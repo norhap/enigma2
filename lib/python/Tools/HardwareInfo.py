@@ -1,9 +1,11 @@
+from Tools.Directories import SCOPE_SKIN, resolveFilename
+
 hw_info = None
 
 class HardwareInfo:
 	device_name = _("unavailable")
 	device_model = None
-	device_brand = _("unavailable")
+	device_brand = _("No Disponible")
 	device_version = ""
 	device_revision = ""
 	device_hdmi = False
@@ -29,13 +31,7 @@ class HardwareInfo:
 
 		# Name ... bit odd, but history prevails
 		try:
-			self.device_name = open("/etc/model").read().strip()
-		except:
-			pass
-
-		# Model
-		try:
-			self.device_model = open("/etc/model").read().strip()
+			self.device_name = open("/proc/stb/info/model").read().strip()
 		except:
 			pass
 
@@ -45,9 +41,37 @@ class HardwareInfo:
 		except:
 			pass
 
+		# Model
+		for line in open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r'):
+			if not line.startswith('#') and not line.isspace():
+				l = line.strip().replace('\t', ' ')
+				if ' ' in l:
+					infoFname, prefix = l.split()
+				else:
+					infoFname = l
+					prefix = ""
+				try:
+					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()
+					break
+				except:
+					pass
+
+		if self.device_model.endswith(("9000de")):
+			self.device_brand = "Golden Interstar"
+		elif self.device_model.startswith(("hd")):
+			self.device_brand = "Mut@nt"
+                elif self.device_model.startswith(("vs")):
+                    self.device_brand = "Mut@nt"
+                elif self.device_model.startswith(("vu")):
+                    self.device_brand = "Vuplus"
+                elif self.device_model.startswith(("ini-8000")):
+                    self.device_brand = "Atemio"
+                elif self.device_model.startswith(("os")):
+                    self.device_brand = "Edision"
+
 		self.device_model = self.device_model or self.device_name
 
-		# map for Xtrend device models to machine names
+        # map for Xtrend device models to machine names
 		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
 			self.machine_name = "%sx00" % self.device_model[:3]
 		elif self.device_model == "et11000":
@@ -83,7 +107,11 @@ class HardwareInfo:
 		return hw_info.device_revision
 
 	def get_device_string(self):
-		return hw_info.device_string
+		if hw_info.device_revision:
+			return "%s (%s-%s)" % (hw_info.device_model, hw_info.device_revision, hw_info.device_version)
+		elif hw_info.device_version:
+			return "%s (%s)" % (hw_info.device_model, hw_info.device_version)
+		return hw_info.device_model
 
 	def get_machine_name(self):
 		return hw_info.machine_name

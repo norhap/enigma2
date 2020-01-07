@@ -5,7 +5,7 @@ import os
 import xml.etree.cElementTree
 
 profile("LOAD:enigma_skin")
-from enigma import addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, getFontFaces, gRGB
+from enigma import addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, getFontFaces, gFont, gRGB
 from Components.config import ConfigSubsection, ConfigText, config
 from Components.Converter.Converter import Converter
 from Components.RcModel import rc_model
@@ -15,7 +15,7 @@ from Tools.Directories import SCOPE_CONFIG, SCOPE_CURRENT_LCDSKIN, SCOPE_CURRENT
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 
-DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "OctEtFHD/skin.xml" or "PLi-HD/skin.xml"  # On SD hardware HD will not be available.
+DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "Vision-Turquoise-HD/skin.xml" or "PLi-FullNightHD/skin.xml"  # On SD hardware HD will not be available.
 DEFAULT_SD_SKIN = "skin.xml"
 EMERGENCY_SKIN = "skin_default.xml"
 DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "display/skin_display_grautec.xml" or "display/skin_display.xml"
@@ -99,15 +99,13 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 				data = content[line - 1].replace("\t", " ").rstrip()
 				print "[skin] XML Parse Error: '%s'" % data
 				print "[skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-			except Exception as e:
-				print "[skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, e)
-	except IOError as e:
+			except Exception:
+				print "[skin] Error: Unable to parse skin data in '%s'!" % filename
+	except IOError, e:
 		if e.errno == errno.ENOENT:  #  No such file or directory
 			print "[skin] Warning: Skin '%s' does not exist!" % filename
 		else:
 			print "[skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
-	except Exception as e:
-		print "[skin] Error: Unexpected error opening file '%s'! (%s)" % (filename, e)
 	return False
 
 
@@ -618,11 +616,20 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 		if id == GUI_SKIN_ID:
 			for res in tag.findall("resolution"):
 				xres = res.attrib.get("xres")
-				xres = int(xres) if xres else 720
+				if xres:
+					xres = int(xres)
+				else:
+					xres = 720
 				yres = res.attrib.get("yres")
-				yres = int(yres) if yres else 576
+				if yres:
+					yres = int(yres)
+				else:
+					yres = 576
 				bpp = res.attrib.get("bpp")
-				bpp = int(bpp) if bpp else 32
+				if bpp:
+					bpp = int(bpp)
+				else:
+					bpp = 32
 				# print "[Skin] Resolution xres=%d, yres=%d, bpp=%d." % (xres, yres, bpp)
 				from enigma import gMainDC
 				gMainDC.getInstance().setResolution(xres, yres)
@@ -872,15 +879,13 @@ def loadSkin(filename, desktop=None, scope=SCOPE_SKIN):
 				data = content[line - 1].replace("\t", " ").rstrip()
 				print "[skin] XML Parse Error: '%s'" % data
 				print "[skin] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1))
-			except Exception as e:
-				print "[skin] Error: Unable to parse skin data in '%s' - '%s'!" % (filename, e)
-	except IOError as e:
+			except Exception:
+				print "[skin] Error: Unable to parse skin data in '%s'!" % filename
+	except IOError, e:
 		if e.errno == errno.ENOENT:  #  No such file or directory
 			print "[skin] Warning: Skin '%s' does not exist!" % filename
 		else:
 			print "[skin] Error %d: Opening file '%s'! (%s)" % (e.errno, filename, os.strerror(e.errno))
-	except Exception as e:
-		print "[skin] Error: Unexpected error opening file '%s'! (%s)" % (filename, e)
 
 # Kinda hackish, but this is called once by mytest.py.
 #

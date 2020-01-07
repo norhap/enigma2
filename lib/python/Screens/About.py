@@ -12,14 +12,30 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.StbHardware import getFPVersion, getBoxProc
 from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
-from Tools.Directories import fileExists, fileHas, pathExists
-from Components.GUIComponent import GUIComponent
-import skin, os, boxbranding
-from Components.Console import Console
 from Components.Pixmap import MultiPixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 from re import search
+from Tools.Directories import fileExists, fileHas, pathExists
+from Components.GUIComponent import GUIComponent
+import skin, os, re, urllib2, sys, boxbranding
+from Components.Console import Console
+
+URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision/develop/NEWS'
+
+def novedades(url):
+    text = ""
+    try:
+        req = urllib2.Request(url)
+        response = urllib2.urlopen(req)
+        link = response.read().decode("windows-1252")
+        response.close()
+        text = link.encode("utf-8")
+
+    except:
+        print"ERROR novedades alvaro %s" %(url)
+
+    return text
 
 class About(Screen):
 	def __init__(self, session):
@@ -31,36 +47,18 @@ class About(Screen):
 
 		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
 		if procmodel != about.getHardwareTypeString():
-			AboutText += _("Proc model: ") + procmodel + "\n"
+			AboutText += _("Modelo: ") + procmodel + "\n"
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
 
-		AboutText += _("Brand: ") + about.getHardwareBrand() + "\n"
-
+		AboutText += _("Fabricante: ") + about.getHardwareBrand() + "\n"
 		cpu = about.getCPUInfoString()
 		AboutText += _("CPU: ") + cpu + "\n"
-		AboutText += _("CPU brand: ") + about.getCPUBrand() + "\n"
-		AboutText += _("CPU architecture: ") + about.getCPUArch() + "\n"
-		if boxbranding.getImageFPU() != "":
-			AboutText += _("FPU: ") + boxbranding.getImageFPU() + "\n"
-		AboutText += _("Image architecture: ") + boxbranding.getImageArch() + "\n"
-
-		if boxbranding.getImageArch() == "aarch64":
-			if boxbranding.getHaveMultiLib() == "True":
-				AboutText += _("MultiLib: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("MultiLib: ") + _("No") + "\n"
-
-		AboutText += _("Flash type: ") + about.getFlashType() + "\n"
-
-		AboutText += "\n" + _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Feed URL: ") + boxbranding.getFeedsUrl() + "\n"
-
-		AboutText += _("Open Vision version: ") + about.getVisionVersion() + "\n"
-		AboutText += _("Open Vision revision: ") + about.getVisionRevision() + "\n"
-		AboutText += _("Open Vision module: ") + about.getVisionModule() + "\n"
-
+		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
+		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"
+		AboutText += _("Flash tipo: ") + about.getFlashType() + "\n"
+		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 
@@ -76,10 +74,8 @@ class About(Screen):
 		EnigmaVersion = _("Enigma version: ") + EnigmaVersion
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += "\n" + EnigmaVersion + "\n"
-		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
-		AboutText += _("Enigma debug level: %d\n") % eGetEnigmaDebugLvl()
 
-		AboutText += "\n" + _("Kernel version: ") + about.getKernelVersionString() + "\n"
+		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 		AboutText += _("DVB API: ") + about.getDVBAPI() + "\n"
@@ -123,13 +119,16 @@ class About(Screen):
 
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
-		AboutText += "\n" + GStreamerVersion + "\n"
+		AboutText += GStreamerVersion + "\n"
 
 		FFmpegVersion = _("FFmpeg version: ") + about.getFFmpegVersionString()
 		self["FFmpegVersion"] = StaticText(FFmpegVersion)
 		AboutText += FFmpegVersion + "\n"
 
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
+
+		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Enigma debug level: %d\n") % eGetEnigmaDebugLvl()
 
 		fp_version = getFPVersion()
 		if fp_version is None:
@@ -140,15 +139,14 @@ class About(Screen):
 
 		self["FPVersion"] = StaticText(fp_version)
 
-		if boxbranding.getHaveTranscoding() != "":
-			AboutText += _("Transcoding: ") + _("Yes") + "\n"
+		if fileExists("/var/lib/opkg/info/enigma2-plugin-systemplugins-transcodingsetup.list"):
+			AboutText += _("Setup Transcoding: ") + _("Yes") + "\n"
 		else:
-			AboutText += _("Transcoding: ") + _("No") + "\n"
-
-		if boxbranding.getHaveMultiTranscoding() != "":
-			AboutText += _("MultiTranscoding: ") + _("Yes") + "\n"
+			AboutText += _("Setup Transcoding: ") + _("No") + "\n"
+		if fileExists("/var/lib/opkg/info/enigma2-plugin-systemplugins-multitranscodingsetup.list"):
+			AboutText += _("Setup MultiTranscoding: ") + _("Yes") + "\n"
 		else:
-			AboutText += _("MultiTranscoding: ") + _("No") + "\n"
+			AboutText += _("Setup MultiTranscoding: ") + _("No") + "\n"
 
 		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
@@ -188,10 +186,10 @@ class About(Screen):
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))
 		self["key_red"] = Button(_("Latest Commits"))
-		self["key_yellow"] = Button(_("Troubleshoot"))
+		self["key_yellow"] = Button(_("Dmesg Info"))
 		self["key_blue"] = Button(_("Memory Info"))
 
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "SetupActions", "DirectionActions"],
 			{
 				"cancel": self.close,
 				"ok": self.close,
@@ -214,7 +212,7 @@ class About(Screen):
 
 	def showTroubleshoot(self):
 		self.session.open(Troubleshoot)
-		
+
 class Devices(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -307,7 +305,7 @@ class Devices(Screen):
 			if SystemInfo["HasRootSubdir"]:
 				if not search('sd[a-z][1-9]', device):
 					continue
-			else:	
+			else:
 				if not search('sd[a-z][1-9]', device) and not search('mmcblk[0-9]p[1-9]', device):
 					continue
 			if SystemInfo["HasMMC"] and pathExists("/dev/sda4") and search('sd[a][1-4]', device):
@@ -348,7 +346,7 @@ class Devices(Screen):
 				if mount.find('mmc') == -1 and mount.find('boot') == -1:
 					self.list.append(mount + '\t' + sizeline + ' \t' + freeline)
 			else:
-				print "[About] MOUNT:", mount
+				print "MOUNT:", mount
 				if mount.find('mmc') == -1:
 					self.list.append(mount + '\t' + _('Not mounted'))
 
@@ -645,8 +643,8 @@ class SystemMemoryInfo(Screen):
 		title = screentitle
 		Screen.setTitle(self, title)
 		self.skinName = ["SystemMemoryInfo", "About"]
-		self["lab1"] = StaticText(_("Open Vision enigma2 image"))
-		self["lab2"] = StaticText(_("by Open Vision developers"))
+		self["lab1"] = StaticText(_("Image OpenVision"))
+		self["lab2"] = StaticText(_("By Team OpenVision"))
 		self["lab3"] = StaticText(_("Support at %s") % "https://openvision.tech")
 		self["AboutScrollLabel"] = ScrollLabel()
 
@@ -693,12 +691,12 @@ class SystemMemoryInfo(Screen):
 		RamTotal = flash[1]
 		RamFree = flash[3]
 
-		self.AboutText += _("Flash") + '\n\n'
+		self.AboutText += _("FLASH") + '\n\n'
 		self.AboutText += _("Total:") + "\t" + RamTotal + "\n"
 		self.AboutText += _("Free:") + "\t" + RamFree + "\n\n"
 
 		self["AboutScrollLabel"].setText(self.AboutText)
-		self["actions"].setEnabled(True)			
+		self["actions"].setEnabled(True)
 
 class TranslationInfo(Screen):
 	def __init__(self, session):
@@ -738,46 +736,26 @@ class TranslationInfo(Screen):
 			})
 
 class CommitInfo(Screen):
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.setTitle(_("Latest Commits"))
-		self.skinName = ["CommitInfo", "About"]
-		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
+    def __init__(self, session):
+        Screen.__init__(self, session)
+        self.session = session
+        self.skinName = "CommitInfo"
+        self.setup_title = _("Novedades Alvaro")
+        self.setTitle(self.setup_title)
+        self["novedades"] = ScrollLabel()
+        self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"],
+            {
+            "cancel" : self.cerrar,
+            "ok" : self.cerrar,
+            "up": self["novedades"].pageUp,
+            "down": self["novedades"].pageDown,
+            "left": self["novedades"].pageUp,
+            "right": self["novedades"].pageDown,
+            })
+        self['novedades'].setText(novedades(URL))
 
-		self["actions"] = ActionMap(["SetupActions", "DirectionActions"],
-			{
-				"cancel": self.close,
-				"ok": self.close,
-				"up": self["AboutScrollLabel"].pageUp,
-				"down": self["AboutScrollLabel"].pageDown,
-				"left": self.left,
-				"right": self.right
-			})
-
-		self["key_red"] = Button(_("Cancel"))
-
-		# get the branch to display from the Enigma version
-		try:
-			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
-		except:
-			branch = ""
-
-		self.project = 0
-		self.projects = [
-			("https://api.github.com/repos/OpenVisionE2/enigma2-openvision/commits" + branch, "Enigma2 - Vision"),
-			("https://api.github.com/repos/OpenVisionE2/openvision-oe/commits", "OE - Vision 7.x"),
-			("https://api.github.com/repos/OpenVisionE2/openvision-development-platform/commits", "OE - Vision 9.x"),
-			("https://api.github.com/repos/openpli/servicemp3/commits", "Service MP3"),
-			("https://api.github.com/repos/OpenVisionE2/gstreamer1.0-plugin-multibox-dvbmediasink/commits", "DVB MediaSink"),
-			("https://api.github.com/repos/OpenVisionE2/enigma2-plugins/commits", "Enigma2 Plugins"),
-			("https://api.github.com/repos/OpenVisionE2/alliance-plugins/commits", "Alliance Plugins"),
-			("https://api.github.com/repos/OpenVisionE2/OpenWebif/commits", "Open WebIF"),
-			("https://api.github.com/repos/OpenVisionE2/BackupSuite/commits", "Backup Suite")
-		]
-		self.cachedProjects = {}
-		self.Timer = eTimer()
-		self.Timer.callback.append(self.readGithubCommitLogs)
-		self.Timer.start(50, True)
+    def cerrar(self):
+        self.close()
 
 	def readGithubCommitLogs(self):
 		url = self.projects[self.project][0]

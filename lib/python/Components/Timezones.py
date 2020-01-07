@@ -79,7 +79,6 @@ class Timezones:
 			self.autotimer = autotimer
 			if autotimer is not None:
 				print "[Timezones] AutoTimer parseEPG"
-				autotimer.parseEPG(autoPoll=True)
 			if autopoller is not None:
 				autopoller.start()
 		except ImportError, KeyError:
@@ -129,7 +128,7 @@ class Timezones:
 		return sorttzChoices((tzname, self.getUserFriendlyTZName(area, tzname)) for tzname in self.timezones[area] if self.getUserFriendlyTZName(area, tzname))
 
 	default_for_area = {
-		'Europe': 'London',
+		'Europe': 'Madrid',
 		'Generic': 'UTC',
 	}
 	def getTimezoneDefault(self, area=None, choices=None):
@@ -137,7 +136,7 @@ class Timezones:
 			try:
 				area = config.timezone.area.getValue()
 			except:
-				print "[Timezones] getTimezoneDefault, no area found, using Europe"
+				print "[Timezones] getTimezoneDefault, no area found, using Generic"
 				area = "Europe"
 		if choices == None:
 			choices = self.getTimezoneList(area=area)
@@ -157,8 +156,7 @@ class Timezones:
 			if config.plugins.autotimer.autopoll.value:
 				print "[Timezones] trying to stop main AutoTimer poller"
 				if autopoller is not None:
-					autopoller.stop()
-				self.ATupdate = True
+				    self.ATupdate = True
 		except ImportError, KeyError:
 			pass
 

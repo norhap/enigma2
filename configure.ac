@@ -1,4 +1,4 @@
-AC_INIT([enigma2],[9],[openvision.tech])
+AC_INIT([enigma2],[7],[norhap.telegram])
 AM_INIT_AUTOMAKE([dist-bzip2 no-define tar-pax -Wno-portability])
 AC_CONFIG_HEADERS([enigma2_config.h])
 
@@ -46,7 +46,7 @@ AC_SUBST(LIBGIF_LIBS)
 
 AC_ARG_WITH(crashlogemail,
 	[  --with-crashlogemail=crash log email address],
-	[CRASHLOGEMAIL="$withval"],[CRASHLOGEMAIL="crash@openvision.tech"])
+	[CRASHLOGEMAIL="$withval"],[CRASHLOGEMAIL="norhap@telegram"])
 AC_SUBST(CRASHLOGEMAIL)
 AC_DEFINE_UNQUOTED(CRASH_EMAILADDR,"$CRASHLOGEMAIL",[crash log email address])
 
@@ -422,14 +422,14 @@ AM_CONDITIONAL(DAGS, test "$BOXBRAND" == "dags")
 AM_CONDITIONAL(DINOBOT, test "$BOXBRAND" == "dinobot")
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
 AM_CONDITIONAL(EBOX, test "$BOXBRAND" == "ebox")
-AM_CONDITIONAL(EDISION, test "$BOXBRAND" == "edision")
+AM_CONDITIONAL(OSMIO4KPLUS, test `echo "$BOXTYPE" | cut -b 1-11` == "osmio4kplus")
 AM_CONDITIONAL(ENTWOPIA, test "$BOXBRAND" == "entwopia")
 AM_CONDITIONAL(FORMULER, test "$BOXBRAND" == "formuler")
-AM_CONDITIONAL(GFUTURES, test "$BOXBRAND" == "gfutures")
+AM_CONDITIONAL(HD51, test `echo "$BOXTYPE" | cut -b 1-4` == "hd51")
 AM_CONDITIONAL(GIGABLUE, test "$BOXBRAND" == "gigablue")
 AM_CONDITIONAL(HARDKERNEL, test "$BOXBRAND" == "hardkernel")
 AM_CONDITIONAL(HYPERCUBE, test "$BOXBRAND" == "hypercube")
-AM_CONDITIONAL(INI, test "$BOXBRAND" == "ini")
+AM_CONDITIONAL(XPEEDLX3, test `echo "$BOXTYPE" | cut -b 1-8` == "xpeedlx3")
 AM_CONDITIONAL(IXUSS, test "$BOXBRAND" == "ixuss")
 AM_CONDITIONAL(LINKDROID, test "$BOXBRAND" == "linkdroid")
 AM_CONDITIONAL(MAXYTEC, test "$BOXBRAND" == "maxytec")
@@ -792,6 +792,7 @@ data/vfd140/Makefile
 data/vfd255/Makefile
 data/extensions/Makefile
 data/keymaps/Makefile
+data/hw_info/Makefile
 data/rc_models/Makefile
 data/skin_default/Makefile
 data/skin_default/menu/Makefile

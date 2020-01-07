@@ -122,7 +122,6 @@ class UpdatePluginMenu(Screen):
 			self.list.append(("software-update", _("Software update"), _("Online update of your receiver software.") + self.oktext, None))
 			self.list.append(("system-backup", _("Backup system settings"), _("Backup your receiver settings.") + self.oktext + "\n\n" + self.infotext, None))
 			self.list.append(("system-restore",_("Restore system settings"), _("Restore your receiver settings.") + self.oktext, None))
-			self.list.append(("ipkg-install", _("Install local extension"), _("Scan for local extensions and install them.") + self.oktext, None))
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_SOFTWAREMANAGER):
 				if "SoftwareSupported" in p.__call__:
 					callFnc = p.__call__["SoftwareSupported"](None)
@@ -256,12 +255,6 @@ class UpdatePluginMenu(Screen):
 						self.session.openWithCallback(self.startRestore, MessageBox, _("Are you sure you want to restore the backup?\nYour receiver will restart after the backup has been restored!"))
 					else:
 						self.session.open(MessageBox, _("Sorry, no backups found!"), MessageBox.TYPE_INFO, timeout = 10)
-				elif (currentEntry == "ipkg-install"):
-					try:
-						from Plugins.Extensions.MediaScanner.plugin import main
-						main(self.session)
-					except:
-						self.session.open(MessageBox, _("Sorry, %s has not been installed!") % ("MediaScanner"), MessageBox.TYPE_INFO, timeout = 10)
 				elif (currentEntry == "default-plugin"):
 					self.extended = current[3]
 					self.extended(self.session, None)

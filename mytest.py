@@ -11,9 +11,7 @@ profile("PYTHON_START")
 # Don't remove this line. It may seem to do nothing, but if removed,
 # it will break output redirection for crash logs.
 import Tools.RedirectOutput
-from boxbranding import getVisionVersion, getVisionRevision, getHaveMultiLib
-print "Open Vision version = %s" % getVisionVersion()
-print "Open Vision revision = %s" % getVisionRevision()
+from boxbranding import getImageArch
 import enigma
 import eConsoleImpl
 import eBaseImpl
@@ -23,10 +21,10 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from traceback import print_exc
 
-if getHaveMultiLib() == "True":
+if getImageArch() == "aarch64":
 	import usb.core
 	import usb.backend.libusb1
-	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
+	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
 profile("ClientMode")
 import Components.ClientMode
@@ -64,7 +62,7 @@ InitFallbackFiles()
 profile("config.misc")
 config.misc.radiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_SKIN, "radio.mvi"))
 config.misc.blackradiopic = ConfigText(default = resolveFilename(SCOPE_CURRENT_SKIN, "black.mvi"))
-config.misc.SyncTimeUsing = ConfigSelection(default = "0", choices = [("0", _("Transponder time")), ("1", _("NTP"))])
+config.misc.SyncTimeUsing = ConfigSelection(default = "0", choices = [("0", _("Hora Transpondedor")), ("1", _("NTP"))])
 config.misc.NTPserver = ConfigText(default = 'pool.ntp.org', fixed_size=False)
 config.misc.startCounter = ConfigInteger(default=0) # number of e2 starts...
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0)) # number of standby

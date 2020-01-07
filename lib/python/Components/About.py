@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import sys, os, time
 import re
+from Tools.HardwareInfo import HardwareInfo
 from enigma import getBoxType, getBoxBrand
 from Components.SystemInfo import SystemInfo
 import socket, fcntl, struct
+from boxbranding import getImageArch
 
 def _ifinfo(sock, addr, ifname):
 	iface = struct.pack('256s', ifname[:15])
@@ -29,7 +31,7 @@ def getIfConfig(ifname):
 		pass
 	sock.close()
 	return ifreq
-	
+
 def getIfTransferredData(ifname):
 	f = open('/proc/net/dev', 'r')
 	for line in f:
@@ -37,7 +39,7 @@ def getIfTransferredData(ifname):
 			data = line.split('%s:' % ifname)[1].split()
 			rx_bytes, tx_bytes = (data[0], data[8])
 			f.close()
-			return rx_bytes, tx_bytes							
+			return rx_bytes, tx_bytes
 
 def getVersionString():
 	return getImageVersionString()
@@ -49,7 +51,7 @@ def getImageVersionString():
 		else:
 			st = os.stat('/usr/lib/ipkg/status')
 		tm = time.localtime(st.st_mtime)
-		if tm.tm_year >= 2018:
+		if tm.tm_year >= 2011:
 			return time.strftime("%Y-%m-%d %H:%M:%S", tm)
 	except:
 		pass
@@ -71,7 +73,7 @@ def getBuildDateString():
 def getUpdateDateString():
 	try:
 		from glob import glob
-		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openvision-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
+		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
 		if build.isdigit():
 			return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
 	except:
@@ -96,9 +98,11 @@ def getGStreamerVersionString(cpu):
 def getFFmpegVersionString():
 	try:
 		from glob import glob
-		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
-		version = ffmpeg[1].split("-")[0].replace("\n","")
-		return "%s" % version.split("+")[0]
+		if not getImageArch() == "aarch64":
+		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+		else:
+		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
 	except:
 		return _("unknown")
 
@@ -109,10 +113,10 @@ def getKernelVersionString():
 		return _("unknown")
 
 def getHardwareTypeString():
-	return getBoxType()
+	return HardwareInfo().get_device_model()
 
 def getHardwareBrand():
-	return getBoxBrand()
+	return HardwareInfo().get_device_brand()
 
 def getImageTypeString():
 	try:
@@ -201,36 +205,16 @@ def getCPUArch():
 		return _("Mipsel")
 
 def getFlashType():
-	if SystemInfo["SmallFlash"]:
-		return _("Small - Tiny image")
-	elif SystemInfo["MiddleFlash"]:
-		return _("Middle - Lite image")
-	else:
-		return _("Enough - Vision image")
+	    if SystemInfo["SmallFlash"]:
+		        return _("Small flash STB")
+	    else:
+                return _("Flash Normal STB")
 
 def getDVBAPI():
 	if SystemInfo["OLDE2API"]:
 		return _("Old")
 	else:
 		return _("New")
-
-def getVisionVersion():
-	try:
-		return open("/etc/visionversion","r").read().strip()
-	except:
-		return _("It's not a genuine Open Vision!")
-
-def getVisionRevision():
-	try:
-		return open("/etc/visionrevision","r").read().strip()
-	except:
-		return _("It's not a genuine Open Vision!")
-
-def getVisionModule():
-	if SystemInfo["OpenVisionModule"]:
-		return _("Loaded")
-	else:
-		return _("Unknown, multiboot situation!")
 
 def getDriverInstalledDate():
 	try:

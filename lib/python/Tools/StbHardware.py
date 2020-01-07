@@ -17,10 +17,14 @@ def getBoxProc():
 			procmodel = open("/proc/stb/info/gbmodel", "r").readline().strip().lower()
 		elif fileExists("/proc/stb/info/vumodel") and not fileExists("/proc/stb/info/boxtype"):
 			procmodel = open("/proc/stb/info/vumodel", "r").readline().strip().lower()
-		elif fileExists("/proc/stb/info/boxtype") and not fileExists("/proc/stb/info/vumodel"):
+		elif fileExists("/proc/stb/info/boxtype") and not fileExists("/proc/stb/info/model"):
 			procmodel = open("/proc/stb/info/boxtype", "r").readline().strip().lower()
 		elif fileExists("/proc/boxtype"):
 			procmodel = open("/proc/boxtype", "r").readline().strip().lower()
+		elif fileExists("/etc/modules-load.d/_xpeedlx3.conf"):
+			procmodel = "Xpeed-LX3"
+		elif fileExists("/etc/modules-load.d/_osmio4kplus.conf"):
+			procmodel = "OS mio+ 4K"
 		else:
 			procmodel = open("/proc/stb/info/model", "r").readline().strip().lower()
 	except IOError:

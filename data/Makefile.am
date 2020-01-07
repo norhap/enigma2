@@ -1,4 +1,4 @@
-SUBDIRS = countries fonts extensions keymaps skin_default skin_fallback_1080 rc_models
+SUBDIRS = countries fonts extensions keymaps skin_default skin_fallback_1080 rc_models hw_info
 
 if HAVE_BWLCD128
 SUBDIRS += vfd128
