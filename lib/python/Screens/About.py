@@ -21,7 +21,7 @@ from Components.GUIComponent import GUIComponent
 import skin, os, re, urllib2, sys, boxbranding
 from Components.Console import Console
 
-URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision/develop/NEWS'
+URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
 
 def novedades(url):
     text = ""
