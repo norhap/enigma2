@@ -3,11 +3,12 @@ from Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
-from enigma import getBoxType
+from Tools.HardwareInfo import HardwareInfo
 try:
 	from Plugins.SystemPlugins.OSDPositionSetup.overscanwizard import OverscanWizard
 except:
 	OverscanWizard = None
+
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Label import Label
@@ -15,11 +16,12 @@ from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from LanguageSelection import LanguageWizard
 from enigma import eConsoleAppContainer, eTimer, eActionMap
+
 import os
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
-config.misc.do_overscanwizard = ConfigBoolean(default = OverscanWizard)
+config.misc.do_overscanwizard = ConfigBoolean(default = OverscanWizard and config.skin.primary_skin.value == "Vision-Turquoise-HD/skin.xml")
 
 class StartWizard(WizardLanguage, Rc):
 	def __init__(self, session, silent = True, showSteps = False, neededTag = None):
@@ -30,7 +32,7 @@ class StartWizard(WizardLanguage, Rc):
 
 	def markDone(self):
 		# setup remote control, all stb have same settings except dm8000 which uses a different settings
-		if getBoxType() == "dm8000":
+		if HardwareInfo().get_device_name() == 'dm8000':
 			config.misc.rcused.value = 0
 		else:
 			config.misc.rcused.value = 1
@@ -58,14 +60,14 @@ def setLanguageFromBackup(backupfile):
 		pass
 
 def checkForAvailableAutoBackup():
-	for backupfile in ["/media/%s/backup/Vision-AutoBackup.tar.gz" % media for media in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", media))]:
+	for backupfile in ["/media/%s/backup/PLi-AutoBackup.tar.gz" % media for media in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", media))]:
 		if os.path.isfile(backupfile):
 			setLanguageFromBackup(backupfile)
 			return True
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
-		MessageBox.__init__(self, session, _("Do you want to autorestore settings?"), type=MessageBox.TYPE_YESNO, timeout=20, default=True, simple=True)
+		MessageBox.__init__(self, session, _("Desea restaurar su configuracion?"), type=MessageBox.TYPE_YESNO, timeout=20, default=True, simple=True)
 
 	def close(self, value):
 		if value:
