@@ -1577,8 +1577,8 @@ msgstr "Modo de configuración"
 msgid "Configuration mode: %s"
 msgstr "Modo de configuración: %s"
 
-msgid "Configuration..."
-msgstr "Configuración…"
+msgid "Configuration"
+msgstr "Configuración"
 
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
 msgstr "Configure si se debe obviar la comprobación de HDMI EDID, esto podría solucionar problemas con algunos televisores."
@@ -5858,7 +5858,7 @@ msgid "Select update source"
 msgstr "Seleccione la fuente de actualización (feed)"
 
 msgid "Select update source to edit"
-msgstr "Seleccione la fuente de actualización (feed) para editar."
+msgstr "Seleccione la fuente de actualización (feed) para editar"
 
 msgid "Select your ATSC provider."
 msgstr "Seleccione su proveedor de ATSC."
@@ -6010,8 +6010,8 @@ msgstr "Establecer el código PIN persistente"
 msgid "Set sequence repeats if your aerial system requires this. Normally if the aerial system has been configured correctly sequence repeats will not be necessary. If yours does, recheck you have command order set correctly."
 msgstr "Establezca la secuencia repetida si su sistema aéreo lo requiere. Normalmente, si el sistema aéreo se ha configurado correctamente, no será necesario repetir la secuencia. Si la suya lo hace, vuelva a verificar que tienes establecidas correctamente las ordenes de comando."
 
-msgid "Set startup service"
-msgstr "Establecer canal de inicio"
+msgid "Set as startup service"
+msgstr "Establecer como canal de inicio"
 
 msgid "Set time window to 1 hour"
 msgstr "Establecer la ventana de tiempo en 1 hora"
@@ -8270,8 +8270,8 @@ msgstr "activar configuración del adaptador de red"
 msgid "actual time only"
 msgstr "solo tiempo actual"
 
-msgid "add alternatives"
-msgstr "añadir alternativos"
+msgid "Add alternatives"
+msgstr "Añadir alternativos"
 
 msgid "add bookmark"
 msgstr "añadir marcador"
@@ -8282,11 +8282,11 @@ msgstr "añadir bouquet"
 msgid "add bouquet to parental protection"
 msgstr "añadir bouquet al control parental"
 
-msgid "add marker"
-msgstr "añadir marcador"
+msgid "Add marker"
+msgstr "Añadir marcador"
 
-msgid "add service to bouquet"
-msgstr "añadir canal al bouquet"
+msgid "Add service to bouquet"
+msgstr "Añadir canal al bouquet"
 
 msgid "add service to favourites"
 msgstr "añadir el canal a favoritos"
@@ -8511,8 +8511,8 @@ msgstr "vacío"
 msgid "enable"
 msgstr "activar"
 
-msgid "enable bouquet edit"
-msgstr "activar edición de bouquet"
+msgid "Enable bouquet edit"
+msgstr "Activar edición de bouquet"
 
 msgid "enable favourite edit"
 msgstr "activar edición de favoritos"
@@ -8520,8 +8520,8 @@ msgstr "activar edición de favoritos"
 msgid "enable intro screen"
 msgstr "activar pantalla intro"
 
-msgid "enable move mode"
-msgstr "activar modo movimiento"
+msgid "Enable move mode"
+msgstr "Activar modo movimiento"
 
 msgid "enabled"
 msgstr "activado"
@@ -8607,8 +8607,8 @@ msgstr "nombre de fichero"
 msgid "film/cinema"
 msgstr "película/cine"
 
-msgid "find currently played service"
-msgstr "encontrar canal en reproducción"
+msgid "Find currently playing service"
+msgstr "Encuentra el servicio que se está reproduciendo actualmente"
 
 msgid "fine arts"
 msgstr "bellas artes"
@@ -8907,8 +8907,8 @@ msgstr "pausando"
 msgid "performing arts"
 msgstr "artes escénicas"
 
-msgid "play as picture in picture"
-msgstr "reproducir como imagen en imagen"
+msgid "Play as Picture in Picture"
+msgstr "Activar PiP"
 
 msgid "play in mainwindow"
 msgstr "reproducir en ventana principal"
@@ -8988,8 +8988,8 @@ msgstr "eliminar servicios terrestres"
 msgid "remove this mark"
 msgstr "eliminar esta marca"
 
-msgid "rename entry"
-msgstr "renombrar entrada"
+msgid "Rename entry"
+msgstr "Renombrar entrada"
 
 msgid "Repeat playlist"
 msgstr "Repetir lista de reproducción"
@@ -9063,9 +9063,6 @@ msgstr "el canal está en bouquet con protección parental"
 msgid "service off-air"
 msgstr "servicio sin emisión"
 
-msgid "set as startup service"
-msgstr "establecer como canal de inicio"
-
 msgid "Show"
 msgstr "Mostrar"
 
@@ -9090,8 +9087,8 @@ msgstr "mostrar administrador de software en el menú de configuración"
 msgid "show softwaremanager on blue button"
 msgstr "mostrar administrador de software al pulsar botón azul"
 
-msgid "show transponder info"
-msgstr "mostrar info del transpondedor"
+msgid "Show transponder info"
+msgstr "Mostrar información del transpondedor"
 
 msgid "show/game show (general)"
 msgstr "show/juego (general)"
@@ -9193,8 +9190,8 @@ msgstr "tamaño del paso"
 msgid "stereo"
 msgstr "estéreo"
 
-msgid "stop using as startup service"
-msgstr "dejar de usar como canal de inicio"
+msgid "Stop using as startup service"
+msgstr "Dejar de usar como canal de inicio"
 
 msgid "successful"
 msgstr "exitoso"
@@ -16014,3 +16011,12 @@ msgstr "Use las teclas del cursor para seleccionar una imagen instalada y luego 
 
 msgid "Client Mode"
 msgstr "Modo Cliente"
+
+msgid "Add BISS CaID to service"
+msgstr "Añadir CaID BISS al servicio"
+
+msgid "Show underline characters in filenames"
+msgstr "Mostrar caracteres subrayados en nombres de archivo"
+
+msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
+msgstr "Si está deshabilitado, los caracteres subrayados en los nombres de archivo y directorio no se muestran y se reemplazan con espacios."
