@@ -126,10 +126,6 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				print "[SoftwareUpdate] status error: ", str(e)
 				message =  _("The current image might not be stable.\nFor more information see %s.") % ("openvision.tech")
 
-		# or display a generic warning if fetching failed
-		else:
-			message = _("The status of the current image could not be checked because %s can not be reached.") % ("openvision.tech")
-
 		# show the user the message first
 		if message is not None:
 			if abort:
