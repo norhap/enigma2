@@ -16044,3 +16044,15 @@ msgstr "Estado del LED de encendido cuando está en marcha."
 
 msgid "Power On Display"
 msgstr "Encendido en Display"
+
+msgid "Swap EN300743 mapping table"
+msgstr "Intercambiar mapeo de la tabla EN300743"
+
+msgid "Swap EN300743 palette table"
+msgstr "Intercambiar la tabla paleta EN300743"
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr "Configure si necesita intercambiar la tabla de mapeo EN300743."
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr "Configure si necesita intercambiar la tabla de paleta EN300743."
