@@ -8276,8 +8276,8 @@ msgstr "Añadir alternativos"
 msgid "add bookmark"
 msgstr "añadir marcador"
 
-msgid "add bouquet"
-msgstr "añadir bouquet"
+msgid "Add bouquet"
+msgstr "Añadir bouquet"
 
 msgid "add bouquet to parental protection"
 msgstr "añadir bouquet al control parental"
@@ -8466,8 +8466,8 @@ msgstr "desactivar"
 msgid "disable intro screen"
 msgstr "desactivar la pantalla de introducción"
 
-msgid "disable move mode"
-msgstr "desactivar el modo de movimiento"
+msgid "Disable move mode"
+msgstr "Desactivar modo movimiento"
 
 msgid "disabled"
 msgstr "desactivado"
@@ -16013,7 +16013,7 @@ msgid "Client Mode"
 msgstr "Modo Cliente"
 
 msgid "Add BISS CaID to service"
-msgstr "Añadir CaID BISS al servicio"
+msgstr "Añadir CaID BISS al canal"
 
 msgid "Show underline characters in filenames"
 msgstr "Mostrar caracteres subrayados en nombres de archivo"
