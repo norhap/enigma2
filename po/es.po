@@ -3006,7 +3006,7 @@ msgid "Go up the list"
 msgstr "Sube la lista"
 
 msgid "Gold"
-msgstr "Oro"
+msgstr "Gold"
 
 msgid "Goto"
 msgstr "Ir a"
@@ -5359,7 +5359,7 @@ msgid "Romanian"
 msgstr "Rumano"
 
 msgid "Root"
-msgstr "Raíz"
+msgstr "Root"
 
 msgid "Root directory"
 msgstr "Directorio raíz"
