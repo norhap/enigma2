@@ -15985,6 +15985,9 @@ msgstr "configuración en etc/openvpn/"
 msgid "ZeroTier Setup"
 msgstr "Configuración ZeroTier"
 
+msgid "Downloading Image"
+msgstr "Descargando imagen"
+
 msgid "Downloaded Images"
 msgstr "Imágenes descargadas"
 

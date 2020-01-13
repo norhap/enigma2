@@ -63,9 +63,9 @@ class SelectImage(Screen):
 			for file in [x for x in files if os.path.splitext(x)[1] == ".zip" and model in x]:
 				try:
 					if checkimagefiles([x.split(os.sep)[-1] for x in zipfile.ZipFile(file).namelist()]):
-						if "Downloaded Images" not in self.imagesList:
-							self.imagesList["Downloaded Images"] = {}
-						self.imagesList["Downloaded Images"][file] = {'link': file, 'name': file.split(os.sep)[-1]}
+						if "Imagenes Descargadas" not in self.imagesList:
+							self.imagesList["Imagenes Descargadas"] = {}
+						self.imagesList["Imagenes Descargadas"][file] = {'link': file, 'name': file.split(os.sep)[-1]}
 				except:
 					pass
 
@@ -319,7 +319,7 @@ class FlashImage(Screen):
 		if reply:
 			if "://" in self.source:
 				from Tools.Downloader import downloadWithProgress
-				self["header"].setText(_("Descargada Imagen"))
+				self["header"].setText(_("Downloading Image"))
 				self["info"].setText(self.imagename)
 				self.downloader = downloadWithProgress(self.source, self.zippedimage)
 				self.downloader.addProgress(self.downloadProgress)
