@@ -16056,3 +16056,7 @@ msgstr "Configure si necesita intercambiar la tabla de mapeo EN300743."
 
 msgid "Configure if you need to swap the EN300743 palette table."
 msgstr "Configure si necesita intercambiar la tabla de paleta EN300743."
+
+msgid "Set startup service"
+msgstr "Establecer canal de inicio"
+
