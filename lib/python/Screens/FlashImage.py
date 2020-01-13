@@ -319,7 +319,7 @@ class FlashImage(Screen):
 		if reply:
 			if "://" in self.source:
 				from Tools.Downloader import downloadWithProgress
-				self["header"].setText(_("Downloading Image"))
+				self["header"].setText(_("Descargada Imagen"))
 				self["info"].setText(self.imagename)
 				self.downloader = downloadWithProgress(self.source, self.zippedimage)
 				self.downloader.addProgress(self.downloadProgress)

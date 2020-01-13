@@ -17,11 +17,11 @@ class MessageBox(Screen, HelpableScreen):
 	TYPE_MESSAGE = 4
 
 	TYPE_PREFIX = {
-		TYPE_YESNO: _("Question"),
-		TYPE_INFO: _("Information"),
-		TYPE_WARNING: _("Warning"),
+		TYPE_YESNO: _("Pregunta"),
+		TYPE_INFO: _("Informacion"),
+		TYPE_WARNING: _("Atencion"),
 		TYPE_ERROR: _("Error"),
-		TYPE_MESSAGE: _("Message")
+		TYPE_MESSAGE: _("Mensage")
 	}
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=0, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=True, simple=False, wizard=False, list=None, skin_name=None, timeout_default=None, title=None):
@@ -94,9 +94,9 @@ class MessageBox(Screen, HelpableScreen):
 			if list:
 				self.list = list
 			elif default:
-				self.list = [(_("Yes"), True), (_("No"), False)]
+				self.list = [(_("Si"), True), (_("No"), False)]
 			else:
-				self.list = [(_("No"), False), (_("Yes"), True)]
+				self.list = [(_("No"), False), (_("Si"), True)]
 		else:
 			self.list = []
 		self.timeout_default = timeout_default

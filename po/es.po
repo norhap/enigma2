@@ -2283,9 +2283,6 @@ msgstr "Nuevos plugins descargables"
 msgid "Downloading"
 msgstr "Descargando"
 
-msgid "Downloading Image"
-msgstr "Descargando imagen"
-
 msgid "Downloading plugin information. Please wait..."
 msgstr "Descargando información del plugin. Espera por favor..."
 
@@ -8030,10 +8027,10 @@ msgid "Yes, returning to movie list"
 msgstr "Sí, volviendo a la lista de películas"
 
 msgid "Yes, with backup"
-msgstr "Sí, con copia de seguridad"
+msgstr "Sí, con backup-completo"
 
 msgid "Yes, without backup"
-msgstr "Sí, sin copia de seguridad"
+msgstr "Sí, sin backup-completo"
 
 msgid "Yesterday"
 msgstr "Ayer"
