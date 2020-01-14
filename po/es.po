@@ -9115,11 +9115,11 @@ msgstr "slot%s - %s (imagen actual)"
 
 #, python-format
 msgid "slot%s - %s (current image) with, backup"
-msgstr "slot%s - %s (imagen actual) con, copia"
+msgstr "slot%s - %s (imagen actual) con previo-backup"
 
 #, python-format
 msgid "slot%s - %s (current image), without backup"
-msgstr "slot%s - %s (imagen actual) sin, copia"
+msgstr "slot%s - %s (imagen actual) sin hacer backup"
 
 #, python-format
 msgid "slot%s - %s mode 1"
@@ -9139,11 +9139,11 @@ msgstr "slot%s - %s modo 12 (imagen actual)"
 
 #, python-format
 msgid "slot%s - %s, with backup"
-msgstr "slot%s - %s, con backup-completo"
+msgstr "slot%s - %s, con previo-backup"
 
 #, python-format
 msgid "slot%s - %s, without backup"
-msgstr "slot%s - %s, sin backup-completo"
+msgstr "slot%s - %s, sin hacer backup"
 
 msgid "soap/melodram/folkloric"
 msgstr "enredo/melodrama/folclore"
