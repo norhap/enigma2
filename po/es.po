@@ -4289,7 +4289,7 @@ msgid "No, but restart from begin"
 msgstr "No, pero reiniciar desde el principio"
 
 msgid "No, do not flash image"
-msgstr "No, no flashees imagen"
+msgstr "No, no flashear imagen"
 
 msgid "No, except Wakeup timer"
 msgstr "No, excepto el temporizador de despertador"
@@ -8030,7 +8030,7 @@ msgid "Yes, with backup"
 msgstr "Sí, con previo-backup"
 
 msgid "Yes, without backup"
-msgstr "Sí, sin previo-backup"
+msgstr "Sí, sin hacer backup"
 
 msgid "Yesterday"
 msgstr "Ayer"
