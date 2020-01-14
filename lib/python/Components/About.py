@@ -20,9 +20,9 @@ def getIfConfig(ifname):
 	infos = {}
 	sock  = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	# offsets defined in /usr/include/linux/sockios.h on linux 2.6
-	infos['addr']    = 0x8915 # SIOCGIFADDR
+	infos['addr']	 = 0x8915 # SIOCGIFADDR
 	infos['brdaddr'] = 0x8919 # SIOCGIFBRDADDR
-	infos['hwaddr']  = 0x8927 # SIOCSIFHWADDR
+	infos['hwaddr']	 = 0x8927 # SIOCSIFHWADDR
 	infos['netmask'] = 0x891b # SIOCGIFNETMASK
 	try:
 		for k,v in infos.items():
@@ -75,7 +75,7 @@ def getUpdateDateString():
 		from glob import glob
 		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
 		if build.isdigit():
-			return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
+			return	"%s-%s-%s" % (build[:4], build[4:6], build[6:])
 	except:
 		pass
 	return _("unknown")
@@ -99,9 +99,9 @@ def getFFmpegVersionString():
 	try:
 		from glob import glob
 		if not getImageArch() == "aarch64":
-		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		else:
-		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
 	except:
 		return _("unknown")
@@ -205,10 +205,10 @@ def getCPUArch():
 		return _("Mipsel")
 
 def getFlashType():
-	    if SystemInfo["SmallFlash"]:
-		        return _("Small flash STB")
-	    else:
-                return _("Flash Normal STB")
+		if SystemInfo["SmallFlash"]:
+				return _("Small flash STB")
+		else:
+				return _("Flash Normal STB")
 
 def getDVBAPI():
 	if SystemInfo["OLDE2API"]:
@@ -222,17 +222,17 @@ def getDriverInstalledDate():
 		try:
 			if getBoxType() in ("dm800","dm8000"):
 				driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+				return	"%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 			else:
 				driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+				return	"%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 		except:
 			try:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s" % driver[1].replace("\n","")
+				return	"%s" % driver[1].replace("\n","")
 			except:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-platform-util-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s" % driver[1].replace("\n","")
+				return	"%s" % driver[1].replace("\n","")
 	except:
 		return _("unknown")
 
@@ -257,7 +257,7 @@ def GetIPsFromNetworkInterfaces():
 			names.append(0)
 		outbytes = struct.unpack('iL', fcntl.ioctl(
 			s.fileno(),
-			0x8912,  # SIOCGIFCONF
+			0x8912,	 # SIOCGIFCONF
 			struct.pack('iL', _bytes, names.buffer_info()[0])
 		))[0]
 		if outbytes == _bytes:
