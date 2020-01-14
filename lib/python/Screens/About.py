@@ -24,18 +24,18 @@ from Components.Console import Console
 URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
 
 def novedades(url):
-    text = ""
-    try:
-        req = urllib2.Request(url)
-        response = urllib2.urlopen(req)
-        link = response.read().decode("windows-1252")
-        response.close()
-        text = link.encode("utf-8")
+	text = ""
+	try:
+		req = urllib2.Request(url)
+		response = urllib2.urlopen(req)
+		link = response.read().decode("windows-1252")
+		response.close()
+		text = link.encode("utf-8")
 
-    except:
-        print"ERROR novedades alvaro %s" %(url)
+	except:
+		print"ERROR novedades alvaro %s" %(url)
 
-    return text
+	return text
 
 class About(Screen):
 	def __init__(self, session):
@@ -357,7 +357,7 @@ class Devices(Screen):
 		self.Console.ePopen("df -mh | grep -v '^Filesystem'", self.Stage1Complete)
 
 	def Stage1Complete(self, result, retval, extra_args=None):
-		result = result.replace('\n                        ', ' ').split('\n')
+		result = result.replace('\n						   ', ' ').split('\n')
 		self.mountinfo = ""
 		for line in result:
 			self.parts = line.split()
@@ -576,8 +576,8 @@ class SystemNetworkInfo(Screen):
 						self.AboutText += _('Encryption:') + '\t' + encryption + '\n'
 
 					if ((status[self.iface]["essid"] and status[self.iface]["essid"] == "off") or
-					    not status[self.iface]["accesspoint"] or
-					    status[self.iface]["accesspoint"] == "Not-Associated"):
+						not status[self.iface]["accesspoint"] or
+						status[self.iface]["accesspoint"] == "Not-Associated"):
 						self.LinkState = False
 						self["statuspic"].setPixmapNum(1)
 						self["statuspic"].show()
@@ -736,26 +736,26 @@ class TranslationInfo(Screen):
 			})
 
 class CommitInfo(Screen):
-    def __init__(self, session):
-        Screen.__init__(self, session)
-        self.session = session
-        self.skinName = "CommitInfo"
-        self.setup_title = _("Novedades Alvaro")
-        self.setTitle(self.setup_title)
-        self["novedades"] = ScrollLabel()
-        self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"],
-            {
-            "cancel" : self.cerrar,
-            "ok" : self.cerrar,
-            "up": self["novedades"].pageUp,
-            "down": self["novedades"].pageDown,
-            "left": self["novedades"].pageUp,
-            "right": self["novedades"].pageDown,
-            })
-        self['novedades'].setText(novedades(URL))
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.skinName = "CommitInfo"
+		self.setup_title = _("Novedades Alvaro")
+		self.setTitle(self.setup_title)
+		self["novedades"] = ScrollLabel()
+		self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"],
+			{
+			"cancel" : self.cerrar,
+			"ok" : self.cerrar,
+			"up": self["novedades"].pageUp,
+			"down": self["novedades"].pageDown,
+			"left": self["novedades"].pageUp,
+			"right": self["novedades"].pageDown,
+			})
+		self['novedades'].setText(novedades(URL))
 
-    def cerrar(self):
-        self.close()
+	def cerrar(self):
+		self.close()
 
 	def readGithubCommitLogs(self):
 		url = self.projects[self.project][0]

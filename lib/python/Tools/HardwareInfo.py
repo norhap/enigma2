@@ -60,18 +60,18 @@ class HardwareInfo:
 			self.device_brand = "Golden Interstar"
 		elif self.device_model.startswith(("hd")):
 			self.device_brand = "Mut@nt"
-                elif self.device_model.startswith(("vs")):
-                    self.device_brand = "Mut@nt"
-                elif self.device_model.startswith(("vu")):
-                    self.device_brand = "Vuplus"
-                elif self.device_model.startswith(("ini-8000")):
-                    self.device_brand = "Atemio"
-                elif self.device_model.startswith(("os")):
-                    self.device_brand = "Edision"
+				elif self.device_model.startswith(("vs")):
+					self.device_brand = "Mut@nt"
+				elif self.device_model.startswith(("vu")):
+					self.device_brand = "Vuplus"
+				elif self.device_model.startswith(("ini-8000")):
+					self.device_brand = "Atemio"
+				elif self.device_model.startswith(("os")):
+					self.device_brand = "Edision"
 
 		self.device_model = self.device_model or self.device_name
 
-        # map for Xtrend device models to machine names
+		# map for Xtrend device models to machine names
 		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
 			self.machine_name = "%sx00" % self.device_model[:3]
 		elif self.device_model == "et11000":
@@ -87,7 +87,7 @@ class HardwareInfo:
 			self.device_string = self.device_model
 
 		# only some early DMM boxes do not have HDMI hardware
-		self.device_hdmi =  self.device_model not in ("dm800","dm8000")
+		self.device_hdmi =	self.device_model not in ("dm800","dm8000")
 
 		print "[HardwareInfo] Detected: " + self.get_device_string()
 
