@@ -8027,10 +8027,10 @@ msgid "Yes, returning to movie list"
 msgstr "Sí, volviendo a la lista de películas"
 
 msgid "Yes, with backup"
-msgstr "Sí, con backup-completo"
+msgstr "Sí, con previo-backup"
 
 msgid "Yes, without backup"
-msgstr "Sí, sin backup-completo"
+msgstr "Sí, sin previo-backup"
 
 msgid "Yesterday"
 msgstr "Ayer"
