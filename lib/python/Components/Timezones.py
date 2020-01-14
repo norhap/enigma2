@@ -156,7 +156,7 @@ class Timezones:
 			if config.plugins.autotimer.autopoll.value:
 				print "[Timezones] trying to stop main AutoTimer poller"
 				if autopoller is not None:
-					self.ATupdate = True
+				    self.ATupdate = True
 		except ImportError, KeyError:
 			pass
 

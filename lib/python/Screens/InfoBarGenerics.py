@@ -1858,13 +1858,13 @@ class InfoBarShowMovies:
 # Hrmf.
 #
 # Timeshift works the following way:
-#										  demux0   demux1					 "TimeshiftActions" "TimeshiftActivateActions" "SeekActions"
-# - normal playback						  TUNER	   unused	   PLAY				  enable				disable				 disable
-# - user presses "yellow" button.		  FILE	   record	   PAUSE			  enable				disable				 enable
-# - user presess pause again			  FILE	   record	   PLAY				  enable				disable				 enable
-# - user fast forwards					  FILE	   record	   FF				  enable				disable				 enable
-# - end of timeshift buffer reached		  TUNER	   record	   PLAY				  enable				enable				 disable
-# - user backwards						  FILE	   record	   BACK	 # !!		  enable				disable				 enable
+#                                         demux0   demux1                    "TimeshiftActions" "TimeshiftActivateActions" "SeekActions"
+# - normal playback                       TUNER    unused      PLAY               enable                disable              disable
+# - user presses "yellow" button.         FILE     record      PAUSE              enable                disable              enable
+# - user presess pause again              FILE     record      PLAY               enable                disable              enable
+# - user fast forwards                    FILE     record      FF                 enable                disable              enable
+# - end of timeshift buffer reached       TUNER    record      PLAY               enable                enable               disable
+# - user backwards                        FILE     record      BACK  # !!         enable                disable              enable
 #
 
 # in other words:
@@ -1885,8 +1885,8 @@ class InfoBarTimeshift():
 	def __init__(self):
 		self["TimeshiftActions"] = HelpableActionMap(self, "InfobarTimeshiftActions",
 			{
-				"timeshiftStart": (self.startTimeshift, _("Start timeshift")),	# the "yellow key"
-				"timeshiftStop": (self.stopTimeshift, _("Stop timeshift")),		 # currently undefined :), probably 'TV'
+				"timeshiftStart": (self.startTimeshift, _("Start timeshift")),  # the "yellow key"
+				"timeshiftStop": (self.stopTimeshift, _("Stop timeshift")),      # currently undefined :), probably 'TV'
 				"seekFwdManual": (self.seekFwdManual, _("Seek forward (enter time)")),
 				"seekBackManual": (self.seekBackManual, _("Seek backward (enter time)")),
 				"seekdef:1": (boundFunction(self.seekdef,1), _("Seek")),
@@ -2602,7 +2602,7 @@ class InfoBarInstantRecord:
 
 	def startInstantRecording(self, limitEvent = False):
 		begin = int(time())
-		end = begin + 3600		# dummy
+		end = begin + 3600      # dummy
 		name = "instant record"
 		info = { }
 
@@ -2742,12 +2742,12 @@ class InfoBarInstantRecord:
 	def changeDuration(self, entry):
 		if entry is not None and entry >= 0:
 			self.selectedEntry = entry
-			self.session.openWithCallback(self.inputCallback, InputBox, title=_("How many minutes do you want to record?"), text="5	 ", maxSize=True, type=Input.NUMBER)
+			self.session.openWithCallback(self.inputCallback, InputBox, title=_("How many minutes do you want to record?"), text="5  ", maxSize=True, type=Input.NUMBER)
 
 	def addRecordingTime(self, entry):
 		if entry is not None and entry >= 0:
 			self.selectedEntry = entry
-			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5	", maxSize=True, type=Input.NUMBER)
+			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5  ", maxSize=True, type=Input.NUMBER)
 
 	def inputAddRecordingTime(self, value):
 		if value:
@@ -3024,15 +3024,15 @@ class InfoBarRedButton:
 			for x in self.onRedButtonActivation:
 				x()
 
-class InfoBarAspectSelection:
-	STATE_HIDDEN = 0
-	STATE_ASPECT = 1
+class InfoBarAspectSelection: 
+	STATE_HIDDEN = 0 
+	STATE_ASPECT = 1 
 	STATE_RESOLUTION = 2
-	def __init__(self):
-		self["AspectSelectionAction"] = HelpableActionMap(self, "InfobarAspectSelectionActions",
-			{
-				"aspectSelection": (self.ExGreen_toggleGreen, _("Aspect ratio list...")),
-			})
+	def __init__(self): 
+		self["AspectSelectionAction"] = HelpableActionMap(self, "InfobarAspectSelectionActions", 
+			{ 
+				"aspectSelection": (self.ExGreen_toggleGreen, _("Aspect ratio list...")), 
+			}) 
 
 		self.__ExGreen_state = self.STATE_HIDDEN
 
@@ -3048,7 +3048,7 @@ class InfoBarAspectSelection:
 
 	def ExGreen_doHide(self):
 		print "do self.STATE_HIDDEN"
-		self.__ExGreen_state = self.STATE_HIDDEN
+		self.__ExGreen_state = self.STATE_HIDDEN 
 
 	def ExGreen_toggleGreen(self, arg=""):
 		print self.__ExGreen_state
@@ -3127,7 +3127,7 @@ class InfoBarResolutionSelection:
 
 		selection = 0
 		tlist = []
-		tlist.append((_("Exit"), "exit"))
+		tlist.append((_("Exit"), "exit")) 
 		tlist.append((_("Auto (not available)"), "auto"))
 		tlist.append((_("Video: ") + str(xres) + "x" + str(yres) + "@" + str(fpsFloat) + "hz", ""))
 		tlist.append(("--", ""))
@@ -3357,7 +3357,7 @@ class InfoBarCueSheetSupport:
 				return # Should not happen?
 			length = seekable.getLength()
 			if length[0]:
-				length = (-1, 0) #	Set length 0 if error in getLength()
+				length = (-1, 0) #  Set length 0 if error in getLength()
 			print "[InfoBarGenerics] seekable.getLength() returns:", length
 			if (last > 900000) and (not length[1] or last < length[1] - 900000):
 				self.resume_point = last

@@ -172,15 +172,15 @@ class PowerTimerEntry(timer.TimerEntry, object):
 				if ((not Screens.Standby.inStandby and NavigationInstance.instance.getCurrentlyPlayingServiceReference() and
 					('0:0:0:0:0:0:0:0:0' in NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString() or
 					 '4097:' in NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
-					 ) or
-					 (int(ClientsStreaming("NUMBER").getText()) > 0)
-					) or
-					(NavigationInstance.instance.RecordTimer.isRecording() or
-					 abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or
-					 abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900) or
-					 (self.autosleepinstandbyonly == 'yes' and not Screens.Standby.inStandby) or
-					 (self.autosleepinstandbyonly == 'yes' and Screens.Standby.inStandby and internalHDDNotSleeping()
-					)
+				     ) or
+				     (int(ClientsStreaming("NUMBER").getText()) > 0)
+				    ) or
+				    (NavigationInstance.instance.RecordTimer.isRecording() or
+				     abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or
+				     abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900) or
+				     (self.autosleepinstandbyonly == 'yes' and not Screens.Standby.inStandby) or
+				     (self.autosleepinstandbyonly == 'yes' and Screens.Standby.inStandby and internalHDDNotSleeping()
+				    )
 				   ):
 					self.do_backoff()
 					return False
