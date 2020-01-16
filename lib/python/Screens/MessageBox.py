@@ -1,5 +1,4 @@
 from enigma import eTimer, ePoint, eSize, getDesktop
-
 from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.Label import Label
@@ -28,6 +27,7 @@ class MessageBox(Screen, HelpableScreen):
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=0, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=True, simple=False, wizard=False, list=None, skin_name=None, timeout_default=None, title=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		self["autoresize"] = Label("") #do not remove, used for autoResize()
 		if text:
 			self.text = _(text)
 		else:
@@ -260,3 +260,9 @@ class MessageBox(Screen, HelpableScreen):
 
 	def __repr__(self):
 		return "%s(%s)" % (str(type(self)), self.text)
+
+	def getListWidth(self):
+		def getListLineTextWidth(text):
+			self["autoresize"].setText(text)
+			return self["autoresize"].getSize()[0]
+		return max([getListLineTextWidth(line[0]) for line in self.list]) if self.list else 0
