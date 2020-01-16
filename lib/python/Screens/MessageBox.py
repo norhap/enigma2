@@ -1,4 +1,5 @@
 from enigma import eTimer, ePoint, eSize, getDesktop
+
 from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.Label import Label
@@ -21,13 +22,12 @@ class MessageBox(Screen, HelpableScreen):
 		TYPE_INFO: _("Informacion"),
 		TYPE_WARNING: _("Atencion"),
 		TYPE_ERROR: _("Error"),
-		TYPE_MESSAGE: _("Mensage")
+		TYPE_MESSAGE: _("Mensaje")
 	}
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=0, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None, picon=True, simple=False, wizard=False, list=None, skin_name=None, timeout_default=None, title=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self["autoresize"] = Label("") #do not remove, used for autoResize()
 		if text:
 			self.text = _(text)
 		else:
@@ -56,27 +56,17 @@ class MessageBox(Screen, HelpableScreen):
 			}, prio=-1, description=_("MessageBox Functions"))
 		self.msgBoxID = msgBoxID
 		# These six lines can go with new skins that only use self["icon"]...
-		self["QuestionPixmap"] = Pixmap()
-		self["QuestionPixmap"].hide()
-		self["InfoPixmap"] = Pixmap()
-		self["InfoPixmap"].hide()
-		self["ErrorPixmap"] = Pixmap()
-		self["ErrorPixmap"].hide()
-		self["WarningPixmap"] = Pixmap()
 		self["icon"] = MultiPixmap()
 		self["icon"].hide()
 		self.picon = picon
 		if picon:
 			# These five lines can go with new skins that only use self["icon"]...
 			if self.type == self.TYPE_YESNO:
-				self["QuestionPixmap"].show()
+				self["icon"].show()
 			elif self.type == self.TYPE_INFO:
-				self["InfoPixmap"].show()
+				self["icon"].show()
 			elif self.type == self.TYPE_ERROR:
-				self["ErrorPixmap"].show()
-			self["icon"].show()
-		if picon != self.TYPE_WARNING:
-			self["WarningPixmap"].hide()
+				self["icon"].show()
 		self.skinName = ["MessageBox"]
 		if simple:
 			self.skinName = ["MessageBoxSimple"]
@@ -270,9 +260,3 @@ class MessageBox(Screen, HelpableScreen):
 
 	def __repr__(self):
 		return "%s(%s)" % (str(type(self)), self.text)
-
-	def getListWidth(self):
-		def getListLineTextWidth(text):
-			self["autoresize"].setText(text)
-			return self["autoresize"].getSize()[0]
-		return max([getListLineTextWidth(line[0]) for line in self.list]) if self.list else 0
