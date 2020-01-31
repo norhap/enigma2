@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 00:41+0330\n"
+"POT-Creation-Date: 2020-01-30 00:14+0330\n"
 "PO-Revision-Date: 2018-12-17 02:51+0200\n"
 "Last-Translator: Hazem <moustafagamal@hotmail.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -1111,6 +1111,12 @@ msgstr ""
 msgid "16:10 PanScan"
 msgstr ""
 
+msgid "16:10 letterbox"
+msgstr ""
+
+msgid "16:10 panscan"
+msgstr ""
+
 msgid "16:9"
 msgstr "16:9"
 
@@ -1120,6 +1126,12 @@ msgstr ""
 
 msgid "16:9 always"
 msgstr "16:9 دائما"
+
+msgid "16:9 letterbox"
+msgstr ""
+
+msgid "16K"
+msgstr ""
 
 #
 msgid "18 V"
@@ -1207,6 +1219,16 @@ msgstr ""
 msgid "4:3 PanScan"
 msgstr ""
 
+msgid "4:3 letterbox"
+msgstr ""
+
+msgid "4:3 panscan"
+msgstr ""
+
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 #, fuzzy
 msgid "4X"
 msgstr "4"
@@ -1229,6 +1251,10 @@ msgstr "8"
 msgid "8 character"
 msgstr ""
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -1238,27 +1264,31 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Alternate Display Skin>"
+#, fuzzy
+msgid "< Current >"
+msgstr "القيمه الحالية:"
+
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "الاعدادات الافتراضية"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "الاعدادات الافتراضية"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
 msgstr ""
 
 #
 msgid "<Current movielist location>"
 msgstr "<موقع قائمة الأفلام الحالية>"
 
-#, fuzzy
-msgid "<Default Skin>"
-msgstr "الاعدادات الافتراضية"
-
 #
 msgid "<Default movie location>"
 msgstr "<مكان الافلام الافتراضى>"
-
-msgid "<Display Skin with Picon>"
-msgstr ""
-
-#, fuzzy
-msgid "<Display Skin>"
-msgstr "الاعدادات الافتراضية"
 
 #
 msgid "<Last timer location>"
@@ -1466,10 +1496,6 @@ msgstr "إنهاء تحرير المفضلة"
 #
 msgid "About"
 msgstr "حول"
-
-#
-msgid "About..."
-msgstr "حول الجهاز..."
 
 #, fuzzy
 msgid "Accept the current selection"
@@ -2023,6 +2049,10 @@ msgstr ""
 msgid "Aspect ratio"
 msgstr "نسبة عرض الشاشة"
 
+#, fuzzy
+msgid "Aspect ratio list..."
+msgstr "نسبة عرض الشاشة"
+
 msgid "Assigned CAIds:"
 msgstr ""
 
@@ -2120,6 +2150,10 @@ msgstr ""
 #. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "آلـى"
+
+#, fuzzy
+msgid "Auto (not available)"
+msgstr "غير متاح"
 
 #, fuzzy
 msgid "Auto Detect"
@@ -2658,6 +2692,12 @@ msgstr ""
 #
 msgid "Cancel"
 msgstr "إلغاء"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
 
 msgid "Cancel any text changes and exit"
 msgstr ""
@@ -5010,9 +5050,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "إصدار الانيجما: "
 
-msgid "Enigma2 skin selector"
-msgstr ""
-
 msgid "Enigmalight"
 msgstr ""
 
@@ -5135,9 +5172,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "خطأ في تثبيت الإضافة"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -5438,6 +5472,9 @@ msgstr ""
 #, fuzzy
 msgid "FFmpeg version: "
 msgstr "إصدار الانيجما: "
+
+msgid "FHD"
+msgstr ""
 
 msgid "FPU: "
 msgstr ""
@@ -5803,6 +5840,10 @@ msgstr "إصدار GStreamer: "
 msgid "GUI Settings"
 msgstr "إعدادات واجهة المستخدم"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "إعدادات واجهة المستخدم"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
@@ -5810,22 +5851,13 @@ msgstr ""
 "يجب إعادة تشغيل واجهة المستخدم لتطبيق اللغة الجديدة\n"
 "إعادة تشغيل واجهة المستخدم الآن؟"
 
-#
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"يجب إعادة تشغيل النظام لتطبيق المظهر \n"
-"هل تريد إعادة تشغيل النظام الان ؟"
-
-#
 #, fuzzy
 msgid ""
 "GUI needs a restart to switch modes\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"يجب إعادة تشغيل النظام لتطبيق المظهر \n"
-"هل تريد إعادة تشغيل النظام الان ؟"
+"يجب إعادة تشغيل واجهة المستخدم لتطبيق اللغة الجديدة\n"
+"إعادة تشغيل واجهة المستخدم الآن؟"
 
 msgid "Gabon"
 msgstr ""
@@ -6032,6 +6064,10 @@ msgstr ""
 
 msgid "H:mm:ss"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "د"
 
 msgid "HD list"
 msgstr ""
@@ -6714,10 +6750,6 @@ msgstr ""
 msgid "Invert"
 msgstr "مقلوب"
 
-#
-msgid "Ipkg"
-msgstr ""
-
 msgid "Iran (Islamic Republic of)"
 msgstr "إيران (الجمهورية الإسلامية)"
 
@@ -7305,6 +7337,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "الصانع"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "MaraM9"
 msgstr ""
 
@@ -7570,7 +7607,7 @@ msgstr "الانتقال لأسفل الى البند الاخير"
 
 #, fuzzy
 msgid "Move down a page"
-msgstr "الانتقال لأسفل الى البند الاخير"
+msgstr "الانتقال الى الزاوية التالية"
 
 #, fuzzy
 msgid "Move down to last entry"
@@ -7610,11 +7647,28 @@ msgstr ""
 msgid "Move to position X"
 msgstr ""
 
+#, fuzzy
+msgid "Move to the next page"
+msgstr "الانتقال الى الزاوية التالية"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "الانتقال لاسفل الى البند التالى"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "عودة للفصل السابق"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "الانتقال لاعلى الى البند السابق"
+
 msgid "Move up a line"
 msgstr ""
 
+#, fuzzy
 msgid "Move up a page"
-msgstr ""
+msgstr "الانتقال الى الزاوية التالية"
 
 #, fuzzy
 msgid "Move up to first entry"
@@ -8437,6 +8491,9 @@ msgstr ""
 msgid "OpenVPN setup"
 msgstr "ضبط صوره داخل صوره"
 
+msgid "Opkg"
+msgstr ""
+
 msgid "Options disable timer"
 msgstr ""
 
@@ -8830,6 +8887,11 @@ msgid "Please select a playlist..."
 msgstr "من فضلك أختيار قائمة العرض..."
 
 #
+#, fuzzy
+msgid "Please select a resolution..."
+msgstr "من فضلك أختار الخدمة الفرعية..."
+
+#
 msgid "Please select a sub service..."
 msgstr "من فضلك أختيار خدمة فرعية..."
 
@@ -8838,6 +8900,11 @@ msgstr "من فضلك أختيار الخدمه الفرعيه المطلوب ت
 
 #
 msgid "Please select a subservice..."
+msgstr "من فضلك أختار الخدمة الفرعية..."
+
+#
+#, fuzzy
+msgid "Please select an aspect ratio..."
 msgstr "من فضلك أختار الخدمة الفرعية..."
 
 #, fuzzy
@@ -9216,7 +9283,8 @@ msgstr ""
 msgid "Press OK on your remote control to continue."
 msgstr "أضغط موافق من الريموت كنترول للمتابعة."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "اضغط OK لتنشيط السمة المحددة."
 
 #
@@ -9229,6 +9297,10 @@ msgstr "أضغط موافق لتحرير الاعدادات."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "أضغط موالق للحصول على تفاصيل أكثر عن %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "اضغط OK لتنشيط السمة المحددة."
 
 #
 msgid "Press OK to scan"
@@ -9492,6 +9564,10 @@ msgstr "هل تريد فعلا حذف المؤقتات المنتهية ؟"
 #
 msgid "Really exit the subservices quickzap?"
 msgstr ""
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "حماية شاشة استعادة ضبط المصنع"
 
 #, fuzzy
 msgid "Really reboot into android mode?"
@@ -9925,7 +10001,7 @@ msgstr "إعادة تشغيل الشبكة"
 
 #, fuzzy
 msgid "Restore previous cuts..."
-msgstr "العودة الى الخدمه القناه السابقه"
+msgstr "الانتقال لاعلى الى البند السابق"
 
 msgid "Restore system settings"
 msgstr "إستعادة إعدادات النظام"
@@ -10204,6 +10280,10 @@ msgstr "حفظ وخروج"
 #, fuzzy
 msgid "Save EPG"
 msgstr "دليل برامج واحد"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "اضغط OK لتنشيط السمة المحددة."
 
 msgid "Save and exit"
 msgstr "حفظ وخروج"
@@ -11607,20 +11687,24 @@ msgid "Size: "
 msgstr ""
 
 #
+#, fuzzy
 msgid "Skin"
-msgstr "المظهر"
+msgstr "المظاهر"
 
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr ""
 
 #, fuzzy
+msgid "Skin Selection Actions"
+msgstr "إختر وظيفة"
+
+#, fuzzy
 msgid "Skin Setting"
 msgstr "إعدادات"
 
-#, fuzzy
-msgid "Skin setup"
-msgstr "ضبط صوره داخل صوره"
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 #
 msgid "Skins"
@@ -11800,7 +11884,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Sort by default"
-msgstr "الافتراضى"
+msgstr "استعادة نسخ احتياطية"
 
 msgid "Sort list to default and exit?"
 msgstr ""
@@ -13253,7 +13337,15 @@ msgstr "خصائص العنوان"
 msgid "Titleset mode"
 msgstr ""
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
+msgstr ""
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -13571,15 +13663,11 @@ msgstr ""
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr ""
 
-#, fuzzy
 msgid ""
-"Unattended upgrade in progress\n"
+"Unattended update in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
-"سيتم ترقية المعالج الأمامي الخاص بك\n"
-"يرجى الانتظار حتى إعادة تشغيل جهاز الاستقبال الخاص بك\n"
-"قد يستغرق هذا بضع دقائق"
 
 msgid "Uncover dashed flickering line for this service"
 msgstr ""
@@ -14005,6 +14093,10 @@ msgstr "ضبط الفيديو"
 #, fuzzy
 msgid "Video wizard"
 msgstr "نافذة إعدادات الفيديو"
+
+#, fuzzy
+msgid "Video: "
+msgstr "S-Video"
 
 #, python-format
 msgid "Video: %s fps"

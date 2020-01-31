@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 from Components.Button import Button
 from Components.ActionMap import HelpableActionMap, ActionMap, NumberActionMap
@@ -85,7 +86,7 @@ l_trashsort = [
 try:
 	from Plugins.Extensions import BlurayPlayer
 except Exception as e:
-	print "[MovieSelection] Bluray Player is not installed:", e
+	print("[MovieSelection] Bluray Player is not installed:", e)
 	BlurayPlayer = None
 
 
@@ -100,9 +101,9 @@ def setPreferredTagEditor(te):
 	global preferredTagEditor
 	if preferredTagEditor is None:
 		preferredTagEditor = te
-		print "[MovieSelection] Preferred tag editor changed to", preferredTagEditor
+		print("[MovieSelection] Preferred tag editor changed to", preferredTagEditor)
 	else:
-		print "[MovieSelection] Preferred tag editor already set to", preferredTagEditor, "ignoring", te
+		print("[MovieSelection] Preferred tag editor already set to", preferredTagEditor, "ignoring", te)
 
 def getPreferredTagEditor():
 	global preferredTagEditor
@@ -150,7 +151,7 @@ def createMoveList(serviceref, dest):
 	srcPath, srcName = os.path.split(src)
 	if os.path.normpath(srcPath) == dest:
 		# move file to itself is allowed, so we have to check it
-		raise Exception, "Refusing to move to the same directory"
+		raise Exception("Refusing to move to the same directory")
 	# Make a list of items to move
 	moveList = [(src, os.path.join(dest, srcName))]
 	if isinstance(serviceref, str) or not serviceref.flags & eServiceReference.mustDescent:
@@ -172,14 +173,14 @@ def moveServiceFiles(serviceref, dest, name=None, allowCopy=True):
 	# Try to "atomically" move these files
 	movedList = []
 	try:
-		# print "[MovieSelection] Moving in background..."
+		# print("[MovieSelection] Moving in background...")
 		# start with the smaller files, do the big one later.
 		moveList.reverse()
 		if name is None:
 			name = os.path.split(moveList[-1][0])[1]
 		Tools.CopyFiles.moveFiles(moveList, name)
-	except Exception, e:
-		print "[MovieSelection] Failed move:", e
+	except Exception as e:
+		print("[MovieSelection] Failed move:", e)
 		# rethrow exception
 		raise
 
@@ -189,14 +190,14 @@ def copyServiceFiles(serviceref, dest, name=None):
 	# Try to "atomically" move these files
 	movedList = []
 	try:
-		# print "[MovieSelection] Copying in background..."
+		# print("[MovieSelection] Copying in background...")
 		# start with the smaller files, do the big one later.
 		moveList.reverse()
 		if name is None:
 			name = os.path.split(moveList[-1][0])[1]
 		Tools.CopyFiles.copyFiles(moveList, name)
-	except Exception, e:
-		print "[MovieSelection] Failed copy:", e
+	except Exception as e:
+		print("[MovieSelection] Failed copy:", e)
 		# rethrow exception
 		raise
 
@@ -976,8 +977,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		config.misc.standbyCounter.removeNotifier(self.standbyCountChanged)
 		try:
 			NavigationInstance.instance.RecordTimer.on_state_change.remove(self.list.updateRecordings)
-		except Exception, e:
-			print "[MovieSelection] failed to unsubscribe:", e
+		except Exception as e:
+			print("[MovieSelection] failed to unsubscribe:", e)
 			pass
 
 	def createSummary(self):
@@ -1104,7 +1105,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.session.open(BlurayUi.BlurayMain, path)
 			return True
 		except Exception as e:
-			print "[MovieSelection] Cannot open BlurayPlayer:", e
+			print("[MovieSelection] Cannot open BlurayPlayer:", e)
 
 	def playAsDVD(self, path):
 		try:
@@ -1114,8 +1115,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				path = os.path.split(path.rstrip('/'))[0]
 			self.session.open(DVD.DVDPlayer, dvd_filelist=[path])
 			return True
-		except Exception, e:
-			print "[MovieSelection] DVD Player not installed:", e
+		except Exception as e:
+			print("[MovieSelection] DVD Player not installed:", e)
 
 	def playSuburi(self, path):
 		suburi = os.path.splitext(path)[0][:-7]
@@ -1174,7 +1175,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		playInBackground = self.list.playInBackground
 		playInForeground = self.list.playInForeground
 		if not playInBackground:
-			print "[MovieSelection] Not playing anything in background"
+			print("[MovieSelection] Not playing anything in background")
 			return
 		self.session.nav.stopService()
 		self.list.playInBackground = None
@@ -1188,7 +1189,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				return
 			path = next.getPath()
 			ext = os.path.splitext(path)[1].lower()
-			print "[MovieSelection] Next up:", path
+			print("[MovieSelection] Next up:", path)
 			if ext in AUDIO_EXTENSIONS:
 				self.nextInBackground = next
 				self.callLater(self.preview)
@@ -1277,8 +1278,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							if os.path.splitext(p)[1].lower() in IMAGE_EXTENSIONS:
 								filelist.append(((p,False), None))
 						self.session.open(ui.Pic_Full_View, filelist, index, path)
-					except Exception, ex:
-						print "[MovieSelection] Cannot display", str(ex)
+					except Exception as ex:
+						print("[MovieSelection] Cannot display", str(ex))
 					return
 				Screens.InfoBar.InfoBar.instance.checkTimeshiftRunning(boundFunction(self.itemSelectedCheckTimeshiftCallback, ext, path))
 
@@ -1290,7 +1291,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					if blurayinfo.isBluray(path) == 1:
 						ext = 'bluray'
 				except Exception as e:
-					print "[MovieSelection] Error in blurayinfo:", e
+					print("[MovieSelection] Error in blurayinfo:", e)
 			if ext == 'bluray':
 				if self.playAsBLURAY(path):
 					return
@@ -1326,8 +1327,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			file = open(path, "wb")
 			pickle.dump(self.settings, file)
 			file.close()
-		except Exception, e:
-			print "[MovieSelection] Failed to save settings to %s: %s" % (path, e)
+		except Exception as e:
+			print("[MovieSelection] Failed to save settings to %s: %s" % (path, e))
 		# Also set config items, in case the user has a read-only disk
 		config.movielist.moviesort.value = self.settings["moviesort"]
 		config.movielist.description.value = self.settings["description"]
@@ -1352,8 +1353,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				}
 				self.applyConfigSettings(updates)
 				pass # ignore fail to open errors
-			except Exception, e:
-				print "[MovieSelection] Failed to load settings from %s: %s" % (path, e)
+			except Exception as e:
+				print("[MovieSelection] Failed to load settings from %s: %s" % (path, e))
 		else:
 			updates = {
 				"moviesort": config.movielist.moviesort.value,
@@ -1386,7 +1387,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		return needUpdate
 
 	def sortBy(self, newType):
-		print '[MovieSelection] SORTBY:',newType
+		print('[MovieSelection] SORTBY:',newType)
 		if newType < MovieList.TRASHSORT_SHOWRECORD:
 			self.settings["moviesort"] = newType
 # If we are using per-directory sort methods then set it now...
@@ -1754,7 +1755,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							fileSize = size
 							self.playfile = folder + name
 				except:
-					print "[MovieSelection] Error calculate size for %s" % (folder + name)
+					print("[MovieSelection] Error calculate size for %s" % (folder + name))
 			if self.playfile:
 				return True
 		return False
@@ -1815,13 +1816,13 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				path += '/'
 			self.reloadList(sel = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + path))
 		except OSError, e:
-			print "[MovieSelection] Error %s:" % e.errno, e
+			print("[MovieSelection] Error %s:" % e.errno, e)
 			if e.errno == 17:
 				msg = _("The path %s already exists.") % name
 			else:
 				msg = _("Error") + '\n' + str(e)
-		except Exception, e:
-			print "[MovieSelection] Unexpected error:", e
+		except Exception as e:
+			print("[MovieSelection] Unexpected error:", e)
 			msg = _("Error") + '\n' + str(e)
 		if msg:
 			mbox=self.session.open(MessageBox, msg, type = MessageBox.TYPE_ERROR, timeout = 5)
@@ -1897,7 +1898,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				path,filename = os.path.split(oldfilename)
 				if item[0].flags & eServiceReference.mustDescent: # directory
 					newfilename = os.path.join(path, newbasename)
-					print "[MovieSelection] rename dir", oldfilename, "to", newfilename
+					print("[MovieSelection] rename dir", oldfilename, "to", newfilename)
 					os.rename(oldfilename, newfilename)
 				else:
 					if oldfilename.endswith(self.extension):
@@ -1917,18 +1918,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							break
 					if not dont_rename:
 						for r in renamelist:
-							print "[MovieSelection] rename", r[0], "to", r[1]
+							print("[MovieSelection] rename", r[0], "to", r[1])
 							os.rename(r[0], r[1])
 				self.reloadList(sel = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + newfilename))
 			except OSError, e:
-				print "[MovieSelection] Error %s:" % e.errno, e
+				print("[MovieSelection] Error %s:" % e.errno, e)
 				if e.errno == 17:
 					msg = _("The path %s already exists.") % name
 				else:
 					msg = _("Error") + '\n' + str(e)
-			except Exception, e:
+			except Exception as e:
 				import traceback
-				print "[MovieSelection] Unexpected error:", e
+				print("[MovieSelection] Unexpected error:", e)
 				traceback.print_exc()
 				msg = _("Error") + '\n' + str(e)
 			if msg:
@@ -1965,8 +1966,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						if os.path.isdir(d) and (d not in inlist):
 							bookmarks.append((fn,d))
 							inlist.append(d)
-			except Exception, e :
-				print "[MovieSelection]", e
+			except Exception as e :
+				print("[MovieSelection]", e)
 			# Last favourites
 			for d in last_selected_dest:
 				if d not in inlist:
@@ -1998,7 +1999,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				name = item[1].getName(current)
 			moveServiceFiles(current, dest, name)
 			self["list"].removeService(current)
-		except Exception, e:
+		except Exception as e:
 			mbox=self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
 			mbox.setTitle(self.getTitle())
 
@@ -2025,7 +2026,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			else:
 				name = item[1].getName(current)
 			copyServiceFiles(current, dest, name)
-		except Exception, e:
+		except Exception as e:
 			mbox=self.session.open(MessageBox, str(e), MessageBox.TYPE_ERROR)
 			mbox.setTitle(self.getTitle())
 
@@ -2123,8 +2124,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						self["list"].removeService(current)
 						self.showActionFeedback(_("Deleted") + " " + name)
 						return
-					except Exception, e:
-						print "[MovieSelection] Weird error moving to trash", e
+					except Exception as e:
+						print("[MovieSelection] Weird error moving to trash", e)
 						msg = _("Cannot delete file") + "\n" + str(e) + "\n"
 						return
 				for fn in os.listdir(cur_path):
@@ -2144,8 +2145,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				else:
 					try:
 						os.rmdir(cur_path)
-					except Exception, e:
-						print "[MovieSelection] Failed delete", e
+					except Exception as e:
+						print("[MovieSelection] Failed delete", e)
 						self.session.open(MessageBox, _("Delete failed!") + "\n" + str(e), MessageBox.TYPE_ERROR)
 					else:
 						self["list"].removeService(current)
@@ -2211,12 +2212,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				eBackgroundFileEraser.getInstance().erase(os.path.realpath(current.getPath()))
 			else:
 				if offline.deleteFromDisk(0):
-					raise Exception, "Offline delete failed"
+					raise Exception("Offline delete failed")
 			self["list"].removeService(current)
 			from Screens.InfoBarGenerics import delResumePoint
 			delResumePoint(current)
 			self.showActionFeedback(_("Deleted") + " " + name)
-		except Exception, ex:
+		except Exception as ex:
 			mbox=self.session.open(MessageBox, _("Delete failed!") + "\n" + name + "\n" + str(ex), MessageBox.TYPE_ERROR)
 			mbox.setTitle(self.getTitle())
 
@@ -2269,9 +2270,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.gotFilename(defaultMoviePath())
 
 	def do_sortdefault(self):
-		print '[MovieSelection] SORT:',config.movielist.moviesort.value
+		print('[MovieSelection] SORT:',config.movielist.moviesort.value)
 		config.movielist.moviesort.load()
-		print '[MovieSelection] SORT:',config.movielist.moviesort.value
+		print('[MovieSelection] SORT:',config.movielist.moviesort.value)
 		self.sortBy(int(config.movielist.moviesort.value))
 
 # This is the code that advances to the "next" sort method
@@ -2307,7 +2308,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			from Plugins.Extensions.MovieManager.ui import MovieManager
 			return True
 		except Exception as e:
-			print "[MovieSelection] MovieManager is not installed...", e
+			print("[MovieSelection] MovieManager is not installed...", e)
 			return False
 
 	def runMovieManager(self):

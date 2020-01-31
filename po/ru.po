@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 00:41+0330\n"
+"POT-Creation-Date: 2020-01-30 00:14+0330\n"
 "PO-Revision-Date: 2019-07-25 17:52+0300\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -1115,6 +1115,14 @@ msgstr "16:10 Letterbox"
 msgid "16:10 PanScan"
 msgstr "16:10 PanScan"
 
+#, fuzzy
+msgid "16:10 letterbox"
+msgstr "16:10 Letterbox"
+
+#, fuzzy
+msgid "16:10 panscan"
+msgstr "16:10 PanScan"
+
 msgid "16:9"
 msgstr "16:9"
 
@@ -1123,6 +1131,13 @@ msgstr "16:9 Letterbox"
 
 msgid "16:9 always"
 msgstr "16:9 всегда"
+
+#, fuzzy
+msgid "16:9 letterbox"
+msgstr "16:9 Letterbox"
+
+msgid "16K"
+msgstr ""
 
 msgid "18 V"
 msgstr "18 V"
@@ -1208,6 +1223,18 @@ msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
 #, fuzzy
+msgid "4:3 letterbox"
+msgstr "4:3 Letterbox"
+
+#, fuzzy
+msgid "4:3 panscan"
+msgstr "4:3 PanScan"
+
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
+#, fuzzy
 msgid "4X"
 msgstr "4"
 
@@ -1229,6 +1256,10 @@ msgstr "8"
 msgid "8 character"
 msgstr ""
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -1238,24 +1269,29 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - по умолчанию (отключено)"
 
-msgid "<Alternate Display Skin>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Текущее значение: "
+
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "<Дефолтный скин>"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "<Дефолтный скин>"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
 msgstr ""
 
 msgid "<Current movielist location>"
 msgstr "<Текущее место списка видео>"
 
-msgid "<Default Skin>"
-msgstr "<Дефолтный скин>"
-
 msgid "<Default movie location>"
 msgstr "<Место видео по дефолту>"
-
-msgid "<Display Skin with Picon>"
-msgstr ""
-
-#, fuzzy
-msgid "<Display Skin>"
-msgstr "<Дефолтный скин>"
 
 msgid "<Last timer location>"
 msgstr "<Место последнего таймера>"
@@ -1477,9 +1513,6 @@ msgstr "Прервать редактирование фаворитов"
 
 msgid "About"
 msgstr "Информация"
-
-msgid "About..."
-msgstr "Информация..."
 
 #, fuzzy
 msgid "Accept the current selection"
@@ -1997,6 +2030,10 @@ msgstr ""
 msgid "Aspect ratio"
 msgstr "Соотношение сторон"
 
+#, fuzzy
+msgid "Aspect ratio list..."
+msgstr "Соотношение сторон"
+
 msgid "Assigned CAIds:"
 msgstr "Назначеный CAID:"
 
@@ -2091,6 +2128,10 @@ msgstr "Режим авторизации"
 #. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Авто"
+
+#, fuzzy
+msgid "Auto (not available)"
+msgstr "Тюнер не доступен."
 
 #, fuzzy
 msgid "Auto Detect"
@@ -2617,6 +2658,12 @@ msgstr "Canada"
 
 msgid "Cancel"
 msgstr "Отмена"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
 
 msgid "Cancel any text changes and exit"
 msgstr "Отменить любые изменения текста и выйти"
@@ -4882,9 +4929,6 @@ msgstr "Энигма - уровень отладки: %d\n"
 msgid "Enigma version: "
 msgstr "Версия энигмы: "
 
-msgid "Enigma2 skin selector"
-msgstr "Выбор скинов Enigma2"
-
 msgid "Enigmalight"
 msgstr ""
 
@@ -5012,9 +5056,6 @@ msgid ""
 msgstr ""
 "Ошибка при распаковке имиджа\n"
 "%s"
-
-msgid "Error executing plugin"
-msgstr "Ошибка запуска плагина"
 
 msgid "Error stop stream!"
 msgstr "Ошибка при остановке стрима!"
@@ -5315,6 +5356,9 @@ msgstr "FEC:"
 #, fuzzy
 msgid "FFmpeg version: "
 msgstr "Версия энигмы: "
+
+msgid "FHD"
+msgstr ""
 
 #, fuzzy
 msgid "FPU: "
@@ -5660,6 +5704,10 @@ msgstr "Версия GStreamer: "
 msgid "GUI Settings"
 msgstr "Настройки GUI"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Настройки GUI"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
@@ -5667,20 +5715,13 @@ msgstr ""
 "Необходим рестарт GUI для полного применения нового языка.\n"
 "Хотите выполнить рестарт GUI сейчас?"
 
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Для активации нового скина необходим рестарт GUI.\n"
-"Вы хотите сделать это сейчас?"
-
 #, fuzzy
 msgid ""
 "GUI needs a restart to switch modes\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"Для активации нового скина необходим рестарт GUI.\n"
-"Вы хотите сделать это сейчас?"
+"Необходим рестарт GUI для полного применения нового языка.\n"
+"Хотите выполнить рестарт GUI сейчас?"
 
 msgid "Gabon"
 msgstr "Gabon"
@@ -5873,6 +5914,10 @@ msgstr ""
 
 msgid "H:mm:ss"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD лист"
@@ -6534,9 +6579,6 @@ msgstr "Инверсия, Pilot & Roll-off"
 msgid "Invert"
 msgstr "Выбрать все"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Iran (Islamic Republic of)"
 
@@ -7060,6 +7102,11 @@ msgstr "Ручной импорт из резервного ресивера"
 msgid "Manufacturer"
 msgstr "Производитель"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "MaraM9"
 msgstr ""
 
@@ -7292,7 +7339,7 @@ msgstr "Перейти вниз списка"
 
 #, fuzzy
 msgid "Move down a page"
-msgstr "переместить вниз к последней записи"
+msgstr "перейти в следующей угол"
 
 #, fuzzy
 msgid "Move down to last entry"
@@ -7333,11 +7380,28 @@ msgid "Move to position X"
 msgstr "Перемещение к позиции Х"
 
 #, fuzzy
+msgid "Move to the next page"
+msgstr "перейти в следующей угол"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "переместить вниз к следующей записи"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "назад на предыдущую главу"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "переместить вверх к предыдущей записи"
+
+#, fuzzy
 msgid "Move up a line"
 msgstr "Перемещение к позиции номера"
 
+#, fuzzy
 msgid "Move up a page"
-msgstr ""
+msgstr "перейти в следующей угол"
 
 #, fuzzy
 msgid "Move up to first entry"
@@ -8103,6 +8167,9 @@ msgstr ""
 msgid "OpenVPN setup"
 msgstr "Открыть настройки тюнера "
 
+msgid "Opkg"
+msgstr ""
+
 msgid "Options disable timer"
 msgstr "Варианты отключения таймера"
 
@@ -8473,6 +8540,10 @@ msgstr "Пожалуйста, выберите плейлист для удал�
 msgid "Please select a playlist..."
 msgstr "Пожалуйста, выберите плейлист..."
 
+#, fuzzy
+msgid "Please select a resolution..."
+msgstr "Пожалуйста, выберите подсервис..."
+
 msgid "Please select a sub service..."
 msgstr "Пожалуйста, выберите подсервис..."
 
@@ -8480,6 +8551,10 @@ msgid "Please select a subservice to record..."
 msgstr "Пожалуйста, выберите подсервис для записи..."
 
 msgid "Please select a subservice..."
+msgstr "Пожалуйста, выберите подсервис..."
+
+#, fuzzy
+msgid "Please select an aspect ratio..."
 msgstr "Пожалуйста, выберите подсервис..."
 
 msgid "Please select medium to be scanned"
@@ -8834,7 +8909,8 @@ msgstr "Нажмите кнопку MENU на Вашем пульте Д/У дл
 msgid "Press OK on your remote control to continue."
 msgstr "Нажмите ОК на Вашем пульте Д/У для продолжения."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Нажмите OK для активации выбранного скина."
 
 msgid "Press OK to activate the settings."
@@ -8846,6 +8922,10 @@ msgstr "Нажмите OK, для измения настройки."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Нажмите ОК, чтобы получить подробную информацию для %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Нажмите OK для активации выбранного скина."
 
 msgid "Press OK to scan"
 msgstr "Нажмите OK для сканирования."
@@ -9104,6 +9184,10 @@ msgstr "Действительно удалить выполненные тай�
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Действительно выйти из меню субсервисов?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Защита меню сброса на дефолтные настройки"
 
 #, fuzzy
 msgid "Really reboot into android mode?"
@@ -9525,7 +9609,7 @@ msgstr "Рестарт сети"
 
 #, fuzzy
 msgid "Restore previous cuts..."
-msgstr "Возврат на предыдущий сервис"
+msgstr "переместить вверх к предыдущей записи"
 
 msgid "Restore system settings"
 msgstr "Восстановить системные настройки"
@@ -9778,6 +9862,10 @@ msgstr "Сохранить / ввести текст и выйти"
 #, fuzzy
 msgid "Save EPG"
 msgstr "Одиночное EPG"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Нажмите OK для активации выбранного скина."
 
 msgid "Save and exit"
 msgstr "Сохранить и выйти"
@@ -10526,7 +10614,7 @@ msgstr "Установить ID пользователя OpenWebif из ваше
 
 #, fuzzy
 msgid "Set the default sorting method."
-msgstr "Установить настройки по дефолту?"
+msgstr "Выбор способа сортировки:"
 
 msgid "Set the delay time between repeated loops, this is used by software renderer in some skins."
 msgstr ""
@@ -11085,20 +11173,24 @@ msgstr "Долгота по сайту"
 msgid "Size: "
 msgstr ""
 
+#, fuzzy
 msgid "Skin"
-msgstr "Выбор скина"
+msgstr "Скины"
 
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Скин & разрешение: %s (%sx%s)\n"
 
 #, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Выберите действие"
+
+#, fuzzy
 msgid "Skin Setting"
 msgstr "Установки"
 
-#, fuzzy
-msgid "Skin setup"
-msgstr "Настройки PiP"
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Скины"
@@ -12641,8 +12733,16 @@ msgstr "Свойства названия"
 msgid "Titleset mode"
 msgstr "Режим установки названия"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "К выбору звука"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "К выбору субтитров"
@@ -12934,9 +13034,8 @@ msgstr ""
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Невозможно создать необходимые каталоги на носителе (например, USB-накопитель или жесткий диск). Пожалуйста, проверьте носитель и попробуйте снова!"
 
-#, fuzzy
 msgid ""
-"Unattended upgrade in progress\n"
+"Unattended update in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
@@ -13338,6 +13437,10 @@ msgstr "Настройка видео"
 
 msgid "Video wizard"
 msgstr "Мастер видео настроек"
+
+#, fuzzy
+msgid "Video: "
+msgstr "Видео PID"
 
 #, python-format
 msgid "Video: %s fps"

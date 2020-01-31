@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
@@ -54,7 +55,7 @@ class InputDeviceSelection(Screen,HelpableScreen):
 		self["introduction"] = StaticText(self.edittext)
 
 		self.devices = [(iInputDevices.getDeviceName(x),x) for x in iInputDevices.getDeviceList()]
-		print "[InputDeviceSetup] found devices :->", len(self.devices),self.devices
+		print("[InputDeviceSetup] found devices :->", len(self.devices),self.devices)
 
 		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
 			{
@@ -202,16 +203,16 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.list = [ ]
 		label = _("Change repeat and delay settings?")
 		cmd = "self.enableEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".enabled)"
-		exec cmd
+		exec(cmd)
 		label = _("Interval between keys when repeating:")
 		cmd = "self.repeatEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".repeat)"
-		exec cmd
+		exec(cmd)
 		label = _("Delay before key repeat starts:")
 		cmd = "self.delayEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".delay)"
-		exec cmd
+		exec(cmd)
 		label = _("Devicename:")
 		cmd = "self.nameEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".name)"
-		exec cmd
+		exec(cmd)
 		if self.enableEntry:
 			if isinstance(self.enableEntry[1], ConfigYesNo):
 				self.enableConfigEntry = self.enableEntry[1]
@@ -257,12 +258,12 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 	def confirm(self, confirmed):
 		if not confirmed:
-			print "[InputDeviceSetup] not confirmed"
+			print("[InputDeviceSetup] not confirmed")
 			return
 		else:
 			self.nameEntry[1].setValue(iInputDevices.getDeviceAttribute(self.inputDevice, 'name'))
 			cmd = "config.inputDevices." + self.inputDevice + ".name.save()"
-			exec cmd
+			exec(cmd)
 			self.keySave()
 
 	def apply(self):

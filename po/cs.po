@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 00:41+0330\n"
+"POT-Creation-Date: 2020-01-30 00:14+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ims <ims21@users.sourceforge.net>\n"
 "Language-Team: PLi <ims@openpli.org>\n"
@@ -1154,6 +1154,16 @@ msgid "16:10 PanScan"
 msgstr "16:10 PanScan"
 
 #
+#, fuzzy
+msgid "16:10 letterbox"
+msgstr "16:10 Letterbox"
+
+#
+#, fuzzy
+msgid "16:10 panscan"
+msgstr "16:10 PanScan"
+
+#
 msgid "16:9"
 msgstr "16:9"
 
@@ -1164,6 +1174,14 @@ msgstr "16:10 Letterbox"
 #
 msgid "16:9 always"
 msgstr "vždy 16:9"
+
+#
+#, fuzzy
+msgid "16:9 letterbox"
+msgstr "16:10 Letterbox"
+
+msgid "16K"
+msgstr ""
 
 #
 msgid "18 V"
@@ -1261,6 +1279,21 @@ msgstr "4:3 PanScan"
 
 #
 #, fuzzy
+msgid "4:3 letterbox"
+msgstr "4:3 Letterbox"
+
+#
+#, fuzzy
+msgid "4:3 panscan"
+msgstr "4:3 PanScan"
+
+#
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
+#
+#, fuzzy
 msgid "4X"
 msgstr "4"
 
@@ -1286,6 +1319,11 @@ msgstr "8"
 msgid "8 character"
 msgstr ""
 
+#
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -1296,7 +1334,25 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - výchozí (zakázáno)"
 
-msgid "<Alternate Display Skin>"
+#
+#, fuzzy
+msgid "< Current >"
+msgstr "Aktuální hodnota: "
+
+#
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "<Defaultní Skin>"
+
+#
+#, fuzzy
+msgid "< Default >"
+msgstr "<Defaultní Skin>"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
 msgstr ""
 
 #
@@ -1304,20 +1360,8 @@ msgid "<Current movielist location>"
 msgstr "<současný seznam souborů>"
 
 #
-msgid "<Default Skin>"
-msgstr "<Defaultní Skin>"
-
-#
 msgid "<Default movie location>"
 msgstr "<standardní umístění>"
-
-msgid "<Display Skin with Picon>"
-msgstr ""
-
-#
-#, fuzzy
-msgid "<Display Skin>"
-msgstr "<Defaultní Skin>"
 
 #
 msgid "<Last timer location>"
@@ -1564,10 +1608,6 @@ msgstr "Zrušit úpravu oblíbených"
 #
 msgid "About"
 msgstr "O přijímači"
-
-#
-msgid "About..."
-msgstr "Info o..."
 
 #
 #, fuzzy
@@ -2175,6 +2215,11 @@ msgid "Aspect ratio"
 msgstr "Poměr stran"
 
 #
+#, fuzzy
+msgid "Aspect ratio list..."
+msgstr "Poměr stran"
+
+#
 msgid "Assigned CAIds:"
 msgstr "Přiřazené CAIds:"
 
@@ -2286,6 +2331,10 @@ msgstr "Mód autorizace"
 #. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Auto"
+
+#, fuzzy
+msgid "Auto (not available)"
+msgstr "Tuner není dostupný."
 
 #, fuzzy
 msgid "Auto Detect"
@@ -2866,6 +2915,12 @@ msgstr "Kanada"
 #
 msgid "Cancel"
 msgstr "Zavřít"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
 
 msgid "Cancel any text changes and exit"
 msgstr "Zrušit všechny změny a zavřít"
@@ -5448,9 +5503,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Enigma verze: "
 
-msgid "Enigma2 skin selector"
-msgstr "Enigma2 výběr skinu"
-
 msgid "Enigmalight"
 msgstr ""
 
@@ -5587,10 +5639,6 @@ msgid ""
 msgstr ""
 "Chyba při rozbalování image\n"
 "%s"
-
-#
-msgid "Error executing plugin"
-msgstr "Chyba při provádění pluginu"
 
 msgid "Error stop stream!"
 msgstr "Chyba při zrušení streamu!"
@@ -5931,6 +5979,9 @@ msgstr "FEC:"
 #, fuzzy
 msgid "FFmpeg version: "
 msgstr "Enigma verze: "
+
+msgid "FHD"
+msgstr ""
 
 #, fuzzy
 msgid "FPU: "
@@ -6316,6 +6367,11 @@ msgstr "GStreamer: "
 msgid "GUI Settings"
 msgstr "Grafické rozhraní"
 
+#
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Grafické rozhraní"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
@@ -6323,22 +6379,13 @@ msgstr ""
 "Pro nastavení nového jazyka musí být zrestartována Enigma\n"
 "Přejete si provést restart nyní?"
 
-#
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Pro uplatnění skinu je potřeba restartovat GUI\n"
-"Chcete nyní restartovat GUI?"
-
-#
 #, fuzzy
 msgid ""
 "GUI needs a restart to switch modes\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"Pro uplatnění skinu je potřeba restartovat GUI\n"
-"Chcete nyní restartovat GUI?"
+"Pro nastavení nového jazyka musí být zrestartována Enigma\n"
+"Přejete si provést restart nyní?"
 
 msgid "Gabon"
 msgstr "Gabon"
@@ -6549,6 +6596,11 @@ msgstr ""
 
 msgid "H:mm:ss"
 msgstr ""
+
+#
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "Seznam HD"
@@ -7286,10 +7338,6 @@ msgstr "Inverze, Pilot & Roll-off"
 msgid "Invert"
 msgstr "Inverze"
 
-#
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Irán"
 
@@ -7891,6 +7939,11 @@ msgstr "Import ze záložního přijímače"
 msgid "Manufacturer"
 msgstr "Výrobce"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "MaraM9"
 msgstr ""
 
@@ -8158,7 +8211,7 @@ msgstr "V seznamu dolů"
 #
 #, fuzzy
 msgid "Move down a page"
-msgstr "přesunout na poslední záznam"
+msgstr "přepnout na další pohled"
 
 #
 #, fuzzy
@@ -8201,12 +8254,34 @@ msgstr "Nahoru"
 msgid "Move to position X"
 msgstr "Natáčí se na pozici X"
 
+#
+#, fuzzy
+msgid "Move to the next page"
+msgstr "přepnout na další pohled"
+
+#
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "přesunout na další záznam"
+
+#
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "zpět na předchozí kapitolu"
+
+#
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "přesunout na předcházející záznam"
+
 #, fuzzy
 msgid "Move up a line"
 msgstr "Natočeno na pozici podle indexu"
 
+#
+#, fuzzy
 msgid "Move up a page"
-msgstr ""
+msgstr "přepnout na další pohled"
 
 #
 #, fuzzy
@@ -9087,6 +9162,9 @@ msgstr ""
 msgid "OpenVPN setup"
 msgstr "Otevřít nastavení tuneru "
 
+msgid "Opkg"
+msgstr ""
+
 msgid "Options disable timer"
 msgstr "Možnosti zakázání časovače"
 
@@ -9512,6 +9590,11 @@ msgid "Please select a playlist..."
 msgstr "Prosím, vyberte playlist"
 
 #
+#, fuzzy
+msgid "Please select a resolution..."
+msgstr "Prosím vyberte podprogram..."
+
+#
 msgid "Please select a sub service..."
 msgstr "Prosím vyberte podprogram..."
 
@@ -9521,6 +9604,11 @@ msgstr "Prosím, vyberte podprogram pro nahrávání..."
 
 #
 msgid "Please select a subservice..."
+msgstr "Prosím vyberte podprogram..."
+
+#
+#, fuzzy
+msgid "Please select an aspect ratio..."
 msgstr "Prosím vyberte podprogram..."
 
 #
@@ -9940,7 +10028,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Stiskněte OK na dálkovém ovladači pro pokračování."
 
 #
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Stiskněte OK pro aktivaci zvoleného skinu."
 
 #
@@ -9955,6 +10044,11 @@ msgstr "Stiskněte OK pro úpravu nastavení."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Stiskněte OK a získejte detaily pro %s"
+
+#
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Stiskněte OK pro aktivaci zvoleného skinu."
 
 #
 msgid "Press OK to scan"
@@ -10253,6 +10347,10 @@ msgstr "Opravdu smazat dokončené časovače?"
 #
 msgid "Really exit the subservices quickzap?"
 msgstr "Opravdu opustit rychlé přepínání podprogramů?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "  Tovární nastavení"
 
 #
 #, fuzzy
@@ -10740,9 +10838,10 @@ msgstr "Obnovit"
 msgid "Restore inetd.conf"
 msgstr "Restartovat síť"
 
+#
 #, fuzzy
 msgid "Restore previous cuts..."
-msgstr "Vyvolat předchozí program"
+msgstr "přesunout na předcházející záznam"
 
 #
 msgid "Restore system settings"
@@ -11031,6 +11130,11 @@ msgstr "Uložit / zadat text a zavřít"
 #, fuzzy
 msgid "Save EPG"
 msgstr "EPG programu"
+
+#
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Stiskněte OK pro aktivaci zvoleného skinu."
 
 msgid "Save and exit"
 msgstr "Uložit a zavřít"
@@ -11871,7 +11975,7 @@ msgstr "Nastavte uživatelské jméno pro OpenWebIf z Vašeho záložního přij
 #
 #, fuzzy
 msgid "Set the default sorting method."
-msgstr "Nastavit standardní nastavení?"
+msgstr "Zvolte způsob třídění:"
 
 msgid "Set the delay time between repeated loops, this is used by software renderer in some skins."
 msgstr ""
@@ -12498,8 +12602,9 @@ msgid "Size: "
 msgstr ""
 
 #
+#, fuzzy
 msgid "Skin"
-msgstr "Skin"
+msgstr "Skiny"
 
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
@@ -12507,13 +12612,16 @@ msgstr "Skin & Rozlišení: %s (%sx%s)\n"
 
 #
 #, fuzzy
-msgid "Skin Setting"
-msgstr "Nastavení"
+msgid "Skin Selection Actions"
+msgstr "Zvolte akci"
 
 #
 #, fuzzy
-msgid "Skin setup"
-msgstr "Nastavení PiP"
+msgid "Skin Setting"
+msgstr "Nastavení"
+
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 #
 msgid "Skins"
@@ -14239,9 +14347,17 @@ msgstr "Vlastnosti"
 msgid "Titleset mode"
 msgstr "Nastavování titulu"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 #
 msgid "To audio selection"
 msgstr "Výběr zvuku"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 #
 msgid "To subtitle selection"
@@ -14573,9 +14689,8 @@ msgstr "Nelze nastavit požadované adresáře na médiu (např. na USB nebo HDD
 
 #
 #
-#, fuzzy
 msgid ""
-"Unattended upgrade in progress\n"
+"Unattended update in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
@@ -15033,6 +15148,10 @@ msgstr "Nastavení videa"
 #
 msgid "Video wizard"
 msgstr "Video průvodce"
+
+#, fuzzy
+msgid "Video: "
+msgstr "Video PID"
 
 #, python-format
 msgid "Video: %s fps"

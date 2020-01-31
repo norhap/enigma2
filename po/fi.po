@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 00:41+0330\n"
+"POT-Creation-Date: 2020-01-30 00:14+0330\n"
 "PO-Revision-Date: 2019-02-13 20:52+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -1130,6 +1130,16 @@ msgid "16:10 PanScan"
 msgstr "16:10 Pan&Scan"
 
 #
+#, fuzzy
+msgid "16:10 letterbox"
+msgstr "16:10 Letterbox"
+
+#
+#, fuzzy
+msgid "16:10 panscan"
+msgstr "16:10 Pan&Scan"
+
+#
 msgid "16:9"
 msgstr "16:9"
 
@@ -1140,6 +1150,14 @@ msgstr "16:9 Letterbox"
 #
 msgid "16:9 always"
 msgstr "16:9 automatiikka"
+
+#
+#, fuzzy
+msgid "16:9 letterbox"
+msgstr "16:9 Letterbox"
+
+msgid "16K"
+msgstr ""
 
 #
 msgid "18 V"
@@ -1229,6 +1247,20 @@ msgstr "4:3 Letterbox"
 msgid "4:3 PanScan"
 msgstr "4:3 Pan&Scan"
 
+#
+#, fuzzy
+msgid "4:3 letterbox"
+msgstr "4:3 Letterbox"
+
+#
+#, fuzzy
+msgid "4:3 panscan"
+msgstr "4:3 Pan&Scan"
+
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
 #, fuzzy
 msgid "4X"
 msgstr "4"
@@ -1251,6 +1283,10 @@ msgstr "8"
 msgid "8 character"
 msgstr ""
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr "8bit"
 
@@ -1260,26 +1296,32 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ""
 
-msgid "<Alternate Display Skin>"
+#
+#, fuzzy
+msgid "< Current >"
+msgstr "Arvo: "
+
+#
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "<Oletus Teema>"
+
+#
+#, fuzzy
+msgid "< Default >"
+msgstr "<Oletus Teema>"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
 msgstr ""
 
 msgid "<Current movielist location>"
 msgstr "<Nykyinen tallennushakemisto>"
 
-#
-msgid "<Default Skin>"
-msgstr "<Oletus Teema>"
-
 msgid "<Default movie location>"
 msgstr "<Oletushakemisto>"
-
-msgid "<Display Skin with Picon>"
-msgstr ""
-
-#
-#, fuzzy
-msgid "<Display Skin>"
-msgstr "<Oletus Teema>"
 
 msgid "<Last timer location>"
 msgstr "<Viimeisin ajastushakemisto>"
@@ -1521,10 +1563,6 @@ msgstr "Peruuta muutokset ja poistu"
 #
 msgid "About"
 msgstr "Tietoja"
-
-#
-msgid "About..."
-msgstr "Tietoja..."
 
 #
 #, fuzzy
@@ -2107,6 +2145,10 @@ msgstr ""
 msgid "Aspect ratio"
 msgstr "Kuvasuhde"
 
+#, fuzzy
+msgid "Aspect ratio list..."
+msgstr "Kuvasuhde"
+
 msgid "Assigned CAIds:"
 msgstr "Määritetyt CAId:t:"
 
@@ -2210,6 +2252,10 @@ msgstr ""
 #. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Autom."
+
+#, fuzzy
+msgid "Auto (not available)"
+msgstr "Viritin ei saatavilla"
 
 #
 #, fuzzy
@@ -2768,6 +2814,12 @@ msgstr "Canada"
 #
 msgid "Cancel"
 msgstr "Peruuta"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
 
 msgid "Cancel any text changes and exit"
 msgstr ""
@@ -5284,9 +5336,6 @@ msgstr "Enigman debug-taso: %d\n"
 msgid "Enigma version: "
 msgstr "Enigman versio: "
 
-msgid "Enigma2 skin selector"
-msgstr "Enigma2 teeman valinta"
-
 msgid "Enigmalight"
 msgstr ""
 
@@ -5414,10 +5463,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-#
-msgid "Error executing plugin"
-msgstr "Virhe plugin-lisäosan suorittamisessa"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -5740,6 +5785,9 @@ msgstr "FEC:"
 #, fuzzy
 msgid "FFmpeg version: "
 msgstr "Enigman versio: "
+
+msgid "FHD"
+msgstr ""
 
 msgid "FPU: "
 msgstr ""
@@ -6114,6 +6162,11 @@ msgstr "GStreamer versio:"
 msgid "GUI Settings"
 msgstr "Käyttöliittymän asetukset"
 
+#
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Käyttöliittymän asetukset"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
@@ -6121,21 +6174,12 @@ msgstr ""
 "Kieli vaihtuu kun käyttöliittymä on käynnistetty\n"
 "Haluatko käynnistää käyttöliittymän uudelleen nyt?"
 
-#
-msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Teema vaihtuu kun käyttöliittymä on käynnistetty\n"
-"Haluatko käynnistää käyttöliittymän uudelleen nyt?"
-
-#
 #, fuzzy
 msgid ""
 "GUI needs a restart to switch modes\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"Teema vaihtuu kun käyttöliittymä on käynnistetty\n"
+"Kieli vaihtuu kun käyttöliittymä on käynnistetty\n"
 "Haluatko käynnistää käyttöliittymän uudelleen nyt?"
 
 msgid "Gabon"
@@ -6344,6 +6388,10 @@ msgstr ""
 
 msgid "H:mm:ss"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD lista"
@@ -7067,9 +7115,6 @@ msgstr "Inversio, Pilot & Roll-off"
 msgid "Invert"
 msgstr "Käänteinen"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr "Iran"
 
@@ -7665,6 +7710,11 @@ msgstr "Tuo ajastimet etävastaaottimelta"
 msgid "Manufacturer"
 msgstr "Valmistaja"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "MaraM9"
 msgstr ""
 
@@ -7927,7 +7977,7 @@ msgstr "Mene luettelossa alaspäin"
 #
 #, fuzzy
 msgid "Move down a page"
-msgstr "siirry viimeiseen kohtaan"
+msgstr "Vaihda seuraavaan kuvakulmaan"
 
 #
 #, fuzzy
@@ -7973,11 +8023,33 @@ msgstr "Mene sijaintiin X"
 
 #
 #, fuzzy
+msgid "Move to the next page"
+msgstr "Vaihda seuraavaan kuvakulmaan"
+
+#
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "siirry seuraavaan kohtaan"
+
+#
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "Kelaa edelliseen kappaleeseen"
+
+#
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "siirry edelliseen kohtaan"
+
+#
+#, fuzzy
 msgid "Move up a line"
 msgstr "Siirryttiin muistipaikan sijaintiin"
 
+#
+#, fuzzy
 msgid "Move up a page"
-msgstr ""
+msgstr "Vaihda seuraavaan kuvakulmaan"
 
 #
 #, fuzzy
@@ -8855,6 +8927,9 @@ msgstr ""
 msgid "OpenVPN setup"
 msgstr "Avaa viritinasetukset"
 
+msgid "Opkg"
+msgstr ""
+
 msgid "Options disable timer"
 msgstr "Keskeytä ajastus"
 
@@ -9276,6 +9351,11 @@ msgid "Please select a playlist..."
 msgstr "Valitse soittolista..."
 
 #
+#, fuzzy
+msgid "Please select a resolution..."
+msgstr "Valitse alipalvelu..."
+
+#
 msgid "Please select a sub service..."
 msgstr "Valitse alipalvelu..."
 
@@ -9285,6 +9365,11 @@ msgstr "Valitse tallennettava alipalvelu..."
 
 #
 msgid "Please select a subservice..."
+msgstr "Valitse alipalvelu..."
+
+#
+#, fuzzy
+msgid "Please select an aspect ratio..."
 msgstr "Valitse alipalvelu..."
 
 #
@@ -9691,7 +9776,8 @@ msgid "Press OK on your remote control to continue."
 msgstr "Jatka painamalla OK-näppäintä."
 
 #
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Ota valittu teema käyttöön painamalla OK."
 
 #
@@ -9706,6 +9792,11 @@ msgstr "Muokkaa painamalla OK."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Katso %s lisätietoja OK-näppäimellä"
+
+#
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Ota valittu teema käyttöön painamalla OK."
 
 #
 msgid "Press OK to scan"
@@ -10006,6 +10097,10 @@ msgstr "Poistetaanko toteutuneet ajastukset?"
 #
 msgid "Really exit the subservices quickzap?"
 msgstr "Poistu alipalveluiden pikavaihdosta?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Suojaa tehdasasetusvalikko"
 
 #
 #, fuzzy
@@ -10489,9 +10584,10 @@ msgstr "Palauta"
 msgid "Restore inetd.conf"
 msgstr "Käynnistä verkko uudelleen"
 
+#
 #, fuzzy
 msgid "Restore previous cuts..."
-msgstr "Palaa edelliselle kanavalle"
+msgstr "siirry edelliseen kohtaan"
 
 #
 msgid "Restore system settings"
@@ -10774,6 +10870,11 @@ msgstr "Tallenna teksti ja poistu"
 #, fuzzy
 msgid "Save EPG"
 msgstr "Ohjelmaopas"
+
+#
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Ota valittu teema käyttöön painamalla OK."
 
 msgid "Save and exit"
 msgstr "Tallenna ja poistu"
@@ -12238,6 +12339,7 @@ msgid "Size: "
 msgstr ""
 
 #
+#, fuzzy
 msgid "Skin"
 msgstr "Teema"
 
@@ -12247,13 +12349,16 @@ msgstr ""
 
 #
 #, fuzzy
-msgid "Skin Setting"
-msgstr "Asetukset"
+msgid "Skin Selection Actions"
+msgstr "Valitse toiminto"
 
 #
 #, fuzzy
-msgid "Skin setup"
-msgstr "PiP-kuvan asetukset"
+msgid "Skin Setting"
+msgstr "Asetukset"
+
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 #
 msgid "Skins"
@@ -13956,8 +14061,16 @@ msgstr "Ominaisuudet"
 msgid "Titleset mode"
 msgstr "Tila"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Avaa äänivalinta"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Avaa tekstitysvalinta"
@@ -14283,9 +14396,8 @@ msgstr ""
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Hakemistojen luonti epäonnistui. Varmista tallennusmedian toimivuus ja kokeile uudestaan!"
 
-#, fuzzy
 msgid ""
-"Unattended upgrade in progress\n"
+"Unattended update in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
@@ -14733,6 +14845,10 @@ msgstr "Video-asetukset"
 #
 msgid "Video wizard"
 msgstr "Video-avustaja"
+
+#, fuzzy
+msgid "Video: "
+msgstr "Video PID"
 
 #, python-format
 msgid "Video: %s fps"

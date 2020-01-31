@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Screen import Screen
 import ChannelSelection
 import Screens.InfoBar
@@ -24,7 +25,7 @@ from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
 from Components.Button import Button
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists
+from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN, fileExists, SCOPE_PLUGINS
 from Screens.MessageBox import MessageBox
 from Components.Console import Console
 
@@ -119,7 +120,7 @@ class EPGSelection(Screen):
 				"red": (self.GoToTmbd, _("Search event in TMBD"))
 			})
 
-		self.isTMBD = fileExists("/usr/lib/enigma2/python/Plugins/Extensions/TMBD/plugin.pyo")
+		self.isTMBD = fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/TMBD/plugin.pyo"))
 		if self.isTMBD:
 			self["key_red"] = Button(_("Search TMBD"))
 			self.select = True
@@ -147,13 +148,13 @@ class EPGSelection(Screen):
 			self.fallbackTimer = FallbackTimerList(self, self.onCreate)
 
 	def GoToTmbd(self):
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/TMBD/plugin.pyo"):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/TMBD/plugin.pyo")):
 			self.runTMBD()
-		if not fileExists("/usr/lib/enigma2/python/Plugins/Extensions/TMBD/plugin.pyo"):
+		if not fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/TMBD/plugin.pyo")):
 			self.session.openWithCallback(self.doInstall, MessageBox, _('The TMBD plugin is not installed!\nDo you want to install it?'), MessageBox.TYPE_YESNO)
 
 	def runTMBD(self):
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/TMBD/plugin.pyo"):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/TMBD/plugin.pyo")):
 			from Plugins.Extensions.TMBD.plugin import TMBD
 			description=_("TMBD Details")
 			description=_("TMBD details for event")
@@ -525,7 +526,7 @@ class EPGSelection(Screen):
 				self.onSelectionChanged()
 
 	def finishedAdd(self, answer):
-		print "[EpgSelection] finished add"
+		print("[EpgSelection] finished add")
 		if answer[0]:
 			entry = answer[1]
 			if entry.external:
@@ -567,7 +568,7 @@ class EPGSelection(Screen):
 				else:
 					self["key_green"].setText(_("Add timer"))
 					self.key_green_choice = self.ADD_TIMER
-					print "[EpgSelection] Timeredit aborted"
+					print("[EpgSelection] Timeredit aborted")
 
 	def finishSanityCorrection(self, answer):
 		self.finishedAdd(answer)

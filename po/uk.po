@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-10 00:41+0330\n"
+"POT-Creation-Date: 2020-01-30 00:14+0330\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -1110,6 +1110,14 @@ msgstr "16:10 Режим ящика"
 msgid "16:10 PanScan"
 msgstr "16:10 Панорама"
 
+#, fuzzy
+msgid "16:10 letterbox"
+msgstr "16:10 Режим ящика"
+
+#, fuzzy
+msgid "16:10 panscan"
+msgstr "16:10 Панорама"
+
 msgid "16:9"
 msgstr "16:9"
 
@@ -1118,6 +1126,13 @@ msgstr "16:9 Режим ящика"
 
 msgid "16:9 always"
 msgstr "16:9 завжди"
+
+#, fuzzy
+msgid "16:9 letterbox"
+msgstr "16:9 Режим ящика"
+
+msgid "16K"
+msgstr ""
 
 msgid "18 V"
 msgstr "18 V"
@@ -1202,6 +1217,18 @@ msgid "4:3 PanScan"
 msgstr "4:3 Панорама"
 
 #, fuzzy
+msgid "4:3 letterbox"
+msgstr "4:3 Режим ящика"
+
+#, fuzzy
+msgid "4:3 panscan"
+msgstr "4:3 Панорама"
+
+#, fuzzy
+msgid "4K"
+msgstr "4"
+
+#, fuzzy
 msgid "4X"
 msgstr "4"
 
@@ -1223,6 +1250,10 @@ msgstr "8"
 msgid "8 character"
 msgstr ""
 
+#, fuzzy
+msgid "8K"
+msgstr "8"
+
 msgid "8bit"
 msgstr ""
 
@@ -1232,25 +1263,29 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - за замовчуванням (відключено)"
 
-msgid "<Alternate Display Skin>"
+#, fuzzy
+msgid "< Current >"
+msgstr "Поточне значення: "
+
+#, fuzzy
+msgid "< Default + Picon >"
+msgstr "Налаштування за замовчуванням"
+
+#, fuzzy
+msgid "< Default >"
+msgstr "Налаштування за замовчуванням"
+
+msgid "< Emergency >"
+msgstr ""
+
+msgid "< Pending restart >"
 msgstr ""
 
 msgid "<Current movielist location>"
 msgstr "<Поточне місце списку відео>"
 
-#, fuzzy
-msgid "<Default Skin>"
-msgstr "Налаштування за замовчуванням"
-
 msgid "<Default movie location>"
 msgstr "<Місце відео по дефолту>"
-
-msgid "<Display Skin with Picon>"
-msgstr ""
-
-#, fuzzy
-msgid "<Display Skin>"
-msgstr "Налаштування за замовчуванням"
 
 msgid "<Last timer location>"
 msgstr "<Місце останнього таймера>"
@@ -1475,9 +1510,6 @@ msgstr "Перервати редагування фаворитів"
 
 msgid "About"
 msgstr "Інформація"
-
-msgid "About..."
-msgstr "Інформація..."
 
 #, fuzzy
 msgid "Accept the current selection"
@@ -2003,6 +2035,10 @@ msgstr ""
 msgid "Aspect ratio"
 msgstr "Співвідношення сторін"
 
+#, fuzzy
+msgid "Aspect ratio list..."
+msgstr "Співвідношення сторін"
+
 msgid "Assigned CAIds:"
 msgstr "Призначено CAID:"
 
@@ -2101,6 +2137,10 @@ msgstr "Режим авторизації"
 #. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr "Авто"
+
+#, fuzzy
+msgid "Auto (not available)"
+msgstr "Тюнер не доступний."
 
 #, fuzzy
 msgid "Auto Detect"
@@ -2619,6 +2659,12 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "Відмінити"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr ""
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr ""
 
 msgid "Cancel any text changes and exit"
 msgstr ""
@@ -4933,9 +4979,6 @@ msgstr ""
 msgid "Enigma version: "
 msgstr "Версія ядра: "
 
-msgid "Enigma2 skin selector"
-msgstr "Вибір скіна Enigma2"
-
 msgid "Enigmalight"
 msgstr ""
 
@@ -5059,9 +5102,6 @@ msgid ""
 "Error during unzipping image\n"
 "%s"
 msgstr ""
-
-msgid "Error executing plugin"
-msgstr "Помилка запуску плагіна"
 
 msgid "Error stop stream!"
 msgstr ""
@@ -5357,6 +5397,9 @@ msgstr "FEC:"
 #, fuzzy
 msgid "FFmpeg version: "
 msgstr "Версія ядра: "
+
+msgid "FHD"
+msgstr ""
 
 #, fuzzy
 msgid "FPU: "
@@ -5709,25 +5752,19 @@ msgstr "Версія ядра: "
 msgid "GUI Settings"
 msgstr "Налаштування"
 
+#, fuzzy
+msgid "GUI Skin"
+msgstr "Налаштування"
+
 msgid ""
 "GUI needs a restart to apply a new language\n"
 "Do you want to restart the GUI now?"
 msgstr ""
 
 msgid ""
-"GUI needs a restart to apply a new skin\n"
-"Do you want to restart the GUI now?"
-msgstr ""
-"Для активації нового скіна необхідний рестарт GUI.\n"
-"Ви хочете зробити це зараз?"
-
-#, fuzzy
-msgid ""
 "GUI needs a restart to switch modes\n"
 "Do you want to restart the GUI now?"
 msgstr ""
-"Для активації нового скіна необхідний рестарт GUI.\n"
-"Ви хочете зробити це зараз?"
 
 msgid "Gabon"
 msgstr ""
@@ -5923,6 +5960,10 @@ msgstr ""
 
 msgid "H:mm:ss"
 msgstr ""
+
+#, fuzzy
+msgid "HD"
+msgstr "D"
 
 msgid "HD list"
 msgstr "HD лист"
@@ -6597,9 +6638,6 @@ msgstr "Інверсія, Pilot & Roll-off"
 msgid "Invert"
 msgstr "Вибрати всі"
 
-msgid "Ipkg"
-msgstr "Ipkg"
-
 msgid "Iran (Islamic Republic of)"
 msgstr ""
 
@@ -7137,6 +7175,11 @@ msgstr ""
 msgid "Manufacturer"
 msgstr "Виробник"
 
+msgid ""
+"Manufacturer reset in progress\n"
+"Pease wait until enigma2 restarts"
+msgstr ""
+
 msgid "MaraM9"
 msgstr ""
 
@@ -7375,7 +7418,7 @@ msgstr "Перемістити вниз до останнього запису"
 
 #, fuzzy
 msgid "Move down a page"
-msgstr "перемістити вниз до останнього запису"
+msgstr "перейти в наступній кут"
 
 #, fuzzy
 msgid "Move down to last entry"
@@ -7416,11 +7459,28 @@ msgid "Move to position X"
 msgstr "Переміщення до позиції Х"
 
 #, fuzzy
+msgid "Move to the next page"
+msgstr "перейти в наступній кут"
+
+#, fuzzy
+msgid "Move to the next skin"
+msgstr "перемістити вниз до наступного запису"
+
+#, fuzzy
+msgid "Move to the previous page"
+msgstr "назад на попередній розділ"
+
+#, fuzzy
+msgid "Move to the previous skin"
+msgstr "перемістити вгору до попереднього запису"
+
+#, fuzzy
 msgid "Move up a line"
 msgstr "Переміщення до позиції номера"
 
+#, fuzzy
 msgid "Move up a page"
-msgstr ""
+msgstr "перейти в наступній кут"
 
 #, fuzzy
 msgid "Move up to first entry"
@@ -8195,6 +8255,9 @@ msgstr ""
 msgid "OpenVPN setup"
 msgstr "Відкрити налаштування тюнера"
 
+msgid "Opkg"
+msgstr ""
+
 msgid "Options disable timer"
 msgstr "Функції таймера відключення"
 
@@ -8570,6 +8633,10 @@ msgstr "Будь ласка, виберіть плейлист для видал
 msgid "Please select a playlist..."
 msgstr "Будь ласка, виберіть плейлист..."
 
+#, fuzzy
+msgid "Please select a resolution..."
+msgstr "Будь ласка, виберіть підсервіс..."
+
 msgid "Please select a sub service..."
 msgstr "Будь ласка, виберіть підсервіс..."
 
@@ -8577,6 +8644,10 @@ msgid "Please select a subservice to record..."
 msgstr "Будь ласка, виберіть підсервіс для запису..."
 
 msgid "Please select a subservice..."
+msgstr "Будь ласка, виберіть підсервіс..."
+
+#, fuzzy
+msgid "Please select an aspect ratio..."
 msgstr "Будь ласка, виберіть підсервіс..."
 
 msgid "Please select medium to be scanned"
@@ -8940,7 +9011,8 @@ msgstr "Натисніть кнопку MENU на пульті для додат
 msgid "Press OK on your remote control to continue."
 msgstr "Натисніть OK на пульті, щоб продовжити."
 
-msgid "Press OK to activate the selected skin."
+#, fuzzy, python-format
+msgid "Press OK to activate the selected%s skin."
 msgstr "Натисніть OK для активації вибраного скіна."
 
 msgid "Press OK to activate the settings."
@@ -8952,6 +9024,10 @@ msgstr "Натисніть OK, щоб змінити настройки."
 #, python-format
 msgid "Press OK to get further details for %s"
 msgstr "Натисніть ОК, щоб отримати детальну інформацію для %s"
+
+#, fuzzy, python-format
+msgid "Press OK to keep the currently selected%s skin."
+msgstr "Натисніть OK для активації вибраного скіна."
 
 msgid "Press OK to scan"
 msgstr "Натисніть OK для пошуку."
@@ -9211,6 +9287,10 @@ msgstr "Дійсно видалити виконані таймери?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Дійсно вийти з меню підсервісів?"
+
+#, fuzzy
+msgid "Really perform a manufacturer reset now?"
+msgstr "Захистіть екран скидання виробника"
 
 #, fuzzy
 msgid "Really reboot into android mode?"
@@ -9635,7 +9715,7 @@ msgstr "Перезапустити мережу"
 
 #, fuzzy
 msgid "Restore previous cuts..."
-msgstr "Повернутися на Попередній сервіс"
+msgstr "перемістити вгору до попереднього запису"
 
 msgid "Restore system settings"
 msgstr "Відновлення системних налаштувань"
@@ -9897,6 +9977,10 @@ msgstr "Збереження і вихід"
 #, fuzzy
 msgid "Save EPG"
 msgstr "Одиночне EPG"
+
+#, fuzzy
+msgid "Save and activate the currently selected skin"
+msgstr "Натисніть OK для активації вибраного скіна."
 
 msgid "Save and exit"
 msgstr "Збереження і вихід"
@@ -10659,7 +10743,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Set the default sorting method."
-msgstr "Налаштування параметрів за замовчуванням?"
+msgstr "Впорядкувати по:"
 
 msgid "Set the delay time between repeated loops, this is used by software renderer in some skins."
 msgstr ""
@@ -11225,20 +11309,24 @@ msgstr "Довгота по сайту"
 msgid "Size: "
 msgstr ""
 
+#, fuzzy
 msgid "Skin"
-msgstr "Вибір графічної оболочки"
+msgstr "Графічні оболочки"
 
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr ""
 
 #, fuzzy
+msgid "Skin Selection Actions"
+msgstr "Виберіть дію"
+
+#, fuzzy
 msgid "Skin Setting"
 msgstr "Налаштування"
 
-#, fuzzy
-msgid "Skin setup"
-msgstr "Налаштування PiP"
+msgid "SkinSelector: Restart GUI"
+msgstr ""
 
 msgid "Skins"
 msgstr "Графічні оболочки"
@@ -12828,8 +12916,16 @@ msgstr "Властивості заголовка"
 msgid "Titleset mode"
 msgstr "Режим установки заголовка"
 
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgstr ""
+
 msgid "To audio selection"
 msgstr "Вибір звуку"
+
+#, python-format
+msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgstr ""
 
 msgid "To subtitle selection"
 msgstr "Вибір субтитрів"
@@ -13129,9 +13225,8 @@ msgstr ""
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr ""
 
-#, fuzzy
 msgid ""
-"Unattended upgrade in progress\n"
+"Unattended update in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
@@ -13546,6 +13641,10 @@ msgstr "Налаштування відео"
 
 msgid "Video wizard"
 msgstr "Майстер відеоналаштувань"
+
+#, fuzzy
+msgid "Video: "
+msgstr "Відео PID"
 
 #, python-format
 msgid "Video: %s fps"

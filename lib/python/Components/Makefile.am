@@ -17,9 +17,9 @@ install_PYTHON = \
 	FIFOList.py ServiceEventTracker.py Input.py TimerSanityCheck.py FileList.py \
 	MultiContent.py MediaPlayer.py TunerInfo.py VideoWindow.py ChoiceList.py \
 	Element.py Playlist.py ParentalControl.py \
-	Ipkg.py SelectionList.py Scanner.py SystemInfo.py PackageInfo.py \
+	Opkg.py SelectionList.py Scanner.py SystemInfo.py PackageInfo.py \
 	Task.py Console.py ResourceManager.py TuneTest.py \
 	Keyboard.py Sensors.py FanControl.py HdmiCec.py RcModel.py \
 	Netlink.py InputHotplug.py \
-	opkg.py ImportChannels.py VfdSymbols.py ChannelsImporter.py ClientMode.py \
+	ImportChannels.py VfdSymbols.py ChannelsImporter.py ClientMode.py \
 	HdmiRecord.py NetworkTime.py StackTrace.py PowerTimerList.py EpgLoadSave.py

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
@@ -9,6 +10,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from ServiceReference import ServiceReference
 from enigma import eServiceReference
 from Components.Pixmap import Pixmap
@@ -258,7 +260,7 @@ def getHotkeyFunctions():
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
-        exec "config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:]
+	exec("config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:])
 
 class HotkeySetup(Screen):
 	ALLOW_SUSPEND = False
@@ -654,21 +656,21 @@ class InfoBarHotkey():
 						return
 			elif selected[0] == "Infobar":
 				if hasattr(self, selected[1]):
-					exec "self." + ".".join(selected[1:]) + "()"
+					exec("self." + ".".join(selected[1:]) + "()")
 				else:
 					return 0
 			elif selected[0] == "Module":
 				try:
-					exec "from %s import %s" % (selected[1], selected[2])
-					exec "self.session.open(%s)" %  ",".join(selected[2:])
+					exec("from %s import %s" % (selected[1], selected[2]))
+					exec("self.session.open(%s)" %  ",".join(selected[2:]))
 				except:
-					print "[Hotkey] error during executing module %s, screen %s" % (selected[1], selected[2])
+					print("[Hotkey] error during executing module %s, screen %s" % (selected[1], selected[2]))
 			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:
 				from Screens.SoftcamSetup import SoftcamSetup
 				self.session.open(SoftcamSetup)
 			elif selected[0] == "Setup":
 				from Screens.Setup import Setup
-				exec "self.session.open(Setup, \"%s\")" % selected[1]
+				exec("self.session.open(Setup, \"%s\")" % selected[1])
 			elif selected[0].startswith("Zap"):
 				if selected[0] == "ZapPanic":
 					self.servicelist.history = []
@@ -686,7 +688,7 @@ class InfoBarHotkey():
 					config.movielist.last_videodir.value = moviepath
 			elif selected[0] == "PPanel":
 				ppanelFileName = '/etc/ppanels/' + selected[1] + ".xml"
-				if os.path.isfile(ppanelFileName) and os.path.isdir('/usr/lib/enigma2/python/Plugins/Extensions/PPanel'):
+				if os.path.isfile(ppanelFileName) and os.path.isdir(resolveFilename(SCOPE_PLUGINS, 'Extensions/PPanel')):
 					from Plugins.Extensions.PPanel.ppanel import PPanel
 					self.session.open(PPanel, name=selected[1] + ' PPanel', node=None, filename=ppanelFileName, deletenode=None)
 			elif selected[0] == "Shellscript":

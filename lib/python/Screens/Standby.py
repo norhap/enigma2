@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from time import time, localtime
 
@@ -23,6 +24,7 @@ QUIT_RESTART = 3
 QUIT_UPGRADE_FP = 4
 QUIT_ERROR_RESTART = 5
 QUIT_DEBUG_RESTART = 6
+QUIT_MANUFACTURER_RESET = 7
 QUIT_REBOOT_ANDROID = 12
 QUIT_REBOOT_RECOVERY = 16
 QUIT_UPGRADE_PROGRAM = 42
@@ -32,7 +34,7 @@ QUIT_WOL = 45
 
 class Standby(Screen):
 	def Power(self):
-		print "[Standby] leave standby"
+		print("[Standby] leave standby")
 		SystemInfo["StandbyState"] = False
 		self.close(True)
 
@@ -68,7 +70,7 @@ class Standby(Screen):
 		Screen.__init__(self, session)
 		self.avswitch = AVSwitch()
 
-		print "[Standby] enter standby"
+		print("[Standby] enter standby")
 		SystemInfo["StandbyState"] = True
 
 		if os.path.exists("/usr/script/standby_enter.sh"):
@@ -259,7 +261,8 @@ class QuitMainloopScreen(Screen):
 			QUIT_DEBUG_RESTART: _("The user interface of your receiver is restarting in debug mode"),
 			QUIT_REBOOT_ANDROID: _("Your receiver is rebooting into android mode"),
 			QUIT_REBOOT_RECOVERY: _("Your receiver is rebooting into recovery mode"),
-			QUIT_UPGRADE_PROGRAM: _("Unattended upgrade in progress\nPlease wait until your receiver reboots\nThis may take a few minutes"),
+			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your receiver reboots\nThis may take a few minutes"),
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPease wait until enigma2 restarts"),
 			QUIT_UPGRADE_FPANEL: _("Your front panel will be updated\nThis may take a few minutes"),
 			QUIT_WOL: _("Your receiver goes to WOL")
 		}.get(retvalue)
@@ -303,6 +306,7 @@ class TryQuitMainloop(MessageBox):
 				QUIT_REBOOT_ANDROID: _("Really reboot into android mode?"),
 				QUIT_REBOOT_RECOVERY: _("Really reboot into recovery mode?"),
 				QUIT_UPGRADE_PROGRAM: _("Really update your settop box and reboot now?"),
+				QUIT_MANUFACTURER_RESET: _("Really perform a manufacturer reset now?"),
 				QUIT_UPGRADE_FPANEL: _("Really update the front panel and reboot now?"),
 				QUIT_WOL: _("Really WOL now?")
 			}.get(retvalue, None)
@@ -353,7 +357,7 @@ class TryQuitMainloop(MessageBox):
 				config.misc.RestartUI.value = True
 				config.misc.RestartUI.save()
 			if SystemInfo["Display"] and SystemInfo["LCDMiniTV"]:
-				print "[Standby] LCDminiTV off"
+				print("[Standby] LCDminiTV off")
 				try:
 					open("/proc/stb/lcd/mode", "w").write(0)
 				except:

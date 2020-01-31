@@ -1,6 +1,7 @@
+from __future__ import print_function
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Poll import Poll
 import time
 import os
@@ -129,24 +130,24 @@ class YWeather(Poll, Converter, object):
 		req = Request(URL)
 		try:
 			response = urlopen(req)
-		except Exception, e:
+		except Exception as e:
 			if hasattr(e, 'code') and hasattr(e, 'reason'):
-				print "[YWeather] fetchXML Failed to retrieve XML file. Error: %s %s" % (str(e.code), str(e.reason))
+				print("[YWeather] fetchXML Failed to retrieve XML file. Error: %s %s" % (str(e.code), str(e.reason)))
 			else:
 				if hasattr(e, 'reason'):
-					print '[YWeather] fetchXML Failed to retrieve XML file. Error: ', str(e.reason)
+					print('[YWeather] fetchXML Failed to retrieve XML file. Error: ', str(e.reason))
 				else:
-					print '[YWeather] fetchXML Failed to retrieve XML file.'
+					print('[YWeather] fetchXML Failed to retrieve XML file.')
 			return
 
 		try:
 			with open(save_to, "w") as f:
 				f.write(response.read().replace("><", ">\n<"))
 				f.close
-			print '[YWeather] fetchXML XML file retrieved and saved.'
+			print('[YWeather] fetchXML XML file retrieved and saved.')
 			return True
 		except:
-			print '[YWeather] fetchXML XML file retrieved and but could not be saved.'
+			print('[YWeather] fetchXML XML file retrieved and but could not be saved.')
 			return
 
 	@cached
@@ -162,10 +163,10 @@ class YWeather(Poll, Converter, object):
 		direct = 0
 		info = ""
 		XML_location = "/tmp/yweather.xml"
-		if fileExists("/usr/lib/enigma2/python/Plugins/Extensions/iSkin/Weather/Config/Location_id"):
-			self.weather_city = open("/usr/lib/enigma2/python/Plugins/Extensions/iSkin/Weather/Config/Location_id").read()
-		elif fileExists("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id"):
-			self.weather_city = open("/usr/lib/enigma2/python/Plugins/Extensions/YahooWeather/Config/Location_id").read()
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/iSkin/Weather/Config/Location_id")):
+			self.weather_city = open(resolveFilename(SCOPE_PLUGINS, "Extensions/iSkin/Weather/Config/Location_id")).read()
+		elif fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/YahooWeather/Config/Location_id")):
+			self.weather_city = open(resolveFilename(SCOPE_PLUGINS, "Extensions/YahooWeather/Config/Location_id")).read()
 		if fileExists(XML_location) and (int((time.time() - os.stat(XML_location).st_mtime)/60) >= self.time_update):
 			os.remove(XML_location)
 		XML_URL = "https://query.yahooapis.com/v1/public/yql?q=select%%20*%%20from%%20weather.forecast%%20where%%20woeid=%ss%%20AND%%20u=%%22c%%22" % self.weather_city
@@ -176,7 +177,7 @@ class YWeather(Poll, Converter, object):
 			return 'N/A'
 		wday = 1
 		for line in open(XML_location):
-			#print "[YWeather][gText] line:", line
+			#print("[YWeather][gText] line:", line)
 			if line.find("<yweather:location") > -1:
 				xweather['ycity'] = line.split('city')[1].split('"')[1]
 				xweather['ycountry'] = line.split('country')[1].split('"')[1]
@@ -222,7 +223,7 @@ class YWeather(Poll, Converter, object):
 					xweather['ytemplowday5'] = line.split('low')[1].split('"')[1]
 				wday = wday + 1
 
-		#print "[YWeather][gText] xweather:", xweather
+		#print("[YWeather][gText] xweather:", xweather)
 
 		if self.type == self.city:
 			info = xweather['ycity']
@@ -429,7 +430,7 @@ class YWeather(Poll, Converter, object):
 				info = "N/A"
 		elif self.type == self.date5:
 			info = xweather['ydate5']
-		#print "[YWeather][gText] info:", info
+		#print("[YWeather][gText] info:", info)
 		return info
 
 	text = property(getText)

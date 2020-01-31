@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import errno
 import inspect
 import os
@@ -14,7 +15,9 @@ SCOPE_TRANSPONDERDATA = 0
 SCOPE_SYSETC = 1
 SCOPE_FONTS = 2
 SCOPE_SKIN = 3
-# SCOPE_SKIN_IMAGE Deprecated scope function - use SCOPE_CURRENT_SKIN instead.
+# SCOPE_SKIN_IMAGE is a deprecated scope function - use SCOPE_CURRENT_SKIN instead.
+# SCOPE_SKIN_IMAGE = SCOPE_ACTIVE_SKIN = SCOPE_CURRENT_SKIN
+SCOPE_SKIN_IMAGE = 4
 SCOPE_USERETC = 5  # DEBUG: Not used in Enigma2.
 SCOPE_CONFIG = 6
 SCOPE_LANGUAGE = 7
@@ -22,21 +25,26 @@ SCOPE_HDD = 8
 SCOPE_PLUGINS = 9
 SCOPE_MEDIA = 10
 SCOPE_PLAYLIST = 11
-SCOPE_SKIN_IMAGE = SCOPE_ACTIVE_SKIN = SCOPE_CURRENT_SKIN = 12
+SCOPE_CURRENT_SKIN = 12
 SCOPE_CURRENT_PLUGIN_ABSOLUTE = 13
 SCOPE_CURRENT_PLUGIN_RELATIVE = 14
-
+SCOPE_KEYMAPS = 15
 SCOPE_METADIR = 16
 SCOPE_CURRENT_PLUGIN = 17
 SCOPE_TIMESHIFT = 18
-# SCOPE_ACTIVE_SKIN Deprecated scope function - use SCOPE_CURRENT_SKIN instead.
+# SCOPE_ACTIVE_SKIN is a deprecated scope function - use SCOPE_CURRENT_SKIN instead.
+# SCOPE_ACTIVE_SKIN = SCOPE_SKIN_IMAGE = SCOPE_CURRENT_SKIN
+SCOPE_ACTIVE_SKIN = 19
 SCOPE_LCDSKIN = 20
-SCOPE_ACTIVE_LCDSKIN = SCOPE_CURRENT_LCDSKIN = 21
-# SCOPE_ACTIVE_LCDSKIN Deprecated scope function name - use SCOPE_CURRENT_LCDSKIN instead.
+SCOPE_CURRENT_LCDSKIN = 21
+# SCOPE_ACTIVE_LCDSKIN is a deprecated scope function - use SCOPE_CURRENT_LCDSKIN instead.
+# SCOPE_ACTIVE_LCDSKIN = SCOPE_CURRENT_LCDSKIN
+SCOPE_ACTIVE_LCDSKIN = 21
 SCOPE_AUTORECORD = 22
 SCOPE_DEFAULTDIR = 23
 SCOPE_DEFAULTPARTITION = 24
 SCOPE_DEFAULTPARTITIONMOUNTDIR = 25
+SCOPE_LIBDIR = 26
 
 PATH_CREATE = 0
 PATH_DONTCREATE = 1
@@ -46,6 +54,7 @@ defaultPaths = {
 	SCOPE_SYSETC: (eEnv.resolve("${sysconfdir}/"), PATH_DONTCREATE),
 	SCOPE_FONTS: (eEnv.resolve("${datadir}/fonts/"), PATH_DONTCREATE),
 	SCOPE_SKIN: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
+	SCOPE_SKIN_IMAGE: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
 	SCOPE_USERETC: ("", PATH_DONTCREATE),  # User home directory
 	SCOPE_CONFIG: (eEnv.resolve("${sysconfdir}/enigma2/"), PATH_CREATE),
 	SCOPE_LANGUAGE: (eEnv.resolve("${datadir}/enigma2/po/"), PATH_DONTCREATE),
@@ -54,17 +63,21 @@ defaultPaths = {
 	SCOPE_MEDIA: ("/media/", PATH_DONTCREATE),
 	SCOPE_PLAYLIST: (eEnv.resolve("${sysconfdir}/enigma2/playlist/"), PATH_CREATE),
 	SCOPE_CURRENT_SKIN: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
+	SCOPE_CURRENT_PLUGIN_ABSOLUTE: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_DONTCREATE),
+	SCOPE_CURRENT_PLUGIN_RELATIVE: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_DONTCREATE),
+	SCOPE_KEYMAPS: (eEnv.resolve("${datadir}/keymaps/"), PATH_CREATE),
 	SCOPE_METADIR: (eEnv.resolve("${datadir}/meta"), PATH_CREATE),
 	SCOPE_CURRENT_PLUGIN: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_CREATE),
 	SCOPE_TIMESHIFT: ("/media/hdd/timeshift/", PATH_DONTCREATE),
+	SCOPE_ACTIVE_SKIN: (eEnv.resolve("${datadir}/enigma2/"), PATH_DONTCREATE),
 	SCOPE_LCDSKIN: (eEnv.resolve("${datadir}/enigma2/display/"), PATH_DONTCREATE),
 	SCOPE_CURRENT_LCDSKIN: ("${datadir}/enigma2/display/", PATH_DONTCREATE),
+	SCOPE_ACTIVE_LCDSKIN: ("${datadir}/enigma2/display/", PATH_DONTCREATE),
 	SCOPE_AUTORECORD: ("/media/hdd/movie/", PATH_DONTCREATE),
 	SCOPE_DEFAULTDIR: (eEnv.resolve("${datadir}/enigma2/defaults/"), PATH_CREATE),
 	SCOPE_DEFAULTPARTITION: ("/dev/mtdblock6", PATH_DONTCREATE),
 	SCOPE_DEFAULTPARTITIONMOUNTDIR: (eEnv.resolve("${datadir}/enigma2/dealer"), PATH_CREATE),
-	SCOPE_CURRENT_PLUGIN_ABSOLUTE: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_DONTCREATE),
-	SCOPE_CURRENT_PLUGIN_RELATIVE: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_DONTCREATE)
+	SCOPE_LIBDIR: (eEnv.resolve("${libdir}/"), PATH_DONTCREATE)
 }
 
 def resolveFilename(scope, base="", path_prefix=None):
@@ -74,13 +87,13 @@ def resolveFilename(scope, base="", path_prefix=None):
 		if path_prefix:
 			base = os.path.join(path_prefix, base[2:])
 		else:
-			print "[Directories] Warning: resolveFilename called with base starting with '~/' but 'path_prefix' is None!"
+			print("[Directories] Warning: resolveFilename called with base starting with '~/' but 'path_prefix' is None!")
 	# Don't further resolve absolute paths.
 	if base.startswith("/"):
 		return os.path.normpath(base)
 	# If an invalid scope is specified log an error and return None.
 	if scope not in defaultPaths:
-		print "[Directories] Error: Invalid scope=%d provided to resolveFilename!" % scope
+		print("[Directories] Error: Invalid scope=%d provided to resolveFilename!" % scope)
 		return None
 	# Ensure that the defaultPaths directories that should exist do exist.
 	path, flag = defaultPaths.get(scope)
@@ -88,7 +101,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		try:
 			os.makedirs(path)
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Couldn't create directory '%s' (%s)" % (err.errno, path, err.strerror)
+			print("[Directories] Error %d: Couldn't create directory '%s' (%s)" % (err.errno, path, err.strerror))
 			return None
 	# Remove any suffix data and restore it at the end.
 	suffix = None
@@ -100,8 +113,8 @@ def resolveFilename(scope, base="", path_prefix=None):
 	# If base is "" then set path to the scope.  Otherwise use the scope to resolve the base filename.
 	if base is "":
 		path, flags = defaultPaths.get(scope)
-		# If the scope is SCOPE_CURRENT_SKIN append the current skin to the scope path.
-		if scope == SCOPE_CURRENT_SKIN:
+		# If the scope is SCOPE_CURRENT_SKIN or SCOPE_ACTIVE_SKIN or SCOPE_SKIN_IMAGE append the current skin to the scope path.
+		if scope in (SCOPE_CURRENT_SKIN, SCOPE_ACTIVE_SKIN, SCOPE_SKIN_IMAGE):
 			# This import must be here as this module finds the config file as part of the config initialisation.
 			from Components.config import config
 			skin = os.path.dirname(config.skin.primary_skin.value)
@@ -115,7 +128,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 				if len(pluginCode) > 2:
 					relative = "%s%s%s" % (pluginCode[0], os.sep, pluginCode[1])
 					path = os.path.join(plugins, relative)
-	elif scope == SCOPE_CURRENT_SKIN:
+	elif scope in (SCOPE_CURRENT_SKIN, SCOPE_ACTIVE_SKIN, SCOPE_SKIN_IMAGE):
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
 		skin = os.path.dirname(config.skin.primary_skin.value)
@@ -133,7 +146,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 			if pathExists(file):
 				path = file
 				break
-	elif scope == SCOPE_CURRENT_LCDSKIN:
+	elif scope in (SCOPE_CURRENT_LCDSKIN, SCOPE_ACTIVE_LCDSKIN):
 		# This import must be here as this module finds the config file as part of the config initialisation.
 		from Components.config import config
 		if hasattr(config.skin, "display_skin"):
@@ -231,7 +244,7 @@ def bestRecordingLocation(candidates):
 					biggest = size
 					path = candidate[1]
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Couldn't get free space for '%s' (%s)" % (err.errno, candidate[1], err.strerror)
+			print("[Directories] Error %d: Couldn't get free space for '%s' (%s)" % (err.errno, candidate[1], err.strerror))
 	return path
 
 def defaultRecordingLocation(candidate=None):
@@ -363,7 +376,7 @@ def copyfile(src, dst):
 				break
 			f2.write(buf)
 	except (IOError, OSError) as err:
-		print "[Directories] Error %d: Copying file '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+		print("[Directories] Error %d: Copying file '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 		status = -1
 	if f1 is not None:
 		f1.close()
@@ -374,13 +387,13 @@ def copyfile(src, dst):
 		try:
 			os.chmod(dst, S_IMODE(st.st_mode))
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Setting modes from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+			print("[Directories] Error %d: Setting modes from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 		try:
 			os.utime(dst, (st.st_atime, st.st_mtime))
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Setting times from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+			print("[Directories] Error %d: Setting times from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 	except (IOError, OSError) as err:
-		print "[Directories] Error %d: Obtaining stats from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+		print("[Directories] Error %d: Obtaining stats from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 	return status
 
 def copytree(src, dst, symlinks=False):
@@ -403,19 +416,19 @@ def copytree(src, dst, symlinks=False):
 			else:
 				copyfile(srcname, dstname)
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Copying tree '%s' to '%s'! (%s)" % (err.errno, srcname, dstname, err.strerror)
+			print("[Directories] Error %d: Copying tree '%s' to '%s'! (%s)" % (err.errno, srcname, dstname, err.strerror))
 	try:
 		st = os.stat(src)
 		try:
 			os.chmod(dst, S_IMODE(st.st_mode))
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Setting modes from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+			print("[Directories] Error %d: Setting modes from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 		try:
 			os.utime(dst, (st.st_atime, st.st_mtime))
 		except (IOError, OSError) as err:
-			print "[Directories] Error %d: Setting times from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+			print("[Directories] Error %d: Setting times from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 	except (IOError, OSError) as err:
-		print "[Directories] Error %d: Obtaining stats from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror)
+		print("[Directories] Error %d: Obtaining stats from '%s' to '%s'! (%s)" % (err.errno, src, dst, err.strerror))
 
 # Renames files or if source and destination are on different devices moves them in background
 # input list of (source, destination)
@@ -429,21 +442,21 @@ def moveFiles(fileList):
 			movedList.append(item)
 	except (IOError, OSError) as err:
 		if e.errno == 18:  # errno.EXDEV - Invalid cross-device link
-			print "[Directories] Warning: Cannot rename across devices, trying slower move."
+			print("[Directories] Warning: Cannot rename across devices, trying slower move.")
 			from Screens.CopyFiles import moveFiles as extMoveFiles
 			extMoveFiles(fileList, item[0])
-			print "[Directories] Moving files in background."
+			print("[Directories] Moving files in background.")
 		else:
-			print "[Directories] Error %d: Moving file '%s' to '%s'! (%s)" % (err.errno, item[0], item[1], err.strerror)
+			print("[Directories] Error %d: Moving file '%s' to '%s'! (%s)" % (err.errno, item[0], item[1], err.strerror))
 			errorFlag = True
 	if errorFlag:
-		print "[Directories] Reversing renamed files due to error."
+		print("[Directories] Reversing renamed files due to error.")
 		for item in movedList:
 			try:
 				os.rename(item[1], item[0])
 			except (IOError, OSError) as err:
-				print "[Directories] Error %d: Renaming '%s' to '%s'! (%s)" % (err.errno, item[1], item[0], err.strerror)
-				print "[Directories] Failed to undo move:", item
+				print("[Directories] Error %d: Renaming '%s' to '%s'! (%s)" % (err.errno, item[1], item[0], err.strerror))
+				print("[Directories] Failed to undo move:", item)
 
 def getSize(path, pattern=".*"):
 	path_size = 0

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Components.Harddisk import harddiskmanager
 from config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigInteger, ConfigPassword, ConfigIP, NoSave, ConfigBoolean
 from Tools.Directories import defaultRecordingLocation
@@ -432,6 +433,18 @@ def InitUsageConfig():
 		setPreferredTuner(int(configElement.value))
 	config.usage.frontend_priority.addNotifier(PreferredTunerChanged)
 
+	config.skin.onlyicon = NoSave(ConfigBoolean(default=False))
+
+	try:
+		onlyIcon = skin.parameters.get("AllowUseOnlyIcon", (0))
+	except Exception as error:
+		print("[UsageConfig] Error loading 'AllowUseOnlyIcon' skin parameter! (%s)" % error)
+		onlyIcon = (0)
+	if onlyIcon:
+		config.skin.onlyicon.value = True
+	else:
+		config.skin.onlyicon.value = False
+
 	config.usage.show_picon_in_display = ConfigYesNo(default = True)
 	config.usage.hide_zap_errors = ConfigYesNo(default = False)
 	config.usage.show_cryptoinfo = ConfigYesNo(default = True)
@@ -600,7 +613,7 @@ def InitUsageConfig():
 	try:
 		dateEnabled, timeEnabled = skin.parameters.get("AllowUserDatesAndTimes", (0, 0))
 	except Exception as error:
-		print "[UsageConfig] Error loading 'AllowUserDatesAndTimes' skin parameter! (%s)" % error
+		print("[UsageConfig] Error loading 'AllowUserDatesAndTimes' skin parameter! (%s)" % error)
 		dateEnabled, timeEnabled = (0, 0)
 	if dateEnabled:
 		config.usage.date.enabled.value = True
@@ -723,7 +736,7 @@ def InitUsageConfig():
 	try:
 		dateDisplayEnabled, timeDisplayEnabled = skin.parameters.get("AllowUserDatesAndTimesDisplay", (0, 0))
 	except Exception as error:
-		print "[UsageConfig] Error loading 'AllowUserDatesAndTimesDisplay' display skin parameter! (%s)" % error
+		print("[UsageConfig] Error loading 'AllowUserDatesAndTimesDisplay' display skin parameter! (%s)" % error)
 		dateDisplayEnabled, timeDisplayEnabled = (0, 0)
 	if dateDisplayEnabled:
 		config.usage.date.enabled_display.value = True
@@ -1302,68 +1315,68 @@ def defaultMoviePath():
 	return defaultRecordingLocation(config.usage.default_path.value)
 
 def patchTuxtxtConfFile(dummyConfigElement):
-	print "[UsageConfig] patching tuxtxt2.conf"
+	print("[UsageConfig] patching tuxtxt2.conf")
 	if config.usage.tuxtxt_font_and_res.value == "X11_SD":
-		tuxtxt2 = [["UseTTF",0],
-				   ["TTFBold",1],
-				   ["TTFScreenResX",720],
-				   ["StartX",50],
-				   ["EndX",670],
-				   ["StartY",30],
-				   ["EndY",555],
-				   ["TTFShiftY",0],
-				   ["TTFShiftX",0],
-				   ["TTFWidthFactor16",26],
-				   ["TTFHeightFactor16",14]]
+		tuxtxt2 = [ ["UseTTF",0],
+					["TTFBold",1],
+					["TTFScreenResX",720],
+					["StartX",50],
+					["EndX",670],
+					["StartY",30],
+					["EndY",555],
+					["TTFShiftY",0],
+					["TTFShiftX",0],
+					["TTFWidthFactor16",26],
+					["TTFHeightFactor16",14]]
 	elif config.usage.tuxtxt_font_and_res.value == "TTF_SD":
-		tuxtxt2 = [["UseTTF",1],
-				   ["TTFBold",1],
-				   ["TTFScreenResX",720],
-				   ["StartX",50],
-				   ["EndX",670],
-				   ["StartY",30],
-				   ["EndY",555],
-				   ["TTFShiftY",2],
-				   ["TTFShiftX",0],
-				   ["TTFWidthFactor16",29],
-				   ["TTFHeightFactor16",14]]
+		tuxtxt2 = [ ["UseTTF",1],
+					["TTFBold",1],
+					["TTFScreenResX",720],
+					["StartX",50],
+					["EndX",670],
+					["StartY",30],
+					["EndY",555],
+					["TTFShiftY",2],
+					["TTFShiftX",0],
+					["TTFWidthFactor16",29],
+					["TTFHeightFactor16",14]]
 	elif config.usage.tuxtxt_font_and_res.value == "TTF_HD":
-		tuxtxt2 = [["UseTTF",1],
-				   ["TTFBold",0],
-				   ["TTFScreenResX",1280],
-				   ["StartX",80],
-				   ["EndX",1200],
-				   ["StartY",35],
-				   ["EndY",685],
-				   ["TTFShiftY",-3],
-				   ["TTFShiftX",0],
-				   ["TTFWidthFactor16",26],
-				   ["TTFHeightFactor16",14]]
+		tuxtxt2 = [ ["UseTTF",1],
+					["TTFBold",0],
+					["TTFScreenResX",1280],
+					["StartX",80],
+					["EndX",1200],
+					["StartY",35],
+					["EndY",685],
+					["TTFShiftY",-3],
+					["TTFShiftX",0],
+					["TTFWidthFactor16",26],
+					["TTFHeightFactor16",14]]
 	elif config.usage.tuxtxt_font_and_res.value == "TTF_FHD":
-		tuxtxt2 = [["UseTTF",1],
-				   ["TTFBold",0],
-				   ["TTFScreenResX",1920],
-				   ["StartX",140],
-				   ["EndX",1780],
-				   ["StartY",52],
-				   ["EndY",1027],
-				   ["TTFShiftY",-6],
-				   ["TTFShiftX",0],
-				   ["TTFWidthFactor16",26],
-				   ["TTFHeightFactor16",14]]
+		tuxtxt2 = [ ["UseTTF",1],
+					["TTFBold",0],
+					["TTFScreenResX",1920],
+					["StartX",140],
+					["EndX",1780],
+					["StartY",52],
+					["EndY",1027],
+					["TTFShiftY",-6],
+					["TTFShiftX",0],
+					["TTFWidthFactor16",26],
+					["TTFHeightFactor16",14]]
 	elif config.usage.tuxtxt_font_and_res.value == "expert_mode":
-		tuxtxt2 = [["UseTTF",			 int(config.usage.tuxtxt_UseTTF.value)],
-				   ["TTFBold",			 int(config.usage.tuxtxt_TTFBold.value)],
-				   ["TTFScreenResX",	 int(config.usage.tuxtxt_TTFScreenResX.value)],
-				   ["StartX",			 config.usage.tuxtxt_StartX.value],
-				   ["EndX",				 config.usage.tuxtxt_EndX.value],
-				   ["StartY",			 config.usage.tuxtxt_StartY.value],
-				   ["EndY",				 config.usage.tuxtxt_EndY.value],
-				   ["TTFShiftY",		 int(config.usage.tuxtxt_TTFShiftY.value)],
-				   ["TTFShiftX",		 int(config.usage.tuxtxt_TTFShiftX.value)],
-				   ["TTFWidthFactor16",	 config.usage.tuxtxt_TTFWidthFactor16.value],
-				   ["TTFHeightFactor16", config.usage.tuxtxt_TTFHeightFactor16.value]]
-	tuxtxt2.append(	   ["CleanAlgo",		 config.usage.tuxtxt_CleanAlgo.value] )
+		tuxtxt2 = [ ["UseTTF",				int(config.usage.tuxtxt_UseTTF.value)],
+					["TTFBold",				int(config.usage.tuxtxt_TTFBold.value)],
+					["TTFScreenResX",		int(config.usage.tuxtxt_TTFScreenResX.value)],
+					["StartX",				config.usage.tuxtxt_StartX.value],
+					["EndX",				config.usage.tuxtxt_EndX.value],
+					["StartY",				config.usage.tuxtxt_StartY.value],
+					["EndY",				config.usage.tuxtxt_EndY.value],
+					["TTFShiftY",			int(config.usage.tuxtxt_TTFShiftY.value)],
+					["TTFShiftX",			int(config.usage.tuxtxt_TTFShiftX.value)],
+					["TTFWidthFactor16",	config.usage.tuxtxt_TTFWidthFactor16.value],
+					["TTFHeightFactor16",	config.usage.tuxtxt_TTFHeightFactor16.value]]
+	tuxtxt2.append( ["CleanAlgo",			config.usage.tuxtxt_CleanAlgo.value] )
 
 	TUXTXT_CFG_FILE = "/etc/tuxtxt/tuxtxt2.conf"
 	command = "sed -i -r '"
@@ -1377,7 +1390,7 @@ def patchTuxtxtConfFile(dummyConfigElement):
 	try:
 		Console().ePopen(command)
 	except:
-		print "[UsageConfig] Error: failed to patch %s!" % TUXTXT_CFG_FILE
-	print "[UsageConfig] patched tuxtxt2.conf"
+		print("[UsageConfig] Error: failed to patch %s!" % TUXTXT_CFG_FILE)
+	print("[UsageConfig] patched tuxtxt2.conf")
 
 	config.usage.tuxtxt_ConfFileHasBeenPatched.setValue(True)

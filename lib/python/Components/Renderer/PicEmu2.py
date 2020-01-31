@@ -1,16 +1,18 @@
+from __future__ import print_function
 from Components.Pixmap import Pixmap 
 from Renderer import Renderer
 from enigma import iServiceInformation 
 from string import upper 
 from enigma import ePixmap 
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename 
+from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename, SCOPE_PLUGINS
 from Components.Element import cached
 from Components.Converter.Poll import Poll
 import os
 
 class PicEmu2(Renderer, Poll):
 	__module__ = __name__
-	searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/usr/lib/enigma2/python/Plugins/Extensions/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
+	searchPaths = ('/data/%s/', '/usr/share/enigma2/%s/', '/media/sde1/%s/', '/media/cf/%s/', '/media/sdd1/%s/', '/media/hdd/%s/', '/media/usb/%s/', '/media/ba/%s/', '/mnt/ba/%s/', '/media/sda/%s/', '/etc/%s/')
+	searchPaths.append(resolveFilename(SCOPE_PLUGINS, 'Extensions/%s/'))
 
 	def __init__(self):
 		Poll.__init__(self)
@@ -113,7 +115,7 @@ class PicEmu2(Renderer, Poll):
 								value = self.getText()
 								value = value.lower()#change value to small letters
 								if value is None:
-									print "[PicEmu2] no emu installed"
+									print("[PicEmu2] no emu installed")
 									sname=''
 								else:
 									## Should write name be small letters
@@ -141,7 +143,7 @@ class PicEmu2(Renderer, Poll):
 											if ("address" in line):
 												sname = "CCcam"                         
 							except:
-								print ""
+								print("")
 
 						if caids:
 							if (len(caids) > 0):
