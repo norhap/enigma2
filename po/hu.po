@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:14+0330\n"
+"POT-Creation-Date: 2020-02-11 13:57+0330\n"
 "PO-Revision-Date: 2019-12-02 21:50+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -2330,11 +2330,11 @@ msgstr "Baszk"
 msgid "Begin time"
 msgstr "Kezdési idő"
 
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Kép-a-Képben esetén a 0 gomb jelentése"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr "'Pause' és 'OK' viselkedése megállítás közben"
-
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Kép-a-Képben esetén a 0 gomb jelentése"
 
 msgid "Behavior when a movie is started"
 msgstr "Amikor egy lejátszás elindul"
@@ -2430,6 +2430,10 @@ msgstr "Bootolás a visszaállítási menübe"
 
 msgid "Bootloader update required!"
 msgstr ""
+
+#, fuzzy
+msgid "Bootup time"
+msgstr "Rendez: Idő"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosznia-Hercegovina"
@@ -2993,7 +2997,7 @@ msgstr "TV kijelző klónozása LCD módba"
 msgid "Close"
 msgstr "Bezárás"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr "Kép-a-Képben bezárása kilépéskor"
 
 msgid "Close title selection"
@@ -3149,7 +3153,7 @@ msgstr "A ventilátor működési módjának beállítása"
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "A kódolási ikonok megjelenítése a csatornalistában."
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Beállíthatja, hogy a legutolsó Kép-a-Képben csatorna mennyi ideig maradjon meg."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -3279,7 +3283,7 @@ msgstr "Többnyelvű csatornáknál ezt a hangsávot választja automatikusan, n
 msgid "Configure the fourth subtitle language."
 msgstr "Többnyelvű csatornáknál ezt a feliratot választja automatikusan, negyedik prioritással."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "A '0' gomb működése aktív Kép-a-Képben funkció mellett."
 
 msgid "Configure the gateway."
@@ -5263,6 +5267,10 @@ msgstr "Külső feliratok párbeszéd-színe"
 msgid "External subtitle switch fonts"
 msgstr "Külső felirat betűtípus csere"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Külső tároló %s"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Inaktivitás figyelmen kívül hagyásának záró ideje (extra időkeret)"
 
@@ -6357,7 +6365,7 @@ msgstr "Legyen ECM a HTTP jelfolyamban"
 msgid "Include EIT in http streams"
 msgstr "Legyen EIT a HTTP jelfolyamban"
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr "Nem megfelelő csatorna a Kép-a-Képben módhoz!"
 
 msgid "Increased voltage"
@@ -6575,6 +6583,9 @@ msgstr "Ezen beállítások használata?"
 
 msgid "Is this video mode ok?"
 msgstr "Megfelelő ez a videómód?"
+
+msgid "Is your SCR device externally powered"
+msgstr ""
 
 msgid "Isle of Man"
 msgstr "Man-sziget"
@@ -6984,7 +6995,7 @@ msgstr "Adapter beállításai"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Háttértár beállítások"
+msgstr "Adapter beállításai"
 
 msgid "MAC:"
 msgstr ""
@@ -7084,7 +7095,7 @@ msgstr "Gyártó"
 
 msgid ""
 "Manufacturer reset in progress\n"
-"Pease wait until enigma2 restarts"
+"Please wait until enigma2 restarts"
 msgstr ""
 
 msgid "MaraM9"
@@ -7304,7 +7315,7 @@ msgstr "Softcam beállítások"
 msgid "Move"
 msgstr "Áthelyezés"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr "Kép-A-Képben mozgatása"
 
 msgid "Move PiP to main picture"
@@ -7459,8 +7470,9 @@ msgstr "Átkódolás: "
 msgid "MultiType"
 msgstr "Multi-típus"
 
-msgid "Multiboot"
-msgstr "Multiboot"
+#, fuzzy
+msgid "Multiboot image selector"
+msgstr "Több műhold (mind kiválasztva)"
 
 msgid "Multichannel PCM"
 msgstr "Többcsatornás PCM"
@@ -7797,6 +7809,10 @@ msgstr "Nincs kikapcsolás"
 
 msgid "No stream clients"
 msgstr "Nincs streamelő kliens"
+
+#, fuzzy
+msgid "No subtitles available"
+msgstr "Nincs elérhető frissítés"
 
 msgid "No tags are set on these movies."
 msgstr "Ezeknek a felvételekre nincsenek metaadataik."
@@ -10126,12 +10142,6 @@ msgstr "Válassza a 'Gyors DiSEqC' módot, amennyiben a földfelszíni rendszere
 msgid "Select HDD"
 msgstr "Háttértár kiválasztása"
 
-msgid "Select Image"
-msgstr "Image kiválasztása"
-
-msgid "Select Multiboot"
-msgstr "Multiboot kiválasztása"
-
 msgid "Select Softcam"
 msgstr "Softcam kiválasztása"
 
@@ -10765,12 +10775,12 @@ msgstr ""
 msgid "Show MiniTV in the front panel display"
 msgstr "Az előlap kijelzőjének fényereje."
 
-msgid "Show PIP"
-msgstr "Kép a képben megjelenítése"
-
 #, fuzzy
 msgid "Show PIP in the front panel display"
 msgstr "Piconok mutatása a kijelzőn"
+
+msgid "Show PiP"
+msgstr "Kép a képben megjelenítése"
 
 msgid "Show Readers/Proxies"
 msgstr ""
@@ -11743,6 +11753,14 @@ msgstr "Feliratok"
 msgid "Subtitles Settings"
 msgstr "Felirat beállítások"
 
+#, fuzzy
+msgid "Subtitles off"
+msgstr "Feliratok"
+
+#, fuzzy
+msgid "Subtitles on"
+msgstr "Feliratok"
+
 msgid "Succeeded:"
 msgstr "Sikeres:"
 
@@ -11774,7 +11792,7 @@ msgstr ""
 msgid "Swap EN300743 palette table"
 msgstr ""
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "Kép-a-Képben felcserélése"
 
 msgid "Swap PiP and main picture"
@@ -12713,14 +12731,14 @@ msgid "Titleset mode"
 msgstr "Tétel-szett mód"
 
 #, python-format
-msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr ""
 
 msgid "To audio selection"
 msgstr "Hangcsatorna kiválasztása"
 
 #, python-format
-msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -12743,7 +12761,7 @@ msgstr "HDMI bemenet be/ki"
 msgid "Toggle LCD LiveTV"
 msgstr "LCD élő TV be/ki"
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr "Kép-a-Képben ugrás be/ki"
 
 msgid "Toggle TV/RADIO mode"
@@ -12755,6 +12773,10 @@ msgstr "Jelenlegi pozícióra vágási jelet tenni"
 msgid "Toggle dashed flickering line for this service"
 msgstr "A kép tetején lévő villogó csík eltakarása ezen csatornánál be/ki"
 
+#, fuzzy
+msgid "Toggle default subtitles"
+msgstr "Feliratok újratördelése"
+
 msgid "Toggle infoBar"
 msgstr "Információs sáv be/ki"
 
@@ -12763,6 +12785,10 @@ msgstr "Az új szöveg a korábbi elé kerüljön, vagy törölje a meglévőt"
 
 msgid "Toggle show/hide"
 msgstr "Mutatás/elrejtés be/ki"
+
+#, fuzzy
+msgid "Toggle the default subtitles"
+msgstr "Rendezési módszer választása:"
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Váltás a TV és rádió lejátszó között..."
@@ -13255,7 +13281,7 @@ msgstr "bejelentkező képernyő kikapcsolása"
 msgid "Use the alternative screen"
 msgstr "Alternatívák módosítása"
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
+msgid "Use the cursor keys to select an installed image then press Reboot button."
 msgstr ""
 
 msgid ""
@@ -13703,7 +13729,7 @@ msgstr "Milyen típusú szolgáltatást szeretne keresni?"
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ha engedélyezi, a leválasztott listák is betöltődnek. Ez azt jelenti, hogy az olyan felhasználói listák is betöltődnek, amelyek léteznek, de nincsnek benne a bouquets.tv vagy bouquets.radio fájlban. Ez lehetőséget ad arra, hogy a saját listáit megtartsa, ha a csatornák frissülnek."
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Kép-a-Képben bezárása a távírányító 'Exit' gomb megnyomásakor."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -14341,7 +14367,7 @@ msgid "Zap up"
 msgstr "Ugrás felfelé"
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr "Csatorna váltva az időzítésre %s Kép-a-Képben módban!"
 
 #, python-format
@@ -14363,6 +14389,7 @@ msgstr "Névszerver beállítások"
 msgid "ZeroTierVPN"
 msgstr ""
 
+#, fuzzy
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
@@ -14377,9 +14404,8 @@ msgstr "Zgemma H9/i55 Plus"
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma Star S/2S/H1/H2"
 
-#, fuzzy
 msgid "Zgemma i55"
-msgstr "Zgemma H9/i55 Plus"
+msgstr ""
 
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
@@ -14769,6 +14795,7 @@ msgstr "Visszaállítás"
 msgid "et4000"
 msgstr "et4000"
 
+#, fuzzy
 msgid "et5000/6000"
 msgstr "et5000/6000"
 
@@ -14783,6 +14810,7 @@ msgstr "et8000/et10000"
 msgid "et9000/et9100"
 msgstr "et9000/et9100"
 
+#, fuzzy
 msgid "et9200/9500/6500"
 msgstr "et9200/9500/6500"
 

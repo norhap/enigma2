@@ -1,5 +1,5 @@
 from enigma import eTimer
-from config import config, ConfigSelection, ConfigSubsection
+from Components.config import config, ConfigSelection, ConfigSubsection
 from os import environ, unlink, symlink, walk, path
 import time
 
@@ -81,7 +81,7 @@ class Timezones:
 				print "[Timezones] AutoTimer parseEPG"
 			if autopoller is not None:
 				autopoller.start()
-		except ImportError, KeyError:
+		except ImportError as KeyError:
 			pass
 
 	def readTimezonesFromSystem(self):
@@ -192,7 +192,7 @@ class Timezones:
 			self.autotimer = autotimer
 			if config.plugins.autotimer.autopoll.value:
 				self.startATupdate()
-		except ImportError, KeyError:
+		except ImportError as KeyError:
 			pass
 
 timezones = Timezones()

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:14+0330\n"
+"POT-Creation-Date: 2020-02-11 13:57+0330\n"
 "PO-Revision-Date: 2011-04-14 00:02+0200\n"
 "Last-Translator: majevica <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -2554,12 +2554,12 @@ msgstr ""
 msgid "Begin time"
 msgstr "Početno vreme"
 
+#
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Uloga tipke 0 u SuS-modu"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr ""
-
-#
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Uloga tipke 0 u SuS-modu"
 
 #
 msgid "Behavior when a movie is started"
@@ -2665,6 +2665,11 @@ msgstr ""
 
 msgid "Bootloader update required!"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Bootup time"
+msgstr "Vreme sortiranja"
 
 msgid "Bosnia and Herzegovina"
 msgstr ""
@@ -3273,7 +3278,7 @@ msgstr ""
 msgid "Close"
 msgstr "Zatvori"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr ""
 
 #
@@ -3466,7 +3471,7 @@ msgstr ""
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr ""
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr ""
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -3604,7 +3609,7 @@ msgstr ""
 msgid "Configure the fourth subtitle language."
 msgstr "Prebaci na sledeći jezik titla"
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr ""
 
 #
@@ -5883,6 +5888,9 @@ msgstr ""
 msgid "External subtitle switch fonts"
 msgstr ""
 
+msgid "Externally powered"
+msgstr ""
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr ""
 
@@ -7077,7 +7085,7 @@ msgstr ""
 msgid "Include EIT in http streams"
 msgstr ""
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr ""
 
 #
@@ -7345,6 +7353,9 @@ msgstr "Koristi ove postavke?"
 #, fuzzy
 msgid "Is this video mode ok?"
 msgstr "Da li je ovaj video mod OK?"
+
+msgid "Is your SCR device externally powered"
+msgstr ""
 
 #
 #, fuzzy
@@ -7832,7 +7843,7 @@ msgstr "Postavke adaptera"
 #
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Postavke hard diska"
+msgstr "Postavke adaptera"
 
 msgid "MAC:"
 msgstr ""
@@ -7949,7 +7960,7 @@ msgstr "Proizvođač"
 
 msgid ""
 "Manufacturer reset in progress\n"
-"Pease wait until enigma2 restarts"
+"Please wait until enigma2 restarts"
 msgstr ""
 
 msgid "MaraM9"
@@ -8211,7 +8222,7 @@ msgstr "Softver"
 msgid "Move"
 msgstr ""
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr ""
 
 #
@@ -8388,10 +8399,9 @@ msgstr ""
 msgid "MultiType"
 msgstr "Multimedija"
 
-#
 #, fuzzy
-msgid "Multiboot"
-msgstr "Multisat"
+msgid "Multiboot image selector"
+msgstr "Multi EPG izbor buketa"
 
 msgid "Multichannel PCM"
 msgstr ""
@@ -8789,6 +8799,11 @@ msgstr "ne stanje pripravnosti"
 
 msgid "No stream clients"
 msgstr ""
+
+#
+#, fuzzy
+msgid "No subtitles available"
+msgstr "ažuriranja dostupna."
 
 #
 msgid "No tags are set on these movies."
@@ -11509,16 +11524,6 @@ msgstr "Odaberi hard disk"
 
 #
 #, fuzzy
-msgid "Select Image"
-msgstr "Odaberi film"
-
-#
-#, fuzzy
-msgid "Select Multiboot"
-msgstr "Odaberite zvučni zapis"
-
-#
-#, fuzzy
 msgid "Select Softcam"
 msgstr "Odaberi film"
 
@@ -12253,10 +12258,10 @@ msgstr ""
 msgid "Show MiniTV in the front panel display"
 msgstr ""
 
-msgid "Show PIP"
+msgid "Show PIP in the front panel display"
 msgstr ""
 
-msgid "Show PIP in the front panel display"
+msgid "Show PiP"
 msgstr ""
 
 msgid "Show Readers/Proxies"
@@ -13395,6 +13400,16 @@ msgstr "Subtitlovi"
 msgid "Subtitles Settings"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Subtitles off"
+msgstr "Subtitlovi"
+
+#
+#, fuzzy
+msgid "Subtitles on"
+msgstr "Subtitlovi"
+
 msgid "Succeeded:"
 msgstr ""
 
@@ -13430,7 +13445,7 @@ msgstr ""
 msgid "Swap EN300743 palette table"
 msgstr ""
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr ""
 
 #
@@ -14446,14 +14461,14 @@ msgid "Titleset mode"
 msgstr "Način postavki naziva"
 
 #, python-format
-msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr ""
 
 msgid "To audio selection"
 msgstr ""
 
 #, python-format
-msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -14475,7 +14490,7 @@ msgstr ""
 msgid "Toggle LCD LiveTV"
 msgstr ""
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr ""
 
 msgid "Toggle TV/RADIO mode"
@@ -14489,6 +14504,9 @@ msgstr "aktiviraj rezanje na trenutno označenoj poziciji"
 msgid "Toggle dashed flickering line for this service"
 msgstr ""
 
+msgid "Toggle default subtitles"
+msgstr ""
+
 msgid "Toggle infoBar"
 msgstr ""
 
@@ -14497,6 +14515,11 @@ msgstr ""
 
 msgid "Toggle show/hide"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Toggle the default subtitles"
+msgstr "Prebacuj vreme,poglavlje,audio,subtitl informacije"
 
 msgid "Toggle the tv and the radio player..."
 msgstr ""
@@ -15056,7 +15079,7 @@ msgstr ""
 msgid "Use the alternative screen"
 msgstr "Uredi alternative"
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
+msgid "Use the cursor keys to select an installed image then press Reboot button."
 msgstr ""
 
 msgid ""
@@ -15585,7 +15608,7 @@ msgstr ""
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr ""
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr ""
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -16229,7 +16252,7 @@ msgid "Zap up"
 msgstr ""
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr ""
 
 #

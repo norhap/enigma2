@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:14+0330\n"
+"POT-Creation-Date: 2020-02-11 13:57+0330\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -2531,12 +2531,12 @@ msgstr "Baskiska"
 msgid "Begin time"
 msgstr "Starttid"
 
+#
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Beteende av '0' knappen i BiB-läge"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr "Beteende av 'paus och OK' vid pausad"
-
-#
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Beteende av '0' knappen i BiB-läge"
 
 #
 msgid "Behavior when a movie is started"
@@ -2643,6 +2643,11 @@ msgstr ""
 
 msgid "Bootloader update required!"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Bootup time"
+msgstr "Sortera tid"
 
 #, fuzzy
 msgid "Bosnia and Herzegovina"
@@ -3251,7 +3256,7 @@ msgstr "Klona TV skärm till LCD"
 msgid "Close"
 msgstr "Stäng"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr "Avsluta BiB med exitknappen"
 
 #
@@ -3438,7 +3443,7 @@ msgstr "Konfigurera hur fläkten skall fungera."
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "Konfigurera om och hur krypteringsikoner skall visas i kanallistan."
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Konfigurera om och hur länge den senaste kanalen i BiB skall kommas ihåg."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -3574,7 +3579,7 @@ msgstr "Konfigurera det fjärde ljudspråket."
 msgid "Configure the fourth subtitle language."
 msgstr "Konfigurera det fjärde undertextspråket."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "Konfigurera beteendet på '0' knappen när BiB är aktiv."
 
 #
@@ -5813,6 +5818,10 @@ msgstr "Extern undertextfärg"
 msgid "External subtitle switch fonts"
 msgstr "Extrena växlingsbara undertextfonter"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Extern lagring %s"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Extra sluttid för att ignorera inaktiv insomningstimer"
 
@@ -7008,7 +7017,7 @@ msgstr "Inkludera ECM i http strömmar"
 msgid "Include EIT in http streams"
 msgstr "Inkludera EIT i http strömmar"
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr "Felaktig kanal för BiB!"
 
 #
@@ -7259,6 +7268,9 @@ msgstr "Använd dessa inställningar?"
 #
 msgid "Is this video mode ok?"
 msgstr "Är detta videoläge ok?"
+
+msgid "Is your SCR device externally powered"
+msgstr ""
 
 #
 #, fuzzy
@@ -7732,7 +7744,7 @@ msgstr "Adapterinställningar"
 #
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Inställningar för hårddisk"
+msgstr "Adapterinställningar"
 
 msgid "MAC:"
 msgstr ""
@@ -7842,7 +7854,7 @@ msgstr "Tillverkare"
 
 msgid ""
 "Manufacturer reset in progress\n"
-"Pease wait until enigma2 restarts"
+"Please wait until enigma2 restarts"
 msgstr ""
 
 msgid "MaraM9"
@@ -8097,7 +8109,7 @@ msgstr "Softcam typ"
 msgid "Move"
 msgstr "Flytta"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr "Flytta BiB"
 
 #
@@ -8273,10 +8285,9 @@ msgstr "Omkodning :"
 msgid "MultiType"
 msgstr "Multimedia"
 
-#
 #, fuzzy
-msgid "Multiboot"
-msgstr "Multisat"
+msgid "Multiboot image selector"
+msgstr "Alla Multisat val"
 
 msgid "Multichannel PCM"
 msgstr "Multikanal PCM"
@@ -8661,6 +8672,10 @@ msgstr "Inget viloläge"
 
 msgid "No stream clients"
 msgstr "inga strömningsklienter"
+
+#, fuzzy
+msgid "No subtitles available"
+msgstr "Inga uppdateringar tillgängliga."
 
 #
 msgid "No tags are set on these movies."
@@ -11326,15 +11341,6 @@ msgstr ""
 msgid "Select HDD"
 msgstr "Välj HDD"
 
-#
-#, fuzzy
-msgid "Select Image"
-msgstr "Välj en film"
-
-#, fuzzy
-msgid "Select Multiboot"
-msgstr "Välj plats"
-
 #, fuzzy
 msgid "Select Softcam"
 msgstr "Välj plats"
@@ -12043,12 +12049,12 @@ msgstr ""
 msgid "Show MiniTV in the front panel display"
 msgstr "Konfigurera ljusstyrkan på frontpanelens display."
 
-msgid "Show PIP"
-msgstr "Visa BiB"
-
 #, fuzzy
 msgid "Show PIP in the front panel display"
 msgstr "Visa picons i display"
+
+msgid "Show PiP"
+msgstr "Visa BiB"
 
 msgid "Show Readers/Proxies"
 msgstr ""
@@ -13146,6 +13152,16 @@ msgstr "Undertexter"
 msgid "Subtitles Settings"
 msgstr "Undertextinställningar"
 
+#
+#, fuzzy
+msgid "Subtitles off"
+msgstr "Undertexter"
+
+#
+#, fuzzy
+msgid "Subtitles on"
+msgstr "Undertexter"
+
 msgid "Succeeded:"
 msgstr "Lyckades :"
 
@@ -13180,7 +13196,7 @@ msgstr ""
 msgid "Swap EN300743 palette table"
 msgstr ""
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "Skifta BiB"
 
 #
@@ -14231,14 +14247,14 @@ msgid "Titleset mode"
 msgstr "Titelset läge"
 
 #, python-format
-msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr ""
 
 msgid "To audio selection"
 msgstr "Till ljudval"
 
 #, python-format
-msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -14262,7 +14278,7 @@ msgstr "Växla HDMI In"
 msgid "Toggle LCD LiveTV"
 msgstr "Växla LCD direktsänd TV"
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr "Växla BiBzapp"
 
 msgid "Toggle TV/RADIO mode"
@@ -14275,6 +14291,10 @@ msgstr "Skifta en klippmarkering på nuvarande position"
 msgid "Toggle dashed flickering line for this service"
 msgstr "Växla den streckade flimrande linjen för denna kanal"
 
+#, fuzzy
+msgid "Toggle default subtitles"
+msgstr "Ingen radbrytning på undertexter"
+
 msgid "Toggle infoBar"
 msgstr "Växla infobalk"
 
@@ -14283,6 +14303,10 @@ msgstr ""
 
 msgid "Toggle show/hide"
 msgstr "Växla Visa / Dölj"
+
+#, fuzzy
+msgid "Toggle the default subtitles"
+msgstr "Välj sorteringsmetod :"
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Växla tv och radiospelaren..."
@@ -14843,7 +14867,7 @@ msgstr "avaktivera introskärm"
 msgid "Use the alternative screen"
 msgstr "Ändra alternativ"
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
+msgid "Use the cursor keys to select an installed image then press Reboot button."
 msgstr ""
 
 msgid ""
@@ -15366,7 +15390,7 @@ msgstr ""
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Vid aktiverad laddar enigma2 olänkade favoritlistor. Detta innebär att favoritlistor som är tillgängliga men som inte ingår i bouquet.tv eller bouquet.radio filer kommer fortfarande laddas. Detta gör att du till exempel kan behålla dina egna favoritlistor medan installerade inställningar uppdateras."
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Vid aktiverad kan BiB stängas med exitknappen."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -16046,7 +16070,7 @@ msgid "Zap up"
 msgstr "Zappa upp"
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr ""
 
 #, fuzzy, python-format

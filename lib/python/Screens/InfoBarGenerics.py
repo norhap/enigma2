@@ -1,5 +1,5 @@
 from __future__ import print_function
-from ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
+from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.ActionMap import NumberActionMap
@@ -16,10 +16,10 @@ from Components.SystemInfo import SystemInfo
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
-from EpgSelection import EPGSelection
+from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 
-from Screen import Screen
+from Screens.Screen import Screen
 from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens import Standby
 from Screens.ChoiceBox import ChoiceBox
@@ -51,7 +51,7 @@ import itertools, datetime
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 
 # hack alert!
-from Menu import MainMenu, mdom
+from Screens.Menu import MainMenu, mdom
 
 def isStandardInfoBar(self):
 	return self.__class__.__name__ == "InfoBar"
@@ -3600,6 +3600,7 @@ class InfoBarSubtitleSupport(object):
 		self["SubtitleSelectionAction"] = HelpableActionMap(self, "InfobarSubtitleSelectionActions",
 			{
 				"subtitleSelection": (self.subtitleSelection, _("Subtitle selection...")),
+				"toggleDefaultSubtitles": (self.toggleDefaultSubtitles, _("Toggle the default subtitles"))
 			})
 
 		self.selected_subtitle = None
@@ -3660,17 +3661,31 @@ class InfoBarSubtitleSupport(object):
 				self.enableSubtitle(cachedsubtitle)
 				self.doCenterDVBSubs()
 
-	def enableSubtitle(self, selectedSubtitle):
+	def toggleDefaultSubtitles(self):
 		subtitle = self.getCurrentServiceSubtitle()
-		self.selected_subtitle = selectedSubtitle
-		if subtitle and self.selected_subtitle:
-			subtitle.enableSubtitles(self.subtitle_window.instance, self.selected_subtitle)
-			self.subtitle_window.show()
-			self.doCenterDVBSubs()
+		subtitlelist = subtitle and subtitle.getSubtitleList()
+		if subtitlelist is None or len(subtitlelist) == 0:
+			self.subtitle_window.showMessage(_("No subtitles available"), True)
+		elif self.selected_subtitle:
+			self.enableSubtitle(None)
+			self.subtitle_window.showMessage(_("Subtitles off"), True)
+			self.selected_subtitle = None
 		else:
-			if subtitle:
-				subtitle.disableSubtitles(self.subtitle_window.instance)
-			self.subtitle_window.hide()
+			self.enableSubtitle(subtitlelist[0])
+			self.subtitle_window.showMessage(_("Subtitles on"), False)
+
+	def enableSubtitle(self, newSubtitle):
+		if self.selected_subtitle != newSubtitle:
+			subtitle = self.getCurrentServiceSubtitle()
+			self.selected_subtitle = newSubtitle
+			if subtitle and newSubtitle:
+				subtitle.enableSubtitles(self.subtitle_window.instance, newSubtitle)
+				self.subtitle_window.show()
+				self.doCenterDVBSubs()
+			else:
+				if subtitle:
+					subtitle.disableSubtitles(self.subtitle_window.instance)
+				self.subtitle_window.hide()
 
 	def restartSubtitle(self):
 		if self.selected_subtitle:

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:14+0330\n"
-"PO-Revision-Date: 2020-01-23 23:24+0200\n"
+"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"PO-Revision-Date: 2020-02-09 13:30+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 
 msgid ""
 "\n"
@@ -1040,7 +1040,7 @@ msgid "16:9 letterbox"
 msgstr "16:9 įterpiant juodas juostas"
 
 msgid "16K"
-msgstr ""
+msgstr "16K"
 
 msgid "18 V"
 msgstr "18 V"
@@ -1126,9 +1126,8 @@ msgstr "4:3 Įterpiant juodas juostas šonuose"
 msgid "4:3 panscan"
 msgstr "4:3 nukerpant šonus"
 
-#, fuzzy
 msgid "4K"
-msgstr "4"
+msgstr "4K"
 
 msgid "4X"
 msgstr "4X"
@@ -1151,9 +1150,8 @@ msgstr "8"
 msgid "8 character"
 msgstr "8 simboliai"
 
-#, fuzzy
 msgid "8K"
-msgstr "8"
+msgstr "8K"
 
 msgid "8bit"
 msgstr "8 bitų"
@@ -1164,23 +1162,20 @@ msgstr "9"
 msgid ": 0000 - default (disabled)"
 msgstr ": 0000 - numatytasis (išjungta)"
 
-#, fuzzy
 msgid "< Current >"
-msgstr "Dabartiniai reikalai"
+msgstr "< Dabartinis >"
 
-#, fuzzy
 msgid "< Default + Picon >"
-msgstr "<Numatytoji tema>"
+msgstr "< Numatytasis + logotipas >"
 
-#, fuzzy
 msgid "< Default >"
-msgstr "<Numatytoji tema>"
+msgstr "< Numatytasis >"
 
 msgid "< Emergency >"
-msgstr ""
+msgstr "< Skubus atvejis >"
 
 msgid "< Pending restart >"
-msgstr ""
+msgstr "< Paleidimo iš naujo laukimas >"
 
 msgid "<Current movielist location>"
 msgstr "<Dabartinė filmų sąrašo vieta>"
@@ -2192,11 +2187,11 @@ msgstr "Baskų"
 msgid "Begin time"
 msgstr "Pradžios laikas"
 
+msgid "Behavior of '0' button in PiP mode"
+msgstr "'0' mygtuko elgsena PiP režime"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr "'Pause' ir 'Ok' mygtukų elgsena pauzės metu"
-
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "0 mygtuko padėtis PiP būsenoje"
 
 msgid "Behavior when a movie is started"
 msgstr "Elgsena, kai filmas prasidėjęs"
@@ -2290,6 +2285,10 @@ msgstr "Paleisti atkūrimo meniu"
 
 msgid "Bootloader update required!"
 msgstr "Įkrovos tvarkyklę reikia atnaujinti!"
+
+#, fuzzy
+msgid "Bootup time"
+msgstr "Rūšiuoti pagal laiką"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnija ir Hercogovina"
@@ -2508,10 +2507,10 @@ msgid "Cancel"
 msgstr "Atšaukti"
 
 msgid "Cancel any changes to the currently active skin"
-msgstr ""
+msgstr "Atšaukti bet kokius šiuo metu aktyvios temos keitimus"
 
 msgid "Cancel any changes to the currently active skin and exit all menus"
-msgstr ""
+msgstr "Atšaukite bet kokius, šiuo metu aktyvios temos keitimus ir užverkite visus meniu"
 
 msgid "Cancel any text changes and exit"
 msgstr "Atšaukti bet kokius tekstinius pakeitimus ir užverti"
@@ -2832,8 +2831,8 @@ msgstr "Dubliuoti TV vaizdą LCD ekrane"
 msgid "Close"
 msgstr "Užverti"
 
-msgid "Close PiP on exit"
-msgstr "Uždaryti PiP exit mygtuku"
+msgid "Close PiP with 'exit' button"
+msgstr "Uždaryti PiP su 'exit' mygtuku"
 
 msgid "Close title selection"
 msgstr "Užverti pavadinimo pasirinkimą"
@@ -2983,8 +2982,8 @@ msgstr "Nustatykite, kaip turi veikti aušintuvas"
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "Konfigūruokite, ar ir kaip kanalų pasirinkimo sąrašo lange turi būti rodomos kodavimo piktogramos."
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
-msgstr "Konfigūruokite, ar ir kiek laiko turi būti įsimenamas paskutinis PiP lange rodytas kanalas."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
+msgstr "Konfigūruokite, ar ir kaip ilgai bus įsimenami kanalai PiP režimu."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
 msgstr "Nustatykite, ar ir kur kanalų pasirinkimo sąrašo lange bus rodomos kanalo tipo (palydovinis/kabelinis/antžeminis) piktogramos."
@@ -3109,8 +3108,8 @@ msgstr "Nustatykite ketvirtą garso kalbą."
 msgid "Configure the fourth subtitle language."
 msgstr "Nustatykite ketvirtą subtitrų kalbą."
 
-msgid "Configure the function of the '0' button do when PIP is active."
-msgstr "Nustatykite kas vyks paspaudus '0' mygtuką, kai PIP aktyvuotas."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
+msgstr "Konfigūruokite '0' mygtuko funkciją, kai PiP yra aktyvus."
 
 msgid "Configure the gateway."
 msgstr "Konfigūruokite tinklo šliuzą."
@@ -5038,6 +5037,10 @@ msgstr "Išorinių subtitrų dialogų spalvinimas"
 msgid "External subtitle switch fonts"
 msgstr "Išorinių subtitrų perjungiami šriftai"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Išorinė saugykla %s"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Papildomo laiko miego laikmačio neaktyvumo ignoravimui pabaiga"
 
@@ -5105,7 +5108,7 @@ msgid "FFmpeg version: "
 msgstr "FFmpeg versija: "
 
 msgid "FHD"
-msgstr ""
+msgstr "FHD"
 
 msgid "FPU: "
 msgstr "FPU: "
@@ -5442,9 +5445,8 @@ msgstr "GStreamer versija: "
 msgid "GUI Settings"
 msgstr "Grafinės aplinkos nustatymai"
 
-#, fuzzy
 msgid "GUI Skin"
-msgstr "Grafinės aplinkos nustatymai"
+msgstr "Grafinės aplinkos tema"
 
 msgid ""
 "GUI needs a restart to apply a new language\n"
@@ -5649,9 +5651,8 @@ msgstr "H:mm"
 msgid "H:mm:ss"
 msgstr "H:mm:ss"
 
-#, fuzzy
 msgid "HD"
-msgstr "D"
+msgstr "HD"
 
 msgid "HD list"
 msgstr "HD sąrašas"
@@ -6095,8 +6096,8 @@ msgstr "Į http transliaciją įtraukti ECM"
 msgid "Include EIT in http streams"
 msgstr "Į http transliaciją įtraukti EIT"
 
-msgid "Incorrect type service for PiP!"
-msgstr "Kanalas netinkamas PiP!"
+msgid "Incorrect service type for Picture in Picture!"
+msgstr "Nesuderinamas su PiP kanalas!"
 
 msgid "Increased voltage"
 msgstr "Padidinta įtampa"
@@ -6303,6 +6304,9 @@ msgstr "Ar šie nustatymai geri?"
 msgid "Is this video mode ok?"
 msgstr "Ar šis vaizdo režimas tinkamas?"
 
+msgid "Is your SCR device externally powered"
+msgstr ""
+
 msgid "Isle of Man"
 msgstr "Meno sala"
 
@@ -6481,7 +6485,7 @@ msgid "Large"
 msgstr "Didelis"
 
 msgid "Last Req."
-msgstr "Paskutinė užklausa"
+msgstr "Vėliausia užkl."
 
 msgid "Last config"
 msgstr "Paskutinė konfigūracija"
@@ -6791,8 +6795,10 @@ msgstr "Gamintojas"
 
 msgid ""
 "Manufacturer reset in progress\n"
-"Pease wait until enigma2 restarts"
+"Please wait until enigma2 restarts"
 msgstr ""
+"Vykdomi gamintojo nustatymai iš naujo\n"
+"Prašome laukti, kol enigma2 pasileis iš naujo"
 
 msgid "MaraM9"
 msgstr "MaraM9"
@@ -7005,7 +7011,7 @@ msgstr "Pajungimų nustatymas"
 msgid "Move"
 msgstr "Perkelti"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr "Perkelti PiP"
 
 msgid "Move PiP to main picture"
@@ -7056,21 +7062,17 @@ msgstr "Perkelti virtualiosios klaviatūros žymeklį aukštyn"
 msgid "Move to position X"
 msgstr "Sukti į poziciją X"
 
-#, fuzzy
 msgid "Move to the next page"
-msgstr "perjungti į kitą kampą"
+msgstr "Pereiti į paskesnį puslapį"
 
-#, fuzzy
 msgid "Move to the next skin"
-msgstr "Perkelti žemyn prie kito įrašo"
+msgstr "Pereiti į kitą temą"
 
-#, fuzzy
 msgid "Move to the previous page"
-msgstr "atsukti atgal į ankstesnį skyrių"
+msgstr "Pereiti į ankstesnį puslapį"
 
-#, fuzzy
 msgid "Move to the previous skin"
-msgstr "Perkelti aukštyn prie ankstesnio įrašo"
+msgstr "Pereiti prie ankstesnės temos"
 
 msgid "Move up a line"
 msgstr "Judėkite linija aukštyn"
@@ -7147,8 +7149,8 @@ msgstr "Daugialypis perkodavimas: "
 msgid "MultiType"
 msgstr "Multi tipas"
 
-msgid "Multiboot"
-msgstr "Daugiafunkcinė įkrova"
+msgid "Multiboot image selector"
+msgstr "Daugia funkcinės įkrovos atvaizdo pasirinkimas"
 
 msgid "Multichannel PCM"
 msgstr "Daugiakanalis PCM"
@@ -7470,6 +7472,10 @@ msgstr "Nebudėti"
 
 msgid "No stream clients"
 msgstr "Transliacijų klientų nėra"
+
+#, fuzzy
+msgid "No subtitles available"
+msgstr "Atnaujinimų nėra"
 
 msgid "No tags are set on these movies."
 msgstr "Jokios žymos šiems filmams nenustatytos."
@@ -7802,7 +7808,7 @@ msgid "OpenVPN setup"
 msgstr "OpenVpn valdymas"
 
 msgid "Opkg"
-msgstr ""
+msgstr "Opkg"
 
 msgid "Options disable timer"
 msgstr "Nustatymai laikmačiui išjungti"
@@ -8519,9 +8525,9 @@ msgstr "Papildomų galimybių pasirinkimui, spauskite 'MENU'."
 msgid "Press OK on your remote control to continue."
 msgstr "Spauskite OK savo valdymo pulte ir tęskite."
 
-#, fuzzy, python-format
+#, python-format
 msgid "Press OK to activate the selected%s skin."
-msgstr "Spauskite OK, kad aktyvuoti pasirinktą temą."
+msgstr "Paspauskite OK, kad suaktyvintumėte pasirinktą %s temą."
 
 msgid "Press OK to activate the settings."
 msgstr "Spauskite OK norėdami aktyvuoti nustatymus."
@@ -8533,9 +8539,9 @@ msgstr "Spauskite OK ir redaguokite nustatymus."
 msgid "Press OK to get further details for %s"
 msgstr "Spauskite OK, kad gautumėte tolimesnes detales dėl %s"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Press OK to keep the currently selected%s skin."
-msgstr "Spauskite OK, kad aktyvuoti pasirinktą temą."
+msgstr "Paspauskite OK, kad išlaikyti šiuo metu pasirinktą %s temą."
 
 msgid "Press OK to scan"
 msgstr "Kad pradėti paiešką, spauskite 'OK'"
@@ -8787,9 +8793,8 @@ msgstr "Tikrai ištrinti baigtus laikmačius?"
 msgid "Really exit the subservices quickzap?"
 msgstr "Tikrai užverti greitą subkanalų perjungimą?"
 
-#, fuzzy
 msgid "Really perform a manufacturer reset now?"
-msgstr "Apsaugoti ekrano nustatymą iš naujo"
+msgstr "Tikrai atlikti gamintojo nustatymus iš naujo dabar?"
 
 msgid "Really reboot into android mode?"
 msgstr "Ar tikrai paleisti į android režimą?"
@@ -9436,9 +9441,8 @@ msgstr "Išsaugoti / įvesti tekstą ir išeiti"
 msgid "Save EPG"
 msgstr "Išsaugoti EPG"
 
-#, fuzzy
 msgid "Save and activate the currently selected skin"
-msgstr "Spauskite OK, kad aktyvuoti pasirinktą temą."
+msgstr "Išsaugokite ir suaktyvinkite šiuo metu pasirinktą temą"
 
 msgid "Save and exit"
 msgstr "Išsaugoti ir užverti"
@@ -9724,12 +9728,6 @@ msgstr "Pasirinkite greitą DiSEqC, jei jūsų sistema palaiko tai. Jei jūs ne�
 
 msgid "Select HDD"
 msgstr "Pasirinkite kietąjį diską"
-
-msgid "Select Image"
-msgstr "Pasirinkite atvaizdą"
-
-msgid "Select Multiboot"
-msgstr "Pasirinktinis atvaizdų įkėlimas"
 
 msgid "Select Softcam"
 msgstr "Pasirinkite emuliatorių"
@@ -10335,11 +10333,11 @@ msgstr "Rodyti medijos atkūrime liko/praėjo kaip"
 msgid "Show MiniTV in the front panel display"
 msgstr "Rodyti MiniTV priekinio skydelio ekrane"
 
-msgid "Show PIP"
-msgstr "Rodyti PiP"
-
 msgid "Show PIP in the front panel display"
 msgstr "Rodyti PIP priekinio skydelio ekrane"
+
+msgid "Show PiP"
+msgstr "Rodyti PiP"
 
 msgid "Show Readers/Proxies"
 msgstr "Skaitytojai/tarpiniai serveriai"
@@ -10705,16 +10703,14 @@ msgstr "Vartotojo aplinkos tema"
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Tema ir rezoliucija: %s (%sx%s)\n"
 
-#, fuzzy
 msgid "Skin Selection Actions"
-msgstr "Pasirinkite veiksmą"
+msgstr "Temos pasirinkimo veiksmai"
 
 msgid "Skin Setting"
 msgstr "Temos nustatymas"
 
-#, fuzzy
 msgid "SkinSelector: Restart GUI"
-msgstr "Paleisti grafinę aplinką iš naujo"
+msgstr "Temos parinktis: iš naujo paleiskite grafinę aplinką"
 
 msgid "Skins"
 msgstr "Vartotojo aplinkos temos"
@@ -11278,6 +11274,14 @@ msgstr "Subtitrai"
 msgid "Subtitles Settings"
 msgstr "Subtitrų nustatymai"
 
+#, fuzzy
+msgid "Subtitles off"
+msgstr "Subtitrai"
+
+#, fuzzy
+msgid "Subtitles on"
+msgstr "Subtitrai"
+
 msgid "Succeeded:"
 msgstr "Pavyko:"
 
@@ -11309,7 +11313,7 @@ msgstr "Sukeiskite EN300743 susiejimo lentelę"
 msgid "Swap EN300743 palette table"
 msgstr "Sukeiskite EN300743 paletės lentelę"
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "Sukeisti PiP"
 
 msgid "Swap PiP and main picture"
@@ -11448,7 +11452,7 @@ msgstr "TMBD informacija apie įvykį"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "Adga, Pasvalys, Lietuva\n"
-"2020-01-23 versija"
+"2020-02-09 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -12209,18 +12213,16 @@ msgstr "Antraštės ypatybės"
 msgid "Titleset mode"
 msgstr "Pavadinimo nustatymo režimas"
 
-#, fuzzy, python-format
-msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
-msgstr ""
-"Režimų perjungimui, grafinę aplinką reikia paleisti iš naujo\n"
-"Ar paleisti iš naujo dabar?"
+#, python-format
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
+msgstr "Norint taikyti pasirinktą '%s' temą, grafinę aplinką reikia paleisti iš naujo. Ar norite tai atlikti dabar?"
 
 msgid "To audio selection"
 msgstr "Garso pasirinkimas"
 
 #, python-format
-msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
-msgstr ""
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
+msgstr "Norint įrašyti ir taikyti pasirinktą '%s' temą, grafinę aplinką reikia paleisti iš naujo. Ar norite išsaugoti pasirinkimą ir paleisti iš naujo dabar?"
 
 msgid "To subtitle selection"
 msgstr "Subtitrų pasirinkimas"
@@ -12240,7 +12242,7 @@ msgstr "Perjungti HDMI-in per visą ekraną"
 msgid "Toggle LCD LiveTV"
 msgstr "Perjungti transliaciją į LCD"
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr "Perjungti PiP jungimą"
 
 msgid "Toggle TV/RADIO mode"
@@ -12252,6 +12254,10 @@ msgstr "Nustatyti iškirpimo žymeklį šioje pozicijoje"
 msgid "Toggle dashed flickering line for this service"
 msgstr "Perjungti punktyrinę, mirgančią liniją šiam kanalui"
 
+#, fuzzy
+msgid "Toggle default subtitles"
+msgstr "Pergrupuoti subtitrus"
+
 msgid "Toggle infoBar"
 msgstr "Perjungti info juostą"
 
@@ -12260,6 +12266,10 @@ msgstr "Įjunkite naujus teksto įterpimus prieš esamą tekstą arba perrašyki
 
 msgid "Toggle show/hide"
 msgstr "Perjungti rodyti/slėpti"
+
+#, fuzzy
+msgid "Toggle the default subtitles"
+msgstr "Nustatykite numatytąjį rūšiavimo būdą."
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Perjungti tv ir radijo grotuvus..."
@@ -12508,13 +12518,12 @@ msgstr "Neįmanoma pakeisti slaptažodžio!"
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "Nepavyko sukurti reikiamų katalogų laikmenose (pvz., USB atmintinėje arba kietame diske) - patikrinkite laikmeną ir bandykite dar kartą!"
 
-#, fuzzy
 msgid ""
 "Unattended update in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
-"Vyksta automatinis atnaujinimas\n"
+"Vyksta atnaujinimas\n"
 "Palaukite, kol imtuvas pasileis iš naujo\n"
 "Tai gali užtrukti kelias minutes"
 
@@ -12748,7 +12757,7 @@ msgstr "Naudokite ploną ekraną"
 msgid "Use the alternative screen"
 msgstr "Naudoti alternatyvų ekraną"
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
+msgid "Use the cursor keys to select an installed image then press Reboot button."
 msgstr "Naudokite žymeklio mygtukus, kad pasirinktumėte įdiegtą atvaizdą, o tada - mygtuką Perkrauti."
 
 msgid ""
@@ -13190,8 +13199,8 @@ msgstr "Kokio tipo kanalų paieškos norite?"
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kai čia įjungta, enigma2 įkels nesusietus vartotojo paketus. Tai reiškia, kad vartotojo paketai, kurie yra prieinami, tačiau nėra įtraukti į bouquets.tv, ar bouquets.radio failus, vis tiek bus įkelti. Tai leidžia jums pvz. išsaugoti savo vartotojo paketus, kai bus atnaujinami įdiegti nustatymai"
 
-msgid "When enabled the PiP can be closed by the exit button."
-msgstr "Kai čia įjungta, PiP gali būti išjungtas su 'EXIT' mygtuku."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
+msgstr "Įjungus PiP gali būti uždarytas su 'exit' mygtuku."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Kai čia įjungta, rodyklių mygtukai, esantys apie 'OK' mygtuką, elgsis 'neutrino' perjungimo stiliuje, o ne kaip enigma2."
@@ -13817,7 +13826,7 @@ msgid "Zap up"
 msgstr "Perjungti aukštyn"
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr "Perjungta į laikmačio kanalą %s kaip PiP!"
 
 #, python-format

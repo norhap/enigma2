@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:14+0330\n"
+"POT-Creation-Date: 2020-02-11 13:57+0330\n"
 "PO-Revision-Date: 2018-02-14 16:51+0330\n"
 "Last-Translator: Persian Prince <persianprince@pe4k.com>\n"
 "Language-Team: Persian Professionals <persianpros@yahoo.com>\n"
@@ -2329,11 +2329,11 @@ msgstr ""
 msgid "Begin time"
 msgstr "زمان شروع"
 
+msgid "Behavior of '0' button in PiP mode"
+msgstr "عملکرد دکمه 0 در حالت تصویر در تصویر"
+
 msgid "Behavior of 'pause and ok' when paused"
 msgstr ""
-
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "عملکرد دکمه 0 در حالت تصویر در تصویر"
 
 msgid "Behavior when a movie is started"
 msgstr "عملکرد هنگامی که یک فیلم شروع میشود"
@@ -2430,6 +2430,10 @@ msgstr ""
 
 msgid "Bootloader update required!"
 msgstr ""
+
+#, fuzzy
+msgid "Bootup time"
+msgstr "چیدمان بر اساس زمان"
 
 msgid "Bosnia and Herzegovina"
 msgstr ""
@@ -2987,7 +2991,7 @@ msgstr ""
 msgid "Close"
 msgstr "بستن"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr ""
 
 msgid "Close title selection"
@@ -3153,7 +3157,7 @@ msgstr ""
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr ""
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr ""
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -3281,7 +3285,7 @@ msgstr ""
 msgid "Configure the fourth subtitle language."
 msgstr ""
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr ""
 
 msgid "Configure the gateway."
@@ -5305,6 +5309,9 @@ msgstr ""
 msgid "External subtitle switch fonts"
 msgstr ""
 
+msgid "Externally powered"
+msgstr ""
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr ""
 
@@ -6401,7 +6408,7 @@ msgstr "شامل ECM در جریان های http"
 msgid "Include EIT in http streams"
 msgstr "شامل EIT در جریان های http"
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr ""
 
 msgid "Increased voltage"
@@ -6631,6 +6638,9 @@ msgstr "آیا این حالت تصویر درست است ؟"
 #, fuzzy
 msgid "Is this video mode ok?"
 msgstr "آیا این حالت تصویر درست است ؟"
+
+msgid "Is your SCR device externally powered"
+msgstr ""
 
 msgid "Isle of Man"
 msgstr ""
@@ -7044,7 +7054,7 @@ msgstr "تنظیمات آداپتور"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "تنظیمات هارد"
+msgstr "تنظیمات آداپتور"
 
 msgid "MAC:"
 msgstr ""
@@ -7144,7 +7154,7 @@ msgstr "تولید کننده"
 
 msgid ""
 "Manufacturer reset in progress\n"
-"Pease wait until enigma2 restarts"
+"Please wait until enigma2 restarts"
 msgstr ""
 
 msgid "MaraM9"
@@ -7374,7 +7384,7 @@ msgstr "تنظیم سافتکم"
 msgid "Move"
 msgstr "جابجایی"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr ""
 
 #, fuzzy
@@ -7526,8 +7536,9 @@ msgstr ""
 msgid "MultiType"
 msgstr "چند رسانه ای"
 
-msgid "Multiboot"
-msgstr "مولتی بوت"
+#, fuzzy
+msgid "Multiboot image selector"
+msgstr "انتخاب زبان خودکار"
 
 msgid "Multichannel PCM"
 msgstr ""
@@ -7872,6 +7883,11 @@ msgstr "خاموشی موقت"
 
 msgid "No stream clients"
 msgstr ""
+
+#
+#, fuzzy
+msgid "No subtitles available"
+msgstr "به روز رسانی های در دسترس"
 
 #
 msgid "No tags are set on these movies."
@@ -10249,12 +10265,6 @@ msgstr ""
 msgid "Select HDD"
 msgstr "انتخاب هارد"
 
-msgid "Select Image"
-msgstr "انتخاب ایمیج"
-
-msgid "Select Multiboot"
-msgstr "انتخاب مولتی بوت"
-
 msgid "Select Softcam"
 msgstr "انتخاب سافتکم"
 
@@ -10911,10 +10921,10 @@ msgstr ""
 msgid "Show MiniTV in the front panel display"
 msgstr ""
 
-msgid "Show PIP"
+msgid "Show PIP in the front panel display"
 msgstr ""
 
-msgid "Show PIP in the front panel display"
+msgid "Show PiP"
 msgstr ""
 
 msgid "Show Readers/Proxies"
@@ -11921,6 +11931,14 @@ msgstr "زیرنویس ها"
 msgid "Subtitles Settings"
 msgstr ""
 
+#, fuzzy
+msgid "Subtitles off"
+msgstr "زیرنویس ها"
+
+#, fuzzy
+msgid "Subtitles on"
+msgstr "زیرنویس ها"
+
 msgid "Succeeded:"
 msgstr ""
 
@@ -11953,7 +11971,7 @@ msgstr ""
 msgid "Swap EN300743 palette table"
 msgstr ""
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr ""
 
 msgid "Swap PiP and main picture"
@@ -12837,14 +12855,14 @@ msgid "Titleset mode"
 msgstr ""
 
 #, python-format
-msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr ""
 
 msgid "To audio selection"
 msgstr ""
 
 #, python-format
-msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -12865,7 +12883,7 @@ msgstr ""
 msgid "Toggle LCD LiveTV"
 msgstr ""
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr ""
 
 msgid "Toggle TV/RADIO mode"
@@ -12877,6 +12895,10 @@ msgstr ""
 msgid "Toggle dashed flickering line for this service"
 msgstr ""
 
+#, fuzzy
+msgid "Toggle default subtitles"
+msgstr "بازکردن زیرنویس"
+
 msgid "Toggle infoBar"
 msgstr ""
 
@@ -12884,6 +12906,9 @@ msgid "Toggle new text inserts before or overwrites existing text"
 msgstr ""
 
 msgid "Toggle show/hide"
+msgstr ""
+
+msgid "Toggle the default subtitles"
 msgstr ""
 
 msgid "Toggle the tv and the radio player..."
@@ -13370,7 +13395,7 @@ msgstr "نگه داشتن صفحه نمایش"
 msgid "Use the alternative screen"
 msgstr ""
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
+msgid "Use the cursor keys to select an installed image then press Reboot button."
 msgstr ""
 
 msgid ""
@@ -13798,7 +13823,7 @@ msgstr ""
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr ""
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr ""
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -14389,7 +14414,7 @@ msgid "Zap up"
 msgstr ""
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr ""
 
 #, python-format
@@ -14410,6 +14435,7 @@ msgstr "Nameserver تنظیمات"
 msgid "ZeroTierVPN"
 msgstr ""
 
+#, fuzzy
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
@@ -14802,6 +14828,7 @@ msgstr "بازنشانی"
 msgid "et4000"
 msgstr "et4000"
 
+#, fuzzy
 msgid "et5000/6000"
 msgstr "et5000/6000"
 
@@ -14816,6 +14843,7 @@ msgstr "et8000/et10000"
 msgid "et9000/et9100"
 msgstr "et9000/et9100"
 
+#, fuzzy
 msgid "et9200/9500/6500"
 msgstr "et9200/9500/6500"
 

@@ -4,7 +4,7 @@ from time import time, localtime
 
 import RecordTimer
 import Components.ParentalControl
-from Screen import Screen
+from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.AVSwitch import AVSwitch
@@ -262,7 +262,7 @@ class QuitMainloopScreen(Screen):
 			QUIT_REBOOT_ANDROID: _("Your receiver is rebooting into android mode"),
 			QUIT_REBOOT_RECOVERY: _("Your receiver is rebooting into recovery mode"),
 			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your receiver reboots\nThis may take a few minutes"),
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPease wait until enigma2 restarts"),
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until enigma2 restarts"),
 			QUIT_UPGRADE_FPANEL: _("Your front panel will be updated\nThis may take a few minutes"),
 			QUIT_WOL: _("Your receiver goes to WOL")
 		}.get(retvalue)

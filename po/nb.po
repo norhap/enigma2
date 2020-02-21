@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-30 00:14+0330\n"
+"POT-Creation-Date: 2020-02-11 13:57+0330\n"
 "PO-Revision-Date: 2019-12-06 15:54+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -2503,12 +2503,12 @@ msgid "Begin time"
 msgstr "Start tid"
 
 #
-msgid "Behavior of 'pause and ok' when paused"
-msgstr "Funksjon for 'pause og ok' når satt i pause"
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Funksjon for 0 tast i PiP modus"
 
 #
-msgid "Behavior of 0 key in PiP-mode"
-msgstr "Funksjon for 0 tast i PiP modus"
+msgid "Behavior of 'pause and ok' when paused"
+msgstr "Funksjon for 'pause og ok' når satt i pause"
 
 msgid "Behavior when a movie is started"
 msgstr "Funksjon når en avspilling startes"
@@ -2611,6 +2611,11 @@ msgstr "Oppstart til gjenopprettings menyen"
 
 msgid "Bootloader update required!"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Bootup time"
+msgstr "Sorter tid"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnia og Herzegovina"
@@ -3227,7 +3232,7 @@ msgstr "Klone TV skjerm til LCD modus"
 msgid "Close"
 msgstr "Lukk"
 
-msgid "Close PiP on exit"
+msgid "Close PiP with 'exit' button"
 msgstr "Slå av PiP (bilde i bilde) med exit tast"
 
 #
@@ -3408,7 +3413,7 @@ msgstr "Still inn valg for kjølevifte"
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr "Velg hvis du ønsker at krypteringsindikator skal vises i kanallisten."
 
-msgid "Configure if and how long the latest service in the PiP will be remembered."
+msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Velg hvis du ønsker å lagre det siste brukte PiP (bilde i bilde) i minnet."
 
 msgid "Configure if and how service type icons will be shown in the channel selection list."
@@ -3540,7 +3545,7 @@ msgstr "Still inn fjerdevalg på lyd språk."
 msgid "Configure the fourth subtitle language."
 msgstr "Still inn fjerdevalg på undertekst språk."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "Still inn funksjonen for '0' tasten når PiP (bilde i bilde) er aktiv."
 
 msgid "Configure the gateway."
@@ -5738,6 +5743,10 @@ msgstr "Ekstern undertekstfarge ved dialog"
 msgid "External subtitle switch fonts"
 msgstr "Ekstern undertekst skriftype"
 
+#, fuzzy
+msgid "Externally powered"
+msgstr "Ekstern lagring %s"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Ekstra slutt tid til overstyring av inaktiv dvale timer"
 
@@ -6916,7 +6925,7 @@ msgstr "Inkluder ECM i http stream"
 msgid "Include EIT in http streams"
 msgstr "Inkluder EIT i http stream"
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for Picture in Picture!"
 msgstr "Feil bruk av bilde i bilde!"
 
 #
@@ -7172,6 +7181,9 @@ msgstr "Er denne innstillingen OK?"
 #
 msgid "Is this video mode ok?"
 msgstr "Er denne videoen modus OK?"
+
+msgid "Is your SCR device externally powered"
+msgstr ""
 
 msgid "Isle of Man"
 msgstr "Isle of Man"
@@ -7633,9 +7645,10 @@ msgstr "IP adresse"
 msgid "MAC address settings"
 msgstr "Nettverks innstillinger"
 
+#
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Diskoppsett"
+msgstr "Nettverks innstillinger"
 
 msgid "MAC:"
 msgstr ""
@@ -7749,7 +7762,7 @@ msgstr "Produsent"
 
 msgid ""
 "Manufacturer reset in progress\n"
-"Pease wait until enigma2 restarts"
+"Please wait until enigma2 restarts"
 msgstr ""
 
 msgid "MaraM9"
@@ -7992,7 +8005,7 @@ msgstr "Softcam innstilling"
 msgid "Move"
 msgstr "Kjør"
 
-msgid "Move PIP"
+msgid "Move PiP"
 msgstr "Flytt bilde i bilde"
 
 #
@@ -8161,9 +8174,9 @@ msgstr "Transkoding: "
 msgid "MultiType"
 msgstr "MultiType"
 
-#
-msgid "Multiboot"
-msgstr "Multiboot"
+#, fuzzy
+msgid "Multiboot image selector"
+msgstr "Alle satellitt posisjoner egendefinert valg"
 
 msgid "Multichannel PCM"
 msgstr "Multikanal PCM lyd"
@@ -8554,6 +8567,10 @@ msgstr "Ikke slå av"
 
 msgid "No stream clients"
 msgstr "Ingen streaming klienter"
+
+#, fuzzy
+msgid "No subtitles available"
+msgstr "Det finnes ingen nye oppdateringer"
 
 msgid "No tags are set on these movies."
 msgstr "Ingen merker er satt på disse opptakene."
@@ -11135,13 +11152,6 @@ msgstr "Velg Fast DiSEqC hvis antenne systemet støtter dette. Hvis du er usikke
 msgid "Select HDD"
 msgstr "Velg hdd/ssd"
 
-msgid "Select Image"
-msgstr "Velg Image"
-
-#
-msgid "Select Multiboot"
-msgstr "Velg multiboot"
-
 #
 msgid "Select Softcam"
 msgstr "Velg softcam"
@@ -11836,13 +11846,13 @@ msgstr ""
 msgid "Show MiniTV in the front panel display"
 msgstr "Still inn lysstyrken på mottakerens frontpanel skjerm når mottakeren er påslått."
 
-#
-msgid "Show PIP"
-msgstr "Vis bilde i bilde"
-
 #, fuzzy
 msgid "Show PIP in the front panel display"
 msgstr "Vis kanallogo (picon) i display"
+
+#
+msgid "Show PiP"
+msgstr "Vis bilde i bilde"
 
 msgid "Show Readers/Proxies"
 msgstr ""
@@ -12922,6 +12932,14 @@ msgstr "Undertekst"
 msgid "Subtitles Settings"
 msgstr "Undertekst innstilling"
 
+#, fuzzy
+msgid "Subtitles off"
+msgstr "Undertekst"
+
+#, fuzzy
+msgid "Subtitles on"
+msgstr "Undertekst"
+
 msgid "Succeeded:"
 msgstr "Vellykket:"
 
@@ -12957,7 +12975,7 @@ msgid "Swap EN300743 palette table"
 msgstr ""
 
 #
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "Bytt om bilde i bilde"
 
 #
@@ -13984,14 +14002,14 @@ msgid "Titleset mode"
 msgstr "Navnevalg"
 
 #, python-format
-msgid "To apply the selected '%s' skin the GUI needs to restart.  Would you like to restart the GUI now?"
+msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr ""
 
 msgid "To audio selection"
 msgstr "Lyd valg"
 
 #, python-format
-msgid "To save and apply the selected '%s' skin the GUI needs to restart.  Would you like to save the selection and restart the GUI now?"
+msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would you like to save the selection and restart the GUI now?"
 msgstr ""
 
 msgid "To subtitle selection"
@@ -14015,7 +14033,7 @@ msgstr "Veksle HDMI inn"
 msgid "Toggle LCD LiveTV"
 msgstr "Vis/Skjul LCD-LiveTV"
 
-msgid "Toggle PIPzap"
+msgid "Toggle PiPzap"
 msgstr "Vis/Skjul Bilde i bilde"
 
 msgid "Toggle TV/RADIO mode"
@@ -14028,6 +14046,10 @@ msgstr "Bytte mellom klipp på den aktuelle posisjonen"
 msgid "Toggle dashed flickering line for this service"
 msgstr "Skift mellom stiplede flimmer linjer for denne kanalen"
 
+#, fuzzy
+msgid "Toggle default subtitles"
+msgstr "Undertekst tilpassing"
+
 msgid "Toggle infoBar"
 msgstr "Vis/Skjul infobar"
 
@@ -14036,6 +14058,11 @@ msgstr "Bruk nye tekst valg først eller overskriv eksisterende tekst"
 
 msgid "Toggle show/hide"
 msgstr "Bytt mellom vis/skjul"
+
+#
+#, fuzzy
+msgid "Toggle the default subtitles"
+msgstr "Velg sorteringsmetode:"
 
 #
 msgid "Toggle the tv and the radio player..."
@@ -14579,7 +14606,7 @@ msgstr "deaktiver intro skjerm"
 msgid "Use the alternative screen"
 msgstr "Rediger alternativer"
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
+msgid "Use the cursor keys to select an installed image then press Reboot button."
 msgstr ""
 
 msgid ""
@@ -15077,7 +15104,7 @@ msgstr "Hvilken type kanalsøk vil du bruke?"
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Når dette er på, vil enigma2 laste kanallister som ikke er tilknyttet mottakeren. Dette betyr at kanallister som er tilgjengelige, men som ikke er tilknyttet radio eller TV filer fortsatt vil bli lastet. Dette gjør at du kan holde egne favorittlister mens installerte innstillinger er oppdatert"
 
-msgid "When enabled the PiP can be closed by the exit button."
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr "Når dette er på, kan PiP (bilde i bilde) avsluttes med exit knapp."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
@@ -15742,7 +15769,7 @@ msgid "Zap up"
 msgstr "Gå opp"
 
 #, python-format
-msgid "Zapped to timer service %s as PiP!"
+msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr "Timer skiftet til valgt kanal %s som bilde i bilde!"
 
 #
@@ -15767,6 +15794,7 @@ msgstr "Navneserver innstilling"
 msgid "ZeroTierVPN"
 msgstr ""
 
+#, fuzzy
 msgid "Zgemma H.S/H.2S/H.2H/H5/H7"
 msgstr "Zgemma H.S/H.2S/H.2H/H5/H7"
 
@@ -15781,9 +15809,8 @@ msgstr "Zgemma H9/i55 Plus"
 msgid "Zgemma Star S/2S/H1/H2"
 msgstr "Zgemma Star S/2S/H1/H2"
 
-#, fuzzy
 msgid "Zgemma i55"
-msgstr "Zgemma H9/i55 Plus"
+msgstr ""
 
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
@@ -16222,6 +16249,7 @@ msgstr "Tilbakestill"
 msgid "et4000"
 msgstr "et4000"
 
+#, fuzzy
 msgid "et5000/6000"
 msgstr "et5000/6000"
 
@@ -16236,6 +16264,7 @@ msgstr "et8000/et10000"
 msgid "et9000/et9100"
 msgstr "et9000/et9100"
 
+#, fuzzy
 msgid "et9200/9500/6500"
 msgstr "et9200/9500/6500"
 
