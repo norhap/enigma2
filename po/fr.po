@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
-"PO-Revision-Date: 2020-02-01 14:31+0100\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"PO-Revision-Date: 2020-03-04 22:12+0100\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -2427,9 +2427,8 @@ msgstr "Démarrer dans le menu de récupération"
 msgid "Bootloader update required!"
 msgstr ""
 
-#, fuzzy
 msgid "Bootup time"
-msgstr "Tri heures"
+msgstr "Temps de démarrage"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnie et Herzegovine"
@@ -2440,7 +2439,7 @@ msgstr "Botswana"
 msgid "Bouvet Island"
 msgstr "Île Bouvet"
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3457,6 +3456,10 @@ msgstr "Configure si oui ou non la position du rotor s'affichera dans la barre d
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Configure si oui ou non une icône doit apparaître lorsque votre parabole motorisée est en mouvement."
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Configure si les picons des services seront affichés dans la liste des chaînes."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -4646,7 +4649,7 @@ msgstr "ERREUR - échec lors de la recherche (%s)!"
 
 #, python-format
 msgid "ERROR downloading file %s"
-msgstr "ERREUR téléchargement du fichier %s"
+msgstr ""
 
 msgid "East"
 msgstr "Est"
@@ -5009,9 +5012,9 @@ msgstr "Eritrée"
 msgid "Error"
 msgstr "Erreur"
 
-#, python-format
+#, fuzzy, python-format
 msgid "Error %s"
-msgstr "Erreur %s"
+msgstr "Erreur"
 
 msgid "Error code"
 msgstr "Code d'erreur"
@@ -5046,10 +5049,13 @@ msgid "Error stop stream!"
 msgstr "Erreur arrêt du stream (diffusion)!"
 
 msgid "Error when writing epg.dat on server"
-msgstr "Erreur lors de l’écriture du epg.dat sur le serveur"
+msgstr ""
 
+#, fuzzy
 msgid "Error while retreiving epg.dat from server"
-msgstr "Erreur lors de la réception du fichier epg.dat du serveur"
+msgstr ""
+"Erreur lors de la récupération des informations de programmation de repli\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -5059,8 +5065,11 @@ msgstr ""
 "Erreur lors de la récupération des informations de programmation de repli\n"
 "%s"
 
+#, fuzzy
 msgid "Error while retreiving location of epg.dat on server"
-msgstr "Erreur pour trouver la localisation du fichier epg.dat sur le serveur"
+msgstr ""
+"Erreur lors de la récupération des informations de programmation de repli\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -5267,9 +5276,8 @@ msgstr "Couleur des sous-titres externes de dialogue"
 msgid "External subtitle switch fonts"
 msgstr "Police de caractère des sous-titres externes"
 
-#, fuzzy
 msgid "Externally powered"
-msgstr "Stockage externe %s"
+msgstr "Alimentation externe"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Heure de fin supplémentaire pour ignorer l'arrêt automatique"
@@ -6321,6 +6329,9 @@ msgstr "Importer depuis l’URL du récepteur distant"
 msgid "Import remote receiver URL"
 msgstr "Importer l’URL du récepteur distant"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6579,9 +6590,6 @@ msgstr "Voulez-vous utiliser ce paramètre?"
 
 msgid "Is this video mode ok?"
 msgstr "Est-ce que ce mode vidéo est correcte?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 msgid "Isle of Man"
 msgstr "Île de Man"
@@ -6965,10 +6973,6 @@ msgstr "Longitude"
 msgid "Loop through from"
 msgstr "Rebouclé depuis"
 
-#, fuzzy
-msgid "Lord Howe Island"
-msgstr "Îles Féroé"
-
 msgid "Lower case"
 msgstr "Minuscules"
 
@@ -6991,7 +6995,7 @@ msgstr "Paramètres adaptateur"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Paramètres adaptateur"
+msgstr "Paramètres du disque dur"
 
 msgid "MAC:"
 msgstr ""
@@ -7464,9 +7468,8 @@ msgstr "Transcodage: "
 msgid "MultiType"
 msgstr "TypeMultiple"
 
-#, fuzzy
 msgid "Multiboot image selector"
-msgstr "Sélectionner tous les multisat"
+msgstr "Sélecteur d’image Multiboot"
 
 msgid "Multichannel PCM"
 msgstr "PCM multi-canaux"
@@ -7754,7 +7757,7 @@ msgid "No displayable files on this medium found!"
 msgstr "Aucun fichier affichable trouvé sur ce support!"
 
 msgid "No epg.dat file found server"
-msgstr "Pas de fichier epg.dat trouvé sur le serveur"
+msgstr ""
 
 msgid "No event info found, recording indefinitely."
 msgstr "Aucune information sur l’événement trouvée, enregistrement indéfini."
@@ -7904,10 +7907,6 @@ msgstr "Nord"
 
 msgid "Northern Mariana Islands"
 msgstr "Iles Mariannes du Nord"
-
-#, fuzzy
-msgid "Northern Territory"
-msgstr "Terres Australes Françaises"
 
 msgid "Norway"
 msgstr "Norvége"
@@ -10337,6 +10336,9 @@ msgstr "Sélectionner l’entrée vidéo avec les boutons haut/bas"
 msgid "Select video mode"
 msgstr "Sélectionner le mode vidéo"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr "Sélectionnez si votre appareil SCR a une alimentation externe."
+
 msgid "Select wireless network"
 msgstr "Sélectionner l'interface sans fil"
 
@@ -10939,6 +10941,10 @@ msgstr "Afficher description étendue"
 msgid "Show packages to be updated"
 msgstr "Afficher les paquets à mettre à jour"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Afficher les picons dans la liste des chaînes"
+
 msgid "Show picons in channel selection list"
 msgstr "Afficher les picons dans la liste des chaînes"
 
@@ -11365,10 +11371,6 @@ msgstr "Sud"
 
 msgid "South Africa"
 msgstr "Afrique du Sud"
-
-#, fuzzy
-msgid "South Australia"
-msgstr "Australie"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Géorgie du Sud et îles Sandwich du Sud"
@@ -11932,7 +11934,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 01-02-2020"
+"Dernière MAJ: 04-03-2020"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -12780,7 +12782,7 @@ msgstr "Inverser afficher/cacher"
 
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Sélectionner la méthode de tri:"
+msgstr "Configure la taille de police des sous-titres."
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Bascule entre le mode TV et le lecteur radio..."
@@ -13709,10 +13711,6 @@ msgstr "Ouest"
 msgid "West limit set"
 msgstr "Fixer limite Ouest"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "Australie"
-
 msgid "Western Sahara"
 msgstr "Sahara Occidental"
 
@@ -14347,6 +14345,9 @@ msgstr "Zap focus image dans l'image"
 
 msgid "Zap focus to main screen"
 msgstr "Zap focus écran principal"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Mode de zapping"

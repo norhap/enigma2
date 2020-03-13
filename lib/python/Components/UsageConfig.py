@@ -205,11 +205,11 @@ def InitUsageConfig():
 		choicelist.append((str(i), _("Standby in ") + h))
 	config.usage.inactivity_timer = ConfigSelection(default = "0", choices = choicelist)
 	config.usage.inactivity_timer_blocktime = ConfigYesNo(default = True)
-	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default = time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
-	config.usage.inactivity_timer_blocktime_end = ConfigClock(default = time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_begin = ConfigClock(default = time.mktime((1970, 1, 1, 18, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_end = ConfigClock(default = time.mktime((1970, 1, 1, 23, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_extra = ConfigYesNo(default = False)
-	config.usage.inactivity_timer_blocktime_extra_begin = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
-	config.usage.inactivity_timer_blocktime_extra_end = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_extra_begin = ConfigClock(default = time.mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
+	config.usage.inactivity_timer_blocktime_extra_end = ConfigClock(default = time.mktime((1970, 1, 1, 9, 0, 0, 0, 0, 0)))
 	config.usage.inactivity_timer_blocktime_by_weekdays = ConfigYesNo(default = False)
 	config.usage.inactivity_timer_blocktime_day = ConfigSubDict()
 	config.usage.inactivity_timer_blocktime_begin_day = ConfigSubDict()
@@ -219,11 +219,11 @@ def InitUsageConfig():
 	config.usage.inactivity_timer_blocktime_extra_end_day = ConfigSubDict()
 	for i in range(7):
 		config.usage.inactivity_timer_blocktime_day[i] = ConfigYesNo(default = False)
-		config.usage.inactivity_timer_blocktime_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 18, 0, 0, 0, 0, 0)))
-		config.usage.inactivity_timer_blocktime_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 23, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_begin_day[i] = ConfigClock(default = time.mktime((1970, 1, 1, 18, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_end_day[i] = ConfigClock(default = time.mktime((1970, 1, 1, 23, 0, 0, 0, 0, 0)))
 		config.usage.inactivity_timer_blocktime_extra_day[i] = ConfigYesNo(default = False)
-		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 6, 0, 0, 0, 0, 0)))
-		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default = time.mktime((0, 0, 0, 9, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_begin_day[i] = ConfigClock(default = time.mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
+		config.usage.inactivity_timer_blocktime_extra_end_day[i] = ConfigClock(default = time.mktime((1970, 1, 1, 9, 0, 0, 0, 0, 0)))
 
 	choicelist = [("0", _("Disabled")),("event_standby", _("Standby after current event"))]
 	for i in range(900, 7201, 900):
@@ -293,6 +293,7 @@ def InitUsageConfig():
 	config.usage.remote_fallback_openwebif_userid = ConfigText(default = "root")
 	config.usage.remote_fallback_openwebif_password = ConfigPassword(default = "default")
 	config.usage.remote_fallback_openwebif_port = ConfigInteger(default=80, limits=(0,65535))
+	config.usage.remote_fallback_dvbt_region = ConfigText(default = "fallback DVB-T/T2 Europe")
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default = True)
 
@@ -972,6 +973,9 @@ def InitUsageConfig():
 		("1", _("Internal hdd only")),
 		("3", _("Everywhere"))])
 	config.misc.erase_flags.addNotifier(updateEraseFlags, immediate_feedback = False)
+
+	config.misc.zapkey_delay = ConfigSelectionNumber(default = 5, stepwidth = 1, min = 0, max = 20, wraparound = True)
+	config.misc.numzap_picon = ConfigYesNo(default = False)
 
 	if SystemInfo["ZapMode"]:
 		def setZapmode(el):

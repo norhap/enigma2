@@ -53,6 +53,7 @@ class About(Screen):
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
 
 		AboutText += _("Fabricante: ") + about.getHardwareBrand() + "\n"
+
 		cpu = about.getCPUInfoString()
 		AboutText += _("CPU: ") + cpu + "\n"
 		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
@@ -902,6 +903,8 @@ class Troubleshoot(Screen):
 				"cancel": self.close,
 				"up": self["AboutScrollLabel"].pageUp,
 				"down": self["AboutScrollLabel"].pageDown,
+				"moveUp": self["AboutScrollLabel"].homePage,
+				"moveDown": self["AboutScrollLabel"].endPage,
 				"left": self.left,
 				"right": self.right,
 				"red": self.red,

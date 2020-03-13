@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2019-02-13 20:52+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -2613,7 +2613,7 @@ msgstr "Botswana"
 msgid "Bouvet Island"
 msgstr "Bouvet Island"
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3694,6 +3694,10 @@ msgstr "Määritä näytetäänkö kääntömoottorin asentotieto tietopalkissa.
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Määrittelee haluatko kuvakkeen näytettäväksi kun kääntömoottoria käännetään. "
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Valitse näytetäänkö kanavalogot kanavanlistassa."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -5443,9 +5447,9 @@ msgid "Error"
 msgstr "Virhe"
 
 #
-#, python-format
+#, fuzzy, python-format
 msgid "Error %s"
-msgstr "Virhe %s"
+msgstr "Virhe"
 
 msgid "Error code"
 msgstr "Virhekoodi"
@@ -6847,6 +6851,9 @@ msgstr "Tuo etävastaanottimelta"
 msgid "Import remote receiver URL"
 msgstr "Syötä etävastaanottimen URL-osoite"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -7141,9 +7148,6 @@ msgstr "Käytä näitä asetuksia?"
 
 msgid "Is this video mode ok?"
 msgstr "Otetaanko tämä video-tila käyttöön?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #
 msgid "Isle of Man"
@@ -7580,10 +7584,6 @@ msgstr "Pituusaste"
 msgid "Loop through from"
 msgstr "Läpisyöttö virittimeltä"
 
-#, fuzzy
-msgid "Lord Howe Island"
-msgstr "Faroe Islands"
-
 msgid "Lower case"
 msgstr "Pienet kirjaimet"
 
@@ -7609,7 +7609,7 @@ msgstr "Sovittimen asetukset"
 #
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Sovittimen asetukset"
+msgstr "Kiintolevyn asetukset"
 
 msgid "MAC:"
 msgstr ""
@@ -8671,10 +8671,6 @@ msgstr "Pohjoista leveyttä"
 
 msgid "Northern Mariana Islands"
 msgstr "Northern Mariana Islands"
-
-#, fuzzy
-msgid "Northern Territory"
-msgstr "French Southern Territories"
 
 #
 msgid "Norway"
@@ -11442,6 +11438,9 @@ msgstr "Valitse video-sisäänmeno ylös/alas-näppäimillä"
 msgid "Select video mode"
 msgstr "Valitse video-tila"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 #
 msgid "Select wireless network"
 msgstr "Valitse WLAN-verkko"
@@ -12107,6 +12106,10 @@ msgstr "Näytä laajennettu ohjelmakuvaus"
 msgid "Show packages to be updated"
 msgstr "Näytä päivitettävät ohjelmistopaketit"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Näytä kanavalogot kanavalistalla"
+
 msgid "Show picons in channel selection list"
 msgstr "Näytä kanavalogot kanavalistalla"
 
@@ -12594,11 +12597,6 @@ msgstr "Eteläistä leveyttä"
 
 msgid "South Africa"
 msgstr "Etelä Afrikka"
-
-#
-#, fuzzy
-msgid "South Australia"
-msgstr "Australia"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "South Georgia and the South Sandwich Islands"
@@ -14137,10 +14135,9 @@ msgstr ""
 msgid "Toggle show/hide"
 msgstr ""
 
-#
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Valitse lajittelutapa"
+msgstr "Määrittää tekstityksen koon."
 
 msgid "Toggle the tv and the radio player..."
 msgstr ""
@@ -15180,11 +15177,6 @@ msgstr "Läntistä pituutta"
 msgid "West limit set"
 msgstr "Läntinen raja-arvo asetettu"
 
-#
-#, fuzzy
-msgid "Western Australia"
-msgstr "Australia"
-
 msgid "Western Sahara"
 msgstr "Western Sahara"
 
@@ -15843,6 +15835,9 @@ msgstr "Kanavanvaihto PiP-kuvassa"
 
 msgid "Zap focus to main screen"
 msgstr "Kanavanvaihto pääruudussa"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Kanavanvaihdon toiminta"

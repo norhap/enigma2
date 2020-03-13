@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2019-12-06 15:54+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -2626,7 +2626,7 @@ msgstr "Botswana"
 msgid "Bouvet Island"
 msgstr "Bouvetøya"
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3726,6 +3726,10 @@ msgstr "Velg hvis en motorposisjon skal vises på infobaren eller ikke"
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Still inn hvis et varsels ikon skal vises når motorisert parabolsystem kjører."
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Velg hvis du ønsker at kanallogo (picons)skal vises i kanallisten."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -5047,7 +5051,7 @@ msgstr "FEIL - kunne ikke søke (%s)!"
 
 #, python-format
 msgid "ERROR downloading file %s"
-msgstr "FEIL under nedlasting av fil %s"
+msgstr ""
 
 #
 msgid "East"
@@ -5449,9 +5453,9 @@ msgid "Error"
 msgstr "Feil"
 
 #
-#, python-format
+#, fuzzy, python-format
 msgid "Error %s"
-msgstr "Feil %s"
+msgstr "Feil"
 
 msgid "Error code"
 msgstr "Feil kode"
@@ -5487,10 +5491,13 @@ msgid "Error stop stream!"
 msgstr "Feil stopp stream!"
 
 msgid "Error when writing epg.dat on server"
-msgstr "Feil ved skriving av EPG på server"
+msgstr ""
 
+#, fuzzy
 msgid "Error while retreiving epg.dat from server"
-msgstr "Feil ved henting av EPG fra server"
+msgstr ""
+"Feil ved henting av reserve timer informasjon\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -5500,8 +5507,11 @@ msgstr ""
 "Feil ved henting av reserve timer informasjon\n"
 "%s"
 
+#, fuzzy
 msgid "Error while retreiving location of epg.dat on server"
-msgstr "Feil ved henting av EPG lokasjon på server"
+msgstr ""
+"Feil ved henting av reserve timer informasjon\n"
+"%s"
 
 #
 #, python-format
@@ -6881,6 +6891,9 @@ msgstr "Importer fra ekstern mottakeradresse"
 msgid "Import remote receiver URL"
 msgstr "Importer eksternmottakers URL"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -7181,9 +7194,6 @@ msgstr "Er denne innstillingen OK?"
 #
 msgid "Is this video mode ok?"
 msgstr "Er denne videoen modus OK?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 msgid "Isle of Man"
 msgstr "Isle of Man"
@@ -7619,10 +7629,6 @@ msgstr "Lengdegrad"
 msgid "Loop through from"
 msgstr "Gjennomgang fra"
 
-#, fuzzy
-msgid "Lord Howe Island"
-msgstr "Færøyene"
-
 msgid "Lower case"
 msgstr "Små bokstaver"
 
@@ -7645,10 +7651,9 @@ msgstr "IP adresse"
 msgid "MAC address settings"
 msgstr "Nettverks innstillinger"
 
-#
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Nettverks innstillinger"
+msgstr "Diskoppsett"
 
 msgid "MAC:"
 msgstr ""
@@ -8507,7 +8512,7 @@ msgid "No displayable files on this medium found!"
 msgstr "Ingen visbare filer på dette mediet funnet!"
 
 msgid "No epg.dat file found server"
-msgstr "Fant ikke noe EPG på server"
+msgstr ""
 
 #
 msgid "No event info found, recording indefinitely."
@@ -8677,10 +8682,6 @@ msgstr "Nord"
 
 msgid "Northern Mariana Islands"
 msgstr "Nord-Marianene"
-
-#, fuzzy
-msgid "Northern Territory"
-msgstr "Fransk sørlig og antarktisk territorium"
 
 #
 msgid "Norway"
@@ -11380,6 +11381,9 @@ msgstr "Velg videoinngang med opp/ned-knappene"
 msgid "Select video mode"
 msgstr "Velg videomodus"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 #
 msgid "Select wireless network"
 msgstr "Velg trådløst nettverk"
@@ -12041,6 +12045,10 @@ msgstr "Vis tilleggs beskrivelse"
 msgid "Show packages to be updated"
 msgstr "Vis pakker som skal oppdateres"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Vis kanallogo (picon) i kanallisten"
+
 msgid "Show picons in channel selection list"
 msgstr "Vis kanallogo (picon) i kanallisten"
 
@@ -12518,11 +12526,6 @@ msgstr "Sør"
 
 msgid "South Africa"
 msgstr "Sør Afrika"
-
-#
-#, fuzzy
-msgid "South Australia"
-msgstr "Australia"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Sør Georgia and the Sør Sandwich øyene"
@@ -14059,10 +14062,9 @@ msgstr "Bruk nye tekst valg først eller overskriv eksisterende tekst"
 msgid "Toggle show/hide"
 msgstr "Bytt mellom vis/skjul"
 
-#
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Velg sorteringsmetode:"
+msgstr "Still inn skriftstørrelse på undertekst."
 
 #
 msgid "Toggle the tv and the radio player..."
@@ -15083,11 +15085,6 @@ msgstr "Vest"
 msgid "West limit set"
 msgstr "Sett vest grense"
 
-#
-#, fuzzy
-msgid "Western Australia"
-msgstr "Australia"
-
 msgid "Western Sahara"
 msgstr "Vest Sahara"
 
@@ -15749,6 +15746,9 @@ msgstr "Bildeplassering for bilde i bilde"
 
 msgid "Zap focus to main screen"
 msgstr "Gå til hovedmeny"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Zappe modus"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2013-10-20 19:13-0300\n"
 "Last-Translator: Diogo <pingflood@gmail.com>\n"
 "Language-Team: Traduzido por Frank Viana <franksrviana@gmail.com>\n"
@@ -2406,7 +2406,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3423,6 +3423,9 @@ msgstr ""
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Configurar se um ícone deve ser exibido quando sua antena motorizada está se movendo."
+
+msgid "Configure whether service picons will be shown in number zap."
+msgstr ""
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -6289,6 +6292,9 @@ msgstr ""
 msgid "Import remote receiver URL"
 msgstr ""
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6548,9 +6554,6 @@ msgstr "Usar estas configurações?"
 
 msgid "Is this video mode ok?"
 msgstr "Este modo de vídeo está correto?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #, fuzzy
 msgid "Isle of Man"
@@ -6934,9 +6937,6 @@ msgstr ""
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -6960,7 +6960,7 @@ msgstr "Configurar adaptador"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Configurar adaptador"
+msgstr "Configurar disco rígido"
 
 msgid "MAC:"
 msgstr ""
@@ -7431,7 +7431,7 @@ msgstr "Grupos Favoritos Multi EPG"
 
 #, fuzzy
 msgid "MultiLib: "
-msgstr "Múltiplos satélites"
+msgstr "Multimídia"
 
 msgid "MultiTranscoding: "
 msgstr ""
@@ -7883,9 +7883,6 @@ msgid "North"
 msgstr "Norte"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #, fuzzy
@@ -10341,6 +10338,9 @@ msgstr "Selecione a entrada de vídeo com os botões de cima/baixo"
 msgid "Select video mode"
 msgstr "Selecione o modo de vídeo"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Selecione a rede sem fio"
 
@@ -10944,6 +10944,10 @@ msgstr "Exibir descrição estendida"
 msgid "Show packages to be updated"
 msgstr ""
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Usar a numeração oficial dos canais"
+
 msgid "Show picons in channel selection list"
 msgstr ""
 
@@ -11379,10 +11383,6 @@ msgstr "Sul"
 
 msgid "South Africa"
 msgstr ""
-
-#, fuzzy
-msgid "South Australia"
-msgstr "Italiano"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -13700,10 +13700,6 @@ msgstr "Oeste"
 msgid "West limit set"
 msgstr "Definir limite oeste"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "Italiano"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -14329,6 +14325,9 @@ msgstr "Zap para janela PiP"
 
 msgid "Zap focus to main screen"
 msgstr "Zap para janela principal"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Modo Zap"

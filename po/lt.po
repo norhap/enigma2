@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
-"PO-Revision-Date: 2020-02-09 13:30+0200\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"PO-Revision-Date: 2020-02-29 09:02+0200\n"
 "Last-Translator: Audronis Grincevicius <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -2286,9 +2286,8 @@ msgstr "Paleisti atkūrimo meniu"
 msgid "Bootloader update required!"
 msgstr "Įkrovos tvarkyklę reikia atnaujinti!"
 
-#, fuzzy
 msgid "Bootup time"
-msgstr "Rūšiuoti pagal laiką"
+msgstr "Įkrovimo laikas"
 
 msgid "Bosnia and Herzegovina"
 msgstr "Bosnija ir Hercogovina"
@@ -2299,7 +2298,8 @@ msgstr "Botsvana"
 msgid "Bouvet Island"
 msgstr "Buveto sala"
 
-msgid "Brand: "
+#, fuzzy
+msgid "Brand/Meta: "
 msgstr "Gamintojas: "
 
 msgid "Brazil"
@@ -3285,6 +3285,9 @@ msgstr "Nustatykite ar info juostoje rodyti rotoriaus poziciją"
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Nustatykite ar sukant motorizuotą anteną, info juostoje turi būti rodoma piktograma."
+
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Konfigūruokite, ar kanalų logotipai bus parodyti jungiant skaičius."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr "Konfigūruokite, ar \"įrašymo\" simbolis (monitoriaus temoje ir LCD temoje) matomi tik realiai įrašant ar taip pat transliacijoms ir pseudo įrašams (pvz EPGrefresh)."
@@ -5037,9 +5040,8 @@ msgstr "Išorinių subtitrų dialogų spalvinimas"
 msgid "External subtitle switch fonts"
 msgstr "Išorinių subtitrų perjungiami šriftai"
 
-#, fuzzy
 msgid "Externally powered"
-msgstr "Išorinė saugykla %s"
+msgstr "Išoriškai maitinama"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Papildomo laiko miego laikmačio neaktyvumo ignoravimui pabaiga"
@@ -6057,6 +6059,9 @@ msgstr "Importuoti epg iš nuotolinio imtuvo URL"
 msgid "Import remote receiver URL"
 msgstr "Importuoti nuotolinio imtuvo URL"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr "Tiesioginiame vaizde palaukite keletą sekundžių po to, kai paspausite skaitinį mygtuką, prieš pradėdami daryti prielaidą, kad bus įvestas reikiamas kanalo numeris. Numatytasis: 5 sekundės. Jei nustatysite nulį, reikės patvirtinti 'OK'. "
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr "Daugeliu atvejų tai turėtų būti nustatyta 'Ne'. Įjunkite tik jei turite labai konkretų poreikį."
 
@@ -6303,9 +6308,6 @@ msgstr "Ar šie nustatymai geri?"
 
 msgid "Is this video mode ok?"
 msgstr "Ar šis vaizdo režimas tinkamas?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 msgid "Isle of Man"
 msgstr "Meno sala"
@@ -6675,9 +6677,6 @@ msgstr "Ilguma"
 
 msgid "Loop through from"
 msgstr "Kilpą iš"
-
-msgid "Lord Howe Island"
-msgstr "Lordo Hau sala"
 
 msgid "Lower case"
 msgstr "Mažosios raidės"
@@ -7473,9 +7472,8 @@ msgstr "Nebudėti"
 msgid "No stream clients"
 msgstr "Transliacijų klientų nėra"
 
-#, fuzzy
 msgid "No subtitles available"
-msgstr "Atnaujinimų nėra"
+msgstr "Subtitrų nėra"
 
 msgid "No tags are set on these movies."
 msgstr "Jokios žymos šiems filmams nenustatytos."
@@ -7571,9 +7569,6 @@ msgstr "Šiaurė"
 
 msgid "Northern Mariana Islands"
 msgstr "Šiaurinės Marianos Salos"
-
-msgid "Northern Territory"
-msgstr "Šiaurinė teritorija"
 
 msgid "Norway"
 msgstr "Norvegija"
@@ -9931,6 +9926,9 @@ msgstr "Pasirinkite vaizdo įvestį su aukštyn / žemyn mygtukais"
 msgid "Select video mode"
 msgstr "Pasirinkite vaizdo režimą"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr "Pasirinkite, ar jūsų SCR įrenginys yra išoriškai maitinamas."
+
 msgid "Select wireless network"
 msgstr "Išsirinkite belaidį tinklą"
 
@@ -10498,6 +10496,9 @@ msgstr "Rodyti arba slėpti išplėstą aprašymą, (priklauso nuo temos)."
 msgid "Show packages to be updated"
 msgstr "Rodyti atnaujinamus paketus"
 
+msgid "Show picons during channel number input"
+msgstr "Rodyti logotipus įvedant kanalo numerį"
+
 msgid "Show picons in channel selection list"
 msgstr "Kanalų sąrašo lange rodyti logotipus"
 
@@ -10912,9 +10913,6 @@ msgstr "Pietų"
 msgid "South Africa"
 msgstr "Pietų Afrika"
 
-msgid "South Australia"
-msgstr "Pietų Australija"
-
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Pietų Džordžijos ir Pietų Sandvičo Salos"
 
@@ -11274,13 +11272,11 @@ msgstr "Subtitrai"
 msgid "Subtitles Settings"
 msgstr "Subtitrų nustatymai"
 
-#, fuzzy
 msgid "Subtitles off"
-msgstr "Subtitrai"
+msgstr "Subtitrai išjungti"
 
-#, fuzzy
 msgid "Subtitles on"
-msgstr "Subtitrai"
+msgstr "Subtitrai įjungti"
 
 msgid "Succeeded:"
 msgstr "Pavyko:"
@@ -11452,7 +11448,7 @@ msgstr "TMBD informacija apie įvykį"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "Adga, Pasvalys, Lietuva\n"
-"2020-02-09 versija"
+"2020-02-29 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -12254,9 +12250,8 @@ msgstr "Nustatyti iškirpimo žymeklį šioje pozicijoje"
 msgid "Toggle dashed flickering line for this service"
 msgstr "Perjungti punktyrinę, mirgančią liniją šiam kanalui"
 
-#, fuzzy
 msgid "Toggle default subtitles"
-msgstr "Pergrupuoti subtitrus"
+msgstr "Perjungti numatytuosius subtitrus"
 
 msgid "Toggle infoBar"
 msgstr "Perjungti info juostą"
@@ -12267,9 +12262,8 @@ msgstr "Įjunkite naujus teksto įterpimus prieš esamą tekstą arba perrašyki
 msgid "Toggle show/hide"
 msgstr "Perjungti rodyti/slėpti"
 
-#, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Nustatykite numatytąjį rūšiavimo būdą."
+msgstr "Perjungti numatytuosius subtitrus"
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Perjungti tv ir radijo grotuvus..."
@@ -13181,9 +13175,6 @@ msgstr "Vakarai"
 msgid "West limit set"
 msgstr "Nustatykite vakarų ribą"
 
-msgid "Western Australia"
-msgstr "Vakarų Australija"
-
 msgid "Western Sahara"
 msgstr "Vakarų Sachara"
 
@@ -13806,6 +13797,9 @@ msgstr "Perjungti vaizdo centrą vaizde"
 
 msgid "Zap focus to main screen"
 msgstr "Perjungti į pagrindinį ekraną"
+
+msgid "Zap key delay for channel number input"
+msgstr "Jungiamo mygtuko delsa kanalo numerio įvedimui"
 
 msgid "Zap mode"
 msgstr "Perjungimo režimas"

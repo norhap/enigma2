@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -2446,7 +2446,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3466,6 +3466,10 @@ msgstr "Rotor konumunun bilgi çubuğunda görünürlüğünü yapılandır."
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Motorlu çanak hareket halindeyken bir simge gösterilmesinin gereken olup olmadığını yapılandırın."
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Servis simgelerinin kanal seçim listesinde görünme şeklini yapılandır."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -6371,6 +6375,9 @@ msgstr "Yedek cihaz  URL"
 msgid "Import remote receiver URL"
 msgstr "Yedek cihaz  URL"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6631,9 +6638,6 @@ msgstr "Bu ayar Tamam mı?"
 
 msgid "Is this video mode ok?"
 msgstr "Bu video modu iyi mi?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #, fuzzy
 msgid "Isle of Man"
@@ -7019,9 +7023,6 @@ msgstr "Boylam"
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -7045,7 +7046,7 @@ msgstr "Ağ donanım ayarları"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Ağ donanım ayarları"
+msgstr "HDD Ayarı"
 
 msgid "MAC:"
 msgstr ""
@@ -7969,9 +7970,6 @@ msgid "North"
 msgstr "Kuzey"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #, fuzzy
@@ -10442,6 +10440,9 @@ msgstr "Yukarı / aşağı düğmeleri ile  video girişi seçin"
 msgid "Select video mode"
 msgstr "Video modu seç"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Kablosuz ağ seçin"
 
@@ -11051,6 +11052,10 @@ msgstr "Geniş açıklama göster"
 msgid "Show packages to be updated"
 msgstr "Güncellenebilir paketleri göster."
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Standart kanal numaraları"
+
 msgid "Show picons in channel selection list"
 msgstr ""
 
@@ -11484,10 +11489,6 @@ msgstr "Güney"
 
 msgid "South Africa"
 msgstr ""
-
-#, fuzzy
-msgid "South Australia"
-msgstr "İtalyanca"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -12903,7 +12904,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Seçileni sıralama yöntemi:"
+msgstr "Altyazı yazı tipi boyutunu yapılandırın."
 
 msgid "Toggle the tv and the radio player..."
 msgstr ""
@@ -13846,10 +13847,6 @@ msgstr "Batı"
 msgid "West limit set"
 msgstr "Batı limit ayarı"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "İtalyanca"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -14478,6 +14475,9 @@ msgstr "Resim içinde Resim (RiR) kanal değiştir."
 
 msgid "Zap focus to main screen"
 msgstr "Ana ekranda kanal değiştir"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Kanal Değş. Modu"

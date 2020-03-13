@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2016-11-17 12:51+0200\n"
 "Last-Translator: vovan43<vovan43@ex.ua>, sety <tim1065@mail.ru>, Irkoff <irkoff@gmail.com>\n"
 "Language-Team: gisclub.tv <http://gisclub.tv/>\n"
@@ -2468,7 +2468,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3492,6 +3492,10 @@ msgstr "Налаштування становища ротора буде чи �
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Виберіть, чи потрібно показати іконку при русі антени з мотопідвісом."
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Налаштування відображення піконів в списку каналів "
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -6401,6 +6405,9 @@ msgstr "Запасний URL віддаленого приймача"
 msgid "Import remote receiver URL"
 msgstr "Запасний URL віддаленого приймача"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6663,9 +6670,6 @@ msgstr "Цей варіант налаштування вас влаштовує
 
 msgid "Is this video mode ok?"
 msgstr "Встановити даний відеорежим?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #, fuzzy
 msgid "Isle of Man"
@@ -7062,9 +7066,6 @@ msgstr "Довгота"
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -7088,7 +7089,7 @@ msgstr "Налаштування адаптера"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Налаштування адаптера"
+msgstr "Налаштування диска"
 
 msgid "MAC:"
 msgstr ""
@@ -8013,9 +8014,6 @@ msgid "North"
 msgstr "Північ"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #, fuzzy
@@ -10497,6 +10495,9 @@ msgstr "Виберіть відеовхід кнопками вгору/вниз
 msgid "Select video mode"
 msgstr "Виберіть відеорежим"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Виберіть бездротову мережу"
 
@@ -11106,6 +11107,10 @@ msgstr "Показати розширений опис"
 msgid "Show packages to be updated"
 msgstr "Показати пакети, які будуть оновлені"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Показати пікони в списку каналів"
+
 msgid "Show picons in channel selection list"
 msgstr "Показати пікони в списку каналів"
 
@@ -11542,10 +11547,6 @@ msgstr "Південь"
 
 msgid "South Africa"
 msgstr ""
-
-#, fuzzy
-msgid "South Australia"
-msgstr "Італійський"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -12989,7 +12990,7 @@ msgstr "Переключення показати / приховати"
 
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Впорядкувати по:"
+msgstr "Налаштування розміру шрифту субтитрів."
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Телевізор та радіо плеєр..."
@@ -13939,10 +13940,6 @@ msgstr "Захід"
 msgid "West limit set"
 msgstr "Увімкнути обмеження на захід"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "Італійський"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -14598,6 +14595,9 @@ msgstr "Переключитись в екрані PiP"
 
 msgid "Zap focus to main screen"
 msgstr "Переключитись в головному екрані"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Режими екрана при перемиканні"

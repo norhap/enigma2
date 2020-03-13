@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -2450,7 +2450,7 @@ msgstr "Botswana"
 msgid "Bouvet Island"
 msgstr "Bouvet saar"
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3459,6 +3459,10 @@ msgstr "Määra, kas antennipööraja asendit näidatakse või ei näidata infor
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Määra, kas mootori liikumisel näidatakse ikooni."
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Määra, kas teenuse picon näidatakse kanalivaliku nimekirjas."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -5026,9 +5030,9 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Viga"
 
-#, python-format
+#, fuzzy, python-format
 msgid "Error %s"
-msgstr "Viga %s"
+msgstr "Viga"
 
 msgid "Error code"
 msgstr "Veakood"
@@ -6343,6 +6347,9 @@ msgstr "Impordi kaugvastuvõtja URL-ist"
 msgid "Import remote receiver URL"
 msgstr "Impordi kaugvastuvõtja URL"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6601,9 +6608,6 @@ msgstr "Kasutad neid seadeid?"
 
 msgid "Is this video mode ok?"
 msgstr "Kas see videoseadistus sobib?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 msgid "Isle of Man"
 msgstr "Mani saar"
@@ -6985,10 +6989,6 @@ msgstr "Pikkuskraad"
 msgid "Loop through from"
 msgstr "Läbijooks seadmest"
 
-#, fuzzy
-msgid "Lord Howe Island"
-msgstr "Fääri saared"
-
 msgid "Lower case"
 msgstr "Väiketähed"
 
@@ -7011,7 +7011,7 @@ msgstr "Võrgukaardi seaded"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Võrgukaardi seaded"
+msgstr "Kõvaketta seaded"
 
 msgid "MAC:"
 msgstr ""
@@ -7930,10 +7930,6 @@ msgstr "Põhi"
 
 msgid "Northern Mariana Islands"
 msgstr "Põhja-Mariaanid"
-
-#, fuzzy
-msgid "Northern Territory"
-msgstr "Prantsuse Lõunaalad"
 
 msgid "Norway"
 msgstr "Norra"
@@ -10386,6 +10382,9 @@ msgstr "Vali video sisend"
 msgid "Select video mode"
 msgstr "Vali video töörežiim"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Vali WiFi võrk"
 
@@ -10992,6 +10991,10 @@ msgstr "Näita pikemat saatetutvustust"
 msgid "Show packages to be updated"
 msgstr "Näita pakette mida peaks uuendama"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Näita piconeid kanalivaliku nimekirjas"
+
 msgid "Show picons in channel selection list"
 msgstr "Näita piconeid kanalivaliku nimekirjas"
 
@@ -11421,10 +11424,6 @@ msgstr "Lõuna"
 
 msgid "South Africa"
 msgstr "Lõuna-Aafrika"
-
-#, fuzzy
-msgid "South Australia"
-msgstr "Austraalia"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Lõuna-Georgia ja Lõuna-Sandwichi saared"
@@ -12851,7 +12850,7 @@ msgstr "Vaheta näita/peida"
 
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Vali järjestusviis:"
+msgstr "Määra subtiitrite tähesuurus."
 
 msgid "Toggle the tv and the radio player..."
 msgstr "Kuula raadiot"
@@ -13787,10 +13786,6 @@ msgstr "Lääs"
 msgid "West limit set"
 msgstr "Lääne piir on määratud"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "Austraalia"
-
 msgid "Western Sahara"
 msgstr "Lääne-Sahara"
 
@@ -14431,6 +14426,9 @@ msgstr "Kanalivahetus PiP kanalil"
 
 msgid "Zap focus to main screen"
 msgstr "Kanalivahetus põhikanalil"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Kanalivahetus"

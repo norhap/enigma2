@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2015-08-30 09:00+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -2701,7 +2701,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3814,6 +3814,10 @@ msgstr "Določitev prikaza položaja motorja v informacijski vrstici"
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Določitev prikaza simbolične slike pri premikanju motoriziranega satelitskega krožnika. "
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Določitev prikaza majhnih slik kanalov (t.i. piconsi) v seznamu kanalov."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -7067,6 +7071,9 @@ msgstr "Naslov rezervnega oddaljenega sprejemnika"
 msgid "Import remote receiver URL"
 msgstr "Naslov rezervnega oddaljenega sprejemnika"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -7370,9 +7377,6 @@ msgstr "Uporabim te nastavitve?"
 #
 msgid "Is this video mode ok?"
 msgstr "Je izbrana ločljivost ustrezna?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #
 #, fuzzy
@@ -7816,9 +7820,6 @@ msgstr "Zemljepisna dolžina [Lon]"
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -7843,7 +7844,7 @@ msgstr "Nastavitve omrežnega vmesnika"
 #
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Nastavitve omrežnega vmesnika"
+msgstr "Nastavitve trdega diska"
 
 msgid "MAC:"
 msgstr ""
@@ -8906,9 +8907,6 @@ msgid "North"
 msgstr "Sever"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #
@@ -11751,6 +11749,9 @@ msgstr "Z gor in dol tipkami izberite video vhod"
 msgid "Select video mode"
 msgstr "Izberite video način"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 #
 msgid "Select wireless network"
 msgstr "Izberite brezžično omrežje"
@@ -12437,6 +12438,10 @@ msgstr "Prikaz razširjenih informacij"
 msgid "Show packages to be updated"
 msgstr "Prikaz paketov, ki bodo nadgrajeni"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Uporaba uradnega številčenja kanalov"
+
 msgid "Show picons in channel selection list"
 msgstr ""
 
@@ -12936,11 +12941,6 @@ msgstr "Jug"
 
 msgid "South Africa"
 msgstr ""
-
-#
-#, fuzzy
-msgid "South Australia"
-msgstr "Italjansko"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -14491,10 +14491,9 @@ msgstr ""
 msgid "Toggle show/hide"
 msgstr ""
 
-#
 #, fuzzy
 msgid "Toggle the default subtitles"
-msgstr "Izbor načina razvrščanja:"
+msgstr "Določitev velikosti pisave podnapisov."
 
 msgid "Toggle the tv and the radio player..."
 msgstr ""
@@ -15566,11 +15565,6 @@ msgstr "Zahod"
 msgid "West limit set"
 msgstr ""
 
-#
-#, fuzzy
-msgid "Western Australia"
-msgstr "Italjansko"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -16229,6 +16223,9 @@ msgid "Zap focus to Picture in Picture"
 msgstr ""
 
 msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "Zap key delay for channel number input"
 msgstr ""
 
 #

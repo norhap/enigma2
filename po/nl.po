@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Frenske <voorzitter@openpli.org>\n"
 "Language-Team: PLiteam <translators@openpli.org>\n"
@@ -2446,7 +2446,7 @@ msgstr "Botswana"
 msgid "Bouvet Island"
 msgstr "Bouvet eilanden"
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3647,6 +3647,13 @@ msgstr "Indien geactiveerd dan wordt de positie van de schotel aangegeven op de 
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Indien geactiveerd, dan is de activiteit van de diseqcmotor zichtbaar. "
+
+#, fuzzy
+msgid "Configure whether service picons will be shown in number zap."
+msgstr ""
+"Indien geactiveerd, dan worden de picons weergegeven in de zenderlijst.\n"
+"\n"
+"Picons zijn zenderlogo's zoals bekend van TV. Deze moet u eerst te downloaden via menu -  applicaties - groene toets - picons. Daar staan picons in diverse formaten."
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -4855,7 +4862,7 @@ msgstr "Fout - zoeken mislukt (%s)!"
 
 #, python-format
 msgid "ERROR downloading file %s"
-msgstr "FOUT tijdens het downloaden van %s"
+msgstr ""
 
 msgid "East"
 msgstr "Oost"
@@ -5227,9 +5234,9 @@ msgstr "Eritrea"
 msgid "Error"
 msgstr "Fout"
 
-#, python-format
+#, fuzzy, python-format
 msgid "Error %s"
-msgstr "Fout %s"
+msgstr "Fout"
 
 msgid "Error code"
 msgstr "Foutcode"
@@ -5264,10 +5271,13 @@ msgid "Error stop stream!"
 msgstr "Fout stop de stream!"
 
 msgid "Error when writing epg.dat on server"
-msgstr "Fout tijdens het opslaan van de epg.dat op de server"
+msgstr ""
 
+#, fuzzy
 msgid "Error while retreiving epg.dat from server"
-msgstr "Fout tijdens het ophalen van de epg.dat van de server"
+msgstr ""
+"Fout tijdens het ophalen van de Fallback timer informatie\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -5277,8 +5287,11 @@ msgstr ""
 "Fout tijdens het ophalen van de Fallback timer informatie\n"
 "%s"
 
+#, fuzzy
 msgid "Error while retreiving location of epg.dat on server"
-msgstr "Fout tijdens het benaderen van de epg.dat locatie op de server "
+msgstr ""
+"Fout tijdens het ophalen van de Fallback timer informatie\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -6547,6 +6560,9 @@ msgstr "Importeer data vanaf een externe ontvanger"
 msgid "Import remote receiver URL"
 msgstr "Locatie van de externe ontvanger"
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6805,9 +6821,6 @@ msgstr "Zijn deze instellingen correct?"
 
 msgid "Is this video mode ok?"
 msgstr "Is deze videomode correct?"
-
-msgid "Is your SCR device externally powered"
-msgstr "Is uw SCR apparaat voorzien van externe voeding"
 
 msgid "Isle of Man"
 msgstr "Ieland Man"
@@ -7189,10 +7202,6 @@ msgstr "Lengtegraad"
 
 msgid "Loop through from"
 msgstr "Doorgelust vanaf ..."
-
-#, fuzzy
-msgid "Lord Howe Island"
-msgstr "Faeröer eilanden"
 
 msgid "Lower case"
 msgstr "Kleine letters"
@@ -7980,7 +7989,7 @@ msgid "No displayable files on this medium found!"
 msgstr "Geen weer te geven bestanden op dit medium gevonden!"
 
 msgid "No epg.dat file found server"
-msgstr "Geen epg.dat file gevonden op de server"
+msgstr ""
 
 msgid "No event info found, recording indefinitely."
 msgstr "Geen EPG gegevens gevonden. Opname voor onbepaalde tijd."
@@ -8130,10 +8139,6 @@ msgstr "Noord"
 
 msgid "Northern Mariana Islands"
 msgstr "Noordelijke Mariana eilanden"
-
-#, fuzzy
-msgid "Northern Territory"
-msgstr "Franse Zuidelijke Gebieden"
 
 msgid "Norway"
 msgstr "Noorwegen"
@@ -10597,6 +10602,10 @@ msgstr "Selecteer video-ingang met de omhoog/omlaag toetsen"
 msgid "Select video mode"
 msgstr "Selecteer videomodus"
 
+#, fuzzy
+msgid "Select whether your SCR device is externally powered."
+msgstr "Is uw SCR apparaat voorzien van externe voeding"
+
 msgid "Select wireless network"
 msgstr "Selecteer draadloos netwerk"
 
@@ -11211,6 +11220,10 @@ msgstr "Weergave met uitgebreide informatie"
 msgid "Show packages to be updated"
 msgstr "Toon de te updaten pakketten"
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Picons in kanalenlijst tonen"
+
 msgid "Show picons in channel selection list"
 msgstr "Picons in kanalenlijst tonen"
 
@@ -11637,10 +11650,6 @@ msgstr "Zuid"
 
 msgid "South Africa"
 msgstr "Zuid Afrika"
-
-#, fuzzy
-msgid "South Australia"
-msgstr "Australië"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Zuid-Georgia en de Zuidelijke Sandwicheilanden"
@@ -14011,10 +14020,6 @@ msgstr "West"
 msgid "West limit set"
 msgstr "Westlimiet gezet"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "Australië"
-
 msgid "Western Sahara"
 msgstr "Westelijke Sahara"
 
@@ -14682,6 +14687,9 @@ msgstr "Zappen in PIP scherm"
 
 msgid "Zap focus to main screen"
 msgstr "Zappen in hoofdscherm"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Zapmodus"

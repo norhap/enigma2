@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2018-12-17 02:51+0200\n"
 "Last-Translator: Hazem <moustafagamal@hotmail.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -2493,7 +2493,7 @@ msgstr "بوتسوانا"
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3521,6 +3521,9 @@ msgid "Configure whether or not a rotor position will be displayed on the infoba
 msgstr ""
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
+msgstr ""
+
+msgid "Configure whether service picons will be shown in number zap."
 msgstr ""
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
@@ -6497,6 +6500,9 @@ msgstr ""
 msgid "Import remote receiver URL"
 msgstr ""
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6778,9 +6784,6 @@ msgstr "هذه الإعدادات مناسبة؟"
 #, fuzzy
 msgid "Is this video mode ok?"
 msgstr "هل توافق على وضعية الفيديو هذه؟"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #
 #, fuzzy
@@ -7212,9 +7215,6 @@ msgstr "خط الطول"
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -7237,10 +7237,9 @@ msgstr "عنوان IP"
 msgid "MAC address settings"
 msgstr "إعدادات المحول"
 
-#
 #, fuzzy
 msgid "MAC address setup"
-msgstr "إعدادات المحول"
+msgstr "ضبط القرص الصلب"
 
 msgid "MAC:"
 msgstr ""
@@ -8237,9 +8236,6 @@ msgid "North"
 msgstr "شمال"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #
@@ -10835,6 +10831,9 @@ msgstr "أختيار مدخل الفيديو بأزرار أعلى/أسفا"
 msgid "Select video mode"
 msgstr "أختيار اسلوب الفيديو"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "اختيار الشبكة اللاسلكية"
 
@@ -11472,6 +11471,10 @@ msgstr "عرض وصف متقدم"
 msgid "Show packages to be updated"
 msgstr ""
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "عرض ارقام القنوات في قائمة القنوات"
+
 msgid "Show picons in channel selection list"
 msgstr ""
 
@@ -11936,10 +11939,6 @@ msgstr "جنوب"
 
 msgid "South Africa"
 msgstr "جنوب أفريقيا"
-
-#, fuzzy
-msgid "South Australia"
-msgstr "استراليا"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -14401,10 +14400,6 @@ msgstr "غرب"
 msgid "West limit set"
 msgstr ""
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "استراليا"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -15030,6 +15025,9 @@ msgid "Zap focus to Picture in Picture"
 msgstr ""
 
 msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "Zap key delay for channel number input"
 msgstr ""
 
 msgid "Zap mode"

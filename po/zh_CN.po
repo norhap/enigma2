@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2016-06-17 12:13+0800\n"
 "Last-Translator: nx111 <gdzdz@163.com>\n"
 "Language-Team: NEWBOLT\n"
@@ -2349,7 +2349,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3345,6 +3345,9 @@ msgid "Configure whether or not a rotor position will be displayed on the infoba
 msgstr ""
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
+msgstr ""
+
+msgid "Configure whether service picons will be shown in number zap."
 msgstr ""
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
@@ -4539,9 +4542,9 @@ msgstr ""
 msgid "ERROR - failed to scan (%s)!"
 msgstr "错误 - 扫描 (%s)失败!"
 
-#, fuzzy, python-format
+#, python-format
 msgid "ERROR downloading file %s"
-msgstr "正在下载歌词"
+msgstr ""
 
 msgid "East"
 msgstr "东"
@@ -6091,9 +6094,8 @@ msgstr ""
 msgid "IPv6"
 msgstr ""
 
-#, fuzzy
 msgid "IPv6 setup"
-msgstr "视频设置"
+msgstr ""
 
 #, fuzzy
 msgid "IPv6 support"
@@ -6194,6 +6196,9 @@ msgid "Import from remote receiver URL"
 msgstr ""
 
 msgid "Import remote receiver URL"
+msgstr ""
+
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
 msgstr ""
 
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
@@ -6454,9 +6459,6 @@ msgid "Is this setting ok?"
 msgstr ""
 
 msgid "Is this video mode ok?"
-msgstr ""
-
-msgid "Is your SCR device externally powered"
 msgstr ""
 
 #, fuzzy
@@ -6839,9 +6841,6 @@ msgstr "经度"
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -6862,9 +6861,8 @@ msgstr "当前CEC地址"
 msgid "MAC address settings"
 msgstr "网卡设置"
 
-#, fuzzy
 msgid "MAC address setup"
-msgstr "网卡设置"
+msgstr ""
 
 msgid "MAC:"
 msgstr ""
@@ -7782,9 +7780,6 @@ msgid "North"
 msgstr "北"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #, fuzzy
@@ -10227,6 +10222,9 @@ msgstr "用上下键选择视频"
 msgid "Select video mode"
 msgstr "设置视频模式"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "选择无线网络"
 
@@ -10816,6 +10814,10 @@ msgstr ""
 msgid "Show packages to be updated"
 msgstr ""
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "使用快速扫描频道编号"
+
 msgid "Show picons in channel selection list"
 msgstr ""
 
@@ -11241,10 +11243,6 @@ msgstr "南"
 
 msgid "South Africa"
 msgstr ""
-
-#, fuzzy
-msgid "South Australia"
-msgstr "意大利语"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -13503,10 +13501,6 @@ msgstr "西"
 msgid "West limit set"
 msgstr ""
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "意大利语"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -14101,6 +14095,9 @@ msgid "Zap focus to Picture in Picture"
 msgstr "切换到画中画"
 
 msgid "Zap focus to main screen"
+msgstr ""
+
+msgid "Zap key delay for channel number input"
 msgstr ""
 
 msgid "Zap mode"

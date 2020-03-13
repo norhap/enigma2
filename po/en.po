@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:57+0330\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: \n"
 "Last-Translator: satdreamgr\n"
 "Language-Team: \n"
@@ -2440,7 +2440,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-msgid "Brand: "
+msgid "Brand/Meta: "
 msgstr ""
 
 msgid "Brazil"
@@ -3458,6 +3458,9 @@ msgstr ""
 
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr "Configure whether or not an icon should be shown when your motorized dish is moving."
+
+msgid "Configure whether service picons will be shown in number zap."
+msgstr ""
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
@@ -6332,6 +6335,9 @@ msgstr ""
 msgid "Import remote receiver URL"
 msgstr ""
 
+msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
+msgstr ""
+
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -6593,9 +6599,6 @@ msgstr "Is this setting ok?"
 
 msgid "Is this video mode ok?"
 msgstr "Is this video mode ok?"
-
-msgid "Is your SCR device externally powered"
-msgstr ""
 
 #, fuzzy
 msgid "Isle of Man"
@@ -6979,9 +6982,6 @@ msgstr "Longitude"
 msgid "Loop through from"
 msgstr ""
 
-msgid "Lord Howe Island"
-msgstr ""
-
 msgid "Lower case"
 msgstr ""
 
@@ -7005,7 +7005,7 @@ msgstr "Adapter settings"
 
 #, fuzzy
 msgid "MAC address setup"
-msgstr "Adapter settings"
+msgstr "Hard disk setup"
 
 msgid "MAC:"
 msgstr ""
@@ -7930,9 +7930,6 @@ msgid "North"
 msgstr "North"
 
 msgid "Northern Mariana Islands"
-msgstr ""
-
-msgid "Northern Territory"
 msgstr ""
 
 #, fuzzy
@@ -10390,6 +10387,9 @@ msgstr "Select video input with up/down buttons"
 msgid "Select video mode"
 msgstr "Select video mode"
 
+msgid "Select whether your SCR device is externally powered."
+msgstr ""
+
 msgid "Select wireless network"
 msgstr "Select wireless network"
 
@@ -10993,6 +10993,10 @@ msgstr "Show extended description"
 msgid "Show packages to be updated"
 msgstr ""
 
+#, fuzzy
+msgid "Show picons during channel number input"
+msgstr "Use official channel numbering"
+
 msgid "Show picons in channel selection list"
 msgstr ""
 
@@ -11428,10 +11432,6 @@ msgstr "South"
 
 msgid "South Africa"
 msgstr ""
-
-#, fuzzy
-msgid "South Australia"
-msgstr "Italian"
 
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
@@ -13753,10 +13753,6 @@ msgstr "West"
 msgid "West limit set"
 msgstr "West limit set"
 
-#, fuzzy
-msgid "Western Australia"
-msgstr "Italian"
-
 msgid "Western Sahara"
 msgstr ""
 
@@ -14381,6 +14377,9 @@ msgstr "Zap focus to Picture in Picture"
 
 msgid "Zap focus to main screen"
 msgstr "Zap focus to main screen"
+
+msgid "Zap key delay for channel number input"
+msgstr ""
 
 msgid "Zap mode"
 msgstr "Zap mode"
