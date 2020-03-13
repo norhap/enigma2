@@ -667,7 +667,7 @@ msgid "About"
 msgstr "Acerca de"
 
 msgid "About..."
-msgstr "Acerca de…"
+msgstr "Acerca de..."
 
 msgid "Accesspoint:"
 msgstr "Punto de acceso:"
@@ -9403,8 +9403,8 @@ msgstr "Teclado"
 msgid "Manual scan"
 msgstr "Búsqueda manual"
 
-msgid "Multiboot"
-msgstr "Multiboot"
+msgid "Multiboot image selector"
+msgstr "Seleccionar imagen Multiboot"
 
 msgid "Plugins"
 msgstr "Complementos"
@@ -9640,7 +9640,7 @@ msgstr "Configure el cuarto idioma de audio."
 msgid "Configure the fourth subtitle language."
 msgstr "Configure el cuarto idioma de subtítulos."
 
-msgid "Configure the function of the '0' button do when PIP is active."
+msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr "Configure la función del botón ‘0’ cuando PIP está activo."
 
 msgid "Configure the gateway."
@@ -16060,3 +16060,23 @@ msgstr "Configure si necesita intercambiar la tabla de paleta EN300743."
 msgid "Set startup service"
 msgstr "Establecer canal de inicio"
 
+msgid "Behavior of '0' button in PiP mode"
+msgstr "Comportamiento del botón '0' en modo PiP"
+
+msgid "Close PiP with 'exit' button"
+msgstr "Cerrar PiP con el botón 'salir'"
+
+msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
+msgstr "Cuando está habilitada, la ventana PiP se puede cerrar con el botón 'salir'."
+
+msgid "Show picons during channel number input"
+msgstr "Mostrar picons durante la entrada del número de canal"
+
+msgid "Configure whether service picons will be shown in number zap."
+msgstr "Configure si los picons de canales se mostrarán en número zap."
+
+msgid "Select whether your SCR device is externally powered."
+msgstr "Seleccione si su dispositivo SCR tiene alimentación externa."
+
+msgid "Externally powered"
+msgstr "Alimentado externamente"
