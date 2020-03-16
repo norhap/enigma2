@@ -1248,7 +1248,7 @@ def movielist_open(list, session, **kwargs):
 		if not path.endswith('/'):
 			path += '/'
 		config.movielist.last_videodir.value = path
-		InfoBar.instance.showMovies(eServiceReference(stype, 0, f.path))
+		InfoBar.instance.showMovies()
 
 def audiocdscan(menuid, **kwargs):
 	try:
