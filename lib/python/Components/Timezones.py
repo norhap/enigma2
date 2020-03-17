@@ -66,12 +66,12 @@ def InitTimeZones():
 	config.timezone.area = ConfigSelection(default=area, choices=timezones.getTimezoneAreaList())
 	config.timezone.val = ConfigSelection(default=timezones.getTimezoneDefault(), choices=timezones.getTimezoneList())
 	if not config.timezone.area.value and config.timezone.val.value.find("/") == -1:
-		config.timezone.area.value = "Generic"
+		config.timezone.area.value = "Europe"
 	try:
 		tzLink = path.realpath("/etc/localtime")[20:]
 		tzSplit = tzLink.find("/")
 		if tzSplit == -1:
-			tzArea = "Generic"
+			tzArea = "Europe"
 			tzVal = tzLink
 		else:
 			tzArea = tzLink[:tzSplit]
