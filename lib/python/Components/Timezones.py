@@ -40,7 +40,7 @@ from Tools.StbHardware import setRTCoffset
 # Internet the defaults described above and listed below will be used.
 #
 DEFAULT_AREA = "Europe"
-DEFAULT_ZONE = "London"
+DEFAULT_ZONE = "Madrid"
 TIMEZONE_FILE = "/etc/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 
