@@ -4856,7 +4856,7 @@ msgid "Press OK to activate the selected%s skin."
 msgstr "Presione OK para activar el skin%s seleccionado."
 
 msgid "Press OK to keep the currently selected%s skin."
-msgstr "Presione OK para mantener el skin seleccionado%s actualmente."
+msgstr "Presione OK para mantener el skin%s seleccionado actualmente."
 
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
