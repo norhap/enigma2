@@ -16133,7 +16133,7 @@ msgid "Timezone: "
 msgstr "Zona horaria: "
 
 msgid "Currency: "
-msgstr "Monedad: "
+msgstr "Moneda: "
 
 msgid "Latitude: "
 msgstr "Latitud: "
