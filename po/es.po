@@ -7482,7 +7482,7 @@ msgid "Unable to backup settings as the AutoBackup plugin is missing, do you wan
 msgstr "No se puede realizar una copia de seguridad de la configuración porque falta el plugin AutoBackup, ¿desea continuar?"
 
 msgid ""
-"Unattended upgrade in progress\n"
+"Unattended updade in progress\n"
 "Please wait until your receiver reboots\n"
 "This may take a few minutes"
 msgstr ""
