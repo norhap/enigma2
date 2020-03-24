@@ -268,14 +268,13 @@ class Geolocation(Screen):
 			GeolocationText +=  _("Longitude: ") + str(float(longitude)) + "\n"
 
 		self["AboutScrollLabel"] = ScrollLabel(GeolocationText)
-
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
-			{
-				"cancel": self.close,
-				"ok": self.close,
-				"up": self["AboutScrollLabel"].pageUp,
-				"down": self["AboutScrollLabel"].pageDown
-			})
+		self["key_red"] = Button(_("Close"))
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "TimerEditActions"],
+									{
+										"cancel": self.close,
+										"ok": self.close,
+										"red": self.close,
+									})
 
 class Devices(Screen):
 	def __init__(self, session):

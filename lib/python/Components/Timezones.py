@@ -39,8 +39,8 @@ from Tools.StbHardware import setRTCoffset
 # based on their WAN IP address.  If the receiver is not connected to the
 # Internet the defaults described above and listed below will be used.
 #
-DEFAULT_AREA = "Generic"
-DEFAULT_ZONE = "London"
+DEFAULT_AREA = "Europe"
+DEFAULT_ZONE = "Madrid"
 TIMEZONE_FILE = "/etc/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 
