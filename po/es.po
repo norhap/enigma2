@@ -15785,7 +15785,7 @@ msgstr "Limpie papelera en red"
 msgid ""
 "Configure the number of days after which items are automatically removed from the trash can.\n"
 "A setting of 0 disables this."
-msgstr "" 
+msgstr ""
 "Configure el número de días después de los cuales los elementos se eliminan automáticamente de la papelera.\n"
 "La configuración a 0 deshabilita esto."
 
