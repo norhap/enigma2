@@ -140,16 +140,16 @@ RESULT eBouquet::flushChanges()
 		CFile f((filename + ".writing").c_str(), "w");
 		if (!f)
 			goto err;
-		if ( fprintf(f, "#NAME %s\r\n", m_bouquet_name.c_str()) < 0 )
+		if ( fprintf(f, "#NAME %s\n", m_bouquet_name.c_str()) < 0 )
 			goto err;
 		for (list::iterator i(m_services.begin()); i != m_services.end(); ++i)
 		{
 			eServiceReference tmp = *i;
 			std::string str = tmp.path;
-			if ( fprintf(f, "#SERVICE %s\r\n", tmp.toString().c_str()) < 0 )
+			if ( fprintf(f, "#SERVICE %s\n", tmp.toString().c_str()) < 0 )
 				goto err;
 			if ( i->name.length() )
-				if ( fprintf(f, "#DESCRIPTION %s\r\n", i->name.c_str()) < 0 )
+				if ( fprintf(f, "#DESCRIPTION %s\n", i->name.c_str()) < 0 )
 					goto err;
 		}
 		f.sync();
@@ -166,6 +166,15 @@ RESULT eBouquet::setListName(const std::string &name)
 	m_bouquet_name = name;
 	return 0;
 }
+
+const eDVBService::cacheID eDVBService::audioCacheTags[] = {
+	eDVBService::cMPEGAPID, eDVBService::cAC3PID,
+	eDVBService::cAACHEAPID, eDVBService::cDDPPID,
+	eDVBService::cDTSPID, eDVBService::cAACAPID,
+	eDVBService::cLPCMPID, eDVBService::cDTSHDPID,
+};
+
+const int eDVBService::nAudioCacheTags = sizeof(eDVBService::audioCacheTags) / sizeof(eDVBService::audioCacheTags[0]);
 
 eDVBService::eDVBService()
 	:m_cache(0), m_flags(0)
@@ -372,6 +381,15 @@ bool eDVBService::cacheEmpty()
 	if (m_cache)
 		for (int i=0; i < cacheMax; ++i)
 			if (m_cache[i] != -1)
+				return false;
+	return true;
+}
+
+bool eDVBService::cacheAudioEmpty()
+{
+	if (m_cache)
+		for (int i=0; i < nAudioCacheTags; ++i)
+			if (m_cache[audioCacheTags[i]] != -1)
 				return false;
 	return true;
 }
@@ -1111,8 +1129,8 @@ void eDVBDB::loadBouquet(const char *path)
 		{
 			int len;
 			if ((len = getline(&line, &linesize, fp)) < 2) break;
-			/* strip newline */
-			line[--len] = 0;
+			/* strip newline (when found) */
+			if (line[len - 1] == '\n') line[--len] = 0;
 			/* strip carriage return (when found) */
 			if (line[len - 1] == '\r') line[--len] = 0;
 			if (!strncmp(line, "#SERVICE", 8))
@@ -2376,6 +2394,22 @@ RESULT eDVBDB::startQuery(ePtr<iDVBChannelListQuery> &query, eDVBChannelQuery *q
 	else
 		query = new eDVBDBQuery(this, source, q);
 	return 0;
+}
+
+bool eDVBDB::isValidService(int tsid, int onid, int sid)
+{
+	eServiceID Sid(sid);
+	eTransportStreamID Tsid(tsid);
+	eOriginalNetworkID Onid(onid);
+	for (std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator sit(m_services.begin());
+		sit != m_services.end(); ++sit)
+	{
+		if (sit->first.getTransportStreamID() == Tsid &&
+			sit->first.getOriginalNetworkID() == Onid &&
+			sit->first.getServiceID() == Sid)
+			return true;
+	}
+	return false;
 }
 
 eServiceReference eDVBDB::searchReference(int tsid, int onid, int sid)

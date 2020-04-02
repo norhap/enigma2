@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: 2020-02-19 11:12+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -2931,6 +2931,10 @@ msgid "Circular right"
 msgstr "Jobbraforgó"
 
 #, fuzzy
+msgid "City: "
+msgstr "Kapacitás: "
+
+#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Nem helyezthető a kukába"
 
@@ -3062,6 +3066,9 @@ msgstr "Comore-szigetek"
 msgid "Compact flash"
 msgstr "Compact Flash"
 
+msgid "Compiled by: "
+msgstr ""
+
 msgid "Complete"
 msgstr "Kész"
 
@@ -3171,12 +3178,6 @@ msgstr "Állítsa be, ha a HDMI EDID ellenőrzést ki kell hagyni, mivel ez prob
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "A felirat váltson-e normál, dőlt, félkövér és félkövér dőlt között"
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
-msgstr ""
 
 msgid "Configure interface"
 msgstr "Interfész konfigurálása"
@@ -3545,6 +3546,10 @@ msgstr "Ezen információhoz nézze meg a motor technikai adatlapját , vagy hag
 msgid "Content does not fit on DVD!"
 msgstr "A tartalom nem fér fel a DVD-re!"
 
+#, fuzzy
+msgid "Continent: "
+msgstr "Folytatás"
+
 msgid "Continue"
 msgstr "Folytatás"
 
@@ -3614,6 +3619,10 @@ msgstr "Szoftverkezeló információ"
 msgid "Country for EPG event rating information"
 msgstr "Ezen információhoz nézze meg az Unicable eszköz technikai adatlapját."
 
+#, fuzzy
+msgid "Country: "
+msgstr "Ország"
+
 msgid "Cover dashed flickering line for this service"
 msgstr "A kép tetején lévő villogó csík eltakarása ezen csatornánál"
 
@@ -3661,6 +3670,10 @@ msgstr "Kuba"
 
 msgid "Curacao"
 msgstr "Curaçao"
+
+#, fuzzy
+msgid "Currency: "
+msgstr "Aktuális eszköz: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5738,6 +5751,14 @@ msgstr ""
 msgid "Genre"
 msgstr "Műfaj"
 
+#, fuzzy
+msgid "Geolocation"
+msgstr "Tárhely"
+
+#, fuzzy
+msgid "Geolocation information"
+msgstr "Szoftverkezeló információ"
+
 msgid "Georgia"
 msgstr "Grúzia"
 
@@ -6225,6 +6246,9 @@ msgstr "Az ISO fájl túl nagy ehhez a fájlrendszerhez!"
 
 msgid "ISO path"
 msgstr "ISO útvonala"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr "Izland"
@@ -6797,6 +6821,10 @@ msgstr "Utolsó frissítés jegyzéke"
 msgid "Latitude"
 msgstr "Földrajzi szélességi fok"
 
+#, fuzzy
+msgid "Latitude: "
+msgstr "Földrajzi szélességi fok"
+
 msgid "Latvia"
 msgstr "Lettország"
 
@@ -6961,6 +6989,10 @@ msgid "Long key press"
 msgstr "Hosszú gombnyomás"
 
 msgid "Longitude"
+msgstr "Földrajzi hosszúsági fok"
+
+#, fuzzy
+msgid "Longitude: "
 msgstr "Földrajzi hosszúsági fok"
 
 msgid "Loop through from"
@@ -7229,6 +7261,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Hiányzó "
+
+msgid "Mobile: "
+msgstr ""
 
 msgid "Mode"
 msgstr "Mód"
@@ -9048,6 +9083,12 @@ msgstr "Szolgáltatók"
 msgid "Providers: "
 msgstr "Szolgáltatók"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -10293,6 +10334,10 @@ msgstr "Válassza ki a beállítandó műholdat. Ha egy műholdat beállított, 
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Válassza ki, hogy mely műholdra van állítva az antennája. Ha nem tudja, válassza az 'Automatikus'-t, ekkor a készüléke megpróbálja azonosítani."
 
+#, fuzzy
+msgid "Select the time zone within the area or region."
+msgstr "Válasszon függőleges felbontást:"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Válassza ki azt a tunert, amely vezérli a forgatómotort."
 
@@ -10356,6 +10401,10 @@ msgstr "Válassza ki a szolgáltatóját, majd nyomja le az OK-t a keresés ind�
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Válassza ki a régióját. Amennyiben nem elérhető, módosítsa az 'Ország' beállítását 'mind'-re, majd válasszon egyet a lehetőségek közül."
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Válasszon függőleges felbontást:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Műholdak kiválasztása 1. (USALS)"
@@ -10675,10 +10724,6 @@ msgstr "Forgatómotor beállítása"
 
 msgid "Setup your satellite equipment"
 msgstr "Műholvevő-berendezés"
-
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "Forgatómotor beállítása"
 
 msgid "Seychelles"
 msgstr "Seychelle-szigetek"
@@ -11533,6 +11578,10 @@ msgstr "A vevőkészülék indítása készenléti módban"
 msgid "Startup to Standby"
 msgstr "Indításkor készenléti módba"
 
+#, fuzzy
+msgid "State: "
+msgstr "Bitráta:"
+
 msgid "Status"
 msgstr ""
 
@@ -11770,12 +11819,6 @@ msgstr "Suriname"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Jan Mayen-sziget"
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
-msgstr ""
 
 msgid "Swap PiP"
 msgstr "Kép-a-Képben felcserélése"
@@ -12617,6 +12660,14 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Időzóna"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Időzóna"
+
 msgid "Timer"
 msgstr "Időzítő"
 
@@ -12695,11 +12746,8 @@ msgstr "Időcsúsztatás tárhelye"
 msgid "Timeshift not possible!"
 msgstr "Időcsúsztatás nem lehetséges!"
 
-msgid "Timezone"
-msgstr "Időzóna"
-
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Időzóna"
 
 msgid "Timor-Leste"
@@ -14288,10 +14336,6 @@ msgstr "A készülék most készenlétbe kapcsol inaktivitás miatt."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Az OK gomb megnyomása után a készülék újra fog indulni."
-
-#, fuzzy
-msgid "Your timezone in the area."
-msgstr "Az eltávolítás folyamata leállítható."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

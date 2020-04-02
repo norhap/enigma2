@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budiarno Pedode\n"
 "Language-Team: \n"
@@ -2949,6 +2949,10 @@ msgid "Circular right"
 msgstr "Kanan sirkular"
 
 #, fuzzy
+msgid "City: "
+msgstr "Kapasitas: "
+
+#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Tidak bisa memindahkan ke tong sampah"
 
@@ -3083,6 +3087,9 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact flash"
 
+msgid "Compiled by: "
+msgstr ""
+
 msgid "Complete"
 msgstr "Selesai"
 
@@ -3198,12 +3205,6 @@ msgstr "Atur jika pemeriksaan HDMI EDID seharusnya dilewatkan karna ini bisa men
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Atur apakah terjemahan bisa bertukar jenis huruf antara normal, miring, tebal dan miring tebal."
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
-msgstr ""
 
 msgid "Configure interface"
 msgstr "Atur antarmuka"
@@ -3577,6 +3578,10 @@ msgstr "Periksa lembar spek penggerak anda untuk informasi ini, atau biarkan set
 msgid "Content does not fit on DVD!"
 msgstr "Isi tidak muat pada DVD!"
 
+#, fuzzy
+msgid "Continent: "
+msgstr "Lanjut"
+
 msgid "Continue"
 msgstr "Lanjut"
 
@@ -3647,6 +3652,10 @@ msgstr "Info pengelola perangkat lunak"
 msgid "Country for EPG event rating information"
 msgstr "Periksa lembar spek peralatan SCR anda untuk informasi ini"
 
+#, fuzzy
+msgid "Country: "
+msgstr "Negara"
+
 msgid "Cover dashed flickering line for this service"
 msgstr "Tutup garis putus-putus berkedip untuk layanan ini"
 
@@ -3696,6 +3705,10 @@ msgstr "Kuba"
 
 msgid "Curacao"
 msgstr ""
+
+#, fuzzy
+msgid "Currency: "
+msgstr "Perangkat saat ini: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5830,6 +5843,14 @@ msgstr ""
 msgid "Genre"
 msgstr "Gaya"
 
+#, fuzzy
+msgid "Geolocation"
+msgstr "Lokasi"
+
+#, fuzzy
+msgid "Geolocation information"
+msgstr "Info pengelola perangkat lunak"
+
 msgid "Georgia"
 msgstr ""
 
@@ -6327,6 +6348,9 @@ msgstr "Berkas ISO terlalu besar untuk filesystem ini!"
 
 msgid "ISO path"
 msgstr "Arah tuju ISO"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr "Islandia"
@@ -6910,6 +6934,10 @@ msgid "Latitude"
 msgstr "Latitude"
 
 #, fuzzy
+msgid "Latitude: "
+msgstr "Latitude"
+
+#, fuzzy
 msgid "Latvia"
 msgstr "Latvia"
 
@@ -7076,6 +7104,10 @@ msgid "Long key press"
 msgstr "Tekan tombol lama"
 
 msgid "Longitude"
+msgstr "Longitude"
+
+#, fuzzy
+msgid "Longitude: "
 msgstr "Longitude"
 
 msgid "Loop through from"
@@ -7349,6 +7381,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Hilang "
+
+msgid "Mobile: "
+msgstr ""
 
 #, fuzzy
 msgid "Mode"
@@ -9200,6 +9235,12 @@ msgstr "Penyedia"
 msgid "Providers: "
 msgstr "Penyedia"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr ""
 
@@ -10473,6 +10514,10 @@ msgstr "Pilih satelit yg ingin anda setel. Setelah satelit tsb disetel, anda bis
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Pilih satelit yg diterima parabola anda. Jika anda tidak yakin, pilih 'otomatis' dan Rx akan mencoba menentukannya untuk anda."
 
+#, fuzzy
+msgid "Select the time zone within the area or region."
+msgstr "Pilih resolusi horizontal:"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Pilih penala yang mengatur parabola bergerak."
 
@@ -10538,6 +10583,10 @@ msgstr "Pilih provider anda, dan tekan OK untuk mulai pelacakan"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Pilih wilayah anda. Jika tidak tersedia, ganti 'Negara' ke 'semua' dan pilih satu dari alternatif bawaan."
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Pilih resolusi horizontal:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Memilih satelit 1 (USALS)"
@@ -10862,10 +10911,6 @@ msgstr "Atur positioner anda"
 
 msgid "Setup your satellite equipment"
 msgstr "Atur perangkat satelit anda"
-
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "Atur positioner anda"
 
 msgid "Seychelles"
 msgstr ""
@@ -11734,6 +11779,10 @@ msgstr "Saat dihidupkan, rx akan masuk ke posisi standby"
 msgid "Startup to Standby"
 msgstr "Mulai ke Standby"
 
+#, fuzzy
+msgid "State: "
+msgstr "Bitrate:"
+
 msgid "Status"
 msgstr ""
 
@@ -11973,12 +12022,6 @@ msgid "Suriname"
 msgstr "Nama kanal"
 
 msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -12827,6 +12870,14 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Zona Waktu"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Zona Waktu"
+
 msgid "Timer"
 msgstr "Pewaktu"
 
@@ -12906,11 +12957,8 @@ msgstr "Lokasi timeshift"
 msgid "Timeshift not possible!"
 msgstr "Timeshift tidak memungkinkan!"
 
-msgid "Timezone"
-msgstr "Zona Waktu"
-
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Zona Waktu"
 
 msgid "Timor-Leste"
@@ -14533,10 +14581,6 @@ msgstr "Rx anda akan menuju standby karena tidak ada aktifitas."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Rx anda akan memulai ulang setelah menekan OK pada remote kontrol anda."
-
-#, fuzzy
-msgid "Your timezone in the area."
-msgstr "Anda bisa membatalkan penghapusan."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

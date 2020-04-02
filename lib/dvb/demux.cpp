@@ -89,6 +89,7 @@ eDVBDemux::~eDVBDemux()
 {
 #ifdef HAVE_RASPBERRYPI
 	delete decsa;
+	eDebug("[RPi eDVBDemux] delete decsa");
 #endif
 }
 
@@ -124,7 +125,7 @@ RESULT eDVBDemux::setSourceFrontend(int fenum)
 	if (res)
 	{
  		eDebug("[eDVBDemux] DMX_SET_SOURCE Frontend%d failed: %m", fenum);
-#if HAVE_AMLOGIC
+#if defined(HAVE_AMLOGIC) || defined(HAVE_RASPBERRYPI)
 		/** FIXME: begin dirty hack  */
 		eDebug("[eDVBDemux] Ignoring due to limitation to one frontend for each adapter and missing ioctl ...");
 		source = fenum;
@@ -766,7 +767,7 @@ eDVBTSRecorder::~eDVBTSRecorder()
 RESULT eDVBTSRecorder::start()
 {
 #ifdef HAVE_RASPBERRYPI
-	eDebug("eDVBTSRecorder::start");
+	eDebug("[eDVBTSRecorder] try to start");
 #endif
 	std::map<int,int>::iterator i(m_pids.begin());
 
@@ -781,9 +782,6 @@ RESULT eDVBTSRecorder::start()
 
 	char filename[128];
 	snprintf(filename, 128, "/dev/dvb/adapter%d/demux%d", m_demux->adapter, m_demux->demux);
-#ifdef HAVE_RASPBERRYPI
-	eDebug("eDVBTSRecorder::start %s", filename);
-#endif
 #if HAVE_HISILICON
 	m_source_fd = ::open(filename, O_RDONLY | O_CLOEXEC | O_NONBLOCK);
 #else
@@ -795,6 +793,9 @@ RESULT eDVBTSRecorder::start()
 		eDebug("[eDVBTSRecorder] FAILED to open demux %s: %m", filename);
 		return -3;
 	}
+#ifdef HAVE_RASPBERRYPI
+	eDebug("[eDVBTSRecorder] OPENED demux %s and started", filename);
+#endif
 
 	setBufferSize(1024*1024);
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: 2008-12-29 16:22+0100\n"
 "Last-Translator: gerrit <gerrit@nedlinux.nl>\n"
 "Language-Team: gerrit <fy@li.org>\n"
@@ -3173,6 +3173,11 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "City: "
+msgstr "Skiif-grutte:"
+
+#
+#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Wiskje foar sykjen ?"
 
@@ -3331,6 +3336,9 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact flash"
 
+msgid "Compiled by: "
+msgstr ""
+
 #
 msgid "Complete"
 msgstr "Kompleet"
@@ -3459,12 +3467,6 @@ msgid "Configure if the HDMI EDID checking should be bypassed as this might solv
 msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
 msgstr ""
 
 #
@@ -3854,6 +3856,9 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "Ynhald past net op in DVD !"
 
+msgid "Continent: "
+msgstr ""
+
 msgid "Continue"
 msgstr ""
 
@@ -3931,6 +3936,9 @@ msgstr ""
 msgid "Country for EPG event rating information"
 msgstr ""
 
+msgid "Country: "
+msgstr ""
+
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -3985,6 +3993,9 @@ msgid "Cuba"
 msgstr ""
 
 msgid "Curacao"
+msgstr ""
+
+msgid "Currency: "
 msgstr ""
 
 #
@@ -6328,6 +6339,14 @@ msgstr ""
 msgid "Genre"
 msgstr "Sjenre"
 
+#
+#, fuzzy
+msgid "Geolocation"
+msgstr "Doel"
+
+msgid "Geolocation information"
+msgstr ""
+
 msgid "Georgia"
 msgstr ""
 
@@ -6863,6 +6882,9 @@ msgstr "ISO triem is te grut foar dit bestânsysteem!"
 #
 msgid "ISO path"
 msgstr "ISO paad"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -7518,6 +7540,11 @@ msgstr "Kies fideo moadus"
 msgid "Latitude"
 msgstr "Bridtegraad"
 
+#
+#, fuzzy
+msgid "Latitude: "
+msgstr "Bridtegraad"
+
 msgid "Latvia"
 msgstr ""
 
@@ -7714,6 +7741,11 @@ msgstr "Lang taste yndrukken"
 
 #
 msgid "Longitude"
+msgstr "Lingtegraad"
+
+#
+#, fuzzy
+msgid "Longitude: "
 msgstr "Lingtegraad"
 
 msgid "Loop through from"
@@ -8020,6 +8052,9 @@ msgid "Mipsel"
 msgstr ""
 
 msgid "Missing "
+msgstr ""
+
+msgid "Mobile: "
 msgstr ""
 
 #
@@ -10134,6 +10169,12 @@ msgstr "Providers"
 msgid "Providers: "
 msgstr "Providers"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr ""
 
@@ -11600,6 +11641,9 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+msgid "Select the time zone within the area or region."
+msgstr ""
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -11669,6 +11713,9 @@ msgid "Select your provider, and press OK to start the scan"
 msgstr ""
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
+msgstr ""
+
+msgid "Select your time zone area or region."
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -12024,11 +12071,6 @@ msgstr ""
 #, fuzzy
 msgid "Setup your satellite equipment"
 msgstr "Satellyt ynstellingen"
-
-#
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "ynstelle fan tuner B"
 
 msgid "Seychelles"
 msgstr ""
@@ -13003,6 +13045,9 @@ msgstr ""
 msgid "Startup to Standby"
 msgstr ""
 
+msgid "State: "
+msgstr ""
+
 msgid "Status"
 msgstr ""
 
@@ -13279,12 +13324,6 @@ msgid "Suriname"
 msgstr "Kanaal sykje"
 
 msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -14166,6 +14205,16 @@ msgid "Time update in minutes:"
 msgstr ""
 
 #
+#, fuzzy
+msgid "Time zone"
+msgstr "Tiidszone"
+
+#
+#, fuzzy
+msgid "Time zone area"
+msgstr "Tiidszone"
+
+#
 msgid "Timer"
 msgstr "Tiidssjtoering"
 
@@ -14267,12 +14316,8 @@ msgid "Timeshift not possible!"
 msgstr "Tiidsskowen is net mooglik !"
 
 #
-msgid "Timezone"
-msgstr "Tiidszone"
-
-#
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Tiidszone"
 
 msgid "Timor-Leste"
@@ -15999,9 +16044,6 @@ msgid "Your receiver will got to standby due to inactivity."
 msgstr ""
 
 msgid "Your receiver will restart after pressing OK on your remote control."
-msgstr ""
-
-msgid "Your timezone in the area."
 msgstr ""
 
 #

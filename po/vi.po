@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: 2019-11-19 08:58+0700\n"
 "Last-Translator: krong\n"
 "Language-Team: none\n"
@@ -2935,6 +2935,10 @@ msgid "Circular right"
 msgstr "Thông tư phải"
 
 #, fuzzy
+msgid "City: "
+msgstr "Sức chứa: "
+
+#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Không thể di chuyển đến thùng rác"
 
@@ -3066,6 +3070,9 @@ msgstr "Comoros"
 msgid "Compact flash"
 msgstr "Đèn flash nhỏ gọn"
 
+msgid "Compiled by: "
+msgstr ""
+
 msgid "Complete"
 msgstr "Hoàn thành"
 
@@ -3176,12 +3183,6 @@ msgstr "Định cấu hình nếu kiểm tra HDMI EDID nên được bỏ qua v�
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Định cấu hình nếu phụ đề nên chuyển đổi giữa bình thường, in nghiêng, in đậm và đậm"
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
-msgstr ""
 
 msgid "Configure interface"
 msgstr "Cấu hình giao diện"
@@ -3550,6 +3551,10 @@ msgstr "Tham khảo bảng thông số kỹ thuật của động cơ của bạ
 msgid "Content does not fit on DVD!"
 msgstr "Nội dung không phù hợp với DVD!"
 
+#, fuzzy
+msgid "Continent: "
+msgstr "Tiếp tục"
+
 msgid "Continue"
 msgstr "Tiếp tục"
 
@@ -3619,6 +3624,10 @@ msgstr "Thông tin về phần mềm"
 msgid "Country for EPG event rating information"
 msgstr "Tham khảo bảng thông số thiết bị SCR của bạn để biết thông tin này."
 
+#, fuzzy
+msgid "Country: "
+msgstr "Quốc gia"
+
 msgid "Cover dashed flickering line for this service"
 msgstr "Che đường nhấp nháy đứt nét cho dịch vụ này"
 
@@ -3666,6 +3675,10 @@ msgstr "Cuba"
 
 msgid "Curacao"
 msgstr "Curacao"
+
+#, fuzzy
+msgid "Currency: "
+msgstr "Thiêt bị hiện tại: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5755,6 +5768,14 @@ msgstr ""
 msgid "Genre"
 msgstr "Thể loại"
 
+#, fuzzy
+msgid "Geolocation"
+msgstr "Vị trí"
+
+#, fuzzy
+msgid "Geolocation information"
+msgstr "Thông tin về phần mềm"
+
 msgid "Georgia"
 msgstr "Georgia"
 
@@ -6243,6 +6264,9 @@ msgstr "Tập tin ISO quá lớn cho hệ thống tập tin này!"
 
 msgid "ISO path"
 msgstr "Đường dẫn ISO"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr "Iceland"
@@ -6814,6 +6838,10 @@ msgstr "Nhật ký nâng cấp mới nhất"
 msgid "Latitude"
 msgstr "Vĩ độ"
 
+#, fuzzy
+msgid "Latitude: "
+msgstr "Vĩ độ"
+
 msgid "Latvia"
 msgstr "Latvia"
 
@@ -6978,6 +7006,10 @@ msgid "Long key press"
 msgstr "Bấm phím dài"
 
 msgid "Longitude"
+msgstr "Kinh độ"
+
+#, fuzzy
+msgid "Longitude: "
 msgstr "Kinh độ"
 
 msgid "Loop through from"
@@ -7244,6 +7276,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Còn thiếu "
+
+msgid "Mobile: "
+msgstr ""
 
 msgid "Mode"
 msgstr "Chế độ"
@@ -9066,6 +9101,12 @@ msgstr "Các nhà cung cấp"
 msgid "Providers: "
 msgstr "Các nhà cung cấp"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -10316,6 +10357,10 @@ msgstr "Chọn vệ tinh bạn muốn cấu hình. Khi vệ tinh đó được �
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Chọn vệ tinh mà món ăn của bạn nhận được từ. Nếu bạn không chắc chắn, hãy chọn 'tự động' và người nhận sẽ cố gắng xác định điều này cho bạn."
 
+#, fuzzy
+msgid "Select the time zone within the area or region."
+msgstr "Chọn độ phân giải ngang:"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Chọn bộ chỉnh điều khiển đĩa cơ giới."
 
@@ -10379,6 +10424,10 @@ msgstr "Chọn nhà cung cấp của bạn và nhấn OK để bắt đầu qué
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Chọn vùng của bạn. Nếu không có sẵn, hãy thay đổi 'Quốc gia' thành 'tất cả' và chọn một trong các lựa chọn thay thế mặc định."
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Chọn độ phân giải ngang:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Chọn vệ tinh 1 (USALS)"
@@ -10698,10 +10747,6 @@ msgstr "Thiết lập định vị của bạn"
 
 msgid "Setup your satellite equipment"
 msgstr "Cài đặt thiết bị vệ tinh của bạn"
-
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "Thiết lập định vị của bạn"
 
 msgid "Seychelles"
 msgstr "Đảo Seychelles"
@@ -11557,6 +11602,10 @@ msgstr "Khởi động đầu thu ở chế độ chờ"
 msgid "Startup to Standby"
 msgstr "Khởi động để chờ"
 
+#, fuzzy
+msgid "State: "
+msgstr "Tốc độ bit:"
+
 msgid "Status"
 msgstr ""
 
@@ -11794,12 +11843,6 @@ msgstr "Xuameame"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard và Jan Mayen"
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
-msgstr ""
 
 msgid "Swap PiP"
 msgstr "Hoán đổi PiP"
@@ -12635,6 +12678,14 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Múi giờ"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Múi giờ"
+
 msgid "Timer"
 msgstr "Hẹn giờ"
 
@@ -12714,11 +12765,8 @@ msgstr "Địa điểm hẹn giờ"
 msgid "Timeshift not possible!"
 msgstr "Timeshift không thể!"
 
-msgid "Timezone"
-msgstr "Múi giờ"
-
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Múi giờ"
 
 msgid "Timor-Leste"
@@ -14309,10 +14357,6 @@ msgstr "Đầu thu của bạn sẽ phải chờ do không hoạt động."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Đầu thu của bạn sẽ khởi động lại sau khi nhấn OK trên điều khiển từ xa của bạn."
-
-#, fuzzy
-msgid "Your timezone in the area."
-msgstr "Bạn có thể hủy bỏ loại bỏ."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

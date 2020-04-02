@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: 2013-10-20 19:13-0300\n"
 "Last-Translator: Diogo <pingflood@gmail.com>\n"
 "Language-Team: Traduzido por Frank Viana <franksrviana@gmail.com>\n"
@@ -2890,6 +2890,10 @@ msgid "Circular right"
 msgstr "Circular direita"
 
 #, fuzzy
+msgid "City: "
+msgstr "Capacidade:"
+
+#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Não foi possível mover para a lixeira"
 
@@ -3023,6 +3027,9 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact Flash"
 
+msgid "Compiled by: "
+msgstr ""
+
 msgid "Complete"
 msgstr "Completo"
 
@@ -3137,12 +3144,6 @@ msgid "Configure if the HDMI EDID checking should be bypassed as this might solv
 msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
 msgstr ""
 
 msgid "Configure interface"
@@ -3515,6 +3516,10 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "O conteúdo não cabe no DVD!"
 
+#, fuzzy
+msgid "Continent: "
+msgstr "Continuar"
+
 msgid "Continue"
 msgstr "Continuar"
 
@@ -3584,6 +3589,10 @@ msgstr "Informação do gerenciador de software"
 msgid "Country for EPG event rating information"
 msgstr ""
 
+#, fuzzy
+msgid "Country: "
+msgstr "Montagem"
+
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -3632,6 +3641,10 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
+
+#, fuzzy
+msgid "Currency: "
+msgstr "Dispositivo atual: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5707,6 +5720,14 @@ msgstr ""
 msgid "Genre"
 msgstr "Gênero"
 
+#, fuzzy
+msgid "Geolocation"
+msgstr "Caminho"
+
+#, fuzzy
+msgid "Geolocation information"
+msgstr "Informação do gerenciador de software"
+
 msgid "Georgia"
 msgstr ""
 
@@ -6197,6 +6218,9 @@ msgstr "Arquivo ISO muito grande para o sistema de arquivos!"
 
 msgid "ISO path"
 msgstr "Caminho ISO"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -6767,6 +6791,10 @@ msgid "Latitude"
 msgstr ""
 
 #, fuzzy
+msgid "Latitude: "
+msgstr "Latitude local"
+
+#, fuzzy
 msgid "Latvia"
 msgstr "Letão"
 
@@ -6933,6 +6961,10 @@ msgstr "Manter tecla pressionada"
 
 msgid "Longitude"
 msgstr ""
+
+#, fuzzy
+msgid "Longitude: "
+msgstr "Longitude local"
 
 msgid "Loop through from"
 msgstr ""
@@ -7201,6 +7233,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Faltando"
+
+msgid "Mobile: "
+msgstr ""
 
 #, fuzzy
 msgid "Mode"
@@ -9040,6 +9075,12 @@ msgstr "Operadoras"
 msgid "Providers: "
 msgstr "Operadoras"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr ""
 
@@ -10302,6 +10343,9 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+msgid "Select the time zone within the area or region."
+msgstr ""
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -10365,6 +10409,9 @@ msgid "Select your provider, and press OK to start the scan"
 msgstr "Selecione a operadora e pressione OK para buscar."
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
+msgstr ""
+
+msgid "Select your time zone area or region."
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -10685,10 +10732,6 @@ msgstr "Configure o posicionador"
 
 msgid "Setup your satellite equipment"
 msgstr "Configure o receptor de satélite"
-
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "Configure o posicionador"
 
 msgid "Seychelles"
 msgstr ""
@@ -11556,6 +11599,10 @@ msgstr ""
 msgid "Startup to Standby"
 msgstr ""
 
+#, fuzzy
+msgid "State: "
+msgstr "Última atualização:"
+
 msgid "Status"
 msgstr ""
 
@@ -11793,12 +11840,6 @@ msgid "Suriname"
 msgstr "Serviço"
 
 msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -12608,6 +12649,14 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Fuso horário"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Fuso horário"
+
 msgid "Timer"
 msgstr "Temporizador"
 
@@ -12687,11 +12736,8 @@ msgstr "Diretório para o timeshift"
 msgid "Timeshift not possible!"
 msgstr "Timeshift não permitido!"
 
-msgid "Timezone"
-msgstr "Fuso horário"
-
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Fuso horário"
 
 msgid "Timor-Leste"
@@ -14286,10 +14332,6 @@ msgstr "O receptor será colocado em espera por inatividade."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Pressione OK para reiniciar o receptor."
-
-#, fuzzy
-msgid "Your timezone in the area."
-msgstr "A remoção pode ser cancelada."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: 2017-03-05 13:24+0100\n"
 "Last-Translator: Magnus Nilsson <mag_nilsson@hotmail.com>\n"
 "Language-Team: \n"
@@ -3187,6 +3187,11 @@ msgstr "Cirkulär vänster"
 msgid "Circular right"
 msgstr "Cirkulär höger"
 
+#
+#, fuzzy
+msgid "City: "
+msgstr "Kapacitet : "
+
 #, fuzzy
 msgid "Clean network trash cans"
 msgstr "Kan inte flytta till papperskorgen"
@@ -3344,6 +3349,9 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact Flash"
 
+msgid "Compiled by: "
+msgstr ""
+
 #
 msgid "Complete"
 msgstr "Komplett"
@@ -3469,12 +3477,6 @@ msgstr "Konfigurera om HDMI EDID kontroll skall förbikopplas eftersom det kan l
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Konfigurera om undertexten skall växla mellan normal, italic, bold och bolditalic."
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
-msgstr ""
 
 #
 msgid "Configure interface"
@@ -3871,6 +3873,10 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "Innehållet för stort för en DVD!"
 
+#, fuzzy
+msgid "Continent: "
+msgstr "Forsätt"
+
 msgid "Continue"
 msgstr "Forsätt"
 
@@ -3947,6 +3953,10 @@ msgstr "Information om mjukvaruhanterare"
 msgid "Country for EPG event rating information"
 msgstr ""
 
+#, fuzzy
+msgid "Country: "
+msgstr "Montera"
+
 msgid "Cover dashed flickering line for this service"
 msgstr "Täck flimrande linje för denna kanal"
 
@@ -4001,6 +4011,10 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
+
+#, fuzzy
+msgid "Currency: "
+msgstr "Nuvarande enhet : "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -6349,6 +6363,15 @@ msgstr ""
 msgid "Genre"
 msgstr "Genre"
 
+#
+#, fuzzy
+msgid "Geolocation"
+msgstr "Sökväg"
+
+#, fuzzy
+msgid "Geolocation information"
+msgstr "Information om mjukvaruhanterare"
+
 msgid "Georgia"
 msgstr ""
 
@@ -6877,6 +6900,9 @@ msgstr "ISO fil är för stor för detta filsystem!"
 #
 msgid "ISO path"
 msgstr "ISO sökväg"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -7521,6 +7547,11 @@ msgstr "Latitud"
 
 #
 #, fuzzy
+msgid "Latitude: "
+msgstr "Latitud"
+
+#
+#, fuzzy
 msgid "Latvia"
 msgstr "Lettiska"
 
@@ -7714,6 +7745,11 @@ msgstr "Lång knapptryckning"
 
 #
 msgid "Longitude"
+msgstr "Longitud"
+
+#
+#, fuzzy
+msgid "Longitude: "
 msgstr "Longitud"
 
 msgid "Loop through from"
@@ -8012,6 +8048,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Saknad"
+
+msgid "Mobile: "
+msgstr ""
 
 #
 #, fuzzy
@@ -10101,6 +10140,12 @@ msgstr "Operatörer"
 msgid "Providers: "
 msgstr "Operatörer"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr ""
 
@@ -11535,6 +11580,10 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+#, fuzzy
+msgid "Select the time zone within the area or region."
+msgstr "Välj sorteringsmetod :"
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -11605,6 +11654,10 @@ msgstr "Välj din operatör och tryck OK för att starta sökningen"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
+
+#, fuzzy
+msgid "Select your time zone area or region."
+msgstr "Välj sorteringsmetod :"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Väljer satelliter 1 (USALS)"
@@ -11956,10 +12009,6 @@ msgstr "Ställ in din position"
 #
 msgid "Setup your satellite equipment"
 msgstr "Ställ in din satellitutrustning"
-
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "Ställ in din position"
 
 msgid "Seychelles"
 msgstr ""
@@ -12920,6 +12969,11 @@ msgstr "Starta upp mottagaren i viloläge"
 msgid "Startup to Standby"
 msgstr "Uppstart till viloläge"
 
+#
+#, fuzzy
+msgid "State: "
+msgstr "Bitrate :"
+
 msgid "Status"
 msgstr ""
 
@@ -13188,12 +13242,6 @@ msgid "Suriname"
 msgstr "Kanalnamn"
 
 msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -14127,6 +14175,16 @@ msgid "Time update in minutes:"
 msgstr ""
 
 #
+#, fuzzy
+msgid "Time zone"
+msgstr "Tidszon"
+
+#
+#, fuzzy
+msgid "Time zone area"
+msgstr "Tidszon"
+
+#
 msgid "Timer"
 msgstr "Timer"
 
@@ -14223,12 +14281,8 @@ msgid "Timeshift not possible!"
 msgstr "Timeshift inte möjligt!"
 
 #
-msgid "Timezone"
-msgstr "Tidszon"
-
-#
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Tidszon"
 
 msgid "Timor-Leste"
@@ -16002,11 +16056,6 @@ msgstr "Din mottagare går i viloläge på grund av inaktivitet."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Din mottagare kommer att starta om när du trycker på OK på din fjärrkontroll."
-
-#
-#, fuzzy
-msgid "Your timezone in the area."
-msgstr "Du kan avbryta borttagningen."
 
 #
 msgid ""

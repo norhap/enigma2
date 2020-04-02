@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 Kurdish translation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"POT-Creation-Date: 2020-03-27 15:42+0430\n"
 "PO-Revision-Date: 2013-04-22 04:29+0330\n"
 "Last-Translator: dimili21\n"
 "Language-Team: \n"
@@ -2934,6 +2934,10 @@ msgid "Circular right"
 msgstr "Raştiya daira"
 
 #, fuzzy
+msgid "City: "
+msgstr "Capacity: "
+
+#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Cannot move to trash can"
 
@@ -3067,6 +3071,9 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact flash"
 
+msgid "Compiled by: "
+msgstr ""
+
 msgid "Complete"
 msgstr "Temami"
 
@@ -3181,12 +3188,6 @@ msgid "Configure if the HDMI EDID checking should be bypassed as this might solv
 msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 mapping table."
-msgstr ""
-
-msgid "Configure if you need to swap the EN300743 palette table."
 msgstr ""
 
 msgid "Configure interface"
@@ -3559,6 +3560,10 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "Content does not fit on DVD!"
 
+#, fuzzy
+msgid "Continent: "
+msgstr "Dowmke"
+
 msgid "Continue"
 msgstr "Dowmke"
 
@@ -3628,6 +3633,10 @@ msgstr "Softwaremanager information"
 msgid "Country for EPG event rating information"
 msgstr ""
 
+#, fuzzy
+msgid "Country: "
+msgstr "Mount"
+
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -3676,6 +3685,10 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
+
+#, fuzzy
+msgid "Currency: "
+msgstr "Current device: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5759,6 +5772,14 @@ msgstr ""
 msgid "Genre"
 msgstr "Genre"
 
+#, fuzzy
+msgid "Geolocation"
+msgstr "Location"
+
+#, fuzzy
+msgid "Geolocation information"
+msgstr "Softwaremanager information"
+
 msgid "Georgia"
 msgstr ""
 
@@ -6250,6 +6271,9 @@ msgstr "ISO file is too large for this filesystem!"
 
 msgid "ISO path"
 msgstr "ISO path"
+
+msgid "ISP: "
+msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -6820,6 +6844,10 @@ msgid "Latitude"
 msgstr "Latitude"
 
 #, fuzzy
+msgid "Latitude: "
+msgstr "Latitude"
+
+#, fuzzy
 msgid "Latvia"
 msgstr "Latvian"
 
@@ -6985,6 +7013,10 @@ msgid "Long key press"
 msgstr "Long key press"
 
 msgid "Longitude"
+msgstr "Longitude"
+
+#, fuzzy
+msgid "Longitude: "
 msgstr "Longitude"
 
 msgid "Loop through from"
@@ -7256,6 +7288,9 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Missing "
+
+msgid "Mobile: "
+msgstr ""
 
 #, fuzzy
 msgid "Mode"
@@ -9096,6 +9131,12 @@ msgstr "Providers"
 msgid "Providers: "
 msgstr "Providers"
 
+msgid "Proxy: "
+msgstr ""
+
+msgid "Public IP: "
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr ""
 
@@ -10359,6 +10400,9 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+msgid "Select the time zone within the area or region."
+msgstr ""
+
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -10422,6 +10466,9 @@ msgid "Select your provider, and press OK to start the scan"
 msgstr "Select your provider, and press OK to start the scan"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
+msgstr ""
+
+msgid "Select your time zone area or region."
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -10742,10 +10789,6 @@ msgstr "Setup your positioner"
 
 msgid "Setup your satellite equipment"
 msgstr "Setup your satellite equipment"
-
-#, fuzzy
-msgid "Setup your timezone area."
-msgstr "Setup your positioner"
 
 msgid "Seychelles"
 msgstr ""
@@ -11613,6 +11656,10 @@ msgstr ""
 msgid "Startup to Standby"
 msgstr ""
 
+#, fuzzy
+msgid "State: "
+msgstr "Zu leziya Bit:"
+
 msgid "Status"
 msgstr ""
 
@@ -11851,12 +11898,6 @@ msgid "Suriname"
 msgstr "Service name"
 
 msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-msgid "Swap EN300743 mapping table"
-msgstr ""
-
-msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -12668,6 +12709,14 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
+#, fuzzy
+msgid "Time zone"
+msgstr "Wextu Zeman"
+
+#, fuzzy
+msgid "Time zone area"
+msgstr "Wextu Zeman"
+
 msgid "Timer"
 msgstr "Vext"
 
@@ -12747,11 +12796,8 @@ msgstr "Timeshift location"
 msgid "Timeshift not possible!"
 msgstr "Timeshift not possible!"
 
-msgid "Timezone"
-msgstr "Wextu Zeman"
-
 #, fuzzy
-msgid "Timezone area"
+msgid "Timezone: "
 msgstr "Wextu Zeman"
 
 msgid "Timor-Leste"
@@ -14343,10 +14389,6 @@ msgstr ""
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Your receiver will restart after pressing OK on your remote control."
-
-#, fuzzy
-msgid "Your timezone in the area."
-msgstr "You can cancel the removal."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"
