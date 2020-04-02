@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2011-04-14 00:02+0200\n"
 "Last-Translator: majevica <jovanovic@gmx.ch>\n"
 "Language-Team: veselin & majevica CRNABERZA <jovanovic@gmx.ch>\n"
@@ -3210,11 +3210,6 @@ msgstr "Kružna desna"
 
 #
 #, fuzzy
-msgid "City: "
-msgstr "Kapacitet:"
-
-#
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Obriši pre skeniranja"
 
@@ -3373,9 +3368,6 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Kompakt fleš"
 
-msgid "Compiled by: "
-msgstr ""
-
 #
 msgid "Complete"
 msgstr "Kompletno"
@@ -3504,6 +3496,12 @@ msgid "Configure if the HDMI EDID checking should be bypassed as this might solv
 msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
 msgstr ""
 
 #
@@ -3907,11 +3905,6 @@ msgid "Content does not fit on DVD!"
 msgstr "Sadržaj ne staje na DVD!"
 
 #
-#, fuzzy
-msgid "Continent: "
-msgstr "Nastaviti"
-
-#
 msgid "Continue"
 msgstr "Nastaviti"
 
@@ -3990,9 +3983,6 @@ msgstr "Informacije upravljača softvera"
 msgid "Country for EPG event rating information"
 msgstr ""
 
-msgid "Country: "
-msgstr ""
-
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -4050,10 +4040,6 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Aktuelni uređaj:"
 
 #
 #, fuzzy
@@ -6419,15 +6405,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Žanrovi"
 
-#
-#, fuzzy
-msgid "Geolocation"
-msgstr "Lokacija"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Informacije upravljača softvera"
-
 msgid "Georgia"
 msgstr ""
 
@@ -6968,9 +6945,6 @@ msgstr "ISO datoteka je prevelika za ovaj sistem?"
 #
 msgid "ISO path"
 msgstr "ISO putanja"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -7638,11 +7612,6 @@ msgstr "Geografska širina"
 
 #
 #, fuzzy
-msgid "Latitude: "
-msgstr "Geografska širina"
-
-#
-#, fuzzy
 msgid "Latvia"
 msgstr "Letonski"
 
@@ -7844,11 +7813,6 @@ msgstr "Dugi pritisak tipke"
 
 #
 msgid "Longitude"
-msgstr "Geografska dužina"
-
-#
-#, fuzzy
-msgid "Longitude: "
 msgstr "Geografska dužina"
 
 msgid "Loop through from"
@@ -8158,9 +8122,6 @@ msgid "Mipsel"
 msgstr ""
 
 msgid "Missing "
-msgstr ""
-
-msgid "Mobile: "
 msgstr ""
 
 #
@@ -10300,12 +10261,6 @@ msgstr "Provajderi"
 msgid "Providers: "
 msgstr "Provajderi"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr ""
 
@@ -11772,9 +11727,6 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
-msgid "Select the time zone within the area or region."
-msgstr ""
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -11846,9 +11798,6 @@ msgid "Select your provider, and press OK to start the scan"
 msgstr ""
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
-msgstr ""
-
-msgid "Select your time zone area or region."
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -12210,6 +12159,11 @@ msgstr ""
 #, fuzzy
 msgid "Setup your satellite equipment"
 msgstr "Satelitska oprema"
+
+#
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Molim podesite tuner B"
 
 msgid "Seychelles"
 msgstr ""
@@ -13205,11 +13159,6 @@ msgstr ""
 msgid "Startup to Standby"
 msgstr ""
 
-#
-#, fuzzy
-msgid "State: "
-msgstr "Bit rata:"
-
 msgid "Status"
 msgstr ""
 
@@ -13486,6 +13435,12 @@ msgid "Suriname"
 msgstr "Skeniranje Kanala"
 
 msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -14379,16 +14334,6 @@ msgid "Time update in minutes:"
 msgstr ""
 
 #
-#, fuzzy
-msgid "Time zone"
-msgstr "Vremenska zona"
-
-#
-#, fuzzy
-msgid "Time zone area"
-msgstr "Vremenska zona"
-
-#
 msgid "Timer"
 msgstr "Tajmer"
 
@@ -14490,8 +14435,12 @@ msgid "Timeshift not possible!"
 msgstr "Vrem.i pomak nije moguć!"
 
 #
+msgid "Timezone"
+msgstr "Vremenska zona"
+
+#
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Vremenska zona"
 
 msgid "Timor-Leste"
@@ -16233,6 +16182,11 @@ msgstr ""
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr ""
+
+#
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Možete otkazati uklanjanje."
 
 #
 msgid ""

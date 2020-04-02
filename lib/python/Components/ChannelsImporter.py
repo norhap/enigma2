@@ -343,11 +343,11 @@ class ChannelsImporter():
 			req = urllib2.Request(url)
 			response = urllib2.urlopen(req)
 			print('[ChannelsImporter] saveEPGonRemoteReceiver Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r","").replace("\n","")))
-		except urllib2.HTTPError as err:
+		except urllib2.HTTPError, err:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR:',err)
-		except urllib2.URLError as err:
+		except urllib2.URLError, err:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR:',err.reason[0])
-		except urllib2 as err:
+		except urllib2, err:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR:',err)
 		except:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver undefined error')

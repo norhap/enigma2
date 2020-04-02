@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2011-05-07 12:23+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -3073,10 +3073,6 @@ msgid "Circular right"
 msgstr "Hringpólun hægri"
 
 #, fuzzy
-msgid "City: "
-msgstr "Stærð:"
-
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Eyða fyrir leit"
 
@@ -3217,9 +3213,6 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact Flash"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "Allt"
 
@@ -3337,6 +3330,12 @@ msgid "Configure if the HDMI EDID checking should be bypassed as this might solv
 msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
 msgstr ""
 
 msgid "Configure interface"
@@ -3721,11 +3720,6 @@ msgid "Content does not fit on DVD!"
 msgstr "Innihald passar ekki á DVD!"
 
 #
-#, fuzzy
-msgid "Continent: "
-msgstr "Áfram"
-
-#
 msgid "Continue"
 msgstr "Áfram"
 
@@ -3798,9 +3792,6 @@ msgstr "Upplýsingar hugbúnaðar umsýslu"
 msgid "Country for EPG event rating information"
 msgstr ""
 
-msgid "Country: "
-msgstr ""
-
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -3853,10 +3844,6 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Núverandi tæki: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -6162,15 +6149,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Gerð"
 
-#
-#, fuzzy
-msgid "Geolocation"
-msgstr "Staðsetning"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Upplýsingar hugbúnaðar umsýslu"
-
 msgid "Georgia"
 msgstr ""
 
@@ -6708,9 +6686,6 @@ msgstr "Iso skrá er of stór fyrir þetta skráarkerfi!"
 #
 msgid "ISO path"
 msgstr "Slóð ISO skráar"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -7365,11 +7340,6 @@ msgstr "Breiddargráða"
 
 #
 #, fuzzy
-msgid "Latitude: "
-msgstr "Breiddargráða"
-
-#
-#, fuzzy
 msgid "Latvia"
 msgstr "Lettneska"
 
@@ -7567,11 +7537,6 @@ msgstr "Ýtt lengi á hnapp"
 
 #
 msgid "Longitude"
-msgstr "Lengdargráða"
-
-#
-#, fuzzy
-msgid "Longitude: "
 msgstr "Lengdargráða"
 
 msgid "Loop through from"
@@ -7877,9 +7842,6 @@ msgid "Mipsel"
 msgstr ""
 
 msgid "Missing "
-msgstr ""
-
-msgid "Mobile: "
 msgstr ""
 
 #
@@ -9994,12 +9956,6 @@ msgstr "Sendendur"
 msgid "Providers: "
 msgstr "Sendendur"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr ""
 
@@ -11445,9 +11401,6 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
-msgid "Select the time zone within the area or region."
-msgstr ""
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -11519,9 +11472,6 @@ msgid "Select your provider, and press OK to start the scan"
 msgstr ""
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
-msgstr ""
-
-msgid "Select your time zone area or region."
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -11878,6 +11828,11 @@ msgstr ""
 #, fuzzy
 msgid "Setup your satellite equipment"
 msgstr "Gervihnatta búnaður"
+
+#
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Vinsamlega settu upp móttakara B"
 
 msgid "Seychelles"
 msgstr ""
@@ -12860,10 +12815,6 @@ msgstr ""
 msgid "Startup to Standby"
 msgstr ""
 
-#, fuzzy
-msgid "State: "
-msgstr "Bitahraði:"
-
 msgid "Status"
 msgstr ""
 
@@ -13140,6 +13091,12 @@ msgid "Suriname"
 msgstr "Leita að rásum"
 
 msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -14026,16 +13983,6 @@ msgid "Time update in minutes:"
 msgstr ""
 
 #
-#, fuzzy
-msgid "Time zone"
-msgstr "Tímabelti"
-
-#
-#, fuzzy
-msgid "Time zone area"
-msgstr "Tímabelti"
-
-#
 msgid "Timer"
 msgstr "Tímastilling"
 
@@ -14135,8 +14082,12 @@ msgid "Timeshift not possible!"
 msgstr "Tímabreyting ekki möguleg!"
 
 #
+msgid "Timezone"
+msgstr "Tímabelti"
+
+#
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Tímabelti"
 
 msgid "Timor-Leste"
@@ -15854,6 +15805,11 @@ msgstr ""
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr ""
+
+#
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Þú getur hætt við að fjarlægja."
 
 #
 msgid ""

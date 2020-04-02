@@ -1,20 +1,22 @@
 import sys
-
+import fcntl
+import os
 from enigma import ePythonOutput
 
+class EnigmaLogDebug:
 
-class EnigmaLog:
-	def __init__(self, level):
-		self.level = level
-		self.line = ""
+	lvlDebug = 4
+
+	def __init__(self):
+		self.line = ''
 
 	def write(self, data):
 		if isinstance(data, unicode):
-			data = data.encode(encoding="UTF-8", errors="ignore")
+			data = data.encode("UTF-8")
 		self.line += data
-		if "\n" in data:
-			ePythonOutput(self.line, self.level)
-			self.line = ""
+		if '\n' in data:
+			ePythonOutput(self.line, self.lvlDebug)
+			self.line = ''
 
 	def flush(self):
 		pass
@@ -22,16 +24,28 @@ class EnigmaLog:
 	def isatty(self):
 		return True
 
+class EnigmaLogFatal:
 
-class EnigmaLogDebug(EnigmaLog):
+	lvlError = 1
+
 	def __init__(self):
-		EnigmaLog.__init__(self, 4)  # lvlDebug = 4
+		self.line = ''
 
+	def write(self, data):
+		if isinstance(data, unicode):
+			data = data.encode("UTF-8")
+		self.line += data
+		if '\n' in data:
+			ePythonOutput(self.line, self.lvlError)
+			self.line = ''
 
-class EnigmaLogFatal(EnigmaLog):
-	def __init__(self):
-		EnigmaLog.__init__(self, 1)  # lvlError = 1
+	def flush(self):
+		pass
 
+	def isatty(self):
+		return True
 
+fcntl.fcntl(sys.stdout, fcntl.F_SETFL, os.O_APPEND)
+fcntl.fcntl(sys.stderr, fcntl.F_SETFL, os.O_APPEND)
 sys.stdout = EnigmaLogDebug()
 sys.stderr = EnigmaLogFatal()

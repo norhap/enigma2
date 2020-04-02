@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2019-11-28 17:53+0100\n"
 "Last-Translator: Pike_Bishop <alfredzngr023@gmail.com>\n"
 "Language-Team: Sfteam  angelo2807@hotmail.com\n"
@@ -2939,10 +2939,6 @@ msgid "Circular right"
 msgstr "Rechts-Zirkular"
 
 #, fuzzy
-msgid "City: "
-msgstr "Kapazität: "
-
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Die Datei konnte nicht in den Papierkorb verschoben werden"
 
@@ -3074,9 +3070,6 @@ msgstr "Comoros"
 msgid "Compact flash"
 msgstr "Compact Flash"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "Komplett"
 
@@ -3187,6 +3180,12 @@ msgstr "Konfiguriere, ob die HDMI-EDID Überprüfung übersprungen werden soll, 
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Konfiguration ob Untertitel zwischen normal, kursiv, fett, und fettkursiv wechseln sollen."
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 msgid "Configure interface"
 msgstr "Netzwerkkarte konfigurieren"
@@ -3559,10 +3558,6 @@ msgstr "Konsultieren Sie das Datenblatt Ihres Motors für diese Information oder
 msgid "Content does not fit on DVD!"
 msgstr "Inhalt passt nicht auf die DVD!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Weiter"
-
 msgid "Continue"
 msgstr "Weiter"
 
@@ -3632,10 +3627,6 @@ msgstr "Softwaremanager Information"
 msgid "Country for EPG event rating information"
 msgstr "Weitere Informationen finden Sie in Ihrem Unicable/SCR-Gerätespezifikationsblatt."
 
-#, fuzzy
-msgid "Country: "
-msgstr "Land"
-
 msgid "Cover dashed flickering line for this service"
 msgstr "Gestrichelte Linie für diesen Kanal verdecken"
 
@@ -3683,10 +3674,6 @@ msgstr "Kuba"
 
 msgid "Curacao"
 msgstr "Curacao"
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Aktuelles Gerät: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5773,14 +5760,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Kategorie"
 
-#, fuzzy
-msgid "Geolocation"
-msgstr "Zielverzeichnis"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Softwaremanager Information"
-
 msgid "Georgia"
 msgstr "Georgien"
 
@@ -6269,9 +6248,6 @@ msgstr "Die ISO-Datei ist für dieses Dateisystem zu groß!"
 
 msgid "ISO path"
 msgstr "ISO-Ausgabepfad"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr "Iceland"
@@ -6844,10 +6820,6 @@ msgstr "Letztes Update-Protokoll"
 msgid "Latitude"
 msgstr "Breitengrad"
 
-#, fuzzy
-msgid "Latitude: "
-msgstr "Breitengrad"
-
 msgid "Latvia"
 msgstr "Lettland"
 
@@ -7012,10 +6984,6 @@ msgid "Long key press"
 msgstr "langer Tastendruck"
 
 msgid "Longitude"
-msgstr "Längengrad"
-
-#, fuzzy
-msgid "Longitude: "
 msgstr "Längengrad"
 
 msgid "Loop through from"
@@ -7282,9 +7250,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Fehlend"
-
-msgid "Mobile: "
-msgstr ""
 
 msgid "Mode"
 msgstr "Modus"
@@ -9110,12 +9075,6 @@ msgstr "Anbieter"
 msgid "Providers: "
 msgstr "Anbieter"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -10371,10 +10330,6 @@ msgstr "Wählen Sie den Satelliten aus, den Sie konfigurieren wollen. Sobald die
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Wählen Sie den Satelliten, von dem Ihr Gerät empfängt. Wenn Sie sich nicht sicher sind, wählen Sie “automatisch” und der Empfänger wird versuchen, dies für Sie zu ermitteln."
 
-#, fuzzy
-msgid "Select the time zone within the area or region."
-msgstr "Wählen Sie die horizontale Auflösung:"
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Wählen Sie den Tuner, der die motorisierte Schüssel steuert."
 
@@ -10438,10 +10393,6 @@ msgstr "Bitte wählen Sie den Anbieter aus und bestätigen Sie mit OK, um die Su
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Wählen Sie Ihre Region. Wenn nicht verfügbar, ändern Sie “Land” in “alle” und wählen Sie eine der Standardalternativen."
-
-#, fuzzy
-msgid "Select your time zone area or region."
-msgstr "Wählen Sie die horizontale Auflösung:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Wähle Satelliten 1 (USALS)"
@@ -10761,6 +10712,10 @@ msgstr "Einstellung des Rotors"
 
 msgid "Setup your satellite equipment"
 msgstr "Satelliten-Ausrüstung"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Einstellung des Rotors"
 
 msgid "Seychelles"
 msgstr "Seychelles"
@@ -11620,10 +11575,6 @@ msgstr "Starte den Receiver im Standby-Modus."
 msgid "Startup to Standby"
 msgstr "Start im Standby-Modus"
 
-#, fuzzy
-msgid "State: "
-msgstr "Bitrate:"
-
 msgid "Status"
 msgstr ""
 
@@ -11861,6 +11812,12 @@ msgstr "Suriname"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard und Jan Mayen"
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
+msgstr ""
 
 msgid "Swap PiP"
 msgstr "Tausche PiP (Bild in Bild)"
@@ -12700,14 +12657,6 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
-#, fuzzy
-msgid "Time zone"
-msgstr "Zeitzone"
-
-#, fuzzy
-msgid "Time zone area"
-msgstr "Zeitzone"
-
 msgid "Timer"
 msgstr "Timer"
 
@@ -12787,8 +12736,11 @@ msgstr "Timeshift-Verzeichnis"
 msgid "Timeshift not possible!"
 msgstr "Timeshift nicht möglich!"
 
+msgid "Timezone"
+msgstr "Zeitzone"
+
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Zeitzone"
 
 msgid "Timor-Leste"
@@ -14385,6 +14337,10 @@ msgstr "Der Receiver geht jetzt wegen Inaktivität in den Standby."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Ihr Receiver startet neu nach Betätigung der OK-Taste."
+
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Sie können das Entfernen abbrechen."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
-"PO-Revision-Date: 2020-03-23 11:15+0100\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
+"PO-Revision-Date: 2020-03-03 08:50+0100\n"
 "Last-Translator: Željko <zeljko2@hi.ht.hr>\n"
 "Language-Team: Željko\n"
 "Language: hr_HR\n"
@@ -1280,7 +1280,7 @@ msgid "< Emergency >"
 msgstr "< Hitna pomoć >"
 
 msgid "< Pending restart >"
-msgstr "< U tijeku je ponovno pokretanje >"
+msgstr "< U tijeku ponovno pokretanje >"
 
 msgid "<Current movielist location>"
 msgstr "<Trenutna lokacija popisa videozapisa>"
@@ -1918,7 +1918,7 @@ msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Želite li zaista očistiti sve izbrisane korisničke pakete?"
 
 msgid "Are you sure to reboot to"
-msgstr "Želite li ponovno pokrenuti sustav?"
+msgstr "Želite li ponovno pokretanje sustava?"
 
 #, python-format
 msgid "Are you sure to remove all %d.%d%s%s services?"
@@ -2209,11 +2209,11 @@ msgstr ""
 
 #, fuzzy
 msgid "Autostart"
-msgstr "o početku"
+msgstr "počinje"
 
 #, fuzzy
 msgid "Autostart:"
-msgstr "o početku"
+msgstr "počinje"
 
 msgid "Available format variables"
 msgstr "Dostupni formati varijabli"
@@ -2942,10 +2942,6 @@ msgid "Circular right"
 msgstr "Kružno desno"
 
 #, fuzzy
-msgid "City: "
-msgstr "Kapacitet: "
-
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Nije moguće premjestiti u koš za smeće"
 
@@ -3077,9 +3073,6 @@ msgstr "Komori"
 msgid "Compact flash"
 msgstr "Kompakt fleš"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "Kompletno"
 
@@ -3189,6 +3182,12 @@ msgstr "Konfigurirajte HDMI EDID-a ako treba zaobići provjeru jer to može rije
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Konfigurirajte ako se podnaslov mijenja između normalnog, kurzivog, podebljanog i podebljanog italic"
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 msgid "Configure interface"
 msgstr "Konfigurirajte sučelje"
@@ -3557,10 +3556,6 @@ msgstr "Za ove informacije pogledajte specifikacije vašeg motora ili ostavite z
 msgid "Content does not fit on DVD!"
 msgstr "Sadržaj ne stane na DVD!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Nastaviti"
-
 msgid "Continue"
 msgstr "Nastaviti"
 
@@ -3630,10 +3625,6 @@ msgstr "Informacije o softverskom upravitelju"
 msgid "Country for EPG event rating information"
 msgstr "Za ove informacije provjerite specifikacije SCR uređaja."
 
-#, fuzzy
-msgid "Country: "
-msgstr "Država"
-
 msgid "Cover dashed flickering line for this service"
 msgstr "Sakrij isprekidanu liniju za ovu uslugu"
 
@@ -3683,10 +3674,6 @@ msgid "Curacao"
 msgstr "Curacao"
 
 #, fuzzy
-msgid "Currency: "
-msgstr "Trenutni uređaj: "
-
-#, fuzzy
 msgid "Current Affairs"
 msgstr "Aktualne vijesti o događajima"
 
@@ -3731,7 +3718,7 @@ msgstr "Trenutačno se zapis dnevnika ne može dohvatiti - pokušajte ponovno ka
 
 #, fuzzy
 msgid "Custom"
-msgstr "Prilagođavanje"
+msgstr "Prilagodite"
 
 msgid "Custom skip time for '1'/'3' buttons"
 msgstr "Prilagođeno vrijeme preskakanja tipki za '1'/'3'"
@@ -3743,13 +3730,13 @@ msgid "Custom skip time for '7'/'9' buttons"
 msgstr "Prilagođeno vrijeme preskakanja tipki za '7'/'9'"
 
 msgid "Customize"
-msgstr "Prilagođavanje"
+msgstr "Prilagodite"
 
 msgid "Customize OpenWebIF settings for fallback tuner"
-msgstr "Prilagoditi OpenWebIF postavke za rezervni tjuner"
+msgstr "Prilagodite OpenWebIF postavke za rezervni tjuner"
 
 msgid "Customize channel list cursor behavior"
-msgstr "Prilagoditi ponašanje pokazivača na popisu kanala"
+msgstr "Prilagodite ponašanje pokazivača na popisu kanala"
 
 msgid "Cut"
 msgstr "Izreži"
@@ -4677,7 +4664,7 @@ msgstr "GREŠKA - nije uspjelo skeniranje (%s)!"
 
 #, python-format
 msgid "ERROR downloading file %s"
-msgstr "GREŠKA u preuzimanju datoteke %s"
+msgstr ""
 
 msgid "East"
 msgstr "Istok"
@@ -4910,7 +4897,7 @@ msgid "Encryption:"
 msgstr "Kodiranje:"
 
 msgid "End alternatives edit"
-msgstr "Završi alternativno uređivanje"
+msgstr "Završite alternativno uređivanje"
 
 msgid "End bouquet edit"
 msgstr "Završi uređivanje paketa"
@@ -5040,9 +5027,9 @@ msgstr "Eritreja"
 msgid "Error"
 msgstr "Greška"
 
-#, python-format
+#, fuzzy, python-format
 msgid "Error %s"
-msgstr "Greška %s"
+msgstr "Greška"
 
 msgid "Error code"
 msgstr "Greška koda"
@@ -5077,10 +5064,13 @@ msgid "Error stop stream!"
 msgstr "Pogreška pri zaustavljanju web prijenosa!"
 
 msgid "Error when writing epg.dat on server"
-msgstr "Pogreška prilikom pisanja epg.dat na serveru"
+msgstr ""
 
+#, fuzzy
 msgid "Error while retreiving epg.dat from server"
-msgstr "Pogreška prilikom preuzimanja epg.data sa servera"
+msgstr ""
+"Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -5090,8 +5080,11 @@ msgstr ""
 "Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
 "%s"
 
+#, fuzzy
 msgid "Error while retreiving location of epg.dat on server"
-msgstr "Pogreška prilikom dohvaćanja lokacije epg.data na serveru"
+msgstr ""
+"Pogreška tijekom preuzimanja podataka o rezervnom tajmeru\n"
+"%s"
 
 #, python-format
 msgid ""
@@ -5769,14 +5762,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Žanr"
 
-#, fuzzy
-msgid "Geolocation"
-msgstr "Lokacija"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Informacije o softverskom upravitelju"
-
 msgid "Georgia"
 msgstr "Georgia"
 
@@ -6264,9 +6249,6 @@ msgstr "ISO datoteka je prevelika za ovaj datotečni sustav!"
 
 msgid "ISO path"
 msgstr "ISO staza"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr "Island"
@@ -6839,10 +6821,6 @@ msgstr "Zadnji dnevnik ažuriranja"
 msgid "Latitude"
 msgstr "Širina"
 
-#, fuzzy
-msgid "Latitude: "
-msgstr "Širina"
-
 msgid "Latvia"
 msgstr "Latvija"
 
@@ -7008,10 +6986,6 @@ msgid "Long key press"
 msgstr "Dugi pritisak na tipku"
 
 msgid "Longitude"
-msgstr "Dužina"
-
-#, fuzzy
-msgid "Longitude: "
 msgstr "Dužina"
 
 msgid "Loop through from"
@@ -7280,9 +7254,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Nedostaje "
-
-msgid "Mobile: "
-msgstr ""
 
 msgid "Mode"
 msgstr "Način"
@@ -7804,7 +7775,7 @@ msgid "No displayable files on this medium found!"
 msgstr "Nema pronađenih datoteka na ovom mediju!"
 
 msgid "No epg.dat file found server"
-msgstr "Nije pronađen nijedan server epg.dat datoteke"
+msgstr ""
 
 msgid "No event info found, recording indefinitely."
 msgstr "Nije pronađen nijedan podatak o događaju, snimanje na neodređeno vrijeme."
@@ -8812,17 +8783,15 @@ msgstr "Uključite napajanje za LED tijekom dubokog stanja čekanja."
 msgid "Power LED state during standby."
 msgstr "Uključite napajanje za LED tijekom stanja čekanja."
 
-#, fuzzy
 msgid "Power LED state in Deep-Standby"
-msgstr "Radni LED status u dubokom stanju čekanja"
+msgstr ""
 
 #, fuzzy
 msgid "Power LED state in Standby"
-msgstr "Radni LED status u stanju čekanja"
+msgstr "Isključivanje u stanje čekanja"
 
-#, fuzzy
 msgid "Power LED state when running."
-msgstr "Operativni LED status dok se izvodi."
+msgstr ""
 
 #, fuzzy
 msgid "Power On Display"
@@ -9101,12 +9070,6 @@ msgstr "Pružatelji usluga"
 #, fuzzy
 msgid "Providers: "
 msgstr "Pružatelji usluga"
-
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
 
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
@@ -9611,7 +9574,7 @@ msgid "Restart network"
 msgstr "Ponovno pokretanje mreže"
 
 msgid "Restart softcam"
-msgstr "Ponovno pokrenite SoftCam"
+msgstr "Ponovno pokretanje SoftCam-a"
 
 msgid "Restart test"
 msgstr "Ponovno pokretanje testa"
@@ -10358,9 +10321,6 @@ msgstr "Odaberite satelit koji želite konfigurirati. Nakon konfiguriranja tog s
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Odaberite satelit od kojeg vaše antene primaju signal. Ako niste sigurni odaberite 'automatsko' i primatelj će to pokušati odrediti."
 
-msgid "Select the time zone within the area or region."
-msgstr "Odaberite vremensku zonu unutar područja ili regije."
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Odaberite tjuner koji kontrolira motorizirani tanjur."
 
@@ -10424,9 +10384,6 @@ msgstr "Odaberite svog pružatelja usluga i pritisnite OK za početak skeniranja
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Odaberite svoju regiju. Ako nije dostupno, promijenite 'Država' u 'sve' i odaberite jednu od zadanih alternativa."
-
-msgid "Select your time zone area or region."
-msgstr "Odaberite vremensku zonu ili regiju."
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Odabir satelita 1 (USALS)"
@@ -10746,6 +10703,10 @@ msgstr "Postavljanje pozicionera"
 
 msgid "Setup your satellite equipment"
 msgstr "Postavljanje satelitske opreme"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Postavljanje pozicionera"
 
 msgid "Seychelles"
 msgstr "Sejšeli"
@@ -11600,10 +11561,6 @@ msgstr "Pokrenite set top box u stanje čekanja"
 msgid "Startup to Standby"
 msgstr "Pokretanje u stanje čekanja"
 
-#, fuzzy
-msgid "State: "
-msgstr "Bitrate:"
-
 msgid "Status"
 msgstr ""
 
@@ -11841,6 +11798,12 @@ msgstr "Suriname"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard i Jan Mayen"
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
+msgstr ""
 
 msgid "Swap PiP"
 msgstr "PiP promjena"
@@ -12676,12 +12639,6 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
-msgid "Time zone"
-msgstr "Vremenska zona"
-
-msgid "Time zone area"
-msgstr "Područje vremenske zone"
-
 msgid "Timer"
 msgstr "Tajmer"
 
@@ -12760,8 +12717,11 @@ msgstr "Lokacija s pomakom vremena"
 msgid "Timeshift not possible!"
 msgstr "Vremenski pomak nije moguć!"
 
+msgid "Timezone"
+msgstr "Vremenska zona"
+
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Vremenska zona"
 
 msgid "Timor-Leste"
@@ -14355,6 +14315,10 @@ msgstr "Vaš će prijemnik morati biti u stanju čekanja zbog neaktivnosti."
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Prijemnik će se ponovno pokrenuti pritiskom na OK na daljinskom upravljaču."
 
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Možete poništiti uklanjanje."
+
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"
 "Have you attached your USB WLAN Stick?\n"
@@ -14486,7 +14450,7 @@ msgid "a gui to assign services/providers/caids to common interface modules"
 msgstr "GUI za dodjeljivanje usluga/pružatelja usluga/caids-a zajedničkim modulima sučelja"
 
 msgid "about to start"
-msgstr "o početku"
+msgstr "počinje"
 
 msgid "activate network adapter configuration"
 msgstr "aktivirati konfiguraciju mrežnog adaptera"
@@ -15702,7 +15666,7 @@ msgid "vertical"
 msgstr "vertikalno"
 
 msgid "violet"
-msgstr "ljubičasta"
+msgstr ""
 
 msgid "wait for ci..."
 msgstr "pričekajte za CI..."
@@ -15762,7 +15726,7 @@ msgid "with errors"
 msgstr "s greškama"
 
 msgid "with text"
-msgstr "s tekstom"
+msgstr "с tekstom"
 
 msgid "with tuner name"
 msgstr "s imenom tjunera"

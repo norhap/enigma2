@@ -755,7 +755,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		if confirmed:
 			try:
 				os.remove(self.delname)
-			except OSError as e:
+			except OSError,e:
 				print("[MediaPlayer] delete failed:", e)
 				self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
 

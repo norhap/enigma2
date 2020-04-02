@@ -1,5 +1,6 @@
 from __future__ import print_function
 from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
+
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.ActionMap import NumberActionMap
 from Components.Harddisk import harddiskmanager
@@ -18,6 +19,7 @@ from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
 from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
+
 from Screens.Screen import Screen
 from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens import Standby
@@ -34,17 +36,22 @@ from Screens.SubtitleDisplay import SubtitleDisplay
 from Screens.RdsDisplay import RdsInfoDisplay, RassInteractive
 from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
-from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
+from ServiceReference import ServiceReference, isPlayableForCur
+
 from Tools import Notifications, ASCIItranslit
 from Tools.Directories import fileExists, getRecordingFilename, moveFiles
 from Tools.KeyBindings import getKeyDescription
+
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType, getBoxBrand
+
 from time import time, localtime, strftime
 import os
 from bisect import insort
 from sys import maxint
 import itertools, datetime
+
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
+
 # hack alert!
 from Screens.Menu import MainMenu, mdom
 
@@ -224,7 +231,7 @@ class InfoBarUnhandledKey:
 		return 0
 
 	def closeSIB(self, key):
-		if key >= 12 and key not in (114, 115, 174, 352, 103, 108, 402, 403, 407, 412):
+		if key >= 12 and key not in (114, 115, 352, 103, 108, 402, 403, 407, 412):
 			return True
 		else:
 			return False
@@ -3905,16 +3912,16 @@ class InfoBarHDMI:
 		slist = self.servicelist
 		if slist.dopipzap:
 			curref = self.session.pip.getCurrentService()
-			if curref and curref.type != eServiceReference.idServiceHDMIIn:
-				self.session.pip.playService(hdmiInServiceRef())
+			if curref and curref.type != 8192:
+				self.session.pip.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:'))
 			else:
 				self.session.pip.playService(slist.servicelist.getCurrent())
 		else:
 			curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			if curref and curref.type != eServiceReference.idServiceHDMIIn:
+			if curref and curref.type != 8192:
 				if curref and curref.type != -1 and os.path.splitext(curref.toString().split(":")[10])[1].lower() in AUDIO_EXTENSIONS.union(MOVIE_EXTENSIONS, DVD_EXTENSIONS):
 					setResumePoint(self.session)
-				self.session.nav.playService(hdmiInServiceRef())
+				self.session.nav.playService(eServiceReference('8192:0:1:0:0:0:0:0:0:0:'))
 			elif isStandardInfoBar(self):
 				self.session.nav.playService(slist.servicelist.getCurrent())
 			else:

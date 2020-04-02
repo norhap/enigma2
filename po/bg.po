@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2018-11-12 20:51+0200\n"
 "Last-Translator: Мартин Петков <marto74bg@yahoo.co.uk>\n"
 "Language-Team: Bulgarian\n"
@@ -2933,10 +2933,6 @@ msgid "Circular right"
 msgstr "Кръгова дясна"
 
 #, fuzzy
-msgid "City: "
-msgstr "Капацитет: "
-
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Не може да се премести в кошчето"
 
@@ -3069,9 +3065,6 @@ msgstr "Коморски Острови"
 msgid "Compact flash"
 msgstr "Компакт-флаш"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "Завършен"
 
@@ -3186,6 +3179,12 @@ msgstr "Настройка, дали да се прескочи проверка
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Настройка за превключване на субтитрите между шрифтове - нормален, курсив, удебелен, удебелен курсив."
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 msgid "Configure interface"
 msgstr "Конфигуриране интерфейс"
@@ -3556,10 +3555,6 @@ msgstr "Консултирайте се със спецификацията на
 msgid "Content does not fit on DVD!"
 msgstr "Съдържанието не се побира на DVD!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Продължи"
-
 msgid "Continue"
 msgstr "Продължи"
 
@@ -3629,10 +3624,6 @@ msgstr "Информация за софтуер мениджъра"
 msgid "Country for EPG event rating information"
 msgstr "Консултирайте се със спецификацията на Вашия мотор за тази информация, или оставете настройките по подразбиране."
 
-#, fuzzy
-msgid "Country: "
-msgstr "Страна"
-
 msgid "Cover dashed flickering line for this service"
 msgstr "Скрийте мигащата линия за този канал"
 
@@ -3681,10 +3672,6 @@ msgstr "Куба"
 
 msgid "Curacao"
 msgstr "Курасао"
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Текущо устройство: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5794,14 +5781,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Жанр"
 
-#, fuzzy
-msgid "Geolocation"
-msgstr "Местоположение"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Информация за софтуер мениджъра"
-
 msgid "Georgia"
 msgstr "Грузия"
 
@@ -6294,9 +6273,6 @@ msgstr "ISO файла е много голям за тази файлова с�
 
 msgid "ISO path"
 msgstr "ISO път"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr "Исландия"
@@ -6872,10 +6848,6 @@ msgstr "Лог на последната актуализация"
 msgid "Latitude"
 msgstr "Ширина"
 
-#, fuzzy
-msgid "Latitude: "
-msgstr "Ширина"
-
 msgid "Latvia"
 msgstr "Латвия"
 
@@ -7041,10 +7013,6 @@ msgid "Long key press"
 msgstr "Дълго натискане на Бутон"
 
 msgid "Longitude"
-msgstr "Дължина"
-
-#, fuzzy
-msgid "Longitude: "
 msgstr "Дължина"
 
 msgid "Loop through from"
@@ -7313,9 +7281,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Липсва "
-
-msgid "Mobile: "
-msgstr ""
 
 #, fuzzy
 msgid "Mode"
@@ -9149,12 +9114,6 @@ msgstr "Провайдъри"
 msgid "Providers: "
 msgstr "Провайдъри"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr ""
 
@@ -10414,10 +10373,6 @@ msgstr "Изберете сателита който искате да конф�
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Изберете сателита който се приема от антената Ви. Ако не сте сигурни, изберете ‘автоматично’ и приемника ще се опита да определи това за Вас."
 
-#, fuzzy
-msgid "Select the time zone within the area or region."
-msgstr "Избор на хоризонтална резолюция:"
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Изберете тунера контролиращ моторизираната антена."
 
@@ -10482,10 +10437,6 @@ msgstr "Изберете Вашия провайдер и натиснете О�
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Изберете Вашия регион. Ако не е наличен, променете ‘Страна’ на ‘всички’ и изберете една от тези по подразбиране."
-
-#, fuzzy
-msgid "Select your time zone area or region."
-msgstr "Избор на хоризонтална резолюция:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Избор сателити 1 (USALS)"
@@ -10808,6 +10759,10 @@ msgstr "Настройка на Вашия позиционер"
 
 msgid "Setup your satellite equipment"
 msgstr "Настройка на сателитното оборудване"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Настройка на Вашия позиционер"
 
 msgid "Seychelles"
 msgstr "Сейшелски Острови"
@@ -11668,10 +11623,6 @@ msgstr "Преход в режим готовност при включване 
 msgid "Startup to Standby"
 msgstr "Режим готовност при включване"
 
-#, fuzzy
-msgid "State: "
-msgstr "Битрейт:"
-
 msgid "Status"
 msgstr ""
 
@@ -11909,6 +11860,12 @@ msgstr "Суринам"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Свалбард и Жан Маен"
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
+msgstr ""
 
 msgid "Swap PiP"
 msgstr "Размени PiP"
@@ -12744,14 +12701,6 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
-#, fuzzy
-msgid "Time zone"
-msgstr "Часова зона"
-
-#, fuzzy
-msgid "Time zone area"
-msgstr "Часова зона"
-
 msgid "Timer"
 msgstr "Таймер"
 
@@ -12831,8 +12780,11 @@ msgstr "Местоположение на таймшифта"
 msgid "Timeshift not possible!"
 msgstr "Таймшифт не е възможен!"
 
+msgid "Timezone"
+msgstr "Часова зона"
+
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Часова зона"
 
 msgid "Timor-Leste"
@@ -14424,6 +14376,10 @@ msgstr "Вашия приемник ще премине в режим готов
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Вашия приемник ще се рестартира след натискане ОK на дистанционното."
+
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Можете да отмените премахването."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

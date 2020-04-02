@@ -25,7 +25,7 @@ class eServiceFactoryDVB: public iServiceHandler
 public:
 	eServiceFactoryDVB();
 	virtual ~eServiceFactoryDVB();
-	enum { id = eServiceReference::idDVB };
+	enum { id = 0x1 };
 
 		// iServiceHandler
 	RESULT play(const eServiceReference &, ePtr<iPlayableService> &ptr);
@@ -176,7 +176,6 @@ public:
 	int isTimeshiftEnabled();
 	RESULT activateTimeshift();
 	RESULT setNextPlaybackFile(const char *fn);
-	void goToNextPlaybackFile();
 	RESULT saveTimeshiftFile();
 	std::string getTimeshiftFilename();
 	void switchToLive();
@@ -219,7 +218,6 @@ protected:
 	eDVBServicePMTHandler m_service_handler_timeshift;
 	eDVBServiceEITHandler m_event_handler;
 	int m_current_audio_pid;
-	int m_current_video_pid_type;
 
 	eDVBServicePlay(const eServiceReference &ref, eDVBService *service);
 

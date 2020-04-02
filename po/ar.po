@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2018-12-17 02:51+0200\n"
 "Last-Translator: Hazem <moustafagamal@hotmail.com>\n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -2990,11 +2990,6 @@ msgstr "يسار دائرى"
 msgid "Circular right"
 msgstr "يمين دائرى"
 
-#
-#, fuzzy
-msgid "City: "
-msgstr "السعة: "
-
 #, fuzzy
 msgid "Clean network trash cans"
 msgstr "حذف قبل البحث"
@@ -3133,9 +3128,6 @@ msgstr ""
 msgid "Compact flash"
 msgstr "فلاش مدمج"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "مكتمل"
 
@@ -3249,6 +3241,12 @@ msgid "Configure if the HDMI EDID checking should be bypassed as this might solv
 msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
 msgstr ""
 
 msgid "Configure interface"
@@ -3613,9 +3611,6 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "المحتوى لا يناسب DVD"
 
-msgid "Continent: "
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -3688,10 +3683,6 @@ msgstr "معلومات مدير النظام"
 msgid "Country for EPG event rating information"
 msgstr ""
 
-#, fuzzy
-msgid "Country: "
-msgstr "الدولة"
-
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -3742,10 +3733,6 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
-
-#, fuzzy
-msgid "Currency: "
-msgstr "القناة الحالية:"
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5912,14 +5899,6 @@ msgstr ""
 msgid "Genre"
 msgstr ""
 
-#, fuzzy
-msgid "Geolocation"
-msgstr "مكان"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "معلومات مدير النظام"
-
 msgid "Georgia"
 msgstr ""
 
@@ -6426,9 +6405,6 @@ msgstr "ملف الايزو كبير جدا على نوع ملفات النظا�
 
 msgid "ISO path"
 msgstr "مسار أيزو"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -7040,11 +7016,6 @@ msgstr "أختيار مصدر الترقيه المراد تحريره"
 msgid "Latitude"
 msgstr "خط العرض"
 
-#
-#, fuzzy
-msgid "Latitude: "
-msgstr "خط العرض"
-
 msgid "Latvia"
 msgstr "لاتفيا"
 
@@ -7239,11 +7210,6 @@ msgstr "ضغط مستمر على مفتاح"
 
 #
 msgid "Longitude"
-msgstr "خط الطول"
-
-#
-#, fuzzy
-msgid "Longitude: "
 msgstr "خط الطول"
 
 msgid "Loop through from"
@@ -7537,9 +7503,6 @@ msgid "Mipsel"
 msgstr ""
 
 msgid "Missing "
-msgstr ""
-
-msgid "Mobile: "
 msgstr ""
 
 #
@@ -9494,12 +9457,6 @@ msgstr "مزودو القنوات"
 msgid "Providers: "
 msgstr "مزودو القنوات"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr ""
 
@@ -10836,9 +10793,6 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
-msgid "Select the time zone within the area or region."
-msgstr ""
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -10904,9 +10858,6 @@ msgid "Select your provider, and press OK to start the scan"
 msgstr ""
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
-msgstr ""
-
-msgid "Select your time zone area or region."
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -11244,6 +11195,10 @@ msgstr ""
 #, fuzzy
 msgid "Setup your satellite equipment"
 msgstr "معدات القمر"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "من فضلك أضبط الموالف A"
 
 msgid "Seychelles"
 msgstr ""
@@ -12162,10 +12117,6 @@ msgstr ""
 msgid "Startup to Standby"
 msgstr ""
 
-#, fuzzy
-msgid "State: "
-msgstr "الترقية السابقة: "
-
 msgid "Status"
 msgstr ""
 
@@ -12427,6 +12378,12 @@ msgid "Suriname"
 msgstr "بخث عن القنوات"
 
 msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -13281,16 +13238,6 @@ msgid "Time update in minutes:"
 msgstr ""
 
 #
-#, fuzzy
-msgid "Time zone"
-msgstr "منطقه الوقت"
-
-#
-#, fuzzy
-msgid "Time zone area"
-msgstr "منطقه الوقت"
-
-#
 msgid "Timer"
 msgstr "المؤقت"
 
@@ -13385,8 +13332,12 @@ msgid "Timeshift not possible!"
 msgstr "تحول الوقت غير ممكن"
 
 #
+msgid "Timezone"
+msgstr "منطقه الوقت"
+
+#
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "منطقه الوقت"
 
 msgid "Timor-Leste"
@@ -15037,6 +14988,10 @@ msgstr ""
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "سيتم إعادة تشغيل جهاز الاستقبال بعد الضغط على \"موافق\" في الريموت."
+
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "تستطيع إلغاء الحذف"
 
 #
 msgid ""

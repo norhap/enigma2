@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Project Slovenia\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2015-08-30 09:00+0200\n"
 "Last-Translator: Taykun345 <support@satnigmo.com>\n"
 "Language-Team: Satnigmo <support@satnigmo.com>\n"
@@ -3231,11 +3231,6 @@ msgstr "Krožno - levo"
 msgid "Circular right"
 msgstr "Krožno - desno"
 
-#
-#, fuzzy
-msgid "City: "
-msgstr "Kapaciteta:"
-
 #, fuzzy
 msgid "Clean network trash cans"
 msgstr "Prenos v smetnjak ni možen!"
@@ -3393,9 +3388,6 @@ msgstr ""
 msgid "Compact flash"
 msgstr "Compact Flash"
 
-msgid "Compiled by: "
-msgstr ""
-
 #
 msgid "Complete"
 msgstr "Končano"
@@ -3522,6 +3514,12 @@ msgstr ""
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Določitev možnosti preklapljanja podnapisov med navadnimi, poševnimi, odebeljenimi in poševnimi/odebeljenimi."
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 #
 msgid "Configure interface"
@@ -3920,10 +3918,6 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "Vsebina se ne prilega na DVD!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Naprej"
-
 msgid "Continue"
 msgstr "Naprej"
 
@@ -4001,10 +3995,6 @@ msgstr "Softwaremanager informacije"
 msgid "Country for EPG event rating information"
 msgstr ""
 
-#, fuzzy
-msgid "Country: "
-msgstr "Pripenjanje"
-
 msgid "Cover dashed flickering line for this service"
 msgstr ""
 
@@ -4061,10 +4051,6 @@ msgstr ""
 
 msgid "Curacao"
 msgstr ""
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Trenutna naprava:"
 
 #, fuzzy
 msgid "Current Affairs"
@@ -6449,15 +6435,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Žanr"
 
-#
-#, fuzzy
-msgid "Geolocation"
-msgstr "Lokacija"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Softwaremanager informacije"
-
 msgid "Georgia"
 msgstr ""
 
@@ -6993,9 +6970,6 @@ msgstr "ISO datoteka je prevelika za ta datotečni sistem!"
 #
 msgid "ISO path"
 msgstr "ISO pot"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr ""
@@ -7645,11 +7619,6 @@ msgstr "Zemljepisna širina [Lat]"
 
 #
 #, fuzzy
-msgid "Latitude: "
-msgstr "Zemljepisna širina [Lat]"
-
-#
-#, fuzzy
 msgid "Latvia"
 msgstr "Latvian"
 
@@ -7846,11 +7815,6 @@ msgstr "Dolgi pritisk tipke"
 
 #
 msgid "Longitude"
-msgstr "Zemljepisna dolžina [Lon]"
-
-#
-#, fuzzy
-msgid "Longitude: "
 msgstr "Zemljepisna dolžina [Lon]"
 
 msgid "Loop through from"
@@ -8156,9 +8120,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Manjkajoče"
-
-msgid "Mobile: "
-msgstr ""
 
 #
 #, fuzzy
@@ -10283,12 +10244,6 @@ msgstr "Ponudnik"
 msgid "Providers: "
 msgstr "Ponudnik"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr ""
 
@@ -11754,11 +11709,6 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
-#
-#, fuzzy
-msgid "Select the time zone within the area or region."
-msgstr "Izbor načina razvrščanja:"
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr ""
 
@@ -11830,11 +11780,6 @@ msgstr "Izberite vašega operaterja in za začetek iskanja pritisnite OK!"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
-
-#
-#, fuzzy
-msgid "Select your time zone area or region."
-msgstr "Izbor načina razvrščanja:"
 
 #
 msgid "Selecting satellites 1 (USALS)"
@@ -12198,6 +12143,10 @@ msgstr "Nastavitev pozicionerja"
 #
 msgid "Setup your satellite equipment"
 msgstr "Nastavljanje satelitske opreme"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Nastavitev pozicionerja"
 
 msgid "Seychelles"
 msgstr ""
@@ -13189,11 +13138,6 @@ msgstr "Po vklopu sprejemnika, ko je le-ta popolnoma izključen, sprejemnik prei
 msgid "Startup to Standby"
 msgstr "Vklop in prehod v stanje pripravljenosti"
 
-#
-#, fuzzy
-msgid "State: "
-msgstr "Bitrate:"
-
 msgid "Status"
 msgstr ""
 
@@ -13477,6 +13421,12 @@ msgid "Suriname"
 msgstr "Ime kanala"
 
 msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
 msgstr ""
 
 msgid "Swap PiP"
@@ -14362,16 +14312,6 @@ msgid "Time update in minutes:"
 msgstr ""
 
 #
-#, fuzzy
-msgid "Time zone"
-msgstr "Časovni pas"
-
-#
-#, fuzzy
-msgid "Time zone area"
-msgstr "Časovni pas"
-
-#
 msgid "Timer"
 msgstr "Časovniki"
 
@@ -14470,8 +14410,12 @@ msgid "Timeshift not possible!"
 msgstr "Časovni zamik ni možen!"
 
 #
+msgid "Timezone"
+msgstr "Časovni pas"
+
+#
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Časovni pas"
 
 msgid "Timor-Leste"
@@ -16237,6 +16181,11 @@ msgstr "Sprejemnik bo prešel v spanje pripravljenosti zaradi neaktivnosti."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Sprejemnik se bo po pritisku tipke OK ponovno zagnal."
+
+#
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Lahko prekličete izbris."
 
 #
 msgid ""

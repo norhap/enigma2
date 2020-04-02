@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Openpli\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2019-04-03 06:49+0300\n"
 "Last-Translator: \n"
 "Language-Team: Raivo, Henkka, eesatfan, rimas, zeros\\n faas, sateks, valgekotkas, tigekala, rootsikunn\\n kain, i70, mustkass, pelmeen, Scott\\n <digi-tv.ee>\n"
@@ -2932,10 +2932,6 @@ msgid "Circular right"
 msgstr "Ringpolarisatsioon parem"
 
 #, fuzzy
-msgid "City: "
-msgstr "Maht: "
-
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Prügikasti saatmine ei ole võimalik"
 
@@ -3067,9 +3063,6 @@ msgstr "Komoori Liit"
 msgid "Compact flash"
 msgstr "Compact flash"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "Täielik"
 
@@ -3180,6 +3173,12 @@ msgstr "Määra, kui HDMI EDID kontrollist peaks mööduma, kuivõrd see võib k
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Määra, kas subtiitreid peaks saama ümber lülitada normaalse, poolpaksu, kursiivi ja poolpaksu kursiivi vahel."
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 msgid "Configure interface"
 msgstr "Seadista liides"
@@ -3551,10 +3550,6 @@ msgstr "Seda infot otsi ajami spetsifikatsioonilehelt või kasuta vaikeväärtus
 msgid "Content does not fit on DVD!"
 msgstr "Sisu ei mahu DVD-le!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Jätka"
-
 msgid "Continue"
 msgstr "Jätka"
 
@@ -3625,10 +3620,6 @@ msgstr "Tarkvarahalduri informatsioon"
 msgid "Country for EPG event rating information"
 msgstr "Seda infot otsi unicable seadme spetsifikatsioonilehelt."
 
-#, fuzzy
-msgid "Country: "
-msgstr "Riik"
-
 msgid "Cover dashed flickering line for this service"
 msgstr "Peida võbeleva katkendjoonega joon selle teenuse jaoks"
 
@@ -3676,10 +3667,6 @@ msgstr "Kuuba"
 
 msgid "Curacao"
 msgstr "Curacao"
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Praegune seade: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5775,14 +5762,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Žanr"
 
-#, fuzzy
-msgid "Geolocation"
-msgstr "Asukoht"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Tarkvarahalduri informatsioon"
-
 msgid "Georgia"
 msgstr "Gruusia"
 
@@ -6270,9 +6249,6 @@ msgstr "ISO fail on liiga suur failisüsteemile!"
 
 msgid "ISO path"
 msgstr "ISO kataloog"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr "Island"
@@ -6844,10 +6820,6 @@ msgstr "Viimase uuenduse logi"
 msgid "Latitude"
 msgstr "Laiuskraad"
 
-#, fuzzy
-msgid "Latitude: "
-msgstr "Laiuskraad"
-
 msgid "Latvia"
 msgstr "Läti"
 
@@ -7012,10 +6984,6 @@ msgid "Long key press"
 msgstr "Pikk nupuvajutus"
 
 msgid "Longitude"
-msgstr "Pikkuskraad"
-
-#, fuzzy
-msgid "Longitude: "
 msgstr "Pikkuskraad"
 
 msgid "Loop through from"
@@ -7282,9 +7250,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Puudub"
-
-msgid "Mobile: "
-msgstr ""
 
 #, fuzzy
 msgid "Mode"
@@ -9119,12 +9084,6 @@ msgstr "Levitajad"
 msgid "Providers: "
 msgstr "Levitajad"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -10385,10 +10344,6 @@ msgstr "Vali seadistatav satelliit. Kui see satelliit on seadistatud, saab valid
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Vali vastuvõetav satelliit. Kui pole kindel, vali 'automaatne' ja vastuvõtja üritab selle ise tuvastada."
 
-#, fuzzy
-msgid "Select the time zone within the area or region."
-msgstr "Vali horisontaalne resolutsioon:"
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Vali tuuner, mis juhib ajamiga antenni."
 
@@ -10454,10 +10409,6 @@ msgstr "Vali teenusepakkuja ja vajuta otsingu alustamiseks OK"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Määra regioon. Kui see pole saadaval, muuda riigi asemel 'Kõik' ja vali üks alternatiividest."
-
-#, fuzzy
-msgid "Select your time zone area or region."
-msgstr "Vali horisontaalne resolutsioon:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Satelliitide valimine 1 (USALS)"
@@ -10779,6 +10730,10 @@ msgstr "Mootori häälestamine"
 
 msgid "Setup your satellite equipment"
 msgstr "Satelliidiseadmed"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Mootori häälestamine"
 
 msgid "Seychelles"
 msgstr "Seišellid"
@@ -11638,10 +11593,6 @@ msgstr "Vastuvõtja käivitamine ooterežiimis."
 msgid "Startup to Standby"
 msgstr "Ooterežiimis alustamine"
 
-#, fuzzy
-msgid "State: "
-msgstr "Bitikiirus:"
-
 msgid "Status"
 msgstr ""
 
@@ -11879,6 +11830,12 @@ msgstr "Suriname"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard ja Jan Mayen"
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
+msgstr ""
 
 msgid "Swap PiP"
 msgstr "Vaheta PiP"
@@ -12737,14 +12694,6 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
-#, fuzzy
-msgid "Time zone"
-msgstr "Ajavöönd"
-
-#, fuzzy
-msgid "Time zone area"
-msgstr "Ajavöönd"
-
 msgid "Timer"
 msgstr "Taimer"
 
@@ -12824,8 +12773,11 @@ msgstr "Ajanihke asukoht"
 msgid "Timeshift not possible!"
 msgstr "Ajanihke kasutamine pole võimalik!"
 
+msgid "Timezone"
+msgstr "Ajavöönd"
+
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Ajavöönd"
 
 msgid "Timor-Leste"
@@ -14435,6 +14387,10 @@ msgstr "Vastuvõtja läheb ootele tegevusetuse tõttu."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Vastuvõtja taaskäivitub pärast puldil OK vajutamist."
+
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Eemaldamise saab tühistada."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

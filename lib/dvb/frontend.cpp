@@ -1223,10 +1223,6 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.28) - 10.0) * 100);
 	}
-	else if (!strcmp(m_description, "GIGA DVB-S2 NIM (TS3L10)"))
-	{
-		ret = snr;
-	}
 	else if (!strcmp(m_description, "DVB-S2 NIM(45208 FBC)") || !strcmp(m_description, "DVB-S2 NIM(45308 FBC)") || !strcmp(m_description, "DVB-S2X NIM(45308 FBC)"))
 	{
 		ret = (int)((((double(snr) / (65535.0 / 100.0)) * 0.1950) - 1.0000) * 100);
@@ -1266,28 +1262,15 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		eDVBFrontendParametersCable parm = {0};
 		int mse = (~snr) & 0xFF;
-		int type = -1;
-		oparm.getSystem(type);
-		switch (type)
+		oparm.getDVBC(parm);
+		switch (parm.modulation)
 		{
-		case feCable: 
-			eDVBFrontendParametersCable parm;
-			oparm.getDVBC(parm);
-			switch (parm.modulation)
-			{
-			case eDVBFrontendParametersCable::Modulation_Auto:
-			case eDVBFrontendParametersCable::Modulation_QAM16:
-			case eDVBFrontendParametersCable::Modulation_QAM64:
-			case eDVBFrontendParametersCable::Modulation_QAM256: ret = (int)(-950 * log(((double)mse) / 760)); break;
-			case eDVBFrontendParametersCable::Modulation_QAM32:
-			case eDVBFrontendParametersCable::Modulation_QAM128: ret = (int)(-875 * log(((double)mse) / 650)); break;
-			}
-			break;
-		case feTerrestrial: 
-			ret = (mse * 25) / 2;
-			break;
-		default:
-			break;
+		case eDVBFrontendParametersCable::Modulation_QAM16:
+		case eDVBFrontendParametersCable::Modulation_QAM64:
+		case eDVBFrontendParametersCable::Modulation_QAM256: ret = (int)(-950 * log(((double)mse) / 760)); break;
+		case eDVBFrontendParametersCable::Modulation_QAM32:
+		case eDVBFrontendParametersCable::Modulation_QAM128: ret = (int)(-875 * log(((double)mse) / 650)); break;
+		default: break;
 		}
 	}
 	else if (!strcmp(m_description, "Typhoon(internal)") || !strcmp(m_description, "DS3103"))
@@ -3120,11 +3103,6 @@ int eDVBFrontend::isCompatibleWith(ePtr<iDVBFrontendParameters> &feparm)
 		{
 			/* prefer to use a T tuner, try to keep T2 free for T2 transponders */
 			score--;
-		}
-		if (parm.system == eDVBFrontendParametersTerrestrial::System_DVB_T_T2 && can_handle_dvbt2)
-		{
-			// System_DVB_T_T2 is a generic T/T2 type, so we prefer a dvb-t2 tuner
-			score++;
 		}
 	}
 	else if (type == eDVBFrontend::feATSC)

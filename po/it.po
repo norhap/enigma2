@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenPLi-enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2018-05-22 13:54+0200\n"
 "Last-Translator: Gringo <openpli@tiscali.it>\n"
 "Language-Team: www.linsat.net <spaeleus@croci.org>\n"
@@ -2931,10 +2931,6 @@ msgid "Circular right"
 msgstr "Circolare a destra"
 
 #, fuzzy
-msgid "City: "
-msgstr "Capacità: "
-
-#, fuzzy
 msgid "Clean network trash cans"
 msgstr "Impossibile spostare nel Cestino"
 
@@ -3066,9 +3062,6 @@ msgstr "Comoros"
 msgid "Compact flash"
 msgstr "Compact Flash"
 
-msgid "Compiled by: "
-msgstr ""
-
 msgid "Complete"
 msgstr "Completo"
 
@@ -3179,6 +3172,12 @@ msgstr "Impostare se il controllo sul collegamento HDMI EDID (Extended Display I
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Impostare se visualizzare i sottotitoli in carattere normale, grassetto, inclinato o grassetto inclinato."
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 msgid "Configure interface"
 msgstr "Impostare l'interfaccia"
@@ -3547,10 +3546,6 @@ msgstr "Consultare le specifiche del motore per inserire queste informazioni, op
 msgid "Content does not fit on DVD!"
 msgstr "I contenuti superano la capacità del DVD!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Continuare"
-
 msgid "Continue"
 msgstr "Continuare"
 
@@ -3620,10 +3615,6 @@ msgstr "Informazioni sulla gestione del software"
 msgid "Country for EPG event rating information"
 msgstr "Consultare la scheda tecnica del dispositivo SCR per queste informazioni."
 
-#, fuzzy
-msgid "Country: "
-msgstr "Paese"
-
 msgid "Cover dashed flickering line for this service"
 msgstr "Far sparire le linee tratteggiate tremolanti ai bordi del canale"
 
@@ -3671,10 +3662,6 @@ msgstr "Cuba"
 
 msgid "Curacao"
 msgstr "Curacao"
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Dispositivo attuale: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -5763,14 +5750,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Genere"
 
-#, fuzzy
-msgid "Geolocation"
-msgstr "Selezione EPG"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Informazioni"
-
 msgid "Georgia"
 msgstr "Georgia"
 
@@ -6259,9 +6238,6 @@ msgstr "File ISO troppo grande per questo filesystem!"
 
 msgid "ISO path"
 msgstr "Percorso ISO"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr "Islanda"
@@ -6835,10 +6811,6 @@ msgstr "Ultimo registro di aggiornamento"
 msgid "Latitude"
 msgstr "Latitudine"
 
-#, fuzzy
-msgid "Latitude: "
-msgstr "Latitudine"
-
 msgid "Latvia"
 msgstr "Lettonia"
 
@@ -7003,10 +6975,6 @@ msgid "Long key press"
 msgstr "Pressione prolungata tasto"
 
 msgid "Longitude"
-msgstr "Longitudine"
-
-#, fuzzy
-msgid "Longitude: "
 msgstr "Longitudine"
 
 msgid "Loop through from"
@@ -7273,9 +7241,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Mancante "
-
-msgid "Mobile: "
-msgstr ""
 
 msgid "Mode"
 msgstr "Modalità"
@@ -9094,12 +9059,6 @@ msgstr "Provider"
 msgid "Providers: "
 msgstr "Provider"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr "Porto Rico"
 
@@ -10349,10 +10308,6 @@ msgstr "Selezionare il satellite che si desidera configurare. Dopo aver impostat
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr "Selezionare il satellite dal quale la parabola riceve il segnale. Nel dubbio selezionare \"Automatico\" e il ricevitore tenterà di individuarlo da solo."
 
-#, fuzzy
-msgid "Select the time zone within the area or region."
-msgstr "Selezionare la risoluzione orizzontale:"
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Selezionare il sintonizzatore che controlla la parabola motorizzata."
 
@@ -10416,10 +10371,6 @@ msgstr "Selezionare il provider e premere OK per avviare la ricerca"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Selezionare la regione. Se non è presente modificare il \"Paese\" in \"Tutti\" e selezionare una delle alternative predefinite."
-
-#, fuzzy
-msgid "Select your time zone area or region."
-msgstr "Selezionare la risoluzione orizzontale:"
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Selezionare i satelliti 1 (USALS)"
@@ -10739,6 +10690,10 @@ msgstr "Configurare il motore"
 
 msgid "Setup your satellite equipment"
 msgstr "Configurare il ricevitore satellitare"
+
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Configurare il motore"
 
 msgid "Seychelles"
 msgstr "Seychelles"
@@ -11594,10 +11549,6 @@ msgstr "Mettere il ricevitore in sospensione dopo l'accensione."
 msgid "Startup to Standby"
 msgstr "Accensione in stato di sospensione"
 
-#, fuzzy
-msgid "State: "
-msgstr "Bitrate:"
-
 msgid "Status"
 msgstr ""
 
@@ -11835,6 +11786,12 @@ msgstr "Suriname"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard e Jan Mayen"
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
+msgstr ""
 
 msgid "Swap PiP"
 msgstr "Scambiare il canale PIP"
@@ -12685,14 +12642,6 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
-#, fuzzy
-msgid "Time zone"
-msgstr "Fuso orario"
-
-#, fuzzy
-msgid "Time zone area"
-msgstr "Fuso orario"
-
 msgid "Timer"
 msgstr "Timer"
 
@@ -12772,8 +12721,11 @@ msgstr "Percorso dei timeshift"
 msgid "Timeshift not possible!"
 msgstr "Timeshift impossibile!"
 
+msgid "Timezone"
+msgstr "Fuso orario"
+
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Fuso orario"
 
 msgid "Timor-Leste"
@@ -14370,6 +14322,10 @@ msgstr "Il ricevitore sta per entrare in sospensione a causa del tempo di inutil
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Il ricevitore si riavvierà dopo aver premuto il tasto OK sul telecomando."
+
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "E' possibile annullare l'eliminazione."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

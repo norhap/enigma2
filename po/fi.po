@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 15:42+0430\n"
+"POT-Creation-Date: 2020-03-08 23:31+0330\n"
 "PO-Revision-Date: 2019-02-13 20:52+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -3137,11 +3137,6 @@ msgstr "Kiertopol. vasen"
 msgid "Circular right"
 msgstr "Kiertopol. oikea"
 
-#
-#, fuzzy
-msgid "City: "
-msgstr "Kapasiteetti: "
-
 #, fuzzy
 msgid "Clean network trash cans"
 msgstr "Ei voida siirtää roskakoriin"
@@ -3298,9 +3293,6 @@ msgstr "Comoros"
 msgid "Compact flash"
 msgstr "CompactFlash"
 
-msgid "Compiled by: "
-msgstr ""
-
 #
 msgid "Complete"
 msgstr "Täysi"
@@ -3416,6 +3408,12 @@ msgstr "Määritä ohitetaanko HDMI EDID tarkistus. Tämä saattaa ratkaista ong
 
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr "Määritä vaihteleeko ulkoisen tekstityksen fontti tekstityksen määritysten mukaisesti (normal, italic, bold, bolditalic)"
+
+msgid "Configure if you need to swap the EN300743 mapping table."
+msgstr ""
+
+msgid "Configure if you need to swap the EN300743 palette table."
+msgstr ""
 
 #
 msgid "Configure interface"
@@ -3796,10 +3794,6 @@ msgstr ""
 msgid "Content does not fit on DVD!"
 msgstr "Sisältö ei mahdu DVD:lle!"
 
-#, fuzzy
-msgid "Continent: "
-msgstr "Jatka"
-
 msgid "Continue"
 msgstr "Jatka"
 
@@ -3873,10 +3867,6 @@ msgstr "Ohjelmiston hallinnan tiedot"
 msgid "Country for EPG event rating information"
 msgstr ""
 
-#, fuzzy
-msgid "Country: "
-msgstr "Maa"
-
 msgid "Cover dashed flickering line for this service"
 msgstr "Peitä välkkyvä rivi tällä kanavalla"
 
@@ -3931,10 +3921,6 @@ msgstr "Kuuba"
 
 msgid "Curacao"
 msgstr "Curacao"
-
-#, fuzzy
-msgid "Currency: "
-msgstr "Käytettävä laite: "
 
 #, fuzzy
 msgid "Current Affairs"
@@ -6239,15 +6225,6 @@ msgstr ""
 msgid "Genre"
 msgstr "Laji"
 
-#
-#, fuzzy
-msgid "Geolocation"
-msgstr "Hakemisto"
-
-#, fuzzy
-msgid "Geolocation information"
-msgstr "Ohjelmiston hallinnan tiedot"
-
 msgid "Georgia"
 msgstr "Georgia"
 
@@ -6773,9 +6750,6 @@ msgstr "ISO-tiedosto on liian suuri tälle tiedostojärjestelmälle!"
 #
 msgid "ISO path"
 msgstr "ISO-hakemisto"
-
-msgid "ISP: "
-msgstr ""
 
 msgid "Iceland"
 msgstr "Islanti"
@@ -7411,11 +7385,6 @@ msgid "Latitude"
 msgstr "Leveysaste"
 
 #
-#, fuzzy
-msgid "Latitude: "
-msgstr "Leveysaste"
-
-#
 msgid "Latvia"
 msgstr "Latvia"
 
@@ -7609,11 +7578,6 @@ msgstr "Pitkä painallus"
 
 #
 msgid "Longitude"
-msgstr "Pituusaste"
-
-#
-#, fuzzy
-msgid "Longitude: "
 msgstr "Pituusaste"
 
 #
@@ -7916,9 +7880,6 @@ msgstr ""
 
 msgid "Missing "
 msgstr "Puuttuu"
-
-msgid "Mobile: "
-msgstr ""
 
 msgid "Mode"
 msgstr "Tila"
@@ -10016,12 +9977,6 @@ msgstr "Palveluntarjoajat"
 msgid "Providers: "
 msgstr "Palveluntarjoajat"
 
-msgid "Proxy: "
-msgstr ""
-
-msgid "Public IP: "
-msgstr ""
-
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -11443,9 +11398,6 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
-msgid "Select the time zone within the area or region."
-msgstr ""
-
 msgid "Select the tuner that controls the motorised dish."
 msgstr "Valitse viritin joka ohjaa moottoroitua lautasta."
 
@@ -11515,9 +11467,6 @@ msgstr "Valitse palveluntarjoaja ja aloita haku OK-näppäimellä"
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Valitse käytettävä alue. Jos sopivaa ei löydy, vaihda maaksi 'Kaikki' ja valitse jokin oletusvaihtoehdoista."
-
-msgid "Select your time zone area or region."
-msgstr ""
 
 #
 msgid "Selecting satellites 1 (USALS)"
@@ -11871,6 +11820,11 @@ msgstr "Määritä antenninkääntölaite"
 
 msgid "Setup your satellite equipment"
 msgstr "Määritä käyttämäsi satelliittilaitteet"
+
+#
+#, fuzzy
+msgid "Setup your timezone area."
+msgstr "Määritä antenninkääntölaite"
 
 msgid "Seychelles"
 msgstr "Seychelles"
@@ -12830,11 +12784,6 @@ msgstr "Käynnistetäänkö laite valmiustilaan"
 msgid "Startup to Standby"
 msgstr "Käynnisty valmiustilaan"
 
-#
-#, fuzzy
-msgid "State: "
-msgstr "Nopeus:"
-
 msgid "Status"
 msgstr ""
 
@@ -13109,6 +13058,12 @@ msgstr "Suriname"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard and Jan Mayen"
+
+msgid "Swap EN300743 mapping table"
+msgstr ""
+
+msgid "Swap EN300743 palette table"
+msgstr ""
 
 msgid "Swap PiP"
 msgstr "Vaihda PiP"
@@ -14006,16 +13961,6 @@ msgstr ""
 msgid "Time update in minutes:"
 msgstr ""
 
-#
-#, fuzzy
-msgid "Time zone"
-msgstr "Aikavyöhyke"
-
-#
-#, fuzzy
-msgid "Time zone area"
-msgstr "Aikavyöhyke"
-
 msgid "Timer"
 msgstr "Ajastukset"
 
@@ -14110,8 +14055,12 @@ msgid "Timeshift not possible!"
 msgstr "Ajansiirtotallennusta ei voida käyttää."
 
 #
+msgid "Timezone"
+msgstr "Aikavyöhyke"
+
+#
 #, fuzzy
-msgid "Timezone: "
+msgid "Timezone area"
 msgstr "Aikavyöhyke"
 
 msgid "Timor-Leste"
@@ -15843,6 +15792,11 @@ msgstr "Vastaanottimesi siirtyy valmiustilaan aktiivisuuden puutteen vuoksi."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Vastaanottimesi uudelleenkäynnistyy kun painat OK näppäintä kaukosäätimessäsi."
+
+#
+#, fuzzy
+msgid "Your timezone in the area."
+msgstr "Voit keskeyttää poiston."
 
 #
 msgid ""
