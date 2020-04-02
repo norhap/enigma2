@@ -1,6 +1,7 @@
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
+from Components.Sources.FrontendStatus import FrontendStatus
 from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, getConfigListEntry
 from Components.NimManager import nimmanager, InitNimManager
@@ -23,7 +24,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 	]
 
 	sat_frequencies = [
-		# Thor 0.8W Sky News
+		# thor 08w Sky News
 		(
 			12418,
 			28000,
@@ -44,7 +45,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			70,
 			"Thor 5/6/7 0.8w"),
 
-		# Eutelsat 9.0E CCTV Europe
+		# eutelsat 90e cctv
 		(
 			11996,
 			27500,
@@ -65,7 +66,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			156,
 			"Eutelsat 9B 9.0e"),
 
-		# Hotbird 13.0E Rai 1
+		# hotbird 130e rai
 		(
 			10992,
 			27500,
@@ -86,10 +87,10 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			318,
 			"Hotbird 13.0e"),
 
- 		# Eutelsat 16.0E OTV
+ 		# eutelsat 160e hrt
  		(
- 			11345,
- 			30000,
+ 			10721,
+ 			27500,
  			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
  			eDVBFrontendParametersSatellite.FEC_3_4,
  			eDVBFrontendParametersSatellite.Inversion_Off,
@@ -103,11 +104,11 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
- 			24100,
+ 			20100,
  			366,
  			"Eutelsat 16A 16.0e"),
  
-		# Astra 19.2E ZDF
+		# astra 192e zdf
 		(
 			11953,
 			27500,
@@ -128,7 +129,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			1,
 			"Astra 1 19.2e"),
 
-		# Astra 23.5E Astra SES
+		# astra 235e astra ses
 		(
 			12168,
 			27500,
@@ -149,7 +150,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			3,
 			"Astra 3 23.5e"),
 
-		# Astra 28.2E EPG background audio
+		# astra 282e EPG background audio
 		(
 			11778,
 			27500,
@@ -170,7 +171,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			2,
 			"Astra 2 28.2e"),
 
-		# Hispasat 30.0W TSA
+		# hispasat 300e tsa
 		(
 			10890,
 			27500,
@@ -187,13 +188,13 @@ class AutoDiseqc(Screen, ConfigListScreen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			15,
-			2,
+			1388,
+			1388,
 			"Hispasat 30.0w"),
 	]
 
 	circular_sat_frequencies = [
-		# Express AMU1 36.0E NHK World Japan
+		# express AMU1 360 NHK World Japan
 		(
 			12341,
 			27500,
