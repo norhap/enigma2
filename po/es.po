@@ -2021,7 +2021,7 @@ msgid "Deselect"
 msgstr "Deseleccionar"
 
 msgid "Destination of fallback remote receiver"
-msgstr "Destino del receptor remoto de reserva"
+msgstr "Destino del receptor reserva"
 
 msgid "Details for plugin: "
 msgstr "Detalles para el plugin: "
@@ -2383,13 +2383,13 @@ msgid "Enable auto fast scan for %s"
 msgstr "Activar búsqueda automática rápida para %s"
 
 msgid "Enable fallback remote receiver"
-msgstr "Habilitar el receptor remoto de respaldo"
+msgstr "Habilitar el receptor reserva para respaldo"
 
 msgid "Enable parental protection"
 msgstr "Activar protección parental"
 
 msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Habilite el receptor remoto enigma2 para sintonizar servicios que no se pueden sintonizar localmente (ej: el sintonizador está ocupado o el tipo de canal no está disponible en el sintonizador local. Especifique la URL completa incluyendo http:// y el número de puerto (normalmente …: 8001 ), ej: http://segundo_receptor:8001."
+msgstr "Habilite el receptor reserva enigma2 para sintonizar servicios que no se pueden sintonizar localmente (ej: el sintonizador está ocupado o el tipo de canal no está disponible en el sintonizador local. Especifique la URL completa incluyendo http:// y el número de puerto (normalmente …: 8001 ), ej: http://segundo_receptor:8001."
 
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su antena necesita alimentación eléctrica"
@@ -2736,16 +2736,16 @@ msgid "Falkland Islands (Malvinas)"
 msgstr "Islas Malvinas"
 
 msgid "Fallback remote receiver"
-msgstr "Receptor remoto de respaldo"
+msgstr "Receptor reserva para respaldo"
 
 msgid "Fallback remote receiver IP"
-msgstr "IP Receptor remoto"
+msgstr "IP Receptor reserva"
 
 msgid "Fallback remote receiver Port"
-msgstr "Puerto del receptor remoto"
+msgstr "Puerto del receptor reserva"
 
 msgid "Fallback remote receiver URL"
-msgstr "URL del receptor remoto"
+msgstr "URL del receptor reserva"
 
 msgid "Fallback tuner setup"
 msgstr "Configuración del sintonizador de respaldo"
@@ -3240,7 +3240,7 @@ msgid "IP address"
 msgstr "Dirección IP"
 
 msgid "IP of fallback remote receiver"
-msgstr "IP del receptor remoto de respaldo"
+msgstr "IP del receptor reserva para respaldo"
 
 msgid "ISO file is too large for this filesystem!"
 msgstr "La imagen ISO es demasiado grande para este sistema de archivos!"
@@ -3302,22 +3302,22 @@ msgid "Image: "
 msgstr "Imagen: "
 
 msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby"
-msgstr "Importar canales y/o EPG desde la URL del receptor remoto también cuando el receptor salga del modo de reposo"
+msgstr "Importar canales y/o EPG desde la URL del receptor reserva también cuando el receptor salga del modo de reposo"
 
 msgid "Import channels and/or EPG from remote receiver URL when receiver is booted"
-msgstr "Importar canales y/o EPG desde la URL del receptor remoto cuando se inicia el receptor"
+msgstr "Importar canales y/o EPG desde la URL del receptor reserva cuando se inicia el receptor"
 
 msgid "Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted"
-msgstr "Importar canales y/o EPG desde la URL del receptor remoto cuando se reinicie el receptor o enigma2"
+msgstr "Importar canales y/o EPG desde la URL del receptor reserva cuando se reinicie el receptor o enigma2"
 
 msgid "Import channels from fallback tuner"
 msgstr "Importar canales desde el sintonizador de respaldo"
 
 msgid "Import from remote receiver URL"
-msgstr "Importar desde la URL del receptor remoto"
+msgstr "Importar desde la URL del receptor reserva"
 
 msgid "Import remote receiver URL"
-msgstr "Importar URL del receptor remoto"
+msgstr "Importar URL del receptor reserva"
 
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Para grabar un temporizador, el televisor se cambió al canal de grabación!\n"
@@ -4796,7 +4796,7 @@ msgid "Port D"
 msgstr "Port D"
 
 msgid "Port of fallback remote receiver"
-msgstr "Puerto de receptor remoto"
+msgstr "Puerto del receptor reserva"
 
 msgid "Portugal"
 msgstr "Portugal"
@@ -5157,10 +5157,10 @@ msgid "Reminder, you have chosen to save timeshift file."
 msgstr "Recordatorio, ha elegido guardar el archivo Timeshift."
 
 msgid "Remote control type"
-msgstr "Tipo de control remoto"
+msgstr "Tipo de mando a distancia"
 
 msgid "Remote control type setup"
-msgstr "Configuración de tipo de control remoto"
+msgstr "Configuración del mando a distancia"
 
 msgid "Removal has completed."
 msgstr "La eliminación se ha completado."
@@ -6149,10 +6149,10 @@ msgid "Show multi channel EPG"
 msgstr "Mostrar EPG multicanal"
 
 msgid "Show notification when import channels and/or EPG from remote receiver URL did not complete"
-msgstr "Mostrar notificación cuando los canales de importación y/o EPG de la URL del receptor remoto no se completaron"
+msgstr "Mostrar notificación cuando los canales de importación y/o EPG de la URL del receptor reserva no se completaron"
 
 msgid "Show notification when import channels and/or EPG from remote receiver URL is completed"
-msgstr "Mostrar notificación cuando se completen los canales de importación y/o EPG desde la URL del receptor remoto"
+msgstr "Mostrar notificación cuando se completen los canales de importación y/o EPG desde la URL del receptor reserva"
 
 msgid "Show notification when import channels was not successful"
 msgstr "Mostrar notificación cuando los canales de importación no tuvieron éxito"
@@ -7455,7 +7455,7 @@ msgid "URL"
 msgstr "URL"
 
 msgid "URL of fallback remote receiver"
-msgstr "URL del receptor remoto de reserva"
+msgstr "URL del receptor reserva"
 
 msgid "USALS"
 msgstr "USALS"
@@ -8182,7 +8182,7 @@ msgid "Your receiver will got to standby due to inactivity."
 msgstr "Su receptor estará en modo de reposo debido a la inactividad."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
-msgstr "Su receptor se reiniciará tras presionar OK en su control remoto."
+msgstr "Su receptor se reiniciará tras presionar OK en su mando a distancia."
 
 msgid "Zambia"
 msgstr "Zambia"
@@ -9386,7 +9386,7 @@ msgid "Factory reset"
 msgstr "Valores de fábrica"
 
 msgid "Fallback remote receiver setup"
-msgstr "Configuración del receptor remoto"
+msgstr "Configuración del receptor reserva"
 
 msgid "Filesystem check"
 msgstr "Chequear sistema de archivos"
@@ -10445,7 +10445,7 @@ msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instea
 msgstr "Cuando está habilitado, los subtítulos DVB gráficos se mostrarán en amarillo, en lugar del color original."
 
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
-msgstr "Cuando está habilitado, los stremas http se descodifican en el lado del servidor. El receptor del cliente (remoto) no tiene que descifrar. Predeterminado activado."
+msgstr "Cuando está habilitado, los stremas http se descodifican en el lado del servidor. El receptor del cliente (reserva) no tiene que descifrar. Predeterminado activado."
 
 msgid "When enabled, it is possible to leave the movieplayer with exit."
 msgstr "Cuando está habilitado, es posible abandonar el reproductor de películas con exit."
@@ -12447,7 +12447,7 @@ msgid ""
 msgstr ""
 "Recargar la lista de temporizadores.\n"
 "%d Temporizador Automático(s) deshabilitado porque el conflicto.\n"
-"%d doble Temporizdor Automático(s) remoto.\n"
+"%d doble Temporizdor Automático(s) reserva.\n"
 
 msgid "Remove not existing events"
 msgstr "Eliminar eventos no existentes"
@@ -14443,7 +14443,7 @@ msgid "Client mode"
 msgstr "Modo Cliente"
 
 msgid "Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared."
-msgstr "El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor remoto. Se borrarán todos los ajustes del sintonizador."
+msgstr "El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor reserva. Se borrarán todos los ajustes del sintonizador."
 
 msgid "Client tuner configuration"
 msgstr "Configuración Tuner Cliente"
@@ -14672,22 +14672,22 @@ msgid "Move Menu Up/Down"
 msgstr "Mover Menu Arriba/Abajo"
 
 msgid "Destination of fallback remote receiver for ATSC"
-msgstr "Destino del receptor remoto alternativo para ATSC"
+msgstr "Destino del receptor reserva alternativo para ATSC"
 
 msgid "Destination of fallback remote receiver for DVB-C"
-msgstr "Destino del receptor remoto alternativo para DVB-C"
+msgstr "Destino del receptor reserva alternativo para DVB-C"
 
 msgid "Destination of fallback remote receiver for DVB-T"
-msgstr "Destino del receptor remoto alternativo para DVB-T"
+msgstr "Destino del receptor reserva alternativo para DVB-T"
 
 msgid "Fallback remote receiver for ATSC"
-msgstr "Receptor remoto de reserva para ATSC"
+msgstr "Receptor reserva para ATSC"
 
 msgid "Fallback remote receiver for DVB-C"
-msgstr "Receptor remoto de reserva para DVB-C"
+msgstr "Receptor reserva para DVB-C"
 
 msgid "Fallback remote receiver for DVB-T"
-msgstr "Receptor remoto de reserva para DVB-T"
+msgstr "Receptor reserva para DVB-T"
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
 msgstr "Establecer sintonizadores alternativos para DVB-T/C o ATSC"
@@ -16140,3 +16140,15 @@ msgstr "Latitud: "
 
 msgid "Longitude: "
 msgstr "Longitud: "
+
+msgid "User ID"
+msgstr "ID de Usuario"
+
+msgid "Port"
+msgstr "Puerto"
+
+msgid "Customize OpenWebIF settings for fallback tuner"
+msgstr "Configuración de OpenWebIF del sintonizador reserva"
+
+msgid "When enabled you can customize the OpenWebIf settings for the fallback tuner"
+msgstr "Cuando está habilitado, puede personalizar la configuración de OpenWebIf del sintonizador reserva"
