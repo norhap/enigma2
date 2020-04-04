@@ -23,7 +23,7 @@ import skin, os, re, urllib2, sys, boxbranding
 from Components.Console import Console
 from Tools.Geolocation import geolocation
 
-URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
+URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/norhap-develop/NEWS'
 
 def novedades(url):
     text = ""
