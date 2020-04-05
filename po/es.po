@@ -16157,4 +16157,5 @@ msgid "Colours"
 msgstr "Colores"
 
 msgid "Service list"
-msgstr "Lista Canales
+msgstr "Lista Canales"
+
