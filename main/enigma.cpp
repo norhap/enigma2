@@ -244,15 +244,15 @@ int main(int argc, char **argv)
 	if (getenv("ENIGMA_DEBUG_TIME"))
 		setDebugTime(atoi(getenv("ENIGMA_DEBUG_TIME")) != 0);
 #ifdef HAVE_RASPBERRYPI
-//	cRpiSetup *m_setup;
+//	mknod("/tmp/ENIGMA_FIFO", S_IFIFO|0666, 0);
 	cOmxDevice *m_device;
-//	m_setup->ProcessArgs(0, 0); // videolayer=0, displayout=0 (default values)
+//	cRpiSetup::GetInstance()->ProcessArgs(/* videolayer */ 0, /* outdisplay */ 0); // (default values)
 	if(!cRpiSetup::HwInit())
 		eLog(3, "[cRpiSetup] failed to initialize RPi HD Device");
 	else
 	{
 		if (!cRpiSetup::IsVideoCodecSupported(cVideoCodec::eMPEG2))
-			eLog(3, "[cRpiHdDevice] MPEG2 video decoder not enabled!");
+			eLog(3, "[cRpiSetup] MPEG2 video decoder not enabled!");
 		m_device = new cOmxDevice(cRpiDisplay::GetId(), cRpiSetup::VideoLayer());
 		if (m_device)
 			m_device->Init();
@@ -370,7 +370,9 @@ int main(int argc, char **argv)
 	}
 #ifdef HAVE_RASPBERRYPI
 	cRpiSetup::DropInstance();
+	eDebug("[cRpiSetup] DropInstance");
 	cRpiDisplay::DropInstance();
+	eDebug("[cRpiDisplay] DropInstance");
 #endif
 	return exit_code;
 }
@@ -411,7 +413,7 @@ const char *getBoxBrand()
 void dump_malloc_stats(void)
 {
 	struct mallinfo mi = mallinfo();
-	eDebug("MALLOC: %d total", mi.uordblks);
+	eDebug("[ENIGMA] MALLOC: %d total", mi.uordblks);
 }
 
 #ifdef USE_LIBVUGLES2

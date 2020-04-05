@@ -373,7 +373,7 @@ class Devices(Screen):
 					freeline = _("Free: ") + str(round((float(free) / 1024), 2)) + _("GB")
 				elif free >= 1:
 					freeline = _("Free: ") + str(free) + _("MB")
-				elif "Generic(STORAGE" in hddp:				# This is the SDA boot volume for SF8008 if "full" #
+				elif "Generic(STORAGE" in hddp:
 					continue
 				else:
 					freeline = _("Free: ") + _("full")

@@ -106,7 +106,7 @@ int eDVBDemux::openDVR(int flags)
 	char filename[32];
 	snprintf(filename, sizeof(filename), "/dev/dvb/adapter%d/dvr%d", adapter, demux);
 	eDebug("[eDVBDemux] open dvr %s", filename);
-#if HAVE_AMLOGIC
+#ifdef HAVE_AMLOGIC
 	m_pvr_fd =  ::open(filename, flags);
 	return m_pvr_fd;
 #else
@@ -125,7 +125,7 @@ RESULT eDVBDemux::setSourceFrontend(int fenum)
 	if (res)
 	{
  		eDebug("[eDVBDemux] DMX_SET_SOURCE Frontend%d failed: %m", fenum);
-#if defined(HAVE_AMLOGIC) || defined(HAVE_RASPBERRYPI)
+#ifdef HAVE_AMLOGIC
 		/** FIXME: begin dirty hack  */
 		eDebug("[eDVBDemux] Ignoring due to limitation to one frontend for each adapter and missing ioctl ...");
 		source = fenum;
@@ -767,7 +767,7 @@ eDVBTSRecorder::~eDVBTSRecorder()
 RESULT eDVBTSRecorder::start()
 {
 #ifdef HAVE_RASPBERRYPI
-	eDebug("[eDVBTSRecorder] try to start");
+	eDebug("[RPi eDVBTSRecorder] try to start");
 #endif
 	std::map<int,int>::iterator i(m_pids.begin());
 
@@ -794,7 +794,7 @@ RESULT eDVBTSRecorder::start()
 		return -3;
 	}
 #ifdef HAVE_RASPBERRYPI
-	eDebug("[eDVBTSRecorder] OPENED demux %s and started", filename);
+	eDebug("[RPi eDVBTSRecorder] OPENED demux %s and started", filename);
 #endif
 
 	setBufferSize(1024*1024);

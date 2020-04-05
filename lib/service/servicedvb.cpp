@@ -1266,7 +1266,7 @@ void eDVBServicePlay::serviceEvent(int event)
 		ePtr<iDVBDemux> demux;
 		if ((!m_is_pvr && !m_service_handler.getDataDemux(demux)) &  !m_timeshift_enabled)
 		{
-			printf("Start live TV!\n");
+			eDebug("[RPi eDVBServicePlay] Start live TV!");
 			demux->createTSRecorder(m_enigma2RPi_record);
 			if (!m_enigma2RPi_record)
 				return;
@@ -1280,7 +1280,7 @@ void eDVBServicePlay::serviceEvent(int event)
 			m_enigma2RPi_record->enableAccessPoints(false);
 			updateTimeshiftPids(); // workaround to set PIDs
 			m_enigma2RPi_record->start();
-			printf("Start live TV END\n");
+			eDebug("[RPi eDVBServicePlay] Start live TV END");
 		}
 #else
 		m_event((iPlayableService*)this, evNewProgramInfo);
@@ -1406,7 +1406,7 @@ RESULT eDVBServicePlay::start()
 	eDVBServicePMTHandler::serviceType type = eDVBServicePMTHandler::livetv;
 
 	if(tryFallbackTuner(/*REF*/service, /*REF*/m_is_stream, m_is_pvr, /*simulate*/false))
-		eDebug("ServicePlay: fallback tuner selected");
+		eDebug("[eDVBServicePlay] ServicePlay: fallback tuner selected");
 
 		/* in pvr mode, we only want to use one demux. in tv mode, we're using
 		   two (one for decoding, one for data source), as we must be prepared
@@ -1454,7 +1454,7 @@ RESULT eDVBServicePlay::start()
 #if HAVE_ALIEN5
 	if(m_is_stream || m_is_pvr)
 	{
-			eDebug("[eDVBServicePlay]start m_is_pvr %d", m_is_pvr);
+			eDebug("[eDVBServicePlay] start m_is_pvr %d", m_is_pvr);
 			aml_set_demux2_source();
 	}
 #endif
@@ -1537,7 +1537,7 @@ RESULT eDVBServicePlay::stop()
 		m_enigma2RPi_record = 0;
 	}
 	if (m_enigma2RPi_fd > 0) {
-		printf("close(m_enigma2RPi_fd) %d\n", m_enigma2RPi_fd);
+		eDebug("[RPi eDVBServicePlay] close(m_enigma2RPi_fd) %d", m_enigma2RPi_fd);
 		close(m_enigma2RPi_fd);
 		m_enigma2RPi_fd = -1;
 	}
@@ -2001,9 +2001,9 @@ int eDVBServicePlay::getInfo(int w)
 	{
 #ifdef HAVE_RASPBERRYPI
 	if (m_decoder)
-		eDebug("eDVBServicePlay::getInfo: m_decoder --> you can implement");
+		eDebug("[RPi eDVBServicePlay] getInfo: m_decoder --> you can implement");
 	else
-		eDebug("eDVBServicePlay::getInfo: !m_decoder --> you can not implement");
+		eDebug("[RPi eDVBServicePlay] getInfo: !m_decoder --> you can not implement");
 	case sVideoHeight:
 /*		return xineLib->getVideoHeight();*/
 		break;
@@ -2590,7 +2590,7 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 
 	remote_service_ref << remote_service_args;
 
-	eDebug("Fallback tuner: redirected unavailable service to: %s\n", remote_service_ref.str().c_str());
+	eDebug("[eDVBServiceBase] Fallback tuner: redirected unavailable service to: %s\n", remote_service_ref.str().c_str());
 
 	service = eServiceReferenceDVB(remote_service_ref.str());
 
@@ -3033,7 +3033,7 @@ void eDVBServicePlay::switchToLive()
 	ePtr<iDVBDemux> demux;
 	if (!m_is_pvr && !m_service_handler.getDataDemux(demux))
 	{
-		printf("Start live TV, end Timeshift!\n");
+		eDebug("[RPi eDVBServicePlay] Start live TV, end Timeshift!");
 		demux->createTSRecorder(m_enigma2RPi_record);
 		if (!m_enigma2RPi_record)
 			return;
@@ -3047,7 +3047,7 @@ void eDVBServicePlay::switchToLive()
 		m_enigma2RPi_record->enableAccessPoints(false);
 		updateTimeshiftPids(); // workaround to set PIDs
 		m_enigma2RPi_record->start();
-		printf("Start live TV END\n");
+		eDebug("[RPi eDVBServicePlay] Start live TV END\n");
 	}
 #endif
 	updateDecoder(true);
@@ -3132,7 +3132,7 @@ void eDVBServicePlay::switchToTimeshift()
 		m_enigma2RPi_record = 0;
 	}
 	if (m_enigma2RPi_fd > 0) {
-		printf("Switch from Live TV to Timeshift, close(m_enigma2RPi_fd) %d\n", m_enigma2RPi_fd);
+		eDebug("[RPi eDVBServicePlay] Switch from Live TV to Timeshift, close(m_enigma2RPi_fd) %d", m_enigma2RPi_fd);
 		close(m_enigma2RPi_fd);
 		m_enigma2RPi_fd = -1;
 	}
