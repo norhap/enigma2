@@ -8261,8 +8261,8 @@ msgstr "una gui para asignar servicios/proveedores/caids a módulos de interfaz 
 msgid "abort alternatives edit"
 msgstr "abortar edición de alternativos"
 
-msgid "abort bouquet edit"
-msgstr "abortar edición de bouquet"
+msgid "Abort bouquet edit"
+msgstr "Abortar edición de bouquet"
 
 msgid "abort favourites edit"
 msgstr "abortar edición de favoritos"
@@ -8535,8 +8535,8 @@ msgstr "activado"
 msgid "end alternatives edit"
 msgstr "editar alternativas finales"
 
-msgid "end bouquet edit"
-msgstr "fin de edición de bouquet"
+msgid "End bouquet edit"
+msgstr "Fin de edición de bouquet"
 
 msgid "end cut here"
 msgstr "finalizar corte aquí"
