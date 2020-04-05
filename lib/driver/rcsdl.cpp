@@ -32,13 +32,13 @@ void eSDLInputDevice::handleCode(long arg)
 
 	if (km == eRCInput::kmNone) {
 		code = translateKey(key->sym);
-		eDebug("[eSDLInputDevice] translated code: %d", code);
+		eDebug("translated code: %d", code);
 	} else {
 		code = m_unicode;
-		eDebug("[eSDLInputDevice] native virtual code: %d / sym: %d", code, key->sym);
+		eDebug("native virtual code: %d / sym: %d", code, key->sym);
 		if ((code == 0) && (key->sym < 128)) {
 			code = key->sym;
-			eDebug("[eSDLInputDevice] ASCII code: %u", code);
+			eDebug("ASCII code: %u", code);
 		}
 
 		if ((km == eRCInput::kmAscii) &&
@@ -66,7 +66,7 @@ void eSDLInputDevice::handleCode(long arg)
 		}
 	}
 
-	eDebug("[eSDLInputDevice] code=%d (%#x) flags=%d (%#x)", code, code, flags, flags);
+	eDebug("code=%d (%#x) flags=%d (%#x)", code, code, flags, flags);
 	input->keyPressed(eRCKey(this, code, flags));
 }
 

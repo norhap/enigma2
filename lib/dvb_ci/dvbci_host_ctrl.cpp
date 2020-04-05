@@ -5,7 +5,7 @@
 
 int eDVBCIHostControlSession::receivedAPDU(const unsigned char *tag,const void *data, int len)
 {
-	eDebugNoNewLine("[CI Host Control] SESSION(%d)/HCTRL %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
+	eDebugNoNewLine("SESSION(%d)/HCTRL %02x %02x %02x: ", session_nb, tag[0], tag[1], tag[2]);
 	for (int i=0; i<len; i++)
 		eDebugNoNewLine("%02x ", ((const unsigned char*)data)[i]);
 	eDebug("");
@@ -14,7 +14,7 @@ int eDVBCIHostControlSession::receivedAPDU(const unsigned char *tag,const void *
 		switch (tag[2])
 		{
 		default:
-			eDebug("[CI Host Control] unknown APDU tag 9F 84 %02x", tag[2]);
+			eDebug("unknown APDU tag 9F 84 %02x", tag[2]);
 			break;
 		}
 	}
@@ -27,7 +27,7 @@ int eDVBCIHostControlSession::doAction()
 	switch (state)
 	{
 	default:
-		eDebug("[CI Host Control] unknown state");
+		eDebug("unknown state");
 		break;
 	}
 
