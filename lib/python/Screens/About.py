@@ -91,31 +91,39 @@ class About(Screen):
 			except:
 				pass
 		if fileExists("/tmp/dvbfetool.txt"):
-			if fileHas("/tmp/dvbfetool.txt","DVBC") or fileHas("/tmp/dvbfetool.txt","DVB-C"):
+			if pathExists("/proc/stb/frontend/0/t2mi"):
+				AboutText += _("DVBS2X: ") + _("Yes") + "\n"
+			else:
+				AboutText += _("DVBS2X: ") + _("No") + "\n"
+			if pathExists("/proc/stb/frontend/0/t2mi") and pathExists("/proc/stb/frontend/1/bs_info") and pathExists("/proc/stb/frontend/1/bs_ctrl"):
+				AboutText += _("DVBS2/T/C: ") + _("Yes") + "\n"
+			else:
+				AboutText += _("DVBS2/T/C: ") + _("No") + "\n"
+			if fileHas("/tmp/dvbfetool.txt","DVBS2"):
+				AboutText += _("DVBS2: ") + _("Yes") + "\n"
+			else:
+				AboutText += _("DVBS2: ") + _("No") + "\n"
+			if pathExists("/proc/stb/frontend/0") and pathExists("/proc/stb/frontend/1") or not fileHas("/tmp/dvbfetool.txt","DVBS2"):
+				AboutText += _("DVB-T/T2: ") + _("Yes") + "\n"
+			else:
+				AboutText += _("DVB-T/T2: ") + _("No") + "\n"
+			if pathExists("/proc/stb/frontend/0") and pathExists("/proc/stb/frontend/1") or not fileHas("/tmp/dvbfetool.txt","DVBS2"):
 				AboutText += _("DVB-C: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVB-C: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBS") or fileHas("/tmp/dvbfetool.txt","DVB-S"):
-				AboutText += _("DVB-S: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-S: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBT") or fileHas("/tmp/dvbfetool.txt","DVB-T"):
-				AboutText += _("DVB-T: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-T: ") + _("No") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","MULTISTREAM"):
 				AboutText += _("Multistream: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("Multistream: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","ANNEX_A") or fileHas("/tmp/dvbfetool.txt","ANNEX-A"):
-				AboutText += _("ANNEX-A: ") + _("Yes") + "\n"
+			if fileHas("/tmp/dvbfetool.txt","Availink AVL6261") or fileHas("/tmp/dvbfetool.txt","ANNEX-A"):
+				AboutText += _("DVBC_ANNEX-A: ") + _("Yes") + "\n"
 			else:
-				AboutText += _("ANNEX-A: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","ANNEX_B") or fileHas("/tmp/dvbfetool.txt","ANNEX-B"):
+				AboutText += _("DVBC_ANNEX-A: ") + _("No") + "\n"
+			if fileHas("/tmp/dvbfetool.txt","Availink AVL6862") or fileHas("/tmp/dvbfetool.txt","ANNEX-B"):
 				AboutText += _("ANNEX-B: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("ANNEX-B: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","ANNEX_C") or fileHas("/tmp/dvbfetool.txt","ANNEX-C"):
+			if fileHas("/tmp/dvbfetool.txt","Availink AVL6862") or fileHas("/tmp/dvbfetool.txt","ANNEX-C"):
 				AboutText += _("ANNEX-C: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("ANNEX-C: ") + _("No") + "\n"
