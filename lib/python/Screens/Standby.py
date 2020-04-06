@@ -16,7 +16,7 @@ from Tools.Directories import mediafilesInUse
 from Tools import Notifications
 from time import time, localtime
 from GlobalActions import globalActionMap
-from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService
+from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService, getBoxType
 
 inStandby = None
 infoBarInstance = None
@@ -29,7 +29,8 @@ QUIT_ERROR_RESTART = 5
 QUIT_DEBUG_RESTART = 6
 QUIT_MANUFACTURER_RESET = 7
 QUIT_REBOOT_ANDROID = 12
-QUIT_REBOOT_RECOVERY = 16
+QUIT_REBOOT_RECOVERY = 13
+QUIT_MAINT = 16
 QUIT_UPGRADE_PROGRAM = 42
 QUIT_IMAGE_RESTORE = 43
 QUIT_UPGRADE_FPANEL = 44
@@ -177,8 +178,28 @@ class RealStandby(Screen):
 			config.misc.standbyCounter.value += 1
 
 	def Power(self):
-		print "[Standby] leave standby"
+		print("[Standby] leave standby")
+		SystemInfo["StandbyState"] = False
 		self.close(True)
+
+		if os.path.exists("/usr/script/StandbyLeave.sh"):
+			Console().ePopen("/usr/script/StandbyLeave.sh")
+
+		if SystemInfo["HiSilicon"]:
+			try:
+				open("/proc/stb/hdmi/output", "w").write("on")
+			except:
+				pass
+
+		if SystemInfo["AmlogicFamily"]:
+			try:
+				open("/sys/class/leds/led-sys/brightness", "w").write("1")
+			except:
+				pass
+			try:
+				open("/sys/class/cec/cmd", "w").write("10 04")
+			except:
+				pass
 
 	def setMute(self):
 		self.wasMuted = eDVBVolumecontrol.getInstance().isMuted()
