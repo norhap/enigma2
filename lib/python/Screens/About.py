@@ -95,19 +95,19 @@ class About(Screen):
 				AboutText += _("DVB-S2X: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVB-S2X: ") + _("No") + "\n"
-			if fileHas("/var/log/messages","Availink AVL6862"):
+			if fileHas("/var/log/dmesg","Availink AVL6862"):
 				AboutText += _("DVB-S2/T/C: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVB-S2/T/C: ") + _("No") + "\n"
-			if fileHas("/var/log/messages","Availink") or fileHas("/tmp/dvbfetool.txt","DVBT"):
-				AboutText += _("DVB-T/C: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-T/C: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBS2"):
+			if fileHas("/tmp/dvbfetool.txt","DVBS2") or fileHas("/var/log/dmesg","DVB-S2"):
 				AboutText += _("DVB-S/S2: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVB-S/S2: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBC") and not fileHas("/tmp/dvbfetool.txt","DVBT") :
+			if pathExists("/proc/stb/frontend/1") and fileHas("/tmp/dvbfetool.txt","DVBT") or fileHas("/var/log/dmesg","DVB-C,T/T2") or not fileHas("/var/log/dmesg","DVB-T/T2"):
+				AboutText += _("DVB-T/C: ") + _("Yes") + "\n"
+			else:
+				AboutText += _("Only DVB-T: ") + _("Yes") + "\n"
+			if fileHas("/var/log/dmesg","DVB-C"):
 				AboutText += _("Only DVB-C: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("Only DVB-C: ") + _("No") + "\n"
@@ -115,18 +115,10 @@ class About(Screen):
 				AboutText += _("Multistream: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("Multistream: ") + _("No") + "\n"
-			if pathExists("/proc/stb/frontend/0") and pathExists("/proc/stb/frontend/1") or fileHas("/tmp/dvbfetool.txt","DVBC") or fileHas("/tmp/dvbfetool.txt","DVBT"):
+			if not fileHas("/var/log/dmesg","DVB-T/T2"):
 				AboutText += _("DVBC_ANNEX-A: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVBC_ANNEX-A: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBC_ANNEX_B"):
-				AboutText += _("DVBC_ANNEX_B: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVBC_ANNEX_B: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBC_ANNEX_C"):
-				AboutText += _("DVBC_ANNEX_C: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVBC_ANNEX_C: ") + _("No") + "\n"
 
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)

@@ -16161,3 +16161,6 @@ msgstr "Lista Canales"
 
 msgid "Only DVB-C: "
 msgstr "Solo DVB-C: "
+
+msgid "Only DVB-T: "
+msgstr "Solo DVB-T: "
