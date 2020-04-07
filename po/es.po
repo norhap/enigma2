@@ -16159,3 +16159,7 @@ msgstr "Colores"
 msgid "Service list"
 msgstr "Lista Canales"
 
+msgid "Only DVB-C: "
+msgstr "Solo DVB-C: "
+
+
