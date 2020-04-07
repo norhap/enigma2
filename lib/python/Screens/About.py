@@ -85,7 +85,7 @@ class About(Screen):
 		if fileExists("/usr/bin/dvb-fe-tool"):
 			import time
 			try:
-				cmd = 'dvb-fe-tool > /tmp/dvbfetool.txt'
+				cmd = 'dvb-fe-tool > /tmp/dvbfetool.txt ; dvb-fe-tool -f 1 >> /tmp/dvbfetool.txt'
 				res = Console().ePopen(cmd)
 				time.sleep(0.1)
 			except:
@@ -106,16 +106,14 @@ class About(Screen):
 			if pathExists("/proc/stb/frontend/1") and fileHas("/tmp/dvbfetool.txt","DVBT") or fileHas("/var/log/dmesg","DVB-C,T/T2") or not fileHas("/var/log/dmesg","DVB-T/T2"):
 				AboutText += _("DVB-T/C: ") + _("Yes") + "\n"
 			else:
-				AboutText += _("Only DVB-T/T2: ") + _("Yes") + "\n"
+				AboutText += _("DVB-T/T2: ") + _("Yes") + "\n"
 			if fileHas("/var/log/dmesg","DVB-C") and not fileHas("/var/log/dmesg","DVB-T/T2"):
-				AboutText += _("Only DVB-C: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("Only DVB-C: ") + _("No") + "\n"
+				AboutText += _("DVB-Cable Only Box: ") + _("Yes") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","MULTISTREAM"):
 				AboutText += _("Multistream: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("Multistream: ") + _("No") + "\n"
-			if not fileHas("/var/log/dmesg","DVB-T/T2"):
+			if fileHas("/tmp/dvbfetool.txt","DVBC/ANNEX_A"):
 				AboutText += _("DVBC_ANNEX-A: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVBC_ANNEX-A: ") + _("No") + "\n"
