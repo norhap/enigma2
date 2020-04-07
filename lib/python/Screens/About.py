@@ -95,22 +95,22 @@ class About(Screen):
 				AboutText += _("DVB-S2X: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVB-S2X: ") + _("No") + "\n"
-			if pathExists("/proc/stb/frontend/0/t2mi") and pathExists("/proc/stb/frontend/1/bs_info") and pathExists("/proc/stb/frontend/1/bs_ctrl"):
-				AboutText += _("DVBS2/T/C: ") + _("Yes") + "\n"
+			if fileHas("/var/log/messages","Availink AVL6862"):
+				AboutText += _("DVB-S2/T/C: ") + _("Yes") + "\n"
 			else:
-				AboutText += _("DVBS2/T/C: ") + _("No") + "\n"
+				AboutText += _("DVB-S2/T/C: ") + _("No") + "\n"
+			if fileHas("/var/log/messages","Availink") or fileHas("/tmp/dvbfetool.txt","DVBT"):
+				AboutText += _("DVB-T/C: ") + _("Yes") + "\n"
+			else:
+				AboutText += _("DVB-T/C: ") + _("No") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","DVBS2"):
-				AboutText += _("DVBS2: ") + _("Yes") + "\n"
+				AboutText += _("DVB-S/S2: ") + _("Yes") + "\n"
 			else:
-				AboutText += _("DVBS2: ") + _("No") + "\n"
-			if pathExists("/proc/stb/frontend/0") and pathExists("/proc/stb/frontend/1") or fileHas("/tmp/dvbfetool.txt","DVBT"):
-				AboutText += _("DVB-T/T2: ") + _("Yes") + "\n"
+				AboutText += _("DVB-S/S2: ") + _("No") + "\n"
+			if fileHas("/tmp/dvbfetool.txt","DVBC") and not fileHas("/tmp/dvbfetool.txt","DVBT") :
+				AboutText += _("ONLY DVB-C: ") + _("Yes") + "\n"
 			else:
-				AboutText += _("DVB-T/T2: ") + _("No") + "\n"
-			if pathExists("/proc/stb/frontend/0") and pathExists("/proc/stb/frontend/1") or fileHas("/tmp/dvbfetool.txt","DVBC"):
-				AboutText += _("DVB-C: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-C: ") + _("No") + "\n"
+				AboutText += _("ONLY DVB-C: ") + _("No") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","MULTISTREAM"):
 				AboutText += _("Multistream: ") + _("Yes") + "\n"
 			else:
