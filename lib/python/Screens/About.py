@@ -106,8 +106,8 @@ class About(Screen):
 			if pathExists("/proc/stb/frontend/1") and fileHas("/tmp/dvbfetool.txt","DVBT") or fileHas("/var/log/dmesg","DVB-C,T/T2") or not fileHas("/var/log/dmesg","DVB-T/T2"):
 				AboutText += _("DVB-T/C: ") + _("Yes") + "\n"
 			else:
-				AboutText += _("Only DVB-T: ") + _("Yes") + "\n"
-			if fileHas("/var/log/dmesg","DVB-C"):
+				AboutText += _("Only DVB-T/T2: ") + _("Yes") + "\n"
+			if fileHas("/var/log/dmesg","DVB-C") and not fileHas("/var/log/dmesg","DVB-T/T2"):
 				AboutText += _("Only DVB-C: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("Only DVB-C: ") + _("No") + "\n"
