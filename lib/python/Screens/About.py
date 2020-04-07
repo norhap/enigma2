@@ -91,7 +91,7 @@ class About(Screen):
 			except:
 				pass
 		if fileExists("/tmp/dvbfetool.txt"):
-			if pathExists("/proc/stb/frontend/0/t2mi"):
+			if pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi"):
 				AboutText += _("DVB-S2X: ") + _("Yes") + "\n"
 			else:
 				AboutText += _("DVB-S2X: ") + _("No") + "\n"
