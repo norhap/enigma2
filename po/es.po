@@ -16159,5 +16159,5 @@ msgstr "Colores"
 msgid "Service list"
 msgstr "Lista Canales"
 
-msgid "DVB-Cable Only Box: "
-msgstr "Receptor Solo DVB-Cable: "
+msgid "DVB-Cable Box: "
+msgstr "Receptor DVB-Cable: "

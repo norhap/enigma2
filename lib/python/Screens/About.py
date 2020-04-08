@@ -100,7 +100,7 @@ class About(Screen):
 			if fileHas("/tmp/dvbfetool.txt","DVB-T2") or fileHas("/tmp/dvbfetool.txt","DVBT"):
 				AboutText += _("DVB-T2/C: ") + _("Yes") + "\n"
 			if not fileHas("/tmp/dvbfetool.txt","DVB-T2"):
-				AboutText += _("DVB-Cable Only Box: ") + _("Yes") + "\n"
+				AboutText += _("DVB-Cable Box: ") + _("Yes") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","MULTISTREAM"):
 				AboutText += _("Multistream: ") + _("Yes") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","DVBC/ANNEX_A"):
