@@ -85,38 +85,26 @@ class About(Screen):
 		if fileExists("/usr/bin/dvb-fe-tool"):
 			import time
 			try:
-				cmd = 'dvb-fe-tool > /tmp/dvbfetool.txt ; dvb-fe-tool -f 1 >> /tmp/dvbfetool.txt'
+				cmd = 'dvb-fe-tool > /tmp/dvbfetool.txt ; dvb-fe-tool -f 1 >> /tmp/dvbfetool.txt ; cat /proc/bus/nim_sockets >> /tmp/dvbfetool.txt'
 				res = Console().ePopen(cmd)
 				time.sleep(0.1)
 			except:
 				pass
 		if fileExists("/tmp/dvbfetool.txt"):
-			if pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi"):
+			if fileHas("/tmp/dvbfetool.txt","DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi"):
 				AboutText += _("DVB-S2X: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-S2X: ") + _("No") + "\n"
-			if fileHas("/var/log/dmesg","Availink AVL6862"):
-				AboutText += _("DVB-S2/T/C: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-S2/T/C: ") + _("No") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBS2") or fileHas("/var/log/dmesg","DVB-S2"):
+			if fileHas("/tmp/dvbfetool.txt","DVBS2") or fileHas("/tmp/dvbfetool.txt","DVB-S") or fileHas("/var/log/dmesg","DVB-S2"):
 				AboutText += _("DVB-S/S2: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-S/S2: ") + _("No") + "\n"
-			if pathExists("/proc/stb/frontend/1") and fileHas("/tmp/dvbfetool.txt","DVBT") or fileHas("/var/log/dmesg","DVB-C,T/T2") or not fileHas("/var/log/dmesg","DVB-T/T2"):
-				AboutText += _("DVB-T/C: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVB-T/T2: ") + _("Yes") + "\n"
-			if fileHas("/var/log/dmesg","DVB-C") and not fileHas("/var/log/dmesg","DVB-T/T2"):
+			if fileHas("/tmp/dvbfetool.txt","Mode 2: DVB-S"):
+				AboutText += _("DVB-S2/T/C: ") + _("Yes") + "\n"
+			if fileHas("/tmp/dvbfetool.txt","DVB-T2") or fileHas("/tmp/dvbfetool.txt","DVBT"):
+				AboutText += _("DVB-T2/C: ") + _("Yes") + "\n"
+			if not fileHas("/tmp/dvbfetool.txt","DVB-T2"):
 				AboutText += _("DVB-Cable Only Box: ") + _("Yes") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","MULTISTREAM"):
 				AboutText += _("Multistream: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("Multistream: ") + _("No") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","DVBC/ANNEX_A"):
 				AboutText += _("DVBC_ANNEX-A: ") + _("Yes") + "\n"
-			else:
-				AboutText += _("DVBC_ANNEX-A: ") + _("No") + "\n"
 
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
