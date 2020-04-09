@@ -96,7 +96,7 @@ class About(Screen):
 			if fileHas("/tmp/dvbfetool.txt","DVBS2") or fileHas("/tmp/dvbfetool.txt","DVB-S") or fileHas("/var/log/dmesg","DVB-S2"):
 				AboutText += _("DVB-S/S2: ") + _("Yes") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","Mode 2: DVB-S"):
-				AboutText += _("DVB-S2/T/C: ") + _("Yes") + "\n"
+				AboutText += _("DVB-S2/T2/C: ") + _("Yes") + "\n"
 			if fileHas("/tmp/dvbfetool.txt","DVB-T2") or fileHas("/tmp/dvbfetool.txt","DVBT"):
 				AboutText += _("DVB-T2/C: ") + _("Yes") + "\n"
 			if not fileHas("/tmp/dvbfetool.txt","DVB-T2"):
