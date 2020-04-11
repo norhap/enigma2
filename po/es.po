@@ -16164,3 +16164,9 @@ msgstr "Receptor DVB-Cable: "
 
 msgid "Client is streaming from this box!"
 msgstr "Un cliente está en streaming desde este receptor!"
+
+msgid "FTA TV"
+msgstr "FTA"
+
+msgid "Encrypted TV"
+msgstr "Encriptado"
