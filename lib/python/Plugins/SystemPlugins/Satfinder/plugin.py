@@ -15,6 +15,7 @@ from Components.TuneTest import Tuner
 from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
 from Screens.Screen import Screen # for services found class
+import skin
 
 try: # for reading the current transport stream (SatfinderExtra)
 	from Plugins.SystemPlugins.AutoBouquetsMaker.scanner import dvbreader
@@ -854,9 +855,9 @@ class SatfinderExtra(Satfinder):
 		red = "\c00??8888" # encrypted tv
 		yellow = "\c00????00" # data/interactive/catch-all/etc
 		blue = "\c007799??" # radio
-		no_colour = "\c00??????"
+		no_colour = skin.parameters.get("ServiceInfoAltColor", (" "))
 		out = []
-		legend = "%s%s%s:  %s%s%s  %s%s%s  %s%s%s  %s%s%s\n\n%s%s%s\n" % (no_colour, _("Colours"), no_colour, green, _("FTA TV"), no_colour, red, _("Encrypted TV"), no_colour, blue, _("Radio"), no_colour, yellow, _("Other"), no_colour, no_colour, _("Channels"), no_colour)
+		legend = "%s%s%s:  %s%s%s  %s%s%s  %s%s%s  %s%s%s\n\n%s%s%s\n" % (no_colour, _("Channels"), no_colour, green, _("FTA TV"), no_colour, red, _("Encrypted TV"), no_colour, blue, _("Radio"), no_colour, yellow, _("Other"), no_colour, no_colour, _(" "), no_colour)
 		for service in self.serviceList:
 			fta = "free_ca" in service and service["free_ca"] == 0
 			if service["service_type"] in radio:
@@ -867,7 +868,7 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
-			out.append("- %s%s%s" % (colour, service["service_name"], no_colour))
+			out.append("%s%s%s" % (colour, service["service_name"], no_colour))
 
 		self.session.open(ServicesFound, "\n".join(out), legend)
 
