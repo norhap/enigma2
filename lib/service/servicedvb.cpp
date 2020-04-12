@@ -1265,10 +1265,11 @@ void eDVBServicePlay::serviceEvent(int event)
 		if (!m_timeshift_active)
 			m_event((iPlayableService*)this, evUpdatedInfo);
 #ifdef HAVE_RASPBERRYPI
+// live TV is managed like a recording (I don't like this hack here try to change and implement on decoder.cpp or omxdecoder.cpp)
 		ePtr<iDVBDemux> demux;
 		if ((!m_is_pvr && !m_service_handler.getDataDemux(demux)) &  !m_timeshift_enabled)
 		{
-			printf("Start live TV!\n");
+			eDebug("[RPi eDVBServicePlay] Live TV START");
 			demux->createTSRecorder(m_enigma2RPi_record);
 			if (!m_enigma2RPi_record)
 				return;
@@ -1282,7 +1283,7 @@ void eDVBServicePlay::serviceEvent(int event)
 			m_enigma2RPi_record->enableAccessPoints(false);
 			updateTimeshiftPids(); // workaround to set PIDs
 			m_enigma2RPi_record->start();
-			printf("Start live TV END\n");
+			eDebug("[RPi eDVBServicePlay] Live TV END");
 		}
 #else
 		m_event((iPlayableService*)this, evNewProgramInfo);
@@ -1429,6 +1430,7 @@ RESULT eDVBServicePlay::start()
 	else
 		m_event(this, evStart);
 #ifdef HAVE_RASPBERRYPI
+	eDebug("[RPi eDVBServicePlay] start m_is_pvr=%d m_is_stream=%d", m_is_pvr, m_is_stream);
 	m_enigma2RPi_file = std::string("/tmp/ENIGMA_FIFO");
 	m_enigma2RPi_fd = ::open(m_enigma2RPi_file.c_str(), O_RDWR);
 #endif
@@ -1720,6 +1722,8 @@ RESULT eDVBServicePlay::seekTo(pts_t to)
 #ifndef HAVE_RASPBERRYPI
 	if (!m_decode_demux)
 		return -1;
+#else
+	eDebug("[RPi eDVBServicePlay] seekTo m_decode_demux %d", m_decode_demux);
 #endif
 	ePtr<iDVBPVRChannel> pvr_channel;
 
@@ -1990,24 +1994,8 @@ int eDVBServicePlay::getInfo(int w)
 	if (m_decoder)
 		eDebug("eDVBServicePlay::getInfo: m_decoder --> you can implement");
 	else
-		eDebug("eDVBServicePlay::getInfo: !m_decoder --> you can not implement");
-	case sVideoHeight:
-/*		return xineLib->getVideoHeight();*/
-		break;
-	case sVideoWidth:
-/*		return xineLib->getVideoWidth();*/
-		break;
-	case sFrameRate:
-/*		return xineLib->getVideoFrameRate();*/
-		break;
-	case sProgressive:
-/*		return xineLib->getProgressive();*/
-		break;
-	case sAspect:
-	{
-		int aspect = -1;
-/*		int aspect = xineLib->getVideoAspect();*/
-#else
+		eDebug("[RPi eDVBServicePlay] getInfo: !m_decoder --> you can not implement");
+#endif
 	case sVideoHeight:
 		if (m_decoder) return m_decoder->getVideoHeight();
 		break;
@@ -2025,7 +2013,6 @@ int eDVBServicePlay::getInfo(int w)
 		int aspect = -1;
 		if (m_decoder)
 			aspect = m_decoder->getVideoAspect();
-#endif
 		if (aspect == -1 && no_program_info)
 			break;
 		else if (aspect == -1 && !program.videoStreams.empty() && program.videoStreams[0].component_tag != -1)
@@ -2324,6 +2311,7 @@ int eDVBServicePlay::selectAudioStream(int i)
 	bool amode = false;  // if == true, radio mode
 	if (program.videoStreams.empty())
 		amode = true;
+	eDebug("[RPi eDVBServicePlay] set amode = %s", amode ? "true" : "false");
 #endif
 	if (((unsigned int)stream) < program.audioStreams.size())
 	{
@@ -3138,6 +3126,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 {
 #ifdef HAVE_RASPBERRYPI
 	int vpid = -1, vpidtype = -1, pcrpid = -1, tpid = -1, achannel = -1, ac3_delay=-1, pcm_delay=-1, vstreamtype=-1;
+	ePlayMode playmode = pmNone;
 #else
 	int vpid = -1, vpidtype = -1, pcrpid = -1, tpid = -1, achannel = -1, ac3_delay=-1, pcm_delay=-1;
 #endif
@@ -3191,7 +3180,16 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		eDebugNoNewLine(", and the text pid is %04x\n", program.textPid);
 		tpid = program.textPid;
 	}
-
+#ifdef HAVE_RASPBERRYPI
+		if (!program.audioStreams.empty() && !program.videoStreams.empty())
+			playmode=pmAudioVideo;
+		else if (program.audioStreams.empty() && !program.videoStreams.empty())
+			playmode=pmVideoOnly;
+		else if (!program.audioStreams.empty() && program.videoStreams.empty())
+			playmode=pmAudioOnly;
+		eDebug("[RPi eDVBServicePlay] playmode=%d", playmode");
+//		cOmxDevice::SetPlayMode(playmode);
+#endif
 	m_have_video_pid = 0;
 
 	if (!m_decoder)
