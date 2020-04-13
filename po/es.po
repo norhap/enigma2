@@ -16170,3 +16170,6 @@ msgstr "FTA"
 
 msgid "Encrypted TV"
 msgstr "Encriptado"
+
+msgid "Play last movie"
+msgstr "Reproduce última película"
