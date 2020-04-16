@@ -57,6 +57,8 @@ from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 # hack alert!
 from Screens.Menu import MainMenu, mdom
 
+from boxbranding import getMachineBuild
+
 def isStandardInfoBar(self):
 	return self.__class__.__name__ == "InfoBar"
 
@@ -4016,8 +4018,8 @@ class InfoBarHdmi2:
 				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True), "green")
 		self["HDMIActions"] = HelpableActionMap(self, "InfobarHDMIActions",
 			{
-				"HDMIin":(self.HDMIIn, _("Switch to HDMI-IN mode")),
-				"HDMIinLong":(self.HDMIInLong, _("Switch to HDMI-IN mode")),
+				"HDMIin":(self.HDMIIn, _("Switch to HDMI in mode")),
+				"HDMIinLong":(self.HDMIInLong, _("Switch to HDMI in mode")),
 			}, prio=2)
 
 	def HDMIInLong(self):
@@ -4059,14 +4061,24 @@ class InfoBarHdmi2:
 			return _("Turn off HDMI-IN PiP mode")
 
 	def HDMIInPiP(self):
-		if SystemInfo["DreamBoxHDMIin"]:
-			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r").read()
+		if getMachineBuild() in ('dm7080', 'dm820', 'dm900', 'dm920'):
+			f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r")
+			check=f.read()
+			f.close()
 			if check.startswith("off"):
-				open("/proc/stb/audio/hdmi_rx_monitor","w").write("on")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w").write("on")
+				f=open("/proc/stb/audio/hdmi_rx_monitor","w")
+				f.write("on")
+				f.close()
+				f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w")
+				f.write("on")
+				f.close()
 			else:
-				open("/proc/stb/audio/hdmi_rx_monitor","w").write("off")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w").write("off")
+				f=open("/proc/stb/audio/hdmi_rx_monitor","w")
+				f.write("off")
+				f.close()
+				f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w")
+				f.write("off")
+				f.close()
 		else:
 			if not hasattr(self.session, 'pip') and not self.session.pipshown:
 				self.hdmi_enabled_pip = True
@@ -4087,24 +4099,48 @@ class InfoBarHdmi2:
 					del self.session.pip
 
 	def HDMIInFull(self):
-		if SystemInfo["DreamBoxHDMIin"]:
-			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r").read()
+		if getMachineBuild() in ('dm7080', 'dm820', 'dm900', 'dm920'):
+			f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r")
+			check=f.read()
+			f.close()
 			if check.startswith("off"):
-				self.oldvideomode = open("/proc/stb/video/videomode","r").read()
-				self.oldvideomode_50hz = open("/proc/stb/video/videomode_50hz","r").read()
-				self.oldvideomode_60hz = open("/proc/stb/video/videomode_60hz","r").read()
-				if getBoxType() in ("dm900","dm920"):
-					open("/proc/stb/video/videomode","w").write("1080p")
+				f=open("/proc/stb/video/videomode","r")
+				self.oldvideomode=f.read()
+				f.close()
+				f=open("/proc/stb/video/videomode_50hz","r")
+				self.oldvideomode_50hz=f.read()
+				f.close()
+				f=open("/proc/stb/video/videomode_60hz","r")
+				self.oldvideomode_60hz=f.read()
+				f.close()
+				f=open("/proc/stb/video/videomode","w")
+				if getMachineBuild() in ('dm900', 'dm920'):
+					f.write("1080p")
 				else:
-					open("/proc/stb/video/videomode","w").write("720p")
-				open("/proc/stb/audio/hdmi_rx_monitor","w").write("on")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w").write("on")
+					f.write("720p")
+				f.close()
+				f=open("/proc/stb/audio/hdmi_rx_monitor","w")
+				f.write("on")
+				f.close()
+				f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w")
+				f.write("on")
+				f.close()
 			else:
-				open("/proc/stb/audio/hdmi_rx_monitor","w").write("off")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w").write("off")
-				open("/proc/stb/video/videomode","w").write(self.oldvideomode)
-				open("/proc/stb/video/videomode_50hz","w").write(self.oldvideomode_50hz)
-				open("/proc/stb/video/videomode_60hz","w").write(self.oldvideomode_60hz)
+				f=open("/proc/stb/audio/hdmi_rx_monitor","w")
+				f.write("off")
+				f.close()
+				f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","w")
+				f.write("off")
+				f.close()
+				f=open("/proc/stb/video/videomode","w")
+				f.write(self.oldvideomode)
+				f.close()
+				f=open("/proc/stb/video/videomode_50hz","w")
+				f.write(self.oldvideomode_50hz)
+				f.close()
+				f=open("/proc/stb/video/videomode_60hz","w")
+				f.write(self.oldvideomode_60hz)
+				f.close()
 		else:
 			slist = self.servicelist
 			curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
