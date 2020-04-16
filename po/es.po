@@ -16173,3 +16173,6 @@ msgstr "Encriptado"
 
 msgid "Play last movie"
 msgstr "Reproduce última película"
+
+msgid "No parse cannot emu"
+msgstr "Pendiente entrar emu"
