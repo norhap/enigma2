@@ -469,10 +469,10 @@ class CaidInfo2(Poll, Converter, object):
 									pass
 					else:
 						if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-							textvalue = "No parse cannot emu"
+							textvalue = "Esperando emu"
 				else:
 					if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3 )):
-						textvalue = "Free-to-air"
+						textvalue = "FTA"
 		return textvalue
 
 	text = property(getText)
