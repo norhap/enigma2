@@ -107,7 +107,7 @@ class AutoDiseqc(Screen, ConfigListScreen):
  			20100,
  			366,
  			"Eutelsat 16A 16.0e"),
- 
+
 		# astra 192e zdf
 		(
 			11953,
