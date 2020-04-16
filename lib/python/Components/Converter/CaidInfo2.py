@@ -226,7 +226,7 @@ class CaidInfo2(Poll, Converter, object):
 			self.poll_enabled = True
 			ecm_info = self.ecmfile()
 			if ecm_info:
-				caid = ("%0.4X" % int(ecm_info.get("caid", ""),16))[:2]
+				caid = ("%0.4X" % int(ecm_info.get("caid"),16))[:2]
 				if self.type == self.SECA_C:
 					if caid == "01":
 						return True
@@ -273,7 +273,7 @@ class CaidInfo2(Poll, Converter, object):
 					return False
 				#oscam
 				reader = ecm_info.get("reader", None)
-				#cccam	
+				#cccam
 				using = ecm_info.get("using", "")
 				#mgcamd
 				source = ecm_info.get("source", "")
@@ -295,8 +295,8 @@ class CaidInfo2(Poll, Converter, object):
 					else:
 						if source != "cache" and source == "net" and source.find("emu") == -1:
 							return True
-						#return  (source != None and source == "net") or (source != None and source != "sci") or (source != None and source != "emu") or (reader != None and reader != "emu") or (source != None and source != "card") 
-						
+						#return  (source != None and source == "net") or (source != None and source != "sci") or (source != None and source != "emu") or (reader != None and reader != "emu") or (source != None and source != "card")
+
 				else:
 					return False
 
@@ -362,7 +362,7 @@ class CaidInfo2(Poll, Converter, object):
 						protocol = ecm_info.get("protocol", "")
 						#port
 						port = ecm_info.get("port", "")
-						# source	
+						# source
 						source = ecm_info.get("source", "")
 						# server
 						server = ecm_info.get("server", "")
@@ -442,29 +442,29 @@ class CaidInfo2(Poll, Converter, object):
 							if source == "emu":
 								textvalue = "%s - %s (Prov: %s, Caid: %s)" % (source, self.systemTxtCaids.get(caid[:2]), prov, caid)
 							#new oscam ecm.info with port parametr
-							elif reader != "" and source == "net" and port != "": 
-								textvalue = "%s - Prov: %s, Caid: %s, Reader: %s, %s (%s:%s) - %s" % (source, prov, caid, reader, protocol, server, port, ecm_time.replace('msec','ms'))
-							elif reader != "" and source == "net": 
-								textvalue = "%s - Prov: %s, Caid: %s, Reader: %s, %s (%s) - %s" % (source, prov, caid, reader, protocol, server, ecm_time.replace('msec','ms'))
-							elif reader != "" and source != "net": 
-								textvalue = "%s - Prov: %s, Caid: %s, Reader: %s, %s (local) - %s" % (source, prov, caid, reader, protocol, ecm_time.replace('msec','ms'))
-							elif server == "" and port == "" and protocol != "": 
-								textvalue = "%s - Prov: %s, Caid: %s, %s - %s" % (source, prov, caid, protocol, ecm_time.replace('msec','ms'))
-							elif server == "" and port == "" and protocol == "": 
-								textvalue = "%s - Prov: %s, Caid: %s - %s" % (source, prov, caid, ecm_time.replace('msec','ms'))
+							elif reader != "" and source == "net" and port != "":
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
+							elif reader != "" and source == "net":
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
+							elif reader != "" and source != "net":
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
+							elif server == "" and port == "" and protocol != "":
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
+							elif server == "" and port == "" and protocol == "":
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
 							else:
 								try:
-									textvalue = "%s - Prov: %s, Caid: %s, %s (%s:%s) - %s" % (source, prov, caid, protocol, server, port, ecm_time.replace('msec','ms'))
+									textvalue = "Caid: %s Prov: %s" % (caid, prov)
 								except:
 									pass
 						if self.type == self.SHORT:
 							if source == "emu":
-								textvalue = "%s - %s (Prov: %s, Caid: %s)" % (source, self.systemTxtCaids.get(caid[:2]), prov, caid)
-							elif server == "" and port == "": 
-								textvalue = "%s - Prov: %s, Caid: %s - %s" % (source, prov, caid, ecm_time.replace('msec','ms'))
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
+							elif server == "" and port == "":
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
 							else:
 								try:
-									textvalue = "%s - Prov: %s, Caid: %s, %s:%s - %s" % (source, prov, caid, server, port, ecm_time.replace('msec','ms'))
+									textvalue = "Caid: %s Prov: %s" % (caid, prov)
 								except:
 									pass
 					else:
@@ -539,7 +539,7 @@ class CaidInfo2(Poll, Converter, object):
 								item[1] = item[1].strip("\n")
 							elif item[0] == "provider":
 								item[1] = item[1].strip("\n")
-							elif item[0][:2] == 'cw'or item[0] =='ChID' or item[0] == "Service": 
+							elif item[0][:2] == 'cw'or item[0] =='ChID' or item[0] == "Service":
 								pass
 							#mgcamd new_oscam block
 							elif item[0] == "source":
