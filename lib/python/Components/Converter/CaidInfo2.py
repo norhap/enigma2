@@ -440,7 +440,7 @@ class CaidInfo2(Poll, Converter, object):
 							return textvalue[:-1]
 						if self.type == self.ALL:
 							if source == "emu":
-								textvalue = "%s - %s (Prov: %s, Caid: %s)" % (source, self.systemTxtCaids.get(caid[:2]), prov, caid)
+								textvalue = "Caid: %s Prov: %s" % (caid, prov)
 							#new oscam ecm.info with port parametr
 							elif reader != "" and source == "net" and port != "":
 								textvalue = "Caid: %s Prov: %s" % (caid, prov)
