@@ -316,7 +316,7 @@ class CaidInfo2(Poll, Converter, object):
 				ecm_info = self.ecmfile()
 				if fileExists("/tmp/ecm.info"):
 					try:
-						caid = "%0.4X" % int(ecm_info.get("caid", ""),16)
+						caid = "%0.4X" % int(ecm_info.get("caid"),16)
 						return "%s" % self.systemTxtCaids.get(caid[:2])
 					except:
 						return 'nondecode'
@@ -332,7 +332,7 @@ class CaidInfo2(Poll, Converter, object):
 					# crypt2
 					if ecm_info:
 						# caid
-						caid = "%0.4X" % int(ecm_info.get("caid", ""),16)
+						caid = "%0.4X" % int(ecm_info.get("caid"),16)
 						if self.type == self.CAID:
 							return caid
 						# crypt
