@@ -96,7 +96,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.blueButton()
 
 	def blueButton(self):
-		if self.softcams.value and self.softcams.value.lower() != "none":
+		if self.softcams.value and self.softcams.value.lower() != "none" or self.cardserver:
 			self["key_blue"].setText(_("Info"))
 		else:
 			self["key_blue"].setText("")
