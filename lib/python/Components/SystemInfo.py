@@ -26,8 +26,8 @@ def countFrontpanelLEDs():
 	return numLeds
 
 def hassoftcaminstalled():
-	from Tools.camcontrol import CamControl
-	return len(CamControl("softcam").getList()) > 1
+	softcams = fileExists("/etc/init.d/softcam") or fileExists("/etc/init.d/cardserver")
+	return softcams
 
 def getBootdevice():
 	dev = ("root" in cmdline and cmdline["root"].startswith("/dev/")) and cmdline["root"][5:]
