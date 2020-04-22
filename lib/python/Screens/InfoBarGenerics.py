@@ -2258,7 +2258,7 @@ class InfoBarExtensions:
 	def getOSname(self):
 		return _("OScam Info")
 
-	def getCCamname(self):
+	def getCCcamname(self):
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
