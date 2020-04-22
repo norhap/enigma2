@@ -225,7 +225,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				self.session.openWithCallback(
 					boundFunction(self.removeBookmark, name),
 					MessageBox,
-					_("Do you really want to remove your bookmark of %s?") % name,
+					_("Do you really want to remove your bookmark of %s?") % (name),
 				)
 
 	def removeBookmark(self, name, ret):
