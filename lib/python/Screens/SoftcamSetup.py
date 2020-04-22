@@ -7,6 +7,7 @@ from Components.ScrollLabel import ScrollLabel
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.GetEcmInfo import GetEcmInfo
 from Components.Sources.StaticText import StaticText
+from Tools.Directories import fileExists, fileHas
 
 import os
 from Tools.camcontrol import CamControl
@@ -96,10 +97,8 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.blueButton()
 
 	def blueButton(self):
-		if self.softcams.value and self.softcams.value.lower() != "none" or self.cardserver:
+		if fileHas("/tmp/ecm.info","protocol:") or fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
 			self["key_blue"].setText(_("Info"))
-		else:
-			self["key_blue"].setText("")
 
 	def setEcmInfo(self):
 		(newEcmFound, ecmInfo) = self.ecminfo.getEcm()
@@ -108,9 +107,12 @@ class SoftcamSetup(Screen, ConfigListScreen):
 
 	def ppanelShortcut(self):
 		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
-		if "oscam" or "ncam" in self.softcams.value.lower():
+		if fileHas ("/tmp/ecm.info","protocol:"):
 			from Screens.OScamInfo import OscamInfoMenu
 			self.session.open(OscamInfoMenu)
+		elif fileHas ("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
+			from Screens.CCcamInfo import CCcamInfoMain
+			self.session.open(CCcamInfoMain)
 		elif "cccam" in self.softcams.value.lower() and os.path.isfile(resolveFilename(SCOPE_PLUGINS, 'Extensions/CCcamInfo/plugin.pyo')):
 			from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
