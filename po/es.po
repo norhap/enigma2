@@ -15353,8 +15353,8 @@ msgstr "Menú Principal - CCcam Info"
 msgid "CCcam Client Info"
 msgstr "CCcam Info Clientes"
 
-msgid "Servidor CCcam Info"
-msgstr "CCcam Server Info"
+msgid "CCcam Server Info"
+msgstr "Servidor CCcam Info"
 
 msgid "Using old profile: "
 msgstr "Usando perfil antiguo: "
