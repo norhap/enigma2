@@ -15321,7 +15321,72 @@ msgid "Share folder"
 msgstr "Compartir carpeta"
 
 msgid "Shares"
-msgstr "Comparte"
+msgstr "Shares"
+
+msgid "Share View"
+msgstr "Ver shares"
+
+msgid "Extended Shares"
+msgstr "shares extendidos"
+
+msgid "Local box"
+msgstr "CCcam.cfg receptor"
+
+msgid "Remote box"
+msgstr "CCcam.cfg Remoto"
+
+msgid "Free memory"
+msgstr "Memoria libre"
+
+msgid "Switch config"
+msgstr "Cambio config"
+
+msgid "CCcam Config Switcher"
+msgstr "Cambiar config"
+
+msgid "CCcam Remote Info"
+msgstr "Remoto CCcam Info"
+
+msgid "CCcam Info - Main Menu"
+msgstr "Menú Principal - CCcam Info"
+
+msgid "CCcam Client Info"
+msgstr "CCcam Info Clientes"
+
+msgid "Servidor CCcam Info"
+msgstr "CCcam Server Info"
+
+msgid "Using old profile: "
+msgstr "Usando perfil antiguo: "
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "New profile: "
+msgstr "Nuevo perfil: "
+
+msgid "Profile: Local box"
+msgstr "Perfil: Local"
+
+msgid "Total cards:"
+msgstr "Total tarjetas:"
+
+msgid ""
+"CCcam Info %s\n"
+"by AliAbdul %s\n"
+"\n"
+"This module shows you the status of your CCcam."
+msgstr ""
+"CCcam Info %s\n"
+"by AliAbdul %s\n"
+"\n"
+"Este módulo le muestra el estado de su CCcam."
+
+msgid "Could not open the file %s!"
+msgstr "No se pudo abrir el archivo %s!"
+
+msgid "Configfile %s saved."
+msgstr "Config archivo %s guardado."
 
 msgid "Strict DLNA"
 msgstr "DLNA estricto"
@@ -16173,3 +16238,6 @@ msgstr "Encriptado"
 
 msgid "Play last movie"
 msgstr "Reproduce última película"
+
+msgid "Active clients"
+msgstr "Clientes activos"
