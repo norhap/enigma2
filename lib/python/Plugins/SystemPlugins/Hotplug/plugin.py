@@ -87,15 +87,14 @@ class Hotplug(Protocol):
 
 def autostart(reason, **kwargs):
 	if reason == 0:
-		from twisted.internet import reactor
 		try:
-			if os.path.exists("/tmp/hotplug.socket"):
-				os.remove("/tmp/hotplug.socket")
-		except OSError:
+		    if not os.path.exists("/tmp/hotplug.socket"):
+		        return
+		except (IOError, OSError):
 			pass
 		factory = Factory()
 		factory.protocol = Hotplug
 		reactor.listenUNIX("/tmp/hotplug.socket", factory)
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name = _("Hotplug"), description = _("listens to hotplug events"), where = PluginDescriptor.WHERE_AUTOSTART, needsRestart = True, fnc = autostart)
+	return PluginDescriptor(name=_("Hotplug"), description=_("Listener for hotplug events."), where=[PluginDescriptor.WHERE_AUTOSTART], needsRestart=True, fnc=autostart)
