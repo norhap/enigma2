@@ -97,7 +97,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.blueButton()
 
 	def blueButton(self):
-		if fileHas("/tmp/ecm.info","protocol:") or fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
+		if fileHas("/var/tmp/ecm.info","protocol:") or fileExists("/tmp/.oscam") or fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
 			self["key_blue"].setText(_("Info"))
 
 	def setEcmInfo(self):
@@ -107,10 +107,10 @@ class SoftcamSetup(Screen, ConfigListScreen):
 
 	def ppanelShortcut(self):
 		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
-		if fileExists ("/tmp/.oscam"):
+		if fileExists ("/tmp/.oscam") and fileExists ("/var/tmp/pid.info"):
 			from Screens.OScamInfo import OscamInfoMenu
 			self.session.open(OscamInfoMenu)
-		elif fileExists ("/tmp/.ncam"):
+		elif fileExists("/var/tmp/ncam.pid"):
 			from Screens.NcamInfo import NcamInfoMenu
 			self.session.open(NcamInfoMenu)
 		elif fileHas ("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
