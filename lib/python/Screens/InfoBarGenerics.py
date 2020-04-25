@@ -2260,16 +2260,26 @@ class InfoBarExtensions:
 			}, 1) # lower priority
 		self.addExtension(extension = self.getOScamInfo, type = InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension = self.getCCcamInfo, type = InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension = self.getNcamInfo, type = InfoBarExtensions.EXTENSION_LIST)
 
 	def getOSname(self):
 		return _("OScam Info")
+
+	def getNcamname(self):
+		return _("Ncam Info")
 
 	def getCCcamname(self):
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
-		if SystemInfo["OScamInstalled"] or SystemInfo["NCamInstalled"]:
+		if SystemInfo["OScamIsActive"]:
 			return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
+		else:
+			return []
+
+	def getNcamInfo(self):
+		if SystemInfo["NCamIsActive"]:
+			return [((boundFunction(self.getNcamname), boundFunction(self.openNcamInfo), lambda: True), None)] or []
 		else:
 			return []
 
@@ -2342,6 +2352,10 @@ class InfoBarExtensions:
 	def openOScamInfo(self):
 		from Screens.OScamInfo import OscamInfoMenu
 		self.session.open(OscamInfoMenu)
+
+	def openNcamInfo(self):
+		from Screens.NcamInfo import NcamInfoMenu
+		self.session.open(NcamInfoMenu)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain

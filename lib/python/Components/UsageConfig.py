@@ -1256,7 +1256,7 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_usecache = ConfigYesNo(default = True)
 
 	config.oscaminfo = ConfigSubsection()
-	if SystemInfo["OScamInstalled"] or SystemInfo["NCamInstalled"]:
+	if SystemInfo["OScamIsActive"]:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=True)
 	else:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
@@ -1267,6 +1267,19 @@ def InitUsageConfig():
 	config.oscaminfo.ip = ConfigIP( default = [ 127,0,0,1 ], auto_jump=True)
 	config.oscaminfo.port = ConfigInteger(default = 16002, limits=(0,65536) )
 	config.oscaminfo.intervall = ConfigSelectionNumber(min = 1, max = 600, stepwidth = 1, default = 10, wraparound = True)
+
+	config.ncaminfo = ConfigSubsection()
+	if SystemInfo["NCamIsActive"]:
+		config.ncaminfo.showInExtensions = ConfigYesNo(default=True)
+	else:
+		config.ncaminfo.showInExtensions = ConfigYesNo(default=False)
+	config.ncaminfo.userdatafromconf = ConfigYesNo(default = True)
+	config.ncaminfo.autoupdate = ConfigYesNo(default = False)
+	config.ncaminfo.username = ConfigText(default = "username", fixed_size = False, visible_width=12)
+	config.ncaminfo.password = ConfigPassword(default = "password", fixed_size = False)
+	config.ncaminfo.ip = ConfigIP( default = [ 127,0,0,1 ], auto_jump=True)
+	config.ncaminfo.port = ConfigInteger(default = 16002, limits=(0,65536) )
+	config.ncaminfo.intervall = ConfigSelectionNumber(min = 1, max = 600, stepwidth = 1, default = 10, wraparound = True)
 
 	config.cccaminfo = ConfigSubsection()
 	if SystemInfo["CCcamInstalled"]:

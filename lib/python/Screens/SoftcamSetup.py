@@ -107,9 +107,12 @@ class SoftcamSetup(Screen, ConfigListScreen):
 
 	def ppanelShortcut(self):
 		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
-		if fileHas ("/tmp/ecm.info","protocol:"):
+		if fileExists ("/tmp/.oscam"):
 			from Screens.OScamInfo import OscamInfoMenu
 			self.session.open(OscamInfoMenu)
+		elif fileExists ("/tmp/.ncam"):
+			from Screens.NcamInfo import NcamInfoMenu
+			self.session.open(NcamInfoMenu)
 		elif fileHas ("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
 			from Screens.CCcamInfo import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
