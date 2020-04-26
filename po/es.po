@@ -16241,3 +16241,6 @@ msgstr "Reproduce última película"
 
 msgid "Active clients"
 msgstr "Clientes activos"
+
+msgid "Please select an aspect ratio..."
+msgstr "Seleccione el modo pantalla deseado..."
