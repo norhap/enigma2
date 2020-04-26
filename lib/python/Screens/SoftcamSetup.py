@@ -97,7 +97,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.blueButton()
 
 	def blueButton(self):
-		if fileHas("/var/tmp/ecm.info","protocol:") or fileExists("/tmp/.oscam") or fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
+		if fileHas("/var/tmp/ecm.info","protocol:") or fileExists("/tmp/.oscam") or fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta") or fileHas("/var/log/oscam1.log","cardserver log switched, version 1.20_svn"):
 			self["key_blue"].setText(_("Info"))
 
 	def setEcmInfo(self):
@@ -107,15 +107,15 @@ class SoftcamSetup(Screen, ConfigListScreen):
 
 	def ppanelShortcut(self):
 		ppanelFileName = '/etc/ppanels/' + self.softcams.value + '.xml'
-		if fileExists ("/tmp/.oscam") and fileExists ("/var/tmp/pid.info"):
-			from Screens.OScamInfo import OscamInfoMenu
-			self.session.open(OscamInfoMenu)
+		if fileHas ("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta") and not fileExists("/var/tmp/ncam.pid"):
+			from Screens.CCcamInfo import CCcamInfoMain
+			self.session.open(CCcamInfoMain)
 		elif fileExists("/var/tmp/ncam.pid"):
 			from Screens.NcamInfo import NcamInfoMenu
 			self.session.open(NcamInfoMenu)
-		elif fileHas ("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
-			from Screens.CCcamInfo import CCcamInfoMain
-			self.session.open(CCcamInfoMain)
+		elif fileExists ("/tmp/.oscam") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","/tmp/.oscam/oscam.pid") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","version 1.20_svn") and not fileExists("/var/tmp/ncam.pid"):
+			from Screens.OScamInfo import OscamInfoMenu
+			self.session.open(OscamInfoMenu)
 		elif "cccam" in self.softcams.value.lower() and os.path.isfile(resolveFilename(SCOPE_PLUGINS, 'Extensions/CCcamInfo/plugin.pyo')):
 			from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
