@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from Tools.Profile import profile
 profile("LOAD:ElementTree")
@@ -92,8 +94,34 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 		# This open gets around a possible file handle leak in Python's XML parser.
 		with open(filename, "r") as fd:
 			try:
-				domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(fd).getroot()))
-				print("[skin] Skin '%s' added successfully." % filename)
+				domSkin = xml.etree.cElementTree.parse(fd).getroot()
+				# print("[Skin] DEBUG: Extracting non screen blocks from '%s'.  (scope='%s')" % (filename, scope))
+				# For loadSingleSkinData colors, bordersets etc. are applied one after
+				# the other in order of ascending priority.
+				loadSingleSkinData(desktop, screenID, domSkin, filename, scope=scope)
+				for element in domSkin:
+					if element.tag == "screen":  # Process all screen elements.
+						name = element.attrib.get("name", None)
+						if name:  # Without a name, it's useless!
+							sid = element.attrib.get("id", None)
+							if sid is None or sid == screenID:  # If there is a screen ID is it for this display.
+								# print("[Skin] DEBUG: Extracting screen '%s' from '%s'.  (scope='%s')" % (name, filename, scope))
+								domScreens[name] = (element, "%s/" % dirname(filename))
+					elif element.tag == "windowstyle":  # Process the windowstyle element.
+						id = element.attrib.get("id", None)
+						if id is not None:  # Without an id, it is useless!
+							id = int(id)
+							# print("[Skin] DEBUG: Processing a windowstyle ID='%s'." % id)
+							domStyle = xml.etree.cElementTree.ElementTree(xml.etree.cElementTree.Element("skin"))
+							domStyle.getroot().append(element)
+							windowStyles[id] = (desktop, screenID, domStyle, filename, scope)
+					# Element is not a screen or windowstyle element so no need for it any longer.
+				reloadWindowStyles()  # Reload the window style to ensure all skin changes are taken into account.
+				print("[skin] Loading skin file '%s' complete." % filename)
+				if runCallbacks:
+					for method in self.callbacks:
+						if method:
+							method()
 				return True
 			except xml.etree.cElementTree.ParseError as err:
 				fd.seek(0)
@@ -228,7 +256,7 @@ def parseCoordinate(s, e, size=0, font=None):
 				val = int(s)  # For speed try a simple number first.
 			except ValueError:
 				val = int(eval(s))
-	# print("[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s'" % (s, e, size, font, val))
+	# print("[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s'." % (s, e, size, font, val))
 	if val < 0:
 		val = 0
 	return val
@@ -641,7 +669,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 					yres = 576
 				bpp = res.attrib.get("bpp")
 				bpp = int(bpp) if bpp else 32
-				# print("[Skin] Resolution xres=%d, yres=%d, bpp=%d." % (xres, yres, bpp))
+				# print("[Skin] DEBUG: Resolution xres=%d, yres=%d, bpp=%d." % (xres, yres, bpp))
 				from enigma import gMainDC
 				gMainDC.getInstance().setResolution(xres, yres)
 				desktop.resize(eSize(xres, yres))
@@ -733,8 +761,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			name = color.attrib.get("name")
 			color = color.attrib.get("value")
 			if name and color:
-				colorNames[name] = parseColor(color)
-				# print("[Skin] Color name='%s', color='%s'." % (name, color))
+				colors[name] = parseColor(color)
+				# print("[Skin] DEBUG: Color name='%s', color='%s'." % (name, color))
 			else:
 				raise SkinError("Tag 'color' needs a name and color, got name='%s' and color='%s'" % (name, color))
 	for tag in domSkin.findall("fonts"):
@@ -754,7 +782,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				render = 0
 			filename = resolveFilename(SCOPE_FONTS, filename, path_prefix=pathSkin)
 			# Log provided by C++ addFont code.
-			# print "[Skin] Add font: Font path='%s', name='%s', scale=%d, isReplacement=%s, render=%d." % (filename, name, scale, isReplacement, render)
+			# print("[Skin] Add font: Font path='%s', name='%s', scale=%d, isReplacement=%s, render=%d." % (filename, name, scale, isReplacement, render))
 			if not fileExists(filename): # When font is not available look at current skin path
 				filename = resolveFilename(SCOPE_CURRENT_SKIN, filename)
 				if not fileExists(filename) and fileExists(resolveFilename(SCOPE_CURRENT_LCDSKIN, filename)):
@@ -788,7 +816,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			image = setup.attrib.get("image")
 			if key and image:
 				menus[key] = image
-				# print("[skin] Menu key='%s', image='%s'." % (key, image))
+				# print("[Skin] DEBUG: Menu key='%s', image='%s'." % (key, image))
 			else:
 				raise SkinError("Tag menu needs key and image, got key='%s' and image='%s'" % (key, image))
 	for tag in domSkin.findall("setups"):
@@ -797,7 +825,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			image = setup.attrib.get("image")
 			if key and image:
 				setups[key] = image
-				# print("[skin] Setup: '%s' -> '%s'" % (key, image))
+				# print("[Skin] DEBUG: Setup key='%s', image='%s'." % (key, image))
 			else:
 				raise SkinError("Tag setup needs key and image, got key='%s' and image='%s'" % (key, image))
 	for tag in domSkin.findall("subtitles"):
@@ -839,7 +867,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			font = parseFont(title.attrib.get("font"), ((1, 1), (1, 1)))
 		style.setTitleFont(font)
 		style.setTitleOffset(offset)
-		# print("[Skin] WindowStyle font, offset:", font, offset)
+		# print("[Skin] DEBUG: WindowStyle font, offset -", font, offset)
 		for borderset in tag.findall("borderset"):
 			bsName = str(borderset.attrib.get("name"))
 			for pixmap in borderset.findall("pixmap"):
@@ -852,7 +880,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 						style.setPixmap(eWindowStyleSkinned.__dict__[bsName], eWindowStyleSkinned.__dict__[bpName], png)
 					except:
 						pass
-				# print("[Skin] WindowStyle borderset name, filename:", bpName, filename)
+				# print("[Skin] DEBUG: WindowStyle borderset name, filename -", bpName, filename)
 		for color in tag.findall("color"):
 			colorType = color.attrib.get("name")
 			color = parseColor(color.attrib.get("color"))
@@ -860,8 +888,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				style.setColor(eWindowStyleSkinned.__dict__["col" + colorType], color)
 			except Exception:
 				raise SkinError("Unknown color type '%s'" % colorType)
-				# pass
-			# print("[Skin] WindowStyle color type, color:", type, color)
+			# print("[Skin] DEBUG: WindowStyle color type, color -", type, color)
 		x = eWindowStyleManager.getInstance()
 		x.setStyle(styleId, style)
 	for tag in domSkin.findall("margin"):
@@ -1117,7 +1144,7 @@ def readSkin(screen, skin, names, desktop):
 			print("[skin] Error: The widget has no name and no source!")
 			return
 		if wname:
-			# print("[Skin] Widget name='%s'" % wname)
+			# print("[Skin] DEBUG: Widget name='%s'." % wname)
 			usedComponents.add(wname)
 			# Get corresponding "gui" object.
 			try:
@@ -1127,9 +1154,8 @@ def readSkin(screen, skin, names, desktop):
 			# assert screen[wname] is not Source
 			collectAttributes(attributes, widget, context, skinPath, ignore=("name",))
 		elif wsource:
-			# print("[Skin] Widget source='%s'" % wsource)
-			# Get corresponding source.
-			while True:  # Until we found a non-obsolete source
+			# print("[Skin] DEBUG: Widget source='%s'." % wsource)
+			while True:  # Get corresponding source until we found a non-obsolete source.
 				# Parse our current "wsource", which might specify a "related screen" before the dot,
 				# for example to reference a parent, global or session-global screen.
 				scr = screen
@@ -1138,8 +1164,8 @@ def readSkin(screen, skin, names, desktop):
 				while len(path) > 1:
 					scr = screen.getRelatedScreen(path[0])
 					if scr is None:
-						# print("[Skin] wsource='%s', name='%s'." % (wsource, name))
-						raise SkinError("Specified related screen '%s' was not found in screen '%s'!" % (wsource, name))
+						# print("[Skin] DEBUG: wsource='%s', name='%s'." % (wsource, name))
+						raise SkinError("Specified related screen '%s' was not found in screen '%s'" % (wsource, name))
 					path = path[1:]
 				# Resolve the source.
 				source = scr.get(path[0])
@@ -1161,13 +1187,16 @@ def readSkin(screen, skin, names, desktop):
 			for converter in widget.findall("convert"):
 				ctype = converter.get("type")
 				assert ctype, "[Skin] The 'convert' tag needs a 'type' attribute!"
-				# print("[Skin] Converter='%s'" % ctype)
+				# print("[Skin] DEBUG: Converter='%s'." % ctype)
 				try:
 					parms = converter.text.strip()
 				except Exception:
 					parms = ""
-				# print("[Skin] Params='%s'" % parms)
-				converterClass = my_import(".".join(("Components", "Converter", ctype))).__dict__.get(ctype)
+				# print("[Skin] DEBUG: Params='%s'." % parms)
+				try:
+					converterClass = my_import(".".join(("Components", "Converter", ctype))).__dict__.get(ctype)
+				except ImportError:
+					raise SkinError("Converter '%s' not found" % ctype)
 				c = None
 				for i in source.downstream_elements:
 					if isinstance(i, converterClass) and i.converter_arguments == parms:
@@ -1274,6 +1303,17 @@ def readSkin(screen, skin, names, desktop):
 	# things around.
 	screen = None
 	usedComponents = None
+
+# Return a scaling factor (float) that can be used to rescale screen displays
+# to suit the current resolution of the screen.  The scales are based on a
+# default screen resolution of HD (720p).  That is the scale factor for a HD
+# screen will be 1.
+#
+def getSkinFactor():
+	skinfactor = getDesktop(GUI_SKIN_ID).size().height() / 720.0
+	# if skinfactor not in [0.8, 1, 1.5, 3, 6]:
+	# 	print("[Skin] Warning: Unexpected result for getSkinFactor '%0.4f'!" % skinfactor)
+	return skinfactor
 
 # Search the domScreens dictionary to see if any of the screen names provided
 # have a skin based screen.  This will allow coders to know if the named
