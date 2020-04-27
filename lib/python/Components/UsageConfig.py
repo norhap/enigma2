@@ -1282,7 +1282,7 @@ def InitUsageConfig():
 	config.ncaminfo.intervall = ConfigSelectionNumber(min = 1, max = 600, stepwidth = 1, default = 10, wraparound = True)
 
 	config.cccaminfo = ConfigSubsection()
-	if SystemInfo["CCcamInstalled"]:
+	if SystemInfo["CCcamIsActive"]:
 		config.cccaminfo.showInExtensions = ConfigYesNo(default=True)
 	else:
 		config.cccaminfo.showInExtensions = ConfigYesNo(default=False)

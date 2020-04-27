@@ -16244,3 +16244,6 @@ msgstr "Clientes activos"
 
 msgid "Please select an aspect ratio..."
 msgstr "Seleccione el modo pantalla deseado..."
+
+msgid "Please select a resolution..."
+msgstr "Seleccione resolución..."

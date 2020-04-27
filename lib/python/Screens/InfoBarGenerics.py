@@ -39,7 +39,7 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur
 
 from Tools import Notifications, ASCIItranslit
-from Tools.Directories import fileExists, getRecordingFilename, moveFiles
+from Tools.Directories import fileExists, fileHas, getRecordingFilename, moveFiles
 from Tools.KeyBindings import getKeyDescription
 
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxBrand
@@ -2260,22 +2260,32 @@ class InfoBarExtensions:
 				"extensions": (self.showExtensionSelection, _("Show extensions...")),
 			}, 1) # lower priority
 		self.addExtension(extension = self.getOScamInfo, type = InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension = self.getNcamInfo, type = InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension = self.getCCcamInfo, type = InfoBarExtensions.EXTENSION_LIST)
 
 	def getOSname(self):
 		return _("OScam Info")
 
+	def getNcamname(self):
+		return _("Ncam Info")
+
 	def getCCcamname(self):
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
-		if SystemInfo["OScamIsActive"]:
+		if fileExists ("/tmp/.oscam") and not fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/var/tmp/ncam.pid"):
 			return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
 		else:
 			return []
 
+	def getNcamInfo(self):
+		if fileExists("/var/tmp/ncam.pid"):
+			return [((boundFunction(self.getNcamname), boundFunction(self.openNcamInfo), lambda: True), None)] or []
+		else:
+			return []
+
 	def getCCcamInfo(self):
-		if SystemInfo["CCcamInstalled"]:
+		if fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta") and not fileExists("/tmp/.oscam"):
 			return [((boundFunction(self.getCCcamname), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
 		else:
 			return []
@@ -2341,8 +2351,14 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def openOScamInfo(self):
+	    if fileExists ("/tmp/.oscam") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","/tmp/.oscam/oscam.pid") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","version 1.20_svn") and not fileExists("/var/tmp/ncam.pid"):
 		from Screens.OScamInfo import OscamInfoMenu
 		self.session.open(OscamInfoMenu)
+
+	def openNcamInfo(self):
+	    if fileExists("/var/tmp/ncam.pid"):
+		from Screens.NcamInfo import NcamInfoMenu
+		self.session.open(NcamInfoMenu)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
