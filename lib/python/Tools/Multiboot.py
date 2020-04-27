@@ -1,7 +1,7 @@
 from __future__ import print_function
 from Components.SystemInfo import SystemInfo
 from Components.Console import Console
-import os, glob, tempfile, shutil
+import os, glob, tempfile
 
 class tmp:
 	dir = None
@@ -15,7 +15,8 @@ def getMultibootStartupDevice():
 				print('[Multiboot] Startupdevice found:', device)
 				return device
 			Console().ePopen('umount %s' % tmp.dir)
-	shutil.rmtree(tmp.dir, True)
+	if not os.path.ismount(tmp.dir):
+		os.rmdir(tmp.dir)
 
 def getparam(line, param):
 	return line.rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
@@ -44,7 +45,8 @@ def getMultibootslots():
 				if slot:
 					bootslots[int(slotnumber)] = slot
 		Console().ePopen('umount %s' % tmp.dir)
-		shutil.rmtree(tmp.dir, True)
+		if not os.path.ismount(tmp.dir):
+			os.rmdir(tmp.dir)
 		if not mode12found and SystemInfo["canMode12"]:
 			#the boot device has ancient content and does not contain the correct STARTUP files
 			for slot in range(1,5):
@@ -117,5 +119,6 @@ class GetImagelist():
 			self.run()
 		else:
 			self.container.killAll()
-			shutil.rmtree(self.tmp_mount, True)
+			if not os.path.ismount(self.tmp_mount):
+				os.rmdir(self.tmp_mount)
 			self.callback(self.imagelist)
