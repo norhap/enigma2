@@ -85,9 +85,9 @@ while : ; do
 		[ -n "${debug_dir}" -a -d "${debug_dir}" ] || debug_dir=/home/root/logs/
 		# remove old logfiles
 		keep=5;
-		for file in `ls -t /home/root/enigma2_debug_*.log`; do let "keep--"; if [ "$keep" -lt "0" ]; then rm $file; fi; done
+		for file in `ls -t ${debug_dir}enigma2_debug_*.log`; do let "keep--"; if [ "$keep" -lt "0" ]; then rm $file; fi; done
 		# todays log file
-		file="/home/root/enigma2_debug_$(date +%Y-%m-%d_%H-%M-%S).log"
+		file="${debug_dir}enigma2_debug_$(date +%Y-%m-%d_%H-%M-%S).log"
 		LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL @bindir@/enigma2 >> $file 2>&1
 	fi
 
