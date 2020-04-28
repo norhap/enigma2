@@ -2279,7 +2279,7 @@ class InfoBarExtensions:
 			return []
 
 	def getNcamInfo(self):
-		if fileExists("/var/tmp/ncam.pid"):
+		if fileExists("/tmp/ncam.pid") and not fileHas("/var/log/oscam1.log", "oscam"):
 			return [((boundFunction(self.getNcamname), boundFunction(self.openNcamInfo), lambda: True), None)] or []
 		else:
 			return []
