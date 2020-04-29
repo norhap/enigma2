@@ -1909,9 +1909,6 @@ msgstr "Fecha"
 msgid "Date/time input"
 msgstr "Entrada de fecha/hora"
 
-msgid "Debug to file"
-msgstr "Depurar a fichero"
-
 msgid "Deep standby"
 msgstr "Reposo profundo"
 
@@ -16256,3 +16253,30 @@ msgstr "Número de dígitos en número de canal"
 
 msgid "This allows you to set the number of digits you can input when selecting channels using number input."
 msgstr "Esto le permite establecer el número de dígitos que puede ingresar al seleccionar canales mediante el ingreso de números."
+
+msgid "Log python stack trace on spinner"
+msgstr "Log python con spinner"
+
+msgid "Debug log time format *"
+msgstr "Formato en tiempo Debug log"
+
+msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since the receiver was last booted."
+msgstr "Este es el prefijo de cada entrada en Debug log. 'en tiempo de arranque' es el número de segundos desde la última vez que se arrancó el receptor."
+
+msgid "Boot time"
+msgstr "En tiempo de arranque"
+
+msgid "Local time"
+msgstr "En tiempo local"
+
+msgid "Boot time and local time"
+msgstr "En tiempo local y arranque"
+
+msgid "Choose the location for crash and debug logs folder."
+msgstr "Elija la carpeta de localización del log."
+
+msgid "Debug to file"
+msgstr "Debug a archivo"
+
+msgid "Logs folder location"
+msgstr "Carpeta localización Logs"
