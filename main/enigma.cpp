@@ -95,7 +95,9 @@ void keyEvent(const eRCKey &key)
 #include <lib/dvb/dvbtime.h>
 #include <lib/dvb/epgcache.h>
 #ifdef HAVE_RASPBERRYPI
+#include <lib/dvb/omxdecoder.h>
 #include <rpisetup.h>
+#include <rpidisplay.h>
 #endif
 
 /* Defined in eerror.cpp */
@@ -242,8 +244,19 @@ int main(int argc, char **argv)
 	if (getenv("ENIGMA_DEBUG_TIME"))
 		setDebugTime(atoi(getenv("ENIGMA_DEBUG_TIME")));
 #ifdef HAVE_RASPBERRYPI
-	cRpiSetup *m_setup;
-	m_setup->HwInit();
+//	mknod("/tmp/ENIGMA_FIFO", S_IFIFO|0666, 0);
+	cOmxDevice *m_device;
+//	cRpiSetup::GetInstance()->ProcessArgs(/* videolayer */ 0, /* outdisplay */ 0); // (default values)
+	if(!cRpiSetup::HwInit())
+		eLog(3, "[cRpiSetup] failed to initialize RPi HD Device");
+	else
+	{
+		if (!cRpiSetup::IsVideoCodecSupported(cVideoCodec::eMPEG2))
+			eLog(3, "[cRpiSetup] MPEG2 video decoder not enabled!");
+		m_device = new cOmxDevice(cRpiDisplay::GetId(), cRpiSetup::VideoLayer());
+		if (m_device)
+			m_device->Init();
+	}
 #endif
 	ePython python;
 	eMain main;
@@ -356,7 +369,10 @@ int main(int argc, char **argv)
 		p.flush();
 	}
 #ifdef HAVE_RASPBERRYPI
-	m_setup->DropInstance();
+	cRpiSetup::DropInstance();
+	eDebug("[cRpiSetup] DropInstance");
+	cRpiDisplay::DropInstance();
+	eDebug("[cRpiDisplay] DropInstance");
 #endif
 	return exit_code;
 }
@@ -397,7 +413,7 @@ const char *getBoxBrand()
 void dump_malloc_stats(void)
 {
 	struct mallinfo mi = mallinfo();
-	eDebug("MALLOC: %d total", mi.uordblks);
+	eDebug("[ENIGMA] MALLOC: %d total", mi.uordblks);
 }
 
 #ifdef USE_LIBVUGLES2
