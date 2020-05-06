@@ -790,10 +790,12 @@ int eDVBCICcSessionImpl::generate_dh_key()
 	
 	DH_set0_pqg(dh, p, q, g);
 
+#endif
 	DH_generate_key(dh);
-
+#ifdef HAVE_NEWOE
 	DH_get0_key(dh, &pub_key, NULL);
 	len = BN_num_bytes(pub_key);
+#endif
 	if (len > 256) {
 		eWarning("[res_content_ctrl] too long public key");
 		return -1;
