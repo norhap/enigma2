@@ -300,7 +300,7 @@ namespace {
 #ifdef HAVE_NEWOE
 			eWarning(X509_verify_cert_error_string(X509_STORE_CTX_get_error(store_ctx)));
 #else
-			eWarning(X509_verify_cert_error_string(store_ctx->error));
+			eWarning(X509_verify_cert_error_string(store_ctx));
 #endif
 
 		X509_STORE_CTX_free(store_ctx);
@@ -787,20 +787,13 @@ int eDVBCICcSessionImpl::generate_dh_key()
 	g = BN_bin2bn(dh_g, sizeof(dh_g), 0);
 	q = BN_bin2bn(dh_q, sizeof(dh_q), 0);
 	// Deprecated!   dh->flags |= DH_FLAG_NO_EXP_CONSTTIME;
+	
 	DH_set0_pqg(dh, p, q, g);
-#else
-	dh->p = BN_bin2bn(dh_p, sizeof(dh_p), 0);
-	dh->g = BN_bin2bn(dh_g, sizeof(dh_g), 0);
-	dh->q = BN_bin2bn(dh_q, sizeof(dh_q), 0);
-	dh->flags |= DH_FLAG_NO_EXP_CONSTTIME;
-#endif
+
 	DH_generate_key(dh);
-#ifdef HAVE_NEWOE
+
 	DH_get0_key(dh, &pub_key, NULL);
 	len = BN_num_bytes(pub_key);
-#else
-	len = BN_num_bytes(dh->pub_key);
-#endif
 	if (len > 256) {
 		eWarning("[res_content_ctrl] too long public key");
 		return -1;
@@ -811,13 +804,13 @@ int eDVBCICcSessionImpl::generate_dh_key()
 	BN_CTX *ctx = BN_CTX_new();
 	BIGNUM *out = BN_new();
 
-	if (BN_cmp(BN_value_one(), dh->pub_key) >= 0) {
+	if (BN_cmp(BN_value_one(), pub_key) >= 0) {
 		eWarning("DHPH <= 1!!!");
 	}
-	if (BN_cmp(dh->pub_key, dh->p) >= 0) {
+	if (BN_cmp(pub_key, dh->p) >= 0) {
 		eWarning("DHPH >= dh_p!!!");
 	}
-	BN_mod_exp(out, dh->pub_key, dh->q, dh->p, ctx);
+	BN_mod_exp(out, pub_key, dh->q, dh->p, ctx);
 	if (BN_cmp(out, BN_value_one()) != 0) {
 		eWarning("DHPH ^ dh_q mod dh_p != 1!!!");
 	}
@@ -828,13 +821,9 @@ int eDVBCICcSessionImpl::generate_dh_key()
 
 	gap = 256 - len;
 	memset(dhph, 0, gap);
-#ifdef HAVE_NEWOE
 	BN_bn2bin(pub_key, &dhph[gap]);
-#else
-	BN_bn2bin(dh->pub_key, &dhph[gap]);
-#endif
+
 	element_set(DHPH, dhph, sizeof(dhph));
-	return 0;
 }
 
 int eDVBCICcSessionImpl::generate_sign_A()
