@@ -821,6 +821,7 @@ int eDVBCICcSessionImpl::generate_dh_key()
 
 	gap = 256 - len;
 	memset(dhph, 0, gap);
+#ifdef HAVE_NEWOE
 	BN_bn2bin(pub_key, &dhph[gap]);
 
 	element_set(DHPH, dhph, sizeof(dhph));
