@@ -299,8 +299,6 @@ namespace {
 		if (ret != 1)
 #ifdef HAVE_NEWOE
 			eWarning(X509_verify_cert_error_string(X509_STORE_CTX_get_error(store_ctx)));
-#else
-			eWarning(X509_verify_cert_error_string(store_ctx));
 #endif
 
 		X509_STORE_CTX_free(store_ctx);
