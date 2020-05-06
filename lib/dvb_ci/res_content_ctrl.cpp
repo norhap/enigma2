@@ -823,8 +823,9 @@ int eDVBCICcSessionImpl::generate_dh_key()
 	memset(dhph, 0, gap);
 #ifdef HAVE_NEWOE
 	BN_bn2bin(pub_key, &dhph[gap]);
-
+#endif
 	element_set(DHPH, dhph, sizeof(dhph));
+	return 0;
 }
 
 int eDVBCICcSessionImpl::generate_sign_A()
