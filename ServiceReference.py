@@ -1,4 +1,5 @@
-from enigma import eServiceReference, eServiceCenter, getBestPlayableServiceReference
+# -*- coding: utf-8 -*-
+from enigma import eServiceReference, eServiceReferenceDVB, eServiceCenter, getBestPlayableServiceReference
 import NavigationInstance
 
 class ServiceReference(eServiceReference):
