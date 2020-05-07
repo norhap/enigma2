@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Components.Converter.Converter import Converter
 from Components.Element import cached, ElementError
 from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Screens.Ci import MMIDialog
 import socketmmi
 

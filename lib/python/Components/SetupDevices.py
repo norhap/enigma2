@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Components.config import ConfigOnOff, ConfigSelection, ConfigSubsection, ConfigText, config
 from Components.Language import language
 from Components.Keyboard import keyboard

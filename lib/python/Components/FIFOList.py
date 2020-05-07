@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Components.MenuList import MenuList
 
 class FIFOList(MenuList):

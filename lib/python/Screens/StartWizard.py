@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Screens.Wizard import wizardManager
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox

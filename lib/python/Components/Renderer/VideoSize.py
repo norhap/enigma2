@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Components.VariableText import VariableText
 from enigma import eLabel, iServiceInformation
 from Components.Renderer.Renderer import Renderer

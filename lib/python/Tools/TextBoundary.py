@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from enigma import eLabel
 
 # Calls onto the static function in eLabel. This avoids causing an invalidate

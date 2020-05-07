@@ -1,5 +1,4 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+# -*- coding: iso-8859-1 -*-
 from Components.Console import Console
 from Components.About import about
 from Components.PackageInfo import PackageInfoHandler

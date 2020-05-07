@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
 from Screen import Screen
 from Components.ActionMap import NumberActionMap
