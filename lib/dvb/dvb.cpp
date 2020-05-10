@@ -277,44 +277,26 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 	char filename[256];
 	char name[128] = {0};
 	int vtunerid = nr - 1;
-	char buffer[4*1024];
-	char* buf_pos;
-	ssize_t rd;
-	int fd;
 
 	pumpThread = 0;
 
 	int num_fe = 0;
-
-	demuxFd = vtunerFd = pipeFd[0] = pipeFd[1] = -1;
-
-	/* we need to know exactly what frontend is internal or initialized! */
-	fd = open("/proc/bus/nim_sockets", O_RDONLY);
-	if (fd < 0)
+	while (1)
 	{
-		eDebug("[eDVBUsbAdapter] Cannot open /proc/bus/nim_sockets");
-		goto error;
+		/*
+		 * Some frontend devices might have been just created, if
+		 * they are virtual (vtuner) frontends.
+		 * In that case, we cannot be sure the devicenodes are available yet.
+		 * So it is safer to scan for sys entries, than for device nodes
+		 */
+		snprintf(filename, sizeof(filename), "/sys/class/dvb/dvb0.frontend%d", num_fe);
+		if (::access(filename, X_OK) < 0) break;
+		num_fe++;
 	}
-	rd = read(fd, buffer, sizeof(buffer));
-	if (rd < 0)
-	{
-		eDebug("[eDVBUsbAdapter] Cannot read /proc/bus/nim_sockets");
-		goto error;
-	}
-	buf_pos = buffer;
-	while ((buf_pos = strstr(buf_pos, "Frontend_Device: ")) != NULL)
-	{
-		int num_fe_tmp;
-		if (sscanf(buf_pos, "Frontend_Device: %d", &num_fe_tmp) == 1)
-		{
-			if (num_fe_tmp > num_fe)
-				num_fe = num_fe_tmp;
-		}
-		buf_pos += 1;
-	}
-	num_fe++;
 	snprintf(filename, sizeof(filename), "/dev/dvb/adapter0/frontend%d", num_fe);
 	virtualFrontendName = filename;
+
+	demuxFd = vtunerFd = pipeFd[0] = pipeFd[1] = -1;
 
 	/* find the device name */
 	snprintf(filename, sizeof(filename), "/sys/class/dvb/dvb%d.frontend0/device/product", nr);

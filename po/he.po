@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 12:39+0430\n"
+"POT-Creation-Date: 2020-05-10 01:38+0430\n"
 "PO-Revision-Date: 2012-03-08 10:40+0330\n"
 "Last-Translator: \n"
 "Language-Team: Arabic <moustafagamal@hotmail.com>\n"
@@ -20,6 +20,12 @@ msgstr ""
 "X-Poedit-Language: Arabic\n"
 "X-Poedit-Country: EGYPT\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
+
+#, python-format
+msgid ""
+"\n"
+" %s "
+msgstr ""
 
 msgid ""
 "\n"
@@ -57,6 +63,9 @@ msgstr ""
 msgid ""
 "\n"
 "Timer '%s' disabled!"
+msgstr ""
+
+msgid " "
 msgstr ""
 
 msgid "  REC  "
@@ -166,6 +175,28 @@ msgstr ""
 msgid "%-d-%b-%Y"
 msgstr ""
 
+#, fuzzy
+msgid "%-d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%-d. %b"
+msgstr ""
+
+msgid "%-d. %b %Y"
+msgstr ""
+
+msgid "%-d.%-m"
+msgstr ""
+
+msgid "%-d.%-m.%Y"
+msgstr ""
+
+msgid "%-d.%m"
+msgstr ""
+
+msgid "%-d.%m.%Y"
+msgstr ""
+
 msgid "%-d/%-m"
 msgstr ""
 
@@ -254,6 +285,25 @@ msgid "%A %-d-%B"
 msgstr ""
 
 msgid "%A %-d-%B-%Y"
+msgstr ""
+
+msgid "%A %-d. %B"
+msgstr ""
+
+#, fuzzy
+msgid "%A %-d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%A %-d.%-m"
+msgstr ""
+
+msgid "%A %-d.%-m.%Y"
+msgstr ""
+
+msgid "%A %-d.%m"
+msgstr ""
+
+msgid "%A %-d.%m.%Y"
 msgstr ""
 
 msgid "%A %-d/%-m"
@@ -346,6 +396,28 @@ msgstr ""
 
 msgid "%A %d-%B-%Y"
 msgstr ""
+
+msgid "%A %d. %B"
+msgstr ""
+
+#, fuzzy
+msgid "%A %d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%A %d.%-m"
+msgstr ""
+
+#, fuzzy
+msgid "%A %d.%-m.%Y"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%A %d.%m"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%A %d.%m.%Y"
+msgstr "%d.%B %Y"
 
 msgid "%A %d/%-m"
 msgstr ""
@@ -483,6 +555,30 @@ msgstr ""
 
 #, fuzzy
 msgid "%a %-d-%b-%Y"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%a %-d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%a %-d. %b"
+msgstr ""
+
+#, fuzzy
+msgid "%a %-d. %b %Y"
+msgstr "%d.%B %Y"
+
+msgid "%a %-d.%-m"
+msgstr ""
+
+msgid "%a %-d.%-m.%Y"
+msgstr ""
+
+msgid "%a %-d.%m"
+msgstr ""
+
+#, fuzzy
+msgid "%a %-d.%m.%Y"
 msgstr "%d.%B %Y"
 
 msgid "%a %-d/%-m"
@@ -623,6 +719,33 @@ msgstr ""
 
 #, fuzzy
 msgid "%a %d-%b-%Y"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%a %d. %B %Y"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%a %d. %b"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%a %d. %b %Y"
+msgstr "%d.%B %Y"
+
+msgid "%a %d.%-m"
+msgstr ""
+
+#, fuzzy
+msgid "%a %d.%-m.%Y"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%a %d.%m"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%a %d.%m.%Y"
 msgstr "%d.%B %Y"
 
 msgid "%a %d/%-m"
@@ -846,9 +969,35 @@ msgstr ""
 msgid "%d-%m"
 msgstr ""
 
+#, fuzzy
+msgid "%d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%d. %b"
+msgstr ""
+
+msgid "%d. %b %Y"
+msgstr ""
+
+#, fuzzy
+msgid "%d.%-m"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%d.%-m.%Y"
+msgstr "%d.%B %Y"
+
 #, python-format
 msgid "%d.%03d GB"
 msgstr ""
+
+#, fuzzy
+msgid "%d.%m"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%d.%m.%Y"
+msgstr "%d.%B %Y"
 
 msgid "%d/%-m"
 msgstr ""
@@ -958,6 +1107,10 @@ msgstr ""
 
 #, python-format
 msgid "%s:%s"
+msgstr ""
+
+#, python-format
+msgid "%s?"
 msgstr ""
 
 #, python-format
@@ -1858,6 +2011,9 @@ msgstr ""
 msgid "Amlogic"
 msgstr ""
 
+msgid "Amlogic remote"
+msgstr ""
+
 #
 msgid "An empty filename is illegal."
 msgstr "קובץ ריק לא חוקי"
@@ -1927,6 +2083,10 @@ msgstr ""
 "האם ברצונך להוריד\n"
 "את הפלאגין \"%s\"?"
 
+#, fuzzy
+msgid "Are you sure to delete image:"
+msgstr "? האם אתה מעוניין לצאת מהאשף"
+
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr ""
 
@@ -1945,6 +2105,10 @@ msgstr ""
 
 msgid "Are you sure to remove this entry?"
 msgstr ""
+
+#, fuzzy
+msgid "Are you sure to restore all deleted images"
+msgstr "? האם אתה מעוניין לצאת מהאשף"
 
 msgid ""
 "Are you sure you want to activate this network configuration?\n"
@@ -2470,6 +2634,14 @@ msgstr ""
 msgid "Boost green"
 msgstr "ירוק"
 
+#
+#, fuzzy
+msgid "Boot time"
+msgstr "Sort Time"
+
+msgid "Boot time and local time"
+msgstr ""
+
 msgid "Boot to Android image"
 msgstr ""
 
@@ -2959,6 +3131,9 @@ msgstr ""
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr ""
 
+msgid "Choose the location for crash and debug logs folder."
+msgstr ""
+
 msgid "Choose the location where the EPG data will be stored when the %s %s is shut down. The location must be available at boot time."
 msgstr ""
 
@@ -3090,6 +3265,10 @@ msgstr "הגדרות האוסף"
 
 #, fuzzy
 msgid "Colombia"
+msgstr "תבנית צבע"
+
+#, fuzzy
+msgid "Color"
 msgstr "תבנית צבע"
 
 #, fuzzy
@@ -3661,6 +3840,9 @@ msgstr ""
 msgid "Contrast"
 msgstr "ניגודיות"
 
+msgid "Control LED can be turned on or off here."
+msgstr ""
+
 msgid "Cook Islands"
 msgstr ""
 
@@ -3679,6 +3861,11 @@ msgstr ""
 
 msgid "Cote d'Ivoire"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Could not connect to server"
+msgstr "%s לא יכול להקליט עקב התנגשות בטיימר"
 
 msgid "Could not find installed channel list."
 msgstr ""
@@ -3894,6 +4081,15 @@ msgstr ""
 msgid "DUAL LAYER DVD"
 msgstr "Dual Layer DVD"
 
+#, fuzzy
+msgid "DVB"
+msgstr "DVB-S"
+
+#
+#, fuzzy
+msgid "DVB API version: "
+msgstr ":גרסה חדשה"
+
 msgid "DVB API: "
 msgstr ""
 
@@ -3910,8 +4106,8 @@ msgstr "בחירת תרגום"
 
 #
 #, fuzzy
-msgid "DVB driver version: "
-msgstr ":גרסה חדשה"
+msgid "DVB information"
+msgstr "מידע"
 
 msgid "DVB subtitle black transparency"
 msgstr ""
@@ -4054,6 +4250,15 @@ msgstr ""
 msgid "Dayname D-Month-Year"
 msgstr ""
 
+msgid "Dayname D. Month Year"
+msgstr ""
+
+msgid "Dayname D.M.Year"
+msgstr ""
+
+msgid "Dayname D.MM.Year"
+msgstr ""
+
 msgid "Dayname D/M/Year"
 msgstr ""
 
@@ -4064,6 +4269,15 @@ msgid "Dayname DD Month Year"
 msgstr ""
 
 msgid "Dayname DD-Month-Year"
+msgstr ""
+
+msgid "Dayname DD. Month Year"
+msgstr ""
+
+msgid "Dayname DD.M.Year"
+msgstr ""
+
+msgid "Dayname DD.MM.Year"
 msgstr ""
 
 msgid "Dayname DD/M/Year"
@@ -4118,6 +4332,9 @@ msgid "Dayname Year/MM/D"
 msgstr ""
 
 msgid "Dayname Year/MM/DD"
+msgstr ""
+
+msgid "Debug log time format *"
 msgstr ""
 
 #, fuzzy
@@ -4225,6 +4442,10 @@ msgstr "מחק"
 msgid "Delete EPG"
 msgstr "מחק"
 
+#, fuzzy
+msgid "Delete Image"
+msgstr "מחק קובץ"
+
 msgid "Delete entry"
 msgstr "מחק רשומה"
 
@@ -4249,10 +4470,13 @@ msgstr "delete playlist entry"
 msgid "Delete saved playlist"
 msgstr "delete saved playlist"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
 msgstr ""
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character to the left of text cursor"
+msgstr ""
+
+msgid "Delete the character under the text cursor"
 msgstr ""
 
 msgid "Delete timer"
@@ -4260,6 +4484,10 @@ msgstr ""
 
 msgid "Deleted"
 msgstr ""
+
+#, fuzzy
+msgid "Deleted image"
+msgstr "מחק קובץ"
 
 msgid "Deleted items"
 msgstr ""
@@ -4326,6 +4554,11 @@ msgstr "Detected NIMs:"
 #, fuzzy
 msgid "Device"
 msgstr "שירות"
+
+#
+#, fuzzy
+msgid "Device id: "
+msgstr "Serviceinfo"
 
 msgid "Device mounts"
 msgstr ""
@@ -4472,6 +4705,10 @@ msgstr "הצג הגדרות"
 
 msgid "Display the EIT now/next eventdata in infobar."
 msgstr ""
+
+#, fuzzy
+msgid "Display type: "
+msgstr "הצג הגדרות"
 
 #
 #, fuzzy
@@ -4730,6 +4967,11 @@ msgstr ""
 
 msgid "Drama"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Drivers version: "
+msgstr ":גרסה חדשה"
 
 msgid "Drop unconfigured satellites"
 msgstr ""
@@ -5057,6 +5299,11 @@ msgid "Enabled"
 msgstr "אפשר"
 
 #
+#, fuzzy
+msgid "Encrypted TV"
+msgstr ":קידוד"
+
+#
 msgid "Encrypted: "
 msgstr ":קידוד"
 
@@ -5104,17 +5351,18 @@ msgstr ""
 msgid "English"
 msgstr "אנגלית"
 
-#, python-format
-msgid "Enigma (re)starts: %d\n"
-msgstr ""
+#
+#, fuzzy, python-format
+msgid "Enigma2 (re)starts: %d\n"
+msgstr ":גרסה חדשה"
 
 #, python-format
-msgid "Enigma debug level: %d\n"
+msgid "Enigma2 debug level: %d\n"
 msgstr ""
 
 #
 #, fuzzy
-msgid "Enigma version: "
+msgid "Enigma2 version: "
 msgstr ":גרסה חדשה"
 
 msgid "Enigmalight"
@@ -5558,6 +5806,9 @@ msgstr ""
 msgid "FTA"
 msgstr ""
 
+msgid "FTA TV"
+msgstr ""
+
 msgid "FTP"
 msgstr ""
 
@@ -5840,6 +6091,11 @@ msgstr ""
 msgid "Frequency & Polarization"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Frequency (kHz)"
+msgstr "תדר"
+
 msgid "Frequency bands"
 msgstr "קבוצת תדרים"
 
@@ -5983,6 +6239,9 @@ msgid "Ghana"
 msgstr ""
 
 msgid "Gibraltar"
+msgstr ""
+
+msgid "Given device id: "
 msgstr ""
 
 msgid "Go down the list"
@@ -6546,6 +6805,13 @@ msgstr ""
 msgid "Image architecture: "
 msgstr ""
 
+#, fuzzy
+msgid "Image file system: "
+msgstr "...בודק קבצי מערכת"
+
+msgid "Image folder: "
+msgstr ""
+
 #, python-format
 msgid ""
 "Image to install is invalid\n"
@@ -6881,9 +7147,6 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "It's not a genuine Open Vision!"
-msgstr ""
-
 msgid "Italian"
 msgstr "איטלקית"
 
@@ -6950,6 +7213,11 @@ msgstr ""
 
 msgid "Kenya"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Kernel file: "
+msgstr ":גרסה חדשה"
 
 #
 #, fuzzy
@@ -7047,6 +7315,9 @@ msgstr ""
 #, fuzzy
 msgid "LED setup"
 msgstr "הגדרת תמונה בתוך תמונה"
+
+msgid "LIRC remote"
+msgstr ""
 
 #
 msgid "LNB"
@@ -7258,6 +7529,10 @@ msgid "Local network"
 msgstr "רשת מקומית"
 
 #, fuzzy
+msgid "Local time"
+msgstr "רשת מקומית"
+
+#, fuzzy
 msgid "Locale"
 msgstr "רשת מקומית"
 
@@ -7277,7 +7552,7 @@ msgstr ""
 msgid "Log"
 msgstr ""
 
-msgid "Log python stack trace on spinner?"
+msgid "Log python stack trace on spinner"
 msgstr ""
 
 msgid "Log results to /tmp"
@@ -7285,6 +7560,14 @@ msgstr ""
 
 msgid "Logfile does not exist anymore"
 msgstr ""
+
+msgid "Logs"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Logs folder location"
+msgstr "<מיקום אחרון לטיימר>"
 
 msgid "Long filenames"
 msgstr ""
@@ -7343,11 +7626,23 @@ msgstr "B"
 msgid "MIRACLEBOX_TWINPLUS"
 msgstr ""
 
+msgid "MKUBIFS: "
+msgstr ""
+
 msgid "MMC card"
 msgstr ""
 
 msgid "MORE"
 msgstr "עוד"
+
+msgid "MTD boot: "
+msgstr ""
+
+msgid "MTD kernel: "
+msgstr ""
+
+msgid "MTD root: "
+msgstr ""
 
 msgid "Macao"
 msgstr ""
@@ -7507,6 +7802,10 @@ msgstr "נגן המוזיקה"
 #, fuzzy
 msgid "Media scanner"
 msgstr "נגן המוזיקה"
+
+#, fuzzy
+msgid "Media service: "
+msgstr "add Service"
 
 #
 msgid "Medium is not a writeable DVD!"
@@ -7725,28 +8024,30 @@ msgstr "move down to next entry"
 msgid "Move east"
 msgstr "Move east"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
 msgstr ""
 
-msgid "Move the text buffer cursor right"
+msgid "Move the keyboard cursor left"
 msgstr ""
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the keyboard cursor right"
 msgstr ""
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the keyboard cursor up"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "העבר לזווית הבאה"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "move down to next entry"
+
+msgid "Move the text cursor to the first character"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor left"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor right"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor up"
+msgid "Move the text cursor to the last character"
 msgstr ""
 
 msgid "Move to position X"
@@ -8189,6 +8490,11 @@ msgid "No images found"
 msgstr "לא נמצאו רשתות"
 
 #
+#, fuzzy
+msgid "No matching place names found"
+msgstr "לא נמצאו רשתות"
+
+#
 msgid "No network connection available."
 msgstr ".אין חיבור רשת זמין"
 
@@ -8373,11 +8679,6 @@ msgstr "אין מקום בכונן הקשיח, פנה מעט מקום ונסה �
 
 #
 #, fuzzy
-msgid "Not mounted"
-msgstr "מיפוי רשת"
-
-#
-#, fuzzy
 msgid "Not running"
 msgstr "התחל מההתחלה"
 
@@ -8425,6 +8726,9 @@ msgstr "Now, use the contrast setting to turn up the brightness of the backgroun
 msgid "Number of channels shown in channel selection list"
 msgstr ""
 
+msgid "Number of digits in channel number"
+msgstr ""
+
 msgid "Number of repeating text on display."
 msgstr ""
 
@@ -8447,6 +8751,9 @@ msgid "OCTAGON_SF4008"
 msgstr ""
 
 msgid "ODIN_M7"
+msgstr ""
+
+msgid "OE: "
 msgstr ""
 
 #
@@ -8569,7 +8876,16 @@ msgstr ""
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr ""
 
+msgid "Open Vision"
+msgstr ""
+
 msgid "Open Vision enigma2 image"
+msgstr ""
+
+msgid "Open Vision information"
+msgstr ""
+
+msgid "Open Vision language: "
 msgstr ""
 
 msgid "Open Vision module: "
@@ -8897,6 +9213,11 @@ msgstr "play from previous mark or playlist entry"
 
 msgid "Play in main window"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Play last movie"
+msgstr "Select a movie"
 
 #
 #, fuzzy
@@ -9271,6 +9592,15 @@ msgstr ""
 msgid "Power LED can be turned on or off here."
 msgstr ""
 
+msgid "Power LED colour state in Deep-Standby"
+msgstr ""
+
+msgid "Power LED colour state in Standby"
+msgstr ""
+
+msgid "Power LED colour state when running."
+msgstr ""
+
 msgid "Power LED state during deep-standby."
 msgstr ""
 
@@ -9281,9 +9611,6 @@ msgid "Power LED state in Deep-Standby"
 msgstr ""
 
 msgid "Power LED state in Standby"
-msgstr ""
-
-msgid "Power LED state when running."
 msgstr ""
 
 msgid "Power On Display"
@@ -9628,6 +9955,11 @@ msgstr "זיפזופ מהיר"
 
 msgid "RAM"
 msgstr ""
+
+#
+#, fuzzy
+msgid "RC type: "
+msgstr "Test Type"
 
 msgid "REC"
 msgstr ""
@@ -10043,6 +10375,10 @@ msgstr ""
 msgid "Required medium type:"
 msgstr "Required medium type:"
 
+#, fuzzy
+msgid "Requires internet connection."
+msgstr "Refresh rate selection."
+
 msgid "Rereading partition table"
 msgstr ""
 
@@ -10137,6 +10473,10 @@ msgstr "שחזור גיבויים"
 msgid "Restore defaults"
 msgstr "שחזור גיבויים"
 
+#, fuzzy
+msgid "Restore deleted images"
+msgstr "שחזור גיבויים"
+
 msgid "Restore deleted user bouquets"
 msgstr ""
 
@@ -10192,10 +10532,6 @@ msgstr "Resuming playback"
 msgid "Retrieving image list - Please wait..."
 msgstr "...מקבל מידע אודות הפלאגין. אנא המתן"
 
-#, fuzzy
-msgid "Retrieving image slots - Please wait..."
-msgstr "Searching for available updates. Please wait..."
-
 msgid "Return to movie list"
 msgstr "חזור לרשימת הסרטים"
 
@@ -10236,6 +10572,9 @@ msgid "Root"
 msgstr ""
 
 msgid "Root directory"
+msgstr ""
+
+msgid "Root file: "
 msgstr ""
 
 msgid "Rotor step position:"
@@ -10899,8 +11238,12 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
-msgid "Select the character or action under the virtual keyboard cursor"
+msgid "Select the character or action under the keyboard cursor"
 msgstr ""
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "select the movie path"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -10936,6 +11279,13 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "select the movie path"
+
+msgid "Select the shifted character set for the next character only"
+msgstr ""
+
 msgid "Select the time zone within the area or region."
 msgstr ""
 
@@ -10952,15 +11302,6 @@ msgid "Select the type of LNB/device being used (normally 'Universal'). If your 
 msgstr ""
 
 msgid "Select the type of Single Cable Reception device you are using."
-msgstr ""
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #
@@ -11138,6 +11479,11 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "Service list"
+msgstr "Subservice list..."
+
+#
+#, fuzzy
 msgid "Service name"
 msgstr "סרוקת שירות"
 
@@ -11258,8 +11604,9 @@ msgstr ""
 msgid "Set the delay time between repeated loops, this is used by software renderer in some skins."
 msgstr ""
 
+#, fuzzy
 msgid "Set the global sort method"
-msgstr ""
+msgstr "select the movie path"
 
 msgid "Set the password of the OpenWebif from your fallback tuner"
 msgstr ""
@@ -11851,9 +12198,6 @@ msgid "Site latitude"
 msgstr ""
 
 msgid "Site longitude"
-msgstr ""
-
-msgid "Size: "
 msgstr ""
 
 #
@@ -12709,6 +13053,9 @@ msgstr ""
 msgid "TB"
 msgstr "B"
 
+msgid "TEXT"
+msgstr ""
+
 msgid "TMBD Details"
 msgstr ""
 
@@ -13109,6 +13456,9 @@ msgstr ""
 msgid "This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
 msgstr ""
 
+msgid "This allows you to set the number of digits you can input when selecting channels using number input."
+msgstr ""
+
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr ""
@@ -13123,6 +13473,9 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
+msgstr ""
+
+msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since the receiver was last booted."
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -13588,6 +13941,10 @@ msgstr ""
 msgid "Toggle the tv and the radio player..."
 msgstr ""
 
+#, fuzzy
+msgid "Toggle videomode"
+msgstr "Select video mode"
+
 msgid "Togo"
 msgstr ""
 
@@ -13790,6 +14147,9 @@ msgstr ""
 msgid "Turn on HDMI-IN PiP mode"
 msgstr ""
 
+msgid "Turn on the control LED."
+msgstr ""
+
 msgid "Turn on the power LED during deep standby."
 msgstr ""
 
@@ -13821,6 +14181,9 @@ msgstr "סוג סריקה"
 #
 msgid "Type of scan"
 msgstr "סוג סריקה"
+
+msgid "UBINIZE: "
+msgstr ""
 
 msgid "UNKNOWN"
 msgstr ""
@@ -14014,6 +14377,9 @@ msgstr "מעדכן קטלוג תוכנה"
 msgid "Upper case"
 msgstr ""
 
+msgid "Uptime: "
+msgstr ""
+
 msgid "Uruguay"
 msgstr ""
 
@@ -14117,7 +14483,7 @@ msgstr ""
 msgid "Use the alternative screen"
 msgstr "Edit alternatives"
 
-msgid "Use the cursor keys to select an installed image then press Reboot button."
+msgid "Use the cursor keys to select an installed image then reboot."
 msgstr ""
 
 msgid ""
@@ -15048,6 +15414,9 @@ msgstr ""
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
+msgstr ""
+
+msgid "You seem to be in timeshift!"
 msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"

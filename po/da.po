@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 12:39+0430\n"
+"POT-Creation-Date: 2020-05-10 01:38+0430\n"
 "PO-Revision-Date: 2017-01-18 16:38+0100\n"
 "Last-Translator: lupine <a_ecklon@hotmail.com>\n"
 "Language-Team: \n"
@@ -14,6 +14,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
+
+#, python-format
+msgid ""
+"\n"
+" %s "
+msgstr ""
 
 #
 msgid ""
@@ -59,6 +65,9 @@ msgid ""
 msgstr ""
 "\n"
 "Timer '%s' deaktiveret!"
+
+msgid " "
+msgstr ""
 
 msgid "  REC  "
 msgstr ""
@@ -168,6 +177,29 @@ msgstr ""
 msgid "%-d-%b-%Y"
 msgstr ""
 
+#
+#, fuzzy
+msgid "%-d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%-d. %b"
+msgstr ""
+
+msgid "%-d. %b %Y"
+msgstr ""
+
+msgid "%-d.%-m"
+msgstr ""
+
+msgid "%-d.%-m.%Y"
+msgstr ""
+
+msgid "%-d.%m"
+msgstr ""
+
+msgid "%-d.%m.%Y"
+msgstr ""
+
 msgid "%-d/%-m"
 msgstr ""
 
@@ -260,6 +292,29 @@ msgstr "%A %d %B"
 #, fuzzy
 msgid "%A %-d-%B-%Y"
 msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %-d. %B"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %-d. %B %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%A %-d.%-m"
+msgstr "%A %d %B"
+
+msgid "%A %-d.%-m.%Y"
+msgstr ""
+
+#, fuzzy
+msgid "%A %-d.%m"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %-d.%m.%Y"
+msgstr "%A %e %B %Y"
 
 #, fuzzy
 msgid "%A %-d/%-m"
@@ -363,6 +418,30 @@ msgstr "%A %d %B"
 #, fuzzy
 msgid "%A %d-%B-%Y"
 msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d. %B"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d. %B %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%A %d.%-m"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d.%-m.%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%A %d.%m"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d.%m.%Y"
+msgstr "%A %e %B %Y"
 
 #, fuzzy
 msgid "%A %d/%-m"
@@ -509,6 +588,32 @@ msgstr ""
 
 #, fuzzy
 msgid "%a %-d-%b-%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %-d. %B %Y"
+msgstr "%A %e %B %Y"
+
+msgid "%a %-d. %b"
+msgstr ""
+
+#, fuzzy
+msgid "%a %-d. %b %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %-d.%-m"
+msgstr "%a %e/%m"
+
+msgid "%a %-d.%-m.%Y"
+msgstr ""
+
+#, fuzzy
+msgid "%a %-d.%m"
+msgstr "%a %e/%m"
+
+#, fuzzy
+msgid "%a %-d.%m.%Y"
 msgstr "%A %e %B %Y"
 
 #, fuzzy
@@ -661,6 +766,34 @@ msgstr "%a %e/%m"
 
 #, fuzzy
 msgid "%a %d-%b-%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d. %B %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d. %b"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d. %b %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d.%-m"
+msgstr "%a %e/%m"
+
+#, fuzzy
+msgid "%a %d.%-m.%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d.%m"
+msgstr "%a %e/%m"
+
+#, fuzzy
+msgid "%a %d.%m.%Y"
 msgstr "%A %e %B %Y"
 
 #, fuzzy
@@ -896,9 +1029,40 @@ msgstr "%d-%m"
 msgid "%d-%m"
 msgstr "%d-%m"
 
+#
+#, fuzzy
+msgid "%d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%d. %b"
+msgstr ""
+
+msgid "%d. %b %Y"
+msgstr ""
+
+#
+#, fuzzy
+msgid "%d.%-m"
+msgstr "%d.%B %Y"
+
+#
+#, fuzzy
+msgid "%d.%-m.%Y"
+msgstr "%d.%B %Y"
+
 #, python-format
 msgid "%d.%03d GB"
 msgstr ""
+
+#
+#, fuzzy
+msgid "%d.%m"
+msgstr "%d.%B %Y"
+
+#
+#, fuzzy
+msgid "%d.%m.%Y"
+msgstr "%d.%B %Y"
 
 msgid "%d/%-m"
 msgstr ""
@@ -1011,6 +1175,10 @@ msgstr "%s/%s: %s"
 #, python-format
 msgid "%s:%s"
 msgstr "%s:%s"
+
+#, python-format
+msgid "%s?"
+msgstr ""
 
 #, python-format
 msgid "'%s' contains %d file(s) and %d sub-directories.\n"
@@ -1977,6 +2145,9 @@ msgstr ""
 msgid "Amlogic"
 msgstr ""
 
+msgid "Amlogic remote"
+msgstr ""
+
 #
 msgid "An empty filename is illegal."
 msgstr "Et tomt filnavn er ugyldigt."
@@ -2046,6 +2217,11 @@ msgstr "Vil du installere kanallisten?"
 msgid "Are you ready to remove \"%s\" ?"
 msgstr "Er du sikker på at dette punkt skal slettes?"
 
+#
+#, fuzzy
+msgid "Are you sure to delete image:"
+msgstr "Bekræft at du vil afslutte denne hjælper?"
+
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Er du sikker på du vil fjerne alle slettede userbouquets?"
 
@@ -2065,6 +2241,10 @@ msgstr "Er du sikker på du vil fjerne alle terrestrial services?"
 
 msgid "Are you sure to remove this entry?"
 msgstr "Er du sikker på at dette punkt skal slettes?"
+
+#, fuzzy
+msgid "Are you sure to restore all deleted images"
+msgstr "Er du sikker på du vil fjerne alle kabel services?"
 
 #
 msgid ""
@@ -2631,6 +2811,14 @@ msgstr ""
 msgid "Boost green"
 msgstr "grøn"
 
+#
+#, fuzzy
+msgid "Boot time"
+msgstr "Sorter tid"
+
+msgid "Boot time and local time"
+msgstr ""
+
 msgid "Boot to Android image"
 msgstr ""
 
@@ -3143,6 +3331,9 @@ msgstr ""
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr ""
 
+msgid "Choose the location for crash and debug logs folder."
+msgstr ""
+
 msgid "Choose the location where the EPG data will be stored when the %s %s is shut down. The location must be available at boot time."
 msgstr ""
 
@@ -3290,6 +3481,11 @@ msgstr "Kollektions indstillinger"
 #
 #, fuzzy
 msgid "Colombia"
+msgstr "Farve format"
+
+#
+#, fuzzy
+msgid "Color"
 msgstr "Farve format"
 
 #
@@ -3904,6 +4100,9 @@ msgstr "Fortsat afspilning (løkke)"
 msgid "Contrast"
 msgstr "Kontrast"
 
+msgid "Control LED can be turned on or off here."
+msgstr ""
+
 msgid "Cook Islands"
 msgstr ""
 
@@ -3923,6 +4122,10 @@ msgstr ""
 
 msgid "Cote d'Ivoire"
 msgstr ""
+
+#, fuzzy
+msgid "Could not connect to server"
+msgstr "Kunne ikke optage pga. fejlende kanal %s"
 
 msgid "Could not find installed channel list."
 msgstr "Kunne ikke finde installeret kanalliste."
@@ -4159,6 +4362,14 @@ msgstr ""
 msgid "DUAL LAYER DVD"
 msgstr "DL DVD"
 
+#, fuzzy
+msgid "DVB"
+msgstr "DVB-C"
+
+#, fuzzy
+msgid "DVB API version: "
+msgstr "DVB drivers: "
+
 msgid "DVB API: "
 msgstr ""
 
@@ -4173,9 +4384,10 @@ msgstr ""
 msgid "DVB and Pango subtitle position"
 msgstr "Undertekst position"
 
+#
 #, fuzzy
-msgid "DVB driver version: "
-msgstr "DVB drivers: "
+msgid "DVB information"
+msgstr "Information"
 
 msgid "DVB subtitle black transparency"
 msgstr "DVB teksters sorte gennemsigtighed"
@@ -4325,6 +4537,15 @@ msgstr ""
 msgid "Dayname D-Month-Year"
 msgstr ""
 
+msgid "Dayname D. Month Year"
+msgstr ""
+
+msgid "Dayname D.M.Year"
+msgstr ""
+
+msgid "Dayname D.MM.Year"
+msgstr ""
+
 msgid "Dayname D/M/Year"
 msgstr ""
 
@@ -4335,6 +4556,15 @@ msgid "Dayname DD Month Year"
 msgstr ""
 
 msgid "Dayname DD-Month-Year"
+msgstr ""
+
+msgid "Dayname DD. Month Year"
+msgstr ""
+
+msgid "Dayname DD.M.Year"
+msgstr ""
+
+msgid "Dayname DD.MM.Year"
 msgstr ""
 
 msgid "Dayname DD/M/Year"
@@ -4389,6 +4619,9 @@ msgid "Dayname Year/MM/D"
 msgstr ""
 
 msgid "Dayname Year/MM/DD"
+msgstr ""
+
+msgid "Debug log time format *"
 msgstr ""
 
 #
@@ -4499,6 +4732,10 @@ msgstr "Slet"
 msgid "Delete EPG"
 msgstr "Slet"
 
+#, fuzzy
+msgid "Delete Image"
+msgstr "Slet timer"
+
 #
 msgid "Delete entry"
 msgstr "Slet punkt"
@@ -4523,10 +4760,13 @@ msgstr "Slet afspilningslistepunkt"
 msgid "Delete saved playlist"
 msgstr "Slet gemt afspilningsliste"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
 msgstr ""
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character to the left of text cursor"
+msgstr ""
+
+msgid "Delete the character under the text cursor"
 msgstr ""
 
 msgid "Delete timer"
@@ -4534,6 +4774,10 @@ msgstr "Slet timer"
 
 msgid "Deleted"
 msgstr "Slettet"
+
+#, fuzzy
+msgid "Deleted image"
+msgstr "Slet timer"
 
 msgid "Deleted items"
 msgstr "Slettede elementer"
@@ -4607,6 +4851,10 @@ msgstr "Fundne NIMs:"
 #, fuzzy
 msgid "Device"
 msgstr "Kanal info"
+
+#, fuzzy
+msgid "Device id: "
+msgstr "Enhedsnavn"
 
 msgid "Device mounts"
 msgstr ""
@@ -4769,6 +5017,11 @@ msgstr "Display indstillinger"
 #, fuzzy
 msgid "Display the EIT now/next eventdata in infobar."
 msgstr "Vis EIT nu/næste i Infobar"
+
+#
+#, fuzzy
+msgid "Display type: "
+msgstr "Display indstillinger"
 
 #
 #, fuzzy
@@ -5060,6 +5313,10 @@ msgstr "DTS downmix"
 #, fuzzy
 msgid "Drama"
 msgstr "Film/Drama"
+
+#, fuzzy
+msgid "Drivers version: "
+msgstr "DVB drivers: "
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -5402,6 +5659,11 @@ msgid "Enabled"
 msgstr "Aktiveret"
 
 #
+#, fuzzy
+msgid "Encrypted TV"
+msgstr "Krypteret:"
+
+#
 msgid "Encrypted: "
 msgstr "Krypteret:"
 
@@ -5452,17 +5714,17 @@ msgstr "Sluttid hvor nedlukning i standby skal ignoreres."
 msgid "English"
 msgstr "Engelsk"
 
-#, python-format
-msgid "Enigma (re)starts: %d\n"
+#, fuzzy, python-format
+msgid "Enigma2 (re)starts: %d\n"
 msgstr "Enigma (gen)starter: %d\n"
 
 #, python-format
-msgid "Enigma debug level: %d\n"
+msgid "Enigma2 debug level: %d\n"
 msgstr ""
 
 #
 #, fuzzy
-msgid "Enigma version: "
+msgid "Enigma2 version: "
 msgstr "Kernel version:"
 
 msgid "Enigmalight"
@@ -5944,6 +6206,9 @@ msgstr ""
 msgid "FTA"
 msgstr "FTA"
 
+msgid "FTA TV"
+msgstr ""
+
 #, fuzzy
 msgid "FTP"
 msgstr "FTA"
@@ -6251,6 +6516,11 @@ msgid "Frequency & Polarization"
 msgstr "Frekvens & Polarisering"
 
 #
+#, fuzzy
+msgid "Frequency (kHz)"
+msgstr "Frekvens"
+
+#
 msgid "Frequency bands"
 msgstr "Frekvens bånd"
 
@@ -6405,6 +6675,10 @@ msgstr ""
 
 msgid "Gibraltar"
 msgstr ""
+
+#, fuzzy
+msgid "Given device id: "
+msgstr "Nuværende enhed"
 
 msgid "Go down the list"
 msgstr "Gå ned af listen"
@@ -6988,6 +7262,14 @@ msgstr "Ignorer konfilkt"
 msgid "Image architecture: "
 msgstr ""
 
+#, fuzzy
+msgid "Image file system: "
+msgstr "Opretter filsystem"
+
+#, fuzzy
+msgid "Image folder: "
+msgstr "Billede:"
+
 #, python-format
 msgid ""
 "Image to install is invalid\n"
@@ -7340,9 +7622,6 @@ msgstr ""
 "\n"
 "\n"
 
-msgid "It's not a genuine Open Vision!"
-msgstr ""
-
 #
 msgid "Italian"
 msgstr "Italiensk"
@@ -7411,6 +7690,11 @@ msgstr ""
 
 msgid "Kenya"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Kernel file: "
+msgstr "Kernel version:"
 
 #
 msgid "Kernel version: "
@@ -7511,6 +7795,9 @@ msgstr "Tænd for strøm LED under standby."
 #, fuzzy
 msgid "LED setup"
 msgstr "OSD 3D setup"
+
+msgid "LIRC remote"
+msgstr ""
 
 #
 msgid "LNB"
@@ -7725,6 +8012,11 @@ msgstr "Lokalt netværk"
 
 #
 #, fuzzy
+msgid "Local time"
+msgstr "Lokalt netværk"
+
+#
+#, fuzzy
 msgid "Locale"
 msgstr "Lokalt netværk"
 
@@ -7746,7 +8038,7 @@ msgstr "Lås:"
 msgid "Log"
 msgstr ""
 
-msgid "Log python stack trace on spinner?"
+msgid "Log python stack trace on spinner"
 msgstr ""
 
 msgid "Log results to /tmp"
@@ -7754,6 +8046,14 @@ msgstr "Log resultater til /tmp"
 
 msgid "Logfile does not exist anymore"
 msgstr ""
+
+msgid "Logs"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Logs folder location"
+msgstr "<Seneste timer placering>"
 
 msgid "Long filenames"
 msgstr "Lange filnavne"
@@ -7813,6 +8113,9 @@ msgstr "B"
 msgid "MIRACLEBOX_TWINPLUS"
 msgstr ""
 
+msgid "MKUBIFS: "
+msgstr ""
+
 #
 msgid "MMC card"
 msgstr "MMC kort"
@@ -7820,6 +8123,15 @@ msgstr "MMC kort"
 #
 msgid "MORE"
 msgstr "MERE"
+
+msgid "MTD boot: "
+msgstr ""
+
+msgid "MTD kernel: "
+msgstr ""
+
+msgid "MTD root: "
+msgstr ""
 
 msgid "Macao"
 msgstr ""
@@ -7980,6 +8292,11 @@ msgstr "Medie afspiller"
 #
 msgid "Media scanner"
 msgstr "Mediescanner"
+
+#
+#, fuzzy
+msgid "Media service: "
+msgstr "Tilføj kanal"
 
 #
 msgid "Medium is not a writeable DVD!"
@@ -8207,28 +8524,32 @@ msgstr "flyrt ned til næste indtastning"
 msgid "Move east"
 msgstr "Drej mod øst"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
 msgstr ""
 
-msgid "Move the text buffer cursor right"
+msgid "Move the keyboard cursor left"
 msgstr ""
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the keyboard cursor right"
 msgstr ""
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the keyboard cursor up"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor down"
+#
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "skift til næste vinkel"
+
+#
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "flyrt ned til næste indtastning"
+
+msgid "Move the text cursor to the first character"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor left"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor right"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor up"
+msgid "Move the text cursor to the last character"
 msgstr ""
 
 msgid "Move to position X"
@@ -8707,6 +9028,11 @@ msgid "No images found"
 msgstr "Ingen fundne netværk"
 
 #
+#, fuzzy
+msgid "No matching place names found"
+msgstr "Ingen fundne netværk"
+
+#
 msgid "No network connection available."
 msgstr "Ingen tilgængelig netværksforbindelse."
 
@@ -8896,11 +9222,6 @@ msgstr "Ikke tilknyttet"
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "Ikke diskplads nok. Venligst skab mere plads på disken og prøv igen. (%d MB nødvendig, %d MB ledig)"
 
-#
-#, fuzzy
-msgid "Not mounted"
-msgstr "Monter netværk"
-
 #, fuzzy
 msgid "Not running"
 msgstr "Ved begyndelsen"
@@ -8953,6 +9274,10 @@ msgstr "Nu, kan du bruge Kontrast indstilling og skrue op for Lystyrken på bagg
 msgid "Number of channels shown in channel selection list"
 msgstr "Antal kanaler vist i kanalliste"
 
+#, fuzzy
+msgid "Number of digits in channel number"
+msgstr "Brug hurtigsøgning kanalnumre"
+
 msgid "Number of repeating text on display."
 msgstr "Antal af gentaget tekst på display"
 
@@ -8976,6 +9301,9 @@ msgid "OCTAGON_SF4008"
 msgstr ""
 
 msgid "ODIN_M7"
+msgstr ""
+
+msgid "OE: "
 msgstr ""
 
 #
@@ -9099,8 +9427,19 @@ msgstr "Kun ved opstart"
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr ""
 
+msgid "Open Vision"
+msgstr ""
+
 msgid "Open Vision enigma2 image"
 msgstr ""
+
+#, fuzzy
+msgid "Open Vision information"
+msgstr "Åben valgte placering"
+
+#, fuzzy
+msgid "Open Vision language: "
+msgstr "original sprog"
 
 msgid "Open Vision module: "
 msgstr ""
@@ -9433,6 +9772,11 @@ msgstr "Aspil fra forrige mærke eller spilleliste punkt"
 
 msgid "Play in main window"
 msgstr "Afspil i hovedvindue"
+
+#
+#, fuzzy
+msgid "Play last movie"
+msgstr "Vælg en film"
 
 #
 msgid "Play music..."
@@ -9855,6 +10199,15 @@ msgstr ""
 msgid "Power LED can be turned on or off here."
 msgstr ""
 
+msgid "Power LED colour state in Deep-Standby"
+msgstr ""
+
+msgid "Power LED colour state in Standby"
+msgstr ""
+
+msgid "Power LED colour state when running."
+msgstr ""
+
 #, fuzzy
 msgid "Power LED state during deep-standby."
 msgstr "Tænd for strøm LED under standby."
@@ -9869,9 +10222,6 @@ msgstr ""
 #, fuzzy
 msgid "Power LED state in Standby"
 msgstr "Luk ned når standby er aktiv"
-
-msgid "Power LED state when running."
-msgstr ""
 
 msgid "Power On Display"
 msgstr ""
@@ -10233,6 +10583,10 @@ msgstr "Hurtigzap"
 
 msgid "RAM"
 msgstr ""
+
+#, fuzzy
+msgid "RC type: "
+msgstr "DVB type"
 
 msgid "REC"
 msgstr "REC"
@@ -10688,6 +11042,10 @@ msgstr "Kræv autorisation for http streams"
 msgid "Required medium type:"
 msgstr "Nødvenig medietype"
 
+#, fuzzy
+msgid "Requires internet connection."
+msgstr "Tjek internet forbindelsen"
+
 msgid "Rereading partition table"
 msgstr "Genlæs partitionstabel"
 
@@ -10796,6 +11154,10 @@ msgstr "Gendan backup"
 msgid "Restore defaults"
 msgstr "Sæt standard"
 
+#, fuzzy
+msgid "Restore deleted images"
+msgstr "Gendan slettede brugerbouquets"
+
 msgid "Restore deleted user bouquets"
 msgstr "Gendan slettede brugerbouquets"
 
@@ -10858,11 +11220,6 @@ msgid "Retrieving image list - Please wait..."
 msgstr "Henter plugin information. Vent venligst..."
 
 #
-#, fuzzy
-msgid "Retrieving image slots - Please wait..."
-msgstr "Søger efter tilgængelige opdateringer. Vent venligst..."
-
-#
 msgid "Return to movie list"
 msgstr "Tilbage til filmliste"
 
@@ -10908,6 +11265,10 @@ msgstr ""
 
 msgid "Root directory"
 msgstr "root mappe"
+
+#, fuzzy
+msgid "Root file: "
+msgstr "SRT fil"
 
 msgid "Rotor step position:"
 msgstr "Motor step postion"
@@ -11589,8 +11950,13 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
-msgid "Select the character or action under the virtual keyboard cursor"
+msgid "Select the character or action under the keyboard cursor"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Vælg stien til film"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -11626,6 +11992,14 @@ msgstr ""
 msgid "Select the satellite your dish receives from. If you are unsure select 'automatic' and the receiver will attempt to determine this for you."
 msgstr ""
 
+#
+#, fuzzy
+msgid "Select the shifted character set"
+msgstr "Vælg stien til film"
+
+msgid "Select the shifted character set for the next character only"
+msgstr ""
+
 #, fuzzy
 msgid "Select the time zone within the area or region."
 msgstr "Vælg sorteringsmetode:"
@@ -11643,15 +12017,6 @@ msgid "Select the type of LNB/device being used (normally 'Universal'). If your 
 msgstr ""
 
 msgid "Select the type of Single Cable Reception device you are using."
-msgstr ""
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 #
@@ -11835,6 +12200,10 @@ msgid ""
 msgstr ""
 "Kanal fejl!\n"
 "(Timeout læsning i PMT)"
+
+#, fuzzy
+msgid "Service list"
+msgstr "Vis serviceliste"
 
 msgid "Service name"
 msgstr "Kanalnavn"
@@ -12572,9 +12941,6 @@ msgstr "Breddegrad"
 
 msgid "Site longitude"
 msgstr "Længdegrad"
-
-msgid "Size: "
-msgstr ""
 
 #
 #, fuzzy
@@ -13440,6 +13806,9 @@ msgstr ""
 msgid "TB"
 msgstr "B"
 
+msgid "TEXT"
+msgstr ""
+
 msgid "TMBD Details"
 msgstr ""
 
@@ -13875,6 +14244,9 @@ msgstr "Denne DVD RW er allerede formatteret - reformattering vil slette alt ind
 msgid "This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
 msgstr ""
 
+msgid "This allows you to set the number of digits you can input when selecting channels using number input."
+msgstr ""
+
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr ""
@@ -13892,6 +14264,9 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
+msgstr ""
+
+msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since the receiver was last booted."
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -14408,6 +14783,11 @@ msgstr "Konfigurer font størrelsen på underteksterne."
 msgid "Toggle the tv and the radio player..."
 msgstr "Skift mellem tv'et og radioafspilleren..."
 
+#
+#, fuzzy
+msgid "Toggle videomode"
+msgstr "Vælg video type"
+
 msgid "Togo"
 msgstr ""
 
@@ -14620,6 +15000,10 @@ msgid "Turn on HDMI-IN PiP mode"
 msgstr ""
 
 #, fuzzy
+msgid "Turn on the control LED."
+msgstr "Tænd for strøm LED under standby."
+
+#, fuzzy
 msgid "Turn on the power LED during deep standby."
 msgstr "Tænd for strøm LED under standby."
 
@@ -14652,6 +15036,9 @@ msgstr "Søge type"
 #
 msgid "Type of scan"
 msgstr "Søge type"
+
+msgid "UBINIZE: "
+msgstr ""
 
 msgid "UNKNOWN"
 msgstr ""
@@ -14860,6 +15247,9 @@ msgstr "Opdaterer softwarekatalog"
 msgid "Upper case"
 msgstr ""
 
+msgid "Uptime: "
+msgstr ""
+
 msgid "Uruguay"
 msgstr ""
 
@@ -14966,7 +15356,7 @@ msgstr "deaktiver introskærm"
 msgid "Use the alternative screen"
 msgstr "Redigere alternativer"
 
-msgid "Use the cursor keys to select an installed image then press Reboot button."
+msgid "Use the cursor keys to select an installed image then reboot."
 msgstr ""
 
 msgid ""
@@ -15966,6 +16356,9 @@ msgstr ""
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Du må skifte til servicen %s (%s - '%s')!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 #
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"

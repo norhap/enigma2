@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from Components.config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
@@ -41,7 +40,7 @@ class inputDevices:
 		self.getInputDevices()
 
 	def getInputDevices(self):
-		devices = os.listdir("/dev/input/")
+		devices = sorted(os.listdir("/dev/input/"))
 
 		for evdev in devices:
 			try:

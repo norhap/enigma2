@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OPENPLi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-03 12:39+0430\n"
+"POT-Creation-Date: 2020-05-10 01:38+0430\n"
 "PO-Revision-Date: 2015-12-18 21:05+0200\n"
 "Last-Translator: Yetkin AYDIN <yetkina@gmail.com>\n"
 "Language-Team: http://www.hurforum.com <yetkina@gmail.com>\n"
@@ -18,6 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid ""
+"\n"
+" %s "
+msgstr ""
 
 msgid ""
 "\n"
@@ -58,6 +64,9 @@ msgid ""
 msgstr ""
 "\n"
 "'%s' Zamanlayıcı devre dışı!"
+
+msgid " "
+msgstr ""
 
 msgid "  REC  "
 msgstr ""
@@ -164,6 +173,28 @@ msgstr ""
 msgid "%-d-%b-%Y"
 msgstr ""
 
+#, fuzzy
+msgid "%-d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%-d. %b"
+msgstr ""
+
+msgid "%-d. %b %Y"
+msgstr ""
+
+msgid "%-d.%-m"
+msgstr ""
+
+msgid "%-d.%-m.%Y"
+msgstr ""
+
+msgid "%-d.%m"
+msgstr ""
+
+msgid "%-d.%m.%Y"
+msgstr ""
+
 msgid "%-d/%-m"
 msgstr ""
 
@@ -256,6 +287,29 @@ msgstr "%A %d %B"
 #, fuzzy
 msgid "%A %-d-%B-%Y"
 msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %-d. %B"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %-d. %B %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%A %-d.%-m"
+msgstr "%A %d %B"
+
+msgid "%A %-d.%-m.%Y"
+msgstr ""
+
+#, fuzzy
+msgid "%A %-d.%m"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %-d.%m.%Y"
+msgstr "%A %e %B %Y"
 
 #, fuzzy
 msgid "%A %-d/%-m"
@@ -359,6 +413,30 @@ msgstr "%A %d %B"
 #, fuzzy
 msgid "%A %d-%B-%Y"
 msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d. %B"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d. %B %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%A %d.%-m"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d.%-m.%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%A %d.%m"
+msgstr "%A %d %B"
+
+#, fuzzy
+msgid "%A %d.%m.%Y"
+msgstr "%A %e %B %Y"
 
 #, fuzzy
 msgid "%A %d/%-m"
@@ -504,6 +582,32 @@ msgstr ""
 
 #, fuzzy
 msgid "%a %-d-%b-%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %-d. %B %Y"
+msgstr "%A %e %B %Y"
+
+msgid "%a %-d. %b"
+msgstr ""
+
+#, fuzzy
+msgid "%a %-d. %b %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %-d.%-m"
+msgstr "%a %e/%m"
+
+msgid "%a %-d.%-m.%Y"
+msgstr ""
+
+#, fuzzy
+msgid "%a %-d.%m"
+msgstr "%a %e/%m"
+
+#, fuzzy
+msgid "%a %-d.%m.%Y"
 msgstr "%A %e %B %Y"
 
 #, fuzzy
@@ -656,6 +760,34 @@ msgstr "%a %e/%m"
 
 #, fuzzy
 msgid "%a %d-%b-%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d. %B %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d. %b"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d. %b %Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d.%-m"
+msgstr "%a %e/%m"
+
+#, fuzzy
+msgid "%a %d.%-m.%Y"
+msgstr "%A %e %B %Y"
+
+#, fuzzy
+msgid "%a %d.%m"
+msgstr "%a %e/%m"
+
+#, fuzzy
+msgid "%a %d.%m.%Y"
 msgstr "%A %e %B %Y"
 
 #, fuzzy
@@ -877,9 +1009,35 @@ msgstr "%d-%m"
 msgid "%d-%m"
 msgstr "%d-%m"
 
+#, fuzzy
+msgid "%d. %B %Y"
+msgstr "%d.%B %Y"
+
+msgid "%d. %b"
+msgstr ""
+
+msgid "%d. %b %Y"
+msgstr ""
+
+#, fuzzy
+msgid "%d.%-m"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%d.%-m.%Y"
+msgstr "%d.%B %Y"
+
 #, python-format
 msgid "%d.%03d GB"
 msgstr ""
+
+#, fuzzy
+msgid "%d.%m"
+msgstr "%d.%B %Y"
+
+#, fuzzy
+msgid "%d.%m.%Y"
+msgstr "%d.%B %Y"
 
 msgid "%d/%-m"
 msgstr ""
@@ -987,6 +1145,10 @@ msgstr "%s/%s: %s"
 #, python-format
 msgid "%s:%s"
 msgstr "%s:%s"
+
+#, python-format
+msgid "%s?"
+msgstr ""
 
 #, python-format
 msgid "'%s' contains %d file(s) and %d sub-directories.\n"
@@ -1842,6 +2004,9 @@ msgstr ""
 msgid "Amlogic"
 msgstr ""
 
+msgid "Amlogic remote"
+msgstr ""
+
 msgid "An empty filename is illegal."
 msgstr "Dosya Adı boş yada geçersiz."
 
@@ -1903,6 +2068,10 @@ msgstr "Kanal listesini yüklemek istiyor musunuz?"
 msgid "Are you ready to remove \"%s\" ?"
 msgstr "Bu giriş silinecek. Emin misin?"
 
+#, fuzzy
+msgid "Are you sure to delete image:"
+msgstr "Sihirbazdan çıkmak istiyor musunuz?"
+
 msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Bütün Buketler silinecek. Emin misin?"
 
@@ -1922,6 +2091,10 @@ msgstr "Tüm karasal servisler silinecek. Emin misin?"
 
 msgid "Are you sure to remove this entry?"
 msgstr "Bu giriş silinecek. Emin misin?"
+
+#, fuzzy
+msgid "Are you sure to restore all deleted images"
+msgstr "Bütün kablo servisleri silinecek. Emin misin?"
 
 msgid ""
 "Are you sure you want to activate this network configuration?\n"
@@ -2424,6 +2597,13 @@ msgstr ""
 msgid "Boost green"
 msgstr "Yeşil"
 
+#, fuzzy
+msgid "Boot time"
+msgstr "Sıralama zamanı"
+
+msgid "Boot time and local time"
+msgstr ""
+
 msgid "Boot to Android image"
 msgstr ""
 
@@ -2889,6 +3069,9 @@ msgstr ""
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr ""
 
+msgid "Choose the location for crash and debug logs folder."
+msgstr ""
+
 msgid "Choose the location where the EPG data will be stored when the %s %s is shut down. The location must be available at boot time."
 msgstr ""
 
@@ -3021,6 +3204,10 @@ msgstr "Koleksiyon ayarları"
 
 #, fuzzy
 msgid "Colombia"
+msgstr "Renk formatı"
+
+#, fuzzy
+msgid "Color"
 msgstr "Renk formatı"
 
 msgid "Color format"
@@ -3583,6 +3770,9 @@ msgstr "Sürekli oynat (döngü)"
 msgid "Contrast"
 msgstr "Kontrast"
 
+msgid "Control LED can be turned on or off here."
+msgstr ""
+
 msgid "Cook Islands"
 msgstr ""
 
@@ -3601,6 +3791,10 @@ msgstr ""
 
 msgid "Cote d'Ivoire"
 msgstr ""
+
+#, fuzzy
+msgid "Could not connect to server"
+msgstr "Geçersiz hizmet %s nedeniyle kayıt bulunamadı"
 
 msgid "Could not find installed channel list."
 msgstr "Yüklü kanal listesi bulunamadı."
@@ -3812,6 +4006,14 @@ msgstr ""
 msgid "DUAL LAYER DVD"
 msgstr "ÇİFT KATMAN DVD"
 
+#, fuzzy
+msgid "DVB"
+msgstr "DVB-C"
+
+#, fuzzy
+msgid "DVB API version: "
+msgstr "DVB sürücüleri: "
+
 msgid "DVB API: "
 msgstr ""
 
@@ -3826,8 +4028,8 @@ msgid "DVB and Pango subtitle position"
 msgstr "Altyazı pozisyonu"
 
 #, fuzzy
-msgid "DVB driver version: "
-msgstr "DVB sürücüleri: "
+msgid "DVB information"
+msgstr "Bilgi"
 
 msgid "DVB subtitle black transparency"
 msgstr "DVB altyazı siyah saydamlığı"
@@ -3964,6 +4166,15 @@ msgstr ""
 msgid "Dayname D-Month-Year"
 msgstr ""
 
+msgid "Dayname D. Month Year"
+msgstr ""
+
+msgid "Dayname D.M.Year"
+msgstr ""
+
+msgid "Dayname D.MM.Year"
+msgstr ""
+
 msgid "Dayname D/M/Year"
 msgstr ""
 
@@ -3974,6 +4185,15 @@ msgid "Dayname DD Month Year"
 msgstr ""
 
 msgid "Dayname DD-Month-Year"
+msgstr ""
+
+msgid "Dayname DD. Month Year"
+msgstr ""
+
+msgid "Dayname DD.M.Year"
+msgstr ""
+
+msgid "Dayname DD.MM.Year"
 msgstr ""
 
 msgid "Dayname DD/M/Year"
@@ -4028,6 +4248,9 @@ msgid "Dayname Year/MM/D"
 msgstr ""
 
 msgid "Dayname Year/MM/DD"
+msgstr ""
+
+msgid "Debug log time format *"
 msgstr ""
 
 #, fuzzy
@@ -4130,6 +4353,10 @@ msgstr "Sil"
 msgid "Delete EPG"
 msgstr "Sil"
 
+#, fuzzy
+msgid "Delete Image"
+msgstr "Zamanlayıcıyı sil"
+
 msgid "Delete entry"
 msgstr "Seçimi sil"
 
@@ -4149,10 +4376,13 @@ msgstr "Çalma listesi girdisini silin"
 msgid "Delete saved playlist"
 msgstr "Kayıtlı çalma listesini silin"
 
-msgid "Delete the character to the left of text buffer cursor"
+msgid "Delete the all the text"
 msgstr ""
 
-msgid "Delete the character under the text buffer cursor"
+msgid "Delete the character to the left of text cursor"
+msgstr ""
+
+msgid "Delete the character under the text cursor"
 msgstr ""
 
 msgid "Delete timer"
@@ -4160,6 +4390,10 @@ msgstr "Zamanlayıcıyı sil"
 
 msgid "Deleted"
 msgstr "Silinmiş"
+
+#, fuzzy
+msgid "Deleted image"
+msgstr "Zamanlayıcıyı sil"
 
 msgid "Deleted items"
 msgstr "Silinmiş öğeler"
@@ -4225,6 +4459,10 @@ msgstr "TUNER:"
 #, fuzzy
 msgid "Device"
 msgstr "Kanal"
+
+#, fuzzy
+msgid "Device id: "
+msgstr "Aygıt Adı​​:"
 
 msgid "Device mounts"
 msgstr ""
@@ -4364,6 +4602,10 @@ msgstr "Ekran kurulumu"
 #, fuzzy
 msgid "Display the EIT now/next eventdata in infobar."
 msgstr "Şimdi/Sonraki bilgi çubuğunda EIT'yi göster."
+
+#, fuzzy
+msgid "Display type: "
+msgstr "Ekran kurulumu"
 
 #, fuzzy
 msgid "Djibouti"
@@ -4614,6 +4856,10 @@ msgstr "DTS downmix"
 #, fuzzy
 msgid "Drama"
 msgstr "Film/Dram"
+
+#, fuzzy
+msgid "Drivers version: "
+msgstr "DVB sürücüleri: "
 
 #, fuzzy
 msgid "Drop unconfigured satellites"
@@ -4919,6 +5165,10 @@ msgstr "İsim sunucusunu yapılandırın..\n"
 msgid "Enabled"
 msgstr "Etkin"
 
+#, fuzzy
+msgid "Encrypted TV"
+msgstr "Şifreli: "
+
 msgid "Encrypted: "
 msgstr "Şifreli: "
 
@@ -4959,16 +5209,16 @@ msgstr "Bitirmek için Hazırda Bekletirken Kapatmayı görmezden gel"
 msgid "English"
 msgstr "İngilizce"
 
-#, python-format
-msgid "Enigma (re)starts: %d\n"
+#, fuzzy, python-format
+msgid "Enigma2 (re)starts: %d\n"
 msgstr "Enigma Başlama Sayısı: %d\n"
 
 #, python-format
-msgid "Enigma debug level: %d\n"
+msgid "Enigma2 debug level: %d\n"
 msgstr ""
 
 #, fuzzy
-msgid "Enigma version: "
+msgid "Enigma2 version: "
 msgstr "Çekirdek sürümü:"
 
 msgid "Enigmalight"
@@ -5405,6 +5655,9 @@ msgstr ""
 msgid "FTA"
 msgstr "FTA"
 
+msgid "FTA TV"
+msgstr ""
+
 #, fuzzy
 msgid "FTP"
 msgstr "FTA"
@@ -5681,6 +5934,10 @@ msgstr ""
 msgid "Frequency & Polarization"
 msgstr ""
 
+#, fuzzy
+msgid "Frequency (kHz)"
+msgstr "Frekans"
+
 msgid "Frequency bands"
 msgstr "Frekans bantları"
 
@@ -5818,6 +6075,10 @@ msgstr ""
 
 msgid "Gibraltar"
 msgstr ""
+
+#, fuzzy
+msgid "Given device id: "
+msgstr "Geçerli aygıt:"
 
 msgid "Go down the list"
 msgstr "Listede aşağı git"
@@ -6368,6 +6629,14 @@ msgstr ""
 msgid "Image architecture: "
 msgstr ""
 
+#, fuzzy
+msgid "Image file system: "
+msgstr "Dosya sistemi oluşturuluyor"
+
+#, fuzzy
+msgid "Image folder: "
+msgstr "Imaj: "
+
 #, python-format
 msgid ""
 "Image to install is invalid\n"
@@ -6677,9 +6946,6 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "It's not a genuine Open Vision!"
-msgstr ""
-
 msgid "Italian"
 msgstr "İtalyanca"
 
@@ -6741,6 +7007,10 @@ msgstr ""
 
 msgid "Kenya"
 msgstr ""
+
+#, fuzzy
+msgid "Kernel file: "
+msgstr "Çekirdek sürümü:"
 
 msgid "Kernel version: "
 msgstr "Çekirdek sürümü:"
@@ -6830,6 +7100,9 @@ msgstr "H.Bekleme modunda LED açık kalsın"
 #, fuzzy
 msgid "LED setup"
 msgstr "3D OSD Ayarı"
+
+msgid "LIRC remote"
+msgstr ""
 
 msgid "LNB"
 msgstr "Unicable LNB"
@@ -7012,6 +7285,10 @@ msgid "Local network"
 msgstr "Yerel ağ"
 
 #, fuzzy
+msgid "Local time"
+msgstr "Yerel ağ"
+
+#, fuzzy
 msgid "Locale"
 msgstr "Yerel ağ"
 
@@ -7030,7 +7307,7 @@ msgstr "Kilitli:"
 msgid "Log"
 msgstr ""
 
-msgid "Log python stack trace on spinner?"
+msgid "Log python stack trace on spinner"
 msgstr ""
 
 msgid "Log results to /tmp"
@@ -7038,6 +7315,13 @@ msgstr ""
 
 msgid "Logfile does not exist anymore"
 msgstr ""
+
+msgid "Logs"
+msgstr ""
+
+#, fuzzy
+msgid "Logs folder location"
+msgstr "<Son zamanlayıcı konumu>"
 
 msgid "Long filenames"
 msgstr "Uzun dosya adı"
@@ -7090,11 +7374,23 @@ msgstr "B"
 msgid "MIRACLEBOX_TWINPLUS"
 msgstr ""
 
+msgid "MKUBIFS: "
+msgstr ""
+
 msgid "MMC card"
 msgstr "MMC kart"
 
 msgid "MORE"
 msgstr "DAHA"
+
+msgid "MTD boot: "
+msgstr ""
+
+msgid "MTD kernel: "
+msgstr ""
+
+msgid "MTD root: "
+msgstr ""
 
 msgid "Macao"
 msgstr ""
@@ -7236,6 +7532,10 @@ msgstr "Ortam Oynatıcı"
 
 msgid "Media scanner"
 msgstr "Medya Tarama"
+
+#, fuzzy
+msgid "Media service: "
+msgstr "Servis Ekle"
 
 msgid "Medium is not a writeable DVD!"
 msgstr "DVD yazılabilir değil!"
@@ -7435,28 +7735,30 @@ msgstr "Bir alta taşı"
 msgid "Move east"
 msgstr "Doğuya taşı"
 
-msgid "Move the text buffer cursor left"
+msgid "Move the keyboard cursor down"
 msgstr ""
 
-msgid "Move the text buffer cursor right"
+msgid "Move the keyboard cursor left"
 msgstr ""
 
-msgid "Move the text buffer cursor to the first character"
+msgid "Move the keyboard cursor right"
 msgstr ""
 
-msgid "Move the text buffer cursor to the last character"
+msgid "Move the keyboard cursor up"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor down"
+#, fuzzy
+msgid "Move the text cursor left"
+msgstr "Sonraki açıyı seç"
+
+#, fuzzy
+msgid "Move the text cursor right"
+msgstr "Bir alta taşı"
+
+msgid "Move the text cursor to the first character"
 msgstr ""
 
-msgid "Move the virtual keyboard cursor left"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor right"
-msgstr ""
-
-msgid "Move the virtual keyboard cursor up"
+msgid "Move the text cursor to the last character"
 msgstr ""
 
 msgid "Move to position X"
@@ -7870,6 +8172,10 @@ msgstr "Boş tuner yok!"
 msgid "No images found"
 msgstr "Ağ bulunamadı"
 
+#, fuzzy
+msgid "No matching place names found"
+msgstr "Ağ bulunamadı"
+
 msgid "No network connection available."
 msgstr "Uygun ağ bağlantısı yok."
 
@@ -8038,10 +8344,6 @@ msgid "Not enough disk space. Please free up some disk space and try again. (%d 
 msgstr "Yetersiz disk alanı. Disk alanı boşaltarak tekrar deneyin. (%d MB gerekli, kullanılabilir %d MB)"
 
 #, fuzzy
-msgid "Not mounted"
-msgstr "Ağ bağlantısı"
-
-#, fuzzy
 msgid "Not running"
 msgstr "Motor çalışma zaman aşımı"
 
@@ -8088,6 +8390,10 @@ msgstr "Şimdi, kontrast ayarlarını kullanarak arkazemin üzerinde, ekrandaki 
 msgid "Number of channels shown in channel selection list"
 msgstr ""
 
+#, fuzzy
+msgid "Number of digits in channel number"
+msgstr "Hızlı Tarama kanal numaralarını kullanın"
+
 msgid "Number of repeating text on display."
 msgstr "Ekranda metin yineleme yazısı."
 
@@ -8111,6 +8417,9 @@ msgid "OCTAGON_SF4008"
 msgstr ""
 
 msgid "ODIN_M7"
+msgstr ""
+
+msgid "OE: "
 msgstr ""
 
 msgid "OK"
@@ -8224,8 +8533,19 @@ msgstr "Yalnız başlangıçta"
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr ""
 
+msgid "Open Vision"
+msgstr ""
+
 msgid "Open Vision enigma2 image"
 msgstr ""
+
+#, fuzzy
+msgid "Open Vision information"
+msgstr "Seçili konumu aç"
+
+#, fuzzy
+msgid "Open Vision language: "
+msgstr "Orjinal dil"
 
 msgid "Open Vision module: "
 msgstr ""
@@ -8527,6 +8847,10 @@ msgstr "Önceki işatten veya çalma listesi girişinden oynat"
 
 msgid "Play in main window"
 msgstr "Ana pencerede oynat"
+
+#, fuzzy
+msgid "Play last movie"
+msgstr "Film seç"
 
 msgid "Play music..."
 msgstr "Müzik çal..."
@@ -8878,6 +9202,15 @@ msgstr "Pozisyoner kurulum kayıtları"
 msgid "Power LED can be turned on or off here."
 msgstr ""
 
+msgid "Power LED colour state in Deep-Standby"
+msgstr ""
+
+msgid "Power LED colour state in Standby"
+msgstr ""
+
+msgid "Power LED colour state when running."
+msgstr ""
+
 #, fuzzy
 msgid "Power LED state during deep-standby."
 msgstr "H.Bekleme modunda LED açık kalsın"
@@ -8892,9 +9225,6 @@ msgstr ""
 #, fuzzy
 msgid "Power LED state in Standby"
 msgstr "Kapat. Bekleme Modunda"
-
-msgid "Power LED state when running."
-msgstr ""
 
 msgid "Power On Display"
 msgstr ""
@@ -9224,6 +9554,10 @@ msgstr "Hızlı kanal değiştirme"
 
 msgid "RAM"
 msgstr ""
+
+#, fuzzy
+msgid "RC type: "
+msgstr "Liste tipi"
 
 msgid "REC"
 msgstr ""
@@ -9622,6 +9956,10 @@ msgstr "Http akışları için kimlik doğrulaması iste"
 msgid "Required medium type:"
 msgstr "İhtiyaç duyulan medya tipi:"
 
+#, fuzzy
+msgid "Requires internet connection."
+msgstr "İnternet bağlantınızı kontrol edin"
+
 msgid "Rereading partition table"
 msgstr "Bölümleme tablosu okunuyor"
 
@@ -9713,6 +10051,10 @@ msgstr "Yedekten geri yükle"
 msgid "Restore defaults"
 msgstr "Varsayılan olarak ayarla"
 
+#, fuzzy
+msgid "Restore deleted images"
+msgstr "Silinen buketleri geri yükle"
+
 msgid "Restore deleted user bouquets"
 msgstr "Silinen buketleri geri yükle"
 
@@ -9764,10 +10106,6 @@ msgstr "Oynatmaya devam ediliyor"
 msgid "Retrieving image list - Please wait..."
 msgstr "Eklenti bilgisi getiriliyor. Lütfen bekleyin..."
 
-#, fuzzy
-msgid "Retrieving image slots - Please wait..."
-msgstr "Güncellemeler kontrol ediliyor. Lütfen bekleyin..."
-
 msgid "Return to movie list"
 msgstr "Film listesine geri dön"
 
@@ -9810,6 +10148,9 @@ msgstr ""
 
 msgid "Root directory"
 msgstr "Ana Dizin"
+
+msgid "Root file: "
+msgstr ""
 
 msgid "Rotor step position:"
 msgstr "Rotorun adım pozisyonu:"
@@ -10412,8 +10753,12 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
-msgid "Select the character or action under the virtual keyboard cursor"
+msgid "Select the character or action under the keyboard cursor"
 msgstr ""
+
+#, fuzzy
+msgid "Select the locale from a menu"
+msgstr "Film yolunu seçin"
 
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
@@ -10449,6 +10794,13 @@ msgid "Select the satellite your dish receives from. If you are unsure select 'a
 msgstr ""
 
 #, fuzzy
+msgid "Select the shifted character set"
+msgstr "Film yolunu seçin"
+
+msgid "Select the shifted character set for the next character only"
+msgstr ""
+
+#, fuzzy
 msgid "Select the time zone within the area or region."
 msgstr "Seçileni sıralama yöntemi:"
 
@@ -10465,15 +10817,6 @@ msgid "Select the type of LNB/device being used (normally 'Universal'). If your 
 msgstr ""
 
 msgid "Select the type of Single Cable Reception device you are using."
-msgstr ""
-
-msgid "Select the virtual keyboard locale from a menu"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set"
-msgstr ""
-
-msgid "Select the virtual keyboard shifted character set for the next character only"
 msgstr ""
 
 msgid "Select update source"
@@ -10636,6 +10979,10 @@ msgid ""
 msgstr ""
 "Kanal geçersiz!\n"
 "(PMT okumasında zaman aşımı oluştu)"
+
+#, fuzzy
+msgid "Service list"
+msgstr "Servis listesini göster"
 
 msgid "Service name"
 msgstr "Kanal adı"
@@ -11309,9 +11656,6 @@ msgstr "Sayfa enlemi"
 
 msgid "Site longitude"
 msgstr "Sayfa boylamı"
-
-msgid "Size: "
-msgstr ""
 
 #, fuzzy
 msgid "Skin"
@@ -12086,6 +12430,9 @@ msgstr ""
 msgid "TB"
 msgstr "B"
 
+msgid "TEXT"
+msgstr ""
+
 msgid "TMBD Details"
 msgstr ""
 
@@ -12482,6 +12829,9 @@ msgstr "DVD-RW medyası zaten biçimlendirilmiş - yeniden biçimlendirme tüm d
 msgid "This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
 msgstr ""
 
+msgid "This allows you to set the number of digits you can input when selecting channels using number input."
+msgstr ""
+
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr ""
@@ -12496,6 +12846,9 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
+msgstr ""
+
+msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since the receiver was last booted."
 msgstr ""
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
@@ -12960,6 +13313,10 @@ msgstr "Altyazı yazı tipi boyutunu yapılandırın."
 msgid "Toggle the tv and the radio player..."
 msgstr ""
 
+#, fuzzy
+msgid "Toggle videomode"
+msgstr "Video modu seç"
+
 msgid "Togo"
 msgstr ""
 
@@ -13146,6 +13503,10 @@ msgid "Turn on HDMI-IN PiP mode"
 msgstr ""
 
 #, fuzzy
+msgid "Turn on the control LED."
+msgstr "H.Bekleme modunda LED açık kalsın"
+
+#, fuzzy
 msgid "Turn on the power LED during deep standby."
 msgstr "H.Bekleme modunda LED açık kalsın"
 
@@ -13174,6 +13535,9 @@ msgstr "Tarama tipi"
 
 msgid "Type of scan"
 msgstr "Tarama tipi"
+
+msgid "UBINIZE: "
+msgstr ""
 
 msgid "UNKNOWN"
 msgstr ""
@@ -13364,6 +13728,9 @@ msgstr "Yazılım kataloğu güncelleniyor"
 msgid "Upper case"
 msgstr ""
 
+msgid "Uptime: "
+msgstr ""
+
 msgid "Uruguay"
 msgstr ""
 
@@ -13463,7 +13830,7 @@ msgstr "Ekranı dondur"
 msgid "Use the alternative screen"
 msgstr "Alternatifleri Düzenle"
 
-msgid "Use the cursor keys to select an installed image then press Reboot button."
+msgid "Use the cursor keys to select an installed image then reboot."
 msgstr ""
 
 msgid ""
@@ -14368,6 +14735,9 @@ msgstr ""
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr " %s (%s - '%s') servisine geçmen gerekir!\n"
+
+msgid "You seem to be in timeshift!"
+msgstr ""
 
 msgid "Your collection exceeds the size of a single layer medium, you will need a blank dual layer DVD!"
 msgstr "Koleksiyonunuz tek katman DVD'ye sığmıyor, çift katman DVD kullanmanız gerekiyor!"
