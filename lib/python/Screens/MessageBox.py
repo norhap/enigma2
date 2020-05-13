@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 from enigma import eTimer, ePoint, eSize, getDesktop
 from Components.ActionMap import HelpableActionMap
 from Components.config import config

@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Tools.Directories import SCOPE_SKIN, resolveFilename
 
 hw_info = None

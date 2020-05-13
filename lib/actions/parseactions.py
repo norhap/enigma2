@@ -1,8 +1,6 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 # takes a header file, outputs action ids
 
+from __future__ import print_function
 import tokenize, sys
 
 def filter(g):

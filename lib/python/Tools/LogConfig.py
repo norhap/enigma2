@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 LOG_TYPE_DEBUG = "D/ "
 LOG_TYPE_INFO = "I/ "
 LOG_TYPE_WARNING = "W/ "

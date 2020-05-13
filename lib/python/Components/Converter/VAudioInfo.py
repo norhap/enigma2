@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from enigma import iPlayableService
 from Components.Converter.Converter import Converter
 from Components.Element import cached

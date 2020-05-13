@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 def my_import(name):
 	mod = __import__(name)
 	components = name.split('.')

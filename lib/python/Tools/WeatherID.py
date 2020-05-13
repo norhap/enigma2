@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from urllib2 import urlopen, URLError
 from urllib import urlencode
 import sys

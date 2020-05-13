@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Tools.Profile import profile
 
 profile("LOAD:GUISkin")

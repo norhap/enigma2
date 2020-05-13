@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Components.Element import cached
 from enigma import eTimer
 from time import time as getTime

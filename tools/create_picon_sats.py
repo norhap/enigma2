@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 #
 # create symlinks for picons
 #   usage: create_picon_sats lamedb

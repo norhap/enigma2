@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 ISO3166 = [
 	(_("Afghanistan"), "AF", "AFG"),
 	(_("Aland Islands"), "AX", "ALA"),

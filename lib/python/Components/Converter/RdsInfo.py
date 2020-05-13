@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
 from enigma import iRdsDecoder, iPlayableService
 from Components.Converter.Converter import Converter

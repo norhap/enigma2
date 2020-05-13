@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from Components.ActionMap import ActionMap
 from Components.Sensors import sensors
 from Components.Sources.Sensor import SensorSource
