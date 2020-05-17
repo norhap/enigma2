@@ -1,6 +1,6 @@
 from __future__ import print_function
 from Screens.Screen import Screen
-import Screens.ChannelSelection
+import ChannelSelection
 from ServiceReference import ServiceReference
 from Components.config import config, ConfigSelection, ConfigText, ConfigSubList, ConfigDateTime, ConfigClock, ConfigYesNo, getConfigListEntry
 from Components.ActionMap import NumberActionMap

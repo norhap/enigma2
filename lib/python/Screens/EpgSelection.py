@@ -1,6 +1,6 @@
 from __future__ import print_function
 from Screens.Screen import Screen
-import Screens.ChannelSelection
+import ChannelSelection
 import Screens.InfoBar
 from Components.config import config, ConfigClock
 from Components.Pixmap import Pixmap
