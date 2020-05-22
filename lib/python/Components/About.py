@@ -6,6 +6,8 @@ from enigma import getBoxType, getBoxBrand
 from Components.SystemInfo import SystemInfo
 import socket, fcntl, struct
 from boxbranding import getImageArch
+from Components.Console import Console
+from Tools.Directories import fileExists
 
 def _ifinfo(sock, addr, ifname):
 	iface = struct.pack('256s', ifname[:15])
@@ -121,7 +123,18 @@ def getImageTypeString():
 		image_type = open("/etc/issue").readlines()[-2].strip()[:-6]
 		return image_type.capitalize()
 	except:
-		return _("undefined")
+		return _("unknown")
+
+def getCPUBenchmark():
+	if fileExists("/usr/bin/dhry") and not fileExists("/tmp/dhry.txt"):
+		if SystemInfo["ArchIsARM64"] or SystemInfo["ArchIsARM"] or SystemInfo["HiSilicon"] or SystemInfo["AmlogicFamily"]:
+			cmdbenchmark = "echo '10000000' | dhry | grep 'Dhrystones per Second' | sed 's|[^0-9]*||' > /tmp/dhry.txt"
+		else:
+			cmdbenchmark = "echo '1000000' | dhry | grep 'Dhrystones per Second' | sed 's|[^0-9]*||' > /tmp/dhry.txt"
+		Console().ePopen(cmdbenchmark)
+	if fileExists("/tmp/dhry.txt"):
+		cpubench = int(float(open("/tmp/dhry.txt").read().strip()))/1757
+	return str(cpubench)
 
 def getCPUInfoString():
 	try:
