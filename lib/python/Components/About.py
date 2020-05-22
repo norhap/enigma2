@@ -127,10 +127,7 @@ def getImageTypeString():
 
 def getCPUBenchmark():
 	if fileExists("/usr/bin/dhry") and not fileExists("/tmp/dhry.txt"):
-		if SystemInfo["ArchIsARM64"] or SystemInfo["ArchIsARM"] or SystemInfo["HiSilicon"] or SystemInfo["AmlogicFamily"]:
-			cmdbenchmark = "echo '10000000' | dhry | grep 'Dhrystones per Second' | sed 's|[^0-9]*||' > /tmp/dhry.txt"
-		else:
-			cmdbenchmark = "echo '1000000' | dhry | grep 'Dhrystones per Second' | sed 's|[^0-9]*||' > /tmp/dhry.txt"
+		cmdbenchmark = "echo '10000000' | dhry | grep 'Dhrystones per Second' | sed 's|[^0-9]*||' > /tmp/dhry.txt"
 		Console().ePopen(cmdbenchmark)
 	if fileExists("/tmp/dhry.txt"):
 		cpubench = int(float(open("/tmp/dhry.txt").read().strip()))/1757
