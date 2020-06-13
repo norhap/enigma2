@@ -5,14 +5,14 @@ import sys
 
 
 def filter(g):
-	while True:
-		t = g.next()
+	while 1:
+		t = next(g)
 		if t[1] == "/*":
-			while g.next()[1] != "*/":
+			while next(g)[1] != "*/":
 				pass
 			continue
 		if t[1] == "//":
-			while g.next()[1] != "\n":
+			while next(g)[1] != "\n":
 				pass
 			continue
 
@@ -34,12 +34,12 @@ def do_file(f, mode):
 
 	while True:
 		try:
-			t = tokens.next()
+			t = next(tokens)
 		except:
 			break
 
 		if t == "class":
-			classname = tokens.next()
+			classname = next(tokens)
 			classstate = state
 
 		if t == "{":
@@ -49,15 +49,15 @@ def do_file(f, mode):
 			state -= 1
 
 		if t == "enum" and state == classstate + 1:
-			actionname = tokens.next()
+			actionname = next(tokens)
 
 			if actionname == "{":
-				while tokens.next() != "}":
+				while next(tokens) != "}":
 					pass
 				continue
 
 			if actionname[-7:] == "Actions":
-				if tokens.next() != "{":
+				if next(tokens) != "{":
 					try:
 						print(classname)
 					except:
@@ -74,19 +74,19 @@ def do_file(f, mode):
 
 				while True:
 
-					t = tokens.next()
+					t = next(tokens)
 
 					if t == "=":
-						tokens.next()
-						t = tokens.next()
+						next(tokens)
+						t = next(tokens)
 
 					if t == "}":
 						break
 
 					if counter:
 						if t != ",":
-							raise Exception(_("no comma"))
-						t = tokens.next()
+							raise Exception("no comma")
+						t = next(tokens)
 
 					if firsthit:
 
