@@ -16,10 +16,10 @@ from Tools.Directories import SCOPE_CONFIG, SCOPE_CURRENT_LCDSKIN, SCOPE_CURRENT
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 
-DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "Vision-Turquoise-HD/skin.xml" or "PLi-FullNightHD/skin.xml"  # On SD hardware HD will not be available.
-DEFAULT_SD_SKIN = "skin.xml"
-EMERGENCY_SKIN = "skin_default.xml"
-DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "display/skin_display_grautec.xml" or "display/skin_display.xml"
+DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "Vision-Turquoise-HD/skin.xml" or "PLi-FullNightHD/skin.xml"
+EMERGENCY_SKIN = "skin_default/skin.xml"
+EMERGENCY_NAME = "Stone II"
+DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
 USER_SKIN = "skin_user.xml"
 USER_SKIN_TEMPLATE = "skin_user_%s.xml"
 # BOX_SKIN = "skin_box.xml"  # DEBUG: Is this actually used?
@@ -366,7 +366,9 @@ class AttributeParser:
 		except AttributeError:
 			print("[skin] Attribute '%s' (with value of '%s') not implemented!" % (attrib, value))
 		except SkinError as err:
-			print("[skin] Error:", err)
+			print("[skin] Error: %s" % str(err))
+		except Exception:
+			print("[skin] Attribute '%s' with wrong (or unknown) value '%s' in object of type '%s'!" % (attrib, value, self.guiObject.__class__.__name__))
 
 	def applyAll(self, attrs):
 		for attrib, value in attrs:
@@ -839,7 +841,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			font = parseFont(title.attrib.get("font"), ((1, 1), (1, 1)))
 		style.setTitleFont(font)
 		style.setTitleOffset(offset)
-		# print("[Skin] WindowStyle font, offset:", font, offset)
+		# print("[Skin] DEBUG: WindowStyle font, offset - '%s' '%s'." % (str(font), str(offset)))
 		for borderset in tag.findall("borderset"):
 			bsName = str(borderset.attrib.get("name"))
 			for pixmap in borderset.findall("pixmap"):
@@ -852,7 +854,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 						style.setPixmap(eWindowStyleSkinned.__dict__[bsName], eWindowStyleSkinned.__dict__[bpName], png)
 					except:
 						pass
-				# print("[Skin] WindowStyle borderset name, filename:", bpName, filename)
+				# print("[Skin] DEBUG: WindowStyle borderset name, filename - '%s' '%s'." % (bpName, filename))
 		for color in tag.findall("color"):
 			colorType = color.attrib.get("name")
 			color = parseColor(color.attrib.get("color"))
@@ -860,8 +862,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				style.setColor(eWindowStyleSkinned.__dict__["col" + colorType], color)
 			except Exception:
 				raise SkinError("Unknown color type '%s'" % colorType)
-				# pass
-			# print("[Skin] WindowStyle color type, color:", type, color)
+			# print("[Skin] DEBUG: WindowStyle color type, color -" % (colorType, str(color)))
 		x = eWindowStyleManager.getInstance()
 		x.setStyle(styleId, style)
 	for tag in domSkin.findall("margin"):

@@ -49,7 +49,8 @@
 			<product name="KR1440" scrs="1680,1420,2040,1210"/>
 		</manufacturer>
 		<manufacturer name="Maclean">
-		<product name="Unicable II MCTV-785" format="jess" scrs ="1210,1420,1680,2040,985,1050,1115,1275,1340,1485 ,1550,1615,1745,1810,1875,1940"/>
+			<product name="MCTV-762" scrs="1210,1420,1680,2040"/>
+			<product name="Unicable II MCTV-785" format="jess" scrs ="1210,1420,1680,2040,985,1050,1115,1275,1340,1485 ,1550,1615,1745,1810,1875,1940"/>
 		</manufacturer>
 		<manufacturer name="Megasat">
 			<product name="Unicable II LNB Diavolo" format="jess" bootuptime="2500" scrs="1210,1420,1680,2040,1005,1050,1095,1140,1260,1305,1350,1475,1520,1565,1610,1725,1770,1815,1860,1905,1950,1995,2085,2130"/>
@@ -340,6 +341,7 @@
 		<manufacturer name="Spaun">
 			<product name="SUS 21 F" positions="2" scrs="1076,1178"/>
 			<product name="SUS 21 FI" positions="2" scrs="1210,1420"/>
+			<product name="SUS 21 FX" format="EN 50607" positions="4" scrs="1076,1178"/>
 			<product name="SUS 4441 F" scrs="1210,1420,1680,2040"/>
 			<product name="SUS 5541 F-NFA" format="EN 50494" scrs="0974,1076,1178,1280"/>
 			<product name="SUS 5581 F-NFA" format="UniSEqC" scrs="0974,1076,1178,1280,1382,1484,1586,1688"/>
