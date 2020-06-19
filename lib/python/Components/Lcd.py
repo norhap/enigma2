@@ -9,6 +9,7 @@ from Tools.Directories import fileExists
 from sys import maxint
 from twisted.internet import threads
 import Screens.Standby
+import usb
 
 class dummyScreen(Screen):
 	skin = """<screen position="0,0" size="0,0" transparent="1">
