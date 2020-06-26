@@ -37,7 +37,7 @@ class ImportChannels():
 		return url[:url.rfind(":")] if url else self.url
 
 	def getFallbackSettings(self):
-		return self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
+		return self.getUrl(self.getTerrestrialUrl()).read()
 
 	def getFallbackSettingsValue(self, settings, e2settingname):
 		root = et.fromstring(settings)
