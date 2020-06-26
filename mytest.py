@@ -4,7 +4,7 @@ import os
 from time import time
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
-
+from Tools.Directories import resolveFilename, fileHas
 # Don't remove this line. It may seem to do nothing, but if removed,
 # it will break output redirection for crash logs.
 import Tools.RedirectOutput
@@ -18,6 +18,13 @@ import eBaseImpl
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
+
+if fileHas ("/var/log/samba/log.nmbd","ERROR: Could not determine network interfaces") and not fileHas ("/var/log/samba/log.nmbd","daemon_ready"):
+	from Components.Console import Console
+	print("[mytest] Try load all network interfaces.")
+	Console = Console()
+	Console.ePopen('/etc/init.d/networking restart ; /etc/init.d/samba.sh restart')
+	print("[mytest] All network interfaces loaded.")
 
 from Components.SystemInfo import SystemInfo
 from traceback import print_exc
