@@ -12,28 +12,14 @@ from boxbranding import getVisionVersion, getVisionRevision, getHaveMultiLib, ge
 print("[mytest] Open Vision version = %s" % getVisionVersion())
 print("[mytest] Open Vision revision = %s" % getVisionRevision())
 
-import enigma 
+import enigma
 import eConsoleImpl
 import eBaseImpl
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
-if getVisionVersion().startswith("10"):
-	from Components.Console import Console
-	print("[mytest] Try load all network interfaces.")
-	Console = Console()
-	Console.ePopen('/sbin/ifup -a')
-	print("[mytest] All network interfaces loaded.")
-
 from Components.SystemInfo import SystemInfo
-if not SystemInfo["OpenVisionModule"]:
-	print("[mytest] Open Vision in multiboot! Now we have to remove what relies on our kernel module!")
-	from Components.Console import Console
-	Console = Console()
-	Console.ePopen('opkg remove enigma2-plugin-extensions-e2iplayer')
-	print("[mytest] Removed, this is on you not us!")
-
 from traceback import print_exc
 
 if getImageArch() == "aarch64":
