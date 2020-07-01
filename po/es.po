@@ -4849,11 +4849,11 @@ msgstr "Presione MENU en su mando para opciones adicionales."
 msgid "Press OK on your remote control to continue."
 msgstr "Presione OK en su mando para continuar."
 
-msgid "Press OK to activate the selected%s skin."
-msgstr "Presione OK para activar el skin%s seleccionado."
+msgid "Press OK to activate the selected %s skin."
+msgstr "Presione OK para activar el skin %s seleccionado."
 
-msgid "Press OK to keep the currently selected%s skin."
-msgstr "Presione OK para mantener el skin%s seleccionado actualmente."
+msgid "Press OK to keep the currently selected %s skin."
+msgstr "Presione OK para mantener el skin %s seleccionado actualmente."
 
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
@@ -16277,3 +16277,9 @@ msgstr "Debug a archivo"
 
 msgid "Logs folder location"
 msgstr "Carpeta localización Logs"
+
+msgid "Emergency"
+msgstr "Emergencia"
+
+msgid "Current"
+msgstr "Actual"
