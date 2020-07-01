@@ -661,8 +661,8 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 					parameters["AutotimerListTimespan"] = (2, 40, 5, 25)
 					parameters["ChoicelistDash"] = (0, 3, 1000, 30)
 					parameters["ChoicelistIcon"] = (7, 0, 52, 38)
-					parameters["ChoicelistName"] = (68, 3, 1000, 30)
-					parameters["ChoicelistNameSingle"] = (7, 3, 1000, 30)
+					parameters["ChoicelistName"] = (68, 3, 1000, 32)
+					parameters["ChoicelistNameSingle"] = (7, 3, 1000, 32)
 					parameters["ConfigListSeperator"] = 500
 					parameters["DreamexplorerIcon"] = (15, 4, 30, 30)
 					parameters["DreamexplorerName"] = (62, 0, 1200, 38)
@@ -1167,8 +1167,11 @@ def readSkin(screen, skin, names, desktop):
 					parms = converter.text.strip()
 				except Exception:
 					parms = ""
-				# print("[Skin] Params='%s'" % parms)
-				converterClass = my_import(".".join(("Components", "Converter", ctype))).__dict__.get(ctype)
+				# print("[Skin] DEBUG: Params='%s'." % parms)
+				try:
+					converterClass = my_import(".".join(("Components", "Converter", ctype))).__dict__.get(ctype)
+				except ImportError as e:
+					raise SkinError("Converter '%s' not found" % ctype)
 				c = None
 				for i in source.downstream_elements:
 					if isinstance(i, converterClass) and i.converter_arguments == parms:
@@ -1177,7 +1180,10 @@ def readSkin(screen, skin, names, desktop):
 					c = converterClass(parms)
 					c.connect(source)
 				source = c
-			rendererClass = my_import(".".join(("Components", "Renderer", wrender))).__dict__.get(wrender)
+			try:
+				rendererClass = my_import(".".join(("Components", "Renderer", wrender))).__dict__.get(wrender)
+			except ImportError as e:
+				raise SkinError("Renderer '%s' not found" % wrender)
 			renderer = rendererClass()  # Instantiate renderer.
 			renderer.connect(source)  # Connect to source.
 			attributes = renderer.skinAttributes = []
