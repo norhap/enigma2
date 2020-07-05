@@ -16286,3 +16286,9 @@ msgstr "Actual"
 
 msgid "Delete Image"
 msgstr "Eliminar Imagen"
+
+msgid "Set the password of the OpenWebif from your fallback tuner"
+msgstr "Establezca la contraseña de OpenWebif desde su sintonizador de reserva"
+
+msgid "Set the port of the OpenWebif from your fallback tuner"
+msgstr "Configure el puerto de OpenWebif desde su sintonizador de reserva"
