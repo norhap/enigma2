@@ -16295,3 +16295,6 @@ msgstr "Configure el puerto de OpenWebif desde su sintonizador de reserva"
 
 msgid "Requires internet connection."
 msgstr "Requiere conexión a internet."
+
+msgid "Are you sure to delete image:"
+msgstr "Estás seguro de eliminar la imagen:"
