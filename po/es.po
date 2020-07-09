@@ -4849,11 +4849,11 @@ msgstr "Presione MENU en su mando para opciones adicionales."
 msgid "Press OK on your remote control to continue."
 msgstr "Presione OK en su mando para continuar."
 
-msgid "Press OK to activate the selected%s skin."
-msgstr "Presione OK para activar el skin%s seleccionado."
+msgid "Press OK to activate the selected %s skin."
+msgstr "Presione OK para activar el skin %s seleccionado."
 
-msgid "Press OK to keep the currently selected%s skin."
-msgstr "Presione OK para mantener el skin%s seleccionado actualmente."
+msgid "Press OK to keep the currently selected %s skin."
+msgstr "Presione OK para mantener el skin %s seleccionado actualmente."
 
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
@@ -16086,8 +16086,8 @@ msgstr "Presione 'Aceptar' para eliminar el elemento o 'CH +/-' para alternar a 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Presione 'Aceptar' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
 
-msgid "Use the cursor keys to select an installed image and then press Reboot button."
-msgstr "Use las teclas del cursor para seleccionar una imagen instalada y luego presione el botón Reiniciar."
+msgid "Use the cursor keys to select an installed image then reboot."
+msgstr "Use las teclas del cursor para seleccionar una imagen instalada y luego reinicie."
 
 msgid "Client Mode"
 msgstr "Modo Cliente"
@@ -16277,3 +16277,24 @@ msgstr "Debug a archivo"
 
 msgid "Logs folder location"
 msgstr "Carpeta localización Logs"
+
+msgid "Emergency"
+msgstr "Emergencia"
+
+msgid "Current"
+msgstr "Actual"
+
+msgid "Delete Image"
+msgstr "Eliminar Imagen"
+
+msgid "Set the password of the OpenWebif from your fallback tuner"
+msgstr "Establezca la contraseña de OpenWebif desde su sintonizador de reserva"
+
+msgid "Set the port of the OpenWebif from your fallback tuner"
+msgstr "Configure el puerto de OpenWebif desde su sintonizador de reserva"
+
+msgid "Requires internet connection."
+msgstr "Requiere conexión a internet."
+
+msgid "Are you sure to delete image:"
+msgstr "Estás seguro de eliminar la imagen:"
