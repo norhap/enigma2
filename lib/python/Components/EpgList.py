@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import division, print_function
 from __future__ import print_function
 from Components.GUIComponent import GUIComponent
 
@@ -297,9 +300,9 @@ class EPGList(GUIComponent):
 					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + self.tw, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT, EventName)
 				))
 			else:
-				percent = (nowTime - beginTime) * 100 / duration
+				percent = (nowTime - beginTime) * 100 // duration
 				prefix = "+"
-				remaining = ((beginTime+duration) - int(time())) / 60
+				remaining = ((beginTime+duration) - int(time())) // 60
 				if remaining <= 0:
 					prefix = ""
 				res.extend((

@@ -49,7 +49,7 @@ endif
 endif
 
 if DINOBOT
-dist_install_DATA = rc_models.cfg anadol1.png anadol1.xml anadol3.png anadol3.xml ariva.png ariva.xml axas1.png axas1.xml axas2.png axas2.xml axas3.png axas3.xml dinobot.png dinobot.xml izibox1.png izibox1.xml mediabox4k.png mediabox4k.xml protek3.png protek3.xml
+dist_install_DATA = rc_models.cfg anadol1.png anadol1.xml anadol3.png anadol3.xml ariva.png ariva.xml axas1.png axas1.xml axas2.png axas2.xml axas3.png axas3.xml dinobot.png dinobot.xml izibox1.png izibox1.xml mediabox4k.png mediabox4k.xml protek3.png protek3.xml turing.png turing.xml
 endif
 
 if EBOX

@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import division, print_function
 from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -678,7 +681,7 @@ class AnimMain(Screen):
 		elif nop == 5:
 			nh = 3
 		else:
-			nh = int(float(nop) / 2)
+			nh = int(float(nop) // 2)
 		self.index = nh
 		i = 0
 		self.onShown.append(self.openTest)

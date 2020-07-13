@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import division, print_function
 from __future__ import print_function
 import NavigationInstance
 from time import localtime, mktime, gmtime, time
@@ -130,7 +133,7 @@ class TimerSanityCheck:
 			interval_begin = min(self.nrep_eventlist)[0]
 			interval_end = max(self.nrep_eventlist)[0]
 			offset_0 = interval_begin - (interval_begin % 604800)
-			weeks = (interval_end - offset_0) / 604800
+			weeks = (interval_end - offset_0) // 604800
 			if (interval_end - offset_0) % 604800:
 				weeks += 1
 			for cnt in range(int(weeks)):
