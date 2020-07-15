@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import division, print_function
 from __future__ import print_function
 import os
 from enigma import eTimer, iPlayableService, iServiceInformation, eServiceReference, iServiceKeys, getDesktop
@@ -575,7 +574,7 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 				height = getDesktop(0).size().height()
 				print("[DVD] height:", height)
 				if isNTSC:
-					height = height * 576 // 480
+					height = height * 576 / 480
 					print("[DVD] NTSC height:", height)
 				if isLowResolution:
 					height *= 2
