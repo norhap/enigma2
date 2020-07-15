@@ -1,6 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from enigma import eTimer, ePoint, eSize, getDesktop
-from Components.ActionMap import HelpableActionMap
+from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.config import config
+from Screens.Screen import Screen
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap, MultiPixmap
