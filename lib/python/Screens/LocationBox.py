@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 #
 # Generic Screen to select a path/filename combination
 #
@@ -387,7 +388,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 				# Try to read fs stats
 				try:
 					s = os.statvfs(currentFolder)
-					if (s.f_bavail * s.f_bsize) / 1000000 > self.minFree:
+					if (s.f_bavail * s.f_bsize) // 1000000 > self.minFree:
 						# Automatically confirm if we have enough free disk Space available
 						return self.selectConfirmed(True)
 				except OSError:
