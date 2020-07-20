@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import division, print_function
 from __future__ import print_function
 from copy import copy, deepcopy
 
