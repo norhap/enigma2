@@ -116,8 +116,8 @@
 			<convert type="ValueRange">9,9</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<!-- <ePixmap pixmap="record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend" /> -->
-		<widget source="session.RecordState" render="Pixmap" pixmap="record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend">
+		<!-- <ePixmap pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend" /> -->
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<panel name="SummaryClockPanel" />
@@ -198,8 +198,8 @@
 			<convert type="ValueRange">9,9</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<!-- <ePixmap pixmap="record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend" /> -->
-		<widget source="session.RecordState" render="Pixmap" pixmap="record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend">
+		<!-- <ePixmap pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend" /> -->
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<panel name="SummaryClockPanel" />
@@ -279,8 +279,8 @@
 			<convert type="ValueRange">9,9</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<!-- <ePixmap pixmap="record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend" /> -->
-		<widget source="session.RecordState" render="Pixmap" pixmap="record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend">
+		<!-- <ePixmap pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend" /> -->
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphatest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<panel name="SummaryClockPanel" />

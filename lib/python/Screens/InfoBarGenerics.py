@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -313,7 +315,6 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.onExecBegin.append(self.__onExecBegin)
 
 	def __onExecBegin(self):
-		self.clearScreenPath()
 		self.showHideVBI()
 
 	def __layoutFinished(self):
@@ -3233,16 +3234,6 @@ class InfoBarTimerButton:
 		from Screens.TimerEdit import TimerEditList
 		self.session.open(TimerEditList)
 
-class InfoBarVmodeButton:
-	def __init__(self):
-		self["VmodeButtonActions"] = HelpableActionMap(self, "InfobarVmodeButtonActions",
-			{
-				"vmodeSelection": (self.vmodeSelection, _("Letterbox zoom")),
-			})
-
-	def vmodeSelection(self):
-		self.session.open(VideoMode)
-
 class VideoMode(Screen):
 	def __init__(self,session):
 		Screen.__init__(self, session)
@@ -3255,9 +3246,11 @@ class VideoMode(Screen):
 		self.show()
 		self.timer.startLongTimer(3)
 
-		self["actions"] = NumberActionMap( [ "InfobarVmodeButtonActions" ],
+class InfoBarVmodeButton:
+	def __init__(self):
+		self["VmodeButtonActions"] = HelpableActionMap(self, "InfobarVmodeButtonActions",
 			{
-				"vmodeSelection": self.selectVMode
+				"vmodeSelection": (self.ToggleVideoMode, _("Letterbox zoom")),
 			})
 		self.VideoMode_window = self.session.instantiateDialog(VideoMode)
 
@@ -3270,11 +3263,7 @@ class VideoMode(Screen):
 		from Components.Converter.ServiceInfo import WIDESCREEN
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
-		return info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
-
-	def quit(self):
-		self.Timer.stop()
-		self.close()
+		return info and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
 
 class InfoBarAdditionalInfo:
 	def __init__(self):

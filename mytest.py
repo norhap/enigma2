@@ -136,6 +136,17 @@ except ImportError as e:
 	def runReactor():
 		enigma.runMainloop()
 
+try:
+	from twisted.python import log
+	config.misc.enabletwistedlog = ConfigYesNo(default = False)
+	if config.misc.enabletwistedlog.value == True:
+		log.startLogging(open('/tmp/twisted.log', 'w'))
+	else:
+		log.startLogging(sys.stdout)
+except ImportError:
+	print("twisted not available")
+	pass
+
 profile("LOAD:Plugin")
 
 # initialize autorun plugins and plugin menu entries
@@ -175,7 +186,7 @@ from Screens.SessionGlobals import SessionGlobals
 from Screens.Screen import Screen
 
 profile("Screen")
-Screen.global_screen = Globals()
+Screen.globalScreen = Globals()
 
 # Session.open:
 # * push current active dialog ('current_dialog') onto stack

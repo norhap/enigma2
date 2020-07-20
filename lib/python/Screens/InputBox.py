@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from enigma import getPrevAsciiCode
 from Screens.Screen import Screen
@@ -12,7 +14,6 @@ from time import time
 class InputBox(Screen):
 	def __init__(self, session, title = "", windowTitle = None, useableChars = None, **kwargs):
 		Screen.__init__(self, session)
-		self.setScreenPathMode(None)
 		self["text"] = Label(title)
 		self["input"] = Input(**kwargs)
 		if windowTitle is None:

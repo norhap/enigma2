@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from Components.Harddisk import harddiskmanager
 from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigInteger, ConfigPassword, ConfigIP, NoSave, ConfigBoolean
@@ -952,7 +953,7 @@ def InitUsageConfig():
 		if os.path.exists(p.mountpoint):
 			d = os.path.normpath(p.mountpoint)
 			if p.mountpoint != '/':
-				debugpath.append((p.mountpoint + 'logs/', d))
+				debugpath.append((p.mountpoint + '/logs/', d))
 	config.crash.debug_path = ConfigSelection(default = "/home/root/logs/", choices = debugpath)
 
 	def updatedebug_path(configElement):

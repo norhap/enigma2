@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 # the implementation here is a bit crappy.
 from __future__ import print_function
 import time
