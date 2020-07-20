@@ -3234,49 +3234,36 @@ class InfoBarTimerButton:
 		from Screens.TimerEdit import TimerEditList
 		self.session.open(TimerEditList)
 
-class InfoBarVmodeButton:
-	def __init__(self):
-		self["VmodeButtonActions"] = HelpableActionMap(self, "InfobarVmodeButtonActions",
-			{
-				"vmodeSelection": (self.vmodeSelection, _("Letterbox zoom")),
-			})
-
-	def vmodeSelection(self):
-		self.session.open(VideoMode)
-
 class VideoMode(Screen):
 	def __init__(self,session):
 		Screen.__init__(self, session)
 		self["videomode"] = Label()
+		self.timer = eTimer()
+		self.timer.callback.append(self.hide)
 
-		self["actions"] = NumberActionMap( [ "InfobarVmodeButtonActions" ],
+	def setText(self, text=""):
+		self["videomode"].setText(text)
+		self.show()
+		self.timer.startLongTimer(3)
+
+class InfoBarVmodeButton:
+	def __init__(self):
+		self["VmodeButtonActions"] = HelpableActionMap(self, "InfobarVmodeButtonActions",
 			{
-				"vmodeSelection": self.selectVMode
+				"vmodeSelection": (self.ToggleVideoMode, _("Letterbox zoom")),
 			})
+		self.VideoMode_window = self.session.instantiateDialog(VideoMode)
 
-		self.Timer = eTimer()
-		self.Timer.callback.append(self.quit)
-		self.selectVMode()
-
-	def selectVMode(self):
-		policy = config.av.policy_43
-		if self.isWideScreen():
-			policy = config.av.policy_169
-		idx = policy.choices.index(policy.value)
-		idx = (idx + 1) % len(policy.choices)
-		policy.value = policy.choices[idx]
-		self["videomode"].setText(policy.value)
-		self.Timer.start(1000, True)
+	def ToggleVideoMode(self):
+		policy = config.av.policy_169 if self.isWideScreen() else config.av.policy_43
+		policy.value = policy.choices[(policy.choices.index(policy.value) + 1) % len(policy.choices)]
+		self.VideoMode_window.setText(policy.value)
 
 	def isWideScreen(self):
 		from Components.Converter.ServiceInfo import WIDESCREEN
 		service = self.session.nav.getCurrentService()
 		info = service and service.info()
 		return info and info.getInfo(iServiceInformation.sAspect) in WIDESCREEN
-
-	def quit(self):
-		self.Timer.stop()
-		self.close()
 
 class InfoBarAdditionalInfo:
 	def __init__(self):

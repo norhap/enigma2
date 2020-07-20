@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
@@ -197,7 +198,7 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Show InfoBar"), "Infobar/showFirstInfoBar", "InfoBar"))
 	hotkey.functions.append((_("Show second InfoBar"), "Infobar/showSecondInfoBar", "InfoBar"))
 	hotkey.functions.append((_("Toggle infoBar"), "Infobar/toggleShow", "InfoBar"))
-	hotkey.functions.append((_("Toggle videomode"), "Infobar/selectVMode", "InfoBar"))
+	hotkey.functions.append((_("Toggle videomode"), "Infobar/ToggleVideoMode", "InfoBar"))
 	hotkey.functions.append((_("Toggle subtitles show/hide"), "Infobar/toggleSubtitleShown", "InfoBar"))
 	if SystemInfo["PIPAvailable"]:
 		hotkey.functions.append((_("Show PiP"), "Infobar/showPiP", "InfoBar"))
