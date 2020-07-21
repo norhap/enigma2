@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+from boxbranding import getHaveHDMI
 from Tools.Directories import SCOPE_SKIN, resolveFilename
 
 hw_info = None
@@ -37,7 +41,7 @@ class HardwareInfo:
 
 		# Brand
 		try:
-			self.device_brand = open("/etc/brand").read().strip().upper()
+			self.device_brand = open("/etc/openvision/brand").read().strip()
 		except:
 			pass
 
@@ -71,13 +75,7 @@ class HardwareInfo:
 
 			self.device_model = self.device_model or self.device_name
 
-		# map for Xtrend device models to machine names
-		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
-			self.machine_name = "%sx00" % self.device_model[:3]
-		elif self.device_model == "et11000":
-			self.machine_name = "et1x000"
-		else:
-			self.machine_name = self.device_model
+		self.machine_name = self.device_model
 
 		if self.device_revision:
 			self.device_string = "%s (%s-%s)" % (self.device_model, self.device_revision, self.device_version)
@@ -87,7 +85,7 @@ class HardwareInfo:
 			self.device_string = self.device_model
 
 		# only some early DMM boxes do not have HDMI hardware
-		self.device_hdmi =	self.device_model not in ("dm800","dm8000")
+		self.device_hdmi =  getHaveHDMI() == "True"
 
 		print("[HardwareInfo] Detected: " + self.get_device_string())
 
