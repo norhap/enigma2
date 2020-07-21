@@ -150,7 +150,7 @@ SystemInfo["OLDE2API"] = model in ("dm800","su980")
 SystemInfo["7segment"] = getDisplayType() == "7segment"
 SystemInfo["HiSilicon"] = getSoCFamily().startswith("hisi") or pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = platform in ("octagonhisil","gbmv200") or model in ("ustym4kpro","beyonwizv2","viper4k")
-SystemInfo["CanFadeOut"] = brand not in ("linkdroid","mecool","minix","wetek","hardkernel","dinobot","maxytec","azbox") and not (SystemInfo["HiSilicon"]) and not pathExists("/proc/hisi") and not fileExists("/usr/bin/hihalt")
+SystemInfo["CanFadeOut"] = brand not in ("linkdroid","mecool","minix","wetek","hardkernel","dinobot","maxytec","azbox") and not (SystemInfo["HiSilicon"])
 SystemInfo["OSDAnimation"] = fileCheck("/proc/stb/fb/animation_mode")
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51","h7")
 SystemInfo["AndroidMode"] =  SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("hypercube","linkdroid","mecool","wetek")
