@@ -427,7 +427,6 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		if SystemInfo["CanFadeOut"]:
 			self.hideTimer.stop()
 			self.DimmingTimer.stop()
-			self.doWriteAlpha(config.av.osd_alpha.value)
 		self.startHideTimer()
 
 	def doTimerHide(self):
