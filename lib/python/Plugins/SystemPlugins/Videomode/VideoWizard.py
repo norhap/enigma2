@@ -7,10 +7,11 @@ from VideoHardware import video_hw
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigBoolean, configfile
 from Components.SystemInfo import SystemInfo
+from enigma import getBoxType
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from boxbranding import getHaveHDMI
 
-has_hdmi = getHaveHDMI() == "True"
+hw_type = getBoxType()
+has_hdmi = hw_type not in ("dm800","dm8000")
 
 config.misc.showtestcard = ConfigBoolean(default = False)
 

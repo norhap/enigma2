@@ -1,13 +1,11 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
 from os import path
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime
 from enigma import getBoxType, getBoxBrand
+from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
-from boxbranding import getMachineBuild
 
 def getBoxProc():
 	procmodel = "unknown"
@@ -39,13 +37,8 @@ def getFPVersion():
 	try:
 		if getBoxBrand() == "blackbox" and fileExists("/proc/stb/info/micomver"):
 			ret = open("/proc/stb/info/micomver", "r").read()
-		elif fileExists("/proc/stb/fp/version"):
-			if getMachineBuild() == "dm4kgen" or getBoxType() in ("dm520","dm7080","dm820"):
-				ret = open("/proc/stb/fp/version", "r").read()
-			else:
-				ret = long(open("/proc/stb/fp/version", "r").read())
-		elif fileExists("/sys/firmware/devicetree/base/bolt/tag"):
-			ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
+		elif SystemInfo["DreamBoxDTSAudio"] or getBoxType().startswith("dm9") or getBoxType().startswith("dm52"):
+			ret = open("/proc/stb/fp/version", "r").read()
 		else:
 			ret = long(open("/proc/stb/fp/version", "r").read())
 	except IOError:
