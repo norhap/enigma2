@@ -40,6 +40,9 @@ def getBootdevice():
 model = getBoxType()
 brand = getBoxBrand()
 platform = getMachineBuild()
+displaytype = getDisplayType()
+architecture = getImageArch()
+socfamily = getSoCFamily()
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots()
@@ -88,7 +91,6 @@ SystemInfo["VFD_final_scroll_delay"] = model != "et8500" and fileCheck("/proc/st
 SystemInfo["LcdLiveTV"] = fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable")
 SystemInfo["LcdLiveTVMode"] = fileCheck("/proc/stb/lcd/mode")
 SystemInfo["LcdLiveDecoder"] = fileCheck("/proc/stb/lcd/live_decoder")
-SystemInfo["FastChannelChange"] = False
 SystemInfo["3DMode"] = fileCheck("/proc/stb/fb/3dmode") or fileCheck("/proc/stb/fb/primary/3d")
 SystemInfo["3DZNorm"] = fileCheck("/proc/stb/fb/znorm") or fileCheck("/proc/stb/fb/primary/zoffset")
 SystemInfo["Blindscan_t2_available"] = brand == "vuplus"
@@ -149,9 +151,14 @@ SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/
 SystemInfo["OpenVisionModule"] = fileCheck("/proc/stb/info/openvision")
 SystemInfo["OLDE2API"] = model in ("dm800","su980")
 SystemInfo["7segment"] = getDisplayType() == "7segment"
-SystemInfo["HiSilicon"] = getSoCFamily().startswith("hisi") or pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
+SystemInfo["HiSilicon"] = socfamily.startswith("hisi") or pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt") or pathExists("/usr/lib/hisilicon")
 SystemInfo["DefineSat"] = platform in ("octagonhisil","gbmv200") or model in ("ustym4kpro","beyonwizv2","viper4k")
+SystemInfo["AmlogicFamily"] = socfamily.startswith("aml") or fileExists("/proc/device-tree/amlogic-dt-id") or fileExists("/usr/bin/amlhalt") or pathExists("/sys/module/amports")
 SystemInfo["CanFadeOut"] = brand not in ("linkdroid","mecool","minix","wetek","hardkernel","dinobot","maxytec","azbox") and not (SystemInfo["HiSilicon"])
+SystemInfo["7segment"] = displaytype == "7segment" or "7seg" in displaytype
+SystemInfo["HiSilicon"] = socfamily.startswith("hisi") or pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt") or pathExists("/usr/lib/hisilicon")
+SystemInfo["DefineSat"] = platform in ("octagonhisil","gbmv200") or model in ("ustym4kpro","beyonwizv2","viper4k")
+SystemInfo["AmlogicFamily"] = socfamily.startswith("aml") or fileExists("/proc/device-tree/amlogic-dt-id") or fileExists("/usr/bin/amlhalt") or pathExists("/sys/module/amports")
 SystemInfo["OSDAnimation"] = fileCheck("/proc/stb/fb/animation_mode")
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51","h7")
 SystemInfo["AndroidMode"] =  SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("hypercube","linkdroid","mecool","wetek")
@@ -180,7 +187,6 @@ SystemInfo["ArchIsARM"] = getImageArch().startswith("arm") or getImageArch().sta
 SystemInfo["SeekStatePlay"] = False
 SystemInfo["StatePlayPause"] = False
 SystemInfo["StandbyState"] = False
-SystemInfo["LEDButtons"] = model == "vuultimo"
 SystemInfo["HasH9SD"] = model in ("h9","i55plus") and pathExists("/dev/mmcblk0p1")
 SystemInfo["HasSDnomount"] = model in ("h9","i55plus") and (False, "none") or model in ("multibox","h9combo") and (True, "mmcblk0")
 SystemInfo["canBackupEMC"] = model in ("hd51","h7") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or platform == "edision4k" and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none")
