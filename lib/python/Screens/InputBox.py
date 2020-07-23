@@ -18,7 +18,7 @@ class InputBox(Screen):
 		self["input"] = Input(**kwargs)
 		if windowTitle is None:
 			windowTitle = _("Input")
-		self.setTitle(windowTitle, showPath=False)
+		self.onShown.append(boundFunction(self.setTitle, windowTitle))
 		if useableChars is not None:
 			self["input"].setUseableChars(useableChars)
 

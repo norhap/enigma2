@@ -9,15 +9,6 @@ from enigma import getBoxType, getBoxBrand
 from Tools.Directories import fileExists
 from boxbranding import getMachineBuild
 
-def getBoxProcType():
-	procmodeltype = "unknown"
-	try:
-		if fileExists("/proc/stb/info/type"):
-			procmodeltype = open("/proc/stb/info/type", "r").readline().strip().lower()
-	except IOError:
-		print("[StbHardware] getBoxProcType failed!")
-	return procmodeltype
-
 def getBoxProc():
 	procmodel = "unknown"
 	try:
