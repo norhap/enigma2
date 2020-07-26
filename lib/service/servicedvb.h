@@ -90,7 +90,7 @@ class eDVBServicePlay: public eDVBServiceBase,
 		public iPlayableService, public iPauseableService,
 		public iSeekableService, public sigc::trackable, public iServiceInformation,
 		public iAudioTrackSelection, public iAudioChannelSelection,
-		public iSubserviceList, public iTimeshiftService, public iTapService,
+		public iSubserviceList, public iTimeshiftService,
 		public iCueSheet, public iSubtitleOutput, public iAudioDelay,
 		public iRdsDecoder, public iStreamableService,
 		public iStreamedService
@@ -113,7 +113,6 @@ public:
 	RESULT frontendInfo(ePtr<iFrontendInformation> &ptr);
 	RESULT subServices(ePtr<iSubserviceList> &ptr);
 	RESULT timeshift(ePtr<iTimeshiftService> &ptr);
-	RESULT tap(ePtr<iTapService> &ptr);
 	RESULT cueSheet(ePtr<iCueSheet> &ptr);
 	RESULT subtitle(ePtr<iSubtitleOutput> &ptr);
 	RESULT audioDelay(ePtr<iAudioDelay> &ptr);
@@ -181,10 +180,6 @@ public:
 	RESULT saveTimeshiftFile();
 	std::string getTimeshiftFilename();
 	void switchToLive();
-
-		// iTapService
-	bool startTapToFD(int fd, const std::vector<int> &pids, int packetsize = 188);
-	void stopTapToFD();
 
 		// iCueSheet
 	PyObject *getCutList();
@@ -272,10 +267,6 @@ protected:
 	int m_skipmode;
 	int m_fastforward;
 	int m_slowmotion;
-
-		/* tap */
-
-	ePtr<iDVBTSRecorder> m_tap_recorder;
 
 		/* cuesheet */
 
