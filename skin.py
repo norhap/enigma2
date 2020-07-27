@@ -94,8 +94,34 @@ def addSkin(name, scope=SCOPE_CURRENT_SKIN):
 		# This open gets around a possible file handle leak in Python's XML parser.
 		with open(filename, "r") as fd:
 			try:
-				domSkins.append((scope, "%s/" % os.path.dirname(filename), xml.etree.cElementTree.parse(fd).getroot()))
-				print("[skin] Skin '%s' added successfully." % filename)
+				domSkin = xml.etree.cElementTree.parse(fd).getroot()
+				# print("[Skin] DEBUG: Extracting non screen blocks from '%s'.  (scope='%s')" % (filename, scope))
+				# For loadSingleSkinData colors, bordersets etc. are applied one after
+				# the other in order of ascending priority.
+				loadSingleSkinData(desktop, screenID, domSkin, filename, scope=scope)
+				for element in domSkin:
+					if element.tag == "screen":  # Process all screen elements.
+						name = element.attrib.get("name", None)
+						if name:  # Without a name, it's useless!
+							sid = element.attrib.get("id", None)
+							if sid is None or int(sid) == screenID:  # If there is a screen ID is it for this display.
+								# print("[Skin] DEBUG: Extracting screen '%s' from '%s'.  (scope='%s')" % (name, filename, scope))
+								domScreens[name] = (element, "%s/" % dirname(filename))
+					elif element.tag == "windowstyle":  # Process the windowstyle element.
+						screenID = element.attrib.get("id", None)
+						if screenID is not None:  # Without an screenID, it is useless!
+							screenID = int(screenID)
+							# print("[Skin] DEBUG: Processing a windowstyle ID='%s'." % screenID)
+							domStyle = xml.etree.cElementTree.ElementTree(xml.etree.cElementTree.Element("skin"))
+							domStyle.getroot().append(element)
+							windowStyles[screenID] = (desktop, screenID, domStyle, filename, scope)
+					# Element is not a screen or windowstyle element so no need for it any longer.
+				reloadWindowStyles()  # Reload the window style to ensure all skin changes are taken into account.
+				print("[skin] Loading skin file '%s' complete." % filename)
+				if runCallbacks:
+					for method in self.callbacks:
+						if method:
+							method()
 				return True
 			except xml.etree.cElementTree.ParseError as err:
 				fd.seek(0)
@@ -383,16 +409,10 @@ class AttributeParser:
 		pass
 
 	def position(self, value):
-		if isinstance(value, tuple):
-			self.guiObject.move(ePoint(*value))
-		else:
-			self.guiObject.move(parsePosition(value, self.scaleTuple, self.guiObject, self.desktop, self.guiObject.csize()))
+		self.guiObject.move(ePoint(*value) if isinstance(value, tuple) else parsePosition(value, self.scaleTuple, self.guiObject, self.desktop, self.guiObject.csize()))
 
 	def size(self, value):
-		if isinstance(value, tuple):
-			self.guiObject.resize(eSize(*value))
-		else:
-			self.guiObject.resize(parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
+		self.guiObject.resize(eSize(*value) if isinstance(value, tuple) else parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
 
 	def animationPaused(self, value):
 		pass
@@ -408,7 +428,7 @@ class AttributeParser:
 				"onhide": 0x10,
 			}[value])
 		except KeyError:
-			print("[skin] Error: Invalid animationMode '%s'!  Must be one of 'disable', 'off', 'offshow', 'offhide', 'onshow' or 'onhide'." % value)
+ 			print("[skin] Error: Invalid animationMode '%s'!  Must be one of 'disable', 'off', 'offshow', 'offhide', 'onshow' or 'onhide'." % value)
 
 	def title(self, value):
 		self.guiObject.setTitle(_(value))
@@ -621,16 +641,17 @@ def applySingleAttribute(guiObject, desktop, attrib, value, scale=((1, 1), (1, 1
 def applyAllAttributes(guiObject, desktop, attributes, scale):
 	AttributeParser(guiObject, desktop, scale).applyAll(attributes)
 
-def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
+def reloadWindowStyles():
+	for screenID in windowStyles:
+		desktop, screenID, domSkin, pathSkin, scope = windowStyles[id]
+		loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope)
+
+def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 	"""Loads skin data like colors, windowstyle etc."""
 	assert domSkin.tag == "skin", "root element in skin must be 'skin'!"
 	global colorNames, fonts, menus, parameters, setups, switchPixmap
 	for tag in domSkin.findall("output"):
-		id = tag.attrib.get("id")
-		if id:
-			id = int(id)
-		else:
-			id = GUI_SKIN_ID
+		sid = int(tag.attrib.get("id", GUI_SKIN_ID))
 		if id == GUI_SKIN_ID:
 			for res in tag.findall("resolution"):
 				xres = res.attrib.get("xres")
@@ -831,11 +852,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			eSubtitleWidget.setFontStyle(face, font, haveColor, foregroundColor, borderColor, borderWidth)
 	for tag in domSkin.findall("windowstyle"):
 		style = eWindowStyleSkinned()
-		styleId = tag.attrib.get("id")
-		if styleId:
-			styleId = int(styleId)
-		else:
-			styleId = GUI_SKIN_ID
+		sid = int(tag.attrib.get("id", GUI_SKIN_ID))
 		font = gFont("Regular", 20)  # Default
 		offset = eSize(20, 5)  # Default
 		for title in tag.findall("title"):
@@ -866,13 +883,9 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 				raise SkinError("Unknown color type '%s'" % colorType)
 			# print("[Skin] DEBUG: WindowStyle color type, color -" % (colorType, str(color)))
 		x = eWindowStyleManager.getInstance()
-		x.setStyle(styleId, style)
+		x.setStyle(sid, style)
 	for tag in domSkin.findall("margin"):
-		styleId = tag.attrib.get("id")
-		if styleId:
-			styleId = int(styleId)
-		else:
-			styleId = GUI_SKIN_ID
+		sid = int(tag.attrib.get("id", GUI_SKIN_ID))
 		r = eRect(0, 0, 0, 0)
 		v = tag.attrib.get("left")
 		if v:
@@ -888,7 +901,7 @@ def loadSingleSkinData(desktop, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 			r.setBottom(int(v))
 		# The "desktop" parameter is hard-coded to the GUI screen, so we must ask
 		# for the one that this actually applies to.
-		getDesktop(styleId).setMargins(r)
+		getDesktop(sid).setMargins(r)
 
 # Now a utility for plugins to add skin data to the screens.
 #
@@ -1079,8 +1092,8 @@ def readSkin(screen, skin, names, desktop):
 			for s in skin:
 				candidate = xml.etree.cElementTree.fromstring(s)
 				if candidate.tag == "screen":
-					sid = candidate.attrib.get("id", None)
-					if (not sid) or (int(sid) == DISPLAY_SKIN_ID):
+					screenID = candidate.attrib.get("id", None)
+					if (not screenID) or (int(screenID) == DISPLAY_SKIN_ID):
 						myScreen = candidate
 						break
 			else:
