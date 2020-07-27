@@ -112,6 +112,7 @@ SystemInfo["HasHDMI-CEC"] = getHaveHDMI() == "True" and fileExists(resolveFilena
 SystemInfo["HasHDMIHDin"] = getHaveHDMIinHD() == "True"
 SystemInfo["HasHDMIFHDin"] = getHaveHDMIinFHD() == "True"
 SystemInfo["HDMIin"] = SystemInfo["HasHDMIHDin"] or SystemInfo["HasHDMIFHDin"]
+SystemInfo["Has2160p"] = fileHas("/proc/stb/video/videomode_preferred","2160p50")
 SystemInfo["HasYPbPr"] = getHaveYUV() == "True"
 SystemInfo["HasScart"] = getHaveSCART() == "True"
 SystemInfo["HasSVideo"] = model == "dm8000"
