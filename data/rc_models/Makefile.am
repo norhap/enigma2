@@ -73,7 +73,7 @@ dist_install_DATA = rc_models.cfg ax4.png ax4.xml ax51.png ax51.xml hd1100.png h
 endif
 
 if GIGABLUE
-dist_install_DATA = rc_models.cfg gb0.png gb0.xml gb1.png gb1.xml gb2.png gb2.xml gb3.png gb3.xml
+dist_install_DATA = rc_models.cfg gb0.png gb0.xml gb1.png gb1.xml gb2.png gb2.xml gb3.png gb3.xml gb4.png gb4.xml
 endif
 
 if HARDKERNEL
