@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 import errno
 import xml.etree.cElementTree
@@ -342,7 +344,6 @@ class Timezones:
 		print("[Timezones] AutoTimer poll is running.")
 		if self.autotimerTimer is not None:
 			print("[Timezones] AutoTimer is parsing the EPG.")
-			self.autotimerTimer.parseEPG(autoPoll=True)
 		if self.autotimerPoller is not None:
 			self.autotimerPoller.start()
 
