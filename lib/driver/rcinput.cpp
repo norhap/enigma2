@@ -100,6 +100,18 @@ void eRCDeviceInputDev::handleCode(long rccode)
 		}
 	}
 
+	if (!remaps.empty())
+	{
+		std::unordered_map<unsigned int, unsigned int>::iterator i = remaps.find(ev->code);
+		if (i != remaps.end())
+		{
+			eDebug("[eRCDeviceInputDev] map: %u->%u", i->first, i->second);
+			ev->code = i->second;
+		}
+	}
+	else
+	{
+
 #if TIVIARRC
 	if (ev->code == KEY_EPG) {
 		ev->code = KEY_INFO;
@@ -196,20 +208,22 @@ void eRCDeviceInputDev::handleCode(long rccode)
 #endif
 
 #if KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE
-	if (ev->code == KEY_PLAY)
-	{
-		if (id == "dreambox advanced remote control (native)")
+		if (ev->code == KEY_PLAY)
 		{
-			/* 8k rc has a KEY_PLAYPAUSE key, which sends KEY_PLAY events. Correct this, so we do not have to place hacks in the keymaps. */
-			ev->code = KEY_PLAYPAUSE;
+			if ((id == "dreambox advanced remote control (native)")  || (id == "bcm7325 remote control"))
+			{
+				/* 8k rc has a KEY_PLAYPAUSE key, which sends KEY_PLAY events. Correct this, so we do not have to place hacks in the keymaps. */
+				ev->code = KEY_PLAYPAUSE;
+			}
 		}
-	}
 #endif
 
-#if KEY_F6_TO_KEY_FAVORITES
-	if (ev->code == KEY_F6) {
-		ev->code = KEY_FAVORITES;
-	}
+#if KEY_VIDEO_TO_KEY_FAVORITES
+		if (ev->code == KEY_VIDEO)
+		{
+			/* formuler rcu fav key send key_media change this to  KEY_FAVORITES */
+			ev->code = KEY_FAVORITES;
+		}
 #endif
 
 #if KEY_CONTEXT_MENU_TO_KEY_BACK
@@ -372,10 +386,13 @@ void eRCDeviceInputDev::handleCode(long rccode)
 #endif
 
 #if KEY_BOOKMARKS_TO_KEY_MEDIA
-	if (ev->code == KEY_BOOKMARKS) {
-		ev->code = KEY_MEDIA;
-	}
+		if (ev->code == KEY_BOOKMARKS)
+		{
+			/* formuler and triplex remote send wrong keycode */
+			ev->code = KEY_MEDIA;
+		}
 #endif
+	}
 
 #if KEY_VIDEO_TO_KEY_FAVORITES
 	if (ev->code == KEY_VIDEO) {
@@ -531,6 +548,12 @@ void eRCDeviceInputDev::handleCode(long rccode)
 			input->keyPressed(eRCKey(this, ev->code, eRCKey::flagRepeat)); /*emit*/
 			break;
 	}
+}
+
+int eRCDeviceInputDev::setKeyMapping(const std::unordered_map<unsigned int, unsigned int>& remaps_p)
+{
+	remaps = remaps_p;
+	return eRCInput::remapOk;
 }
 
 eRCDeviceInputDev::eRCDeviceInputDev(eRCInputEventDriver *driver, int consolefd)
