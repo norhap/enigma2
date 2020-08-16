@@ -62,7 +62,6 @@ class About(Screen):
 		AboutText += _("CPU: ") + cpu + "\n"
 		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
 		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"
-		AboutText += _("CPU Cotaref: ") + about.getCPUBenchmark() + _(" DMIPS") + "\n"
 		AboutText += _("Flash tipo: ") + about.getFlashType() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"

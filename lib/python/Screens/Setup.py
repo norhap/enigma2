@@ -40,7 +40,7 @@ class SetupSummary(Screen):
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent = parent)
-		self["SetupTitle"] = StaticText(_(parent.setup_title))
+		self["SetupTitle"] = StaticText(parent.getTitle())
 		self["SetupEntry"] = StaticText("")
 		self["SetupValue"] = StaticText("")
 		self.onShow.append(self.addWatcher)
@@ -58,8 +58,12 @@ class SetupSummary(Screen):
 			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
 
 	def selectionChanged(self):
-		self["SetupEntry"].text = self.parent.getCurrentEntry()
-		self["SetupValue"].text = self.parent.getCurrentValue()
+		if SystemInfo["HasRootSubdir"]:
+		    self["SetupEntry"].text = self.parent.getCurrentEntry()
+		    self["SetupValue"].text = self.parent.getCurrentValue()
+		else:
+		    self["SetupEntry"].setText = self.parent.getCurrentEntry()
+		    self["SetupValue"].setText = self.parent.getCurrentValue()
 		if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
 			self.parent["description"].text = self.parent.getCurrentDescription()
 

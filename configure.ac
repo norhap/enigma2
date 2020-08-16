@@ -642,7 +642,7 @@ if test `echo "$BOXTYPE" | cut -b 1-7` == "mbmicro"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "classm" -o "$BOXTYPE" == "axodin" -o "$BOXTYPE" == "axodinc" -o "$BOXTYPE" == "starsatlx" -o "$BOXTYPE" == "genius" -o "$BOXTYPE" == "evo" -o "$BOXTYPE" == "galaxym6"; then
+if test "$BOXTYPE" == "axodin"; then
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 	AC_DEFINE(KEY_POWER2_TO_KEY_WWW, 1,[define when rc sends a KEY_POWER2 event for its KEY_WWW key])
 	AC_DEFINE(KEY_DIRECTORY_TO_KEY_FILE, 1,[define when rc sends a KEY_DIRECTORY event for its KEY_FILE key])
@@ -799,6 +799,9 @@ data/skin_default/LCDIcons/Makefile
 data/skin_fallback_1080/Makefile
 data/skin_fallback_1080/buttons/Makefile
 data/skin_fallback_1080/icons/Makefile
+data/VirtualKeyBoard_Icons/Makefile
+data/VirtualKeyBoard_Icons/buttonsHD/Makefile
+data/VirtualKeyBoard_Icons/buttonsFHD/Makefile
 include/Makefile
 lib/Makefile
 lib/base/eenv.cpp

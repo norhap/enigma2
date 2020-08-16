@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
-from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.ActionMap import NumberActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
 from Components.Label import Label
@@ -40,7 +39,7 @@ from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRe
 from Tools import Notifications, ASCIItranslit
 from Tools.Directories import fileExists, fileHas, getRecordingFilename, moveFiles
 from Tools.KeyBindings import getKeyDescription
-from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType, getBoxBrand
+from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxBrand, getBoxType
 from time import time, localtime, strftime
 import os
 from bisect import insort
@@ -49,6 +48,11 @@ import itertools, datetime
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 # hack alert!
 from Screens.Menu import MainMenu, mdom
+from boxbranding import getMachineBuild
+
+model = getBoxType()
+brand = getBoxBrand()
+platform = getMachineBuild()
 
 from boxbranding import getMachineBuild
 
@@ -422,7 +426,6 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		if SystemInfo["CanFadeOut"]:
 			self.hideTimer.stop()
 			self.DimmingTimer.stop()
-			self.doWriteAlpha(config.av.osd_alpha.value)
 		self.startHideTimer()
 
 	def doTimerHide(self):
@@ -1255,7 +1258,7 @@ class InfoBarEPG:
 		plugin.__call__(session = self.session, servicelist = self.servicelist)
 
 	def showEventInfoPlugins(self):
-		if getBoxBrand() not in ("xtrend","odin","ini","dags","gigablue","xp"):
+		if brand not in ("xtrend","odin","ini","dags","gigablue","xp"):
 			pluginlist = self.getEPGPluginList()
 			if pluginlist:
 				self.session.openWithCallback(self.EventInfoPluginChosen, ChoiceBox, title=_("Please choose an extension..."), list=pluginlist, skin_name="EPGExtensionsList", reorderConfig="eventinfo_order", windowTitle=_("Events info menu"))
@@ -2360,6 +2363,26 @@ class InfoBarExtensions:
 		from Screens.CCcamInfo import CCcamInfoMain
 		self.session.open(CCcamInfoMain)
 
+	@staticmethod
+	def _getAutoTimerPluginFunc():
+		# Use the WHERE_MENU descriptor because it's the only
+		# AutoTimer plugin descriptor that opens the AutoTimer
+		# overview and is always present.
+
+		for l in plugins.getPlugins(PluginDescriptor.WHERE_MENU):
+			if l.name == _("Auto Timers"):  # Must use translated name
+				menuEntry = l("timermenu")
+				if menuEntry and len(menuEntry[0]) > 1 and callable(menuEntry[0][1]):
+					return menuEntry[0][1]
+		return None
+
+	def showAutoTimerList(self):
+		autotimerFunc = self._getAutoTimerPluginFunc()
+		if autotimerFunc is not None:
+			autotimerFunc(self.session)
+		else:
+			self.session.open(MessageBox, _("The AutoTimer plugin is not installed!\nPlease install it."), type = MessageBox.TYPE_INFO,timeout = 10 )
+
 from Tools.BoundFunction import boundFunction
 import inspect
 
@@ -2396,7 +2419,9 @@ class InfoBarJobman:
 		return [((boundFunction(self.getJobName, job), boundFunction(self.showJobView, job), lambda: True), None) for job in job_manager.getPendingJobs()]
 
 	def getJobName(self, job):
-		return "%s: %s (%d%%)" % (job.getStatustext(), job.name, int(100*job.progress/float(job.end)))
+		if job.status == job.IN_PROGRESS:
+			return "%s: (%d%%), %s" % (job.getStatustext(), int(100*job.progress/float(job.end)), job.name)
+		return "%s: %s" % (job.getStatustext(), job.name)
 
 	def showJobView(self, job):
 		from Screens.TaskView import JobView
@@ -2768,6 +2793,10 @@ class InfoBarInstantRecord:
 			self.deleteRecording = True
 			self.stopAllCurrentRecordings(list)
 		elif answer[1] in ( "indefinitely" , "manualduration", "manualendtime", "event"):
+			from Components.About import about
+			if len(list) >= 2 and about.getChipSetString().startswith("meson-6"):
+				Notifications.AddNotification(MessageBox,_("Sorry only possible to record 2 channels at once!"), MessageBox.TYPE_ERROR, timeout=5)
+				return
 			self.startInstantRecording(limitEvent = answer[1] in ("event", "manualendtime") or False)
 			if answer[1] == "manualduration":
 				self.changeDuration(len(self.recording)-1)
@@ -3162,7 +3191,7 @@ class InfoBarResolutionSelection:
 			yresString = open("/proc/stb/vmpeg/0/yres", "r").read()
 		except:
 			print("[InfoBarGenerics] Error open /proc/stb/vmpeg/0/yres!")
-		if getBoxBrand() == "azbox":
+		if brand == "azbox":
 			fpsString = '50000'
 		else:
 			try:
@@ -4000,10 +4029,8 @@ class InfoBarHdmi2:
 			return _("Turn off HDMI-IN PiP mode")
 
 	def HDMIInPiP(self):
-		if getMachineBuild() in ('dm7080', 'dm820', 'dm900', 'dm920'):
-			f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r")
-			check=f.read()
-			f.close()
+		if platform == "dm4kgen" or model in ("dm7080","dm820"):
+			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r").read()
 			if check.startswith("off"):
 				f=open("/proc/stb/audio/hdmi_rx_monitor","w")
 				f.write("on")
@@ -4038,23 +4065,14 @@ class InfoBarHdmi2:
 					del self.session.pip
 
 	def HDMIInFull(self):
-		if getMachineBuild() in ('dm7080', 'dm820', 'dm900', 'dm920'):
-			f=open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r")
-			check=f.read()
-			f.close()
+		if platform == "dm4kgen" or model in ("dm7080","dm820"):
+			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r").read()
 			if check.startswith("off"):
-				f=open("/proc/stb/video/videomode","r")
-				self.oldvideomode=f.read()
-				f.close()
-				f=open("/proc/stb/video/videomode_50hz","r")
-				self.oldvideomode_50hz=f.read()
-				f.close()
-				f=open("/proc/stb/video/videomode_60hz","r")
-				self.oldvideomode_60hz=f.read()
-				f.close()
-				f=open("/proc/stb/video/videomode","w")
-				if getMachineBuild() in ('dm900', 'dm920'):
-					f.write("1080p")
+				self.oldvideomode = open("/proc/stb/video/videomode","r").read()
+				self.oldvideomode_50hz = open("/proc/stb/video/videomode_50hz","r").read()
+				self.oldvideomode_60hz = open("/proc/stb/video/videomode_60hz","r").read()
+				if platform == "dm4kgen":
+					open("/proc/stb/video/videomode","w").write("1080p")
 				else:
 					f.write("720p")
 				f.close()

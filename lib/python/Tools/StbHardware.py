@@ -37,7 +37,7 @@ def getFPVersion():
 	try:
 		if getBoxBrand() == "blackbox" and fileExists("/proc/stb/info/micomver"):
 			ret = open("/proc/stb/info/micomver", "r").read()
-		elif SystemInfo["DreamBoxDTSAudio"] or getBoxType().startswith("dm9") or getBoxType().startswith("dm52"):
+		elif getBoxType().startswith("dm9") or getBoxType().startswith("dm52"):
 			ret = open("/proc/stb/fp/version", "r").read()
 		else:
 			ret = long(open("/proc/stb/fp/version", "r").read())

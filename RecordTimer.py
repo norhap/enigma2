@@ -700,11 +700,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			message += _("Timeshift is running. Select an action.\n")
 			choice = [(_("Zap"), "zap"), (_("Don't zap and disable timer"), "disable"), (_("Don't zap and remove timer"), "remove")]
 			if not self.InfoBarInstance.save_timeshift_file:
-				choice.insert(1, (_("Save timeshift in movie dir and zap"), "save_movie"))
-				if self.InfoBarInstance.timeshiftActivated():
-					choice.insert(0, (_("Save timeshift and zap"), "save"))
-				else:
-					choice.insert(1, (_("Save timeshift and zap"), "save"))
+				choice.insert(0, (_("Save timeshift and zap"), "save"))
 			else:
 				message += _("Reminder, you have chosen to save timeshift file.")
 			#if self.justplay or self.always_zap:
@@ -713,17 +709,14 @@ class RecordTimerEntry(timer.TimerEntry, object):
 			def zapAction(choice):
 				start_zap = True
 				if choice:
-					if choice in ("zap", "save", "save_movie"):
+					if choice in ("zap", "save"):
 						self.log(8, "zap to recording service")
-						if choice in ("save", "save_movie"):
+						if choice == "save":
 							ts = self.InfoBarInstance.getTimeshift()
 							if ts and ts.isTimeshiftEnabled():
-								if choice =="save_movie":
-									self.InfoBarInstance.save_timeshift_in_movie_dir = True
-								self.InfoBarInstance.save_timeshift_file = True
-								ts.saveTimeshiftFile()
 								del ts
-								self.InfoBarInstance.saveTimeshiftFiles()
+								self.InfoBarInstance.save_timeshift_file = True
+								self.InfoBarInstance.SaveTimeshift()
 					elif choice == "disable":
 						self.disable()
 						NavigationInstance.instance.RecordTimer.timeChanged(self)
@@ -783,7 +776,12 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 	# Report the tuner that the current recording is using
 	def log_tuner(self, level, state):
-		feinfo = self.record_service and hasattr(self.record_service, "frontendInfo") and self.record_service.frontendInfo()
+# If we have a Zap timer then the tuner is for the current service
+		if self.justplay:
+			timer_rs = NavigationInstance.instance.getCurrentService()
+		else:
+			timer_rs = self.record_service
+		feinfo = timer_rs and hasattr(timer_rs, "frontendInfo") and timer_rs.frontendInfo()
 		fedata = feinfo and hasattr(feinfo, "getFrontendData") and feinfo.getFrontendData()
 		tuner_info = fedata and "tuner_number" in fedata and chr(ord('A') + fedata.get("tuner_number")) or "(fallback) stream"
 		self.log(level, "%s recording on tuner: %s" % (state, tuner_info))
@@ -959,7 +957,8 @@ class RecordTimer(timer.Timer):
 				return True
 		return False
 
-	def loadTimer(self):
+# justLoad is passed on to record()
+	def loadTimer(self, justLoad=False):
 		try:
 			doc = xml.etree.cElementTree.parse(self.Filename)
 		except SyntaxError:
@@ -984,7 +983,7 @@ class RecordTimer(timer.Timer):
 		timer_text = ""
 		for timer in root.findall("timer"):
 			newTimer = createTimer(timer)
-			conflict_list = self.record(newTimer, ignoreTSC=True, dosave=False, loadtimer=True)
+			conflict_list = self.record(newTimer, ignoreTSC=True, dosave=False, loadtimer=True, justLoad=justLoad)
 			if conflict_list:
 				checkit = True
 				if newTimer in conflict_list:
@@ -1156,9 +1155,15 @@ class RecordTimer(timer.Timer):
 					return True
 		return False
 
-	def record(self, entry, ignoreTSC=False, dosave=True, loadtimer=False):
+# If justLoad is True then we (temporarily) turn off conflict detection
+# as we load.  On a restore we may not have the correct tuner
+# configuration (and no USB tuners)...
+	def record(self, entry, ignoreTSC=False, dosave=True, loadtimer=False, justLoad=False):
+		real_cd = entry.conflict_detection
+		if justLoad:
+			entry.conflict_detection = False
 		check_timer_list = self.timer_list[:]
-		timersanitycheck = TimerSanityCheck(check_timer_list,entry)
+		timersanitycheck = TimerSanityCheck(check_timer_list, entry)
 		answer = None
 		if not timersanitycheck.check():
 			if not ignoreTSC:
@@ -1181,6 +1186,7 @@ class RecordTimer(timer.Timer):
 			for x in check_timer_list:
 				if x.begin == entry.begin and not x.disabled and not x.justplay and not (x.service_ref and '%3a//' in x.service_ref.ref.toString()):
 					entry.begin += 1
+		entry.conflict_detection = real_cd
 		entry.timeChanged()
 		print("[RecordTimer] Record " + str(entry))
 		entry.Timer = self

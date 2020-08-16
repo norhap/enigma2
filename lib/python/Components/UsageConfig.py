@@ -12,7 +12,9 @@ import os
 import time
 import locale
 import skin
-from boxbranding import getDisplayType
+from boxbranding import getDisplayType, getMachineBuild
+
+displaytype = getDisplayType()
 
 def InitUsageConfig():
 	config.misc.useNTPminutes = ConfigSelection(default = "30", choices = [("30", "30" + " " +_("minutes")), ("60", _("Hour")), ("1440", _("Once per day"))])
@@ -43,6 +45,8 @@ def InitUsageConfig():
 	config.usage.crypto_icon_mode.addNotifier(refreshServiceList)
 	config.usage.record_indicator_mode = ConfigSelection(default = "3", choices = [("0", _("None")), ("1", _("Left from servicename")), ("2", _("Right from servicename")), ("3", _("Red colored"))])
 	config.usage.record_indicator_mode.addNotifier(refreshServiceList)
+
+	config.usage.virtualkeyBoard_style = ConfigSelection(default='OV', choices=[('OV', _('Open Vision')), ('e2', _('enigma2 default'))])
 
 	choicelist = [("-1", _("Disable"))]
 	for i in range(0,1300,100):
@@ -353,7 +357,7 @@ def InitUsageConfig():
 	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
 	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
 
-	if getDisplayType() == "7segment":
+	if displaytype == "7segment":
 		config.usage.blinking_display_clock_during_recording = ConfigSelection(default = "Rec", choices = [
 						("Rec", _("REC")),
 						("RecBlink", _("Blinking REC")),
@@ -361,12 +365,12 @@ def InitUsageConfig():
 	else:
 		config.usage.blinking_display_clock_during_recording = ConfigYesNo(default = False)
 
-	if getDisplayType() == "textlcd":
+	if displaytype == "textlcd":
 		config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default = "Channel", choices = [
 						("Rec", _("REC Symbol")),
 						("RecBlink", _("Blinking REC Symbol")),
 						("Channel", _("Channelname"))])
-	if getDisplayType() == "7segment":
+	if displaytype == "7segment":
 		config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default = "Rec", choices = [
 						("Rec", _("REC")),
 						("RecBlink", _("Blinking REC")),
@@ -1068,7 +1072,7 @@ def InitUsageConfig():
 		if SystemInfo["HasColorspaceSimple"]:
 			config.av.hdmicolorspace = ConfigSelection(default = "Edid(Auto)", choices={"Edid(Auto)": _("Auto"), "Hdmi_Rgb": _("RGB"), "444": _("YCbCr444"), "422": _("YCbCr422"), "420": _("YCbCr420")})
 		else:
-			if getBoxType() in ("dm900","dm920","vuzero4k"):
+			if getBoxType() == "vuzero4k" or getMachineBuild == "dm4kgen":
 				config.av.hdmicolorspace = ConfigSelection(choices={
 						"Edid(Auto)": _("Auto"),
 						"Hdmi_Rgb": _("RGB"),

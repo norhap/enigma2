@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 import threading, urllib2, os, shutil, tempfile
 from json import loads
@@ -56,8 +58,8 @@ class ImportChannels():
 		config.usage.remote_fallback_dvbt_region.value = description
 
 	def threaded_function(self):
-		settings = self.getFallbackSettings()
-		self.getTerrestrialRegion(settings)
+#		settings = self.getFallbackSettings()
+#		self.getTerrestrialRegion(settings)
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels")
 		if "epg" in config.usage.remote_fallback_import.value:
 			print("[ImportChannels] Writing epg.dat file on sever box")
@@ -115,6 +117,7 @@ class ImportChannels():
 	def ImportChannelsDone(self, flag, message=None):
 		shutil.rmtree(self.tmp_dir, True)
 		if flag:
-			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
-		else:
-			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, type=MessageBox.TYPE_ERROR, timeout=5)
+#			Notifications.AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
+#		else:
+#			Notifications.AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, type=MessageBox.TYPE_ERROR, timeout=5)
+		      return

@@ -147,21 +147,22 @@ class Screen(dict):
 	def getScreenPath(self):
 		return self.screenPath
 
-	def setTitle(self, title):
+	def setTitle(self, title, showPath=True):
 		try:  # This protects against calls to setTitle() before being fully initialised like self.session is accessed *before* being defined.
 			if self.session and len(self.session.dialog_stack) > 2:
 				self.screenPath = " > ".join(ds[0].getTitle() for ds in self.session.dialog_stack[2:])
+			else:
+				self.screenPath = ""
 			if self.instance:
 				self.instance.setTitle(title)
 			self.summaries.setTitle(title)
 		except AttributeError:
 			pass
 		self.screenTitle = title
-		dont_use_menu_path = "ChannelSelection" in self.__class__.__name__
-		if config.usage.menu_path.value == "large" and not dont_use_menu_path:
+		if showPath and config.usage.menu_path.value == "large":
 			screenPath = ""
 			screenTitle = "%s > %s" % (self.screenPath, title) if self.screenPath else title
-		elif config.usage.menu_path.value == "small" and not dont_use_menu_path:
+		elif showPath and config.usage.menu_path.value == "small":
 			screenPath = "%s >" % self.screenPath if self.screenPath else ""
 			screenTitle = title
 		else:
@@ -218,30 +219,23 @@ class Screen(dict):
 		self.__callLaterTimer.start(0, True)
 
 	def applySkin(self):
-		z = 0
 		# DEBUG: baseRes = (getDesktop(GUI_SKIN_ID).size().width(), getDesktop(GUI_SKIN_ID).size().height())
 		baseRes = (720, 576)  # FIXME: A skin might have set another resolution, which should be the base res.
-		idx = 0
-		skinTitleIndex = -1
-		title = self.title
+		zPosition = 0
 		for (key, value) in self.skinAttributes:
-			if key == "zPosition":
-				z = int(value)
-			elif key == "title":
-				skinTitleIndex = idx
-				if title:
-					self.skinAttributes[skinTitleIndex] = ("title", title)
-				else:
-					self["Title"].text = _(value)
-					self.summaries.setTitle(_(value))
-			elif key == "baseResolution":
+			if key == "baseResolution":
 				baseRes = tuple([int(x) for x in value.split(",")])
-			idx += 1
+			elif key == "zPosition":
+				zPosition = int(value)
 		self.scale = ((baseRes[0], baseRes[0]), (baseRes[1], baseRes[1]))
 		if not self.instance:
-			self.instance = eWindow(self.desktop, z)
-		if skinTitleIndex == -1 and title:
-			self.skinAttributes.append(("title", title))
+			self.instance = eWindow(self.desktop, zPosition)
+		if "title" not in self.skinAttributes and self.screenTitle:
+			self.skinAttributes.append(("title", self.screenTitle))
+		else:
+			for attribute in self.skinAttributes:
+				if attribute[0] == "title":
+					self.setTitle(_(attribute[1]))
 		self.skinAttributes.sort(key=lambda a: {"position": 1}.get(a[0], 0))  # We need to make sure that certain attributes come last.
 		applyAllAttributes(self.instance, self.desktop, self.skinAttributes, self.scale)
 		self.createGUIScreen(self.instance, self.desktop)
