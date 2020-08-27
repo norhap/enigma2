@@ -3,6 +3,11 @@ from __future__ import print_function
 from Components.config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
 from enigma import getBoxType, getBoxBrand
 from Components.SystemInfo import SystemInfo
+import errno
+import xml.etree.cElementTree
+from enigma import eRCInput
+from keyids import KEYIDS
+from Components.RcModel import rc_model
 from fcntl import ioctl
 import os
 import struct
