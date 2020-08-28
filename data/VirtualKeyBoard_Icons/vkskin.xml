@@ -1,6 +1,6 @@
 <skin>
 <!-- HD Skin -->
-<screen name="vkeyboard_hdskin" title="Virtual keyboard" position="center,center" size="1020,450" zPosition="99" backgroundColor="#00000000">
+<screen name="vkeyboard_hdskin" title="Virtual keyboard" position="center,center" size="1020,450" zPosition="99" backgroundColor="#16000000">
 	<widget name="header" conditional="header" position="20,65" size="690,35" font="Regular;30" foregroundColor="#00ffff00" halign="center" transparent="1" noWrap="1"/>
 	<widget name="prompt" conditional="prompt" position="20,65" size="690,35" font="Regular;30" foregroundColor="#00ffff00" halign="center" transparent="1" noWrap="1"/>
 	<eLabel position="5,105" size="1010,49" zPosition="1" backgroundColor="#0066ccff" foregroundColor="#00ffffff"/>
