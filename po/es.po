@@ -10300,8 +10300,8 @@ msgstr "Esta opción le permite mostrar todos los símbolos en la pantalla."
 msgid "This option allows you to show menu number quick links."
 msgstr "Esta opción le permite mostrar números que accederán directos al menú."
 
-msgid "This option allows you to show menu paths."
-msgstr "Esta opción le permite mostrar las rutas del menú."
+msgid "This option allows you to show the full screen path leading to the current screen."
+msgstr "Esta opción le permite mostrar la ruta de pantalla completa que conduce a la pantalla actual."
 
 msgid "Timezone"
 msgstr "Zona horaria"
