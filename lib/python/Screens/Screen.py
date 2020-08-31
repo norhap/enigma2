@@ -24,6 +24,7 @@ class Screen(dict):
 		self.skinName = self.__class__.__name__
 		self.session = session
 		self.parent = parent
+		self.mandatoryWidgets = mandatoryWidgets
 		self.onClose = []
 		self.onFirstExecBegin = []
 		self.onExecBegin = []
