@@ -72,6 +72,7 @@ def InitUsageConfig():
 
 	config.usage.quickzap_bouquet_change = ConfigYesNo(default = False)
 	config.usage.e1like_radio_mode = ConfigYesNo(default = False)
+	config.usage.e1like_radio_mode_last_play = ConfigYesNo(default = True)
 	choicelist = [("0", _("No timeout"))]
 	for i in range(1, 12):
 		choicelist.append((str(i), ngettext("%d second", "%d seconds", i) % i))
@@ -95,10 +96,7 @@ def InitUsageConfig():
 	config.usage.menu_sort_mode = ConfigSelection(default = "default", choices = [("a_z", _("alphabetical")), ("default", _("Default")), ("user", _("user defined")), ("user_hidden", _("user defined hidden"))])
 	config.usage.show_genre_info = ConfigYesNo(default=False)
 	config.usage.menu_show_numbers = ConfigSelection(default = "no", choices = [("no", _("no")), ("menu&plugins", _("in menu and plugins")), ("menu", _("in menu only")), ("plugins", _("in plugins only"))])
-	config.usage.menu_path = ConfigSelection(default = "off", choices = [
-		("off", _("Disabled")),
-		("small", _("Small")),
-		("large", _("Large")),])
+	config.usage.showScreenPath = ConfigSelection(default="small", choices=[("off", _("Disabled")), ("small", _("Small")), ("large", _("Large"))])
 	config.usage.enable_tt_caching = ConfigYesNo(default = True)
 
 	config.usage.tuxtxt_font_and_res = ConfigSelection(default = "TTF_SD", choices = [("X11_SD", _("Fixed X11 font (SD)")), ("TTF_SD", _("TrueType font (SD)")), ("TTF_HD", _("TrueType font (HD)")), ("TTF_FHD", _("TrueType font (full-HD)")), ("expert_mode", _("Expert mode"))])

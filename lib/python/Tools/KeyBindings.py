@@ -163,7 +163,6 @@ keyDescriptions = [{  # id=0 - dmm0 remote directory, DM8000.
 	KEYIDS["KEY_F1"]: ("F1",),
 	KEYIDS["KEY_F2"]: ("F2",),
 	KEYIDS["KEY_F3"]: ("F3",),
-	KEYIDS["KEY_F6"]: ("PIP",),
 	KEYIDS["KEY_FASTFORWARD"]: ("FASTFORWARD",),
 	KEYIDS["KEY_FAVORITES"]: ("FAV",),
 	KEYIDS["KEY_FILE"]: ("LIST",),
@@ -367,8 +366,12 @@ def queryKeyBinding(context, action):
 		return []
 
 def getKeyDescription(key):
-	if rc_model.rcIsDefault():
-		idx = config.misc.rcused.value
+	rcType = config.plugins.remotecontroltype.rctype.value
+#	print("[KeyBindings] RC type is:", rcType)
+	if rcType == 14:  # XP1000
+		idx = 3
+	elif rcType == 18:  # F1
+		idx = 4
 	else:
 		rcType = config.plugins.remotecontroltype.rctype.value
 		# rcType = config.misc.inputdevices.rcType.value

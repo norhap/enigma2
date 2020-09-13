@@ -9,18 +9,8 @@ from Tools.Directories import resolveFilename, fileHas
 # it will break output redirection for crash logs.
 import Tools.RedirectOutput
 from Tools.Directories import resolveFilename, fileExists
-from boxbranding import getVisionVersion, getVisionRevision, getHaveMultiLib, getMachineBuild, getImageArch
+from boxbranding import getMachineBuild, getImageArch
 from enigma import getBoxType, getBoxBrand
-
-model = getBoxType()
-brand = getBoxBrand()
-platform = getMachineBuild()
-
-print("[mytest] Open Vision version = %s" % getVisionVersion())
-print("[mytest] Open Vision revision = %s" % getVisionRevision())
-print("[mytest] Brand/Meta = %s" % brand)
-print("[mytest] Model = %s" % model)
-print("[mytest] Platform = %s" % platform)
 
 import enigma
 import eConsoleImpl
@@ -28,6 +18,9 @@ import eBaseImpl
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
+
+model = getBoxType()
+brand = getBoxBrand()
 
 if fileHas ("/var/log/samba/log.nmbd","ERROR: Could not determine network interfaces") and not fileHas ("/var/log/samba/log.nmbd","daemon_ready"):
 	from Components.Console import Console
@@ -665,7 +658,7 @@ import Components.Lcd
 Components.Lcd.InitLcd()
 Components.Lcd.IconCheck()
 
-if platform == "dm4kgen" or model in ("dm7080","dm820"):
+if getBoxType in ("dm7080","dm820"):
 	check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor","r").read()
 	if check.startswith("on"):
 		f=open("/proc/stb/audio/hdmi_rx_monitor","w")
