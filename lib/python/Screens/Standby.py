@@ -49,7 +49,7 @@ def checkTimeshiftRunning():
 	return config.usage.check_timeshift.value and infobar_instance and infobar_instance.timeshiftEnabled() and infobar_instance.timeshift_was_activated
 
 
-class RealStandby(Screen):
+class StandbyScreen(Screen):
 	def __init__(self, session, StandbyCounterIncrease=True):
 		self.skinName = "Standby"
 		Screen.__init__(self, session)
@@ -241,7 +241,7 @@ class RealStandby(Screen):
 	def createSummary(self):
 		return StandbySummary
 
-class Standby(RealStandby):
+class Standby(StandbyScreen):
 	def __init__(self, session, StandbyCounterIncrease=True):
 		if checkTimeshiftRunning():
 			self.skin = """<screen position="0,0" size="0,0"/>"""
@@ -251,7 +251,7 @@ class Standby(RealStandby):
 			self.onFirstExecBegin.append(self.showCheckTimeshiftRunning)
 			self.onHide.append(self.close)
 		else:
-			RealStandby.__init__(self, session, StandbyCounterIncrease)
+			StandbyScreen.__init__(self, session, StandbyCounterIncrease)
 
 	def showCheckTimeshiftRunning(self):
 		self.infoBarInstance.checkTimeshiftRunning(self.showCheckTimeshiftRunningCallback, timeout=20)
@@ -261,7 +261,7 @@ class Standby(RealStandby):
 			self.onClose.append(self.goStandby)
 
 	def goStandby(self):
-		Notifications.AddNotification(RealStandby, self.StandbyCounterIncrease)
+		Notifications.AddNotification(StandbyScreen, self.StandbyCounterIncrease)
 
 class StandbySummary(Screen):
 	skin = """
