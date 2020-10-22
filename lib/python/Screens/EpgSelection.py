@@ -1,6 +1,6 @@
 from __future__ import print_function
 from Screens.Screen import Screen
-import ChannelSelection
+import Screens.ChannelSelection
 import Screens.InfoBar
 from Components.config import config, ConfigClock
 from Components.Pixmap import Pixmap
@@ -115,7 +115,7 @@ class EPGSelection(Screen):
 				"preview": self.eventPreview,
 			})
 
-		self['colouractions'] = HelpableActionMap(self, 'ColorActions',
+		self['colouractions'] = HelpableActionMap(self, ["ColorActions"],
 			{
 				"red": (self.GoToTmbd, _("Search event in TMBD"))
 			})

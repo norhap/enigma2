@@ -1,11 +1,12 @@
 from __future__ import print_function
 import struct, os, time
-from config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
+from Components.config import config, ConfigSelection, ConfigYesNo, ConfigSubsection, ConfigText, ConfigCECAddress, ConfigLocations, ConfigDirectory
 from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
 import NavigationInstance
 from enigma import eTimer
-from sys import maxint
+from os import sys
+from sys import maxsize
 
 LOGPATH="/hdd/"
 LOGFILE="hdmicec.log"
@@ -114,7 +115,7 @@ class HdmiCec:
 		self.volumeForwardingEnabled = False
 		self.volumeForwardingDestination = 0
 		self.wakeup_from_tv = False
-		eActionMap.getInstance().bindAction('', -maxint - 1, self.keyEvent)
+		eActionMap.getInstance().bindAction('', -maxsize - 1, self.keyEvent)
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value:
@@ -483,7 +484,7 @@ class HdmiCec:
 		if out:
 			send = ">"
 		opCode = ''
-		if cmdList.has_key(cmd):
+		if 'cmd' in cmdList:
 			opCode += "%s" % cmdList[cmd]
 		opCode += 30 * " "
 		return opCode[:28] + send + " "

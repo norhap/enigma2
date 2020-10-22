@@ -490,7 +490,7 @@ class CaidInfo2(Poll, Converter, object):
 				if ecm_mtime == old_ecm_mtime:
 					return info
 				old_ecm_mtime = ecm_mtime
-				ecmf = open("/tmp/ecm.info", "rb")
+				ecmf = open("/tmp/ecm.info", "r")
 				ecm = ecmf.readlines()
 			except:
 				old_ecm_mtime = None
@@ -581,13 +581,13 @@ class CaidInfo2(Poll, Converter, object):
 									item[1] = item[1][tt+1:]
 							info[item[0].strip().lower()] = item[1].strip()
 						else:
-							if not info.has_key("caid") or not info.has_key("CaID"):
+							if not 'caid' in info or not 'CaID' in info:
 								x = line.lower().find("caid")
 								if x != -1:
 									y = line.find(",")
 									if y != -1:
 										info["caid"] = line[x+5:y]
-							if not info.has_key("pid"):
+							if not 'pid' in info:
 								x = line.lower().find("pid")
 								if x != -1:
 									y = line.find(" =")

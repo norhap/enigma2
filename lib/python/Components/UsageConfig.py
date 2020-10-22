@@ -33,7 +33,7 @@ def InitUsageConfig():
 		refreshServiceList()
 	config.usage.alternative_number_mode.addNotifier(alternativeNumberModeChange)
 
-	config.usage.servicelist_twolines = ConfigYesNo(default = False)
+	config.usage.servicelist_twolines = ConfigSelection(default = "0", choices = [("0", _("Single line mode")), ("1", _("Two lines")), ("2", _("Two lines and next event"))])
 	config.usage.servicelist_twolines.addNotifier(refreshServiceList)
 
 	config.usage.hide_number_markers = ConfigYesNo(default = True)
@@ -338,10 +338,10 @@ def InitUsageConfig():
 	atsc_nims.insert(1,("-1", _("auto")))
 	config.usage.recording_frontend_priority_atsc = ConfigSelection(default = "-2", choices = atsc_nims)
 
-	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 1
-	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 1
-	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 1
-	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 1
+	SystemInfo["DVB-S_priority_tuner_available"] = len(dvbs_nims) > 3 and any(len(i) > 2 for i in (dvbt_nims, dvbc_nims, atsc_nims))
+	SystemInfo["DVB-T_priority_tuner_available"] = len(dvbt_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, atsc_nims))
+	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims))
+	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
 
 	config.misc.disable_background_scan = ConfigYesNo(default = False)
 	config.misc.use_ci_assignment = ConfigYesNo(default = False)
@@ -839,6 +839,13 @@ def InitUsageConfig():
 	config.epg.netmed = ConfigYesNo(default = False)
 	config.epg.virgin = ConfigYesNo(default = False)
 	config.epg.opentv = ConfigYesNo(default = False)
+	config.epg.saveepg = ConfigYesNo(default = True)
+
+	config.epg.maxdays = ConfigSelectionNumber(min = 1, max = 365, stepwidth = 1, default = 7, wraparound = True)
+	def EpgmaxdaysChanged(configElement):
+		from enigma import eEPGCache
+		eEPGCache.getInstance().setEpgmaxdays(config.epg.maxdays.getValue())
+	config.epg.maxdays.addNotifier(EpgmaxdaysChanged)
 
 	config.misc.epgratingcountry = ConfigSelection(default="", choices=[("", _("Auto Detect")), ("ETSI", _("Generic")), ("AUS", _("Australia"))])
 	config.misc.epggenrecountry = ConfigSelection(default="", choices=[("", _("Auto Detect")), ("ETSI", _("Generic")), ("AUS", _("Australia"))])

@@ -605,12 +605,12 @@ class NIM(object):
 		return self.internally_connectable
 
 	def setInternalLink(self):
-		if self.internally_connectable is not None:
+		if self.internally_connectable >= 0:
 			print("[NimManager] setting internal link on frontend id", self.frontend_id)
 			open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w").write("internal")
 
 	def removeInternalLink(self):
-		if self.internally_connectable is not None:
+		if self.internally_connectable >= 0:
 			print("[NimManager] removing internal link on frontend id", self.frontend_id)
 			open("/proc/stb/frontend/%d/rf_switch" % self.frontend_id, "w").write("external")
 
@@ -1050,7 +1050,7 @@ class NimManager:
 			nim = config.Nims[slotid]
 			configMode = nim.configMode.value
 
-			if any([self.nim_slots[slotid].isCompatible(x) for x in "DVB-S", "DVB-T", "DVB-C", "ATSC"]):
+			if any([self.nim_slots[slotid].isCompatible(x) for x in ("DVB-S", "DVB-T", "DVB-C", "ATSC")]):
 				return not (configMode == "nothing")
 
 	def getSatListForNim(self, slotid):

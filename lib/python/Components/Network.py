@@ -193,7 +193,12 @@ class Network:
 			# load ns only once
 			self.loadNameserverConfig()
 			print("[Network] read configured interface:", ifaces)
-			print("[Network] self.ifaces after loading:", self.ifaces)
+			# remove any password before info is printed to the debug log
+			safe_ifaces = self.ifaces.copy()
+			for intf in safe_ifaces:
+				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup'] is not False:
+					safe_ifaces[intf]['preup'] = re.sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
+			print("[Network] self.ifaces after loading:", safe_ifaces)
 			self.config_ready = True
 			self.msgPlugins()
 			if callback is not None:
@@ -623,9 +628,9 @@ class Network:
 		mask = 1L<<31
 		xnet = (1L<<32)-1
 		cidr_range = range(0, 32)
-		cidr = long(nmask)
+		cidr = int(nmask)
 		if cidr not in cidr_range:
-			print('[Network] cidr invalid: %d' % cidr)
+			print('[Network] cidr invalid: %str' % cidr)
 			return None
 		else:
 			nm = ((1L<<cidr)-1)<<(32-cidr)
@@ -635,7 +640,12 @@ class Network:
 	def msgPlugins(self):
 		if self.config_ready is not None:
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKCONFIG_READ):
-				p.__call__(reason=self.config_ready)
+				try:
+					p.__call__(reason=self.config_ready)
+				except:
+					print("[Network] Plugin caused exception at WHERE_NETWORKCONFIG_READ")
+					import traceback
+					traceback.print_exc()
 
 	def hotplug(self, event):
 		interface = event['INTERFACE']

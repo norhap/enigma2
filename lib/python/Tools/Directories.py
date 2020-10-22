@@ -2,7 +2,7 @@
 from __future__ import print_function
 import errno
 import inspect
-import os
+import os, sys
 
 from enigma import eEnv, getDesktop
 from re import compile
@@ -82,18 +82,18 @@ defaultPaths = {
 
 def resolveFilename(scope, base="", path_prefix=None):
 	# You can only use the ~/ if we have a prefix directory.
-	if base.startswith("~/"):
+	if str(base).startswith("~/"):
 		assert path_prefix is not None  # Assert only works in debug mode!
 		if path_prefix:
 			base = os.path.join(path_prefix, base[2:])
 		else:
 			print("[Directories] Warning: resolveFilename called with base starting with '~/' but 'path_prefix' is None!")
 	# Don't further resolve absolute paths.
-	if base.startswith("/"):
+	if str(base).startswith("/"):
 		return os.path.normpath(base)
 	# If an invalid scope is specified log an error and return None.
 	if scope not in defaultPaths:
-		print("[Directories] Error: Invalid scope=%d provided to resolveFilename!" % scope)
+		print("[Directories] Error: Invalid scope=%str provided to resolveFilename!" % scope)
 		return None
 	# Ensure that the defaultPaths directories that should exist do exist.
 	path, flag = defaultPaths.get(scope)

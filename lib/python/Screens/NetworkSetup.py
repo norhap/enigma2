@@ -69,7 +69,7 @@ class NSCommon:
 	def doInstall(self, callback, pkgname):
 		self.message = self.session.open(MessageBox,_("Please wait..."), MessageBox.TYPE_INFO, enable_input = False)
 		self.message.setTitle(_('Installing service'))
-		self.Console.ePopen('/usr/bin/opkg install ' + pkgname, callback)
+		self.Console.ePopen('/usr/bin/opkg install ' + pkgname + ' >/dev/null 2>&1', callback)
 
 	def checkNetworkState(self, str, retval, extra_args):
 		if 'Collected errors' in str:
@@ -145,20 +145,20 @@ class NetworkAdapterSelection(Screen,HelpableScreen):
 		self["key_blue"] = StaticText("")
 		self["introduction"] = StaticText(self.edittext)
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.close, _("Exit network interface list")),
 			"ok": (self.okbuttonClick, _("Select interface")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("Exit network interface list")),
 			"green": (self.okbuttonClick, _("Select interface")),
 			"blue": (self.openNetworkWizard, _("Use the network wizard to configure selected network adapter")),
 			})
 
-		self["DefaultInterfaceAction"] = HelpableActionMap(self, "ColorActions",
+		self["DefaultInterfaceAction"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"yellow": (self.setDefaultInterface, [_("Set interface as default Interface"),_("* Only available if more than one interface is active.")] ),
 			})
@@ -332,13 +332,13 @@ class NameserverSetup(Screen, ConfigListScreen, HelpableScreen):
 		self["introduction"] = StaticText(_("Press OK to activate the settings."))
 		self.createConfig()
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.cancel, _("Exit nameserver configuration")),
 			"ok": (self.ok, _("Activate current configuration")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.cancel, _("Exit nameserver configuration")),
 			"green": (self.add, _("Add a nameserver entry")),
@@ -413,13 +413,13 @@ class NetworkMacSetup(Screen, ConfigListScreen, HelpableScreen):
 
 		self["introduction"] = StaticText(_("Press OK to set the MAC address."))
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.cancel, _("Exit nameserver configuration")),
 			"ok": (self.ok, _("Activate current configuration")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.cancel, _("Exit MAC address configuration")),
 			"green": (self.ok, _("Activate MAC address configuration")),
@@ -492,13 +492,13 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 
 		self["introduction"] = StaticText(_("Enable or disable IPv6"))
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.cancel, _("Exit IPv6 configuration")),
 			"ok": (self.ok, _("Activate IPv6 configuration")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.cancel, _("Exit IPv6 configuration")),
 			"green": (self.ok, _("Activate IPv6 configuration")),
@@ -605,10 +605,10 @@ class InetdRecovery(Screen, ConfigListScreen):
 
 		ConfigListScreen.__init__(self, self.list)
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions", {
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"], {
 			"cancel": (self.close, _("Exit inetd recovery"))
 		})
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions", {
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"], {
 			"red": (self.close, _("Exit inetd recovery")),
 			"blue": (self.keyBlue, _("Recover inetd")),
 		})
@@ -686,13 +686,13 @@ class AdapterSetup(Screen, ConfigListScreen, HelpableScreen):
 
 		self.createConfig()
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.keyCancel, _("exit network adapter configuration")),
 			"ok": (self.keySave, _("activate network adapter configuration")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.keyCancel, _("exit network adapter configuration")),
 			"green": (self.keySave, _("activate network adapter configuration")),
@@ -1049,7 +1049,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self.errortext = _("No working wireless network interface found.\n Please verify that you have attached a compatible WLAN device or enable your local network interface.")
 		self.missingwlanplugintxt = _("The wireless LAN plugin is not installed!\nPlease install it.")
 
-		self["WizardActions"] = HelpableActionMap(self, "WizardActions",
+		self["WizardActions"] = HelpableActionMap(self, ["WizardActions"],
 			{
 			"up": (self.up, _("move up to previous entry")),
 			"down": (self.down, _("move down to next entry")),
@@ -1057,13 +1057,13 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			"right": (self.right, _("move down to last entry")),
 			})
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.close, _("exit networkadapter setup menu")),
 			"ok": (self.ok, _("select menu entry")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("exit networkadapter setup menu")),
 			})
@@ -1801,7 +1801,7 @@ class NetworkMountsMenu(Screen,HelpableScreen):
 		self["key_red"] = StaticText(_("Close"))
 		self["introduction"] = StaticText()
 
-		self["WizardActions"] = HelpableActionMap(self, "WizardActions",
+		self["WizardActions"] = HelpableActionMap(self, ["WizardActions"],
 			{
 			"up": (self.up, _("Move up to previous entry")),
 			"down": (self.down, _("Move down to next entry")),
@@ -1809,13 +1809,13 @@ class NetworkMountsMenu(Screen,HelpableScreen):
 			"right": (self.right, _("Move down to last entry")),
 			})
 
-		self["OkCancelActions"] = HelpableActionMap(self, "OkCancelActions",
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.close, _("Exit mounts setup menu")),
 			"ok": (self.ok, _("Select menu entry")),
 			})
 
-		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("Exit networkadapter setup menu")),
 			})
@@ -1877,11 +1877,11 @@ class NetworkMountsMenu(Screen,HelpableScreen):
 			callFnc = p.__call__["ifaceSupported"](self)
 			if callFnc is not None:
 				self.extended = callFnc
-				if p.__call__.has_key("menuEntryName"):
+				if 'menuEntryName' in p.__call__:
 					menuEntryName = p.__call__["menuEntryName"](self)
 				else:
 					menuEntryName = _('Extended setup...')
-				if p.__call__.has_key("menuEntryDescription"):
+				if 'menuEntryDescription' in p.__call__:
 					menuEntryDescription = p.__call__["menuEntryDescription"](self)
 				else:
 					menuEntryDescription = _('Extended network setup plugin...')

@@ -14752,8 +14752,8 @@ msgstr "Le permite habilitar log twisted en Carpeta tmp. Contiene información m
 msgid "Show two lines per entry"
 msgstr "Mostrar dos líneas por entrada"
 
-msgid "Show service name and event description among each other instead of side by side."
-msgstr "Mostrar el nombre del canal y la descripción del evento uno debajo del otro."
+msgid "Show the service information on two lines in the channel selection screen. You can choose between the current event description below the channel name, or the current event description next to the channel name, and the next event description on the second line."
+msgstr "Muestra la información del servicio en dos líneas en la pantalla de selección de canal. Puede elegir entre la descripción del evento actual debajo del nombre del canal, o la descripción del evento actual junto al nombre del canal y la descripción del evento siguiente en la segunda línea."
 
 msgid "Timezone area"
 msgstr "Area zona horaria"

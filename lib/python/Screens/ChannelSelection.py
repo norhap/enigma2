@@ -1783,7 +1783,7 @@ class ChannelSelectionBase(Screen):
 
 	def toggleTwoLines(self):
 		if config.usage.setup_level.index > 1 and not self.pathChangeDisabled and self.servicelist.mode == self.servicelist.MODE_FAVOURITES:
-			config.usage.servicelist_twolines.value = not config.usage.servicelist_twolines.value
+			config.usage.servicelist_twolines.selectNext()
 			config.usage.servicelist_twolines.save()
 		else:
 			return 0
@@ -2116,6 +2116,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 					self.startRoot = None
 					self.correctChannelNumber()
 					self.movemode and self.toggleMoveMode()
+					self.bouquet_mark_edit != OFF and self.endMarkedEdit(True)
 					self.editMode = False
 					self.protectContextMenu = True
 					self.close(ref)
@@ -2392,6 +2393,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.asciiOff()
 		self.zapBack()
 		self.correctChannelNumber()
+		self.movemode and self.toggleMoveMode()
+		self.bouquet_mark_edit != OFF and self.endMarkedEdit(True)
 		self.editMode = False
 		self.protectContextMenu = True
 		self.close(None)
@@ -2514,7 +2517,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 ########## RDS Radiotext / Rass Support BEGIN
 		self.infobar = infobar # reference to real infobar (the one and only)
 		self["RdsDecoder"] = self.info["RdsDecoder"]
-		self["RdsActions"] = HelpableActionMap(self, "InfobarRdsActions",
+		self["RdsActions"] = HelpableActionMap(self, ["InfobarRdsActions"],
 		{
 			"startRassInteractive": (self.startRassInteractive, _("View Rass interactive..."))
 		},-1)

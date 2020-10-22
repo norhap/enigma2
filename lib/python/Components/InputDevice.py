@@ -3,6 +3,11 @@ from __future__ import print_function
 from Components.config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
 from enigma import getBoxType, getBoxBrand
 from Components.SystemInfo import SystemInfo
+import errno
+import xml.etree.cElementTree
+from enigma import eRCInput
+from keyids import KEYIDS
+from Components.RcModel import rc_model
 from fcntl import ioctl
 import os
 import struct
@@ -51,7 +56,7 @@ class inputDevices:
 				self.name = ioctl(self.fd, EVIOCGNAME(256), buffer)
 				self.name = self.name[:self.name.find("\0")]
 				os.close(self.fd)
-			except (IOError,OSError), err:
+			except (IOError,OSError) as err:
 				print("[InputDevice] getInputDevices " + evdev + " <ERROR: ioctl(EVIOCGNAME): " + str(err) + " >")
 				self.name = None
 

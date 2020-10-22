@@ -40,7 +40,7 @@ def getFPVersion():
 		elif getBoxType().startswith("dm9") or getBoxType().startswith("dm52"):
 			ret = open("/proc/stb/fp/version", "r").read()
 		else:
-			ret = long(open("/proc/stb/fp/version", "r").read())
+			ret = int(open("/proc/stb/fp/version", "r").read())
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
@@ -96,7 +96,7 @@ def setRTCtime(wutime):
 def getFPWakeuptime():
 	ret = 0
 	try:
-		ret = long(open("/proc/stb/fp/wakeup_time", "r").read())
+		ret = int(open("/proc/stb/fp/wakeup_time", "r").read())
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
