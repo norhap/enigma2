@@ -24,7 +24,10 @@ from Components.GUIComponent import GUIComponent
 import skin, os, re, urllib2, sys, boxbranding
 from Components.Console import Console
 from Tools.Geolocation import geolocation
-import urllib2
+try:
+	import urllib2
+except:
+	import urllib
 import six
 
 URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
