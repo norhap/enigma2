@@ -31,6 +31,8 @@ from Components.MenuList import MenuList
 # Timer
 from enigma import eTimer
 
+import six
+
 defaultInhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/var"]
 
 class LocationBox(Screen, NumericalTextInput, HelpableScreen):
@@ -489,7 +491,10 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 		# Get char and append to text
 		char = self.getKey(number)
-		self.quickselect = self.quickselect[:self.curr_pos] + unicode(char)
+		if six.PY2:
+			self.quickselect = self.quickselect[:self.curr_pos] + unicode(char)
+		else:
+			self.quickselect = self.quickselect[:self.curr_pos] + char
 
 		# Start Timeout
 		self.qs_timer_type = 0
