@@ -47,13 +47,13 @@ class SetupSummary(Screen):
 		self.onHide.append(self.removeWatcher)
 
 	def addWatcher(self):
-		if hasattr(self.parent,"onChangedEntry"):
+		if hasattr(self.parent, "onChangedEntry"):
 			self.parent.onChangedEntry.append(self.selectionChanged)
 			self.parent["config"].onSelectionChanged.append(self.selectionChanged)
 			self.selectionChanged()
 
 	def removeWatcher(self):
-		if hasattr(self.parent,"onChangedEntry"):
+		if hasattr(self.parent, "onChangedEntry"):
 			self.parent.onChangedEntry.remove(self.selectionChanged)
 			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
 
