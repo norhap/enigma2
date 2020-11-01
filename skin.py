@@ -17,9 +17,7 @@ from Tools.LoadPixmap import LoadPixmap
 import six
 
 if six.PY2:
-DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "Vision-Turquoise-HD/skin.xml" or "PLi-FullNightHD/skin.xml"
-else:
-	DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "PLi-FullNightHD" or "PLi-HD/skin.xml"
+	DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "Vision-Turquoise-HD/skin.xml" or "OctEtFHD/skin.xml"
 EMERGENCY_SKIN = "skin_default/skin.xml"
 EMERGENCY_NAME = "Stone II"
 DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
