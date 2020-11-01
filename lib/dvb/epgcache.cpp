@@ -1042,7 +1042,7 @@ next:
 				}
 			}
 			{
-				CFile f("/media/hdd/time_map.txt", "w+");
+				CFile f("/media/hdd/time_map", "w+");
 				int i = 0;
 				for (timeMap::iterator it(servicemap.byTime.begin()); it != servicemap.byTime.end(); ++it )
 				{
@@ -1368,7 +1368,9 @@ void eEPGCache::load()
 {
 	if (m_filename.empty())
 		m_filename = "/media/hdd/epg.dat";
-	const char* EPGDAT = m_filename.c_str();
+	std::vector<char> vEPGDAT(m_filename.begin(), m_filename.end());
+	vEPGDAT.push_back('\0');
+	const char* EPGDAT = &vEPGDAT[0];
 	std::string filenamex = m_filename + ".loading";
 	std::vector<char> vEPGDATX(filenamex.begin(), filenamex.end());
 	vEPGDATX.push_back('\0');
