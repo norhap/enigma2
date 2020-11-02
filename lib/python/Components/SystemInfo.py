@@ -117,7 +117,7 @@ SystemInfo["Has2160p"] = fileHas("/proc/stb/video/videomode_preferred","2160p50"
 SystemInfo["HasYPbPr"] = getHaveYUV() == "True"
 SystemInfo["HasScart"] = getHaveSCART() == "True"
 SystemInfo["HasSVideo"] = model == "dm8000"
-SystemInfo["HasComposite"] = getHaveRCA() == "True"
+SystemInfo["HasComposite"] = model not in ("i55", "gbquad4k", "gbue4k", "hd1500", "osnino", "osninoplus", "purehd", "purehdse", "revo4k", "vusolo4k", "vuzero4k", "vuduo4k", "vuduo4kse", "vuuno4k", "vuuno4kse", "vuultimo4k",)
 SystemInfo["HasAutoVolume"] = fileExists("/proc/stb/audio/avl_choices") and fileCheck("/proc/stb/audio/avl")
 SystemInfo["HasAutoVolumeLevel"] = fileExists("/proc/stb/audio/autovolumelevel_choices") and fileCheck("/proc/stb/audio/autovolumelevel")
 SystemInfo["Has3DSurround"] = fileExists("/proc/stb/audio/3d_surround_choices") and fileCheck("/proc/stb/audio/3d_surround")
