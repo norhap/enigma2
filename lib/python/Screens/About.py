@@ -858,13 +858,6 @@ class CommitInfo(Screen):
         self.setTitle(self.setup_title)
         self["novedades"] = ScrollLabel()
 
-		self["lab1"] = StaticText(_("OpenVision"))
-		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
-		self["lab3"] = StaticText(_("Report problems to:"))
-		self["lab4"] = StaticText(_("https://openvision.tech"))
-		self["lab5"] = StaticText(_("Sources are available at:"))
-		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-
         self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"],
             {
             "cancel" : self.cerrar,
@@ -875,6 +868,13 @@ class CommitInfo(Screen):
             "right": self["novedades"].pageDown,
             })
         self['novedades'].setText(novedades(URL))
+
+	self["lab1"] = StaticText(_("OpenVision"))
+	self["lab2"] = StaticText(_("Lets define enigma2 once more"))
+	self["lab3"] = StaticText(_("Report problems to:"))
+	self["lab4"] = StaticText(_("https://openvision.tech"))
+	self["lab5"] = StaticText(_("Sources are available at:"))
+	self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
     def cerrar(self):
         self.close()
