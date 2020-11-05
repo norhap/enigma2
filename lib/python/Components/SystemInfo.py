@@ -92,9 +92,9 @@ SystemInfo["LcdLiveDecoder"] = fileCheck("/proc/stb/lcd/live_decoder")
 SystemInfo["FastChannelChange"] = False
 SystemInfo["3DMode"] = fileCheck("/proc/stb/fb/3dmode") or fileCheck("/proc/stb/fb/primary/3d")
 SystemInfo["3DZNorm"] = fileCheck("/proc/stb/fb/znorm") or fileCheck("/proc/stb/fb/primary/zoffset")
-SystemInfo["Blindscan_t2_available"] = brand == "vuplus"
-SystemInfo["RcTypeChangable"] = model not in ("et8500","et7x00") and pathExists("/proc/stb/ir/rc/type")
-SystemInfo["HasFullHDSkinSupport"] = model not in ("et4x00","et5x00","sh1","hd500c","hd1100","xp1000","lc") and brand not in ("minix","hardkernel")
+SystemInfo["Blindscan_t2_available"] = fileCheck("/proc/stb/info/vumodel") and model.startswith("vu")
+SystemInfo["RcTypeChangable"] = not(model.startswith("et8500") or model.startswith("et7")) and pathExists("/proc/stb/ir/rc/type")
+SystemInfo["HasFullHDSkinSupport"] = model not in ("et4000", "et5000", "sh1", "hd500c", "hd1100", "xp1000", "lc")
 SystemInfo["HasBypassEdidChecking"] = fileCheck("/proc/stb/hdmi/bypass_edid_checking")
 SystemInfo["HasColorspace"] = fileCheck("/proc/stb/video/hdmi_colorspace")
 SystemInfo["HasColorspaceSimple"] = SystemInfo["HasColorspace"] and model in ("vusolo4k","vuuno4k","vuuno4kse","vuultimo4k","vuduo4k","vuduo4kse")
