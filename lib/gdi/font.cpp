@@ -678,8 +678,10 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 	singleLock s(ftlock);
 
 	if (!current_font)
+	{
+		eWarning("[eTextPara] renderString: No current_font!");
 		return -1;
-
+	}
 	if ((FTC_Manager_LookupFace(fontRenderClass::instance->cacheManager,
 				current_font->scaler.face_id,
 				&current_face) < 0) ||
@@ -688,6 +690,16 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 				&current_font->size) < 0))
 	{
 		eDebug("[eTextPara] renderString: FTC_Manager_Lookup_Size current_font failed!");
+		return -1;
+	}
+	if (!current_face)
+	{
+		eWarning("[eTextPara] renderString: No current_face!");
+		return -1;
+	}
+	if (!current_face->size)
+	{
+		eWarning("[eTextPara] renderString: No current_face->size!");
 		return -1;
 	}
 
