@@ -10189,6 +10189,9 @@ msgstr "Mostrar posición del motor"
 msgid "Show record indicator"
 msgstr "Mostrar indicador de grabación"
 
+msgid "Show screen path"
+msgstr "Mostrar ruta en Pantalla"
+
 msgid "Show screensaver"
 msgstr "Mostrar salvapantallas"
 
@@ -16298,3 +16301,9 @@ msgstr "Requiere conexión a internet."
 
 msgid "Are you sure to delete image:"
 msgstr "Estás seguro de eliminar la imagen:"
+
+msgid "You can select the skin of virtual keyboard."
+msgstr "Puede seleccionar el skin del teclado virtual."
+
+msgid "Virtual keyboard skin"
+msgstr "Teclado virtual en skin"
