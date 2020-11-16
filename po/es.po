@@ -16307,3 +16307,6 @@ msgstr "Puede seleccionar el skin del teclado virtual."
 
 msgid "Virtual keyboard skin"
 msgstr "Teclado virtual en skin"
+
+msgid "Humidity :"
+msgstr "Humedad :"
