@@ -16310,3 +16310,12 @@ msgstr "Teclado virtual en skin"
 
 msgid "Humidity :"
 msgstr "Humedad :"
+
+msgid "Lets define enigma2 once more"
+msgstr "Definamos enigma2 una vez más"
+
+msgid "Report problems to:"
+msgstr "Reportar problemas a:"
+
+msgid "Sources are available at:"
+msgstr "Fuentes disponibles en:"
