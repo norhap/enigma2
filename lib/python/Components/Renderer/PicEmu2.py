@@ -4,7 +4,7 @@ from Components.Renderer.Renderer import Renderer
 from enigma import iServiceInformation
 from string import upper
 from enigma import ePixmap
-from Tools.Directories import fileExists, SCOPE_CURRENT_SKIN, resolveFilename
+from Tools.Directories import fileExists, fileHas, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Element import cached
 from Components.Converter.Poll import Poll
 import os
@@ -123,11 +123,11 @@ class PicEmu2(Renderer, Poll):
 									## Should write name be small letters
 									if ("ncam" in value):
 										sname = "ncam"
-									elif ("oscam" in value):
+									elif fileHas("/tmp/ecm.info","caid:"):
 										sname = "oscam"
 									elif ("mgcamd" in value):
 										sname = "Mgcamd"
-									elif ("wicard" in value or "wicardd" in value):
+									elif fileHas("/tmp/ecm.info","CAID:"):
 										sname = "Wicardd"
 									elif ("gbox" in value):
 										sname = "Gbox"
