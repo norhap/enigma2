@@ -15327,7 +15327,7 @@ msgid "Share View"
 msgstr "Ver shares"
 
 msgid "Extended Shares"
-msgstr "shares extendidos"
+msgstr "Extender Compartidos"
 
 msgid "Local box"
 msgstr "CCcam.cfg receptor"
@@ -16168,7 +16168,7 @@ msgid "Zap key delay for channel number input"
 msgstr "Retardo de tecla Zap para entrada de número de canal"
 
 msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
-msgstr "En la vista en vivo, espere estos segundos después de presionar una tecla numérica antes de asumir que se ha ingresado el número de canal requerido. Predeterminado: 5 segundos. Establecer cero requerirá confirmación con 'OK'."
+msgstr "En la vista en vivo, espere estos segundos después de presionar una tecla numérica antes de asumir que se ha ingresado el número de canal requerido. Predeterminado: 5 segundos. Establecer cero requerirá confirmación con 'OK'. "
 
 msgid "Load unlinked user bouquets"
 msgstr "Cargar bouquets de usuarios no vinculados"
@@ -16319,3 +16319,6 @@ msgstr "Reportar problemas a:"
 
 msgid "Sources are available at:"
 msgstr "Fuentes disponibles en:"
+
+msgid "Uptime:"
+msgstr "Receptor iniciado desde hace:"
