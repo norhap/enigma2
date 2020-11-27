@@ -1,9 +1,11 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from os import path
 from fcntl import ioctl
 from struct import pack, unpack
-from time import time, localtime
-from enigma import getBoxType, getBoxBrand
+from time import time, localtime, gmtime
+from enigma import getBoxType
 from Components.SystemInfo import SystemInfo
 from Tools.Directories import fileExists
 
@@ -35,22 +37,16 @@ def getBoxProc():
 def getFPVersion():
 	ret = None
 	try:
-		if getBoxBrand() == "blackbox" and fileExists("/proc/stb/info/micomver"):
-			ret = open("/proc/stb/info/micomver", "r").read()
-		elif getBoxType().startswith("dm9") or getBoxType().startswith("dm52"):
-			ret = open("/proc/stb/fp/version", "r").read()
-		else:
-			ret = int(open("/proc/stb/fp/version", "r").read())
+		ret = int(open("/proc/stb/fp/version", "r").read())
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ret = ioctl(fp.fileno(),0)
-			fp.close()
 		except IOError:
 			try:
 				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
 			except:
-				print("[StbHardware] getFPVersion failed!")
+				print("getFPVersion failed!")
 	return ret
 
 def setFPWakeuptime(wutime):
