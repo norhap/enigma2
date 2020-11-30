@@ -2279,7 +2279,7 @@ class InfoBarExtensions:
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
-		if fileExists ("/tmp/.oscam") and not fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/var/tmp/ncam.pid"):
+		if fileExists ("/var/log/oscam.log") and not fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/var/tmp/ncam.pid"):
 			return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
 		else:
 			return []

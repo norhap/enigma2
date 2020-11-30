@@ -219,8 +219,8 @@ class OscamInfo:
 		else:
 			return True, data
 
-	def readXML(self, typ):
-		if typ == "l":
+	def readXML(self, type):
+		if type == "l":
 			self.showLog = True
 			part = "status&appendlog=1"
 		else:
@@ -232,7 +232,7 @@ class OscamInfo:
 		if result[0]:
 			if not self.showLog:
 				data = ElementTree.XML(result[1])
-#				if typ=="version":
+#				if type=="version":
 #					if "version" in data.attrib:
 #						self.version = data.attrib["version"]
 #					else:
@@ -290,21 +290,21 @@ class OscamInfo:
 					tmp = result[1].replace("<log>", "<log><![CDATA[").replace("</log>", "]]></log>")
 				else:
 					tmp = result[1]
-				data = ElementTree.XML(tmp)
+				data = ElementTree.XML(result[1])
 				log = data.find("log")
 				logtext = log.text
-			if typ == "s":
+			if type == "s":
 				if "r" in tmp:
 					for i in tmp["r"]:
 						retval.append(i)
 				if "p" in tmp:
 					for i in tmp["p"]:
 						retval.append(i)
-			elif typ == "c":
+			elif type == "c":
 				if "c" in tmp:
 					for i in tmp["c"]:
 						retval.append(i)
-			elif typ == "l":
+			elif type == "l":
 				tmp = logtext.split("\n")
 				retval = []
 				for i in tmp:
@@ -660,7 +660,7 @@ class oscInfo(Screen, OscamInfo):
 		self.firstrun = True
 		self.listchange = True
 		self.scrolling = False
-		self.webif_data = self.readXML(typ = self.what)
+		self.webif_data = self.readXML(type = self.what)
 		ypos = 10
 		ysize = 350
 		self.rows = 12
@@ -836,7 +836,7 @@ class oscInfo(Screen, OscamInfo):
 			data = self.webif_data
 			self.firstrun = False
 		else:
-			data = self.readXML(typ = self.what)
+			data = self.readXML(type = self.what)
 		self.out = []
 		self.itemheight = 25
 		if not isinstance(data, str):
@@ -1017,8 +1017,7 @@ class oscEntitlements(Screen, OscamInfo):
 			csystem = i.attrib["system"]
 			creshare = i.attrib["reshare"]
 			if not host_ok:
-				hostadr = i.find("hostaddress").text
-			chop = int(i.attrib["hop"])
+				chop = int(i.attrib["hop"])
 			if chop > 5:
 				chop = 5
 			if "ccaid" in caid:
@@ -1052,7 +1051,7 @@ class oscEntitlements(Screen, OscamInfo):
 		else:
 			self["output"].setStyle("default")
 		self["output"].setList(result)
-		title = [ _("Reader"), self.cccamreader, _("Cards:"), cardTotal, _("Server:"), hostadr ]
+		title = [ _("Reader"), self.cccamreader, _("Cards:"), cardTotal, _("Server:") ]
 		self.setTitle( " ".join(title))
 
 class oscReaderStats(Screen, OscamInfo):
