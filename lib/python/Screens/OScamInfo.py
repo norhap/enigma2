@@ -219,8 +219,8 @@ class OscamInfo:
 		else:
 			return True, data
 
-	def readXML(self, type):
-		if type == "l":
+	def readXML(self, typ):
+		if typ == "l":
 			self.showLog = True
 			part = "status&appendlog=1"
 		else:
@@ -232,7 +232,7 @@ class OscamInfo:
 		if result[0]:
 			if not self.showLog:
 				data = ElementTree.XML(result[1])
-#				if type=="version":
+#				if typ=="version":
 #					if "version" in data.attrib:
 #						self.version = data.attrib["version"]
 #					else:
@@ -293,18 +293,18 @@ class OscamInfo:
 				data = ElementTree.XML(result[1])
 				log = data.find("log")
 				logtext = log.text
-			if type == "s":
+			if typ == "s":
 				if "r" in tmp:
 					for i in tmp["r"]:
 						retval.append(i)
 				if "p" in tmp:
 					for i in tmp["p"]:
 						retval.append(i)
-			elif type == "c":
+			elif typ == "c":
 				if "c" in tmp:
 					for i in tmp["c"]:
 						retval.append(i)
-			elif type == "l":
+			elif typ == "l":
 				tmp = logtext.split("\n")
 				retval = []
 				for i in tmp:
@@ -660,7 +660,7 @@ class oscInfo(Screen, OscamInfo):
 		self.firstrun = True
 		self.listchange = True
 		self.scrolling = False
-		self.webif_data = self.readXML(type = self.what)
+		self.webif_data = self.readXML(typ = self.what)
 		ypos = 10
 		ysize = 350
 		self.rows = 12
@@ -836,7 +836,7 @@ class oscInfo(Screen, OscamInfo):
 			data = self.webif_data
 			self.firstrun = False
 		else:
-			data = self.readXML(type = self.what)
+			data = self.readXML(typ = self.what)
 		self.out = []
 		self.itemheight = 25
 		if not isinstance(data, str):
@@ -1017,7 +1017,8 @@ class oscEntitlements(Screen, OscamInfo):
 			csystem = i.attrib["system"]
 			creshare = i.attrib["reshare"]
 			if not host_ok:
-				chop = int(i.attrib["hop"])
+				hostadr = i.find("hostaddress")
+			chop = int(i.attrib["hop"])
 			if chop > 5:
 				chop = 5
 			if "ccaid" in caid:

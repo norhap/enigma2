@@ -2357,7 +2357,7 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def openOScamInfo(self):
-	    if fileExists ("/tmp/.oscam") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","/tmp/.oscam/oscam.pid") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","version 1.20_svn") and not fileExists("/var/tmp/ncam.pid"):
+	    if fileExists ("/var/log/oscam.log") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","/tmp/.oscam/oscam.pid") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","OSCam") and not fileExists("/var/tmp/ncam.pid"):
 		from Screens.OScamInfo import OscamInfoMenu
 		self.session.open(OscamInfoMenu)
 
