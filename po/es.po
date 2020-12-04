@@ -16322,3 +16322,9 @@ msgstr "Fuentes disponibles en:"
 
 msgid "Uptime:"
 msgstr "Receptor iniciado desde hace:"
+
+msgid "Mobile: "
+msgstr "Móvil: "
+
+msgid "Public IP: "
+msgstr "IP Pública: "
