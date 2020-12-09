@@ -32,7 +32,7 @@ import six
 
 URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
 
-def novedades(url):
+def news(url):
     text = ""
     try:
         req = urllib2.Request(url)
@@ -208,7 +208,7 @@ class About(Screen):
 		self.session.open(TranslationInfo)
 
 	def showCommits(self):
-		self.session.open(CommitInfo)
+		self.session.open(CommitInfoDevelop)
 
 	def showMemoryInfo(self):
 		self.session.open(MemoryInfo)
@@ -843,25 +843,25 @@ class TranslationInfo(Screen):
 				"ok": self.close,
 			})
 
-class CommitInfo(Screen):
+class CommitInfoDevelop(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
         self.session = session
-        self.skinName = "CommitInfo"
+        self.skinName = "CommitInfoDevelop"
         self.setup_title = _("Novedades Alvaro")
         self.setTitle(self.setup_title)
-        self["novedades"] = ScrollLabel()
+        self["news"] = ScrollLabel()
 
         self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"],
             {
             "cancel" : self.cerrar,
             "ok" : self.cerrar,
-            "up": self["novedades"].pageUp,
-            "down": self["novedades"].pageDown,
-            "left": self["novedades"].pageUp,
-            "right": self["novedades"].pageDown,
+            "up": self["news"].pageUp,
+            "down": self["news"].pageDown,
+            "left": self["news"].pageUp,
+            "right": self["news"].pageDown,
             })
-        self['novedades'].setText(novedades(URL))
+        self['news'].setText(news(URL))
 
 	self["lab1"] = StaticText(_("OpenVision"))
 	self["lab2"] = StaticText(_("Lets define enigma2 once more"))
