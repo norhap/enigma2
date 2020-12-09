@@ -5,7 +5,6 @@ from enigma import eListbox, eListboxPythonConfigContent, eRCInput, eTimer
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
 import skin
-from xml.etree import ElementTree
 
 class ConfigList(GUIComponent, object):
 	def __init__(self, list, session=None):

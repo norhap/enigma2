@@ -287,10 +287,8 @@ class OscamInfo:
 				else:
 					cdata = 'b"<![CDATA"'
 				if cdata not in result[1]:
-					tmp = result[1].replace("<log>", "<log><![CDATA[").replace("</log>", "]]></log>")
-				else:
 					tmp = result[1]
-				data = ElementTree.XML(result[1])
+				data = ElementTree.XML(tmp)
 				log = data.find("log")
 				logtext = log.text
 			if typ == "s":
