@@ -76,6 +76,10 @@ if GBTRIO4K
 dist_install_DATA = rc_models.cfg gb3.png gb3.xml
 endif
 
+if GBIP4K
+dist_install_DATA = rc_models.cfg gb3.png gb3.xml
+endif
+
 if HARDKERNEL
 dist_install_DATA = rc_models.cfg hardkernel.png hardkernel.xml
 endif

@@ -28,6 +28,10 @@ def getBoxProc():
 			procmodel = "Xpeed-LX3"
 		elif fileExists("/etc/modules-load.d/_osmio4kplus.conf"):
 			procmodel = "OS mio+ 4K"
+		elif fileExists("/etc/modules-load.d/_gbtrio4k.conf"):
+			procmodel = "GB TRIO 4K"
+		elif fileExists("/etc/modules-load.d/_gbip4k.conf"):
+			procmodel = "GB IP 4K"
 		else:
 			procmodel = open("/proc/stb/info/model", "r").readline().strip().lower()
 	except IOError:

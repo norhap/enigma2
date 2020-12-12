@@ -69,6 +69,8 @@ class HardwareInfo:
 			self.device_brand = "Atemio"
 		elif self.device_model.startswith(("os")):
 			self.device_brand = "Edision"
+		elif self.device_model.startswith(("gb")):
+			self.device_brand = "GigaBlue"
 
 			self.device_model = self.device_model or self.device_name
 			self.device_hw = self.device_model
