@@ -72,8 +72,8 @@ if HD51
 dist_install_DATA = rc_models.cfg ax4.png ax4.xml ax51.png ax51.xml hd1100.png hd1100.xml hd2400.png hd2400.xml hd530c.png hd530c.xml hd60.png hd60.xml
 endif
 
-if GIGABLUE
-dist_install_DATA = rc_models.cfg gb0.png gb0.xml gb1.png gb1.xml gb2.png gb2.xml gb3.png gb3.xml gb4.png gb4.xml
+if GBTRIO4K
+dist_install_DATA = rc_models.cfg gb3.png gb3.xml
 endif
 
 if HARDKERNEL

@@ -435,7 +435,7 @@ AM_CONDITIONAL(OSMIO4KPLUS, test `echo "$BOXTYPE" | cut -b 1-11` == "osmio4kplus
 AM_CONDITIONAL(ENTWOPIA, test "$BOXBRAND" == "entwopia")
 AM_CONDITIONAL(FORMULER, test "$BOXBRAND" == "formuler")
 AM_CONDITIONAL(HD51, test `echo "$BOXTYPE" | cut -b 1-4` == "hd51")
-AM_CONDITIONAL(GIGABLUE, test "$BOXBRAND" == "gigablue")
+AM_CONDITIONAL(GBTRIO4K, test `echo "$BOXTYPE" | cut -b 1-8` == "gbtrio4k")
 AM_CONDITIONAL(HARDKERNEL, test "$BOXBRAND" == "hardkernel")
 AM_CONDITIONAL(HYPERCUBE, test "$BOXBRAND" == "hypercube")
 AM_CONDITIONAL(ATEMIONEMESIS, test `echo "$BOXTYPE" | cut -b 1-13` == "atemionemesis")
