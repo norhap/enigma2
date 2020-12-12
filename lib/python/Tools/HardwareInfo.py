@@ -85,9 +85,9 @@ class HardwareInfo:
 			self.machine_name = self.device_model
 
 		if self.device_revision:
-			self.device_string = "%s (%s-%s)" % (self.device_hw, self.device_revision, self.device_version)
+			self.device_string = "%s (%s-%s)" % (self.device_model, self.device_revision, self.device_version)
 		elif self.device_version:
-			self.device_string = "%s (%s)" % (self.device_hw, self.device_version)
+			self.device_string = "%s (%s)" % (self.device_model, self.device_version)
 		else:
 			self.device_string = self.device_hw
 
