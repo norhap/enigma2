@@ -348,7 +348,7 @@ class Session:
 
 	def open(self, screen, *arguments, **kwargs):
 		if self.dialog_stack and not self.in_exec:
-			raise RuntimeError("modal open are allowed only from a screen which is modal!")
+			raise BaseException
 			# ...unless it's the very first screen.
 
 		self.pushCurrent()
