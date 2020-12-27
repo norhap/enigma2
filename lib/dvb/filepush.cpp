@@ -39,15 +39,6 @@ eFilePushThread::~eFilePushThread()
 
 void eFilePushThread::thread()
 {
-	struct sigaction action;
-
-	/* we set the signal to not restart syscalls, so we can detect our signal.
-	 * SIGUSR1 is used to signal stopping from the parent thread */
-
-	action.sa_handler = global_signal_SIGUSR1_handler;
-	action.sa_flags = 0;
-	sigaction(SIGUSR1, &action, 0);
-
 	hasStarted(); /* "start()" blocks until we get here */
 //	cXineLib *xineLib = cXineLib::getInstance();	--->	 [rpi] to be replaced with omx
 	setIoPrio(IOPRIO_CLASS_BE, 0);
@@ -518,8 +509,6 @@ int eFilePushThreadRecorder::read_dmx(int fd, void *m_buffer, int size)
 void eFilePushThreadRecorder::thread()
 {
 	struct pollfd pfd;
-	struct timespec timeout;
-	sigset_t sigset;
 	int result;
 	int bytes;
 
@@ -527,23 +516,7 @@ void eFilePushThreadRecorder::thread()
 
 	eDebug("[eFilePushThreadRecorder] THREAD START");
 
-	/* block SIGUSR1 in this thread so it's delayed until the ppoll()
-	 * call where it will be handled. ppoll() will lift the block
-	 * momentarily and atomically, preventing a race condition */
-
-	sigemptyset(&sigset);
-	sigaddset(&sigset, SIGUSR1);
-	pthread_sigmask(SIG_BLOCK, &sigset, (sigset_t *)0);
-
-	hasStarted(); /* "start()" blocks until we get here */
-
-	if (m_protocol == _PROTO_RTSP_TCP)
-	{
-		int flags = fcntl(m_fd_source, F_GETFL, 0);
-		flags |= O_NONBLOCK;
-		if (fcntl(m_fd_source, F_SETFL, flags) == -1)
-			eDebug("[eFilePushThread] failed setting DMX handle %d in non-blocking mode, error %d: %s", m_fd_source, errno, strerror(errno));
-	}
+	hasStarted();
 
 	/* m_stop must be evaluated after each syscall */
 	/* if it isn't, there's a chance of the thread becoming deadlocked when recordings are finishing */
@@ -556,18 +529,8 @@ void eFilePushThreadRecorder::thread()
 		pfd.fd = m_fd_source;
 		pfd.events = POLLIN;
 		pfd.revents = 0;
-		timeout.tv_sec = 0;
-		timeout.tv_nsec = 100 * 1000000;
-		sigemptyset(&sigset);
 
-		/* this ppoll call will all of: 1) enforce a short delay if there is nothing to be read
-		 * (see above comment), 2) check if something actually can be read without blocking and
-		 * 3) check whether a SIGUSR1 is pending.
-		 * This is required to prevent a race condition leading to a deadlock, where a signal
-		 * is sent by the parent, the signal is consumed by the call to poll() and so it
-		 * doesn't interrupt the read call, which will never complete. */
-
-		result = ppoll(&pfd, 1, &timeout, &sigset);
+		result = poll(&pfd, 1, 100);
 
 		if(result < 0)
 		{
