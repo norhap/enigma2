@@ -2,6 +2,7 @@ language: cpp
 
 sudo: required
 dist: bionic
+os: linux
 
 addons:
   apt:
@@ -34,7 +35,7 @@ addons:
 python:
   - "2.7"
 
-matrix:
+jobs:
   include:
     - os: linux
       addons:
