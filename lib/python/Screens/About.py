@@ -14,7 +14,7 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.StbHardware import getFPVersion, getBoxProc
-from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
+from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl, eDVBResourceManager
 from Components.Pixmap import MultiPixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
@@ -94,7 +94,17 @@ class About(Screen):
 		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
-		AboutText += _("DVB API: ") + about.getDVBAPI() + "\n"
+
+		numSlots = 0
+		dvbinformation = ""
+		nimSlots = nimmanager.getSlotCount()
+		for nim in range(nimSlots):
+			dvbinformation += eDVBResourceManager.getInstance().getFrontendCapabilities(nim)
+
+		dvbapiversion = ""
+		dvbapiversion = dvbinformation.splitlines()[0].replace("DVB API version: ", "").strip()
+		AboutText += _("DVB API version: ") + dvbapiversion + "\n"
+
 		if fileExists("/usr/bin/dvb-fe-tool"):
 			import time
 			try:
@@ -103,6 +113,11 @@ class About(Screen):
 				time.sleep(0.1)
 			except:
 				pass
+
+		if "MULTISTREAM" in dvbinformation:
+			AboutText += _("Multistream: ") + _("Yes") + "\n"
+		else:
+			AboutText += _("Multistream: ") + _("No") + "\n"
 		if fileExists("/tmp/dvbfetool.txt"):
 			if fileHas("/tmp/dvbfetool.txt","DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi"):
 				AboutText += _("DVB-S2X: ") + _("Yes") + "\n"
@@ -114,10 +129,12 @@ class About(Screen):
 				AboutText += _("DVB-T2/C: ") + _("Yes") + "\n"
 			if not fileHas("/tmp/dvbfetool.txt","DVB-T2"):
 				AboutText += _("DVB-Cable Box: ") + _("Yes") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","MULTISTREAM"):
-				AboutText += _("Multistream: ") + _("Yes") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBC/ANNEX_A"):
-				AboutText += _("DVBC_ANNEX-A: ") + _("Yes") + "\n"
+			if "DVBC_ANNEX_A" in dvbinformation:
+				AboutText += _("DVBC_ANNEX_A: ") + _("Yes") + "\n"
+			if "DVBC_ANNEX_B"  in dvbinformation:
+				AboutText += _("DVBC_ANNEX_B: ") + _("Yes") + "\n"
+			if "DVBC_ANNEX_C"  in dvbinformation:
+				AboutText += _("DVBC_ANNEX_C: ") + _("Yes") + "\n"
 
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
