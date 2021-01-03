@@ -1,73 +1,27 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from Screens.Screen import Screen
-from Components.ActionMap import NumberActionMap
-from Components.config import config, ConfigNothing, ConfigBoolean, ConfigSelection
-from Components.Label import Label
-from Components.SystemInfo import SystemInfo
-from Components.ConfigList import ConfigListScreen
-from Components.Pixmap import Pixmap
-from Components.Sources.StaticText import StaticText
-from Components.Sources.Boolean import Boolean
 from enigma import eEnv
-import xml.etree.cElementTree
-import six
+from six import PY2
+from xml.etree.cElementTree import parse
+
+from Components.ActionMap import NumberActionMap
+from Components.config import ConfigBoolean, ConfigNothing, ConfigSelection, config
+from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+from Components.Pixmap import Pixmap
+from Components.SystemInfo import SystemInfo
+from Components.Sources.Boolean import Boolean
+from Components.Sources.StaticText import StaticText
+from Screens.Screen import Screen
 
 # FIXME: use resolveFile!
 # Read the setupmenu.
 try:
 	# First we search in the current path.
-	setupfile = open("data/setup.xml", "r")
+	setupFile = open("data/setup.xml", "r")
 except (IOError, OSError) as err:
 	# If not found in the current path, we use the global datadir-path.
-	setupfile = open(eEnv.resolve("${datadir}/enigma2/setup.xml"), "r")
-setupdom = xml.etree.cElementTree.parse(setupfile)
-setupfile.close()
-
-def getConfigMenuItem(configElement):
-	for item in setupdom.getroot().findall("./setup/item/."):
-		if item.text == configElement:
-			return _(item.attrib["text"]), eval(configElement)
-	return "", None
-
-
-class SetupError(Exception):
-	def __init__(self, message):
-		self.msg = message
-
-	def __str__(self):
-		return self.msg
-
-
-class SetupSummary(Screen):
-	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent=parent)
-		self["SetupTitle"] = StaticText(parent.getTitle())
-		self["SetupEntry"] = StaticText("")
-		self["SetupValue"] = StaticText("")
-		self.onShow.append(self.addWatcher)
-		self.onHide.append(self.removeWatcher)
-
-	def addWatcher(self):
-		if hasattr(self.parent, "onChangedEntry"):
-			self.parent.onChangedEntry.append(self.selectionChanged)
-			self.parent["config"].onSelectionChanged.append(self.selectionChanged)
-			self.selectionChanged()
-
-	def removeWatcher(self):
-		if hasattr(self.parent, "onChangedEntry"):
-			self.parent.onChangedEntry.remove(self.selectionChanged)
-			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
-
-	def selectionChanged(self):
-		if SystemInfo["HasRootSubdir"]:
-		    self["SetupEntry"].text = self.parent.getCurrentEntry()
-		    self["SetupValue"].text = self.parent.getCurrentValue()
-		else:
-		    self["SetupEntry"].setText = self.parent.getCurrentEntry()
-		    self["SetupValue"].setText = self.parent.getCurrentValue()
-		if hasattr(self.parent,"getCurrentDescription") and "description" in self.parent:
-			self.parent["description"].text = self.parent.getCurrentDescription()
+	setupFile = open(eEnv.resolve("${datadir}/enigma2/setup.xml"), "r")
+setupdom = parse(setupFile)
+setupFile.close()
 
 class Setup(ConfigListScreen, Screen):
 	ALLOW_SUSPEND = True
@@ -77,16 +31,16 @@ class Setup(ConfigListScreen, Screen):
 		# For the skin: first try a setup_<setupID>, then Setup.
 		self.skinName = ["setup_" + setup, "Setup"]
 		self.list = []
-		self.force_update_list = False
+		self.forceUpdateList = False
 		xmldata = setupdom.getroot()
 		for x in xmldata.findall("setup"):
 			if x.get("key") == setup:
 				self.setup = x
 				break
-		if six.PY2:
-			self.setup_title = self.setup.get("title", "").encode("UTF-8")
+		if PY2:
+			self.setupTitle = self.setup.get("title", "").encode("UTF-8")
 		else:
-			self.setup_title = self.setup.get("title", "")
+			self.setupTitle = self.setup.get("title", "")
 		self.seperation = int(self.setup.get("separation", "0"))
 		# Check for list.entries > 0 else self.close.
 		self["key_red"] = StaticText(_("Cancel"))
@@ -103,7 +57,7 @@ class Setup(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		self.createSetupList()
 		self["config"].onSelectionChanged.append(self.__onSelectionChanged)
-		self.setTitle(_(self.setup_title))
+		self.setTitle(_(self.setupTitle))
 
 	def createSetupList(self):
 		currentItem = self["config"].getCurrent()
@@ -112,11 +66,11 @@ class Setup(ConfigListScreen, Screen):
 			if not x.tag:
 				continue
 			if x.tag == "item":
-				item_level = int(x.get("level", 0))
-				item_tuxtxtlevel = int(x.get("tt_level", 0))
-				if item_level > config.usage.setup_level.index:
+				itemLevel = int(x.get("level", 0))
+				itemTuxTxtLevel = int(x.get("tt_level", 0))
+				if itemLevel > config.usage.setup_level.index:
 					continue
-				if (item_tuxtxtlevel == 1) and (config.usage.tuxtxt_font_and_res.value != "expert_mode"):
+				if (itemTuxTxtLevel == 1) and (config.usage.tuxtxt_font_and_res.value != "expert_mode"):
 					continue
 				requires = x.get("requires")
 				if requires:
@@ -142,12 +96,12 @@ class Setup(ConfigListScreen, Screen):
 									break
 					if not meets:
 						continue
-				if six.PY2:
-					item_text = _(x.get("text", "??").encode("UTF-8"))
-					item_description = _(x.get("description", " ").encode("UTF-8"))
+				if PY2:
+					itemText = _(x.get("text", "??").encode("UTF-8"))
+					itemDescription = _(x.get("description", " ").encode("UTF-8"))
 				else:
-					item_text = _(x.get("text", "??"))
-					item_description = _(x.get("description", " "))
+					itemText = _(x.get("text", "??"))
+					itemDescription = _(x.get("description", " "))
 				b = eval(x.text or "")
 				if b == "":
 					continue
@@ -156,7 +110,7 @@ class Setup(ConfigListScreen, Screen):
 				# The first b is the item itself, ignored by the configList.
 				# The second one is converted to string.
 				if not isinstance(item, ConfigNothing):
-					self.list.append((item_text, item, item_description))
+					self.list.append((itemText, item, itemDescription))
 		self["config"].setList(self.list)
 		if config.usage.sort_settings.value:
 			self["config"].list.sort()
@@ -174,23 +128,60 @@ class Setup(ConfigListScreen, Screen):
 			self.createSetupList()
 
 	def __onSelectionChanged(self):
-		if self.force_update_list:
+		if self.forceUpdateList:
 			self["config"].onSelectionChanged.remove(self.__onSelectionChanged)
 			self.createSetupList()
 			self["config"].onSelectionChanged.append(self.__onSelectionChanged)
-			self.force_update_list = False
+			self.forceUpdateList = False
 		if not (isinstance(self["config"].getCurrent()[1], ConfigBoolean) or isinstance(self["config"].getCurrent()[1], ConfigSelection)):
-			self.force_update_list = True
+			self.forceUpdateList = True
+
+	def createSummary(self):
+		return SetupSummary
 
 	def run(self):
 		self.keySave()
 
+
+class SetupSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent=parent)
+		self["SetupTitle"] = StaticText(parent.getTitle())
+		self["SetupEntry"] = StaticText("")
+		self["SetupValue"] = StaticText("")
+		self.onShow.append(self.addWatcher)
+		self.onHide.append(self.removeWatcher)
+
+	def addWatcher(self):
+		if hasattr(self.parent, "onChangedEntry"):
+			self.parent.onChangedEntry.append(self.selectionChanged)
+			self.parent["config"].onSelectionChanged.append(self.selectionChanged)
+			self.selectionChanged()
+
+	def removeWatcher(self):
+		if hasattr(self.parent, "onChangedEntry"):
+			self.parent.onChangedEntry.remove(self.selectionChanged)
+			self.parent["config"].onSelectionChanged.remove(self.selectionChanged)
+
+	def selectionChanged(self):
+		self["SetupEntry"].text = self.parent.getCurrentEntry()
+		self["SetupValue"].text = self.parent.getCurrentValue()
+		if hasattr(self.parent, "getCurrentDescription") and "description" in self.parent:
+			self.parent["description"].text = self.parent.getCurrentDescription()
+
+def getConfigMenuItem(configElement):
+	for item in setupdom.getroot().findall("./setup/item/."):
+		if item.text == configElement:
+			return _(item.attrib["text"]), eval(configElement)
+	return "", None
+
 def getSetupTitle(id):
-	xmldata = setupdom.getroot()
-	for x in xmldata.findall("setup"):
+	xmlData = setupdom.getroot()
+	for x in xmlData.findall("setup"):
 		if x.get("key") == id:
-			if six.PY2:
+			if PY2:
 				return x.get("title", "").encode("UTF-8")
 			else:
 				return x.get("title", "")
-	raise SetupError("unknown setup id '%s'!" % repr(id))
+	print("[Setup] Error: Unknown setup id '%s'!" % repr(id))
+	return "Unknown setup id '%s'!" % repr(id)
