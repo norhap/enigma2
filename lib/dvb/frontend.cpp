@@ -1208,6 +1208,10 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	{
 		ret = (snr * 100) >> 8;
 	}
+	else if (!strcmp(m_description, "DVB-S2 NIM")) // Amiko Viper Twin / u42
+	{
+		ret = (int)(snr / 8);
+	}
 	else if (!strcmp(m_description, "ATBM781x"))
 	{
 		ret = snr*10;
@@ -1274,7 +1278,6 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		{
 			case feCable:
 				ret = (int)(snr / 15);
-				cab_max = 4200;
 				break;
 			case feTerrestrial:
 				ret = (int)(snr / 30);
@@ -1288,7 +1291,6 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 	}
 	else if (!strcmp(m_description, "CXD1981"))
 	{
-		eDVBFrontendParametersCable parm{};
 		int mse = (~snr) & 0xFF;
 		int type = -1;
 		oparm.getSystem(type);
@@ -1381,7 +1383,6 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 			case feTerrestrial:
 				ret = (int)(snr / 22.3);
-				ter_max = 2900;
 				break;
 		}
 	}
@@ -2943,6 +2944,7 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 			break;
 		case voltage13_5:
 			increased = true;
+			[[fallthrough]];
 		case voltage13:
 			vlt = SEC_VOLTAGE_13;
 			if(m_type == feTerrestrial)
@@ -2954,6 +2956,7 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 			break;
 		case voltage18_5:
 			increased = true;
+			[[fallthrough]];
 		case voltage18:
 			vlt = SEC_VOLTAGE_18;
 			break;
