@@ -29,7 +29,9 @@ eFilePushThread::eFilePushThread(int blocksize, size_t buffersize):
 eFilePushThread::~eFilePushThread()
 {
 	stop(); /* eThread is borked, always call stop() from d'tor */
-	free(m_buffer);
+	if (m_buffer) {
+		free(m_buffer);
+	}
 }
 
 static void signal_handler(int x)
@@ -56,206 +58,172 @@ void eFilePushThread::thread()
 
 	do
 	{
-	int eofcount = 0;
-	int buf_end = 0;
-	size_t bytes_read = 0;
-	off_t current_span_offset = 0;
-	size_t current_span_remaining = 0;
-	m_sof = 0;
+		int eofcount = 0;
+		int buf_end = 0;
+		size_t bytes_read = 0;
+		off_t current_span_offset = 0;
+		size_t current_span_remaining = 0;
+		m_sof = 0;
 
-	while (!m_stop)
-	{
-		if (m_sg && !current_span_remaining)
+		while (!m_stop)
 		{
-			m_sg->getNextSourceSpan(m_current_position, bytes_read, current_span_offset, current_span_remaining, m_blocksize, m_sof);
-			ASSERT(!(current_span_remaining % m_blocksize));
-			m_current_position = current_span_offset;
-			bytes_read = 0;
-		}
+			if (m_sg && !current_span_remaining)
+			{
+				m_sg->getNextSourceSpan(m_current_position, bytes_read, current_span_offset, current_span_remaining, m_blocksize, m_sof);
+				ASSERT(!(current_span_remaining % m_blocksize));
+				m_current_position = current_span_offset;
+				bytes_read = 0;
+			}
 
-		size_t maxread = m_buffersize;
+			size_t maxread = m_buffersize;
 
 			/* if we have a source span, don't read past the end */
-		if (m_sg && maxread > current_span_remaining)
-			maxread = current_span_remaining;
+			if (m_sg && maxread > current_span_remaining)
+				maxread = current_span_remaining;
 
 			/* align to blocksize */
-		maxread -= maxread % m_blocksize;
+			maxread -= maxread % m_blocksize;
 
-		if (maxread && !m_sof)
-		{
-#ifdef SHOW_WRITE_TIME
-			struct timeval starttime;
-			struct timeval now;
-			gettimeofday(&starttime, NULL);
-#endif
-			buf_end = m_source->read(m_current_position, m_buffer, maxread);
-#ifdef SHOW_WRITE_TIME
-			gettimeofday(&now, NULL);
-			suseconds_t diff = (1000000 * (now.tv_sec - starttime.tv_sec)) + now.tv_usec - starttime.tv_usec;
-			eDebug("[eFilePushThread] read %d bytes time: %9u us", buf_end, (unsigned int)diff);
-#endif
-		}
-		else
-			buf_end = 0;
-
-		if (buf_end < 0)
-		{
-			buf_end = 0;
-			/* Check m_stop after interrupted syscall. */
-			if (m_stop) {
-				break;
-			}
-			if (errno == EINTR || errno == EBUSY || errno == EAGAIN)
-				continue;
-			if (errno == EOVERFLOW)
+			if (maxread && !m_sof)
 			{
-				eWarning("[eFilePushThread] OVERFLOW while playback?");
-				continue;
+#ifdef SHOW_WRITE_TIME
+				struct timeval starttime;
+				struct timeval now;
+				gettimeofday(&starttime, NULL);
+#endif
+				buf_end = m_source->read(m_current_position, m_buffer, maxread);
+#ifdef SHOW_WRITE_TIME
+				gettimeofday(&now, NULL);
+				suseconds_t diff = (1000000 * (now.tv_sec - starttime.tv_sec)) + now.tv_usec - starttime.tv_usec;
+				eDebug("[eFilePushThread] read %d bytes time: %9u us", buf_end, (unsigned int)diff);
+#endif
 			}
-			eDebug("[eFilePushThread] read error: %m");
-			sleep(1);
-			sendEvent(evtReadError);
-			break;
-		}
+			else
+				buf_end = 0;
+
+			if (buf_end < 0)
+			{
+				buf_end = 0;
+				/* Check m_stop after interrupted syscall. */
+				if (m_stop)
+					break;
+				if (errno == EINTR || errno == EBUSY || errno == EAGAIN)
+					continue;
+				if (errno == EOVERFLOW)
+				{
+					eWarning("[eFilePushThread] OVERFLOW while playback?");
+					continue;
+				}
+				eDebug("[eFilePushThread] read error: %m");
+			}
 
 			/* a read might be mis-aligned in case of a short read. */
-		int d = buf_end % m_blocksize;
-		if (d)
-			buf_end -= d;
+			int d = buf_end % m_blocksize;
+			if (d)
+				buf_end -= d;
 
-		if (buf_end == 0 || m_sof == 1)
-		{
-#ifndef HAVE_ALIEN5
-				/* on EOF, try COMMITting once. */
-			if (m_send_pvr_commit)
+			if (buf_end == 0 || m_sof == 1)
 			{
-				struct pollfd pfd;
-				pfd.fd = m_fd_dest;
-				pfd.events = POLLIN;
-				switch (poll(&pfd, 1, 250)) // wait for 250ms
+				/* on EOF, try COMMITting once. */
+				if (m_send_pvr_commit)
 				{
-					case 0:
-						eDebug("[eFilePushThread] wait for driver eof timeout");
-						continue;
-					case 1:
-						eDebug("[eFilePushThread] wait for driver eof ok");
-						break;
-					default:
-						eDebug("[eFilePushThread] wait for driver eof aborted by signal");
-						/* Check m_stop after interrupted syscall. */
-						if (m_stop)
+					struct pollfd pfd;
+					pfd.fd = m_fd_dest;
+					pfd.events = POLLIN;
+					switch (poll(&pfd, 1, 250)) // wait for 250ms
+					{
+						case 0:
+							eDebug("[eFilePushThread] wait for driver eof timeout");
+							continue;
+						case 1:
+							eDebug("[eFilePushThread] wait for driver eof ok");
 							break;
-						continue;
+						default:
+							eDebug("[eFilePushThread] wait for driver eof aborted by signal");
+							/* Check m_stop after interrupted syscall. */
+							if (m_stop)
+								break;
+							continue;
+					}
 				}
-			}
-#endif
-			if (m_stop)
-				break;
+
+				if (m_stop)
+					break;
 
 				/* in stream_mode, we are sending EOF events
 				   over and over until somebody responds.
-
 				   in stream_mode, think of evtEOF as "buffer underrun occurred". */
+				if (m_sof == 0)
+					sendEvent(evtEOF);
+				else
+					sendEvent(evtUser); // start of file event
 
-//			if (xineLib->end_of_stream == true)	--->	 [rpi] to be replaced with omx
-			if (m_sof == 0)
-				sendEvent(evtEOF);
-			else
-				sendEvent(evtUser); // start of file event
-
-			if (m_stream_mode && ++eofcount < 5)
-			{
-				eDebug("[eFilePushThread] reached EOF, but we are in stream mode. delaying 1 second.");
-#if HAVE_ALIEN5
-				usleep(50000);
-#else
-				sleep(1);
-#endif
-				continue;
-			}
-			else if (++eofcount < 10)
-			{
-				eDebug("[eFilePushThread] reached EOF, but the file may grow. delaying 1 second.");
-#if HAVE_ALIEN5
-				usleep(50000);
-#else
-				sleep(1);
-#endif
-				continue;
-			}
-			sendEvent(evtReadError);
-			break;
-		} else
-		{
-			/* Write data to mux */
-			int buf_start = 0;
-			filterRecordData(m_buffer, buf_end);
-			while ((buf_start != buf_end) && !m_stop)
-			{
-				int w = write(m_fd_dest, m_buffer + buf_start, buf_end - buf_start);
-
-				if (w <= 0)
+				if (m_stream_mode)
 				{
-					/* HACK: we can't control it (for now) inside the drivers
-					   because we need it only for streaming (not for recordings)
-					   so we let flush the decoder to enigma2 */
-					if (w < 0 && m_stream_mode) {
-						eDebug("[eFilePushThread] error writing on demuxer. Flush the decoder!");
-						sendEvent(evtFlush);
-					}
-					/* Check m_stop after interrupted syscall. */
-					if (m_stop) {
-						w = 0;
-						buf_start = 0;
-						buf_end = 0;
+					eDebug("[eFilePushThread] reached EOF, but we are in stream mode. delaying 1 second.");
+					sleep(1);
+					continue;
+				}
+				else if (++eofcount < 10)
+				{
+					eDebug("[eFilePushThread] reached EOF, but the file may grow. delaying 1 second.");
+					sleep(1);
+					continue;
+				}
+				break;
+			}
+			else
+			{
+				/* Write data to mux */
+				int buf_start = 0;
+				filterRecordData(m_buffer, buf_end);
+				while ((buf_start != buf_end) && !m_stop)
+				{
+					int w = write(m_fd_dest, m_buffer + buf_start, buf_end - buf_start);
+
+					if (w <= 0)
+					{
+						/* Check m_stop after interrupted syscall. */
+						if (m_stop)
+						{
+							w = 0;
+							buf_start = 0;
+							buf_end = 0;
+							break;
+						}
+						if (w < 0 && (errno == EINTR || errno == EAGAIN || errno == EBUSY))
+							continue;
+						eDebug("[eFilePushThread] write: %m");
+						sendEvent(evtWriteError);
 						break;
 					}
-					if (w < 0 && (errno == EINTR || errno == EAGAIN || errno == EBUSY))
-					{
-#if HAVE_HISILICON
-						usleep(100000);
-#endif
-#if HAVE_ALIEN5
-						usleep(100000);
-#endif
-						continue;
-					}
-#if HAVE_ALIEN5
-					usleep(50000);
-#endif
-					eDebug("[eFilePushThread] write: %m");
-					sendEvent(evtWriteError);
-					break;
+					buf_start += w;
 				}
-				buf_start += w;
+
+				eofcount = 0;
+				m_current_position += buf_end;
+				bytes_read += buf_end;
+				if (m_sg)
+					current_span_remaining -= buf_end;
 			}
-
-			eofcount = 0;
-			m_current_position += buf_end;
-			bytes_read += buf_end;
-			if (m_sg)
-				current_span_remaining -= buf_end;
 		}
-#if HAVE_ALIEN5
-		usleep(10);
-#endif
-	}
-	sendEvent(evtStopped);
+		sendEvent(evtStopped);
 
-	{ /* mutex lock scope */
-		eSingleLocker lock(m_run_mutex);
-		m_run_state = 0;
-		m_run_cond.signal(); /* Tell them we're here */
-		while (m_stop == 2) {
-			eDebug("[eFilePushThread] PAUSED");
-			m_run_cond.wait(m_run_mutex);
+		{ /* mutex lock scope */
+			eSingleLocker lock(m_run_mutex);
+			m_run_state = 0;
+			m_run_cond.signal(); /* Tell them we're here */
+			while (m_stop == 2) {
+				eDebug("[eFilePushThread] PAUSED");
+				m_run_cond.wait(m_run_mutex);
+			}
+			if (m_stop == 0)
+				m_run_state = 1;
 		}
-		if (m_stop == 0)
-			m_run_state = 1;
-	}
-
 	} while (m_stop == 0);
+
+	m_stopped = true;
+
 	eDebug("[eFilePushThread] STOP");
 }
 
@@ -266,6 +234,7 @@ void eFilePushThread::start(ePtr<iTsSource> &source, int fd_dest)
 	m_current_position = 0;
 	m_run_state = 1;
 	m_stop = 0;
+	m_stopped = false;
 
 	/* Use a signal to interrupt blocking systems calls (like read()).
 	 * We don't want to get enigma killed by the signal (default action),
@@ -284,14 +253,33 @@ void eFilePushThread::start(ePtr<iTsSource> &source, int fd_dest)
 
 void eFilePushThread::stop()
 {
-	/* if we aren't running, don't bother stopping. */
+	static const struct timespec timespec_1 = { .tv_sec =  0, .tv_nsec = 1000000000 / 10 };
+	int safeguard;
+
 	if (m_stop == 1)
+	{
+		eDebug("[eFilePushThread]: stopping thread that is already stopped");
 		return;
+	}
+
 	m_stop = 1;
-	eDebug("[eFilePushThread] stopping thread");
 	m_run_cond.signal(); /* Break out of pause if needed */
-	sendSignal(SIGUSR1);
-	kill(); /* Kill means join actually */
+
+	for(safeguard = 100; safeguard > 0; safeguard--)
+	{
+		eDebug("[eFilePushThread] stopping thread: %d", safeguard);
+		sendSignal(SIGUSR1);
+
+		nanosleep(&timespec_1, nullptr);
+
+		if(m_stopped)
+			break;
+	}
+
+	if(safeguard > 0)
+		kill();
+	else
+		eWarning("[eFilePushThread] thread could not be stopped!");
 }
 
 void eFilePushThread::pause()
@@ -536,8 +524,15 @@ void eFilePushThreadRecorder::thread()
 
 	hasStarted();
 
-	/* m_stop must be evaluated after each syscall */
-	/* if it isn't, there's a chance of the thread becoming deadlocked when recordings are finishing */
+	if (m_protocol == _PROTO_RTSP_TCP)
+	{
+		int flags = fcntl(m_fd_source, F_GETFL, 0);
+		flags |= O_NONBLOCK;
+		if (fcntl(m_fd_source, F_SETFL, flags) == -1)
+			eDebug("[eFilePushThread] failed setting DMX handle %d in non-blocking mode, error %d: %s", m_fd_source, errno, strerror(errno));
+	}
+
+	/* m_stop must be evaluated after each syscall. */
 	while (!m_stop)
 	{
 		bytes = ::read(m_fd_source, m_buffer, m_buffersize);
@@ -554,7 +549,7 @@ void eFilePushThreadRecorder::thread()
 				pfd.revents = 0;
 
 				errno = 0;
-				rv = poll(&pfd, 1, 500);
+				rv = poll(&pfd, 1, 30000);
 
 				if(rv < 0)
 				{
@@ -571,7 +566,10 @@ void eFilePushThreadRecorder::thread()
 				}
 
 				if(rv == 0)
+				{
+					eDebug("[eFilePushThreadRecorder] no fds ready %d", pfd.fd);
 					continue;
+				}
 
 				if(rv != 1)
 				{
@@ -583,7 +581,7 @@ void eFilePushThreadRecorder::thread()
 
 				if(pfd.revents & (POLLRDHUP | POLLERR | POLLHUP | POLLNVAL))
 				{
-					eWarning("[eFilePushThreadRecorder] POLL STATUS ERROR, aborting thread: %x\n", pfd.revents);
+					eWarning("[eFilePushThreadRecorder] POLL STATUS ERROR, aborting thread: %x, fd: %d\n", pfd.revents, pfd.fd);
 					sendEvent(evtWriteError);
 
 					break;
@@ -689,7 +687,6 @@ void eFilePushThreadRecorder::start(int fd, ePtr<eDVBDemux> &demux)
 void eFilePushThreadRecorder::stop()
 {
 	static const struct timespec timespec_1 = { .tv_sec =  0, .tv_nsec = 1000000000 / 10 };
-
 	int safeguard;
 
 	if (m_stop == 1)
@@ -700,7 +697,7 @@ void eFilePushThreadRecorder::stop()
 
 	m_stop = 1;
 
-	for(safeguard = 10; safeguard > 0; safeguard--)
+	for(safeguard = 100; safeguard > 0; safeguard--)
 	{
 		eDebug("[eFilePushThreadRecorder] stopping thread: %d", safeguard);
 		sendSignal(SIGUSR1);
