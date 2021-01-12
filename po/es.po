@@ -16334,3 +16334,6 @@ msgstr "IP Estática o Personalizado"
 
 msgid "Nameserver configuration"
 msgstr "Configuración Proveedor DNS"
+
+msgid "<Press OK to perform action>"
+msgstr "<Pulse OK>"
