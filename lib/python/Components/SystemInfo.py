@@ -1,10 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getBoxType, getBoxBrand
+from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getBoxType
 from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 import os, re
 from os import access, R_OK
 from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild
+
+def getBoxBrand():
+	brand = ""
+	try:
+		if fileHas("/etc/hostname","os"):
+			brand = "Edision"
+		elif fileHas("/etc/hostname","gb"):
+			brand = "GigaBlue"
+		elif fileHas("/etc/hostname","sf"):
+			brand = "octagon"
+		else:
+			brand = open("/proc/stb/info/brandname").read().strip()
+	except IOError:
+		print("[BrandName] Machine not added in SystemInfo def getBoxBrand!")
+	return brand
 
 SystemInfo = {}
 SystemInfo["HasRootSubdir"] = False
