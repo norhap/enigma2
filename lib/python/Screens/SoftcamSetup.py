@@ -97,7 +97,7 @@ class SoftcamSetup(Screen, ConfigListScreen):
 			self.blueButton()
 
 	def blueButton(self):
-		if self.softcams.value and self.softcams.value.lower() != "none" and not fileExists("/tmp/ncam.pid") or fileHas("/var/tmp/ecm.info","system:") or fileHas("/var/tmp/ecm.info","CCcam-s2s") or fileHas("/var/tmp/ecm.info","fta") or fileExists("/tmp/ncam.pid") and not self.softcams.value and self.softcams.value.lower() != "none" or fileExists("/tmp/ncam.pid") and not self.softcams.value and self.softcams.value.lower() != "none":
+		if self.softcams.value and self.softcams.value.lower() != "none" and not fileExists("/tmp/ncam.pid") or fileHas("/tmp/ecm.info","system:") or fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta") or fileExists("/tmp/ncam.pid") and not self.softcams.value and self.softcams.value.lower() != "none":
 			self["key_blue"].setText(_("Info"))
 
 	def setEcmInfo(self):
