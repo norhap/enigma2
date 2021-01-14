@@ -285,18 +285,18 @@ class QuitMainloopScreen(Screen):
 		Screen.__init__(self, session)
 		from Components.Label import Label
 		text = {
-			QUIT_SHUTDOWN: _("Your receiver is shutting down"),
-			QUIT_REBOOT: _("Your receiver is rebooting"),
-			QUIT_RESTART: _("The user interface of your receiver is restarting"),
-			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your receiver reboots\nThis may take a few minutes"),
-			QUIT_ERROR_RESTART: _("The user interface of your receiver is restarting\ndue to an error in mytest.py"),
-			QUIT_DEBUG_RESTART: _("The user interface of your receiver is restarting in debug mode"),
-			QUIT_REBOOT_ANDROID: _("Your receiver is rebooting into android mode"),
-			QUIT_REBOOT_RECOVERY: _("Your receiver is rebooting into recovery mode"),
-			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your receiver reboots\nThis may take a few minutes"),
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until enigma2 restarts"),
-			QUIT_UPGRADE_FPANEL: _("Your front panel will be updated\nThis may take a few minutes"),
-			QUIT_WOL: _("Your receiver goes to WOL")
+			QUIT_SHUTDOWN: _("Your %s %s is shutting down") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_REBOOT: _("Your %s %s is rebooting") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_RESTART: _("The user interface of your %s %s is restarting") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s %s reboots\nThis may take a few minutes") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_ERROR_RESTART: _("The user interface of your %s %s is restarting\ndue to an error in mytest.py") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_DEBUG_RESTART: _("The user interface of your %s %s is restarting in debug mode") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_REBOOT_ANDROID: _("Your %s %s is rebooting into android mode") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_REBOOT_RECOVERY: _("Your %s %s is rebooting into recovery mode") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s %s reboots\nThis may take a few minutes") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s %s restarts") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_UPGRADE_FPANEL: _("Front panel your %s %s will be updated\nThis may take a few minutes") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"]),
+			QUIT_WOL: _("Your %s %s goes to WOL") % (SystemInfo["MachineBrand"], SystemInfo["MachineModel"])
 		}.get(retvalue)
 		self["text"] = Label(text)
 
