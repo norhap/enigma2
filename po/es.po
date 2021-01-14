@@ -9469,8 +9469,14 @@ msgstr "Prioridad de sintonizador de servicios alternativos"
 msgid "Always include ECM in recordings"
 msgstr "Incluye siempre ECM en las grabaciones"
 
-msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your receiver. Default: off."
-msgstr "Siempre incluya mensajes ECM en grabaciones. Esto anula las configuraciones de temporizador individuales. Permite que las grabaciones siempre se descifren después (a veces llamada decodificación sin conexión), si su receptor lo soporta. Predeterminado: apagado."
+msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your %s %s. Default: off."
+msgstr "Siempre incluya mensajes ECM en grabaciones. Esto anula las configuraciones de temporizador individuales. Permite que las grabaciones siempre se descifren después (a veces llamada decodificación sin conexión), si su %s %s lo soporta. Por Defecto: apagado."
+
+msgid "The speed of the fan when your %s %s is in normal use."
+msgstr "La velocidad del ventilador cuando su %s %s está en uso normal."
+
+msgid "The speed of the fan when your %s %s is in standby mode."
+msgstr "La velocidad del ventilador cuando su %s %s está en standby."
 
 msgid "Audio language selection 1"
 msgstr "Selección de idioma de audio 1"
@@ -9748,8 +9754,8 @@ msgstr "Configure el tipo de iconos de indicación de estado que se muestran en 
 msgid "Configure the vertical position of the subtitles, measured from the bottom of the screen."
 msgstr "Configure la posición vertical de los subtítulos, medida desde la parte inferior de la pantalla."
 
-msgid "Configure the way in which the receiver changes channels."
-msgstr "Configure la forma en que el receptor cambia canales."
+msgid "Configure the way in which your %s %s changes channels."
+msgstr "Configure la forma en que su %s %s cambia canales."
 
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Configure dónde aparecen los temporizadores completados en la lista de temporizadores."
@@ -10495,20 +10501,20 @@ msgstr "Cuando está habilitado, la Infobar se mostrará al saltar adelante/atr�
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
 msgstr "Cuando está habilitado, la duración de cada grabación se mostrará en el lista de películas (esto podría causar un tiempo de carga adicional)."
 
-msgid "When enabled, the receiver will automatically use the audio track which you selected before."
-msgstr "Cuando está habilitado, el receptor utilizará automáticamente la pista de audio que seleccionó anteriormente."
+msgid "When enabled, your %s %s will automatically use the audio track which you selected before."
+msgstr "Cuando está habilitado, su %s %s utilizará automáticamente la pista de audio que seleccionó anteriormente."
 
-msgid "When enabled, the receiver will automatically use the subtitles which you selected before."
-msgstr "Cuando está habilitado, el receptor utilizará automáticamente los subtítulos que seleccionó anteriormente."
+msgid "When enabled, your %s %s will automatically use the subtitles which you selected before."
+msgstr "Cuando está habilitado, su %s %s utilizará automáticamente los subtítulos que seleccionó anteriormente."
 
-msgid "When enabled, the receiver will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing."
-msgstr "Cuando está habilitado, el receptor ya no controlará el transpondedor sintonizado para detectar posibles cambios. No use esta opción a menos que sepa lo que está haciendo."
+msgid "When enabled, your %s %s will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing."
+msgstr "Cuando está habilitado, su %s %s ya no controlará el transpondedor sintonizado para detectar posibles cambios. No use esta opción a menos que sepa lo que está haciendo."
 
-msgid "When enabled, the receiver will select an AC3 track (when available)."
-msgstr "Cuando está habilitado, el receptor seleccionará una pista AC3 (cuando esté disponible)."
+msgid "When enabled, your %s %s will select an AC3 track (when available)."
+msgstr "Cuando está habilitado, su %s %s seleccionará una pista AC3 (cuando esté disponible)."
 
-msgid "When enabled, the receiver will select an AC3+ track (when available)."
-msgstr "Cuando está habilitado, el receptor seleccionará una pista AC3+ (cuando esté disponible)."
+msgid "When enabled, your %s %s will select an AC3+ track (when available)."
+msgstr "Cuando está habilitado, su %s %s seleccionará una pista AC3+ (cuando esté disponible)."
 
 msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
 msgstr "Cuando está habilitada, esta configuración tiene más peso que ‘Sintonizador preferido para grabaciones’."
@@ -15696,17 +15702,17 @@ msgstr "Guardar-Cargar-Eliminar"
 msgid "Delete EPG"
 msgstr "Eliminar EPG"
 
-msgid "Allows the %s %s to read the stored EPG data regularly."
-msgstr "Permite a su sistema leer en el almacenado el EPG periódicamente."
+msgid "Allows your %s %s to read the stored EPG data regularly."
+msgstr "Permite a su %s %s leer en el almacenado el EPG periódicamente."
 
-msgid "Allows the %s %s to store the EPG data regularly."
-msgstr "Permite a su sistema almacenar los datos en el EPG periódicamente."
+msgid "Allows your %s %s to store the EPG data regularly."
+msgstr "Permite a su %s %s almacenar los datos en el EPG periódicamente."
 
-msgid "Choose the location where the EPG data will be stored when the %s %s is shut down. The location must be available at boot time."
-msgstr "Elegir la ubicación donde se guardarán los datos EPG en su sistema cuando se apaga. La ubicación deberá estar disponible durante el reinicio."
+msgid "Choose the location where the EPG data will be stored when your %s %s is shut down. The location must be available at boot time."
+msgstr "Elegir la ubicación donde se guardarán los datos EPG en su %s %s cuando se apaga. La ubicación deberá estar disponible durante el reinicio."
 
-msgid "Choose the name of the file that holds the EPG data when the %s %s is shut down. This can be handy to differentiate between several boxes."
-msgstr "Elegir el nombre del archivo que contiene los datos EPG en su sistema cuando se apaga. Puede ser útil para distinguir entre varios receptores."
+msgid "Choose the name of the file that holds the EPG data when your %s %s is shut down. This can be handy to differentiate between several boxes."
+msgstr "Elegir el nombre del archivo que contiene los datos EPG en su %s %s cuando se apaga. Puede ser útil para distinguir entre varios receptores."
 
 msgid "EPG location"
 msgstr "Guardar EPG"
@@ -15723,14 +15729,14 @@ msgstr "Actualizar cada (horas)"
 msgid "Automatic save"
 msgstr "Guardado automático"
 
-msgid "The %s %s reads the stored EPG data every (hours)."
-msgstr "Su sistema lee los datos guardados en EPG cada (horas)."
+msgid "Your %s %s reads the stored EPG data every (hours)."
+msgstr "Su %s %s lee los datos guardados en EPG cada (horas)."
 
 msgid "Save every (in hours)"
 msgstr "Guardar cada (horas)"
 
-msgid "The %s %s stores the EPG data every (hours)."
-msgstr "Su sistema almacena los datos guardados en EPG cada (horas)."
+msgid "Your %s %s stores the EPG data every (hours)."
+msgstr "Su %s %s almacena los datos guardados en EPG cada (horas)."
 
 msgid "Display the EIT now/next eventdata in infobar."
 msgstr "Visualizar datos ahora/siguiente EIT en la barra de información."
@@ -16260,8 +16266,8 @@ msgstr "Log python con spinner"
 msgid "Debug log time format *"
 msgstr "Formato Debug log en tiempo"
 
-msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since the receiver was last booted."
-msgstr "Este es el prefijo de cada entrada en Debug log. 'en tiempo de arranque' es el número de segundos desde la última vez que se arrancó el receptor."
+msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since your %s %s was last booted."
+msgstr "Este es el prefijo de cada entrada en Debug log. 'en tiempo de arranque' es el número de segundos desde la última vez que se arrancó su %s %s."
 
 msgid "Boot time"
 msgstr "En tiempo de arranque"
@@ -16337,3 +16343,9 @@ msgstr "Configuración Proveedor DNS"
 
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"
+
+msgid "%s  (Default: %s)"
+msgstr "%s  (Por Defecto: %s)"
+
+msgid "Default: '%s'."
+msgstr "Por Defecto: '%s'."
