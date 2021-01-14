@@ -2286,7 +2286,7 @@ class InfoBarExtensions:
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
-		if fileExists ("/var/log/oscam.log") and not fileExists("/var/tmp/ncam.pid") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/var/tmp/ncam.pid"):
+		if fileExists ("/tmp/.oscam/oscam.pid") and not fileExists("/tmp/ncam.pid") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/tmp/ncam.pid"):
 			return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
 		else:
 			return []
@@ -2364,12 +2364,12 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def openOScamInfo(self):
-	    if fileExists ("/var/log/oscam.log") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","/tmp/.oscam/oscam.pid") and not fileExists("/var/tmp/ncam.pid") or fileHas("/var/log/oscam1.log","OSCam") and not fileExists("/var/tmp/ncam.pid"):
+	    if fileExists ("/tmp/.oscam/oscam.pid") and not fileExists("/tmp/ncam.pid") or fileExists("/tmp/.oscam/oscam.pid") and not fileExists("/tmp/ncam.pid") or fileExists ("/tmp/.oscam/oscam.pid") and not fileExists("/tmp/ncam.pid"):
 		from Screens.OScamInfo import OscamInfoMenu
 		self.session.open(OscamInfoMenu)
 
 	def openNcamInfo(self):
-	    if fileExists("/var/tmp/ncam.pid"):
+	    if fileExists("/tmp/ncam.pid"):
 		from Screens.NcamInfo import NcamInfoMenu
 		self.session.open(NcamInfoMenu)
 
