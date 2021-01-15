@@ -5,13 +5,13 @@ from Components.Element import cached
 from Components.Converter.Poll import Poll
 from os import popen, statvfs
 
-SIZE_UNITS = ['B',
- 'KB',
- 'MB',
- 'GB',
- 'TB',
- 'PB',
- 'EB']
+SIZE_UNITS = ["B",
+ "KB",
+ "MB",
+ "GB",
+ "TB",
+ "PB",
+ "EB"]
 
 class ProgressDiskSpaceInfo(Poll, Converter):
 	HDDTEMP = 0
@@ -27,24 +27,24 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		Poll.__init__(self)
-		type = type.split(',')
-		self.shortFormat = 'Short' in type
-		self.fullFormat = 'Full' in type
-		if 'HddTemp' in type:
+		type = type.split(",")
+		self.shortFormat = "Short" in type
+		self.fullFormat = "Full" in type
+		if "HddTemp" in type:
 			self.type = self.HDDTEMP
-		elif 'LoadAvg' in type:
+		elif "LoadAvg" in type:
 			self.type = self.LOADAVG
-		elif 'MemTotal' in type:
+		elif "MemTotal" in type:
 			self.type = self.MEMTOTAL
-		elif 'MemFree' in type:
+		elif "MemFree" in type:
 			self.type = self.MEMFREE
-		elif 'SwapTotal' in type:
+		elif "SwapTotal" in type:
 			self.type = self.SWAPTOTAL
-		elif 'SwapFree' in type:
+		elif "SwapFree" in type:
 			self.type = self.SWAPFREE
-		elif 'UsbInfo' in type:
+		elif "UsbInfo" in type:
 			self.type = self.USBINFO
-		elif 'HddInfo' in type:
+		elif "HddInfo" in type:
 			self.type = self.HDDINFO
 		else:
 			self.type = self.FLASHINFO
@@ -63,35 +63,35 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 
 	@cached
 	def getText(self):
-		text = 'N/A'
+		text = "N/A"
 		if self.type == self.HDDTEMP:
 			text = self.getHddTemp()
 		elif self.type == self.LOADAVG:
 			text = self.getLoadAvg()
 		else:
-			entry = {self.MEMTOTAL: ('Mem', 'Ram'),
-			self.MEMFREE: ('Mem', 'Ram'),
-			self.SWAPTOTAL: ('Swap', 'Swap'),
-			self.SWAPFREE: ('Swap', 'Swap'),
-			self.USBINFO: ('/media/usb', 'USB'),
-			self.HDDINFO: ('/media/hdd', 'HDD'),
-			self.FLASHINFO: ('/', 'Flash')}[self.type]
+			entry = {self.MEMTOTAL: ("Mem", "Ram"),
+			self.MEMFREE: ("Mem", "Ram"),
+			self.SWAPTOTAL: ("Swap", "Swap"),
+			self.SWAPFREE: ("Swap", "Swap"),
+			self.USBINFO: ("/media/usb", "USB"),
+			self.HDDINFO: ("/media/hdd", "HDD"),
+			self.FLASHINFO: ("/", "Flash")}[self.type]
 			if self.type in (self.USBINFO, self.HDDINFO, self.FLASHINFO):
 				list = self.getDiskInfo(entry[0])
 			else:
 				list = self.getMemInfo(entry[0])
 			if list[0] == 0:
-				text = '%s: Not Available' % entry[1]
+				text = "%s: Not Available" % entry[1]
 			elif self.shortFormat:
-				text = '%s: %s, in use: %s%%' % (entry[1], self.getSizeStr(list[0]), list[3])
+				text = "%s: %s, in use: %s%%" % (entry[1], self.getSizeStr(list[0]), list[3])
 			elif self.fullFormat:
-				text = '%s: %s Free:%s Used:%s (%s%%)' % (entry[1],
+				text = "%s: %s Free:%s Used:%s (%s%%)" % (entry[1],
 				self.getSizeStr(list[0]),
 				self.getSizeStr(list[2]),
 				self.getSizeStr(list[1]),
 				list[3])
 			else:
-				text = '%s: %s Used:%s Free:%s' % (entry[1],
+				text = "%s: %s Used:%s Free:%s" % (entry[1],
 				self.getSizeStr(list[0]),
 				self.getSizeStr(list[1]),
 				self.getSizeStr(list[2]))
@@ -104,15 +104,15 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 			self.MEMFREE,
 			self.SWAPTOTAL,
 			self.SWAPFREE):
-			entry = {self.MEMTOTAL: 'Mem',
-			self.MEMFREE: 'Mem',
-			self.SWAPTOTAL: 'Swap',
-			self.SWAPFREE: 'Swap'}[self.type]
+			entry = {self.MEMTOTAL: "Mem",
+			self.MEMFREE: "Mem",
+			self.SWAPTOTAL: "Swap",
+			self.SWAPFREE: "Swap"}[self.type]
 			result = self.getMemInfo(entry)[3]
 		elif self.type in (self.USBINFO, self.HDDINFO, self.FLASHINFO):
-			path = {self.USBINFO: '/media/usb',
-			self.HDDINFO: '/media/hdd',
-			self.FLASHINFO: '/'}[self.type]
+			path = {self.USBINFO: "/media/usb",
+			self.HDDINFO: "/media/hdd",
+			self.FLASHINFO: "/"}[self.type]
 			result = self.getDiskInfo(path)[3]
 		return result
 
@@ -121,11 +121,11 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 	range = 100
 
 	def getHddTemp(self):
-		textvalue = 'No info'
-		info = '0'
+		textvalue = "No info"
+		info = "0"
 		try:
-			out_line = popen('hddtemp -n -q /dev/sda').readline()
-			info = 'Hdd C:' + out_line[:4]
+			out_line = popen("hddtemp -n -q /dev/sda").readline()
+			info = "Hdd C:" + out_line[:4]
 			textvalue = info
 		except:
 			pass
@@ -133,11 +133,11 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 		return textvalue
 
 	def getLoadAvg(self):
-		textvalue = 'No info'
-		info = '0'
+		textvalue = "No info"
+		info = "0"
 		try:
-			out_line = popen('cat /proc/loadavg').readline()
-			info = 'loadavg:' + out_line[:15]
+			out_line = popen("cat /proc/loadavg").readline()
+			info = "loadavg:" + out_line[:15]
 			textvalue = info
 		except:
 			pass
@@ -151,12 +151,12 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 		0]
 		try:
 			check = 0
-			fd = open('/proc/meminfo')
+			fd = open("/proc/meminfo")
 			for line in fd:
-				if value + 'Total' in line:
+				if value + "Total" in line:
 					check += 1
 					result[0] = int(line.split()[1]) * 1024
-				elif value + 'Free' in line:
+				elif value + "Free" in line:
 					check += 1
 					result[2] = int(line.split()[1]) * 1024
 				if check > 1:
@@ -175,7 +175,7 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 
 		def isMountPoint():
 			try:
-				fd = open('/proc/mounts', 'r')
+				fd = open("/proc/mounts", "r")
 				for line in fd:
 					l = line.split()
 					if len(l) > 1 and l[1] == path:
@@ -207,16 +207,16 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 	def getSizeStr(self, value, u = 0):
 		fractal = 0
 		if value >= 1024:
-			fmt = '%(size)u.%(frac)d %(unit)s'
+			fmt = "%(size)u.%(frac)d %(unit)s"
 			while value >= 1024 and u < len(SIZE_UNITS):
 				value, mod = divmod(value, 1024)
 				fractal = mod * 10 / 1024
 				u += 1
 		else:
-			fmt = '%(size)u %(unit)s'
-		return fmt % {'size': value,
-		'frac': fractal,
-		'unit': SIZE_UNITS[u]}
+			fmt = "%(size)u %(unit)s"
+		return fmt % {"size": value,
+		"frac": fractal,
+		"unit": SIZE_UNITS[u]}
 
 	def doSuspend(self, suspended):
 		if suspended:

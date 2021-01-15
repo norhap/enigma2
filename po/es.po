@@ -16361,9 +16361,3 @@ msgstr "Número máximo de dias en EPG"
 
 msgid "Load only specific days in EPG"
 msgstr "Cargar solo días específicos en EPG"
-
-msgid "%s: Not Available"
-msgstr "%s: No Disponible"
-
-msgid "%s: %s Free:%s Used:%s (%s%%)"
-msgstr "%s: %s Libre:%s Usado:%s (%s%%)"
