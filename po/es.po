@@ -4347,10 +4347,6 @@ msgstr "No, excepto el temporizador de despertador"
 msgid "No, never"
 msgstr "No, nunca"
 
-msgid "None"
-msgstr "Ninguno"
-
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
 msgstr "No linear"
 
@@ -5325,11 +5321,8 @@ msgstr "Reiniciar"
 msgid "Restart GUI now?"
 msgstr "¿Reiniciar GUI?"
 
-msgid "Restart both"
-msgstr "Reiniciar ambos"
-
 msgid "Restart cardserver"
-msgstr "Reiniciar servidor de tarjeta"
+msgstr "Reiniciar cardserver"
 
 msgid "Restart enigma"
 msgstr "Reiniciar Enigma2"
@@ -16424,3 +16417,33 @@ msgstr "Cargar solo días específicos en EPG"
 
 msgid "Your %s %s goes to WOL"
 msgstr "Su %s %s va a WOL"
+
+msgid "Don't restart"
+msgstr "No reiniciar"
+
+msgid "Restart both"
+msgstr "Reiniciar ambos"
+
+msgid "None"
+msgstr "Ninguno"
+
+msgid "Immediately restart selected devices."
+msgstr "Reinicie inmediatamente los seleccionados."
+
+msgid "Display oscam information."
+msgstr "Mostrar información oscam."
+
+msgid "Select softcam"
+msgstr "Seleccione softcam"
+
+msgid "Select a softcam from the available list."
+msgstr "Seleccione una softcam de la lista disponible."
+
+msgid "Select cardserver"
+msgstr "Seleccione cardserver"
+
+msgid "Select a cardserver from the available list."
+msgstr "Seleccione un cardserver de la lista disponible."
+
+msgid "Reset the selected devices when the GREEN button is pressed."
+msgstr "Guarda lo seleccionado cuando se presiona el botón VERDE."
