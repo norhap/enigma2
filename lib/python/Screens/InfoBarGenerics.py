@@ -2286,19 +2286,19 @@ class InfoBarExtensions:
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
-		if fileExists ("/tmp/.oscam/oscam.pid") and not fileExists("/tmp/ncam.pid") and not fileHas("/tmp/ecm.info","CAID:") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/tmp/ncam.pid"):
+		if fileExists ("/tmp/.oscam/oscam.pid") and not fileExists("/tmp/ncam.pid") and not fileHas("/tmp/ecm.info","CCcam-s2s") and not fileHas("/tmp/ecm.info","CAID:") or fileHas("/tmp/ecm.info","protocol:") and not fileExists("/tmp/ncam.pid"):
 			return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getNcamInfo(self):
-		if fileExists("/tmp/ncam.pid") and not fileHas("/var/log/oscam1.log", "oscam"):
+		if fileExists("/tmp/ncam.pid"):
 			return [((boundFunction(self.getNcamname), boundFunction(self.openNcamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getCCcamInfo(self):
-		if fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta") and not fileExists("/tmp/.oscam"):
+		if fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
 			return [((boundFunction(self.getCCcamname), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
 		else:
 			return []
