@@ -7494,7 +7494,7 @@ msgid ""
 "Manufacturer reset in progress\n"
 "Please wait until your %s %s restarts"
 msgstr ""
-"Restablecimiento del fabricante en curso\n"
+"Reset de fábrica en progreso\n"
 "Espere hasta que su %s %s se reinicie"
 
 msgid "Uncover dashed flickering line for this service"
