@@ -2743,6 +2743,9 @@ msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del tem
 msgid "Select 'Yes' to remove all other files and directories not covered by the options above."
 msgstr "Seleccione 'Sí' para eliminar todos los demás archivos y directorios no cubiertos por las opciones anteriores."
 
+msgid "Factory Reset"
+msgstr "Restablecimiento de Fábrica"
+
 msgid "Full factory reset"
 msgstr "Restablecimiento completo de fábrica"
 
