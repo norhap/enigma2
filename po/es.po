@@ -2713,15 +2713,65 @@ msgstr "FEC:"
 msgid "FTA"
 msgstr "FTA"
 
-msgid ""
-"Factory reset will restore your receiver to its default configuration. All user data including system settings, tuner configuration, bouquets, services and plugins will be DELETED. Recordings and other files stored on HDD and USB media will remain intact. After completion, the system will restart automatically!\n"
-"\n"
-"Do you really want to proceed?"
-msgstr ""
-"El restablecimiento de fábrica restaurará su receptor a su configuración predeterminada. Se ELIMINARÁN todos los datos del usuario, incluida la configuración del sistema, la configuración del sintonizador, los bouquets, los servicios y los plugins. Las grabaciones y otros archivos almacenados en el HDD y el dispositivo USB permanecerán intactos. "
-"¡Después de la finalización, el sistema se reiniciará automáticamente!\n"
-"\n"
-"¿De verdad quiere continuar?"
+msgid "Select 'Yes' to remove all settings, tuning data, timers, resume pointers etc. Selecting this option will restore the configuration to the initial settings before any configuration settings were applied. This is the most reliable form of Factory Reset."
+msgstr "Seleccione 'Sí' para eliminar todos los ajustes, datos de ajuste, temporizadores, punteros de reanudación, etc. Al seleccionar esta opción, se restaurará la configuración a los ajustes iniciales antes de que se aplicaran los ajustes de configuración. Esta es la forma más confiable de restablecimiento de fábrica."
+
+msgid "Select 'Yes' to remove all tuning data. Selecting this option will remove all tuning and bouquet data and will make timers non functional until the receiver is retuned."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de sintonización. Al seleccionar esta opción, se eliminarán todos los datos de sintonización y ramificación y los temporizadores no funcionarán hasta que se vuelva a sintonizar el receptor."
+
+msgid "Select 'Yes' to remove all keymap data. Selecting this option will remove all keymap override data and restore the default keymap definitions."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de teclas. Al seleccionar esta opción, se eliminarán todos los datos de teclas y se restaurarán las definiciones predeterminadas del mapa de teclas."
+
+msgid "Select 'Yes' to remove all network data. Selecting this option will remove all network data including automounts and network connection data including connection accounts and passwords. This could cause some Enigma2 functions to fail if they are configured to use these network resources."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de la red. Al seleccionar esta opción, se eliminarán todos los datos de red, incluidos los montajes automáticos y los datos de conexión de red, incluidas las cuentas de conexión y las contraseñas. Esto podría hacer que algunas funciones de Enigma2 fallen si están configuradas para usar estos recursos de red."
+
+msgid "Select 'Yes' to remove all plugin configuration data. Selecting this option will remove all plugin configuration data that is stored in the Enigma2 configuration folder. This will cause all affected plugins to return to their default settings. This could cause some plugins to not function until configured."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de plugins. Al seleccionar esta opción, se eliminarán todos los datos de configuración de plugins que están almacenados en la carpeta de configuración de Enigma2. Esto hará que todos los plugins afectados vuelvan a su configuración predeterminada. Esto podría hacer que algunos plugins no funcionen hasta que se configuren."
+
+msgid "Select 'Yes' to remove all media player resume data. Selecting this option will remove the data used to allow playback of media files to resume from the position where playback was last stopped. Playback position of recordings is not affected."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de reanudación del reproductor multimedia. Al seleccionar esta opción, se eliminarán los datos utilizados para permitir que la reproducción de archivos multimedia se reanude desde la posición donde se detuvo por última vez. La posición de reproducción de las grabaciones no se ve afectada."
+
+msgid "Select 'Yes' to remove all main settings configuration data. Selecting this option will set all Enigma2 settings back to their default values.  This will also cause Enigma2 to run the Welcome Wizard on restart."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de los ajustes principales. Al seleccionar esta opción, todos los ajustes de Enigma2 volverán a sus valores de fábrica. Esto también hace que Enigma2 ejecute el Asistente wizard al reiniciar."
+
+msgid "Select 'Yes' to remove all user customisations of skin data. Selecting this option will remove all user based skin customisations. All affected skins will return to their standard settings. This will also clear any customied boot logos and backdrops."
+msgstr "Seleccione 'Sí' para eliminar todas las personalizaciones de usuario de los datos del skin. Al seleccionar esta opción, se eliminarán todas las personalizaciones de skin basadas en el usuario. Todos los aspectos afectados volverán a su configuración estándar. Esto también borrará los logotipos y fondos de arranque personalizados."
+
+msgid "Select 'Yes' to remove all timer configuration data. Selecting this option will clear all timers, autotimers and power timers."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del temporizador. Al seleccionar esta opción, se borrarán todos los temporizadores, temporizadores automáticos y temporizadores de alimentación."
+
+msgid "Select 'Yes' to remove all other files and directories not covered by the options above."
+msgstr "Seleccione 'Sí' para eliminar todos los demás archivos y directorios no cubiertos por las opciones anteriores."
+
+msgid "Full factory reset"
+msgstr "Restablecimiento completo de fábrica"
+
+msgid "Remove all bouquet/tuning data"
+msgstr "Eliminar completo datos de bouquets/sintonizados"
+
+msgid "Remove all keymap data"
+msgstr "Eliminar completo teclas asignadas"
+
+msgid "Remove all network data"
+msgstr "Eliminar completo datos de red"
+
+msgid "Remove all plugin setting data"
+msgstr "Eliminar completo datos de plugins"
+
+msgid "Remove all resume point data"
+msgstr "Eliminar puntos de reanudación de reprodución del multimedia"
+
+msgid "Remove all settings data"
+msgstr "Eliminar completo datos de configuración"
+
+msgid "Remove all skin data"
+msgstr "Eliminar completo datos del skin"
+
+msgid "Remove all timer data"
+msgstr "Eliminar completo datos de temporizadores"
+
+msgid "Remove all other data"
+msgstr "Eliminar completo otros datos"
 
 msgid "Failed"
 msgstr "Fallido"
