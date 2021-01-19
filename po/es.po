@@ -16449,4 +16449,4 @@ msgid "Select a cardserver from the available list."
 msgstr "Seleccione un cardserver de la lista disponible."
 
 msgid "Reset the selected devices when the GREEN button is pressed."
-msgstr "Guarda lo seleccionado cuando se presiona el botón VERDE."
+msgstr "Puede elegir también su softcam y pulsar VERDE para reiniciarla."
