@@ -82,6 +82,23 @@ class AutoRestoreWizard(MessageBox):
 		else:
 			MessageBox.close(self)
 
+def checkForDevelopImage():
+	if about.getImageTypeString() == 'Openpli develop':
+		return config.misc.check_developimage.value
+	elif not config.misc.check_developimage.value:
+		config.misc.check_developimage.value = True
+		config.misc.check_developimage.save()
+
+class DevelopWizard(MessageBox):
+	def __init__(self, session):
+		MessageBox.__init__(self, session, _("This image is intended for developers and testers.\nNo support will be provided!\nDo you understand this?"), type=MessageBox.TYPE_YESNO, timeout=20, default=False, simple=True)
+
+	def close(self, value):
+		if value:
+			config.misc.check_developimage.value = False
+			config.misc.check_developimage.save()
+		MessageBox.close(self)
+
 class AutoInstallWizard(Screen):
 	skin = """<screen name="AutoInstall" position="fill" flags="wfNoBorder">
 		<panel position="left" size="5%,*"/>
