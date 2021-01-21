@@ -513,7 +513,7 @@ msgid "8bit"
 msgstr "8bit"
 
 msgid "  Default: 0000 (disabled)"
-msgstr ": Por Defecto: 0000 (desactivado)"
+msgstr "  Por Defecto: 0000 (desactivado)"
 
 msgid "<Current movielist location>"
 msgstr "<ubicacion lista peliculas>"
