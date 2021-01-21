@@ -9,6 +9,7 @@ try:
 except:
 	OverscanWizard = None
 
+from boxbranding import getImageVersion
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
@@ -22,7 +23,8 @@ import os
 
 config.misc.firstrun = ConfigBoolean(default = True)
 config.misc.languageselected = ConfigBoolean(default = True)
-config.misc.do_overscanwizard = ConfigBoolean(default = OverscanWizard and config.skin.primary_skin.value == "Vision-Turquoise-HD/skin.xml")
+config.misc.do_overscanwizard = ConfigBoolean(default = OverscanWizard)
+config.misc.check_developimage = ConfigBoolean(default = False)
 
 class StartWizard(WizardLanguage, Rc):
 	def __init__(self, session, silent = True, showSteps = False, neededTag = None):
@@ -83,7 +85,7 @@ class AutoRestoreWizard(MessageBox):
 			MessageBox.close(self)
 
 def checkForDevelopImage():
-	if about.getImageTypeString() == 'Openpli develop':
+	if getImageVersion() == 'develop':
 		return config.misc.check_developimage.value
 	elif not config.misc.check_developimage.value:
 		config.misc.check_developimage.value = True
@@ -195,6 +197,7 @@ if not os.path.isfile("/etc/installed"):
 
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
+wizardManager.registerWizard(DevelopWizard, checkForDevelopImage(), priority=0)
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
 if OverscanWizard:
 	wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
