@@ -1099,7 +1099,7 @@ msgid "BT 709"
 msgstr "BT 709"
 
 msgid "Back"
-msgstr "Trasero"
+msgstr "Atrás"
 
 msgid "Background"
 msgstr "Segundo plano"
