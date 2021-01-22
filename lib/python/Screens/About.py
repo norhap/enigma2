@@ -1,6 +1,16 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
+import boxbranding
+try:
+	import urllib2
+except ImportError:
+	import urllib
+
+from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getBoxType, getDesktop
+from os import listdir, popen, remove
+from os.path import getmtime, isfile, join as pathjoin
+from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
+
+import skin, os, re, urllib2, sys, boxbranding
+from skin import parameters
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Components.config import config
@@ -14,21 +24,14 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.StbHardware import getFPVersion, getBoxProc
-from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl, eDVBResourceManager
 from Components.Pixmap import MultiPixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 from re import search
 from Tools.Directories import fileExists, fileHas, pathExists
 from Components.GUIComponent import GUIComponent
-import skin, os, re, urllib2, sys, boxbranding
 from Components.Console import Console
 from Tools.Geolocation import geolocation
-try:
-	import urllib2
-except:
-	import urllib
-import six
 
 URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
 
@@ -250,56 +253,57 @@ class Geolocation(Screen):
 		GeolocationText += "\n"
 
 		try:
-			continent = geolocation.get("continent", None)
-			if isinstance(continent, six.text_type):
-				continent = six.ensure_str(continent.encode(encoding="UTF-8", errors="ignore"))
+			geolocationData = geolocation.getGeolocationData(fields="continent,country,regionName,city,timezone,currency,lat,lon", useCache=True)
+			continent = geolocationData.get("continent", None)
+			if isinstance(continent, texttype):
+				continent = ensurestr(continent.encode(encoding="UTF-8", errors="ignore"))
 			if continent is not None:
-				GeolocationText +=  _("Continent: ") + continent + "\n"
+				GeolocationText += _("Continent: ") + continent + "\n"
 
-			country = geolocation.get("country", None)
-			if isinstance(country, six.text_type):
-				country = six.ensure_str(country.encode(encoding="UTF-8", errors="ignore"))
+			country = geolocationData.get("country", None)
+			if isinstance(country, texttype):
+				country = ensurestr(country.encode(encoding="UTF-8", errors="ignore"))
 			if country is not None:
-				GeolocationText +=  _("Country: ") + country + "\n"
+				GeolocationText += _("Country: ") + country + "\n"
 
-			state = geolocation.get("regionName", None)
-			if isinstance(state, six.text_type):
-				state = six.ensure_str(state.encode(encoding="UTF-8", errors="ignore"))
+			state = geolocationData.get("regionName", None)
+			if isinstance(state, texttype):
+				state = ensurestr(state.encode(encoding="UTF-8", errors="ignore"))
 			if state is not None:
-				GeolocationText +=  _("State: ") + state + "\n"
+				GeolocationText += _("State: ") + state + "\n"
 
-			city = geolocation.get("city", None)
-			if isinstance(city, six.text_type):
-				city = six.ensure_str(city.encode(encoding="UTF-8", errors="ignore"))
+			city = geolocationData.get("city", None)
+			if isinstance(city, texttype):
+				city = ensurestr(city.encode(encoding="UTF-8", errors="ignore"))
 			if city is not None:
-				GeolocationText +=  _("City: ") + city + "\n"
+				GeolocationText += _("City: ") + city + "\n"
 
 			GeolocationText += "\n"
 
-			timezone = geolocation.get("timezone", None)
-			if isinstance(timezone, six.text_type):
-				timezone = six.ensure_str(timezone.encode(encoding="UTF-8", errors="ignore"))
+			timezone = geolocationData.get("timezone", None)
+			if isinstance(timezone, texttype):
+				timezone = ensurestr(timezone.encode(encoding="UTF-8", errors="ignore"))
 			if timezone is not None:
-				GeolocationText +=  _("Timezone: ") + timezone + "\n"
+				GeolocationText += _("Timezone: ") + timezone + "\n"
 
-			currency = geolocation.get("currency", None)
-			if isinstance(currency, six.text_type):
-				currency = six.ensure_str(currency.encode(encoding="UTF-8", errors="ignore"))
+			currency = geolocationData.get("currency", None)
+			if isinstance(currency, texttype):
+				currency = ensurestr(currency.encode(encoding="UTF-8", errors="ignore"))
 			if currency is not None:
-				GeolocationText +=  _("Currency: ") + currency + "\n"
+				GeolocationText += _("Currency: ") + currency + "\n"
 
 			GeolocationText += "\n"
 
-			latitude = geolocation.get("lat", None)
+			latitude = geolocationData.get("lat", None)
 			if str(float(latitude)) is not None:
-				GeolocationText +=  _("Latitude: ") + str(float(latitude)) + "\n"
+				GeolocationText += _("Latitude: ") + str(float(latitude)) + "\n"
 
-			longitude = geolocation.get("lon", None)
+			longitude = geolocationData.get("lon", None)
 			if str(float(longitude)) is not None:
-				GeolocationText +=  _("Longitude: ") + str(float(longitude)) + "\n"
+				GeolocationText += _("Longitude: ") + str(float(longitude)) + "\n"
 			self["AboutScrollLabel"] = ScrollLabel(GeolocationText)
-		except Exception as e:
-			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection."))
+		except Exception as err:
+			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection"))
 
 		self["key_red"] = Button(_("Close"))
 
@@ -426,7 +430,7 @@ class Devices(Screen):
 		self.Console.ePopen("df -mh | grep -v '^Filesystem'", self.Stage1Complete)
 
 	def Stage1Complete(self, result, retval, extra_args=None):
-		if six.PY2:
+		if PY2:
 			result = result.replace('\n                        ', ' ').split('\n')
 		else:
 			result = result.decode().replace('\n                        ', ' ').split('\n')
@@ -565,32 +569,33 @@ class SystemNetworkInfo(Screen):
 		self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\n"
 		self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\n"
 
-		isp = geolocation.get("isp", None)
-		isporg = geolocation.get("org", None)
-		if isinstance(isp, six.text_type):
-			isp = six.ensure_str(isp.encode(encoding="UTF-8", errors="ignore"))
-		if isinstance(isporg, six.text_type):
-			isporg = six.ensure_str(isporg.encode(encoding="UTF-8", errors="ignore"))
+		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
+		isp = geolocationData.get("isp", None)
+		isporg = geolocationData.get("org", None)
+		if isinstance(isp, texttype):
+			isp = ensurestr(isp.encode(encoding="UTF-8", errors="ignore"))
+		if isinstance(isporg, texttype):
+			isporg = ensurestr(isporg.encode(encoding="UTF-8", errors="ignore"))
 		self.AboutText += "\n"
 		if isp is not None:
 			if isporg is not None:
-				self.AboutText +=  "\n" + _("ISP: ") + isp + " " + "(" + isporg + ")" + "\n"
+				self.AboutText += _("ISP: ") + isp + " " + "(" + isporg + ")" + "\n"
 			else:
 				self.AboutText +=  "\n" + _("ISP: ") + isp + "\n"
 
-		mobile = geolocation.get("mobile", False)
+		mobile = geolocationData.get("mobile", False)
 		if mobile is not False:
 			self.AboutText += _("Mobile: ") + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Mobile: ") + _("No") + "\n"
 
-		proxy = geolocation.get("proxy", False)
+		proxy = geolocationData.get("proxy", False)
 		if proxy is not False:
 			self.AboutText += _("Proxy: ") + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Proxy: ") + _("No") + "\n"
 
-		publicip = geolocation.get("query", None)
+		publicip = geolocationData.get("query", None)
 		if str(publicip) != "":
 			self.AboutText +=  _("Public IP: ") + str(publicip) + "\n" + "\n"
 
@@ -598,7 +603,7 @@ class SystemNetworkInfo(Screen):
 		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
 
 	def SpeedFinished(self, result, retval, extra_args):
-		if six.PY2:
+		if PY2:
 			result_tmp = result.split('\n')
 		else:
 			result_tmp = result.decode().split('\n')
@@ -720,7 +725,7 @@ class SystemNetworkInfo(Screen):
 		self["devicepic"].show()
 
 	def dataAvail(self, data):
-		if six.PY3:
+		if PY3:
 			data = data.decode()
 		self.LinkState = None
 		for line in data.splitlines():
@@ -903,12 +908,12 @@ class CommitInfoDevelop(Screen):
 			try:
 				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
 				from ssl import _create_unverified_context
-				if six.PY2:
+				if PY2:
 					log = loads(urllib2.urlopen(url, timeout=5, context=_create_unverified_context()).read())
 				else:
 					log = loads(urllib.request.urlopen(url, timeout=5, context=_create_unverified_context()).read())
 			except:
-				if six.PY2:
+				if PY2:
 					log = loads(urllib2.urlopen(url, timeout=5).read())
 				else:
 					log = loads(urllib.request.urlopen(url, timeout=5).read())
