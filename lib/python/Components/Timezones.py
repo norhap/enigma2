@@ -113,7 +113,7 @@ class Timezones:
 		# until AutoTimers are updated to use the Timezones
 		# callbacks.  Once AutoTimers are updated *all* AutoTimer
 		# code should be removed from the Timezones.py code!
-#		self.autotimerInit()
+		self.autotimerInit()
 
 	# Scan the zoneinfo directory tree and all load all time zones found.
 	#
@@ -342,7 +342,7 @@ class Timezones:
 		print("[Timezones] AutoTimer poll is running.")
 		if self.autotimerTimer is not None:
 			print("[Timezones] AutoTimer is parsing the EPG.")
-			self.autotimerTimer.parseEPG(autoPoll=True)
+			self.autotimerTimer.parseEPG()
 		if self.autotimerPoller is not None:
 			self.autotimerPoller.start()
 
