@@ -633,7 +633,7 @@ msgstr ""
 "Un temporizador de grabación falló!\n"
 "Desactivar TV y reintentar?\n"
 
-msgid "A/V settings"
+msgid "A/V Setup"
 msgstr "Ajustes A/V"
 
 msgid "AAC downmix"
@@ -4148,7 +4148,7 @@ msgstr "Nombre de red (SSID)"
 msgid "Network scan"
 msgstr "Búsqueda de redes"
 
-msgid "Network setup"
+msgid "Network Setup"
 msgstr "Configuración de red"
 
 msgid "Network test"
@@ -5117,7 +5117,7 @@ msgstr "Reiniciar"
 msgid "Recall to previous service"
 msgstr "Volver al canal anterior"
 
-msgid "Record"
+msgid "Recording &amp; Playback Setup"
 msgstr "Grabación & Reproducción"
 
 msgid "Record time limited due to conflicting timer %s"
@@ -7249,7 +7249,7 @@ msgstr "Miniaturas"
 msgid "Thursday"
 msgstr "Jueves"
 
-msgid "Time"
+msgid "Time Setup"
 msgstr "Horario"
 
 msgid "Time scale"
@@ -7708,7 +7708,7 @@ msgstr "Definido por el usuario"
 msgid "User defined transponder"
 msgstr "Transpondedor definido por el usuario"
 
-msgid "User interface"
+msgid "User Interface Setup"
 msgstr "Interfaz de Usuario"
 
 #, python-format
@@ -9885,8 +9885,8 @@ msgstr "Espacio en disco a reservar para grabaciones (en GB)"
 msgid "Display message before playing next movie"
 msgstr "Mostrar mensaje antes de reproducir la próxima película"
 
-msgid "Display setup"
-msgstr "Configuración Display"
+msgid "Display Setup"
+msgstr "Ajustes Display"
 
 msgid "EPG language selection 1"
 msgstr "Selección del idioma de EPG 1"
@@ -9894,8 +9894,8 @@ msgstr "Selección del idioma de EPG 1"
 msgid "EPG language selection 2"
 msgstr "Selección del idioma de EPG 2"
 
-msgid "EPG settings"
-msgstr "Configuración EPG"
+msgid "EPG Setup"
+msgstr "Ajustes EPG"
 
 msgid "Enable 'neutrino' style channel select controlling"
 msgstr "Activar el control en lista de canales con estilo neutrino"
@@ -9972,8 +9972,8 @@ msgstr "Retardo repetición de texto final"
 msgid "Finetune"
 msgstr "Ajuste fino"
 
-msgid "Hard disk setup"
-msgstr "Configuración de Disco Duro"
+msgid "Hard Disk Setup"
+msgstr "Ajustes Disco Duro"
 
 msgid "Hard disk standby after"
 msgstr "Poner el Disco Duro en reposo tras"
@@ -10026,8 +10026,8 @@ msgstr "Retraso de desplazamiento inicial"
 msgid "Keyboard map"
 msgstr "Mapa de teclado"
 
-msgid "Keyboard setup"
-msgstr "Configuración de teclado"
+msgid "Keyboard Setup"
+msgstr "Ajustes del teclado"
 
 msgid "Limit character set for recording filenames"
 msgstr "Juego de caracteres límite para nombres de archivo"
@@ -10065,8 +10065,8 @@ msgstr "Número de canales que se muestran en la lista de canales"
 msgid "Number of repeating text on display."
 msgstr "Número de texto repetido en pantalla."
 
-msgid "OSD settings"
-msgstr "Configuración de OSD"
+msgid "OSD Setup"
+msgstr "Ajustes OSD"
 
 msgid "Offline decode delay (ms)"
 msgstr "Retraso decodificación sin conexión (milisegundos)"
@@ -10128,8 +10128,8 @@ msgstr "Sintonizador preferido DVB-T para grabaciones"
 msgid "Preferred tuner for recordings"
 msgstr "Sintonizador preferido para grabaciones"
 
-msgid "RF output"
-msgstr "Salida RF"
+msgid "RF Output Setup"
+msgstr "Ajustes Salida RF"
 
 msgid "Recordings always have priority"
 msgstr "Las grabaciones siempre tienen prioridad"
@@ -10155,8 +10155,8 @@ msgstr "Velocidades de rebobinado"
 msgid "Rewrap subtitles"
 msgstr "Justificar subtítulos"
 
-msgid "Satellite dish setup"
-msgstr "Configuración de la parabólica"
+msgid "Satellite Dish Setup"
+msgstr "Ajustes Antena Satélite"
 
 msgid "Scroll delay"
 msgstr "Retardo de repetición"
@@ -10335,7 +10335,7 @@ msgstr "Selección de idioma de subtítulos 4"
 msgid "Subtitle position"
 msgstr "Posición de los subtítulos"
 
-msgid "Subtitle settings"
+msgid "Auto Language Setup"
 msgstr "Ajustes de subtítulos"
 
 msgid "Teletext subtitle color"
@@ -10407,8 +10407,8 @@ msgstr "Usar la posición original del teletexto"
 msgid "Use trash can in movielist"
 msgstr "Usar papelera en lista de películas"
 
-msgid "User Mode"
-msgstr "Modo Usuario"
+msgid "User Mode Setup"
+msgstr "Ajustes Modo Usuario"
 
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
 msgstr "Por lo general, cuando el idioma de los subtítulos es el mismo que el del audio, los subtítulos no se usarán. Habilite esta opción para permitir el uso de estos subtítulos."
@@ -14089,8 +14089,8 @@ msgstr "Retraso unicable después del último comando diseqc"
 msgid "Unzipping Image"
 msgstr "Descomprimiendo imagen"
 
-msgid "Wizard setup"
-msgstr "Configuración del asistente"
+msgid "Wizard Setup"
+msgstr "Ajustes del asistente"
 
 #, python-format
 msgid "Audio PID%s, codec & lang"
@@ -14319,10 +14319,10 @@ msgid "Front panel display"
 msgstr "Panel Frontal Display"
 
 msgid "LCD setup"
-msgstr "Configuración LCD"
+msgstr "Ajustes LCD"
 
-msgid "LED setup"
-msgstr "Configuración LED"
+msgid "LED Setup"
+msgstr "Ajustes LED"
 
 msgid "<Default Skin>"
 msgstr "<Skin Por Defecto>"
@@ -16450,3 +16450,12 @@ msgstr "Seleccione un cardserver de la lista disponible."
 
 msgid "Reset the selected devices when the GREEN button is pressed."
 msgstr "Puede elegir también su softcam y pulsar VERDE para reiniciarla."
+
+msgid "HDMI Recording Setup"
+msgstr "Ajustes Grabación HDMI"
+
+msgid "Fan Speed Setup"
+msgstr "Ajustes Velocidad Ventilador"
+
+msgid "Logs Setup"
+msgstr "Ajustes Registros"

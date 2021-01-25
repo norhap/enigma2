@@ -638,7 +638,7 @@ class RecordTimerEntry(timer.TimerEntry, object):
 
 				# Tell the trashcan we started recording. The trashcan gets events,
 				# but cannot tell what the associated path is.
-				#Trashcan.instance.markDirty(self.Filename)
+				#Trashcan.instance.markDirty(self.Filename) esta linea hace no iniciar el sistema en eliminacion repentina de grabacion, bloquea sistema y luego no inicia.
 				self.log_tuner(11, "start")
 				return True
 
