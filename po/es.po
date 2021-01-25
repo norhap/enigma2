@@ -4719,7 +4719,7 @@ msgid "Please enter the correct pin code"
 msgstr "Introducir el PIN correcto"
 
 msgid "Please enter the new PIN code"
-msgstr "Introducir el nievo código PIN"
+msgstr "Introducir el nuevo código PIN"
 
 msgid "Please enter the old PIN code"
 msgstr "Introducir el antiguo PIN"
