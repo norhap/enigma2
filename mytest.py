@@ -10,7 +10,7 @@ from Tools.Directories import resolveFilename, fileHas
 import Tools.RedirectOutput
 from Tools.Directories import resolveFilename, fileExists
 from boxbranding import getImageArch
-from enigma import getBoxType, getBoxBrand
+from enigma import getBoxType, getBoxBrand, getE2Rev
 
 import enigma
 import eConsoleImpl
