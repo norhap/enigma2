@@ -512,8 +512,8 @@ msgstr "50 MB/s"
 msgid "8bit"
 msgstr "8bit"
 
-msgid ": 0000 - default (disabled)"
-msgstr ": 0000 - por defecto (desactivado)"
+msgid "  Default: 0000 (disabled)"
+msgstr ": Por Defecto: 0000 (desactivado)"
 
 msgid "<Current movielist location>"
 msgstr "<ubicacion lista peliculas>"
@@ -1369,8 +1369,8 @@ msgstr "Chad"
 msgid "Change Language"
 msgstr "Cambiar idioma"
 
-msgid "Change PIN"
-msgstr "Cambiar PIN"
+msgid "Change PIN Pressing [OK]"
+msgstr "Cambiar PIN Presionando [OK]"
 
 msgid "Change recording (add time)"
 msgstr "Cambiar grabación (añadir tiempo)"
@@ -6029,8 +6029,8 @@ msgstr "Nombre de canal"
 msgid "Services"
 msgstr "Servicios"
 
-msgid "Set PIN"
-msgstr "Establezca PIN"
+msgid "Set PIN Pressing [OK]"
+msgstr "Establezca PIN Presionando [OK]"
 
 msgid "Set all hotkey to default?"
 msgstr "¿Establecer todas las hotkeys por defecto?"
@@ -8097,8 +8097,8 @@ msgstr "Sí, sin hacer backup"
 msgid "Yesterday"
 msgstr "Ayer"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
-msgstr "Su código PIN es 0000. ¡Este es el código PIN predeterminado y deshabilita el control parental!\n"
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgstr "Su código PIN es 0000. ¡Este es el código PIN por defecto y deshabilita el control parental!\n"
 
 #, python-format
 msgid ""
