@@ -1,7 +1,9 @@
 
-ALVARO
+NORHAP
 
 
-KODI 18.7 Leia
-KERNEL 5.5.16 add GCC 9.2.0
+KODI 18.9 Leia
+KERNEL 5.9 add GCC 9.2.0
 HbbTV
+GST 1.18.1
+FFmpeg 4.2.1

@@ -3653,7 +3653,7 @@ msgid "Last update: "
 msgstr "Última actualización: "
 
 msgid "Latest Commits"
-msgstr "Cambios Álvaro"
+msgstr "Últimos Cambios"
 
 msgid "Latest update log"
 msgstr "Último registro de actualización"
@@ -16503,7 +16503,7 @@ msgid "Select how you want your receiver to keep the correct time, either from t
 msgstr "Seleccione cómo desea que su receptor mantenga la hora correcta, ya sea desde el transpondedor DVB o desde Internet usando NTP. O use Auto, que favorecerá el uso de NTP, pero volverá al tiempo del transpondedor cuando no haya conexión a Internet disponible."
 
 msgid "FastScan"
-msgstr "EScaneo Rápido"
+msgstr "Escaneo Rápido"
 
 msgid "Fastscan"
 msgstr "Escaneo rápido"
