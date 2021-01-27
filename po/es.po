@@ -3194,7 +3194,7 @@ msgid "Hard disk"
 msgstr "Disco Duro"
 
 msgid "Harddisk Setup"
-msgstr "Configuración del Disco Duro"
+msgstr "Ajustes del Disco Duro"
 
 msgid "Hardware: "
 msgstr "Hardware: "
@@ -3631,8 +3631,8 @@ msgstr "Conexión LAN"
 msgid "LNB"
 msgstr "LNB"
 
-msgid "Language"
-msgstr "Idioma"
+msgid "Language Setup"
+msgstr "Ajustes Idioma"
 
 msgid "Language selection"
 msgstr "Selección de idioma"
@@ -3812,8 +3812,8 @@ msgstr "Macedonia"
 msgid "Madagascar"
 msgstr "Madagascar"
 
-msgid "Main menu"
-msgstr "Menú principal"
+msgid "Main Menu"
+msgstr "Menú Principal"
 
 msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu"
 msgstr "Permite iniciar manualmente los canales de importación y/o EPG a través del menú de extensión"
@@ -4582,11 +4582,11 @@ msgstr "Paraguay"
 msgid "Parent directory"
 msgstr "Directorio anterior"
 
-msgid "Parental control"
-msgstr "Control parental"
+msgid "Parental Control"
+msgstr "Control Parental"
 
-msgid "Parental control setup"
-msgstr "Configuración de control parental"
+msgid "Parental Control Setup"
+msgstr "Ajustes Control Parental"
 
 msgid "Pause"
 msgstr "Pausa"
@@ -5117,8 +5117,8 @@ msgstr "Reiniciar"
 msgid "Recall to previous service"
 msgstr "Volver al canal anterior"
 
-msgid "Recording &amp; Playback Setup"
-msgstr "Grabación & Reproducción"
+msgid "Record"
+msgstr "Ajustes Grabación & Reproducción"
 
 msgid "Record time limited due to conflicting timer %s"
 msgstr "Tiempo de grabación limitado por conflicto de tmporizador %s"
@@ -5131,6 +5131,9 @@ msgstr "Configuración de la grabación"
 
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
+
+msgid "Recording Paths"
+msgstr "Rutas Grabación & Timeshift"
 
 msgid "Recording paths"
 msgstr "Rutas de grabación"
@@ -5322,7 +5325,7 @@ msgid "Restart"
 msgstr "Reiniciar"
 
 msgid "Restart GUI now?"
-msgstr "¿Reiniciar GUI?"
+msgstr "¿Reiniciar Enigma2 ahora?"
 
 msgid "Restart cardserver"
 msgstr "Reiniciar cardserver"
@@ -5330,7 +5333,7 @@ msgstr "Reiniciar cardserver"
 msgid "Restart enigma"
 msgstr "Reiniciar Enigma2"
 
-msgid "Restart enigma in debug mode"
+msgid "Restart GUI in debug mode"
 msgstr "Reiniciar Enigma2 Modo debug"
 
 msgid "Restart network"
@@ -6317,8 +6320,11 @@ msgstr "Latitud del sitio"
 msgid "Site longitude"
 msgstr "Longitud del sitio"
 
-msgid "Skin"
+msgid "Skin Setup"
 msgstr "Cambiar Skin"
+
+msgid "Skin"
+msgstr "Skin"
 
 msgid "Skins"
 msgstr "Skins"
@@ -6393,8 +6399,8 @@ msgstr "Configuración del administrador de software"
 msgid "Software restore"
 msgstr "Restauración de software"
 
-msgid "Software update"
-msgstr "Actualización de software"
+msgid "Software Update"
+msgstr "Actualización de Software"
 
 msgid "Softwaremanager information"
 msgstr "Información del administrador de software"
@@ -6678,8 +6684,8 @@ msgstr "Transmisión"
 msgid "Stream request"
 msgstr "Solicitud de stream"
 
-msgid "Streaming clients info"
-msgstr "Info clientes en streaming"
+msgid "Streaming Clients"
+msgstr "Clientes en Streaming"
 
 msgid "Strongest position"
 msgstr "Posición más fuerte"
@@ -7249,8 +7255,11 @@ msgstr "Miniaturas"
 msgid "Thursday"
 msgstr "Jueves"
 
-msgid "Time Setup"
+msgid "Time"
 msgstr "Horario"
+
+msgid "Time Setup"
+msgstr "Ajustes Horario"
 
 msgid "Time scale"
 msgstr "Escala de tiempo"
@@ -7708,8 +7717,11 @@ msgstr "Definido por el usuario"
 msgid "User defined transponder"
 msgstr "Transpondedor definido por el usuario"
 
-msgid "User Interface Setup"
+msgid "User Interface"
 msgstr "Interfaz de Usuario"
+
+msgid "User Interface Setup"
+msgstr "Ajustes Interfaz de Usuario"
 
 #, python-format
 msgid "Using LNB %d"
@@ -9441,14 +9453,14 @@ msgstr "Valores de fábrica"
 msgid "Fallback remote receiver setup"
 msgstr "Configuración del receptor reserva"
 
-msgid "Filesystem check"
+msgid "Filesystem Check"
 msgstr "Chequear sistema de archivos"
 
 msgid "Flash image"
 msgstr "Flashear imagen"
 
-msgid "GUI Settings"
-msgstr "Interfaz Usuario Skin & Display"
+msgid "GUI Skin"
+msgstr "Cambiar Skin"
 
 msgid "Harddisk"
 msgstr "Disco Duro"
@@ -9456,8 +9468,8 @@ msgstr "Disco Duro"
 msgid "Initialization"
 msgstr "Inicialización"
 
-msgid "Input devices"
-msgstr "Dispositivos de entrada"
+msgid "Input Devices"
+msgstr "Entrada Dispositivos"
 
 msgid "Keyboard"
 msgstr "Teclado"
@@ -9465,8 +9477,8 @@ msgstr "Teclado"
 msgid "Manual scan"
 msgstr "Búsqueda manual"
 
-msgid "Multiboot image selector"
-msgstr "Seleccionar imagen Multiboot"
+msgid "Multiboot Image Selector"
+msgstr "Seleccionar Imagen Multiboot"
 
 msgid "Plugins"
 msgstr "Complementos"
@@ -9480,8 +9492,8 @@ msgstr "Búsqueda de canales"
 msgid "Shutdown"
 msgstr "Apagar"
 
-msgid "Sleep timer"
-msgstr "Temporizador de descanso"
+msgid "Sleep Timer"
+msgstr "Temporizador de Descanso"
 
 msgid "SoftCam / CI"
 msgstr "SoftCam & CI"
@@ -11230,7 +11242,7 @@ msgid "Show log"
 msgstr "Mostrar log"
 
 msgid "Skip import on restart GUI"
-msgstr "Omitir importación al reiniciar GUI"
+msgstr "Omitir importación al reiniciar Enigma2"
 
 msgid "Sources"
 msgstr "Fuentes"
@@ -11582,7 +11594,7 @@ msgstr "Volver a ver televisión"
 msgid "Run AutoTimer after refresh"
 msgstr "Ejecutar Temporizador Automático después de actualizar"
 
-msgid "Save EPG"
+msgid "Save EPG Cache"
 msgstr "Guardar EPG"
 
 msgid "Save EPG after refresh"
@@ -12998,7 +13010,7 @@ msgstr ""
 "Q: El plugin solo agrega temporizadores al salir de la configuración, no automáticamente. ¿Que puedo hacer?\n"
 "A: Desde la Vista general, presione MENÚ e ingrese la \"Configuración\". En esta pantalla, habilite \"Encuesta automáticamente\" y debería estar listo para continuar."
 
-msgid "Auto Backup"
+msgid "Auto backup"
 msgstr "Copia Automática"
 
 msgid "AutoBackup Configuration"
@@ -14315,10 +14327,10 @@ msgstr ""
 msgid "Please set your time zone"
 msgstr "Por favor, establezca su zona horaria"
 
-msgid "Front panel display"
+msgid "Front Panel Display"
 msgstr "Panel Frontal Display"
 
-msgid "LCD setup"
+msgid "LCD Setup"
 msgstr "Ajustes LCD"
 
 msgid "LED Setup"
@@ -14519,7 +14531,7 @@ msgstr "Falló la conexión utilizando los parámetros FTP suministrados. Por fa
 msgid "Cron manager"
 msgstr "Administrador Cron"
 
-msgid "Cron timers"
+msgid "Cron Timers"
 msgstr "Temporizadores Cron"
 
 msgid "Current status:"
@@ -14567,8 +14579,8 @@ msgstr "Iniciar"
 msgid "Timers"
 msgstr "Temporizadores"
 
-msgid "Restart enigma in standard mode"
-msgstr "Reiniciar Enigma2 en Modo Estandard"
+msgid "Restart GUI in standard mode"
+msgstr "Reiniciar Enigma2 Modo Estandard"
 
 msgid "H: = Hourly / D: = Daily / W: = Weekly / M: = Monthly"
 msgstr "H: = horario / D: = diario / W: = semanal / M: = mensual"
@@ -14796,7 +14808,7 @@ msgstr "Su %s %s se reinicia en modo Android"
 msgid "Your %s %s is rebooting into recovery mode"
 msgstr "Su %s %s se reinicia en modo de recuperación"
 
-msgid "Android mode"
+msgid "Android Mode"
 msgstr "Modo Android"
 
 msgid "Really reboot into android mode?"
@@ -14899,7 +14911,7 @@ msgid "Configure the contrast level of the front panel display"
 msgstr "Configure el nivel de contraste de la pantalla del display"
 
 msgid "Skin Setting"
-msgstr "Ajuste en Skin"
+msgstr "Ajustes en Skin"
 
 msgid "Mins"
 msgstr "Minutos"
@@ -15618,9 +15630,6 @@ msgstr "modo reposo profundo automático"
 msgid "reboot system"
 msgstr "reiniciar sistema"
 
-msgid "restart GUI"
-msgstr "reiniciar GUI"
-
 msgid "Sleep delay"
 msgstr "Retraso para ejecutarse"
 
@@ -15629,6 +15638,9 @@ msgstr "Solo activo cuando esté en modo reposo"
 
 msgid "PowerTimer List"
 msgstr "Lista Temporizadores Alimentación"
+
+msgid "Power Timers"
+msgstr "Temporizadores Alimentación"
 
 msgid "PowerManager entry"
 msgstr "Entrada Administrador Alimentación"
@@ -15711,7 +15723,7 @@ msgid "Auto Deep Standby"
 msgstr "Espera Profunda Automática"
 
 msgid "Restart GUI"
-msgstr "Reiniciar GUI"
+msgstr "Reiniciar Enigma2"
 
 msgid "Installing service"
 msgstr "Instalando Servicio"
@@ -16459,3 +16471,36 @@ msgstr "Ajustes Velocidad Ventilador"
 
 msgid "Logs Setup"
 msgstr "Ajustes Registros"
+
+msgid "Subtitle Setup"
+msgstr "Configuración Subtítulos"
+
+msgid "A/V settings"
+msgstr "Ajustes A/V"
+
+msgid "Storage"
+msgstr "Almacenamiento"
+
+msgid "Time zone area"
+msgstr "Tiempo zona area"
+
+msgid "Time zone"
+msgstr "Tiempo zona"
+
+msgid "Time synchronization method"
+msgstr "Tiempo método sincronizado"
+
+msgid "NTP Hostname"
+msgstr "NTP Hostname"
+
+msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
+msgstr "Seleccione cómo desea que su receptor mantenga la hora correcta, ya sea desde el transpondedor DVB o desde Internet usando NTP. O use Auto, que favorecerá el uso de NTP, pero volverá al tiempo del transpondedor cuando no haya conexión a Internet disponible."
+
+msgid "FastScan"
+msgstr "EScaneo Rápido"
+
+msgid "Fastscan"
+msgstr "Escaneo rápido"
+
+msgid "Recovery Mode"
+msgstr "Modo Recuperación"
