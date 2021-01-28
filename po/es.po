@@ -3215,7 +3215,7 @@ msgid "Hide known extensions"
 msgstr "Ocultar archivos jpg"
 
 msgid "Hide parentel locked services"
-msgstr "Ocultar los servicios de bloqueo parental"
+msgstr "Ocultar los canales de bloqueo parental"
 
 msgid "Hide player"
 msgstr "Ocultar reproductor"
@@ -5121,7 +5121,7 @@ msgid "Recall to previous service"
 msgstr "Volver al canal anterior"
 
 msgid "Record"
-msgstr "Ajustes Grabación & Reproducción"
+msgstr "Ajustes Grabación & Multimedia"
 
 msgid "Record time limited due to conflicting timer %s"
 msgstr "Tiempo de grabación limitado por conflicto de tmporizador %s"
@@ -7574,7 +7574,7 @@ msgid "Unencrypted"
 msgstr "Desencriptado"
 
 msgid "Unhide parental control services"
-msgstr "Mostrar los servicios de control parental"
+msgstr "Mostrar los canales de control parental"
 
 msgid "Uninstall"
 msgstr "Desinstalar"
@@ -8356,8 +8356,8 @@ msgstr "añadir marcador"
 msgid "Add bouquet"
 msgstr "Añadir bouquet"
 
-msgid "add bouquet to parental protection"
-msgstr "añadir bouquet al control parental"
+msgid "Add bouquet to parental protection"
+msgstr "Añadir bouquet al control parental"
 
 msgid "Add marker"
 msgstr "Añadir marcador"
@@ -8368,8 +8368,8 @@ msgstr "Añadir canal al bouquet"
 msgid "add service to favourites"
 msgstr "añadir el canal a favoritos"
 
-msgid "add to parental protection"
-msgstr "añadir a control parental"
+msgid "Add to parental protection"
+msgstr "Añadir canal a control parental"
 
 msgid "adult movie/drama"
 msgstr "adultos/Drama"
@@ -9038,10 +9038,10 @@ msgstr "eliminar tras esta posición"
 msgid "remove bookmark"
 msgstr "eliminar marcador"
 
-msgid "remove bouquet from parental protection"
-msgstr "eliminar bouquet de la protección parental"
+msgid "Remove bouquet from parental protection"
+msgstr "Eliminar bouquet de la protección parental"
 
-msgid "remove cable services"
+msgid "emove cable services"
 msgstr "eliminar servicios de cable"
 
 msgid "remove directory"
@@ -9050,8 +9050,8 @@ msgstr "eliminar directorio"
 msgid "remove entry"
 msgstr "eliminar entrada"
 
-msgid "remove from parental protection"
-msgstr "eliminar de protección parental"
+msgid "Remove from parental protection"
+msgstr "Eliminar canal de la protección parental"
 
 msgid "remove new found flag"
 msgstr "eliminar el indicador nuevo encontrado"
@@ -16513,3 +16513,6 @@ msgstr "Modo Recuperación"
 
 msgid "The hostname or the IP address of the NTP server to synchronise the time with."
 msgstr "El nombre de host o la dirección IP del servidor NTP con el que sincronizar la hora."
+
+msgid "Service belongs to a parental protected bouquet"
+msgstr "El canal pertenece a un bouquet protegido por los padres"
