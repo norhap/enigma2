@@ -18,4 +18,4 @@ install_PYTHON = \
 	InputDeviceSetup.py DVD.py SoftwareUpdate.py AutoDiseqc.py InstallWizard.py ScreenSaver.py \
 	Hotkey.py StreamingClientsInfo.py SoftcamSetup.py FlashImage.py SetupFallbacktuner.py \
 	SkinSelector.py OScamInfo.py ClientMode.py CronTimer.py PowerTimerEdit.py PowerTimerEntry.py \
-	CCcamInfo.py NcamInfo.py
+	CCcamInfo.py NcamInfo.py Time.py
