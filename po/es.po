@@ -16516,3 +16516,21 @@ msgstr "El nombre de host o la dirección IP del servidor NTP con el que sincron
 
 msgid "Service belongs to a parental protected bouquet"
 msgstr "El canal pertenece a un bouquet protegido por los padres"
+
+msgid "Use geolocation to set the current time zone location"
+msgstr "Utilice la geolocalización para establecer la ubicación de la zona horaria actual"
+
+msgid "Time Setup Actions"
+msgstr "Acciones configuración de tiempo"
+
+msgid "Geolocation does not contain time zone information."
+msgstr "La geolocalización no contiene información sobre la zona horaria."
+
+msgid "Geolocation is not available."
+msgstr "La geolocalización no está disponible."
+
+msgid "Geolocation has been used to set the time zone."
+msgstr "Se ha utilizado la geolocalización para establecer la zona horaria."
+
+msgid "Use Geolocation"
+msgstr "Use Geolocalización"
