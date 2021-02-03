@@ -16534,3 +16534,9 @@ msgstr "Se ha utilizado la geolocalización para establecer la zona horaria."
 
 msgid "Use Geolocation"
 msgstr "Use Geolocalización"
+
+msgid "Auto play last service in radio mode"
+msgstr "Reproducción automática del último canal en modo radio"
+
+msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
+msgstr "Cuando está habilitado, se reproducirá automáticamente en el último canal de radio guardado al cambiar al modo de radio."

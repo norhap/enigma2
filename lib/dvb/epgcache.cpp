@@ -4842,13 +4842,19 @@ void eEPGCache::channel_data::timeMHW2DVB( u_char hours, u_char minutes, u_char 
 	return_time[2] = 0;
 }
 
-void eEPGCache::channel_data::timeMHW2DVB( int minutes, u_char *return_time)
-{
-	timeMHW2DVB( int(minutes/60), minutes%60, return_time );
+		// disable EIT event parsing when using EPG_IMPORT
+		ePtr<eDVBService> service;
+		if (!eDVBDB::getInstance()->getService(*serviceRef, service) && service->useEIT())
+		{
+			service->m_flags |= eDVBService::dxNoEIT;
+		}
+	}
+	submitEventData(sids, chids, start, duration, title, short_summary, long_description, event_type, 0, EPG_IMPORT);
 }
 
-void eEPGCache::channel_data::timeMHW2DVB( u_char day, u_char hours, u_char minutes, u_char *return_time)
-// For date plus time of day
+void eEPGCache::submitEventData(const std::vector<int>& sids, const std::vector<eDVBChannelID>& chids, long start,
+	long duration, const char* title, const char* short_summary,
+	const char* long_description, char event_type, int event_id, int source)
 {
 	char tz_saved[1024];
 	// Remove offset in mhw time.
@@ -4929,9 +4935,14 @@ void eEPGCache::channel_data::storeMHWTitle(std::map<uint32_t, mhw_title_t>::ite
 	packet->segment_last_section_number = 0; // eEPGCache::sectionRead() will dig this for the moment
 	packet->segment_last_table_id = 0x50;
 
-	uint8_t *title = isMHW2 ? ((uint8_t*)(itTitle->second.title))-4 : (uint8_t*)itTitle->second.title;
-	std::string prog_title = (char *) delimitName( title, name, isMHW2 ? 35 : 23 );
-	int prog_title_length = prog_title.length();
+	eit_event_t *evt_struct = (eit_event_t*) (data + EIT_SIZE);
+
+	uint16_t eventId = (event_id == 0) ? start & 0xFFFF : event_id;
+	evt_struct->setEventId(eventId);
+
+	//6 bytes start time, 3 bytes duration
+	fill_eit_start(evt_struct, start);
+	fill_eit_duration(evt_struct, duration);
 
 	int packet_length = EIT_SIZE + EIT_LOOP_SIZE + EIT_SHORT_EVENT_DESCRIPTOR_SIZE +
 		prog_title_length + 1;
