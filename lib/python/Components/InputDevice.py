@@ -40,7 +40,7 @@ def EVIOCGNAME(length):
 
 
 class inputDevices:
-
+	BLACKLIST = ("dreambox front panel", "cec_input")
 	def __init__(self):
 		self.Devices = {}
 		self.currentDevice = ""
@@ -61,6 +61,10 @@ class inputDevices:
 				self.name = None
 
 			if self.name:
+				if self.name == "aml_keypad":
+					self.name = "dreambox advanced remote control (native)"
+				if self.name in self.BLACKLIST:
+					continue
 				self.Devices[evdev] = {'name': self.name, 'type': self.getInputDeviceType(self.name),'enabled': False, 'configuredName': None }
 				if model.startswith("et"):
 					self.setDefaults(evdev)
