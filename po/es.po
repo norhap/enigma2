@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2019-10-16 22:14+0200\n"
+"PO-Revision-Date: 2021-02-09 02:00+0100\n"
 "Language-Team: Álvaro <mi casa>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "Last-Translator: Kuatto\n"
 "Language: es_ES\n"
 
@@ -6940,7 +6940,7 @@ msgstr ""
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
-"Note: you can always start the Overscan wizard later,	via\n"
+"Note: you can always start the Overscan wizard later,\tvia\n"
 "\n"
 "Menu->Installation->System->Audio/Video->Overscan wizard"
 msgstr ""
@@ -9387,8 +9387,8 @@ msgstr "cuando esté activo PiPzap cambia canal abajo…"
 msgid "when PiPzap enabled zap channel up..."
 msgstr "cuando esté activo PiPzap cambia canal arriba…"
 
-msgid "white"
-msgstr "blanco"
+msgid "White"
+msgstr "Blanco"
 
 msgid "wide"
 msgstr "altura"
@@ -9482,6 +9482,9 @@ msgstr "Teclado"
 
 msgid "Manual scan"
 msgstr "Búsqueda manual"
+
+msgid "Multiboot image selector"
+msgstr "Seleccionar Imagen Multiboot"
 
 msgid "Multiboot Image Selector"
 msgstr "Seleccionar Imagen Multiboot"
@@ -14880,6 +14883,9 @@ msgstr "Esta opción le permite elegir cómo mostrar el tiempo transcurrido como
 msgid "This option allows you to choose how to display the remaining/elapsed time for media playback."
 msgstr "Esta opción le permite elegir cómo mostrar el tiempo restante/transcurrido para la reproducción de medios."
 
+msgid "This option allows you to choose how to display the remaining/elapsed time for Media playback."
+msgstr "Esta opción le permite elegir cómo mostrar el tiempo restante/transcurrido para la reproducción de Medios."
+
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Configure si y por cuánto tiempo se recordará el último servicio en el modo PiP."
 
@@ -15661,28 +15667,35 @@ msgid ""
 "A finished powertimer wants to reboot your %s %s.\n"
 "Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere reiniciar su %s %s.\n"
+"Un Powertimer ha terminado y quiere reiniciar su %s %s.\n"
 "Hacerlo Ahora?"
 
 msgid ""
 "A finished powertimer wants to restart the user interface.\n"
 "Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere reiniciar la interfaz de usuario.\n"
+"Un Powertimer ha terminado y quiere reiniciar enigma2.\n"
 "Hacerlo Ahora?"
 
 msgid ""
-"A finished powertimer wants to set your\n"
-"%s %s to standby. Do that now?"
+"A finished powertimer wants to set your %s %s to standby.\n"
+"Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere configurar su\n"
-"%s %s para modo espera.Hacerlo Ahora?"
+"Un Powertimer ha terminado y quiere poner su %s %s en standby.\n"
+"Hacerlo Ahora?"
+
+msgid ""
+"A finished powertimer wants to set your receiver to standby.\n"
+"Do that now?"
+msgstr ""
+"Un Powertimer ha terminado y quiere poner su receptor en standby.\n"
+"Hacerlo Ahora?"
 
 msgid ""
 "A finished powertimer wants to shutdown your %s %s.\n"
 "Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere apagar su %s %s.\n"
+"Un Powertimer ha terminado y quiere apagar profundo su %s %s.\n"
 "Hacerlo Ahora?"
 
 msgid "Do you really want to delete this timer?"
@@ -15730,6 +15743,9 @@ msgstr "Espera Profunda Automática"
 
 msgid "Restart GUI"
 msgstr "Reiniciar Enigma2"
+
+msgid "restart GUI"
+msgstr "reiniciar enigma2"
 
 msgid "Installing service"
 msgstr "Instalando Servicio"
@@ -15900,17 +15916,17 @@ msgstr "'%s' contiene %d archivo(s) y %d sub-directorios.\n"
 msgid "(You are currently using a temporary sort method)"
 msgstr "(Actualmente está utilizando un método de clasificación temporal)"
 
-msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.	 It hides the day of the week for recordings made in previous years."
+msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.\t It hides the day of the week for recordings made in previous years."
 msgstr "La visualización adaptable de la fecha permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
 
 msgid "Allows you to setup the button to do what you choose."
 msgstr "Le permite configurar el botón para hacer lo que elija."
 
 msgid "Ask user (with default as 'no')"
-msgstr "Preguntar al usuario (con valor predeterminado 'no')"
+msgstr "Preguntar al usuario (por defecto 'no')"
 
 msgid "Ask user (with default as 'yes')"
-msgstr "Preguntar al usuario (con valor predeterminado 'si')"
+msgstr "Preguntar al usuario (por defecto 'si')"
 
 msgid "Blue long"
 msgstr "Azul prolongado"
@@ -16388,8 +16404,8 @@ msgstr "Puede seleccionar el skin del teclado virtual."
 msgid "Virtual keyboard skin"
 msgstr "Teclado virtual en skin"
 
-msgid "Humidity :"
-msgstr "Humedad :"
+msgid "Humidity:"
+msgstr "Humedad:"
 
 msgid "Lets define enigma2 once more"
 msgstr "Definamos enigma2 una vez más"
@@ -16418,8 +16434,8 @@ msgstr "Configuración Proveedor DNS"
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"
 
-msgid "%s  (Default: %s)"
-msgstr "%s  (Por Defecto: %s)"
+msgid "%s\n(Default: %s)"
+msgstr "%s\n(Por Defecto: %s)"
 
 msgid "Default: '%s'."
 msgstr "Por Defecto: '%s'."
@@ -16539,4 +16555,79 @@ msgid "Auto play last service in radio mode"
 msgstr "Reproducción automática del último canal en modo radio"
 
 msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
-msgstr "Cuando está habilitado, se reproducirá automáticamente en el último canal de radio guardado al cambiar al modo de radio."
+msgstr "Cuando está habilitado, se reproducirá automáticamente el último canal de radio guardado al cambiar al modo de radio."
+
+msgid "Enable Autostart"
+msgstr "Activar Inicio Automático"
+
+msgid "Stop|Disable Autostart"
+msgstr "Detener|Desactivado Autoinicio"
+
+msgid "SATPI Setup"
+msgstr "Ajustes SATPI"
+
+msgid "Delay:"
+msgstr "Retraso:"
+
+msgid "Auto deep standby"
+msgstr "Modo espera profundo automático"
+
+msgid ""
+"Please set your time options.\n"
+"\n"
+"Press YELLOW to set the time zone via geolocation."
+msgstr ""
+"Configura sus opciones de horario.\n"
+"\n"
+"Pulsa Amarillo para usar su horario y continue con el wizard."
+
+msgid "Skin setting"
+msgstr "Ajuste skin"
+
+msgid "With this option you can switch the LED color or deactivate the LED."
+msgstr "Con esta opción puede cambiar el color del LED o desactivar el LED."
+
+msgid "violet"
+msgstr "violeta"
+
+msgid "Operating LED status in deep standby mode"
+msgstr "Estado del LED en reposo profundo"
+
+msgid "Operating LED status in standby mode"
+msgstr "Estado del LED en standby"
+
+msgid "Operating LED status while running."
+msgstr "Estado del LED en funcionamiento."
+
+msgid "Switch on the display during Standby Mode"
+msgstr "Encender la pantalla en standby"
+
+msgid "Switch on the display during Suspend Mode"
+msgstr "Encender la pantalla durante reposo profundo"
+
+msgid "Switch on the display during operation."
+msgstr "Encender la pantalla durante el funcionamiento."
+
+msgid "With this option you can switch on the display during operation."
+msgstr "Con esta opción puede encender la pantalla durante el funcionamiento."
+
+msgid "With this option you can switch on the display in Deep Standby Mode."
+msgstr "Con esta opción puede encender la pantalla en reposo profundo."
+
+msgid "With this option you can switch on the display in Standby Mode."
+msgstr "Con esta opción puede encender la pantalla en standby."
+
+msgid "Set the scrolling speed of text on the front panel display."
+msgstr "Configure la velocidad de desplazamiento del texto en display."
+
+msgid "Set the scrolling speed of text on the front panel display, this is used by software renderer in some skins."
+msgstr "Establezca la velocidad de desplazamiento del texto en display, esto lo usa el renderizador de software en algunas skins."
+
+msgid "Default timer type"
+msgstr "Tipo temporizador por defecto"
+
+msgid "Configure default type for new timers."
+msgstr "Configure por defecto para nuevos temporizadores."
+
+msgid "Single line mode"
+msgstr "Linea simple"
