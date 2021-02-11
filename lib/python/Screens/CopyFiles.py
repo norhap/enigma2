@@ -49,7 +49,7 @@ class CopyFileTask(Components.Task.PythonTask):
 					offset = 0
 					fdd = dst.fileno()
 					fds = src.fileno()
-					while 1:
+					while True:
 						if self.aborted:
 							print("[CopyFiles] aborting")
 							raise Exception("Aborted")
@@ -66,7 +66,7 @@ class CopyFileTask(Components.Task.PythonTask):
 					print("[CopyFiles]", ex)
 					bs = 65536
 					d = bytearray(bs)
-					while 1:
+					while True:
 						if self.aborted:
 							print("[CopyFiles] aborting")
 							raise Exception("Aborted")
