@@ -6,7 +6,10 @@
 # because the log unit looks enough like a file!
 
 import sys
-from cStringIO import StringIO
+try:
+	from cStringIO import StringIO
+except:
+	from io import StringIO
 import threading
 
 logfile = None
