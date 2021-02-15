@@ -229,7 +229,7 @@ class InfoBarUnhandledKey:
 		)
 
 	def actionA(self, key, flag):  # This function is called on every keypress!
-		print("[InfoBarGenerics] Key: %s (%s) KeyID='%s' Binding='%s'." % (key, KEYFLAGS[flag], self.invKeyIds.get(key, ""), ", ".join(getKeyDescription(key))))
+		print("[InfoBarGenerics] Key: %s (%s) KeyID='%s' Binding='%s'" % (key, KEYFLAGS[flag], self.invKeyIds.get(key, ""), getKeyDescription(key)))
 		self.unhandledKeyDialog.hide()
 		if self.closeSIB(key) and self.secondInfoBarScreen and self.secondInfoBarScreen.shown:
 			self.secondInfoBarScreen.hide()
