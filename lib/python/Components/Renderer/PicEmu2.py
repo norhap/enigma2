@@ -8,6 +8,8 @@ from Tools.Directories import fileExists, fileHas, SCOPE_CURRENT_SKIN, resolveFi
 from Components.Element import cached
 import os
 
+
+
 class PicEmu2(Renderer):
 	__module__ = __name__
 	if os.path.exists("/usr/lib64"):

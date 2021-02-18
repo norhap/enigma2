@@ -4,6 +4,7 @@ from enigma import iServiceInformation, eTimer
 from Components.Element import cached
 import re
 
+
 class Audio(Converter, object):
 	PROV_CA_ID = 1
 	NETCARD_INFO = 2
@@ -197,7 +198,6 @@ class Audio(Converter, object):
 								return sysID
 		else:
 			return ""
-
 
 	def getStreamInfo(self, ltype):
 		try:

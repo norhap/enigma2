@@ -79,6 +79,7 @@ config.misc.prev_wakeup_time_type = ConfigInteger(default=0)
 # 0 = RecordTimer, 1 = ZapTimer, 2 = Plugins, 3 = WakeupTimer
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
 
+
 def setEPGCachePath(configElement):
 	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
 		configElement.value = os.path.join(configElement.value, "epg.dat")
@@ -95,6 +96,7 @@ def setEPGCachePath(configElement):
 
 #config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call = False)
 ####################################################
+
 
 profile("Twisted")
 try:
@@ -138,6 +140,7 @@ from Plugins.Plugin import PluginDescriptor
 
 profile("misc")
 had = dict()
+
 
 def dump(dir, p=""):
 	if isinstance(dir, dict):

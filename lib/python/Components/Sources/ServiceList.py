@@ -2,6 +2,7 @@ from __future__ import print_function
 from Components.Sources.Source import Source
 from enigma import eServiceCenter, eServiceReference
 
+
 class ServiceList(Source):
 	def __init__(self, root, command_func=None, validate_commands=True):
 		Source.__init__(self)

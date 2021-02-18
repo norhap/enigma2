@@ -1,6 +1,7 @@
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 
+
 class Combine(Converter, object):
 	SINGLE_SOURCE = False
 

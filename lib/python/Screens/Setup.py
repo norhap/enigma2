@@ -370,11 +370,15 @@ def setupDom(setup=None, plugin=None):
 
 # Temporary legacy interface.  Known to be used by the Heinz plugin and possibly others.
 #
+
+
 def setupdom(setup=None, plugin=None):
 	return setupDom(setup, plugin)
 
 # Only used in AudioSelection screen...
 #
+
+
 def getConfigMenuItem(configElement):
 	for item in setupDom().findall("./setup/item/."):
 		if item.text == configElement:
@@ -383,6 +387,8 @@ def getConfigMenuItem(configElement):
 
 # Temporary legacy interface.  Only used in Menu screen.
 #
+
+
 def getSetupTitle(id):
 	xmlData = setupDom()
 	for x in xmlData.findall("setup"):

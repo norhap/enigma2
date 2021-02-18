@@ -1,9 +1,11 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from enigma import iServiceInformation
 from ServiceReference import ServiceReference
 from os import path
+
 
 class MovieBarInfo(Converter, object):
 	MOVIE_REFERENCE = 0

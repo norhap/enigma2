@@ -16,6 +16,7 @@ has_hdmi = hw_type not in ("dm800","dm8000")
 
 config.misc.showtestcard = ConfigBoolean(default=False)
 
+
 class VideoWizardSummary(WizardSummary):
 	def __init__(self, session, parent):
 		WizardSummary.__init__(self, session, parent)
@@ -25,6 +26,7 @@ class VideoWizardSummary(WizardSummary):
 
 	def setLCDPic(self, file):
 		self["pic"].instance.setPixmapFromFile(file)
+
 
 class VideoWizard(WizardLanguage, Rc):
 	skin = """
@@ -69,7 +71,6 @@ class VideoWizard(WizardLanguage, Rc):
 		self.port = None
 		self.mode = None
 		self.rate = None
-
 
 	def createSummary(self):
 		print("[Videomode] VideoWizard createSummary")

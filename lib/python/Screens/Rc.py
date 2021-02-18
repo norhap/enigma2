@@ -9,6 +9,7 @@ from Tools.StbHardware import getBoxProc
 
 config.misc.rcused = ConfigInteger(default = 1)
 
+
 class Rc:
 	def __init__(self):
 		self["rc"] = MultiPixmap()

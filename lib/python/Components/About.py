@@ -13,6 +13,7 @@ import struct
 from Components.Console import Console
 from Tools.Directories import fileExists
 
+
 def _ifinfo(sock, addr, ifname):
 	iface = struct.pack('256s', ifname[:15])
 	info = fcntl.ioctl(sock.fileno(), addr, iface)
@@ -20,6 +21,7 @@ def _ifinfo(sock, addr, ifname):
 		return ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
 	else:
 		return socket.inet_ntoa(info[20:24])
+
 
 def getIfConfig(ifname):
 	ifreq = {'ifname': ifname}
@@ -38,6 +40,7 @@ def getIfConfig(ifname):
 	sock.close()
 	return ifreq
 
+
 def getIfTransferredData(ifname):
 	f = open('/proc/net/dev', 'r')
 	for line in f:
@@ -47,8 +50,10 @@ def getIfTransferredData(ifname):
 			f.close()
 			return rx_bytes, tx_bytes
 
+
 def getVersionString():
 	return getImageVersionString()
+
 
 def getImageVersionString():
 	try:
@@ -62,8 +67,11 @@ def getImageVersionString():
 	return _("unavailable")
 
 # WW -placeholder for BC purposes, commented out for the moment in the Screen
+
+
 def getFlashDateString():
 	return _("unknown")
+
 
 def getBuildDateString():
 	try:
@@ -73,6 +81,7 @@ def getBuildDateString():
 	except:
 		pass
 	return _("unknown")
+
 
 def getUpdateDateString():
 	try:
@@ -84,12 +93,14 @@ def getUpdateDateString():
 		pass
 	return _("unknown")
 
+
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
 	if '-(no branch)' in enigma_version:
 		enigma_version = enigma_version[:-12]
 	return enigma_version
+
 
 def getGStreamerVersionString(cpu):
 	try:
@@ -98,6 +109,7 @@ def getGStreamerVersionString(cpu):
 		return "%s" % gst[1].split("+")[0].replace("\n","")
 	except:
 		return _("Not Required") if cpu.upper().startswith('HI') else _("Not Installed")
+
 
 def getFFmpegVersionString():
 	try:
@@ -109,6 +121,7 @@ def getFFmpegVersionString():
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
 	except:
 		return _("unknown")
+
 
 def getKernelVersionString():
 	try:
@@ -186,12 +199,14 @@ def getCPUInfoString():
 	except:
 		return _("undefined")
 
+
 def getChipSetString():
 	try:
 		chipset = open("/proc/stb/info/chipset", "r").read()
 		return str(chipset.lower().replace('\n',''))
 	except IOError:
 		return _("undefined")
+
 
 def getCPUBrand():
 	if SystemInfo["AmlogicFamily"]:
@@ -203,6 +218,7 @@ def getCPUBrand():
 	else:
 		return _("Broadcom")
 
+
 def getCPUArch():
 	if SystemInfo["ArchIsARM64"]:
 		return _("ARM64")
@@ -211,11 +227,13 @@ def getCPUArch():
 	else:
 		return _("Mipsel")
 
+
 def getFlashType():
 	    if SystemInfo["SmallFlash"]:
 		        return _("Small flash STB")
 	    else:
                 return _("Flash Normal STB")
+
 
 def getDVBAPI():
 	if SystemInfo["OLDE2API"]:
@@ -243,6 +261,7 @@ def getDriverInstalledDate():
 	except:
 		return _("unknown")
 
+
 def getPythonVersionString():
 	try:
 		try:
@@ -253,6 +272,7 @@ def getPythonVersionString():
 		return output.split(' ')[1]
 	except:
 		return _("unknown")
+
 
 def GetIPsFromNetworkInterfaces():
 	import socket
@@ -287,6 +307,7 @@ def GetIPsFromNetworkInterfaces():
 			ifaces.append((iface_name, iface_addr))
 	return ifaces
 
+
 def getBoxUptime():
 	try:
 		time = ''
@@ -304,6 +325,7 @@ def getBoxUptime():
 		return "%s" % time
 	except:
 		return '-'
+
 
 # For modules that do "from About import about"
 about = sys.modules[__name__]

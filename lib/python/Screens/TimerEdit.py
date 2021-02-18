@@ -25,6 +25,7 @@ import six
 if six.PY3:
 	import functools
 
+
 class TimerEditList(Screen, ProtectedScreen):
 	EMPTY = 0
 	ENABLE = 1
@@ -341,6 +342,7 @@ class TimerEditList(Screen, ProtectedScreen):
 				def removeEditTimer():
 					entry.service_ref, entry.begin, entry.end, entry.external = entry.service_ref_prev, entry.begin_prev, entry.end_prev, entry.external_prev
 					self.removeTimer()
+
 				def moveEditTimerError():
 					entry.external = entry.external_prev
 					self.refill()
@@ -400,6 +402,7 @@ class TimerEditList(Screen, ProtectedScreen):
 
 	def onStateChange(self, entry):
 		self.refill()
+
 
 class TimerSanityConflict(Screen):
 	def __init__(self, session, timer):
@@ -541,6 +544,7 @@ class TimerSanityConflict(Screen):
 		menu = []
 		if not config.usage.show_timer_conflict_warning.value:
 			menu.append((_("Show warning before set 'Ignore conflict'"), "blue_key_warning"))
+
 		def showAction(choice):
 			if choice is not None:
 				if choice[1] == "blue_key_warning":

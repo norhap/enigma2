@@ -16,6 +16,7 @@ has_hdmi = model not in ("dm800","dm8000")
 
 config.av.edid_override = ConfigYesNo(default=True)
 
+
 class VideoHardware:
 	rates = {} # high-level, use selectable modes.
 
@@ -426,6 +427,7 @@ class VideoHardware:
 			open("/proc/stb/video/policy2", "w").write(policy2)
 		except IOError:
 			pass
+
 
 video_hw = VideoHardware()
 video_hw.setConfiguredMode()
