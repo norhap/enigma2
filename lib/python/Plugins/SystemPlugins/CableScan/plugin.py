@@ -202,7 +202,7 @@ class CableScanAutoScreen(CableScanScreen):
 	def __init__(self, session, nimlist):
 		print("[CableScan] start")
 		Screen.__init__(self, session)
-		self.skinName="Standby"
+		self.skinName = "Standby"
 
 		self["actions"] = ActionMap(["StandbyActions"],
 		{
@@ -228,7 +228,7 @@ class CableScanAutoScreen(CableScanScreen):
 	def scanCompleted(self, result):
 		print("[CableScan] completed result = ", result)
 		refreshServiceList()
-		self.close(result>0)
+		self.close(result > 0)
 
 	def Power(self):
 		from Screens.Standby import inStandby

@@ -162,7 +162,7 @@ class Harddisk:
 			return ""
 		if cap < 1000:
 			return _("%03d MB") % cap
-		return _("%d.%03d GB") % (cap/1000, cap%1000)
+		return _("%d.%03d GB") % (cap / 1000, cap % 1000)
 
 	def model(self):
 		try:
@@ -185,7 +185,7 @@ class Harddisk:
 		if dev:
 			try:
 				stat = os.statvfs(dev)
-				return (stat.f_bfree/1000) * (stat.f_bsize/1024)
+				return (stat.f_bfree / 1000) * (stat.f_bsize / 1024)
 			except:
 				pass
 		return -1
@@ -199,10 +199,10 @@ class Harddisk:
 		for mpath in mediapath:
 			try:
 				stat = os.statvfs(mpath)
-				freetot += (stat.f_bfree/1000) * (stat.f_bsize/1000)
+				freetot += (stat.f_bfree / 1000) * (stat.f_bsize / 1000)
 			except:
 				pass
-		return	freetot
+		return freetot
 
 	def numPartitions(self):
 		numPart = -1
@@ -614,11 +614,11 @@ class HarddiskManager:
 		devpath = "/sys/block/" + blockdev
 		error = False
 		removable = False
-		BLACKLIST=[]
+		BLACKLIST = []
 		if SystemInfo["HasMMC"]:
-			BLACKLIST=["%s" %(getMachineMtdRoot()[0:7])]
+			BLACKLIST = ["%s" % (getMachineMtdRoot()[0:7])]
 		if SystemInfo["HasMMC"] and "root=/dev/mmcblk0p1" in open('/proc/cmdline', 'r').read():
-			BLACKLIST=["mmcblk0p1"]
+			BLACKLIST = ["mmcblk0p1"]
 		blacklisted = False
 		if blockdev[:7] in BLACKLIST:
 			blacklisted = True
@@ -737,7 +737,7 @@ class HarddiskManager:
 				self.on_partition_list_change("add", p)
 			# see if this is a harddrive
 			l = len(device)
-			if l and (not device[l-1].isdigit() or device.startswith('mmcblk')):
+			if l and (not device[l - 1].isdigit() or device.startswith('mmcblk')):
 				self.hdd.append(Harddisk(device, removable))
 				self.hdd.sort()
 				SystemInfo["Harddisk"] = True
@@ -769,7 +769,7 @@ class HarddiskManager:
 				if x.mountpoint: # Plugins won't expect unmounted devices
 					self.on_partition_list_change("remove", x)
 		l = len(device)
-		if l and (not device[l-1].isdigit() or (device.startswith('mmcblk') and not re.search(r"mmcblk\dp\d+", device))):
+		if l and (not device[l - 1].isdigit() or (device.startswith('mmcblk') and not re.search(r"mmcblk\dp\d+", device))):
 			for hdd in self.hdd:
 				if hdd.device == device:
 					hdd.stop()
@@ -855,7 +855,7 @@ class HarddiskManager:
 				self.on_partition_list_change("remove", x)
 
 	def setDVDSpeed(self, device, speed=0):
-		ioctl_flag=int(0x5322)
+		ioctl_flag = int(0x5322)
 		if not device.startswith('/'):
 			device = "/dev/" + device
 		try:
@@ -946,7 +946,7 @@ class MkfsTask(Task.LoggingTask):
 					d = data.strip(' \x08\r\n').split('/', 1)
 					if '\x08' in d[1]:
 						d[1] = d[1].split('\x08', 1)[0]
-					self.setProgress(80*int(d[0])/int(d[1]))
+					self.setProgress(80 * int(d[0]) / int(d[1]))
 				except Exception as e:
 					print("[Harddisk] Mkfs E:", e)
 				return # don't log the progess
