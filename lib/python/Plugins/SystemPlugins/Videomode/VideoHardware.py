@@ -392,14 +392,24 @@ class VideoHardware:
 		print("[Videomode] VideoHardware -> setting aspect, policy, policy2, wss", aspect, policy, policy2, wss)
 		if about.getChipSetString().startswith('meson-6'):
 			arw = "0"
-			if config.av.policy_43.value == "bestfit" : arw = "10"
-			if config.av.policy_43.value == "panscan" : arw = "11"
-			if config.av.policy_43.value == "letterbox" : arw = "12"
+			if config.av.policy_43.value == "bestfit" :
+				arw = "10"
+			if config.av.policy_43.value == "panscan" :
+				arw = "11"
+			if config.av.policy_43.value == "letterbox" :
+				arw = "12"
 			try:
 				open("/sys/class/video/screen_mode", "w").write(arw)
 			except IOError:
 				pass
-		else:
+		elif model.startswith == "dreamone" or model.startswith == "dreamtwo":
+			arw = "0"
+			if config.av.policy_43.value == "bestfit" :
+				arw = "10"
+			if config.av.policy_43.value == "panscan" :
+				arw = "12"
+			if config.av.policy_43.value == "letterbox" :
+				arw = "11"
 			try:
 				open("/proc/stb/video/aspect", "w").write(aspect)
 			except IOError:
