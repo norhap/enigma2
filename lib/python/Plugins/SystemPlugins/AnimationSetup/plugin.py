@@ -6,15 +6,16 @@ from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigNumber, ConfigSelection, ConfigSelectionNumber, getConfigListEntry
 from Plugins.Plugin import PluginDescriptor
-from enigma import setAnimation_current, setAnimation_speed, getBoxBrand
+from enigma import setAnimation_current, setAnimation_speed
+from Components.SystemInfo import SystemInfo, getBoxBrand
 
 brand = getBoxBrand()
 
-if not brand == 'gigablue':
+if not brand == 'GigaBlue':
 	from enigma import setAnimation_current_listbox
 
 # default = disabled
-if brand == 'gigablue':
+if brand == 'GigaBlue':
 	g_default = {
 		"current": 0,
 		"speed": 20,
@@ -34,8 +35,8 @@ g_orig_doClose = None
 
 config.misc.window_animation_default = ConfigNumber(default=g_default["current"])
 config.misc.window_animation_speed = ConfigSelectionNumber(15, g_max_speed, 1, default=g_default["speed"])
-if not brand == 'gigablue':
-	config.misc.listbox_animation_default = ConfigSelection(default = g_default["listbox"], choices = [ ("0", _("Disable")), ("1", _("Enable")), ("2", _("Same behavior as current animation")) ])
+if brand != 'GigaBlue':
+	config.misc.listbox_animation_default = ConfigSelection(default=g_default["listbox"], choices=[ ("0", _("Disable")), ("1", _("Enable")), ("2", _("Same behavior as current animation")) ])
 
 class AnimationSetupConfig(ConfigListScreen, Screen):
 	skin="""
@@ -280,14 +281,14 @@ def sessionAnimationSetup(session, reason, **kwargs):
 def Plugins(**kwargs):
 	plugin_list = [
 		PluginDescriptor(
-			name = _("Animations"),
-			description = _("Setup UI animations"),
-			where = PluginDescriptor.WHERE_MENU,
-			needsRestart = False,
-			fnc = startAnimationSetup),
+			name=_("Animations"),
+			description=_("Setup UI animations"),
+			where=PluginDescriptor.WHERE_MENU,
+			needsRestart=False,
+			fnc=startAnimationSetup),
 		PluginDescriptor(
-			where = PluginDescriptor.WHERE_SESSIONSTART,
-			needsRestart = False,
-			fnc = sessionAnimationSetup),
+			where=PluginDescriptor.WHERE_SESSIONSTART,
+			needsRestart=False,
+			fnc=sessionAnimationSetup),
 	]
 	return plugin_list

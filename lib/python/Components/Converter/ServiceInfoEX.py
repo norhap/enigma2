@@ -156,7 +156,7 @@ class ServiceInfoEX(Poll, Converter, object):
 		self.poll_interval = 1000
 		self.poll_enabled = True
 
-	def getServiceInfoString2(self, info, what, convert = lambda x: "%d" % x):
+	def getServiceInfoString2(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -3:
 			t_objs = info.getInfoObject(what)
@@ -169,7 +169,7 @@ class ServiceInfoEX(Poll, Converter, object):
 				return ""
 		return convert(v)
 
-	def getServiceInfoString(self, info, what, convert = lambda x: "%d" % x):
+	def getServiceInfoString(self, info, what, convert=lambda x: "%d" % x):
 		v = info.getInfo(what)
 		if v == -1:
 			return "N/A"

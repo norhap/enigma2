@@ -69,16 +69,15 @@ InitFallbackFiles()
 profile("config.misc")
 config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "radio.mvi"))
 config.misc.blackradiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "black.mvi"))
-config.misc.startCounter = ConfigInteger(default=0)  # number of e2 starts...
-config.misc.standbyCounter = NoSave(ConfigInteger(default=0))  # number of standby
-config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # detect deepstandby
-config.misc.RestartUI = ConfigYesNo(default=False)  # detect user interface restart
+config.misc.startCounter = ConfigInteger(default=0) # number of e2 starts...
+config.misc.standbyCounter = NoSave(ConfigInteger(default=0)) # number of standby
+config.misc.DeepStandby = NoSave(ConfigYesNo(default=False)) # detect deepstandby
+config.misc.RestartUI = ConfigYesNo(default=False) # detect user interface restart
 config.misc.prev_wakeup_time = ConfigInteger(default=0)
 # config.misc.prev_wakeup_time_type is only valid when wakeup_time is not 0
 config.misc.prev_wakeup_time_type = ConfigInteger(default=0)
 # 0 = RecordTimer, 1 = ZapTimer, 2 = Plugins, 3 = WakeupTimer
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
-
 
 def setEPGCachePath(configElement):
 	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
@@ -139,7 +138,6 @@ from Plugins.Plugin import PluginDescriptor
 
 profile("misc")
 had = dict()
-
 
 def dump(dir, p=""):
 	if isinstance(dir, dict):
