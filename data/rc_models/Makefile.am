@@ -57,7 +57,7 @@ dist_install_DATA = rc_models.cfg ebox5000.png ebox5000.xml
 endif
 
 if OSMIO4KPLUS
-dist_install_DATA = rc_models.cfg edision1.png edision1.xml edision2.png edision2.xml edision3.png edision3.xml xcore3.png xcore3.xml
+dist_install_DATA = rc_models.cfg osmio4kplus.png osmio4kplus.xml
 endif
 
 if ENTWOPIA
@@ -117,7 +117,7 @@ dist_install_DATA = rc_models.cfg sf8008.png sf8008.xml
 endif
 
 if SF8008M
-dist_install_DATA = rc_models.cfg sf8008.png sf8008.xml
+dist_install_DATA = rc_models.cfg sf8008m.png sf8008m.xml
 endif
 
 if ODIN

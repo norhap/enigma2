@@ -24,7 +24,7 @@ def getBoxBrand():
 	return brand
 
 def getRCFile(ext):
-	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s" % (ext)))
+	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getBoxType(), ext)))
 	if not isfile(filename):
 		filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "dmm1.%s" % ext))
 	return filename
