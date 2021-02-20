@@ -16434,7 +16434,7 @@ msgstr "Configuración Proveedor DNS"
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"
 
-msgid "%s\n(Default: %s)"
+msgid "%s  \n(Default: %s)"
 msgstr "%s\n(Por Defecto: %s)"
 
 msgid "Default: '%s'."
@@ -16631,3 +16631,12 @@ msgstr "Configure por defecto para nuevos temporizadores."
 
 msgid "Single line mode"
 msgstr "Linea simple"
+
+msgid "After %s"
+msgstr "Después de %s"
+
+msgid "Standby in %s"
+msgstr "Standby en %s"
+
+msgid "Show satellites list"
+msgstr "Mostrar lista de Satélites"

@@ -1393,7 +1393,7 @@ def InitUsageConfig():
 				"420": _("YCbCr420")
 			})
 		else:
-			if model == "vuzero4k" or getMachineBuild() == "dm4kgen":
+			if model == "vuzero4k" or model == "dm4kgen":
 				config.av.hdmicolorspace = ConfigSelection(default="Edid(Auto)", choices={
 					"Edid(Auto)": _("Auto"),
 					"Hdmi_Rgb": _("RGB"),
