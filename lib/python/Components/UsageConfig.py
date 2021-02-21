@@ -1046,6 +1046,12 @@ def InitUsageConfig():
 			open(SystemInfo["FanPWM"], "w").write(hex(configElement.value)[2:])
 		config.usage.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
 		config.usage.fanspeed.addNotifier(fanSpeedChanged)
+		
+	if SystemInfo["StandbyLED"]:
+		def standbyLEDChanged(configElement):
+			open(SystemInfo["StandbyLED"], "w").write(configElement.value and "on" or "off")
+		config.usage.standbyLED = ConfigYesNo(default=True)
+		config.usage.standbyLED.addNotifier(standbyLEDChanged)
 
 	if SystemInfo["WakeOnLAN"] or getHaveWOL() == "True":
 		def wakeOnLANChanged(configElement):
