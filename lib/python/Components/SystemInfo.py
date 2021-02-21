@@ -25,8 +25,10 @@ def getBoxBrand():
 
 def getRCFile(ext):
 	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getBoxType(), ext)))
-	if not isfile(filename):
+	if not getBoxType():
 		filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "dmm1.%s" % ext))
+	elif getBoxType() == "sf8008m":
+	    filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "sf8008.%s" % ext))
 	return filename
 
 SystemInfo = {}

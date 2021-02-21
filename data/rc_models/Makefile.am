@@ -116,10 +116,6 @@ if SF8008
 dist_install_DATA = rc_models.cfg sf8008.png sf8008.xml
 endif
 
-if SF8008M
-dist_install_DATA = rc_models.cfg sf8008m.png sf8008m.xml
-endif
-
 if ODIN
 dist_install_DATA = rc_models.cfg e3hd.png e3hd.xml odinm6.png odinm6.xml odinm7.png odinm7.xml odinm9.png odinm9.xml
 endif
