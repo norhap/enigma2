@@ -16434,8 +16434,8 @@ msgstr "Configuración Proveedor DNS"
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"
 
-msgid "%s  \n(Default: %s)"
-msgstr "%s\n(Por Defecto: %s)"
+msgid "%s%s(Default: %s)"
+msgstr "%s%s(Por Defecto: %s)"
 
 msgid "Default: '%s'."
 msgstr "Por Defecto: '%s'."
@@ -16640,3 +16640,18 @@ msgstr "Standby en %s"
 
 msgid "Show satellites list"
 msgstr "Mostrar lista de Satélites"
+
+msgid "Don't show default"
+msgstr "No Mostrar Por Defecto"
+
+msgid "Show default after description"
+msgstr "Mostrar 'Por Defecto' seguido en la descripción"
+
+msgid "Show default on new line"
+msgstr "Mostrar 'Por Defecto' en nueva linea"
+
+msgid "Show setup default value"
+msgstr "Mostrar valor 'Por Defecto' en descripciones"
+
+msgid "This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description."
+msgstr "Esta opción le permite seleccionar si se muestra 'Por Defecto' para un elemento de configuración y, de ser así, dónde se muestra en relación con la descripción."
