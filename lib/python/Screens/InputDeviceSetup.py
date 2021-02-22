@@ -302,10 +302,11 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 class RemoteControlType(Screen, ConfigListScreen):
 	rcList = [
 			("0", _("Default")),
+			("3", _("maram9")),
 			("4", _("DMM normal")),
-			("5", _("et9000/et9100")),
+			("5", _("et9x00")),
 			("6", _("DMM advanced")),
-			("7", _("et5000/et6000")),
+			("7", _("et5x00")),
 			("8", _("VU+")),
 			("9", _("et8000/et10000")),
 			("11", _("et9200/et9500/et6500")),
