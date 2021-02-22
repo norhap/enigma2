@@ -10396,7 +10396,7 @@ msgid "Tuner slot"
 msgstr "Ranura del sintonizador"
 
 msgid "Turn on the power LED during standby."
-msgstr "Encienda el LED de encendido durante el modo reposo."
+msgstr "Encienda el LED de encendido durante standby o reposo profundo."
 
 msgid "Use 12 characters display mode"
 msgstr "Use el modo de visualización de 12 caracteres"
@@ -16201,7 +16201,7 @@ msgid "If disabled, underline characters in file and directory names are not sho
 msgstr "Si está deshabilitado, los caracteres subrayados en los nombres de archivo y directorio no se muestran y se reemplazan con espacios."
 
 msgid "Standby LED"
-msgstr "LED en Modo Reposo"
+msgstr "LED en Standby o Reposo Profundo"
 
 msgid "Power LED can be turned on or off here."
 msgstr "El LED de encendido se puede encender o apagar aquí."
