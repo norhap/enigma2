@@ -16710,6 +16710,96 @@ msgstr "Día Lun-D"
 msgid "Day Mon-DD"
 msgstr "Día Lun-DD"
 
+msgid "Dayname D Month Year"
+msgstr "Nombre Día D Mes Año"
+
+msgid "Dayname D-Month-Year"
+msgstr "Nombre Día D-Mes-Año"
+
+msgid "Dayname D. Month Year"
+msgstr "Nombre Día D. Mes Año"
+
+msgid "Dayname D.M.Year"
+msgstr "Nombre Día D.M.Año"
+
+msgid "Dayname D.MM.Year"
+msgstr "Nombre Día D.MM.Año"
+
+msgid "Dayname D/M/Year"
+msgstr "Nombre Día D/M/Año"
+
+msgid "Dayname D/MM/Year"
+msgstr "Nombre Día D/MM/Año"
+
+msgid "Dayname DD Month Year"
+msgstr "Nombre Día DD Mes Año"
+
+msgid "Dayname DD-Month-Year"
+msgstr "Nombre Día DD-Mes-Año"
+
+msgid "Dayname DD. Month Year"
+msgstr "Nombre Día DD. Mes Año"
+
+msgid "Dayname DD.M.Year"
+msgstr "Nombre Día DD.M.Año"
+
+msgid "Dayname DD.MM.Year"
+msgstr "Nombre Día DD.MM.Año"
+
+msgid "Dayname DD/M/Year"
+msgstr "Nombre Día DD/M/Año"
+
+msgid "Dayname DD/MM/Year"
+msgstr "Nombre Día DD/MM/Año"
+
+msgid "Dayname M/D/Year"
+msgstr "Nombre Día M/D/Año"
+
+msgid "Dayname M/DD/Year"
+msgstr "Nombre Día M/DD/Año"
+
+msgid "Dayname MM/D/Year"
+msgstr "Nombre Día MM/D/Año"
+
+msgid "Dayname MM/DD/Year"
+msgstr "Nombre Día MM/DD/Año"
+
+msgid "Dayname Month D Year"
+msgstr "Nombre Día Mes D Año"
+
+msgid "Dayname Month DD Year"
+msgstr "Nombre Día Mes DD Año"
+
+msgid "Dayname Month-D-Year"
+msgstr "Nombre Día Mes-D-Año"
+
+msgid "Dayname Month-DD-Year"
+msgstr "Nombre Día Mes-DD-Año"
+
+msgid "Dayname Year Month D"
+msgstr "Nombre Día Año Mes D"
+
+msgid "Dayname Year Month DD"
+msgstr "Nombre Día Año Mes DD"
+
+msgid "Dayname Year-Month-D"
+msgstr "Nombre Día Año-Mes-D"
+
+msgid "Dayname Year-Month-DD"
+msgstr "Nombre Día Año-Mes-DD"
+
+msgid "Dayname Year/M/D"
+msgstr "Nombre Día Año/M/D"
+
+msgid "Dayname Year/M/DD"
+msgstr "Nombre Día Año/M/DD"
+
+msgid "Dayname Year/MM/D"
+msgstr "Nombre Día Año/MM/D"
+
+msgid "Dayname Year/MM/DD"
+msgstr "Nombre Día Año/MM/DD"
+
 msgid "Hidden / Blank"
 msgstr "Ocultar / En blanco"
 
@@ -16754,3 +16844,35 @@ msgstr "Muy lento"
 
 msgid "Very fast"
 msgstr "Muy rápido"
+
+msgid "Transponder time"
+msgstr "Tiempo transpondedor"
+
+msgid "internet time (NTP)"
+msgstr "tiempo internet (NTP)"
+
+msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits.  ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
+msgstr "Elija el estilo de formato de visualización para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por skin."
+
+msgid "Choose the display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes and 'ss' is the seconds.  ('HH' and 'hh' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
+msgstr "Elija el estilo de formato de visualización para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos y 'ss' son los segundos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por skin."
+
+msgid ""
+"Help Screen\n"
+"Brief help information for buttons in your current context.\n"
+"Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. EXIT to return to the help screen. OK to perform the action described in the currently highlighted help.\n"
+"Other buttons will jump to the help for that button, if there is help.\n"
+"If an action is user-configurable, its help entry will be flagged with a (C).\n"
+"A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list indicates whether the function is for a long press of the button(s).\n"
+"The order and grouping of the help information list can be controlled using MENU>Setup>User Interface>Settings>Sort order for help screen."
+msgstr ""
+"Pantalla Ayuda\n"
+"Breve información de ayuda para los botones en su contexto actual.\n"
+"Navegue hacia arriba / abajo con los botones ARRIBA / ABAJO y página arriba / abajo con IZQUIERDA / DERECHA. SALIR para volver a la pantalla de ayuda. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente.\n"
+"Otros botones saltarán a la ayuda para ese botón, si hay ayuda.\n"
+"Si una acción es configurable por el usuario, su entrada de ayuda se marcará con un (C).\n"
+"Un resaltado en la imagen del control remoto muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista indica si la función es para una pulsación larga del botón(s).\n"
+"El orden y la agrupación de la lista de información de ayuda se pueden controlar mediante MENÚ> Configuración> Interfaz de usuario> Configuración> Orden de clasificación para la pantalla de ayuda."
+
+msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
+msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La pantalla del panel frontal se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
