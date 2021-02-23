@@ -14340,7 +14340,7 @@ msgid "Front Panel Display"
 msgstr "Panel Frontal Display"
 
 msgid "LCD Setup"
-msgstr "Ajustes LCD"
+msgstr "Ajustes Display"
 
 msgid "LED Setup"
 msgstr "Ajustes LED"
@@ -16848,8 +16848,8 @@ msgstr "Muy rápido"
 msgid "Transponder time"
 msgstr "Tiempo transpondedor"
 
-msgid "internet time (NTP)"
-msgstr "tiempo internet (NTP)"
+msgid "Internet time (NTP)"
+msgstr "Tiempo internet (NTP)"
 
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits.  ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr "Elija el estilo de formato de visualización para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por skin."
