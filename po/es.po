@@ -16655,3 +16655,102 @@ msgstr "Mostrar valor 'Por Defecto' en descripciones"
 
 msgid "This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description."
 msgstr "Esta opción le permite seleccionar si se muestra 'Por Defecto' para un elemento de configuración y, de ser así, dónde se muestra en relación con la descripción."
+
+msgid "Date style"
+msgstr "Estilo de fecha"
+
+msgid "Time style"
+msgstr "Estilo de Tiempo"
+
+msgid "Day D Mon"
+msgstr "Día D Lun"
+
+msgid "Day D-Mon"
+msgstr "Día D-Lun"
+
+msgid "Day D/M"
+msgstr "Día D/M"
+
+msgid "Day D/MM"
+msgstr "Día D/MM"
+
+msgid "Day DD Mon"
+msgstr "Día DD Lun"
+
+msgid "Day DD-Mon"
+msgstr "Día DD-Lun"
+
+msgid "Day DD/M"
+msgstr "Día DD/M"
+
+msgid "Day DD/MM"
+msgstr "Día DD/MM"
+
+msgid "Day M/D"
+msgstr "Día M/D"
+
+msgid "Day M/DD"
+msgstr "Día M/DD"
+
+msgid "Day MM/D"
+msgstr "Día MM/D"
+
+msgid "Day MM/DD"
+msgstr "Día MM/DD"
+
+msgid "Day Mon D"
+msgstr "Día Lun D"
+
+msgid "Day Mon DD"
+msgstr "Dia Lun DD"
+
+msgid "Day Mon-D"
+msgstr "Día Lun-D"
+
+msgid "Day Mon-DD"
+msgstr "Día Lun-DD"
+
+msgid "Hidden / Blank"
+msgstr "Ocultar / En blanco"
+
+msgid "hide"
+msgstr "ocultar"
+
+msgid "fast"
+msgstr "rápido"
+
+msgid "slow"
+msgstr "lento"
+
+msgid "Center"
+msgstr "Centro"
+
+msgid "Sort order for help screen"
+msgstr "Orden de clasificación para pantalla ayuda"
+
+msgid "Choose the order in which items are displayed in Help windows"
+msgstr "Elija el orden en el que se muestran los elementos en las ventanas de Ayuda"
+
+msgid "Flat by position on remote"
+msgstr "Plano por posición en el mando"
+
+msgid "Flat by key group on remote"
+msgstr "Plano por tecla en el mando"
+
+msgid "Flat alphabetical"
+msgstr "Alfabeto plano"
+
+msgid "Alphabetical under headings"
+msgstr "Alfabéticamente bajo títulos"
+
+msgid "Animation speed of help indicators"
+msgstr "Velocidad de animación de los indicadores de ayuda"
+
+msgid "Control the animation speed of the button indicators in the Help screen. 'Disabled' turns off animation so that indicators jump between buttons."
+msgstr "Controle la velocidad de animación de los indicadores de los botones en la pantalla de ayuda. 'Deshabilitado' apaga la animación para que los indicadores salten entre los botones."
+
+msgid "Very slow"
+msgstr "Muy lento"
+
+msgid "Very fast"
+msgstr "Muy rápido"
