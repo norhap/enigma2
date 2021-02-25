@@ -460,6 +460,8 @@ AM_CONDITIONAL(MECOOL, test "$BOXBRAND" == "mecool")
 AM_CONDITIONAL(MINIX, test "$BOXBRAND" == "minix")
 AM_CONDITIONAL(SF8008, test `echo "$BOXTYPE" | cut -b 1-6` == "sf8008")
 AM_CONDITIONAL(ODIN, test "$BOXBRAND" == "odin")
+AM_CONDITIONAL(DM4KGEN, test "$STBPLATFORM" == "dm4kgen")
+AM_CONDITIONAL(DMAMLOGIC, test "$STBPLATFORM" == "dmamlogic")
 AM_CONDITIONAL(RASPBERRYPI, test "$BOXBRAND" == "rpi")
 AM_CONDITIONAL(TECHNOMATE, test `echo "$BOXTYPE" | cut -b 1-2` == "tm")
 AM_CONDITIONAL(TIVIAR, test "$BOXBRAND" == "Tiviar")
@@ -537,6 +539,10 @@ fi
 if test "$BOXBRAND" == "dreambox"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
+fi
+
+if test "$STBPLATFORM" == "dmamlogic"; then
+	AC_DEFINE(DMAMLOGIC, 1, [Dreambox Amlogic hardware])
 fi
 
 if test "$BOXTYPE" == "dm7080"; then
