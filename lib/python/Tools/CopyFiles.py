@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from Components.Task import PythonTask, Task, Job, job_manager as JobManager, Condition
 from Tools.Directories import fileExists
@@ -63,9 +65,9 @@ class AddFileProcessTask(Task):
 
 
 class DownloadProcessTask(Job):
-	def __init__(self, url, filename, file):
+	def __init__(self, url, filename, file, **kwargs):
 		Job.__init__(self, _("%s") % file)
-		DownloadTask(self, url, filename)
+		DownloadTask(self, url, filename, **kwargs)
 
 
 class DownloaderPostcondition(Condition):
@@ -77,7 +79,8 @@ class DownloaderPostcondition(Condition):
 
 
 class DownloadTask(Task):
-	def __init__(self, job, url, path):
+	def __init__(self, job, url, path, **kwargs):
+		self.kwargs = kwargs
 		Task.__init__(self, job, _("Downloading"))
 		self.postconditions.append(DownloaderPostcondition())
 		self.job = job
@@ -92,7 +95,7 @@ class DownloadTask(Task):
 	def run(self, callback):
 		from Tools.Downloader import downloadWithProgress
 		self.callback = callback
-		self.download = downloadWithProgress(self.url, self.path)
+		self.download = downloadWithProgress(self.url, self.path, **self.kwargs)
 		self.download.addProgress(self.download_progress)
 		self.download.start().addCallback(self.download_finished).addErrback(self.download_failed)
 		print("[CopyFiles] downloading", self.url, "to", self.path)
@@ -152,5 +155,5 @@ def deleteFiles(fileList, name):
 	JobManager.AddJob(job)
 
 
-def downloadFile(url, file_name, sel):
-	JobManager.AddJob(DownloadProcessTask(url, file_name, sel))
+def downloadFile(url, file_name, sel, **kwargs):
+	JobManager.AddJob(DownloadProcessTask(url, file_name, sel, **kwargs))
