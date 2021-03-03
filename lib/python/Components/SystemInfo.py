@@ -39,6 +39,7 @@ SystemInfo["RCMapping"] = getRCFile("xml")
 from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
 # Parse the boot commandline.
+print("[SystemInfo] Read /proc/cmdline")
 with open("/proc/cmdline", "r") as fd:
 	cmdline = fd.read()
 cmdline = {k: v.strip('"') for k, v in re.findall(r'(\S+)=(".*?"|\S+)', cmdline)}
@@ -165,10 +166,10 @@ SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
 SystemInfo["canMode12"] = "%s_4.boxmode" % model in cmdline and cmdline["%s_4.boxmode" % model] in ("1","12") and "192M"
 SystemInfo["canMultiBoot"] = getMultibootslots()
 SystemInfo["canFlashWithOfgwrite"] = brand != "dreambox"
-SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and fileCheck("/proc/stb/hdmi/hlg_support")
-SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices","downmix")
-SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices","downmix")
-SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices","downmix")
+SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") or fileCheck("/proc/stb/hdmi/hlg_support")
+SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
+SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
+SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["FbcTunerPowerAlwaysOn"] = model in ("vusolo4k","vuduo4k","vuduo4kse","vuultimo4k","vuuno4k","vuuno4kse", "gbquad4k", "gbue4k")

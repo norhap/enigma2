@@ -72,6 +72,7 @@ def getMultibootslots():
 
 def getCurrentImage():
 	if SystemInfo["canMultiBoot"]:
+		print("[Multiboot] Read /sys/firmware/devicetree/base/chosen/bootargs")
 		slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
 		if slot:
 			return int(slot[0])
@@ -83,6 +84,7 @@ def getCurrentImage():
 
 
 def getCurrentImageMode():
+	print("[Multiboot] Read /sys/firmware/devicetree/base/chosen/bootargs")
 	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
 
 
