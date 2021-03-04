@@ -17,6 +17,22 @@ from os import sys
 model = getBoxType()
 platform = getBoxBrand()
 
+colors = [
+	("0xff0000", _("red")),
+	("0xff3333", _("rose")),
+	("0xff5500", _("orange")),
+	("0xdd9900", _("yellow")),
+	("0x99dd00", _("lime")),
+	("0x00ff00", _("green")),
+	("0x00ff99", _("aqua")),
+	("0x00bbff", _("olympic blue")),
+	("0x0000ff", _("blue")),
+	("0x6666ff", _("azure")),
+	("0x9900ff", _("purple")),
+	("0xff0066", _("pink")),
+	("0xffffff", _("white")),
+]
+
 
 class dummyScreen(Screen):
 	skin = """<screen position="0,0" size="0,0" transparent="1">
@@ -383,6 +399,18 @@ def InitLcd():
 
 		def setLEDblinkingtime(configElement):
 			ilcd.setLEDBlinkingTime(configElement.value)
+			
+		config.lcd.ledblinkcontrolcolor = ConfigSelection(colors, default="0xffffff")
+		config.lcd.ledblinkcontrolcolor.addNotifier(setLedBlinkControlColor)
+
+		config.lcd.ledbrightnesscontrol = ConfigSlider(default="0xff", increment=25, limits=(0, 0xff))
+		config.lcd.ledbrightnesscontrol.addNotifier(setLedBrightnessControl)
+
+		config.lcd.ledcolorcontrolcolor = ConfigSelection(colors, default="0xffffff")
+		config.lcd.ledcolorcontrolcolor.addNotifier(setLedColorControlColor)
+
+		config.lcd.ledfadecontrolcolor = ConfigSelection(colors, default="0xffffff")
+		config.lcd.ledfadecontrolcolor.addNotifier(setLedFadeControlColor)
 
 		config.lcd.ledblinkingtime = ConfigSlider(default = 5, increment = 1, limits = (0,15))
 		config.lcd.ledblinkingtime.addNotifier(setLEDblinkingtime)
@@ -499,6 +527,26 @@ def InitLcd():
 
 		def setLEDnormalstate(configElement):
 			ilcd.setLEDNormalState(configElement.value)
+
+		def setLedBlinkControlColor(configElement):
+			if fileExists("/proc/stb/fp/led_blink"):
+				print("[Lcd] Write to /proc/stb/fp/led_blink")
+				open("/proc/stb/fp/led_blink", "w").write(configElement.value)
+
+		def setLedBrightnessControl(configElement):
+			if fileExists("/proc/stb/fp/led_brightness"):
+				print("[Lcd] Write to /proc/stb/fp/led_brightness")
+				open("/proc/stb/fp/led_brightness", "w").write(configElement.value)
+
+		def setLedColorControlColor(configElement):
+			if fileExists("/proc/stb/fp/led_color"):
+				print("[Lcd] Write to /proc/stb/fp/led_color")
+				open("/proc/stb/fp/led_color", "w").write(configElement.value)
+
+		def setLedFadeControlColor(configElement):
+			if fileExists("/proc/stb/fp/led_fade"):
+				print("[Lcd] Write to /proc/stb/fp/led_fade")
+				open("/proc/stb/fp/led_fade", "w").write(configElement.value)
 
 		def setXcoreVFD(configElement):
 			if fileExists("/sys/module/brcmstb_osmega/parameters/pt6302_cgram"):

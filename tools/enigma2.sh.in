@@ -20,6 +20,12 @@ if [ $modelcheck == "sf8008" ] || [ $modelcheck == "sf8008m" ] || [ $modelcheck 
 	fi
 fi
 
+if [ -f /proc/stb/fp/led_color ]; then
+	echo 00ffffff > /proc/stb/fp/led_color
+elif [ -f /proc/stb/fp/led_brightness ]; then
+	echo 000000ff > /proc/stb/fp/led_brightness
+fi
+
 if [ -d /home/root ]; then
 	export HOME=/home/root
 	cd
@@ -121,6 +127,11 @@ while : ; do
 				echo "0" > /sys/class/leds/wetek\:blue\:wifiled/brightness
 				echo "0" > /sys/class/leds/wetek\:blue\:ethled/brightness
 				echo "mem" > /sys/power/state
+			fi
+			if [ -f /proc/stb/fp/led_color ]; then
+				echo 00ffffff > /proc/stb/fp/led_color
+			elif [ -f /proc/stb/fp/led_brightness ]; then
+				echo 00000008 > /proc/stb/fp/led_brightness
 			fi
 			;;
 		2)
