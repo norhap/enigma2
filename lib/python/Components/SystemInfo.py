@@ -33,7 +33,7 @@ def getRCFile(ext):
 
 SystemInfo = {}
 SystemInfo["HasRootSubdir"] = False
-SystemInfo["RCTypeIndex"] = int(getRCIDNum())
+SystemInfo["RCTypeIndex"] = int(float(2))
 SystemInfo["RCImage"] = getRCFile("png")
 SystemInfo["RCMapping"] = getRCFile("xml")
 
