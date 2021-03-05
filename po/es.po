@@ -16870,3 +16870,6 @@ msgstr ""
 
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La pantalla del panel frontal se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
+
+msgid "and"
+msgstr "y"
