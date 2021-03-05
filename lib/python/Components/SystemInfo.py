@@ -6,7 +6,7 @@ import os
 import re
 from os import access, R_OK
 from os.path import isfile, join as pathjoin
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum
 
 def getBoxBrand():
 	brand = ""
@@ -33,6 +33,7 @@ def getRCFile(ext):
 
 SystemInfo = {}
 SystemInfo["HasRootSubdir"] = False
+SystemInfo["RCTypeIndex"] = int(getRCIDNum())
 SystemInfo["RCImage"] = getRCFile("png")
 SystemInfo["RCMapping"] = getRCFile("xml")
 

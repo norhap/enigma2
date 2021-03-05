@@ -4796,14 +4796,8 @@ msgstr "Espere mientras se testea su red…"
 msgid "Please wait while your network is restarting..."
 msgstr "Espere mientras se reinicia su red…"
 
-msgid "Please wait, restarting cardserver."
-msgstr "Espere, reiniciando cardserver."
-
-msgid "Please wait, restarting softcam and cardserver."
-msgstr "Espere, reiniciando softcam y cardserver."
-
-msgid "Please wait, restarting softcam."
-msgstr "Espere, reiniciando softcam."
+msgid "Please wait, restarting %s."
+msgstr "Espere, reiniciando %s."
 
 msgid "Please wait..."
 msgstr "Espera por favor…"
