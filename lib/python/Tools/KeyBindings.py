@@ -376,15 +376,8 @@ def getKeyDescription(key):
 	elif rcType == 18:  # F1
 		idx = 4
 	else:
-		rcType = config.plugins.remotecontroltype.rctype.value
-		# rcType = config.misc.inputdevices.rcType.value
-		if rcType == 14:  # XP1000
-			idx = 3
-		elif rcType == 18:  # F1
-			idx = 4
-		else:
-			idx = 2
-	return keyDescriptions[idx].get(key)
+		idx = 2
+	return keyDescriptions[idx].get(key, ("None",))
 
 
 def getKeyBindingKeys(filterfn=lambda key: True):
