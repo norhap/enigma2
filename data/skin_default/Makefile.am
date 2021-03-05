@@ -48,10 +48,10 @@ dist_install_DATA = \
 	progress_small.png \
 	rcold.png \
 	rc.png \
-	rc_circle.png \
 	rc0.png \
 	rc1.png \
 	rc2.png \
+	rc_circle.png \
 	screensaverpicture.png \
 	screws_mp.png \
 	screws.png \
