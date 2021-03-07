@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2021-02-09 02:00+0100\n"
+"PO-Revision-Date: 2021-03-07 03:11+0100\n"
 "Language-Team: Álvaro <mi casa>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16846,30 +16846,97 @@ msgid "Internet time (NTP)"
 msgstr "Tiempo internet (NTP)"
 
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits.  ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
-msgstr "Elija el estilo de formato de visualización para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por skin."
+msgstr "Elija el estilo de formato de visualización para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización del display se basará en su elección, pero puede verse influenciada por skin."
 
 msgid "Choose the display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes and 'ss' is the seconds.  ('HH' and 'hh' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
-msgstr "Elija el estilo de formato de visualización para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos y 'ss' son los segundos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por skin."
-
-msgid ""
-"Help Screen\n"
-"Brief help information for buttons in your current context.\n"
-"Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. EXIT to return to the help screen. OK to perform the action described in the currently highlighted help.\n"
-"Other buttons will jump to the help for that button, if there is help.\n"
-"If an action is user-configurable, its help entry will be flagged with a (C).\n"
-"A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list indicates whether the function is for a long press of the button(s).\n"
-"The order and grouping of the help information list can be controlled using MENU>Setup>User Interface>Settings>Sort order for help screen."
-msgstr ""
-"Pantalla Ayuda\n"
-"Breve información de ayuda para los botones en su contexto actual.\n"
-"Navegue hacia arriba / abajo con los botones ARRIBA / ABAJO y página arriba / abajo con IZQUIERDA / DERECHA. SALIR para volver a la pantalla de ayuda. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente.\n"
-"Otros botones saltarán a la ayuda para ese botón, si hay ayuda.\n"
-"Si una acción es configurable por el usuario, su entrada de ayuda se marcará con un (C).\n"
-"Un resaltado en la imagen del control remoto muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista indica si la función es para una pulsación larga del botón(s).\n"
-"El orden y la agrupación de la lista de información de ayuda se pueden controlar mediante MENÚ> Configuración> Interfaz de usuario> Configuración> Orden de clasificación para la pantalla de ayuda."
+msgstr "Elija el estilo de formato de visualización para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos y 'ss' son los segundos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La visualización del display se basará en su elección, pero puede verse influenciada por skin."
 
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
-msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La pantalla del panel frontal se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
+msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). El display se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
+
+msgid "Help Screen"
+msgstr "Pantalla Ayuda"
+
+msgid "Brief help information for buttons in your current context."
+msgstr "Breve información de ayuda para los botones en su contexto actual."
+
+msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. EXIT to return to the help screen. OK to perform the action described in the currently highlighted help."
+msgstr "Navegue hacia arriba / abajo con los botones ARRIBA/ABAJO y página arriba/abajo con IZQUIERDA/DERECHA. SALIR para volver a la pantalla de ayuda. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente."
+
+msgid "Other buttons will jump to the help for that button, if there is help."
+msgstr "Otros botones saltarán a la ayuda de ese botón, si hay ayuda."
+
+msgid "If an action is user-configurable, its help entry will be flagged with a (C)."
+msgstr "Si una acción es configurable por el usuario, su entrada de ayuda se marcará con una (C)."
+
+msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list indicates whether the function is for a long press of the button(s)."
+msgstr "Un resaltado en la imagen del control remoto muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista indica si la función es para una pulsación larga de los botones."
+
+msgid "The order and grouping of the help information list can be controlled using MENU>Setup>User Interface>Settings>Sort order for help screen."
+msgstr "El orden y la agrupación de la lista de información de ayuda se puede controlar mediante MENÚ> Configuración> Interfaz de usuario> Configuración> Orden de clasificación para la pantalla de ayuda."
 
 msgid "and"
 msgstr "y"
+
+msgid "Cancel any changed settings and exit"
+msgstr "Cancelar cualquier configuración modificada y salir"
+
+msgid "Cancel any changed settings and exit all menus"
+msgstr "Cancelar cualquier configuración modificada y salir de todos los menús"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr "Cancelar cualquier cambio activo en el skin"
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr "Cancele cualquier cambio en la máscara actualmente activa y salga de todos los menús"
+
+msgid "Jump to first item in list or the start of text"
+msgstr "Ir al primer elemento de la lista o al comienzo del texto"
+
+msgid "Jump to last item in list or the end of text"
+msgstr "Ir al último elemento de la lista o al final del texto"
+
+msgid "Move down a screen"
+msgstr "Moverse abajo de la pantalla"
+
+msgid "Move up a screen"
+msgstr "Moverse arriba de la pantalla"
+
+msgid "Save all changed settings and exit"
+msgstr "Guarde todas las configuraciones cambiadas y salga"
+
+msgid "Select the next item in list or move cursor right"
+msgstr "Seleccione el siguiente elemento de la lista o mueva el cursor a la derecha"
+
+msgid "Select the previous item in list or move cursor left"
+msgstr "Seleccione el elemento anterior en la lista o mueva el cursor a la izquierda"
+
+msgid "Select, toggle, process or edit the current entry"
+msgstr "Seleccionar, alternar, procesar o editar la entrada actual"
+
+msgid "Common Setup Actions"
+msgstr "Acciones Ajustes Comunes"
+
+msgid "Aspect ratio list..."
+msgstr "Lista de proporciones..."
+
+msgid "Subtitle show/hide..."
+msgstr "Subtítulos mostrar/ocultar..."
+
+msgid "Move to the next page"
+msgstr "Moverse a la siguiente página"
+
+msgid "Move to the next skin"
+msgstr "Moverse al siguiente skin"
+
+msgid "Move to the previous page"
+msgstr "Moverse a la página anterior"
+
+msgid "Move to the previous skin"
+msgstr "Moverse al skin anterior"
+
+msgid "Save and activate the currently selected skin"
+msgstr "Guardar y activar el actual skin seleccionado"
+
+msgid "exit"
+msgstr "salir"
