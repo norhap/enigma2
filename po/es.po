@@ -16973,3 +16973,15 @@ msgstr "Habilitado audio BT"
 
 msgid "General BT audio delay"
 msgstr "Retardo General audio BT"
+
+msgid "Other functions"
+msgstr "Otras funciones"
+
+msgid "Delete all the text"
+msgstr "Eliminar completo el texto"
+
+msgid "Delete character to left of cursor or select AM times"
+msgstr "Eliminar el carácter a la izquierda del cursor o seleccionar horas AM"
+
+msgid "Delete character under cursor or select PM times"
+msgstr "Eliminar el carácter debajo del cursor o seleccionar las horas de la tarde"
