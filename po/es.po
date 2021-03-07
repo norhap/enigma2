@@ -3693,7 +3693,7 @@ msgid "Letterbox"
 msgstr "Letterbox"
 
 msgid "Letterbox zoom"
-msgstr "Letterbox zoom"
+msgstr "Selección de video panscan, letterbox, scale"
 
 msgid "Liberia"
 msgstr "Liberia"
@@ -13797,7 +13797,7 @@ msgid "show options list"
 msgstr "mostrar opciones de lista"
 
 msgid "zap to service"
-msgstr "zap al servicio"
+msgstr "zapear al canal"
 
 msgid ""
 "Warning!\n"
@@ -16918,7 +16918,7 @@ msgid "Common Setup Actions"
 msgstr "Acciones Ajustes Comunes"
 
 msgid "Aspect ratio list..."
-msgstr "Lista de proporciones..."
+msgstr "Lista ratio (proporciones)..."
 
 msgid "Subtitle show/hide..."
 msgstr "Subtítulos mostrar/ocultar..."
@@ -16988,3 +16988,9 @@ msgstr "Eliminar el carácter debajo del cursor o seleccionar las horas de la ta
 
 msgid "Long press: %s"
 msgstr "Pulsación larga: %s"
+
+msgid "Display selection list as a selection menu"
+msgstr "Mostrar lista de selección como menú de selección"
+
+msgid "Softcam Actions"
+msgstr "Acciones Softcam"
