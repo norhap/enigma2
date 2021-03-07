@@ -9267,8 +9267,8 @@ msgstr "Dejar de usar como canal de inicio"
 msgid "successful"
 msgstr "exitoso"
 
-msgid "switch to bookmarks"
-msgstr "cambia a marcadores"
+msgid "Switch to bookmarks"
+msgstr "Cambia a marcadores"
 
 msgid "switch to filelist"
 msgstr "cambia a lista de archivos"
@@ -16940,3 +16940,36 @@ msgstr "Guardar y activar el actual skin seleccionado"
 
 msgid "exit"
 msgstr "salir"
+
+msgid "Skin Selection Actions"
+msgstr "Acciones Selección de Skin"
+
+msgid "%d seconds"
+msgstr "%d segundos"
+
+msgid "Controlled by HDMI"
+msgstr "Controlado por HDMI"
+
+msgid "Force enabled"
+msgstr "Fuerza habilitada"
+
+msgid "Force disabled"
+msgstr "Fuerza deshabilitada"
+
+msgid "convert to AC3"
+msgstr "convertir a AC3"
+
+msgid "convert to DTS"
+msgstr "convertir a DTS"
+
+msgid "Ask user (with default as 'No')"
+msgstr "Preguntar usuario (Por defecto es 'No')"
+
+msgid "Ask user (with default as 'Yes')"
+msgstr "Preguntar usuario (Por defecto es 'Si')"
+
+msgid "Enable BT audio"
+msgstr "Habilitado audio BT"
+
+msgid "General BT audio delay"
+msgstr "Retardo General audio BT"
