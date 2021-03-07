@@ -16985,3 +16985,6 @@ msgstr "Eliminar el carácter a la izquierda del cursor o seleccionar horas AM"
 
 msgid "Delete character under cursor or select PM times"
 msgstr "Eliminar el carácter debajo del cursor o seleccionar las horas de la tarde"
+
+msgid "Long press: %s"
+msgstr "Pulsación larga: %s"
