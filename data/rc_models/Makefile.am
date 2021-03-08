@@ -76,10 +76,6 @@ if GBTRIO4K
 dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml gbtrio4k.png gbtrio4k.xml
 endif
 
-if GBIP4K
-dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml gbip4k.png gbip4k.xml
-endif
-
 if HARDKERNEL
 dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml hardkernel.png hardkernel.xml
 endif
