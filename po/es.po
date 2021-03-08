@@ -3089,7 +3089,7 @@ msgid "Goto previous page of events"
 msgstr "Ir a la página previa de eventos"
 
 msgid "Goto primetime / now"
-msgstr "Ir a primetime / ahora"
+msgstr "Ir a hora máxima audiencia ahora"
 
 msgid "Goto specific date/time"
 msgstr "Ir a fecha / hora específica"
@@ -16947,8 +16947,8 @@ msgstr "Acciones Selección de Skin"
 msgid "%d seconds"
 msgstr "%d segundos"
 
-msgid "Controlled by HDMI"
-msgstr "Controlado por HDMI"
+msgid "controlled by HDMI"
+msgstr "controlado por HDMI"
 
 msgid "Force enabled"
 msgstr "Fuerza habilitada"
@@ -16990,7 +16990,82 @@ msgid "Long press: %s"
 msgstr "Pulsación larga: %s"
 
 msgid "Display selection list as a selection menu"
-msgstr "Mostrar lista de selección como menú de selección"
+msgstr "Mostrar menú con selección de lista"
 
 msgid "Softcam Actions"
 msgstr "Acciones Softcam"
+
+msgid "Goto down service"
+msgstr "Ir evento abajo"
+
+msgid "Goto up service"
+msgstr "Ir evento arriba"
+
+msgid "Enable or disable using HDMI-CEC."
+msgstr "Habilitado o deshabilitado usando HDMI-CEC."
+
+msgid "Image View On"
+msgstr "Vista de imagen activada"
+
+msgid "Text View On"
+msgstr "Vista de texto activada"
+
+msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
+msgstr "Ponga automáticamente el televisor en modo de espera siempre que el receptor entre en modo de espera o en modo de espera total."
+
+msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
+msgstr "Cuando el receptor se despierta del modo de espera o del modo de espera profundo, enviará un comando al televisor para que también salga del modo de espera."
+
+msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
+msgstr "Algunos televisores no se despiertan del modo de espera cuando reciben el comando 'Vista de imagen activada'. Si este es el caso, intente el comando 'Vista de texto activada' en su lugar."
+
+msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor para los eventos de espera profunda que se envían durante los eventos de espera normales."
+
+msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
+msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
+
+msgid "Allows the TV remote to be used to control the receiver."
+msgstr "Permite usar el control remoto del televisor para controlar el receptor."
+
+msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
+msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo de espera cuando se apague el televisor."
+
+msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
+msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
+
+msgid "Wake the receiver from standby when selected wake command is sent from the TV."
+msgstr "Despierta el receptor desde el modo de espera cuando se envía el comando de activación seleccionado desde el televisor."
+
+msgid "Volume keys on the receiver remote will control the TV volume."
+msgstr "Las teclas de volumen del control remoto del receptor controlarán el volumen del televisor."
+
+msgid "Put A/V receiver to standby too."
+msgstr "Ponga el receptor de A/V en espera también."
+
+msgid "Wakeup A/V receiver from standby too."
+msgstr "También activa el receptor A/V desde el modo de espera."
+
+msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
+msgstr "Retraso entre comandos CEC al enviar una serie de comandos. Algunos dispositivos requieren este retraso para su correcto funcionamiento, generalmente entre 50-150 ms."
+
+msgid "The command to wake from standby will be sent multiple times."
+msgstr "El comando para despertar desde el modo de espera se enviará varias veces."
+
+msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
+msgstr "Ordene al televisor que cambie a la entrada HDMI correcta cuando se activen los temporizadores zap."
+
+msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
+msgstr "Antes de enviar el comando para poner el televisor en modo de espera, el receptor prueba si todos los demás dispositivos conectados al televisor están en modo de espera. Si no es así, el comando 'códigoactivo' se enviará al televisor en lugar del comando 'standby'."
+
+msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
+msgstr "Si está habilitado, se mantendrá un registro del tráfico del protocolo CEC ('hdmicec.log')"
+
+msgid "Wakeup command for TV"
+msgstr "Comando de activación para TV"
+
+msgid "TrueType font (Full-HD)"
+msgstr "Tipo fuente verdadero (Full-HD)"
+
+msgid "use best / controlled by HDMI"
+msgstr "use mejor controlado por HDMI"
