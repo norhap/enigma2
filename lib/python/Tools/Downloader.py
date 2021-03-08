@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from twisted.web import client
 from twisted.internet import reactor, defer
-from urlparse import urlparse
-from enigma import getBoxType, getBoxBrand
+try:
+	from urlparse import urlparse
+except:
+	from urllib.parse import urlparse
+from enigma import getBoxType
+
 
 class HTTPProgressDownloader(client.HTTPDownloader):
 	def __init__(self, url, outfile, headers=None):
-		client.HTTPDownloader.__init__(self, url, outfile, headers=headers, agent="%s %s Enigma2 HbbTV/1.1.1 (+PVR+RTSP+DL;OpenVision;;;)" % (getBoxBrand(), getBoxType()))
+		client.HTTPDownloader.__init__(self, url, outfile, headers=headers, agent="%s Enigma2 HbbTV/1.1.1 (+PVR+RTSP+DL;OpenVision;;;)" % (getBoxType()))
 		self.status = self.progress_callback = self.error_callback = self.end_callback = None
 		self.deferred = defer.Deferred()
 
@@ -39,6 +43,7 @@ class HTTPProgressDownloader(client.HTTPDownloader):
 		if self.end_callback:
 			self.end_callback()
 		return ret
+
 
 class downloadWithProgress:
 	def __init__(self, url, outputfile, contextFactory=None, *args, **kwargs):

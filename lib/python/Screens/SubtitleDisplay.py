@@ -8,6 +8,7 @@ from sys import maxint
 import skin
 from os import sys
 
+
 class SubtitleDisplay(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -47,8 +48,8 @@ class SubtitleDisplay(Screen):
 		label = self['message']
 		label.setText(message)
 		size = label.getSize()
-		label.resize(size[0]+padding[0]*2, size[1]+padding[1]*2)
-		label.move((getDesktop(0).size().width()-size[0]-padding[0]) // 2, getDesktop(0).size().height()-size[1]-padding[1]*2-30)
+		label.resize(size[0] + padding[0] * 2, size[1] + padding[1] * 2)
+		label.move((getDesktop(0).size().width() - size[0] - padding[0]) // 2, getDesktop(0).size().height() - size[1] - padding[1] * 2 - 30)
 		label.show()
 		self.messageShown = True
 		self.show()

@@ -5,6 +5,7 @@ import os
 import socket
 import six
 
+
 class NetlinkSocket(socket.socket):
 	def __init__(self):
 		NETLINK_KOBJECT_UEVENT = 15 # hasn't landed in socket yet, see linux/netlink.h
@@ -30,10 +31,11 @@ class NetlinkSocket(socket.socket):
 				except:
 					event[None] = item
 
+
 # Quick unit test (you can run this on any Linux machine)
 if __name__ == '__main__':
 	nls = NetlinkSocket()
 	print("[Netlink] socket no:", nls.fileno())
-	while 1:
+	while True:
 		for item in nls.parse():
 			print(repr(item))

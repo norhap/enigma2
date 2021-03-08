@@ -71,9 +71,9 @@ def setFPWakeuptime(wutime):
 def setRTCoffset(forsleep=None):
 	import time
 	if time.localtime().tm_isdst == 0:
-		forsleep = 7200+time.timezone
+		forsleep = 7200 + time.timezone
 	else:
-		forsleep = 3600-time.timezone
+		forsleep = 3600 - time.timezone
 
 	t_local = time.localtime(int(time.time()))
 
@@ -112,7 +112,7 @@ def getFPWakeuptime():
 
 wasTimerWakeup = None
 
-def getFPWasTimerWakeup(check = False):
+def getFPWasTimerWakeup(check=False):
 	global wasTimerWakeup
 	isError = False
 	if wasTimerWakeup is not None:

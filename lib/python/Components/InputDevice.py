@@ -29,17 +29,19 @@ else:
 	IOC_DIRBITS = 3L if "mips" in platform.machine() else 2L
 
 IOC_NRSHIFT = 0L
-IOC_TYPESHIFT = IOC_NRSHIFT+IOC_NRBITS
-IOC_SIZESHIFT = IOC_TYPESHIFT+IOC_TYPEBITS
-IOC_DIRSHIFT = IOC_SIZESHIFT+IOC_SIZEBITS
+IOC_TYPESHIFT = IOC_NRSHIFT + IOC_NRBITS
+IOC_SIZESHIFT = IOC_TYPESHIFT + IOC_TYPEBITS
+IOC_DIRSHIFT = IOC_SIZESHIFT + IOC_SIZEBITS
 
 IOC_READ = 2L
 
+
 def EVIOCGNAME(length):
-	return (IOC_READ<<IOC_DIRSHIFT)|(length<<IOC_SIZESHIFT)|(0x45<<IOC_TYPESHIFT)|(0x06<<IOC_NRSHIFT)
+	return (IOC_READ << IOC_DIRSHIFT) | (length << IOC_SIZESHIFT) | (0x45 << IOC_TYPESHIFT) | (0x06 << IOC_NRSHIFT)
 
 
 class inputDevices:
+	BLACKLIST = ("dreambox front panel", "cec_input")
 
 	def __init__(self):
 		self.Devices = {}
@@ -51,7 +53,7 @@ class inputDevices:
 
 		for evdev in devices:
 			try:
-				buffer = "\0"*512
+				buffer = "\0" * 512
 				self.fd = os.open("/dev/input/" + evdev, os.O_RDWR | os.O_NONBLOCK)
 				self.name = ioctl(self.fd, EVIOCGNAME(256), buffer)
 				self.name = self.name[:self.name.find("\0")]
@@ -61,12 +63,15 @@ class inputDevices:
 				self.name = None
 
 			if self.name:
-				self.Devices[evdev] = {'name': self.name, 'type': self.getInputDeviceType(self.name),'enabled': False, 'configuredName': None }
+				if self.name == "aml_keypad":
+					self.name = "dreambox advanced remote control (native)"
+				if self.name in self.BLACKLIST:
+					continue
+				self.Devices[evdev] = {'name': self.name, 'type': self.getInputDeviceType(self.name), 'enabled': False, 'configuredName': None}
 				if model.startswith("et"):
 					self.setDefaults(evdev)
 
-
-	def getInputDeviceType(self,name):
+	def getInputDeviceType(self, name):
 		if "remote control" in str(name).lower():
 			return "remote"
 		elif "keyboard" in str(name).lower():
@@ -201,7 +206,12 @@ class InitInputDevices:
 		exec(cmd)
 		cmd = "config.inputDevices." + device + ".name.addNotifier(self.inputDevicesNameChanged,config.inputDevices." + device + ".name)"
 		exec(cmd)
-		cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=100, increment = 10, limits=(0, 500))"
+		if model in ("maram9", "axodin"):
+			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=400, increment = 10, limits=(0, 500))"
+		elif model == "azboxhd":
+			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=150, increment = 10, limits=(0, 500))"
+		else:
+			cmd = "config.inputDevices." + device + ".repeat = ConfigSlider(default=100, increment = 10, limits=(0, 500))"
 		exec(cmd)
 		cmd = "config.inputDevices." + device + ".repeat.addNotifier(self.inputDevicesRepeatChanged,config.inputDevices." + device + ".repeat)"
 		exec(cmd)
@@ -211,11 +221,13 @@ class InitInputDevices:
 		exec(cmd)
 
 
+
 iInputDevices = inputDevices()
 
 
 config.plugins.remotecontroltype = ConfigSubsection()
 config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
+
 
 class RcTypeControl():
 	def __init__(self):
@@ -242,5 +254,6 @@ class RcTypeControl():
 		if self.isSupported:
 			rc = open('/proc/stb/ir/rc/type', 'r').read().strip()
 		return int(rc)
+
 
 iRcTypeControl = RcTypeControl()

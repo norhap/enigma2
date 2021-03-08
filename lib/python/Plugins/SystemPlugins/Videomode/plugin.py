@@ -9,25 +9,26 @@ from Components.Sources.StaticText import StaticText
 
 from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw
 
-config.misc.videowizardenabled = ConfigBoolean(default = True)
+config.misc.videowizardenabled = ConfigBoolean(default=True)
+
 
 class VideoSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session, hw):
 		Screen.__init__(self, session)
 		# for the skin: first try VideoSetup, then Setup, this allows individual skinning
-		self.skinName = ["VideoSetup", "Setup" ]
+		self.skinName = ["VideoSetup", "Setup"]
 		self.setup_title = _("A/V settings")
 		self.setTitle(self.setup_title)
 		self.hw = hw
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 
 		# handle hotplug by re-creating setup
 		self.onShow.append(self.startHotplug)
 		self.onHide.append(self.stopHotplug)
 
-		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		from Components.ActionMap import ActionMap
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
@@ -202,7 +203,7 @@ class VideoSetup(Screen, ConfigListScreen):
 		if (port, mode, rate) != self.last_good:
 			self.hw.setMode(port, mode, rate)
 			from Screens.MessageBox import MessageBox
-			self.session.openWithCallback(self.confirm, MessageBox, _("Is this video mode ok?"), MessageBox.TYPE_YESNO, timeout = 20, default = False)
+			self.session.openWithCallback(self.confirm, MessageBox, _("Is this video mode ok?"), MessageBox.TYPE_YESNO, timeout=20, default=False)
 		else:
 			self.keySave()
 
@@ -223,6 +224,7 @@ class VideoSetup(Screen, ConfigListScreen):
 	def createSummary(self):
 		from Screens.Setup import SetupSummary
 		return SetupSummary
+
 
 class VideomodeHotplug:
 	def __init__(self, hw):
@@ -251,19 +253,22 @@ class VideomodeHotplug:
 			print("[Videomode] setting %s/%s/%s" % (port, mode, rate))
 			self.hw.setMode(port, mode, rate)
 
+
 hotplug = None
+
 
 def startHotplug():
 	global hotplug, video_hw
 	hotplug = VideomodeHotplug(video_hw)
 	hotplug.start()
 
+
 def stopHotplug():
 	global hotplug
 	hotplug.stop()
 
 
-def autostart(reason, session = None, **kwargs):
+def autostart(reason, session=None, **kwargs):
 	if session is not None:
 		global my_global_session
 		my_global_session = session
@@ -274,24 +279,28 @@ def autostart(reason, session = None, **kwargs):
 	elif reason == 1:
 		stopHotplug()
 
+
 def videoSetupMain(session, **kwargs):
 	session.open(VideoSetup, video_hw)
 
+
 def startSetup(menuid):
 	if menuid != "video":
-		return [ ]
+		return []
 
 	return [(_("A/V settings"), videoSetupMain, "av_setup", 40)]
+
 
 def VideoWizard(*args, **kwargs):
 	from Plugins.SystemPlugins.Videomode.VideoWizard import VideoWizard
 	return VideoWizard(*args, **kwargs)
 
+
 def Plugins(**kwargs):
 	list = [
 #		PluginDescriptor(where = [PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc = autostart),
-		PluginDescriptor(name=_("Video setup"), description=_("Advanced video setup"), where = PluginDescriptor.WHERE_MENU, needsRestart = False, fnc=startSetup)
+		PluginDescriptor(name=_("Video setup"), description=_("Advanced video setup"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=startSetup)
 	]
 	if config.misc.videowizardenabled.value:
-		list.append(PluginDescriptor(name=_("Video wizard"), where = PluginDescriptor.WHERE_WIZARD, needsRestart = False, fnc=(20, VideoWizard)))
+		list.append(PluginDescriptor(name=_("Video wizard"), where=PluginDescriptor.WHERE_WIZARD, needsRestart=False, fnc=(20, VideoWizard)))
 	return list

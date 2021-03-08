@@ -6,6 +6,7 @@ from Components.config import config, getConfigListEntry
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 
+
 class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -35,7 +36,7 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 		self.list = []
 		self.logpath_entry = None
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.createSetup()
 		self.updateAddress()
 
@@ -138,8 +139,10 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 				inhibitDirs=inhibitDirs, minFree=1
 				)
 
+
 def main(session, **kwargs):
 	session.open(HdmiCECSetupScreen)
+
 
 def startSetup(menuid):
 	# only show in the menu when set to intermediate or higher
@@ -147,10 +150,11 @@ def startSetup(menuid):
 		return [(_("HDMI-CEC setup"), main, "hdmi_cec_setup", 0)]
 	return []
 
+
 def Plugins(**kwargs):
 	from os import path
 	if path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
 		import Components.HdmiCec
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc = startSetup)]
+		return [PluginDescriptor(where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]
 	return []

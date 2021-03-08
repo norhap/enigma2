@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Label import Label
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
+
 
 class VNetSpeedInfo(Poll, Converter, object):
 	RCL = 0
@@ -34,7 +36,7 @@ class VNetSpeedInfo(Poll, Converter, object):
 	DRO_RCW = 25
 	DRO_TMW = 26
 
-	def __init__(self, type, update_interval = 1000):
+	def __init__(self, type, update_interval=1000):
 		Poll.__init__(self)
 		self.poll_interval = 1500
 		self.poll_enabled = True
@@ -137,6 +139,7 @@ class VNetSpeedInfo(Poll, Converter, object):
 	def updateNetSpeedInfoStatus(self):
 		flaglan = 0
 		flagwlan = 0
+		print("[VNetSpeedInfo] Read /proc/net/dev")
 		bwm = open('/proc/net/dev')
 		bw = bwm.readline()
 		bw = bwm.readline()

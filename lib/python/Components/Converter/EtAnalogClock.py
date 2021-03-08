@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from time import localtime
 from Components.Element import cached
 
+
 class EtAnalogClock(Converter, object):
 	DEFAULT = 0
 	OMA_SEC = 1
@@ -32,7 +33,7 @@ class EtAnalogClock(Converter, object):
 		elif self.type == self.OMA_MIN:
 			return "%02d,min" % t.tm_min
 		elif self.type == self.OMA_HOUR:
-			ret = (t.tm_hour*5)+(t.tm_min/12);
+			ret = (t.tm_hour * 5) + (t.tm_min / 12)
 			return "%02d,hour" % ret
 		else:
 			return "???"

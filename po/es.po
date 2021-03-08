@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2019-10-16 22:14+0200\n"
+"PO-Revision-Date: 2021-03-07 03:11+0100\n"
 "Language-Team: Álvaro <mi casa>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.4.2\n"
 "Last-Translator: Kuatto\n"
 "Language: es_ES\n"
 
@@ -3089,7 +3089,7 @@ msgid "Goto previous page of events"
 msgstr "Ir a la página previa de eventos"
 
 msgid "Goto primetime / now"
-msgstr "Ir a primetime / ahora"
+msgstr "Ir a hora máxima audiencia ahora"
 
 msgid "Goto specific date/time"
 msgstr "Ir a fecha / hora específica"
@@ -3693,7 +3693,7 @@ msgid "Letterbox"
 msgstr "Letterbox"
 
 msgid "Letterbox zoom"
-msgstr "Letterbox zoom"
+msgstr "Selección de video panscan, letterbox, scale"
 
 msgid "Liberia"
 msgstr "Liberia"
@@ -4796,14 +4796,8 @@ msgstr "Espere mientras se testea su red…"
 msgid "Please wait while your network is restarting..."
 msgstr "Espere mientras se reinicia su red…"
 
-msgid "Please wait, restarting cardserver."
-msgstr "Espere, reiniciando cardserver."
-
-msgid "Please wait, restarting softcam and cardserver."
-msgstr "Espere, reiniciando softcam y cardserver."
-
-msgid "Please wait, restarting softcam."
-msgstr "Espere, reiniciando softcam."
+msgid "Please wait, restarting %s."
+msgstr "Espere, reiniciando %s."
 
 msgid "Please wait..."
 msgstr "Espera por favor…"
@@ -6940,7 +6934,7 @@ msgstr ""
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
-"Note: you can always start the Overscan wizard later,	via\n"
+"Note: you can always start the Overscan wizard later,\tvia\n"
 "\n"
 "Menu->Installation->System->Audio/Video->Overscan wizard"
 msgstr ""
@@ -9273,8 +9267,8 @@ msgstr "Dejar de usar como canal de inicio"
 msgid "successful"
 msgstr "exitoso"
 
-msgid "switch to bookmarks"
-msgstr "cambia a marcadores"
+msgid "Switch to bookmarks"
+msgstr "Cambia a marcadores"
 
 msgid "switch to filelist"
 msgstr "cambia a lista de archivos"
@@ -9387,8 +9381,8 @@ msgstr "cuando esté activo PiPzap cambia canal abajo…"
 msgid "when PiPzap enabled zap channel up..."
 msgstr "cuando esté activo PiPzap cambia canal arriba…"
 
-msgid "white"
-msgstr "blanco"
+msgid "White"
+msgstr "Blanco"
 
 msgid "wide"
 msgstr "altura"
@@ -9482,6 +9476,9 @@ msgstr "Teclado"
 
 msgid "Manual scan"
 msgstr "Búsqueda manual"
+
+msgid "Multiboot image selector"
+msgstr "Seleccionar Imagen Multiboot"
 
 msgid "Multiboot Image Selector"
 msgstr "Seleccionar Imagen Multiboot"
@@ -10393,7 +10390,7 @@ msgid "Tuner slot"
 msgstr "Ranura del sintonizador"
 
 msgid "Turn on the power LED during standby."
-msgstr "Encienda el LED de encendido durante el modo reposo."
+msgstr "Encienda el LED de encendido durante standby o reposo profundo."
 
 msgid "Use 12 characters display mode"
 msgstr "Use el modo de visualización de 12 caracteres"
@@ -13800,7 +13797,7 @@ msgid "show options list"
 msgstr "mostrar opciones de lista"
 
 msgid "zap to service"
-msgstr "zap al servicio"
+msgstr "zapear al canal"
 
 msgid ""
 "Warning!\n"
@@ -14337,7 +14334,7 @@ msgid "Front Panel Display"
 msgstr "Panel Frontal Display"
 
 msgid "LCD Setup"
-msgstr "Ajustes LCD"
+msgstr "Ajustes Display"
 
 msgid "LED Setup"
 msgstr "Ajustes LED"
@@ -14879,6 +14876,9 @@ msgstr "Esta opción le permite elegir cómo mostrar el tiempo transcurrido como
 
 msgid "This option allows you to choose how to display the remaining/elapsed time for media playback."
 msgstr "Esta opción le permite elegir cómo mostrar el tiempo restante/transcurrido para la reproducción de medios."
+
+msgid "This option allows you to choose how to display the remaining/elapsed time for Media playback."
+msgstr "Esta opción le permite elegir cómo mostrar el tiempo restante/transcurrido para la reproducción de Medios."
 
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr "Configure si y por cuánto tiempo se recordará el último servicio en el modo PiP."
@@ -15661,28 +15661,35 @@ msgid ""
 "A finished powertimer wants to reboot your %s %s.\n"
 "Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere reiniciar su %s %s.\n"
+"Un Powertimer ha terminado y quiere reiniciar su %s %s.\n"
 "Hacerlo Ahora?"
 
 msgid ""
 "A finished powertimer wants to restart the user interface.\n"
 "Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere reiniciar la interfaz de usuario.\n"
+"Un Powertimer ha terminado y quiere reiniciar enigma2.\n"
 "Hacerlo Ahora?"
 
 msgid ""
-"A finished powertimer wants to set your\n"
-"%s %s to standby. Do that now?"
+"A finished powertimer wants to set your %s %s to standby.\n"
+"Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere configurar su\n"
-"%s %s para modo espera.Hacerlo Ahora?"
+"Un Powertimer ha terminado y quiere poner su %s %s en standby.\n"
+"Hacerlo Ahora?"
+
+msgid ""
+"A finished powertimer wants to set your receiver to standby.\n"
+"Do that now?"
+msgstr ""
+"Un Powertimer ha terminado y quiere poner su receptor en standby.\n"
+"Hacerlo Ahora?"
 
 msgid ""
 "A finished powertimer wants to shutdown your %s %s.\n"
 "Do that now?"
 msgstr ""
-"Un Powertimer ha terminado quiere apagar su %s %s.\n"
+"Un Powertimer ha terminado y quiere apagar profundo su %s %s.\n"
 "Hacerlo Ahora?"
 
 msgid "Do you really want to delete this timer?"
@@ -15730,6 +15737,9 @@ msgstr "Espera Profunda Automática"
 
 msgid "Restart GUI"
 msgstr "Reiniciar Enigma2"
+
+msgid "restart GUI"
+msgstr "reiniciar enigma2"
 
 msgid "Installing service"
 msgstr "Instalando Servicio"
@@ -15900,17 +15910,17 @@ msgstr "'%s' contiene %d archivo(s) y %d sub-directorios.\n"
 msgid "(You are currently using a temporary sort method)"
 msgstr "(Actualmente está utilizando un método de clasificación temporal)"
 
-msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.	 It hides the day of the week for recordings made in previous years."
+msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.\t It hides the day of the week for recordings made in previous years."
 msgstr "La visualización adaptable de la fecha permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
 
 msgid "Allows you to setup the button to do what you choose."
 msgstr "Le permite configurar el botón para hacer lo que elija."
 
 msgid "Ask user (with default as 'no')"
-msgstr "Preguntar al usuario (con valor predeterminado 'no')"
+msgstr "Preguntar al usuario (por defecto 'no')"
 
 msgid "Ask user (with default as 'yes')"
-msgstr "Preguntar al usuario (con valor predeterminado 'si')"
+msgstr "Preguntar al usuario (por defecto 'si')"
 
 msgid "Blue long"
 msgstr "Azul prolongado"
@@ -16185,7 +16195,7 @@ msgid "If disabled, underline characters in file and directory names are not sho
 msgstr "Si está deshabilitado, los caracteres subrayados en los nombres de archivo y directorio no se muestran y se reemplazan con espacios."
 
 msgid "Standby LED"
-msgstr "LED en Modo Reposo"
+msgstr "LED en Standby o Reposo Profundo"
 
 msgid "Power LED can be turned on or off here."
 msgstr "El LED de encendido se puede encender o apagar aquí."
@@ -16388,8 +16398,8 @@ msgstr "Puede seleccionar el skin del teclado virtual."
 msgid "Virtual keyboard skin"
 msgstr "Teclado virtual en skin"
 
-msgid "Humidity :"
-msgstr "Humedad :"
+msgid "Humidity:"
+msgstr "Humedad:"
 
 msgid "Lets define enigma2 once more"
 msgstr "Definamos enigma2 una vez más"
@@ -16418,8 +16428,8 @@ msgstr "Configuración Proveedor DNS"
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"
 
-msgid "%s  (Default: %s)"
-msgstr "%s  (Por Defecto: %s)"
+msgid "%s%s(Default: %s)"
+msgstr "%s%s(Por Defecto: %s)"
 
 msgid "Default: '%s'."
 msgstr "Por Defecto: '%s'."
@@ -16534,3 +16544,528 @@ msgstr "Se ha utilizado la geolocalización para establecer la zona horaria."
 
 msgid "Use Geolocation"
 msgstr "Use Geolocalización"
+
+msgid "Auto play last service in radio mode"
+msgstr "Reproducción automática del último canal en modo radio"
+
+msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
+msgstr "Cuando está habilitado, se reproducirá automáticamente el último canal de radio guardado al cambiar al modo de radio."
+
+msgid "Enable Autostart"
+msgstr "Activar Inicio Automático"
+
+msgid "Stop|Disable Autostart"
+msgstr "Detener|Desactivado Autoinicio"
+
+msgid "SATPI Setup"
+msgstr "Ajustes SATPI"
+
+msgid "Delay:"
+msgstr "Retraso:"
+
+msgid "Auto deep standby"
+msgstr "Modo espera profundo automático"
+
+msgid ""
+"Please set your time options.\n"
+"\n"
+"Press YELLOW to set the time zone via geolocation."
+msgstr ""
+"Configura sus opciones de horario.\n"
+"\n"
+"Pulsa Amarillo para usar su horario y continue con el wizard."
+
+msgid "Skin setting"
+msgstr "Ajuste skin"
+
+msgid "With this option you can switch the LED color or deactivate the LED."
+msgstr "Con esta opción puede cambiar el color del LED o desactivar el LED."
+
+msgid "violet"
+msgstr "violeta"
+
+msgid "Operating LED status in deep standby mode"
+msgstr "Estado del LED en reposo profundo"
+
+msgid "Operating LED status in standby mode"
+msgstr "Estado del LED en standby"
+
+msgid "Operating LED status while running."
+msgstr "Estado del LED en funcionamiento."
+
+msgid "Switch on the display during Standby Mode"
+msgstr "Encender la pantalla en standby"
+
+msgid "Switch on the display during Suspend Mode"
+msgstr "Encender la pantalla durante reposo profundo"
+
+msgid "Switch on the display during operation."
+msgstr "Encender la pantalla durante el funcionamiento."
+
+msgid "With this option you can switch on the display during operation."
+msgstr "Con esta opción puede encender la pantalla durante el funcionamiento."
+
+msgid "With this option you can switch on the display in Deep Standby Mode."
+msgstr "Con esta opción puede encender la pantalla en reposo profundo."
+
+msgid "With this option you can switch on the display in Standby Mode."
+msgstr "Con esta opción puede encender la pantalla en standby."
+
+msgid "Set the scrolling speed of text on the front panel display."
+msgstr "Configure la velocidad de desplazamiento del texto en display."
+
+msgid "Set the scrolling speed of text on the front panel display, this is used by software renderer in some skins."
+msgstr "Establezca la velocidad de desplazamiento del texto en display, esto lo usa el renderizador de software en algunas skins."
+
+msgid "Default timer type"
+msgstr "Tipo temporizador por defecto"
+
+msgid "Configure default type for new timers."
+msgstr "Configure por defecto para nuevos temporizadores."
+
+msgid "Single line mode"
+msgstr "Linea simple"
+
+msgid "After %s"
+msgstr "Después de %s"
+
+msgid "Standby in %s"
+msgstr "Standby en %s"
+
+msgid "Show satellites list"
+msgstr "Mostrar lista de Satélites"
+
+msgid "Don't show default"
+msgstr "No Mostrar Por Defecto"
+
+msgid "Show default after description"
+msgstr "Mostrar 'Por Defecto' seguido en la descripción"
+
+msgid "Show default on new line"
+msgstr "Mostrar 'Por Defecto' en nueva linea"
+
+msgid "Show setup default value"
+msgstr "Mostrar valor 'Por Defecto' en descripciones"
+
+msgid "This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description."
+msgstr "Esta opción le permite seleccionar si se muestra 'Por Defecto' para un elemento de configuración y, de ser así, dónde se muestra en relación con la descripción."
+
+msgid "Date style"
+msgstr "Estilo de fecha"
+
+msgid "Time style"
+msgstr "Estilo de Tiempo"
+
+msgid "Day D Mon"
+msgstr "Día D Lun"
+
+msgid "Day D-Mon"
+msgstr "Día D-Lun"
+
+msgid "Day D/M"
+msgstr "Día D/M"
+
+msgid "Day D/MM"
+msgstr "Día D/MM"
+
+msgid "Day DD Mon"
+msgstr "Día DD Lun"
+
+msgid "Day DD-Mon"
+msgstr "Día DD-Lun"
+
+msgid "Day DD/M"
+msgstr "Día DD/M"
+
+msgid "Day DD/MM"
+msgstr "Día DD/MM"
+
+msgid "Day M/D"
+msgstr "Día M/D"
+
+msgid "Day M/DD"
+msgstr "Día M/DD"
+
+msgid "Day MM/D"
+msgstr "Día MM/D"
+
+msgid "Day MM/DD"
+msgstr "Día MM/DD"
+
+msgid "Day Mon D"
+msgstr "Día Lun D"
+
+msgid "Day Mon DD"
+msgstr "Dia Lun DD"
+
+msgid "Day Mon-D"
+msgstr "Día Lun-D"
+
+msgid "Day Mon-DD"
+msgstr "Día Lun-DD"
+
+msgid "Dayname D Month Year"
+msgstr "Nombre Día D Mes Año"
+
+msgid "Dayname D-Month-Year"
+msgstr "Nombre Día D-Mes-Año"
+
+msgid "Dayname D. Month Year"
+msgstr "Nombre Día D. Mes Año"
+
+msgid "Dayname D.M.Year"
+msgstr "Nombre Día D.M.Año"
+
+msgid "Dayname D.MM.Year"
+msgstr "Nombre Día D.MM.Año"
+
+msgid "Dayname D/M/Year"
+msgstr "Nombre Día D/M/Año"
+
+msgid "Dayname D/MM/Year"
+msgstr "Nombre Día D/MM/Año"
+
+msgid "Dayname DD Month Year"
+msgstr "Nombre Día DD Mes Año"
+
+msgid "Dayname DD-Month-Year"
+msgstr "Nombre Día DD-Mes-Año"
+
+msgid "Dayname DD. Month Year"
+msgstr "Nombre Día DD. Mes Año"
+
+msgid "Dayname DD.M.Year"
+msgstr "Nombre Día DD.M.Año"
+
+msgid "Dayname DD.MM.Year"
+msgstr "Nombre Día DD.MM.Año"
+
+msgid "Dayname DD/M/Year"
+msgstr "Nombre Día DD/M/Año"
+
+msgid "Dayname DD/MM/Year"
+msgstr "Nombre Día DD/MM/Año"
+
+msgid "Dayname M/D/Year"
+msgstr "Nombre Día M/D/Año"
+
+msgid "Dayname M/DD/Year"
+msgstr "Nombre Día M/DD/Año"
+
+msgid "Dayname MM/D/Year"
+msgstr "Nombre Día MM/D/Año"
+
+msgid "Dayname MM/DD/Year"
+msgstr "Nombre Día MM/DD/Año"
+
+msgid "Dayname Month D Year"
+msgstr "Nombre Día Mes D Año"
+
+msgid "Dayname Month DD Year"
+msgstr "Nombre Día Mes DD Año"
+
+msgid "Dayname Month-D-Year"
+msgstr "Nombre Día Mes-D-Año"
+
+msgid "Dayname Month-DD-Year"
+msgstr "Nombre Día Mes-DD-Año"
+
+msgid "Dayname Year Month D"
+msgstr "Nombre Día Año Mes D"
+
+msgid "Dayname Year Month DD"
+msgstr "Nombre Día Año Mes DD"
+
+msgid "Dayname Year-Month-D"
+msgstr "Nombre Día Año-Mes-D"
+
+msgid "Dayname Year-Month-DD"
+msgstr "Nombre Día Año-Mes-DD"
+
+msgid "Dayname Year/M/D"
+msgstr "Nombre Día Año/M/D"
+
+msgid "Dayname Year/M/DD"
+msgstr "Nombre Día Año/M/DD"
+
+msgid "Dayname Year/MM/D"
+msgstr "Nombre Día Año/MM/D"
+
+msgid "Dayname Year/MM/DD"
+msgstr "Nombre Día Año/MM/DD"
+
+msgid "Hidden / Blank"
+msgstr "Ocultar / En blanco"
+
+msgid "hide"
+msgstr "ocultar"
+
+msgid "fast"
+msgstr "rápido"
+
+msgid "slow"
+msgstr "lento"
+
+msgid "Center"
+msgstr "Centro"
+
+msgid "Sort order for help screen"
+msgstr "Orden de clasificación para pantalla ayuda"
+
+msgid "Choose the order in which items are displayed in Help windows"
+msgstr "Elija el orden en el que se muestran los elementos en las ventanas de Ayuda"
+
+msgid "Flat by position on remote"
+msgstr "Plano por posición en el mando"
+
+msgid "Flat by key group on remote"
+msgstr "Plano por tecla en el mando"
+
+msgid "Flat alphabetical"
+msgstr "Alfabeto plano"
+
+msgid "Alphabetical under headings"
+msgstr "Alfabéticamente bajo títulos"
+
+msgid "Animation speed of help indicators"
+msgstr "Velocidad de animación de los indicadores de ayuda"
+
+msgid "Control the animation speed of the button indicators in the Help screen. 'Disabled' turns off animation so that indicators jump between buttons."
+msgstr "Controle la velocidad de animación de los indicadores de los botones en la pantalla de ayuda. 'Deshabilitado' apaga la animación para que los indicadores salten entre los botones."
+
+msgid "Very slow"
+msgstr "Muy lento"
+
+msgid "Very fast"
+msgstr "Muy rápido"
+
+msgid "Transponder time"
+msgstr "Tiempo transpondedor"
+
+msgid "Internet time (NTP)"
+msgstr "Tiempo internet (NTP)"
+
+msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits.  ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
+msgstr "Elija el estilo de formato de visualización para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización del display se basará en su elección, pero puede verse influenciada por skin."
+
+msgid "Choose the display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes and 'ss' is the seconds.  ('HH' and 'hh' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
+msgstr "Elija el estilo de formato de visualización para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos y 'ss' son los segundos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La visualización del display se basará en su elección, pero puede verse influenciada por skin."
+
+msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
+msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). El display se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
+
+msgid "Help Screen"
+msgstr "Pantalla Ayuda"
+
+msgid "Brief help information for buttons in your current context."
+msgstr "Breve información de ayuda para los botones en su contexto actual."
+
+msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. EXIT to return to the help screen. OK to perform the action described in the currently highlighted help."
+msgstr "Navegue hacia arriba / abajo con los botones ARRIBA/ABAJO y página arriba/abajo con IZQUIERDA/DERECHA. SALIR para volver a la pantalla de ayuda. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente."
+
+msgid "Other buttons will jump to the help for that button, if there is help."
+msgstr "Otros botones saltarán a la ayuda de ese botón, si hay ayuda."
+
+msgid "If an action is user-configurable, its help entry will be flagged with a (C)."
+msgstr "Si una acción es configurable por el usuario, su entrada de ayuda se marcará con una (C)."
+
+msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list indicates whether the function is for a long press of the button(s)."
+msgstr "Un resaltado en la imagen del control remoto muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista indica si la función es para una pulsación larga de los botones."
+
+msgid "The order and grouping of the help information list can be controlled using MENU>Setup>User Interface>Settings>Sort order for help screen."
+msgstr "El orden y la agrupación de la lista de información de ayuda se puede controlar mediante MENÚ> Configuración> Interfaz de usuario> Configuración> Orden de clasificación para la pantalla de ayuda."
+
+msgid "and"
+msgstr "y"
+
+msgid "Cancel any changed settings and exit"
+msgstr "Cancelar cualquier configuración modificada y salir"
+
+msgid "Cancel any changed settings and exit all menus"
+msgstr "Cancelar cualquier configuración modificada y salir de todos los menús"
+
+msgid "Cancel any changes to the currently active skin"
+msgstr "Cancelar cualquier cambio activo en el skin"
+
+msgid "Cancel any changes to the currently active skin and exit all menus"
+msgstr "Cancele cualquier cambio en la máscara actualmente activa y salga de todos los menús"
+
+msgid "Jump to first item in list or the start of text"
+msgstr "Ir al primer elemento de la lista o al comienzo del texto"
+
+msgid "Jump to last item in list or the end of text"
+msgstr "Ir al último elemento de la lista o al final del texto"
+
+msgid "Move down a screen"
+msgstr "Moverse abajo de la pantalla"
+
+msgid "Move up a screen"
+msgstr "Moverse arriba de la pantalla"
+
+msgid "Save all changed settings and exit"
+msgstr "Guarde todas las configuraciones cambiadas y salga"
+
+msgid "Select the next item in list or move cursor right"
+msgstr "Seleccione el siguiente elemento de la lista o mueva el cursor a la derecha"
+
+msgid "Select the previous item in list or move cursor left"
+msgstr "Seleccione el elemento anterior en la lista o mueva el cursor a la izquierda"
+
+msgid "Select, toggle, process or edit the current entry"
+msgstr "Seleccionar, alternar, procesar o editar la entrada actual"
+
+msgid "Common Setup Actions"
+msgstr "Acciones Ajustes Comunes"
+
+msgid "Aspect ratio list..."
+msgstr "Lista ratio (proporciones)..."
+
+msgid "Subtitle show/hide..."
+msgstr "Subtítulos mostrar/ocultar..."
+
+msgid "Move to the next page"
+msgstr "Moverse a la siguiente página"
+
+msgid "Move to the next skin"
+msgstr "Moverse al siguiente skin"
+
+msgid "Move to the previous page"
+msgstr "Moverse a la página anterior"
+
+msgid "Move to the previous skin"
+msgstr "Moverse al skin anterior"
+
+msgid "Save and activate the currently selected skin"
+msgstr "Guardar y activar el actual skin seleccionado"
+
+msgid "exit"
+msgstr "salir"
+
+msgid "Skin Selection Actions"
+msgstr "Acciones Selección de Skin"
+
+msgid "%d seconds"
+msgstr "%d segundos"
+
+msgid "controlled by HDMI"
+msgstr "controlado por HDMI"
+
+msgid "Force enabled"
+msgstr "Fuerza habilitada"
+
+msgid "Force disabled"
+msgstr "Fuerza deshabilitada"
+
+msgid "convert to AC3"
+msgstr "convertir a AC3"
+
+msgid "convert to DTS"
+msgstr "convertir a DTS"
+
+msgid "Ask user (with default as 'No')"
+msgstr "Preguntar usuario (Por defecto es 'No')"
+
+msgid "Ask user (with default as 'Yes')"
+msgstr "Preguntar usuario (Por defecto es 'Si')"
+
+msgid "Enable BT audio"
+msgstr "Habilitado audio BT"
+
+msgid "General BT audio delay"
+msgstr "Retardo General audio BT"
+
+msgid "Other functions"
+msgstr "Otras funciones"
+
+msgid "Delete all the text"
+msgstr "Eliminar completo el texto"
+
+msgid "Delete character to left of cursor or select AM times"
+msgstr "Eliminar el carácter a la izquierda del cursor o seleccionar horas AM"
+
+msgid "Delete character under cursor or select PM times"
+msgstr "Eliminar el carácter debajo del cursor o seleccionar las horas de la tarde"
+
+msgid "Long press: %s"
+msgstr "Pulsación larga: %s"
+
+msgid "Display selection list as a selection menu"
+msgstr "Mostrar menú con selección de lista"
+
+msgid "Softcam Actions"
+msgstr "Acciones Softcam"
+
+msgid "Goto down service"
+msgstr "Ir evento abajo"
+
+msgid "Goto up service"
+msgstr "Ir evento arriba"
+
+msgid "Enable or disable using HDMI-CEC."
+msgstr "Habilitado o deshabilitado usando HDMI-CEC."
+
+msgid "Image View On"
+msgstr "Vista de imagen activada"
+
+msgid "Text View On"
+msgstr "Vista de texto activada"
+
+msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
+msgstr "Ponga automáticamente el televisor en modo de espera siempre que el receptor entre en modo de espera o en modo de espera total."
+
+msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
+msgstr "Cuando el receptor se despierta del modo de espera o del modo de espera profundo, enviará un comando al televisor para que también salga del modo de espera."
+
+msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
+msgstr "Algunos televisores no se despiertan del modo de espera cuando reciben el comando 'Vista de imagen activada'. Si este es el caso, intente el comando 'Vista de texto activada' en su lugar."
+
+msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor para los eventos de espera profunda que se envían durante los eventos de espera normales."
+
+msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
+msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
+
+msgid "Allows the TV remote to be used to control the receiver."
+msgstr "Permite usar el control remoto del televisor para controlar el receptor."
+
+msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
+msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo de espera cuando se apague el televisor."
+
+msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
+msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
+
+msgid "Wake the receiver from standby when selected wake command is sent from the TV."
+msgstr "Despierta el receptor desde el modo de espera cuando se envía el comando de activación seleccionado desde el televisor."
+
+msgid "Volume keys on the receiver remote will control the TV volume."
+msgstr "Las teclas de volumen del control remoto del receptor controlarán el volumen del televisor."
+
+msgid "Put A/V receiver to standby too."
+msgstr "Ponga el receptor de A/V en espera también."
+
+msgid "Wakeup A/V receiver from standby too."
+msgstr "También activa el receptor A/V desde el modo de espera."
+
+msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
+msgstr "Retraso entre comandos CEC al enviar una serie de comandos. Algunos dispositivos requieren este retraso para su correcto funcionamiento, generalmente entre 50-150 ms."
+
+msgid "The command to wake from standby will be sent multiple times."
+msgstr "El comando para despertar desde el modo de espera se enviará varias veces."
+
+msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
+msgstr "Ordene al televisor que cambie a la entrada HDMI correcta cuando se activen los temporizadores zap."
+
+msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
+msgstr "Antes de enviar el comando para poner el televisor en modo de espera, el receptor prueba si todos los demás dispositivos conectados al televisor están en modo de espera. Si no es así, el comando 'códigoactivo' se enviará al televisor en lugar del comando 'standby'."
+
+msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
+msgstr "Si está habilitado, se mantendrá un registro del tráfico del protocolo CEC ('hdmicec.log')"
+
+msgid "Wakeup command for TV"
+msgstr "Comando de activación para TV"
+
+msgid "TrueType font (Full-HD)"
+msgstr "Tipo fuente verdadero (Full-HD)"
+
+msgid "use best / controlled by HDMI"
+msgstr "use mejor controlado por HDMI"

@@ -1,10 +1,11 @@
 # takes a header file, outputs action ids
 
-from __future__ import print_function
-import tokenize, sys
+import tokenize
+import sys
+
 
 def filter(g):
-	while 1:
+	while True:
 		t = g.next()
 		if t[1] == "/*":
 			while g.next()[1] != "*/":
@@ -19,6 +20,7 @@ def filter(g):
 #			print(t)
 			yield t[1]
 
+
 def do_file(f, mode):
 	tokens = filter(tokenize.generate_tokens(open(f, 'r').readline))
 
@@ -30,7 +32,7 @@ def do_file(f, mode):
 
 	firsthit = 1
 
-	while 1:
+	while True:
 		try:
 			t = tokens.next()
 		except:
@@ -70,7 +72,7 @@ def do_file(f, mode):
 
 				counter = 0
 
-				while 1:
+				while True:
 
 					t = tokens.next()
 
@@ -100,6 +102,7 @@ def do_file(f, mode):
 						print("{\"" + actionname + "\", \"" + t + "\", " + "::".join((classname, t)) + "},")
 
 					counter += 1
+
 
 mode = sys.argv[1]
 

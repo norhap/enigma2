@@ -362,13 +362,6 @@ if test x"$with_olde2api" != xno ; then
 	AC_DEFINE(HAVE_OLDE2_API, 1,[define add old api of enigma2])
 fi
 
-AC_ARG_WITH(hisiltuner,
-	AS_HELP_STRING([--with-hisiltuner],[use hisiltuner, yes or no]),
-	[with_hisiltuner=$withval],[with_hisiltuner=no])
-if test x"$with_hisiltuner" != xno ; then
-	AC_DEFINE(HAVE_HISILICON_TUNER, 1,[define add HISILICON TUNER])
-fi
-
 AC_ARG_WITH(osdanimation,
 	AC_HELP_STRING([--with-osdanimation], [use osd animation, yes or no]),
 	[[withosdanimation=$withval]],
@@ -466,8 +459,9 @@ AM_CONDITIONAL(MAXYTEC, test "$BOXBRAND" == "maxytec")
 AM_CONDITIONAL(MECOOL, test "$BOXBRAND" == "mecool")
 AM_CONDITIONAL(MINIX, test "$BOXBRAND" == "minix")
 AM_CONDITIONAL(SF8008, test `echo "$BOXTYPE" | cut -b 1-6` == "sf8008")
-AM_CONDITIONAL(SF8008M, test `echo "$BOXTYPE" | cut -b 1-7` == "sf8008m")
 AM_CONDITIONAL(ODIN, test "$BOXBRAND" == "odin")
+AM_CONDITIONAL(DM4KGEN, test "$STBPLATFORM" == "dm4kgen")
+AM_CONDITIONAL(DMAMLOGIC, test "$STBPLATFORM" == "dmamlogic")
 AM_CONDITIONAL(RASPBERRYPI, test "$BOXBRAND" == "rpi")
 AM_CONDITIONAL(TECHNOMATE, test `echo "$BOXTYPE" | cut -b 1-2` == "tm")
 AM_CONDITIONAL(TIVIAR, test "$BOXBRAND" == "Tiviar")
@@ -530,7 +524,7 @@ if test "$BOXTYPE" == "bwidowx" -o "$BOXTYPE" == "bwidowx2"; then
 	AC_DEFINE(KEY_LAST_TO_KEY_PVR, 1,[define when rc sends a KEY_LAST event for its KEY_PVR key])
 fi
 
-if test "$BOXTYPE" == "sf8008" -o "$BOXTYPE" == "sf8008m" -o "$BOXTYPE" == "ustym4kpro" -o "$BOXTYPE" == "gbtrio4k" -o "$BOXTYPE" == "gbip4k" -o "$BOXTYPE" == "beyonwizv2" -o "$BOXTYPE" == "viper4k"; then
+if test "$BOXTYPE" == "sf8008" -o "$BOXTYPE" == "sf8008m" -o "$BOXTYPE" == "ustym4kpro" -o "$BOXTYPE" == "gbtrio4k" -o "$BOXTYPE" == "gbip4k" -o "$BOXTYPE" == "beyonwizv2" -o "$BOXTYPE" == "viper4k" -o "$BOXTYPE" == "qviart5"; then
 	AC_DEFINE(HAVE_HISILICON, 1,[define it is a HISILICON chip])
 	AC_DEFINE(CONFIG_HISILICON_FB, 1,[define add HISILICON framebuffer blit])
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
@@ -545,6 +539,10 @@ fi
 if test "$BOXBRAND" == "dreambox"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
+fi
+
+if test "$STBPLATFORM" == "dmamlogic"; then
+	AC_DEFINE(DMAMLOGIC, 1, [Dreambox Amlogic hardware])
 fi
 
 if test "$BOXTYPE" == "dm7080"; then

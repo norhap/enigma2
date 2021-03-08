@@ -1,5 +1,7 @@
 from __future__ import print_function
-import os, re, unicodedata
+import os
+import re
+import unicodedata
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 from Tools.Alternatives import GetWithAlternative
@@ -7,8 +9,9 @@ from Tools.Directories import pathExists, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
 
+
 class PiconLocator:
-	def __init__(self, piconDirectories = ['picon']):
+	def __init__(self, piconDirectories=['picon']):
 		harddiskmanager.on_partition_list_change.append(self.__onPartitionChange)
 		self.piconDirectories = piconDirectories
 		self.activePiconPath = None
@@ -63,7 +66,7 @@ class PiconLocator:
 		if pathExists(value):
 			if not value.endswith('/'):
 				value += '/'
-			if not value.startswith('/media/net') and not value.startswith('/media/autofs') and	value not in self.searchPaths:
+			if not value.startswith('/media/net') and not value.startswith('/media/autofs') and value not in self.searchPaths:
 				self.searchPaths.append(value)
 
 	def getPiconName(self, serviceName):
@@ -107,15 +110,21 @@ class PiconLocator:
 					pngname = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
 		return pngname
 
+
 piconLocator = None
+
 
 def initPiconPaths():
 	global piconLocator
 	piconLocator = PiconLocator()
+
+
 initPiconPaths()
+
 
 def getPiconName(serviceName):
 	return piconLocator.getPiconName(serviceName)
+
 
 class Picon(Renderer):
 	def __init__(self):

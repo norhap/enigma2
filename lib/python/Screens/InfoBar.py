@@ -38,6 +38,7 @@ brand = getBoxBrand()
 model = getBoxType()
 procmodel = getBoxProc()
 
+
 class InfoBar(InfoBarBase, InfoBarShowHide,
 	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarEPG, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection,
 	InfoBarInstantRecord, InfoBarAudioSelection, InfoBarRedButton, InfoBarTimerButton, InfoBarVmodeButton,
@@ -78,8 +79,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.helpList.append((self["actions"], "InfobarActions", [("showMovies", _("Watch recordings..."))]))
 		self.helpList.append((self["actions"], "InfobarActions", [("showRadio", _("Listen to the radio..."))]))
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				enigma.iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 			})
 
@@ -167,7 +167,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def showMovies(self, defaultRef=None):
 		self.lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, defaultRef or enigma.eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled = self.timeshiftEnabled())
+		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, defaultRef or enigma.eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled=self.timeshiftEnabled())
 
 	def movieSelected(self, service):
 		ref = self.lastservice
@@ -182,7 +182,6 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def openMoviePlayer(self, ref):
 		self.session.open(MoviePlayer, ref, slist=self.servicelist, lastservice=self.session.nav.getCurrentlyPlayingServiceOrGroup(), infobar=self)
-
 
 	def ZoomInOut(self):
 		zoomval = 0
@@ -204,13 +203,16 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		print('[InfoBar] zoomRate:', self.zoomrate)
 		print('[InfoBar] zoomval:', zoomval)
 		if fileExists("/proc/stb/vmpeg/0/zoomrate"):
+			print("[InfoBar] Write to /proc/stb/vmpeg/0/zoomrate")
 			open("/proc/stb/vmpeg/0/zoomrate", "w").write(int(zoomval))
 
 	def ZoomOff(self):
 		self.zoomrate = 0
 		self.zoomin = 1
 		if fileExists("/proc/stb/vmpeg/0/zoomrate"):
+			print("[InfoBar] Write to /proc/stb/vmpeg/0/zoomrate")
 			open("/proc/stb/vmpeg/0/zoomrate", "w").write(str(0))
+
 
 class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord, InfoBarVmodeButton, InfoBarResolutionSelection, InfoBarAspectSelection,
 		InfoBarAudioSelection, HelpableScreen, InfoBarNotifications, InfoBarServiceNotifications, InfoBarPVRState,
@@ -236,7 +238,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			{
 				"left": self.left,
 				"right": self.right
-			}, prio = -2)
+			}, prio=-2)
 
 		self.allowPiP = True
 
@@ -295,7 +297,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				)
 
 			from Screens.ChoiceBox import ChoiceBox
-			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list = list)
+			self.session.openWithCallback(self.leavePlayerConfirmed, ChoiceBox, title=_("Stop playing this movie?"), list=list)
 		else:
 			self.leavePlayerConfirmed([True, how])
 
@@ -381,11 +383,17 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 					return
 
 		if answer in ("quit", "quitanddeleteconfirmed"):
+			# make sure that playback is unpaused otherwise the
+			# player driver might stop working
+			self.setSeekState(self.SEEK_STATE_PLAY)
 			self.close()
 		elif answer in ("movielist", "deleteandmovielistconfirmed"):
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.returning = True
 			self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, ref)
+			# make sure that playback is unpaused otherwise the
+			# player driver might stop working
+			self.setSeekState(self.SEEK_STATE_PLAY)
 			self.session.nav.stopService()
 			if not config.movielist.stop_service.value:
 				self.session.nav.playService(self.lastservice)
@@ -393,7 +401,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.doSeek(0)
 			self.setSeekState(self.SEEK_STATE_PLAY)
 		elif answer in ("playlist", "playlistquit", "loop"):
-			( next_service, item, lenght ) = self.getPlaylistServiceInfo(self.cur_service)
+			(next_service, item, lenght) = self.getPlaylistServiceInfo(self.cur_service)
 			if next_service is not None:
 				if config.usage.next_movie_msg.value:
 					self.displayPlayedName(next_service, item, lenght)
@@ -494,12 +502,12 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 						slist.moveUp()
 						cur = slist.getCurrentSelection()
 						if cur:
-							playable = not (cur.flags & (64|8)) and hasattr(self.session, "pip") and self.session.pip.isPlayableForPipService(cur)
+							playable = not (cur.flags & (64 | 8)) and hasattr(self.session, "pip") and self.session.pip.isPlayableForPipService(cur)
 							if cur.toString() == prev or playable:
 								break
 			else:
 				slist.moveUp()
-			slist.zap(enable_pipzap = True)
+			slist.zap(enable_pipzap=True)
 
 	def zapDown(self):
 		slist = self.servicelist
@@ -515,12 +523,12 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 							slist.moveDown()
 						cur = slist.getCurrentSelection()
 						if cur:
-							playable = not (cur.flags & (64|8)) and hasattr(self.session, "pip") and self.session.pip.isPlayableForPipService(cur)
+							playable = not (cur.flags & (64 | 8)) and hasattr(self.session, "pip") and self.session.pip.isPlayableForPipService(cur)
 							if cur.toString() == prev or playable:
 								break
 			else:
 				slist.moveDown()
-			slist.zap(enable_pipzap = True)
+			slist.zap(enable_pipzap=True)
 
 	def showPiP(self):
 		slist = self.servicelist
@@ -593,17 +601,17 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		for i, item in enumerate(playlist):
 			if item == service:
 				if config.usage.on_movie_eof.value == "repeatcurrent":
-					return (i+1, len(playlist))
+					return (i + 1, len(playlist))
 				i += 1
 				if i < len(playlist):
-					return (playlist[i], i+1, len(playlist))
+					return (playlist[i], i + 1, len(playlist))
 				elif config.usage.on_movie_eof.value == "loop":
 					return (playlist[0], 1, len(playlist))
-		return ( None, 0, 0 )
+		return (None, 0, 0)
 
 	def displayPlayedName(self, ref, index, n):
 		from Tools import Notifications
-		Notifications.AddPopup(text = _("%s/%s: %s") % (index, n, self.ref2HumanName(ref)), type = MessageBox.TYPE_INFO, timeout = 5)
+		Notifications.AddPopup(text=_("%s/%s: %s") % (index, n, self.ref2HumanName(ref)), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def ref2HumanName(self, ref):
 		return enigma.eServiceCenter.getInstance().info(ref).getName(ref)

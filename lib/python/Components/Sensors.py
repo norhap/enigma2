@@ -1,4 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.FanControl import fancontrol
+
 
 class Sensors:
 	# (type, name, unit, directory)
@@ -11,7 +15,7 @@ class Sensors:
 		self.sensors_list = []
 		self.addSensors()
 
-	def getSensorsCount(self, type = None):
+	def getSensorsCount(self, type=None):
 		if type is None:
 			return len(self.sensors_list)
 		count = 0
@@ -21,7 +25,7 @@ class Sensors:
 		return count
 
 	# returns a list of sensorids of type "type"
-	def getSensorsList(self, type = None):
+	def getSensorsList(self, type=None):
 		if type is None:
 			return range(len(self.sensors_list))
 		list = []
@@ -29,7 +33,6 @@ class Sensors:
 			if self.sensors_list[sensorid][0] == type:
 				list.append(sensorid)
 		return list
-
 
 	def getSensorType(self, sensorid):
 		return self.sensors_list[sensorid][0]
@@ -41,6 +44,7 @@ class Sensors:
 		value = -1
 		sensor = self.sensors_list[sensorid]
 		if sensor[0] == self.TYPE_TEMPERATURE:
+			print("[Sensors] Read %s/value" % sensor[3])
 			value = int(open("%s/value" % sensor[3], "r").readline().strip())
 		elif sensor[0] == self.TYPE_FAN_RPM:
 			value = fancontrol.getFanSpeed(sensor[3])
@@ -54,11 +58,14 @@ class Sensors:
 		if os.path.exists("/proc/stb/sensors"):
 			for dirname in os.listdir("/proc/stb/sensors"):
 				if dirname.find("temp", 0, 4) == 0:
+					print("[Sensors] Read /proc/stb/sensors/%s/name" % dirname)
 					name = open("/proc/stb/sensors/%s/name" % dirname, "r").readline().strip()
+					print("[Sensors] Read /proc/stb/sensors/%s/unit" % dirname)
 					unit = open("/proc/stb/sensors/%s/unit" % dirname, "r").readline().strip()
 					self.sensors_list.append((self.TYPE_TEMPERATURE, name, unit, "/proc/stb/sensors/%s" % dirname))
 		for fanid in range(fancontrol.getFanCount()):
 			if fancontrol.hasRPMSensor(fanid):
 				self.sensors_list.append((self.TYPE_FAN_RPM, _("Fan %d") % (fanid + 1), "rpm", fanid))
+
 
 sensors = Sensors()

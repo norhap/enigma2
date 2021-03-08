@@ -1,12 +1,16 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSlider, getConfigListEntry
 
 config.plugins.VideoClippingSetup = ConfigSubsection()
-config.plugins.VideoClippingSetup.clip_left = ConfigInteger(default = 0)
-config.plugins.VideoClippingSetup.clip_width = ConfigInteger(default = 720)
-config.plugins.VideoClippingSetup.clip_top = ConfigInteger(default = 0)
-config.plugins.VideoClippingSetup.clip_height = ConfigInteger(default = 576)
+config.plugins.VideoClippingSetup.clip_left = ConfigInteger(default=0)
+config.plugins.VideoClippingSetup.clip_width = ConfigInteger(default=720)
+config.plugins.VideoClippingSetup.clip_top = ConfigInteger(default=0)
+config.plugins.VideoClippingSetup.clip_height = ConfigInteger(default=576)
+
 
 class VideoClippingCoordinates(Screen, ConfigListScreen):
 	skin = """
@@ -41,18 +45,18 @@ class VideoClippingCoordinates(Screen, ConfigListScreen):
 		}, -2)
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 
 		left = config.plugins.VideoClippingSetup.clip_left.value
 		width = config.plugins.VideoClippingSetup.clip_width.value
 		top = config.plugins.VideoClippingSetup.clip_top.value
 		height = config.plugins.VideoClippingSetup.clip_height.value
 
-		self.clip_step = ConfigSlider(default = 1, increment = 1, limits = (1, 20))
-		self.clip_left = ConfigSlider(default = left, increment = self.clip_step.value, limits = (0, 720))
-		self.clip_width = ConfigSlider(default = width, increment = self.clip_step.value, limits = (0, 720))
-		self.clip_top = ConfigSlider(default = top, increment = self.clip_step.value, limits = (0, 576))
-		self.clip_height = ConfigSlider(default = height, increment = self.clip_step.value, limits = (0, 576))
+		self.clip_step = ConfigSlider(default=1, increment=1, limits=(1, 20))
+		self.clip_left = ConfigSlider(default=left, increment=self.clip_step.value, limits=(0, 720))
+		self.clip_width = ConfigSlider(default=width, increment=self.clip_step.value, limits=(0, 720))
+		self.clip_top = ConfigSlider(default=top, increment=self.clip_step.value, limits=(0, 576))
+		self.clip_height = ConfigSlider(default=height, increment=self.clip_step.value, limits=(0, 576))
 		self.list.append(getConfigListEntry(_("stepsize"), self.clip_step))
 		self.list.append(getConfigListEntry(_("left"), self.clip_left))
 		self.list.append(getConfigListEntry(_("width"), self.clip_width))
@@ -92,40 +96,45 @@ class VideoClippingCoordinates(Screen, ConfigListScreen):
 		setConfiguredPosition()
 		self.close()
 
+
 def setPosition(clip_left, clip_width, clip_top, clip_height):
 	if clip_left + clip_width > 720:
 		clip_width = 720 - clip_left
 	if clip_top + clip_height > 576:
 		clip_height = 576 - clip_top
 	try:
-		file = open("/proc/stb/vmpeg/0/clip_left", "w")
-		file.write('%X' % clip_left)
-		file.close()
-		file = open("/proc/stb/vmpeg/0/clip_width", "w")
-		file.write('%X' % clip_width)
-		file.close()
-		file = open("/proc/stb/vmpeg/0/clip_top", "w")
-		file.write('%X' % clip_top)
-		file.close()
-		file = open("/proc/stb/vmpeg/0/clip_height", "w")
-		file.write('%X' % clip_height)
-		file.close()
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_left")
+		open("/proc/stb/vmpeg/0/clip_left", "w").write('%X' % clip_left)
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_width")
+		open("/proc/stb/vmpeg/0/clip_width", "w").write('%X' % clip_width)
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_top")
+		open("/proc/stb/vmpeg/0/clip_top", "w").write('%X' % clip_top)
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_height")
+		open("/proc/stb/vmpeg/0/clip_height", "w").write('%X' % clip_height)
 	except:
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_left failed.")
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_width failed.")
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_top failed.")
+		print("[VideoClippingSetup] Write to /proc/stb/vmpeg/0/clip_height failed.")
 		return
+
 
 def setConfiguredPosition():
 	setPosition(int(config.plugins.VideoClippingSetup.clip_left.value), int(config.plugins.VideoClippingSetup.clip_width.value), int(config.plugins.VideoClippingSetup.clip_top.value), int(config.plugins.VideoClippingSetup.clip_height.value))
 
+
 def main(session, **kwargs):
 	session.open(VideoClippingCoordinates)
 
+
 def startup(reason, **kwargs):
 	setConfiguredPosition()
+
 
 def Plugins(**kwargs):
 	from os import path
 	if path.exists("/proc/stb/vmpeg/0/clip_left"):
 		from Plugins.Plugin import PluginDescriptor
-		return [PluginDescriptor(name = _("Video clipping setup"), description = _("clip overscan / letterbox borders"), where = PluginDescriptor.WHERE_PLUGINMENU, fnc = main),
-					PluginDescriptor(name = _("Video clipping setup"), description = "", where = PluginDescriptor.WHERE_SESSIONSTART, fnc = startup)]
+		return [PluginDescriptor(name=_("Video clipping setup"), description=_("clip overscan / letterbox borders"), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+					PluginDescriptor(name=_("Video clipping setup"), description="", where=PluginDescriptor.WHERE_SESSIONSTART, fnc=startup)]
 	return []

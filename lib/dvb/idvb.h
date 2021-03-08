@@ -517,11 +517,7 @@ public:
 	enum { feSatellite, feCable, feTerrestrial, feATSC };
 	enum { stateIdle, stateTuning, stateFailed, stateLock, stateLostLock, stateClosed };
 	enum { toneOff, toneOn };
-#if HAVE_HISILICON_TUNER
 	enum { voltageOff, voltage13, voltage18, voltage13_5, voltage18_5, voltage5_terrestrial };
-#else
-	enum { voltageOff, voltage13, voltage18, voltage13_5, voltage18_5 };
-#endif
 };
 
 class iDVBFrontendStatus:  public iDVBFrontend_ENUMS, public iObject
@@ -831,7 +827,11 @@ public:
 			eventSizeChanged = VIDEO_EVENT_SIZE_CHANGED,
 			eventFrameRateChanged = VIDEO_EVENT_FRAME_RATE_CHANGED,
 			eventProgressiveChanged = 16,
-			eventGammaChanged = 17
+			eventGammaChanged = 17,
+#if defined(DMAMLOGIC)
+			eventPtsValid = 32,
+			eventVideoDiscontDetected = 64,
+#endif
 		} type;
 		unsigned char aspect;
 		unsigned short height;

@@ -1,6 +1,5 @@
 from keyids import KEYIDS
 from Components.config import config
-from Components.RcModel import rc_model
 
 keyBindings = {}
 
@@ -142,6 +141,7 @@ keyDescriptions = [{  # id=0 - dmm0 remote directory, DM8000.
 	KEYIDS["KEY_7"]: ("7",),
 	KEYIDS["KEY_8"]: ("8",),
 	KEYIDS["KEY_9"]: ("9",),
+	KEYIDS["KEY_ANGLE"]: ("VMODE",),
 	KEYIDS["KEY_ARCHIVE"]: ("HISTORY",),
 	KEYIDS["KEY_AUDIO"]: ("AUDIO",),
 	KEYIDS["KEY_AUX"]: ("WIZTV",),
@@ -338,8 +338,10 @@ keyDescriptions = [{  # id=0 - dmm0 remote directory, DM8000.
 	KEYIDS["KEY_YELLOW"]: ("YELLOW",)
 }]
 
+
 def addKeyBinding(domain, key, context, action, flags):
 	keyBindings.setdefault((context, action), []).append((key, domain, flags))
+
 
 def removeKeyBinding(key, context, action, wild=True):
 	if wild and action == "*":
@@ -355,6 +357,7 @@ def removeKeyBinding(key, context, action, wild=True):
 		else:
 			del keyBindings[contextAction]
 
+
 # Returns a list of (key, flags) for a specified action.
 #
 def queryKeyBinding(context, action):
@@ -362,6 +365,7 @@ def queryKeyBinding(context, action):
 		return [(x[0], x[2]) for x in keyBindings[(context, action)]]
 	else:
 		return []
+
 
 def getKeyDescription(key):
 	# rcType = config.misc.inputdevices.rcType.value  # This is a proposed new config location.
@@ -372,18 +376,13 @@ def getKeyDescription(key):
 	elif rcType == 18:  # F1
 		idx = 4
 	else:
-		rcType = config.plugins.remotecontroltype.rctype.value
-		# rcType = config.misc.inputdevices.rcType.value
-		if rcType == 14:  # XP1000
-			idx = 3
-		elif rcType == 18:  # F1
-			idx = 4
-		else:
-			idx = 2
-	return keyDescriptions[idx].get(key)
+		idx = 2
+	return keyDescriptions[idx].get(key, ("None",))
+
 
 def getKeyBindingKeys(filterfn=lambda key: True):
 	return filter(filterfn, keyBindings)
+
 
 # Remove all entries of domain "domain".
 #

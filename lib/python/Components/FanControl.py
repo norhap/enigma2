@@ -9,6 +9,7 @@ from enigma import iRecordableService, getBoxType
 
 model = getBoxType()
 
+
 class FanControl:
 	# ATM there's only support for one fan
 	def __init__(self):
@@ -17,7 +18,7 @@ class FanControl:
 		else:
 			self.fancount = 0
 		self.createConfig()
-		config.misc.standbyCounter.addNotifier(self.standbyCounterChanged, initial_call = False)
+		config.misc.standbyCounter.addNotifier(self.standbyCounterChanged, initial_call=False)
 
 	def setVoltage_PWM(self):
 		for fanid in range(self.getFanCount()):
@@ -59,30 +60,31 @@ class FanControl:
 	def createConfig(self):
 		def setVlt(fancontrol, fanid, configElement):
 			fancontrol.setVoltage(fanid, configElement.value)
+
 		def setPWM(fancontrol, fanid, configElement):
 			fancontrol.setPWM(fanid, configElement.value)
 
 		config.fans = ConfigSubList()
 		for fanid in range(self.getFanCount()):
 			fan = ConfigSubsection()
-			fan.vlt = ConfigSlider(default = 15, increment = 5, limits = (0, 255))
+			fan.vlt = ConfigSlider(default=15, increment=5, limits=(0, 255))
 			if model == "tm2t":
-				fan.pwm = ConfigSlider(default = 150, increment = 5, limits = (0, 255))
+				fan.pwm = ConfigSlider(default=150, increment=5, limits=(0, 255))
 			elif model == "tmsingle":
-				fan.pwm = ConfigSlider(default = 100, increment = 5, limits = (0, 255))
+				fan.pwm = ConfigSlider(default=100, increment=5, limits=(0, 255))
 			elif model == "beyonwizu4":
-				fan.pwm = ConfigSlider(default = 0xcc, increment = 0x11, limits = (0x22, 0xff))
+				fan.pwm = ConfigSlider(default=0xcc, increment=0x11, limits=(0x22, 0xff))
 			elif model == "beyonwizt4":
-				fan.pwm = ConfigSlider(default = 200, increment = 5, limits = (0, 255))
+				fan.pwm = ConfigSlider(default=200, increment=5, limits=(0, 255))
 			else:
-				fan.pwm = ConfigSlider(default = 50, increment = 5, limits = (0, 255))
-			fan.vlt_standby = ConfigSlider(default = 5, increment = 5, limits = (0, 255))
+				fan.pwm = ConfigSlider(default=50, increment=5, limits=(0, 255))
+			fan.vlt_standby = ConfigSlider(default=5, increment=5, limits=(0, 255))
 			if model == "beyonwizu4":
-				fan.pwm_standby = ConfigSlider(default = 0x44, increment = 0x11, limits = (0x22, 0xff))
+				fan.pwm_standby = ConfigSlider(default=0x44, increment=0x11, limits=(0x22, 0xff))
 			elif model == "beyonwizt4":
-				fan.pwm_standby = ConfigSlider(default = 10, increment = 5, limits = (0, 0xff))
+				fan.pwm_standby = ConfigSlider(default=10, increment=5, limits=(0, 0xff))
 			else:
-				fan.pwm_standby = ConfigSlider(default = 0, increment = 5, limits = (0, 255))
+				fan.pwm_standby = ConfigSlider(default=0, increment=5, limits=(0, 255))
 			fan.vlt.addNotifier(boundFunction(setVlt, self, fanid))
 			fan.pwm.addNotifier(boundFunction(setPWM, self, fanid))
 			config.fans.append(fan)
@@ -100,9 +102,11 @@ class FanControl:
 		return os.path.exists("/proc/stb/fp/fan_vlt") or os.path.exists("/proc/stb/fp/fan_pwm")
 
 	def getFanSpeed(self, fanid):
+		print("[FanControl] Read /proc/stb/fp/fan_speed")
 		return int(open("/proc/stb/fp/fan_speed", "r").readline().strip()[:-4])
 
 	def getVoltage(self, fanid):
+		print("[FanControl] Read /proc/stb/fp/fan_vlt")
 		return int(open("/proc/stb/fp/fan_vlt", "r").readline().strip(), 16)
 
 	def setVoltage(self, fanid, value):
@@ -110,14 +114,18 @@ class FanControl:
 			return
 		if value > 255:
 			return
+		print("[FanControl] Write to /proc/stb/fp/fan_vlt")
 		open("/proc/stb/fp/fan_vlt", "w").write("%x" % value)
 
 	def getPWM(self, fanid):
+		print("[FanControl] Read /proc/stb/fp/fan_pwm")
 		return int(open("/proc/stb/fp/fan_pwm", "r").readline().strip(), 16)
 
 	def setPWM(self, fanid, value):
 		if value > 255:
 			return
+		print("[FanControl] Write to /proc/stb/fp/fan_pwm")
 		open("/proc/stb/fp/fan_pwm", "w").write("%x" % value)
+
 
 fancontrol = FanControl()

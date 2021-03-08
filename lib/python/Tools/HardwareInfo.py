@@ -2,6 +2,7 @@ from Tools.Directories import SCOPE_SKIN, resolveFilename
 
 hw_info = None
 
+
 class HardwareInfo:
 	device_name = _("unavailable")
 	device_brandname = None
@@ -97,7 +98,6 @@ class HardwareInfo:
 
 		# only some early DMM boxes do not have HDMI hardware
 		self.device_hdmi =	self.device_model not in ("dm800","dm8000")
-
 		print("[HardwareInfo] Detected: " + self.get_device_string())
 
 	def get_device_name(self):

@@ -9,11 +9,12 @@ from xml.dom.minidom import parseString
 from enigma import eTimer
 
 config.plugins.AtileHD = ConfigSubsection()
-config.plugins.AtileHD.refreshInterval = ConfigNumber(default = "10")
-config.plugins.AtileHD.woeid = ConfigNumber(default = "2251945")
-config.plugins.AtileHD.tempUnit = ConfigSelection(default = "Celsius", choices = [("Celsius", _("Celsius")), ("Fahrenheit", _("Fahrenheit"))])
+config.plugins.AtileHD.refreshInterval = ConfigNumber(default="10")
+config.plugins.AtileHD.woeid = ConfigNumber(default="2251945")
+config.plugins.AtileHD.tempUnit = ConfigSelection(default="Celsius", choices=[("Celsius", _("Celsius")), ("Fahrenheit", _("Fahrenheit"))])
 
 weather_data = None
+
 
 class VWeather(Converter, object):
 
@@ -110,6 +111,7 @@ class VWeather(Converter, object):
 
 	text = property(getText)
 
+
 class WeatherData:
 	def __init__(self):
 		self.WeatherInfo = WeatherInfo = {
@@ -153,7 +155,7 @@ class WeatherData:
 			self.timer.callback.append(self.GetWeather)
 			self.GetWeather()
 
-	def downloadError(self, error = None):
+	def downloadError(self, error=None):
 		print("[VWeather] error fetching weather data")
 
 	def GetWeather(self):
@@ -161,10 +163,10 @@ class WeatherData:
 		if timeout > 0:
 			self.timer.start(timeout, True)
 			print("[VWeather] lookup for ID " + str(config.plugins.AtileHD.woeid.value))
-			url = "http://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20woeid%3D%22"+str(config.plugins.AtileHD.woeid.value)+"%22&format=xml"
-			getPage(url, method = 'GET').addCallback(self.GotWeatherData).addErrback(self.downloadError)
+			url = "http://query.yahooapis.com/v1/public/yql?q=select%20item%20from%20weather.forecast%20where%20woeid%3D%22" + str(config.plugins.AtileHD.woeid.value) + "%22&format=xml"
+			getPage(url, method='GET').addCallback(self.GotWeatherData).addErrback(self.downloadError)
 
-	def GotWeatherData(self, data = None):
+	def GotWeatherData(self, data=None):
 		if data is not None:
 			dom = parseString(data)
 			title = self.getText(dom.getElementsByTagName('title')[0].childNodes)
@@ -213,7 +215,7 @@ class WeatherData:
 			self.WeatherInfo["forecastTomorrow3Date"] = self.getWeatherDate(weather)
 			self.WeatherInfo["forecastTomorrow3TempMax"] = self.getTemp(weather.getAttributeNode('high').nodeValue)
 			self.WeatherInfo["forecastTomorrow3TempMin"] = self.getTemp(weather.getAttributeNode('low').nodeValue)
-			self.WeatherInfo["forecastTomorrow3Text"] =_(str(weather.getAttributeNode('text').nodeValue))
+			self.WeatherInfo["forecastTomorrow3Text"] = _(str(weather.getAttributeNode('text').nodeValue))
 
 	def getText(self, nodelist):
 		rc = []
@@ -229,7 +231,7 @@ class WeatherData:
 			condition = "S"
 		elif c == 3 or c == 4:
 			condition = "Z"
-		elif c == 5  or c == 6 or c == 7 or c == 18:
+		elif c == 5 or c == 6 or c == 7 or c == 18:
 			condition = "U"
 		elif c == 8 or c == 10 or c == 25:
 			condition = "G"
@@ -269,7 +271,7 @@ class WeatherData:
 		if config.plugins.AtileHD.tempUnit.value == "Fahrenheit":
 			return str(int(round(float(temp), 0)))
 		else:
-			celsius = (float(temp) - 32 ) * 5 / 9
+			celsius = (float(temp) - 32) * 5 / 9
 			return str(int(round(float(celsius), 0)))
 
 	def getWeatherDate(self, weather):

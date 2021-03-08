@@ -1,10 +1,25 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from os import R_OK, access
+from os.path import isfile, join as pathjoin
+from re import findall
+
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getBoxType
-from Tools.Directories import SCOPE_PLUGINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
-import os, re
-from os import access, R_OK
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild
+
+from Tools.Directories import SCOPE_SKIN, fileCheck, fileExists, fileHas, pathExists, resolveFilename
+
+SystemInfo = {}
+SystemInfo["HasRootSubdir"] = False
+
+from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
+
+# Parse the boot commandline.
+print("[SystemInfo] Read /proc/cmdline")
+with open("/proc/cmdline", "r") as fd:
+	cmdline = fd.read()
+cmdline = {k: v.strip('"') for k, v in findall(r'(\S+)=(".*?"|\S+)', cmdline)}
+
 
 def getBoxBrand():
 	brand = ""
@@ -21,15 +36,19 @@ def getBoxBrand():
 		print("[BrandName] Machine not added in SystemInfo def getBoxBrand!")
 	return brand
 
-SystemInfo = {}
-SystemInfo["HasRootSubdir"] = False
+def getRCFile(ext):
+	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getBoxType(), ext)))
+	if not getBoxType():
+		filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "dmm1.%s" % ext))
+	elif getBoxType() == "sf8008m":
+	    filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "sf8008.%s" % ext))
+	return filename
 
-from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
-# Parse the boot commandline.
-with open("/proc/cmdline", "r") as fd:
-	cmdline = fd.read()
-cmdline = {k: v.strip('"') for k, v in re.findall(r'(\S+)=(".*?"|\S+)', cmdline)}
+SystemInfo["RCTypeIndex"] = int(float(2)) or int(getRCIDNum())
+SystemInfo["RCImage"] = getRCFile("png")
+SystemInfo["RCMapping"] = getRCFile("xml")
+
 
 def getNumVideoDecoders():
 	numVideoDecoders = 0
@@ -37,21 +56,25 @@ def getNumVideoDecoders():
 		numVideoDecoders += 1
 	return numVideoDecoders
 
+
 def countFrontpanelLEDs():
 	numLeds = fileExists("/proc/stb/fp/led_set_pattern") and 1 or 0
 	while fileExists("/proc/stb/fp/led%d_pattern" % numLeds):
 		numLeds += 1
 	return numLeds
 
+
 def hassoftcaminstalled():
 	softcams = fileExists("/etc/init.d/softcam") or fileExists("/etc/init.d/cardserver")
 	return softcams
+
 
 def getBootdevice():
 	dev = ("root" in cmdline and cmdline["root"].startswith("/dev/")) and cmdline["root"][5:]
 	while dev and not fileExists("/sys/block/%s" % dev):
 		dev = dev[:-1]
 	return dev
+
 
 model = getBoxType()
 brand = getBoxBrand()
@@ -94,8 +117,7 @@ SystemInfo["LedSuspendColor"] = fileCheck("/proc/stb/fp/ledsuspendledcolor")
 SystemInfo["Power4x7On"] = fileCheck("/proc/stb/fp/power4x7on")
 SystemInfo["Power4x7Standby"] = fileCheck("/proc/stb/fp/power4x7standby")
 SystemInfo["Power4x7Suspend"] = fileCheck("/proc/stb/fp/power4x7suspend")
-SystemInfo["PowerOffDisplay"] = model != "formuler1" and fileCheck("/proc/stb/power/vfd") or fileCheck("/proc/stb/lcd/vfd")
-SystemInfo["WakeOnLAN"] = getBoxType() and fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol")
+SystemInfo["WakeOnLAN"] = fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol")
 SystemInfo["HasExternalPIP"] = platform != "1genxt" and fileCheck("/proc/stb/vmpeg/1/external")
 SystemInfo["VideoDestinationConfigurable"] = fileExists("/proc/stb/vmpeg/0/dst_left")
 SystemInfo["hasPIPVisibleProc"] = fileCheck("/proc/stb/vmpeg/1/visible")
@@ -127,9 +149,8 @@ SystemInfo["Has24hz"] = fileCheck("/proc/stb/video/videomode_24hz")
 SystemInfo["HasHDMIpreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")
 SystemInfo["HasColorimetry"] = fileCheck("/proc/stb/video/hdmi_colorimetry")
 SystemInfo["HasHdrType"] = fileCheck("/proc/stb/video/hdmi_hdrtype")
-SystemInfo["HasHDMI-CEC"] = getHaveHDMI() == "True" and fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/HdmiCEC/plugin.pyo")) and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
 SystemInfo["Has2160p"] = fileHas("/proc/stb/video/videomode_preferred","2160p50")
-SystemInfo["HasHDMI-CEC"] = getHaveHDMI() == "True" and fileExists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/HdmiCEC/plugin.pyo")) and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
+SystemInfo["HasHDMI-CEC"] = getHaveHDMI() == "True" and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
 SystemInfo["HasHDMIHDin"] = getHaveHDMIinHD() == "True"
 SystemInfo["HasHDMIFHDin"] = getHaveHDMIinFHD() == "True"
 SystemInfo["HasHDMIin"] = SystemInfo["HasHDMIHDin"] or SystemInfo["HasHDMIFHDin"]
@@ -149,10 +170,10 @@ SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
 SystemInfo["canMode12"] = "%s_4.boxmode" % model in cmdline and cmdline["%s_4.boxmode" % model] in ("1","12") and "192M"
 SystemInfo["canMultiBoot"] = getMultibootslots()
 SystemInfo["canFlashWithOfgwrite"] = brand != "dreambox"
-SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") and fileCheck("/proc/stb/hdmi/hlg_support")
-SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices","downmix")
-SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices","downmix")
-SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices","downmix")
+SystemInfo["HDRSupport"] = fileExists("/proc/stb/hdmi/hlg_support_choices") or fileCheck("/proc/stb/hdmi/hlg_support")
+SystemInfo["CanDownmixAC3"] = fileHas("/proc/stb/audio/ac3_choices", "downmix")
+SystemInfo["CanDownmixDTS"] = fileHas("/proc/stb/audio/dts_choices", "downmix")
+SystemInfo["CanDownmixAAC"] = fileHas("/proc/stb/audio/aac_choices", "downmix")
 SystemInfo["HDMIAudioSource"] = fileCheck("/proc/stb/hdmi/audio_source")
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["FbcTunerPowerAlwaysOn"] = model in ("vusolo4k","vuduo4k","vuduo4kse","vuultimo4k","vuuno4k","vuuno4kse", "gbquad4k", "gbue4k")
@@ -169,11 +190,11 @@ SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/
 SystemInfo["OLDE2API"] = model in ("dm800","su980")
 SystemInfo["7segment"] = getDisplayType() == "7segment"
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
-SystemInfo["DefineSat"] = platform in ("octagonhisil","gbmv200") or model in ("ustym4kpro","beyonwizv2","viper4k")
+SystemInfo["DefineSat"] = model in ("ustym4kpro","beyonwizv2","viper4k","sf8008","sf8008m","gbtrio4k","gbip4k","qviart5")
 SystemInfo["CanFadeOut"] = brand not in ("linkdroid","mecool","minix","wetek","hardkernel","dinobot","maxytec","azbox") and not (SystemInfo["HiSilicon"])
 SystemInfo["OSDAnimation"] = fileCheck("/proc/stb/fb/animation_mode")
-SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51","h7")
-SystemInfo["AndroidMode"] =  SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("hypercube","linkdroid","mecool","wetek")
+SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51", "h7")
+SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("hypercube", "linkdroid", "mecool", "wetek")
 SystemInfo["grautec"] = fileExists("/tmp/usbtft")
 SystemInfo["CanAC3plusTranscode"] = fileExists("/proc/stb/audio/ac3plus_choices")
 SystemInfo["CanDTSHD"] = fileExists("/proc/stb/audio/dtshd_choices")
@@ -199,8 +220,12 @@ SystemInfo["ArchIsARM"] = getImageArch().startswith("arm") or getImageArch().sta
 SystemInfo["SeekStatePlay"] = False
 SystemInfo["StatePlayPause"] = False
 SystemInfo["StandbyState"] = False
-SystemInfo["LEDButtons"] = model == "vuultimo"
+SystemInfo["LEDButtons"] = False
 SystemInfo["HasH9SD"] = model in ("h9","i55plus") and pathExists("/dev/mmcblk0p1")
 SystemInfo["HasSDnomount"] = model in ("h9","h3","i55plus") and (False, "none") or model in ("multibox","h9combo","h3") and (True, "mmcblk0")
 SystemInfo["canBackupEMC"] = model in ("hd51","h7") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or platform == "edision4k" and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none")
 SystemInfo["CanSyncMode"] = fileExists("/proc/stb/video/sync_mode_choices")
+SystemInfo["FrontpanelLEDBlinkControl"] = fileExists("/proc/stb/fp/led_blink")
+SystemInfo["FrontpanelLEDBrightnessControl"] = fileExists("/proc/stb/fp/led_brightness")
+SystemInfo["FrontpanelLEDColorControl"] = fileExists("/proc/stb/fp/led_color")
+SystemInfo["FrontpanelLEDFadeControl"] = fileExists("/proc/stb/fp/led_fade")

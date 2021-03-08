@@ -6,6 +6,7 @@ from Tools.Transponder import orbpos
 from Components.NimManager import nimmanager
 from enigma import eDVBSatelliteEquipmentControl
 
+
 class RotorPosition(Converter, object):
 	DEFAULT = 0
 	WITH_TEXT = 1
@@ -29,12 +30,18 @@ class RotorPosition(Converter, object):
 				if config.misc.showrotorposition.value == "tunername":
 					active_tuner = self.getActiveTuner()
 					if tuner != active_tuner:
-						return _("%s:%s") % ("\c0000?0?0" + chr(ord("A")+ tuner), "\c00?0?0?0" + orbpos(config.misc.lastrotorposition.value))
+						return _("%s:%s") % ("\c0000f0f0" + chr(ord("A") + tuner), "\c00f0f0f0" + orbpos(config.misc.lastrotorposition.value))
 					return ""
 				return orbpos(config.misc.lastrotorposition.value)
 		return ""
 
+	@cached
+	def getBool(self):
+		return bool(self.getText())
+
 	text = property(getText)
+
+	boolean = property(getBool)
 
 	def isMotorizedTuner(self):
 		for x in nimmanager.nim_slots:

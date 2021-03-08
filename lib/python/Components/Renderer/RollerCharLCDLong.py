@@ -5,6 +5,7 @@ from Components.Renderer.Renderer import Renderer
 from enigma import eLabel, eTimer
 from Components.VariableText import VariableText
 
+
 class RollerCharLCDLong(VariableText, Renderer):
 
 	def __init__(self):
@@ -87,4 +88,3 @@ class RollerCharLCDLong(VariableText, Renderer):
 	def delayTimergo(self):
 		self.delayTimer.stop()
 		self.changed((self.CHANGED_DEFAULT,))
-

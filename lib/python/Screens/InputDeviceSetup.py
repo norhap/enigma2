@@ -10,8 +10,9 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from enigma import getBoxType, getBoxBrand
+from enigma import getBoxType
 from Tools.StbHardware import getBoxProc
+
 
 class InputDeviceSelection(Screen, HelpableScreen):
 	skin = """
@@ -39,7 +40,6 @@ class InputDeviceSelection(Screen, HelpableScreen):
 		<ePixmap pixmap="div-h.png" position="0,340" zPosition="1" size="560,2"/>
 		<widget source="introduction" render="Label" position="0,350" size="560,50" zPosition="10" font="Regular;21" halign="center" valign="center" backgroundColor="#25062748" transparent="1"/>
 	</screen>"""
-
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -82,7 +82,7 @@ class InputDeviceSelection(Screen, HelpableScreen):
 	def cleanup(self):
 		self.currentIndex = 0
 
-	def buildInterfaceList(self, device, description, type, isinputdevice = True):
+	def buildInterfaceList(self, device, description, type, isinputdevice=True):
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"))
 		activepng = None
 		devicepng = None
@@ -161,7 +161,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.setTitle(_("Input device setup"))
 		self.inputDevice = device
 		iInputDevices.currentDevice = self.inputDevice
-		self.onChangedEntry = [ ]
+		self.onChangedEntry = []
 		self.setup_title = _("Input device setup")
 		self.isStepSlider = None
 		self.enableEntry = None
@@ -170,8 +170,8 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.nameEntry = None
 		self.enableConfigEntry = None
 
-		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		self.list = []
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 			{
@@ -194,13 +194,13 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		self.setTitle(self.setup_title)
 		listWidth = self["config"].l.getItemSize().width()
 		# use 20% of list width for sliders
-		self["config"].l.setSeperation(int(listWidth*.8))
+		self["config"].l.setSeperation(int(listWidth * .8))
 
 	def cleanup(self):
 		iInputDevices.currentDevice = ""
 
 	def createSetup(self):
-		self.list = [ ]
+		self.list = []
 		label = _("Change repeat and delay settings?")
 		cmd = "self.enableEntry = getConfigListEntry(label, config.inputDevices." + self.inputDevice + ".enabled)"
 		exec(cmd)
@@ -238,7 +238,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 	def selectionChanged(self):
 		if self["config"].getCurrent() == self.enableEntry:
-			self["introduction"].setText(_("Current device: ") + str(iInputDevices.getDeviceAttribute(self.inputDevice, 'name')) )
+			self["introduction"].setText(_("Current device: ") + str(iInputDevices.getDeviceAttribute(self.inputDevice, 'name')))
 		else:
 			self["introduction"].setText(_("Current value: ") + self.getCurrentValue() + _(" ms"))
 
@@ -282,6 +282,7 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 		else:
 			self.close()
 	# for summary:
+
 	def changedEntry(self):
 		for x in self.onChangedEntry:
 			x()
@@ -299,166 +300,71 @@ class InputDeviceSetup(Screen, ConfigListScreen):
 
 
 class RemoteControlType(Screen, ConfigListScreen):
-	if getBoxBrand() in ("broadmedia","octagon","odin","protek","ultramini") or getBoxType() in ("et7x00","et8500","et1x000","et13000") or getBoxProc() in ("et7000","et7100","et7200","et7500"):
-		rcList = [
-				("0", _("Default")),
-				("3", _("MaraM9")),
-				("4", _("DMM normal")),
-				("5", _("et9000/et9100")),
-				("6", _("DMM advanced")),
-				("7", _("et5000/6000")),
-				("8", _("VU+")),
-				("9", _("et8000/et10000/et13000/SF5008")),
-				("11", _("et9200/9500/6500")),
-				("13", _("et4000")),
-				("14", _("XP1000")),
-				("16", _("HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/et7x00/et8500/VS1000/VS1500")),
-				("17", _("XP3000")),
-				("18", _("F1/F3/F4/F4-TURBO/TRIPLEX")),
-				("19", _("HD2400")),
-				("20", _("Zgemma Star S/2S/H1/H2")),
-				("21", _("Zgemma H.S/H.2S/H.2H/H5/H7 old model")),
-				("500", _("WWIO_BRE2ZE_TC")),
-				("501", _("OCTAGON_SF4008")),
-				("502", _("GIGABLUE Black")),
-				("503", _("MIRACLEBOX_TWINPLUS")),
-				("504", _("E3HD/XPEEDLX/GI")),
-				("505", _("ODIN_M7")),
-				("507", _("Beyonwiz U4")),
-				("511", _("OCTAGON SF5008"))
-				]
-		defaultRcList = [
-				("default", 0),
-				("et4000", 13),
-				("et5000", 7),
-				("et6000", 7),
-				("et6500", 11),
-				("et7x00",16),
-				("et7100",16),
-				("et7000",16),
-				("et7500",16),
-				("et7000mini",16),
-				("et8000", 9),
-				("et13000", 9),
-				("et8500",16),
-				("et9000", 5),
-				("et9100", 5),
-				("et9200", 11),
-				("et9500", 11),
-				("et10000", 9),
-				("formuler1",18),
-				("formuler3",18),
-				("formuler4",18),
-				("formuler4turbo",18),
-				("hd11",16),
-				("hd51",16),
-				("hd1100",16),
-				("hd1200",16),
-				("hd1265",16),
-				("hd500c",16),
-				("hd530c",16),
-				("vs1000",16),
-				("vs1500",16),
-				("hd2400",19),
-				("triplex",18),
-				("xp1000", 14),
-				("xp3000", 17),
-				("sh1", 20),
-				("h3", 21),
-				("h5", 21),
-				("h7", 21),
-				("bre2ze_tc", 500),
-				("sf4008", 501),
-				("g100", 501),
-				("sf4018", 501),
-				("gbquadplus", 502),
-				("g300", 503),
-				("e3hd", 504),
-				("et7000mini", 504),
-				("et1x000", 504),
-				("xpeedc.", 504),
-				("odinm7", 505),
-				("beyonwizu4", 507),
-				("sf5008", 511)
-				]
-	else:
-		rcList = [
-				("0", _("Default")),
-				("3", _("MaraM9")),
-				("4", _("DMM normal")),
-				("5", _("et9000/et9100")),
-				("6", _("DMM advanced")),
-				("7", _("et5000/6000")),
-				("8", _("VU+")),
-				("9", _("et8000/et10000/et13000")),
-				("11", _("et9200/9500/6500")),
-				("13", _("et4000")),
-				("14", _("XP1000")),
-				("16", _("HD11/HD51/HD1100/HD1200/HD1265/HD1500/HD500C/HD530C/VS1000/VS1500")),
-				("17", _("XP3000")),
-				("18", _("F1/F3/F4/F4-TURBO/TRIPLEX")),
-				("19", _("HD2400")),
-				("20", _("Zgemma Star S/2S/H1/H2")),
-				("21", _("Zgemma H.S/H.2S/H.2H/H5/H7")),
-				("22", _("Zgemma i55")),
-				("23", _("WWIO 4K")),
-				("24", _("Axas E4HD Ultra")),
-				("25", _("Zgemma H9/I55Plus old model")),
-				("26", _("Protek 4K UHD/HD61")),
-				("27", _("HD60")),
-				("28", _("H7/H9/H9COMBO/H10 new model"))
-				]
-		defaultRcList = [
-				("default", 0),
-				("et4000", 13),
-				("et5000", 7),
-				("et6000", 7),
-				("et6500", 11),
-				("et8000", 9),
-				("et13000", 9),
-				("et9000", 5),
-				("et9100", 5),
-				("et9200", 11),
-				("et9500", 11),
-				("et10000", 9),
-				("formuler1",18),
-				("formuler3",18),
-				("formuler4",18),
-				("formuler4turbo",18),
-				("hd11",16),
-				("hd51",16),
-				("hd1100",16),
-				("hd1200",16),
-				("hd1265",16),
-				("hd500c",16),
-				("hd530c",16),
-				("vs1000",16),
-				("vs1500",16),
-				("hd2400",19),
-				("triplex",18),
-				("xp1000", 14),
-				("xp3000", 17),
-				("sh1", 20),
-				("h3", 21),
-				("h5", 21),
-				#("h7", 21), # old model
-				("i55", 22),
-				("bre2ze4k", 23),
-				("e4hd", 24),
-				#("h9", 25), # old model
-				("i55plus", 25),
-				("protek4k", 26),
-				("hd61", 26),
-				("hd60", 27),
-				("h7", 28), # new model
-				("h9", 28), # new model
-				("h9combo", 28),
-				("h10", 28)
-				]
+	rcList = [
+			("0", _("Default")),
+			("3", _("maram9")),
+			("4", _("DMM normal")),
+			("5", _("et9x00")),
+			("6", _("DMM advanced")),
+			("7", _("et5x00")),
+			("8", _("VU+")),
+			("9", _("et8000/et10000")),
+			("11", _("et9200/et9500/et6500")),
+			("13", _("et4000")),
+			("14", _("xp1000")),
+			("16", _("HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini")),
+			("18", _("F1/F3/F4/F4-TURBO")),
+			("19", _("HD2400")),
+			("20", _("Zgemma Star S/2S/H1/H2")),
+			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7(old model)")),
+			("25", _("Zgemma H9(old model)/I55Plus")),
+			("27", _("HD60")),
+			("28", _("Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"))
+		]
+
+	defaultRcList = [
+			("et4000", 13),
+			("et5000", 7),
+			("et6000", 7),
+			("et6500", 11),
+			("et8000", 9),
+			("et9000", 5),
+			("et9100", 5),
+			("et9200", 11),
+			("et9500", 11),
+			("et10000", 9),
+			("formuler1", 18),
+			("formuler3", 18),
+			("formuler4", 18),
+			("formuler4turbo", 18),
+			("xp1000", 14),
+			("vs1000", 16),
+			("vs1500", 16),
+			("hd500c", 16),
+			("hd530c", 16),
+			("hd11", 16),
+			("hd51", 16),
+			("hd1200", 16),
+			("hd1265", 16),
+			("hd1100", 16),
+			("hd2400", 19),
+			("hd60", 27),
+			("et7000mini", 16),
+			("et7000", 16),
+			("et7500", 16),
+			("et8500", 16),
+			("sh1", 20),
+			("h3", 21),
+			("h5", 21),
+			("h7", 28), # new model /old 21
+			("h9", 28), # new model /old 25
+			("h9combo", 28),
+			("h10", 28)
+		]
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.skinName = ["RemoteControlType", "Setup" ]
+		self.skinName = ["RemoteControlType", "Setup"]
 		self.setTitle(_("Remote control type setup"))
 
 		self["actions"] = ActionMap(["SetupActions"],
@@ -471,10 +377,10 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session = self.session)
+		ConfigListScreen.__init__(self, self.list, session=self.session)
 
 		rctype = config.plugins.remotecontroltype.rctype.value
-		self.rctype = ConfigSelection(choices = self.rcList, default = str(rctype))
+		self.rctype = ConfigSelection(choices=self.rcList, default=str(rctype))
 		self.list.append(getConfigListEntry(_("Remote control type"), self.rctype))
 		self["config"].list = self.list
 

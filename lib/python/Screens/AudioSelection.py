@@ -18,6 +18,7 @@ from boxbranding import getMachineBuild
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
 
+
 class AudioSelection(Screen, ConfigListScreen):
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
@@ -32,8 +33,7 @@ class AudioSelection(Screen, ConfigListScreen):
 		ConfigListScreen.__init__(self, [])
 		self.infobar = infobar or self.session.infobar
 
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap=
-			{
+		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evUpdatedInfo: self.__updatedInfo
 			})
 		self.cached_subtitle_checked = False
@@ -66,7 +66,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 		self.settings = ConfigSubsection()
 		choicelist = [(PAGE_AUDIO, ""), (PAGE_SUBTITLES, "")]
-		self.settings.menupage = ConfigSelection(choices = choicelist, default=page)
+		self.settings.menupage = ConfigSelection(choices=choicelist, default=page)
 		self.onLayoutFinish.append(self.__layoutFinished)
 
 	def __layoutFinished(self):
@@ -91,11 +91,11 @@ class AudioSelection(Screen, ConfigListScreen):
 			n = audio and audio.getNumberOfTracks() or 0
 			if SystemInfo["CanDownmixAC3"]:
 				if SystemInfo["DreamBoxAudio"]:
-					choice_list = [("downmix",  _("Downmix")), ("passthrough", _("Passthrough")), ("multichannel",  _("convert to multi-channel PCM")), ("hdmi_best",  _("use best / controlled by HDMI"))]
-					self.settings.downmix_ac3 = ConfigSelection(choices = choice_list, default=config.av.downmix_ac3.value)
+					choice_list = [("downmix", _("Downmix")), ("passthrough", _("Passthrough")), ("multichannel", _("convert to multi-channel PCM")), ("hdmi_best", _("use best / controlled by HDMI"))]
+					self.settings.downmix_ac3 = ConfigSelection(choices=choice_list, default=config.av.downmix_ac3.value)
 				else:
 					self.settings.downmix_ac3 = ConfigOnOff(default=config.av.downmix_ac3.value)
-				self.settings.downmix_ac3.addNotifier(self.changeAC3Downmix, initial_call = False)
+				self.settings.downmix_ac3.addNotifier(self.changeAC3Downmix, initial_call=False)
 				conflist.append(getConfigListEntry(_("AC3 downmix"), self.settings.downmix_ac3, None))
 				self["key_red"].setBoolean(True)
 
@@ -103,8 +103,8 @@ class AudioSelection(Screen, ConfigListScreen):
 				self.audioChannel = service.audioChannel()
 				if self.audioChannel:
 					choicelist = [("0", _("left")), ("1", _("stereo")), ("2", _("right"))]
-					self.settings.channelmode = ConfigSelection(choices = choicelist, default = str(self.audioChannel.getCurrentChannel()))
-					self.settings.channelmode.addNotifier(self.changeMode, initial_call = False)
+					self.settings.channelmode = ConfigSelection(choices=choicelist, default=str(self.audioChannel.getCurrentChannel()))
+					self.settings.channelmode.addNotifier(self.changeMode, initial_call=False)
 					conflist.append(getConfigListEntry(_("Channel"), self.settings.channelmode))
 					self["key_green"].setBoolean(True)
 				else:
@@ -151,20 +151,20 @@ class AudioSelection(Screen, ConfigListScreen):
 
 			if SystemInfo["Has3DSurround"]:
 				choice_list = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))]
-				self.settings.surround_3d = ConfigSelection(choices = choice_list, default = config.av.surround_3d.value)
-				self.settings.surround_3d.addNotifier(self.change3DSurround, initial_call = False)
+				self.settings.surround_3d = ConfigSelection(choices=choice_list, default=config.av.surround_3d.value)
+				self.settings.surround_3d.addNotifier(self.change3DSurround, initial_call=False)
 				conflist.append(getConfigListEntry(_("3D Surround"), self.settings.surround_3d, None))
 
 			if SystemInfo["Has3DSpeaker"] and config.av.surround_3d.value != "none":
 				choice_list = [("center", _("center")), ("wide", _("wide")), ("extrawide", _("extra wide"))]
-				self.settings.surround_3d_speaker = ConfigSelection(choices = choice_list, default = config.av.surround_3d_speaker.value)
-				self.settings.surround_3d_speaker.addNotifier(self.change3DSurroundSpeaker, initial_call = False)
+				self.settings.surround_3d_speaker = ConfigSelection(choices=choice_list, default=config.av.surround_3d_speaker.value)
+				self.settings.surround_3d_speaker.addNotifier(self.change3DSurroundSpeaker, initial_call=False)
 				conflist.append(getConfigListEntry(_("3D Surround Speaker Position"), self.settings.surround_3d_speaker, None))
 
 			if SystemInfo["HasAutoVolume"]:
 				choice_list = [("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))]
-				self.settings.autovolume = ConfigSelection(choices = choice_list, default = config.av.autovolume.value)
-				self.settings.autovolume.addNotifier(self.changeAutoVolume, initial_call = False)
+				self.settings.autovolume = ConfigSelection(choices=choice_list, default=config.av.autovolume.value)
+				self.settings.autovolume.addNotifier(self.changeAutoVolume, initial_call=False)
 				conflist.append(getConfigListEntry(_("Auto Volume Level"), self.settings.autovolume, None))
 
 			from Components.PluginComponent import plugins
@@ -175,10 +175,11 @@ class AudioSelection(Screen, ConfigListScreen):
 					def __init__(self, fnc, *args):
 						self.fnc = fnc
 						self.args = args
+
 					def __call__(self, *args, **kwargs):
 						self.fnc(*self.args)
 
-				self.Plugins = [ (p.name, PluginCaller(self.infobar.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_AUDIOMENU) ]
+				self.Plugins = [(p.name, PluginCaller(self.infobar.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_AUDIOMENU)]
 
 				if self.Plugins:
 					self["key_blue"].setBoolean(True)
@@ -224,7 +225,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 				elif x[0] == 1:
 					description = "teletext"
-					number = "%x%02x" %(x[3] and x[3] or 8, x[2])
+					number = "%x%02x" % (x[3] and x[3] or 8, x[2])
 
 				elif x[0] == 2:
 					types = (_("unknown"), _("embedded"), _("SSA file"), _("ASS file"),
@@ -240,7 +241,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
 
-			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0)  and not ".DVDPlayer'>" in `self.infobar`:
+			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0) and not ".DVDPlayer'>" in `self.infobar`:
 				self["key_blue"].setBoolean(True)
 				conflist.append(getConfigListEntry(_("Subtitle Quickmenu"), ConfigNothing()))
 
@@ -363,7 +364,7 @@ class AudioSelection(Screen, ConfigListScreen):
 		elif self.focus == FOCUS_STREAMS:
 			self["streams"].setIndex(0)
 
-	def keyRight(self, config = False):
+	def keyRight(self, config=False):
 		if config or self.focus == FOCUS_CONFIG:
 			if self["config"].getCurrentIndex() < 3:
 				ConfigListScreen.keyRight(self)
@@ -379,7 +380,7 @@ class AudioSelection(Screen, ConfigListScreen):
 				elif self.settings.menupage.getValue() == PAGE_SUBTITLES and self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0):
 					self.session.open(QuickSubtitlesConfigMenu, self.infobar)
 		if self.focus == FOCUS_STREAMS and self["streams"].count() and config == False:
-			self["streams"].setIndex(self["streams"].count()-1)
+			self["streams"].setIndex(self["streams"].count() - 1)
 
 	def keyRed(self):
 		if self["key_red"].getBoolean():
@@ -416,14 +417,14 @@ class AudioSelection(Screen, ConfigListScreen):
 			if self["streams"].getIndex() == 0:
 				self["config"].instance.setSelectionEnable(True)
 				self["streams"].style = "notselected"
-				self["config"].setCurrentIndex(len(self["config"].getList())-1)
+				self["config"].setCurrentIndex(len(self["config"].getList()) - 1)
 				self.focus = FOCUS_CONFIG
 			else:
 				self["streams"].selectPrevious()
 
 	def keyDown(self):
 		if self.focus == FOCUS_CONFIG:
-			if self["config"].getCurrentIndex() < len(self["config"].getList())-1:
+			if self["config"].getCurrentIndex() < len(self["config"].getList()) - 1:
 				self["config"].instance.moveSelection(self["config"].instance.moveDown)
 			else:
 				self["config"].instance.setSelectionEnable(False)
@@ -443,7 +444,7 @@ class AudioSelection(Screen, ConfigListScreen):
 
 	def keyNumberGlobal(self, number):
 		if number <= len(self["streams"].list):
-			self["streams"].setIndex(number-1)
+			self["streams"].setIndex(number - 1)
 			self.keyOk()
 
 	def keyOk(self):
@@ -482,10 +483,12 @@ class AudioSelection(Screen, ConfigListScreen):
 	def cancel(self):
 		self.close(0)
 
+
 class SubtitleSelection(AudioSelection):
 	def __init__(self, session, infobar=None):
 		AudioSelection.__init__(self, session, infobar, page=PAGE_SUBTITLES)
 		self.skinName = ["AudioSelection"]
+
 
 class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 	skin = """
@@ -511,7 +514,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			self.service_string = info and info.getInfoString(self.service, iServiceInformation.sServiceref)
 		else:
 			self.service_string = self.service.toString()
-		self.center_dvb_subs = ConfigYesNo(default = (eDVBDB.getInstance().getFlag(eServiceReference(self.service_string)) & self.FLAG_CENTER_DVB_SUBS) and True)
+		self.center_dvb_subs = ConfigYesNo(default=(eDVBDB.getInstance().getFlag(eServiceReference(self.service_string)) & self.FLAG_CENTER_DVB_SUBS) and True)
 		self.center_dvb_subs.addNotifier(self.setCenterDvbSubs)
 		self["videofps"] = Label("")
 
@@ -556,7 +559,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			]
 			self["videofps"].setText(_("Video: %s fps") % (self.getFps().rstrip(".000")))
 
-		ConfigListScreen.__init__(self, menu, self.session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, menu, self.session, on_change=self.changedEntry)
 
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
@@ -576,7 +579,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 
 	def layoutFinished(self):
 		if not self["videofps"].text:
-			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height()*len(self["config"].getList()) + 10))
+			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height() * len(self["config"].getList()) + 10))
 
 	def changedEntry(self):
 		if self["config"].getCurrent() in [getConfigMenuItem("config.subtitles.pango_subtitles_delay"), getConfigMenuItem("config.subtitles.pango_subtitles_fps")]:
@@ -596,7 +599,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 			return ""
 		fps = info.getInfo(iServiceInformation.sFrameRate)
 		if fps > 0:
-			return "%6.3f" % (fps/1000.)
+			return "%6.3f" % (fps / 1000.)
 		return ""
 
 	def cancel(self):

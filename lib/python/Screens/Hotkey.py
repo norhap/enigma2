@@ -20,6 +20,7 @@ from Components.Label import Label
 import os
 import six
 
+
 class hotkey:
 	functions = None
 	hotkeys = [(_("Red") + " " + _("long"), "red_long", ""),
@@ -50,7 +51,7 @@ class hotkey:
 		("Help", "displayHelp", ""),
 		("Help" + " " + _("long"), "displayHelp_long", ""),
 		("Subtitle", "subtitle", ""),
-		("Subtitle"+ " " + _("long"), "subtitle_long", ""),
+		("Subtitle" + " " + _("long"), "subtitle_long", ""),
 		("Menu", "mainMenu", ""),
 		("Info (EPG)", "info", "Infobar/openEventView"),
 		("Info (EPG)" + " " + _("long"), "info_long", "Infobar/showEventInfoPlugins"),
@@ -71,7 +72,7 @@ class hotkey:
 		("Channel up", "channelup", ""),
 		("Channel down", "channeldown", ""),
 		("Page up", "pageUp", ""),
-		("Page up"	+ " " + _("long"), "pageUp_long", ""),
+		("Page up" + " " + _("long"), "pageUp_long", ""),
 		("Page down", "pageDown", ""),
 		("Page down" + " " + _("long"), "pageDown_long", ""),
 		("Next", "next", ""),
@@ -137,6 +138,7 @@ class hotkey:
 		("WWW Portal" + " " + _("long"), "www_long", ""),
 		("ZOOM", "zoom", ""),
 		("ZOOM" + " " + _("long"), "zoom_long", "")]
+
 
 def getHotkeyFunctions():
 	hotkey.functions = []
@@ -275,13 +277,16 @@ def getHotkeyFunctions():
 			x = x[:-3]
 			hotkey.functions.append((_("Shellscript") + " " + x, "Shellscript/" + x, "Shellscripts"))
 
+
 config.misc.hotkey = ConfigSubsection()
 config.misc.hotkey.additional_keys = ConfigYesNo(default=False)
 for x in hotkey.hotkeys:
 	exec("config.misc.hotkey.%s = ConfigText(default='%s')" % x[1:])
 
+
 class HotkeySetup(Screen):
 	ALLOW_SUSPEND = False
+
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
@@ -373,6 +378,7 @@ class HotkeySetup(Screen):
 						selected.append(ChoiceEntryComponent('', ((function[0]), function[1])))
 			self["choosen"].setList(selected)
 		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if len(selected) else _("Press or select button and then press 'OK' for attach function."))
+
 
 class HotkeySetupSelect(Screen):
 	def __init__(self, session, key, args=None):
@@ -527,7 +533,7 @@ class HotkeySetupSelect(Screen):
 	def zaptoCallback(self, *args):
 		if args:
 			currentSelected = self["list"].l.getCurrentSelection()[:]
-			currentSelected[1]=currentSelected[1][:-1] + (currentSelected[0][0] + " " + ServiceReference(args[0]).getServiceName(),)
+			currentSelected[1] = currentSelected[1][:-1] + (currentSelected[0][0] + " " + ServiceReference(args[0]).getServiceName(),)
 			self.selected.append([(currentSelected[0][0], currentSelected[0][1] + "/" + args[0].toString()), currentSelected[1]])
 
 	def keyLeft(self):
@@ -575,6 +581,7 @@ class HotkeySetupSelect(Screen):
 	def cancelCallback(self, answer):
 		answer and self.close(None)
 
+
 class hotkeyActionMap(ActionMap):
 	def action(self, contexts, action):
 		if action in tuple(x[1] for x in hotkey.hotkeys) and action in self.actions:
@@ -585,6 +592,7 @@ class hotkeyActionMap(ActionMap):
 		else:
 			return ActionMap.action(self, contexts, action)
 
+
 class helpableHotkeyActionMap(HelpableActionMap):
 	def action(self, contexts, action):
 		if action in tuple(x[1] for x in hotkey.hotkeys) and action in self.actions:
@@ -594,6 +602,7 @@ class helpableHotkeyActionMap(HelpableActionMap):
 			return 1
 		else:
 			return ActionMap.action(self, contexts, action)
+
 
 class InfoBarHotkey():
 	def __init__(self):
@@ -681,7 +690,7 @@ class InfoBarHotkey():
 			elif selected[0] == "Module":
 				try:
 					exec("from %s import %s" % (selected[1], selected[2]))
-					exec("self.session.open(%s)" %	",".join(selected[2:]))
+					exec("self.session.open(%s)" % ",".join(selected[2:]))
 				except Exception as e:
 					print("[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e))
 					import traceback
@@ -697,7 +706,7 @@ class InfoBarHotkey():
 					self.servicelist.history = []
 					self.pipShown() and self.showPiP()
 				self.servicelist.servicelist.setCurrent(eServiceReference("/".join(selected[1:])))
-				self.servicelist.zap(enable_pipzap = True)
+				self.servicelist.zap(enable_pipzap=True)
 				if hasattr(self, "lastservice"):
 					self.lastservice = eServiceReference("/".join(selected[1:]))
 					self.close()

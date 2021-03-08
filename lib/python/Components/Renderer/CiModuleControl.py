@@ -3,6 +3,7 @@ from enigma import eDVBCI_UI, eLabel, iPlayableService
 from Components.SystemInfo import SystemInfo
 from Components.VariableText import VariableText
 
+
 class CiModuleControl(Renderer, VariableText):
 	def __init__(self):
 		Renderer.__init__(self)
@@ -44,17 +45,17 @@ class CiModuleControl(Renderer, VariableText):
 									string += ""
 									add_num = False
 								else:
-									string += "\c007?7?7?"
+									string += "\c007f7f7f"
 							elif state == 1:
-								string += "\c00????00"
+								string += "\c00ffff00"
 							elif state == 2:
-								string += "\c0000??00"
+								string += "\c0000ff00"
 						else:
 							if not self.allVisible:
 								string += ""
 								add_num = False
 							else:
-								string += "\c00??2525"
+								string += "\c00ff2525"
 						if add_num:
 							string += "%d" % (slot + 1)
 					if string:

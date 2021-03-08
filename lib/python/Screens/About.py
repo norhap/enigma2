@@ -143,7 +143,7 @@ class About(Screen):
 			if "DVBC_ANNEX_C"  in dvbinformation:
 				AboutText += _("DVBC_ANNEX_C: ") + _("Yes") + "\n"
 
-		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString(cpu).replace("GStreamer","")
+		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString().replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
 

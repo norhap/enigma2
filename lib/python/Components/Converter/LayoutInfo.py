@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
@@ -12,6 +13,7 @@ SIZE_UNITS = ['B',
  'TB',
  'PB',
  'EB']
+
 
 class LayoutInfo(Poll, Converter):
 	HDDTEMP = 0
@@ -136,11 +138,12 @@ class LayoutInfo(Poll, Converter):
 		textvalue = 'No info'
 		info = '0'
 		try:
+			print("[LayoutInfo] Read /proc/loadavg")
 			out_line = popen('cat /proc/loadavg').readline()
 			info = 'loadavg:' + out_line[:15]
 			textvalue = info
 		except:
-			pass
+			print("[LayoutInfo] Read /proc/loadavg failed.")
 
 		return textvalue
 
@@ -151,6 +154,7 @@ class LayoutInfo(Poll, Converter):
 		0]
 		try:
 			check = 0
+#			print("[LayoutInfo] Read /proc/meminfo")
 			fd = open('/proc/meminfo')
 			for line in fd:
 				if value + 'Total' in line:
@@ -167,7 +171,7 @@ class LayoutInfo(Poll, Converter):
 
 			fd.close()
 		except:
-			pass
+			print("[LayoutInfo] Read /proc/meminfo failed.")
 
 		return result
 
@@ -175,6 +179,7 @@ class LayoutInfo(Poll, Converter):
 
 		def isMountPoint():
 			try:
+#				print("[LayoutInfo] Read /proc/mounts")
 				fd = open('/proc/mounts', 'r')
 				for line in fd:
 					l = line.split()
@@ -183,6 +188,7 @@ class LayoutInfo(Poll, Converter):
 
 				fd.close()
 			except:
+				print("[LayoutInfo] Read /proc/mounts failed.")
 				return None
 
 			return False
@@ -204,7 +210,7 @@ class LayoutInfo(Poll, Converter):
 				result[3] = result[1] * 100 / result[0]
 		return result
 
-	def getSizeStr(self, value, u = 0):
+	def getSizeStr(self, value, u=0):
 		fractal = 0
 		if value >= 1024:
 			fmt = '%(size)u.%(frac)d %(unit)s'

@@ -21,6 +21,7 @@ from time import localtime, strftime
 from Components.config import config
 import six
 
+
 class EventViewBase:
 	ADD_TIMER = 0
 	REMOVE_TIMER = 1
@@ -28,7 +29,7 @@ class EventViewBase:
 	def __init__(self, event, Ref, callback=None, similarEPGCB=None, parent=None):
 		self.similarEPGCB = similarEPGCB
 		self.cbFunc = callback
-		self.currentService=Ref
+		self.currentService = Ref
 		self.isRecording = (not Ref.ref.flags & eServiceReference.isGroup) and Ref.ref.getPath()
 		self.event = event
 		self["Service"] = ServiceEvent()
@@ -115,6 +116,7 @@ class EventViewBase:
 			title_text = timer.repeated and _("Attention, this is repeated timer!\n") or ""
 			menu = [(_("Delete timer"), "delete"), (_("Edit timer"), "edit")]
 			buttons = ["red", "green"]
+
 			def timerAction(choice):
 				if choice is not None:
 					if choice[1] == "delete":
@@ -123,7 +125,7 @@ class EventViewBase:
 						self.session.openWithCallback(self.finishedEdit, TimerEntry, timer)
 			self.session.openWithCallback(timerAction, ChoiceBox, title=title_text + _("Select action for timer '%s'.") % timer.name, list=menu, keys=buttons)
 		else:
-			newEntry = RecordTimerEntry(self.currentService, checkOldTimers = True, dirname = preferredTimerPath(), *parseEvent(self.event))
+			newEntry = RecordTimerEntry(self.currentService, checkOldTimers=True, dirname=preferredTimerPath(), *parseEvent(self.event))
 			newEntry.justplay = config.recording.timer_default_type.value == "zap"
 			newEntry.always_zap = config.recording.timer_default_type.value == "zap+record"
 			self.session.openWithCallback(self.finishedAdd, TimerEntry, newEntry)
@@ -135,6 +137,7 @@ class EventViewBase:
 				def removeEditTimer():
 					entry.service_ref, entry.begin, entry.end, entry.external = entry.service_ref_prev, entry.begin_prev, entry.end_prev, entry.external_prev
 					self.removeTimer(entry)
+
 				def moveEditTimerError():
 					entry.external = entry.external_prev
 					self.onSelectionChanged()
@@ -209,7 +212,7 @@ class EventViewBase:
 		self.finishedAdd(answer)
 
 	def setService(self, service):
-		self.currentService=service
+		self.currentService = service
 		self["Service"].newService(service.ref)
 		if self.isRecording:
 			self["channel"].setText(_("Recording"))
@@ -244,7 +247,7 @@ class EventViewBase:
 				short = ""
 		if short and ext:
 			if short.find(ext):
-				short =""
+				short = ""
 			else:
 				ext = short + "\n\n" + ext
 		elif short:
@@ -262,7 +265,7 @@ class EventViewBase:
 		begintime = localtime(begint)
 		endtime = localtime(begint + event.getDuration())
 		self["datetime"].setText("%s - %s" % (strftime("%s, %s" % (config.usage.date.short.value, config.usage.time.short.value), begintime), strftime(config.usage.time.short.value, endtime)))
-		self["duration"].setText(_("%d min")%(event.getDuration()/60))
+		self["duration"].setText(_("%d min") % (event.getDuration() / 60))
 		self["key_red"].setText("")
 		if self.SimilarBroadcastTimer is not None:
 			self.SimilarBroadcastTimer.start(400, True)
@@ -316,9 +319,9 @@ class EventViewBase:
 				text += "\n%s  -  %s" % (strftime(config.usage.date.long.value + ", " + config.usage.time.short.value, localtime(x[1])), x[0])
 
 			descr = self["epg_description"]
-			descr.setText(descr.getText()+text)
+			descr.setText(descr.getText() + text)
 			descr = self["FullDescription"]
-			descr.setText(descr.getText()+text)
+			descr.setText(descr.getText() + text)
 			self["key_red"].setText(_("Similar"))
 
 	def openSimilarList(self):
@@ -332,13 +335,13 @@ class EventViewBase:
 		if self.event:
 			text = _("Select action")
 			if six.PY2:
-				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
-					if 'servicelist' not in p.__call__.func_code.co_varnames \
-						if 'selectedevent' not in p.__call__.func_code.co_varnames ]
+				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
+					if 'servicelist' not in p.__call__.func_code.co_varnames
+						if 'selectedevent' not in p.__call__.func_code.co_varnames]
 			else:
-				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where = PluginDescriptor.WHERE_EVENTINFO) \
-					if 'servicelist' not in p.__call__.__code__.co_varnames \
-						if 'selectedevent' not in p.__call__.__code__.co_varnames ]
+				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
+					if 'servicelist' not in p.__call__.__code__.co_varnames
+						if 'selectedevent' not in p.__call__.__code__.co_varnames]
 			if len(menu) == 1:
 				menu and menu[0][1]()
 			elif len(menu) > 1:
@@ -351,11 +354,13 @@ class EventViewBase:
 	def runPlugin(self, plugin):
 		plugin.__call__(session=self.session, service=self.currentService, event=self.event, eventName=self.event.getEventName())
 
+
 class EventViewSimple(Screen, EventViewBase):
 	def __init__(self, session, Event, Ref, callback=None, similarEPGCB=None, parent=None):
 		Screen.__init__(self, session)
 		self.skinName = "EventView"
 		EventViewBase.__init__(self, Event, Ref, callback, similarEPGCB, parent)
+
 
 class EventViewEPGSelect(Screen, EventViewBase):
 	def __init__(self, session, Event, Ref, callback=None, singleEPGCB=None, multiEPGCB=None, similarEPGCB=None, parent=None):

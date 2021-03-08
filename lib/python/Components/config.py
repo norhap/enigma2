@@ -61,17 +61,21 @@ KEY_NUMBERS = ACTIONKEY_NUMBERS
 KEY_0 = ACTIONKEY_0
 KEY_9 = ACTIONKEY_9
 
+
 def getKeyNumber(key):
 	assert key in ACTIONKEY_NUMBERS
 	return key - ACTIONKEY_0
+
 
 def getConfigListEntry(*args):
 	assert len(args) > 1, "getConfigListEntry needs a minimum of two arguments (descr, configElement)"
 	return args
 
+
 def updateConfigElement(element, newelement):
 	newelement.value = element.value
 	return newelement
+
 
 def NoSave(element):
 	element.disableSave()
@@ -269,7 +273,6 @@ class choicesList(object):
 	LIST_TYPE_DICT = 2
 
 	def __init__(self, choices, type=None):
-		self.choices = choices
 		if type is None:
 			if isinstance(choices, list):
 				self.type = choicesList.LIST_TYPE_LIST
@@ -279,6 +282,7 @@ class choicesList(object):
 				assert False, "choices must be dict or list!"
 		else:
 			self.type = type
+		self.choices = choices
 
 	def __list__(self):
 		if self.type == choicesList.LIST_TYPE_LIST:
@@ -361,12 +365,9 @@ class descriptionList(choicesList):
 	def __getitem__(self, index):
 		if self.type == choicesList.LIST_TYPE_LIST:
 			for x in self.choices:
-				if isinstance(x, tuple):
-					if str(x[0]) == str(index):
-						return str(x[1])
-				elif str(x) == str(index):
-					return str(x)
-			return str(index)  # Fallback!
+				if isinstance(x, tuple) and str(x[0]) == str(index):
+					return str(x[1])
+			return _(str(index))  # If there is no display / translation string then translate the value!
 		else:
 			return str(self.choices.get(index, ""))
 
@@ -1202,6 +1203,8 @@ class ConfigSequence(ConfigElement):
 
 
 cec_limits = [(0, 15), (0, 15), (0, 15), (0, 15)]
+
+
 class ConfigCECAddress(ConfigSequence):
 	def __init__(self, default, auto_jump=False):
 		ConfigSequence.__init__(self, seperator=".", limits=cec_limits, default=default)
@@ -1276,6 +1279,8 @@ class ConfigCECAddress(ConfigSequence):
 
 
 clock_limits = [(0, 23), (0, 59)]
+
+
 class ConfigClock(ConfigSequence):
 	def __init__(self, default):
 		self.t = localtime(default)
@@ -1375,6 +1380,8 @@ class ConfigClock(ConfigSequence):
 
 
 date_limits = [(1, 31), (1, 12), (1970, 2050)]
+
+
 class ConfigDate(ConfigSequence):
 	def __init__(self, default):
 		d = localtime(default)
@@ -1401,6 +1408,8 @@ class ConfigFloat(ConfigSequence):
 
 
 integer_limits = (0, 9999999999)
+
+
 class ConfigInteger(ConfigSequence):
 	def __init__(self, default, limits=integer_limits):
 		ConfigSequence.__init__(self, seperator=":", limits=[limits], default=default)
@@ -1432,6 +1441,8 @@ class ConfigPIN(ConfigInteger):
 
 
 ip_limits = [(0, 255), (0, 255), (0, 255), (0, 255)]
+
+
 class ConfigIP(ConfigSequence):
 	def __init__(self, default, auto_jump=False):
 		ConfigSequence.__init__(self, seperator=".", limits=ip_limits, default=default)
@@ -1506,6 +1517,8 @@ class ConfigIP(ConfigSequence):
 
 
 mac_limits = [(1, 255), (1, 255), (1, 255), (1, 255), (1, 255), (1, 255)]
+
+
 class ConfigMAC(ConfigSequence):
 	def __init__(self, default):
 		ConfigSequence.__init__(self, seperator=":", limits=mac_limits, default=default)

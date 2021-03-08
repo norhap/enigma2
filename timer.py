@@ -4,12 +4,13 @@ from time import time, localtime, mktime
 from enigma import eTimer, eActionMap
 import datetime
 
+
 class TimerEntry:
-	StateWaiting  = 0
+	StateWaiting = 0
 	StatePrepared = 1
-	StateRunning  = 2
-	StateEnded    = 3
-	StateFailed   = 4
+	StateRunning = 2
+	StateEnded = 3
+	StateFailed = 4
 
 	def __init__(self, begin, end):
 		self.begin = begin
@@ -46,7 +47,7 @@ class TimerEntry:
 
 	def addOneDay(self, timedatestruct):
 		oldHour = timedatestruct.tm_hour
-		newdate =  (datetime.datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + datetime.timedelta(days=1)).timetuple()
+		newdate = (datetime.datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + datetime.timedelta(days=1)).timetuple()
 		if localtime(mktime(newdate)).tm_hour != oldHour:
 			return (datetime.datetime(timedatestruct.tm_year, timedatestruct.tm_mon, timedatestruct.tm_mday, timedatestruct.tm_hour, timedatestruct.tm_min, timedatestruct.tm_sec) + datetime.timedelta(days=2)).timetuple()
 		return newdate
@@ -82,7 +83,7 @@ class TimerEntry:
 
 			# if day is NOT in the list of repeated days
 			# OR if the day IS in the list of the repeated days, check, if event is currently running... then if findRunningEvent is false, go to the next event
-			while ((day[localbegin.tm_wday] != 0) or (mktime(localrepeatedbegindate) > mktime(localbegin))  or
+			while ((day[localbegin.tm_wday] != 0) or (mktime(localrepeatedbegindate) > mktime(localbegin)) or
 				(day[localbegin.tm_wday] == 0 and (findRunningEvent and localend < localnow) or ((not findRunningEvent) and localbegin < localnow))):
 				localbegin = self.addOneDay(localbegin)
 				localend = self.addOneDay(localend)
@@ -147,6 +148,7 @@ class TimerEntry:
 	def enable(self):
 		self.disabled = False
 
+
 class Timer:
 	# the time between "polls". We do this because
 	# we want to account for time jumps etc.
@@ -160,15 +162,15 @@ class Timer:
 	MaxWaitTime = 100
 
 	def __init__(self):
-		self.timer_list = [ ]
-		self.processed_timers = [ ]
+		self.timer_list = []
+		self.processed_timers = []
 
 		self.timer = eTimer()
 		self.timer.callback.append(self.calcNextActivation)
 		self.lastActivation = time()
 
 		self.calcNextActivation()
-		self.on_state_change = [ ]
+		self.on_state_change = []
 
 	def stateChanged(self, entry):
 		for f in self.on_state_change:
@@ -231,7 +233,7 @@ class Timer:
 		if self.lastActivation > now:
 			print("[timer] timewarp - re-evaluating all processed timers.")
 			tl = self.processed_timers
-			self.processed_timers = [ ]
+			self.processed_timers = []
 			for x in tl:
 				# simulate a "waiting" state to give them a chance to re-occure
 				x.resetState()
@@ -245,7 +247,7 @@ class Timer:
 		self.timer_list and self.timer_list.sort() #  resort/refresh list, try to fix hanging timers
 
 		# calculate next activation point
-		timer_list = [ t for t in self.timer_list if not t.disabled ]
+		timer_list = [t for t in self.timer_list if not t.disabled]
 		if timer_list:
 			w = timer_list[0].getNextActivation()
 			if w < min:
@@ -323,7 +325,7 @@ class Timer:
 # Since this tag is only for use here, we remove it after use.
 #
 		while True:
-			timer_list = [ tmr for tmr in self.timer_list if (not tmr.disabled and not getattr(tmr, "currentlyActivated", False)) ]
+			timer_list = [tmr for tmr in self.timer_list if (not tmr.disabled and not getattr(tmr, "currentlyActivated", False))]
 			if timer_list and timer_list[0].getNextActivation() < t:
 				timer_list[0].currentlyActivated = True
 				self.doActivate(timer_list[0])

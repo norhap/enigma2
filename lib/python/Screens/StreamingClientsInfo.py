@@ -15,6 +15,7 @@ try:
 except:
 	streamList = []
 
+
 class StreamingClientsInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -78,7 +79,7 @@ class StreamingClientsInfo(Screen):
 		if self.clients:
 			client = self["menu"].l.getCurrentSelection()
 			if client:
-				self.session.openWithCallback(self.stopCurrentStreamCallback, MessageBox, client[0] +" \n\n" + _("Stop current stream") + "?", MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.stopCurrentStreamCallback, MessageBox, client[0] + " \n\n" + _("Stop current stream") + "?", MessageBox.TYPE_YESNO)
 
 	def stopCurrentStreamCallback(self, answer):
 		if answer:
@@ -87,7 +88,7 @@ class StreamingClientsInfo(Screen):
 				for x in self.streamServer.getConnectedClients():
 					if client[1][0] == x[0] and client[1][1] == x[1]:
 						if not self.streamServer.stopStreamClient(client[1][0], client[1][1]):
-							self.session.open(MessageBox,  client[0] +" \n\n" + _("Error stop stream!"), MessageBox.TYPE_WARNING)
+							self.session.open(MessageBox, client[0] + " \n\n" + _("Error stop stream!"), MessageBox.TYPE_WARNING)
 				self.updateClients()
 
 	def stopAllStreams(self):

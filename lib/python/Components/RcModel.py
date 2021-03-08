@@ -6,6 +6,7 @@ from Tools.StbHardware import getFPVersion, getBoxProc
 fp_version = str(getFPVersion())
 procmodel = getBoxProc()
 
+
 class RcModel:
 	RcModels = {}
 
@@ -55,5 +56,6 @@ class RcModel:
 
 	def getRcPositions(self):
 		return self.getRcFile('xml')
+
 
 rc_model = RcModel()

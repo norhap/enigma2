@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from enigma import iServiceInformation, eServiceReference, iPlayableServicePtr
 
+
 class MovieReference(Converter, object):
 
 	def __init__(self, type):
@@ -25,7 +26,7 @@ class MovieReference(Converter, object):
 			path = refstr and eServiceReference(refstr).getPath()
 			if path:
 				try:
-					fd = open("%s.meta"%(path), "r")
+					fd = open("%s.meta" % (path), "r")
 					refstr = fd.readline().strip()
 					fd.close()
 				except:

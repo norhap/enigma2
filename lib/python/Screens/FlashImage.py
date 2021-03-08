@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.Standby import getReasons
@@ -14,14 +15,22 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
-import os, urllib2, json, time, zipfile, shutil, tempfile
+import os
+import urllib2
+import json
+import time
+import zipfile
+import shutil
+import tempfile
 
 from enigma import eEPGCache, getBoxType
 
 model = getBoxType()
 
+
 def checkimagefiles(files):
 	return len([x for x in files if 'kernel' in x and '.bin' in x or x in ('uImage', 'rootfs.bin', 'root_cfe_auto.bin', 'root_cfe_auto.jffs2', 'oe_rootfs.bin', 'e2jffs2.img', 'rootfs.tar.bz2', 'rootfs.ubi')]) == 2
+
 
 class SelectImage(Screen):
 	def __init__(self, session, *args):
@@ -129,7 +138,7 @@ class SelectImage(Screen):
 			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1])
 
 	def keyDelete(self):
-		currentSelected= self["list"].l.getCurrentSelection()[0][1]
+		currentSelected = self["list"].l.getCurrentSelection()[0][1]
 		if not("://" in currentSelected or currentSelected in ["Expander", "Waiter"]):
 			try:
 				os.remove(currentSelected)
@@ -174,6 +183,7 @@ class SelectImage(Screen):
 		self["list"].instance.moveSelection(self["list"].instance.moveDown)
 		self.selectionChanged()
 
+
 class FlashImage(Screen):
 	skin = """<screen position="center,center" size="640,150" flags="wfNoBorder" backgroundColor="#54242424">
 		<widget name="header" position="5,10" size="e-10,50" font="Regular;40" backgroundColor="#54242424"/>
@@ -183,7 +193,7 @@ class FlashImage(Screen):
 
 	BACKUP_SCRIPT = resolveFilename(SCOPE_PLUGINS, "Extensions/AutoBackup/settings-backup.sh")
 
-	def __init__(self, session,  imagename, source):
+	def __init__(self, session, imagename, source):
 		Screen.__init__(self, session)
 		self.containerbackup = None
 		self.containerofgwrite = None
@@ -218,7 +228,7 @@ class FlashImage(Screen):
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
 			choices = []
-			slotdict = { k:v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
+			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
 			for x in range(1, len(slotdict) + 1):
 				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
 			for x in range(1, len(slotdict) + 1):
@@ -250,6 +260,7 @@ class FlashImage(Screen):
 					st_dev = os.stat(path).st_dev
 					return (os.major(st_dev), os.minor(st_dev)) in diskstats
 
+				print("[FlashImage] Read /proc/diskstats")
 				diskstats = [(int(x[0]), int(x[1])) for x in [x.split()[0:3] for x in open('/proc/diskstats').readlines()] if x[2].startswith("sd")]
 				if os.path.isdir(path) and checkIfDevice(path, diskstats) and avail(path) > 500:
 					return (path, True)
@@ -342,7 +353,7 @@ class FlashImage(Screen):
 
 	def unzip(self):
 		self["header"].setText(_("Unzipping Image"))
-		self["info"].setText("%s\n%s"% (self.imagename, _("Please wait")))
+		self["info"].setText("%s\n%s" % (self.imagename, _("Please wait")))
 		self["progress"].hide()
 		self.callLater(self.doUnzip)
 
@@ -355,6 +366,7 @@ class FlashImage(Screen):
 
 	def flashimage(self):
 		self["header"].setText(_("Flashing Image"))
+
 		def findimagefiles(path):
 			for path, subdirs, files in os.walk(path):
 				if not subdirs and files:
@@ -392,6 +404,7 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MultibootSelection)
 		else:
 			return 0
+
 
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
@@ -504,7 +517,7 @@ class MultibootSelection(SelectImage):
 
 	def selectionChanged(self):
 		self.currentSelected = self["list"].l.getCurrentSelection()
-		if type(self.currentSelected[0][1]) is tuple and self.currentimageslot != self.currentSelected[0][1][0]:
+		if isinstance(self.currentSelected[0][1], tuple) and self.currentimageslot != self.currentSelected[0][1][0]:
 			self["key_yellow"].setText(_("Delete Image"))
 		elif self.deletedImagesExists:
 			self["key_yellow"].setText(_("Restore deleted images"))

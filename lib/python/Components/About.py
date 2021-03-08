@@ -1,30 +1,36 @@
 # -*- coding: utf-8 -*-
-import sys, os, time
+import sys
+import os
+import time
 import re
 from Tools.HardwareInfo import HardwareInfo
 from enigma import getBoxType, getBoxBrand
 from Components.SystemInfo import SystemInfo
-import socket, fcntl, struct
 from boxbranding import getImageArch
+import socket
+import fcntl
+import struct
 from Components.Console import Console
 from Tools.Directories import fileExists
 
+
 def _ifinfo(sock, addr, ifname):
 	iface = struct.pack('256s', ifname[:15])
-	info  = fcntl.ioctl(sock.fileno(), addr, iface)
+	info = fcntl.ioctl(sock.fileno(), addr, iface)
 	if addr == 0x8927:
 		return ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
 	else:
 		return socket.inet_ntoa(info[20:24])
 
+
 def getIfConfig(ifname):
 	ifreq = {'ifname': ifname}
 	infos = {}
-	sock  = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	# offsets defined in /usr/include/linux/sockios.h on linux 2.6
-	infos['addr']    = 0x8915 # SIOCGIFADDR
+	infos['addr'] = 0x8915 # SIOCGIFADDR
 	infos['brdaddr'] = 0x8919 # SIOCGIFBRDADDR
-	infos['hwaddr']  = 0x8927 # SIOCSIFHWADDR
+	infos['hwaddr'] = 0x8927 # SIOCSIFHWADDR
 	infos['netmask'] = 0x891b # SIOCGIFNETMASK
 	try:
 		for k,v in infos.items():
@@ -33,6 +39,7 @@ def getIfConfig(ifname):
 		pass
 	sock.close()
 	return ifreq
+
 
 def getIfTransferredData(ifname):
 	f = open('/proc/net/dev', 'r')
@@ -43,8 +50,10 @@ def getIfTransferredData(ifname):
 			f.close()
 			return rx_bytes, tx_bytes
 
+
 def getVersionString():
 	return getImageVersionString()
+
 
 def getImageVersionString():
 	try:
@@ -58,8 +67,11 @@ def getImageVersionString():
 	return _("unavailable")
 
 # WW -placeholder for BC purposes, commented out for the moment in the Screen
+
+
 def getFlashDateString():
 	return _("unknown")
+
 
 def getBuildDateString():
 	try:
@@ -70,30 +82,38 @@ def getBuildDateString():
 		pass
 	return _("unknown")
 
+
 def getUpdateDateString():
 	try:
 		from glob import glob
 		build = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/openpli-bootlogo.control")[0], "r") if x.startswith("Version:")][0]
 		if build.isdigit():
-			return  "%s-%s-%s" % (build[:4], build[4:6], build[6:])
+			return "%s-%s-%s" % (build[:4], build[4:6], build[6:])
 	except:
 		pass
 	return _("unknown")
+
 
 def getEnigmaVersionString():
 	import enigma
 	enigma_version = enigma.getEnigmaVersionString()
 	if '-(no branch)' in enigma_version:
-		enigma_version = enigma_version [:-12]
+		enigma_version = enigma_version[:-12]
 	return enigma_version
 
-def getGStreamerVersionString(cpu):
+
+def getGStreamerVersionString():
+	from glob import glob
 	try:
-		from glob import glob
 		gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer[0-9].[0-9].control")[0], "r") if x.startswith("Version:")][0]
-		return "%s" % gst[1].split("+")[0].replace("\n","")
+		return "%s" % gst[1].split("+")[0].replace("\n", "")
 	except:
-		return _("Not Required") if cpu.upper().startswith('HI') else _("Not Installed")
+		try:
+			gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer.[0-9].control")[0], "r") if x.startswith("Version:")][0]
+			return "%s" % gst[1].split("+")[0].replace("\n", "")
+		except:
+			return _("Not Installed")
+
 
 def getFFmpegVersionString():
 	try:
@@ -104,7 +124,8 @@ def getFFmpegVersionString():
 		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
 	except:
-		return _("unknown")
+		return _("Not Installed")
+
 
 def getKernelVersionString():
 	try:
@@ -182,12 +203,14 @@ def getCPUInfoString():
 	except:
 		return _("undefined")
 
+
 def getChipSetString():
 	try:
 		chipset = open("/proc/stb/info/chipset", "r").read()
 		return str(chipset.lower().replace('\n',''))
 	except IOError:
 		return _("undefined")
+
 
 def getCPUBrand():
 	if SystemInfo["AmlogicFamily"]:
@@ -199,6 +222,7 @@ def getCPUBrand():
 	else:
 		return _("Broadcom")
 
+
 def getCPUArch():
 	if SystemInfo["ArchIsARM64"]:
 		return _("ARM64")
@@ -207,11 +231,13 @@ def getCPUArch():
 	else:
 		return _("Mipsel")
 
+
 def getFlashType():
 	    if SystemInfo["SmallFlash"]:
 		        return _("Small flash STB")
 	    else:
                 return _("Flash Normal STB")
+
 
 def getDVBAPI():
 	if SystemInfo["OLDE2API"]:
@@ -225,30 +251,39 @@ def getDriverInstalledDate():
 		try:
 			if getBoxType() in ("dm800","dm8000"):
 				driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 			else:
 				driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 		except:
 			try:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s" % driver[1].replace("\n","")
+				return "%s" % driver[1].replace("\n", "")
 			except:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-platform-util-*.control")[0], "r") if x.startswith("Version:")][0]
-				return  "%s" % driver[1].replace("\n","")
+				return "%s" % driver[1].replace("\n", "")
 	except:
 		return _("unknown")
 
+
 def getPythonVersionString():
 	try:
-		import commands
+		try:
+			import commands
+		except:
+			import subprocess as commands
 		status, output = commands.getstatusoutput("python -V")
 		return output.split(' ')[1]
 	except:
 		return _("unknown")
 
+
 def GetIPsFromNetworkInterfaces():
-	import socket, fcntl, struct, array, sys
+	import socket
+	import fcntl
+	import struct
+	import array
+	import sys
 	is_64bits = sys.maxsize > 2**32
 	struct_size = 40 if is_64bits else 32
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -270,11 +305,12 @@ def GetIPsFromNetworkInterfaces():
 	namestr = names.tostring()
 	ifaces = []
 	for i in range(0, outbytes, struct_size):
-		iface_name = bytes.decode(namestr[i:i+16]).split('\0', 1)[0].encode('ascii')
+		iface_name = bytes.decode(namestr[i:i + 16]).split('\0', 1)[0].encode('ascii')
 		if iface_name != 'lo':
-			iface_addr = socket.inet_ntoa(namestr[i+20:i+24])
+			iface_addr = socket.inet_ntoa(namestr[i + 20:i + 24])
 			ifaces.append((iface_name, iface_addr))
 	return ifaces
+
 
 def getBoxUptime():
 	try:
@@ -290,9 +326,10 @@ def getBoxUptime():
 		m = (secs % 3600) / 60
 		time += ngettext("%d hour", "%d hours", h) % h + " "
 		time += ngettext("%d minute", "%d minutes", m) % m
-		return  "%s" % time
+		return "%s" % time
 	except:
 		return '-'
+
 
 # For modules that do "from About import about"
 about = sys.modules[__name__]
