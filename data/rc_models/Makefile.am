@@ -57,7 +57,7 @@ dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml ebox5000.png ebox5000.xml
 endif
 
 if OSMIO4KPLUS
-dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml osmio4kplus.png edision3.xml
+dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml edision3.png edision3.xml
 endif
 
 if ENTWOPIA
