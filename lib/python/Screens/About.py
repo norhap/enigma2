@@ -81,8 +81,8 @@ class About(Screen):
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 		AboutText += "\n"
-		if not boxbranding.getDisplayType().startswith(' '):
-			AboutText += _("Display tipo: ") + boxbranding.getDisplayType() + "\n"
+		if boxbranding.getDisplayType():
+			AboutText += _("Tipo Display: ") + boxbranding.getDisplayType() + "\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
@@ -168,14 +168,15 @@ class About(Screen):
 
 		self["FPVersion"] = StaticText(fp_version)
 
-		if fileExists("/var/lib/opkg/info/enigma2-plugin-systemplugins-transcodingsetup.list"):
-			AboutText += _("Setup Transcoding: ") + _("Yes") + "\n"
+		if boxbranding.getHaveTranscoding() == "True":
+			AboutText += _("Transcoding: ") + _("Yes") + "\n"
 		else:
-			AboutText += _("Setup Transcoding: ") + _("No") + "\n"
-		if fileExists("/var/lib/opkg/info/enigma2-plugin-systemplugins-multitranscodingsetup.list"):
-			AboutText += _("Setup MultiTranscoding: ") + _("Yes") + "\n"
+			AboutText += _("Transcoding: ") + _("No") + "\n"
+
+		if boxbranding.getHaveMultiTranscoding() == "True":
+			AboutText += _("MultiTranscoding: ") + _("Yes") + "\n"
 		else:
-			AboutText += _("Setup MultiTranscoding: ") + _("No") + "\n"
+			AboutText += _("MultiTranscoding: ") + _("No") + "\n"
 
 		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
