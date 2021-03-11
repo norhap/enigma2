@@ -57,7 +57,7 @@ dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml ebox5000.png ebox5000.xml
 endif
 
 if OSMIO4KPLUS
-dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml osmio4kplus.png osmio4kplus.xml
+dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml osmio4kplus.png edision3.xml
 endif
 
 if ENTWOPIA
@@ -73,7 +73,7 @@ dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml ax4.png ax4.xml hd51.png hd5
 endif
 
 if GBTRIO4K
-dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml gbtrio4k.png gbtrio4k.xml
+dist_install_DATA = rc_models.cfg dmm1.png dmm1.xml gb4.png gb4.xml
 endif
 
 if HARDKERNEL

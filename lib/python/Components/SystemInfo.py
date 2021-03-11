@@ -4,7 +4,7 @@ from os import R_OK, access
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getBoxType
 
 from Tools.Directories import SCOPE_SKIN, fileCheck, fileExists, fileHas, pathExists, resolveFilename
@@ -37,17 +37,10 @@ def getBoxBrand():
 	return brand
 
 def getRCFile(ext):
-	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getBoxType(), ext)))
-	if not getBoxType():
+	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getRCName(), ext)))
+	if not isfile(filename):
 		filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "dmm1.%s" % ext))
-	elif getBoxType() == "sf8008m":
-	    filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "sf8008.%s" % ext))
 	return filename
-
-
-SystemInfo["RCTypeIndex"] = int(float(2)) or int(getRCIDNum())
-SystemInfo["RCImage"] = getRCFile("png")
-SystemInfo["RCMapping"] = getRCFile("xml")
 
 
 def getNumVideoDecoders():
@@ -79,9 +72,15 @@ def getBootdevice():
 model = getBoxType()
 brand = getBoxBrand()
 platform = getMachineBuild()
+displaytype = getDisplayType()
+architecture = getImageArch()
 
 SystemInfo["MachineBrand"] = brand
 SystemInfo["MachineModel"] = model
+SystemInfo["RCCode"] = int(getRCType())
+SystemInfo["RCTypeIndex"] = int(float(2)) or int(getRCIDNum())
+SystemInfo["RCImage"] = getRCFile("png")
+SystemInfo["RCMapping"] = getRCFile("xml")
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots()
@@ -154,10 +153,10 @@ SystemInfo["HasHDMI-CEC"] = getHaveHDMI() == "True" and (fileExists("/dev/cec0")
 SystemInfo["HasHDMIHDin"] = getHaveHDMIinHD() == "True"
 SystemInfo["HasHDMIFHDin"] = getHaveHDMIinFHD() == "True"
 SystemInfo["HasHDMIin"] = SystemInfo["HasHDMIHDin"] or SystemInfo["HasHDMIFHDin"]
-SystemInfo["HasYPbPr"] = model in ("dm8000", "et5000", "et6000", "et6500", "et9000", "et9200", "et9500", "et10000", "formuler1", "mbtwinplus", "spycat", "vusolo", "vuduo", "vuduo2", "vuultimo")
-SystemInfo["HasScart"] = model in ("dm8000", "et4000", "et6500", "et8000", "et9000", "et9200", "et9500", "et10000", "formuler1", "hd1100", "hd1200", "hd1265", "hd2400", "vusolo", "vusolo2", "vuduo", "vuduo2", "vuultimo", "vuuno", "xp1000")
+SystemInfo["HasYPbPr"] = getHaveYUV() == "True"
+SystemInfo["HasScart"] = getHaveSCART() == "True"
+SystemInfo["HasComposite"] = getHaveRCA() == "True"
 SystemInfo["HasSVideo"] = model in ("dm8000")
-SystemInfo["HasComposite"] = model not in ("i55", "gbquad4k", "gbue4k", "hd1500", "osnino", "osninoplus", "purehd", "purehdse", "revo4k", "vusolo4k", "vuzero4k", "vuduo4k", "vuduo4kse", "vuuno4k", "vuuno4kse", "vuultimo4k")
 SystemInfo["HasAutoVolume"] = fileExists("/proc/stb/audio/avl_choices") and fileCheck("/proc/stb/audio/avl")
 SystemInfo["HasAutoVolumeLevel"] = fileExists("/proc/stb/audio/autovolumelevel_choices") and fileCheck("/proc/stb/audio/autovolumelevel")
 SystemInfo["Has3DSurround"] = fileExists("/proc/stb/audio/3d_surround_choices") and fileCheck("/proc/stb/audio/3d_surround")
