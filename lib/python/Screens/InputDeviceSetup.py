@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -10,8 +12,7 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
-from enigma import getBoxType
-from Tools.StbHardware import getBoxProc
+from boxbranding import getRCType
 
 
 class InputDeviceSelection(Screen, HelpableScreen):
@@ -89,16 +90,10 @@ class InputDeviceSelection(Screen, HelpableScreen):
 		enabled = iInputDevices.getDeviceAttribute(device, 'enabled')
 
 		if type == 'remote':
-			if config.misc.rcused.value == 0:
-				if enabled:
-					devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew-configured.png"))
-				else:
-					devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew.png"))
+			if enabled:
+				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew-configured.png"))
 			else:
-				if enabled:
-					devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcold-configured.png"))
-				else:
-					devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcold.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew.png"))
 		elif type == 'keyboard':
 			if enabled:
 				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_keyboard-configured.png"))
@@ -308,58 +303,31 @@ class RemoteControlType(Screen, ConfigListScreen):
 			("6", _("DMM advanced")),
 			("7", _("et5x00")),
 			("8", _("VU+")),
-			("9", _("et8000/et10000")),
-			("11", _("et9200/et9500/et6500")),
-			("13", _("et4000")),
+			("9", _("et8000/10000/13000")),
+			("11", _("et6x00")),
+			("13", _("et4x00")),
 			("14", _("xp1000")),
-			("16", _("HDx1/HD1xxx/HD5x0C/VS1x00/et7x00/et8500/et7000mini")),
-			("18", _("F1/F3/F4/F4-TURBO")),
-			("19", _("HD2400")),
-			("20", _("Zgemma Star S/2S/H1/H2")),
-			("21", _("Zgemma H.S/H.2S/H.2H/H5/H7(old model)")),
-			("25", _("Zgemma H9(old model)/I55Plus")),
-			("27", _("HD60")),
-			("28", _("Zgemma H7(new model)/H9(new model)/H9COMBO/H9TWIN/H10"))
-		]
-
-	defaultRcList = [
-			("et4000", 13),
-			("et5000", 7),
-			("et6000", 7),
-			("et6500", 11),
-			("et8000", 9),
-			("et9000", 5),
-			("et9100", 5),
-			("et9200", 11),
-			("et9500", 11),
-			("et10000", 9),
-			("formuler1", 18),
-			("formuler3", 18),
-			("formuler4", 18),
-			("formuler4turbo", 18),
-			("xp1000", 14),
-			("vs1000", 16),
-			("vs1500", 16),
-			("hd500c", 16),
-			("hd530c", 16),
-			("hd11", 16),
-			("hd51", 16),
-			("hd1200", 16),
-			("hd1265", 16),
-			("hd1100", 16),
-			("hd2400", 19),
-			("hd60", 27),
-			("et7000mini", 16),
-			("et7000", 16),
-			("et7500", 16),
-			("et8500", 16),
-			("sh1", 20),
-			("h3", 21),
-			("h5", 21),
-			("h7", 28), # new model /old 21
-			("h9", 28), # new model /old 25
-			("h9combo", 28),
-			("h10", 28)
+			("16", _("hd11/51/1100/1200/1265/1500/500c/530c/vs1000/1500")),
+			("17", _("XP3000")),
+			("18", _("formuler1/3/4/4turbo/triplex")),
+			("19", _("hd2400")),
+			("20", _("sh1/lc")),
+			("21", _("h3/4/5/6")),
+			("22", _("i55")),
+			("23", _("bre2ze4k")),
+			("24", _("e4hdultra")),
+			("25", _("h0/8/i55plus")),
+			("26", _("hd61")),
+			("27", _("hd60")),
+			("28", _("h7/9/9se/9combo/9combose/10/i55plusse")),
+			("500", _("bre2zet2c")),
+			("501", _("sf4008")),
+			("502", _("GigaBlue Black")),
+			("503", _("mbtwinplus")),
+			("504", _("axase3/xpeedlx")),
+			("505", _("axodin")),
+			("507", _("beyonwizu4")),
+			("511", _("sf5008"))
 		]
 
 	def __init__(self, session):
@@ -388,11 +356,7 @@ class RemoteControlType(Screen, ConfigListScreen):
 		self.getDefaultRcType()
 
 	def getDefaultRcType(self):
-		data = iRcTypeControl.getBoxType()
-		for x in self.defaultRcList:
-			if x[0] in data:
-				self.defaultRcType = x[1]
-				break
+		self.defaultRcType = int(getRCType())
 		if self.defaultRcType == 0:
 			self.defaultRcType = iRcTypeControl.readRcType()
 
