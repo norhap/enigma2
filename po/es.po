@@ -8344,9 +8344,6 @@ msgstr "solo tiempo actual"
 msgid "Add alternatives"
 msgstr "Añadir alternativos"
 
-msgid "Add bookmark"
-msgstr "Añadir marcador"
-
 msgid "Add bouquet"
 msgstr "Añadir bouquet"
 
