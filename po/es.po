@@ -8344,8 +8344,8 @@ msgstr "solo tiempo actual"
 msgid "Add alternatives"
 msgstr "Añadir alternativos"
 
-msgid "add bookmark"
-msgstr "añadir marcador"
+msgid "Add bookmark"
+msgstr "Añadir marcador"
 
 msgid "Add bouquet"
 msgstr "Añadir bouquet"
@@ -8359,8 +8359,8 @@ msgstr "Añadir marcador"
 msgid "Add service to bouquet"
 msgstr "Añadir canal al bouquet"
 
-msgid "add service to favourites"
-msgstr "añadir el canal a favoritos"
+msgid "Add service to favourites"
+msgstr "Añadir el canal a favoritos"
 
 msgid "Add to parental protection"
 msgstr "Añadir canal a control parental"
