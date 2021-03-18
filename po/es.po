@@ -17069,3 +17069,12 @@ msgstr "use mejor controlado por HDMI"
 
 msgid "Type Display: "
 msgstr "Tipo Display: "
+
+msgid ""
+"Selecting 'Yes' will delete the currently selected user data. This action can't be undone. You may want to create a backup before continuing.\n"
+"\n"
+"Are you sure you want to continue with the factory reset?"
+msgstr ""
+"Si selecciona 'Sí' se eliminarán los datos de usuario seleccionados actualmente. Esta acción no se puede deshacer. Es posible que desee crear una copia de seguridad antes de continuar.\n"
+"\n"
+"Está seguro de que desea continuar con el restablecimiento de fábrica?"
