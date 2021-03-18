@@ -187,7 +187,7 @@ SystemInfo["NCamInstalled"] = fileExists("/usr/bin/ncam")
 SystemInfo["NCamIsActive"] = fileExists("/var/tmp/ncam.pid")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta")
 SystemInfo["OLDE2API"] = model in ("dm800","su980")
-SystemInfo["7segment"] = getDisplayType() == "7segmentos"
+SystemInfo["7segment"] = getDisplayType() == "textolcd-7segmentos"
 SystemInfo["textlcd"] = getDisplayType() == "textolcd"
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = model in ("ustym4kpro","beyonwizv2","viper4k","sf8008","sf8008m","gbtrio4k","gbip4k","qviart5")
