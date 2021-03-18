@@ -81,8 +81,10 @@ class About(Screen):
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 		AboutText += "\n"
-		if boxbranding.getDisplayType():
-			AboutText += _("Tipo Display: ") + boxbranding.getDisplayType() + "\n"
+		if SystemInfo["Display"] or SystemInfo["7segment"]:
+			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
+		else:
+			AboutText += _("No Display") + "\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
