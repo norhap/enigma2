@@ -187,7 +187,7 @@ SystemInfo["NCamInstalled"] = fileExists("/usr/bin/ncam")
 SystemInfo["NCamIsActive"] = fileExists("/var/tmp/ncam.pid")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta")
 SystemInfo["OLDE2API"] = model in ("dm800","su980")
-SystemInfo["7segment"] = getDisplayType() == "textolcd-7segmentos"
+SystemInfo["7segment"] = getDisplayType() == "textolcd 7segmentos"
 SystemInfo["textlcd"] = getDisplayType() == "textolcd"
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = model in ("ustym4kpro","beyonwizv2","viper4k","sf8008","sf8008m","gbtrio4k","gbip4k","qviart5")
@@ -205,11 +205,11 @@ SystemInfo["GraphicLCD"] = model in ("vuultimo","xpeedlx3","et10000","hd2400","s
 SystemInfo["LCDMiniTV"] = fileExists("/proc/stb/lcd/mode")
 SystemInfo["LCDMiniTVPiP"] = SystemInfo["LCDMiniTV"] and model not in ("gb800ueplus","gbquad4k","gbue4k")
 SystemInfo["DefaultDisplayBrightness"] = platform == "dm4kgen" and 8 or 5
-SystemInfo["ConfigDisplay"] = SystemInfo["FrontpanelDisplay"] and getDisplayType() != "7segment"
+SystemInfo["ConfigDisplay"] = SystemInfo["FrontpanelDisplay"] and getDisplayType() != "textolcd 7segmentos"
 SystemInfo["DreamBoxAudio"] = platform == "dm4kgen" or model in ("dm7080","dm800")
 SystemInfo["AmlogicFamily"] = fileExists("/proc/device-tree/amlogic-dt-id") or fileExists("/usr/bin/amlhalt") or pathExists("/sys/module/amports")
 SystemInfo["VFDDelay"] = model in ("sf4008","beyonwizu4")
-SystemInfo["VFDRepeats"] = brand != "ixuss" and getDisplayType() != "7segment"
+SystemInfo["VFDRepeats"] = brand != "ixuss" and getDisplayType() != "textolcd 7segmentos"
 SystemInfo["FirstCheckModel"] = model in ("tmtwin4k","mbmicrov2","revo4k","force3uhd","mbmicro","e4hd","e4hdhybrid","valalinux","lunix","tmnanom3","purehd","force2nano","purehdse") or brand in ("linkdroid","wetek")
 SystemInfo["SecondCheckModel"] = model in ("osninopro","osnino","osninoplus","dm7020hd","dm7020hdv2","9910lx","9911lx","9920lx","tmnanose","tmnanoseplus","tmnanosem2","tmnanosem2plus","tmnanosecombo","force2plus","force2","force2se","optimussos","fusionhd","fusionhdse","force2plushv") or brand == "ixuss"
 SystemInfo["DifferentLCDSettings"] = model in ("spycat4kmini","osmega")
