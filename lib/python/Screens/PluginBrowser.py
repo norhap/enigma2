@@ -23,6 +23,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 from time import time
 import os
+from six import PY3
 
 language.addCallback(plugins.reloadPlugins)
 
@@ -481,6 +482,8 @@ class PluginDownloadBrowser(Screen):
 
 	def dataAvail(self, str):
 		#prepend any remaining data from the previous call
+		if PY3:
+			str = str.decode()
 		str = self.remainingdata + str
 		#split in lines
 		lines = str.split('\n')

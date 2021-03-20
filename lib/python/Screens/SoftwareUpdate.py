@@ -18,8 +18,11 @@ from Components.Slider import Slider
 from Components.SystemInfo import getBoxBrand
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
-from enigma import eTimer, getBoxType, eDVBDB
-from urllib2 import urlopen
+from enigma import eTimer, eDVBDB, getBoxType
+try:
+	from urllib2 import urlopen
+except:
+	from urllib.request import urlopen
 import datetime
 import os
 import json
