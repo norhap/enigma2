@@ -19,7 +19,7 @@
 		<button keyid="KEY_0" name="0" title="0" pos="62,161" shape="rect" size="28,13" />
 		<button keyid="KEY_NEXT" name="ARROWRIGHT" title="Next / Arrow Right" pos="102,161" shape="rect" size="28,13" />
 		<button keyid="KEY_VOLUMEUP" name="VOL+" title="Volume +" pos="22,193" shape="rect" size="24,24" />
-		<button keyid="KEY_FILE" name="LIST" title="Playlist" pos="62,191" shape="rect" size="24,24" />
+		<button keyid="KEY_VIDEO" remap="KEY_FILE" name="LIST" title="Playlist" pos="62,191" shape="rect" size="24,24" />
 		<button keyid="KEY_CHANNELUP" name="BOUQUET+" title="Channel +" pos="103,193" shape="rect" size="24,24" />
 		<button keyid="KEY_VOLUMEDOWN" name="VOL-" title="Volume -" pos="22,222" shape="rect" size="24,24" />
 		<button keyid="KEY_EPG" name="EPG" title="EPG" pos="62,226" shape="rect" size="24,24" />
@@ -44,7 +44,7 @@
 		<button keyid="KEY_AUDIO" name="AUDIO" title="Audio" pos="20,404" shape="rect" size="20,10" />
 		<button keyid="KEY_STOP" name="STOP" title="Stop" pos="48,404" shape="rect" size="20,10" />
 		<button keyid="KEY_RECORD" name="RECORD" title="Record" pos="76,404" shape="rect" size="20,10" />
-		<button keyid="KEY_CONTEXT_MENU" remap="KEY_BOOKMARKS" name="PLUGIN" title="Context / Plugins" pos="104,404" shape="rect" size="20,10" />
+		<button keyid="KEY_KEYBOARD" remap="KEY_BOOKMARKS" name="PLUGIN" title="Context / Plugins" pos="104,404" shape="rect" size="20,10" />
 		<button keyid="KEY_TEXT" name="TEXT" title="Text" pos="20,422" shape="rect" size="20,10" />
 		<button keyid="KEY_SUBTITLE" name="SUBTITLE" title="Subtitle" pos="48,422" shape="rect" size="20,10" />
 		<button keyid="KEY_TV" name="TV" title="TV/Radio" pos="76,422" shape="rect" size="20,10" />
