@@ -118,7 +118,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 			baseList.append("%s%s" % (base[:-3], "png"))
 		for item in resolveList:
 			for base in baseList:
-				file = pathjoin(item, base)
+				file = os.path.join(item, base)
 				if pathExists(file):
 					return file
 
