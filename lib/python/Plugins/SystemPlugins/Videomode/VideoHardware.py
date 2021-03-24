@@ -88,12 +88,14 @@ class VideoHardware:
 
 	if SystemInfo["HasScart"]:
 		modes["Scart"] = ["PAL", "NTSC", "Multi"]
-	elif SystemInfo["HasComposite"]:
+	if SystemInfo["HasScartYUV"]:
+		modes["Scart YPbPr"] = ["HDMI"]
+	if SystemInfo["HasComposite"]:
 		modes["RCA"] = ["576i", "PAL", "NTSC", "Multi"]
+	if SystemInfo["HasJack"]:
+		modes["AV JACK"] = ["PAL", "NTSC", "Multi"]
 	if SystemInfo["HasYPbPr"]:
 		modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
-	if SystemInfo["Has2160p"]:
-		modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "480p", "576i", "480i"]
 	else:
 		modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "480p", "576i", "480i"]
 	modes["DVI-PC"] = ["PC"]

@@ -4,7 +4,7 @@ from os import R_OK, access
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveSCART, getHaveYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getBoxType
 
 from Tools.Directories import SCOPE_SKIN, fileCheck, fileExists, fileHas, pathExists, resolveFilename
@@ -161,15 +161,16 @@ SystemInfo["Has24hz"] = fileCheck("/proc/stb/video/videomode_24hz")
 SystemInfo["HasHDMIpreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")
 SystemInfo["HasColorimetry"] = fileCheck("/proc/stb/video/hdmi_colorimetry")
 SystemInfo["HasHdrType"] = fileCheck("/proc/stb/video/hdmi_hdrtype")
-SystemInfo["Has2160p"] = fileHas("/proc/stb/video/videomode_preferred","2160p50")
 SystemInfo["HasHDMI-CEC"] = getHaveHDMI() == "True" and (fileExists("/dev/cec0") or fileExists("/dev/hdmi_cec") or fileExists("/dev/misc/hdmi_cec0"))
 SystemInfo["HasHDMIHDin"] = getHaveHDMIinHD() == "True"
 SystemInfo["HasHDMIFHDin"] = getHaveHDMIinFHD() == "True"
 SystemInfo["HasHDMIin"] = SystemInfo["HasHDMIHDin"] or SystemInfo["HasHDMIFHDin"]
-SystemInfo["HasYPbPr"] = getHaveYUV() == "True"
-SystemInfo["HasScart"] = getHaveSCART() == "True"
 SystemInfo["HasComposite"] = getHaveRCA() == "True"
+SystemInfo["HasJack"] = getHaveAVJACK() == "True"
+SystemInfo["HasScart"] = getHaveSCART() == "True"
+SystemInfo["HasScartYUV"] = getHaveSCARTYUV() == "True"
 SystemInfo["HasSVideo"] = model in ("dm8000")
+SystemInfo["HasYPbPr"] = getHaveYUV() == "True"
 SystemInfo["HasAutoVolume"] = fileExists("/proc/stb/audio/avl_choices") and fileCheck("/proc/stb/audio/avl")
 SystemInfo["HasAutoVolumeLevel"] = fileExists("/proc/stb/audio/autovolumelevel_choices") and fileCheck("/proc/stb/audio/autovolumelevel")
 SystemInfo["Has3DSurround"] = fileExists("/proc/stb/audio/3d_surround_choices") and fileCheck("/proc/stb/audio/3d_surround")
