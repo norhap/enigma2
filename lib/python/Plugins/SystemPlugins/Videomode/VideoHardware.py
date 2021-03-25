@@ -23,52 +23,36 @@ class VideoHardware:
 
 	modes = {}  # a list of (high-level) modes for a certain port.
 
-	rates["PAL"] = {"50Hz": {50: "pal"},
-								"60Hz": {60: "pal60"},
-								"multi": {50: "pal", 60: "pal60"}}
-
+	rates["PAL"] = {"50Hz": {50: "pal"}, "60Hz": {60: "pal60"}, "multi": {50: "pal", 60: "pal60"}}
 	rates["NTSC"] = {"60Hz": {60: "ntsc"}}
-
 	rates["Multi"] = {"multi": {50: "pal", 60: "ntsc"}}
-
 	rates["480i"] = {"60Hz": {60: "480i"}}
-
 	rates["576i"] = {"50Hz": {50: "576i"}}
-
 	rates["480p"] = {"60Hz": {60: "480p"}}
-
 	rates["576p"] = {"50Hz": {50: "576p"}}
-
 	rates["720p"] = {"50Hz": {50: "720p50"},
-								"60Hz": {60: "720p"},
-								"multi": {50: "720p50", 60: "720p"},
-								"auto": {50: "720p50", 60: "720p", 24: "720p24"}}
-
+	                          "60Hz": {60: "720p"},
+							  "multi": {50: "720p50", 60: "720p"}}
 	rates["1080i"] = {"50Hz": {50: "1080i50"},
-								"60Hz": {60: "1080i"},
-								"multi": {50: "1080i50", 60: "1080i"},
-								"auto": {50: "1080i50", 60: "1080i", 24: "1080p24"}}
-
+	                           "60Hz": {60: "1080i"},
+							   "multi": {50: "1080i50", 60: "1080i"}}
 	rates["1080p"] = {"50Hz": {50: "1080p50"},
-								"60Hz": {60: "1080p"},
-								"multi": {50: "1080p50", 60: "1080p"},
-								"auto": {50: "1080p50", 60: "1080p", 24: "1080p24"}}
-
-	rates["2160p30"] = {"25Hz": {50: "2160p25"},
-								"30Hz": {60: "2160p30"},
-								"multi": {50: "2160p25", 60: "2160p30"},
-								"auto": {50: "2160p25", 60: "2160p30", 24: "2160p24"}}
+	                           "60Hz": {60: "1080p"},
+	                           "multi": {50: "1080p50", 60: "1080p"}}
+	rates["2160p"] = {"50Hz": {50: "2160p50"},
+	                           "60Hz": {60: "2160p"},
+	                           "multi": {50: "2160p50", 60: "2160p"}}
 
 	if model.startswith == "dreamone" or model.startswith == "dreamtwo":
-		rates["2160p"] =	{"50Hz":		{50: "2160p50"},
-								"60Hz":		{60: "2160p60"},
-								"multi":	{50: "2160p50", 60: "2160p60"},
-								"auto":		{50: "2160p50", 60: "2160p60", 24: "2160p24"}}
+		rates["2160p"] = {"50Hz": {50: "2160p50"},
+	                           "60Hz": {60: "2160p60"},
+	                           "multi": {50: "2160p50", 60: "2160p60"},
+	                           "auto": {50: "2160p50", 60: "2160p60", 24: "2160p24"}}
 	else:
 		rates["2160p"] = {"50Hz": {50: "2160p50"},
-								"60Hz": {60: "2160p"},
-								"multi": {50: "2160p50", 60: "2160p"},
-								"auto": {50: "2160p50", 60: "2160p", 24: "2160p24"}}
+	                           "60Hz": {60: "2160p"},
+	                           "multi": {50: "2160p50", 60: "2160p"},
+	                           "auto": {50: "2160p50", 60: "2160p", 24: "2160p24"}}
 
 	rates["PC"] = {
 		"1024x768": {60: "1024x768"},
@@ -86,19 +70,43 @@ class VideoHardware:
 		"640x480": {60: "640x480"}
 	}
 
+	def chipsets():
+		try:
+			f = open('/proc/stb/info/chipset', 'r')
+			chipset = f.read()
+			f.close()
+			return str(chipset.lower().replace('\n','').replace('brcm','').replace('bcm',''))
+		except IOError:
+			return _("unavailable")
+
+	SystemInfo["VideoModes"] = chipsets() in (  # 2160p and 1080p capable hardware.
+		"5272s", "7251", "7251s", "7252", "7252s", "7278", "7366", "7376", "7444s", "72604", "3798mv200", "3798cv200", "hi3798mv200", "hi3798cv200"
+	) and (
+		["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
+		{"720p", "1080p", "2160p", "1080i"}  # Widescreen modes.
+	) or chipsets() in (  # 1080p capable hardware.
+		"7241", "7356", "73565", "7358", "7362", "73625", "7424", "7425", "7552", "3716mv410"
+	) and (
+		["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
+		{"720p", "1080p", "1080i"}  # Widescreen modes.
+	) or (  # Default modes (neither 2160p nor 1080p capable hardware).
+		["720p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
+		{"720p", "1080i"}  # Widescreen modes.
+	)
+
+	modes["HDMI"] = SystemInfo["VideoModes"][0]
+	widescreen_modes = SystemInfo["VideoModes"][1]
+
 	if SystemInfo["HasScart"]:
 		modes["Scart"] = ["PAL", "NTSC", "Multi"]
 	if SystemInfo["HasScartYUV"]:
-		modes["Scart YPbPr"] = ["HDMI"]
+		modes["Scart YPbPr"] = modes["HDMI"]
 	if SystemInfo["HasComposite"]:
 		modes["RCA"] = ["576i", "PAL", "NTSC", "Multi"]
 	if SystemInfo["HasJack"]:
 		modes["AV JACK"] = ["PAL", "NTSC", "Multi"]
 	if SystemInfo["HasYPbPr"]:
-		modes["YPbPr"] = ["720p", "1080i", "576p", "480p", "576i", "480i"]
-	else:
-		modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "480p", "576i", "480i"]
-	modes["DVI-PC"] = ["PC"]
+		modes["YPbPr"] = modes["HDMI"]
 
 	def getOutputAspect(self):
 		ret = (16, 9)
@@ -138,7 +146,7 @@ class VideoHardware:
 		self.readPreferredModes()
 		self.widescreen_modes = set(["720p", "1080i", "1080p", "2160p", "2160p30"]).intersection(*[self.modes_available])
 
-		if "DVI-PC" in self.modes and not self.getModeList("DVI-PC"):
+		if "HDMI-PC" in self.modes and not self.getModeList("DVI-PC"):
 			print("[Videomode] VideoHardware remove DVI-PC because of not existing modes")
 			del self.modes["DVI-PC"]
 		if "Scart" in self.modes and not self.getModeList("Scart"):
@@ -195,7 +203,7 @@ class VideoHardware:
 	def isModeAvailable(self, port, mode, rate):
 		rate = self.rates[mode][rate]
 		for mode in rate.values():
-			if port == "DVI":
+			if port == "HDMI":
 				if mode not in self.modes_preferred:
 					return False
 			else:
@@ -265,7 +273,7 @@ class VideoHardware:
 		return True
 
 	def isPortUsed(self, port):
-		if port == "DVI":
+		if port == "HDMI":
 			self.readPreferredModes()
 			return len(self.modes_preferred) != 0
 		else:
@@ -297,9 +305,7 @@ class VideoHardware:
 		portlist = self.getPortList()
 		for port in portlist:
 			descr = port
-			if descr == 'DVI' and has_hdmi:
-				descr = 'HDMI'
-			elif descr == 'DVI-PC' and has_hdmi:
+			if descr == 'DVI-PC' and has_hdmi:
 				descr = 'HDMI-PC'
 			lst.append((port, descr))
 

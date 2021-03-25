@@ -81,7 +81,7 @@ class About(Screen):
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 		AboutText += "\n"
-		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"]:
+		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model != "gbip4k":
 			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
 		else:
 			AboutText += _("No Display") + "\n"

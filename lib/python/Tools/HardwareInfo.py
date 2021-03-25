@@ -4,10 +4,10 @@ hw_info = None
 
 
 class HardwareInfo:
-	device_name = _("unavailable")
+	device_name = None
 	device_brandname = None
 	device_model = None
-	device_brand = _("No Disponible")
+	device_brand = None
 	device_version = ""
 	device_revision = ""
 	device_hdmi = False
