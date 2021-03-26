@@ -63,7 +63,7 @@ class HardwareInfo:
 		elif self.device_model.startswith(("ini-8000")):
 			self.device_name = "Atemio Nemesis"
 		elif self.device_model.startswith(("hd51")):
-			self.device_brand = "Mut@nt HD51"
+			self.device_name = "Mut@nt HD51"
 		elif self.device_model.startswith(("osmio4kplus")):
 			self.device_name = "Edision OS Mio 4K +"
 		elif self.device_model.startswith(("gbip4k")):
