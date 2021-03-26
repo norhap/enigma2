@@ -17081,3 +17081,6 @@ msgstr ""
 "Si selecciona 'Sí' se eliminarán los datos de usuario seleccionados actualmente. Esta acción no se puede deshacer. Es posible que desee crear una copia de seguridad antes de continuar.\n"
 "\n"
 "Está seguro de que desea continuar con el restablecimiento de fábrica?"
+
+msgid "User defined hidden"
+msgstr "Definido por el usuario oculto"
