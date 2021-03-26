@@ -69,7 +69,7 @@ class HardwareInfo:
 		elif self.device_model.startswith(("gbip4k")):
 			self.device_name = "GigaBlue UHD IP 4K"
 		elif self.device_model.startswith(("gbtrio4k")):
-			self.device_name = "GigaBlue TRIO 4K"
+			self.device_name = "GigaBlue UHD TRIO 4K"
 		elif self.device_model.startswith(("sf8008")):
 			self.device_name = "OCTAGON SF8008 UHD 4K"
 		elif self.device_model.startswith(("sf8008m")):
