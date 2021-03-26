@@ -23,25 +23,43 @@ class VideoHardware:
 
 	modes = {}  # a list of (high-level) modes for a certain port.
 
-	rates["PAL"] = {"50Hz": {50: "pal"}, "60Hz": {60: "pal60"}, "multi": {50: "pal", 60: "pal60"}}
+	rates["PAL"] = {"50Hz": {50: "pal"},
+								"60Hz": {60: "pal60"},
+								"multi": {50: "pal", 60: "pal60"}}
+
 	rates["NTSC"] = {"60Hz": {60: "ntsc"}}
+
 	rates["Multi"] = {"multi": {50: "pal", 60: "ntsc"}}
+
 	rates["480i"] = {"60Hz": {60: "480i"}}
+
 	rates["576i"] = {"50Hz": {50: "576i"}}
+
 	rates["480p"] = {"60Hz": {60: "480p"}}
+
 	rates["576p"] = {"50Hz": {50: "576p"}}
+
 	rates["720p"] = {"50Hz": {50: "720p50"},
-	                          "60Hz": {60: "720p"},
-							  "multi": {50: "720p50", 60: "720p"}}
+								"60Hz": {60: "720p"},
+								"multi": {50: "720p50", 60: "720p"},
+								"auto": {50: "720p50", 60: "720p", 24: "720p24"}}
+
 	rates["1080i"] = {"50Hz": {50: "1080i50"},
 	                           "60Hz": {60: "1080i"},
 							   "multi": {50: "1080i50", 60: "1080i"}}
+
 	rates["1080p"] = {"50Hz": {50: "1080p50"},
 	                           "60Hz": {60: "1080p"},
 	                           "multi": {50: "1080p50", 60: "1080p"}}
+
 	rates["2160p"] = {"50Hz": {50: "2160p50"},
 	                           "60Hz": {60: "2160p"},
 	                           "multi": {50: "2160p50", 60: "2160p"}}
+
+	rates["2160p30"] = {"25Hz": {50: "2160p25"},
+								"30Hz": {60: "2160p30"},
+								"multi": {50: "2160p25", 60: "2160p30"},
+								"auto": {50: "2160p25", 60: "2160p30", 24: "2160p24"}}
 
 	if model.startswith == "dreamone" or model.startswith == "dreamtwo":
 		rates["2160p"] = {"50Hz": {50: "2160p50"},
