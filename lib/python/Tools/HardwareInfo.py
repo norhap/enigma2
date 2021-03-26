@@ -59,21 +59,21 @@ class HardwareInfo:
 					pass
 
 		if self.device_model.endswith(("9000de")):
-			self.device_brand = "Golden Interstar"
-		elif self.device_model.startswith(("hd")):
-			self.device_brand = "Mut@nt"
-		elif self.device_model.startswith(("vs")):
-			self.device_brand = "Mut@nt"
-		elif self.device_model.startswith(("vu")):
-			self.device_brand = "Vuplus"
+			self.device_name = "Golden Intestart LX-3"
 		elif self.device_model.startswith(("ini-8000")):
-			self.device_brand = "Atemio"
-		elif self.device_model.startswith(("os")):
-			self.device_brand = "Edision"
-		elif self.device_model.startswith(("gb")):
-			self.device_brand = "GigaBlue"
-		elif self.device_model.startswith(("sf")):
-			self.device_brand = "octagon"
+			self.device_name = "Atemio Nemesis"
+		elif self.device_model.startswith(("hd51")):
+			self.device_brand = "Mut@nt HD51"
+		elif self.device_model.startswith(("osmio4kplus")):
+			self.device_name = "Edision OS Mio 4K +"
+		elif self.device_model.startswith(("gbip4k")):
+			self.device_name = "GigaBlue UHD IP 4K"
+		elif self.device_model.startswith(("gbtrio4k")):
+			self.device_name = "GigaBlue TRIO 4K"
+		elif self.device_model.startswith(("sf8008")):
+			self.device_name = "OCTAGON SF8008 UHD 4K"
+		elif self.device_model.startswith(("sf8008m")):
+			self.device_name = "OCTAGON SF8008 MINI UHD 4K"
 
 			self.device_model = self.device_model or self.device_name
 			self.device_hw = self.device_model
@@ -123,7 +123,7 @@ class HardwareInfo:
 		return hw_info.device_model
 
 	def get_machine_name(self):
-		return hw_info.machine_name
+		return hw_info.device_name
 
 	def has_hdmi(self):
 		return hw_info.device_hdmi

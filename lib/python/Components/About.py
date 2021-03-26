@@ -135,7 +135,7 @@ def getKernelVersionString():
 		return _("unknown")
 
 def getHardwareTypeString():
-	return HardwareInfo().get_device_model()
+	return HardwareInfo().get_device_string()
 
 def getHardwareBrand():
 	return HardwareInfo().get_device_brand()
@@ -334,7 +334,8 @@ def getBoxUptime():
 	except:
 		return '-'
 
-
+def getModel():
+	return HardwareInfo().get_machine_name()
 # For modules that do "from About import about"
 about = sys.modules[__name__]
 

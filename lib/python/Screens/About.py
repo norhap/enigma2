@@ -61,16 +61,14 @@ class About(Screen):
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		hddsplit = skin.parameters.get("AboutHddSplit", 0)
 
-		procmodel = getBoxProc()
+		model = getBoxType()
 
-		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
-		if procmodel != about.getHardwareTypeString():
-			AboutText += _("Modelo: ") + procmodel + "\n"
+		AboutText = _("Machine: ") + about.getHardwareTypeString() + "\n"
+		if model:
+			AboutText += _("Model: ") + about.getModel() + "\n"
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
-
-		AboutText += _("Fabricante: ") + about.getHardwareBrand() + "\n"
 
 		cpu = about.getCPUInfoString()
 		AboutText += _("CPU: ") + cpu + "\n"

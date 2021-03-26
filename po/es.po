@@ -17070,6 +17070,9 @@ msgstr "use mejor controlado por HDMI"
 msgid "Type Display: "
 msgstr "Tipo Display: "
 
+msgid "Machine: "
+msgstr "Máquina: "
+
 msgid ""
 "Selecting 'Yes' will delete the currently selected user data. This action can't be undone. You may want to create a backup before continuing.\n"
 "\n"
