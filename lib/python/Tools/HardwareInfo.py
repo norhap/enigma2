@@ -65,15 +65,15 @@ class HardwareInfo:
 		elif self.device_model.startswith(("hd51")):
 			self.device_name = "Mut@nt HD51"
 		elif self.device_model.startswith(("osmio4kplus")):
-			self.device_name = "Edision OS Mio 4K +"
+			self.device_name = "Edision OS mio+ 4K"
 		elif self.device_model.startswith(("gbip4k")):
 			self.device_name = "GigaBlue UHD IP 4K"
 		elif self.device_model.startswith(("gbtrio4k")):
 			self.device_name = "GigaBlue UHD TRIO 4K"
 		elif self.device_model.startswith(("sf8008")):
-			self.device_name = "OCTAGON SF8008 UHD 4K"
+			self.device_name = "OCTAGON SF8008 4K UHD"
 		elif self.device_model.startswith(("sf8008m")):
-			self.device_name = "OCTAGON SF8008 MINI UHD 4K"
+			self.device_name = "OCTAGON SF8008 MINI 4K UHD"
 
 			self.device_model = self.device_model or self.device_name
 			self.device_hw = self.device_model
