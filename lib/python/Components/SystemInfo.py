@@ -229,8 +229,8 @@ SystemInfo["SecondCheckModel"] = model in ("osninopro","osnino","osninoplus","dm
 SystemInfo["DifferentLCDSettings"] = model in ("spycat4kmini","osmega")
 SystemInfo["CanBTAudio"] = fileCheck("/proc/stb/audio/btaudio")
 SystemInfo["CanBTAudioDelay"] = fileCheck("/proc/stb/audio/btaudio_delay")
-SystemInfo["ArchIsARM64"] = getImageArch() == "aarch64" or "64" in getImageArch()
-SystemInfo["ArchIsARM"] = getImageArch().startswith("arm") or getImageArch().startswith("cortex")
+SystemInfo["ArchIsARM64"] = architecture == "aarch64" or "64" in architecture
+SystemInfo["ArchIsARM"] = architecture.startswith(("arm", "cortex"))
 SystemInfo["SeekStatePlay"] = False
 SystemInfo["StatePlayPause"] = False
 SystemInfo["StandbyState"] = False
