@@ -1,4 +1,5 @@
 from Tools.Directories import SCOPE_SKIN, resolveFilename
+from boxbranding import getBoxType
 
 hw_info = None
 
@@ -53,14 +54,12 @@ class HardwareInfo:
 					infoFname = l
 					prefix = ""
 				try:
-					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()
+					self.device_model = getBoxType()
 					break
 				except:
 					pass
 
-		if self.device_model.endswith(("9000de")):
-			self.device_name = "Golden Intestart LX-3"
-		elif self.device_model.startswith(("ini-8000")):
+		if self.device_model.startswith(("atemionemesis")):
 			self.device_name = "Atemio Nemesis"
 		elif self.device_model.startswith(("hd51")):
 			self.device_name = "Mut@nt HD51"

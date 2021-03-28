@@ -63,9 +63,9 @@ class About(Screen):
 
 		model = getBoxType()
 
-		AboutText = _("Machine: ") + about.getHardwareTypeString() + "\n"
+		AboutText = _("Model: ") + about.getModel() + "\n"
 		if model:
-			AboutText += _("Model: ") + about.getModel() + "\n"
+			AboutText += _("Machine: ") + about.getHardwareTypeString() + "\n"
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
