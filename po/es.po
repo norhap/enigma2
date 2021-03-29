@@ -17084,3 +17084,6 @@ msgstr ""
 
 msgid "User defined hidden"
 msgstr "Definido por el usuario oculto"
+
+msgid "PluginBrowser Setup"
+msgstr "Ajustes Navegador de Plugins"
