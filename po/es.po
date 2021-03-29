@@ -4809,7 +4809,7 @@ msgid "Plugin Browser"
 msgstr "Navegador de Plugins"
 
 msgid "Plugin browser"
-msgstr "Navegador de plugins"
+msgstr "Navegador de Plugins"
 
 msgid "Plugin manager activity information"
 msgstr "Información de actividad del administrador de plugins"
