@@ -8,7 +8,13 @@ from Tools.StbHardware import getFPWasTimerWakeup
 import NavigationInstance
 from enigma import eTimer
 from os import sys
-from sys import maxsize
+from six import PY2
+if PY2:
+	from sys import maxint
+	maximport = maxint
+else:
+	from sys import maxsize
+	maximport = maxsize
 
 LOGPATH = "/hdd/"
 LOGFILE = "hdmicec.log"
@@ -86,7 +92,7 @@ for i in (10, 50, 100, 150, 250, 500, 750, 1000):
 	choicelist.append(("%d" % i, _("%d ms") % i))
 config.hdmicec.minimum_send_interval = ConfigSelection(default="0", choices=[("0", _("Disabled"))] + choicelist)
 choicelist = []
-for i in [3] + range(5, 65, 5):
+for i in [3] + list(range(5, 65, 5)):
 	choicelist.append(("%d" % i, _("%d sec") % i))
 config.hdmicec.repeat_wakeup_timer = ConfigSelection(default="3", choices=[("0", _("Disabled"))] + choicelist)
 config.hdmicec.debug = ConfigSelection(default="0", choices=[("0", _("Disabled")), ("1", _("Messages")), ("2", _("Key Events")), ("3", _("All"))])
@@ -99,7 +105,11 @@ config.hdmicec.sourceactive_zaptimers = ConfigYesNo(default=False)
 class HdmiCec:
 
 	def __init__(self):
-		assert not HdmiCec.instance, "only one HdmiCec instance is allowed!"
+		try:
+			if HdmiCec.instance:
+				raise AssertionError("only one HdmiCec instance is allowed!")
+		except:
+			pass
 		HdmiCec.instance = self
 
 		self.wait = eTimer()
@@ -125,7 +135,7 @@ class HdmiCec:
 		self.volumeForwardingEnabled = False
 		self.volumeForwardingDestination = 0
 		self.wakeup_from_tv = False
-		eActionMap.getInstance().bindAction('', -maxsize - 1, self.keyEvent)
+		eActionMap.getInstance().bindAction('', -maximport - 1, self.keyEvent)
 		config.hdmicec.volume_forwarding.addNotifier(self.configVolumeForwarding)
 		config.hdmicec.enabled.addNotifier(self.configVolumeForwarding)
 		if config.hdmicec.enabled.value:
@@ -219,7 +229,7 @@ class HdmiCec:
 					self.wait.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:
 				eHdmiCEC.getInstance().sendMessage(address, cmd, data, len(data))
-			if config.hdmicec.debug.value in["1", "3"]:
+			if config.hdmicec.debug.value in ["1", "3"]:
 				self.debugTx(address, cmd, data)
 
 	def sendCmd(self):
@@ -454,7 +464,7 @@ class HdmiCec:
 					self.waitKeyEvent.start(int(config.hdmicec.minimum_send_interval.value), True)
 			else:
 				eHdmiCEC.getInstance().sendMessage(self.volumeForwardingDestination, cmd, data, len(data))
-			if config.hdmicec.debug.value in["2", "3"]:
+			if config.hdmicec.debug.value in ["2", "3"]:
 				self.debugTx(self.volumeForwardingDestination, cmd, data)
 			return 1
 		else:
@@ -470,7 +480,7 @@ class HdmiCec:
 		txt = self.now(True) + self.opCode(cmd, True) + " " + "%02X" % (cmd) + " "
 		tmp = ""
 		if len(data):
-			if cmd in[0x32, 0x47]:
+			if cmd in [0x32, 0x47]:
 				for i in range(len(data)):
 					tmp += "%s" % data[i]
 			else:
@@ -489,7 +499,7 @@ class HdmiCec:
 			else:
 				txt += self.opCode(cmd) + " " + "%02X" % (cmd) + " "
 			for i in range(length - 1):
-				if cmd in[0x32, 0x47]:
+				if cmd in [0x32, 0x47]:
 					txt += "%s" % data[i]
 				elif cmd == 0x9e:
 					txt += "%02X" % ord(data[i]) + 3 * " " + "[version: %s]" % CEC[ord(data[i])]

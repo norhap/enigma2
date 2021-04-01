@@ -1,13 +1,14 @@
 from Tools.Directories import SCOPE_SKIN, resolveFilename
+from boxbranding import getBoxType
 
 hw_info = None
 
 
 class HardwareInfo:
-	device_name = _("unavailable")
+	device_name = None
 	device_brandname = None
 	device_model = None
-	device_brand = _("No Disponible")
+	device_brand = None
 	device_version = ""
 	device_revision = ""
 	device_hdmi = False
@@ -53,27 +54,25 @@ class HardwareInfo:
 					infoFname = l
 					prefix = ""
 				try:
-					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()
+					self.device_model = getBoxType()
 					break
 				except:
 					pass
 
-		if self.device_model.endswith(("9000de")):
-			self.device_brand = "Golden Interstar"
-		elif self.device_model.startswith(("hd")):
-			self.device_brand = "Mut@nt"
-		elif self.device_model.startswith(("vs")):
-			self.device_brand = "Mut@nt"
-		elif self.device_model.startswith(("vu")):
-			self.device_brand = "Vuplus"
-		elif self.device_model.startswith(("ini-8000")):
-			self.device_brand = "Atemio"
-		elif self.device_model.startswith(("os")):
-			self.device_brand = "Edision"
-		elif self.device_model.startswith(("gb")):
-			self.device_brand = "GigaBlue"
-		elif self.device_model.startswith(("sf")):
-			self.device_brand = "octagon"
+		if self.device_model.startswith(("atemionemesis")):
+			self.device_name = "Atemio Nemesis"
+		elif self.device_model.startswith(("hd51")):
+			self.device_name = "Mut@nt HD51"
+		elif self.device_model.startswith(("osmio4kplus")):
+			self.device_name = "Edision OS mio+ 4K"
+		elif self.device_model.startswith(("gbip4k")):
+			self.device_name = "GigaBlue UHD IP 4K"
+		elif self.device_model.startswith(("gbtrio4k")):
+			self.device_name = "GigaBlue UHD TRIO 4K"
+		elif self.device_model.startswith(("sf8008t")):
+			self.device_name = "OCTAGON SF8008 4K UHD TWIN"
+		elif self.device_model.startswith(("sf8008m")):
+			self.device_name = "OCTAGON SF8008 MINI 4K UHD"
 
 			self.device_model = self.device_model or self.device_name
 			self.device_hw = self.device_model
@@ -123,7 +122,7 @@ class HardwareInfo:
 		return hw_info.device_model
 
 	def get_machine_name(self):
-		return hw_info.machine_name
+		return hw_info.device_name
 
 	def has_hdmi(self):
 		return hw_info.device_hdmi

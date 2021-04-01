@@ -61,16 +61,14 @@ class About(Screen):
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		hddsplit = skin.parameters.get("AboutHddSplit", 0)
 
-		procmodel = getBoxProc()
+		model = getBoxType()
 
-		AboutText = _("Hardware: ") + about.getHardwareTypeString() + "\n"
-		if procmodel != about.getHardwareTypeString():
-			AboutText += _("Modelo: ") + procmodel + "\n"
+		AboutText = _("Model: ") + about.getModel() + "\n"
+		if model:
+			AboutText += _("Machine: ") + about.getHardwareTypeString() + "\n"
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
-
-		AboutText += _("Fabricante: ") + about.getHardwareBrand() + "\n"
 
 		cpu = about.getCPUInfoString()
 		AboutText += _("CPU: ") + cpu + "\n"
@@ -81,8 +79,10 @@ class About(Screen):
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
 		AboutText += "\n"
-		if boxbranding.getDisplayType():
-			AboutText += _("Tipo Display: ") + boxbranding.getDisplayType() + "\n"
+		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model != "gbip4k":
+			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
+		else:
+			AboutText += _("No Display") + "\n"
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"

@@ -1,5 +1,9 @@
 SUBDIRS = display
 
+if HAVE_TEXTLCD
+SUBDIRS += displaytext
+endif
+
 if HAVE_BWLCD128
 SUBDIRS += vfd128
 endif
@@ -56,10 +60,6 @@ if HAVE_GRAUTEC8000
 SUBDIRS += grautec8000
 endif
 
-if HAVE_TEXTLCD
 if HAVE_7SEGMENT
 SUBDIRS += 7segment
-else
-SUBDIRS += displaytext
-endif
 endif

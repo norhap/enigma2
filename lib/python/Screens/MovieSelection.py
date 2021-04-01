@@ -39,7 +39,7 @@ try:
 	import cPickle as pickle
 except:
 	import pickle
-import six
+from six import PY2
 
 config.movielist = ConfigSubsection()
 config.movielist.curentlyplayingservice = ConfigText()
@@ -965,7 +965,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.list.moveToChar(charstr[0], self["chosenletter"])
 
 	def keyAsciiCode(self):
-		if six.PY2:
+		if PY2:
 			unichar = unichr(getPrevAsciiCode())
 		else:
 			unichar = chr(getPrevAsciiCode())

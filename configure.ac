@@ -95,11 +95,10 @@ fi
 AM_CONDITIONAL(HAVE_TEXTLCD, test x"$withtextlcd" != xno)
 
 AC_ARG_WITH(7segment,
-	AC_HELP_STRING([--with-7segment], [use 7 segment lcd, yes or no]),
-	[[TEXTSKIN="7segment"]],
-	[[TEXTSKIN="default"]]
+	AC_HELP_STRING([--with-7segment], [use ascii based lcd, yes or no]),
+	[[with7segment=$withval]],
+	[[with7segment=no]]
 )
-AC_SUBST(TEXTSKIN)
 if test x"$with7segment" != xno ; then
 	AC_DEFINE(HAVE_7SEGMENT, 1,[Define when using an ascii based lcd device])
 fi
@@ -403,15 +402,6 @@ if test x"$with_fcc" = xyes ; then
 	AC_DEFINE(HAVE_FCC_ABILITY, 1,[use FCC specific codes for fast channel change])
 fi
 
-AC_ARG_WITH(oever,
-	[  --with-oever=NAME oe name [[7.2,...]]],
-	[OE_VER="$withval"],[OE_VER=""])
-AC_SUBST(OE_VER)
-AC_DEFINE_UNQUOTED(OE_VER,"$OE_VER",[oe name])
-if test `echo "$OE_VER" | cut -b 1-3` == "10."; then
-	AC_DEFINE(HAVE_NEWOE, 1,[enable new OpenEmbedded specific stuff])
-fi
-
 if test "$BOXBRAND" == "rpi"; then
 	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
 	PKG_CHECK_MODULES(LIBNL, libnl-1 >= 1.0-pre8, has_libnl=yes, dummy=no)
@@ -427,6 +417,7 @@ if test "$BOXBRAND" == "rpi"; then
 	RPI_CFLAGS=" $LIBNL_CFLAGS"
 	CXXFLAGS+="$RPI_CFLAGS"
 	AC_DEFINE(HAVE_RASPBERRYPI, 1,[enable rpi specific stuff])
+	AC_DEFINE(VMSG_TYPE2, 1,[define vtuner_message type 2])
 fi
 
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
@@ -598,7 +589,7 @@ if test "$BOXTYPE" == "gbue4k"; then
 	AC_DEFINE(HAVE_COLORLCD220, 1,[define when using a 220x176 color display device])
 fi
 
-if test "$BOXBRAND" == "gfutures"; then
+if test "$BOXBRAND" == "gfutures" -o "$BOXBRAND" == "abcom"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi

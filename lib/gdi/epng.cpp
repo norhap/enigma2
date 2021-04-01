@@ -417,25 +417,21 @@ static int savePNGto(FILE *fp, gPixmap *pixmap)
 	return 0;
 }
 
-int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
+int loadSVG(ePtr<gPixmap> &result, const char *filename, int cached, int width, int height, float scale)
 {
 	result = nullptr;
 
-        if (pixmapFromTable(result, filename) == 0)
-                return 0;
+	if (cached && (result = PixmapCache::Get(filename)))
+		return 0;
 
-	// load svg
 	NSVGimage *image = nullptr;
 	NSVGrasterizer *rast = nullptr;
-	int w = 0;
-	int h = 0;
-	double scale = 1.0;
+	double xscale = 1.0;
+	double yscale = 1.0;
 
-	image = nsvgParseFromFile(filename, "px", 96.0f);
+	image = nsvgParseFromFile(filename, "px", 96.0);
 	if (image == nullptr)
-	{
 		return 0;
-	}
 
 	rast = nsvgCreateRasterizer();
 	if (rast == nullptr)
@@ -444,10 +440,37 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
 		return 0;
 	}
 
-	w = image->width*scale;
-	h = image->height*scale;
+	if (height > 0)
+		yscale = ((double) height) / image->height;
 
-	result = new gPixmap(w, h, 32, pixmapDisposed, accel);
+	if (width > 0)
+	{
+		xscale = ((double) width) / image->width;
+		if (height <= 0)
+		{
+			yscale = xscale;
+			height = (int)(image->height * yscale);
+		}
+	}
+	else if (height > 0)
+	{
+		xscale = yscale;
+		width = (int)(image->width * xscale);
+	}
+	else if (scale > 0)
+	{
+		xscale = (double) scale;
+		yscale = (double) scale;
+		width = (int)(image->width * scale);
+		height = (int)(image->height * scale);
+	}
+	else
+	{
+		width = (int)image->width;
+		height = (int)image->height;
+	}
+
+	result = new gPixmap(width, height, 32, cached ? PixmapCache::PixmapDisposed : NULL, -1);
 	if (result == nullptr)
 	{
 		nsvgDeleteRasterizer(rast);
@@ -455,11 +478,12 @@ int loadSVG(ePtr<gPixmap> &result, const char *filename, int accel)
 		return 0;
 	}
 
-	eDebug("[ePNG] loadSVG %s=%dx%d", filename, w, h);
+	eDebug("[ePNG] loadSVG %s %dx%d from %dx%d", filename, width, height, (int)image->width, (int)image->height);
 	// Rasterizes SVG image, returns RGBA image (non-premultiplied alpha)
-	nsvgRasterize(rast, image, 0, 0, scale, (unsigned char*)result->surface->data, w, h, w*4);
+	nsvgRasterizeFull(rast, image, 0, 0, xscale, yscale, (unsigned char*)result->surface->data, width, height, width * 4, 1);
 
-	pixmapToTable(result, filename);
+	if (cached)
+		PixmapCache::Set(filename, result);
 
 	nsvgDeleteRasterizer(rast);
 	nsvgDelete(image);

@@ -16,9 +16,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.FuzzyDate import FuzzyTime
 from time import time
 from timer import TimerEntry as RealTimerEntry
-import six
-if six.PY3:
-	import functools
+from six import PY2
 
 
 class PowerTimerEditList(Screen):
@@ -139,7 +137,7 @@ class PowerTimerEditList(Screen):
 				self.removeAction("yellow")
 				self["key_yellow"].setText("")
 				self.key_yellow_choice = self.EMPTY
-			elif ((not cur.isRunning())or cur.repeated) and (not cur.disabled) and (self.key_yellow_choice != self.DISABLE):
+			elif ((not cur.isRunning()) or cur.repeated) and (not cur.disabled) and (self.key_yellow_choice != self.DISABLE):
 				self["actions"].actions.update({"yellow": self.toggleDisabledState})
 				self["key_yellow"].setText(_("Disable"))
 				self.key_yellow_choice = self.DISABLE
@@ -205,9 +203,10 @@ class PowerTimerEditList(Screen):
 		list.extend([(timer, False) for timer in self.session.nav.PowerTimer.timer_list])
 		list.extend([(timer, True) for timer in self.session.nav.PowerTimer.processed_timers])
 		if config.usage.timerlist_finished_timer_position.index: #end of list
-			if six.PY2:
+			if PY2:
 				list.sort(cmp=eol_compare)
 			else:
+				import functools
 				list.sort(key=functools.cmp_to_key(eol_compare))
 		else:
 			list.sort(key=lambda x: x[0].begin)

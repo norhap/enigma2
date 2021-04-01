@@ -4809,7 +4809,7 @@ msgid "Plugin Browser"
 msgstr "Navegador de Plugins"
 
 msgid "Plugin browser"
-msgstr "Navegador de plugins"
+msgstr "Navegador de Plugins"
 
 msgid "Plugin manager activity information"
 msgstr "Información de actividad del administrador de plugins"
@@ -17066,3 +17066,139 @@ msgstr "Tipo fuente verdadero (Full-HD)"
 
 msgid "use best / controlled by HDMI"
 msgstr "use mejor controlado por HDMI"
+
+msgid "Type Display: "
+msgstr "Tipo Display: "
+
+msgid "Machine: "
+msgstr "Máquina: "
+
+msgid ""
+"Selecting 'Yes' will delete the currently selected user data. This action can't be undone. You may want to create a backup before continuing.\n"
+"\n"
+"Are you sure you want to continue with the factory reset?"
+msgstr ""
+"Si selecciona 'Sí' se eliminarán los datos de usuario seleccionados actualmente. Esta acción no se puede deshacer. Es posible que desee crear una copia de seguridad antes de continuar.\n"
+"\n"
+"Está seguro de que desea continuar con el restablecimiento de fábrica?"
+
+msgid "User defined hidden"
+msgstr "Definido por el usuario oculto"
+
+msgid "Plugin Browser Setup"
+msgstr "Ajustes Navegador de Plugins"
+
+msgid "Show development packages in opkg"
+msgstr "Mostrar paquetes de desarrollo en opkg"
+
+msgid "When enabled, you will see dev, staticdev, dbg, doc, src and po packages in opkg list."
+msgstr "Cuando esté habilitado, verá los paquetes dev, staticdev, dbg, doc, src y po en la lista de opkg."
+
+msgid "Show alsa-utils in plugin browser"
+msgstr "Mostrar alsa-utils en el navegador de plugins"
+
+msgid "When enabled, you will see alsa-utils packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes alsa-utils en la sección de descarga del navegador de plugins."
+
+msgid "Show bluez5 in plugin browser"
+msgstr "Mostrar bluez5 en el navegador de plugins"
+
+msgid "When enabled, you will see bluez5 packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes bluez5 en la sección de descarga del navegador de plugins."
+
+msgid "Show busybox in plugin browser"
+msgstr "Mostrar busybox en el navegador de plugins"
+
+msgid "When enabled, you will see busybox packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes de busybox en la sección de descarga del navegador de plugins."
+
+msgid "Show e2fsprogs in plugin browser"
+msgstr "Mostrar e2fsprogs en el navegador de plugins"
+
+msgid "When enabled, you will see e2fsprogs packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes e2fsprogs en la sección de descarga del navegador de plugins."
+
+msgid "Show enigma2-locale in plugin browser"
+msgstr "Mostrar enigma2-locale en el navegador de plugins"
+
+msgid "When enabled, you will see enigma2-locale packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes enigma2-locale en la sección de descarga del navegador de plugins."
+
+msgid "Show firmware in plugin browser"
+msgstr "Mostrar firmware en el navegador de plugins"
+
+msgid "When enabled, you will see firmware packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá paquetes de firmware en la sección de descarga del navegador de plugins."
+
+msgid "Show frequency-xml-list in plugin browser"
+msgstr "Mostrar la lista de frecuencia xml en el navegador de plugins"
+
+msgid "When enabled, you will see frequency-xml-list packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes de listas de frecuencia xml en la sección de descarga del navegador de plugins."
+
+msgid "Show glibc-charmap in plugin browser"
+msgstr "Mostrar glibc-charmap en el navegador de plugins"
+
+msgid "When enabled, you will see glibc-charmap packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes glibc-charmap en la sección de descarga del navegador de plugins."
+
+msgid "Show glibc-gconv in plugin browser"
+msgstr "Mostrar glibc-gconv en el navegador de plugins"
+
+msgid "When enabled, you will see glibc-gconv packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes glibc-gconv en la sección de descarga del navegador de plugins."
+
+msgid "Show gstreamer1.0-plugins in plugin browser"
+msgstr "Mostrar complementos de gstreamer1.0 en el navegador de plugins"
+
+msgid "When enabled, you will see gstreamer1.0-plugins packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes de complementos de gstreamer1.0 en la sección de descarga del navegador de plugins."
+
+msgid "Show kernel-module in plugin browser"
+msgstr "Mostrar el módulo del kernel en el navegador de plugins"
+
+msgid "When enabled, you will see kernel-module packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes del módulo del kernel en la sección de descarga del navegador de plugins."
+
+msgid "Show mtd-utils in plugin browser"
+msgstr "Mostrar mtd-utils en el navegador de plugins"
+
+msgid "When enabled, you will see mtd-utils packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes mtd-utils en la sección de descarga del navegador de plugins."
+
+msgid "Show packagegroup-base in plugin browser"
+msgstr "Mostrar packagegroup-base en el navegador de plugins"
+
+msgid "When enabled, you will see packagegroup-base packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá paquetes basados en grupos de paquetes en la sección de descarga del navegador de plugins."
+
+msgid "Show pam-plugin in plugin browser"
+msgstr "Mostrar pam-plugin en el navegador de plugins"
+
+msgid "When enabled, you will see pam-plugin packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes pam-plugin en la sección de descarga del navegador de plugins."
+
+msgid "Show perl-module in plugin browser"
+msgstr "Mostrar módulo perl en el navegador de plugins"
+
+msgid "When enabled, you will see perl-module packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes del módulo perl en la sección de descarga del navegador de plugins."
+
+msgid "Show python in plugin browser"
+msgstr "Mostrar python en el navegador de plugins"
+
+msgid "When enabled, you will see python packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes de python en la sección de descarga del navegador de plugins."
+
+msgid "Show tzdata in plugin browser"
+msgstr "Mostrar tzdata en el navegador de plugins"
+
+msgid "When enabled, you will see tzdata packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes tzdata en la sección de descarga del navegador de plugins."
+
+msgid "Show util-linux in plugin browser"
+msgstr "Mostrar util-linux en el navegador de plugins"
+
+msgid "When enabled, you will see util-linux packages in plugin browser download section."
+msgstr "Cuando esté habilitado, verá los paquetes util-linux en la sección de descarga del navegador de plugins."
+

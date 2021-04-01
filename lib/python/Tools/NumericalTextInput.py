@@ -1,3 +1,5 @@
+from six import PY2
+
 from enigma import eTimer
 
 from Components.Language import language
@@ -273,4 +275,4 @@ class NumericalTextInput:
 		return self.mapping[num][self.pos]
 
 	def setUseableChars(self, useable):
-		self.useableChars = unicode(useable)
+		self.useableChars = unicode(useable) if PY2 else str(useable)

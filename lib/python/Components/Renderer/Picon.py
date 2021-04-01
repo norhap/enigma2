@@ -8,6 +8,7 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_CURRENT_SKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
+from six import PY2
 
 
 class PiconLocator:
@@ -27,7 +28,7 @@ class PiconLocator:
 				path = os.path.join(mountpoint, piconDirectory) + '/'
 				if os.path.isdir(path) and path not in self.searchPaths:
 					for fn in os.listdir(path):
-						if fn.endswith('.png'):
+						if fn.endswith('.png') or fn.endswith('.svg'):
 							print("[Picon] adding path:", path)
 							self.searchPaths.append(path)
 							break
@@ -51,15 +52,17 @@ class PiconLocator:
 
 	def findPicon(self, serviceName):
 		if self.activePiconPath is not None:
-			pngname = self.activePiconPath + serviceName + ".png"
-			if pathExists(pngname):
-				return pngname
+			for ext in ('.png', '.svg'):
+				pngname = self.activePiconPath + serviceName + ext
+				if pathExists(pngname):
+					return pngname
 		else:
 			for path in self.searchPaths:
-				pngname = path + serviceName + ".png"
-				if pathExists(pngname):
-					self.activePiconPath = path
-					return pngname
+				for ext in ('.png', '.svg'):
+					pngname = path + serviceName + ext
+					if pathExists(pngname):
+						self.activePiconPath = path
+						return pngname
 		return ""
 
 	def addSearchPath(self, value):
@@ -89,7 +92,10 @@ class PiconLocator:
 			pngname = self.findPicon('_'.join(fields))
 		if not pngname: # picon by channel name
 			name = ServiceReference(serviceName).getServiceName()
-			name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+			if PY2:
+				name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+			else:
+				name = unicodedata.normalize('NFKD', str(name)).encode('ASCII', 'ignore').decode('ASCII', 'ignore')
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			if len(name) > 0:
 				pngname = self.findPicon(name)

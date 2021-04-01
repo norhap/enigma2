@@ -129,21 +129,13 @@
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="132,64">
 		<widget source="global.CurrentTime" render="Label" position="0,0" size="120,64" font="Regular;48" halign="center" valign="center">
-			<convert type="ClockToText">Format:%H:%M</convert>
+			<convert type="ClockToText">Format:%d.%m. %H:%M</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="0,4" zPosition="1" size="120,64" text=" ">
 			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide">Blink,3000</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" position="0,0" size="120,25" text="  REC  ">
-			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,RecBlink,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide">Blink,3000</convert>
-		</widget>
-		<widget source="session.RecordState" render="FixedLabel" position="0,0" size="120,25" text="  REC  ">
-			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,Rec,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
-	</screen>
+    </screen>
 
 <!-- RDS info -->
 	<screen name="RdsInfoDisplaySummary" position="0,0" size="132,64">
@@ -181,7 +173,6 @@
 			<convert type="ServicePosition">VFDPosition</convert>
 		</widget>
 	</screen>
-
 <!-- ATV -->
 <!-- Quickmenü -->
 	<screen name="QuickMenu_summary" position="0,0" size="132,64">
@@ -244,5 +235,11 @@
 <!-- Shoutcast -->
 	<screen name="SHOUTcastLCDScreen" size="132,64">
 		<widget name="text2" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"  />
+	</screen>
+
+<!-- IMdb  -->
+	<screen name="IMDbLCDScreen" position="0,0" size="1,1">
+		<panel name="MyClockPanel" />
+		<panel name="MyRecPanel" />
 	</screen>
 </skin>

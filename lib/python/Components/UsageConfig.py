@@ -421,7 +421,7 @@ def InitUsageConfig():
 	config.usage.sleep_timer = ConfigSelection(default="0", choices=choicelist)
 
 	choicelist = [("0", _("Disabled"))]
-	for i in [300, 600] + range(900, 14401, 900):
+	for i in [300, 600] + list(range(900, 14401, 900)):
 		m = abs(i / 60)
 		choicelist.append((str(i), _("After %s") % (ngettext("%d minute", "%d minutes", m) % m)))
 	config.usage.standby_to_shutdown_timer = ConfigSelection(default="0", choices=choicelist)
@@ -1253,8 +1253,8 @@ def InitUsageConfig():
 	config.seek.speeds_backward = ConfigSet(default=[2, 4, 8, 16, 32, 64, 128], choices=[1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128])
 	config.seek.speeds_slowmotion = ConfigSet(default=[2, 4, 8], choices=[2, 4, 6, 8, 12, 16, 25])
 
-	config.seek.enter_forward = ConfigSelection(default="2", choices=["2", "4", "6", "8", "12", "16", "24", "32", "48", "64", "96", "128"])
-	config.seek.enter_backward = ConfigSelection(default="1", choices=["1", "2", "4", "6", "8", "12", "16", "24", "32", "48", "64", "96", "128"])
+	config.seek.enter_forward = ConfigSelection(default=2, choices=[2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128])
+	config.seek.enter_backward = ConfigSelection(default=1, choices=[1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128])
 
 	config.seek.on_pause = ConfigSelection(default="play", choices=[
 		("play", _("Play")),
@@ -1728,7 +1728,7 @@ def InitUsageConfig():
 			eEPGCache.getInstance().timeUpdated()
 			if not islink("/etc/network/if-up.d/ntpdate-sync"):
 				Console().ePopen("echo '30 * * * * /usr/bin/ntpdate-sync silent' >>/etc/cron/crontabs/root;ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
-	config.ntp.timesync = ConfigSelection(default="ntp", choices=[
+	config.ntp.timesync = ConfigSelection(default="auto", choices=[
 		("auto", _("Auto")),
 		("dvb", _("Transponder time")),
 		("ntp", _("Internet time (NTP)"))
@@ -1748,7 +1748,7 @@ def updateChoices(sel, choices):
 				if x < val:
 					defval = str(x)
 					break
-		sel.setChoices(map(str, choices), defval)
+		sel.setChoices(list(map(str, choices)), defval)
 
 
 def preferredPath(path):

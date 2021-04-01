@@ -1,7 +1,6 @@
 from __future__ import print_function
 import enigma
 import os
-import six
 
 
 class ConsoleItem:
@@ -44,10 +43,7 @@ class ConsoleItem:
 		self.container = None
 		callback = self.callback
 		if callback is not None:
-			if six.PY2:
-				data = ''.join(self.appResults)
-			else:
-				data = b''.join(self.appResults)
+			data = b''.join(self.appResults)
 			callback(data, retval, self.extra_args)
 
 

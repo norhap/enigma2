@@ -11,6 +11,7 @@ from Components.Sources.Source import ObsoleteSource
 from Tools.Directories import SCOPE_CONFIG, SCOPE_CURRENT_LCDSKIN, SCOPE_CURRENT_SKIN, SCOPE_FONTS, SCOPE_SKIN, resolveFilename, fileExists
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
+from six import PY2
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "OctEtFHD/skin.xml"
 EMERGENCY_SKIN = "skin_default/skin.xml"
@@ -390,13 +391,13 @@ def parseValuePair(value, scale, object=None, desktop=None, size=None):
 	return (int(xValue * scale[0][0] / scale[0][1]), int(yValue * scale[1][0] / scale[1][1]))
 
 
-def loadPixmap(path, desktop):
+def loadPixmap(path, desktop, width=0, height=0):
 	option = path.find("#")
 	if option != -1:
 		path = path[:option]
 	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png"):
 		path = rc_model.getRcImg()
-	pixmap = LoadPixmap(path, desktop)
+	pixmap = LoadPixmap(path, desktop, None, width, height)
 	if pixmap is None:
 		raise SkinError("Pixmap file '%s' not found" % path)
 	return pixmap
@@ -418,14 +419,17 @@ def collectAttributes(skinAttributes, node, context, skinPath=None, ignore=(), f
 			# listbox; when the scrollbar setting is applied after the size, a scrollbar
 			# will not be shown until the selection moves for the first time.
 			if attrib == "size":
-				size = value.encode("utf-8")
+				size = value.encode("utf-8") if PY2 else value
 			elif attrib == "position":
-				pos = value.encode("utf-8")
+				pos = value.encode("utf-8") if PY2 else value
 			elif attrib == "font":
-				font = value.encode("utf-8")
+				font = value.encode("utf-8") if PY2 else value
 				skinAttributes.append((attrib, font))
 			else:
-				skinAttributes.append((attrib, value.encode("utf-8")))
+				if PY2:
+					skinAttributes.append((attrib, value.encode("utf-8")))
+				else:
+					skinAttributes.append((attrib, value))
 	if pos is not None:
 		pos, size = context.parse(pos, size, font)
 		skinAttributes.append(("position", pos))
@@ -456,6 +460,7 @@ class AttributeParser:
 		self.scaleTuple = scale
 
 	def applyAll(self, attrs):
+		attrs.sort(key=lambda a: {"pixmap": 1}.get(a[0], 0))  # For svg pixmap scale required the size, so sort pixmap last
 		for attrib, value in attrs:
 			self.applyOne(attrib, value)
 
@@ -627,7 +632,7 @@ class AttributeParser:
 		self.overScan(value)
 
 	def pixmap(self, value):
-		self.guiObject.setPixmap(loadPixmap(value, self.desktop))
+		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
 
 	def pointer(self, value):
 		(name, pos) = [x.strip() for x in value.split(":", 1)]
@@ -1274,7 +1279,11 @@ def readSkin(screen, skin, names, desktop):
 		screen.additionalWidgets.append(w)
 
 	def processScreen(widget, context):
-		for w in widget.getchildren():
+		if PY2:
+			widgetmode = widget.getchildren()
+		else:
+			widgetmode = widget
+		for w in widgetmode:
 			conditional = w.attrib.get("conditional")
 			if conditional and not [i for i in conditional.split(",") if i in screen.keys()]:
 				continue
