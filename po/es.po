@@ -17085,7 +17085,7 @@ msgstr ""
 msgid "User defined hidden"
 msgstr "Definido por el usuario oculto"
 
-msgid "PluginBrowser Setup"
+msgid "Plugin Browser Setup"
 msgstr "Ajustes Navegador de Plugins"
 
 msgid "Show development packages in opkg"
