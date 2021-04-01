@@ -98,7 +98,7 @@ class VideoHardware:
 			return _("unavailable")
 
 	SystemInfo["VideoModes"] = chipsets() in (  # 2160p and 1080p capable hardware.
-		"5272s", "7251", "7251s", "7252", "7252s", "7278", "7366", "7376", "7444s", "72604", "3798mv200", "3798cv200", "hi3798mv200", "hi3798cv200"
+		"5272s", "7251", "7251s", "7252", "7252s", "7278", "7366", "7376", "7444s", "72604", "3798mv200", "3798mv310", "3798cv200", "hi3798mv200", "hi3798cv200"
 	) and (
 		["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
 		{"720p", "1080p", "2160p", "1080i"}  # Widescreen modes.
