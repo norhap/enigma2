@@ -6,12 +6,10 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.WizardLanguage import WizardLanguage
 from Screens.Rc import Rc
-from Tools.HardwareInfo import HardwareInfo
 try:
 	from Plugins.SystemPlugins.OSDPositionSetup.overscanwizard import OverscanWizard
 except:
 	OverscanWizard = None
-
 from boxbranding import getImageVersion
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
@@ -21,7 +19,6 @@ from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from Screens.LanguageSelection import LanguageWizard
 from enigma import eConsoleAppContainer, eTimer, eActionMap
-
 import os
 
 config.misc.firstrun = ConfigBoolean(default=True)
@@ -44,13 +41,6 @@ class StartWizard(WizardLanguage, Rc):
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
 	def markDone(self):
-		# setup remote control, all stb have same settings except dm8000 which uses a different settings
-		if HardwareInfo().get_device_name() == 'dm8000':
-			config.misc.rcused.value = 0
-		else:
-			config.misc.rcused.value = 1
-		config.misc.rcused.save()
-
 		config.misc.firstrun.value = 0
 		config.misc.firstrun.save()
 		configfile.save()
