@@ -110,7 +110,9 @@ def getGStreamerVersionString():
 		return "%s" % gst[1].split("+")[0].replace("\n", "")
 	except:
 		try:
-			gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer.[0-9].control")[0], "r") if x.startswith("Version:")][0]
+			from glob import glob
+			print("[About] Read /var/lib/opkg/info/gstreamer.control")
+			gst = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/gstreamer?.[0-9].control")[0], "r") if x.startswith("Version:")][0]
 			return "%s" % gst[1].split("+")[0].replace("\n", "")
 		except:
 			return _("Not Installed")
