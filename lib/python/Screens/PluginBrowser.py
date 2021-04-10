@@ -453,10 +453,10 @@ class PluginDownloadBrowser(Screen):
 		self.doInstall(self.installFinished, self.install_settings_name)
 
 	def startOpkgListInstalled(self, pkgname=PLUGIN_PREFIX + '*'):
-		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list_installed")
+		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list_installed '%s'" % pkgname)
 
 	def startOpkgListAvailable(self):
-		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list")
+		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list '" + self.PLUGIN_PREFIX + "*'")
 
 	def startRun(self):
 		listsize = self["list"].instance.size()
