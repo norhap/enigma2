@@ -1946,6 +1946,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			return
 		name = "".join((name.strip(), self.extension))
 		item = self.getCurrentSelection()
+		newbasename = name.strip()
 		if item and item[0]:
 			try:
 				path = item[0].getPath().rstrip('/')
@@ -1988,7 +1989,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						if not os.path.isfile(newfilename):
 							renamelist.append((oldfilename, newfilename))
 						else:
-							msg = _("The path %s already exists.") % newname
+							msg = _("The path %s already exists.") % name
 							dont_rename = True
 							break
 					if not dont_rename:
