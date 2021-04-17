@@ -16581,6 +16581,9 @@ msgstr "Con esta opción puede cambiar el color del LED o desactivar el LED."
 msgid "violet"
 msgstr "violeta"
 
+msgid "Violet"
+msgstr "Violeta"
+
 msgid "Operating LED status in deep standby mode"
 msgstr "Estado del LED en reposo profundo"
 
