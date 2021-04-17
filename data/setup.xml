@@ -112,14 +112,14 @@
 		<item level="0" requires="LedPowerColor" text="LED color during recording" description="Configure front LED color during recording (this needs an enigma2 restart).">config.usage.frontledrec_color</item>
 		<item level="0" requires="LedStandbyColor" text="LED color during standby" description="Configure front LED color during standby (this needs an enigma2 restart).">config.usage.frontledstdby_color</item>
 		<item level="0" requires="LedStandbyColor" text="LED color during recording in standby" description="Configure front LED color during recording in standby (this needs an enigma2 restart).">config.usage.frontledrecstdby_color</item>
-		<item level="0" requires="StandbyLED" text="Standby LED" description="Turn on the power LED during standby.">config.lcd.standbyLED</item>
-		<item level="0" requires="SuspendLED" text="Deep Standby LED" description="Turn on the power LED during deep standby.">config.lcd.suspendLED</item>
+		<item level="0" requires="StandbyLED" text="Standby LED" description="Turn on the power LED during standby.">config.usage.lcd_standbypowerled</item>
+		<item level="0" requires="SuspendLED" text="Deep Standby LED" description="Turn on the power LED during deep standby.">config.usage.lcd_deepstandbypowerled</item>
 		<item level="0" requires="LEDButtons" text="LED Normal" description="LED brightness during normal operations.">config.lcd.ledbrightness</item>
 		<item level="0" requires="LEDButtons" text="LED Standby" description="LED brightness during standby.">config.lcd.ledbrightnessstandby</item>
 		<item level="0" requires="LEDButtons" text="LED Deep Standby" description="LED brightness during deep standby.">config.lcd.ledbrightnessdeepstandby</item>
-		<item level="0" requires="PowerLED" text="Turn on the power LED." description="Power LED can be turned on or off here.">config.lcd.powerled</item>
-		<item level="0" requires="PowerLED2" text="Turn on the control LED." description="Control LED can be turned on or off here.">config.lcd.powerled2</item>
-		<item level="0" requires="SuspendLED" text="Power LED state in Deep-Standby" description="Power LED state during deep-standby.">config.lcd.suspendLED</item>
+		<item level="0" requires="PowerLED" text="Turn on the power LED." description="Power LED can be turned on or off here.">config.usage.lcd_powerled</item>
+		<item level="0" requires="PowerLED2" text="Turn on the control LED." description="Control LED can be turned on or off here.">config.usage.lcd_powerled2</item>
+		<item level="0" requires="SuspendLED" text="Power LED state in Deep-Standby" description="Power LED state during deep-standby.">config.usage.lcd_deepstandbypowerled</item>
 		<item level="0" requires="LedPowerColor" text="Operating LED status while running." description="With this option you can switch the LED color or deactivate the LED.">config.lcd.ledpowercolor</item>
 		<item level="0" requires="LedStandbyColor" text="Operating LED status in standby mode" description="With this option you can switch the LED color or deactivate the LED.">config.lcd.ledstandbycolor</item>
 		<item level="0" requires="LedSuspendColor" text="Operating LED status in deep standby mode" description="With this option you can switch the LED color or deactivate the LED.">config.lcd.ledsuspendcolor</item>
