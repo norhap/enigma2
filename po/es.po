@@ -16474,7 +16474,7 @@ msgid "Select a cardserver from the available list."
 msgstr "Seleccione un cardserver de la lista disponible."
 
 msgid "Reset the selected devices when the GREEN button is pressed."
-msgstr "Puede elegir también su softcam y pulsar VERDE para reiniciarla."
+msgstr "Reiniciará lo seleccionado, si cambió la selección y quiere mantenerla, pulse VERDE"
 
 msgid "HDMI Recording Setup"
 msgstr "Ajustes Grabación HDMI"
@@ -17205,3 +17205,14 @@ msgstr "Mostrar util-linux en el navegador de plugins"
 msgid "When enabled, you will see util-linux packages in plugin browser download section."
 msgstr "Cuando esté habilitado, verá los paquetes util-linux en la sección de descarga del navegador de plugins."
 
+msgid "Number of debug logs to keep *"
+msgstr "Número máximo de logs para mantenerlos *"
+
+msgid "This sets the maximum number of log files that will be retained.  Files in excess of this number will be deleted."
+msgstr "Esto establece el número máximo de archivos de registro que se conservarán. Se eliminarán los archivos que superen este número."
+
+msgid "This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted."
+msgstr "Esto establece el prefijo para cada línea en el registro de depuración. El 'Tiempo de arranque' es el número de segundos desde que arrancó su %s %s por última vez"
+
+msgid "Enable auto fastscan"
+msgstr "Habilitar escaneo rápido automático"
