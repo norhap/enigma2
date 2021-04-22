@@ -1,10 +1,11 @@
 from xml.etree.cElementTree import ParseError, parse
 
-from Components.config import config
+from Components.config import ConfigInteger, config
 from Components.Pixmap import MovingPixmap, Pixmap
 from Components.SystemInfo import SystemInfo
 from Tools.LoadPixmap import LoadPixmap
 
+config.misc.rcused = ConfigInteger(default=1)
 
 class Rc:
 	def __init__(self):
