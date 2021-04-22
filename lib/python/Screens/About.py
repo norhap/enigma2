@@ -71,6 +71,7 @@ class About(Screen):
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
 
 		cpu = about.getCPUInfoString()
+		AboutText += _("ChipSet: ") + about.getChipSetString() + "\n"
 		AboutText += _("CPU: ") + cpu + "\n"
 		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
 		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"

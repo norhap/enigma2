@@ -14820,9 +14820,6 @@ msgstr "Posición entrada desplazamiento"
 msgid "When the input cursor reaches this point (percentage of the width, from either side) scroll the text to the cursor."
 msgstr "Cuando el cursor de entrada alcanza este punto (porcentaje del ancho, desde cualquier lado), desplace el texto hacia el cursor."
 
-msgid "Enable twisted log"
-msgstr "Habilitar log twisted"
-
 msgid "Allows you to enable the twisted log. It contains very detailed information of everything the twisted does."
 msgstr "Le permite habilitar log twisted en Carpeta tmp. Contiene información muy detallada de todo lo que hace el sistema."
 
@@ -16365,8 +16362,8 @@ msgstr "Elija la carpeta de localización del log."
 msgid "Debug to file"
 msgstr "Debug a archivo"
 
-msgid "Logs folder location"
-msgstr "Carpeta localización Logs"
+msgid "Logs folder location *"
+msgstr "Ubicación de la carpeta de Logs *"
 
 msgid "Emergency"
 msgstr "Emergencia"
@@ -16474,7 +16471,7 @@ msgid "Select a cardserver from the available list."
 msgstr "Seleccione un cardserver de la lista disponible."
 
 msgid "Reset the selected devices when the GREEN button is pressed."
-msgstr "Reiniciará lo seleccionado, si cambió la selección y quiere mantenerla, pulse VERDE"
+msgstr "Reiniciará lo seleccionado, si cambió la selección y quiere mantenerla, pulse VERDE."
 
 msgid "HDMI Recording Setup"
 msgstr "Ajustes Grabación HDMI"
@@ -17212,7 +17209,16 @@ msgid "This sets the maximum number of log files that will be retained.  Files i
 msgstr "Esto establece el número máximo de archivos de registro que se conservarán. Se eliminarán los archivos que superen este número."
 
 msgid "This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted."
-msgstr "Esto establece el prefijo para cada línea en el registro de depuración. El 'Tiempo de arranque' es el número de segundos desde que arrancó su %s %s por última vez"
+msgstr "Esto establece el prefijo para cada línea en el registro de depuración. El 'Tiempo de arranque' es el número de segundos desde que arrancó su %s %s por última vez."
 
 msgid "Enable auto fastscan"
 msgstr "Habilitar escaneo rápido automático"
+
+msgid "Enable debug logs *"
+msgstr "Habilitar logs de depuración *"
+
+msgid "Use this option to select if debug logs of internal enigma2 activities are created.  These logs can be helpful for developers in finding and fixing problems."
+msgstr "Utilice esta opción para seleccionar si se crean registros de depuración de actividades internas de enigma2. Estos registros pueden ser útiles para que los desarrolladores encuentren y solucionen problemas."
+
+msgid "* = Restart Required"
+msgstr "* = Reiniciar Requerido"
