@@ -14,7 +14,7 @@ fi
 BRANDCHECK=`cat /etc/openvision/brand`
 MODELCHECK=`cat /etc/openvision/model`
 PLATFORMCHECK=`cat /etc/openvision/platform`
-SOCFAMILY=`cat /proc/stb/info/chipset | cut -c 1-8`
+SOCFAMILY=`cat /proc/stb/info/chipset | cut -c 1-3`
 
 if [ "${BRANDCHECK}" == "mecool" ] || [ "${PLATFORMCHECK}" == "dmamlogic" ]; then
 	export media_arm_audio_decoder="ape,flac,dts,ac3,eac3,wma,wmapro,mp3,aac,vorbis,raac,cook,amr,pcm,adpcm"
@@ -85,7 +85,7 @@ while : ; do
 			for DIR in "${SEARCHDIRS}"
 			do
 				if [ -d "${DIR}" ] && [ -f "${DIR}/bootlogo.mvi" ]; then
-					if [ "${SOCFAMILY}" != "Broadcom" ]; then
+					if [ "${SOCFAMILY}" != "bcm" ]; then
 						killall -9 showiframe; sleep 1
 					fi
 					"@bindir@/showiframe" "${DIR}/bootlogo.mvi"
