@@ -97,10 +97,10 @@ class SoftcamSetup(Setup):
 		elif "cccam" in config.misc.softcams.value.lower():
 			from Screens.CCcamInfo import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
-		elif "cccam" in config.misc.softcams.value.lower() and isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/CCcamInfo/plugin.", getPyExt())) or isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/CCcamInfo/plugin.py.", getPyExt())):
+		elif "cccam" in config.misc.softcams.value.lower() and isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/CCcamInfo/plugin." + getPyExt())) or isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/CCcamInfo/plugin." + getPyExt())):
 			from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
-		elif isfile(ppanelFilename) and isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/PPanel/plugin.", getPyExt())) or isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/PPanel/plugin.", getPyExt())):
+		elif isfile(ppanelFilename) and isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/PPanel/plugin." + getPyExt())) or isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/PPanel/plugin." + getPyExt())):
 			from Plugins.Extensions.PPanel.ppanel import PPanel
 			self.session.open(PPanel, name="%s PPanel" % config.misc.softcams.value, node=None, filename=ppanelFilename, deletenode=None)
 
