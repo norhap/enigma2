@@ -109,11 +109,10 @@ class UpdatePlugin(Screen, ProtectedScreen):
 
 			try:
 				# get image version and machine name
-				machine = getBoxType()
 				version = open("/etc/issue").readlines()[-2].split()[1]
 
 				# do we have an entry for this version
-				if version in status and machine in status[version]['machines']:
+				if version in status and model in status[version]['machines']:
 					if 'abort' in status[version]:
 						abort = status[version]['abort']
 					if 'from' in status[version]:
