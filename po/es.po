@@ -2211,7 +2211,7 @@ msgid "Do you want to preview this DVD before burning?"
 msgstr "¿Quieres previsualizar el DVD antes de quemarlo?"
 
 msgid "Do you want to quit the overscan wizard?"
-msgstr "¿Quieres salir del asistentes de overscan?"
+msgstr "¿Quieres salir del asistente de overscan?"
 
 msgid "Do you want to reboot your receiver?"
 msgstr "¿Quieres reiniciar su receptor?"
@@ -17203,7 +17203,7 @@ msgid "OPKG clean mode"
 msgstr "Modo de limpieza OPKG"
 
 msgid "When enabled, before opkg update there will be opkg clean to make sure nothing ruine the update but only enable this when you can not update online."
-msgstr "Cuando está habilitado, antes de la actualización de opkg, habrá opkg clean para asegurar la actualización, habilítelo cuando no pueda actualizar en línea."
+msgstr "Cuando está habilitado, antes de la actualización de opkg, habrá limpieza opkg para asegurar la actualización, habilítelo cuando no pueda actualizar en línea."
 
 msgid "Show util-linux in plugin browser"
 msgstr "Mostrar util-linux en el navegador de plugins"
