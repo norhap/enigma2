@@ -2064,7 +2064,7 @@ msgid "DiSEqC-tester settings"
 msgstr "Ajustes del DiSEqC-tester"
 
 msgid "Did you see all eight arrow heads?"
-msgstr "Viste las 8 puntas de fecha?"
+msgstr "Viste las 8 puntas de las flechas?"
 
 msgid "Digital contour removal"
 msgstr "Remoción de contorno digital"
@@ -3327,7 +3327,7 @@ msgid ""
 "your scart connection. Press OK to return."
 msgstr ""
 "Si ves esto, algo está mal con\n"
-"su conexión scart. Presione OK para regresar."
+"su conexión scart. Pulse OK para regresar."
 
 msgid ""
 "If your TV has a brightness or contrast enhancement, disable it. If there is something called \"dynamic\", set it to standard. Adjust the backlight level to a value suiting your taste. Turn down contrast on your TV as much as possible.\n"
@@ -4766,8 +4766,8 @@ msgid ""
 "Press OK to go back to the TV mode or EXIT to cancel the moving."
 msgstr ""
 "Utilice las teclas de dirección para mover la ventana PiP.\n"
-"Presione Bouquet +/- para cambiar el tamaño de la ventana.\n"
-"Presione OK para volver al modo TV o EXIT para cancelar el movimiento."
+"Pulse Bouquet +/- para cambiar el tamaño de la ventana.\n"
+"Pulse OK para volver al modo TV o EXIT para cancelar el movimiento."
 
 msgid "Please use the UP and DOWN keys to select your language. Afterwards press the OK button."
 msgstr "Utilice las teclas ARRIBA y ABAJO para seleccionar su idioma. Luego presione el botón OK."
@@ -4887,22 +4887,22 @@ msgid "Preparing... Please wait"
 msgstr "Preparando… Espere"
 
 msgid "Press '0' to toggle PiP mode"
-msgstr "Presione ‘0’ para alternar el modo PiP"
+msgstr "Pulse ‘0’ para alternar el modo PiP"
 
 msgid "Press INFO on your remote control for additional information."
-msgstr "Presione INFO en su mando para obtener información adicional."
+msgstr "Pulse INFO en su mando para obtener información adicional."
 
 msgid "Press MENU on your remote control for additional options."
-msgstr "Presione MENU en su mando para opciones adicionales."
+msgstr "Pulse MENU en su mando para opciones adicionales."
 
 msgid "Press OK on your remote control to continue."
-msgstr "Presione OK en su mando para continuar."
+msgstr "Pulse OK en su mando para continuar."
 
 msgid "Press OK to activate the selected %s skin."
-msgstr "Presione OK para activar el skin %s seleccionado."
+msgstr "Pulse OK para activar el skin %s seleccionado."
 
 msgid "Press OK to keep the currently selected %s skin."
-msgstr "Presione OK para mantener el skin %s seleccionado actualmente."
+msgstr "Pulse OK para mantener el skin %s seleccionado actualmente."
 
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
@@ -4911,41 +4911,41 @@ msgid "To save and apply the selected '%s' skin the GUI needs to restart. Would 
 msgstr "Para guardar y aplicar el skin '%s' seleccionada, la GUI debe reiniciarse. ¿Desea guardar la selección y reiniciar la GUI ahora?"
 
 msgid "Press OK to activate the settings."
-msgstr "Presione OK para activar la configuración."
+msgstr "Pulse OK para activar la configuración."
 
 msgid "Press OK to edit the settings."
-msgstr "Presione OK para editar la configuración."
+msgstr "Pulse OK para editar la configuración."
 
 #, python-format
 msgid "Press OK to get further details for %s"
-msgstr "Presione OK para obtener más detalles sobre %s"
+msgstr "Pulse OK para obtener más detalles sobre %s"
 
 msgid "Press OK to scan"
-msgstr "Presione OK para escanear"
+msgstr "Pulse OK para escanear"
 
 msgid "Press OK to select a group of satellites to configure in one block."
-msgstr "Presione OK para seleccionar un grupo de satélites para configurar en bloque."
+msgstr "Pulse OK para seleccionar un grupo de satélites para configurar en bloque."
 
 msgid "Press OK to select a provider."
-msgstr "Presione OK para seleccionar un proveedor."
+msgstr "Pulse OK para seleccionar un proveedor."
 
 msgid "Press OK to select satellites"
-msgstr "Presione OK para seleccionar satélites"
+msgstr "Pulse OK para seleccionar satélites"
 
 msgid "Press OK to select/deselect a CAId."
-msgstr "Presione OK para seleccionar / deseleccionar un CAId."
+msgstr "Pulse OK para seleccionar / deseleccionar un CAId."
 
 msgid "Press OK to toggle the selection"
-msgstr "Presione OK para alternar la selección"
+msgstr "Pulse OK para alternar la selección"
 
 msgid "Press OK to toggle the selection."
-msgstr "Presione OK para alternar la selección."
+msgstr "Pulse OK para alternar la selección."
 
 msgid "Press OK, save and exit..."
-msgstr "Presione OK, guadar y salir…"
+msgstr "Pulse OK, guadar y salir…"
 
 msgid "Press yellow to set this interface as default interface."
-msgstr "Presione amarillo para establecer esta interfaz como predeterminada."
+msgstr "Pulse amarillo para establecer esta interfaz como predeterminada."
 
 msgctxt "button label, 'previous screen'"
 msgid "Prev"
@@ -7963,7 +7963,7 @@ msgid ""
 msgstr ""
 "Bienvenido al editor de listas de reproducción.\n"
 "\n"
-"Busque el inicio de las cosas que desea cortar. Presione OK, seleccione ‘iniciar corte’.\n"
+"Busque el inicio de las cosas que desea cortar. Pulse OK, seleccione ‘iniciar corte’.\n"
 "\n"
 "Luego busque hasta el final, presione OK, seleccione ‘fin de corte’. Eso es."
 
@@ -10877,7 +10877,7 @@ msgid ""
 "Press OK to start using your receiver."
 msgstr ""
 "Gracias por usar el asistente. Su receptor ahora está listo para usar.\n"
-"Presione OK para comenzar a usar su receptor."
+"Pulse OK para comenzar a usar su receptor."
 
 msgid "Use the up/down keys on your remote control to select an option. After that, press OK."
 msgstr "Usar las teclas arriba / abajo en su mando a distancia para seleccionar una opción. Después de eso, presione OK."
@@ -10893,7 +10893,7 @@ msgid ""
 msgstr ""
 "Bienvenido.\n"
 "Este asistente de inicio lo guiará a través de la configuración básica de su receptor.\n"
-"Presione el botón OK en su mando a distancia para avanzar al siguiente paso."
+"Pulse el botón OK en su mando a distancia para avanzar al siguiente paso."
 
 msgid "What type of service scan do you want?"
 msgstr "¿Qué tipo de búsqueda de canal quieres?"
@@ -11048,7 +11048,7 @@ msgid "Yes, restore the settings now"
 msgstr "Sí, recupera ajustes"
 
 msgid "You have chosen to backup your settings. Please press OK to start the backup now."
-msgstr "Has elegido hacer una copia de seguridad de su configuración. Presione OK para comenzar la copia de seguridad ahora."
+msgstr "Has elegido hacer una copia de seguridad de su configuración. Pulse OK para comenzar la copia de seguridad ahora."
 
 msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
 msgstr "Haa elegido restaurar su configuración. Enigma2 se reiniciará después de la restauración. Pulse OK para comenzar la restauración ahora."
@@ -11559,7 +11559,7 @@ msgid "Please don't use PiP in the meantime!"
 msgstr "Por favor, no use PiP mientras tanto!"
 
 msgid "Press the OK button to open the save / load EPG (+ configuration) menu."
-msgstr "Presione el botón OK para abrir el menú guardar / cargar EPG (+ configuración) menú."
+msgstr "Pulse el botón OK para abrir el menú guardar / cargar EPG (+ configuración) menú."
 
 msgid "Refresh EPG automatically"
 msgstr "Actualizar EPG automáticamente"
@@ -12922,7 +12922,7 @@ msgid ""
 msgstr ""
 "Es posible restringir un Temporizador Automático a ciertos Canales o Bouquets o denegar algunos específicos.\n"
 "Un Evento solo coincidirá con este Temporizador Automático si se trata de un canal específico y no denegado (dentro de un Bouquet).\n"
-"Presione AZUL para agregar una nueva restricción y AMARILLO para eliminar la seleccionada."
+"Pulse AZUL para agregar una nueva restricción y AMARILLO para eliminar la seleccionada."
 
 msgid "No, remove them."
 msgstr "No, eliminarlos."
@@ -12939,7 +12939,7 @@ msgid ""
 "Please press OK to close this Wizard."
 msgstr ""
 "El temporizador no se agregará a la lista.\n"
-"Presione OK para cerrar este asistente."
+"Pulse OK para cerrar este asistente."
 
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
 msgstr "El intervalo de tiempo de un Temporizador Automático es el primer atributo 'avanzado'. Si se especifica un intervalo de tiempo, un evento solo coincidirá con este Temporizador Automático si se encuentra dentro de este intervalo de tiempo."
@@ -13117,7 +13117,7 @@ msgid "Manage your network shares..."
 msgstr "Administre sus recursos compartidos de red..."
 
 msgid "Press OK to select."
-msgstr "Presione OK para seleccionar."
+msgstr "Pulse OK para seleccionar."
 
 msgid "Add a new NFS or CIFS mount point to your Receiver."
 msgstr "Agregue un nuevo punto de montaje NFS o CIFS a su receptor."
@@ -13141,10 +13141,10 @@ msgid "Add new network mount point"
 msgstr "Agregar nuevo punto de montaje en red"
 
 msgid "Press OK to expand this host"
-msgstr "Presione OK para expandir este hostname"
+msgstr "Pulse OK para expandir este hostname"
 
 msgid "Press OK to collapse this host"
-msgstr "Presione OK para contraer este hostname"
+msgstr "Pulse OK para contraer este hostname"
 
 msgid "Search for network shares..."
 msgstr "Buscar recursos compartidos en red ..."
@@ -13600,7 +13600,7 @@ msgid "Username"
 msgstr "Nombre de usuario"
 
 msgid "Press OK to save settings."
-msgstr "Presione OK para guardar la configuración."
+msgstr "Pulse OK para guardar la configuración."
 
 msgid "Enter username:"
 msgstr "Introduzca su nombre de usuario:"
@@ -13609,7 +13609,7 @@ msgid "Enter password:"
 msgstr "Introduzca su contraseña:"
 
 msgid "Press OK to mount this share!"
-msgstr "Presione OK para montar este recurso compartido!"
+msgstr "Pulse OK para montar este recurso compartido!"
 
 msgid ""
 "Are you sure you want to save this network mount?\n"
@@ -13635,7 +13635,7 @@ msgid "Usermanager"
 msgstr "Administrador de usuarios"
 
 msgid "Press OK to edit selected settings."
-msgstr "Presione OK para editar las configuración seleccionada."
+msgstr "Pulse OK para editar las configuración seleccionada."
 
 msgid "Enter user and password for host: "
 msgstr "Ingrese usuario y contraseña para el host: "
@@ -14269,10 +14269,10 @@ msgid "update bookmarks"
 msgstr "actualizar marcadores"
 
 msgid "Press or select button and then press 'OK' for attach function."
-msgstr "Presione el botón del mando que quiera asignar directo o seleccione con botón 'arriba abajo' y elíjalo, luego pulse 'OK' para asignar la función."
+msgstr "Pulse el botón del mando que quiera asignar directo o seleccione con botón 'arriba abajo' y elíjalo, luego pulse 'OK' para asignar la función."
 
 msgid "Press or select button and then press 'OK' for attach next function or edit attached."
-msgstr "Presione el botón del mando que quiere asignar directo o seleccione con botón 'arriba abajo' y elíjalo, luego presione 'OK' para asignar una nueva función a la que hay en uso."
+msgstr "Pulse el botón del mando que quiere asignar directo o seleccione con botón 'arriba abajo' y elíjalo, luego presione 'OK' para asignar una nueva función a la que hay en uso."
 
 msgid "Local mountpoint"
 msgstr "Punto de montaje Local"
@@ -15326,7 +15326,7 @@ msgid "Please wait while feeds state is being checked."
 msgstr "Espere mientras se verifica el estado de los feeds."
 
 msgid "Press OK to set the MAC address."
-msgstr "Presione OK para configurar la dirección MAC."
+msgstr "Pulse OK para configurar la dirección MAC."
 
 msgid "Random password"
 msgstr "Contraseña aleatoria"
@@ -16162,16 +16162,16 @@ msgid "Are you sure to reboot to"
 msgstr "Quieres Reiniciar con imagen"
 
 msgid "Press 'OK' for attach function."
-msgstr "Presione 'OK' para asignar la función."
+msgstr "Pulse 'OK' para asignar la función."
 
 msgid "Press 'OK' for attach next function or 'CH+/-' for edit attached."
-msgstr "Presione 'OK' para asignar la siguiente función o 'CH +/-' para editar lo asignado."
+msgstr "Pulse 'OK' para asignar la siguiente función o 'CH +/-' para editar lo asignado."
 
 msgid "Press 'OK' for remove item or 'CH+/-' for toggle to list of features."
-msgstr "Presione 'Aceptar' para eliminar el elemento o 'CH +/-' para alternar a la lista de características."
+msgstr "Pulse 'Aceptar' para eliminar el elemento o 'CH +/-' para alternar a la lista de características."
 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
-msgstr "Presione 'Aceptar' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
+msgstr "Pulse 'Aceptar' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
 
 msgid "Use the cursor keys to select an installed image then reboot."
 msgstr "Use las teclas del cursor para seleccionar una imagen instalada y luego reinicie."
@@ -16851,26 +16851,29 @@ msgstr "Elija el estilo de formato de visualización para las horas. 'H' / 'HH' 
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). El display se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
 
-msgid "Help Screen"
-msgstr "Pantalla Ayuda"
+msgid "Help Screen Information"
+msgstr "Pantalla Información Ayuda"
 
-msgid "Brief help information for buttons in your current context."
+msgid "HELP provides brief information for buttons in your current context."
 msgstr "Breve información de ayuda para los botones en su contexto actual."
 
-msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. EXIT to return to the help screen. OK to perform the action described in the currently highlighted help."
-msgstr "Navegue hacia arriba / abajo con los botones ARRIBA/ABAJO y página arriba/abajo con IZQUIERDA/DERECHA. SALIR para volver a la pantalla de ayuda. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente."
+msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. OK to perform the action described in the currently highlighted help."
+msgstr "Navegue hacia arriba/abajo con los botones ARRIBA/ABAJO y página arriba/abajo con IZQUIERDA/DERECHA. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente."
 
-msgid "Other buttons will jump to the help for that button, if there is help."
-msgstr "Otros botones saltarán a la ayuda de ese botón, si hay ayuda."
+msgid "Other buttons will jump to the help information for that button, if there is help available."
+msgstr "Otros botones saltarán a la información de ayuda para ese botón, si hay ayuda disponible."
 
-msgid "If an action is user-configurable, its help entry will be flagged with a (C)."
-msgstr "Si una acción es configurable por el usuario, su entrada de ayuda se marcará con una (C)."
+msgid "If an action is user-configurable, its help entry will be flagged with a '(C)' suffix."
+msgstr "Si una acción es configurable por el usuario, su entrada de ayuda se marcará con un sufijo '(C)'."
 
-msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list indicates whether the function is for a long press of the button(s)."
-msgstr "Un resaltado en la imagen del control remoto muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista indica si la función es para una pulsación larga de los botones."
+msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list lists the active buttons and whether the function requires a long press or SHIFT of the button(s)."
+msgstr "Un resaltado en la imagen del mando a distancia muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista enumera los botones activos y si la función requiere una pulsación larga o MAYÚS de los botones(s)."
 
-msgid "The order and grouping of the help information list can be controlled using MENU>Setup>User Interface>Settings>Sort order for help screen."
-msgstr "El orden y la agrupación de la lista de información de ayuda se puede controlar mediante MENÚ> Configuración> Interfaz de usuario> Configuración> Orden de clasificación para la pantalla de ayuda."
+msgid "Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."
+msgstr "Las opciones de configuración para la pantalla AYUDA se pueden encontrar en 'MENÚ> Configuración> Interfaz de usuario> Configuración de interfaz de usuario'."
+
+msgid "Press EXIT to return to the help screen." 
+msgstr "Pulse EXIT para regresar a la pantalla de ayuda."
 
 msgid "and"
 msgstr "y"
@@ -17023,7 +17026,7 @@ msgid "When receiver wakes from standby, it will command the TV to switch to the
 msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
 
 msgid "Allows the TV remote to be used to control the receiver."
-msgstr "Permite usar el control remoto del televisor para controlar el receptor."
+msgstr "Permite usar el mando a distancia del televisor para controlar el receptor."
 
 msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
 msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo de espera cuando se apague el televisor."
@@ -17035,7 +17038,7 @@ msgid "Wake the receiver from standby when selected wake command is sent from th
 msgstr "Despierta el receptor desde el modo de espera cuando se envía el comando de activación seleccionado desde el televisor."
 
 msgid "Volume keys on the receiver remote will control the TV volume."
-msgstr "Las teclas de volumen del control remoto del receptor controlarán el volumen del televisor."
+msgstr "Las teclas de volumen del mando a distancia del receptor controlarán el volumen del televisor."
 
 msgid "Put A/V receiver to standby too."
 msgstr "Ponga el receptor de A/V en espera también."
