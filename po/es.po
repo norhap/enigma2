@@ -17196,6 +17196,12 @@ msgstr "Mostrar tzdata en el navegador de plugins"
 msgid "When enabled, you will see tzdata packages in plugin browser download section."
 msgstr "Cuando esté habilitado, verá los paquetes tzdata en la sección de descarga del navegador de plugins."
 
+msgid "OPKG clean mode"
+msgstr "Modo de limpieza OPKG"
+
+msgid "When enabled, before opkg update there will be opkg clean to make sure nothing ruine the update but only enable this when you can not update online."
+msgstr "Cuando está habilitado, antes de la actualización de opkg, habrá opkg clean para asegurar la actualización, habilítelo cuando no pueda actualizar en línea."
+
 msgid "Show util-linux in plugin browser"
 msgstr "Mostrar util-linux en el navegador de plugins"
 
