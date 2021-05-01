@@ -16870,7 +16870,7 @@ msgid "A highlight on the remote control image shows which button the help refer
 msgstr "Un resaltado en la imagen del mando a distancia muestra a que botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista enumera los botones activos y si la función requiere una pulsación larga o MAYÚS de los botones(s)."
 
 msgid "Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."
-msgstr "Las opciones de configuración para la pantalla AYUDA se pueden encontrar en 'MENÚ> Configuración> Interfaz de usuario> Configuración de interfaz de usuario'."
+msgstr "Las opciones de configuración para la pantalla AYUDA se encuentran en 'MENÚ> Configuración> Interfaz de Usuario> Ajustes Interfaz de Usuario'."
 
 msgid "Press EXIT to return to the help screen." 
 msgstr "Pulse EXIT para regresar a la pantalla de ayuda."
