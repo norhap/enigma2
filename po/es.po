@@ -6967,7 +6967,7 @@ msgstr ""
 "\n"
 "En otras palabras, si el cuadro amarillo toca los cuatro lados de la pantalla, tiene al menos un 5% de overscan en todos los lados.\n"
 "\n"
-"Si ves las puntas de las ocho puntas de flecha, entonces su TV tiene el overscan deshabilitado.\n"
+"Si ves las puntas de las ocho flechas, entonces su TV tiene el overscan deshabilitado.\n"
 "\n"
 "Test Pattern por TigerDave - www.tigerdave.com/ht_menu.htm"
 
@@ -10880,7 +10880,7 @@ msgstr ""
 "Pulse OK para comenzar a usar su receptor."
 
 msgid "Use the up/down keys on your remote control to select an option. After that, press OK."
-msgstr "Usar las teclas arriba / abajo en su mando a distancia para seleccionar una opción. Después de eso, presione OK."
+msgstr "Usar las teclas arriba/abajo en su mando a distancia para seleccionar una opción. Después de eso, presione OK."
 
 msgid "Use the wizard to set up basic features"
 msgstr "Usar el asistente para funciones básicas"
@@ -16867,7 +16867,7 @@ msgid "If an action is user-configurable, its help entry will be flagged with a 
 msgstr "Si una acción es configurable por el usuario, su entrada de ayuda se marcará con un sufijo '(C)'."
 
 msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list lists the active buttons and whether the function requires a long press or SHIFT of the button(s)."
-msgstr "Un resaltado en la imagen del mando a distancia muestra a qué botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista enumera los botones activos y si la función requiere una pulsación larga o MAYÚS de los botones(s)."
+msgstr "Un resaltado en la imagen del mando a distancia muestra a que botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista enumera los botones activos y si la función requiere una pulsación larga o MAYÚS de los botones(s)."
 
 msgid "Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."
 msgstr "Las opciones de configuración para la pantalla AYUDA se pueden encontrar en 'MENÚ> Configuración> Interfaz de usuario> Configuración de interfaz de usuario'."
@@ -17231,3 +17231,9 @@ msgstr "Utilice esta opción para seleccionar si se crean registros de depuraci�
 
 msgid "* = Restart Required"
 msgstr "* = Reiniciar Requerido"
+
+msgid "Move to first line / screen"
+msgstr "Mover a la primera línea en pantalla"
+
+msgid "Move to last line / screen"
+msgstr "Mover a la última línea en pantalla"
