@@ -8,7 +8,7 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
 from Tools.camcontrol import CamControl
-from Tools.Directories import isPluginExtensionInstalled, fileExists, fileHas
+from Tools.Directories import isPluginInstalled, fileExists, fileHas
 from Tools.GetEcmInfo import GetEcmInfo
 
 class SoftcamSetup(Setup):
@@ -97,10 +97,10 @@ class SoftcamSetup(Setup):
 		elif "cccam" in config.misc.softcams.value.lower():
 			from Screens.CCcamInfo import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
-		elif "cccam" in config.misc.softcams.value.lower() and isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/CCcamInfo/plugin." + getPyExt())) or isfile(resolveFilename(SCOPE_PLUGINS, "Extensions/CCcamInfo/plugin." + getPyExt())):
+		elif "cccam" in config.misc.softcams.value.lower() and isPluginInstalled("CCcamInfo"):
 			from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
-		elif isfile(ppanelFilename) and isPluginExtensionInstalled("PPanel"):
+		elif isfile(ppanelFilename) and isPluginInstalled("PPanel"):
 			from Plugins.Extensions.PPanel.ppanel import PPanel
 			self.session.open(PPanel, name="%s PPanel" % config.misc.softcams.value, node=None, filename=ppanelFilename, deletenode=None)
 

@@ -11,10 +11,10 @@ from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
 
 import skin, os, re, urllib2, sys, boxbranding
 from skin import parameters
-from Screens.Screen import Screen
+from Screens.Screen import Screen, ScreenSummary
 from Screens.MessageBox import MessageBox
 from Components.config import config
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Harddisk import harddiskmanager, Harddisk
 from Components.NimManager import nimmanager
@@ -28,10 +28,23 @@ from Components.Pixmap import MultiPixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 from re import search
-from Tools.Directories import fileExists, fileHas, pathExists
+from Screens.HelpMenu import HelpableScreen
+from Tools.Directories import fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
 from Components.GUIComponent import GUIComponent
 from Components.Console import Console
 from Tools.Geolocation import geolocation
+
+MODULE_NAME = __name__.split(".")[-1]
+
+INFO_COLORS = ["N", "H", "P", "V", "M"]
+INFO_COLOR = {
+	"B": None,
+	"N": 0x00ffffff,  # Normal.
+	"H": 0x00ffffff,  # Headings.
+	"P": 0x00888888,  # Prompts.
+	"V": 0x00888888,  # Values.
+	"M": 0x00ffff00  # Messages.
+}
 
 URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
 
@@ -244,6 +257,120 @@ class About(Screen):
 
 	def showTroubleshoot(self):
 		self.session.open(Troubleshoot)
+
+def formatLine(style, left, right=None):
+	styleLen = len(style)
+	leftStartColor = "" if styleLen > 0 and style[0] == "B" else "\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
+	leftEndColor = "" if leftStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	leftIndent = "    " * int(style[1]) if styleLen > 1 and style[1].isdigit() else ""
+	rightStartColor = "" if styleLen > 2 and style[2] == "B" else "\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
+	rightEndColor = "" if rightStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
+	if right is None:
+		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ":"
+		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
+	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
+
+class BenchmarkInformation(Screen, HelpableScreen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+		self.setTitle(_("Benchmark Information"))
+		self.skinName = ["BenchmarkInformation"]
+		self["lab1"] = StaticText(_("OpenVision"))
+		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
+		self["lab3"] = StaticText(_("Report problems to:"))
+		self["lab4"] = StaticText(_("https://openvision.tech"))
+		self["lab5"] = StaticText(_("Sources are available at:"))
+		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		self["key_red"] = Button(_("Close"))
+		self.console = Console()
+		self.cpuTypes = []
+		self.cpuBenchmark = None
+		self.cpuRating = None
+		self.ramBenchmark = None
+		self["information"] = ScrollLabel()
+		self.informationTimer = eTimer()
+		self.informationTimer.callback.append(self.fetchInformation)
+		self.informationTimer.start(25)
+		self.onInformationUpdated = [self.displayInformation]
+		self.onLayoutFinish.append(self.displayInformation)
+		self["actions"] = HelpableActionMap(self, ["CancelSaveActions", "OkActions", "NavigationActions"], {
+			"cancel": (self.keyCancel, _("Close the screen")),
+			"ok": (self.refreshInformation, _("Refresh the screen")),
+			})
+
+	def fetchInformation(self):
+		self.informationTimer.stop()
+		self.cpuTypes = []
+		lines = []
+		lines = fileReadLines("/proc/cpuinfo", lines, source=MODULE_NAME)
+		for line in lines:
+			if line.startswith("model name") or line.startswith("Processor"):  # HiSilicon use the label "Processor"!
+				self.cpuTypes.append([x.strip() for x in line.split(":")][1])
+		self.console.ePopen(("/usr/bin/dhry", "/usr/bin/dhry"), self.cpuBenchmarkFinished)
+		# Serialise the tests for better accuracy.
+		# self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
+		for callback in self.onInformationUpdated:
+			callback()
+
+	def cpuBenchmarkFinished(self, result, retVal, extraArgs):
+		for line in result.split("\n"):
+			if line.startswith("Open Vision DMIPS"):
+				self.cpuBenchmark = int([x.strip() for x in line.split(":")][1])
+			if line.startswith("Open Vision CPU status"):
+				self.cpuRating = [x.strip() for x in line.split(":")][1]
+		# Serialise the tests for better accuracy.
+		Console().ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
+
+	def ramBenchmarkFinished(self, result, retVal, extraArgs):
+		for line in result.split("\n"):
+			if line.startswith("Open Vision copy rate"):
+				self.ramBenchmark = float([x.strip() for x in line.split(":")][1])
+		for callback in self.onInformationUpdated:
+			callback()
+
+	def refreshInformation(self):
+		self.cpuBenchmark = None
+		self.cpuRating = None
+		self.ramBenchmark = None
+		self.informationTimer.start(25)
+		for callback in self.onInformationUpdated:
+			callback()
+
+	def displayInformation(self):
+		info = []
+		info.append(formatLine("H", "%s %s %s" % (_("Benchmark for"), SystemInfo["MachineBrand"], SystemInfo["MachineModel"])))
+		info.append("")
+		for index, cpu in enumerate(self.cpuTypes):
+			info.append(formatLine("P1", _("CPU / Core %d type") % index, cpu))
+		info.append("")
+		info.append(formatLine("P1", _("CPU benchmark"), _("%d DMIPS per core") % self.cpuBenchmark if self.cpuBenchmark else _("Calculating benchmark...")))
+		count = len(self.cpuTypes)
+		if count > 1:
+			info.append(formatLine("P1", _("Total CPU benchmark"), _("%d DMIPS with %d cores") % (self.cpuBenchmark * count, count) if self.cpuBenchmark else _("Calculating benchmark...")))
+		info.append(formatLine("P1", _("CPU rating"), self.cpuRating if self.cpuRating else _("Calculating rating...")))
+		info.append("")
+		info.append(formatLine("P1", _("RAM benchmark"), "%.2f MB/s tasa de copia" % self.ramBenchmark if self.ramBenchmark else _("Calculating benchmark...")))
+		self["information"].setText("\n".join(info).encode("UTF-8", "ignore") if PY2 else "\n".join(info))
+
+	def getSummaryInformation(self):
+		return "Benchmark Information"
+
+	def keyCancel(self):
+		self.close()
+
+class InformationSummary(ScreenSummary):
+	def __init__(self, session, parent):
+		ScreenSummary.__init__(self, session, parent=parent)
+		self.parent = parent
+		self["information"] = StaticText()
+		parent.onInformationUpdated.append(self.updateSummary)
+		# self.updateSummary()
+
+	def updateSummary(self):
+		# print("[Information] DEBUG: Updating summary.")
+		self["information"].setText(self.parent.getSummaryInformation())
 
 class Geolocation(Screen):
 	def __init__(self, session):

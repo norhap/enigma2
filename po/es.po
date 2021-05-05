@@ -17237,3 +17237,39 @@ msgstr "Mover a la primera línea en pantalla"
 
 msgid "Move to last line / screen"
 msgstr "Mover a la última línea en pantalla"
+
+msgid "Benchmark Information"
+msgstr "Información CPU DMIPS RAM"
+
+msgid "Calculating benchmark..."
+msgstr "Calculando espere no cierre esta pantalla..."
+
+msgid "Benchmark for"
+msgstr "Caracteristicas CPU y RAM para"
+
+msgid "CPU / Core %d type"
+msgstr "CPU / Core %d"
+
+msgid "CPU benchmark"
+msgstr "CPU"
+
+msgid "RAM benchmark"
+msgstr "RAM"
+
+msgid "Total CPU benchmark"
+msgstr "Total CPU"
+
+msgid "%d DMIPS with %d cores"
+msgstr "%d DMIPS con %d cores"
+
+msgid "%d DMIPS per core"
+msgstr "%d DMIPS por cada core"
+
+msgid "CPU rating"
+msgstr "Clasificación CPU"
+
+msgid "Close the screen"
+msgstr "Cerrar esta pantalla"
+
+msgid "Refresh the screen"
+msgstr "Actualizar esta pantalla"
