@@ -302,6 +302,7 @@ class BenchmarkInformation(Screen, HelpableScreen):
 
 	def fetchInformation(self):
 		self.informationTimer.stop()
+		self.console = Console()
 		self.cpuTypes = []
 		lines = []
 		lines = fileReadLines("/proc/cpuinfo", lines, source=MODULE_NAME)
@@ -321,7 +322,8 @@ class BenchmarkInformation(Screen, HelpableScreen):
 			if line.startswith("Open Vision CPU status"):
 				self.cpuRating = [x.strip() for x in line.split(":")][1]
 		# Serialise the tests for better accuracy.
-		Console().ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
+		self.console = Console()
+		self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
 
 	def ramBenchmarkFinished(self, result, retVal, extraArgs):
 		for line in result.split("\n"):

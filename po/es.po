@@ -17244,8 +17244,11 @@ msgstr "Información CPU DMIPS RAM"
 msgid "Calculating benchmark..."
 msgstr "Calculando espere no cierre esta pantalla..."
 
+msgid "Calculating rating..."
+msgstr "Calculando espere no cierre esta pantalla..."
+
 msgid "Benchmark for"
-msgstr "Caracteristicas CPU y RAM para"
+msgstr "Caracteristicas CPU DMIPS RAM de su"
 
 msgid "CPU / Core %d type"
 msgstr "CPU / Core %d"
