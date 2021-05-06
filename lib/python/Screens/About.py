@@ -284,7 +284,6 @@ class BenchmarkInformation(Screen, HelpableScreen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		self["key_red"] = Button(_("Close"))
-		self.console = Console()
 		self.cpuTypes = []
 		self.cpuBenchmark = None
 		self.cpuRating = None
@@ -295,6 +294,7 @@ class BenchmarkInformation(Screen, HelpableScreen):
 		self.informationTimer.start(25)
 		self.onInformationUpdated = [self.displayInformation]
 		self.onLayoutFinish.append(self.displayInformation)
+		self.console = Console()
 		self["actions"] = HelpableActionMap(self, ["CancelSaveActions", "OkActions", "NavigationActions"], {
 			"cancel": (self.keyCancel, _("Close the screen")),
 			"ok": (self.refreshInformation, _("Refresh the screen")),
@@ -302,7 +302,6 @@ class BenchmarkInformation(Screen, HelpableScreen):
 
 	def fetchInformation(self):
 		self.informationTimer.stop()
-		self.console = Console()
 		self.cpuTypes = []
 		lines = []
 		lines = fileReadLines("/proc/cpuinfo", lines, source=MODULE_NAME)
@@ -322,7 +321,6 @@ class BenchmarkInformation(Screen, HelpableScreen):
 			if line.startswith("Open Vision CPU status"):
 				self.cpuRating = [x.strip() for x in line.split(":")][1]
 		# Serialise the tests for better accuracy.
-		self.console = Console()
 		self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
 
 	def ramBenchmarkFinished(self, result, retVal, extraArgs):
@@ -360,6 +358,7 @@ class BenchmarkInformation(Screen, HelpableScreen):
 		return "Benchmark Information"
 
 	def keyCancel(self):
+		self.console.killAll()
 		self.close()
 
 class InformationSummary(ScreenSummary):
