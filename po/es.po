@@ -17242,10 +17242,10 @@ msgid "Benchmark Information"
 msgstr "Información CPU DMIPS RAM"
 
 msgid "Calculating benchmark..."
-msgstr "Calculando resultados: no cierre esta pantalla hasta que muestre resultados, es importante..."
+msgstr "Calculando espere..."
 
 msgid "Calculating rating..."
-msgstr "Calculando resultados: no cierre esta pantalla hasta que muestre resultados, es importante..."
+msgstr "Calculando espere..."
 
 msgid "Benchmark for"
 msgstr "Caracteristicas CPU DMIPS RAM de su"
