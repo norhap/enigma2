@@ -235,7 +235,6 @@ class Task(object):
 		self.afterRun()
 		not_met = []
 		if aborted:
-			aborted = True
 			not_met.append(AbortedPostcondition())
 		else:
 			for postcondition in self.postconditions:
