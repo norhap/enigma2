@@ -16470,8 +16470,8 @@ msgstr "Seleccione cardserver"
 msgid "Select a cardserver from the available list."
 msgstr "Seleccione un cardserver de la lista disponible."
 
-msgid "Reset the selected devices when the GREEN button is pressed."
-msgstr "Reiniciará lo seleccionado, si cambió la selección y quiere mantenerla, pulse VERDE."
+msgid "Reset the selected devices and save changes of your config when the GREEN button is pressed."
+msgstr "Reiniciará lo seleccionado y guarda su configuración si pulsa botón VERDE."
 
 msgid "HDMI Recording Setup"
 msgstr "Ajustes Grabación HDMI"
