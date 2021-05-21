@@ -136,11 +136,14 @@ def getKernelVersionString():
 	except:
 		return _("unknown")
 
+
 def getHardwareTypeString():
 	return HardwareInfo().get_device_string()
 
+
 def getHardwareBrand():
 	return HardwareInfo().get_device_brand()
+
 
 def getImageTypeString():
 	try:
@@ -148,6 +151,7 @@ def getImageTypeString():
 		return image_type.capitalize()
 	except:
 		return _("unknown")
+
 
 def getCPUInfoString():
 	try:
@@ -235,18 +239,12 @@ def getCPUArch():
 		return _("Mipsel")
 
 
-def getFlashType():
-	    if SystemInfo["SmallFlash"]:
-		        return _("Small flash STB")
-	    else:
-                return _("Flash Normal STB")
-
-
 def getDVBAPI():
 	if SystemInfo["OLDE2API"]:
 		return _("Old")
 	else:
 		return _("New")
+
 
 def getDriverInstalledDate():
 	try:
@@ -335,6 +333,7 @@ def getBoxUptime():
 		return "%s" % time
 	except:
 		return '-'
+
 
 def getModel():
 	return HardwareInfo().get_machine_name()

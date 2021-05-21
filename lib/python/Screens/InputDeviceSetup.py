@@ -28,14 +28,15 @@ class InputDeviceSelection(Screen, HelpableScreen):
 		<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" transparent="1"/>
 		<widget source="list" render="Listbox" position="5,50" size="550,280" zPosition="10" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
-			<!--  device, description, devicepng, divpng  -->
-							{"template": [
-									MultiContentEntryPixmapAlphaTest(pos = (2, 8), size = (54, 54), png = 2), # index 3 is the interface pixmap
-									MultiContentEntryText(pos = (65, 6), size = (450, 54), font=0, flags = RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_WRAP, text = 1), # index 1 is the interfacename
-								],
-							"fonts": [gFont("Regular", 28),gFont("Regular", 20)],
-							"itemHeight": 70
-							}
+				<!--  device, description, devicepng, divpng  -->
+				{
+				"template": [
+					MultiContentEntryPixmapAlphaBlend(pos = (2, 8), size = (54, 54), png = 2),  # Index 3 is the interface pixmap
+					MultiContentEntryText(pos = (65, 6), size = (450, 54), font = 0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text = 1)  # Index 1 is the interfacename
+				],
+				"fonts": [gFont("Regular", 28), gFont("Regular", 20)],
+				"itemHeight": 70
+				}
 			</convert>
 		</widget>
 		<ePixmap pixmap="div-h.png" position="0,340" zPosition="1" size="560,2"/>
