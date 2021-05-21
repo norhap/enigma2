@@ -35,13 +35,14 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 
 		self["key_green"] = StaticText("")
 
-		if self.cancelable:
-			self["key_red"] = StaticText(_("Cancel"))
+		if self.job.IN_PROGRESS:
+			self["key_red"] = StaticText(_("Job cancel"))
 		else:
 			self["key_red"] = StaticText("")
 
-		if self.backgroundable:
-			self["key_blue"] = StaticText(_("Background"))
+		if self.job.IN_PROGRESS:
+			self["key_blue"] = StaticText(_("Continue in background"))
+			self["key_green"] = StaticText(_("OK"))
 		else:
 			self["key_blue"] = StaticText("")
 
@@ -53,7 +54,6 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 			"green": self.ok,
 			"red": self.abort,
 			"blue": self.background,
-			"cancel": self.abort,
 			"ok": self.ok,
 		}, -2)
 
@@ -116,10 +116,11 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 				self["key_red"].setText("")
 			elif j.status == j.FAILED:
 				self.cancelable = True
-				self["key_red"].setText(_("Cancel"))
+				self["key_green"].setText(_("OK"))
+				self["key_red"].setText("")
 
 	def background(self):
-		if self.backgroundable:
+		if self.job.IN_PROGRESS:
 			self.close(True)
 
 	def ok(self):
@@ -135,7 +136,7 @@ class JobView(InfoBarNotifications, Screen, ConfigListScreen):
 		elif self.job.status == self.job.IN_PROGRESS and self.cancelable:
 			self.job.cancel()
 		else:
-			self.close(False)
+			self.job.cancel()
 
 	def performAfterEvent(self):
 		self["config"].hide()

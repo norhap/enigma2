@@ -3570,8 +3570,8 @@ msgstr "Jersey"
 msgid "Job overview"
 msgstr "Visión general del trabajo"
 
-msgid "Jordan"
-msgstr "Jordania"
+msgid "Job cancel"
+msgstr "Cancelar trabajo"
 
 msgid "Jump to beginning of list"
 msgstr "Saltar al comienzo de la lista"
