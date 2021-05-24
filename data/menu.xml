@@ -193,7 +193,8 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 	<menu entryID="info_screen" level="0" text="Information" weight="20">
 		<id val="information" />
 		<item entryID="about_screen" level="0" text="About" weight="5"><screen module="About" /></item>
-		<item entryID="device_screen" level="0" text="Devices" weight="15"><screen module="About" screen="Devices" /></item>
+		<item entryID="device_screen" level="0" text="Tuner Information" weight="15"><screen module="About" screen="TunerInformation" /></item>
+		<item entryID="device_screen" level="0" text="Storage Devices" weight="15"><screen module="About" screen="Devices" /></item>
 		<item entryID="memory_screen" level="0" text="Memory" weight="20"><screen module="About" screen="SystemMemoryInfo" /></item>
 		<item entryID="network_screen" level="0" text="Network" weight="25"><screen module="About" screen="SystemNetworkInfo" /></item>
 		<item entryID="service_info_screen" level="1" text="Service" weight="30"><screen module="ServiceInfo" screen="ServiceInfo" /></item>

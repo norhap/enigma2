@@ -62,6 +62,106 @@ def news(url):
 
     return text
 
+
+class InformationBase(Screen, HelpableScreen):
+	def __init__(self, session):
+		Screen.__init__(self, session, mandatoryWidgets=["information"])
+		HelpableScreen.__init__(self)
+		self.skinName = ["Information"]
+		self["information"] = ScrollLabel()
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Refresh"))
+		self["lab1"] = StaticText(_("OpenVision"))
+		self["lab2"] = StaticText(_("Let's define enigma2 once more"))
+		self["lab3"] = StaticText(_("Report problems to:"))
+		self["lab4"] = StaticText(_("https://openvision.tech"))
+		self["lab5"] = StaticText(_("Sources are available at:"))
+		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		self["actions"] = HelpableActionMap(self, ["CancelSaveActions", "OkActions", "NavigationActions"], {
+			"cancel": (self.keyCancel, _("Close the screen")),
+			"close": (self.closeRecursive, _("Close the screen and exit all menus")),
+			"save": (self.refreshInformation, _("Refresh the screen")),
+			"ok": (self.refreshInformation, _("Refresh the screen")),
+			"top": (self["information"].moveTop, _("Move to first line / screen")),
+			"pageUp": (self["information"].pageUp, _("Move up a screen")),
+			"up": (self["information"].pageUp, _("Move up a screen")),
+			"down": (self["information"].pageDown, _("Move down a screen")),
+			"pageDown": (self["information"].pageDown, _("Move down a screen")),
+			"bottom": (self["information"].moveBottom, _("Move to last line / screen"))
+		}, prio=0, description=_("Common Information Actions"))
+		colors = parameters.get("InformationColors", (0x00ffffff, 0x00ffffff, 0x00888888, 0x00888888, 0x00ffff00))
+		if len(colors) == len(INFO_COLORS):
+			for index in range(len(colors)):
+				INFO_COLOR[INFO_COLORS[index]] = colors[index]
+		else:
+			print("[Information] Warning: %d colors are defined in the skin when %d were expected!" % (len(colors), len(INFO_COLORS)))
+		self["information"].setText(_("Loading information, please wait..."))
+		self.onInformationUpdated = [self.displayInformation]
+		self.onLayoutFinish.append(self.displayInformation)
+		self.console = Console()
+		self.informationTimer = eTimer()
+		self.informationTimer.callback.append(self.fetchInformation)
+		self.informationTimer.start(25)
+
+	def keyCancel(self):
+		self.console.killAll()
+		self.close()
+
+	def closeRecursive(self):
+		self.console.killAll()
+		self.close(True)
+
+	def informationWindowClosed(self, *retVal):
+		if retVal and retVal[0]:
+			self.close(True)
+
+	def fetchInformation(self):
+		self.informationTimer.stop()
+		for callback in self.onInformationUpdated:
+			callback()
+
+	def refreshInformation(self):
+		self.informationTimer.start(25)
+		for callback in self.onInformationUpdated:
+			callback()
+
+	def displayInformation(self):
+		pass
+
+	def getSummaryInformation(self):
+		pass
+
+	def createSummary(self):
+		return InformationSummary
+
+
+def formatLine(style, left, right=None):
+	styleLen = len(style)
+	leftStartColor = "" if styleLen > 0 and style[0] == "B" else "\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
+	leftEndColor = "" if leftStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	leftIndent = "    " * int(style[1]) if styleLen > 1 and style[1].isdigit() else ""
+	rightStartColor = "" if styleLen > 2 and style[2] == "B" else "\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
+	rightEndColor = "" if rightStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
+	if right is None:
+		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ""
+		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
+	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
+
+
+class InformationSummary(ScreenSummary):
+	def __init__(self, session, parent):
+		ScreenSummary.__init__(self, session, parent=parent)
+		self.parent = parent
+		self["information"] = StaticText()
+		parent.onInformationUpdated.append(self.updateSummary)
+		# self.updateSummary()
+
+	def updateSummary(self):
+		# print("[Information] DEBUG: Updating summary.")
+		self["information"].setText(self.parent.getSummaryInformation())
+
+
 class About(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -91,11 +191,10 @@ class About(Screen):
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
-		AboutText += "\n"
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model != "gbip4k":
 			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
 		else:
-			AboutText += _("No Display") + "\n"
+			AboutText += _("No Display")
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
@@ -118,16 +217,6 @@ class About(Screen):
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
-		numSlots = 0
-		dvbinformation = ""
-		nimSlots = nimmanager.getSlotCount()
-		for nim in range(nimSlots):
-			dvbinformation += eDVBResourceManager.getInstance().getFrontendCapabilities(nim)
-
-		dvbapiversion = ""
-		dvbapiversion = dvbinformation.splitlines()[0].replace("DVB API version: ", "").strip()
-		AboutText += _("DVB API version: ") + dvbapiversion + "\n"
-
 		if fileExists("/usr/bin/dvb-fe-tool"):
 			import time
 			try:
@@ -136,28 +225,6 @@ class About(Screen):
 				time.sleep(0.1)
 			except:
 				pass
-
-		if "MULTISTREAM" in dvbinformation:
-			AboutText += _("Multistream: ") + _("Yes") + "\n"
-		else:
-			AboutText += _("Multistream: ") + _("No") + "\n"
-		if fileExists("/tmp/dvbfetool.txt"):
-			if fileHas("/tmp/dvbfetool.txt","DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi"):
-				AboutText += _("DVB-S2X: ") + _("Yes") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVBS2") or fileHas("/tmp/dvbfetool.txt","DVB-S") or fileHas("/var/log/dmesg","DVB-S2"):
-				AboutText += _("DVB-S/S2: ") + _("Yes") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","Mode 2: DVB-S"):
-				AboutText += _("DVB-S2/T2/C: ") + _("Yes") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVB-T2") or fileHas("/tmp/dvbfetool.txt","DVBT"):
-				AboutText += _("DVB-T2/C: ") + _("Yes") + "\n"
-			if fileHas("/tmp/dvbfetool.txt","DVB-C") and not fileHas("/tmp/dvbfetool.txt","DVB-T2"):
-				AboutText += _("DVB-Cable: ") + _("Yes") + "\n"
-			if "DVBC_ANNEX_A" in dvbinformation:
-				AboutText += _("DVBC_ANNEX_A: ") + _("Yes") + "\n"
-			if "DVBC_ANNEX_B"  in dvbinformation:
-				AboutText += _("DVBC_ANNEX_B: ") + _("Yes") + "\n"
-			if "DVBC_ANNEX_C"  in dvbinformation:
-				AboutText += _("DVBC_ANNEX_C: ") + _("Yes") + "\n"
 
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString().replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
@@ -181,51 +248,10 @@ class About(Screen):
 
 		self["FPVersion"] = StaticText(fp_version)
 
-		if boxbranding.getHaveTranscoding() == "True":
-			AboutText += _("Transcoding: ") + _("Yes") + "\n"
-		else:
-			AboutText += _("Transcoding: ") + _("No") + "\n"
-
-		if boxbranding.getHaveMultiTranscoding() == "True":
-			AboutText += _("MultiTranscoding: ") + _("Yes") + "\n"
-		else:
-			AboutText += _("MultiTranscoding: ") + _("No") + "\n"
-
 		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
-		self["TunerHeader"] = StaticText(_("Detected NIMs:"))
-		AboutText += "\n" + _("Detected NIMs:") + "\n"
-
-		nims = nimmanager.nimListCompressed()
-		for count in range(len(nims)):
-			if count < 4:
-				self["Tuner" + str(count)] = StaticText(nims[count])
-			else:
-				self["Tuner" + str(count)] = StaticText("")
-			AboutText += nims[count] + "\n"
-
-		self["HDDHeader"] = StaticText(_("Detected HDD:"))
-		AboutText += "\n" + _("Detected HDD:") + "\n"
-
-		hddlist = harddiskmanager.HDDList()
-		hddinfo = ""
-		if hddlist:
-			formatstring = hddsplit and "%s:%s, %.1f %sB %s" or "%s\n(%s, %.1f %sB %s)"
-			for count in range(len(hddlist)):
-				if hddinfo:
-					hddinfo += "\n"
-				hdd = hddlist[count][1]
-				if int(hdd.free()) > 1024:
-					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.Totalfree()/1024.0, "G", _("free"))
-				else:
-					hddinfo += formatstring % (hdd.model(), hdd.capacity(), hdd.Totalfree(), "M", _("free"))
-		else:
-			hddinfo = _("none")
-		self["hddA"] = StaticText(hddinfo)
-		AboutText += hddinfo + "\n\n" + _("Network Info:")
 		for x in about.GetIPsFromNetworkInterfaces():
-			AboutText += "\n" + x[0] + ": " + x[1]
-		AboutText += '\n\n' + _("Uptime:") + "  " + about.getBoxUptime()
+		    AboutText += _("Uptime:") + "  " + about.getBoxUptime()
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))
@@ -257,47 +283,16 @@ class About(Screen):
 	def showTroubleshoot(self):
 		self.session.open(Troubleshoot)
 
-def formatLine(style, left, right=None):
-	styleLen = len(style)
-	leftStartColor = "" if styleLen > 0 and style[0] == "B" else "\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
-	leftEndColor = "" if leftStartColor == "" else "\c%08x" % INFO_COLOR["N"]
-	leftIndent = "    " * int(style[1]) if styleLen > 1 and style[1].isdigit() else ""
-	rightStartColor = "" if styleLen > 2 and style[2] == "B" else "\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
-	rightEndColor = "" if rightStartColor == "" else "\c%08x" % INFO_COLOR["N"]
-	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
-	if right is None:
-		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ":"
-		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
-	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
 
-class BenchmarkInformation(Screen, HelpableScreen):
+class BenchmarkInformation(InformationBase):
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		HelpableScreen.__init__(self)
+		InformationBase.__init__(self, session)
 		self.setTitle(_("Benchmark Information"))
-		self.skinName = ["BenchmarkInformation"]
-		self["lab1"] = StaticText(_("OpenVision"))
-		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
-		self["lab3"] = StaticText(_("Report problems to:"))
-		self["lab4"] = StaticText(_("https://openvision.tech"))
-		self["lab5"] = StaticText(_("Sources are available at:"))
-		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-		self["key_red"] = Button(_("Close"))
+		self.skinName.insert(0, "BenchmarkInformation")
 		self.cpuTypes = []
 		self.cpuBenchmark = None
 		self.cpuRating = None
 		self.ramBenchmark = None
-		self["information"] = ScrollLabel()
-		self.informationTimer = eTimer()
-		self.informationTimer.callback.append(self.fetchInformation)
-		self.informationTimer.start(25)
-		self.onInformationUpdated = [self.displayInformation]
-		self.onLayoutFinish.append(self.displayInformation)
-		self.console = Console()
-		self["actions"] = HelpableActionMap(self, ["CancelSaveActions", "OkActions", "NavigationActions"], {
-			"cancel": (self.keyCancel, _("Close the screen")),
-			"ok": (self.refreshInformation, _("Refresh the screen")),
-			})
 
 	def fetchInformation(self):
 		self.informationTimer.stop()
@@ -321,6 +316,8 @@ class BenchmarkInformation(Screen, HelpableScreen):
 				self.cpuRating = [x.strip() for x in line.split(":")][1]
 		# Serialise the tests for better accuracy.
 		self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
+		for callback in self.onInformationUpdated:
+			callback()
 
 	def ramBenchmarkFinished(self, result, retVal, extraArgs):
 		for line in result.split("\n"):
@@ -356,21 +353,6 @@ class BenchmarkInformation(Screen, HelpableScreen):
 	def getSummaryInformation(self):
 		return "Benchmark Information"
 
-	def keyCancel(self):
-		self.console.killAll()
-		self.close()
-
-class InformationSummary(ScreenSummary):
-	def __init__(self, session, parent):
-		ScreenSummary.__init__(self, session, parent=parent)
-		self.parent = parent
-		self["information"] = StaticText()
-		parent.onInformationUpdated.append(self.updateSummary)
-		# self.updateSummary()
-
-	def updateSummary(self):
-		# print("[Information] DEBUG: Updating summary.")
-		self["information"].setText(self.parent.getSummaryInformation())
 
 class Geolocation(Screen):
 	def __init__(self, session):
@@ -451,13 +433,77 @@ class Geolocation(Screen):
 				"down": self["AboutScrollLabel"].pageDown
 			})
 
+
+class TunerInformation(InformationBase):
+	def __init__(self, session):
+		InformationBase.__init__(self, session)
+		self.setTitle(_("Tuner Information"))
+		self.skinName.insert(0, "TunerInformation")
+
+	def displayInformation(self):
+		info = []
+		info.append(formatLine("H", _("Detected tuners")))
+		info.append("")
+		nims = nimmanager.nimList()
+		descList = []
+		curIndex = -1
+		for count in range(len(nims)):
+			data = nims[count].split(":")
+			idx = data[0].strip("Tuner").strip()
+			desc = data[1].strip()
+			if descList and descList[curIndex]["desc"] == desc:
+				descList[curIndex]["end"] = idx
+			else:
+				descList.append({
+					"desc": desc,
+					"start": idx,
+					"end": idx
+				})
+				curIndex += 1
+			count += 1
+		for count in range(len(descList)):
+			data = descList[count]["start"] if descList[count]["start"] == descList[count]["end"] else ("%s-%s" % (descList[count]["start"], descList[count]["end"]))
+			info.append(formatLine("", "Tuner %s" % data + ":" + "\n" + descList[count]["desc"]))
+		# info.append("")
+		# info.append(formatLine("H", _("Logical tuners")))  # Each tuner is a listed separately even if the hardware is common.
+		# info.append("")
+		# nims = nimmanager.nimListCompressed()
+		# for count in range(len(nims)):
+		# 	tuner, type = [x.strip() for x in nims[count].split(":", 1)]
+		# 	info.append(formatLine("P1", tuner, type))
+		info.append("")
+		info.append(formatLine("", _("DVB API"), about.getDVBAPI()))
+		numSlots = 0
+		dvbFeToolTxt = ""
+		nimSlots = nimmanager.getSlotCount()
+		for nim in range(nimSlots):
+			dvbFeToolTxt += eDVBResourceManager.getInstance().getFrontendCapabilities(nim)
+		dvbApiVersion = dvbFeToolTxt.splitlines()[0].replace("DVB API version: ", "").strip()
+		info.append(formatLine("", _("DVB API version"), dvbApiVersion))
+		info.append("")
+		info.append(formatLine("", _("Transcoding"), (_("Yes") if boxbranding.getHaveTranscoding() == "True" else _("No"))))
+		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if boxbranding.getHaveMultiTranscoding() == "True" else _("No"))))
+		info.append("")
+		info.append(formatLine("", _("DVB-S2X"), (_("Yes") if fileHas("/tmp/dvbfetool.txt","DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi") else _("No"))))
+		info.append(formatLine("", _("DVB-S2/T2/C Combined"), (_("Yes") if fileHas("/tmp/dvbfetool.txt","Mode 2: DVB-S") else _("No"))))
+		info.append(formatLine("", _("DVB-S"), (_("Yes") if "DVBS" in dvbFeToolTxt or "DVB-S" in dvbFeToolTxt else _("No"))))
+		info.append(formatLine("", _("DVB-T"), (_("Yes") if "DVBT" in dvbFeToolTxt or "DVB-T" in dvbFeToolTxt else _("No"))))
+		info.append(formatLine("", _("DVB-C"), (_("Yes") if "DVBC" in dvbFeToolTxt or "DVB-C" in dvbFeToolTxt else _("No"))))
+		info.append("")
+		info.append(formatLine("", _("Multistream"), (_("Yes") if "MULTISTREAM" in dvbFeToolTxt else _("No"))))
+		info.append("")
+		info.append(formatLine("", _("ANNEX-A"), (_("Yes") if "ANNEX_A" in dvbFeToolTxt or "ANNEX-A" in dvbFeToolTxt else _("No"))))
+		info.append(formatLine("", _("ANNEX-B"), (_("Yes") if "ANNEX_B" in dvbFeToolTxt or "ANNEX-B" in dvbFeToolTxt else _("No"))))
+		info.append(formatLine("", _("ANNEX-C"), (_("Yes") if "ANNEX_C" in dvbFeToolTxt or "ANNEX-C" in dvbFeToolTxt else _("No"))))
+		self["information"].setText("\n".join(info).encode("UTF-8", "ignore") if PY2 else "\n".join(info))
+
+
 class Devices(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		screentitle = _("Devices")
+		screentitle = _("Storage Devices")
 		title = screentitle
 		Screen.setTitle(self, title)
-		self["TunerHeader"] = StaticText(_("Detected tuners:"))
 		self["HDDHeader"] = StaticText(_("Detected devices:"))
 		self["MountsHeader"] = StaticText(_("Network servers:"))
 		self["nims"] = StaticText()
@@ -475,21 +521,17 @@ class Devices(Screen):
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.populate2)
 		self["key_red"] = Button(_("Close"))
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "TimerEditActions"],
-									{
-										"cancel": self.close,
-										"ok": self.close,
-										"red": self.close,
-									})
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "TimerEditActions"], {
+			"cancel": self.close,
+			"red": self.close,
+			"save": self.close,
+		})
 		self.onLayoutFinish.append(self.populate)
 
 	def populate(self):
 		self.mountinfo = ''
 		self["actions"].setEnabled(False)
 		scanning = _("Please wait while scanning for devices...")
-		self["nims"].setText(scanning)
-		for count in (0, 1, 2, 3):
-			self["Tuner" + str(count)].setText(scanning)
 		self["hdd"].setText(scanning)
 		self['mounts'].setText(scanning)
 		self.activityTimer.start(1)
@@ -497,47 +539,6 @@ class Devices(Screen):
 	def populate2(self):
 		self.activityTimer.stop()
 		self.Console = Console()
-		niminfo = ""
-		nims = nimmanager.nimListCompressed()
-		for count in range(len(nims)):
-			if niminfo:
-				niminfo += "\n"
-			niminfo += nims[count]
-		self["nims"].setText(niminfo)
-
-		nims = nimmanager.nimList()
-		if len(nims) <= 4 :
-			for count in (0, 1, 2, 3):
-				if count < len(nims):
-					self["Tuner" + str(count)].setText(nims[count])
-				else:
-					self["Tuner" + str(count)].setText("")
-		else:
-			desc_list = []
-			count = 0
-			cur_idx = -1
-			while count < len(nims):
-				data = nims[count].split(":")
-				idx = data[0].strip('Tuner').strip()
-				desc = data[1].strip()
-				if desc_list and desc_list[cur_idx]['desc'] == desc:
-					desc_list[cur_idx]['end'] = idx
-				else:
-					desc_list.append({'desc' : desc, 'start' : idx, 'end' : idx})
-					cur_idx += 1
-				count += 1
-
-			for count in (0, 1, 2, 3):
-				if count < len(desc_list):
-					if desc_list[count]['start'] == desc_list[count]['end']:
-						text = "Tuner %s: %s" % (desc_list[count]['start'], desc_list[count]['desc'])
-					else:
-						text = "Tuner %s-%s: %s" % (desc_list[count]['start'], desc_list[count]['end'], desc_list[count]['desc'])
-				else:
-					text = ""
-
-				self["Tuner" + str(count)].setText(text)
-
 		self.hddlist = harddiskmanager.HDDList()
 		self.list = []
 		if self.hddlist:
@@ -592,6 +593,7 @@ class Devices(Screen):
 			self["mounts"].setText(_('none'))
 		self["actions"].setEnabled(True)
 
+
 class SystemNetworkInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -617,7 +619,6 @@ class SystemNetworkInfo(Screen):
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-
 		self["IFtext"] = StaticText()
 		self["IF"] = StaticText()
 		self["Statustext"] = StaticText()
@@ -625,7 +626,6 @@ class SystemNetworkInfo(Screen):
 		self["statuspic"].setPixmapNum(1)
 		self["statuspic"].show()
 		self["devicepic"] = MultiPixmap()
-
 		self["AboutScrollLabel"] = ScrollLabel()
 
 		self.iface = None
@@ -644,13 +644,12 @@ class SystemNetworkInfo(Screen):
 
 		self["key_red"] = StaticText(_("Close"))
 
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "DirectionActions"],
-									{
-										"cancel": self.close,
-										"ok": self.close,
-										"up": self["AboutScrollLabel"].pageUp,
-										"down": self["AboutScrollLabel"].pageDown
-									})
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "DirectionActions"], {
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["AboutScrollLabel"].pageUp,
+			"down": self["AboutScrollLabel"].pageDown
+		})
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createscreen(self):
@@ -893,6 +892,7 @@ class SystemNetworkInfo(Screen):
 		except:
 			pass
 
+
 class SystemMemoryInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -907,14 +907,12 @@ class SystemMemoryInfo(Screen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		self["AboutScrollLabel"] = ScrollLabel()
-
 		self["key_red"] = Button(_("Close"))
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
-									{
-										"cancel": self.close,
-										"ok": self.close,
-										"red": self.close,
-									})
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"], {
+		"cancel": self.close,
+		"ok": self.close,
+		"red": self.close,
+		})
 
 		out_lines = file("/proc/meminfo").readlines()
 		self.AboutText = _("RAM") + '\n\n'
@@ -957,6 +955,7 @@ class SystemMemoryInfo(Screen):
 
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
+
 
 class TranslationInfo(Screen):
 	def __init__(self, session):
@@ -1001,6 +1000,7 @@ class TranslationInfo(Screen):
 				"ok": self.close,
 			})
 
+
 class CommitInfoDevelop(Screen):
     def __init__(self, session):
         Screen.__init__(self, session)
@@ -1010,17 +1010,16 @@ class CommitInfoDevelop(Screen):
         self.setTitle(self.setup_title)
         self["news"] = ScrollLabel()
 
-        self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"],
-            {
+        self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"], {
             "cancel" : self.cerrar,
             "ok" : self.cerrar,
             "up": self["news"].pageUp,
             "down": self["news"].pageDown,
             "left": self["news"].pageUp,
             "right": self["news"].pageDown,
-            })
-        self['news'].setText(news(URL))
+        })
 
+	self['news'].setText(news(URL))
 	self["lab1"] = StaticText(_("OpenVision"))
 	self["lab2"] = StaticText(_("Lets define enigma2 once more"))
 	self["lab3"] = StaticText(_("Report problems to:"))
@@ -1079,38 +1078,35 @@ class CommitInfoDevelop(Screen):
 		self.project = self.project != len(self.projects) - 1 and self.project + 1 or 0
 		self.updateCommitLogs()
 
+
 class MemoryInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
-			{
-				"cancel": self.close,
-				"ok": self.getMemoryInfo,
-				"green": self.getMemoryInfo,
-				"blue": self.clearMemory,
-			})
-
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("Refresh"))
 		self["key_blue"] = Label(_("Clear"))
-
 		self['lmemtext'] = Label()
 		self['lmemvalue'] = Label()
 		self['rmemtext'] = Label()
 		self['rmemvalue'] = Label()
-
 		self['pfree'] = Label()
 		self['pused'] = Label()
 		self["slide"] = ProgressBar()
 		self["slide"].setValue(100)
-
 		self["lab1"] = StaticText(_("OpenVision"))
 		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
 		self["lab3"] = StaticText(_("Report problems to:"))
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+
+
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"], {
+			"cancel": self.close,
+			"ok": self.getMemoryInfo,
+			"green": self.getMemoryInfo,
+			"blue": self.clearMemory,
+		})
 
 		self["params"] = MemoryInfoSkinParams()
 
@@ -1160,6 +1156,7 @@ class MemoryInfo(Screen):
 		open("/proc/sys/vm/drop_caches", "w").write("3")
 		self.getMemoryInfo()
 
+
 class MemoryInfoSkinParams(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
@@ -1177,6 +1174,7 @@ class MemoryInfoSkinParams(GUIComponent):
 
 	GUI_WIDGET = eLabel
 
+
 class Troubleshoot(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -1191,18 +1189,17 @@ class Troubleshoot(Screen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"],
-			{
-				"cancel": self.close,
-				"up": self["AboutScrollLabel"].pageUp,
-				"down": self["AboutScrollLabel"].pageDown,
-				"moveUp": self["AboutScrollLabel"].homePage,
-				"moveDown": self["AboutScrollLabel"].endPage,
-				"left": self.left,
-				"right": self.right,
-				"red": self.red,
-				"green": self.green,
-			})
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"], {
+			"cancel": self.close,
+			"up": self["AboutScrollLabel"].pageUp,
+			"down": self["AboutScrollLabel"].pageDown,
+			"moveUp": self["AboutScrollLabel"].homePage,
+			"moveDown": self["AboutScrollLabel"].endPage,
+			"left": self.left,
+			"right": self.right,
+			"red": self.red,
+			"green": self.green,
+		})
 
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)

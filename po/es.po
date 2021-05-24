@@ -14208,7 +14208,7 @@ msgid "MultiType"
 msgstr "MultiTipo"
 
 msgid "Combined"
-msgstr "Dinámico"
+msgstr "Combinado"
 
 msgid "Retrieving image list - Please wait..."
 msgstr "Recuperando lista de imágenes - Por favor espere..."
@@ -15171,11 +15171,11 @@ msgstr "Soporte DLna"
 msgid "Device"
 msgstr "Dispositivo"
 
-msgid "Devices"
-msgstr "Dispositivos & Tuners"
+msgid "Storage Devices"
+msgstr "Dispositivos Almacenamiento"
 
-msgid "Detected tuners:"
-msgstr "Sintonizadores Detectados:"
+msgid "Detected tuners"
+msgstr "Sintonizadores detectados"
 
 msgid "Detected devices:"
 msgstr "Dispositivos Detectados:"
@@ -17239,7 +17239,7 @@ msgid "Move to last line / screen"
 msgstr "Mover a la última línea en pantalla"
 
 msgid "Benchmark Information"
-msgstr "Información CPU DMIPS RAM"
+msgstr "Información cpu dmips ram"
 
 msgid "Calculating benchmark..."
 msgstr "Calculando espere..."
@@ -17276,3 +17276,9 @@ msgstr "Cerrar esta pantalla"
 
 msgid "Refresh the screen"
 msgstr "Actualizar esta pantalla"
+
+msgid "Tuner Information"
+msgstr "Información Sintonizadores"
+
+msgid "DVB-S2/T2/C Combined"
+msgstr "DVB-S2/T2/C [Combinado]"
