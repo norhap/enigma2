@@ -656,7 +656,7 @@ if test "$BOXTYPE" == "tiviarmin"; then
 fi
 
 if test "$BOXBRAND" == "dinobot" -o "$BOXTYPE" == "reborn"; then
-	AC_DEFINE(HAVE_HISILICON, 1,[define it's a HISILICON chip])
+	AC_DEFINE(HAVE_HISILICON, 1,[define it is a HISILICON chip])
 fi
 
 if test "$BOXTYPE" == "dinobot4kmini" -o "$BOXTYPE" == "arivatwin" -o "$BOXTYPE" == "arivacombo"; then

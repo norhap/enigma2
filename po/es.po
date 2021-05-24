@@ -664,7 +664,7 @@ msgid "Abort"
 msgstr "Abortar"
 
 msgid "About"
-msgstr "Hardware & Software"
+msgstr "Receptor"
 
 msgid "About..."
 msgstr "Acerca de..."
