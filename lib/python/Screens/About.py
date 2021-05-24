@@ -205,12 +205,9 @@ class About(Screen):
 		AboutText += "\n" + EnigmaVersion + "\n"
 		AboutText += _("Enigma2 revision: ") + getE2Rev() + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
-		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
-		AboutText += _("Enigma2 debug level: %d\n") % eGetEnigmaDebugLvl()
+		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
 		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
-
-		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
 		if fileExists("/usr/bin/dvb-fe-tool"):
 			import time
@@ -228,9 +225,9 @@ class About(Screen):
 		FFmpegVersion = _("FFmpeg version: ") + about.getFFmpegVersionString()
 		self["FFmpegVersion"] = StaticText(FFmpegVersion)
 		AboutText += FFmpegVersion + "\n"
-
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
-
+		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Enigma2 debug level: %d\n") % eGetEnigmaDebugLvl()
 		fp_version = getFPVersion()
 		if fp_version is None:
 			fp_version = ""
@@ -245,7 +242,7 @@ class About(Screen):
 		self["FPVersion"] = StaticText(fp_version)
 
 		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
-
+		AboutText += "\n"
 		for x in about.GetIPsFromNetworkInterfaces():
 		    AboutText += _("Uptime:") + "  " + about.getBoxUptime()
 

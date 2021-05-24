@@ -1853,7 +1853,7 @@ msgid "DVB CI Delay"
 msgstr "Retardo del DVB CI"
 
 msgid "DVB driver version: "
-msgstr "Versión el controlador DVB: "
+msgstr "Fecha de los Drivers: "
 
 msgid "DVB type"
 msgstr "Tipo de DVB"
@@ -2951,7 +2951,7 @@ msgstr "Desde:"
 
 #, python-format
 msgid "Frontprocessor version: %s"
-msgstr "Versión del procesador frontal: %s"
+msgstr "Procesador frontal: %s"
 
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 msgid "Full screen"
@@ -17293,4 +17293,4 @@ msgid "Enigma2 revision: "
 msgstr "Enigma2 revisión: "
 
 msgid "FFmpeg version: "
-msgstr "FFmpeg versión: "
+msgstr "Versión FFmpeg: "
