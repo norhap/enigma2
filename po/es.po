@@ -17242,7 +17242,7 @@ msgid "Move to last line / screen"
 msgstr "Mover a la última línea en pantalla"
 
 msgid "Benchmark Information"
-msgstr "Información cpu dmips ram"
+msgstr "Información Chipset"
 
 msgid "Calculating benchmark..."
 msgstr "Calculando espere..."
