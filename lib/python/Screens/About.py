@@ -189,12 +189,7 @@ class About(Screen):
 		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
 		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
-		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model != "gbip4k":
-			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
-		else:
-			AboutText += _("No Display")
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
@@ -204,13 +199,13 @@ class About(Screen):
 		if len(EnigmaVersion) == 3:
 			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[2] + "-" + EnigmaVersion[1] + ")"
 		else:
-			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[1] + ")"
-		EnigmaVersion = _("Enigma version: ") + EnigmaVersion
+			EnigmaVersion = EnigmaVersion[1]
+		EnigmaVersion = _("Branch Enigma2: ") + EnigmaVersion
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += "\n" + EnigmaVersion + "\n"
 		AboutText += _("Enigma2 revision: ") + getE2Rev() + "\n"
-		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
-		AboutText += _("Enigma2 (re)starts: %d\n") % config.misc.startCounter.value
+		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
+		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
 		AboutText += _("Enigma2 debug level: %d\n") % eGetEnigmaDebugLvl()
 
 		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
@@ -236,15 +231,16 @@ class About(Screen):
 
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 
-		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
-		AboutText += _("Enigma debug level: %d\n") % eGetEnigmaDebugLvl()
-
 		fp_version = getFPVersion()
 		if fp_version is None:
 			fp_version = ""
 		else:
 			fp_version = _("Frontprocessor version: %s") % fp_version
 			AboutText += fp_version + "\n"
+		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model != "gbip4k":
+			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
+		else:
+			AboutText += _("No Display")
 
 		self["FPVersion"] = StaticText(fp_version)
 

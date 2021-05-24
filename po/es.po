@@ -17282,3 +17282,12 @@ msgstr "Información Sintonizadores"
 
 msgid "DVB-S2/T2/C Combined"
 msgstr "DVB-S2/T2/C [Combinado]"
+
+msgid "Branch Enigma2: "
+msgstr "Rama Git Enigma2: "
+
+msgid "Enigma2 revision: "
+msgstr "Enigma2 revisión: "
+
+msgid "FFmpeg version: "
+msgstr "FFmpeg versión: "
