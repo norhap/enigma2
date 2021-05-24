@@ -354,7 +354,7 @@ class Geolocation(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("Geolocation"))
-		self.setTitle(_("Open Vision information"))
+		self.setTitle(_("Geolocation Information"))
 		self["lab1"] = StaticText(_("OpenVision"))
 		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
 		self["lab3"] = StaticText(_("Report problems to:"))
@@ -362,7 +362,7 @@ class Geolocation(Screen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
-		GeolocationText = _("Geolocation information") + "\n"
+		GeolocationText = _("Information about your Geolocation data") + "\n"
 
 		GeolocationText += "\n"
 
@@ -372,25 +372,25 @@ class Geolocation(Screen):
 			if isinstance(continent, texttype):
 				continent = ensurestr(continent.encode(encoding="UTF-8", errors="ignore"))
 			if continent is not None:
-				GeolocationText += _("Continent: ") + continent + "\n"
+				GeolocationText += _("Continent: ") + "\t" + continent + "\n"
 
 			country = geolocationData.get("country", None)
 			if isinstance(country, texttype):
 				country = ensurestr(country.encode(encoding="UTF-8", errors="ignore"))
 			if country is not None:
-				GeolocationText += _("Country: ") + country + "\n"
+				GeolocationText += _("Country: ") + "\t" + country + "\n"
 
 			state = geolocationData.get("regionName", None)
 			if isinstance(state, texttype):
 				state = ensurestr(state.encode(encoding="UTF-8", errors="ignore"))
 			if state is not None:
-				GeolocationText += _("State: ") + state + "\n"
+				GeolocationText += _("State: ") + "\t" + state + "\n"
 
 			city = geolocationData.get("city", None)
 			if isinstance(city, texttype):
 				city = ensurestr(city.encode(encoding="UTF-8", errors="ignore"))
 			if city is not None:
-				GeolocationText += _("City: ") + city + "\n"
+				GeolocationText += _("City: ") + "\t" + city + "\n"
 
 			GeolocationText += "\n"
 
@@ -398,23 +398,23 @@ class Geolocation(Screen):
 			if isinstance(timezone, texttype):
 				timezone = ensurestr(timezone.encode(encoding="UTF-8", errors="ignore"))
 			if timezone is not None:
-				GeolocationText += _("Timezone: ") + timezone + "\n"
+				GeolocationText += _("Timezone: ") + "\t" + timezone + "\n"
 
 			currency = geolocationData.get("currency", None)
 			if isinstance(currency, texttype):
 				currency = ensurestr(currency.encode(encoding="UTF-8", errors="ignore"))
 			if currency is not None:
-				GeolocationText += _("Currency: ") + currency + "\n"
+				GeolocationText += _("Currency: ") + "\t" + currency + "\n"
 
 			GeolocationText += "\n"
 
 			latitude = geolocationData.get("lat", None)
 			if str(float(latitude)) is not None:
-				GeolocationText += _("Latitude: ") + str(float(latitude)) + "\n"
+				GeolocationText += _("Latitude: ") + "\t" + str(float(latitude)) + "\n"
 
 			longitude = geolocationData.get("lon", None)
 			if str(float(longitude)) is not None:
-				GeolocationText += _("Longitude: ") + str(float(longitude)) + "\n"
+				GeolocationText += _("Longitude: ") + "\t" + str(float(longitude)) + "\n"
 			self["AboutScrollLabel"] = ScrollLabel(GeolocationText)
 		except Exception as err:
 			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection"))
@@ -653,47 +653,47 @@ class SystemNetworkInfo(Screen):
 		self.iface = "eth0"
 		eth0 = about.getIfConfig('eth0')
 		if 'addr' in eth0:
-			self.AboutText += _("IP:") + "\t" + eth0['addr'] + "\n"
+			self.AboutText += _("IP:") + "\t" + "\t" + eth0['addr'] + "\n"
 			if 'netmask' in eth0:
 				self.AboutText += _("Netmask:") + "\t" + eth0['netmask'] + "\n"
 			if 'hwaddr' in eth0:
-				self.AboutText += _("MAC:") + "\t" + eth0['hwaddr'] + "\n"
+				self.AboutText += _("MAC:") + "\t" + "\t" + eth0['hwaddr'] + "\n"
 			self.iface = 'eth0'
 
 		eth1 = about.getIfConfig('eth1')
 		if 'addr' in eth1:
-			self.AboutText += _("IP:") + "\t" + eth1['addr'] + "\n"
+			self.AboutText += _("IP:") + "\t" + "\t" + eth1['addr'] + "\n"
 			if 'netmask' in eth1:
 				self.AboutText += _("Netmask:") + "\t" + eth1['netmask'] + "\n"
 			if 'hwaddr' in eth1:
-				self.AboutText += _("MAC:") + "\t" + eth1['hwaddr'] + "\n"
+				self.AboutText += _("MAC:") + "\t" + "\t" + eth1['hwaddr'] + "\n"
 			self.iface = 'eth1'
 
 		ra0 = about.getIfConfig('ra0')
 		if 'addr' in ra0:
-			self.AboutText += _("IP:") + "\t" + ra0['addr'] + "\n"
+			self.AboutText += _("IP:") + "\t" + "\t" + ra0['addr'] + "\n"
 			if 'netmask' in ra0:
 				self.AboutText += _("Netmask:") + "\t" + ra0['netmask'] + "\n"
 			if 'hwaddr' in ra0:
-				self.AboutText += _("MAC:") + "\t" + ra0['hwaddr'] + "\n"
+				self.AboutText += _("MAC:") + "\t" + "\t" + ra0['hwaddr'] + "\n"
 			self.iface = 'ra0'
 
 		wlan0 = about.getIfConfig('wlan0')
 		if 'addr' in wlan0:
-			self.AboutText += _("IP:") + "\t" + wlan0['addr'] + "\n"
+			self.AboutText += _("IP:") + "\t" + "\t" + wlan0['addr'] + "\n"
 			if 'netmask' in wlan0:
 				self.AboutText += _("Netmask:") + "\t" + wlan0['netmask'] + "\n"
 			if 'hwaddr' in wlan0:
-				self.AboutText += _("MAC:") + "\t" + wlan0['hwaddr'] + "\n"
+				self.AboutText += _("MAC:") + "\t" + "\t" + wlan0['hwaddr'] + "\n"
 			self.iface = 'wlan0'
 
 		wlan3 = about.getIfConfig('wlan3')
 		if 'addr' in wlan3:
-			self.AboutText += _("IP:") + "\t" + wlan3['addr'] + "\n"
+			self.AboutText += _("IP:") + "\t" + "\t" + wlan3['addr'] + "\n"
 			if 'netmask' in wlan3:
 				self.AboutText += _("Netmask:") + "\t" + wlan3['netmask'] + "\n"
 			if 'hwaddr' in wlan3:
-				self.AboutText += _("MAC:") + "\t" + wlan3['hwaddr'] + "\n"
+				self.AboutText += _("MAC:") + "\t" + "\t" + wlan3['hwaddr'] + "\n"
 			self.iface = 'wlan3'
 
 		rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
@@ -710,25 +710,25 @@ class SystemNetworkInfo(Screen):
 		self.AboutText += "\n"
 		if isp is not None:
 			if isporg is not None:
-				self.AboutText += _("ISP: ") + isp + " " + "(" + isporg + ")" + "\n"
+				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + "(" + isporg + ")" + "\n"
 			else:
-				self.AboutText +=  "\n" + _("ISP: ") + isp + "\n"
+				self.AboutText +=  "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
 
 		mobile = geolocationData.get("mobile", False)
 		if mobile is not False:
-			self.AboutText += _("Mobile: ") + _("Yes") + "\n"
+			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
-			self.AboutText += _("Mobile: ") + _("No") + "\n"
+			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
 
 		proxy = geolocationData.get("proxy", False)
 		if proxy is not False:
-			self.AboutText += _("Proxy: ") + _("Yes") + "\n"
+			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
-			self.AboutText += _("Proxy: ") + _("No") + "\n"
+			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
 
 		publicip = geolocationData.get("query", None)
 		if str(publicip) != "":
-			self.AboutText +=  _("Public IP: ") + str(publicip) + "\n" + "\n"
+			self.AboutText +=  _("Public IP: ") + "\t" + "\t" + str(publicip) + "\n" + "\n"
 
 		self.console = Console()
 		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
@@ -741,10 +741,10 @@ class SystemNetworkInfo(Screen):
 		for line in result_tmp:
 			if 'Speed:' in line:
 				speed = line.split(': ')[1][:-4]
-				self.AboutText += _("Speed:") + "\t" + speed + _('Mb/s')
+				self.AboutText += _("Speed:") + "\t" + "\t" + speed + _('Mb/s')
 
 		hostname = file('/proc/sys/kernel/hostname').read()
-		self.AboutText += "\n" + _("Hostname:") + "\t" + hostname + "\n"
+		self.AboutText += "\n" + _("Hostname:") + "\t" + "\t" + hostname + "\n"
 		self["AboutScrollLabel"].setText(self.AboutText)
 
 	def cleanup(self):
@@ -918,22 +918,22 @@ class SystemMemoryInfo(Screen):
 			tstLine = out_lines[lidx].split()
 			if "MemTotal:" in tstLine:
 				MemTotal = out_lines[lidx].split()
-				self.AboutText += _("Total memory:") + "\t" + MemTotal[1] + "\n"
+				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1] + "\n"
 			if "MemFree:" in tstLine:
 				MemFree = out_lines[lidx].split()
-				self.AboutText += _("Free memory:") + "\t" + MemFree[1] + "\n"
+				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1] + "\n"
 			if "Buffers:" in tstLine:
 				Buffers = out_lines[lidx].split()
-				self.AboutText += _("Buffers:") + "\t" + Buffers[1] + "\n"
+				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1] + "\n"
 			if "Cached:" in tstLine:
 				Cached = out_lines[lidx].split()
-				self.AboutText += _("Cached:") + "\t" + Cached[1] + "\n"
+				self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1] + "\n"
 			if "SwapTotal:" in tstLine:
 				SwapTotal = out_lines[lidx].split()
-				self.AboutText += _("Total swap:") + "\t" + SwapTotal[1] + "\n"
+				self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1] + "\n"
 			if "SwapFree:" in tstLine:
 				SwapFree = out_lines[lidx].split()
-				self.AboutText += _("Free swap:") + "\t" + SwapFree[1] + "\n\n"
+				self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1] + "\n\n"
 
 		self["actions"].setEnabled(False)
 		self.Console = Console()
@@ -946,8 +946,8 @@ class SystemMemoryInfo(Screen):
 		RamFree = flash[3]
 
 		self.AboutText += _("FLASH") + '\n\n'
-		self.AboutText += _("Total:") + "\t" + RamTotal + "\n"
-		self.AboutText += _("Free:") + "\t" + RamFree + "\n\n"
+		self.AboutText += _("Total:") + "\t" + "\t" + RamTotal + "\n"
+		self.AboutText += _("Free:") + "\t" + "\t" + RamFree + "\n\n"
 
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)

@@ -16263,8 +16263,11 @@ msgstr "Cuando está habilitado, enigma2 cargará bouquets de usuarios no vincul
 msgid "Geolocation"
 msgstr "Geolocalización"
 
-msgid "Geolocation information"
+msgid "Geolocation Information"
 msgstr "Información Geolocalización"
+
+msgid "Information about your Geolocation data"
+msgstr "Información de sus datos de Geolocalización"
 
 msgid "Continent: "
 msgstr "Continente: "
