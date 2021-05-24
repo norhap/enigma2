@@ -237,7 +237,7 @@ class About(Screen):
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model != "gbip4k":
 			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
 		else:
-			AboutText += _("No Display")
+			AboutText += _("No Display") + "\n"
 
 		self["FPVersion"] = StaticText(fp_version)
 
