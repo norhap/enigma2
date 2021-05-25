@@ -1638,13 +1638,13 @@ msgid "Configure which color format should be used on the SCART output."
 msgstr "Configure qué formato de color se debe usar en la salida SCART."
 
 msgid "Configure your internal LAN"
-msgstr "Configura su red interna"
+msgstr "Configura su red Ethernet LAN por cable"
 
 msgid "Configure your network settings and press OK to scan"
 msgstr "Configura tus ajustes de red y pulsa OK para escanear"
 
 msgid "Configure your wireless LAN again"
-msgstr "Configura su red inalámbrica otra vez"
+msgstr "Configura su red inalámbrica Wifi WLAN"
 
 msgid "Configures which video output connector will be used."
 msgstr "Configura qué conector de salida de video se utilizará."
@@ -17294,3 +17294,9 @@ msgstr "Enigma2 revisión: "
 
 msgid "FFmpeg version: "
 msgstr "Versión FFmpeg: "
+
+msgid "Start Wizard"
+msgstr "Iniciar Asistente"
+
+msgid "Network Wizard"
+msgstr "Asistente de Red"
