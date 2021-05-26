@@ -3626,7 +3626,7 @@ msgid "LAN adapter"
 msgstr "Adaptador LAN"
 
 msgid "LAN connection"
-msgstr "Conexión LAN"
+msgstr "Conexión LAN Ethernet-Cable"
 
 msgid "LNB"
 msgstr "LNB"
@@ -7782,8 +7782,8 @@ msgstr "Salida de video"
 msgid "Video setup"
 msgstr "Configuración de video"
 
-msgid "Video wizard"
-msgstr "Asistente de video"
+msgid "Video Wizard"
+msgstr "Asistente de Video"
 
 #, python-format
 msgid "Video: %s fps"
@@ -7874,7 +7874,7 @@ msgid "WEP"
 msgstr "WEP"
 
 msgid "WLAN connection"
-msgstr "Conexión WLAN"
+msgstr "Conexión WLAN-WiFi"
 
 msgid "WPA"
 msgstr "WPA"
