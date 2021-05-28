@@ -3743,8 +3743,8 @@ msgid_plural "List version %d, found %d channels"
 msgstr[0] "Lista de versión %d, encontrado %d canal"
 msgstr[1] "Lista de versión %d, encontrados %d canales"
 
-msgid "Listen to the radio..."
-msgstr "Escuchar la radio…"
+msgid "Listen to the radio"
+msgstr "Escuchar la radio"
 
 msgid "Lists reloaded!"
 msgstr "Listas recargadas!"
@@ -4682,8 +4682,8 @@ msgstr "Reproducir siguiente (volver a canal previo)"
 msgid "Play previous"
 msgstr "Reproduce anterior"
 
-msgid "Play recorded movies..."
-msgstr "Reproducir grabaciones…"
+msgid "Play recorded movies"
+msgstr "Reproducir grabaciones"
 
 msgid "Please add titles to the compilation."
 msgstr "Añadir títulos a la compilación."
@@ -6233,11 +6233,11 @@ msgstr "Mostrar selección de subservicios"
 msgid "Show subtitle selection"
 msgstr "Mostrar selección de subtítulos"
 
-msgid "Show the radio player..."
-msgstr "Mostrar el reproductor de radio…"
+msgid "Show the radio player"
+msgstr "Mostrar el reproductor de radio"
 
-msgid "Show the tv player..."
-msgstr "Mostrar el reproductor de TV…"
+msgid "Show the TV player"
+msgstr "Mostrar el reproductor de TV"
 
 msgid "Show vertical timelines"
 msgstr "Mostrar líneas de tiempo vertical"
@@ -7355,8 +7355,8 @@ msgstr "Alternar infoBar"
 msgid "Toggle show/hide"
 msgstr "Mostrar/ocultar"
 
-msgid "Toggle the tv and the radio player..."
-msgstr "Alterna la televisión y el reproductor de radio…"
+msgid "Toggle the TV and the radio player"
+msgstr "Alterna la televisión y el reproductor de radio"
 
 msgid "Togo"
 msgstr "Togo"
@@ -7939,8 +7939,8 @@ msgstr "Advertencia: no LNB; usando los valores predeterminados de fábrica."
 msgid "Watch movies..."
 msgstr "Ver películas…"
 
-msgid "Watch recordings..."
-msgstr "Ver grabaciones…"
+msgid "Watch recordings"
+msgstr "Ver grabaciones"
 
 msgid "Wed"
 msgstr "Mié"
@@ -8774,8 +8774,8 @@ msgstr "saltar al capítulo por número"
 msgid "languages"
 msgstr "idiomas"
 
-msgid "leave movie player..."
-msgstr "salir del reproductor de películas…"
+msgid "Leave movie player"
+msgstr "Salir del reproductor de películas"
 
 msgid "left"
 msgstr "izquierda"
@@ -9372,11 +9372,11 @@ msgstr "semanalmente"
 msgid "west"
 msgstr "oeste"
 
-msgid "when PiPzap enabled zap channel down..."
-msgstr "cuando esté activo PiPzap cambia canal abajo…"
+msgid "When PiPzap enabled zap channel down"
+msgstr "Cuando esté activo PiPzap cambia canal abajo"
 
-msgid "when PiPzap enabled zap channel up..."
-msgstr "cuando esté activo PiPzap cambia canal arriba…"
+msgid "When PiPzap enabled zap channel up"
+msgstr "Cuando esté activo PiPzap cambia canal arriba"
 
 msgid "White"
 msgstr "Blanco"
@@ -15075,11 +15075,11 @@ msgstr "Acelerar el rendimiento"
 msgid "Display skin"
 msgstr "Skin Display"
 
-msgid "Zoom In/Out TV..."
-msgstr "Zoom In/Out TV..."
+msgid "Zoom In/Out TV"
+msgstr "Zoom Entrada/Salida TV"
 
-msgid "Zoom Off..."
-msgstr "Zoom Apagado..."
+msgid "Zoom Off"
+msgstr "Zoom Apagado"
 
 msgid "used"
 msgstr "usado"
@@ -17300,3 +17300,96 @@ msgstr "Iniciar Asistente"
 
 msgid "Network Wizard"
 msgstr "Asistente de Red"
+
+msgid "Live TV Actions"
+msgstr "Acciones de TV en vivo"
+
+msgid "Scan backwards"
+msgstr "Escanear hacia atrás"
+
+msgid "Pressing this button multiple times will increase the rate of backward scan."
+msgstr "Si pulsa este botón varias veces, aumentará la velocidad de exploración hacia atrás."
+
+msgid "Scan forwards"
+msgstr "Escanear hacia adelante"
+
+msgid "Pressing this button multiple times will increase the rate of forward scan."
+msgstr "Si pulsa este botón varias veces, aumentará la velocidad de exploración hacia adelante."
+
+msgid "InfoBar Show/Hide Actions"
+msgstr "InfoBar Mostrar/Ocultar Acciones"
+
+msgid "Hide the InfoBar"
+msgstr "Ocultar la InfoBar"
+
+msgid "Hide the second InfoBar"
+msgstr "Ocultar la segunda InfoBar"
+
+msgid "Toggle display of the InfoBar"
+msgstr "Alternar visualización de la InfoBar"
+
+msgid "Service Zap Actions"
+msgstr "Acciones de Servicio Zap"
+
+msgid "Digit entry for service selection"
+msgstr "Entrada de dígitos para la selección de servicios"
+
+msgid "Service Selection Actions"
+msgstr "Acciones Selección de Servicios"
+
+msgid "Menu Actions"
+msgstr "Acciones Menú"
+
+msgid "Open main menu"
+msgstr "Abrir Menú Principal"
+
+msgid "InfoBar EPG Actions"
+msgstr "Acciones EPG InfoBar"
+
+msgid "Aspect ratio list"
+msgstr "Lista de relación de Aspecto"
+
+msgid "Recording Actions"
+msgstr "Acciones de Grabación"
+
+msgid "Instant recording"
+msgstr "Grabación instantánea"
+
+msgid "Audio Actions"
+msgstr "Acciones Audio"
+
+msgid "Audio options"
+msgstr "Opciones de Audio"
+
+msgid "Red/HbbTV Button Actions"
+msgstr "Acciones Botón Rojo/HbbTV"
+
+msgid "Timer Actions"
+msgstr "Acciones Temporizadores"
+
+msgid "Zoom Actions"
+msgstr "Acciones Zoom"
+
+msgid "Timeshift Actions"
+msgstr "Acciones Timeshift"
+
+msgid "Teletext Actions"
+msgstr "Acciones Teletexto"
+
+msgid "View teletext"
+msgstr "Ver teletexto"
+
+msgid "Extension Actions"
+msgstr "Acciones Extension"
+
+msgid "Show extensions"
+msgstr "Mostrar extensiones"
+
+msgid "Subtitle Actions"
+msgstr "Acciones Subtítulos"
+
+msgid "Subtitle show/hide"
+msgstr "Subtitulos mostrar/ocultar"
+
+msgid "HDMI-IN Actions"
+msgstr "Acciones HDMI-IN"
