@@ -57,29 +57,47 @@ class IconCheckPoller:
 			pass
 		self.timer.startLongTimer(30)
 
-	def jobTask(self):
-		linkState = 0
-		if exists("/sys/class/net/wlan0/operstate"):
-			linkState = fileReadLine("/sys/class/net/wlan0/operstate")
-			if linkState != "down":
-				linkState = fileReadLine("/sys/class/net/wlan0/carrier")
-		elif exists("/sys/class/net/eth0/operstate"):
-			linkState = fileReadLine("/sys/class/net/eth0/operstate")
-			if linkState != "down":
-				linkState = fileReadLine("/sys/class/net/eth0/carrier")
-		linkState = linkState[:1]
-		if exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "1":
-			fileWriteLine("/proc/stb/lcd/symbol_network", linkState)
-		elif exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "0":
-			fileWriteLine("/proc/stb/lcd/symbol_network", "0")
+	def JobTask(self):
+		LinkState = 0
+		if exists('/sys/class/net/wlan0/operstate'):
+			LinkState = open('/sys/class/net/wlan0/operstate').read()
+			if LinkState != 'down':
+				LinkState = open('/sys/class/net/wlan0/operstate').read()
+		elif exists('/sys/class/net/eth0/operstate'):
+			LinkState = open('/sys/class/net/eth0/operstate').read()
+			if LinkState != 'down':
+				LinkState = open('/sys/class/net/eth0/carrier').read()
+		LinkState = LinkState[:1]
+		if exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == '1':
+			f = open("/proc/stb/lcd/symbol_network", "w")
+			f.write(str(LinkState))
+			f.close()
+		elif exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == '0':
+			f = open("/proc/stb/lcd/symbol_network", "w")
+			f.write('0')
+			f.close()
+
 		USBState = 0
-		for bus in busses():
-		    dev = bus
-		    for dev in ["deviceClass","idVendor"]:
-		        if dev != 9 and dev != 2 and dev != 3034 and dev > 0:
-			        USBState = 1
-		if exists("/proc/stb/lcd/symbol_usb"):
-			fileWriteLine("/proc/stb/lcd/symbol_usb", USBState)
+		busses = usb.busses()
+		for bus in busses:
+			devices = bus.devices
+			for dev in devices:
+				if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor > 0:
+					# print ' '
+					# print "Device:", dev.filename
+					# print "  Number:", dev.deviceClass
+					# print "  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor)
+					# print "  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct)
+					USBState = 1
+		if exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '1':
+			f = open("/proc/stb/lcd/symbol_usb", "w")
+			f.write(str(USBState))
+			f.close()
+		elif exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '0':
+			f = open("/proc/stb/lcd/symbol_usb", "w")
+			f.write('0')
+			f.close()
+
 		self.timer.startLongTimer(30)
 
 
