@@ -209,15 +209,6 @@ class About(Screen):
 
 		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
 
-		if fileExists("/usr/bin/dvb-fe-tool"):
-			import time
-			try:
-				cmd = 'dvb-fe-tool > /tmp/dvbfetool.txt ; dvb-fe-tool -f 1 >> /tmp/dvbfetool.txt ; cat /proc/bus/nim_sockets >> /tmp/dvbfetool.txt'
-				res = Console().ePopen(cmd)
-				time.sleep(0.1)
-			except:
-				pass
-
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString().replace("GStreamer","")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
@@ -440,6 +431,14 @@ class TunerInformation(InformationBase):
 		nims = nimmanager.nimList()
 		descList = []
 		curIndex = -1
+		if fileExists("/usr/bin/dvb-fe-tool"):
+			import time
+			try:
+				cmd = 'dvb-fe-tool > /tmp/dvbfetool.txt ; dvb-fe-tool -f 1 >> /tmp/dvbfetool.txt ; cat /proc/bus/nim_sockets >> /tmp/dvbfetool.txt'
+				res = Console().ePopen(cmd)
+				time.sleep(0.1)
+			except:
+				pass
 		for count in range(len(nims)):
 			data = nims[count].split(":")
 			idx = data[0].strip("Tuner").strip()
