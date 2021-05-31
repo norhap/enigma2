@@ -5208,6 +5208,9 @@ msgid "Remove all logfiles"
 msgstr "Eliminar todos los registros"
 
 msgid "Delete Bookmark"
+msgstr "Eliminar Marcador"
+
+msgid "Delete bookmark"
 msgstr "Eliminar marcador"
 
 msgid "Remove currently selected title"
@@ -17435,11 +17438,23 @@ msgstr "Puede que no haya suficiente espacio en la ubicación seleccionada.\n"
 msgid "Location Box Actions"
 msgstr "Acciones de Ubicación"
 
+msgid "Select the currently highlighted location and exit"
+msgstr "Seleccione la ubicación resaltada actualmente y salga"
+
+msgid "Location Box Context Menu"
+msgstr "Menú Contextual Ubicación"
+
 msgid "Cancel the location selection"
 msgstr "Cancelar la selección de ubicación"
 
 msgid "Change directory / Select bookmark"
-msgstr "Cambiar directorio/Seleccionar marcador"
+msgstr "Cambiar directorio / Seleccionar marcador"
+
+msgid "Bookmark Actions"
+msgstr "Acciones Marcadores"
+
+msgid "Add / Delete bookmark"
+msgstr "Añadir / Eliminar Marcadores"
 
 msgid "Display context menu"
 msgstr "Mostrar menú contextual"
