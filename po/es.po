@@ -17444,6 +17444,9 @@ msgstr "Seleccione la ubicación resaltada actualmente y salga"
 msgid "Location Box Context Menu"
 msgstr "Menú Contextual Ubicación"
 
+msgid "Select Timeshift Location"
+msgstr "Seleccionar Ubicación Timeshift"
+
 msgid "Cancel the location selection"
 msgstr "Cancelar la selección de ubicación"
 
