@@ -705,6 +705,9 @@ msgstr "Añadir un nuevo título"
 msgid "Add bookmark"
 msgstr "Añadir marcador"
 
+msgid "Add Bookmark"
+msgstr "Añadir Marcador"
+
 msgid "Add directory to playlist"
 msgstr "Agregar directorio a la lista de reproducción"
 
@@ -1750,15 +1753,8 @@ msgstr "Cubrir la línea blanca discontinua para este canal"
 msgid "Create DVD-ISO"
 msgstr "Crear DVD-ISO"
 
-msgid "Create new folder and exit"
-msgstr "Crear nueva carpeta y salir"
-
 msgid "Create seperate radio userbouquet"
 msgstr "Crea un bouquet de radio por separado"
-
-#, python-format
-msgid "Creating directory %s failed."
-msgstr "Creación de la carpeta %s falló."
 
 msgid "Creating filesystem"
 msgstr "Creando sistema de ficheros"
@@ -2175,14 +2171,6 @@ msgid ""
 msgstr ""
 "¿Realmente quiere desinstalar\n"
 "el plugin “%s”?"
-
-#, python-format
-msgid "Do you really want to remove directory %s from the disk?"
-msgstr "Realmente quiere borrar el directorio %s del disco?"
-
-#, python-format
-msgid "Do you really want to remove your bookmark of %s?"
-msgstr "Realmente quiere borrar su marcador de %s?"
 
 msgid "Do you want this?"
 msgstr "Quiere esto?"
@@ -3489,10 +3477,6 @@ msgstr "Solo Disco Duro interno"
 msgid "Interval between keys when repeating:"
 msgstr "Intervalo entre teclas al repetir:"
 
-#, python-format
-msgid "Invalid directory selected: %s"
-msgstr "Directorio seleccionado inválido: %s"
-
 msgid "Invalid location"
 msgstr "Localización inválida"
 
@@ -4709,9 +4693,6 @@ msgstr "Introducir nombre de fichero"
 msgid "Please enter filename (empty = use current date)"
 msgstr "Introducir nombre de fichero (vacío=usar fecha actual)"
 
-msgid "Please enter name of the new directory"
-msgstr "Introducir nombre de nuevo directorio"
-
 msgid "Please enter new description:"
 msgstr "Introducir nueva descripción:"
 
@@ -5226,7 +5207,7 @@ msgstr "Eliminar una entrada del servidor de nombres"
 msgid "Remove all logfiles"
 msgstr "Eliminar todos los registros"
 
-msgid "Remove bookmark"
+msgid "Delete Bookmark"
 msgstr "Eliminar marcador"
 
 msgid "Remove currently selected title"
@@ -5243,10 +5224,6 @@ msgstr "Eliminar título"
 
 msgid "Removing"
 msgstr "Eliminando"
-
-#, python-format
-msgid "Removing directory %s failed. (Maybe not empty.)"
-msgstr "Eliminar directorio %s falló. (Puede que no esté vacío.)"
 
 msgid "Removing partition table"
 msgstr "Eliminando tabla de particiones"
@@ -5767,10 +5744,6 @@ msgstr "Seleccionar adaptador de red"
 msgid "Select a wireless network"
 msgstr "Seleccionar una red inhalámbrica"
 
-msgid "Select action"
-msgstr "Seleccionar acción"
-
-#, python-format
 msgid "Select action for timer '%s'."
 msgstr "Seleccionar acción para el temporizador ‘%s’."
 
@@ -6768,9 +6741,6 @@ msgstr "Cambiar de canal hacia arriba"
 msgid "Switch to TV mode"
 msgstr "Cambiar a modo TV"
 
-msgid "Switch to filelist"
-msgstr "Cambiar a modo lista"
-
 msgid "Switch to next bouquet"
 msgstr "Cambiar al siguiente bouquet"
 
@@ -6971,10 +6941,6 @@ msgstr ""
 "\n"
 "Test Pattern por TigerDave - www.tigerdave.com/ht_menu.htm"
 
-#, python-format
-msgid "The path %s already exists."
-msgstr "La ruta %s ya existe."
-
 msgid "The pin code you entered is wrong."
 msgstr "El código PIN introducido es incorrecto."
 
@@ -7049,13 +7015,6 @@ msgstr "No hay actualizaciones disponibles."
 
 msgid "There is no signal to lock on !"
 msgstr "¡No hay señal para bloquear!"
-
-msgid ""
-"There might not be enough Space on the selected Partition.\n"
-"Do you really want to continue?"
-msgstr ""
-"Es posible que no haya suficiente espacio en la partición seleccionada.\n"
-"¿De verdad quieres continuar?"
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Este medio de DVD RW ya está formateado - el formateo borrará todo el contenido del disco."
@@ -9026,9 +8985,6 @@ msgstr "eliminar todas los indicadores nuevos encontrados"
 msgid "remove before this position"
 msgstr "eliminar tras esta posición"
 
-msgid "remove bookmark"
-msgstr "eliminar marcador"
-
 msgid "Remove bouquet from parental protection"
 msgstr "Eliminar bouquet de la protección parental"
 
@@ -9263,9 +9219,6 @@ msgstr "Dejar de usar como canal de inicio"
 
 msgid "successful"
 msgstr "exitoso"
-
-msgid "Switch to bookmarks"
-msgstr "Cambia a marcadores"
 
 msgid "switch to filelist"
 msgstr "cambia a lista de archivos"
@@ -17423,3 +17376,97 @@ msgstr "Directorio '%s' no se puede escribir!"
 
 msgid "Directory '%s' can't be linked to recordings!"
 msgstr "Directorio '%s' no se puede vincular a grabaciones!"
+
+msgid "Error: Invalid location!"
+msgstr "Error: Ubicación Inválida!"
+
+msgid "Switch to bookmarks panel"
+msgstr "Cambiar al panel de marcadores"
+
+msgid "Reload bookmarks"
+msgstr "Recargar marcadores"
+
+msgid "Rename directory"
+msgstr "Renombrar directorio"
+
+msgid "Delete directory"
+msgstr "Eliminar directorio"
+
+msgid "Select Movie Location"
+msgstr "Seleccionar Ubicación de Películas"
+
+msgid "Error: The filename may not be blank!"
+msgstr "Error: Es posible que el nombre del archivo no esté en blanco!"
+
+msgid "Do you really want to delete the '%s' bookmark?"
+msgstr "Desea eliminar el '%s' marcador?"
+
+msgid "Enter name of new directory:"
+msgstr "Ingrese el nombre del nuevo directorio:"
+
+msgid "Error: Directory '%s' already exists!"
+msgstr "Error: El Directorio '%s' ya existe!"
+
+msgid "Error: Unable to create directory '%s'!"
+msgstr "Error: No se puede crear el directorio '%s'!"
+
+msgid "Error: Invalid directory '%s' selected!"
+msgstr "Error: Inválido directorio '%s' seleccionado!"
+
+msgid "Error: File or directory '%s' already exists!"
+msgstr "Error: Archivo o directorio '%s' ya existe!"
+
+msgid "Error: Unable to rename directory '%s' to '%s'!"
+msgstr "Error: no se puede cambiar el nombre del directorio  '%s' a '%s'!"
+
+msgid "Do you really want to delete the '%s' directory?"
+msgstr "Desea eliminar el '%s' directorio?"
+
+msgid "Error: Unable to delete directory '%s'! (Diretory may not be empty.)"
+msgstr "Error: no se puede eliminar el directorio '%s'! (Es posible que el directorio no esté vacío)"
+
+msgid "There may not be enough space on the selected location.\n"
+"\n"
+"Do you really want to continue?"
+msgstr "Puede que no haya suficiente espacio en la ubicación seleccionada.\n"
+"\n"
+"Desea continuar?"
+
+msgid "Location Box Actions"
+msgstr "Acciones de Ubicación"
+
+msgid "Cancel the location selection"
+msgstr "Cancelar la selección de ubicación"
+
+msgid "Change directory / Select bookmark"
+msgstr "Cambiar directorio/Seleccionar marcador"
+
+msgid "Display context menu"
+msgstr "Mostrar menú contextual"
+
+msgid "Mode down a line"
+msgstr "Modo en una línea"
+
+msgid "Mode down a screen"
+msgstr "Modo abajo de una pantalla"
+
+msgid "Move down to last line"
+msgstr "Bajar a la última línea"
+
+msgid "Move up to first line"
+msgstr "Subir a la primera línea"
+
+msgid "Panel Selection Actions"
+msgstr "Acciones de selección de panel"
+
+msgid "Switch to directories panel"
+msgstr "Cambiar al panel de directorios"
+
+msgid "Switch to the other panel"
+msgstr "Cambiar al otro panel"
+
+msgid "Quick Select Actions"
+msgstr "Acciones de selección rápida"
+
+msgid "SMS style QuickSelect location selection"
+msgstr "Selección de ubicación QuickSelect estilo SMS"
