@@ -27,7 +27,6 @@ install_PYTHON = \
 	Hotkey.py \
 	InfoBar.py \
 	InfoBarGenerics.py \
-	Information.py \
 	InputBox.py \
 	InputDeviceSetup.py \
 	InstallWizard.py \
