@@ -2,6 +2,7 @@ installdir = $(pkglibdir)/python/Screens
 
 install_PYTHON = \
 	__init__.py \
+	About.py \
 	AudioSelection.py \
 	AutoDiseqc.py \
 	CCcamInfo.py \
@@ -49,6 +50,7 @@ install_PYTHON = \
 	PowerTimerEdit.py \
 	PowerTimerEntry.py \
 	PVRState.py \
+	Rc.py \
 	RdsDisplay.py \
 	Recording.py \
 	Satconfig.py \
