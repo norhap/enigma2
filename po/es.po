@@ -5114,7 +5114,7 @@ msgstr "Reiniciar"
 msgid "Recall to previous service"
 msgstr "Volver al canal anterior"
 
-msgid "Record"
+msgid "Playback Setup"
 msgstr "Ajustes Grabación & Multimedia"
 
 msgid "Record time limited due to conflicting timer %s"
@@ -5124,7 +5124,7 @@ msgid "Recording"
 msgstr "Grabando"
 
 msgid "Recording Setup"
-msgstr "Configuración de la grabación"
+msgstr "Ajustes Grabaciones"
 
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
@@ -9573,8 +9573,8 @@ msgstr "Opción de eliminado en segundo plano"
 msgid "Background delete speed"
 msgstr "Velocidad de eliminación en segundo plano"
 
-msgid "Behavior of 'pause and ok' when paused"
-msgstr "Comportamiento de ‘pausa y ok’ cuando se está en pausa"
+msgid "Behavior of PAUSE and OK when paused"
+msgstr "Comportamiento de tecla OK y PAUSA cuando se está en pausa"
 
 msgid "Behavior of 0 key in PiP-mode"
 msgstr "Comportamiento de la tecla 0 en modo PiP"
@@ -10590,7 +10590,7 @@ msgstr "Cuando está habilitada, esta configuración tiene más peso que ‘Sint
 msgid "When enabled, this setting has more weight than 'Preferred tuner'."
 msgstr "Cuando está habilitado, esta configuración tiene más peso que ‘Sintonizador preferido’."
 
-msgid "When enabled, timeshift starts automatically in background after specified time."
+msgid "When enabled, timeshift starts automatically in background after the specified time."
 msgstr "Cuando está habilitado, Timeshift se inicia automáticamente en segundo plano después del tiempo especificado."
 
 msgid "When enabled, use DHCP for the IP configuration."
@@ -17373,6 +17373,9 @@ msgstr "Acciones Zoom"
 msgid "Timeshift Actions"
 msgstr "Acciones Timeshift"
 
+msgid "Timeshift Setup"
+msgstr "Ajustes Timeshift"
+
 msgid "Teletext Actions"
 msgstr "Acciones Teletexto"
 
@@ -17393,3 +17396,30 @@ msgstr "Subtitulos mostrar/ocultar"
 
 msgid "HDMI-IN Actions"
 msgstr "Acciones HDMI-IN"
+
+msgid "Set the default location for your recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
+msgstr "Establezca la ubicación por defecto para sus grabaciones. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
+
+msgid "Set the default location for your timers. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
+msgstr "Establezca la ubicación por defecto para sus temporizadores. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
+
+msgid "Set the default location for your instant recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
+msgstr "Establezca la ubicación por defecto para sus grabaciones instantáneas. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
+
+msgid "Set the default location for your timeshift files. Press OK to add new locations, LEFT/RIGHT to select any existing locations."
+msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar cualquier ubicación existente."
+
+msgid "Please select an acceptable directory."
+msgstr "Seleccione un directorio aceptable."
+
+msgid "Directory '%s' does not exist!"
+msgstr "El directorio '%s' does no exixte!"
+
+msgid "Flash directory '%s' not allowed!"
+msgstr "Directorio Flash '%s' no permitido!"
+
+msgid "Directory '%s' not writeable!"
+msgstr "Directorio '%s' no se puede escribir!"
+
+msgid "Directory '%s' can't be linked to recordings!"
+msgstr "Directorio '%s' no se puede vincular a grabaciones!"
