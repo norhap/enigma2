@@ -49,9 +49,11 @@
 
 	<map context="ColorActions">
 		<key id="KEY_RED" mapto="red" flags="m" />
+		<key id="KEY_RED" mapto="red" flags="b" />
 		<key id="KEY_RED" mapto="RED" flags="b" />
 		<key id="KEY_RED" mapto="redLong" flags="l" />
 		<key id="KEY_GREEN" mapto="green" flags="m" />
+		<key id="KEY_GREEN" mapto="green" flags="b" />
 		<key id="KEY_GREEN" mapto="GREEN" flags="b" />
 		<key id="KEY_GREEN" mapto="greenLong" flags="l" />
 		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
