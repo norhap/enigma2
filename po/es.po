@@ -17491,3 +17491,6 @@ msgstr "Directorios"
 
 msgid "If the upper panel is active pressing OK will change the current directory.  If the lower panel is active pressing OK will select the current bookmark and exit."
 msgstr "Si directorios está activo, presionando OK cambiará el directorio actual. Si marcadores está activo, pulsando OK seleccionará el marcador actual y saldrá."
+
+msgid "Options/Restore"
+msgstr "Restaurar/Opciones"
