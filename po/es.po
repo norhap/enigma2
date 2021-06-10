@@ -7566,13 +7566,10 @@ msgid "Update"
 msgstr "Actualizar"
 
 msgid "Update and ask to reboot"
-msgstr "Actualizar y preguntar por reinicio"
+msgstr "Actualizar"
 
-msgid "Update and reboot"
-msgstr "Actualizar y reiniciar"
-
-msgid "Update and reboot (recommended)"
-msgstr "Actualizar y reiniciar (recomendado)"
+msgid "Update and ask to reboot (recommended)"
+msgstr "Actualizar"
 
 msgid "Update channel list only"
 msgstr "Actualizar solo lista de canales"
