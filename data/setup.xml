@@ -1,7 +1,6 @@
 <setupxml>
 	<setup key="AccessLevel" title="User Mode Setup">
 		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
-		<item level="0" text="Open Vision revision check" description="When enabled, you will see the available revision on github">config.misc.OVupdatecheck</item>
 	</setup>
 	<setup key="AutoLanguage" title="Auto Language Setup">
 		<item level="0" text="Audio language selection 1" description="Configure the first audio language (highest priority).">config.autolanguage.audio_autoselect1</item>
