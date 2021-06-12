@@ -82,13 +82,16 @@ class PicCript(Renderer):
 
 	def matchCAId(self, caids):
 		lines = []
-		for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-			if fileHas("/tmp/ecm.info","CAID: 0x") or line.startswith("caid: 0x"):
-				for caid in caids:
-					sName = self.condAccessIds.get(line[8:10])
-					if sName is not None:
-						return sName
-		return "NAG"
+		try:
+		   for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
+			   if fileHas("/tmp/ecm.info","CAID: 0x") or line.startswith("caid: 0x"):
+				   for caid in caids:
+					   sName = self.condAccessIds.get(line[8:10])
+					   if sName is not None:
+						   return sName
+		   return "NAG"
+		except IOError as err:
+			print("[Errno 2] No such file or directory: /tmp/ecm.info")
 
 	def findPicon(self, serviceName):
 		for path in self.searchPaths:
