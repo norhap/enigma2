@@ -17502,13 +17502,16 @@ msgid "Checking ONID/TSID"
 msgstr "Comprobación ONID/TSID"
 
 msgid "Enter valid ONID/TSID"
-msgstr "Introduzca un válido ONID/TSID"
+msgstr "Introduzca un ONID/TSID válido"
 
 msgid "This not valid ONID/TSID"
-msgstr "No es un válido ONID/TSID"
+msgstr "No es un ONID/TSID válido"
 
 msgid "This valid ONID/TSID"
-msgstr "Es un válido ONID/TSID"
+msgstr "Es un ONID/TSID válido"
 
 msgid "Valid ONID/TSID look at www.lyngsat.com..."
 msgstr "Consulta un ONID/TSID válido en www.lyngsat.com..."
+
+msgid "Select action"
+msgstr "Seleccione la acción"
