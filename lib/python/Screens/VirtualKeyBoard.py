@@ -87,7 +87,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 	</screen>"""
 
 	def __init__(self, session, title=_("Virtual KeyBoard Text:"), text="", maxSize=False, visible_width=False, type=Input.TEXT, currPos=None, allMarked=False, style=VKB_ENTER_ICON):
-		Screen.__init__(self, session, mandatoryWidgets=["text", "list"])
+		Screen.__init__(self, session, mandatoryWidgets=["prompt", "text", "list"])
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Virtual KeyBoard"))
 		prompt = title  # Title should only be used for screen titles!
