@@ -431,6 +431,10 @@ class AttribError(Exception):
 		return self.msg
 
 
+class AttribDeprecatedError(AttribError):
+	pass
+
+
 class AttribElementError(AttribError):
 	pass
 
@@ -453,6 +457,9 @@ class AttributeParser:
 	def applyOne(self, attribute, value):
 		try:
 			getattr(self, attribute)(value)
+		except AttribDeprecatedError as err:
+			# print("[Skin] Warning: Attribute '%s' has been deprecated, use '%s' instead!" % (attribute, err))
+			pass  # Don't start reporting deprecated attibutes until there is agreement to deprecate them.
 		except AttribElementError as err:
 			print("[Skin] Error: Attribute '%s' with value '%s' has invalid element(s) '%s'!" % (attribute, value, err))
 		except AttribValueError as err:
@@ -462,16 +469,13 @@ class AttributeParser:
 		except SkinError as err:
 			print("[Skin] Error: %s" % err)
 		except Exception as err:
-			print("[Skin] Error: Attribute '%s' with value '%s' in object of type '%s' (Error: '%s')!" % (attrib, value, self.guiObject.__class__.__name__, err))
+			print("[Skin] Error: Attribute '%s' with value '%s' in object of type '%s' (Error: '%s')!" % (attribute, value, self.guiObject.__class__.__name__, err))
 
 	def applyHorizontalScale(self, value):
 		return int(int(value) * self.scaleTuple[0][0] / self.scaleTuple[0][1])
 
 	def applyVerticalScale(self, value):
 		return int(int(value) * self.scaleTuple[1][0] / self.scaleTuple[1][1])
-
-	def alphatest(self, value):  # This legacy definition uses an inconsistent name!
-		self.alphaTest(value)
 
 	def alphaTest(self, value):
 		try:
@@ -482,6 +486,10 @@ class AttributeParser:
 			}[value])
 		except KeyError:
 			raise AttribValueError("'on', 'off' or 'blend'")
+
+	def alphatest(self, value):  # This legacy definition uses an inconsistent name, use 'alphaTest' instead!
+		self.alphaTest(value)
+		raise AttribDeprecatedError("alphaTest")
 
 	def animationMode(self, value):
 		try:
@@ -523,25 +531,26 @@ class AttributeParser:
 		self.guiObject.setBorderColor(parseColor(value))
 
 	def borderWidth(self, value):
-		self.guiObject.setBorderWidth(int(value))
-
-	def colposition(self, value):
-		pass
+		# print("[Skin] DEBUG: Scale borderWidth %d -> %d." % (int(value), self.applyVerticalScale(value)))
+		self.guiObject.setBorderWidth(self.applyVerticalScale(value))
 
 	def colPosition(self, value):
 		pass
 
-	def conditional(self, value):
-		pass
+	def colposition(self, value):
+		raise AttribDeprecatedError("colPosition")
 
-	def dividechar(self, value):
+	def conditional(self, value):
 		pass
 
 	def divideChar(self, value):
 		pass
 
+	def dividechar(self, value):
+		raise AttribDeprecatedError("divideChar")
+
 	def enableWrapAround(self, value):
-		value = True if value.lower() in ("1", "enabled", "enablewraparound", "on", "true", "yes") else False
+		value = value.lower() in ("1", "enabled", "enablewraparound", "on", "true", "yes")
 		self.guiObject.setWrapAround(value)
 
 	def flags(self, value):
@@ -573,8 +582,9 @@ class AttributeParser:
 	def foregroundNotCrypted(self, value):
 		self.guiObject.setForegroundColor(parseColor(value))
 
-	def halign(self, value):  # This legacy definition uses an inconsistent name!
+	def halign(self, value):  # This legacy definition uses an inconsistent name, use 'horizontalAlignment' instead!
 		self.horizontalAlignment(value)
+		raise AttribDeprecatedError("horizontalAlignment")
 
 	def horizontalAlignment(self, value):
 		try:
@@ -589,7 +599,11 @@ class AttributeParser:
 			raise AttribValueError("'left', 'center'/'centre', 'right' or 'block'")
 
 	def itemHeight(self, value):
-		self.guiObject.setItemHeight(int(value))
+		# print("[Skin] DEBUG: Scale itemHeight %d -> %d." % (int(value), self.applyVerticalScale(value)))
+		self.guiObject.setItemHeight(self.applyVerticalScale(value))
+
+	def leftColAlign(self, value):
+		self.horizontalAlignment(value)
 
 	def noWrap(self, value):
 		value = 1 if value.lower() in ("1", "enabled", "nowrap", "on", "true", "yes") else 0
@@ -611,15 +625,17 @@ class AttributeParser:
 		except KeyError:
 			raise AttribValueError("'orVertical', 'orTopToBottom', 'orBottomToTop', 'orHorizontal', 'orLeftToRight' or 'orRightToLeft'")
 
+	def OverScan(self, value):  # This legacy definition uses an inconsistent name, use 'overScan' instead!
+		self.overScan(value)
+		raise AttribDeprecatedError("overScan")
+
 	def overScan(self, value):
 		self.guiObject.setOverscan(value)
 
-	def OverScan(self, value):  # This legacy definition uses an inconsistent name!
-		self.overScan(value)
-
 	def pixmap(self, value):
-		if value.endswith(".svg"): # if graphic is svg force alphatest to "blend"
-			self.guiObject.setAlphatest(2)
+		# Why is this being forced?  Why not just use add the 'alphaTest' attribute?
+		# if value.endswith(".svg"):  # If the image is a SVG force alphatest to "blend".
+		# 	self.guiObject.setAlphatest(2)
 		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
 
 	def pointer(self, value):
@@ -631,20 +647,27 @@ class AttributeParser:
 	def position(self, value):
 		# print("[Skin] DEBUG: Position '%s'." % str(value))
 		self.guiObject.move(ePoint(*value) if isinstance(value, tuple) else parsePosition(value, self.scaleTuple, self.guiObject, self.desktop, self.guiObject.csize()))
-		# self.guiObject.move(parsePosition(value, self.scaleTuple, self.guiObject, self.desktop, self.guiObject.csize()))
+
+	def resolution(self, value):
+		pass
+
+	def rightColAlign(self, value):
+		self.horizontalAlignment(value)
 
 	def scale(self, value):
 		value = 1 if value.lower() in ("1", "enabled", "on", "scale", "true", "yes") else 0
 		self.guiObject.setScale(value)
 
-	def scrollbarBackgroundPicture(self, value):  # For compatibility same as scrollbarBackgroundPixmap.
-		self.scrollbarBackgroundPixmap(value)
-
 	def scrollbarBackgroundPixmap(self, value):
 		self.guiObject.setScrollbarBackgroundPicture(loadPixmap(value, self.desktop))
 
-	def scrollbarbackgroundPixmap(self, value):  # This legacy definition uses an inconsistent name!
+	def scrollbarBackgroundPicture(self, value):  # For compatibility same as 'scrollbarBackgroundPixmap', use 'scrollbarBackgroundPixmap' instead.
 		self.scrollbarBackgroundPixmap(value)
+		raise AttribDeprecatedError("scrollbarBackgroundPixmap")
+
+	def scrollbarbackgroundPixmap(self, value):  # This legacy definition uses an inconsistent name, use'scrollbarBackgroundPixmap' instead!
+		self.scrollbarBackgroundPixmap(value)
+		raise AttribDeprecatedError("scrollbarBackgroundPixmap")
 
 	def scrollbarMode(self, value):
 		try:
@@ -661,22 +684,33 @@ class AttributeParser:
 		self.guiObject.setSliderBorderColor(parseColor(value))
 
 	def scrollbarSliderBorderWidth(self, value):
-		self.guiObject.setScrollbarSliderBorderWidth(int(value))
+		# print("[Skin] DEBUG: Scale scrollbarSliderBorderWidth %d -> %d." % (int(value), self.applyHorizontalScale(value)))
+		self.guiObject.setScrollbarSliderBorderWidth(self.applyHorizontalScale(value))
 
 	def scrollbarSliderForegroundColor(self, value):
 		self.guiObject.setSliderForegroundColor(parseColor(value))
 
-	def scrollbarSliderPicture(self, value):  # For compatibility same as sliderPixmap.
-		self.sliderPixmap(value)
+	def scrollbarSliderPicture(self, value):  # For compatibility same as 'scrollbarSliderPixmap', use 'scrollbarSliderPixmap' instead.
+		self.scrollbarSliderPixmap(value)
+		raise AttribDeprecatedError("scrollbarSliderPixmap")
+
+	def scrollbarSliderPixmap(self, value):
+		self.guiObject.setSliderPicture(loadPixmap(value, self.desktop))
 
 	def scrollbarWidth(self, value):
-		self.guiObject.setScrollbarWidth(int(value))
+		# print("[Skin] DEBUG: Scale scrollbarWidth %d -> %d." % (int(value), self.applyHorizontalScale(value)))
+		self.guiObject.setScrollbarWidth(self.applyHorizontalScale(value))
 
 	def secondFont(self, value):
 		self.guiObject.setSecondFont(parseFont(value, self.scaleTuple))
 
-	def secondfont(self, value):  # This legacy definition uses an inconsistent name!
+	def secondfont(self, value):  # This legacy definition uses an inconsistent name, use 'secondFont' instead!
 		self.secondFont(value)
+		raise AttribDeprecatedError("secondFont")
+
+	def seek_pointer(self, value):  # This legacy definition uses an inconsistent name, use 'seekPointer' instead!
+		self.seekPointer(value)
+		raise AttribDeprecatedError("seekPointer")
 
 	def seekPointer(self, value):
 		(name, pos) = [x.strip() for x in value.split(":", 1)]
@@ -684,15 +718,13 @@ class AttributeParser:
 		pos = parsePosition(pos, self.scaleTuple)
 		self.guiObject.setPointer(1, ptr, pos)
 
-	def seek_pointer(self, value):  # This legacy definition uses an inconsistent name!
-		self.seekPointer(value)
-
 	def selection(self, value):
 		value = 1 if value.lower() in ("1", "enabled", "on", "selection", "true", "yes") else 0
 		self.guiObject.setSelectionEnable(value)
 
-	def selectionDisabled(self, value):
+	def selectionDisabled(self, value):  # This legacy definition is a redundant option and is uncharacteristic, use 'selection="0"' etc instead!
 		self.guiObject.setSelectionEnable(0)
+		raise AttribDeprecatedError("selection")
 
 	def selectionPixmap(self, value):
 		self.guiObject.setSelectionPicture(loadPixmap(value, self.desktop))
@@ -706,10 +738,10 @@ class AttributeParser:
 	def size(self, value):
 		# print("[Skin] DEBUG: Size '%s'." % str(value))
 		self.guiObject.resize(eSize(*value) if isinstance(value, tuple) else parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
-		# self.guiObject.resize(parseSize(value, self.scaleTuple, self.guiObject, self.desktop))
 
-	def sliderPixmap(self, value):
-		self.guiObject.setSliderPicture(loadPixmap(value, self.desktop))
+	def sliderPixmap(self, value):  # For compatibility same as 'scrollbarSliderPixmap', use 'scrollbarSliderPixmap' instead.
+		self.scrollbarSliderPixmap(value)
+		raise AttribDeprecatedError("sliderPixmap")
 
 	def split(self, value):
 		pass
@@ -728,8 +760,9 @@ class AttributeParser:
 		value = 1 if value.lower() in ("1", "enabled", "on", "transparent", "true", "yes") else 0
 		self.guiObject.setTransparent(value)
 
-	def valign(self, value):  # This legacy definition uses an inconsistent name!
+	def valign(self, value):  # This legacy definition uses an inconsistent name, use 'verticalAlignment' instead!
 		self.verticalAlignment(value)
+		raise AttribDeprecatedError("verticalAlignment")
 
 	def verticalAlignment(self, value):
 		try:
@@ -760,7 +793,7 @@ def reloadWindowStyles():
 def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_CURRENT_SKIN):
 	"""Loads skin data like colors, windowstyle etc."""
 	assert domSkin.tag == "skin", "root element in skin must be 'skin'!"
-	global colors, fonts, menus, parameters, setups, switchPixmap, skinResolutions
+	global colors, fonts, menus, parameters, setups, switchPixmap, resolutions
 	for tag in domSkin.findall("output"):
 		scrnID = int(tag.attrib.get("id", GUI_SKIN_ID))
 		if scrnID == GUI_SKIN_ID:
