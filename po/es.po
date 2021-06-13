@@ -17494,3 +17494,21 @@ msgstr "Si directorios está activo, presionando OK cambiará el directorio actu
 
 msgid "Options/Restore"
 msgstr "Restaurar/Opciones"
+
+msgid "Stop live TV service"
+msgstr "Detener el canal de TV en vivo"
+
+msgid "Checking ONID/TSID"
+msgstr "Comprobación ONID/TSID"
+
+msgid "Enter valid ONID/TSID"
+msgstr "Introduzca un válido ONID/TSID"
+
+msgid "This not valid ONID/TSID"
+msgstr "No es un válido ONID/TSID"
+
+msgid "This valid ONID/TSID"
+msgstr "Es un válido ONID/TSID"
+
+msgid "Valid ONID/TSID look at www.lyngsat.com..."
+msgstr "Consulta un ONID/TSID válido en www.lyngsat.com..."
