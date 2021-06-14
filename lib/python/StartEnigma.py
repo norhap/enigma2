@@ -2,13 +2,12 @@ from __future__ import print_function
 import sys
 import os
 from time import time
+from Tools.Directories import InitFallbackFiles, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from Tools.Profile import profile, profileFinal
 profile("PYTHON_START")
-from Tools.Directories import resolveFilename, fileHas
 # Don't remove this line. It may seem to do nothing, but if removed,
 # it will break output redirection for crash logs.
 import Tools.RedirectOutput
-from Tools.Directories import resolveFilename, fileExists
 from boxbranding import getImageArch
 from enigma import getBoxType, getBoxBrand, getE2Rev
 
@@ -63,7 +62,6 @@ profile("LOAD:skin")
 from skin import readSkin
 
 profile("LOAD:Tools")
-from Tools.Directories import InitFallbackFiles, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 InitFallbackFiles()
 
 profile("config.misc")
