@@ -17521,3 +17521,9 @@ msgstr "Forzar zap al canal de grabación en espera"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Esto puede resultar útil cuando se utiliza el módulo CI(+). Una vez finalizada la grabación, el canal se detendrá automáticamente."
+
+msgid "Common Information Actions"
+msgstr "Acciones Información Comunes"
+
+msgid "Close the screen and exit all menus"
+msgstr "Cerrar la pantalla y salir de todos los menús"
