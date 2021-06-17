@@ -203,7 +203,7 @@ class About(Screen):
 		EnigmaVersion = _("Branch Enigma2: ") + EnigmaVersion
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += "\n" + EnigmaVersion + "\n"
-		AboutText += _("Enigma2 revision: ") + getE2Rev() + "\n"
+		AboutText += _("Enigma2 revision: ") + getE2Rev().split("+")[1] + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
