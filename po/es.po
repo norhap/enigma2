@@ -16828,7 +16828,7 @@ msgstr "Un resaltado en la imagen del mando a distancia muestra a que botón se 
 msgid "Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."
 msgstr "Las opciones de configuración para la pantalla AYUDA se encuentran en 'MENÚ> Configuración> Interfaz de Usuario> Ajustes Interfaz de Usuario'."
 
-msgid "Press EXIT to return to the help screen." 
+msgid "Press EXIT to return to the help screen."
 msgstr "Pulse EXIT para regresar a la pantalla de ayuda."
 
 msgid "and"
@@ -17523,7 +17523,40 @@ msgid "This can be useful when using the CI(+) module. After the end of the reco
 msgstr "Esto puede resultar útil cuando se utiliza el módulo CI(+). Una vez finalizada la grabación, el canal se detendrá automáticamente."
 
 msgid "Common Information Actions"
-msgstr "Acciones Información Comunes"
+msgstr "Acciones Comunes Información"
 
 msgid "Close the screen and exit all menus"
 msgstr "Cerrar la pantalla y salir de todos los menús"
+
+msgid "Images"
+msgstr "Imágenes"
+
+msgid "Receiver Image"
+msgstr "Imagen del Receptor"
+
+msgid "Front"
+msgstr "Frontal"
+
+msgid "Rear"
+msgstr "Trasero"
+
+msgid "Remote Control"
+msgstr "Mando a Distancia"
+
+msgid "Flashing"
+msgstr "Flaseando"
+
+msgid "Receiver Image Actions"
+msgstr "Acciones Imagen Receptor"
+
+msgid "Show next image"
+msgstr "Mostrar próxima imagen"
+
+msgid "Show previous image"
+msgstr "Mostrar imagen previa"
+
+msgid "Prev Image"
+msgstr "Imagen Previa"
+
+msgid "Next Image"
+msgstr "Próxima Imagen"

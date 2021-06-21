@@ -1,14 +1,13 @@
-import boxbranding
 try:
 	import urllib2
 except ImportError:
 	import urllib
 
-from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getBoxType, getDesktop, getE2Rev
+from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getBoxType, getDesktop, getE2Rev, ePoint, eSize
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
 from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
-
+from PIL import Image
 import skin, os, re, urllib2, sys, boxbranding
 from skin import parameters
 from Screens.Screen import Screen, ScreenSummary
@@ -24,15 +23,16 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.StbHardware import getFPVersion, getBoxProc
-from Components.Pixmap import MultiPixmap
+from Components.Pixmap import  MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 from re import search
 from Screens.HelpMenu import HelpableScreen
-from Tools.Directories import fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
+from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
 from Components.GUIComponent import GUIComponent
 from Components.Console import Console
 from Tools.Geolocation import geolocation
+from Tools.LoadPixmap import LoadPixmap
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -89,6 +89,11 @@ class InformationBase(Screen, HelpableScreen):
 			"pageDown": (self["information"].pageDown, _("Move down a screen")),
 			"bottom": (self["information"].moveBottom, _("Move to last line / screen"))
 		}, prio=0, description=_("Common Information Actions"))
+		if isfile(resolveFilename(SCOPE_PLUGINS, pathjoin("boxes", "%s.png" % (getBoxType())))):
+			self["key_info"] = StaticText(_("INFO"))
+			self["infoActions"] = HelpableActionMap(self, ["InfoActions"], {
+				"info": (self.showReceiverImage, _("Show receiver image(s)"))
+			}, prio=0, description=_("Receiver Information Actions"))
 		colors = parameters.get("InformationColors", (0x00ffffff, 0x00ffffff, 0x00888888, 0x00888888, 0x00ffff00))
 		if len(colors) == len(INFO_COLORS):
 			for index in range(len(colors)):
@@ -102,6 +107,9 @@ class InformationBase(Screen, HelpableScreen):
 		self.informationTimer = eTimer()
 		self.informationTimer.callback.append(self.fetchInformation)
 		self.informationTimer.start(25)
+
+	def showReceiverImage(self):
+		self.session.openWithCallback(self.informationWindowClosed, InformationImage)
 
 	def keyCancel(self):
 		self.console.killAll()
@@ -145,6 +153,124 @@ def formatLine(style, left, right=None):
 	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
 	if right is None:
 		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ""
+		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
+	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
+
+
+class InformationImage(Screen, HelpableScreen):
+	skin = """
+	<screen name="InformationImage" title="Receiver Image" position="center,center" size="950,560">
+		<widget name="name" position="10,10" size="e-20,25" font="Regular;20" halign="center" transparent="1" valign="center" />
+		<widget name="image" position="10,45" size="e-20,e-105" alphatest="blend" scale="1" transparent="1" />
+		<widget source="key_red" render="Label" position="10,e-50" size="180,40" backgroundColor="key_red" conditional="key_red" font="Regular;20" foregroundColor="key_text" halign="center" valign="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_green" render="Label" position="200,e-50" size="180,40" backgroundColor="key_green" conditional="key_green" font="Regular;20" foregroundColor="key_text" halign="center" valign="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_yellow" render="Label" position="390,e-50" size="180,40" backgroundColor="key_yellow" conditional="key_yellow" font="Regular;20" foregroundColor="key_text" halign="center" valign="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="key_help" render="Label" position="e-90,e-50" size="80,40" backgroundColor="key_back" conditional="key_help" font="Regular;20" foregroundColor="key_text" halign="center" valign="center">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<widget source="lab1" render="Label" position="0,0" size="0,0" conditional="lab1" font="Regular;22" transparent="1" />
+		<widget source="lab2" render="Label" position="0,0" size="0,0" conditional="lab2" font="Regular;18" transparent="1" />
+		<widget source="lab3" render="Label" position="0,0" size="0,0" conditional="lab3" font="Regular;18" transparent="1" />
+		<widget source="lab4" render="Label" position="0,0" size="0,0" conditional="lab4" font="Regular;18" transparent="1" />
+		<widget source="lab5" render="Label" position="0,0" size="0,0" conditional="lab5" font="Regular;18" transparent="1" />
+		<widget source="lab6" render="Label" position="0,0" size="0,0" conditional="lab6" font="Regular;18" transparent="1" />
+	</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session, mandatoryWidgets=["name", "image"])
+		HelpableScreen.__init__(self)
+		self["name"] = Label()
+		self["image"] = Pixmap()
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Prev Image"))
+		self["key_yellow"] = StaticText(_("Next Image"))
+		self["lab1"] = StaticText(_("OpenVision"))
+		self["lab2"] = StaticText(_("Let's define enigma2 once more"))
+		self["lab3"] = StaticText(_("Report problems to:"))
+		self["lab4"] = StaticText(_("https://openvision.tech"))
+		self["lab5"] = StaticText(_("Sources are available at:"))
+		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions"], {
+			"cancel": (self.keyCancel, _("Close the screen")),
+			"close": (self.closeRecursive, _("Close the screen and exit all menus")),
+			"ok": (self.nextImage, _("Show next image")),
+			"red": (self.keyCancel, _("Close the screen")),
+			"green": (self.prevImage, _("Show previous image")),
+			"yellow": (self.nextImage, _("Show next image"))
+		}, prio=0, description=_("Receiver Image Actions"))
+		self.images = (
+			(_("Front"), "/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/%s.png", SystemInfo["MachineModel"]),
+			(_("Rear"), "rc_models/%s-rear.png",  SystemInfo["MachineModel"]),
+			(_("Internal"), "rc_models/%s-internal.png", SystemInfo["MachineModel"]),
+			(_("Remote Control"), "rc_models/%s.png", SystemInfo["RCName"]),
+			(_("Flashing"), "rc_models/%s-flashing.png", SystemInfo["MachineModel"])
+		)
+		self.imageIndex = 0
+		self.widgetContext = None
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def keyCancel(self):
+		self.close()
+
+	def closeRecursive(self):
+		self.close(True)
+
+	def prevImage(self):
+		self.imageIndex -= 1
+		if self.imageIndex < 0:
+			self.imageIndex = len(self.images) - 1
+		while not isfile(resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])):
+			self.imageIndex -= 1
+			if self.imageIndex < 0:
+				self.imageIndex = len(self.images) - 1
+				break
+		self.layoutFinished()
+
+	def nextImage(self):
+		self.imageIndex += 1
+		while not isfile(resolveFilename(SCOPE_CURRENT_SKIN, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])):
+			self.imageIndex += 1
+			if self.imageIndex >= len(self.images):
+				self.imageIndex = 0
+				break
+		self.layoutFinished()
+
+	def layoutFinished(self):
+		if self.widgetContext is None:
+			self.widgetContext = tuple(self["image"].getPosition() + self["image"].getSize())
+			print(self.widgetContext)
+		self["name"].setText("%s  -  %s %s" % (self.images[self.imageIndex][0], SystemInfo["MachineBrand"], SystemInfo["MachineModel"]))
+		imagePath = resolveFilename(SCOPE_CURRENT_SKIN, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
+		image = LoadPixmap(imagePath)
+		if image:
+			img = Image.open(imagePath)
+			imageWidth, imageHeight = img.size
+			scale = float(self.widgetContext[2]) / imageWidth if imageWidth >= imageHeight else float(self.widgetContext[3]) / imageHeight
+			sizeW = int(imageWidth * scale)
+			sizeH = int(imageHeight * scale)
+			posX = self.widgetContext[0] + int(self.widgetContext[2] / 2.0 - sizeW / 2.0)
+			posY = self.widgetContext[1] + int(self.widgetContext[3] / 2.0 - sizeH / 2.0)
+			self["image"].instance.move(ePoint(posX, posY))
+			self["image"].instance.resize(eSize(sizeW, sizeH))
+			self["image"].instance.setPixmap(image)
+
+
+def formatLine(style, left, right=None):
+	styleLen = len(style)
+	leftStartColor = "" if styleLen > 0 and style[0] == "B" else "\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
+	leftEndColor = "" if leftStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	leftIndent = "    " * int(style[1]) if styleLen > 1 and style[1].isdigit() else ""
+	rightStartColor = "" if styleLen > 2 and style[2] == "B" else "\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
+	rightEndColor = "" if rightStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
+	if right is None:
+		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ":"
 		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
 	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
 
