@@ -922,13 +922,22 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			"pls_code": eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			"t2mi_plp_id": eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			"t2mi_pid": eDVBFrontendParametersSatellite.T2MI_Default_Pid}
-		defaultCab = {
-			"frequency": 466000,
-			"inversion": eDVBFrontendParametersCable.Inversion_Unknown,
-			"modulation": eDVBFrontendParametersCable.Modulation_QAM64,
-			"fec": eDVBFrontendParametersCable.FEC_Auto,
-			"symbolrate": 6900,
-			"system": eDVBFrontendParametersCable.System_DVB_C_ANNEX_A}
+		if brand == "atto":
+			defaultCab = {
+				"frequency": 477000,
+				"inversion": eDVBFrontendParametersCable.Inversion_Unknown,
+				"modulation": eDVBFrontendParametersCable.Modulation_QAM256,
+				"fec": eDVBFrontendParametersCable.FEC_Auto,
+				"symbolrate": 5217,
+				"system": eDVBFrontendParametersCable.System_DVB_C_ANNEX_A}
+		else:
+			defaultCab = {
+				"frequency": 466000,
+				"inversion": eDVBFrontendParametersCable.Inversion_Unknown,
+				"modulation": eDVBFrontendParametersCable.Modulation_QAM64,
+				"fec": eDVBFrontendParametersCable.FEC_Auto,
+				"symbolrate": 6900,
+				"system": eDVBFrontendParametersCable.System_DVB_C_ANNEX_A}
 		defaultTer = {
 			"frequency": 474000,
 			"inversion": eDVBFrontendParametersTerrestrial.Inversion_Unknown,
