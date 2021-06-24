@@ -15523,7 +15523,7 @@ msgid "Seems a background update check is in progress, please wait a few minutes
 msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos y vuelva a intentarlo."
 
 msgid "Please wait while we configure your network..."
-msgstr "Espere mientras configubouquets su red..."
+msgstr "Espere mientras configuramos su red..."
 
 msgid ""
 "Your receiver will be restarted after the installation of the service\n"

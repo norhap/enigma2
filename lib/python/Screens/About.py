@@ -23,7 +23,7 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Tools.StbHardware import getFPVersion, getBoxProc
-from Components.Pixmap import  MultiPixmap, Pixmap
+from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 from re import search
