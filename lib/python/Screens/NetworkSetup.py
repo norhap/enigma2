@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+import netifaces as ni
 import os
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -458,13 +459,8 @@ class NetworkMacSetup(Screen, ConfigListScreen, HelpableScreen):
 		self.createSetup()
 
 	def getmac(self, iface):
-		mac = (0, 0, 0, 0, 0, 0)
-		ifconfig = commands.getoutput("ifconfig " + iface + "| grep HWaddr | awk '{ print($5) }'").strip()
-		if len(ifconfig) == 0:
-			mac = "00:00:00:00:00:00"
-		else:
-			mac = ifconfig[:17]
-		return mac
+		nit = ni.ifaddresses(iface)
+		return nit[ni.AF_LINK][0]['addr']
 
 	def createSetup(self):
 		self.list = []
@@ -474,8 +470,9 @@ class NetworkMacSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def ok(self):
 		MAC = self.getConfigMac.value
-		open("/etc/enigma2/hwmac", "w").write(MAC)
-		route = commands.getoutput("route -n |grep UG | awk '{print($2) }'")
+		f = open('/etc/enigma2/hwmac', 'w')
+		f.write(MAC)
+		f.close()
 		self.restartLan()
 
 	def run(self):
@@ -484,10 +481,9 @@ class NetworkMacSetup(Screen, ConfigListScreen, HelpableScreen):
 	def cancel(self):
 		self.close()
 
-	def restartLan(self, ret=False):
-		if ret:
-			iNetwork.restartNetwork(self.restartLanDataAvail)
-			self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while your network is restarting..."), type=MessageBox.TYPE_INFO, enable_input=False)
+	def restartLan(self):
+		iNetwork.restartNetwork(self.restartLanDataAvail)
+		self.restartLanRef = self.session.openWithCallback(self.restartfinishedCB, MessageBox, _("Please wait while we configure your network..."), type=MessageBox.TYPE_INFO, enable_input=False)
 
 	def restartLanDataAvail(self, data):
 		if data is True:
@@ -499,8 +495,7 @@ class NetworkMacSetup(Screen, ConfigListScreen, HelpableScreen):
 
 	def restartfinishedCB(self, data):
 		if data is True:
-			self.updateStatusbar()
-			self.session.open(MessageBox, _("Finished restarting your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)
+			self.session.openWithCallback(self.close, MessageBox, _("Finished configuring your network"), type=MessageBox.TYPE_INFO, timeout=10, default=False)
 
 
 class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
