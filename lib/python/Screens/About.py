@@ -28,7 +28,7 @@ from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 from re import search
 from Screens.HelpMenu import HelpableScreen
-from Tools.Directories import SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
+from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
 from Components.GUIComponent import GUIComponent
 from Components.Console import Console
 from Tools.Geolocation import geolocation
@@ -205,11 +205,11 @@ class InformationImage(Screen, HelpableScreen):
 			"yellow": (self.nextImage, _("Show next image"))
 		}, prio=0, description=_("Receiver Image Actions"))
 		self.images = (
-			(_("Front"), "/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/public/images/boxes/%s.png", SystemInfo["MachineModel"]),
-			(_("Rear"), "rc_models/%s-rear.png",  SystemInfo["MachineModel"]),
-			(_("Internal"), "rc_models/%s-internal.png", SystemInfo["MachineModel"]),
-			(_("Remote Control"), "rc_models/%s.png", SystemInfo["RCName"]),
-			(_("Flashing"), "rc_models/%s-flashing.png", SystemInfo["MachineModel"])
+			(_("Front"), "Extensions/OpenWebif/public/images/boxes/%s.png", SystemInfo["MachineModel"]),
+			(_("Rear"), "Extensions/OpenWebif/public/images/boxes/%s-rear.png", SystemInfo["MachineModel"]),
+			(_("Remote Control"), "Extensions/OpenWebif/public/images/remotes/%s.png", SystemInfo["RCName"]),
+			(_("Internal"), "Extensions/OpenWebif/public/images/boxes/%s-internal.png", SystemInfo["MachineModel"]),
+			(_("Flashing"), "Extensions/OpenWebif/public/images/boxes/%s-flashing.png", SystemInfo["MachineModel"])
 		)
 		self.imageIndex = 0
 		self.widgetContext = None
@@ -234,7 +234,7 @@ class InformationImage(Screen, HelpableScreen):
 
 	def nextImage(self):
 		self.imageIndex += 1
-		while not isfile(resolveFilename(SCOPE_CURRENT_SKIN, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])):
+		while not isfile(resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])):
 			self.imageIndex += 1
 			if self.imageIndex >= len(self.images):
 				self.imageIndex = 0
@@ -246,7 +246,7 @@ class InformationImage(Screen, HelpableScreen):
 			self.widgetContext = tuple(self["image"].getPosition() + self["image"].getSize())
 			print(self.widgetContext)
 		self["name"].setText("%s  -  %s %s" % (self.images[self.imageIndex][0], SystemInfo["MachineBrand"], SystemInfo["MachineModel"]))
-		imagePath = resolveFilename(SCOPE_CURRENT_SKIN, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
+		imagePath = resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
 		image = LoadPixmap(imagePath)
 		if image:
 			img = Image.open(imagePath)
