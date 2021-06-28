@@ -10,6 +10,7 @@ from boxbranding import getImageArch
 import socket
 import fcntl
 import struct
+from subprocess import PIPE, Popen
 from Components.Console import Console
 from Tools.Directories import fileExists
 from six import PY2
@@ -268,15 +269,12 @@ def getDriverInstalledDate():
 
 
 def getPythonVersionString():
-	try:
-		try:
-			import commands
-		except:
-			import subprocess as commands
-		status, output = commands.getstatusoutput("python -V")
-		return output.split(' ')[1]
-	except:
-		return _("unknown")
+	process = Popen(("/usr/bin/python", "-V"), stdout=PIPE, stderr=PIPE)
+	stdout, stderr = process.communicate()
+	if process.returncode == 0:
+		return stderr.strip().split()[1]
+	print("[About] Get python version failed.")
+	return _("Unknown")
 
 
 def GetIPsFromNetworkInterfaces():
@@ -333,6 +331,20 @@ def getBoxUptime():
 		return "%s" % time
 	except:
 		return '-'
+		
+
+def getGccVersion():
+	process = Popen(("/lib/libc.so.6"), stdout=PIPE, stderr=PIPE)
+	stdout, stderr = process.communicate()
+	if process.returncode == 0:
+		for line in stdout.split("\n"):
+			if line.startswith("Compiled by GNU CC version"):
+				data = line.split()[-1]
+				if data.endswith("."):
+					data = data[0:-1]
+				return data
+	print("[About] Get gcc version failed.")
+	return _("Unknown")
 
 
 def getModel():

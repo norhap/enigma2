@@ -343,6 +343,7 @@ class About(Screen):
 		self["FFmpegVersion"] = StaticText(FFmpegVersion)
 		AboutText += FFmpegVersion + "\n"
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
+		AboutText += _("GCC version: ") + about.getGccVersion() + "\n"
 		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value
 		AboutText += _("Enigma2 debug level: %d\n") % eGetEnigmaDebugLvl()
 		fp_version = getFPVersion()

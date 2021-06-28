@@ -17560,3 +17560,6 @@ msgstr "Imagen Previa"
 
 msgid "Next Image"
 msgstr "Próxima Imagen"
+
+msgid "GCC version: "
+msgstr "Versión GCC: "
