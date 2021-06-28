@@ -90,24 +90,21 @@ class Network:
 		netmaskLinePattern = re.compile('/' + netRegexp)
 		netmaskPattern = re.compile(netRegexp)
 		bcastLinePattern = re.compile(' brd ' + ipRegexp)
-		upPattern = re.compile('UP')
+		upPattern = re.compile('UP', re.IGNORECASE)
 		macPattern = re.compile(macRegexp)
 		macLinePattern = re.compile('link/ether ' + macRegexp)
 
 		for line in result.splitlines():
 			split = line.strip().split(' ', 2)
-			if iface:
-				up = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
+			if split[1] == iface:
+				up = upPattern
 				mac = self.regExpMatch(macPattern, self.regExpMatch(macLinePattern, split[2]))
-				nit = ni.ifaddresses(iface)
 				if up is not None:
 					data['up'] = True
 					if iface is not 'lo':
 						self.configuredInterfaces.append(iface)
-				if mac is None:
-					data['mac'] = nit[ni.AF_LINK][0]['addr']
-				else:
-				     data['mac'] = mac
+				if mac is not None:
+					data['mac'] = mac
 			if split[1] == iface:
 				if re.search(globalIPpattern, split[2]):
 					ip = self.regExpMatch(ipPattern, self.regExpMatch(ipLinePattern, split[2]))
