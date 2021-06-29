@@ -9904,8 +9904,8 @@ msgstr "Activar bouquets múltiples"
 msgid "Enable teletext caching"
 msgstr "Habilitar el caché de teletexto"
 
-msgid "Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch."
-msgstr "Habilitar para mostrar todo verdadero/falso, sí/no, encendido/apagado y activar/desactivar las opciones de configuración como un interruptor gráfico."
+msgid "Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch."
+msgstr "Habilite para mostrar todas las opciones de configuración Verdadero/Falso, Sí/No, Encendido/Apagado y Habilitar/Deshabilitar como un interruptor gráfico."
 
 msgid "Enable volume control with arrow buttons"
 msgstr "Habilite el control de volumen con botones flecha (cruzeta del botón OK)"
@@ -10147,8 +10147,8 @@ msgstr "Mostrar EIT ahora/siguiente en Infobar"
 msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrar porcentaje de SNR en lugar de valor de dB"
 
-msgid "Show True/False as graphical switch"
-msgstr "Mostrar verdadero/falso como un interruptor gráfico"
+msgid "Show Boolean values as graphical switch"
+msgstr "Mostrar gráficos para las opciones de configuración"
 
 msgid "Show VCR scart on main menu"
 msgstr "Mostrar VCR scart en menú principal"
@@ -17563,3 +17563,9 @@ msgstr "Próxima Imagen"
 
 msgid "GCC version: "
 msgstr "Versión GCC: "
+
+msgid "Show additional slider value"
+msgstr "Mostrar valor adicional del control en barra deslizante"
+
+msgid "Enable the current value of the slider at end of the slider bar."
+msgstr "Habilite el valor actual del control deslizante al final de la barra deslizante."
