@@ -17569,3 +17569,6 @@ msgstr "Mostrar valor adicional del control en barra deslizante"
 
 msgid "Enable the current value of the slider at end of the slider bar."
 msgstr "Habilite el valor actual del control deslizante al final de la barra deslizante."
+
+msgid "Free: "
+msgstr "Libre: "
