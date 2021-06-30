@@ -208,8 +208,8 @@ class InformationImage(Screen, HelpableScreen):
 			(_("Front"), "Extensions/OpenWebif/public/images/boxes/%s.png", SystemInfo["MachineModel"]),
 			(_("Rear"), "Extensions/OpenWebif/public/images/boxes/%s-rear.png", SystemInfo["MachineModel"]),
 			(_("Remote Control"), "Extensions/OpenWebif/public/images/remotes/%s.png", SystemInfo["RCName"]),
-			(_("Internal"), "Extensions/OpenWebif/public/images/boxes/%s-internal.png", SystemInfo["MachineModel"]),
-			(_("Flashing"), "Extensions/OpenWebif/public/images/boxes/%s-flashing.png", SystemInfo["MachineModel"])
+			(_("Flashing"), "Extensions/OpenWebif/public/images/boxes/%s-flashing.png", SystemInfo["MachineModel"]),
+			(_("Internal"), "Extensions/OpenWebif/public/images/boxes/%s-internal.png", SystemInfo["MachineModel"])
 		)
 		self.imageIndex = 0
 		self.widgetContext = None

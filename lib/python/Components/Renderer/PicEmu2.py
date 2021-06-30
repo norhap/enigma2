@@ -123,7 +123,7 @@ class PicEmu2(Renderer):
 									## Should write name be small letters
 									if ("ncam" in value):
 										sname = "ncam"
-									elif fileHas("/tmp/ecm.info","caid:"):
+									elif fileHas("/tmp/ecm.info","caid:") and not fileHas("/tmp/ecm.info","system:"):
 										sname = "oscam"
 									elif ("mgcamd" in value):
 										sname = "mgcamd"
@@ -143,7 +143,7 @@ class PicEmu2(Renderer):
 										contentInfo = content.split("\n")
 										for line in contentInfo:
 											if ("address" in line):
-												sname = "oscamcccam"
+												sname = "cccam"
 							except:
 								print("")
 
