@@ -17572,3 +17572,15 @@ msgstr "Habilite el valor actual del control deslizante al final de la barra des
 
 msgid "Free: "
 msgstr "Libre: "
+
+msgid "%s: Not Available"
+msgstr "%s: No Disponible"
+
+msgid "%s: %s, in use: %s%%"
+msgstr "%s: %s, en uso: %s%%"
+
+msgid "%s: %s Free:%s Used:%s (%s%%)"
+msgstr "%s: %s Libre:%s Usado:%s (%s%%)"
+
+msgid "%s: %s Used:%s Free:%s"
+msgstr "%s: %s Usado:%s Libre:%s"
