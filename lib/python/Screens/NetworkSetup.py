@@ -42,7 +42,7 @@ from os import remove, unlink, rename
 from six import PY2
 
 config.macaddress = ConfigSubsection()
-config.macaddress.interfaces = ConfigSelection(default="1", choices = [("1", _("eth0"))])
+config.macaddress.interfaces = ConfigSelection(default="1", choices=[("1", _("eth0"))])
 config.macaddress.mac = ConfigText(default='', fixed_size=False)
 config.macaddress.new = ConfigText()
 configmac = config.macaddress
@@ -442,7 +442,7 @@ class MACSettings(Setup):
             "cancel": self.keyCancel,
             "ok": self.ok,
         }, -2)
-        ConfigListScreen.__init__(self, self.list, session=self.session, on_change = self.changedEntry)
+        ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
         self.CreateSetup()
 
     def MacCurrent(self):
