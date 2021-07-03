@@ -15097,9 +15097,6 @@ msgstr "Configurar AFP"
 msgid "Activate IPv6 configuration"
 msgstr "Activar la configuración de IPv6"
 
-msgid "Activate MAC address configuration"
-msgstr "Activar la configuración de la dirección MAC"
-
 msgid "Alias"
 msgstr "Alias"
 
@@ -15155,9 +15152,6 @@ msgstr "Habilite/deshabilite la compatibilidad con IPv6 de su receptor.\n"
 msgid "Exit IPv6 configuration"
 msgstr "Salir de la configuración IPv6"
 
-msgid "Exit MAC address configuration"
-msgstr "Salir de la configuración dirección MAC"
-
 msgid "Exit inetd recovery"
 msgstr "Salir de inetd recovery"
 
@@ -15206,9 +15200,6 @@ msgstr "Nombre del archivo de configuración de entrada:"
 msgid "MAC address"
 msgstr "Dirección MAC"
 
-msgid "MAC address settings"
-msgstr "Configuración de la dirección MAC"
-
 msgid "MIRACLEBOX_TWINPLUS"
 msgstr "MIRACLEBOX_TWINPLUS"
 
@@ -15251,8 +15242,8 @@ msgstr "NFS"
 msgid "NFS setup"
 msgstr "Configurar NFS"
 
-msgid "Network MAC settings"
-msgstr "Configuración de red MAC"
+msgid "MAC Address Setup"
+msgstr "Ajustes Dirección MAC"
 
 msgid "New password"
 msgstr "Nueva contraseña"
@@ -15278,8 +15269,8 @@ msgstr "Configurar contraseña"
 msgid "Please wait while feeds state is being checked."
 msgstr "Espere mientras se verifica el estado de los feeds."
 
-msgid "Press OK to set the MAC address."
-msgstr "Pulse OK para configurar la dirección MAC."
+msgid "Press OK to active the MAC address."
+msgstr "Pulse OK para activar la dirección MAC."
 
 msgid "Random password"
 msgstr "Contraseña aleatoria"
@@ -17584,3 +17575,24 @@ msgstr "%s: %s Libre:%s Usado:%s (%s%%)"
 
 msgid "%s: %s Used:%s Free:%s"
 msgstr "%s: %s Usado:%s Libre:%s"
+
+msgid "Current mac address"
+msgstr "Dirección mac actual"
+
+msgid "Set new mac address"
+msgstr "Establecer nueva dirección mac"
+
+msgid "You want to change current MAC address: "
+msgstr "Quiere cambiar la dirección MAC actual: "
+
+msgid ""
+"MAC address successfully changed."
+"\n"
+"New MAC address: "
+msgstr ""
+"La dirección MAC se cambió correctamente."
+"\n"
+"Nueva dirección MAC: "
+
+msgid "Not valide MAC address"
+msgstr "Dirección MAC no válida"
