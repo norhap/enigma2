@@ -362,7 +362,7 @@ class About(Screen):
 		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 		AboutText += "\n"
 		for x in about.GetIPsFromNetworkInterfaces():
-		    AboutText += _("Uptime:") + "  " + about.getBoxUptime()
+		    AboutText += _("Uptime: ") + about.getBoxUptime()
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["key_green"] = Button(_("Translations"))

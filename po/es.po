@@ -16351,8 +16351,8 @@ msgstr "Reportar problemas a:"
 msgid "Sources are available at:"
 msgstr "Fuentes disponibles en:"
 
-msgid "Uptime:"
-msgstr "Receptor iniciado desde hace:"
+msgid "Uptime: "
+msgstr "Activo desde hace: "
 
 msgid "Mobile: "
 msgstr "Móvil: "
