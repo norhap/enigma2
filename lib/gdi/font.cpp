@@ -32,7 +32,7 @@
 
 fontRenderClass *fontRenderClass::instance;
 
-static pthread_mutex_t ftlock= 
+static pthread_mutex_t ftlock=
 #ifdef __GLIBC__
 	PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP;
 #else
@@ -799,6 +799,12 @@ int eTextPara::renderString(const char *string, int rflags, int border, int mark
 	bool activate_newcolor = false;
 	int nextflags = 0;
 	int pos = 0;
+	int markedlen = 0;
+	if (markedpos > 0xFFFF)
+	{
+            markedlen = markedpos >> 16;
+            markedpos &= 0xFFFF;
+    }
 
 	for (std::vector<unsigned long>::const_iterator i(uc_visual.begin());
 		i != uc_visual.end(); ++i)
@@ -891,7 +897,14 @@ nprint:				isprintable=0;
 		if (isprintable)
 		{
 			if (markedpos == -2 || markedpos == pos++)
+			{
 				flags |= GS_INVERT;
+				if (markedlen)
+				{
+					--markedlen;
+					++markedpos;
+				}
+			}
 
 			FT_UInt index = 0;
 
