@@ -922,7 +922,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			"pls_code": eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			"t2mi_plp_id": eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			"t2mi_pid": eDVBFrontendParametersSatellite.T2MI_Default_Pid}
-		if brand == "atto":
+		if SystemInfo["MachineModel"] in ("pixel", "pixelpremium"):
 			defaultCab = {
 				"frequency": 477000,
 				"inversion": eDVBFrontendParametersCable.Inversion_Unknown,
