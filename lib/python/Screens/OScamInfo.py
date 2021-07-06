@@ -512,12 +512,13 @@ class OscamInfoMenu(Screen):
 		if entry in (1, 2, 3) and config.oscaminfo.userdatafromconf.value and self.osc.confPath()[0] is None:
 			config.oscaminfo.userdatafromconf.setValue(False)
 			config.oscaminfo.userdatafromconf.save()
-			self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf/ncam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
+			self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 		elif entry == 0:
-			if os.path.exists("/tmp/ecm.info"):
-				self.session.open(oscECMInfo)
-			else:
-				self.session.open(MessageBox, _("No ECM info is currently available. This is only available while decrypting."), MessageBox.TYPE_INFO)
+			try:
+			    if os.path.exists("/tmp/ecm.info"):
+				    self.session.open(oscECMInfo)
+			except IOError as err:
+			    self.session.open(MessageBox, _("No ECM info is currently available. This is only available while decrypting."), MessageBox.TYPE_INFO)
 		elif entry == 1:
 			self.session.open(oscInfo, "c")
 		elif entry == 2:
@@ -545,9 +546,7 @@ class OscamInfoMenu(Screen):
 						self.callbackmode = "readers"
 						self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose reader"), list=reader)
 		elif entry == 6:
-			if SystemInfo["NCamIsActive"]:
-				screentitle = _("NCam Config info")
-			else:
+			if SystemInfo["OScamIsActive"]:
 				screentitle = _("OScam Config info")
 			self.session.open(OscamInfoConfigScreen)
 
@@ -600,9 +599,7 @@ class OscamInfoMenu(Screen):
 
 	def showMenu(self):
 		entr = self.buildMenu(self.menu)
-		if SystemInfo["NCamIsActive"]:
-			self.setTitle(_("NCam Info - Main Menu"))
-		else:
+		if SystemInfo["OScamIsActive"]:
 			self.setTitle(_("OScam Info - Main Menu"))
 		self["mainmenu"].l.setList(entr)
 		self["mainmenu"].moveToIndex(0)
@@ -865,25 +862,19 @@ class oscInfo(Screen, OscamInfo):
 					if i != "":
 						self.out.append(self.buildLogListEntry((i,)))
 			if self.what == "c":
-				if SystemInfo["NCamIsActive"]:
-					self.setTitle(_("Client Info ( NCam-Version: %s )") % self.getVersion())
-				else:
+				if fileExists("/tmp/.oscam"):
 					self.setTitle(_("Client Info ( OScam-Version: %s )") % self.getVersion())
 				self["key_green"].setText("")
 				self["key_yellow"].setText(_("Servers"))
 				self["key_blue"].setText(_("Log"))
 			elif self.what == "s":
-				if SystemInfo["NCamIsActive"]:
-					self.setTitle(_("Server Info ( NCam-Version: %s )") % self.getVersion())
-				else:
+				if fileExists("/tmp/.oscam"):
 					self.setTitle(_("Server Info ( OScam-Version: %s )") % self.getVersion())
 				self["key_green"].setText(_("Clients"))
 				self["key_yellow"].setText("")
 				self["key_blue"].setText(_("Log"))
 			elif self.what == "l":
-				if SystemInfo["NCamIsActive"]:
-					self.setTitle(_("NCam Log ( NCam-Version: %s )") % self.getVersion())
-				else:
+				if fileExists("/tmp/.oscam"):
 					self.setTitle(_("OScam Log ( OScam-Version: %s )") % self.getVersion())
 				self["key_green"].setText(_("Clients"))
 				self["key_yellow"].setText(_("Servers"))
@@ -1232,7 +1223,7 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 	def __init__(self, session, msg=None):
 		Screen.__init__(self, session)
 		self.session = session
-		if SystemInfo["NCamIsActive"]:
+		if SystemInfo["OScamIsActive"]:
 			if f == 1.5:
 				self.skin = """<screen position="center,center" size="960,540" title="NCam Setup">"""
 				self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
@@ -1243,7 +1234,7 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 				self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
 				self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
 			else:
-				self.skin = """<screen position="center,center" size="640,400" title="NCam Setup">"""
+				self.skin = """<screen position="center,center" size="640,400" title="OScam Setup">"""
 				self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
 				self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 				self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
@@ -1302,15 +1293,13 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 			pass
 
 	def layoutFinished(self):
-		if SystemInfo["NCamIsActive"]:
-			self.setTitle(_("NCam Info - Configuration"))
-		else:
-			self.setTitle(_("OScam Info - Configuration"))
+		if SystemInfo["OScamIsActive"]:
+			self.setTitle(_("OSCam Info - Configuration"))
 		self["config"].l.setList(self.oscamconfig)
 
 	def createSetup(self):
 		self.oscamconfig = []
-		self.oscamconfig.append(getConfigListEntry(_("Read Userdata from oscam.conf/ncam.conf"), config.oscaminfo.userdatafromconf))
+		self.oscamconfig.append(getConfigListEntry(_("Read Userdata from oscam.conf"), config.oscaminfo.userdatafromconf))
 		if not config.oscaminfo.userdatafromconf.value:
 			self.oscamconfig.append(getConfigListEntry(_("Username (httpuser)"), config.oscaminfo.username))
 			self.oscamconfig.append(getConfigListEntry(_("Password (httpwd)"), config.oscaminfo.password))

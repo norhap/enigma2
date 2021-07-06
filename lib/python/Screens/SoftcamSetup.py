@@ -79,7 +79,7 @@ class SoftcamSetup(Setup):
 		else:
 			self["key_yellow"].setText("")
 			self["restartActions"].setEnabled(False)
-		if self["config"].getCurrent()[1] == config.misc.softcams and config.misc.softcams.value and config.misc.softcams.value.lower() != "none" and config.misc.softcams.value.lower() != "wicardd":
+		if self["config"].getCurrent()[1] == config.misc.softcams and config.misc.softcams.value and config.misc.softcams.value.lower() != "none" and config.misc.softcams.value.lower() != "wicardd" and not config.misc.softcams.value.startswith("mgcamd"):
 			self["key_blue"].setText(_("Info"))
 			self["infoActions"].setEnabled(True)
 		else:

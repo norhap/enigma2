@@ -24,11 +24,11 @@ cmdline = {k: v.strip('"') for k, v in findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 def getBoxBrand():
 	brand = ""
 	try:
-		if fileHas("/etc/hostname","os"):
+		if fileHas("/etc/hostname", "os"):
 			brand = "Edision"
-		elif fileHas("/etc/hostname","gb"):
+		elif fileHas("/etc/hostname", "gb"):
 			brand = "GigaBlue"
-		elif fileHas("/etc/hostname","sf"):
+		elif fileHas("/etc/hostname", "sf"):
 			brand = "octagon"
 		else:
 			brand = open("/proc/stb/info/brandname").read().strip()
@@ -197,9 +197,9 @@ SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck
 SystemInfo["CanChangeOsdAlpha"] = access("/proc/stb/video/alpha", R_OK) and True or False
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
 SystemInfo["OScamInstalled"] = fileExists("/usr/bin/oscam") or fileExists("/usr/bin/oscam-emu") or fileExists("/usr/bin/oscam-trunk")
-SystemInfo["OScamIsActive"] = fileExists("/var/log/oscam1.log")
+SystemInfo["OScamIsActive"] = fileExists("/tmp/.oscam")
 SystemInfo["NCamInstalled"] = fileExists("/usr/bin/ncam")
-SystemInfo["NCamIsActive"] = fileExists("/var/tmp/ncam.pid")
+SystemInfo["NCamIsActive"] = fileExists("/tmp/.ncam")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta")
 SystemInfo["OLDE2API"] = model in ("dm800","su980")
 SystemInfo["7segment"] = getDisplayType() == "textolcd 7segmentos"
