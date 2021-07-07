@@ -110,9 +110,7 @@ class OscamInfo:
 		blocked = False
 		ipconfigured = ipcompiled
 		user = pwd = None
-		if SystemInfo["NCamIsActive"]:
-			ret = _("NCam webif disabled")
-		else:
+		if SystemInfo["OScamIsActive"]:
 			ret = _("OScam webif disabled")
 
 		if webif and port is not None:
@@ -422,25 +420,14 @@ class OscamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
-		if SystemInfo["NCamIsActive"]:
-			screentitle = _("NCam Info Main Menu")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="640,400" title="NCam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
-			else:
-				self.skin = """<screen position="center,center" size="425,260" title="NCam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
+		Screen.setTitle(self, _("Oscam Info - Main Menu"))
+		if f == 1.5:
+			self.skin = """<screen position="center,center" size="640,400" title="Oscam Info - Main Menu">"""
+			self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
 		else:
-			screentitle = _("OScam Info Main Menu")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="640,400" title="OScam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
-			else:
-				self.skin = """<screen position="center,center" size="425,260" title="OScam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
+			self.skin = """<screen position="center,center" size="425,260" title="Oscam Info - Main Menu">"""
+			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
-		title = screentitle
-		Screen.setTitle(self, title)
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
 		self.osc = OscamInfo()
 		self["mainmenu"] = oscMenuList([])
@@ -546,8 +533,6 @@ class OscamInfoMenu(Screen):
 						self.callbackmode = "readers"
 						self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose reader"), list=reader)
 		elif entry == 6:
-			if SystemInfo["OScamIsActive"]:
-				screentitle = _("OScam Config info")
 			self.session.open(OscamInfoConfigScreen)
 
 	def chooseReaderCallback(self, retval):
@@ -609,22 +594,13 @@ class oscECMInfo(Screen, OscamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
-		if SystemInfo["NCamIsActive"]:
-			screentitle = _("NCam ECM info")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="NCam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-			else:
-				self.skin = """<screen position="center ,center" size="640,360" title="NCam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
+		Screen.setTitle(self, _("OScam ECM info"))
+		if f == 1.5:
+			self.skin = """<screen position="center,center" size="960,540" title="OScam ECM info">"""
+			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
 		else:
-			screentitle = _("OScam ECM info")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="OScam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-			else:
-				self.skin = """<screen position="center ,center" size="640,360" title="OScam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
+			self.skin = """<screen position="center ,center" size="640,360" title="OScam ECM info">"""
+			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 		self.skin += """</screen>"""
 		self.ecminfo = "/tmp/ecm.info"
 		self["output"] = oscMenuList([])
@@ -862,19 +838,19 @@ class oscInfo(Screen, OscamInfo):
 					if i != "":
 						self.out.append(self.buildLogListEntry((i,)))
 			if self.what == "c":
-				if fileExists("/tmp/.oscam"):
+				if SystemInfo["OScamIsActive"]:
 					self.setTitle(_("Client Info ( OScam-Version: %s )") % self.getVersion())
 				self["key_green"].setText("")
 				self["key_yellow"].setText(_("Servers"))
 				self["key_blue"].setText(_("Log"))
 			elif self.what == "s":
-				if fileExists("/tmp/.oscam"):
+				if SystemInfo["OScamIsActive"]:
 					self.setTitle(_("Server Info ( OScam-Version: %s )") % self.getVersion())
 				self["key_green"].setText(_("Clients"))
 				self["key_yellow"].setText("")
 				self["key_blue"].setText(_("Log"))
 			elif self.what == "l":
-				if fileExists("/tmp/.oscam"):
+				if SystemInfo["OScamIsActive"]:
 					self.setTitle(_("OScam Log ( OScam-Version: %s )") % self.getVersion())
 				self["key_green"].setText(_("Clients"))
 				self["key_yellow"].setText(_("Servers"))
@@ -1223,45 +1199,26 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 	def __init__(self, session, msg=None):
 		Screen.__init__(self, session)
 		self.session = session
-		if SystemInfo["OScamIsActive"]:
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="NCam Setup">"""
-				self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,450" size="960,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="60,475" size="40,40" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="255,475" size="40,40" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
-			else:
-				self.skin = """<screen position="center,center" size="640,400" title="OScam Setup">"""
-				self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="40,365" size="35,35" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="180,365" size="35,35" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;18" position="80,367" size="180,35" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;18" position="220,367" size="220,35" transparent="1" zPosition="1" />"""
+		Screen.setTitle(self, _("OScam Config info"))
+		if f == 1.5:
+			self.skin = """<screen position="center,center" size="960,540" title="OScam Config info">"""
+			self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
+			self.skin += """<widget name="status" render="Label" font="Regular;30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
+			self.skin += """<eLabel backgroundColor="white" name="" position="0,450" size="960,2" zPosition="-9" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="60,475" size="40,40" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="255,475" size="40,40" />"""
+			self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
+			self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
 		else:
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="OScam Setup">"""
-				self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,450" size="960,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="60,475" size="40,40" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="255,475" size="40,40" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
-			else:
-				self.skin = """<screen position="center,center" size="640,400" title="OScam Setup">"""
-				self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="40,365" size="35,35" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="180,365" size="35,35" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;18" position="80,367" size="180,35" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;18" position="220,367" size="220,35" transparent="1" zPosition="1" />"""
-		self.skin += """</screen>"""
+			self.skin = """<screen position="center,center" size="640,400" title="OScam Config info">"""
+			self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
+			self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
+			self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="40,365" size="35,35" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="180,365" size="35,35" />"""
+			self.skin += """<widget source="key_red" render="Label" font="Regular;18" position="80,367" size="180,35" transparent="1" zPosition="1" />"""
+			self.skin += """<widget source="key_green" render="Label" font="Regular;18" position="220,367" size="220,35" transparent="1" zPosition="1" />"""
+			self.skin += """</screen>"""
 		if msg is not None:
 			self.msg = "Error:\n%s" % msg
 		else:
@@ -1293,8 +1250,7 @@ class OscamInfoConfigScreen(Screen, ConfigListScreen):
 			pass
 
 	def layoutFinished(self):
-		if SystemInfo["OScamIsActive"]:
-			self.setTitle(_("OSCam Info - Configuration"))
+		self.setTitle(_("OScam Info - Configuration"))
 		self["config"].l.setList(self.oscamconfig)
 
 	def createSetup(self):

@@ -110,8 +110,6 @@ class NcamInfo:
 		user = pwd = None
 		if SystemInfo["NCamIsActive"]:
 			ret = _("NCam webif disabled")
-		else:
-			ret = _("OScam webif disabled")
 
 		if webif and port is not None:
 		# ncam reports it got webif support and webif is running (Port != 0)
@@ -418,25 +416,14 @@ class NcamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
-		if SystemInfo["NCamIsActive"]:
-			screentitle = _("NCam Info Main Menu")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="640,400" title="NCam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
-			else:
-				self.skin = """<screen position="center,center" size="425,260" title="NCam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
+		Screen.setTitle(self, _("Ncam Info Main Menu"))
+		if f == 1.5:
+			self.skin = """<screen position="center,center" size="640,400" title="Ncam Info Main Menu">"""
+			self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
 		else:
-			screentitle = _("Ncam Info Main Menu")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="640,400" title="Ncam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
-			else:
-				self.skin = """<screen position="center,center" size="425,260" title="Ncam Info Main Menu">"""
-				self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
+			self.skin = """<screen position="center,center" size="425,260" title="Ncam Info Main Menu">"""
+			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
-		title = screentitle
-		Screen.setTitle(self, title)
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
 		self.osc = NcamInfo()
 		self["mainmenu"] = oscMenuList([])
@@ -541,10 +528,6 @@ class NcamInfoMenu(Screen):
 						self.callbackmode = "readers"
 						self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose reader"), list=reader)
 		elif entry == 6:
-			if SystemInfo["NCamIsActive"]:
-				screentitle = _("NCam Config info")
-			else:
-				screentitle = _("OScam Config info")
 			self.session.open(NcamInfoConfigScreen)
 
 	def chooseReaderCallback(self, retval):
@@ -606,22 +589,13 @@ class oscECMInfo(Screen, NcamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
-		if SystemInfo["NCamIsActive"]:
-			screentitle = _("NCam ECM info")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="NCam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-			else:
-				self.skin = """<screen position="center ,center" size="640,360" title="NCam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
+		Screen.setTitle(self, _("Ncam ECM info"))
+		if f == 1.5:
+			self.skin = """<screen position="center,center" size="960,540" title="Ncam ECM info">"""
+			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
 		else:
-			screentitle = _("Ncam ECM info")
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="Ncam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-			else:
-				self.skin = """<screen position="center ,center" size="640,360" title="Ncam ECM info">"""
-				self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
+			self.skin = """<screen position="center ,center" size="640,360" title="Ncam ECM info">"""
+			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 		self.skin += """</screen>"""
 		self.ecminfo = "/tmp/ecm.info"
 		self["output"] = oscMenuList([])
@@ -1226,45 +1200,26 @@ class NcamInfoConfigScreen(Screen, ConfigListScreen):
 	def __init__(self, session, msg=None):
 		Screen.__init__(self, session)
 		self.session = session
-		if SystemInfo["NCamIsActive"]:
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="NCam Setup">"""
-				self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,450" size="960,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="60,475" size="40,40" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="255,475" size="40,40" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
-			else:
-				self.skin = """<screen position="center,center" size="640,400" title="NCam Setup">"""
-				self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="40,365" size="35,35" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="180,365" size="35,35" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;18" position="80,367" size="180,35" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;18" position="220,367" size="220,35" transparent="1" zPosition="1" />"""
+		Screen.setTitle(self, _("Ncam Config info"))
+		if f == 1.5:
+			self.skin = """<screen position="center,center" size="960,540" title="Ncam Config info">"""
+			self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
+			self.skin += """<widget name="status" render="Label" font="Regular;30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
+			self.skin += """<eLabel backgroundColor="white" name="" position="0,450" size="960,2" zPosition="-9" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="60,475" size="40,40" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="255,475" size="40,40" />"""
+			self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
+			self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
 		else:
-			if f == 1.5:
-				self.skin = """<screen position="center,center" size="960,540" title="Ncam Setup">"""
-				self.skin += """<widget name="config" font="Regular;30" itemHeight="50" backgroundColor="black" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="960,540" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,450" size="960,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="60,475" size="40,40" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="255,475" size="40,40" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;28" position="120,480" size="270,40" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;28" position="315,480" size="270,40" transparent="1" zPosition="1" />"""
-			else:
-				self.skin = """<screen position="center,center" size="640,400" title="Ncam Setup">"""
-				self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
-				self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
-				self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="40,365" size="35,35" />"""
-				self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="180,365" size="35,35" />"""
-				self.skin += """<widget source="key_red" render="Label" font="Regular;18" position="80,367" size="180,35" transparent="1" zPosition="1" />"""
-				self.skin += """<widget source="key_green" render="Label" font="Regular;18" position="220,367" size="220,35" transparent="1" zPosition="1" />"""
-		self.skin += """</screen>"""
+			self.skin = """<screen position="center,center" size="640,400" title="Ncam Config info">"""
+			self.skin += """<widget name="config" font="Regular;20" itemHeight="50" foregroundColor="white" scrollbarMode="showOnDemand" enableWrapAround="1" position="center,center" size="640,400" transparent="1" />"""
+			self.skin += """<widget name="status" render="Label" font="Regular;20" itemHeight="30" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
+			self.skin += """<eLabel backgroundColor="white" name="" position="0,350" size="640,2" zPosition="-9" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_red.png" position="40,365" size="35,35" />"""
+			self.skin += """<ePixmap alphatest="blend" pixmap="buttons/key_green.png" position="180,365" size="35,35" />"""
+			self.skin += """<widget source="key_red" render="Label" font="Regular;18" position="80,367" size="180,35" transparent="1" zPosition="1" />"""
+			self.skin += """<widget source="key_green" render="Label" font="Regular;18" position="220,367" size="220,35" transparent="1" zPosition="1" />"""
+			self.skin += """</screen>"""
 		if msg is not None:
 			self.msg = "Error:\n%s" % msg
 		else:
@@ -1296,8 +1251,7 @@ class NcamInfoConfigScreen(Screen, ConfigListScreen):
 			pass
 
 	def layoutFinished(self):
-		if fileExists("/tmp/.ncam"):
-			self.setTitle(_("NCam Info - Configuration"))
+		self.setTitle(_("NCam Info - Configuration"))
 		self["config"].l.setList(self.oscamconfig)
 
 	def createSetup(self):
