@@ -2860,6 +2860,9 @@ msgstr "Fijado"
 msgid "Flash Image"
 msgstr "Flashear imagen"
 
+msgid "Flashing Image"
+msgstr "Flasheando Imagen"
+
 msgid "Flashing image succesfull"
 msgstr "Flasheo de imagen con éxito"
 

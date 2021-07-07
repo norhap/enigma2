@@ -2309,30 +2309,39 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getNcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 
-	def getOSname(self):
+	def getOScam(self):
 		return _("OScam Info")
 
-	def getNcamname(self):
+	def getNcam(self):
 		return _("Ncam Info")
 
-	def getCCcamname(self):
+	def getCCcam(self):
 		return _("CCcam Info")
 
 	def getOScamInfo(self):
-		if fileExists("/tmp/.oscam"):
-			return [((boundFunction(self.getOSname), boundFunction(self.openOScamInfo), lambda: True), None)] or []
+		import process
+		p = process.ProcessList()
+		oscam = str(p.named("oscam")).strip("[]")
+		if oscam:
+			return [((boundFunction(self.getOScam), boundFunction(self.openOScamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getNcamInfo(self):
-		if fileExists("/tmp/.ncam"):
-			return [((boundFunction(self.getNcamname), boundFunction(self.openNcamInfo), lambda: True), None)] or []
+		import process
+		p = process.ProcessList()
+		ncam = str(p.named("ncam")).strip("[]")
+		if ncam:
+			return [((boundFunction(self.getNcam), boundFunction(self.openNcamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getCCcamInfo(self):
-		if fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta"):
-			return [((boundFunction(self.getCCcamname), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
+		import process
+		p = process.ProcessList()
+		CCcam = str(p.named("CCcam")).strip("[]")
+		if CCcam:
+			return [((boundFunction(self.getCCcam), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
 		else:
 			return []
 
