@@ -5361,7 +5361,7 @@ msgid "Retreiving image list - Please wait..."
 msgstr "Actualización de la lista de imágenes: espere …"
 
 msgid "Retreiving image slots - Please wait..."
-msgstr "Recuperando particiones de imagen - Por favor espere …"
+msgstr "Recuperando particiones de imagen - Por favor espere..."
 
 msgid "Return to movie list"
 msgstr "Volver a lista de películas"
@@ -17599,3 +17599,21 @@ msgstr ""
 
 msgid "Not valide MAC address"
 msgstr "Dirección MAC no válida"
+
+msgid "Client Info ( OScam-Version: %s )"
+msgstr "Información del Cliente ( Versión OScam: %s )"
+
+msgid "Client Info ( NCam-Version: %s )"
+msgstr "Información del Cliente ( Versión Ncam: %s )"
+
+msgid "Server Info ( OScam-Version: %s )"
+msgstr "Información del Servidor ( Versión OScam: %s )"
+
+msgid "Server Info ( NCam-Version: %s )"
+msgstr "Información del Servidor ( Versión Ncam: %s )"
+
+msgid "(Show only reader:"
+msgstr "(Mostrar solo reader:"
+
+msgid "No ECM info is currently available. This is only available while decrypting."
+msgstr "Actualmente no hay información de ECM disponible. Solo está disponible durante el descifrado."

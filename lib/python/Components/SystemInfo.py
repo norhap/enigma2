@@ -197,9 +197,9 @@ SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck
 SystemInfo["CanChangeOsdAlpha"] = access("/proc/stb/video/alpha", R_OK) and True or False
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
 SystemInfo["OScamInstalled"] = fileExists("/usr/bin/oscam") or fileExists("/usr/bin/oscam-emu") or fileExists("/usr/bin/oscam-trunk")
-SystemInfo["OScamIsActive"] = fileExists("/tmp/.oscam")
+SystemInfo["OScamIsActive"] = fileExists("/var/tmp/.oscam")
 SystemInfo["NCamInstalled"] = fileExists("/usr/bin/ncam")
-SystemInfo["NCamIsActive"] = fileExists("/tmp/.ncam")
+SystemInfo["NCamIsActive"] = fileExists("/var/tmp/.ncam")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info","CCcam-s2s") or fileHas("/tmp/ecm.info","fta")
 SystemInfo["OLDE2API"] = model in ("dm800","su980")
 SystemInfo["7segment"] = getDisplayType() == "textolcd 7segmentos"
