@@ -3,7 +3,8 @@ try:
 except ImportError:
 	import urllib
 
-from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getBoxType, getDesktop, getE2Rev, ePoint, eSize
+from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
+from boxbranding import getBoxType
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
 from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
@@ -196,6 +197,9 @@ class InformationImage(Screen, HelpableScreen):
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		model = getBoxType()
+		boxes = "Extensions/OpenWebif/public/images/boxes/"
+		remotes = "Extensions/OpenWebif/public/images/remotes/"
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions"], {
 			"cancel": (self.keyCancel, _("Close the screen")),
 			"close": (self.closeRecursive, _("Close the screen and exit all menus")),
@@ -205,11 +209,11 @@ class InformationImage(Screen, HelpableScreen):
 			"yellow": (self.nextImage, _("Show next image"))
 		}, prio=0, description=_("Receiver Image Actions"))
 		self.images = (
-			(_("Front"), "Extensions/OpenWebif/public/images/boxes/%s.png", SystemInfo["MachineModel"]),
-			(_("Rear"), "Extensions/OpenWebif/public/images/boxes/%s-rear.png", SystemInfo["MachineModel"]),
-			(_("Remote Control"), "Extensions/OpenWebif/public/images/remotes/%s.png", SystemInfo["RCName"]),
-			(_("Flashing"), "Extensions/OpenWebif/public/images/boxes/%s-flashing.png", SystemInfo["MachineModel"]),
-			(_("Internal"), "Extensions/OpenWebif/public/images/boxes/%s-internal.png", SystemInfo["MachineModel"])
+			(_("Front"), "%s%s.png", (boxes, model)),
+			(_("Rear"), "%s%s-rear.png", (boxes, model)),
+			(_("Remote Control"), "%s%s.png", (remotes, SystemInfo["RCName"])),
+			(_("Flashing"), "%s%s-flashing.png", (boxes, model)),
+			(_("Internal"), "%s%s-internal.png", (boxes, model))
 		)
 		self.imageIndex = 0
 		self.widgetContext = None
@@ -242,10 +246,11 @@ class InformationImage(Screen, HelpableScreen):
 		self.layoutFinished()
 
 	def layoutFinished(self):
+		model = getBoxType()
 		if self.widgetContext is None:
 			self.widgetContext = tuple(self["image"].getPosition() + self["image"].getSize())
 			print(self.widgetContext)
-		self["name"].setText("%s  -  %s %s" % (self.images[self.imageIndex][0], SystemInfo["MachineBrand"], SystemInfo["MachineModel"]))
+		self["name"].setText("%s  -  %s %s" % (self.images[self.imageIndex][0], SystemInfo["MachineBrand"], model))
 		imagePath = resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
 		image = LoadPixmap(imagePath)
 		if image:
@@ -447,7 +452,8 @@ class BenchmarkInformation(InformationBase):
 
 	def displayInformation(self):
 		info = []
-		info.append(formatLine("H", "%s %s %s" % (_("Benchmark for"), SystemInfo["MachineBrand"], SystemInfo["MachineModel"])))
+		model = getBoxType()
+		info.append(formatLine("H", "%s %s %s" % (_("Benchmark for"), SystemInfo["MachineBrand"], model)))
 		info.append("")
 		for index, cpu in enumerate(self.cpuTypes):
 			info.append(formatLine("P1", _("CPU / Core %d type") % index, cpu))
