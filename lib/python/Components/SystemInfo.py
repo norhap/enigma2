@@ -22,19 +22,20 @@ cmdline = {k: v.strip('"') for k, v in findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 
 
 def getBoxBrand():
-	brand = ""
+	BrandName = ""
+	BrandStarSwith = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s" % (getRCName())))
 	try:
-		if fileHas("/etc/hostname", "os"):
-			brand = "Edision"
-		elif fileHas("/etc/hostname", "gb"):
-			brand = "GigaBlue"
-		elif fileHas("/etc/hostname", "sf"):
-			brand = "octagon"
+		if "edision" in (BrandStarSwith):
+			BrandName = "Edision"
+		elif "gb" in (BrandStarSwith):
+			BrandName = "GigaBlue"
+		elif "octagon" in (BrandStarSwith):
+			BrandName = "octagon"
 		else:
-			brand = open("/proc/stb/info/brandname").read().strip()
+			BrandName = open("/proc/stb/info/brandname").read().strip()
 	except IOError:
 		print("[BrandName] Machine not added in SystemInfo def getBoxBrand!")
-	return brand
+	return BrandName
 
 def getRCFile(ext):
 	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getRCName(), ext)))
