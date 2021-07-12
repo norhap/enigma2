@@ -67,7 +67,7 @@ class NcamInfo:
 		conffile = ""
 
 		# Find and parse running ncam
-		for file in ["/tmp/.ncam/ncam.version", "/tmp/.ncam/ncam.version"]:
+		for file in ["/tmp/.ncam/ncam.version"]:
 			if fileExists(file):
 				with open(file, 'r') as data:
 					conffile = file.split('/')[-1].replace("version", "conf")

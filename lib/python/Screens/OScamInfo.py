@@ -69,7 +69,7 @@ class OscamInfo:
 		conffile = ""
 
 		# Find and parse running oscam
-		for file in ["/tmp/.ncam/ncam.version", "/tmp/.oscam/oscam.version"]:
+		for file in ["/tmp/.oscam/oscam.version"]:
 			if fileExists(file):
 				with open(file, 'r') as data:
 					conffile = file.split('/')[-1].replace("version", "conf")
