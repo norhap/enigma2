@@ -1,15 +1,15 @@
-from __future__ import print_function
 import os
 import RecordTimer
 import Components.ParentalControl
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
+from Components.About import getModel
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
-from Components.SystemInfo import SystemInfo, getBoxBrand
+from Components.SystemInfo import SystemInfo
 from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediafilesInUse
@@ -21,8 +21,7 @@ from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceRefe
 inStandby = None
 infoBarInstance = None
 
-brand = getBoxBrand()
-model = getBoxType()
+model = getModel()
 
 QUIT_SHUTDOWN = 1
 QUIT_REBOOT = 2
@@ -297,17 +296,17 @@ class QuitMainloopScreen(Screen):
 		Screen.__init__(self, session)
 		from Components.Label import Label
 		text = {
-			QUIT_SHUTDOWN: _("Your %s %s is shutting down") % (brand, model),
-			QUIT_REBOOT: _("Your %s %s is rebooting") % (brand, model),
-			QUIT_RESTART: _("The user interface of your %s %s is restarting") % (brand, model),
-			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s %s reboots\nThis may take a few minutes") % (brand, model),
-			QUIT_DEBUG_RESTART: _("The user interface of your %s %s is restarting in debug mode") % (brand, model),
-			QUIT_REBOOT_ANDROID: _("Your %s %s is rebooting into android mode") % (brand, model),
-			QUIT_REBOOT_RECOVERY: _("Your %s %s is rebooting into recovery mode") % (brand, model),
-			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s %s reboots\nThis may take a few minutes") % (brand, model),
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s %s restarts") % (brand, model),
-			QUIT_UPGRADE_FPANEL: _("Front panel your %s %s will be updated\nThis may take a few minutes") % (brand, model),
-			QUIT_WOL: _("Your %s %s goes to WOL") % (brand, model)
+			QUIT_SHUTDOWN: _("Your %s is shutting down") % model,
+			QUIT_REBOOT: _("Your %s is rebooting") % model,
+			QUIT_RESTART: _("The user interface of your %s is restarting") % model,
+			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s reboots\nThis may take a few minutes") % model,
+			QUIT_DEBUG_RESTART: _("The user interface of your %s is restarting in debug mode") % model,
+			QUIT_REBOOT_ANDROID: _("Your %s is rebooting into android mode") % model,
+			QUIT_REBOOT_RECOVERY: _("Your %s is rebooting into recovery mode") % model,
+			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s reboots\nThis may take a few minutes") % model,
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s restarts") % model,
+			QUIT_UPGRADE_FPANEL: _("Front panel your %s will be updated\nThis may take a few minutes") % model,
+			QUIT_WOL: _("Your %s goes to WOL") % model
 		}.get(retvalue)
 		self["text"] = Label(text)
 
