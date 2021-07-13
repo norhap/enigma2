@@ -4,12 +4,12 @@ except ImportError:
 	import urllib
 
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
-from boxbranding import getBoxType
+from boxbranding import getBoxType, getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
 from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
 from PIL import Image
-import skin, os, re, urllib2, sys, boxbranding
+import skin, os, re, urllib2, sys
 from skin import parameters
 from Screens.Screen import Screen, ScreenSummary
 from Screens.MessageBox import MessageBox
@@ -23,11 +23,10 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from Tools.StbHardware import getFPVersion, getBoxProc
+from Tools.StbHardware import getFPVersion
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
-from re import search
 from Screens.HelpMenu import HelpableScreen
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
 from Components.GUIComponent import GUIComponent
@@ -358,7 +357,7 @@ class About(Screen):
 			fp_version = _("Frontprocessor version: %s") % fp_version
 			AboutText += fp_version + "\n"
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model not in ("gbip4k"):
-			AboutText += _("Type Display: ") + boxbranding.getDisplayType() + "\n"
+			AboutText += _("Type Display: ") + getDisplayType() + "\n"
 		else:
 			AboutText += _("No Display") + "\n"
 
@@ -606,8 +605,8 @@ class TunerInformation(InformationBase):
 		dvbApiVersion = dvbFeToolTxt.splitlines()[0].replace("DVB API version: ", "").strip()
 		info.append(formatLine("", _("DVB API version"), dvbApiVersion))
 		info.append("")
-		info.append(formatLine("", _("Transcoding"), (_("Yes") if boxbranding.getHaveTranscoding() == "True" else _("No"))))
-		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if boxbranding.getHaveMultiTranscoding() == "True" else _("No"))))
+		info.append(formatLine("", _("Transcoding"), (_("Yes") if getHaveTranscoding() == "True" else _("No"))))
+		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if getHaveMultiTranscoding() == "True" else _("No"))))
 		info.append("")
 		info.append(formatLine("", _("DVB-S2X"), (_("Yes") if fileHas("/tmp/dvbfetool.txt", "DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi") else _("No"))))
 		info.append(formatLine("", _("DVB-S2/T2/C Combined"), (_("Yes") if fileHas("/tmp/dvbfetool.txt", "Mode 2: DVB-S") else _("No"))))
