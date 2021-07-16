@@ -17617,3 +17617,6 @@ msgstr "(Mostrar solo reader:"
 
 msgid "No ECM info is currently available. This is only available while decrypting."
 msgstr "Actualmente no hay información de ECM disponible. Solo está disponible durante el descifrado."
+
+msgid "Timeout elapsed, sorry."
+msgstr "Se agotó el tiempo de espera, lo sentimos."
