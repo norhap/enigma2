@@ -9,6 +9,7 @@ from Components.About import about
 
 model = getBoxType()
 has_hdmi = model not in ("dm800","dm8000")
+chipsetstring = about.getChipSetString()
 
 # The "VideoHardware" is the interface to /proc/stb/video.
 # It generates hotplug events, and gives you the list of
@@ -35,7 +36,7 @@ class VideoHardware:
 	rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p"}, "multi": {50: "2160p50", 60: "2160p"}}
 	rates["2160p30"] = {"25Hz": {50: "2160p25"}, "30Hz": {60: "2160p30"}, "multi": {50: "2160p25", 60: "2160p30"}, "auto": {50: "2160p25", 60: "2160p30", 24: "2160p24"}}
 
-	if model.startswith == "dreamone" or model.startswith == "dreamtwo":
+	if model.startswith in ("dreamone", "dreamtwo"):
 		rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p60"}, "multi": {50: "2160p50", 60: "2160p60"}, "auto": {50: "2160p50", 60: "2160p60", 24: "2160p24"}}
 	else:
 		rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p"}, "multi": {50: "2160p50", 60: "2160p"}, "auto": {50: "2160p50", 60: "2160p", 24: "2160p24"}}
@@ -65,23 +66,21 @@ class VideoHardware:
 		except IOError:
 			return _("unavailable")
 
-	SystemInfo["VideoModes"] = chipsets() in (  # 2160p and 1080p capable hardware.
-		"5272s", "7251", "7251s", "7252", "7252s", "7278", "7366", "7376", "7444s", "72604", "3798mv200", "3798mv310", "3798cv200", "hi3798mv200", "hi3798cv200"
-	) and (
-		["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
-		{"720p", "1080p", "2160p", "1080i"}  # Widescreen modes.
-	) or chipsets() in (  # 1080p capable hardware.
-		"7241", "7356", "73565", "7358", "7362", "73625", "7424", "7425", "7552", "3716mv410"
-	) and (
-		["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
-		{"720p", "1080p", "1080i"}  # Widescreen modes.
-	) or (  # Default modes (neither 2160p nor 1080p capable hardware).
-		["720p", "1080i", "576p", "576i", "480p", "480i"],  # Normal modes.
-		{"720p", "1080i"}  # Widescreen modes.
-	)
-
-	modes["HDMI"] = SystemInfo["VideoModes"][0]
-	widescreen_modes = SystemInfo["VideoModes"][1]
+	if chipsets() in ("5272s", "7251", "7251s", "7252", "7252s", "7278", "7366", "7376", "7444s", "72604", "3798mv200", "3798mv310", "3798cv200", "hi3798mv200", "hi3798cv200"):
+		modes["HDMI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
+		widescreen_modes = {"720p", "1080p", "1080i", "2160p"}
+	elif chipsets() in ("7241", "7358", "7362", "73625", "7356", "73565", "7424", "7425", "7435", "7581", "3716mv410"):
+		modes["HDMI"] = ["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"]
+		widescreen_modes = {"720p", "1080p", "1080i"}
+	elif chipsetstring == "meson-6":
+		modes["HDMI"] = ["720p", "1080p", "1080i"]
+		widescreen_modes = {"720p", "1080p", "1080i"}
+	elif chipsetstring in ("meson-64", "s905d"):
+		modes["HDMI"] = ["720p", "1080p", "2160p", "2160p30", "1080i"]
+		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
+	else:
+		modes["HDMI"] = ["720p", "1080i", "576p", "576i", "480p", "480i"]
+		widescreen_modes = {"720p", "1080i"}
 
 	if SystemInfo["HasScart"]:
 		modes["Scart"] = ["PAL", "NTSC", "Multi"]
@@ -90,7 +89,7 @@ class VideoHardware:
 	if SystemInfo["HasComposite"]:
 		modes["RCA"] = ["576i", "PAL", "NTSC", "Multi"]
 	if SystemInfo["HasJack"]:
-		modes["AV JACK"] = ["PAL", "NTSC", "Multi"]
+		modes["Jack"] = ["PAL", "NTSC", "Multi"]
 	if SystemInfo["HasYPbPr"]:
 		modes["YPbPr"] = modes["HDMI"]
 
