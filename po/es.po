@@ -17620,3 +17620,24 @@ msgstr "Actualmente no hay información de ECM disponible. Solo está disponible
 
 msgid "Timeout elapsed, sorry."
 msgstr "Se agotó el tiempo de espera, lo sentimos."
+
+msgid "action enum must be simple."
+msgstr "acción enumeración debe ser simple."
+
+msgid "no comma"
+msgstr "sin coma"
+
+msgid "Aborted"
+msgstr "Abortado"
+
+msgid "Refusing to move to the same directory"
+msgstr "Negarse a pasar al mismo directorio"
+
+msgid "Offline delete failed"
+msgstr "Error al eliminar sin conexión"
+
+msgid "failed to execute command!"
+msgstr "no se pudo ejecutar el comando!"
+
+msgid "Neither .png nor .jpg nor .svg, please fix file extension"
+msgstr "Ni .png ni .jpg ni .svg, corrija la extensión del archivo"
