@@ -16289,10 +16289,10 @@ msgid "This allows you to set the number of digits you can input when selecting 
 msgstr "Esto le permite establecer el número de dígitos que puede ingresar al seleccionar canales mediante el ingreso de números."
 
 msgid "Log python stack trace on spinner"
-msgstr "Log python con spinner"
+msgstr "Seguimiento de registro con spinner (ruleta)"
 
 msgid "Debug log time format *"
-msgstr "Formato Debug log en tiempo"
+msgstr "Formato registro depuración en tiempo"
 
 msgid "This is the prefix of each entry in the debug log. 'boot time' is the number of seconds since your %s %s was last booted."
 msgstr "Este es el prefijo de cada entrada en Debug log. 'en tiempo de arranque' es el número de segundos desde la última vez que se arrancó su %s %s."
@@ -17173,13 +17173,52 @@ msgstr "Esto establece el prefijo para cada línea en el registro de depuración
 msgid "Enable auto fastscan"
 msgstr "Habilitar escaneo rápido automático"
 
-msgid "Enable debug logs *"
-msgstr "Habilitar logs de depuración *"
+msgid "Debug logging *"
+msgstr "Registros de depuración *"
 
-msgid "Use this option to select if debug logs of internal enigma2 activities are created.  These logs can be helpful for developers in finding and fixing problems."
-msgstr "Utilice esta opción para seleccionar si se crean registros de depuración de actividades internas de enigma2. Estos registros pueden ser útiles para que los desarrolladores encuentren y solucionen problemas."
+msgid "Detailed debug logs"
+msgstr "Registros de depuración detallados"
 
-msgid "* = Restart Required"
+msgid "No debug logs"
+msgstr "Sin registros de depuración"
+
+msgid "Basic debug logs"
+msgstr "Registros de depuración básicos"
+
+msgid "Local date/time"
+msgstr "Fecha/hora local"
+
+msgid "Boot time and local data/time"
+msgstr "Tiempo de arranque y tiempo de datos local"
+
+msgid "Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged.  These logs can be helpful for developers in finding and fixing problems."
+msgstr "Utilice esta opción para seleccionar si se crean registros de depuración de las actividades internas de enigma2 y, de ser así, cuántos detalles se registrarán. Estos registros pueden ser útiles para que los desarrolladores encuentren y solucionen problemas. Desactívelo cuando encuentre lo que busca!!."
+
+msgid "Include keyboard data"
+msgstr "Incluir datos del teclado"
+
+msgid "Enable this option to add keyboard keymap data to the debug log file."
+msgstr "Habilite esta opción para agregar datos del keymap del teclado al archivo de registro de depuración."
+
+msgid "Include remote control data"
+msgstr "Incluir datos del mando a distancia"
+
+msgid "Enable this option to add remote control data to the debug log file."
+msgstr "Habilite esta opción para agregar datos del mando a distancia al archivo de registro de depuración."
+
+msgid "Include action map data"
+msgstr "Incluir datos de mapas de acción en keymap"
+
+msgid "Enable this option to add action map / remote control mapping data to the debug log file."
+msgstr "Habilite esta opción para agregar datos de mapas de acción/mando a distancia al archivo de registro de depuración."
+
+msgid "Include screen load data"
+msgstr "Incluir datos de carga de pantalla"
+
+msgid "Enable this option to add screen names and resolution data to the debug log file."
+msgstr "Habilite esta opción para agregar nombres de pantalla y datos de resolución al archivo de registro de depuración."
+
+msgid "* = Restart Required" 
 msgstr "* = Reiniciar Requerido"
 
 msgid "Move to first line / screen"
