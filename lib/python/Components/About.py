@@ -220,6 +220,16 @@ def getChipSetString():
 		return _("undefined")
 
 
+def getChipSetNumber():
+	try:
+		f = open('/proc/stb/info/chipset', 'r')
+		chipset = f.read()
+		f.close()
+		return str(chipset.lower().replace('\n','').replace('brcm','').replace('bcm',''))
+	except IOError:
+		return _("unavailable")
+
+
 def getCPUBrand():
 	if SystemInfo["AmlogicFamily"]:
 		return _("Amlogic")
