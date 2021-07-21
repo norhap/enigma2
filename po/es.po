@@ -15025,9 +15025,6 @@ msgstr "Mostrar en modo reposo"
 msgid "This option allows you choose how to display the time or nothing in Standby"
 msgstr "Esta opción le permite elegir cómo mostrar la hora o nada en modo espera"
 
-msgid "Speed up the performance"
-msgstr "Acelerar el rendimiento"
-
 msgid "Display skin"
 msgstr "Skin Display"
 
