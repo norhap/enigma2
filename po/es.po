@@ -17266,8 +17266,8 @@ msgstr "Actualizar esta pantalla"
 msgid "Tuner Information"
 msgstr "Información Sintonizadores"
 
-msgid "DVB-S2/T2/C Combined"
-msgstr "DVB-S2/T2/C [Combinado]"
+msgid "DVB-S2/C/T2 Combined"
+msgstr "DVB-S2/C/T2 [Combinado]"
 
 msgid "Branch Enigma2: "
 msgstr "Rama Git Enigma2: "
