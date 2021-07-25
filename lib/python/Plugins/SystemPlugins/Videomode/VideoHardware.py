@@ -42,7 +42,7 @@ class VideoHardware:
 	rates["1080p"] = {"50Hz": {50: "1080p50"}, "60Hz": {60: "1080p"}, "multi": {50: "1080p50", 60: "1080p"}, "auto": {50: "1080p50", 60: "1080p", 24: "1080p24"}}
 	rates["2160p30"] = {"25Hz": {50: "2160p25"}, "30Hz": {60: "2160p30"}, "multi": {50: "2160p25", 60: "2160p30"}, "auto": {50: "2160p25", 60: "2160p30", 24: "2160p24"}}
 
-	if model.startswith in ("dreamone", "dreamtwo"):
+	if model in ("dm900", "dm920", "dreamone", "dreamtwo"):
 		rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p60"}, "multi": {50: "2160p50", 60: "2160p60"}, "auto": {50: "2160p50", 60: "2160p60", 24: "2160p24"}}
 	else:
 		rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p"}, "multi": {50: "2160p50", 60: "2160p"}, "auto": {50: "2160p50", 60: "2160p", 24: "2160p24"}}
@@ -70,7 +70,7 @@ class VideoHardware:
 	if has_avjack:
 		modes["Jack"] = ["PAL", "NTSC", "Multi"]
 
-	if socfamily in ("7376", "7444") or brand == "dmamlogic":
+	if socfamily in ("7376", "7444") or model in ("dreamone", "dreamtwo"):
 		modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p"}
 	elif socfamily in ("7252", "7251", "7251s", "7252s", "72604", "7278", "3798mv200", "3798mv310", "3798cv200"):
@@ -82,7 +82,7 @@ class VideoHardware:
 	elif chipsetstring == "meson-6":
 		modes["DVI"] = ["720p", "1080p", "1080i"]
 		widescreen_modes = {"720p", "1080p", "1080i"}
-	elif chipsetstring in ("meson-64", "s905d") or socfamily in ("aml905d", "meson64") and brand != "dmamlogic":
+	elif chipsetstring in ("meson-64", "s905d") or socfamily in ("aml905d", "meson64") and model not in ("dreamone", "dreamtwo"):
 		modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
 	else:
@@ -190,7 +190,7 @@ class VideoHardware:
 
 	def readPreferredModes(self):
 		if config.av.edid_override.value == False:
-			if brand == "dmamlogic" and fileExists("/sys/class/amhdmitx/amhdmitx0/disp_cap"):
+			if model in ("dreamone", "dreamtwo") and fileExists("/sys/class/amhdmitx/amhdmitx0/disp_cap"):
 				print("[Videomode] Read /sys/class/amhdmitx/amhdmitx0/disp_cap")
 				modes = open("/sys/class/amhdmitx/amhdmitx0/disp_cap").read()[:-1]
 				self.modes_preferred = modes.splitlines()
@@ -255,7 +255,7 @@ class VideoHardware:
 			if force == 50:
 				mode_24 = mode_50
 
-		if brand == "dmamlogic":
+		if model in ("dreamone", "dreamtwo"):
 			amlmode = mode + rate.lower()
 			print("[Videomode] Write to /sys/class/display/mode")
 			open('/sys/class/display/mode', 'w').write(amlmode)
@@ -382,7 +382,7 @@ class VideoHardware:
 			print("[Videomode] VideoHardware current mode not available, not setting videomode")
 			return
 
-		if brand == "dmamlogic" and (mode.find("0p30") != -1 or mode.find("0p24") != -1 or mode.find("0p25") != -1):
+		if model in ("dreamone", "dreamtwo") and (mode.find("0p30") != -1 or mode.find("0p24") != -1 or mode.find("0p25") != -1):
 			match = re.search(r"(\d*?[ip])(\d*?)$", mode)
 			mode = match.group(1)
 			rate = match.group(2) + "Hz"
@@ -448,7 +448,7 @@ class VideoHardware:
 			wss = "auto"
 
 		print("[Videomode] VideoHardware -> setting aspect, policy, policy2, wss", aspect, policy, policy2, wss)
-		if chipsetstring.startswith("meson-6") and brand != "dmamlogic":
+		if chipsetstring.startswith("meson-6") and model not in ("dreamone", "dreamtwo"):
 			arw = "0"
 			if config.av.policy_43.value == "bestfit":
 				arw = "10"
@@ -461,7 +461,7 @@ class VideoHardware:
 				open("/sys/class/video/screen_mode", "w").write(arw)
 			except IOError:
 				print("[Videomode] Write to /sys/class/video/screen_mode failed.")
-		elif brand == "dmamlogic":
+		elif model in ("dreamone", "dreamtwo"):
 			arw = "0"
 			if config.av.policy_43.value == "bestfit":
 				arw = "10"
