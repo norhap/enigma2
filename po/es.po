@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2021-03-07 03:11+0100\n"
+"PO-Revision-Date: 2021-07-28 15:54+0200\n"
 "Language-Team: Álvaro <mi casa>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Last-Translator: Kuatto\n"
 "Language: es_ES\n"
 
@@ -1266,9 +1266,6 @@ msgstr "Bus: "
 msgid "Bypass HDMI EDID checking"
 msgstr "Omitir la verificación HDMI EDID"
 
-msgid "C-Band"
-msgstr "C-Band"
-
 msgid "CH"
 msgstr "CH"
 
@@ -2030,15 +2027,6 @@ msgstr "NIMs detectados:"
 
 msgid "Devicename:"
 msgstr "Nombre dispositivo:"
-
-msgid "DiSEqC 1.0 command"
-msgstr "DiSEqC 1.0 command"
-
-msgid "DiSEqC 1.1 command"
-msgstr "DiSEqC 1.1 command"
-
-msgid "DiSEqC 1.1 repeats"
-msgstr "DiSEqC 1.1 repeats"
 
 msgid "DiSEqC A/B"
 msgstr "DiSEqC A/B"
@@ -4814,16 +4802,16 @@ msgid "Polish"
 msgstr "Polaco"
 
 msgid "Port A"
-msgstr "Port A"
+msgstr "Puerto A"
 
 msgid "Port B"
-msgstr "Port B"
+msgstr "Puerto B"
 
 msgid "Port C"
-msgstr "Port C"
+msgstr "Puerto C"
 
 msgid "Port D"
-msgstr "Port D"
+msgstr "Puerto D"
 
 msgid "Port of fallback remote receiver"
 msgstr "Puerto del receptor reserva"
@@ -5685,7 +5673,7 @@ msgid "Select '1.0' for standard committed switches, '1.1' for uncommitted switc
 msgstr "Seleccione ‘1.0’ para interruptores comprometidos estándar, ‘1.1’ para interruptores no comprometidos y ‘1.2’ para sistemas que usan un motor."
 
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
-msgstr "Seleccione ‘A’ o ‘B’ si su sistema aéreo lo requiere, de lo contrario seleccione ‘ninguno’. Si no está seguro, seleccione ‘ninguno’."
+msgstr "Seleccione ‘A’ o ‘B’ si su antena lo requiere, de lo contrario seleccione ‘ninguno’. Si no está seguro, seleccione ‘ninguno’."
 
 msgid "Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'."
 msgstr "Seleccione ‘Unicable’ si este sintonizador usará un dispositivo Unicable. Para todas las demás configuraciones, seleccione ‘FBC automático’."
@@ -6727,7 +6715,7 @@ msgid "Swedish"
 msgstr "Sueco"
 
 msgid "Switch"
-msgstr "Interruptor"
+msgstr "Interruptor-Distribuidor"
 
 msgid "Switch TV to correct input"
 msgstr "Cambia la TV a la entrada correcta"
@@ -11893,15 +11881,6 @@ msgstr "buscar EPG..."
 
 msgid "title starts with"
 msgstr "el título comienza con"
-
-msgid ""
-"\n"
-"\n"
-"Cancel?"
-msgstr ""
-"\n"
-"\n"
-"¿Cancelar?"
 
 msgid " (if services are enabled, bouquets are ignored)."
 msgstr " (si los canales están habilitados, los bouquets se ignoran)."
@@ -17215,7 +17194,7 @@ msgstr "Incluir datos de carga de pantalla"
 msgid "Enable this option to add screen names and resolution data to the debug log file."
 msgstr "Habilite esta opción para agregar nombres de pantalla y datos de resolución al archivo de registro de depuración."
 
-msgid "* = Restart Required" 
+msgid "* = Restart Required"
 msgstr "* = Reiniciar Requerido"
 
 msgid "Move to first line / screen"
@@ -17455,10 +17434,12 @@ msgstr "Desea eliminar el '%s' directorio?"
 msgid "Error: Unable to delete directory '%s'! (Diretory may not be empty.)"
 msgstr "Error: no se puede eliminar el directorio '%s'! (Es posible que el directorio no esté vacío)"
 
-msgid "There may not be enough space on the selected location.\n"
+msgid ""
+"There may not be enough space on the selected location.\n"
 "\n"
 "Do you really want to continue?"
-msgstr "Puede que no haya suficiente espacio en la ubicación seleccionada.\n"
+msgstr ""
+"Puede que no haya suficiente espacio en la ubicación seleccionada.\n"
 "\n"
 "Desea continuar?"
 
@@ -17625,12 +17606,10 @@ msgid "You want to change current MAC address: "
 msgstr "Quiere cambiar la dirección MAC actual: "
 
 msgid ""
-"MAC address successfully changed."
-"\n"
+"MAC address successfully changed.\n"
 "New MAC address: "
 msgstr ""
-"La dirección MAC se cambió correctamente."
-"\n"
+"La dirección MAC se cambió correctamente.\n"
 "Nueva dirección MAC: "
 
 msgid "Not valide MAC address"
@@ -17677,3 +17656,51 @@ msgstr "no se pudo ejecutar el comando!"
 
 msgid "Neither .png nor .jpg nor .svg, please fix file extension"
 msgstr "Ni .png ni .jpg ni .svg, corrija la extensión del archivo"
+
+msgid "Nothing connected"
+msgstr "Nada Conectado"
+
+msgid "Not configured"
+msgstr "No configurado"
+
+msgid "DiSEqC 1.0 command"
+msgstr "Comando DiSEqC 1.0"
+
+msgid "DiSEqC 1.1 command"
+msgstr "Comando DiSEqC 1.1"
+
+msgid "DiSEqC 1.1 repeats"
+msgstr "Repite DiSEqC 1.1"
+
+msgid "Positioner (Selecting satellites)"
+msgstr "Motor (Seleccionando satélites)"
+
+msgid " (Disabled)"
+msgstr " (Desactivado)"
+
+msgid " (Lower than any auto)"
+msgstr " (Más baja que cualquier auto)"
+
+msgid " (Higher than rotor any auto)"
+msgstr " (Más alta que el motor de cualquier auto)"
+
+msgid " (Higher than any auto)"
+msgstr " (Más alta que cualquier auto)"
+
+msgid "Bootup time"
+msgstr "Tiempo de arranque"
+
+msgid "Input %d"
+msgstr "Entrada %d"
+
+msgid "C-Band"
+msgstr "Band-C"
+
+msgid "User Band %d"
+msgstr "Banda Usuario %d"
+
+msgid "User Band %d (%s)"
+msgstr "Banda Usuario %d (%s)"
+
+msgid " (+5 volt terrestrial)"
+msgstr " (+5 voltios terrestre)"
