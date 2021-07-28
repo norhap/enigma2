@@ -2,15 +2,15 @@ from __future__ import print_function
 import sys
 import os
 from time import time
+from boxbranding import getImageArch
+from enigma import getBoxType, getBoxBrand, getE2Rev
 from Tools.Directories import InitFallbackFiles, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from Tools.Profile import profile, profileFinal
 profile("PYTHON_START")
+
 # Don't remove this line. It may seem to do nothing, but if removed,
 # it will break output redirection for crash logs.
 import Tools.RedirectOutput
-from boxbranding import getImageArch
-from enigma import getBoxType, getBoxBrand, getE2Rev
-
 import enigma
 import eConsoleImpl
 import eBaseImpl
@@ -18,15 +18,12 @@ enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
-model = getBoxType()
-
 from Components.SystemInfo import SystemInfo
 from traceback import print_exc
 
-if getImageArch() == "aarch64":
-	import usb.core
-	import usb.backend.libusb1
-	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
+profile("SetupDevices")
+import Components.SetupDevices
+Components.SetupDevices.InitSetupDevices()
 
 profile("ClientMode")
 import Components.ClientMode
@@ -35,6 +32,13 @@ Components.ClientMode.InitClientMode()
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
+
+model = getBoxType()
+
+if getImageArch() == "aarch64":
+	import usb.core
+	import usb.backend.libusb1
+	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
 from sys import stdout
 
@@ -606,10 +610,6 @@ profile("InputDevice")
 import Components.InputDevice
 Components.InputDevice.InitInputDevices()
 import Components.InputHotplug
-
-profile("SetupDevices")
-import Components.SetupDevices
-Components.SetupDevices.InitSetupDevices()
 
 profile("AVSwitch")
 import Components.AVSwitch
