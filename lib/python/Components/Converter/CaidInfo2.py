@@ -2,14 +2,13 @@ from Components.Converter.Converter import Converter
 from enigma import iServiceInformation
 from Tools.Directories import fileExists
 from Components.Element import cached
-from Components.Converter.Poll import Poll
 import os
 
 info = {}
 old_ecm_mtime = None
 
 
-class CaidInfo2(Poll, Converter, object):
+class CaidInfo2(Converter, object):
 	CAID = 0
 	PID = 1
 	PROV = 2
@@ -49,7 +48,6 @@ class CaidInfo2(Poll, Converter, object):
 	my_interval = 1000
 
 	def __init__(self, type):
-		Poll.__init__(self)
 		Converter.__init__(self, type)
 		if type == "CAID":
 			self.type = self.CAID
