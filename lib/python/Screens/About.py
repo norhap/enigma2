@@ -710,7 +710,7 @@ class Devices(Screen):
 				self.mountinfo += "%s (%sB, %sB %s)" % (ipaddress, mounttotal, mountfree, _("free"))
 		if pathExists("/media/autofs"):
 			for entry in sorted(listdir("/media/autofs")):
-				mountEntry = path.join("/media/autofs", entry)
+				mountEntry = pathjoin("/media/autofs", entry)
 				self.mountinfo += _("\n %s " % (mountEntry))
 
 		if self.mountinfo:
