@@ -2368,7 +2368,7 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr "Habilite el receptor reserva enigma2 para sintonizar servicios que no se pueden sintonizar localmente (ej: el sintonizador está ocupado o el tipo de canal no está disponible en el sintonizador local. Especifique la URL completa incluyendo http:// y el número de puerto (normalmente …: 8001 ), ej: http://segundo_receptor:8001."
 
 msgid "Enable this setting if your aerial system needs power"
-msgstr "Activa este ajuste si su antena necesita alimentación eléctrica"
+msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
 
 msgid "Enable timer conflict detection"
 msgstr "Activa temporizador de detección de conflictos"
@@ -5673,7 +5673,7 @@ msgid "Select '1.0' for standard committed switches, '1.1' for uncommitted switc
 msgstr "Seleccione ‘1.0’ para interruptores comprometidos estándar, ‘1.1’ para interruptores no comprometidos y ‘1.2’ para sistemas que usan un motor."
 
 msgid "Select 'A' or 'B' if your aerial system requires this, otherwise select 'none'. If you are unsure select 'none'."
-msgstr "Seleccione ‘A’ o ‘B’ si su antena lo requiere, de lo contrario seleccione ‘ninguno’. Si no está seguro, seleccione ‘ninguno’."
+msgstr "Seleccione ‘A’ o ‘B’ si su instalación de antena lo requiere, de lo contrario seleccione ‘ninguno’. Si no está seguro, seleccione ‘ninguno’."
 
 msgid "Select 'Unicable' if this tuner will use a Unicable device. For all other setups select 'FBC automatic'."
 msgstr "Seleccione ‘Unicable’ si este sintonizador usará un dispositivo Unicable. Para todas las demás configuraciones, seleccione ‘FBC automático’."
@@ -5721,7 +5721,7 @@ msgid "Select Channel"
 msgstr "Seleccionar Canal"
 
 msgid "Select Fast DiSEqC if your aerial system supports this. If you are unsure select 'no'."
-msgstr "Seleccione Fast DiSEqC si su sistema aéreo lo admite. Si no está seguro, seleccione ‘no’."
+msgstr "Seleccione DiSEqC rápido si su instalación de antena lo admite. Si no está seguro, seleccione ‘no’."
 
 msgid "Select Image"
 msgstr "Seleccionar Imagen"
@@ -6027,7 +6027,7 @@ msgid "Set pin code persistent"
 msgstr "Establecer el código PIN persistente"
 
 msgid "Set sequence repeats if your aerial system requires this. Normally if the aerial system has been configured correctly sequence repeats will not be necessary. If yours does, recheck you have command order set correctly."
-msgstr "Establezca la secuencia repetida si su sistema aéreo lo requiere. Normalmente, si el sistema aéreo se ha configurado correctamente, no será necesario repetir la secuencia. Si la suya lo hace, vuelva a verificar que tienes establecidas correctamente las ordenes de comando."
+msgstr "Establezca la secuencia repetida si su instalación de antena lo requiere. Normalmente, si la instalación se ha configurado correctamente, no será necesario repetir la secuencia. Si la suya lo hace, vuelva a verificar que tienes establecidas correctamente las ordenes de comando."
 
 msgid "Set as startup service"
 msgstr "Establecer como canal de inicio"
@@ -7030,7 +7030,7 @@ msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr "Este es un sintonizador multitipo. Las opciones disponibles dependen del hardware."
 
 msgid "This is the order in which DiSEqC commands are sent to the aerial system. The order must correspond exactly with the order the physical devices are arranged along the signal cable (starting from the receiver end)."
-msgstr "Este es el orden en que los comandos DiSEqC se envían al sistema aéreo. El orden debe corresponderse exactamente con el orden en que los dispositivos físicos están dispuestos a lo largo del cable de señal (comenzando desde el extremo del receptor)."
+msgstr "Este es el orden en que los comandos DiSEqC se envían a su instalación de antena. El orden debe corresponderse exactamente con el orden en que los dispositivos físicos están dispuestos a lo largo del cable de señal (comenzando desde el extremo del receptor)."
 
 msgid "This option allows to reduce the block-noise in the picture. Obviously this is at the cost of the picture's sharpness."
 msgstr "Esta opción permite reducir el ruido (pixelado) en la imagen. Obviamente, esto es a costa de la nitidez de la imagen."
