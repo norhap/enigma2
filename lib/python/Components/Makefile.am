@@ -22,5 +22,4 @@ install_PYTHON = \
 	Keyboard.py Sensors.py FanControl.py HdmiCec.py RcModel.py \
 	Netlink.py InputHotplug.py \
 	ImportChannels.py VfdSymbols.py ChannelsImporter.py ClientMode.py \
-	HdmiRecord.py StackTrace.py PowerTimerList.py EpgLoadSave.py \
-	WeatherMSN.py
+	HdmiRecord.py StackTrace.py PowerTimerList.py EpgLoadSave.py
