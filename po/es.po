@@ -17345,7 +17345,7 @@ msgid "View teletext"
 msgstr "Ver teletexto"
 
 msgid "Extension Actions"
-msgstr "Acciones Extension"
+msgstr "Acciones Extensión"
 
 msgid "Show extensions"
 msgstr "Mostrar extensiones"
@@ -17704,3 +17704,9 @@ msgstr "Banda Usuario %d (%s)"
 
 msgid " (+5 volt terrestrial)"
 msgstr " (+5 voltios terrestre)"
+
+msgid "Aspect Ratio Actions"
+msgstr "Acciones Aspecto Ratio"
+
+msgid "Switch to HDMI-IN mode"
+msgstr "Cambiar a Modo HDMI-IN"
