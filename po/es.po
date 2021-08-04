@@ -8514,8 +8514,8 @@ msgstr "este"
 msgid "economics/social advisory"
 msgstr "economía/asesoría social"
 
-msgid "edit alternatives"
-msgstr "editar alternativos"
+msgid "Edit alternatives"
+msgstr "Editar alternativos"
 
 msgid "education/science/factual topics (general)"
 msgstr "educación/ciencia/temas de actualidad (general)"
@@ -8967,8 +8967,8 @@ msgstr "personas notables"
 msgid "remove after this position"
 msgstr "eliminar después de esta posición"
 
-msgid "remove all alternatives"
-msgstr "eliminar todos los alternativos"
+msgid "Remove all alternatives"
+msgstr "Eliminar todos los alternativos"
 
 msgid "remove all new found flags"
 msgstr "eliminar todas los indicadores nuevos encontrados"
@@ -9087,8 +9087,8 @@ msgstr "mostrar menú principal del DVD"
 msgid "show all tags"
 msgstr "mostrar todas las etiquetas"
 
-msgid "show alternatives"
-msgstr "mostrar alternativos"
+msgid "Show alternatives"
+msgstr "Mostrar alternativos"
 
 msgid "show event details"
 msgstr "mostrar detalles del evento"
