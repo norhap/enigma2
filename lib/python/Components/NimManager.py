@@ -1306,7 +1306,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 	advanced_lnb_ucsw_choices = [("0", _("None"))] + [(str(x), _("Input %d") % x) for x in range(1, 17)]
 	diseqc_mode_choices = [
 		("single", _("Single")),
-		("toneburst_a_b", _("Toneburst A/B")),
+		("toneburst_a_b", _("MiniDiSEqC A/B")),
 		("diseqc_a_b", "DiSEqC A/B"),
 		("diseqc_a_b_c_d", "DiSEqC A/B/C/D"),
 		("positioner", _("Positioner")),

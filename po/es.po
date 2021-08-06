@@ -7326,8 +7326,8 @@ msgstr "Modo de tono"
 msgid "Toneburst"
 msgstr "MiniDiseqC"
 
-msgid "Toneburst A/B"
-msgstr "MiniDiseqC A/B"
+msgid "MiniDiSEqC A/B"
+msgstr "MiniDiSEqC A/B"
 
 msgid "Tonga"
 msgstr "Tonga"
