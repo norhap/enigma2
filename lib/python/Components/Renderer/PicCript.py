@@ -55,7 +55,7 @@ class PicCript(Renderer):
 		if self.instance:
 			pngName = ""
 			if (what[0] != self.CHANGED_CLEAR) and isfile("/tmp/ecm.info"):
-				sName = "NAG"
+				sName = ""
 				service = self.source.service
 				if service:
 					info = service and service.info()
@@ -85,7 +85,7 @@ class PicCript(Renderer):
 		lines = []
 		try:
 		   for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-			   if fileHas("/tmp/ecm.info","CAID: 0x") or line.startswith("caid: 0x"):
+			   if fileHas("/tmp/ecm.info", " 0x"):
 				   for caid in caids:
 					   sName = self.condAccessIds.get(line[8:10])
 					   if sName != None:
