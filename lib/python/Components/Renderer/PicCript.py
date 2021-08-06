@@ -17,6 +17,7 @@ class PicCript(Renderer):
 		"01": "SEC",
 		"06": "IRD",
 		"17": "BET",
+		"18": "NAG",
 		"05": "VIA",
 		"09": "NDS",
 		"0B": "CONN",
@@ -87,9 +88,8 @@ class PicCript(Renderer):
 			   if fileHas("/tmp/ecm.info","CAID: 0x") or line.startswith("caid: 0x"):
 				   for caid in caids:
 					   sName = self.condAccessIds.get(line[8:10])
-					   if sName is not None:
+					   if sName != None:
 						   return sName
-		   return "NAG"
 		except IOError as err:
 			print("[Errno 2] No such file or directory: /tmp/ecm.info")
 
