@@ -1,9 +1,7 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
 from Tools.Profile import profile
-from enigma import eServiceReference, getBoxType, getBoxBrand
-from Tools.StbHardware import getBoxProc
+from enigma import eServiceReference
+from Components.About import getModel
+from Components.SystemInfo import getBoxBrand
 from Tools.Directories import fileExists
 # workaround for required config entry dependencies.
 import Screens.MovieSelection
@@ -37,8 +35,7 @@ profile("LOAD:HelpableScreen")
 from Screens.HelpMenu import HelpableScreen
 
 brand = getBoxBrand()
-model = getBoxType()
-procmodel = getBoxProc()
+model = getModel()
 
 
 class InfoBar(InfoBarBase, InfoBarShowHide,
@@ -122,9 +119,9 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.onShown.remove(self.__checkServiceStarted)
 
 	def showTvButton(self):
-		if brand == "gigablue":
+		if brand == "GigaBlue":
 			self.toggleTvRadio()
-		elif model in ("sezam5000hd", "mbtwin") or procmodel in ("ini-3000", "ini-5000", "ini-7000", "ini-7012"):
+		elif model in ("sezam5000hd", "mbtwin", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.showMovies()
 		else:
 			self.showTv()
@@ -133,7 +130,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.showTvChannelList(True)
 
 	def showRadioButton(self):
-		if brand in ("gigablue", "azbox") or model in ("sezam5000hd", "mbtwin", "beyonwizt3") or procmodel in ("ini-3000", "ini-5000", "ini-7000", "ini-7012"):
+		if brand in ("GigaBlue", "azbox") or model in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.toggleTvRadio()
 		else:
 			self.showRadio()
