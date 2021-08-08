@@ -1,15 +1,15 @@
 <rcs>
 	<rc id="2">
-		<button name="POWER" pos="57,21" />
-		<button name="1" pos="25,66" />
+		<button name="POWER" pos="56,20" />
+		<button name="1" pos="22,66" />
 		<button name="2" pos="57,66" />
-		<button name="3" pos="92,66" />
-		<button name="4" pos="25,86" />
+		<button name="3" pos="88,66" />
+		<button name="4" pos="22,86" />
 		<button name="5" pos="57,86" />
-		<button name="6" pos="92,86" />
-		<button name="7" pos="25,106" />
+		<button name="6" pos="88,86" />
+		<button name="7" pos="22,106" />
 		<button name="8" pos="57,106" />
-		<button name="9" pos="92,106" />
+		<button name="9" pos="88,106" />
 		<button name="ARROWLEFT" pos="25,125" />
 		<button name="0" pos="57,125" />
 		<button name="ARROWRIGHT" pos="92,125" />
@@ -18,17 +18,17 @@
 		<button name="BOUQUET+" pos="91,270" />
 		<button name="BOUQUET-" pos="91,304" />
 		<button name="MUTE" pos="95,24" />
-		<button name="EXIT" pos="57,274" />
+		<button name="EXIT" pos="56,274" />
 		<button name="EPG" pos="57,304" />
 		<button name="INFO" pos="20,161" />
 		<button name="MENU" pos="94,161" />
-		<button name="OK" pos="57,206" />
+		<button name="OK" pos="57,205" />
 		<button name="UP" pos="57,177" />
 		<button name="DOWN" pos="57,233" />
 		<button name="LEFT" pos="28,205" />
 		<button name="RIGHT" pos="86,205" />
 		<button name="AUDIO" pos="24,246" />
-		<button name="PVR" pos="94,246" />
+		<button name="PVR" pos="93,247" />
 		<button name="RED" pos="18,143" />
 		<button name="GREEN" pos="44,143" />
 		<button name="YELLOW" pos="70,143" />
