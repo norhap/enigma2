@@ -91,6 +91,14 @@ class LanguageSelection(Screen):
 		self.list = list
 		self["languages"].list = list
 
+	def createSummary(self):
+		return LanguageSelectionSummary
+
+
+class LanguageSelectionSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent)
+
 
 class LanguageWizard(LanguageSelection, Rc):
 	def __init__(self, session):
@@ -114,3 +122,11 @@ class LanguageWizard(LanguageSelection, Rc):
 
 	def setText(self):
 		self["text"].setText(_("Please use the UP and DOWN keys to select your language. Afterwards press the OK button."))
+
+	def createSummary(self):
+		return LanguageWizardSummary
+
+
+class LanguageWizardSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent)

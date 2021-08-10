@@ -146,21 +146,21 @@
 		  <convert type="MovieInfo">FileSize</convert>
 		</widget>
 	</screen>
-    <!-- EMC screen EMCMoviePlayerSummary -->
-    <screen name="EMCMoviePlayerSummary" position="0,0" size="128,32" >
-	    <widget source="session.CurrentService" render="Label" position="0,3" size="75,15" font="FdLcD;20" halign="left" valign="center" noWrap="1">
-		     <convert type="ServicePosition">Remaining</convert>
-	    </widget>
-	    <widget source="global.CurrentTime" render="Label" position="78,0" size="50,17" font="FdLcD;20" noWrap="1">
-		     <convert type="ClockToText">Format:%H:%M</convert>
-	    </widget>
-	    <widget source="session.CurrentService" render="Label" position="0,18" size="125,14" font="FdLcD;14" noWrap="1">
-		     <convert type="ServiceName">Name</convert>
-        </widget>
+	<!-- EMC screen EMCMoviePlayerSummary -->
+	<screen name="EMCMoviePlayerSummary" position="0,0" size="128,32" >
+		<widget source="session.CurrentService" render="Label" position="0,3" size="75,15" font="FdLcD;20" halign="left" valign="center" noWrap="1">
+			 <convert type="ServicePosition">Remaining</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="78,0" size="50,17" font="FdLcD;20" noWrap="1">
+			 <convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="0,18" size="125,14" font="FdLcD;14" noWrap="1">
+			 <convert type="ServiceName">Name</convert>
+		</widget>
 		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/rec.png" position="52,5" size="19,10" >
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-    </screen>
+	</screen>
 
 <!-- channelselection-->
 	<screen name="ChannelSelection_summary" position="0,0" size="128,32">
@@ -291,15 +291,17 @@
 			<convert type="StringListSelection" />
 		</widget>
 	</screen>
-	<screen name="LanguageWizardSummary" position="0,0" size="128,32">
-		<widget source="parent.summarytext" render="Label" position="0,0" size="128,32" font="FdLcD;12" halign="center" />
-		<widget source="parent.summarylangname" render="Label" position="0,50" size="128,14" font="FdLcD;12" halign="center" noWrap="1"	 />
-	</screen>
 	<screen name="VideoWizardSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,32" font="FdLcD;12" halign="center" />
 		<widget source="parent.list" render="Label" position="0,50" size="128,14" font="FdLcD;12" halign="center" noWrap="1"  >
 			<convert type="StringListSelection" />
 		</widget>
+	</screen>
+	<screen name="LanguageSelection_summary" position="0,0" size="128,64">
+		<widget source="parent.summarylangsel" render="Label" position="0,0" size="128,32" font="FdLcD;12" halign="center" />
+	</screen>
+	<screen name="LanguageWizar_dSummary" position="0,0" size="128,32">
+		<widget source="parent.summarylangsel" render="Label" position="0,0" size="128,32" font="FdLcD;12" halign="center" />
 	</screen>
 
 <!-- DVD -->
