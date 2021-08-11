@@ -580,10 +580,10 @@ class Wizard(Screen):
 						self["config"].setList(self.configInstance["config"].list)
 						callbacks = self.configInstance["config"].onSelectionChanged
 						self.configInstance["config"].destroy()
-						print("[Wizard] clearConfigList '%s' '%s'." % (self.configInstance["config"], self["config"]))
+						# print("[Wizard] clearConfigList '%s' '%s'." % (self.configInstance["config"], self["config"]))
 						self.configInstance["config"] = self["config"]
 						self.configInstance["config"].onSelectionChanged = callbacks
-						print("[Wizard] clearConfigList '%s' '%s'." % (self.configInstance["config"], self["config"]))
+						# print("[Wizard] clearConfigList '%s' '%s'." % (self.configInstance["config"], self["config"]))
 						self["config"].setCurrentIndex(0)
 				else:
 					# self["config"].l.setList([])  # DEBUG IanSav
