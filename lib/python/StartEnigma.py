@@ -21,6 +21,10 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 from Components.SystemInfo import SystemInfo
 from traceback import print_exc
 
+from Components.config import ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
+from Components.Console import Console
+from Tools.Directories import InitFallbackFiles, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename
+
 profile("SetupDevices")
 import Components.SetupDevices
 Components.SetupDevices.InitSetupDevices()
@@ -33,6 +37,15 @@ profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
 
+profile("Imports")
+from os.path import exists, isdir, isfile, islink, join as pathjoin
+from traceback import print_exc
+from time import time
+# These entries should be moved back to UsageConfig.py when it is safe to bring UsageConfig init to this location in StartEnigma2.py.
+#
+profile("Bouquets")
+config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
+
 model = getBoxType()
 
 if getImageArch() == "aarch64":
@@ -41,10 +54,6 @@ if getImageArch() == "aarch64":
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
 from sys import stdout
-
-profile("Bouquets")
-from Components.config import config, configfile, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, NoSave
-config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
 
 
 def setLoadUnlinkedUserbouquets(configElement):

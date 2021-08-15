@@ -16,6 +16,12 @@ from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import SystemInfo
 from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
 
+config.crash = ConfigSubsection()
+config.crash.debugActionMaps = ConfigYesNo(default=False)
+config.crash.debugKeyboards = ConfigYesNo(default=False)
+config.crash.debugRemoteControls = ConfigYesNo(default=False)
+config.crash.debugScreens = ConfigYesNo(default=False)
+
 model = getBoxType()
 displaytype = getDisplayType()
 
@@ -1209,8 +1215,6 @@ def InitUsageConfig():
 	config.usage.keytrans = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 
-	config.crash = ConfigSubsection()
-
 	def updateStackTracePrinter(configElement):
 		from Components.StackTrace import StackTracePrinter
 		if configElement.value:
@@ -1221,11 +1225,6 @@ def InitUsageConfig():
 		else:
 			StackTracePrinter.getInstance().deactivate()
 
-	config.crash = ConfigSubsection()
-	config.crash.debugActionMaps = ConfigYesNo(default=False)
-	config.crash.debugKeyboards = ConfigYesNo(default=False)
-	config.crash.debugRemoteControls = ConfigYesNo(default=False)
-	config.crash.debugScreens = ConfigYesNo(default=False)
 	config.crash.pythonStackOnSpinner = ConfigYesNo(default=False)
 	config.crash.pythonStackOnSpinner.addNotifier(updateStackTracePrinter, immediate_feedback=False, initial_call=True)
 	config.crash.debugLevel = ConfigSelection(choices=[
@@ -1259,7 +1258,7 @@ def InitUsageConfig():
 			mkdir(config.crash.debugPath.value, 0o755)
 
 	config.crash.debugPath.addNotifier(updateDebugPath, immediate_feedback=False)
-	config.crash.debugFileCount = ConfigSelectionNumber(min=2, max=20, stepwidth=1, default=2, wraparound=True)
+	config.crash.debugFileCount = ConfigSelectionNumber(min=2, max=20, stepwidth=1, default=5, wraparound=True)
 	config.crash.debugFileCount.save_forced = True
 
 	config.seek = ConfigSubsection()
