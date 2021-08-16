@@ -1,29 +1,25 @@
 from __future__ import print_function
+from Tools.Profile import profile, profileFinal  # This facilitates the start up progress counter.
+profile("StartPython")
+import Tools.RedirectOutput
+
+import enigma
+import eBaseImpl
+import eConsoleImpl
 import sys
 import os
-from time import time
-from boxbranding import getImageArch
-from enigma import getBoxType, getBoxBrand, getE2Rev
-from Tools.Directories import InitFallbackFiles, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
-from Tools.Profile import profile, profileFinal
-profile("PYTHON_START")
 
-# Don't remove this line. It may seem to do nothing, but if removed,
-# it will break output redirection for crash logs.
-import Tools.RedirectOutput
-import enigma
-import eConsoleImpl
-import eBaseImpl
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
-from Components.SystemInfo import SystemInfo
-from traceback import print_exc
-
-from Components.config import ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
 from Components.Console import Console
-from Tools.Directories import InitFallbackFiles, SCOPE_CURRENT_SKIN, SCOPE_PLUGINS, resolveFilename
+from enigma import getBoxType, getBoxBrand, getE2Rev
+from Tools.Directories import InitFallbackFiles, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
+from Components.config import ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
+from boxbranding import getImageArch
+from Components.SystemInfo import SystemInfo
+from sys import stdout
 
 profile("SetupDevices")
 import Components.SetupDevices
@@ -52,8 +48,6 @@ if getImageArch() == "aarch64":
 	import usb.core
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
-
-from sys import stdout
 
 
 def setLoadUnlinkedUserbouquets(configElement):
