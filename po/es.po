@@ -5317,7 +5317,7 @@ msgid "Restart your network connection and interfaces.\n"
 msgstr "Reiniciar la conexión de red e interfaces.\n"
 
 msgid "Restore"
-msgstr "Restaurar solo configuración incluida 'Lista de Canales'"
+msgstr "Restaurar solo configuración"
 
 msgid "Restore backups"
 msgstr "Restaurar copias de seguridad"
