@@ -1018,7 +1018,8 @@ msgstr "%d.%B %Y"
 msgid "%d/%-m"
 msgstr ""
 
-msgid "%d/%-m "
+#, python-format
+msgid "Are you sure to remove all %s services?"
 msgstr ""
 
 msgid "%d/%-m/%Y"

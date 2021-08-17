@@ -909,9 +909,8 @@ msgstr "Árabe"
 msgid "Are you sure to purge all deleted userbouquets?"
 msgstr "Purgar todos los bouquets de usuario eliminados?"
 
-#, python-format
-msgid "Are you sure to remove all %d.%d%s%s services?"
-msgstr "Eliminar todos %d.%d%s%s servicios?"
+msgid "Are you sure to remove all %s services?"
+msgstr "¿Estás seguro que quieres eliminar todos los canales %s?"
 
 msgid "Are you sure to remove all cable services?"
 msgstr "Eliminar todos los servicios de cable?"

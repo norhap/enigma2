@@ -2932,7 +2932,8 @@ msgstr ""
 msgid "Calculating rating..."
 msgstr ""
 
-msgid "Calculation complete"
+#, python-format
+msgid "Are you sure to remove all %s services?"
 msgstr ""
 
 msgid "Calibrate"
