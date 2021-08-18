@@ -11,8 +11,10 @@ from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
 from PIL import Image
 import skin, os, re, urllib2, sys
 from skin import parameters
+from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
 from Screens.MessageBox import MessageBox
+
 from Components.config import config
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Sources.StaticText import StaticText
@@ -23,16 +25,17 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Button import Button
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from Tools.StbHardware import getFPVersion
+from Components.Console import Console
+from Components.GUIComponent import GUIComponent
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
-from Screens.HelpMenu import HelpableScreen
+
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
-from Components.GUIComponent import GUIComponent
-from Components.Console import Console
 from Tools.Geolocation import geolocation
+from Tools.StbHardware import getFPVersion, getBrandModel
 from Tools.LoadPixmap import LoadPixmap
+
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -245,11 +248,11 @@ class InformationImage(Screen, HelpableScreen):
 		self.layoutFinished()
 
 	def layoutFinished(self):
-		model = about.getModel()
+		BrandModel = getBrandModel()
 		if self.widgetContext is None:
 			self.widgetContext = tuple(self["image"].getPosition() + self["image"].getSize())
 			print(self.widgetContext)
-		self["name"].setText("%s  -  %s" % (self.images[self.imageIndex][0], model))
+		self["name"].setText("%s  -  %s" % (self.images[self.imageIndex][0], BrandModel))
 		imagePath = resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
 		image = LoadPixmap(imagePath)
 		if image:
@@ -306,7 +309,7 @@ class About(Screen):
 
 		model = getBoxType()
 
-		AboutText = _("Model: ") + about.getModel() + "\n"
+		AboutText = _("Model: ") + getBrandModel() + "\n"
 		if model:
 			AboutText += _("Machine: ") + about.getHardwareTypeString() + "\n"
 		if fileExists("/proc/stb/info/sn"):
@@ -451,8 +454,8 @@ class BenchmarkInformation(InformationBase):
 
 	def displayInformation(self):
 		info = []
-		model = about.getModel()
-		info.append(formatLine("H", "%s %s" % (_("Benchmark for"), model)))
+		BrandModel = getBrandModel()
+		info.append(formatLine("H", "%s %s" % (_("Benchmark for"), BrandModel)))
 		info.append("")
 		for index, cpu in enumerate(self.cpuTypes):
 			info.append(formatLine("P1", _("CPU / Core %d type") % index, cpu))

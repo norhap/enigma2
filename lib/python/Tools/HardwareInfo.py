@@ -54,27 +54,28 @@ class HardwareInfo:
 					infoFname = l
 					prefix = ""
 				try:
-					self.device_model = getBoxType()
+					self.device_model = getBoxType() #this variable starts machine you can also use proc boxtype
 					break
 				except:
 					pass
-
-		if self.device_model.startswith(("atemionemesis")):
-			self.device_name = "Atemio Nemesis"
-		elif self.device_model.startswith(("hd51")):
-			self.device_name = "Mut@nt HD51"
-		elif self.device_model.startswith(("osmio4kplus")):
-			self.device_name = "Edision OS mio+ 4K"
-		elif self.device_model.startswith(("gbip4k")):
-			self.device_name = "GigaBlue UHD IP 4K"
-		elif self.device_model.startswith(("gbtrio4k")):
-			self.device_name = "GigaBlue UHD TRIO 4K"
-		elif self.device_model.endswith(("sf8008t")):
-			self.device_name = "OCTAGON SF8008 4K UHD TWIN"
-		elif self.device_model.endswith(("sf8008")):
-			self.device_name = "OCTAGON SF8008 4K UHD COMBO"
-		elif self.device_model.startswith(("sf8008m")):
-			self.device_name = "OCTAGON SF8008 MINI 4K UHD"
+		# if self.device_model.startswith(("atemionemesis")):
+			# self.device_name = "Atemio Nemesis"
+		# elif self.device_model.startswith(("hd51")):
+			# self.device_name = "Mut@nt HD51"
+		# elif self.device_model.startswith(("osmio4kplus")):
+			# self.device_name = "Edision OS mio+ 4K"
+		# elif self.device_model.startswith(("gbip4k")):
+			# self.device_name = "GigaBlue UHD IP 4K"
+		# elif self.device_model.startswith(("gbtrio4k")):
+			# self.device_name = "GigaBlue UHD TRIO 4K"
+		# elif self.device_model.endswith(("sf8008t")):
+			# self.device_name = "OCTAGON SF8008 4K UHD TWIN"
+		# elif self.device_model.endswith(("sf8008s")):
+			# self.device_name = "OCTAGON SF8008 4K UHD SINGLE"
+		# elif self.device_model.endswith(("sf8008")):
+			# self.device_name = "OCTAGON SF8008 4K UHD COMBO"
+		# elif self.device_model.startswith(("sf8008m")):
+			# self.device_name = "OCTAGON SF8008 MINI 4K UHD"
 
 			self.device_model = self.device_model or self.device_name
 			self.device_hw = self.device_model

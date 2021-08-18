@@ -13,7 +13,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock
-from Components.SystemInfo import SystemInfo, getBoxBrand
+from Components.SystemInfo import SystemInfo
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
@@ -39,6 +39,7 @@ from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRe
 from Tools import Notifications, ASCIItranslit
 from Tools.Directories import fileExists, fileHas, getRecordingFilename, moveFiles
 from Tools.KeyBindings import getKeyBindingKeys, getKeyDescription
+from Tools.StbHardware import getBrand
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType
 from time import time, localtime, strftime
@@ -54,7 +55,7 @@ from six import PY2
 from sys import maxsize
 
 model = getBoxType()
-brand = getBoxBrand()
+brand = getBrand()
 
 def isStandardInfoBar(self):
 	return self.__class__.__name__ == "InfoBar"

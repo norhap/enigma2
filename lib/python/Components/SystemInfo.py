@@ -4,10 +4,11 @@ from os import R_OK, access
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType
-from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getBoxType
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType, getBoxType
+from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
 
 from Tools.Directories import SCOPE_SKIN, fileCheck, fileExists, fileHas, pathExists, resolveFilename
+from Tools.StbHardware import getBrand
 
 SystemInfo = {}
 SystemInfo["HasRootSubdir"] = False
@@ -20,22 +21,6 @@ with open("/proc/cmdline", "r") as fd:
 	cmdline = fd.read()
 cmdline = {k: v.strip('"') for k, v in findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 
-
-def getBoxBrand():
-	BrandName = ""
-	BrandStarSwith = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s" % (getRCName())))
-	try:
-		if "edision" in (BrandStarSwith):
-			BrandName = "Edision"
-		elif "gb" in (BrandStarSwith):
-			BrandName = "GigaBlue"
-		elif "octagon" in (BrandStarSwith):
-			BrandName = "octagon"
-		else:
-			BrandName = open("/proc/stb/info/brandname").read().strip()
-	except IOError:
-		print("[BrandName] Machine not added in SystemInfo def getBoxBrand!")
-	return BrandName
 
 def getRCFile(ext):
 	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getRCName(), ext)))
@@ -71,7 +56,7 @@ def getBootdevice():
 
 
 model = getBoxType()
-brand = getBoxBrand()
+brand = getBrand()
 platform = getMachineBuild()
 displaytype = getDisplayType()
 architecture = getImageArch()
@@ -80,14 +65,14 @@ SystemInfo["MachineBrand"] = brand
 SystemInfo["MachineModel"] = model
 SystemInfo["MachineBuild"] = platform
 
-# Remote control related data.
-#
+#detect remote control
 SystemInfo["RCCode"] = int(getRCType())
 SystemInfo["RCTypeIndex"] = int(float(2)) or int(getRCIDNum())
 SystemInfo["RCName"] = getRCName()
 SystemInfo["RCImage"] = getRCFile("png")
 SystemInfo["RCMapping"] = getRCFile("xml")
 SystemInfo["RemoteEnable"] = model in ("dm800", "azboxhd")
+
 if model in ("maram9", "axodin"):
 	repeat = 400
 elif model == "azboxhd":

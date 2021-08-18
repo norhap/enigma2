@@ -1,46 +1,39 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
-from os import path
+from os.path import join as pathjoin
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, gmtime
-from enigma import getBoxType
-from Components.SystemInfo import SystemInfo
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN
+from boxbranding import getMachineName, getBoxType, getRCName
 
-def getBoxProc():
-	procmodel = "unknown"
+
+def getBrand():
+	BrandName = None
+	BrandStarSwith = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s" % (getRCName())))
 	try:
-		if fileExists("/proc/stb/info/hwmodel"):
-			procmodel = open("/proc/stb/info/hwmodel", "r").readline().strip().lower()
-		elif fileExists("/proc/stb/info/azmodel"):
-			procmodel = open("/proc/stb/info/azmodel", "r").readline().strip().lower()
-		elif fileExists("/proc/stb/info/gbmodel"):
-			procmodel = open("/proc/stb/info/gbmodel", "r").readline().strip().lower()
-		elif fileExists("/proc/stb/info/vumodel") and not fileExists("/proc/stb/info/boxtype"):
-			procmodel = open("/proc/stb/info/vumodel", "r").readline().strip().lower()
-		elif fileExists("/proc/stb/info/boxtype") and not fileExists("/proc/stb/info/model"):
-			procmodel = open("/proc/stb/info/boxtype", "r").readline().strip().lower()
-		elif fileExists("/proc/boxtype"):
-			procmodel = open("/proc/boxtype", "r").readline().strip().lower()
-		elif fileExists("/etc/modules-load.d/_xpeedlx3.conf"):
-			procmodel = "Xpeed-LX3"
-		elif fileExists("/etc/modules-load.d/_osmio4kplus.conf"):
-			procmodel = "OS mio+ 4K"
-		elif fileExists("/etc/modules-load.d/_gbtrio4k.conf"):
-			procmodel = "GB TRIO 4K"
-		elif fileExists("/etc/modules-load.d/_gbip4k.conf"):
-			procmodel = "GB IP 4K"
-		elif fileExists("/etc/modules-load.d/_sf8008.conf"):
-			procmodel = "SF 8008 UHD"
-		elif fileExists("/etc/modules-load.d/_sf8008m.conf"):
-			procmodel = "SF 8008 MINI UHD"
-		else:
-			procmodel = open("/proc/stb/info/model", "r").readline().strip().lower()
-	except IOError:
-		print("[StbHardware] getBoxProc failed!")
-	return procmodel
+		if "edision" in BrandStarSwith:
+			BrandName = "Edision"
+		elif "gb" in BrandStarSwith:
+			BrandName = "GigaBlue"
+		elif "octagon" in BrandStarSwith:
+			BrandName = "octagon"
+		elif not BrandName:
+			print("[BrandName] Not Exists!! add this Brand a getBrand")
+	except (IOError, OSError) as err:
+		print("[BrandName] exception with error in Brand Name")
+	return BrandName
+
+def getBrandModel():
+	BrandModel = None
+	Brand = getBrand()
+	Model = getMachineName()
+	Machine = getBoxType()
+	try:
+		if Machine:
+			BrandModel = ("%s %s") % (Brand, Model)
+	except (IOError, OSError) as err:
+		print("[BrandModel] No BrandModel!")
+	return BrandModel
 
 def getFPVersion():
 	ret = None

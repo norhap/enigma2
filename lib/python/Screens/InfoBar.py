@@ -1,7 +1,7 @@
 from Tools.Profile import profile
 from enigma import eServiceReference
-from Components.About import getModel
-from Components.SystemInfo import getBoxBrand
+from boxbranding import getBoxType
+from Tools.StbHardware import getBrand
 from Tools.Directories import fileExists
 # workaround for required config entry dependencies.
 import Screens.MovieSelection
@@ -34,8 +34,8 @@ from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 profile("LOAD:HelpableScreen")
 from Screens.HelpMenu import HelpableScreen
 
-brand = getBoxBrand()
-model = getModel()
+brand = getBrand()
+model = getBoxType()
 
 
 class InfoBar(InfoBarBase, InfoBarShowHide,

@@ -3,8 +3,7 @@ import sys
 import os
 import time
 import re
-from Tools.HardwareInfo import HardwareInfo
-from enigma import getBoxType, getBoxBrand
+from boxbranding import getBoxType
 from Components.SystemInfo import SystemInfo
 from boxbranding import getImageArch
 import socket
@@ -13,6 +12,8 @@ import struct
 from subprocess import PIPE, Popen
 from Components.Console import Console
 from Tools.Directories import fileExists
+from Tools.HardwareInfo import HardwareInfo
+from Tools.StbHardware import getBrand
 from six import PY2
 
 
@@ -142,10 +143,6 @@ def getHardwareTypeString():
 	return HardwareInfo().get_device_string()
 
 
-def getHardwareBrand():
-	return HardwareInfo().get_device_brand()
-
-
 def getImageTypeString():
 	try:
 		image_type = open("/etc/issue").readlines()[-2].strip()[:-6]
@@ -235,7 +232,7 @@ def getCPUBrand():
 		return _("Amlogic")
 	elif SystemInfo["HiSilicon"]:
 		return _("HiSilicon")
-	elif getBoxBrand() == "azbox":
+	elif getBrand() == "azbox":
 		return _("Sigma Designs")
 	else:
 		return _("Broadcom")
@@ -357,8 +354,8 @@ def getGccVersion():
 	return _("Unknown")
 
 
-def getModel():
-	return HardwareInfo().get_machine_name()
+# def getModel():
+	# return HardwareInfo().get_machine_name()
 # For modules that do "from About import about"
 about = sys.modules[__name__]
 

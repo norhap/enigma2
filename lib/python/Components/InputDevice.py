@@ -1,6 +1,6 @@
 from Components.config import config, ConfigSlider, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger
 from enigma import getBoxType
-from Components.SystemInfo import SystemInfo, getBoxBrand
+from Components.SystemInfo import SystemInfo
 import errno
 import xml.etree.cElementTree
 from enigma import eRCInput
@@ -13,6 +13,7 @@ from platform import machine
 import struct
 import platform
 from Tools.Directories import pathExists
+from Tools.StbHardware import getBrand
 
 model = getBoxType()
 
@@ -252,7 +253,7 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
 
 class RcTypeControl():
 	def __init__(self):
-		if SystemInfo["RcTypeChangable"] and pathExists('/proc/stb/info/boxtype') and getBoxBrand() not in ("GigaBlue" ,"odin" ,"ini" ,"entwopia" ,"tripledot"):
+		if SystemInfo["RcTypeChangable"] and pathExists('/proc/stb/info/boxtype') and getBrand() not in ("GigaBlue" ,"odin" ,"ini" ,"entwopia" ,"tripledot"):
 			self.isSupported = True
 			self.boxType = open('/proc/stb/info/boxtype', 'r').read().strip()
 			if config.plugins.remotecontroltype.rctype.value != 0:

@@ -4,7 +4,7 @@ from os.path import abspath, dirname, exists, ismount, join as pathjoin, normpat
 from re import search
 from time import sleep, time
 
-from boxbranding import getMachineMtdRoot, getMachineProcModel
+from boxbranding import getMachineMtdRoot
 from enigma import eTimer
 
 from Components import Task
@@ -12,12 +12,6 @@ from Components.Console import Console
 from Components.SystemInfo import SystemInfo
 from Tools.CList import CList
 from Tools.Directories import fileReadLine, fileReadLines
-from Tools.StbHardware import getBoxProc
-
-try:
-	hw_type = getBoxProc()
-except Exception:
-	hw_type = getMachineProcModel()
 
 
 def getProcMounts():
@@ -684,9 +678,6 @@ class HarddiskManager:
 				physdev = dev
 				print("[Harddisk] Error %d: Couldn't determine blockdev physdev for device '%s'!  (%s)" % (err.errno, device, err.strerror))
 		error, blacklisted, removable, is_cdrom, partitions, medium_found = self.getBlockDevInfo(device)
-		if hw_type in ("elite", "premium", "premium+", "ultra"):
-			if device[0:3] == "hda":
-				blacklisted = True
 		if not blacklisted and medium_found:
 			description = self.getUserfriendlyDeviceName(device, physdev)
 			p = Partition(mountpoint=self.getMountpoint(device), description=description, force_mounted=True, device=device)
