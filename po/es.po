@@ -7375,11 +7375,11 @@ msgstr "Trinidad y Tobago"
 msgid "Troubleshoot"
 msgstr "Solucionar problemas"
 
-msgid "Try to find used transponders in cable network.. please wait..."
-msgstr "Intentar encontrar transpondedores usados ​​en la red de cable. Espere…"
+msgid "Looking for active transponders in the cable network. Please wait..."
+msgstr "Buscando transpondedores activos en la red de cable. Espere por favor..."
 
-msgid "Try to find used transponders in terrestrial network... please wait..."
-msgstr "Tratar de encontrar transpondedores usados ​​en la red terrestre… Espere…"
+msgid "Looking for active transponders in the terrestrial network. Please wait..."
+msgstr "Buscando transpondedores activos en la red terrestre. Espere por favor..."
 
 msgid "Trying to download a new packetlist. Please wait..."
 msgstr "Intentando descargar una nueva lista de paquetes. Por favor espera…"
