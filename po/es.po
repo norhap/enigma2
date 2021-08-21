@@ -11369,8 +11369,12 @@ msgstr "Actualizar EPG terminado."
 msgid "EPG refresh started in background."
 msgstr "La actualización de EPG comenzó en segundo plano."
 
+
 msgid "EPG refresh starts scanning channels."
 msgstr "La actualización EPG comienza a escanear canales."
+
+msgid "Not enough disk space. Please free up some disk space and try again. (%(req)d MB required, %(avail)d MB available)"
+msgstr "No hay suficiente espacio en el disco. Libere espacio en disco e inténtelo de nuevo. (%(req)d MB requerido, %(avail)d MB disponible)"
 
 msgid "EPG-refresh now"
 msgstr "Actualización EPG ahora"

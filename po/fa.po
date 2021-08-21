@@ -9322,8 +9322,8 @@ msgid "Not currently mounted."
 msgstr ""
 
 #, fuzzy, python-format
-msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
-msgstr "فضای کافی وجود ندارد ، لطفا مقداری فضا خالی و دوباره تلاش کنید . (%d مگابایت نیاز است و %d مگابایت در دسترس است)"
+msgid "Not enough disk space. Please free up some disk space and try again. (%(req)d MB required, %(avail)d MB available)"
+msgstr "فضای کافی وجود ندارد ، لطفا مقداری فضا خالی و دوباره تلاش کنید . (%(req)d مگابایت نیاز است و %(avail)d مگابایت در دسترس است)"
 
 msgid "Not recommended for HiSilicon and Amlogic"
 msgstr ""
