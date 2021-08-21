@@ -111,19 +111,20 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				version = open("/etc/issue").readlines()[-2].split()[1]
 
 				# do we have an entry for this version
-				if version in status and model in status[version]['machines']:
+				if (version in status or 'all' in status) and (machine in status[version]['machines'] or 'all' in status[version]['machines']):
 					if 'abort' in status[version]:
 						abort = status[version]['abort']
 					if 'from' in status[version]:
 						starttime = datetime.datetime.strptime(status[version]['from'], '%Y%m%d%H%M%S')
 					else:
-						starttime = datetime.datetime.now()
+						starttime = 0
 					if 'to' in status[version]:
 						endtime = datetime.datetime.strptime(status[version]['to'], '%Y%m%d%H%M%S')
 					else:
-						endtime = datetime.datetime.now()
-					if (starttime <= datetime.datetime.now() and endtime >= datetime.datetime.now()):
-						message = str(status[version]['message'])
+						endtime = datetime.datetime.now() + 1
+					if 'message' in status[version]:
+						if (starttime <= datetime.datetime.now() and endtime >= datetime.datetime.now()):
+							message = status[version]['message']
 
 				# check if we have per-language messages
 				if isinstance(message, dict):
@@ -133,16 +134,20 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					elif 'en_US' in message:
 						message = message['en_US']
 					else:
-						message = _("The current image might not be stable.\nFor more information see %s.") % ("openvision.tech")
+						message = _("The current image might not be stable.\nFor more information see %s.") % ("https://images.openvision.dedyn.io")
 
-			except Exception as e:
+			except Exception, e:
 				print("[SoftwareUpdate] status error: ", str(e))
-				message = _("The current image might not be stable.\nFor more information see %s.") % ("openvision.tech")
+				message = _("The current image might not be stable.\nFor more information see %s.") % ("https://forum.openvision.tech")
+
+		# enable the status message when we have a status domain not yet.
+		# else:
+			# message = _("The status of the current image could not be checked because %s can not be reached.") % ("https://images.openvision.dedyn.io")
 
 		# show the user the message first
 		if message is not None:
 			if abort:
-				self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_ERROR, picon=picon)
+				self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_MESSAGE, picon=picon)
 			else:
 				message += "\n\n" + _("Do you want to update your %s?") % BrandModel
 				self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon=picon)
