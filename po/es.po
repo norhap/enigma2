@@ -17710,3 +17710,45 @@ msgstr "Acciones Aspecto Ratio"
 
 msgid "Switch to HDMI-IN mode"
 msgstr "Cambiar a Modo HDMI-IN"
+
+msgid "Use the UP and DOWN buttons to select your locale/language then press the OK button to continue."
+msgstr "Use los botones ARRIBA y ABAJO para seleccionar su configuración de idioma y luego presione el botón OK para continuar."
+
+msgid "Press OK to use this locale."
+msgstr "Presione OK para usar esta configuración."
+
+msgid "Press OK to use this locale.\n"
+msgstr "Presione OK para usar esta configuración.\n"
+
+msgid "This is the currently selected locale."
+msgstr "Esta es su configuración actual."
+
+msgid "Language Selection"
+msgstr "Selección Idioma"
+
+msgid "Locale %s (%s) has been selected as the active locale."
+msgstr "Se ha seleccionado %s (%s) como la configuración activa."
+
+msgid "Apply the currently highlighted locale/language and exit"
+msgstr "Aplicar la configuración idioma resaltado actual y salir"
+
+msgid "Cancel any changes to the active locale/language and exit"
+msgstr "Cancele cualquier cambio en la configuración de idioma activo y salga"
+
+msgid "This is already the active locale."
+msgstr "Esta ya es la configuración activa."
+
+msgid "Deleting %s (%s)..."
+msgstr "Eliminando %s (%s)..."
+
+msgid "Installing %s (%s)..."
+msgstr "Instalando %s (%s)..."
+
+msgid "Locale %s (%s) has been installed and selected as the active locale."
+msgstr "Lugar %s (%s) se ha instalado y seleccionado como la configuración activa."
+
+msgid "Delete Lang"
+msgstr "Eliminar Lenguaje"
+
+msgid "Install Lang"
+msgstr "Instalar Lenguaje"

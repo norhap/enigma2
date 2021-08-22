@@ -32,6 +32,7 @@ install_PYTHON = \
 	InputDeviceSetup.py \
 	InstallWizard.py \
 	LanguageSelection.py \
+	LocaleSelection.py \
 	LocationBox.py \
 	Menu.py	\
 	MessageBox.py \
