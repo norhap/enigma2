@@ -17753,8 +17753,8 @@ msgstr "Eliminar Lenguaje"
 msgid "Install Lang"
 msgstr "Instalar Lenguaje"
 
-msgid "Press OK to install and use this locale."
-msgstr "Presione OK para instalar y usar esta configuración."
+msgid "Press OK to install and use this locale.\n"
+msgstr "Presione OK para instalar y usar esta configuración.\n"
 
 msgid "Install Loc"
 msgstr "Instalar Región"

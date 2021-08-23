@@ -226,7 +226,7 @@ class LocaleSelection(Screen, HelpableScreen):
 				msg = _("Press OK to use this locale.\n")
 			else:
 				self["key_yellow"].text = installText
-				msg = _("Press OK to install and use this locale.")
+				msg = _("Press OK to install and use this locale.\n")
 			self["manageActions"].setEnabled(True)
 		if updateDescription:
 			self["description"].text = "%s  [%s (%s) %s]" % (msg, _(international.getLanguageName(current[self.LIST_LOCALE])), _(international.getCountryName(current[self.LIST_LOCALE])), current[self.LIST_LOCALE])

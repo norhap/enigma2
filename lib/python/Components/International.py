@@ -612,7 +612,7 @@ class International:
 							setlocale(category[CAT_PYTHON], locale=(locales[0], "UTF-8"))
 							replacement = locales[0]
 						except LocaleError as err:  # If unavailable fall back to the US English locale.
-							setlocale(category[CAT_PYTHON])
+							setlocale(category[CAT_PYTHON], locale=("en_US", "UTF-8"))
 							replacement = "en_US"
 						if localeError is None:
 							localeError = replacement
