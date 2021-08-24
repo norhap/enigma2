@@ -348,7 +348,6 @@ class SoftwareManagerSetup(Screen, ConfigListScreen):
 
 	def __init__(self, session, skin_path=None):
 		Screen.__init__(self, session)
-		self.session = session
 		self.skin_path = skin_path
 		if self.skin_path is None:
 			self.skin_path = resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager")
@@ -478,7 +477,6 @@ class SoftwareManagerInfo(Screen):
 
 	def __init__(self, session, skin_path=None, mode=None):
 		Screen.__init__(self, session)
-		self.session = session
 		self.mode = mode
 		self.skin_path = skin_path
 		if self.skin_path is None:
@@ -552,7 +550,6 @@ class PluginManager(Screen, PackageInfoHandler):
 
 	def __init__(self, session, plugin_path=None, args=None):
 		Screen.__init__(self, session)
-		self.session = session
 		self.skin_path = plugin_path
 		if self.skin_path is None:
 			self.skin_path = resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/SoftwareManager")
@@ -992,7 +989,6 @@ class PluginManagerInfo(Screen):
 
 	def __init__(self, session, plugin_path, cmdlist=None):
 		Screen.__init__(self, session)
-		self.session = session
 		self.skin_path = plugin_path
 		self.cmdlist = cmdlist
 
@@ -1093,7 +1089,6 @@ class PluginManagerHelp(Screen):
 
 	def __init__(self, session, plugin_path):
 		Screen.__init__(self, session)
-		self.session = session
 		self.skin_path = plugin_path
 
 		self["shortcuts"] = ActionMap(["ShortcutActions", "WizardActions"],
@@ -1428,7 +1423,6 @@ class OPKGSource(Screen):
 
 	def __init__(self, session, configfile=None):
 		Screen.__init__(self, session)
-		self.session = session
 		self.configfile = configfile
 		text = ""
 		if self.configfile:
@@ -1542,7 +1536,6 @@ class PacketManager(Screen, NumericalTextInput):
 	def __init__(self, session, plugin_path, args=None):
 		Screen.__init__(self, session)
 		NumericalTextInput.__init__(self)
-		self.session = session
 		self.skin_path = plugin_path
 
 		self.setUseableChars(u'1234567890abcdefghijklmnopqrstuvwxyz')
