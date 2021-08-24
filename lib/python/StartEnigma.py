@@ -16,45 +16,31 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 from Components.Console import Console
 from enigma import getBoxType, getBoxBrand, getE2Rev
 from Tools.Directories import InitFallbackFiles, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
-from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile, ConfigOnOff
+from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
 from Components.International import international
 from boxbranding import getImageArch
 from Components.SystemInfo import SystemInfo
 from sys import stdout
 
-profile("InitOSDLanguage")
-from Components.Language import language
-def localeNotifier(configElement):
-	language.activateLanguage(configElement.value)
-
-config.osd = ConfigSubsection()
-config.osd.language = ConfigText(default="en_US")
-config.osd.language.addNotifier(localeNotifier)
-
-profile("ClientMode")
-import Components.ClientMode
-Components.ClientMode.InitClientMode()
-
-profile("SimpleSummary")
-from Screens import InfoBar
-from Screens.SimpleSummary import SimpleSummary
-
-profile("Imports")
-from os.path import exists, isdir, isfile, islink, join as pathjoin
-from traceback import print_exc
-from time import time
-# These entries should be moved back to UsageConfig.py when it is safe to bring UsageConfig init to this location in StartEnigma2.py.
-#
-
 model = getBoxType()
-
-def localeNotifier(configElement):
-	international.activateLocale(configElement.value)
 
 if getImageArch() == "aarch64":
 	import usb.core
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
+
+
+def localeNotifier(configElement):
+	from Components.Language import language
+	international.activateLocale(configElement.value)
+
+config.osd = ConfigSubsection()
+config.osd.language = ConfigText(default="en_US")
+config.osd.language.addNotifier(localeNotifier)
+
+config.misc.country = ConfigText(default="US")
+config.misc.language = ConfigText(default="en")
+config.misc.locale = ConfigText(default="en_US")
 
 
 def setLoadUnlinkedUserbouquets(configElement):
@@ -63,6 +49,19 @@ def setLoadUnlinkedUserbouquets(configElement):
 config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
 config.misc.load_unlinked_userbouquets.addNotifier(setLoadUnlinkedUserbouquets)
 
+
+def setEPGCachePath(configElement):
+	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
+		configElement.value = os.path.join(configElement.value, "epg.dat")
+	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
+
+profile("ClientMode")
+import Components.ClientMode
+Components.ClientMode.InitClientMode()
+
+profile("SimpleSummary")
+from Screens import InfoBar
+from Screens.SimpleSummary import SimpleSummary
 
 profile("Bouquets")
 if config.clientmode.enabled.value == False:
@@ -78,37 +77,21 @@ from Navigation import Navigation
 profile("LOAD:skin")
 from skin import readSkin
 
+config.misc.blackradiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "black.mvi"))
+config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "radio.mvi"))
+
 profile("LOAD:Tools")
 InitFallbackFiles()
 
 profile("InitializeConfigs")
-config.expert = ConfigSubsection()
-config.expert.autoinfo = ConfigOnOff(default=True)
-config.expert.fastzap = ConfigOnOff(default=True)
-config.expert.hideerrors = ConfigOnOff(default=False)
-config.expert.satpos = ConfigOnOff(default=True)
-config.expert.skipconfirm = ConfigOnOff(default=False)
-config.parental = ConfigSubsection()
-config.parental.lock = ConfigOnOff(default=False)
-config.parental.setuplock = ConfigOnOff(default=False)
-config.misc.country = ConfigText(default="US")
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstandby.
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
-config.misc.language = ConfigText(default="en")
-config.misc.locale = ConfigText(default="en_US")
 # config.misc.locale.addNotifier(localeNotifier)  # This should not be enabled while config.osd.language is in use!
 config.misc.prev_wakeup_time = ConfigInteger(default=0)
 config.misc.prev_wakeup_time_type = ConfigInteger(default=0)  # This is only valid when wakeup_time is not 0.  0 = RecordTimer, 1 = ZapTimer, 2 = Plugins, 3 = WakeupTimer.
 config.misc.RestartUI = ConfigYesNo(default=False)  # Detect user interface restart.
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0))  # Number of standby.
 config.misc.startCounter = ConfigInteger(default=0)  # Number of e2 starts.
-
-
-def setEPGCachePath(configElement):
-	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
-		configElement.value = os.path.join(configElement.value, "epg.dat")
-	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
-
 # demo code for use of standby enter leave callbacks
 # def leaveStandby():
 #	print("!!!!!!!!!!!!!!!!!leave standby")
@@ -120,7 +103,6 @@ def setEPGCachePath(configElement):
 
 #config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call = False)
 ####################################################
-
 
 profile("Twisted")
 try:

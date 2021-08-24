@@ -8,9 +8,10 @@ from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff,
 
 from skin import parameters
 from Components.About import GetIPsFromNetworkInterfaces
-from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config
+from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config, ConfigOnOff
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager
+from Components.Keyboard import keyboard
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import SystemInfo
@@ -64,6 +65,25 @@ def InitUsageConfig():
 	config.misc.opkgcleanmode = ConfigYesNo(default=False)
 
 	config.usage.alternative_number_mode = ConfigYesNo(default=False)
+
+	def keyboardNotifier(configElement):
+		keyboard.activateKeyboardMap(configElement.index)
+
+	config.keyboard = ConfigSubsection()
+	config.keyboard.keymap = ConfigSelection(default=keyboard.getDefaultKeyboardMap(), choices=keyboard.getKeyboardMaplist())
+	config.keyboard.keymap.addNotifier(keyboardNotifier)
+
+	config.parental = ConfigSubsection()
+	config.parental.lock = ConfigOnOff(default=False)
+	config.parental.setuplock = ConfigOnOff(default=False)
+
+	config.expert = ConfigSubsection()
+	config.expert.satpos = ConfigOnOff(default=True)
+	config.expert.fastzap = ConfigOnOff(default=True)
+	config.expert.skipconfirm = ConfigOnOff(default=False)
+	config.expert.hideerrors = ConfigOnOff(default=False)
+	config.expert.autoinfo = ConfigOnOff(default=True)
+
 
 	def alternativeNumberModeChange(configElement):
 		eDVBDB.getInstance().setNumberingMode(configElement.value)
