@@ -83,6 +83,11 @@ config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "r
 profile("CreateDefaultPaths")
 InitDefaultPaths()
 
+profile("Imports")
+from os.path import exists, isdir, isfile, islink, join as pathjoin
+from traceback import print_exc
+from time import localtime, strftime, time
+
 profile("InitializeConfigs")
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstandby.
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
