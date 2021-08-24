@@ -601,7 +601,7 @@ class International:
 				self.catalog = translation("enigma2", "/", fallback=True)
 			self.catalog.install(names=("ngettext", "pgettext"))
 			for category in CATEGORIES:
-				environ[category[CAT_ENVIRONMENT]] = "%s.UTF-8" % locale
+				# environ[category[CAT_ENVIRONMENT]] = "%s.UTF-8" % locale  silence warning message /bin/sh
 				localeError = None
 				if category[CAT_PYTHON] is not None:
 					try:  # Try and set the Python locale to the current locale.
