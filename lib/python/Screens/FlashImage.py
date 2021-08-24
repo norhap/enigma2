@@ -35,7 +35,6 @@ def checkimagefiles(files):
 class SelectImage(Screen):
 	def __init__(self, session, *args):
 		Screen.__init__(self, session)
-		self.session = session
 		self.jsonlist = {}
 		self.imagesList = {}
 		self.setIndex = 0
@@ -44,7 +43,6 @@ class SelectImage(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
-		self["key_blue"] = StaticText()
 		self["description"] = StaticText()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 
@@ -408,9 +406,8 @@ class FlashImage(Screen):
 
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
-		Screen.__init__(self, session)
-		self.skinName = "SelectImage"
-		self.session = session
+		SelectImage.__init__(self, session)
+		self.skinName = ["MultibootSelection", "SelectImage"]
 		self.expanded = []
 		self.tmp_dir = None
 		self.setTitle(_("Multiboot image selector"))
