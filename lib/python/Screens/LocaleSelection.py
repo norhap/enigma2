@@ -213,7 +213,7 @@ class LocaleSelection(Screen, HelpableScreen):
 			if current[self.LIST_STATUS] == self.PACK_IN_USE:
 				msg = _("This is the currently selected locale.")
 			else:
-				msg = _("Press OK to use this locale.\n")
+				msg = _("Press OK to use this locale.")
 		else:
 			if international.splitPackage(current[self.LIST_PACKAGE])[1] is None:
 				deleteText = _("Delete Lang")
@@ -223,10 +223,10 @@ class LocaleSelection(Screen, HelpableScreen):
 				installText = _("Install Loc")
 			if current[self.LIST_STATUS] == self.PACK_INSTALLED:
 				self["key_yellow"].text = deleteText
-				msg = _("Press OK to use this locale.\n")
+				msg = _("Press OK to use this locale.")
 			else:
 				self["key_yellow"].text = installText
-				msg = _("Press OK to install and use this locale.\n")
+				msg = _("Press OK to install and use this locale.")
 			self["manageActions"].setEnabled(True)
 		if updateDescription:
 			self["description"].text = "%s  [%s (%s) %s]" % (msg, _(international.getLanguageName(current[self.LIST_LOCALE])), _(international.getCountryName(current[self.LIST_LOCALE])), current[self.LIST_LOCALE])
