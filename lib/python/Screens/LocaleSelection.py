@@ -100,21 +100,21 @@ class LocaleSelection(Screen, HelpableScreen):
 			"select": (self.keySelect, _("Select the currently highlighted locale/language to be used in the user interface")),
 			"close": (self.closeRecursive, _("Cancel any changes the active locale/language and exit all menus")),
 			"cancel": (self.keyCancel, _("Cancel any changes to the active locale/language and exit")),
-			"save": (self.keySave, _("Apply any changes to the active locale/langauge and exit"))
+			"save": (self.keySave, _("Apply any changes to the active locale/language and exit"))
 		}, prio=0, description=_("Locale/Language Selection Actions"))
 		self["manageActions"] = HelpableActionMap(self, "LocaleSelectionActions", {
-			"manage": (self.keyManage, _("Add / Delete the currently highlighted locale / language"))
+			"manage": (self.keyManage, _("Add/Delete the currently highlighted locale/language"))
 		}, prio=0, description=_("Locale/Language Selection Actions"))
 		topItem = _("Move up to first line")
 		topDesc = _("Move up to the first line in the list.")
 		pageUpItem = _("Move up one screen")
-		pageUpDesc = _("Move up one screen.  Move to the first line of the screen if this is the first screen.")
+		pageUpDesc = _("Move up one screen. Move to the first line of the screen if this is the first screen.")
 		upItem = _("Move up one line")
-		upDesc = _("Move up one line.  Move to the bottom of the previous screen if this is the first line of the screen.  Move to the last of the entry / list if this is the first line of the list.")
+		upDesc = _("Move up one line. Move to the bottom of the previous screen if this is the first line of the screen.  Move to the last of the entry / list if this is the first line of the list.")
 		downItem = _("Move down one line")
-		downDesc = _("Move down one line.  Move to the top of the next screen if this is the last line of the screen.  Move to the first line of the list if this is the last line on the list.")
+		downDesc = _("Move down one line. Move to the top of the next screen if this is the last line of the screen.  Move to the first line of the list if this is the last line on the list.")
 		pageDownItem = _("Move down one screen")
-		pageDownDesc = _("Move down one screen.  Move to the last line of the screen if this is the last screen.")
+		pageDownDesc = _("Move down one screen. Move to the last line of the screen if this is the last screen.")
 		bottomItem = _("Move down to last line")
 		bottomDesc = _("Move down to the last line in the list.")
 		self["navigationActions"] = HelpableActionMap(self, "NavigationActions", {
