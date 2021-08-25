@@ -17805,13 +17805,13 @@ msgid "Manage Locale/Language Selection settings"
 msgstr "Administrar Selección Región/Lenguaje"
 
 msgid "Select the currently highlighted locale/language to be used in the user interface"
-msgstr "Seleccione la configuración regional o el idioma resaltado actualmente que se utilizará en la interfaz de usuario"
+msgstr "Seleccione región/idioma resaltado que se utilizará en la GUI"
 
 msgid "Cancel any changes the active locale/language and exit all menus"
-msgstr "Cancelar cualquier cambio en la configuración regional/idioma activo y salir de todos los menús"
+msgstr "Cancelar cualquier cambio regional/idioma activo y salir de todos los menús"
 
 msgid "Apply any changes to the active locale/language and exit"
-msgstr "Aplicar cualquier cambio a la configuración regional/idioma activo y salir"
+msgstr "Aplicar cualquier cambio en la configuración regional/idioma activa y salir"
 
 msgid "Locale/Language Selection Actions"
 msgstr "Seleccionar Acción para Región/Lenguaje"
@@ -17848,3 +17848,6 @@ msgstr "Bajar una pantalla. Vaya a la última línea de la pantalla si esta es l
 
 msgid "Move down to the last line in the list."
 msgstr "Baje hasta la última línea de la lista."
+
+msgid "List Navigation Actions"
+msgstr "Lista de acciones de navegación"
