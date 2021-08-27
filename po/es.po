@@ -14012,8 +14012,8 @@ msgid "Location EPG Cache file"
 msgstr "Localización del archivo EPG"
 
 #, python-format
-msgid "%s%% Autoinstalling %s"
-msgstr "%s%% Autoinstalación %s"
+msgid "Autoinstalling %s"
+msgstr "Autoinstalación %s"
 
 msgid "Autoinstalling Completed"
 msgstr "Autoinstalación completada"
