@@ -113,7 +113,7 @@ LANGUAGE_DATA = {
 	"fy": ("Western Frisian", _("Western Frisian"), "Frysk", "ISO-8859-15", ("NL", "DE")),
 	"ga": ("Irish", _("Irish"), "Gaeilge", "UTF-8", ("IE",)),
 	"gd": ("Gaelic", _("Gaelic"), "Gàidhlig", "UTF-8", ("GB",)),
-	"gl": ("Galician", _("Galician"), "Galego", "UTF-8", ("ES",)),
+	"gl": ("Galician", _("Galician"), "Galego", "UTF-8", ("GL",)),
 	"gn": ("Guarani", _("Guarani"), "Avañe'ẽ", "UTF-8", ("PY",)),
 	"gu": ("Gujarati", _("Gujarati"), "ગુજરાતી", "UTF-8", ("IN",)),
 	"gv": ("Manx", _("Manx"), "Gaelg / Gailck", "UTF-8", ("GB",)),
