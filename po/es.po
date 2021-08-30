@@ -17717,17 +17717,23 @@ msgstr "Cambiar a Modo HDMI-IN"
 msgid "Use the UP and DOWN buttons to select your locale/language then press the OK button to continue."
 msgstr "Use los botones ARRIBA y ABAJO para seleccionar su configuración de idioma y luego presione el botón OK para continuar."
 
-msgid "Press OK to use this locale."
-msgstr "Presione OK para usar esta configuración."
+msgid "Press OK to use this locale. [%s]"
+msgstr "Presione OK para usar esta configuración. [%s]"
 
-msgid "This is the currently selected locale."
-msgstr "Esta es su configuración actual."
+msgid "Press OK to install and use this language. [%s]"
+msgstr "Presione OK para instalar y usar este idioma. [%s]"
+
+msgid "Press OK to use this language. [%s]"
+msgstr "Presione OK para usar este idioma. [%s]"
+
+msgid "This is the currently selected language. [%s]"
+msgstr "Este es el idioma seleccionado actualmente. [%s]"
+
+msgid "This is the currently selected locale. [%s]"
+msgstr "Esta es la configuración regional actual. [%s]"
 
 msgid "Language Selection"
 msgstr "Selección Idioma"
-
-msgid "Locale %s (%s) has been selected as the active locale."
-msgstr "Se ha seleccionado %s (%s) como la configuración activa."
 
 msgid "Apply the currently highlighted locale/language and exit"
 msgstr "Aplicar la configuración idioma resaltado actual y salir"
@@ -17744,8 +17750,11 @@ msgstr "Eliminando %s (%s)..."
 msgid "Installing %s (%s)..."
 msgstr "Instalando %s (%s)..."
 
-msgid "Locale %s (%s) has been installed and selected as the active locale."
-msgstr "Lugar %s (%s) se ha instalado y seleccionado como la configuración activa."
+msgid "Locale %s (%s) installed and selected."
+msgstr "Configuración regional %s (%s) instalada y seleccionada."
+
+msgid "Locale %s (%s) selected."
+msgstr "Configuración Regional %s (%s) seleccionada."
 
 msgid "Delete Lang"
 msgstr "Eliminar Lenguaje"
@@ -17753,8 +17762,8 @@ msgstr "Eliminar Lenguaje"
 msgid "Install Lang"
 msgstr "Instalar Lenguaje"
 
-msgid "Press OK to install and use this locale."
-msgstr "Presione OK para instalar y usar esta configuración."
+msgid "Press OK to install and use this locale. [%s]"
+msgstr "Presione OK para instalar y usar esta configuración. [%s]"
 
 msgid "Install Loc"
 msgstr "Instalar Región"
@@ -17804,8 +17813,8 @@ msgstr "Región (Descendente)"
 msgid "Manage Locale/Language Selection settings"
 msgstr "Administrar Selección Región/Lenguaje"
 
-msgid "Select the currently highlighted locale/language to be used in the user interface"
-msgstr "Seleccione región/idioma resaltado que se utilizará en la GUI"
+msgid "Select the currently highlighted locale/language for the user interface"
+msgstr "Seleccione la configuración regional o el idioma actual para la GUI"
 
 msgid "Cancel any changes the active locale/language and exit all menus"
 msgstr "Cancelar cualquier cambio regional/idioma activo y salir de todos los menús"
@@ -17837,7 +17846,7 @@ msgstr "Sube una línea. Vaya a la parte inferior de la pantalla anterior si est
 msgid "Move down one line"
 msgstr "Bajar una línea"
 
-msgid "Move down one line. Move to the top of the next screen if this is the last line of the screen.  Move to the first line of the list if this is the last line on the list."
+msgid "Move down one line. Move to the top of the next screen if this is the last line of the screen. Move to the first line of the list if this is the last line on the list."
 msgstr "Bajar una línea. Vaya a la parte superior de la siguiente pantalla si esta es la última línea de la pantalla. Vaya a la primera línea de la lista si esta es la última línea de la lista."
 
 msgid "Move down one screen"
@@ -17851,3 +17860,27 @@ msgstr "Baje hasta la última línea de la lista."
 
 msgid "List Navigation Actions"
 msgstr "Lista de acciones de navegación"
+
+msgid "Do you want to purge all locales/languages except %s?"
+msgstr "Quiere limpiar todas las configuraciones regionales/idiomas excepto %s?"
+
+msgid "Purging all unused locales/languages..."
+msgstr "Depurando todas las configuraciones regionales/idiomas no utilizados..."
+
+msgid "Language %s (%s) installed and selected."
+msgstr "Idioma% %s (%s) instalado y seleccionado."
+
+msgid "Language %s (%s) selected."
+msgstr "Idioma %s (%s) seleccionado."
+
+msgid "Language already selected."
+msgstr "Idioma ya seleccionado."
+
+msgid "Jump to the currently active locale/language"
+msgstr "Ir a la configuración regional/idioma actualmente activo"
+
+msgid "Purge all but / Add / Delete the currently highlighted locale/language"
+msgstr "Limpiar todo menos Agregar/Eliminar la configuración regional/idioma actual"
+
+msgid "Purge all but the current and permanent locales/languages.  Add the current locale/language if it is not installed.  Delete the current locale/language if it is installed."
+msgstr "Limpiar todos los idiomas locales, excepto los actuales y permanentes. Agregue la configuración regional/idioma actual si no está instalado. Elimine la configuración regional/idioma actual si está instalado."
