@@ -610,7 +610,7 @@ class International:
 				self.catalog = translation("enigma2", "/", fallback=True)
 			self.catalog.install(names=("ngettext", "pgettext"))
 			for category in CATEGORIES:
-				# environ[category[CAT_ENVIRONMENT]] = "%s.UTF-8" % locale "silennce warning change locale LC_ALL
+				environ[category[CAT_ENVIRONMENT]] = "%s.UTF-8" % locale
 				localeError = None
 				if category[CAT_PYTHON] is not None:
 					try:  # Try and set the Python locale to the current locale.
@@ -626,6 +626,7 @@ class International:
 						if localeError is None:
 							localeError = replacement
 							print("[International] Warning: Locale '%s' is not available in Python %s, using locale '%s' instead." % (locale, category[CAT_ENVIRONMENT], replacement))
+			environ["LC_ALL"] = ""  # NOTE export LC_ALL with value empty for to have any locale available
 			environ["LC_TIME"] = "%s.UTF-8" % locale  # Python 2.7 sometimes reverts the LC_TIME environment value, so make sure it has the correct value!
 			environ["LANG"] = "%s.UTF-8" % locale
 			environ["LANGUAGE"] = "%s.UTF-8" % locale
