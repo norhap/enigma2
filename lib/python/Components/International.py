@@ -626,7 +626,7 @@ class International:
 						if localeError is None:
 							localeError = replacement
 							print("[International] Warning: Locale '%s' is not available in Python %s, using locale '%s' instead." % (locale, category[CAT_ENVIRONMENT], replacement))
-			environ["LC_ALL"] = ""  # NOTE export LC_ALL with value empty for to have any locale available
+			environ["LC_ALL"] = "C"  # NOTE export LC_ALL with value empty for to have any locale available
 			environ["LC_TIME"] = "%s.UTF-8" % locale  # Python 2.7 sometimes reverts the LC_TIME environment value, so make sure it has the correct value!
 			environ["LANG"] = "%s.UTF-8" % locale
 			environ["LANGUAGE"] = "%s.UTF-8" % locale
