@@ -17732,9 +17732,6 @@ msgstr "Este es el idioma seleccionado actualmente. [%s]"
 msgid "This is the currently selected locale. [%s]"
 msgstr "Esta es la configuración regional actual. [%s]"
 
-msgid "Language Selection"
-msgstr "Selección Idioma"
-
 msgid "Apply the currently highlighted locale/language and exit"
 msgstr "Aplicar la configuración idioma resaltado actual y salir"
 
@@ -17821,6 +17818,9 @@ msgstr "Cancelar cualquier cambio regional/idioma activo y salir de todos los me
 
 msgid "Apply any changes to the active locale/language and exit"
 msgstr "Aplicar cualquier cambio en la configuración regional/idioma activa y salir"
+
+msgid "Locale/Language Selection"
+msgstr "Selección de idioma/configuración regional"
 
 msgid "Locale/Language Selection Actions"
 msgstr "Seleccionar Acción para Región/Lenguaje"

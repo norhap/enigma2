@@ -198,7 +198,7 @@ class LocaleSelection(Screen, HelpableScreen):
 		self.updateText()
 
 	def updateText(self):
-		self.setTitle(_("Language Selection"))
+		self.setTitle(_("Locale/Language Selection"))
 		self["key_red"].text = _("Cancel")
 		self["key_green"].text = _("Save")
 		self["key_menu"].text = _("MENU")
