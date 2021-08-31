@@ -211,21 +211,21 @@ class LocaleSelection(Screen, HelpableScreen):
 		if international.splitPackage(package)[1] is None:
 			detail = "%s - %s" % (international.getLanguageTranslated(locale), package)
 			if status == self.PACK_AVAILABLE:
-				self["description"].text = _("Press OK to install and use this language. [%s]") % detail
+				self["description"].text = _("Press OK to install and use this language.  [%s]") % detail
 			elif status == self.PACK_INSTALLED:
-				self["description"].text = _("Press OK to use this language. [%s]") % detail
+				self["description"].text = _("Press OK to use this language.  [%s]") % detail
 			else:
-				self["description"].text = _("This is the currently selected language. [%s]") % detail
+				self["description"].text = _("This is the currently selected language.  [%s]") % detail
 			deleteButton = _("Delete Lang")
 			installButton = _("Install Lang")
 		else:
 			detail = "%s (%s) %s" % (international.getLanguageTranslated(locale), international.getCountryTranslated(locale), locale)
 			if status == self.PACK_AVAILABLE:
-				self["description"].text = _("Press OK to install and use this locale. [%s]") % detail
+				self["description"].text = _("Press OK to install and use this locale.  [%s]") % detail
 			elif status == self.PACK_INSTALLED:
-				self["description"].text = _("Press OK to use this locale. [%s]") % detail
+				self["description"].text = _("Press OK to use this locale.  [%s]") % detail
 			else:
-				self["description"].text = _("This is the currently selected locale. [%s]") % detail
+				self["description"].text = _("This is the currently selected locale.  [%s]") % detail
 			deleteButton = _("Delete Loc")
 			installButton = _("Install Loc")
 		if package != international.getPackage(self.currentLocale):
@@ -492,7 +492,7 @@ class LocaleWizard(LocaleSelection, Rc):
 		else:
 			detail = "%s (%s) %s" % (international.getLanguageTranslated(locale), international.getCountryTranslated(locale), locale)
 			if status == self.PACK_INSTALLED:
-				self["description"].text = _("Press OK to use this locale. [%s]") % detail
+				self["description"].text = _("Press OK to use this locale.  [%s]") % detail
 			elif status == self.PACK_IN_USE:
 				self["description"].text = _("This is the currently selected locale.  [%s]") % detail
 		self["text"].setText(_("Use the UP and DOWN buttons to select your locale/language then press the OK button to continue."))

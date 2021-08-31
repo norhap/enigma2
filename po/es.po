@@ -17717,20 +17717,20 @@ msgstr "Cambiar a Modo HDMI-IN"
 msgid "Use the UP and DOWN buttons to select your locale/language then press the OK button to continue."
 msgstr "Use los botones ARRIBA y ABAJO para seleccionar su configuración de idioma y luego presione el botón OK para continuar."
 
-msgid "Press OK to use this locale. [%s]"
-msgstr "Presione OK para usar esta configuración. [%s]"
+msgid "Press OK to use this locale.  [%s]"
+msgstr "Presione OK para usar esta configuración.  [%s]"
 
-msgid "Press OK to install and use this language. [%s]"
-msgstr "Presione OK para instalar y usar este idioma. [%s]"
+msgid "Press OK to install and use this language.  [%s]"
+msgstr "Presione OK para instalar y usar este idioma.  [%s]"
 
-msgid "Press OK to use this language. [%s]"
-msgstr "Presione OK para usar este idioma. [%s]"
+msgid "Press OK to use this language.  [%s]"
+msgstr "Presione OK para usar este idioma.  [%s]"
 
-msgid "This is the currently selected language. [%s]"
-msgstr "Este es el idioma seleccionado actualmente. [%s]"
+msgid "This is the currently selected language.  [%s]"
+msgstr "Este es el idioma seleccionado actualmente.  [%s]"
 
-msgid "This is the currently selected locale. [%s]"
-msgstr "Esta es la configuración regional actual. [%s]"
+msgid "This is the currently selected locale.  [%s]"
+msgstr "Esta es la configuración regional actual.  [%s]"
 
 msgid "Apply the currently highlighted locale/language and exit"
 msgstr "Aplicar la configuración idioma resaltado actual y salir"
@@ -17759,8 +17759,8 @@ msgstr "Eliminar Lenguaje"
 msgid "Install Lang"
 msgstr "Instalar Lenguaje"
 
-msgid "Press OK to install and use this locale. [%s]"
-msgstr "Presione OK para instalar y usar esta configuración. [%s]"
+msgid "Press OK to install and use this locale.  [%s]"
+msgstr "Presione OK para instalar y usar esta configuración.  [%s]"
 
 msgid "Install Loc"
 msgstr "Instalar Región"
