@@ -44,7 +44,7 @@ class NetworkWizard(WizardLanguage, Rc):
 		self["HelpWindow"].hide()
 		self["VKeyIcon"] = Boolean(False)
 		self["lab1"] = StaticText(_("OpenVision"))
-		self["lab2"] = StaticText(_("Let's define enigma2 once more"))
+		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
 		self["lab3"] = StaticText(_("Report problems to:"))
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
