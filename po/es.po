@@ -17884,3 +17884,6 @@ msgstr "Limpiar todo menos Agregar/Eliminar la configuración regional/idioma ac
 
 msgid "Purge all but the current and permanent locales/languages.  Add the current locale/language if it is not installed.  Delete the current locale/language if it is installed."
 msgstr "Limpiar todos los idiomas locales, excepto los actuales y permanentes. Agregue la configuración regional/idioma actual si no está instalado. Elimine la configuración regional/idioma actual si está instalado."
+
+msgid "Purge"
+msgstr "Eliminar Idiomas"

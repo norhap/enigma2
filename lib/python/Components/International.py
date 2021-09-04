@@ -591,8 +591,8 @@ class International:
 		self.languageList.sort()
 
 	def activateLanguage(self, language, runCallbacks=True):
-		locale = "%s_%s" % (language, LANGUAGE_DATA[language][LANG_COUNTRYCODES][0]) if language in LANGUAGE_DATA else "en_US"
-		print("[International] Language '%s' is being activated as locale '%s'." % (language, locale))
+		locale = "%s_%s" % (language, LANGUAGE_DATA[language][LANG_COUNTRYCODES][0]) if language in LANGUAGE_DATA else '%s' % language
+		print("[International] Language '%s' is being activated as locale '%s'." % (self.getLanguage(locale), locale))
 		return self.activateLocale(locale, runCallbacks=runCallbacks)
 
 	def activateLocale(self, locale, runCallbacks=True):
