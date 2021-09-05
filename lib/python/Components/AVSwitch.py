@@ -77,15 +77,15 @@ def InitAVSwitch():
 		config.av.yuvenabled = ConfigBoolean(default=False)
 	else:
 		config.av.yuvenabled = ConfigBoolean(default=True)
-	colorformat_choices = {"cvbs": _("CVBS")}
+	colorformat_choices = {"cvbs": "CVBS"}
 
 	# when YUV, Scart or S-Video is not support by HW, don't let the user select it
 	if SystemInfo["HasYPbPr"]:
-		colorformat_choices["yuv"] = _("YPbPr")
+		colorformat_choices["yuv"] = "YPbPr"
 	if SystemInfo["HasScart"]:
-		colorformat_choices["rgb"] = _("RGB")
+		colorformat_choices["rgb"] = "RGB"
 	if SystemInfo["HasSVideo"]:
-		colorformat_choices["svideo"] = _("S-Video")
+		colorformat_choices["svideo"] = "S-Video"
 
 	config.av.colorformat = ConfigSelection(choices=colorformat_choices, default="cvbs")
 	config.av.aspectratio = ConfigSelection(choices={
@@ -154,7 +154,7 @@ def InitAVSwitch():
 	except:
 		print("[AVSwitch] Read /proc/stb/video/policy_choices failed.")
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default="scale")
-	config.av.tvsystem = ConfigSelection(choices={"pal": _("PAL"), "ntsc": _("NTSC"), "multinorm": _("multinorm")}, default="pal")
+	config.av.tvsystem = ConfigSelection(choices={"pal": "PAL", "ntsc": "NTSC", "multinorm": "multinorm"}, default="pal")
 	config.av.wss = ConfigEnableDisable(default=True)
 	config.av.generalAC3delay = ConfigSelectionNumber(-1000, 1000, 5, default=0)
 	config.av.generalPCMdelay = ConfigSelectionNumber(-1000, 1000, 5, default=0)
@@ -344,7 +344,7 @@ def InitAVSwitch():
 		def setAutoVolume(configElement):
 			print("[AVSwitch] Write to /proc/stb/audio/avl")
 			open("/proc/stb/audio/avl", "w").write(configElement.value)
-		config.av.autovolume = ConfigSelection(default="none", choices=[("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))])
+		config.av.autovolume = ConfigSelection(default="none", choices=[("none", _("off")), ("hdmi", "HDMI"), ("spdif", "SPDIF"), ("dac", "DAC")])
 		config.av.autovolume.addNotifier(setAutoVolume)
 
 	if SystemInfo["HasAutoVolumeLevel"]:
@@ -358,7 +358,7 @@ def InitAVSwitch():
 		def set3DSurround(configElement):
 			print("[AVSwitch] Write to /proc/stb/audio/3d_surround")
 			open("/proc/stb/audio/3d_surround", "w").write(configElement.value)
-		config.av.surround_3d = ConfigSelection(default="none", choices=[("none", _("off")), ("hdmi", _("HDMI")), ("spdif", _("SPDIF")), ("dac", _("DAC"))])
+		config.av.surround_3d = ConfigSelection(default="none", choices=[("none", _("off")), ("hdmi", "HDMI"), ("spdif", "SPDIF"), ("dac", "DAC")])
 		config.av.surround_3d.addNotifier(set3DSurround)
 
 	if SystemInfo["Has3DSpeaker"]:
@@ -386,7 +386,7 @@ def InitAVSwitch():
 		def setHDMIAudioSource(configElement):
 			print("[AVSwitch] Write to /proc/stb/hdmi/audio_source")
 			open(SystemInfo["HDMIAudioSource"], "w").write(configElement.value)
-		config.av.hdmi_audio_source = ConfigSelection(default="pcm", choices=[("pcm", _("PCM")), ("spdif", _("SPDIF"))])
+		config.av.hdmi_audio_source = ConfigSelection(default="pcm", choices=[("pcm", "PCM"), ("spdif", "SPDIF")])
 		config.av.hdmi_audio_source.addNotifier(setHDMIAudioSource)
 
 	def setVolumeStepsize(configElement):
