@@ -7,7 +7,6 @@ import enigma
 import eBaseImpl
 import eConsoleImpl
 import sys
-import os
 
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
@@ -21,6 +20,11 @@ from Components.International import international
 from boxbranding import getImageArch
 from Components.SystemInfo import SystemInfo
 from sys import stdout
+
+profile("Imports")
+from os.path import exists, isdir, islink, join as pathjoin
+from traceback import print_exc
+from time import localtime, strftime, time
 
 model = getBoxType()
 
@@ -43,17 +47,23 @@ config.misc.language = ConfigText(default="en")
 config.misc.locale = ConfigText(default="en_US")
 
 
+def setEPGCachePath(configElement):
+	if isdir(configElement.value) or islink(configElement.value):
+		configElement.value = pathjoin(configElement.value, "epg.dat")
+	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
+
+
+profile("Bouquets")
+config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
+
+
 def setLoadUnlinkedUserbouquets(configElement):
 	enigma.eDVBDB.getInstance().setLoadUnlinkedUserbouquets(configElement.value)
 
-config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
+
 config.misc.load_unlinked_userbouquets.addNotifier(setLoadUnlinkedUserbouquets)
+enigma.eDVBDB.getInstance().reloadBouquets()
 
-
-def setEPGCachePath(configElement):
-	if os.path.isdir(configElement.value) or os.path.islink(configElement.value):
-		configElement.value = os.path.join(configElement.value, "epg.dat")
-	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
 
 profile("ClientMode")
 import Components.ClientMode
@@ -62,10 +72,6 @@ Components.ClientMode.InitClientMode()
 profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
-
-profile("Bouquets")
-if config.clientmode.enabled.value == False:
-	enigma.eDVBDB.getInstance().reloadBouquets()
 
 profile("ParentalControl")
 import Components.ParentalControl
@@ -82,11 +88,6 @@ config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "r
 
 profile("CreateDefaultPaths")
 InitDefaultPaths()
-
-profile("Imports")
-from os.path import exists, isdir, isfile, islink, join as pathjoin
-from traceback import print_exc
-from time import localtime, strftime, time
 
 profile("InitializeConfigs")
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstandby.
@@ -685,7 +686,7 @@ if config.clientmode.enabled.value:
 	Components.ChannelsImporter.autostart()
 
 profile("IPv6")
-if os.path.exists('/etc/enigma2/ipv6'):
+if exists('/etc/enigma2/ipv6'):
 	try:
 		print("[StartEnigma] Write to /proc/sys/net/ipv6/conf/all/disable_ipv6")
 		open("/proc/sys/net/ipv6/conf/all/disable_ipv6", "w").write("1")
