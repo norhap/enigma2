@@ -17856,3 +17856,10 @@ msgstr "Limpiar todos los idiomas locales, excepto los actuales y permanentes. A
 
 msgid "Purge"
 msgstr "Eliminar Idiomas"
+
+msgid ""
+"GUI needs a restart to switch modes\n"
+"Do you want to restart the GUI now?"
+msgstr ""
+"La GUI necesita un reinicio para cambiar de modo\n"
+"Quieres reiniciar la GUI ahora?"
