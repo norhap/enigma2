@@ -307,10 +307,6 @@ msgstr "%d-%m"
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
 
-#, python-format
-msgid "%d.%03d GB"
-msgstr "%d.%03d GB"
-
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
@@ -347,10 +343,6 @@ msgstr "%s %d.%d"
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s espacio libre en disco"
-
-#, python-format
-msgid "%s (%s)\n"
-msgstr "%s (%s)\n"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -408,15 +400,6 @@ msgstr "-ERROR DE SERVICIO:%d\n"
 
 msgid "/s"
 msgstr "/s"
-
-msgid "1.0"
-msgstr "1.0"
-
-msgid "1.1"
-msgstr "1.1"
-
-msgid "1.2"
-msgstr "1.2"
 
 msgid "10 MB/s"
 msgstr "10 MB/s"
@@ -646,9 +629,6 @@ msgstr "ASS archivo"
 
 msgid "ASS file"
 msgstr "ASS Archivo"
-
-msgid "ATSC"
-msgstr "ATSC"
 
 msgid "ATSC provider"
 msgstr "ATSC provider"
@@ -1839,27 +1819,6 @@ msgstr "Fecha de los Drivers: "
 
 msgid "DVB type"
 msgstr "Tipo de DVB"
-
-msgid "DVB-C"
-msgstr "DVB-C"
-
-msgid "DVB-C ANNEX B"
-msgstr "DVB-C ANNEX B"
-
-msgid "DVB-C ANNEX C"
-msgstr "DVB-C ANNEX C"
-
-msgid "DVB-S"
-msgstr "DVB-S"
-
-msgid "DVB-S2"
-msgstr "DVB-S2"
-
-msgid "DVB-T"
-msgstr "DVB-T"
-
-msgid "DVB-T2"
-msgstr "DVB-T2"
 
 msgid "DVD Burn"
 msgstr "Quemar DVD"
@@ -7797,20 +7756,8 @@ msgstr "Volumen arriba"
 msgid "W"
 msgstr "W"
 
-msgid "WEP"
-msgstr "WEP"
-
 msgid "WLAN connection"
 msgstr "Conexión WLAN-WiFi"
-
-msgid "WPA"
-msgstr "WPA"
-
-msgid "WPA or WPA2"
-msgstr "WPA o WPA2"
-
-msgid "WPA2"
-msgstr "WPA2"
 
 msgid "WSS on 4:3"
 msgstr "WSS en 4:3"
