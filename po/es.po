@@ -6343,6 +6343,9 @@ msgstr "Restauración de software"
 msgid "Software Update"
 msgstr "Actualización de Software"
 
+msgid "Software update"
+msgstr "Actualización de software"
+
 msgid "Softwaremanager information"
 msgstr "Información del administrador de software"
 
