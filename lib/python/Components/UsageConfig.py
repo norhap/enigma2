@@ -1689,10 +1689,7 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_hearingimpaired = ConfigYesNo(default=False)
 	config.autolanguage.subtitle_defaultimpaired = ConfigYesNo(default=False)
 	config.autolanguage.subtitle_defaultdvb = ConfigYesNo(default=False)
-	config.autolanguage.subtitle_usecache = ConfigYesNo(default=True)
-	
-	if not exists('/usr/softcams'):
-		mkdir('/usr/softcams', 0o755)	
+	config.autolanguage.subtitle_usecache = ConfigYesNo(default=True)	
 
 	config.oscaminfo = ConfigSubsection()
 	if SystemInfo["OScamIsActive"]:

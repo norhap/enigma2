@@ -4471,7 +4471,6 @@ msgstr "Paquetes a actualizar"
 msgid "Packet management"
 msgstr "Manejo de paquetes"
 
-
 msgid "Packet manager"
 msgstr "Administrador de paquetes"
 
