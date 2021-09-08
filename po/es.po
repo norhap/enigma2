@@ -4471,8 +4471,15 @@ msgstr "Paquetes a actualizar"
 msgid "Packet management"
 msgstr "Manejo de paquetes"
 
+
 msgid "Packet manager"
 msgstr "Administrador de paquetes"
+
+#, python-format
+msgid "List version %(ver)d, found %(num)d channel"
+msgid_plural "List version %(ver)d, found %(num)d channels"
+msgstr[0] "Lista de versión %(ver)d, encontrada %(num)d canal"
+msgstr[1] "Lista de la versión %(ver)d, encontrada %(num)d canales"
 
 msgid "Pakistan"
 msgstr "Pakistan"

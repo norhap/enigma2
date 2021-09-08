@@ -8895,10 +8895,10 @@ msgid "List type"
 msgstr "Listtyp"
 
 #, python-format
-msgid "List version %d, found %d channel"
-msgid_plural "List version %d, found %d channels"
-msgstr[0] "Listversion %d, hittade %d kanal"
-msgstr[1] "Listversion %d, hittade %d kanaler"
+msgid "List version %(ver)d, found %(num)d channel"
+msgid_plural "List version %(ver)d, found %(num)d channels"
+msgstr[0] "Listversion %(ver)d, hittade %(num)d kanal"
+msgstr[1] "Listversion %(ver)d, hittade %(num)d kanaler"
 
 msgid "List/Fav"
 msgstr ""
