@@ -356,10 +356,6 @@ msgstr[0] "%s paquete de actualización disponible"
 msgstr[1] "%s paquetes de actualización disponibles"
 
 #, python-format
-msgid "%s%d min"
-msgstr "%s%d min"
-
-#, python-format
 msgid "%s:%s"
 msgstr "%s:%s"
 
