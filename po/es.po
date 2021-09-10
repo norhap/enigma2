@@ -17819,3 +17819,6 @@ msgid ""
 msgstr ""
 "La GUI necesita un reinicio para cambiar de modo\n"
 "Quieres reiniciar la GUI ahora?"
+
+msgid "DVD titlelis"
+msgstr "Título del DVD"

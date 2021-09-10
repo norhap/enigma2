@@ -245,11 +245,9 @@ def buildMovieLocationList(bookmarks):
 
 class MovieBrowserConfiguration(ConfigListScreen, Screen):
 	def __init__(self, session, args=0):
-		self.setup_title = _("Movie list configuration")
-		Screen.__init__(self, session)
-		self.session = session
-		self.skinName = "Setup"
 		self.setup_title = _("Movie List Setup")
+		Screen.__init__(self, session)
+		self.skinName = "Setup"
 		Screen.setTitle(self, _(self.setup_title))
 
 		# No ConfigText fields in MovieBrowserConfiguration so these are not currently used.
