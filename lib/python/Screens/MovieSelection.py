@@ -316,7 +316,7 @@ class MovieBrowserConfiguration(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Automatic bookmarks"), config.movielist.add_bookmark, _("If enabled, bookmarks will be updated with the new location when you move or copy a recording.")))
 		self.list.append(getConfigListEntry(_("Show underline characters in filenames"), config.movielist.show_underlines, _("If disabled, underline characters in file and directory names are not shown and are replaced with spaces.")))
 		self.list.append(getConfigListEntry(_("Show live tv when movie stopped"), config.movielist.show_live_tv_in_movielist, _("When set the PIG will return to live after a movie has stopped playing.")))
-		for btn in (('red', _('Red')), ('green', _('Green')), ('yellow', _('Yellow')), ('blue', _('Blue')), ('redlong', _('Red long')), ('greenlong', _('Green long')), ('yellowlong', _('Yellow long')), ('bluelong', _('Blue long')), ('TV', _('TV')), ('Radio', _('Radio')), ('Text', _('Text')), ('F1', _('F1')), ('F2', _('F2')), ('F3', _('F3'))):
+		for btn in (('red', _('Red')), ('green', _('Green')), ('yellow', _('Yellow')), ('blue', _('Blue')), ('redLong', _('Red Long')), ('greenLong', _('Green Long')), ('yellowLong', _('Yellow Long')), ('blueLong', _('Blue Long')), ('TV', _('TV')), ('Radio', _('Radio')), ('Text', _('Text')), ('F1', _('F1')), ('F2', _('F2')), ('F3', _('F3'))):
 			self.list.append(getConfigListEntry(_("Button") + " " + _(btn[1]), userDefinedButtons[btn[0]], _("Allows you to setup the button to do what you choose.")))
 		if config.usage.sort_settings.value:
 			self.list.sort()
@@ -717,10 +717,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"green": (self.btn_green, boundFunction(self.getinitUserDefinedActionsDescription, "btn_green")),
 				"yellow": (self.btn_yellow, boundFunction(self.getinitUserDefinedActionsDescription, "btn_yellow")),
 				"blue": (self.btn_blue, boundFunction(self.getinitUserDefinedActionsDescription, "btn_blue")),
-				"redlong": (self.btn_redlong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_redlong")),
-				"greenlong": (self.btn_greenlong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_greenlong")),
-				"yellowlong": (self.btn_yellowlong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_yellowlong")),
-				"bluelong": (self.btn_bluelong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_bluelong")),
+				"redLong": (self.btn_redlong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_redlong")),
+				"greenLong": (self.btn_greenlong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_greenlong")),
+				"yellowLong": (self.btn_yellowlong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_yellowlong")),
+				"blueLong": (self.btn_bluelong, boundFunction(self.getinitUserDefinedActionsDescription, "btn_bluelong")),
 			})
 		self["FunctionKeyActions"] = HelpableActionMap(self, ["FunctionKeyActions"],
 			{
@@ -852,10 +852,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				'green': config.movielist.btn_green,
 				'yellow': config.movielist.btn_yellow,
 				'blue': config.movielist.btn_blue,
-				'redlong': config.movielist.btn_redlong,
-				'greenlong': config.movielist.btn_greenlong,
-				'yellowlong': config.movielist.btn_yellowlong,
-				'bluelong': config.movielist.btn_bluelong,
+				'redLong': config.movielist.btn_redlong,
+				'greenLong': config.movielist.btn_greenlong,
+				'yellowLong': config.movielist.btn_yellowlong,
+				'blueLong': config.movielist.btn_bluelong,
 				'Radio': config.movielist.btn_radio,
 				'TV': config.movielist.btn_tv,
 				'Text': config.movielist.btn_text,
