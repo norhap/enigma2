@@ -42,3 +42,17 @@ mipsel-oe-linux-libtool
 *.pyo
 *.mo
 .vscode/
+po/ar.po
+po/et.po
+po/de.po
+po/fy.po
+po/is.po
+po/mk.po
+po/pl.po
+po/pt_BR.po
+po/pt_BR.po
+po/ro.po
+po/ru.po
+po/sr.po
+po/sv.po
+po/zh_HK.po

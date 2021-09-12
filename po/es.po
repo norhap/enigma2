@@ -2381,7 +2381,7 @@ msgstr "Entrar al menú principal…"
 msgid "Enter persistent PIN code"
 msgstr "Introduzca el código PIN persistente"
 
-msgid "Enter pin code"
+msgid "Enter PIN code"
 msgstr "Introduzca código PIN"
 
 msgid "Enter the frequency at which you LNB switches between low band and high band. For more information consult the spec sheet of your LNB."
@@ -2393,8 +2393,8 @@ msgstr "Ingrese el tamaño del paso de frecuencia para que el sintonizador lo us
 msgid "Enter the number stored in the positioner that corresponds to this satellite."
 msgstr "Ingrese el número almacenado en el motor que corresponde a este satélite."
 
-msgid "Enter the service pin"
-msgstr "Introduzca el pin del servicio"
+msgid "Enter the service PIN"
+msgstr "Introduzca el PIN del servicio"
 
 msgid "Enter your current latitude. This is the number of degrees you are from the equator as a decimal."
 msgstr "Ingrese su latitud actual. Este es el número de grados al que estás del ecuador como un decimal."
@@ -4637,7 +4637,7 @@ msgstr "Introducir nueva descripción:"
 msgid "Please enter new name:"
 msgstr "Introducir nuevo nombre:"
 
-msgid "Please enter the correct pin code"
+msgid "Please enter the correct PIN code"
 msgstr "Introducir el PIN correcto"
 
 msgid "Please enter the new PIN code"
@@ -5961,8 +5961,8 @@ msgstr "Establecer interfaz como predeterminada"
 msgid "Set limits"
 msgstr "Establecer límites"
 
-msgid "Set pin code persistent"
-msgstr "Establecer el código PIN persistente"
+msgid "Set persistent PIN code"
+msgstr "Establecer un código PIN persistente"
 
 msgid "Set sequence repeats if your aerial system requires this. Normally if the aerial system has been configured correctly sequence repeats will not be necessary. If yours does, recheck you have command order set correctly."
 msgstr "Establezca la secuencia repetida si su instalación de antena lo requiere. Normalmente, si la instalación se ha configurado correctamente, no será necesario repetir la secuencia. Si la suya lo hace, vuelva a verificar que tienes establecidas correctamente las ordenes de comando."
@@ -6876,7 +6876,7 @@ msgstr ""
 "\n"
 "Test Pattern por TigerDave - www.tigerdave.com/ht_menu.htm"
 
-msgid "The pin code you entered is wrong."
+msgid "The PIN code you entered is wrong."
 msgstr "El código PIN introducido es incorrecto."
 
 #, python-format
@@ -9158,14 +9158,14 @@ msgstr "archivo plantilla"
 msgid "tennis/squash"
 msgstr "tenis/squash"
 
-msgid "this bouquet is protected by a parental control pin"
-msgstr "este bouquet está protegido por un PIN de control parental"
+msgid "This bouquet is protected by a parental control PIN"
+msgstr "Este bouquet está protegido por un PIN de control parental"
 
 msgid "this recording"
 msgstr "esta grabación"
 
-msgid "this service is protected by a parental control pin"
-msgstr "este canal está protegido por un PIN de control parental"
+msgid "This service is protected by a parental control PIN"
+msgstr "Este canal está protegido por un PIN de control parental"
 
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "alternar el tiempo, el capítulo, el audio, la información de los subtítulos"

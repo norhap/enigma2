@@ -68,10 +68,21 @@ class TimerEditList(Screen, ProtectedScreen):
 
 		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
 		self.onShown.append(self.updateState)
+		if self.isProtected() and config.ParentalControl.servicepin[0].value:
+			self.onFirstExecBegin.append(boundFunction(self.session.openWithCallback, self.pinEntered, PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the correct PIN code"), windowTitle=_("Enter PIN code")))
 		self.fallbackTimer = FallbackTimerList(self, self.fillTimerList)
 
 	def isProtected(self):
-		return config.ParentalControl.setuppinactive.value and (not config.ParentalControl.config_sections.main_menu.value or hasattr(self.session, 'infobar') and self.session.infobar is None) and config.ParentalControl.config_sections.timer_menu.value and config.ParentalControl.servicepin[0].value
+		return config.ParentalControl.setuppinactive.value and (not config.ParentalControl.config_sections.main_menu.value or hasattr(self.session, 'infobar') and self.session.infobar is None) and config.ParentalControl.config_sections.timer_menu.value
+
+	def pinEntered(self, result):
+		if result is None:
+			self.closeProtectedScreen()
+		elif not result:
+			self.session.openWithCallback(self.close(), MessageBox, _("The PIN code you entered is wrong."), MessageBox.TYPE_ERROR, timeout=5)
+
+	def closeProtectedScreen(self, result=None):
+		self.close(None)
 
 	def up(self):
 		self["timerlist"].instance.moveSelection(self["timerlist"].instance.moveUp)
