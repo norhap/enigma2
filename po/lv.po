@@ -602,7 +602,7 @@ msgstr "Grafiskais EPG visiem kanāliem izvēlētajā buķetē"
 
 #, python-format
 msgid ""
-"A record has been started:\n"
+"A recording has started:\n"
 "%s"
 msgstr ""
 "Ieraksts ir sācies:\n"
@@ -703,7 +703,7 @@ msgstr "Pārtraukt favorītu rediģēšanu"
 msgid "About"
 msgstr "Par"
 
-msgid "Accesspoint:"
+msgid "Access point:"
 msgstr "Piekļuves punkts:"
 
 msgid "Activate HbbTV (Redbutton)"
@@ -2722,7 +2722,7 @@ msgstr "Atmiņas iekārtas:"
 msgid "Detected NIMs:"
 msgstr "Uztvērēji:"
 
-msgid "Devicename:"
+msgid "Device name:"
 msgstr "Iekārtas nosaukums:"
 
 msgid "DiSEqC"
@@ -6178,7 +6178,7 @@ msgstr "Lūdzu uzgaidiet (atjauno pakotnes)"
 msgid "Please wait for activation of your network configuration..."
 msgstr "Lūdzu uzgaidiet kamēr tīkla konfigurācija tiek aktivizēta..."
 
-msgid "Please wait while scanning is in progress..."
+msgid "Please wait while scanning..."
 msgstr "Lūdzu uzgaidiet kamēr notiek meklēšana..."
 
 msgid "Please wait while we configure your network..."
@@ -6817,8 +6817,8 @@ msgstr ""
 "Pārraide pašreiz tiek ierakstīta.\n"
 "Ko vēlaties darīt?"
 
-msgid "Repeating event currently recording... What do you want to do?"
-msgstr "Pārraide pašreiz ierakstās... Ko vēlaties darīt?"
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Pārraide pašreiz ierakstās. Ko vēlaties darīt?"
 
 msgid "Repeats"
 msgstr "Atkārtojumi"
@@ -10628,7 +10628,7 @@ msgstr "Jā, bez dublējumkopijas"
 msgid "Yesterday"
 msgstr "Vakar"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr "Jūsu PIN kods ir 0000. Tas ir kods pēc noklusējuma un izslēdz vecāku kontroli!\n"
 
 #, python-format
@@ -11152,7 +11152,7 @@ msgstr "EPG kešatmiņas dublējumkopija"
 msgid "equestrian"
 msgstr "jātnieka"
 
-msgid "error starting scanning"
+msgid "error starting scan"
 msgstr "kļūda uzsākot skenēšanu"
 
 msgid "error while scanning"

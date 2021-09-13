@@ -596,7 +596,7 @@ msgstr "EPG grafis untuk seluruh layanan pada buket tertentu"
 
 #, python-format
 msgid ""
-"A record has been started:\n"
+"A recording has started:\n"
 "%s"
 msgstr ""
 "Rekaman telah dimulai:\n"
@@ -698,7 +698,7 @@ msgstr "Batalkan ubah favorit"
 msgid "About"
 msgstr "Tentang"
 
-msgid "Accesspoint:"
+msgid "Access point:"
 msgstr "Poin akses:"
 
 msgid "Activate HbbTV (Redbutton)"
@@ -2788,7 +2788,7 @@ msgstr "HDD terdeteksi:"
 msgid "Detected NIMs:"
 msgstr "NIMs terdeteksi:"
 
-msgid "Devicename:"
+msgid "Device name:"
 msgstr "Nama perangkat:"
 
 msgid "DiSEqC"
@@ -6364,7 +6364,7 @@ msgstr "Mohon tunggu (memperbarui paket)"
 msgid "Please wait for activation of your network configuration..."
 msgstr "Silakan tunggu aktivasi setelan jaringan anda..."
 
-msgid "Please wait while scanning is in progress..."
+msgid "Please wait while scanning..."
 msgstr "Silakan tunggu sementara pemindaian sedang berlangsung..."
 
 msgid "Please wait while we configure your network..."
@@ -7017,8 +7017,8 @@ msgstr ""
 "Mengulang acara yg saat ini merekam.\n"
 "Apa yang ingin anda lakukan?"
 
-msgid "Repeating event currently recording... What do you want to do?"
-msgstr "Mengulang acara yg saat ini merekam... Apa yang ingin anda lakukan?"
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Mengulang acara yg saat ini merekam. Apa yang ingin anda lakukan?"
 
 msgid "Repeats"
 msgstr "Ulang"
@@ -10948,7 +10948,7 @@ msgid "Yesterday"
 msgstr "Kemarin"
 
 #, fuzzy
-msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr "Kode PIN anda adalah 0000. Ini adalah kode PIN bawaan pabrik dan ia mematikan kontrol orang tua!\n"
 
 #, python-format
@@ -11477,7 +11477,7 @@ msgstr "cadangan cache EPG"
 msgid "equestrian"
 msgstr "equestrian"
 
-msgid "error starting scanning"
+msgid "error starting scan"
 msgstr "gagal memulai pindaian"
 
 msgid "error while scanning"

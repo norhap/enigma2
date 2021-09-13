@@ -675,7 +675,7 @@ msgstr "Grafični EPG za vse kanale izbranega paketa"
 
 #, python-format
 msgid ""
-"A record has been started:\n"
+"A recording has started:\n"
 "%s"
 msgstr ""
 "Pričelo se je snemanje kanala:\n"
@@ -789,7 +789,7 @@ msgid "About"
 msgstr "Informacije o OpenPLi sliki"
 
 #
-msgid "Accesspoint:"
+msgid "Access point:"
 msgstr "Dostopna točka:"
 
 msgid "Activate HbbTV (Redbutton)"
@@ -3132,7 +3132,7 @@ msgstr "Zaznane shranjevalne naprave:"
 msgid "Detected NIMs:"
 msgstr "Zaznani kanalniki:"
 
-msgid "Devicename:"
+msgid "Device name:"
 msgstr "Ime naprave:"
 
 #
@@ -7191,7 +7191,7 @@ msgid "Please wait for activation of your network configuration..."
 msgstr "Počakajte na aktivacijo omrežnih nastavitev ..."
 
 #
-msgid "Please wait while scanning is in progress..."
+msgid "Please wait while scanning..."
 msgstr "Izvaja se iskanje ... Prosim počakajte!"
 
 #
@@ -7962,8 +7962,8 @@ msgstr ""
 "Kaj želite storiti?"
 
 #
-msgid "Repeating event currently recording... What do you want to do?"
-msgstr "Snemanje ponavljajočega dogodka v teku ... Kaj želite storiti?"
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Snemanje ponavljajočega dogodka v teku. Kaj želite storiti?"
 
 #
 msgid "Repeats"
@@ -12394,7 +12394,7 @@ msgstr "Povrnitev varnostne kopije"
 msgid "Yesterday"
 msgstr "Včeraj"
 
-msgid "You PIN code is 0000. This is the default PIN code and it disables parental control!\n"
+msgid "Your PIN code is 0000. This is the default PIN code and it disables parental control!\n"
 msgstr ""
 
 #, python-format
@@ -12964,7 +12964,7 @@ msgstr "varnostno kopiranje EPG podatkov"
 msgid "equestrian"
 msgstr ""
 
-msgid "error starting scanning"
+msgid "error starting scan"
 msgstr ""
 
 msgid "error while scanning"

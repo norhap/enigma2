@@ -543,10 +543,10 @@ msgstr "Un EPG gráfico para todos los servicios de un bouquet específico"
 
 #, python-format
 msgid ""
-"A record has been started:\n"
+"A recording has started:\n"
 "%s"
 msgstr ""
-"Una grabación ha comenzado:\n"
+"Ha comenzado una grabación:\n"
 "%s"
 
 msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
@@ -638,7 +638,7 @@ msgstr "Receptor"
 msgid "About..."
 msgstr "Acerca de..."
 
-msgid "Accesspoint:"
+msgid "Access point:"
 msgstr "Punto de acceso:"
 
 msgid "Activate HbbTV (Redbutton)"
@@ -1969,7 +1969,7 @@ msgstr "HDD Detectado:"
 msgid "Detected NIMs:"
 msgstr "NIMs detectados:"
 
-msgid "Devicename:"
+msgid "Device name:"
 msgstr "Nombre dispositivo:"
 
 msgid "DiSEqC A/B"
@@ -4703,8 +4703,8 @@ msgstr "Espere (actualizando paquetes)"
 msgid "Please wait for activation of your network configuration..."
 msgstr "Espere la activación de la configuración de red…"
 
-msgid "Please wait while scanning is in progress..."
-msgstr "Espere mientras se realiza el búsqueda…"
+msgid "Please wait while scanning..."
+msgstr "Espere mientras escanea..."
 
 msgid "Please wait while we prepare your network interfaces..."
 msgstr "Espere mientras prepabouquets los interfaces de su red…"
@@ -5181,15 +5181,8 @@ msgstr "Repetir dejar mensajes en espera"
 msgid "Repeat type"
 msgstr "Tipo de repetición"
 
-msgid ""
-"Repeating event currently recording.\n"
-"What do you want to do?"
-msgstr ""
-"Evento repetitivo actualmente grabando.\n"
-"¿Qué quieres hacer?"
-
-msgid "Repeating event currently recording... What do you want to do?"
-msgstr "Evento repetitivo actualmente grabando… ¿Qué quieres hacer?"
+msgid "A repeating event is currently recording. What would you like to do?"
+msgstr "Actualmente se está grabando un evento repetido. Que te gustaría hacer?"
 
 msgid "Repeats"
 msgstr "Repetición"
@@ -8491,8 +8484,8 @@ msgstr "copia de seguridad del caché EPG"
 msgid "equestrian"
 msgstr "ecuestre"
 
-msgid "error starting scanning"
-msgstr "error al comenzar a escanear"
+msgid "error starting scan"
+msgstr "error al iniciar el escaneo"
 
 msgid "error while scanning"
 msgstr "error mientras se escanea"
@@ -13109,9 +13102,6 @@ msgid ""
 msgstr ""
 "Los cambios en el dispositivo necesitan un reinicio del sistema para tomar los efectos.\n"
 "¿Reiniciar su receptor ahora?"
-
-msgid "Device name:"
-msgstr "Nombre dispositivo:"
 
 msgid "Device: "
 msgstr "Dispositivo: "
