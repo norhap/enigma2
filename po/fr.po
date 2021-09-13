@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 01:12+0300\n"
-"PO-Revision-Date: 2021-08-24 20:12+0200\n"
+"POT-Creation-Date: 2021-09-10 01:42+0300\n"
+"PO-Revision-Date: 2021-09-12 10:10+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -108,9 +108,6 @@ msgstr " Paquets sélectionnés."
 msgid " unicable LNB input of rotor"
 msgstr " entrée LNB unicable du rotor"
 
-msgid " updates available."
-msgstr " Mises à jour disponibles."
-
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s espace disque libre"
@@ -142,10 +139,6 @@ msgstr "%.2f GB"
 #, python-format
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
-
-#, python-format
-msgid "%03d MB"
-msgstr "%03d MB"
 
 #, python-format
 msgid "%2.1f sec"
@@ -295,10 +288,6 @@ msgstr "%d-%m"
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
 
-#, python-format
-msgid "%d.%03d GB"
-msgstr "%d.%03d GB"
-
 msgid "%d.%B %Y"
 msgstr "%d.%B %Y"
 
@@ -343,10 +332,6 @@ msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
 #, python-format
-msgid "%s (%s)\n"
-msgstr "%s (%s)\n"
-
-#, python-format
 msgid "%s imported from fallback tuner"
 msgstr "%s importés du tuner de repli"
 
@@ -360,10 +345,6 @@ msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] "%s mise à jour disponible"
 msgstr[1] "%s mises à jour disponibles"
-
-#, python-format
-msgid "%s%d min"
-msgstr "%s%d min"
 
 msgid "(VU+ type)"
 msgstr "(type VU+)"
@@ -400,9 +381,6 @@ msgstr "-PAS DE SERVICE\n"
 msgid "-SERVICE ERROR:%d\n"
 msgstr "-ERREUR AU SERVICE:%d\n"
 
-msgid "/T"
-msgstr "/T"
-
 msgid "/s"
 msgstr "/s"
 
@@ -411,15 +389,6 @@ msgstr "0"
 
 msgid "1"
 msgstr "1"
-
-msgid "1.0"
-msgstr "1.0"
-
-msgid "1.1"
-msgstr "1.1"
-
-msgid "1.2"
-msgstr "1.2"
 
 msgid "10 MB/s"
 msgstr "10 MB/s"
@@ -454,9 +423,8 @@ msgstr "18 V"
 msgid "2"
 msgstr "2"
 
-#, fuzzy
 msgid "2 new lines"
-msgstr "Deux lignes"
+msgstr "2 nouvelles lignes"
 
 msgid "20 MB/s"
 msgstr "20 MB/s"
@@ -665,9 +633,6 @@ msgstr "AGC:"
 
 msgid "ASS file"
 msgstr "Fichier ASS"
-
-msgid "ATSC"
-msgstr "ATSC"
 
 msgid "ATSC provider"
 msgstr "Opérateur ATSC"
@@ -1973,7 +1938,7 @@ msgid "Configure remote control type"
 msgstr "Configure le type de télécommande"
 
 msgid "Configure separator type used in full description for separate short and extended descriptions."
-msgstr ""
+msgstr "Configurer le type de séparateur dans la description complète pour séparer les descriptions courte étendue"
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "Configure le mode DiSEqC pour cette LNB."
@@ -2468,27 +2433,6 @@ msgstr "Transparence des sous-titres DVB"
 
 msgid "DVB type"
 msgstr "Type DVB"
-
-msgid "DVB-C"
-msgstr "DVB-C"
-
-msgid "DVB-C ANNEX B"
-msgstr "DVB-C ANNEX B"
-
-msgid "DVB-C ANNEX C"
-msgstr "DVB-C ANNEX C"
-
-msgid "DVB-S"
-msgstr "DVB-S"
-
-msgid "DVB-S2"
-msgstr "DVB-S2"
-
-msgid "DVB-T"
-msgstr "DVB-T"
-
-msgid "DVB-T2"
-msgstr "DVB-T2"
 
 msgid "DVD Burn"
 msgstr "Graver le DVD"
@@ -3858,7 +3802,7 @@ msgid "Frontprocessor version: %s"
 msgstr "Version du frontprocessor: %s"
 
 msgid "Full description separator"
-msgstr ""
+msgstr "Séparateur de la description étendue"
 
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 msgid "Full screen"
@@ -5805,9 +5749,8 @@ msgstr "PID PMT"
 msgid "PPanel"
 msgstr "PPanel"
 
-#, fuzzy
 msgid "PULSe 4K(mini)"
-msgstr "PULSe 4K"
+msgstr "PULSe 4K(mini)"
 
 msgid "Package list update"
 msgstr "Mise à jour de la liste des paquets"
@@ -6474,7 +6417,7 @@ msgstr "Protéger le tri des menus"
 msgid "Protect movie list"
 msgstr "Protéger la liste de films"
 
-msgid "Protect on epg age"
+msgid "Protect on EPG age"
 msgstr "Protéger sur l'âge de l'EPG"
 
 msgid "Protect plugin browser"
@@ -6807,7 +6750,7 @@ msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subt
 msgstr "Remplacer `- ` dans les dialogues par un texte coloré en fonction de l’intervenant (comme les sous-titres télétexte pour les malentendants)."
 
 msgid "Replace newlines in EPG"
-msgstr ""
+msgstr "Remplacer les retour à la ligne dans l'EPG"
 
 msgid "Request for physical address report"
 msgstr "Demande du rapport d’adresse physique"
@@ -7213,9 +7156,6 @@ msgid_plural "Scanning completed, %d channels found"
 msgstr[0] "Recherche terminée, %d chaînes trouvées"
 msgstr[1] "Recherche terminée, %d chaînes trouvées"
 
-msgid "Scanning failed!"
-msgstr "Echec de la recherche!"
-
 msgid "Scanning..."
 msgstr "Recherche en cours..."
 
@@ -7388,8 +7328,8 @@ msgstr "Sélectionner une chaîne"
 msgid "Select channel to record from"
 msgstr "Sélectionner la chaîne à enregistrer"
 
-msgid "Select char for replacing newlines in epg."
-msgstr ""
+msgid "Select char for replacing newlines in EPG."
+msgstr "Sélectionnez le caractère pour remplacer les retours à la ligne dans l'EPG."
 
 msgid "Select copy destination for:"
 msgstr "Sélectionnez la destination de copie pour:"
@@ -8807,7 +8747,7 @@ msgstr ""
 "\n"
 "Traducteur: Pr2\n"
 "Support: www.openpli.org\n"
-"Dernière MAJ: 26-07-2021"
+"Dernière MAJ: 12-09-2021"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "Fichier TS trop grand pour le niveau 1 ISO9660!"
@@ -9042,9 +8982,6 @@ msgid ""
 msgstr ""
 "L'extension LAN sans fil n'est pas installée!\n"
 "Veuillez l'installer."
-
-msgid "There are at least "
-msgstr "Il y a au moins "
 
 #, python-format
 msgid "There are at least %d updates available."
@@ -9635,9 +9572,6 @@ msgstr ""
 "http:// et le numéro du port (normalement: 8001),\n"
 "p.e. http://second_demo:8001"
 
-msgid "USALS"
-msgstr "USALS"
-
 msgid "USALS automatically moves a motorised dish to the correct satellite based on the coordinates entered by the user. Without USALS each satellite will need to be setup and saved individually."
 msgstr "USALS déplace automatiquement une antenne motorisée sur le satellite correct sur base des coordonnées entrées par l’utilisateur. Sans USALS chaque satellite aura besoin d’être configuré et sauvegardé individuellement."
 
@@ -10116,20 +10050,8 @@ msgstr "Volume haut"
 msgid "W"
 msgstr "O"
 
-msgid "WEP"
-msgstr "WEP"
-
 msgid "WLAN connection"
 msgstr "Connexion WLAN"
-
-msgid "WPA"
-msgstr "WPA"
-
-msgid "WPA or WPA2"
-msgstr "WPA ou WPA2"
-
-msgid "WPA2"
-msgstr "WPA2"
 
 msgid "WSS on 4:3"
 msgstr "WSS sur 4:3"
@@ -10703,7 +10625,7 @@ msgstr "Vous n'avez pas sélectionné une chaîne à enregistrer."
 
 #, python-format
 msgid "You have to wait %(min)d minutes, %(sec)d seconds!"
-msgstr ""
+msgstr "Vous devez attendre %(min)d minutes, %(sec)d secondes!"
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
@@ -11133,8 +11055,8 @@ msgstr "Divertissement (10-16 ans)"
 msgid "entertainment (6-14 year old)"
 msgstr "Divertissement (6-14 ans)"
 
-msgid "epg cache backup"
-msgstr "sauvegarde du cache de l'epg"
+msgid "backup EPG cache"
+msgstr "sauvegarde du cache de l'EPG"
 
 msgid "equestrian"
 msgstr "Équestre"
@@ -11406,9 +11328,8 @@ msgstr "Nature/Animaux/Environnement"
 msgid "never"
 msgstr "Jamais"
 
-#, fuzzy
 msgid "new line"
-msgstr "Deux lignes"
+msgstr "nouvelle ligne"
 
 msgid "new media"
 msgstr "Nouveaux médias"
@@ -11470,9 +11391,8 @@ msgstr "frontend non valide"
 msgid "not_tested"
 msgstr "pas_testé"
 
-#, fuzzy
 msgid "nothing"
-msgstr "Ne rien faire"
+msgstr "rien"
 
 msgid "nothing connected"
 msgstr "Rien n'est connecté"
@@ -11493,7 +11413,7 @@ msgid "offset is"
 msgstr "Position finale sur"
 
 msgid "omit"
-msgstr ""
+msgstr "omettre"
 
 msgid "on"
 msgstr "Marche"
@@ -11704,7 +11624,7 @@ msgid "social/spiritual science"
 msgstr "Science sociale/Spirituelle"
 
 msgid "space"
-msgstr ""
+msgstr "espace"
 
 msgid "special events"
 msgstr "Évènements spéciaux"

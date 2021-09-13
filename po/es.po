@@ -4930,7 +4930,7 @@ msgstr "Proteger el menú de ordenado"
 msgid "Protect movie list"
 msgstr "Proteger lista de películas"
 
-msgid "Protect on epg age"
+msgid "Protect on EPG age"
 msgstr "Proteger EPG por edad"
 
 msgid "Protect plugin browser"
@@ -8485,7 +8485,7 @@ msgstr "entretenimiento (10-16 años)"
 msgid "entertainment (6-14 year old)"
 msgstr "entretenimiento (4-14 años)"
 
-msgid "epg cache backup"
+msgid "backup EPG cache"
 msgstr "copia de seguridad del caché EPG"
 
 msgid "equestrian"

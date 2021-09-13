@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-02 01:12+0300\n"
-"PO-Revision-Date: 2021-08-24 20:00+0300\n"
+"POT-Creation-Date: 2021-09-12 09:42+0200\n"
+"PO-Revision-Date: 2021-09-09 21:28+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
 "Language: lt_LT\n"
@@ -109,9 +109,6 @@ msgstr " išsirinkti paketai."
 msgid " unicable LNB input of rotor"
 msgstr " unicable LNB rotoriaus įvestis"
 
-msgid " updates available."
-msgstr " galimi atnaujinimai."
-
 #, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "laisvos vietos diske %(freespace)s %(percent)s"
@@ -143,10 +140,6 @@ msgstr "%.2f GB"
 #, python-format
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
-
-#, python-format
-msgid "%03d MB"
-msgstr "%03d MB"
 
 #, python-format
 msgid "%2.1f sec"
@@ -307,10 +300,6 @@ msgstr "%m-%d"
 msgid "%d.%02d. %02d:%02d"
 msgstr "%d.%02d. %02d:%02d"
 
-#, python-format
-msgid "%d.%03d GB"
-msgstr "%d.%03d GB"
-
 msgid "%d.%B %Y"
 msgstr "%Y %B %e"
 
@@ -355,10 +344,6 @@ msgid "%s %d.%d"
 msgstr "%s %d.%d"
 
 #, python-format
-msgid "%s (%s)\n"
-msgstr "%s (%s)\n"
-
-#, python-format
 msgid "%s imported from fallback tuner"
 msgstr "%s importuota iš nuotolinio imtuvo"
 
@@ -373,10 +358,6 @@ msgid_plural "%s updated packages available"
 msgstr[0] "galimas %s paketo atnaujinimas"
 msgstr[1] "galimas %s paketų atnaujinimas"
 msgstr[2] "galimas %s paketų atnaujinimas"
-
-#, python-format
-msgid "%s%d min"
-msgstr "%s%d min"
 
 msgid "(VU+ type)"
 msgstr "(VU+ tipas)"
@@ -413,9 +394,6 @@ msgstr "-KANALO NĖRA\n"
 msgid "-SERVICE ERROR:%d\n"
 msgstr "-KANALO KLAIDA:%d\n"
 
-msgid "/T"
-msgstr "/T"
-
 msgid "/s"
 msgstr "/s"
 
@@ -424,15 +402,6 @@ msgstr "0"
 
 msgid "1"
 msgstr "1"
-
-msgid "1.0"
-msgstr "1.0"
-
-msgid "1.1"
-msgstr "1.1"
-
-msgid "1.2"
-msgstr "1.2"
 
 msgid "10 MB/s"
 msgstr "10 MB/s"
@@ -467,9 +436,8 @@ msgstr "18 V"
 msgid "2"
 msgstr "2"
 
-#, fuzzy
 msgid "2 new lines"
-msgstr "Dvi linijos"
+msgstr "2 naujos eilutės"
 
 msgid "20 MB/s"
 msgstr "20 MB/s"
@@ -678,9 +646,6 @@ msgstr "AGC:"
 
 msgid "ASS file"
 msgstr "ASS failas"
-
-msgid "ATSC"
-msgstr "ATSC"
 
 msgid "ATSC provider"
 msgstr "ATSC teikėjas"
@@ -1986,7 +1951,7 @@ msgid "Configure remote control type"
 msgstr "Nustatykite nuotolinio pultelio tipą"
 
 msgid "Configure separator type used in full description for separate short and extended descriptions."
-msgstr ""
+msgstr "Konfigūruoti skyriklio tipą, naudojamą išsamiame apraše atskiriems trumpiems ir išplėstiniams aprašams."
 
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr "Nustatykite DiSEqC veikseną šiam LNB."
@@ -2481,27 +2446,6 @@ msgstr "DVB subtitrų juodos spalvos skaidrumas"
 
 msgid "DVB type"
 msgstr "DVB tipas"
-
-msgid "DVB-C"
-msgstr "DVB-C"
-
-msgid "DVB-C ANNEX B"
-msgstr "DVB-C ANNEX C"
-
-msgid "DVB-C ANNEX C"
-msgstr "DVB-C ANNEX C"
-
-msgid "DVB-S"
-msgstr "DVB-S"
-
-msgid "DVB-S2"
-msgstr "DVB-S2"
-
-msgid "DVB-T"
-msgstr "DVB-T"
-
-msgid "DVB-T2"
-msgstr "DVB-T2"
 
 msgid "DVD Burn"
 msgstr "DVD įrašymas"
@@ -3869,7 +3813,7 @@ msgid "Frontprocessor version: %s"
 msgstr "Priekinio procesoriaus versija: %s"
 
 msgid "Full description separator"
-msgstr ""
+msgstr "Visas aprašo skyriklis"
 
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 msgid "Full screen"
@@ -4383,7 +4327,7 @@ msgid "Import from fallback tuner failed, %s"
 msgstr "Importuoti iš nuotolinio imtuvo nepavyko, %s"
 
 msgid "Import from remote receiver URL"
-msgstr "Importuoti epg iš nuotolinio imtuvo URL"
+msgstr "Importuoti iš nuotolinio imtuvo URL"
 
 msgid "Import remote receiver URL"
 msgstr "Importuoti nuotolinio imtuvo URL"
@@ -5821,9 +5765,8 @@ msgstr "PMT PID"
 msgid "PPanel"
 msgstr "PLi skydelis"
 
-#, fuzzy
 msgid "PULSe 4K(mini)"
-msgstr "PULSe 4K"
+msgstr "PULSe 4K(mini)"
 
 msgid "Package list update"
 msgstr "Paketo sąrašo atnaujinimas"
@@ -6490,7 +6433,7 @@ msgstr "Apsaugoti meniu rūšiavimą"
 msgid "Protect movie list"
 msgstr "Apsaugoti filmų sąrašą"
 
-msgid "Protect on epg age"
+msgid "Protect on EPG age"
 msgstr "Apsaugoti EPG, atsižvelgiant į amžių"
 
 msgid "Protect plugin browser"
@@ -6823,7 +6766,7 @@ msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subt
 msgstr "Pakeiskite `- ` į dialogus su spalvotu tekstu vienam pranešėjui (pavyzdžiui, teleteksto subtitrai neprigirdintiems)"
 
 msgid "Replace newlines in EPG"
-msgstr ""
+msgstr "Pakeisti naujas linijas EPG"
 
 msgid "Request for physical address report"
 msgstr "Prašymas pateikti fizinio adreso ataskaitą"
@@ -7232,9 +7175,6 @@ msgstr[0] "Paieška baigta, rastas %d kanalas"
 msgstr[1] "Paieška baigta, surasti %d kanalai"
 msgstr[2] "Paieška baigta, surasta %d kanalų"
 
-msgid "Scanning failed!"
-msgstr "Paieška nepavyko!"
-
 msgid "Scanning..."
 msgstr "Vyksta paieška..."
 
@@ -7407,8 +7347,8 @@ msgstr "Pasirinkite kanalą"
 msgid "Select channel to record from"
 msgstr "Pasirinkite kanalą įrašymui"
 
-msgid "Select char for replacing newlines in epg."
-msgstr ""
+msgid "Select char for replacing newlines in EPG."
+msgstr "Pasirinkite simbolį, skirtą pakeisti naujas linijas EPG."
 
 msgid "Select copy destination for:"
 msgstr "Pasirinkite kopijos vietą:"
@@ -8821,7 +8761,7 @@ msgstr "TEKSTAS"
 msgid "TRANSLATOR_INFO"
 msgstr ""
 "P&C Adga, adga45@gmail.com\n"
-"Pasvalys, 2021-08-24 versija"
+"Pasvalys, 2021-09-09 versija"
 
 msgid "TS file is too large for ISO9660 level 1!"
 msgstr "TS failas per didelis 1 lygio ISO9660!"
@@ -9057,12 +8997,9 @@ msgstr ""
 "Bevielio tinklo programa neįdiegta!\n"
 "Prašome įdiegti tai."
 
-msgid "There are at least "
-msgstr "Bent jau yra "
-
 #, python-format
 msgid "There are at least %d updates available."
-msgstr "Yra bent %d galimi atnaujinimai."
+msgstr "Yra bent %d naujinimų."
 
 msgid "There are currently no outstanding actions."
 msgstr "Šiuo metu nėra jokių neįvykdytų veiksmų."
@@ -9645,9 +9582,6 @@ msgstr "Internetinis adresas"
 msgid "URL of fallback remote receiver"
 msgstr "Atsarginio nuotolinio imtuvo internetinis adresas"
 
-msgid "USALS"
-msgstr "USALS"
-
 msgid "USALS automatically moves a motorised dish to the correct satellite based on the coordinates entered by the user. Without USALS each satellite will need to be setup and saved individually."
 msgstr "USALS automatiškai perkelia motorizuotą anteną į tinkamą palydovą, remiantis vartotojo įrašytomis koordinatėmis. Be USALS kiekvienas palydovas turės būti nustatytas ir išsaugotas atskirai."
 
@@ -9782,7 +9716,7 @@ msgid "Update failed. Your receiver does not have a working internet connection.
 msgstr "Atnaujinimo klaida. Jūsų imtuvas neturi interneto ryšio."
 
 msgid "Update feed not available."
-msgstr "Atnaujinimo šaltinis nepasiekiamas."
+msgstr "Naujinimo informacijos santrauka nepasiekiama."
 
 msgid "Update has completed."
 msgstr "Atnaujinimas baigtas."
@@ -10127,20 +10061,8 @@ msgstr "Pagarsinti"
 msgid "W"
 msgstr "V"
 
-msgid "WEP"
-msgstr "WEP"
-
 msgid "WLAN connection"
 msgstr "Belaidis ryšys"
-
-msgid "WPA"
-msgstr "WPA raktas"
-
-msgid "WPA or WPA2"
-msgstr "WPA arba WPA2"
-
-msgid "WPA2"
-msgstr "WPA2"
 
 msgid "WSS on 4:3"
 msgstr "WSS 4:3 režime"
@@ -10716,7 +10638,7 @@ msgstr "Jūs nepasirinkote kanalo, kad įrašyti."
 
 #, python-format
 msgid "You have to wait %(min)d minutes, %(sec)d seconds!"
-msgstr ""
+msgstr "Jūs turite palaukti %(min)d minučių, %(sec)d sekundžių!"
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
@@ -11146,8 +11068,8 @@ msgstr "pramogos (10-16 metų vaikams)"
 msgid "entertainment (6-14 year old)"
 msgstr "pramogos (6-14 metų vaikams)"
 
-msgid "epg cache backup"
-msgstr "epg talpyklos atsarginė kopija"
+msgid "backup EPG cache"
+msgstr "EPG talpyklos atsarginė kopija"
 
 msgid "equestrian"
 msgstr "jojimas"
@@ -11419,9 +11341,8 @@ msgstr "gamta/gyvūnai/aplinka"
 msgid "never"
 msgstr "niekada"
 
-#, fuzzy
 msgid "new line"
-msgstr "Dvi linijos"
+msgstr "nauja eilutė"
 
 msgid "new media"
 msgstr "nauja media laikmena"
@@ -11483,9 +11404,8 @@ msgstr "neteisinga sąsaja"
 msgid "not_tested"
 msgstr "netikrinta"
 
-#, fuzzy
 msgid "nothing"
-msgstr "Nieko nedaryti"
+msgstr "nieko"
 
 msgid "nothing connected"
 msgstr "nieko nepajungta"
@@ -11506,7 +11426,7 @@ msgid "offset is"
 msgstr "poslinkis yra"
 
 msgid "omit"
-msgstr ""
+msgstr "Praleisti"
 
 msgid "on"
 msgstr "įjungta"
@@ -11717,7 +11637,7 @@ msgid "social/spiritual science"
 msgstr "socialinis/dvasinis mokslas"
 
 msgid "space"
-msgstr ""
+msgstr "tarpas"
 
 msgid "special events"
 msgstr "specialieji įvykiai"
