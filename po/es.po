@@ -17740,11 +17740,14 @@ msgstr "Cancelar cualquier cambio regional/idioma activo y salir de todos los me
 msgid "Apply any changes to the active locale/language and exit"
 msgstr "Aplicar cualquier cambio en la configuración regional/idioma activa y salir"
 
+msgid "Locale/Language"
+msgstr "Ajustes Regional/Idioma"
+
 msgid "Locale/Language Selection"
-msgstr "Selección de idioma/configuración regional"
+msgstr "Selección de Ajustes Regional/Idioma"
 
 msgid "Locale/Language Selection Actions"
-msgstr "Seleccionar Acción para Región/Lenguaje"
+msgstr "Seleccionar Acción para Ajustes Regional/Idioma"
 
 msgid "Add/Delete the currently highlighted locale/language"
 msgstr "Agregar/eliminar la configuración regional/idioma resaltados actualmente"
