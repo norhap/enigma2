@@ -7689,8 +7689,8 @@ msgstr "Ver Rass interactivo…"
 msgid "View details"
 msgstr "Ver detalles"
 
-msgid "View list of available "
-msgstr "Ver lista de disponibles "
+msgid "View list of available %s extensions."
+msgstr "Ver lista de extensiones %s disponibles."
 
 msgid "View list of available CommonInterface extensions"
 msgstr "Ver lista de extensiones de interfaz común disponibles"
