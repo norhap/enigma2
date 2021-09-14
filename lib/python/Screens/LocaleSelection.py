@@ -375,8 +375,6 @@ class LocaleSelection(Screen, HelpableScreen):
 		config.misc.country.save()
 		international.activateLanguage(self.currentLocale, runCallbacks=True)
 		international.activateLocale(self.currentLocale, runCallbacks=True)
-		config.misc.languageselected.value = False
-		config.misc.languageselected.save()
 		self.close()
 
 	def keyCancel(self, closeParameters=()):
