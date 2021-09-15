@@ -7251,8 +7251,8 @@ msgid "Top and bottom"
 msgstr "Arriba y abajo"
 
 #, python-format
-msgid "Total clients streaming: %d (%s)"
-msgstr "Total de clientes transmitiendo: %d (%s)"
+msgid "Total clients streaming: "
+msgstr "Total de clientes en streaming: "
 
 msgid "Track"
 msgstr "Pista"
