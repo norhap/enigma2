@@ -129,22 +129,6 @@ msgid " updates available."
 msgstr " actualizaciones disponibles."
 
 #, python-format
-msgid "%.0f GB"
-msgstr "%.0f GB"
-
-#, python-format
-msgid "%.0f MB"
-msgstr "%.0f MB"
-
-#, python-format
-msgid "%.0f kB"
-msgstr "%.0f kB"
-
-#, python-format
-msgid "%.2f GB"
-msgstr "%.2f GB"
-
-#, python-format
 msgid "%02d:%02d"
 msgstr "%02d:%02d"
 
