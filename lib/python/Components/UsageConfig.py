@@ -1171,6 +1171,11 @@ def InitUsageConfig():
 		eEPGCache.getInstance().setEpgHistorySeconds(config.epg.histminutes.getValue() * 60)
 	config.epg.histminutes.addNotifier(EpgHistorySecondsChanged)
 
+	choicelist = [("newline", _("new line")), ("2newlines", _("2 new lines")), ("space", _("space")), ("dot", " . "), ("dash", " - "), ("asterisk", " * "), ("nothing", _("nothing"))]
+	config.epg.fulldescription_separator = ConfigSelection(default="2newlines", choices=choicelist)
+	choicelist = [("no", _("no")), ("nothing", _("omit")), ("space", _("space")), ("dot", ". "), ("dash", " - "), ("asterisk", " * "), ("hashtag", " # ")]
+	config.epg.replace_newlines = ConfigSelection(default="no", choices=choicelist)
+
 	config.epg.cacheloadsched = ConfigYesNo(default=False)
 	config.epg.cachesavesched = ConfigYesNo(default=False)
 
@@ -1689,7 +1694,7 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_hearingimpaired = ConfigYesNo(default=False)
 	config.autolanguage.subtitle_defaultimpaired = ConfigYesNo(default=False)
 	config.autolanguage.subtitle_defaultdvb = ConfigYesNo(default=False)
-	config.autolanguage.subtitle_usecache = ConfigYesNo(default=True)	
+	config.autolanguage.subtitle_usecache = ConfigYesNo(default=True)
 
 	config.oscaminfo = ConfigSubsection()
 	if SystemInfo["OScamIsActive"]:
@@ -1899,7 +1904,6 @@ def preferredTunerChoicesUpdate(update=False):
 	SystemInfo["DVB-C_priority_tuner_available"] = len(dvbc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbt_nims, atsc_nims))
 	SystemInfo["ATSC_priority_tuner_available"] = len(atsc_nims) > 3 and any(len(i) > 2 for i in (dvbs_nims, dvbc_nims, dvbt_nims))
 
-
 def patchTuxtxtConfFile(dummyConfigElement):
 	print("[UsageConfig] patching tuxtxt2.conf")
 	if config.usage.tuxtxt_font_and_res.value == "X11_SD":
@@ -1990,3 +1994,11 @@ def patchTuxtxtConfFile(dummyConfigElement):
 	print("[UsageConfig] patched tuxtxt2.conf")
 
 	config.usage.tuxtxt_ConfFileHasBeenPatched.setValue(True)
+
+def dropEPGNewLines(text):
+	if config.epg.replace_newlines.value != "no":
+		text = text.replace('\x0a', replaceEPGSeparator(config.epg.replace_newlines.value))
+	return text
+
+def replaceEPGSeparator(code):
+	return {"newline": "\n", "2newlines": "\n\n", "space": " ", "dash": " - ", "dot": " . ", "asterisk": " * ", "hashtag": " # ", "nothing": ""}.get(code)

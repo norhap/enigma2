@@ -47,6 +47,8 @@
 		<item level="2" text="Include AIT in http streams" description="When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV.">config.streaming.stream_ait</item>
 		<item level="2" text="Country for EPG event rating information" description="Choose a country scheme for decoding rating information in EPG events.">config.misc.epgratingcountry</item>
 		<item level="2" text="Country for EPG event genre information" description="Choose a country scheme for decoding genre information in EPG events.">config.misc.epggenrecountry</item>
+		<item level="2" text="Full description separator" description="Configure separator type used in full description for separate short and extended descriptions.">config.epg.fulldescription_separator</item>
+		<item level="2" text="Replace newlines in EPG" description="Select char for replacing newlines in EPG.">config.epg.replace_newlines</item>
 	</setup>
 	<setup key="fanspeed" title="Fan Speed Setup" requires="FanPWM">
 		<item level="0" text="Normal speed" description="The speed of the fan when your %s %s is in normal use.">config.fans[0].pwm</item>

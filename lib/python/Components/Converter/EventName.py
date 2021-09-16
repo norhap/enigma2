@@ -1,9 +1,12 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 from enigma import eEPGCache
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.genre import getGenreStringSub
 from Components.config import config
+from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from time import localtime, mktime, strftime
 
@@ -240,11 +243,17 @@ class EventName(Converter):
 		elif self.type == self.NAME_NOW:
 			return pgettext("now/next: 'now' event label", "Now") + ": " + self.trimText(event.getEventName())
 		elif self.type == self.SHORT_DESCRIPTION:
-			return self.trimText(event.getShortDescription())
+			return dropEPGNewLines(event.getShortDescription())
 		elif self.type == self.EXTENDED_DESCRIPTION:
-			return self.trimText(event.getExtendedDescription() or event.getShortDescription())
+			return dropEPGNewLines(event.getExtendedDescription()) or dropEPGNewLines(event.getShortDescription())
 		elif self.type == self.FULL_DESCRIPTION:
-			return self.formatDescription(event.getShortDescription(), event.getExtendedDescription())
+			description = dropEPGNewLines(event.getShortDescription())
+			extended = dropEPGNewLines(event.getExtendedDescription().rstrip())
+			if description and extended:
+				if description.replace('\n', '') == extended.replace('\n', ''):
+					return extended
+				description += replaceEPGSeparator(config.epg.fulldescription_separator.value)
+			return description + extended
 		elif self.type == self.ID:
 			return self.trimText(event.getEventId())
 		elif self.type == self.PDC:

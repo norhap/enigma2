@@ -17795,3 +17795,30 @@ msgstr ""
 
 msgid "DVD titlelis"
 msgstr "Título del DVD"
+
+msgid "Full description separator"
+msgstr "Separador de descripción completa"
+
+msgid "Configure separator type used in full description for separate short and extended descriptions."
+msgstr "Configure el tipo de separador utilizado en la descripción completa para descripciones breves y extendidas separadas."
+
+msgid "Replace newlines in EPG"
+msgstr "Reemplazar nuevas líneas en EPG"
+
+msgid "Select char for replacing newlines in EPG."
+msgstr "Seleccione el carácter para reemplazar nuevas líneas en EPG."
+
+msgid "new line"
+msgstr "nueva línea"
+
+msgid "2 new lines"
+msgstr "2 nuevas líneas"
+
+msgid "space"
+msgstr "espacio"
+
+msgid "nothing"
+msgstr "nada"
+
+msgid "omit"
+msgstr "omitir"
