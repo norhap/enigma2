@@ -9981,8 +9981,8 @@ msgstr "Sintonizador preferido DVB-T para grabaciones"
 msgid "Preferred tuner for recordings"
 msgstr "Sintonizador preferido para grabaciones"
 
-msgid "RF Output Setup"
-msgstr "Ajustes Salida RF"
+msgid "RF Modulator Output Setup"
+msgstr "Ajustes de Salida Modulador RF"
 
 msgid "Recordings always have priority"
 msgstr "Las grabaciones siempre tienen prioridad"

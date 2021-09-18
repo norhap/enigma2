@@ -555,13 +555,13 @@ def InitUsageConfig():
 
 	config.usage.show_timer_conflict_warning = ConfigYesNo(default=True)
 
+	preferredTunerChoicesUpdate()
+
 	config.usage.menutype = ConfigSelection(default="standard", choices=[
 		("horzanim", _("Horizontal menu")),
 		("horzicon", _("Horizontal icons")),
 		("standard", _("Standard menu"))
 	])
-
-	preferredTunerChoicesUpdate()
 
 	config.misc.disable_background_scan = ConfigYesNo(default=False)
 	config.misc.use_ci_assignment = ConfigYesNo(default=False)
