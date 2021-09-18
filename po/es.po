@@ -188,12 +188,12 @@ msgid "%d B"
 msgstr "%d B"
 
 #, python-format
-msgid "%d GB"
-msgstr "%d GB"
+msgid "GB"
+msgstr "GB"
 
 #, python-format
-msgid "%d MB"
-msgstr "%d MB"
+msgid "MB"
+msgstr "MB"
 
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
 #, python-format
@@ -231,8 +231,8 @@ msgstr[0] "%d tarea está corriendo en segundo plano!"
 msgstr[1] "%d tareas están corriendo en segundo plano!"
 
 #, python-format
-msgid "%d kB"
-msgstr "%d kB"
+msgid "kB"
+msgstr "kB"
 
 #, python-format
 msgid "%d kB/s"
@@ -493,34 +493,14 @@ msgid "A"
 msgstr "A"
 
 #, python-format
-msgid ""
-"A configuration file (%s) has been modified since it was installed.\n"
-"Do you want to keep your modifications?"
-msgstr ""
-"Un fichero de configuración (%s) ha sido modificado desde que se instaló.\n"
-"Quieres mantener las modificaciones?"
+msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
+msgstr "Se ha modificado un archivo de configuración (%s) desde que se instaló. ¿Le gustaría conservar la versión modificada?"
 
-#, python-format
-msgid ""
-"A configuration file (%s) was modified since Installation.\n"
-"Do you want to keep your version?"
-msgstr ""
-"Un fichero de configuración (%s) fue modificado desde la instalación.\n"
-"Quieres mantener su versión?"
+msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
+msgstr "Un temporizador de grabación completado está a punto de poner su receptor en modo de espera. ¿Le gustaría continuar?"
 
-msgid ""
-"A finished record timer wants to set your\n"
-"receiver to standby. Do that now?"
-msgstr ""
-"Un temporizador acabado quiere poner tu\n"
-"receptor en reposo. Hacerlo ahora?"
-
-msgid ""
-"A finished record timer wants to shut down\n"
-"your receiver. Shutdown now?"
-msgstr ""
-"Un temporizador acabado quiere apagar\n"
-"Tu receptor. Apagar ahora?"
+msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
+msgstr "Un temporizador de grabación completado está a punto de apagar su receptor. ¿Le gustaría continuar?"
 
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Un EPG gráfico para todos los servicios de un bouquet específico"
@@ -543,11 +523,11 @@ msgstr ""
 "Grabación en curso.\n"
 "Qué quieres hacer?"
 
-msgid "A recording is currently running. Please stop the recording before trying to scan."
-msgstr "Grabación en curso. Por favor, para la grabación antes de tratar de escanear."
+msgid "A recording is currently running. Please stop the recording before starting a service scan."
+msgstr "Actualmente se está ejecutando una grabación. Detenga la grabación antes de iniciar una búsqueda de canal."
 
-msgid "A recording is currently running. Please stop the recording before trying to start a testing DiSEqC."
-msgstr "Grabación en curso. Por favor, para la grabación antes de empezar a testear DiSEqC."
+msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
+msgstr "Actualmente se está ejecutando una grabación. Detenga la grabación antes de iniciar una prueba DiSEqC."
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -565,19 +545,11 @@ msgstr ""
 "\n"
 "Quieres desactivar el segundo interfaz de red?"
 
-msgid ""
-"A sleep timer wants to set your\n"
-"receiver to standby. Do that now?"
-msgstr ""
-"Un temporizador de apagado quiere poner \n"
-"tu receptor en reposo. Hacerlo ahora?"
+msgid "A sleep timer is about to put your receiver in standby mode. Would you like to proceed?"
+msgstr "Un temporizador está a punto de poner su receptor en modo de espera. ¿Le gustaría continuar?"
 
-msgid ""
-"A sleep timer wants to shut down\n"
-"your receiver. Shutdown now?"
-msgstr ""
-"Un temporizador de apagado quiere apagar \n"
-"tu receptor. Hacerlo ahora?"
+msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
+msgstr "Un temporizador de apagado está a punto de apagar su receptor. ¿Le gustaría continuar?"
 
 msgid "A small overview of the available icon states and actions."
 msgstr "Una pequeña descripción de los iconos de estado y acciones disponibles."
@@ -1002,8 +974,8 @@ msgstr "Modo de autoría"
 msgid "Auto"
 msgstr "Auto"
 
-msgid "Auto Diseqc"
-msgstr "Auto Diseqc"
+msgid "Auto DiSEqC"
+msgstr "DiSEqC Automático"
 
 msgid "Auto EXIF Orientation rotation/flipping"
 msgstr "Rotación / giro automático de orientación EXIF"
@@ -7296,8 +7268,8 @@ msgstr "Buscando transpondedores activos en la red de cable. Espere por favor...
 msgid "Looking for active transponders in the terrestrial network. Please wait..."
 msgstr "Buscando transpondedores activos en la red terrestre. Espere por favor..."
 
-msgid "Trying to download a new packetlist. Please wait..."
-msgstr "Intentando descargar una nueva lista de paquetes. Por favor espera…"
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Descargando una nueva lista de paquetes. Espere por favor..."
 
 msgid "Tue"
 msgstr "Mar"
@@ -7573,8 +7545,8 @@ msgstr "¿Usar esta configuración de mejora de video??"
 msgid "Used service scan type"
 msgstr "Tipo de exploración de canal usado"
 
-msgid "User - bouquets"
-msgstr "Usuario - Favoritos"
+msgid "User bouquets"
+msgstr "Bouquets Usuario"
 
 msgid "User defined"
 msgstr "Definido por el usuario"
@@ -8055,8 +8027,8 @@ msgstr ""
 "Esto puede tardar unos pocos minutos"
 
 #, python-format
-msgid "Your internet connection is working (ip: %s)"
-msgstr "Su conexión a internet está funcionando (ip: %s)"
+msgid "Your internet connection is working (IP address: %s)"
+msgstr "Su conexión a internet está funcionando (Dirección IP: %s)"
 
 msgid "Your network configuration has been activated."
 msgstr "Su configuración de red ha sido activada."
@@ -9357,7 +9329,7 @@ msgstr "Activar ajustes de red"
 msgid "Activate the configured network settings."
 msgstr "Activar ajustes de red configurados."
 
-msgid "Allow quit movieplayer with exit"
+msgid "Allow quitting movie player with exit"
 msgstr "Permitir salir del reproductor con exit"
 
 msgid "Allow subtitle language to equal audio language"
@@ -10362,7 +10334,7 @@ msgstr "Cuando está habilitado, los subtítulos DVB gráficos se mostrarán en 
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
 msgstr "Cuando está habilitado, los stremas http se descodifican en el lado del servidor. El receptor del cliente (reserva) no tiene que descifrar. Predeterminado activado."
 
-msgid "When enabled, it is possible to leave the movieplayer with exit."
+msgid "When enabled, it is possible to leave the movie player with exit."
 msgstr "Cuando está habilitado, es posible abandonar el reproductor de películas con exit."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
@@ -10449,8 +10421,8 @@ msgstr "Subtítulos DVB amarillos"
 msgid "Zap mode"
 msgstr "Modo Zap"
 
-msgid "configure in which resolution pictures are displayed with the picture viewer and movieplayer"
-msgstr "configurar en qué resolución se muestran las imágenes con el visor de imágenes y el reproductor de películas"
+msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
+msgstr "Seleccione en qué resolución se muestran las imágenes con el visor de imágenes o el reproductor de películas."
 
 msgid "Audio"
 msgstr "Audio"
@@ -13125,14 +13097,8 @@ msgstr "Fallo al leer /etc/fstab! Restaure fstab.backup o edite el archivo manua
 msgid "File system type:"
 msgstr "Tipo de sistema de archivos:"
 
-msgid "GB"
-msgstr "GB"
-
 msgid "HARD DISK: "
 msgstr "DISCO DURO: "
-
-msgid "MB"
-msgstr "MB"
 
 msgid "MMC: "
 msgstr "MMC: "
