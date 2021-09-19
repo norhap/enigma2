@@ -13885,8 +13885,8 @@ msgstr "Instalación automática, espere actualizando los paquetes"
 msgid "Full view resolution"
 msgstr "Resolución vista completa"
 
-msgid "Please configure the fallback tuner setup?"
-msgstr "Configurar del sintonizador de respaldo?"
+msgid "Please configure the fallback tuner setup"
+msgstr "Por favor configure el sintonizador de respaldo"
 
 msgid "Unicable delay after change voltage before switch command"
 msgstr "Retraso unicable después del cambio de voltaje antes del comando de cambio"
@@ -16274,6 +16274,9 @@ msgstr "Ajustes Registros"
 
 msgid "Subtitle Setup"
 msgstr "Configuración Subtítulos"
+
+msgid "Audio/Video Setup"
+msgstr "Ajustes Audio Video"
 
 msgid "A/V settings"
 msgstr "Ajustes A/V"
