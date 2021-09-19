@@ -48,29 +48,21 @@
 	</map>
 
 	<map context="ColorActions">
-		<key id="KEY_RED" mapto="red" flags="m" />
 		<key id="KEY_RED" mapto="red" flags="b" />
-		<key id="KEY_RED" mapto="RED" flags="b" />
-		<key id="KEY_RED" mapto="redLong" flags="l" />
-		<key id="KEY_GREEN" mapto="green" flags="m" />
+		<key id="KEY_RED" mapto="redlong" flags="l" />
 		<key id="KEY_GREEN" mapto="green" flags="b" />
-		<key id="KEY_GREEN" mapto="GREEN" flags="b" />
-		<key id="KEY_GREEN" mapto="greenLong" flags="m" />
-		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
-		<key id="KEY_YELLOW" mapto="YELLOW" flags="b" />
-		<key id="KEY_YELLOW" mapto="yellowLong" flags="m" />
-		<key id="KEY_BLUE" mapto="blue" flags="m" />
-		<key id="KEY_BLUE" mapto="BLUE" flags="m" />
-		<key id="KEY_BLUE" mapto="blueLong" flags="m" />
+		<key id="KEY_GREEN" mapto="greenLong" flags="l" />
+		<key id="KEY_YELLOW" mapto="yellow" flags="b" />
+		<key id="KEY_YELLOW" mapto="yellowLong" flags="l" />
+		<key id="KEY_BLUE" mapto="blue" flags="b" />
+		<key id="KEY_BLUE" mapto="BLUE" flags="b" />
+		<key id="KEY_BLUE" mapto="blueLong" flags="l" />
 		<!-- Keyboard specific buttons -->
-		<key id="KEY_F5" mapto="red" flags="m" />
-		<key id="KEY_F5" mapto="RED" flags="b" />
+		<key id="KEY_F5" mapto="red" flags="b" />
 		<key id="KEY_F5" mapto="redLong" flags="l" />
-		<key id="KEY_F6" mapto="green" flags="m" />
-		<key id="KEY_F6" mapto="GREEN" flags="b" />
+		<key id="KEY_F6" mapto="green" flags="b" />
 		<key id="KEY_F6" mapto="greenLong" flags="l" />
-		<key id="KEY_F7" mapto="yellow" flags="m" />
-		<key id="KEY_F7" mapto="YELLOW" flags="b" />
+		<key id="KEY_F7" mapto="yellow" flags="b" />
 		<key id="KEY_F7" mapto="yellowLong" flags="l" />
 		<key id="KEY_F8" mapto="blue" flags="m" />
 		<key id="KEY_F8" mapto="BLUE" flags="b" />
