@@ -207,8 +207,8 @@ class InformationImage(Screen, HelpableScreen):
 			"close": (self.closeRecursive, _("Close the screen and exit all menus")),
 			"ok": (self.nextImage, _("Show next image")),
 			"red": (self.keyCancel, _("Close the screen")),
-			"green": (self.prevImage, _("Show previous image")),
-			"yellow": (self.nextImage, _("Show next image"))
+			"GREEN": (self.prevImage, _("Show previous image")),
+			"YELLOW": (self.nextImage, _("Show next image"))
 		}, prio=0, description=_("Receiver Image Actions"))
 		self.images = (
 			(_("Front"), "%s%s.png", (boxes, model)),
