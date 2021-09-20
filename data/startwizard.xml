@@ -258,7 +258,7 @@ self.selectKey("OK")
 		</step>
 		<step id="setup">
 			<text value="Please setup the following basic configs!"/>
-			<config screen="Setup" module="Setup" args="Wizard" type="ConfigList"/>
+			<config screen="Setup" module="Setup" args="SetupLevel" type="ConfigList"/>
 			<code>
 self.clearSelectedKeys()
 self.selectKey("OK")
