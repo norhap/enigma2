@@ -116,8 +116,7 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 
 	int fd = open(file, O_RDONLY);
 	if (fd == -1) return NULL;
-	if (lseek(fd, BMP_SIZE_OFFSET, SEEK_SET) == -1)
-	{
+	if (lseek(fd, BMP_SIZE_OFFSET, SEEK_SET) == -1) {
 		close(fd);
 		return NULL;
 	}
@@ -167,8 +166,7 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 			fetch_pallete(fd, pallete, 16);
 			lseek(fd, raster, SEEK_SET);
 			unsigned char * tbuffer = new unsigned char[*x / 2 + 1];
-			if (tbuffer == NULL)
-			{
+			if (tbuffer == NULL) {
 				close(fd);
 				return NULL;
 			}
@@ -215,8 +213,7 @@ static unsigned char *bmp_load(const char *file,  int *x, int *y)
 			fetch_pallete(fd, pallete, 256);
 			lseek(fd, raster, SEEK_SET);
 			unsigned char * tbuffer = new unsigned char[*x];
-			if (tbuffer == NULL)
-			{
+			if (tbuffer == NULL) {
 				close(fd);
 				return NULL;
 			}
@@ -1466,7 +1463,7 @@ int ePicLoad::getFileType(const char * file)
 SWIG_VOID(int) loadPic(ePtr<gPixmap> &result, std::string filename, int x, int y, int aspect, int resize_mode, int rotate, int background, std::string cachefile)
 {
 	long asp1, asp2;
-	eDebug("[loadPic] deprecated loadPic function used!!! please use the non blocking version! you can see demo code in Pictureplayer plugin... this function is removed in the near future!");
+	eDebug("[ePicLoad] deprecated loadPic function used! please use the non blocking version! you can see demo code in Pictureplayer plugin... this function is removed in the near future!");
 
 	switch(aspect)
 	{
