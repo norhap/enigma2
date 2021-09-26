@@ -99,7 +99,7 @@
 		<widget source="session.Event_Now" render="Progress" position="0,33" size="256,6" borderWidth="1">
 			 <convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="/usr/share/enigma2/Vision-Turquoise-HD/skin_default/display-oled/hd.png" position="102,18" size="22,15">
+		<widget source="session.CurrentService" render="FixedLabel" text="HD" position="115,18" font="FdLcD;12" size="22,15">
 			 <convert type="ServiceInfo">IsHD</convert>
 			 <convert type="ConditionalShowHide"/>
 		</widget>
@@ -109,7 +109,7 @@
 		<widget source="session.Event_Now" render="RollerCharLCDLong" position="0,39" size="255,35" font="FdLcD;22" noWrap="1">
 			 <convert type="EventName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="0,5" size="65,26" font="FdLcD;28" noWrap="1">
+		<widget source="session.Event_Now" render="Label" position="0,5" size="65,26" font="FdLcD;25" noWrap="1">
 			 <convert type="EventTime">Remaining</convert>
 			 <convert type="RemainingToText">NoSeconds</convert>
 		</widget>
