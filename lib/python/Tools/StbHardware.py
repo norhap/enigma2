@@ -8,7 +8,7 @@ from boxbranding import getMachineName, getBoxType, getRCName
 
 
 def getBrand():
-	BrandName = None
+	BrandName = ""
 	BrandStarSwith = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s" % (getRCName())))
 	try:
 		if "edision" in BrandStarSwith:
