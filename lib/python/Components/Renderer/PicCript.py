@@ -4,7 +4,7 @@ from enigma import ePixmap, iServiceInformation
 
 from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, fileReadLines, fileHas
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileHas
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -73,7 +73,7 @@ class PicCript(Renderer):
 				if (pngName == ""):
 					pngName = self.findPicon("picon_default")
 					if (pngName == ""):
-						tmp = resolveFilename(SCOPE_CURRENT_SKIN, "picon_default.png")
+						tmp = resolveFilename(SCOPE_GUISKIN, "picon_default.png")
 						if isfile(tmp):
 							pngName = tmp
 						self.nameCache["default"] = pngName

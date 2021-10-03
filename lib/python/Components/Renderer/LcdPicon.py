@@ -1,7 +1,7 @@
 import os
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, ePicLoad
-from Tools.Directories import pathExists, SCOPE_CURRENT_SKIN, resolveFilename
+from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename
 from boxbranding import getDisplayType
 from Components.config import config
 from Components.Renderer.Picon import PiconLocator
@@ -35,7 +35,7 @@ class LcdPicon(Renderer):
 		serviceName = "lcd_picon_default" if useLcdPicons() else "picon_default"
 		pngname = lcdPiconLocator.findPicon(serviceName)
 		if not pngname:
-			pngname = resolveFilename(SCOPE_CURRENT_SKIN, serviceName + ".png")
+			pngname = resolveFilename(SCOPE_GUISKIN, serviceName + ".png")
 		self.defaultpngname = pngname if os.path.getsize(pngname) else None
 		self.changed((self.CHANGED_DEFAULT,))
 

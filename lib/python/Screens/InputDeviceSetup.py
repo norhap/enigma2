@@ -10,7 +10,7 @@ from Components.Sources.List import List
 from Components.config import config, ConfigYesNo, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
 from boxbranding import getRCType
 
@@ -81,28 +81,28 @@ class InputDeviceSelection(Screen, HelpableScreen):
 		self.currentIndex = 0
 
 	def buildInterfaceList(self, device, description, type, isinputdevice=True):
-		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "div-h.png"))
+		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "div-h.png"))
 		activepng = None
 		devicepng = None
 		enabled = iInputDevices.getDeviceAttribute(device, 'enabled')
 
 		if type == 'remote':
 			if enabled:
-				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew-configured.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_rcnew-configured.png"))
 			else:
-				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_rcnew.png"))
 		elif type == 'keyboard':
 			if enabled:
-				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_keyboard-configured.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_keyboard-configured.png"))
 			else:
-				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_keyboard.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_keyboard.png"))
 		elif type == 'mouse':
 			if enabled:
-				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_mouse-configured.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_mouse-configured.png"))
 			else:
-				devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_mouse.png"))
+				devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_mouse.png"))
 		elif isinputdevice:
-			devicepng = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/input_rcnew.png"))
+			devicepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/input_rcnew.png"))
 		return ((device, description, devicepng, divpng))
 
 	def updateList(self):

@@ -4,7 +4,7 @@ from Components.Renderer.Renderer import Renderer
 from enigma import iServiceInformation
 from string import upper
 from enigma import ePixmap
-from Tools.Directories import fileExists, fileHas, SCOPE_CURRENT_SKIN, resolveFilename
+from Tools.Directories import fileExists, fileHas, SCOPE_GUISKIN, resolveFilename
 from Components.Element import cached
 import os
 
@@ -169,7 +169,7 @@ class PicEmu2(Renderer):
 				if (pngname == ''):
 					pngname = self.findPicon('fta')
 					if (pngname == ''):
-						tmp = resolveFilename(SCOPE_CURRENT_SKIN, 'picon_default.png')
+						tmp = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')
 						if fileExists(tmp):
 							pngname = tmp
 						self.nameCache['default'] = pngname

@@ -1,5 +1,5 @@
 import xml.sax
-from Tools.Directories import crawlDirectory, resolveFilename, SCOPE_CONFIG, SCOPE_SKIN, copyfile, copytree
+from Tools.Directories import crawlDirectory, resolveFilename, SCOPE_CONFIG, SCOPE_SKINS, copyfile, copytree
 from Components.Console import Console
 from Components.NimManager import nimmanager
 from Components.Opkg import OpkgComponent
@@ -385,10 +385,10 @@ class PackageInfoHandler:
 
 	def installSkin(self, directory, name):
 		if self.blocking:
-			copytree(directory, resolveFilename(SCOPE_SKIN))
+			copytree(directory, resolveFilename(SCOPE_SKINS))
 			self.installNext()
 		else:
-			if self.console.execute("cp -a %s %s" % (directory, resolveFilename(SCOPE_SKIN))):
+			if self.console.execute("cp -a %s %s" % (directory, resolveFilename(SCOPE_SKINS))):
 				self.installNext()
 
 	def mergeServices(self, directory, name, merge=False):

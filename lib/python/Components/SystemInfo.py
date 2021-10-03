@@ -7,7 +7,7 @@ from re import findall
 from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType, getBoxType
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
 
-from Tools.Directories import SCOPE_SKIN, fileCheck, fileExists, fileHas, pathExists, resolveFilename
+from Tools.Directories import SCOPE_SKINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 from Tools.StbHardware import getBrand
 
 SystemInfo = {}
@@ -23,9 +23,9 @@ cmdline = {k: v.strip('"') for k, v in findall(r'(\S+)=(".*?"|\S+)', cmdline)}
 
 
 def getRCFile(ext):
-	filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s.%s" % (getRCName(), ext)))
+	filename = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s.%s" % (getRCName(), ext)))
 	if not isfile(filename):
-		filename = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "dmm1.%s" % ext))
+		filename = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "dmm1.%s" % ext))
 	return filename
 
 

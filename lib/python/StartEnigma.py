@@ -14,7 +14,7 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from Components.Console import Console
 from enigma import getBoxType, getBoxBrand, getE2Rev
-from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
+from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
 from Components.International import international
 from boxbranding import getImageArch
@@ -83,8 +83,8 @@ from Navigation import Navigation
 profile("LOAD:skin")
 from skin import readSkin
 
-config.misc.blackradiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "black.mvi"))
-config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_CURRENT_SKIN, "radio.mvi"))
+config.misc.blackradiopic = ConfigText(default=resolveFilename(SCOPE_GUISKIN, "black.mvi"))
+config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_GUISKIN, "radio.mvi"))
 
 profile("CreateDefaultPaths")
 InitDefaultPaths()
