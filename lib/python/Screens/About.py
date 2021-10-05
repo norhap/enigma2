@@ -357,16 +357,15 @@ class About(Screen):
 		if fp_version is None:
 			fp_version = ""
 		else:
-			fp_version = _("Frontprocessor version: %s") % fp_version
-			AboutText += fp_version + "\n"
+			fp_version = _("Frontprocessor version: %s\n") % fp_version
+			AboutText += fp_version
+			self["FPVersion"] = StaticText(fp_version)
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model not in ("gbip4k"):
-			AboutText += _("Type Display: ") + getDisplayType()
+			AboutText += _("Type Display: ") + getDisplayType() + "\n"
 		else:
-			AboutText += _("No Display")
-
-		self["FPVersion"] = StaticText(fp_version)
+			AboutText += _("No Display") + "\n"
 		if config.hdmicec.enabled.value:
-			AboutText += "\n\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value + "\n"
+			AboutText += "\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value + "\n"
 
 		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 		AboutText += "\n"
