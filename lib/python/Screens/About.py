@@ -322,7 +322,7 @@ class About(Screen):
 		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
 		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Last update: ") + about.getUpdateDateString() + "\n"
+		AboutText += _("Last update: ") + about.getUpdateDateString()
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
@@ -357,17 +357,20 @@ class About(Screen):
 		if fp_version is None:
 			fp_version = ""
 		else:
-			fp_version = _("Frontprocessor version: %s\n") % fp_version
+			fp_version = _("Frontprocessor version: %s") % fp_version
 			AboutText += fp_version
 			self["FPVersion"] = StaticText(fp_version)
+
+		if config.hdmicec.enabled.value:
+			AboutText += "\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value
+
+		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
+
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model not in ("gbip4k"):
 			AboutText += _("Type Display: ") + getDisplayType() + "\n"
 		else:
 			AboutText += _("No Display") + "\n"
-		if config.hdmicec.enabled.value:
-			AboutText += "\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value + "\n"
 
-		AboutText += _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 		AboutText += "\n"
 		for x in about.GetIPsFromNetworkInterfaces():
 		    AboutText += _("Uptime: ") + about.getBoxUptime()
