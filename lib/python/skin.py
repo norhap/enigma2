@@ -3,7 +3,7 @@ from os.path import basename, dirname, isfile
 from six import PY2
 from xml.etree.cElementTree import Element, ElementTree, fromstring
 
-from enigma import addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, getFontFaces, gMainDC, gRGB, BT_ALPHATEST, BT_ALPHABLEND
+from enigma import BT_ALPHATEST, BT_ALPHABLEND, addFont, eLabel, ePixmap, ePoint, eRect, eSize, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, getFontFaces, gMainDC, gRGB
 
 from Components.config import ConfigSubsection, ConfigText, config
 from Components.RcModel import rc_model
@@ -401,7 +401,7 @@ def loadPixmap(path, desktop, width=0, height=0):  # Shouldn't this be size?
 	if option != -1:
 		path = path[:option]
 	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png"):
-		path = rc_model.getRcImg()
+		path = SystemInfo["RCImage"]
 	pixmap = LoadPixmap(path, desktop, None, width, height)
 	if pixmap is None:
 		raise SkinError("Pixmap file '%s' not found" % path)
@@ -652,7 +652,7 @@ class AttributeParser:
 	def pixmap(self, value):
 		# Why is this being forced?  Why not just use add the 'alphaTest' attribute?
 		# if value.endswith(".svg"):  # If the image is a SVG force alphatest to "blend".
-		# 	self.guiObject.setAlphatest(2)
+		# 	self.guiObject.setAlphatest(BT_ALPHABLEND)
 		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
 
 	def pointer(self, value):
