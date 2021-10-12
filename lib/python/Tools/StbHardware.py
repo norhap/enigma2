@@ -19,8 +19,10 @@ def getBrand():
 			BrandName = "octagon"
 		elif "ini" in BrandStarSwith:
 			BrandName = "INI"
+		elif "hd" in BrandStarSwith:
+			BrandName = "Mut@nt"
 		elif not BrandName:
-			print("[BrandName] Not Exists!! add this Brand a getBrand")
+			print("[BrandName] Not Exists!! add this Brand to getBrand")
 	except (IOError, OSError) as err:
 		print("[BrandName] exception with error in Brand Name")
 	return BrandName
