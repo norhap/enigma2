@@ -48,7 +48,7 @@ EXTRA_OECONF = "\
 	--enable-maintainer-mode --with-target=native --with-libsdl=no --with-boxtype=${MACHINE} \
 	--enable-dependency-tracking \
 	${@bb.utils.contains("MACHINE_FEATURES", "textlcd", "--with-textlcd" , "", d)} \
-	--with-boxbrand="${BOX_BRAND}" \
+	--with-brandname="${MACHINE_BRAND}" \
 	--with-stbplatform=${STB_PLATFORM} \
 	--with-e2rev=${SRCPV} \
 	--with-pyext=${PYTHONEXTENSION} \

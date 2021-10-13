@@ -56,11 +56,11 @@ AC_ARG_WITH(boxtype,
 AC_SUBST(BOXTYPE)
 AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
-AC_ARG_WITH(boxbrand,
-	[  --with-boxbrand=NAME box brand [[none,dreambox...]]],
-	[BOXBRAND="$withval"],[BOXBRAND="dreambox"])
-AC_SUBST(BOXBRAND)
-AC_DEFINE_UNQUOTED(BOXBRAND,"$BOXBRAND",[box brand])
+AC_ARG_WITH(brandname,
+	[  --with-brandname=NAME brand name [[none,dreambox...]]],
+	[MACHINE_BRAND="$withval"],[MACHINE_BRAND="dreambox"])
+AC_SUBST(MACHINE_BRAND)
+AC_DEFINE_UNQUOTED(MACHINE_BRAND,"$MACHINE_BRAND",[brand name])
 
 AC_ARG_WITH(stbplatform,
 	AS_HELP_STRING([--with-stbplatform],[build for STBPLATFORM, $withval]),
@@ -408,7 +408,7 @@ if test x"$with_fcc" = xyes ; then
 	AC_DEFINE(HAVE_FCC_ABILITY, 1,[use FCC specific codes for fast channel change])
 fi
 
-if test "$BOXBRAND" == "rpi"; then
+if test "$MACHINE_BRAND" == "rpi"; then
 	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
 	PKG_CHECK_MODULES(LIBNL, libnl-1 >= 1.0-pre8, has_libnl=yes, dummy=no)
 	PKG_CHECK_MODULES(LIBNL, libnl-3.0, has_libnl=yes, dummy=no)
@@ -427,7 +427,7 @@ if test "$BOXBRAND" == "rpi"; then
 fi
 
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
-AM_CONDITIONAL(RASPBERRYPI, test "$BOXBRAND" == "rpi")
+AM_CONDITIONAL(RASPBERRYPI, test "$MACHINE_BRAND" == "rpi")
 
 AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == "dm8000" -o "$BOXTYPE" == "dm800" -o "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2")
 AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm800sev2" -o "$BOXTYPE" == "dm820")
@@ -443,7 +443,7 @@ if test "$BOXTYPE" == "e4hdultra" -o "$BOXTYPE" == "protek4k"; then
 	AC_DEFINE(KEY_VIDEO_TO_KEY_BOOKMARKS, 1,[define when rc sends a KEY_VIDEO event for its KEY_BOOKMARKS])
 fi
 
-if test "$BOXBRAND" == "azbox"; then
+if test "$MACHINE_BRAND" == "azbox"; then
 	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(FORCE_NO_ACCELNEVER, 1,[define when the framebuffer acceleration auto not working correct])
@@ -486,12 +486,12 @@ if test "$BOXTYPE" == "sf8008" -o "$BOXTYPE" == "sf8008m" -o "$BOXTYPE" == "usty
 	AC_DEFINE(VMSG_TYPE2, 1,[define vtuner_message type 2])
 fi
 
-if test "$BOXBRAND" == "dags"; then
+if test "$MACHINE_BRAND" == "dags"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
 fi
 
-if test "$BOXBRAND" == "dreambox"; then
+if test "$MACHINE_BRAND" == "dreambox"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
@@ -520,7 +520,7 @@ if test "$BOXTYPE" == "e4hd" -o "$BOXTYPE" == "e4hdhybrid"; then
 	AC_DEFINE(KEY_DIRECTORY_TO_KEY_FILE, 1,[define when rc sends a KEY_DIRECTORY event for its KEY_FILE key])
 fi
 
-if test "$BOXBRAND" == "ebox"; then
+if test "$MACHINE_BRAND" == "ebox"; then
 	AC_DEFINE(KEY_SCREEN_TO_KEY_ANGLE, 1,[define when rc sends a KEY_SCREEN event for its KEY_ANGLE key])
 	AC_DEFINE(KEY_TIME_TO_KEY_SLEEP, 1,[define when rc sends a KEY_TIME event for its KEY_SLEEP])
 	AC_DEFINE(KEY_MODE_TO_KEY_AUDIO, 1,[define when rc sends a KEY_MODE event for its AV plus])
@@ -560,7 +560,7 @@ if test "$BOXTYPE" == "x2plus"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXBRAND" == "formuler" -o "$BOXTYPE" == "triplex" -o "$BOXTYPE" == "sf108" -o "$BOXTYPE" == "ultrabox"; then
+if test "$MACHINE_BRAND" == "formuler" -o "$BOXTYPE" == "triplex" -o "$BOXTYPE" == "sf108" -o "$BOXTYPE" == "ultrabox"; then
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 	AC_DEFINE(KEY_LAST_TO_KEY_BACK, 1,[define when rc sends a KEY_LAST event for its KEY_BACK key])
 	AC_DEFINE(KEY_BOOKMARKS_TO_KEY_MEDIA, 1,[define when rc Playlist sends a KEY_BOOKMARKS event for its KEY_MEDIA key])
@@ -590,7 +590,7 @@ if test "$BOXTYPE" == "gbue4k"; then
 	AC_DEFINE(HAVE_COLORLCD220, 1,[define when using a 220x176 color display device])
 fi
 
-if test "$BOXBRAND" == "gfutures" -o "$BOXBRAND" == "abcom"; then
+if test "$MACHINE_BRAND" == "gfutures" -o "$MACHINE_BRAND" == "abcom"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi
@@ -599,7 +599,7 @@ if test "$BOXTYPE" == "hd2400" -o "$BOXTYPE" == "vuultimo"; then
 	AC_DEFINE(HAVE_BWLCD255, 1,[define when using a 255x64 black and white display device])
 fi
 
-if test "$BOXBRAND" == "ini"; then
+if test "$MACHINE_BRAND" == "ini"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(KEY_MEDIA_TO_KEY_OPEN, 1,[define when rc sends a KEY_MEDIA event for its KEY_OPEN key])
@@ -611,7 +611,7 @@ if test "$BOXBRAND" == "ini"; then
 	AC_DEFINE(KEY_LIST_TO_KEY_PVR, 1,[define when rc sends a KEY_LIST event for its KEY_PVR key])
 fi
 
-if test "$BOXBRAND" == "ixuss"; then
+if test "$MACHINE_BRAND" == "ixuss"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 fi
 
@@ -655,7 +655,7 @@ if test "$BOXTYPE" == "tiviarmin"; then
 	AC_DEFINE(TIVIARRC, 1,[define use Tiviar RC keymap])
 fi
 
-if test "$BOXBRAND" == "dinobot" -o "$BOXTYPE" == "reborn"; then
+if test "$MACHINE_BRAND" == "dinobot" -o "$BOXTYPE" == "reborn"; then
 	AC_DEFINE(HAVE_HISILICON, 1,[define it is a HISILICON chip])
 fi
 
@@ -671,7 +671,7 @@ if test "$BOXTYPE" == "tyrant" -o "$BOXTYPE" == "xcombo" -o "$BOXTYPE" == "enibo
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi
 
-if test "$BOXBRAND" == "vuplus"; then
+if test "$MACHINE_BRAND" == "vuplus"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(FORCE_NO_FILL_ACCELERATION, 1,[define when the framebuffer acceleration does not have fill support])
 	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
@@ -700,7 +700,7 @@ if test "$BOXTYPE" == "vuzero" -o "$BOXTYPE" == "vuuno" -o "$BOXTYPE" == "vuulti
 	AC_DEFINE(FORCE_AUTO_INV, 1,[force Inversion auto for vuplus mipsel boxes])
 fi
 
-if test "$BOXBRAND" == "wetek" -o "$BOXTYPE" == "x8hp"; then
+if test "$MACHINE_BRAND" == "wetek" -o "$BOXTYPE" == "x8hp"; then
 	AC_DEFINE(KEY_F7_TO_KEY_MENU, 1,[define when rc sends a KEY_F7 event for its KEY_MENU])
 	AC_DEFINE(KEY_F1_TO_KEY_MEDIA, 1,[define when rc sends a KEY_F1 event for its KEY_MEDIA])
 	AC_DEFINE(KEY_HOME_TO_KEY_INFO, 1,[define when rc sends a KEY_HOME event for its KEY_INFO])
@@ -710,7 +710,7 @@ if test "$BOXBRAND" == "wetek" -o "$BOXTYPE" == "x8hp"; then
 	AC_DEFINE(WETEKRC, 1, [WeTek remote uses BACKSPACE to toggle extended functions on numeric buttons])
 fi
 
-if test "$BOXBRAND" == "linkdroid"; then
+if test "$MACHINE_BRAND" == "linkdroid"; then
 	AC_DEFINE(HAVE_ALIEN5, 1,[enable Alien5 and similar amlogic specific stuff])
 fi
 

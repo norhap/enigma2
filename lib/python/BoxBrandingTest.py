@@ -3,7 +3,7 @@ import boxbranding
 print("getOEVersion=%s<" % boxbranding.getOEVersion())
 print("getImageDistro=%s<" % boxbranding.getImageDistro())
 print("getBoxType=%s<" % boxbranding.getBoxType())
-print("getBrandOEM=%s<" % boxbranding.getBrandOEM())
+print("getBrand=%s<" % boxbranding.getBrand())
 print("getMachineName=%s<" % boxbranding.getMachineName())
 print("getMachineBuild=%s<" % boxbranding.getMachineBuild())
 print("getMachineMake=%s<" % boxbranding.getMachineMake())

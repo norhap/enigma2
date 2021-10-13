@@ -411,9 +411,9 @@ const char *getBoxType()
 	return BOXTYPE;
 }
 
-const char *getBoxBrand()
+const char *getBrand()
 {
-	return BOXBRAND;
+	return MACHINE_BRAND;
 }
 
 const char *getE2Rev()

@@ -13,7 +13,7 @@ enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from Components.Console import Console
-from enigma import getBoxType, getBoxBrand, getE2Rev
+from enigma import getBoxType, getE2Rev
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
 from Components.International import international

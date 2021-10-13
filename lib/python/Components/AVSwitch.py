@@ -1,6 +1,6 @@
 from __future__ import print_function
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
-from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop, getBoxType, getBoxBrand
+from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop, getBoxType, getBrand
 from Components.SystemInfo import SystemInfo
 import os
 from boxbranding import getMachineBuild
@@ -73,7 +73,7 @@ class AVSwitch:
 
 def InitAVSwitch():
 	config.av = ConfigSubsection()
-	if model == "vuduo" or getBoxBrand() == "ixuss":
+	if model == "vuduo" or getBrand() == "ixuss":
 		config.av.yuvenabled = ConfigBoolean(default=False)
 	else:
 		config.av.yuvenabled = ConfigBoolean(default=True)

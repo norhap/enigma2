@@ -2,7 +2,7 @@ from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 
 import boxbranding
-from enigma import eEnv, eTimer, getBoxBrand, getBoxType
+from enigma import eEnv, eTimer, getBoxType
 
 from Components.ActionMap import NumberActionMap
 from Components.config import ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ConfigPassword, ConfigText, config
