@@ -11,23 +11,23 @@ if [ -d /home/root ]; then
 	cd
 fi
 
-BRANDCHECK=`cat /etc/openvision/brand`
-MODELCHECK=`cat /etc/openvision/model`
-PLATFORMCHECK=`cat /etc/openvision/platform`
+MODELCHECK=`cat /proc/stb/info/boxtype`
 SOCFAMILY=`cat /proc/stb/info/chipset | cut -c 1-3`
 
-if [ "${BRANDCHECK}" == "mecool" ] || [ "${PLATFORMCHECK}" == "dmamlogic" ]; then
+if [ $MODELCHECK == "dreamone" ] || [ $MODELCHECK == "dreamtwo" ]; then
 	export media_arm_audio_decoder="ape,flac,dts,ac3,eac3,wma,wmapro,mp3,aac,vorbis,raac,cook,amr,pcm,adpcm"
 fi
 
-if [ "${PLATFORMCHECK}" == "octagonhisil" ] || [ "${MODELCHECK}" == "ustym4kpro" ] || [ "${PLATFORMCHECK}" == "gbmv200" ] || [ "${MODELCHECK}" == "beyonwizv2" ] || [ "${MODELCHECK}" == "viper4k" ]; then
-	COUNT=`ps -ef | grep libreader | grep -v "grep" | wc -l`
-	if [ "${COUNT}" -eq "0" ];then
-		libreader 720P_50
+if [ -e /proc/stb/info/boxtype ]; then
+	if [ $MODELCHECK == "viper4k" ] || [ $MODELCHECK == "sf8008" ] || [ $MODELCHECK == "sf8008m" ] || [ $MODELCHECK == "beyonwizv2" ] || [ $MODELCHECK == "ustym4kpro" ] || [ $MODELCHECK == "cc1" ] || [ $MODELCHECK == "gbtrio4k" ]  || [ $MODELCHECK == "gbip4k" ] ; then
+		count=`ps -ef |grep libreader |grep -v "grep" |wc -l`
+		if [ 0 == $count ];then
+			libreader 720P_50
+		fi
 	fi
 fi
 
-if [ "${PLATFORMCHECK}" == "dmamlogic" ]; then
+if [ $MODELCHECK == "dreamone" ] || [ $MODELCHECK == "dreamtwo" ]; then
 	echo "1" > /sys/class/graphics/fb0/osd_clear
 	echo "1" > /sys/class/graphics/fb1/osd_clear
 	FIRSTRUN=`sed -En 's|^config\.misc\.firstrun=(.+)$|\1|p' /etc/enigma2/settings | tr [A-Z] [a-z]`
@@ -62,27 +62,26 @@ fi
 
 # Enigma main loop.
 while : ; do
-	# Show bootlogo on enigma2 start.
+	# Show backdrop on enigma2 start.
 	SKIN=`sed -En 's|^config\.skin\.primary_skin=(.+)/skin\.xml$|\1|p' "@sysconfdir@/enigma2/settings"`
 	if [ -z "${SKIN}" ]; then
 		SKIN=`strings -n 10 "@prefix@/lib/enigma2/python/skin.pyo" | egrep -o -m 1 ".+/skin.xml" | sed 's|/skin.xml.*||'`
 	fi
 	if [ -n "${SKIN}" ]; then
-		SEARCHDIRS="@sysconfdir@/enigma2/$skin @sysconfdir@/enigma2/skin_common @sysconfdir@/enigma2 @datadir@/enigma2/$skin @datadir@/enigma2/skin_default @datadir@/enigma2"
+		SEARCHDIRS="@sysconfdir@/enigma2/$SKIN @sysconfdir@/enigma2/skin_common @sysconfdir@/enigma2 @datadir@/enigma2/$SKIN @datadir@/enigma2/skin_default @datadir@/enigma2"
 	else
 		SEARCHDIRS="@sysconfdir@/enigma2/skin_common @sysconfdir@/enigma2 @datadir@/enigma2/skin_default @datadir@/enigma2"
 	fi
 	if [ -x "@bindir@/exteplayer3" -o -x "@bindir@/showiframe" ]; then
-		for DIR in $SEARCHDIRS
-		do
-			if [ -d ${DIR} ] && [ -f ${DIR}/bootlogo.mp4 ]; then
+		for DIR in $SEARCHDIRS; do
+			if [ -d "${DIR}" ] && [ -f "${DIR}/bootlogo.mp4" ]; then
 				"@bindir@/exteplayer3" "${DIR}/bootlogo.mp4"
 				break
-			elif [ -d ${DIR} ] && [ -f ${DIR}/bootlogo.mvi ]; then
+			elif [ -d "${DIR}" ] && [ -f "${DIR}/backdrop.mvi" ]; then
 				if [ "${SOCFAMILY}" != "bcm" ]; then
 					killall -9 showiframe; sleep 0.1
 				fi
-				"@bindir@/showiframe" "${DIR}/bootlogo.mvi"
+				"@bindir@/showiframe" "${DIR}/backdrop.mvi"
 				break
 			fi
 		done
@@ -93,7 +92,7 @@ while : ; do
 		"@bindir@/enigma2_pre_start.sh"
 	fi
 
-	if [ "${BRANDCHECK}" == "dreambox" ]; then
+	if [ $MODELCHECK == "dreamone" ] || [ $MODELCHECK == "dreamtwo" ]; then
 		DISK=$(grep "/media/ba" /proc/mounts | awk '{gsub("/media/ba",""); print $1}' | head -n 1)
 		umount -f /media/ba
 		sleep 0.1
@@ -172,7 +171,7 @@ while : ; do
 	case ${RET} in
 		1)
 			/sbin/halt
-			if [ "${BRANDCHECK}" == "wetek" ]; then
+			if [ $MODELCHECK == "wetekplay" ]; then
 				echo "0" > /sys/class/leds/wetek\:blue\:wifiled/brightness
 				echo "0" > /sys/class/leds/wetek\:blue\:ethled/brightness
 				echo "mem" > /sys/power/state
@@ -215,11 +214,7 @@ while : ; do
 				mount /dev/block/by-name/bootoptions /tmp/bootoptions
 				cp -f /tmp/bootoptions/STARTUP_ANDROID /tmp/bootoptions/STARTUP_ONCE
 			else
-				if [ "${MODELCHECK}" == "su980" ] || [ "${BRANDCHECK}" == "mecool" ]; then
-					echo "Rescue not needed!"
-				else
-					echo "rescue" > /proc/stb/fp/boot_mode
-				fi
+				echo "rescue" > /proc/stb/fp/boot_mode
 			fi
 			[ -e "@bindir@/setenv" ] && "@bindir@/setenv" default_sys 1
 			[ -e "@sbindir@/fw_setenv" ] && "@sbindir@/fw_setenv" bootfromnand 1

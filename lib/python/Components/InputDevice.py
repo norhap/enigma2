@@ -253,7 +253,7 @@ config.plugins.remotecontroltype.rctype = ConfigInteger(default = 0)
 
 class RcTypeControl():
 	def __init__(self):
-		if SystemInfo["RcTypeChangable"] and pathExists('/proc/stb/info/boxtype') and getBrand() not in ("Mut@nt" ,"GigaBlue" ,"odin" ,"INI" ,"entwopia" ,"tripledot"):
+		if SystemInfo["RcTypeChangable"] and pathExists('/proc/stb/info/boxtype') and getBrand() not in ("Mut@nt", "GigaBlue", "odin", "INI", "entwopia", "tripledot"):
 			self.isSupported = True
 			self.boxType = open('/proc/stb/info/boxtype', 'r').read().strip()
 			if config.plugins.remotecontroltype.rctype.value != 0:
