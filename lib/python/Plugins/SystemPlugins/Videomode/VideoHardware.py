@@ -10,8 +10,9 @@ import re
 
 socfamily = getChipSetNumber()
 chipsetstring = getChipSetString()
-model = SystemInfo["MachineModel"]
 brand = SystemInfo["MachineBrand"]
+model = SystemInfo["MachineModel"]
+platform = SystemInfo["Platform"]
 has_scart = SystemInfo["HasScart"]
 has_yuv = SystemInfo["HasYPbPr"]
 has_rca = SystemInfo["HasComposite"]
@@ -70,7 +71,7 @@ class VideoHardware:
 	if has_avjack:
 		modes["Jack"] = ["PAL", "NTSC", "Multi"]
 
-	if socfamily in ("7376", "7444") or model in ("dreamone", "dreamtwo"):
+	if socfamily in ("7376", "7444"):
 		modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p"}
 	elif socfamily in ("7252", "7251", "7251s", "7252s", "72604", "7278", "3798mv200", "3798mv310", "3798cv200"):
@@ -82,7 +83,7 @@ class VideoHardware:
 	elif chipsetstring == "meson-6":
 		modes["DVI"] = ["720p", "1080p", "1080i"]
 		widescreen_modes = {"720p", "1080p", "1080i"}
-	elif chipsetstring in ("meson-64", "s905d") or socfamily in ("aml905d", "meson64") and model not in ("dreamone", "dreamtwo"):
+	elif chipsetstring in ("meson-64", "s905d") or socfamily in ("aml905d", "meson64") or platform == "dmamlogic":
 		modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
 	else:
@@ -255,7 +256,8 @@ class VideoHardware:
 			if force == 50:
 				mode_24 = mode_50
 
-		if model in ("dreamone", "dreamtwo"):
+		if platform == "dmamlogic":
+			open('/sys/class/display/mode', 'w').write('576i50hz')
 			amlmode = mode + rate.lower()
 			print("[Videomode] Write to /sys/class/display/mode")
 			open('/sys/class/display/mode', 'w').write(amlmode)
@@ -328,6 +330,12 @@ class VideoHardware:
 
 	# get a list with all modes, with all rates, for a given port.
 	def getModeList(self, port):
+		if platform == "dmamlogic":
+			res = [('2160p', ['50Hz', 'multi', '60Hz', 'auto']),
+			('1080p', ['50Hz', 'multi', '60Hz', 'auto']),
+			('720p', ['50Hz', 'multi', '60Hz']), ('1080i', ['50Hz', 'multi', '60Hz', 'auto']),
+			('576p', ['50Hz']), ('576i', ['50Hz']), ('480p', ['60Hz']), ('480i', ['60Hz'])]
+		return res
 		print("[Videomode] VideoHardware getModeList for port", port)
 		res = []
 		for mode in self.modes[port]:
@@ -465,10 +473,10 @@ class VideoHardware:
 			arw = "0"
 			if config.av.policy_43.value == "bestfit":
 				arw = "10"
-			if config.av.policy_43.value == "panscan":
-				arw = "12"
 			if config.av.policy_43.value == "letterbox":
 				arw = "11"
+			if config.av.policy_43.value == "panscan":
+				arw = "12"
 			try:
 				print("[Videomode] Write to /sys/class/video/screen_mode")
 				open("/sys/class/video/screen_mode", "w").write(arw)

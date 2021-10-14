@@ -515,6 +515,11 @@ const char *getPyExt()
 	return PYEXT;
 }
 
+const char *getPlatform()
+{
+	return PLATFORM;
+}
+
 #include <malloc.h>
 
 void dump_malloc_stats(void)

@@ -4,8 +4,8 @@ from os import R_OK, access
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getMachineBuild, getRCIDNum, getRCName, getRCType, getBoxType
-from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveWOL, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getBoxType
+from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform
 
 from Tools.Directories import SCOPE_SKINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
 from Tools.StbHardware import getBrand
@@ -57,13 +57,13 @@ def getBootdevice():
 
 model = getBoxType()
 brand = getBrand()
-platform = getMachineBuild()
+platform = getPlatform()
 displaytype = getDisplayType()
 architecture = getImageArch()
 
 SystemInfo["MachineBrand"] = brand
 SystemInfo["MachineModel"] = model
-SystemInfo["MachineBuild"] = platform
+SystemInfo["Platform"] = platform
 
 #detect remote control
 SystemInfo["RCCode"] = int(getRCType())
@@ -208,7 +208,7 @@ SystemInfo["LCDMiniTV"] = fileExists("/proc/stb/lcd/mode")
 SystemInfo["LCDMiniTVPiP"] = SystemInfo["LCDMiniTV"] and model not in ("gb800ueplus", "gbquad4k", "gbue4k")
 SystemInfo["DefaultDisplayBrightness"] = platform == "dm4kgen" and 8 or 5
 SystemInfo["ConfigDisplay"] = SystemInfo["FrontpanelDisplay"] and getDisplayType() != "textolcd 7segmentos"
-SystemInfo["DreamBoxAudio"] = platform == "dm4kgen" or model in ("dm7080", "dm800")
+SystemInfo["DreamBoxAudio"] = platform in ("dm4kgen", "dmamlogic") or model in ("dm7080", "dm800")
 SystemInfo["AmlogicFamily"] = fileExists("/proc/device-tree/amlogic-dt-id") or fileExists("/usr/bin/amlhalt") or pathExists("/sys/module/amports")
 SystemInfo["VFDDelay"] = model in ("sf4008", "beyonwizu4")
 SystemInfo["VFDRepeats"] = brand != "ixuss" and getDisplayType() != "textolcd 7segmentos"

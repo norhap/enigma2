@@ -62,11 +62,11 @@ AC_ARG_WITH(brandname,
 AC_SUBST(MACHINE_BRAND)
 AC_DEFINE_UNQUOTED(MACHINE_BRAND,"$MACHINE_BRAND",[brand name])
 
-AC_ARG_WITH(stbplatform,
-	AS_HELP_STRING([--with-stbplatform],[build for STBPLATFORM, $withval]),
-	[STBPLATFORM="$withval"],[STBPLATFORM=""])
-AC_SUBST(STBPLATFORM)
-AC_DEFINE_UNQUOTED(STBPLATFORM,"$STBPLATFORM",[stb platform])
+AC_ARG_WITH(platform,
+	AS_HELP_STRING([--with-platform],[build for PLATFORM, $withval]),
+	[PLATFORM="$withval"],[PLATFORM=""])
+AC_SUBST(PLATFORM)
+AC_DEFINE_UNQUOTED(PLATFORM,"$PLATFORM",[platform])
 
 AC_ARG_WITH(e2rev,
 	AS_HELP_STRING([--with-e2rev],[value of E2REV, $withval]),
@@ -428,6 +428,7 @@ fi
 
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
 AM_CONDITIONAL(RASPBERRYPI, test "$MACHINE_BRAND" == "rpi")
+AM_CONDITIONAL(DMAMLOGIC, test "$PLATFORM" == "dmamlogic")
 
 AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == "dm8000" -o "$BOXTYPE" == "dm800" -o "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2")
 AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm800sev2" -o "$BOXTYPE" == "dm820")
@@ -494,6 +495,10 @@ fi
 if test "$MACHINE_BRAND" == "dreambox"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
+fi
+
+if test "$PLATFORM" == "dmamlogic"; then
+	AC_DEFINE(DMAMLOGIC, 1, [Dreambox Amlogic hardware])
 fi
 
 if test "$BOXTYPE" == "dm7080"; then

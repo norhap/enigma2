@@ -41,7 +41,7 @@ from Tools.Directories import fileExists, fileHas, getRecordingFilename, moveFil
 from Tools.KeyBindings import getKeyBindingKeys, getKeyDescription
 from Tools.StbHardware import getBrand
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
-from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType
+from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType, getPlatform
 from time import time, localtime, strftime
 import os
 from os import sys
@@ -55,6 +55,7 @@ from six import PY2
 from sys import maxsize
 
 model = getBoxType()
+platform = getPlatform()
 brand = getBrand()
 
 def isStandardInfoBar(self):
@@ -4118,7 +4119,7 @@ class InfoBarHdmi2:
 			return _("Turn off HDMI-IN PiP mode")
 
 	def HDMIInPiP(self):
-		if model in ("dm7080", "dm820", "dreamtwo", "dreamone"):
+		if platform in ("dm4kgen", "dmamlogic") or model in ("dm7080", "dm820"):
 			print("[InfoBarGenerics] Read /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
 			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
 			if check.startswith("off"):
@@ -4151,7 +4152,7 @@ class InfoBarHdmi2:
 					del self.session.pip
 
 	def HDMIInFull(self):
-		if model in ("dm7080", "dm820", "dreamtwo", "dreamone"):
+		if platform in ("dm4kgen", "dmamlogic") or model in ("dm7080", "dm820"):
 			print("[InfoBarGenerics] Read /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
 			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
 			if check.startswith("off"):
@@ -4161,7 +4162,7 @@ class InfoBarHdmi2:
 				self.oldvideomode_50hz = open("/proc/stb/video/videomode_50hz", "r").read()
 				print("[InfoBarGenerics] Read /proc/stb/video/videomode_60hz")
 				self.oldvideomode_60hz = open("/proc/stb/video/videomode_60hz", "r").read()
-				if model in ("dreamtwo", "dreamone"):
+				if platform in ("dm4kgen", "dmamlogic"):
 					print("[InfoBarGenerics] Write to /proc/stb/video/videomode")
 					open("/proc/stb/video/videomode", "w").write("1080p")
 				else:
