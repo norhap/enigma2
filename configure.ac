@@ -427,7 +427,7 @@ if test "$MACHINE_BRAND" == "rpi"; then
 fi
 
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
-AM_CONDITIONAL(DREAMONE, test `echo "$BOXTYPE" | cut -b 1-8` == "dreamone")
+AM_CONDITIONAL(DREAMBOXDMM2, test "$PLATFORM" == "dmamlogic" -o "$PLATFORM" == "dm4kgen" -o "$PLATFORM" == "dm3gen" -o "$PLATFORM" == "dm2gen")
 AM_CONDITIONAL(RASPBERRYPI, test "$MACHINE_BRAND" == "rpi")
 AM_CONDITIONAL(DMAMLOGIC, test "$PLATFORM" == "dmamlogic")
 
