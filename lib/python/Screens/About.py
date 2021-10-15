@@ -336,7 +336,9 @@ class About(Screen):
 		EnigmaVersion = _("Branch Enigma2: ") + EnigmaVersion
 		self["EnigmaVersion"] = StaticText(EnigmaVersion)
 		AboutText += "\n" + EnigmaVersion + "\n"
-		AboutText += _("Enigma2 revision: ") + getE2Rev().split("+")[1] + "\n"
+		if "+" in getE2Rev():
+			AboutText += _("Enigma2 revision: ") + getE2Rev().split("+")[1] + "\n"
+
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
 
@@ -361,15 +363,17 @@ class About(Screen):
 			AboutText += fp_version
 			self["FPVersion"] = StaticText(fp_version)
 
-		if config.hdmicec.enabled.value:
-			AboutText += "\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value
+		if SystemInfo["HasHDMI-CEC"]:
+			if config.hdmicec.enabled.value:
+				AboutText += "\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value
 
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
-		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"] or model not in ("gbip4k"):
-			AboutText += _("Type Display: ") + getDisplayType() + "\n"
-		else:
-			AboutText += _("No Display") + "\n"
+		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"]:
+			if model not in ("gbip4k", "dreamone"):
+				AboutText += _("Type Display: ") + getDisplayType() + "\n"
+			else:
+				AboutText += _("No Display") + "\n"
 
 		AboutText += "\n"
 		for x in about.GetIPsFromNetworkInterfaces():
