@@ -340,7 +340,6 @@ class VideoHardware:
 				# if at least one rate is ok, add this mode
 				if len(rates):
 					res.append((mode, rates))
-			return res
 		else:
 			res = [('2160p', ['50Hz', 'multi', '60Hz', 'auto']),
 			('1080p', ['50Hz', 'multi', '60Hz', 'auto']),
