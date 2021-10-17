@@ -172,7 +172,7 @@ static const std::string getConfigCurrentSpinner(const std::string &key)
 	}
 
 	// if value is not empty, means config.skin.primary_skin exist in settings file
-	if (!value.empty()) 
+	if (!value.empty())
 	{
 
 		// check /usr/share/enigma2/MYSKIN/spinner/wait1.png
@@ -185,7 +185,7 @@ static const std::string getConfigCurrentSpinner(const std::string &key)
 
 	}
 
-	// try to find spinner in skin_default/spinner subfolder 
+	// try to find spinner in skin_default/spinner subfolder
 	value = "skin_default/spinner";
 
 	// check /usr/share/enigma2/skin_default/spinner/wait1.png
