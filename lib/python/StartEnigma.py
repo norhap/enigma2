@@ -22,7 +22,7 @@ from Components.SystemInfo import SystemInfo
 from sys import stdout
 
 profile("Imports")
-from os.path import exists, isdir, islink, join as pathjoin
+from os.path import isdir, islink, join as pathjoin
 from traceback import print_exc
 from time import localtime, strftime, time
 
@@ -685,20 +685,6 @@ if config.clientmode.enabled.value:
 	import Components.ChannelsImporter
 	Components.ChannelsImporter.autostart()
 
-profile("IPv6")
-if exists('/etc/enigma2/ipv6'):
-	try:
-		print("[StartEnigma] Write to /proc/sys/net/ipv6/conf/all/disable_ipv6")
-		open("/proc/sys/net/ipv6/conf/all/disable_ipv6", "w").write("1")
-	except:
-		print("[StartEnigma] Write to /proc/sys/net/ipv6/conf/all/disable_ipv6 failed.")
-
-#from enigma import dump_malloc_stats
-#t = eTimer()
-# t.callback.append(dump_malloc_stats)
-# t.start(1000)
-
-# first, setup a screen
 try:
 	runScreenTest()
 
