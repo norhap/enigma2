@@ -15,7 +15,7 @@ from Components.Keyboard import keyboard
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import SystemInfo
-from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
+from Tools.Directories import SCOPE_MEDIA, SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
 
 config.crash = ConfigSubsection()
 config.crash.debugActionMaps = ConfigYesNo(default=False)
@@ -320,9 +320,13 @@ def InitUsageConfig():
 		choicelist.append((str(i), ngettext("%d minute", "%d minutes", m) % m))
 	config.usage.pip_last_service_timeout = ConfigSelection(default="0", choices=choicelist)
 
-	if not exists(resolveFilename(SCOPE_HDD)):
+	if SCOPE_MEDIA:
 		try:
-			mkdir(resolveFilename(SCOPE_HDD), 0755)
+			SCOPE_USB = "/media/usb/movie"
+			if exists("/media/hdd") and not exists(resolveFilename(SCOPE_HDD)):
+			    mkdir(resolveFilename(SCOPE_HDD), 0o755)
+			elif exists("/media/usb") and not exists(SCOPE_USB):
+				mkdir("%s" % SCOPE_USB, 0o755)
 		except (IOError, OSError):
 			pass
 	defaultValue = resolveFilename(SCOPE_HDD)
@@ -351,12 +355,22 @@ def InitUsageConfig():
 			config.usage.instantrec_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.instantrec_path.value = savedValue
 	config.usage.instantrec_path.save()
-	if not exists(resolveFilename(SCOPE_TIMESHIFT)):
+	if SCOPE_MEDIA:
+		SCOPE_USB_TIMESHIFT = "/media/usb/timeshift"
+		SCOPE_USB_TIMESHIFT_MOVIE = "/media/usb/timeshift/movie"
+		SCOPE_HDD_TIMESHIFT_MOVIE = "/media/hdd/timeshift/movie"
 		try:
-			mkdir(resolveFilename(SCOPE_TIMESHIFT), 0755)
-		except:
+			if exists("/media/hdd") and not exists(resolveFilename(SCOPE_TIMESHIFT)):
+				mkdir(resolveFilename(SCOPE_TIMESHIFT), 0o755)
+				if not exists(SCOPE_HDD_TIMESHIFT_MOVIE):
+					mkdir("%s" % SCOPE_HDD_TIMESHIFT_MOVIE, 0o755)
+			elif exists("/media/usb") and not exists(SCOPE_USB_TIMESHIFT):
+				mkdir("%s" % SCOPE_USB_TIMESHIFT, 0o755)
+				if not exists(SCOPE_USB_TIMESHIFT_MOVIE):
+					mkdir("%s" % SCOPE_USB_TIMESHIFT_MOVIE, 0o755)
+		except (IOError, OSError):
 			pass
-	defaultValue = resolveFilename(SCOPE_TIMESHIFT)
+	defaultValue = resolveFilename(SCOPE_TIMESHIFT) + "movie/"
 	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
