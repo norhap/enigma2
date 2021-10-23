@@ -3,13 +3,13 @@ from os.path import join as pathjoin
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, gmtime
-from Tools.Directories import fileExists, resolveFilename, SCOPE_SKIN
+from Tools.Directories import fileExists, resolveFilename, SCOPE_SKINS
 from boxbranding import getMachineName, getBoxType, getRCName
 
 
 def getBrand():
 	BrandName = ""
-	BrandStarSwith = resolveFilename(SCOPE_SKIN, pathjoin("rc_models", "%s" % (getRCName())))
+	BrandStarSwith = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName())))
 	try:
 		if "edision" in BrandStarSwith:
 			BrandName = "Edision"

@@ -1,4 +1,4 @@
-from Tools.Directories import SCOPE_SKIN, resolveFilename
+from Tools.Directories import SCOPE_SKINS, resolveFilename
 from boxbranding import getBoxType
 
 hw_info = None
@@ -45,7 +45,7 @@ class HardwareInfo:
 			pass
 
 		# Model
-		for line in open((resolveFilename(SCOPE_SKIN, 'hw_info/hw_info.cfg')), 'r'):
+		for line in open((resolveFilename(SCOPE_SKINS, 'hw_info/hw_info.cfg')), 'r'):
 			if not line.startswith('#') and not line.isspace():
 				l = line.strip().replace('\t', ' ')
 				if ' ' in l:

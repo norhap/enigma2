@@ -23,18 +23,18 @@ SCOPE_GUISKIN
 
     Otherwise if config.skin.primary_skin.value (the skin path selected in
     MENU>Setup>AV Setup>Skin setup) contains '/', use
-    SCOPE_SKIN/primary_skin.value/base as the resolved name if the path exists
-    or if SCOPE_SKIN/primary_skin.value/base contains ':" and the part of the
+    SCOPE_SKINS/primary_skin.value/base as the resolved name if the path exists
+    or if SCOPE_SKINS/primary_skin.value/base contains ':" and the part of the
     path before the ':' exists.
 
-    Otherwise use SCOPE_SKIN/base as the resolved name if the path exists
-    or if SCOPE_SKIN/base contains ':" and the part of the
+    Otherwise use SCOPE_SKINS/base as the resolved name if the path exists
+    or if SCOPE_SKINS/base contains ':" and the part of the
     path before the ':' exists.
 
-    Otherwise if 'skin_default' is not in SCOPE_SKIN, use
-    SCOPE_SKIN/skin_default/base as the resolved name.
+    Otherwise if 'skin_default' is not in SCOPE_SKINS, use
+    SCOPE_SKINS/skin_default/base as the resolved name.
 
-    Otherwise fall back to the path SCOPE_SKIN/base.
+    Otherwise fall back to the path SCOPE_SKINS/base.
 
 
 SCOPE_LCDSKIN

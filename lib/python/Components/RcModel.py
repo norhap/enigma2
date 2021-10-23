@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
-from Tools.Directories import SCOPE_SKIN, resolveFilename
+from Tools.Directories import SCOPE_SKINS, resolveFilename
 from boxbranding import getRCName
 
 
@@ -11,9 +11,9 @@ class RcModel:
 
 	def getRcFile(self, ext):
 		remote = getRCName()
-		f = resolveFilename(SCOPE_SKIN, 'rc_models/' + remote + '.' + ext)
+		f = resolveFilename(SCOPE_SKINS, 'rc_models/' + remote + '.' + ext)
 		if not os.path.exists(f):
-			f = resolveFilename(SCOPE_SKIN, 'rc_models/dmm1.' + ext)
+			f = resolveFilename(SCOPE_SKINS, 'rc_models/dmm1.' + ext)
 		return f
 
 	def getRcImg(self):
