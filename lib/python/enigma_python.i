@@ -472,7 +472,6 @@ extern const char *getEnigmaVersionString();
 extern const char *getBoxType();
 extern const char *getBrand();
 extern const char *getE2Rev();
-extern const char *getPyExt();
 extern const char *getPlatform();
 extern void dump_malloc_stats(void);
 #ifndef HAVE_OSDANIMATION
@@ -493,7 +492,6 @@ extern const char *getEnigmaVersionString();
 extern const char *getBoxType();
 extern const char *getBrand();
 extern const char *getE2Rev();
-extern const char *getPyExt();
 extern const char *getPlatform();
 extern void dump_malloc_stats(void);
 #ifndef HAVE_OSDANIMATION

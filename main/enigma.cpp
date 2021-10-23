@@ -524,11 +524,6 @@ const char *getE2Rev()
 	return E2REV;
 }
 
-const char *getPyExt()
-{
-	return PYEXT;
-}
-
 const char *getPlatform()
 {
 	return PLATFORM;
