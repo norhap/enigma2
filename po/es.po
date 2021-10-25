@@ -17798,5 +17798,5 @@ msgstr "\n Do quieres cambiar a Android ?"
 msgid "HDMI-CEC address"
 msgstr "Entrada HDMI-CEC"
 
-msgid "Pending restart"
-msgstr "XML con Error: Pendiente Reiniciar GUI"
+msgid "Error in XML file: Try to solve and then restart."
+msgstr "Error en archivo XML: intente solucionarlo y luego reinicie."
