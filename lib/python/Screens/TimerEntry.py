@@ -1,5 +1,6 @@
 from __future__ import print_function
 from Screens.Screen import Screen
+import ChannelSelection
 from ServiceReference import ServiceReference
 from Components.config import config, ConfigSelection, ConfigText, ConfigSubList, ConfigDateTime, ConfigClock, ConfigYesNo, getConfigListEntry
 from Components.ActionMap import NumberActionMap
@@ -23,7 +24,6 @@ from enigma import eEPGCache, iRecordableServicePtr
 from time import localtime, mktime, time, strftime
 from datetime import datetime
 import urllib
-import Screens.ChannelSelection
 
 
 class TimerEntry(Screen, ConfigListScreen):
