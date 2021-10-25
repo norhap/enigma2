@@ -17,10 +17,9 @@ MODULE_NAME = __name__.split(".")[-1].capitalize()
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "OctEtFHD/skin.xml"
 EMERGENCY_SKIN = "skin_default/skin.xml"
-EMERGENCY_NAME = "Stone II"
+EMERGENCY_NAME = "OctEtFHD/Stone II"
 DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
-USER_SKIN = "skin_user.xml"
-USER_SKIN_TEMPLATE = "skin_user_%s.xml"
+SKIN_FALLBACK_1080 = "skin_fallback_1080/skin_1080.xml"
 SUBTITLE_SKIN = "skin_subtitles.xml"
 
 GUI_SKIN_ID = 0  # Main frame-buffer.
@@ -50,7 +49,7 @@ config.skin = ConfigSubsection()
 skin = resolveFilename(SCOPE_SKINS, DEFAULT_SKIN)
 if not isfile(skin):
 	print("[Skin] Error: Default skin '%s' is not readable or is not a file!  Using emergency skin." % skin)
-	DEFAULT_SKIN = EMERGENCY_SKIN
+	DEFAULT_SKIN = SKIN_FALLBACK_1080
 config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
 
@@ -76,8 +75,9 @@ def InitSkins():
 	global currentPrimarySkin, currentDisplaySkin, resolutions
 	runCallbacks = False
 	# Add the emergency skin.  This skin should provide enough functionality
-	# to enable basic GUI functions to work.
-	loadSkin(EMERGENCY_SKIN, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
+	# to enable basic GUI functions to work.It will be read as a last resort, that is, if there is no XML fallback in the skin by default or in fallback 1080 skin_1080.xml
+	if not isfile(resolveFilename(SCOPE_SKINS, SKIN_FALLBACK_1080)):
+		loadSkin(EMERGENCY_SKIN, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
 	# Add the subtitle skin.
 	loadSkin(SUBTITLE_SKIN, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
 	# Add the front panel / display / lcd skin.
@@ -102,15 +102,11 @@ def InitSkins():
 			break
 		print("[Skin] Error: Adding %s GUI skin '%s' has failed!" % (name, config.skin.primary_skin.value))
 		result.append(skin)
-	# Add an optional skin related user skin "user_skin_<SkinName>.xml".  If there is
-	# not a skin related user skin then try to add am optional generic user skin.
-	result = None
-	if isfile(resolveFilename(SCOPE_SKINS, config.skin.primary_skin.value)):
-		name = USER_SKIN_TEMPLATE % dirname(config.skin.primary_skin.value)
-		if isfile(resolveFilename(SCOPE_GUISKIN, name)):
-			result = loadSkin(name, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
-	if result is None:
-		resolution = resolutions.get(GUI_SKIN_ID, (0, 0, 0))
+	# add skin user fallback for scope skins skin_fallback_1080 in skin_1080.xml
+	if isfile(resolveFilename(SCOPE_SKINS, SKIN_FALLBACK_1080)):
+		result = loadSkin(SKIN_FALLBACK_1080, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
+
+	resolution = resolutions.get(GUI_SKIN_ID, (0, 0, 0))
 	if resolution[0] and resolution[1]:
 		gMainDC.getInstance().setResolution(resolution[0], resolution[1])
 		getDesktop(GUI_SKIN_ID).resize(eSize(resolution[0], resolution[1]))
