@@ -17,7 +17,7 @@ MODULE_NAME = __name__.split(".")[-1].capitalize()
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "OctEtFHD/skin.xml"
 EMERGENCY_SKIN = "skin_default/skin.xml"
-EMERGENCY_NAME = "OctEtFHD/Stone II"
+EMERGENCY_NAME = "OctEtFHD & Stone II"
 DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
 SKIN_FALLBACK_1080 = "skin_fallback_1080/skin_1080.xml"
 SUBTITLE_SKIN = "skin_subtitles.xml"
