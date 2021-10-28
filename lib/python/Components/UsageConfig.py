@@ -354,6 +354,7 @@ def InitUsageConfig():
 		SCOPE_USB_TIMESHIFT = "/media/usb/timeshift"
 		SCOPE_USB_TIMESHIFT_MOVIE = "/media/usb/timeshift/movie"
 		SCOPE_HDD_TIMESHIFT_MOVIE = "/media/hdd/timeshift/movie"
+		movie = "movie/"
 		try:
 			if exists("/media/hdd") and not exists(resolveFilename(SCOPE_TIMESHIFT)):
 				mkdir(resolveFilename(SCOPE_TIMESHIFT), 0o755)
@@ -365,16 +366,21 @@ def InitUsageConfig():
 					mkdir("%s" % SCOPE_USB_TIMESHIFT_MOVIE, 0o755)
 		except (IOError, OSError):
 			pass
-	defaultValue = resolveFilename(SCOPE_TIMESHIFT) + "movie/"
-	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
-	config.usage.timeshift_path.load()
+	if exists(SCOPE_USB_TIMESHIFT_MOVIE):
+		defaultValue = "/media/usb/timeshift/movie/"
+		config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
+		config.usage.timeshift_path.load()
+	else:
+		defaultValue = resolveFilename(SCOPE_TIMESHIFT, movie)
+		config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
+		config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
 		savedValue = pathjoin(config.usage.timeshift_path.saved_value, "")
 		if savedValue and savedValue != defaultValue:
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
 	config.usage.timeshift_path.save()
-	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
+	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT, movie)])
 
 	config.usage.trashsort_deltime = ConfigSelection(default="no", choices=[
 		("no", _("No")),
