@@ -4779,6 +4779,12 @@ msgstr "Pulse OK para activar el skin %s seleccionado."
 msgid "Press OK to keep the currently selected %s skin."
 msgstr "Pulse OK para mantener el skin %s seleccionado actualmente."
 
+msgid "Press OK to activate the selected display skin."
+msgstr "Pulse OK para activar el skin display seleccionado actualmente."
+
+msgid "Press OK to keep the currently selected display skin."
+msgstr "Pulse OK para mantener el skin display seleccionado actualmente."
+
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
 

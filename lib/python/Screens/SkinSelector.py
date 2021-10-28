@@ -136,7 +136,7 @@ class SkinSelector(Screen, HelpableScreen):
 					elif skin == DEFAULT_SKIN:
 						list = [dir, default, dir, skin, resolution, preview]
 					elif skin == DEFAULT_DISPLAY_SKIN:
-						list = [default, default, dir, skin, resolution, preview]
+						list = [dir, default, dir, skin, resolution, preview]
 					elif skin == displayPicon:
 						list = [dir, defaultPicon, dir, skin, resolution, preview]
 					else:
@@ -166,10 +166,14 @@ class SkinSelector(Screen, HelpableScreen):
 		if not exists(preview):
 			preview = resolveFilename(SCOPE_GUISKIN, "noprev.png")
 		self.picload.startDecode(preview)
-		if skin == self.config.value:
+		if skin == self.config.value and resolution != None:
 			self["description"].setText(_("Press OK to keep the currently selected %s skin.") % resolution)
 		else:
 			self["description"].setText(_("Press OK to activate the selected %s skin.") % resolution)
+		if skin == self.config.value and resolution == None:
+			self["description"].setText(_("Press OK to keep the currently selected display skin."))
+		if skin != self.config.value and resolution == None:
+			self["description"].setText(_("Press OK to activate the selected display skin."))
 
 	def cancel(self):
 		self.close(False)
