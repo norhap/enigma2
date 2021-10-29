@@ -316,11 +316,11 @@ def InitUsageConfig():
 	config.usage.pip_last_service_timeout = ConfigSelection(default="0", choices=choicelist)
 
 	if SCOPE_MEDIA:
+		SCOPE_USB = "/media/usb/movie/"
 		try:
-			SCOPE_USB = "/media/usb/movie"
 			if exists("/media/hdd") and not exists(resolveFilename(SCOPE_HDD)):
-			    mkdir(resolveFilename(SCOPE_HDD), 0o755)
-			elif exists("/media/usb") and not exists(SCOPE_USB):
+				mkdir(resolveFilename(SCOPE_HDD), 0o755)
+			if exists("/media/usb") and not exists(SCOPE_USB):
 				mkdir("%s" % SCOPE_USB, 0o755)
 		except (IOError, OSError):
 			pass
@@ -354,18 +354,19 @@ def InitUsageConfig():
 		SCOPE_USB_TIMESHIFT = "/media/usb/timeshift"
 		SCOPE_USB_TIMESHIFT_MOVIE = "/media/usb/timeshift/movie"
 		SCOPE_HDD_TIMESHIFT_MOVIE = "/media/hdd/timeshift/movie"
+		movie = "movie/"
 		try:
 			if exists("/media/hdd") and not exists(resolveFilename(SCOPE_TIMESHIFT)):
 				mkdir(resolveFilename(SCOPE_TIMESHIFT), 0o755)
 				if not exists(SCOPE_HDD_TIMESHIFT_MOVIE):
 					mkdir("%s" % SCOPE_HDD_TIMESHIFT_MOVIE, 0o755)
-			elif exists("/media/usb") and not exists(SCOPE_USB_TIMESHIFT):
+			if exists("/media/usb") and not exists(SCOPE_USB_TIMESHIFT):
 				mkdir("%s" % SCOPE_USB_TIMESHIFT, 0o755)
 				if not exists(SCOPE_USB_TIMESHIFT_MOVIE):
 					mkdir("%s" % SCOPE_USB_TIMESHIFT_MOVIE, 0o755)
 		except (IOError, OSError):
 			pass
-	defaultValue = resolveFilename(SCOPE_TIMESHIFT) + "movie/"
+	defaultValue = resolveFilename(SCOPE_TIMESHIFT, movie)
 	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
@@ -374,7 +375,7 @@ def InitUsageConfig():
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
 	config.usage.timeshift_path.save()
-	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
+	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT, movie)])
 
 	config.usage.trashsort_deltime = ConfigSelection(default="no", choices=[
 		("no", _("No")),
