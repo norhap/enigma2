@@ -316,11 +316,11 @@ def InitUsageConfig():
 	config.usage.pip_last_service_timeout = ConfigSelection(default="0", choices=choicelist)
 
 	if SCOPE_MEDIA:
+		SCOPE_USB = "/media/usb/movie/"
 		try:
-			SCOPE_USB = "/media/usb/movie"
 			if exists("/media/hdd") and not exists(resolveFilename(SCOPE_HDD)):
-			    mkdir(resolveFilename(SCOPE_HDD), 0o755)
-			elif exists("/media/usb") and not exists(SCOPE_USB):
+				mkdir(resolveFilename(SCOPE_HDD), 0o755)
+			if exists("/media/usb") and not exists(SCOPE_USB):
 				mkdir("%s" % SCOPE_USB, 0o755)
 		except (IOError, OSError):
 			pass
@@ -360,20 +360,15 @@ def InitUsageConfig():
 				mkdir(resolveFilename(SCOPE_TIMESHIFT), 0o755)
 				if not exists(SCOPE_HDD_TIMESHIFT_MOVIE):
 					mkdir("%s" % SCOPE_HDD_TIMESHIFT_MOVIE, 0o755)
-			elif exists("/media/usb") and not exists(SCOPE_USB_TIMESHIFT):
+			if exists("/media/usb") and not exists(SCOPE_USB_TIMESHIFT):
 				mkdir("%s" % SCOPE_USB_TIMESHIFT, 0o755)
 				if not exists(SCOPE_USB_TIMESHIFT_MOVIE):
 					mkdir("%s" % SCOPE_USB_TIMESHIFT_MOVIE, 0o755)
 		except (IOError, OSError):
 			pass
-	if exists(SCOPE_USB_TIMESHIFT_MOVIE):
-		defaultValue = "/media/usb/timeshift/movie/"
-		config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
-		config.usage.timeshift_path.load()
-	else:
-		defaultValue = resolveFilename(SCOPE_TIMESHIFT, movie)
-		config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
-		config.usage.timeshift_path.load()
+	defaultValue = resolveFilename(SCOPE_TIMESHIFT, movie)
+	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
+	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
 		savedValue = pathjoin(config.usage.timeshift_path.saved_value, "")
 		if savedValue and savedValue != defaultValue:

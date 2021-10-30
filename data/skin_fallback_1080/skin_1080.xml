@@ -868,7 +868,7 @@
 	</screen>
 	<!-- AUDIOSELECTION -->
 	<screen name="AudioSelection" backgroundColor="transparent" flags="wfNoBorder" position="0,center" size="1920,1080" transparent="0">
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="280,700" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="280,700" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="18,700" zPosition="1" size="64,43" transparent="1" alphatest="blend">
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -2240,10 +2240,10 @@
 		<ePixmap alphatest="blend" pixmap="OctEtFHD/skin_default/buttons/key_info.png" position="10,980" size="64,43"/>
 		<ePixmap alphatest="blend" pixmap="OctEtFHD/skin_default/buttons/key_help.png" position="10,1025" size="64,43"/>
 		<widget name="chosenletter" position="350,530" size="380,185" font="Regular;50" foregroundColor="green_light" halign="center" valign="center" transparent="1" zPosition="4"/>
-		<widget name="freeDiskSpace" position="100,635" size="530,35" font="RegularBold;22" halign="left" transparent="1" backgroundColor="OE_Background" foregroundColor="blue_light"/>
-		<widget name="TrashcanSize" position="800,635" size="235,35" font="RegularBold;21" backgroundColor="OE_Background" foregroundColor="blue_light" halign="left" zPosition="2" transparent="1"/>
+		<widget name="freeDiskSpace" position="100,65" size="530,30" font="RegularBold;22" halign="left" transparent="1" backgroundColor="OE_Background" foregroundColor="blue_light"/>
+		<widget name="TrashcanSize" position="825,65" size="235,30" font="RegularBold;21" backgroundColor="OE_Background" foregroundColor="blue_light" halign="left" zPosition="2" transparent="1"/>
 		<widget name="waitingtext" position="640,95" size="300,35" font="RegularBold;26" halign="center" valign="center" transparent="1" backgroundColor="OE_Background" zPosition="4"/>
-		<widget name="list" position="100,135" size="945,610" zPosition="3" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" backgroundColor="OE_Background" transparent="1" enableWrapAround="1"/>
+		<widget name="list" position="100,135" size="945,655" zPosition="3" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" backgroundColor="OE_Background" transparent="1" enableWrapAround="1"/>
 		<widget name="DescriptionBorder" position="10,400" size="503,95" zPosition="3" transparent="1"/>
 		<widget source="Service" render="Label" position="100,95" size="520,25" zPosition="1" backgroundColor="OE_Background" font="RegularBold;21" noWrap="1" transparent="1" valign="top">
 			<convert type="MovieInfo">RecordServiceName</convert>
@@ -2252,7 +2252,7 @@
 			<convert type="ServiceTime">Duration</convert>
 			<convert type="ClockToText"/>
 		</widget>
-		<widget backgroundColor="OE_Background" font="RegularBold;22" halign="left" position="100,675" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="RunningText" size="925,285" source="Service" transparent="1" valign="top">
+		<widget backgroundColor="OE_Background" font="RegularBold;22" halign="left" position="100,690" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="RunningText" size="925,285" source="Service" transparent="1" valign="top">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="movie_sort" pixmaps="OctEtFHD/icons/az.png,icons/newtop.png,icons/shuffle.png,icons/za.png,icons/oldtop.png,icons/faz.png,icons/fza.png,icons/default.png" position="25,890" size="35,20" transparent="1" alphatest="on"/>
@@ -2683,7 +2683,7 @@
 	<screen name="ParentalControlSetup" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1920,1080">
 		<panel name="StanDardScreen"/>
 		<panel name="TemplatePip"/>
-		<widget name="config" itemHeight="50" font="RegularBold;26" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" enableWrapAround="1" backgroundColor="OE_Background" position="97,140" size="1250,795" transparent="1"/>
+		<widget name="config" itemHeight="50" font="RegularBold;26" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" enableWrapAround="1" backgroundColor="OE_Background" position="97,140" size="1250,800" transparent="1"/>
 	</screen>
 	<screen name="PinInput" title="Change pin code" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1920,1080">
 		<eLabel backgroundColor="OE_Background" foregroundColor="OE_Background" name="" position="30,center" size="1170,290" zPosition="-15"/>
@@ -3530,7 +3530,7 @@
 		<eLabel name="" foregroundColor="white" backgroundColor="blue_light" position="170,420" size="900,2" zPosition="-9"/>
 		<widget source="Title" render="Label" backgroundColor="OE_Background" font="RegularBold;34" position="170,370" size="900,40" transparent="1" valign="center" zPosition="3" halign="left"/>
 		<widget name="config" itemHeight="50" font="RegularBold;32" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="OE_Background" position="170,440" size="900,150" transparent="1" zPosition="3"/>
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="445,825" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="445,825" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="introduction" render="Label" font="RegularBold;28" backgroundColor="OE_Background" foregroundColor="green_light" halign="left" position="170,605" size="900,45" transparent="1" valign="center"/>
 		<!-- Button -->
 		<eLabel backgroundColor="blue_light" name="" position="170,655" size="900,2" zPosition="-9"/>
@@ -4306,7 +4306,7 @@
 		<ePixmap pixmap="OctEtFHD/buttons/key_help.png" position="165,905" size="64,43" alphatest="blend"/>
 		<eLabel backgroundColor="blue_light" name="" position="410,880" size="1490,2" zPosition="-9"/>
 		<widget name="config" itemHeight="60" font="RegularBold;25" backgroundColor="OE_Background" position="410,150" zPosition="10" size="1490,940" transparent="1"/>
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="410,635" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="410,635" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget name="description" conditional="description" position="410,880" font="RegularBold;28" backgroundColor="OE_Background" foregroundColor="blue_light" zPosition="2" size="1490,70" transparent="1" valign="center" halign="center"/>
 		<widget name="footnote" conditional="footnote" position="410,880" font="RegularBold;28" backgroundColor="OE_Background" foregroundColor="blue_light" zPosition="2" size="1490,70" transparent="1" valign="center" halign="center"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="165,905" zPosition="1" size="64,43" transparent="1" alphatest="blend">
@@ -4449,7 +4449,7 @@
 	</screen>
 	<screen name="ClientModeBoxAbout" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080">
 		<panel name="TemplateInformation"/>
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="280,700" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="280,700" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="160,900" zPosition="1" size="64,43" transparent="1" alphatest="blend">
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -5397,7 +5397,7 @@
 		<widget name="arrowup2" conditional="arrowup2" pixmap="arrowup.png" position="-100,-100" size="37,70" alphatest="blend" zPosition="11"/>
 		<widget name="stepslider" conditional="stepslider" borderWidth="1" position="665,340" size="450,35" foregroundColor="blue_light" zPosition="15" transparent="1"/>
 		<widget name="step" conditional="step" borderWidth="1" position="445,345" size="450,40" font="RegularBold;26" backgroundColor="OE_Background" foregroundColor="blue_light" zPosition="15" transparent="1"/>
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="445,825" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="445,825" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="350,825" zPosition="1" size="64,43" transparent="1" alphatest="blend">
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -5469,7 +5469,7 @@
 	</screen>
 		<!-- TEMPLATE MANDATORY WIDGETS -->
 	<screen name="MandatoryWidgets">
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="260,725" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="260,725" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="18,725" zPosition="1" size="64,43" transparent="1" alphatest="blend">
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -5485,7 +5485,7 @@
 		<!-- TEMPLATE NOT PIP -->
 	<screen name="TemplateNoPip">
 		<eLabel backgroundColor="OE_NewBg2" name="" position="1340,0" size="580,1080" zPosition="-16"/>
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="260,725" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="260,725" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="18,725" zPosition="1" size="64,43" transparent="1" alphatest="blend">
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -5501,7 +5501,7 @@
 	</screen>
 		<!-- TEMPLATE VISION CORE -->
 	<screen name="TemplateSetupVisionCore">
-		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/buttons/vkey_icon.png" position="410,635" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="OctEtFHD/skin_default/vkey_icon.png" position="410,635" size="1,1" transparent="1" zPosition="10" alphatest="on"/>
 		<widget source="VKeyIcon" render="Pixmap" conditional="VKeyIcon" pixmap="OctEtFHD/buttons/key_text.png" position="165,905" zPosition="1" size="64,43" transparent="1" alphatest="blend">
 			<convert type="ConditionalShowHide"/>
 		</widget>
