@@ -4880,6 +4880,9 @@ msgstr "Proteger configuración"
 msgid "Protect context menus"
 msgstr "Proteger menús de contexto"
 
+msgid "Protect vision core menu"
+msgstr "Proteger menú vision core"
+
 msgid "Protect main menu"
 msgstr "Proteger menú principal"
 
