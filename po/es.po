@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2021-07-28 15:54+0200\n"
+"PO-Revision-Date: 2021-10-31 21:33+0100\n"
 "Language-Team: Álvaro <mi casa>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4773,17 +4773,11 @@ msgstr "Pulse MENU en su mando para opciones adicionales."
 msgid "Press OK on your remote control to continue."
 msgstr "Pulse OK en su mando para continuar."
 
-msgid "Press OK to activate the selected %s skin."
-msgstr "Pulse OK para activar el skin %s seleccionado."
+msgid "Press OK to keep the currently the selected %s."
+msgstr "Presione OK para mantener el %s seleccionado actualmente."
 
-msgid "Press OK to keep the currently selected %s skin."
-msgstr "Pulse OK para mantener el skin %s seleccionado actualmente."
-
-msgid "Press OK to activate the selected display skin."
-msgstr "Pulse OK para activar el skin display seleccionado actualmente."
-
-msgid "Press OK to keep the currently selected display skin."
-msgstr "Pulse OK para mantener el skin display seleccionado actualmente."
+msgid "Press OK to activate the selected %s."
+msgstr "Presione OK para activar el seleccionado %s."
 
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
@@ -11246,7 +11240,6 @@ msgstr "Actualizar EPG terminado."
 
 msgid "EPG refresh started in background."
 msgstr "La actualización de EPG comenzó en segundo plano."
-
 
 msgid "EPG refresh starts scanning channels."
 msgstr "La actualización EPG comienza a escanear canales."
@@ -17801,8 +17794,12 @@ msgstr "nada"
 msgid "omit"
 msgstr "omitir"
 
-msgid "\n Do you want to switch to Android ?"
-msgstr "\n Do quieres cambiar a Android ?"
+msgid ""
+"\n"
+" Do you want to switch to Android ?"
+msgstr ""
+"\n"
+" quieres cambiar a Android ?"
 
 msgid "HDMI-CEC address"
 msgstr "Entrada HDMI-CEC"
