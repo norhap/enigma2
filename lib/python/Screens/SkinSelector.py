@@ -131,14 +131,16 @@ class SkinSelector(Screen, HelpableScreen):
 						# Code can be added here to reject unsupported resolutions.
 					# The "piconprev.png" image should be "prevpicon.png" to keep it with its partner preview image.
 					preview = pathjoin(previewPath, "piconprev.png" if skinFile == "skin_display_picon.xml" else "prev.png")
+					FileDisplayXML = "skin_display.xml"
+					FileDisplayPiconXML = "skin_display_picon.xml"
 					if skin == EMERGENCY_SKIN:
 						list = [EMERGENCY_NAME, emergency, dir, skin, resolution, preview]
 					elif skin == DEFAULT_SKIN:
 						list = [dir, default, dir, skin, resolution, preview]
 					elif skin == DEFAULT_DISPLAY_SKIN:
-						list = [dir, default, dir, skin, resolution, preview]
+						list = [dir, default, dir, skin, FileDisplayXML, preview]
 					elif skin == displayPicon:
-						list = [dir, defaultPicon, dir, skin, resolution, preview]
+						list = [dir, default, dir, skin, FileDisplayPiconXML, preview]
 					else:
 						list = [dir, "", dir, skin, resolution, preview]
 					if skin == self.current:
@@ -162,18 +164,19 @@ class SkinSelector(Screen, HelpableScreen):
 	def loadPreview(self):
 		self.currentSelectedSkin = self["skins"].getCurrent()
 		preview, resolution, skin = self.currentSelectedSkin[6], self.currentSelectedSkin[5], self.currentSelectedSkin[4]
+		preview, FileDisplayPiconXML, SkinDisplayPicon = self.currentSelectedSkin[6], self.currentSelectedSkin[4], self.currentSelectedSkin[3]
 		self.changedEntry()
 		if not exists(preview):
 			preview = resolveFilename(SCOPE_GUISKIN, "noprev.png")
 		self.picload.startDecode(preview)
 		if skin == self.config.value and resolution != None:
-			self["description"].setText(_("Press OK to keep the currently selected %s skin.") % resolution)
+			self["description"].setText(_("Press OK to keep the currently the selected %s.") % resolution)
 		else:
-			self["description"].setText(_("Press OK to activate the selected %s skin.") % resolution)
+			self["description"].setText(_("Press OK to activate the selected %s.") % resolution)
+		if SkinDisplayPicon != self.config.value and resolution == None:
+			self["description"].setText(_("Press OK to activate the selected %s.") % FileDisplayPiconXML)
 		if skin == self.config.value and resolution == None:
-			self["description"].setText(_("Press OK to keep the currently selected display skin."))
-		if skin != self.config.value and resolution == None:
-			self["description"].setText(_("Press OK to activate the selected display skin."))
+			self["description"].setText(_("Press OK to keep the currently the selected %s.") % FileDisplayPiconXML)
 
 	def cancel(self):
 		self.close(False)
