@@ -16,11 +16,13 @@ from Tools.LoadPixmap import LoadPixmap
 MODULE_NAME = __name__.split(".")[-1].capitalize()
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "OctEtFHD/skin.xml"
-EMERGENCY_SKIN = "skin_default/skin.xml"
-EMERGENCY_NAME = "OctEtFHD & Stone II"
+SKIN_DEFAULT = "skin_default/skin.xml"
+EMERGENCY_NAME = "OctEtFHD"
 DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
-SKIN_FALLBACK_1080 = "skin_fallback_1080/skin_1080.xml"
+EMERGENCY_SKIN = "skin_fallback_1080/skin.xml"
 SUBTITLE_SKIN = "skin_subtitles.xml"
+USER_SKIN_TEMPLATE = "skin_user_%s.xml"
+USER_SKIN = "skin_user.xml"
 
 GUI_SKIN_ID = 0  # Main frame-buffer.
 DISPLAY_SKIN_ID = 1  # Front panel / display / LCD.
@@ -49,7 +51,7 @@ config.skin = ConfigSubsection()
 skin = resolveFilename(SCOPE_SKINS, DEFAULT_SKIN)
 if not isfile(skin):
 	print("[Skin] Error: Default skin '%s' is not readable or is not a file!  Using emergency skin." % skin)
-	DEFAULT_SKIN = SKIN_FALLBACK_1080
+	DEFAULT_SKIN = SKIN_DEFAULT
 DEFAULT_SKIN = EMERGENCY_SKIN
 
 config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
@@ -77,9 +79,7 @@ def InitSkins():
 	global currentPrimarySkin, currentDisplaySkin, resolutions
 	runCallbacks = False
 	# Add the emergency skin.  This skin should provide enough functionality
-	# to enable basic GUI functions to work.It will be read as a last resort, that is, if there is no XML fallback in the skin by default or in fallback 1080 skin_1080.xml
-	if not isfile(resolveFilename(SCOPE_SKINS, SKIN_FALLBACK_1080)):
-		loadSkin(EMERGENCY_SKIN, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
+	loadSkin(SKIN_DEFAULT, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
 	# Add the subtitle skin.
 	loadSkin(SUBTITLE_SKIN, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
 	# Add the front panel / display / lcd skin.
@@ -106,10 +106,17 @@ def InitSkins():
 		print("[Skin] Error: Adding %s GUI skin '%s' has failed!" % (name, config.skin.primary_skin.value))
 		result.append(skin)
 	# add skin user fallback for scope skins skin_fallback_1080 in skin_1080.xml
-	if isfile(resolveFilename(SCOPE_SKINS, SKIN_FALLBACK_1080)):
-		result = loadSkin(SKIN_FALLBACK_1080, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
+	result = None
+	if isfile(resolveFilename(SCOPE_SKINS, config.skin.primary_skin.value)):
+		name = USER_SKIN_TEMPLATE % dirname(config.skin.primary_skin.value)
+		if isfile(resolveFilename(SCOPE_GUISKIN, name)):
+			result = loadSkin(name, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
+	# only with skin_user.xml in /usr/share/enigma2/
+	# if isfile(resolveFilename(SCOPE_GUISKIN, USER_SKIN)):
+		# loadSkin(USER_SKIN, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
 
-	resolution = resolutions.get(GUI_SKIN_ID, (0, 0, 0))
+	if result is None:
+		resolution = resolutions.get(GUI_SKIN_ID, (0, 0, 0))
 	if resolution[0] and resolution[1]:
 		gMainDC.getInstance().setResolution(resolution[0], resolution[1])
 		getDesktop(GUI_SKIN_ID).resize(eSize(resolution[0], resolution[1]))
