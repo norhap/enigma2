@@ -680,9 +680,10 @@ class SatfinderExtra(Satfinder):
 				print("[Satfinder][getCurrentTsidOnid] Timed out")
 				break
 
-			if self.currentProcess != currentProcess:
-				dvbreader.close(fd)
-				return
+			if hasattr(self, "currentProcess"):
+				if self.currentProcess != currentProcess:
+					dvbreader.close(fd)
+					return
 
 			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
 			if section is None:
@@ -699,7 +700,7 @@ class SatfinderExtra(Satfinder):
 				if section["header"]["section_number"] not in sdt_current_sections_read:
 					sdt_current_sections_read.append(section["header"]["section_number"])
 					sdt_current_content += section["content"]
-					if self.tsid is None or self.onid is None: # write first find straight to the screen
+					if hasattr(self, "tsid") and self.tsid is None or hasattr(self, "onid") and self.tsid is None: # write first find straight to the screen
 						self.tsid = section["header"]["transport_stream_id"]
 						self.onid = section["header"]["original_network_id"]
 						self["tsid"].setText("%d" % (section["header"]["transport_stream_id"]))
@@ -764,9 +765,10 @@ class SatfinderExtra(Satfinder):
 				print("[Satfinder][getOrbPosFromNit] Timed out reading NIT")
 				break
 
-			if self.currentProcess != currentProcess:
-				dvbreader.close(fd)
-				return
+			if hasattr(self, "currentProcess"):
+				if self.currentProcess != currentProcess:
+					dvbreader.close(fd)
+					return
 
 			section = dvbreader.read_nit(fd, nit_current_table_id, nit_other_table_id)
 			if section is None:
@@ -833,14 +835,16 @@ class SatfinderExtra(Satfinder):
 				print("[Satfinder][waitTunerLock] tuner lock timeout reached, seconds:", lock_timeout)
 				return False
 
-			if self.currentProcess != currentProcess:
-				return False
+			if hasattr(self, "currentProcess"):
+				if self.currentProcess != currentProcess:
+					return False
 
-			frontendStatus = {}
-			self.frontend.getFrontendStatus(frontendStatus)
-			if frontendStatus["tuner_state"] == "FAILED":
-				print("[Satfinder][waitTunerLock] TUNING FAILED FATAL") # enigma2 cpp code has given up trying
-				return False
+			if hasattr(self, "frontend"):
+				frontendStatus = {}
+				self.frontend.getFrontendStatus(frontendStatus)
+				if frontendStatus["tuner_state"] == "FAILED":
+					print("[Satfinder][waitTunerLock] TUNING FAILED FATAL") # enigma2 cpp code has given up trying
+					return False
 
 			if frontendStatus["tuner_state"] != "LOCKED":
 				time.sleep(0.25)
