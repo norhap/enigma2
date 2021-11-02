@@ -700,7 +700,7 @@ class SatfinderExtra(Satfinder):
 				if section["header"]["section_number"] not in sdt_current_sections_read:
 					sdt_current_sections_read.append(section["header"]["section_number"])
 					sdt_current_content += section["content"]
-					if hasattr(self, "tsid") and self.tsid is None or hasattr(self, "onid") and self.tsid is None: # write first find straight to the screen
+					if hasattr(self, "tsid") and self.tsid is None or hasattr(self, "onid") and self.onid is None: # write first find straight to the screen
 						self.tsid = section["header"]["transport_stream_id"]
 						self.onid = section["header"]["original_network_id"]
 						self["tsid"].setText("%d" % (section["header"]["transport_stream_id"]))
