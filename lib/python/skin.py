@@ -50,6 +50,8 @@ skin = resolveFilename(SCOPE_SKINS, DEFAULT_SKIN)
 if not isfile(skin):
 	print("[Skin] Error: Default skin '%s' is not readable or is not a file!  Using emergency skin." % skin)
 	DEFAULT_SKIN = SKIN_FALLBACK_1080
+DEFAULT_SKIN = EMERGENCY_SKIN
+
 config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
 config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
 
