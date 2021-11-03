@@ -16,9 +16,9 @@ from Tools.LoadPixmap import LoadPixmap
 MODULE_NAME = __name__.split(".")[-1].capitalize()
 
 DEFAULT_SKIN = SystemInfo["HasFullHDSkinSupport"] and "OctEtFHD/skin.xml"
+DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
 SKIN_DEFAULT = "skin_default/skin.xml"
 EMERGENCY_NAME = "OctEtFHD"
-DEFAULT_DISPLAY_SKIN = SystemInfo["grautec"] and "skin_default/skin_display_grautec.xml" or "skin_default/skin_display.xml"
 EMERGENCY_SKIN = "skin_fallback_1080/skin.xml"
 SUBTITLE_SKIN = "skin_subtitles.xml"
 USER_SKIN_TEMPLATE = "skin_user_%s.xml"
@@ -49,13 +49,13 @@ resolutions = {}  # Dictionary of screen resolutions for each screen ID.
 
 config.skin = ConfigSubsection()
 skin = resolveFilename(SCOPE_SKINS, DEFAULT_SKIN)
+config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
+config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
+
 if not isfile(skin):
 	print("[Skin] Error: Default skin '%s' is not readable or is not a file!  Using emergency skin." % skin)
 	DEFAULT_SKIN = SKIN_DEFAULT
 DEFAULT_SKIN = EMERGENCY_SKIN
-
-config.skin.primary_skin = ConfigText(default=DEFAULT_SKIN)
-config.skin.display_skin = ConfigText(default=DEFAULT_DISPLAY_SKIN)
 
 currentPrimarySkin = None
 currentDisplaySkin = None
