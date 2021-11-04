@@ -1,5 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
 from enigma import eDVBResourceManager, eDVBFrontendParametersSatellite, eDVBFrontendParametersTerrestrial, eTimer
 
@@ -652,7 +650,6 @@ class SatfinderExtra(Satfinder):
 		thread.start_new_thread(self.monitorTunerLock, (currentProcess,)) # if tuner loses lock we start again from scratch
 
 		adapter = 0
-		demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
 
 		sdt_pid = 0x11
 		sdt_current_table_id = 0x42
@@ -667,10 +664,12 @@ class SatfinderExtra(Satfinder):
 		sdt_current_content = []
 		sdt_current_completed = False
 
-		fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.feid)
-		if fd < 0:
-			print("[Satfinder][getCurrentTsidOnid] Cannot open the demuxer")
-			return None
+		if hasattr(self, "demux"):
+			demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
+			fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.feid)
+			if fd < 0:
+				print("[Satfinder][getCurrentTsidOnid] Cannot open the demuxer")
+				return None
 
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, tsidOnidTimeout)
@@ -734,8 +733,10 @@ class SatfinderExtra(Satfinder):
 		if self.DVB_type.value != "DVB-S" or not dvbreader_available or self.frontend is None or self.demux < 0:
 			return
 
+
 		adapter = 0
-		demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
+		if hasattr(self, "demux"):
+			demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
 
 		nit_current_pid = 0x10
 		nit_current_table_id = 0x40
@@ -797,19 +798,19 @@ class SatfinderExtra(Satfinder):
 		if not nit_current_content:
 			print("[Satfinder][getOrbPosFromNit] current transponder not found")
 			return
-
-		transponders = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x43 and t["original_network_id"] == self.onid and t["transport_stream_id"] == self.tsid]
-		transponders2 = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x43 and t["transport_stream_id"] == self.tsid]
-		if transponders and "orbital_position" in transponders[0]:
-			orb_pos = self.getOrbitalPosition(transponders[0]["orbital_position"], transponders[0]["west_east_flag"])
-			self["pos"].setText(_("%s") % orb_pos)
-			print("[satfinder][getOrbPosFromNit] orb_pos", orb_pos)
-		elif transponders2 and "orbital_position" in transponders2[0]:
-			orb_pos = self.getOrbitalPosition(transponders2[0]["orbital_position"], transponders2[0]["west_east_flag"])
-			self["pos"].setText(_("%s?") % orb_pos)
-			print("[satfinder][getOrbPosFromNit] orb_pos tentative, tsid match, onid mismatch between NIT and SDT", orb_pos)
-		else:
-			print("[satfinder][getOrbPosFromNit] no orbital position found")
+		if hasattr(self, "tsid") or hasattr(self, "onid"):
+			transponders = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x43 and t["original_network_id"] == self.onid and t["transport_stream_id"] == self.tsid]
+			transponders2 = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x43 and t["transport_stream_id"] == self.tsid]
+			if transponders and "orbital_position" in transponders[0]:
+				orb_pos = self.getOrbitalPosition(transponders[0]["orbital_position"], transponders[0]["west_east_flag"])
+				self["pos"].setText(_("%s") % orb_pos)
+				print("[satfinder][getOrbPosFromNit] orb_pos", orb_pos)
+			elif transponders2 and "orbital_position" in transponders2[0]:
+				orb_pos = self.getOrbitalPosition(transponders2[0]["orbital_position"], transponders2[0]["west_east_flag"])
+				self["pos"].setText(_("%s?") % orb_pos)
+				print("[satfinder][getOrbPosFromNit] orb_pos tentative, tsid match, onid mismatch between NIT and SDT", orb_pos)
+			else:
+				print("[satfinder][getOrbPosFromNit] no orbital position found")
 
 	def getOrbitalPosition(self, bcd, w_e_flag=1):
 		# 4 bit BCD (binary coded decimal)
@@ -854,7 +855,7 @@ class SatfinderExtra(Satfinder):
 
 	def monitorTunerLock(self, currentProcess):
 		while True:
-			if self.currentProcess:
+			if hasattr(self, "currentProcess"):
 				return
 			frontendStatus = {}
 			if frontendStatus:
@@ -906,6 +907,7 @@ class ServicesFound(Screen):
 		self["key_red"] = StaticText(_("Close"))
 		self["legend"] = Label(legend)
 		self["servicesfound"] = ScrollLabel(text)
+
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
