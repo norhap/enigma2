@@ -664,25 +664,26 @@ class SatfinderExtra(Satfinder):
 		sdt_current_content = []
 		sdt_current_completed = False
 
+		timeout = datetime.datetime.now()
+		timeout += datetime.timedelta(0, tsidOnidTimeout)
+
 		if hasattr(self, "demux"):
 			demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
+
+		if hasattr(self, "demux"):
 			fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.feid)
 			if fd < 0:
 				print("[Satfinder][getCurrentTsidOnid] Cannot open the demuxer")
 				return None
-
-		timeout = datetime.datetime.now()
-		timeout += datetime.timedelta(0, tsidOnidTimeout)
 
 		while True:
 			if datetime.datetime.now() > timeout:
 				print("[Satfinder][getCurrentTsidOnid] Timed out")
 				break
 
-			if hasattr(self, "currentProcess"):
-				if self.currentProcess != currentProcess:
-					dvbreader.close(fd)
-					return
+			if not hasattr(self, "currentProcess"):
+				dvbreader.close()
+				return
 
 			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
 			if section is None:
