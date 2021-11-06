@@ -1420,7 +1420,7 @@ msgid "Clear before scan"
 msgstr "Limpiar antes de escanear"
 
 msgid "Clear fixed"
-msgstr "Limpiar arreglado"
+msgstr "Limpiar dirección"
 
 msgid "Clear log"
 msgstr "Limpiar log"
@@ -5905,7 +5905,7 @@ msgid "Set end time"
 msgstr "Establecer tiempo final"
 
 msgid "Set fixed"
-msgstr "Establecer fijado"
+msgstr "Establecer dirección"
 
 msgid "Set interface as default Interface"
 msgstr "Establecer interfaz como predeterminada"
