@@ -114,11 +114,11 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 
 	def updateAddress(self):
 		import Components.HdmiCec
-		self.current_address = _("Current CEC address") + ":\t" + Components.HdmiCec.hdmi_cec.getPhysicalAddress()
+		self.current_address = _("Current CEC address") + ": " + Components.HdmiCec.hdmi_cec.getPhysicalAddress()
 		if config.hdmicec.fixed_physical_address.value == "0.0.0.0":
 			self.fixed_address = _("Press yellow button to set CEC address again")
 		else:
-			self.fixed_address = _("Using fixed address") + ":\t" + config.hdmicec.fixed_physical_address.value
+			self.fixed_address = _("Using fixed address") + ": " + config.hdmicec.fixed_physical_address.value
 		self.updateDescription()
 
 	def logPath(self, res):
