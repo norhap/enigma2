@@ -17806,3 +17806,6 @@ msgstr "Entrada HDMI-CEC"
 
 msgid "Error in XML file: Try to solve and then restart."
 msgstr "Error en archivo XML: intente solucionarlo y luego reinicie."
+
+msgid "Press yellow button to set CEC address again"
+msgstr "Presione el botón amarillo para configurar la dirección HDMI-CEC nuevamente"
