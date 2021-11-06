@@ -2021,14 +2021,14 @@
 		<widget name="icon" conditional="icon" pixmaps="OctEtFHD/icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="680,265" size="80,80" alphatest="blend"/>
 	</screen>
 	<!-- MESSAGEBOX SIMPLE-->
-	<screen name="MessageBoxSimple" backgroundColor="transparent" position="300,center" size="1290,800">
+	<screen name="MessageBoxSimple" backgroundColor="transparent" position="center,center" size="1290,725">
 		<panel name="MessageBoxTemplate"/>
-		<eLabel backgroundColor="OE_NewBg2" foregroundColor="white" name="" position="20,20" size="150,770" zPosition="-10"/>
-		<eLabel backgroundColor="OE_Background" foregroundColor="OE_Background" name="" position="0,center" size="1290,800" zPosition="-15"/>
-		<eLabel backgroundColor="blue_light" name="" position="20,20" size="2,770" zPosition="20" foregroundColor="white"/>
-		<eLabel backgroundColor="blue_light" name="" position="20,20" size="1250,2" zPosition="-10" foregroundColor="white"/>
-		<eLabel backgroundColor="blue_light" name="" position="1270,20" size="2,770" zPosition="20" foregroundColor="white"/>
-		<eLabel backgroundColor="blue_light" name="" position="20,790" size="1252,2" zPosition="-10" foregroundColor="white"/>
+		<eLabel backgroundColor="OE_NewBg2" foregroundColor="white" name="" position="20,10" size="150,705" zPosition="-10"/>
+		<eLabel backgroundColor="OE_Background" foregroundColor="OE_Background" name="" position="0,center" size="1290,725" zPosition="-15"/>
+		<eLabel backgroundColor="blue_light" name="" position="20,10" size="2,705" zPosition="20" foregroundColor="white"/>
+		<eLabel backgroundColor="blue_light" name="" position="20,10" size="1250,2" zPosition="-10" foregroundColor="white"/>
+		<eLabel backgroundColor="blue_light" name="" position="1270,10" size="2,705" zPosition="20" foregroundColor="white"/>
+		<eLabel backgroundColor="blue_light" name="" position="20,715" size="1252,2" zPosition="-10" foregroundColor="white"/>
 	</screen>
 	<!-- MEDIAPLAYER-->
 	<screen name="MediaPlayer" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1920,1080" title="MediaPlayer" transparent="0">
@@ -5263,14 +5263,42 @@
 	</screen>
 		<!-- MESSAGEBOX TEMPLATE-->
 	<screen name="MessageBoxTemplate">
-		<widget name="text" font="RegularBold;26" backgroundColor="OE_Background" position="175,25" size="1090,350" valign="center" halign="center"/>
-		<widget name="ErrorPixmap" conditional="ErrorPixmap" pixmap="OctEtFHD/icons/input_error.png" position="55,50" size="80,80" alphatest="blend"/>
-		<widget name="QuestionPixmap" conditional="QuestionPixmap" pixmap="OctEtFHD/icons/input_question.png" position="55,50" size="80,80" alphatest="blend"/>
-		<widget name="InfoPixmap" conditional="InfoPixmap" pixmap="OctEtFHD/icons/input_info.png" position="55,50" size="80,80" alphatest="blend"/>
-		<widget name="WarningPixmap" conditional="WarningPixmap" pixmap="OctEtFHD/icons/input_warning.png" position="55,50" size="80,80" alphatest="blend"/>
-		<widget name="icon" conditional="icon" pixmaps="OctEtFHD/icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="55,50" size="80,80" alphatest="blend"/>
-		<widget name="list" itemHeight="45" font="RegularBold;26" backgroundColor="OE_Background" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" position="175,380" size="1090,405" transparent="1"/>
 		<panel name="autoresize"/>
+		<widget name="text" font="RegularBold;26" backgroundColor="OE_Background" position="175,25" size="1050,350" valign="center" halign="center"/>
+		<widget name="ErrorPixmap" conditional="ErrorPixmap" pixmap="icons/input_error.png" position="55,50" size="80,80" alphatest="blend"/>
+		<widget name="QuestionPixmap" conditional="QuestionPixmap" pixmap="icons/input_question.png" position="55,50" size="80,80" alphatest="blend"/>
+		<widget name="InfoPixmap" conditional="InfoPixmap" pixmap="icons/input_info.png" position="55,50" size="80,80" alphatest="blend"/>
+		<widget name="WarningPixmap" conditional="WarningPixmap" pixmap="icons/input_warning.png" position="55,50" size="80,80" alphatest="blend"/>
+		<widget name="icon" conditional="icon" pixmaps="icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="55,50" size="80,80" alphatest="blend"/>
+		<widget name="list" itemHeight="45" font="RegularBold;26" backgroundColor="OE_Background" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" position="175,380" size="1090,405" transparent="1"/>
+		<applet type="onLayoutFinish">
+# this should be factored out into some helper code, but currently demonstrates applets.
+from enigma import eSize, ePoint
+orgwidth = self.instance.size().width()
+orgpos = self.instance.position()
+textsize = self[&quot;text&quot;].getSize()
+# y size still must be fixed in font stuff...
+textsize = (textsize[0] + 60, textsize[1] + 60)
+offset = 20
+if self.type == self.TYPE_YESNO:
+	offset = 60
+wsizex = textsize[0] + 60
+wsizey = textsize[1] + offset
+if (1100 &gt; wsizex):
+	wsizex = 1100
+wsize = (wsizex, wsizey)
+# resize
+#self.instance.resize(eSize(*wsize))
+# resize label
+self[&quot;text&quot;].instance.resize(eSize(*textsize))
+# move list
+listsize = (wsizex - 30, 605)
+self[&quot;list&quot;].instance.move(ePoint(185, int(textsize[1] + 180)))
+self[&quot;list&quot;].instance.resize(eSize(*listsize))
+# center window
+newwidth = wsize[0]
+self.instance.move(ePoint(int(orgpos.x() + (orgwidth - newwidth) // 2), int(orgpos.y())))
+		</applet>
 	</screen>
 		<!-- AUTORESIZE-->
 	<screen name="autoresize" position="fill" flags="wfNoBorder">
