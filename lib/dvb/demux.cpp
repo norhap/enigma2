@@ -356,9 +356,9 @@ void eDVBPESReader::data(int)
 {
 	while (1)
 	{
-		uint8_t buffer[16384];
+		uint8_t buffer[8192];
 		int r;
-		r = ::read(m_fd, buffer, 16384);
+		r = ::read(m_fd, buffer, 8192);
 		if (!r)
 			return;
 		if(r < 0)
@@ -373,7 +373,7 @@ void eDVBPESReader::data(int)
 			m_read(buffer, r);
 		else
 			eWarning("[eDVBPESReader] PES reader not active");
-		if (r != 16384)
+		if (r != 8192)
 			break;
 	}
 }
