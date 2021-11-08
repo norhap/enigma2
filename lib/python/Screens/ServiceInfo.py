@@ -96,7 +96,7 @@ class ServiceInfo(Screen):
 
 		self["infolist"] = ServiceInfoList([])
 		self.setTitle(_("Service info"))
-		self["key_red"] = self["red"] = Label(_("Exit"))
+		self["key_red"] = self["red"] = Label(_("Close"))
 		self["key_green"] = self["green"] = Label(_("ECM Info"))
 		self["lab1"] = StaticText(_("OpenVision"))
 		self["lab2"] = StaticText(_("Lets define enigma2 once more"))

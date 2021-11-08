@@ -17801,8 +17801,11 @@ msgstr ""
 "\n"
 " quieres cambiar a Android ?"
 
-msgid "HDMI-CEC address"
-msgstr "Entrada HDMI-CEC"
+msgid "HDMI-CEC Enabled"
+msgstr "HDMI-CEC Activado"
+
+msgid "No fixed address set"
+msgstr "No se ha establecido dirección fija"
 
 msgid "Error in XML file: Try to solve and then restart."
 msgstr "Error en archivo XML: intente solucionarlo y luego reinicie."

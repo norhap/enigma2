@@ -52,18 +52,18 @@ INFO_COLOR = {
 URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
 
 def news(url):
-    text = ""
-    try:
-        req = urllib2.Request(url)
-        response = urllib2.urlopen(req)
-        link = response.read().decode("windows-1252")
-        response.close()
-        text = link.encode("utf-8")
+	text = ""
+	try:
+		req = urllib2.Request(url)
+		response = urllib2.urlopen(req)
+		link = response.read().decode("windows-1252")
+		response.close()
+		text = link.encode("utf-8")
 
-    except:
-        print("ERROR novedades alvaro %s" %(url))
+	except:
+		print("ERROR Latest Commits %s" %(url))
 
-    return text
+	return text
 
 
 class InformationBase(Screen, HelpableScreen):
@@ -305,6 +305,11 @@ class About(Screen):
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		self["key_green"] = Button(_("Translations"))
+		self["key_red"] = Button(_("Latest Commits"))
+		self["key_yellow"] = Button(_("Dmesg Info"))
+		self["key_blue"] = Button(_("Memory Info"))
+
 		hddsplit = skin.parameters.get("AboutHddSplit", 0)
 
 		model = getBoxType()
@@ -363,9 +368,12 @@ class About(Screen):
 			AboutText += fp_version
 			self["FPVersion"] = StaticText(fp_version)
 
-		if SystemInfo["HasHDMI-CEC"]:
-			if config.hdmicec.enabled.value:
-				AboutText += "\n" + _("HDMI-CEC address") + ": " + config.hdmicec.fixed_physical_address.value
+		if SystemInfo["HasHDMI-CEC"] and config.hdmicec.enabled.value:
+			address = config.hdmicec.fixed_physical_address.value if config.hdmicec.fixed_physical_address.value != "0.0.0.0" else _("No fixed address set")
+			AboutText += "\n" + _("HDMI-CEC Enabled") + ": " + address
+		else:
+			hdmicec_disabled = _("Disabled")
+			AboutText += "\n" + _("HDMI-CEC %s") % hdmicec_disabled
 
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
@@ -377,25 +385,19 @@ class About(Screen):
 
 		AboutText += "\n"
 		for x in about.GetIPsFromNetworkInterfaces():
-		    AboutText += _("Uptime: ") + about.getBoxUptime()
+			AboutText += _("Uptime: ") + about.getBoxUptime()
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
-		self["key_green"] = Button(_("Translations"))
-		self["key_red"] = Button(_("Latest Commits"))
-		self["key_yellow"] = Button(_("Dmesg Info"))
-		self["key_blue"] = Button(_("Memory Info"))
-
-		self["actions"] = ActionMap(["OkCancelActions", "SetupActions", "DirectionActions"],
-			{
-				"cancel": self.close,
-				"ok": self.close,
-				"red": self.showCommits,
-				"green": self.showTranslationInfo,
-				"blue": self.showMemoryInfo,
-				"yellow": self.showTroubleshoot,
-				"up": self["AboutScrollLabel"].pageUp,
-				"down": self["AboutScrollLabel"].pageDown
-			})
+		self["actions"] = ActionMap(["OkCancelActions", "SetupActions", "DirectionActions"], {
+			"cancel": self.close,
+			"ok": self.close,
+			"red": self.showCommits,
+			"green": self.showTranslationInfo,
+			"blue": self.showMemoryInfo,
+			"yellow": self.showTroubleshoot,
+			"up": self["AboutScrollLabel"].pageUp,
+			"down": self["AboutScrollLabel"].pageDown
+		})
 
 	def showTranslationInfo(self):
 		self.session.open(TranslationInfo)
@@ -492,9 +494,8 @@ class Geolocation(Screen):
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-
+		self["key_red"] = Button(_("Close"))
 		GeolocationText = _("Information about your Geolocation data") + "\n"
-
 		GeolocationText += "\n"
 
 		try:
@@ -550,15 +551,12 @@ class Geolocation(Screen):
 		except Exception as err:
 			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection"))
 
-		self["key_red"] = Button(_("Close"))
-
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"],
-			{
-				"cancel": self.close,
-				"ok": self.close,
-				"up": self["AboutScrollLabel"].pageUp,
-				"down": self["AboutScrollLabel"].pageDown
-			})
+		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"], {
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["AboutScrollLabel"].pageUp,
+			"down": self["AboutScrollLabel"].pageDown
+		})
 
 
 class TunerInformation(InformationBase):
@@ -620,7 +618,7 @@ class TunerInformation(InformationBase):
 		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if getHaveMultiTranscoding() == "True" else _("No"))))
 		info.append("")
 		if fileHas("/tmp/dvbfetool.txt", "Mode 2: DVB-S"):
-		     info.append(formatLine("", _("DVB-S2/C/T2 Combined"), (_("Yes"))))
+			 info.append(formatLine("", _("DVB-S2/C/T2 Combined"), (_("Yes"))))
 
 		info.append(formatLine("", _("DVB-S2X"), (_("Yes") if fileHas("/tmp/dvbfetool.txt", "DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi") else _("No"))))
 		info.append(formatLine("", _("DVB-S"), (_("Yes") if "DVBS" in dvbFeToolTxt or "DVB-S" in dvbFeToolTxt else _("No"))))
@@ -764,6 +762,13 @@ class SystemNetworkInfo(Screen):
 		self["statuspic"].show()
 		self["devicepic"] = MultiPixmap()
 		self["AboutScrollLabel"] = ScrollLabel()
+		self["key_red"] = StaticText(_("Close"))
+		self["actions"] = ActionMap(["SetupActions", "ColorActions", "DirectionActions"], {
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["AboutScrollLabel"].pageUp,
+			"down": self["AboutScrollLabel"].pageDown
+		})
 
 		self.iface = None
 		self.createscreen()
@@ -779,14 +784,6 @@ class SystemNetworkInfo(Screen):
 			self.resetList()
 			self.onClose.append(self.cleanup)
 
-		self["key_red"] = StaticText(_("Close"))
-
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "DirectionActions"], {
-			"cancel": self.close,
-			"ok": self.close,
-			"up": self["AboutScrollLabel"].pageUp,
-			"down": self["AboutScrollLabel"].pageDown
-		})
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createscreen(self):
@@ -967,8 +964,8 @@ class SystemNetworkInfo(Screen):
 						self.AboutText += _('Encryption:') + '\t' + encryption + '\n'
 
 					if ((status[self.iface]["essid"] and status[self.iface]["essid"] == "off") or
-					    not status[self.iface]["accesspoint"] or
-					    status[self.iface]["accesspoint"] == "Not-Associated"):
+						not status[self.iface]["accesspoint"] or
+						status[self.iface]["accesspoint"] == "Not-Associated"):
 						self.LinkState = False
 						self["statuspic"].setPixmapNum(1)
 						self["statuspic"].show()
@@ -1046,9 +1043,9 @@ class SystemMemoryInfo(Screen):
 		self["AboutScrollLabel"] = ScrollLabel()
 		self["key_red"] = Button(_("Close"))
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"], {
-		"cancel": self.close,
-		"ok": self.close,
-		"red": self.close,
+			"cancel": self.close,
+			"ok": self.close,
+			"red": self.close,
 		})
 
 		out_lines = file("/proc/meminfo").readlines()
@@ -1098,10 +1095,18 @@ class TranslationInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.setTitle(_("Translation"))
+		self["key_red"] = StaticText(_("Close"))
+		info = _("TRANSLATOR_INFO")
+		self["TranslationInfo"] = StaticText(info)
+		self["lab1"] = StaticText(_("OpenVision"))
+		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
+		self["lab3"] = StaticText(_("Report problems to:"))
+		self["lab4"] = StaticText(_("https://openvision.tech"))
+		self["lab5"] = StaticText(_("Sources are available at:"))
+		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		# don't remove the string out of the _(), or it can't be "translated" anymore.
 
 		# TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
-		info = _("TRANSLATOR_INFO")
 
 		if info == "TRANSLATOR_INFO":
 			info = "(N/A)"
@@ -1116,56 +1121,41 @@ class TranslationInfo(Screen):
 			infomap[type] = value
 		print(infomap)
 
-		self["key_red"] = Button(_("Cancel"))
-		self["TranslationInfo"] = StaticText(info)
-		self["lab1"] = StaticText(_("OpenVision"))
-		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
-		self["lab3"] = StaticText(_("Report problems to:"))
-		self["lab4"] = StaticText(_("https://openvision.tech"))
-		self["lab5"] = StaticText(_("Sources are available at:"))
-		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-
 		translator_name = infomap.get("Language-Team", "none")
 		if translator_name == "none":
 			translator_name = infomap.get("Last-Translator", "")
 
 		self["TranslatorName"] = StaticText(translator_name)
 
-		self["actions"] = ActionMap(["SetupActions"],
-			{
-				"cancel": self.close,
-				"ok": self.close,
-			})
+		self["actions"] = ActionMap(["SetupActions"], {
+			"cancel": self.close,
+			"ok": self.close,
+		})
 
 
 class CommitInfoDevelop(Screen):
-    def __init__(self, session):
-        Screen.__init__(self, session)
-        self.session = session
-        self.skinName = "CommitInfoDevelop"
-        self.setup_title = _("Novedades Alvaro")
-        self.setTitle(self.setup_title)
-        self["news"] = ScrollLabel()
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self.session = session
+		self.skinName = "CommitInfoDevelop"
+		self.setup_title = _("Latest Commits")
+		self.setTitle(self.setup_title)
+		self["news"] = ScrollLabel()
+		self["news"].setText(news(URL))
+		self["lab1"] = StaticText(_("OpenVision"))
+		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
+		self["lab3"] = StaticText(_("Report problems to:"))
+		self["lab4"] = StaticText(_("https://openvision.tech"))
+		self["lab5"] = StaticText(_("Sources are available at:"))
+		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		self["key_red"] = StaticText(_("Close"))
 
-        self["Actions"] = ActionMap(['OkCancelActions', 'ShortcutActions',"ColorActions","DirectionActions"], {
-            "cancel" : self.cerrar,
-            "ok" : self.cerrar,
-            "up": self["news"].pageUp,
-            "down": self["news"].pageDown,
-            "left": self["news"].pageUp,
-            "right": self["news"].pageDown,
-        })
-
-	self['news'].setText(news(URL))
-	self["lab1"] = StaticText(_("OpenVision"))
-	self["lab2"] = StaticText(_("Lets define enigma2 once more"))
-	self["lab3"] = StaticText(_("Report problems to:"))
-	self["lab4"] = StaticText(_("https://openvision.tech"))
-	self["lab5"] = StaticText(_("Sources are available at:"))
-	self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-
-    def cerrar(self):
-        self.close()
+		self["Actions"] = ActionMap(["SetupActions"], {
+			"cancel" : self.close,
+			"ok": self.close,
+			"left": self["news"].pageUp,
+			"right": self["news"].pageDown,
+		})
 
 	def readGithubCommitLogs(self):
 		url = self.projects[self.project][0]
@@ -1219,7 +1209,7 @@ class CommitInfoDevelop(Screen):
 class MemoryInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["key_red"] = Label(_("Cancel"))
+		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = Label(_("Refresh"))
 		self["key_blue"] = Label(_("Clear"))
 		self['lmemtext'] = Label()
@@ -1317,7 +1307,7 @@ class Troubleshoot(Screen):
 		Screen.__init__(self, session)
 		self.setTitle(_("Troubleshoot"))
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
-		self["key_red"] = Button()
+		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = Button()
 		self["lab1"] = StaticText(_("OpenVision"))
 		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
@@ -1447,5 +1437,5 @@ class Troubleshoot(Screen):
 		self.updateKeys()
 
 	def updateKeys(self):
-		self["key_red"].setText(_("Cancel") if self.commandIndex < self.numberOfCommands else _("Remove all logfiles"))
+		self["key_red"].setText(_("Close") if self.commandIndex < self.numberOfCommands else _("Remove all logfiles"))
 		self["key_green"].setText(_("Refresh") if self.commandIndex < self.numberOfCommands else _("Remove this logfile"))
