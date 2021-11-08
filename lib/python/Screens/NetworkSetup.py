@@ -2886,7 +2886,7 @@ class NetworkInadynLog(Screen):
 
 
 config.networkushare = ConfigSubsection()
-config.networkushare.mediafolders = NoSave(ConfigLocations(default=""))
+config.networkushare.mediafolders = NoSave(ConfigLocations(default=None))
 
 
 class NetworkuShare(NSCommon, Screen):
@@ -3315,7 +3315,7 @@ class NetworkuShareLog(Screen):
 
 
 config.networkminidlna = ConfigSubsection()
-config.networkminidlna.mediafolders = NoSave(ConfigLocations(default=""))
+config.networkminidlna.mediafolders = NoSave(ConfigLocations(default=None))
 
 
 class NetworkMiniDLNA(NSCommon, Screen):
