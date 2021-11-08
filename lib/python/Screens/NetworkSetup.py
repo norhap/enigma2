@@ -3046,14 +3046,14 @@ class NetworkuShare(NSCommon, Screen):
 class NetworkuShareSetup(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("uShare setup"))
+		Screen.setTitle(self, _("Setup uShare"))
 		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.selectionChanged)
-		Screen.setTitle(self, _("uShare setup"))
-		self['key_red'] = Label(_("Save"))
-		self['key_green'] = Label(_("Shares"))
-		self['actions'] = ActionMap(['WizardActions', 'ColorActions', 'VirtualKeyboardActions'], {'red': self.saveuShare, 'green': self.selectfolders, 'back': self.close, 'showVirtualKeyboard': self.KeyText})
+		Screen.setTitle(self, _("Setup uShare"))
+		self['key_red'] = Label(_("Close"))
+		self['key_yellow'] = Label(_("Shares"))
+		self['actions'] = ActionMap(['OkCancelActions', 'WizardActions', 'ColorActions', 'VirtualKeyboardActions'], {'red': self.close, 'green': self.saveuShare, 'yellow': self.selectfolders, 'back': self.close, 'showVirtualKeyboard': self.KeyText})
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self.updateList()
@@ -3260,10 +3260,11 @@ class uShareSelection(Screen):
 
 	def selectionChanged(self):
 		current = self["checkList"].getCurrent()[0]
-		if current[2] is True:
-			self["key_yellow"].setText(_("Deselect"))
-		else:
-			self["key_yellow"].setText(_("Select"))
+		if len(current) > 2:
+			if current[2] is True:
+				self["key_yellow"].setText(_("Deselect"))
+			else:
+				self["key_yellow"].setText(_("Select"))
 
 	def up(self):
 		self["checkList"].up()

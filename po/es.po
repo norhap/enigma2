@@ -15184,10 +15184,10 @@ msgid "Share folder"
 msgstr "Compartir carpeta"
 
 msgid "Shares"
-msgstr "Shares"
+msgstr "Compartir"
 
 msgid "Share View"
-msgstr "Ver shares"
+msgstr "Compartir Vista"
 
 msgid "Extended Shares"
 msgstr "Extender Compartidos"
@@ -15337,8 +15337,8 @@ msgstr "nombre uShare"
 msgid "uShare port"
 msgstr "puerto uShare"
 
-msgid "uShare setup"
-msgstr "configurar uShare"
+msgid "Setup uShare"
+msgstr "Ajustes uShare"
 
 msgid "Show Main Menu as"
 msgstr "Mostrar menú principal como"
