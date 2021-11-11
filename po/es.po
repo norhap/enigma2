@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2021-10-31 21:33+0100\n"
+"PO-Revision-Date: 2021-11-11 19:09+0100\n"
 "Language-Team: Álvaro <mi casa>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1727,8 +1727,8 @@ msgstr "Valor actual: "
 msgid "Currently the commit log cannot be retrieved - please try later again"
 msgstr "Actualmente, el registro de confirmación no se puede recuperar. Inténtalo más tarde nuevamente"
 
-msgid "Cut"
-msgstr "Cortar"
+msgid "Cut Menu"
+msgstr "Menú Cortar"
 
 msgid "Cutlist editor"
 msgstr "Editor de lista de cortes"
@@ -8347,8 +8347,11 @@ msgstr "día"
 msgid "default"
 msgstr "por defecto"
 
-msgid "delete cut"
-msgstr "eliminar corte"
+msgid "Delete cut"
+msgstr "Eliminar corte"
+
+msgid "Delete cut (disabled)"
+msgstr "Eliminar corte (deshabilitado)"
 
 msgid "descramble and record ecm"
 msgstr "descifrar y grabar ecm"
@@ -8428,8 +8431,11 @@ msgstr "editar alternativas finales"
 msgid "End bouquet edit"
 msgstr "Fin de edición de bouquet"
 
-msgid "end cut here"
-msgstr "finalizar corte aquí"
+msgid "End cut here"
+msgstr "Finalizar corte aquí"
+
+msgid "End cut here (reset)"
+msgstr "Finalizar corte aquí (restablecer)"
 
 msgid "end favourites edit"
 msgstr "fin de edición de favoritos"
@@ -8551,8 +8557,8 @@ msgstr "ir a reposo profundo"
 msgid "go to standby"
 msgstr "ir a reposo"
 
-msgid "grab this frame as bitmap"
-msgstr "tomar este cuadro como mapa de bits"
+msgid "Grab this frame as bitmap"
+msgstr "Tomar este cuadro como mapa de bits"
 
 msgid "green"
 msgstr "verde"
@@ -8581,8 +8587,11 @@ msgstr "iniciar módulo"
 msgid "init modules"
 msgstr "iniciar módulos"
 
-msgid "insert mark here"
-msgstr "insertar marca aquí"
+msgid "Insert mark here"
+msgstr "Insertar marca aquí"
+
+msgid "Remove this mark"
+msgstr "Quitar esta marca"
 
 msgid "invalid type"
 msgstr "tipo inválido"
@@ -8839,8 +8848,29 @@ msgstr "religión"
 msgid "remarkable people"
 msgstr "personas notables"
 
-msgid "remove after this position"
-msgstr "eliminar después de esta posición"
+msgid "Remove after this position"
+msgstr "Eliminar después de esta posición"
+
+msgid "Remove bookmarks in cuts"
+msgstr "Eliminar marcadores en cortes"
+
+msgid "Preserve bookmarks in cuts"
+msgstr "Conservar marcadores en cortes"
+
+msgid "Enable cuts (preview)"
+msgstr "Habilitar cortes (vista previa)"
+
+msgid "Disable cuts (edit)"
+msgstr "Deshabilitar cortes (editar)"
+
+msgid "Execute cuts and exit"
+msgstr "Ejecutar cortes y salir"
+
+msgid "Quick execute"
+msgstr "Ejecución rápida"
+
+msgid "Insert mark after each in"
+msgstr "Insertar marca después de cada en"
 
 msgid "Remove all alternatives"
 msgstr "Eliminar todos los alternativos"
@@ -8848,8 +8878,8 @@ msgstr "Eliminar todos los alternativos"
 msgid "remove all new found flags"
 msgstr "eliminar todas los indicadores nuevos encontrados"
 
-msgid "remove before this position"
-msgstr "eliminar tras esta posición"
+msgid "Remove before this position"
+msgstr "Eliminar tras esta posición"
 
 msgid "Remove bouquet from parental protection"
 msgstr "Eliminar bouquet de la protección parental"
@@ -8874,9 +8904,6 @@ msgstr "eliminar satélite seleccionado"
 
 msgid "remove terrestrial services"
 msgstr "eliminar servicios terrestres"
-
-msgid "remove this mark"
-msgstr "eliminar esta marca"
 
 msgid "Rename entry"
 msgstr "Renombrar entrada"
@@ -9065,8 +9092,23 @@ msgstr "magacine de deportes"
 msgid "standard"
 msgstr "estándar"
 
-msgid "start cut here"
-msgstr "comenzar corte aquí"
+msgid "Start cut"
+msgstr "Empezar corte"
+
+msgid "End cut"
+msgstr "Corte final"
+
+msgid "Step back"
+msgstr "Paso atrás"
+
+msgid "Step forward"
+msgstr "Un paso adelante"
+
+msgid "Start cut here"
+msgstr "Comenzar corte aquí"
+
+msgid "Start cut here (reset)"
+msgstr "Comenzar corte aquí (restablecer)"
 
 msgid "Start directory"
 msgstr "Directorio de inicio"
