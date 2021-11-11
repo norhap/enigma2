@@ -17827,3 +17827,9 @@ msgstr "%s KSymb/s"
 
 msgid "%.3f MHz"
 msgstr "%.3f MHz"
+
+msgid "Original audio"
+msgstr "Audio original"
+
+msgid "Visually impaired commentary"
+msgstr "Comentarios para personas con discapacidad visual"
