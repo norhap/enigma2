@@ -4249,6 +4249,9 @@ msgstr "Noruego"
 msgid "Not Defined"
 msgstr "No Definido"
 
+msgid "Not defined"
+msgstr "No definido"
+
 msgid "Not associated"
 msgstr "No asociado"
 
@@ -17812,3 +17815,15 @@ msgstr "Error en archivo XML: intente solucionarlo y luego reinicie."
 
 msgid "Press yellow button to set CEC address again"
 msgstr "Pulse amarillo para configurar la dirección HDMI-CEC nuevamente"
+
+msgid "Audio description for the visually impaired"
+msgstr "Descripción de audio para personas con discapacidad visual"
+
+msgid "%s MHz"
+msgstr "%s MHz"
+
+msgid "%s KSymb/s"
+msgstr "%s KSymb/s"
+
+msgid "%.3f MHz"
+msgstr "%.3f MHz"
