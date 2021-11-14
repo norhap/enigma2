@@ -351,16 +351,17 @@ class Session:
 		return dlg
 
 	def open(self, screen, *arguments, **kwargs):
-		if self.dialog_stack and not self.in_exec:
-			raise BaseException
-			# ...unless it's the very first screen.
-
+		try:
+			if self.dialog_stack and not self.in_exec:
+				raise RuntimeError
+		except:
+			print("[StartEnigma] Error: Modal open are allowed only from a screen which is modal!")  # ...unless it's the very first screen.
 		self.pushCurrent()
-		dlg = self.current_dialog = self.instantiateDialog(screen, *arguments, **kwargs)
-		dlg.isTmp = True
-		dlg.callback = None
+		dialog = self.current_dialog = self.instantiateDialog(screen, *arguments, **kwargs)
+		dialog.isTmp = True
+		dialog.callback = None
 		self.execBegin()
-		return dlg
+		return dialog
 
 	def close(self, screen, *retval):
 		if not self.in_exec:
