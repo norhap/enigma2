@@ -67,7 +67,7 @@ class Satfinder(ScanSetup, ServiceScan):
 		self.setTitle(_("Signal finder"))
 		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
+		self["actions"] = ActionMap(["SetupActions"],
 		{
 			"save": self.keyGoScan,
 			"ok": self.keyGoScan,
@@ -874,9 +874,12 @@ class SatfinderExtra(Satfinder):
 		red = "\c00ff8888" # encrypted tv
 		yellow = "\c00ffff00" # data/interactive/catch-all/etc
 		blue = "\c007799ff" # radio
+		default = "\c00ffffff" # colour default white
 		no_colour = skin.parameters.get("ServiceInfoAltColor", (" "))
-		out = []
-		legend = "%s%s%s:  %s%s%s  %s%s%s  %s%s%s  %s%s%s\n\n%s%s%s\n" % (no_colour, _("Services"), no_colour, green, _("FTA TV"), no_colour, red, _("Encrypted TV"), no_colour, blue, _("Radio"), no_colour, yellow, _("Other"), no_colour, no_colour, _(" "), no_colour)
+		dash = "%s%s" % (default, "- ")
+		listItem = []
+		services = [x.encode("UTF-8") for x in listItem]
+		legend = "%s%s:  %s%s  %s%s  %s%s  %s%s\n" % (no_colour, _("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))
 		for service in self.serviceList:
 			fta = "free_ca" in service and service["free_ca"] == 0
 			if service["service_type"] in radio:
@@ -887,9 +890,9 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
-			out.append("%s%s%s" % (colour, service["service_name"], no_colour))
+			services.append("%s%s%s%s" % (dash, colour, service["service_name"], no_colour))
 
-		self.session.open(ServicesFound, "\n".join(out), legend)
+		self.session.open(ServicesFound, "\n".join(services), legend)
 
 
 class ServicesFound(Screen):
