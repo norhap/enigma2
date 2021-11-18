@@ -207,8 +207,8 @@ class InformationImage(Screen, HelpableScreen):
 			"close": (self.closeRecursive, _("Close the screen and exit all menus")),
 			"ok": (self.nextImage, _("Show next image")),
 			"red": (self.keyCancel, _("Close the screen")),
-			"GREEN": (self.prevImage, _("Show previous image")),
-			"YELLOW": (self.nextImage, _("Show next image"))
+			"green": (self.prevImage, _("Show previous image")),
+			"yellow": (self.nextImage, _("Show next image"))
 		}, prio=0, description=_("Receiver Image Actions"))
 		self.images = (
 			(_("Front"), "%s%s.png", (boxes, model)),
@@ -388,7 +388,7 @@ class About(Screen):
 			AboutText += _("Uptime: ") + about.getBoxUptime()
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
-		self["actions"] = ActionMap(["OkCancelActions", "SetupActions", "DirectionActions"], {
+		self["actions"] = ActionMap(["ColorActionsAbout", "DirectionActions"], {
 			"cancel": self.close,
 			"ok": self.close,
 			"red": self.showCommits,
@@ -551,9 +551,10 @@ class Geolocation(Screen):
 		except Exception as err:
 			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection"))
 
-		self["actions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions"], {
-			"cancel": self.close,
+		self["actions"] = ActionMap(["ColorActionsAbout", "SetupActions", "DirectionActions"], {
+			"red": self.close,
 			"ok": self.close,
+			"cancel": self.close,
 			"up": self["AboutScrollLabel"].pageUp,
 			"down": self["AboutScrollLabel"].pageDown
 		})
@@ -656,7 +657,7 @@ class Devices(Screen):
 		self.activityTimer = eTimer()
 		self.activityTimer.timeout.get().append(self.populate2)
 		self["key_red"] = Button(_("Close"))
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "TimerEditActions"], {
+		self["actions"] = ActionMap(["SetupActions", "ColorActionsAbout", "TimerEditActions"], {
 			"cancel": self.close,
 			"red": self.close,
 			"save": self.close,
@@ -763,7 +764,7 @@ class SystemNetworkInfo(Screen):
 		self["devicepic"] = MultiPixmap()
 		self["AboutScrollLabel"] = ScrollLabel()
 		self["key_red"] = StaticText(_("Close"))
-		self["actions"] = ActionMap(["SetupActions", "ColorActions", "DirectionActions"], {
+		self["actions"] = ActionMap(["SetupActions", "ColorActionsAbout", "DirectionActions"], {
 			"cancel": self.close,
 			"ok": self.close,
 			"up": self["AboutScrollLabel"].pageUp,
@@ -1042,7 +1043,7 @@ class SystemMemoryInfo(Screen):
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		self["AboutScrollLabel"] = ScrollLabel()
 		self["key_red"] = Button(_("Close"))
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"], {
+		self["actions"] = ActionMap(["SetupActions", "ColorActionsAbout"], {
 			"cancel": self.close,
 			"ok": self.close,
 			"red": self.close,
@@ -1228,8 +1229,9 @@ class MemoryInfo(Screen):
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
 
-		self["actions"] = ActionMap(["SetupActions", "ColorActions"], {
+		self["actions"] = ActionMap(["ColorActionsAbout"], {
 			"cancel": self.close,
+			"red": self.close,
 			"ok": self.getMemoryInfo,
 			"green": self.getMemoryInfo,
 			"blue": self.clearMemory,
@@ -1316,7 +1318,7 @@ class Troubleshoot(Screen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActionsAbout"], {
 			"cancel": self.close,
 			"up": self["AboutScrollLabel"].pageUp,
 			"down": self["AboutScrollLabel"].pageDown,

@@ -48,42 +48,17 @@
 	</map>
 
 	<map context="ColorActions">
-		<key id="KEY_RED" mapto="red" flags="b" />
-		<key id="KEY_RED" mapto="RED" flags="b" />
-		<key id="KEY_RED" mapto="redLong" flags="l" />
-		<key id="KEY_GREEN" mapto="green" flags="b" />
-		<key id="KEY_GREEN" mapto="GREEN" flags="b" />
-		<key id="KEY_GREEN" mapto="greenLong" flags="l" />
-		<key id="KEY_YELLOW" mapto="yellow" flags="b" />
-		<key id="KEY_YELLOW" mapto="YELLOW" flags="b" />
-		<key id="KEY_YELLOW" mapto="yellowLong" flags="l" />
-		<key id="KEY_BLUE" mapto="blue" flags="b" />
-		<key id="KEY_BLUE" mapto="BLUE" flags="b" />
-		<key id="KEY_BLUE" mapto="blueLong" flags="l" />
-		<!-- Keyboard specific buttons -->
-		<key id="KEY_F5" mapto="red" flags="b" />
-		<key id="KEY_F5" mapto="redLong" flags="l" />
-		<key id="KEY_F6" mapto="green" flags="b" />
-		<key id="KEY_F6" mapto="greenLong" flags="l" />
-		<key id="KEY_F7" mapto="yellow" flags="b" />
-		<key id="KEY_F7" mapto="yellowLong" flags="l" />
-		<key id="KEY_F8" mapto="blue" flags="m" />
-		<key id="KEY_F8" mapto="BLUE" flags="b" />
-		<key id="KEY_F8" mapto="blueLong" flags="l" />
-	</map>
-
-	<map context="ColorActionsNew">
 		<key id="KEY_RED" mapto="red" flags="m" />
-		<key id="KEY_RED" mapto="RED" flags="b" />
+		<!--key id="KEY_RED" mapto="RED" flags="b" /-->
 		<key id="KEY_RED" mapto="redLong" flags="l" />
 		<key id="KEY_GREEN" mapto="green" flags="m" />
-		<key id="KEY_GREEN" mapto="GREEN" flags="b" />
+		<!--key id="KEY_GREEN" mapto="GREEN" flags="b" /-->
 		<key id="KEY_GREEN" mapto="greenLong" flags="l" />
 		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
-		<key id="KEY_YELLOW" mapto="YELLOW" flags="b" />
+		<!--key id="KEY_YELLOW" mapto="YELLOW" flags="b" /-->
 		<key id="KEY_YELLOW" mapto="yellowLong" flags="l" />
 		<key id="KEY_BLUE" mapto="blue" flags="m" />
-		<key id="KEY_BLUE" mapto="BLUE" flags="b" />
+		<!--key id="KEY_BLUE" mapto="BLUE" flags="b" /-->
 		<key id="KEY_BLUE" mapto="blueLong" flags="l" />
 		<!-- Keyboard specific buttons -->
 		<key id="KEY_F5" mapto="red" flags="m" />
@@ -98,6 +73,35 @@
 		<key id="KEY_F8" mapto="blue" flags="m" />
 		<key id="KEY_F8" mapto="BLUE" flags="b" />
 		<key id="KEY_F8" mapto="blueLong" flags="l" />
+	</map>
+
+	<map context="ColorActionsOld">
+		<key id="KEY_RED" mapto="red" flags="b" />
+		<key id="KEY_RED" mapto="redlong" flags="l" />
+		<key id="KEY_GREEN" mapto="green" flags="b" />
+		<key id="KEY_GREEN" mapto="greenlong" flags="l" />
+		<key id="KEY_YELLOW" mapto="yellow" flags="b" />
+		<key id="KEY_YELLOW" mapto="yellowlong" flags="l" />
+		<key id="KEY_BLUE" mapto="blue" flags="b" />
+		<key id="KEY_BLUE" mapto="bluelong" flags="l" />
+		<!-- Keyboard specific buttons -->
+		<key id="KEY_F5" mapto="red" flags="b" />
+		<key id="KEY_F5" mapto="redlong" flags="l" />
+		<key id="KEY_F6" mapto="green" flags="b" />
+		<key id="KEY_F6" mapto="greenlong" flags="l" />
+		<key id="KEY_F7" mapto="yellow" flags="b" />
+		<key id="KEY_F7" mapto="yellowlong" flags="l" />
+		<key id="KEY_F8" mapto="blue" flags="b" />
+		<key id="KEY_F8" mapto="bluelong" flags="l" />
+	</map>
+
+	<map context="ColorActionsAbout">
+		<key id="KEY_OK" mapto="ok" flags="m" />
+		<key id="KEY_EXIT" mapto="cancel" flags="b" />
+		<key id="KEY_RED" mapto="red" flags="m"/>
+		<key id="KEY_GREEN" mapto="green" flags="m"/>
+		<key id="KEY_YELLOW" mapto="yellow" flags="m"/>
+		<key id="KEY_BLUE" mapto="blue" flags="m"/>
 	</map>
 
 	<map context="HelpActions">
@@ -985,21 +989,6 @@
 		<key id="KEY_YELLOW" mapto="openSingleServiceEPG" flags="m" />
 		<key id="KEY_BLUE" mapto="openMultiServiceEPG" flags="m" />
 		<key id="KEY_EPG" mapto="openSingleServiceEPG" flags="m" />
-	</map>
-
-	<map context="OkCancelActions">
-		<key id="\x0a" mapto="ok" flags="m" />
-		<key id="\x1b" mapto="cancel" flags="m" />
-		<!-- use this on rcu, ok? -->
-		<key id="KEY_OK" mapto="ok" flags="m"/>
-		<key id="KEY_EXIT" mapto="cancel" flags="m"/>
-
-		<key id="KEY_ENTER" mapto="ok" flags="m"/>
-		<key id="KEY_ESC" mapto="cancel" flags="m"/>
-		<key id="KEY_RED" mapto="red" flags="m"/>
-		<key id="KEY_GREEN" mapto="green" flags="m"/>
-		<key id="KEY_YELLOW" mapto="yellow" flags="m"/>
-		<key id="KEY_BLUE" mapto="blue" flags="m"/>
 	</map>
 
 	<map context="DirectionActions">
