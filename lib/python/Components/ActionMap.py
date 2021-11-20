@@ -58,9 +58,14 @@ class ActionMap:
 			if res is not None:
 				return res
 			return 1
-		else:
-			print("[ActionMap] Keymap '%s' -> Unknown action '%s'! (Typo in keymap?)" % (context, action))
-			return 0
+		unknown = list(self.actions.keys())
+		if not action in self.actions:
+			for action in unknown[:]:
+				if queryKeyBinding(context, action):
+					unknown.remove(action)
+				else:
+					print("[ActionMap] Keymap '%s' -> Unknown action '%s'! (Typo in keymap?)" % (context, action))
+					return 0
 
 	def destroy(self):
 		pass
