@@ -98,10 +98,10 @@
 	<map context="ColorActionsAbout">
 		<key id="KEY_OK" mapto="ok" flags="m" />
 		<key id="KEY_EXIT" mapto="cancel" flags="b" />
-		<key id="KEY_RED" mapto="red" flags="m"/>
-		<key id="KEY_GREEN" mapto="green" flags="m"/>
-		<key id="KEY_YELLOW" mapto="yellow" flags="m"/>
-		<key id="KEY_BLUE" mapto="blue" flags="m"/>
+		<key id="KEY_RED" mapto="red" flags="m" />
+		<key id="KEY_GREEN" mapto="green" flags="m" />
+		<key id="KEY_YELLOW" mapto="yellow" flags="m" />
+		<key id="KEY_BLUE" mapto="blue" flags="m" />
 	</map>
 
 	<map context="HelpActions">
@@ -227,7 +227,6 @@
 	<map context="OkCancelActions">
 		<key id="KEY_OK" mapto="ok" flags="m" />
 		<key id="KEY_OK" mapto="OKLong" flags="l" />
-		<key id="KEY_OK" mapto="select" flags="m" />
 		<key id="KEY_HELP" mapto="displayHelp" flags="m" />
 		<!-- <key id="KEY_EXIT" mapto="cancel" flags="m" /> -->
 		<!-- <key id="KEY_EXIT" mapto="CANCEL" flags="b" /> -->
