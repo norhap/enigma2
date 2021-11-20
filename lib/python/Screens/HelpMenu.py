@@ -41,7 +41,8 @@ class HelpMenu(Screen, Rc):
 		self["buttonlist"] = Label("")
 		self["description"] = Label("")
 		self["key_help"] = StaticText(_("HELP"))
-		self["helpActions"] = ActionMap(["HelpActions"], {
+		self["helpActions"] = ActionMap(["HelpActions", "OkCancelActions"], {
+			"ok": self["list"].ok,
 			"select": self["list"].ok,
 			"cancel": self.close,
 			"displayHelp": self.showHelp,

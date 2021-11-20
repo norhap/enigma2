@@ -105,9 +105,7 @@
 	</map>
 
 	<map context="HelpActions">
-		<key id="KEY_EXIT" mapto="cancel" flags="m" />
-		<key id="KEY_OK" mapto="select" flags="m" />
-		<!-- <key id="KEY_HELP" mapto="displayHelp" flags="m" /> -->
+		<key id="KEY_HELP" mapto="displayHelp" flags="m" />
 		<!-- <key id="KEY_HELP" mapto="DISPLAYHELP" flags="b" /> -->
 		<key id="KEY_HELP" mapto="displayHelp" flags="b" />
 		<key id="KEY_HELP" mapto="displayHelpLong" flags="l" />
@@ -228,8 +226,9 @@
 
 	<map context="OkCancelActions">
 		<key id="KEY_OK" mapto="ok" flags="m" />
-		<key id="KEY_OK" mapto="OK" flags="b" />
 		<key id="KEY_OK" mapto="OKLong" flags="l" />
+		<key id="KEY_OK" mapto="select" flags="m" />
+		<key id="KEY_HELP" mapto="displayHelp" flags="m" />
 		<!-- <key id="KEY_EXIT" mapto="cancel" flags="m" /> -->
 		<!-- <key id="KEY_EXIT" mapto="CANCEL" flags="b" /> -->
 		<key id="KEY_EXIT" mapto="cancel" flags="b" />
@@ -1002,8 +1001,8 @@
 		<key id="KEY_RIGHT" mapto="rightRepeated" flags="r" />
 		<key id="KEY_LEFT" mapto="leftUp" flags="b" />
 		<key id="KEY_RIGHT" mapto="rightUp" flags="b" />
-		<key id="KEY_UP" mapto="upUp" flags="b" />
-		<key id="KEY_DOWN" mapto="downUp" flags="b" />
+		<!--key id="KEY_UP" mapto="upUp" flags="b" /-->
+		<!--key id="KEY_DOWN" mapto="downUp" flags="b" /-->
 		<key id="KEY_PREVIOUS" mapto="moveUp" flags="m" />
 		<key id="KEY_NEXT" mapto="moveDown" flags="m" />
 	</map>
