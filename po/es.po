@@ -10562,7 +10562,7 @@ msgstr "Más"
 msgid "Message..."
 msgstr "Mensaje…"
 
-msgid "Movielist menu"
+msgid "Movie List Context Menu"
 msgstr "Menú de lista de películas"
 
 msgid "Mute"
@@ -15750,8 +15750,8 @@ msgstr "Preguntar al usuario (por defecto 'no')"
 msgid "Ask user (with default as 'yes')"
 msgstr "Preguntar al usuario (por defecto 'si')"
 
-msgid "Blue Long"
-msgstr "Azul Prolongado"
+msgid "Blue long"
+msgstr "Azul prolongado"
 
 msgid "Button"
 msgstr "Botón"
@@ -15802,8 +15802,8 @@ msgstr "Realmente quieres eliminar el directorio desde la papelera?"
 msgid "Font size"
 msgstr "Tamaño fuente"
 
-msgid "Green Long"
-msgstr "Verde Prolongado"
+msgid "Green long"
+msgstr "Verde prolongado"
 
 msgid "Keeps the movie list open whilst playing audio files."
 msgstr "Mantiene la lista de películas abierta mientras reproduce archivos de audio."
@@ -15844,8 +15844,8 @@ msgstr "Por favor ingrese el nombre del nuevo directorio"
 msgid "Please select the tag to filter..."
 msgstr "Seleccione la etiqueta para filtrar..."
 
-msgid "Red Long"
-msgstr "Rojo Prolongado"
+msgid "Red long"
+msgstr "Rojo prolongado"
 
 msgid "Service Title mode"
 msgstr "Mostrar picon"
@@ -15932,8 +15932,8 @@ msgstr "Cuando se establece, los cambios de clasificación mediante la tecla de 
 msgid "When unset, sort changes will be temporary - just for this view of a directory."
 msgstr "Cuando se cambia la configuración, los cambios de clasificación serán temporales, solo para esta vista de un directorio."
 
-msgid "Yellow Long"
-msgstr "Amarillo Prolongado"
+msgid "Yellow long"
+msgstr "Amarillo prolongado"
 
 msgid "Yes, show delete time"
 msgstr "Sí, mostrar hora de borrado"
