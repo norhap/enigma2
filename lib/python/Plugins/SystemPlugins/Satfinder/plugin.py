@@ -875,11 +875,9 @@ class SatfinderExtra(Satfinder):
 		yellow = "\c00ffff00" # data/interactive/catch-all/etc
 		blue = "\c007799ff" # radio
 		default = "\c00ffffff" # colour default white
-		no_colour = skin.parameters.get("ServiceInfoAltColor", (" "))
 		dash = "%s%s" % (default, "- ")
-		listItem = []
-		services = [x.encode("UTF-8") for x in listItem]
-		legend = "%s%s:  %s%s  %s%s  %s%s  %s%s\n" % (no_colour, _("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))
+		services = []
+		legend = "%s:  %s%s  %s%s  %s%s  %s%s\n" % (_("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))
 		for service in self.serviceList:
 			fta = "free_ca" in service and service["free_ca"] == 0
 			if service["service_type"] in radio:
@@ -890,7 +888,7 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
-			services.append("%s%s%s%s" % (dash, colour, service["service_name"], no_colour))
+			services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
 
 		self.session.open(ServicesFound, "\n".join(services), legend)
 
