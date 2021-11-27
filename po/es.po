@@ -766,7 +766,7 @@ msgid "Allocate unused memory index"
 msgstr "Asignar índice de memoria no utilizada"
 
 msgid "Allows you to hide the extensions of known file types."
-msgstr "Le permite ocultar archivo completos con extensión .jpg, para tener lista sólo con películas, salga de la lista, espere unos segundos y vuelve a entrar si se habilita."
+msgstr "Le permite ocultar las extensiones de archivos."
 
 msgid "Allow unsupported modes"
 msgstr "Permitir modos no compatibles"
@@ -3088,7 +3088,7 @@ msgid "Hidden network"
 msgstr "Red oculta"
 
 msgid "Hide known extensions"
-msgstr "Ocultar archivos jpg"
+msgstr "Ocultar extensiones de archivos"
 
 msgid "Hide parentel locked services"
 msgstr "Ocultar los canales de bloqueo parental"
@@ -4554,11 +4554,8 @@ msgstr "Reproducir música…"
 msgid "Play next"
 msgstr "Reproducir siguiente"
 
-msgid "Play next (return to movie list)"
-msgstr "Reproducir siguiente (volver a lista de películas)"
-
-msgid "Play next (return to previous service)"
-msgstr "Reproducir siguiente (volver a canal previo)"
+msgid "Play next in movie list"
+msgstr "Reproducir la siguiente en la lista de películas"
 
 msgid "Play previous"
 msgstr "Reproduce anterior"
@@ -5038,6 +5035,21 @@ msgstr "Rojo"
 msgid "Red button..."
 msgstr "Botón rojo…"
 
+msgid "Movie Selection Setup"
+msgstr "Ajustes Selección de Películas"
+
+msgid "RED button"
+msgstr "Botón ROJO"
+
+msgid "GREEN button"
+msgstr "Botón VERDE"
+
+msgid "YELLOW button"
+msgstr "Botón AMARILLO"
+
+msgid "BLUE button"
+msgstr "Botón AZUL"
+
 msgid "Red colored"
 msgstr "Coloreado en rojo"
 
@@ -5165,7 +5177,7 @@ msgid "Reserved"
 msgstr "Reservado"
 
 msgid "Reset"
-msgstr "Reset"
+msgstr "Restablecer"
 
 msgid "Reset and renumerate title names"
 msgstr "Restablecer y renumerar los nombres de los títulos"
@@ -9010,8 +9022,8 @@ msgstr "Mostrar información del transpondedor"
 msgid "show/game show (general)"
 msgstr "show/juego (general)"
 
-msgid "shuffle"
-msgstr "aleatorio"
+msgid "Shuffle"
+msgstr "Aleatorio"
 
 msgid "shut down"
 msgstr "apagar"
@@ -9378,7 +9390,7 @@ msgid "Activate the configured network settings."
 msgstr "Activar ajustes de red configurados."
 
 msgid "Allow quitting movie player with exit"
-msgstr "Permitir salir del reproductor con exit"
+msgstr "Permitir salir del reproductor con tecla EXIT"
 
 msgid "Allow subtitle language to equal audio language"
 msgstr "Permitir idioma de subtítulos igual al idioma de audio"
@@ -9444,7 +9456,7 @@ msgid "Behavior when a movie is started"
 msgstr "Comportamiento cuando se inicia una película"
 
 msgid "Behavior when a movie is stopped"
-msgstr "Comportamiento cuando se detiene una película"
+msgstr "Comportamiento cuando pulsa STOP en una película"
 
 msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
 msgstr "Por defecto, SNR se mostrará en dB (cuando el sintonizador lo admita). Esta configuración obliga a que SNR se muestre como un porcentaje."
@@ -9615,7 +9627,7 @@ msgid "Configure the netmask."
 msgstr "Configure la máscara de red."
 
 msgid "Configure the number of days after which items are automaticaly removed from the trash can."
-msgstr "Configure la cantidad de días después de los cuales los artículos se eliminan automáticamente de la papelera."
+msgstr "Configure el número de días después de los cuales los elementos se eliminan automáticamente de la papelera."
 
 msgid "Configure the number of days old timers are kept before they are automatically removed from the timer list."
 msgstr "Configure la cantidad de días que se guardan los temporizadores antiguos antes de que se eliminen automáticamente de la lista de temporizadores."
@@ -15741,8 +15753,8 @@ msgstr "(Actualmente está utilizando un método de clasificación temporal)"
 msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.\t It hides the day of the week for recordings made in previous years."
 msgstr "La visualización adaptable de la fecha permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
 
-msgid "Allows you to setup the button to do what you choose."
-msgstr "Le permite configurar el botón para hacer lo que elija."
+msgid "Allows you to assign the selected function to the this button."
+msgstr "Le permite asignar la función seleccionada a este botón."
 
 msgid "Ask user (with default as 'no')"
 msgstr "Preguntar al usuario (por defecto 'no')"
@@ -15750,11 +15762,35 @@ msgstr "Preguntar al usuario (por defecto 'no')"
 msgid "Ask user (with default as 'yes')"
 msgstr "Preguntar al usuario (por defecto 'si')"
 
-msgid "Blue long"
-msgstr "Azul prolongado"
+msgid "Long BLUE button"
+msgstr "Botón AZUL Prolongado"
 
 msgid "Button"
 msgstr "Botón"
+
+msgid "RADIO button"
+msgstr "Botón RADIO"
+
+msgid "TV button"
+msgstr "Botón TV"
+
+msgid "TEXT button"
+msgstr "Botón TEXT"
+
+msgid "F1 button"
+msgstr "Botón F1"
+
+msgid "F2 button"
+msgstr "Botón F2"
+
+msgid "F3 button"
+msgstr "Botón F3"
+
+msgid "Show image items"
+msgstr "Mostrar elementos de imagen"
+
+msgid "Allows you to show images."
+msgstr "Le permite mostrar imágenes."
 
 msgid "Cannot delete file"
 msgstr "No se puede eliminar el archivo"
@@ -15765,12 +15801,11 @@ msgstr "No se puede mover a la papelera"
 msgid "Clean network trash cans"
 msgstr "Limpie papelera en red"
 
-msgid ""
-"Configure the number of days after which items are automatically removed from the trash can.\n"
-"A setting of 0 disables this."
-msgstr ""
-"Configure el número de días después de los cuales los elementos se eliminan automáticamente de la papelera.\n"
-"La configuración a 0 deshabilita esto."
+msgid "Configure the number of days after which items are automatically removed from the trash can. A setting of 0 disables this."
+msgstr "Configure el número de días después de los cuales los elementos se eliminan automáticamente de la papelera. Un ajuste de 0 lo desactiva."
+
+msgid "List type"
+msgstr "Tipo de lista"
 
 msgid "Copying files"
 msgstr "Copiando archivos"
@@ -15802,8 +15837,8 @@ msgstr "Realmente quieres eliminar el directorio desde la papelera?"
 msgid "Font size"
 msgstr "Tamaño fuente"
 
-msgid "Green long"
-msgstr "Verde prolongado"
+msgid "Long GREEN button"
+msgstr "Botón VERDE prolongado"
 
 msgid "Keeps the movie list open whilst playing audio files."
 msgstr "Mantiene la lista de películas abierta mientras reproduce archivos de audio."
@@ -15844,8 +15879,8 @@ msgstr "Por favor ingrese el nombre del nuevo directorio"
 msgid "Please select the tag to filter..."
 msgstr "Seleccione la etiqueta para filtrar..."
 
-msgid "Red long"
-msgstr "Rojo prolongado"
+msgid "Long RED button"
+msgstr "Botón ROJO Prolongado"
 
 msgid "Service Title mode"
 msgstr "Mostrar picon"
@@ -15904,15 +15939,56 @@ msgstr "Usar una pantalla alternativa para lista de peliculas"
 msgid "Use adaptive date display"
 msgstr "Usar display con fecha adaptativa"
 
-msgid ""
-"Use the deletion time to sort Trash directories.\n"
-"Most recently deleted at the top."
-msgstr ""
-"Use el tiempo de eliminación para ordenar los directorios de la Papelera.\n"
-"Recientemente eliminado en la parte superior."
+msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'. It hides the year for recordings made this year. It hides the day of the week for recordings made in previous years."
+msgstr "La visualización de fecha adaptable permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
+
+msgid "Use the deletion time to sort Trash directories. Most recently deleted at the top."
+msgstr "Utilice el tiempo de eliminación para ordenar los directorios de la Papelera. Eliminado más recientemente en la parte superior."
 
 msgid "Use trash can in movie list"
 msgstr "Usar papelera en lista de peliculas"
+
+msgid "Recordings by date, other media by name"
+msgstr "Grabaciones por fecha, otros medios por nombre"
+
+msgid "By reverse date, then by reverse name"
+msgstr "Por fecha inversa, luego por nombre inverso"
+
+msgid "By date, then by name"
+msgstr "Por fecha, luego por nombre"
+
+msgid "By name, then by date"
+msgstr "Por nombre, luego por fecha"
+
+msgid "Flat by name, then by date"
+msgstr "Plano por nombre, luego por fecha"
+
+msgid "By name, then by reverse date"
+msgstr "Por nombre, luego por fecha inversa"
+
+msgid "By reverse name, then by date"
+msgstr "Por nombre inverso, luego por fecha"
+
+msgid "By reverse name, then by reverse date"
+msgstr "Por nombre inverso, luego por fecha inversa"
+
+msgid "Flat by reverse name, then by reverse date"
+msgstr "Plana por nombre inverso, luego por fecha inversa"
+
+msgid "By duration, then by name"
+msgstr "Por duración, luego por nombre"
+
+msgid "By reverse duration, then by name"
+msgstr "Por duración inversa, luego por nombre"
+
+msgid "By file size, then by name"
+msgstr "Por tamaño de archivo, luego por nombre"
+
+msgid "By reverse file size, then by name"
+msgstr "Por tamaño de archivo inverso, luego por nombre"
+
+msgid "By description, then by name"
+msgstr "Por descripción, luego por nombre"
 
 msgid "When enabled, network trash cans are probed for cleaning."
 msgstr "Cuando está habilitado, papelera de la red son sondeados para su limpieza."
@@ -15926,14 +16002,14 @@ msgstr "Cuando está configurado, el PIG volverá a vivir después de que una pe
 msgid "When set, each directory will show the previous state used. When off, the default values will be shown."
 msgstr "Cuando se establece, cada directorio mostrará el estado anterior utilizado. Cuando está apagado, se mostrarán los valores predeterminados."
 
-msgid "When set, sort changes via the sort key will be permanent."
-msgstr "Cuando se establece, los cambios de clasificación mediante la tecla de clasificación serán permanentes."
+msgid "When set, sort changes via the sort key will be permanent. When unset, sort changes will be temporary, just for this view of a directory."
+msgstr "Cuando se establece, los cambios de clasificación a través de la tecla de clasificación serán permanentes. Cuando no se configura, los cambios de clasificación serán temporales, solo para esta vista de un directorio."
 
 msgid "When unset, sort changes will be temporary - just for this view of a directory."
 msgstr "Cuando se cambia la configuración, los cambios de clasificación serán temporales, solo para esta vista de un directorio."
 
-msgid "Yellow long"
-msgstr "Amarillo prolongado"
+msgid "Long YELLOW button"
+msgstr "Botón AMARILLO prolongado"
 
 msgid "Yes, show delete time"
 msgstr "Sí, mostrar hora de borrado"
@@ -16682,13 +16758,13 @@ msgstr "Tiempo transpondedor"
 msgid "Internet time (NTP)"
 msgstr "Tiempo internet (NTP)"
 
-msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits.  ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
-msgstr "Elija el estilo de formato de visualización para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización del display se basará en su elección, pero puede verse influenciada por skin."
+msgid "Choose the front panel display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
+msgstr "Elija el estilo de formato de visualización del panel frontal para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por el skin."
 
-msgid "Choose the display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes and 'ss' is the seconds.  ('HH' and 'hh' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
+msgid "Choose the display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes and 'ss' is the seconds. ('HH' and 'hh' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr "Elija el estilo de formato de visualización para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos y 'ss' son los segundos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). La visualización del display se basará en su elección, pero puede verse influenciada por skin."
 
-msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes.  ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
+msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes. ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). El display se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
 
 msgid "Help Screen Information"
@@ -17054,7 +17130,7 @@ msgstr "Cuando esté habilitado, verá los paquetes util-linux en la sección de
 msgid "Number of debug logs to keep *"
 msgstr "Número máximo de logs para mantenerlos *"
 
-msgid "This sets the maximum number of log files that will be retained.  Files in excess of this number will be deleted."
+msgid "This sets the maximum number of log files that will be retained. Files in excess of this number will be deleted."
 msgstr "Esto establece el número máximo de archivos de registro que se conservarán. Se eliminarán los archivos que superen este número."
 
 msgid "This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted."
@@ -17081,7 +17157,7 @@ msgstr "Fecha/hora local"
 msgid "Boot time and local data/time"
 msgstr "Tiempo de arranque y tiempo de datos local"
 
-msgid "Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged.  These logs can be helpful for developers in finding and fixing problems."
+msgid "Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged. These logs can be helpful for developers in finding and fixing problems."
 msgstr "Utilice esta opción para seleccionar si se crean registros de depuración de las actividades internas de enigma2 y, de ser así, cuántos detalles se registrarán. Estos registros pueden ser útiles para que los desarrolladores encuentren y solucionen problemas. Desactívelo cuando encuentre lo que busca!!."
 
 msgid "Include keyboard data"

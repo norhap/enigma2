@@ -14,10 +14,12 @@ def SelectionEntryComponent(description, value, index, selected):
 		(description, value, index, selected),
 		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, description)
 	]
-	global icons
-	icon = icons[0] if selected else icons[1]
-	ix, iy, iw, ih = parameters.get("SelectionListLock", (10, 2, 26, 26))
-	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, icon, None, None, BT_SCALE | BT_KEEP_ASPECT_RATIO))
+	if selected:
+		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png"))
+	else:
+		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_off.png"))
+	ix, iy, iw, ih = parameters.get("SelectionListLock", (0, 2, 25, 24))
+	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
 	return res
 
 
@@ -27,11 +29,6 @@ class SelectionList(MenuList):
 		font = fonts.get("SelectionList", ("Regular", 25, 30))
 		self.l.setFont(0, gFont(font[0], font[1]))
 		self.l.setItemHeight(font[2])
-		global icons
-		icons = [
-			LoadPixmap(path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png")),
-			LoadPixmap(path=resolveFilename(SCOPE_GUISKIN, "icons/lock_off.png"))
-		]
 
 	def addSelection(self, description, value, index, selected=True):
 		self.list.append(SelectionEntryComponent(description, value, index, selected))
