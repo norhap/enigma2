@@ -10353,7 +10353,7 @@ msgid "When enabled, a warning will be displayed and the user will get an option
 msgstr "Cuando está habilitado, se mostrará una advertencia y el usuario tendrá la opción de detener o continuar con el Timeshift."
 
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
-msgstr "Cuando esté habilitado, siempre descifrar la recepción de streams http. Esto requiere más recursos, habilita solo si es necesario. Los stremams individuales siempre se descodifican si se agrega 0x100 al tipo de servicio, independientemente de esta configuración. Predeterminado desactivado."
+msgstr "Cuando esté habilitado, siempre descifrar la recepción de streams http. Esto requiere más recursos, habilita solo si es necesario. Los streams individuales siempre se descodifican si se agrega 0x100 al tipo de servicio, independientemente de esta configuración. Predeterminado desactivado."
 
 msgid "When enabled, authentication is required to watch http streams."
 msgstr "Cuando está habilitado, se requiere autenticación para ver los streams http."
