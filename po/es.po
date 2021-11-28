@@ -17951,3 +17951,9 @@ msgstr "Audio original"
 
 msgid "Visually impaired commentary"
 msgstr "Comentarios para personas con discapacidad visual"
+
+msgid "Do you really want to remove your bookmark of %s?"
+msgstr "Quieres eliminar tu marcador de %s?"
+
+msgid "Remove bookmark"
+msgstr "Eliminar marcador"
