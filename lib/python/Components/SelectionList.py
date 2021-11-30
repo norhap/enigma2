@@ -14,12 +14,13 @@ def SelectionEntryComponent(description, value, index, selected):
 		(description, value, index, selected),
 		(eListboxPythonMultiContent.TYPE_TEXT, dx, dy, dw, dh, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, description)
 	]
-	if selected:
-		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png"))
-	else:
-		selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_off.png"))
-	ix, iy, iw, ih = parameters.get("SelectionListLock", (0, 2, 25, 24))
-	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, selectionpng))
+	icons = [
+		LoadPixmap(path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png")),
+		LoadPixmap(path=resolveFilename(SCOPE_GUISKIN, "icons/lock_off.png"))
+	]
+	icon = icons[0] if selected else icons[1]
+	ix, iy, iw, ih = parameters.get("SelectionListLock", (10, 2, 26, 26))
+	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, icon, BT_SCALE | BT_KEEP_ASPECT_RATIO))
 	return res
 
 

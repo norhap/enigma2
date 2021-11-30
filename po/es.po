@@ -4318,8 +4318,8 @@ msgstr "Encendido"
 msgid "On end of movie"
 msgstr "En final de película"
 
-msgid "On end of movie (as menu)"
-msgstr "En final de película (como menú)"
+msgid "On end of movie (As menu)"
+msgstr "En final de película (Como menú)"
 
 msgid "One"
 msgstr "Uno"
