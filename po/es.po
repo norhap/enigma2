@@ -17960,3 +17960,9 @@ msgstr "Quieres eliminar tu marcador de %s?"
 
 msgid "Remove bookmark"
 msgstr "Eliminar marcador"
+
+msgid "DVB and Pango subtitle position"
+msgstr "Posición de subtítulos DVB y Pango"
+
+msgid "Set the vertical position of subtitles, measured from the bottom of the screen."
+msgstr "Establezca la posición vertical de los subtítulos, medida desde la parte inferior de la pantalla."
