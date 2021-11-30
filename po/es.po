@@ -10383,7 +10383,7 @@ msgid "When enabled, graphical DVB subtitles are preferred over teletext subtitl
 msgstr "Cuando está habilitado, los subtítulos DVB gráficos son preferidos sobre los subtítulos del teletexto, cuando ambos tipos están disponibles."
 
 msgid "When enabled, graphical DVB subtitles will be centered horizontally."
-msgstr "\\Cuando está habilitado, los subtítulos DVB gráficos se centrarán horizontalmente."
+msgstr "Cuando está habilitado, los subtítulos DVB gráficos se centrarán horizontalmente."
 
 msgid "When enabled, graphical DVB subtitles will be displayed at their original position."
 msgstr "Cuando está habilitado, los subtítulos DVB gráficos se mostrarán en su posición original."
