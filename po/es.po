@@ -7710,8 +7710,8 @@ msgstr "Islas Vírgenes (Británicas)"
 msgid "Virgin Islands (U.S.)"
 msgstr "Islas Vírgenes (USA)"
 
-msgid "Virtual keyboard"
-msgstr "Teclado virtual"
+msgid "Virtual KeyBoard"
+msgstr "Teclado Virtual"
 
 msgid "Voltage mode"
 msgstr "Modo de tensión"
@@ -17966,3 +17966,6 @@ msgstr "Posición de subtítulos DVB y Pango"
 
 msgid "Set the vertical position of subtitles, measured from the bottom of the screen."
 msgstr "Establezca la posición vertical de los subtítulos, medida desde la parte inferior de la pantalla."
+
+msgid "Shift"
+msgstr "Cambiar"
