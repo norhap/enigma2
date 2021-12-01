@@ -6,7 +6,9 @@ from Tools.Directories import SCOPE_GUISKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 
 
-def ChoiceEntryComponent(key=None, text=["--"]):
+def ChoiceEntryComponent(key=None, text=None):
+	if text is None:
+		text = ["--"]
 	res = [text]
 	if text[0] == "--":
 		x, y, w, h = parameters.get("ChoicelistDash", (0, 0, 800, 25))
