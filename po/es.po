@@ -17969,3 +17969,24 @@ msgstr "Establezca la posición vertical de los subtítulos, medida desde la par
 
 msgid "Shift"
 msgstr "Cambiar"
+
+msgid "Select which tuner to use for the scan."
+msgstr "Seleccione qué sintonizador usar para la búsqueda."
+
+msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
+msgstr "Elija si desea buscar un solo transpondedor, un satélite o varios satélites."
+
+msgid "Select which satellite to scan."
+msgstr "Seleccione qué satélite buscar."
+
+msgid "Select which transponder to scan."
+msgstr "Seleccione qué transpondedor buscar."
+
+msgid "Scan using transponders on NIT table? 'No' will use transponders in xml file."
+msgstr "Buscar usando transpondedores en la tabla NIT? 'No' usará transpondedores en el archivo xml."
+
+msgid "Remove the services on scanned transponders before re-adding services?"
+msgstr "Eliminar los canales que ya existen de los transpondedores buscados antes de volver a agregar estos canales?"
+
+msgid "Choose whether to scan for free services only or whether to include paid/encrypted services too."
+msgstr "Elija si desea buscar solo canales gratuitos o si desea incluir también canales de pago."
