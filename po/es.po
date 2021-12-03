@@ -16545,6 +16545,9 @@ msgstr "Después de %s"
 msgid "Standby in %s"
 msgstr "Standby en %s"
 
+msgid "Open satellites list"
+msgstr "Abrir la lista de Satélites"
+
 msgid "Show satellites list"
 msgstr "Mostrar lista de Satélites"
 
