@@ -1196,7 +1196,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.close(None)
 
 	def saveconfig(self):
-		config.movielist.last_selected_tags.value = self.selected_tags
+		config.movielist.last_selected_tags.value = self.selected_tags if self.selected_tags else []
 
 	def configure(self):
 		self.session.openWithCallback(self.configureDone, MovieSelectionSetup)
