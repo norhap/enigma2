@@ -320,7 +320,8 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
 		else:
 			msg = "Failed to read"
 	if debug or forceDebug:
-		print("[%s] %s from XML file '%s'." % (source, msg, filename))
+		length = len(dom) if dom else 0
+		print("[%s] %s Lines=%d from XML '%s'." % (source, msg, length, filename))
 	return dom
 
 
