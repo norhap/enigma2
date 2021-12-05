@@ -17993,3 +17993,75 @@ msgstr "Eliminar los canales que ya existen de los transpondedores buscados ante
 
 msgid "Choose whether to scan for free services only or whether to include paid/encrypted services too."
 msgstr "Elija si desea buscar solo canales gratuitos o si desea incluir también canales de pago."
+
+msgid ""
+"Replace all '%s' tags with:"
+"\n"
+"(NOTE: 'Cancel' cannot undo this!)"
+msgstr ""
+"Reemplace todas las etiquetas '%s' con:"
+"\n"
+"(NOTA: 'Cancelar' no puede deshacer esto!)"
+
+msgid ""
+"Do you really want to delete all '%s' tags?"
+"\n"
+"(NOTE: 'Cancel' cannot undo this!)"
+msgstr ""
+"Desea eliminar todas las '%s' etiquetas?"
+"\n"
+"(NOTA: 'Cancelar' no puede deshacer esto!)"
+
+msgid ""
+"Do you really want to delete all tags?"
+"\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+"Desea eliminar todas las etiquetas?"
+"\n"
+"(Tenga en cuenta que 'Cancelar' no deshará esto!)"
+
+msgid "Please enter the new tag:"
+msgstr "Introduzca la nueva etiqueta:"
+
+msgid "Edit Tags"
+msgstr "Editar Etiquetas"
+
+msgid "Tag Editor"
+msgstr "Editor de Etiquetas"
+
+msgid "Add new tag"
+msgstr "Añadir nueva etiqueta"
+
+msgid "Rename this tag"
+msgstr "Renombrar esta etiqueta"
+
+msgid "Delete this tag"
+msgstr "Eliminar esta etiqueta"
+
+msgid "Delete unused tags"
+msgstr "Eliminar etiquetas no utilizadas"
+
+msgid "Delete all tags"
+msgstr "Eliminar todas las etiquetas"
+
+msgid "Cancel any changed tags and exit"
+msgstr "Cancelar las etiquetas modificadas y salir"
+
+msgid "Save all changed tags and exit"
+msgstr "Guarde todas las etiquetas modificadas y salga"
+
+msgid "Toggle selection of the current tag"
+msgstr "Alternar la selección de la etiqueta actual"
+
+msgid "Add a new tag"
+msgstr "Añadir una nueva etiqueta"
+
+msgid "Load tags from the timer and recordings"
+msgstr "Cargar etiquetas desde el temporizador y las grabaciones"
+
+msgid "Display the tags context menu"
+msgstr "Mostrar el menú contextual de las etiquetas"
+
+msgid "Tag Editor Actions"
+msgstr "Acciones del editor de etiquetas"
