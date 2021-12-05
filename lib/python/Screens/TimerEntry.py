@@ -1,5 +1,5 @@
 from datetime import datetime
-from time import localtime, mktime, time, strftime
+from time import localtime, mktime, strftime, time
 import urllib
 
 from enigma import eEPGCache, iRecordableServicePtr
@@ -20,7 +20,6 @@ from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.LocationBox import MovieLocationBox
 from Screens.MessageBox import MessageBox
-# from Screens.MovieSelection import getPreferredTagEditor
 from Screens.Screen import Screen
 from Screens.TagEditor import TagEditor
 from Screens.VirtualKeyBoard import VirtualKeyBoard
