@@ -231,7 +231,7 @@ def fileReadLine(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False
 		line = default
 		msg = "Default"
 	if debug or forceDebug:
-		print("[%s] Line %d: %s '%s' from file '%s'." % (source, stack()[1][0].f_lineno, msg, line, filename))
+		print("[%s] %s '%s' from file '%s'." % (source, msg, line, filename))
 	return line
 
 
@@ -246,7 +246,7 @@ def fileWriteLine(filename, line, source=DEFAULT_MODULE_NAME, debug=False):
 		msg = "Failed to write"
 		result = 0
 	if debug or forceDebug:
-		print("[%s] Line %d: %s '%s' to file '%s'." % (source, stack()[1][0].f_lineno, msg, line, filename))
+		print("[%s] %s '%s' to file '%s'." % (source, msg, line, filename))
 	return result
 
 
@@ -263,7 +263,7 @@ def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=Fals
 		msg = "Default"
 	if debug or forceDebug:
 		length = len(lines) if lines else 0
-		print("[%s] Line %d: %s %d lines from file '%s'." % (source, stack()[1][0].f_lineno, msg, length, filename))
+		print("[%s] %s %d lines from file '%s'." % (source, msg, length, filename))
 	return lines
 
 
@@ -281,7 +281,7 @@ def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
 		msg = "Failed to write"
 		result = 0
 	if debug or forceDebug:
-		print("[%s] Line %d: %s %d lines to file '%s'." % (source, stack()[1][0].f_lineno, msg, len(lines), filename))
+		print("[%s] %s %d lines to file '%s'." % (source, msg, len(lines), filename))
 	return result
 
 
@@ -320,7 +320,7 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
 		else:
 			msg = "Failed to read"
 	if debug or forceDebug:
-		print("[%s] Line %d: %s from XML file '%s'." % (source, stack()[1][0].f_lineno, msg, filename))
+		print("[%s] %s from XML file '%s'." % (source, msg, filename))
 	return dom
 
 
