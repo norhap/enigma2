@@ -18071,3 +18071,15 @@ msgstr "No se seleccionaron etiquetas para renombrar"
 
 msgid "No tags selected for remove"
 msgstr "No se seleccionaron etiquetas para eliminar"
+
+msgid "Poster Preview (TMBD)"
+msgstr "Vista previa poster (TMBD)"
+
+msgid "Play with ServiceGstPlayer"
+msgstr "Reproducir con GstPlayer"
+
+msgid "Play with ServiceExtEplayer3"
+msgstr "Reproducir con ExtEplayer3"
+
+msgid "Search for movie in TMBD"
+msgstr "Buscar película en TMBD"
