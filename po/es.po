@@ -18065,3 +18065,9 @@ msgstr "Mostrar el menú contextual de las etiquetas"
 
 msgid "Tag Editor Actions"
 msgstr "Acciones del editor de etiquetas"
+
+msgid "No tags selected for rename"
+msgstr "No se seleccionaron etiquetas para renombrar"
+
+msgid "No tags selected for remove"
+msgstr "No se seleccionaron etiquetas para eliminar"
