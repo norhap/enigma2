@@ -3304,6 +3304,7 @@
 	<screen name="TimerLog" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1920,1080">
 		<panel name="StanDardScreen"/>
 		<panel name="TemplateNoPip"/>
+		<ePixmap alphatest="blend" pixmap="buttons/key_help.png" position="18,1035" size="64,43"/>
 		<widget name="loglist" itemHeight="45" font="RegularBold;26" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" backgroundColor="OE_Background" position="26,140" size="1250,820" transparent="1"/>
 		<widget name="logentry" position="1290,575" size="620,635" font="RegularBold;25" halign="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
 	</screen>

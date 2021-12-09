@@ -7128,11 +7128,11 @@ msgstr "Temporizadores Grabaciones"
 msgid "Timer Overview"
 msgstr "Resumen del Temporizador"
 
-msgid "Timer entry"
-msgstr "Entrada del temporizador"
+msgid "Timer Entry"
+msgstr "Entrada del Temporizador"
 
-msgid "Timer log"
-msgstr "Registro de temporizador"
+msgid "Timer Log"
+msgstr "Registro del Temporizador"
 
 msgid ""
 "Timer overlap in timers.xml detected!\n"
@@ -8232,8 +8232,8 @@ msgstr "alfabéticamente"
 msgid "alternative"
 msgstr "alternativa"
 
-msgid "always"
-msgstr "siempre"
+msgid "Always"
+msgstr "Siempre"
 
 msgid "and never ask in this session again"
 msgstr "y nunca preguntes en esta sesión otra vez"
@@ -8365,8 +8365,8 @@ msgstr "Eliminar corte"
 msgid "Delete cut (disabled)"
 msgstr "Eliminar corte (deshabilitado)"
 
-msgid "descramble and record ecm"
-msgstr "descifrar y grabar ecm"
+msgid "Descramble and record ecm"
+msgstr "Descifrar y grabar ecm"
 
 msgid "detective/thriller"
 msgstr "detective/intriga"
@@ -8395,8 +8395,8 @@ msgstr "no hacer nada"
 msgid "documentary"
 msgstr "documental"
 
-msgid "don't descramble, record ecm"
-msgstr "no descifrar, grabar ecm"
+msgid "Don't descramble, record ecm"
+msgstr "No descifrar, grabar ecm"
 
 msgid "done!"
 msgstr "hecho!"
@@ -8563,11 +8563,11 @@ msgstr "juego/pruebas/concurso"
 msgid "gardening"
 msgstr "actividad de jardín"
 
-msgid "go to deep standby"
-msgstr "ir a reposo profundo"
+msgid "Go to deep standby"
+msgstr "Ir a reposo profundo"
 
-msgid "go to standby"
-msgstr "ir a reposo"
+msgid "Go to standby"
+msgstr "Ir a reposo"
 
 msgid "Grab this frame as bitmap"
 msgstr "Tomar este cuadro como mapa de bits"
@@ -8710,8 +8710,8 @@ msgstr "musical/opera"
 msgid "nature/animals/environment"
 msgstr "naturaleza/animales/entorno"
 
-msgid "never"
-msgstr "nunca"
+msgid "Never"
+msgstr "Nunca"
 
 msgid "new media"
 msgstr "nuevo medio"
@@ -8794,14 +8794,14 @@ msgstr "encendido"
 msgid "on READ ONLY medium."
 msgstr "en medio de SOLO LECTURA."
 
-msgid "once"
-msgstr "una vez"
+msgid "Once"
+msgstr "Una vez"
 
-msgid "only from deep standby"
-msgstr "solo desde el modo de reposo profundo"
+msgid "Only from deep standby"
+msgstr "Solo desde el modo de reposo profundo"
 
-msgid "only from standby"
-msgstr "solo desde el modo de reposo"
+msgid "Only from standby"
+msgstr "Solo desde el modo de reposo"
 
 msgid "open nameserver configuration"
 msgstr "abrir la configuración del servidor de nombres"
@@ -8845,8 +8845,8 @@ msgstr "purgar bouquets de usuario borrados"
 msgid "receiver software because updates are available."
 msgstr "software del receptor porque hay actualizaciones disponibles."
 
-msgid "record"
-msgstr "grabar"
+msgid "Record"
+msgstr "Grabar"
 
 msgid "recording..."
 msgstr "grabando…"
@@ -8923,8 +8923,8 @@ msgstr "Renombrar entrada"
 msgid "Repeat playlist"
 msgstr "Repetir lista de reproducción"
 
-msgid "repeated"
-msgstr "repetido"
+msgid "Repeated"
+msgstr "Repetido"
 
 msgid "reserved for future use"
 msgstr "reservado para uso futuro"
@@ -9239,8 +9239,8 @@ msgstr "esperando"
 msgid "water sport"
 msgstr "deporte acuático"
 
-msgid "weekly"
-msgstr "semanalmente"
+msgid "Weekly"
+msgstr "Semanalmente"
 
 msgid "west"
 msgstr "oeste"
@@ -9302,8 +9302,8 @@ msgstr "sí (mantiene feeds)"
 msgid "zap"
 msgstr "zap"
 
-msgid "zap and record"
-msgstr "zapea y graba"
+msgid "Zap and record"
+msgstr "Zapea y graba"
 
 msgid "zapped"
 msgstr "zapeado"
@@ -18083,3 +18083,18 @@ msgstr "Reproducir con ExtEplayer3"
 
 msgid "Search for movie in TMBD"
 msgstr "Buscar película en TMBD"
+
+msgid "Cancel any changes and close the log and the screen"
+msgstr "Cancele los cambios y cierre el registro y la pantalla"
+
+msgid "Save the current contents of the log and close the screen"
+msgstr "Guarde el contenido del registro y cierre la pantalla"
+
+msgid "Delete the current entry from the log"
+msgstr "Eliminar la entrada actual del registro"
+
+msgid "Clear the contents of the log"
+msgstr "Borrar el contenido del registro"
+
+msgid "Log Actions"
+msgstr "Acciones Registros"
