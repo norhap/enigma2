@@ -1,4 +1,4 @@
-from enigma import RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
+from enigma import BT_KEEP_ASPECT_RATIO, BT_SCALE, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
 
 from skin import fonts, parameters
 from Components.MenuList import MenuList
@@ -17,7 +17,7 @@ def SelectionEntryComponent(description, value, index, selected):
 	global icons
 	icon = icons[0] if selected else icons[1]
 	ix, iy, iw, ih = parameters.get("SelectionListLock", (10, 2, 26, 26))
-	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, icon, None, None))
+	res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, ix, iy, iw, ih, icon, None, None, BT_SCALE | BT_KEEP_ASPECT_RATIO))
 	return res
 
 
