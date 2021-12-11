@@ -8569,6 +8569,21 @@ msgstr "Ir a reposo profundo"
 msgid "Go to standby"
 msgstr "Ir a reposo"
 
+msgid "go to deep standby"
+msgstr "ir a reposo profundo"
+
+msgid "go to standby"
+msgstr "ir a reposo"
+
+msgid "repeated"
+msgstr "repetido"
+
+msgid "once"
+msgstr "una vez"
+
+msgid "weekly"
+msgstr "semanalmente"
+
 msgid "Grab this frame as bitmap"
 msgstr "Tomar este cuadro como mapa de bits"
 
@@ -15560,7 +15575,7 @@ msgstr ""
 msgid "running..."
 msgstr "ejecutando..."
 
-msgid "Wake Up"
+msgid "Wake up"
 msgstr "Despertar"
 
 msgid "Deep Standby"
