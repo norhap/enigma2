@@ -226,7 +226,7 @@ class PowerTimer(Timer):
 	def getNextPowerManagerTime(self):
 		nextTime = self.getNextPowerManagerTimeOld()
 		fakeTime = time() + 300
-		if config.timeshift.isRecording.value:
+		if hasattr(self, "timeshift") and config.usage.timeshift.isRecording.value:
 			return nextTime if 0 < nextTime < fakeTime else fakeTime
 		return nextTime
 
@@ -426,7 +426,7 @@ class PowerTimerEntry(TimerEntry, object):
 						quitMainloop(1)
 						return True
 					else:
-						AddNotificationWithUniqueIDCallback(self.sendTryQuitMainloopNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to shutdown your %s.\nDo that now?") % BrandModel, timeout=180)
+						AddNotificationWithUniqueIDCallback(self.sendTryQuitMainloopNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to shutdown your %s.\nDo that now?") % getBrandModel(), timeout=180)
 						if self.autosleeprepeat == "once":
 							eActionMap.getInstance().unbindAction("", self.keyPressed)
 							return True
@@ -444,7 +444,7 @@ class PowerTimerEntry(TimerEntry, object):
 					if Screens.Standby.inStandby:  # In standby.
 						quitMainloop(1)
 					else:
-						AddNotificationWithUniqueIDCallback(self.sendTryQuitMainloopNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to shutdown your %s.\nDo that now?") % BrandModel, timeout=180)
+						AddNotificationWithUniqueIDCallback(self.sendTryQuitMainloopNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to shutdown your %s.\nDo that now?") % getBrandModel(), timeout=180)
 				return True
 			elif self.timerType == TIMERTYPE.REBOOT:
 				if NavigationInstance.instance.RecordTimer.isRecording() or abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900:
@@ -454,7 +454,7 @@ class PowerTimerEntry(TimerEntry, object):
 					if Screens.Standby.inStandby:  # In standby.
 						quitMainloop(2)
 					else:
-						AddNotificationWithUniqueIDCallback(self.sendTryToRebootNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to reboot your %s.\nDo that now?") % BrandModel, timeout=180)
+						AddNotificationWithUniqueIDCallback(self.sendTryToRebootNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to reboot your %s.\nDo that now?") % getBrandModel(), timeout=180)
 				return True
 			elif self.timerType == TIMERTYPE.RESTART:
 				if NavigationInstance.instance.RecordTimer.isRecording() or abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900:
@@ -471,7 +471,7 @@ class PowerTimerEntry(TimerEntry, object):
 			NavigationInstance.instance.PowerTimer.saveTimers()
 			if self.afterEvent == AFTEREVENT.STANDBY:
 				if not Screens.Standby.inStandby:  # Not already in standby.
-					AddNotificationWithUniqueIDCallback(self.sendStandbyNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to set your %s to standby.\nDo that now?") % BrandModel, timeout=180)
+					AddNotificationWithUniqueIDCallback(self.sendStandbyNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to set your %s to standby.\nDo that now?") % getBrandModel(), timeout=180)
 			elif self.afterEvent == AFTEREVENT.DEEPSTANDBY:
 				if NavigationInstance.instance.RecordTimer.isRecording() or abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900:
 					self.do_backoff()  # Retry.
@@ -480,7 +480,7 @@ class PowerTimerEntry(TimerEntry, object):
 					if Screens.Standby.inStandby:  # In standby.
 						quitMainloop(1)
 					else:
-						AddNotificationWithUniqueIDCallback(self.sendTryQuitMainloopNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to shutdown your %s.\nDo that now?") % BrandModel, timeout=180)
+						AddNotificationWithUniqueIDCallback(self.sendTryQuitMainloopNotification, "PT_StateChange", MessageBox, _("A finished powertimer wants to shutdown your %s.\nDo that now?") % getBrandModel(), timeout=180)
 			return True
 
 	def setAutoincreaseEnd(self, entry=None):
