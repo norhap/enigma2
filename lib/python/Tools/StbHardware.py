@@ -84,7 +84,7 @@ def setRTCoffset(forsleep=None):
 		print("[StbHardware] setRTCoffset failed!")
 
 def setRTCtime(wutime):
-	if path.exists("/proc/stb/fp/rtc_offset"):
+	if fileExists("/proc/stb/fp/rtc_offset"):
 		setRTCoffset()
 	try:
 		open("/proc/stb/fp/rtc", "w").write(str(wutime))
