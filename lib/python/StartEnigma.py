@@ -93,8 +93,10 @@ profile("InitializeConfigs")
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstandby.
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
 # config.misc.locale.addNotifier(localeNotifier)  # This should not be enabled while config.osd.language is in use!
-config.misc.prev_wakeup_time = ConfigInteger(default=0)
-config.misc.prev_wakeup_time_type = ConfigInteger(default=0)  # This is only valid when wakeup_time is not 0.  0 = RecordTimer, 1 = ZapTimer, 2 = Plugins, 3 = WakeupTimer.
+# config.misc.prev_wakeup_time = ConfigInteger(default=0) # disable for PowerTimer
+# config.misc.prev_wakeup_time_type = ConfigInteger(default=0)  # disable for PowerTimer # This is only valid when wakeup_time is not 0. 0=RecordTimer,1=ZapTimer,2=Plugins,3=WakeupTimer.
+config.misc.isNextRecordTimerAfterEventActionAuto = ConfigYesNo(default=False) # auto action after event in RecordTimer
+config.misc.isNextPowerTimerAfterEventActionAuto = ConfigYesNo(default=False) # auto action after event in PowerTimer
 config.misc.RestartUI = ConfigYesNo(default=False)  # Detect user interface restart.
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0))  # Number of standby.
 config.misc.startCounter = ConfigInteger(default=0)  # Number of e2 starts.
@@ -509,7 +511,7 @@ def runScreenTest():
 	enigma.resumeInit()
 
 	profile("Init:Session")
-	nav = Navigation()
+	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value) # wake up to standby for RecordTimer and PowerTimer.
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
 
 	CiHandler.setSession(session)
@@ -567,38 +569,61 @@ def runScreenTest():
 	from time import strftime, localtime
 	from Tools.StbHardware import setFPWakeuptime, setRTCtime
 	from Screens.SleepTimerEdit import isNextWakeupTime
+	PowerTimerWakeupAuto = False
+	recordTimerWakeupAuto = False
 	# get currentTime
 	nowTime = time()
-	wakeupList = sorted([
+	powerTimerList = sorted([
+		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0, session.nav.RecordTimer.isNextRecordAfterEventActionAuto()),
+					(session.nav.RecordTimer.getNextZapTime(isWakeup=True), 1),
+					(plugins.getNextWakeupTime(), 2),
+					(session.nav.PowerTimer.getNextPowerManagerTime(), 3, session.nav.PowerTimer.isNextPowerManagerAfterEventActionAuto()))
+		if x[0] != -1
+	])
+	sleepTimerList = sorted([
 		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0),
 					(session.nav.RecordTimer.getNextZapTime(isWakeup=True), 1),
 					(plugins.getNextWakeupTime(), 2),
 					(isNextWakeupTime(), 3))
 		if x[0] != -1
 	])
-	if wakeupList:
-		from time import strftime
-		startTime = wakeupList[0]
-		if (startTime[0] - nowTime) < 270:  # no time to switch box back on
+	if sleepTimerList:
+		startSleepTime = sleepTimerList[0]
+		if (startSleepTime[0] - nowTime) < 270:  # no time to switch box back on
 			wptime = nowTime + 30  # so switch back on in 30 seconds
 		else:
 			if model.startswith == "gb":
-				wptime = startTime[0] - 120  # GigaBlue already starts 2 min. before wakeup time
+				wptime = startSleepTime[0] - 120  # GigaBlue already starts 2 min. before wakeup time
 			else:
-				wptime = startTime[0] - 240
-		if model.startswith == "gb":
-			print("[StartEnigma] dvb time sync disabled... so set RTC now to current linux time!", strftime("%Y/%m/%d %H:%M", localtime(nowTime)))
+				wptime = startSleepTime[0] - 240
+		if not config.ntp.timesync.value == "dvb":
 			setRTCtime(nowTime)
-		print("[StartEnigma] Set wakeup time to", strftime("%Y/%m/%d %H:%M", localtime(wptime)))
 		setFPWakeuptime(wptime)
-		config.misc.prev_wakeup_time.value = int(startTime[0])
-		config.misc.prev_wakeup_time_type.value = startTime[1]
-		config.misc.prev_wakeup_time_type.save()
-	else:
-		config.misc.prev_wakeup_time.value = 0
-#		if not model.startswith('azboxm'): # skip for AZBox (mini)me - setting wakeup time to past reboots box
-#			setFPWakeuptime(int(nowTime) - 3600) # minus one hour -> overwrite old wakeup time
-	config.misc.prev_wakeup_time.save()
+
+	if powerTimerList and powerTimerList[0][1] == 3:
+		startTimePowerList = powerTimerList[0]
+		if (startTimePowerList[0], nowTime) < 60: # no time to switch box back on
+			wptime = nowTime + 30  # so switch back on in 30 seconds
+		else:
+			wptime = startTimePowerList[0]
+		if not config.ntp.timesync.value == "dvb":
+			setRTCtime(nowTime)
+		setFPWakeuptime(wptime)
+		PowerTimerWakeupAuto = startTimePowerList[1] == 3 and startTimePowerList[2]
+	config.misc.isNextPowerTimerAfterEventActionAuto.value = PowerTimerWakeupAuto
+	config.misc.isNextPowerTimerAfterEventActionAuto.save()
+	if powerTimerList and powerTimerList[0][1] != 3:
+		startTimePowerList = powerTimerList[0]
+		if (startTimePowerList[0], nowTime) < 270: # no time to switch box back on
+			wptime = nowTime + 30  # so switch back on in 30 seconds
+		else:
+			wptime = (startTimePowerList[0], 240)
+		if not config.ntp.timesync.value == "dvb":
+			setRTCtime(nowTime)
+		setFPWakeuptime(wptime)
+		recordTimerWakeupAuto = startTimePowerList[1] == 0 and startTimePowerList[2]
+	config.misc.isNextRecordTimerAfterEventActionAuto.value = recordTimerWakeupAuto
+	config.misc.isNextRecordTimerAfterEventActionAuto.save()
 
 	profile("stopService")
 	session.nav.stopService()
