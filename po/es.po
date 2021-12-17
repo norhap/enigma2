@@ -15581,11 +15581,11 @@ msgstr "Despertar"
 msgid "Deep Standby"
 msgstr "Reposo Profundo"
 
-msgid "Wake Up To Standby"
-msgstr "Despertar Modo Espera"
+msgid "Wake up to standby"
+msgstr "despertar a modo reposo"
 
-msgid "Auto Standby"
-msgstr "Espera Automática"
+msgid "Auto standby"
+msgstr "modo reposo automático"
 
 msgid "Auto Deep Standby"
 msgstr "Espera Profunda Automática"
