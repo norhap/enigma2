@@ -15582,10 +15582,10 @@ msgid "Deep Standby"
 msgstr "Reposo Profundo"
 
 msgid "Wake up to standby"
-msgstr "despertar a modo reposo"
+msgstr "Despertar a modo reposo"
 
 msgid "Auto standby"
-msgstr "modo reposo automático"
+msgstr "Modo reposo automático"
 
 msgid "Auto Deep Standby"
 msgstr "Espera Profunda Automática"
@@ -17382,8 +17382,8 @@ msgstr "Establezca la ubicación por defecto para sus grabaciones instantáneas.
 msgid "Set the default location for your timeshift files. Press OK to add new locations, LEFT/RIGHT to select any existing locations."
 msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar cualquier ubicación existente."
 
-msgid "Please select an acceptable directory."
-msgstr "Seleccione un directorio aceptable."
+msgid "Directory not accepted, check device."
+msgstr "Directorio no aceptado, revise dispositivo."
 
 msgid "Directory '%s' does not exist!"
 msgstr "El directorio '%s' does no exixte!"
