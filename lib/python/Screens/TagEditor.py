@@ -136,7 +136,7 @@ class TagEditor(Screen, HelpableScreen, TagManager):
 			"red": (self.keyCancel, _("Cancel any changed tags and exit")),
 			"green": (self.keySave, _("Save all changed tags and exit")),
 			"yellow": (self.addNewTag, _("Add a new tag")),
-			"blue": (self.loadFromDisk, _("Load tags from the timer and recordings")),
+			"blue": (self.loadFromData, _("Load tags from the timer and recordings")),
 			"menu": (self.showMenu, _("Display the tags context menu"))
 		}, prio=0, description=_("Tag Editor Actions"))
 		self["key_red"] = StaticText(_("Cancel"))
@@ -175,7 +175,7 @@ class TagEditor(Screen, HelpableScreen, TagManager):
 	def toggleSelection(self):
 		self["taglist"].toggleSelection()
 
-	def loadFromDisk(self):
+	def loadFromData(self):
 		tags = self.tags[:]
 		self.foreachTimerTags(lambda t, tg: self.buildTags(tags, tg))
 		self.foreachMovieTags(lambda r, tg: self.buildTags(tags, tg))
@@ -188,13 +188,14 @@ class TagEditor(Screen, HelpableScreen, TagManager):
 				tagList.append(tag)
 
 	def showMenu(self):
-		menu = [
-			(_("Add new tag"), self.addNewTag),
-			(_("Rename this tag"), self.renameOldTag),
-			(_("Delete this tag"), self.removeTag),
-			(_("Delete unused tags"), self.removeUnusedTags),
-			(_("Delete all tags"), self.removeAllTags),
-		]
+		menu = [(_("Add new tag"), self.addNewTag)]
+		if self["taglist"].count():
+			menu.extend([
+				(_("Rename this tag"), self.renameOldTag),
+				(_("Delete this tag"), self.removeTag),
+				(_("Delete unused tags"), self.removeUnusedTags)
+			])
+		menu.append((_("Delete all tags"), self.removeAllTags))
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, title="", list=menu)
 
 	def menuCallback(self, choice):
@@ -212,12 +213,8 @@ class TagEditor(Screen, HelpableScreen, TagManager):
 			self.updateMenuList(self.tags, extraSelected=[tag])
 
 	def renameOldTag(self):
-		selectionTagsList = self["taglist"].getSelectionsList()
-		if selectionTagsList:
-			self.currentTag = self["taglist"].list[self["taglist"].getSelectedIndex()][0]
-			self.session.openWithCallback(self.renameOldTagCallback, VirtualKeyBoard, title=_("Replace all '%s' tags with:\n(NOTE: 'Cancel' cannot undo this!)") % self.currentTag[1], text=self.currentTag[1], windowTitle=_("Tag Editor"))
-		else:
-			self.session.open(MessageBox, _("No tags selected for rename"), MessageBox.TYPE_INFO, timeout=5)
+		self.currentTag = self["taglist"].list[self["taglist"].getSelectedIndex()][0]
+		self.session.openWithCallback(self.renameOldTagCallback, VirtualKeyBoard, title=_("Replace all '%s' tags with:\n(NOTE: 'Cancel' cannot undo this!)") % self.currentTag[1], text=self.currentTag[1], windowTitle=_("Tag Editor"))
 
 	def renameOldTagCallback(self, tag):
 		tag = tag and self.formatTag(tag)
@@ -232,12 +229,8 @@ class TagEditor(Screen, HelpableScreen, TagManager):
 			self.updateMenuList(self.tags, extraSelected=self.currentTag[3] and [tag] or [])
 
 	def removeTag(self):
-		selectionTagsList = self["taglist"].getSelectionsList()
-		if selectionTagsList:
-			self.currentTag = self["taglist"].list[self["taglist"].getSelectedIndex()][0]
-			self.session.openWithCallback(self.removeTagCallback, MessageBox, _("Do you really want to delete all '%s' tags?\n(NOTE: 'Cancel' cannot undo this!)") % self.currentTag[1])
-		else:
-			self.session.open(MessageBox, _("No tags selected for remove"), MessageBox.TYPE_INFO, timeout=5)
+		self.currentTag = self["taglist"].list[self["taglist"].getSelectedIndex()][0]
+		self.session.openWithCallback(self.removeTagCallback, MessageBox, _("Do you really want to delete all '%s' tags?\n(NOTE: 'Cancel' cannot undo this!)") % self.currentTag[1])
 
 	def removeTagCallback(self, answer):
 		if answer:
