@@ -18113,3 +18113,27 @@ msgstr "Borrar el contenido del registro"
 
 msgid "Log Actions"
 msgstr "Acciones Registros"
+
+msgid "Message Box Actions"
+msgstr "Acciones en Mensajes"
+
+msgid "Move to first line"
+msgstr "Mover a la primera línea"
+
+msgid "Move to last line"
+msgstr "Mover a la última línea"
+
+msgid "Move up a page"
+msgstr "Subir una página"
+
+msgid "Return the current selection response"
+msgstr "Devuelve la respuesta de la selección actual"
+
+msgid "Select the No / False response"
+msgstr "Seleccione la respuesta No / Falso"
+
+msgid "Select the Yes / True response"
+msgstr "Seleccione la respuesta Sí / Verdadero"
+
+msgid "Close the window"
+msgstr "Cerrar la ventana"

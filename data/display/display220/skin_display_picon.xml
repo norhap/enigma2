@@ -228,12 +228,12 @@
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="MessageBox_summary" position="0,0" size="220,176">
-		<widget source="parent.Text" render="Label" position="0,0" size="220,176" font="FdLcD;26" halign="center" />
-		<widget source="parent.selectedChoice" render="Label" position="0,135" size="220,28" font="FdLcD;26" halign="center" noWrap="1" />
+		<widget source="text" render="Label" position="0,0" size="220,176" font="FdLcD;26" halign="center" />
+		<widget source="option" render="Label" position="0,135" size="220,28" font="FdLcD;26" halign="center" noWrap="1" />
 	</screen>
 	<screen name="MessageBoxSimple_summary" position="0,0" size="220,176">
-		<widget source="parent.Text" render="Label" position="0,0" size="220,176" font="FdLcD;26" halign="center" />
-		<widget source="parent.selectedChoice" render="Label" position="0,135" size="220,28" font="FdLcD;26" halign="center" noWrap="1" />
+		<widget source="text" render="Label" position="0,0" size="220,176" font="FdLcD;26" halign="center" />
+		<widget source="option" render="Label" position="0,135" size="220,28" font="FdLcD;26" halign="center" noWrap="1" />
 	</screen>
 	<screen name="AboutSummary" position="0,0" size="220,176">
 		<widget source="parent.Title" render="Label" position="top" size="*,100" font="FdLcD;28" halign="center" valign="center" />
@@ -343,7 +343,7 @@
 		<widget source="parent.summary_description" render="Label" position="0,82" size="220,80" font="FdLcD;30" halign="center" valign="center"  />
 	</screen>
 
-<!-- Quickmenü -->
+<!-- Quickmenu -->
 	<screen name="QuickMenu_summary" position="0,0" size="220,176">
 		<widget source="parent.Title" render="Label" position="0,0" foregroundColor="#FFFF00" size="220,80" font="FdLcD;35" halign="center" valign="top" />
 		<widget source="parent.summary_description" render="Label" position="0,82" size="220,80" font="FdLcD;30" halign="center" valign="center"  />

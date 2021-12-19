@@ -99,7 +99,7 @@
 		<widget source="session.Event_Now" render="Progress" position="0,33" size="256,6" borderWidth="1">
 			 <convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.CurrentService" render="FixedLabel" text="HD" position="115,18" font="FdLcD;12" size="22,15">
+		<widget source="session.CurrentService" render="FixedLabel" text="HD" position="95,18" font="FdLcD;12" size="22,15">
 			 <convert type="ServiceInfo">IsHD</convert>
 			 <convert type="ConditionalShowHide"/>
 		</widget>
@@ -279,12 +279,12 @@
 	</screen>
 	<!-- LCD screen MessageBox -->
 	<screen name="MessageBox_summary" position="0,0" size="256,64" id="1">
-		<widget source="parent.Text" render="Label" position="0,0" size="256,45" font="FdLcD;14" halign="center" valign="center"/>
-		<widget source="parent.selectedChoice" render="Label" position="6,46" size="244,18" font="FdLcD;16" halign="center" valign="center"/>
+		<widget source="text" render="Label" position="0,0" size="256,45" font="FdLcD;14" halign="center" valign="center"/>
+		<widget source="option" render="Label" position="6,46" size="244,18" font="FdLcD;16" halign="center" valign="center"/>
 	</screen>
 	<screen name="MessageBoxSimple_summary" position="0,0" size="255,64">
-		<widget source="parent.Text" render="Label" position="0,0" size="255,64" font="FdLcD;12" halign="center"/>
-		<widget source="parent.selectedChoice" render="Label" position="0,50" size="255,14" font="FdLcD;12" halign="center" noWrap="1"/>
+		<widget source="text" render="Label" position="0,0" size="255,64" font="FdLcD;12" halign="center"/>
+		<widget source="option" render="Label" position="0,50" size="255,14" font="FdLcD;12" halign="center" noWrap="1"/>
 	</screen>
 	<screen name="AboutSummary" position="0,0" size="255,64">
 		<widget source="AboutText" render="Label" position="0,0" size="255,64" font="FdLcD;11"/>
