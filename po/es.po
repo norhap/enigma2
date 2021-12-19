@@ -15768,7 +15768,7 @@ msgstr "(Actualmente está utilizando un método de clasificación temporal)"
 msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.\t It hides the day of the week for recordings made in previous years."
 msgstr "La visualización adaptable de la fecha permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
 
-msgid "Allows you to assign the selected function to the this button."
+msgid "Allows you to assign the selected function to this button."
 msgstr "Le permite asignar la función seleccionada a este botón."
 
 msgid "Ask user (with default as 'no')"
@@ -17382,8 +17382,8 @@ msgstr "Establezca la ubicación por defecto para sus grabaciones instantáneas.
 msgid "Set the default location for your timeshift files. Press OK to add new locations, LEFT/RIGHT to select any existing locations."
 msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar cualquier ubicación existente."
 
-msgid "Directory not accepted, check device."
-msgstr "Directorio no aceptado, revise dispositivo."
+msgid "Directory not accepted, change path."
+msgstr "Directorio no aceptado, cambie de ruta."
 
 msgid "Directory '%s' does not exist!"
 msgstr "El directorio '%s' does no exixte!"
