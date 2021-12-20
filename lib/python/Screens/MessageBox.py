@@ -203,23 +203,20 @@ class MessageBoxSummary(ScreenSummary):
 		ScreenSummary.__init__(self, session, parent=parent)
 		self["text"] = StaticText(parent.text)
 		self["option"] = StaticText("")
-		if self.addWatcher not in self.onShow:
-			self.onShow.append(self.addWatcher)
-		if self.removeWatcher not in self.onHide:
-			self.onHide.append(self.removeWatcher)
+		if hasattr(self, "list"):
+			if self.addWatcher not in self.onShow:
+				self.onShow.append(self.addWatcher)
+			if self.removeWatcher not in self.onHide:
+				self.onHide.append(self.removeWatcher)
 
 	def addWatcher(self):
-		if not self["text"]:
-			if self.parent["list"]:
-				if self.selectionChanged not in self.parent["list"].onSelectionChanged:
-					self.parent["list"].onSelectionChanged.append(self.selectionChanged)
-				self.selectionChanged()
+		if self.selectionChanged not in self.parent["list"].onSelectionChanged:
+			self.parent["list"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
 
 	def removeWatcher(self):
-		if not self["text"]:
-			if self.parent["list"]:
-				if self.selectionChanged in self.parent["list"].onSelectionChanged:
-					self.parent["list"].onSelectionChanged.remove(self.selectionChanged)
+		if self.selectionChanged in self.parent["list"].onSelectionChanged:
+			self.parent["list"].onSelectionChanged.remove(self.selectionChanged)
 
 	def selectionChanged(self):
 		self["option"].setText(self.parent["list"].getCurrent()[0])
