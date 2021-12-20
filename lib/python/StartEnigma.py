@@ -566,7 +566,6 @@ def runScreenTest():
 	runReactor()
 
 	profile("wakeup")
-	from time import strftime, localtime
 	from Tools.StbHardware import setFPWakeuptime, setRTCtime
 	from Screens.SleepTimerEdit import isNextWakeupTime
 	PowerTimerWakeupAuto = False
