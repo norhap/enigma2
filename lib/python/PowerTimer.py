@@ -227,7 +227,7 @@ class PowerTimer(Timer):
 		nextTime = self.getNextPowerManagerTimeOld()
 		fakeTime = time() + 300
 		if config.usage.timeshift_start_delay.value:
-			return nextTime if 0 < nextTime < fakeTime else fakeTime
+			return nextTime if "0" in config.usage.timeshift_start_delay.value else fakeTime
 		return nextTime
 
 	def isNextPowerManagerAfterEventActionAuto(self):
