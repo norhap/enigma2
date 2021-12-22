@@ -1,3 +1,4 @@
+from __future__ import division
 from bisect import insort
 from os import fsync, remove, rename
 from os.path import exists
@@ -227,7 +228,7 @@ class PowerTimer(Timer):
 		nextTime = self.getNextPowerManagerTimeOld()
 		fakeTime = time() + 300
 		if config.usage.timeshift_start_delay.value:
-			return nextTime if "0" in config.usage.timeshift_start_delay.value else fakeTime
+			return nextTime if 0 < nextTime < fakeTime or "8008" in getBrandModel() else fakeTime  # Add machine sf8008 for not run fakeTime.
 		return nextTime
 
 	def isNextPowerManagerAfterEventActionAuto(self):
@@ -330,7 +331,7 @@ class PowerTimerEntry(TimerEntry, object):
 			self.backoff *= 2
 			if self.backoff > 1800:
 				self.backoff = 1800
-		self.log(10, "Backoff, retry in %d minutes." % self.backoff // 60)
+		self.log(10, "Backoff, retry in %d minutes." % (int(self.backoff) // 60))
 		# If this is the first backoff of a repeat timer remember the original
 		# begin/end times, so that we can use *these* when setting up the repeat.
 		if self.repeated != 0 and not hasattr(self, "real_begin"):
