@@ -51,7 +51,7 @@ class InputDevices:
 			try:
 				buffer = b"\0" * 512
 				self.fd = open("/dev/input/%s" % device, O_RDWR | O_NONBLOCK)
-				self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer)
+				self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
 				close(self.fd)
 				self.name = str(self.name[:self.name.find(b"\0")])
 			except (IOError, OSError) as err:
