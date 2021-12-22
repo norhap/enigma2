@@ -577,6 +577,9 @@ class AttributeParser:
 		value = value.lower() in ("1", "enabled", "enablewraparound", "on", "true", "yes")
 		self.guiObject.setWrapAround(value)
 
+	def excludes(self, value):
+		pass
+
 	def flags(self, value):
 		errors = []
 		flags = [x.strip() for x in value.split(",")]
@@ -621,6 +624,9 @@ class AttributeParser:
 			}[value])
 		except KeyError:
 			raise AttribValueError("'left', 'center'/'centre', 'right' or 'block'")
+
+	def includes(self, value):  # Same as conditional.  Created to partner new "excludes" attribute.
+		pass
 
 	def itemHeight(self, value):
 		# print("[Skin] DEBUG: Scale itemHeight %d -> %d." % (int(value), self.applyVerticalScale(value)))
@@ -1384,6 +1390,12 @@ def readSkin(screen, skin, names, desktop):
 				continue
 			objecttypes = w.attrib.get("objectTypes", "").split(",")
 			if len(objecttypes) > 1 and (objecttypes[0] not in screen.keys() or not [i for i in objecttypes[1:] if i == screen[objecttypes[0]].__class__.__name__]):
+				continue
+			includes = w.attrib.get("includes")
+			if includes and not [i for i in includes.split(",") if i in screen.keys()]:
+				continue
+			excludes = w.attrib.get("excludes")
+			if excludes and [i for i in excludes.split(",") if i in screen.keys()]:
 				continue
 			p = processors.get(w.tag, processNone)
 			try:
