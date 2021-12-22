@@ -8,38 +8,38 @@ from boxbranding import getMachineName, getBoxType, getRCName
 
 
 def getBrand():
-	BrandName = ""
-	BrandStarSwith = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName())))
+	brandName = ""
+	brandStartSwith = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName())))
 	try:
-		if "edision" in BrandStarSwith:
-			BrandName = "Edision"
-		elif "gb" in BrandStarSwith:
-			BrandName = "GigaBlue"
-		elif "octagon" in BrandStarSwith:
-			BrandName = "octagon"
-		elif "ini" in BrandStarSwith:
-			BrandName = "INI"
-		elif "hd" in BrandStarSwith:
-			BrandName = "Mut@nt"
-		elif "dmm" in BrandStarSwith:
-			BrandName = "dreambox"
-		elif not BrandName:
-			print("[BrandName] Not Exists!! add this Brand to getBrand")
+		if "edision" in brandStartSwith:
+			brandName = "Edision"
+		elif "gb" in brandStartSwith:
+			brandName = "GigaBlue"
+		elif "octagon" in brandStartSwith:
+			brandName = "octagon"
+		elif "ini" in brandStartSwith:
+			brandName = "INI"
+		elif "hd" in brandStartSwith:
+			brandName = "Mut@nt"
+		elif "dmm" in brandStartSwith:
+			brandName = "dreambox"
+		elif not brandName:
+			print("[brandName] Not Exists!! add this Brand to getBrand")
 	except (IOError, OSError) as err:
-		print("[BrandName] exception with error in Brand Name")
-	return BrandName
+		print("[brandName] exception with error in Brand Name")
+	return brandName
 
 def getBrandModel():
-	BrandModel = None
-	Brand = getBrand()
-	Model = getMachineName()
-	Machine = getBoxType()
+	brandModel = None
+	brand = getBrand()
+	model = getMachineName()
+	machine = getBoxType()
 	try:
-		if Machine:
-			BrandModel = ("%s %s") % (Brand, Model)
+		if machine:
+			brandModel = ("%s %s") % (brand, model)
 	except (IOError, OSError) as err:
-		print("[BrandModel] No BrandModel!")
-	return BrandModel
+		print("[brandModel] No brandModel!")
+	return brandModel
 
 def getFPVersion():
 	ret = None

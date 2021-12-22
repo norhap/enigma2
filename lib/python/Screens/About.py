@@ -248,11 +248,11 @@ class InformationImage(Screen, HelpableScreen):
 		self.layoutFinished()
 
 	def layoutFinished(self):
-		BrandModel = getBrandModel()
+		brandModel = getBrandModel()
 		if self.widgetContext is None:
 			self.widgetContext = tuple(self["image"].getPosition() + self["image"].getSize())
 			print(self.widgetContext)
-		self["name"].setText("%s  -  %s" % (self.images[self.imageIndex][0], BrandModel))
+		self["name"].setText("%s  -  %s" % (self.images[self.imageIndex][0], brandModel))
 		imagePath = resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
 		image = LoadPixmap(imagePath)
 		if image:
@@ -464,8 +464,8 @@ class BenchmarkInformation(InformationBase):
 
 	def displayInformation(self):
 		info = []
-		BrandModel = getBrandModel()
-		info.append(formatLine("H", "%s %s" % (_("Benchmark for"), BrandModel)))
+		brandModel = getBrandModel()
+		info.append(formatLine("H", "%s %s" % (_("Benchmark for"), brandModel)))
 		info.append("")
 		for index, cpu in enumerate(self.cpuTypes):
 			info.append(formatLine("P1", _("CPU / Core %d type") % index, cpu))

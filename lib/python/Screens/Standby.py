@@ -22,7 +22,7 @@ from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceRefe
 inStandby = None
 infoBarInstance = None
 
-Brandmodel = getBrandModel()
+brandModel = getBrandModel()
 
 QUIT_SHUTDOWN = 1
 QUIT_REBOOT = 2
@@ -297,17 +297,17 @@ class QuitMainloopScreen(Screen):
 		Screen.__init__(self, session)
 		from Components.Label import Label
 		text = {
-			QUIT_SHUTDOWN: _("Your %s is shutting down") % Brandmodel,
-			QUIT_REBOOT: _("Your %s is rebooting") % Brandmodel,
-			QUIT_RESTART: _("The user interface of your %s is restarting") % Brandmodel,
-			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s reboots\nThis may take a few minutes") % Brandmodel,
-			QUIT_DEBUG_RESTART: _("The user interface of your %s is restarting in debug mode") % Brandmodel,
-			QUIT_REBOOT_ANDROID: _("Your %s is rebooting into android mode") % Brandmodel,
-			QUIT_REBOOT_RECOVERY: _("Your %s is rebooting into recovery mode") % Brandmodel,
-			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s reboots\nThis may take a few minutes") % Brandmodel,
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s restarts") % Brandmodel,
-			QUIT_UPGRADE_FPANEL: _("Front panel your %s will be updated\nThis may take a few minutes") % Brandmodel,
-			QUIT_WOL: _("Your %s goes to WOL") % Brandmodel
+			QUIT_SHUTDOWN: _("Your %s is shutting down") % brandModel,
+			QUIT_REBOOT: _("Your %s is rebooting") % brandModel,
+			QUIT_RESTART: _("The user interface of your %s is restarting") % brandModel,
+			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s reboots\nThis may take a few minutes") % brandModel,
+			QUIT_DEBUG_RESTART: _("The user interface of your %s is restarting in debug mode") % brandModel,
+			QUIT_REBOOT_ANDROID: _("Your %s is rebooting into android mode") % brandModel,
+			QUIT_REBOOT_RECOVERY: _("Your %s is rebooting into recovery mode") % brandModel,
+			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s reboots\nThis may take a few minutes") % brandModel,
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s restarts") % brandModel,
+			QUIT_UPGRADE_FPANEL: _("Front panel your %s will be updated\nThis may take a few minutes") % brandModel,
+			QUIT_WOL: _("Your %s goes to WOL") % brandModel
 		}.get(retvalue)
 		self["text"] = Label(text)
 
