@@ -17888,7 +17888,7 @@ msgid "Language already selected."
 msgstr "Idioma ya seleccionado."
 
 msgid "Jump to the currently active locale/language"
-msgstr "Ir a la configuración regional/idioma actualmente activo"
+msgstr "Ir al ajuste regional/idioma actualmente activo"
 
 msgid "Purge all but / Add / Delete the currently highlighted locale/language"
 msgstr "Limpiar todo menos Agregar/Eliminar la configuración regional/idioma actual"
