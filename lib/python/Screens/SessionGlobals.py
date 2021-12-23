@@ -7,12 +7,10 @@ from Components.Sources.Source import Source
 from Components.Sources.TunerInfo import TunerInfo
 from Components.Sources.Boolean import Boolean
 from Components.Sources.RecordState import RecordState
-from Components.Sources.HddState import HddState
 from Components.Converter.Combine import Combine
 from Components.Renderer.FrontpanelLed import FrontpanelLed
 from Components.config import config
-from enigma import getBoxType
-from boxbranding import getMachineBuild
+from boxbranding import getBoxType
 
 
 class SessionGlobals(Screen):
@@ -27,14 +25,12 @@ class SessionGlobals(Screen):
 		self["TunerInfo"] = TunerInfo()
 		self["RecordState"] = RecordState(session)
 		self["Standby"] = Boolean(fixed=False)
-		self["HddSleepingState"] = HddState(session)
 
 		from Components.SystemInfo import SystemInfo
 
 		combine = Combine(func=lambda s: {(False, False): 0, (False, True): 1, (True, False): 2, (True, True): 3}[(s[0].boolean, s[1].boolean)])
 		combine.connect(self["Standby"])
 		combine.connect(self["RecordState"])
-		combine.connect(self["HddSleepingState"])
 
 		#                      |  two leds  | single led |
 		# recordstate  standby   red green
@@ -99,7 +95,7 @@ class SessionGlobals(Screen):
 			if getBoxType() == "dm520":
 				FrontpanelLed(which=0, boolean=False, patterns=[PATTERN_ON, PATTERN_BLINK, PATTERN_OFF, PATTERN_BLINK]).connect(combine)
 				FrontpanelLed(which=1, boolean=False, patterns=[PATTERN_OFF, PATTERN_OFF, PATTERN_OFF, PATTERN_OFF]).connect(combine)
-			elif getMachineBuild() == "dm4kgen":
+			elif getBoxType() == "dm920" or getBoxType() == "dm900":
 				FrontpanelLed(which=0, boolean=False, patterns=[NormalLed0, RecLed0, StandbyLed0, RecstdbyLed0]).connect(combine)
 				FrontpanelLed(which=1, boolean=False, patterns=[NormalLed1, RecLed1, StandbyLed1, RecstdbyLed1]).connect(combine)
 			else:
