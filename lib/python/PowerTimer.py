@@ -227,8 +227,8 @@ class PowerTimer(Timer):
 	def getNextPowerManagerTime(self):
 		nextTime = self.getNextPowerManagerTimeOld()
 		fakeTime = time() + 300
-		if config.usage.timeshift_start_delay.value:
-			return nextTime if 0 < nextTime < fakeTime or "8008" in getBrandModel() else fakeTime  # Add machine sf8008 for not run fakeTime.
+		if hasattr(self, "timeshift") and config.usage.timeshift_start_delay.value:
+			return nextTime if 0 < nextTime < fakeTime else fakeTime
 		return nextTime
 
 	def isNextPowerManagerAfterEventActionAuto(self):
