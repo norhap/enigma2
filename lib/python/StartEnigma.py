@@ -568,10 +568,10 @@ def runScreenTest():
 	profile("wakeup")
 	from Tools.StbHardware import setFPWakeuptime, setRTCtime
 	from Screens.SleepTimerEdit import isNextWakeupTime
-	PowerTimerWakeupAuto = False
+	powerTimerWakeupAuto = False
 	recordTimerWakeupAuto = False
 	# get currentTime
-	nowTime = time()
+	nowTime = int(time())
 	powerTimerList = sorted([
 		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0, session.nav.RecordTimer.isNextRecordAfterEventActionAuto()),
 					(session.nav.RecordTimer.getNextZapTime(isWakeup=True), 1),
@@ -589,37 +589,37 @@ def runScreenTest():
 	if sleepTimerList:
 		startSleepTime = sleepTimerList[0]
 		if (startSleepTime[0] - nowTime) < 270:  # no time to switch box back on
-			wptime = nowTime + 30  # so switch back on in 30 seconds
+			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
 			if model.startswith == "gb":
-				wptime = startSleepTime[0] - 120  # GigaBlue already starts 2 min. before wakeup time
+				wakeupTime = startSleepTime[0] - 120  # GigaBlue already starts 2 min. before wakeup time
 			else:
-				wptime = startSleepTime[0] - 240
+				wakeupTime = startSleepTime[0] - 240
 		if not config.ntp.timesync.value == "dvb":
 			setRTCtime(nowTime)
-		setFPWakeuptime(wptime)
+		setFPWakeuptime(wakeupTime)
 
 	if powerTimerList and powerTimerList[0][1] == 3:
 		startTimePowerList = powerTimerList[0]
-		if (startTimePowerList[0], nowTime) < 60: # no time to switch box back on
-			wptime = nowTime + 30  # so switch back on in 30 seconds
+		if (startTimePowerList[0] - nowTime) < 60: # no time to switch box back on
+			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			wptime = startTimePowerList[0]
+			wakeupTime = startTimePowerList[0]
 		if not config.ntp.timesync.value == "dvb":
 			setRTCtime(nowTime)
-		setFPWakeuptime(wptime)
-		PowerTimerWakeupAuto = startTimePowerList[1] == 3 and startTimePowerList[2]
-	config.misc.isNextPowerTimerAfterEventActionAuto.value = PowerTimerWakeupAuto
+		setFPWakeuptime(wakeupTime)
+		powerTimerWakeupAuto = startTimePowerList[1] == 3 and startTimePowerList[2]
+	config.misc.isNextPowerTimerAfterEventActionAuto.value = powerTimerWakeupAuto
 	config.misc.isNextPowerTimerAfterEventActionAuto.save()
 	if powerTimerList and powerTimerList[0][1] != 3:
 		startTimePowerList = powerTimerList[0]
-		if (startTimePowerList[0], nowTime) < 270: # no time to switch box back on
-			wptime = nowTime + 30  # so switch back on in 30 seconds
+		if (startTimePowerList[0] - nowTime) < 270: # no time to switch box back on
+			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			wptime = (startTimePowerList[0], 240)
+			wakeupTime = startTimePowerList[0] - 240
 		if not config.ntp.timesync.value == "dvb":
 			setRTCtime(nowTime)
-		setFPWakeuptime(wptime)
+		setFPWakeuptime(wakeupTime)
 		recordTimerWakeupAuto = startTimePowerList[1] == 0 and startTimePowerList[2]
 	config.misc.isNextRecordTimerAfterEventActionAuto.value = recordTimerWakeupAuto
 	config.misc.isNextRecordTimerAfterEventActionAuto.save()
