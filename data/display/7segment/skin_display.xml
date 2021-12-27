@@ -208,9 +208,9 @@
 		<widget source="parent.Title" render="Label" position="fill" size="120,20" font="Regular;18" />
 	</screen>
 <!-- Timer -->
-	<screen name="TimerLog_summary" position="0,0" size="132,64">
+	<!--screen name="TimerLog_summary" position="0,0" size="132,64">
 		<widget source="parent.summary_description" render="Label" position="fill" size="120,20" font="Regular;18" />
-	</screen>
+	</screen-->
 	<screen name="CrossEPG_MenuSummary" position="0,0" size="132,64">
 		<widget source="SetupEntry" render="Label" position="0,0" size="120,20" font="Regular;18" halign="left" noWrap="1"  />
 	</screen>
