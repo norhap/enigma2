@@ -72,7 +72,7 @@ class ChoiceBox(Screen, HelpableScreen):
 			"down": (self.down, _("Move down a line")),
 			"pageDown": (self.pageDown, _("Move down a page")),
 			"bottom": (self.bottom, _("Move to last line"))
-		}, prio=0, description=_("Choice Box Actions"))
+		}, prio=-2, description=_("Choice Box Actions"))
 		self.setTitle(windowTitle or _("Select"))
 		self.onLayoutFinish.append(self.layoutFinished)
 
