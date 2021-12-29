@@ -22,6 +22,7 @@ import os
 
 config.misc.firstrun = ConfigBoolean(default=True)
 config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard)
+# config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard and config.skin.primary_skin.value == "OctEtFHD/skin.xml")
 
 
 class StartWizard(WizardLanguage, Rc):
