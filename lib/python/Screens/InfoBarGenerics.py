@@ -1311,7 +1311,7 @@ class InfoBarEPG:
 		if brand not in ("xtrend", "odin", "ini", "dags", "gigablue", "xp"):
 			pluginlist = self.getEPGPluginList()
 			if pluginlist:
-				self.session.openWithCallback(self.EventInfoPluginChosen, OrderedChoiceBox, text=_("Please choose an extension:"), list=pluginlist, order="eventInfoOrder", skinName="EPGExtensionsList", windowTitle=_("Events Info Menu"))
+				self.session.openWithCallback(self.EventInfoPluginChosen, OrderedChoiceBox, text=_("Please choose an extension..."), list=pluginlist, order="eventInfoOrder", skinName="EPGExtensionsList", windowTitle=_("Events Info Menu"))
 			else:
 				self.openSingleServiceEPG()
 		else:
@@ -2406,7 +2406,7 @@ class InfoBarExtensions:
 				else:
 					extensionsList.remove(extension)
 		list.extend([(x[0](), x) for x in extensionsList])
-		list and self.session.openWithCallback(self.extensionCallback, OrderedChoiceBox, text=_("Please choose an extension:"), list=list, keys=keys, order="extensionOrder", skinName="ExtensionsList", windowTitle=_("Extensions Menu"))
+		list and self.session.openWithCallback(self.extensionCallback, OrderedChoiceBox, text=_("Please choose an extension..."), list=list, keys=keys, order="extensionOrder", skinName="ExtensionsList", windowTitle=_("Extensions Menu"))
 
 	def extensionCallback(self, answer):
 		if answer is not None:

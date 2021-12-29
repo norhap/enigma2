@@ -2524,8 +2524,8 @@ msgstr "Configuración extendida…"
 msgid "Extensions management"
 msgstr "Administrador de extensiones"
 
-msgid "Extensions menu"
-msgstr "Menú de extensiones"
+msgid "Extensions Menu"
+msgstr "Menú de Extensiones"
 
 msgid "External"
 msgstr "Externo"
@@ -18137,3 +18137,33 @@ msgstr "Seleccione la respuesta Sí / Verdadero"
 
 msgid "Close the window"
 msgstr "Cerrar la ventana"
+
+msgid "Close Event View screen"
+msgstr "Cerrar la pantalla de visualización de eventos"
+
+msgid "Event View Actions"
+msgstr "Acciones de visualización de eventos"
+
+msgid "Add a timer for the current event"
+msgstr "Añadir un temporizador para el evento actual"
+
+msgid "Open context menu"
+msgstr "Abrir menú contextual"
+
+msgid "Open the multi service EPG view"
+msgstr "Abrir Multi EPG"
+
+msgid "Open the single service EPG view"
+msgstr "Abrir EPG Simple"
+
+msgid "Show next event"
+msgstr "Mostrar próximo evento"
+
+msgid "Show next page of description"
+msgstr "Mostrar la siguiente página de descripción"
+
+msgid "Show previous event"
+msgstr "Mostrar evento anterior"
+
+msgid "Show previous page of description"
+msgstr "Mostrar la página anterior de descripción"

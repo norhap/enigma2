@@ -258,9 +258,9 @@
 		<panel name="SummaryEpgPanel" />
 	</screen>
 
-	<screen name="ChoiceBox_summary" position="0,0" size="128,32">
+	<!--screen name="ChoiceBox_summary" position="0,0" size="128,32">
 		<widget source="parent.summary_list" render="Label" position="0,0" size="128,30" font="FdLcD;11" valign="top" noWrap="1" />
-	</screen>
+	</screen-->
 
 	<screen name="MessageBox_summary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,18" font="FdLcD;9" valign="top" halign="center" />

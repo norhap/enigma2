@@ -411,10 +411,10 @@
 		<panel name="SummaryClockPanel" />
 	</screen>
 
-	<screen name="ChoiceBox_summary" position="0,0" size="720,576">
+	<!--screen name="ChoiceBox_summary" position="0,0" size="720,576">
 		<widget source="parent.summary_list" render="Label" position="22,22" size="670,445" font="FdLcDLight;57" halign="center" valign="center" foregroundColor="#e5b243" />
 		<panel name="SummaryClockPanel" />
-	</screen>
+	</screen-->
 
 	<screen name="MessageBox_summary" position="0,0" size="720,576">
 		<widget source="text" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
