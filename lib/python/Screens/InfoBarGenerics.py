@@ -3091,7 +3091,7 @@ class InfoBarSubserviceSelection:
 					keys = ["red", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 					selection += 2
 				if tlist:
-					self.session.openWithCallback(self.subserviceSelected, ChoiceBox, text=_("Please select a sub service:"), list=tlist, selection=selection, keys=keys, skin_name="SubserviceSelection")
+					self.session.openWithCallback(self.subserviceSelected, ChoiceBox, text=_("Please select a sub service..."), list=tlist, selection=selection, keys=keys, skin_name="SubserviceSelection")
 				else:
 					self.session.open(MessageBox, _("No active subservices available."), MessageBox.TYPE_INFO, timeout=5, simple=True)
 
@@ -3253,7 +3253,7 @@ class InfoBarAspectSelection:
 			if aspectList[item][1] == aspect:
 				selection = item
 				break
-		self.session.openWithCallback(self.aspectSelected, ChoiceBox, text=_("Please select an aspect ratio:"), list=aspectList, keys=keys, selection=selection)
+		self.session.openWithCallback(self.aspectSelected, ChoiceBox, text=_("Please select an aspect ratio..."), list=aspectList, keys=keys, selection=selection)
 
 	def aspectSelected(self, aspect):
 		if not aspect is None:
@@ -3308,7 +3308,7 @@ class InfoBarResolutionSelection:
 				selection = item
 				break
 		print("[InfoBarGenerics] Current video mode is %s." % videoMode)
-		self.session.openWithCallback(self.resolutionSelected, ChoiceBox, text=_("Please select a resolution:"), list=resList, keys=keys, selection=selection)
+		self.session.openWithCallback(self.resolutionSelected, ChoiceBox, text=_("Please select a resolution..."), list=resList, keys=keys, selection=selection)
 
 	def resolutionSelected(self, videoMode):
 		if videoMode is not None:
