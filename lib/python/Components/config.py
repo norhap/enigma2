@@ -466,7 +466,7 @@ class ConfigBoolean(ConfigElement):
 		for item in booleanlist:
 			if not isinstance(item, bool):
 				# raise TypeError("[Config] Error: 'ConfigBoolean' default must be a Boolean!")
-				print("[Config] Error: 'ConfigBoolean' default must be a Boolean!  (%s)" % item)
+				print("[Config] Error: 'ConfigBoolean' default must be a Boolean!  (%s)" % default)
 		if descriptions is None:
 			descriptions = {
 				False: _("False"),
@@ -1816,7 +1816,7 @@ class ConfigDirectory(ConfigText):
 
 	def onSelect(self, session):
 		self.allmarked = (self.value != "")
-		
+
 	def getValue(self):
 		if self.text == "":
 			return None
