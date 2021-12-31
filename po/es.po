@@ -663,6 +663,9 @@ msgstr "Añadir servicio"
 msgid "Add Timer"
 msgstr "Añadir Temporizador"
 
+msgid "Add timer"
+msgstr "Añadir temporizador"
+
 msgid "Add title"
 msgstr "Añadir título"
 
@@ -1311,6 +1314,9 @@ msgstr "Cambiar tamaño de los pasos"
 msgid "Change Timer"
 msgstr "Cambiar Temporizador"
 
+msgid "Change timer"
+msgstr "Cambiar temporizador"
+
 msgid "Channel"
 msgstr "Canal"
 
@@ -1892,6 +1898,9 @@ msgstr "Borrar lista de reproducción guardada"
 msgid "Delete Timer"
 msgstr "Borrar Temporizador"
 
+msgid "Delete timer"
+msgstr "Borrar temporizador"
+
 msgid "Deleted"
 msgstr "Borrado"
 
@@ -2220,6 +2229,9 @@ msgstr "Editar la configuración de red de su receptor.\n"
 
 msgid "Edit Timer"
 msgstr "Editar Temporizador"
+
+msgid "Edit timer"
+msgstr "Editar temporizador"
 
 msgid "Edit title"
 msgstr "Editar título"
