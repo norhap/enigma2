@@ -660,8 +660,8 @@ msgstr "Añadir grabación (para al acabar el evento actual)"
 msgid "Add service"
 msgstr "Añadir servicio"
 
-msgid "Add timer"
-msgstr "Añadir temporizador"
+msgid "Add Timer"
+msgstr "Añadir Temporizador"
 
 msgid "Add title"
 msgstr "Añadir título"
@@ -1308,8 +1308,8 @@ msgstr "Cambiar grabación (repetición y ajustes de demora)"
 msgid "Change step size"
 msgstr "Cambiar tamaño de los pasos"
 
-msgid "Change timer"
-msgstr "Cambiar temporizador"
+msgid "Change Timer"
+msgstr "Cambiar Temporizador"
 
 msgid "Channel"
 msgstr "Canal"
@@ -1889,8 +1889,8 @@ msgstr "Eliminar la entrada de la lista de reproducción"
 msgid "Delete saved playlist"
 msgstr "Borrar lista de reproducción guardada"
 
-msgid "Delete timer"
-msgstr "Borrar temporizador"
+msgid "Delete Timer"
+msgstr "Borrar Temporizador"
 
 msgid "Deleted"
 msgstr "Borrado"
@@ -2218,8 +2218,8 @@ msgstr "Editar configuración DNS de su receptor.\n"
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Editar la configuración de red de su receptor.\n"
 
-msgid "Edit timer"
-msgstr "Editar temporizador"
+msgid "Edit Timer"
+msgstr "Editar Temporizador"
 
 msgid "Edit title"
 msgstr "Editar título"
@@ -4969,7 +4969,7 @@ msgid "Really restart in debug mode now?"
 msgstr "¿Quiere reiniciar ahora en modo debug?"
 
 msgid "Really restart now?"
-msgstr "Reinicio completo ahora?"
+msgstr "Reiniciar ahora?"
 
 msgid "Really shutdown now?"
 msgstr "Apagar ahora?"
@@ -9221,8 +9221,8 @@ msgstr "desconocido"
 msgid "unknown error"
 msgstr "error desconocido"
 
-msgid "unknown service"
-msgstr "servicio desconocido"
+msgid "Unknown Service"
+msgstr "Servicio desconocido"
 
 msgid "unpublished"
 msgstr "sin publicar"

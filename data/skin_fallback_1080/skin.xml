@@ -5134,13 +5134,14 @@
 		<eLabel backgroundColor="blue_light" name="" position="50,142" size="270,2" zPosition="2" foregroundColor="white"/>
 		<eLabel backgroundColor="blue_light" name="" position="50,930" size="275,2" zPosition="2"/>
 		<!-- Buttons -->
-		<ePixmap pixmap="OctEtFHD/buttons/key_menu.png" position="65,950" size="64,43" zPosition="2" alphatest="blend"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_info.png" position="155,950" size="64,43" zPosition="2" alphatest="blend"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_leftright.png" position="245,950" size="64,43" zPosition="2" alphatest="blend"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_red.png" position="350,950" size="40,40" alphatest="blend"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_green.png" position="710,950" size="40,40" alphatest="blend"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_yellow.png" position="1100,950" size="40,40" alphatest="blend"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_blue.png" position="1490,950" size="40,40" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_menu.png" position="50,950" size="64,43" zPosition="2" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_info.png" position="120,950" size="64,43" zPosition="2" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_leftright.png" position="190,950" size="64,43" zPosition="2" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_help.png" position="260,950" size="64,43" zPosition="2" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_red.png" position="350,950" size="40,40" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_green.png" position="710,950" size="40,40" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_yellow.png" position="1100,950" size="40,40" alphatest="blend"/>
+		<ePixmap pixmap="buttons/key_blue.png" position="1490,950" size="40,40" alphatest="blend"/>
 		<!-- Keys Sources -->
 		<widget backgroundColor="OE_Background" font="RegularBold;24" position="395,935" size="300,70" source="key_red" render="Label" objectTypes="key_red,StaticText" halign="left" valign="center" transparent="1" zPosition="1"/>
 		<widget backgroundColor="OE_Background" font="RegularBold;24" position="755,935" size="300,70" source="key_green" render="Label" objectTypes="key_green,StaticText" halign="left" valign="center" transparent="1" zPosition="1"/>
