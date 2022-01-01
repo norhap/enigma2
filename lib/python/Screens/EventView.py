@@ -375,7 +375,7 @@ class EventViewEPGSelect(Screen, HelpableScreen, EventViewBase):
 			if isinstance(skinName, str):
 				self.skinName.insert(0, skinName)
 			else:
-				self.skinName = skinName + self.skinname
+				self.skinName = skinName + self.skinName
 
 	def openSingleEPG(self):
 		self.hide()
