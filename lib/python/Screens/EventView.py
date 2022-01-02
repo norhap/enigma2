@@ -155,7 +155,8 @@ class EventViewBase:
 	def addTimer(self):
 		if self.isRecording or self.event is None:
 			return
-		if self.doesTimerExist():
+		timer, isRecordEvent = self.doesTimerExist()
+		if isRecordEvent:
 			menu = [
 				(_("Delete Timer"), "delete"),
 				(_("Edit Timer"), "edit")
@@ -261,7 +262,7 @@ class EventViewBase:
 		self.finishedAdd(answer)
 
 	def setTimerState(self):
-		isRecordEvent = self.doesTimerExist()
+		timer, isRecordEvent = self.doesTimerExist()
 		if isRecordEvent and self.keyGreenAction != self.REMOVE_TIMER:
 			self["key_green"].setText(_("Change Timer"))
 			self.keyGreenAction = self.REMOVE_TIMER
@@ -280,7 +281,7 @@ class EventViewBase:
 			if neededRef and (timer.eit == eventId and (begin < timer.begin <= end or timer.begin <= begin <= timer.end) or timer.repeated and self.session.nav.RecordTimer.isInRepeatTimer(timer, self.event)):
 				isRecordEvent = True
 				break
-		return isRecordEvent
+		return timer, isRecordEvent
 
 	def removeTimer(self, timer):
 		if timer.external:
