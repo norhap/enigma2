@@ -156,7 +156,7 @@ class EventViewBase:
 		if self.isRecording or self.event is None:
 			return
 		timer, isRecordEvent = self.doesTimerExist()
-		if isRecordEvent:
+		if timer and isRecordEvent:
 			menu = [
 				(_("Delete Timer"), "delete"),
 				(_("Edit Timer"), "edit")
@@ -281,6 +281,8 @@ class EventViewBase:
 			if neededRef and (timer.eit == eventId and (begin < timer.begin <= end or timer.begin <= begin <= timer.end) or timer.repeated and self.session.nav.RecordTimer.isInRepeatTimer(timer, self.event)):
 				isRecordEvent = True
 				break
+		else:
+			timer = None
 		return timer, isRecordEvent
 
 	def removeTimer(self, timer):
