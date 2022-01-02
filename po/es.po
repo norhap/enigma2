@@ -16837,7 +16837,7 @@ msgid "Cancel any changes to the currently active skin"
 msgstr "Cancelar cualquier cambio activo en el skin"
 
 msgid "Cancel any changes to the currently active skin and exit all menus"
-msgstr "Cancele cualquier cambio en la máscara actualmente activa y salga de todos los menús"
+msgstr "Cancele cualquier cambio en el skin activo y salga de todos los menús"
 
 msgid "Jump to first item in list or the start of text"
 msgstr "Ir al primer elemento de la lista o al comienzo del texto"

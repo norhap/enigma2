@@ -69,7 +69,7 @@ class SkinSelector(Screen, HelpableScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["description"] = StaticText(_("Please wait... Loading list..."))
-		self["actions"] = HelpableNumberActionMap(self, ["SetupActions", "DirectionActions", "ColorActions"], {
+		self["actions"] = HelpableNumberActionMap(self, ["OkActions", "DirectionActions", "ColorActions", "ConfigListActions"], {
 			"ok": (self.save, _("Save and activate the currently selected skin")),
 			"cancel": (self.cancel, _("Cancel any changes to the currently active skin")),
 			"close": (self.cancelRecursive, _("Cancel any changes to the currently active skin and exit all menus")),
