@@ -12,7 +12,7 @@ class NetlinkSocket(socket.socket):
 		self.bind((os.getpid(), -1))
 
 	def parse(self):
-		data = self.recv(512)
+		data = self.recv(512).decode()
 		event = {}
 		splitdata = data.split(b'\x00')
 		for item in splitdata:
