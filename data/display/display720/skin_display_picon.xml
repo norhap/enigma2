@@ -336,17 +336,17 @@
 <!-- PowerTimer -->
 	<screen name="PowerTimerEditListSummary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="12,15" size="645,270" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="12,300" size="645,120" zPosition="1" font="FdLcD;60" halign="center" valign="center" foregroundColor="#02c6ff" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="12,300" size="645,120" zPosition="1" font="FdLcD;60" halign="center" valign="center" foregroundColor="#02c6ff" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="TimerEntry_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="12,15" size="645,270" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="12,300" size="645,120" zPosition="1" font="FdLcD;60" halign="center" valign="center" foregroundColor="#02c6ff" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="12,300" size="645,120" zPosition="1" font="FdLcD;60" halign="center" valign="center" foregroundColor="#02c6ff" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="TimerLog_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="12,15" size="645,270" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="12,300" size="645,120" zPosition="1" font="FdLcD;60" halign="center" valign="center" foregroundColor="#02c6ff" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="12,300" size="645,120" zPosition="1" font="FdLcD;60" halign="center" valign="center" foregroundColor="#02c6ff" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 
@@ -431,39 +431,39 @@
 <!-- console -->
 	<screen name="Console_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 
 <!-- softwaremanagment -->
 	<screen name="BackupSelection_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="RestoreScreen_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="installedPlugins_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="RestartNetwork_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="RestorePlugins_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="RestoreMenu_summary" position="0,0" size="720,576">
 		<widget source="parent.Title" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
-		<widget source="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="22,390" size="670,63" foregroundColor="#02c6ff" font="FdLcDLight;60" halign="center" valign="center" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 
@@ -476,13 +476,13 @@
 
 <!-- QuickMenu -->
 	<screen name="QuickMenu_summary" position="0,0" size="720,576">
-		<widget source="parent.summary_description" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 
 <!-- Infopanel -->
 	<screen name="Infopanel_summary" position="0,0" size="720,576">
-		<widget source="parent.summary_description" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="10,20" size="670,376" font="FdLcD;70" halign="center" valign="center" foregroundColor="#e5b243" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 

@@ -334,7 +334,7 @@
 	</screen>
 	<screen name="EventViewSimple_summary" position="0,0" size="255,64">
 		<widget source="parent.Title" render="Label" position="0,0" size="160,22" font="FdLcD;17" halign="left" noWrap="1"/>
-		<widget source="parent.summary_description" render="Label" position="0,43" size="255,20" font="FdLcD;13"/>
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="0,43" size="255,20" font="FdLcD;13"/>
 	</screen>
 	<!-- EPG Screens -->
 	<screen name="EPGSelection_summary" position="0,0" size="255,64">

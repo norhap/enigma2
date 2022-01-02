@@ -276,12 +276,12 @@
 
 	<screen name="EventView_summary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,14" font="FdLcD;16" halign="center" valign="top" zPosition="1" noWrap="1" />
-		<widget source="parent.summary_description" render="Label" position="fill" size="*,18" font="FdLcD;10" halign="center" valign="top" zPosition="1" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="fill" size="*,18" font="FdLcD;10" halign="center" valign="top" zPosition="1" />
 	</screen>
 
 	<screen name="EventViewSimple_summary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,14" font="FdLcD;16" halign="center" valign="top" zPosition="1" noWrap="1" />
-		<widget source="parent.summary_description" render="Label" position="fill" size="*,18" font="FdLcD;10" halign="center" valign="top" zPosition="1" />
+		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="fill" size="*,18" font="FdLcD;10" halign="center" valign="top" zPosition="1" />
 	</screen>
 
 <!-- EPG Screens -->
