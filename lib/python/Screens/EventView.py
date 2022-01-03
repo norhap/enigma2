@@ -78,7 +78,7 @@ class EventViewBase:
 		self.keyGreenAction = self.ADD_TIMER
 		self["key_menu"] = StaticText(_("MENU"))
 		self["key_info"] = StaticText(_("INFO"))
-		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "EventViewActions"], {
+		self["actions"] = HelpableActionMap(self, ["OkActions", "EventViewActions"], {
 			"cancel": (self.close, _("Close Event View screen")),
 			"ok": (self.close, _("Close Event View screen")),
 			"contextMenu": (self.doContext, _("Open context menu")),

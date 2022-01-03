@@ -332,6 +332,7 @@
 		<!-- Also uses OkCancelActions -->
 		<key id="KEY_INFO" mapto="cancel" flags="m" />
 		<key id="KEY_RED" mapto="openSimilarList" flags="m" />
+		<key id="KEY_EXIT" mapto="cancel" flags="m" />
 		<key id="KEY_GREEN" mapto="timerAdd" flags="m" />
 		<!-- <key id="KEY_INFO" mapto="contextMenu" flags="m" /> -->
 		<key id="KEY_MENU" mapto="contextMenu" flags="m" />
