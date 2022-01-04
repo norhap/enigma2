@@ -68,7 +68,7 @@ static unsigned char *color_resize(unsigned char * orgin, int ox, int oy, int dx
 					b += q[2];
 				}
 			}
-			if (sq == 0) // prevent division by zero
+			if (sq == 0) // prevent Division by zero
 				sq = 1;
 			p[0] = r / sq;
 			p[1] = g / sq;

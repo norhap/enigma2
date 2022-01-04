@@ -1,5 +1,5 @@
 from __future__ import print_function
-from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
+from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigOnOff, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop, getBoxType, getBrand
 from Components.SystemInfo import SystemInfo
 import os
@@ -290,9 +290,8 @@ def InitAVSwitch():
 	if SystemInfo["CanBTAudio"]:
 		def setBTAudio(configElement):
 			print("[AVSwitch] Write to /proc/stb/audio/btaudio")
-			open("/proc/stb/audio/btaudio", "w").write(configElement.value)
-		choice_list = [("off", _("off")), ("on", _("on"))]
-		config.av.btaudio = ConfigSelection(choices=choice_list, default="off")
+			open("/proc/stb/audio/btaudio", "w").write("on" if configElement.value else "off")
+		config.av.btaudio = ConfigOnOff(default=False)
 		config.av.btaudio.addNotifier(setBTAudio)
 	else:
 		config.av.btaudio = ConfigNothing()
