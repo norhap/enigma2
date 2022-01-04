@@ -265,7 +265,7 @@ class PliExtraInfo(Poll, Converter):
 		yres = info.getInfo(iServiceInformation.sVideoHeight)
 		mode = ("i", "p", " ")[info.getInfo(iServiceInformation.sProgressive)]
 		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) / 1000
-		if not fps:
+		if not fps or fps == -1:
 			try:
 				if os.path.exists("/proc/stb/vmpeg/0/framerate"):
 					print("[PliExtraInfo] Read /proc/stb/vmpeg/0/framerate")
