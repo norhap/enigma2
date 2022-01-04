@@ -116,8 +116,8 @@
 	</screen>
 
 	<screen name="WizardSummary" position="fill">
-		<widget source="parent.list" render="RollerCharLCD" position="fill" font="Regular;12">
-			<convert type="StringListSelection" />
+		<widget source="text" render="Label" position="top" size="*,71" font="FdLcD;35" halign="center" />
+		<widget source="parent.list" render="RollerCharLCD" position="fill" font="Regular;12" />
 		</widget>
 	</screen>
 

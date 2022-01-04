@@ -427,7 +427,6 @@ class LocaleWizard(LocaleSelection, Rc):
 		self["selectionActions"] = HelpableActionMap(self, "LocaleSelectionActions", {
 			"select": (self.keySelect, saveText),
 			"close": (self.keyCancel, cancelText),
-			"cancel": (self.keyCancel, cancelText),
 			"save": (self.keySelect, saveText),
 		}, prio=0, description=_("Locale/Language Selection Actions"))
 		self["manageActions"].setEnabled(False)

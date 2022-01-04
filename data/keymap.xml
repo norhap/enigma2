@@ -156,6 +156,7 @@
 		<key id="KEY_MENU" mapto="menu" flags="mr" />
 		<!-- Keyboard specific buttons -->
 		<key id="KEY_SPACE" mapto="menu" flags="mr" />
+		<key id="KEY_MENU" mapto="cancel" flags="m" />
 	</map>
 
 	<map context="MenuActionsNew">
@@ -627,8 +628,9 @@
 		<key id="KEY_ENTER" mapto="ok" flags="m" />
 		<key id="KEY_EXIT" mapto="back" flags="m" />
 		<key id="KEY_ESC" mapto="back" flags="m" />
-		<key id="KEY_UP" mapto="up" flags="mr" />
-		<key id="KEY_DOWN" mapto="down" flags="mr" />
+		<key id="KEY_MENU" mapto="menu" flags="m" />
+		<key id="KEY_UP" mapto="up" flags="l" />
+		<key id="KEY_DOWN" mapto="down" flags="l" />
 		<key id="KEY_LEFT" mapto="left" flags="mr" />
 		<key id="KEY_RIGHT" mapto="right" flags="mr" />
 	</map>

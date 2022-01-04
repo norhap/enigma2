@@ -287,9 +287,7 @@
 
 	<screen name="WizardSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,16" font="FdLcD;16" halign="center" />
-		<widget source="parent.list" render="Label" position="0,16" size="128,16" font="FdLcD;12" halign="center" noWrap="1"  >
-			<convert type="StringListSelection" />
-		</widget>
+		<widget source="parent.list" render="Label" position="0,16" size="128,16" font="FdLcD;12" halign="center" noWrap="1" />
 	</screen>
 	<screen name="VideoWizardSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,32" font="FdLcD;12" halign="center" />

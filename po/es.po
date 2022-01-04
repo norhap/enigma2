@@ -18179,3 +18179,6 @@ msgstr "Mostrar evento anterior"
 
 msgid "Show previous page of description"
 msgstr "Mostrar la página anterior de descripción"
+
+msgid "You seem to be in timeshift!"
+msgstr "Parece que estás en Timeshift!"
