@@ -15198,8 +15198,8 @@ msgstr "Configurar contraseña"
 msgid "Please wait while feeds state is being checked."
 msgstr "Espere mientras se verifica el estado de los feeds."
 
-msgid "Press OK to active the MAC address."
-msgstr "Pulse OK para activar la dirección MAC."
+msgid "Press OK to activate current MAC address."
+msgstr "Pulse OK para activar la actual dirección MAC."
 
 msgid "Random password"
 msgstr "Contraseña aleatoria"
@@ -17619,11 +17619,8 @@ msgstr "%s: %s Libre:%s Usado:%s (%s%%)"
 msgid "%s: %s Used:%s Free:%s"
 msgstr "%s: %s Usado:%s Libre:%s"
 
-msgid "Current mac address"
-msgstr "Dirección mac actual"
-
-msgid "Set new mac address"
-msgstr "Establecer nueva dirección mac"
+msgid "Set new MAC address"
+msgstr "Establecer nueva dirección MAC"
 
 msgid "You want to change current MAC address: "
 msgstr "Quiere cambiar la dirección MAC actual: "
@@ -18182,3 +18179,6 @@ msgstr "Mostrar la página anterior de descripción"
 
 msgid "You seem to be in timeshift!"
 msgstr "Parece que estás en Timeshift!"
+
+msgid "Network interface for MAC address."
+msgstr "Interfaz de red para dirección MAC."
