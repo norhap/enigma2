@@ -8,7 +8,7 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
 from Tools.camcontrol import CamControl
-from Tools.Directories import isPluginInstalled, fileExists, fileHas
+from Tools.Directories import isPluginInstalled
 from Tools.GetEcmInfo import GetEcmInfo
 
 class SoftcamSetup(Setup):
