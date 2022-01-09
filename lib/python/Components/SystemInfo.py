@@ -83,7 +83,7 @@ SystemInfo["RemoteRepeat"] = repeat
 SystemInfo["RemoteDelay"] = 200 if model in ("maram9", "axodin") else 700
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
-SystemInfo["CommonInterface"] = eDVBCIInterfaces.getInstance().getNumOfSlots()
+SystemInfo["CommonInterface"] = model in ("h9combo", "h9combose", "h10","pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
 SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 for cislot in range(0, SystemInfo["CommonInterface"]):
 	SystemInfo["CI%dSupportsHighBitrates" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_tsclk" % cislot)
