@@ -113,7 +113,7 @@ class SelectImage(Screen):
 				for image in self.imagesList[catagorie].keys():
 					list.append(ChoiceEntryComponent('expandable', ((str(catagorie)), "Expander")))
 					break
-		if list:
+		if not hasattr(self, "list") and list:
 			self["list"].setList(list)
 			if self.setIndex:
 				self["list"].moveToIndex(self.setIndex if self.setIndex < len(list) else len(list) - 1)
