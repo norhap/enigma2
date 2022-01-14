@@ -1,6 +1,6 @@
 from __future__ import print_function
 try:
-	from cPickle import dump, load
+	from pickle import dump, load
 except ImportError:
 	from pickle import dump, load
 from os import W_OK, access, listdir, mkdir, rename, rmdir, stat
