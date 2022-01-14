@@ -136,7 +136,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					else:
 						message = _("The current image might not be stable.\nFor more information see %s.") % ("https://images.openvision.dedyn.io")
 
-			except Exception, e:
+			except Exception as e:
 				print("[SoftwareUpdate] status error: ", str(e))
 				message = _("The current image might not be stable.\nFor more information see %s.") % ("https://forum.openvision.tech")
 
