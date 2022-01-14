@@ -1,5 +1,5 @@
 from Plugins.Plugin import PluginDescriptor
-from Plugins.Extensions.SocketMMI.SocketMMI import SocketMMIMessageHandler
+from SocketMMI import SocketMMIMessageHandler
 
 socketHandler = None
 
@@ -9,7 +9,7 @@ def main(session, **kwargs):
 
 
 def menu(menuid, **kwargs):
-	if menuid == "cam" and socketHandler and socketHandler.connected():
+	if menuid == "setup" and socketHandler and socketHandler.connected():
 		return [(socketHandler.getName(), main, "socket_mmi", 0)]
 	return []
 
