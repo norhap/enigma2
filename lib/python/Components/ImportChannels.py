@@ -2,12 +2,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import threading
-try:
-	import urllib2
-	from urllib2 import quote
-except:
-	import urllib
-	from urllib import quote
+import urllib
+from urllib import quote
 import os
 import shutil
 import tempfile
@@ -46,15 +42,15 @@ class ImportChannels():
 
 	def getUrl(self, url, timeout=5):
 		if PY2:
-			request = urllib2.Request(url)
+			request = urllib.Request(url)
 			if self.header:
 				request.add_header("Authorization", self.header)
-			return urllib2.urlopen(request, timeout=timeout)
+			return urllib.urlopen(request, timeout=timeout)
 		else:
 			request = urllib.request.Request(url)
 			if self.header:
 				request.add_header("Authorization", self.header)
-			return urllib.urlopen(request, timeout=timeout)
+			return urllib.request.urlopen(request, timeout=timeout)
 
 	def getTerrestrialUrl(self):
 		url = config.usage.remote_fallback_dvb_t.value
