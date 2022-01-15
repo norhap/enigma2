@@ -68,7 +68,7 @@ class TitleList(Screen, HelpableScreen):
 
 		self.setTitle(_("DVD titlelist"))
 
-		self["titleactions"] = HelpableActionMap(self, "DVDTitleList",
+		self["titleactions"] = HelpableActionMap(self, ["DVDTitleList"],
 			{
 				"addTitle": (self.addTitle, _("Add a new title"), _("Add title")),
 				"titleProperties": (self.titleProperties, _("Properties of current title"), _("Title properties")),

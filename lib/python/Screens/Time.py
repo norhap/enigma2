@@ -9,7 +9,7 @@ class Time(Setup):
 	def __init__(self, session):
 		Setup.__init__(self, session=session, setup="Time")
 		self["key_yellow"] = StaticText("")
-		self["geolocationActions"] = HelpableActionMap(self, "ColorActions", {
+		self["geolocationActions"] = HelpableActionMap(self, ["ColorActions"], {
 			"yellow": (self.useGeolocation, _("Use geolocation to set the current time zone location"))
 		}, prio=0, description=_("Time Setup Actions"))
 		self.selectionChanged()

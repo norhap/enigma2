@@ -101,7 +101,7 @@ class LocaleSelection(Screen, HelpableScreen):
 		self["locales"] = List(self.localeList, enableWrapAround=True)
 		self["locales"].onSelectionChanged.append(self.selectionChanged)
 		self["description"] = StaticText()
-		self["selectionActions"] = HelpableActionMap(self, "LocaleSelectionActions", {
+		self["selectionActions"] = HelpableActionMap(self, ["LocaleSelectionActions"], {
 			"menu": (self.keySettings, _("Manage Locale/Language Selection settings")),
 			"current": (self.keyCurrent, _("Jump to the currently active locale/language")),
 			"select": (self.keySelect, _("Select the currently highlighted locale/language for the user interface")),
@@ -109,7 +109,7 @@ class LocaleSelection(Screen, HelpableScreen):
 			"cancel": (self.keyCancel, _("Cancel any changes to the active locale/language and exit")),
 			"save": (self.keySave, _("Apply any changes to the active locale/language and exit"))
 		}, prio=0, description=_("Locale/Language Selection Actions"))
-		self["manageActions"] = HelpableActionMap(self, "LocaleSelectionActions", {
+		self["manageActions"] = HelpableActionMap(self, ["LocaleSelectionActions"], {
 			"manage": (self.keyManage, (_("Purge all but / Add / Delete the currently highlighted locale/language"), _("Purge all but the current and permanent locales/languages.  Add the current locale/language if it is not installed.  Delete the current locale/language if it is installed.")))
 		}, prio=0, description=_("Locale/Language Selection Actions"))
 		topItem = _("Move up to first line")
@@ -124,7 +124,7 @@ class LocaleSelection(Screen, HelpableScreen):
 		pageDownDesc = _("Move down one screen. Move to the last line of the screen if this is the last screen.")
 		bottomItem = _("Move down to last line")
 		bottomDesc = _("Move down to the last line in the list.")
-		self["navigationActions"] = HelpableActionMap(self, "NavigationActions", {
+		self["navigationActions"] = HelpableActionMap(self, ["NavigationActions"], {
 			"top": (self.keyTop, (topItem, topDesc)),
 			"pageUp": (self.keyPageUp, (pageUpItem, pageUpDesc)),
 			"up": (self.keyUp, (upItem, upDesc)),
@@ -424,7 +424,7 @@ class LocaleWizard(LocaleSelection, Rc):
 		inWizard = True
 		saveText = _("Apply the currently highlighted locale/language and exit")
 		cancelText = _("Cancel any changes to the active locale/language and exit")
-		self["selectionActions"] = HelpableActionMap(self, "LocaleSelectionActions", {
+		self["selectionActions"] = HelpableActionMap(self, ["LocaleSelectionActions"], {
 			"select": (self.keySelect, saveText),
 			"close": (self.keyCancel, cancelText),
 			"save": (self.keySelect, saveText),
