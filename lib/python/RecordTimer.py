@@ -266,7 +266,7 @@ class RecordTimer(Timer):
 		return self.saveTimers()
 
 	def createTimer(self, timerDom):
-		serviceReference = ServiceReference(timerDom.get("serviceref").encode("UTF-8"))
+		serviceReference = ServiceReference(timerDom.get("serviceref"))
 		begin = int(timerDom.get("begin"))
 		end = int(timerDom.get("end"))
 		name = timerDom.get("name").encode("UTF-8")
