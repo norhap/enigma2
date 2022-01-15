@@ -107,7 +107,7 @@ class Wlan:
 
 				extra = []
 				for element in result.custom:
-					element = element.encode()
+					element = element.decode()
 					if PY2:
 						extra.append(strip(self.asciify(element)))
 					else:
