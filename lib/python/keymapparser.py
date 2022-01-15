@@ -57,7 +57,7 @@ def parseKeys(context, filename, actionmap, device, keys):
 
 			flag_ascii_to_id = lambda x: {'m': 1, 'b': 2, 'r': 4, 'l': 8}[x]
 
-			flags = sum(map(flag_ascii_to_id, flags))
+			flags = sum(list(map(flag_ascii_to_id, flags)))
 
 			assert flags, "[keymapparser] %s: must specify at least one flag in context %s, id '%s'" % (filename, context, id)
 
