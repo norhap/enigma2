@@ -83,9 +83,9 @@ class SelectImage(Screen):
 		if not self.imagesList:
 			if not self.jsonlist:
 				try:
-					self.jsonlist = dict(json.load(urllib.request.urlopen('http://downloads.openpli.org/json/%s' % model)))
+					self.jsonlist = dict(json.load(urllib.urlopen('http://downloads.openpli.org/json/%s' % model)))
 					if config.usage.alternative_imagefeed.value:
-						self.jsonlist.update(dict(json.load(urllib.request.urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
+						self.jsonlist.update(dict(json.load(urllib.urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
 				except:
 					pass
 			self.imagesList = dict(self.jsonlist)
