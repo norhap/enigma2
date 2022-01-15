@@ -14,7 +14,7 @@ from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediaFilesInUse
 from Tools.StbHardware import getBrandModel
-from Tools import Notifications
+from Tools.Notifications import AddNotification
 from time import time, localtime
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService, getBoxType
@@ -272,7 +272,7 @@ class Standby(StandbyScreen):
 			self.onClose.append(self.goStandby)
 
 	def goStandby(self):
-		Notifications.AddNotification(StandbyScreen, self.StandbyCounterIncrease)
+		AddNotification(StandbyScreen, self.StandbyCounterIncrease)
 
 
 class StandbySummary(Screen):
