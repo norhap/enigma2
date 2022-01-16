@@ -1859,9 +1859,8 @@ class ChannelSelectionBase(Screen):
 					self.numberSelectionActions(number)
 			else:
 				unichar = self.numericalTextInput.getKey(number)
-				charstr = unichar.encode("utf-8")
-				if len(charstr) == 1:
-					self.servicelist.moveToChar(charstr[0])
+				if len(unichar) == 1:
+					self.servicelist.moveToChar(unichar[0])
 
 	def numberSelectionActions(self, number):
 		if not(hasattr(self, "movemode") and self.movemode):
@@ -1882,13 +1881,12 @@ class ChannelSelectionBase(Screen):
 		self.selectionNumber = ""
 
 	def keyAsciiCode(self):
-		if PY2:
-			unichar = unichr(getPrevAsciiCode())
-		else:
+		if PY3:
 			unichar = chr(getPrevAsciiCode())
-		charstr = unichar.encode("utf-8")
-		if len(charstr) == 1:
-			self.servicelist.moveToChar(charstr[0])
+		else:
+			unichar = unichr(getPrevAsciiCode())
+		if len(unichar) == 1:
+			self.servicelist.moveToChar(unichar[0])
 
 	def getRoot(self):
 		return self.servicelist.getRoot()
