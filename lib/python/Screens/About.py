@@ -1,15 +1,10 @@
-try:
-	import urllib2
-except ImportError:
-	import urllib
-
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
 from boxbranding import getBoxType, getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
 from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
 from PIL import Image
-import skin, os, re, urllib2, sys
+import skin, os, re, sys
 from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -54,17 +49,24 @@ URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS
 def news(url):
 	text = ""
 	try:
-		req = urllib2.Request(url)
-		response = urllib2.urlopen(req)
-		link = response.read().decode("windows-1252")
-		response.close()
-		text = link.encode("utf-8")
-
+		if PY2:
+			from urllib2 import Request, urlopen
+			request = Request(url)
+			response = urlopen(request)
+			link = response.read().decode("windows-1252")
+			response.close()
+			text = link.encode("utf-8")
+		else: # Python3
+			from urllib.request import Request, urlopen
+			request = Request(url)
+			response = urlopen(request)
+			link = response.read()
+			response.close()
+			text = link
 	except:
 		print("ERROR Latest Commits %s" %(url))
 
 	return text
-
 
 class InformationBase(Screen, HelpableScreen):
 	def __init__(self, session):
@@ -703,10 +705,7 @@ class Devices(Screen):
 		self.Console.ePopen("df -mh | grep -v '^Filesystem'", self.Stage1Complete)
 
 	def Stage1Complete(self, result, retval, extra_args=None):
-		if PY2:
-			result = result.replace('\n                        ', ' ').split('\n')
-		else:
-			result = result.decode().replace('\n                        ', ' ').split('\n')
+		result = result.replace('\n                        ', ' ').split('\n')
 		self.mountinfo = ""
 		for line in result:
 			self.parts = line.split()
@@ -873,16 +872,13 @@ class SystemNetworkInfo(Screen):
 		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
 
 	def SpeedFinished(self, result, retval, extra_args):
-		if PY2:
-			result_tmp = result.split('\n')
-		else:
-			result_tmp = result.decode().split('\n')
+		result_tmp = str(result).split('\n')
 		for line in result_tmp:
 			if 'Speed:' in line:
 				speed = line.split(': ')[1][:-4]
 				self.AboutText += _("Speed:") + "\t" + "\t" + speed + _('Mb/s')
 
-		hostname = file('/proc/sys/kernel/hostname').read()
+		hostname = open('/proc/sys/kernel/hostname').read()
 		self.AboutText += "\n" + _("Hostname:") + "\t" + "\t" + hostname + "\n"
 		self["AboutScrollLabel"].setText(self.AboutText)
 
@@ -995,8 +991,6 @@ class SystemNetworkInfo(Screen):
 		self["devicepic"].show()
 
 	def dataAvail(self, data):
-		if PY3:
-			data = data.decode()
 		self.LinkState = None
 		for line in data.splitlines():
 			line = line.strip()
@@ -1049,7 +1043,7 @@ class SystemMemoryInfo(Screen):
 			"red": self.close,
 		})
 
-		out_lines = file("/proc/meminfo").readlines()
+		out_lines = open("/proc/meminfo").readlines()
 		self.AboutText = _("RAM") + '\n\n'
 		RamTotal = "-"
 		RamFree = "-"
@@ -1163,7 +1157,6 @@ class CommitInfoDevelop(Screen):
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
-		from urllib2 import urlopen
 		try:
 			commitlog += 80 * '-' + '\n'
 			commitlog += url.split('/')[-2] + '\n'
@@ -1172,14 +1165,13 @@ class CommitInfoDevelop(Screen):
 				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
 				from ssl import _create_unverified_context
 				if PY2:
-					log = loads(urllib2.urlopen(url, timeout=5, context=_create_unverified_context()).read())
-				else:
-					log = loads(urllib.request.urlopen(url, timeout=5, context=_create_unverified_context()).read())
+					from urllib2 import urlopen
+					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
+				else: # Python3
+					from urllib.request import urlopen
+					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
 			except:
-				if PY2:
-					log = loads(urllib2.urlopen(url, timeout=5).read())
-				else:
-					log = loads(urllib.request.urlopen(url, timeout=5).read())
+				log += _("No log - please try later again")
 			for c in log:
 				creator = c['commit']['author']['name']
 				title = c['commit']['message']

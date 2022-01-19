@@ -4,7 +4,7 @@ import urllib
 
 from enigma import eEPGCache, iRecordableServicePtr
 
-import ChannelSelection
+import Screens.ChannelSelection
 from RecordTimer import AFTEREVENT
 from ServiceReference import ServiceReference
 from Components.ActionMap import HelpableNumberActionMap
@@ -317,7 +317,7 @@ class TimerEntry(Screen, ConfigListScreen):
 	def keySelect(self):
 		cur = self["config"].getCurrent()
 		if cur == self.channelEntry:
-			self.session.openWithCallback(self.finishedChannelSelection, ChannelSelection.SimpleChannelSelection, _("Select channel to record from"), currentBouquet=True)
+			self.session.openWithCallback(self.finishedChannelSelection, Screens.ChannelSelection.SimpleChannelSelection, _("Select channel to record from"), currentBouquet=True)
 		elif cur == self.dirname:
 			menu = [(_("Open select location"), "empty")]
 			if self.timerentry_type.value == "repeated" and self.timerentry_name.value:
@@ -363,7 +363,7 @@ class TimerEntry(Screen, ConfigListScreen):
 		return begin, end
 
 	def selectChannelSelector(self, *args):
-		self.session.openWithCallback(self.finishedChannelSelectionCorrection, ChannelSelection.SimpleChannelSelection, _("Select channel to record from"))
+		self.session.openWithCallback(self.finishedChannelSelectionCorrection, Screens.ChannelSelection.SimpleChannelSelection, _("Select channel to record from"))
 
 	def finishedChannelSelectionCorrection(self, *args):
 		if args:

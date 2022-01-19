@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
-import sys
-import os
+import os, sys
+from six import PY2
+from sys import modules, version_info
+
 import time
 import re
 from boxbranding import getBoxType
@@ -14,7 +15,6 @@ from Components.Console import Console
 from Tools.Directories import fileExists
 from Tools.HardwareInfo import HardwareInfo
 from Tools.StbHardware import getBrand
-from six import PY2
 
 
 def _ifinfo(sock, addr, ifname):
@@ -276,12 +276,7 @@ def getDriverInstalledDate():
 
 
 def getPythonVersionString():
-	process = Popen(("/usr/bin/python", "-V"), stdout=PIPE, stderr=PIPE, universal_newlines=True)
-	stdout, stderr = process.communicate()
-	if process.returncode == 0:
-		return stderr.strip().split()[1]
-	print("[About] Get python version failed.")
-	return _("Unknown")
+	return "%s.%s.%s" % (version_info.major, version_info.minor, version_info.micro)
 
 
 def GetIPsFromNetworkInterfaces():

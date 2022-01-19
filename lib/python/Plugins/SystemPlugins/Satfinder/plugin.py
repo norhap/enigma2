@@ -1,6 +1,6 @@
 from __future__ import print_function
 from enigma import eDVBResourceManager, eDVBFrontendParametersSatellite, eDVBFrontendParametersTerrestrial, eTimer
-
+from six import PY2
 from Screens.ScanSetup import ScanSetup, buildTerTransponder
 from Screens.ServiceScan import ServiceScan
 from Screens.MessageBox import MessageBox
@@ -888,7 +888,9 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
+		if PY2:
 			services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
+		services.append("%s%s%s" % (dash, colour, service["service_name"]))
 
 		self.session.open(ServicesFound, "\n".join(services), legend)
 

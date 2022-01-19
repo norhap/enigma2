@@ -52,8 +52,8 @@ class InputDevices:
 				buffer = b"\0" * 512
 				self.fd = open("/dev/input/%s" % device, O_RDWR | O_NONBLOCK)
 				self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
+				self.name = self.name[:self.name.find("\0")]
 				close(self.fd)
-				self.name = str(self.name[:self.name.find(b"\0")])
 			except (IOError, OSError) as err:
 				print("[InputDevice] Error: device='%s' getInputDevices <ERROR: ioctl(EVIOCGNAME): '%s'>" % (device, str(err)))
 				self.name = None

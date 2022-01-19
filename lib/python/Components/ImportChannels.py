@@ -1,12 +1,9 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
 import threading
-import urllib
-from urllib import quote
 import os
 import shutil
 import tempfile
+import urllib
 from json import loads
 from enigma import eDVBDB, eEPGCache
 from Screens.MessageBox import MessageBox
@@ -19,6 +16,7 @@ except ImportError:
 	from base64 import encodebytes
 	encodecommand = encodebytes
 import xml.etree.ElementTree as et
+from six.moves.urllib.parse import quote
 from six import PY2
 
 settingfiles = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
