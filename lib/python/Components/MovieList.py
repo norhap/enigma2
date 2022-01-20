@@ -785,8 +785,9 @@ class MovieList(GUIComponent):
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildSizeAlphaSortKey)
 		elif self.sort_type == MovieList.SORT_SIZEREV_ALPHA:
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildSizeRevAlphaSortKey)
-		elif self.sort_type == MovieList.SORT_DESCRIPTION_ALPHA:
-			self.list = sorted(self.list[:numberOfDirs], key=self.buildDescrAlphaSortKey) + sorted(self.list[numberOfDirs:], key=self.buildDescrAlphaSortKey)
+		elif not defaultInhibitDirs:
+			if self.sort_type == MovieList.SORT_DESCRIPTION_ALPHA:
+				self.list = sorted(self.list[:numberOfDirs], key=self.buildDescrAlphaSortKey) + sorted(self.list[numberOfDirs:], key=self.buildDescrAlphaSortKey)
 		else:
 			self.list.sort(key=self.buildGroupwiseSortkey)
 
