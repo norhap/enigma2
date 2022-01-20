@@ -371,12 +371,12 @@ class MovieList(GUIComponent):
 
 	def setItemsPerPage(self):
 		if self.listHeight > 0:
-			itemHeight = self.listHeight / config.movielist.itemsperpage.value
+			itemHeight = self.listHeight // config.movielist.itemsperpage.value
 		else:
 			itemHeight = 15 # some default (270/5)
 		self.itemHeight = itemHeight
 		self.l.setItemHeight(itemHeight)
-		self.instance.resize(eSize(self.listWidth, self.listHeight / itemHeight * itemHeight))
+		self.instance.resize(eSize(self.listWidth, self.listHeight // itemHeight * itemHeight))
 
 	def setFontsize(self):
 		if isHD():
@@ -423,13 +423,13 @@ class MovieList(GUIComponent):
 					p = os.path.split(p[0])
 				txt = p[1]
 				if txt == ".Trash":
-					res.append(MultiContentEntryPixmapAlphaTest(pos=((col0iconSize - self.iconTrash.size().width()) / 2, (self.itemHeight - self.iconFolder.size().height()) / 2), size=(iconSize, self.iconTrash.size().height()), png=self.iconTrash))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=((col0iconSize - self.iconTrash.size().width()) // 2, (self.itemHeight - self.iconFolder.size().height()) // 2), size=(iconSize, self.iconTrash.size().height()), png=self.iconTrash))
 					res.append(MultiContentEntryText(pos=(col0iconSize + space, 0), size=(width - 145, self.itemHeight), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=_("Deleted items")))
 					res.append(MultiContentEntryText(pos=(width - 185 - r, 0), size=(185, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=_("Trash can")))
 					return res
 			if not config.movielist.show_underlines.value:
 				txt = txt.replace('_', ' ').strip()
-			res.append(MultiContentEntryPixmapAlphaTest(pos=((col0iconSize - self.iconFolder.size().width()) / 2, (self.itemHeight - self.iconFolder.size().height()) / 2), size=(iconSize, iconSize), png=self.iconFolder))
+			res.append(MultiContentEntryPixmapAlphaTest(pos=((col0iconSize - self.iconFolder.size().width()) // 2, (self.itemHeight - self.iconFolder.size().height()) // 2), size=(iconSize, iconSize), png=self.iconFolder))
 			res.append(MultiContentEntryText(pos=(col0iconSize + space, 0), size=(width - 145, self.itemHeight), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=txt))
 			res.append(MultiContentEntryText(pos=(width - 145 - r, 0), size=(145, self.itemHeight), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=_("Directory")))
 			return res
@@ -529,7 +529,7 @@ class MovieList(GUIComponent):
 			if data:
 				len = data.len
 				if len > 0:
-					len = ngettext("%d Min", "%d Mins", (len / 60)) % (len / 60)
+					len = ngettext("%d Min", "%d Mins", (len // 60)) % (len // 60)
 					res.append(MultiContentEntryText(pos=(colX + 880, 2), size=(durationWidth, ih), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=len))
 
 		# Date
@@ -900,15 +900,9 @@ class MovieList(GUIComponent):
 
 	def buildBeginTimeSortKey(self, x):
 		ref = x[0]
-		name = self.getNameKey(ref, x[1])
-		path = ref.getPath()
-		if ref.flags & eServiceReference.mustDescent and os.path.exists(path):
-			try:
-				mtime = -os.stat(path).st_mtime
-			except (IOError, OSError) as err:
-				mtime = 0
-			return (0, x[1] and mtime, name)
-		return (1, -x[2], name)
+		if ref.flags & eServiceReference.mustDescent:
+			return (0, "", -x[2])
+		return (1, "", -x[2])
 
 	def buildDescrAlphaSortKey(self, x):
 		ref = x[0]
