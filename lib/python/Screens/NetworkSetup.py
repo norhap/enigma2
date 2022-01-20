@@ -1,6 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from __future__ import print_function
+import six
 import netifaces
 import io
 import os
@@ -88,6 +87,7 @@ class NSCommon:
 		self.Console.ePopen('opkg install ' + pkgname + ' >/dev/null 2>&1', callback)
 
 	def checkNetworkState(self, str, retval, extra_args):
+		str = six.ensure_str(str)
 		if 'Collected errors' in str:
 			self.session.openWithCallback(self.close, MessageBox, _("Seems a background update check is in progress, please wait a few minutes and then try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
@@ -2677,7 +2677,7 @@ class NetworkInadyn(NSCommon, Screen):
 					self['labalias'].setText(line)
 				elif line.startswith('update_period_sec '):
 					line = line[18:]
-					line = (int(line) / 60)
+					line = (int(line) // 60)
 					self['labtime'].setText(str(line))
 				elif line.startswith('dyndns_system ') or line.startswith('#dyndns_system '):
 					if line.startswith('#'):
@@ -2759,7 +2759,7 @@ class NetworkInadynSetup(Screen, ConfigListScreen):
 					self.list.append(ina_alias1)
 				elif line.startswith('update_period_sec '):
 					line = line[18:]
-					line = (int(line) / 60)
+					line = (int(line) // 60)
 					self.ina_period.value = line
 					ina_period1 = getConfigListEntry(_("Time update in minutes") + ":", self.ina_period)
 					self.list.append(ina_period1)
