@@ -1,6 +1,5 @@
 from __future__ import print_function
 from enigma import eDVBResourceManager, eDVBFrontendParametersSatellite, eDVBFrontendParametersTerrestrial, eTimer
-from six import PY2
 from Screens.ScanSetup import ScanSetup, buildTerTransponder
 from Screens.ServiceScan import ServiceScan
 from Screens.MessageBox import MessageBox
@@ -273,7 +272,7 @@ class Satfinder(ScanSetup, ServiceScan):
 					self.list.append(getConfigListEntry(_("Channel"), self.scan_ter.channel))
 				else:
 					prev_val = self.scan_ter.frequency.floatint
-					self.scan_ter.frequency.floatint = channel2frequency(self.scan_ter.channel.value, self.ter_tnumber) / 1000
+					self.scan_ter.frequency.floatint = channel2frequency(self.scan_ter.channel.value, self.ter_tnumber) // 1000
 					if self.scan_ter.frequency.floatint == 474000:
 						self.scan_ter.frequency.floatint = prev_val
 					self.list.append(getConfigListEntry(_("Frequency (kHz)"), self.scan_ter.frequency))
@@ -824,7 +823,7 @@ class SatfinderExtra(Satfinder):
 			op = (3600 - op) * -1
 		if w_e_flag == 0:
 			op *= -1
-		return "%0.1f%s" % (abs(op) / 10., "W" if op < 0 else "E")
+		return "%0.1f%s" % (abs(op) // 10., "W" if op < 0 else "E")
 
 	def waitTunerLock(self, currentProcess):
 		lock_timeout = 120
@@ -888,9 +887,7 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
-		if PY2:
 			services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
-		services.append("%s%s%s" % (dash, colour, service["service_name"]))
 
 		self.session.open(ServicesFound, "\n".join(services), legend)
 
