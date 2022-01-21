@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+from functools import cmp_to_key
 from Components.config import config
 from Components.Sources.List import List
 from Tools.KeyBindings import queryKeyBinding, getKeyDescription
@@ -120,7 +120,7 @@ class HelpMenuList(List):
 			amId = actMapId()
 			if headings and amId in actionMapHelp and getattr(actionmap, "description", None):
 				if sortCmp or sortKey:
-					actionMapHelp[amId].sort(cmp=sortCmp, key=sortKey)
+					actionMapHelp[amId].sort(key=cmp_to_key(self.compare))
 				self.addListBoxContext(actionMapHelp[amId], formatFlags)
 				lst.append((None, actionmap.description, None) + extendedPadding)
 				lst.extend(actionMapHelp[amId])
@@ -135,7 +135,7 @@ class HelpMenuList(List):
 					otherHelp.extend(actionMapHelp[amId])
 					del actionMapHelp[amId]
 			if sortCmp or sortKey:
-				otherHelp.sort(cmp=sortCmp, key=sortKey)
+				otherHelp.sort(key=cmp_to_key(self.compare))
 			self.addListBoxContext(otherHelp, formatFlags)
 			lst.extend(otherHelp)
 		for i, ent in enumerate(lst):
@@ -177,12 +177,15 @@ class HelpMenuList(List):
 			actionMapHelp[i] = tuple(ent)
 
 	# Reverse the coordinate tuple, too, to (y, x) to get ordering by y then x.
-	#
+	# use method python 3 remove compare (cmp) from python 2
+	def compare(self, a, b):
+		return (a > b) - (a < b)
+
 	def _getMinPos(self, a):
 		return min(map(lambda x: tuple(reversed(self.rcPos.getRcKeyPos(x[0]))), a))
 
 	def _sortCmpPos(self, a, b):
-		return cmp(self._getMinPos(a[0][3]), self._getMinPos(b[0][3]))
+		return self.compare(self._getMinPos(a[0][3]), self._getMinPos(b[0][3]))
 
 	# Sort order "Flat by key group on remote" is really
 	# "Sort in order of buttons in rcpositions.xml", and so
@@ -193,7 +196,7 @@ class HelpMenuList(List):
 		return min(map(lambda x: self.rcKeyIndex[x[0]], a))
 
 	def _sortCmpInd(self, a, b):
-		return cmp(self._getMinInd(a[0][3]), self._getMinInd(b[0][3]))
+		return self.compare(self._getMinInd(a[0][3]), self._getMinInd(b[0][3]))
 
 	# Convert normal help to extended help form for comparison and ignore case.
 	#
