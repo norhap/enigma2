@@ -513,18 +513,12 @@ def runScreenTest():
 	profile("Init:Session")
 	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value) # wake up to standby for RecordTimer and PowerTimer.
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
-
 	CiHandler.setSession(session)
-
-	screensToRun = [p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
-
+	screensToRun = [p.__call__ for p in plugins.getPlugins(str(PluginDescriptor.WHERE_WIZARD))]
 	profile("wizards")
 	screensToRun += wizardManager.getWizards()
-
 	screensToRun.append((100, InfoBar.InfoBar))
-
 	screensToRun.sort()
-
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
 
 	def runNextScreen(session, screensToRun, *result):
@@ -541,9 +535,7 @@ def runScreenTest():
 			session.open(screen, *args)
 
 	config.misc.epgcache_filename.addNotifier(setEPGCachePath)
-
 	runNextScreen(session, screensToRun)
-
 	profile("Init:VolumeControl")
 	vol = VolumeControl(session)
 	profile("Init:PowerKey")
