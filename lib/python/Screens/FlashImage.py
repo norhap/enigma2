@@ -16,13 +16,17 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import downloadWithProgress
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
 import os
-import urllib
 import json
 import time
 import zipfile
 import shutil
 import tempfile
 import struct
+try: # python 3
+	from urllib.request import urlopen # raises ImportError in Python 2
+	from urllib.error import HTTPError, URLError # raises ImportError in Python 2
+except ImportError: # Python 2
+	from urllib import urlopen
 
 from enigma import eEPGCache, getBoxType
 
@@ -83,9 +87,9 @@ class SelectImage(Screen):
 		if not self.imagesList:
 			if not self.jsonlist:
 				try:
-					self.jsonlist = dict(json.load(urllib.urlopen('http://downloads.openpli.org/json/%s' % model)))
+					self.jsonlist = dict(json.load(urlopen('http://downloads.openpli.org/json/%s' % model)))
 					if config.usage.alternative_imagefeed.value:
-						self.jsonlist.update(dict(json.load(urllib.urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
+						self.jsonlist.update(dict(json.load(urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
 				except:
 					pass
 			self.imagesList = dict(self.jsonlist)
