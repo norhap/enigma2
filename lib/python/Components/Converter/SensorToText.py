@@ -1,5 +1,5 @@
 from Components.Converter.Converter import Converter
-
+from six import PY3
 
 class SensorToText(Converter):
 	def __init__(self, arguments):
@@ -11,7 +11,8 @@ class SensorToText(Converter):
 		mark = " "
 		unit = self.source.getUnit()
 		if unit in ('C', 'F'):
-			mark = str('\xc2\xb0')
-		return "%d%s%s" % (self.source.getValue(), mark, unit)
+			mark = str('\xb0')
+			markpython2 = str('\xc2\xb0')
+		return "%d%s%s" % (self.source.getValue(), mark, unit) if PY3 return "%d%s%s" % (self.source.getValue(), markpython2, unit) 
 
 	text = property(getText)
