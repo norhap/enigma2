@@ -3,12 +3,21 @@ import threading
 import os
 import shutil
 import tempfile
-import urllib
 from json import loads
 from enigma import eDVBDB, eEPGCache
 from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigText
 from Tools.Notifications import AddNotificationWithID
+from time import sleep
+try: # python 3
+	import urllib
+	from urllib.request import urlopen, Request, urlretrieve
+	from urllib.parse import quote	# raises ImportError in Python 2
+	from urllib.error import HTTPError, URLError # raises ImportError in Python 2
+except ImportError: # Python 2
+	import urllib
+	from urllib import quote
+	from urllib2 import Request, urlopen, HTTPError, URLError
 try:
 	from base64 import encodestring
 	encodecommand = encodestring
@@ -39,16 +48,20 @@ class ImportChannels():
 			self.thread.start()
 
 	def getUrl(self, url, timeout=5):
-		if PY2:
-			request = urllib.Request(url)
-			if self.header:
-				request.add_header("Authorization", self.header)
-			return urllib.urlopen(request, timeout=timeout)
-		else:
-			request = urllib.request.Request(url)
-			if self.header:
-				request.add_header("Authorization", self.header)
-			return urllib.request.urlopen(request, timeout=timeout)
+		request = Request(url)
+		if self.header:
+			request.add_header("Authorization", self.header)
+		try:
+			result = urlopen(request, timeout=timeout)
+		except URLError as e:
+			if "[Errno -3]" in str(e.reason):
+				print("[Import Channels] Network is not up yet, delay 5 seconds")
+				# network not up yet
+				sleep(5)
+				return self.getUrl(url, timeout)
+			print("[Import Channels] URLError ", e)
+			raise e
+		return result
 
 	def getTerrestrialUrl(self):
 		url = config.usage.remote_fallback_dvb_t.value
@@ -78,7 +91,7 @@ class ImportChannels():
 #		self.getTerrestrialRegion(settings)
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels")
 		if "epg" in config.usage.remote_fallback_import.value:
-			print("[ImportChannels] Writing epg.dat file on sever box")
+			print("[Import Channels] Writing epg.dat file on sever box")
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
 			except:
@@ -137,4 +150,4 @@ class ImportChannels():
 #			AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
 #		else:
 #			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, type=MessageBox.TYPE_ERROR, timeout=5)
-		      return
+			  return
