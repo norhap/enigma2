@@ -45,8 +45,8 @@ class ConsoleItem:
 		del self.container.appClosed[:]
 		self.container = None
 		if self.callback is not None:
-			appResults = b"".join(self.appResults)
-			self.callback(appResults.decode(), retVal, self.extraArgs)
+			data = b"".join(self.appResults)
+			self.callback(data.decode(), retVal, self.extraArgs)
 
 
 class Console(object):
