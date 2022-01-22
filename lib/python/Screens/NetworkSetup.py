@@ -1,5 +1,4 @@
 from __future__ import print_function
-import six
 import netifaces
 import io
 import os
@@ -38,7 +37,6 @@ import glob
 import fnmatch
 from Components.ScrollLabel import ScrollLabel
 from os import remove, unlink, rename
-from six import PY2
 
 macaddress = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_LINK][0])["addr"].upper())
 config.macaddress = ConfigSubsection()
@@ -87,7 +85,7 @@ class NSCommon:
 		self.Console.ePopen('opkg install ' + pkgname + ' >/dev/null 2>&1', callback)
 
 	def checkNetworkState(self, str, retval, extra_args):
-		str = six.ensure_str(str)
+		str = str.decode()
 		if 'Collected errors' in str:
 			self.session.openWithCallback(self.close, MessageBox, _("Seems a background update check is in progress, please wait a few minutes and then try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
