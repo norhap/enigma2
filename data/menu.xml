@@ -188,6 +188,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<id val="timermenu" />
 		<item entryID="timer_edit" level="0" text="Timers" weight="5"><screen module="TimerEdit" screen="TimerEditList" /></item>
 		<item entryID="crontimer_edit" level="0" text="Cron Timers" weight="10"><screen module="CronTimer" screen="CronTimers" /></item>
+		<item entryID="sleep" level="0" text="Sleep Timer" weight="30"><screen module="SleepTimerEdit" screen="SleepTimerEdit" /></item>
 		<item entryID="powertimer_edit" level="0" text="Power Timers" weight="15"><screen module="PowerTimerEdit" screen="PowerTimerEditList" /></item>
 	</menu>
 
@@ -222,7 +223,6 @@ self.session.scart.VCRSbChanged(3)
 		<item entryID="restart_enigma" level="0" text="Restart GUI in standard mode" weight="20" requires="InDebugMode"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
 		<item entryID="restart_enigma_debug" level="0" text="Restart GUI in debug mode" weight="25" requires="!InDebugMode"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
 		<item entryID="multiboot" level="0" text="Multiboot Image Selector" weight="40" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
-		<item entryID="sleep" level="0" text="Sleep Timer" weight="30"><screen module="SleepTimerEdit" screen="SleepTimerEdit" /></item>
 		<item entryID="restart" level="0" text="Restart" weight="35"><screen module="Standby" screen="TryQuitMainloop">2</screen></item>
 		<item weight="24" level="0" text="Switch to Android" requires="canDualBoot" entryID="dualboot"><screen module="Standby" screen="SwitchToAndroid" /></item>
 		<item entryID="deep_standby" level="0" text="Deep Standby" weight="45" requires="DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
