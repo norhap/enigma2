@@ -79,7 +79,8 @@ class Network:
 		try:
 			print("[Network] Read /sys/class/net/%s/flags" % iface)
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
-			self.configuredInterfaces.append(iface)
+			if data['up']:
+				self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
 			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
 			data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
@@ -94,7 +95,10 @@ class Network:
 			data['ip'] = [0, 0, 0, 0]
 			data['netmask'] = [0, 0, 0, 0]
 			data['gateway'] = [0, 0, 0, 0]
-		self.ifaces[iface] = data
+		if iface in self.ifaces:
+			self.ifaces[iface].update(data)
+		else:
+			self.ifaces[iface] = data
 		self.loadNetworkConfig(iface, callback)
 
 	def writeNetworkConfig(self):
@@ -328,6 +332,8 @@ class Network:
 		return self.ifaces.keys()
 
 	def getAdapterAttribute(self, iface, attribute):
+		if self.ifaces.get(iface, {}).get('ip') == [0, 0, 0, 0]:
+			self.getAddrInet(iface, None)
 		return self.ifaces.get(iface, {}).get(attribute)
 
 	def setAdapterAttribute(self, iface, attribute, value):
