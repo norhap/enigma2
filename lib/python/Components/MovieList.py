@@ -147,11 +147,13 @@ def resetMoviePlayState(cutsFileName, ref=None):
 			if cutType != 3:
 				cutlist.append(data)
 		f.close()
-		open(cutsFileName, 'wb').write(''.join(cutlist))
+		f = open(cutsFileName, 'wb')
+		f.write(b''.join(cutlist))
+		f.close()
 	except:
 		pass
 		#import sys
-		#print("Exception in resetMoviePlayState: %s: %s" % sys.exc_info()[:2])
+		#print "Exception in resetMoviePlayState: %s: %s" % sys.exc_info()[:2]
 
 
 class MovieList(GUIComponent):
