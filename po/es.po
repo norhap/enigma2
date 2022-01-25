@@ -18182,3 +18182,6 @@ msgstr "Parece que estás en Timeshift!"
 
 msgid "Network interface for MAC address."
 msgstr "Interfaz de red para dirección MAC."
+
+msgid "No log: please try later again"
+msgstr "Sin registro: inténtelo más tarde de nuevo"

@@ -153,7 +153,7 @@ def resetMoviePlayState(cutsFileName, ref=None):
 	except:
 		pass
 		#import sys
-		#print "Exception in resetMoviePlayState: %s: %s" % sys.exc_info()[:2]
+		#print("Exception in resetMoviePlayState: %s: %s" % sys.exc_info()[:2])
 
 
 class MovieList(GUIComponent):

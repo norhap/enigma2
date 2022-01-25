@@ -386,8 +386,7 @@ class About(Screen):
 				AboutText += _("No Display") + "\n"
 
 		AboutText += "\n"
-		for x in about.GetIPsFromNetworkInterfaces():
-			AboutText += _("Uptime: ") + about.getBoxUptime()
+		AboutText += _("Uptime: ") + about.getBoxUptime()
 
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["actions"] = ActionMap(["ColorActionsAbout", "DirectionActions"], {
@@ -505,25 +504,25 @@ class Geolocation(Screen):
 			continent = geolocationData.get("continent", None)
 			if isinstance(continent, texttype):
 				continent = ensurestr(continent.encode(encoding="UTF-8", errors="ignore"))
-			if continent is not None:
+			if continent != None:
 				GeolocationText += _("Continent: ") + "\t" + continent + "\n"
 
 			country = geolocationData.get("country", None)
 			if isinstance(country, texttype):
 				country = ensurestr(country.encode(encoding="UTF-8", errors="ignore"))
-			if country is not None:
+			if country != None:
 				GeolocationText += _("Country: ") + "\t" + country + "\n"
 
 			state = geolocationData.get("regionName", None)
 			if isinstance(state, texttype):
 				state = ensurestr(state.encode(encoding="UTF-8", errors="ignore"))
-			if state is not None:
+			if state != None:
 				GeolocationText += _("State: ") + "\t" + state + "\n"
 
 			city = geolocationData.get("city", None)
 			if isinstance(city, texttype):
 				city = ensurestr(city.encode(encoding="UTF-8", errors="ignore"))
-			if city is not None:
+			if city != None:
 				GeolocationText += _("City: ") + "\t" + city + "\n"
 
 			GeolocationText += "\n"
@@ -531,23 +530,23 @@ class Geolocation(Screen):
 			timezone = geolocationData.get("timezone", None)
 			if isinstance(timezone, texttype):
 				timezone = ensurestr(timezone.encode(encoding="UTF-8", errors="ignore"))
-			if timezone is not None:
+			if timezone != None:
 				GeolocationText += _("Timezone: ") + "\t" + timezone + "\n"
 
 			currency = geolocationData.get("currency", None)
 			if isinstance(currency, texttype):
 				currency = ensurestr(currency.encode(encoding="UTF-8", errors="ignore"))
-			if currency is not None:
+			if currency != None:
 				GeolocationText += _("Currency: ") + "\t" + currency + "\n"
 
 			GeolocationText += "\n"
 
 			latitude = geolocationData.get("lat", None)
-			if str(float(latitude)) is not None:
+			if str(float(latitude)) != None:
 				GeolocationText += _("Latitude: ") + "\t" + str(float(latitude)) + "\n"
 
 			longitude = geolocationData.get("lon", None)
-			if str(float(longitude)) is not None:
+			if str(float(longitude)) != None:
 				GeolocationText += _("Longitude: ") + "\t" + str(float(longitude)) + "\n"
 			self["AboutScrollLabel"] = ScrollLabel(GeolocationText)
 		except Exception as err:
@@ -846,20 +845,20 @@ class SystemNetworkInfo(Screen):
 		if isinstance(isporg, texttype):
 			isporg = ensurestr(isporg.encode(encoding="UTF-8", errors="ignore"))
 		self.AboutText += "\n"
-		if isp is not None:
-			if isporg is not None:
-				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + "(" + isporg + ")" + "\n"
+		if isp != None:
+			if isporg != None:
+				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + (isporg) + "\n"
 			else:
 				self.AboutText +=  "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
 
 		mobile = geolocationData.get("mobile", False)
-		if mobile is not False:
+		if mobile:
 			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
 
 		proxy = geolocationData.get("proxy", False)
-		if proxy is not False:
+		if proxy:
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
@@ -892,8 +891,8 @@ class SystemNetworkInfo(Screen):
 
 	def getInfoCB(self, data, status):
 		self.LinkState = None
-		if data is not None and data:
-			if status is not None:
+		if data != None and data:
+			if status != None:
 # getDataForInterface()->iwconfigFinished() in
 # Plugins/SystemPlugins/WirelessLan/Wlan.py sets fields to boolean False
 # if there is no info for them, so we need to check that possibility
@@ -1171,17 +1170,16 @@ class CommitInfoDevelop(Screen):
 					from urllib.request import urlopen
 					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
 			except:
-				log += _("No log - please try later again")
+				log += _("No log: please try later again")
 			for c in log:
 				creator = c['commit']['author']['name']
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
 				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
-			commitlog = commitlog.encode('utf-8')
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
 			commitlog += _("Currently the commit log cannot be retrieved - please try later again")
-		self["AboutScrollLabel"].setText(commitlog.decode())
+		self["AboutScrollLabel"].setText(commitlog)
 
 	def updateCommitLogs(self):
 		if self.projects[self.project][1] in self.cachedProjects:
@@ -1284,7 +1282,7 @@ class MemoryInfoSkinParams(GUIComponent):
 		self.rows_in_column = 25
 
 	def applySkin(self, desktop, screen):
-		if self.skinAttributes is not None:
+		if self.skinAttributes != None:
 			attribs = [ ]
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "rowsincolumn":

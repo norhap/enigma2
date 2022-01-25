@@ -1,9 +1,2 @@
-
-NORHAP
-
-
-KODI 18.9 Leia
-KERNEL 5.9 add GCC 9.2.0
-HbbTV
-GST 1.18.1
-FFmpeg 4.2.1
+GCC 10.2
+Python 3
