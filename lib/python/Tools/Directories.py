@@ -290,7 +290,7 @@ def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
 def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	dom = None
 	try:
-		with open(filename, "r") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
+		with open(filename, "rb") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
 			try:
 				dom = parse(fd).getroot()
 				msg = "Read"
