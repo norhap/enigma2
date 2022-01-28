@@ -1184,23 +1184,24 @@ class PluginDetails(Screen, PackageInfoHandler):
 		pass
 
 	def setInfos(self):
-		if "screenshot" in self.attributes:
-			self.loadThumbnail(self.attributes)
+		if self.attributes:
+			if "screenshot" in self.attributes:
+				self.loadThumbnail(self.attributes)
 
-		if "name" in self.attributes:
-			self.pluginname = self.attributes["name"]
-		else:
-			self.pluginname = _("unknown")
+			if "name" in self.attributes:
+				self.pluginname = self.attributes["name"]
+			else:
+				self.pluginname = _("unknown")
 
-		if "author" in self.attributes:
-			self.author = self.attributes["author"]
-		else:
-			self.author = _("unknown")
+			if "author" in self.attributes:
+				self.author = self.attributes["author"]
+			else:
+				self.author = _("unknown")
 
-		if "description" in self.attributes:
-			self.description = _(self.attributes["description"].replace("\\n", "\n"))
-		else:
-			self.description = _("No description available.")
+			if "description" in self.attributes:
+				self.description = _(self.attributes["description"].replace("\\n", "\n"))
+			else:
+				self.description = _("No description available.")
 
 		self["author"].setText(_("Author: ") + self.author)
 		self["detailtext"].setText(_(self.description))
@@ -1256,10 +1257,11 @@ class PluginDetails(Screen, PackageInfoHandler):
 			self.setThumbnail(noScreenshot=True)
 
 	def go(self):
-		if "package" in self.attributes:
-			self.packagefiles = self.attributes["package"]
-		if "needsRestart" in self.attributes:
-			self.restartRequired = True
+		if self.attributes:
+			if "package" in self.attributes:
+				self.packagefiles = self.attributes["package"]
+			if "needsRestart" in self.attributes:
+				self.restartRequired = True
 		self.cmdList = []
 		if self.pluginstate in ('installed', 'remove'):
 			if self.packagefiles:
@@ -1382,7 +1384,7 @@ class OPKGSource(Screen):
 		text = ""
 		if self.configfile:
 			try:
-				fp = file(configfile, 'r')
+				fp = open(self.configfile, 'r')
 				sources = fp.readlines()
 				if sources:
 					text = sources[0]
@@ -1426,11 +1428,10 @@ class OPKGSource(Screen):
 
 	def go(self):
 		text = self["text"].getText()
-		if text:
-			fp = file(self.configfile, 'w')
-			fp.write(text)
-			fp.write("\n")
-			fp.close()
+		if text and self.configfile:
+			with open(self.configfile, 'w') as fp:
+				fp.write(text)
+				fp.write("\n")
 		self.close()
 
 	def keyLeft(self):
