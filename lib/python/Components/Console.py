@@ -4,12 +4,13 @@ from enigma import eConsoleAppContainer
 
 
 class ConsoleItem:
-	def __init__(self, containers, cmd, callback, extraArgs):
+	def __init__(self, containers, cmd, callback, extraArgs, binary=False):
 		self.containers = containers
 		if isinstance(cmd, str):  # Until .execute supports a better API.
 			cmd = [cmd]
 		self.callback = callback
 		self.extraArgs = extraArgs
+		self.binary = binary
 		name = str(cmd)
 		if name in self.containers:
 			name = "%s@%s" % (name, hex(id(self)))  # Create a unique name.
@@ -44,20 +45,25 @@ class ConsoleItem:
 		del self.container.dataAvail[:]
 		del self.container.appClosed[:]
 		self.container = None
-		if self.callback is not None:
+		if self.callback != None:
 			data = b"".join(self.appResults)
-			self.callback(data.decode(), retVal, self.extraArgs)
+			data = data if self.binary else data.decode()
+			self.callback(data, retVal, self.extraArgs)
 
 
 class Console(object):
-	def __init__(self):
-		# Still called appContainers because Network.py, SoftwareTools.py
-		# and WirelessLan/Wlan.py accesses it to know if there's still
-		# stuff running.
+	"""
+		Console by default will work with strings on callback.
+		If binary data required class shoud be initialized with Console(binary=True)
+	"""
+	def __init__(self, binary=False):
+		# Still called appContainers because Network.py accesses it to
+		# know if there's still stuff running
 		self.appContainers = {}
+		self.binary = binary
 
 	def ePopen(self, cmd, callback=None, extra_args=None):
-		return ConsoleItem(self.appContainers, cmd, callback, extra_args)
+		return ConsoleItem(self.appContainers, cmd, callback, extra_args, self.binary)
 
 	def eBatch(self, cmds, callback, extra_args=None, debug=False):
 		self.debug = debug
