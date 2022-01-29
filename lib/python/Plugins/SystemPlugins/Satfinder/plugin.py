@@ -4,7 +4,7 @@ from Screens.ScanSetup import ScanSetup, buildTerTransponder
 from Screens.ServiceScan import ServiceScan
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-
+from six import PY3
 from Components.Sources.FrontendStatus import FrontendStatus
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager, getConfigSatlist
@@ -887,7 +887,7 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
-			services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
+			services.append("%s%s%s" % (dash, colour, service["service_name"])) if PY3 else services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
 
 		self.session.open(ServicesFound, "\n".join(services), legend)
 
