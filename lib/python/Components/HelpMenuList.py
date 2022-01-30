@@ -119,8 +119,10 @@ class HelpMenuList(List):
 		for (actionmap, context, actions) in helplist:
 			amId = actMapId()
 			if headings and amId in actionMapHelp and getattr(actionmap, "description", None):
-				if sortCmp or sortKey:
-					actionMapHelp[amId].sort(key=cmp_to_key(self.compare))
+				if sortCmp:
+					actionMapHelp[amId].sort(key=cmp_to_key(sortCmp))
+				elif sortKey:
+					actionMapHelp[amId].sort(key=sortKey)
 				self.addListBoxContext(actionMapHelp[amId], formatFlags)
 				lst.append((None, actionmap.description, None) + extendedPadding)
 				lst.extend(actionMapHelp[amId])
@@ -134,8 +136,10 @@ class HelpMenuList(List):
 				if amId in actionMapHelp:
 					otherHelp.extend(actionMapHelp[amId])
 					del actionMapHelp[amId]
-			if sortCmp or sortKey:
-				otherHelp.sort(key=cmp_to_key(self.compare))
+			if sortCmp:
+				otherHelp.sort(key=cmp_to_key(sortCmp))
+			elif sortKey:
+				otherHelp.sort(key=sortKey)
 			self.addListBoxContext(otherHelp, formatFlags)
 			lst.extend(otherHelp)
 		for i, ent in enumerate(lst):
@@ -176,16 +180,20 @@ class HelpMenuList(List):
 				ent[1 + headings] = help
 			actionMapHelp[i] = tuple(ent)
 
-	# Reverse the coordinate tuple, too, to (y, x) to get ordering by y then x.
-	# use method python 3 remove compare (cmp) from python 2
-	def compare(self, a, b):
+	# use method python 3 for sortCamp remove compare (cmp) from python 2
+	def _cmp(self, a, b):
 		return (a > b) - (a < b)
 
+	def _sortCmpPos(self, a, b):
+		return self._cmp(self._getMinPos(a[0][3]), self._getMinPos(b[0][3]))
+
+	# Reverse the coordinate tuple, too, to (y, x) to get ordering by y then x.
+	#
 	def _getMinPos(self, a):
 		return min(map(lambda x: tuple(reversed(self.rcPos.getRcKeyPos(x[0]))), a))
 
-	def _sortCmpPos(self, a, b):
-		return self.compare(self._getMinPos(a[0][3]), self._getMinPos(b[0][3]))
+	def _sortCmpInd(self, a, b):
+		return self._cmp(self._getMinInd(a[0][3]), self._getMinInd(b[0][3]))
 
 	# Sort order "Flat by key group on remote" is really
 	# "Sort in order of buttons in rcpositions.xml", and so
@@ -195,13 +203,10 @@ class HelpMenuList(List):
 	def _getMinInd(self, a):
 		return min(map(lambda x: self.rcKeyIndex[x[0]], a))
 
-	def _sortCmpInd(self, a, b):
-		return self.compare(self._getMinInd(a[0][3]), self._getMinInd(b[0][3]))
-
 	# Convert normal help to extended help form for comparison and ignore case.
 	#
 	def _sortKeyAlpha(self, hlp):
-		return map(str.lower, hlp[1] if isinstance(hlp[1], (tuple, list)) else [hlp[1], ''])
+		return list(map(str.lower, hlp[1] if isinstance(hlp[1], (tuple, list)) else [hlp[1], ""]))
 
 	def ok(self):
 		# A list entry has a "private" tuple as first entry...
