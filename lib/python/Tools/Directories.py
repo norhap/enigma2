@@ -4,7 +4,6 @@ from inspect import stack
 from os import F_OK, R_OK, W_OK, access, chmod, link, listdir, makedirs, mkdir, readlink, remove, rename, rmdir, sep, stat, statvfs, symlink, utime, walk
 from os.path import basename, dirname, exists, getsize, isdir, isfile, islink, join as pathjoin, normpath, splitext
 from re import compile, split
-from six import PY2
 from shutil import copy2
 from stat import S_IMODE
 from tempfile import mkstemp

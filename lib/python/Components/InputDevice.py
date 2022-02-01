@@ -14,6 +14,7 @@ import struct
 import platform
 from Tools.Directories import pathExists
 from Tools.StbHardware import getBrand
+from six import PY3
 
 model = getBoxType()
 
@@ -51,7 +52,10 @@ class InputDevices:
 			try:
 				buffer = b"\0" * 512
 				self.fd = open("/dev/input/%s" % device, O_RDWR | O_NONBLOCK)
-				self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
+				if PY3:
+					self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
+				else:
+					self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer)
 				self.name = self.name[:self.name.find("\0")]
 				close(self.fd)
 			except (IOError, OSError) as err:
