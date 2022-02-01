@@ -486,6 +486,12 @@ msgstr ""
 msgid "%a %-d %b %Y"
 msgstr ""
 
+msgid "%a %e %b"
+msgstr ""
+
+msgid "%A %e %B"
+msgstr ""
+
 msgid "%a %-d+%b_"
 msgstr ""
 

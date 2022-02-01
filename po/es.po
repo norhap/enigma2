@@ -161,6 +161,9 @@ msgstr "%A %d %B"
 msgid "%A %e %B"
 msgstr "%A %e %B"
 
+msgid "%a %e %b"
+msgstr "%a %e %b"
+
 #. TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See 'man strftime'
 msgid "%A %e %B %Y"
 msgstr "%A %e %B %Y"
