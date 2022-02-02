@@ -370,8 +370,6 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		goto error;
 	}
 
-	struct dtv_properties props;
-	struct dtv_property prop[1];
 #ifdef HAVE_OLDE2_API
 #if defined DTV_ENUM_DELSYS
 	prop[0].cmd = DTV_ENUM_DELSYS;
