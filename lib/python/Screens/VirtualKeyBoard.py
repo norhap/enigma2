@@ -1095,7 +1095,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def localeMenu(self):
 		languages = []
-		for locale, data in iter(self.locales.items()):
+		for locale, data in self.locales.iteritems():
 			languages.append(("%s  -  %s  (%s)" % (data[0], data[1], locale), locale))
 		languages = sorted(languages)
 		index = 0
