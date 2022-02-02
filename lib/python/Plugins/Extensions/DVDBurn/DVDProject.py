@@ -3,6 +3,7 @@ from Tools.Directories import fileExists
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigText, ConfigSelection, ConfigSequence, ConfigSubList
 from . import DVDTitle
 import xml.dom.minidom
+from six import iteritems
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_FONTS
 
 
@@ -60,7 +61,7 @@ class DVDProject:
 		list.append('<?xml version="1.0" encoding="utf-8" ?>\n')
 		list.append('<DreamDVDBurnerProject>\n')
 		list.append('\t<settings ')
-		for key, val in self.settings.dict().iteritems():
+		for key, val in iteritems(self.settings.dict()):
 			list.append(key + '="' + str(val.getValue()) + '" ')
 		list.append('/>\n')
 		list.append('\t<titles>\n')
@@ -71,12 +72,12 @@ class DVDProject:
 			list.append('</path>\n')
 			list.append('\t\t\t<properties ')
 			audiotracks = []
-			for key, val in title.properties.dict().iteritems():
+			for key, val in iteritems(title.properties.dict()):
 				if isinstance(val, ConfigSubList):
 					audiotracks.append('\t\t\t<audiotracks>\n')
 					for audiotrack in val:
 						audiotracks.append('\t\t\t\t<audiotrack ')
-						for subkey, subval in audiotrack.dict().iteritems():
+						for subkey, subval in iteritems(audiotrack.dict()):
 							audiotracks.append(subkey + '="' + str(subval.getValue()) + '" ')
 						audiotracks.append(' />\n')
 					audiotracks.append('\t\t\t</audiotracks>\n')
