@@ -947,12 +947,12 @@ class PositionerSetup(Screen):
 		frequency_text = ""
 		frequency = transponderdata.get("frequency")
 		if frequency:
-			frequency_text = str(frequency / 1000) + polarization_text
+			frequency_text = str(frequency // 1000) + polarization_text
 		self["frequency_value"].setText(frequency_text)
 		symbolrate_text = ""
 		symbolrate = transponderdata.get("symbol_rate")
 		if symbolrate:
-			symbolrate_text = str(symbolrate / 1000)
+			symbolrate_text = str(symbolrate // 1000)
 		self["symbolrate_value"].setText(symbolrate_text)
 		fec_text = ""
 		fec_inner = transponderdata.get("fec_inner")
