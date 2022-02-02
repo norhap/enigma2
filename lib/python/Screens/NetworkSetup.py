@@ -3,6 +3,7 @@ import netifaces
 import io
 import os
 import re
+import six
 from Screens.Setup import Setup
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -85,7 +86,7 @@ class NSCommon:
 		self.Console.ePopen('opkg install ' + pkgname + ' >/dev/null 2>&1', callback)
 
 	def checkNetworkState(self, str, retval, extra_args):
-		str = str.decode()
+		str = six.ensure_str(str)
 		if 'Collected errors' in str:
 			self.session.openWithCallback(self.close, MessageBox, _("Seems a background update check is in progress, please wait a few minutes and then try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
@@ -112,6 +113,7 @@ class NSCommon:
 		self.Console.ePopen('opkg list_installed ' + self.service_name, self.RemovedataAvail)
 
 	def RemovedataAvail(self, str, retval, extra_args):
+		str = six.ensure_str(str)
 		if str:
 			if self.reboot_at_end:
 				restartbox = self.session.openWithCallback(self.RemovePackage, MessageBox, _('Your receiver will be restarted after the removal of the service\nDo you want to remove the service now ?'), MessageBox.TYPE_YESNO)
@@ -1093,24 +1095,44 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self.onClose.append(self.cleanup)
 
 	def queryWirelessDevice(self, iface):
-		try:
-			from pythonwifi.iwlibs import Wireless
-			import errno
-		except ImportError as e:
-			return False
-		else:
+		if six.PY3:
 			try:
-				ifobj = Wireless(iface) # a Wireless NIC Object
-				wlanresponse = ifobj.getAPaddr()
-			except IOError as error_no_error_str:
-				(error_no, error_str) = error_no_error_str
-				if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
-					return False
-				else:
-					print("[NetworkSetup] error: ", error_no, error_str)
-					return True
+				from wifi.scan import Cell
+				import errno
+			except ImportError:
+				return False
 			else:
-				return True
+				try:
+					system("ifconfig %s up" % iface)
+					wlanresponse = list(Cell.all(iface))
+				except IOError as err:
+					error_no, error_str = err.args
+					if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
+						return False
+					else:
+						print("[AdapterSetupConfiguration] error: ", error_no, error_str)
+						return True
+				else:
+					return True
+
+		if six.PY2:
+			try:
+				from pythonwifi.iwlibs import Wireless
+				import errno
+			except ImportError:
+				return False
+			else:
+				try:
+					ifobj = Wireless(iface) # a Wireless NIC Object
+					wlanresponse = ifobj.getAPaddr()
+				except IOError as error_no:
+					if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
+						return False
+					else:
+						print("[AdapterSetupConfiguration] error: ", error_no, error_str)
+						return True
+				else:
+					return True
 
 	def ok(self):
 		self.cleanup()
