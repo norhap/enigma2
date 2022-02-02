@@ -7,7 +7,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 
 
-class HdmiCECSetupScreen(Screen, ConfigListScreen):
+class HdmiCECSetupScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.skinName = "Setup"
@@ -76,11 +76,6 @@ class HdmiCECSetupScreen(Screen, ConfigListScreen):
 	def getCurrentEntry(self):
 		self.updateDescription()
 		return ConfigListScreen.getCurrentEntry(self)
-
-	def createSummary(self):
-		from Screens.Setup import SetupSummary
-		return SetupSummary
-	###
 
 	def updateDescription(self):
 		self["description"].setText("%s\n%s\n\n%s" % (self.current_address, self.fixed_address, self.getCurrentDescription()))

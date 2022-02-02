@@ -28,7 +28,7 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.FallbackTimer import FallbackTimerDirs
 
 
-class TimerEntry(Screen, ConfigListScreen):
+class TimerEntry(ConfigListScreen, Screen):
 	def __init__(self, session, timer):
 		Screen.__init__(self, session)
 		self.timer = timer
@@ -257,7 +257,6 @@ class TimerEntry(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("After event"), self.timerentry_afterevent))
 			self.list.append(getConfigListEntry(_("Recording type"), self.timerentry_recordingtype))
 		self[widget].list = self.list
-		self[widget].l.setList(self.list)
 
 	def newConfig(self):
 		print("[TimerEntry] newConfig '%s'." % str(self["config"].getCurrent()))
