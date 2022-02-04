@@ -6,7 +6,6 @@ import Tools.RedirectOutput
 import enigma
 import eBaseImpl
 import eConsoleImpl
-import sys
 
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
@@ -19,12 +18,12 @@ from Components.config import ConfigSubsection, ConfigInteger, ConfigText, Confi
 from Components.International import international
 from boxbranding import getImageArch
 from Components.SystemInfo import SystemInfo
-from sys import stdout
 
 profile("Imports")
 from os.path import isdir, islink, join as pathjoin
 from traceback import print_exc
-from time import localtime, strftime, time
+from time import time
+from sys import stdout
 
 model = getBoxType()
 
@@ -147,7 +146,7 @@ try:
 		util.untilConcludes(self.write, msg)
 		util.untilConcludes(self.flush)
 
-	logger = log.FileLogObserver(sys.stdout)
+	logger = log.FileLogObserver(stdout)
 	log.FileLogObserver.emit = quietEmit
 	log.startLoggingWithObserver(logger.emit)
 except ImportError:
