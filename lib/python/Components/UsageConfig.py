@@ -87,7 +87,6 @@ def InitUsageConfig():
 	config.expert.hideerrors = ConfigOnOff(default=False)
 	config.expert.autoinfo = ConfigOnOff(default=True)
 
-
 	def alternativeNumberModeChange(configElement):
 		eDVBDB.getInstance().setNumberingMode(configElement.value)
 		refreshServiceList()

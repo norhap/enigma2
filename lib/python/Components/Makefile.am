@@ -33,10 +33,10 @@ install_PYTHON = \
 	Input.py \
 	InputDevice.py \
 	InputHotplug.py \
-	International.py \
 	Keyboard.py \
 	Label.py \
 	Language.py \
+	Language_cache.py \
 	Lcd.py \
 	MediaPlayer.py \
 	MenuList.py \

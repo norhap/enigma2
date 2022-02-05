@@ -1,6 +1,6 @@
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
-from Screens.LocaleSelection import LocaleWizard
+from Screens.LanguageSelection import LanguageWizard
 from Screens.Wizard import Wizard
 
 
@@ -11,4 +11,4 @@ class WizardLanguage(Wizard):
 		self["languagetext"] = Label(_("Change Language"))
 
 	def red(self):
-		self.session.open(LocaleWizard)
+		self.session.open(LanguageWizard)

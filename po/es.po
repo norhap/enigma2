@@ -18188,3 +18188,22 @@ msgstr "Interfaz de red para dirección MAC."
 
 msgid "No log: please try later again"
 msgstr "Sin registro: inténtelo más tarde de nuevo"
+
+msgid ""
+"'Save' changes active language."
+"\n"
+"'Add Language' or MENU adds additional language(s)."
+"\n"
+"'Delete Language' allows either deletion of all but English and active language OR selected language."
+msgstr ""
+"'Guardar' cambia el idioma activo."
+"\n"
+"'Agregar idioma' o MENÚ agrega idioma(s) adicional(es)."
+"\n"
+"'Eliminar idioma' permite eliminar todo menos el inglés y el idioma activo o el idioma seleccionado."
+
+msgid "Add Language"
+msgstr "Añadir Lenguage"
+
+msgid "Delete Language(s)"
+msgstr "Eliminar Lenguage(s)"

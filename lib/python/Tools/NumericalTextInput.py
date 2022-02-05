@@ -2,7 +2,7 @@ from six import PY2
 
 from enigma import eTimer
 
-from Components.International import international
+from Components.Language import language
 
 MAP_SEARCH_UPCASE = "SearchUpper"  # NOTE: Legacy interface for previous and deprecated versions of NumericalTextInput.
 MAP_SEARCH = "SearchLower"
@@ -235,7 +235,7 @@ class NumericalTextInput:
 		self.mapping = []
 		for num in range(10):
 			self.mapping.append((MAPPINGS[num][index]))
-		locale = LOCALES.get(international.getLocale(), None)
+		locale = LOCALES.get(language.getLanguage(), None)
 		if locale is not None and index in list(range(6)):
 			index = index % 3
 			for num in range(10):

@@ -15,7 +15,6 @@ from Components.Console import Console
 from enigma import getBoxType, getE2Rev
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
-from Components.International import international
 from boxbranding import getImageArch
 from Components.SystemInfo import SystemInfo
 
@@ -32,19 +31,13 @@ if getImageArch() == "aarch64":
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
-
-def localeNotifier(configElement):
+def languageNotifier(configElement):
 	from Components.Language import language
-	international.activateLocale(configElement.value)
+	language.activateLanguage(configElement.value)
 
 config.osd = ConfigSubsection()
-config.osd.language = ConfigText(default="en_US")
-config.osd.language.addNotifier(localeNotifier)
-
-config.misc.country = ConfigText(default="US")
-config.misc.language = ConfigText(default="en")
-config.misc.locale = ConfigText(default="en_US")
-
+config.osd.language = ConfigText(default="en_EN")
+config.osd.language.addNotifier(languageNotifier)
 
 def setEPGCachePath(configElement):
 	if isdir(configElement.value) or islink(configElement.value):
