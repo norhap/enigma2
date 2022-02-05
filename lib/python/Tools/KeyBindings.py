@@ -383,11 +383,11 @@ def getKeyDescription(key):
 
 
 def getKeyBindingKeys(filterfn=lambda key: True):
-	return filter(filterfn, keyBindings)
+	return list(filter(filterfn, keyBindings))
 
 
 # Remove all entries of domain "domain".
 #
 def removeKeyBindings(domain):
 	for x in keyBindings:
-		keyBindings[x] = list(filter(lambda e: e[1] != domain, keyBindings[x]))
+		keyBindings[x] = [e for e in keyBindings[x] if e[1] != domain]
