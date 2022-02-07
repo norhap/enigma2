@@ -87,7 +87,9 @@ class Navigation:
 
 		if self.__nextRecordTimerAfterEventActionAuto and abs(self.RecordTimer.getNextRecordingTime() - now) <= 360:
 			print('[Navigation] RECTIMER: wakeup to standby detected.')
-			open("/tmp/was_rectimer_wakeup", "w").write("1")
+			with open("/tmp/was_rectimer_wakeup", "w") as f:
+				f.write("1")
+				f.close()
 			# as we woke the box to record, place the box in standby.
 			self.standbytimer = eTimer()
 			self.standbytimer.callback.append(self.gotostandby)
@@ -95,7 +97,9 @@ class Navigation:
 
 		elif self.__nextPowerManagerAfterEventActionAuto:
 			print('[Navigation] POWERTIMER: wakeup to standby detected.')
-			open("/tmp/was_powertimer_wakeup", "w").write("1")
+			with open("/tmp/was_powertimer_wakeup", "w") as f:
+				f.write("1")
+				f.close()
 			# as a PowerTimer WakeToStandby was actiond to it.
 			self.standbytimer = eTimer()
 			self.standbytimer.callback.append(self.gotostandby)
@@ -114,7 +118,7 @@ class Navigation:
 	def dispatchEvent(self, i):
 		for x in self.event:
 			x(i)
-		if i == iPlayableService.evEnd and i != None:
+		if i == iPlayableService.evEnd:
 			self.currentlyPlayingServiceReference = None
 			self.currentlyPlayingServiceOrGroup = None
 			self.currentlyPlayingService = None
@@ -145,13 +149,19 @@ class Navigation:
 				else:
 					signal = 0
 				print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
-				open("/proc/stb/lcd/symbol_signal", "w").write(str(signal))
+				with open("/proc/stb/lcd/symbol_signal", "w") as f:
+					f.write(str(signal))
+					f.close()
 			except:
 				print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
-				open("/proc/stb/lcd/symbol_signal", "w").write("0")
+				with open("/proc/stb/lcd/symbol_signal", "w") as f:
+					f.write("0")
+					f.close()
 		elif path.exists("/proc/stb/lcd/symbol_signal") and config.lcd.mode.value == '0':
 			print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
-			open("/proc/stb/lcd/symbol_signal", "w").write("0")
+			with open("/proc/stb/lcd/symbol_signal", "w") as f:
+				f.write("0")
+				f.close()
 		if ref is None:
 			self.stopService()
 			return 0
@@ -281,7 +291,9 @@ class Navigation:
 		self.currentlyPlayingServiceOrGroup = None
 		if path.exists("/proc/stb/lcd/symbol_signal"):
 			print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
-			open("/proc/stb/lcd/symbol_signal", "w").write("0")
+			with open("/proc/stb/lcd/symbol_signal", "w") as f:
+				f.write("0")
+				f.close()
 
 	def pause(self, p):
 		return self.pnav and self.pnav.pause(p)
