@@ -51,18 +51,13 @@ def news(url):
 	try:
 		if PY2:
 			from urllib2 import Request, urlopen
-			request = Request(url)
-			response = urlopen(request)
-			link = response.read().decode("windows-1252")
-			response.close()
-			text = link.encode("utf-8")
-		else: # Python3
+		else:
 			from urllib.request import Request, urlopen
-			request = Request(url)
-			response = urlopen(request)
-			link = response.read()
-			response.close()
-			text = link
+		request = Request(url)
+		response = urlopen(request)
+		link = response.read()
+		response.close()
+		text = link.decode()
 	except:
 		print("ERROR Latest Commits %s" %(url))
 

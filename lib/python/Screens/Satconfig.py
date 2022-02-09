@@ -188,10 +188,9 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 						self.fillListWithAdvancedSatEntrys(self.nimConfig.advanced.sat[int(current_config_sats)])
 					else:
 						cur_orb_pos = self.nimConfig.advanced.sats.orbital_position
-						satlist = self.nimConfig.advanced.sat.keys()
 						if cur_orb_pos is not None:
-							if cur_orb_pos not in satlist:
-								cur_orb_pos = satlist[0]
+							if cur_orb_pos not in self.nimConfig.advanced.sat.keys():
+								cur_orb_pos = next(iter(self.nimConfig.advanced.sat)) # get first key
 							self.fillListWithAdvancedSatEntrys(self.nimConfig.advanced.sat[cur_orb_pos])
 					self.have_advanced = True
 				if self.nimConfig.configMode.value != "nothing" and config.usage.setup_level.index >= 2:
@@ -320,6 +319,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.list.append(getConfigListEntry(_("Force legacy signal stats"), self.nimConfig.force_legacy_signal_stats, _("If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded.")))
 
 		self["config"].list = self.list
+		self["config"].l.setList(self.list)
 		self.setTextKeyYellow()
 
 	def newConfig(self):
@@ -624,6 +624,13 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		self.nimConfig = self.nim.config
 		self.createSetup()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
+
+		if not self.selectionChanged in self["config"].onSelectionChanged:
+			self["config"].onSelectionChanged.append(self.selectionChanged)
+		self.selectionChanged()
+
+	def selectionChanged(self):
+		self["description"].setText(self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or "")
 
 	def keyLeft(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
