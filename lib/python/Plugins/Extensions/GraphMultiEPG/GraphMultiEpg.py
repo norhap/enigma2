@@ -1178,10 +1178,10 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		if event:
 			if PY2:
 				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-					if 'selectedevent' in p.__call__.__code__.co_varnames]
+					if 'selectedevent' in p.fnc.__code__.co_varnames]
 			else:
 				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-					if 'selectedevent' in p.__call__.__code__.co_varnames]
+					if 'selectedevent' in p.fnc.__code__.co_varnames]
 			if menu:
 				text += ": %s" % event.getEventName()
 			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow"][:len(menu)] + (len(menu) - 13) * [""] + keys
@@ -1195,7 +1195,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 
 	def runPlugin(self, plugin):
 		event = self["list"].getCurrent()
-		plugin.__call__(session=self.session, selectedevent=event)
+		plugin(session=self.session, selectedevent=event)
 
 	def openTimerOverview(self):
 		self.session.open(TimerEditList)
