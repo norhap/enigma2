@@ -94,10 +94,11 @@ class PluginDescriptor(object):
 
 		self.wakeupfnc = wakeupfnc
 
-		self.__call__ = fnc
+		self.fnc = fnc
 
-	def __call__(self, reason=0, session=0, servicelist=0, service=0):
-		return
+	def __call__(self, *args, **kwargs):
+		if callable(self.fnc):
+			return self.fnc(*args, **kwargs)
 
 	def updateIcon(self, path):
 		self.path = path
@@ -114,10 +115,10 @@ class PluginDescriptor(object):
 			return self._icon
 
 	def __eq__(self, other):
-		return self.__call__ == other.__call__
+		return self.fnc == other.fnc
 
 	def __ne__(self, other):
-		return self.__call__ != other.__call__
+		return self.fnc != other.fnc
 
 	def __lt__(self, other):
 		if self.weight < other.weight:

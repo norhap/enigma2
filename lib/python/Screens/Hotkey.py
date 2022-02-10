@@ -148,9 +148,9 @@ def getHotkeyFunctions():
 	pluginlist.sort(key=lambda p: p.name)
 	for plugin in pluginlist:
 		if PY2:
-			pycode = plugin.__call__.__code__.co_varnames
+			pycode = plugin.fnc.__code__.co_varnames
 		else:
-			pycode = plugin.__call__.__code__.co_varnames
+			pycode = plugin.fnc.__code__.co_varnames
 		if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in pycode:
 			if plugin.path[24:] in twinPaths:
 				twinPaths[plugin.path[24:]] += 1
@@ -655,9 +655,9 @@ class InfoBarHotkey():
 				pluginlist.sort(key=lambda p: p.name)
 				for plugin in pluginlist:
 					if PY2:
-						pycode = plugin.__call__.__code__.co_varnames
+						pycode = plugin.fnc.__code__.co_varnames
 					else:
-						pycode = plugin.__call__.__code__.co_varnames
+						pycode = plugin.fnc.__code__.co_varnames
 					if plugin.name not in twinPlugins and plugin.path and 'selectedevent' not in pycode:
 						if plugin.path[24:] in twinPaths:
 							twinPaths[plugin.path[24:]] += 1
