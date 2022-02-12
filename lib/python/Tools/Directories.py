@@ -10,6 +10,7 @@ from tempfile import mkstemp
 from traceback import print_exc
 from xml.etree.cElementTree import Element, ParseError, fromstring, parse
 from unicodedata import normalize
+from chardet import detect
 
 from enigma import eEnv, getDesktop, eGetEnigmaDebugLvl
 
@@ -82,6 +83,13 @@ scopeGUISkin = defaultPaths[SCOPE_GUISKIN][0]
 scopeLCDSkin = defaultPaths[SCOPE_LCDSKIN][0]
 scopeFonts = defaultPaths[SCOPE_FONTS][0]
 scopePlugins = defaultPaths[SCOPE_PLUGINS][0]
+
+
+def getEncodingType(filename):
+	if not PY2:
+		with open(filename, 'rb') as f:
+			data = f.read()
+		return detect(data)["encoding"]
 
 
 def InitDefaultPaths():
@@ -226,11 +234,11 @@ def fileReadLine(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False
 		if PY2:
 			with open(filename, "r") as fd:
 				line = fd.read().strip().replace("\0", "")
-			msg = "Read"
 		else:
-			with open(filename, "r", encoding="UTF-8") as fd:
+			type_codec = getEncodingType(filename)
+			with open(filename, "r", encoding=type_codec) as fd:
 				line = fd.read().strip().replace("\0", "")
-			msg = "Read"
+		msg = "Read"
 	except (IOError, OSError) as err:
 		if err.errno != ENOENT:  # ENOENT - No such file or directory.
 			print("[%s] Error %d: Unable to read a line from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
@@ -262,11 +270,11 @@ def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=Fals
 		if PY2:
 			with open(filename, "r") as fd:
 				lines = fd.read().splitlines()
-			msg = "Read"
 		else:
-			with open(filename, "r", encoding="UTF-8") as fd:
+			type_codec = getEncodingType(filename)
+			with open(filename, "r", encoding=type_codec) as fd:
 				lines = fd.read().splitlines()
-			msg = "Read"
+		msg = "Read"
 	except (IOError, OSError) as err:
 		if err.errno != ENOENT:  # ENOENT - No such file or directory.
 			print("[%s] Error %d: Unable to read lines from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
@@ -603,8 +611,13 @@ def fileExists(file, mode="r"):
 def fileContains(file, content, mode="r"):
 	result = False
 	if fileExists(file, mode):
-		with open(file, mode) as fd:
-			text = fd.read()
+		if not PY2:
+			type_codec = getEncodingType(file)
+			with open(file, mode, encoding=type_codec) as fd:
+				text = fd.read()
+		else:
+			with open(file, mode) as fd:
+				text = fd.read()
 		if content in text:
 			result = True
 	return result
