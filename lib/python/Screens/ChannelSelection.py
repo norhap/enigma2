@@ -45,7 +45,6 @@ from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
 import os
-import unicodedata
 from time import time
 from six import PY2
 
