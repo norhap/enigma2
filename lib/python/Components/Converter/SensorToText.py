@@ -1,6 +1,7 @@
 from Components.Converter.Converter import Converter
 from six import PY3
 
+
 class SensorToText(Converter):
 	def __init__(self, arguments):
 		Converter.__init__(self, arguments)
