@@ -201,7 +201,7 @@ class VideoSetup(ConfigListScreen, Screen):
 			self.session.openWithCallback(self.confirm, MessageBox, _("Is this video mode ok?"), MessageBox.TYPE_YESNO, timeout=20, default=False)
 		else:
 			self.keySave()
-			
+
 	def getCurrentEntry(self):
 		self.updateDescription()
 		return ConfigListScreen.getCurrentEntry(self)

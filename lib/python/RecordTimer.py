@@ -283,7 +283,7 @@ class RecordTimer(Timer):
 		}.get(timerDom.get("afterevent", "nothing"), "nothing")
 		location = timerDom.get("location")
 		if location == "None":
-			location = None 
+			location = None
 		tags = timerDom.get("tags")
 		tags = tags.encode("UTF-8").split(" ") if tags and tags != "None" else None
 		descramble = bool(int(timerDom.get("descramble", True)))

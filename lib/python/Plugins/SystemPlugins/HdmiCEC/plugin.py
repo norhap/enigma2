@@ -72,7 +72,6 @@ class HdmiCECSetupScreen(ConfigListScreen, Screen):
 	def changedEntry(self):
 		self.createSetup()
 
-	# for summary:
 	def getCurrentEntry(self):
 		self.updateDescription()
 		return ConfigListScreen.getCurrentEntry(self)
