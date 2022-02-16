@@ -1043,6 +1043,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self.restartLanRef = None
 		self.LinkState = None
 		self.mainmenu = self.genMainMenu()
+		self.Console = Console()
 		self["menulist"] = MenuList(self.mainmenu)
 		self["key_red"] = StaticText(_("Close"))
 		self["description"] = StaticText()
@@ -1101,7 +1102,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 				return False
 			else:
 				try:
-					system("ifconfig %s up" % iface)
+					self.Console.ePopen("ifconfig %s up" % iface)
 					wlanresponse = list(Cell.all(iface))
 				except IOError as err:
 					error_no, error_str = err.args
