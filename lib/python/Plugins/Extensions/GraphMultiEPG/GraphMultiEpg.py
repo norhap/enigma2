@@ -37,7 +37,6 @@ from time import localtime, time, strftime, mktime
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
-from six import PY2
 
 MAX_TIMELINES = 6
 
@@ -1176,12 +1175,8 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		text = _("Select action")
 		event = self["list"].getCurrent()[0]
 		if event:
-			if PY2:
-				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-					if 'selectedevent' in p.fnc.__code__.co_varnames]
-			else:
-				menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-					if 'selectedevent' in p.fnc.__code__.co_varnames]
+			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
+				if 'selectedevent' in p.fnc.__code__.co_varnames]
 			if menu:
 				text += ": %s" % event.getEventName()
 			keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow"][:len(menu)] + (len(menu) - 13) * [""] + keys

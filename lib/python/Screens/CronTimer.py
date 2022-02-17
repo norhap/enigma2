@@ -12,7 +12,6 @@ from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
 from os import system, listdir, rename, path, mkdir
 from time import sleep
-from six import PY3
 
 
 class CronTimers(Screen):

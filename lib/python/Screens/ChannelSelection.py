@@ -765,12 +765,8 @@ class ChannelSelectionEPG(InfoBarHotkey):
 		Screens.InfoBar.InfoBar.instance.runPlugin(plugin)
 
 	def getEPGPluginList(self, getAll=False):
-		if PY2:
-			pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-					if 'selectedevent' not in p.fnc.__code__.co_varnames] or []
-		else:
-			pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-					if 'selectedevent' not in p.fnc.__code__.co_varnames] or []
+		pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
+				if 'selectedevent' not in p.fnc.__code__.co_varnames] or []
 		from Components.ServiceEventTracker import InfoBarCount
 		if getAll or InfoBarCount == 1:
 			pluginlist.append((_("Show EPG for current channel..."), self.openSingleServiceEPG, _("Display EPG list for current channel")))
@@ -1880,10 +1876,10 @@ class ChannelSelectionBase(Screen):
 		self.selectionNumber = ""
 
 	def keyAsciiCode(self):
-		if PY3:
-			unichar = chr(getPrevAsciiCode())
-		else:
+		if PY2:
 			unichar = unichr(getPrevAsciiCode())
+		else:
+			unichar = chr(getPrevAsciiCode())
 		if len(unichar) == 1:
 			self.servicelist.moveToChar(unichar[0])
 
