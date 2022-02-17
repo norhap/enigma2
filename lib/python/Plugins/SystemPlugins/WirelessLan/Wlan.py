@@ -99,9 +99,9 @@ class Wlan:
 				scanresults = ifobj.scan()
 			except:
 				scanresults = None
-				print("[Wlan.py] No wireless networks could be found")
+				print("[Wlan] No wireless networks could be found")
 			aps = {}
-			if scanresults is not None:
+			if scanresults != None:
 				(num_channels, frequencies) = ifobj.getChannelInfo()
 				index = 1
 				for result in scanresults:
@@ -156,11 +156,11 @@ class Wlan:
 			aps = {}
 			try:
 				scanresults = list(Cell.all(self.iface, 5))
-				print("[Wlan.py] scanresults1 = %s" % scanresults)				
+				print("[Wlan] scanresults1 = %s" % scanresults)				
 			except:
 				scanresults = None
-				print("[Wlan.py] No wireless networks could be found")				
-			if scanresults is not None:
+				print("[Wlan] No wireless networks could be found")				
+			if scanresults != None:
 				for i in range(len(scanresults)):
 					bssid = scanresults[i].ssid
 					aps[bssid] = {
@@ -182,11 +182,11 @@ class Wlan:
 						'pairwise_ciphers': scanresults[i].pairwise_ciphers,
 						'authentication_suites': scanresults[i].authentication_suites,
 					}
-		print("[Wlan.py] apsresults1 = %s" % aps)		
+		print("[Wlan] apsresults1 = %s" % aps)		
 		return aps
 
 	def stopGetNetworkList(self):
-		if self.oldInterfaceState is not None:
+		if self.oldInterfaceState:
 			if self.oldInterfaceState is False:
 				iNetwork.setAdapterAttribute(self.iface, "up", False)
 				Console().ePopen("ifconfig " + self.iface + " down")
@@ -231,7 +231,7 @@ class brcmWLConfig:
 		configfile = getWlanConfigName(iface)
 
 		if os_path.exists(configfile):
-			print("[Wlan.py] parsing configfile: ", configfile)
+			print("[Wlan] parsing configfile: ", configfile)
 			fd = open(configfile, "r")
 			lines = fd.readlines()
 			fd.close()
@@ -308,7 +308,7 @@ class wpaSupplicant:
 				else:
 					continue
 		except:
-			print("[Wlan.py] Error parsing ", configfile)
+			print("[Wlan] Error parsing ", configfile)
 			wsconfig = {
 					'hiddenessid': False,
 					'ssid': "",
@@ -382,7 +382,7 @@ class wpaSupplicant:
 			configfile = '/etc/wpa_supplicant.conf'
 		try:
 			#parse the wpasupplicant configfile
-			print("[Wlan.py] parsing configfile: ", configfile)
+			print("[Wlan] parsing configfile: ", configfile)
 			fp = open(configfile, 'r')
 			supplicant = fp.readlines()
 			fp.close()
@@ -447,7 +447,7 @@ class wpaSupplicant:
 					if key == 'key':
 						wsconfig['key'] = ""
 		except:
-			print("[Wlan.py] Error parsing ", configfile)
+			print("[Wlan] Error parsing ", configfile)
 			wsconfig = {
 					'hiddenessid': False,
 					'ssid': "",
@@ -455,7 +455,7 @@ class wpaSupplicant:
 					'wepkeytype': "ASCII",
 					'key': "",
 				}
-		#print "[Wlan.py] WS-CONFIG-->",wsconfig
+		#print "[Wlan] WS-CONFIG-->",wsconfig
 		return wsconfig
 
 
@@ -467,7 +467,7 @@ class Status:
 		self.WlanConsole = Console()
 
 	def stopWlanConsole(self):
-		if self.WlanConsole is not None:
+		if self.WlanConsole:
 			print("[iStatus] killing self.WlanConsole")
 			self.WlanConsole.killAll()
 			self.WlanConsole = None
@@ -475,7 +475,7 @@ class Status:
 	def getDataForInterface(self, iface, callback=None):
 		self.WlanConsole = Console()
 		cmd = "iwconfig " + iface
-		if callback is not None:
+		if callback:
 			self.statusCallback = callback
 		self.WlanConsole.ePopen(cmd, self.iwconfigFinished, iface)
 
@@ -498,14 +498,14 @@ class Status:
 					data['essid'] = ssid
 			if "Frequency" in line:
 				frequency = line[line.index('Frequency') + 10:line.index(' GHz')]
-				if frequency is not None:
+				if frequency:
 					data['frequency'] = frequency
 			if "Access Point" in line:
 				if "Sensitivity" in line:
 					ap = line[line.index('Access Point') + 14:line.index('   Sensitivity')]
 				else:
 					ap = line[line.index('Access Point') + 14:len(line)]
-				if ap is not None:
+				if ap:
 					data['accesspoint'] = ap
 			if "Bit Rate" in line:
 				if "kb" in line:
@@ -514,27 +514,27 @@ class Status:
 					br = line[line.index('Bit Rate') + 9:line.index(' Gb/s')]
 				else:
 					br = line[line.index('Bit Rate') + 9:line.index(' Mb/s')]
-				if br is not None:
+				if br:
 					data['bitrate'] = br
 			if "Encryption key" in line:
 				if ":off" in line:
 					enc = "off"
 				elif "Security" in line:
 					enc = line[line.index('Encryption key') + 15:line.index('   Security')]
-					if enc is not None:
+					if enc:
 						enc = "on"
 				else:
 					enc = line[line.index('Encryption key') + 15:len(line)]
-					if enc is not None:
+					if enc:
 						enc = "on"
-				if enc is not None:
+				if enc:
 					data['encryption'] = enc
 			if 'Quality' in line:
 				if "/100" in line:
 					qual = line[line.index('Quality') + 8:line.index('  Signal')]
 				else:
 					qual = line[line.index('Quality') + 8:line.index('Sig')]
-				if qual is not None:
+				if qual:
 					data['quality'] = qual
 			if 'Signal level' in line:
 				if "dBm" in line:
@@ -549,18 +549,18 @@ class Status:
 						signal = line[line.index('Signal level') + 13:line.index('  Noise')]
 					else:
 						signal = line[line.index('Signal level') + 13:len(line)]
-				if signal is not None:
+				if signal:
 					data['signal'] = signal
 		if PY3:
 			if ssid != None and ssid != "off" and ssid != "":
 				try:
 					scanresults = list(Cell.all(iface, 5))
-					print("[Wlan.py] scanresults2 = %s" % scanresults)	
+					print("[Wlan] scanresults2 = %s" % scanresults)	
 				except:	
 					scanresults = None
-					print("[Wlan.py] No wireless networks could be found")	
+					print("[Wlan] No wireless networks could be found")	
 				aps = {}
-				if scanresults is not None:			
+				if scanresults != None:			
 					for i in range(len(scanresults)):
 						bssid = scanresults[i].ssid
 						aps[bssid] = {
@@ -590,14 +590,14 @@ class Status:
 					data['encryption_type'] = aps[ssid]["encryption_type"]
 					#data['frequency'] = aps[ssid]["frequency"]
 					data['frequency_norm'] = aps[ssid]["frequency_norm"]
-		print("[Wlan.py] apsresults2 = %s" % data)
+		print("[Wlan] apsresults2 = %s" % data)
 		self.wlaniface[iface] = data
 		self.backupwlaniface = self.wlaniface
 
-		if self.WlanConsole is not None:
+		if self.WlanConsole:
 			if not self.WlanConsole.appContainers:
-				print("[Wlan.py] self.wlaniface after loading:", self.wlaniface)
-				if self.statusCallback is not None:
+				print("[Wlan] self.wlaniface after loading:", self.wlaniface)
+				if self.statusCallback:
 						self.statusCallback(True, self.wlaniface)
 						self.statusCallback = None
 
