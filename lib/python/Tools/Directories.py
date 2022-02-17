@@ -1,5 +1,4 @@
 from errno import ENOENT, EXDEV
-from inspect import stack
 from os import F_OK, R_OK, W_OK, access, chmod, link, listdir, makedirs, mkdir, readlink, remove, rename, rmdir, sep, stat, statvfs, symlink, utime, walk
 from os.path import basename, dirname, exists, getsize, isdir, isfile, islink, join as pathjoin, normpath, splitext
 from re import compile
@@ -28,17 +27,15 @@ SCOPE_LCDSKIN = 6
 SCOPE_FONTS = 7
 SCOPE_PLUGINS = 8
 SCOPE_PLUGIN = 9
-SCOPE_PLUGIN_ABSOLUTE = 10
-SCOPE_PLUGIN_RELATIVE = 11
-SCOPE_SYSETC = 12
-SCOPE_TRANSPONDERDATA = 13
-SCOPE_CONFIG = 14
-SCOPE_PLAYLIST = 15
-SCOPE_MEDIA = 16
-SCOPE_HDD = 17
-SCOPE_TIMESHIFT = 18
-SCOPE_DEFAULTDIR = 19
-SCOPE_LIBDIR = 20
+SCOPE_SYSETC = 10
+SCOPE_TRANSPONDERDATA = 11
+SCOPE_CONFIG = 12
+SCOPE_PLAYLIST = 13
+SCOPE_MEDIA = 14
+SCOPE_HDD = 15
+SCOPE_TIMESHIFT = 16
+SCOPE_DEFAULTDIR = 17
+SCOPE_LIBDIR = 18
 
 # Deprecated scopes:
 SCOPE_ACTIVE_LCDSKIN = SCOPE_LCDSKIN
@@ -64,8 +61,6 @@ defaultPaths = {
 	SCOPE_FONTS: (eEnv.resolve("${datadir}/fonts/"), PATH_DONTCREATE),
 	SCOPE_PLUGINS: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_CREATE),
 	SCOPE_PLUGIN: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_CREATE),
-	SCOPE_PLUGIN_ABSOLUTE: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_DONTCREATE),
-	SCOPE_PLUGIN_RELATIVE: (eEnv.resolve("${libdir}/enigma2/python/Plugins/"), PATH_DONTCREATE),
 	SCOPE_SYSETC: (eEnv.resolve("${sysconfdir}/"), PATH_DONTCREATE),
 	SCOPE_TRANSPONDERDATA: (eEnv.resolve("${sysconfdir}/"), PATH_DONTCREATE),
 	SCOPE_CONFIG: (eEnv.resolve("${sysconfdir}/enigma2/"), PATH_CREATE),
@@ -140,15 +135,6 @@ def resolveFilename(scope, base="", path_prefix=None):
 			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 			skin = dirname(config.skin.primary_skin.value)
 			path = pathjoin(path, skin)
-		elif scope in (SCOPE_PLUGIN_ABSOLUTE, SCOPE_PLUGIN_RELATIVE):
-			callingCode = normpath(stack()[1][1])
-			plugins = normpath(scopePlugins)
-			path = None
-			if comparePaths(plugins, callingCode):
-				pluginCode = callingCode[len(plugins) + 1:].split(sep)
-				if len(pluginCode) > 2:
-					relative = "%s%s%s" % (pluginCode[0], sep, pluginCode[1])
-					path = pathjoin(plugins, relative)
 	elif scope == SCOPE_GUISKIN:
 		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 		skin = dirname(config.skin.primary_skin.value)
@@ -205,23 +191,12 @@ def resolveFilename(scope, base="", path_prefix=None):
 		file = pathjoin(scopePlugins, base)
 		if pathExists(file):
 			path = file
-	elif scope in (SCOPE_PLUGIN_ABSOLUTE, SCOPE_PLUGIN_RELATIVE):
-		callingCode = normpath(stack()[1][1])
-		plugins = normpath(scopePlugins)
-		path = None
-		if comparePaths(plugins, callingCode):
-			pluginCode = callingCode[len(plugins) + 1:].split(sep)
-			if len(pluginCode) > 2:
-				relative = pathjoin("%s%s%s" % (pluginCode[0], sep, pluginCode[1]), base)
-				path = pathjoin(plugins, relative)
 	else:
 		path, flags = defaultPaths.get(scope)
 		path = pathjoin(path, base)
 	path = normpath(path)
 	if isdir(path) and not path.endswith(sep):  # If the path is a directory then ensure that it ends with a "/".
 		path = "%s%s" % (path, sep)
-	if scope == SCOPE_PLUGIN_RELATIVE:
-		path = path[len(plugins) + 1:]
 	if suffix is not None:  # If a suffix was supplier restore it.
 		path = "%s:%s" % (path, suffix)
 	return path
