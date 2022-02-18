@@ -3,7 +3,7 @@ from enigma import eTimer
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.Pixmap import MultiPixmap
+from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -47,6 +47,8 @@ class MessageBox(Screen, HelpableScreen):
 			else:
 				print("[MessageBox] Error: The context of the default (%s) can't be determined!" % default)
 		else:
+			self["list"] = MenuList([])
+			self["list"].hide()
 			self.list = None
 		self.timeout = timeout
 		if close_on_any_key == True:  # Process legacy close_on_any_key argument.
@@ -82,8 +84,22 @@ class MessageBox(Screen, HelpableScreen):
 		if typeIcon is None:
 			typeIcon = type
 		self.typeIcon = typeIcon
+		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
 		if typeIcon:
 			self["icon"] = MultiPixmap()
+			# These lines can go with new skins that only use self["icon"]...
+			self["QuestionPixmap"] = Pixmap()
+			self["QuestionPixmap"].hide()
+			self["InfoPixmap"] = Pixmap()
+			self["InfoPixmap"].hide()
+			self["ErrorPixmap"] = Pixmap()
+			self["ErrorPixmap"].hide()
+			if typeIcon == self.TYPE_YESNO:
+				self["QuestionPixmap"].show()
+			elif typeIcon == self.TYPE_INFO or typeIcon == self.TYPE_WARNING:
+				self["InfoPixmap"].show()
+			elif typeIcon == self.TYPE_ERROR:
+				self["ErrorPixmap"].show()
 		if timeout_default is not None:  # Process legacy timeout_default argument.
 			timeoutDefault = timeout_default
 		self.timeoutDefault = timeoutDefault
@@ -112,6 +128,7 @@ class MessageBox(Screen, HelpableScreen):
 	def layoutFinished(self):
 		if self.list:
 			self["list"].instance.allowNativeKeys(False)  # Override listbox navigation.
+			# self["list"].moveToIndex(self.startIndex)
 		if self.typeIcon:
 			self["icon"].setPixmapNum(self.typeIcon - 1)
 		prefix = self.TYPE_PREFIX.get(self.type, _("Unknown"))
