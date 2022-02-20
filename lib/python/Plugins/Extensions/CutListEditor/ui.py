@@ -20,6 +20,7 @@ from Screens.HelpMenu import HelpableScreen
 from Components.Sources.List import List
 from Components.config import config, ConfigYesNo
 from Screens.MovieSelection import MovieSelection
+from Plugins.Extensions.MovieCut.ui import MovieCut
 
 apscParser = Struct(">qq")    # big-endian, 64-bit offset and 64-bit PTS/data
 
@@ -550,10 +551,10 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			config.usage.cutlisteditor_keep_bookmarks.value ^= True
 			config.usage.cutlisteditor_keep_bookmarks.save()
 		elif result == CutListContextMenu.RET_QUICKEXECUTE:
-			menu = [(_("cancel"), 0),
-					(_("end at this position"), 1),
-					(_("punch cuts"), 2),
-					(_("both"), 3)]
+			menu = [(_("Cancel"), 0),
+					(_("End at this position"), 1),
+					(_("Punch cuts"), 2),
+					(_("Both"), 3)]
 			self.session.openWithCallback(self.quickCallback, ChoiceBox, title=_("How would you like to modify the movie?\nWarning: This operation cannot be undone!"), list=menu)
 		elif result == CutListContextMenu.RET_ENABLECUTS:
 			self.cut_state = 3
@@ -563,7 +564,6 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			self.setCutListEnable()
 		elif result == CutListContextMenu.RET_EXECUTECUTS:
 			try:
-				from Plugins.Extensions.MovieCut.plugin import MovieCut
 				self.session.nav.stopService()	# need to stop to save the cuts file
 				self.session.openWithCallback(self.executeCallback, MovieCut, self.service)
 			except ImportError as e:
@@ -571,9 +571,9 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_GRABFRAME:
 			self.grabFrame()
 
-	def executeCallback(self, answer):
-		if answer:
-			self.close()
+	def executeCallback(self, *retval):
+		if retval and retval[0]:
+			self.close(True)
 		else:
 			self.session.nav.playService(self.service)
 			self.pauseService()

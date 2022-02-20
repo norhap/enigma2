@@ -2692,7 +2692,7 @@ class InfoBarInstantRecord:
 		print("[InfoBarGenerics] instantRecord stop and delete recording: ", entry.name)
 		import Tools.Trashcan
 		trash = Tools.Trashcan.createTrashFolder(entry.Filename)
-		from MovieSelection import moveServiceFiles
+		from Screens.MovieSelection import moveServiceFiles
 # Don't crash on errors...the sub-handlers trap and re-raise errors...
 		try:
 			moveServiceFiles(entry.Filename, trash, entry.name, allowCopy=False)
@@ -3570,11 +3570,11 @@ class InfoBarCueSheetSupport:
 				isin = True
 		return ret
 
-	def jumpPreviousNextMark(self, cmp, start=False):
+	def jumpPreviousNextMark(self, abs, start=False):
 		current_pos = self.cueGetCurrentPosition()
 		if current_pos is None:
 			return False
-		mark = self.getNearestCutPoint(current_pos, cmp=cmp, start=start)
+		mark = self.getNearestCutPoint(current_pos, abs=abs, start=start)
 		if mark is not None:
 			pts = mark[0]
 		else:
@@ -3592,21 +3592,22 @@ class InfoBarCueSheetSupport:
 		if not self.jumpPreviousNextMark(lambda x: x - 90000):
 			self.doSeek(-1)
 
-	def getNearestCutPoint(self, pts, cmp=abs, start=False):
+	def getNearestCutPoint(self, pts, abs=abs, start=False):
 		# can be optimized
 		beforecut = True
 		nearest = None
 		bestdiff = -1
 		instate = True
+		abs = (0 > pts) - (0 < pts)
 		if start:
-			bestdiff = cmp(0 - pts)
+			bestdiff = abs
 			if bestdiff >= 0:
 				nearest = [0, False]
 		for cp in self.cut_list:
 			if beforecut and cp[1] in (self.CUT_TYPE_IN, self.CUT_TYPE_OUT):
 				beforecut = False
 				if cp[1] == self.CUT_TYPE_IN:  # Start is here, disregard previous marks
-					diff = cmp(cp[0] - pts)
+					diff = (cp[0] > pts) - (cp[0] < pts)
 					if start and diff >= 0:
 						nearest = cp
 						bestdiff = diff
@@ -3618,7 +3619,7 @@ class InfoBarCueSheetSupport:
 			elif cp[1] == self.CUT_TYPE_OUT:
 				instate = False
 			elif cp[1] in (self.CUT_TYPE_MARK, self.CUT_TYPE_LAST):
-				diff = cmp(cp[0] - pts)
+				diff = (cp[0] > pts) - (cp[0] < pts)
 				if instate and diff >= 0 and (nearest is None or bestdiff > diff):
 					nearest = cp
 					bestdiff = diff

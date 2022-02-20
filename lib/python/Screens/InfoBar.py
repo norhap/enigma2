@@ -4,7 +4,7 @@ from boxbranding import getBoxType
 from Tools.StbHardware import getBrand
 from Tools.Directories import fileExists
 # workaround for required config entry dependencies.
-import Screens.MovieSelection
+from Screens.MovieSelection import MovieSelection, moveServiceFiles
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -165,7 +165,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def showMovies(self, defaultRef=None):
 		self.lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, defaultRef or enigma.eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled=self.timeshiftEnabled())
+		self.session.openWithCallback(self.movieSelected, MovieSelection, defaultRef or enigma.eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled=self.timeshiftEnabled())
 
 	def movieSelected(self, service):
 		ref = self.lastservice
@@ -263,7 +263,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		from Screens.MovieSelection import playlist
 		del playlist[:]
 		if not config.movielist.stop_service.value:
-			Screens.InfoBar.InfoBar.instance.callServiceStarted()
+			InfoBar.instance.callServiceStarted()
 		self.session.nav.playService(self.lastservice)
 		config.usage.last_movie_played.value = self.cur_service and self.cur_service.toString() or ""
 		config.usage.last_movie_played.save()
@@ -351,7 +351,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 					import Tools.Trashcan
 					try:
 						trash = Tools.Trashcan.createTrashFolder(ref.getPath())
-						Screens.MovieSelection.moveServiceFiles(ref, trash)
+						moveServiceFiles(ref, trash)
 						# Moved to trash, okay
 						if answer == "quitanddelete":
 							self.close()
@@ -386,7 +386,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		elif answer in ("movielist", "deleteandmovielistconfirmed"):
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.returning = True
-			self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, ref)
+			self.session.openWithCallback(self.movieSelected, MovieSelection, ref)
 			# make sure that playback is unpaused otherwise the
 			# player driver might stop working
 			self.setSeekState(self.SEEK_STATE_PLAY)
@@ -398,7 +398,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.setSeekState(self.SEEK_STATE_PLAY)
 		elif answer in ("playlist", "loop"):
 			(next_service, item, length) = self.getPlaylistServiceInfo(self.cur_service)
-			from MovieSelection import playlist
+			from Screens.MovieSelection import playlist
 			if playlist:
 				self.activeResumePosition(True)
 			if next_service is not None:
@@ -581,7 +581,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.session.nav.stopService()
 		ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.playingservice = ref # movie list may change the currently playing
-		self.movieselection_dlg = self.session.openWithCallback(self.movieSelected, Screens.MovieSelection.MovieSelection, ref)
+		self.movieselection_dlg = self.session.openWithCallback(self.movieSelected, MovieSelection, ref)
 
 	def movieSelected(self, service):
 		if service is not None:

@@ -8912,7 +8912,7 @@ msgid "Quick execute"
 msgstr "Ejecución rápida"
 
 msgid "Insert mark after each in"
-msgstr "Insertar marca después de cada en"
+msgstr "Insertar marca después de cada IN"
 
 msgid "Remove all alternatives"
 msgstr "Eliminar todos los alternativos"
@@ -8920,8 +8920,17 @@ msgstr "Eliminar todos los alternativos"
 msgid "remove all new found flags"
 msgstr "eliminar todas los indicadores nuevos encontrados"
 
+msgid "End at this position"
+msgstr "Terminar en esta posición"
+
+msgid "Punch cuts"
+msgstr "Cortes de punzón"
+
+msgid "Both"
+msgstr "Ambos"
+
 msgid "Remove before this position"
-msgstr "Eliminar tras esta posición"
+msgstr "Eliminar lo de detrás de esta posición"
 
 msgid "Remove bouquet from parental protection"
 msgstr "Eliminar bouquet de la protección parental"
