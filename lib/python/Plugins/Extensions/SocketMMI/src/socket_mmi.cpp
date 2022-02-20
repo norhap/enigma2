@@ -486,7 +486,7 @@ static PyMethodDef module_methods[] = {
 
 
 PyMODINIT_FUNC
-initsocketmmi(void)
+PyInit_socketmmi(void)
 {
 #if PY_MAJOR_VERSION >= 3
 	return PyModule_Create(&moduledef);
