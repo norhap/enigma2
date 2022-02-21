@@ -561,11 +561,14 @@ def removeDir(path):
 
 
 def fileAccess(file, mode="r"):
+	from glob import glob
 	accMode = F_OK
 	if "r" in mode:
 		accMode |= R_OK
 	if "w" in mode:
 		accMode |= W_OK
+	if "*" in file:
+		return bool(glob(file))
 	result = False
 	try:
 		result = access(file, accMode)
@@ -676,11 +679,5 @@ def mediaFilesInUse(session):
 	return set([file for file in files if not(filename and file == filename and files.count(filename) < 2)])
 
 
-def isPluginInstalled(pluginName, pluginFile="plugin", pluginType=None):
-	for type in [x for x in listdir(scopePlugins) if x != "__pychache__" and isdir(pathjoin(scopePlugins, x))]:
-		for extension in ["", "o", "c"]:
-			if isfile(pathjoin(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):
-				if pluginType and type != pluginType:
-					continue
-				return True
-	return False
+def isPluginInstalled(pluginFolderName):
+	return fileExists("/usr/lib/enigma2/python/Plugins/*/%s/plugin.py*" % pluginFolderName)
