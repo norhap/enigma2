@@ -94,11 +94,8 @@ class SoftcamSetup(Setup):
 		elif "ncam" in config.misc.softcams.value.lower():
 			from Screens.NcamInfo import NcamInfoMenu
 			self.session.open(NcamInfoMenu)
-		elif "cccam" in config.misc.softcams.value.lower():
+		elif "cccam" in config.misc.softcams.value.lower() or isPluginInstalled("CCcamInfo"):
 			from Screens.CCcamInfo import CCcamInfoMain
-			self.session.open(CCcamInfoMain)
-		elif "cccam" in config.misc.softcams.value.lower() and isPluginInstalled("CCcamInfo"):
-			from Plugins.Extensions.CCcamInfo.plugin import CCcamInfoMain
 			self.session.open(CCcamInfoMain)
 		elif isfile(ppanelFilename) and isPluginInstalled("PPanel"):
 			from Plugins.Extensions.PPanel.ppanel import PPanel
