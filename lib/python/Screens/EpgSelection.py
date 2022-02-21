@@ -127,7 +127,7 @@ class EPGSelection(Screen):
 		if self.isTMBD:
 			self["key_red"] = Button(_("Search TMBD"))
 			self.select = True
-		if not self.isTMBD:
+		else:
 			self["key_red"] = Button(_("TMBD Not Installed"))
 			self.select = False
 		try:
