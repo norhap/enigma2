@@ -15,13 +15,38 @@ class PicCript(Renderer):
 	condAccessIds = {
 		"26": "BiSS",
 		"01": "SEC",
+		"10": "SEC",
+		"x6": "IRD",
 		"06": "IRD",
+		"64": "IRD",
 		"17": "BET",
 		"18": "NAG",
 		"05": "VIA",
+		"50": "VIA",
+		"09": "NDS",
+		"9c": "NDS",
+		"98": "NDS",
+		"0B": "CONN",
+		"b0": "CONN",
+		"d9": "CRW",
+		"0D": "CRW",
+		"4A": "DRE",
+		"0E": "PowerVU",
+		"22": "Codicrypt",
+		"07": "DigiCipher",
+		"A1": "Rosscrypt",
+		"56": "Verimatrix"
+	}
+	condAccessIdsMgcamd = {
+		"26": "BiSS",
+		"10": "SEC",
+		"x0": "IRD",
+		"17": "BET",
+		"18": "NAG",
+		" 0": "VIA",
 		"09": "NDS",
 		"0B": "CONN",
-		"0D": "CRW",
+		"aI": "CRW",
 		"4A": "DRE",
 		"0E": "PowerVU",
 		"22": "Codicrypt",
@@ -85,9 +110,19 @@ class PicCript(Renderer):
 		lines = []
 		try:
 		   for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-			   if fileHas("/tmp/ecm.info", " 0x"):
+			   if fileHas("/tmp/ecm.info", "protocol") or fileHas("/tmp/ecm.info", "Service"):
 				   for caid in caids:
 					   sName = self.condAccessIds.get(line[8:10])
+					   if sName != None:
+						   return sName
+			   elif fileHas("/tmp/ecm.info", "CCcam-s2s"):
+				   for caid in caids:
+					   sName = self.condAccessIds.get(line[14:16])
+					   if sName != None:
+						   return sName
+			   elif fileHas("/tmp/ecm.info", "Signature"):
+				   for caid in caids:
+					   sName = self.condAccessIdsMgcamd.get(line[26:28])
 					   if sName != None:
 						   return sName
 		except IOError as err:
