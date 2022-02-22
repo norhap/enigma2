@@ -58,7 +58,6 @@ public:
 	RESULT tryFCCService(const eServiceReference &service, ePtr<iPlayableService> &ptr);
 	PyObject *getFCCServiceList();
 	void printFCCServices();
-	int isLocked(ePtr<iPlayableService> service);
 	static int getFCCChannelID(std::map<eDVBChannelID, int> &fcc_chids);
 	static bool checkAvailable(const eServiceReference &ref);
 	void setFCCEnable(int enable) { m_fcc_enable = (enable != 0); }
