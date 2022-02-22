@@ -64,7 +64,7 @@ class Listbox(Renderer):
 	def moveToIndex(self, index):
 		if self.instance is None:
 			return
-		self.instance.moveSelectionTo(index)
+		self.instance.moveSelectionTo(int(index))
 
 	index = property(getIndex, moveToIndex)
 
