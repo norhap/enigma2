@@ -105,15 +105,11 @@ config.misc.startCounter = ConfigInteger(default=0)  # Number of e2 starts.
 ####################################################
 
 profile("Twisted")
-try:
-	import twisted.python.runtime
-	twisted.python.runtime.platform.supportsThreads = lambda: True
-	import e2reactor
-	e2reactor.install()
-	# from twisted.python.runtime.platform import supportsThreads
-	# supportsThreads = lambda: True
-	# from e2reactor import install
-	# install()
+try:  # Configure the twisted processor
+	from twisted.python.runtime import platform
+	platform.supportsThreads = lambda: True
+	from e2reactor import install
+	install()
 	from twisted.internet import reactor
 
 	def runReactor():
@@ -125,7 +121,7 @@ except ImportError:
 	def runReactor():
 		enigma.runMainloop()
 
-try:
+try:  # Configure the twisted logging
 	from twisted.python import log, util
 
 	def quietEmit(self, eventDict):
