@@ -561,14 +561,11 @@ def removeDir(path):
 
 
 def fileAccess(file, mode="r"):
-	from glob import glob
 	accMode = F_OK
 	if "r" in mode:
 		accMode |= R_OK
 	if "w" in mode:
 		accMode |= W_OK
-	if "*" in file:
-		return bool(glob(file))
 	result = False
 	try:
 		result = access(file, accMode)
@@ -679,5 +676,16 @@ def mediaFilesInUse(session):
 	return set([file for file in files if not(filename and file == filename and files.count(filename) < 2)])
 
 
-def isPluginInstalled(pluginFolderName):
-	return fileExists("/usr/lib/enigma2/python/Plugins/*/%s/plugin.py*" % pluginFolderName)
+def isPluginInstalled(pluginName, pluginFile="plugin", pluginType=None):
+	types = ["Extensions", "SystemPlugins"]
+	if pluginType:
+		types = [pluginType]
+	if PY2:
+		extensions = ["o", ""]
+	else:
+		extensions = ["c", ""]
+	for type in types:
+		for extension in extensions:
+			if isfile(pathjoin(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):
+				return True
+	return False
