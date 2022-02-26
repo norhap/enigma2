@@ -123,7 +123,10 @@ def getResumePoint(session):
 
 def saveResumePoints():
 	global resumePointCache, resumePointCacheLast
-	import pickle
+	if PY2:
+		import cPickle as pickle
+	else:
+		import pickle
 	try:
 		f = open('/etc/enigma2/resumepoints.pkl', 'wb')
 		pickle.dump(resumePointCache, f, pickle.HIGHEST_PROTOCOL)
@@ -134,7 +137,10 @@ def saveResumePoints():
 
 
 def loadResumePoints():
-	import pickle
+	if PY2:
+		import cPickle as pickle
+	else:
+		import pickle
 	try:
 		return pickle.load(open('/etc/enigma2/resumepoints.pkl', 'rb'))
 	except Exception as ex:
