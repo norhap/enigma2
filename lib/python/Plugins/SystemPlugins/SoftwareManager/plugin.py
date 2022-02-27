@@ -2,7 +2,12 @@
 from __future__ import print_function
 import os
 import time
-import pickle
+from six import PY3
+if PY3:
+	import pickle
+else:
+	import cPickle as pickle
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
@@ -34,7 +39,6 @@ from enigma import ePicLoad, eRCInput, getPrevAsciiCode, eEnv
 from twisted.web import client
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
-from six import PY2
 
 config.plugins.configurationbackup = ConfigSubsection()
 config.plugins.configurationbackup.backuplocation = ConfigText(default='/media/hdd/', visible_width=50, fixed_size=False)
@@ -1524,10 +1528,10 @@ class PacketManager(Screen, NumericalTextInput):
 				self.setNextIdx(keyvalue[0])
 
 	def keyGotAscii(self):
-		if PY2:
-			keyvalue = unichr(getPrevAsciiCode()).encode("utf-8")
-		else:
+		if PY3:
 			keyvalue = chr(getPrevAsciiCode()).encode("utf-8")
+		else:
+			keyvalue = unichr(getPrevAsciiCode()).encode("utf-8")
 		if len(keyvalue) == 1:
 			self.setNextIdx(keyvalue[0])
 
