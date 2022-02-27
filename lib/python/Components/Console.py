@@ -1,5 +1,5 @@
 from os import waitpid
-
+from six import PY3
 from enigma import eConsoleAppContainer
 
 
@@ -10,13 +10,13 @@ class ConsoleItem:
 			cmd = [cmd]
 		self.callback = callback
 		self.extraArgs = extraArgs
-		self.binary = binary
 		name = str(cmd)
 		if name in self.containers:
 			name = "%s@%s" % (name, hex(id(self)))  # Create a unique name.
 		self.containers[name] = self
 		self.name = name
 		self.container = eConsoleAppContainer()
+		self.binary = binary
 		if callback is not None:  # If the caller isn't interested in our results, we don't need to store the output either.
 			self.appResults = []
 			self.container.dataAvail.append(self.dataAvailCB)
@@ -46,9 +46,12 @@ class ConsoleItem:
 		del self.container.appClosed[:]
 		self.container = None
 		if self.callback != None:
-			data = b"".join(self.appResults)
-			data = data if self.binary else data.decode()
-			self.callback(data, retVal, self.extraArgs)
+			appResults = b"".join(self.appResults)
+			if PY3:
+				appResults = appResults if self.binary else appResults.decode()
+			appResults = appResults if self.binary else appResults
+
+			self.callback(appResults, retVal, self.extraArgs)
 
 
 class Console(object):
@@ -58,8 +61,9 @@ class Console(object):
 	"""
 
 	def __init__(self, binary=False):
-		# Still called appContainers because Network.py accesses it to
-		# know if there's still stuff running
+		# Still called appContainers because Network.py, SoftwareTools.py
+		# and WirelessLan/Wlan.py accesses it to know if there's still
+		# stuff running.
 		self.appContainers = {}
 		self.binary = binary
 
