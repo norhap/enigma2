@@ -18216,3 +18216,10 @@ msgstr "Añadir Lenguage"
 
 msgid "Delete Language(s)"
 msgstr "Eliminar Lenguage(s)"
+
+msgid "Delay start http(s) stream"
+msgstr "Retraso en el inicio de stream http(s)"
+
+msgid "Define additional delay in milliseconds before start of http(s) streams."
+msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams http(s)."
+
