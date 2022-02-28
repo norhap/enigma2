@@ -1,11 +1,11 @@
 # takes a header file, outputs action ids
-
+from __future__ import print_function
 import tokenize
 import sys
 
 
 def filter(g):
-	while 1:
+	while True:
 		t = next(g)
 		if t[1] == "/*":
 			while next(g)[1] != "*/":
@@ -35,7 +35,7 @@ def do_file(f, mode):
 	while True:
 		try:
 			t = next(tokens)
-		except:
+		except Exception as e:
 			break
 
 		if t == "class":
