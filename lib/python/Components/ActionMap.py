@@ -20,7 +20,7 @@ class ActionMap:
 					unknown.remove(action)
 					break
 		if unknown:
-			print("[ActionMap] Keymap(s) '%s' -> Undefined action(s) '%s'." % (", ".join(self.contexts), ", ".join(unknown)))
+			print(_("[ActionMap] Missing actions in keymap, '%s' missing: mapto='%s'.") % ("', '".join(sorted(self.contexts)), "', '".join(sorted(list(self.actions.keys())))))
 
 	def setEnabled(self, enabled):
 		self.enabled = enabled
@@ -54,19 +54,14 @@ class ActionMap:
 
 	def action(self, context, action):
 		if action in self.actions:
-			print("[ActionMap] Keymap '%s' -> Action = '%s'." % (context, action))
+			print("[ActionMap] Keymap '%s' -> Action mapto='%s'." % (context, action))
 			res = self.actions[action]()
 			if res is not None:
 				return res
 			return 1
-		unknown = list(self.actions.keys())
-		if not action in self.actions:
-			for action in unknown[:]:
-				if queryKeyBinding(context, action):
-					unknown.remove(action)
-				else:
-					print("[ActionMap] Keymap '%s' -> Unknown action '%s'! (Typo in keymap?)" % (context, action))
-					return 0
+		else:
+			print(_("[ActionMap] Keymap '%s' -> Unknown mapto='%s' It's probably an action that is needed elsewhere in the code, check.") % (context, action))
+			return 0
 
 	def destroy(self):
 		pass

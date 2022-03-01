@@ -18223,3 +18223,8 @@ msgstr "Retraso en el inicio de stream http(s)"
 msgid "Define additional delay in milliseconds before start of http(s) streams."
 msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams http(s)."
 
+msgid "[ActionMap] Missing actions in keymap, '%s' missing: mapto='%s'."
+msgstr "[ActionMap] Faltan acciones en keymap, '%s' falta: mapto='%s'."
+
+msgid "[ActionMap] Keymap '%s' -> Unknown mapto='%s' It's probably an action that is needed elsewhere in the code, check."
+msgstr "[ActionMap] Keymap '%s' -> Desconocido mapto='%s' Probablemente es una acción que se necesita en otro lugar del código, compruébelo."
