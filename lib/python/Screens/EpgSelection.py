@@ -98,22 +98,37 @@ class EPGSelection(Screen):
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGList(type=self.type, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
-
-		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions"],
-			{
-				"cancel": self.closeScreen,
-				"ok": self.eventSelected,
-				"timerAdd": self.timerAdd,
-				"yellow": self.yellowButtonPressed,
-				"blue": self.blueButtonPressed,
-				"info": self.infoKeyPressed,
-				"menu": self.furtherOptions,
-				"nextBouquet": self.nextBouquet, # just used in multi epg yet
-				"prevBouquet": self.prevBouquet, # just used in multi epg yet
-				"nextService": self.nextService, # just used in single epg yet
-				"prevService": self.prevService, # just used in single epg yet
-				"preview": self.eventPreview,
-			})
+		if not isPluginInstalled("EPGSearch"):
+			self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions"],
+				{
+					"cancel": self.closeScreen,
+					"ok": self.eventSelected,
+					"timerAdd": self.timerAdd,
+					"yellow": self.yellowButtonPressed,
+					"blue": self.blueButtonPressed,
+					"info": self.infoKeyPressed,
+					"menu": self.furtherOptions,
+					"nextBouquet": self.nextBouquet, # just used in multi epg yet
+					"prevBouquet": self.prevBouquet, # just used in multi epg yet
+					"nextService": self.nextService, # just used in single epg yet
+					"prevService": self.prevService, # just used in single epg yet
+					"preview": self.eventPreview
+				})
+		else:
+			self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions"],
+				{
+					"cancel": self.closeScreen,
+					"ok": self.eventSelected,
+					"timerAdd": self.timerAdd,
+					"yellow": self.yellowButtonPressed,
+					"info": self.infoKeyPressed,
+					"menu": self.furtherOptions,
+					"nextBouquet": self.nextBouquet,
+					"prevBouquet": self.prevBouquet,
+					"nextService": self.nextService,
+					"prevService": self.prevService,
+					"preview": self.eventPreview
+				})
 
 		self['colouractions'] = HelpableActionMap(self, ["ColorActions"],
 			{
