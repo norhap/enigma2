@@ -2035,7 +2035,7 @@
 	<!-- MESSAGEBOX SIMPLE-->
 	<screen name="MessageBoxSimple" backgroundColor="OE_Background" position="260,center" size="1290,445">
 		<panel name="MessageBoxTemplate"/>
-		<eLabel backgroundColor="OE_NewBg2" foregroundColor="white" name="" position="0,3" size="100,540" zPosition="-10"/>
+		<eLabel backgroundColor="OE_NewBg2" foregroundColor="white" name="" position="0,3" size="100,640" zPosition="-10"/>
 		<widget name="list" conditional="list" itemHeight="32" font="RegularBold;26" scrollbarMode="showOnDemand" scrollbarSliderForegroundColor="blue_light" backgroundColor="OE_Background" foregroundColor="OE_Foreground" position="115,230" size="1190,190" transparent="1"/>
 		<widget name="text" font="RegularBold;26" backgroundColor="OE_Background" position="110,3" size="1155,200" halign="left" valign="center"/>
 	</screen>
@@ -4956,7 +4956,7 @@
 		<!-- TITLES -->
 	<screen name="TitleStanDardScreen">
 		<widget source="Title" render="Label" font="RegularBold;28" backgroundColor="OE_Background" position="24,63" size="1255,70" halign="center" valign="top" transparent="1"/>
-		<widget source="ScreenPath" render="Label" font="RegularBold;24" backgroundColor="OE_Background" foregroundColor="blue_light" position="24,10" size="1255,70" halign="center" transparent="1"/>
+		<widget source="ScreenPath" render="Label" font="RegularBold;24" backgroundColor="OE_Background" foregroundColor="blue_light" position="24,10" size="1255,56" halign="center" transparent="1"/>
 	</screen>
 	<screen name="TitleInformation">
 		<widget source="Title" render="Label" font="RegularBold;28" backgroundColor="OE_Background" position="405,62" size="1490,70" halign="center" valign="top" transparent="1"/>
