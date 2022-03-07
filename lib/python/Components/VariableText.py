@@ -1,7 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-
 class VariableText(object):
 	"""VariableText can be used for components which have a variable text, based on any widget with setText call"""
 
@@ -11,9 +7,9 @@ class VariableText(object):
 		self.instance = None
 
 	def setText(self, text):
-		self.message = text
+		self.message = str(text)
 		if self.instance:
-			self.instance.setText(str(self.message) or "")
+			self.instance.setText(self.message or "")
 
 	def setMarkedPos(self, pos):
 		if self.instance:
@@ -25,4 +21,4 @@ class VariableText(object):
 	text = property(getText, setText)
 
 	def postWidgetCreate(self, instance):
-		instance.setText(str(self.message) or "")
+		instance.setText(self.message or "")
