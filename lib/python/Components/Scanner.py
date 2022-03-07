@@ -154,7 +154,7 @@ def scanDevice(mountpoint):
 	scanner = []
 
 	for p in plugins.getPlugins(PluginDescriptor.WHERE_FILESCAN):
-		l = p()
+		l = p.__call__()
 		if not isinstance(l, list):
 			l = [l]
 		scanner += l
@@ -163,29 +163,22 @@ def scanDevice(mountpoint):
 
 	res = {}
 
-	# merge all to-be-scanned paths, with priority to
-	# with_subdirs.
-
 	paths_to_scan = set()
 
-	# first merge them all...
+	# merge all to-be-scanned paths.
+	# first merge them all.
 	for s in scanner:
 		paths_to_scan.update(set(s.paths_to_scan))
-
-	# ...then remove with_subdir=False when same path exists
-	# with with_subdirs=True
-	for p in paths_to_scan:
-		if p.with_subdirs == True and ScanPath(path=p.path) in paths_to_scan:
-			paths_to_scan.remove(ScanPath(path=p.path))
 
 	from Components.Harddisk import harddiskmanager
 	blockdev = mountpoint.rstrip("/").rsplit('/', 1)[-1]
 	error, blacklisted, removable, is_cdrom, partitions, medium_found = harddiskmanager.getBlockDevInfo(blockdev)
 
-	# now scan the paths
-	for p in paths_to_scan:
-		path = os.path.join(mountpoint, p.path)
+	for p in paths_to_scan: # with_subdirs=True...then remove with_subdir=False when same path exists
+		if p.with_subdirs == True and ScanPath(path=p.path) in paths_to_scan:
+			paths_to_scan.remove(ScanPath(path=p.path))
 
+		path = os.path.join(mountpoint, p.path) # now scan the files paths.
 		for root, dirs, files in os.walk(path):
 			for f in files:
 				path = os.path.join(root, f)
@@ -200,8 +193,8 @@ def scanDevice(mountpoint):
 			if not p.with_subdirs:
 				del dirs[:]
 
-	# res is a dict with scanner -> [ScanFiles]
-	return res
+		# res is a dict with scanner -> [ScanFiles]
+		return res
 
 
 def openList(session, files):
@@ -211,7 +204,7 @@ def openList(session, files):
 	scanner = []
 
 	for p in plugins.getPlugins(PluginDescriptor.WHERE_FILESCAN):
-		l = p()
+		l = p.__call__()
 		if not isinstance(l, list):
 			scanner.append(l)
 		else:
