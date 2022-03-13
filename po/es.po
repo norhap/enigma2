@@ -6277,8 +6277,8 @@ msgstr "Software"
 msgid "Software management"
 msgstr "Administrador de Software"
 
-msgid "Software manager setup"
-msgstr "Configuración del administrador de software"
+msgid "Software Manager Setup"
+msgstr "Ajustes Administrador de Software"
 
 msgid "Software restore"
 msgstr "Restauración de software"
@@ -18228,3 +18228,12 @@ msgstr "[ActionMap] Faltan acciones en keymap, '%s' falta: mapto='%s'."
 
 msgid "[ActionMap] Keymap '%s' -> Unknown mapto='%s' It's probably an action that is needed elsewhere in the code, check."
 msgstr "[ActionMap] Keymap '%s' -> Desconocido mapto='%s' Probablemente es una acción que se necesita en otro lugar del código, compruébelo."
+
+msgid "Scan and search files and extensions in subdirs"
+msgstr "Escanea y busca archivos y extensiones en subdirectorios"
+
+msgid "For Media Scanner, enabled will take search more time, but will do a full scan of all subdirs where your media files or extensions are located."
+msgstr "Para Media Scanner, habilitado llevará más tiempo la búsqueda, pero realizará un escaneo completo de todos los subdirectorios donde se encuentran sus archivos multimedia o extensiones."
+
+msgid "SkinSelector: Restart GUI"
+msgstr "Seleccionar Skin: Reiniciar GUI"

@@ -41,7 +41,7 @@ def mountpoint_choosen(option):
 
 def scan(session):
 	from Screens.ChoiceBox import ChoiceBox
-	parts = [(r.description, r.mountpoint, session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) if os.access(r.mountpoint, os.F_OK | os.R_OK)]
+	parts = [(r.tabbedDescription(), r.mountpoint, session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) if os.access(r.mountpoint, os.F_OK | os.R_OK)]
 	parts.append((_("Memory") + "\t/tmp", "/tmp", session))
 	session.openWithCallback(mountpoint_choosen, ChoiceBox, title=_("Please select medium to be scanned"), list=parts)
 
@@ -94,7 +94,7 @@ def autostart(reason, **kwargs):
 		harddiskmanager.on_partition_list_change.remove(partitionListChanged)
 		global_session = None
 
-		
+
 def movielist_open(list, session, **kwargs):
 	from Components.config import config
 	if not list:
