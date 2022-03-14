@@ -27,6 +27,8 @@ class MessageBox(Screen, HelpableScreen):
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, list=None, default=True, closeOnAnyKey=False, enableInput=True, msgBoxID=None, typeIcon=None, timeoutDefault=None, windowTitle=None, skinName=None, close_on_any_key=False, enable_input=True, timeout_default=None, title=None, picon=None, skin_name=None, simple=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		self.timerRunning = False
+		self["autoresize"] = Label("")
 		self.text = text
 		self["text"] = Label(text)
 		self.type = type
@@ -42,7 +44,7 @@ class MessageBox(Screen, HelpableScreen):
 		else:
 			self["list"] = MenuList([])
 			self["list"].hide()
-			self.list = None
+			self.list = []
 		self.timeout = timeout
 		if close_on_any_key == True:  # Process legacy close_on_any_key argument.
 			closeOnAnyKey = True
@@ -85,11 +87,15 @@ class MessageBox(Screen, HelpableScreen):
 			self["QuestionPixmap"].hide()
 			self["InfoPixmap"] = Pixmap()
 			self["InfoPixmap"].hide()
+			self["WarningPixmap"] = Pixmap()
+			self["WarningPixmap"].hide()
 			self["ErrorPixmap"] = Pixmap()
 			self["ErrorPixmap"].hide()
 			if typeIcon == self.TYPE_YESNO:
 				self["QuestionPixmap"].show()
-			elif typeIcon == self.TYPE_INFO or typeIcon == self.TYPE_WARNING:
+			elif typeIcon == self.TYPE_WARNING:
+				self["WarningPixmap"].show()
+			elif typeIcon == self.TYPE_INFO:
 				self["InfoPixmap"].show()
 			elif typeIcon == self.TYPE_ERROR:
 				self["ErrorPixmap"].show()
@@ -204,6 +210,12 @@ class MessageBox(Screen, HelpableScreen):
 
 	def autoResize(self):  # Dummy method place holder for some legacy skins.
 		pass
+
+	def getListWidth(self):
+		def getListLineTextWidth(text):
+			self["autoresize"].setText(text)
+			return self["autoresize"].getSize()[0]
+		return max([getListLineTextWidth(line[0]) for line in self.list]) if self.list else 0
 
 	def createSummary(self):
 		return MessageBoxSummary
