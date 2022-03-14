@@ -12,6 +12,7 @@ from Components.Console import Console
 from Components.SystemInfo import SystemInfo
 from Tools.CList import CList
 from Tools.Directories import fileReadLine, fileReadLines
+from six import PY3
 
 
 def getProcMounts():
@@ -269,6 +270,8 @@ class Harddisk:
 
 	def killPartitionTable(self):
 		zero = "\0" * 512
+		if PY3:
+			h = open(self.dev_path, "w")
 		h = open(self.dev_path, "wb")
 		# delete first 9 sectors, which will likely kill the first partition too
 		for i in range(9):
