@@ -37,14 +37,14 @@ class MessageBox(Screen, HelpableScreen):
 			self["list"] = MenuList(self.list)
 			if isinstance(default, int):
 				self["list"].moveToIndex(default)
-			elif default in (True, False):
+			elif default in (bool):
 				self["list"].moveToIndex(0 if default else 1)
 			else:
 				print("[MessageBox] Error: The context of the default (%s) can't be determined!" % default)
 		else:
+			self.list = []
 			self["list"] = MenuList([])
 			self["list"].hide()
-			self.list = []
 		self.timeout = timeout
 		if close_on_any_key == True:  # Process legacy close_on_any_key argument.
 			closeOnAnyKey = True
@@ -81,9 +81,8 @@ class MessageBox(Screen, HelpableScreen):
 		self.typeIcon = typeIcon
 		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
 		if typeIcon:
-			self["icon"] = MultiPixmap()
-			# These lines can go with new skins that only use self["icon"]...
-			self["QuestionPixmap"] = Pixmap()
+			self["icon"] = MultiPixmap()  # These line can go with new skins that only use self["icon"]...
+			self["QuestionPixmap"] = Pixmap()  # These lines are to be compatible with the old Pixmaps.
 			self["QuestionPixmap"].hide()
 			self["InfoPixmap"] = Pixmap()
 			self["InfoPixmap"].hide()
@@ -211,7 +210,7 @@ class MessageBox(Screen, HelpableScreen):
 	def autoResize(self):  # Dummy method place holder for some legacy skins.
 		pass
 
-	def getListWidth(self):
+	def getListWidth(self):  # keep text autoresize compatible for others skins MessageBoxSimple.
 		def getListLineTextWidth(text):
 			self["autoresize"].setText(text)
 			return self["autoresize"].getSize()[0]
