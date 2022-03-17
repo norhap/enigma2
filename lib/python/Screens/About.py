@@ -915,7 +915,7 @@ class SystemNetworkInfo(Screen):
 								essid = _("No connection")
 							else:
 								essid = status[self.iface]["essid"]
-						self.AboutText += _('SSID:') + '\t' + essid + '\n'
+						self.AboutText += _('SSID:') + '\t'  + '\t' + essid + '\n'
 
 					if 'quality' in self:
 						if not status[self.iface]["quality"]:
@@ -932,14 +932,14 @@ class SystemNetworkInfo(Screen):
 								bitrate = _("Unsupported")
 							else:
 								bitrate = str(status[self.iface]["bitrate"]) + " Mb/s"
-						self.AboutText += _('Bitrate:') + '\t' + bitrate + '\n'
+						self.AboutText += _('Bitrate:') + '\t'  + '\t' + bitrate + '\n'
 
 					if 'signal' in self:
 						if not status[self.iface]["signal"]:
 							signal = _("Unknown")
 						else:
 							signal = status[self.iface]["signal"]
-						self.AboutText += _('Signal strength:') + '\t' + signal + '\n'
+						self.AboutText += _('Signal strength:') + '\t' + str(signal) + '\n'
 
 					if 'enc' in self:
 						if not status[self.iface]["encryption"]:
@@ -952,7 +952,7 @@ class SystemNetworkInfo(Screen):
 									encryption = _("Unsupported")
 							else:
 								encryption = _("Enabled")
-						self.AboutText += _('Encryption:') + '\t' + encryption + '\n'
+						self.AboutText += _('Encryption:') + '\t'  + '\t' + encryption + '\n'
 
 					if ((status[self.iface]["essid"] and status[self.iface]["essid"] == "off") or
 						not status[self.iface]["accesspoint"] or

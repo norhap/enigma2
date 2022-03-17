@@ -1,5 +1,5 @@
 import os, sys
-from six import PY2
+from six import PY3
 from sys import modules, version_info
 
 import time
@@ -18,10 +18,13 @@ from Tools.StbHardware import getBrand
 
 
 def _ifinfo(sock, addr, ifname):
-	iface = struct.pack('256s', ifname[:15])
+	if PY3:
+		iface = struct.pack('256s', bytes(ifname[:15], encoding="UTF-8"))
+	else:
+		iface = struct.pack('256s', ifname[:15])
 	info = fcntl.ioctl(sock.fileno(), addr, iface)
 	if addr == 0x8927:
-		return ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
+		return ''.join(['%02x:' % ord(chr(char)) for char in info[18:24]])[:-1].upper() if PY3 else ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
 	else:
 		return socket.inet_ntoa(info[20:24])
 
@@ -38,7 +41,8 @@ def getIfConfig(ifname):
 	try:
 		for k,v in infos.items():
 			ifreq[k] = _ifinfo(sock, v, ifname)
-	except:
+	except Exception as ex:
+		print("[About] getIfConfig Ex: %s" % str(ex))
 		pass
 	sock.close()
 	return ifreq
@@ -124,9 +128,9 @@ def getFFmpegVersionString():
 	try:
 		from glob import glob
 		if not getImageArch() == "aarch64":
-		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		else:
-		      ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
 	except:
 		return _("Not Installed")
@@ -303,13 +307,15 @@ def GetIPsFromNetworkInterfaces():
 			max_possible *= 2
 		else:
 			break
-	namestr = names.tostring() if PY2 else names
+	if PY3:
+		namestr = names.tobytes()
+	namestr = names.tostring()
+
 	ifaces = []
 	for i in range(0, outbytes, struct_size):
-		if PY2:
-			iface_name = bytes.decode(namestr[i:i + 16]).split('\0', 1)[0].encode('ascii')
-		else:
+		if PY3:
 			iface_name = str(namestr[i:i + 16]).split('\0', 1)[0]
+		iface_name = bytes.decode(namestr[i:i + 16]).split('\0', 1)[0].encode('ascii')
 		if iface_name != 'lo':
 			iface_addr = socket.inet_ntoa(namestr[i + 20:i + 24])
 			ifaces.append((iface_name, iface_addr))

@@ -18240,3 +18240,6 @@ msgstr "Skin Seleccionado: Reiniciar GUI"
 
 msgid "Cable scan executable utility not found '%s'!"
 msgstr "Utilidad ejecutable búsqueda de cable no encontrada '%s'!"
+
+msgid "Accesspoint:"
+msgstr "Punto de Acceso:"
