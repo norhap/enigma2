@@ -1353,12 +1353,11 @@ msgstr "Número de canal, picon y nombre de canal"
 msgid "Channels and EPG"
 msgstr "Canales y EPG"
 
-#, python-format
-msgid "Channels from fallback tuner failed %s"
-msgstr "Los canales del sintonizador de reserva fallaron %s"
+msgid "Import from fallback tuner failed, %s"
+msgstr "Falló la importación desde el sintonizador reserva, %s"
 
-msgid "Channels from fallback tuner imported"
-msgstr "Canales del sintonizador de respaldo importados"
+msgid "%s imported from fallback tuner"
+msgstr "%s importado del sintonizador reserva"
 
 msgid "Channels only"
 msgstr "Solo Canales"
