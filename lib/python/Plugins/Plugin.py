@@ -94,14 +94,10 @@ class PluginDescriptor(object):
 
 		self.wakeupfnc = wakeupfnc
 
-		self.fnc = fnc
+		self.__call__ = fnc
 
-	def __call__(self, *args, **kwargs):
-		try:
-			if callable(self.fnc):
-				return self.fnc(*args, **kwargs)
-		except RuntimeError as err:
-			print("Error Python Module '%s' '%s'" % (self.path, err))
+	def __call__(self, reason=0, session=0, servicelist=0, service=0):
+		return
 
 	def updateIcon(self, path):
 		self.path = path
@@ -118,10 +114,10 @@ class PluginDescriptor(object):
 			return self._icon
 
 	def __eq__(self, other):
-		return self.fnc == other.fnc
+		return self.__call__ == other.__call__
 
 	def __ne__(self, other):
-		return self.fnc != other.fnc
+		return self.__call__ != other.__call__
 
 	def __lt__(self, other):
 		if self.weight < other.weight:

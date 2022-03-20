@@ -668,7 +668,7 @@ class Network:
 		if self.config_ready is not None:
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKCONFIG_READ):
 				try:
-					p(reason=self.config_ready)
+					p.__call__(reason=self.config_ready)
 				except:
 					print("[Network] Plugin caused exception at WHERE_NETWORKCONFIG_READ")
 					import traceback

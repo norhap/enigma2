@@ -229,7 +229,7 @@ class Session:
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_SESSIONSTART):
 			try:
-				p(reason=0, session=self)
+				p.__call__(reason=0, session=self)
 			except:
 				print("[StartEnigma] Plugin raised exception at WHERE_SESSIONSTART")
 				import traceback
@@ -501,7 +501,7 @@ def runScreenTest():
 	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value) # wake up to standby for RecordTimer and PowerTimer.
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
 	CiHandler.setSession(session)
-	screensToRun = [p.fnc for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
+	screensToRun = [p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
 	profile("wizards")
 	screensToRun += wizardManager.getWizards()
 	screensToRun.append((100, InfoBar.InfoBar))

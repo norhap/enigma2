@@ -53,8 +53,12 @@ import datetime
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 # hack alert!
 from Screens.Menu import MainMenu, mdom
-from six import PY2
 from sys import maxsize
+from six import PY3
+if PY3:
+	import pickle
+else:
+	import cPickle as pickle
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -123,10 +127,6 @@ def getResumePoint(session):
 
 def saveResumePoints():
 	global resumePointCache, resumePointCacheLast
-	if PY2:
-		import cPickle as pickle
-	else:
-		import pickle
 	try:
 		f = open('/etc/enigma2/resumepoints.pkl', 'wb')
 		pickle.dump(resumePointCache, f, pickle.HIGHEST_PROTOCOL)
@@ -137,10 +137,6 @@ def saveResumePoints():
 
 
 def loadResumePoints():
-	if PY2:
-		import cPickle as pickle
-	else:
-		import pickle
 	try:
 		return pickle.load(open('/etc/enigma2/resumepoints.pkl', 'rb'))
 	except Exception as ex:
@@ -1154,7 +1150,7 @@ class InfoBarEPG:
 
 	def getEPGPluginList(self, getAll=False):
 		pluginlist = [(p.name, boundFunction(self.runPlugin, p), p.description or p.name) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
-				if 'selectedevent' not in p.fnc.__code__.co_varnames] or []
+				if 'selectedevent' not in p.__call__.__code__.co_varnames] or []
 		from Components.ServiceEventTracker import InfoBarCount
 		if getAll or InfoBarCount == 1:
 			pluginlist.append((_("Show EPG for current channel..."), self.openSingleServiceEPG, _("Display EPG list for current channel")))
@@ -1308,7 +1304,7 @@ class InfoBarEPG:
 				self.session.open(EPGSelection, ref)
 
 	def runPlugin(self, plugin):
-		plugin(session=self.session, servicelist=self.servicelist)
+		plugin.__call__(session=self.session, servicelist=self.servicelist)
 
 	def showEventInfoPlugins(self):
 		if brand not in ("xtrend", "odin", "ini", "dags", "gigablue", "xp"):
@@ -2460,10 +2456,9 @@ class InfoBarPlugins:
 	def getPluginList(self):
 		l = []
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EXTENSIONSMENU):
-			if PY2:
-				args = inspect.getargspec(p.fnc)[0]
-			else:
-				args = inspect.getfullargspec(p.fnc)[0]
+			if PY3:
+				args = inspect.getfullargspec(p.__call__)[0]
+			args = inspect.getargspec(p.__call__)[0]
 			if len(args) == 1 or len(args) == 2 and isinstance(self, InfoBarChannelSelection):
 				l.append(((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name))
 		l.sort(key=lambda e: e[2]) # sort by name
@@ -2471,9 +2466,9 @@ class InfoBarPlugins:
 
 	def runPlugin(self, plugin):
 		if isinstance(self, InfoBarChannelSelection):
-			plugin(session=self.session, servicelist=self.servicelist)
+			plugin.__call__(session=self.session, servicelist=self.servicelist)
 		else:
-			plugin(session=self.session)
+			plugin.__call__(session=self.session)
 
 
 from Components.Task import job_manager
@@ -3752,7 +3747,7 @@ class InfoBarTeletextPlugin:
 		self.teletext_plugin = None
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_TELETEXT):
-			self.teletext_plugin = p
+			self.teletext_plugin = p.__call__
 
 		if self.teletext_plugin is not None:
 			self["TeletextActions"] = HelpableActionMap(self, ["InfobarTeletextActions"], {
