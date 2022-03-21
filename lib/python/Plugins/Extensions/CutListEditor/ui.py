@@ -571,9 +571,9 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		elif result == CutListContextMenu.RET_GRABFRAME:
 			self.grabFrame()
 
-	def executeCallback(self, *retval):
-		if retval and retval[0]:
-			self.close(True)
+	def executeCallback(self, *answer):
+		if answer:
+			self.close()
 		else:
 			self.session.nav.playService(self.service)
 			self.pauseService()
