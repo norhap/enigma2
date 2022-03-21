@@ -3557,7 +3557,7 @@ class InfoBarCueSheetSupport:
 		r = seek.getPlayPosition()
 		if r[0]:
 			return None
-		return int(r[1])
+		return int(r[1]) if PY3 else long(r[1])
 
 	def cueGetEndCutPosition(self):
 		ret = False
