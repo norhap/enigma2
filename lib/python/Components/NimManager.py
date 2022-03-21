@@ -1089,10 +1089,12 @@ class NimManager:
 		list = []
 		if self.nim_slots[slotid].isCompatible("DVB-S"):
 			nim = config.Nims[slotid]
-			# print("[NimManager] slotid:", slotid)
-			# print("[NimManager] self.satellites:", self.satList[config.Nims[slotid].diseqcA.index])
-			# print("[NimManager] diseqcA:", config.Nims[slotid].diseqcA.value)
+			#print "slotid:", slotid
+
+			#print "self.satellites:", self.satList[config.Nims[slotid].diseqcA.index]
+			#print "diseqcA:", config.Nims[slotid].diseqcA.value
 			configMode = nim.configMode.value
+
 			if configMode == "equal":
 				slotid = int(nim.connectedTo.value)
 				nim = config.Nims[slotid]
@@ -1101,6 +1103,7 @@ class NimManager:
 				slotid = self.sec.getRoot(slotid, int(nim.connectedTo.value))
 				nim = config.Nims[slotid]
 				configMode = nim.configMode.value
+
 			if configMode == "simple":
 				dm = nim.diseqcMode.value
 				if dm in ("single", "toneburst_a_b", "diseqc_a_b", "diseqc_a_b_c_d"):
@@ -1122,7 +1125,7 @@ class NimManager:
 					userSatlist = userSatlist.replace("]", "").replace("[", "")
 					for x in self.satList:
 						sat_str = str(x[0])
-						if userSatlist and ", %s," % sat_str in ", %s," % userSatlist:
+						if userSatlist and ("," not in userSatlist and sat_str == userSatlist) or ((', ' + sat_str + ',' in userSatlist) or (userSatlist.startswith(sat_str + ',')) or (userSatlist.endswith(', ' + sat_str))):
 							list.append(x)
 			elif configMode == "advanced":
 				for x in range(3601, 3605):
@@ -1139,7 +1142,7 @@ class NimManager:
 						userSatlist = userSatlist.replace("]", "").replace("[", "")
 						for user_sat in self.satList:
 							sat_str = str(user_sat[0])
-							if userSatlist and ", %s," % sat_str in ", %s," % userSatlist and user_sat not in list:
+							if userSatlist and ("," not in userSatlist and sat_str == userSatlist) or ((', ' + sat_str + ',' in userSatlist) or (userSatlist.startswith(sat_str + ',')) or (userSatlist.endswith(', ' + sat_str))) and user_sat not in list:
 								list.append(user_sat)
 		return list
 
