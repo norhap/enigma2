@@ -1,9 +1,10 @@
 from __future__ import print_function
-from six import PY2
-if PY2:
-	from cPickle import dump, load
-else:
+from six import PY3
+if PY3:
 	from pickle import dump, load
+else:
+	from cPickle import dump, load
+
 from os import W_OK, access, listdir, mkdir, rename, rmdir, stat
 from os.path import abspath, basename, exists, isdir, isfile, join as pathjoin, normpath, pardir, realpath, split, splitext
 from time import time
@@ -674,7 +675,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.list.moveToChar(charstr[0], self["chosenletter"])
 
 	def keyAsciiCode(self):
-		charstr = chr(getPrevAsciiCode())
+		if PY3:
+			charstr = chr(getPrevAsciiCode())
+		else:
+			charstr = unichr(getPrevAsciiCode())
 		if len(charstr) == 1:
 			self.list.moveToString(charstr[0], self["chosenletter"])
 

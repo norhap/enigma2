@@ -46,7 +46,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
 import os
 from time import time
-from six import PY2
+from six import PY3
 
 profile("ChannelSelection.py after imports")
 
@@ -1876,10 +1876,10 @@ class ChannelSelectionBase(Screen):
 		self.selectionNumber = ""
 
 	def keyAsciiCode(self):
-		if PY2:
-			unichar = unichr(getPrevAsciiCode())
-		else:
+		if PY3:
 			unichar = chr(getPrevAsciiCode())
+		else:
+			unichar = unichr(getPrevAsciiCode())
 		if len(unichar) == 1:
 			self.servicelist.moveToChar(unichar[0])
 
