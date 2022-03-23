@@ -61,7 +61,7 @@ class ServiceName2(Converter, object):
 		def searchService(serviceHandler, bouquet):
 			istype = False
 			servicelist = serviceHandler.list(bouquet)
-			if not servicelist is None:
+			if not servicelist:
 				while True:
 					s = servicelist.getNext()
 					if not s.valid():

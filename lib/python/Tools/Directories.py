@@ -102,7 +102,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		print("[Directories] Error: Invalid scope=%s provided to resolveFilename!" % scope)
 		return None
 	path, flag = defaultPaths[scope]  # Ensure that the defaultPath directory that should exist for this scope does exist.
-	if flag == PATH_CREATE and not pathExists(path):
+	if flag == PATH_CREATE and not exists(path):
 		try:
 			makedirs(path)
 		except (IOError, OSError) as err:
@@ -125,7 +125,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		for item in resolveList:
 			# for base in baseList:
 			file = pathjoin(item, base)
-			if pathExists(file):
+			if exists(file):
 				return file
 		return base
 
@@ -140,7 +140,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		skin = dirname(config.skin.primary_skin.value)
 		resolveList = [
 			pathjoin(scopeConfig, skin),
-			pathjoin(scopeConfig, "skin_common"),
+			# pathjoin(scopeConfig, "skin_common"),
 			scopeConfig,  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
 			pathjoin(scopeGUISkin, skin),
 			pathjoin(scopeGUISkin, "skin_fallback_%d" % getDesktop(0).size().height()),
@@ -189,7 +189,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		path = itemExists(resolveList, base)
 	elif scope == SCOPE_PLUGIN:
 		file = pathjoin(scopePlugins, base)
-		if pathExists(file):
+		if exists(file):
 			path = file
 	else:
 		path, flags = defaultPaths.get(scope)
@@ -335,13 +335,13 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
 
 
 def defaultRecordingLocation(candidate=None):
-	if candidate and pathExists(candidate):
+	if candidate and exists(candidate):
 		return candidate
 	try:
 		path = readlink("/hdd")  # First, try whatever /hdd points to, or /media/hdd.
 	except (IOError, OSError) as err:
 		path = "/media/hdd"
-	if not pathExists(path):  # Find the largest local disk.
+	if not exists(path):  # Find the largest local disk.
 		from Components import Harddisk
 		mounts = [mount for mount in Harddisk.getProcMounts() if mount[1].startswith("/media/")]
 		path = bestRecordingLocation([mount for mount in mounts if mount[0].startswith("/dev/")])  # Search local devices first, use the larger one.

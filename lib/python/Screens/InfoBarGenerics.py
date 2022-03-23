@@ -217,9 +217,13 @@ def hasActiveSubservicesForCurrentChannel(service):
 class InfoBarDish:
 	def __init__(self):
 		self.dishDialog = self.session.instantiateDialog(Dish)
-		if SystemInfo["OSDAnimation"]:
-			self.dishDialog.setAnimationMode(0)
+		self.dishDialog.setAnimationMode(0)
+		self.onClose.append(self.__onClose)
 
+	def __onClose(self):
+		if self.dishDialog:
+			self.dishDialog.doClose()
+			self.dishDialog = None
 
 class InfoBarLongKeyDetection:
 	def __init__(self):
@@ -801,11 +805,12 @@ class InfoBarChannelSelection:
 	def __init__(self):
 		#instantiate forever
 		self.servicelist = self.session.instantiateDialog(ChannelSelection)
+		self.onClose.append(self.__onClose)
 
 		if config.misc.initialchannelselection.value:
 			self.onShown.append(self.firstRun)
 
-		self["ChannelSelectActions"] = HelpableActionMap(self, ["InfobarChannelSelection"], {
+		self["ChannelSelectActions"] = HelpableActionMap(self, "InfobarChannelSelection", {
 			"keyUp": (self.keyUpCheck, self.getKeyUpHelptext),
 			"keyDown": (self.keyDownCheck, self.getKeyDownHelpText),
 			"keyLeft": (self.keyLeftCheck, self.getKeyLeftHelptext),
@@ -816,6 +821,12 @@ class InfoBarChannelSelection:
 			"keyChannelDown": (self.keyChannelDownCheck, self.getKeyChannelDownHelptext),
 			"openSatellitesList": (self.openSatellitesList, _("Open satellites list")),
 		}, prio=0, description=_("Service Selection Actions"))
+		self.onClose.append(self.__onClose)
+
+	def __onClose(self):
+		if self.servicelist:
+			self.servicelist.doClose()
+			self.servicelist = None
 
 	def showTvChannelList(self, zap=False):
 		self.servicelist.setModeTv()
@@ -1412,7 +1423,7 @@ class InfoBarRdsDecoder:
 				iPlayableService.evUpdatedRassSlidePic: self.RassSlidePicChanged
 			})
 
-		self["RdsActions"] = HelpableActionMap(self, ["InfobarRdsActions"], {
+		self["RdsActions"] = HelpableActionMap(self, "InfobarRdsActions", {
 			"startRassInteractive": (self.startRassInteractive, _("Start RDS interactive"))
 		}, prio=-1, description=_("InfoBar RDS Actions"))
 
@@ -1577,7 +1588,9 @@ class InfoBarSeek:
 				open("/proc/stb/lcd/symbol_hdd", "w").write("0")
 			if os.path.exists("/proc/stb/lcd/symbol_hddprogress"):
 				print("[InfoBarGenerics] Write to /proc/stb/lcd/symbol_hddprogress")
-				open("/proc/stb/lcd/symbol_hddprogress", "w").write("0")
+				with open("/proc/stb/lcd/symbol_hddprogress", "w") as f:
+					f.write("0")
+					f.close()
 			self["SeekActions"].setEnabled(False)
 #			print("not seekable, return to play")
 			self.setSeekState(self.SEEK_STATE_PLAY)
