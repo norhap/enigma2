@@ -7,9 +7,9 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigNumber, ConfigSelection, ConfigSelectionNumber, getConfigListEntry
 from Plugins.Plugin import PluginDescriptor
 from enigma import setAnimation_current, setAnimation_speed
-from Components.SystemInfo import SystemInfo, getBoxBrand
-
-brand = getBoxBrand()
+from Components.SystemInfo import SystemInfo
+from Tools.StbHardware import getBrand
+brand = getBrand()
 
 if not brand == 'GigaBlue':
 	from enigma import setAnimation_current_listbox

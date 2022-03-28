@@ -2,7 +2,7 @@
 from __future__ import print_function
 from twisted.internet import threads
 from Components.config import config
-from enigma import eTimer, iPlayableService, iServiceInformation, getBoxType, getBoxBrand
+from enigma import eTimer, iPlayableService, iServiceInformation, getBoxType
 import NavigationInstance
 from Tools.Directories import fileExists
 from Components.ParentalControl import parentalControl
@@ -10,8 +10,10 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import SystemInfo
 from time import time
 from boxbranding import getMachineBuild
+from Tools.StbHardware import getBrand
+from time import sleep
 
-brand = getBoxBrand()
+brand = getBrand()
 model = getBoxType()
 platform = getMachineBuild()
 
@@ -149,22 +151,48 @@ class SymbolsCheckPoller:
 				open("/proc/stb/lcd/symbol_rec", "w").write("0")
 		elif SystemInfo["HiSilicon"] and fileExists("/proc/stb/fp/ledpowercolor"):
 			import Screens.Standby
-			recordings = len(NavigationInstance.instance.getRecordings())
-			self.blink = not self.blink
-			print("[VfdSymbols] Write to /proc/stb/fp/ledpowercolor")
-			if recordings > 0:
-				if self.blink:
+			recordings = len(NavigationInstance.instance.getRecordings(False))
+			if recordings > 0 and not Screens.Standby.inStandby:
+				if config.usage.frontledrec_color.value == "2":
+					open("/proc/stb/fp/ledpowercolor", "w").write("2")
+				elif config.usage.frontledrec_color.value == "4":
 					open("/proc/stb/fp/ledpowercolor", "w").write("0")
-					self.led = "1"
-				else:
-					if Screens.Standby.inStandby:
-						open("/proc/stb/fp/ledpowercolor", "w").write(config.lcd.ledstandbycolor.value)
-					else:
-						open("/proc/stb/fp/ledpowercolor", "w").write(config.lcd.ledpowercolor.value)
-					self.led = "0"
-			else:
+					sleep(3) # blinking
+					open("/proc/stb/fp/ledpowercolor", "w").write("2")
+				elif config.usage.frontledrec_color.value == "3":
+					open("/proc/stb/fp/ledpowercolor", "w").write("0")
+					sleep(3) # blinking
+					open("/proc/stb/fp/ledpowercolor", "w").write("1")
+				elif config.usage.frontledrec_color.value == "1":
+					open("/proc/stb/fp/ledpowercolor", "w").write("1")
+				elif config.usage.frontledrec_color.value == "0":
+					open("/proc/stb/fp/ledpowercolor", "w").write("0")
+			if recordings > 0 and Screens.Standby.inStandby:
+				if config.usage.frontledrecstdby_color.value == "2":
+					open("/proc/stb/fp/ledpowercolor", "w").write("2")
+				elif config.usage.frontledrecstdby_color.value == "4":
+					open("/proc/stb/fp/ledpowercolor", "w").write("0")
+					sleep(3) # blinking standby
+					open("/proc/stb/fp/ledpowercolor", "w").write("2")
+				elif config.usage.frontledrecstdby_color.value == "3":
+					open("/proc/stb/fp/ledpowercolor", "w").write("0")
+					sleep(3) # blinking standby
+					open("/proc/stb/fp/ledpowercolor", "w").write("1")
+				elif config.usage.frontledrecstdby_color.value == "1":
+					open("/proc/stb/fp/ledpowercolor", "w").write("1")
+				elif config.usage.frontledrecstdby_color.value == "0":
+					open("/proc/stb/fp/ledpowercolor", "w").write("0")
+			if not recordings:
 				if Screens.Standby.inStandby:
-					open("/proc/stb/fp/ledpowercolor", "w").write(config.lcd.ledstandbycolor.value)
+					if config.usage.frontledstdby_color.value == "4":
+						open("/proc/stb/fp/ledpowercolor", "w").write("0")
+						sleep(3) # blinking standby
+						open("/proc/stb/fp/ledpowercolor", "w").write("2")
+					elif config.usage.frontledstdby_color.value == "3":
+						open("/proc/stb/fp/ledpowercolor", "w").write("0")
+						sleep(3) # blinking standby
+						open("/proc/stb/fp/ledpowercolor", "w").write("1")
+					open("/proc/stb/fp/ledpowercolor", "w").write(config.usage.frontledstdby_color.value)
 				else:
 					open("/proc/stb/fp/ledpowercolor", "w").write(config.lcd.ledpowercolor.value)
 		elif SystemInfo["FrontpanelLEDFadeControl"]:

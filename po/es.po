@@ -14547,20 +14547,20 @@ msgstr "Configure el color del LED frontal durante las operaciones normales (est
 msgid "LED color during recording"
 msgstr "Color del LED durante la grabación"
 
-msgid "Configure front LED color during recording (this needs an enigma2 restart)."
-msgstr "Configure el color del LED frontal durante la grabación (esto requiere un reinicio de enigma2)."
+msgid "Configure front LED color during recording."
+msgstr "Configure el color del LED frontal durante la grabación."
 
 msgid "LED color during recording in standby"
 msgstr "Color del LED durante grabaciones en modo reposo"
 
-msgid "Configure front LED color during recording in standby (this needs an enigma2 restart)."
-msgstr "Configure el color del LED frontal durante la grabación en modo reposo (esto necesita un reinicio de enigma2)."
+msgid "Configure front LED color during recording in standby."
+msgstr "Configure el color del LED frontal durante la grabación en modo reposo."
 
 msgid "LED color during standby"
 msgstr "Color del LED durante modo reposo"
 
-msgid "Configure front LED color during standby (this needs an enigma2 restart)."
-msgstr "Configure el color del LED frontal durante el modo reposo (esto necesita un reinicio de enigma2)."
+msgid "Configure front LED color during standby."
+msgstr "Configure el color del LED frontal durante el modo reposo."
 
 msgid "Show recording symbol"
 msgstr "Mostrar símbolo de grabación"
@@ -14595,6 +14595,8 @@ msgstr "Azul intermitente"
 msgid "Blinking red"
 msgstr "Rojo intermitente"
 
+msgid "Blinking Violet"
+msgstr "Violeta intermitente"
 msgid "Audio Sync"
 msgstr "Sincronizar Audio"
 
@@ -16526,8 +16528,8 @@ msgstr ""
 msgid "Skin setting"
 msgstr "Ajuste skin"
 
-msgid "With this option you can switch the LED color or deactivate the LED."
-msgstr "Con esta opción puede cambiar el color del LED o desactivar el LED."
+msgid "Configure color of the LED when is operation."
+msgstr "Configure el color del LED frontal cuando está en funcionamiento."
 
 msgid "violet"
 msgstr "violeta"
@@ -16538,11 +16540,14 @@ msgstr "Violeta"
 msgid "Operating LED status in deep standby mode"
 msgstr "Estado del LED en reposo profundo"
 
+msgid "Configure  color front LED during deep standby mode."
+msgstr "Configure el color del LED frontal durante el modo de espera profundo."
+
 msgid "Operating LED status in standby mode"
 msgstr "Estado del LED en standby"
 
-msgid "Operating LED status while running."
-msgstr "Estado del LED en funcionamiento."
+msgid "Operating LED status while running"
+msgstr "Estado del LED en funcionamiento"
 
 msgid "Switch on the display during Standby Mode"
 msgstr "Encender la pantalla en standby"
@@ -18204,11 +18209,11 @@ msgid ""
 "\n"
 "'Delete Language' allows either deletion of all but English and active language OR selected language."
 msgstr ""
-"'Guardar' cambia el idioma activo."
+"\"Guardar\" cambia el idioma activo."
 "\n"
-"'Agregar idioma' o MENÚ agrega idioma(s) adicional(es)."
+"\"Añadir Lenguage\" o \"MENU\" agrega idioma(s) adicional(es)."
 "\n"
-"'Eliminar idioma' permite eliminar todo menos el inglés y el idioma activo o el idioma seleccionado."
+"\"Eliminar lenguage(s)\" permite eliminar todo menos el inglés y el idioma activo o el idioma seleccionado."
 
 msgid "Add Language"
 msgstr "Añadir Lenguage"
