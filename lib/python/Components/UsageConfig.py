@@ -3,7 +3,7 @@ from os import mkdir, remove
 from os.path import exists, isfile, islink, join as pathjoin, normpath
 from time import mktime
 
-from boxbranding import getDisplayType, getHaveWOL, getMachineBuild
+from boxbranding import getHaveWOL
 from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache, getBoxType
 
 from skin import parameters
@@ -24,7 +24,6 @@ config.crash.debugRemoteControls = ConfigYesNo(default=False)
 config.crash.debugScreens = ConfigYesNo(default=False)
 
 model = getBoxType()
-displaytype = getDisplayType()
 
 originalAudioTracks = "orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ oth"
 visuallyImpairedCommentary = "NAR qad"
@@ -593,7 +592,7 @@ def InitUsageConfig():
 	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
 	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
 
-	if displaytype == "7segment" or "7seg" in displaytype:
+	if SystemInfo["7segment"]:
 		config.usage.blinking_display_clock_during_recording = ConfigSelection(default="Rec", choices=[
 			("Rec", _("REC")),
 			("RecBlink", _("Blinking REC")),
@@ -603,13 +602,14 @@ def InitUsageConfig():
 	else:
 		config.usage.blinking_display_clock_during_recording = ConfigYesNo(default=False)
 
-	if displaytype == "textlcd" or "text" in displaytype:
+	# blink for displaytext not in 7segment
+	if SystemInfo["textlcd"]:
 		config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default="Channel", choices=[
 			("Rec", _("REC symbol")),
 			("RecBlink", _("Blinking REC symbol")),
 			("Channel", _("Channel name"))
 		])
-	if displaytype == "7segment" or "7seg" in displaytype:
+	if SystemInfo["7segment"]:
 		config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default="Rec", choices=[
 			("Rec", _("REC")),
 			("RecBlink", _("Blinking REC")),
@@ -618,8 +618,8 @@ def InitUsageConfig():
 	else:
 		config.usage.blinking_rec_symbol_during_recording = ConfigYesNo(default=True)
 
-	if displaytype == "7segment" or "7seg" in displaytype:
-		config.usage.show_in_standby = ConfigSelection(default="time", choices=[
+	# show/hide time in display in standby
+	config.usage.show_in_standby = ConfigSelection(default="time", choices=[
 		("time", _("Time")),
 		("nothing", _("Nothing"))
 	])

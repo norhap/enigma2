@@ -7128,7 +7128,7 @@ msgid "Thursday"
 msgstr "Jueves"
 
 msgid "Time"
-msgstr "Horario"
+msgstr "Hora"
 
 msgid "Time Setup"
 msgstr "Ajustes Horario"
@@ -14535,8 +14535,11 @@ msgstr "Establezca el tiempo de retardo entre los bucles repetidos, esto es usad
 msgid "Show HDD progress"
 msgstr "Mostrar progreso HDD"
 
-msgid "Disable the HDD Process on VFD"
-msgstr "Deshabilite el proceso HDD en VFD"
+msgid "Disable the HDD Process on VFD."
+msgstr "Deshabilite el proceso HDD en VFD."
+
+msgid "Show HDMI Output Resulution."
+msgstr "Mostrar resolución HDMI en display."
 
 msgid "LED color during normal operations"
 msgstr "Color del LED durante las operaciones normales"
@@ -14778,8 +14781,8 @@ msgstr "Configure si y por cuánto tiempo se recordará el último servicio en e
 msgid "Use separate picon pack for front panel display"
 msgstr "Use un paquete de picon separado para la pantalla del display"
 
-msgid "Use piconlcd directory for picons on color LCD"
-msgstr "Use el directorio piconlcd para picons en color LCD"
+msgid "Use piconlcd directory for picons on color LCD."
+msgstr "Use el directorio piconlcd para picons en color LCD."
 
 msgid "Show Transponder Remaining/Elapsed as"
 msgstr "Mostrar transpondedor Restante/Transcurrido como"
@@ -14928,14 +14931,17 @@ msgstr "Configure la altura de las letras de fuente TrueType utilizadas para el 
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr "Seleccione el método para restaurar la resolución de pantalla y el framebuffer cuando salga del teletexto."
 
-msgid "Show MiniTV in the front panel display"
-msgstr "Mostrar MiniTV en el display"
+msgid "Show MiniTV in the front panel display."
+msgstr "Mostrar MiniTV en el display."
 
-msgid "Show PIP in the front panel display"
-msgstr "Mostrar PIP en el display"
+msgid "Show PIP in the front panel display."
+msgstr "Mostrar PIP en el display."
 
-msgid "Set framerate for MiniTV"
-msgstr "Establecer framerate para MiniTV"
+msgid "Show framerate MiniTV in the front panel display."
+msgstr "Mostrar framerate MiniTV en display."
+
+msgid "Enable screenshot of LCD in /tmp."
+msgstr "Habilite la captura de pantalla de LCD en /tmp."
 
 msgid "Fixed X11 font (SD)"
 msgstr "Fuente fija X11 (SD)"
@@ -14943,14 +14949,17 @@ msgstr "Fuente fija X11 (SD)"
 msgid "REC symbol in use"
 msgstr "Símbolo REC en uso"
 
-msgid "Enable blinking REC symbol on the LCD display"
-msgstr "Active el símbolo REC parpadeante en la pantalla LCD"
+msgid "Enable blinking REC symbol on the LCD display (this needs an enigma2 restart)."
+msgstr "Habilite el símbolo REC intermitente en la pantalla LCD (esto necesita un reinicio de enigma2)."
 
 msgid "REC symbol in Standby"
 msgstr "Símbolo REC en reposo"
 
-msgid "In the Standby record on the LCD display"
-msgstr "En grabación modo reposo en la pantalla LCD"
+msgid "In the Standby record on the LCD display (this needs an enigma2 restart)."
+msgstr "Muestra en grabacion símbolo REC en display LCD (esto necesita un reinicio de enigma2)."
+
+msgid "This option allows you to Power Off the display."
+msgstr "Esta opción le permite apagar la pantalla display."
 
 msgid "PowerControl front display normal mode"
 msgstr "Control Encendido display en modo normal"
@@ -14962,10 +14971,16 @@ msgid "PowerControl front display suspend mode"
 msgstr "Control Encendido display en modo reposo profundo"
 
 msgid "Show in Standby"
-msgstr "Mostrar en modo reposo"
+msgstr "Mostrar en standby"
 
-msgid "This option allows you choose how to display the time or nothing in Standby"
-msgstr "Esta opción le permite elegir cómo mostrar la hora o nada en modo espera"
+msgid "This option allows you choose how to display the time or nothing in Standby."
+msgstr "Esta opción le permite elegir mostrar la hora o nada en standby."
+
+msgid "Turn on the power LED"
+msgstr "Encienda el LED de encendido"
+
+msgid "Turn on the control LED"
+msgstr "Enciende el LED de control"
 
 msgid "Display skin"
 msgstr "Skin Display"
@@ -16144,6 +16159,9 @@ msgstr "LED en Standby o Reposo Profundo"
 msgid "Power LED can be turned on or off here."
 msgstr "El LED de encendido se puede encender o apagar aquí."
 
+msgid "Control LED can be turned on or off here."
+msgstr "El LED de control se puede encender o apagar aquí."
+
 msgid "Power LED state during deep-standby."
 msgstr "Estado del LED de encendido durante modo de espera profundo."
 
@@ -16160,7 +16178,7 @@ msgid "Power LED state when running."
 msgstr "Estado del LED de encendido cuando está en marcha."
 
 msgid "Power On Display"
-msgstr "Encendido en Display"
+msgstr "Encendido de pantalla display"
 
 msgid "Swap EN300743 mapping table"
 msgstr "Intercambiar mapeo de la tabla EN300743"
@@ -16555,8 +16573,8 @@ msgstr "Encender la pantalla en standby"
 msgid "Switch on the display during Suspend Mode"
 msgstr "Encender la pantalla durante reposo profundo"
 
-msgid "Switch on the display during operation."
-msgstr "Encender la pantalla durante el funcionamiento."
+msgid "Switch on the display during operation"
+msgstr "Encender la pantalla durante el funcionamiento"
 
 msgid "With this option you can switch on the display during operation."
 msgstr "Con esta opción puede encender la pantalla durante el funcionamiento."
