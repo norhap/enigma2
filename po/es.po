@@ -14595,6 +14595,9 @@ msgstr "Consulte la hoja de especificaciones de su dispositivo SCR para obtener 
 msgid "Blinking blue"
 msgstr "Azul intermitente"
 
+msgid "Blinking REC"
+msgstr "REC intermitente"
+
 msgid "Blinking red"
 msgstr "Rojo intermitente"
 
@@ -14949,14 +14952,14 @@ msgstr "Fuente fija X11 (SD)"
 msgid "REC symbol in use"
 msgstr "Símbolo REC en uso"
 
-msgid "Enable blinking REC symbol on the LCD display (this needs an enigma2 restart)."
-msgstr "Habilite el símbolo REC intermitente en la pantalla LCD (esto necesita un reinicio de enigma2)."
+msgid "Configure how to show REC symbol in use (this needs an enigma2 restart)."
+msgstr "Configurar cómo mostrar el símbolo REC en funcionamiento (esto necesita un reinicio de enigma2)."
 
 msgid "REC symbol in Standby"
 msgstr "Símbolo REC en reposo"
 
-msgid "In the Standby record on the LCD display (this needs an enigma2 restart)."
-msgstr "Muestra en grabacion símbolo REC en display LCD (esto necesita un reinicio de enigma2)."
+msgid "Configure how to show REC symbol in standby (this needs an enigma2 restart)."
+msgstr "Configurar cómo mostrar el símbolo REC en standby (esto necesita un reinicio de enigma2)."
 
 msgid "This option allows you to Power Off the display."
 msgstr "Esta opción le permite apagar la pantalla display."
