@@ -27,6 +27,7 @@ supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
 
 e2path = "/etc/enigma2"
 
+
 class ImportChannels():
 
 	def __init__(self):
