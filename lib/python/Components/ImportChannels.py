@@ -162,7 +162,7 @@ class ImportChannels():
 
 		if "channels" in self.remote_fallback_import:
 			print("[ImportChannels] Enumerate remote files")
-			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio');
+			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio')
 
 			print("[Import Channels] Enumerate remote support files")
 			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)).read())["files"]:
@@ -178,7 +178,7 @@ class ImportChannels():
 					print("[ImportChannels] Exception: %s" % str(e))
 
 			print("[ImportChannels] Enumerate local files")
-			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio');
+			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')
 
 			print("[ImportChannels] Removing old local files...")
 			for file in files:
