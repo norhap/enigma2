@@ -18217,8 +18217,11 @@ msgstr "Mostrar la página anterior de descripción"
 msgid "You seem to be in timeshift!"
 msgstr "Parece que estás en Timeshift!"
 
-msgid "Network interface for MAC address."
-msgstr "Interfaz de red para dirección MAC."
+msgid "Interface to change MAC"
+msgstr "Interfaz para cambiar MAC"
+
+msgid "Network interface for change MAC address (to change WiFi MAC have previous activated LAN DHCP)."
+msgstr "Interfaz de red para cambiar dirección MAC (para cambiar MAC WiFi tenga activado previamente LAN DHCP)."
 
 msgid "No log: please try later again"
 msgstr "Sin registro: inténtelo más tarde de nuevo"
