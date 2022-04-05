@@ -87,8 +87,8 @@ def moviePlayState(cutsFileName, ref, length):
 	'''Returns None, 0..100 for percentage'''
 	try:
 		# read the cuts file first
-		f = open(cutsFileName, 'rb')
-		lastPosition = None
+		with open(cutsFileName, 'rb') as f:
+			lastPosition = None
 		while True:
 			data = f.read(cutsParser.size)
 			if len(data) < cutsParser.size:

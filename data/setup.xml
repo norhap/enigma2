@@ -143,7 +143,7 @@
 		<item level="2" text="Log python stack trace on spinner" description="Set to yes for debugging the root cause of a spinner.">config.crash.pythonStackOnSpinner</item>
 	</setup>
 	<setup key="MACAddress" title="MAC Address Setup">
-		<item level="0" text="Interface to change MAC" description="Network interface for change MAC address (to change WiFi MAC have previous activated LAN DHCP).">config.macaddress.interfaces</item>
+		<item level="0" text="Interface to change MAC" description="Network interface for change MAC address (to change WiFi MAC have previous activated LAN-WLAN DHCP).">config.macaddress.interfaces</item>
 		<item level="0" text="Set new MAC address" description="Press OK to activate current MAC address.">config.macaddress.change</item>
 	</setup>
 	<setup key="MovieSelection" title="Movie Selection Setup">
@@ -157,9 +157,9 @@
 		<item level="0" text="Number of rows" description="Number of rows to display">config.movielist.itemsperpage</item>
 		<item level="0" text="Use slim screen" description="Use the alternative screen">config.movielist.useslim</item>
 		<item level="0" text="Use adaptive date display" description="Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'. It hides the year for recordings made this year. It hides the day of the week for recordings made in previous years.">config.movielist.use_fuzzy_dates</item>
-		<item level="0" text="Sort" description="Set the default sorting method.">config.movielist.moviesort</item>
+		<item level="0" text="Sort" description="Set the default sorting method.">self.cfg.moviesort</item>
 		<item level="0" text="Sort Trash by deletion time" description="Use the deletion time to sort Trash directories. Most recently deleted at the top.">config.usage.trashsort_deltime</item>
-		<item level="0" text="Show extended description" description="Show or hide the extended description, (skin dependant).">config.movielist.description</item>
+		<item level="0" text="Show extended description" description="Show or hide the extended description, (skin dependant).">self.cfg.description</item>
 		<item level="0" text="Use individual settings for each directory" description="When set, each directory will show the previous state used. When off, the default values will be shown.">config.movielist.settings_per_directory</item>
 		<item level="0" text="Permanent sort key changes" description="When set, sort changes via the sort key will be permanent. When unset, sort changes will be temporary, just for this view of a directory." conditional="not config.movielist.settings_per_directory.value">config.movielist.perm_sort_changes</item>
 		<item level="0" text="Stop service on return to movie list" description="Stop previous broadcasted service on return to movie list.">config.movielist.stop_service</item>

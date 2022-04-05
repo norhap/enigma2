@@ -16,7 +16,7 @@ from RecordTimer import AFTEREVENT, RecordTimerEntry
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ChoiceList import ChoiceEntryComponent, ChoiceList
-from Components.config import ConfigLocations, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSubsection, ConfigText, ConfigYesNo, config, getConfigListEntry
+from Components.config import ConfigLocations, ConfigSelection, ConfigInteger, ConfigSelectionNumber, ConfigSet, ConfigSubsection, ConfigText, ConfigYesNo, config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.DiskInfo import DiskInfo
 from Components.Harddisk import harddiskmanager
@@ -72,10 +72,6 @@ l_moviesort = [
 	(str(MovieList.SORT_SHUFFLE), _("Shuffle"), "Shuffle")
 ]
 
-l_desc = [
-	(str(MovieList.SHOW_DESCRIPTION), _("Yes")),
-	(str(MovieList.HIDE_DESCRIPTION), _("No"))]
-
 # 4th item is the textual value set in UsageConfig.py
 #
 l_trashsort = [
@@ -115,9 +111,7 @@ config.movielist.useslim = ConfigYesNo(default=False)
 config.movielist.use_fuzzy_dates = ConfigYesNo(default=True)
 # config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_GROUPWISE)
 config.movielist.moviesort = ConfigSelection(default=str(MovieList.SORT_GROUPWISE), choices=[(x[0], x[1]) for x in l_moviesort])
-# config.movielist.description = ConfigInteger(default=MovieList.SHOW_DESCRIPTION)
-# cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
-config.movielist.description = ConfigSelection(default=str(MovieList.SHOW_DESCRIPTION), choices=l_desc)
+config.movielist.description = ConfigInteger(default=MovieList.SHOW_DESCRIPTION)
 config.movielist.settings_per_directory = ConfigYesNo(default=True)
 config.movielist.perm_sort_changes = ConfigYesNo(default=True)
 config.movielist.stop_service = ConfigYesNo(default=False)
@@ -2220,7 +2214,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 		ProtectedScreen.__init__(self)
 		self.skinName = "Setup"
 		self.setTitle(_("Movie List Context Menu"))
-		# No ConfigText fields in MovieBrowserConfiguration so these are not currently used.
+		# No ConfigText fields in MovieSelectionSetup so these are not currently used.
 		# self["HelpWindow"] = Pixmap()
 		# self["HelpWindow"].hide()
 		# self["VKeyIcon"] = Boolean(False)
@@ -2367,12 +2361,23 @@ class MovieContextMenuSummary(Screen):
 
 
 class MovieSelectionSetup(Setup):
-	def __init__(self, session):
-		Setup.__init__(self, session, setup="MovieSelection")
-		self.setTitle(_("Movie Selection Setup"))
+	def __init__(self, session, args=0):
+		if args:
+			print("[MovieSelectionSetup] args is deprecated, because it is unused")
+		cfg = ConfigSubsection()
+		cfg.moviesort = ConfigSelection(default=str(config.movielist.moviesort.value), choices=l_moviesort)
+		cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
+		self.cfg = cfg # self.cfg for self.cfg.moviesort and self.cfg.description ( setup.xml ).
+		Setup.__init__(self, session, setup="MovieSelection") # must be at this level for cfg to be a MovieSelection object.
 
 	def keySave(self):
 		self.saveAll()
+		cfg = self.cfg
+		config.movielist.moviesort.value = int(cfg.moviesort.value)
+		if cfg.description.value:
+			config.movielist.description.value = MovieList.SHOW_DESCRIPTION
+		else:
+			config.movielist.description.value = MovieList.HIDE_DESCRIPTION
 		self.close(True)
 
 	def closeConfigList(self, closeParameters=()):
