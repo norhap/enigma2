@@ -35,7 +35,7 @@ def languageNotifier(configElement):
 	language.activateLanguage(configElement.value)
 
 config.osd = ConfigSubsection()
-config.osd.language = ConfigText(default="en_GB")
+config.osd.language = ConfigText(default="en_US")
 config.osd.language.addNotifier(languageNotifier)
 
 def setEPGCachePath(configElement):
