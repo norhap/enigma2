@@ -18292,3 +18292,42 @@ msgid ""
 msgstr ""
 "Realmente desea eliminar el idioma seleccionado?:\n"
 "\n"
+
+msgid "Cancel the action selection and exit"
+msgstr "Cancelar la selección de acción y salir"
+
+msgid "Run the currently highlighted action"
+msgstr "Ejecutar la acción resaltada actualmente"
+
+msgid "Run the numbered action"
+msgstr "Ejecutar la acción numerada"
+
+msgid "Run the RED action"
+msgstr "Ejecute la acción botón ROJO"
+
+msgid "Run the GREEN action"
+msgstr "Ejecute la acción botón VERDE"
+
+msgid "Run the YELLOW action"
+msgstr "Ejecute la acción botón AMARILLO"
+
+msgid "Run the BLUE action"
+msgstr "Ejecute la acción botón AZUL"
+
+msgid "Choice Box Actions"
+msgstr "Elección de Acciones"
+
+msgid "Reset list order to default"
+msgstr "Restablecer el orden de lista por defecto"
+
+msgid "Choice Box Order Actions"
+msgstr "Elección de orden de Acciones"
+
+msgid "Move the current item up one line"
+msgstr "Mover el elemento actual una línea hacia arriba"
+
+msgid "Move the current item down one line"
+msgstr "Mover el elemento actual una línea hacia abajo"
+
+msgid "Reset list order to default?"
+msgstr "Restablecer el orden por defecto de la lista?"
