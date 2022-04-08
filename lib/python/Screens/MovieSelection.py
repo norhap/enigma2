@@ -1194,19 +1194,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def configure(self):
 		self.session.openWithCallback(self.configureDone, MovieSelectionSetup)
 
-	def configureDone(self, result):
-		if result is True:
-			self.applyConfigSettings({
-				"moviesort": config.movielist.moviesort.value,
-				"description": config.movielist.description.value,
-				"movieoff": config.usage.on_movie_eof.value
-			})
-			self.saveLocalSettings()
-			self._updateButtonTexts()
-			self["list"].setItemsPerPage()
-			self["list"].setFontsize()
-			self.reloadList()
-			self.updateDescription()
+	def configureDone(self):
+		self.applyConfigSettings({
+			"moviesort": config.movielist.moviesort.value,
+			"description": config.movielist.description.value,
+			"movieoff": config.usage.on_movie_eof.value
+		})
+		self.saveLocalSettings()
+		self._updateButtonTexts()
+		self["list"].setItemsPerPage()
+		self["list"].setFontsize()
+		self.reloadList()
+		self.updateDescription()
 
 	def can_sortby(self, item):
 		return True
@@ -2361,27 +2360,19 @@ class MovieContextMenuSummary(Screen):
 
 
 class MovieSelectionSetup(Setup):
-	def __init__(self, session, args=0):
-		if args:
-			print("[MovieSelectionSetup] args is deprecated, because it is unused")
+	def __init__(self, session):
 		cfg = ConfigSubsection()
-		cfg.moviesort = ConfigSelection(default=str(config.movielist.moviesort.value), choices=l_moviesort)
 		cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
-		self.cfg = cfg # self.cfg for self.cfg.moviesort and self.cfg.description ( setup.xml ).
+		self.cfg = cfg # for self.cfg.description ( setup.xml ).
 		Setup.__init__(self, session, setup="MovieSelection") # must be at this level for cfg to be a MovieSelection object.
 
 	def keySave(self):
 		self.saveAll()
-		cfg = self.cfg
-		config.movielist.moviesort.value = int(cfg.moviesort.value)
-		if cfg.description.value:
+		if self.cfg.description.value:
 			config.movielist.description.value = MovieList.SHOW_DESCRIPTION
 		else:
 			config.movielist.description.value = MovieList.HIDE_DESCRIPTION
-		self.close(True)
-
-	def closeConfigList(self, closeParameters=()):
-		Setup.closeConfigList(self, (False,))
+		self.close()
 
 
 playlist = []
