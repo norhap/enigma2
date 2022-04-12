@@ -3617,8 +3617,8 @@ msgstr "Enlace:"
 msgid "Linked titles with a DVD menu"
 msgstr "Títulos vinculados con un menú de DVD"
 
-msgid "List mode"
-msgstr "Modo Pip"
+msgid "Mode PiP"
+msgstr "Modo PiP"
 
 msgid "List of storage devices"
 msgstr "Lista de dispositivos de almacenamiento"
@@ -6459,8 +6459,8 @@ msgstr "Hora de inicio para ignorar el apagado en modo de reposo"
 msgid "Start timeshift"
 msgstr "Iniciar Timeshift"
 
-msgid "Start with list screen"
-msgstr "Iniciar lista con pantalla"
+msgid "Show list with PiP"
+msgstr "Mostrar lista con PiP"
 
 msgid "Starting on"
 msgstr "A partir de la fecha"
