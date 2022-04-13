@@ -282,9 +282,7 @@ class OscamInfo:
 							tmp[cl.attrib["type"]].append((name, proto, "%s:%s" % (caid, srvid), srvname_short, ecmtime, ip, connstatus))
 			else:
 				cdata = 'b"<![CDATA"'
-				if cdata not in result[1]:
-					tmp = result[1].replace("<log>", "<log><![CDATA[").replace("</log>", "]]></log>")
-				else:
+				if cdata:
 					tmp = result[1]
 				data = ElementTree.XML(result[1])
 				log = data.find("log")

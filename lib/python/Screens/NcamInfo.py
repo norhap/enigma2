@@ -280,7 +280,7 @@ class NcamInfo:
 							tmp[cl.attrib["type"]].append((name, proto, "%s:%s" % (caid, srvid), srvname_short, ecmtime, ip, connstatus))
 			else:
 				cdata = 'b"<![CDATA"'
-				if cdata not in result[1]:
+				if cdata:
 					tmp = result[1]
 				data = ElementTree.XML(tmp)
 				log = data.find("log")
