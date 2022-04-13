@@ -1,5 +1,5 @@
 from os import waitpid
-from six import PY3
+from sys import version_info
 from enigma import eConsoleAppContainer
 
 
@@ -47,7 +47,7 @@ class ConsoleItem:
 		self.container = None
 		if self.callback != None:
 			appResults = b"".join(self.appResults)
-			if PY3:
+			if version_info.major >= 3:
 				appResults = appResults if self.binary else appResults.decode()
 			appResults = appResults if self.binary else appResults
 

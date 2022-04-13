@@ -1,6 +1,6 @@
 from __future__ import print_function
-from six import PY3
-if PY3:
+from sys import version_info
+if version_info.major >= 3:
 	from pickle import dump, load
 else:
 	from cPickle import dump, load
@@ -669,7 +669,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.list.moveToChar(charstr[0], self["chosenletter"])
 
 	def keyAsciiCode(self):
-		if PY3:
+		if version_info.major >= 3:
 			charstr = chr(getPrevAsciiCode())
 		else:
 			charstr = unichr(getPrevAsciiCode())

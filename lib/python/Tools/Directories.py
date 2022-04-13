@@ -2,7 +2,7 @@ from errno import ENOENT, EXDEV
 from os import F_OK, R_OK, W_OK, access, chmod, link, listdir, makedirs, mkdir, readlink, remove, rename, rmdir, sep, stat, statvfs, symlink, utime, walk
 from os.path import basename, dirname, exists, getsize, isdir, isfile, islink, join as pathjoin, normpath, splitext
 from re import compile
-from six import PY2
+from sys import version_info
 from shutil import copy2
 from stat import S_IMODE
 from tempfile import mkstemp
@@ -80,7 +80,7 @@ scopePlugins = defaultPaths[SCOPE_PLUGINS][0]
 
 
 def getEncodingType(filename):
-	if not PY2:
+	if version_info.major >= 3:
 		with open(filename, 'rb') as f:
 			data = f.read()
 		return detect(data)["encoding"]
@@ -205,12 +205,12 @@ def resolveFilename(scope, base="", path_prefix=None):
 def fileReadLine(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	line = None
 	try:
-		if PY2:
-			with open(filename, "r") as fd:
-				line = fd.read().strip().replace("\0", "")
-		else:
+		if version_info.major >= 3:
 			type_codec = getEncodingType(filename)
 			with open(filename, "r", encoding=type_codec) as fd:
+				line = fd.read().strip().replace("\0", "")
+		else:
+			with open(filename, "r") as fd:
 				line = fd.read().strip().replace("\0", "")
 		msg = "Read"
 	except (IOError, OSError) as err:
@@ -241,12 +241,12 @@ def fileWriteLine(filename, line, source=DEFAULT_MODULE_NAME, debug=False):
 def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	lines = None
 	try:
-		if PY2:
-			with open(filename, "r") as fd:
-				lines = fd.read().splitlines()
-		else:
+		if version_info.major >= 3:
 			type_codec = getEncodingType(filename)
 			with open(filename, "r", encoding=type_codec) as fd:
+				lines = fd.read().splitlines()
+		else:
+			with open(filename, "r") as fd:
 				lines = fd.read().splitlines()
 		msg = "Read"
 	except (IOError, OSError) as err:
@@ -281,8 +281,8 @@ def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
 def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	dom = None
 	try:
-		if PY2:
-			with open(filename, "r") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
+		if version_info.major >= 3:
+			with open(filename, "r", encoding="UTF-8") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
 				try:
 					dom = parse(fd).getroot()
 					msg = "Read"
@@ -297,7 +297,7 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
 				except Exception as err:
 					print("[%s] Error: Unable to parse data in '%s' - '%s'!" % (source, filename, err))
 		else:
-			with open(filename, "r", encoding="UTF-8") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
+			with open(filename, "r") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
 				try:
 					dom = parse(fd).getroot()
 					msg = "Read"
@@ -372,7 +372,7 @@ def bestRecordingLocation(candidates):
 
 def getRecordingFilename(basename, dirname=None):
 	nonAllowedCharacters = "/.\\:*?<>|\""  # Filter out non-allowed characters.
-	basename = basename.replace("\xc2\x86", "").replace("\xc2\x87", "") if PY2 else basename.replace("\x86", "").replace("\x87", "")
+	basename = basename.replace("\x86", "").replace("\x87", "") if version_info.major >= 3 else basename.replace("\xc2\x86", "").replace("\xc2\x87", "")
 	filename = ""
 	for character in basename:
 		if character in nonAllowedCharacters or ord(character) < 32:
@@ -382,7 +382,7 @@ def getRecordingFilename(basename, dirname=None):
 	# but must not truncate in the middle of a multi-byte utf8 character!
 	# So convert the truncation to unicode and back, ignoring errors, the
 	# result will be valid utf8 and so xml parsing will be OK.
-	filename = unicode(filename[:247], "UTF8", "ignore").encode("UTF8", "ignore") if PY2 else filename[:247]
+	filename = filename[:247] if version_info.major >= 3 else unicode(filename[:247], "UTF8", "ignore").encode("UTF8", "ignore")
 	if dirname is None:
 		dirname = defaultRecordingLocation()
 	else:
@@ -585,7 +585,7 @@ def fileExists(file, mode="r"):
 def fileContains(file, content, mode="r"):
 	result = False
 	if fileExists(file, mode):
-		if not PY2:
+		if version_info.major >= 3:
 			type_codec = getEncodingType(file)
 			with open(file, mode, encoding=type_codec) as fd:
 				text = fd.read()
@@ -680,10 +680,10 @@ def isPluginInstalled(pluginName, pluginFile="plugin", pluginType=None):
 	types = ["Extensions", "SystemPlugins"]
 	if pluginType:
 		types = [pluginType]
-	if PY2:
-		extensions = ["o", ""]
-	else:
+	if version_info.major >= 3:
 		extensions = ["c", ""]
+	else:
+		extensions = ["o", ""]
 	for type in types:
 		for extension in extensions:
 			if isfile(pathjoin(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):

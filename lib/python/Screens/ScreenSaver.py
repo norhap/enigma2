@@ -5,16 +5,13 @@ from Components.Pixmap import Pixmap
 from Components.config import config
 import Screens.Standby
 from enigma import ePoint, eTimer, iPlayableService, eActionMap
-import os
+from os.path import splitext
 import random
-from six import PY2
-if PY2:
-	from sys import maxint
-	maximport = maxint
-else:
+from sys import version_info
+if version_info.major >= 3:
 	from sys import maxsize
-	maximport = maxsize
-from os import sys
+else:
+	from sys import maxint as maxsize
 
 
 class InfoBarScreenSaver:
@@ -46,7 +43,7 @@ class InfoBarScreenSaver:
 			ref = self.session.nav.getCurrentlyPlayingServiceReference()
 			if ref and not pip_show:
 				ref = ref.toString().split(":")
-				flag = ref[2] in ("2", "A") or os.path.splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS
+				flag = ref[2] in ("2", "A") or splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS
 		if time and flag and not pip_show:
 			self.screenSaverTimer.startLongTimer(time)
 		else:
@@ -58,7 +55,7 @@ class InfoBarScreenSaver:
 			if hasattr(self, "pvrStateDialog"):
 				self.pvrStateDialog.hide()
 			self.screensaver.show()
-			eActionMap.getInstance().bindAction('', -maximport - 1, self.keypressScreenSaver)
+			eActionMap.getInstance().bindAction('', -maxsize - 1, self.keypressScreenSaver)
 
 	def keypressScreenSaver(self, key, flag):
 		if flag:
@@ -109,7 +106,7 @@ class Screensaver(Screen):
 			ref = self.session.nav.getCurrentlyPlayingServiceReference()
 			if ref:
 				ref = ref.toString().split(":")
-				if not os.path.splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS:
+				if not splitext(ref[10])[1].lower() in AUDIO_EXTENSIONS:
 					self.hide()
 
 	def doMovePicture(self):

@@ -1,4 +1,4 @@
-from six import PY2
+from sys import version_info
 
 from enigma import eLabel
 
@@ -6,7 +6,7 @@ from Components.GUIComponent import GUIComponent
 from Components.VariableText import VariableText
 from Tools.NumericalTextInput import NumericalTextInput
 
-pyunichr = unichr if PY2 else chr
+pyunichr = chr if version_info.major >= 3 else unichr
 
 
 class Input(VariableText, GUIComponent, NumericalTextInput):
@@ -31,11 +31,11 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		return len(self.text)
 
 	def getText(self):
-		return self.textU.encode("UTF-8", "ignore") if PY2 else self.textU
+		return self.textU if version_info.major >= 3 else self.textU.encode("UTF-8", "ignore")
 
 	def setText(self, text):
 		if len(text):
-			self.textU = text.decode("UTF-8", "ignore") if PY2 else text
+			self.textU = text if version_info.major >= 3 else text.decode("UTF-8", "ignore")
 		else:
 			self.currPos = 0
 			self.textU = u""
@@ -63,14 +63,14 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 				for x in self.textU[self.offset:self.offset + self.visibleWidth]:
 					self.text += (x == " " and u"\u00A0" or "*")
 			else:
-				self.text = self.textU[self.offset:self.offset + self.visibleWidth].encode("UTF-8", "ignore") + u"\u00A0" if PY2 else self.textU[self.offset:self.offset + self.visibleWidth] + u"\u00A0"
+				self.text = self.textU[self.offset:self.offset + self.visibleWidth] + u"\u00A0" if version_info.major >= 3 else self.textU[self.offset:self.offset + self.visibleWidth].encode("UTF-8", "ignore") + u"\u00A0"
 		else:
 			if self.type == self.PIN:
 				self.text = ""
 				for x in self.textU:
 					self.text += (x == " " and u"\u00A0" or "*")
 			else:
-				self.text = self.textU.encode("UTF-8", "ignore") + u"\u00A0" if PY2 else self.textU + u"\u00A0"
+				self.text = self.textU + u"\u00A0" if version_info.major >= 3 else self.textU.encode("UTF-8", "ignore") + u"\u00A0"
 
 	def createWidget(self, parent):
 		if self.allMarked:
@@ -149,7 +149,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		self.update()
 
 	def insertChar(self, ch, pos=False, owr=False, ins=False):
-		ch = ch.decode("UTF-8", "ignore") if PY2 else ch
+		ch = ch if version_info.major >= 3 else ch.decode("UTF-8", "ignore")
 		n = len(ch)
 		if not pos:
 			pos = self.currPos

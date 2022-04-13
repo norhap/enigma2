@@ -4,7 +4,6 @@ from Screens.ScanSetup import ScanSetup, buildTerTransponder
 from Screens.ServiceScan import ServiceScan
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-from six import PY3
 from Components.Sources.FrontendStatus import FrontendStatus
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager, getConfigSatlist
@@ -14,6 +13,7 @@ from Components.TuneTest import Tuner
 from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
 from Screens.Screen import Screen # for services found class
+from sys import version_info
 import skin
 
 try: # for reading the current transport stream (SatfinderExtra)
@@ -894,7 +894,7 @@ class SatfinderExtra(Satfinder):
 				colour = green
 			else:
 				colour = red
-			services.append("%s%s%s" % (dash, colour, service["service_name"])) if PY3 else services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
+			services.append("%s%s%s" % (dash, colour, service["service_name"])) if version_info.major >= 3 else services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
 
 		self.session.open(ServicesFound, "\n".join(services), legend)
 

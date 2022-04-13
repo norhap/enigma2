@@ -1,4 +1,4 @@
-from six import PY2
+from sys import version_info
 from time import time
 from timer import TimerEntry as RealTimerEntry
 
@@ -202,11 +202,11 @@ class PowerTimerEditList(Screen):
 		list.extend([(timer, False) for timer in self.session.nav.PowerTimer.timer_list])
 		list.extend([(timer, True) for timer in self.session.nav.PowerTimer.processed_timers])
 		if config.usage.timerlist_finished_timer_position.index: #end of list
-			if PY2:
-				list.sort(cmp=eol_compare)
-			else:
+			if version_info.major >= 3:
 				import functools
 				list.sort(key=functools.cmp_to_key(eol_compare))
+			else:
+				list.sort(cmp=eol_compare)
 		else:
 			list.sort(key=lambda x: x[0].begin)
 

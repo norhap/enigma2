@@ -1,6 +1,6 @@
 from copy import copy, deepcopy
-from six import PY2, iteritems
-
+from six import iteritems
+from sys import version_info
 from enigma import BT_SCALE, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_CENTER, RT_VALIGN_TOP, eListboxPythonMultiContent, getDesktop, getPrevAsciiCode, gFont
 
 from skin import fonts, parameters
@@ -18,7 +18,7 @@ from Tools.Directories import SCOPE_GUISKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
 
-pyunichr = unichr if PY2 else chr
+pyunichr = chr if version_info.major >= 3 else unichr
 
 VKB_DONE_ICON = 0
 VKB_ENTER_ICON = 1
@@ -1019,13 +1019,13 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 					res.append(MultiContentEntryPixmapAlphaBlend(pos=(left, top), size=(wImage, hImage), png=image))
 					# print("[VirtualKeyBoard] DEBUG: Left=%d, Top=%d, Width=%d, Height=%d, Image Width=%d, Image Height=%d" % (left, top, w, h, wImage, hImage))
 				else:  # Display the cell text.
-					if len(key) > 1 and PY2:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
+					if len(key) > 1 and version_info.major == 2:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=key.encode("UTF-8", "ignore"), color=self.shiftColors[self.shiftLevel]))
-					elif not len(key) > 1 and PY2:
+					elif not len(key) > 1 and version_info.major == 2:
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=0, flags=alignH | alignV, text=key.encode("UTF-8", "ignore"), color=self.shiftColors[self.shiftLevel]))
-					elif len(key) > 1 and not PY2:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
+					elif len(key) > 1 and version_info.major >= 3:  # NOTE: UTF8 / Unicode glyphs only count as one character here.
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=1, flags=alignH | alignV, text=key, color=self.shiftColors[self.shiftLevel]))
-					elif not len(key) > 1 and not PY2:
+					elif not len(key) > 1 and version_info.major >= 3:
 						text.append(MultiContentEntryText(pos=(xData, self.padding[1]), size=(w, h), font=0, flags=alignH | alignV, text=key, color=self.shiftColors[self.shiftLevel]))
 			prevKey = key
 			self.index += 1
@@ -1072,17 +1072,17 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def processSelect(self):
 		self.smsChar = None
-		if PY2:
+		if version_info.major == 2:
 			text = self.keyList[self.shiftLevel][self.selectedKey // self.keyboardWidth][self.selectedKey % self.keyboardWidth].encode("UTF-8", "ignore")
 		text = self.keyList[self.shiftLevel][self.selectedKey // self.keyboardWidth][self.selectedKey % self.keyboardWidth]
 		cmd = self.cmds.get(text.upper(), None)
-		if cmd == None and PY2:
+		if cmd == None and version_info.major == 2:
 			self["text"].char(text.encode("UTF-8", "ignore"))
-		elif cmd != None and PY2:
+		elif cmd != None and version_info.major == 2:
 			exec(cmd)
-		elif cmd == None and not PY2:
+		elif cmd == None and version_info.major >= 3:
 			self["text"].char(text)
-		elif cmd != None and not PY2:
+		elif cmd != None and version_info.major >= 3:
 			exec(cmd)
 		if text not in (u"SHIFT", u"SHIFTICON") and self.shiftHold != -1:
 			self.shiftRestore()
@@ -1205,11 +1205,11 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def keyGotAscii(self):
 		self.smsChar = None
-		if PY2:
-			if self.selectAsciiKey(str(pyunichr(getPrevAsciiCode()).encode("UTF-8", "ignore"))):
+		if version_info.major >= 3:
+			if self.selectAsciiKey(str(pyunichr(getPrevAsciiCode()))):
 				self.processSelect()
 		else:
-			if self.selectAsciiKey(str(pyunichr(getPrevAsciiCode()))):
+			if self.selectAsciiKey(str(pyunichr(getPrevAsciiCode()).encode("UTF-8", "ignore"))):
 				self.processSelect()
 
 	def selectAsciiKey(self, char):

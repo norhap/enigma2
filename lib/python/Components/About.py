@@ -1,5 +1,4 @@
 import os, sys
-from six import PY3
 from sys import modules, version_info
 
 import time
@@ -18,13 +17,13 @@ from Tools.StbHardware import getBrand
 
 
 def _ifinfo(sock, addr, ifname):
-	if PY3:
+	if version_info.major >= 3:
 		iface = struct.pack('256s', bytes(ifname[:15], encoding="UTF-8"))
 	else:
 		iface = struct.pack('256s', ifname[:15])
 	info = fcntl.ioctl(sock.fileno(), addr, iface)
 	if addr == 0x8927:
-		return ''.join(['%02x:' % ord(chr(char)) for char in info[18:24]])[:-1].upper() if PY3 else ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
+		return ''.join(['%02x:' % ord(chr(char)) for char in info[18:24]])[:-1].upper() if version_info.major >= 3 else ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
 	else:
 		return socket.inet_ntoa(info[20:24])
 
@@ -307,13 +306,13 @@ def GetIPsFromNetworkInterfaces():
 			max_possible *= 2
 		else:
 			break
-	if PY3:
+	if version_info.major >= 3:
 		namestr = names.tobytes()
 	namestr = names.tostring()
 
 	ifaces = []
 	for i in range(0, outbytes, struct_size):
-		if PY3:
+		if version_info.major >= 3:
 			iface_name = str(namestr[i:i + 16]).split('\0', 1)[0]
 		iface_name = bytes.decode(namestr[i:i + 16]).split('\0', 1)[0].encode('ascii')
 		if iface_name != 'lo':

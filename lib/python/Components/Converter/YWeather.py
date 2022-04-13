@@ -10,12 +10,9 @@ try:
 except ImportError:
 	import urllib
 import socket
-from six import PY2
+from sys import version_info
 
-if PY2:
-	pyunichr = unichr
-else:
-	pyunichr = chr
+pyunichr = chr if version_info.major >= 3 else unichr
 
 
 class YWeather(Poll, Converter, object):
@@ -137,15 +134,15 @@ class YWeather(Poll, Converter, object):
 	def fetchXML(self, URL, save_to):
 		socket_timeout = 10
 		socket.setdefaulttimeout(socket_timeout)
-		if PY2:
-			req = urllib2.Request(URL)
-		else:
+		if version_info.major >= 3:
 			req = urllib.request.Request(URL)
+		else:
+			req = urllib2.Request(URL)
 		try:
-			if PY2:
-				response = urllib2.urlopen(req)
-			else:
+			if version_info.major >= 3:
 				response = urllib.request.urlopen(req)
+			else:
+				response = urllib2.urlopen(req)
 		except Exception as e:
 			if hasattr(e, 'code') and hasattr(e, 'reason'):
 				print("[YWeather] fetchXML Failed to retrieve XML file. Error: %s %s" % (str(e.code), str(e.reason)))

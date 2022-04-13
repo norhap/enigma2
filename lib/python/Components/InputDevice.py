@@ -14,7 +14,7 @@ import struct
 import platform
 from Tools.Directories import pathExists
 from Tools.StbHardware import getBrand
-from six import PY3
+from sys import version_info
 
 model = getBoxType()
 
@@ -52,7 +52,7 @@ class InputDevices:
 			try:
 				buffer = b"\0" * 512
 				self.fd = open("/dev/input/%s" % device, O_RDWR | O_NONBLOCK)
-				if PY3:
+				if version_info.major >= 3:
 					self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
 				else:
 					self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer)

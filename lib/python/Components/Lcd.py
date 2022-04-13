@@ -1,6 +1,9 @@
-from os import sys
 from os.path import exists
-from sys import maxsize
+from sys import version_info
+if version_info.major >= 3:
+	from sys import maxsize
+else:
+	from sys import maxint as maxsize
 from twisted.internet import threads
 
 from boxbranding import getMachineBuild, getDBoxLCD
@@ -12,7 +15,6 @@ from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 from Screens.Standby import inTryQuitMainloop
 from Tools.Directories import fileReadLine, fileWriteLine
-from six import PY2
 
 model = getBoxType()
 platform = getMachineBuild()
@@ -76,8 +78,8 @@ class IconCheckPoller:
 			f = open("/proc/stb/lcd/symbol_network", "w")
 			f.write('0')
 			f.close()
-		if PY2:
-			from usb import busses		
+		if version_info.major == 2:
+			from usb import busses
 			USBState = 0
 			busses = usb.busses()
 			for bus in busses:
@@ -202,7 +204,7 @@ class LCD:
 		eDBoxLCD.getInstance().setFlipped(value)
 
 	def setScreenShot(self, value):
- 		eDBoxLCD.getInstance().setDump(value)
+		eDBoxLCD.getInstance().setDump(value)
 
 	def isOled(self):
 		return eDBoxLCD.getInstance().isOled()

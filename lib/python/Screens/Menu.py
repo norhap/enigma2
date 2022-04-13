@@ -1,4 +1,4 @@
-from six import PY2
+from sys import version_info
 from xml.etree.cElementTree import parse
 
 from enigma import eTimer
@@ -199,7 +199,7 @@ class Menu(Screen, ProtectedScreen):
 			elif not SystemInfo.get(requires, False):
 				return
 
-		MenuTitle = _(node.get("text", "??").encode("UTF-8", "ignore")) if PY2 else _(node.get("text", "??"))
+		MenuTitle = _(node.get("text", "??")) if version_info.major >= 3 else _(node.get("text", "??").encode("UTF-8", "ignore"))
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
 		x = node.get("flushConfigOnClose")
@@ -235,7 +235,7 @@ class Menu(Screen, ProtectedScreen):
 		conditional = node.get("conditional")
 		if conditional and not eval(conditional):
 			return
-		item_text = node.get("text", "").encode("UTF-8", "ignore") if PY2 else node.get("text", "")
+		item_text = node.get("text", "") if version_info.major >= 3 else node.get("text", "").encode("UTF-8", "ignore")
 		entryID = node.get("entryID", "undefined")
 		weight = node.get("weight", 50)
 		for x in node:
@@ -312,11 +312,11 @@ class Menu(Screen, ProtectedScreen):
 			"displayHelp": self.showHelp,
 			"blue": self.keyBlue,
 		})
-		title = parent.get("title", "").encode("UTF-8", "ignore") if PY2 else parent.get("title", "") or None
-		title = title and _(title) or _(parent.get("text", "").encode("UTF-8", "ignore")) if PY2 else _(parent.get("text", ""))
+		title = parent.get("title", "") if version_info.major >= 3 else parent.get("title", "").encode("UTF-8", "ignore") or None
+		title = _(parent.get("text", "")) if version_info.major >= 3 else title and _(title) or _(parent.get("text", "").encode("UTF-8", "ignore"))
 		title = self.__class__.__name__ == "MenuSort" and _("Menusort (%s)") % title or title
 		if title is None:
-			title = _(parent.get("text", "").encode("UTF-8", "ignore")) if PY2 else _(parent.get("text", ""))
+			title = _(parent.get("text", "")) if version_info.major >= 3 else _(parent.get("text", "").encode("UTF-8", "ignore"))
 		else:
 			t_history.reset()
 		self["title"] = StaticText(title)

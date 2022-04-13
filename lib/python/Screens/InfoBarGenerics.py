@@ -44,21 +44,20 @@ from Tools.StbHardware import getBrand
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType, getPlatform
 from time import time, localtime, strftime
-import os
-from os import sys
-from os.path import exists
+from os.path import exists, isfile, splitext
 from bisect import insort
 import itertools
 import datetime
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 # hack alert!
 from Screens.Menu import MainMenu, mdom
-from sys import maxsize
-from six import PY3
-if PY3:
+from sys import version_info
+if version_info.major >= 3:
 	import pickle
+	from sys import maxsize
 else:
 	import cPickle as pickle
+	from sys import maxint as maxsize
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -153,7 +152,7 @@ class whitelist:
 
 
 def reload_whitelist_vbi():
-	whitelist.vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if os.path.isfile('/etc/enigma2/whitelist_vbi') else []
+	whitelist.vbi = [line.strip() for line in open('/etc/enigma2/whitelist_vbi', 'r').readlines()] if isfile('/etc/enigma2/whitelist_vbi') else []
 
 
 reload_whitelist_vbi()
@@ -167,7 +166,7 @@ def reload_subservice_groupslist(force=False):
 	if subservice.groupslist is None or force:
 		try:
 			groupedservices = "/etc/enigma2/groupedservices"
-			if not os.path.isfile(groupedservices):
+			if not isfile(groupedservices):
 				groupedservices = "/usr/share/enigma2/groupedservices"
 			subservice.groupslist = [list(g) for k, g in itertools.groupby([line.split('#')[0].strip() for line in open(groupedservices).readlines()], lambda x:not x) if not k]
 		except:
@@ -1318,7 +1317,7 @@ class InfoBarEPG:
 		plugin.__call__(session=self.session, servicelist=self.servicelist)
 
 	def showEventInfoPlugins(self):
-		if brand not in ("xtrend", "odin", "ini", "dags", "gigablue", "xp"):
+		if brand not in ("xtrend", "odin", "INI", "dags", "GigaBlue", "xp"):
 			pluginlist = self.getEPGPluginList()
 			if pluginlist:
 				self.session.openWithCallback(self.EventInfoPluginChosen, OrderedChoiceBox, text=_("Please choose an extension..."), list=pluginlist, order="eventInfoOrder", skinName="EPGExtensionsList", windowTitle=_("Events Info Menu"))
@@ -1583,10 +1582,10 @@ class InfoBarSeek:
 #		print("seekable status changed!")
 		if not self.isSeekable():
 			SystemInfo["SeekStatePlay"] = False
-			if os.path.exists("/proc/stb/lcd/symbol_hdd"):
+			if exists("/proc/stb/lcd/symbol_hdd"):
 				print("[InfoBarGenerics] Write to /proc/stb/lcd/symbol_hdd")
 				open("/proc/stb/lcd/symbol_hdd", "w").write("0")
-			if os.path.exists("/proc/stb/lcd/symbol_hddprogress"):
+			if exists("/proc/stb/lcd/symbol_hddprogress"):
 				print("[InfoBarGenerics] Write to /proc/stb/lcd/symbol_hddprogress")
 				with open("/proc/stb/lcd/symbol_hddprogress", "w") as f:
 					f.write("0")
@@ -2469,7 +2468,7 @@ class InfoBarPlugins:
 	def getPluginList(self):
 		l = []
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EXTENSIONSMENU):
-			if PY3:
+			if version_info.major >= 3:
 				args = inspect.getfullargspec(p.__call__)[0]
 			args = inspect.getargspec(p.__call__)[0]
 			if len(args) == 1 or len(args) == 2 and isinstance(self, InfoBarChannelSelection):
@@ -3570,7 +3569,7 @@ class InfoBarCueSheetSupport:
 		r = seek.getPlayPosition()
 		if r[0]:
 			return None
-		return int(r[1]) if PY3 else long(r[1])
+		return int(r[1]) if version_info.major >= 3 else long(r[1])
 
 	def cueGetEndCutPosition(self):
 		ret = False
@@ -4068,7 +4067,7 @@ class InfoBarHDMI:
 		else:
 			curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			if curref and curref.type != eServiceReference.idServiceHDMIIn:
-				if curref and curref.type != -1 and os.path.splitext(curref.toString().split(":")[10])[1].lower() in AUDIO_EXTENSIONS.union(MOVIE_EXTENSIONS, DVD_EXTENSIONS):
+				if curref and curref.type != -1 and splitext(curref.toString().split(":")[10])[1].lower() in AUDIO_EXTENSIONS.union(MOVIE_EXTENSIONS, DVD_EXTENSIONS):
 					setResumePoint(self.session)
 				self.session.nav.playService(hdmiInServiceRef())
 			elif isStandardInfoBar(self):

@@ -5,7 +5,7 @@ from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
-from six import PY2
+from sys import version_info
 
 
 class Console(Screen):
@@ -118,7 +118,7 @@ class Console(Screen):
 			self.show()
 
 	def dataAvail(self, str):
-		if PY2:
-			self["text"].appendText(str)
-		else:
+		if version_info.major >= 3:
 			self["text"].appendText(str.decode())
+		else:
+			self["text"].appendText(str)

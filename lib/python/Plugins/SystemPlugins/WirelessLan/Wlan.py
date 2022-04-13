@@ -1,10 +1,10 @@
 from __future__ import print_function
 import re
-from six import PY2, PY3, ensure_str
+from sys import version_info
 from os import path as os_path
 from six.moves import range
 
-if PY3:
+if version_info.major >= 3:
 	from wifi.scan import Cell
 else:
 	from string import maketrans, strip
@@ -57,7 +57,7 @@ class Wlan:
 				b += ' '
 			else:
 				b += chr(i)
-		if PY3:
+		if version_info.major >= 3:
 			self.asciitrans = str.maketrans(a, b)
 		else:
 			self.asciitrans = maketrans(a, b)
@@ -93,7 +93,7 @@ class Wlan:
 				Console().ePopen("ifconfig " + self.iface + " up")
 				if existBcmWifi(self.iface):
 					eConsoleAppContainer().execute("wl up")
-		if PY3:
+		if version_info.major >= 3:
 			aps = {}
 			try:
 				scanresults = list(Cell.all(self.iface, 5))
@@ -415,7 +415,6 @@ class Status:
 		self.WlanConsole.ePopen(cmd, self.iwconfigFinished, iface)
 
 	def iwconfigFinished(self, result, retval, extra_args):
-		result = ensure_str(result)
 		iface = extra_args
 		ssid = "off"
 		data = {'essid': False, 'frequency': False, 'accesspoint': False, 'bitrate': False, 'encryption': False, 'quality': False, 'signal': False, 'channel': False, 'encryption_type': False, 'frequency': False, 'frequency_norm': False}
@@ -486,7 +485,7 @@ class Status:
 						signal = line[line.index('Signal level') + 13:len(line)]
 				if signal:
 					data['signal'] = signal
-		if PY3:
+		if version_info.major >= 3:
 			if ssid != None and ssid != "off" and ssid != "":
 				try:
 					scanresults = list(Cell.all(iface, 5))

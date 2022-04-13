@@ -22,7 +22,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 from time import time
 import os
-from six import PY3
+from sys import version_info
 
 language.addCallback(plugins.reloadPlugins)
 
@@ -292,7 +292,7 @@ class PluginDownloadBrowser(Screen):
 	PACKAGEGROUPBASE_PREFIX = 'packagegroup-base-'
 	PAMPLUGIN_PREFIX = 'pam-plugin-'
 	PERLMODULE_PREFIX = 'perl-module-'
-	if PY3:
+	if version_info.major >= 3:
 		PYTHON_PREFIX = 'python3-'
 	else:
 		PYTHON_PREFIX = 'python-'
@@ -603,7 +603,7 @@ class PluginDownloadBrowser(Screen):
 
 	def dataAvail(self, str):
 		#prepend any remaining data from the previous call
-		if PY3:
+		if version_info.major >= 3:
 			str = str.decode()
 		str = self.remainingdata + str
 		#split in lines

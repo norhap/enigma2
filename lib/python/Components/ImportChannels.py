@@ -10,11 +10,11 @@ from Screens.MessageBox import MessageBox
 from Components.config import config, ConfigText
 from Tools.Notifications import AddNotificationWithID
 from time import sleep
-from six import PY3
+from sys import version_info
 from six.moves.urllib.error import URLError
 from six.moves.urllib.parse import quote
 import xml.etree.ElementTree as et
-if PY3:
+if version_info.major >= 3:
 	from six.moves.urllib.request import Request, urlopen
 	from base64 import encodebytes
 	encodecommand = encodebytes

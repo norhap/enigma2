@@ -2,8 +2,8 @@
 from __future__ import print_function
 import os
 import time
-from six import PY3
-if PY3:
+from sys import version_info
+if version_info.major >= 3:
 	import pickle
 else:
 	import cPickle as pickle
@@ -1524,7 +1524,7 @@ class PacketManager(Screen, NumericalTextInput):
 				self.setNextIdx(keyvalue[0])
 
 	def keyGotAscii(self):
-		if PY3:
+		if version_info.major >= 3:
 			keyvalue = chr(getPrevAsciiCode()).encode("utf-8")
 		else:
 			keyvalue = unichr(getPrevAsciiCode()).encode("utf-8")

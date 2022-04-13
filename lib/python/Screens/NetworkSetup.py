@@ -3,7 +3,6 @@ import netifaces
 import io
 import os
 import re
-from six import PY2, PY3, ensure_str
 from Screens.Setup import Setup
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -38,6 +37,7 @@ import glob
 import fnmatch
 from Components.ScrollLabel import ScrollLabel
 from os import remove, unlink, rename
+from sys import version_info
 
 macaddress = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_LINK][0])["addr"].upper())
 config.macaddress = ConfigSubsection()
@@ -86,7 +86,8 @@ class NSCommon:
 		self.Console.ePopen('opkg install ' + pkgname + ' >/dev/null 2>&1', callback)
 
 	def checkNetworkState(self, str, retval, extra_args):
-		str = ensure_str(str)
+		if version_info.major >= 3:
+			str = str.decode()
 		if 'Collected errors' in str:
 			self.session.openWithCallback(self.close, MessageBox, _("Seems a background update check is in progress, please wait a few minutes and then try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
@@ -113,7 +114,8 @@ class NSCommon:
 		self.Console.ePopen('opkg list_installed ' + self.service_name, self.RemovedataAvail)
 
 	def RemovedataAvail(self, str, retval, extra_args):
-		str = ensure_str(str)
+		if version_info.major >= 3:
+			str = str.decode()
 		if str:
 			if self.reboot_at_end:
 				restartbox = self.session.openWithCallback(self.RemovePackage, MessageBox, _('Your receiver will be restarted after the removal of the service\nDo you want to remove the service now ?'), MessageBox.TYPE_YESNO)
@@ -1094,7 +1096,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self.onClose.append(self.cleanup)
 
 	def queryWirelessDevice(self, iface):
-		if PY3:
+		if version_info.major >= 3:
 			try:
 				from wifi.scan import Cell
 				import errno
@@ -1113,8 +1115,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 						return True
 				else:
 					return True
-
-		if PY2:
+		else:
 			try:
 				from pythonwifi.iwlibs import Wireless
 				import errno
@@ -3807,7 +3808,8 @@ class NetworkPassword(ConfigListScreen, Screen):
 			self.close()
 
 	def dataAvail(self, data):
-		data = ensure_str(data)
+		if version_info.major >= 3:
+			data = data.decode()
 		self.output_line += data
 		while True:
 			i = self.output_line.find('\n')
