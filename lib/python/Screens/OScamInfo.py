@@ -253,7 +253,7 @@ class OscamInfo:
 						if ecmtime == "0" or ecmtime == "":
 							ecmtime = _("n/a")
 						else:
-							ecmtime = str(float(ecmtime) / 1000)[:5]
+							ecmtime = str(float(ecmtime) // 1000)[:5]
 					else:
 						ecmtime = "not available"
 					srvname = cl.find("request").text
@@ -1162,8 +1162,8 @@ class oscReaderStats(Screen, OscamInfo):
 						rcs = j.attrib["rcs"]
 						num = j.text
 						if rcs == "found":
-							avg_time = str(float(avgtime) / 1000)[:5]
-							last_time = str(float(lasttime) / 1000)[:5]
+							avg_time = str(float(avgtime) // 1000)[:5]
+							last_time = str(float(lasttime) // 1000)[:5]
 							if "lastrequest" in j.attrib:
 								lastreq = j.attrib["lastrequest"]
 								try:
