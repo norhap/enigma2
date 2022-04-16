@@ -14304,7 +14304,7 @@ msgid "ECM last"
 msgstr "ECM Último"
 
 msgid "ECM-Time"
-msgstr "ECM-Hora"
+msgstr "Tiempo-ECM"
 
 msgid ""
 "File oscam.conf not found."

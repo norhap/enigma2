@@ -645,7 +645,7 @@ class oscInfo(Screen, OscamInfo):
 		self.scrolling = False
 		self.webif_data = self.readXML(typ=self.what)
 		ypos = 10
-		ysize = 350
+		ysize = 340
 		self.rows = 12
 		self.itemheight = 25
 		self.sizeLH = sizeH
