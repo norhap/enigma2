@@ -9,19 +9,19 @@ from boxbranding import getMachineName, getBoxType, getRCName
 
 def getBrand():
 	brandName = ""
-	brandStartSwith = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName())))
+	rcStartSwithisBrand = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName()))) # based on remote control name start matches brand.
 	try:
-		if "edision" in brandStartSwith:
+		if "edision" in rcStartSwithisBrand:
 			brandName = "Edision"
-		elif "gb" in brandStartSwith:
+		elif "gb" in rcStartSwithisBrand:
 			brandName = "GigaBlue"
-		elif "octagon" in brandStartSwith:
+		elif "octagon" in rcStartSwithisBrand:
 			brandName = "octagon"
-		elif "ini" in brandStartSwith:
+		elif "ini" in rcStartSwithisBrand:
 			brandName = "INI"
-		elif "hd" in brandStartSwith:
+		elif "hd" in rcStartSwithisBrand:
 			brandName = "Mut@nt"
-		elif "dmm" in brandStartSwith:
+		elif "dmm" in rcStartSwithisBrand: # this check should always be the last.
 			brandName = "dreambox"
 		elif not brandName:
 			print("[brandName] Not Exists!! add this Brand to getBrand")
