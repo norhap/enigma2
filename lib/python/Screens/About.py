@@ -44,24 +44,6 @@ INFO_COLOR = {
 	"M": 0x00ffff00  # Messages.
 }
 
-URL ='https://raw.githubusercontent.com/norhap/enigma2-openvision-1/develop/NEWS'
-
-def news(url):
-	text = ""
-	try:
-		if PY2:
-			from urllib2 import Request, urlopen
-		else:
-			from urllib.request import Request, urlopen
-		request = Request(url)
-		response = urlopen(request)
-		link = response.read()
-		response.close()
-		text = link.decode()
-	except:
-		print("ERROR Latest Commits %s" %(url))
-
-	return text
 
 class InformationBase(Screen, HelpableScreen):
 	def __init__(self, session):
@@ -1129,8 +1111,7 @@ class CommitInfoDevelop(Screen):
 		self.skinName = "CommitInfoDevelop"
 		self.setup_title = _("Latest Commits")
 		self.setTitle(self.setup_title)
-		self["news"] = ScrollLabel()
-		self["news"].setText(news(URL))
+		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
 		self["lab1"] = StaticText(_("OpenVision"))
 		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
 		self["lab3"] = StaticText(_("Report problems to:"))
@@ -1138,13 +1119,33 @@ class CommitInfoDevelop(Screen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		self["key_red"] = StaticText(_("Close"))
-
-		self["Actions"] = ActionMap(["SetupActions"], {
+		self["key_text"] = StaticText(_("Left / Right"))
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"], {
 			"cancel" : self.close,
+			"red" : self.close,
 			"ok": self.close,
-			"left": self["news"].pageUp,
-			"right": self["news"].pageDown,
+			"up": self["AboutScrollLabel"].pageUp,
+			"down": self["AboutScrollLabel"].pageDown,
+			"left": self.left,
+			"right": self.right
 		})
+		try:
+			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
+		except:
+			branch = ""
+		self.project = 0
+		self.projects = [
+			("https://api.github.com/repos/norhap/enigma2-openvision-1/commits", "Enigma2"),
+			("https://api.github.com/repos/satdreamgr/oe-core/commits", "Satdreamgr Oe Core"),
+			("https://api.github.com/repos/norhap/enigma2-plugins/commits", "Enigma2 Plugins"),
+			("https://api.github.com/repos/norhap/openvision-core-plugin/commits", "Plugin Vision Core"),
+			("https://api.github.com/repos/norhap/OctEtFHD-skin/commits", "Skin OpenVision FHD"),
+			("https://api.github.com/repos/E2OpenPlugins/e2openplugin-OpenWebif/commits", "OpenWebif")
+		]
+		self.cachedProjects = {}
+		self.Timer = eTimer()
+		self.Timer.callback.append(self.readGithubCommitLogs)
+		self.Timer.start(50, True)
 
 	def readGithubCommitLogs(self):
 		url = self.projects[self.project][0]
@@ -1171,9 +1172,10 @@ class CommitInfoDevelop(Screen):
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
 				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
+			commitlog =  commitlog if PY3 else commitlog.encode('utf-8')
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
-			commitlog += _("Currently the commit log cannot be retrieved - please try later again")
+			commitlog += _("The repository is not public or there is no access.")
 		self["AboutScrollLabel"].setText(commitlog)
 
 	def updateCommitLogs(self):

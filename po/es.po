@@ -1732,8 +1732,8 @@ msgstr "Transpondedor actual"
 msgid "Current value: "
 msgstr "Valor actual: "
 
-msgid "Currently the commit log cannot be retrieved - please try later again"
-msgstr "Actualmente, el registro de confirmación no se puede recuperar. Inténtalo más tarde nuevamente"
+msgid "The repository is not public or there is no access."
+msgstr "El repositorio no es público o no hay acceso."
 
 msgid "Cut Menu"
 msgstr "Menú Cortar"
