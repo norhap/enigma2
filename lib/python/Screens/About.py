@@ -2,9 +2,10 @@ from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl
 from boxbranding import getBoxType, getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
-from six import PY2, PY3, ensure_str as ensurestr, text_type as texttype
+from sys import version_info
+from six import ensure_str, text_type
 from PIL import Image
-import skin, os, re, sys
+import skin, os, re
 from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -455,7 +456,7 @@ class BenchmarkInformation(InformationBase):
 		info.append(formatLine("P1", _("CPU rating"), self.cpuRating if self.cpuRating else _("Calculating rating...")))
 		info.append("")
 		info.append(formatLine("P1", _("RAM benchmark"), "%.2f MB/s tasa de copia" % self.ramBenchmark if self.ramBenchmark else _("Calculating benchmark...")))
-		self["information"].setText("\n".join(info).encode("UTF-8", "ignore") if PY2 else "\n".join(info))
+		self["information"].setText("\n".join(info) if version_info.major >= 3 else "\n".join(info).encode("UTF-8", "ignore"))
 
 	def getSummaryInformation(self):
 		return "Benchmark Information"
@@ -479,40 +480,40 @@ class Geolocation(Screen):
 		try:
 			geolocationData = geolocation.getGeolocationData(fields="continent,country,regionName,city,timezone,currency,lat,lon", useCache=True)
 			continent = geolocationData.get("continent", None)
-			if isinstance(continent, texttype):
-				continent = ensurestr(continent.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(continent, text_type):
+				continent = ensure_str(continent.encode(encoding="UTF-8", errors="ignore"))
 			if continent != None:
 				GeolocationText += _("Continent: ") + "\t" + continent + "\n"
 
 			country = geolocationData.get("country", None)
-			if isinstance(country, texttype):
-				country = ensurestr(country.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(country, text_type):
+				country = ensure_str(country.encode(encoding="UTF-8", errors="ignore"))
 			if country != None:
 				GeolocationText += _("Country: ") + "\t" + country + "\n"
 
 			state = geolocationData.get("regionName", None)
-			if isinstance(state, texttype):
-				state = ensurestr(state.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(state, text_type):
+				state = ensure_str(state.encode(encoding="UTF-8", errors="ignore"))
 			if state != None:
 				GeolocationText += _("State: ") + "\t" + state + "\n"
 
 			city = geolocationData.get("city", None)
-			if isinstance(city, texttype):
-				city = ensurestr(city.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(city, text_type):
+				city = ensure_str(city.encode(encoding="UTF-8", errors="ignore"))
 			if city != None:
 				GeolocationText += _("City: ") + "\t" + city + "\n"
 
 			GeolocationText += "\n"
 
 			timezone = geolocationData.get("timezone", None)
-			if isinstance(timezone, texttype):
-				timezone = ensurestr(timezone.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(timezone, text_type):
+				timezone = ensure_str(timezone.encode(encoding="UTF-8", errors="ignore"))
 			if timezone != None:
 				GeolocationText += _("Timezone: ") + "\t" + timezone + "\n"
 
 			currency = geolocationData.get("currency", None)
-			if isinstance(currency, texttype):
-				currency = ensurestr(currency.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(currency, text_type):
+				currency = ensure_str(currency.encode(encoding="UTF-8", errors="ignore"))
 			if currency != None:
 				GeolocationText += _("Currency: ") + "\t" + currency + "\n"
 
@@ -609,7 +610,7 @@ class TunerInformation(InformationBase):
 		info.append(formatLine("", _("ANNEX-A"), (_("Yes") if "ANNEX_A" in dvbFeToolTxt or "ANNEX-A" in dvbFeToolTxt else _("No"))))
 		info.append(formatLine("", _("ANNEX-B"), (_("Yes") if "ANNEX_B" in dvbFeToolTxt or "ANNEX-B" in dvbFeToolTxt else _("No"))))
 		info.append(formatLine("", _("ANNEX-C"), (_("Yes") if "ANNEX_C" in dvbFeToolTxt or "ANNEX-C" in dvbFeToolTxt else _("No"))))
-		self["information"].setText("\n".join(info).encode("UTF-8", "ignore") if PY2 else "\n".join(info))
+		self["information"].setText("\n".join(info) if version_info.major >= 3 else "\n".join(info).encode("UTF-8", "ignore"))
 
 
 class Devices(Screen):
@@ -817,10 +818,10 @@ class SystemNetworkInfo(Screen):
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
 		isp = geolocationData.get("isp", None)
 		isporg = geolocationData.get("org", None)
-		if isinstance(isp, texttype):
-			isp = ensurestr(isp.encode(encoding="UTF-8", errors="ignore"))
-		if isinstance(isporg, texttype):
-			isporg = ensurestr(isporg.encode(encoding="UTF-8", errors="ignore"))
+		if isinstance(isp, text_type):
+			isp = ensure_str(isp.encode(encoding="UTF-8", errors="ignore"))
+		if isinstance(isporg, text_type):
+			isporg = ensure_str(isporg.encode(encoding="UTF-8", errors="ignore"))
 		self.AboutText += "\n"
 		if isp != None:
 			if isporg != None:
@@ -1159,11 +1160,11 @@ class CommitInfoDevelop(Screen):
 			try:
 				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
 				from ssl import _create_unverified_context
-				if PY2:
-					from urllib2 import urlopen
-					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
-				else: # Python3
+				if version_info.major >= 3:
 					from urllib.request import urlopen
+					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
+				else: # Python 2
+					from urllib2 import urlopen
 					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
 			except:
 				log += _("No log: please try later again")
@@ -1172,7 +1173,7 @@ class CommitInfoDevelop(Screen):
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
 				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
-			commitlog =  commitlog if PY3 else commitlog.encode('utf-8')
+			commitlog =  commitlog if version_info.major >= 3 else commitlog.encode('utf-8')
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
 			commitlog += _("The repository is not public or there is no access.")
@@ -1364,7 +1365,7 @@ class Troubleshoot(Screen):
 			self["AboutScrollLabel"].setText(_("An error occurred - Please try again later"))
 
 	def dataAvail(self, data):
-		self["AboutScrollLabel"].appendText(data.decode()) if PY3 else self["AboutScrollLabel"].appendText(data)
+		self["AboutScrollLabel"].appendText(data.decode()) if version_info.major >= 3 else self["AboutScrollLabel"].appendText(data)
 
 	def run_console(self):
 		self["AboutScrollLabel"].setText("")
