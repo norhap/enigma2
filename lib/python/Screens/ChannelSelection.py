@@ -46,7 +46,6 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
 import os
 from time import time
-from sys import version_info
 
 profile("ChannelSelection.py after imports")
 
@@ -1853,9 +1852,9 @@ class ChannelSelectionBase(Screen):
 				else:
 					self.numberSelectionActions(number)
 			else:
-				unichar = self.numericalTextInput.getKey(number)
-				if len(unichar) == 1:
-					self.servicelist.moveToChar(unichar[0])
+				charstr = self.numericalTextInput.getKey(number)
+				if len(charstr) == 1:
+					self.servicelist.moveToChar(charstr[0])
 
 	def numberSelectionActions(self, number):
 		if not(hasattr(self, "movemode") and self.movemode):
@@ -1876,12 +1875,9 @@ class ChannelSelectionBase(Screen):
 		self.selectionNumber = ""
 
 	def keyAsciiCode(self):
-		if version_info.major >= 3:
-			unichar = chr(getPrevAsciiCode())
-		else:
-			unichar = unichr(getPrevAsciiCode())
-		if len(unichar) == 1:
-			self.servicelist.moveToChar(unichar[0])
+		charstr = chr(getPrevAsciiCode())
+		if len(charstr) == 1:
+			self.servicelist.moveToChar(charstr[0])
 
 	def getRoot(self):
 		return self.servicelist.getRoot()
