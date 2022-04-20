@@ -269,12 +269,17 @@ class PliExtraInfo(Poll, Converter):
 			try:
 				if os.path.exists("/proc/stb/vmpeg/0/framerate"):
 					print("[PliExtraInfo] Read /proc/stb/vmpeg/0/framerate")
-					fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) // 1000
+					f = open("/proc/stb/vmpeg/0/framerate", "r")
+					video_rate = int(f.read())
+					fps = str((video_rate + 500) // 1000)
 				elif os.path.exists("/proc/stb/vmpeg/0/fallback_framerate"):
 					print("[PliExtraInfo] Read /proc/stb/vmpeg/0/fallback_framerate")
-					fps = (int(open("/proc/stb/vmpeg/0/fallback_framerate", "r").read()) + 0) // 1000
+					f = open("/proc/stb/vmpeg/0/fallback_framerate", "r")
+					video_rate = int(f.read())
+					fps = str((video_rate + 0) // 1000)
 			except:
 				print("[PliExtraInfo] Read framerate failed.")
+				f.close()
 		if not mode:
 			try:
 				print("[PliExtraInfo] Read /proc/stb/vmpeg/0/progressive")
