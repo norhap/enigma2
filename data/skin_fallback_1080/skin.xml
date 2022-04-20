@@ -5289,8 +5289,8 @@ def getScreenObjectSize(data, screenObject, maxWidth, maxHeight):
 		data = [(data, None)]
 	font = screenObject.instance.getFont()
 	size = eSize(maxWidth, maxHeight)
-	width = max([eLabel.calculateTextSize(font, line[0], size, False).width() for line in data]) if data else 0
-	height = max([eLabel.calculateTextSize(font, line[0], size, False).height() for line in data]) if data else 0
+	width = max([eLabel.calculateTextSize(font, line[0], size, False).width() for line in str(data)]) if data else 0
+	height = max([eLabel.calculateTextSize(font, line[0], size, False).height() for line in str(data)]) if data else 0
 	return (width, height)
 
 from enigma import ePoint, eSize, getDesktop
