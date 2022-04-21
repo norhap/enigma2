@@ -12,7 +12,6 @@ from Components.Console import Console
 from Components.SystemInfo import SystemInfo
 from Tools.CList import CList
 from Tools.Directories import fileReadLine, fileReadLines
-from sys import version_info
 
 
 def getProcMounts():
@@ -129,11 +128,11 @@ class Harddisk:
 				try:
 					stat = statvfs(dev)
 					cap = int(stat.f_blocks * stat.f_bsize)
-					return cap / 1000 / 1000
+					return cap // 1000 // 1000
 				except (IOError, OSError):
 					return 0
 		cap = int(line)
-		return cap / 1000 * 512 / 1000
+		return cap // 1000 * 512 // 1000
 
 	def capacity(self):
 		cap = self.diskSize()
@@ -141,7 +140,7 @@ class Harddisk:
 			return ""
 		if cap < 1000:
 			return _("%d MB") % cap
-		return _("%.2f GB") % (cap / 1000.0)
+		return _("%.2f GB") % (cap // 1000.0)
 
 	def model(self):
 		if self.device[:2] == "hd":
@@ -160,7 +159,7 @@ class Harddisk:
 		if dev:
 			try:
 				stat = statvfs(dev)
-				return (stat.f_bfree / 1000) * (stat.f_bsize / 1024)
+				return (stat.f_bfree // 1000) * (stat.f_bsize // 1024)
 			except (IOError, OSError):
 				pass
 		return -1
@@ -174,7 +173,7 @@ class Harddisk:
 		for mpath in mediapath:
 			try:
 				stat = statvfs(mpath)
-				freetot += (stat.f_bfree / 1000) * (stat.f_bsize / 1000)
+				freetot += (stat.f_bfree // 1000) * (stat.f_bsize // 1000)
 			except (IOError, OSError):
 				pass
 		return freetot
@@ -269,9 +268,7 @@ class Harddisk:
 		return 1  # No longer supported, use createCheckJob instead.
 
 	def killPartitionTable(self):
-		zero = "\0" * 512
-		if version_info.major >= 3:
-			h = open(self.dev_path, "w")
+		zero = b"\0" * 512
 		h = open(self.dev_path, "wb")
 		# delete first 9 sectors, which will likely kill the first partition too
 		for i in range(9):
@@ -279,7 +276,7 @@ class Harddisk:
 		h.close()
 
 	def killPartition(self, n):
-		zero = "\0" * 512
+		zero = b"\0" * 512
 		part = self.partitionPath(n)
 		h = open(part, "wb")
 		for i in range(3):
@@ -901,20 +898,20 @@ class MkfsTask(Task.LoggingTask):
 
 	def processOutput(self, data):
 		print("[Harddisk] MkfsTask - [Mkfs] %s" % data)
-		if "Writing inode tables:" in data:
+		if "Writing inode tables:" in str(data):
 			self.fsck_state = "inode"
-		elif "Creating journal" in data:
+		elif "Creating journal" in str(data):
 			self.fsck_state = "journal"
 			self.setProgress(80)
-		elif "Writing superblocks " in data:
+		elif "Writing superblocks " in str(data):
 			self.setProgress(95)
 		elif self.fsck_state == "inode":
-			if "/" in data:
+			if "/" in str(data):
 				try:
-					d = data.strip(" \x08\r\n").split("/", 1)
+					d = str(data).strip(" \x08\r\n").split("/", 1)
 					if "\x08" in d[1]:
 						d[1] = d[1].split("\x08", 1)[0]
-					self.setProgress(80 * int(d[0]) / int(d[1]))
+					self.setProgress(80 * int(d[0]) // int(d[1]))
 				except Exception as err:
 					print("[Harddisk] MkfsTask - [Mkfs] Error: %s" % err)
 				return  # Don't log the progess.
