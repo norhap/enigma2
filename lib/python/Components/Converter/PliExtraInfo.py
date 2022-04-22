@@ -259,38 +259,15 @@ class PliExtraInfo(Poll, Converter):
 		return ""
 
 	def createResolution(self, info):
+		yres = info.getInfo(iServiceInformation.sVideoHeight)
 		xres = info.getInfo(iServiceInformation.sVideoWidth)
 		if xres == -1:
 			return ""
-		yres = info.getInfo(iServiceInformation.sVideoHeight)
-		mode = ("i", "p", " ")[info.getInfo(iServiceInformation.sProgressive)]
-		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) // 1000
-		if not fps or fps == -1:
-			try:
-				if os.path.exists("/proc/stb/vmpeg/0/framerate"):
-					print("[PliExtraInfo] Read /proc/stb/vmpeg/0/framerate")
-					f = open("/proc/stb/vmpeg/0/framerate", "r")
-					video_rate = int(f.read())
-					fps = str((video_rate + 500) // 1000)
-				elif os.path.exists("/proc/stb/vmpeg/0/fallback_framerate"):
-					print("[PliExtraInfo] Read /proc/stb/vmpeg/0/fallback_framerate")
-					f = open("/proc/stb/vmpeg/0/fallback_framerate", "r")
-					video_rate = int(f.read())
-					fps = str((video_rate + 0) // 1000)
-			except:
-				print("[PliExtraInfo] Read framerate failed.")
-				f.close()
-		if not mode:
-			try:
-				print("[PliExtraInfo] Read /proc/stb/vmpeg/0/progressive")
-				mod = int(open("/proc/stb/vmpeg/0/progressive", "r").read())
-				if mod == 1:
-					mode = "p"
-				else:
-					mode = "i"
-			except:
-				print("[PliExtraInfo] Read /proc/stb/vmpeg/0/progressive failed.")
-		return "%sx%s%s%s" % (xres, yres, mode, fps)
+		mode = ("i", "p", "", " ")[info.getInfo(iServiceInformation.sProgressive)]
+		fps  = str((info.getInfo(iServiceInformation.sFrameRate) + 500) // 1000)
+		if int(fps) <= 0:
+			fps = ""
+		return str(xres) + "x" + str(yres) + mode + fps
 
 	def createGamma(self, info):
 		return gamma_data.get(info.getInfo(iServiceInformation.sGamma), "")
