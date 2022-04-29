@@ -25,7 +25,7 @@ else: # Python 2
 
 supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
 
-e2path = "/etc/enigma2"
+channelslistpath = "/etc/enigma2"
 
 
 class ImportChannels():
@@ -52,6 +52,7 @@ class ImportChannels():
 		try:
 			result = urlopen(request, timeout=timeout)
 		except URLError as err:
+			print("[ImportChannels] %s" % err)
 			if "[Errno -3]" in str(err.reason):
 				try:
 					print("[ImportChannels] Network is not up yet, delay 5 seconds")
@@ -59,16 +60,16 @@ class ImportChannels():
 					sleep(5)
 					return self.getUrl(url, timeout)
 				except URLError as err:
-					print("[ImportChannels] URLError ", err)
-					return result
+					print("[ImportChannels] %s" % err)
+				return result
 
 	def getTerrestrialUrl(self):
 		url = config.usage.remote_fallback_dvb_t.value
 		return url[:url.rfind(":")] if url else self.url
 
 	def getFallbackSettings(self):
-		if not URLError:
-			return self.getUrl("%s/web/settings" % self.getTerrestrialUrl()).read()
+		if not URLError:  # currently disabled, we get syntax errors when we try to load settings from the server.
+			return (str(self.getUrl("%s/web/settings" % self.getTerrestrialUrl())))
 
 	def getFallbackSettingsValue(self, settings, e2settingname):
 		if settings:
@@ -88,116 +89,84 @@ class ImportChannels():
 				description = "fallback DVB-T/T2 Australia"
 			config.usage.remote_fallback_dvbt_region.value = description
 
-	"""
-	Enumerate all the files that make up the bouquet system, either local or on a remote machine
-	"""
-
-	def ImportGetFilelist(self, remote=False, *files):
-		result = []
-		for file in files:
-			# determine the type of bouquet file
-			type = 1 if file.endswith('.tv') else 2
-			# read the contents of the file
-			try:
-				if remote:
-					try:
-						content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).readlines()
-					except Exception as e:
-						print("[ImportChannels] Exception: %s" % str(e))
-						self.ImportChannelsDone(False, _("ERROR downloading file %s/%s") % (e2path, file))
-						return
-				else:
-					with open('%s/%s' % (e2path, file), 'r') as f:
-						content = f.readlines()
-			except Exception as e:
-				# for the moment just log and ignore
-				print("[ImportChannels] %s" % str(e))
-				continue
-
-			# check the contents for more bouquet files
-			for line in content:
-				# check if it contains another bouquet reference
-				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, str(line))
-				if r:
-					# recurse
-					result.extend(self.ImportGetFilelist(remote, r.group(1)))
-
-			# add add the file itself
-			result.append(file)
-
-		# return the file list
-		return result
-
 	def threaded_function(self):
 		settings = self.getFallbackSettings()
 		self.getTerrestrialRegion(settings)
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels_")
 
 		if "epg" in self.remote_fallback_import:
-			print("[ImportChannels] Writing epg.dat file on sever box")
+			print("[ImportChannels] Starting to load epg.dat files and channels from server box")
 			try:
-				self.getUrl("%s/web/saveepg" % self.url, timeout=30).read()
-			except:
-				self.ImportChannelsDone(False, _("Error when writing epg.dat on server"))
-				return
+				self.getUrl("%s/web/saveepg" % self.url, timeout=5)
+			except Exception as err:
+				print("[ImportChannels] %s" % err)
+				return self.ImportChannelsDone(False, _("Fallback tuner not available")) if config.usage.remote_fallback_nok.value else None
 			print("[ImportChannels] Get EPG Location")
 			try:
-				epgdatfile = self.getFallbackSettingsValue(settings, "config.misc.epgcache_filename") or "/media/hdd/epg.dat"
-				try:
-					files = [file for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile))).read())["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
-				except:
-					files = [file for file in loads(self.getUrl("%s/file?dir=/" % self.url).read())["files"] if os.path.basename(file).startswith("epg.dat")]
+				epgdatfile = self.getFallbackSettingsValue(settings, "config.misc.epgcache_filename") or "/media/hdd/epg.dat" or "/media/usb/epg.dat" or "/etc/enigma2/epg.dat"
+				files = [file for file in loads(urlopen("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile)), timeout=5).read())["files"] if os.path.basename(file).startswith("epg.dat")]
 				epg_location = files[0] if files else None
-			except:
-				self.ImportChannelsDone(False, _("Error while retreiving location of epg.dat on server"))
-				return
+			except Exception as err:
+				print("[ImportChannels] %s" % err)
+				return self.ImportChannelsDone(False, _("Error retrieving EPG from server, wearing EPG and channels from this receiver")) if config.usage.remote_fallback_nok.value else None
 			if epg_location:
 				print("[ImportChannels] Copy EPG file...")
 				try:
-					open(os.path.join(self.tmp_dir, "epg.dat"), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)).read())
-					shutil.move(os.path.join(self.tmp_dir, "epg.dat"), config.misc.epgcache_filename.value)
-				except:
-					self.ImportChannelsDone(False, _("Error while retreiving epg.dat from server"))
-					return
+					try:
+						os.mkdir("/tmp/epgdat")
+					except:
+						print("[ImportChannels] epgdat folder exists in tmp")
+					epgdattmp = "/tmp/epgdat"
+					epgdatserver = "/tmp/epgdat/epg.dat"
+					open("%s/%s" % (epgdattmp, os.path.basename(epg_location)), "wb").write(urlopen("%s/file?file=%s" % (self.url, epg_location), timeout=5).read())
+					shutil.move("%s" % epgdatserver, "%s" % (config.misc.epgcache_filename.value))
+					eEPGCache.getInstance().load()
+					shutil.rmtree(epgdattmp)
+					self.ImportChannelsDone(False, _("EPG imported successfully from %s") % self.url) if config.usage.remote_fallback_ok.value else None
+				except Exception as err:
+					print("[ImportChannels] cannot save EPG %s" % err)
+					return self.ImportChannelsDone(False, _("Error retrieving EPG from server, wearing EPG and channels from this receiver")) if config.usage.remote_fallback_nok.value else None
 			else:
-				self.ImportChannelsDone(False, _("No epg.dat file found server"))
-
+				self.ImportChannelsDone(False, _("No epg.dat file found server")) if config.usage.remote_fallback_nok.value else None
 		if "channels" in self.remote_fallback_import:
-			print("[ImportChannels] Enumerate remote files")
-			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio')
-
-			print("[Import Channels] Enumerate remote support files")
-			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)).read())["files"]:
-				if os.path.basename(file).startswith(supportfiles):
-					files.append(file.replace(e2path, ''))
-
-			print("[ImportChannels] Fetch remote files")
-			for file in files:
-				print("[ImportChannels] Downloading %s..." % file)
+			channelslist = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
+			try:
 				try:
-					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).read())
-				except Exception as e:
-					print("[ImportChannels] Exception: %s" % str(e))
+					os.mkdir("/tmp/channelslist")
+				except:
+					print("[ImportChannels] channelslist folder exists in tmp")
+				channelslistserver = "/tmp/channelslist"
+				files = [file for file in loads(urlopen("%s/file?dir=%s" % (self.url, channelslistpath), timeout=5).read())["files"] if os.path.basename(file).startswith(channelslist)]
+				count = 0
+				for file in files:
+					count += 1
+					file = file if version_info.major >= 3 else file.encode("UTF-8")
+					print("[ImportChannels] Downloading %s" % file)
+					try:
+						open("%s/%s" % (channelslistserver, os.path.basename(file)), "wb").write(urlopen("%s/file?file=%s" % (self.url, file), timeout=5).read())
+					except:
+						return self.ImportChannelsDone(False, _("ERROR downloading file %s") % file) if config.usage.remote_fallback_nok.value else None
+			except:
+				return self.ImportChannelsDone(False, _("Using channels of this receiver, error import channels from %s") % self.url) if config.usage.remote_fallback_nok.value else None
 
-			print("[ImportChannels] Enumerate local files")
-			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')
-
-			print("[ImportChannels] Removing old local files...")
+			print("[ImportChannels] Removing files...")
+			files = [file for file in os.listdir("%s" % channelslistpath) if file.startswith(channelslist)]
 			for file in files:
-				print("- Removing %s..." % file)
-				os.remove(os.path.join(e2path, file))
-
-			print("[Import Channels] Updating files...")
-			files = [x for x in os.listdir(self.tmp_dir)]
+				os.remove("%s/%s" % (channelslistpath, file))
+			print("[ImportChannels] copying files...")
+			files = [x for x in os.listdir(channelslistserver) if x.startswith(channelslist)]
 			for file in files:
-				print("- Moving %s..." % file)
-				shutil.move(os.path.join(self.tmp_dir, file), os.path.join(e2path, file))
+				shutil.move("%s/%s" % (channelslistserver, file), "%s/%s" % (channelslistpath, file))
+			shutil.rmtree(channelslistserver)
+			eDVBDB.getInstance().reloadBouquets()
+			eDVBDB.getInstance().reloadServicelist()
+			return self.ImportChannelsDone(False, _("Channels imported successfully from %s") % self.url) if config.usage.remote_fallback_ok.value else None
 
-		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
+		#self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
 
 	def ImportChannelsDone(self, flag, message=None):
 		shutil.rmtree(self.tmp_dir, True)
-		if flag:
-			AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s imported from fallback tuner") % message, type=MessageBox.TYPE_INFO, timeout=5)
-		else:
-			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Import from fallback tuner failed, %s") % message, type=MessageBox.TYPE_ERROR, timeout=5)
+		if config.usage.remote_fallback_ok.value:
+			AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s") % message, type=MessageBox.TYPE_INFO, timeout=5)
+		elif config.usage.remote_fallback_nok.value:
+			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("%s") % message, type=MessageBox.TYPE_ERROR, timeout=5)

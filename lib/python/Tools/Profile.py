@@ -43,7 +43,7 @@ def profile(checkPoint):
 		if checkPoint in profileData:
 			timeStamp = profileData[checkPoint]
 			if totalTime:
-				percentage = timeStamp * (PERCENTAGE_END - PERCENTAGE_START) / totalTime + PERCENTAGE_START
+				percentage = timeStamp * (PERCENTAGE_END - PERCENTAGE_START) // totalTime + PERCENTAGE_START
 			else:
 				percentage = PERCENTAGE_START
 			if model == "axodin":
@@ -57,8 +57,11 @@ def profile(checkPoint):
 			elif model in ("ebox5000", "osmini", "spycatmini", "osminiplus", "spycatminiplus"):
 				fileWriteLine("/proc/progress", "%d" % percentage, source=MODULE_NAME)
 			elif isfile("/proc/progress"):
-				fileWriteLine("/proc/progress", "%d \n" % percentage, source=MODULE_NAME)
-
+				dev_fmt = ("/proc/progress", "%d \n")
+				(dev, fmt) = dev_fmt
+				with open(dev, "w") as f:
+					f.write(fmt % percentage)
+					f.close()
 
 def profileFinal():
 	global profileFd
