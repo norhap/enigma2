@@ -128,7 +128,7 @@ class ImportChannels():
 					return self.ImportChannelsDone(False, _("Error retrieving EPG from server, wearing EPG and channels from this receiver")) if config.usage.remote_fallback_nok.value else None
 			else:
 				self.ImportChannelsDone(False, _("No epg.dat file found server")) if config.usage.remote_fallback_nok.value else None
-		if "channels" in self.remote_fallback_import:
+		if "channels" in self.remote_fallback_import and not config.clientmode.enabled.value:
 			channelslist = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 			try:
 				try:
