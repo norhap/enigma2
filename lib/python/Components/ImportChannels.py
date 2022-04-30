@@ -100,7 +100,7 @@ class ImportChannels():
 				self.getUrl("%s/web/saveepg" % self.url, timeout=5)
 			except Exception as err:
 				print("[ImportChannels] %s" % err)
-				return self.ImportChannelsDone(False, _("Fallback tuner not available")) if config.usage.remote_fallback_nok.value else None
+				return self.ImportChannelsDone(False, _("Server not available")) if config.usage.remote_fallback_nok.value else None
 			print("[ImportChannels] Get EPG Location")
 			try:
 				epgdatfile = self.getFallbackSettingsValue(settings, "config.misc.epgcache_filename") or "/media/hdd/epg.dat" or "/media/usb/epg.dat" or "/etc/enigma2/epg.dat"
@@ -108,7 +108,7 @@ class ImportChannels():
 				epg_location = files[0] if files else None
 			except Exception as err:
 				print("[ImportChannels] %s" % err)
-				return self.ImportChannelsDone(False, _("Error retrieving EPG from server, wearing EPG and channels from this receiver")) if config.usage.remote_fallback_nok.value else None
+				return self.ImportChannelsDone(False, _("Error retrieving EPG from server, EPG and channels loaded from this receiver")) if config.usage.remote_fallback_nok.value else None
 			if epg_location:
 				print("[ImportChannels] Copy EPG file...")
 				try:
@@ -125,7 +125,7 @@ class ImportChannels():
 					self.ImportChannelsDone(False, _("EPG imported successfully from %s") % self.url) if config.usage.remote_fallback_ok.value else None
 				except Exception as err:
 					print("[ImportChannels] cannot save EPG %s" % err)
-					return self.ImportChannelsDone(False, _("Error retrieving EPG from server, wearing EPG and channels from this receiver")) if config.usage.remote_fallback_nok.value else None
+					return self.ImportChannelsDone(False, _("Error retrieving EPG from server, EPG and channels loaded from this receiver")) if config.usage.remote_fallback_nok.value else None
 			else:
 				self.ImportChannelsDone(False, _("No epg.dat file found server")) if config.usage.remote_fallback_nok.value else None
 		if "channels" in self.remote_fallback_import and not config.clientmode.enabled.value:
@@ -147,10 +147,19 @@ class ImportChannels():
 					except:
 						return self.ImportChannelsDone(False, _("ERROR downloading file %s") % file) if config.usage.remote_fallback_nok.value else None
 			except:
-				return self.ImportChannelsDone(False, _("Using channels of this receiver, error import channels from %s") % self.url) if config.usage.remote_fallback_nok.value else None
+				from Components.ChannelsImporter import ChannelsImporter
+				from Screens.ClientMode import ClientModeScreen
+				try:
+					ipServer = [int(x) for x in self.url.split(":")[1][2:].split(".")]
+					config.clientmode.serverIP.value = ipServer
+					ClientModeScreen.run()
+					print("[ImportChannels] IP Server is %s" % ipServer)
+				except:
+					print("[ImportChannels] IP server not found")
+				ChannelsImporter()
 
 			print("[ImportChannels] Removing files...")
-			files = [file for file in os.listdir("%s" % channelslistpath) if file.startswith(channelslist)]
+			files = [file for file in os.listdir("%s" % channelslistpath) if file.startswith(channelslist) and file.startswith(channelslistserver)]
 			for file in files:
 				os.remove("%s/%s" % (channelslistpath, file))
 			print("[ImportChannels] copying files...")

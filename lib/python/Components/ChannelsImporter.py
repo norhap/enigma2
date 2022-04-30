@@ -8,7 +8,12 @@ from enigma import eTimer
 #for downloader
 import os
 import re
-import urllib2
+from sys import version_info
+from six.moves.urllib.error import URLError, HTTPError
+if version_info.major >= 3:
+	from six.moves.urllib.request import Request, urlopen
+else: # Python 2
+	from urllib2 import Request, urlopen
 from enigma import eServiceReference, eDVBDB
 
 autoClientModeTimer = None
@@ -348,14 +353,12 @@ class ChannelsImporter():
 		url = "http://%s/api/saveepg" % self.getRemoteAddress()
 		print('[ChannelsImporter] saveEPGonRemoteReceiver URL: %s' % url)
 		try:
-			req = urllib2.Request(url)
-			response = urllib2.urlopen(req)
+			req = Request(url)
+			response = urlopen(req)
 			print('[ChannelsImporter] saveEPGonRemoteReceiver Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r", "").replace("\n", "")))
-		except urllib2.HTTPError as err:
-			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR:', err)
-		except urllib2.URLError as err:
-			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR:', err.reason[0])
-		except urllib2 as err:
-			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR:', err)
+		except HTTPError as err:
+			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR: %s', err)
+		except URLError as err:
+			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR: %s', err)
 		except:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver undefined error')

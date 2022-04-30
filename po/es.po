@@ -14426,8 +14426,14 @@ msgstr "Estás seguro que quieres eliminar esto:\n"
 msgid "Client mode"
 msgstr "Modo Cliente"
 
-msgid "Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared."
-msgstr "El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor reserva. Se borrarán todos los ajustes del sintonizador."
+msgid ""
+"Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared."
+"\n\n"
+"NOTE: To download EPG from server, epg.dat file path in server must be in internal flash, not fixed yet Python3."
+msgstr ""
+"El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor reserva. Se borrarán todos los ajustes del sintonizador."
+"\n\n"
+"NOTA: Para descargar EPG desde el servidor, la ruta del archivo epg.dat en el servidor debe estar en flash interno, aún no arreglado Python3."
 
 msgid "Client tuner configuration"
 msgstr "Configuración Tuner Cliente"
@@ -14459,23 +14465,80 @@ msgstr "Dominio"
 msgid "Enable client mode"
 msgstr "Habilitar modo cliente"
 
+msgid "Host receiver address type"
+msgstr "Tipo de dirección del receptor servidor"
+
+msgid "Select between entering an IP address or a domain."
+msgstr "Seleccione entre ingresar una dirección IP o un host."
+
+msgid "Host receiver IP address"
+msgstr "Dirección IP del receptor servidor"
+
+msgid "Host domain"
+msgstr "Dominio Host"
+
+msgid "Host receiver streaming port"
+msgstr "Puerto streaming del receptor servidor"
+
+msgid "Host receiver FTP username"
+msgstr "Nombre de usuario FTP del receptor servidor"
+
+msgid "Host receiver FTP password"
+msgstr "Contraseña FTP del receptor servidor"
+
+msgid "Host receiver FTP port"
+msgstr "Puerto FTP del receptor servidor"
+
+msgid "Should the FTP connection to the remote receiver be established in passive mode (normally 'no')?"
+msgstr "Debería establecerse la conexión FTP con el servidor en modo pasivo (normalmente 'no')?"
+
+msgid "Schedule EPG and channel list import"
+msgstr "Programar la importación de EPG y lista de canales"
+
+msgid "Repeat how often"
+msgstr "Repita con qué frecuencia"
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Establezca el intervalo de repetición del programa."
+
+msgid "Every hour"
+msgstr "Cada hora"
+
+msgid "Every 2 hours"
+msgstr "Cada 2 horas"
+
+msgid "Every 3 hours"
+msgstr "Cada 3 horas"
+
+msgid "Every 6 hours"
+msgstr "Cada 6 horas"
+
+msgid "Every 12 hours"
+msgstr "Cada 12 horas"
+
+msgid "Time import should start"
+msgstr "La importación en tiempo debería comenzar"
+
+msgid "Set the time of day to perform the import."
+msgstr "Configure la hora del día para realizar la importación."
+
 msgid "Enter the FTP password of the host receiver (normally just leave empty)."
-msgstr "Ingrese la contraseña de FTP del receptor host (normalmente solo deje en blanco)."
+msgstr "Ingrese la contraseña de FTP del receptor servidor (normalmente solo deje en blanco)."
 
 msgid "Enter the FTP port of the host receiver (normally '21')."
-msgstr "Ingrese el puerto FTP del receptor host (normalmente '21')."
+msgstr "Ingrese el puerto FTP del receptor servidor (normalmente '21')."
 
 msgid "Enter the FTP username of the host receiver (normally 'root')."
 msgstr "Ingrese el nombre de usuario de FTP del receptor (normalmente 'root')."
 
 msgid "Enter the IP address of the host receiver."
-msgstr "Introduzca la dirección IP del receptor."
+msgstr "Introduzca la dirección IP del receptor servidor."
 
 msgid "Enter the domain of the host receiver. Do not include 'http://' or port number."
 msgstr "Ingrese el hostname del receptor. No incluya 'http://' o número de puerto."
 
 msgid "Enter the streaming port of the host receiver (normally '8001')."
-msgstr "Ingrese el puerto de streaming del receptor host (normalmente '8001')."
+msgstr "Ingrese el puerto de streaming del receptor servidor (normalmente '8001')."
 
 msgid "Autostart"
 msgstr "Autoinicio"
@@ -18346,17 +18409,14 @@ msgstr "Mover el elemento actual una línea hacia abajo"
 msgid "Reset list order to default?"
 msgstr "Restablecer el orden por defecto de la lista?"
 
-msgid "Fallback tuner not available"
-msgstr "Sintornizador de reserva no disponible"
+msgid "Server not available"
+msgstr "Servidor de reserva no disponible"
 
-msgid "Error retrieving EPG from server, wearing EPG and channels from this receiver"
-msgstr "Error al recuperar la EPG del servidor, usando EPG y canales de este receptor"
+msgid "Error retrieving EPG from server, EPG and channels loaded from this receiver"
+msgstr "Error al recuperar EPG del servidor, EPG y canales cargados desde este receptor"
 
 msgid "No epg.dat file found server"
 msgstr "Archivo epg.dat no encontrado en el servidor"
-
-msgid "Using channels of this receiver, error import channels from %s"
-msgstr "Usando canales de este receptor, error al importar canales desde %s"
 
 msgid "Channels imported successfully from %s"
 msgstr "Canales importados con éxito desde %s"
