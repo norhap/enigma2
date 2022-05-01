@@ -148,14 +148,14 @@ class ImportChannels():
 						return self.ImportChannelsDone(False, _("ERROR downloading file %s") % file) if config.usage.remote_fallback_nok.value else None
 			except:
 				from Components.ChannelsImporter import ChannelsImporter
-				from Screens.ClientMode import ClientModeScreen
 				try:
 					ipServer = [int(x) for x in self.url.split(":")[1][2:].split(".")]
 					config.clientmode.serverIP.value = ipServer
-					ClientModeScreen.run()
+					config.clientmode.save()
 					print("[ImportChannels] IP Server is %s" % ipServer)
 				except:
-					print("[ImportChannels] IP server not found")
+					print("[ImportChannels] Not IP server in ClientMode")
+					return self.ImportChannelsDone(False, _("Error receiving channels from %s" % self.url)) if config.usage.remote_fallback_nok.value else None
 				ChannelsImporter()
 
 			print("[ImportChannels] Removing files...")

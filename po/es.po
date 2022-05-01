@@ -2278,8 +2278,14 @@ msgstr "Habilitar el receptor reserva para respaldo"
 msgid "Enable parental protection"
 msgstr "Activar protección parental"
 
-msgid "Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally (e.g. tuner is occupied or service type is unavailable on the local tuner. Specify complete URL including http:// and port number (normally ...:8001), e.g. http://second_box:8001."
-msgstr "Habilite el receptor reserva enigma2 para sintonizar servicios que no se pueden sintonizar localmente (ej: el sintonizador está ocupado o el tipo de canal no está disponible en el sintonizador local. Especifique la URL completa incluyendo http:// y el número de puerto (normalmente …: 8001 ), ej: http://segundo_receptor:8001."
+msgid ""
+"Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally, e.g. tuner is occupied or service type is unavailable on the local tuner."
+"\n\n"
+"You can use this receiver only in client mode using server channel list. NOTE: For Python 3 manually set the server IP and enable import on restart enigma2, from standby mode or from extensions menu."
+msgstr ""
+"Permita que el receptor remoto enigma2 intente sintonizar servicios que no se pueden sintonizar localmente, ej: el sintonizador está ocupado o el tipo de servicio no está disponible en el sintonizador local."
+"\n\n"
+"Puede usar este receptor solo en modo cliente usando la lista de canales del servidor. NOTA: Para Python 3, configure manualmente la IP del servidor y habilite la importación al reiniciar enigma2, desde standby o desde el menú de extensiones."
 
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
@@ -18426,3 +18432,6 @@ msgstr "EPG importada con éxito desde %s"
 
 msgid "Manually import from fallback tuner"
 msgstr "Importar manual desde el tuner reserva"
+
+msgid "Error receiving channels from %s"
+msgstr "Error recibiendo canales desde %s"
