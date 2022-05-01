@@ -154,8 +154,8 @@ class ImportChannels():
 					config.clientmode.save()
 					print("[ImportChannels] IP Server is %s" % ipServer)
 				except:
-					print("[ImportChannels] Not IP server in ClientMode")
-					return self.ImportChannelsDone(False, _("Error receiving channels from %s" % self.url)) if config.usage.remote_fallback_nok.value else None
+					print("[ImportChannels] You need to configure IP in ClientMode, do it from ImportChannels setup")
+					return self.ImportChannelsDone(False, _("Manual IP is not configured for %s") % self.url) if config.usage.remote_fallback_nok.value else None
 				ChannelsImporter()
 
 			print("[ImportChannels] Removing files...")

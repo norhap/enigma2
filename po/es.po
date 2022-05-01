@@ -18433,5 +18433,5 @@ msgstr "EPG importada con éxito desde %s"
 msgid "Manually import from fallback tuner"
 msgstr "Importar manual desde el tuner reserva"
 
-msgid "Error receiving channels from %s"
-msgstr "Error recibiendo canales desde %s"
+msgid "Manual IP is not configured for %s"
+msgstr "La IP manual no está configurada para %s"
