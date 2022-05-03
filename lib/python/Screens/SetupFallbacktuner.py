@@ -94,10 +94,10 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Enable fallback remote receiver"),
 			config.usage.remote_fallback_enabled,
-			_("Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally, e.g. tuner is occupied or service type is unavailable on the local tuner.\n\nYou can use this receiver only in client mode using server channel list. NOTE: For Python 3 manually set the server IP and enable import on restart enigma2, from standby mode or from extensions menu.")))
+			_("Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally, e.g. tuner is occupied or service type is unavailable on the local tuner.\nYou can use this receiver only in client mode using server channel list and EPG.\n\nNOTE: To access a server with Python 3, manually configure the IP of server.")))
 		self.list.append(getConfigListEntry(_("Import from remote receiver URL"),
 			config.usage.remote_fallback_import,
-			_("Import channels and/or EPG from remote receiver URL when receiver is booted")))
+			_("Import channels and/or EPG from remote receiver URL or IP.\n\nNOTE: With Python 3 in server, server EPG path must be in internal flash, don't forget to manually set server IP.")))
 		if config.usage.remote_fallback_enabled.value or config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,

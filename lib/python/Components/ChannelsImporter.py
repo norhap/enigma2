@@ -254,7 +254,8 @@ class ChannelsImporter():
 		db.reloadServicelist()
 		db.reloadBouquets()
 		print("[ChannelsImporter] processFiles New channel list loaded.")
-		self.checkEPG()
+		if config.usage.remote_fallback_import.value != "channels":
+			self.checkEPG()
 
 	def checkEPG(self):
 		print("[ChannelsImporter] checkEPG Force EPG save on remote receiver...")
