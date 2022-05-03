@@ -10,10 +10,7 @@ import os
 import re
 from sys import version_info
 from six.moves.urllib.error import URLError, HTTPError
-if version_info.major >= 3:
-	from six.moves.urllib.request import Request, urlopen
-else: # Python 2
-	from urllib2 import Request, urlopen
+from six.moves.urllib.request import Request, urlopen
 from enigma import eServiceReference, eDVBDB
 
 autoClientModeTimer = None

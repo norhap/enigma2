@@ -13,13 +13,12 @@ from time import sleep
 from sys import version_info
 from six.moves.urllib.error import URLError, HTTPError
 from six.moves.urllib.parse import quote
+from six.moves.urllib.request import Request, urlopen
 import xml.etree.ElementTree as et
 if version_info.major >= 3:
-	from six.moves.urllib.request import Request, urlopen
 	from base64 import encodebytes
 	encodecommand = encodebytes
 else: # Python 2
-	from urllib2 import Request, urlopen
 	from base64 import encodestring
 	encodecommand = encodestring
 
