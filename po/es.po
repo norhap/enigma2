@@ -7192,8 +7192,8 @@ msgstr "Tipo de temporizador"
 msgid "Timeshift is running. Select an action.\n"
 msgstr "Timeshift está funcionando. Escoge una acción.\n"
 
-msgid "Timeshift location"
-msgstr "Ubicación de Timeshift"
+msgid "Location of recordings in Timeshift"
+msgstr "Ubicación de grabaciones en Timeshift"
 
 msgid "Timeshift not possible!"
 msgstr "Timeshift no posible!"
@@ -17527,17 +17527,17 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
-msgid "Directory '%s' does not exist!"
-msgstr "El directorio '%s' does no exixte!"
+msgid "Directory '%s' does not exist"
+msgstr "El directorio '%s' no existe"
 
-msgid "Flash directory '%s' not allowed!"
-msgstr "Directorio Flash '%s' no permitido!"
+msgid "Flash directory '%s' not allowed"
+msgstr "Directorio Flash '%s' no permitido"
 
-msgid "Directory '%s' not writeable!"
-msgstr "Directorio '%s' no se puede escribir!"
+msgid "Directory '%s' not writeable"
+msgstr "Directorio '%s' no se puede escribir"
 
-msgid "Directory '%s' can't be linked to recordings!"
-msgstr "Directorio '%s' no se puede vincular a grabaciones!"
+msgid "Directory '%s' can't be linked to recordings"
+msgstr "Directorio '%s' no se puede vincular a grabaciones"
 
 msgid "Error: Invalid location!"
 msgstr "Error: Ubicación Inválida!"
