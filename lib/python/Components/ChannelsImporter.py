@@ -250,9 +250,8 @@ class ChannelsImporter():
 		for filename in allFiles:
 			self.copyFile(self.DIR_TMP + filename, self.DIR_ENIGMA2 + filename)
 			self.removeFiles(self.DIR_TMP, filename)
-		db = eDVBDB.getInstance()
-		db.reloadServicelist()
-		db.reloadBouquets()
+		eDVBDB.getInstance().reloadBouquets()
+		eDVBDB.getInstance().reloadServicelist()
 		print("[ChannelsImporter] processFiles New channel list loaded.")
 		if config.usage.remote_fallback_import.value != "channels":
 			self.checkEPG()
