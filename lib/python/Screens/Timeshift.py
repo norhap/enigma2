@@ -5,7 +5,7 @@ from Components.config import config
 from Screens.LocationBox import defaultInhibitDirs, TimeshiftLocationBox
 from Screens.MessageBox import MessageBox
 from Screens.Setup import Setup
-from Tools.Directories import fileAccess, hasHardLinks
+from Tools.Directories import fileAccess # hasHardLinks
 
 
 class TimeshiftSettings(Setup):
@@ -68,22 +68,22 @@ class TimeshiftSettings(Setup):
 		self.changedEntry()
 
 	def pathStatus(self, path):
-		if not isdir(path) or stat(path).st_dev in self.inhibitDevs:
+		if not isdir(path):
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Directory '%s' does not exist") % path
+			footnote = _("'%s' does not exist") % path
 			green = ""
 		elif stat(path).st_dev in self.inhibitDevs:
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Flash directory '%s' not allowed") % path
+			footnote = _("'%s' it is not a storage device") % path
 			green = ""
 		elif not fileAccess(path, "w"):
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Directory '%s' not writeable") % path
+			footnote = _("'%s' not writeable") % path
 			green = ""
-		elif not hasHardLinks(path):
-			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Directory '%s' can't be linked to recordings") % path
-			green = ""
+		#elif not hasHardLinks(path):
+			#self.errorItem = self["config"].getCurrentIndex()
+			#footnote = _("'%s' can't be linked to recordings") % path
+			#green = ""
 		else:
 			self.errorItem = -1
 			footnote = ""

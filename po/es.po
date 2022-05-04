@@ -17527,17 +17527,17 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
-msgid "Directory '%s' does not exist"
-msgstr "El directorio '%s' no existe"
+msgid "'%s' does not exist"
+msgstr "'%s' no existe"
 
-msgid "Flash directory '%s' not allowed"
-msgstr "Directorio Flash '%s' no permitido"
+msgid "'%s' it is not a storage device"
+msgstr "'%s' no es un dispositivo de almacenamiento"
 
-msgid "Directory '%s' not writeable"
-msgstr "Directorio '%s' no se puede escribir"
+msgid "'%s' not writeable"
+msgstr "'%s' no se puede escribir"
 
-msgid "Directory '%s' can't be linked to recordings"
-msgstr "Directorio '%s' no se puede vincular a grabaciones"
+msgid "'%s' can't be linked to recordings"
+msgstr "'%s' no se puede vincular a grabaciones"
 
 msgid "Error: Invalid location!"
 msgstr "Error: Ubicación Inválida!"
