@@ -111,7 +111,8 @@ class ClientModeScreen(ConfigListScreen, Screen):
 		elif self.initial_state != config.clientmode.enabled.value: # switching back to normal mode
 			# load nim config from config.clientmode.nimcache
 			import json
-			nim_config_list = json.loads(config.clientmode.nim_cache.value)
+			if config.clientmode.nim_cache.value:
+				nim_config_list = json.loads(config.clientmode.nim_cache.value)
 			config.clientmode.nim_cache.value = ""
 			config.Nims = ConfigSubList()
 			for x in nim_config_list:
