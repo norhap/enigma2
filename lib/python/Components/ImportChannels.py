@@ -156,7 +156,8 @@ class ImportChannels():
 		if result:
 			self.importEPGCallback()
 		else:
-			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("EPG not imported make sure the EPG path of the server is in internal flash."), type=MessageBox.TYPE_ERROR, timeout=5)
+			if not config.usage.remote_fallback_import_standby.value:
+				AddNotificationWithID("ChannelsImportNOK", MessageBox, _("EPG on server is not in internal flash or manual IP not set."), type=MessageBox.TYPE_ERROR, timeout=5)
 
 	def importEPGCallback(self):
 		print("[ImportChannels] importEPGCallback '%s%s' downloaded successfully. " % (self.remoteEPGpath, self.remoteEPGfile))
