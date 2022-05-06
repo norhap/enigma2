@@ -14433,8 +14433,8 @@ msgstr "No hay subservicios activos disponibles."
 msgid "A background update check is in progress, please wait a few minutes and try again."
 msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos e intente nuevamente."
 
-msgid "Allows you to set a schedule to import the EPG and channels list. The EPG and channels list will always be imported on reboot or GUI restart."
-msgstr "Le permite establecer un horario para importar la EPG y la lista de canales. La EPG y la lista de canales siempre se importarán al reiniciar o al reinicio de la GUI."
+msgid "Allows you to set a schedule to import the EPG and channels list."
+msgstr "Le permite establecer un horario para importar la EPG y la lista de canales."
 
 msgid "Are you sure you want to delete this:\n"
 msgstr "Estás seguro que quieres eliminar esto:\n"
@@ -14445,14 +14445,26 @@ msgstr "Modo Cliente"
 msgid ""
 "Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared."
 "\n\n"
-"NOTE: To download EPG from server, epg.dat file path in server must be in internal flash, not fixed yet Python3."
+"NOTE: To download EPG from server, EPG path in server must be in internal flash."
 msgstr ""
 "El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor reserva. Se borrarán todos los ajustes del sintonizador."
 "\n\n"
-"NOTA: Para descargar EPG desde el servidor, la ruta del archivo epg.dat en el servidor debe estar en flash interno, aún no arreglado Python3."
+"NOTA: Para descargar EPG del servidor, la ruta de EPG en el servidor debe estar en flash interno."
 
 msgid "Client tuner configuration"
 msgstr "Configuración Tuner Cliente"
+
+msgid "Start import when restart enigma2"
+msgstr "Iniciar importación al reiniciar enigma2"
+
+msgid "Enabled will perform a channels and EPG import on every enigma2 restart."
+msgstr "Habilitado realizará una importación de canales y EPG en cada reinicio de enigma2."
+
+msgid "Show import notification for channels and EPG"
+msgstr "Mostrar notificación de importación para canales y EPG"
+
+msgid "Shows a notification when the channel and EPG import from server is completed successfully."
+msgstr "Muestra una notificación cuando la importación de canales y EPG desde el servidor se completa con éxito."
 
 msgid "Command type"
 msgstr "Tipo Comando"
@@ -14505,8 +14517,8 @@ msgstr "Contraseña FTP del receptor servidor"
 msgid "Host receiver FTP port"
 msgstr "Puerto FTP del receptor servidor"
 
-msgid "Should the FTP connection to the remote receiver be established in passive mode (normally 'no')?"
-msgstr "Debería establecerse la conexión FTP con el servidor en modo pasivo (normalmente 'no')?"
+msgid "Set FTP connection to the remote receiver be established in passive mode (normally 'no')."
+msgstr "Configure la conexión FTP con el receptor servidor para que se establezca en modo pasivo (normalmente 'no')."
 
 msgid "Schedule EPG and channel list import"
 msgstr "Programar la importación de EPG y lista de canales"
@@ -18445,3 +18457,6 @@ msgstr "Importar manual desde el tuner reserva"
 
 msgid "Manual IP is not configured for %s"
 msgstr "La IP manual no está configurada para %s"
+
+msgid "EPG not imported make sure the EPG path of the server is in internal flash."
+msgstr "EPG no importado, asegúrese de que la ruta EPG del servidor esté en la memoria flash interna."

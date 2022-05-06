@@ -1,6 +1,7 @@
 from __future__ import print_function
 from Components.config import config
-
+from Tools.Notifications import AddNotificationWithID
+from Screens.MessageBox import MessageBox
 #for scheduler
 from time import mktime, strftime, time, localtime
 from enigma import eTimer
@@ -250,8 +251,8 @@ class ChannelsImporter():
 		eDVBDB.getInstance().reloadBouquets()
 		eDVBDB.getInstance().reloadServicelist()
 		print("[ChannelsImporter] processFiles New channel list loaded.")
-		if config.usage.remote_fallback_import.value != "channels":
-			self.checkEPG()
+		self.ChannelsEPGimportDone(False, _("Channels imported successfully from %s") % self.getRemoteAddress()) if config.clientmode_notifications_ok.value else None
+		self.checkEPG()
 
 	def checkEPG(self):
 		print("[ChannelsImporter] checkEPG Force EPG save on remote receiver...")
@@ -277,6 +278,7 @@ class ChannelsImporter():
 			self.importEPGCallback()
 		else:
 			print("[ChannelsImporter] checkEPGCallback Download epg.dat from remote receiver failed. Check file exists on remote receiver.")
+			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("EPG not imported make sure the EPG path of the server is in internal flash."), type=MessageBox.TYPE_ERROR, timeout=5)
 
 	def importEPGCallback(self):
 		print("[ChannelsImporter] importEPGCallback '%s%s' downloaded successfully. " % (self.remoteEPGpath, self.remoteEPGfile))
@@ -290,6 +292,7 @@ class ChannelsImporter():
 		from enigma import eEPGCache
 		epgcache = eEPGCache.getInstance()
 		epgcache.load()
+		self.ChannelsEPGimportDone(False, _("EPG imported successfully from %s") % self.getRemoteAddress()) if config.clientmode_notifications_ok.value else None
 		print("[ChannelsImporter] importEPGCallback New EPG data loaded...")
 		print("[ChannelsImporter] importEPGCallback Closing importer.")
 
@@ -359,3 +362,7 @@ class ChannelsImporter():
 			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR: %s', err)
 		except:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver undefined error')
+
+	def ChannelsEPGimportDone(self, flag, message=None):
+		if config.clientmode_notifications_ok.value:
+			AddNotificationWithID("ChannelsImportOK", MessageBox, _("%s") % message, type=MessageBox.TYPE_INFO, timeout=5)

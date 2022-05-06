@@ -685,9 +685,9 @@ import Components.EpgLoadSave
 Components.EpgLoadSave.EpgCacheSaveCheck()
 Components.EpgLoadSave.EpgCacheLoadCheck()
 
-if config.clientmode.enabled.value:
-	import Components.ChannelsImporter
-	Components.ChannelsImporter.autostart()
+#if config.clientmode.enabled.value: # add to navigation instance for the user to decide if channels are imported or not after restarting enigma2.
+	#import Components.ChannelsImporter
+	#Components.ChannelsImporter.autostart()
 
 try:
 	runScreenTest()

@@ -156,7 +156,7 @@ class ImportChannels():
 		if result:
 			self.importEPGCallback()
 		else:
-			self.ImportChannelsDone(False, _("EPG not received from %s") % self.url) if config.usage.remote_fallback_nok.value else None
+			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("EPG not imported make sure the EPG path of the server is in internal flash."), type=MessageBox.TYPE_ERROR, timeout=5)
 
 	def importEPGCallback(self):
 		print("[ImportChannels] importEPGCallback '%s%s' downloaded successfully. " % (self.remoteEPGpath, self.remoteEPGfile))
@@ -177,7 +177,8 @@ class ImportChannels():
 		self.getTerrestrialRegion(settings)
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels_")
 
-		if "epg" in self.remote_fallback_import:
+		if "epg" in self.remote_fallback_import and not config.clientmode.enabled.value or "channels_epg" in self.remote_fallback_import and not config.clientmode.enabled.value:
+			config.clientmode_notifications_ok.value = False
 			print("[ImportChannels] Starting to load epg.dat files and channels from server box")
 			try:
 				self.getUrl("%s/web/saveepg" % self.url, timeout=5)
@@ -212,7 +213,8 @@ class ImportChannels():
 				print("[ImportChannels] %s" % err)
 				self.downloadEPG() # try download EPG with one server Python 3.
 
-		if "channels" in self.remote_fallback_import and not config.clientmode.enabled.value:
+		if "channels" in self.remote_fallback_import and not config.clientmode.enabled.value or "channels_epg" in self.remote_fallback_import and not config.clientmode.enabled.value:
+			config.clientmode_notifications_ok.value = False
 			channelslist = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 			try:
 				try:
