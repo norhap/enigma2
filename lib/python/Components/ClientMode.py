@@ -26,6 +26,6 @@ def InitClientMode():
 	config.clientmode.nim_cache = ConfigText(default="", fixed_size=False)
 	config.clientmode.remote_fallback_enabled_cache = ConfigYesNo(default=False)
 	config.clientmode.remote_fallback_cache = ConfigText(default="", fixed_size=False)
-	config.clientmode_import_restart = ConfigYesNo(default=False)
-	config.clientmode_notifications_ok = ConfigYesNo(default=False)
+	config.clientmode_import_restart = ConfigYesNo(default=True)
+	config.clientmode_notifications_ok = ConfigYesNo(default=True)
 	print("[ClientMode] Client mode data initialised.")
