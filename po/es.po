@@ -4746,8 +4746,8 @@ msgstr "Puerto C"
 msgid "Port D"
 msgstr "Puerto D"
 
-msgid "Port of fallback remote receiver"
-msgstr "Puerto del receptor reserva"
+msgid "Port of fallback remote receiver."
+msgstr "Puerto del receptor reserva."
 
 msgid "Portugal"
 msgstr "Portugal"
