@@ -256,7 +256,6 @@ class ChannelsImporter():
 		AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels imported successfully from %s") % self.getRemoteAddress(), type=MessageBox.TYPE_INFO, timeout=5) if config.clientmode_notifications_ok.value else None
 		self.checkEPG() if config.clientmode.enabled.value else None
 
-
 	def checkEPG(self):
 		print("[ChannelsImporter] checkEPG Force EPG save on remote receiver...")
 		self.forceSaveEPGonRemoteReceiver()
