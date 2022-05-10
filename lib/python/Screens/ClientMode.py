@@ -86,7 +86,7 @@ class ClientModeScreen(ConfigListScreen, Screen):
 
 	def keyGo(self):
 		if config.clientmode.enabled.value and not self.checkFTPconnection():
-			mbox = self.session.open(MessageBox, _("Connection using the supplied FTP parameters failed. Please recheck the details and try again."), MessageBox.TYPE_ERROR)
+			mbox = self.session.open(MessageBox, _("Receiver with IP %s is active?\n\nConnection using supplied FTP parameters failed. Check details.") % self.getRemoteAddress(), MessageBox.TYPE_ERROR)
 			mbox.setTitle(_("FTP connection failure"))
 			return
 		if self.initial_state != config.clientmode.enabled.value:

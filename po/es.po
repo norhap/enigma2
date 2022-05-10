@@ -14473,8 +14473,16 @@ msgstr "Muestra una notificación cuando la importación de canales y EPG desde 
 msgid "Command type"
 msgstr "Tipo Comando"
 
-msgid "Connection using the supplied FTP parameters failed. Please recheck the details and try again."
-msgstr "Falló la conexión utilizando los parámetros FTP suministrados. Por favor, vuelva a comprobar los detalles y vuelva a intentarlo."
+msgid "" 
+"Receiver with IP %s is active?"
+"\n"
+"\n"
+"Connection using supplied FTP parameters failed. Check details."
+msgstr ""
+"Receptor con IP %s está activo?"
+"\n"
+"\n"
+"Falló la conexión utilizando los parámetros FTP proporcionados. Revise detalles."
 
 msgid "Cron manager"
 msgstr "Administrador Cron"
@@ -18458,3 +18466,6 @@ msgstr "Importar manual desde el tuner reserva"
 
 msgid "Manual IP is not configured for %s"
 msgstr "La IP manual no está configurada para %s"
+
+msgid "FTP connection failure"
+msgstr "Falló la conexión FTP"
