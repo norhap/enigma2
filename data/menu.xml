@@ -202,7 +202,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<item entryID="memory_screen" level="0" text="Memory" weight="20"><screen module="About" screen="SystemMemoryInfo" /></item>
 		<item entryID="network_screen" level="0" text="Network" weight="25"><screen module="About" screen="SystemNetworkInfo" /></item>
 		<item entryID="service_info_screen" level="1" text="Service" weight="30"><screen module="ServiceInfo" screen="ServiceInfo" /></item>
-		<item entryID="geolocation_screen" level="0" text="Geolocation" weight="40"><screen module="About" screen="Geolocation" /></item>
+		<!--item entryID="geolocation_screen" level="0" text="Geolocation" weight="40"><screen module="About" screen="Geolocation" /></item-->
 		<item entryID="BenchmarkInformation_screen" level="0" text="Benchmark Information" weight="40"><screen module="About" screen="BenchmarkInformation" /></item>
 		<item entryID="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="50"><screen module="StreamingClientsInfo" /></item>
 	</menu>
