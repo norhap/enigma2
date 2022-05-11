@@ -106,7 +106,7 @@ class ImportChannels():
 		if result:
 			self.checkEPGCallback()
 		else:
-			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("EPG and Channels not received from %s is this receiver active?") % self.url, type=MessageBox.TYPE_ERROR, timeout=10) if config.usage.remote_fallback_nok.value else None
+			AddNotificationWithID("ChannelsImportNOK", MessageBox, _("EPG and Channels not received receiver %s is turned off") % self.url, type=MessageBox.TYPE_ERROR, timeout=10) if config.usage.remote_fallback_nok.value else None
 
 	def forceSaveEPGonRemoteReceiver(self):
 		url = "%s/api/saveepg" % self.url
@@ -320,7 +320,7 @@ class ImportChannels():
 				except:
 					print("[ImportChannels] You need to configure IP in ClientMode, do it from ImportChannels setup")
 					return self.ImportChannelsDone(False, _("Manual IP is not configured for %s") % self.url) if config.usage.remote_fallback_nok.value else None
-				from Components.ChannelsImporter import ChannelsImporter
+
 			print("[ImportChannels] Removing files...")
 			files = [file for file in os.listdir("%s" % channelslistpath) if file.startswith(channelslist) and file.startswith(channelslistserver)]
 			for file in files:
@@ -332,6 +332,7 @@ class ImportChannels():
 			shutil.rmtree(channelslistserver)
 			eDVBDB.getInstance().reloadBouquets()
 			eDVBDB.getInstance().reloadServicelist()
+			from Components.ChannelsImporter import ChannelsImporter
 			self.ImportChannelsDone(False, _("Channels imported successfully from %s") % self.url) if config.usage.remote_fallback_ok.value and files else ChannelsImporter()
 		#self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
 

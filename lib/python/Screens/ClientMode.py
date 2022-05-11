@@ -54,7 +54,7 @@ class ClientModeScreen(ConfigListScreen, Screen):
 
 	def createSetup(self):
 		setup_list = []
-		setup_list.append(getConfigListEntry(_("Enable client mode"), config.clientmode.enabled, _('Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared.\n\nPaths to search EPG and Channels on server:\nInternal Flash, HDD, USB.')))
+		setup_list.append(getConfigListEntry(_("Enable client mode"), config.clientmode.enabled, _("Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared.\n\nPaths to search EPG and Channels on server:\nInternal Flash, HDD, USB.\n\nServer must have authentication disabled for streams http in MENU \"customize\". Set password if it is set on server.")))
 		if config.clientmode.enabled.value:
 			setup_list.append(getConfigListEntry(_("Host receiver address type"), config.clientmode.serverAddressType, _('Select between entering an IP address or a domain.')))
 			if config.clientmode.serverAddressType.value == "ip":
@@ -86,8 +86,6 @@ class ClientModeScreen(ConfigListScreen, Screen):
 
 	def keyGo(self):
 		if config.clientmode.enabled.value and not self.checkFTPconnection():
-			mbox = self.session.open(MessageBox, _("Receiver with IP %s is active?\n\nConnection using supplied FTP parameters failed. Check details.") % self.getRemoteAddress(), MessageBox.TYPE_ERROR)
-			mbox.setTitle(_("FTP connection failure"))
 			return
 		if self.initial_state != config.clientmode.enabled.value:
 			restartbox = self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to switch modes\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
@@ -157,7 +155,9 @@ class ClientModeScreen(ConfigListScreen, Screen):
 			print("[ClientMode] checkFTPconnection FTP connection failure:", result)
 			return False
 		except Exception as err:
-			print("[ClientMode] checkFTPconnection Error:", err)
+			print("[ClientMode] checkFTPconnection:", err)
+			mbox = self.session.open(MessageBox, _("Receiver with IP %s is turned off.") % self.getRemoteAddress(), MessageBox.TYPE_ERROR) if "[Errno 113] No route to host" in str(err) else self.session.open(MessageBox, _("Connection using supplied FTP parameters failed.\nCheck parameters of server."), MessageBox.TYPE_ERROR)
+			mbox.setTitle(_("FTP connection failure"))
 			return False
 
 	def restartGUI(self, answer):
