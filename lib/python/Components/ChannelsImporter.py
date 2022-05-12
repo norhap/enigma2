@@ -248,13 +248,18 @@ class ChannelsImporter():
 			self.removeFiles(self.DIR_ENIGMA2, target)
 		print("[ChannelsImporter] processFiles Loading new channel list...")
 		for filename in allFiles:
-			self.copyFile(self.DIR_TMP + filename, self.DIR_ENIGMA2 + filename)
-			self.removeFiles(self.DIR_TMP, filename)
+			try:
+				self.copyFile(self.DIR_TMP + filename, self.DIR_ENIGMA2 + filename)
+				self.removeFiles(self.DIR_TMP, filename)
+			except OSError as err:
+				print("%s" % err)
 		eDVBDB.getInstance().reloadBouquets()
 		eDVBDB.getInstance().reloadServicelist()
 		print("[ChannelsImporter] processFiles New channel list loaded.")
-		AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels imported successfully from %s") % self.getRemoteAddress(), type=MessageBox.TYPE_INFO, timeout=5) if config.clientmode_notifications_ok.value else None
+		AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels imported successfully from %s") % self.getRemoteAddress(), type=MessageBox.TYPE_INFO, timeout=5) if config.clientmode_notifications_ok.value and config.clientmode.enabled.value else None
 		self.checkEPG() if config.clientmode.enabled.value else None
+		if not config.clientmode.enabled.value and config.usage.remote_fallback_ok.value:
+			AddNotificationWithID("ChannelsImportOK", MessageBox, _("Channels imported successfully from %s") % self.getRemoteAddress(), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def checkEPG(self):
 		print("[ChannelsImporter] checkEPG Force EPG save on remote receiver...")

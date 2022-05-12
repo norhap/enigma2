@@ -56,7 +56,7 @@ class Navigation:
 		if isNextWakeupTime():
 			wakeup_time_type = config.usage.wakeup_enabled.value
 		wakeup_timer_enabled = False
-		if config.usage.remote_fallback_import_restart.value:
+		if config.usage.remote_fallback_import_restart.value and not config.clientmode.enabled.value:
 			ImportChannels()
 		if config.clientmode.enabled.value and config.clientmode_import_restart.value:
 			import Components.ChannelsImporter

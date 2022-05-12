@@ -18469,8 +18469,8 @@ msgstr "EPG importada con éxito desde %s"
 msgid "Manually import from fallback tuner"
 msgstr "Importar manual desde el tuner reserva"
 
-msgid "Manual IP is not configured for %s"
-msgstr "La IP manual no está configurada para %s"
+msgid "You have not set manual IP for %s"
+msgstr "No ha establecido una IP manual para %s"
 
 msgid "FTP connection failure"
 msgstr "Falló la conexión FTP"

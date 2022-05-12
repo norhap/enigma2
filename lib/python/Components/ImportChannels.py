@@ -294,7 +294,6 @@ class ImportChannels():
 
 	def importChannelsCallback(self):
 		if "channels" in self.remote_fallback_import:
-			config.clientmode_notifications_ok.value = True
 			channelslist = ('lamedb', 'bouquets.', 'userbouquet.', 'blacklist', 'whitelist', 'alternatives.')
 			try:
 				try:
@@ -319,7 +318,7 @@ class ImportChannels():
 					config.clientmode.save()
 				except:
 					print("[ImportChannels] You need to configure IP in ClientMode, do it from ImportChannels setup")
-					return self.ImportChannelsDone(False, _("Manual IP is not configured for %s") % self.url) if config.usage.remote_fallback_nok.value else None
+					return AddNotificationWithID("ChannelsImportNOK", MessageBox, _("You have not set manual IP for %s") % self.url, type=MessageBox.TYPE_ERROR, timeout=10)
 
 			print("[ImportChannels] Removing files...")
 			files = [file for file in os.listdir("%s" % channelslistpath) if file.startswith(channelslist) and file.startswith(channelslistserver)]
@@ -333,7 +332,8 @@ class ImportChannels():
 			eDVBDB.getInstance().reloadBouquets()
 			eDVBDB.getInstance().reloadServicelist()
 			from Components.ChannelsImporter import ChannelsImporter
-			self.ImportChannelsDone(False, _("Channels imported successfully from %s") % self.url) if config.usage.remote_fallback_ok.value and files else ChannelsImporter()
+			self.ImportChannelsDone(False, _("Channels imported successfully from %s") % self.url) if config.usage.remote_fallback_ok.value and files else None
+			ChannelsImporter() if not config.clientmode.enabled.value and not files else None
 		#self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
 
 	def ImportChannelsDone(self, flag, message=None):
