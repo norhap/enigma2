@@ -10517,8 +10517,8 @@ msgstr "Cuando está habilitada, esta configuración tiene más peso que ‘Sint
 msgid "When enabled, this setting has more weight than 'Preferred tuner'."
 msgstr "Cuando está habilitado, esta configuración tiene más peso que ‘Sintonizador preferido’."
 
-msgid "When enabled, timeshift starts automatically in background after the specified time."
-msgstr "Cuando está habilitado, Timeshift se inicia automáticamente en segundo plano después del tiempo especificado."
+msgid "When enabled, timeshift starts automatically in background after the specified time. Timeshift recording will start for each started service, the previous one is deleted. This background recording is not saved unless you press the PLAY-PAUSE, if zap to another service then you will have options to save the previous service recording."
+msgstr "Cuando está habilitado, Timeshift se inicia automáticamente en segundo plano después del tiempo especificado. La grabación de Timeshift comenzará para cada canal iniciado, la anterior se elimina. Esta grabación de fondo no se guarda a menos que pulse la tecla PLAY-PAUSE, si cambia a otro canal tendrá opciones para guardar la grabación del canal anterior."
 
 msgid "When enabled, use DHCP for the IP configuration."
 msgstr "Cuando esté habilitado, use DHCP para la configuración de IP."
