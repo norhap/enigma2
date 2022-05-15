@@ -506,7 +506,7 @@ def runScreenTest():
 	profile("wizards")
 	screensToRun += wizardManager.getWizards()
 	screensToRun.append((100, InfoBar.InfoBar))
-	# screensToRun.sort()  for now deactive problems init wizard
+	#screensToRun.sort(key=lambda x: x[0]) # works in both Pythons but let's not use sort method here first we must see if we have work network in the wizard.
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
 
 	def runNextScreen(session, screensToRun, *result):
