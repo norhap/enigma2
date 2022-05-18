@@ -7940,8 +7940,8 @@ msgstr "Sí"
 msgid "Yes (save index in setup tuner)"
 msgstr "Sí (guardar el índice en la configuración del sintonizador)"
 
-msgid "Yes and save"
-msgstr "Sì y guarda"
+msgid "Yes and save in timeshift dir"
+msgstr "Si y guardar en el directorio timeshift"
 
 msgid "Yes and save in movie dir"
 msgstr "Sí y guardar en el directorio de películas"
@@ -17556,11 +17556,14 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
+msgid "'%s' %d MB little space available"
+msgstr "'%s' %d MB poco espacio disponible"
+
 msgid "'%s' does not exist"
 msgstr "'%s' no existe"
 
-msgid "'%s' it is not a storage device"
-msgstr "'%s' no es un dispositivo de almacenamiento"
+msgid "'%s'= Internal Flash. It is not a storage device"
+msgstr "'%s' = Flash Interna. No es un dispositivo de almacenamiento"
 
 msgid "'%s' not writeable"
 msgstr "'%s' no se puede escribir"
@@ -18474,3 +18477,6 @@ msgstr "No ha establecido una IP manual para %s"
 
 msgid "FTP connection failure"
 msgstr "Falló la conexión FTP"
+
+msgid "Free %d MB: Low space available for timeshift. Change device"
+msgstr "Libre %d MB: Poco espacio disponible para hacer timeshift. Cambie de dispositivo"

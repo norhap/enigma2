@@ -38,7 +38,7 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
 from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileHas, fileReadLine, fileWriteLine, getRecordingFilename, moveFiles
-from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup
+from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from Tools.KeyBindings import getKeyBindingKeys, getKeyDescription
 from Tools.StbHardware import getBrand
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
@@ -2073,7 +2073,13 @@ class InfoBarTimeshift():
 		if ts.isTimeshiftEnabled():
 			print("[InfoBarGenerics] timeshift already enabled?")
 		else:
-			if not ts.startTimeshift():
+			from os import statvfs
+			if config.usage.timeshift_path.value:
+				size = statvfs(config.usage.timeshift_path.value)
+				free = int((size.f_bfree * size.f_frsize) // (1024 * 1024))
+				if free <= 200:
+					return AddNotification(MessageBox, _("Free %d MB: Low space available for timeshift. Change device") % free, type=MessageBox.TYPE_ERROR, timeout=10)
+			if not ts.startTimeshift() and free > 200:
 				# we remove the "relative time" for now.
 				#self.pvrStateDialog["timeshift"].setRelative(time.time())
 
@@ -2210,7 +2216,7 @@ class InfoBarTimeshift():
 		if self.timeshiftEnabled() and config.usage.check_timeshift.value and self.timeshift_was_activated:
 			message = _("Stop timeshift?")
 			if not self.save_timeshift_file:
-				choice = [(_("Yes"), "stop"), (_("No"), "continue"), (_("Yes and save"), "save"), (_("Yes and save in movie dir"), "save_movie")]
+				choice = [(_("Yes"), "stop"), (_("No"), "continue"), (_("Yes and save in timeshift dir"), "save"), (_("Yes and save in movie dir"), "save_movie")]
 			else:
 				choice = [(_("Yes"), "stop"), (_("No"), "continue")]
 				message += "\n" + _("Reminder, you have chosen to save timeshift file.")
@@ -2880,7 +2886,7 @@ class InfoBarInstantRecord:
 		elif answer[1] in ("indefinitely", "manualduration", "manualendtime", "event"):
 			from Components.About import about
 			if len(list) >= 2 and about.getChipSetString().startswith("meson-6"):
-				Notifications.AddNotification(MessageBox, _("Sorry only possible to record 2 channels at once!"), MessageBox.TYPE_ERROR, timeout=5)
+				AddNotification(MessageBox, _("Sorry only possible to record 2 channels at once!"), MessageBox.TYPE_ERROR, timeout=5)
 				return
 			self.startInstantRecording(limitEvent=answer[1] in ("event", "manualendtime") or False)
 			if answer[1] == "manualduration":
