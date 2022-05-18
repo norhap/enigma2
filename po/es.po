@@ -10686,7 +10686,7 @@ msgid "Timer edit"
 msgstr "Editar temporizador"
 
 msgid "Timeshift Live"
-msgstr "Timeshift Live"
+msgstr "Timeshift Vivo"
 
 msgid "Translation:"
 msgstr "Traducción:"
