@@ -15,7 +15,7 @@ from Components.Keyboard import keyboard
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import SystemInfo
-from Tools.Directories import SCOPE_MEDIA, SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
+from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
 
 config.crash = ConfigSubsection()
 config.crash.debugActionMaps = ConfigYesNo(default=False)
@@ -341,17 +341,8 @@ def InitUsageConfig():
 			config.usage.instantrec_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.instantrec_path.value = savedValue
 	config.usage.instantrec_path.save()
-	if SCOPE_MEDIA:
-		SCOPE_USB_TIMESHIFT_RECORDINGS = "/media/usb/timeshift/recordings"
-		SCOPE_HDD_TIMESHIFT_RECORDINGS = "/media/hdd/timeshift/recordings"
-		try:
-			if exists("/media/hdd") and not exists(SCOPE_HDD_TIMESHIFT_RECORDINGS):
-				makedirs("%s" % SCOPE_HDD_TIMESHIFT_RECORDINGS, 0o755)
-			elif exists("/media/usb") and not exists(SCOPE_USB_TIMESHIFT_RECORDINGS):
-				makedirs("%s" % SCOPE_USB_TIMESHIFT_RECORDINGS, 0o755)
-		except (IOError, OSError):
-			pass
-	defaultValue = resolveFilename(SCOPE_TIMESHIFT) if exists(SCOPE_HDD_TIMESHIFT_RECORDINGS) else SCOPE_USB_TIMESHIFT_RECORDINGS + "/"
+	SCOPE_USB_TIMESHIFT_RECORDINGS = "/media/usb/timeshift/recordings/"
+	defaultValue = resolveFilename(SCOPE_TIMESHIFT) if exists(resolveFilename(SCOPE_HDD)) else SCOPE_USB_TIMESHIFT_RECORDINGS
 	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
@@ -360,7 +351,7 @@ def InitUsageConfig():
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
 	if not exists(config.usage.timeshift_path.value):
-		makedirs(config.usage.timeshift_path.value) # Create timeshift directory. pathStatus of Timeshift module values this directory.
+		makedirs(config.usage.timeshift_path.value, 0o755) # Create Timeshift DefaultValue directorie and users Directories. PathStatus of Timeshift module values this directorie.
 	config.usage.timeshift_path.save()
 	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
 
