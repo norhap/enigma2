@@ -5,7 +5,9 @@ from os.path import getmtime, isfile, join as pathjoin
 from sys import version_info
 from six import ensure_str, text_type
 from PIL import Image
-import skin, os, re
+import skin
+import os
+import re
 from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary

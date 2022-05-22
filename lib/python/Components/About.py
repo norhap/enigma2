@@ -1,4 +1,5 @@
-import os, sys
+import os
+import sys
 from sys import modules, version_info
 
 import time
