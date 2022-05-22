@@ -1124,8 +1124,8 @@ class CommitInfoDevelop(Screen):
 		self["key_red"] = StaticText(_("Close"))
 		self["key_text"] = StaticText(_("Left / Right"))
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActions"], {
-			"cancel" : self.close,
-			"red" : self.close,
+			"cancel": self.close,
+			"red": self.close,
 			"ok": self.close,
 			"up": self["AboutScrollLabel"].pageUp,
 			"down": self["AboutScrollLabel"].pageDown,
@@ -1283,7 +1283,7 @@ class MemoryInfoSkinParams(GUIComponent):
 
 	def applySkin(self, desktop, screen):
 		if self.skinAttributes != None:
-			attribs = [ ]
+			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "rowsincolumn":
 					self.rows_in_column = int(value)
