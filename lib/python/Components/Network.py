@@ -142,12 +142,12 @@ class Network:
 				fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 			fp.close()
 			if config.usage.dns.value.lower() not in ("dhcp-router", "custom"):
-				fp = open('/etc/enigma2/nameserversdns.conf', 'w')
+				fp = open('/etc/enigma2/serverdns.conf', 'w')
 				for nameserver in self.nameservers:
 					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 				fp.close()
-		except:
-			print("[Network] resolv.conf or nameserversdns.conf - writing failed")
+		except Exception as err:
+			print("[Network] DNS %s" % err)
 
 	def loadNetworkConfig(self, iface, callback=None):
 		interfaces = []
@@ -224,15 +224,15 @@ class Network:
 		try:
 			if config.usage.dns.value.lower() in ("dhcp-router", "custom"):
 				fp = open('/etc/resolv.conf', 'r')
-				if (os.path.isfile("/etc/enigma2/nameserversdns.conf")):
-					Console().ePopen('rm /etc/enigma2/nameserversdns.conf')
+				if (os.path.isfile("/etc/enigma2/serverdns.conf")):
+					Console().ePopen('rm /etc/enigma2/serverdns.conf')
 			else:
-				fp = open('/etc/enigma2/nameserversdns.conf', 'r')
+				fp = open('/etc/enigma2/serverdns.conf', 'r')
 			resolv = fp.readlines()
 			fp.close()
 			self.nameservers = []
-		except:
-			print("[Network] resolv.conf or nameserversdns.conf - opening failed")
+		except Exception as err:
+			print("[Network] DNS %s" % err)
 
 		for line in resolv:
 			if self.regExpMatch(nameserverPattern, line) is not None:
