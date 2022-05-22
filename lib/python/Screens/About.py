@@ -1218,7 +1218,6 @@ class MemoryInfo(Screen):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 
-
 		self["actions"] = ActionMap(["ColorActionsAbout"], {
 			"cancel": self.close,
 			"red": self.close,

@@ -63,6 +63,7 @@ def profile(checkPoint):
 					f.write(fmt % percentage)
 					f.close()
 
+
 def profileFinal():
 	global profileFd
 	if profileFd is not None:

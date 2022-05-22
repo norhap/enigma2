@@ -1814,6 +1814,7 @@ class OpkgInstaller(Screen):
 			cmdList.append((OpkgComponent.CMD_INSTALL, {"package": item[1]}))
 		self.session.open(Opkg, cmdList=cmdList)
 
+
 def filescan_open(list, session, **kwargs):
 	filelist = [x.path for x in list]
 	session.open(OpkgInstaller, filelist) # list

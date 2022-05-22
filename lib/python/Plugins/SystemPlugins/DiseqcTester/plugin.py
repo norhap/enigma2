@@ -543,7 +543,6 @@ class DiseqcTesterTestTypeSelection(ConfigListScreen, Screen):
 
 		ConfigListScreen.__init__(self, self.list, session)
 
-
 	def keyOK(self):
 		print(self.testtype.getValue())
 		testtype = DiseqcTester.TEST_TYPE_QUICK

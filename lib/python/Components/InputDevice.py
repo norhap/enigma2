@@ -247,7 +247,6 @@ class InitInputDevices:
 		exec(cmd)
 
 
-
 iInputDevices = InputDevices()
 
 

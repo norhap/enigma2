@@ -114,9 +114,11 @@ def movielist_open(list, session, **kwargs):
 		config.movielist.last_videodir.value = path
 		InfoBar.instance.showMovies(eServiceReference(stype, 0, f.path))
 
+
 def filescan_open(list, session, **kwargs):
 	filelist = [x.path for x in list]
 	session.open(OpkgInstaller, filelist) # list
+
 
 def filescan(**kwargs):
 	from Components.Scanner import Scanner, ScanPath

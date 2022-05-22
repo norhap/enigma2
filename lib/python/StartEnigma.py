@@ -30,13 +30,16 @@ if getImageArch() == "aarch64":
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
+
 def languageNotifier(configElement):
 	from Components.Language import language
 	language.activateLanguage(configElement.value)
 
+
 config.osd = ConfigSubsection()
 config.osd.language = ConfigText(default="en_US")
 config.osd.language.addNotifier(languageNotifier)
+
 
 def setEPGCachePath(configElement):
 	if isdir(configElement.value) or islink(configElement.value):
@@ -447,6 +450,7 @@ class PowerKey:
 			self.session.open(Screens.Standby.Standby)
 		else:
 			return 0
+
 
 if enigma.eAVSwitch.getInstance().haveScartSwitch():
 	profile("Scart")

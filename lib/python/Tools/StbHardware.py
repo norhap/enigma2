@@ -29,6 +29,7 @@ def getBrand():
 		print("[brandName] exception with error in Brand Name")
 	return brandName
 
+
 def getBrandModel():
 	brandModel = None
 	brand = getBrand()
@@ -40,6 +41,7 @@ def getBrandModel():
 	except (IOError, OSError) as err:
 		print("[brandModel] No brandModel!")
 	return brandModel
+
 
 def getFPVersion():
 	ret = None
@@ -56,6 +58,7 @@ def getFPVersion():
 				print("getFPVersion failed!")
 	return ret
 
+
 def setFPWakeuptime(wutime):
 	try:
 		open("/proc/stb/fp/wakeup_time", "w").write(str(wutime))
@@ -66,6 +69,7 @@ def setFPWakeuptime(wutime):
 			fp.close()
 		except IOError:
 			print("[StbHardware] setFPWakeupTime failed!")
+
 
 def setRTCoffset(forsleep=None):
 	import time
@@ -83,6 +87,7 @@ def setRTCoffset(forsleep=None):
 	except IOError:
 		print("[StbHardware] setRTCoffset failed!")
 
+
 def setRTCtime(wutime):
 	if fileExists("/proc/stb/fp/rtc_offset"):
 		setRTCoffset()
@@ -95,6 +100,7 @@ def setRTCtime(wutime):
 			fp.close()
 		except IOError:
 			print("[StbHardware] setRTCtime failed!")
+
 
 def getFPWakeuptime():
 	ret = 0
@@ -109,7 +115,9 @@ def getFPWakeuptime():
 			print("[StbHardware] getFPWakeupTime failed!")
 	return ret
 
+
 wasTimerWakeup = None
+
 
 def getFPWasTimerWakeup(check=False):
 	global wasTimerWakeup
@@ -136,6 +144,7 @@ def getFPWasTimerWakeup(check=False):
 	if check:
 		return wasTimerWakeup, isError
 	return wasTimerWakeup
+
 
 def clearFPWasTimerWakeup():
 	try:

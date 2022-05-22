@@ -740,7 +740,6 @@ class SatfinderExtra(Satfinder):
 		if self.DVB_type.value != "DVB-S" or not dvbreader_available or self.frontend is None or self.demux < 0:
 			return
 
-
 		adapter = 0
 		if hasattr(self, "demux"):
 			demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
@@ -915,7 +914,6 @@ class ServicesFound(Screen):
 		self["key_red"] = StaticText(_("Close"))
 		self["legend"] = Label(legend)
 		self["servicesfound"] = ScrollLabel(text)
-
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{

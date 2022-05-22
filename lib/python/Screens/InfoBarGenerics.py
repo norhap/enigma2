@@ -224,6 +224,7 @@ class InfoBarDish:
 			self.dishDialog.doClose()
 			self.dishDialog = None
 
+
 class InfoBarLongKeyDetection:
 	def __init__(self):
 		eActionMap.getInstance().bindAction('', -maxsize - 1, self.detection) #highest prio

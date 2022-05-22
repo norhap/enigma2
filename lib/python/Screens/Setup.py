@@ -20,6 +20,7 @@ MODULE_NAME = __name__.split(".")[-1]
 domSetups = {}
 setupModTimes = {}
 
+
 class Setup(ConfigListScreen, Screen, HelpableScreen):
 	skin = """
 	<screen name="Setup" position="center,center" size="980,570" resolution="1280,720">

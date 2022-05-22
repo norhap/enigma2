@@ -48,6 +48,8 @@ configmac = config.macaddress
 
 # Define a function to determine whether a service is configured to start at boot time.
 # This checks for a start file in rc2.d (rc4.d might be more appropriate, but historically it's been rc2.d, so...).
+
+
 def ServiceIsEnabled(service_name):
 	starter_list = glob.glob("/etc/rc2.d/S*" + service_name)
 	return len(starter_list) > 0

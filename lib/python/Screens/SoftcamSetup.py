@@ -11,6 +11,7 @@ from Tools.camcontrol import CamControl
 from Tools.Directories import isPluginInstalled
 from Tools.GetEcmInfo import GetEcmInfo
 
+
 class SoftcamSetup(Setup):
 	def __init__(self, session):
 		self.softcam = CamControl("softcam")

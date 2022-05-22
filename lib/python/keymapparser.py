@@ -7,7 +7,6 @@ from keyids import KEYIDS
 from Tools.KeyBindings import addKeyBinding
 
 
-
 class KeymapError(Exception):
 	def __init__(self, message):
 		self.msg = message
