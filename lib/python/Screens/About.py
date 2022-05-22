@@ -676,7 +676,7 @@ class Devices(Screen):
 					continue
 				else:
 					freeline = _("Free: ") + _("full")
-				line = "%s      %s" %(hddp, freeline)
+				line = "%s      %s" % (hddp, freeline)
 				self.list.append(line)
 		self.list = '\n'.join(self.list)
 		self["hdd"].setText(self.list)
@@ -829,7 +829,7 @@ class SystemNetworkInfo(Screen):
 			if isporg != None:
 				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + (isporg) + "\n"
 			else:
-				self.AboutText +=  "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
+				self.AboutText += "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
 
 		mobile = geolocationData.get("mobile", False)
 		if mobile:
@@ -845,7 +845,7 @@ class SystemNetworkInfo(Screen):
 
 		publicip = geolocationData.get("query", None)
 		if str(publicip) != "":
-			self.AboutText +=  _("Public IP: ") + "\t" + "\t" + str(publicip) + "\n" + "\n"
+			self.AboutText += _("Public IP: ") + "\t" + "\t" + str(publicip) + "\n" + "\n"
 
 		self.console = Console()
 		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
@@ -900,7 +900,7 @@ class SystemNetworkInfo(Screen):
 								essid = _("No connection")
 							else:
 								essid = status[self.iface]["essid"]
-						self.AboutText += _('SSID:') + '\t'  + '\t' + essid + '\n'
+						self.AboutText += _('SSID:') + '\t' + '\t' + essid + '\n'
 
 					if 'quality' in self:
 						if not status[self.iface]["quality"]:
@@ -917,7 +917,7 @@ class SystemNetworkInfo(Screen):
 								bitrate = _("Unsupported")
 							else:
 								bitrate = str(status[self.iface]["bitrate"]) + " Mb/s"
-						self.AboutText += _('Bitrate:') + '\t'  + '\t' + bitrate + '\n'
+						self.AboutText += _('Bitrate:') + '\t' + '\t' + bitrate + '\n'
 
 					if 'signal' in self:
 						if not status[self.iface]["signal"]:
@@ -937,7 +937,7 @@ class SystemNetworkInfo(Screen):
 									encryption = _("Unsupported")
 							else:
 								encryption = _("Enabled")
-						self.AboutText += _('Encryption:') + '\t'  + '\t' + encryption + '\n'
+						self.AboutText += _('Encryption:') + '\t' + '\t' + encryption + '\n'
 
 					if ((status[self.iface]["essid"] and status[self.iface]["essid"] == "off") or
 						not status[self.iface]["accesspoint"] or
@@ -1175,7 +1175,7 @@ class CommitInfoDevelop(Screen):
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
 				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
-			commitlog =  commitlog if version_info.major >= 3 else commitlog.encode('utf-8')
+			commitlog = commitlog if version_info.major >= 3 else commitlog.encode('utf-8')
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
 			commitlog += _("The repository is not public or there is no access.")
@@ -1264,9 +1264,9 @@ class MemoryInfo(Screen):
 			self['lmemvalue'].setText(lvalue)
 			self['rmemtext'].setText(rtext)
 			self['rmemvalue'].setText(rvalue)
-			self["slide"].setValue(int(100.0*(mem-free)/mem+0.25))
-			self['pfree'].setText("%.1f %s" % (100.*free/mem,'%'))
-			self['pused'].setText("%.1f %s" % (100.*(mem-free)/mem,'%'))
+			self["slide"].setValue(int(100.0 * (mem - free) / mem + 0.25))
+			self['pfree'].setText("%.1f %s" % (100. * free / mem,'%'))
+			self['pused'].setText("%.1f %s" % (100. * (mem - free) / mem,'%'))
 		except Exception as e:
 			print("[About] getMemoryInfo FAIL:", e)
 
