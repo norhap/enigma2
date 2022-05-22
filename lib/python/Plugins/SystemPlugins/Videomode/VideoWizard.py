@@ -12,7 +12,7 @@ from enigma import getBoxType
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 hw_type = getBoxType()
-has_hdmi = hw_type not in ("dm800","dm8000")
+has_hdmi = hw_type not in ("dm800", "dm8000")
 
 config.misc.showtestcard = ConfigBoolean(default=False)
 

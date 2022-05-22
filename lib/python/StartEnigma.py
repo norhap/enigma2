@@ -663,7 +663,7 @@ import Components.Lcd
 Components.Lcd.InitLcd()
 Components.Lcd.IconCheck()
 
-if getBoxType in ("dm7080","dm820"):
+if getBoxType in ("dm7080", "dm820"):
 	check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
 	if check.startswith("on"):
 		f = open("/proc/stb/audio/hdmi_rx_monitor", "w")

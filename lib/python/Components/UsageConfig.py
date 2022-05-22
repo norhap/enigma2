@@ -1713,8 +1713,8 @@ def InitUsageConfig():
 	config.ncaminfo.autoupdate = ConfigYesNo(default=False)
 	config.ncaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
 	config.ncaminfo.password = ConfigPassword(default="password", fixed_size=False)
-	config.ncaminfo.ip = ConfigIP(default=[127,0,0,1], auto_jump=True)
-	config.ncaminfo.port = ConfigInteger(default=16002, limits=(0,65536))
+	config.ncaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
+	config.ncaminfo.port = ConfigInteger(default=16002, limits=(0, 65536))
 	config.ncaminfo.intervall = ConfigSelectionNumber(min=1, max=600, stepwidth=1, default=10, wraparound=True)
 
 	config.cccaminfo = ConfigSubsection()

@@ -105,7 +105,7 @@ class InputDevices:
 		elif "mouse" in str(name).lower():
 			return "mouse"
 		else:
-			print("[InputDevice] Unknown device type:",name)
+			print("[InputDevice] Unknown device type:", name)
 			return None
 
 	def getDeviceName(self, x):
@@ -158,7 +158,7 @@ class InputDevices:
 
 	def setRepeat(self, device, value): #REP_PERIOD
 		if self.getDeviceAttribute(device, 'enabled'):
-			print("[InputDevice] setRepeat for device %s to %d ms" % (device,value))
+			print("[InputDevice] setRepeat for device %s to %d ms" % (device, value))
 			event = struct.pack('LLHHi', 0, 0, 0x14, 0x01, int(value))
 			fd = open("/dev/input/" + device, O_RDWR)
 			write(fd, event)
@@ -166,7 +166,7 @@ class InputDevices:
 
 	def setDelay(self, device, value): #REP_DELAY
 		if self.getDeviceAttribute(device, 'enabled'):
-			print("[InputDevice] setDelay for device %s to %d ms" % (device,value))
+			print("[InputDevice] setDelay for device %s to %d ms" % (device, value))
 			event = struct.pack('LLHHi', 0, 0, 0x14, 0x00, int(value))
 			fd = open("/dev/input/" + device, O_RDWR)
 			write(fd, event)
@@ -187,13 +187,13 @@ class InitInputDevices:
 			self.setupConfigEntries(self.currentDevice)
 			self.currentDevice = ""
 
-	def InputDevicesEnabledChanged(self,configElement):
+	def InputDevicesEnabledChanged(self, configElement):
 		if self.currentDevice != "" and iInputDevices.currentDevice == "":
 			iInputDevices.setEnabled(self.currentDevice, configElement.value)
 		elif iInputDevices.currentDevice != "":
 			iInputDevices.setEnabled(iInputDevices.currentDevice, configElement.value)
 
-	def InputDevicesNameChanged(self,configElement):
+	def InputDevicesNameChanged(self, configElement):
 		if self.currentDevice != "" and iInputDevices.currentDevice == "":
 			iInputDevices.setName(self.currentDevice, configElement.value)
 			if configElement.value != "":
@@ -206,22 +206,22 @@ class InitInputDevices:
 		elif iInputDevices.currentDevice != "":
 			iInputDevices.setName(iInputDevices.currentDevice, configElement.value)
 
-	def InputDevicesRepeatChanged(self,configElement):
+	def InputDevicesRepeatChanged(self, configElement):
 		if self.currentDevice != "" and iInputDevices.currentDevice == "":
 			iInputDevices.setRepeat(self.currentDevice, configElement.value)
 		elif iInputDevices.currentDevice != "":
 			iInputDevices.setRepeat(iInputDevices.currentDevice, configElement.value)
 
-	def InputDevicesDelayChanged(self,configElement):
+	def InputDevicesDelayChanged(self, configElement):
 		if self.currentDevice != "" and iInputDevices.currentDevice == "":
 			iInputDevices.setDelay(self.currentDevice, configElement.value)
 		elif iInputDevices.currentDevice != "":
 			iInputDevices.setDelay(iInputDevices.currentDevice, configElement.value)
 
-	def setupConfigEntries(self,device):
+	def setupConfigEntries(self, device):
 		cmd = "config.InputDevices." + device + " = ConfigSubsection()"
 		exec(cmd)
-		if model in ("dm800","azboxhd"):
+		if model in ("dm800", "azboxhd"):
 			cmd = "config.InputDevices." + device + ".enabled = ConfigYesNo(default = True)"
 		else:
 			cmd = "config.InputDevices." + device + ".enabled = ConfigYesNo(default = False)"

@@ -36,7 +36,7 @@ def getIfConfig(ifname):
 	infos['hwaddr'] = 0x8927 # SIOCSIFHWADDR
 	infos['netmask'] = 0x891b # SIOCGIFNETMASK
 	try:
-		for k,v in infos.items():
+		for k, v in infos.items():
 			ifreq[k] = _ifinfo(sock, v, ifname)
 	except Exception as ex:
 		print("[About] getIfConfig Ex: %s" % str(ex))
@@ -80,7 +80,7 @@ def getFlashDateString():
 def getBuildDateString():
 	try:
 		if os.path.isfile('/etc/version'):
-			version = open("/etc/version","r").read()
+			version = open("/etc/version", "r").read()
 			return "%s-%s-%s" % (version[:4], version[4:6], version[6:8])
 	except:
 		pass
@@ -128,14 +128,14 @@ def getFFmpegVersionString():
 			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		else:
 			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
-		return "%s" % ffmpeg[1].split("-")[0].replace("\n","")
+		return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
 	except:
 		return _("Not Installed")
 
 
 def getKernelVersionString():
 	try:
-		return open("/proc/version","r").read().split(' ', 4)[2].split('-',2)[0]
+		return open("/proc/version", "r").read().split(' ', 4)[2].split('-', 2)[0]
 	except:
 		return _("unknown")
 
@@ -181,15 +181,15 @@ def getCPUInfoString():
 
 		temperature = None
 		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
-			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n','')
+			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n', '')
 		elif os.path.isfile('/proc/stb/power/avs'):
-			temperature = open("/proc/stb/power/avs").readline().replace('\n','')
+			temperature = open("/proc/stb/power/avs").readline().replace('\n', '')
 		elif os.path.isfile('/proc/stb/fp/temp_sensor'):
-			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n','')
+			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n', '')
 		elif os.path.isfile('/proc/stb/sensors/temp0/value'):
-			temperature = open("/proc/stb/sensors/temp0/value").readline().replace('\n','')
+			temperature = open("/proc/stb/sensors/temp0/value").readline().replace('\n', '')
 		elif os.path.isfile('/proc/stb/sensors/temp/value'):
-			temperature = open("/proc/stb/sensors/temp/value").readline().replace('\n','')
+			temperature = open("/proc/stb/sensors/temp/value").readline().replace('\n', '')
 		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
 				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip()) / 1000
@@ -213,7 +213,7 @@ def getCPUInfoString():
 def getChipSetString():
 	try:
 		chipset = open("/proc/stb/info/chipset", "r").read()
-		return str(chipset.lower().replace('\n',''))
+		return str(chipset.lower().replace('\n', ''))
 	except IOError:
 		return _("undefined")
 
@@ -223,7 +223,7 @@ def getChipSetNumber():
 		f = open('/proc/stb/info/chipset', 'r')
 		chipset = f.read()
 		f.close()
-		return str(chipset.lower().replace('\n','').replace('brcm','').replace('bcm',''))
+		return str(chipset.lower().replace('\n', '').replace('brcm', '').replace('bcm', ''))
 	except IOError:
 		return _("unavailable")
 
@@ -259,7 +259,7 @@ def getDriverInstalledDate():
 	try:
 		from glob import glob
 		try:
-			if getBoxType() in ("dm800","dm8000"):
+			if getBoxType() in ("dm800", "dm8000"):
 				driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
 				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 			else:
