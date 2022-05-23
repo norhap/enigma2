@@ -201,13 +201,11 @@ class CableTransponderSearchSupport:
 		self.cable_search_session.close(True)
 
 	def getCableTransponderData(self, str):
-		str = str.decode()
 		print("[getCableTransponderData] ", str)
 		#prepend any remaining data from the previous call
 		if version_info.major >= 3:
-			str = self.remainingdata + str.decode()
-		else:
-			str = self.remainingdata + str
+			str = str.decode()
+		str = self.remainingdata + str
 		lines = str.split('\n')
 		#'str' should end with '\n', so when splitting, the last line should be empty. If this is not the case, we received an incomplete line
 		if len(lines[-1]):

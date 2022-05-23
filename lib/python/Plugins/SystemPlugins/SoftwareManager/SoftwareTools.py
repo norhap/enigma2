@@ -152,10 +152,9 @@ class SoftwareTools(PackageInfoHandler):
 			self.list_updating = True
 		if self.list_updating:
 			if self.NetworkConnectionAvailable == True:
-				from sys import version_info
 				if not self.UpdateConsole:
 					self.UpdateConsole = Console()
-				cmd = self.opkg.opkg + " install enigma2-meta enigma2-plugins-meta" if version_info.major >= 3 else self.opkg.opkg + " install enigma2-meta enigma2-plugins-meta enigma2-skins-meta"
+				cmd = self.opkg.opkg + " install enigma2-meta enigma2-plugins-meta"
 				self.UpdateConsole.ePopen(cmd, self.InstallMetaPackageCB, callback)
 			else:
 				self.InstallMetaPackageCB(True)
