@@ -511,7 +511,7 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 	mappedFrontendName[virtualFrontendName] = usbFrontendName;
 	if (pipe(pipeFd) == -1)
 	{
-		eWarning("[eDVBUsbAdapter] failed to create pipe (%m)");
+		eDebug("[eDVBUsbAdapter] failed to create pipe (%m)");
 		goto error;
 	}
 	running = true;
