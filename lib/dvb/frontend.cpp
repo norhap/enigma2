@@ -569,9 +569,6 @@ eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool sim
 	:m_simulate(simulate), m_enabled(false), m_fbc(false), m_is_usbtuner(false), m_simulate_fe(simulate_fe), m_type(-1), m_dvbid(fe), m_slotid(fe)
 	,m_fd(-1), m_dvbversion(0), m_rotor_mode(false), m_need_rotor_workaround(false), m_multitype(false), m_voltage5_terrestrial(-1)
 	,m_state(stateClosed), m_timeout(0), m_tuneTimer(0)
-#if HAVE_ALIEN5
-	,m_looptimeout(100)
-#endif
 {
 	m_filename = devicenodename;
 #ifdef HAVE_RASPBERRYPI
@@ -860,9 +857,6 @@ void eDVBFrontend::feEvent(int w)
 	eDVBFrontend *sec_fe = this;
 	long tmp = m_data[LINKED_PREV_PTR];
 #if HAVE_AMLOGIC
-#if HAVE_ALIEN5
-	static int timeoutNum = 0;
-#endif
 	if (w < 0)
 		return;
 #endif
@@ -878,9 +872,6 @@ void eDVBFrontend::feEvent(int w)
 		int res;
 		int state;
 #if HAVE_AMLOGIC
-#if HAVE_ALIEN5
-		usleep(20000);
-#endif
 		if((res = ::ioctl(m_fd, FE_READ_STATUS, &event.status)) != 0)
 		{
 			break;
@@ -917,27 +908,6 @@ void eDVBFrontend::feEvent(int w)
 #endif
 		else
 		{
-#if HAVE_ALIEN5
-			if (m_tuning) {
-				state = stateTuning;
-				if (event.status & FE_TIMEDOUT) {
-				//if (m_tuning >=100) {
-					if (m_looptimeout == 0){
-						eDebug("[eDVBFrontend] FE_TIMEDOUT! ..abort");
-						m_tuneTimer->stop();
-						timeout();
-						//m_looptimeout=0;
-						return;
-					}
-					else{
-						m_looptimeout--;
-					}
-
-				}
-				++m_tuning;
-				break;
-			}
-#else
 			if (m_tuning) {
 				state = stateTuning;
 				if (event.status & FE_TIMEDOUT) {
@@ -948,17 +918,12 @@ void eDVBFrontend::feEvent(int w)
 				}
 				++m_tuning;
 			}
-#endif
 			else
 			{
 				eDebug("[eDVBFrontend%d] stateLostLock", m_dvbid);
 				state = stateLostLock;
 				if (!m_rotor_mode)
 					sec_fe->m_data[CSW] = sec_fe->m_data[UCSW] = sec_fe->m_data[TONEBURST] = -1; // reset diseqc
-#if HAVE_ALIEN5
-				if(m_state == state)
-					break; /* I do not see any other way out */
-#endif
 			}
 		}
 		if (m_state != state)
@@ -1395,7 +1360,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 				break;
 		}
 	}
-	else if (!strcmp(m_description, "GIGA DVB-T2/C NIM (TT3L10)")) // dual plug & play tuner GB UE/Quad UHD 4K 
+	else if (!strcmp(m_description, "GIGA DVB-T2/C NIM (TT3L10)")) // dual plug & play tuner GB UE/Quad UHD 4K
 	{
 		ret = (int)(snr / 15);
 	}
@@ -1724,26 +1689,9 @@ int eDVBFrontend::readFrontendData(int type)
 			fe_status_t status;
 			if (!m_simulate)
 			{
-#if HAVE_ALIEN5
-				//static int timeoutNum =0 ;
-				usleep(20000);
-				if ( ioctl(m_fd, FE_READ_STATUS, &status) < 0 && errno != ERANGE )
-					eDebug("[eDVBFrontend] FE_READ_STATUS failed (%m)");
-				if (status & FE_TIMEDOUT) {
-				//if (m_tuning >=100) {
-					if (m_looptimeout == 0){
-						return (int)status;
-					}
-					else{
-						m_looptimeout--;
-					}
-
-				}
-#else
 				if ( ioctl(m_fd, FE_READ_STATUS, &status) < 0 && errno != ERANGE )
 					eDebug("[eDVBFrontend] FE_READ_STATUS failed: %m");
 				return (int)status;
-#endif
 			}
 			return (FE_HAS_SYNC | FE_HAS_LOCK);
 		}
@@ -2148,38 +2096,6 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 					{
 						dvb_frontend_event event = {};
 						int res;
-#if HAVE_ALIEN5
-						usleep(20000);
-						if((res = ::ioctl(m_fd, FE_READ_STATUS, &event.status)) != 0)
-						{
-							break;
-						}
-						else
-						{
-							if(event.status == 0)
-							{
-								break;
-							}
-						}
-						if (event.status & FE_TIMEDOUT) {
-						//if (m_tuning >=100) {
-							if (m_looptimeout == 0){
-								eDebugNoSimulate("[eDVBFrontend] IF_LOCK_TIMEOUT_GOTO: got FE_TIMEDOUT");
-								setSecSequencePos(m_sec_sequence.current()->steps);
-								timeout = true;
-								//m_looptimeout=100;
-								break;
-							}
-							else{
-								m_looptimeout--;
-							}
-							break;
-						}
-						if (event.status & FE_HAS_LOCK)
-						{
-							break; /* I do not see any other way out */
-						}
-#else
 						res = ::ioctl(m_fd, FE_GET_EVENT, &event);
 
 						if (res && (errno == EAGAIN))
@@ -2192,7 +2108,6 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 							timeout = true;
 							break;
 						}
-#endif
 					}
 					if (timeout) break;
 				}
@@ -2389,9 +2304,6 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		cmdseq.props = p;
 		cmdseq.num = 0;
 		p[cmdseq.num].cmd = DTV_CLEAR, cmdseq.num++;
-#if HAVE_ALIEN5
-		m_looptimeout = 100;
-#endif
 		if (type == iDVBFrontend::feSatellite)
 		{
 			eDVBFrontendParametersSatellite parm{};
@@ -2400,15 +2312,6 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			fe_modulation_t modulation = QPSK;
 			fe_delivery_system_t system = SYS_DVBS;
 			oparm.getDVBS(parm);
-#if HAVE_ALIEN5
-			if (parm.symbol_rate < 5000000)
-				m_looptimeout = 250;
-			else if (parm.symbol_rate < 10000000)
-				m_looptimeout = 60;
-			else
-				m_looptimeout = 50;
-				//m_looptimeout(100);
-#endif
 			switch (parm.system)
 			{
 				default:
@@ -2495,9 +2398,6 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		{
 			eDVBFrontendParametersCable parm{};
 			oparm.getDVBC(parm);
-#if HAVE_ALIEN5
-			m_looptimeout = 300;
-#endif
 			p[cmdseq.num].cmd = DTV_DELIVERY_SYSTEM;
 #ifdef HAVE_OLDE2_API
 			if (m_dvbversion >= DVB_VERSION(5, 6))
@@ -2586,9 +2486,6 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 			eDVBFrontendParametersTerrestrial parm{};
 			fe_delivery_system_t system = SYS_DVBT;
 			oparm.getDVBT(parm);
-#if HAVE_ALIEN5
-			m_looptimeout = 100;
-#endif
 			switch (parm.system)
 			{
 				default:

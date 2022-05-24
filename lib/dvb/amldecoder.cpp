@@ -97,10 +97,10 @@ eAMLTSMPEGDecoder::~eAMLTSMPEGDecoder()
 	if (m_state == statePause) {
 		if (adec_handle)
 			audio_decode_resume(adec_handle);
-		
-		if ((m_vpid >= 0) && (m_vpid < 0x1FFF) && aml_fd >= 0)	 
+
+		if ((m_vpid >= 0) && (m_vpid < 0x1FFF) && aml_fd >= 0)
 			::ioctl(aml_fd, AMSTREAM_IOC_VPAUSE, 0);
-		
+
 		if (m_demux && m_demux->m_pvr_fd >= 0)
 			::ioctl(m_demux->m_pvr_fd, PVR_P3);
 	}
@@ -156,7 +156,7 @@ int eAMLTSMPEGDecoder::setState()
 			m_text = new eDVBTText(m_demux, m_decoder);
 			if (m_text->startPid(m_textpid))
 				res = -1;
-	
+
 			if (m_demux && m_decoder == 0)  // Tuxtxt caching actions only on primary decoder
 			{
 				uint8_t demux = 0;
@@ -166,7 +166,7 @@ int eAMLTSMPEGDecoder::setState()
 		}
 		else if (m_demux && m_decoder == 0)     // Tuxtxt caching actions only on primary decoder
 			eTuxtxtApp::getInstance()->resetPid();
-	
+
 		m_changed &= ~changeText;
 	}
 
@@ -228,9 +228,6 @@ RESULT eAMLTSMPEGDecoder::setVideoPID(int vpid, int type)
 				break;
  		}
  		eDebug("[eAMLTSMPEGDecoder::setVideoPID] vpid=%d, type=%d %s", vpid, type, t.c_str());
-#if HAVE_ALIEN5
-		aml_change_vpid(vpid, m_codec.video_type);
-#endif
 	}
 	return 0;
 }
@@ -288,8 +285,8 @@ RESULT eAMLTSMPEGDecoder::setAudioPID(int apid, int type)
 				eDebug("[eAMLTSMPEGDecoder::setAudioPID] set AMSTREAM_IOC_ACHANNEL failed");
 			/*reset audio*/
 			if(::ioctl(aml_fd, AMSTREAM_IOC_AUDIO_RESET, 0) < 0)
-				eDebug("[eAMLTSMPEGDecoder::setAudioPID] audio reset failed");                         
-			audio_decode_init(&adec_handle, &am_param);                                                     
+				eDebug("[eAMLTSMPEGDecoder::setAudioPID] audio reset failed");
+			audio_decode_init(&adec_handle, &am_param);
 		}
 	}
 	return 0;
@@ -469,7 +466,7 @@ RESULT eAMLTSMPEGDecoder::play()
 					if(::ioctl(cntl_fd, AMSTREAM_IOC_AVTHRESH, (unsigned long)90000 * 30 ) < 0)
 						eDebug("[eAMLTSMPEGDecoder::play] set AMSTREAM_IOC_AVTHRESH failed");
 					if(::ioctl(cntl_fd, AMSTREAM_IOC_SYNCTHRESH, (unsigned long) 0) < 0)
-						eDebug("[eAMLTSMPEGDecoder::play] set AMSTREAM_IOC_SYNCTHRESH failed");                                                 
+						eDebug("[eAMLTSMPEGDecoder::play] set AMSTREAM_IOC_SYNCTHRESH failed");
 				}
 				else
 					eDebug("[eAMLTSMPEGDecoder::play] cntl_fd NULL or PVR mode");
@@ -489,7 +486,7 @@ RESULT eAMLTSMPEGDecoder::play()
 		eDebug("[eAMLTSMPEGDecoder::play] resume from pause");
 		audio_decode_resume(adec_handle);
 
-		if (m_vpid >= 0 && m_vpid < 0x1FFF)  
+		if (m_vpid >= 0 && m_vpid < 0x1FFF)
 			::ioctl(aml_fd, AMSTREAM_IOC_VPAUSE, 0);
 
 		if (m_demux && m_demux->m_pvr_fd >= 0)
@@ -511,7 +508,7 @@ RESULT eAMLTSMPEGDecoder::pause()
 	if (m_demux && m_demux->m_pvr_fd >= 0)
 		::ioctl(m_demux->m_pvr_fd, PVR_P0);
 	audio_decode_pause(adec_handle);
-	if (m_vpid >= 0 && m_vpid < 0x1FFF)  
+	if (m_vpid >= 0 && m_vpid < 0x1FFF)
 		::ioctl(aml_fd, AMSTREAM_IOC_VPAUSE, 1);
 
 	m_state = statePause;
@@ -566,8 +563,8 @@ RESULT eAMLTSMPEGDecoder::getPTS(int what, pts_t &pts)
 	unsigned int aml_pts;
 
 	if (aml_fd >= 0)
-	{                       
-		if (::ioctl(aml_fd, AMSTREAM_IOC_PCRSCR, (unsigned long)&aml_pts) >= 0) 
+	{
+		if (::ioctl(aml_fd, AMSTREAM_IOC_PCRSCR, (unsigned long)&aml_pts) >= 0)
 		{
 			pts = aml_pts;
 			return 0;

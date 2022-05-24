@@ -47,12 +47,6 @@ using namespace std;
 #include <sstream>
 #include <iomanip>
 
-#if HAVE_ALIEN5
-extern "C" {
-#include <codec.h>
-}
-#endif
-
 #ifndef SUBT_TXT_ABNORMAL_PTS_DIFFS
 #define SUBT_TXT_ABNORMAL_PTS_DIFFS 1800000
 #endif
@@ -1467,14 +1461,6 @@ RESULT eDVBServicePlay::start()
 
 		type = eDVBServicePMTHandler::streamclient;
 	}
-
-#if HAVE_ALIEN5
-	if(m_is_stream || m_is_pvr)
-	{
-			eDebug("[eDVBServicePlay] start m_is_pvr %d", m_is_pvr);
-			aml_set_demux2_source();
-	}
-#endif
 #ifndef HAVE_RASPBERRYPI
 	m_first_program_info = 1;
 	ePtr<iTsSource> source = createTsSource(service, packetsize);
@@ -2794,7 +2780,7 @@ RESULT eDVBServicePlay::stopTimeshift(bool swToLive)
 	{
 		fileout << "0";
 	}
-	
+
 	fileout.open("/proc/stb/lcd/symbol_record");
 	if(fileout.is_open())
 	{
@@ -3874,7 +3860,7 @@ void eDVBServicePlay::newDVBSubtitlePage(const eDVBSubtitlePage &p)
 /*		xineLib->getPTS(pos);*/
 		// Where subtitles are delivered out of sync with video, only treat subtitles in the past as having bad timing.
 		// Those that are delivered too early are cached for displaying at the appropriate later time
-		// Note that this can be due to buggy drivers, as well as problems with the broadcast 
+		// Note that this can be due to buggy drivers, as well as problems with the broadcast
 		if (pos-p.m_show_time > SUBT_TXT_ABNORMAL_PTS_DIFFS && (m_is_pvr || m_timeshift_enabled))
 		{
 			// Subtitles delivered over 20 seconds too late
