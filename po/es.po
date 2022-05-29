@@ -4247,7 +4247,7 @@ msgid "No, do not flash image"
 msgstr "No, no flashear imagen"
 
 msgid "No, except Wakeup timer"
-msgstr "No, excepto el temporizador de despertador"
+msgstr "No, excepto el temporizador despertador"
 
 msgid "No, never"
 msgstr "No, nunca"
@@ -4295,8 +4295,8 @@ msgstr "No probado:"
 msgid "Not yet implemented!"
 msgstr "Aún no implementado!"
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
-msgstr "Nota: cuando está habilitado, y desea el modo de reposo después de despertarse, configure la opción ‘Inicio en modo de reposo’ como ‘No, excepto el temporizador de despertador’."
+msgid "When it is enabled, and you want to go to standby mode after wakeup timer, please set \"Startup to Standby\" option in \"Customize\" setup to \"No, except Wakeup timer\"."
+msgstr "Cuando está habilitado, y desea ir a modo reposo después del temporizador despertador, configure la opción \"Iniciar a modo reposo\" en ajustes \"Personalizar\" en \"No, excepto el temporizador despertador\"."
 
 msgid ""
 "Nothing to scan!\n"
@@ -10242,7 +10242,7 @@ msgid "Startup the set top box in standby"
 msgstr "Inicie el receptor en modo de reposo"
 
 msgid "Startup to Standby"
-msgstr "Inicio al modo de reposo"
+msgstr "Iniciar a modo reposo"
 
 msgid "Subtitle alignment"
 msgstr "Alineamiento de subtítulos"
