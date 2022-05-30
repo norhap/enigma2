@@ -3,7 +3,7 @@
 #include <lib/dvb/db.h>
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/metaparser.h>
-#include <lib/base/nconfig.h> 
+#include <lib/base/nconfig.h>
 #include <lib/base/httpstream.h>
 #include <fcntl.h>
 
@@ -647,26 +647,34 @@ PyObject *eDVBServiceRecord::getCutList()
 
 void eDVBServiceRecord::saveCutlist()
 {
-	// Save cuts only when main file is accessible.
-	if (::access(m_filename.c_str(), R_OK) < 0)
-		return;
-
+			/* XXX: dupe of eDVBServicePlay::saveCuesheet, refactor plz */
 	std::string filename = m_filename + ".cuts";
+
+	eDVBTSTools tstools;
+
+	if (tstools.openFile(m_filename.c_str()))
+	{
+		eDebug("[eDVBServiceRecord] saving cutlist failed because tstools failed");
+		return;
+	}
 
 	// If a cuts file exists, append to it (who cares about sorting it)
 	FILE *f = fopen(filename.c_str(), "a+b");
 	if (f)
 	{
-		std::list<pts_t> offsets;
-		fixupCuts(offsets);
+		unsigned long long where;
+		int what;
 
-		for (std::list<pts_t>::iterator i(offsets.begin()); i != offsets.end(); ++i)
+		for (std::map<int,pts_t>::iterator i(m_event_timestamps.begin()); i != m_event_timestamps.end(); ++i)
 		{
-			unsigned long long where;
-			int what;
-			pts_t p = *i;
-
-			eDebug("[eDVBServiceRecord] saveCutlist %llx", p);
+			pts_t p = i->second;
+			off_t offset = 0; // fixme, we need to note down both
+			if (tstools.fixupPTS(offset, p))
+			{
+				eDebug("[eDVBServiceRecord] fixing up PTS failed, not saving");
+				continue;
+			}
+			eDebug("[eDVBServiceRecord] fixed up %llx to %llx (offset %jx)", i->second, p, (intmax_t)offset);
 			where = htobe64(p);
 			what = htonl(2); /* mark */
 			fwrite(&where, sizeof(where), 1, f);
