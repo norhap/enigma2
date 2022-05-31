@@ -4295,8 +4295,8 @@ msgstr "No probado:"
 msgid "Not yet implemented!"
 msgstr "Aún no implementado!"
 
-msgid "When it is enabled, and you want to go to standby mode after wakeup timer, please set \"Startup to Standby\" option in \"Customize\" setup to \"No, except Wakeup timer\"."
-msgstr "Cuando está habilitado, y desea ir a modo reposo después del temporizador despertador, configure la opción \"Iniciar a modo reposo\" en ajustes \"Personalizar\" en \"No, excepto el temporizador despertador\"."
+msgid "When it is enabled, and you want to go to standby mode after wakeup timer, set \"Startup to Standby\" to \"No, except Wakeup timer\"."
+msgstr "Cuando está habilitado y desee ir a modo reposo después del temporizador despertador, configure \"Iniciar a modo reposo\" en \"No, excepto el temporizador despertador\"."
 
 msgid ""
 "Nothing to scan!\n"
