@@ -11,46 +11,44 @@ setup the "fonts".
 This has been done so another converter could convert the list to a different format, for example
 to generate HTML."""
 
-	# NOTE: The calling arguments enableWraparound, item_height and fonts are not
-	# used but remain here so that calling code does not need to be modified.
-	# The enableWrapAround function is correctly handles by the C++ code and the
-	# use of the enableWrapAround="1" attribute in the skin. Similarly the
-	# itemHeight and font specifications are handled by the skin.
-	#
 	def __init__(self, list=[], enableWrapAround=False, item_height=25, fonts=[]):
 		Source.__init__(self)
-		self.listData = list
+		self.__list = list
+		self.enableWrapAround = enableWrapAround
+		self.item_height = item_height
+		self.fonts = fonts
 		self.onSelectionChanged = []
-		self.disableCallbacks = False
-		self.listStyle = "default"  # Style might be an optional string which can be used to define different visualizations in the skin.
+		self.disable_callbacks = False
+		self.__style = "default"  # Style might be an optional string which can be used to define different visualisations in the skin.
 
-	def setList(self, listData):
-		self.listData = listData
+	def setList(self, list):
+		self.__list = list
 		self.changed((self.CHANGED_ALL,))
 
-	list = property(lambda self: self.listData, setList)
+	list = property(lambda self: self.__list, setList)
 
-	def updateList(self, listData):
+	def updateList(self, list):
 		"""Changes the list without changing the selection or emitting changed Events"""
-		maxIndex = len(listData) - 1
-		oldIndex = min(self.index, maxIndex)
-		self.disableCallbacks = True
-		self.setList(listData)
+		maxIndex = len(list) - 1
+		oldIndex = self.index
+		self.disable_callbacks = True
+		self.list = list
 		self.index = oldIndex
-		self.disableCallbacks = False
+		self.disable_callbacks = False
 
 	def entry_changed(self, index):
-		if not self.disableCallbacks:
+		if not self.disable_callbacks:
 			self.downstream_elements.entry_changed(index)
 
 	def modifyEntry(self, index, data):
-		self.listData[index] = data
+		self.__list[index] = data
 		self.entry_changed(index)
 
 	def selectionChanged(self, index):
-		if self.disableCallbacks:
+		if self.disable_callbacks:
 			return
-		for x in self.downstream_elements:  # Update all non-master targets.
+		# Update all non-master targets.
+		for x in self.downstream_elements:
 			if x is not self.master:
 				x.index = index
 		for x in self.onSelectionChanged:
@@ -77,11 +75,11 @@ to generate HTML."""
 
 	@cached
 	def getStyle(self):
-		return self.listStyle
+		return self.__style
 
 	def setStyle(self, style):
-		if self.listStyle != style:
-			self.listStyle = style
+		if self.__style != style:
+			self.__style = style
 			self.changed((self.CHANGED_SPECIFIC, "style"))
 
 	style = property(getStyle, setStyle)
@@ -90,13 +88,21 @@ to generate HTML."""
 		return self.getIndex()
 
 	def count(self):
-		return len(self.listData)
+		return len(self.__list)
 
-	def selectPrevious(self):  # This is a hack to protect code that was modified to use the previous up/down hack!
-		self.up()
+	def selectPrevious(self):
+		if self.getIndex() > 0:
+			self.index -= 1
+		elif self.enableWrapAround:
+			self.index = self.count() - 1
+		self.setIndex(self.index)
 
-	def selectNext(self):  # This is a hack to protect code that was modified to use the previous up/down hack!
-		self.down()
+	def selectNext(self):
+		if self.getIndex() < self.count() - 1:
+			self.index += 1
+		elif self.enableWrapAround:
+			self.index = 0
+		self.setIndex(self.index)
 
 	def top(self):
 		try:
@@ -113,18 +119,10 @@ to generate HTML."""
 			return
 
 	def up(self):
-		try:
-			instance = self.master.master.instance
-			instance.moveSelection(instance.moveUp)
-		except AttributeError:
-			return
+		self.selectPrevious()
 
 	def down(self):
-		try:
-			instance = self.master.master.instance
-			instance.moveSelection(instance.moveDown)
-		except AttributeError:
-			return
+		self.selectNext()
 
 	def pageDown(self):
 		try:
