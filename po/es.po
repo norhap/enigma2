@@ -18480,3 +18480,6 @@ msgstr "Falló la conexión FTP"
 
 msgid "Free %d MB: Low space available for timeshift. Change device"
 msgstr "Libre %d MB: Poco espacio disponible para hacer timeshift. Cambie de dispositivo"
+
+msgid "Emu waiting"
+msgstr "Esperando emu"

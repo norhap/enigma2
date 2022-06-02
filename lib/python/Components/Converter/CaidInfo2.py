@@ -467,7 +467,7 @@ class CaidInfo2(Converter, object):
 							textvalue = "No parse cannot emu"
 				else:
 					if self.type == self.ALL or self.type == self.SHORT or (self.type == self.FORMAT and (self.sfmt.count("%") > 3)):
-						textvalue = "Esperando emu"
+						textvalue = _("Emu waiting")
 		return textvalue
 
 	text = property(getText)
