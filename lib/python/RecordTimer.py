@@ -557,7 +557,7 @@ class RecordTimer(Timer):
 					type_offset = 5
 					if (timer_end - timer.begin) <= 1:
 						timer_end += 60
-					if timer.pipzap:
+					if timer.pipzap and not timer.repeated:
 						type_offset = 30
 				if timer.always_zap:
 					type_offset = 10
