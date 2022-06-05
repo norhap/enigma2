@@ -18483,3 +18483,9 @@ msgstr "Libre %d MB: Poco espacio disponible para hacer timeshift. Cambie de dis
 
 msgid "Emu waiting"
 msgstr "Esperando emu"
+
+msgid "Unable to access server timer"
+msgstr "No se pudo acceder al temporizador del servidor"
+
+msgid "Error while retreiving fallback timer information\n%s"
+msgstr "Error al recuperar la información del temporizador del servidor\n%s"
