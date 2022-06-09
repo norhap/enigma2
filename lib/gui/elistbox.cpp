@@ -385,7 +385,7 @@ void eListbox::updateScrollBar()
 					start = 996;
 				}
 				m_scrollbar->setStartEnd(start,end);
-			} 
+			}
 			return;
 		}
 
