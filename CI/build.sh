@@ -13,7 +13,7 @@ commit_files() {
   rm -rf *.pyc
   rm -rf *.pyo
   rm -rf *.mo
-  git checkout develop
+  git checkout windowstyle
   ./CI/chmod.sh
   ./CI/dos2unix.sh
   ./CI/PEP8.sh
@@ -22,7 +22,7 @@ commit_files() {
 
 upload_files() {
   git remote add upstream https://${GITHUB_TOKEN}@github.com/norhap/enigma2-openvision-1.git > /dev/null 2>&1
-  git push --quiet upstream develop || echo "failed to push with error $?"
+  git push --quiet upstream windowstyle || echo "failed to push with error $?"
 }
 
 setup_git

@@ -2,9 +2,9 @@ name: enigma2
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ windowstyle ]
   pull_request:
-    branches: [ develop ]
+    branches: [ windowstyle ]
 
 jobs:
   build:
