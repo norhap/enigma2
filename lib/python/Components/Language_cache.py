@@ -22,7 +22,7 @@ LANG_TEXT = {
 	 "T4": "Save",
 },
 "es_ES": {
-	 "T1": "Use the UP and DOWN keys to select language, Menu key to install new language. Afterwards press the OK button.",
+	 "T1": "Use las teclas ARRIBA y ABAJO para seleccionar el idioma, luego pulse botón OK. Con la tecla MENU podrá instalar un nuevo idioma.",
 	 "T2": "Selección de idioma",
 	 "T3": "Cancelar",
 	 "T4": "Guardar",
