@@ -10238,11 +10238,11 @@ msgstr "Portadora de sonido"
 msgid "StandbyLED"
 msgstr "StandbyLED"
 
-msgid "Startup the set top box in standby"
-msgstr "Inicie el receptor en modo de reposo"
+msgid "Startup the set top box in standby from deepstandby or from turn off."
+msgstr "Inicie el receptor a reposo desde espera profundo o desde apagado."
 
-msgid "Startup to Standby"
-msgstr "Iniciar a modo reposo"
+msgid "Startup to standby from deepstandby or from turn off"
+msgstr "Inicio a reposo desde espera profundo o desde apagado"
 
 msgid "Subtitle alignment"
 msgstr "Alineamiento de subtítulos"
