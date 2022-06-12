@@ -1,5 +1,5 @@
 from __future__ import print_function
-from os.path import join as pathjoin
+from os.path import isfile, join as pathjoin
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, gmtime
@@ -46,16 +46,19 @@ def getBrandModel():
 def getFPVersion():
 	ret = None
 	try:
-		ret = int(open("/proc/stb/fp/version", "r").read())
-	except IOError:
-		try:
-			fp = open("/dev/dbox/fp0")
-			ret = ioctl(fp.fileno(), 0)
-		except IOError:
+		if isfile("/sys/firmware/devicetree/base/bolt/tag"):
+			ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
+		elif getBoxType() in ('dm7080', 'dm820', 'dm520', 'dm525', 'dm900', 'dm920'):
+			ret = open("/proc/stb/fp/version", "r").read()
+		else:
+			ret = int(open("/proc/stb/fp/version", "r").read())
+	except (IOError, OSError):
+		if isfile("/dev/dbox/fp0"):
 			try:
-				ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
-			except:
-				print("getFPVersion failed!")
+				with open("/dev/dbox/fp0") as fd:
+					ret = ioctl(fd.fileno(), 0)
+			except (IOError, OSError) as err:
+				print("[StbHardware] %s" % err)
 	return ret
 
 
