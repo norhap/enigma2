@@ -49,4 +49,3 @@ class ChoiceList(MenuList):
 	def postWidgetCreate(self, instance):
 		MenuList.postWidgetCreate(self, instance)
 		self.moveToIndex(self.selection)
-		self.instance.setWrapAround(True)
