@@ -5,7 +5,7 @@ from Components.GUIComponent import GUIComponent
 
 
 class ScrollLabel(GUIComponent):
-	def __init__(self, text=""):
+	def __init__(self, text="", showscrollbar=True):
 		GUIComponent.__init__(self)
 		self.msgText = text
 		self.instance = None
