@@ -15,7 +15,7 @@ class OverscanWizard(Screen, ConfigListScreen):
 				<ePixmap pixmap="overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="3" alphatest="on"/>
 				<eLabel position="377,200" size="1244,648" zPosition="3"/>
 				<widget name="introduction" position="382,252" size="1234,623" halign="center" valign="center" font="Regular;30" zPosition="4"/>
-				<widget name="config" position="382,662" size="1234,226" font="Regular;30" itemHeight="40" zPosition="4"/>
+				<widget name="config" position="382,662" size="1234,226" entryFont="Regular;30" valueFont="Regular;22" itemHeight="40" zPosition="4"/>
 				<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
 			</screen>"""
 		else:
