@@ -18489,3 +18489,18 @@ msgstr "No se pudo acceder al temporizador del servidor"
 
 msgid "Error while retreiving fallback timer information\n%s"
 msgstr "Error al recuperar la información del temporizador del servidor\n%s"
+
+msgid "Enigma2 Player: ServiceApp"
+msgstr "Reproductor Enigma2: ServiceApp"
+
+msgid "Enigma2 Player: Default"
+msgstr "Reproductor Enigma2: Por defecto"
+
+msgid ""
+"Recording IPTV with ServiceApp enabled, timer ended"
+"\n"
+"Disable ServiceApp to record IPTV"
+msgstr ""
+"Grabación de IPTV con Serviceapp habilitado, temporizador terminado"
+"\n"
+"Deshabilite ServiceApp para grabar IPTV"

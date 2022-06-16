@@ -29,7 +29,7 @@ from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import SystemInfo
 
-from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine
+from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
 from Tools.Geolocation import geolocation
 from Tools.StbHardware import getFPVersion, getBrandModel
 from Tools.LoadPixmap import LoadPixmap
@@ -364,6 +364,7 @@ class About(Screen):
 				AboutText += _("Type Display: ") + getDisplayType() + "\n"
 			else:
 				AboutText += _("No Display") + "\n"
+		AboutText += _("Enigma2 Player: ServiceApp") if isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value else _("Enigma2 Player: Default")
 
 		AboutText += "\n"
 		AboutText += _("Uptime: ") + about.getBoxUptime()
