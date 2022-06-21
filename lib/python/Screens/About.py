@@ -364,7 +364,15 @@ class About(Screen):
 				AboutText += _("Type Display: ") + getDisplayType() + "\n"
 			else:
 				AboutText += _("No Display") + "\n"
-		AboutText += _("Enigma2 Player: ServiceApp") if isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value else _("Enigma2 Player: Default")
+		if isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value and not SystemInfo["HiSilicon"]:
+			player = "ServiceApp"
+		elif SystemInfo["HiSilicon"] and isPluginInstalled("ServiceApp"):
+			player = "ServiceApp (exteplayer3)"
+		elif SystemInfo["HiSilicon"] and isPluginInstalled("ServiceHisilicon") and not isPluginInstalled("ServiceApp"):
+			player = "ServiceHisilicon"
+		else:
+			player = "ServiceMP3"
+		AboutText += _("Media service player: %s") % player
 
 		AboutText += "\n"
 		AboutText += _("Uptime: ") + about.getBoxUptime()
