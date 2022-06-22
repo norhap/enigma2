@@ -479,6 +479,22 @@ def parseParameter(value):
 		return int(value)
 
 
+def parsePixmap(path, desktop, width=0, height=0):
+	option = path.find("#")
+	if option != -1:
+		path = path[:option]
+	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png") and rc_model.rcIsDefault() is False:
+		path = rc_model.getRcImg()
+	if isfile(path):
+		pixmap = LoadPixmap(path, desktop, None, width, height)
+		if pixmap is None:
+			skinError("Pixmap file '%s' could not be loaded" % path)
+	else:
+		skinError("Pixmap '%s' is not found or is not a file" % path)
+		pixmap = None
+	return pixmap
+
+
 def parsePosition(value, scale, object=None, desktop=None, size=None):
 	return ePoint(*parseValuePair(value, scale, object, desktop, size))
 
@@ -578,18 +594,6 @@ def parseVerticalAlignment(value):
 	return parseOptions(options, "horizontalAlignment", value, 1)
 
 
-def loadPixmap(path, desktop, width=0, height=0):  # Shouldn't this be size?
-	option = path.find("#")
-	if option != -1:
-		path = path[:option]
-	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png"):
-		path = SystemInfo["RCImage"]
-	pixmap = LoadPixmap(path, desktop, None, width, height)
-	if pixmap is None:
-		skinError("Pixmap file '%s' not found" % path)
-	return pixmap
-
-
 def collectAttributes(skinAttributes, node, context, skinPath=None, ignore=(), filenames=frozenset(("pixmap", "pointer", "seekPointer", "seek_pointer", "backgroundPixmap", "selectionPixmap", "sliderPixmap", "scrollbarBackgroundPixmap", "scrollbarForegroundPixmap", "scrollbarbackgroundPixmap", "scrollbarBackgroundPicture", "scrollbarSliderPicture"))):
 	size = None
 	pos = None
@@ -640,10 +644,10 @@ class AttributeParser:
 			print("[Skin] Error: Attribute '%s' with value '%s' in object of type '%s' (%s)!" % (attribute, value, self.guiObject.__class__.__name__, err))
 
 	def applyHorizontalScale(self, value):
-		return int(int(value) * self.scaleTuple[0][0] / self.scaleTuple[0][1])
+		return int(parseInteger(value) * self.scaleTuple[0][0] / self.scaleTuple[0][1])
 
 	def applyVerticalScale(self, value):
-		return int(int(value) * self.scaleTuple[1][0] / self.scaleTuple[1][1])
+		return int(parseInteger(value) * self.scaleTuple[1][0] / self.scaleTuple[1][1])
 
 	def alphaTest(self, value):
 		self.guiObject.setAlphatest(parseAlphaTest(value))
@@ -674,7 +678,7 @@ class AttributeParser:
 		self.guiObject.setBackgroundColor(parseColor(value, 0x00000000))
 
 	def backgroundPixmap(self, value):
-		self.guiObject.setBackgroundPixmap(loadPixmap(value, self.desktop))
+		self.guiObject.setBackgroundPixmap(parsePixmap(value, self.desktop))
 
 	def borderColor(self, value):
 		self.guiObject.setBorderColor(parseColor(value, 0x00FFFFFF))
@@ -761,11 +765,11 @@ class AttributeParser:
 		# Why is this being forced?  Why not just use add the 'alphaTest' attribute?
 		# if value.endswith(".svg"):  # If the image is a SVG force alphatest to "blend".
 		# 	self.guiObject.setAlphatest(BT_ALPHABLEND)
-		self.guiObject.setPixmap(loadPixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
+		self.guiObject.setPixmap(parsePixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
 
 	def pointer(self, value):
 		(name, pos) = [x.strip() for x in value.split(":", 1)]
-		ptr = loadPixmap(name, self.desktop)
+		ptr = parsePixmap(name, self.desktop)
 		pos = parsePosition(pos, self.scaleTuple)
 		self.guiObject.setPointer(0, ptr, pos)
 
@@ -782,7 +786,7 @@ class AttributeParser:
 		self.guiObject.setPixmapScaleFlags(parseScaleFlags(value))
 
 	def scrollbarBackgroundPixmap(self, value):
-		self.guiObject.setScrollbarBackgroundPixmap(loadPixmap(value, self.desktop))
+		self.guiObject.setScrollbarBackgroundPixmap(parsePixmap(value, self.desktop))
 
 	def scrollbarBackgroundPicture(self, value):  # For compatibility same as 'scrollbarBackgroundPixmap', use 'scrollbarBackgroundPixmap' instead.
 		self.scrollbarBackgroundPixmap(value)
@@ -823,7 +827,7 @@ class AttributeParser:
 		attribDeprecationWarning("scrollbarSliderForegroundColor", "scrollbarForegroundColor")
 
 	def scrollbarForegroundPixmap(self, value):
-		self.guiObject.setScrollbarForegroundPixmap(loadPixmap(value, self.desktop))
+		self.guiObject.setScrollbarForegroundPixmap(parsePixmap(value, self.desktop))
 
 	def scrollbarSliderPicture(self, value):  # This legacy definition uses an inconsistent name, use'scrollbarForegroundPixmap' instead!
 		self.scrollbarForegroundPixmap(value)
@@ -850,7 +854,7 @@ class AttributeParser:
 
 	def seekPointer(self, value):
 		(name, pos) = [x.strip() for x in value.split(":", 1)]
-		ptr = loadPixmap(name, self.desktop)
+		ptr = parsePixmap(name, self.desktop)
 		pos = parsePosition(pos, self.scaleTuple)
 		self.guiObject.setPointer(1, ptr, pos)
 
@@ -862,7 +866,7 @@ class AttributeParser:
 		attribDeprecationWarning("selectionDisabled", "selection")
 
 	def selectionPixmap(self, value):
-		self.guiObject.setSelectionPixmap(loadPixmap(value, self.desktop))
+		self.guiObject.setSelectionPixmap(parsePixmap(value, self.desktop))
 
 	def shadowColor(self, value):
 		self.guiObject.setShadowColor(parseColor(value, 0x00000000))
@@ -878,14 +882,18 @@ class AttributeParser:
 		attribDeprecationWarning("sliderPixmap", "scrollbarForegroundPixmap")
 
 	def text(self, value):
-		self.guiObject.setText(_(value))
+		if value:
+			value = _(value)
+		self.guiObject.setText(value)
 
 	def textOffset(self, value):
-		(xOffset, yOffset) = [x.strip() for x in value.split(",")]
+		(xOffset, yOffset) = [parseInteger(x.strip()) for x in value.split(",")]
 		self.guiObject.setTextOffset(ePoint(self.applyHorizontalScale(xOffset), self.applyVerticalScale(yOffset)))
 
 	def title(self, value):
-		self.guiObject.setTitle(_(value))
+		if value:
+			value = _(value)
+		self.guiObject.setTitle(value)
 
 	def transparent(self, value):
 		self.guiObject.setTransparent(1 if parseBoolean("transparent", value) else 0)
@@ -1126,7 +1134,7 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 				bpName = pixmap.attrib.get("pos")
 				filename = pixmap.attrib.get("filename")
 				if filename and bpName:
-					png = loadPixmap(resolveFilename(scope, filename, path_prefix=pathSkin), desktop)
+					png = parsePixmap(resolveFilename(scope, filename, path_prefix=pathSkin), desktop)
 					try:
 						style.setPixmap(eWindowStyleSkinned.__dict__[bsName], eWindowStyleSkinned.__dict__[bpName], png)
 					except Exception as err:
