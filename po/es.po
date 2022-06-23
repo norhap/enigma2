@@ -8785,6 +8785,24 @@ msgstr "sin lista de canales"
 msgid "no module found"
 msgstr "módulo no encontrado"
 
+msgid "module disabled"
+msgstr "módulo deshabilitado"
+
+msgid "CI Operation Mode"
+msgstr "CI Modo Operación"
+
+msgid "CI enabled"
+msgstr "CI activado"
+
+msgid "PID Filtering"
+msgstr "Filtrado PID"
+
+msgid "Choose the CI protocol operation mode for standard CI or CI Plus."
+msgstr "Elija el modo de funcionamiento del protocolo CI para CI estándar o CI Plus."
+
+msgid "Your hardware can detect CI mode itself or works only in legacy mode."
+msgstr "Su hardware puede detectar el modo CI por sí mismo o solo funciona en modo heredado."
+
 msgid "no resource manager"
 msgstr "sin administrador de recursos"
 
