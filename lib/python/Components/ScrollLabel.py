@@ -174,7 +174,7 @@ class ScrollLabel(GUIComponent):
 				self.leftText.setText("\n".join(leftText))
 				self.rightText.setText("\n".join(rightText))
 			else:
-				self.leftText.setText(text)
+				self.leftText.setText(str(text))
 			self.totalTextHeight = self.leftText.calculateSize().height()
 			leftWidth = self.leftWidth
 			rightWidth = self.rightWidth
