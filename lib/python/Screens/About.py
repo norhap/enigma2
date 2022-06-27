@@ -367,9 +367,9 @@ class About(Screen):
 		if isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value and not SystemInfo["HiSilicon"]:
 			player = "ServiceApp"
 		elif SystemInfo["HiSilicon"] and isPluginInstalled("ServiceApp"):
-			player = "ServiceApp (exteplayer3)"
+			player = _("ServiceApp. Recommended (ExtEplayer3)")
 		elif SystemInfo["HiSilicon"] and isPluginInstalled("ServiceHisilicon") and not isPluginInstalled("ServiceApp"):
-			player = "ServiceHisilicon"
+			player = _("ServiceHisilicon. Recommended ServiceApp (ExtEplayer3)")
 		else:
 			player = "ServiceMP3"
 		AboutText += _("Media service player: %s") % player
