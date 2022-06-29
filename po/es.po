@@ -18520,11 +18520,11 @@ msgstr "Error al recuperar la información del temporizador del servidor\n%s"
 msgid "Media service player: %s"
 msgstr "Reproductor servicios multimedia: %s"
 
-msgid "ServiceApp. Recommended (ExtEplayer3)"
-msgstr "ServiceApp. Recomendado (ExtEplayer3)"
+msgid "ServiceApp (Recommended ExtEplayer3)"
+msgstr "ServiceApp (Recomendado ExtEplayer3)"
 
-msgid "ServiceHisilicon. Recommended ServiceApp (ExtEplayer3)"
-msgstr "ServiceHisilicon. Recomendado ServiceApp (ExtEplayer3)"
+msgid "ServiceHisilicon (Recommended ServiceApp ExtEplayer3)"
+msgstr "ServiceHisilicon (Recomendado ServiceApp ExtEplayer3)"
 
 msgid ""
 "Recording IPTV with ServiceApp enabled or your set top box have HiSilicon chipset"
