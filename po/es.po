@@ -9965,7 +9965,7 @@ msgstr "Incluir ECM en streams http"
 msgid "Include EIT in http streams"
 msgstr "Incluir EIT en streams http"
 
-msgid "Include PID in http streams"
+msgid "Include SDT, BAT in http streams"
 msgstr "Incluir PID en streams http"
 
 msgid "Info bar timeout"
@@ -10412,7 +10412,7 @@ msgstr "Cuando está habilitado, los datos de ECM se incluirán en los streams h
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
 msgstr "Cuando está habilitado, los datos EIT se incluirán en los streams http. Esto permite que un receptor del cliente muestre EPG."
 
-msgid "When enabled, PID data will be included in http streams."
+msgid "When enabled, SDT, BAT data will be included in http streams."
 msgstr "Cuando está habilitado, los datos PID se incluirán en streams http."
 
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
