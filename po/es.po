@@ -10413,7 +10413,7 @@ msgid "When enabled, EIT data will be included in http streams. This allows a cl
 msgstr "Cuando está habilitado, los datos EIT se incluirán en los streams http. Esto permite que un receptor del cliente muestre EPG."
 
 msgid "When enabled, SDT, BAT data will be included in http streams."
-msgstr "Cuando está habilitado, los datos SDT BAT se incluirán en streams http."
+msgstr "Cuando está habilitado, SDT BAT (tablas de grupos y descripciones de canales), se incluirán en streams http."
 
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
 msgstr "Cuando está habilitado, se mostrará un mensaje emergente cuando una película haya finalizado y la próxima comenzará."
