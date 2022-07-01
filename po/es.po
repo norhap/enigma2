@@ -4295,8 +4295,8 @@ msgstr "No probado:"
 msgid "Not yet implemented!"
 msgstr "Aún no implementado!"
 
-msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or from power off\" to \"No, except Wakeup timer\"."
-msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o desde apagado\" en \"No, excepto el temporizador despertador\"."
+msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except Wakeup timer\"."
+msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o apagado\" en \"No, excepto el temporizador despertador\"."
 
 msgid ""
 "Nothing to scan!\n"
@@ -9966,7 +9966,7 @@ msgid "Include EIT in http streams"
 msgstr "Incluir EIT en streams http"
 
 msgid "Include SDT, BAT in http streams"
-msgstr "Incluir PID en streams http"
+msgstr "Incluir SDT en streams http"
 
 msgid "Info bar timeout"
 msgstr "Duración de la InfoBar"
@@ -10262,8 +10262,8 @@ msgstr "StandbyLED"
 msgid "Startup the set top box in standby from deepstandby or from turn off."
 msgstr "Inicie el receptor a reposo desde espera profundo o desde apagado."
 
-msgid "Startup to standby from deepstandby or from power off"
-msgstr "Iniciar a reposo desde espera profundo o desde apagado"
+msgid "Startup to standby from deepstandby or power off"
+msgstr "Iniciar a reposo desde espera profundo o apagado"
 
 msgid "Subtitle alignment"
 msgstr "Alineamiento de subtítulos"
@@ -10413,7 +10413,7 @@ msgid "When enabled, EIT data will be included in http streams. This allows a cl
 msgstr "Cuando está habilitado, los datos EIT se incluirán en los streams http. Esto permite que un receptor del cliente muestre EPG."
 
 msgid "When enabled, SDT, BAT data will be included in http streams."
-msgstr "Cuando está habilitado, los datos PID se incluirán en streams http."
+msgstr "Cuando está habilitado, los datos SDT BAT se incluirán en streams http."
 
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
 msgstr "Cuando está habilitado, se mostrará un mensaje emergente cuando una película haya finalizado y la próxima comenzará."
