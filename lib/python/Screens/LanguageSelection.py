@@ -58,7 +58,7 @@ class LanguageSelection(Screen):
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = Label(_("Add Language"))
 		self["key_blue"] = Label(_("Delete Language(s)"))
-		self["description"] = Label(_("'Save' changes active language.\n'Add Language' or MENU adds additional language(s).\n'Delete Language' allows either deletion of all but English and active language OR selected language."))
+		self["description"] = Label(_("'Save' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but English and selected language, You also have the option to remove the selected language."))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -130,7 +130,7 @@ class LanguageSelection(Screen):
 			if curlang == t[0]:
 				lang = t[1]
 				break
-		self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to delete all languages except English and current language:\n\nSelect 'No' to delete only the chosen language:\n\n") + _("%s") % (lang), default=config.osd.language.value)
+		self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except English and the selected language.\n\nSelect 'No' to delete only the chosen language:\n\n") + _("%s") % (lang), default=config.osd.language.value)
 
 	def delLangCB(self, answer):
 		if answer:
@@ -138,6 +138,7 @@ class LanguageSelection(Screen):
 			language.activateLanguage(self.oldActiveLanguage)
 			self.updateList()
 			self.selectActiveLanguage()
+			config.pluginbrowser.languages_po.save()
 		else:
 			curlang = config.osd.language.value
 			lang = curlang
@@ -147,7 +148,7 @@ class LanguageSelection(Screen):
 				if curlang == t[0]:
 					lang = t[1]
 					break
-			self.session.openWithCallback(self.deletelanguagesCB, MessageBox, _("Do you really want to delete selected language:\n\n") + _("%s") % (lang), default=False)
+			self.session.openWithCallback(self.deletelanguagesCB, MessageBox, _("Do you really want to delete selected language?\n\n") + _("%s") % (lang), default=False)
 
 	def deletelanguagesCB(self, answer):
 		if answer:
@@ -196,12 +197,14 @@ class LanguageSelection(Screen):
 
 	def installLanguage(self):
 		from Screens.PluginBrowser import PluginDownloadBrowser
+		config.pluginbrowser.languages_po.value = True
 		self.session.openWithCallback(self.update_after_installLanguage, PluginDownloadBrowser, 0)
 
 	def update_after_installLanguage(self):
 		language.InitLang()
 		self.updateList()
 		self.updateCache()
+		config.pluginbrowser.languages_po.save()
 
 	def changed(self):
 		self.run(justlocal=True)
