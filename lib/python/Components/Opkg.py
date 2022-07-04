@@ -66,12 +66,8 @@ def enumPlugins(filter_start=''):
 					package = line.split(":", 1)[1].strip()
 					version = ''
 					description = ''
-					if config.misc.extraopkgpackages.value is True:
-						if package.startswith(filter_start) and not package.endswith('--pycache--'):
-							continue
-					else:
-						if package.startswith(filter_start) and not package.endswith('-dev') and not package.endswith('-staticdev') and not package.endswith('-dbg') and not package.endswith('-doc') and not package.endswith('-src') and not package.endswith('-po') and not package.endswith('--pycache--'):
-							continue
+					if package.startswith(filter_start) and not package.endswith('-dev') and not package.endswith('-staticdev') and not package.endswith('-dbg') and not package.endswith('-doc') and not package.endswith('-src') and not package.endswith('-po') and not package.endswith('--pycache--'):
+						continue
 					package = None
 				if package is None:
 					continue
@@ -157,10 +153,7 @@ class OpkgComponent:
 
 	def startCmd(self, cmd, args=None):
 		if cmd == self.CMD_UPDATE:
-			if config.misc.opkgcleanmode.value is True:
-				self.runCmdEx("clean && opkg update")
-			else:
-				self.runCmdEx("update")
+			self.runCmdEx("update")
 		elif cmd == self.CMD_UPGRADE:
 			if os.path.exists("/home/root/opkgupgrade.log"):
 				os.unlink("/home/root/opkgupgrade.log")

@@ -36,10 +36,7 @@ class SoftwareTools(PackageInfoHandler):
 		self.Console = Console()
 		self.UpdateConsole = Console()
 		self.cmdList = []
-		if config.misc.extraopkgpackages.value is True:
-			self.unwanted_extensions = ('--pycache--')
-		else:
-			self.unwanted_extensions = ('-dev', '-staticdev', '-dbg', '-doc', '-src', '-po', '--pycache--')
+		self.unwanted_extensions = ('-dev', '-staticdev', '-dbg', '-doc', '-src', '-po', '--pycache--')
 		self.opkg = OpkgComponent()
 		self.opkg.addCallback(self.opkgCallback)
 

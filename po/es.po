@@ -2164,14 +2164,14 @@ msgstr[1] "Hecho - Instalados, actualizados o borrados %d paquetes (%s)"
 msgid "Download plugins"
 msgstr "Descargar plugins"
 
-msgid "Downloadable new plugins"
-msgstr "Nuevos plugins descargables"
+msgid "Install plugins"
+msgstr "Instalar plugins"
 
 msgid "Downloading"
 msgstr "Descargando"
 
 msgid "Downloading plugin information. Please wait..."
-msgstr "Descargando información del plugin. Espera por favor..."
+msgstr "Descargando información. Espera por favor..."
 
 msgid "Dutch"
 msgstr "Holandés"
@@ -2920,7 +2920,13 @@ msgid "Germany"
 msgstr "Alemania"
 
 msgid "Getting plugin information. Please wait..."
-msgstr "Obtener información del plugin. Por favor espera…"
+msgstr "Obteniendo información. Por favor espera…"
+
+msgid "You want to install the plugin \"%s\"?"
+msgstr "Quiere instalar el plugin \"%s\"?"
+
+msgid "You want to remove the plugin \"%s\"?"
+msgstr "Quiere eliminar el plugin \"%s\"?"
 
 msgid "Ghana"
 msgstr "Ghana"
@@ -4152,8 +4158,11 @@ msgstr "No hay conexión de red disponible."
 msgid "No networks found"
 msgstr "No se encontraron redes"
 
-msgid "No new plugins found"
-msgstr "No se encontraron nuevos plugins"
+msgid "No plugins found, check server."
+msgstr "No se encontraron plugins, revise el servidor."
+
+msgid "List of available plugins."
+msgstr "Lista de plugins disponibles."
 
 msgid "No positioner capable frontend found."
 msgstr "No se encontró ningún frontend capaz de posicionar."
@@ -4711,9 +4720,6 @@ msgid "Please wait... Loading list..."
 msgstr "Espera por favor… Cargando lista…"
 
 msgid "Plugin Browser"
-msgstr "Navegador de Plugins"
-
-msgid "Plugin browser"
 msgstr "Navegador de Plugins"
 
 msgid "Plugin manager activity information"
@@ -7991,6 +7997,30 @@ msgstr ""
 "Ya tiene una lista de canales instalada,\n"
 "le gustaría eliminar\n"
 "“%s”?"
+
+msgid ""
+"You already have a bootlogo installed,\n"
+"would you like to remove\n"
+"\"%s\"?"
+msgstr ""
+"Ya tiene un bootlogo instalado,\n"
+"le gustaría eliminar\n"
+"“%s”?"
+
+msgid "Install lcd picons on"
+msgstr "Instalar picons lcd en"
+
+msgid "Show packages languages"
+msgstr "Mostrar paquetes de idiomas"
+
+msgid "If set to 'yes', it will display 'languages' packs and 'PO' in browser'."
+msgstr "Si se establece en 'sí', mostrará los paquetes de 'idiomas' y 'PO' en el navegador'."
+
+msgid "Show source packages"
+msgstr "Mostrar paquetes fuente"
+
+msgid "If set to 'yes' it will show the 'SRC' packages in browser."
+msgstr "Si se establece en 'sí', mostrará los paquetes 'SRC' en el navegador."
 
 msgid "You can cancel the installation."
 msgstr "Puede cancelar la instalación."
@@ -17223,114 +17253,6 @@ msgstr "Definido por el usuario oculto"
 msgid "Plugin Browser Setup"
 msgstr "Ajustes Navegador de Plugins"
 
-msgid "Show development packages in opkg"
-msgstr "Mostrar paquetes de desarrollo en opkg"
-
-msgid "When enabled, you will see dev, staticdev, dbg, doc, src and po packages in opkg list."
-msgstr "Cuando esté habilitado, verá los paquetes dev, staticdev, dbg, doc, src y po en la lista de opkg."
-
-msgid "Show alsa-utils in plugin browser"
-msgstr "Mostrar alsa-utils en el navegador de plugins"
-
-msgid "When enabled, you will see alsa-utils packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes alsa-utils en la sección de descarga del navegador de plugins."
-
-msgid "Show bluez5 in plugin browser"
-msgstr "Mostrar bluez5 en el navegador de plugins"
-
-msgid "When enabled, you will see bluez5 packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes bluez5 en la sección de descarga del navegador de plugins."
-
-msgid "Show busybox in plugin browser"
-msgstr "Mostrar busybox en el navegador de plugins"
-
-msgid "When enabled, you will see busybox packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes de busybox en la sección de descarga del navegador de plugins."
-
-msgid "Show e2fsprogs in plugin browser"
-msgstr "Mostrar e2fsprogs en el navegador de plugins"
-
-msgid "When enabled, you will see e2fsprogs packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes e2fsprogs en la sección de descarga del navegador de plugins."
-
-msgid "Show enigma2-locale in plugin browser"
-msgstr "Mostrar enigma2-locale en el navegador de plugins"
-
-msgid "When enabled, you will see enigma2-locale packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes enigma2-locale en la sección de descarga del navegador de plugins."
-
-msgid "Show firmware in plugin browser"
-msgstr "Mostrar firmware en el navegador de plugins"
-
-msgid "When enabled, you will see firmware packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá paquetes de firmware en la sección de descarga del navegador de plugins."
-
-msgid "Show frequency-xml-list in plugin browser"
-msgstr "Mostrar la lista de frecuencia xml en el navegador de plugins"
-
-msgid "When enabled, you will see frequency-xml-list packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes de listas de frecuencia xml en la sección de descarga del navegador de plugins."
-
-msgid "Show glibc-charmap in plugin browser"
-msgstr "Mostrar glibc-charmap en el navegador de plugins"
-
-msgid "When enabled, you will see glibc-charmap packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes glibc-charmap en la sección de descarga del navegador de plugins."
-
-msgid "Show glibc-gconv in plugin browser"
-msgstr "Mostrar glibc-gconv en el navegador de plugins"
-
-msgid "When enabled, you will see glibc-gconv packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes glibc-gconv en la sección de descarga del navegador de plugins."
-
-msgid "Show gstreamer1.0-plugins in plugin browser"
-msgstr "Mostrar complementos de gstreamer1.0 en el navegador de plugins"
-
-msgid "When enabled, you will see gstreamer1.0-plugins packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes de complementos de gstreamer1.0 en la sección de descarga del navegador de plugins."
-
-msgid "Show kernel-module in plugin browser"
-msgstr "Mostrar el módulo del kernel en el navegador de plugins"
-
-msgid "When enabled, you will see kernel-module packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes del módulo del kernel en la sección de descarga del navegador de plugins."
-
-msgid "Show mtd-utils in plugin browser"
-msgstr "Mostrar mtd-utils en el navegador de plugins"
-
-msgid "When enabled, you will see mtd-utils packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes mtd-utils en la sección de descarga del navegador de plugins."
-
-msgid "Show packagegroup-base in plugin browser"
-msgstr "Mostrar packagegroup-base en el navegador de plugins"
-
-msgid "When enabled, you will see packagegroup-base packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá paquetes basados en grupos de paquetes en la sección de descarga del navegador de plugins."
-
-msgid "Show pam-plugin in plugin browser"
-msgstr "Mostrar pam-plugin en el navegador de plugins"
-
-msgid "When enabled, you will see pam-plugin packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes pam-plugin en la sección de descarga del navegador de plugins."
-
-msgid "Show perl-module in plugin browser"
-msgstr "Mostrar módulo perl en el navegador de plugins"
-
-msgid "When enabled, you will see perl-module packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes del módulo perl en la sección de descarga del navegador de plugins."
-
-msgid "Show python in plugin browser"
-msgstr "Mostrar python en el navegador de plugins"
-
-msgid "When enabled, you will see python packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes de python en la sección de descarga del navegador de plugins."
-
-msgid "Show tzdata in plugin browser"
-msgstr "Mostrar tzdata en el navegador de plugins"
-
-msgid "When enabled, you will see tzdata packages in plugin browser download section."
-msgstr "Cuando esté habilitado, verá los paquetes tzdata en la sección de descarga del navegador de plugins."
-
 msgid "OPKG clean mode"
 msgstr "Modo de limpieza OPKG"
 
@@ -18388,6 +18310,12 @@ msgstr ""
 "\n"
 "\"Eliminar lenguage(s)\" permite eliminar todo menos el inglés y el idioma activo o el idioma seleccionado."
 
+msgid "Updating cache"
+msgstr "Actualizando caché"
+
+msgid "Updating cache, please wait..."
+msgstr "Actualizando caché, por favor espere..."
+
 msgid "Add Language"
 msgstr "Añadir Lenguage"
 
@@ -18425,12 +18353,12 @@ msgid "The selected langugage is unavailable - using en_US"
 msgstr "El idioma seleccionado no está disponible - usando en_US"
 
 msgid ""
-"Select 'Yes' to delete all languages except English and current language:\n"
+"Select 'Yes' to remove all languages except English and the selected language.\n"
 "\n"
 "Select 'No' to delete only the chosen language:\n"
 "\n"
 msgstr ""
-"Seleccione \"Sí\" para eliminar todos los idiomas excepto el inglés y el idioma actual.\n"
+"Seleccione \"Sí\" para eliminar todos los idiomas excepto el inglés y el idioma seleccionado.\n"
 "\n"
 "Seleccione \"No\" para eliminar solo el idioma elegido:\n"
 "\n"

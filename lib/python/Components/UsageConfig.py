@@ -62,9 +62,10 @@ def InitUsageConfig():
 		("5", _("5")),
 		("6", _("6"))
 	])
-	config.misc.OVupdatecheck = ConfigYesNo(default=False)
-	config.misc.extraopkgpackages = ConfigYesNo(default=False)
-	config.misc.opkgcleanmode = ConfigYesNo(default=False)
+	config.usage.sort_pluginlist = ConfigYesNo(default=True)
+	config.pluginbrowser = ConfigSubsection()
+	config.pluginbrowser.languages_po = ConfigYesNo(default=False)
+	config.pluginbrowser.src = ConfigYesNo(default=False)
 
 	config.usage.alternative_number_mode = ConfigYesNo(default=False)
 
