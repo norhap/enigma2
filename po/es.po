@@ -1608,6 +1608,9 @@ msgstr "Conectado a"
 msgid "Connected transcoding, limit - no PiP!"
 msgstr "Transcodificado conectado, límite - no PiP!"
 
+msgid "Service type 4097 incorrect for PiP!"
+msgstr "Tipo de servicio 4097 incorrecto para PiP!"
+
 msgid "Console"
 msgstr "Consola"
 
