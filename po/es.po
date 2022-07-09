@@ -4944,7 +4944,7 @@ msgid "Protect standby menu"
 msgstr "Proteger menú de reposo"
 
 msgid "Protect timer menu"
-msgstr "Proteger menú de temporizares"
+msgstr "Proteger menú de temporizadores"
 
 msgid "Provider"
 msgstr "Proveedor"
@@ -8085,8 +8085,8 @@ msgid "You didn't select a channel to record from."
 msgstr "No seleccionó un canal a grabar."
 
 #, python-format
-msgid "You have to wait % minutes, % seconds!"
-msgstr "Tienes que esperar % minutos, % segundos!"
+msgid "You have to wait %(min)d minutes, %(sec)d seconds!"
+msgstr "Tienes que esperar %(min)d minutos, %(sec)d segundos!"
 
 #, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
