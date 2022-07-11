@@ -3,14 +3,10 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Components.Converter.Poll import Poll
+from six.moves.urllib.request import Request, urlopen
 import time
 import os
-try:
-	import urllib2
-except ImportError:
-	import urllib
 import socket
-from sys import version_info
 
 
 class YWeather(Poll, Converter, object):
@@ -132,15 +128,9 @@ class YWeather(Poll, Converter, object):
 	def fetchXML(self, URL, save_to):
 		socket_timeout = 10
 		socket.setdefaulttimeout(socket_timeout)
-		if version_info.major >= 3:
-			req = urllib.request.Request(URL)
-		else:
-			req = urllib2.Request(URL)
+		request = Request(url)
 		try:
-			if version_info.major >= 3:
-				response = urllib.request.urlopen(req)
-			else:
-				response = urllib2.urlopen(req)
+			response = urlopen(request)
 		except Exception as e:
 			if hasattr(e, 'code') and hasattr(e, 'reason'):
 				print("[YWeather] fetchXML Failed to retrieve XML file. Error: %s %s" % (str(e.code), str(e.reason)))

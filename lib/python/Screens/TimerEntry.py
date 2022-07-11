@@ -1,6 +1,5 @@
 from datetime import datetime
 from time import localtime, mktime, strftime, time
-import urllib
 
 from enigma import eEPGCache, iRecordableServicePtr
 
