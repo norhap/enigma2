@@ -1164,6 +1164,7 @@ class CommitInfoDevelop(Screen):
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
+		from six.moves.urllib.request import urlopen
 		try:
 			commitlog += 80 * '-' + '\n'
 			commitlog += url.split('/')[-2] + '\n'
@@ -1171,12 +1172,7 @@ class CommitInfoDevelop(Screen):
 			try:
 				# OpenPli 5.0 uses python 2.7.11 and here we need to bypass the certificate check
 				from ssl import _create_unverified_context
-				if version_info.major >= 3:
-					from urllib.request import urlopen
-					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
-				else: # Python 2
-					from urllib2 import urlopen
-					log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
+				log = loads(urlopen(url, timeout=5, context=_create_unverified_context()).read())
 			except:
 				log += _("No log: please try later again")
 			for c in log:

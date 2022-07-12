@@ -19,10 +19,7 @@ from Tools.StbHardware import getBrandModel
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
 from enigma import eTimer, eDVBDB
-try:
-	from urllib2 import urlopen
-except:
-	from urllib.request import urlopen
+from six.moves.urllib.request import urlopen
 import datetime
 import os
 import json
