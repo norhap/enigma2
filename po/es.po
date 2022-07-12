@@ -4813,7 +4813,7 @@ msgid "Press OK on your remote control to continue."
 msgstr "Pulse OK en su mando para continuar."
 
 msgid "Press OK to keep the currently selected skin %s."
-msgstr "Presione OK para mantener el seleccionado actualmente skin %s."
+msgstr "Presione OK para mantener el actualmente seleccionado skin %s."
 
 msgid "Press OK to activate the selected skin %s."
 msgstr "Presione OK para activar el seleccionado skin %s."
