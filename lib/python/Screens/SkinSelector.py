@@ -98,8 +98,9 @@ class SkinSelector(Screen, HelpableScreen):
 		default = _("Default")
 		defaultPicon = _("Default+Picon")
 		current = _("Current")
-		pending = _("Error in XML file: Try to solve and then restart.")
+		pending = _("Error in XML")
 		displayPicon = pathjoin(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_picon.xml")
+		displayGrautec = pathjoin(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_grautec.xml")
 		skinList = []
 		# Find and list the available skins...
 		for dir in [dir for dir in listdir(self.rootDir) if isdir(pathjoin(self.rootDir, dir))]:
@@ -131,16 +132,16 @@ class SkinSelector(Screen, HelpableScreen):
 						# Code can be added here to reject unsupported resolutions.
 					# The "piconprev.png" image should be "prevpicon.png" to keep it with its partner preview image.
 					preview = pathjoin(previewPath, "piconprev.png" if skinFile == "skin_display_picon.xml" else "prev.png")
-					FileDisplayXML = "skin_display.xml"
-					FileDisplayPiconXML = "skin_display_picon.xml"
 					if skin == EMERGENCY_SKIN:
 						list = [EMERGENCY_NAME, emergency, dir, skin, resolution, preview]
 					elif skin == DEFAULT_SKIN:
 						list = [dir, default, dir, skin, resolution, preview]
 					elif skin == DEFAULT_DISPLAY_SKIN:
-						list = [dir, default, dir, skin, FileDisplayXML, preview]
+						list = [DEFAULT_DISPLAY_SKIN.split(".")[0].split("/")[1], default, dir, skin, DEFAULT_DISPLAY_SKIN.split("/skin_")[1], preview]
 					elif skin == displayPicon:
-						list = [dir, default, dir, skin, FileDisplayPiconXML, preview]
+						list = [displayPicon.split(".")[0].split("/")[1], default, dir, skin, displayPicon.split("/skin_")[1], preview]
+					elif skin == displayGrautec:
+						list = [displayGrautec.split(".")[0].split("/")[1], default, dir, skin, displayGrautec.split("/skin_")[1], preview]
 					else:
 						list = [dir, "", dir, skin, resolution, preview]
 					if skin == self.current:
@@ -164,19 +165,14 @@ class SkinSelector(Screen, HelpableScreen):
 	def loadPreview(self):
 		self.currentSelectedSkin = self["skins"].getCurrent()
 		preview, resolution, skin = self.currentSelectedSkin[6], self.currentSelectedSkin[5], self.currentSelectedSkin[4]
-		preview, FileDisplayPiconXML, SkinDisplayPicon = self.currentSelectedSkin[6], self.currentSelectedSkin[4], self.currentSelectedSkin[3]
 		self.changedEntry()
 		if not exists(preview):
 			preview = resolveFilename(SCOPE_GUISKIN, "noprev.png")
 		self.picload.startDecode(preview)
-		if skin == self.config.value and resolution != None:
-			self["description"].setText(_("Press OK to keep the currently the selected %s.") % resolution)
+		if skin == self.config.value:
+			self["description"].setText(_("Press OK to keep the currently selected skin %s.") % resolution)
 		else:
-			self["description"].setText(_("Press OK to activate the selected %s.") % resolution)
-		if SkinDisplayPicon != self.config.value and resolution == None:
-			self["description"].setText(_("Press OK to activate the selected %s.") % FileDisplayPiconXML)
-		if skin == self.config.value and resolution == None:
-			self["description"].setText(_("Press OK to keep the currently the selected %s.") % FileDisplayPiconXML)
+			self["description"].setText(_("Press OK to activate the selected skin %s.") % resolution)
 
 	def cancel(self):
 		self.close(False)
@@ -249,7 +245,7 @@ class LcdSkinSelector(SkinSelector):
 		self.rootDir = resolveFilename(SCOPE_LCDSKIN)
 		self.config = config.skin.display_skin
 		self.current = currentDisplaySkin
-		self.xmlList = ["skin_display.xml", "skin_display_picon.xml"]
+		self.xmlList = ["skin_display.xml", "skin_display_picon.xml", "skin_display_grautec.xml"]
 
 
 class SkinSelectorSummary(Screen):

@@ -4812,11 +4812,11 @@ msgstr "Pulse MENU en su mando para opciones adicionales."
 msgid "Press OK on your remote control to continue."
 msgstr "Pulse OK en su mando para continuar."
 
-msgid "Press OK to keep the currently the selected %s."
-msgstr "Presione OK para mantener el %s seleccionado actualmente."
+msgid "Press OK to keep the currently selected skin %s."
+msgstr "Presione OK para mantener el seleccionado actualmente skin %s."
 
-msgid "Press OK to activate the selected %s."
-msgstr "Presione OK para activar el seleccionado %s."
+msgid "Press OK to activate the selected skin %s."
+msgstr "Presione OK para activar el seleccionado skin %s."
 
 msgid "To apply the selected '%s' skin the GUI needs to restart. Would you like to restart the GUI now?"
 msgstr "Para aplicar el skin  '%s' seleccionado, la GUI debe reiniciarse. ¿Desea reiniciar la GUI ahora?"
@@ -18069,8 +18069,8 @@ msgstr "HDMI-CEC Activado"
 msgid "No fixed address set"
 msgstr "No se ha establecido dirección fija"
 
-msgid "Error in XML file: Try to solve and then restart."
-msgstr "Error en archivo XML: intente solucionarlo y luego reinicie."
+msgid "Error in XML"
+msgstr "Error en XML"
 
 msgid "Press yellow button to set CEC address again"
 msgstr "Pulse amarillo para configurar la dirección HDMI-CEC nuevamente"
