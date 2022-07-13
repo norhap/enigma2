@@ -13,22 +13,22 @@ class OverscanWizard(Screen, ConfigListScreen):
 		if getDesktop(0).size().height() == 1080:
 			self.skin = """<screen position="fill" flags="wfNoBorder">
 				<ePixmap pixmap="overscan1920x1080.png" position="0,0" size="1920,1080" zPosition="3" alphatest="on"/>
-				<eLabel position="377,200" size="1244,648" zPosition="3"/>
-				<widget name="introduction" position="382,252" size="1234,623" halign="center" valign="center" font="Regular;30" zPosition="4"/>
-				<widget name="config" position="382,662" size="1234,226" entryFont="Regular;30" valueFont="Regular;22" itemHeight="40" zPosition="4"/>
-				<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
+				<widget name="title" position="380,212" size="1160,35" font="Regular;40" backgroundColor="black" foregroundColor="blue" halign="center" valign="center" zPosition="4"/>
+				<widget name="introduction" position="380,247" size="1160,660" font="Regular;26" halign="center" valign="center" backgroundColor="black" zPosition="4"/>
+				<widget name="config" position="380,867" size="1160,35" entryFont="Regular;30" valueFont="Regular;29" itemHeight="40" zPosition="4"/>
+				<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1"/>
 			</screen>"""
 		else:
-			self.skin = """<screen position="fill"	flags="wfNoBorder">
+			self.skin = """<screen position="fill" flags="wfNoBorder">
 				<ePixmap pixmap="overscan1280x720.png" position="0,0" size="1280,720" zPosition="3" alphatest="on"/>
-				<eLabel position="235,131" size="810,457" zPosition="3"/>
-				<widget name="introduction" position="240,175" size="800,623" halign="center" valign="center" font="Regular;18" zPosition="4"/>
-				<widget name="config" position="240,590" size="800,120" font="Regular;20" itemHeight="30" zPosition="4"/>
-				<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
+				<widget name="title" position="240,135" size="800,40" font="Regular;30" backgroundColor="black" foregroundColor="blue" halign="center" valign="center" zPosition="4"/>
+				<widget name="introduction" position="240,175" size="800,440" font="Regular;18" backgroundColor="black" halign="center" valign="center" zPosition="4"/>
+				<widget name="config" position="240,580" size="800,120" entryFont="Regular;20" valueFont="Regular;21" itemHeight="30" zPosition="4"/>
+				<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1"/>
 			</screen>"""
 
 		Screen.__init__(self, session)
-		self.setTitle(_("Overscan wizard"))
+		self["title"] = Label(_("Overscan wizard"))
 		self["introduction"] = Label()
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
@@ -56,14 +56,14 @@ class OverscanWizard(Screen, ConfigListScreen):
 		from enigma import eSize, ePoint
 		if getDesktop(0).size().height() == 1080:
 			lenlist = len(self.list) * 40
-			self["config"].instance.move(ePoint(382, 835 - lenlist))
-			self["config"].instance.resize(eSize(1234, lenlist))
-			self["introduction"].instance.resize(eSize(1234, 535 - lenlist))
+			self["config"].instance.move(ePoint(380, 867 - lenlist))
+			self["config"].instance.resize(eSize(1160, lenlist))
+			self["introduction"].instance.resize(eSize(1160, 660 - lenlist))
 		else:
 			lenlist = len(self.list) * 30
 			self["config"].instance.move(ePoint(240, 580 - lenlist))
 			self["config"].instance.resize(eSize(800, lenlist))
-			self["introduction"].instance.resize(eSize(800, 405 - lenlist))
+			self["introduction"].instance.resize(eSize(800, 440 - lenlist))
 
 	def setScreen(self):
 		self.list = []
