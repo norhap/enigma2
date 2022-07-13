@@ -977,7 +977,7 @@ class oscEntitlements(Screen, NcamInfo):
 			csystem = i.attrib["system"]
 			creshare = i.attrib["reshare"]
 			if not host_ok:
-				hostadr = i.find("hostaddress").text
+				hostadr = i.find("hostaddress")
 			chop = int(i.attrib["hop"])
 			if chop > 5:
 				chop = 5
