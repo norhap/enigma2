@@ -3201,6 +3201,15 @@ msgstr "IDLE"
 msgid "IP address"
 msgstr "Dirección IP"
 
+msgid "Port (httpport)"
+msgstr "Puerto (httpport)"
+
+msgid "Set in section [webif] port (httpport), enter (0) if you don't have any numeric value assigned in your (httpport)."
+msgstr "Configure en la sección [webif] puerto (httpport), ingrese (0) si no tiene ningún valor numérico asignado en su (httpport)."
+
+msgid "Set receiver IP address."
+msgstr "Establecer la dirección IP del receptor."
+
 msgid "IP of fallback remote receiver."
 msgstr "IP del receptor reserva para respaldo."
 
@@ -14321,8 +14330,11 @@ msgstr "(Todos los lectores)"
 msgid "Address"
 msgstr "Dirección IP"
 
-msgid "Automatically update Client/Server View?"
-msgstr "Actualizar automáticamente la vista cliente/servidor?"
+msgid "Automatically update Clients/Servers view"
+msgstr "Actualizar automáticamente la vista de Clientes/Servidores"
+
+msgid "Automatically update Clients/Servers view."
+msgstr "Actualizar automáticamente la vista de Clientes/Servidores."
 
 msgid ""
 "Can be used to test defect pixels on TV screen.\n"
@@ -14418,6 +14430,9 @@ msgstr "Oscam Info - Menú Principal"
 msgid "Password (httpwd)"
 msgstr "Contraseña (httppwd)"
 
+msgid "Set password if you have it set in section [webif] httppwd."
+msgstr "Establece contraseña si la tiene configurada en la sección [webif] httppwd."
+
 msgid "Please choose CCcam-Reader"
 msgstr "Elegir CCcam-Lector"
 
@@ -14430,11 +14445,17 @@ msgstr "Protocolo"
 msgid "Providers: "
 msgstr "Proveedores: "
 
-msgid "Read Userdata from oscam.conf"
+msgid "Read userdata from oscam.conf"
 msgstr "Leer datos usuarios desde oscam.conf"
 
-msgid "Read Userdata from ncam.conf"
+msgid "Read userdata from ncam.conf"
 msgstr "Leer datos usuarios desde ncam.conf"
+
+msgid "Read userdata from oscam.conf."
+msgstr "Leer datos usuarios desde oscam.conf."
+
+msgid "Read userdata from ncam.conf."
+msgstr "Leer datos usuarios desde ncam.conf."
 
 msgid "Reader"
 msgstr "Lector"
@@ -14475,8 +14496,14 @@ msgstr "Estado"
 msgid "Update interval (in seconds)"
 msgstr "Actualizar intervalo (segundos)"
 
+msgid "Update interval (in seconds)."
+msgstr "Actualizar intervalo (segundos)."
+
 msgid "Username (httpuser)"
-msgstr "Nombre Usuario (httpuser)"
+msgstr "Nombre usuario (httpuser)"
+
+msgid "Set username if you have it set in section [webif] httpuser."
+msgstr "Establezca el nombre de usuario si lo tiene configurado en la sección [webif] httpuser."
 
 msgid "listens to hotplug events"
 msgstr "escucha eventos directo"
@@ -14864,20 +14891,20 @@ msgstr "Configure la velocidad de desvanecimiento de la infobar"
 msgid "All slots"
 msgstr "Todos los slots"
 
-msgid "NCam Info - Configuration"
-msgstr "NCam Info - Configuración"
+msgid "Ncam Info Setup"
+msgstr "Ajustes de información Ncam"
 
-msgid "NCam Info - Main Menu"
-msgstr "NCam Info - Menú Principal"
+msgid "NCam Info Main Menu"
+msgstr "Menú principal de información NCam"
 
 msgid "NCam webif disabled"
 msgstr "Webif NCam deshabilitado"
 
-msgid "OScam Info - Configuration"
-msgstr "OScam Info - Configuración"
+msgid "OScam Info Setup"
+msgstr "Ajustes de información OScam"
 
-msgid "OScam Info - Main Menu"
-msgstr "OScam Info - Menú Principal"
+msgid "OScam Info Main Menu"
+msgstr "Menú principal de información OScam"
 
 msgid "OScam webif disabled"
 msgstr "Webif OScam deshabilitado"
