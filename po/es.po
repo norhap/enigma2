@@ -14330,11 +14330,11 @@ msgstr "(Todos los lectores)"
 msgid "Address"
 msgstr "Dirección IP"
 
-msgid "Automatically update Clients/Servers view"
-msgstr "Actualizar automáticamente la vista de Clientes/Servidores"
+msgid "Automatically update Clients/Servers/Log screens"
+msgstr "Actualizar automáticamente las pantallas Clientes/Servidores/Log"
 
-msgid "Automatically update Clients/Servers view."
-msgstr "Actualizar automáticamente la vista de Clientes/Servidores."
+msgid "Enabled, screens Clients, Servers and Log are updated on time interval."
+msgstr "Habilitado, las pantallas Clientes, Servidores y Log se actualizan en intervalos de tiempo."
 
 msgid ""
 "Can be used to test defect pixels on TV screen.\n"
@@ -14496,8 +14496,8 @@ msgstr "Estado"
 msgid "Update interval (in seconds)"
 msgstr "Actualizar intervalo (segundos)"
 
-msgid "Update interval (in seconds)."
-msgstr "Actualizar intervalo (segundos)."
+msgid "Time interval for screens update Clients/Servers/Log (in seconds)."
+msgstr "Intervalo de tiempo de actualización de pantallas Clientes/Servidores/Log (en segundos)."
 
 msgid "Username (httpuser)"
 msgstr "Nombre usuario (httpuser)"
