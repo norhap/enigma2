@@ -104,7 +104,7 @@ class OscamInfo:
 		blocked = False
 		ipconfigured = ipcompiled
 		user = pwd = None
-		ret = _("OScam webif disabled")
+		ret = _("OSCam webif disabled")
 
 		if webif and port is not None:
 		# oscam reports it got webif support and webif is running (Port != 0)
@@ -392,12 +392,12 @@ class OscamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
-		Screen.setTitle(self, _("Oscam Info - Main Menu"))
+		Screen.setTitle(self, _("OSCam Info - Main Menu"))
 		if f == 1.5:
-			self.skin = """<screen position="center,center" size="640,400" title="Oscam Info - Main Menu">"""
+			self.skin = """<screen position="center,center" size="640,400" title="OSCam Info - Main Menu">"""
 			self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
 		else:
-			self.skin = """<screen position="center,center" size="425,260" title="Oscam Info - Main Menu">"""
+			self.skin = """<screen position="center,center" size="425,260" title="OSCam Info - Main Menu">"""
 			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
@@ -556,7 +556,7 @@ class OscamInfoMenu(Screen):
 	def showMenu(self):
 		entr = self.buildMenu(self.menu)
 		if SystemInfo["OScamIsActive"]:
-			self.setTitle(_("OScam Info Main Menu"))
+			self.setTitle(_("OSCam Info - Main Menu"))
 		self["mainmenu"].l.setList(entr)
 		self["mainmenu"].moveToIndex(0)
 
@@ -565,12 +565,12 @@ class oscECMInfo(Screen, OscamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("OScam ECM info"))
+		Screen.setTitle(self, _("OSCam ECM Info"))
 		if f == 1.5:
-			self.skin = """<screen position="center,center" size="960,540" title="OScam ECM info">"""
+			self.skin = """<screen position="center,center" size="960,540" title="OSCam ECM info">"""
 			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
 		else:
-			self.skin = """<screen position="center ,center" size="640,360" title="OScam ECM info">"""
+			self.skin = """<screen position="center ,center" size="640,360" title="OSCam ECM info">"""
 			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 		self.skin += """</screen>"""
 		self.ecminfo = "/tmp/ecm.info"
@@ -819,17 +819,17 @@ class oscInfo(Screen, OscamInfo):
 					if i != "":
 						self.out.append(self.buildLogListEntry((i,)))
 			if self.what == "c":
-				self.setTitle(_("Client Info ( OScam-Version: %s )") % self.getVersion())
+				self.setTitle(_("Client Info ( OSCam-Version: %s )") % self.getVersion())
 				self["key_green"].setText("")
 				self["key_yellow"].setText(_("Servers"))
 				self["key_blue"].setText(_("Log"))
 			elif self.what == "s":
-				self.setTitle(_("Server Info ( OScam-Version: %s )") % self.getVersion())
+				self.setTitle(_("Server Info ( OSCam-Version: %s )") % self.getVersion())
 				self["key_green"].setText(_("Clients"))
 				self["key_yellow"].setText("")
 				self["key_blue"].setText(_("Log"))
 			elif self.what == "l":
-				self.setTitle(_("OScam Log ( OScam-Version: %s )") % self.getVersion())
+				self.setTitle(_("OSCam Log ( OSCam-Version: %s )") % self.getVersion())
 				self["key_green"].setText(_("Clients"))
 				self["key_yellow"].setText(_("Servers"))
 				self["key_blue"].setText("")

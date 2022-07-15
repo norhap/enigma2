@@ -14372,10 +14372,6 @@ msgstr ""
 msgid "Cards:"
 msgstr "Tarjetas:"
 
-#, python-format
-msgid "Client Info ( Oscam-Version: %s )"
-msgstr "Cliente Info ( Oscam-Version: %s )"
-
 msgid "Clients"
 msgstr "Clientes"
 
@@ -14421,11 +14417,8 @@ msgstr "Etiqueta"
 msgid "Last Req."
 msgstr "Último Req."
 
-msgid "Oscam Info - Configuration"
-msgstr "Oscam Info - Configuración"
-
-msgid "Oscam Info - Main Menu"
-msgstr "Oscam Info - Menú Principal"
+msgid "OSCam Info - Main Menu"
+msgstr "OSCam Info - Menú Principal"
 
 msgid "Password (httpwd)"
 msgstr "Contraseña (httppwd)"
@@ -14465,9 +14458,6 @@ msgstr "Estadísticas Lector"
 
 msgid "Serv.Name"
 msgstr "Serv.Nombre"
-
-msgid "Server Info ( Oscam-Version: %s )"
-msgstr "Servidor Info ( Oscam-Version: %s )"
 
 msgid "Server:"
 msgstr "Servidor:"
@@ -14891,23 +14881,20 @@ msgstr "Configure la velocidad de desvanecimiento de la infobar"
 msgid "All slots"
 msgstr "Todos los slots"
 
-msgid "Ncam Info Setup"
-msgstr "Ajustes de información Ncam"
+msgid "NCam Info Setup"
+msgstr "Ajustes Información NCam"
 
-msgid "NCam Info Main Menu"
-msgstr "Menú principal de información NCam"
+msgid "NCam Info - Main Menu"
+msgstr "Menú principal - Información NCam"
 
 msgid "NCam webif disabled"
 msgstr "Webif NCam deshabilitado"
 
-msgid "OScam Info Setup"
-msgstr "Ajustes de información OScam"
+msgid "OSCam Info Setup"
+msgstr "Ajustes Información OSCam"
 
-msgid "OScam Info Main Menu"
-msgstr "Menú principal de información OScam"
-
-msgid "OScam webif disabled"
-msgstr "Webif OScam deshabilitado"
+msgid "OSCam webif disabled"
+msgstr "Webif OSCam deshabilitado"
 
 msgid "Use OpenTV EPG information when it is available."
 msgstr "Use la información EPG OpenTV cuando esté disponible."
@@ -17773,17 +17760,17 @@ msgstr ""
 msgid "Not valide MAC address"
 msgstr "Dirección MAC no válida"
 
-msgid "Client Info ( OScam-Version: %s )"
-msgstr "Información del Cliente ( Versión OScam: %s )"
+msgid "Client Info ( OSCam-Version: %s )"
+msgstr "Información del Cliente ( Versión OSCam: %s )"
 
 msgid "Client Info ( NCam-Version: %s )"
-msgstr "Información del Cliente ( Versión Ncam: %s )"
+msgstr "Información del Cliente ( Versión NCam: %s )"
 
-msgid "Server Info ( OScam-Version: %s )"
-msgstr "Información del Servidor ( Versión OScam: %s )"
+msgid "Server Info ( OSCam-Version: %s )"
+msgstr "Información del Servidor ( Versión OSCam: %s )"
 
 msgid "Server Info ( NCam-Version: %s )"
-msgstr "Información del Servidor ( Versión Ncam: %s )"
+msgstr "Información del Servidor ( Versión NCam: %s )"
 
 msgid "(Show only reader:"
 msgstr "(Mostrar solo reader:"

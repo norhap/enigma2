@@ -392,12 +392,12 @@ class NcamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
-		Screen.setTitle(self, _("Ncam Info Main Menu"))
+		Screen.setTitle(self, _("NCam Info - Main Menu"))
 		if f == 1.5:
-			self.skin = """<screen position="center,center" size="640,400" title="Ncam Info Main Menu">"""
+			self.skin = """<screen position="center,center" size="640,400" title="NCam Info Main Menu">"""
 			self.skin += """<widget name="mainmenu" position="50,50" size="590, 350" zPosition="1" scrollbarMode="showOnDemand" />"""
 		else:
-			self.skin = """<screen position="center,center" size="425,260" title="Ncam Info Main Menu">"""
+			self.skin = """<screen position="center,center" size="425,260" title="NCam Info Main Menu">"""
 			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
@@ -556,7 +556,7 @@ class NcamInfoMenu(Screen):
 	def showMenu(self):
 		entr = self.buildMenu(self.menu)
 		if SystemInfo["NCamIsActive"]:
-			self.setTitle(_("NCam Info Main Menu"))
+			self.setTitle(_("NCam Info - Main Menu"))
 		self["mainmenu"].l.setList(entr)
 		self["mainmenu"].moveToIndex(0)
 
@@ -565,12 +565,12 @@ class oscECMInfo(Screen, NcamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Ncam ECM info"))
+		Screen.setTitle(self, _("NCam ECM info"))
 		if f == 1.5:
-			self.skin = """<screen position="center,center" size="960,540" title="Ncam ECM info">"""
+			self.skin = """<screen position="center,center" size="960,540" title="NCam ECM info">"""
 			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="50,50" size="960,540" transparent="1" />"""
 		else:
-			self.skin = """<screen position="center ,center" size="640,360" title="Ncam ECM info">"""
+			self.skin = """<screen position="center ,center" size="640,360" title="NCam ECM info">"""
 			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 		self.skin += """</screen>"""
 		self.ecminfo = "/tmp/ecm.info"
