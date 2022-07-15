@@ -42,7 +42,7 @@ class TimerEntry(ConfigListScreen, Screen):
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Timer type"))
 		self["key_blue"] = StaticText("")
-		self["actions"] = HelpableNumberActionMap(self, ["SetupActions", "GlobalActions", "PiPSetupActions", "ColorActions"], {
+		self["actions"] = HelpableNumberActionMap(self, ["ConfigListActions", "GlobalActions", "PiPSetupActions", "ColorActions"], {
 			"ok": self.keySelect,
 			"save": self.keyGo,
 			"cancel": self.keyCancel,
