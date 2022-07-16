@@ -14418,7 +14418,7 @@ msgid "Last Req."
 msgstr "Último Req."
 
 msgid "OSCam Info - Main Menu"
-msgstr "OSCam Info - Menú Principal"
+msgstr "Menú principal - Información OSCam"
 
 msgid "Password (httpwd)"
 msgstr "Contraseña (httppwd)"
@@ -15519,7 +15519,7 @@ msgid "CCcam Remote Info"
 msgstr "Remoto CCcam Info"
 
 msgid "CCcam Info - Main Menu"
-msgstr "Menú Principal - CCcam Info"
+msgstr "Menú principal - Información CCcam"
 
 msgid "CCcam Client Info"
 msgstr "CCcam Info Clientes"
