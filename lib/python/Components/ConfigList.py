@@ -42,14 +42,15 @@ class ConfigList(GUIComponent):
 		self.handleKey(ACTIONKEY_TIMEOUT)
 
 	def handleKey(self, key, callback=None):
-		selection = self.getCurrent()
-		if selection and selection[1].enabled:
-			changed = selection[1].handleKey(key, callback)
-			self.invalidateCurrent()
-			if key in ACTIONKEY_NUMBERS:
-				self.timer.start(1000, 1)
-			return changed
-		return False
+		for item in range(len(self.list)):
+			selection = self.getCurrent()
+			if selection and selection[1].enabled:
+				changed = selection[1].handleKey(key, callback)
+				self.invalidateCurrent()
+				if key in ACTIONKEY_NUMBERS:
+					self.timer.start(1000, 1)
+				return changed
+			return False
 
 	def toggle(self):
 		self.getCurrent()[1].toggle()
@@ -235,7 +236,10 @@ class ConfigListScreen:
 		self.restartMsg = _("Restart GUI now?") if msg is None else msg
 
 	def getCurrentItem(self):
-		return self["config"].getCurrent() and self["config"].getCurrent()[1] or None
+		try:
+			return self["config"].getCurrent() and self["config"].getCurrent()[1] or None
+		except Exception as err:
+			print(err)
 
 	def getCurrentEntry(self):
 		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
