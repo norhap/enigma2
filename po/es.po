@@ -16730,14 +16730,17 @@ msgstr "Retraso:"
 msgid "Auto deep standby"
 msgstr "Modo espera profundo automático"
 
-msgid ""
-"Please set your time options.\n"
-"\n"
-"Press YELLOW to set the time zone via geolocation."
-msgstr ""
-"Configura sus opciones de horario.\n"
-"\n"
-"Pulsa Amarillo para usar su horario y continue con el wizard."
+msgid "Press YELLOW button to set your schedule."
+msgstr "Presione el botón AMARILLO para establecer su horario."
+
+msgid "Your local time has been set successfully. Press \"OK\" to continue wizard."
+msgstr "Su hora local se ha configurado correctamente. Presione \"OK\" para continuar con el asistente."
+
+msgid "Time Wizard"
+msgstr "Asistente de Horario"
+
+msgid "Set local time"
+msgstr "Establecer hora local"
 
 msgid "Skin setting"
 msgstr "Ajuste skin"

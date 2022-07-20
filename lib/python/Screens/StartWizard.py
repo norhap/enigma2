@@ -17,6 +17,7 @@ from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.config import config, ConfigBoolean, configfile
 from Screens.LanguageSelection import LanguageWizard
+from Screens.Time import TimeWizard
 from enigma import eConsoleAppContainer, eTimer, eActionMap
 import os
 
@@ -185,6 +186,7 @@ if not os.path.isfile("/etc/installed"):
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
+wizardManager.registerWizard(TimeWizard, config.misc.firstrun.value, priority=20)
 if OverscanWizard:
 	wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.value, priority=40)
