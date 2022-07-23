@@ -1237,6 +1237,8 @@
 		<key id="KEY_F2" mapto="f2_long" flags="l" />
 		<key id="KEY_F3" mapto="f3" flags="b" />
 		<key id="KEY_F3" mapto="f3_long" flags="l" />
+		<key id="KEY_F4" mapto="f4" flags="b" />
+		<key id="KEY_F4" mapto="f4_long" flags="l" />
 		<key id="KEY_F6" mapto="f6" flags="b" />
 		<key id="KEY_F6" mapto="f6_long" flags="l" />
 		<key id="KEY_AUX" mapto="HDMIin" flags="b" />
