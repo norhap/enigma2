@@ -60,7 +60,7 @@ class ActionMap:
 				return res
 			return 1
 		else:
-			print(_("[ActionMap] Keymap '%s' -> Unknown mapto='%s' It's probably an action that is needed elsewhere in the code, check.") % (context, action))
+			print(_("[ActionMap] Keymap '%s' -> mapto='%s' Unknown or missing, check if you need it, or is it a mapto other code part.") % (context, action))
 			return 0
 
 	def destroy(self):

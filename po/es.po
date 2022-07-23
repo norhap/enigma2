@@ -18355,8 +18355,8 @@ msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams 
 msgid "[ActionMap] Missing actions in keymap, '%s' missing: mapto='%s'."
 msgstr "[ActionMap] Faltan acciones en keymap, '%s' falta: mapto='%s'."
 
-msgid "[ActionMap] Keymap '%s' -> Unknown mapto='%s' It's probably an action that is needed elsewhere in the code, check."
-msgstr "[ActionMap] Keymap '%s' -> Desconocido mapto='%s' Probablemente es una acción que se necesita en otro lugar del código, compruébelo."
+msgid "[ActionMap] Keymap '%s' -> mapto='%s' Unknown or missing, check if you need it, or is it a mapto other code part."
+msgstr "[ActionMap] Keymap '%s' -> mapto='%s' Desconocido o faltante, compruebe si lo necesita o si es un mapa de otra parte del código."
 
 msgid "Scan and search files and extensions in subdirs"
 msgstr "Escanea y busca archivos y extensiones en subdirectorios"
