@@ -1224,6 +1224,8 @@
 		<key id="KEY_SLEEP" mapto="sleep_long" flags="l" />
 		<key id="KEY_CONTEXT_MENU" mapto="contextmenu" flags="b" />
 		<key id="KEY_CONTEXT_MENU" mapto="contextmenu_long" flags="l" />
+		<key id="KEY_PLAYER" mapto="contextmenu" flags="b" />
+		<key id="KEY_PLAYER" mapto="contextmenu_long" flags="l" />
 		<key id="KEY_HOME" mapto="home" flags="m" />
 		<key id="KEY_POWER" mapto="power" flags="b" />
 		<key id="KEY_POWER" mapto="power_long" flags="l" />
@@ -1265,6 +1267,8 @@
 		<key id="KEY_VOD" mapto="vod_long" flags="l" />
 		<key id="KEY_OPEN" mapto="open" flags="b" />
 		<key id="KEY_OPEN" mapto="open_long" flags="l" />
+		<key id="KEY_OPTION" mapto="magic" flags="b" />
+		<key id="KEY_OPTION" mapto="magic_long" flags="l" />
 		<key id="KEY_OPTION" mapto="option" flags="b" />
 		<key id="KEY_OPTION" mapto="option_long" flags="l" />
 		<key id="KEY_PC" mapto="pc" flags="b" />
