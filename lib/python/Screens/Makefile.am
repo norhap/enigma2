@@ -11,7 +11,6 @@ install_PYTHON = \
 	Ci.py \
 	ClientMode.py \
 	Console.py \
-	CopyFiles.py \
 	CronTimer.py \
 	Dish.py \
 	DVD.py \
