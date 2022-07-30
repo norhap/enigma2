@@ -18146,6 +18146,18 @@ msgstr "Eliminar los canales que ya existen de los transpondedores buscados ante
 msgid "Choose whether to scan for free services only or whether to include paid/encrypted services too."
 msgstr "Elija si desea buscar solo canales gratuitos o si desea incluir también canales de pago."
 
+msgid "Choose whether AC3 Plus sound tracks should be transcoded to AC3."
+msgstr "Elija si las pistas de sonido AC3 Plus deben transcodificarse a AC3."
+
+msgid "Choose whether AAC sound tracks should be transcoded."
+msgstr "Elija si las pistas de sonido AAC deben transcodificarse."
+
+msgid "This option allows you to switch audio to BT speakers.."
+msgstr "Esta opción le permite cambiar el audio a altavoces BT."
+
+msgid "This option configures the general audio delay for BT speakers."
+msgstr "Esta opción configura el retardo de audio general para altavoces BT."
+
 msgid ""
 "Replace all '%s' tags with:"
 "\n"

@@ -222,9 +222,7 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
+		self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def selectionChanged(self):
 		if self["config"].getCurrent() == self.enableEntry:

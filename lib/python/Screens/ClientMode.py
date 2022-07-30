@@ -26,7 +26,7 @@ class ClientModeScreen(ConfigListScreen, Screen):
 		self.initial_state = config.clientmode.enabled.value
 		self.onChangedEntry = []
 		self.session = session
-		ConfigListScreen.__init__(self, [], session=session, on_change=self.changedEntry)
+		ConfigListScreen.__init__(self, [], session=session)
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions", "ColorActions"],
 		{
@@ -47,10 +47,6 @@ class ClientModeScreen(ConfigListScreen, Screen):
 		self["VKeyIcon"] = Boolean(False)
 
 		self.createSetup()
-
-		if not self.selectionChanged in self["config"].onSelectionChanged:
-			self["config"].onSelectionChanged.append(self.selectionChanged)
-		self.selectionChanged()
 
 	def createSetup(self):
 		setup_list = []
@@ -77,9 +73,6 @@ class ClientModeScreen(ConfigListScreen, Screen):
 
 		self["config"].list = setup_list
 		self["config"].l.setList(setup_list)
-
-	def selectionChanged(self):
-		self["description"].setText(self.getCurrentDescription())
 
 	def run(self): # for start wizard
 		self.saveconfig()
