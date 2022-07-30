@@ -1774,6 +1774,7 @@ def InitUsageConfig():
 	])
 	config.ntp.timesync.addNotifier(timesyncChanged)
 	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)
+	config.usage.new_navigation = ConfigYesNo(default=False)
 
 
 def updateChoices(sel, choices):
