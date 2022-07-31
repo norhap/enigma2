@@ -18152,7 +18152,7 @@ msgstr "Elija si las pistas de sonido AC3 Plus deben transcodificarse a AC3."
 msgid "Choose whether AAC sound tracks should be transcoded."
 msgstr "Elija si las pistas de sonido AAC deben transcodificarse."
 
-msgid "This option allows you to switch audio to BT speakers.."
+msgid "This option allows you to switch audio to BT speakers."
 msgstr "Esta opción le permite cambiar el audio a altavoces BT."
 
 msgid "This option configures the general audio delay for BT speakers."
@@ -18495,3 +18495,9 @@ msgstr "ServiceHisilicon (Recomendado ServiceApp ExtEplayer3)"
 
 msgid "IPTV recording with ServiceApp enabled - recording canceled"
 msgstr "Grabación de IPTV con ServiceApp habilitado - grabación cancelada"
+
+msgid "Experimental navigation"
+msgstr "Navegación experimental"
+
+msgid "This is a temporary setting to enable testing of new navigation code within the C++ GUI engine."
+msgstr "Esta es una configuración temporal para permitir pruebas de un nuevo código de navegación dentro del motor GUI de C++."
