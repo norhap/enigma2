@@ -438,9 +438,10 @@ void eListbox::updateScrollBar()
 					}
 					eDebug("[eListbox] updateScrollBar thumb=%d steps=%d start=%d end=%d range=%d m_items_per_page=%d entries=%d m_selected=%d", thumb, steps, start, end, range, m_items_per_page, entries, m_selected);
 				}
+
 				m_scrollbar->setStartEnd(start, end, true);
 
-			}
+			} 
 			return;
 		}
 
