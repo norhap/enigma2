@@ -10,7 +10,7 @@ class EnigmaLog:
 
 	def write(self, data):
 		if isinstance(data, bytes):
-			data = data.decode("UTF-8")
+			data = data.encode("UTF-8", "ignore")
 		self.line += data
 		if "\n" in data:
 			ePythonOutput(self.line, self.level)

@@ -148,7 +148,7 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 
 	def insertChar(self, ch, pos=False, owr=False, ins=False):
 		if isinstance(ch, bytes):
-			ch = ch.decode("UTF-8")
+			ch = ch.decode("UTF-8", "ignore")
 		n = len(ch)
 		if not pos:
 			pos = self.currPos
