@@ -4,7 +4,6 @@ from enigma import eConsoleAppContainer
 from Components.config import config
 from Components.Harddisk import harddiskmanager
 from Tools.Directories import resolveFilename, SCOPE_LIBDIR
-from sys import version_info
 
 opkgDestinations = []
 opkgStatusPath = ''
@@ -187,8 +186,7 @@ class OpkgComponent:
 		self.cmd.dataAvail.remove(self.cmdData)
 
 	def cmdData(self, data):
-		if version_info.major >= 3:
-			data = data.decode()
+		data = data.decode()
 		print("[Opkg] data:", data)
 		if self.cache is None:
 			self.cache = data

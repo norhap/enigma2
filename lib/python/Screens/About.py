@@ -1371,7 +1371,7 @@ class Troubleshoot(Screen):
 			self["AboutScrollLabel"].setText(_("An error occurred - Please try again later"))
 
 	def dataAvail(self, data):
-		self["AboutScrollLabel"].appendText(data.decode()) if version_info.major >= 3 else self["AboutScrollLabel"].appendText(data)
+		self["AboutScrollLabel"].appendText(data.decode())
 
 	def run_console(self):
 		self["AboutScrollLabel"].setText("")

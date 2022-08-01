@@ -3802,8 +3802,7 @@ class NetworkPassword(ConfigListScreen, Screen):
 			self.close()
 
 	def dataAvail(self, data):
-		if version_info.major >= 3:
-			data = data.decode()
+		data = data.decode()
 		self.output_line += data
 		while True:
 			i = self.output_line.find('\n')
