@@ -586,8 +586,9 @@ class TunerInformation(InformationBase):
 				curIndex += 1
 			count += 1
 		for count in range(len(descList)):
-			data = descList[count]["start"] if descList[count]["start"] == descList[count]["end"] else ("%s-%s" % (descList[count]["start"], descList[count]["end"]))
-			info.append(formatLine("", "Tuner %s" % data + ":" + "\n" + descList[count]["desc"]))
+			data = descList[count]["start"] if descList[count]["start"] == descList[count]["end"] else ("%s - %s" % (descList[count]["start"], descList[count]["end"]))
+			info.append(formatLine("H", "Tuner %s:" % data))
+			info.append(formatLine("", "%s" % descList[count]["desc"]))
 		# info.append("")
 		# info.append(formatLine("H", _("Logical tuners")))  # Each tuner is a listed separately even if the hardware is common.
 		# info.append("")
