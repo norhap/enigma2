@@ -17,7 +17,7 @@ class ConsoleItem:
 		self.name = name
 		self.container = eConsoleAppContainer()
 		self.binary = binary
-		if callback is not None:  # If the caller isn't interested in our results, we don't need to store the output either.
+		if callback:  # If the caller isn't interested in our results, we don't need to store the output either.
 			self.appResults = []
 			self.container.dataAvail.append(self.dataAvailCB)
 		self.container.appClosed.append(self.appClosedCB)
@@ -28,7 +28,7 @@ class ConsoleItem:
 		retVal = self.container.execute(*cmd)
 		if retVal:
 			self.appClosedCB(retVal)
-		if callback is None:
+		if not callback:
 			try:
 				pid = self.container.getPID()
 				print("[Console] Waiting for command (PID %d) to finish." % pid)
@@ -45,12 +45,12 @@ class ConsoleItem:
 		del self.container.dataAvail[:]
 		del self.container.appClosed[:]
 		self.container = None
-		if self.callback != None:
+		if self.callback:
 			appResults = b"".join(self.appResults)
 			if version_info.major >= 3:
 				appResults = appResults if self.binary else appResults.decode()
-			appResults = appResults if self.binary else appResults
-
+			else:
+				appResults = appResults if self.binary else appResults
 			self.callback(appResults, retVal, self.extraArgs)
 
 
