@@ -13,12 +13,6 @@
 
 #define BRASIL_NET_LOGICAL_CHANNEL_DESCRIPTOR 0x82
 
-#ifdef HAVE_OLDE2_API
-#ifndef NO_STREAM_ID_FILTER
-#define NO_STREAM_ID_FILTER    (~0U)
-#endif
-#endif
-
 FastScanLogicalChannel::FastScanLogicalChannel(const uint8_t *const buffer)
 {
 	serviceId = UINT16(&buffer[0]);

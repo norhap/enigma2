@@ -249,10 +249,7 @@ def getCPUArch():
 
 
 def getDVBAPI():
-	if SystemInfo["OLDE2API"]:
-		return _("Old")
-	else:
-		return _("New")
+	return _("New")
 
 
 def getDriverInstalledDate():
