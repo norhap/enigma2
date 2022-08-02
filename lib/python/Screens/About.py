@@ -360,7 +360,7 @@ class About(Screen):
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"]:
-			if model not in ("gbip4k", "dreamone"):
+			if model not in ("gbip4k",):
 				AboutText += _("Type Display: ") + getDisplayType() + "\n"
 			else:
 				AboutText += _("No Display") + "\n"
