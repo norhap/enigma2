@@ -597,13 +597,13 @@ class TunerInformation(InformationBase):
 		# 	tuner, type = [x.strip() for x in nims[count].split(":", 1)]
 		# 	info.append(formatLine("P1", tuner, type))
 		info.append("")
-		info.append(formatLine("", _("DVB API"), about.getDVBAPI()))
 		numSlots = 0
 		dvbFeToolTxt = ""
 		nimSlots = nimmanager.getSlotCount()
 		for nim in range(nimSlots):
 			dvbFeToolTxt += eDVBResourceManager.getInstance().getFrontendCapabilities(nim)
 		dvbApiVersion = dvbFeToolTxt.splitlines()[0].replace("DVB API version: ", "").strip()
+		info.append(formatLine("", _("DVB API"), _("New"))) if float(dvbApiVersion) > 5 else info.append(formatLine("", _("DVB API"), _("Old")))
 		info.append(formatLine("", _("DVB API version"), dvbApiVersion))
 		info.append("")
 		info.append(formatLine("", _("Transcoding"), (_("Yes") if getHaveTranscoding() == "True" else _("No"))))

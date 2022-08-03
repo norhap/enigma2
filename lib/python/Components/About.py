@@ -248,10 +248,6 @@ def getCPUArch():
 		return _("Mipsel")
 
 
-def getDVBAPI():
-	return _("New")
-
-
 def getDriverInstalledDate():
 	try:
 		from glob import glob
