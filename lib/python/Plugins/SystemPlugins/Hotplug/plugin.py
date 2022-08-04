@@ -45,7 +45,7 @@ def processHotplugData(self, v):
 		# Removing the invalid playlist.e2pls If its still the audio cd's list
 		# Default setting is to save last playlist on closing Mediaplayer.
 		# If audio cd is removed after Mediaplayer was closed,
-	# the playlist remains in if no other media was played.
+		# the playlist remains in if no other media was played.
 		if os.path.isfile('/etc/enigma2/playlist.e2pls'):
 			with open('/etc/enigma2/playlist.e2pls', 'r') as f:
 				file = f.readline().strip()
@@ -72,6 +72,9 @@ def processHotplugData(self, v):
 
 
 class Hotplug(Protocol):
+	def __init__(self):
+		pass
+
 	def connectionMade(self):
 		print("[Hotplug] connection!")
 		self.received = ""
@@ -94,13 +97,16 @@ class Hotplug(Protocol):
 def autostart(reason, **kwargs):
 	if reason == 0:
 		try:
-		    if not os.path.exists("/tmp/hotplug.socket"):
-		        return
-		except (IOError, OSError):
-			pass
-		factory = Factory()
-		factory.protocol = Hotplug
-		reactor.listenUNIX("/tmp/hotplug.socket", factory)
+			if not os.path.exists("/tmp/hotplug.socket"):
+				return
+			else:
+				from twisted.internet import reactor
+				from twisted.internet.error import CannotListenError
+				factory = Factory()
+				factory.protocol = Hotplug
+				reactor.listenUNIX("/tmp/hotplug.socket", factory)
+		except (OSError, CannotListenError) as err:
+			print("[Hotplug] %s" % err)
 
 
 def Plugins(**kwargs):
