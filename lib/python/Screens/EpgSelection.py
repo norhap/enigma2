@@ -63,7 +63,7 @@ class EPGSelection(Screen):
 			self.setTitle(_("Single EPG"))
 			self.type = EPG_TYPE_SINGLE
 			self["key_yellow"] = StaticText()
-			self["key_blue"] = StaticText(_("Select Channel"))
+			self["key_blue"] = StaticText(_("Change channel"))
 			self.currentService = ServiceReference(service)
 			self.zapFunc = zapFunc
 			self.sort_type = 0
@@ -98,7 +98,7 @@ class EPGSelection(Screen):
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGList(type=self.type, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
-		if not isPluginInstalled("EPGSearch"):
+		if self.type == EPG_TYPE_MULTI or self.type == EPG_TYPE_SINGLE and not isPluginInstalled("EPGSearch"):
 			self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions"],
 				{
 					"cancel": self.closeScreen,
@@ -129,12 +129,10 @@ class EPGSelection(Screen):
 					"prevService": self.prevService,
 					"preview": self.eventPreview
 				})
-
-		self['colouractions'] = HelpableActionMap(self, ["ColorActions"],
+		self['tmbd'] = HelpableActionMap(self, ["ColorActions"],
 			{
 				"red": (self.GoToTmbd, _("Search event in TMBD"))
 			})
-
 		self.isTMBD = isPluginInstalled("TMBD")
 		if self.isTMBD:
 			self["key_red"] = Button(_("Search TMBD"))
@@ -247,8 +245,8 @@ class EPGSelection(Screen):
 		if event:
 			menu = [(p.name, boundFunction(self.runPlugin, p)) for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EVENTINFO)
 				if 'selectedevent' in p.__call__.__code__.co_varnames]
-		if menu:
-			text += ": %s" % event.getEventName()
+			if menu:
+				text += ": %s" % event.getEventName()
 		if self.type == EPG_TYPE_MULTI:
 			menu.append((_("Goto specific date/time"), self.enterDateTime))
 		menu.append((_("Timer Overview"), self.openTimerOverview))
