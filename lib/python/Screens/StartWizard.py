@@ -23,7 +23,7 @@ import os
 
 config.misc.firstrun = ConfigBoolean(default=True)
 config.misc.languageselected = ConfigBoolean(default=True)
-config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard)
+# config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard)
 # config.misc.do_overscanwizard = ConfigBoolean(default=OverscanWizard and config.skin.primary_skin.value == "OctEtFHD/skin.xml")
 
 
@@ -187,6 +187,6 @@ wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinst
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
 wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
 wizardManager.registerWizard(TimeWizard, config.misc.firstrun.value, priority=20)
-if OverscanWizard:
-	wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
+#if OverscanWizard:
+	#wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.value, priority=40)
