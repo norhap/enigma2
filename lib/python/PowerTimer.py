@@ -2,7 +2,7 @@ from __future__ import division
 from bisect import insort
 from os import fsync, remove, rename
 from os.path import exists
-from sys import maxsize
+from sys import maxsize, version_info
 from time import ctime, localtime, mktime, time
 
 from enigma import eActionMap, quitMainloop
@@ -118,7 +118,7 @@ class PowerTimer(Timer):
 			for logTime, logCode, logMsg in timer.log_entries:
 				if logTime < ignoreBefore:
 					continue
-				timerList.append("\t\t<log code=\"%d\" time=\"%d\">%s</log>" % (logCode, logTime, stringToXML(str(logMsg))))
+				timerList.append("\t\t<log code=\"%d\" time=\"%d\">%s</log>" % (int(logCode), int(logTime), stringToXML(str(logMsg))))
 			timerList.append("\t</timer>")
 		timerList.append("</timers>\n")
 		# Should this code also use a writeLock as for the regular timers?
@@ -167,7 +167,8 @@ class PowerTimer(Timer):
 		entry.autosleeprepeat = autosleeprepeat
 		entry.repeated = 0 if entry.autosleeprepeat == "repeated" else int(timerDom.get("repeated"))  # Ensure timer repeated is cleared if we have an autosleeprepeat.
 		for log in timerDom.findall("log"):
-			entry.log_entries.append((int(log.get("time")), int(log.get("code")), log.text.strip().encode("UTF-8")))
+			msg = log.text.strip().encode("UTF-8").decode() if version_info.major >= 3 else log.text.strip().encode("UTF-8")
+			entry.log_entries.append((int(log.get("time")), int(log.get("code")), msg))
 		return entry
 
 	def doActivate(self, w):
