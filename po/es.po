@@ -18502,9 +18502,3 @@ msgstr "ServiceHisilicon (Recomendado ServiceApp ExtEplayer3)"
 
 msgid "IPTV recording with ServiceApp enabled - recording canceled"
 msgstr "Grabación de IPTV con ServiceApp habilitado - grabación cancelada"
-
-msgid "Experimental navigation"
-msgstr "Navegación experimental"
-
-msgid "This is a temporary setting to enable testing of new navigation code within the C++ GUI engine."
-msgstr "Esta es una configuración temporal para permitir pruebas de un nuevo código de navegación dentro del motor GUI de C++."

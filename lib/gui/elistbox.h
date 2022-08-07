@@ -138,7 +138,6 @@ public:
 
 	int getCurrentIndex();
 	void moveSelection(long how);
-	void moveSelectionNew(long how);
 	void moveSelectionTo(int index);
 	void moveToEnd(); // Deprecated
 	bool atBegin();
@@ -276,7 +275,6 @@ private:
 	int m_selection_enabled;
 
 	bool m_native_keys_bound;
-	bool m_new_navigation;
 	int m_first_selectable_item;
 	int m_last_selectable_item;
 
