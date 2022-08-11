@@ -1755,6 +1755,8 @@ def InitUsageConfig():
 	config.misc.softcam_setup.extension_menu = ConfigYesNo(default=True)
 
 	config.ntp = ConfigSubsection()
+	config.powertimerlog = ConfigSubsection()
+	config.powertimerlog.actived = ConfigYesNo(default=False)
 
 	def timesyncChanged(configElement):
 		if configElement.value == "dvb" or not GetIPsFromNetworkInterfaces():

@@ -18502,3 +18502,9 @@ msgstr "ServiceHisilicon (Recomendado ServiceApp ExtEplayer3)"
 
 msgid "IPTV recording with ServiceApp enabled - recording canceled"
 msgstr "Grabación de IPTV con ServiceApp habilitado - grabación cancelada"
+
+msgid "Disable log"
+msgstr "Desactivar log"
+
+msgid "Enable log"
+msgstr "Activar log"
