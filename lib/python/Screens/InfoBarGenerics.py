@@ -4212,3 +4212,17 @@ class InfoBarHdmi2:
 			else:
 				self.hdmi_enabled_full = False
 				self.session.nav.playService(slist.servicelist.getCurrent())
+
+
+class InfoBarOpenOnTopHelper:
+	def __init__(self):
+		pass
+
+	def openInfoBarSession(self, session, option=None):
+		try:
+			if option is None:
+				self.session.open(session)
+			else:
+				self.session.open(session, option)
+		except Exception as e:
+			print("[InfoBarGenerics] [openInfoBarSession] Exception:", e)
