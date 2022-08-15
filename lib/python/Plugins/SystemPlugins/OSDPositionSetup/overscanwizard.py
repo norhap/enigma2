@@ -170,8 +170,9 @@ class OverscanWizard(Screen, ConfigListScreen):
 					config.plugins.OSDPositionSetup.dst_width.value = 720
 					config.plugins.OSDPositionSetup.dst_top.value = 0
 					config.plugins.OSDPositionSetup.dst_height.value = 576
-				config.misc.do_overscanwizard.value = False
-				config.misc.do_overscanwizard.save()
+				if hasattr(self, "do_overscanwizard"): # default I don't activate config attributes in Startwizard so there are no "do_overscanwizard" attributes.
+					config.misc.do_overscanwizard.value = False
+					config.misc.do_overscanwizard.save()
 				config.plugins.OSDPositionSetup.save()
 				setConfiguredPosition()
 				self.close()
