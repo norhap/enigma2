@@ -21,7 +21,7 @@ from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.ScreenSaver import InfoBarScreenSaver
-from Screens import Standby
+from Screens.Standby import Standby, inStandby
 from Screens.ChoiceBox import ChoiceBox, OrderedChoiceBox
 from Screens.Dish import Dish
 from Screens.EventView import EventViewEPGSelect, EventViewSimple
@@ -30,7 +30,6 @@ from Screens.MessageBox import MessageBox
 from Screens.MinuteInput import MinuteInput
 from Screens.TimerSelection import TimerSelection
 from Screens.PictureInPicture import PictureInPicture
-import Screens.Standby
 from Screens.SubtitleDisplay import SubtitleDisplay
 from Screens.RdsDisplay import RdsInfoDisplay, RassInteractive
 from Screens.TimeDateInput import TimeDateInput
@@ -3972,7 +3971,7 @@ class InfoBarPowersaver:
 						duration += 24 * 3600
 					self.inactivityTimer.startLongTimer(duration)
 					return
-		if Screens.Standby.inStandby:
+		if inStandby:
 			self.inactivityTimeoutCallback(True)
 		else:
 			message = _("Your receiver will got to standby due to inactivity.") + "\n" + _("Do you want this?")
@@ -4002,7 +4001,7 @@ class InfoBarPowersaver:
 		AddPopup(message, type=MessageBox.TYPE_INFO, timeout=5)
 
 	def sleepTimerTimeout(self):
-		if not Screens.Standby.inStandby:
+		if not inStandby:
 			list = [(_("No"), False), (_("Extend sleeptimer 15 minutes"), "extend"), (_("Yes"), True)]
 			message = _("Your receiver will got to stand by due to the sleeptimer.")
 			message += "\n" + _("Do you want this?")
@@ -4019,9 +4018,9 @@ class InfoBarPowersaver:
 			self.setSleepTimer(0)
 
 	def goStandby(self):
-		if not Screens.Standby.inStandby:
+		if not inStandby:
 			print("[InfoBarGenerics] Powersaver goto standby")
-			self.session.open(Screens.Standby.Standby)
+			self.session.open(Standby)
 
 
 class InfoBarZoom:

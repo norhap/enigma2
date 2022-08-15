@@ -5386,8 +5386,8 @@ msgstr "Resolución"
 msgid "Restart"
 msgstr "Reiniciar"
 
-msgid "Restart GUI now?"
-msgstr "¿Reiniciar Enigma2 ahora?"
+msgid "Restart GUI with debug now?"
+msgstr "¿Reiniciar Enigma2 con depuración ahora?"
 
 msgid "Restart cardserver"
 msgstr "Reiniciar cardserver"
@@ -8288,7 +8288,7 @@ msgid "Your receiver might be unusable now. Please consult the manual for furthe
 msgstr "Su receptor podría estar inutilizable ahora. Consulte el manual para obtener más ayuda antes de reiniciar su %s."
 
 msgid "Your receiver will got to stand by due to the sleeptimer."
-msgstr "Su receptor tendrá que esperar debido al temporizador."
+msgstr "Su receptor se pondrá en reposo debido al temporizador de apagado automático."
 
 msgid "Your receiver will got to standby due to inactivity."
 msgstr "Su receptor estará en modo de reposo debido a la inactividad."

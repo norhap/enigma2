@@ -9,7 +9,7 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Screens.Standby import QUIT_RESTART, TryQuitMainloop
+from Screens.Standby import QUIT_DEBUG_RESTART, TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 
@@ -253,7 +253,7 @@ class ConfigListScreen:
 		self.cancelMsg = _("Really close without saving settings?") if msg is None else msg
 
 	def setRestartMessage(self, msg):
-		self.restartMsg = _("Restart GUI now?") if msg is None else msg
+		self.restartMsg = _("Restart GUI with debug now?") if msg is None else msg
 
 	def getCurrentItem(self):
 		try:
@@ -428,7 +428,7 @@ class ConfigListScreen:
 
 	def restartConfirm(self, result):
 		if result:
-			self.session.open(TryQuitMainloop, retvalue=QUIT_RESTART)
+			self.session.open(TryQuitMainloop, retvalue=QUIT_DEBUG_RESTART)
 			self.close()
 
 	def saveAll(self):
