@@ -124,7 +124,8 @@ public:
 		DefaultScrollBarBorderWidth = 1,
 		DefaultScrollBarScroll = eListbox::byPage,
 		DefaultScrollBarMode = eListbox::showNever,
-		DefaultWrapAround = true
+		DefaultWrapAround = true,
+		DefaultPageSize = 0
 	};
 
 	void setScrollbarScroll(int scroll);
@@ -208,13 +209,16 @@ public:
 	void setScrollbarForegroundColor(gRGB &col);
 	void setScrollbarBackgroundColor(gRGB &col);
 
-	static void setDefaultScrollbarStyle(int width, int offset, int borderwidth, int scroll, int mode, bool enablewraparound) {
+	void setPageSize(int size) { m_page_size = size; }
+
+	static void setDefaultScrollbarStyle(int width, int offset, int borderwidth, int scroll, int mode, bool enablewraparound, int pageSize) {
 			defaultScrollBarWidth = width;
 			defaultScrollBarOffset = offset;
 			defaultScrollBarBorderWidth = borderwidth;
 			defaultScrollBarScroll = scroll;
 			defaultWrapAround = enablewraparound;
 			defaultScrollBarMode = mode;
+			defaultPageSize = pageSize;
 		}
 
 	void setOrientation(int o);
@@ -225,6 +229,7 @@ public:
 	int getScrollbarWidth() { return m_scrollbar_width; }
 	int getScrollbarOffset() { return m_scrollbar_offset; }
 	int getScrollbarBorderWidth() { return m_scrollbar_border_width; }
+	int getPageSize() { return m_page_size; }
 	int getItemHeight() { return m_itemheight; }
 	int getItemWidth() { return m_itemwidth; }
 	int getOrientation() { return m_list_orientation; }
@@ -259,6 +264,7 @@ private:
 	static int defaultScrollBarBorderWidth;
 	static int defaultScrollBarScroll;
 	static int defaultScrollBarMode;
+	static int defaultPageSize;
 	static bool defaultWrapAround;
 
 	int m_list_orientation,m_scrollbar_mode, m_prev_scrollbar_page, m_scrollbar_scroll;
@@ -277,6 +283,7 @@ private:
 	bool m_native_keys_bound;
 	int m_first_selectable_item;
 	int m_last_selectable_item;
+	int m_page_size;
 
 	ePtr<iListboxContent> m_content;
 	eSlider *m_scrollbar;
