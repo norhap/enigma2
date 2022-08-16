@@ -639,7 +639,7 @@ public:
 		eRCInputEventDriver *p = new eRCInputEventDriver(filename);
 		items.push_back(new element(filename, p, new eRCDeviceInputDev(p, consoleFd)));
 	}
-	
+
 	void addAll(void)
 	{
 		int i = 0;
@@ -673,6 +673,16 @@ public:
 		}
 		eDebug("[eInputDeviceInit] Remove '%s', not found", filename);
 	}
+
+	void removeAll(void)
+	{
+		int size = items.size();
+		for (itemlist::iterator it = items.begin(); it != items.end(); ++it)
+		{
+			delete *it;
+		}
+		items.clear();
+	}
 };
 
 eAutoInitP0<eInputDeviceInit> init_rcinputdev(eAutoInitNumbers::rc+1, "input device driver");
@@ -685,4 +695,14 @@ void addInputDevice(const char* filename)
 void removeInputDevice(const char* filename)
 {
 	init_rcinputdev->remove(filename);
+}
+
+void addAllInputDevices(void)
+{
+	init_rcinputdev->addAll();
+}
+
+void removeAllInputDevices(void)
+{
+	init_rcinputdev->removeAll();
 }
