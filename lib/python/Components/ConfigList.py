@@ -253,7 +253,7 @@ class ConfigListScreen:
 		self.cancelMsg = _("Really close without saving settings?") if msg is None else msg
 
 	def setRestartMessage(self, msg):
-		self.restartMsg = _("Restart GUI with debug now?") if msg is None else msg
+		self.restartMsg = _("Restart GUI in debug mode now?") if msg is None else msg
 
 	def getCurrentItem(self):
 		try:

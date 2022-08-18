@@ -5386,8 +5386,8 @@ msgstr "Resolución"
 msgid "Restart"
 msgstr "Reiniciar"
 
-msgid "Restart GUI with debug now?"
-msgstr "¿Reiniciar Enigma2 con depuración ahora?"
+msgid "Restart GUI in debug mode now?"
+msgstr "¿Reiniciar Enigma2 en modo debug ahora?"
 
 msgid "Restart cardserver"
 msgstr "Reiniciar cardserver"
