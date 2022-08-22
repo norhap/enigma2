@@ -6766,8 +6766,8 @@ msgstr "Selección de subtítulos…"
 msgid "Subtitles"
 msgstr "Subtítulos"
 
-msgid "Subtitles Settings"
-msgstr "Configuración de Subtítulos"
+msgid "Subtitle settings"
+msgstr "Ajustes de Subtítulos"
 
 msgid "Succeeded:"
 msgstr "Exitoso:"
