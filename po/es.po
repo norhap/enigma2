@@ -1665,13 +1665,14 @@ msgstr "No se puso cargar medio! No hay disco insertado?"
 msgid "Could not open Picture in Picture"
 msgstr "No se pudo abrir PiP"
 
-#, python-format
 msgid "Could not record due to conflicting timer %s"
 msgstr "No se pudo grabar por conflicto en temporizador %s"
 
-#, python-format
 msgid "Could not record due to invalid service %s"
 msgstr "No se pudo grabar por canal inválido %s"
+
+msgid "Could not record due to invalid service"
+msgstr "No se pudo grabar por canal inválido"
 
 msgid "Country"
 msgstr "País"
