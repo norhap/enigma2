@@ -2804,7 +2804,7 @@ class InfoBarInstantRecord:
 			if limitEvent:
 				end = info["end"]
 		else:
-			if limitEvent:
+			if limitEvent and serviceref:
 				self.session.open(MessageBox, _("No event info found, recording indefinitely."), MessageBox.TYPE_INFO)
 
 		if isinstance(serviceref, eServiceReference):
