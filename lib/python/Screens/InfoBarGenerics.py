@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
@@ -3897,6 +3896,7 @@ class InfoBarServiceErrorPopupSupport:
 		self.closeNotificationInstantiateDialog()
 		self.last_error = None
 		RemovePopup(id="ZapError")
+		RemovePopup(id="ZapPipError")
 
 	def __tuneFailed(self):
 		if not config.usage.hide_zap_errors.value or not config.usage.remote_fallback_enabled.value:
@@ -3927,8 +3927,7 @@ class InfoBarServiceErrorPopupSupport:
 
 			if error and not config.usage.hide_zap_errors.value:
 				self.closeNotificationInstantiateDialog()
-				if hasattr(self, "dishDialog") and not self.dishDialog.dishState():
-					AddPopup(text=error, type=MessageBox.TYPE_ERROR, timeout=5, id="ZapError")
+				AddPopup(text=error, type=MessageBox.TYPE_ERROR, timeout=5, id="ZapError") if hasattr(self, "dishDialog") and not self.dishDialog.dishState() and not self.session.pipshown else AddPopup(text="PiP...\n" + _("No free tuner!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
 
 
 class InfoBarPowersaver:
