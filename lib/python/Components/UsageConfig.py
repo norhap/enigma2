@@ -22,6 +22,8 @@ config.crash.debugActionMaps = ConfigYesNo(default=False)
 config.crash.debugKeyboards = ConfigYesNo(default=False)
 config.crash.debugRemoteControls = ConfigYesNo(default=False)
 config.crash.debugScreens = ConfigYesNo(default=False)
+config.crash.debugEPG = ConfigYesNo(default=False)
+config.crash.debugDVBScan = ConfigYesNo(default=False)
 
 model = getBoxType()
 

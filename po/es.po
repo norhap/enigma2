@@ -18618,3 +18618,15 @@ msgstr "Desactivar log"
 
 msgid "Enable log"
 msgstr "Activar log"
+
+msgid "Include EPG data"
+msgstr "Incluir datos EPG"
+
+msgid "Enable this option to add extra EPG data to the debug log file."
+msgstr "Habilite esta opción para agregar datos EPG adicionales al archivo de registro de depuración."
+
+msgid "Include DVB scan data"
+msgstr "Incluir datos DVB"
+
+msgid "Enable this option to add extra DVB scan data to the debug log file."
+msgstr "Habilite esta opción para agregar datos de Búsqueda DVB adicionales al archivo de registro de depuración."
