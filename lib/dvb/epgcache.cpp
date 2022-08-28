@@ -172,8 +172,8 @@ eventData::eventData(const eit_event_struct* e, int size, int _type, int tsidoni
 						undoAbbreviation(eventNameUTF8, eventText);
 					}
 
- 					unsigned int eventNameUTF8len = eventNameUTF8.length();
- 					unsigned int eventTextlen = eventText.length();
+					unsigned int eventNameUTF8len = eventNameUTF8.length();
+					unsigned int eventTextlen = eventText.length();
 
 					//Rebuild the short event descriptor with UTF-8 strings
 
@@ -623,9 +623,9 @@ void eEPGCache::sectionRead(const uint8_t *data, int source, eEPGChannelData *ch
 			goto next;
 
 		if ( (TM != 3599) &&		// NVOD Service
-		     (now <= (TM+duration)) &&	// skip old events
-		     (TM < (now+4*maxdays*24*60*60)) &&	// maxdays for EPG - no more than 4 weeks in future
-		     ( (onid != 1714) || (duration != (24*3600-1)) )	// PlatformaHD invalid event
+			 (now <= (TM+duration)) &&	// skip old events
+			 (TM < (now+4*maxdays*24*60*60)) &&	// maxdays for EPG - no more than 4 weeks in future
+			 ( (onid != 1714) || (duration != (24*3600-1)) )	// PlatformaHD invalid event
 		   )
 		{
 			uint16_t event_id = eit_event->getEventId();
@@ -863,24 +863,24 @@ void eEPGCache::flushEPG(const uniqueEPGKey & s, bool lock) // lock only affects
 			// remove this service's channel from lastupdated map
 			for (updateMap::iterator it = m_channelLastUpdated.begin(); it != m_channelLastUpdated.end(); )
 			{
-                                const eDVBChannelID &chid = it->first;
-                                if(chid.original_network_id == s.onid && chid.transport_stream_id == s.tsid)
+								const eDVBChannelID &chid = it->first;
+								if(chid.original_network_id == s.onid && chid.transport_stream_id == s.tsid)
 					it = m_channelLastUpdated.erase(it);
 				else
 					++it;
 			}
 
-                        singleLock l(last_channel_update_lock);
-                        for (ChannelMap::const_iterator it(m_knownChannels.begin
+						singleLock l(last_channel_update_lock);
+						for (ChannelMap::const_iterator it(m_knownChannels.begin
 ()); it != m_knownChannels.end(); ++it)
-                        {
-                                const eDVBChannelID chid = it->second->channel->getChannelID();
-                                if(chid.original_network_id == s.onid && chid.transport_stream_id == s.tsid)
-                                {
+						{
+								const eDVBChannelID chid = it->second->channel->getChannelID();
+								if(chid.original_network_id == s.onid && chid.transport_stream_id == s.tsid)
+								{
 					it->second->abortEPG();
 					it->second->startChannel();
-                                }
-                        }
+								}
+						}
 */
 		}
 	}
@@ -2019,30 +2019,30 @@ skip_entry:
 
 static void fill_eit_start(eit_event_struct *evt, time_t t)
 {
-    tm time;
-    gmtime_r( &t, &time );
+	tm time;
+	gmtime_r( &t, &time );
 
-    int l = 0;
-    int month = time.tm_mon + 1;
-    if (month == 1 || month == 2)
-        l = 1;
-    int mjd = 14956 + time.tm_mday + (int)((time.tm_year - l) * 365.25) + (int)((month + 1 + l*12) * 30.6001);
-    evt->start_time_1 = mjd >> 8;
-    evt->start_time_2 = mjd & 0xFF;
+	int l = 0;
+	int month = time.tm_mon + 1;
+	if (month == 1 || month == 2)
+		l = 1;
+	int mjd = 14956 + time.tm_mday + (int)((time.tm_year - l) * 365.25) + (int)((month + 1 + l*12) * 30.6001);
+	evt->start_time_1 = mjd >> 8;
+	evt->start_time_2 = mjd & 0xFF;
 
-    evt->start_time_3 = toBCD(time.tm_hour);
-    evt->start_time_4 = toBCD(time.tm_min);
-    evt->start_time_5 = toBCD(time.tm_sec);
+	evt->start_time_3 = toBCD(time.tm_hour);
+	evt->start_time_4 = toBCD(time.tm_min);
+	evt->start_time_5 = toBCD(time.tm_sec);
 
 }
 
 static void fill_eit_duration(eit_event_struct *evt, int time)
 {
-    //time is given in second
-    //convert to hour, minutes, seconds
-    evt->duration_1 = toBCD(time / 3600);
-    evt->duration_2 = toBCD((time % 3600) / 60);
-    evt->duration_3 = toBCD((time % 3600) % 60);
+	//time is given in second
+	//convert to hour, minutes, seconds
+	evt->duration_1 = toBCD(time / 3600);
+	evt->duration_2 = toBCD((time % 3600) / 60);
+	evt->duration_3 = toBCD((time % 3600) % 60);
 }
 
 static inline uint8_t HI(int x) { return (uint8_t) ((x >> 8) & 0xFF); }
@@ -2314,11 +2314,11 @@ void eEPGCache::importEvents(ePyObject serviceReferences, ePyObject list)
 
 		refstr = PyUnicode_AsUTF8(serviceReferences);
 #endif
-	        if (!refstr)
-	        {
+			if (!refstr)
+			{
 			eDebug("[eEPGCache:import] serviceReferences string is 0, aborting");
-                	return;
-	        }
+					return;
+			}
 		refs.push_back(eServiceReferenceDVB(refstr));
 	}
 	else if (PyTuple_Check(serviceReferences))
@@ -2675,15 +2675,17 @@ PyObject *eEPGCache::search(ePyObject arg)
 							{
 								auto cid = ContentIdentifierDescriptor(data);
 								auto cril = cid.getIdentifier();
-								for (auto crit = cril->begin(); crit != cril->end(); ++crit)
+								for (auto crid = cril->begin(); crid != cril->end(); ++crid)
 								{
-									// UK broadcasters set the two top bits of crid_type, i.e. 0x31 and 0x32 rather than
+									// some broadcasters set the two top bits of crid_type, i.e. 0x31 and 0x32 rather than
 									// the specification's 1 and 2 for episode and series respectively
-									if (((*crit)->getType() & 0xf) == casetype)
+									if (((*crid)->getType() & 0xf) == casetype && (*crid)->getBytes()->data() != NULL)
 									{
-										// Exact match required for CRID data
-										if ((*crit)->getLength() == strlen && memcmp((*crit)->getBytes()->data(), str, strlen) == 0)
+										std::string cridData = std::string((char*)(*crid)->getBytes()->data());
+										if(cridData.find(str)!=std::string::npos)
 										{
+											if(m_debug)
+												eDebug("[eEPGCache] crid casetype=%X gridtype=%X crid=%s", casetype, (*crid)->getType(), cridData.c_str());
 											descr.push_back(it->first);
 										}
 									}
