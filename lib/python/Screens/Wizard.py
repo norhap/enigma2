@@ -573,9 +573,8 @@ class Wizard(Screen):
 						else:
 							self.configInstance = self.session.instantiateDialog(self.wizard[self.currStep]["config"]["screen"], eval(self.wizard[self.currStep]["config"]["args"]))
 
-						if SystemInfo["OSDAnimation"]:
-							self.configInstance.setAnimationMode(0)
-						self["config"].setList(self.configInstance["config"].list)
+						self.configInstance.setAnimationMode(0)
+						self["config"].l.setList(self.configInstance["config"].list)
 						callbacks = self.configInstance["config"].onSelectionChanged
 						self.configInstance["config"].destroy()
 						self.configInstance["config"] = self["config"]

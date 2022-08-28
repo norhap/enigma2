@@ -195,7 +195,6 @@ SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info", "CCcam-s2s") or fileHas("
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = model in ("ustym4kpro", "beyonwizv2", "viper4k", "sf8008", "sf8008m", "gbtrio4k", "gbip4k", "qviart5")
 SystemInfo["CanFadeOut"] = brand not in ("linkdroid", "mecool", "minix", "wetek", "hardkernel", "dinobot", "maxytec", "azbox") and not (SystemInfo["HiSilicon"])
-SystemInfo["OSDAnimation"] = fileCheck("/proc/stb/fb/animation_mode")
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51", "h7") or getSoCFamily() in ("hisi3798mv200",)
 SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("wetek", "dreambox")
 SystemInfo["grautec"] = fileExists("/tmp/usbtft")
