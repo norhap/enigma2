@@ -18601,14 +18601,20 @@ msgstr ""
 "Error al recuperar la información del temporizador del servidor\n"
 "%s"
 
-msgid "Media service player: %s"
-msgstr "Reproductor servicios multimedia: %s"
+msgid "Player: %s"
+msgstr "Reproductor: %s"
 
-msgid "ServiceApp (Recommended ExtEplayer3)"
-msgstr "ServiceApp (Recomendado ExtEplayer3)"
+msgid "ServiceApp-ExtEplayer3. IPTV recording (No). (Recommended ServiceMP3)."
+msgstr "ServiceApp-ExtEplayer3. Grabación IPTV (No). (Recomendado ServiceMP3)."
 
-msgid "ServiceHisilicon (Recommended ServiceApp ExtEplayer3)"
-msgstr "ServiceHisilicon (Recomendado ServiceApp ExtEplayer3)"
+msgid "ServiceApp-GstPlayer. IPTV recording (No). (Recommended ServiceMP3)."
+msgstr "ServiceApp-GstPlayer. Grabación IPTV (No). (Recomendado ServiceMP3)."
+
+msgid "ServiceMP3. IPTV recording (Yes)."
+msgstr "ServiceMP3. Grabación IPTV (Sí)."
+
+msgid "ServiceHisilicon. IPTV recording (No). (Recommended ServiceMP3)."
+msgstr "ServiceHisilicon. Grabación IPTV (No). (Recomendado ServiceMP3)."
 
 msgid "IPTV recording with ServiceApp enabled - recording canceled"
 msgstr "Grabación de IPTV con ServiceApp habilitado - grabación cancelada"

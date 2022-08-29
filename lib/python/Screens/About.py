@@ -364,15 +364,31 @@ class About(Screen):
 				AboutText += _("Type Display: ") + getDisplayType() + "\n"
 			else:
 				AboutText += _("No Display") + "\n"
-		if isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value and not SystemInfo["HiSilicon"]:
-			player = "ServiceApp"
-		elif SystemInfo["HiSilicon"] and isPluginInstalled("ServiceApp"):
-			player = _("ServiceApp (Recommended ExtEplayer3)")
-		elif SystemInfo["HiSilicon"] and isPluginInstalled("ServiceHisilicon") and not isPluginInstalled("ServiceApp"):
-			player = _("ServiceHisilicon (Recommended ServiceApp ExtEplayer3)")
+		servicemp3 = _("ServiceMP3. IPTV recording (Yes).")
+		servicehisilicon = _("ServiceHisilicon. IPTV recording (No). (Recommended ServiceMP3).")
+		exteplayer3 = _("ServiceApp-ExtEplayer3. IPTV recording (No). (Recommended ServiceMP3).")
+		gstplayer = _("ServiceApp-GstPlayer. IPTV recording (No). (Recommended ServiceMP3).")
+		if isPluginInstalled("ServiceApp"):
+			if isPluginInstalled("ServiceMP3"):
+				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
+					player = "%s" % exteplayer3
+				else:
+					player = "%s" % gstplayer
+				if not config.plugins.serviceapp.servicemp3.replace.value:
+					player = "%s" % servicemp3
+			else:
+				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
+					player = "%s" % exteplayer3
+				else:
+					player = "%s" % gstplayer
+				if not config.plugins.serviceapp.servicemp3.replace.value:
+					player = "%s" % servicehisilicon
 		else:
-			player = "ServiceMP3"
-		AboutText += _("Media service player: %s") % player
+			if isPluginInstalled("ServiceMP3"):
+				player = "%s" % servicemp3
+			else:
+				player = "%s" % servicehisilicon
+		AboutText += _("Player: %s") % player
 
 		AboutText += "\n"
 		AboutText += _("Uptime: ") + about.getBoxUptime()
