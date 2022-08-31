@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 # CCcam Info by AliAbdul
 try:
 	from base64 import b64encode

@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
 from Tools.Directories import SCOPE_SKINS, resolveFilename

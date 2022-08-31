@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Components.config import config
 from Tools.Notifications import AddNotificationWithID
 from Screens.MessageBox import MessageBox

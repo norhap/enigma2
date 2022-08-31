@@ -1,8 +1,6 @@
-from __future__ import print_function
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager

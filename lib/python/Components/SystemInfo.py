@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from os import R_OK, access
 from os.path import isfile, join as pathjoin

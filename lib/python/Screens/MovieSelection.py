@@ -1,4 +1,3 @@
-from __future__ import print_function
 from sys import version_info
 if version_info.major >= 3:
 	from pickle import dump, load

@@ -1,4 +1,3 @@
-from __future__ import print_function
 from os.path import isfile, join as pathjoin
 from fcntl import ioctl
 from struct import pack, unpack

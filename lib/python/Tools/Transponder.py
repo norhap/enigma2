@@ -1,6 +1,3 @@
-#!/usr/bin/python
-from __future__ import print_function
-from __future__ import division
 from enigma import eDVBFrontendParametersSatellite, eDVBFrontendParametersCable, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersATSC
 from Components.NimManager import nimmanager
 from Components.config import config

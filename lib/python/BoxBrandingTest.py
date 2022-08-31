@@ -1,4 +1,3 @@
-from __future__ import print_function
 import boxbranding
 print("getOEVersion=%s<" % boxbranding.getOEVersion())
 print("getImageDistro=%s<" % boxbranding.getImageDistro())

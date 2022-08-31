@@ -1,6 +1,4 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
-
 from Components.VariableText import VariableText
 from Components.Renderer.Renderer import Renderer
 from enigma import eLabel, eEPGCache

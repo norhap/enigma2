@@ -1,4 +1,3 @@
-from __future__ import print_function
 import re
 from sys import version_info
 from os import path as os_path

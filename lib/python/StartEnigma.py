@@ -1,4 +1,3 @@
-from __future__ import print_function
 from Tools.Profile import profile, profileFinal  # This facilitates the start up progress counter.
 profile("StartPython")
 import Tools.RedirectOutput

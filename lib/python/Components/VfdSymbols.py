@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 from twisted.internet import threads
 from Components.config import config
 from enigma import eTimer, iPlayableService, iServiceInformation, getBoxType
