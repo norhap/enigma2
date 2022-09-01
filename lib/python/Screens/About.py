@@ -448,6 +448,12 @@ class BenchmarkInformation(InformationBase):
 				self.cpuBenchmark = int([x.strip() for x in line.split(":")][1])
 			if line.startswith("Open Vision CPU status"):
 				self.cpuRating = [x.strip() for x in line.split(":")][1]
+				if self.cpuRating == "Fast":
+					self.cpuRating = _("Fast")
+				elif self.cpuRating == "Normal":
+					self.cpuRating = _("Normal")
+				else:
+					self.cpuRating = _("Slow")
 		# Serialise the tests for better accuracy.
 		self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
 		for callback in self.onInformationUpdated:

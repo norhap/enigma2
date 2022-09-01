@@ -17514,7 +17514,7 @@ msgid "%d DMIPS per core"
 msgstr "%d DMIPS por cada core"
 
 msgid "CPU rating"
-msgstr "Clasificación CPU"
+msgstr "Calificación CPU"
 
 msgid "Close the screen"
 msgstr "Cerrar esta pantalla"
