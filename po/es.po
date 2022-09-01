@@ -17501,6 +17501,9 @@ msgstr "CPU"
 msgid "RAM benchmark"
 msgstr "RAM"
 
+msgid "%.2f MB/s copy rate"
+msgstr "%.2f MB/s tasa de copia"
+
 msgid "Total CPU benchmark"
 msgstr "Total CPU"
 

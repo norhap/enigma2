@@ -482,7 +482,7 @@ class BenchmarkInformation(InformationBase):
 			info.append(formatLine("P1", _("Total CPU benchmark"), _("%d DMIPS with %d cores") % (self.cpuBenchmark * count, count) if self.cpuBenchmark else _("Calculating benchmark...")))
 		info.append(formatLine("P1", _("CPU rating"), self.cpuRating if self.cpuRating else _("Calculating rating...")))
 		info.append("")
-		info.append(formatLine("P1", _("RAM benchmark"), "%.2f MB/s tasa de copia" % self.ramBenchmark if self.ramBenchmark else _("Calculating benchmark...")))
+		info.append(formatLine("P1", _("RAM benchmark"), _("%.2f MB/s copy rate") % self.ramBenchmark if self.ramBenchmark else _("Calculating benchmark...")))
 		self["information"].setText("\n".join(info) if version_info.major >= 3 else "\n".join(info).encode("UTF-8", "ignore"))
 
 	def getSummaryInformation(self):
