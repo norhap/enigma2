@@ -1671,8 +1671,8 @@ msgstr "No se pudo grabar por conflicto en temporizador %s"
 msgid "Could not record due to invalid service %s"
 msgstr "No se pudo grabar por canal inválido %s"
 
-msgid "Could not record due to invalid service"
-msgstr "No se pudo grabar por canal inválido"
+msgid "Could not record due to busy tuner"
+msgstr "No se pudo grabar debido a que el sintonizador está ocupado"
 
 msgid "Country"
 msgstr "País"
