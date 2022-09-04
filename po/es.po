@@ -18622,6 +18622,9 @@ msgstr "ServiceHisilicon. Grabación IPTV (No). (Recomendado ServiceMP3)."
 msgid "IPTV recording with ServiceApp enabled - recording canceled"
 msgstr "Grabación de IPTV con ServiceApp habilitado - grabación cancelada"
 
+msgid "Not installed"
+msgstr "No instalado"
+
 msgid "Disable log"
 msgstr "Desactivar log"
 

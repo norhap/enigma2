@@ -376,18 +376,22 @@ class About(Screen):
 					player = "%s" % gstplayer
 				if not config.plugins.serviceapp.servicemp3.replace.value:
 					player = "%s" % servicemp3
-			else:
+			elif isPluginInstalled("ServiceHisilicon"):
 				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
 					player = "%s" % exteplayer3
 				else:
 					player = "%s" % gstplayer
 				if not config.plugins.serviceapp.servicemp3.replace.value:
 					player = "%s" % servicehisilicon
+			else:
+				player = _("Not installed")
 		else:
 			if isPluginInstalled("ServiceMP3"):
 				player = "%s" % servicemp3
-			else:
+			elif isPluginInstalled("ServiceHisilicon"):
 				player = "%s" % servicehisilicon
+			else:
+				player = _("Not installed")
 		AboutText += _("Player: %s") % player
 
 		AboutText += "\n"
