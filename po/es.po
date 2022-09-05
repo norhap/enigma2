@@ -17339,8 +17339,8 @@ msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al te
 msgid "Allows the TV remote to be used to control the receiver."
 msgstr "Permite usar el mando a distancia del televisor para controlar el receptor."
 
-msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
-msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo de espera cuando se apague el televisor."
+msgid "When enabled, receiver will automatically return to the set mode when the TV is turned off or the power button on the receiver's remote is pressed."
+msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo establecido cuando se apague el televisor o se presione el botón de encendido del mando del receptor."
 
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
 msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
