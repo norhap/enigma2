@@ -251,8 +251,11 @@ class Session:
 			callback(*retval)
 
 	def execBegin(self, first=True, do_show=True):
-		if self.in_exec:
-			raise AssertionError("already in exec")
+		try:
+			if self.in_exec:
+				print("already in exec")
+		except AssertionError as err:
+			print(err)
 		self.in_exec = True
 		c = self.current_dialog
 
@@ -341,9 +344,9 @@ class Session:
 	def open(self, screen, *arguments, **kwargs):
 		try:
 			if self.dialog_stack and not self.in_exec:
-				raise RuntimeError
-		except:
-			print("[StartEnigma] Error: Modal open are allowed only from a screen which is modal!")  # ...unless it's the very first screen.
+				print("[StartEnigma] Error: Modal open are allowed only from a screen which is modal!")  # ...unless it's the very first screen.
+		except RuntimeError as err:
+			  print(err)
 		self.pushCurrent()
 		dialog = self.current_dialog = self.instantiateDialog(screen, *arguments, **kwargs)
 		dialog.isTmp = True
@@ -363,8 +366,11 @@ class Session:
 		# after close of the top dialog, the underlying will
 		# gain focus again (for a short time), thus triggering
 		# the onExec, which opens the dialog again, closing the loop.
-		if not screen == self.current_dialog:
-			raise AssertionError("Attempt to close non-current screen")
+		try:
+			if not screen == self.current_dialog:
+				print("Attempt to close non-current screen")
+		except AssertionError as err:
+			print(err)
 
 		self.current_dialog.returnValue = retval
 		self.delay_timer.start(0, 1)
