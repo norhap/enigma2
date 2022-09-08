@@ -5011,6 +5011,12 @@ msgstr ""
 "Añadir autotemporizador\n"
 "Ahora (Pulse largo)"
 
+msgid "Now (Press long)"
+msgstr "Ahora (Pulse largo)"
+
+msgid "Prime time (Press long)"
+msgstr "Hora máxima audiencia (Pulse largo)"
+
 msgid "Add autotimer"
 msgstr "Añadir autotemporizador"
 
