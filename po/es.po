@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2022-08-12 22:58+0200\n"
+"PO-Revision-Date: 2022-09-12 04:04+0200\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
 "Language: es_ES\n"
@@ -439,13 +439,19 @@ msgid "30"
 msgstr "30"
 
 msgid "3D surround"
-msgstr "3D surround"
+msgstr "envolvente 3D"
 
 msgid "3D surround softlimiter"
-msgstr "3D surround softlimiter"
+msgstr "Limitador de sonido envolvente 3D"
 
 msgid "3D surround speaker position"
-msgstr "3D surround speaker position"
+msgstr "Posición de los altavoces de sonido envolvente 3D"
+
+msgid "3D surround speaker position on or off"
+msgstr "Posición del altavoz de sonido envolvente 3D o desactivar"
+
+msgid "AC3 transcoding"
+msgstr "Transcodificación AC3"
 
 msgid "3d mode"
 msgstr "3d modo"
@@ -947,6 +953,12 @@ msgstr "Audio PID"
 msgid "Audio auto volume level"
 msgstr "Nivel de volumen de audio automático"
 
+msgid "PCM multichannel"
+msgstr "Multicanal PCM"
+
+msgid "Bypass HDMI EDID Check"
+msgstr "Omitir comprobación de HDMI EDID"
+
 msgid "Audio options..."
 msgstr "Opciones de audio…"
 
@@ -1322,6 +1334,9 @@ msgstr "Cambiar temporizador"
 
 msgid "Channel"
 msgstr "Canal"
+
+msgid "Audio channel"
+msgstr "Canal de audio"
 
 msgid "Channel Info"
 msgstr "Info de canal"
@@ -4554,7 +4569,7 @@ msgid "PDC"
 msgstr "PDC"
 
 msgid "PGS file"
-msgstr "PGS archivo"
+msgstr "Archivo PGS"
 
 msgid "PLP ID"
 msgstr "PLP ID"
@@ -5531,10 +5546,10 @@ msgid "SNR:"
 msgstr "SNR:"
 
 msgid "SRT file"
-msgstr "Fichero STR"
+msgstr "Archivo STR"
 
 msgid "SSA file"
-msgstr "Fichero SSA"
+msgstr "Archivo SSA"
 
 msgid "SSID:"
 msgstr "SSID:"
@@ -6184,6 +6199,9 @@ msgstr "Nombres cortos de archivo"
 msgid "Show Audioselection"
 msgstr "Mostrar selección de audio"
 
+msgid "Change AC3 audio track"
+msgstr "Cambiar pista de audio AC3"
+
 msgid "Show CI messages"
 msgstr "Mostrar mensajes CI"
 
@@ -6772,6 +6790,12 @@ msgstr "Selección de subtítulos…"
 
 msgid "Subtitles"
 msgstr "Subtítulos"
+
+msgid "Subtitles enabled"
+msgstr "Subtítulos habilitado"
+
+msgid "Subtitles disabled"
+msgstr "Subtítulos deshabilitado"
 
 msgid "Subtitle settings"
 msgstr "Ajustes de Subtítulos"
@@ -7789,7 +7813,7 @@ msgid "VMGM (intro trailer)"
 msgstr "VMGM (intro trailer)"
 
 msgid "VOB file"
-msgstr "Fichero VOB"
+msgstr "Archivo VOB"
 
 msgid "VU+"
 msgstr "VU+"
@@ -8714,9 +8738,6 @@ msgstr "salir del menú de configuración del adaptador de red"
 msgid "experimental film/video"
 msgstr "película/video experimental"
 
-msgid "extra wide"
-msgstr "extra wide"
-
 msgid "failed"
 msgstr "fallido"
 
@@ -9387,8 +9408,8 @@ msgstr "empieza en unos segundos"
 msgid "stepsize"
 msgstr "tamaño del paso"
 
-msgid "stereo"
-msgstr "estéreo"
+msgid "Stereo"
+msgstr "Estéreo"
 
 msgid "Stop using as startup service"
 msgstr "Dejar de usar como canal de inicio"
@@ -9510,8 +9531,8 @@ msgstr "Cuando esté activo PiPzap cambia canal arriba"
 msgid "White"
 msgstr "Blanco"
 
-msgid "wide"
-msgstr "altura"
+msgid "Wide"
+msgstr "Amplio"
 
 msgid "width"
 msgstr "anchura"
@@ -14091,12 +14112,6 @@ msgstr "Esta opción le permite forzar los modos HDR10 para UHD"
 msgid "This option allows you to force the HLG modes for UHD"
 msgstr "Esta opción le permite forzar los modos HLG para UHD"
 
-msgid "force disabled"
-msgstr "forzar desactivado"
-
-msgid "force enabled"
-msgstr "forzar activado"
-
 msgid "Your network mount has been updated."
 msgstr "Su montaje de red ha sido actualizado."
 
@@ -17264,20 +17279,35 @@ msgstr "Acciones Selección de Skin"
 msgid "%d seconds"
 msgstr "%d segundos"
 
-msgid "controlled by HDMI"
-msgstr "controlado por HDMI"
+msgid "Controlled by HDMI"
+msgstr "Controlado por HDMI"
+
+msgid "Use HDMI cacenter"
+msgstr "Usar cacenter HDMI"
+
+msgid "Extra wide"
+msgstr "Extra amplio"
 
 msgid "Force enabled"
-msgstr "Fuerza habilitada"
+msgstr "Habilitado forzar"
 
 msgid "Force disabled"
-msgstr "Fuerza deshabilitada"
+msgstr "Deshabilitado forzar"
 
-msgid "convert to AC3"
-msgstr "convertir a AC3"
+msgid "Convert to AC3"
+msgstr "Convertir a AC3"
 
-msgid "convert to DTS"
-msgstr "convertir a DTS"
+msgid "Force AC3plus"
+msgstr "Forzar AC3plus"
+
+msgid "AC3+ transcoding"
+msgstr "Transcodificación AC3+"
+
+msgid "AAC transcoding"
+msgstr "Transcodificación AAC"
+
+msgid "Convert to DTS"
+msgstr "Convertir a DTS"
 
 msgid "Ask user (with default as 'No')"
 msgstr "Preguntar usuario (Por defecto es 'No')"
@@ -17285,11 +17315,11 @@ msgstr "Preguntar usuario (Por defecto es 'No')"
 msgid "Ask user (with default as 'Yes')"
 msgstr "Preguntar usuario (Por defecto es 'Si')"
 
-msgid "Enable BT audio"
-msgstr "Habilitado audio BT"
+msgid "Enable bluetooth audio"
+msgstr "Habilitado audio bluetooth"
 
-msgid "General BT audio delay"
-msgstr "Retardo General audio BT"
+msgid "General bluetooth audio delay"
+msgstr "Retardo General audio bluetooth"
 
 msgid "Other functions"
 msgstr "Otras funciones"
@@ -17384,8 +17414,11 @@ msgstr "Comando de activación para TV"
 msgid "TrueType font (Full-HD)"
 msgstr "Tipo fuente verdadero (Full-HD)"
 
-msgid "use best / controlled by HDMI"
-msgstr "use mejor controlado por HDMI"
+msgid "Use best / Controlled by HDMI"
+msgstr "Usar mejor controlado por HDMI"
+
+msgid "Convert to multi-channel PCM"
+msgstr "Convertir a multi-canal PCM"
 
 msgid "Type Display: "
 msgstr "Tipo Display: "
@@ -18290,11 +18323,11 @@ msgstr "Elija si las pistas de sonido AC3 Plus deben transcodificarse a AC3."
 msgid "Choose whether AAC sound tracks should be transcoded."
 msgstr "Elija si las pistas de sonido AAC deben transcodificarse."
 
-msgid "This option allows you to switch audio to BT speakers."
-msgstr "Esta opción le permite cambiar el audio a altavoces BT."
+msgid "This option allows you to switch audio to bluetooth speakers."
+msgstr "Esta opción le permite cambiar el audio a los altavoces bluetooth."
 
-msgid "This option configures the general audio delay for BT speakers."
-msgstr "Esta opción configura el retardo de audio general para altavoces BT."
+msgid "This option configures the general audio delay for bluetooth speakers."
+msgstr "Esta opción configura el retardo de audio general para altavoces bluetooth."
 
 msgid ""
 "Replace all '%s' tags with:\n"
@@ -18648,3 +18681,12 @@ msgstr "Incluir datos DVB"
 
 msgid "Enable this option to add extra DVB scan data to the debug log file."
 msgstr "Habilite esta opción para agregar datos de Búsqueda DVB adicionales al archivo de registro de depuración."
+
+msgid "Original language"
+msgstr "Lenguage original"
+
+msgid "Narration"
+msgstr "Narración"
+
+msgid "Dolby Digital downmix is now %s"
+msgstr "Mezcla AC3 Dolby Digital es ahora %s"

@@ -20,6 +20,10 @@ def getBrand():
 			brandName = "INI"
 		elif "hd" in rcStartSwithisBrand:
 			brandName = "Mut@nt"
+		elif "ixuss" in rcStartSwithisBrand:
+			brandName = "Medi@link"
+		elif "vu" in rcStartSwithisBrand:
+			brandName = "vuplus"
 		elif "dmm" in rcStartSwithisBrand: # this check should always be the last.
 			brandName = "dreambox"
 		elif not brandName:
