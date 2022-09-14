@@ -17,7 +17,6 @@ from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This
 # Parse the boot commandline.
 from os.path import isfile
 if (isfile("/proc/cmdline")):
-	print("[SystemInfo] Read /proc/cmdline")
 	with open("/proc/cmdline", "r") as fd:
 		cmdline = fd.read()
 	cmdline = {k: v.strip('"') for k, v in findall(r'(\S+)=(".*?"|\S+)', cmdline)}
@@ -136,9 +135,7 @@ SystemInfo["hasPIPVisibleProc"] = fileCheck("/proc/stb/vmpeg/1/visible")
 SystemInfo["FastChannelChange"] = False
 SystemInfo["3DMode"] = fileCheck("/proc/stb/fb/3dmode") or fileCheck("/proc/stb/fb/primary/3d")
 SystemInfo["3DZNorm"] = fileCheck("/proc/stb/fb/znorm") or fileCheck("/proc/stb/fb/primary/zoffset")
-if (isfile("/proc/cmdline")):
-	SystemInfo["HasMMC"] = "root" in cmdline and cmdline["root"].startswith("/dev/mmcblk")
-SystemInfo["HasMMC"] = "mmcblk" in getMachineMtdKernel()
+SystemInfo["HasMMC"] = "root" in cmdline and cmdline["root"].startswith("/dev/mmcblk") if (isfile("/proc/cmdline")) else "mmcblk" in getMachineMtdKernel()
 SystemInfo["Blindscan_t2_available"] = fileCheck("/proc/stb/info/vumodel") and model.startswith("vu")
 SystemInfo["CanProc"] = SystemInfo["HasMMC"] and brand != "vuplus"
 SystemInfo["RcTypeChangable"] = not (model in ("gbquad4k", "gbue4k", "et8500") or model.startswith("et7")) and pathExists("/proc/stb/ir/rc/type")

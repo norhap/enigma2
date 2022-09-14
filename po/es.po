@@ -959,8 +959,8 @@ msgstr "Multicanal PCM"
 msgid "Bypass HDMI EDID Check"
 msgstr "Omitir comprobación de HDMI EDID"
 
-msgid "Audio options..."
-msgstr "Opciones de audio…"
+msgid "Toggle Digital downmix"
+msgstr "Alternar mezcla digital"
 
 msgid "Audio plugins"
 msgstr "Plugins de audio"
