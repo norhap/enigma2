@@ -238,7 +238,7 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 			painter.fill(eRect(offset.x() + half_height, offset.y() + half_height - 2, m_itemsize.width() - m_itemsize.height(), 4));
 		} else
 		{
-			const char *string = PyString_Check(item) ? PyString_AsString(item) : "<not-a-string>";
+			const char *string = PyUnicode_Check(item) ? PyString_AS_STRING(item) : "<not-a-string>";
 			ePoint text_offset = offset;
 			if (gray)
 				painter.setForegroundColor(gRGB(0x808080));
@@ -417,7 +417,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 				/* handle left part. get item from tuple, convert to string, display. */
 			text = PyTuple_GET_ITEM(item, 0);
 			text = PyObject_Str(text); /* creates a new object - old object was borrowed! */
-			const char *string = (text && PyString_Check(text)) ? PyString_AsString(text) : "<not-a-string>";
+			const char *string = (text && PyUnicode_Check(text)) ? PyString_AS_STRING(text) : "<not-a-string>";
 			eRect labelrect(ePoint(offset.x()+15, offset.y()), m_itemsize);
 			painter.renderText(labelrect, string,
 				gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
@@ -451,14 +451,14 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 			{
 					/* convert type to string */
 				ePyObject type = PyTuple_GET_ITEM(value, 0);
-				const char *atype = (type && PyString_Check(type)) ? PyString_AsString(type) : 0;
+				const char *atype = (type && PyUnicode_Check(type)) ? PyString_AS_STRING(type) : 0;
 
 				if (atype)
 				{
 					if (!strcmp(atype, "text") || !strcmp(atype, "mtext"))
 					{
 						ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
-						const char *text = (pvalue && PyString_Check(pvalue)) ? PyString_AsString(pvalue) : "<not-a-string>";
+						const char *text = (pvalue && PyUnicode_Check(pvalue)) ? PyString_AS_STRING(pvalue) : "<not-a-string>";
 						painter.setFont(fnt2);
 						int flags = value_alignment_left ? gPainter::RT_HALIGN_LEFT : gPainter::RT_HALIGN_RIGHT;
 						int markedpos = -1;
@@ -574,7 +574,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 						if (SwigFromPython(pixmap, ppixmap))
 						{
 							eDebug("[eListboxPythonMultiContent] (Pixmap) get pixmap failed");
-							const char *value = (ppixmap && PyString_Check(ppixmap)) ? PyString_AsString(ppixmap) : "<not-a-string>";
+							const char *value = (ppixmap && PyUnicode_Check(ppixmap)) ? PyString_AS_STRING(ppixmap) : "<not-a-string>";
 							painter.setFont(fnt2);
 							if (value_alignment_left)
 								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
@@ -935,7 +935,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 				if (!pstring || pstring == Py_None)
 					continue;
 
-				const char *string = (PyString_Check(pstring)) ? PyString_AsString(pstring) : "<not-a-string>";
+				const char *string = (PyUnicode_Check(pstring)) ? PyString_AS_STRING(pstring) : "<not-a-string>";
 				int x = PyInt_AsLong(px) + offset.x();
 				int y = PyInt_AsLong(py) + offset.y();
 				int width = PyInt_AsLong(pwidth);
