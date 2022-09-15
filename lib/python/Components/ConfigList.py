@@ -9,7 +9,7 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Screens.Standby import QUIT_DEBUG_RESTART, TryQuitMainloop
+from Screens.Standby import QUIT_DEBUG_RESTART, QUIT_RESTART, TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 
@@ -253,7 +253,10 @@ class ConfigListScreen:
 		self.cancelMsg = _("Really close without saving settings?") if msg is None else msg
 
 	def setRestartMessage(self, msg):
-		self.restartMsg = _("Restart GUI in debug mode now?") if msg is None else msg
+		if msg is None:
+			self.restartMsg = _("Restart GUI in debug mode now?") if config.crash.debugLevel.value == "3" else _("Restart GUI now?")
+		else:
+			msg
 
 	def getCurrentItem(self):
 		try:
@@ -421,14 +424,14 @@ class ConfigListScreen:
 	def keySave(self):
 		for notifier in self.onSave:
 			notifier()
-		if self.saveAll():
+		if self.saveAll() and hasattr(self, "restartMsg"):
 			self.session.openWithCallback(self.restartConfirm, MessageBox, self.restartMsg, default=True, type=MessageBox.TYPE_YESNO)
 		else:
 			self.close()
 
 	def restartConfirm(self, result):
 		if result:
-			self.session.open(TryQuitMainloop, retvalue=QUIT_DEBUG_RESTART)
+			self.session.open(TryQuitMainloop, retvalue=QUIT_DEBUG_RESTART) if config.crash.debugLevel.value != "3" else self.session.open(TryQuitMainloop, retvalue=QUIT_RESTART)
 			self.close()
 
 	def saveAll(self):

@@ -5411,6 +5411,9 @@ msgstr "Reiniciar"
 msgid "Restart GUI in debug mode now?"
 msgstr "¿Reiniciar Enigma2 en modo debug ahora?"
 
+msgid "Restart GUI now?"
+msgstr "¿Reiniciar Enigma2 ahora?"
+
 msgid "Restart cardserver"
 msgstr "Reiniciar cardserver"
 
