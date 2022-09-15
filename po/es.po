@@ -10500,8 +10500,8 @@ msgstr "Selección de idioma de subtítulos 4"
 msgid "Subtitle position"
 msgstr "Posición de los subtítulos"
 
-msgid "Auto Language Setup"
-msgstr "Ajustes de subtítulos"
+msgid "Audio and Subtitles Setup"
+msgstr "Ajustes Audio & Subtítulos"
 
 msgid "Teletext subtitle color"
 msgstr "Color de subtítulos del teletexto"
@@ -13795,6 +13795,9 @@ msgstr "Dirección IP"
 
 msgid "Audio Sync Setup"
 msgstr "Configuración Sincronización Audio"
+
+msgid "Audio and subtitles actions"
+msgstr "Acciones audio y subtítulos"
 
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Configuración para el plugin Sincronización Audio"

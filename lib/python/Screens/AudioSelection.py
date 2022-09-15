@@ -1,9 +1,10 @@
 from Screens.Screen import Screen
 from Screens.Setup import getConfigMenuItem, Setup
+from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.ActionMap import NumberActionMap
+from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
 from Components.Label import Label
@@ -23,9 +24,10 @@ FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
 
 
-class AudioSelection(ConfigListScreen, Screen):
+class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
 		self["streams"] = List([], enableWrapAround=True)
 		self["key_red"] = Boolean(False)
 		self["key_green"] = Boolean(False)
@@ -67,6 +69,12 @@ class AudioSelection(ConfigListScreen, Screen):
 			"8": self.keyNumberGlobal,
 			"9": self.keyNumberGlobal,
 		}, -2)
+		self["help"] = HelpableActionMap(self, ["MenuActions", "InfobarAudioSelectionActions", "InfobarSubtitleSelectionActions"],
+			{
+			"audioSelectionLong": (self.audioSelectionLong, _("Toggle Digital downmix")),
+			"subtitleSelection": (self.keyAudioSubtitle, _("Subtitle selection")),
+			"menu": (self.openAutoLanguageSetup, _("Audio and Subtitles Setup"))
+			}, description=_("Audio and subtitles actions"))
 		self.settings = ConfigSubsection()
 		choicelist = [
 			(PAGE_AUDIO, ""),
@@ -74,6 +82,11 @@ class AudioSelection(ConfigListScreen, Screen):
 		]
 		self.settings.menupage = ConfigSelection(choices=choicelist, default=page)
 		self.onLayoutFinish.append(self.__layoutFinished)
+
+	def audioSelectionLong(self):
+		from Screens.InfoBar import InfoBar
+		if InfoBar and InfoBar.instance:
+			InfoBar.instance.audioSelectionLong()
 
 	def __layoutFinished(self):
 		self["config"].instance.setSelectionEnable(False)
