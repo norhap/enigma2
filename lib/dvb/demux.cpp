@@ -95,7 +95,7 @@ int eDVBDemux::openDemux(void)
 {
 	char filename[32] = {};
 	snprintf(filename, sizeof(filename), "/dev/dvb/adapter%d/demux%d", adapter, demux);
-	eTrace("[eDVBDemux] open demux %s", filename);
+	eDebug("[eDVBDemux] open demux %s", filename);
 	return ::open(filename, O_RDWR | O_CLOEXEC);
 }
 
@@ -103,7 +103,7 @@ int eDVBDemux::openDVR(int flags)
 {
 	char filename[32];
 	snprintf(filename, sizeof(filename), "/dev/dvb/adapter%d/dvr%d", adapter, demux);
-	eTrace("[eDVBDemux] open dvr %s", filename);
+	eDebug("[eDVBDemux] open dvr %s", filename);
 #ifdef HAVE_AMLOGIC
 	m_pvr_fd =  ::open(filename, flags);
 	return m_pvr_fd;
@@ -305,7 +305,7 @@ RESULT eDVBSectionReader::start(const eDVBSectionFilterMask &mask)
 	if (fd < 0)
 		return -ENODEV;
 
-	eTrace("[eDVBSectionReader] DMX_SET_FILTER pid=%d", mask.pid);
+	eDebug("[eDVBSectionReader] DMX_SET_FILTER pid=%d", mask.pid);
 	notifier->start();
 
 	dmx_sct_filter_params sct = {};
