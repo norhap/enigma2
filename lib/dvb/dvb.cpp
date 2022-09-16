@@ -1,3 +1,4 @@
+#include <linux/ioctl.h>
 #include <linux/dvb/frontend.h>
 #include <linux/dvb/dmx.h>
 #include <linux/dvb/version.h>
@@ -132,41 +133,10 @@ eDVBResourceManager::eDVBResourceManager()
 		m_adapter.size(), m_frontend.size(), m_simulate_frontend.size(), m_demux.size());
 
 	m_fbcmng = new eFBCTunerManager(instance);
-#ifdef HAVE_INIT_DEMUX
-	/*
-	 * this is a strange hack: the drivers seem to only work correctly after
-	 * demux0 has been used once. After that, we can use demux1,2,...
-	 */
-	initDemux(0);
-		/* for pip demux1 also be used once */
-	initDemux(1);
-#endif
+
 	CONNECT(m_releaseCachedChannelTimer->timeout, eDVBResourceManager::releaseCachedChannel);
 }
-#ifdef HAVE_INIT_DEMUX
-void eDVBResourceManager::initDemux(int num_demux)
-{
-	char filename[32];
-	sprintf(filename, "/dev/dvb/adapter0/demux%d", num_demux);
-	int dmx = open(filename, O_RDWR | O_CLOEXEC);
-	if (dmx < 0)
-	{
-		eDebug("can't open %s (%m)", filename);
-	}
-	else
-	{
-		struct dmx_pes_filter_params filter;
-		memset(&filter, 0, sizeof(filter));
-		filter.output = DMX_OUT_DECODER;
-		filter.input  = DMX_IN_FRONTEND;
-		filter.flags  = DMX_IMMEDIATE_START;
-		filter.pes_type = DMX_PES_VIDEO;
-		ioctl(dmx, DMX_SET_PES_FILTER, &filter);
-		ioctl(dmx, DMX_STOP);
-		close(dmx);
-	}
-}
-#endif
+
 void eDVBResourceManager::feStateChanged()
 {
 	int mask=0;
@@ -369,12 +339,16 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		frontend = -1;
 		goto error;
 	}
-	if (::ioctl(frontend, FE_GET_INFO, &fe_info) < 0)
-	{
-		::close(frontend);
-		frontend = -1;
-		goto error;
-	}
+	
+	prop[0].cmd = DTV_ENUM_DELSYS;
+	memset(prop[0].u.buffer.data, 0, sizeof(prop[0].u.buffer.data));
+	prop[0].u.buffer.len = 0;
+	props.num = 1;
+	props.props = prop;
+
+	if (ioctl(frontend, FE_GET_PROPERTY, &props) < 0)
+		eDebug("[eDVBUsbAdapter] FE_GET_PROPERTY DTV_ENUM_DELSYS failed %m");
+
 	::close(frontend);
 	frontend = -1;
 
@@ -461,29 +435,33 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 		goto error;
 	}
 
-#ifdef VMSG_TYPE2
-#define VTUNER_GET_MESSAGE  11
-#define VTUNER_SET_RESPONSE 12
-#define VTUNER_SET_NAME     13
-#define VTUNER_SET_TYPE     14
+#if _IOC_NONE > 0		/* MIPS receivers return _IOC_NONE=1 */
+#define VTUNER_GET_MESSAGE      1
+#define VTUNER_SET_RESPONSE     2
+#define VTUNER_SET_NAME         3
+#define VTUNER_SET_TYPE         4
+#define VTUNER_SET_HAS_OUTPUTS  5
+#define VTUNER_SET_FE_INFO      6
+#define VTUNER_SET_NUM_MODES    7
+#define VTUNER_SET_MODES        8
+#else				/* ARM receivers return _IOC_NONE=0 */
+#define VTUNER_GET_MESSAGE     11
+#define VTUNER_SET_RESPONSE    12
+#define VTUNER_SET_NAME        13
+#define VTUNER_SET_TYPE        14
 #define VTUNER_SET_HAS_OUTPUTS 15
-#define VTUNER_SET_FE_INFO  16
-#define VTUNER_SET_NUM_MODES 17
-#define VTUNER_SET_MODES 18
-#else
-#define VTUNER_GET_MESSAGE  1
-#define VTUNER_SET_RESPONSE 2
-#define VTUNER_SET_NAME     3
-#define VTUNER_SET_TYPE     4
-#define VTUNER_SET_HAS_OUTPUTS 5
-#define VTUNER_SET_FE_INFO  6
-#define VTUNER_SET_NUM_MODES 7
-#define VTUNER_SET_MODES 8
+#define VTUNER_SET_FE_INFO     16
+#define VTUNER_SET_NUM_MODES   17
+#define VTUNER_SET_MODES       18
 #endif
-#define VTUNER_SET_DELSYS 32
-#define VTUNER_SET_ADAPTER 33
+#define VTUNER_SET_DELSYS      32
+#define VTUNER_SET_ADAPTER     33
+
 	ioctl(vtunerFd, VTUNER_SET_NAME, name);
 	ioctl(vtunerFd, VTUNER_SET_TYPE, type);
+	ioctl(vtunerFd, VTUNER_SET_FE_INFO, &fe_info);
+	if (prop[0].u.buffer.len > 0)
+		ioctl(vtunerFd, VTUNER_SET_DELSYS, prop[0].u.buffer.data);
 	ioctl(vtunerFd, VTUNER_SET_HAS_OUTPUTS, "no");
 	ioctl(vtunerFd, VTUNER_SET_ADAPTER, nr);
 
