@@ -7633,6 +7633,9 @@ msgstr "Descubrir línea parpadeante discontinua para este servicio"
 msgid "Undefined"
 msgstr "Indefinido"
 
+msgid "Undetermined"
+msgstr "Indeterminado"
+
 msgid "Undo install"
 msgstr "Deshacer la instalación"
 
@@ -16475,6 +16478,9 @@ msgstr "Descargando imagen"
 msgid "Downloaded Images"
 msgstr "Imágenes descargadas"
 
+msgid "Fullbackup Images"
+msgstr "Imágenes copia completa de Vision Core"
+
 msgid "Are you sure to reboot to"
 msgstr "Quieres Reiniciar con imagen"
 
@@ -18509,9 +18515,9 @@ msgid ""
 msgstr ""
 "\"Guardar\" cambia el idioma activo.\n"
 "\n"
-"\"Añadir Lenguage\" o \"MENU\" agrega idioma(s) adicional(es).\n"
+"\"Añadir Lenguaje\" o \"MENU\" agrega idioma(s) adicional(es).\n"
 "\n"
-"\"Eliminar lenguage(s)\" permite eliminar todo menos el inglés y el idioma seleccionado, también tienes opción de eliminar el idioma seleccionado."
+"\"Eliminar Lenguaje(s)\" permite eliminar todo menos el inglés y el idioma seleccionado, también tienes opción de eliminar el idioma seleccionado."
 
 msgid "Updating cache"
 msgstr "Actualizando caché"
@@ -18520,10 +18526,10 @@ msgid "Updating cache, please wait..."
 msgstr "Actualizando caché, por favor espere..."
 
 msgid "Add Language"
-msgstr "Añadir Lenguage"
+msgstr "Añadir Lenguaje"
 
 msgid "Delete Language(s)"
-msgstr "Eliminar Lenguage(s)"
+msgstr "Eliminar Lenguaje(s)"
 
 msgid "Delay start http(s) stream"
 msgstr "Retraso en el inicio de stream http(s)"
@@ -18689,7 +18695,7 @@ msgid "Enable this option to add extra DVB scan data to the debug log file."
 msgstr "Habilite esta opción para agregar datos de Búsqueda DVB adicionales al archivo de registro de depuración."
 
 msgid "Original language"
-msgstr "Lenguage original"
+msgstr "Lenguaje original"
 
 msgid "Narration"
 msgstr "Narración"
