@@ -10506,8 +10506,8 @@ msgstr "Selección de idioma de subtítulos 4"
 msgid "Subtitle position"
 msgstr "Posición de los subtítulos"
 
-msgid "Audio and Subtitles Setup"
-msgstr "Ajustes Audio & Subtítulos"
+msgid "Automatic Language and Subtitles Setup"
+msgstr "Ajustes Lenguaje Automático & Subtítulos"
 
 msgid "Teletext subtitle color"
 msgstr "Color de subtítulos del teletexto"

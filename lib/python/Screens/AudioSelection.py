@@ -73,7 +73,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 			{
 			"audioSelectionLong": (self.audioSelectionLong, _("Toggle Digital downmix")),
 			"subtitleSelection": (self.keyAudioSubtitle, _("Subtitle selection")),
-			"menu": (self.openAutoLanguageSetup, _("Audio and Subtitles Setup"))
+			"menu": (self.openAutoLanguageSetup, _("Automatic Language and Subtitles Setup"))
 			}, description=_("Audio and subtitles actions"))
 		self.settings = ConfigSubsection()
 		choicelist = [
