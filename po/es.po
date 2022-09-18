@@ -1008,7 +1008,7 @@ msgid "Auto focus"
 msgstr "Auto focus"
 
 msgid "Auto focus commencing..."
-msgstr "Auto focus comenzando..."
+msgstr "Auto enfoque comenzando..."
 
 msgid "Auto play blu-ray file"
 msgstr "Auto reproducir fichero Blu-ray"
