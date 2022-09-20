@@ -139,16 +139,9 @@ int eDVBVolumecontrol::checkVolume(int vol)
 void eDVBVolumecontrol::setVolume(int left, int right)
 {
 		/* left, right is 0..100 */
-#ifdef HAVE_RASPBERRYPI
-/*	cXineLib *xineLib = cXineLib::getInstance();	*/
-//	m_omx->Init(0,0);
-	eDebug("[RPi eDVBVolumecontrol] SetVolume(L:%d)(R:%d)", left, right);
-#endif
 	leftVol = checkVolume(left);
 	rightVol = checkVolume(right);
-#ifdef HAVE_RASPBERRYPI
-	m_omx->SetVolume(leftVol);
-#endif
+
 #ifdef HAVE_ALSA
 	eDebug("[eDVBVolumecontrol] Setvolume: ALSA leftVol=%d", leftVol);
 	if (mainVolume)
@@ -218,11 +211,6 @@ void eDVBVolumecontrol::volumeMute()
 	//HACK?
 	CFile::writeInt("/proc/stb/audio/j1_mute", 1);
 #endif
-#ifdef HAVE_RASPBERRYPI
-/*	cXineLib *xineLib = cXineLib::getInstance();	*/
-//	m_omx->Init(0,0);
-	m_omx->SetMute(true);
-#endif
 }
 
 void eDVBVolumecontrol::volumeUnMute()
@@ -245,11 +233,6 @@ void eDVBVolumecontrol::volumeUnMute()
 
 	//HACK?
 	CFile::writeInt("/proc/stb/audio/j1_mute", 0);
-#endif
-#ifdef HAVE_RASPBERRYPI
-/*	cXineLib *xineLib = cXineLib::getInstance();	*/
-//	m_omx->Init(0,0);
-	m_omx->SetMute(false);
 #endif
 }
 

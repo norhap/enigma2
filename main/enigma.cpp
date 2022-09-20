@@ -100,11 +100,6 @@ void keyEvent(const eRCKey &key)
 #include <lib/dvb/dvbtime.h>
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/epgtransponderdatareader.h>
-#ifdef HAVE_RASPBERRYPI
-#include <lib/dvb/omxdecoder.h>
-#include <rpisetup.h>
-#include <rpidisplay.h>
-#endif
 
 /* Defined in eerror.cpp */
 void setDebugTime(int level);
@@ -241,34 +236,6 @@ void catchTermSignal()
 
 int main(int argc, char **argv)
 {
-#ifdef AZBOX
-	/* Azbox Sigma mode check, switch back from player mode to normal mode if player crashed and enigma2 restart */
-	int val=0;
-	FILE *f = fopen("/proc/player_status", "r");
-	if (f)
-	{
-		fscanf(f, "%d", &val);
-		fclose(f);
-	}
-	if(val)
-	{
-		int rmfp_fd = open("/tmp/rmfp.kill", O_CREAT);
-		if(rmfp_fd > 0)
-		{
-			int t = 50;
-			close(rmfp_fd);
-			while(access("/tmp/rmfp.kill", F_OK) >= 0 && t--) {
-			usleep(10000);
-			}
-		}
-		f = fopen("/proc/player", "w");
-		if (f)
-		{
-			fprintf(f, "%d", 1);
-			fclose(f);
-		}
-	}
-#endif
 #ifdef MEMLEAK_CHECK
 	atexit(DumpUnfreed);
 #endif
@@ -298,21 +265,6 @@ int main(int argc, char **argv)
 	eLog(0, "[Enigma] DVB API version %d, DVB API version minor %d.", DVB_API_VERSION, DVB_API_VERSION_MINOR);
 	eLog(0, "[Enigma] Enigma debug level %d.", debugLvl);
 
-#ifdef HAVE_RASPBERRYPI
-//	mknod("/tmp/ENIGMA_FIFO", S_IFIFO|0666, 0);
-	cOmxDevice *m_device;
-//	cRpiSetup::GetInstance()->ProcessArgs(/* videolayer */ 0, /* outdisplay */ 0); // (default values)
-	if(!cRpiSetup::HwInit())
-		eLog(3, "[cRpiSetup] failed to initialize RPi HD Device");
-	else
-	{
-		if (!cRpiSetup::IsVideoCodecSupported(cVideoCodec::eMPEG2))
-			eLog(3, "[cRpiSetup] MPEG2 video decoder not enabled!");
-		m_device = new cOmxDevice(cRpiDisplay::GetId(), cRpiSetup::VideoLayer());
-		if (m_device)
-			m_device->Init();
-	}
-#endif
 	ePython python;
 	eMain main;
 
@@ -443,12 +395,6 @@ int main(int argc, char **argv)
 		p.clear();
 		p.flush();
 	}
-#ifdef HAVE_RASPBERRYPI
-	cRpiSetup::DropInstance();
-	eDebug("[cRpiSetup] DropInstance");
-	cRpiDisplay::DropInstance();
-	eDebug("[cRpiDisplay] DropInstance");
-#endif
 	return exit_code;
 }
 

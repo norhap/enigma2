@@ -130,7 +130,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.showTvChannelList(True)
 
 	def showRadioButton(self):
-		if brand in ("GigaBlue", "azbox") or model in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
+		if brand in ("GigaBlue",) or model in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.toggleTvRadio()
 		else:
 			self.showRadio()

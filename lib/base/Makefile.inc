@@ -64,8 +64,3 @@ baseinclude_HEADERS = \
 	base/httpstream.h \
 	base/wrappers.h \
 	base/esimpleconfig.h
-
-if RASPBERRYPI
-base_libenigma_base_a_SOURCES += base/tsRingbuffer.cpp
-baseinclude_HEADERS += base/tsRingbuffer.h
-endif

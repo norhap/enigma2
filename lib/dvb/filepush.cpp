@@ -659,31 +659,7 @@ void eFilePushThreadRecorder::start(int fd)
 
 	run();
 }
-#ifdef HAVE_RASPBERRYPI
-void eFilePushThreadRecorder::start(int fd, ePtr<eDVBDemux> &demux)
-{
-	eDecryptRawFile *f = new eDecryptRawFile();
-	m_source = f;
-	f->setfd(fd);
-	f->setDemux(demux);
 
-	struct sigaction action;
-
-	m_fd_source = 0;
-	m_stop = 0;
-
-	/* prevent enigma main thread/process from being
-	 * actually killed when a thread is signalled
-	 * that not (yet) has signal handler or is not
-	 * (yet) blocking signals. NB this is still in
-	 * parent context. */
-	action.sa_handler = global_signal_SIGUSR1_handler;
-	action.sa_flags = 0;
-	sigaction(SIGUSR1, &action, 0);
-
-	run();
-}
-#endif
 void eFilePushThreadRecorder::stop()
 {
 	static const struct timespec timespec_1 = { .tv_sec =  0, .tv_nsec = 1000000000 / 10 };

@@ -15,11 +15,7 @@ struct eDVBPMTSpec
 {
 	eDVBTableSpec m_spec;
 public:
-#ifdef AZBOX
-	eDVBPMTSpec(int pid, int sid, int timeout = 60000)
-#else
 	eDVBPMTSpec(int pid, int sid, int timeout = 20000)
-#endif
 	{
 		m_spec.pid     = pid;
 		m_spec.tid     = ProgramMapSection::TID;
@@ -135,11 +131,7 @@ struct eDVBPATSpec
 {
 	eDVBTableSpec m_spec;
 public:
-#ifdef AZBOX
-	eDVBPATSpec(int timeout=60000)
-#else
 	eDVBPATSpec(int timeout=20000)
-#endif
 	{
 		m_spec.pid     = ProgramAssociationSection::PID;
 		m_spec.tid     = ProgramAssociationSection::TID;

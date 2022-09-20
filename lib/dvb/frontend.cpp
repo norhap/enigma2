@@ -561,9 +561,7 @@ eDVBFrontend::eDVBFrontend(const char *devicenodename, int fe, int &ok, bool sim
 	,m_state(stateClosed), m_timeout(0), m_tuneTimer(0)
 {
 	m_filename = devicenodename;
-#ifdef HAVE_RASPBERRYPI
-	sscanf(devicenodename, "/dev/dvb/adapter%d", &m_dvbid);
-#endif
+
 	m_timeout = eTimer::create(eApp);
 	CONNECT(m_timeout->timeout, eDVBFrontend::timeout);
 
@@ -2933,10 +2931,8 @@ RESULT eDVBFrontend::setVoltage(int voltage)
 		}
 	}
 
-#ifndef HAVE_RASPBERRYPI
 	eDebug("[eDVBFrontend%d] setVoltage FE_ENABLE_HIGH_LNB_VOLTAGE %d FE_SET_VOLTAGE %d", m_dvbid, increased, vlt);
 	::ioctl(m_fd, FE_ENABLE_HIGH_LNB_VOLTAGE, increased);
-#endif
 	return ::ioctl(m_fd, FE_SET_VOLTAGE, vlt);
 }
 

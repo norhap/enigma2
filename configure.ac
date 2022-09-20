@@ -395,26 +395,8 @@ if test x"$with_fcc" = xyes ; then
 	AC_DEFINE(HAVE_FCC_ABILITY, 1,[use FCC specific codes for fast channel change])
 fi
 
-if test "$MACHINE_BRAND" == "rpi"; then
-	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
-	PKG_CHECK_MODULES(LIBNL, libnl-1 >= 1.0-pre8, has_libnl=yes, dummy=no)
-	PKG_CHECK_MODULES(LIBNL, libnl-3.0, has_libnl=yes, dummy=no)
-	if (test "${has_libnl}" = "no"); then
-		AC_MSG_ERROR(Netlink library is required)
-	fi
-#	AC_CHECK_LIB([rpihddevice], [LIBRPIHDDEVICE_LIBS="-lrpihddevice"], [AC_MSG_ERROR([Could not find librpihddevice])])
-#	AC_SUBST(LIBRPIHDDEVICE_LIBS)
-#	PKG_CHECK_MODULES(LIBRPIHDDEVICE, e2-rpihddevice)
-	BASE_LIBS+=" -lrpihddevice"
-	AC_DEFINE(OMX_SKIP64BIT, 1, [Required by the RPi implementation])
-	RPI_CFLAGS=" $LIBNL_CFLAGS"
-	CXXFLAGS+="$RPI_CFLAGS"
-	AC_DEFINE(HAVE_RASPBERRYPI, 1,[enable rpi specific stuff])
-fi
-
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
 AM_CONDITIONAL(DREAMBOXDMM2, test "$PLATFORM" == "dm4kgen" -o "$PLATFORM" == "dm3gen" -o "$PLATFORM" == "dm2gen")
-AM_CONDITIONAL(RASPBERRYPI, test "$MACHINE_BRAND" == "rpi")
 
 AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == "dm8000" -o "$BOXTYPE" == "dm800" -o "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2")
 AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm800sev2" -o "$BOXTYPE" == "dm820")
@@ -428,27 +410,6 @@ fi
 
 if test "$BOXTYPE" == "e4hdultra" -o "$BOXTYPE" == "protek4k"; then
 	AC_DEFINE(KEY_VIDEO_TO_KEY_BOOKMARKS, 1,[define when rc sends a KEY_VIDEO event for its KEY_BOOKMARKS])
-fi
-
-if test "$MACHINE_BRAND" == "azbox"; then
-	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
-	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
-	AC_DEFINE(FORCE_NO_ACCELNEVER, 1,[define when the framebuffer acceleration auto not working correct])
-	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
-	AC_DEFINE(KEY_HOME_TO_KEY_OPEN, 1,[define when rc sends a KEY_HOME event for its KEY_OPEN])
-fi
-
-if test "$BOXTYPE" == "azboxme" -o "$BOXTYPE" == "azboxminime"; then
-	AC_DEFINE(KEY_TV_TO_KEY_STOP, 1,[define when rc sends a KEY_TV event for its KEY_STOP])
-	AC_DEFINE(KEY_VIDEO_TO_KEY_SUBTITLE, 1,[define when rc sends a KEY_VIDEO event for its KEY_SUBTITLE])
-	AC_DEFINE(KEY_RADIO_TO_KEY_RECORD, 1,[define when rc sends a KEY_RADIO event for its KEY_RECORD])
-fi
-
-if test "$BOXTYPE" == "azboxhd"; then
-	AC_DEFINE(KEY_VIDEO_TO_KEY_EPG, 1,[define when rc sends a KEY_VIDEO event for its KEY_EPG])
-	AC_DEFINE(KEY_TV_TO_KEY_MODE, 1,[define when rc sends a KEY_TV event for its KEY_MODE key])
-	AC_DEFINE(KEY_TEXT_TO_KEY_AUDIO, 1,[define when rc sends a KEY_TEXT event for its KEY_AUDIO key])
-	AC_DEFINE(AZBOXHD_LCD_CHARACTERS, 1,[define lcd characters for azboxhd family])
 fi
 
 if test "$BOXTYPE" == "blackbox7405"; then

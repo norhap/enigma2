@@ -30,8 +30,3 @@ if HAVE_LIBSDL
 driver_libenigma_driver_a_SOURCES += driver/rcsdl.cpp
 driverinclude_HEADERS += driver/rcsdl.h
 endif
-
-if RASPBERRYPI
-driver_libenigma_driver_a_SOURCES += driver/rclirc.cpp
-driverinclude_HEADERS += driver/rclirc.h
-endif

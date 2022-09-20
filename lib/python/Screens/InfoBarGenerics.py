@@ -3319,11 +3319,7 @@ class InfoBarResolutionSelection:
 	def resolutionSelection(self):
 		xRes = int(fileReadLine("/proc/stb/vmpeg/0/xres", 0, source=MODULE_NAME), 16)
 		yRes = int(fileReadLine("/proc/stb/vmpeg/0/yres", 0, source=MODULE_NAME), 16)
-		if brand == "azbox":
-			print("[InfoBarGenerics] Set fps to 50 for azbox to avoid further problems!")
-			fps = 50.0
-		else:
-			fps = float(fileReadLine("/proc/stb/vmpeg/0/framerate", 50000, source=MODULE_NAME)) / 1000.0
+		fps = float(fileReadLine("/proc/stb/vmpeg/0/framerate", 50000, source=MODULE_NAME)) / 1000.0
 		resList = []
 		resList.append((_("Exit"), "exit"))
 		resList.append((_("Auto (not available)"), "auto"))

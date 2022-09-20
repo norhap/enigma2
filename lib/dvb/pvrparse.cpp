@@ -7,9 +7,6 @@
 #include <fcntl.h>
 #include <byteswap.h>
 #include <sys/mman.h>
-#ifdef HAVE_RASPBERRYPI
-#include <omx.h>
-#endif
 
 #ifndef BYTE_ORDER
 #	error no byte order defined!
@@ -922,34 +919,7 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 			//	eDebugNoNewLine(" %02X", pkt[i]);
 			//}
 			//eDebugNoNewLine("\n");
-#ifdef HAVE_RASPBERRYPI
-			time_t m_current_time;
-			double m_diff_time;
-			if (m_broken_count == 0)
-			{
-				time(&m_last_time);
-			}
-			else
-			{
-				time(&m_current_time);
-				m_diff_time=difftime(m_current_time,m_last_time);
-				if (m_diff_time>30)  // when diff more 2 min counter broken stream is now zero out
-				{
-					m_broken_count=0;
-					eWarning("[RPi eMPEGStreamParserTS] Broken stream counter is now ZERO out");
-				}
-				time(&m_last_time);
-			}
-			if (!m_broken)
-			{
-				m_broken_count++;
-				if (m_broken_count>25)
-				{
-					m_broken=true;
-				}
-			}
-			eWarning("[RPi eMPEGStreamParserTS] broken startcode -- %d", m_broken_count);
-#endif
+
 			return 0;
 		}
 
@@ -1084,16 +1054,6 @@ int eMPEGStreamParserTS::processPacket(const unsigned char *pkt, off_t offset)
 			}
 		}
 	}
-#ifdef HAVE_RASPBERRYPI
-	if (m_broken && m_pts_found)
-	{
-/*		cXineLib *xineLib = cXineLib::getInstance();
-		xineLib->playVideo();*/
-		printf("Renew play stream playVideo() \n");
-		m_broken_count=0;
-		m_broken=false;
-	}
-#endif
 	return 0;
 }
 

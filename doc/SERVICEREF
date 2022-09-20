@@ -20,7 +20,6 @@ idServiceMP3          = 4097/0x1001
 idServiceAirPlay      = 4105/0x1009
 idServiceXINE         = 4112/0x1010
 idServiceDVD          = 4369/0x1111
-idServiceAzBox        = 4370/0x1112
 idServiceHDMIIn       = 8192/0x2000
 
 Defined in class eServiceReference in enigma2/lib/service/iservice.h.

@@ -88,20 +88,6 @@ dvb_libenigma_dvb_a_SOURCES += dvb/amldecoder.cpp
 dvbinclude_HEADERS += dvb/amldecoder.h
 endif
 
-if RASPBERRYPI
-dvb_libenigma_dvb_a_SOURCES += \
-	dvb/ca_connector.cpp \
-	dvb/decsa.cpp \
-	dvb/edvbdemux.cpp \
-	dvb/omxdecoder.cpp
-
-dvbinclude_HEADERS += \
-	dvb/ca_connector.h \
-	dvb/decsa.h \
-	dvb/edvbdemux.h \
-	dvb/omxdecoder.h
-endif
-
 if HAVE_FCC_ABILITY
 dvb_libenigma_dvb_a_SOURCES += \
 	dvb/fcc.cpp \

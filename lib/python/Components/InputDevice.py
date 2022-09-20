@@ -210,7 +210,7 @@ class InitInputDevices:
 	def setupConfigEntries(self, device):
 		cmd = "config.InputDevices." + device + " = ConfigSubsection()"
 		exec(cmd)
-		if model in ("dm800", "azboxhd"):
+		if model in ("dm800",):
 			cmd = "config.InputDevices." + device + ".enabled = ConfigYesNo(default = True)"
 		else:
 			cmd = "config.InputDevices." + device + ".enabled = ConfigYesNo(default = False)"
@@ -223,8 +223,6 @@ class InitInputDevices:
 		exec(cmd)
 		if model in ("maram9", "axodin"):
 			cmd = "config.InputDevices." + device + ".repeat = ConfigSlider(default=400, increment = 10, limits=(0, 500))"
-		elif model == "azboxhd":
-			cmd = "config.InputDevices." + device + ".repeat = ConfigSlider(default=150, increment = 10, limits=(0, 500))"
 		else:
 			cmd = "config.InputDevices." + device + ".repeat = ConfigSlider(default=100, increment = 10, limits=(0, 500))"
 		exec(cmd)

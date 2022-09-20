@@ -15,12 +15,6 @@
 #include <asm/ptrace.h>
 #include "version_info.h"
 
-#ifdef AZBOX
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#endif
-
 /************************************************/
 
 static const char *crash_emailaddr =
@@ -88,37 +82,6 @@ static bool bsodhandled = false;
 
 void bsodFatal(const char *component)
 {
-#ifdef AZBOX
-	if (!component)
-	{
-		/* Azbox Sigma mode check, switch back from player mode to normal mode if player Python code crashed and enigma2 restart */		
-		int val=0;
-		FILE *f = fopen("/proc/player_status", "r");
-		if (f)
-		{		
-			fscanf(f, "%d", &val);
-			fclose(f);
-		}
-		if(val)
-		{
-			int rmfp_fd = open("/tmp/rmfp.kill", O_CREAT);
-			if(rmfp_fd > 0) 
-			{
-				int t = 50;
-				close(rmfp_fd);
-				while(access("/tmp/rmfp.kill", F_OK) >= 0 && t--) {
-				usleep(10000);
-				}
-			}		
-			f = fopen("/proc/player", "w");
-			if (f)
-			{		
-				fprintf(f, "%d", 1);
-				fclose(f);
-			}
-		}
-	}
-#endif
 	/* show no more than one bsod while shutting down/crashing */
 	if (bsodhandled) {
 		if (component) {
@@ -243,7 +206,7 @@ void bsodFatal(const char *component)
 
 	std::string logtail;
 	int lines = 20;
-	
+
 	if (logp2)
 	{
 		unsigned int size = logs2;
@@ -255,7 +218,7 @@ void bsodFatal(const char *component)
 				if (!lines) {
 					logtail = std::string(r, logs2 - size);
 					break;
-				} 
+				}
 			}
 			else {
 				logtail = std::string(logp2, logs2);
@@ -275,7 +238,7 @@ void bsodFatal(const char *component)
 				if (!lines) {
 					logtail += std::string(r, logs1 - size);
 					break;
-				} 
+				}
 			}
 			else {
 				logtail += std::string(logp1, logs1);

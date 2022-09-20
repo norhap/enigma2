@@ -369,23 +369,15 @@ void eServiceWebTS::recv_event(int evt)
 		{
 			PID_SET = 1;
 			m_decodedemux->flush();
-#ifdef HAVE_RASPBERRYPI
-			if (H264)
-				m_decoder->setVideoPID(VPID, eDVBVideo::MPEG4_H264, 0);
-			else
-				m_decoder->setVideoPID(VPID, eDVBVideo::MPEG2, 0);
-			m_decoder->setAudioPID(APID, eDVBAudio::aMPEG, 0);
-#else
 			if (H264)
 				m_decoder->setVideoPID(VPID, eDVBVideo::MPEG4_H264);
 			else
 				m_decoder->setVideoPID(VPID, eDVBVideo::MPEG2);
 			m_decoder->setAudioPID(APID, eDVBAudio::aMPEG);
-#endif
 			m_decoder->pause();
 			m_event(this, evStart);
 			m_decoder->play();
-			
+
 		}
 		bool wasnull = !m_audioInfo;
 		m_streamthread->getAudioInfo(m_audioInfo);
@@ -531,11 +523,7 @@ RESULT eServiceWebTS::selectTrack(unsigned int i) {
 	if (m_audioInfo) {
 		m_apid = m_audioInfo->audioStreams[i].pid;
 		eDebug("[eServiceWebTS] audio track %d PID 0x%02x type %d\n", i, m_apid, m_audioInfo->audioStreams[i].type);
-#ifdef HAVE_RASPBERRYPI
-		m_decoder->setAudioPID(m_apid, m_audioInfo->audioStreams[i].type, 0);
-#else
 		m_decoder->setAudioPID(m_apid, m_audioInfo->audioStreams[i].type);
-#endif
 		m_decoder->set();
 		return 0;
 	} else {

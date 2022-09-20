@@ -233,8 +233,6 @@ def getCPUBrand():
 		return _("Amlogic")
 	elif SystemInfo["HiSilicon"]:
 		return _("HiSilicon")
-	elif getBrand() == "azbox":
-		return _("Sigma Designs")
 	else:
 		return _("Broadcom")
 

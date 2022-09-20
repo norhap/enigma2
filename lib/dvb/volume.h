@@ -6,9 +6,6 @@
 #endif
 
 #include <lib/base/ebase.h>
-#ifdef HAVE_RASPBERRYPI
-#include <omx.h>
-#endif
 
 class eDVBVolumecontrol
 {
@@ -21,9 +18,6 @@ private:
 	eDVBVolumecontrol();
 #ifdef SWIG
 	~eDVBVolumecontrol();
-#endif
-#ifdef HAVE_RASPBERRYPI
-	cOmx *m_omx;
 #endif
 	int openMixer();
 	void closeMixer(int fd);
