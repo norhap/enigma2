@@ -81,9 +81,12 @@ scopePlugins = defaultPaths[SCOPE_PLUGINS][0]
 
 def getEncodingType(filename):
 	if version_info.major >= 3:
-		with open(filename, 'rb') as f:
-			data = f.read()
-		return detect(data)["encoding"]
+		with open(filename, 'rb') as fd:
+			data = fd.read()
+	else:
+		with open(filename, 'r') as fd:
+			data = fd.read()
+	return detect(data)["encoding"]
 
 
 def InitDefaultPaths():
@@ -205,13 +208,9 @@ def resolveFilename(scope, base="", path_prefix=None):
 def fileReadLine(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	line = None
 	try:
-		if version_info.major >= 3:
-			type_codec = getEncodingType(filename)
-			with open(filename, "r", encoding=type_codec) as fd:
-				line = fd.read().strip().replace("\0", "")
-		else:
-			with open(filename, "r") as fd:
-				line = fd.read().strip().replace("\0", "")
+		type_codec = getEncodingType(filename)
+		with open(filename, "r", encoding=type_codec) as fd:
+			line = fd.read().strip().replace("\0", "")
 		msg = "Read"
 	except (IOError, OSError) as err:
 		if err.errno != ENOENT:  # ENOENT - No such file or directory.
@@ -241,16 +240,12 @@ def fileWriteLine(filename, line, source=DEFAULT_MODULE_NAME, debug=False):
 def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	lines = None
 	try:
-		if version_info.major >= 3:
-			type_codec = getEncodingType(filename)
-			with open(filename, "r", encoding=type_codec) as fd:
-				lines = fd.read().splitlines()
-		else:
-			with open(filename, "r") as fd:
-				lines = fd.read().splitlines()
+		type_codec = getEncodingType(filename)
+		with open(filename, "r", encoding=type_codec) as fd:
+			lines = fd.read().splitlines()
 		msg = "Read"
-	except (IOError, OSError) as err:
-		if err.errno != ENOENT:  # ENOENT - No such file or directory.
+	except (IOError, OSError, UnicodeDecodeError) as err:
+		if not UnicodeDecodeError and err.errno != ENOENT:  # ENOENT - No such file or directory.
 			print("[%s] Error %d: Unable to read lines from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
 		lines = default
 		msg = "Default"
@@ -585,13 +580,9 @@ def fileExists(file, mode="r"):
 def fileContains(file, content, mode="r"):
 	result = False
 	if fileExists(file, mode):
-		if version_info.major >= 3:
-			type_codec = getEncodingType(file)
-			with open(file, mode, encoding=type_codec) as fd:
-				text = fd.read()
-		else:
-			with open(file, mode) as fd:
-				text = fd.read()
+		type_codec = getEncodingType(file)
+		with open(file, mode, encoding=type_codec) as fd:
+			text = fd.read()
 		if content in text:
 			result = True
 	return result
@@ -599,6 +590,20 @@ def fileContains(file, content, mode="r"):
 
 def fileHas(file, content, mode="r"):
 	return fileContains(file, content, mode)
+
+
+def fileContainsCodecWindows(file, content, mode="r"): # encoding windows.
+	result = False
+	if fileExists(file, mode):
+		with open(file, mode, encoding="windows-1255") as fd:
+			text = fd.read()
+		if content in text:
+			result = True
+	return result
+
+
+def fileHasCodecWindows(file, content, mode="r"): # encoding windows.
+	return fileContainsCodecWindows(file, content, mode)
 
 
 def hasHardLinks(path):  # Test if the volume containing path supports hard links.

@@ -31,7 +31,7 @@ class GetEcmInfo:
 			info['ecminterval1'] = oecmi0
 			old_ecm_time = ecm_time
 			try:
-				ecm = open(ECM_INFO, 'r').readlines()
+				ecm = open(ECM_INFO, 'r', encoding="windows-1255").readlines()
 			except:
 				ecm = ''
 			for line in ecm:
