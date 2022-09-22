@@ -352,13 +352,6 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 	}
 	if (name[0])
 	{
-		/* fallback to the dvb_frontend_info name */
-		int len = MIN(sizeof(fe_info.name), sizeof(name) - 1);
-		strncpy(name, fe_info.name, len);
-		name[len] = 0;
-	}
-	if (name[0])
-	{
 		/* strip trailing LF / CR / whitespace */
 		int len = strlen(name);
 		char *tmp = name;
@@ -445,7 +438,6 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 #endif
 #define VTUNER_SET_DELSYS      32
 #define VTUNER_SET_ADAPTER     33
-
 	ioctl(vtunerFd, VTUNER_SET_NAME, name);
 	ioctl(vtunerFd, VTUNER_SET_TYPE, type);
 	ioctl(vtunerFd, VTUNER_SET_FE_INFO, &fe_info);
@@ -459,7 +451,8 @@ eDVBUsbAdapter::eDVBUsbAdapter(int nr)
 	mappedFrontendName[virtualFrontendName] = usbFrontendName;
 	if (pipe(pipeFd) == -1)
 	{
-		eDebug("[eDVBUsbAdapter] failed to create pipe (%m)");
+		eWarning("[eDVBUsbAdapter] failed to create pipe (%m)");
+		goto error;
 	}
 	running = true;
 	pthread_create(&pumpThread, NULL, threadproc, (void*)this);

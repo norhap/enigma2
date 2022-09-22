@@ -2375,9 +2375,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 				}
 				else
 				{
-#if defined DTV_STREAM_ID
 					p[cmdseq.num].cmd = DTV_STREAM_ID, p[cmdseq.num].u.data = parm.is_id | (parm.pls_code << 8) | (parm.pls_mode << 26), cmdseq.num++;
-#endif
 				}
 				/* FIXME HACK ALERT use unused by enigma2 ISDBT SEGMENT IDX to pass T2MI PLP ID and T2MI PID */
 				p[cmdseq.num].cmd = DTV_ISDBT_SB_SEGMENT_IDX, p[cmdseq.num].u.data = (static_cast<unsigned int>(parm.t2mi_plp_id) == eDVBFrontendParametersSatellite::No_T2MI_PLP_Id ? 0 : (0x80000000 | (parm.t2mi_pid << 16) | parm.t2mi_plp_id)), cmdseq.num++;
@@ -2387,6 +2385,7 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 		{
 			eDVBFrontendParametersCable parm{};
 			oparm.getDVBC(parm);
+
 			p[cmdseq.num].cmd = DTV_DELIVERY_SYSTEM;
 #if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 			if (m_dvbversion >= DVB_VERSION(5, 6))
@@ -3318,12 +3317,7 @@ bool eDVBFrontend::setSlotInfo(int id, const char *descr, bool enabled, bool isD
 
 bool eDVBFrontend::is_multistream()
 {
-//#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
-#if DVB_API_VERSION >= 5
-	if(!strcmp(m_description, "TBS-5925"))
-		return true;
-	if(!strcmp(m_description, "GIGA DVB-S2 NIM (SP2246T)"))
-		return true;
+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
 	return fe_info.caps & FE_CAN_MULTISTREAM;
 #else //if DVB_API_VERSION < 5
 	return 0;
@@ -3376,9 +3370,8 @@ std::string eDVBFrontend::getCapabilities()
 	if (fe_info.caps &  FE_CAN_8VSB)			ss << " FE_CAN_8VSB";
 	if (fe_info.caps &  FE_CAN_16VSB)			ss << " FE_CAN_16VSB";
 	if (fe_info.caps &  FE_HAS_EXTENDED_CAPS)		ss << " FE_HAS_EXTENDED_CAPS";
-//#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
-#if DVB_API_VERSION >= 5
-	if (fe_info.caps &  FE_CAN_MULTISTREAM)			ss << "FE_CAN_MULTISTREAM,";
+#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 8
+	if (fe_info.caps &  FE_CAN_MULTISTREAM)			ss << " FE_CAN_MULTISTREAM";
 #endif
 	if (fe_info.caps &  FE_CAN_TURBO_FEC)			ss << " FE_CAN_TURBO_FEC";
 	if (fe_info.caps &  FE_CAN_2G_MODULATION)		ss << " FE_CAN_2G_MODULATION";
@@ -3410,14 +3403,10 @@ std::string eDVBFrontend::getCapabilities()
 		case SYS_ISDBT:		ss << " ISDBT"; break;
 		case SYS_UNDEFINED:	ss << " UNDEFINED"; break;
 		case SYS_DVBC_ANNEX_A:	ss << " DVBC_ANNEX_A"; break;
-#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
 		case SYS_DVBC_ANNEX_C:	ss << " DVBC_ANNEX_C"; break;
+		case SYS_DVBT2:		ss << " DVBT2"; break;
 		case SYS_TURBO:		ss << " TURBO"; break;
 		case SYS_DTMB:		ss << " DTMB"; break;
-#else
-		case SYS_DMBTH:		ss << " DMBTH"; break;
-#endif
-		case SYS_DVBT2:		ss << " DVBT2"; break;
 		}
 	}
 

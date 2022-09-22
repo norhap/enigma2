@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 
+
 DEFINE_REF(eDVBFrontendStatus);
 
 eDVBFrontendStatus::eDVBFrontendStatus(ePtr<eDVBFrontend> &fe)
