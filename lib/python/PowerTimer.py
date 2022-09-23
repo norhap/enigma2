@@ -13,7 +13,7 @@ from Components.Harddisk import internalHDDNotSleeping
 from Components.TimerSanityCheck import TimerSanityCheck
 from Screens.MessageBox import MessageBox
 import Screens.Standby
-from Tools.Directories import SCOPE_CONFIG, fileReadXML, getRecordingFilename, resolveFilename
+from Tools.Directories import SCOPE_CONFIG, fileReadXML, resolveFilename
 from Tools.Notifications import AddNotification, AddNotificationWithUniqueIDCallback, AddPopup
 from Tools.XMLTools import stringToXML
 from Tools.StbHardware import getBrandModel
