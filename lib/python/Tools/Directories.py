@@ -386,7 +386,7 @@ def getRecordingFilename(basename, dirname=None):
 	filename = pathjoin(dirname, filename)
 	next = 0
 	path = filename
-	while isfile("%s.ts" % path):
+	while isfile("%s.ts" % path) or isfile("%s.stream" % path):
 		next += 1
 		path = "%s_%03d" % (filename, next)
 	return path
