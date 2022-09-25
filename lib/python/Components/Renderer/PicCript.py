@@ -4,7 +4,7 @@ from enigma import ePixmap, iServiceInformation
 
 from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileHasCodecWindows
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileHas
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -110,17 +110,17 @@ class PicCript(Renderer):
 		lines = []
 		try:
 			for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-				if fileHasCodecWindows("/tmp/ecm.info", "protocol") or fileHasCodecWindows("/tmp/ecm.info", "Service"):
+				if fileHas("/tmp/ecm.info", "protocol") or fileHas("/tmp/ecm.info", "Service"):
 					for caid in caids:
 						sName = self.condAccessIds.get(line[8:10])
 						if sName != None:
 							return sName
-				elif fileHasCodecWindows("/tmp/ecm.info", "CCcam-s2s"):
+				elif fileHas("/tmp/ecm.info", "CCcam-s2s"):
 					for caid in caids:
 						sName = self.condAccessIds.get(line[14:16])
 						if sName != None:
 							return sName
-				elif fileHasCodecWindows("/tmp/ecm.info", "Signature"):
+				elif fileHas("/tmp/ecm.info", "Signature"):
 					for caid in caids:
 						sName = self.condAccessIdsMgcamd.get(line[26:28])
 						if sName != None:

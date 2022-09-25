@@ -8,7 +8,6 @@ from stat import S_IMODE
 from tempfile import mkstemp
 from traceback import print_exc
 from xml.etree.cElementTree import Element, ParseError, fromstring, parse
-from chardet import detect
 
 from enigma import eEnv, getDesktop, eGetEnigmaDebugLvl
 
@@ -77,16 +76,6 @@ scopeGUISkin = defaultPaths[SCOPE_GUISKIN][0]
 scopeLCDSkin = defaultPaths[SCOPE_LCDSKIN][0]
 scopeFonts = defaultPaths[SCOPE_FONTS][0]
 scopePlugins = defaultPaths[SCOPE_PLUGINS][0]
-
-
-def getEncodingType(filename):
-	if version_info.major >= 3:
-		with open(filename, 'rb') as fd:
-			data = fd.read()
-	else:
-		with open(filename, 'r') as fd:
-			data = fd.read()
-	return detect(data)["encoding"]
 
 
 def InitDefaultPaths():
@@ -208,12 +197,11 @@ def resolveFilename(scope, base="", path_prefix=None):
 def fileReadLine(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	line = None
 	try:
-		type_codec = getEncodingType(filename)
-		with open(filename, "r", encoding=type_codec) as fd:
+		with open(filename, "r", encoding="ISO 8859-1") as fd:
 			line = fd.read().strip().replace("\0", "")
 		msg = "Read"
-	except (IOError, OSError) as err:
-		if err.errno != ENOENT:  # ENOENT - No such file or directory.
+	except (IOError, OSError, UnicodeDecodeError) as err:
+		if not UnicodeDecodeError and err.errno != ENOENT:  # ENOENT - No such file or directory.
 			print("[%s] Error %d: Unable to read a line from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
 		line = default
 		msg = "Default"
@@ -240,8 +228,7 @@ def fileWriteLine(filename, line, source=DEFAULT_MODULE_NAME, debug=False):
 def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	lines = None
 	try:
-		type_codec = getEncodingType(filename)
-		with open(filename, "r", encoding=type_codec) as fd:
+		with open(filename, "r", encoding="ISO 8859-1") as fd:
 			lines = fd.read().splitlines()
 		msg = "Read"
 	except (IOError, OSError, UnicodeDecodeError) as err:
@@ -580,8 +567,7 @@ def fileExists(file, mode="r"):
 def fileContains(file, content, mode="r"):
 	result = False
 	if fileExists(file, mode):
-		type_codec = getEncodingType(file)
-		with open(file, mode, encoding=type_codec) as fd:
+		with open(file, mode, encoding="ISO 8859-1") as fd:
 			text = fd.read()
 		if content in text:
 			result = True
@@ -590,20 +576,6 @@ def fileContains(file, content, mode="r"):
 
 def fileHas(file, content, mode="r"):
 	return fileContains(file, content, mode)
-
-
-def fileContainsCodecWindows(file, content, mode="r"): # encoding windows.
-	result = False
-	if fileExists(file, mode):
-		with open(file, mode, encoding="windows-1255") as fd:
-			text = fd.read()
-		if content in text:
-			result = True
-	return result
-
-
-def fileHasCodecWindows(file, content, mode="r"): # encoding windows.
-	return fileContainsCodecWindows(file, content, mode)
 
 
 def hasHardLinks(path):  # Test if the volume containing path supports hard links.

@@ -31,15 +31,16 @@ class GetEcmInfo:
 			info['ecminterval1'] = oecmi0
 			old_ecm_time = ecm_time
 			try:
-				ecm = open(ECM_INFO, 'r', encoding="windows-1255").readlines()
+				ecm = open(ECM_INFO, 'r', encoding="ISO 8859-1").readlines()
 			except:
 				ecm = ''
-			for line in ecm:
-				d = line.split(':', 1)
-				if len(d) > 1:
-					info[d[0].strip()] = d[1].strip()
-			data = self.getText()
-			return True
+			if ecm:
+				for line in ecm:
+					d = line.split(':', 1)
+					if len(d) > 1:
+						info[d[0].strip()] = d[1].strip()
+				data = self.getText()
+				return True
 		else:
 			info['ecminterval0'] = (int(time.time()) - ecm_time + 0.5)
 

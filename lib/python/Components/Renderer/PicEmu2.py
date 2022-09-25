@@ -4,7 +4,7 @@ from enigma import ePixmap, iServiceInformation
 
 from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileHasCodecWindows
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileHas
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -77,12 +77,12 @@ class PicEmu2(Renderer):
 		lines = []
 		try:
 			for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-				if fileHasCodecWindows("/tmp/ecm.info", " 0x") and not fileHasCodecWindows("/tmp/.ncam/ncam.version", "NCam"):
+				if fileHas("/tmp/ecm.info", " 0x") and not fileHas("/tmp/.ncam/ncam.version", "NCam"):
 					for caid in caids:
 						sName = self.camds.get(line[0:4])
 						if sName != None:
 							return sName
-				if fileHasCodecWindows("/tmp/.ncam/ncam.version", "NCam"):
+				if fileHas("/tmp/.ncam/ncam.version", "NCam"):
 					for caid in caids:
 						sName = self.ncam.get(line[0:4])
 						if sName != None:
