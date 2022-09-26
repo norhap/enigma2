@@ -21,7 +21,7 @@ class Time(Setup):
 
 	def selectionChanged(self):
 		if Setup.getCurrentItem(self) in (config.timezone.area, config.timezone.val):
-			self["key_yellow"].setText(_("Use Geolocation"))
+			self["key_yellow"].setText(_("Set local time"))
 			self["geolocationActions"].setEnabled(True)
 		else:
 			self["key_yellow"].setText("")
