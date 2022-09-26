@@ -14619,7 +14619,7 @@ msgid "Reader Statistics"
 msgstr "Estadísticas Lector"
 
 msgid "Serv.Name"
-msgstr "Serv.Nombre"
+msgstr "Nombre Canal"
 
 msgid "Server:"
 msgstr "Servidor:"
