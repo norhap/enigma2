@@ -8588,8 +8588,8 @@ msgstr "conectado"
 msgid "cooking"
 msgstr "cocina"
 
-msgid "copy to bouquets"
-msgstr "copiar a bouquets"
+msgid "Copy to bouquets"
+msgstr "Copiar a bouquets"
 
 msgid "create directory"
 msgstr "crar directorio"
@@ -8794,6 +8794,9 @@ msgstr "libre"
 
 msgid "from"
 msgstr "de"
+
+msgid "From"
+msgstr "Desde"
 
 msgid "further education"
 msgstr "educación avanzada"
@@ -9194,8 +9197,8 @@ msgstr "Eliminar canal de la protección parental"
 msgid "remove new found flag"
 msgstr "eliminar el indicador nuevo encontrado"
 
-msgid "remove selected satellite"
-msgstr "eliminar satélite seleccionado"
+msgid "Remove selected satellite"
+msgstr "Eliminar satélite seleccionado"
 
 msgid "remove terrestrial services"
 msgstr "eliminar servicios terrestres"
@@ -14542,13 +14545,13 @@ msgid "Clients"
 msgstr "Clientes"
 
 msgid "ECM Statistics"
-msgstr "ECM Estadísticas"
+msgstr "Estadísticas ECM"
 
 msgid "ECM Time"
-msgstr "ECM Hora"
+msgstr "Tiempo ECM"
 
 msgid "ECM last"
-msgstr "ECM Último"
+msgstr "Último ECM"
 
 msgid "ECM-Time"
 msgstr "Tiempo-ECM"
