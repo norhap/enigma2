@@ -4,7 +4,7 @@ from enigma import ePixmap, iServiceInformation
 
 from Components.Pixmap import Pixmap
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileHas
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -74,21 +74,23 @@ class PicEmu2(Renderer):
 				self.instance.setPixmapFromFile(self.pngName)
 
 	def matchCAId(self, caids):
+		from process import ProcessList
+		ncam = str(ProcessList().named("ncam")).strip("[]")
 		lines = []
 		try:
 			for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-				if fileHas("/tmp/ecm.info", " 0x") and not fileHas("/tmp/.ncam/ncam.version", "NCam"):
+				if not ncam:
 					for caid in caids:
 						sName = self.camds.get(line[0:4])
 						if sName != None:
 							return sName
-				if fileHas("/tmp/.ncam/ncam.version", "NCam"):
+				else:
 					for caid in caids:
 						sName = self.ncam.get(line[0:4])
 						if sName != None:
 							return sName
 		except IOError as err:
-			print("[Errno 2] No such file or directory: /tmp/ecm.info")
+			print("[PicEmu2] %s" % err)
 
 	def findPicon(self, serviceName):
 		for path in self.searchPaths:
