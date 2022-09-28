@@ -363,17 +363,21 @@ class NcamInfo:
 					result.append((_("Provider"), i.split(":")[1].strip()))
 				elif "reader" in i:
 					result.append((_("Reader"), i.split(":")[1].strip()))
-				elif "from" in i:
+				elif "from" in i and not "cache" in i:
 					result.append((_("Address"), i.split(":")[1].strip()))
-				elif "protocol" in i:
+				elif "from" in i and "cache" in i:
+					result.append((_("From"), i.split(":")[1].strip()))
+				elif "protocol" in i and not "none" in i:
 					result.append((_("Protocol"), i.split(":")[1].strip()))
+				elif "none" in i:
+					result.append(("CacheEX", i.split(":")[1].strip().replace("none", "cacheex")))
 				elif "hops" in i:
 					result.append((_("Hops"), i.split(":")[1].strip()))
 				elif "ecm time" in i:
 					result.append((_("ECM Time"), i.split(":")[1].strip()))
+				else:
+					result
 			return result
-		else:
-			return "%s not found" % self.ecminfo
 
 
 class oscMenuList(MenuList):
@@ -402,27 +406,26 @@ class NcamInfoMenu(Screen):
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
 		self.osc = NcamInfo()
 		self["mainmenu"] = oscMenuList([])
-		self["actions"] = NumberActionMap(["OkCancelActions", "InputActions", "ColorActions"],
-					{
-						"ok": self.ok,
-						"cancel": self.exit,
-						"red": self.red,
-						"green": self.green,
-						"yellow": self.yellow,
-						"blue": self.blue,
-						"1": self.keyNumberGlobal,
-						"2": self.keyNumberGlobal,
-						"3": self.keyNumberGlobal,
-						"4": self.keyNumberGlobal,
-						"5": self.keyNumberGlobal,
-						"6": self.keyNumberGlobal,
-						"7": self.keyNumberGlobal,
-						"8": self.keyNumberGlobal,
-						"9": self.keyNumberGlobal,
-						"0": self.keyNumberGlobal,
-						"up": self.up,
-						"down": self.down
-						}, -1)
+		self["actions"] = NumberActionMap(["OkCancelActions", "InputActions", "ColorActions"], {
+			"ok": self.ok,
+			"cancel": self.exit,
+			"red": self.red,
+			"green": self.green,
+			"yellow": self.yellow,
+			"blue": self.blue,
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+			"0": self.keyNumberGlobal,
+			"up": self.up,
+			"down": self.down
+		}, -1)
 		self.onLayoutFinish.append(self.showMenu)
 
 	def ok(self):
@@ -579,11 +582,10 @@ class oscECMInfo(Screen, NcamInfo):
 			self.loop.callback.append(self.showData)
 			timeout = config.ncaminfo.intervall.value * 1000
 			self.loop.start(int(100))
-		self["actions"] = ActionMap(["OkCancelActions"],
-					{
-						"ok": self.exit,
-						"cancel": self.exit
-					}, -1)
+		self["actions"] = ActionMap(["OkCancelActions"], {
+			"ok": self.exit,
+			"cancel": self.exit
+		}, -1)
 		self.onLayoutFinish.append(self.showData)
 
 	def exit(self):
@@ -661,21 +663,20 @@ class oscInfo(Screen, NcamInfo):
 			self.loop.callback.append(self.showData)
 			timeout = config.ncaminfo.intervall.value * 1000
 			self.loop.start(timeout, False)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"],
-					{
-						"ok": self.key_ok,
-						"cancel": self.exit,
-						"red": self.exit,
-						"green": self.key_green,
-						"yellow": self.key_yellow,
-						"blue": self.key_blue,
-						"up": self.key_up,
-						"down": self.key_down,
-						"right": self.key_right,
-						"left": self.key_left,
-						"moveUp": self.key_moveUp,
-						"moveDown": self.key_moveDown
-					}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"], {
+			"ok": self.key_ok,
+			"cancel": self.exit,
+			"red": self.exit,
+			"green": self.key_green,
+			"yellow": self.key_yellow,
+			"blue": self.key_blue,
+			"up": self.key_up,
+			"down": self.key_down,
+			"right": self.key_right,
+			"left": self.key_left,
+			"moveUp": self.key_moveUp,
+			"moveDown": self.key_moveDown
+		}, -1)
 		self.onLayoutFinish.append(self.showData)
 
 	def key_ok(self):
@@ -920,11 +921,10 @@ class oscEntitlements(Screen, NcamInfo):
 		self.mlist = oscMenuList([])
 		self.cccamreader = reader
 		self["output"] = List([])
-		self["actions"] = ActionMap(["OkCancelActions"],
-					{
-						"ok": self.showData,
-						"cancel": self.exit
-					}, -1)
+		self["actions"] = ActionMap(["OkCancelActions"], {
+			"ok": self.showData,
+			"cancel": self.exit
+		}, -1)
 		self.onLayoutFinish.append(self.showData)
 
 	def exit(self):
@@ -1060,11 +1060,10 @@ class oscReaderStats(Screen, NcamInfo):
 		self.reader = reader
 		self.mlist = oscMenuList([])
 		self["output"] = List([])
-		self["actions"] = ActionMap(["OkCancelActions"],
-					{
-						"ok": self.showData,
-						"cancel": self.exit
-					}, -1)
+		self["actions"] = ActionMap(["OkCancelActions"], {
+			"ok": self.showData,
+			"cancel": self.exit
+		}, -1)
 		self.onLayoutFinish.append(self.showData)
 
 	def exit(self):
