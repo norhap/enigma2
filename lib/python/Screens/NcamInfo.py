@@ -17,6 +17,7 @@ import os
 import time
 import skin
 from six.moves.urllib.error import URLError
+from six.moves.urllib.parse import quote_plus
 from six.moves.urllib.request import HTTPHandler, HTTPDigestAuthHandler, HTTPPasswordMgrWithDefaultRealm, Request, urlopen, build_opener, install_opener
 
 ###global
@@ -166,7 +167,7 @@ class NcamInfo:
 		else:
 			self.url = "%s://%s:%s/%s.html?part=%s" % (self.proto, self.ip, self.port, self.api, part)
 		if part is not None and reader is not None:
-			self.url = "%s://%s:%s/%s.html?part=%s&label=%s" % (self.proto, self.ip, self.port, self.api, part, reader)
+			self.url = "%s://%s:%s/%s.html?part=%s&label=%s" % (self.proto, self.ip, self.port, self.api, part, quote_plus(reader))
 
 		opener = build_opener(HTTPHandler)
 		if not self.username == "":
