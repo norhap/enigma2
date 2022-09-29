@@ -90,11 +90,11 @@ class SoftcamSetup(Setup):
 	def softcamInfo(self):
 		ppanelFilename = "/etc/ppanels/%s.xml" % config.misc.softcams.value
 		if "oscam" in config.misc.softcams.value.lower():
-			from Screens.OScamInfo import OscamInfoMenu
-			self.session.open(OscamInfoMenu)
+			from Screens.OScamInfo import oscamInfoMenu
+			self.session.open(oscamInfoMenu)
 		elif "ncam" in config.misc.softcams.value.lower():
-			from Screens.NcamInfo import NcamInfoMenu
-			self.session.open(NcamInfoMenu)
+			from Screens.NcamInfo import ncamInfoMenu
+			self.session.open(ncamInfoMenu)
 		elif "cccam" in config.misc.softcams.value.lower() or isPluginInstalled("CCcamInfo"):
 			from Screens.CCcamInfo import CCcamInfoMain
 			self.session.open(CCcamInfoMain)

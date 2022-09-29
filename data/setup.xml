@@ -325,7 +325,7 @@
 		<item level="0" text="Select cardserver" description="Select a cardserver from the available list." conditional="config.misc.cardservers.value != ''">config.misc.cardservers</item>
 		<item level="0" text="Restart" description="Reset the selected devices and save changes of your config when the GREEN button is pressed.">config.misc.restarts</item>
 	</setup>
-	<setup key="OscamInfo" title="OSCam Info Setup">
+	<setup key="OScamInfo" title="OSCam Info Setup">
 		<item level="0" text="Read userdata from oscam.conf" description="Read userdata from oscam.conf.">config.oscaminfo.userdatafromconf</item>
 		<if conditional="not config.oscaminfo.userdatafromconf.value">
 			<item level="0" text="Username (httpuser)" description="Set username if you have it set in section [webif] httpuser.">config.oscaminfo.username</item>

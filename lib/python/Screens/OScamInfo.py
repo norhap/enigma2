@@ -39,7 +39,7 @@ elif screenwidth and screenwidth > 1024:
 ###global
 
 
-class OscamInfo:
+class oscamInfo:
 	def __init__(self):
 		pass
 
@@ -354,31 +354,37 @@ class OscamInfo:
 	def getECMInfo(self, ecminfo):
 		result = []
 		if os.path.exists(ecminfo):
-			data = open(ecminfo, "r").readlines()
-			for i in data:
-				if "caid" in i:
-					result.append((_("CAID"), i.split(":")[1].strip()))
-				elif "pid" in i:
-					result.append((_("PID"), i.split(" ")[1].strip()))
-				elif "prov" in i:
-					result.append((_("Provider"), i.split(":")[1].strip()))
-				elif "reader" in i:
-					result.append((_("Reader"), i.split(":")[1].strip()))
-				elif "from" in i and not "cache" in i:
-					result.append((_("Address"), i.split(":")[1].strip()))
-				elif "from" in i and "cache" in i:
-					result.append((_("From"), i.split(":")[1].strip()))
-				elif "protocol" in i and not "none" in i:
-					result.append((_("Protocol"), i.split(":")[1].strip()))
-				elif "none" in i:
-					result.append(("CacheEX", i.split(":")[1].strip().replace("none", "cacheex")))
-				elif "hops" in i:
-					result.append((_("Hops"), i.split(":")[1].strip()))
-				elif "ecm time" in i:
-					result.append((_("ECM Time"), i.split(":")[1].strip()))
-				else:
-					result
-			return result
+			try:
+				with open(ecminfo, "r", encoding="ISO 8859-1") as fd:
+					data = fd.readlines()
+					fd.close()
+			except UnicodeDecodeError as err:
+				print("[OScamInfo] %s" % err)
+			if data:
+				for i in data:
+					if "caid" in i:
+						result.append((_("CAID"), i.split(":")[1].strip()))
+					elif "pid" in i:
+						result.append((_("PID"), i.split(" ")[1].strip()))
+					elif "prov" in i:
+						result.append((_("Provider"), i.split(":")[1].strip()))
+					elif "reader" in i:
+						result.append((_("Reader"), i.split(":")[1].strip()))
+					elif "from" in i and not "cache" in i:
+						result.append((_("Address"), i.split(":")[1].strip()))
+					elif "from" in i and "cache" in i:
+						result.append((_("From"), i.split(":")[1].strip()))
+					elif "protocol" in i and not "none" in i:
+						result.append((_("Protocol"), i.split(":")[1].strip()))
+					elif "none" in i:
+						result.append(("CacheEX", i.split(":")[1].strip().replace("none", "cacheex")))
+					elif "hops" in i:
+						result.append((_("Hops"), i.split(":")[1].strip()))
+					elif "ecm time" in i:
+						result.append((_("ECM Time"), i.split(":")[1].strip()))
+					else:
+						result
+				return result
 
 
 class oscMenuList(MenuList):
@@ -392,7 +398,7 @@ class oscMenuList(MenuList):
 		self.l.setFont(3, gFont("Regular", int(12 * f)))
 
 
-class OscamInfoMenu(Screen):
+class oscamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
@@ -405,7 +411,7 @@ class OscamInfoMenu(Screen):
 			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
-		self.osc = OscamInfo()
+		self.osc = oscamInfo()
 		self["mainmenu"] = oscMenuList([])
 		self["actions"] = NumberActionMap(["OkCancelActions", "InputActions", "ColorActions"], {
 			"ok": self.ok,
@@ -487,7 +493,7 @@ class OscamInfoMenu(Screen):
 		elif entry == 3:
 			self.session.open(oscInfo, "l")
 		elif entry == 4:
-			osc = OscamInfo()
+			osc = oscamInfo()
 			reader = osc.getReaders("cccam")  # get list of available CCcam-Readers
 			if isinstance(reader, list):
 				if len(reader) == 1:
@@ -496,7 +502,7 @@ class OscamInfoMenu(Screen):
 					self.callbackmode = "cccam"
 					self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose CCcam-Reader"), list=reader)
 		elif entry == 5:
-			osc = OscamInfo()
+			osc = oscamInfo()
 			reader = osc.getReaders()
 			if reader is not None:
 				reader.append((_("All"), "all"))
@@ -507,7 +513,7 @@ class OscamInfoMenu(Screen):
 						self.callbackmode = "readers"
 						self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose reader"), list=reader)
 		elif entry == 6:
-			self.session.open(OscamInfoSetup)
+			self.session.open(oscamInfoSetup)
 
 	def chooseReaderCallback(self, retval):
 		print(retval)
@@ -519,7 +525,7 @@ class OscamInfoMenu(Screen):
 
 	def ErrMsgCallback(self, retval):
 		print(retval)
-		self.session.open(OscamInfoSetup)
+		self.session.open(oscamInfoSetup)
 
 	def buildMenu(self, mlist):
 		keys = ["red", "green", "yellow", "blue", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ""]
@@ -564,7 +570,7 @@ class OscamInfoMenu(Screen):
 		self["mainmenu"].moveToIndex(0)
 
 
-class oscECMInfo(Screen, OscamInfo):
+class oscECMInfo(Screen, oscamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
@@ -612,7 +618,7 @@ class oscECMInfo(Screen, OscamInfo):
 		self["output"].selectionEnabled(False)
 
 
-class oscInfo(Screen, OscamInfo):
+class oscInfo(Screen, oscamInfo):
 	def __init__(self, session, what):
 		global HDSKIN, sizeH
 		self.session = session
@@ -876,7 +882,7 @@ class oscInfo(Screen, OscamInfo):
 				self["output"].moveToIndex(len(self.out) - 1)
 
 
-class oscEntitlements(Screen, OscamInfo):
+class oscEntitlements(Screen, oscamInfo):
 	global HDSKIN, sizeH
 	sizeLH = sizeH - 20
 	skin = """<screen position="center,center" size="%s, 400" title="Client Info" >
@@ -1016,7 +1022,7 @@ class oscEntitlements(Screen, OscamInfo):
 		self.setTitle(" ".join(title))
 
 
-class oscReaderStats(Screen, OscamInfo):
+class oscReaderStats(Screen, oscamInfo):
 	global HDSKIN, sizeH
 	sizeLH = sizeH - 20
 	skin = """<screen position="center,center" size="%s, 400" title="Client Info" >
@@ -1172,9 +1178,9 @@ class oscReaderStats(Screen, OscamInfo):
 		self.setTitle(" ".join(title))
 
 
-class OscamInfoSetup(Setup):
+class oscamInfoSetup(Setup):
 	def __init__(self, session, msg=None):
-		Setup.__init__(self, session, setup="OscamInfo")
+		Setup.__init__(self, session, setup="OScamInfo")
 		self.msg = msg
 		if self.msg:
 			self.msg = "Error:\n%s" % self.msg

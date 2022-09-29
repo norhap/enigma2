@@ -2336,11 +2336,11 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getNcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 
-	def getOScam(self):
-		return _("OScam Info")
+	def getOSCam(self):
+		return _("OSCam Info")
 
-	def getNcam(self):
-		return _("Ncam Info")
+	def getNCam(self):
+		return _("NCam Info")
 
 	def getCCcam(self):
 		return _("CCcam Info")
@@ -2350,7 +2350,7 @@ class InfoBarExtensions:
 		p = process.ProcessList()
 		oscam = str(p.named("oscam")).strip("[]")
 		if oscam:
-			return [((boundFunction(self.getOScam), boundFunction(self.openOScamInfo), lambda: True), None)] or []
+			return [((boundFunction(self.getOSCam), boundFunction(self.openOScamInfo), lambda: True), None)] or []
 		else:
 			return []
 
@@ -2359,7 +2359,7 @@ class InfoBarExtensions:
 		p = process.ProcessList()
 		ncam = str(p.named("ncam")).strip("[]")
 		if ncam:
-			return [((boundFunction(self.getNcam), boundFunction(self.openNcamInfo), lambda: True), None)] or []
+			return [((boundFunction(self.getNCam), boundFunction(self.openNcamInfo), lambda: True), None)] or []
 		else:
 			return []
 
@@ -2433,12 +2433,12 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def openOScamInfo(self):
-		from Screens.OScamInfo import OscamInfoMenu
-		self.session.open(OscamInfoMenu)
+		from Screens.OScamInfo import oscamInfoMenu
+		self.session.open(oscamInfoMenu)
 
 	def openNcamInfo(self):
-		from Screens.NcamInfo import NcamInfoMenu
-		self.session.open(NcamInfoMenu)
+		from Screens.NcamInfo import ncamInfoMenu
+		self.session.open(ncamInfoMenu)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
