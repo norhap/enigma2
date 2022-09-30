@@ -31,7 +31,7 @@ from Components.SystemInfo import SystemInfo
 
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
 from Tools.Geolocation import geolocation
-from Tools.StbHardware import getFPVersion, getBrandModel
+from Tools.StbHardware import getFPVersion, getBrandModel, getProcInfoTypeTuner
 from Tools.LoadPixmap import LoadPixmap
 
 
@@ -46,6 +46,19 @@ INFO_COLOR = {
 	"V": 0x00888888,  # Values.
 	"M": 0x00ffff00  # Messages.
 }
+
+
+def getTypeTuner():
+	typetuner = {
+		"00": _("OTT Model"),
+		"10": _("Single"),
+		"11": _("Twin"),
+		"12": _("Combo"),
+		"21": _("Twin Hybrid"),
+		"22": _("Single Hybrid")
+	}
+	if getProcInfoTypeTuner():
+		return "%s - %s" % (getProcInfoTypeTuner(), typetuner.get(getProcInfoTypeTuner()))
 
 
 class InformationBase(Screen, HelpableScreen):
@@ -615,6 +628,7 @@ class TunerInformation(InformationBase):
 			data = descList[count]["start"] if descList[count]["start"] == descList[count]["end"] else ("%s - %s" % (descList[count]["start"], descList[count]["end"]))
 			info.append(formatLine("H", "Tuner %s:" % data))
 			info.append(formatLine("", "%s" % descList[count]["desc"]))
+		info.append(formatLine("H", _("Type Tuner"), "%s" % getTypeTuner())) if getTypeTuner() else ""
 		# info.append("")
 		# info.append(formatLine("H", _("Logical tuners")))  # Each tuner is a listed separately even if the hardware is common.
 		# info.append("")

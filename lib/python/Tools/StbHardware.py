@@ -5,6 +5,22 @@ from time import time, localtime, gmtime
 from Tools.Directories import fileExists, resolveFilename, SCOPE_SKINS
 from boxbranding import getMachineName, getBoxType, getRCName
 
+INFO_TYPE = "/proc/stb/info/type"
+INFO_SUBTYPE = "/proc/stb/info/subtype"
+
+
+def getProcInfoTypeTuner():
+	typetuner = ""
+	if isfile(INFO_TYPE):
+		with open(INFO_TYPE, "r") as fd:
+			typetuner = fd.read().split('\n', 1)[0]
+			fd.close()
+	elif isfile(INFO_SUBTYPE):
+		with open(INFO_SUBTYPE, "r") as fd:
+			typetuner = fd.read().split('\n', 1)[0]
+			fd.close()
+	return typetuner
+
 
 def getBrand():
 	brandName = ""

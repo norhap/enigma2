@@ -6380,7 +6380,19 @@ msgid "Singapore"
 msgstr "Singapur"
 
 msgid "Single"
-msgstr "Único"
+msgstr "Simple"
+
+msgid "OTT Model"
+msgstr "Modelo OTT"
+
+msgid "Twin Hybrid"
+msgstr "Twin Híbrido"
+
+msgid "Single Hybrid"
+msgstr "Simple Híbrido"
+
+msgid "Type Tuner"
+msgstr "Tuner Tipo"
 
 msgid "Single EPG"
 msgstr "EPG simple"
