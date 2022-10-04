@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-27 22:21+0200\n"
-"PO-Revision-Date: 2022-09-12 04:04+0200\n"
+"PO-Revision-Date: 2022-10-04 00:23+0200\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
 "Language: es_ES\n"
@@ -869,7 +869,7 @@ msgid ""
 "Are you sure you want to delete\n"
 "the following backup:\n"
 msgstr ""
-"Quieres borrar la siguiente\n"
+"Quieres eliminar la siguiente\n"
 "copia de seguridad:\n"
 
 msgid "Are you sure you want to exit this wizard?"
@@ -1896,31 +1896,31 @@ msgid "Delay between switch and motor command"
 msgstr "Retardo entre el interruptor y el comando del motor"
 
 msgid "Delete"
-msgstr "Borrar"
+msgstr "Eliminar"
 
 msgid "Delete entry"
-msgstr "Borrar entrada"
+msgstr "Eliminar entrada"
 
 msgid "Delete failed!"
 msgstr "Borrado falló!"
 
 msgid "Delete file"
-msgstr "Borrar fichero"
+msgstr "Eliminar archivo"
 
 msgid "Delete image"
-msgstr "Borrar imagen"
+msgstr "Eliminar imagen"
 
 msgid "Delete playlist entry"
 msgstr "Eliminar la entrada de la lista de reproducción"
 
 msgid "Delete saved playlist"
-msgstr "Borrar lista de reproducción guardada"
+msgstr "Eliminar lista de reproducción guardada"
 
 msgid "Delete Timer"
-msgstr "Borrar Temporizador"
+msgstr "Eliminar Temporizador"
 
 msgid "Delete timer"
-msgstr "Borrar temporizador"
+msgstr "Eliminar temporizador"
 
 msgid "Deleted"
 msgstr "Borrado"
@@ -2062,7 +2062,7 @@ msgstr ""
 
 #, python-format
 msgid "Do you really want to delete %s?"
-msgstr "¿Realmente quiere borrar %s?"
+msgstr "¿Realmente quiere eliminar %s?"
 
 #, python-format
 msgid ""
@@ -2123,7 +2123,7 @@ msgid "Do you want to reboot your receiver?"
 msgstr "¿Quieres reiniciar su receptor?"
 
 msgid "Do you want to remove all the crahs logfiles"
-msgstr "Quieres borrar los ficheros de logs"
+msgstr "Quieres eliminar los ficheros de logs"
 
 msgid "Do you want to remove the package:\n"
 msgstr "¿Quieres desinstalar el paquete?:\n"
@@ -2172,7 +2172,7 @@ msgid "Don't zap and disable timer"
 msgstr "No cambiar canal y desactivar temporizador"
 
 msgid "Don't zap and remove timer"
-msgstr "No cambiar canal y borrar temporizador"
+msgstr "No cambiar canal y eliminar temporizador"
 
 #, python-format
 msgid "Done - Installed, upgraded or removed %d package (%s)"
@@ -2654,7 +2654,7 @@ msgid "Select 'Yes' to remove all main settings configuration data. Selecting th
 msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de los ajustes principales. Al seleccionar esta opción, todos los ajustes de Enigma2 volverán a sus valores de fábrica. Esto también hace que Enigma2 ejecute el Asistente wizard al reiniciar."
 
 msgid "Select 'Yes' to remove all user customisations of skin data. Selecting this option will remove all user based skin customisations. All affected skins will return to their standard settings. This will also clear any customied boot logos and backdrops."
-msgstr "Seleccione 'Sí' para eliminar todas las personalizaciones de usuario de los datos del skin. Al seleccionar esta opción, se eliminarán todas las personalizaciones de skin basadas en el usuario. Todos los aspectos afectados volverán a su configuración estándar. Esto también borrará los logotipos y fondos de arranque personalizados."
+msgstr "Seleccione 'Sí' para eliminar todas las personalizaciones de usuario de los datos del skin. Al seleccionar esta opción, se eliminarán todas las personalizaciones de skin basadas en el usuario. Todos los aspectos afectados volverán a su configuración estándar. Esto también eliminará los logotipos y fondos de arranque personalizados."
 
 msgid "Select 'Yes' to remove all timer configuration data. Selecting this option will clear all timers, autotimers and power timers."
 msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del temporizador. Al seleccionar esta opción, se borrarán todos los temporizadores, temporizadores automáticos y temporizadores de alimentación."
@@ -6699,16 +6699,16 @@ msgid "Stop all streams"
 msgstr "Detener todos los streams"
 
 msgid "Stop and delete all current recordings"
-msgstr "Detener y borrar todas las grabaciones actuales"
+msgstr "Detener y eliminar todas las grabaciones actuales"
 
 msgid "Stop and delete recording"
-msgstr "Detener y borrar grabación"
+msgstr "Detener y eliminar grabación"
 
 msgid "Stop and delete recording:"
-msgstr "Detener y borrar grabación:"
+msgstr "Detener y eliminar grabación:"
 
 msgid "Stop and delete recordings:"
-msgstr "Detener y borrar grabaciones:"
+msgstr "Detener y eliminar grabaciones:"
 
 msgid "Stop current event and disable coming events"
 msgstr "Detener el evento actual y deshabilitar los siguientes eventos"
@@ -6732,7 +6732,7 @@ msgid "Stop recording"
 msgstr "Detener la grabación"
 
 msgid "Stop recording and delete"
-msgstr "Detener grabación y borrar"
+msgstr "Detener grabación y eliminar"
 
 msgid "Stop recording:"
 msgstr "Detener grabación:"
@@ -8234,10 +8234,10 @@ msgid "You can only burn receiver recordings!"
 msgstr "¡Solo puedes grabar en DVD grabaciones de receptor!"
 
 msgid "You can remove this plugin."
-msgstr "Puede borrar este plugin."
+msgstr "Puede eliminar este plugin."
 
 msgid "You cannot delete this!"
-msgstr "No puedes borrar esto!"
+msgstr "No puedes eliminar esto!"
 
 msgid ""
 "You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
@@ -10624,7 +10624,7 @@ msgid "When enabled you can control the volume with the arrow buttons instead of
 msgstr "Cuando está habilitado, puede controlar el volumen con los botones de flecha en lugar de obtener la lista de canales"
 
 msgid "When enabled you can zap channels with the CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
-msgstr "Cuando está habilitado, puede borrar los canales con los botones CH +/-, B +/-, P +/- en lugar de abrir la lista de canales."
+msgstr "Cuando está habilitado, puede eliminar los canales con los botones CH +/-, B +/-, P +/- en lugar de abrir la lista de canales."
 
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
 msgstr "Cuando está habilitado, se obtiene la lista de canales con el botón OK, la infobar se alterna para pasar al botón de exit"
@@ -12566,7 +12566,7 @@ msgid ""
 "Do you really want to delete %s?"
 msgstr ""
 "Mensaje\n"
-"¿De verdad quieres borrar %s?"
+"¿De verdad quieres eliminar %s?"
 
 msgid "Modify existing timers"
 msgstr "Modificar los temporizadores existentes"
@@ -14331,7 +14331,7 @@ msgid "in plugins only"
 msgstr "solo en complementos"
 
 msgid "Do you really want to stop current event and delete timer %s?"
-msgstr "¿Realmente quieres detener el evento actual y borrar el temporizador %s?"
+msgstr "¿Realmente quieres detener el evento actual y eliminar el temporizador %s?"
 
 msgid "Hotswitchable"
 msgstr "Conmutable"
@@ -16823,8 +16823,11 @@ msgstr "Ajustes Grabación HDMI"
 msgid "Fan Speed Setup"
 msgstr "Ajustes Velocidad Ventilador"
 
+msgid "Logs Manager"
+msgstr "Administrador Logs"
+
 msgid "Logs Setup"
-msgstr "Ajustes Registros"
+msgstr "Ajustes Logs"
 
 msgid "Subtitle Setup"
 msgstr "Configuración Subtítulos"
@@ -17480,11 +17483,75 @@ msgstr "Cuando esté habilitado, verá los paquetes util-linux en la sección de
 msgid "Number of debug logs to keep *"
 msgstr "Número máximo de logs para mantenerlos *"
 
+msgid "Maximum number of days"
+msgstr "Número máximo de días"
+
+msgid "Logs older than the specified number of days will be deleted."
+msgstr "Se eliminarán los logs anteriores al número de días especificados."
+
+msgid "Maximum total space used (MB)"
+msgstr "Espacio total máximo utilizado (MB)"
+
+msgid "When maximum space for all logs is reached, the oldest logs will be deleted."
+msgstr "Cuando se alcance el espacio máximo para todos los logs, se eliminarán los más antiguos."
+
+msgid "Show Logs Manager in extensions list"
+msgstr "Mostrar Logs Manager en la lista de extensiones"
+
+msgid "Allows you to show/hide Log Manager in extensions (blue button)."
+msgstr "Le permite mostrar/ocultar Log Manager en extensiones (botón azul)."
+
+msgid "LogManager"
+msgstr "Administrador de logs"
+
+msgid "Checking Logs..."
+msgstr "Comprobando Logs..."
+
+msgid "View"
+msgstr "Ver"
+
+msgid ""
+"Do you want to delete all the selected files:\n"
+"choose \"No\" to only delete the currently selected file."
+msgstr ""
+"Quiere eliminar todos los archivos seleccionados:\n"
+"Elija \"No\" para eliminar solo el archivo seleccionado actualmente."
+
+msgid "Delete Confirmation"
+msgstr "Confirmación Eliminar"
+
+msgid "Are you sure you want to delete this log?\n"
+msgstr "Está seguro de que desea eliminar este log?\n"
+
+msgid "You have not selected any logs to delete."
+msgstr "No ha seleccionado ningún log para eliminar."
+
+msgid "Are you sure you want to delete all the selected logs:\n"
+msgstr "Está seguro de que desea eliminar todos los logs seleccionados:\n"
+
+msgid "First page"
+msgstr "Primera página"
+
+msgid "Page forward"
+msgstr "Página adelante"
+
+msgid "Page back"
+msgstr "Página atrás"
+
+msgid "Last page"
+msgstr "Última página"
+
+msgid "File can not displayed - File not found"
+msgstr "Archivo no se puede mostrar - Archivo no encontrado"
+
+msgid "Space used:"
+msgstr "Espacio usado:"
+
 msgid "This sets the maximum number of log files that will be retained. Files in excess of this number will be deleted."
-msgstr "Esto establece el número máximo de archivos de registro que se conservarán. Se eliminarán los archivos que superen este número."
+msgstr "Esto establece el número máximo de archivos logs que se conservarán. Se eliminarán los archivos que superen este número."
 
 msgid "This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted."
-msgstr "Esto establece el prefijo para cada línea en el registro de depuración. El 'Tiempo de arranque' es el número de segundos desde que arrancó su %s %s por última vez."
+msgstr "Esto establece el prefijo para cada línea en el log de depuración. El 'Tiempo de arranque' es el número de segundos desde que arrancó su %s %s por última vez."
 
 msgid "Enable auto fastscan"
 msgstr "Habilitar escaneo rápido automático"

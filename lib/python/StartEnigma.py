@@ -690,6 +690,10 @@ profile("Init:CI")
 import Screens.Ci
 Screens.Ci.InitCiConfig()
 
+profile("Init:LogManager")
+import Screens.LogManager
+Screens.LogManager.AutoLogManager()
+
 profile("RcModel")
 import Components.RcModel
 

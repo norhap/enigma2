@@ -172,6 +172,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item entryID="usage_setup" level="0" text="Customize" weight="10"><setup id="Usage" /></item>
 			<item entryID="hotkey_setup" level="1" text="Hotkey" weight="15"><screen module="Hotkey" screen="HotkeySetup" /></item>
 			<item entryID="log_settings" level="2" text="Logs Setup" weight="20"><setup id="Logs" /></item>
+			<item entryID="logs_man" level="2" text="Logs Manager"><screen module="LogManager" screen="LogManager" /></item>
 			<item entryID="software_update" level="0" text="Software Update" weight="25"><screen module="SoftwareUpdate" screen="UpdatePlugin" /></item>
 			<item entryID="flash_image" level="0" text="Flash Image" weight="30" requires="canFlashWithOfgwrite"><screen module="FlashImage" screen="SelectImage" /></item>
 			<item entryID="input_device_setup" level="1" text="Input Devices" weight="35"><screen module="InputDeviceSetup" screen="InputDeviceSelection" /></item>

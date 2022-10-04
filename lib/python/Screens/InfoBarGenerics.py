@@ -2335,6 +2335,7 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getOScamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getNcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension=self.getLogManager, type=InfoBarExtensions.EXTENSION_LIST)
 
 	def getOSCam(self):
 		return _("OSCam Info")
@@ -2375,6 +2376,15 @@ class InfoBarExtensions:
 	def openSoftcamSetup(self):
 		from Screens.SoftcamSetup import SoftcamSetup
 		self.session.open(SoftcamSetup)
+
+	def getLogManagerName(self):
+		return _("Logs Manager")
+
+	def getLogManager(self):
+		if config.logmanager.showinextensions.value:
+			return [((boundFunction(self.getLogManagerName), boundFunction(self.openLogManager), lambda: True), None)]
+		else:
+			return []
 
 	def importChannels(self):
 		from Components.ImportChannels import ImportChannels
@@ -2443,6 +2453,10 @@ class InfoBarExtensions:
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
 		self.session.open(CCcamInfoMain)
+
+	def openLogManager(self):
+		from Screens.LogManager import LogManager
+		self.session.open(LogManager)
 
 	@staticmethod
 	def _getAutoTimerPluginFunc():

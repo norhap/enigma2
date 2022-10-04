@@ -31,6 +31,7 @@ install_PYTHON = \
 	InstallWizard.py \
 	LanguageSelection.py \
 	LocationBox.py \
+	LogManager.py \
 	Menu.py	\
 	MessageBox.py \
 	MinuteInput.py \
