@@ -17498,8 +17498,8 @@ msgstr "Cuando se alcance el espacio máximo para todos los logs, se eliminarán
 msgid "Show Logs Manager in extensions list"
 msgstr "Mostrar Logs Manager en la lista de extensiones"
 
-msgid "Allows you to show/hide Log Manager in extensions (blue button)."
-msgstr "Le permite mostrar/ocultar Log Manager en extensiones (botón azul)."
+msgid "Allows you to show/hide 'Logs Manager' in extensions (blue button)."
+msgstr "Le permite mostrar/ocultar \"Administrador Logs\" en extensiones (botón azul)."
 
 msgid "LogManager"
 msgstr "Administrador de logs"

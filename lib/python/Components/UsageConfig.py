@@ -1283,8 +1283,8 @@ def InitUsageConfig():
 
 	config.crash.debugPath.addNotifier(updateDebugPath, immediate_feedback=False)
 	config.crash.debugFileCount = ConfigSelectionNumber(min=2, max=5, stepwidth=1, default=2, wraparound=True)
-	config.crash.daysloglimit = ConfigSelectionNumber(min=1, max=30, stepwidth=1, default=8, wraparound=True)
-	config.crash.sizeloglimit = ConfigSelectionNumber(min=1, max=20, stepwidth=1, default=2, wraparound=True)
+	config.crash.daysloglimit = ConfigSelectionNumber(min=1, max=30, stepwidth=1, default=2, wraparound=True)
+	config.crash.sizeloglimit = ConfigSelectionNumber(min=1, max=20, stepwidth=1, default=5, wraparound=True)
 	config.crash.debugFileCount.save_forced = True
 
 	config.logmanager = ConfigSubsection()
