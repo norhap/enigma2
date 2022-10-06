@@ -389,7 +389,7 @@ def InitAVSwitch():
 
 	if SystemInfo["supportPcmMultichannel"]:
 		def setPCMMultichannel(configElement):
-			open("/proc/stb/audio/multichannel_pcm", "w").write(configElement.value and "enable" or "disable")
+			open(SystemInfo["supportPcmMultichannel"], "w").write(configElement.value and "enable" or "disable")
 		config.av.multichannel_pcm = ConfigYesNo(default=False)
 		config.av.multichannel_pcm.addNotifier(setPCMMultichannel)
 
@@ -561,7 +561,7 @@ def InitAVSwitch():
 		default = "downmix"
 
 		def setWMAPRO(configElement):
-			open("/proc/stb/audio/wmapro", "w").write(configElement.value)
+			open(SystemInfo["CanWMAPRO"], "w").write(configElement.value)
 		if SystemInfo["CanProc"]:
 			with open("/proc/stb/audio/wmapro_choices", "r") as wmapro_choices:
 				wmapro_choices.read().split('\n', 1)[0]
@@ -672,7 +672,7 @@ def InitAVSwitch():
 
 	if SystemInfo["CanAutoVolumeLevel"]:
 		def setAutoVolumeLevel(configElement):
-			open("/proc/stb/audio/autovolumelevel_choices", "w").write("enabled" if configElement.value else "disabled")
+			open(SystemInfo["CanAutoVolumeLevel"], "w").write("enabled" if configElement.value else "disabled")
 		config.av.autovolumelevel = ConfigYesNo(default=False)
 		config.av.autovolumelevel.addNotifier(setAutoVolumeLevel)
 
@@ -698,8 +698,7 @@ def InitAVSwitch():
 
 	if SystemInfo["Can3DSurroundSoftLimiter"]:
 		def set3DSurroundSoftLimiter(configElement):
-			print("[AVSwitch] Write to /proc/stb/audio/3dsurround_softlimiter")
-			open("/proc/stb/audio/3dsurround_softlimiter", "w").write(configElement.value and "enabled" or "disabled")
+			open(SystemInfo["Can3DSurroundSoftLimiter"], "w").write(configElement.value and "enabled" or "disabled")
 		config.av.surround_softlimiter_3d = ConfigYesNo(default=False)
 		config.av.surround_softlimiter_3d.addNotifier(set3DSurroundSoftLimiter)
 
