@@ -3,7 +3,7 @@ from os import R_OK, access
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getBoxType, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel
+from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getMachineBuild, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform
 
 from Tools.Directories import SCOPE_SKINS, fileCheck, fileExists, fileHas, pathExists, resolveFilename
@@ -55,7 +55,7 @@ def getBootdevice():
 	return dev
 
 
-model = getBoxType()
+model = getMachineBuild()
 brand = getBrand()
 platform = getPlatform()
 architecture = getImageArch()
@@ -203,7 +203,7 @@ SystemInfo["NCamInstalled"] = fileExists("/usr/bin/ncam")
 SystemInfo["NCamIsActive"] = fileExists("/var/tmp/.ncam")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info", "CCcam-s2s") or fileHas("/tmp/ecm.info", "fta")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
-SystemInfo["DefineSat"] = model in ("ustym4kpro", "beyonwizv2", "viper4k", "sf8008", "sf8008m", "gbtrio4k", "gbip4k", "qviart5")
+SystemInfo["DefineSat"] = model in ("ustym4kpro", "beyonwizv2", "viper4k", "sf8008", "gbtrio4k", "gbip4k", "qviart5")
 SystemInfo["CanFadeOut"] = brand not in ("linkdroid", "mecool", "minix", "wetek", "hardkernel", "dinobot", "maxytec") and not (SystemInfo["HiSilicon"])
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51", "h7") or getSoCFamily() in ("hisi3798mv200",)
 SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("wetek", "dreambox")
@@ -226,7 +226,7 @@ SystemInfo["StandbyState"] = False
 SystemInfo["LEDButtons"] = False
 SystemInfo["HasH9SD"] = model in ("h9", "i55plus") and pathExists("/dev/mmcblk0p1")
 SystemInfo["HasSDnomount"] = model in ("h9", "h3", "i55plus") and (False, "none") or model in ("multibox", "h9combo", "h3") and (True, "mmcblk0")
-SystemInfo["canBackupEMC"] = model in ("hd51", "h7") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or model.startswith("osmio4k") and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none")
+SystemInfo["canBackupEMC"] = model in ("hd51", "vs1500", "h7", "8100s") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or model in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none") or model in ("cc1", "sx988", "ip8", "ustym4kottpremium", "og2ott4k") and ("usb_update.bin", "none")
 SystemInfo["FrontpanelLEDBlinkControl"] = fileExists("/proc/stb/fp/led_blink")
 SystemInfo["FrontpanelLEDBrightnessControl"] = fileExists("/proc/stb/fp/led_brightness")
 SystemInfo["FrontpanelLEDColorControl"] = fileExists("/proc/stb/fp/led_color")
