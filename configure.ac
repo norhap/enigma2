@@ -387,8 +387,8 @@ fi
 
 AC_ARG_WITH(fcc,
 	AC_HELP_STRING([--with-fcc], [use FCC specific codes for fast channel change]),
-	[[fcc=$withval]],
-	[[fcc=no]]
+	[[with_fcc=$withval]],
+	[[with_fcc=no]]
 )
 AM_CONDITIONAL(HAVE_FCC_ABILITY, test x"$with_fcc" = xyes)
 if test x"$with_fcc" = xyes ; then
