@@ -965,9 +965,9 @@ public:
 		evHBBTVInfo,
 
 		evVideoGammaChanged,
-#if defined(HAVE_FCC_ABILITY)
+
 		evFccFailed,
-#endif
+
 		evUser = 0x100
 	};
 };
