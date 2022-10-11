@@ -390,10 +390,10 @@ AC_ARG_WITH(fcc,
 	[[with_fcc=$withval]],
 	[[with_fcc=no]]
 )
-AM_CONDITIONAL(HAVE_FCC_ABILITY, test x"$with_fcc" = xyes)
-if test x"$with_fcc" = xyes ; then
+if test x"$with_fcc" != xno ; then
 	AC_DEFINE(HAVE_FCC_ABILITY, 1,[use FCC specific codes for fast channel change])
 fi
+AM_CONDITIONAL(HAVE_FCC_ABILITY, test x"$with_fcc" != xno)
 
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
 AM_CONDITIONAL(DREAMBOXDMM2, test "$PLATFORM" == "dm4kgen" -o "$PLATFORM" == "dm3gen" -o "$PLATFORM" == "dm2gen")
