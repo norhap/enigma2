@@ -371,20 +371,6 @@ AC_ARG_WITH(subttxtabnormalptsdiffs,
 )
 AC_DEFINE_UNQUOTED(SUBT_TXT_ABNORMAL_PTS_DIFFS, $with_subttxtabnormalptsdiffs,[Configure abnormal pts for subtitle and teletext])
 
-AC_ARG_WITH(amlogic,
-	AC_HELP_STRING([--with-amlogic], [use amlogic MPEG decoder]),
-	[[with_amlogic=$withval]],
-	[[with_amlogic=no]]
-)
-AM_CONDITIONAL(HAVE_AMLOGIC, test x"$with_amlogic" = xyes)
-if test x"$with_amlogic" = xyes ; then
-	AC_DEFINE(HAVE_AMLOGIC, 1,[Enables AMLOGIC decoder support])
-	PKG_CHECK_MODULES(AMCODEC, libamcodec)
-	PKG_CHECK_MODULES(AMADEC, libamadec)
-	PKG_CHECK_MODULES(DVBCSA, libdvbcsa)
-	ALSA_CFLAGS="-lasound"
-fi
-
 AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
 AM_CONDITIONAL(DREAMBOXDMM2, test "$PLATFORM" == "dm4kgen" -o "$PLATFORM" == "dm3gen" -o "$PLATFORM" == "dm2gen")
 
@@ -678,8 +664,7 @@ CXXFLAGS="$CXXFLAGS -Wall -Wextra \
 	-Wno-error=stringop-truncation -Wno-error=shadow -Wno-error=cast-qual \
 	-Wno-error=aggregate-return -Wno-error=missing-field-initializers \
 	-Wno-error=packed -Wno-error=vla -Wno-error=clobbered -Wno-error=unused-parameter \
-	$BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS \
-	$GLES_CFLAGS $AMCODEC_CFLAGS $AMADEC_CFLAGS $DVBCSA_CFLAGS"
+	$BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS"
 
 ARFLAGS="cr"
 AC_SUBST(ARFLAGS)

@@ -839,10 +839,6 @@ void eDVBFrontend::feEvent(int w)
 {
 	eDVBFrontend *sec_fe = this;
 	long tmp = m_data[LINKED_PREV_PTR];
-#if HAVE_AMLOGIC
-	if (w < 0)
-		return;
-#endif
 	while (tmp != -1)
 	{
 		eDVBRegisteredFrontend *linked_fe = (eDVBRegisteredFrontend*)tmp;
@@ -854,27 +850,6 @@ void eDVBFrontend::feEvent(int w)
 		dvb_frontend_event event = {};
 		int res;
 		int state;
-#if HAVE_AMLOGIC
-		if((res = ::ioctl(m_fd, FE_READ_STATUS, &event.status)) != 0)
-		{
-			break;
-		}
-		else
-		{
-			if(event.status == 0)
-			{
-				break;
-			}
-		}
-		usleep(10000);
-		if (event.status & FE_HAS_LOCK)
-		{
-			state = stateLock;
-			/* FIXME: this because FE_READ_STATUS always returns */
-			if(m_state == state)
-				break; /* I do not see any other way out */
-		}
-#else
 		res = ::ioctl(m_fd, FE_GET_EVENT, &event);
 
 		if (res && (errno == EAGAIN))
@@ -888,7 +863,6 @@ void eDVBFrontend::feEvent(int w)
 		{
 			state = stateLock;
 		}
-#endif
 		else
 		{
 			if (m_tuning) {
@@ -2659,12 +2633,8 @@ RESULT eDVBFrontend::prepare_sat(const eDVBFrontendParametersSatellite &feparm, 
 			feparm.pls_code,
 			feparm.t2mi_plp_id,
 			feparm.t2mi_pid);
-#ifndef HAVE_AMLOGIC
 		if ((unsigned int)satfrequency < (fe_info.type ? fe_info.frequency_min/1000 : fe_info.frequency_min)
 			|| (unsigned int)satfrequency > (fe_info.type ? fe_info.frequency_max/1000 : fe_info.frequency_max))
-#else
-		if ((unsigned int)satfrequency < fe_info.frequency_min || (unsigned int)satfrequency > fe_info.frequency_max)
-#endif
 		{
 			eDebugNoSimulate("[eDVBFrontend%d] %d mhz out of tuner range.. dont tune", m_dvbid, satfrequency / 1000);
 			return -EINVAL;

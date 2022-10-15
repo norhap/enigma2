@@ -233,9 +233,7 @@ def getChipSetNumber():
 
 
 def getCPUBrand():
-	if SystemInfo["AmlogicFamily"]:
-		return _("Amlogic")
-	elif SystemInfo["HiSilicon"]:
+	if SystemInfo["HiSilicon"]:
 		return _("HiSilicon")
 	else:
 		return _("Broadcom")

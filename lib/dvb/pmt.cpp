@@ -251,11 +251,7 @@ void eDVBServicePMTHandler::PATready(int)
 		}
 		if (pmtpid == -1) {
 			eDebug("[eDVBServicePMTHandler] no PAT entry found.. start delay");
-#if defined(HAVE_AMLOGIC)
-			m_no_pat_entry_delay->start(10000, true);
-#else
 			m_no_pat_entry_delay->start(1000, true);
-#endif
 		}
 		else {
 			eDebug("[eDVBServicePMTHandler] use pmtpid %04x for service_id %04x", pmtpid, m_reference.getServiceID().get());

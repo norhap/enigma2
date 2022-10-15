@@ -185,18 +185,6 @@ class StandbyScreen(Screen):
 		except:
 			print("[Standby] Write to /proc/stb/hdmi/output failed.")
 
-		if SystemInfo["AmlogicFamily"]:
-			try:
-				print("[Standby] Write to /sys/class/leds/led-sys/brightness")
-				open("/sys/class/leds/led-sys/brightness", "w").write("0")
-			except:
-				print("[Standby] Write to /sys/class/leds/led-sys/brightness failed.")
-			try:
-				print("[Standby] Write to /sys/class/cec/cmd")
-				open("/sys/class/cec/cmd", "w").write("0f 36")
-			except:
-				print("[Standby] Write to /sys/class/cec/cmd failed.")
-
 		gotoShutdownTime = int(config.usage.standby_to_shutdown_timer.value)
 		if gotoShutdownTime:
 			self.standbyTimeoutTimer.startLongTimer(gotoShutdownTime)
@@ -260,18 +248,6 @@ class StandbyScreen(Screen):
 			open("/proc/stb/hdmi/output", "w").write("on")
 		except:
 			print("[Standby] Write to /proc/stb/hdmi/output failed.")
-
-		if SystemInfo["AmlogicFamily"]:
-			try:
-				print("[Standby] Write to /sys/class/leds/led-sys/brightness")
-				open("/sys/class/leds/led-sys/brightness", "w").write("1")
-			except:
-				print("[Standby] Write to /sys/class/leds/led-sys/brightness failed")
-			try:
-				print("[Standby] Write to /sys/class/cec/cmd")
-				open("/sys/class/cec/cmd", "w").write("10 04")
-			except:
-				print("[Standby] Write to /sys/class/cec/cmd failed.")
 
 	def setMute(self):
 		self.wasMuted = eDVBVolumecontrol.getInstance().isMuted()
