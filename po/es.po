@@ -16496,6 +16496,9 @@ msgstr "Imágenes descargadas"
 msgid "Fullbackup Images"
 msgstr "Imágenes copia completa de Vision Core"
 
+msgid "Restore deleted images"
+msgstr "Restaurar imágenes eliminadas"
+
 msgid "Are you sure to reboot to"
 msgstr "Quieres Reiniciar con imagen"
 
@@ -16729,6 +16732,9 @@ msgstr "Requiere conexión a internet."
 
 msgid "Are you sure to delete image:"
 msgstr "Estás seguro de eliminar la imagen:"
+
+msgid "Want to restore all deleted images?"
+msgstr "Quiere restaurar todas las imágenes eliminadas?"
 
 msgid "You can select the skin of virtual keyboard."
 msgstr "Puede seleccionar el skin del teclado virtual."
