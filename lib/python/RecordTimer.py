@@ -172,8 +172,16 @@ class RecordTimer(Timer):
 	def __init__(self):
 		Timer.__init__(self)
 		self.fallback_timer_list = []
+		self.onTimerAdded = []
+		self.onTimerRemoved = []
+		self.onTimerChanged = []
 		self.timersFilename = resolveFilename(SCOPE_CONFIG, "timers.xml")
 		self.loadTimers()
+
+	def timeChanged(self, entry):
+		Timer.timeChanged(self, entry)
+		for f in self.onTimerChanged:
+			f(entry)
 
 	def loadTimers(self, justLoad=False):
 		timersDom = fileReadXML(self.timersFilename, source=MODULE_NAME)
@@ -443,6 +451,9 @@ class RecordTimer(Timer):
 		print("[RecordTimer] Record %s." % str(entry))
 		entry.Timer = self
 		self.addTimerEntry(entry)
+		# Trigger onTimerAdded callbacks
+		for f in self.onTimerAdded:
+			f(entry)
 		if dosave:
 			self.saveTimers()
 		return answer
@@ -685,13 +696,22 @@ class RecordTimer(Timer):
 					self.timeChanged(timer)
 		if entry in self.processed_timers:  # Now the timer should be in the processed_timers list, remove it from there.
 			self.processed_timers.remove(entry)
+
+		# Trigger onTimerRemoved callbacks
+		for f in self.onTimerRemoved:
+			f(entry)
+
 		self.saveTimers()
 
 	def shutdown(self):
 		self.saveTimers()
 
 	def cleanup(self):
+		removed_timers = [entry for entry in self.processed_timers if not entry.disabled]
 		Timer.cleanup(self)
+		for entry in removed_timers:
+			for f in self.onTimerRemoved:
+				f(entry)
 		self.saveTimers()
 
 	def cleanupDaily(self, days):
@@ -774,8 +794,20 @@ class RecordTimerEntry(TimerEntry, object):
 			self.service_ref = serviceref
 		else:
 			self.service_ref = ServiceReference(None)
-		self.eit = eit
 		self.dontSave = False
+		self.eit = None
+		if not description or not name or not eit:
+			evt = self.getEventFromEPGId(eit) or self.getEventFromEPG()
+			if evt:
+				if not description:
+					description = evt.getShortDescription()
+				if not description:
+					description = evt.getExtendedDescription()
+				if not name:
+					name = evt.getEventName()
+				if not eit:
+					eit = evt.getEventId()
+		self.eit = eit
 		self.name = name
 		self.description = description
 		self.disabled = disabled
@@ -867,6 +899,18 @@ class RecordTimerEntry(TimerEntry, object):
 		self.Filename = getRecordingFilename(filename, dirname)
 		self.log(0, "Filename calculated as '%s'." % self.Filename)
 		return self.Filename
+
+	def getEventFromEPGId(self, id=None):
+		id = id or self.eit
+		epgcache = eEPGCache.getInstance()
+		ref = self.service_ref and self.service_ref.ref
+		return id and epgcache.lookupEventId(ref, id) or None
+
+	def getEventFromEPG(self):
+		epgcache = eEPGCache.getInstance()
+		queryTime = self.begin + (self.end - self.begin) // 2
+		ref = self.service_ref and self.service_ref.ref
+		return epgcache.lookupEventTime(ref, queryTime)
 
 	def tryPrepare(self):
 		if self.justplay:
