@@ -120,6 +120,13 @@ int eStaticServiceWebTSInfo::getInfo(const eServiceReference &ref, int w)
 			return s.st_mtime;
 	}
 	break;
+	case iServiceInformation::sFileSize:
+	{
+		struct stat s = {};
+		if (!stat(ref.path.c_str(), &s))
+			return s.st_size;
+	}
+	break;
 	}
 	return iServiceInformation::resNA;
 }
@@ -290,7 +297,7 @@ int eServiceWebTS::openHttpConnection(std::string url)
 	return fd;
 }
 
-RESULT eServiceWebTS::connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection)
+RESULT eServiceWebTS::connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iPlayableService*)this, m_event.connect(event));
 	return 0;

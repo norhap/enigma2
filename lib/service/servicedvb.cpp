@@ -468,6 +468,8 @@ int eStaticServiceDVBPVRInformation::getInfo(const eServiceReference &ref, int w
 		return iServiceInformation::resIsString;
 	case iServiceInformation::sServiceref:
 		return iServiceInformation::resIsString;
+	case iServiceInformation::sFileSize:
+		return m_parser.m_filesize;
 	case iServiceInformation::sTimeCreate:
 		if (m_parser.m_time_create)
 			return m_parser.m_time_create;
@@ -1507,7 +1509,7 @@ RESULT eDVBServicePlay::setTarget(int target, bool noaudio = false)
 	return 0;
 }
 
-RESULT eDVBServicePlay::connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection)
+RESULT eDVBServicePlay::connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iPlayableService*)this, m_event.connect(event));
 	return 0;

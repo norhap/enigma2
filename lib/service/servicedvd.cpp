@@ -118,6 +118,13 @@ int eStaticServiceDVDInfo::getInfo(const eServiceReference &ref, int w)
 				return s.st_mtime;
 		}
 		break;
+	case iServiceInformation::sFileSize:
+		{
+			struct stat s = {};
+			if (stat(ref.path.c_str(), &s) == 0)
+				return s.st_size;
+		}
+		break;
 	}
 	return iServiceInformation::resNA;
 }
@@ -433,7 +440,7 @@ eServiceDVD::~eServiceDVD()
 	disableSubtitles();
 }
 
-RESULT eServiceDVD::connectEvent(const sigc::slot2<void,iPlayableService*,int> &event, ePtr<eConnection> &connection)
+RESULT eServiceDVD::connectEvent(const sigc::slot<void(iPlayableService*,int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection((iPlayableService*)this, m_event.connect(event));
 	return 0;
