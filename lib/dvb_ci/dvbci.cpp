@@ -853,14 +853,14 @@ PyObject *eDVBCIInterfaces::getDescrambleRules(int slotid)
 	while(services)
 	{
 		--services;
-		PyList_SET_ITEM(service_list, services, PyString_FromString(ref_it->toString().c_str()));
+		PyList_SET_ITEM(service_list, services, PyUnicode_FromString(ref_it->toString().c_str()));
 		++ref_it;
 	}
 	providerSet::iterator provider_it(slot->possible_providers.begin());
 	while(providers)
 	{
 		ePyObject tuple = PyTuple_New(2);
-		PyTuple_SET_ITEM(tuple, 0, PyString_FromString(provider_it->first.c_str()));
+		PyTuple_SET_ITEM(tuple, 0, PyUnicode_FromString(provider_it->first.c_str()));
 		PyTuple_SET_ITEM(tuple, 1, PyLong_FromUnsignedLong(provider_it->second));
 		--providers;
 		PyList_SET_ITEM(provider_list, providers, tuple);
@@ -926,14 +926,14 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 	{
 		--size;
 		ePyObject refstr = PyList_GET_ITEM(service_list, size);
-		if (!PyString_Check(refstr))
+		if (!PyUnicode_Check(refstr))
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules entry in service list is not a string.. it is '%s'!!", PyObject_TypeStr(refstr));
 			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
-		const char *tmpstr = PyString_AS_STRING(refstr);
+		const char *tmpstr = PyUnicode_AsUTF8(refstr);
 		eServiceReference ref(tmpstr);
 		if (ref.valid())
 			slot->possible_services.insert(ref);
@@ -959,7 +959,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
-		if (!PyString_Check(PyTuple_GET_ITEM(tuple, 0)))
+		if (!PyUnicode_Check(PyTuple_GET_ITEM(tuple, 0)))
 		{
 			char buf[255];
 			snprintf(buf, 255, "eDVBCIInterfaces::setDescrambleRules 1st entry in provider tuple is not a string it is '%s'", PyObject_TypeStr(PyTuple_GET_ITEM(tuple, 0)));
@@ -973,7 +973,7 @@ RESULT eDVBCIInterfaces::setDescrambleRules(int slotid, SWIG_PYOBJECT(ePyObject)
 			PyErr_SetString(PyExc_TypeError, buf);
 			return -1;
 		}
-		const char *tmpstr = PyString_AS_STRING(PyTuple_GET_ITEM(tuple, 0));
+		const char *tmpstr = PyUnicode_AsUTF8(PyTuple_GET_ITEM(tuple, 0));
 		uint32_t orbpos = PyLong_AsUnsignedLong(PyTuple_GET_ITEM(tuple, 1));
 		if (strlen(tmpstr))
 			slot->possible_providers.insert(std::pair<std::string, uint32_t>(tmpstr, orbpos));
@@ -1293,7 +1293,7 @@ eDVBCISlot::~eDVBCISlot()
 	close(fd);
 }
 
-void eDVBCISlot::closeDevice() 
+void eDVBCISlot::closeDevice()
 {
 	close(fd);
 	fd = -1;

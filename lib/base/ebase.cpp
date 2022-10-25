@@ -272,7 +272,7 @@ int eMainloop::processOneEvent(long user_timeout, PyObject **res, ePyObject addi
 		Py_ssize_t pos=0;
 		while (PyDict_Next(additional, &pos, &key, &val)) {
 			pfd[i].fd = PyObject_AsFileDescriptor(key);
-			pfd[i++].events = PyInt_AsLong(val);
+			pfd[i++].events = PyLong_AsLong(val);
 		}
 	}
 
@@ -313,8 +313,8 @@ int eMainloop::processOneEvent(long user_timeout, PyObject **res, ePyObject addi
 				if (!*res)
 					*res = PyList_New(0);
 				ePyObject it = PyTuple_New(2);
-				PyTuple_SET_ITEM(it, 0, PyInt_FromLong(pfd[i].fd));
-				PyTuple_SET_ITEM(it, 1, PyInt_FromLong(pfd[i].revents));
+				PyTuple_SET_ITEM(it, 0, PyLong_FromLong(pfd[i].fd));
+				PyTuple_SET_ITEM(it, 1, PyLong_FromLong(pfd[i].revents));
 				PyList_Append(*res, it);
 				Py_DECREF(it);
 			}
@@ -422,7 +422,7 @@ PyObject *eMainloop::poll(ePyObject timeout, ePyObject dict)
 	if (app_quit_now)
 		Py_RETURN_NONE;
 
-	int twisted_timeout = (timeout == Py_None) ? 0 : PyInt_AsLong(timeout);
+	int twisted_timeout = (timeout == Py_None) ? 0 : PyLong_AsLong(timeout);
 
 	iterate(twisted_timeout, &res, dict);
 	if (res)

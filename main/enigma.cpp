@@ -251,11 +251,7 @@ int main(int argc, char **argv)
 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);
 
 	// get enigma2 debug level settings
-#if PY_MAJOR_VERSION >= 3
 	debugLvl = getenv("ENIGMA_DEBUG_LVL") ? atoi(getenv("ENIGMA_DEBUG_LVL")) : 4;
-#else
-	debugLvl = getenv("ENIGMA_DEBUG_LVL") ? atoi(getenv("ENIGMA_DEBUG_LVL")) : 3;
-#endif
 	if (debugLvl < 0)
 		debugLvl = 0;
 	if (getenv("ENIGMA_DEBUG_TIME"))

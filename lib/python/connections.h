@@ -24,7 +24,7 @@ public:
 
 inline PyObject *PyFrom(int v)
 {
-	return PyInt_FromLong(v);
+	return PyLong_FromLong(v);
 }
 
 inline PyObject *PyFrom(const char *c)
@@ -34,11 +34,7 @@ inline PyObject *PyFrom(const char *c)
 
 inline PyObject *PyFrom(std::pair<const char*, int>& p)
 {
-#if PY_MAJOR_VERSION < 3
-	return PyString_FromStringAndSize(p.first, p.second);
-#else
 	return PyBytes_FromStringAndSize(p.first, p.second);
-#endif
 }
 
 template <class R>

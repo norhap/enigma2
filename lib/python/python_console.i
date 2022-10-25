@@ -167,16 +167,16 @@ eConsolePy_execute(eConsolePy* self, PyObject *argt)
 				PyErr_SetString(PyExc_TypeError, err);
 				return NULL;
 			}
-			argv[argpos++] = PyString_AS_STRING(arg);
+			argv[argpos++] = PyUnicode_AsUTF8(arg);
 		}
 		argv[argpos] = 0;
-		return PyInt_FromLong(self->cont->execute(argv[0], argv+1));
+		return PyLong_FromLong(self->cont->execute(argv[0], argv+1));
 	}
 	else
 	{
 		const char *str;
 		if (PyArg_ParseTuple(argt, "s", &str))
-			return PyInt_FromLong(self->cont->execute(str));
+			return PyLong_FromLong(self->cont->execute(str));
 		PyErr_SetString(PyExc_TypeError,
 			"cmd is not a string!");
 	}
@@ -196,7 +196,7 @@ eConsolePy_write(eConsolePy* self, PyObject *args)
 		return NULL;
 	}
 	if (len < 0)
-		len = data_len;	
+		len = data_len;
 	self->cont->write(data, len);
 	Py_RETURN_NONE;
 }
@@ -204,7 +204,7 @@ eConsolePy_write(eConsolePy* self, PyObject *args)
 static PyObject *
 eConsolePy_getPID(eConsolePy* self)
 {
-	return PyInt_FromLong(self->cont->getPID());
+	return PyLong_FromLong(self->cont->getPID());
 }
 
 static PyObject *
@@ -353,7 +353,6 @@ static PyMethodDef console_module_methods[] = {
 	{}  /* Sentinel */
 };
 
-#if PY_MAJOR_VERSION >= 3
 	static struct PyModuleDef eConsole_moduledef = {
 	PyModuleDef_HEAD_INIT,
 	"eConsoleImpl",																			/* m_name */
@@ -365,26 +364,7 @@ static PyMethodDef console_module_methods[] = {
 	NULL,																					/* m_clear */
 	NULL,																					/* m_free */
 	};
-#endif
 
-#if PY_MAJOR_VERSION < 3
-void eConsoleInit(void)
-{
-	PyObject* m = Py_InitModule3("eConsoleImpl", console_module_methods,
-		"Module that implements eConsoleAppContainer with working cyclic garbage collection.");
-
-	if (m == NULL)
-		return;
-
-	if (!PyType_Ready(&eConsolePyType))
-	{
-		Org_Py_INCREF((PyObject*)&eConsolePyType);
-		PyModule_AddObject(m, "eConsoleAppContainer", (PyObject*)&eConsolePyType);
-	}
-}
-#endif
-
-#if PY_MAJOR_VERSION >= 3
 PyObject* PyInit_eConsoleImpl(void)
 {
 	PyObject* m = PyModule_Create(&eConsole_moduledef);
@@ -399,6 +379,5 @@ PyObject* PyInit_eConsoleImpl(void)
 	}
 	return m;
 }
-#endif
 }
 %}
