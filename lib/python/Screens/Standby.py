@@ -13,7 +13,7 @@ from Components.SystemInfo import SystemInfo
 from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediaFilesInUse
-from Tools.StbHardware import getBrandModel
+from Tools.StbHardware import getBrand, getBrandModel
 from Tools.Notifications import AddNotification
 from time import time, localtime
 from GlobalActions import globalActionMap
@@ -22,7 +22,6 @@ from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceRefe
 inStandby = None
 infoBarInstance = None
 TVinStandby = None
-brandModel = getBrandModel()
 
 QUIT_SHUTDOWN = 1
 QUIT_REBOOT = 2
@@ -178,12 +177,12 @@ class StandbyScreen(Screen):
 			self.avswitch.setInput("SCART")
 		else:
 			self.avswitch.setInput("AUX")
-
-		try:
-			print("[Standby] Write to /proc/stb/hdmi/output")
-			open("/proc/stb/hdmi/output", "w").write("off")
-		except:
-			print("[Standby] Write to /proc/stb/hdmi/output failed.")
+		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or getBoxType() in ("sfx6008", "sfx6018"):
+			output = "/proc/stb/hdmi/output"
+			if os.path.isfile(output):
+				with open(output, "w") as hdmi:
+					hdmi.write("off")
+					hdmi.close()
 
 		gotoShutdownTime = int(config.usage.standby_to_shutdown_timer.value)
 		if gotoShutdownTime:
@@ -242,12 +241,12 @@ class StandbyScreen(Screen):
 
 		if os.path.exists("/usr/script/StandbyLeave.sh"):
 			Console().ePopen("/usr/script/StandbyLeave.sh")
-
-		try:
-			print("[Standby] Write to /proc/stb/hdmi/output")
-			open("/proc/stb/hdmi/output", "w").write("on")
-		except:
-			print("[Standby] Write to /proc/stb/hdmi/output failed.")
+		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or getBoxType() in ("sfx6008", "sfx6018"):
+			output = "/proc/stb/hdmi/output"
+			if os.path.isfile(output):
+				with open(output, "w") as hdmi:
+					hdmi.write("on")
+					hdmi.close()
 
 	def setMute(self):
 		self.wasMuted = eDVBVolumecontrol.getInstance().isMuted()
@@ -335,17 +334,17 @@ class QuitMainloopScreen(Screen):
 		Screen.__init__(self, session)
 		from Components.Label import Label
 		text = {
-			QUIT_SHUTDOWN: _("Your %s is shutting down") % brandModel,
-			QUIT_REBOOT: _("Your %s is rebooting") % brandModel,
-			QUIT_RESTART: _("The user interface of your %s is restarting") % brandModel,
-			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s reboots\nThis may take a few minutes") % brandModel,
-			QUIT_DEBUG_RESTART: _("The user interface of your %s is restarting in debug mode") % brandModel,
-			QUIT_REBOOT_ANDROID: _("Your %s is rebooting into android mode") % brandModel,
-			QUIT_REBOOT_RECOVERY: _("Your %s is rebooting into recovery mode") % brandModel,
-			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s reboots\nThis may take a few minutes") % brandModel,
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s restarts") % brandModel,
-			QUIT_UPGRADE_FPANEL: _("Front panel your %s will be updated\nThis may take a few minutes") % brandModel,
-			QUIT_WOL: _("Your %s goes to WOL") % brandModel
+			QUIT_SHUTDOWN: _("Your %s is shutting down") % getBrandModel(),
+			QUIT_REBOOT: _("Your %s is rebooting") % getBrandModel(),
+			QUIT_RESTART: _("The user interface of your %s is restarting") % getBrandModel(),
+			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s reboots\nThis may take a few minutes") % getBrandModel(),
+			QUIT_DEBUG_RESTART: _("The user interface of your %s is restarting in debug mode") % getBrandModel(),
+			QUIT_REBOOT_ANDROID: _("Your %s is rebooting into android mode") % getBrandModel(),
+			QUIT_REBOOT_RECOVERY: _("Your %s is rebooting into recovery mode") % getBrandModel(),
+			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s reboots\nThis may take a few minutes") % getBrandModel(),
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s restarts") % getBrandModel(),
+			QUIT_UPGRADE_FPANEL: _("Front panel your %s will be updated\nThis may take a few minutes") % getBrandModel(),
+			QUIT_WOL: _("Your %s goes to WOL") % getBrandModel()
 		}.get(retvalue)
 		self["text"] = Label(text)
 
@@ -436,18 +435,19 @@ class TryQuitMainloop(MessageBox):
 				config.misc.RestartUI.value = True
 				config.misc.RestartUI.save()
 			if SystemInfo["Display"] and SystemInfo["LCDMiniTV"]:
-				print("[Standby] LCDminiTV off")
-				try:
-					print("[Standby] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(0)
-				except:
-					print("[Standby] Write to /proc/stb/lcd/mode failed.")
+				mode = "/proc/stb/lcd/mode"
+				if os.path.isfile(mode):
+					print("[Standby] LCDminiTV off")
+					with open(mode, "w") as lcd:
+						lcd.write("0")
+						lcd.close()
 			if getBoxType() == "vusolo4k":
-				try:
-					print("[Standby] Write to /proc/stb/fp/oled_brightness")
-					open("/proc/stb/fp/oled_brightness", "w").write("0")
-				except:
-					print("[Standby] Write to /proc/stb/fp/oled_brightness failed.")
+				oled_brightness = "/proc/stb/fp/oled_brightness"
+				if os.path.isfile(oled_brightness):
+					print("[Standby] Brightness OLED off")
+					with open(oled_brightness, "w") as oled:
+						oled.write("0")
+						oled.close()
 			self.quitMainloop()
 		else:
 			MessageBox.close(self, True)

@@ -40,6 +40,8 @@ def getBrand():
 			brandName = "Medi@link"
 		elif "vu" in rcStartSwithisBrand:
 			brandName = "vuplus"
+		elif "dinobot" in rcStartSwithisBrand:
+			brandName = "dinobot"
 		elif "dmm" in rcStartSwithisBrand: # this check should always be the last.
 			brandName = "dreambox"
 		elif not brandName:
