@@ -2,7 +2,6 @@
 
 from os import sep, statvfs
 from os.path import exists, isdir, join as pathjoin
-from sys import version_info
 
 from enigma import eTimer
 
@@ -414,7 +413,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			self.selectByStart()
 			self.quickSelectPos += 1
 		char = self.getKey(digit)  # Get char and append to text.
-		self.quickSelect = self.quickSelect[:self.quickSelectPos] + (unicode(char) if version_info.major == 2 else str(char))
+		self.quickSelect = self.quickSelect[:self.quickSelectPos] + str(char)
 		self["quickselect"].setText(self.quickSelect)
 		self["quickselect"].visible = True
 		self.timerType = 0

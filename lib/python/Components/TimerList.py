@@ -29,8 +29,8 @@ class TimerList(GUIComponent):
 		if timer.external:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName, self.backupColor, self.backupColorSel, None, None, None, None))
 		else:
-			from sys import version_info
-			timer.name = timer.name if version_info.major >= 3 else timer.name.encode() # Event name.
+			# from sys import version_info
+			timer.name = timer.name # if version_info.major >= 3 else timer.name.encode() # Event name.
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, width - serviceNameWidth, 0, serviceNameWidth, self.rowSplit, 0, RT_HALIGN_RIGHT | RT_VALIGN_BOTTOM, serviceName))
 		res.append((eListboxPythonMultiContent.TYPE_TEXT, self.iconWidth + self.iconMargin, 0, width - serviceNameWidth - self.iconWidth - self.iconMargin, self.rowSplit, 2, RT_HALIGN_LEFT | RT_VALIGN_BOTTOM, timer.name))
 

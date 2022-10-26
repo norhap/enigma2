@@ -36,7 +36,6 @@ import glob
 import fnmatch
 from Components.ScrollLabel import ScrollLabel
 from os import remove, unlink, rename
-from sys import version_info
 
 macaddress = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_LINK][0])["addr"].upper())
 config.macaddress = ConfigSubsection()
@@ -1092,43 +1091,24 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self.onClose.append(self.cleanup)
 
 	def queryWirelessDevice(self, iface):
-		if version_info.major >= 3:
-			try:
-				from wifi.scan import Cell
-				import errno
-			except ImportError:
-				return False
-			else:
-				try:
-					self.Console.ePopen("ifconfig %s up" % iface)
-					wlanresponse = list(Cell.all(iface))
-				except IOError as err:
-					error_no, error_str = err.args
-					if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
-						return False
-					else:
-						print("[AdapterSetupConfiguration] error: ", error_no, error_str)
-						return True
-				else:
-					return True
+		try:
+			from wifi.scan import Cell
+			import errno
+		except ImportError:
+			return False
 		else:
 			try:
-				from pythonwifi.iwlibs import Wireless
-				import errno
-			except ImportError:
-				return False
-			else:
-				try:
-					ifobj = Wireless(iface) # a Wireless NIC Object
-					wlanresponse = ifobj.getAPaddr()
-				except IOError as error_no:
-					if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
-						return False
-					else:
-						print("[AdapterSetupConfiguration] error: ", error_no, error_str)
-						return True
+				self.Console.ePopen("ifconfig %s up" % iface)
+				wlanresponse = list(Cell.all(iface))
+			except IOError as err:
+				error_no, error_str = err.args
+				if error_no in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
+					return False
 				else:
+					print("[AdapterSetupConfiguration] error: ", error_no, error_str)
 					return True
+			else:
+				return True
 
 	def ok(self):
 		self.cleanup()

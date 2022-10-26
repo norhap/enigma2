@@ -1,5 +1,3 @@
-from sys import version_info
-
 from enigma import eLabel
 
 from Components.GUIComponent import GUIComponent
@@ -29,11 +27,11 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 		return len(self.text)
 
 	def getText(self):
-		return self.textU if version_info.major >= 3 else self.textU.encode("UTF-8", "ignore")
+		return self.textU
 
 	def setText(self, text):
 		if len(text):
-			self.textU = text if version_info.major >= 3 else text.decode("UTF-8", "ignore")
+			self.textU = text
 		else:
 			self.currPos = 0
 			self.textU = u""
@@ -61,14 +59,14 @@ class Input(VariableText, GUIComponent, NumericalTextInput):
 				for x in self.textU[self.offset:self.offset + self.visibleWidth]:
 					self.text += (x == " " and u"\u00A0" or "*")
 			else:
-				self.text = self.textU[self.offset:self.offset + self.visibleWidth] + u"\u00A0" if version_info.major >= 3 else self.textU[self.offset:self.offset + self.visibleWidth].encode("UTF-8", "ignore") + u"\u00A0"
+				self.text = self.textU[self.offset:self.offset + self.visibleWidth] + u"\u00A0"
 		else:
 			if self.type == self.PIN:
 				self.text = ""
 				for x in self.textU:
 					self.text += (x == " " and u"\u00A0" or "*")
 			else:
-				self.text = self.textU + u"\u00A0" if version_info.major >= 3 else self.textU.encode("UTF-8", "ignore") + u"\u00A0"
+				self.text = self.textU + u"\u00A0"
 
 	def createWidget(self, parent):
 		if self.allMarked:

@@ -10,11 +10,7 @@ from Components.config import config, ConfigSelection, ConfigYesNo, ConfigSubsec
 from Components.Console import Console
 import Screens.Standby
 from Tools.Directories import fileExists, pathExists
-from sys import version_info
-if version_info.major >= 3:
-	from sys import maxsize
-else:
-	from sys import maxint as maxsize
+from sys import maxsize
 
 config.hdmicec = ConfigSubsection()
 config.hdmicec.enabled = ConfigYesNo(default=False)  # Query from this value in hdmi_cec.cpp

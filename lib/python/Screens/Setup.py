@@ -1,6 +1,5 @@
 from gettext import dgettext
 from os.path import getmtime, join as pathjoin
-from sys import version_info
 from xml.etree.cElementTree import ParseError, fromstring, parse
 
 from skin import setups
@@ -105,7 +104,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 				skin = setup.get("skin", None)
 				if skin and skin != "":
 					self.skinName.insert(0, skin)
-				title = setup.get("title", None) if version_info.major >= 3 else setup.get("title", None).encode("UTF-8", errors="ignore")
+				title = setup.get("title", None)
 				# If this break is executed then there can only be one setup tag with this key.
 				# This may not be appropriate if conditional setup blocks become available.
 				break
@@ -141,11 +140,11 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 
 	def addItem(self, element):
 		if self.pluginLanguageDomain:
-			itemText = dgettext(self.pluginLanguageDomain, element.get("text", "??")) if version_info.major >= 3 else dgettext(self.pluginLanguageDomain, element.get("text", "??").encode("UTF-8", errors="ignore"))
-			itemDescription = dgettext(self.pluginLanguageDomain, element.get("description", " ")) if version_info.major >= 3 else dgettext(self.pluginLanguageDomain, element.get("description", " ").encode("UTF-8", errors="ignore"))
+			itemText = dgettext(self.pluginLanguageDomain, element.get("text", "??"))
+			itemDescription = dgettext(self.pluginLanguageDomain, element.get("description", " "))
 		else:
-			itemText = _(element.get("text", "??")) if version_info.major >= 3 else _(element.get("text", "??").encode("UTF-8", errors="ignore"))
-			itemDescription = _(element.get("description", " ")) if version_info.major >= 3 else _(element.get("description", " ").encode("UTF-8", errors="ignore"))
+			itemText = _(element.get("text", "??"))
+			itemDescription = _(element.get("description", " "))
 		item = eval(element.text) if element.text else ""
 		if item == "":
 			self.list.append((self.formatItemText(itemText),))  # Add the comment line to the config list.
@@ -364,7 +363,7 @@ def setupDom(setup=None, plugin=None):
 		for setup in setupFileDom.findall("setup"):
 			key = setup.get("key")
 			if key:  # If there is no key then this element is useless and can be skipped!
-				title = setup.get("title", "") if version_info.major >= 3 else setup.get("title", "").encode("UTF-8", errors="ignore")
+				title = setup.get("title", "")
 				if title == "":
 					print("[Setup] Error: Setup key '%s' title is missing or blank!" % key)
 					title = "** Setup error: '%s' title is missing or blank!" % key
@@ -393,6 +392,6 @@ def getSetupTitle(id):
 	xmlData = setupDom()
 	for x in xmlData.findall("setup"):
 		if x.get("key") == id:
-			return x.get("title", "") if version_info.major >= 3 else x.get("title", "").encode("UTF-8", errors="ignore")
+			return x.get("title", "")
 	print("[Setup] Error: Unknown setup id '%s'!" % repr(id))
 	return "Unknown setup id '%s'!" % repr(id)

@@ -18,10 +18,10 @@ from Tools.StbHardware import getBrand
 
 
 def _ifinfo(sock, addr, ifname):
-	iface = struct.pack('256s', bytes(ifname[:15], encoding="UTF-8")) if version_info.major >= 3 else struct.pack('256s', ifname[:15])
+	iface = struct.pack('256s', bytes(ifname[:15], encoding="UTF-8"))
 	info = fcntl.ioctl(sock.fileno(), addr, iface)
 	if addr == 0x8927:
-		return ''.join(['%02x:' % ord(chr(char)) for char in info[18:24]])[:-1].upper() if version_info.major >= 3 else ''.join(['%02x:' % ord(char) for char in info[18:24]])[:-1].upper()
+		return ''.join(['%02x:' % ord(chr(char)) for char in info[18:24]])[:-1].upper()
 	else:
 		return socket.inet_ntoa(info[20:24])
 
@@ -298,10 +298,10 @@ def GetIPsFromNetworkInterfaces():
 		else:
 			break
 
-	namestr = names.tobytes() if version_info.major >= 3 else names.tostring()
+	namestr = names.tobytes()
 	ifaces = []
 	for i in range(0, outbytes, struct_size):
-		iface_name = str(namestr[i:i + 16]).split('\0', 1)[0] if version_info.major >= 3 else bytes.decode(namestr[i:i + 16]).split('\0', 1)[0].encode('ascii')
+		iface_name = str(namestr[i:i + 16]).split('\0', 1)[0]
 		if iface_name != 'lo':
 			iface_addr = socket.inet_ntoa(namestr[i + 20:i + 24])
 			ifaces.append((iface_name, iface_addr))

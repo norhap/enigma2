@@ -9,20 +9,13 @@ from Screens.MessageBox import MessageBox
 from Components.config import config
 from Tools.Notifications import AddNotificationWithID
 from time import sleep
-from sys import version_info
 from six.moves.urllib.error import URLError, HTTPError
 from six.moves.urllib.parse import quote
 from six.moves.urllib.request import Request, urlopen
 import xml.etree.ElementTree as et
-if version_info.major >= 3:
-	from base64 import encodebytes
-	encodecommand = encodebytes
-else: # Python 2
-	from base64 import encodestring
-	encodecommand = encodestring
+from base64 import encodebytes
 
 supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
-
 channelslistpath = "/etc/enigma2"
 
 
@@ -42,7 +35,7 @@ class ImportChannels():
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
 				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-					self.header = "Basic %s" % encodecommand(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()
+					self.header = "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()
 			self.remote_fallback_import = config.usage.remote_fallback_import.value
 			self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
 			self.thread.start()
@@ -304,7 +297,7 @@ class ImportChannels():
 				count = 0
 				for file in files:
 					count += 1
-					file = file if version_info.major >= 3 else file.encode("UTF-8")
+					file = file
 					print("[ImportChannels] Downloading %s" % file)
 					try:
 						open("%s/%s" % (channelslistserver, os.path.basename(file)), "wb").write(urlopen("%s/file?file=%s" % (self.url, file), timeout=5).read())

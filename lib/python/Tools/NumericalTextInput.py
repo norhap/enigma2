@@ -1,5 +1,4 @@
 from os import environ
-from sys import version_info
 from enigma import eTimer
 
 from Components.Language import language		# DO NOT REMOVE THIS IMPORT - NEEDED TO RESOLVE path/language/locales
@@ -284,4 +283,4 @@ class NumericalTextInput:
 		return self.mapping[num][self.pos]
 
 	def setUseableChars(self, useable):
-		self.useableChars = str(useable) if version_info.major >= 3 else unicode(useable)
+		self.useableChars = str(useable)

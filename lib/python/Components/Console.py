@@ -1,5 +1,4 @@
 from os import waitpid
-from sys import version_info
 from enigma import eConsoleAppContainer
 
 
@@ -47,10 +46,7 @@ class ConsoleItem:
 		self.container = None
 		if self.callback:
 			appResults = b"".join(self.appResults)
-			if version_info.major >= 3:
-				appResults = appResults if self.binary else appResults.decode()
-			else:
-				appResults = appResults if self.binary else appResults
+			appResults = appResults if self.binary else appResults.decode()
 			self.callback(appResults, retVal, self.extraArgs)
 
 

@@ -4,12 +4,7 @@ from Screens.MessageBox import MessageBox
 from timer import TimerEntry as TimerObject
 from six.moves.urllib.parse import quote
 import xml
-try:
-	from base64 import encodestring
-	encodecommand = encodestring
-except ImportError:
-	from base64 import encodebytes
-	encodecommand = encodebytes
+from base64 import encodebytes
 
 
 class FallbackTimerList():
@@ -24,7 +19,7 @@ class FallbackTimerList():
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
 				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-					self.headers = {"Authorization": "Basic %s" % encodecommand(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
+					self.headers = {"Authorization": "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
 			self.getFallbackTimerList()
 		else:
 			self.url = None

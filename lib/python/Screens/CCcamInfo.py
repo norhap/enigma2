@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # CCcam Info by AliAbdul
-try:
-	from base64 import b64encode
-except ImportError:
-	from base64 import encodestring as b64encode
+from base64 import b64encode
 from os import listdir, remove, rename, system, path
 
 from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_RIGHT, getDesktop

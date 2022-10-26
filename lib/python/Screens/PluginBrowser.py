@@ -1,6 +1,5 @@
 import os
 from time import time
-from sys import version_info
 from enigma import eConsoleAppContainer, eDVBDB, eTimer
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
@@ -566,8 +565,7 @@ class PluginDownloadBrowser(Screen):
 					self["text"].setText(_("No plugins found, check server."))
 
 	def dataAvail(self, str):
-		if version_info.major >= 3:
-			str = str.decode()
+		str = str.decode()
 		str = self.remainingdata + str
 		if self.type == self.DOWNLOAD and any([x for x in ('wget returned 1', 'wget returned 255', '404 Not Found') if x in str]):
 			self.run = 3

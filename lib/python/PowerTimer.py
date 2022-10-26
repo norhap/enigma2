@@ -1,7 +1,7 @@
 from bisect import insort
 from os import fsync, remove, rename
 from os.path import exists
-from sys import maxsize, version_info
+from sys import maxsize
 from time import ctime, localtime, mktime, time
 
 from enigma import eActionMap, quitMainloop
@@ -166,7 +166,7 @@ class PowerTimer(Timer):
 		entry.autosleeprepeat = autosleeprepeat
 		entry.repeated = 0 if entry.autosleeprepeat == "repeated" else int(timerDom.get("repeated"))  # Ensure timer repeated is cleared if we have an autosleeprepeat.
 		for log in timerDom.findall("log"):
-			msg = log.text.strip().encode("UTF-8").decode() if version_info.major >= 3 else log.text.strip().encode("UTF-8")
+			msg = log.text.strip().encode("UTF-8").decode()
 			entry.log_entries.append((int(log.get("time")), int(log.get("code")), msg))
 		return entry
 

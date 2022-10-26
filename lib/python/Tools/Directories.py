@@ -2,7 +2,6 @@ from errno import ENOENT, EXDEV
 from os import F_OK, R_OK, W_OK, access, chmod, link, listdir, makedirs, mkdir, readlink, remove, rename, rmdir, sep, stat, statvfs, symlink, utime, walk
 from os.path import basename, dirname, exists, getsize, isdir, isfile, islink, join as pathjoin, normpath, splitext
 from re import compile
-from sys import version_info
 from shutil import copy2
 from stat import S_IMODE
 from tempfile import mkstemp
@@ -263,36 +262,20 @@ def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
 def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
 	dom = None
 	try:
-		if version_info.major >= 3:
-			with open(filename, "r", encoding="UTF-8") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
-				try:
-					dom = parse(fd).getroot()
-					msg = "Read"
-				except ParseError as err:
-					fd.seek(0)
-					content = fd.readlines()
-					line, column = err.position
-					print("[%s] XML Parse Error: '%s' in '%s'!" % (source, err, filename))
-					data = content[line - 1].replace("\t", " ").rstrip()
-					print("[%s] XML Parse Error: '%s'" % (source, data))
-					print("[%s] XML Parse Error: '%s^%s'" % (source, "-" * column, " " * (len(data) - column - 1)))
-				except Exception as err:
-					print("[%s] Error: Unable to parse data in '%s' - '%s'!" % (source, filename, err))
-		else:
-			with open(filename, "r") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
-				try:
-					dom = parse(fd).getroot()
-					msg = "Read"
-				except ParseError as err:
-					fd.seek(0)
-					content = fd.readlines()
-					line, column = err.position
-					print("[%s] XML Parse Error: '%s' in '%s'!" % (source, err, filename))
-					data = content[line - 1].replace("\t", " ").rstrip()
-					print("[%s] XML Parse Error: '%s'" % (source, data))
-					print("[%s] XML Parse Error: '%s^%s'" % (source, "-" * column, " " * (len(data) - column - 1)))
-				except Exception as err:
-					print("[%s] Error: Unable to parse data in '%s' - '%s'!" % (source, filename, err))
+		with open(filename, "r", encoding="UTF-8") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
+			try:
+				dom = parse(fd).getroot()
+				msg = "Read"
+			except ParseError as err:
+				fd.seek(0)
+				content = fd.readlines()
+				line, column = err.position
+				print("[%s] XML Parse Error: '%s' in '%s'!" % (source, err, filename))
+				data = content[line - 1].replace("\t", " ").rstrip()
+				print("[%s] XML Parse Error: '%s'" % (source, data))
+				print("[%s] XML Parse Error: '%s^%s'" % (source, "-" * column, " " * (len(data) - column - 1)))
+			except Exception as err:
+				print("[%s] Error: Unable to parse data in '%s' - '%s'!" % (source, filename, err))
 	except (IOError, OSError) as err:
 		if err.errno == ENOENT:  # ENOENT - No such file or directory.
 			print("[%s] Warning: File '%s' does not exist!" % (source, filename))
@@ -354,7 +337,7 @@ def bestRecordingLocation(candidates):
 
 def getRecordingFilename(basename, dirname=None):
 	nonAllowedCharacters = "/.\\:*?<>|\""  # Filter out non-allowed characters.
-	basename = basename.replace("\x86", "").replace("\x87", "") if version_info.major >= 3 else basename.replace("\xc2\x86", "").replace("\xc2\x87", "")
+	basename = basename.replace("\x86", "").replace("\x87", "")
 	filename = ""
 	for character in basename:
 		if character in nonAllowedCharacters or ord(character) < 32:
@@ -364,7 +347,7 @@ def getRecordingFilename(basename, dirname=None):
 	# but must not truncate in the middle of a multi-byte utf8 character!
 	# So convert the truncation to unicode and back, ignoring errors, the
 	# result will be valid utf8 and so xml parsing will be OK.
-	filename = filename[:247] if version_info.major >= 3 else unicode(filename[:247], "UTF8", "ignore").encode("UTF8", "ignore")
+	filename = filename[:247]
 	if dirname is None:
 		dirname = defaultRecordingLocation()
 	else:
@@ -657,12 +640,8 @@ def isPluginInstalled(pluginName, pluginFile="plugin", pluginType=None):
 	types = ["Extensions", "SystemPlugins"]
 	if pluginType:
 		types = [pluginType]
-	if version_info.major >= 3:
-		extensions = ["c", ""]
-	else:
-		extensions = ["o", ""]
 	for type in types:
-		for extension in extensions:
+		for extension in ["c", ""]:
 			if isfile(pathjoin(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):
 				return True
 	return False

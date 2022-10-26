@@ -12,7 +12,6 @@ from Tools.Directories import fileExists
 from Screens.InfoBar import InfoBar
 from Screens.MessageBox import MessageBox
 from enigma import eTimer, eDVBFrontendParametersSatellite, eComponentScan, eDVBFrontendParametersTerrestrial, eDVBFrontendParametersCable, eConsoleAppContainer, eDVBResourceManager, eDVBFrontendParametersATSC, getBoxType
-from sys import version_info
 
 
 def buildTerTransponder(frequency,
@@ -201,8 +200,7 @@ class CableTransponderSearchSupport:
 	def getCableTransponderData(self, str):
 		print("[getCableTransponderData] ", str)
 		#prepend any remaining data from the previous call
-		if version_info.major >= 3:
-			str = str.decode()
+		str = str.decode()
 		str = self.remainingdata + str
 		lines = str.split('\n')
 		#'str' should end with '\n', so when splitting, the last line should be empty. If this is not the case, we received an incomplete line

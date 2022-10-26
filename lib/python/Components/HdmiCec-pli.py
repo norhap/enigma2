@@ -6,11 +6,7 @@ from enigma import eHdmiCEC, eActionMap
 from Tools.StbHardware import getFPWasTimerWakeup
 import NavigationInstance
 from enigma import eTimer
-from sys import version_info
-if version_info.major >= 3:
-	from sys import maxsize
-else:
-	from sys import maxint as maxsize
+from sys import maxsize
 
 LOGPATH = "/hdd/"
 LOGFILE = "hdmicec.log"

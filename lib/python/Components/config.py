@@ -1,7 +1,6 @@
 from copy import copy as shallowcopy
 from os import fsync, rename, sep
 from os.path import realpath
-from sys import version_info
 from time import localtime, strftime, struct_time
 
 from enigma import getPrevAsciiCode
@@ -1344,7 +1343,7 @@ class ConfigPIN(ConfigInteger):
 			raise TypeError("[Config] Error: 'ConfigPIN' default must be an integer!")
 		if censor != "" and (isinstance(censor, str) and len(censor) != 1):  # and (isinstance(censor, unicode) and len(censor) != 1):
 			raise ValueError("[Config] Error: Censor must be a single char (or \"\")!")
-		censor = censor if version_info.major >= 3 else censor.encode("UTF-8", errors="ignore")
+		censor = censor
 		ConfigInteger.__init__(self, default=default, limits=(0, (10 ** pinLength) - 1), censor=censor)
 		self.pinLength = pinLength
 
@@ -1721,7 +1720,7 @@ class ConfigText(ConfigElement, NumericalTextInput):
 				self.offset = max(0, textlen - self.visible_width)
 
 	def getText(self):
-		return self.text if version_info.major >= 3 else self.text.encode("UTF-8", errors="ignore")
+		return self.text
 
 	def getMulti(self, selected):
 		padding = u"\u00A0" if selected else ""
@@ -1737,7 +1736,7 @@ class ConfigText(ConfigElement, NumericalTextInput):
 			else:
 				mark = [self.markedPos]
 			multi = "%s%s" % (self.text, padding)
-		return ("mtext"[1 - selected:], multi.encode("UTF-8", errors="ignore") if version_info.major == 2 else multi, mark)
+		return ("mtext"[1 - selected:], multi, mark)
 
 	def showHelp(self, session):
 		if session is not None and self.help_window is not None:
@@ -1764,18 +1763,15 @@ class ConfigText(ConfigElement, NumericalTextInput):
 		ConfigElement.onDeselect(self, session)
 
 	def getValue(self):
-		if version_info.major >= 3:
+		try:
 			return self.text
-		else:
-			try:
-				return self.text.encode("UTF-8", errors="strict")
-			except UnicodeDecodeError:
-				print("[Config] Broken UTF8!")
-				return self.text.encode("UTF-8", errors="ignore")
+		except UnicodeDecodeError:
+			print("[Config] Broken UTF8!")
+			return self.text.encode("UTF-8", errors="ignore")
 
 	def setValue(self, value):
 		prev = self.text if hasattr(self, "text") else None
-		if version_info.major == 2 or isinstance(value, bytes): # DEBUG: If bytes on PY3 we can print this and then convert.
+		if isinstance(value, bytes): # DEBUG: If bytes on PY3 we can print this and then convert.
 			try:
 				self.text = value.decode("UTF-8", errors="strict")
 			except UnicodeDecodeError:
@@ -1950,7 +1946,7 @@ class ConfigPassword(ConfigText):
 		ConfigText.__init__(self, default=default, fixed_size=fixed_size, visible_width=visible_width)
 		if censor != "" and (isinstance(censor, str) and len(censor) != 1) and (isinstance(censor, unicode) and len(censor) != 1):
 			raise ValueError("[Config] Error: Censor must be a single char (or \"\")!")
-		self.censor = censor if version_info.major >= 3 else censor.encode("UTF-8", errors="ignore")
+		self.censor = censor
 		self.hidden = True
 
 	def getMulti(self, selected):
@@ -2211,27 +2207,16 @@ class Config(ConfigSubsection):
 	def loadFromFile(self, filename, baseFile=True, base_file=None):  # DEBUG: base_file is deprecated, only used in Components/PackageInfo.py
 		if base_file is not None:
 			baseFile = base_file
-		if version_info.major >= 3:
-			with open(filename, "r", encoding="UTF-8") as fd:
-				self.unpickle(fd, baseFile)
-		else:
-			with open(filename, "r") as fd:
-				self.unpickle(fd, baseFile)
+		with open(filename, "r", encoding="UTF-8") as fd:
+			self.unpickle(fd, baseFile)
 
 	def saveToFile(self, filename):
 		try:
-			if version_info.major >= 3:
-				with open("%s.writing" % filename, "w", encoding="UTF-8") as fd:
-					fd.write(self.pickle())
-					fd.flush()
-					fsync(fd.fileno())
-				rename("%s.writing" % filename, filename)
-			else:
-				with open("%s.writing" % filename, "w") as fd:
-					fd.write(self.pickle())
-					fd.flush()
-					fsync(fd.fileno())
-				rename("%s.writing" % filename, filename)
+			with open("%s.writing" % filename, "w", encoding="UTF-8") as fd:
+				fd.write(self.pickle())
+				fd.flush()
+				fsync(fd.fileno())
+			rename("%s.writing" % filename, filename)
 		except (IOError, OSError) as err:
 			print("[Config] Error %d: Couldn't write '%s'!  (%s)" % (err.errno, filename, err.strerror))
 

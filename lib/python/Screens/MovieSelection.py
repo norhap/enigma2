@@ -1,8 +1,4 @@
-from sys import version_info
-if version_info.major >= 3:
-	from pickle import dump, load
-else:
-	from cPickle import dump, load
+from pickle import dump, load
 
 from os import W_OK, access, listdir, mkdir, rename, rmdir, stat
 from os.path import abspath, basename, exists, isdir, isfile, join as pathjoin, normpath, pardir, realpath, split, splitext
@@ -28,11 +24,6 @@ from Components.UsageConfig import preferredTimerPath
 # from Components.Sources.Boolean import Boolean
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
-try:
-	from Plugins.Extensions import BlurayPlayer
-except ImportError:
-	print("[MovieSelection] Bluray Player is not installed.")
-	BlurayPlayer = None
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -49,9 +40,15 @@ from Screens.TagEditor import TagEditor
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.BoundFunction import boundFunction
 from Tools.CopyFiles import copyFiles, deleteFiles, moveFiles
-from Tools.Directories import SCOPE_HDD, resolveFilename
+from Tools.Directories import SCOPE_HDD, resolveFilename, isPluginInstalled
 from Tools.NumericalTextInput import MAP_SEARCH_UPCASE, NumericalTextInput
 from Tools.Trashcan import TrashInfo, cleanAll, createTrashFolder, getTrashFolder
+if isPluginInstalled("BlurayPlayer"):
+	from Plugins.Extensions import BlurayPlayer
+else:
+	BlurayPlayer = None
+	print("[MovieSelection] Bluray Player is not installed.")
+
 
 l_moviesort = [
 	(str(MovieList.SORT_GROUPWISE), _("Recordings by date, other media by name"), 'Rec New-Old & A-Z'),

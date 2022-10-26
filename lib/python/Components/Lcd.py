@@ -1,9 +1,5 @@
 from os.path import exists
-from sys import version_info
-if version_info.major >= 3:
-	from sys import maxsize
-else:
-	from sys import maxint as maxsize
+from sys import maxsize
 from twisted.internet import threads
 
 from boxbranding import getMachineBuild, getDBoxLCD
@@ -78,30 +74,39 @@ class IconCheckPoller:
 			f = open("/proc/stb/lcd/symbol_network", "w")
 			f.write('0')
 			f.close()
-		if version_info.major == 2:
-			from usb import busses
-			USBState = 0
-			busses = usb.busses()
-			for bus in busses:
-				devices = bus.devices
-				for dev in devices:
-					if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor > 0:
+		# from sys import version_info
+		# if version_info.major == 2:
+			# from usb import busses
+			# USBState = 0
+			# busses = usb.busses()
+			# for bus in busses:
+				# devices = bus.devices
+				# for dev in devices:
+					# if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor > 0:
+		# if version_info.major == 2:
+			# from usb import busses
+			# USBState = 0
+			# busses = usb.busses()
+			# for bus in busses:
+				# devices = bus.devices
+				# for dev in devices:
+					# if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor > 0:
 						# print ' '
 						# print "Device:", dev.filename
 						# print "  Number:", dev.deviceClass
 						# print "  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor)
 						# print "  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct)
-						USBState = 1
-			if exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '1':
-				f = open("/proc/stb/lcd/symbol_usb", "w")
-				f.write(str(USBState))
-				f.close()
-			elif exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '0':
-				f = open("/proc/stb/lcd/symbol_usb", "w")
-				f.write('0')
-				f.close()
+						# USBState = 1
+			# if exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '1':
+				# f = open("/proc/stb/lcd/symbol_usb", "w")
+				# f.write(str(USBState))
+				# f.close()
+			# elif exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '0':
+				# f = open("/proc/stb/lcd/symbol_usb", "w")
+				# f.write('0')
+				# f.close()
 
-			self.timer.startLongTimer(30)
+			# self.timer.startLongTimer(30)
 
 
 class LCD:

@@ -3,11 +3,7 @@ from Screens.Screen import Screen
 from Components.Label import Label
 from enigma import eTimer, getDesktop, eActionMap, gFont
 from Components.ActionMap import ActionMap
-from sys import version_info
-if version_info.major >= 3:
-	from sys import maxsize
-else:
-	from sys import maxint as maxsize
+from sys import maxsize
 
 
 class SubtitleDisplay(Screen):

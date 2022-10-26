@@ -2,7 +2,6 @@ from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl
 from boxbranding import getBoxType, getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
-from sys import version_info
 from six import ensure_str, text_type
 from PIL import Image
 import skin
@@ -506,7 +505,7 @@ class BenchmarkInformation(InformationBase):
 		info.append(formatLine("P1", _("CPU rating"), self.cpuRating if self.cpuRating else _("Calculating rating...")))
 		info.append("")
 		info.append(formatLine("P1", _("RAM benchmark"), _("%.2f MB/s copy rate") % self.ramBenchmark if self.ramBenchmark else _("Calculating benchmark...")))
-		self["information"].setText("\n".join(info) if version_info.major >= 3 else "\n".join(info).encode("UTF-8", "ignore"))
+		self["information"].setText("\n".join(info))
 
 	def getSummaryInformation(self):
 		return "Benchmark Information"
@@ -662,7 +661,7 @@ class TunerInformation(InformationBase):
 		info.append(formatLine("", _("ANNEX-A"), (_("Yes") if "ANNEX_A" in dvbFeToolTxt or "ANNEX-A" in dvbFeToolTxt else _("No"))))
 		info.append(formatLine("", _("ANNEX-B"), (_("Yes") if "ANNEX_B" in dvbFeToolTxt or "ANNEX-B" in dvbFeToolTxt else _("No"))))
 		info.append(formatLine("", _("ANNEX-C"), (_("Yes") if "ANNEX_C" in dvbFeToolTxt or "ANNEX-C" in dvbFeToolTxt else _("No"))))
-		self["information"].setText("\n".join(info) if version_info.major >= 3 else "\n".join(info).encode("UTF-8", "ignore"))
+		self["information"].setText("\n".join(info))
 
 
 class Devices(Screen):
@@ -1221,7 +1220,7 @@ class CommitInfoDevelop(Screen):
 				title = c['commit']['message']
 				date = datetime.strptime(c['commit']['committer']['date'], '%Y-%m-%dT%H:%M:%SZ').strftime('%x %X')
 				commitlog += date + ' ' + creator + '\n' + title + 2 * '\n'
-			commitlog = commitlog if version_info.major >= 3 else commitlog.encode('utf-8')
+			commitlog = commitlog
 			self.cachedProjects[self.projects[self.project][1]] = commitlog
 		except:
 			commitlog += _("The repository is not public or there is no access.")

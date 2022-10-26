@@ -48,13 +48,8 @@ import datetime
 from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
 # hack alert!
 from Screens.Menu import MainMenu, mdom
-from sys import version_info
-if version_info.major >= 3:
-	import pickle
-	from sys import maxsize
-else:
-	import cPickle as pickle
-	from sys import maxint as maxsize
+import pickle
+from sys import maxsize
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -2495,8 +2490,7 @@ class InfoBarPlugins:
 	def getPluginList(self):
 		l = []
 		for p in plugins.getPlugins(where=PluginDescriptor.WHERE_EXTENSIONSMENU):
-			if version_info.major >= 3:
-				args = inspect.getfullargspec(p.__call__)[0]
+			args = inspect.getfullargspec(p.__call__)[0]
 			args = inspect.getargspec(p.__call__)[0]
 			if len(args) == 1 or len(args) == 2 and isinstance(self, InfoBarChannelSelection):
 				l.append(((boundFunction(self.getPluginName, p.name), boundFunction(self.runPlugin, p), lambda: True), None, p.name))
@@ -3612,7 +3606,7 @@ class InfoBarCueSheetSupport:
 		r = seek.getPlayPosition()
 		if r[0]:
 			return None
-		return int(r[1]) if version_info.major >= 3 else long(r[1])
+		return int(r[1])
 
 	def cueGetEndCutPosition(self):
 		ret = False

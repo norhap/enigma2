@@ -7,7 +7,6 @@ from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
-from sys import version_info
 
 
 class PiconLocator:
@@ -91,10 +90,7 @@ class PiconLocator:
 			pngname = self.findPicon('_'.join(fields))
 		if not pngname: # picon by channel name
 			name = ServiceReference(serviceName).getServiceName()
-			if version_info.major >= 3:
-				name = unicodedata.normalize('NFKD', str(name)).encode('ASCII', 'ignore').decode('ASCII', 'ignore')
-			else:
-				name = unicodedata.normalize('NFKD', unicode(name, 'utf_8', errors='ignore')).encode('ASCII', 'ignore')
+			name = unicodedata.normalize('NFKD', str(name)).encode('ASCII', 'ignore').decode('ASCII', 'ignore')
 			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			if len(name) > 0:
 				pngname = self.findPicon(name)

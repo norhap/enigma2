@@ -1,7 +1,6 @@
 from errno import ENOENT
 from os import environ, path, symlink, unlink, walk
 from os.path import exists, isfile, join as pathjoin, realpath
-from sys import version_info
 from time import gmtime, localtime, strftime, time, tzset
 from xml.etree.cElementTree import ParseError, parse
 
@@ -130,9 +129,9 @@ class Timezones:
 				name = commonTimezoneNames.get(tz, zone)  # Use the more common name if one is defined.
 				if name is None:
 					continue
-				name = name if version_info.major >= 3 else name.encode(encoding="UTF-8", errors="ignore")
-				area = area if version_info.major >= 3 else area.encode(encoding="UTF-8", errors="ignore")
-				zone = zone if version_info.major >= 3 else zone.encode(encoding="UTF-8", errors="ignore")
+				name = name
+				area = area
+				zone = zone
 				zones.append((zone, name.replace("_", " ")))
 			if area:
 				if area in self.timezones:
@@ -163,9 +162,9 @@ class Timezones:
 		if fileDom:
 			for zone in fileDom.findall("zone"):
 				name = zone.get("name", "")
-				name = name if version_info.major >= 3 else name.encode(encoding="UTF-8", errors="ignore")
+				name = name
 				zonePath = zone.get("zone", "")
-				zonePath = zonePath if version_info.major >= 3 else zonePath.encode(encoding="UTF-8", errors="ignore")
+				zonePath = zonePath
 				if exists(pathjoin(TIMEZONE_DATA, zonePath)):
 					zones.append((zonePath, name))
 				else:

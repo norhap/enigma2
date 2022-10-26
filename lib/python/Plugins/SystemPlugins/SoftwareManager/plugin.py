@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import time
-from sys import version_info
-if version_info.major >= 3:
-	import pickle
-else:
-	import cPickle as pickle
+import pickle
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox

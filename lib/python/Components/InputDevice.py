@@ -13,7 +13,6 @@ from platform import machine
 import struct
 from Tools.Directories import pathExists
 from Tools.StbHardware import getBrand
-from sys import version_info
 
 model = getBoxType()
 
@@ -44,10 +43,7 @@ class InputDevices:
 			try:
 				buffer = b"\0" * 512
 				self.fd = open("/dev/input/%s" % device, O_RDWR | O_NONBLOCK)
-				if version_info.major >= 3:
-					self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
-				else:
-					self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer)
+				self.name = ioctl(self.fd, self.EVIOCGNAME(256), buffer).decode()
 				self.name = self.name[:self.name.find("\0")]
 				close(self.fd)
 			except (IOError, OSError) as err:
