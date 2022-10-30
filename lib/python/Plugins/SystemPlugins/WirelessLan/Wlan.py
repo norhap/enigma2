@@ -1,6 +1,5 @@
 import re
 from os import path as os_path
-from six.moves import range
 
 from wifi.scan import Cell
 

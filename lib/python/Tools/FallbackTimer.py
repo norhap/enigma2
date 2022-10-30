@@ -2,7 +2,7 @@ from ServiceReference import ServiceReference
 from Components.config import config
 from Screens.MessageBox import MessageBox
 from timer import TimerEntry as TimerObject
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import xml
 from base64 import encodebytes
 

@@ -8,8 +8,8 @@ from enigma import eTimer
 #for downloader
 import os
 import re
-from six.moves.urllib.error import URLError, HTTPError
-from six.moves.urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+from urllib.request import Request, urlopen
 from enigma import eServiceReference, eDVBDB
 
 autoClientModeTimer = None

@@ -21,7 +21,7 @@ import zipfile
 import shutil
 import tempfile
 import struct
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 
 from enigma import eEPGCache, getBoxType
 

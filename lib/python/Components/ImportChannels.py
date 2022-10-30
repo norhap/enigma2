@@ -9,9 +9,9 @@ from Screens.MessageBox import MessageBox
 from Components.config import config
 from Tools.Notifications import AddNotificationWithID
 from time import sleep
-from six.moves.urllib.error import URLError, HTTPError
-from six.moves.urllib.parse import quote
-from six.moves.urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+from urllib.parse import quote
+from urllib.request import Request, urlopen
 import xml.etree.ElementTree as et
 from base64 import encodebytes
 

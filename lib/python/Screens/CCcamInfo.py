@@ -23,7 +23,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, SCOPE_GUISKIN, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 import requests
-from six.moves.urllib.parse import urlparse, urlunparse
+from urllib.parse import urlparse, urlunparse
 
 
 VERSION = "V3 Python 3"

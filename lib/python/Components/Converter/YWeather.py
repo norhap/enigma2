@@ -2,7 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from Components.Converter.Poll import Poll
-from six.moves.urllib.request import Request, urlopen
+from urllib.request import Request, urlopen
 import time
 import os
 import socket

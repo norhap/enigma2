@@ -16,9 +16,9 @@ from Components.SystemInfo import SystemInfo
 import os
 import time
 import skin
-from six.moves.urllib.error import URLError
-from six.moves.urllib.parse import quote_plus
-from six.moves.urllib.request import HTTPHandler, HTTPDigestAuthHandler, HTTPPasswordMgrWithDefaultRealm, Request, urlopen, build_opener, install_opener
+from urllib.error import URLError
+from urllib.parse import quote_plus
+from urllib.request import HTTPHandler, HTTPDigestAuthHandler, HTTPPasswordMgrWithDefaultRealm, Request, urlopen, build_opener, install_opener
 
 ###global
 f = 1

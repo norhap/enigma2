@@ -1,5 +1,5 @@
 from json import loads
-from six.moves.urllib.request import urlopen
+from urllib.request import urlopen
 
 # Data available from http://ip-api.com/json/:
 #

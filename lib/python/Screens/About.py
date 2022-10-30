@@ -2,7 +2,6 @@ from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl
 from boxbranding import getBoxType, getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
-from six import ensure_str, text_type
 from PIL import Image
 import skin
 import os
@@ -529,40 +528,40 @@ class Geolocation(Screen):
 		try:
 			geolocationData = geolocation.getGeolocationData(fields="continent,country,regionName,city,timezone,currency,lat,lon", useCache=True)
 			continent = geolocationData.get("continent", None)
-			if isinstance(continent, text_type):
-				continent = ensure_str(continent.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(continent, str):
+				continent = str(continent)
 			if continent != None:
 				GeolocationText += _("Continent: ") + "\t" + continent + "\n"
 
 			country = geolocationData.get("country", None)
-			if isinstance(country, text_type):
-				country = ensure_str(country.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(country, str):
+				country = str(country)
 			if country != None:
 				GeolocationText += _("Country: ") + "\t" + country + "\n"
 
 			state = geolocationData.get("regionName", None)
-			if isinstance(state, text_type):
-				state = ensure_str(state.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(state, str):
+				state = str(state)
 			if state != None:
 				GeolocationText += _("State: ") + "\t" + state + "\n"
 
 			city = geolocationData.get("city", None)
-			if isinstance(city, text_type):
-				city = ensure_str(city.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(city, str):
+				city = str(city)
 			if city != None:
 				GeolocationText += _("City: ") + "\t" + city + "\n"
 
 			GeolocationText += "\n"
 
 			timezone = geolocationData.get("timezone", None)
-			if isinstance(timezone, text_type):
-				timezone = ensure_str(timezone.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(timezone, str):
+				timezone = str(timezone)
 			if timezone != None:
 				GeolocationText += _("Timezone: ") + "\t" + timezone + "\n"
 
 			currency = geolocationData.get("currency", None)
-			if isinstance(currency, text_type):
-				currency = ensure_str(currency.encode(encoding="UTF-8", errors="ignore"))
+			if isinstance(currency, str):
+				currency = str(currency)
 			if currency != None:
 				GeolocationText += _("Currency: ") + "\t" + currency + "\n"
 
@@ -869,10 +868,10 @@ class SystemNetworkInfo(Screen):
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
 		isp = geolocationData.get("isp", None)
 		isporg = geolocationData.get("org", None)
-		if isinstance(isp, text_type):
-			isp = ensure_str(isp.encode(encoding="UTF-8", errors="ignore"))
-		if isinstance(isporg, text_type):
-			isporg = ensure_str(isporg.encode(encoding="UTF-8", errors="ignore"))
+		if isinstance(isp, str):
+			isp = str(isp)
+		if isinstance(isporg, str):
+			isporg = str(isporg)
 		self.AboutText += "\n"
 		if isp != None:
 			if isporg != None:
@@ -1204,7 +1203,7 @@ class CommitInfoDevelop(Screen):
 		commitlog = ""
 		from datetime import datetime
 		from json import loads
-		from six.moves.urllib.request import urlopen
+		from urllib.request import urlopen
 		try:
 			commitlog += 80 * '-' + '\n'
 			commitlog += url.split('/')[-2] + '\n'
