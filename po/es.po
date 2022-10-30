@@ -17766,6 +17766,9 @@ msgstr "Acciones Extensión"
 msgid "Show extensions"
 msgstr "Mostrar extensiones"
 
+msgid "Import autotimer in current event"
+msgstr "Importar temporizador automático en el evento actual"
+
 msgid "Subtitle Actions"
 msgstr "Acciones Subtítulos"
 
