@@ -2,7 +2,6 @@ from enigma import iPlayableService
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
-from six import iteritems
 
 
 class VAudioInfo(Poll, Converter, object):
@@ -81,7 +80,7 @@ class VAudioInfo(Poll, Converter, object):
 		return description_str
 
 	def get_short(self, audioName):
-		for return_codec, codecs in sorted(iteritems(self.codecs)):
+		for return_codec, codecs in sorted(self.codecs.items()):
 			for codec in codecs:
 				if codec in audioName:
 					codec = return_codec.split('_')[1]

@@ -1,5 +1,4 @@
 from copy import copy, deepcopy
-from six import iteritems
 from enigma import BT_SCALE, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM, RT_VALIGN_CENTER, RT_VALIGN_TOP, eListboxPythonMultiContent, getDesktop, getPrevAsciiCode, gFont
 
 from skin import fonts, parameters
@@ -1082,7 +1081,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def localeMenu(self):
 		languages = []
-		for locale, data in iteritems(self.locales):
+		for locale, data in self.locales.items():
 			languages.append(("%s  -  %s  (%s)" % (data[0], data[1], locale), locale))
 		languages = sorted(languages)
 		index = 0

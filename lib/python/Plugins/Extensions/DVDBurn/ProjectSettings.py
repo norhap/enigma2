@@ -8,7 +8,6 @@ from Components.FileList import FileList
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_FONTS, SCOPE_HDD
 from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
-from six import iteritems
 
 
 class FileBrowser(Screen, HelpableScreen):
@@ -170,9 +169,9 @@ class ProjectSettings(ConfigListScreen, Screen):
 
 		self["config"].setList(self.list)
 		self.keydict = {}
-		for key, val in iteritems(self.settings.dict()):
+		for key, val in self.settings.dict().items():
 			self.keydict[val] = key
-		for key, val in iteritems(self.project.menutemplate.settings.dict()):
+		for key, val in self.project.menutemplate.settings.dict().items():
 			self.keydict[val] = key
 
 	def keyLeft(self):
