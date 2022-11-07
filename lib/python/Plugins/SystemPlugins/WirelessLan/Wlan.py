@@ -453,10 +453,9 @@ class Status:
 				data['encryption_type'] = aps[ssid]["encryption_type"]
 				#data['frequency'] = aps[ssid]["frequency"]
 				data['frequency_norm'] = aps[ssid]["frequency_norm"]
-			print("[Wlan] apsresults2 = %s" % data)
-			self.wlaniface[iface] = data
-			self.backupwlaniface = self.wlaniface
-
+		print("[Wlan] apsresults2 = %s" % data)
+		self.wlaniface[iface] = data
+		self.backupwlaniface = self.wlaniface
 		if self.WlanConsole:
 			if not self.WlanConsole.appContainers:
 				print("[Wlan] self.wlaniface after loading:", self.wlaniface)
