@@ -15626,6 +15626,9 @@ msgstr "Restaurar inetd"
 msgid "Restore inetd.conf"
 msgstr "Restaurar inetd.conf"
 
+msgid "Use config file /etc/\"inetd.conf\" in mode IPv6 compatible with IPv4."
+msgstr "Utilice el archivo config /etc/\"inetd.conf\" en modo IPv6 compatible con IPv4."
+
 msgid "SABnzbd"
 msgstr "SABnzbd"
 
