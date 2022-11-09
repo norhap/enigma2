@@ -23,7 +23,7 @@ from Components.ProgressBar import ProgressBar
 from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from Tools.Downloader import downloadWithProgress
+from Tools.Downloader import DownloadWithProgress
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
 
 model = getBoxType()
@@ -333,7 +333,7 @@ class FlashImage(Screen):
 			if "://" in self.source:
 				self["header"].setText(_("Downloading Image"))
 				self["info"].setText(self.imagename)
-				self.downloader = downloadWithProgress(self.source, self.zippedimage)
+				self.downloader = DownloadWithProgress(self.source, self.zippedimage)
 				self.downloader.addProgress(self.downloadProgress)
 				self.downloader.addEnd(self.downloadEnd)
 				self.downloader.addError(self.downloadError)
@@ -350,7 +350,7 @@ class FlashImage(Screen):
 		self.downloader.stop()
 		self.session.openWithCallback(self.abort, MessageBox, _("Error during downloading image\n%s\n%s") % (self.imagename, reason), type=MessageBox.TYPE_ERROR, simple=True)
 
-	def downloadEnd(self):
+	def downloadEnd(self, outputFile):
 		self.downloader.stop()
 		self.unzip()
 
