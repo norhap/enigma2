@@ -39,7 +39,7 @@ elif screenwidth and screenwidth > 1024:
 ###global
 
 
-class oscamInfo:
+class OSCamInfo:
 	def __init__(self):
 		pass
 
@@ -187,7 +187,7 @@ class oscamInfo:
 			elif hasattr(e, "code"):
 				err = str(e.code)
 		if err is not False:
-			print("[OScamInfo] Open WebIF error: %s" % err)
+			print("[OSCamInfo] Open WebIF error: %s" % err)
 			return False, err
 		else:
 			return True, data
@@ -359,7 +359,7 @@ class oscamInfo:
 					data = fd.readlines()
 					fd.close()
 			except UnicodeDecodeError as err:
-				print("[OScamInfo] %s" % err)
+				print("[OSCamInfo] %s" % err)
 			if data:
 				for i in data:
 					if "caid" in i:
@@ -387,7 +387,7 @@ class oscamInfo:
 				return result
 
 
-class oscMenuList(MenuList):
+class OSCamMenuList(MenuList):
 	def __init__(self, list, itemH=30):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(int(itemH * f))
@@ -398,7 +398,7 @@ class oscMenuList(MenuList):
 		self.l.setFont(3, gFont("Regular", int(12 * f)))
 
 
-class oscamInfoMenu(Screen):
+class OSCamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
@@ -411,8 +411,8 @@ class oscamInfoMenu(Screen):
 			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
-		self.osc = oscamInfo()
-		self["mainmenu"] = oscMenuList([])
+		self.osc = OSCamInfo()
+		self["mainmenu"] = OSCamMenuList([])
 		self["actions"] = NumberActionMap(["OkCancelActions", "InputActions", "ColorActions"], {
 			"ok": self.ok,
 			"cancel": self.exit,
@@ -483,49 +483,49 @@ class oscamInfoMenu(Screen):
 			self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 		elif entry == 0:
 			if os.path.exists("/tmp/ecm.info"):
-				self.session.open(oscECMInfo)
+				self.session.open(OSCamECMInfo)
 			else:
 				self.session.open(MessageBox, _("No ECM info is currently available. This is only available while decrypting."), MessageBox.TYPE_INFO)
 		elif entry == 1:
-			self.session.open(oscInfo, "c")
+			self.session.open(OScamInfo, "c")
 		elif entry == 2:
-			self.session.open(oscInfo, "s")
+			self.session.open(OScamInfo, "s")
 		elif entry == 3:
-			self.session.open(oscInfo, "l")
+			self.session.open(OScamInfo, "l")
 		elif entry == 4:
-			osc = oscamInfo()
+			osc = OSCamInfo()
 			reader = osc.getReaders("cccam")  # get list of available CCcam-Readers
 			if isinstance(reader, list):
 				if len(reader) == 1:
-					self.session.open(oscEntitlements, reader[0][1])
+					self.session.open(OSCamEntitlements, reader[0][1])
 				else:
 					self.callbackmode = "cccam"
 					self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose CCcam-Reader"), list=reader)
 		elif entry == 5:
-			osc = oscamInfo()
+			osc = OSCamInfo()
 			reader = osc.getReaders()
 			if reader is not None:
 				reader.append((_("All"), "all"))
 				if isinstance(reader, list):
 					if len(reader) == 1:
-						self.session.open(oscReaderStats, reader[0][1])
+						self.session.open(OSCamReaderStats, reader[0][1])
 					else:
 						self.callbackmode = "readers"
 						self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose reader"), list=reader)
 		elif entry == 6:
-			self.session.open(oscamInfoSetup)
+			self.session.open(OSCamInfoSetup)
 
 	def chooseReaderCallback(self, retval):
 		print(retval)
 		if retval is not None:
 			if self.callbackmode == "cccam":
-				self.session.open(oscEntitlements, retval[1])
+				self.session.open(OSCamEntitlements, retval[1])
 			else:
-				self.session.open(oscReaderStats, retval[1])
+				self.session.open(OSCamReaderStats, retval[1])
 
 	def ErrMsgCallback(self, retval):
 		print(retval)
-		self.session.open(oscamInfoSetup)
+		self.session.open(OSCamInfoSetup)
 
 	def buildMenu(self, mlist):
 		keys = ["red", "green", "yellow", "blue", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ""]
@@ -570,7 +570,7 @@ class oscamInfoMenu(Screen):
 		self["mainmenu"].moveToIndex(0)
 
 
-class oscECMInfo(Screen, oscamInfo):
+class OSCamECMInfo(Screen, OSCamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
@@ -583,7 +583,7 @@ class oscECMInfo(Screen, oscamInfo):
 			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 		self.skin += """</screen>"""
 		self.ecminfo = "/tmp/ecm.info"
-		self["output"] = oscMenuList([])
+		self["output"] = OSCamMenuList([])
 		if config.oscaminfo.autoupdate.value:
 			self.loop = eTimer()
 			self.loop.callback.append(self.showData)
@@ -618,7 +618,7 @@ class oscECMInfo(Screen, oscamInfo):
 		self["output"].selectionEnabled(False)
 
 
-class oscInfo(Screen, oscamInfo):
+class OScamInfo(Screen, OSCamInfo):
 	def __init__(self, session, what):
 		global HDSKIN, sizeH
 		self.session = session
@@ -645,7 +645,7 @@ class oscInfo(Screen, oscamInfo):
 		self.skin += """<widget name="output" position="10,65" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % (self.sizeLH, ysize - 80)
 		self.skin += """</screen>"""
 		Screen.__init__(self, session)
-		self.mlist = oscMenuList([])
+		self.mlist = OSCamMenuList([])
 		self["output"] = self.mlist
 		self.errmsg = ""
 		self["key_red"] = StaticText(_("Close"))
@@ -882,7 +882,7 @@ class oscInfo(Screen, oscamInfo):
 				self["output"].moveToIndex(len(self.out) - 1)
 
 
-class oscEntitlements(Screen, oscamInfo):
+class OSCamEntitlements(Screen, OSCamInfo):
 	global HDSKIN, sizeH
 	sizeLH = sizeH - 20
 	skin = """<screen position="center,center" size="%s, 400" title="Client Info" >
@@ -925,7 +925,7 @@ class oscEntitlements(Screen, oscamInfo):
 	def __init__(self, session, reader):
 		global HDSKIN, sizeH
 		Screen.__init__(self, session)
-		self.mlist = oscMenuList([])
+		self.mlist = OSCamMenuList([])
 		self.cccamreader = reader
 		self["output"] = List([])
 		self["actions"] = ActionMap(["OkCancelActions"], {
@@ -1022,7 +1022,7 @@ class oscEntitlements(Screen, oscamInfo):
 		self.setTitle(" ".join(title))
 
 
-class oscReaderStats(Screen, oscamInfo):
+class OSCamReaderStats(Screen, OSCamInfo):
 	global HDSKIN, sizeH
 	sizeLH = sizeH - 20
 	skin = """<screen position="center,center" size="%s, 400" title="Client Info" >
@@ -1065,7 +1065,7 @@ class oscReaderStats(Screen, oscamInfo):
 		else:
 			self.allreaders = False
 		self.reader = reader
-		self.mlist = oscMenuList([])
+		self.mlist = OSCamMenuList([])
 		self["output"] = List([])
 		self["actions"] = ActionMap(["OkCancelActions"], {
 			"ok": self.showData,
@@ -1178,9 +1178,9 @@ class oscReaderStats(Screen, oscamInfo):
 		self.setTitle(" ".join(title))
 
 
-class oscamInfoSetup(Setup):
+class OSCamInfoSetup(Setup):
 	def __init__(self, session, msg=None):
-		Setup.__init__(self, session, setup="OScamInfo")
+		Setup.__init__(self, session, setup="OSCamInfo")
 		self.msg = msg
 		if self.msg:
 			self.msg = "Error:\n%s" % self.msg

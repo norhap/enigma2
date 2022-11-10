@@ -39,7 +39,7 @@ elif screenwidth and screenwidth > 1024:
 ###global
 
 
-class ncamInfo:
+class NCamInfo:
 	def __init__(self):
 		pass
 
@@ -187,7 +187,7 @@ class ncamInfo:
 			elif hasattr(e, "code"):
 				err = str(e.code)
 		if err is not False:
-			print("[NcamInfo] Open WebIF error: %s" % err)
+			print("[NCamInfo] Open WebIF error: %s" % err)
 			return False, err
 		else:
 			return True, data
@@ -359,7 +359,7 @@ class ncamInfo:
 					data = fd.readlines()
 					fd.close()
 			except UnicodeDecodeError as err:
-				print("[NcamInfo] %s" % err)
+				print("[NCamInfo] %s" % err)
 			if data:
 				for i in data:
 					if "caid" in i:
@@ -387,7 +387,7 @@ class ncamInfo:
 				return result
 
 
-class oscMenuList(MenuList):
+class NCamMenuList(MenuList):
 	def __init__(self, list, itemH=30):
 		MenuList.__init__(self, list, False, eListboxPythonMultiContent)
 		self.l.setItemHeight(int(itemH * f))
@@ -398,7 +398,7 @@ class oscMenuList(MenuList):
 		self.l.setFont(3, gFont("Regular", int(12 * f)))
 
 
-class ncamInfoMenu(Screen):
+class NCamInfoMenu(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		global f
@@ -411,8 +411,8 @@ class ncamInfoMenu(Screen):
 			self.skin += """<widget name="mainmenu" position="33,33" size="392,220" zPosition="1" scrollbarMode="showOnDemand" />"""
 		self.skin += """</screen>"""
 		self.menu = [_("Show /tmp/ecm.info"), _("Show Clients"), _("Show Readers/Proxies"), _("Show log"), _("Card infos (CCcam-Reader)"), _("ECM Statistics"), _("Setup")]
-		self.osc = ncamInfo()
-		self["mainmenu"] = oscMenuList([])
+		self.nc = NCamInfo()
+		self["mainmenu"] = NCamMenuList([])
 		self["actions"] = NumberActionMap(["OkCancelActions", "InputActions", "ColorActions"], {
 			"ok": self.ok,
 			"cancel": self.exit,
@@ -477,55 +477,55 @@ class ncamInfoMenu(Screen):
 		pass
 
 	def goEntry(self, entry):
-		if entry in (1, 2, 3) and config.ncaminfo.userdatafromconf.value and self.osc.confPath()[0] is None:
+		if entry in (1, 2, 3) and config.ncaminfo.userdatafromconf.value and self.nc.confPath()[0] is None:
 			config.ncaminfo.userdatafromconf.setValue(False)
 			config.ncaminfo.userdatafromconf.save()
 			self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File ncam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 		elif entry == 0:
 			if os.path.exists("/tmp/ecm.info"):
-				self.session.open(oscECMInfo)
+				self.session.open(NCamECMInfo)
 			else:
 				self.session.open(MessageBox, _("No ECM info is currently available. This is only available while decrypting."), MessageBox.TYPE_INFO)
 		elif entry == 1:
-			self.session.open(oscInfo, "c")
+			self.session.open(NcamInfo, "c")
 		elif entry == 2:
-			self.session.open(oscInfo, "s")
+			self.session.open(NcamInfo, "s")
 		elif entry == 3:
-			self.session.open(oscInfo, "l")
+			self.session.open(NcamInfo, "l")
 		elif entry == 4:
-			osc = ncamInfo()
-			reader = osc.getReaders("cccam")  # get list of available CCcam-Readers
+			nc = NCamInfo()
+			reader = nc.getReaders("cccam")  # get list of available CCcam-Readers
 			if isinstance(reader, list):
 				if len(reader) == 1:
-					self.session.open(oscEntitlements, reader[0][1])
+					self.session.open(NCamEntitlements, reader[0][1])
 				else:
 					self.callbackmode = "cccam"
 					self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose CCcam-Reader"), list=reader)
 		elif entry == 5:
-			osc = ncamInfo()
-			reader = osc.getReaders()
+			nc = NCamInfo()
+			reader = nc.getReaders()
 			if reader is not None:
 				reader.append((_("All"), "all"))
 				if isinstance(reader, list):
 					if len(reader) == 1:
-						self.session.open(oscReaderStats, reader[0][1])
+						self.session.open(NCamReaderStats, reader[0][1])
 					else:
 						self.callbackmode = "readers"
 						self.session.openWithCallback(self.chooseReaderCallback, ChoiceBox, title=_("Please choose reader"), list=reader)
 		elif entry == 6:
-			self.session.open(ncamInfoSetup)
+			self.session.open(NCamInfoSetup)
 
 	def chooseReaderCallback(self, retval):
 		print(retval)
 		if retval is not None:
 			if self.callbackmode == "cccam":
-				self.session.open(oscEntitlements, retval[1])
+				self.session.open(NCamEntitlements, retval[1])
 			else:
-				self.session.open(oscReaderStats, retval[1])
+				self.session.open(NCamReaderStats, retval[1])
 
 	def ErrMsgCallback(self, retval):
 		print(retval)
-		self.session.open(ncamInfoSetup)
+		self.session.open(NCamInfoSetup)
 
 	def buildMenu(self, mlist):
 		keys = ["red", "green", "yellow", "blue", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ""]
@@ -570,7 +570,7 @@ class ncamInfoMenu(Screen):
 		self["mainmenu"].moveToIndex(0)
 
 
-class oscECMInfo(Screen, ncamInfo):
+class NCamECMInfo(Screen, NCamInfo):
 	def __init__(self, session):
 		global f
 		Screen.__init__(self, session)
@@ -583,7 +583,7 @@ class oscECMInfo(Screen, ncamInfo):
 			self.skin += """<widget name="output" font="FHD; 30" itemHeight="50" scrollbarMode="showOnDemand" enableWrapAround="1" position="33,33" size="640,360" transparent="1" />"""
 		self.skin += """</screen>"""
 		self.ecminfo = "/tmp/ecm.info"
-		self["output"] = oscMenuList([])
+		self["output"] = NCamMenuList([])
 		if config.ncaminfo.autoupdate.value:
 			self.loop = eTimer()
 			self.loop.callback.append(self.showData)
@@ -618,7 +618,7 @@ class oscECMInfo(Screen, ncamInfo):
 		self["output"].selectionEnabled(False)
 
 
-class oscInfo(Screen, ncamInfo):
+class NcamInfo(Screen, NCamInfo):
 	def __init__(self, session, what):
 		global HDSKIN, sizeH
 		self.session = session
@@ -645,7 +645,7 @@ class oscInfo(Screen, ncamInfo):
 		self.skin += """<widget name="output" position="10,65" size="%d,%d" zPosition="1" scrollbarMode="showOnDemand" />""" % (self.sizeLH, ysize - 80)
 		self.skin += """</screen>"""
 		Screen.__init__(self, session)
-		self.mlist = oscMenuList([])
+		self.mlist = NCamMenuList([])
 		self["output"] = self.mlist
 		self.errmsg = ""
 		self["key_red"] = StaticText(_("Close"))
@@ -882,7 +882,7 @@ class oscInfo(Screen, ncamInfo):
 				self["output"].moveToIndex(len(self.out) - 1)
 
 
-class oscEntitlements(Screen, ncamInfo):
+class NCamEntitlements(Screen, NCamInfo):
 	global HDSKIN, sizeH
 	sizeLH = sizeH - 20
 	skin = """<screen position="center,center" size="%s, 400" title="Client Info" >
@@ -925,7 +925,7 @@ class oscEntitlements(Screen, ncamInfo):
 	def __init__(self, session, reader):
 		global HDSKIN, sizeH
 		Screen.__init__(self, session)
-		self.mlist = oscMenuList([])
+		self.mlist = NCamMenuList([])
 		self.cccamreader = reader
 		self["output"] = List([])
 		self["actions"] = ActionMap(["OkCancelActions"], {
@@ -1022,7 +1022,7 @@ class oscEntitlements(Screen, ncamInfo):
 		self.setTitle(" ".join(title))
 
 
-class oscReaderStats(Screen, ncamInfo):
+class NCamReaderStats(Screen, NCamInfo):
 	global HDSKIN, sizeH
 	sizeLH = sizeH - 20
 	skin = """<screen position="center,center" size="%s, 400" title="Client Info" >
@@ -1065,7 +1065,7 @@ class oscReaderStats(Screen, ncamInfo):
 		else:
 			self.allreaders = False
 		self.reader = reader
-		self.mlist = oscMenuList([])
+		self.mlist = NCamMenuList([])
 		self["output"] = List([])
 		self["actions"] = ActionMap(["OkCancelActions"], {
 			"ok": self.showData,
@@ -1178,9 +1178,9 @@ class oscReaderStats(Screen, ncamInfo):
 		self.setTitle(" ".join(title))
 
 
-class ncamInfoSetup(Setup):
+class NCamInfoSetup(Setup):
 	def __init__(self, session, msg=None):
-		Setup.__init__(self, session, setup="NcamInfo")
+		Setup.__init__(self, session, setup="NCamInfo")
 		self.msg = msg
 		if self.msg:
 			self.msg = "Error:\n%s" % self.msg

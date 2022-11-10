@@ -2328,8 +2328,8 @@ class InfoBarExtensions:
 			"extensions": (self.showExtensionSelection, _("Show extensions")),
 			"openCurrentEventAutoTimer": (self.importAutoTimerCurrentEvent, _("Import autotimer in current event")),
 		}, prio=1, description=_("Extension Actions"))  # Lower priority.
-		self.addExtension(extension=self.getOScamInfo, type=InfoBarExtensions.EXTENSION_LIST)
-		self.addExtension(extension=self.getNcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension=self.getOSCamInfo, type=InfoBarExtensions.EXTENSION_LIST)
+		self.addExtension(extension=self.getNCamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getLogManager, type=InfoBarExtensions.EXTENSION_LIST)
 
@@ -2342,21 +2342,21 @@ class InfoBarExtensions:
 	def getCCcam(self):
 		return _("CCcam Info")
 
-	def getOScamInfo(self):
+	def getOSCamInfo(self):
 		import process
 		p = process.ProcessList()
 		oscam = str(p.named("oscam")).strip("[]")
 		if oscam:
-			return [((boundFunction(self.getOSCam), boundFunction(self.openOScamInfo), lambda: True), None)] or []
+			return [((boundFunction(self.getOSCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
-	def getNcamInfo(self):
+	def getNCamInfo(self):
 		import process
 		p = process.ProcessList()
 		ncam = str(p.named("ncam")).strip("[]")
 		if ncam:
-			return [((boundFunction(self.getNCam), boundFunction(self.openNcamInfo), lambda: True), None)] or []
+			return [((boundFunction(self.getNCam), boundFunction(self.openNCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
@@ -2438,13 +2438,13 @@ class InfoBarExtensions:
 		if answer is not None:
 			answer[1][1]()
 
-	def openOScamInfo(self):
-		from Screens.OScamInfo import oscamInfoMenu
-		self.session.open(oscamInfoMenu)
+	def openOSCamInfo(self):
+		from Screens.OScamInfo import OSCamInfoMenu
+		self.session.open(OSCamInfoMenu)
 
-	def openNcamInfo(self):
-		from Screens.NcamInfo import ncamInfoMenu
-		self.session.open(ncamInfoMenu)
+	def openNCamInfo(self):
+		from Screens.NcamInfo import NCamInfoMenu
+		self.session.open(NCamInfoMenu)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain
