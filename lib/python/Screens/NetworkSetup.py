@@ -1036,6 +1036,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Network configuration"))
 		self.iface = iface
+		self.Console = Console()
 		self.restartLanRef = None
 		self.LinkState = None
 		self.mainmenu = self.genMainMenu()
@@ -1049,7 +1050,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self["statuspic"] = MultiPixmap()
 		self["statuspic"].hide()
 		self["devicepic"] = MultiPixmap()
-
 		self.oktext = _("Press OK on your remote control to continue.")
 		self.reboottext = _("Your receiver will restart after pressing OK on your remote control.")
 		self.errortext = _("No working wireless network interface found.\n Please verify that you have attached a compatible WLAN device or enable your local network interface.")
