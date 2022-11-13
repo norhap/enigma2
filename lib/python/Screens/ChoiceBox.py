@@ -46,7 +46,7 @@ class ChoiceBox(Screen, HelpableScreen):
 			else:
 				self.skinName = skinName + self.skinName
 		self["actions"] = HelpableNumberActionMap(self, ["ChoiceBoxActions", "NumberActions", "ColorActions", "NavigationActions", "MenuActions"], {
-			"cancel": (self.keyCancel, _("Cancel the action selection and exit")),
+			"back": (self.keyCancel, _("Cancel the action selection and exit")),
 			"select": (self.keySelect, _("Run the currently highlighted action")),
 			"1": (self.keyNumberGlobal, _("Run the numbered action")),
 			"2": (self.keyNumberGlobal, _("Run the numbered action")),
