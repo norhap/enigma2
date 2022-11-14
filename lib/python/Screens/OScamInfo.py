@@ -13,7 +13,7 @@ from enigma import eTimer, RT_HALIGN_LEFT, eListboxPythonMultiContent, gFont, ge
 from xml.etree import ElementTree
 from operator import itemgetter
 from Components.SystemInfo import SystemInfo
-import os
+from os.path import exists
 import time
 import skin
 from urllib.error import URLError
@@ -108,7 +108,7 @@ class OSCamInfo:
 
 		if webif and port is not None:
 		# oscam reports it got webif support and webif is running (Port != 0)
-			if conf is not None and os.path.exists(conf):
+			if conf is not None and exists(conf):
 				# If we have a config file, we need to investigate it further
 				with open(conf, 'r') as data:
 					for i in data:
@@ -353,7 +353,7 @@ class OSCamInfo:
 
 	def getECMInfo(self, ecminfo):
 		result = []
-		if os.path.exists(ecminfo):
+		if exists(ecminfo):
 			try:
 				with open(ecminfo, "r", encoding="ISO 8859-1") as fd:
 					data = fd.readlines()
@@ -482,7 +482,7 @@ class OSCamInfoMenu(Screen):
 			config.oscaminfo.userdatafromconf.save()
 			self.session.openWithCallback(self.ErrMsgCallback, MessageBox, _("File oscam.conf not found.\nPlease enter username/password manually."), MessageBox.TYPE_ERROR)
 		elif entry == 0:
-			if os.path.exists("/tmp/ecm.info"):
+			if exists("/tmp/ecm.info"):
 				self.session.open(OSCamECMInfo)
 			else:
 				self.session.open(MessageBox, _("No ECM info is currently available. This is only available while decrypting."), MessageBox.TYPE_INFO)
