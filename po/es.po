@@ -5811,7 +5811,7 @@ msgstr "Seleccione ‘sí’ para elegir qué bandas o tamaños de pasos serán 
 
 #, python-format
 msgid "Select 'yes' to include %s multiplexes in your search."
-msgstr "Seleccione ‘sí’ para incluir% s múltiplex en su búsqueda."
+msgstr "Seleccione ‘sí’ para incluir %s multiplexes en su búsqueda."
 
 #, python-format
 msgid "Select 'yes' to include symbol rate %s in your search."
@@ -12494,22 +12494,6 @@ msgstr "Si esto está habilitado, imprimir el registro de depuración en el modo
 msgid "If this enabled, will check the list of timers, conflicting autotimers are disabled, the duplicate autotimers will be deleted."
 msgstr "Si esto está habilitado, verificará la lista de temporizadores, los temporizadores en conflicto estarán deshabilitados, los temporizadores duplicados serán eliminados."
 
-#, python-format
-msgid "If this is enabled an existing timer will also be considered recording an event if it records at least 80% of the it."
-msgstr "Si esto está habilitado, un temporizador existente también se considerará registrar un evento si registra al menos el 80% del mismo."
-
-msgid "If this is enabled, up on the MENU button in the multi-EPG will list of choices for AutoTimer."
-msgstr "Si esto está habilitado, al presionar el botón MENÚ en el EPG múltiple aparecerá una lista de opciones para el Temporizador automático."
-
-msgid "If this is enabled, up on the Menu button in the standard single-EPG will list of choices for AutoTimer."
-msgstr "Si esto está habilitado, hacia arriba en el botón Menú en el EPG único estándar aparecerá una lista de opciones para el Temporizador automático."
-
-msgid "If this is selected, the name of the respective AutoTimer will be added as a tag to timers created by this plugin."
-msgstr "Si se selecciona esto, el nombre del AutoTimer respectivo se agregará como una etiqueta a los temporizadores creados por este plugin."
-
-msgid "If this is selected, the tag \"AutoTimer\" will be given to timers created by this plugin."
-msgstr "Si se selecciona esta opción, la etiqueta \"Temporizador Automático\" se asignará a los temporizadores creados por este plugin."
-
 msgid "Import AutoTimer"
 msgstr "Importar Temporizador Automático"
 
@@ -12989,22 +12973,6 @@ msgstr "Sí, pero mantenga los temporizadores generados"
 
 msgid "You can control for how many days in the future timers are added. Set this to 0 to disable this feature."
 msgstr "Puede controlar cuántos días en el futuro se agregarán temporizadores. Establezca esto en 0 para deshabilitar esta característica."
-
-#, python-format
-msgid ""
-"You entered \"%s\" as Text to match.\n"
-"Do you want to remove trailing whitespaces?"
-msgstr ""
-"Ingresó \"% s\" como Texto para hacer coincidir.\n"
-"¿Quieres eliminar espacios en blanco al final?"
-
-#, python-format
-msgid ""
-"Your config file is not well-formed:\n"
-"%s"
-msgstr ""
-"Tu archivo de configuración no está bien formado:\n"
-"%s"
 
 msgid "add AutoTimer"
 msgstr "agregar Temporizador Automático"
@@ -18793,3 +18761,18 @@ msgstr "Narración"
 
 msgid "Dolby Digital downmix is now %s"
 msgstr "Mezcla AC3 Dolby Digital es ahora %s"
+
+msgid "Europe"
+msgstr "Europa"
+
+msgid "Pacific"
+msgstr "Pacífico"
+
+msgid "Indian"
+msgstr "India"
+
+msgid "Arctic"
+msgstr "Ártico"
+
+msgid "Atlantic"
+msgstr "Atlántico"
