@@ -92,8 +92,8 @@ class SelectImage(Screen):
 					pass
 			self.imagesList = dict(self.jsonlist)
 			for mountdir in ["/media", "/media/net", "/media/autofs"]:
-				for media in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
-					try:
+				if isdir(mountdir):
+					for media in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
 						getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and model in x])
 						for folder in ["images", "downloaded_images", "imagebackups"]:
 							if folder in listdir(media):
@@ -102,8 +102,6 @@ class SelectImage(Screen):
 									getImages(subfolder, [join(subfolder, x) for x in listdir(subfolder) if splitext(x)[1] == ".zip" and model in x])
 									for dir in [dir for dir in [join(subfolder, dir) for dir in listdir(subfolder)] if isdir(dir) and splitext(dir)[1] == ".unzipped"]:
 										rmtree(dir)
-					except:
-						pass
 
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
@@ -269,8 +267,8 @@ class FlashImage(Screen):
 				mounts = []
 				devices = []
 				for mountdir in ["/media", "/media/net", "/media/autofs"]:
-					for path in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
-						if path:
+					if isdir(mountdir):
+						for path in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
 							if checkIfDevice(path, diskstats):
 								devices.append((path, avail(path)))
 							else:
