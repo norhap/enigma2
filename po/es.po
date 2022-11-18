@@ -10464,6 +10464,12 @@ msgstr "Mostrar símbolos en pantalla"
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar advertencia al detener timeshift"
 
+msgid "Skip jumping to live TV while timeshifting with plugins"
+msgstr "Salta a la TV en vivo mientras cambias de tiempo con plugins"
+
+msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
+msgstr "Si se establece en 'sí', le permite usar Timeshift con plugins de audio alternativos."
+
 msgid "Shows live tv or informations on LCD."
 msgstr "Mostrar tv en vivo o info en el LCD."
 
