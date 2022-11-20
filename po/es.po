@@ -15284,9 +15284,6 @@ msgstr "Mostrar PIP en el display."
 msgid "Show framerate MiniTV in the front panel display."
 msgstr "Mostrar framerate MiniTV en display."
 
-msgid "Enable screenshot of LCD in /tmp."
-msgstr "Habilite la captura de pantalla de LCD en /tmp."
-
 msgid "Fixed X11 font (SD)"
 msgstr "Fuente fija X11 (SD)"
 
