@@ -18599,11 +18599,11 @@ msgstr "Retraso en el inicio de stream http(s)"
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams http(s), por ejemplo conectar un tuner remoto con sistema complejo tipo DiSEqC."
 
-msgid "[ActionMap] Missing actions in keymap, '%s' missing: mapto='%s'."
-msgstr "[ActionMap] Faltan acciones en keymap, '%s' falta: mapto='%s'."
+msgid "[ActionMap] Missing actions in keymap, missing context in this list ->'%s' for mapto='%s'."
+msgstr "[ActionMap] Faltan acciones en el mapa de teclas, falta contexto en esta lista ->'%s' para mapto='%s'."
 
-msgid "[ActionMap] Keymap '%s' -> mapto='%s' Unknown or missing, check if you need it, or is it a mapto other code part."
-msgstr "[ActionMap] Keymap '%s' -> mapto='%s' Desconocido o faltante, compruebe si lo necesita o si es un mapa de otra parte del código."
+msgid "[ActionMap] in this context list -> '%s' -> mapto='%s' Unknown or missing, check if you need it, or is it a mapto other code part."
+msgstr "[ActionMap] en esta lista de contexto '%s' -> mapto='%s' Desconocido o faltante, compruebe si lo necesita o si es un mapa de otra parte del código."
 
 msgid "Scan and search files and extensions in subdirs"
 msgstr "Escanea y busca archivos y extensiones en subdirectorios"
