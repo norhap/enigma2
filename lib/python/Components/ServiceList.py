@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
-from Components.GUIComponent import GUIComponent
-from skin import parseColor, parseFont
-
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
+from Components.config import config
+from Components.GUIComponent import GUIComponent
+from Components.Renderer.Picon import getPiconName
+from skin import parseColor, parseFont
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
-
-from Tools.Directories import resolveFilename, SCOPE_GUISKIN
-
-from Components.Renderer.Picon import getPiconName
-from Components.config import config
 
 
 def refreshServiceList(configElement=None):
@@ -199,31 +196,34 @@ class ServiceList(GUIComponent):
 			return None
 		from Components.ServiceEventTracker import InfoBarCount
 		if adjust and config.usage.multibouquet.value and InfoBarCount == 1 and ref and ref.type != 8192:
-			print("[ServiceList] search for service in user bouquets")
+			print("[servicelist] search for service in userbouquets")
+			isRadio = ref.toString().startswith("1:0:2:") or ref.toString().startswith("1:0:A:")
 			if self.serviceList:
 				revert_mode = config.servicelist.lastmode.value
 				revert_root = self.getRoot()
-				self.serviceList.setModeTv()
-				revert_tv_root = self.getRoot()
-				bouquets = self.serviceList.getBouquetList()
-				for bouquet in bouquets:
-					self.serviceList.enterUserbouquet(bouquet[1])
-					if self.l.setCurrent(ref):
-						config.servicelist.lastmode.save()
-						self.serviceList.saveChannel(ref)
-						return True
-				self.serviceList.enterUserbouquet(revert_tv_root)
-				self.serviceList.setModeRadio()
-				revert_radio_root = self.getRoot()
-				bouquets = self.serviceList.getBouquetList()
-				for bouquet in bouquets:
-					self.serviceList.enterUserbouquet(bouquet[1])
-					if self.l.setCurrent(ref):
-						config.servicelist.lastmode.save()
-						self.serviceList.saveChannel(ref)
-						return True
-				self.serviceList.enterUserbouquet(revert_radio_root)
-				print("[ServiceList] service not found in any user bouquets")
+				if not isRadio:
+					self.serviceList.setModeTv()
+					revert_tv_root = self.getRoot()
+					bouquets = self.serviceList.getBouquetList()
+					for bouquet in bouquets:
+						self.serviceList.enterUserbouquet(bouquet[1])
+						if self.l.setCurrent(ref):
+							config.servicelist.lastmode.save()
+							self.serviceList.saveChannel(ref)
+							return True
+					self.serviceList.enterUserbouquet(revert_tv_root)
+				else:
+					self.serviceList.setModeRadio()
+					revert_radio_root = self.getRoot()
+					bouquets = self.serviceList.getBouquetList()
+					for bouquet in bouquets:
+						self.serviceList.enterUserbouquet(bouquet[1])
+						if self.l.setCurrent(ref):
+							config.servicelist.lastmode.save()
+							self.serviceList.saveChannel(ref)
+							return True
+					self.serviceList.enterUserbouquet(revert_radio_root)
+				print("[servicelist] service not found in any userbouquets")
 				if revert_mode == "tv":
 					self.serviceList.setModeTv()
 				elif revert_mode == "radio":
@@ -271,7 +271,7 @@ class ServiceList(GUIComponent):
 				index = indexup
 
 		self.instance.moveSelectionTo(index)
-		print("[ServiceList] Moving to character " + str(char))
+		print("Moving to character %s" % str(char))
 
 	def moveToNextMarker(self):
 		idx = self.l.getNextMarkerPos()
