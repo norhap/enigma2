@@ -78,7 +78,7 @@ class TimeshiftSettings(Setup):
 			self.errorItem = self["config"].getCurrentIndex()
 			footnote = _("'%s' does not exist") % path
 			green = ""
-		elif stat(path).st_dev in self.inhibitDevs:
+		elif stat(path).st_dev in self.inhibitDevs and config.timeshift.skipreturntolive.value is False:
 			self.errorItem = self["config"].getCurrentIndex()
 			footnote = _("'%s'= Internal Flash. It is not a storage device") % path
 			green = ""
