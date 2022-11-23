@@ -2,6 +2,7 @@ from ServiceReference import ServiceReference
 from Components.config import config
 from Screens.MessageBox import MessageBox
 from timer import TimerEntry as TimerObject
+from Tools.Directories import isPluginInstalled
 from urllib.parse import quote
 import xml
 from base64 import encodebytes
@@ -14,14 +15,23 @@ class FallbackTimerList():
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		self.parent = parent
 		self.headers = {}
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value or config.ipboxclient.remotetimers.value:
-			self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
-			if config.usage.remote_fallback_openwebif_customize.value:
-				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
-				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-					self.headers = {"Authorization": "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
-			self.getFallbackTimerList()
+		if isPluginInstalled("Vision"):
+			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value or config.ipboxclient.remotetimers.value:
+				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
+				if config.usage.remote_fallback_openwebif_customize.value:
+					self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
+					if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
+						self.headers = {"Authorization": "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
+				self.getFallbackTimerList()
 		else:
+			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value:
+				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
+				if config.usage.remote_fallback_openwebif_customize.value:
+					self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
+					if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
+						self.headers = {"Authorization": "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
+				self.getFallbackTimerList()
+		if not hasattr(self, "url"):
 			self.url = None
 			self.list = []
 			parent.onLayoutFinish.append(self.fallbackFunction)
