@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from os import access, listdir, major, minor, mkdir, remove, rmdir, sep, stat, statvfs, walk, W_OK
-from os.path import isdir, isfile, join, splitext, islink, ismount
+from os.path import isdir, isfile, join, splitext, islink, ismount, exists
 from json import load
 from zipfile import ZipFile
 from shutil import copyfile, rmtree
@@ -448,7 +448,7 @@ class MultibootSelection(SelectImage):
 
 	def cancel(self, value=None):
 		Console().ePopen('umount %s' % self.tmp_dir)
-		if not ismount(self.tmp_dir):
+		if exists(self.tmp_dir):
 			rmdir(self.tmp_dir)
 		if value == 2 and not isfile(join(self.tmp_dir, "STARTUP")):
 			self.session.open(TryQuitMainloop, 2)
