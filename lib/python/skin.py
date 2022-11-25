@@ -480,7 +480,7 @@ def parsePixmap(path, desktop, width=0, height=0):
 	option = path.find("#")
 	if option != -1:
 		path = path[:option]
-	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png") and rc_model.rcIsDefault() is False:
+	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png"):
 		path = rc_model.getRcImg()
 	if isfile(path):
 		pixmap = LoadPixmap(path, desktop, None, width, height)
