@@ -71,6 +71,16 @@ def InitUsageConfig():
 	config.pluginbrowser.languages_po = ConfigYesNo(default=False)
 	config.pluginbrowser.src = ConfigYesNo(default=False)
 
+	def correctInvalidEPGDataChange(configElement):
+		eServiceEvent.setUTF8Fix(int(configElement.value))
+
+	config.usage.correct_invalid_epgdata = ConfigSelection(default="1", choices=[
+		("0", _("Disabled")),
+		("1", _("Enabled")),
+		("2", _("Debug"))
+	])
+	config.usage.correct_invalid_epgdata.addNotifier(correctInvalidEPGDataChange)
+
 	config.usage.alternative_number_mode = ConfigYesNo(default=False)
 
 	def keyboardNotifier(configElement):

@@ -16079,6 +16079,12 @@ msgstr "Elija un esquema de país para decodificar información de género en ev
 msgid "Country for EPG event genre information"
 msgstr "País para la información de género en evento EPG"
 
+msgid "Correct invalid EPG data"
+msgstr "Corregir datos EPG no válidos"
+
+msgid "Choose the option to correct invalid EPG data."
+msgstr "Elija la opción para corregir datos EPG no válidos."
+
 msgid "Auto Detect"
 msgstr "Auto Detectar"
 
