@@ -23,7 +23,8 @@ from Tools.NumericalTextInput import NumericalTextInput
 
 BOOKMARKS_INDENT = 3
 
-defaultInhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/home", "/lib", "/picon", "/piconlcd", "/proc", "/run", "/sbin", "/share", "/sys", "/tmp", "/usr", "/var"]
+DEFAULT_INHIBIT_DIRECTORIES = ("/bin", "/boot", "/dev", "/etc", "/home", "/lib", "/picon", "/piconlcd", "/proc", "/run", "/sbin", "/share", "/sys", "/tmp", "/usr", "/var")
+defaultInhibitDirs = list(DEFAULT_INHIBIT_DIRECTORIES)
 
 
 class LocationBox(Screen, NumericalTextInput, HelpableScreen):
