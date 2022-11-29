@@ -72,7 +72,7 @@ def InitUsageConfig():
 	config.pluginbrowser.src = ConfigYesNo(default=False)
 
 	def correctInvalidEPGDataChange(configElement):
-		eServiceEvent.setUTF8Fix(int(configElement.value))
+		eServiceEvent.setUTF8CorrectMode(int(configElement.value))
 
 	config.usage.correct_invalid_epgdata = ConfigSelection(default="1", choices=[
 		("0", _("Disabled")),
