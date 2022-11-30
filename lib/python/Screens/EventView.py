@@ -63,7 +63,7 @@ class EventViewBase:
 		else:
 			self.fallbackTimer = FallbackTimerList(self, self.layoutFinished)
 		self.windowTitle = windowTitle
-		self.isRecording = (not serviceRef.ref.flags & eServiceReference.isGroup) and serviceRef.ref.getPath()
+		self.isRecording = (not serviceRef.ref.flags & eServiceReference.isGroup) and serviceRef.ref.getPath() and "%3a//" not in serviceRef.ref.toString()
 		self["channel"] = Label()
 		self["datetime"] = Label()
 		self["duration"] = Label()
