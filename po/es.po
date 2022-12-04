@@ -4276,8 +4276,8 @@ msgstr "No se encuentran archivos mostrables en este medio!"
 msgid "No event info found, recording indefinitely."
 msgstr "No se encontró información del evento, grabando indefinidamente."
 
-msgid "A recording has been set."
-msgstr "Se ha establecido una grabación."
+msgid "Recording time has been set."
+msgstr "Se ha establecido el tiempo de grabación."
 
 msgid "No fast winding possible yet... but you can use the number buttons to skip forward/backward!"
 msgstr "No es posible el avance rápido aún… pero puede usar los botones de números para pasar delante/atrás!"
