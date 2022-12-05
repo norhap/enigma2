@@ -17533,8 +17533,15 @@ msgstr "Última página"
 msgid "File can not displayed - File not found"
 msgstr "Archivo no se puede mostrar - Archivo no encontrado"
 
-msgid "Space used:"
-msgstr "Espacio usado:"
+msgid "Exist are debug or crash files."
+"\n"
+"Space used:"
+msgstr "Existen archivos debug o crash."
+"\n"
+"Espacio usado:"
+
+msgid "Exist are no debug files or crash."
+msgstr "No existen archivos debug o crash."
 
 msgid "This sets the maximum number of log files that will be retained. Files in excess of this number will be deleted."
 msgstr "Esto establece el número máximo de archivos logs que se conservarán. Se eliminarán los archivos que superen este número."
