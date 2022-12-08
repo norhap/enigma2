@@ -307,6 +307,10 @@ class HotkeySetup(Screen):
 			"down": self.keyDown,
 			"left": self.keyLeft,
 			"right": self.keyRight,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
 			"menu": boundFunction(self.close, True),
 		}, -1)
 		self["NumberActions"] = NumberActionMap(["NumberActions"],
@@ -379,6 +383,9 @@ class HotkeySetup(Screen):
 			self["choosen"].setList(selected)
 		self["description"].setText(_("Press or select button and then press 'OK' for attach next function or edit attached.") if len(selected) else _("Press or select button and then press 'OK' for attach function."))
 
+	def doNothing(self):
+		pass
+
 
 class HotkeySetupSelect(Screen):
 	def __init__(self, session, key, args=None):
@@ -431,6 +438,10 @@ class HotkeySetupSelect(Screen):
 			"pageDown": self.toggleMode,
 			"moveUp": self.moveUp,
 			"moveDown": self.moveDown,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
 			"menu": boundFunction(self.close, True),
 		}, -1)
 		self.description(text)
@@ -579,6 +590,9 @@ class HotkeySetupSelect(Screen):
 
 	def cancelCallback(self, answer):
 		answer and self.close(None)
+
+	def doNothing(self):
+		pass
 
 
 class hotkeyActionMap(ActionMap):

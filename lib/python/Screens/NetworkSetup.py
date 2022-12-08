@@ -350,6 +350,8 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"ok": self.ok,
+			"left": self.keyLeft,
+			"right": self.keyRight
 		}, -2)
 
 		self.list = []
@@ -415,6 +417,14 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		if index < len(self.nameservers):
 			self.createConfig()
 			self.createSetup()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createConfig()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createConfig()
 
 
 class MACSettings(Setup):
@@ -510,6 +520,8 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"ok": self.ok,
+			"left": self.keyLeft,
+			"right": self.keyRight
 		}, -2)
 
 		self.list = []
@@ -603,6 +615,14 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 
 	def cancel(self):
 		self.close()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createSetup()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createSetup()
 
 
 class InetdRecovery(Screen, ConfigListScreen):
@@ -718,6 +738,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"ok": self.keySave,
+			"left": self.keyLeft,
+			"right": self.keyRight
 		}, -2)
 
 		self.list = []

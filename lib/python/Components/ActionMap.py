@@ -1,6 +1,6 @@
 from enigma import eActionMap
-
 from Tools.KeyBindings import queryKeyBinding
+from Components.config import config
 
 
 class ActionMap:
@@ -59,7 +59,7 @@ class ActionMap:
 				return res
 			return 1
 		else:
-			print(_("[ActionMap] in this context list -> '%s' -> mapto='%s' Unknown or missing, check if you need it, or is it a mapto other code part.") % (context, action))
+			print(_("[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'.") % (context, action))
 			return 0
 
 	def destroy(self):
@@ -93,9 +93,10 @@ class HelpableActionMap(ActionMap):
 	def __init__(self, parent, contexts, actions=None, prio=0, description=None):
 		def exists(record):
 			for context in parent.helpList:
-				if record in context[2]:
-					print("[ActionMap] removed duplicity: %s %s" % (context[1], record))
-					return True
+				if context[1] != "NavigationActions":
+					if record in context[2]:
+						print("[ActionMap] removed duplicity: %s %s" % (context[1], record))
+						return True
 			return False
 
 		if isinstance(contexts, str):
@@ -104,6 +105,12 @@ class HelpableActionMap(ActionMap):
 		self.description = description
 		adict = {}
 		for context in contexts:
+			if config.usage.actionLeftRightToPageUpPageDown.value and context == "DirectionActions":
+				copyLeft = "left" not in actions and "pageUp" in actions
+				copyRight = "right" not in actions and "pageDown" in actions
+			else:
+				copyLeft = False
+				copyRight = False
 			alist = []
 			for (action, funchelp) in actions.items():
 				# Check if this is a tuple.
@@ -117,6 +124,12 @@ class HelpableActionMap(ActionMap):
 						if not exists((action, None)):
 							alist.append((action, None))
 					adict[action] = funchelp
+				if copyLeft and action == "pageUp":
+					alist.append(("left", funchelp[1]))
+					adict["left"] = funchelp[0]
+				if copyRight and action == "pageDown":
+					alist.append(("right", funchelp[1]))
+					adict["right"] = funchelp[0]
 			parent.helpList.append((self, context, alist))
 		ActionMap.__init__(self, contexts, adict, prio)
 

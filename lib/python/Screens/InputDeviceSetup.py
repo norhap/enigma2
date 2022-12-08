@@ -167,6 +167,8 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 				"cancel": self.keyCancel,
 				"save": self.apply,
 				"menu": self.closeRecursive,
+				"left": self.keyLeft,
+				"right": self.keyRight
 			}, -2)
 
 		self["key_red"] = StaticText(_("Cancel"))
@@ -272,6 +274,14 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 		for x in self.onChangedEntry:
 			x()
 		self.selectionChanged()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createSetup()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createSetup()
 
 
 class RemoteControlType(ConfigListScreen, Screen):

@@ -440,6 +440,12 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			"ok": (self.itemSelected, _("Select movie"))
 		}, prio=0)
 		self["DirectionActions"] = HelpableActionMap(self, ["DirectionActions"], {
+			"left": self.pageUp,
+			"right": self.pageDown,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
 			"up": (self.keyUp, _("Go up the list")),
 			"down": (self.keyDown, _("Go down the list"))
 		}, prio=-2)
@@ -641,6 +647,21 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self["list"].moveToFirst()
 		else:
 			self["list"].moveDown()
+
+	def pageUp(self):
+		if self["list"].getCurrentIndex() < 1:
+			self["list"].moveToLast()
+		else:
+			self["list"].instance.moveSelection(self["list"].instance.pageUp)
+
+	def pageDown(self):
+		if self["list"].getCurrentIndex() == len(self["list"]) - 1:
+			self["list"].moveToFirst()
+		else:
+			self["list"].instance.moveSelection(self["list"].instance.pageDown)
+
+	def doNothing(self):
+		pass
 
 	def moveToFirstOrFirstFile(self):
 		if self.list.getCurrentIndex() <= self.list.firstFileEntry:  # selection above or on first movie

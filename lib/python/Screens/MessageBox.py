@@ -53,7 +53,7 @@ class MessageBox(Screen, HelpableScreen):
 			enableInput = False
 		if enableInput:
 			if self.list:
-				self["actions"] = HelpableActionMap(self, ["MsgBoxActions", "NavigationActions"], {
+				self["actions"] = HelpableActionMap(self, ["MsgBoxActions", "NavigationActions", "DirectionActions"], {
 					"cancel": (self.cancel, _("Select the No / False response")),
 					"select": (self.select, _("Return the current selection response")),
 					"selectOk": (self.selectOk, _("Select the Yes / True response")),

@@ -30,6 +30,8 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			"red": self.cancel,
 			"cancel": self.cancel,
 			"ok": self.ok,
+			"left": self.keyLeft,
+			"right": self.keyRight
 		}, -2)
 
 	def createSetup(self):
@@ -181,6 +183,14 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		if remaining > 0:
 			return remaining + config.recording.margin_after.value * 60
 		return remaining
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createSetup()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createSetup()
 
 
 def isNextWakeupTime(standby_timer=False):

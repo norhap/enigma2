@@ -68,6 +68,10 @@ class SkinSelector(Screen, HelpableScreen):
 		self["key_green"] = StaticText(_("Save"))
 		self["description"] = StaticText(_("Please wait... Loading list..."))
 		self["actions"] = HelpableNumberActionMap(self, ["OkActions", "DirectionActions", "ColorActions", "ConfigListActions"], {
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
 			"ok": (self.save, _("Save and activate the currently selected skin")),
 			"cancel": (self.cancel, _("Cancel any changes to the currently active skin")),
 			"close": (self.cancelRecursive, _("Cancel any changes to the currently active skin and exit all menus")),
@@ -234,6 +238,9 @@ class SkinSelector(Screen, HelpableScreen):
 		if current:
 			current = current.replace("_", " ")
 		return current
+
+	def doNothing(self):
+		pass
 
 
 class LcdSkinSelector(SkinSelector):

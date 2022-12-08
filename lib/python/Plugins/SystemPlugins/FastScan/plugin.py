@@ -166,6 +166,8 @@ class FastScanScreen(ConfigListScreen, Screen):
 			"save": self.keySave,
 			"cancel": self.keyCancel,
 			"menu": self.closeRecursive,
+			"left": self.keyLeft,
+			"right": self.keyRight
 		}, -2)
 
 		lastConfiguration = eval(config.misc.fastscan.last_configuration.value)
@@ -276,6 +278,14 @@ class FastScanScreen(ConfigListScreen, Screen):
 
 	def keyCancel(self):
 		self.close()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createSetup()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createSetup()
 
 
 class FastScanAutoScreen(FastScanScreen):

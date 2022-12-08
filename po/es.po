@@ -16992,6 +16992,12 @@ msgstr "Mostrar valor 'Por Defecto' en descripciones"
 msgid "This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description."
 msgstr "Esta opción le permite seleccionar si se muestra 'Por Defecto' para un elemento de configuración y, de ser así, dónde se muestra en relación con la descripción."
 
+msgid "Add legacy LEFT/RIGHT actions"
+msgstr "Agregar acciones IZQUIERDA/DERECHA"
+
+msgid "Select 'Yes' to enable use of the LEFT/RIGHT buttons to move PageUp/PageDown when the LEFT/RIGHT buttons are otherwise undefined. This provides legacy navigation for users who prefer it."
+msgstr "Seleccione 'Sí' para habilitar el uso de los botones IZQUIERDO/DERECHO para mover Página Arriba/Página Abajo cuando los botones IZQUIERDO/DERECHO no están definidos. Esto proporciona una navegación heredada para los usuarios que la prefieran."
+
 msgid "Date style"
 msgstr "Estilo de fecha"
 
@@ -18618,8 +18624,8 @@ msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams 
 msgid "[ActionMap] Missing actions in keymap, missing context in this list ->'%s' for mapto='%s'."
 msgstr "[ActionMap] Faltan acciones en el mapa de teclas, falta contexto en esta lista ->'%s' para mapto='%s'."
 
-msgid "[ActionMap] in this context list -> '%s' -> mapto='%s' Unknown or missing, check if you need it, or is it a mapto other code part."
-msgstr "[ActionMap] en esta lista de contexto '%s' -> mapto='%s' Desconocido o faltante, compruebe si lo necesita o si es un mapa de otra parte del código."
+msgid "[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'."
+msgstr "[ActionMap] en esta lista de contexto '%s' -> mapto='%s' no está definido en este código 'faltante'."
 
 msgid "Scan and search files and extensions in subdirs"
 msgstr "Escanea y busca archivos y extensiones en subdirectorios"

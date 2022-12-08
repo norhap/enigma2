@@ -43,7 +43,11 @@ class TimerEntry(Screen, ConfigListScreen):
 			"volumeUp": self.incrementStart,
 			"volumeDown": self.decrementStart,
 			"size+": self.incrementEnd,
-			"size-": self.decrementEnd
+			"size-": self.decrementEnd,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.moveUp,
+			"down": self.moveDown
 		}, -2)
 
 		self.list = []
@@ -334,3 +338,17 @@ class TimerEntry(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		self.close((False,))
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.createConfig()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.createConfig()
+
+	def moveUp(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveUp)
+
+	def moveDown(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveDown)

@@ -45,7 +45,7 @@ class ChoiceBox(Screen, HelpableScreen):
 				self.skinName.insert(0, skinName)
 			else:
 				self.skinName = skinName + self.skinName
-		self["actions"] = HelpableNumberActionMap(self, ["ChoiceBoxActions", "NumberActions", "ColorActions", "NavigationActions", "MenuActions"], {
+		self["actions"] = HelpableNumberActionMap(self, ["ChoiceBoxActions", "NumberActions", "ColorActions", "NavigationActions", "MenuActions", "DirectionActions"], {
 			"back": (self.keyCancel, _("Cancel the action selection and exit")),
 			"select": (self.keySelect, _("Run the currently highlighted action")),
 			"1": (self.keyNumberGlobal, _("Run the numbered action")),
@@ -58,6 +58,10 @@ class ChoiceBox(Screen, HelpableScreen):
 			"8": (self.keyNumberGlobal, _("Run the numbered action")),
 			"9": (self.keyNumberGlobal, _("Run the numbered action")),
 			"0": (self.keyNumberGlobal, _("Run the numbered action")),
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
 			"menu": self.KeyMenu,
 			"red": (self.keyRed, _("Run the RED action")),
 			"green": (self.keyGreen, _("Run the GREEN action")),
@@ -156,6 +160,9 @@ class ChoiceBox(Screen, HelpableScreen):
 
 	def createSummary(self):
 		return ChoiceBoxSummary
+
+	def doNothing(self):
+		pass
 
 
 class ChoiceBoxSummary(ScreenSummary):
