@@ -55,6 +55,8 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 			"cancel": self.cancel,
 			"up": self.keyUp,
 			"down": self.keyDown,
+			"upRepeated": self.keyUp,
+			"downRepeated": self.keyDown,
 			"left": self.keyLeft,
 			"right": self.keyRight,
 			"upUp": self.doNothing,

@@ -442,10 +442,14 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["DirectionActions"] = HelpableActionMap(self, ["DirectionActions"], {
 			"left": self.pageUp,
 			"right": self.pageDown,
+			"leftRepeated": self.pageUp,
+			"rightRepeated": self.pageDown,
 			"upUp": self.doNothing,
 			"downUp": self.doNothing,
 			"rightUp": self.doNothing,
 			"leftUp": self.doNothing,
+			"upRepeated": self.keyUp,
+			"downRepeated": self.keyDown,
 			"up": (self.keyUp, _("Go up the list")),
 			"down": (self.keyDown, _("Go down the list"))
 		}, prio=-2)
