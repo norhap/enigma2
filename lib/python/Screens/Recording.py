@@ -100,15 +100,15 @@ class RecordingSettings(Setup):
 			green = self.greenText
 		elif not isdir(path):
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Directory '%s' does not exist!") % path
+			footnote = _("'%s' does not exist") % path
 			green = ""
 		elif stat(path).st_dev in self.inhibitDevs:
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Flash directory '%s' not allowed!") % path
+			footnote = _("'%s'= Internal Flash. It is not a storage device") % path
 			green = ""
 		elif not fileAccess(path, "w"):
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("Directory '%s' not writable!") % path
+			footnote = _("'%s' not writeable") % path
 			green = ""
 		else:
 			self.errorItem = -1
