@@ -184,14 +184,6 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 			return remaining + config.recording.margin_after.value * 60
 		return remaining
 
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.createSetup()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.createSetup()
-
 
 def isNextWakeupTime(standby_timer=False):
 	wakeup_enabled = config.usage.wakeup_enabled.value

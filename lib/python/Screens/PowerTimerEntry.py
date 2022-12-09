@@ -339,14 +339,6 @@ class TimerEntry(Screen, ConfigListScreen):
 	def keyCancel(self):
 		self.close((False,))
 
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.createConfig()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.createConfig()
-
 	def moveUp(self):
 		self["config"].instance.moveSelection(self["config"].instance.moveUp)
 

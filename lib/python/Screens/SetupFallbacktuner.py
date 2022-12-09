@@ -274,8 +274,8 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
+		self.createConfig()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
+		self.createConfig()

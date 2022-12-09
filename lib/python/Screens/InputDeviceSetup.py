@@ -275,14 +275,6 @@ class InputDeviceSetup(ConfigListScreen, Screen):
 			x()
 		self.selectionChanged()
 
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.createSetup()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.createSetup()
-
 
 class RemoteControlType(ConfigListScreen, Screen):
 	rcList = [
