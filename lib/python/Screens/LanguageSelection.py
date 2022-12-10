@@ -59,13 +59,15 @@ class LanguageSelection(Screen):
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
+			"left": self.pageUp,
+			"right": self.pageDown,
 			"ok": self.save,
 			"cancel": self.cancel,
 			"red": self.cancel,
 			"green": self.save,
 			"yellow": self.installLanguage,
 			"blue": self.delLang,
-			"menu": self.installLanguage,
+			"menu": self.installLanguage
 		}, -1)
 
 	def updateCache(self):
@@ -205,6 +207,12 @@ class LanguageSelection(Screen):
 
 	def changed(self):
 		self.run(justlocal=True)
+
+	def pageUp(self):
+		self["languages"].pageUp()
+
+	def pageDown(self):
+		self["languages"].pageDown()
 
 
 class LanguageWizard(LanguageSelection, Rc):
