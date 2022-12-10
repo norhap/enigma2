@@ -108,7 +108,8 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 
 		# Actions that will reset QuickSelect...
 		self["locationActions"] = LocationBoxActionMap(self, ["LocationBoxActions", "NavigationActions"], {
-			"enter": (self.enter, (_("Change directory / Select bookmark"), _("If the upper panel is active pressing OK will change the current directory.  If the lower panel is active pressing OK will select the current bookmark and exit."))),
+			"select": self.enter,
+			"enter": (self.enter, (_("Change directory / Select bookmark"), _("If the upper panel is active pressing GREEN or OK will change the current directory.  If the lower panel is active pressing GREEN or OK will select the current bookmark and exit."))),
 			"cancel": (self.cancel, _("Cancel the location selection")),
 			"menu": (self.showMenu, _("Display context menu")),
 			"left": (self.switchToFileList, _("Switch to directories panel")),
