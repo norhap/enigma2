@@ -83,7 +83,9 @@ class InformationBase(Screen, HelpableScreen):
 			"up": (self["information"].pageUp, _("Move up a screen")),
 			"down": (self["information"].pageDown, _("Move down a screen")),
 			"pageDown": (self["information"].pageDown, _("Move down a screen")),
-			"bottom": (self["information"].moveBottom, _("Move to last line / screen"))
+			"bottom": (self["information"].moveBottom, _("Move to last line / screen")),
+			"right": self.displayInformation,
+			"left": self.displayInformation,
 		}, prio=0, description=_("Common Information Actions"))
 		if isfile(resolveFilename(SCOPE_PLUGINS, pathjoin("boxes", "%s.png" % (getBoxType())))):
 			self["key_info"] = StaticText(_("INFO"))
@@ -416,8 +418,14 @@ class About(Screen):
 			"green": self.showTranslationInfo,
 			"blue": self.showMemoryInfo,
 			"yellow": self.showTroubleshoot,
-			"up": self["AboutScrollLabel"].pageUp,
-			"down": self["AboutScrollLabel"].pageDown
+			"up": self.doNothing,
+			"down": self.doNothing,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"right": self.doNothing,
+			"left": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing
 		})
 
 	def showTranslationInfo(self):
@@ -431,6 +439,9 @@ class About(Screen):
 
 	def showTroubleshoot(self):
 		self.session.open(Troubleshoot)
+
+	def doNothing(self):
+		pass
 
 
 class BenchmarkInformation(InformationBase):
@@ -582,9 +593,18 @@ class Geolocation(Screen):
 			"red": self.close,
 			"ok": self.close,
 			"cancel": self.close,
-			"up": self["AboutScrollLabel"].pageUp,
-			"down": self["AboutScrollLabel"].pageDown
+			"up": self.doNothing,
+			"down": self.doNothing,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"right": self.doNothing,
+			"left": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing
 		})
+
+	def doNothing(self):
+		pass
 
 
 class TunerInformation(InformationBase):
@@ -690,6 +710,8 @@ class Devices(Screen):
 			"cancel": self.close,
 			"red": self.close,
 			"save": self.close,
+			"right": self.doNothing,
+			"left": self.doNothing
 		})
 		self.onLayoutFinish.append(self.populate)
 
@@ -755,6 +777,9 @@ class Devices(Screen):
 			self["mounts"].setText(_('none'))
 		self["actions"].setEnabled(True)
 
+	def doNothing(self):
+		pass
+
 
 class SystemNetworkInfo(Screen):
 	def __init__(self, session):
@@ -793,8 +818,16 @@ class SystemNetworkInfo(Screen):
 		self["actions"] = ActionMap(["SetupActions", "ColorActionsAbout", "DirectionActions"], {
 			"cancel": self.close,
 			"ok": self.close,
-			"up": self["AboutScrollLabel"].pageUp,
-			"down": self["AboutScrollLabel"].pageDown
+			"up": self.doNothing,
+			"down": self.doNothing,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"right": self.doNothing,
+			"left": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
+			"downRepeated": self.doNothing,
+			"upRepeated": self.doNothing
 		})
 
 		self.iface = None
@@ -1048,6 +1081,9 @@ class SystemNetworkInfo(Screen):
 		except:
 			pass
 
+	def doNothing(self):
+		pass
+
 
 class SystemMemoryInfo(Screen):
 	def __init__(self, session):
@@ -1067,7 +1103,7 @@ class SystemMemoryInfo(Screen):
 		self["actions"] = ActionMap(["SetupActions", "ColorActionsAbout"], {
 			"cancel": self.close,
 			"ok": self.close,
-			"red": self.close,
+			"red": self.close
 		})
 
 		out_lines = open("/proc/meminfo").readlines()
@@ -1152,7 +1188,12 @@ class TranslationInfo(Screen):
 		self["actions"] = ActionMap(["SetupActions"], {
 			"cancel": self.close,
 			"ok": self.close,
+			"right": self.doNothing,
+			"left": self.doNothing
 		})
+
+	def doNothing(self):
+		pass
 
 
 class CommitInfoDevelop(Screen):
@@ -1178,7 +1219,16 @@ class CommitInfoDevelop(Screen):
 			"up": self["AboutScrollLabel"].pageUp,
 			"down": self["AboutScrollLabel"].pageDown,
 			"left": self.left,
-			"right": self.right
+			"right": self.right,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"upUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
+			"downRepeated": self.doNothing,
+			"upRepeated": self.doNothing,
+			"leftRepeated": self.doNothing,
+			"rightRepeated": self.doNothing
 		})
 		try:
 			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
@@ -1239,6 +1289,9 @@ class CommitInfoDevelop(Screen):
 	def right(self):
 		self.project = self.project != len(self.projects) - 1 and self.project + 1 or 0
 		self.updateCommitLogs()
+
+	def doNothing(self):
+		pass
 
 
 class MemoryInfo(Screen):
@@ -1361,6 +1414,14 @@ class Troubleshoot(Screen):
 			"right": self.right,
 			"red": self.red,
 			"green": self.green,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"rightUp": self.doNothing,
+			"leftUp": self.doNothing,
+			"downRepeated": self.doNothing,
+			"upRepeated": self.doNothing,
+			"leftRepeated": self.doNothing,
+			"rightRepeated": self.doNothing
 		})
 
 		self.container = eConsoleAppContainer()
@@ -1474,3 +1535,6 @@ class Troubleshoot(Screen):
 	def updateKeys(self):
 		self["key_red"].setText(_("Close") if self.commandIndex < self.numberOfCommands else _("Remove all logfiles"))
 		self["key_green"].setText(_("Refresh") if self.commandIndex < self.numberOfCommands else _("Remove this logfile"))
+
+	def doNothing(self):
+		pass
