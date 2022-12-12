@@ -145,6 +145,10 @@ class LogManager(Screen):
 			self["key_red"] = StaticText(_("Debug Logs"))
 			self["key_green"] = StaticText(_("View"))
 			self["key_yellow"] = StaticText(_("Delete"))
+		else:
+			self["key_red"] = StaticText("")
+			self["key_green"] = StaticText("")
+			self["key_yellow"] = StaticText("")
 		self.onChangedEntry = []
 		self.sentsingle = ""
 		self.selectedFiles = config.logmanager.sentfiles.value
