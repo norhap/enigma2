@@ -236,6 +236,8 @@ class LogManager(Screen):
 				self.sel = None
 			if self.sel:
 				self.session.open(LogManagerViewLog, self.sel[0])
+			else:
+				self.session.open(MessageBox, _("You have not selected any logs to view."), MessageBox.TYPE_INFO, timeout=10)
 
 	def deletelog(self):
 		if self.logs:

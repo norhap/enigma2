@@ -17521,6 +17521,9 @@ msgstr "Está seguro de que desea eliminar este log?\n"
 msgid "You have not selected any logs to delete."
 msgstr "No ha seleccionado ningún log para eliminar."
 
+msgid "You have not selected any logs to view."
+msgstr "No ha seleccionado ningún log para ver."
+
 msgid "Are you sure you want to delete all the selected logs:\n"
 msgstr "Está seguro de que desea eliminar todos los logs seleccionados:\n"
 
