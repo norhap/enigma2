@@ -5,7 +5,7 @@ from os.path import join, getsize, isdir, exists
 from time import time
 import Components.Task
 from Components.ActionMap import ActionMap
-from Components.Button import Button
+from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile
 from Components.FileList import FileList, MultiFileSelectList
 from Components.GUIComponent import GUIComponent
@@ -142,9 +142,9 @@ class LogManager(Screen):
 			"up": self.up
 		}, -1)
 		if self.logs:
-			self["key_red"] = Button(_("Debug Logs"))
-			self["key_green"] = Button(_("View"))
-			self["key_yellow"] = Button(_("Delete"))
+			self["key_red"] = StaticText(_("Debug Logs"))
+			self["key_green"] = StaticText(_("View"))
+			self["key_yellow"] = StaticText(_("Delete"))
 		self.onChangedEntry = []
 		self.sentsingle = ""
 		self.selectedFiles = config.logmanager.sentfiles.value
@@ -211,19 +211,22 @@ class LogManager(Screen):
 			self.selectedFiles = self["list"].getSelectedList()
 
 	def changelogtype(self):
-		if self.logs:
-			self["LogsSize"].update(config.crash.debugPath.value)
-			import re
-			if self.logtype == "crashlogs":
-				self["key_red"].setText(_("Crash Logs"))
-				self.logtype = "debuglogs"
-				self.matchingPattern = "enigma2_debug_"
-			else:
-				self["key_red"].setText(_("Debug Logs"))
-				self.logtype = "crashlogs"
-				self.matchingPattern = "enigma2_crash_"
-			self["list"].matchingPattern = re.compile(self.matchingPattern)
-			self["list"].changeDir(self.defaultDir)
+		self["LogsSize"].update(config.crash.debugPath.value)
+		import re
+		if self.logtype == "crashlogs":
+			self["key_red"].setText(_("Crash Logs"))
+			self.logtype = "debuglogs"
+			self.matchingPattern = "enigma2_debug_"
+		else:
+			self["key_red"].setText(_("Debug Logs"))
+			self.logtype = "crashlogs"
+			self.matchingPattern = "enigma2_crash_"
+		self["list"].matchingPattern = re.compile(self.matchingPattern)
+		self["list"].changeDir(self.defaultDir)
+		if not listdir(config.crash.debugPath.value):
+			self["key_red"].setText("")
+			self["key_green"].setText("")
+			self["key_yellow"].setText("")
 
 	def showLog(self):
 		if self.logs:
@@ -309,10 +312,10 @@ class LogManagerViewLog(Screen):
 			"right": self["list"].pageDown,
 			"left": self["list"].pageUp
 		}, -2)
-		self["key_red"] = Button(_("First page"))
-		self["key_green"] = Button(_("Page forward"))
-		self["key_yellow"] = Button(_("Page back"))
-		self["key_blue"] = Button(_("Last page"))
+		self["key_red"] = StaticText(_("First page"))
+		self["key_green"] = StaticText(_("Page forward"))
+		self["key_yellow"] = StaticText(_("Page back"))
+		self["key_blue"] = StaticText(_("Last page"))
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
