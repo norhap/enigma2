@@ -128,7 +128,7 @@ class LogManagerPoller:
 class LogManager(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.logs = listdir("/home/root/logs")
+		self.logs = listdir(config.crash.debugPath.value)
 		self.logtype = "crashlogs"
 		self["myactions"] = ActionMap(["ColorActions", "OkCancelActions", "DirectionActions"], {
 			"ok": self.changeSelectionState,
@@ -269,8 +269,10 @@ class LogManager(Screen):
 		if answer is True:
 			self.selectedFiles = self["list"].getSelectedList()
 			self["list"].instance.moveSelectionTo(0)
-			for f in self.selectedFiles:
-				remove(f)
+			for file in self.selectedFiles:
+				if exists(file):
+					remove(file)
+					self.changelogtype()
 			config.logmanager.sentfiles.setValue("")
 			config.logmanager.sentfiles.save()
 			configfile.save()
@@ -282,6 +284,7 @@ class LogManager(Screen):
 			self["list"].instance.moveSelectionTo(0)
 			if exists(self.defaultDir + self.sel[0]):
 				remove(self.defaultDir + self.sel[0])
+				self.changelogtype()
 			self["list"].changeDir(self.defaultDir)
 			self["LogsSize"].update(config.crash.debugPath.value)
 
@@ -376,7 +379,7 @@ class LogInfo(VariableText, GUIComponent):
 	def __init__(self, path, type, update=True):
 		GUIComponent.__init__(self)
 		VariableText.__init__(self)
-		self.logs = listdir("/home/root/logs")
+		self.logs = listdir(path)
 		self.type = type
 # 		self.path = config.crash.debugPath.value
 		if update:
@@ -396,7 +399,7 @@ class LogInfo(VariableText, GUIComponent):
 					total_size = "%d MB" % (total_size >> 20)
 				else:
 					total_size = "%d GB" % (total_size >> 30)
-				self.setText(_("Exist are debug or crash files.\nSpace used:") + " " + total_size) if self.logs else self.setText(_("Exist are no debug files or crash."))
+				self.setText(_("Exist are debug or crash files.\nSpace used:") + " " + total_size) if self.logs and get_size(path) > 0 else self.setText(_("Exist are no debug files or crash."))
 			except:
 				# occurs when f_blocks is 0 or a similar error
 				self.setText("-?-")
