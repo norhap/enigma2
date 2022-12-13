@@ -7,7 +7,7 @@ from boxbranding import getDisplayType, getImageArch, getHaveHDMIinFHD, getHaveH
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform
 
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
-from Tools.StbHardware import getBrand
+from Tools.StbHardware import getBrand, getWakeOnLANType
 
 SystemInfo = {}
 SystemInfo["HasRootSubdir"] = False
@@ -244,6 +244,7 @@ SystemInfo["Power4x7Standby"] = fileCheck("/proc/stb/fp/power4x7standby")
 SystemInfo["Power4x7Suspend"] = fileCheck("/proc/stb/fp/power4x7suspend")
 SystemInfo["MaxPIPSize"] = model in ("hd51", "h7", "vs1500", "e4hdultra") and (360, 288) or (540, 432)
 SystemInfo["WakeOnLAN"] = fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol")
+SystemInfo["WakeOnLANType"] = getWakeOnLANType(SystemInfo["WakeOnLAN"]) if SystemInfo["WakeOnLAN"] else False
 SystemInfo["HasExternalPIP"] = platform != "1genxt" and fileCheck("/proc/stb/vmpeg/1/external")
 SystemInfo["VideoDestinationConfigurable"] = fileExists("/proc/stb/vmpeg/0/dst_left")
 SystemInfo["hasPIPVisibleProc"] = fileCheck("/proc/stb/vmpeg/1/visible")

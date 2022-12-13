@@ -3,7 +3,6 @@ from os import makedirs, remove
 from os.path import exists, isfile, islink, join as pathjoin, normpath
 from time import mktime
 
-from boxbranding import getHaveWOL
 from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache, getBoxType
 
 from skin import parameters
@@ -1094,12 +1093,9 @@ def InitUsageConfig():
 		config.usage.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
 		config.usage.fanspeed.addNotifier(fanSpeedChanged)
 
-	if SystemInfo["WakeOnLAN"] or getHaveWOL() == "True":
+	if SystemInfo["WakeOnLAN"]:
 		def wakeOnLANChanged(configElement):
-			if "fp" in SystemInfo["WakeOnLAN"]:
-				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "enable" or "disable")
-			else:
-				open(SystemInfo["WakeOnLAN"], "w").write(configElement.value and "on" or "off")
+			open(SystemInfo["WakeOnLAN"], "w").write(SystemInfo["WakeOnLANType"][configElement.value])
 		config.usage.wakeOnLAN = ConfigYesNo(default=False)
 		config.usage.wakeOnLAN.addNotifier(wakeOnLANChanged)
 

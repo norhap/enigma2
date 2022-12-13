@@ -2,11 +2,19 @@ from os.path import isfile, join as pathjoin
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, gmtime
-from Tools.Directories import fileExists, resolveFilename, SCOPE_SKINS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_SKINS, fileReadLine
 from boxbranding import getMachineName, getBoxType, getRCName
 
 INFO_TYPE = "/proc/stb/info/type"
 INFO_SUBTYPE = "/proc/stb/info/subtype"
+
+
+def getWakeOnLANType(fileName):
+	value = ""
+	if fileName:
+		value = fileReadLine(fileName)
+	onOff = ("off", "on")
+	return onOff if value in onOff else ("disable", "enable")
 
 
 def getProcInfoTypeTuner():
