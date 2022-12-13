@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
+from os.path import exists
 from Tools.Directories import SCOPE_SKINS, resolveFilename
 from boxbranding import getRCName
 
@@ -11,7 +11,7 @@ class RcModel:
 	def getRcFile(self, ext):
 		remote = getRCName()
 		f = resolveFilename(SCOPE_SKINS, 'rc_models/' + remote + '.' + ext)
-		if not os.path.exists(f):
+		if not exists(f):
 			f = resolveFilename(SCOPE_SKINS, 'rc_models/dmm1.' + ext)
 		return f
 

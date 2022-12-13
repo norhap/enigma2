@@ -18804,3 +18804,9 @@ msgstr "Ártico"
 
 msgid "Atlantic"
 msgstr "Atlántico"
+
+msgid "I55SE/H7/H9/H9SE/H9COMBO/H9COMBOSE/H10/H11 new Model"
+msgstr "I55SE/H7/H9/H9SE/H9COMBO/H9COMBOSE/H10/H11 Modelo nuevo"
+
+msgid "Zgemma H.S/H.2S/H.2H/H5/H7 old Model"
+msgstr "Zgemma H.S/H.2S/H.2H/H5/H7 Modelo nuevo"
