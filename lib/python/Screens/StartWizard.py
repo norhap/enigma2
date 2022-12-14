@@ -141,7 +141,7 @@ class AutoInstallWizard(Screen):
 
 	def dataAvail(self, data):
 		if isinstance(data, bytes):
-			data = data.decode()
+			data = data.decode("UTF-8", "ignore")
 		self["AboutScrollLabel"].appendText(data)
 		self.logfile.write(data)
 

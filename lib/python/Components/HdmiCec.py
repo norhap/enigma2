@@ -759,7 +759,7 @@ class HdmiCec:
 					try:
 						data = data.decode("UTF-8", "ignore")
 					except:
-						data = data.encode("ISO-8859-1")
+						data = data.encode("ISO-8859-1", "ignore")
 				if config.misc.DeepStandby.value: # no delay for messages before go in to deep-standby
 					if config.hdmicec.debug.value:
 						self.debugTx(address, cmd, data)
@@ -1355,7 +1355,7 @@ class HdmiCec:
 								try:
 									data = data.decode("UTF-8", "ignore")
 								except:
-									data = data.encode("UTF-8", "ignore")
+									data = data.encode("ISO-8859-1", "ignore")
 
 							if config.hdmicec.debug.value:
 								self.debugTx(address, cmd, data)

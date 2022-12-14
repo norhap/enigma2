@@ -3816,7 +3816,7 @@ class NetworkPassword(ConfigListScreen, Screen):
 			self.close()
 
 	def dataAvail(self, data):
-		data = data.decode()
+		data = data.decode("UTF-8", "ignore")
 		self.output_line += data
 		while True:
 			i = self.output_line.find('\n')

@@ -202,10 +202,10 @@ class Task(object):
 		pass
 
 	def processStdout(self, data):
-		self.processOutput(data.decode())
+		self.processOutput(data.decode("UTF-8", "ignore"))
 
 	def processStderr(self, data):
-		self.processOutput(data.decode())
+		self.processOutput(data.decode("UTF-8", "ignore"))
 
 	def processOutput(self, data):
 		self.output_line += data
