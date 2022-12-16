@@ -33,7 +33,6 @@ install_PYTHON = \
 	Input.py \
 	InputDevice.py \
 	InputHotplug.py \
-	Keyboard.py \
 	Label.py \
 	Language.py \
 	Language_cache.py \

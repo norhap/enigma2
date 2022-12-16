@@ -10,7 +10,7 @@ from Components.About import GetIPsFromNetworkInterfaces
 from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config, ConfigOnOff
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager
-from Components.Keyboard import keyboard
+from keyids import KEYIDS
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import SystemInfo
@@ -81,13 +81,6 @@ def InitUsageConfig():
 	config.usage.correct_invalid_epgdata.addNotifier(correctInvalidEPGDataChange)
 
 	config.usage.alternative_number_mode = ConfigYesNo(default=False)
-
-	def keyboardNotifier(configElement):
-		keyboard.activateKeyboardMap(configElement.index)
-
-	config.keyboard = ConfigSubsection()
-	config.keyboard.keymap = ConfigSelection(default=keyboard.getDefaultKeyboardMap(), choices=keyboard.getKeyboardMaplist())
-	config.keyboard.keymap.addNotifier(keyboardNotifier)
 
 	config.parental = ConfigSubsection()
 	config.parental.lock = ConfigOnOff(default=False)
@@ -495,6 +488,21 @@ def InitUsageConfig():
 	config.usage.standby_to_shutdown_timer_blocktime = ConfigYesNo(default=False)
 	config.usage.standby_to_shutdown_timer_blocktime_begin = ConfigClock(default=mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
 	config.usage.standby_to_shutdown_timer_blocktime_end = ConfigClock(default=mktime((1970, 1, 1, 23, 0, 0, 0, 0, 0)))
+
+	config.usage.long_press_emulation_key = ConfigSelection(default="0", choices=[
+		("0", _("None")),
+		(str(KEYIDS["KEY_TV"]), _("TV")),
+		(str(KEYIDS["KEY_RADIO"]), _("Radio")),
+		(str(KEYIDS["KEY_AUDIO"]), _("Audio")),
+		(str(KEYIDS["KEY_VIDEO"]), _("List Fav")),
+		(str(KEYIDS["KEY_HOME"]), _("Home")),
+		(str(KEYIDS["KEY_END"]), _("End")),
+		(str(KEYIDS["KEY_HELP"]), _("Help")),
+		(str(KEYIDS["KEY_INFO"]), _("Info (EPG)")),
+		(str(KEYIDS["KEY_TEXT"]), _("Teletext")),
+		(str(KEYIDS["KEY_SUBTITLE"]), _("Subtitle")),
+		(str(KEYIDS["KEY_FAVORITES"]), _("Favorites"))
+	])
 
 	choicelist = [("0", _("Disabled"))]
 	for m in (1, 5, 10, 15, 30, 60):

@@ -16,6 +16,7 @@ dist_pkgdata_DATA = \
 	otv_06400000_00a9_0003.dict \
 	radio.mvi \
 	rcpositions.xml \
+	remotes.xml \
 	setup.xml \
 	skin_subtitles.xml \
 	startwizard.xml \

@@ -370,9 +370,7 @@ def queryKeyBinding(context, action):
 
 
 def getKeyDescription(key):
-	# rcType = config.misc.inputdevices.rcType.value  # This is a proposed new config location.
-	rcType = config.plugins.remotecontroltype.rctype.value
-	# print("[KeyBindings] RC type is '%s'." % rcType)
+	rcType = config.inputDevices.rcType.value
 	if rcType == 14:  # XP1000
 		idx = 3
 	elif rcType == 18:  # F1

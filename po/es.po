@@ -2513,8 +2513,56 @@ msgstr "Salir de EPG"
 msgid "Exit editor"
 msgstr "Salir del editor"
 
-msgid "Exit input device selection."
-msgstr "Salir de selección de dispositivo de entrada."
+msgid "Select Input Device"
+msgstr "Seleccionar Dispositivo de Entrada"
+
+msgid "Select input device"
+msgstr "Seleccionar dispositivo de entrada"
+
+msgid "Exit input device selection"
+msgstr "Salir de la selección de dispositivo de entrada"
+
+msgid "Exit input device selection and close all menus"
+msgstr "Salir de la selección del dispositivo de entrada y cerrar todos los menús"
+
+msgid "Input Device Actions"
+msgstr "Acciones del dispositivo de entrada"
+
+msgid "Press OK to edit the settings of the selected device."
+msgstr "Pulse OK para editar la configuración del dispositivo seleccionado."
+
+msgid "Change device settings"
+msgstr "Cambiar la configuración del dispositivo"
+
+msgid "Select 'Yes' to enable editing of this device's settings. Selecting 'No' resets the devices settings to their default values."
+msgstr "Seleccione 'Sí' para habilitar la edición de la configuración de este dispositivo. Seleccionar 'No' restablece la configuración de los dispositivos a sus valores predeterminados."
+
+msgid "Device name"
+msgstr "Nombre dispositivo"
+
+msgid "Enter a new name for this device."
+msgstr "Introduzca un nuevo nombre para este dispositivo."
+
+msgid "Delay before key repeat starts (ms)"
+msgstr "Retraso antes de que comience la repetición de tecla (milisegundos)"
+
+msgid "Select the time delay before the button starts repeating."
+msgstr "Seleccione el tiempo de retraso antes de que el botón comience a repetirse."
+
+msgid "Interval between keys when repeating (ms)"
+msgstr "Intervalo entre teclas al repetir (milisegundos)"
+
+msgid "Select the time delay between each repeat of the button."
+msgstr "Seleccione el tiempo de retraso entre cada repetición del botón."
+
+msgid "Input Device Driver Setup"
+msgstr "Ajustes Entrada Dispositivos"
+
+msgid "Use these input device settings for '%s' (%s)?"
+msgstr "Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"
+
+msgid "Is the remote control working okay?"
+msgstr "Funciona bien el mando a distancia?"
 
 msgid "Exit media player?"
 msgstr "Salir del reproductor?"
@@ -3564,9 +3612,6 @@ msgstr "Iraq"
 msgid "Ireland"
 msgstr "Irlanda"
 
-msgid "Is this setting ok?"
-msgstr "¿Está bien esta configuración?"
-
 msgid "Is this video mode ok?"
 msgstr "¿Está bien este modo de video?"
 
@@ -3774,6 +3819,21 @@ msgstr "Títulos vinculados con un menú de DVD"
 
 msgid "Mode PiP"
 msgstr "Modo PiP"
+
+msgid "List Fav"
+msgstr "Lista Favoritos"
+
+msgid "End"
+msgstr "Fin"
+
+msgid "Teletext"
+msgstr "Teletexto"
+
+msgid "Subtitle"
+msgstr "Subtítulo"
+
+msgid "Favorites"
+msgstr "Favoritos"
 
 msgid "List of storage devices"
 msgstr "Lista de dispositivos de almacenamiento"
@@ -5303,12 +5363,6 @@ msgstr "Recordar el PIN del servicio"
 msgid "Reminder, you have chosen to save timeshift file."
 msgstr "Recordatorio, ha elegido guardar el archivo Timeshift."
 
-msgid "Remote control type"
-msgstr "Tipo de mando a distancia"
-
-msgid "Remote control type setup"
-msgstr "Configuración del mando a distancia"
-
 msgid "Removal has completed."
 msgstr "La eliminación se ha completado."
 
@@ -5904,12 +5958,6 @@ msgstr "Seleccione qué tan rápido debe moverse el plato entre los satélites."
 
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
 msgstr "Seleccione cómo se configura la antena parabólica. es decir, plato fijo, LNB único, interruptor DiSEqC, motor, etc."
-
-msgid "Select input device"
-msgstr "Seleccionar dispositivo de entrada"
-
-msgid "Select input device."
-msgstr "Seleccionar dispositivo de entrada."
 
 msgid "Select interface"
 msgstr "Seleccionar interfaz"
@@ -7786,9 +7834,6 @@ msgstr "Usar el asistente de red para configurar el adaptador de red seleccionad
 msgid "Use the network wizard to configure your network\n"
 msgstr "Usar el asistente de configuración de red para configurar su red\n"
 
-msgid "Use these input device settings?"
-msgstr "¿Usar esos ajustes de dispositivo de entrada?"
-
 msgid "Use these settings?"
 msgstr "¿Usar esos ajustes?"
 
@@ -9644,6 +9689,24 @@ msgstr "Entrada Dispositivos"
 
 msgid "Keyboard"
 msgstr "Teclado"
+
+msgid "Keyboard / Remote Control Setup"
+msgstr "Ajustes Teclado & Mando Distancia"
+
+msgid "Keyboard mapping file to be used for keyboard input."
+msgstr "Archivo de asignación de teclado que se utilizará para la entrada de teclado."
+
+msgid "Select remote control"
+msgstr "Seleccione mando a distancia"
+
+msgid "Long press emulation with button"
+msgstr "Emulación de pulsación larga con botón"
+
+msgid "Select the remote control device to be used with the %s %s."
+msgstr "Seleccione el dispositivo del mando a distancia que se utilizará con el %s %s."
+
+msgid "Press this button to emulate a long press on a button pressed afterwards (this also overrides any other actions assigned to emulation button)."
+msgstr "Pulse este botón para emular una pulsación larga en un botón pulsado después (esto también anula cualquier otra acción asignada al botón de emulación)."
 
 msgid "Manual scan"
 msgstr "Búsqueda manual"
