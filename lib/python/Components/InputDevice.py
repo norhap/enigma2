@@ -264,7 +264,7 @@ class RemoteControl:
 					rcButtons["keyIds"].append(keyId)
 					rcButtons[keyId] = {}
 					rcButtons[keyId]["id"] = id
-					rcButtons[keyId]["label"] = button.attrib.get("label")
+					rcButtons[keyId]["label"] = button.attrib.get("label") if button.attrib.get("label") else button.attrib.get("name")
 					rcButtons[keyId]["pos"] = [int(x.strip()) for x in button.attrib.get("pos", "0").split(",")]
 					rcButtons[keyId]["title"] = button.attrib.get("title")
 					rcButtons[keyId]["shape"] = button.attrib.get("shape")

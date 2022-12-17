@@ -1,10 +1,10 @@
-import enigma
+from enigma import eActionMap
 import xml.etree.cElementTree
 
 from keyids import KEYIDS
 
 # these are only informational (for help)...
-from Tools.KeyBindings import addKeyBinding
+from Components.ActionMap import addKeyBinding
 
 
 class KeymapError(Exception):
@@ -89,7 +89,7 @@ def parseTrans(filename, actionmap, device, keys):
 
 
 def readKeymap(filename):
-	p = enigma.eActionMap.getInstance()
+	p = eActionMap.getInstance()
 	assert p
 
 	try:
@@ -121,5 +121,5 @@ def readKeymap(filename):
 
 
 def removeKeymap(filename):
-	p = enigma.eActionMap.getInstance()
+	p = eActionMap.getInstance()
 	p.unbindKeyDomain(filename)

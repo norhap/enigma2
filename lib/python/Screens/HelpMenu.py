@@ -2,6 +2,7 @@ from sys import maxsize
 
 from enigma import eActionMap
 
+from Components.InputDevice import remoteControl
 from Components.ActionMap import ActionMap
 from Components.HelpMenuList import HelpMenuList
 from Components.Label import Label
@@ -32,19 +33,18 @@ class HelpableScreen:
 
 
 class HelpMenu(Screen, Rc):
-	def __init__(self, session, list):
+	def __init__(self, session, helpList):
 		Screen.__init__(self, session)
 		Rc.__init__(self)
 		self.setTitle(_("Help"))
-		self["list"] = HelpMenuList(list, self.close, rcPos=self.getRcPositions())
+		self["list"] = HelpMenuList(helpList, self.close)
 		self["list"].onSelectionChanged.append(self.selectionChanged)
 		self["buttonlist"] = Label("")
 		self["description"] = Label("")
 		self["key_help"] = StaticText(_("HELP"))
 		self["helpActions"] = ActionMap(["HelpActions", "OkCancelActions"], {
-			"ok": self["list"].ok,
-			"select": self["list"].ok,
-			"cancel": self.close,
+			"cancel": self.close,  # self.closeHelp,
+			"select": self.selectItem,
 			"displayHelp": self.showHelp,
 			"displayHelpLong": self.showButtons
 		}, prio=-1)
@@ -60,6 +60,9 @@ class HelpMenu(Screen, Rc):
 		self.onClose.append(self.closeHelp)
 		self.onLayoutFinish.append(self.selectionChanged)
 
+	def selectItem(self):
+		self["list"].select()
+
 	def closeHelp(self):
 		eActionMap.getInstance().unbindAction("", self["list"].handleButton)
 		self["list"].onSelectionChanged.remove(self.selectionChanged)
@@ -73,24 +76,27 @@ class HelpMenu(Screen, Rc):
 			shiftButtons = []
 			buttonList = []
 			for button in selection[3]:
+				label = remoteControl.getRemoteControlKeyLabel(button[0])
+				if label is None:
+					label = _("Note: No button defined for this action!")
 				if len(button) > 1:
 					if button[1] == "SHIFT":
-						self.selectKey("SHIFT")
-						shiftButtons.append(button[0])
-					elif button[1] == "long":
-						longButtons.append(button[0])
+						self.selectKey(KEYIDS.get("KEY_SHIFT"))
+						shiftButtons.append(label)
+					elif button[1] == "LONG":
+						longButtons.append(label)
 				else:
-					baseButtons.append(button[0])
+					baseButtons.append(label)
 				self.selectKey(button[0])
 			if baseButtons:
 				buttonList.append(pgettext("Text list separator", ", ").join(sorted(baseButtons)))
 			if longButtons:
-				buttonList.append(_("Long press: %s") % pgettext("Text list separator", ", ").join(longButtons))
+				buttonList.append(_("Long press: %s") % pgettext("Text list separator", ", ").join(sorted(longButtons)))
 			if shiftButtons:
-				buttonList.append(_("Shift: %s") % pgettext("Text list separator", ", ").join(shiftButtons))
+				buttonList.append(_("Shift: %s") % pgettext("Text list separator", ", ").join(sorted(shiftButtons)))
 			self["buttonlist"].setText("; ".join(buttonList))
-			help = selection[4]
-			self["description"].text = isinstance(help, (list, tuple)) and len(help) > 1 and help[1] or ""
+			helpText = selection[4]
+			self["description"].setText(isinstance(helpText, (list, tuple)) and len(helpText) > 1 and helpText[1] or "")
 
 	def showHelp(self):
 		# MessageBox import deferred so that MessageBox's import of HelpMenu doesn't cause an import loop.

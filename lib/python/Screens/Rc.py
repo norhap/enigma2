@@ -1,5 +1,6 @@
 from xml.etree.cElementTree import ParseError, parse
-
+from Components.InputDevice import remoteControl
+from keyids import KEYIDS
 from Components.config import ConfigInteger, config
 from Components.Pixmap import MovingPixmap, Pixmap
 from Components.SystemInfo import SystemInfo
@@ -12,15 +13,27 @@ class Rc:
 	def __init__(self):
 		self["rc"] = Pixmap()
 		self.rcPosition = None
-		nSelectPics = 16
+		buttonImages = 16
 		rcHeights = (500,) * 2
 		self.selectPics = []
-		for indicator in range(nSelectPics):
+		for indicator in range(buttonImages):
 			self.selectPics.append(self.KeyIndicator(self, rcHeights, ("indicatorU%d" % indicator, "indicatorL%d" % indicator)))
-		self.rcPositions = RcPositions()
-		self.oldNSelectedKeys = self.nSelectedKeys = 0
+		self.nSelectedKeys = 0
+		self.oldNSelectedKeys = 0
 		self.clearSelectedKeys()
-		self.onLayoutFinish.append(self.initRc)
+		self.wizardConversion = {  # This dictionary converts named buttons in the Wizards to keyIds.
+			"OK": KEYIDS.get("KEY_OK"),
+			"EXIT": KEYIDS.get("KEY_EXIT"),
+			"LEFT": KEYIDS.get("KEY_LEFT"),
+			"RIGHT": KEYIDS.get("KEY_RIGHT"),
+			"UP": KEYIDS.get("KEY_UP"),
+			"DOWN": KEYIDS.get("KEY_DOWN"),
+			"RED": KEYIDS.get("KEY_RED"),
+			"GREEN": KEYIDS.get("KEY_GREEN"),
+			"YELLOW": KEYIDS.get("KEY_YELLOW"),
+			"BLUE": KEYIDS.get("KEY_BLUE")
+		}
+		self.onLayoutFinish.append(self.initRemoteControl)
 
 	class KeyIndicator:
 
@@ -34,15 +47,14 @@ class Rc:
 			self.pixmaps = []
 			for actYpos, pixmap in zip(activeYPos, pixmaps):
 				pm = self.KeyIndicatorPixmap(actYpos, pixmap)
-				# print("[Rc] KeyIndicator DEBUG: actPos='%s', pixmap='%s'." % (actYpos, pixmap))
 				owner[pixmap] = pm
 				self.pixmaps.append(pm)
 			self.pixmaps.sort(key=lambda x: x.activeYPos)
 
-		def slideTime(self, frm, to, time=20):
+		def slideTime(self, start, end, time=20):
 			if not self.pixmaps:
 				return time
-			dist = ((to[0] - frm[0]) ** 2 + (to[1] - frm[1]) ** 2) ** 0.5
+			dist = ((end[0] - start[0]) ** 2 + (end[1] - start[1]) ** 2) ** 0.5
 			slide = int(round(dist / self.pixmaps[-1].activeYPos * time))
 			return slide if slide > 0 else 1
 
@@ -67,36 +79,25 @@ class Rc:
 			for pixmap in self.pixmaps:
 				pixmap.hide()
 
-	def initRc(self):
+	def initRemoteControl(self):
 		rc = LoadPixmap(SystemInfo["RCImage"])
 		if rc:
 			self["rc"].instance.setPixmap(rc)
 			self.rcPosition = self["rc"].getPosition()
 			rcHeight = self["rc"].getSize()[1]
-		rcHeight = self["rc"].getSize()[1]
-		for selectPic in self.selectPics:
-			nBreaks = len(selectPic.pixmaps)
-			roundup = nBreaks - 1
-			n = 1
-			# print("[Rc] KeyIndicator DEBUG: nBreaks=%d, roundup=%d." % (nBreaks, roundup))
-			for pic in selectPic.pixmaps:
-				pic.activeYPos = (rcHeight * n + roundup) / nBreaks
-				n += 1
-				# print("[Rc] KeyIndicator DEBUG: n=%d, activeYPos=%d." % (n, pic.activeYPos))
+			for selectPic in self.selectPics:
+				nBreaks = len(selectPic.pixmaps)
+				roundup = nBreaks - 1
+				n = 1
+				for pic in selectPic.pixmaps:
+					pic.activeYPos = (rcHeight * n + roundup) / nBreaks
+					n += 1
 
-	def getRcPositions(self):
-		return self.rcPositions
-
-	def hideRc(self):
-		self["rc"].hide()
-		self.hideSelectPics()
-
-	def showRc(self):
-		self["rc"].show()
-
-	def selectKey(self, key):
+	def selectKey(self, keyId):
 		if self.rcPosition:
-			pos = self.rcPositions.getRcKeyPos(key)
+			if isinstance(keyId, str):  # This test looks for named buttons in the Wizards and converts them to keyIds.
+				keyId = self.wizardConversion.get(keyId, 0)
+			pos = remoteControl.getRemoteControlKeyPos(keyId)
 			if pos and self.nSelectedKeys < len(self.selectPics):
 				selectPic = self.selectPics[self.nSelectedKeys]
 				self.nSelectedKeys += 1
@@ -106,10 +107,9 @@ class Rc:
 					selectPic.moveTo(pos, self.rcPosition, time=int(config.usage.helpAnimationSpeed.value))
 
 	def clearSelectedKeys(self):
-		self.showRc()
+		self.hideSelectPics()
 		self.oldNSelectedKeys = self.nSelectedKeys
 		self.nSelectedKeys = 0
-		self.hideSelectPics()
 
 	def hideSelectPics(self):
 		for selectPic in self.selectPics:
@@ -128,52 +128,10 @@ class Rc:
 		self.hideSelectPics()
 		pixmap = self.selectPics[0].pixmaps[0]
 		pixmap.show()
+		rcPos = self["rc"].getPosition()
 		pixmap.clearPath()
-		for name in self.rcPositions.getRcKeyList():
-			pos = self.rcPositions.getRcKeyPos(name)
-			pixmap.addMovePoint(self.rcPosition[0] + pos[0], self.rcPosition[1] + pos[1], time=5)
-			pixmap.addMovePoint(self.rcPosition[0] + pos[0], self.rcPosition[1] + pos[1], time=10)
+		for keyId in remoteControl.getRemoteControlKeyList():
+			pos = remoteControl.getRemoteControlKeyPos(keyId)
+			pixmap.addMovePoint(rcPos[0] + pos[0], rcPos[1] + pos[1], time=5)
+			pixmap.addMovePoint(rcPos[0] + pos[0], rcPos[1] + pos[1], time=10)
 		pixmap.startMoving(callback)
-
-
-class RcPositions:
-	def __init__(self):
-		remoteFile = SystemInfo["RCMapping"]
-		self.rcs = {}
-		self.rc = {"names": [], "keypos": {}}
-		try:
-			with open(remoteFile, "r") as fd:  # This open gets around a possible file handle leak in Python's XML parser.
-				try:
-					rcs = parse(fd).getroot()
-					for rc in rcs:
-						id = int(rc.attrib["id"])
-						self.rcs[id] = {"names": [], "keypos": {}}
-						for key in rc:
-							name = key.attrib["name"]
-							pos = key.attrib["pos"].split(",")
-							self.rcs[id]["keypos"][name] = (int(pos[0]), int(pos[1]))
-							self.rcs[id]["names"].append(name)
-					self.rc = self.rcs[SystemInfo["RCIDNum"]]
-				except ParseError as err:
-					fd.seek(0)
-					content = fd.readlines()
-					line, column = err.position
-					print("[Rc] XML Parse Error: '%s' in '%s'!" % (err, remoteFile))
-					data = content[line - 1].replace("\t", " ").rstrip()
-					print("[Rc] XML Parse Error: '%s'" % data)
-					print("[Rc] XML Parse Error: '%s^%s'" % ("-" * column, " " * (len(data) - column - 1)))
-				except Exception as err:
-					print("[Rc] Error: Unable to parse remote control mapping data in '%s' - '%s'!" % (remoteFile, err))
-		except (IOError, OSError) as err:
-			print("[Rc] Error %d: Opening remote control mapping file '%s'! (%s)" % (err.errno, remoteFile, err.strerror))
-		except Exception as err:
-			print("[Rc] Error %d: Unexpected error opening remote control mapping file '%s'! (%s)" % (err.errno, remoteFile, err.strerror))
-
-	def getRc(self):
-		return self.rc
-
-	def getRcKeyPos(self, key):
-		return self.rc["keypos"].get(key)
-
-	def getRcKeyList(self):
-		return self.rc["names"]

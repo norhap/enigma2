@@ -17361,6 +17361,9 @@ msgstr "salir"
 msgid "Skin Selection Actions"
 msgstr "Acciones Selección de Skin"
 
+msgid "Note: No button defined for this action!"
+msgstr "Nota: ¡No hay ningún botón definido para esta acción!"
+
 msgid "%d seconds"
 msgstr "%d segundos"
 
@@ -18457,6 +18460,9 @@ msgstr "Establezca la posición vertical de los subtítulos, medida desde la par
 
 msgid "Shift"
 msgstr "Cambiar"
+
+msgid "Shift: %s"
+msgstr "Cambiar: %s"
 
 msgid "Select which tuner to use for the scan."
 msgstr "Seleccione qué sintonizador usar para la búsqueda."

@@ -36,7 +36,6 @@ from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRe
 from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileHas, fileReadLine, fileWriteLine, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
-from Tools.KeyBindings import getKeyBindingKeys, getKeyDescription
 from Tools.StbHardware import getBrand
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, getBoxType, getPlatform
@@ -252,7 +251,7 @@ class InfoBarUnhandledKey:
 		)
 
 	def actionA(self, key, flag):  # This function is called on every keypress!
-		print("[InfoBarGenerics] Key: %s (%s) KeyID='%s' Binding='%s'." % (key, KEYFLAGS.get(flag, _("Unknown")), KEYIDNAMES.get(key, _("Unknown")), ", ".join(getKeyDescription(key))))
+		print("[InfoBarGenerics] Key: %s (%s) KeyID='%s'." % (key, KEYFLAGS.get(flag, _("Unknown")), KEYIDNAMES.get(key, _("Unknown"))))
 		if flag != 2: # Don't hide on repeat.
 			self.unhandledKeyDialog.hide()
 			if self.closeSIB(key) and self.secondInfoBarScreen and self.secondInfoBarScreen.shown:

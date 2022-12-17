@@ -2,8 +2,8 @@ from collections import defaultdict
 from functools import cmp_to_key
 from Components.config import config
 from Components.Sources.List import List
-from Tools.KeyBindings import queryKeyBinding, getKeyDescription
-
+from Components.ActionMap import queryKeyBinding
+from Components.InputDevice import remoteControl
 
 # Helplist structure:
 # [ ( actionmap, context, [(action, help), (action, help), ...] ), (actionmap, ... ), ... ]
@@ -39,6 +39,8 @@ from Tools.KeyBindings import queryKeyBinding, getKeyDescription
 # and data[2:] = [helpText, None, extText, None] for non-indented text
 # and data[2:] = [None, helpText, None, extText] for indented text
 #
+
+
 class HelpMenuList(List):
 	HEADINGS = 1
 	EXTENDED = 2
@@ -86,21 +88,18 @@ class HelpMenuList(List):
 				if help is None:
 					continue
 				buttons = queryKeyBinding(context, action)
+				# print("[HelpMenu] HelpMenuList DEBUG: queryKeyBinding buttons=%s." % str(buttons))
 				if not buttons:  # Do not display entries which are not accessible from keys.
+					# print("[HelpMenu] HelpMenuList DEBUG: No buttons allocated.")
+					# helpTags.append(pgettext("Abbreviation of 'Unassigned'", "Unassigned"))
 					continue
 				buttonNames = []
-				for n in buttons:
-					name = getKeyDescription(n[0])
-					if name is not None:
-						if len(name) > 0 and not rcPos.getRcKeyPos(name[0]):  # Ignore buttons that don't have a button location.
-							continue
-						if (len(name) < 2 or name[1] not in ("fp", "kbd")):
-							if n[1] & 8:  # For long keypresses, make the second tuple item "long".
-								name = (name[0], "long")
-							if name not in buttonsProcessed:
-								buttonNames.append(name)
-								buttonsProcessed.add(name)
+				for keyId, flags in buttons:
+					if remoteControl.getRemoteControlKeyPos(keyId):
+						buttonNames.append((keyId, "LONG") if flags & 8 else (keyId,))  # For long keypresses, make the second tuple item "LONG".
 				if not buttonNames:  # Only show entries with keys that are available on the used rc.
+					# print("[HelpMenu] HelpMenuList DEBUG: Button not available on current remote control.")
+					# helpTags.append(pgettext("Abbreviation of 'No Button'", "No Button"))
 					continue
 				isExtended = isinstance(help, (tuple, list))
 				if isExtended and not (formatFlags & self.EXTENDED):
@@ -217,19 +216,16 @@ class HelpMenuList(List):
 		# We returns this tuple to the callback.
 		self.callback(item[0], item[1], item[2])
 
-	def handleButton(self, key, flag):
-		name = getKeyDescription(key)
-		if name is not None and (len(name) < 2 or name[1] not in ("fp", "kbd")):
-			if flag == 3:  # For Long keypresses, make the second tuple item "long".
-				name = (name[0], "long")
-			if name in self.buttonMap:
-				if flag == 3 or flag == 1 and not self.longSeen:  # Show help for pressed button for long press, or for Break if it's not a Long press.
-					self.longSeen = flag == 3
-					self.setIndex(self.buttonMap[name])
-					return 1  # Report key handled.
-				if flag == 0:  # Reset the long press flag on Make.
-					self.longSeen = False
-		return 0  # Report key not handled.
+	def handleButton(self, keyId, flag):
+		button = (keyId, "LONG") if flag == 3 else (keyId,)
+		if button in self.buttonMap:
+			if flag == 3 or flag == 1 and not self.longSeen:  # Show help for pressed button for long press, or for Break if it's not a Long press.
+				self.longSeen = flag == 3
+				self.setIndex(self.buttonMap[button])
+				return 1  # Report keyId handled.
+			if flag == 0:  # Reset the long press flag on Make.
+				self.longSeen = False
+		return 0  # Report keyId not handled.
 
 	def getCurrent(self):
 		sel = super(HelpMenuList, self).getCurrent()
