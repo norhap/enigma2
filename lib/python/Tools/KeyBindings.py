@@ -1,6 +1,5 @@
 from keyids import KEYIDS
-from Components.config import config
-
+from Components.SystemInfo import BoxInfo
 keyBindings = {}
 
 keyDescriptions = [{  # id=0 - dmm0 remote directory, DM8000.
@@ -370,10 +369,10 @@ def queryKeyBinding(context, action):
 
 
 def getKeyDescription(key):
-	rcType = config.inputDevices.rcType.value
-	if rcType == 14:  # XP1000
+	rcType = BoxInfo.getItem("rctype")
+	if int(rcType) == 14:  # XP1000
 		idx = 3
-	elif rcType == 18:  # F1
+	elif int(rcType) == 18:  # F1
 		idx = 4
 	else:
 		idx = 2

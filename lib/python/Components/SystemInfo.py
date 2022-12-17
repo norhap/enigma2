@@ -182,8 +182,8 @@ SystemInfo["MachineModel"] = model
 SystemInfo["Platform"] = platform
 
 #detect remote control
-SystemInfo["RCCode"] = int(getRCType())
-SystemInfo["RCTypeIndex"] = int(float(2)) or int(getRCIDNum())
+#SystemInfo["RCType"] = getRCType() detect from boxbranding
+SystemInfo["RCIDNum"] = int(float(2)) or int(getRCIDNum())
 SystemInfo["RCName"] = getRCName()
 SystemInfo["RCImage"] = getRCFile("png")
 SystemInfo["RCMapping"] = getRCFile("xml")

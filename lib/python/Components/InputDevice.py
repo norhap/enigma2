@@ -6,8 +6,8 @@ from os.path import isdir, isfile
 from platform import machine
 from keyids import KEYIDS, KEYIDNAMES
 from struct import pack
-from Components.config import ConfigInteger, ConfigSelection, ConfigSelectionNumber, ConfigSubsection, ConfigText, ConfigYesNo, config
-from Components.SystemInfo import SystemInfo
+from Components.config import ConfigSelection, ConfigSelectionNumber, ConfigSubsection, ConfigText, ConfigYesNo, config
+from Components.SystemInfo import SystemInfo, BoxInfo
 from Tools.StbHardware import getBrand
 from Tools.Directories import resolveFilename, fileReadLine, fileReadLines, SCOPE_KEYMAPS, SCOPE_GUISKIN, fileReadXML
 
@@ -20,7 +20,6 @@ REMOTE_NAME = 2
 REMOTE_DISPLAY_NAME = 3
 
 config.inputDevices = ConfigSubsection()
-config.inputDevices.rcType = ConfigInteger(default=0)
 
 
 class InputDevices:
@@ -306,6 +305,7 @@ class RemoteControl:
 		return fileReadLine("/proc/stb/ir/rc/type", "0", source=MODULE_NAME)
 
 	def writeRemoteControlType(self, rcType):
+		rcType = BoxInfo.getItem("rctype")
 		if int(rcType) > 0:
 			fileWriteLine("/proc/stb/ir/rc/type", rcType, source=MODULE_NAME)
 

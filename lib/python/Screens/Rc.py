@@ -153,7 +153,7 @@ class RcPositions:
 							pos = key.attrib["pos"].split(",")
 							self.rcs[id]["keypos"][name] = (int(pos[0]), int(pos[1]))
 							self.rcs[id]["names"].append(name)
-					self.rc = self.rcs[SystemInfo["RCTypeIndex"]]
+					self.rc = self.rcs[SystemInfo["RCIDNum"]]
 				except ParseError as err:
 					fd.seek(0)
 					content = fd.readlines()
