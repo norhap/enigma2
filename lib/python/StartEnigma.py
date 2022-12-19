@@ -669,10 +669,9 @@ profile("TimeZones")
 import Components.Timezones
 Components.Timezones.InitTimeZones()
 
-profile("keymapparser")
-import keymapparser
-keymapparser.readKeymap(config.usage.keymap.value)
-keymapparser.readKeymap(config.usage.keytrans.value)
+profile("loadKeymap")
+from Components.ActionMap import loadKeymap
+loadKeymap(config.usage.keymap.value)
 
 profile("Network")
 import Components.Network

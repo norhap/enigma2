@@ -1,5 +1,9 @@
 from enigma import eActionMap
+from keyids import KEYIDS
 from Components.config import config
+from Tools.Directories import fileReadXML
+
+MODULE_NAME = __name__.split(".")[-1]
 
 keyBindings = {}
 
@@ -12,6 +16,92 @@ def queryKeyBinding(context, mapto):  # Returns a list of (keyId, flags) for a s
 	if (context, mapto) in keyBindings:
 		return [(x[0], x[2]) for x in keyBindings[(context, mapto)]]
 	return []
+
+
+def parseKeymap(filename, context, actionMapInstance, device, domKeys):
+	unmapDict = {}
+	error = False
+	keyId = -1
+	for key in domKeys.findall("key"):
+		keyName = key.attrib.get("id")
+		if keyName is None:
+			print("[ActionMap] Error: Keymap attribute 'id' in context '%s' in file '%s' must be specified!" % (context, filename))
+			error = True
+		else:
+			try:
+				if len(keyName) == 1:
+					keyId = ord(keyName) | 0x8000
+				elif keyName[0] == "\\":
+					if keyName[1].lower() == "x":
+						keyId = int(keyName[2:], 16) | 0x8000
+					elif keyName[1].lower() == "d":
+						keyId = int(keyName[2:], 10) | 0x8000
+					elif keyName[1].lower() == "o":
+						keyId = int(keyName[2:], 8) | 0x8000
+					elif keyName[1].lower() == "b":
+						keyId = int(keyName[2:], 2) | 0x8000
+					else:
+						print("[ActionMap] Error: Keymap id '%s' in context '%s' in file '%s' is not a hex, decimal, octal or binary number!" % (keyName, context, filename))
+						error = True
+				else:
+					keyId = KEYIDS.get(keyName, -1)
+					if keyId is None:
+						print("[ActionMap] Error: Keymap id '%s' in context '%s' in file '%s' is undefined/invalid!" % (keyName, context, filename))
+						error = True
+			except ValueError:
+				print("[ActionMap] Error: Keymap id '%s' in context '%s' in file '%s' can not be evaluated!" % (keyName, context, filename))
+				keyId = -1
+				error = True
+		mapto = key.attrib.get("mapto")
+		unmap = key.attrib.get("unmap")
+		if mapto is None and unmap is None:
+			print("[ActionMap] Error: At least one of the attributes 'mapto' or 'unmap' in context '%s' id '%s' (%d) in file '%s' must be specified!" % (context, keyName, keyId, filename))
+			error = True
+		flags = key.attrib.get("flags")
+		if flags is None:
+			print("[ActionMap] Error: Attribute 'flag' in context '%s' id '%s' (%d) in file '%s' must be specified!" % (context, keyName, keyId, filename))
+			error = True
+		else:
+			flagToValue = lambda x: {
+				'm': 1,
+				'b': 2,
+				'r': 4,
+				'l': 8
+			}[x]
+			newFlags = sum(map(flagToValue, flags))
+			if not newFlags:
+				print("[ActionMap] Error: Attribute 'flag' value '%s' in context '%s' id '%s' (%d) in file '%s' appears invalid!" % (flags, context, keyName, keyId, filename))
+				error = True
+			flags = newFlags
+		if not error:
+			if unmap is None:  # If a key was unmapped, it can only be assigned a new function in the same keymap file (avoid file parsing sequence dependency).
+				if unmapDict.get((context, keyName, mapto)) in [filename, None]:
+					if config.crash.debugActionMaps.value:
+						print("[ActionMap] Context '%s' keyName '%s' (%d) mapped to '%s' (Device: %s)." % (context, keyName, keyId, mapto, device.capitalize()))
+					actionMapInstance.bindKey(filename, device, keyId, flags, context, mapto)
+					addKeyBinding(filename, keyId, context, mapto, flags)
+			else:
+				actionMapInstance.unbindPythonKey(context, keyId, unmap)
+				unmapDict.update({(context, keyName, unmap): filename})
+
+
+def loadKeymap(filename):
+	actionMapInstance = eActionMap.getInstance()
+	domKeymap = fileReadXML(filename, source=MODULE_NAME)
+	if domKeymap:
+		for domMap in domKeymap.findall("map"):
+			context = domMap.attrib.get("context")
+			if context is None:
+				print("ActionMap] Error: All keymap action maps in '%s' must have a context!" % filename)
+			else:
+				parseKeymap(filename, context, actionMapInstance, "generic", domMap)
+				for domDevice in domMap.findall("device"):
+					parseKeymap(filename, context, actionMapInstance, domDevice.attrib.get("name"), domDevice)
+
+
+def removeKeymap(filename):
+	actionMapInstance = eActionMap.getInstance()
+	actionMapInstance.unbindKeyDomain(filename)
 
 
 class ActionMap:
