@@ -207,7 +207,7 @@ class HelpMenuList(List):
 	def _sortKeyAlpha(self, hlp):
 		return list(map(str.lower, hlp[1] if isinstance(hlp[1], (tuple, list)) else [hlp[1], ""]))
 
-	def ok(self):
+	def enterItem(self):
 		# A list entry has a "private" tuple as first entry...
 		item = self.getCurrent()
 		if item is None:

@@ -44,7 +44,7 @@ class HelpMenu(Screen, Rc):
 		self["key_help"] = StaticText(_("HELP"))
 		self["helpActions"] = ActionMap(["HelpActions", "OkCancelActions"], {
 			"cancel": self.close,  # self.closeHelp,
-			"select": self.selectItem,
+			"ok": self.enterItem,
 			"displayHelp": self.showHelp,
 			"displayHelpLong": self.showButtons
 		}, prio=-1)
@@ -60,8 +60,8 @@ class HelpMenu(Screen, Rc):
 		self.onClose.append(self.closeHelp)
 		self.onLayoutFinish.append(self.selectionChanged)
 
-	def selectItem(self):
-		self["list"].select()
+	def enterItem(self):
+		self["list"].enterItem() # def enterItem(self) HelpMenuList.
 
 	def closeHelp(self):
 		eActionMap.getInstance().unbindAction("", self["list"].handleButton)
