@@ -15,7 +15,7 @@
 		<button keyid="KEY_SUBTITLE" name="SUBTITLE" title="Subtitle" pos="106,115" shape="rect" size="21,13" />
 		<button keyid="KEY_SAT" name="SAT" title="Sat" pos="28,132" shape="rect" size="21,13" />
 		<button keyid="KEY_FAVORITES" name="FAV" title="Favorites" pos="54,132" shape="rect" size="21,13" />
-		<button keyid="KEY_ANGLE" remap="KEY_SWITCHVIDEOMODE" name="VMODE" title="Video" pos="80,132" shape="rect" size="21,13" />
+		<button keyid="KEY_VIDEO" remap="KEY_SWITCHVIDEOMODE" name="VMODE" title="Video" pos="80,132" shape="rect" size="21,13" />
 		<button keyid="KEY_HELP" name="HELP" title="Help" pos="106,132" shape="rect" size="21,13" />
 		<button keyid="KEY_RED" name="RED" title="Red" pos="28,153" shape="rect" size="16,14" />
 		<button keyid="KEY_GREEN" name="GREEN" title="Green" pos="54,153" shape="rect" size="14,14" />
