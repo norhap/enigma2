@@ -158,9 +158,6 @@
 		<item level="0" text="Select remote control" description="Select the remote control device to be used with the %s %s.">config.inputDevices.remotesIndex</item>
 		<item level="0" text="Long press emulation with button" description="Press this button to emulate a long press on a button pressed afterwards (this also overrides any other actions assigned to emulation button).">config.usage.long_press_emulation_key</item>
 	</setup>
-	<setup key="keyboard" title="Keyboard Setup">
-		<item level="0" text="Keyboard map">config.keyboard.keymap</item>
-	</setup>
 	<setup key="LEDDisplay" title="LED Setup">
 		<!--item level="0" requires="LedPowerColor" text="LED color during normal operations" description="Configure front LED color during normal operations (this needs an enigma2 restart).">config.usage.frontled_color</item-->
 		<item level="0" requires="LedPowerColor" text="LED color during recording" description="Configure front LED color during recording.">config.usage.frontledrec_color</item>

@@ -221,17 +221,16 @@ class RemoteControl:
 					if config.crash.debugRemoteControls.value:
 						print("[InputDevice] Adding remote control identifier for '%s'." % displayName)
 					self.remotes.append((model, rcType, codeName, displayName))
-		self.remotes.insert(0, ("", "", "", _("Default")))
-		#if BoxInfo.getItem("RemoteTypeZeroAllowed", False):
-			#self.remotes.insert(1, ("", "0", "", _("All supported")))
+		self.remotes.insert(0, ("", "", "", "Default"))
 		rcChoices = []
-		default = "0"
+		default = "0" if remotes else _("Default")
 		for index, remote in enumerate(self.remotes):
 			index = str(index)
-			rcChoices.append((index, remote[REMOTE_DISPLAY_NAME]))
-			if self.model == remote[REMOTE_MODEL] and self.rcType == remote[REMOTE_RCTYPE] and self.rcName in [x.strip() for x in remote[REMOTE_NAME].split(",")]:
-				print("[InputDevice] Default remote control identified as '%s'.  (model='%s', rcName='%s', rcType='%s')" % (remote[REMOTE_DISPLAY_NAME], self.model, self.rcName, self.rcType))
-				default = index
+			if remotes:
+				rcChoices.append((index, remote[REMOTE_DISPLAY_NAME]))
+				if self.model == remote[REMOTE_MODEL] and self.rcType == remote[REMOTE_RCTYPE] and self.rcName in [x.strip() for x in remote[REMOTE_NAME].split(",")]:
+					print("[InputDevice] Default remote control identified as '%s'.  (model='%s', rcName='%s', rcType='%s')" % (remote[REMOTE_DISPLAY_NAME], self.model, self.rcName, self.rcType))
+					default = index
 		config.inputDevices.remotesIndex = ConfigSelection(choices=rcChoices, default=default)
 		self.remote = self.loadRemoteControl(SystemInfo["RCMapping"])
 
@@ -250,9 +249,10 @@ class RemoteControl:
 				if config.crash.debugRemoteControls.value:
 					print("[InputDevice] Remote control image file '%s'." % rcButtons["image"])
 				for button in rc.findall("button"):
-					id = button.attrib.get("keyid", "KEY_RESERVED")
+					id = button.attrib.get("id", "KEY_RESERVED")
+					keyid = button.attrib.get("keyid", "KEY_RESERVED")
 					remap = button.attrib.get("remap")
-					keyId = KEYIDS.get(id)
+					keyId = KEYIDS.get(id) if button.attrib.get("id") else KEYIDS.get(keyid)
 					remapId = KEYIDS.get(remap)
 					if keyId is not None and remapId is not None:
 						logRemaps.append((id, remap))
@@ -270,7 +270,10 @@ class RemoteControl:
 					rcButtons[keyId]["shape"] = button.attrib.get("shape")
 					rcButtons[keyId]["coords"] = [int(x.strip()) for x in button.attrib.get("coords", "0").split(",")]
 					if config.crash.debugRemoteControls.value:
-						print("[InputDevice] Remote control button id='%s', keyId='%s', label='%s', pos='%s', title='%s', shape='%s', coords='%s'." % (id, keyId, rcButtons[keyId]["label"], rcButtons[keyId]["pos"], rcButtons[keyId]["title"], rcButtons[keyId]["shape"], rcButtons[keyId]["coords"]))
+						if button.attrib.get("id"):
+							print("[InputDevice] Remote control button id='%s', keyId='%s', label='%s', pos='%s', title='%s', shape='%s', coords='%s'." % (id, keyId, rcButtons[keyId]["label"], rcButtons[keyId]["pos"], rcButtons[keyId]["title"], rcButtons[keyId]["shape"], rcButtons[keyId]["coords"]))
+						else:
+							print("[InputDevice] Remote control button keyid='%s', keyId='%s', label='%s', pos='%s', title='%s', shape='%s', coords='%s'." % (keyid, keyId, rcButtons[keyId]["label"], rcButtons[keyId]["pos"], rcButtons[keyId]["title"], rcButtons[keyId]["shape"], rcButtons[keyId]["coords"]))
 				if logRemaps:
 					for remap in logRemaps:
 						print("[InputDevice] Remapping '%s' to '%s'." % (remap[0], remap[1]))

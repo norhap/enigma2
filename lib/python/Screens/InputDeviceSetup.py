@@ -178,8 +178,9 @@ class InputDeviceSetup(Setup):
 
 	def restoreOldSetting(self):
 		config.inputDevices.remotesIndex.value = self.initialRemotesIndex
-		index = int(self.initialRemotesIndex)
-		remoteControl.writeRemoteControlType(remoteControl.remotes[index][REMOTE_RCTYPE])
-		print("[InputDeviceSetup] Restoring remote control index=%d, getMachineBuild='%s', rcType='%s', name='%s'." % (index, remoteControl.remotes[index][REMOTE_MODEL], remoteControl.remotes[index][REMOTE_RCTYPE], remoteControl.remotes[index][REMOTE_DISPLAY_NAME]))
+		if self.initialRemotesIndex != "Default":
+			index = int(self.initialRemotesIndex)
+			remoteControl.writeRemoteControlType(remoteControl.remotes[index][REMOTE_RCTYPE])
+			print("[InputDeviceSetup] Restoring remote control index=%d, getMachineBuild='%s', rcType='%s', name='%s'." % (index, remoteControl.remotes[index][REMOTE_MODEL], remoteControl.remotes[index][REMOTE_RCTYPE], remoteControl.remotes[index][REMOTE_DISPLAY_NAME]))
 		for item in self["config"].list:
 			self["config"].invalidate(item)
