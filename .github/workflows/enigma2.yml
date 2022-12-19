@@ -78,8 +78,7 @@ jobs:
         cd /tmp
         git clone --depth 1 https://github.com/dbus-cxx/libsigc--3.0.git
         cd libsigc--3.0
-        autoreconf -i
-        ./configure
+        ./autogen.sh
         make
         sudo make install
         popd
