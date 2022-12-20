@@ -357,14 +357,14 @@ class InitInputDevices:
 	def setupConfigEntries(self, device):
 		setattr(config.inputDevices, device, ConfigSubsection())
 		configItem = getattr(config.inputDevices, device)
-		configItem.disabled = ConfigYesNo(default=SystemInfo["RemoteEnable"] == True)
-		configItem.disabled.addNotifier(self.inputDevicesEnabledChanged)
+		configItem.enabled = ConfigYesNo(default=SystemInfo["RemoteEnable"] == True)
+		configItem.enabled.addNotifier(self.inputDevicesEnabledChanged)
 		configItem.name = ConfigText(default=inputDevices.devices[device]["name"])
 		configItem.name.addNotifier(self.inputDevicesNameChanged)
-		configItem.repeat = ConfigSelectionNumber(default=SystemInfo["RemoteRepeat"] == 100, min=0, max=500, stepwidth=10)
-		configItem.repeat.addNotifier(self.inputDevicesEnabledChanged)
-		configItem.delay = ConfigSelectionNumber(default=SystemInfo["RemoteDelay"] == 700, min=0, max=5000, stepwidth=100)
-		configItem.delay.addNotifier(self.inputDevicesNameChanged)
+		configItem.repeat = ConfigSelectionNumber(default=SystemInfo["RemoteRepeat"], min=0, max=500, stepwidth=10)
+		configItem.repeat.addNotifier(self.inputDevicesRepeatChanged)
+		configItem.delay = ConfigSelectionNumber(default=SystemInfo["RemoteDelay"], min=0, max=5000, stepwidth=100)
+		configItem.delay.addNotifier(self.inputDevicesDelayChanged)
 
 	def inputDevicesEnabledChanged(self, configElement):
 		if self.currentDevice and inputDevices.currentDevice is None:
@@ -378,7 +378,8 @@ class InitInputDevices:
 			if configElement.value:
 				devName = inputDevices.getDeviceAttribute(self.currentDevice, "name")
 				if devName != configElement.value:
-					configItem = getattr(config.inputDevices, self.currentDevice)
+					configItem = getattr(config.inputDevices, "%s.enabled" % self.currentDevice)
+					configItem.value = False
 					configItem.save()
 		elif inputDevices.currentDevice:
 			inputDevices.setDeviceName(inputDevices.currentDevice, configElement.value)

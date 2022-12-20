@@ -103,7 +103,7 @@ class InputDeviceDriverSetup(Setup):
 		self.device = device
 		inputDevices.currentDevice = device
 		configItem = getattr(config.inputDevices, device)
-		self.disableEntry = getConfigListEntry(self.formatItemText(_("Change device settings")), configItem.disabled, self.formatItemDescription(configItem.disabled, _("Select 'Yes' to enable editing of this device's settings. Selecting 'No' resets the devices settings to their default values.")))
+		self.disableEntry = getConfigListEntry(self.formatItemText(_("Change device settings")), configItem.enabled, self.formatItemDescription(configItem.enabled, _("Select 'Yes' to enable editing of this device's settings. Selecting 'No' resets the devices settings to their default values.")))
 		self.nameEntry = getConfigListEntry(self.formatItemText(_("Device name")), configItem.name, self.formatItemDescription(configItem.name, _("Enter a new name for this device.")))
 		self.delayEntry = getConfigListEntry(self.formatItemText(_("Delay before key repeat starts (ms)")), configItem.delay, self.formatItemDescription(configItem.delay, _("Select the time delay before the button starts repeating.")))
 		self.repeatEntry = getConfigListEntry(self.formatItemText(_("Interval between keys when repeating (ms)")), configItem.repeat, self.formatItemDescription(configItem.repeat, _("Select the time delay between each repeat of the button.")))
