@@ -512,7 +512,7 @@ msgid "A completed recording timer is about to shut down your receiver. Would yo
 msgstr "Un temporizador de grabación completado está a punto de apagar su receptor. ¿Le gustaría continuar?"
 
 msgid "A graphical EPG for all services of a specific bouquet"
-msgstr "Un EPG gráfico para todos los servicios de un bouquet específico"
+msgstr "Un EPG gráfico para todos los canales de un bouquet específico"
 
 #, python-format
 msgid ""
@@ -766,7 +766,7 @@ msgid "All satellites 4 (USALS)"
 msgstr "Todos los satélites 4 (USALS)"
 
 msgid "All services provider"
-msgstr "Todos los proveedores de servicios"
+msgstr "Todos los proveedores de canales"
 
 msgid "Allocate"
 msgstr "Asignar"
@@ -850,10 +850,10 @@ msgid "Are you sure to remove all %s services?"
 msgstr "¿Estás seguro que quieres eliminar todos los canales %s?"
 
 msgid "Are you sure to remove all cable services?"
-msgstr "Eliminar todos los servicios de cable?"
+msgstr "Eliminar todos los canales de cable?"
 
 msgid "Are you sure to remove all terrestrial services?"
-msgstr "Eliminar todos los servicios terrestres?"
+msgstr "Eliminar todos los canales terrestres?"
 
 msgid "Are you sure to remove this entry?"
 msgstr "Eliminar esta entrada?"
@@ -965,13 +965,14 @@ msgstr "Alternar mezcla digital"
 msgid "Audio plugins"
 msgstr "Plugins de audio"
 
-#, python-format
 msgid "Audio track (%s) format"
 msgstr "Formato (%s) de pista de audio"
 
-#, python-format
 msgid "Audio track (%s) language"
 msgstr "Idioma (%s) de pista de audio"
+
+msgid "Audio track selection, downmix and other audio options"
+msgstr "Selección de pistas de audio, downmix y otras opciones de audio"
 
 msgid "Audio volume step size"
 msgstr "Paso de volumen de audio"
@@ -1348,7 +1349,7 @@ msgid "Channel list type"
 msgstr "Tipo de lista de canales"
 
 msgid "Channel not in services list"
-msgstr "Canal no en lista de servicios"
+msgstr "Canal no en lista de canales"
 
 msgid "Channel selection"
 msgstr "Selección de canal"
@@ -1836,7 +1837,7 @@ msgid "Default"
 msgstr "Por defecto"
 
 msgid "Default Services Scanner"
-msgstr "Escáner de servicios predeterminados"
+msgstr "Escáner de canales predeterminados"
 
 msgid "Default movie location"
 msgstr "Lugar de las películas por defecto"
@@ -2304,7 +2305,7 @@ msgid ""
 "\n"
 "Set manual IP for importing EPG and Channels in 'Import remote receiver URL'."
 msgstr ""
-"Permita que el receptor servidor intente sintonizar servicios que no se pueden sintonizar localmente, ej. el sintonizador está ocupado o el tipo de servicio no está disponible en el sintonizador local.\n"
+"Permita que el receptor servidor intente sintonizar canales que no se pueden sintonizar localmente, ej. el sintonizador está ocupado o el tipo de servicio no está disponible en el sintonizador local.\n"
 "\n"
 "Puede usar este receptor solo en modo cliente usando la lista de canales del servidor y EPG.\n"
 "\n"
@@ -2336,6 +2337,9 @@ msgstr "Tipo de llave de encriptado"
 
 msgid "Encryption:"
 msgstr "Encriptación:"
+
+msgid "End timeshift"
+msgstr "Final timeshift"
 
 msgid "End time"
 msgstr "Tiempo final"
@@ -3829,6 +3833,9 @@ msgstr "Fin"
 msgid "Teletext"
 msgstr "Teletexto"
 
+msgid "Sub Service Actions"
+msgstr "Acciones Sub Canales"
+
 msgid "Subtitle"
 msgstr "Subtítulo"
 
@@ -3960,6 +3967,9 @@ msgstr "Transpondedor manual"
 
 msgid "Manufacturer"
 msgstr "Fabricante"
+
+msgid "Marker Actions"
+msgstr "Acciones de marcador"
 
 msgid "Mark service as dedicated 3D service"
 msgstr "Marcar el canal como dedicado 3D"
@@ -4376,7 +4386,7 @@ msgid "No service"
 msgstr "Sin servicio"
 
 msgid "No services/providers selected"
-msgstr "No se seleccionaron servicios / proveedores"
+msgstr "No se seleccionaron canales / proveedores"
 
 msgid "No standby"
 msgstr "Sin espera"
@@ -4703,6 +4713,9 @@ msgstr "Ajustes Control Parental"
 
 msgid "Parental Control Setup"
 msgstr "Ajustes Control Parental"
+
+msgid "Pause and start timeshift"
+msgstr "Pausar y comenzar el cambio de tiempo"
 
 msgid "Pause"
 msgstr "Pausa"
@@ -5355,7 +5368,7 @@ msgid "Reload blacklists"
 msgstr "Recargar listas negras"
 
 msgid "Reloading bouquets and services..."
-msgstr "Recargando bouquets y servicios…"
+msgstr "Recargando bouquets y canales…"
 
 msgid "Remember service PIN"
 msgstr "Recordar el PIN del servicio"
@@ -5823,6 +5836,24 @@ msgstr "DNS Secundario"
 
 msgid "Seek"
 msgstr "Buscar"
+
+msgid "Seek back short"
+msgstr "Buscar poco tiempo"
+
+msgid "Seek forward short"
+msgstr "Buscar hacia adelante poco tiempo"
+
+msgid "Seek back medium"
+msgstr "Buscar medio atrás"
+
+msgid "Seek forward medium"
+msgstr "Buscar avance medio"
+
+msgid "Seek back long"
+msgstr "Buscar mucho tiempo atrás"
+
+msgid "Seek forward long"
+msgstr "Buscar hacia adelante mucho tiempo"
 
 msgid "Seek backward"
 msgstr "Buscar hacia atrás"
@@ -6349,6 +6380,9 @@ msgstr "Mostrar iconos de reloj de grabación"
 msgid "Show second InfoBar"
 msgstr "Mostrar segunda InfoBar"
 
+msgid "Show service event information"
+msgstr "Mostrar información de eventos de canales"
+
 msgid "Show service list"
 msgstr "Mostrar lista de canales"
 
@@ -6362,7 +6396,7 @@ msgid "Show status icons in movie list"
 msgstr "Mostrar iconos de status en lista de películas"
 
 msgid "Show subservice selection"
-msgstr "Mostrar selección de subservicios"
+msgstr "Mostrar selección de subcanales"
 
 msgid "Show subtitle selection"
 msgstr "Mostrar selección de subtítulos"
@@ -6839,11 +6873,11 @@ msgstr "Info Clientes en Streaming"
 msgid "Strongest position"
 msgstr "Posición más fuerte"
 
-msgid "Subservice list..."
-msgstr "Lista de satélites …"
+msgid "Subservice list"
+msgstr "Lista de subcanales"
 
 msgid "Subservices"
-msgstr "Subservicios"
+msgstr "Subcanales"
 
 msgid "Subtitle Quickmenu"
 msgstr "Menú rápido de Subtítulos"
@@ -6891,7 +6925,7 @@ msgid "Swap PiP and main picture"
 msgstr "Intercambiar PiP e imagen principal"
 
 msgid "Swap services"
-msgstr "Intercambiar servicios"
+msgstr "Intercambiar canales"
 
 msgid "Swaziland"
 msgstr "Swazilandia"
@@ -7318,7 +7352,7 @@ msgid "This setting depends on your cable provider and location. If you don't kn
 msgstr "Esta configuración depende de su proveedor de cable y su ubicación. Si no conoce la configuración correcta, consulte el menú en el receptor de cable oficial, o recíbalo de su proveedor de cable o busque ayuda en el foro de Internet."
 
 msgid "This setting is for special setups only. It gives this LNB higher priority over other LNBs with lower values. The free LNB with the highest priority will be the first LNB selected for tuning services."
-msgstr "Esta configuración es solo para configuraciones especiales. Le da a este LNB una mayor prioridad que otros LNB con valores más bajos. El LNB libre con la prioridad más alta será el primer LNB seleccionado para servicios de ajuste."
+msgstr "Esta configuración es solo para configuraciones especiales. Le da a este LNB una mayor prioridad que otros LNB con valores más bajos. El LNB libre con la prioridad más alta será el primer LNB seleccionado para ajuste de canales."
 
 msgid ""
 "This test checks for configured nameservers.\n"
@@ -7471,6 +7505,9 @@ msgstr "Hoy"
 
 msgid "Toggle HDMI In"
 msgstr "Alternar entrada HDMI"
+
+msgid "Toggle display of the second InfoBar"
+msgstr "Alternar visualización de la segunda barra de información"
 
 msgid "Toggle LCD LiveTV"
 msgstr "Alternar LCD LiveTV"
@@ -8462,10 +8499,10 @@ msgid "[move mode]"
 msgstr "[modo mover]"
 
 msgid "a gui to assign services/providers to common interface modules"
-msgstr "una gui para asignar servicios/proveedores a módulos de interfaz común"
+msgstr "una gui para asignar canales/proveedores a módulos de interfaz común"
 
 msgid "a gui to assign services/providers/caids to common interface modules"
-msgstr "una gui para asignar servicios/proveedores/caids a módulos de interfaz común"
+msgstr "una gui para asignar canales/proveedores/caids a módulos de interfaz común"
 
 msgid "abort alternatives edit"
 msgstr "abortar edición de alternativos"
@@ -9242,14 +9279,14 @@ msgstr "Eliminar lo de detrás de esta posición"
 msgid "Remove bouquet from parental protection"
 msgstr "Eliminar bouquet de la protección parental"
 
-msgid "emove cable services"
-msgstr "eliminar servicios de cable"
+msgid "Remove cable services"
+msgstr "Eliminar canales de cable"
+
+msgid "Remove terrestrial services"
+msgstr "Eliminar canales de tdt"
 
 msgid "remove directory"
 msgstr "eliminar directorio"
-
-msgid "remove entry"
-msgstr "eliminar entrada"
 
 msgid "Remove from parental protection"
 msgstr "Eliminar canal de la protección parental"
@@ -9259,9 +9296,6 @@ msgstr "eliminar el indicador nuevo encontrado"
 
 msgid "Remove selected satellite"
 msgstr "Eliminar satélite seleccionado"
-
-msgid "remove terrestrial services"
-msgstr "eliminar servicios terrestres"
 
 msgid "Rename entry"
 msgstr "Renombrar entrada"
@@ -9769,7 +9803,7 @@ msgid "Alternative numbering mode"
 msgstr "Modo de numeración alternativo"
 
 msgid "Alternative services tuner priority"
-msgstr "Prioridad de sintonizador de servicios alternativos"
+msgstr "Prioridad de sintonizador de canales alternativos"
 
 msgid "Always include ECM in recordings"
 msgstr "Incluye siempre ECM en las grabaciones"
@@ -10978,7 +11012,7 @@ msgid "PIN code needed"
 msgstr "Código PIN necesario"
 
 msgid "Parental control services editor"
-msgstr "Editor de servicios de control parental"
+msgstr "Editor de canales de control parental"
 
 msgid "PiP setup"
 msgstr "Configuración PiP"
@@ -11433,10 +11467,10 @@ msgstr ""
 "Error al iniciar:\n"
 
 msgid "Ignore services list"
-msgstr "Ignorar lista de servicios"
+msgstr "Ignorar lista de canales"
 
 msgid "Ignore services list(press OK to save)"
-msgstr "Ignorar lista de servicios (presione OK para guardar)"
+msgstr "Ignorar lista de canales (presione OK para guardar)"
 
 msgid "Import current source"
 msgstr "Importar fuente actual"
@@ -11461,7 +11495,7 @@ msgid "Last: %s %s, %d events"
 msgstr "Último: %s %s, %d Eventos"
 
 msgid "Load EPG only services in bouquets"
-msgstr "Cargar servicios de EPG únicamente en bouquets"
+msgstr "Cargar canales de EPG únicamente en bouquets"
 
 msgid "Load long descriptions up to X days"
 msgstr "Cargar descripciones largas hasta X días"
@@ -11539,7 +11573,7 @@ msgid ""
 "%d more services."
 msgstr ""
 "\n"
-"%d más servicios."
+"%d más canales."
 
 msgid "   (AutoZap)"
 msgstr "   (AutoZapeo)"
@@ -11711,7 +11745,7 @@ msgid "Enable automatic EPG save interval."
 msgstr "Habilita el intervalo de guardado EPG automático."
 
 msgid "Enable automatic zapping of all services in the current services list."
-msgstr "Habilite el cambio automático de todos los servicios en la lista de servicios actual."
+msgstr "Habilite el cambio automático de todos los canales en la lista de canales actual."
 
 msgid "Enable this item to flush all EPG data before starting a new EPG refresh cycle"
 msgstr "Habilite este elemento para vaciar todos los datos de EPG antes de comenzar un nuevo ciclo de actualización de EPG"
@@ -11735,7 +11769,7 @@ msgid "Flush EPG before refresh"
 msgstr "Nivelar EPG después de actualizar"
 
 msgid "Following Services have to be scanned:"
-msgstr "Los siguientes servicios deben escanearse:"
+msgstr "Los siguientes canales deben escanearse:"
 
 msgid "Force scan even if receiver is in use"
 msgstr "Forzar búsqueda incluso si el receptor está en uso"
@@ -11756,7 +11790,7 @@ msgid "If you want to refresh the EPG in background, you can choose the method w
 msgstr "Si desea actualizar la EPG en segundo plano, puede elegir el método que mejor se adapte a sus necesidades aquí, por ejemplo, grabación oculta, falsa o imagen en imagen común."
 
 msgid "Inherit Services from AutoTimer"
-msgstr "Heredar servicios del Temporizador Automático"
+msgstr "Heredar canales del Temporizador Automático"
 
 msgid "Input EPG Cache path"
 msgstr "Ruta de entrada del caché EPG"
@@ -11871,7 +11905,7 @@ msgid "Select channel to refresh"
 msgstr "Seleccionar canal para actualizar"
 
 msgid "Select mode the refresh for services/bouquets parental control."
-msgstr "Seleccione el modo de actualización para los servicios/bouquets de control parental."
+msgstr "Seleccione el modo de actualización para los canales/bouquets de control parental."
 
 msgid "Select options"
 msgstr "Seleccione opciones"
@@ -11995,7 +12029,7 @@ msgid "EPGRefresh Help"
 msgstr "Actualización EPG Ayuda"
 
 msgid "Editing the service list"
-msgstr "Editando la lista de servicios"
+msgstr "Editando la lista de canales"
 
 msgid " (%s%d min)"
 msgstr " (%s%d minutos)"
@@ -13924,7 +13958,7 @@ msgid "Show warning message before action"
 msgstr "Mostrar mensaje de advertencia antes de la acción"
 
 msgid "Style services list"
-msgstr "Estilo de la lista servicios"
+msgstr "Estilo de la lista canales"
 
 msgid "Use number zap"
 msgstr "Usar número zap"
@@ -14087,7 +14121,7 @@ msgid "Include CI assignment"
 msgstr "Incluir asignación de CI"
 
 msgid "Set CI assignment for detection of available services."
-msgstr "Establecer asignación de CI para la detección de servicios disponibles."
+msgstr "Establecer asignación de CI para la detección de canales disponibles."
 
 msgid "How would you like to cut \"%s\"?"
 msgstr "¿Cómo te gustaría cortar \"%s\"?"
@@ -14719,7 +14753,7 @@ msgid "Card infos (CCcam-Reader)"
 msgstr "Tarjetas Info (Lectores-CCcam)"
 
 msgid "No active subservices available."
-msgstr "No hay subservicios activos disponibles."
+msgstr "No hay subcanales activos disponibles."
 
 msgid "A background update check is in progress, please wait a few minutes and try again."
 msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos e intente nuevamente."
@@ -15822,7 +15856,7 @@ msgid "XBox support"
 msgstr "Soporte XBox"
 
 msgid "You must set a root password in order to be able to use network services, such as FTP, telnet or ssh."
-msgstr "Debe establecer una contraseña de root para poder utilizar los servicios de red, como FTP, telnet o ssh."
+msgstr "Debe establecer una contraseña de root para poder utilizar los canales de red, como FTP, telnet o ssh."
 
 msgid "Your receiver is not connected to the internet, please check your network settings and try again."
 msgstr "Su receptor no está conectado a Internet, verifique la configuración de su red e intente nuevamente."
@@ -17775,7 +17809,7 @@ msgid "Service Zap Actions"
 msgstr "Acciones de Servicio Zap"
 
 msgid "Digit entry for service selection"
-msgstr "Entrada de dígitos para la selección de servicios"
+msgstr "Entrada de dígitos para la selección de canales"
 
 msgid "Service Selection Actions"
 msgstr "Acciones Selección de Servicios"
