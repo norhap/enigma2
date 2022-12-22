@@ -181,6 +181,7 @@ def getActiveSubservicesForCurrentChannel(current_service):
 		activeSubservices = []
 		epgCache = eEPGCache.getInstance()
 		for subservice in possibleSubservices:
+			servicename = ServiceReference(subservice).getServiceName()
 			events = epgCache.lookupEvent(['BDTS', (subservice, 0, -1)])
 			if events and len(events) == 1:
 				event = events[0]
@@ -188,9 +189,10 @@ def getActiveSubservicesForCurrentChannel(current_service):
 				if title and "Sendepause" not in title:
 					starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
 					endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
-					servicename = ServiceReference(subservice).getServiceName()
 					schedule = str(starttime) + "-" + str(endtime)
 					activeSubservices.append((servicename + " " + schedule + " " + title, subservice))
+				elif title:
+					activeSubservices.append((servicename + " " + title, subservice))
 		return activeSubservices
 
 
@@ -3064,8 +3066,8 @@ class InfoBarSubserviceSelection:
 		self["SubserviceSelectionAction"] = HelpableActionMap(self, ["InfobarSubserviceSelectionActions"], {
 			"subserviceSelection": (self.subserviceSelection, _("Subservice list")),
 		}, prio=0, description=_("Sub Service Actions"))
-
 		self["SubserviceQuickzapAction"] = HelpableActionMap(self, ["InfobarSubserviceQuickzapActions"], {
+			"exit": self.keyHide,
 			"nextSubservice": (self.nextSubservice, _("Switch to next sub service")),
 			"prevSubservice": (self.prevSubservice, _("Switch to previous sub service"))
 		}, prio=-10, description=_("Sub Service Actions"))
