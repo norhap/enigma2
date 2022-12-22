@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from os import R_OK, access
 from os.path import isfile, join as pathjoin
 from re import findall
 
@@ -313,7 +312,7 @@ SystemInfo["FbcTunerPowerAlwaysOn"] = model in ("vusolo4k", "vuduo4k", "vuduo4ks
 SystemInfo["HasPhysicalLoopthrough"] = ["Vuplus DVB-S NIM(AVL2108)", "GIGA DVB-S2 NIM (Internal)"]
 SystemInfo["HasFBCtuner"] = ["Vuplus DVB-C NIM(BCM3158)", "Vuplus DVB-C NIM(BCM3148)", "Vuplus DVB-S NIM(7376 FBC)", "Vuplus DVB-S NIM(45308X FBC)", "Vuplus DVB-S NIM(45208 FBC)", "DVB-S2 NIM(45208 FBC)", "DVB-S2X NIM(45308X FBC)", "DVB-S2 NIM(45308 FBC)", "DVB-C NIM(3128 FBC)", "BCM45208", "BCM45308X", "BCM3158"]
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
-SystemInfo["CanChangeOsdAlpha"] = access("/proc/stb/video/alpha", R_OK) and True or False
+SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
 SystemInfo["OScamInstalled"] = fileExists("/usr/bin/oscam") or fileExists("/usr/bin/oscam-emu") or fileExists("/usr/bin/oscam-trunk")
 SystemInfo["OScamIsActive"] = fileExists("/var/tmp/.oscam")
@@ -322,7 +321,6 @@ SystemInfo["NCamIsActive"] = fileExists("/var/tmp/.ncam")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info", "CCcam-s2s") or fileHas("/tmp/ecm.info", "fta")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = model in ("ustym4kpro", "beyonwizv2", "viper4k", "sf8008", "gbtrio4k", "gbtrio4kplus", "gbip4k", "qviart5")
-SystemInfo["CanFadeOut"] = brand not in ("linkdroid", "mecool", "minix", "wetek", "hardkernel", "dinobot", "maxytec") and not (SystemInfo["HiSilicon"])
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and model not in ("hd51", "h7") or getSoCFamily() in ("hisi3798mv200",)
 SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and model == "multibox" or brand in ("wetek", "dreambox")
 SystemInfo["grautec"] = fileExists("/tmp/usbtft")

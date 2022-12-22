@@ -318,11 +318,10 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		InfoBarScreenSaver.__init__(self)
 		self.__state = self.STATE_SHOWN
 		self.__locked = 0
-		if SystemInfo["CanFadeOut"]:
-			self.DimmingTimer = eTimer()
-			self.DimmingTimer.callback.append(self.doDimming)
-			self.unDimmingTimer = eTimer()
-			self.unDimmingTimer.callback.append(self.unDimming)
+		self.DimmingTimer = eTimer()
+		self.DimmingTimer.callback.append(self.doDimming)
+		self.unDimmingTimer = eTimer()
+		self.unDimmingTimer.callback.append(self.unDimming)
 		self.hideTimer = eTimer()
 		self.hideTimer.callback.append(self.doTimerHide)
 		self.hideTimer.start(5000, True)
@@ -346,8 +345,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			InfoBarInstance.hideVBILineScreen.hide()
 		self.hideVBILineScreen = self.session.instantiateDialog(HideVBILine)
 		self.hideVBILineScreen.show()
-		if SystemInfo["CanFadeOut"]:
-			self.lastResetAlpha = True
+		self.lastResetAlpha = True
 		self.onLayoutFinish.append(self.__layoutFinished)
 		self.onExecBegin.append(self.__onExecBegin)
 
@@ -368,8 +366,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 	def __onHide(self):
 		self.__state = self.STATE_HIDDEN
-		if SystemInfo["CanFadeOut"]:
-			self.resetAlpha()
+		self.resetAlpha()
 		if self.actualSecondInfoBarScreen:
 			self.actualSecondInfoBarScreen.hide()
 		for x in self.onShowHideNotifiers:
@@ -393,8 +390,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 	def doWriteAlpha(self, value):
 		if SystemInfo["CanChangeOsdAlpha"]:
-#			print("[InfoBarGenerics] Write to /proc/stb/video/alpha")
-			open("/proc/stb/video/alpha", "w").write(str(value))
+			f = open(SystemInfo["CanChangeOsdAlpha"], "w")
+			f.write("%i" % value)
+			f.close()
 			if value == config.av.osd_alpha.value:
 				self.lastResetAlpha = True
 			else:
@@ -457,24 +455,20 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 	def doShow(self):
 		self.show()
-		if SystemInfo["CanFadeOut"]:
-			self.hideTimer.stop()
-			self.DimmingTimer.stop()
+		self.hideTimer.stop()
+		self.DimmingTimer.stop()
+		self.doWriteAlpha(config.av.osd_alpha.value)
 		self.startHideTimer()
 
 	def doTimerHide(self):
 		self.hideTimer.stop()
-		if SystemInfo["CanFadeOut"]:
-			self.DimmingTimer.start(70, True)
-			self.dimmed = config.usage.show_infobar_dimming_speed.value
-		else:
-			if self.__state == self.STATE_SHOWN:
-				self.hide()
+		self.DimmingTimer.start(300, True)
+		self.dimmed = config.usage.show_infobar_dimming_speed.value
 
 	def doHide(self):
 		if self.__state != self.STATE_HIDDEN:
 			if self.dimmed > 0:
-				self.doWriteAlpha(int(int(config.av.osd_alpha.value) * int(self.dimmed) / int(config.usage.show_infobar_dimming_speed.value)))
+				self.doWriteAlpha((config.av.osd_alpha.value * self.dimmed / config.usage.show_infobar_dimming_speed.value))
 				self.DimmingTimer.start(5, True)
 			else:
 				self.DimmingTimer.stop()
@@ -524,17 +518,14 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.hideTimer.stop()
 
 	def unlockShow(self):
-		if SystemInfo["CanFadeOut"]:
-			if config.usage.show_infobar_do_dimming.value and self.lastResetAlpha is False:
-				self.doWriteAlpha(config.av.osd_alpha.value)
-			try:
-				self.__locked -= 1
-			except:
-				self.__locked = 0
-			if self.__locked < 0:
-				self.__locked = 0
-		else:
+		if config.usage.show_infobar_do_dimming.value and self.lastResetAlpha is False:
+			self.doWriteAlpha(config.av.osd_alpha.value)
+		try:
 			self.__locked -= 1
+		except:
+			self.__locked = 0
+		if self.__locked < 0:
+			self.__locked = 0
 		if self.execing:
 			self.startHideTimer()
 
@@ -1884,12 +1875,11 @@ class InfoBarPVRState:
 	def _mayShow(self):
 		if self.shown and self.seekstate != self.SEEK_STATE_PLAY:
 			self.pvrStateDialog.show()
-		if SystemInfo["CanFadeOut"]:
-			if self.shown and self.seekstate != self.SEEK_STATE_EOF:
-				self.DimmingTimer.stop()
-				self.doWriteAlpha(config.av.osd_alpha.value)
-				self.pvrStateDialog.show()
-				self.startHideTimer()
+		if self.shown and self.seekstate != self.SEEK_STATE_EOF:
+			self.DimmingTimer.stop()
+			self.doWriteAlpha(config.av.osd_alpha.value)
+			self.pvrStateDialog.show()
+			self.startHideTimer()
 
 	def __playStateChanged(self, state):
 		playstateString = state[3]

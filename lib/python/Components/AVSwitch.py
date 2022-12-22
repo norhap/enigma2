@@ -710,6 +710,6 @@ def InitAVSwitch():
 	if SystemInfo["CanChangeOsdAlpha"]:
 		def setAlpha(config):
 			print("[AVSwitch] Write to /proc/stb/video/alpha")
-			open("/proc/stb/video/alpha", "w").write(str(config.value))
+			open(SystemInfo["CanChangeOsdAlpha"], "w").write(str(config.value))
 		config.av.osd_alpha = ConfigSlider(default=255, limits=(0, 255))
 		config.av.osd_alpha.addNotifier(setAlpha)
