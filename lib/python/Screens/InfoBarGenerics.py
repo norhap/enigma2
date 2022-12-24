@@ -156,9 +156,7 @@ class subservice:
 def reload_subservice_groupslist(force=False):
 	if subservice.groupslist is None or force:
 		try:
-			groupedservices = "/etc/enigma2/groupedservices"
-			if not isfile(groupedservices):
-				groupedservices = "/usr/share/enigma2/groupedservices"
+			groupedservices = "/usr/share/enigma2/groupedservices" if isfile("/usr/share/enigma2/groupedservices") else "/etc/enigma2/groupedservices"
 			subservice.groupslist = [list(g) for k, g in itertools.groupby([line.split('#')[0].strip() for line in open(groupedservices).readlines()], lambda x:not x) if not k]
 		except:
 			subservice.groupslist = []
