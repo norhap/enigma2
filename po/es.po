@@ -4863,13 +4863,13 @@ msgid "Please select a playlist..."
 msgstr "Seleccionar una lsta de reproducción…"
 
 msgid "Please select a sub service..."
-msgstr "Seleccionar un subservicio…"
+msgstr "Seleccionar un subcanal…"
 
 msgid "Please select a subservice to record..."
-msgstr "Seleccionar un subservicio a grabar…"
+msgstr "Seleccionar un subcanal a grabar…"
 
 msgid "Please select a subservice..."
-msgstr "Seleccionar un subservicio…"
+msgstr "Seleccionar un subcanal…"
 
 msgid "Please select medium to be scanned"
 msgstr "Seleccionar medio a escanear"
