@@ -13531,6 +13531,9 @@ msgstr ""
 msgid "Failed to read /etc/fstab! Restore fstab.backup or edit the file manually."
 msgstr "Fallo al leer /etc/fstab! Restaure fstab.backup o edite el archivo manualmente."
 
+msgid "File error %s"
+msgstr "Error en archivo %s"
+
 msgid "File system type:"
 msgstr "Tipo de sistema de archivos:"
 

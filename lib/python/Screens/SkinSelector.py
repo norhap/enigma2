@@ -16,13 +16,13 @@ from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop, QUIT_RESTART
-from Tools.Directories import resolveFilename, SCOPE_GUISKIN, SCOPE_LCDSKIN, SCOPE_SKINS
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN, SCOPE_LCDSKIN, SCOPE_SKINS, fileReadXML
 
 
 class SkinSelector(Screen, HelpableScreen):
 	skin = ["""
 	<screen name="SkinSelector" position="center,center" size="%d,%d">
-		<widget name="preview" position="center,%d" size="%d,%d" alphatest="blend" />
+		<widget name="preview" position="center,%d" size="%d,%d" alphaTest="blend" />
 		<widget source="skins" render="Listbox" position="center,%d" size="%d,%d" enableWrapAround="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">
 				{
@@ -35,9 +35,9 @@ class SkinSelector(Screen, HelpableScreen):
 				}
 			</convert>
 		</widget>
-		<widget source="description" render="Label" position="center,e-%d" size="%d,%d" font="Regular;%d" valign="center" />
-		<widget source="key_red" render="Label" position="%d,e-%d" size="%d,%d" backgroundColor="key_red" font="Regular;%d" foregroundColor="key_text" halign="center" valign="center" />
-		<widget source="key_green" render="Label" position="%d,e-%d" size="%d,%d" backgroundColor="key_green" font="Regular;%d" foregroundColor="key_text" halign="center" valign="center" />
+		<widget source="description" render="Label" position="center,e-%d" size="%d,%d" font="Regular;%d" verticalAlignment="center" />
+		<widget source="key_red" render="Label" position="%d,e-%d" size="%d,%d" backgroundColor="key_red" font="Regular;%d" foregroundColor="key_text" horizontalAlignment="center" verticalAlignment="center" />
+		<widget source="key_green" render="Label" position="%d,e-%d" size="%d,%d" backgroundColor="key_green" font="Regular;%d" foregroundColor="key_text" horizontalAlignment="center" verticalAlignment="center" />
 	</screen>""",
 		670, 570,
 		10, 356, 200,
@@ -104,7 +104,6 @@ class SkinSelector(Screen, HelpableScreen):
 		default = _("Default")
 		defaultPicon = _("Default+Picon")
 		current = _("Current")
-		pending = _("Error in XML")
 		displayPicon = pathjoin(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_picon.xml")
 		displayGrautec = pathjoin(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_grautec.xml")
 		skinList = []
@@ -114,6 +113,8 @@ class SkinSelector(Screen, HelpableScreen):
 			for skinFile in self.xmlList:
 				skin = pathjoin(dir, skinFile)
 				skinPath = pathjoin(self.rootDir, skin)
+				parseDone = fileReadXML(skinPath)
+				parseError = _("File error %s") % skin
 				if exists(skinPath):
 					resolution = None
 					if skinFile == "skin.xml":
@@ -150,10 +151,16 @@ class SkinSelector(Screen, HelpableScreen):
 						list = [displayGrautec.split(".")[0].split("/")[1], default, dir, skin, displayGrautec.split("/skin_")[1], preview]
 					else:
 						list = [dir, "", dir, skin, resolution, preview]
-					if skin == self.current:
+					if not parseDone:
+						list[1] = parseError
+					elif skin == self.current and "fallback" in skin:
+						list[1] = "%s %s" % (current, emergency)
+					elif skin == self.current and EMERGENCY_NAME in skin:
 						list[1] = current
-					elif skin == self.config.value:
-						list[1] = pending
+					elif skin != self.current and EMERGENCY_NAME in skin:
+						list[1] = default
+					elif skin == self.current:
+						list[1] = current
 					list.append("%s (%s)" % (list[0], list[1]) if list[1] else list[0])
 					if list[1]:
 						list[1] = "<%s>" % list[1]
