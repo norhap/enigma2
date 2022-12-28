@@ -1245,7 +1245,7 @@ def InitUsageConfig():
 	config.usage.keymap = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keymap.xml"))
 	config.usage.keytrans = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
-	config.usage.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
+	config.misc.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
 
 	def updateStackTracePrinter(configElement):
 		from Components.StackTrace import StackTracePrinter

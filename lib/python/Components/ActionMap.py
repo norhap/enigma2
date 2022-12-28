@@ -1,4 +1,7 @@
+from sys import maxsize
+
 from enigma import eActionMap
+
 from keyids import KEYIDS
 from Components.config import config
 from Tools.Directories import fileReadXML
@@ -109,17 +112,38 @@ class ActionMap:
 		self.contexts = contexts or []
 		self.actions = actions or {}
 		self.prio = prio
-		self.p = eActionMap.getInstance()
+		self.actionMapInstance = eActionMap.getInstance()
 		self.bound = False
 		self.exec_active = False
 		self.enabled = True
-		unknown = list(self.actions.keys())
-		for action in unknown[:]:
+		self.legacyBound = False
+		undefinedAction = list(self.actions.keys())
+		leftActionDefined = "left" in undefinedAction
+		rightActionDefined = "right" in undefinedAction
+		leftAction = None
+		rightAction = None
+		for action in undefinedAction[:]:
 			for context in self.contexts:
+				if context == "NavigationActions":
+					if action == "pageUp" and not leftActionDefined:
+						leftAction = self.actions[action]
+					if action == "pageDown" and not rightActionDefined:
+						rightAction = self.actions[action]
 				if queryKeyBinding(context, action):
-					unknown.remove(action)
+					undefinedAction.remove(action)
 					break
-		if unknown:
+		if leftAction and rightAction and config.misc.actionLeftRightToPageUpPageDown.value:
+			if config.crash.debugActionMaps.value:
+				print("[ActionMap] DEBUG: Creating legacy navigation action map.")
+				print(leftAction)
+				print(rightAction)
+			self.legacyActions = {
+				"left": leftAction,
+				"right": rightAction
+			}
+		else:
+			self.legacyActions = {}
+		if undefinedAction:
 			print(_("[ActionMap] Missing actions in keymap, missing context in this list ->'%s' for mapto='%s'.") % ("', '".join(sorted(self.contexts)), "', '".join(sorted(list(self.actions.keys())))))
 
 	def setEnabled(self, enabled):
@@ -127,15 +151,21 @@ class ActionMap:
 		self.checkBind()
 
 	def doBind(self):
+		if not self.legacyBound and self.legacyActions:
+			self.actionMapInstance.bindAction("NavigationActions", maxsize - 1, self.legacyAction)
+			self.legacyBound = True
 		if not self.bound:
 			for context in self.contexts:
-				self.p.bindAction(context, self.prio, self.action)
+				self.actionMapInstance.bindAction(context, self.prio, self.action)
 			self.bound = True
 
 	def doUnbind(self):
+		if self.legacyBound and self.legacyActions:
+			self.actionMapInstance.unbindAction("NavigationActions", self.legacyAction)
+			self.legacyBound = False
 		if self.bound:
 			for context in self.contexts:
-				self.p.unbindAction(context, self.action)
+				self.actionMapInstance.unbindAction(context, self.action)
 			self.bound = False
 
 	def checkBind(self):
@@ -163,6 +193,17 @@ class ActionMap:
 			print(_("[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'.") % (context, action))
 			return 0
 
+	def legacyAction(self, context, action):
+		if action in self.legacyActions:
+			print("[ActionMap] Map context '%s' -> Legacy action '%s'." % (context, action))
+			print(self.legacyActions[action])
+			response = self.legacyActions[action]()
+			if response is not None:
+				return response
+			return 1
+		print(_("[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'.") % (context, action))
+		return 0
+
 	def destroy(self):
 		pass
 
@@ -170,12 +211,11 @@ class ActionMap:
 class NumberActionMap(ActionMap):
 	def action(self, contexts, action):
 		if action in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9") and action in self.actions:
-			res = self.actions[action](int(action))
-			if res is not None:
-				return res
+			response = self.actions[action](int(action))
+			if response is not None:
+				return response
 			return 1
-		else:
-			return ActionMap.action(self, contexts, action)
+		return ActionMap.action(self, contexts, action)
 
 
 class HelpableActionMap(ActionMap):
@@ -191,6 +231,7 @@ class HelpableActionMap(ActionMap):
 	# ActionMapconstructor,	the collected helpstrings (with correct
 	# context, action) is added to the screen's "helpList", which will
 	# be picked up by the "HelpableScreen".
+	#
 	def __init__(self, parent, contexts, actions=None, prio=0, description=None):
 		def exists(record):
 			for context in parent.helpList:
@@ -199,40 +240,21 @@ class HelpableActionMap(ActionMap):
 						print("[ActionMap] removed duplicity: %s %s" % (context[1], record))
 						return True
 			return False
-
 		if isinstance(contexts, str):
 			contexts = [contexts]
 		actions = actions or {}
 		self.description = description
-		adict = {}
+		actionDict = {}
 		for context in contexts:
-			if config.usage.actionLeftRightToPageUpPageDown.value and context == "DirectionActions":
-				copyLeft = "left" not in actions and "pageUp" in actions
-				copyRight = "right" not in actions and "pageDown" in actions
-			else:
-				copyLeft = False
-				copyRight = False
-			alist = []
-			for (action, funchelp) in actions.items():
-				# Check if this is a tuple.
-				if isinstance(funchelp, tuple):
-					if queryKeyBinding(context, action):
-						if not exists((action, funchelp[1])):
-							alist.append((action, funchelp[1]))
-					adict[action] = funchelp[0]
-				else:
-					if queryKeyBinding(context, action):
-						if not exists((action, None)):
-							alist.append((action, None))
-					adict[action] = funchelp
-				if copyLeft and action == "pageUp":
-					alist.append(("left", funchelp[1]))
-					adict["left"] = funchelp[0]
-				if copyRight and action == "pageDown":
-					alist.append(("right", funchelp[1]))
-					adict["right"] = funchelp[0]
-			parent.helpList.append((self, context, alist))
-		ActionMap.__init__(self, contexts, adict, prio)
+			actionList = []
+			for (action, response) in actions.items():
+				if not isinstance(response, (list, tuple)):
+					response = (response, None)
+				if queryKeyBinding(context, action):
+					actionList.append((action, response[1]))
+				actionDict[action] = response[0]
+			parent.helpList.append((self, context, actionList))
+		ActionMap.__init__(self, contexts, actionDict, prio)
 
 
 class HelpableNumberActionMap(NumberActionMap, HelpableActionMap):
@@ -240,5 +262,6 @@ class HelpableNumberActionMap(NumberActionMap, HelpableActionMap):
 		# Initialise NumberActionMap with empty context and actions
 		# so that the underlying ActionMap is only initialised with
 		# these once, via the HelpableActionMap.
+		#
 		NumberActionMap.__init__(self, [], {})
 		HelpableActionMap.__init__(self, parent, contexts, actions, prio, description)
