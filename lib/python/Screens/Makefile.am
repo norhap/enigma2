@@ -49,7 +49,6 @@ install_PYTHON = \
 	PowerTimerEdit.py \
 	PowerTimerEntry.py \
 	PVRState.py \
-	Rc.py \
 	RdsDisplay.py \
 	Recording.py \
 	Satconfig.py \

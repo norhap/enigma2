@@ -10,7 +10,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Screens.InfoBar import InfoBar
 from Screens.MessageBox import MessageBox
-from Screens.Rc import Rc
+from Screens.HelpMenu import ShowRemoteControl
 from Screens.Standby import TryQuitMainloop
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -215,10 +215,10 @@ class LanguageSelection(Screen):
 		self["languages"].pageDown()
 
 
-class LanguageWizard(LanguageSelection, Rc):
+class LanguageWizard(LanguageSelection, ShowRemoteControl):
 	def __init__(self, session):
 		LanguageSelection.__init__(self, session)
-		Rc.__init__(self)
+		ShowRemoteControl.__init__(self)
 		global inWizzard
 		inWizzard = True
 		self.onLayoutFinish.append(self.selectKeys)

@@ -155,7 +155,7 @@ from Components.PluginComponent import plugins
 profile("LOAD:Wizard")
 from Screens.Wizard import wizardManager
 from Screens.StartWizard import *
-import Screens.Rc
+from Screens.HelpMenu import ShowRemoteControl
 from Tools.BoundFunction import boundFunction
 from Plugins.Plugin import PluginDescriptor
 

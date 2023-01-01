@@ -1,17 +1,22 @@
-from sys import maxsize
-
-from enigma import eActionMap
-
 from collections import defaultdict
 from functools import cmp_to_key
-from Components.config import config
-from Components.Sources.List import List
+from sys import maxsize
+
+from enigma import eActionMap, eTimer
+
+from keyids import KEYIDNAMES, KEYIDS
 from Components.ActionMap import ActionMap, queryKeyBinding
+from Components.config import config, ConfigInteger
 from Components.InputDevice import remoteControl
 from Components.Label import Label
+from Components.Pixmap import MovingPixmap, Pixmap
+from Components.SystemInfo import SystemInfo
+from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from Screens.Rc import Rc
 from Screens.Screen import Screen
+from Tools.LoadPixmap import LoadPixmap
+
+config.misc.rcused = ConfigInteger(default=1)
 
 
 class HelpableScreen:
@@ -22,11 +27,6 @@ class HelpableScreen:
 		self["key_help"] = StaticText(_("HELP"))
 
 	def showHelp(self):
-		# try:
-		# 	if self.secondInfoBarScreen and self.secondInfoBarScreen.shown:
-		# 		self.secondInfoBarScreen.hide()
-		# except Exception:
-		# 	pass
 		self.session.openWithCallback(self.callHelpAction, HelpMenu, self.helpList)
 
 	def callHelpAction(self, *args):
@@ -35,10 +35,154 @@ class HelpableScreen:
 			actionmap.action(context, action)
 
 
-class HelpMenu(Screen, Rc):
+class ShowRemoteControl:
+	def __init__(self):
+		self["rc"] = Pixmap()
+		self["label"] = Label()
+		self.rcPosition = None
+		buttonImages = 16
+		rcHeights = (500,) * 2
+		self.selectPics = []
+		for indicator in range(buttonImages):
+			self.selectPics.append(self.KeyIndicator(self, rcHeights, ("indicatorU%d" % indicator, "indicatorL%d" % indicator)))
+		self.nSelectedKeys = 0
+		self.oldNSelectedKeys = 0
+		self.clearSelectedKeys()
+		self.wizardConversion = {  # This dictionary converts named buttons in the Wizards to keyIds.
+			"OK": KEYIDS.get("KEY_OK"),
+			"EXIT": KEYIDS.get("KEY_EXIT"),
+			"LEFT": KEYIDS.get("KEY_LEFT"),
+			"RIGHT": KEYIDS.get("KEY_RIGHT"),
+			"UP": KEYIDS.get("KEY_UP"),
+			"DOWN": KEYIDS.get("KEY_DOWN"),
+			"RED": KEYIDS.get("KEY_RED"),
+			"GREEN": KEYIDS.get("KEY_GREEN"),
+			"YELLOW": KEYIDS.get("KEY_YELLOW"),
+			"BLUE": KEYIDS.get("KEY_BLUE")
+		}
+		self.onLayoutFinish.append(self.initRemoteControl)
+
+	class KeyIndicator:
+
+		class KeyIndicatorPixmap(MovingPixmap):
+			def __init__(self, activeYPos, pixmap):
+				MovingPixmap.__init__(self)
+				self.activeYPos = activeYPos
+				self.pixmapName = pixmap
+
+		def __init__(self, owner, activeYPos, pixmaps):
+			self.pixmaps = []
+			for actYpos, pixmap in zip(activeYPos, pixmaps):
+				pm = self.KeyIndicatorPixmap(actYpos, pixmap)
+				owner[pixmap] = pm
+				self.pixmaps.append(pm)
+			self.pixmaps.sort(key=lambda x: x.activeYPos)
+
+		def slideTime(self, start, end, time=20):
+			if not self.pixmaps:
+				return time
+			dist = ((end[0] - start[0]) ** 2 + (end[1] - start[1]) ** 2) ** 0.5
+			slide = int(round(dist / self.pixmaps[-1].activeYPos * time))
+			return slide if slide > 0 else 1
+
+		def moveTo(self, pos, rcPos, moveFrom=None, time=20):
+			foundActive = False
+			for index, pixmap in enumerate(self.pixmaps):
+				fromX, fromY = pixmap.getPosition()
+				if moveFrom:
+					fromX, fromY = moveFrom.pixmaps[index].getPosition()
+				x = pos[0] + rcPos[0]
+				y = pos[1] + rcPos[1]
+				if pos[1] <= pixmap.activeYPos and not foundActive:
+					pixmap.move(fromX, fromY)
+					pixmap.moveTo(x, y, self.slideTime((fromX, fromY), (x, y), time))
+					pixmap.show()
+					pixmap.startMoving()
+					foundActive = True
+				else:
+					pixmap.move(x, y)
+
+		def hide(self):
+			for pixmap in self.pixmaps:
+				pixmap.hide()
+
+	def initRemoteControl(self):
+		rc = LoadPixmap(SystemInfo["RCImage"])
+		if rc:
+			self["rc"].instance.setPixmap(rc)
+			self.rcPosition = self["rc"].getPosition()
+			rcHeight = self["rc"].getSize()[1]
+			for selectPic in self.selectPics:
+				nBreaks = len(selectPic.pixmaps)
+				roundup = nBreaks - 1
+				n = 1
+				for pic in selectPic.pixmaps:
+					pic.activeYPos = (rcHeight * n + roundup) / nBreaks
+					n += 1
+
+	def selectKey(self, keyId):
+		if self.rcPosition:
+			if isinstance(keyId, str):  # This test looks for named buttons in the Wizards and converts them to keyIds.
+				keyId = self.wizardConversion.get(keyId, 0)
+			pos = remoteControl.getRemoteControlKeyPos(keyId)
+			if pos and self.nSelectedKeys < len(self.selectPics):
+				selectPic = self.selectPics[self.nSelectedKeys]
+				self.nSelectedKeys += 1
+				if self.oldNSelectedKeys > 0 and self.nSelectedKeys > self.oldNSelectedKeys:
+					selectPic.moveTo(pos, self.rcPosition, moveFrom=self.selectPics[self.oldNSelectedKeys - 1], time=int(config.usage.helpAnimationSpeed.value))
+				else:
+					selectPic.moveTo(pos, self.rcPosition, time=int(config.usage.helpAnimationSpeed.value))
+
+	def clearSelectedKeys(self):
+		self.hideSelectPics()
+		self.oldNSelectedKeys = self.nSelectedKeys
+		self.nSelectedKeys = 0
+
+	def hideSelectPics(self):
+		for selectPic in self.selectPics:
+			selectPic.hide()
+
+	# Visits all the buttons in turn, sliding between them.  Starts with
+	# the top left button and finishes on the bottom right button.
+	# Leaves the highlight on the bottom right button at the end of
+	# the test run.  The callback method can be used to restore the
+	# highlight(s) to their correct position(s) when the animation
+	# completes.
+	#
+	def testHighlights(self, callback=None):
+		def timeout():
+			if buttons:
+				keyId = buttons.pop(0)
+				pos = remoteControl.getRemoteControlKeyPos(keyId)
+				pixmap.clearPath()
+				pixmap.addMovePoint(rcPos[0] + pos[0], rcPos[1] + pos[1], time=5)
+				pixmap.startMoving(startTimer)
+				self["label"].setText("%s: %s\n%s: %s" % (_("Key"), KEYIDNAMES.get(keyId, _("Unknown")), _("Label"), remoteControl.getRemoteControlKeyLabel(keyId)))
+				pixmap.addMovePoint(rcPos[0] + pos[0], rcPos[1] + pos[1], time=15)
+				pixmap.startMoving(startTimer)
+			else:
+				self["label"].setText("")
+				callback()
+
+		def startTimer():
+			timer.start(0, True)
+
+		if not self.selectPics or not self.selectPics[0].pixmaps:
+			return
+		self.hideSelectPics()
+		pixmap = self.selectPics[0].pixmaps[0]
+		pixmap.show()
+		rcPos = self["rc"].getPosition()
+		buttons = remoteControl.getRemoteControlKeyList()[:]
+		timer = eTimer()
+		timer.callback.append(timeout)
+		timer.start(500, True)
+
+
+class HelpMenu(Screen, ShowRemoteControl):
 	def __init__(self, session, helpList):
 		Screen.__init__(self, session)
-		Rc.__init__(self)
+		ShowRemoteControl.__init__(self)
 		self.setTitle(_("Help"))
 		self["list"] = HelpMenuList(helpList, self.close)
 		self["list"].onSelectionChanged.append(self.selectionChanged)
@@ -70,6 +214,23 @@ class HelpMenu(Screen, Rc):
 		eActionMap.getInstance().unbindAction("", self["list"].handleButton)
 		self["list"].onSelectionChanged.remove(self.selectionChanged)
 
+	def showHelp(self):
+		# MessageBox import deferred so that MessageBox's import of HelpMenu doesn't cause an import loop.
+		from Screens.MessageBox import MessageBox
+		helpText = "\n\n".join([
+			_("HELP provides brief information for buttons in your current context."),
+			_("Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. OK to perform the action described in the currently highlighted help."),
+			_("Other buttons will jump to the help information for that button, if there is help available."),
+			_("If an action is user-configurable, its help entry will be flagged with a '(C)' suffix."),
+			_("A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list lists the active buttons and whether the function requires a long press or SHIFT of the button(s)."),
+			_("Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."),
+			_("Press EXIT to return to the help screen.")
+		])
+		self.session.open(MessageBox, helpText, type=MessageBox.TYPE_INFO, title=_("Help Screen Information"))
+
+	def showButtons(self):
+		self.testHighlights(self.selectionChanged)
+
 	def selectionChanged(self):
 		self.clearSelectedKeys()
 		selection = self["list"].getCurrent()
@@ -100,23 +261,6 @@ class HelpMenu(Screen, Rc):
 			self["buttonlist"].setText("; ".join(buttonList))
 			helpText = selection[4]
 			self["description"].setText(isinstance(helpText, (list, tuple)) and len(helpText) > 1 and helpText[1] or "")
-
-	def showHelp(self):
-		# MessageBox import deferred so that MessageBox's import of HelpMenu doesn't cause an import loop.
-		from Screens.MessageBox import MessageBox
-		helpText = "\n\n".join([
-			_("HELP provides brief information for buttons in your current context."),
-			_("Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. OK to perform the action described in the currently highlighted help."),
-			_("Other buttons will jump to the help information for that button, if there is help available."),
-			_("If an action is user-configurable, its help entry will be flagged with a '(C)' suffix."),
-			_("A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list lists the active buttons and whether the function requires a long press or SHIFT of the button(s)."),
-			_("Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."),
-			_("Press EXIT to return to the help screen.")
-		])
-		self.session.open(MessageBox, helpText, type=MessageBox.TYPE_INFO, title=_("Help Screen Information"))
-
-	def showButtons(self):
-		self.testHighlights(self.selectionChanged)
 
 
 # Helplist structure:

@@ -6,7 +6,7 @@ from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
 from Screens.Screen import Screen
-from Screens.Rc import Rc
+from Screens.HelpMenu import ShowRemoteControl
 from Tools.Geolocation import geolocation
 
 
@@ -56,7 +56,7 @@ class Time(Setup):
 			self.setFootnote(_("Geolocation has been used to set the time zone."))
 
 
-class TimeWizard(ConfigListScreen, Screen, Rc):
+class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 	skin = """
 	<screen name="TimeWizard" position="center,60" size="980,635" resolution="1280,720">
 		<widget name="text" position="10,10" size="e-20,25" font="Regular;20" transparent="1" valign="center" />
@@ -106,7 +106,7 @@ class TimeWizard(ConfigListScreen, Screen, Rc):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Rc.__init__(self)
+		ShowRemoteControl.__init__(self)
 		self.skinName = ["TimeWizard"]
 		self.setTitle(_("Time Wizard"))
 		self.list = []
