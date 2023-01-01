@@ -102,7 +102,6 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		self.settings.menupage.addNotifier(self.fillList)
 
 	def fillList(self, arg=None):
-		from Tools.ISO639 import LanguageCodes
 		from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
 		streams = []
 		conflist = []
@@ -626,7 +625,12 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 
 	def keyDown(self):
 		if self.focus == FOCUS_CONFIG:
-			if self["config"].getCurrentIndex() < len(self["config"].getList()) - 1:
+			configList = self["config"].getList()
+			count = len(configList)
+			for x in configList:
+				if x[0] == "":
+					count -= 1
+			if self["config"].getCurrentIndex() < count - 1:
 				self["config"].instance.moveSelection(self["config"].instance.moveDown)
 			else:
 				self["config"].instance.setSelectionEnable(False)
