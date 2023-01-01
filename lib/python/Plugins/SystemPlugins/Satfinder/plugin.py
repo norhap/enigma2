@@ -7,28 +7,20 @@ from Components.Sources.FrontendStatus import FrontendStatus
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager, getConfigSatlist
 from Components.config import config, ConfigSelection, getConfigListEntry
-from Components.SystemInfo import SystemInfo
 from Components.TuneTest import Tuner
 from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
-from Screens.Screen import Screen # for services found class
+from Tools.Directories import isPluginInstalled
 # from sys import version_info
-import skin
 
-try: # for reading the current transport stream (SatfinderExtra)
+if isPluginInstalled("AutoBouquetsMaker"):
+	dvbreader_available = True
 	from Plugins.SystemPlugins.AutoBouquetsMaker.scanner import dvbreader
 	from Components.Sources.StaticText import StaticText
-	from Components.ScrollLabel import ScrollLabel
-	from Components.Label import Label
 	import time
 	import datetime
-	try:
-		import thread
-	except:
-		import _thread as thread
-	dvbreader_available = True
-except ImportError as e:
-	print("[Satfinder] import dvbreader not available")
+	import _thread
+else:
 	dvbreader_available = False
 
 
@@ -631,7 +623,7 @@ class SatfinderExtra(Satfinder):
 
 	def dvb_read_stream(self):
 		print("[satfinder][dvb_read_stream] starting")
-		thread.start_new_thread(self.getCurrentTsidOnid, (True,))
+		_thread.start_new_thread(self.getCurrentTsidOnid, (True,))
 
 	def getCurrentTsidOnid(self, from_retune=False):
 		self.currentProcess = currentProcess = datetime.datetime.now()
@@ -651,7 +643,7 @@ class SatfinderExtra(Satfinder):
 		if not self.waitTunerLock(currentProcess): # dont even try to read the transport stream if tuner is not locked
 			return
 
-		thread.start_new_thread(self.monitorTunerLock, (currentProcess,)) # if tuner loses lock we start again from scratch
+		_thread.start_new_thread(self.monitorTunerLock, (currentProcess,)) # if tuner loses lock we start again from scratch
 
 		adapter = 0
 
@@ -870,6 +862,7 @@ class SatfinderExtra(Satfinder):
 			time.sleep(1.0)
 
 	def keyReadServices(self):
+		from Screens.TextBox import TextBox
 		if not self.serviceList:
 			return
 		tv = [1, 17, 22, 25]
@@ -894,41 +887,7 @@ class SatfinderExtra(Satfinder):
 				colour = red
 			services.append("%s%s%s" % (dash, colour, service["service_name"])) # if version_info.major >= 3 else services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
 
-		self.session.open(ServicesFound, "\n".join(services), legend)
-
-
-class ServicesFound(Screen):
-	skin = """
-		<screen name="ServicesFound" position="center,center" size="600,570">
-			<widget name="legend" position="0,0" size="590,80" zPosition="10" font="Regular;21" transparent="1"/>
-			<widget name="servicesfound" position="0,85" size="590,425" zPosition="10" font="Regular;21" transparent="1"/>
-			<ePixmap pixmap="buttons/red.png" position="10,525" size="140,40" alphatest="on" />
-			<widget render="Label" source="key_red" position="10,500" zPosition="1" size="140,25" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1"/>
-		</screen>"""
-
-	def __init__(self, session, text, legend):
-		Screen.__init__(self, session)
-		self.setTitle(_("Information"))
-
-		self["key_red"] = StaticText(_("Close"))
-		self["legend"] = Label(legend)
-		self["servicesfound"] = ScrollLabel(text)
-
-		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
-		{
-			"back": self.close,
-			"red": self.close,
-			"up": self.pageUp,
-			"down": self.pageDown,
-			"left": self.pageUp,
-			"right": self.pageDown,
-		}, -2)
-
-	def pageUp(self):
-		self["servicesfound"].pageUp()
-
-	def pageDown(self):
-		self["servicesfound"].pageDown()
+		self.session.open(TextBox, "\n".join(services), legend)
 
 
 def SatfinderCallback(close, answer):
