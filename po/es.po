@@ -6189,7 +6189,7 @@ msgid "Servicename"
 msgstr "Nombre de canal"
 
 msgid "Services"
-msgstr "Servicios"
+msgstr "Canales"
 
 msgid "Set PIN Pressing [OK]"
 msgstr "Establezca PIN Presionando [OK]"
