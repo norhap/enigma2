@@ -606,6 +606,9 @@ class SatfinderExtra(Satfinder):
 		self["tsid"] = StaticText("")
 		self["onid"] = StaticText("")
 		self["pos"] = StaticText("")
+		self["tsidtext"] = StaticText("TSID:")
+		self["onidtext"] = StaticText("ONID:")
+		self["postext"] = StaticText(_("Orbital position:"))
 
 	def retune(self, configElement=None):
 		Satfinder.retune(self)

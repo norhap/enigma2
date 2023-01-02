@@ -4608,6 +4608,9 @@ msgstr "Opciones de temporizador desactivado"
 msgid "Orbital position"
 msgstr "Posición orbital"
 
+msgid "Orbital position:"
+msgstr "Posición orbital:"
+
 msgid "Ordinary"
 msgstr "Ordinario"
 
