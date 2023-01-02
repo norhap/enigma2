@@ -662,55 +662,53 @@ class SatfinderExtra(Satfinder):
 
 		timeout = datetime.datetime.now()
 		timeout += datetime.timedelta(0, tsidOnidTimeout)
-
 		if hasattr(self, "demux"):
 			demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demux)
-			fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.feid)
-		fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.feid)
+			if demuxer_device:
+				fd = dvbreader.open(demuxer_device, sdt_pid, sdt_current_table_id, mask, self.feid)
+				if fd:
+					if fd < 0:
+						print("[Satfinder][getCurrentTsidOnid] Cannot open the demuxer")
+						return None
 
-		if hasattr(self, "demux"):
-			if fd < 0:
-				print("[Satfinder][getCurrentTsidOnid] Cannot open the demuxer")
-				return None
+				while True:
+					if datetime.datetime.now() > timeout:
+						print("[Satfinder][getCurrentTsidOnid] Timed out")
+						break
 
-		while True:
-			if datetime.datetime.now() > timeout:
-				print("[Satfinder][getCurrentTsidOnid] Timed out")
-				break
+					if hasattr(self, "currentProcess") and self.currentProcess != currentProcess:
+						dvbreader.close(fd)
+						return
+					if fd:
+						section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
+					if section is None:
+						time.sleep(0.1)	# no data.. so we wait a bit
+						continue
 
-			if hasattr(self, "currentProcess") and self.currentProcess != currentProcess:
+					if section["header"]["table_id"] == sdt_current_table_id and not sdt_current_completed:
+						if section["header"]["version_number"] != sdt_current_version_number:
+							sdt_current_version_number = section["header"]["version_number"]
+							sdt_current_sections_read = []
+							sdt_current_sections_count = section["header"]["last_section_number"] + 1
+							sdt_current_content = []
+
+						if section["header"]["section_number"] not in sdt_current_sections_read:
+							sdt_current_sections_read.append(section["header"]["section_number"])
+							sdt_current_content += section["content"]
+							if hasattr(self, "tsid") and self.tsid is None or hasattr(self, "onid") and self.onid is None: # write first find straight to the screen
+								self.tsid = section["header"]["transport_stream_id"]
+								self.onid = section["header"]["original_network_id"]
+								self["tsid"].setText("%d" % (section["header"]["transport_stream_id"]))
+								self["onid"].setText("%d" % (section["header"]["original_network_id"]))
+								print("[Satfinder][getCurrentTsidOnid] tsid %d, onid %d" % (section["header"]["transport_stream_id"], section["header"]["original_network_id"]))
+
+							if len(sdt_current_sections_read) == sdt_current_sections_count:
+								sdt_current_completed = True
+
+					if sdt_current_completed:
+						break
+
 				dvbreader.close(fd)
-				return
-
-			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
-			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
-				continue
-
-			if section["header"]["table_id"] == sdt_current_table_id and not sdt_current_completed:
-				if section["header"]["version_number"] != sdt_current_version_number:
-					sdt_current_version_number = section["header"]["version_number"]
-					sdt_current_sections_read = []
-					sdt_current_sections_count = section["header"]["last_section_number"] + 1
-					sdt_current_content = []
-
-				if section["header"]["section_number"] not in sdt_current_sections_read:
-					sdt_current_sections_read.append(section["header"]["section_number"])
-					sdt_current_content += section["content"]
-					if hasattr(self, "tsid") and self.tsid is None or hasattr(self, "onid") and self.onid is None: # write first find straight to the screen
-						self.tsid = section["header"]["transport_stream_id"]
-						self.onid = section["header"]["original_network_id"]
-						self["tsid"].setText("%d" % (section["header"]["transport_stream_id"]))
-						self["onid"].setText("%d" % (section["header"]["original_network_id"]))
-						print("[Satfinder][getCurrentTsidOnid] tsid %d, onid %d" % (section["header"]["transport_stream_id"], section["header"]["original_network_id"]))
-
-					if len(sdt_current_sections_read) == sdt_current_sections_count:
-						sdt_current_completed = True
-
-			if sdt_current_completed:
-				break
-
-		dvbreader.close(fd)
 
 		if not sdt_current_content:
 			print("[Satfinder][getCurrentTsidOnid] no services found on transponder")
