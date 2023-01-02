@@ -1,3 +1,6 @@
+from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
+
+from Tools.ISO639 import LanguageCodes
 from Screens.Screen import Screen
 from Screens.Setup import getConfigMenuItem, Setup
 from Screens.HelpMenu import HelpableScreen
@@ -14,11 +17,6 @@ from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
-
-from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
-
-from Tools.ISO639 import LanguageCodes
-from Tools.BoundFunction import boundFunction
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
