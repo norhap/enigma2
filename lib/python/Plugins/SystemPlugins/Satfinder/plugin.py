@@ -11,7 +11,6 @@ from Components.TuneTest import Tuner
 from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import isPluginInstalled
-# from sys import version_info
 
 if isPluginInstalled("AutoBouquetsMaker"):
 	dvbreader_available = True
@@ -62,6 +61,7 @@ class Satfinder(ScanSetup, ServiceScan):
 			"save": self.keyGoScan,
 			"ok": self.keyGoScan,
 			"cancel": self.keyCancel,
+			"menu": self.keyMenu
 		}, -3)
 
 		self.initcomplete = True
@@ -580,6 +580,10 @@ class Satfinder(ScanSetup, ServiceScan):
 			del self.raw_channel
 		self.close(False)
 
+	def keyMenu(self):
+		from Components.ConfigList import ConfigListScreen
+		ConfigListScreen.keyMenu(self)
+
 	def doCloseRecursive(self):
 		if self.session.postScanService and self.frontend:
 			self.frontend = None
@@ -606,9 +610,9 @@ class SatfinderExtra(Satfinder):
 		self["tsid"] = StaticText("")
 		self["onid"] = StaticText("")
 		self["pos"] = StaticText("")
-		self["tsidtext"] = StaticText("TSID:")
-		self["onidtext"] = StaticText("ONID:")
-		self["postext"] = StaticText(_("Orbital position:"))
+		self["tsidtext"] = StaticText("")
+		self["onidtext"] = StaticText("")
+		self["postext"] = StaticText("")
 
 	def retune(self, configElement=None):
 		Satfinder.retune(self)
@@ -632,6 +636,7 @@ class SatfinderExtra(Satfinder):
 		self.currentProcess = currentProcess = datetime.datetime.now()
 		self["tsid"].setText("")
 		self["onid"].setText("")
+		self["postext"].setText(_("DVB type:"))
 		self["pos"].setText(self.DVB_type.value)
 		self["key_yellow"].setText("")
 		self["actions2"].setEnabled(False)
@@ -701,6 +706,8 @@ class SatfinderExtra(Satfinder):
 							if hasattr(self, "tsid") and self.tsid is None or hasattr(self, "onid") and self.onid is None: # write first find straight to the screen
 								self.tsid = section["header"]["transport_stream_id"]
 								self.onid = section["header"]["original_network_id"]
+								self["tsidtext"].setText("TSID:")
+								self["onidtext"].setText("ONID:")
 								self["tsid"].setText("%d" % (section["header"]["transport_stream_id"]))
 								self["onid"].setText("%d" % (section["header"]["original_network_id"]))
 								print("[Satfinder][getCurrentTsidOnid] tsid %d, onid %d" % (section["header"]["transport_stream_id"], section["header"]["original_network_id"]))
@@ -801,10 +808,12 @@ class SatfinderExtra(Satfinder):
 			transponders2 = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] == 0x43 and t["transport_stream_id"] == self.tsid]
 			if transponders and "orbital_position" in transponders[0]:
 				orb_pos = self.getOrbitalPosition(transponders[0]["orbital_position"], transponders[0]["west_east_flag"])
+				self["postext"].setText(_("Orbital position:"))
 				self["pos"].setText(_("%s") % orb_pos)
 				print("[satfinder][getOrbPosFromNit] orb_pos", orb_pos)
 			elif transponders2 and "orbital_position" in transponders2[0]:
 				orb_pos = self.getOrbitalPosition(transponders2[0]["orbital_position"], transponders2[0]["west_east_flag"])
+				self["postext"].setText(_("Orbital position:"))
 				self["pos"].setText(_("%s?") % orb_pos)
 				print("[satfinder][getOrbPosFromNit] orb_pos tentative, tsid match, onid mismatch between NIT and SDT", orb_pos)
 			else:

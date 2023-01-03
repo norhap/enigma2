@@ -1800,6 +1800,9 @@ msgstr "Fecha de los Drivers: "
 msgid "DVB type"
 msgstr "Tipo de DVB"
 
+msgid "DVB type:"
+msgstr "Tipo de DVB:"
+
 msgid "DVD Burn"
 msgstr "Quemar DVD"
 
