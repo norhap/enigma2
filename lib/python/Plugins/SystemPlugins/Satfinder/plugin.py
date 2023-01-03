@@ -840,14 +840,14 @@ class SatfinderExtra(Satfinder):
 
 			if hasattr(self, "frontend"):
 				frontendStatus = {}
-				self.frontend.getFrontendStatus(frontendStatus)
-				if frontendStatus["tuner_state"] == "FAILED":
-					print("[Satfinder][waitTunerLock] TUNING FAILED FATAL") # enigma2 cpp code has given up trying
-					return False
-
-				if frontendStatus["tuner_state"] != "LOCKED":
-					time.sleep(0.25)
-					continue
+				if self.frontend:
+					self.frontend.getFrontendStatus(frontendStatus)
+					if frontendStatus["tuner_state"] == "FAILED":
+						print("[Satfinder][waitTunerLock] TUNING FAILED FATAL") # enigma2 cpp code has given up trying
+						return False
+					if frontendStatus["tuner_state"] != "LOCKED":
+						time.sleep(0.25)
+						continue
 
 			return True
 
