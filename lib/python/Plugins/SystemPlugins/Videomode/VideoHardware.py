@@ -80,12 +80,6 @@ class VideoHardware:
 	elif socfamily in ("7241", "7358", "7362", "73625", "7346", "7356", "73565", "7424", "7425", "7435", "7552", "7581", "7584", "75845", "7585", "pnx8493", "7162", "7111", "3716mv410", "3716mv430"):
 		modes["DVI"] = ["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i"}
-	elif chipsetstring == "meson-6":
-		modes["DVI"] = ["720p", "1080p", "1080i"]
-		widescreen_modes = {"720p", "1080p", "1080i"}
-	elif chipsetstring in ("meson-64", "s905d") or socfamily in ("aml905d", "meson64"):
-		modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i"]
-		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
 	else:
 		modes["DVI"] = ["720p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080i"}
@@ -106,7 +100,6 @@ class VideoHardware:
 		del modes["Scart"]
 
 	if model == "hd2400":
-		print("[Videomode] Read /proc/stb/info/board_revision")
 		rev = open("/proc/stb/info/board_revision", "r").read()
 		if rev >= "2":
 			del modes["YPbPr"]
@@ -130,11 +123,10 @@ class VideoHardware:
 						ret = (16, 10)
 			elif is_auto:
 				try:
-					print("[Videomode] Read /proc/stb/vmpeg/0/aspect")
 					aspect_str = open("/proc/stb/vmpeg/0/aspect", "r").read()
 					if aspect_str == "1": # 4:3
 						ret = (4, 3)
-				except IOError:
+				except Exception:
 					pass
 			else:  # 4:3
 				ret = (4, 3)
@@ -179,7 +171,6 @@ class VideoHardware:
 
 	def readAvailableModes(self):
 		try:
-			print("[Videomode] Read /proc/stb/video/videomode_choices")
 			modes = open("/proc/stb/video/videomode_choices").read()[:-1]
 		except IOError:
 			print("[Videomode] Read /proc/stb/video/videomode_choices failed.")
@@ -190,14 +181,12 @@ class VideoHardware:
 	def readPreferredModes(self):
 		if config.av.edid_override.value == False:
 			try:
-				print("[Videomode] Read /proc/stb/video/videomode_edid")
 				modes = open("/proc/stb/video/videomode_edid").read()[:-1]
 				self.modes_preferred = modes.split(' ')
 				print("[Videomode] VideoHardware reading edid modes: ", self.modes_preferred)
 			except IOError:
 				print("[Videomode] Read /proc/stb/video/videomode_edid failed.")
 				try:
-					print("[Videomode] Read /proc/stb/video/videomode_preferred")
 					modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
 					self.modes_preferred = modes.split(' ')
 				except IOError:
@@ -249,16 +238,12 @@ class VideoHardware:
 				mode_24 = mode_50
 
 		try:
-			print("[Videomode] Write to /proc/stb/video/videomode_50hz")
 			open("/proc/stb/video/videomode_50hz", "w").write(mode_50)
-			print("[Videomode] Write to /proc/stb/video/videomode_60hz")
 			open("/proc/stb/video/videomode_60hz", "w").write(mode_60)
 		except IOError:
-			print("[Videomode] Write to /proc/stb/video/videomode_50hz failed.")
-			print("[Videomode] Write to /proc/stb/video/videomode_60hz failed.")
+			print("[Videomode] cannot open /proc/stb/video/videomode failed.")
 			try:
 				# fallback if no possibility to setup 50/60 hz mode
-				print("[Videomode] Write to /proc/stb/video/videomode")
 				open("/proc/stb/video/videomode", "w").write(mode_50)
 			except IOError:
 				print("[Videomode] Write to /proc/stb/video/videomode failed.")
@@ -268,12 +253,11 @@ class VideoHardware:
 				print("[Videomode] Write to /proc/stb/video/videomode_24hz")
 				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
 			except IOError:
-				print("[Videomode] Write to /proc/stb/video/videomode_24hz failed.")
+				print("[Videomode] cannot open /proc/stb/video/videomode_24hz")
 
 		if brand == "GigaBlue":
 			try:
 				# use 50Hz mode (if available) for booting
-				print("[Videomode] Write to /etc/videomode")
 				open("/etc/videomode", "w").write(mode_50)
 			except IOError:
 				print("[Videomode] Write to /etc/videomode failed.")
@@ -422,38 +406,21 @@ class VideoHardware:
 			wss = "auto"
 
 		print("[Videomode] VideoHardware -> setting aspect, policy, policy2, wss", aspect, policy, policy2, wss)
-		if chipsetstring.startswith("meson-6"):
-			arw = "0"
-			if config.av.policy_43.value == "bestfit":
-				arw = "10"
-			if config.av.policy_43.value == "panscan":
-				arw = "11"
-			if config.av.policy_43.value == "letterbox":
-				arw = "12"
-			try:
-				print("[Videomode] Write to /sys/class/video/screen_mode")
-				open("/sys/class/video/screen_mode", "w").write(arw)
-			except IOError:
-				print("[Videomode] Write to /sys/class/video/screen_mode failed.")
 		try:
-			print("[Videomode] Write to /proc/stb/video/aspect")
 			open("/proc/stb/video/aspect", "w").write(aspect)
-		except IOError:
+		except Exception:
 			print("[Videomode] Write to /proc/stb/video/aspect failed.")
 		try:
-			print("[Videomode] Write to /proc/stb/video/policy")
 			open("/proc/stb/video/policy", "w").write(policy)
-		except IOError:
+		except Exception:
 			print("[Videomode] Write to /proc/stb/video/policy failed.")
 		try:
-			print("[Videomode] Write to /proc/stb/denc/0/wss")
 			open("/proc/stb/denc/0/wss", "w").write(wss)
-		except IOError:
+		except Exception:
 			print("[Videomode] Write to /proc/stb/denc/0/wss failed.")
 		try:
-			print("[Videomode] Write to /proc/stb/video/policy2")
 			open("/proc/stb/video/policy2", "w").write(policy2)
-		except IOError:
+		except Exception:
 			print("[Videomode] Write to /proc/stb/video/policy2 failed.")
 
 
