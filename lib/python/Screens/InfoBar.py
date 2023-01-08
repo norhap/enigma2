@@ -2,7 +2,7 @@ from Tools.Profile import profile
 from enigma import eServiceReference
 from boxbranding import getBoxType
 from Tools.StbHardware import getBrand
-from Tools.Directories import fileExists
+from Tools.Directories import fileExists, isPluginInstalled
 # workaround for required config entry dependencies.
 from Screens.MovieSelection import MovieSelection, moveServiceFiles
 
@@ -60,10 +60,12 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			"ZoomInOut": (self.ZoomInOut, _("Zoom In/Out TV")),
 			"ZoomOff": (self.ZoomOff, _("Zoom Off"))
 		}, prio=2, description=_("Live TV Actions"))
-
+		if isPluginInstalled("AutoTimer"):
+			from Components.Label import Label
+			self["key_yellow"] = Label()
+			self["key_yellow"].setText(_("AutoTimer"))
 		self.radioTV = 0
 		self.allowPiP = True
-
 		for x in HelpableScreen, \
 				InfoBarBase, InfoBarShowHide, \
 				InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarEPG, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
