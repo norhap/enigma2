@@ -5128,6 +5128,17 @@ msgstr ""
 "\n"
 "Temporizadores > AutoTemporizadores y busque el evento con botón verde."
 
+msgid ""
+"You are ready to add an event to automatic timer.\n"
+"If there are no conflicts, once added you must enter menu:\n"
+"\n"
+"Timers > AutoTimers and search the event with green button."
+msgstr ""
+"Se dispone para añadir un evento al temporizador automático.\n"
+"Si no hay conflictos, una vez agregado debe ingresar al menú:\n"
+"\n"
+"Temporizadores > AutoTemporizadores y busque el evento con botón verde."
+
 msgid "The AutoTimer plugin is not installed."
 msgstr "El plugin temporizador automático no está instalado."
 
