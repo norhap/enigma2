@@ -2452,7 +2452,7 @@ class InfoBarExtensions:
 			service = self.session.nav.getCurrentService()
 			event = service and service.info().getEvent(0)
 			from Plugins.Extensions.AutoTimer.AutoTimerEditor import addAutotimerFromEvent
-			self.isAutoTimer = _("You are ready to add an event to automatic timer.\nIf there are no conflicts, once added you must enter menu:\n\nTimers > AutoTimers and search the event with green button.")
+			self.isAutoTimer = _("You are ready to add current event to automatic timer.\nIf there are no conflicts, once added you must enter menu:\n\nTimers > AutoTimers and search the event with green button.")
 			if not event:
 				return
 			addAutotimerFromEvent(self.session, evt=event, service=service)
