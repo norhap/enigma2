@@ -1,6 +1,6 @@
 <wizard>
 	<step id="inputselection" nextstep="modeselection" timeout="20" timeoutaction="selectnext">
-		<text value="Video input selection\n\nPress OK to use this input on your TV (or select if exist is another input port).\n\nThe next input port will be automatically probed in 20 seconds." />
+		<text value="Video input selection\n\nPress OK to use this input on your TV (or select if exist is another input port).\n\nThe next input port and modes video will be automatically probed in 20 seconds." />
 		<displaytext value="Select video input with up/down buttons" />
 		<list type="dynamic" source="listInputChannels" evaluation="inputSelectionMade" onselect="inputSelectionMoved" />
 		<code>
