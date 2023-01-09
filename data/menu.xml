@@ -168,17 +168,17 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<!-- Menu / Setup / System -->
 		<menu entryID="system_selection" level="0" text="System" weight="55">
 			<id val="system" />
-			<item entryID="accesslevel_setup" level="0" text="User Mode Setup" weight="5"><setup id="AccessLevel" /></item>
-			<item entryID="usage_setup" level="0" text="Customize" weight="10"><setup id="Usage" /></item>
-			<item entryID="hotkey_setup" level="1" text="Hotkey" weight="15"><screen module="Hotkey" screen="HotkeySetup" /></item>
-			<item entryID="log_settings" level="2" text="Logs Setup" weight="20"><setup id="Logs" /></item>
+			<item entryID="accesslevel_setup" level="0" text="User Mode Setup"><setup id="AccessLevel" /></item>
+			<item entryID="usage_setup" level="0" text="Customize"><setup id="Usage" /></item>
+			<item entryID="hotkey_setup" level="1" text="Hotkey"><screen module="Hotkey" screen="HotkeySetup" /></item>
+			<item entryID="log_settings" level="2" text="Logs Setup"><setup id="Logs" /></item>
 			<item entryID="logs_man" level="2" text="Logs Manager"><screen module="LogManager" screen="LogManager" /></item>
+			<item entryID="input_device_setup" level="1" text="Input Devices"><screen module="InputDeviceSetup" screen="InputDeviceSelection" /></item>
 			<item entryID="software_update" level="0" text="Software Update" weight="25"><screen module="SoftwareUpdate" screen="UpdatePlugin" /></item>
-			<item entryID="flash_image" level="0" text="Flash Image" weight="30" requires="canFlashWithOfgwrite"><screen module="FlashImage" screen="SelectImage" /></item>
-			<item entryID="input_device_setup" level="1" text="Input Devices" weight="35"><screen module="InputDeviceSetup" screen="InputDeviceSelection" /></item>
-			<item entryID="device_setup" level="0" text="Keyboard / Remote Control Setup" weight="40"><screen module="InputDeviceSetup" screen="InputDeviceSetup" /></item>
-			<item entryID="rfmod_setup" level="1" text="RF Modulator Output Setup" weight="45" requires="RfModulator"><setup id="RFModulator" /></item>
-			<item entryID="factory_reset" level="0" text="Factory Reset" weight="50"><screen module="FactoryReset" screen="FactoryReset" /></item>
+			<item entryID="device_setup" level="0" text="Keyboard / Remote Control Setup"><screen module="InputDeviceSetup" screen="InputDeviceSetup" /></item>
+			<item entryID="rfmod_setup" level="1" text="RF Modulator Output Setup" requires="RfModulator"><setup id="RFModulator" /></item>
+			<item entryID="flash_image" level="0" text="Flash Image" requires="canFlashWithOfgwrite"><screen module="FlashImage" screen="SelectImage" /></item>
+			<item entryID="factory_reset" level="0" text="Factory Reset"><screen module="FactoryReset" screen="FactoryReset" /></item>
 		</menu>
 	</menu>
 
