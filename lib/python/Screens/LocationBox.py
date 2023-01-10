@@ -128,9 +128,9 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		self["selectAction"].setEnabled(True)
 		self["panelActions"] = LocationBoxActionMap(self, ["LocationBoxActions", "NavigationActions"], {
 			#"first": (self.switchToFileList, _("Switch to directories panel")),
+			#"last": (self.switchToBookList, _("Switch to bookmarks panel")),
 			"left": (self.switchToFileList, _("Switch to directories panel")),
 			"right": (self.switchToBookList, _("Switch to bookmarks panel")),
-			#"last": (self.switchToBookList, _("Switch to bookmarks panel")),
 			"swap": (self.swapPanels, _("Switch to the other panel"))
 		}, prio=0, description=_("Panel Selection Actions"))
 		self["panelActions"].setEnabled(True)
