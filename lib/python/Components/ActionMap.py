@@ -185,13 +185,12 @@ class ActionMap:
 	def action(self, context, action):
 		if action in self.actions:
 			print("[ActionMap] Keymap '%s' -> Action mapto='%s'." % (context, action))
-			res = self.actions[action]()
-			if res is not None:
-				return res
+			response = self.actions[action]()
+			if response is not None:
+				return response
 			return 1
-		else:
-			print(_("[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'.") % (context, action))
-			return 0
+		print(_("[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'.") % (context, action))
+		return 0
 
 	def legacyAction(self, context, action):
 		if action in self.legacyActions:
