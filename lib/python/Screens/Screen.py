@@ -300,11 +300,14 @@ class ScreenSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
 		self["Title"] = StaticText(parent.getTitle())
-		skinNames = parent.skinName
-		if not isinstance(skinNames, list):
-			skinNames = [skinNames]
-		self.skinName = ["%sSummary" % x for x in skinNames]
-		self.skinName.append("ScreenSummary")
-		self.skinName += ["%s_summary" % x for x in skinNames]  # DEBUG: Old summary screens currently kept for compatibility.
+		names = parent.skinName
+		if not isinstance(names, list):
+			names = [names]
+		self.skinName = ["%sSummary" % x for x in names]
+		self.skinName += ["%s_summary" % x for x in names]  # DEBUG: Old summary screens currently kept for compatibility.
+		className = self.__class__.__name__
+		if className != "ScreenSummary" and className not in self.skinName: # e.g. if a module uses Screens.Setup.SetupSummary the skin needs to be available directly
+			self.skinName.append(className)
 		self.skinName.append("SimpleSummary")  # DEBUG: Old summary screens currently kept for compatibility.
+		self.skinName.append("ScreenSummary")  # DEBUG: Proposed for new summary screens.
 		self.skin = parent.__dict__.get("skinSummary", self.skin)  # If parent has a "skinSummary" defined, use that as default.
