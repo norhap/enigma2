@@ -23,7 +23,7 @@ else:
 	dvbreader_available = False
 
 
-class Satfinder(ScanSetup, ServiceScan):
+class Satfinder(ScanSetup):
 	"""Inherits StaticText [key_red] and [key_green] properties from ScanSetup"""
 
 	def __init__(self, session):
