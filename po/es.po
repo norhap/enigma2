@@ -9604,7 +9604,7 @@ msgid "unknown error"
 msgstr "error desconocido"
 
 msgid "Unknown Service"
-msgstr "Servicio desconocido"
+msgstr "Canal desconocido"
 
 msgid "unpublished"
 msgstr "sin publicar"
@@ -18680,16 +18680,19 @@ msgstr "Cerrar la pantalla de visualización de eventos"
 msgid "Event View Actions"
 msgstr "Acciones de visualización de eventos"
 
+msgid "Event View Context Menu"
+msgstr "Menú contextual de la vista de eventos"
+
 msgid "Add a timer for the current event"
 msgstr "Añadir un temporizador para el evento actual"
 
 msgid "Open context menu"
 msgstr "Abrir menú contextual"
 
-msgid "Open the multi service EPG view"
+msgid "Open Multi EPG"
 msgstr "Abrir Multi EPG"
 
-msgid "Open the single service EPG view"
+msgid "Open Simple EPG"
 msgstr "Abrir EPG Simple"
 
 msgid "Show next event"
@@ -18703,6 +18706,9 @@ msgstr "Mostrar evento anterior"
 
 msgid "Show previous page of description"
 msgstr "Mostrar la página anterior de descripción"
+
+msgid "Find similar events in the EPG"
+msgstr "Encuentra eventos similares en la EPG"
 
 msgid "You seem to be in timeshift!"
 msgstr "Parece que estás en Timeshift!"
