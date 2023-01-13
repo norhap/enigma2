@@ -11389,8 +11389,8 @@ msgstr "Seleccionar ratio de refresco"
 msgid "Select video input with up/down buttons"
 msgstr "Seleccionar entrada de video con botones arriba/abajo"
 
-msgid "Select video mode"
-msgstr "Seleccionar modo de video"
+msgid "Select video mode."
+msgstr "Seleccionar modo de video."
 
 msgid ""
 "Video input selection\n"
