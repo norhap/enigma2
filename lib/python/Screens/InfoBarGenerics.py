@@ -2458,7 +2458,25 @@ class InfoBarExtensions:
 			addAutotimerFromEvent(self.session, evt=event, service=service)
 			self.session.open(MessageBox, self.isAutoTimer, MessageBox.TYPE_INFO, timeout=10)
 		else:
-			AddPopup(_("The AutoTimer plugin is not installed."), MessageBox.TYPE_ERROR, timeout=5)
+			self.session.openWithCallback(self.doInstallAutoTimer, MessageBox, _('The AutoTimer plugin is not installed!\nDo you want to install it?'), MessageBox.TYPE_YESNO)
+
+	def doInstallAutoTimer(self, val):
+		from Components.Console import Console
+		self.Console = Console()
+		self.message = self.session.open(MessageBox, _("Please wait..."), MessageBox.TYPE_INFO, enable_input=False)
+		self.message.setTitle(_("Installing AutoTimer"))
+		if val:
+			self.Console.ePopen("opkg update && opkg install enigma2-plugin-extensions-autotimer", self.autoTimerInstall)
+		else:
+			self.message.close()
+
+	def autoTimerInstall(self, str, retval, extra_args):
+		if not isfile("/var/lib/opkg/info/enigma2-plugin-extensions-autotimer.control"):
+			self.session.open(MessageBox, _("Feed not available. The AutoTimer plugin was not installed."), MessageBox.TYPE_ERROR, timeout=10)
+			self.message.close()
+		else:
+			self.session.open(MessageBox, _("The AutoTimer plugin is installed."), MessageBox.TYPE_INFO, timeout=10)
+			self.message.close()
 
 
 from Tools.BoundFunction import boundFunction
