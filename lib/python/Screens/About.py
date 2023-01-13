@@ -1103,7 +1103,9 @@ class SystemMemoryInfo(Screen):
 		self["actions"] = ActionMap(["SetupActions", "ColorActionsAbout"], {
 			"cancel": self.close,
 			"ok": self.close,
-			"red": self.close
+			"red": self.close,
+			"left": self.doNothing,
+			"right": self.doNothing
 		})
 
 		out_lines = open("/proc/meminfo").readlines()
@@ -1147,6 +1149,9 @@ class SystemMemoryInfo(Screen):
 
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
+
+	def doNothing(self):
+		pass
 
 
 class TranslationInfo(Screen):
