@@ -24,7 +24,7 @@ visuallyImpairedCommentary = "NAR qad"
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
-	if (isfile("/etc/crontab")) and (isfile("/home/root/.cache/gstreamer-1.0/registry.arm.bin")) and not fileContains("/etc/crontab", "registry.arm.bin"):
+	if isfile("/etc/crontab") and isfile("/home/root/.cache/gstreamer-1.0/registry.arm.bin") and not fileContains("/etc/crontab", "registry.arm.bin"):
 		Console().ePopen("sed -i '$a@reboot root rm -f /home/root/.cache/gstreamer-1.0/registry.arm.bin' /etc/crontab")
 	if fileContains("/etc/network/interfaces", "iface eth0 inet static") and not fileContains("/etc/network/interfaces", "iface wlan0 inet dhcp") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
 		config.usage.dns = ConfigSelection(default="custom", choices=[
@@ -1250,7 +1250,7 @@ def InitUsageConfig():
 	def updateStackTracePrinter(configElement):
 		from Components.StackTrace import StackTracePrinter
 		if configElement.value:
-			if (isfile("/tmp/doPythonStackTrace")):
+			if isfile("/tmp/doPythonStackTrace"):
 				remove("/tmp/doPythonStackTrace")
 			from threading import current_thread
 			StackTracePrinter.getInstance().activate(current_thread().ident)
