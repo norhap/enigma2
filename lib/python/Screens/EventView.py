@@ -83,13 +83,11 @@ class EventViewBase:
 			"contextMenu": (self.doContext, _("Open context menu")),
 			"timerAdd": (self.addTimer, _("Add a timer for the current event")),
 			"pageUp": (self.pageUp, _("Show previous page of description")),
-			"pageDown": (self.pageDown, _("Show next page of description"))
-		}, prio=0, description=_("Event View Actions"))
-		self["eventActions"] = HelpableActionMap(self, ["EventViewActions"], {
+			"pageDown": (self.pageDown, _("Show next page of description")),
+			"openSimilarList": self.openSimilarList,
 			"prevEvent": (self.prevEvent, _("Show previous event")),
 			"nextEvent": (self.nextEvent, _("Show next event"))
 		}, prio=0, description=_("Event View Actions"))
-		self["eventActions"].setEnabled(callback is not None)
 		self["similarActions"] = HelpableActionMap(self, ["EventViewActions"], {
 			"openSimilarList": (self.openSimilarList, _("Find similar events in the EPG"))
 		}, prio=0, description=_("Event View Actions"))
@@ -357,20 +355,19 @@ class EventViewEPGSelect(Screen, HelpableScreen, EventViewBase):
 		EventViewBase.__init__(self, event, serviceRef, callback=callback, similarEPGCB=similarEPGCB, parent=parent, windowTitle=windowTitle)
 		self.singleEPGCB = singleEPGCB
 		self.multiEPGCB = multiEPGCB
-		self.similarEPGCB = similarEPGCB
 		if singleEPGCB or multiEPGCB:
 			self["key_yellow"] = StaticText(_("Single EPG"))
 			self["key_blue"] = StaticText(_("Multi EPG"))
 			self["singleMultiEPGActions"] = HelpableActionMap(self, ["EventViewEPGActions"], {
 				"openSingleServiceEPG": (self.openSingleEPG, _("Open Simple EPG")),
-				"openMultiServiceEPG": (self.openMultiEPG, _("Open Multi EPG")),
+				"openMultiServiceEPG": (self.openMultiEPG, _("Open Multi EPG"))
 			}, prio=0, description=_("Event View Actions"))
 			self["actions"] = ActionMap(["GMEPGSelectActions", "EventViewActions"], {
 				"red": self.openSimilarList,
+				"cancel": self.keyCancel,
 				"timerAdd": self.addTimer,
 				"yellow": self.openSingleEPG,
-				"info": self.openSimilarList,
-				"cancel": self.keyCancel,
+				"info": self.doContext,
 				"menu": self.doContext,
 				"prevEvent": self.prevEvent,
 				"nextEvent": self.nextEvent,
