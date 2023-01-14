@@ -872,7 +872,7 @@ int eDVBTSTools::findFrame(off_t &_offset, size_t &len, int &direction, int fram
 		{
 			eDebug("[eDVBTSTools] findFrame getStructureEntryFirst for is_mpeg2 failed");
 			return -1;
-                }
+        }
 		// Seek back to sequence start (appears to be needed for e.g. a few TCM streams)
 		// length calculation changes m_streaminfo -> reset it to start offset
 		while (count_passes)
