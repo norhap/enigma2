@@ -17,12 +17,8 @@ from datetime import datetime
 class TimerEntry(Screen, ConfigListScreen):
 	def __init__(self, session, timer):
 		Screen.__init__(self, session)
-		screentitle = _("PowerManager entry")
+		Screen.setTitle(self, _("PowerManager entry"))
 		self.skinName = "PowerTimerEntry"
-		title = screentitle
-		self.setup_title = title
-		Screen.setTitle(self, title)
-
 		self.timer = timer
 
 		self.entryDate = None
