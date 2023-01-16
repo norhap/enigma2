@@ -16,6 +16,7 @@ class ChoiceBox(Screen, HelpableScreen):
 	def __init__(self, session, text=None, list=None, keys=None, selection=0, skinName=None, windowTitle=None, title=None, skin_name=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
+		from .ChoiceBox import OrderedChoiceBox
 		if title is not None:  # Process legacy title argument.
 			text = title
 		if text is None:
@@ -45,7 +46,7 @@ class ChoiceBox(Screen, HelpableScreen):
 				self.skinName.insert(0, skinName)
 			else:
 				self.skinName = skinName + self.skinName
-		self["actions"] = HelpableNumberActionMap(self, ["ChoiceBoxActions", "NumberActions", "ColorActions", "NavigationActions", "MenuActions", "DirectionActions"], {
+		self["actions"] = HelpableNumberActionMap(self, ["ChoiceBoxActions", "NumberActions", "ColorActions", "NavigationActions", "MenuActions"], {
 			"back": (self.keyCancel, _("Cancel the action selection and exit")),
 			"select": (self.keySelect, _("Run the currently highlighted action")),
 			"1": (self.keyNumberGlobal, _("Run the numbered action")),
@@ -58,10 +59,6 @@ class ChoiceBox(Screen, HelpableScreen):
 			"8": (self.keyNumberGlobal, _("Run the numbered action")),
 			"9": (self.keyNumberGlobal, _("Run the numbered action")),
 			"0": (self.keyNumberGlobal, _("Run the numbered action")),
-			"upUp": self.doNothing,
-			"downUp": self.doNothing,
-			"rightUp": self.doNothing,
-			"leftUp": self.doNothing,
 			"menu": self.KeyMenu,
 			"red": (self.keyRed, _("Run the RED action")),
 			"green": (self.keyGreen, _("Run the GREEN action")),
@@ -76,7 +73,10 @@ class ChoiceBox(Screen, HelpableScreen):
 			# "last": (self.bottom, _("Move to last line")),
 			"down": (self.down, _("Move down a line")),
 			"pageDown": (self.pageDown, _("Move down a page")),
-			"bottom": (self.bottom, _("Move to last line"))
+			"bottom": (self.bottom, _("Move to last line")),
+			"resetList": self.setDefaultChoiceList,
+			"moveItemUp": self.additionalMoveUp,
+			"moveItemDown": self.additionalMoveDown
 		}, prio=-2, description=_("Choice Box Actions"))
 		self.setTitle(windowTitle or _("Select"))
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -145,6 +145,18 @@ class ChoiceBox(Screen, HelpableScreen):
 	def bottom(self):
 		self.move(1, self["list"].instance.moveEnd)
 
+	def setDefaultChoiceList(self):
+		if hasattr(self, "setDefaultChoiceListCallback"):
+			OrderedChoiceBox.setDefaultChoiceList(self)
+
+	def additionalMoveUp(self):
+		if hasattr(self, "additionalMove"):
+			OrderedChoiceBox.additionalMoveUp(self)
+
+	def additionalMoveDown(self):
+		if hasattr(self, "additionalMove"):
+			OrderedChoiceBox.additionalMoveDown(self)
+
 	def move(self, direction, step):  # The list should not start or end in a separator line.
 		limit = len(self["list"].list) - 1 if direction > 0 else 0
 		self["list"].instance.moveSelection(step)
@@ -160,9 +172,6 @@ class ChoiceBox(Screen, HelpableScreen):
 
 	def createSummary(self):
 		return ChoiceBoxSummary
-
-	def doNothing(self):
-		pass
 
 
 class ChoiceBoxSummary(ScreenSummary):
