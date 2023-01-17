@@ -1,7 +1,6 @@
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap, ePicLoad
 from Components.AVSwitch import AVSwitch
-from Components.Pixmap import Pixmap
 from Components.config import config
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.CurrentService import CurrentService

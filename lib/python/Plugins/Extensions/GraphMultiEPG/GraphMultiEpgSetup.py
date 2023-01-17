@@ -1,6 +1,5 @@
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
-from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.PluginComponent import plugins
 from Components.config import config, getConfigListEntry
