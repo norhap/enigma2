@@ -12842,9 +12842,6 @@ msgstr "Restricción a ciertos días de la semana (editar en el menú de filtro)
 msgid "Restriction to certain services (edit in services menu)"
 msgstr "Restricción a ciertos canales (editar en el menú de canales)"
 
-msgid "Save and search now"
-msgstr "Guarde y busque ahora"
-
 msgid "Save the by SeriesPlugin generated timer-name in a filterlist to filter at later timer-searches (only with SeriesPlugin)"
 msgstr "Guarde el nombre del temporizador generado por SeriesPlugin en una lista de filtros para filtrar las búsquedas de temporizador posteriores (solo con SeriesPlugin)"
 
@@ -17933,8 +17930,8 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
-msgid "'%s' %d MB little space available"
-msgstr "'%s' %d MB poco espacio disponible"
+msgid "'%s' Storage device capacity less to %d GB"
+msgstr "Capacidad del dispositivo de almacenamiento '%s' inferior a %d GB"
 
 msgid "'%s' does not exist"
 msgstr "'%s' no existe"
@@ -18873,8 +18870,16 @@ msgstr "No ha establecido una IP manual para %s"
 msgid "FTP connection failure"
 msgstr "Falló la conexión FTP"
 
-msgid "Free %d MB: Low space available for timeshift. Change device"
-msgstr "Libre %d MB: Poco espacio disponible para hacer timeshift. Cambie de dispositivo"
+msgid "" 
+"Storage device capacity less to %d GB."
+"\n"
+"\n"
+"Change the storage device for timeshift."
+msgstr "" 
+"Dispositivo de almacenamiento inferior a %d GB."
+"\n"
+"\n"
+"Cambie el dispositivo de almacenamiento para timeshift."
 
 msgid "Emu waiting"
 msgstr "Esperando emu"
