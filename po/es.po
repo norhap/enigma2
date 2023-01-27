@@ -5757,6 +5757,9 @@ msgstr "Guardar timeshift en directorio de películas y zapea"
 msgid "Save timeshift only for current event"
 msgstr "Guarda timeshift solo para el evento actual"
 
+msgid "Previous saved timeshift has editing properties with plugin CutListEditor."
+msgstr "El timeshift guardado anteriormente tiene propiedades de edición con el plugin CutListEditor."
+
 msgid "Scaler sharpness"
 msgstr "Nitidez del escalador"
 
