@@ -2086,10 +2086,10 @@ class InfoBarTimeshift():
 			from os import statvfs
 			if config.usage.timeshift_path.value:
 				size = statvfs(config.usage.timeshift_path.value)
-				free = int((size.f_bfree * size.f_frsize) // (1024 * 1024) // 1000)
-				if free <= 4:
-					return AddNotification(MessageBox, _("Storage device capacity less to %d GB.\n\nChange the storage device for timeshift.") % free, type=MessageBox.TYPE_ERROR, timeout=10)
-			if not ts.startTimeshift() and free > 4:
+				storage = int((size.f_bfree * size.f_frsize) // (1024 * 1024) // 1000)
+				if storage <= 1:
+					return AddNotification(MessageBox, _("Timeshift failed: Storage device free size %d GB.") % storage, type=MessageBox.TYPE_ERROR, timeout=10)
+			if not ts.startTimeshift() and storage > 1:
 				# we remove the "relative time" for now.
 				#self.pvrStateDialog["timeshift"].setRelative(time.time())
 
@@ -3018,8 +3018,8 @@ class InfoBarInstantRecord:
 		if not findSafeRecordPath(pirr) and not findSafeRecordPath(defaultMoviePath()):
 			if not pirr:
 				pirr = ""
-			self.session.open(MessageBox, _("Missing ") + "\n" + pirr +
-						"\n" + _("No HDD found or HDD not initialized!"), MessageBox.TYPE_ERROR)
+			self.session.open(MessageBox, _("Recording path is \"%s\"") % pirr
+				+ "\n\n" + _("Storage device not available or not initialized."), MessageBox.TYPE_ERROR)
 			return
 
 		service = self.session.nav.getCurrentService()
@@ -3942,6 +3942,7 @@ class InfoBarServiceErrorPopupSupport:
 		self.last_error = None
 		RemovePopup(id="ZapError")
 		RemovePopup(id="ZapPipError")
+		RemovePopup(id="TimerRecordingFailed")
 
 	def __tuneFailed(self):
 		if not config.usage.hide_zap_errors.value or not config.usage.remote_fallback_enabled.value:

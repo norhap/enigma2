@@ -4048,8 +4048,11 @@ msgstr "Mínima edad %d años"
 msgid "Minimum send interval"
 msgstr "Intervalo mínimo de envío"
 
-msgid "Missing "
-msgstr "Perdido "
+msgid "Recording failed: Storage device free size %d GB."
+msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d GB."
+
+msgid "Recording path is \"%s\""
+msgstr "La ruta de grabación es \"%s\""
 
 msgctxt "Satellite configuration mode"
 msgid "Mode"
@@ -4320,9 +4323,6 @@ msgstr "Sin conexión"
 
 msgid "No ECMPids available (FTA Service)"
 msgstr "No ECMPids disponibles (Servicio FTA)"
-
-msgid "No HDD found or HDD not initialized!"
-msgstr "Sin HDD presente o no inicializado!"
 
 msgid "No age block"
 msgstr "Sin bloqueo de edad"
@@ -4876,6 +4876,9 @@ msgstr "Seleccionar un subcanal a grabar…"
 
 msgid "Please select a subservice..."
 msgstr "Seleccionar un subcanal…"
+
+msgid "Please select an acceptable directory."
+msgstr "Seleccione un directorio aceptable."
 
 msgid "Please select medium to be scanned"
 msgstr "Seleccionar medio a escanear"
@@ -15562,6 +15565,9 @@ msgstr "Dispositivo"
 msgid "Storage Devices"
 msgstr "Dispositivos Almacenamiento"
 
+msgid "Storage device not available or not initialized."
+msgstr "Dispositivo de almacenamiento no disponible o no inicializado."
+
 msgid "Detected tuners"
 msgstr "Sintonizadores detectados"
 
@@ -17894,6 +17900,9 @@ msgstr "Acciones Zoom"
 msgid "Timeshift Actions"
 msgstr "Acciones Timeshift"
 
+msgid "Timeshift failed: Storage device free size %d GB."
+msgstr "Timeshift fallido: Tamaño libre del dispositivo de almacenamiento %d GB."
+
 msgid "Timeshift Setup"
 msgstr "Ajustes Timeshift"
 
@@ -17936,17 +17945,17 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
-msgid "'%s' Storage device capacity less to %d GB"
-msgstr "Capacidad del dispositivo de almacenamiento '%s' inferior a %d GB"
+msgid "'%s' Storage device free size %d GB. Press 'OK' to change path."
+msgstr "Tamaño libre del dispositivo de almacenamiento %d GB. Pulse 'OK' para cambiar la ruta."
 
-msgid "'%s' does not exist"
-msgstr "'%s' no existe"
+msgid "'%s' does not exist. Press 'OK' to change path."
+msgstr "'%s' no existe. Pulse 'OK' para cambiar la ruta."
 
-msgid "'%s'= Internal Flash. It is not a storage device"
-msgstr "'%s' = Flash Interna. No es un dispositivo de almacenamiento"
+msgid "'%s' is Internal Flash. It is not a storage device. Press 'OK' to change path."
+msgstr "'%s' es la Flash Interna. No es un dispositivo de almacenamiento. Pulse 'OK' para cambiar la ruta."
 
-msgid "'%s' not writeable"
-msgstr "'%s' no se puede escribir"
+msgid "'%s' not writeable. Press 'OK' to change path."
+msgstr "'%s' no se puede escribir. Pulse 'OK' para cambiar la ruta."
 
 msgid "'%s' can't be linked to recordings"
 msgstr "'%s' no se puede vincular a grabaciones"
@@ -18875,17 +18884,6 @@ msgstr "No ha establecido una IP manual para %s"
 
 msgid "FTP connection failure"
 msgstr "Falló la conexión FTP"
-
-msgid "" 
-"Storage device capacity less to %d GB."
-"\n"
-"\n"
-"Change the storage device for timeshift."
-msgstr "" 
-"Dispositivo de almacenamiento inferior a %d GB."
-"\n"
-"\n"
-"Cambie el dispositivo de almacenamiento para timeshift."
 
 msgid "Emu waiting"
 msgstr "Esperando emu"
