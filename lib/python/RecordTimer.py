@@ -90,6 +90,30 @@ def findSafeRecordPath(dirname):
 	return dirname
 
 
+def getRecordingStorageSize():
+	styles = ["<default>", "<current>", "<timer>"]
+	if config.usage.default_path.value:
+		size = statvfs(config.usage.default_path.value)
+		storage = int(size.f_bfree * size.f_frsize)
+	if storage > 1:
+		return storage // (1024 * 1024) // 1000
+	if config.usage.timer_path.value not in styles:
+		size = statvfs(config.usage.timer_path.value)
+		storage = int(size.f_bfree * size.f_frsize)
+		return storage // (1024 * 1024) // 1000 if storage > 1 else 0
+	if config.usage.instantrec_path.value not in styles:
+		size = statvfs(config.usage.instantrec_path.value)
+		storage = int(size.f_bfree * size.f_frsize)
+		return storage // (1024 * 1024) // 1000 if storage > 1 else 0
+
+
+def getTimeshiftStorageSize():
+	if config.usage.timeshift_path.value:
+		size = statvfs(config.usage.timeshift_path.value)
+		storage = int(size.f_bfree * size.f_frsize)
+		return storage // (1024 * 1024) // 1000
+
+
 # This code is for use by hardware with a stb device file which, when
 # non-zero, can display a visual indication on the front-panel that
 # recordings are in progress, with possibly different icons for
@@ -166,23 +190,6 @@ def createRecordTimerEntry(timer):
 		tags=timer.tags, descramble=timer.descramble, record_ecm=timer.record_ecm, always_zap=timer.always_zap,
 		zap_wakeup=timer.zap_wakeup, rename_repeat=timer.rename_repeat, conflict_detection=timer.conflict_detection,
 		pipzap=timer.pipzap)
-
-
-def getStorageSize():
-	styles = ["<default>", "<current>", "<timer>"]
-	if config.usage.default_path.value:
-		size = statvfs(config.usage.default_path.value)
-		storage = int(size.f_bfree * size.f_frsize)
-	if storage > 1:
-		return storage // (1024 * 1024) // 1000
-	if config.usage.timer_path.value not in styles:
-		size = statvfs(config.usage.timer_path.value)
-		storage = int(size.f_bfree * size.f_frsize)
-		return storage // (1024 * 1024) // 1000 if storage > 1 else 0
-	if config.usage.instantrec_path.value not in styles:
-		size = statvfs(config.usage.instantrec_path.value)
-		storage = int(size.f_bfree * size.f_frsize)
-		return storage // (1024 * 1024) // 1000 if storage > 1 else 0
 
 
 class RecordTimer(Timer):
@@ -335,9 +342,9 @@ class RecordTimer(Timer):
 		return entry
 
 	def doActivate(self, w):
-		if getStorageSize() <= 1: # Storage <= 1 GB not recording.
+		if getRecordingStorageSize() <= 1: # Storage <= 1 GB not recording.
 			w.state = RecordTimerEntry.StateEnded
-			AddPopup(_("Recording failed: Storage device free size %d GB.") % getStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
+			AddPopup(_("Recording failed: Storage device free size %d GB.") % getRecordingStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer for servicetype 4097,
 		# and ServiceApp has player enabled, then skip recording.
 		if w.service_ref.ref.toString().startswith("4097:") and isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value or w.service_ref.ref.toString()[:4] in ("5001", "5002"):

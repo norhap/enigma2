@@ -17903,6 +17903,9 @@ msgstr "Acciones Timeshift"
 msgid "Timeshift failed: Storage device free size %d GB."
 msgstr "Timeshift fallido: Tamaño libre del dispositivo de almacenamiento %d GB."
 
+msgid "Timeshift not enough diskspace. Is path set?"
+msgstr "Timeshift no tiene suficiente espacio en disco. Se estableció la ruta?"
+
 msgid "Timeshift Setup"
 msgstr "Ajustes Timeshift"
 

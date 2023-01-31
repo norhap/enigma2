@@ -46,7 +46,7 @@ from shutil import move
 from bisect import insort
 import itertools
 import datetime
-from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath
+from RecordTimer import RecordTimerEntry, RecordTimer, findSafeRecordPath, getRecordingStorageSize, getTimeshiftStorageSize
 # hack alert!
 from Screens.Menu import MainMenu, mdom
 import pickle
@@ -2075,6 +2075,7 @@ class InfoBarTimeshift():
 			if not pauseService and not int(config.usage.timeshift_start_delay.value):
 				self.session.open(MessageBox, _("Timeshift not possible!"), MessageBox.TYPE_ERROR, simple=True)
 			print("[InfoBarGenerics] no ts interface")
+			self.session.openWithCallback(self.closed, MessageBox, _("Timeshift not enough diskspace. Is path set?"), type=MessageBox.TYPE_ERROR, timeout=10)
 			if pauseService:
 				return self.playpauseStreamService()
 			else:
@@ -2083,13 +2084,9 @@ class InfoBarTimeshift():
 		if ts.isTimeshiftEnabled():
 			print("[InfoBarGenerics] timeshift already enabled?")
 		else:
-			from os import statvfs
-			if config.usage.timeshift_path.value:
-				size = statvfs(config.usage.timeshift_path.value)
-				storage = int((size.f_bfree * size.f_frsize) // (1024 * 1024) // 1000)
-				if storage <= 1:
-					return AddNotification(MessageBox, _("Timeshift failed: Storage device free size %d GB.") % storage, type=MessageBox.TYPE_ERROR, timeout=10)
-			if not ts.startTimeshift() and storage > 1:
+			if getTimeshiftStorageSize() <= 1:
+				return AddPopup(_("Timeshift failed: Storage device free size %d GB.") % getTimeshiftStorageSize(), type=MessageBox.TYPE_ERROR, timeout=10, id="TimerRecordingFailed")
+			if not ts.startTimeshift():
 				# we remove the "relative time" for now.
 				#self.pvrStateDialog["timeshift"].setRelative(time.time())
 
@@ -2231,7 +2228,15 @@ class InfoBarTimeshift():
 		if self.timeshiftEnabled() and config.usage.check_timeshift.value and self.timeshift_was_activated:
 			message = _("Stop timeshift?")
 			if not self.save_timeshift_file:
-				choice = [(_("Yes"), "stop"), (_("No"), "continue"), (_("Yes and save in timeshift dir"), "save"), (_("Yes and save in movie dir"), "save_movie")]
+				if getRecordingStorageSize() > 1:
+					choice = [(_("Yes"), "stop"),
+					(_("No"), "continue"),
+					(_("Yes and save in timeshift dir"), "save"),
+					(_("Yes and save in movie dir"), "save_movie")]
+				else:
+					choice = [(_("Yes"), "stop"),
+					(_("No"), "continue"),
+					(_("Yes and save in timeshift dir"), "save")]
 			else:
 				choice = [(_("Yes"), "stop"), (_("No"), "continue")]
 				message += "\n" + _("Reminder, you have chosen to save timeshift file.")
