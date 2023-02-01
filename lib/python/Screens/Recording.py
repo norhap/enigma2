@@ -25,7 +25,8 @@ class RecordingSettings(Setup):
 		self["configActions"] = ActionMap(["ConfigListActions"], {
 			"select": self.keySelect,
 			"cancel": self.close,
-			"save": self.keySave
+			"save": self.keySave,
+			"menu": self.keyMenu
 		}, -1)
 
 	def selectionChanged(self):
@@ -52,6 +53,10 @@ class RecordingSettings(Setup):
 			Setup.keySave(self)
 		else:
 			self.session.open(MessageBox, "%s\n\n%s" % (self.getFootnote(), _("Please select an acceptable directory.")), type=MessageBox.TYPE_ERROR)
+
+	def keyMenu(self):
+		from Components.ConfigList import ConfigListScreen
+		ConfigListScreen.keyMenu(self)
 
 	def buildChoices(self, item, configEntry, path):
 		configList = config.movielist.videodirs.value[:]
