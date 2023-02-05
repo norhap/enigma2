@@ -1488,6 +1488,9 @@ msgstr "Combo"
 msgid "Command order"
 msgstr "Orden de comando"
 
+msgid "Command to run"
+msgstr "Comando para ejecutar"
+
 msgid "Common Interface"
 msgstr "Interfaz común"
 
@@ -2749,6 +2752,9 @@ msgstr "Eliminar completo datos de temporizadores"
 
 msgid "Remove all other data"
 msgstr "Eliminar completo otros datos"
+
+msgid "Remove Confirmation"
+msgstr "Confirmación Eliminar"
 
 msgid "Failed"
 msgstr "Fallido"
@@ -5006,6 +5012,9 @@ msgstr "Umbral de potencia. Consulteel manual de su receptor para más informaci
 msgid "PowerMenu"
 msgstr "Menú de apagado"
 
+msgid "Predefined"
+msgstr "Predefinido"
+
 msgid "Predefined transponder"
 msgstr "Transpondedor predefinido"
 
@@ -5068,6 +5077,9 @@ msgstr "Pulse OK para seleccionar satélites"
 
 msgid "Press OK to select/deselect a CAId."
 msgstr "Pulse OK para seleccionar / deseleccionar un CAId."
+
+msgid "Press OK to show details."
+msgstr "Pulse OK para mostrar detalles."
 
 msgid "Press OK to toggle the selection"
 msgstr "Pulse OK para alternar la selección"
@@ -8152,7 +8164,7 @@ msgid "Wednesday"
 msgstr "Miércoles"
 
 msgid "Weekday"
-msgstr "Día laborable"
+msgstr "Día de la semana"
 
 msgid "Weighted position"
 msgstr "Posición ponderada"
@@ -11149,6 +11161,9 @@ msgstr "Probando la conexión a Internet"
 
 msgid "Do you want to install Plugins?"
 msgstr "Quieres instalar Plugins?"
+
+msgid "Do you want to remove this command or script?\n\n"
+msgstr "Quieres eliminar este comando o script?\n\n"
 
 msgid "Do you want to install a channel list?"
 msgstr "Quieres instalar una lista de canales?"
@@ -14853,7 +14868,7 @@ msgstr ""
 "Falló la conexión usando los parámetros FTP proporcionados.\n"
 "Revise los parámetros del servidor."
 
-msgid "Cron manager"
+msgid "Cron Manager"
 msgstr "Administrador Cron"
 
 msgid "Cron Timers"
@@ -15307,6 +15322,9 @@ msgstr "Minutos"
 msgid "Mins Secs"
 msgstr "Minutos Segundos"
 
+msgid "Hourly"
+msgstr "Cada hora"
+
 msgid "Hours Mins"
 msgstr "Horas Minutos"
 
@@ -15719,14 +15737,11 @@ msgstr "Pulse OK para activar la actual dirección MAC."
 msgid "Random password"
 msgstr "Contraseña aleatoria"
 
-msgid "Ready to install %s ?"
-msgstr "Listo para instalar %s ?"
+msgid "Do you want to install \"%s\" ?"
+msgstr "Quiere instalar \"%s\" ?"
 
-msgid "Ready to remove \"%s\" ?"
-msgstr "Listo para quitar \"%s\" ?"
-
-msgid "Ready to remove %s ?"
-msgstr "Listo para quitar %s ?"
+msgid "Do you want to remove \"%s\" ?"
+msgstr "Deseas eliminar \"%s\" ?"
 
 msgid "Recover"
 msgstr "Recuperar"
@@ -15903,6 +15918,9 @@ msgstr "Soporte XBox"
 
 msgid "You must set a root password in order to be able to use network services, such as FTP, telnet or ssh."
 msgstr "Debe establecer una contraseña de root para poder utilizar los canales de red, como FTP, telnet o ssh."
+
+msgid "You must set at least one command"
+msgstr "Debe establecer al menos un comando"
 
 msgid "Your receiver is not connected to the internet, please check your network settings and try again."
 msgstr "Su receptor no está conectado a Internet, verifique la configuración de su red e intente nuevamente."
@@ -17201,6 +17219,9 @@ msgstr "Día Lun-D"
 
 msgid "Day Mon-DD"
 msgstr "Día Lun-DD"
+
+msgid "Day of the month"
+msgstr "Día del mes"
 
 msgid "Dayname D Month Year"
 msgstr "Nombre Día D Mes Año"
@@ -18830,6 +18851,9 @@ msgstr ""
 
 msgid "Cancel the action selection and exit"
 msgstr "Cancelar la selección de acción y salir"
+
+msgid "Run frequency"
+msgstr "Frecuencia de ejecución"
 
 msgid "Run the currently highlighted action"
 msgstr "Ejecutar la acción resaltada actualmente"
