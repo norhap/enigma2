@@ -103,7 +103,7 @@ class NSCommon:
 		if self.reboot_at_end:
 			mtext = _('Your receiver will be restarted after the installation of the service\nAre you ready to install "%s" ?') % self.service_name
 		else:
-			mtext = _('Are you ready to install "%s" ?') % self.service_name
+			mtext = _("Do you want to install \"%s\" ?") % self.service_name
 		self.session.openWithCallback(self.InstallPackage, MessageBox, mtext, MessageBox.TYPE_YESNO)
 		if ('wget returned 1' or 'wget returned 255' or '404 Not Found') in result:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Please wait while feeds state is being checked."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
@@ -117,7 +117,7 @@ class NSCommon:
 				restartbox = self.session.openWithCallback(self.RemovePackage, MessageBox, _('Your receiver will be restarted after the removal of the service\nDo you want to remove the service now ?'), MessageBox.TYPE_YESNO)
 				restartbox.setTitle(_('Are you ready to remove "%s" ?') % self.service_name)
 			else:
-				self.session.openWithCallback(self.RemovePackage, MessageBox, _('Ready to remove "%s" ?') % self.service_name, MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.RemovePackage, MessageBox, _("Do you want to remove \"%s\" ?") % self.service_name, MessageBox.TYPE_YESNO)
 		else:
 			self.updateService()
 
