@@ -47,13 +47,6 @@ msgstr ""
 "\n"
 "Pulsa OK en su mando para continuar."
 
-msgid ""
-"\n"
-"Recording in progress."
-msgstr ""
-"\n"
-"Grabación en progreso."
-
 msgid "Restore previous cuts..."
 msgstr "Restaurar cortes anteriores ..."
 
@@ -660,8 +653,8 @@ msgstr "Añadir grabación (introduce duración)"
 msgid "Add recording (enter recording endtime)"
 msgstr "Añadir grabación (introduce final de grabación)"
 
-msgid "Add recording (indefinitely)"
-msgstr "Añadir grabación (indefinidamente)"
+msgid "Add recording (indefinitely 24 hours)"
+msgstr "Añadir grabación (indefinidamente 24 horas)"
 
 msgid "Add recording (stop after current event)"
 msgstr "Añadir grabación (para al acabar el evento actual)"
@@ -4054,12 +4047,6 @@ msgstr "Mínima edad %d años"
 msgid "Minimum send interval"
 msgstr "Intervalo mínimo de envío"
 
-msgid "Recording failed: Storage device free size %d GB."
-msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d GB."
-
-msgid "Recording path is \"%s\""
-msgstr "La ruta de grabación es \"%s\""
-
 msgctxt "Satellite configuration mode"
 msgid "Mode"
 msgstr "Modo"
@@ -4352,11 +4339,8 @@ msgstr "Sin descripción disponible."
 msgid "No displayable files on this medium found!"
 msgstr "No se encuentran archivos mostrables en este medio!"
 
-msgid "No event info found, recording indefinitely."
-msgstr "No se encontró información del evento, grabando indefinidamente."
-
-msgid "Recording time has been set."
-msgstr "Se ha establecido el tiempo de grabación."
+msgid "No event info found, recording indefinitely (24 hours)"
+msgstr "No se encontró información del evento, grabando indefinidamente (24 horas)"
 
 msgid "No fast winding possible yet... but you can use the number buttons to skip forward/backward!"
 msgstr "No es posible el avance rápido aún… pero puede usar los botones de números para pasar delante/atrás!"
@@ -5322,17 +5306,39 @@ msgstr "Tiempo de grabación limitado por conflicto de tmporizador %s"
 msgid "Recording"
 msgstr "Grabando"
 
-msgid "Recording Setup"
-msgstr "Ajustes Grabaciones"
+msgid "Recording Actions"
+msgstr "Acciones de Grabación"
+
+msgid "Recording failed: Storage device free size %d GB."
+msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d GB."
 
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
+
+msgid "Recording indefinitely been set (24 hours)"
+msgstr "Se ha configurado la grabación indefinidamente (24 horas)"
+
+msgid ""
+"\n"
+"Recording in progress."
+msgstr ""
+"\n"
+"Grabación en progreso."
+
+msgid "Recording path is \"%s\""
+msgstr "La ruta de grabación es \"%s\""
 
 msgid "Recording Paths"
 msgstr "Rutas Grabación & Timeshift"
 
 msgid "Recording paths"
 msgstr "Rutas de grabación"
+
+msgid "Recording Setup"
+msgstr "Ajustes Grabaciones"
+
+msgid "Recording timer has been set"
+msgstr "Se ha establecido el temporizador de grabación"
 
 msgid "Recording type"
 msgstr "Tipo de grabación"
@@ -17896,9 +17902,6 @@ msgstr "Acciones EPG InfoBar"
 
 msgid "Aspect ratio list"
 msgstr "Lista de relación de Aspecto"
-
-msgid "Recording Actions"
-msgstr "Acciones de Grabación"
 
 msgid "Instant recording"
 msgstr "Grabación instantánea"
