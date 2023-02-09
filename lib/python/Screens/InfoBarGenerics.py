@@ -2837,18 +2837,17 @@ class InfoBarInstantRecord:
 				message = _("Recording timer has been set")
 				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
 			else:
-				message = _("Recording indefinitely been set (24 hours)")
+				message = _("Recording set to (24 hours)")
 				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
 		else:
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
-			if service:
-				if service.toString().startswith("1:"):
-					if limitEvent:
-						message = _("Recording timer has been set")
-						AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
-					else:
-						message = _("No event info found, recording indefinitely (24 hours)")
-						AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
+			if service and service.toString().startswith("1:"):
+				if limitEvent:
+					message = _("Recording timer has been set")
+					AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
+				else:
+					message = _("No event info found, recording set to (24 hours)")
+					AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
 
 		if isinstance(serviceref, eServiceReference):
 			serviceref = ServiceReference(serviceref)
@@ -3026,7 +3025,7 @@ class InfoBarInstantRecord:
 			info = {}
 			self.getProgramInfoAndEvent(info, "")
 			event_entry = ((_("Add recording (stop after current event)"), "event"),)
-			common = ((_("Add recording (indefinitely 24 hours)"), "indefinitely"),
+			common = ((_("Add recording set to (24 hours)"), "indefinitely"),
 					(_("Add recording (enter recording duration)"), "manualduration"),
 					(_("Add recording (enter recording endtime)"), "manualendtime"),)
 			if info["event"]:
