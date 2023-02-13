@@ -5311,6 +5311,9 @@ msgstr "Grabación en progreso"
 msgid "Recording set to (24 hours)"
 msgstr "Se ha establecido grabación a (24 horas)"
 
+msgid "Recording timer was canceled"
+msgstr "El temporizador de grabación fue cancelado"
+
 msgid ""
 "\n"
 "Recording in progress."
