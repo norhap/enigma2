@@ -7524,9 +7524,6 @@ msgstr "Error conflicto temporizador"
 msgid "Timer selection"
 msgstr "Selección del temporizador"
 
-msgid "Timer selection..."
-msgstr "Selección del temporizador…"
-
 msgid "Timer type"
 msgstr "Tipo de temporizador"
 
