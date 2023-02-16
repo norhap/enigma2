@@ -11,5 +11,5 @@ install_PYTHON = \
 	AnalogClock.py ServiceName2.py LayoutInfo.py ConverterRotator.py MovieReference.py YWeather.py \
 	EtAnalogClock.py ExtendedServiceInfo.py ExtremeInfo.py VExtraNumText.py VWeather.py VtiTempFan.py \
 	HbbtvApplicationInfo.py BhAnalogic.py BhStreamInfo.py VNetSpeedInfo.py VisionCamInfo.py CaidInfo2.py \
-	RefString.py EventName2.py CpuUsage.py ProgressDiskSpaceInfo.py RouteInfo.py ServiceInfoEX.py \
-	Audio.py TextAddAfter.py TextAddBefore.py Textreplace.py TextToUpper.py MovieBarInfo.py HddState.py
+	RefString.py CpuUsage.py ProgressDiskSpaceInfo.py RouteInfo.py ServiceInfoEX.py Audio.py \
+	TextAddAfter.py TextAddBefore.py Textreplace.py TextToUpper.py MovieBarInfo.py HddState.py

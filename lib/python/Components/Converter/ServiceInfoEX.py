@@ -228,14 +228,14 @@ class ServiceInfoEX(Poll, Converter, object):
 		self.tpdata = info.getInfoObject(iServiceInformation.sTransponderData)
 		if self.tpdata:
 			self.stream['ttype'] = self.tpdata.get('tuner_type', '')
-			if self.stream['ttype'] == 'DVB-S' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 1:
+			if self.stream['ttype'] == 'DVB-S' and not service.streamed():
+				if self.tpdata.get('system', 0):
 					self.stream['ttype'] = 'DVB-S2'
-			elif self.stream['ttype'] == 'DVB-C' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 1:
+			elif self.stream['ttype'] == 'DVB-C' and not service.streamed():
+				if self.tpdata.get('system', 0):
 					self.stream['ttype'] = 'DVB-C2'
-			elif self.stream['ttype'] == 'DVB-T' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 1:
+			elif self.stream['ttype'] == 'DVB-T' and not service.streamed():
+				if self.tpdata.get('system', 0):
 					self.stream['ttype'] = 'DVB-T2'
 		else:
 			self.stream['ttype'] = 'IP-TV'
@@ -383,28 +383,28 @@ class ServiceInfoEX(Poll, Converter, object):
 			if service.streamed() is not None:
 				return True
 		elif self.type == self.IS_SATELLITE_S:
-			if type == 'DVB-S' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 0:
+			if type == 'DVB-S' and not service.streamed():
+				if not self.tpdata.get('system', 0):
 					return True
 		elif self.type == self.IS_SATELLITE_S2:
-			if type == 'DVB-S' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 1:
+			if type == 'DVB-S' and not service.streamed():
+				if self.tpdata.get('system', 0):
 					return True
 		elif self.type == self.IS_CABLE_C:
-			if type == 'DVB-C' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 0:
+			if type == 'DVB-C' and not service.streamed():
+				if not self.tpdata.get('system', 0):
 					return True
 		elif self.type == self.IS_CABLE_C2:
-			if type == 'DVB-C' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 1:
+			if type == 'DVB-C' and not service.streamed():
+				if self.tpdata.get('system', 0):
 					return True
 		elif self.type == self.IS_TERRESTRIAL_T:
-			if type == 'DVB-T' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 0:
+			if type == 'DVB-T' and not service.streamed():
+				if not self.tpdata.get('system', 0):
 					return True
 		elif self.type == self.IS_TERRESTRIAL_T2:
-			if type == 'DVB-T' and service.streamed() is None:
-				if self.tpdata.get('system', 0) is 1:
+			if type == 'DVB-T' and not service.streamed():
+				if self.tpdata.get('system', 0):
 					return True
 		return False
 	boolean = property(getBoolean)
