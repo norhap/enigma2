@@ -207,8 +207,8 @@
 	</screen>
 
 	<screen name="MessageBoxSimple_summary" position="fill">
-		<widget source="text" render="Label" position="top" size="*,52" font="FdLcD;11" horizontalAlignment="center" verticalAlignment="center" />
-		<widget source="option" render="Label" position="bottom" size="*,14" font="FdLcD;14" horizontalAlignment="center" verticalAlignment="center" />
+		<widget source="parent.Text" conditional="parent.Text" render="Label" position="top" size="*,52" font="FdLcD;11" horizontalAlignment="center" verticalAlignment="center" />
+		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="bottom" size="*,14" font="FdLcD;14" horizontalAlignment="center" verticalAlignment="center" />
 	</screen>
 
 <!-- EMC -->
