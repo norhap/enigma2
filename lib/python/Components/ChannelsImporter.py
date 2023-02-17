@@ -361,6 +361,8 @@ class ChannelsImporter():
 			return False
 		except Exception as err:
 			print("[ChannelsImporter] FTPdownloadFile Error:", err)
+			if "550" in str(err) and sourcefile != "epg.dat":
+				AddNotificationWithID("ChannelsImportNOK", MessageBox, _("Server Error: %s %s is included in bouquets.tv and does not exist in channel list") % (err, sourcefile), type=MessageBox.TYPE_ERROR, timeout=10)
 			return False
 
 	def forceSaveEPGonRemoteReceiver(self):

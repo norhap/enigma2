@@ -2453,6 +2453,9 @@ msgstr ""
 msgid "Error executing plugin"
 msgstr "Error ejecutando plugin"
 
+msgid "Server Error: %s %s is included in bouquets.tv and does not exist in channel list"
+msgstr "Error en Servidor: %s el archivo %s está incluido en bouquets.tv y no existe en la lista de canales"
+
 msgid "Error stop stream!"
 msgstr "Error al detener el stream!"
 
