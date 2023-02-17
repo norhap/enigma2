@@ -1341,6 +1341,12 @@ msgstr "Menú de contexto de canales"
 msgid "Channel list type"
 msgstr "Tipo de lista de canales"
 
+msgid "Channel list was successfully purged."
+msgstr "La lista de canales se purgó con éxito."
+
+msgid "Channel list is clean no characters to purge."
+msgstr "La lista de canales está limpia, no hay caracteres para purgar."
+
 msgid "Channel not in services list"
 msgstr "Canal no en lista de canales"
 
@@ -2215,8 +2221,8 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - falló el búsqueda (%s)!"
 
 #, python-format
-msgid "ERROR downloading file %s"
-msgstr "ERROR descargando archivo %s"
+msgid "ERROR downloading file %s. Use button YELLOW in server \"Purge channel list\""
+msgstr "ERROR al descargar el archivo %s. Use el botón AMARILLO en el servidor \"Purgar lista de canales\""
 
 msgid "East"
 msgstr "Este"
@@ -2298,16 +2304,27 @@ msgid "Enable parental protection"
 msgstr "Activar protección parental"
 
 msgid ""
-"Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally, e.g. tuner is occupied or service type is unavailable on the local tuner."
+"Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally, e.g. tuner is occupied or service type is unavailable on local tuner."
 "\n"
 "\n"
 "You can use this receiver only in client mode using server channel list, timers and EPG."
+"\n"
+"\n"
+"If YELLOW button is available, it means that channel list include characters bad, e.g. \"+\", then list cannot be import from server."
+"\n"
+"\n"
+"If you press YELLOW button then it will clean up list to remove these characters."
 msgstr ""
 "Permita que el receptor servidor intente sintonizar canales que no se pueden sintonizar localmente, ej. el sintonizador está ocupado o el tipo de servicio no está disponible en el sintonizador local."
 "\n"
 "\n"
 "Puede usar este receptor solo en modo cliente usando la lista de canales del servidor, temporizadores y EPG."
-
+"\n"
+"\n"
+"Si el botón AMARILLO está disponible, significa que la lista de canales incluye caracteres incorrectos, por ejemplo, \"+\", entonces la lista no se puede importar desde el servidor."
+"\n"
+"\n"
+"Si pulsa el botón AMARILLO, se limpiará la lista para eliminar estos caracteres."
 
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
@@ -18473,14 +18490,8 @@ msgstr "Idioma ya seleccionado."
 msgid "Jump to the currently active locale/language"
 msgstr "Ir al ajuste regional/idioma actualmente activo"
 
-msgid "Purge all but / Add / Delete the currently highlighted locale/language"
-msgstr "Limpiar todo menos Agregar/Eliminar la configuración regional/idioma actual"
-
-msgid "Purge all but the current and permanent locales/languages.  Add the current locale/language if it is not installed.  Delete the current locale/language if it is installed."
-msgstr "Limpiar todos los idiomas locales, excepto los actuales y permanentes. Agregue la configuración regional/idioma actual si no está instalado. Elimine la configuración regional/idioma actual si está instalado."
-
-msgid "Purge"
-msgstr "Eliminar Idiomas"
+msgid "Purge channel list"
+msgstr "Purgar lista de canales"
 
 msgid ""
 "GUI needs a restart to switch modes\n"
