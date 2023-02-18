@@ -1371,6 +1371,9 @@ msgstr "Canales y EPG"
 msgid "Import from fallback tuner failed, %s"
 msgstr "Falló la importación desde el sintonizador reserva, %s"
 
+msgid "Imported list with bouquet empty <n/a> %s file does not exist"
+msgstr "Lista importada con bouquet vacío <n/a> el archivo %s no existe"
+
 msgid "%s imported from fallback tuner"
 msgstr "%s importado del sintonizador reserva"
 
