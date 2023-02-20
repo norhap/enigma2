@@ -2020,6 +2020,9 @@ msgstr "Desactivar temporizador"
 msgid "Disabled"
 msgstr "Desactivado"
 
+msgid "Disorder bouquets alphabetic"
+msgstr "Desordenar bouquets alfabético"
+
 msgid "Display 16:9 content as"
 msgstr "Mostrar contenido 16:9 como"
 
@@ -4544,6 +4547,9 @@ msgstr "OK"
 
 msgid "ONID"
 msgstr "ONID"
+
+msgid "Order bouquets alphabetic a-z"
+msgstr "Ordenar bouquets alfabético a-z"
 
 msgid "OSD 3D setup"
 msgstr "Ajustes de OSD 3D"
