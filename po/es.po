@@ -8587,14 +8587,14 @@ msgstr "una gui para asignar canales/proveedores a módulos de interfaz común"
 msgid "a gui to assign services/providers/caids to common interface modules"
 msgstr "una gui para asignar canales/proveedores/caids a módulos de interfaz común"
 
-msgid "abort alternatives edit"
-msgstr "abortar edición de alternativos"
+msgid "Abort alternatives edit"
+msgstr "Abortar edición alternativos"
 
 msgid "Abort bouquet edit"
 msgstr "Abortar edición de bouquet"
 
-msgid "abort favourites edit"
-msgstr "abortar edición de favoritos"
+msgid "Abort favourites edit"
+msgstr "Abortar edición de favoritos"
 
 msgid "about to start"
 msgstr "a punto de empezar"
@@ -8861,8 +8861,8 @@ msgstr "Activar modo movimiento"
 msgid "enabled"
 msgstr "activado"
 
-msgid "end alternatives edit"
-msgstr "editar alternativas finales"
+msgid "End alternatives edit"
+msgstr "Fin edición alternativos"
 
 msgid "End bouquet edit"
 msgstr "Fin de edición de bouquet"
@@ -8873,8 +8873,11 @@ msgstr "Finalizar corte aquí"
 msgid "End cut here (reset)"
 msgstr "Finalizar corte aquí (restablecer)"
 
-msgid "end favourites edit"
-msgstr "fin de edición de favoritos"
+msgid "End favourites edit"
+msgstr "Fin edición de favoritos"
+
+msgid "Enable favourites edit"
+msgstr "Habilitar edición de favoritos"
 
 msgid "entertainment (10-16 year old)"
 msgstr "entretenimiento (10-16 años)"
