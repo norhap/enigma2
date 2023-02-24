@@ -6544,6 +6544,12 @@ msgstr "Modelo OTT"
 msgid "Twin Hybrid"
 msgstr "Twin Híbrido"
 
+msgid "Two lines"
+msgstr "Dos líneas"
+
+msgid "Two lines and next event"
+msgstr "Dos líneas y siguiente evento"
+
 msgid "Single Hybrid"
 msgstr "Simple Híbrido"
 
