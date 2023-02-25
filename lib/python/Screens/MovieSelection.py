@@ -301,7 +301,7 @@ class SelectionEventInfo:
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, ProtectedScreen):
 	# SUSPEND_PAUSES actually means "please call my pauseService()"
 	ALLOW_SUSPEND = Screen.SUSPEND_PAUSES
-	if not listdir(config.movielist.last_videodir.value):
+	if exists(config.movielist.last_videodir.value) and not listdir(config.movielist.last_videodir.value):
 		from Components.Console import Console
 		Console().ePopen("mount -a")
 
