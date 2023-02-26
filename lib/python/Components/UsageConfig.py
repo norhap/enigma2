@@ -1,5 +1,5 @@
 from locale import AM_STR, PM_STR, nl_langinfo
-from os import makedirs, remove
+from os import makedirs, remove, symlink
 from os.path import exists, isfile, islink, join as pathjoin, normpath
 from time import mktime
 
@@ -1669,8 +1669,15 @@ def InitUsageConfig():
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 			eEPGCache.getInstance().timeUpdated()
 			if not islink("/etc/network/if-up.d/ntpdate-sync"):
-				Console().ePopen("echo '30 * * * * /usr/bin/ntpdate-sync silent' >>/etc/cron/crontabs/root;ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
-	config.ntp.timesync = ConfigSelection(default="dvb", choices=[
+				Console().ePopen("ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
+			if not isfile("/etc/cron/crontabs/root"):
+				Console().ePopen("echo '30 * * * * /usr/bin/ntpdate-sync silent' >>/etc/cron/crontabs/root")
+			else:
+				if not fileContains("/etc/cron/crontabs/root", "ntpdate-sync silent"):
+					Console().ePopen("echo '30 * * * * /usr/bin/ntpdate-sync silent' >>/etc/cron/crontabs/root")
+			if not islink("/var/spool/cron/crontabs/root"):
+				symlink("/etc/cron/crontabs/root", "/var/spool/cron/crontabs/root")
+	config.ntp.timesync = ConfigSelection(default="auto", choices=[
 		("auto", _("Auto")),
 		("dvb", _("Transponder time")),
 		("ntp", _("Internet time (NTP)"))
