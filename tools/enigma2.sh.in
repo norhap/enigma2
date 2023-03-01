@@ -73,9 +73,9 @@ while : ; do
 
 	# Start enigma.
 	sync
-
-	(sleep 0.1; echo "Enigma2 is the main application so adjust oom score!"; PID=$(pidof enigma2); \
-		[ -e "/proc/${PID}/oom_score_adj" ] && echo "-999" > "/proc/${PID}/oom_score_adj" || echo "-17" > "/proc/${PID}/oom_adj";) &
+	# Not restarting enigma2 when it's leaking memory results in unusable system.
+	# (sleep 0.1; echo "Enigma2 is the main application so adjust oom score!"; PID=$(pidof enigma2); \
+		# [ -e "/proc/${PID}/oom_score_adj" ] && echo "-999" > "/proc/${PID}/oom_score_adj" || echo "-17" > "/proc/${PID}/oom_adj";) &
 
 	# Set the debug level to be used for enigma2 logging.
 	if [ -z "${ENIGMA_DEBUG_LVL}" ]; then
