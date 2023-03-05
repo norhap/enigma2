@@ -91,7 +91,7 @@ profile("InitializeConfigs")
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstandby.
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
 config.misc.prev_wakeup_time = ConfigInteger(default=0)
-config.misc.prev_wakeup_time_type = ConfigInteger(default=0)  # This is only valid when wakeup_time is not 0. 0=RecordTimer, 1=ZapTimer, 2=Plugins, 3=WakeupTimer.
+config.misc.prev_wakeup_time_type = ConfigInteger(default=0)  # This is only valid when wakeup_time is not 0. 0=RecordTimer, 1=ZapTimer, 2=Plugins-PowerTimer, 3=WakeupTime.
 config.misc.isNextRecordTimerAfterEventActionAuto = ConfigYesNo(default=False) # auto action after event in RecordTimer
 config.misc.isNextPowerTimerAfterEventActionAuto = ConfigYesNo(default=False) # auto action after event in PowerTimer
 config.misc.RestartUI = ConfigYesNo(default=False)  # Detect user interface restart.

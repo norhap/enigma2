@@ -4943,6 +4943,9 @@ msgstr "Espera por favor… Cargando lista…"
 msgid "Plugin Browser"
 msgstr "Navegador de Plugins"
 
+msgid "Plugin EPGImport actived EPG import and woke up your %s"
+msgstr "El plugin EPGImport activó la importación de EPG y despertó su %s"
+
 msgid "Plugin manager activity information"
 msgstr "Información de actividad del administrador de plugins"
 
@@ -5124,14 +5127,14 @@ msgstr ""
 "Ahora (Pulse largo)"
 
 msgid ""
-"AutoTimer is not installed\n" 
+"AutoTimer is not installed\n"
 "Now (Press long)"
 msgstr
 "AutoTemporizador no instalado\n"
 "Ahora (Pulse largo)"
 
 msgid ""
-"AutoTimer is not installed\n" 
+"AutoTimer is not installed\n"
 "Prime time (Press long)"
 msgstr ""
 "AutoTemporizador no instalado\n"

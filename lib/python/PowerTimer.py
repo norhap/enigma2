@@ -13,7 +13,7 @@ from Components.Harddisk import internalHDDNotSleeping
 from Components.TimerSanityCheck import TimerSanityCheck
 from Screens.MessageBox import MessageBox
 import Screens.Standby
-from Tools.Directories import SCOPE_CONFIG, fileReadXML, resolveFilename
+from Tools.Directories import SCOPE_CONFIG, fileReadXML, resolveFilename, isPluginInstalled
 from Tools.Notifications import AddNotification, AddNotificationWithUniqueIDCallback, AddPopup
 from Tools.XMLTools import stringToXML
 from Tools.StbHardware import getBrandModel
@@ -53,6 +53,8 @@ class PowerTimer(Timer):
 		Timer.__init__(self)
 		self.timersFilename = resolveFilename(SCOPE_CONFIG, "pm_timers.xml")
 		self.loadTimers()
+		if self.getWakeupEPGImport is not None:
+			self.getWakeupEPGImport()
 
 	def loadTimers(self):
 		timersDom = fileReadXML(self.timersFilename, source=MODULE_NAME)
@@ -298,6 +300,24 @@ class PowerTimer(Timer):
 	def cleanupDaily(self, days):
 		Timer.cleanupDaily(self, days)
 		self.saveTimers()
+
+	def getWakeupEPGImport(self):
+		if isPluginInstalled("EPGImport"):
+			importtime = config.plugins.epgimport.wakeup.value
+			now = localtime(time())
+			intiger_now = int(mktime(localtime(time())))
+			intiger_epgimport = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, importtime[0], importtime[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			if config.misc.prev_wakeup_time_type.value == 2 and (intiger_epgimport - intiger_now) < 270 and (intiger_epgimport - intiger_now) > 30:
+				if not config.misc.RestartUI.value and \
+					not config.plugins.epgimport.shutdown.value and \
+					not config.plugins.epgimport.standby_afterwakeup.value:
+						if isPluginInstalled("EPGRefresh"):
+							if not config.plugins.epgrefresh.wakeup.value or \
+							not config.plugins.epgrefresh.enabled.value:
+								return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s") % getBrandModel(), type=MessageBox.TYPE_INFO, timeout=0)
+						else:
+							return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s") % getBrandModel(), type=MessageBox.TYPE_INFO, timeout=0)
+		return None
 
 
 class PowerTimerEntry(TimerEntry, object):
