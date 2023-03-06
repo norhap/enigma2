@@ -623,9 +623,6 @@ msgstr "Añadir"
 msgid "Add a mark"
 msgstr "Añadir una marca"
 
-msgid "Add a nameserver entry"
-msgstr "Agregar una entrada de servidor de nombres"
-
 msgid "Add a new title"
 msgstr "Añadir un nuevo título"
 
@@ -5059,6 +5056,20 @@ msgstr ""
 msgid "Press OK to activate the settings."
 msgstr "Pulse OK para activar la configuración."
 
+msgid ""
+"Press OK to activate the settings.\n\n"
+"With DNS server name \"Static IP Router\" you can use DNS provided by other servers."
+msgstr ""
+"Pulse OK para activar la configuración.\n\n"
+"Con nombre del servidor \"Router IP Estática\" puede utilizar DNS proporcionado por otros servidores."
+
+msgid ""
+"Press OK to activate the settings.\n\n"
+"With DNS server name \"DHCP Router\" If the old DNS are still maintained, to obtain the DNS of your internet provider, reboot receiver."
+msgstr ""
+"Pulse OK para activar la configuración.\n\n"
+"Con el nombre del servidor DNS \"DHCP Router\" Si aún se mantienen los DNS antiguos, para obtener los DNS de su proveedor de internet, reinicie el receptor."
+
 msgid "Press OK to edit the settings."
 msgstr "Pulse OK para editar la configuración."
 
@@ -5455,9 +5466,6 @@ msgstr "Eliminar"
 
 msgid "Remove a mark"
 msgstr "Eliminar una marca"
-
-msgid "Remove a nameserver entry"
-msgstr "Eliminar una entrada del servidor de nombres"
 
 msgid "Remove all logfiles"
 msgstr "Eliminar todos los registros"
@@ -16954,11 +16962,11 @@ msgstr "Móvil: "
 msgid "Public IP: "
 msgstr "IP Pública: "
 
-msgid "Static IP or Custom"
-msgstr "IP Estática o Personalizado"
+msgid "Static IP Router"
+msgstr "Router IP Estática"
 
-msgid "Nameserver configuration"
-msgstr "Configuración Proveedor DNS"
+msgid "DNS server name"
+msgstr "Nombre del servidor DNS"
 
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"

@@ -138,12 +138,15 @@ class Network:
 
 	def writeNameserverConfig(self):
 		try:
-			fp = open('/etc/resolv.conf', 'w')
-			for nameserver in self.nameservers:
-				fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-			fp.close()
-			if config.usage.dns.value.lower() not in ("dhcp-router", "custom"):
-				fp = open('/etc/enigma2/serverdns.conf', 'w')
+			if config.usage.dns.value.lower() in ("dhcp-router", "staticip"):
+				fp = open('/etc/resolv.conf', 'w')
+				for nameserver in self.nameservers:
+					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+				fp.close()
+				if (os.path.isfile("/etc/enigma2/nameservers")):
+					Console().ePopen('rm /etc/enigma2/nameservers')
+			else:
+				fp = open('/etc/enigma2/nameservers', 'w')
 				for nameserver in self.nameservers:
 					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 				fp.close()
@@ -202,8 +205,7 @@ class Network:
 			self.configuredNetworkAdapters = self.configuredInterfaces
 			# load ns only once
 			self.loadNameserverConfig()
-			if config.usage.dns.value.lower() not in ("dhcp-router", "custom"):
-				self.writeNameserverConfig()
+			self.writeNameserverConfig()
 			print("[Network] read configured interface:", ifaces)
 			# remove any password before info is printed to the debug log
 			safe_ifaces = self.ifaces.copy()
@@ -223,12 +225,10 @@ class Network:
 
 		resolv = []
 		try:
-			if config.usage.dns.value.lower() in ("dhcp-router", "custom"):
+			if config.usage.dns.value.lower() in ("dhcp-router", "staticip"):
 				fp = open('/etc/resolv.conf', 'r')
-				if (os.path.isfile("/etc/enigma2/serverdns.conf")):
-					Console().ePopen('rm /etc/enigma2/serverdns.conf')
 			else:
-				fp = open('/etc/enigma2/serverdns.conf', 'r')
+				fp = open('/etc/enigma2/nameservers', 'r')
 			resolv = fp.readlines()
 			fp.close()
 			self.nameservers = []
