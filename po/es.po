@@ -1530,8 +1530,8 @@ msgstr "Configuración"
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
 msgstr "Configure si se debe obviar la comprobación de HDMI EDID, esto podría solucionar problemas con algunos televisores."
 
-msgid "Configure nameservers"
-msgstr "Configure servidor de nombres DNS"
+msgid "Settings DNS Server"
+msgstr "Configuración Servidor DNS"
 
 msgid "Configure remote control type"
 msgstr "Configure el tipo de mando a distancia"

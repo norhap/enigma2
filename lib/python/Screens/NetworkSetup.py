@@ -320,7 +320,7 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self.setTitle(_("Configure nameservers"))
+		self.setTitle(_("Settings DNS Server"))
 		self.backupNameserverList = iNetwork.getNameserverList()[:]
 		print("[NetworkSetup] backup-list:", self.backupNameserverList)
 		self["key_red"] = StaticText(_("Cancel"))
@@ -340,7 +340,8 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 			"cancel": self.keyCancel,
 			"ok": self.ok,
 			"left": self.keyLeft,
-			"right": self.keyRight
+			"right": self.keyRight,
+			"menu": self.keyMenu
 		}, -2)
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
@@ -407,6 +408,9 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.createConfig()
+
+	def keyMenu(self):
+		ConfigListScreen.keyMenu(self)
 
 
 class MACSettings(Setup):
