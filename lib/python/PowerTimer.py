@@ -302,20 +302,22 @@ class PowerTimer(Timer):
 		self.saveTimers()
 
 	def getWakeupEPGImport(self):
-		if isPluginInstalled("EPGImport"):
-			importtime = config.plugins.epgimport.wakeup.value
-			now = localtime(time())
-			intiger_now = int(mktime(localtime(time())))
-			intiger_epgimport = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, importtime[0], importtime[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
-			if config.misc.prev_wakeup_time_type.value == 2 and (intiger_epgimport - intiger_now) < 270 and (intiger_epgimport - intiger_now) > 30:
-				if not config.misc.RestartUI.value and \
-					not config.plugins.epgimport.shutdown.value and \
-					not config.plugins.epgimport.standby_afterwakeup.value:
-						if isPluginInstalled("EPGRefresh"):
-							if not config.plugins.epgrefresh.wakeup.value or \
-							not config.plugins.epgrefresh.enabled.value:
-								return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s") % getBrandModel(), type=MessageBox.TYPE_INFO, timeout=0)
-						else:
+		now = localtime(time())
+		begin = int(mktime(localtime(time())))
+		if isPluginInstalled("EPGImport") and config.misc.prev_wakeup_time_type.value == 2:
+			importwakeup = config.plugins.epgimport.wakeup.value
+			importtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, importwakeup[0], importwakeup[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+			if not config.misc.RestartUI.value and \
+				not config.plugins.epgimport.shutdown.value and \
+				not config.plugins.epgimport.standby_afterwakeup.value:
+					if not isPluginInstalled("EPGRefresh"):
+						return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s") % getBrandModel(), type=MessageBox.TYPE_INFO, timeout=0)
+					else:
+						refreshwakeup = config.plugins.epgrefresh.begin.value
+						refreshtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, refreshwakeup[0], refreshwakeup[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+						if (refreshtime - begin) < 360 and (refreshtime - begin) > 0:
+							return None
+						elif (importtime - begin) < 240 and (importtime - begin) > 0:
 							return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s") % getBrandModel(), type=MessageBox.TYPE_INFO, timeout=0)
 		return None
 
