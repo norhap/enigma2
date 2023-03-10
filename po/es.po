@@ -2580,6 +2580,12 @@ msgstr "Seleccione el tiempo de retraso entre cada repetición del botón."
 msgid "Input Device Driver Setup"
 msgstr "Ajustes Entrada Dispositivos"
 
+msgid "Use LEFT or MENU keys to choose other server.\n\nCurrent server name: %s"
+msgstr "Utilice las teclas IZQUIERDA o MENÚ para elegir otro servidor.\n\nNombre del servidor actual: %s"
+
+msgid "Use RIGHT or MENU keys to choose other server.\n\nCurrent server name: %s"
+msgstr "Utilice las teclas DERECHA o MENÚ para elegir otro servidor.\n\nNombre del servidor actual: %s"
+
 msgid "Use these input device settings for '%s' (%s)?"
 msgstr "Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"
 
@@ -5056,11 +5062,11 @@ msgstr ""
 msgid "Press OK to activate the settings."
 msgstr "Pulse OK para activar la configuración."
 
-msgid "You can use the DNS provided by other servers with this DNS server name."
-msgstr "Puede utilizar los DNS proporcionados por otros servidores con este nombre de servidor DNS"
+msgid "%s\n\nYou can use the DNS provided by other servers in Static IP Router."
+msgstr "%s\n\nPuede utilizar los DNS proporcionados por otros servidores en Router IP Estática."
 
-msgid "If the old DNS are still maintained with DHCP Router, to obtain the DNS of your internet provider, reboot receiver."
-msgstr "Si los DNS antiguos aún se mantienen con el DHCP Router, para obtener los DNS de su proveedor de Internet, reinicie el receptor."
+msgid "%s\n\nIf the DNS 1-2 of other servers are still kept in the DHCP Router, to get the DNS 1-2 from your DHCP Router, reboot the receiver."
+msgstr "%s\n\nSi los DNS 1-2 de otros servidores aún se mantienen en DHCP Router, para obtener los DNS 1-2 de su DHCP Router, reinicie el receptor."
 
 msgid "Press OK to edit the settings."
 msgstr "Pulse OK para editar la configuración."

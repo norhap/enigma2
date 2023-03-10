@@ -18,7 +18,7 @@ from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText,
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, fileExists
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, fileExists, fileContains
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer, getBoxType
@@ -333,6 +333,8 @@ class DNSSettings(Setup, HelpableScreen):
 		self.createSetup()
 
 	def createSetup(self): # Updatable list of servers to write IP DNS.
+		dhcpkeys = _("Use LEFT or MENU keys to choose other server.\n\nCurrent server name: %s") % config.usage.dns.value
+		staticip_keys = _("Use RIGHT or MENU keys to choose other server.\n\nCurrent server name: %s") % config.usage.dns.value
 		self.nameservers = iNetwork.getNameserverList()
 		if config.usage.dns.value == 'google':
 			self.nameserverEntries = [NoSave(ConfigIP(default=[8, 8, 8, 8])), NoSave(ConfigIP(default=[8, 8, 4, 4]))]
@@ -356,10 +358,22 @@ class DNSSettings(Setup, HelpableScreen):
 		for x in self.nameserverEntries:
 			self.list.append(getConfigListEntry(_("DNS %d") % (i), x))
 			i += 1
+		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2"):
+			if fileContains("/etc/network/interfaces", "iface eth0 inet static") and not fileContains("/etc/network/interfaces", "iface wlan0 inet dhcp") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
+				config.usage.dns.default = "staticip"
+				config.usage.dns.value = config.usage.dns.default
+			else:
+				config.usage.dns.default = "dhcp-router"
+				config.usage.dns.value = config.usage.dns.default
+			config.usage.dns.save()
 		if config.usage.dns.value == "staticip":
-			self["introduction"] = StaticText(_("You can use the DNS provided by other servers with this DNS server name."))
+			self["introduction"] = StaticText(_("%s\n\nYou can use the DNS provided by other servers in Static IP Router.") % staticip_keys)
 		elif config.usage.dns.value == "dhcp-router":
-			self["introduction"] = StaticText(_("If the old DNS are still maintained with DHCP Router, to obtain the DNS of your internet provider, reboot receiver."))
+			self["introduction"] = StaticText(_("%s\n\nIf the DNS 1-2 of other servers are still kept in the DHCP Router, to get the DNS 1-2 from your DHCP Router, reboot the receiver.") % dhcpkeys)
+		elif config.usage.dns.default == "dhcp-router" and config.usage.dns.value != "dhcp-router":
+			self["introduction"] = StaticText(dhcpkeys)
+		else:
+			self["introduction"] = StaticText(staticip_keys)
 
 	def keySave(self):
 		self.RefreshNameServerUsed()
@@ -374,7 +388,7 @@ class DNSSettings(Setup, HelpableScreen):
 		self.keySave()
 
 	def keyCancel(self):
-		Setup.keyCancel(self)
+		Setup.keyCancel(self) if config.usage.dns.value not in ("dhcp-router", "staticip") else self.close(True)
 
 	def RefreshNameServerUsed(self):
 		print("[NetworkSetup] currentIndex:", self["config"].getCurrentIndex())
