@@ -359,7 +359,7 @@ class DNSSettings(Setup, HelpableScreen):
 			self.list.append(getConfigListEntry(_("DNS %d") % (i), x))
 			i += 1
 		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2"):
-			if fileContains("/etc/network/interfaces", "iface eth0 inet static") and not fileContains("/etc/network/interfaces", "iface wlan0 inet dhcp") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
+			if fileContains("/etc/network/interfaces", "iface eth0 inet static") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
 			else:
