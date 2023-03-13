@@ -2580,11 +2580,8 @@ msgstr "Seleccione el tiempo de retraso entre cada repetición del botón."
 msgid "Input Device Driver Setup"
 msgstr "Ajustes Entrada Dispositivos"
 
-msgid "Use LEFT or MENU keys to choose other server.\n\nCurrent server name: %s"
-msgstr "Utilice las teclas IZQUIERDA o MENÚ para elegir otro servidor.\n\nNombre del servidor actual: %s"
-
-msgid "Use RIGHT or MENU keys to choose other server.\n\nCurrent server name: %s"
-msgstr "Utilice las teclas DERECHA o MENÚ para elegir otro servidor.\n\nNombre del servidor actual: %s"
+msgid "Use LEFT RIGHT or MENU keys to choose server.\n\nActive server: %s\nDNS: %s"
+msgstr "Utilice las teclas IZQUIERDA DERECHA o MENÚ para elegir el servidor.\n\nServidor activo: %s\nDNS: %s"
 
 msgid "Use these input device settings for '%s' (%s)?"
 msgstr "Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"
@@ -3241,6 +3238,9 @@ msgstr "Active su receptor AV desde el modo de espera"
 
 msgid "When enabled the receiver will automatically be switched on."
 msgstr "Cuando está habilitado, el receptor se encenderá automáticamente."
+
+msgid "WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!."
+msgstr "ADVERTENCIA: Los DNS no se guardaron en su configuración.\n\nServidor activo: %s\nDNS activo: %s\n\n¡Es nesesario elegir un servidor y guardar con botón VERDE!."
 
 msgid "Repeat the sent standby and wakeup commands"
 msgstr "Repita los comandos de espera y activación enviados"
@@ -5065,8 +5065,8 @@ msgstr "Pulse OK para activar la configuración."
 msgid "%s\n\nYou can use the DNS provided by other servers in Static IP Router."
 msgstr "%s\n\nPuede utilizar los DNS proporcionados por otros servidores en Router IP Estática."
 
-msgid "%s\n\nIf the DNS 1-2 of other servers are still kept in the DHCP Router, to get the DNS 1-2 from your DHCP Router, reboot the receiver."
-msgstr "%s\n\nSi los DNS 1-2 de otros servidores aún se mantienen en DHCP Router, para obtener los DNS 1-2 de su DHCP Router, reinicie el receptor."
+msgid "%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver."
+msgstr "%s\n\nSi los DNS de otros servidores aún se mantienen en DHCP Router, para obtener los DNS de su Router, reinicie el receptor."
 
 msgid "Press OK to edit the settings."
 msgstr "Pulse OK para editar la configuración."
