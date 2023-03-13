@@ -4635,6 +4635,12 @@ msgstr "Otros"
 msgid "Output"
 msgstr "Salida"
 
+msgid "Order by modes"
+msgstr "Ordenar por modos"
+
+msgid "Order by slots"
+msgstr "Ordenar por slots"
+
 msgid "Overall progress:"
 msgstr "Progreso total:"
 
