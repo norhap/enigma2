@@ -4355,8 +4355,8 @@ msgstr "Sin retardo"
 msgid "No description available."
 msgstr "Sin descripción disponible."
 
-msgid "No displayable files on this medium found!"
-msgstr "No se encuentran archivos mostrables en este medio!"
+msgid "%s connected successfully. No playable files on this medium found!"
+msgstr "%s conectado con éxito. ¡No se encontraron archivos reproducibles en este medio!"
 
 msgid "No event info found, recording set to (24 hours)"
 msgstr "No se encontró información del evento, grabación establecida a (24 horas)"
@@ -7208,8 +7208,8 @@ msgstr ""
 "El directorio %s no se puede escribir.\n"
 "Seleccione un directorio que permita escritura en su lugar."
 
-msgid "The following files were found..."
-msgstr "Se encontraron los siguientes archivos…"
+msgid "%s connected successfully.\nPlayable files found."
+msgstr "%s conectado con éxito.\nSe encontraron archivos reproducibles."
 
 msgid ""
 "The network wizard extension is not installed!\n"
