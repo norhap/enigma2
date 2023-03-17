@@ -2583,8 +2583,8 @@ msgstr "Seleccione el tiempo de retraso entre cada repetición del botón."
 msgid "Input Device Driver Setup"
 msgstr "Ajustes Entrada Dispositivos"
 
-msgid "Use LEFT RIGHT or MENU keys to choose server.\n\nActive server: %s\nDNS: %s"
-msgstr "Utilice las teclas IZQUIERDA DERECHA o MENÚ para elegir el servidor.\n\nServidor activo: %s\nDNS: %s"
+msgid "Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s"
+msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para elegir otro servidor.\n\nServidor activo: %s\nDNS: %s"
 
 msgid "Use these input device settings for '%s' (%s)?"
 msgstr "Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"

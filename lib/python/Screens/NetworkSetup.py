@@ -355,7 +355,7 @@ class DNSSettings(Setup, HelpableScreen):
 				servername = _("OpenDNS-2")
 			else:
 				servername = _("Cloudflare")
-		introduction = _("Use LEFT RIGHT or MENU keys to choose server.\n\nActive server: %s\nDNS: %s") % (servername, dns)
+		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns)
 		if "0. 0. 0. 0" in dns:
 			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
 			self["introduction"] = StaticText(introduction)
