@@ -47,6 +47,9 @@ msgstr ""
 "\n"
 "Pulsa OK en su mando para continuar."
 
+msgid "Press LEFT RIGHT OK or MENU to change path."
+msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para cambiar de ruta."
+
 msgid "Restore previous cuts..."
 msgstr "Restaurar cortes anteriores ..."
 
@@ -5040,7 +5043,7 @@ msgid "Press INFO on your remote control for additional information."
 msgstr "Pulse INFO en su mando para obtener información adicional."
 
 msgid "Press MENU on your remote control for additional options."
-msgstr "Pulse MENU en su mando para opciones adicionales."
+msgstr "Pulse MENÚ en su mando para opciones adicionales."
 
 msgid "Press OK on your remote control to continue."
 msgstr "Pulse OK en su mando para continuar."
@@ -18018,17 +18021,17 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
-msgid "'%s' Storage device free size %d GB. Press 'OK' to change path."
-msgstr "Tamaño libre del dispositivo de almacenamiento %d GB. Pulse 'OK' para cambiar la ruta."
+msgid "'%s' Storage device free size %d GB.\n%s"
+msgstr "Tamaño libre del dispositivo de almacenamiento %d GB.\n%s"
 
-msgid "'%s' does not exist. Press 'OK' to change path."
-msgstr "'%s' no existe. Pulse 'OK' para cambiar la ruta."
+msgid "'%s' does not exist.\n%s"
+msgstr "'%s' no existe.\n%s"
 
-msgid "'%s' is Internal Flash. It is not a storage device. Press 'OK' to change path."
-msgstr "'%s' es la Flash Interna. No es un dispositivo de almacenamiento. Pulse 'OK' para cambiar la ruta."
+msgid "'%s' is Internal Flash. It is not a storage device.\n%s"
+msgstr "'%s' es la Flash Interna. No es un dispositivo de almacenamiento.\n%s"
 
-msgid "'%s' not writeable. Press 'OK' to change path."
-msgstr "'%s' no se puede escribir. Pulse 'OK' para cambiar la ruta."
+msgid "'%s' not writeable.\n%s"
+msgstr "'%s' no se puede escribir.\n%s"
 
 msgid "'%s' can't be linked to recordings"
 msgstr "'%s' no se puede vincular a grabaciones"
@@ -18831,7 +18834,7 @@ msgid ""
 msgstr ""
 "\"Guardar\" cambia el idioma activo.\n"
 "\n"
-"\"Añadir Lenguaje\" o \"MENU\" agrega idioma(s) adicional(es).\n"
+"\"Añadir Lenguaje\" o \"MENÚ\" agrega idioma(s) adicional(es).\n"
 "\n"
 "\"Eliminar Lenguaje(s)\" permite eliminar todo menos el inglés y el idioma seleccionado, también tienes opción de eliminar el idioma seleccionado."
 

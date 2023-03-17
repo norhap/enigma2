@@ -7,6 +7,8 @@ from Screens.MessageBox import MessageBox
 from Screens.Setup import Setup
 from Tools.Directories import fileAccess # hasHardLinks
 
+itemchange = _("Press LEFT RIGHT OK or MENU to change path.")
+
 
 class TimeshiftSettings(Setup):
 	def __init__(self, session):
@@ -64,15 +66,15 @@ class TimeshiftSettings(Setup):
 	def pathStatus(self, path):
 		if not isdir(path):
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("'%s' does not exist. Press 'OK' to change path.") % path
+			footnote = _("'%s' does not exist.\n%s") % (path, itemchange)
 			green = ""
 		elif stat(path).st_dev in DEFAULT_INHIBIT_DEVICES:
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("'%s' is Internal Flash. It is not a storage device. Press 'OK' to change path.") % path
+			footnote = _("'%s' is Internal Flash. It is not a storage device.\n%s") % (path, itemchange)
 			green = ""
 		elif not fileAccess(path, "w"):
 			self.errorItem = self["config"].getCurrentIndex()
-			footnote = _("'%s' not writeable. Press 'OK' to change path.") % path
+			footnote = _("'%s' not writeable.\n%s") % (path, itemchange)
 			green = ""
 		#elif not hasHardLinks(path):
 			#self.errorItem = self["config"].getCurrentIndex()
@@ -88,7 +90,7 @@ class TimeshiftSettings(Setup):
 			if storage:
 				if isdir(path) and not stat(path).st_dev in DEFAULT_INHIBIT_DEVICES and fileAccess(path, "w") and storage <= 1:
 					self.errorItem = self["config"].getCurrentIndex()
-					footnote = _("'%s' Storage device free size %d GB. Press 'OK' to change path.") % (path, storage)
+					footnote = _("'%s' Storage device free size %d GB.\n%s") % (path, storage, itemchange)
 					green = ""
 		self.setFootnote(footnote)
 		self["key_green"].text = green
