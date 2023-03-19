@@ -202,10 +202,11 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 				valItem[1].changed()
 			self["config"].invalidate(valItem)
 			self.updateTimeList()
-			self["text"].setText(_("Your local time has been set successfully. Press \"OK\" to continue wizard."))
+			self["text"].setText(_("Your local time has been set successfully. Settings has been saved.\n\nPress \"OK\" to continue wizard."))
 
 	def red(self):
 		self.close()
 
 	def yellow(self):
 		self.useGeolocation()
+		Time.checkNtpDateRootFile(self)
