@@ -4744,6 +4744,12 @@ msgstr "Ajustes Control Parental"
 msgid "Parental Control Setup"
 msgstr "Ajustes Control Parental"
 
+msgid "Partial"
+msgstr "Similar completo"
+
+msgid "Partial EPG"
+msgstr "EPG completo"
+
 msgid "Pause and start timeshift"
 msgstr "Pausar y comenzar el cambio de tiempo"
 
