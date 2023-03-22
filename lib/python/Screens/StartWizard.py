@@ -7,6 +7,7 @@ try:
 	from Plugins.SystemPlugins.OSDPositionSetup.overscanwizard import OverscanWizard
 except:
 	OverscanWizard = None
+from Components.Console import Console
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
@@ -162,6 +163,12 @@ class AutoInstallWizard(Screen):
 			self.delay.callback.append(self.abort)
 			eActionMap.getInstance().bindAction('', 0, self.abort)
 			self.delay.startLongTimer(5)
+			from Tools.Directories import fileContains # check environment to establish SNTP time with autorestore.
+			if config.ntp.timesync.value != "dvb":
+				if not fileContains("/etc/crontab", "sntp -S"):
+					Console().ePopen("sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
+			if os.path.isfile("/etc/crontab") and fileContains("/etc/crontab", "registry.arm.bin"):
+				Console().ePopen("sed -i '/gstreamer/d' /etc/crontab")
 
 	def abort(self, key=None, flag=None):
 		if hasattr(self, 'delay'):
@@ -176,7 +183,6 @@ class AutoInstallWizard(Screen):
 
 
 if not os.path.isfile("/etc/installed"):
-	from Components.Console import Console
 	Console().ePopen("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
