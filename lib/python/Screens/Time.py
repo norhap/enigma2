@@ -1,5 +1,5 @@
 from Components.ActionMap import ActionMap, HelpableActionMap
-from os.path import islink
+from os.path import isfile
 from Components.Console import Console
 from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -23,17 +23,31 @@ class Time(Setup):
 		}, prio=0, description=_("Time Setup Actions"))
 		self.selectionChanged()
 
-	def checkNtpDateRootFile(self):
+	def setSntpTime(self):
+		self.console = Console()
+		self.console.ePopen("sntp -S %s" % config.ntp.server.value)
+		if not isfile("/etc/init.d/crond") and config.ntp.timesync.value != "dvb":
+			self.console.ePopen("opkg update && opkg install cronie")
 		if config.ntp.timesync.value != "dvb":
-			if not islink("/etc/network/if-up.d/ntpdate-sync") and not fileContains("/var/spool/cron/root", "ntpdate-sync"):
-				Console().ePopen("ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync;echo '30 * * * * /usr/bin/ntpdate-sync silent' >>/var/spool/cron/root")
+			if not fileContains("/etc/crontab", "sntp -S"):
+				self.console.ePopen("sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
 		else:
-			if islink("/etc/network/if-up.d/ntpdate-sync") and fileContains("/var/spool/cron/root", "ntpdate-sync"):
-				Console().ePopen("sed -i '/ntpdate-sync/d' /var/spool/cron/root;unlink /etc/network/if-up.d/ntpdate-sync")
+			if fileContains("/etc/crontab", "sntp -S"):
+				self.console.ePopen("sed -i '/sntp -S/d' /etc/crontab")
 
 	def keySave(self):
-		Setup.keySave(self)
-		self.checkNtpDateRootFile()
+		if isfile("/etc/init.d/crond"):
+			Setup.keySave(self)
+			self.setSntpTime()
+		else:
+			if config.ntp.timesync.value != "dvb":
+				self.setSntpTime()
+				if isfile("/etc/init.d/crond"):
+					self.setFootnote(_("Cronie service installed. Press GREEN button."))
+				else:
+					self.setFootnote(_("Cronie service could not be installed. Press RED or EXIT buttons."))
+			else:
+				Setup.keySave(self)
 
 	def selectionChanged(self):
 		if Setup.getCurrentItem(self) in (config.timezone.area, config.timezone.val):
@@ -70,54 +84,55 @@ class Time(Setup):
 				valItem[1].changed()
 			self["config"].invalidate(valItem)
 			self.setFootnote(_("Geolocation has been used to set the time zone."))
+			self.setSntpTime()
 
 
 class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 	skin = """
 	<screen name="TimeWizard" position="center,60" size="980,635" resolution="1280,720">
-		<widget name="text" position="10,10" size="e-20,25" font="Regular;20" transparent="1" valign="center" />
+		<widget name="text" position="10,10" size="e-20,25" font="Regular;20" transparent="1" verticalAlignment="center" />
 		<widget name="config" position="10,40" size="e-20,250" enableWrapAround="1" entryFont="Regular;25" valueFont="Regular;25" itemHeight="35" scrollbarMode="showOnDemand" />
-		<widget source="key_red" render="Label" objectTypes="key_red,StaticText" position="180,e-50" size="180,40" backgroundColor="key_red" conditional="key_red" font="Regular;20" foregroundColor="key_text" halign="center" valign="center">
+		<widget source="key_red" render="Label" objectTypes="key_red,StaticText" position="180,e-50" size="180,40" backgroundColor="key_red" conditional="key_red" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" verticalAlignment="center">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="key_yellow" render="Label" objectTypes="key_yellow,StaticText" position="390,e-50" size="180,40" backgroundColor="key_yellow" conditional="key_yellow" font="Regular;20" foregroundColor="key_text" halign="center" valign="center">
+		<widget source="key_yellow" render="Label" objectTypes="key_yellow,StaticText" position="390,e-50" size="180,40" backgroundColor="key_yellow" conditional="key_yellow" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" verticalAlignment="center">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget name="HelpWindow" position="0,0" size="0,0" alphatest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
-		<widget name="rc" conditional="rc" alphatest="blend" position="10,290" size="100,360" />
-		<widget name="wizard" conditional="wizard" pixmap="picon_default.png" position="740,400" size="220,132" alphatest="blend" />
-		<widget name="indicatorU0" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU1" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU2" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU3" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU4" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU5" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU6" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU7" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU8" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU9" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU10" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU11" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU12" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU13" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU14" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorU15" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL0" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL1" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL2" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL3" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL4" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL5" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL6" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL7" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL8" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL9" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL10" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL11" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL12" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL13" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL14" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
-		<widget name="indicatorL15" pixmap="rc_circle.png" position="0,0" size="23,23" alphatest="blend" offset="11,11" zPosition="11" />
+		<widget name="HelpWindow" position="0,0" size="0,0" alphaTest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
+		<widget name="rc" conditional="rc" alphaTest="blend" position="10,290" size="100,360" />
+		<widget name="wizard" conditional="wizard" pixmap="picon_default.png" position="740,400" size="220,132" alphaTest="blend" />
+		<widget name="indicatorU0" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU1" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU2" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU3" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU4" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU5" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU6" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU7" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU8" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU9" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU10" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU11" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU12" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU13" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU14" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorU15" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL0" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL1" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL2" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL3" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL4" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL5" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL6" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL7" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL8" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL9" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL10" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL11" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL12" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL13" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL14" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
+		<widget name="indicatorL15" pixmap="rc_circle.png" position="0,0" size="23,23" alphaTest="blend" offset="11,11" zPosition="11" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -128,7 +143,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		self["text"] = Label()
-		self["text"].setText(_("Press YELLOW button to set your schedule."))
+		self["text"].setText(_("Press YELLOW button to automatically set your local time and time zone."))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_yellow"] = StaticText(_("Set local time"))
 		self["wizard"] = Pixmap()
@@ -145,7 +160,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 			"back": self.red
 		}, -2)
 		self.onLayoutFinish.append(self.selectKeys)
-		self.updateTimeList()
+		self.getTimeList()
 
 	def selectKeys(self):
 		self.clearSelectedKeys()
@@ -155,24 +170,16 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self.selectKey("RIGHT")
 		self.selectKey("RED")
 		self.selectKey("YELLOW")
+		self.selectKey("OK")
 
-	def updateTimeList(self):
+	def getTimeList(self):
 		self.list = []
 		self.list.append(getConfigListEntry(_("Time zone area"), config.timezone.area))
 		self.list.append(getConfigListEntry(_("Time zone"), config.timezone.val))
-		if config.usage.date.enabled.value:
-			self.list.append(getConfigListEntry(_("Date style"), config.usage.date.dayfull))
-			config.usage.date.dayfull.save()
-		if config.usage.time.enabled.value:
-			self.list.append(getConfigListEntry(_("Time style"), config.usage.time.long))
-			config.usage.time.long.save()
+		self.list.append(getConfigListEntry(_("Date style"), config.usage.date.dayfull))
+		self.list.append(getConfigListEntry(_("Time style"), config.usage.time.long))
 		self.list.append(getConfigListEntry(_("Time synchronization method"), config.ntp.timesync))
-		config.ntp.timesync.save()
-		if config.ntp.timesync.value != "dvb":
-			self.list.append(getConfigListEntry(_("NTP Hostname"), config.ntp.server))
-			config.ntp.server.save()
-		config.timezone.val.save()
-		config.timezone.area.save()
+		self.list.append(getConfigListEntry(_("NTP Hostname"), config.ntp.server))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
@@ -201,12 +208,19 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 			if valItem:
 				valItem[1].changed()
 			self["config"].invalidate(valItem)
-			self.updateTimeList()
-			self["text"].setText(_("Your local time has been set successfully. Settings has been saved.\n\nPress \"OK\" to continue wizard."))
+			config.timezone.area.save()
+			config.timezone.val.save()
+			config.usage.date.dayfull.save()
+			config.usage.time.long.save()
+			config.ntp.timesync.save()
+			config.ntp.server.save()
+			self["text"].setText(_("Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."))
 
 	def red(self):
+		ConfigListScreen.keySave(self)
+		Time.setSntpTime(self)
 		self.close()
 
 	def yellow(self):
 		self.useGeolocation()
-		Time.checkNtpDateRootFile(self)
+		Time.setSntpTime(self)

@@ -1719,6 +1719,12 @@ msgstr "Croacia"
 msgid "Croatian"
 msgstr "Croata"
 
+msgid "Cronie service installed. Press GREEN button."
+msgstr "Servicio Cronie instalado. Pulse el botón VERDE."
+
+msgid "Cronie service could not be installed. Press RED or EXIT buttons."
+msgstr "No se pudo instalar el servicio Cronie. Pulse botones ROJO o SALIR."
+
 msgid "Cuba"
 msgstr "Cuba"
 
@@ -17119,11 +17125,11 @@ msgstr "Retraso:"
 msgid "Auto deep standby"
 msgstr "Modo espera profundo automático"
 
-msgid "Press YELLOW button to set your schedule."
-msgstr "Presione el botón AMARILLO para establecer su horario."
+msgid "Press YELLOW button to automatically set your local time and time zone."
+msgstr "Pulse botón AMARILLO para configurar automáticamente su hora local y zona horaria."
 
-msgid "Your local time has been set successfully. Settings has been saved.\n\nPress \"OK\" to continue wizard."
-msgstr "Su hora local se ha configurado correctamente. La configuración se ha guardado.\n\nPulse \"OK\" para continuar con el asistente."
+msgid "Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."
+msgstr "Su zona y hora local se han configurado correctamente.\n\nPulse \"OK\" para continuar con el asistente."
 
 msgid "Time Wizard"
 msgstr "Asistente de Horario"
@@ -17416,8 +17422,8 @@ msgstr "Muy rápido"
 msgid "Transponder time"
 msgstr "Tiempo transpondedor"
 
-msgid "Internet time (NTP)"
-msgstr "Tiempo internet (NTP)"
+msgid "Internet time (SNTP)"
+msgstr "Hora internet (SNTP)"
 
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr "Elija el estilo de formato de visualización del display para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por el skin."

@@ -1664,7 +1664,7 @@ def InitUsageConfig():
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[
 		("auto", _("Auto")),
 		("dvb", _("Transponder time")),
-		("ntp", _("Internet time (NTP)"))
+		("ntp", _("Internet time (SNTP)"))
 	])
 	config.ntp.timesync.addNotifier(timesyncChanged)
 	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)
