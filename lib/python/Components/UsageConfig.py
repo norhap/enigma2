@@ -24,8 +24,6 @@ visuallyImpairedCommentary = "NAR qad"
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
-	if isfile("/etc/crontab") and isfile("/home/root/.cache/gstreamer-1.0/registry.arm.bin") and not fileContains("/etc/crontab", "registry.arm.bin"):
-		Console().ePopen("sed -i '$a@reboot root rm -f /home/root/.cache/gstreamer-1.0/registry.arm.bin' /etc/crontab")
 	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
 		("dhcp-router", _("DHCP Router")),
 		("staticip", _("Static IP Router")),
@@ -1896,3 +1894,12 @@ def dropEPGNewLines(text):
 
 def replaceEPGSeparator(code):
 	return {"newline": "\n", "2newlines": "\n\n", "space": " ", "dash": " - ", "dot": " . ", "asterisk": " * ", "hashtag": " # ", "nothing": ""}.get(code)
+
+
+def getFileUsage():
+	if isfile("/etc/crontab") and isfile("/home/root/.cache/gstreamer-1.0/registry.arm.bin") and not fileContains("/etc/crontab", "registry.arm.bin"):
+		Console().ePopen("sed -i '$a@reboot root rm -f /home/root/.cache/gstreamer-1.0/registry.arm.bin' /etc/crontab")
+	if not isfile("/home/root/.cache/gstreamer-1.0/registry.arm.bin"):
+		Console().ePopen("sed -i '/gstreamer/d' /etc/crontab")
+		return False
+	return True

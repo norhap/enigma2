@@ -10,7 +10,6 @@ enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
-from Components.Console import Console
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
 from boxbranding import getBoxType, getImageArch
@@ -662,8 +661,9 @@ import Components.RecordingConfig
 Components.RecordingConfig.InitRecordingConfig()
 
 profile("UsageConfig")
-import Components.UsageConfig
-Components.UsageConfig.InitUsageConfig()
+from Components.UsageConfig import InitUsageConfig, getFileUsage
+InitUsageConfig()
+getFileUsage()
 
 profile("TimeZones")
 import Components.Timezones

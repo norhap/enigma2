@@ -4748,7 +4748,7 @@ msgid "Partial"
 msgstr "Similar completo"
 
 msgid "Partial EPG"
-msgstr "EPG completo"
+msgstr "Similar completo"
 
 msgid "Pause and start timeshift"
 msgstr "Pausar y comenzar el cambio de tiempo"
