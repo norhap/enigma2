@@ -1,3 +1,4 @@
+from enigma import eConsoleAppContainer
 from Components.ActionMap import ActionMap, HelpableActionMap
 from os.path import isfile
 from Components.Console import Console
@@ -21,13 +22,13 @@ class Time(Setup):
 			"yellow": (self.useGeolocation, _("Use geolocation to set the current time zone location")),
 			"green": self.keySave
 		}, prio=0, description=_("Time Setup Actions"))
+		if not isfile("/etc/init.d/crond") and config.ntp.timesync.value != "dvb":
+			eConsoleAppContainer().execute("opkg update && opkg install cronie")
 		self.selectionChanged()
 
 	def setSntpTime(self):
 		self.console = Console()
 		self.console.ePopen("sntp -S %s" % config.ntp.server.value)
-		if not isfile("/etc/init.d/crond") and config.ntp.timesync.value != "dvb":
-			self.console.ePopen("opkg update && opkg install cronie")
 		if config.ntp.timesync.value != "dvb":
 			if not fileContains("/etc/crontab", "sntp -S"):
 				self.console.ePopen("sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
@@ -41,11 +42,11 @@ class Time(Setup):
 			self.setSntpTime()
 		else:
 			if config.ntp.timesync.value != "dvb":
-				self.setSntpTime()
 				if isfile("/etc/init.d/crond"):
-					self.setFootnote(_("Cronie service installed. Press GREEN button."))
+					Setup.keySave(self)
+					self.setSntpTime()
 				else:
-					self.setFootnote(_("Cronie service could not be installed. Press RED or EXIT buttons."))
+					self.setFootnote(_("Cronie is being installed. Time settings are being established. Save your settings with GREEN button after a few seconds."))
 			else:
 				Setup.keySave(self)
 

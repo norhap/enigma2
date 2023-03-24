@@ -1719,11 +1719,8 @@ msgstr "Croacia"
 msgid "Croatian"
 msgstr "Croata"
 
-msgid "Cronie service installed. Press GREEN button."
-msgstr "Servicio Cronie instalado. Pulse el botón VERDE."
-
-msgid "Cronie service could not be installed. Press RED or EXIT buttons."
-msgstr "No se pudo instalar el servicio Cronie. Pulse botones ROJO o SALIR."
+msgid "Cronie is being installed. Time settings are being established. Save your settings with GREEN button after a few seconds."
+msgstr "Cronie está siendo instalado. Se están estableciendo los ajustes de hora. Guarde sus ajustes con botón VERDE después de unos segundos."
 
 msgid "Cuba"
 msgstr "Cuba"
