@@ -1,7 +1,6 @@
 from enigma import eConsoleAppContainer
 from Components.ActionMap import ActionMap, HelpableActionMap
 from os.path import isfile
-from Components.Console import Console
 from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
@@ -27,14 +26,11 @@ class Time(Setup):
 		self.selectionChanged()
 
 	def setSntpTime(self):
-		self.console = Console()
-		self.console.ePopen("sntp -S %s" % config.ntp.server.value)
 		if config.ntp.timesync.value != "dvb":
-			if not fileContains("/etc/crontab", "sntp -S"):
-				self.console.ePopen("sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
+			if not fileContains("/etc/crontab", "30 *   *   *   * root sntp -S"):
+				eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
 		else:
-			if fileContains("/etc/crontab", "sntp -S"):
-				self.console.ePopen("sed -i '/sntp -S/d' /etc/crontab")
+			eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
 
 	def keySave(self):
 		if isfile("/etc/init.d/crond"):

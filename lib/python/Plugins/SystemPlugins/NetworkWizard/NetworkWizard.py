@@ -1,14 +1,14 @@
 from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
+from Screens.Time import Time
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from enigma import eTimer
-
-import enigma
+from enigma import eTimer, eConsoleAppContainer
+from Components.config import config
 
 
 class NetworkWizard(WizardLanguage, ShowRemoteControl):
@@ -74,6 +74,8 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl):
 		self.rescanTimer.callback.append(self.rescanTimerFired)
 		self.getInstalledInterfaceCount()
 		self.isWlanPluginInstalled()
+		eConsoleAppContainer().execute("sntp -S %s" % config.ntp.server.value) # SNTP always starts.
+		Time.setSntpTime(self) # set SNTP if necessary.
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):
@@ -136,7 +138,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl):
 				if interface == self.selectedInterface:
 					if not self.originalInterfaceState[interface]["up"]:
 						if iNetwork.checkforInterface(interface):
-							enigma.eConsoleAppContainer().execute("ifconfig %s down" % interface)
+							eConsoleAppContainer().execute("ifconfig %s down" % interface)
 
 	def listInterfaces(self):
 		self.checkOldInterfaceState()
