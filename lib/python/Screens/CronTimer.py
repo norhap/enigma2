@@ -40,8 +40,9 @@ class CronTimers(Screen):
 
 		self["key_red"] = Label(_("Delete"))
 		self["key_green"] = Label(_("Add"))
-		self["key_yellow"] = Label(_("Start"))
-		self["key_blue"] = Label(_("Autostart"))
+		if config.ntp.timesync.value == "dvb":
+			self["key_yellow"] = Label(_("Start"))
+			self["key_blue"] = Label(_("Autostart"))
 		self.list = []
 		self["list"] = List(self.list)
 		self["actions"] = ActionMap(["WizardActions", "ColorActions", "MenuActions", "OKCancelActions"], {
@@ -94,7 +95,7 @@ class CronTimers(Screen):
 			self.close()
 
 	def RemovedataAvail(self, str, retval, extra_args):
-		if str:
+		if str and config.ntp.timesync.value == "dvb":
 			self.session.openWithCallback(self.RemovePackage, MessageBox, _("Do you want to remove \"%s\" ?") % self.service_name)
 		else:
 			self.close()
@@ -133,14 +134,14 @@ class CronTimers(Screen):
 	def CrondStart(self):
 		if not self.my_crond_run:
 			self.Console.ePopen("/etc/init.d/crond start", self.StartStopCallback)
-		elif self.my_crond_run:
+		elif self.my_crond_run and config.ntp.timesync.value == "dvb":
 			self.Console.ePopen("/etc/init.d/crond stop", self.StartStopCallback)
 
 	def StartStopCallback(self, result=None, retval=None, extra_args=None):
 		self.updateList()
 
 	def autostart(self):
-		if fileExists("/etc/rc2.d/S90crond"):
+		if fileExists("/etc/rc2.d/S90crond") and config.ntp.timesync.value == "dvb":
 			self.Console.ePopen("update-rc.d -f crond remove")
 		else:
 			self.Console.ePopen("update-rc.d -f crond defaults 90 60")
@@ -171,12 +172,14 @@ class CronTimers(Screen):
 		if self.my_crond_run:
 			self["labstop"].hide()
 			self["labrun"].show()
-			self["key_yellow"].setText(_("Stop"))
+			if config.ntp.timesync.value == "dvb":
+				self["key_yellow"].setText(_("Stop"))
 			self.summary_running = _("Running")
 		else:
 			self["labstop"].show()
 			self["labrun"].hide()
-			self["key_yellow"].setText(_("Start"))
+			if config.ntp.timesync.value == "dvb":
+				self["key_yellow"].setText(_("Start"))
 			self.summary_running = _("Stopped")
 
 		self.list = []
