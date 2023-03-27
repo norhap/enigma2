@@ -4,6 +4,7 @@ from Components.Console import Console
 import os
 import glob
 import tempfile
+from subprocess import check_output
 
 
 class tmp:
@@ -12,7 +13,8 @@ class tmp:
 
 def getMultibootStartupDevice():
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
-	for device in ('/dev/block/by-name/bootoptions', '/dev/mmcblk0p1', '/dev/mmcblk1p1', '/dev/mmcblk0p3', '/dev/mmcblk0p4', '/dev/mtdblock2'):
+	bootList = ("/dev/mmcblk0p1", "/dev/mmcblk1p1", "/dev/mmcblk0p3", "/dev/mmcblk0p4", "/dev/mtdblock2", "/dev/block/by-name/bootoptions") if not SystemInfo["hasKexec"] else ("/dev/mmcblk0p4", "/dev/mmcblk0p7", "/dev/mmcblk0p9")
+	for device in bootList:
 		if os.path.exists(device):
 			if os.path.exists("/dev/block/by-name/flag"):
 				Console().ePopen('mount --bind %s %s' % (device, tmp.dir))
@@ -46,6 +48,10 @@ def getMultibootslots():
 					if 'root=' in line:
 						line = line.rstrip("\n")
 						device = getparam(line, 'root')
+						if "UUID=" in device:
+							slotx = str(getUUIDtoSD(device))
+							if slotx is not None:
+								device = slotx
 						if os.path.exists(device) or device == 'ubi0:ubifs':
 							slot['device'] = device
 							slot['startupfile'] = os.path.basename(file)
@@ -74,15 +80,19 @@ def getMultibootslots():
 
 def getCurrentImage():
 	if SystemInfo["canMultiBoot"]:
-		print("[Multiboot] Read /sys/firmware/devicetree/base/chosen/bootargs")
-		slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
-		if slot:
-			return int(slot[0])
-		else:
-			device = getparam(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read(), 'root')
-			for slot in SystemInfo["canMultiBoot"].keys():
-				if SystemInfo["canMultiBoot"][slot]['device'] == device:
-					return slot
+		if not SystemInfo["hasKexec"]: # No kexec kernel multiboot
+			slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
+			if slot:
+				return int(slot[0])
+			else:
+				device = getparam(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read(), 'root')
+				for slot in SystemInfo["canMultiBoot"].keys():
+					if SystemInfo["canMultiBoot"][slot]['device'] == device:
+						return slot
+		else: # kexec kernel multiboot VU+
+			rootsubdir = [x for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith("rootsubdir")]
+			char = "/" if "/" in rootsubdir[0] else "="
+			return int(rootsubdir[0].rsplit(char, 1)[1][11:])
 
 
 def getCurrentImageMode():
@@ -111,6 +121,17 @@ def restoreImages():
 		Console().ePopen('umount %s' % tmp.dir)
 		if not os.path.ismount(tmp.dir):
 			os.rmdir(tmp.dir)
+
+
+def getUUIDtoSD(UUID): # returns None on failure
+	check = "/sbin/blkid"
+	if os.path.exists(check):
+		lines = check_output([check]).decode(encoding="utf8", errors="ignore").split("\n")
+		for line in lines:
+			if UUID in line.replace('"', ''):
+				return line.split(":")[0].strip()
+	else:
+		return None
 
 
 def getImagelist():

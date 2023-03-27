@@ -302,6 +302,7 @@ SystemInfo["havehdmipreemphasis"] = fileCheck("/proc/stb/hdmi/preemphasis")
 SystemInfo["supportPcmMultichannel"] = fileCheck("/proc/stb/audio/multichannel_pcm")
 SystemInfo["hasXcoreVFD"] = model == "osmega" or platform == "4kspycat" and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % model)
 SystemInfo["HasOfflineDecoding"] = model not in ("osmini", "osminiplus", "et7000mini", "et11000", "mbmicro", "mbtwinplus", "mbmicrov2", "et7x00", "et8500")
+SystemInfo["hasKexec"] = fileHas("/proc/cmdline", "kexec=1")
 SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
 SystemInfo["canMode12"] = "%s_4.boxmode" % model in cmdline and cmdline["%s_4.boxmode" % model] in ("1", "12") and "192M"
 SystemInfo["canMultiBoot"] = getMultibootslots()
