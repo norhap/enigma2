@@ -16796,6 +16796,9 @@ msgstr "La geolocalización no contiene información sobre la zona horaria."
 msgid "Geolocation is not available."
 msgstr "La geolocalización no está disponible."
 
+msgid "Geolocation is not available. There is no Internet.\nPress \"OK\" to continue wizard."
+msgstr "La geolocalización no está disponible. No hay Internet.\nPulse \"OK\" para continuar con el asistente."
+
 msgid "Geolocation has been used to set the time zone."
 msgstr "Se ha utilizado la geolocalización para establecer la zona horaria."
 
@@ -16820,8 +16823,8 @@ msgstr "Retraso:"
 msgid "Auto deep standby"
 msgstr "Modo espera profundo automático"
 
-msgid "Press YELLOW button to automatically set your local time and time zone."
-msgstr "Pulse botón AMARILLO para configurar automáticamente su hora local y zona horaria."
+msgid "Press YELLOW button if your time zone is not set or press \"OK\" to continue wizard."
+msgstr "Pulse el botón AMARILLO si su zona horaria no está configurada o pulse \"OK\" para continuar con el asistente."
 
 msgid "Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."
 msgstr "Su zona y hora local se han configurado correctamente.\n\nPulse \"OK\" para continuar con el asistente."

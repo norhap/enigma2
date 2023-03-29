@@ -6,12 +6,13 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
+from Tools.Geolocation import geolocation
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import eTimer, eConsoleAppContainer
 from Components.config import config
 
 
-class NetworkWizard(WizardLanguage, ShowRemoteControl):
+class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 	skin = """
 		<screen position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder" >
 			<widget name="text" position="153,40" size="340,300" font="Regular;22" />
@@ -74,8 +75,14 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl):
 		self.rescanTimer.callback.append(self.rescanTimerFired)
 		self.getInstalledInterfaceCount()
 		self.isWlanPluginInstalled()
-		eConsoleAppContainer().execute("sntp -S %s" % config.ntp.server.value) # SNTP always starts.
-		Time.setSntpTime(self) # set SNTP if necessary.
+		# from Components.About import getIfConfig (These commented lines also work).
+		# eth0 = getIfConfig("eth0")
+		# wlan0 = getIfConfig("wlan0")
+		# if "addr" in eth0 or "addr" in wlan0:
+		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
+		if geolocationData.get("status", None) == "success":
+			Time.useGeolocation(self) # set time zone auto.
+			Time.setSntpTime(self) # set SNTP in crontab.
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):

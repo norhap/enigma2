@@ -28,9 +28,9 @@ class Time(Setup):
 	def setSntpTime(self):
 		if config.ntp.timesync.value != "dvb":
 			if not fileContains("/etc/crontab", "30 *   *   *   * root sntp -S"):
-				eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
+				eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
 		else:
-			eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab")
+			eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
 
 	def keySave(self):
 		if isfile("/etc/init.d/crond"):
@@ -57,11 +57,11 @@ class Time(Setup):
 
 	def useGeolocation(self):
 		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
-		if geolocationData.get("proxy", True):
+		if geolocationData.get("proxy", True) and hasattr(self, "setFootnote"):
 			self.setFootnote(_("Geolocation is not available."))
 			return
 		tz = geolocationData.get("timezone", None)
-		if tz is None:
+		if tz is None and hasattr(self, "setFootnote"):
 			self.setFootnote(_("Geolocation does not contain time zone information."))
 		else:
 			areaItem = None
@@ -80,7 +80,10 @@ class Time(Setup):
 			if valItem is not None:
 				valItem[1].changed()
 			self["config"].invalidate(valItem)
-			self.setFootnote(_("Geolocation has been used to set the time zone."))
+			try:
+				self.setFootnote(_("Geolocation has been used to set the time zone."))
+			except KeyError:
+				pass
 			self.setSntpTime()
 
 
@@ -140,7 +143,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		self["text"] = Label()
-		self["text"].setText(_("Press YELLOW button to automatically set your local time and time zone."))
+		self["text"].setText(_("Press YELLOW button if your time zone is not set or press \"OK\" to continue wizard."))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_yellow"] = StaticText(_("Set local time"))
 		self["wizard"] = Pixmap()
@@ -151,10 +154,10 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"], {
-			"yellow": self.yellow,
-			"ok": self.red,
-			"red": self.red,
-			"back": self.red
+			"yellow": self.keyGeolocation,
+			"ok": self.keySave,
+			"red": self.keySave,
+			"back": self.keySave
 		}, -2)
 		self.onLayoutFinish.append(self.selectKeys)
 		self.getTimeList()
@@ -180,10 +183,10 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
-	def useGeolocation(self):
+	def geolocationWizard(self):
 		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
 		if geolocationData.get("proxy", True):
-			self["text"].setText(_("Geolocation is not available."))
+			self["text"].setText(_("Geolocation is not available. There is no Internet.\nPress \"OK\" to continue wizard."))
 			return
 		tz = geolocationData.get("timezone", None)
 		if not tz:
@@ -205,19 +208,12 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 			if valItem:
 				valItem[1].changed()
 			self["config"].invalidate(valItem)
-			config.timezone.area.save()
-			config.timezone.val.save()
-			config.usage.date.dayfull.save()
-			config.usage.time.long.save()
-			config.ntp.timesync.save()
-			config.ntp.server.save()
 			self["text"].setText(_("Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."))
 
-	def red(self):
+	def keySave(self):
 		ConfigListScreen.keySave(self)
 		Time.setSntpTime(self)
-		self.close()
+		self.close(True)
 
-	def yellow(self):
-		self.useGeolocation()
-		Time.setSntpTime(self)
+	def keyGeolocation(self):
+		self.geolocationWizard()
