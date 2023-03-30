@@ -2,14 +2,15 @@ from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
 from Screens.Time import Time
+from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
+from Components.Timezones import OSD_LANGUAGE
 from Tools.Geolocation import geolocation
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from enigma import eTimer, eConsoleAppContainer
-from Components.config import config
 
 
 class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
@@ -83,6 +84,8 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		if geolocationData.get("status", None) == "success":
 			Time.useGeolocation(self) # set time zone auto.
 			Time.setSntpTime(self) # set SNTP in crontab.
+			config.osd.language.value = OSD_LANGUAGE.get(config.timezone.val.value)# Init default user language
+			config.osd.language.save()
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):
