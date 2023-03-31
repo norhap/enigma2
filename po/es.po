@@ -11220,8 +11220,8 @@ msgstr "Revisa la conexión a Internet"
 msgid "Check the internet connection again"
 msgstr "Revisa la conexión a Internet de nuevo"
 
-msgid "Checking the internet connection"
-msgstr "Probando la conexión a Internet"
+msgid "Checking the internet connection. Please wait..."
+msgstr "Comprobando la conexión a Internet. Espere por favor..."
 
 msgid "Do you want to install Plugins?"
 msgstr "Quieres instalar Plugins?"

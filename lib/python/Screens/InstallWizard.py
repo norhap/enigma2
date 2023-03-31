@@ -46,7 +46,7 @@ class InstallWizard(ConfigListScreen, Screen):
 			self.createMenu()
 
 	def checkNetwork(self):
-		if self.adapters:
+		if hasattr(self, "adapters") and self.adapters:
 			self.adapter = self.adapters.pop(0)
 			if iNetwork.getAdapterAttribute(self.adapter, 'up'):
 				iNetwork.checkNetworkState(self.checkNetworkStateCallback)
@@ -137,7 +137,7 @@ class InstallWizard(ConfigListScreen, Screen):
 class InstallWizardOpkgUpdater(Screen):
 	skin = """
 	<screen position="c-300,c-25" size="600,50" title=" ">
-		<widget source="statusbar" render="Label" position="10,5" zPosition="10" size="e-10,30" halign="center" valign="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		<widget source="statusbar" render="Label" position="10,5" zPosition="10" size="e-10,30" horizontalAlignment="center" verticalAlignment="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
 	</screen>"""
 
 	def __init__(self, session, index, info, cmd, pkg=None):
