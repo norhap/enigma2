@@ -28,14 +28,6 @@ if getImageArch() == "aarch64":
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
-config.crash = ConfigSubsection()
-config.crash.debugActionMaps = ConfigYesNo(default=False)
-config.crash.debugKeyboards = ConfigYesNo(default=False)
-config.crash.debugRemoteControls = ConfigYesNo(default=False)
-config.crash.debugScreens = ConfigYesNo(default=False)
-config.crash.debugEPG = ConfigYesNo(default=False)
-config.crash.debugDVBScan = ConfigYesNo(default=False)
-
 
 def languageNotifier(configElement):
 	from Components.Language import language

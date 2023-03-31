@@ -5,13 +5,15 @@ from xml.etree.cElementTree import Element, ElementTree, fromstring
 
 from enigma import BT_ALPHABLEND, BT_ALPHATEST, BT_HALIGN_CENTER, BT_HALIGN_LEFT, BT_HALIGN_RIGHT, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_BOTTOM, BT_VALIGN_CENTER, BT_VALIGN_TOP, addFont, eLabel, eListbox, ePixmap, ePoint, eRect, eSize, eSlider, eSubtitleWidget, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, getFontFaces, gMainDC, gRGB
 
-from Components.config import ConfigSubsection, ConfigText, config
+from Components.config import ConfigSubsection, ConfigText, config, ConfigYesNo
 from Components.RcModel import rc_model
 from Components.SystemInfo import SystemInfo
 from Components.Sources.Source import ObsoleteSource
 from Tools.Directories import SCOPE_LCDSKIN, SCOPE_GUISKIN, SCOPE_FONTS, SCOPE_SKINS, pathExists, resolveFilename, fileReadXML
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
+
+config.debug = ConfigSubsection()
 
 MODULE_NAME = __name__.split(".")[-1].capitalize()
 
@@ -148,6 +150,7 @@ def InitSkins():
 # Method to load a skin XML file into the skin data structures.
 #
 def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID):
+	config.debug.debugScreens = ConfigYesNo(default=False)
 	global windowStyles, resolutions
 	filename = resolveFilename(scope, filename)
 	print("[Skin] Loading skin file '%s'." % filename)
@@ -167,7 +170,7 @@ def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), scree
 						res = element.attrib.get("resolution", "%s,%s" % (resolution[0], resolution[1]))
 						if res != "0,0":
 							element.attrib["resolution"] = res
-						if config.crash.debugScreens.value:
+						if config.debug.debugScreens.value:
 							res = [parseInteger(x.strip()) for x in res.split(",")]
 							msg = ", resolution %dx%d," % (res[0], res[1]) if len(res) == 2 and res[0] and res[1] else ""
 							print("[Skin] Loading screen '%s'%s from '%s'.  (scope=%s)" % (name, msg, filename, scope))
@@ -179,7 +182,7 @@ def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), scree
 					domStyle = ElementTree(Element("skin"))
 					domStyle.getroot().append(element)
 					windowStyles[scrnID] = (desktop, screenID, domStyle.getroot(), filename, scope)
-					if config.crash.debugScreens.value:
+					if config.debug.debugScreens.value:
 						print("[Skin] This skin has a windowstyle for screen ID='%s'." % scrnID)
 			# Element is not a screen or windowstyle element so no need for it any longer.
 		print("[Skin] Loading skin file '%s' complete." % filename)

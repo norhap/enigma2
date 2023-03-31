@@ -1249,6 +1249,10 @@ def InitUsageConfig():
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 	config.misc.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
 
+	config.crash = ConfigSubsection()
+	config.crash.debugEPG = ConfigYesNo(default=False)
+	config.crash.debugDVBScan = ConfigYesNo(default=False)
+
 	def updateStackTracePrinter(configElement):
 		from Components.StackTrace import StackTracePrinter
 		if configElement.value:

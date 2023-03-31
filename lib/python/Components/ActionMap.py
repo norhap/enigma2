@@ -3,8 +3,11 @@ from sys import maxsize
 from enigma import eActionMap
 
 from keyids import KEYIDS
-from Components.config import config
+from Components.config import config, ConfigSubsection, ConfigYesNo
 from Tools.Directories import fileReadXML
+
+config.debug = ConfigSubsection()
+config.debug.debugActionMaps = ConfigYesNo(default=False)
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -22,6 +25,7 @@ def queryKeyBinding(context, mapto):  # Returns a list of (keyId, flags) for a s
 
 
 def parseKeymap(filename, context, actionMapInstance, device, domKeys):
+	config.debug.debugActionMaps = ConfigYesNo(default=False)
 	unmapDict = {}
 	error = False
 	keyId = -1
@@ -79,7 +83,7 @@ def parseKeymap(filename, context, actionMapInstance, device, domKeys):
 		if not error:
 			if unmap is None:  # If a key was unmapped, it can only be assigned a new function in the same keymap file (avoid file parsing sequence dependency).
 				if unmapDict.get((context, keyName, mapto)) in [filename, None]:
-					if config.crash.debugActionMaps.value:
+					if config.debug.debugActionMaps.value:
 						print("[ActionMap] Context '%s' keyName '%s' (%d) mapped to '%s' (Device: %s)." % (context, keyName, keyId, mapto, device.capitalize()))
 					actionMapInstance.bindKey(filename, device, keyId, flags, context, mapto)
 					addKeyBinding(filename, keyId, context, mapto, flags)
@@ -133,7 +137,7 @@ class ActionMap:
 					undefinedAction.remove(action)
 					break
 		if leftAction and rightAction and config.misc.actionLeftRightToPageUpPageDown.value:
-			if config.crash.debugActionMaps.value:
+			if config.debug.debugActionMaps.value:
 				print("[ActionMap] DEBUG: Creating legacy navigation action map.")
 				print(leftAction)
 				print(rightAction)
