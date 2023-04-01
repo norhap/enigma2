@@ -11,7 +11,7 @@ class TextBox(Screen):
 		self.text = text
 		self["text"] = ScrollLabel(self.text)
 
-		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "NavigationActions"],
 				{
 					"cancel": self.close,
 					"ok": self.close,
