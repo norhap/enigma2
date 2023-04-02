@@ -7,7 +7,7 @@ from Components.config import config, ConfigSubsection, ConfigInteger
 from Components.SystemInfo import SystemInfo
 
 profile("VolumeControl")
-#TODO .. move this to a own .py file
+# TODO .. move this to a own .py file
 
 
 class VolumeControl:

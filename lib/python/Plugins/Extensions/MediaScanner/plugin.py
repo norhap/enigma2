@@ -116,7 +116,7 @@ def movielist_open(list, session, **kwargs):
 
 def filescan_open(list, session, **kwargs):
 	filelist = [x.path for x in list]
-	session.open(OpkgInstaller, filelist) # list
+	session.open(OpkgInstaller, filelist)  # list
 
 
 def filescan(**kwargs):

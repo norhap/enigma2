@@ -74,12 +74,12 @@ class InputDevices:
 		IOC_DIRSHIFT = IOC_SIZESHIFT + IOC_SIZEBITS
 		IOC_READ = 2
 		return (IOC_READ << IOC_DIRSHIFT) | (length << IOC_SIZESHIFT) | (0x45 << IOC_TYPESHIFT) | (0x06 << IOC_NRSHIFT)
-	#struct input_event {
+	# struct input_event {
 	#	struct timeval time;    -> ignored
 	#	__u16 type;             -> EV_REP (0x14)
 	#	__u16 code;             -> REP_DELAY (0x00) or REP_PERIOD (0x01)
 	#	__s32 value;            -> DEFAULTS: 700(REP_DELAY) or 100(REP_PERIOD)
-	#}; -> size = 16
+	# }; -> size = 16
 
 	def getInputDeviceType(self, name):
 		if "remote control" in name:

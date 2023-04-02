@@ -83,8 +83,8 @@ config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstand
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
 config.misc.prev_wakeup_time = ConfigInteger(default=0)
 config.misc.prev_wakeup_time_type = ConfigInteger(default=0)  # This is only valid when wakeup_time is not 0. 0=RecordTimer, 1=ZapTimer, 2=Plugins-PowerTimer, 3=WakeupTime.
-config.misc.isNextRecordTimerAfterEventActionAuto = ConfigYesNo(default=False) # auto action after event in RecordTimer
-config.misc.isNextPowerTimerAfterEventActionAuto = ConfigYesNo(default=False) # auto action after event in PowerTimer
+config.misc.isNextRecordTimerAfterEventActionAuto = ConfigYesNo(default=False)  # auto action after event in RecordTimer
+config.misc.isNextPowerTimerAfterEventActionAuto = ConfigYesNo(default=False)  # auto action after event in PowerTimer
 config.misc.RestartUI = ConfigYesNo(default=False)  # Detect user interface restart.
 config.misc.standbyCounter = NoSave(ConfigInteger(default=0))  # Number of standby.
 config.misc.startCounter = ConfigInteger(default=0)  # Number of e2 starts.
@@ -504,14 +504,14 @@ def runScreenTest():
 	enigma.resumeInit()
 
 	profile("Init:Session")
-	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value) # wake up to standby for RecordTimer and PowerTimer.
+	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value)  # wake up to standby for RecordTimer and PowerTimer.
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
 	CiHandler.setSession(session)
 	screensToRun = [p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
 	profile("wizards")
 	screensToRun += wizardManager.getWizards()
 	screensToRun.append((100, InfoBar.InfoBar))
-	#screensToRun.sort(key=lambda x: x[0]) # works in both Pythons but let's not use sort method here first we must see if we have work network in the wizard.
+	#screensToRun.sort(key=lambda x: x[0])  # works in both Pythons but let's not use sort method here first we must see if we have work network in the wizard.
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
 
 	def runNextScreen(session, screensToRun, *result):
@@ -592,7 +592,7 @@ def runScreenTest():
 
 	if powerTimerList and powerTimerList[0][1] == 3:
 		startTimePowerList = powerTimerList[0]
-		if (startTimePowerList[0] - nowTime) < 60: # no time to switch box back on
+		if (startTimePowerList[0] - nowTime) < 60:  # no time to switch box back on
 			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
 			wakeupTime = startTimePowerList[0]
@@ -604,7 +604,7 @@ def runScreenTest():
 	config.misc.isNextPowerTimerAfterEventActionAuto.save()
 	if powerTimerList and powerTimerList[0][1] != 3:
 		startTimePowerList = powerTimerList[0]
-		if (startTimePowerList[0] - nowTime) < 270: # no time to switch box back on
+		if (startTimePowerList[0] - nowTime) < 270:  # no time to switch box back on
 			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
 			wakeupTime = startTimePowerList[0] - 240
@@ -701,7 +701,7 @@ import Components.EpgLoadSave
 Components.EpgLoadSave.EpgCacheSaveCheck()
 Components.EpgLoadSave.EpgCacheLoadCheck()
 
-#if config.clientmode.enabled.value: # add to navigation instance for the user to decide if channels are imported or not after restarting enigma2.
+#if config.clientmode.enabled.value:  # add to navigation instance for the user to decide if channels are imported or not after restarting enigma2.
 	#import Components.ChannelsImporter
 	#Components.ChannelsImporter.autostart()
 

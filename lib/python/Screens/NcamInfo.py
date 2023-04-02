@@ -863,7 +863,7 @@ class NcamInfo(Screen, NCamInfo):
 		if self.listchange:
 			self.listchange = False
 			self["output"].l.setItemHeight(int(self.itemheight * f))
-			self["output"].instance.setScrollbarMode(0) #"showOnDemand"
+			self["output"].instance.setScrollbarMode(0)  # "showOnDemand"
 			self.rows = int(self["output"].instance.size().height() / (self.itemheight * f))
 			if self.what != "l" and self.rows < len(self.out):
 				self.enableScrolling(True)
@@ -898,28 +898,28 @@ class NCamEntitlements(Screen, NCamInfo):
 				<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (55,[
-							MultiContentEntryText(pos = (0, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (90, 1), size = (150, 30), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (250, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (290, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (330, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (370, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (410, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (480, 1), size = (70, 30), font=0, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
-							MultiContentEntryText(pos = (550, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 8), # index 8 is reshare
-							MultiContentEntryText(pos = (0, 25), size = (700, 30), font=1, flags = RT_HALIGN_LEFT, text = 9), # index 9 is providers
+							MultiContentEntryText(pos = (0, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 0),  # index 0 is caid
+							MultiContentEntryText(pos = (90, 1), size = (150, 30), font=0, flags = RT_HALIGN_LEFT, text = 1),  # index 1 is csystem
+							MultiContentEntryText(pos = (250, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 2),  # index 2 is hop 1
+							MultiContentEntryText(pos = (290, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 3),  # index 3 is hop 2
+							MultiContentEntryText(pos = (330, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 4),  # index 4 is hop 3
+							MultiContentEntryText(pos = (370, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 5),  # index 5 is hop 4
+							MultiContentEntryText(pos = (410, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 6),  # index 6 is hop 5
+							MultiContentEntryText(pos = (480, 1), size = (70, 30), font=0, flags = RT_HALIGN_LEFT, text = 7),  # index 7 is sum of cards for caid
+							MultiContentEntryText(pos = (550, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 8),  # index 8 is reshare
+							MultiContentEntryText(pos = (0, 25), size = (700, 30), font=1, flags = RT_HALIGN_LEFT, text = 9),  # index 9 is providers
 													]),
 					"HD": (55,[
-							MultiContentEntryText(pos = (0, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (90, 1), size = (150, 30), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (250, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (290, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (330, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (370, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (410, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (480, 1), size = (70, 30), font=0, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
-							MultiContentEntryText(pos = (550, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 8), # index 8 is reshare
-							MultiContentEntryText(pos = (630, 1), size = (1070, 45), font=1, flags = RT_HALIGN_LEFT, text = 9), # index 9 is providers
+							MultiContentEntryText(pos = (0, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 0),  # index 0 is caid
+							MultiContentEntryText(pos = (90, 1), size = (150, 30), font=0, flags = RT_HALIGN_LEFT, text = 1),  # index 1 is csystem
+							MultiContentEntryText(pos = (250, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 2),  # index 2 is hop 1
+							MultiContentEntryText(pos = (290, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 3),  # index 3 is hop 2
+							MultiContentEntryText(pos = (330, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 4),  # index 4 is hop 3
+							MultiContentEntryText(pos = (370, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 5),  # index 5 is hop 4
+							MultiContentEntryText(pos = (410, 1), size = (40, 30), font=0, flags = RT_HALIGN_LEFT, text = 6),  # index 6 is hop 5
+							MultiContentEntryText(pos = (480, 1), size = (70, 30), font=0, flags = RT_HALIGN_LEFT, text = 7),  # index 7 is sum of cards for caid
+							MultiContentEntryText(pos = (550, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 8),  # index 8 is reshare
+							MultiContentEntryText(pos = (630, 1), size = (1070, 45), font=1, flags = RT_HALIGN_LEFT, text = 9),  # index 9 is providers
 
 												]),
 					},
@@ -1038,24 +1038,24 @@ class NCamReaderStats(Screen, NCamInfo):
 				<convert type="TemplatedMultiContent">
 				{"templates":
 					{"default": (25,[
-							MultiContentEntryText(pos = (0, 1), size = (100, 30), font=0, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (100, 1), size = (50, 30), font=0, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (150, 1), size = (150, 30), font=0, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (300, 1), size = (60, 30), font=0, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (360, 1), size = (60, 30), font=0, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (420, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (510, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (590, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
+							MultiContentEntryText(pos = (0, 1), size = (100, 30), font=0, flags = RT_HALIGN_LEFT, text = 0),  # index 0 is caid
+							MultiContentEntryText(pos = (100, 1), size = (50, 30), font=0, flags = RT_HALIGN_LEFT, text = 1),  # index 1 is csystem
+							MultiContentEntryText(pos = (150, 1), size = (150, 30), font=0, flags = RT_HALIGN_LEFT, text = 2),  # index 2 is hop 1
+							MultiContentEntryText(pos = (300, 1), size = (60, 30), font=0, flags = RT_HALIGN_LEFT, text = 3),  # index 3 is hop 2
+							MultiContentEntryText(pos = (360, 1), size = (60, 30), font=0, flags = RT_HALIGN_LEFT, text = 4),  # index 4 is hop 3
+							MultiContentEntryText(pos = (420, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 5),  # index 5 is hop 4
+							MultiContentEntryText(pos = (510, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 6),  # index 6 is hop 5
+							MultiContentEntryText(pos = (590, 1), size = (80, 30), font=0, flags = RT_HALIGN_LEFT, text = 7),  # index 7 is sum of cards for caid
 							]),
 					"HD": (25,[
-							MultiContentEntryText(pos = (0, 1), size = (200, 30), font=1, flags = RT_HALIGN_LEFT, text = 0), # index 0 is caid
-							MultiContentEntryText(pos = (200, 1), size = (70, 30), font=1, flags = RT_HALIGN_LEFT, text = 1), # index 1 is csystem
-							MultiContentEntryText(pos = (300, 1), size = (290, 30), font=1, flags = RT_HALIGN_LEFT, text = 2), # index 2 is hop 1
-							MultiContentEntryText(pos = (600, 1), size = (80, 30), font=1, flags = RT_HALIGN_LEFT, text = 3), # index 3 is hop 2
-							MultiContentEntryText(pos = (700, 1), size = (100, 30), font=1, flags = RT_HALIGN_LEFT, text = 4), # index 4 is hop 3
-							MultiContentEntryText(pos = (820, 1), size = (130, 30), font=1, flags = RT_HALIGN_LEFT, text = 5), # index 5 is hop 4
-							MultiContentEntryText(pos = (940, 1), size = (130, 30), font=1, flags = RT_HALIGN_LEFT, text = 6), # index 6 is hop 5
-							MultiContentEntryText(pos = (1070, 1), size = (100, 30), font=1, flags = RT_HALIGN_LEFT, text = 7), # index 7 is sum of cards for caid
+							MultiContentEntryText(pos = (0, 1), size = (200, 30), font=1, flags = RT_HALIGN_LEFT, text = 0),  # index 0 is caid
+							MultiContentEntryText(pos = (200, 1), size = (70, 30), font=1, flags = RT_HALIGN_LEFT, text = 1),  # index 1 is csystem
+							MultiContentEntryText(pos = (300, 1), size = (290, 30), font=1, flags = RT_HALIGN_LEFT, text = 2),  # index 2 is hop 1
+							MultiContentEntryText(pos = (600, 1), size = (80, 30), font=1, flags = RT_HALIGN_LEFT, text = 3),  # index 3 is hop 2
+							MultiContentEntryText(pos = (700, 1), size = (100, 30), font=1, flags = RT_HALIGN_LEFT, text = 4),  # index 4 is hop 3
+							MultiContentEntryText(pos = (820, 1), size = (130, 30), font=1, flags = RT_HALIGN_LEFT, text = 5),  # index 5 is hop 4
+							MultiContentEntryText(pos = (940, 1), size = (130, 30), font=1, flags = RT_HALIGN_LEFT, text = 6),  # index 6 is hop 5
+							MultiContentEntryText(pos = (1070, 1), size = (100, 30), font=1, flags = RT_HALIGN_LEFT, text = 7),  # index 7 is sum of cards for caid
 							]),
 					},
 					"fonts": [gFont("Regular", 18),gFont("Regular", 18),gFont("Regular", 30),gFont("Regular", 20)],

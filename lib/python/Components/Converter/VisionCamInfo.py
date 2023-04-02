@@ -31,7 +31,7 @@ class VisionCamInfo(Poll, Converter, object):
 				return config.plugins.AltSoftcam.actcam.value
 			else:
 				return None
-		#  GlassSysUtil
+		# GlassSysUtil
 		elif fileExists("/tmp/ucm_cam.info"):
 			return open("/tmp/ucm_cam.info").read()
 		# Pli

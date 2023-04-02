@@ -93,7 +93,7 @@ class PluginComponent:
 		plugins_added = [p for p in new_plugins if p not in self.pluginList]
 		plugins_removed = [p for p in self.pluginList if not p.internal and p not in new_plugins]
 
-		#ignore already installed but reloaded plugins
+		# ignore already installed but reloaded plugins
 		for p in plugins_removed:
 			for pa in plugins_added:
 				if pa.path == p.path and pa.where == p.where:

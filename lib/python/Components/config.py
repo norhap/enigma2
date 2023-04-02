@@ -1770,7 +1770,7 @@ class ConfigText(ConfigElement, NumericalTextInput):
 
 	def setValue(self, value):
 		prev = self.text if hasattr(self, "text") else None
-		if isinstance(value, bytes): # DEBUG: If bytes on PY3 we can print this and then convert.
+		if isinstance(value, bytes):  # DEBUG: If bytes on PY3 we can print this and then convert.
 			try:
 				self.text = value.decode("UTF-8", errors="strict")
 			except UnicodeDecodeError:

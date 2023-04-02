@@ -16,7 +16,7 @@ brand = getBrand()
 model = getBoxType()
 platform = getMachineBuild()
 
-POLLTIME = 5 # seconds
+POLLTIME = 5  # seconds
 
 
 def SymbolsCheck(session, **kwargs):
@@ -156,11 +156,11 @@ class SymbolsCheckPoller:
 					open("/proc/stb/fp/ledpowercolor", "w").write("2")
 				elif config.usage.frontledrec_color.value == "4":
 					open("/proc/stb/fp/ledpowercolor", "w").write("0")
-					sleep(3) # blinking
+					sleep(3)  # blinking
 					open("/proc/stb/fp/ledpowercolor", "w").write("2")
 				elif config.usage.frontledrec_color.value == "3":
 					open("/proc/stb/fp/ledpowercolor", "w").write("0")
-					sleep(3) # blinking
+					sleep(3)  # blinking
 					open("/proc/stb/fp/ledpowercolor", "w").write("1")
 				elif config.usage.frontledrec_color.value == "1":
 					open("/proc/stb/fp/ledpowercolor", "w").write("1")
@@ -171,11 +171,11 @@ class SymbolsCheckPoller:
 					open("/proc/stb/fp/ledpowercolor", "w").write("2")
 				elif config.usage.frontledrecstdby_color.value == "4":
 					open("/proc/stb/fp/ledpowercolor", "w").write("0")
-					sleep(3) # blinking standby
+					sleep(3)  # blinking standby
 					open("/proc/stb/fp/ledpowercolor", "w").write("2")
 				elif config.usage.frontledrecstdby_color.value == "3":
 					open("/proc/stb/fp/ledpowercolor", "w").write("0")
-					sleep(3) # blinking standby
+					sleep(3)  # blinking standby
 					open("/proc/stb/fp/ledpowercolor", "w").write("1")
 				elif config.usage.frontledrecstdby_color.value == "1":
 					open("/proc/stb/fp/ledpowercolor", "w").write("1")
@@ -185,11 +185,11 @@ class SymbolsCheckPoller:
 				if Screens.Standby.inStandby:
 					if config.usage.frontledstdby_color.value == "4":
 						open("/proc/stb/fp/ledpowercolor", "w").write("0")
-						sleep(3) # blinking standby
+						sleep(3)  # blinking standby
 						open("/proc/stb/fp/ledpowercolor", "w").write("2")
 					elif config.usage.frontledstdby_color.value == "3":
 						open("/proc/stb/fp/ledpowercolor", "w").write("0")
-						sleep(3) # blinking standby
+						sleep(3)  # blinking standby
 						open("/proc/stb/fp/ledpowercolor", "w").write("1")
 					open("/proc/stb/fp/ledpowercolor", "w").write(config.usage.frontledstdby_color.value)
 				else:

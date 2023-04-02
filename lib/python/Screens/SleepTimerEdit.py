@@ -161,7 +161,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 		ref = self.session.nav.getCurrentlyPlayingServiceReference()
 		if ref:
 			refstr = ref.toString()
-			if "%3a//" not in refstr and refstr.rsplit(":", 1)[1].startswith("/"): # Movie
+			if "%3a//" not in refstr and refstr.rsplit(":", 1)[1].startswith("/"):  # Movie
 				service = self.session.nav.getCurrentService()
 				seek = service and service.seek()
 				if seek:
@@ -171,7 +171,7 @@ class SleepTimerEdit(ConfigListScreen, Screen):
 						remaining = length[1] - position[1]
 						if remaining > 0:
 							remaining = remaining / 90000
-			else: # DVB
+			else:  # DVB
 				epg = eEPGCache.getInstance()
 				event = epg.lookupEventTime(ref, -1, 0)
 				if event:

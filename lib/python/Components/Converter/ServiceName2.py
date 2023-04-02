@@ -203,19 +203,19 @@ class ServiceName2(Converter, object):
 			type = self.tpdata.get('tuner_type', '')
 		if not fmt or fmt == 'T':
 			if type == 'DVB-C':
-				fmt = ["t ", "F ", "Y ", "i ", "f ", "M"]	#(type frequency symbol_rate inversion fec modulation)
+				fmt = ["t ", "F ", "Y ", "i ", "f ", "M"]  # (type frequency symbol_rate inversion fec modulation)
 			elif type == 'DVB-T':
 				if ref:
-					fmt = ["O ", "F ", "c ", "l ", "h ", "m ", "g "]	#(orbital_position code_rate_hp transmission_mode guard_interval constellation)
+					fmt = ["O ", "F ", "c ", "l ", "h ", "m ", "g "]  # (orbital_position code_rate_hp transmission_mode guard_interval constellation)
 				else:
-					fmt = ["t ", "F ", "c ", "l ", "h ", "m ", "g "]	#(type frequency code_rate_hp transmission_mode guard_interval constellation)
+					fmt = ["t ", "F ", "c ", "l ", "h ", "m ", "g "]  # (type frequency code_rate_hp transmission_mode guard_interval constellation)
 			elif type == 'IP-TV':
 				return _("Streaming")
 			else:
-				fmt = ["O ", "s ", "M ", "F ", "p ", "Y ", "f"]		#(orbital_position frequency polarization symbol_rate fec)
+				fmt = ["O ", "s ", "M ", "F ", "p ", "Y ", "f"]  # (orbital_position frequency polarization symbol_rate fec)
 		for line in fmt:
 			f = line[:1]
-			if f == 't':	# %t - tuner_type (dvb-s/s2/c/t)
+			if f == 't':  # %t - tuner_type (dvb-s/s2/c/t)
 				if type == 'DVB-S':
 					result += _("Satellite")
 				elif type == 'DVB-C':
@@ -316,11 +316,11 @@ class ServiceName2(Converter, object):
 	def getSatelliteName(self, ref):
 		if isinstance(ref, eServiceReference):
 			orbpos = ref.getUnsignedData(4) >> 16
-			if orbpos == 0xFFFF: #Cable
+			if orbpos == 0xFFFF:  # Cable
 				return _("Cable")
-			elif orbpos == 0xEEEE: #Terrestrial
+			elif orbpos == 0xEEEE:  # Terrestrial
 				return _("Terrestrial")
-			else: #Satellite
+			else:  # Satellite
 				orbpos = ref.getData(4) >> 16
 				if orbpos < 0:
 					orbpos += 3600
@@ -464,7 +464,7 @@ class ServiceName2(Converter, object):
 		if isinstance(service, iPlayableServicePtr):
 			info = service and service.info()
 			ref = None
-		else: # reference
+		else:  # reference
 			info = service and self.source.info
 			ref = service
 		if not info:
@@ -544,7 +544,7 @@ class ServiceName2(Converter, object):
 			else:
 				if self.ref:
 					return self.getSatelliteName(self.ref)
-			#test#
+			# test
 				return self.getSatelliteName(ref or eServiceReference(info.getInfoString(iServiceInformation.sServiceref)))
 		elif self.type == self.ALLREF:
 			tmpref = self.getReferenceType(refstr, ref)

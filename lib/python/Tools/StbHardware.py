@@ -32,7 +32,7 @@ def getProcInfoTypeTuner():
 
 def getBrand():
 	brandName = ""
-	rcStartSwithisBrand = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName()))) # based on remote control name start matches brand.
+	rcStartSwithisBrand = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName())))  # based on remote control name start matches brand.
 	try:
 		if "edision" in rcStartSwithisBrand:
 			brandName = "Edision"
@@ -50,7 +50,7 @@ def getBrand():
 			brandName = "vuplus"
 		elif "dinobot" in rcStartSwithisBrand:
 			brandName = "dinobot"
-		elif "dmm" in rcStartSwithisBrand: # this check should always be the last.
+		elif "dmm" in rcStartSwithisBrand:  # this check should always be the last.
 			brandName = "dreambox"
 		elif not brandName:
 			print("[brandName] Not Exists!! add this Brand to getBrand")
@@ -97,7 +97,7 @@ def setFPWakeuptime(wutime):
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
-			ioctl(fp.fileno(), 6, pack('L', wutime)) # set wake up
+			ioctl(fp.fileno(), 6, pack('L', wutime))  # set wake up
 			fp.close()
 		except IOError:
 			print("[StbHardware] setFPWakeupTime failed!")
@@ -128,7 +128,7 @@ def setRTCtime(wutime):
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
-			ioctl(fp.fileno(), 0x101, pack('L', wutime)) # set wake up
+			ioctl(fp.fileno(), 0x101, pack('L', wutime))  # set wake up
 			fp.close()
 		except IOError:
 			print("[StbHardware] setRTCtime failed!")
@@ -141,7 +141,7 @@ def getFPWakeuptime():
 	except IOError:
 		try:
 			fp = open("/dev/dbox/fp0")
-			ret = unpack('L', ioctl(fp.fileno(), 5, '	 '))[0] # get wakeuptime
+			ret = unpack('L', ioctl(fp.fileno(), 5, '	 '))[0]  # get wakeuptime
 			fp.close()
 		except IOError:
 			print("[StbHardware] getFPWakeupTime failed!")

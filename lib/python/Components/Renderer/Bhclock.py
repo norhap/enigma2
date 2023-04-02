@@ -25,6 +25,6 @@ class Bhclock(VariableValue, Renderer):
 		instance.setValue(0)
 
 	def setValue(self, value):
-		#self.instance.setValue(5)
+		# self.instance.setValue(5)
 		if self.instance is not None:
 			self.instance.setValue(value)

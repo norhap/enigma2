@@ -71,7 +71,7 @@ def channel2frequency(channel, nim):
 		elif 21 <= channel <= 69:
 			return (474000 + 8000 * (channel - 21)) * 1000
 		else:
-			return None # FIXME
+			return None  # FIXME
 	elif "Zealand" in descr and 25 <= channel <= 50:
 			return (506000 + 8000 * (int(channel) - 25)) * 1000
 	else:	# Australian rules

@@ -54,7 +54,7 @@ class HardwareInfo:
 					infoFname = l
 					prefix = ""
 				try:
-					self.device_model = getBoxType() #this variable starts machine you can also use proc boxtype
+					self.device_model = getBoxType()  # this variable starts machine you can also use proc boxtype
 					break
 				except:
 					pass

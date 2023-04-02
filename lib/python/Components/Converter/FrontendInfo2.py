@@ -39,7 +39,7 @@ class FrontendInfo2(Converter, object):
 	def getText(self):
 		assert self.type not in (self.LOCK, self.SLOT_NUMBER), "the text output of FrontendInfo cannot be used for lock info"
 		percent = None
-		if self.type == self.BER: # as count
+		if self.type == self.BER:  # as count
 			count = self.source.ber
 			if count is not None:
 				return str(count)
@@ -50,9 +50,9 @@ class FrontendInfo2(Converter, object):
 		elif self.type == self.SNR:
 			percent = self.source.snr
 		elif self.type == self.SNRdB:
-			#if self.source.snr_db is not None:
-				#return "%3.01f dB" % (self.source.snr_db / 100.0)
-			if self.source.snr is not None: #fallback to normal SNR
+			# if self.source.snr_db is not None:
+				# return "%3.01f dB" % (self.source.snr_db / 100.0)
+			if self.source.snr is not None:  # fallback to normal SNR
 				return "%3.01f dB" % (0.32 * ((self.source.snr * 100) / 65536.0) / 2)
 			return "N/A"
 		elif self.type == self.TUNER_TYPE:

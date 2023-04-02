@@ -76,21 +76,21 @@ class TimerEntry(Screen, ConfigListScreen):
 		weekday = 0
 		for x in (0, 1, 2, 3, 4, 5, 6):
 			day.append(0)
-		if self.timer.repeated: # repeated
+		if self.timer.repeated:  # repeated
 			type = "repeated"
-			if self.timer.repeated == 31: # Mon-Fri
+			if self.timer.repeated == 31:  # Mon-Fri
 				repeated = "weekdays"
-			elif self.timer.repeated == 127: # daily
+			elif self.timer.repeated == 127:  # daily
 				repeated = "daily"
 			else:
 				flags = self.timer.repeated
 				repeated = "user"
 				count = 0
 				for x in (0, 1, 2, 3, 4, 5, 6):
-					if flags == 1: # weekly
+					if flags == 1:  # weekly
 						print("[PowerTimerEntry] Set to weekday " + str(x))
 						weekday = x
-					if flags & 1 == 1: # set user defined flags
+					if flags & 1 == 1:  # set user defined flags
 						day[x] = 1
 						count += 1
 					else:
@@ -98,7 +98,7 @@ class TimerEntry(Screen, ConfigListScreen):
 					flags >>= 1
 				if count == 1:
 					repeated = "weekly"
-		else: # once
+		else:  # once
 			type = "once"
 			repeated = None
 			weekday = int(strftime("%u", localtime(self.timer.begin))) - 1
@@ -184,7 +184,7 @@ class TimerEntry(Screen, ConfigListScreen):
 
 			if self.timerentry_type.value == "once":
 				self.frequencyEntry = None
-			else: # repeated
+			else:  # repeated
 				self.frequencyEntry = getConfigListEntry(_("Repeats"), self.timerentry_repeated)
 				self.list.append(self.frequencyEntry)
 				self.repeatedbegindateEntry = getConfigListEntry(_("Starting on"), self.timerentry_repeatedbegindate)
@@ -292,7 +292,7 @@ class TimerEntry(Screen, ConfigListScreen):
 # Ensure that the timer repeated is cleared if we have an autosleeprepeat
 			if self.timerentry_type.value == "repeated":
 				self.timer.resetRepeated()
-				self.timerentry_type.value = "once" # Stop it being set again
+				self.timerentry_type.value = "once"  # Stop it being set again
 
 		if self.timerentry_type.value == "repeated":
 			if self.timerentry_repeated.value == "daily":

@@ -5,7 +5,7 @@ from Tools.LogConfig import LogConfig, LOG_TYPE_DEBUG, LOG_TYPE_INFO, LOG_TYPE_W
 class Log(object):
 	@staticmethod
 	def e(text=""):
-		#ERROR
+		# ERROR
 		LogConfig.init()
 		if LogConfig.level() >= LOG_LEVEL_ERROR:
 			callframe = _getframe(1)
@@ -13,7 +13,7 @@ class Log(object):
 
 	@staticmethod
 	def w(text=""):
-		#WARNING
+		# WARNING
 		LogConfig.init()
 		if LogConfig.level() >= LOG_LEVEL_WARNING:
 			callframe = _getframe(1)
@@ -21,7 +21,7 @@ class Log(object):
 
 	@staticmethod
 	def i(text=""):
-		#INFO
+		# INFO
 		LogConfig.init()
 		if LogConfig.level() >= LOG_LEVEL_INFO:
 			callframe = _getframe(1)
@@ -29,7 +29,7 @@ class Log(object):
 
 	@staticmethod
 	def d(text=""):
-		#DEBUG
+		# DEBUG
 		LogConfig.init()
 		if LogConfig.level() >= LOG_LEVEL_DEBUG:
 			callframe = _getframe(1)

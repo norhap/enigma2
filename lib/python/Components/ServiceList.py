@@ -145,8 +145,8 @@ class ServiceList(GUIComponent):
 		def serviceInfoFont(value):
 			self.ServiceInfoFont = parseFont(value, ((1, 1), (1, 1)))
 			self.ServiceNextInfoFont = parseFont(value, ((5, 6), (1, 1)))
-		#def serviceNextInfoFont(value):
-		#	self.ServiceNextInfoFont = parseFont(value, ((1,1),(1,1)))
+		# def serviceNextInfoFont(value):
+		# self.ServiceNextInfoFont = parseFont(value, ((1,1),(1,1)))
 
 		def serviceNumberFont(value):
 			self.ServiceNumberFont = parseFont(value, ((1, 1), (1, 1)))
@@ -363,7 +363,7 @@ class ServiceList(GUIComponent):
 			ref = eServiceReference()
 		return marked
 
-#just for movemode.. only one marked entry..
+# just for movemode.. only one marked entry..
 	def setCurrentMarked(self, state):
 		self.l.setCurrentMarked(state)
 
@@ -393,7 +393,7 @@ class ServiceList(GUIComponent):
 		else:
 			self.l.setGetPiconNameFunc(None)
 
-		rowWidth = self.instance.size().width() - 30 #scrollbar is fixed 20 + 10 Extra marge
+		rowWidth = self.instance.size().width() - 30  # scrollbar is fixed 20 + 10 Extra marge
 
 		if mode == self.MODE_NORMAL or not config.usage.show_channel_numbers_in_servicelist.value:
 			channelNumberWidth = 0

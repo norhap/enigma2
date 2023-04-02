@@ -121,7 +121,7 @@ class PositionerSetup(Screen):
 							if n.config.connectedTo.value and int(n.config.connectedTo.value) == self.feid:
 								self.oldref_stop = True
 				if self.oldref_stop:
-					self.session.nav.stopService() # try to disable foreground service
+					self.session.nav.stopService()  # try to disable foreground service
 					if getCurrentSat is not None and getCurrentSat in self.availablesats:
 						cur = cur_info
 					else:
@@ -129,7 +129,7 @@ class PositionerSetup(Screen):
 			getCurrentTuner = None
 			getCurrentSat = None
 			if not self.openFrontend():
-				if hasattr(session, 'pipshown') and session.pipshown: # try to disable pip
+				if hasattr(session, 'pipshown') and session.pipshown:  # try to disable pip
 					service = self.session.pip.pipservice
 					feInfo = service and service.frontendInfo()
 					if feInfo:
@@ -149,7 +149,7 @@ class PositionerSetup(Screen):
 						del session.pip
 						session.pipshown = False
 					if not self.openFrontend():
-						self.frontend = None # in normal case this should not happen
+						self.frontend = None  # in normal case this should not happen
 						if hasattr(self, 'raw_channel'):
 							del self.raw_channel
 			if self.frontend is None:
@@ -364,7 +364,7 @@ class PositionerSetup(Screen):
 			self.rotorPositions = lnb.rotorPositions.value
 			self.turningspeedH = lnb.turningspeedH.float
 			self.turningspeedV = lnb.turningspeedV.float
-		except: # some reasonable defaults from NimManager
+		except:  # some reasonable defaults from NimManager
 			self.sitelon = 5.1
 			self.longitudeOrientation = 'east'
 			self.sitelat = 50.767
@@ -593,9 +593,9 @@ class PositionerSetup(Screen):
 			return int(s // 10) * '.' if s < 100 else 10 * '.'
 
 		if steps > 0:
-			return 4 * " " + ">| %s %d" % (dots(steps), steps) # west
+			return 4 * " " + ">| %s %d" % (dots(steps), steps)  # west
 		elif steps < 0:
-			return 4 * " " + "%d %s |<" % (abs(steps), dots(steps)) # east
+			return 4 * " " + "%d %s |<" % (abs(steps), dots(steps))  # east
 		else:
 			return 4 * " " + ">|<"
 
@@ -652,7 +652,7 @@ class PositionerSetup(Screen):
 		elif entry == "finemove":
 			self.finesteps += 1
 			self.printMsg(_("Step west"))
-			self.diseqccommand("moveWest", 0xFF) # one step
+			self.diseqccommand("moveWest", 0xFF)  # one step
 			self.statusMsg(_("Stepped west") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
 			if not self.getUsals():
@@ -709,7 +709,7 @@ class PositionerSetup(Screen):
 		elif entry == "finemove":
 			self.finesteps -= 1
 			self.printMsg(_("Step east"))
-			self.diseqccommand("moveEast", 0xFF) # one step
+			self.diseqccommand("moveEast", 0xFF)  # one step
 			self.statusMsg(_("Stepped east") + self.stepCourse(self.finesteps), timeout=self.STATUS_MSG_TIMEOUT)
 		elif entry == "storage":
 			if not self.getUsals():
@@ -867,7 +867,7 @@ class PositionerSetup(Screen):
 				self.raw_channel.requestTsidOnid()
 
 	def gotTsidOnid(self, tsid, onid):
-		colors = parameters.get("PositionerOnidTsidcolors", (0x0000FF00, 0x00FF0000)) # "valid", "not valid"
+		colors = parameters.get("PositionerOnidTsidcolors", (0x0000FF00, 0x00FF0000))  # "valid", "not valid"
 		if tsid == self.tsid and onid == self.onid:
 			msg = "\c%08x" % colors[0] + _("This valid ONID/TSID")
 		else:
@@ -995,16 +995,16 @@ class PositionerSetup(Screen):
 			return ((a // 10) << 4) + gotoXtable[a % 10]
 
 		satHourAngle = rotor_calc.calcSatHourangle(satlon, sitelat, sitelon)
-		if sitelat >= 0: # Northern Hemisphere
+		if sitelat >= 0:  # Northern Hemisphere
 			rotorCmd = azimuth2Rotorcode(180 - satHourAngle)
-			if satHourAngle <= 180: # the east
+			if satHourAngle <= 180:  # the east
 				rotorCmd |= 0xE000
 			else:					# west
 				rotorCmd |= 0xD000
-		else: # Southern Hemisphere
-			if satHourAngle <= 180: # the east
+		else:  # Southern Hemisphere
+			if satHourAngle <= 180:  # the east
 				rotorCmd = azimuth2Rotorcode(satHourAngle) | 0xD000
-			else: # west
+			else:  # west
 				rotorCmd = azimuth2Rotorcode(360 - satHourAngle) | 0xE000
 		return rotorCmd
 
@@ -1317,17 +1317,17 @@ class Diseqc:
 			elif what == "limitWest":
 				string = 'E03167'
 			else:
-				string = 'E03160' #positioner stop
+				string = 'E03160'  # positioner stop
 
 			print("diseqc command:", end=' ')
 			print(string)
 			cmd.setCommandString(string)
 			self.frontend.setTone(iDVBFrontend.toneOff)
-			sleep(0.015) # wait 15msec after disable tone
+			sleep(0.015)  # wait 15msec after disable tone
 			self.frontend.sendDiseqc(cmd)
-			if string == 'E03160': #positioner stop
+			if string == 'E03160':  # positioner stop
 				sleep(0.050)
-				self.frontend.sendDiseqc(cmd) # send 2nd time
+				self.frontend.sendDiseqc(cmd)  # send 2nd time
 
 
 class PositionerSetupLog(Screen):
@@ -1621,7 +1621,7 @@ class TunerScreen(ConfigListScreen, Screen):
 				if nim.isT2MI():
 					self.list.append(getConfigListEntry(_('T2MI PLP ID'), self.scan_sat.t2mi_plp_id))
 					self.list.append(getConfigListEntry(_('T2MI PID'), self.scan_sat.t2mi_pid))
-		else: # "predefined_transponder"
+		else:  # "predefined_transponder"
 			self.list.append(getConfigListEntry(_("Transponder"), self.tuning.transponder))
 			currtp = self.transponderToString([None, self.scan_sat.frequency.value, self.scan_sat.symbolrate.value, self.scan_sat.polarization.value])
 			self.tuning.transponder.setValue(currtp)

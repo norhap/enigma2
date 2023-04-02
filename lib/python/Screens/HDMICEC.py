@@ -60,7 +60,7 @@ class HDMICECSetup(Setup):
 			self["addressActions"].setEnabled(config.hdmicec.enabled.value)
 			self["key_blue"].setText(_("Use defaults") if config.hdmicec.enabled.value else "")
 			self["defaultActions"].setEnabled(config.hdmicec.enabled.value)
-		#Setup.selectionChanged(self)
+		# Setup.selectionChanged(self)
 
 	def getCurrentEntry(self):
 		text = "%s\n%s\n\n%s" % (self.current_address, self.fixed_address, self.getCurrentDescription()) if config.hdmicec.enabled.value else self.getCurrentDescription()

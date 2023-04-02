@@ -31,10 +31,10 @@ def getIfConfig(ifname):
 	infos = {}
 	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	# offsets defined in /usr/include/linux/sockios.h on linux 2.6
-	infos['addr'] = 0x8915 # SIOCGIFADDR
-	infos['brdaddr'] = 0x8919 # SIOCGIFBRDADDR
-	infos['hwaddr'] = 0x8927 # SIOCSIFHWADDR
-	infos['netmask'] = 0x891b # SIOCGIFNETMASK
+	infos['addr'] = 0x8915  # SIOCGIFADDR
+	infos['brdaddr'] = 0x8919  # SIOCGIFBRDADDR
+	infos['hwaddr'] = 0x8927  # SIOCSIFHWADDR
+	infos['netmask'] = 0x891b  # SIOCGIFNETMASK
 	try:
 		for k, v in infos.items():
 			ifreq[k] = _ifinfo(sock, v, ifname)
@@ -282,7 +282,7 @@ def GetIPsFromNetworkInterfaces():
 	is_64bits = sys.maxsize > 2**32
 	struct_size = 40 if is_64bits else 32
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	max_possible = 8 # initial value
+	max_possible = 8  # initial value
 	while True:
 		_bytes = max_possible * struct_size
 		names = array.array('B')

@@ -568,11 +568,11 @@ class HdmiCec:
 				else:
 					self.debugRx(length, cmd, ctrl0)
 
-			#// workaround for wrong address vom driver (e.g. hd51, message comes from tv -> address is only sometimes 0, dm920, same tv -> address is always 0)
+			# // workaround for wrong address vom driver (e.g. hd51, message comes from tv -> address is only sometimes 0, dm920, same tv -> address is always 0)
 			if address > 15:
 				self.CECwritedebug("[HdmiCec] workaround for wrong address active", True)
 				address = 0
-			#//
+			# //
 
 			if cmd == 0x00:  # feature abort
 				if length == 0:  # only polling message ( it's same as ping )
@@ -760,7 +760,7 @@ class HdmiCec:
 						data = data.decode("UTF-8", "ignore")
 					except:
 						data = data.encode("ISO-8859-1", "ignore")
-				if config.misc.DeepStandby.value: # no delay for messages before go in to deep-standby
+				if config.misc.DeepStandby.value:  # no delay for messages before go in to deep-standby
 					if config.hdmicec.debug.value:
 						self.debugTx(address, cmd, data)
 					eHdmiCEC.getInstance().sendMessage(address, cmd, str(data), len(data))

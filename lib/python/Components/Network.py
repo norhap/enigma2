@@ -79,11 +79,11 @@ class Network:
 			data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
 			self.configuredInterfaces.append(iface)
 			nit = ni.ifaddresses(iface)
-			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr']) # ipv4
+			data['ip'] = self.convertIP(nit[ni.AF_INET][0]['addr'])  # ipv4
 			data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
 			data['bcast'] = self.convertIP(nit[ni.AF_INET][0]['broadcast'])
-			data['mac'] = nit[ni.AF_LINK][0]['addr'] # mac
-			data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0]) # default gw
+			data['mac'] = nit[ni.AF_LINK][0]['addr']  # mac
+			data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0])  # default gw
 			disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
 			enable_ipv6 = "/etc/enigma2/ipv6"
 			if not os.path.isfile(enable_ipv6) and os.path.isfile(disable_ipv6):
@@ -174,7 +174,7 @@ class Network:
 					ifaces[currif]["dhcp"] = True
 				else:
 					ifaces[currif]["dhcp"] = False
-			if currif == iface: #read information only for available interfaces
+			if currif == iface:  # read information only for available interfaces
 				if split[0] == "address":
 					ifaces[currif]["address"] = list(map(int, split[1].split('.')))
 					if "ip" in self.ifaces[currif]:
@@ -256,7 +256,7 @@ class Network:
 		if x in self.friendlyNames.keys():
 			return self.friendlyNames.get(x, x)
 		self.friendlyNames[x] = self.getFriendlyAdapterNaming(x)
-		return self.friendlyNames.get(x, x) # when we have no friendly name, use adapter name
+		return self.friendlyNames.get(x, x)  # when we have no friendly name, use adapter name
 
 	def getFriendlyAdapterNaming(self, iface):
 		name = None
@@ -525,7 +525,7 @@ class Network:
 		def buildCommands(iface):
 			commands.append((self.ifdown_bin, self.ifdown_bin, "-f", iface))
 			commands.append((self.ip_bin, self.ip_bin, "addr", "flush", "dev", iface, "scope", "global"))
-			#wpa_supplicant sometimes doesn't quit properly on SIGTERM
+			# wpa_supplicant sometimes doesn't quit properly on SIGTERM
 			if os.path.exists('/var/run/wpa_supplicant/' + iface):
 				commands.append("wpa_cli -i" + iface + " terminate")
 

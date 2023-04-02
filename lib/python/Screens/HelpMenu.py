@@ -208,7 +208,7 @@ class HelpMenu(Screen, ShowRemoteControl):
 		self.onLayoutFinish.append(self.selectionChanged)
 
 	def enterItem(self):
-		self["list"].enterItem() # def enterItem(self) HelpMenuList.
+		self["list"].enterItem()  # def enterItem(self) HelpMenuList.
 
 	def closeHelp(self):
 		eActionMap.getInstance().unbindAction("", self["list"].handleButton)

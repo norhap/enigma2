@@ -341,7 +341,7 @@ class RecordTimer(Timer):
 		pipZap = bool(int(timerDom.get("pipzap", False)))
 		# filename = timerDom.get("filename").encode("UTF-8")
 		entry = RecordTimerEntry(serviceReference, begin, end, name, description, eit, disabled, justPlay, afterEvent, dirname=location, tags=tags, descramble=descramble, record_ecm=recordEcm, isAutoTimer=isAutoTimer, always_zap=alwaysZap, zap_wakeup=zapWakeup, rename_repeat=renameRepeat, conflict_detection=conflictDetection, pipzap=pipZap)
-		entry.repeated = int(repeated) # 1 Weekly, 31 Mon-Fr, 127 Daily, Others for User Defined.
+		entry.repeated = int(repeated)  # 1 Weekly, 31 Mon-Fr, 127 Daily, Others for User Defined.
 		flags = timerDom.get("flags")
 		if flags:
 			entry.flags = set(flags.split(" "))
@@ -350,7 +350,7 @@ class RecordTimer(Timer):
 		return entry
 
 	def doActivate(self, w):
-		if getRecordingStorageSize() <= 1: # Storage <= 1 GB not recording.
+		if getRecordingStorageSize() <= 1:  # Storage <= 1 GB not recording.
 			w.state = RecordTimerEntry.StateEnded
 			AddPopup(_("Recording failed: Storage device free size %d GB.") % getRecordingStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer for servicetype 4097,
@@ -545,7 +545,7 @@ class RecordTimer(Timer):
 				xbegin -= 1440
 				xend -= 1440
 				if begin2 < xbegin <= end2:
-					if xend < end2: # Recording within event.
+					if xend < end2:  # Recording within event.
 						time_match = (xend - xbegin) * 60
 						is_editable = True
 					else:  # Recording last part of event.

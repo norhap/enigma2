@@ -1,11 +1,11 @@
 from Components.config import config
 from Tools.Notifications import AddNotificationWithID
 from Screens.MessageBox import MessageBox
-#for scheduler
+# for scheduler
 from time import mktime, strftime, time, localtime
 from enigma import eTimer
 
-#for downloader
+# for downloader
 import os
 import re
 from urllib.error import URLError, HTTPError
@@ -32,7 +32,7 @@ class AutoClientModeTimer:
 		self.clientmodeactivityTimer = eTimer()
 		self.clientmodeactivityTimer.timeout.get().append(self.clientmodedatedelay)
 		now = int(time())
-		self.doautostartscan() # import at boot time
+		self.doautostartscan()  # import at boot time
 
 		global ClientModeTime
 		if config.clientmode.enableSchedule.value:
@@ -62,7 +62,7 @@ class AutoClientModeTimer:
 		backupclock = config.clientmode.scheduletime.value
 		nowt = time()
 		now = localtime(nowt)
-		if config.clientmode.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
+		if config.clientmode.scheduleRepeatInterval.value.isdigit():  # contains wait time in minutes
 			repeatIntervalMinutes = int(config.clientmode.scheduleRepeatInterval.value)
 			return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min + repeatIntervalMinutes, 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, backupclock[0], backupclock[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
@@ -74,7 +74,7 @@ class AutoClientModeTimer:
 		now = int(time())
 		if ClientModeTime > 0:
 			if ClientModeTime < now + atLeast:
-				if config.clientmode.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
+				if config.clientmode.scheduleRepeatInterval.value.isdigit():  # contains wait time in minutes
 					ClientModeTime = now + (60 * int(config.clientmode.scheduleRepeatInterval.value))
 					while (int(ClientModeTime) - 30) < now:
 						ClientModeTime += 60 * int(config.clientmode.scheduleRepeatInterval.value)

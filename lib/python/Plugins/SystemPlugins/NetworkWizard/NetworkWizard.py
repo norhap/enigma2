@@ -82,8 +82,8 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		# if "addr" in eth0 or "addr" in wlan0:
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 		if geolocationData.get("status", None) == "success":
-			Time.useGeolocation(self) # set time zone auto.
-			Time.setSntpTime(self) # set SNTP in crontab.
+			Time.useGeolocation(self)  # set time zone auto.
+			Time.setSntpTime(self)  # set SNTP in crontab.
 			config.osd.language.value = OSD_LANGUAGE.get(config.timezone.val.value)# Init default user language
 			config.osd.language.save()
 
@@ -179,7 +179,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 			self.Adapterlist = iNetwork.getAdapterList()
 		if self.NextStep != 'end':
 			if len(self.Adapterlist) == 0:
-				#Reset Network to defaults if network broken
+				# Reset Network to defaults if network broken
 				iNetwork.resetNetworkConfig('lan', self.resetNetworkConfigCB)
 				self.resetRef = self.session.openWithCallback(self.resetNetworkConfigFinished, MessageBox, _("Please wait while we prepare your network interfaces..."), type=MessageBox.TYPE_INFO, enable_input=False)
 			if iface in iNetwork.getInstalledAdapters():

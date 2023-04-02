@@ -15,8 +15,8 @@ RIGHT = 1
 TOP = 2
 BOTTOM = 3
 # halign:
-#LEFT     = 0
-#RIGHT    = 1
+# LEFT     = 0
+# RIGHT    = 1
 CENTER = 2
 BLOCK = 3
 
@@ -124,7 +124,7 @@ class VRunningText(Renderer):
 						elif opt == "direction" and val in ("left", "right", "top", "bottom"):
 							self.direction = {"left": LEFT, "right": RIGHT, "top": TOP, "bottom": BOTTOM}[val]
 						elif opt == "step" and val:
-							#retValue(val, limit, default, Min=False)
+							# retValue(val, limit, default, Min=False)
 							self.mStep = retValue(val, 1, self.mStep)
 						elif opt == "steptime" and val:
 							self.mStepTimeout = retValue(val, 25, self.mStepTimeout)
@@ -144,28 +144,28 @@ class VRunningText(Renderer):
 					attribs.append((attrib, value))
 			self.skinAttributes = attribs
 		ret = Renderer.applySkin(self, desktop, screen)
-		#if self.type == RUNNING and self.direction in (LEFT,RIGHT):
-		#	self.halign = eLabel.alignLeft
-		#	self.txtflags = RT_HALIGN_LEFT | (self.txtflags & RT_WRAP)
+		# if self.type == RUNNING and self.direction in (LEFT,RIGHT):
+		# self.halign = eLabel.alignLeft
+		# self.txtflags = RT_HALIGN_LEFT | (self.txtflags & RT_WRAP)
 		if self.mOneShot:
 			self.mOneShot = max(self.mStepTimeout, self.mOneShot)
 		if self.mLoopTimeout:
 			self.mLoopTimeout = max(self.mStepTimeout, self.mLoopTimeout)
 
 		self.test_label.setFont(self.txfont)
-		#self.test_label.setForegroundColor(self.fcolor)
-		#self.test_label.setBackgroundColor(self.bcolor)
-		#if not self.scolor is None:
-		#	self.test_label.setShadowColor(self.scolor)
-		#	self.test_label.setShadowOffset(ePoint(self.soffset[0], self.soffset[1]))
+		# self.test_label.setForegroundColor(self.fcolor)
+		# self.test_label.setBackgroundColor(self.bcolor)
+		# if not self.scolor is None:
+		# self.test_label.setShadowColor(self.scolor)
+		# self.test_label.setShadowOffset(ePoint(self.soffset[0], self.soffset[1]))
 		if not (self.txtflags & RT_WRAP):
 			self.test_label.setNoWrap(1)
 		self.test_label.setVAlign(valign)
 		self.test_label.setHAlign(self.halign)
 		self.test_label.move(ePoint(self.W, self.H))
 		self.test_label.resize(eSize(self.W, self.H))
-		#self.test_label.hide()
-		#self.changed((self.CHANGED_DEFAULT,))
+		# self.test_label.hide()
+		# self.changed((self.CHANGED_DEFAULT,))
 		return ret
 
 	def doSuspend(self, suspended):
@@ -176,7 +176,7 @@ class VRunningText(Renderer):
 
 	def connect(self, source):
 		Renderer.connect(self, source)
-		#self.changed((self.CHANGED_DEFAULT,))
+		# self.changed((self.CHANGED_DEFAULT,))
 
 	def changed(self, what):
 		if not self.mTimer is None:
@@ -184,7 +184,7 @@ class VRunningText(Renderer):
 		if what[0] == self.CHANGED_CLEAR:
 			self.txtext = ""
 			if self.instance:
-				#self.instance.fillRect( eRect(0, 0, self.W, self.H), self.bcolor )
+				# self.instance.fillRect( eRect(0, 0, self.W, self.H), self.bcolor )
 				self.instance.clear(self.bcolor)
 		else:
 			self.txtext = self.source.text or ""
@@ -193,12 +193,12 @@ class VRunningText(Renderer):
 					self.drawText(self.X, self.Y)
 
 	def drawText(self, X, Y):
-		#self.instance.fillRect( eRect(0, 0, self.W, self.H), self.bcolor )
+		# self.instance.fillRect( eRect(0, 0, self.W, self.H), self.bcolor )
 		self.instance.clear(self.bcolor)
 
-		#if not self.scolor is None:
-		#	self.instance.writeText( eRect(X-self.soffset[0], Y-self.soffset[1], self.W-self.soffset[0], self.H-self.soffset[1]), self.scolor, self.bcolor, self.txfont, self.txtext, self.txtflags )
-		#self.instance.writeText( eRect(X, Y, self.W, self.H), self.fcolor, self.bcolor, self.txfont, self.txtext, self.txtflags )
+		# if not self.scolor is None:
+		# self.instance.writeText( eRect(X-self.soffset[0], Y-self.soffset[1], self.W-self.soffset[0], self.H-self.soffset[1]), self.scolor, self.bcolor, self.txfont, self.txtext, self.txtflags )
+		# self.instance.writeText( eRect(X, Y, self.W, self.H), self.fcolor, self.bcolor, self.txfont, self.txtext, self.txtflags )
 		if not self.scolor is None:
 			fcolor = self.scolor
 		else:
@@ -241,7 +241,7 @@ class VRunningText(Renderer):
 
 				if not self.mStartPoint is None:
 					if self.direction == LEFT:
-						#self.P = min(self.B, max(self.A, self.mStartPoint))
+						# self.P = min(self.B, max(self.A, self.mStartPoint))
 						self.mStop = self.P = max(self.A, min(self.W, self.mStartPoint))
 					else:
 						self.mStop = self.P = max(self.A, min(self.B, self.mStartPoint - text_width + self.soffset[0]))

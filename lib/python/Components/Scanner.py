@@ -174,7 +174,7 @@ def scanDevice(mountpoint):
 	blockdev = mountpoint.rstrip("/").rsplit('/', 1)[-1]
 	error, blacklisted, removable, is_cdrom, partitions, medium_found = harddiskmanager.getBlockDevInfo(blockdev)
 	for p in paths_to_scan:
-		for root, dirs, files in os.walk(mountpoint): # now scan the files paths.
+		for root, dirs, files in os.walk(mountpoint):  # now scan the files paths.
 			for f in files:
 				if (is_cdrom and f.endswith(".wav") and f.startswith("track")) or f == "cdplaylist.cdpls":
 					sfile = ScanFile(os.path.join(root, f), "audio/x-cda")
@@ -183,7 +183,7 @@ def scanDevice(mountpoint):
 				for s in scanner:
 					s.handleFile(res, sfile)
 
-			if config.plugins.softwaremanager.scanner_with_subdirs.value: # True choose search files in subdirs.
+			if config.plugins.softwaremanager.scanner_with_subdirs.value:  # True choose search files in subdirs.
 				continue
 			else:
 				del dirs[:]

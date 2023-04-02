@@ -935,8 +935,8 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									countList.append(count)
 									numberofcards = count
 									providername = self.providers.get(caidprovider, 'Multiple Providers given')
-									#if providername == 'Multiple Providers given':
-									#	print caidprovider
+									# if providername == 'Multiple Providers given':
+									# print caidprovider
 									numberofreshare = 0
 									if int(down) > 0:
 										resharecards += 1
@@ -1004,8 +1004,8 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										countList.append(count)
 										numberofcards = count
 										providername = self.providers.get(caidprovider, 'Multiple Providers given')
-										#if providername == 'Multiple Providers given':
-										#	print caidprovider
+										# if providername == 'Multiple Providers given':
+										# print caidprovider
 
 										numberofreshare = 0
 										if int(down) > 0:
@@ -1027,8 +1027,8 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 										if int(down) > 0:
 											reshare = reshareList[i]
 											reshare += 1
-											#if caidprovider == "05021700":
-											#	print "re: %d" %(reshare)
+											# if caidprovider == "05021700":
+											# print "re: %d" %(reshare)
 											reshareList[i] = reshare
 											numberofreshare = 0
 											numberofreshare = reshare
@@ -1042,12 +1042,12 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									self.hostList.append(hostname)
 									self.caidList.append(caidprovider)
 									totalcards += 1
-									#maxdown = list[6]
-									#while maxdown.startswith(" "):
-										#maxdown = maxdown[1:]
-										#down = maxdown
-									#if int(down)>0:
-										#resharecards +=1
+									# maxdown = list[6]
+									# while maxdown.startswith(" "):
+										# maxdown = maxdown[1:]
+										# down = maxdown
+									# if int(down)>0:
+										# resharecards +=1
 
 		self.instance.setTitle("%s (%s %d) %s %s" % (_("Share View"), _("Total cards:"), totalcards, _("Hops:"), ulevel))
 		self["title"].setText("%s (%s %d) %s %s" % (_("Share View"), _("Total cards:"), totalcards, _("Hops:"), ulevel))
@@ -1197,11 +1197,11 @@ class CCcamInfoServerMenu(Screen):
 
 		list = []
 		for x in self.infoList:
-			if x[5].replace(_("Connected: "), "") == "": #offline - red
+			if x[5].replace(_("Connected: "), "") == "":  # offline - red
 				list.append(CCcamServerListEntry(x[0], "red"))
-			elif x[1] == _("Cards: 0"): #online with no card - blue
+			elif x[1] == _("Cards: 0"):  # online with no card - blue
 				list.append(CCcamServerListEntry(x[0], "blue"))
-			else: #online with cards - green
+			else:  # online with cards - green
 				list.append(CCcamServerListEntry(x[0], "green"))
 		self["list"] = CCcamList(list)
 		self["info"] = Label()

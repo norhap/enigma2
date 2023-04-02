@@ -58,7 +58,7 @@ class Navigation:
 			import Components.ChannelsImporter
 			Components.ChannelsImporter.autostart()
 		if self.__wasTimerWakeup:
-			if wakeup_time_type == 3 and not config.misc.isNextRecordTimerAfterEventActionAuto.value: # "inStandby". Do not execute setWasInDeepStandby static method if recording exists.
+			if wakeup_time_type == 3 and not config.misc.isNextRecordTimerAfterEventActionAuto.value:  # "inStandby". Do not execute setWasInDeepStandby static method if recording exists.
 				RecordTimer.RecordTimerEntry.setWasInDeepStandby()
 		if config.misc.RestartUI.value:
 			config.misc.RestartUI.value = False
@@ -71,7 +71,7 @@ class Navigation:
 				if not Screens.Standby.inTryQuitMainloop:
 					self.standbytimer = eTimer()
 					self.standbytimer.callback.append(self.gotostandby)
-					self.standbytimer.start(15000, True) # Time increse 15 second for standby.
+					self.standbytimer.start(15000, True)  # Time increse 15 second for standby.
 
 	def _processTimerWakeup(self):
 		now = time()
@@ -190,7 +190,7 @@ class Navigation:
 							self.currentlyPlayingServiceReference = None
 							self.currentlyPlayingServiceOrGroup = None
 							if oldref and "://" in oldref.getPath():
-								print("[Navigation] Streaming was active -> try again") # use timer to give the streamserver the time to deallocate the tuner
+								print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 								self.retryServicePlayTimer = eTimer()
 								self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 								self.retryServicePlayTimer.start(500, True)
@@ -247,7 +247,7 @@ class Navigation:
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
 					if oldref and "://" in oldref.getPath():
-						print("[Navigation] Streaming was active -> try again") # use timer to give the streamserver the time to deallocate the tuner
+						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 						self.retryServicePlayTimer.start(500, True)

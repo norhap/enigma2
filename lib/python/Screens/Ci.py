@@ -74,7 +74,7 @@ class MMIDialog(Screen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.keyCancel)
 
-		#else the skins fails
+		# else the skins fails
 		self["title"] = Label("")
 		self["subtitle"] = Label("")
 		self["bottom"] = Label("")
@@ -85,7 +85,7 @@ class MMIDialog(Screen):
 				"ok": self.okbuttonClick,
 				"cancel": self.keyCancel,
 				"menu": self.forceExit,
-				#for PIN
+				# for PIN
 				"left": self.keyLeft,
 				"right": self.keyRight,
 				"1": self.keyNumberGlobal,
@@ -110,14 +110,14 @@ class MMIDialog(Screen):
 		else:
 			self.wait_text = wait_text
 
-		if action == 2:		#start MMI
+		if action == 2:  # start MMI
 			handler.startMMI(self.slotid)
 			self.showWait()
-		elif action == 3:		#mmi already there (called from infobar)
+		elif action == 3:  # mmi already there (called from infobar)
 			self.showScreen()
 
 	def addEntry(self, list, entry):
-		if entry[0] == "TEXT":		#handle every item (text / pin only?)
+		if entry[0] == "TEXT":  # handle every item (text / pin only?)
 			list.append((entry[1], ConfigNothing(), entry[2]))
 		if entry[0] == "PIN":
 			pinlength = entry[1]
@@ -294,16 +294,16 @@ class MMIDialog(Screen):
 
 	def ciStateChanged(self):
 		do_close = False
-		if self.action == 0:			#reset
+		if self.action == 0:  # reset
 			do_close = True
-		if self.action == 1:			#init
+		if self.action == 1:  # init
 			do_close = True
 
-		#module still there ?
+		# module still there ?
 		if self.handler.getState(self.slotid) != 2:
 			do_close = True
 
-		#mmi session still active ?
+		# mmi session still active ?
 		if self.handler.getMMIState(self.slotid) != 1:
 			do_close = True
 
@@ -312,7 +312,7 @@ class MMIDialog(Screen):
 		elif self.action > 1 and self.handler.availableMMI(self.slotid) == 1:
 			self.showScreen()
 
-		#FIXME: check for mmi-session closed
+		# FIXME: check for mmi-session closed
 
 
 class CiMessageHandler:
@@ -447,11 +447,11 @@ class CiSelection(Screen):
 		self.list.append((_("Reset"), ConfigNothing(), 0, slot))
 		self.list.append((_("Init"), ConfigNothing(), 1, slot))
 
-		if self.state[slot] == 0: #no module
+		if self.state[slot] == 0:  # no module
 			self.list.append((_("no module found"), ConfigNothing(), 2, slot))
-		elif self.state[slot] == 1: #module in init
+		elif self.state[slot] == 1:  # module in init
 			self.list.append((_("init module"), ConfigNothing(), 2, slot))
-		elif self.state[slot] == 2: #module ready
+		elif self.state[slot] == 2:  # module ready
 			appname = eDVBCI_UI.getInstance().getAppName(slot)
 			self.list.append((appname, ConfigNothing(), 2, slot))
 		elif self.state[slot] == 3:  # module disabled by the user
@@ -481,14 +481,14 @@ class CiSelection(Screen):
 		for slot in range(len(self.list)):
 			if len(self.list[slotidx]) < 3:
 				slotidx += 1
-		slotidx += 1 #do not change CI Enabled
-		slotidx += 1 #do not change Reset
-		slotidx += 1 #do not change Init
-		if state == 0: #no module
+		slotidx += 1  # do not change CI Enabled
+		slotidx += 1  # do not change Reset
+		slotidx += 1  # do not change Init
+		if state == 0:  # no module
 			self.list[slotidx] = (_("no module found"), ConfigNothing(), 2, slot)
-		elif state == 1: #module in init
+		elif state == 1:  # module in init
 			self.list[slotidx] = (_("init module"), ConfigNothing(), 2, slot)
-		elif state == 2: #module ready
+		elif state == 2:  # module ready
 			appname = eDVBCI_UI.getInstance().getAppName(slot)
 			self.list[slotidx] = (appname, ConfigNothing(), 2, slot)
 			if len(self.list) <= slotidx + 1:
@@ -519,9 +519,9 @@ class CiSelection(Screen):
 			entryData = self.entryData[idx]
 			action = entryData[0]
 			slot = entryData[1]
-			if action == 0: #reset
+			if action == 0:  # reset
 				eDVBCI_UI.getInstance().setReset(slot)
-			elif action == 1: #init
+			elif action == 1:  # init
 				eDVBCI_UI.getInstance().setInit(slot)
 			elif action == 5:
 				self.session.openWithCallback(self.cancelCB, PermanentPinEntry, config.ci[slot].static_pin, _("Smartcard PIN"))

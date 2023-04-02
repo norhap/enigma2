@@ -2386,8 +2386,8 @@ class MovieSelectionSetup(Setup):
 	def __init__(self, session):
 		cfg = ConfigSubsection()
 		cfg.description = ConfigYesNo(default=(config.movielist.description.value != MovieList.HIDE_DESCRIPTION))
-		self.cfg = cfg # for self.cfg.description ( setup.xml ).
-		Setup.__init__(self, session, setup="MovieSelection") # must be at this level for cfg to be a MovieSelection object.
+		self.cfg = cfg  # for self.cfg.description ( setup.xml ).
+		Setup.__init__(self, session, setup="MovieSelection")  # must be at this level for cfg to be a MovieSelection object.
 
 	def keySave(self):
 		self.saveAll()

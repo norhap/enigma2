@@ -19,7 +19,7 @@ class BoxInformation:
 		self.immutableList = []
 		self.boxInfo = {}
 		file = root + pathjoin(resolveFilename(SCOPE_LIBDIR), "enigma.info")
-		self.boxInfo["overrideactive"] = False # not currently used by us
+		self.boxInfo["overrideactive"] = False  # not currently used by us
 		lines = fileReadLines(file)
 		if lines:
 			for line in lines:
@@ -30,7 +30,7 @@ class BoxInformation:
 					self.immutableList.append(item)
 					# Temporary fix: some items that look like floats are not floats and should be handled as strings, e.g. python "3.10" should not be processed as "3.1".
 					if not (value.startswith("\"") or value.startswith("'")) and item in ("python", "imageversion", "imgversion"):
-						value = '"' + value + '"' # wrap it so it is treated as a string
+						value = '"' + value + '"'  # wrap it so it is treated as a string
 					self.boxInfo[item] = self.processValue(value)
 			# print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
 		else:
@@ -58,7 +58,7 @@ class BoxInformation:
 		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
 			value = True
 		elif value.isdigit() or ((value[0:1] == "-" or value[0:1] == "+") and value[1:].isdigit()):
-			if value[0] != "0": # if this is zero padded it must be a string, so skip
+			if value[0] != "0":  # if this is zero padded it must be a string, so skip
 				value = int(value)
 		elif value.startswith("0x") or value.startswith("0X"):
 			value = int(value, 16)
@@ -76,7 +76,7 @@ class BoxInformation:
 	def getEnigmaInfoList(self):
 		return sorted(self.immutableList)
 
-	def getEnigmaConfList(self): # not used by us
+	def getEnigmaConfList(self):  # not used by us
 		return []
 
 	def getItemsList(self):
@@ -180,8 +180,8 @@ SystemInfo["MachineBrand"] = brand
 SystemInfo["MachineModel"] = model
 SystemInfo["Platform"] = platform
 
-#detect remote control
-#SystemInfo["RCType"] = getRCType() detect from boxbranding
+# detect remote control
+# SystemInfo["RCType"] = getRCType() detect from boxbranding
 SystemInfo["RCIDNum"] = int(float(2)) or int(getRCIDNum())
 SystemInfo["RCName"] = getRCName()
 SystemInfo["RCImage"] = getRCFile("png")

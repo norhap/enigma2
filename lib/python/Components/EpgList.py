@@ -126,7 +126,7 @@ class EPGList(GUIComponent):
 				x()
 #				try:
 #					x()
-#				except: # FIXME!!!
+#				except:  # FIXME!!!
 #					print("FIXME in EPGList.selectionChanged")
 #					pass
 
@@ -184,7 +184,7 @@ class EPGList(GUIComponent):
 				xpos += w
 				w = width / 10 * 5
 				self.descr_rect = Rect(xpos, 0, width, height)
-		else: # EPG_TYPE_SIMILAR
+		else:  # EPG_TYPE_SIMILAR
 			if self.skinColumns:
 				x = 0
 				self.weekday_rect = Rect(0, 0, self.gap(self.col[0] + 120), height)
@@ -218,7 +218,7 @@ class EPGList(GUIComponent):
 		t = localtime(beginTime)
 		et = localtime(beginTime + duration)
 		res = [
-			None, # no private data needed
+			None,  # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w, r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, strftime(config.usage.date.dayshort.value, t)),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x, r2.y, split, r2.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, strftime(config.usage.time.short.value + " -", t)),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x + split, r2.y, r2.w - split, r2.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, strftime(config.usage.time.short.value, et))
@@ -297,16 +297,16 @@ class EPGList(GUIComponent):
 		return []
 
 	def fillMultiEPG(self, services, stime=-1):
-		#t = time()
+		# t = time()
 		test = [(service.ref.toString(), 0, stime) for service in services]
 		test.insert(0, 'X0RIBDTCn')
 		self.list = self.queryEPG(test)
 		self.l.setList(self.list)
-		#print(time() - t)
+		# print(time() - t)
 		self.selectionChanged()
 
 	def updateMultiEPG(self, direction):
-		#t = time()
+		# t = time()
 		test = [x[3] and (x[1], direction, x[3]) or (x[1], direction, 0) for x in self.list]
 		test.insert(0, 'XRIBDTCn')
 		tmp = self.queryEPG(test)
@@ -318,7 +318,7 @@ class EPGList(GUIComponent):
 					self.list[cnt] = (changecount, x[0], x[1], x[2], x[3], x[4], x[5], x[6])
 			cnt += 1
 		self.l.setList(self.list)
-		#print(time() - t)
+		# print(time() - t)
 		self.selectionChanged()
 
 	def fillSingleEPG(self, service):

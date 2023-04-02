@@ -17,7 +17,7 @@ class Audio(Converter, object):
 	TRANSPONDER = 11
 	SOURCE = 12
 
-	#constructor
+	# constructor
 	def __init__(self, type):
 		Converter.__init__(self, type)
 		self.type = {

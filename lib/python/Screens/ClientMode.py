@@ -73,7 +73,7 @@ class ClientModeScreen(ConfigListScreen, Screen):
 		self["config"].list = setup_list
 		self["config"].l.setList(setup_list)
 
-	def run(self): # for start wizard
+	def run(self):  # for start wizard
 		self.saveconfig()
 
 	def keyGo(self):
@@ -101,7 +101,7 @@ class ClientModeScreen(ConfigListScreen, Screen):
 		if config.clientmode.enabled.value:
 			config.usage.remote_fallback_enabled.value = True
 			config.usage.remote_fallback.value = "http://%s:%d" % (self.getRemoteAddress(), config.clientmode.serverStreamingPort.value)
-		elif self.initial_state != config.clientmode.enabled.value: # switching back to normal mode
+		elif self.initial_state != config.clientmode.enabled.value:  # switching back to normal mode
 			# load nim config from config.clientmode.nimcache
 			import json
 			if config.clientmode.nim_cache.value:

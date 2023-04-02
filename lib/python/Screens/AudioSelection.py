@@ -557,7 +557,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		if config or self.focus == FOCUS_CONFIG:
 			index = self["config"].getCurrentIndex()
 			if self.settings.menupage.value == PAGE_AUDIO:
-				if self.subtitlelist and index == 0: # Subtitle selection screen
+				if self.subtitlelist and index == 0:  # Subtitle selection screen
 					self.keyAudioSubtitle()
 					self.__updatedInfo()
 				elif self["config"].getCurrent()[2]:
@@ -565,11 +565,11 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 				else:
 					ConfigListScreen.keyRight(self)
 			elif self.settings.menupage.value == PAGE_SUBTITLES and self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0):
-				if index == 0: # Audio selection screen
+				if index == 0:  # Audio selection screen
 					self.keyAudioSubtitle()
 					self.__updatedInfo()
 				else:
-					self.session.open(QuickSubtitlesConfigMenu, self.infobar) # sub title config screen
+					self.session.open(QuickSubtitlesConfigMenu, self.infobar)  # sub title config screen
 			else:
 				ConfigListScreen.keyRight(self)
 		if self.focus == FOCUS_STREAMS and self["streams"].count() and config == False:
@@ -737,7 +737,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("config.subtitles.subtitle_bad_timing_delay"),
 				getConfigMenuItem("config.subtitles.subtitle_noPTSrecordingdelay"),
 			]
-		elif sub[0] == 1: # teletext
+		elif sub[0] == 1:  # teletext
 			menu = [
 				getConfigMenuItem("config.subtitles.ttx_subtitle_colors"),
 				getConfigMenuItem("config.subtitles.ttx_subtitle_original_position"),

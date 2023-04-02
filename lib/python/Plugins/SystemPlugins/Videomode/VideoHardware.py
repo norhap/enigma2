@@ -28,7 +28,7 @@ config.av.edid_override = ConfigYesNo(default=True)
 
 
 class VideoHardware:
-	rates = {} # high-level, use selectable modes.
+	rates = {}  # high-level, use selectable modes.
 	modes = {}  # a list of (high-level) modes for a certain port.
 
 	rates["PAL"] = {"50Hz": {50: "pal"}, "60Hz": {60: "pal60"}, "multi": {50: "pal", 60: "pal60"}}
@@ -124,7 +124,7 @@ class VideoHardware:
 			elif is_auto:
 				try:
 					aspect_str = open("/proc/stb/vmpeg/0/aspect", "r").read()
-					if aspect_str == "1": # 4:3
+					if aspect_str == "1":  # 4:3
 						ret = (4, 3)
 				except Exception:
 					pass
@@ -379,7 +379,7 @@ class VideoHardware:
 
 		is_widescreen = force_widescreen or config.av.aspect.value in ("16_9", "16_10")
 		is_auto = config.av.aspect.value == "auto"
-		policy2 = "policy" # use main policy
+		policy2 = "policy"  # use main policy
 
 		if is_widescreen:
 			if force_widescreen:

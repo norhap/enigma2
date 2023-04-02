@@ -71,7 +71,7 @@ def getMultibootslots():
 		if not os.path.ismount(tmp.dir):
 			os.rmdir(tmp.dir)
 		if not mode12found and SystemInfo["canMode12"]:
-			#the boot device has ancient content and does not contain the correct STARTUP files
+			# the boot device has ancient content and does not contain the correct STARTUP files
 			for slot in range(1, 5):
 				bootslots[slot] = {'device': '/dev/mmcblk0p%s' % (slot * 2 + 1), 'startupfile': None}
 	print('[Multiboot] Bootslots found:', bootslots)
@@ -80,7 +80,7 @@ def getMultibootslots():
 
 def getCurrentImage():
 	if SystemInfo["canMultiBoot"]:
-		if not SystemInfo["hasKexec"]: # No kexec kernel multiboot
+		if not SystemInfo["hasKexec"]:  # No kexec kernel multiboot
 			slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
 			if slot:
 				return int(slot[0])
@@ -89,7 +89,7 @@ def getCurrentImage():
 				for slot in SystemInfo["canMultiBoot"].keys():
 					if SystemInfo["canMultiBoot"][slot]['device'] == device:
 						return slot
-		else: # kexec kernel multiboot VU+
+		else:  # kexec kernel multiboot VU+
 			rootsubdir = [x for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith("rootsubdir")]
 			char = "/" if "/" in rootsubdir[0] else "="
 			return int(rootsubdir[0].rsplit(char, 1)[1][11:])
@@ -123,7 +123,7 @@ def restoreImages():
 			os.rmdir(tmp.dir)
 
 
-def getUUIDtoSD(UUID): # returns None on failure
+def getUUIDtoSD(UUID):  # returns None on failure
 	check = "/sbin/blkid"
 	if os.path.exists(check):
 		lines = check_output([check]).decode(encoding="utf8", errors="ignore").split("\n")

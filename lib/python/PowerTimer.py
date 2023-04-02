@@ -225,10 +225,10 @@ class PowerTimer(Timer):
 			return timer.begin
 		return -1
 
-	def getNextWakeupSleepTimer(self): # Start wakeup from deepstandby or standby with [SleepTimerEdit].
+	def getNextWakeupSleepTimer(self):  # Start wakeup from deepstandby or standby with [SleepTimerEdit].
 		now = localtime(time())
 		current_week_day = int(now.tm_wday)
-		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[current_week_day].value[0], config.usage.wakeup_time[current_week_day].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst))) # Timer config.usage.wakeup_time.value.
+		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, config.usage.wakeup_time[current_week_day].value[0], config.usage.wakeup_time[current_week_day].value[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))  # Timer config.usage.wakeup_time.value.
 
 	def getNextPowerTimeActive(self):
 		now = time()
@@ -239,12 +239,12 @@ class PowerTimer(Timer):
 					continue
 				return next_act
 		if config.usage.wakeup_enabled.value != "no":
-			if self.getNextWakeupSleepTimer() > now: # [SleepTimerEdit] Start wake up.
-				if Screens.Standby.inStandby and config.usage.wakeup_enabled.value == "standby": # [SleepTimerEdit] wake up from "standby".
+			if self.getNextWakeupSleepTimer() > now:  # [SleepTimerEdit] Start wake up.
+				if Screens.Standby.inStandby and config.usage.wakeup_enabled.value == "standby":  # [SleepTimerEdit] wake up from "standby".
 					return self.getNextWakeupSleepTimer()
-				elif config.usage.wakeup_enabled.value != "standby": # [SleepTimerEdit] wake up from "deepstandby" or "yes".
+				elif config.usage.wakeup_enabled.value != "standby":  # [SleepTimerEdit] wake up from "deepstandby" or "yes".
 					return self.getNextWakeupSleepTimer()
-		return -1 # [StartEnigma] Not time powerTimerList or sleepTimerList.
+		return -1  # [StartEnigma] Not time powerTimerList or sleepTimerList.
 
 	def getNextPowerManagerTime(self):
 		nextTime = self.getNextPowerTimeActive()

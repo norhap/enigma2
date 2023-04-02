@@ -341,7 +341,7 @@ def InitUsageConfig():
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
 	if not exists(config.usage.timeshift_path.value):
-		makedirs(config.usage.timeshift_path.value, 0o755) # Create Timeshift DefaultValue directorie and users Directories. PathStatus of Timeshift module values this directorie.
+		makedirs(config.usage.timeshift_path.value, 0o755)  # Create Timeshift DefaultValue directorie and users Directories. PathStatus of Timeshift module values this directorie.
 	config.usage.timeshift_path.save()
 	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
 	config.usage.timeshift_skipreturntolive = ConfigYesNo(default=False)
@@ -1206,16 +1206,16 @@ def InitUsageConfig():
 		eEPGCache.getInstance().setCacheFile(config.misc.epgcache_filename.value)
 		epgcache = eEPGCache.getInstance()
 		epgcache.save()
-		for partition in harddiskmanager.getMountedPartitions(): # ckeck epg.dat file
+		for partition in harddiskmanager.getMountedPartitions():  # ckeck epg.dat file
 			if exists(partition.mountpoint):
 				path = normpath(partition.mountpoint)
-			if not config.misc.epgcache_filename.value.startswith("/etc/enigma2/"): # delete internal flash
+			if not config.misc.epgcache_filename.value.startswith("/etc/enigma2/"):  # delete internal flash
 				if exists(pathjoin("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
 					remove(pathjoin("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
-				if path not in config.misc.epgcache_filename.value: # delete on all devices with no value in config
+				if path not in config.misc.epgcache_filename.value:  # delete on all devices with no value in config
 					if exists(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
 						remove(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
-			else: # delete in all devices except internal flash
+			else:  # delete in all devices except internal flash
 				if exists(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
 					remove(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
 	config.misc.epgcachepath.addNotifier(EpgCacheChanged, immediate_feedback=False)

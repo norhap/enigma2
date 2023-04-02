@@ -44,7 +44,7 @@ def InitParentalControl():
 	config.ParentalControl.config_sections.visioncore_menu = ConfigYesNo(default=False)
 	config.ParentalControl.config_sections.menu_sort = ConfigYesNo(default=False)
 
-	#Added for backwards compatibility with some 3rd party plugins that depend on this config
+	# Added for backwards compatibility with some 3rd party plugins that depend on this config
 	config.ParentalControl.servicepinactive = config.ParentalControl.configured
 	config.ParentalControl.setuppin = config.ParentalControl.servicepin[0]
 	config.ParentalControl.retries.setuppin = config.ParentalControl.retries.servicepin
@@ -92,17 +92,17 @@ class ParentalControl:
 		elif int(config.ParentalControl.age.value):
 			event = info and info.getEvent(ref)
 			rating = event and event.getParentalData()
-			age = rating and rating.getRating() # rating.getRating() = (age - 3) if rating.getRating().
+			age = rating and rating.getRating()  # rating.getRating() = (age - 3) if rating.getRating().
 			age = age and age <= 15 and age + 3 or 0
 			if age == 0:
-				try: # Age control based on getExtendedDescription also valid for EIT.
+				try:  # Age control based on getExtendedDescription also valid for EIT.
 					agecontrol = "%s" % int(config.ParentalControl.age.value)
 					description = event.getExtendedDescription().strip()
 					if "(+%s)" % int(config.ParentalControl.age.value) in str(description):
 						rating = event.getExtendedDescription().lstrip(")")
 					elif "+%s" % int(config.ParentalControl.age.value) in str(description) or "-%s" % int(config.ParentalControl.age.value) in str(description):
 						rating = event.getExtendedDescription().strip()
-					elif "TP" in str(description): # Add here future EPG character filters for other platforms EPG.
+					elif "TP" in str(description):  # Add here future EPG character filters for other platforms EPG.
 						rating = None
 					if rating:
 						if agecontrol in str(rating):

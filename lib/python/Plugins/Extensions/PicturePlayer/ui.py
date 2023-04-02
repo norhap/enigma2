@@ -119,7 +119,7 @@ class picshow(Screen):
 			self["key_yellow"].setText("")
 
 	def KeyGreen(self):
-		#if not self.filelist.canDescent():
+		# if not self.filelist.canDescent():
 		self.session.openWithCallback(self.callbackView, Pic_Thumb, self.filelist.getFileList(), self.filelist.getSelectionIndex(), self.filelist.getCurrentDirectory())
 
 	def KeyYellow(self):
@@ -137,7 +137,7 @@ class picshow(Screen):
 
 	def setConf(self, retval=None):
 		sc = getScale()
-		#0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
+		# 0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
 		self.picload.setPara((self["thn"].instance.size().width(), self["thn"].instance.size().height(), sc[0], sc[1], config.pic.cache.value, int(config.pic.resize.value), "#00000000", config.pic.autoOrientation.value))
 
 	def callbackView(self, val=0):
@@ -262,9 +262,9 @@ class Pic_Thumb(Screen):
 
 		size_w = getDesktop(0).size().width()
 		size_h = getDesktop(0).size().height()
-		self.thumbsX = size_w // (self.spaceX + self.picX) # thumbnails in X
-		self.thumbsY = size_h // (self.spaceY + self.picY) # thumbnails in Y
-		self.thumbsC = int(self.thumbsX * self.thumbsY) # all thumbnails
+		self.thumbsX = size_w // (self.spaceX + self.picX)  # thumbnails in X
+		self.thumbsY = size_h // (self.spaceY + self.picY)  # thumbnails in Y
+		self.thumbsC = int(self.thumbsX * self.thumbsY)  # all thumbnails
 
 		self.positionlist = []
 		skincontent = ""
@@ -346,7 +346,7 @@ class Pic_Thumb(Screen):
 		self.paintFrame()
 
 	def paintFrame(self):
-		#print("index=" + str(self.index))
+		# print("index=" + str(self.index))
 		if self.maxentry < self.index or self.index < 0:
 			return
 
@@ -360,23 +360,23 @@ class Pic_Thumb(Screen):
 
 	def newPage(self):
 		self.Thumbnaillist = []
-		#clear Labels and Thumbnail
+		# clear Labels and Thumbnail
 		for x in range(self.thumbsC):
 			self["label" + str(x)].setText("")
 			self["thumb" + str(x)].hide()
-		#paint Labels and fill Thumbnail-List
+		# paint Labels and fill Thumbnail-List
 		for x in self.filelist:
 			if x[T_PAGE] == self.currPage:
 				self["label" + str(x[T_FRAME_POS])].setText("(" + str(x[T_INDEX] + 1) + ") " + x[T_NAME])
 				self.Thumbnaillist.append([0, x[T_FRAME_POS], x[T_FULL]])
 
-		#paint Thumbnail start
+		# paint Thumbnail start
 		self.showPic()
 
 	def showPic(self, picInfo=""):
 		for x in range(len(self.Thumbnaillist)):
 			if self.Thumbnaillist[x][0] == 0:
-				if self.picload.getThumbnail(self.Thumbnaillist[x][2]) == 1: #zu tun probier noch mal
+				if self.picload.getThumbnail(self.Thumbnaillist[x][2]) == 1:  # zu tun probier noch mal
 					self.ThumbTimer.start(500, True)
 				else:
 					self.Thumbnaillist[x][0] = 1
@@ -482,17 +482,17 @@ class Pic_Full_View(Screen):
 		self.dirlistcount = 0
 
 		for x in filelist:
-			if len(filelist[0]) == 3: #orig. filelist
+			if len(filelist[0]) == 3:  # orig. filelist
 				if x[0][1] == False:
 					self.filelist.append(path + x[0][0])
 				else:
 					self.dirlistcount += 1
-			elif len(filelist[0]) == 2: #scanlist
+			elif len(filelist[0]) == 2:  # scanlist
 				if x[0][1] == False:
 					self.filelist.append(x[0][0])
 				else:
 					self.dirlistcount += 1
-			else: # thumbnaillist
+			else:  # thumbnaillist
 				self.filelist.append(x[T_FULL])
 
 		self.maxentry = len(self.filelist) - 1
@@ -522,7 +522,7 @@ class Pic_Full_View(Screen):
 
 	def setConf(self, retval=None):
 		sc = getScale()
-		#0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
+		# 0=Width 1=Height 2=Aspect 3=use_cache 4=resize_type 5=Background(#AARRGGBB)
 		self.picload.setPara([self["pic"].instance.size().width(), self["pic"].instance.size().height(), sc[0], sc[1], 0, int(config.pic.resize.value), self.bgcolor, config.pic.autoOrientation.value])
 
 	def ShowPicture(self):
