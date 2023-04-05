@@ -2198,6 +2198,9 @@ msgstr "Descargar plugins"
 msgid "Install plugins"
 msgstr "Instalar plugins"
 
+msgid "Init Vu+ MultiBoot"
+msgstr "Inicializar MultiBoot Vu+"
+
 msgid "Downloading"
 msgstr "Descargando"
 
@@ -2305,6 +2308,9 @@ msgstr "Activar búsqueda automática rápida para %s"
 
 msgid "Enable fallback remote receiver"
 msgstr "Habilitar el receptor reserva para respaldo"
+
+msgid "Enable MultiBoot Kexec"
+msgstr "Habilitar MultiBoot Kexec"
 
 msgid "Enable parental protection"
 msgstr "Activar protección parental"
@@ -3714,6 +3720,12 @@ msgstr "Kazakistán"
 
 msgid "Keep service"
 msgstr "Mantener canal"
+
+msgid "Kexec MultiBoot Manager"
+msgstr "Administrador Arranque Múltiple Kexec"
+
+msgid "Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."
+msgstr "Inicialización MultiBoot Kexec en progreso!\n\nSe reiniciará después de restaurar cualquier slot eMMC.\nEsto puede tomar de 1 a 5 minutos por slot."
 
 msgid "Kenya"
 msgstr "Kenia"
@@ -7824,6 +7836,9 @@ msgstr "Ukraniano"
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "No se puede realizar una copia de seguridad de la configuración porque falta el plugin AutoBackup, ¿desea continuar?"
 
+msgid "Unable to complete - Kexec Multiboot files missing!"
+msgstr "No se puede completar - ¡Faltan archivos Kexec Multiboot!"
+
 msgid ""
 "Unattended update in progress\n"
 "Please wait until your %s reboots\n"
@@ -11133,6 +11148,9 @@ msgstr "Código PIN necesario"
 msgid "Parental control services editor"
 msgstr "Editor de canales de control parental"
 
+msgid "Press Green key to enable MultiBoot!\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr "Pulse buttón verde para habilitar MultiBoot\n\nSe reiniciará en 10 segundos,\na menos que tenga slots eMMC para restaurar.\nLa restauración de los slots eMMC puede llevar de 1 -> 5 minutos por slot."
+
 msgid "PiP setup"
 msgstr "Configuración PiP"
 
@@ -11630,6 +11648,9 @@ msgstr "Pulse OK"
 
 msgid "Really delete all list?"
 msgstr "Realmente elimina toda la lista?"
+
+msgid "Really permanently delete MultiBoot files?\n%s"
+msgstr "Quieres eliminar archivos MultiBoot de forma permanente?\n%s"
 
 msgid "Return to deep standby after import"
 msgstr "Volver al modo de espera profundo después de la importación"
@@ -12597,6 +12618,9 @@ msgstr ""
 "Recargar la lista de temporizadores.\n"
 "%d Temporizador Automático(s) deshabilitado porque el conflicto.\n"
 "%d doble Temporizdor Automático(s) reserva.\n"
+
+msgid "Remove forever"
+msgstr "Eliminar para siempre"
 
 msgid "Remove not existing events"
 msgstr "Eliminar eventos no existentes"
@@ -14881,6 +14905,9 @@ msgstr "Arrancar en imagen Android"
 
 msgid "Boot to Recovery menu"
 msgstr "Arrancar en menu Recuperación"
+
+msgid "Boot with Recovery image - slot0 %s"
+msgstr "Arrancar con imagen de recuperación - slot0 %s"
 
 msgid "Recovery"
 msgstr "Recuperación"

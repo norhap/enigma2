@@ -296,6 +296,7 @@ SystemInfo["supportPcmMultichannel"] = fileCheck("/proc/stb/audio/multichannel_p
 SystemInfo["hasXcoreVFD"] = MODEL == "osmega" or PLATFORM == "4kspycat" and fileCheck("/sys/module/brcmstb_%s/parameters/pt6302_cgram" % MODEL)
 SystemInfo["HasOfflineDecoding"] = MODEL not in ("osmini", "osminiplus", "et7000mini", "et11000", "mbmicro", "mbtwinplus", "mbmicrov2", "et7x00", "et8500")
 SystemInfo["hasKexec"] = fileHas("/proc/cmdline", "kexec=1")
+SystemInfo["canKexec"] = MODEL in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse", "vuzero4k") and not SystemInfo["hasKexec"] and fileExists("/usr/bin/kernel_auto.bin") and fileExists("/usr/bin/STARTUP.cpio.gz")
 SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
 SystemInfo["canMode12"] = "%s_4.boxmode" % MODEL in cmdline and cmdline["%s_4.boxmode" % MODEL] in ("1", "12") and "192M"
 SystemInfo["canMultiBoot"] = getMultibootslots()
