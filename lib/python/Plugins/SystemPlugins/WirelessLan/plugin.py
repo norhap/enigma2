@@ -1,4 +1,4 @@
-from enigma import eTimer, eEnv, getBoxType
+from enigma import eTimer, eEnv
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import MultiPixmap
@@ -8,6 +8,7 @@ from Components.Sources.List import List
 from Components.config import config, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword
 from Components.Network import iNetwork
 from Components.Console import Console
+from Components.SystemInfo import MODEL
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -382,7 +383,7 @@ def configStrings(iface):
 		ret += '\tpre-up wl-config.sh -m ' + encryption.lower() + ' -k "' + psk + '" -s "' + essid + '" \n'
 		ret += '\tpost-down wl-down.sh\n'
 	else:
-		if (driver == 'madwifi' or getBoxType() == "dm8000") and config.plugins.wlan.hiddenessid.value:
+		if (driver == 'madwifi' or MODEL == "dm8000") and config.plugins.wlan.hiddenessid.value:
 			ret += "\tpre-up iwconfig " + iface + " essid \"" + re.escape(config.plugins.wlan.essid.value) + "\" || true\n"
 		ret += "\tpre-up wpa_supplicant -i" + iface + " -c" + getWlanConfigName(iface) + " -B -dd -D" + driver + " || true\n"
 		ret += "\tpre-down wpa_cli -i" + iface + " terminate || true\n"

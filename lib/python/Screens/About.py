@@ -1,5 +1,5 @@
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
-from boxbranding import getBoxType, getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
+from boxbranding import getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
 from PIL import Image
@@ -25,11 +25,12 @@ from Components.Console import Console
 from Components.GUIComponent import GUIComponent
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL
 
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
 from Tools.Geolocation import geolocation
-from Tools.StbHardware import getFPVersion, getBrandModel, getProcInfoTypeTuner
+from Tools.StbHardware import getFPVersion, getProcInfoTypeTuner
+from Tools.HardwareInfo import getBrandModel
 from Tools.LoadPixmap import LoadPixmap
 
 
@@ -87,7 +88,7 @@ class InformationBase(Screen, HelpableScreen):
 			"right": self.displayInformation,
 			"left": self.displayInformation,
 		}, prio=0, description=_("Common Information Actions"))
-		if isfile(resolveFilename(SCOPE_PLUGINS, pathjoin("boxes", "%s.png" % (getBoxType())))):
+		if isfile(resolveFilename(SCOPE_PLUGINS, pathjoin("boxes", "%s.png" % (MODEL)))):
 			self["key_info"] = StaticText(_("INFO"))
 			self["infoActions"] = HelpableActionMap(self, ["InfoActions"], {
 				"info": (self.showReceiverImage, _("Show receiver image(s)"))
@@ -194,7 +195,6 @@ class InformationImage(Screen, HelpableScreen):
 		self["lab4"] = StaticText(_("https://openvision.tech"))
 		self["lab5"] = StaticText(_("Sources are available at:"))
 		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
-		model = getBoxType()
 		boxes = "Extensions/OpenWebif/public/images/boxes/"
 		remotes = "Extensions/OpenWebif/public/images/remotes/"
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions"], {
@@ -206,11 +206,11 @@ class InformationImage(Screen, HelpableScreen):
 			"yellow": (self.nextImage, _("Show next image"))
 		}, prio=0, description=_("Receiver Image Actions"))
 		self.images = (
-			(_("Front"), "%s%s.png", (boxes, model)),
-			(_("Rear"), "%s%s-rear.png", (boxes, model)),
+			(_("Front"), "%s%s.png", (boxes, MODEL)),
+			(_("Rear"), "%s%s-rear.png", (boxes, MODEL)),
 			(_("Remote Control"), "%s%s.png", (remotes, SystemInfo["RCName"])),
-			(_("Flashing"), "%s%s-flashing.png", (boxes, model)),
-			(_("Internal"), "%s%s-internal.png", (boxes, model))
+			(_("Flashing"), "%s%s-flashing.png", (boxes, MODEL)),
+			(_("Internal"), "%s%s-internal.png", (boxes, MODEL))
 		)
 		self.imageIndex = 0
 		self.widgetContext = None
@@ -304,13 +304,9 @@ class About(Screen):
 		self["key_red"] = Button(_("Latest Commits"))
 		self["key_yellow"] = Button(_("Dmesg Info"))
 		self["key_blue"] = Button(_("Memory Info"))
-
 		hddsplit = skin.parameters.get("AboutHddSplit", 0)
-
-		model = getBoxType()
-
 		AboutText = _("Model: ") + getBrandModel() + "\n"
-		if model:
+		if MODEL:
 			AboutText += _("Machine: ") + about.getHardwareTypeString() + "\n"
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
@@ -373,7 +369,7 @@ class About(Screen):
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"]:
-			if model not in ("gbip4k",):
+			if MODEL not in ("gbip4k",):
 				AboutText += _("Type Display: ") + getDisplayType() + "\n"
 			else:
 				AboutText += _("No Display") + "\n"

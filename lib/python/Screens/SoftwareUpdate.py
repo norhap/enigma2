@@ -20,7 +20,7 @@ from Components.Language import language
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
 from Components.SystemInfo import BoxInfo
-from Tools.StbHardware import getBrandModel
+from Tools.HardwareInfo import getBrandModel
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
 

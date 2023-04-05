@@ -1,4 +1,4 @@
-from enigma import eRCInput, getBoxType
+from enigma import eRCInput
 
 from fcntl import ioctl
 from os import O_NONBLOCK, O_RDWR, close, listdir, open, write
@@ -8,7 +8,6 @@ from keyids import KEYIDS, KEYIDNAMES
 from struct import pack
 from Components.config import ConfigSelection, ConfigSelectionNumber, ConfigSubsection, ConfigText, ConfigYesNo, config
 from Components.SystemInfo import SystemInfo, BoxInfo
-from Tools.StbHardware import getBrand
 from Tools.Directories import resolveFilename, fileReadLine, fileReadLines, SCOPE_KEYMAPS, SCOPE_GUISKIN, fileReadXML
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -209,7 +208,7 @@ class RemoteControl:
 	]
 
 	def __init__(self):
-		self.model = SystemInfo["MachineModel"]
+		self.model = BoxInfo.getItem("model")
 		self.rcName = SystemInfo["RCName"]
 		self.rcType = self.readRemoteControlType()
 		remotes = fileReadXML(resolveFilename(SCOPE_GUISKIN, "remotes.xml"), source=MODULE_NAME)

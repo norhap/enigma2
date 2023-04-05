@@ -1,12 +1,10 @@
 import os
-
+from enigma import iRecordableService
 from Components.config import config, ConfigSubList, ConfigSubsection, ConfigSlider
 from Tools.BoundFunction import boundFunction
 
 import NavigationInstance
-from enigma import iRecordableService, getBoxType
-
-model = getBoxType()
+from Components.SystemInfo import MODEL
 
 
 class FanControl:
@@ -67,20 +65,20 @@ class FanControl:
 		for fanid in range(self.getFanCount()):
 			fan = ConfigSubsection()
 			fan.vlt = ConfigSlider(default=15, increment=5, limits=(0, 255))
-			if model == "tm2t":
+			if MODEL == "tm2t":
 				fan.pwm = ConfigSlider(default=150, increment=5, limits=(0, 255))
-			elif model == "tmsingle":
+			elif MODEL == "tmsingle":
 				fan.pwm = ConfigSlider(default=100, increment=5, limits=(0, 255))
-			elif model == "beyonwizu4":
+			elif MODEL == "beyonwizu4":
 				fan.pwm = ConfigSlider(default=0xcc, increment=0x11, limits=(0x22, 0xff))
-			elif model == "beyonwizt4":
+			elif MODEL == "beyonwizt4":
 				fan.pwm = ConfigSlider(default=200, increment=5, limits=(0, 255))
 			else:
 				fan.pwm = ConfigSlider(default=50, increment=5, limits=(0, 255))
 			fan.vlt_standby = ConfigSlider(default=5, increment=5, limits=(0, 255))
-			if model == "beyonwizu4":
+			if MODEL == "beyonwizu4":
 				fan.pwm_standby = ConfigSlider(default=0x44, increment=0x11, limits=(0x22, 0xff))
-			elif model == "beyonwizt4":
+			elif MODEL == "beyonwizt4":
 				fan.pwm_standby = ConfigSlider(default=10, increment=5, limits=(0, 0xff))
 			else:
 				fan.pwm_standby = ConfigSlider(default=0, increment=5, limits=(0, 255))
@@ -109,7 +107,7 @@ class FanControl:
 		return int(open("/proc/stb/fp/fan_vlt", "r").readline().strip(), 16)
 
 	def setVoltage(self, fanid, value):
-		if model == "beyonwizu4":
+		if MODEL == "beyonwizu4":
 			return
 		if value > 255:
 			return

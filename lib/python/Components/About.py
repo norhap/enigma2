@@ -1,35 +1,31 @@
-import os
-import sys
-from sys import modules, version_info
+from os import stat
+from os.path import isfile
+from sys import maxsize, modules, version_info
 
 import time
-import re
-from boxbranding import getBoxType
-from Components.SystemInfo import SystemInfo
-from boxbranding import getImageArch
-import socket
-import fcntl
-import struct
+from re import search
+from socket import socket, AF_INET, inet_ntoa, SOCK_DGRAM
+from fcntl import ioctl
+from struct import pack, unpack
 from subprocess import PIPE, Popen
 from Components.Console import Console
-from Tools.Directories import fileExists
+from Components.SystemInfo import SystemInfo, ARCHITECTURE, MODEL
 from Tools.HardwareInfo import HardwareInfo
-from Tools.StbHardware import getBrand
 
 
 def _ifinfo(sock, addr, ifname):
-	iface = struct.pack('256s', bytes(ifname[:15], encoding="UTF-8"))
-	info = fcntl.ioctl(sock.fileno(), addr, iface)
+	iface = pack('256s', bytes(ifname[:15], encoding="UTF-8"))
+	info = ioctl(sock.fileno(), addr, iface)
 	if addr == 0x8927:
 		return ''.join(['%02x:' % ord(chr(char)) for char in info[18:24]])[:-1].upper()
 	else:
-		return socket.inet_ntoa(info[20:24])
+		return inet_ntoa(info[20:24])
 
 
 def getIfConfig(ifname):
 	ifreq = {'ifname': ifname}
 	infos = {}
-	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	sock = socket(AF_INET, SOCK_DGRAM)
 	# offsets defined in /usr/include/linux/sockios.h on linux 2.6
 	infos['addr'] = 0x8915  # SIOCGIFADDR
 	infos['brdaddr'] = 0x8919  # SIOCGIFBRDADDR
@@ -61,8 +57,8 @@ def getVersionString():
 
 def getImageVersionString():
 	try:
-		if os.path.isfile('/var/lib/opkg/status'):
-			st = os.stat('/var/lib/opkg/status')
+		if isfile('/var/lib/opkg/status'):
+			st = stat('/var/lib/opkg/status')
 		tm = time.localtime(st.st_mtime)
 		if tm.tm_year >= 2011:
 			return time.strftime("%Y-%m-%d %H:%M:%S", tm)
@@ -79,7 +75,7 @@ def getFlashDateString():
 
 def getBuildDateString():
 	try:
-		if os.path.isfile('/etc/version'):
+		if isfile('/etc/version'):
 			version = open("/etc/version", "r").read()
 			return "%s-%s-%s" % (version[:4], version[4:6], version[6:8])
 	except:
@@ -124,7 +120,7 @@ def getGStreamerVersionString():
 def getFFmpegVersionString():
 	try:
 		from glob import glob
-		if not getImageArch() == "aarch64":
+		if not ARCHITECTURE == "aarch64":
 			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		else:
 			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
@@ -170,7 +166,7 @@ def getCPUInfoString():
 			elif line[0] == "processor":
 				cpu_count += 1
 
-		if processor.startswith("ARM") and os.path.isfile("/proc/stb/info/chipset"):
+		if processor.startswith("ARM") and isfile("/proc/stb/info/chipset"):
 			processor = "%s (%s)" % (open("/proc/stb/info/chipset").readline().strip().upper(), processor)
 
 		if not cpu_speed:
@@ -184,24 +180,24 @@ def getCPUInfoString():
 					cpu_speed = "-"
 
 		temperature = None
-		if os.path.isfile('/proc/stb/fp/temp_sensor_avs'):
+		if isfile('/proc/stb/fp/temp_sensor_avs'):
 			temperature = open("/proc/stb/fp/temp_sensor_avs").readline().replace('\n', '')
-		elif os.path.isfile('/proc/stb/power/avs'):
+		elif isfile('/proc/stb/power/avs'):
 			temperature = open("/proc/stb/power/avs").readline().replace('\n', '')
-		elif os.path.isfile('/proc/stb/fp/temp_sensor'):
+		elif isfile('/proc/stb/fp/temp_sensor'):
 			temperature = open("/proc/stb/fp/temp_sensor").readline().replace('\n', '')
-		elif os.path.isfile('/proc/stb/sensors/temp0/value'):
+		elif isfile('/proc/stb/sensors/temp0/value'):
 			temperature = open("/proc/stb/sensors/temp0/value").readline().replace('\n', '')
-		elif os.path.isfile('/proc/stb/sensors/temp/value'):
+		elif isfile('/proc/stb/sensors/temp/value'):
 			temperature = open("/proc/stb/sensors/temp/value").readline().replace('\n', '')
-		elif os.path.isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
+		elif isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
 				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip()) / 1000
 			except:
 				pass
-		elif os.path.isfile("/proc/hisi/msp/pm_cpu"):
+		elif isfile("/proc/hisi/msp/pm_cpu"):
 			try:
-				temperature = re.search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
+				temperature = search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
 			except:
 				pass
 		if temperature:
@@ -252,7 +248,7 @@ def getDriverInstalledDate():
 	try:
 		from glob import glob
 		try:
-			if getBoxType() in ("dm800", "dm8000"):
+			if MODEL in ("dm800", "dm8000"):
 				driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
 				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 			else:
@@ -274,24 +270,20 @@ def getPythonVersionString():
 
 
 def GetIPsFromNetworkInterfaces():
-	import socket
-	import fcntl
-	import struct
-	import array
-	import sys
-	is_64bits = sys.maxsize > 2**32
+	from array import array
+	is_64bits = maxsize > 2**32
 	struct_size = 40 if is_64bits else 32
-	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	s = socket(AF_INET, SOCK_DGRAM)
 	max_possible = 8  # initial value
 	while True:
 		_bytes = max_possible * struct_size
-		names = array.array('B')
+		names = array('B')
 		for i in range(0, _bytes):
 			names.append(0)
-		outbytes = struct.unpack('iL', fcntl.ioctl(
+		outbytes = unpack('iL', ioctl(
 			s.fileno(),
 			0x8912,  # SIOCGIFCONF
-			struct.pack('iL', _bytes, names.buffer_info()[0])
+			pack('iL', _bytes, names.buffer_info()[0])
 		))[0]
 		if outbytes == _bytes:
 			max_possible *= 2
@@ -303,7 +295,7 @@ def GetIPsFromNetworkInterfaces():
 	for i in range(0, outbytes, struct_size):
 		iface_name = str(namestr[i:i + 16]).split('\0', 1)[0]
 		if iface_name != 'lo':
-			iface_addr = socket.inet_ntoa(namestr[i + 20:i + 24])
+			iface_addr = inet_ntoa(namestr[i + 20:i + 24])
 			ifaces.append((iface_name, iface_addr))
 	return ifaces
 
@@ -344,4 +336,4 @@ def getGccVersion():
 # def getModel():
 	# return HardwareInfo().get_machine_name()
 # For modules that do "from About import about"
-about = sys.modules[__name__]
+about = modules[__name__]

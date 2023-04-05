@@ -8,7 +8,7 @@ from tempfile import mkdtemp
 from struct import pack
 from urllib.request import urlopen
 
-from enigma import eEPGCache, getBoxType
+from enigma import eEPGCache
 
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
@@ -20,13 +20,11 @@ from Components.ActionMap import ActionMap
 from Components.Console import Console
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import DownloadWithProgress
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
-
-model = getBoxType()
 
 
 def checkimagefiles(files):
@@ -74,7 +72,7 @@ class SelectImage(Screen):
 	def getImagesList(self):
 
 		def getImages(path, files):
-			for file in [x for x in files if splitext(x)[1] == ".zip" and model in x]:
+			for file in [x for x in files if splitext(x)[1] == ".zip" and MODEL in x]:
 				try:
 					if checkimagefiles([x.split(sep)[-1] for x in ZipFile(file).namelist()]):
 						imagetyp = _("Downloaded Images")
@@ -89,21 +87,21 @@ class SelectImage(Screen):
 		if not self.imagesList:
 			if not self.jsonlist:
 				try:
-					self.jsonlist = dict(load(urlopen('http://downloads.openpli.org/json/%s' % model)))
+					self.jsonlist = dict(load(urlopen('http://downloads.openpli.org/json/%s' % MODEL)))
 					if config.usage.alternative_imagefeed.value:
-						self.jsonlist.update(dict(load(urlopen('%s%s' % (config.usage.alternative_imagefeed.value, model)))))
+						self.jsonlist.update(dict(load(urlopen('%s%s' % (config.usage.alternative_imagefeed.value, MODEL)))))
 				except:
 					pass
 			self.imagesList = dict(self.jsonlist)
 			for mountdir in ["/media", "/media/net", "/media/autofs"]:
 				if isdir(mountdir):
 					for media in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
-						getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and model in x])
+						getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and MODEL in x])
 						for folder in ["images", "downloaded_images", "imagebackups"]:
 							if folder in listdir(media):
 								subfolder = join(media, folder)
 								if isdir(subfolder) and not islink(subfolder) and not ismount(subfolder):
-									getImages(subfolder, [join(subfolder, x) for x in listdir(subfolder) if splitext(x)[1] == ".zip" and model in x])
+									getImages(subfolder, [join(subfolder, x) for x in listdir(subfolder) if splitext(x)[1] == ".zip" and MODEL in x])
 									for dir in [dir for dir in [join(subfolder, dir) for dir in listdir(subfolder)] if isdir(dir) and splitext(dir)[1] == ".unzipped"]:
 										rmtree(dir)
 
@@ -546,9 +544,9 @@ class MultibootSelection(SelectImage):
 						copyfile(startupfile, join(self.tmp_dir, "STARTUP"))
 			else:
 				if slot[1] == 1:
-					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot[0], slot[0] * 2 + 1, model)
+					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot[0], slot[0] * 2 + 1, MODEL)
 				else:
-					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot[0], SystemInfo["canMode12"], slot[0] * 2 + 1, model)
+					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot[0], SystemInfo["canMode12"], slot[0] * 2 + 1, MODEL)
 				with open(join(self.tmp_dir, "STARTUP", "w")) as f:
 					f.write(startupFileContents)
 					f.close()

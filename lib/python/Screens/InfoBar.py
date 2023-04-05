@@ -1,8 +1,8 @@
 from Tools.Profile import profile
 from enigma import eServiceReference
-from boxbranding import getBoxType
-from Tools.StbHardware import getBrand
+from Components.SystemInfo import MODEL
 from Tools.Directories import fileExists, isPluginInstalled
+from Tools.HardwareInfo import getBrand
 # workaround for required config entry dependencies.
 from Screens.MovieSelection import MovieSelection, moveServiceFiles
 
@@ -33,9 +33,6 @@ from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 
 profile("LOAD:HelpableScreen")
 from Screens.HelpMenu import HelpableScreen
-
-brand = getBrand()
-model = getBoxType()
 
 
 class InfoBar(InfoBarBase, InfoBarShowHide,
@@ -121,9 +118,9 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.onShown.remove(self.__checkServiceStarted)
 
 	def showTvButton(self):
-		if brand == "GigaBlue":
+		if getBrand() == "GigaBlue":
 			self.toggleTvRadio()
-		elif model in ("sezam5000hd", "mbtwin", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
+		elif MODEL in ("sezam5000hd", "mbtwin", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.showMovies()
 		else:
 			self.showTv()
@@ -132,7 +129,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.showTvChannelList(True)
 
 	def showRadioButton(self):
-		if brand in ("GigaBlue",) or model in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
+		if getBrand() in ("GigaBlue",) or MODEL in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.toggleTvRadio()
 		else:
 			self.showRadio()

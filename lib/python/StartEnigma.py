@@ -12,8 +12,7 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
-from boxbranding import getBoxType, getImageArch
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, ARCHITECTURE, MODEL
 
 profile("Imports")
 from os.path import isdir, islink, join as pathjoin
@@ -21,9 +20,7 @@ from traceback import print_exc
 from time import time
 from sys import stdout
 
-model = getBoxType()
-
-if getImageArch() == "aarch64":
+if ARCHITECTURE == "aarch64":
 	import usb.core
 	import usb.backend.libusb1
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
@@ -576,7 +573,7 @@ def runScreenTest():
 		if (startSleepTime[0] - nowTime) < 270:  # no time to switch box back on
 			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			if model.startswith == "gb":
+			if MODEL.startswith == "gb":
 				wakeupTime = startSleepTime[0] - 120  # GigaBlue already starts 2 min. before wakeup time
 			else:
 				wakeupTime = startSleepTime[0] - 240
@@ -674,7 +671,7 @@ import Components.Lcd
 Components.Lcd.InitLcd()
 Components.Lcd.IconCheck()
 
-if getBoxType in ("dm7080", "dm820"):
+if MODEL in ("dm7080", "dm820"):
 	check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
 	if check.startswith("on"):
 		f = open("/proc/stb/audio/hdmi_rx_monitor", "w")

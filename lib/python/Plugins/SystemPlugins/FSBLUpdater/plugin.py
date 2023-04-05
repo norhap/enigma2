@@ -1,12 +1,10 @@
 from Components.config import config, ConfigBoolean
 from Screens.ChoiceBox import ChoiceBox
 from Plugins.Plugin import PluginDescriptor
-from enigma import getBoxType
+from Components.SystemInfo import MODEL
 from Plugins.SystemPlugins.FSBLUpdater.FSBLUpdater import FSBLUpdater
 from Tools.Log import Log
 from Tools import Notifications
-
-model = getBoxType()
 
 config.misc.fsbl_update_never = ConfigBoolean(default=False)
 
@@ -19,7 +17,7 @@ class FSBLUpdateHandler(object):
 		if config.misc.fsbl_update_never.value:
 			return
 		self._session = session
-		if FSBLUpdater.isUpdateRequired(model):
+		if FSBLUpdater.isUpdateRequired(MODEL):
 			Log.w("FSBL Update required!")
 			choices = [
 				(_("Yes"), "yes"),
@@ -37,7 +35,7 @@ class FSBLUpdateHandler(object):
 		Log.i(answer)
 		answer = answer[1]
 		if answer == "yes":
-			self._session.open(FSBLUpdater, model)
+			self._session.open(FSBLUpdater, MODEL)
 		elif answer == "never":
 			config.misc.fsbl_update_never.value = True
 			config.misc.fsbl_update_never.save()

@@ -1,7 +1,44 @@
+from os.path import join
 from Tools.Directories import SCOPE_SKINS, resolveFilename
-from boxbranding import getBoxType
-
+from boxbranding import getMachineName, getRCName
 hw_info = None
+
+
+def getBrand():
+	rcStartSwith = resolveFilename(SCOPE_SKINS, join("rc_models", "%s" % (getRCName())))  # based on remote control name start matches brand.
+	if rcStartSwith:
+		if "edision" in rcStartSwith:
+			brand = "Edision"
+		elif "gb" in rcStartSwith:
+			brand = "GigaBlue"
+		elif "octagon" in rcStartSwith:
+			brand = "octagon"
+		elif "ini" in rcStartSwith:
+			brand = "INI"
+		elif "hd" in rcStartSwith:
+			brand = "Mut@nt"
+		elif "ixuss" in rcStartSwith:
+			brand = "Medi@link"
+		elif "vu" in rcStartSwith:
+			brand = "vuplus"
+		elif "dinobot" in rcStartSwith:
+			brand = "dinobot"
+		elif "dmm" in rcStartSwith:  # this check should always be the last.
+			brand = "dreambox"
+		else:
+			brand = _("None")
+		return brand
+	else:
+		return _("None")
+
+
+def getBrandModel():
+	brandModel = _("None")
+	try:
+		brandModel = ("%s %s") % (getBrand(), getMachineName())
+		return brandModel
+	except Exeption as err:
+		return brandModel
 
 
 class HardwareInfo:
@@ -18,32 +55,27 @@ class HardwareInfo:
 		if hw_info:
 			return
 		hw_info = self
-
 		print("[HardwareInfo] Scanning hardware info")
 		# Version
 		try:
 			self.device_version = open("/proc/stb/info/version").read().strip()
 		except:
 			pass
-
 		# Revision
 		try:
 			self.device_revision = open("/proc/stb/info/board_revision").read().strip()
 		except:
 			pass
-
 		# Name ... bit odd, but history prevails
 		try:
 			self.device_name = open("/proc/stb/info/model").read().strip()
 		except:
 			pass
-
 		# Brandname ... bit odd, but history prevails
 		try:
 			self.device_brandname = open("/proc/stb/info/brandname").read().strip()
 		except:
 			pass
-
 		# Model
 		for line in open((resolveFilename(SCOPE_SKINS, 'hw_info/hw_info.cfg')), 'r'):
 			if not line.startswith('#') and not line.isspace():
@@ -54,33 +86,13 @@ class HardwareInfo:
 					infoFname = l
 					prefix = ""
 				try:
-					self.device_model = getBoxType()  # this variable starts machine you can also use proc boxtype
+					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()  # this variable starts machine you can also use proc boxtype
 					break
 				except:
 					pass
-		# if self.device_model.startswith(("atemionemesis")):
-			# self.device_name = "Atemio Nemesis"
-		# elif self.device_model.startswith(("hd51")):
-			# self.device_name = "Mut@nt HD51"
-		# elif self.device_model.startswith(("osmio4kplus")):
-			# self.device_name = "Edision OS mio+ 4K"
-		# elif self.device_model.startswith(("gbip4k")):
-			# self.device_name = "GigaBlue UHD IP 4K"
-		# elif self.device_model.startswith(("gbtrio4k")):
-			# self.device_name = "GigaBlue UHD TRIO 4K"
-		# elif self.device_model.endswith(("sf8008t")):
-			# self.device_name = "OCTAGON SF8008 4K UHD TWIN"
-		# elif self.device_model.endswith(("sf8008s")):
-			# self.device_name = "OCTAGON SF8008 4K UHD SINGLE"
-		# elif self.device_model.endswith(("sf8008")):
-			# self.device_name = "OCTAGON SF8008 4K UHD COMBO"
-		# elif self.device_model.startswith(("sf8008m")):
-			# self.device_name = "OCTAGON SF8008 MINI 4K UHD"
-
 			self.device_model = self.device_model or self.device_name
 			self.device_hw = self.device_model
 			self.machine_name = self.device_model
-
 		if self.device_model.startswith(("et9", "et4", "et5", "et6", "et7")):
 			self.machine_name = "%sx00" % self.device_model[:3]
 		elif self.device_model == "et11000":
@@ -97,7 +109,6 @@ class HardwareInfo:
 			self.device_string = "%s (%s)" % (self.device_model, self.device_version)
 		else:
 			self.device_string = self.device_hw
-
 		# only some early DMM boxes do not have HDMI hardware
 		self.device_hdmi = self.device_model not in ("dm800", "dm8000")
 		print("[HardwareInfo] Detected: " + self.get_device_string())

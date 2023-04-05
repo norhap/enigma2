@@ -1,9 +1,9 @@
-from os.path import isfile, join as pathjoin
+from os.path import isfile
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, gmtime
-from Tools.Directories import fileExists, resolveFilename, SCOPE_SKINS, fileReadLine
-from boxbranding import getMachineName, getBoxType, getRCName
+from Tools.Directories import fileExists, fileReadLine
+from boxbranding import getMachineBuild
 
 INFO_TYPE = "/proc/stb/info/type"
 INFO_SUBTYPE = "/proc/stb/info/subtype"
@@ -30,54 +30,12 @@ def getProcInfoTypeTuner():
 	return typetuner
 
 
-def getBrand():
-	brandName = ""
-	rcStartSwithisBrand = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s" % (getRCName())))  # based on remote control name start matches brand.
-	try:
-		if "edision" in rcStartSwithisBrand:
-			brandName = "Edision"
-		elif "gb" in rcStartSwithisBrand:
-			brandName = "GigaBlue"
-		elif "octagon" in rcStartSwithisBrand:
-			brandName = "octagon"
-		elif "ini" in rcStartSwithisBrand:
-			brandName = "INI"
-		elif "hd" in rcStartSwithisBrand:
-			brandName = "Mut@nt"
-		elif "ixuss" in rcStartSwithisBrand:
-			brandName = "Medi@link"
-		elif "vu" in rcStartSwithisBrand:
-			brandName = "vuplus"
-		elif "dinobot" in rcStartSwithisBrand:
-			brandName = "dinobot"
-		elif "dmm" in rcStartSwithisBrand:  # this check should always be the last.
-			brandName = "dreambox"
-		elif not brandName:
-			print("[brandName] Not Exists!! add this Brand to getBrand")
-	except (IOError, OSError) as err:
-		print("[brandName] exception with error in Brand Name")
-	return brandName
-
-
-def getBrandModel():
-	brandModel = None
-	brand = getBrand()
-	model = getMachineName()
-	machine = getBoxType()
-	try:
-		if machine:
-			brandModel = ("%s %s") % (brand, model)
-	except (IOError, OSError) as err:
-		print("[brandModel] No brandModel!")
-	return brandModel
-
-
 def getFPVersion():
 	ret = None
 	try:
 		if isfile("/sys/firmware/devicetree/base/bolt/tag"):
 			ret = open("/sys/firmware/devicetree/base/bolt/tag", "r").read().rstrip("\0")
-		elif getBoxType() in ('dm7080', 'dm820', 'dm520', 'dm525', 'dm900', 'dm920'):
+		elif getMachineBuild() in ('dm7080', 'dm820', 'dm520', 'dm525', 'dm900', 'dm920'):
 			ret = open("/proc/stb/fp/version", "r").read()
 		else:
 			ret = int(open("/proc/stb/fp/version", "r").read())

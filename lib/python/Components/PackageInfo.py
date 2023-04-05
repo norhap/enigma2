@@ -4,7 +4,8 @@ from Components.Console import Console
 from Components.NimManager import nimmanager
 from Components.Opkg import OpkgComponent
 from Components.config import config, configfile
-from enigma import eConsoleAppContainer, eDVBDB, getBoxType
+from Components.SystemInfo import MODEL
+from enigma import eConsoleAppContainer, eDVBDB
 import os
 
 
@@ -272,7 +273,7 @@ class PackageInfoHandler:
 		if "hardware" in prerequisites:
 			hardware_found = False
 			for hardware in prerequisites["hardware"]:
-				if hardware == getBoxType():
+				if hardware == MODEL:
 					hardware_found = True
 			if not hardware_found:
 				return False

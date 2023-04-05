@@ -1,11 +1,8 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL
+from Tools.HardwareInfo import getBrand
 from os.path import exists
-from boxbranding import getMachineBuild
-from Tools.StbHardware import getBrand
-
-model = getMachineBuild()
 
 
 class AVSwitch:
@@ -72,7 +69,7 @@ class AVSwitch:
 
 def InitAVSwitch():
 	config.av = ConfigSubsection()
-	if model == "vuduo" or getBrand() == "Medi@link":
+	if MODEL == "vuduo" or getBrand() == "Medi@link":
 		config.av.yuvenabled = ConfigBoolean(default=False)
 	else:
 		config.av.yuvenabled = ConfigBoolean(default=True)
@@ -159,9 +156,9 @@ def InitAVSwitch():
 	iAVSwitch = AVSwitch()
 
 	def setColorFormat(configElement):
-		if model == "et6x00":
+		if MODEL == "et6x00":
 			map = {"cvbs": 3, "rgb": 3, "svideo": 2, "yuv": 3}
-		elif model == "gb7356" or model.startswith('et'):
+		elif MODEL == "gb7356" or MODEL.startswith('et'):
 			map = {"cvbs": 0, "rgb": 3, "svideo": 2, "yuv": 3}
 		else:
 			map = {"cvbs": 0, "rgb": 1, "svideo": 2, "yuv": 3}
@@ -185,7 +182,7 @@ def InitAVSwitch():
 	config.av.wss.addNotifier(setWSS)
 
 	iAVSwitch.setInput("ENCODER")  # init on startup
-	if model in ("gb7356", "et5x00", "et6x00", "ixussone", "ixusszero", "axodin", "axase3", "optimussos1", "optimussos2", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "twinboxlcd"):
+	if MODEL in ("gb7356", "et5x00", "et6x00", "ixussone", "ixusszero", "axodin", "axase3", "optimussos1", "optimussos2", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "twinboxlcd"):
 		detected = False
 	else:
 		detected = eAVSwitch.getInstance().haveScartSwitch()
@@ -217,7 +214,7 @@ def InitAVSwitch():
 			]
 			default = "Edid(Auto)"
 		else:
-			if model in ("vuzero4k", "dm900", "dm920"):
+			if MODEL in ("vuzero4k", "dm900", "dm920"):
 				choices = [
 					("Edid(Auto)", _("Auto")),
 					("Hdmi_Rgb", _("RGB")),
@@ -469,7 +466,7 @@ def InitAVSwitch():
 		config.av.downmix_dts.addNotifier(setDTSDownmix)
 
 	if SystemInfo["CanDTSHD"]:
-		if model not in ("dm7080", "dm820"):
+		if MODEL not in ("dm7080", "dm820"):
 			choices = [
 				("downmix", _("Downmix")),
 				("force_dts", _("Convert to DTS")),
@@ -514,7 +511,7 @@ def InitAVSwitch():
 		config.av.transcodeaac = ConfigNothing()
 
 	if SystemInfo["CanAC3PlusTranscode"]:
-		if not SystemInfo["DreamBoxAudio"] and model not in ("gb7252", "gb72604"):
+		if not SystemInfo["DreamBoxAudio"] and MODEL not in ("gb7252", "gb72604"):
 			choices = [
 				("use_hdmi_caps", _("Controlled by HDMI")),
 				("force_ac3", _("Convert to AC3"))
@@ -685,7 +682,7 @@ def InitAVSwitch():
 			except IOError:
 				print("[AVSwitch] couldn't write pep_scaler_sharpness")
 
-		if model == "gb7356":
+		if MODEL == "gb7356":
 			config.av.scaler_sharpness = ConfigSlider(default=5, limits=(0, 26))
 		else:
 			config.av.scaler_sharpness = ConfigSlider(default=13, limits=(0, 26))

@@ -3,7 +3,7 @@ from os import makedirs, remove
 from os.path import exists, isfile, join as pathjoin, normpath
 from time import mktime
 
-from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache, getBoxType
+from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
 
 from skin import parameters
 from Components.About import GetIPsFromNetworkInterfaces
@@ -13,10 +13,8 @@ from Components.Harddisk import harddiskmanager
 from keyids import KEYIDS
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL
 from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
-
-model = getBoxType()
 
 originalAudioTracks = "orj dos ory org esl qaa und mis mul ORY ORJ Audio_ORJ oth"
 visuallyImpairedCommentary = "NAR qad"
@@ -167,7 +165,7 @@ def InitUsageConfig():
 		("user", _("User defined")),
 		("user_hidden", _("User defined hidden"))
 	])
-	if model.startswith("bey"):
+	if MODEL.startswith("bey"):
 		config.usage.show_genre_info = ConfigYesNo(default=True)
 	else:
 		config.usage.show_genre_info = ConfigYesNo(default=False)
@@ -1115,7 +1113,7 @@ def InitUsageConfig():
 		eEPGCache.getInstance().setEpgmaxdays(config.epg.maxdays.getValue())
 	config.epg.maxdays.addNotifier(EpgmaxdaysChanged)
 
-	if model.startswith("bey"):
+	if MODEL.startswith("bey"):
 		config.misc.epgratingcountry = ConfigSelection(default="AUS", choices=[
 			("", _("Auto detect")),
 			("ETSI", _("Generic")),

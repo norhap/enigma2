@@ -1,23 +1,21 @@
 from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesNo
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
 from Tools.CList import CList
 import os
 from enigma import getDesktop
 from Components.About import getChipSetNumber, getChipSetString
 from Tools.Directories import fileExists
+from Tools.HardwareInfo import getBrand
 from Components.Console import Console
 import re
 
 socfamily = getChipSetNumber()
 chipsetstring = getChipSetString()
-brand = SystemInfo["MachineBrand"]
-model = SystemInfo["MachineModel"]
-platform = SystemInfo["Platform"]
 has_scart = SystemInfo["HasScart"]
 has_yuv = SystemInfo["HasYPbPr"]
 has_rca = SystemInfo["HasComposite"]
 has_avjack = SystemInfo["HasJack"]
-has_hdmi = model not in ("dm800", "dm8000")
+has_hdmi = MODEL not in ("dm800", "dm8000")
 
 # The "VideoHardware" is the interface to /proc/stb/video.
 # It generates hotplug events, and gives you the list of
@@ -43,7 +41,7 @@ class VideoHardware:
 	rates["1080p"] = {"50Hz": {50: "1080p50"}, "60Hz": {60: "1080p"}, "multi": {50: "1080p50", 60: "1080p"}, "auto": {50: "1080p50", 60: "1080p", 24: "1080p24"}}
 	rates["2160p30"] = {"25Hz": {50: "2160p25"}, "30Hz": {60: "2160p30"}, "multi": {50: "2160p25", 60: "2160p30"}, "auto": {50: "2160p25", 60: "2160p30", 24: "2160p24"}}
 
-	if platform == "dm4kgen":
+	if PLATFORM == "dm4kgen":
 		rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p60"}, "multi": {50: "2160p50", 60: "2160p60"}, "auto": {50: "2160p50", 60: "2160p60", 24: "2160p24"}}
 	else:
 		rates["2160p"] = {"50Hz": {50: "2160p50"}, "60Hz": {60: "2160p"}, "multi": {50: "2160p50", 60: "2160p"}, "auto": {50: "2160p50", 60: "2160p", 24: "2160p24"}}
@@ -99,7 +97,7 @@ class VideoHardware:
 	if "Scart" in modes and not has_rca and not has_scart and not has_avjack:
 		del modes["Scart"]
 
-	if model == "hd2400":
+	if MODEL == "hd2400":
 		rev = open("/proc/stb/info/board_revision", "r").read()
 		if rev >= "2":
 			del modes["YPbPr"]
@@ -255,7 +253,7 @@ class VideoHardware:
 			except IOError:
 				print("[Videomode] cannot open /proc/stb/video/videomode_24hz")
 
-		if brand == "GigaBlue":
+		if getBrand() == "GigaBlue":
 			try:
 				# use 50Hz mode (if available) for booting
 				open("/etc/videomode", "w").write(mode_50)

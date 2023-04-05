@@ -2,18 +2,15 @@ from os.path import exists
 from sys import maxsize
 from twisted.internet import threads
 
-from boxbranding import getMachineBuild, getDBoxLCD
-from enigma import eActionMap, eDBoxLCD, eTimer, getBoxType
+from boxbranding import getDBoxLCD
+from enigma import eActionMap, eDBoxLCD, eTimer
 
 from Components.config import ConfigNothing, ConfigSelection, ConfigSlider, ConfigSubsection, ConfigYesNo, config
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
 from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 from Screens.Standby import inTryQuitMainloop
 from Tools.Directories import fileReadLine, fileWriteLine
-
-model = getBoxType()
-platform = getMachineBuild()
 
 
 class dummyScreen(Screen):
@@ -287,7 +284,7 @@ class LCD:
 
 def leaveStandby():
 	config.lcd.bright.apply()
-	if model == "vuultimo":
+	if MODEL == "vuultimo":
 		config.lcd.ledbrightness.apply()
 		config.lcd.ledbrightnessdeepstandby.apply()
 
@@ -559,9 +556,9 @@ def InitLcd():
 			("on", _("On"))
 		], default="on")
 		config.lcd.power4x7suspend.addNotifier(setPower4x7Suspend)
-		if platform in ("dm4kgen", "8100s"):
+		if PLATFORM in ("dm4kgen", "8100s"):
 			standby_default = 4
-		elif model in ("spycat4kmini", "osmega"):
+		elif MODEL in ("spycat4kmini", "osmega"):
 			standby_default = 10
 		else:
 			standby_default = 1
@@ -570,11 +567,11 @@ def InitLcd():
 			config.lcd.contrast.addNotifier(setLCDcontrast)
 		else:
 			config.lcd.contrast = ConfigNothing()
-		if model in ("h3", "ebox5000", "ebox5100", "sh1", "spycat", "novacombo", "novatwin"):
+		if MODEL in ("h3", "ebox5000", "ebox5100", "sh1", "spycat", "novacombo", "novatwin"):
 			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.bright = ConfigSlider(default=4, limits=(0, 4))
-		elif model in ("spycat4kmini", "osmega"):
+		elif MODEL in ("spycat4kmini", "osmega"):
 			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
 			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 10))
 			config.lcd.bright = ConfigSlider(default=10, limits=(0, 10))
@@ -626,7 +623,7 @@ def InitLcd():
 			config.lcd.showTv = ConfigYesNo(default=False)
 			config.lcd.showTv.addNotifier(lcdLiveTvChanged)
 
-		if SystemInfo["LCDMiniTV"] and platform not in ("gb7356", "gb7252", "gb72604"):
+		if SystemInfo["LCDMiniTV"] and PLATFORM not in ("gb7356", "gb7252", "gb72604"):
 			config.lcd.minitvmode = ConfigSelection(choices=[
 				("0", _("Normal")),
 				("1", _("MiniTV")),
@@ -739,7 +736,7 @@ def InitLcd():
 			config.lcd.showoutputresolution.addNotifier(setLCDshowoutputresolution)
 		else:
 			config.lcd.showoutputresolution = ConfigNothing()
-		if model == "vuultimo":
+		if MODEL == "vuultimo":
 			config.lcd.ledblinkingtime = ConfigSlider(default=5, increment=1, limits=(0, 15))
 			config.lcd.ledblinkingtime.addNotifier(setLEDblinkingtime)
 			config.lcd.ledbrightnessdeepstandby = ConfigSlider(default=1, increment=1, limits=(0, 15))

@@ -9,15 +9,15 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL
 from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediaFilesInUse
-from Tools.StbHardware import getBrand, getBrandModel
+from Tools.HardwareInfo import getBrand, getBrandModel
 from Tools.Notifications import AddNotification
 from time import time, localtime
 from GlobalActions import globalActionMap
-from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService, getBoxType
+from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService
 
 inStandby = None
 infoBarInstance = None
@@ -177,7 +177,7 @@ class StandbyScreen(Screen):
 			self.avswitch.setInput("SCART")
 		else:
 			self.avswitch.setInput("AUX")
-		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or getBoxType() in ("sfx6008", "sfx6018"):
+		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
 			output = "/proc/stb/hdmi/output"
 			if os.path.isfile(output):
 				with open(output, "w") as hdmi:
@@ -241,7 +241,7 @@ class StandbyScreen(Screen):
 
 		if os.path.exists("/usr/script/StandbyLeave.sh"):
 			Console().ePopen("/usr/script/StandbyLeave.sh")
-		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or getBoxType() in ("sfx6008", "sfx6018"):
+		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
 			output = "/proc/stb/hdmi/output"
 			if os.path.isfile(output):
 				with open(output, "w") as hdmi:
@@ -441,7 +441,7 @@ class TryQuitMainloop(MessageBox):
 					with open(mode, "w") as lcd:
 						lcd.write("0")
 						lcd.close()
-			if getBoxType() == "vusolo4k":
+			if MODEL == "vusolo4k":
 				oled_brightness = "/proc/stb/fp/oled_brightness"
 				if os.path.isfile(oled_brightness):
 					print("[Standby] Brightness OLED off")

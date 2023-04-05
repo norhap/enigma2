@@ -12,7 +12,7 @@ from timer import Timer, TimerEntry
 from ServiceReference import ServiceReference, isPlayableForCur
 from Components.config import config
 from Components.Harddisk import findMountPoint
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL
 from Components.TimerSanityCheck import TimerSanityCheck
 import Components.ParentalControl
 from Components.UsageConfig import defaultMoviePath
@@ -137,7 +137,7 @@ SID_symbol_states = {
 	"mbtwin": ("/proc/stb/lcd/symbol_circle", 4)
 }
 
-SID_code_states = SID_symbol_states.setdefault(SystemInfo["MachineModel"], (None, 0))
+SID_code_states = SID_symbol_states.setdefault(MODEL, (None, 0))
 
 n_recordings = 0  # Must be zero when we start running.
 # Also use in Tools/Trashcan.py

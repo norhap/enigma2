@@ -2,7 +2,7 @@ from os import unlink
 import requests
 from twisted.internet import reactor
 from urllib.request import urlopen, Request
-from Tools.StbHardware import getBrandModel
+from Tools.HardwareInfo import getBrandModel
 from enigma import eTimer
 
 

@@ -16,7 +16,7 @@ import Screens.Standby
 from Tools.Directories import SCOPE_CONFIG, fileReadXML, resolveFilename, isPluginInstalled
 from Tools.Notifications import AddNotification, AddNotificationWithUniqueIDCallback, AddPopup
 from Tools.XMLTools import stringToXML
-from Tools.StbHardware import getBrandModel
+from Tools.HardwareInfo import getBrandModel
 
 MODULE_NAME = __name__.split(".")[-1]
 

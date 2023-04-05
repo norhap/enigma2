@@ -1,20 +1,15 @@
 # -*- coding: utf-8 -*-
 from twisted.internet import threads
 from Components.config import config
-from enigma import eTimer, iPlayableService, iServiceInformation, getBoxType
+from enigma import eTimer, iPlayableService, iServiceInformation
 import NavigationInstance
 from Tools.Directories import fileExists
+from Tools.HardwareInfo import getBrand
 from Components.ParentalControl import parentalControl
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
 from time import time
-from boxbranding import getMachineBuild
-from Tools.StbHardware import getBrand
 from time import sleep
-
-brand = getBrand()
-model = getBoxType()
-platform = getMachineBuild()
 
 POLLTIME = 5  # seconds
 
@@ -62,7 +57,7 @@ class SymbolsCheckPoller:
 
 	def __evUpdatedInfo(self):
 		self.service = self.session.nav.getCurrentService()
-		if platform == "u41":
+		if PLATFORM == "u41":
 			self.Resolution()
 			self.Audio()
 			self.Crypted()
@@ -96,7 +91,7 @@ class SymbolsCheckPoller:
 				open("/proc/stb/lcd/symbol_pvr2", "w").write("1")
 			else:
 				open("/proc/stb/lcd/symbol_pvr2", "w").write("0")
-		elif model in ("osninopro", "9910lx", "9911lx", "osnino", "osninoplus", "9920lx") or brand in ("wetek", "ixuss") and fileExists("/proc/stb/lcd/powerled"):
+		elif MODEL in ("osninopro", "9910lx", "9911lx", "osnino", "osninoplus", "9920lx") or getBrand() in ("wetek", "ixuss") and fileExists("/proc/stb/lcd/powerled"):
 			recordings = len(NavigationInstance.instance.getRecordings())
 			self.blink = not self.blink
 			print("[VfdSymbols] Write to /proc/stb/lcd/powerled")
@@ -109,7 +104,7 @@ class SymbolsCheckPoller:
 					self.led = "0"
 			elif self.led == "1":
 				open("/proc/stb/lcd/powerled", "w").write("0")
-		elif model in ("mbmicrov2", "mbmicro", "e4hd", "e4hdhybrid") and fileExists("/proc/stb/lcd/powerled"):
+		elif MODEL in ("mbmicrov2", "mbmicro", "e4hd", "e4hdhybrid") and fileExists("/proc/stb/lcd/powerled"):
 			recordings = len(NavigationInstance.instance.getRecordings())
 			self.blink = not self.blink
 			print("[VfdSymbols] Write to /proc/stb/lcd/powerled")
@@ -122,7 +117,7 @@ class SymbolsCheckPoller:
 					self.led = "0"
 			elif self.led == "1":
 				open("/proc/stb/lcd/powerled", "w").write("1")
-		elif model == "dm7020hd" and fileExists("/proc/stb/fp/led_set"):
+		elif MODEL == "dm7020hd" and fileExists("/proc/stb/fp/led_set"):
 			recordings = len(NavigationInstance.instance.getRecordings())
 			self.blink = not self.blink
 			print("[VfdSymbols] Write to /proc/stb/fp/led_set")
@@ -135,7 +130,7 @@ class SymbolsCheckPoller:
 					self.led = "0"
 			else:
 				open("/proc/stb/fp/led_set", "w").write("0xffffffff")
-		elif platform in ("dags7362", "dags73625") or model in ("tmtwin4k", "revo4k", "force3uhd") and fileExists("/proc/stb/lcd/symbol_rec"):
+		elif PLATFORM in ("dags7362", "dags73625") or MODEL in ("tmtwin4k", "revo4k", "force3uhd") and fileExists("/proc/stb/lcd/symbol_rec"):
 			recordings = len(NavigationInstance.instance.getRecordings())
 			self.blink = not self.blink
 			print("[VfdSymbols] Write to /proc/stb/lcd/symbol_rec")
