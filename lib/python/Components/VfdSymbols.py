@@ -4,10 +4,9 @@ from Components.config import config
 from enigma import eTimer, iPlayableService, iServiceInformation
 import NavigationInstance
 from Tools.Directories import fileExists
-from Tools.HardwareInfo import getBrand
 from Components.ParentalControl import parentalControl
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
+from Components.SystemInfo import SystemInfo, BRAND, MODEL, PLATFORM
 from time import time
 from time import sleep
 
@@ -91,7 +90,7 @@ class SymbolsCheckPoller:
 				open("/proc/stb/lcd/symbol_pvr2", "w").write("1")
 			else:
 				open("/proc/stb/lcd/symbol_pvr2", "w").write("0")
-		elif MODEL in ("osninopro", "9910lx", "9911lx", "osnino", "osninoplus", "9920lx") or getBrand() in ("wetek", "ixuss") and fileExists("/proc/stb/lcd/powerled"):
+		elif MODEL in ("osninopro", "9910lx", "9911lx", "osnino", "osninoplus", "9920lx") or BRAND in ("wetek", "ixuss") and fileExists("/proc/stb/lcd/powerled"):
 			recordings = len(NavigationInstance.instance.getRecordings())
 			self.blink = not self.blink
 			print("[VfdSymbols] Write to /proc/stb/lcd/powerled")

@@ -1,8 +1,7 @@
 from Tools.Profile import profile
 from enigma import eServiceReference
-from Components.SystemInfo import MODEL
+from Components.SystemInfo import BRAND, MODEL
 from Tools.Directories import fileExists, isPluginInstalled
-from Tools.HardwareInfo import getBrand
 # workaround for required config entry dependencies.
 from Screens.MovieSelection import MovieSelection, moveServiceFiles
 
@@ -118,7 +117,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.onShown.remove(self.__checkServiceStarted)
 
 	def showTvButton(self):
-		if getBrand() == "GigaBlue":
+		if BRAND == "GigaBlue":
 			self.toggleTvRadio()
 		elif MODEL in ("sezam5000hd", "mbtwin", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.showMovies()
@@ -129,7 +128,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.showTvChannelList(True)
 
 	def showRadioButton(self):
-		if getBrand() in ("GigaBlue",) or MODEL in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
+		if BRAND in ("GigaBlue",) or MODEL in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.toggleTvRadio()
 		else:
 			self.showRadio()

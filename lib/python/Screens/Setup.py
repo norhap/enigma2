@@ -7,8 +7,7 @@ from Components.config import ConfigBoolean, ConfigNothing, ConfigSelection, con
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Components.SystemInfo import SystemInfo, MODEL
-from Tools.HardwareInfo import getBrand
+from Components.SystemInfo import SystemInfo, BRAND, MODEL
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -158,10 +157,10 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			self.graphicSwitchChanged = True
 
 	def formatItemText(self, itemText):
-		return itemText.replace("%s %s", "%s %s" % (getBrand(), MODEL))
+		return itemText.replace("%s %s", "%s %s" % (BRAND, MODEL))
 
 	def formatItemDescription(self, item, itemDescription):
-		itemDescription = itemDescription.replace("%s %s", "%s %s" % (getBrand(), MODEL))
+		itemDescription = itemDescription.replace("%s %s", "%s %s" % (BRAND, MODEL))
 		if config.usage.setupShowDefault.value:
 			spacer = "\n" if config.usage.setupShowDefault.value == "newline" else "  "
 			itemDefault = item.toDisplayString(item.default)

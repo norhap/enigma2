@@ -1,16 +1,16 @@
+from enigma import eTimer
 from os import unlink
 import requests
 from twisted.internet import reactor
 from urllib.request import urlopen, Request
-from Tools.HardwareInfo import getBrandModel
-from enigma import eTimer
+from Components.SystemInfo import BRAND, DISPLAYMODEL
 
 
 class DownloadWithProgress:
 	def __init__(self, url, outputFile, *args, **kwargs):
 		self.url = url
 		self.outputFile = outputFile
-		self.userAgent = "%s Enigma2 HbbTV/1.1.1 (+PVR+RTSP+DL;OpenVision;;;)" % getBrandModel()
+		self.userAgent = "%s %s Enigma2 HbbTV/1.1.1 (+PVR+RTSP+DL;OpenVision;;;)" % (BRAND, DISPLAYMODEL)
 		# self.agent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"
 		self.totalSize = 0
 		self.progress = 0

@@ -1,11 +1,10 @@
 from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesNo
-from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
+from Components.SystemInfo import SystemInfo, BRAND, MODEL, PLATFORM
 from Tools.CList import CList
 import os
 from enigma import getDesktop
 from Components.About import getChipSetNumber, getChipSetString
 from Tools.Directories import fileExists
-from Tools.HardwareInfo import getBrand
 from Components.Console import Console
 import re
 
@@ -253,7 +252,7 @@ class VideoHardware:
 			except IOError:
 				print("[Videomode] cannot open /proc/stb/video/videomode_24hz")
 
-		if getBrand() == "GigaBlue":
+		if BRAND == "GigaBlue":
 			try:
 				# use 50Hz mode (if available) for booting
 				open("/etc/videomode", "w").write(mode_50)

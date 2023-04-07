@@ -19,12 +19,9 @@ from Components.Opkg import OpkgComponent
 from Components.Language import language
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
-from Components.SystemInfo import BoxInfo
-from Tools.HardwareInfo import getBrandModel
+from Components.SystemInfo import BoxInfo, BRAND, DISPLAYMODEL
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
-
-brandModel = getBrandModel()
 
 
 class UpdatePlugin(Screen, ProtectedScreen):
@@ -135,7 +132,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			if abort:
 				self.session.openWithCallback(self.close, MessageBox, message, type=MessageBox.TYPE_MESSAGE, picon=picon)
 			else:
-				message += "\n\n" + _("Do you want to update your %s?") % brandModel
+				message += "\n\n" + _("Do you want to update your %s %s?") % (BRAND, DISPLAYMODEL)
 				self.session.openWithCallback(self.startActualUpdate, MessageBox, message, picon=picon)
 
 		# no message, continue with the update
@@ -214,9 +211,9 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					latestImageTimestamp = self.getLatestImageTimestamp()
 					if latestImageTimestamp:
 						message = _("Do you want to update to %s") % latestImageTimestamp + "\n"
-						message += _("Your %s?") % brandModel + "\n"
+						message += _("Your %s %s?") % (BRAND, DISPLAYMODEL) + "\n"
 					else:
-						message = _("Do you want to update your %s?") % brandModel + "\n"
+						message = _("Do you want to update your %s %s?") % (BRAND, DISPLAYMODEL) + "\n"
 					message += "(" + (ngettext("%s updated package available", "%s updated packages available", self.total_packages) % self.total_packages) + ")"
 					if self.total_packages > 150:
 						choices = [(_("Update and ask to reboot"), "hot")]
@@ -253,7 +250,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 			else:
 				self.activityTimer.stop()
 				self.activityslider.value = 0
-				error = _("Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your %s.") % brandModel
+				error = _("Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your %s %s.") % (BRAND, DISPLAYMODEL)
 				if self.packages == 0:
 					error = _("No updates available. Please try again later.")
 				if self.updating:
@@ -299,7 +296,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def exit(self):
 		if not self.opkg.isRunning():
 			if self.packages != 0 and self.error == 0 and self.channellist_only == 0:
-				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Update completed. Do you want to reboot your %s?") % brandModel)
+				self.session.openWithCallback(self.exitAnswer, MessageBox, _("Update completed. Do you want to reboot your %s %s?") % (BRAND, DISPLAYMODEL))
 			else:
 				self.close()
 		else:

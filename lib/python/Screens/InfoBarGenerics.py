@@ -11,7 +11,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock, ACTIONKEY_RIGHT
-from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
+from Components.SystemInfo import SystemInfo, BRAND, MODEL, PLATFORM
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
@@ -35,7 +35,6 @@ from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
 from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileHas, fileReadLine, fileWriteLine, getRecordingFilename, moveFiles, isPluginInstalled
-from Tools.HardwareInfo import getBrand
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
@@ -1312,7 +1311,7 @@ class InfoBarEPG:
 		plugin.__call__(session=self.session, servicelist=self.servicelist)
 
 	def showEventInfoPlugins(self):
-		if getBrand() not in ("xtrend", "odin", "INI", "dags", "GigaBlue", "xp"):
+		if BRAND not in ("xtrend", "odin", "INI", "dags", "GigaBlue", "xp"):
 			pluginlist = self.getEPGPluginList()
 			if pluginlist:
 				self.session.openWithCallback(self.EventInfoPluginChosen, OrderedChoiceBox, text=_("Please choose an extension..."), list=pluginlist, order="eventInfoOrder", skinName="EPGExtensionsList", windowTitle=_("Events Info Menu"))

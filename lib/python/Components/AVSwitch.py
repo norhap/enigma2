@@ -1,7 +1,6 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
-from Components.SystemInfo import SystemInfo, MODEL
-from Tools.HardwareInfo import getBrand
+from Components.SystemInfo import SystemInfo, BRAND, MODEL
 from os.path import exists
 
 
@@ -69,7 +68,7 @@ class AVSwitch:
 
 def InitAVSwitch():
 	config.av = ConfigSubsection()
-	if MODEL == "vuduo" or getBrand() == "Medi@link":
+	if MODEL == "vuduo" or BRAND == "Medi@link":
 		config.av.yuvenabled = ConfigBoolean(default=False)
 	else:
 		config.av.yuvenabled = ConfigBoolean(default=True)

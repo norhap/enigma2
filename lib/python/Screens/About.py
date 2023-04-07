@@ -25,12 +25,11 @@ from Components.Console import Console
 from Components.GUIComponent import GUIComponent
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
-from Components.SystemInfo import SystemInfo, MODEL
+from Components.SystemInfo import SystemInfo, BRAND, MODEL, DISPLAYMODEL
 
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
 from Tools.Geolocation import geolocation
 from Tools.StbHardware import getFPVersion, getProcInfoTypeTuner
-from Tools.HardwareInfo import getBrandModel
 from Tools.LoadPixmap import LoadPixmap
 
 
@@ -243,11 +242,10 @@ class InformationImage(Screen, HelpableScreen):
 		self.layoutFinished()
 
 	def layoutFinished(self):
-		brandModel = getBrandModel()
 		if self.widgetContext is None:
 			self.widgetContext = tuple(self["image"].getPosition() + self["image"].getSize())
 			print(self.widgetContext)
-		self["name"].setText("%s  -  %s" % (self.images[self.imageIndex][0], brandModel))
+		self["name"].setText("%s  -  %s %s" % (self.images[self.imageIndex][0], BRAND, DISPLAYMODEL))
 		imagePath = resolveFilename(SCOPE_PLUGINS, self.images[self.imageIndex][1] % self.images[self.imageIndex][2])
 		image = LoadPixmap(imagePath)
 		if image:
@@ -305,9 +303,9 @@ class About(Screen):
 		self["key_yellow"] = Button(_("Dmesg Info"))
 		self["key_blue"] = Button(_("Memory Info"))
 		hddsplit = skin.parameters.get("AboutHddSplit", 0)
-		AboutText = _("Model: ") + getBrandModel() + "\n"
+		AboutText = _("Model: ") + BRAND + " " + DISPLAYMODEL + "\n"
 		if MODEL:
-			AboutText += _("Machine: ") + about.getHardwareTypeString() + "\n"
+			AboutText += _("Hardware Type: ") + about.getHardwareTypeString() + "\n"
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
@@ -498,8 +496,7 @@ class BenchmarkInformation(InformationBase):
 
 	def displayInformation(self):
 		info = []
-		brandModel = getBrandModel()
-		info.append(formatLine("H", "%s %s" % (_("Benchmark for"), brandModel)))
+		info.append(formatLine("H", "%s %s %s" % (_("Benchmark for"), BRAND, DISPLAYMODEL)))
 		info.append("")
 		for index, cpu in enumerate(self.cpuTypes):
 			info.append(formatLine("P1", _("CPU / Core %d type") % index, cpu))

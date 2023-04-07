@@ -4,16 +4,16 @@ from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.MenuList import MenuList
 from Components.Sources.StaticText import StaticText
+from Components.SystemInfo import BRAND
 from Components.config import config, ConfigNumber, ConfigSelection, ConfigSelectionNumber, getConfigListEntry
 from Plugins.Plugin import PluginDescriptor
 from enigma import setAnimation_current, setAnimation_speed
-from Tools.HardwareInfo import getBrand
 
-if getBrand() != 'GigaBlue':
+if BRAND != 'GigaBlue':
 	from enigma import setAnimation_current_listbox
 
 # default = disabled
-if getBrand() == 'GigaBlue':
+if BRAND == 'GigaBlue':
 	g_default = {
 		"current": 0,
 		"speed": 20,
@@ -33,7 +33,7 @@ g_orig_doClose = None
 
 config.misc.window_animation_default = ConfigNumber(default=g_default["current"])
 config.misc.window_animation_speed = ConfigSelectionNumber(15, g_max_speed, 1, default=g_default["speed"])
-if getBrand() != 'GigaBlue':
+if BRAND != 'GigaBlue':
 	config.misc.listbox_animation_default = ConfigSelection(default=g_default["listbox"], choices=[("0", _("Disable")), ("1", _("Enable")), ("2", _("Same behavior as current animation"))])
 
 
@@ -80,7 +80,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 		config.misc.window_animation_speed.save()
 		setAnimation_speed(int(config.misc.window_animation_speed.value))
 		config.misc.listbox_animation_default.save()
-		if getBrand() != 'GigaBlue':
+		if BRAND != 'GigaBlue':
 			setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
 		self.close()
 
@@ -92,7 +92,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 	def keyYellow(self):
 		global g_default
 		config.misc.window_animation_speed.value = g_default["speed"]
-		if getBrand() != 'GigaBlue':
+		if BRAND != 'GigaBlue':
 			config.misc.listbox_animation_default.value = g_default["listbox"]
 		self.makeConfigList()
 
@@ -107,7 +107,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 
 		entrySpeed = getConfigListEntry(_("Animation Speed"), config.misc.window_animation_speed)
 		self.entrylist.append(entrySpeed)
-		if getBrand() != 'GigaBlue':
+		if BRAND != 'GigaBlue':
 			entryMoveSelection = getConfigListEntry(_("Enable Focus Animation"), config.misc.listbox_animation_default)
 			self.entrylist.append(entryMoveSelection)
 		self["config"].list = self.entrylist
@@ -115,7 +115,7 @@ class AnimationSetupConfig(ConfigListScreen, Screen):
 
 
 class AnimationSetupScreen(Screen):
-	if getBrand() == 'GigaBlue':
+	if BRAND == 'GigaBlue':
 		animationSetupItems = [
 			{"idx": 0, "name": _("Disable Animations")},
 			{"idx": 1, "name": _("Simple fade")},
@@ -206,14 +206,14 @@ class AnimationSetupScreen(Screen):
 			config.misc.window_animation_default.value = key
 			config.misc.window_animation_default.save()
 			setAnimation_current(key)
-			if getBrand() != 'GigaBlue':
+			if BRAND != 'GigaBlue':
 				setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
 		self.close()
 
 	def keyclose(self):
 		setAnimation_current(config.misc.window_animation_default.value)
 		setAnimation_speed(int(config.misc.window_animation_speed.value))
-		if getBrand() != 'GigaBlue':
+		if BRAND != 'GigaBlue':
 			setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
 		self.close()
 
@@ -274,7 +274,7 @@ def startAnimationSetup(menuid):
 def sessionAnimationSetup(session, reason, **kwargs):
 	setAnimation_current(config.misc.window_animation_default.value)
 	setAnimation_speed(int(config.misc.window_animation_speed.value))
-	if getBrand() != 'GigaBlue':
+	if BRAND != 'GigaBlue':
 		setAnimation_current_listbox(int(config.misc.listbox_animation_default.value))
 
 	global g_orig_show, g_orig_doClose

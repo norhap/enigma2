@@ -9,11 +9,10 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
-from Components.SystemInfo import SystemInfo, MODEL
+from Components.SystemInfo import SystemInfo, MODEL, BRAND, DISPLAYMODEL
 from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediaFilesInUse
-from Tools.HardwareInfo import getBrand, getBrandModel
 from Tools.Notifications import AddNotification
 from time import time, localtime
 from GlobalActions import globalActionMap
@@ -177,7 +176,7 @@ class StandbyScreen(Screen):
 			self.avswitch.setInput("SCART")
 		else:
 			self.avswitch.setInput("AUX")
-		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
+		if BRAND in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
 			output = "/proc/stb/hdmi/output"
 			if os.path.isfile(output):
 				with open(output, "w") as hdmi:
@@ -241,7 +240,7 @@ class StandbyScreen(Screen):
 
 		if os.path.exists("/usr/script/StandbyLeave.sh"):
 			Console().ePopen("/usr/script/StandbyLeave.sh")
-		if getBrand() in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
+		if BRAND in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
 			output = "/proc/stb/hdmi/output"
 			if os.path.isfile(output):
 				with open(output, "w") as hdmi:
@@ -334,17 +333,17 @@ class QuitMainloopScreen(Screen):
 		Screen.__init__(self, session)
 		from Components.Label import Label
 		text = {
-			QUIT_SHUTDOWN: _("Your %s is shutting down") % getBrandModel(),
-			QUIT_REBOOT: _("Your %s is rebooting") % getBrandModel(),
-			QUIT_RESTART: _("The user interface of your %s is restarting") % getBrandModel(),
-			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s reboots\nThis may take a few minutes") % getBrandModel(),
-			QUIT_DEBUG_RESTART: _("The user interface of your %s is restarting in debug mode") % getBrandModel(),
-			QUIT_REBOOT_ANDROID: _("Your %s is rebooting into android mode") % getBrandModel(),
-			QUIT_REBOOT_RECOVERY: _("Your %s is rebooting into recovery mode") % getBrandModel(),
-			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s reboots\nThis may take a few minutes") % getBrandModel(),
-			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s restarts") % getBrandModel(),
-			QUIT_UPGRADE_FPANEL: _("Front panel your %s will be updated\nThis may take a few minutes") % getBrandModel(),
-			QUIT_WOL: _("Your %s goes to WOL") % getBrandModel()
+			QUIT_SHUTDOWN: _("Your %s %s is shutting down") % (BRAND, DISPLAYMODEL),
+			QUIT_REBOOT: _("Your %s %s is rebooting") % (BRAND, DISPLAYMODEL),
+			QUIT_RESTART: _("The user interface of your %s %s is restarting") % (BRAND, DISPLAYMODEL),
+			QUIT_UPGRADE_FP: _("Your frontprocessor will be updated\nPlease wait until your %s %s reboots\nThis may take a few minutes") % (BRAND, DISPLAYMODEL),
+			QUIT_DEBUG_RESTART: _("The user interface of your %s %s is restarting in debug mode") % (BRAND, DISPLAYMODEL),
+			QUIT_REBOOT_ANDROID: _("Your %s %s is rebooting into android mode") % (BRAND, DISPLAYMODEL),
+			QUIT_REBOOT_RECOVERY: _("Your %s %s is rebooting into recovery mode") % (BRAND, DISPLAYMODEL),
+			QUIT_UPGRADE_PROGRAM: _("Unattended update in progress\nPlease wait until your %s %s reboots\nThis may take a few minutes") % (BRAND, DISPLAYMODEL),
+			QUIT_MANUFACTURER_RESET: _("Manufacturer reset in progress\nPlease wait until your %s %s restarts") % (BRAND, DISPLAYMODEL),
+			QUIT_UPGRADE_FPANEL: _("Front panel your %s %s will be updated\nThis may take a few minutes") % (BRAND, DISPLAYMODEL),
+			QUIT_WOL: _("Your %s %s goes to WOL") % (BRAND, DISPLAYMODEL)
 		}.get(retvalue)
 		self["text"] = Label(text)
 

@@ -1,44 +1,7 @@
 from os.path import join
 from Tools.Directories import SCOPE_SKINS, resolveFilename
-from boxbranding import getMachineName, getRCName
+
 hw_info = None
-
-
-def getBrand():
-	rcStartSwith = resolveFilename(SCOPE_SKINS, join("rc_models", "%s" % (getRCName())))  # based on remote control name start matches brand.
-	if rcStartSwith:
-		if "edision" in rcStartSwith:
-			brand = "Edision"
-		elif "gb" in rcStartSwith:
-			brand = "GigaBlue"
-		elif "octagon" in rcStartSwith:
-			brand = "octagon"
-		elif "ini" in rcStartSwith:
-			brand = "INI"
-		elif "hd" in rcStartSwith:
-			brand = "Mut@nt"
-		elif "ixuss" in rcStartSwith:
-			brand = "Medi@link"
-		elif "vu" in rcStartSwith:
-			brand = "vuplus"
-		elif "dinobot" in rcStartSwith:
-			brand = "dinobot"
-		elif "dmm" in rcStartSwith:  # this check should always be the last.
-			brand = "dreambox"
-		else:
-			brand = _("None")
-		return brand
-	else:
-		return _("None")
-
-
-def getBrandModel():
-	brandModel = _("None")
-	try:
-		brandModel = ("%s %s") % (getBrand(), getMachineName())
-		return brandModel
-	except Exeption as err:
-		return brandModel
 
 
 class HardwareInfo:
@@ -129,11 +92,12 @@ class HardwareInfo:
 		return hw_info.device_revision
 
 	def get_device_string(self):
+		from boxbranding import getBoxType
 		if hw_info.device_revision:
-			return "%s (%s-%s)" % (hw_info.device_model, hw_info.device_revision, hw_info.device_version)
+			return "%s (%s-%s)" % (getBoxType(), hw_info.device_revision, hw_info.device_version)
 		elif hw_info.device_version:
-			return "%s (%s)" % (hw_info.device_model, hw_info.device_version)
-		return hw_info.device_model
+			return "%s (%s)" % (getBoxType(), hw_info.device_version)
+		return getBoxType()
 
 	def get_machine_name(self):
 		return hw_info.device_name

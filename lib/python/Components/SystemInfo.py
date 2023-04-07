@@ -2,12 +2,11 @@
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel
+from boxbranding import getDisplayType, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel, getMachineName
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform
 
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
 from Tools.StbHardware import getWakeOnLANType
-from Tools.HardwareInfo import getBrand
 
 SystemInfo = {}
 SystemInfo["HasRootSubdir"] = False
@@ -114,13 +113,13 @@ class BoxInformation:
 BoxInfo = BoxInformation()
 
 MODEL = BoxInfo.getItem("model")
-BRAND = getBrand()
+DISPLAYMODEL = getMachineName()
+BRAND = BoxInfo.getItem("displaybrand")
 PLATFORM = getPlatform()
 ARCHITECTURE = BoxInfo.getItem("architecture")
 SOC_FAMILY = BoxInfo.getItem("socfamily")
 DISPLAYTYPE = BoxInfo.getItem("displaytype")
 MTDROOTFS = BoxInfo.getItem("mtdrootfs")
-DISPLAYMODEL = BoxInfo.getItem("displaymodel")
 DISPLAYBRAND = BoxInfo.getItem("displaybrand")
 MACHINEBUILD = BoxInfo.getItem("machinebuild")
 
