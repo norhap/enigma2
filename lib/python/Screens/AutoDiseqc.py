@@ -23,6 +23,26 @@ class AutoDiseqc(ConfigListScreen, Screen):
 	]
 
 	sat_frequencies = [
+		# Astra 19.2E ZDF
+		(
+			11954,
+			27500,
+			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
+			eDVBFrontendParametersSatellite.FEC_3_4,
+			eDVBFrontendParametersSatellite.Inversion_Off,
+			192,
+			eDVBFrontendParametersSatellite.System_DVB_S,
+			eDVBFrontendParametersSatellite.Modulation_Auto,
+			eDVBFrontendParametersSatellite.RollOff_auto,
+			eDVBFrontendParametersSatellite.Pilot_Unknown,
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
+			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
+			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
+			1079,
+			1,
+			"Astra 1 19.2e"),
 		# Thor 0.8W Sky News
 		(
 			12418,
@@ -106,27 +126,6 @@ class AutoDiseqc(ConfigListScreen, Screen):
 			24100,
 			366,
 			"Eutelsat 16A 16.0e"),
-
-		# Astra 19.2E ZDF
-		(
-			11954,
-			27500,
-			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
-			eDVBFrontendParametersSatellite.FEC_3_4,
-			eDVBFrontendParametersSatellite.Inversion_Off,
-			192,
-			eDVBFrontendParametersSatellite.System_DVB_S,
-			eDVBFrontendParametersSatellite.Modulation_Auto,
-			eDVBFrontendParametersSatellite.RollOff_auto,
-			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
-			eDVBFrontendParametersSatellite.PLS_Gold,
-			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
-			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
-			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			1079,
-			1,
-			"Astra 1 19.2e"),
 
 		# Astra 23.5E Astra SES
 		(
