@@ -54,7 +54,7 @@ class SelectImage(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
-		self["description"] = StaticText()
+		self["description"] = Label()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -100,7 +100,7 @@ class SelectImage(Screen):
 			if not self.jsonlist:
 				url = "http://downloads.openpli.org/json/%s" % MODEL
 				try:
-					self.jsonlist = dict(load(urlopen(url)))
+					self.jsonlist = dict(load(urlopen(url, timeout=15)))
 				except:
 					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % url)
 				alternative_imagefeed = config.usage.alternative_imagefeed.value
@@ -108,7 +108,7 @@ class SelectImage(Screen):
 					if "http" in alternative_imagefeed:
 						url = "%s%s" % (config.usage.alternative_imagefeed.value, MODEL)
 						try:
-							self.jsonlist.update(dict(load(urlopen(url))))
+							self.jsonlist.update(dict(load(urlopen(url, timeout=15))))
 						except:
 							print("[FlashImage] getImagesList Error: Unable to load json data from alternative URL '%s'!" % url)
 					elif alternative_imagefeed == "all":
@@ -116,7 +116,7 @@ class SelectImage(Screen):
 								url = "%s%s" % (link[1], MODEL)
 								try:
 									req = Request(url, None, {"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"})
-									self.jsonlist.update(dict(load(urlopen(req))))
+									self.jsonlist.update(dict(load(urlopen(req, timeout=10))))
 								except:
 									print("[FlashImage] getImagesList Error: Unable to load json data from %s URL '%s'!" % (link[0], url))
 
@@ -165,7 +165,12 @@ class SelectImage(Screen):
 				self.expanded.append(currentSelected[0][0])
 			self.getImagesList()
 		elif currentSelected[0][1] != "Waiter":
-			self.session.openWithCallback(self.getImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1])
+			self.session.openWithCallback(self.reloadImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1])
+
+	def reloadImagesList(self):
+		self.imagesList = {}
+		self.jsonlist = {}
+		self.getImagesList()
 
 	def keyDelete(self):
 		currentSelected = self["list"].l.getCurrentSelection()[0][1]
@@ -455,6 +460,7 @@ class MultibootSelection(SelectImage):
 		self["description"] = StaticText(_("Use the cursor keys to select an installed image then reboot."))
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
+		self["description"] = Label()
 		self["list"] = ChoiceList([])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -520,6 +526,7 @@ class MultibootSelection(SelectImage):
 			recovery_text = _("Boot to Recovery menu")
 			if SystemInfo["hasKexec"]:
 				recovery_text = _("Boot with Recovery image - slot0 %s") % (fileContains("/proc/cmdline", "rootsubdir=linuxrootfs0") and _("(current)") or "")
+				self["description"].setText(_("Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"))
 			list.append(ChoiceEntryComponent('', (recovery_text, "Recovery")))
 		if isfile(join(self.tmp_dir, "STARTUP_ANDROID")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
@@ -610,7 +617,7 @@ class KexecInit(Screen):
 		self.kexec_files = exists("/usr/bin/kernel_auto.bin") and exists("/usr/bin/STARTUP.cpio.gz")
 		self["description"] = Label(_("Press Green key to enable MultiBoot!\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."))
 		self["key_red"] = StaticText(self.kexec_files and _("Remove forever") or "")
-		self["key_green"] = StaticText(_("Init Vu+ MultiBoot"))
+		self["key_green"] = StaticText(_("Init"))
 		self["actions"] = ActionMap(["TeletextActions"],
 		{
 			"green": self.RootInit,

@@ -933,6 +933,9 @@ msgstr "Al final"
 msgid "Attention, this is repeated timer!\n"
 msgstr "Atención, temporizador repetido!\n"
 
+msgid "Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
+msgstr "Atención: carga forzada de la imagen de recuperación\nCree un archivo de STARTUP_RECOVERY vacío en la raíz de su unidad HDD/USB y mantenga presionado el botón de encendido durante más de 12 segundos para reiniciar el receptor!"
+
 msgid ""
 "Attention, this is repeated timer!\n"
 "What do you want to do?"
@@ -2197,9 +2200,6 @@ msgstr "Descargar plugins"
 
 msgid "Install plugins"
 msgstr "Instalar plugins"
-
-msgid "Init Vu+ MultiBoot"
-msgstr "Inicializar MultiBoot Vu+"
 
 msgid "Downloading"
 msgstr "Descargando"
