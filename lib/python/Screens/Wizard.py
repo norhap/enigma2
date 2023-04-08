@@ -443,7 +443,7 @@ class Wizard(Screen):
 		return False
 
 	def getTranslation(self, text):
-		return _(text)  # .replace("%s %s", "%s %s" % (BRAND, MODEL))
+		return _(text).replace("%s %s", "%s %s" % (BRAND, MODEL))
 
 	def updateText(self, firstset=False):
 		text = self.getTranslation(self.wizard[self.currStep]["text"])

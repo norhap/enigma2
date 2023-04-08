@@ -11331,10 +11331,10 @@ msgid "Manual configuration"
 msgstr "Configuración manual"
 
 msgid ""
-"Please configure or verify your Nameservers by filling out the required values.\n"
+"Please configure or verify your DNS server by filling out the required values.\n"
 "When you are ready press OK to continue."
 msgstr ""
-"Configure o verifique sus servidores de nombres completando los valores requeridos.\n"
+"Configure o verifique su servidor DNS completando los valores requeridos.\n"
 "Cuando esté listo, pulse OK para continuar."
 
 msgid ""
