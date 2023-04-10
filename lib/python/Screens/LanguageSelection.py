@@ -172,6 +172,20 @@ class LanguageSelection(Screen):
 			config.osd.language.setValue(lang)
 			config.osd.language.save()
 
+		if config.misc.firstrun.value:  # define area and city without network only in first run
+			from Tools.Directories import fileReadXML
+			from Components.Timezones import TIMEZONE_FILE
+			#  config.timezone.area.value = AREA.get(config.osd.language.value) work with dictionary in timezones AREA = "es_ES": "Europe"
+			#  config.timezone.val.value = CITY.get(config.osd.language.value) work with dictionary in timezones CITY = "es_ES": "Madrid"
+			fileDom = fileReadXML(TIMEZONE_FILE)
+			for zone in fileDom.findall("zone"):
+				if lang in zone.attrib.get("localeCode"):
+					area = zone.attrib.get("zone").split("/")[0]
+					config.timezone.area.value = area
+					if area in zone.attrib.get("zone"):
+						city = zone.attrib.get("zone").split("/")[1]
+						config.timezone.val.value = city
+			config.ntp.timesync.value = "dvb"
 		self.setTitle(_cached("T2"))
 		self["summarylangname"].setText(_cached("T2"))
 		self["summarylangsel"].setText(self["languages"].getCurrent()[1])
