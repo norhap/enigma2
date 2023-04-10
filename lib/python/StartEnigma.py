@@ -10,7 +10,7 @@ enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
-from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
+from Tools.Directories import fileUpdateLine, InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
 from Components.SystemInfo import SystemInfo, ARCHITECTURE, MODEL
 
@@ -672,11 +672,9 @@ Components.Lcd.InitLcd()
 Components.Lcd.IconCheck()
 
 if MODEL in ("dm7080", "dm820"):
-	check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
-	if check.startswith("on"):
-		f = open("/proc/stb/audio/hdmi_rx_monitor", "w")
-		f.write("off")
-		f.close()
+	MODULE_NAME = __name__.split(".")[-1]
+	fileUpdateLine("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", conditionValue="on", replacementValue="off", source=MODULE_NAME)
+	fileUpdateLine("/proc/stb/audio/hdmi_rx_monitor", conditionValue="on", replacementValue="off", source=MODULE_NAME)
 
 profile("RFMod")
 import Components.RFmod
