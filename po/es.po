@@ -2076,8 +2076,8 @@ msgstr ""
 "Esto puede durar mucho tiempo!"
 
 #, python-format
-msgid "Do you really want to delete %s?"
-msgstr "¿Realmente quiere eliminar %s?"
+msgid "Do you want to delete %s?"
+msgstr "¿Quiere eliminar %s?"
 
 #, python-format
 msgid ""
@@ -5319,8 +5319,8 @@ msgstr "Clasificación indefinida"
 msgid "Really close without saving settings?"
 msgstr "Cerrar sin guardar configuración?"
 
-msgid "Really delete done timers?"
-msgstr "Borrar los temporizadores hechos?"
+msgid "Delete finished timers?"
+msgstr "¿Eliminar temporizadores finalizados?"
 
 msgid "Really exit the subservices quickzap?"
 msgstr "Salir del quickzap de subcanales?"
@@ -14239,8 +14239,8 @@ msgstr "solo en menu"
 msgid "in plugins only"
 msgstr "solo en complementos"
 
-msgid "Do you really want to stop current event and delete timer %s?"
-msgstr "¿Realmente quieres detener el evento actual y eliminar el temporizador %s?"
+msgid "Do you want to stop %s and delete timer?"
+msgstr "¿Quieres detener %s y eliminar temporizador?"
 
 msgid "Hotswitchable"
 msgstr "Conmutable"

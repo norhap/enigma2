@@ -272,7 +272,7 @@ class TimerEditList(Screen, ProtectedScreen):
 			self.session.openWithCallback(self.finishedEdit, TimerEntry, cur)
 
 	def cleanupQuestion(self):
-		self.session.openWithCallback(self.cleanupTimer, MessageBox, _("Really delete done timers?"))
+		self.session.openWithCallback(self.cleanupTimer, MessageBox, _("Delete finished timers?"))
 
 	def cleanupTimer(self, delete):
 		if delete:
@@ -282,12 +282,12 @@ class TimerEditList(Screen, ProtectedScreen):
 	def stopTimerQuestion(self):
 		cur = self["timerlist"].getCurrent()
 		if cur:
-			self.session.openWithCallback(self.removeTimer, MessageBox, _("Do you really want to stop current event and delete timer %s?") % (cur.name))
+			self.session.openWithCallback(self.removeTimer, MessageBox, _("Do you want to stop %s and delete timer?") % (cur.name))
 
 	def removeTimerQuestion(self):
 		cur = self["timerlist"].getCurrent()
 		if cur:
-			self.session.openWithCallback(self.removeTimer, MessageBox, _("Do you really want to delete %s?") % (cur.name))
+			self.session.openWithCallback(self.removeTimer, MessageBox, _("Do you want to delete %s?") % (cur.name))
 
 	def removeTimer(self, result=True):
 		if result:
