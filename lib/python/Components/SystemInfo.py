@@ -9,9 +9,6 @@ from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, fileCheck, fileExists, 
 from Tools.StbHardware import getWakeOnLANType
 
 SystemInfo = {}
-SystemInfo["HasRootSubdir"] = False
-
-from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
 
 class BoxInformation:
@@ -122,6 +119,14 @@ DISPLAYTYPE = BoxInfo.getItem("displaytype")
 MTDROOTFS = BoxInfo.getItem("mtdrootfs")
 DISPLAYBRAND = BoxInfo.getItem("displaybrand")
 MACHINEBUILD = BoxInfo.getItem("machinebuild")
+
+
+SystemInfo["HasUsbhdd"] = {}
+SystemInfo["HasRootSubdir"] = False
+SystemInfo["HasMultibootMTD"] = False
+SystemInfo["HasKexecUSB"] = False
+SystemInfo["RecoveryMode"] = False
+from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
 
 
 def getBoxDisplayName():  # This function returns a tuple like ("BRANDNAME", "BOXNAME")

@@ -11,13 +11,15 @@ from urllib.request import urlopen, Request
 from enigma import eEPGCache
 
 from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
-from Screens.Standby import getReasons, TryQuitMainloop
+from Screens.Standby import getReasons, QUIT_RESTART, TryQuitMainloop
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
-from Components.ActionMap import ActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Console import Console
+from Components.Harddisk import Harddisk
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Components.SystemInfo import SystemInfo, MODEL
@@ -54,7 +56,7 @@ class SelectImage(Screen):
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
-		self["description"] = Label()
+		self["description"] = StaticText()
 		self["list"] = ChoiceList(list=[ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
@@ -448,29 +450,29 @@ class FlashImage(Screen):
 			return 0
 
 
-class MultibootSelection(SelectImage):
+class MultibootSelection(SelectImage, HelpableScreen):
 	def __init__(self, session, *args):
 		SelectImage.__init__(self, session)
+		HelpableScreen.__init__(self)
 		self.skinName = ["MultibootSelection", "SelectImage"]
 		self.expanded = []
 		self.tmp_dir = None
 		self.setTitle(_("Multiboot image selector"))
-		self["key_red"] = StaticText(_("Cancel"))
+		usbIn = SystemInfo["HasUsbhdd"].keys() and SystemInfo["hasKexec"]
+		self["key_red"] = StaticText(_("Cancel") if not usbIn else _("Add USB slots"))
 		self["key_green"] = StaticText(_("Reboot"))
-		self["description"] = StaticText(_("Use the cursor keys to select an installed image then reboot."))
+		self["description"] = StaticText(_("Use the cursor keys to select an installed image and press OK or GREEN button for reboot."))
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
-		self["description"] = Label()
 		self["list"] = ChoiceList([])
-
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
+		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
 			"ok": self.keyOk,
-			"cancel": self.cancel,
-			"red": self.cancel,
-			"green": self.keyOk,
-			"yellow": self.deleteImage,
-			"blue": self.order,
+			"cancel": (self.cancel, _("Cancel the image selection and exit")),
+			"red": (self.cancel, _("Cancel")) if not usbIn else (self.KexecMount, _("Add USB slots (require receiver Vu+ 4k)")),
+			"green": (self.keyOk, _("Select image and reboot")),
+			"yellow": (self.deleteImage, _("Select image and delete")),
+			"blue": (self.order, _("Orde image modes and slots (requires receiver with feature)")),
 			"up": self.keyUp,
 			"down": self.keyDown,
 			"left": self.keyLeft,
@@ -523,11 +525,7 @@ class MultibootSelection(SelectImage):
 			list += list12
 			list = sorted(list) if config.usage.multiboot_order.value else list
 		if isfile(join(self.tmp_dir, "STARTUP_RECOVERY")):
-			recovery_text = _("Boot to Recovery menu")
-			if SystemInfo["hasKexec"]:
-				recovery_text = _("Boot with Recovery image - slot0 %s") % (fileContains("/proc/cmdline", "rootsubdir=linuxrootfs0") and _("(current)") or "")
-				self["description"].setText(_("Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"))
-			list.append(ChoiceEntryComponent('', (recovery_text, "Recovery")))
+			list.append(ChoiceEntryComponent('', ((_("Boot to Recovery menu")), "Recovery")))
 		if isfile(join(self.tmp_dir, "STARTUP_ANDROID")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
 		if not list:
@@ -599,69 +597,73 @@ class MultibootSelection(SelectImage):
 		else:
 			self["key_yellow"].setText("")
 
-
-class KexecInit(Screen):
-
-	modelMtdRootKernel = MODEL in ("vuduo4k", "vuduo4kse") and ["mmcblk0p9", "mmcblk0p6"] or MODEL in ("vusolo4k", "vuultimo4k", "vuuno4k", "vuuno4kse") and ["mmcblk0p4", "mmcblk0p1"] or MODEL == "vuzero4k" and ["mmcblk0p7", "mmcblk0p4"] or ["", ""]
-
-	STARTUP = "kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0]                 # /STARTUP
-	STARTUP_RECOVERY = "kernel=/zImage root=/dev/%s rootsubdir=linuxrootfs0" % modelMtdRootKernel[0]        # /STARTUP_RECOVERY
-	STARTUP_1 = "kernel=/linuxrootfs1/zImage root=/dev/%s rootsubdir=linuxrootfs1" % modelMtdRootKernel[0]  # /STARTUP_1
-	STARTUP_2 = "kernel=/linuxrootfs2/zImage root=/dev/%s rootsubdir=linuxrootfs2" % modelMtdRootKernel[0]  # /STARTUP_2
-	STARTUP_3 = "kernel=/linuxrootfs3/zImage root=/dev/%s rootsubdir=linuxrootfs3" % modelMtdRootKernel[0]  # /STARTUP_3
-
-	def __init__(self, session, *args):
-		Screen.__init__(self, session)
-		self.skinName = ["KexecInit", "Setup"]
-		self.setTitle(_("Kexec MultiBoot Manager"))
-		self.kexec_files = exists("/usr/bin/kernel_auto.bin") and exists("/usr/bin/STARTUP.cpio.gz")
-		self["description"] = Label(_("Press Green key to enable MultiBoot!\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."))
-		self["key_red"] = StaticText(self.kexec_files and _("Remove forever") or "")
-		self["key_green"] = StaticText(_("Init"))
-		self["actions"] = ActionMap(["TeletextActions"],
-		{
-			"green": self.RootInit,
-			"ok": self.close,
-			"exit": self.close,
-			"red": self.removeFiles,
-		}, -1)
-
-	def RootInit(self):
-		self["actions"].setEnabled(False)  # This function takes time so disable the ActionMap to avoid responding to multiple button presses
-		if self.kexec_files:
-			self.setTitle(_("Kexec MultiBoot Initialisation - will reboot after 10 seconds."))
-			self["description"].setText(_("Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."))
-			with open("/STARTUP", 'w') as f:
-				f.write(self.STARTUP)
-			with open("/STARTUP_RECOVERY", 'w') as f:
-				f.write(self.STARTUP_RECOVERY)
-			with open("/STARTUP_1", 'w') as f:
-				f.write(self.STARTUP_1)
-			with open("/STARTUP_2", 'w') as f:
-				f.write(self.STARTUP_2)
-			with open("/STARTUP_3", 'w') as f:
-				f.write(self.STARTUP_3)
-			cmdlist = []
-			cmdlist.append("dd if=/dev/%s of=/zImage" % self.modelMtdRootKernel[1])  # backup old kernel
-			cmdlist.append("dd if=/usr/bin/kernel_auto.bin of=/dev/%s" % self.modelMtdRootKernel[1])  # create new kernel
-			cmdlist.append("mv /usr/bin/STARTUP.cpio.gz /STARTUP.cpio.gz")  # copy userroot routine
-			Console().eBatch(cmdlist, self.RootInitEnd, debug=True)
+	def KexecMount(self):
+		hdd = []
+		usblist = list(SystemInfo["HasUsbhdd"].keys())
+		print("[MultibootSelection] usblist=", usblist)
+		if not SystemInfo["VuUUIDSlot"]:
+			with open("/proc/mounts", "r") as fd:
+				xlines = fd.readlines()
+				for hddkey in range(len(usblist)):
+					for xline in xlines:
+						print("[MultibootSelection] xline, usblist", xline, "   ", usblist[hddkey])
+						if xline.find(usblist[hddkey]) != -1 and "ext4" in xline:
+							index = xline.find(usblist[hddkey])
+							print("[MultibootSelection] key, line ", usblist[hddkey], "   ", xline)
+							hdd.append(xline[index:index + 4])
+						else:
+							continue
+			print("[MultibootSelection] hdd available ", hdd)
+			if not hdd:
+					self.session.open(MessageBox, _("FlashImage: Add USB STARTUP slots - No EXT4 USB attached."), MessageBox.TYPE_INFO, timeout=10)
+					self.cancel()
+			else:
+				usb = hdd[0][0:3]
+				free = Harddisk(usb).Totalfree()
+				print("[MultibootSelection] USB free space", free)
+				if free < 1024:
+					des = str(round((float(free)), 2)) + _("MB")
+					print("[MultibootSelection][add USB STARTUP slot] limited free space", des)
+					self.session.open(MessageBox, _("FlashImage: Add USB STARTUP slots - USB (%s) only has %s free. At least 1024MB is required.") % (usb, des), MessageBox.TYPE_INFO, timeout=30)
+					self.cancel()
+					return
+				Console().ePopen("/sbin/blkid | grep " + "/dev/" + hdd[0], self.KexecMountRet)
 		else:
-			self.session.open(MessageBox, _("Unable to complete - Kexec Multiboot files missing!"), MessageBox.TYPE_INFO, timeout=10)
+			hiKey = sorted(SystemInfo["canMultiBoot"].keys(), reverse=True)[0]
+			self.session.openWithCallback(self.addSTARTUPs, MessageBox, _("Add 4 more Vu+ Multiboot USB slots after slot %s ?") % hiKey, MessageBox.TYPE_YESNO, timeout=30)
+
+	def addSTARTUPs(self, answer):
+		hiKey = sorted(SystemInfo["canMultiBoot"].keys(), reverse=True)[0]
+		hiUUIDkey = SystemInfo["VuUUIDSlot"][1]
+		print("[MultibootSelection]1 answer, hiKey,  hiUUIDkey", answer, "   ", hiKey, "   ", hiUUIDkey)
+		if answer is False:
 			self.close()
+		else:
+			boxmodel = MODEL[2:]
+			for usbslot in range(hiKey + 1, hiKey + 5):
+				STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, SystemInfo["VuUUIDSlot"][0], boxmodel, usbslot) # /STARTUP_<n>
+				if boxmodel in ("duo4k"):
+					STARTUP_usbslot += " rootwait=40"
+				elif boxmodel in ("duo4kse"):
+					STARTUP_usbslot += " rootwait=35"
+				with open("/%s/STARTUP_%d" % (self.tmp_dir, usbslot), 'w') as f:
+					f.write(STARTUP_usbslot)
+				print("[MultibootSelection] STARTUP_%d --> %s, self.tmp_dir: %s" % (usbslot, STARTUP_usbslot, self.tmp_dir))
+			self.session.open(TryQuitMainloop, QUIT_RESTART)
 
-	def RootInitEnd(self, *args, **kwargs):
-		from Screens.Standby import TryQuitMainloop
-		for usbslot in range(1, 4):
-			if exists("/media/hdd/%s/linuxrootfs%s" % (self.MODEL, usbslot)):
-				Console().ePopen("cp -R /media/hdd/%s/linuxrootfs%s . /" % (self.MODEL, usbslot))
-		self.session.open(TryQuitMainloop, 2)
+	def KexecMountRet(self, result=None, retval=None, extra_args=None):
+		self.device_uuid = "UUID=" + result.split("UUID=")[1].split(" ")[0].replace('"', '')
+		usb = result.split(":")[0]
+		boxmodel = MODEL[2:]
+		for usbslot in range(4, 8):
+			STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, self.device_uuid, boxmodel, usbslot) # /STARTUP_<n>
+			if boxmodel in ("duo4k"):
+				STARTUP_usbslot += " rootwait=40"
+			elif boxmodel in ("duo4kse"):
+				STARTUP_usbslot += " rootwait=35"
+			print("[MultibootSelection] STARTUP_%d --> %s, self.tmp_dir: %s" % (usbslot, STARTUP_usbslot, self.tmp_dir))
+			with open("/%s/STARTUP_%d" % (self.tmp_dir, usbslot), 'w') as f:
+				f.write(STARTUP_usbslot)
 
-	def removeFiles(self):
-		if self.kexec_files:
-			self.session.openWithCallback(self.removeFilesAnswer, MessageBox, _("Really permanently delete MultiBoot files?\n%s") % "(/usr/bin/kernel_auto.bin /usr/bin/STARTUP.cpio.gz)", simple=True)
-
-	def removeFilesAnswer(self, answer=None):
-		if answer:
-			Console().ePopen("rm -rf /usr/bin/kernel_auto.bin /usr/bin/STARTUP.cpio.gz")
-			self.close()
+		SystemInfo["HasKexecUSB"] = True
+		self.session.open(TryQuitMainloop, QUIT_RESTART)

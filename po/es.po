@@ -47,6 +47,9 @@ msgstr ""
 "\n"
 "Pulsa OK en su mando para continuar."
 
+msgid "Press GREEN button to enable MultiBoot\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."
+msgstr "Pulse el botón VERDE para habilitar MultiBoot\n\nSe reiniciará en 10 segundos,\na menos que tenga slots eMMC para restaurar.\nLa restauración de las slots eMMC puede llevar de 1 a 5 minutos por slot."
+
 msgid "Press LEFT RIGHT OK or MENU to change path."
 msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para cambiar de ruta."
 
@@ -638,6 +641,9 @@ msgstr "Añadir Marcador"
 msgid "Add directory to playlist"
 msgstr "Agregar directorio a la lista de reproducción"
 
+msgid "Add USB slots"
+msgstr "Añadir slots USB"
+
 msgid "Add file to playlist"
 msgstr "Agregar fichero a la lista de reproducción"
 
@@ -932,9 +938,6 @@ msgstr "Al final"
 
 msgid "Attention, this is repeated timer!\n"
 msgstr "Atención, temporizador repetido!\n"
-
-msgid "Attention - forced loading recovery image!\nCreate an empty STARTUP_RECOVERY file at the root of your HDD/USB drive and hold the Power button for more than 12 seconds for reboot receiver!"
-msgstr "Atención: carga forzada de la imagen de recuperación\nCree un archivo de STARTUP_RECOVERY vacío en la raíz de su unidad HDD/USB y mantenga presionado el botón de encendido durante más de 12 segundos para reiniciar el receptor!"
 
 msgid ""
 "Attention, this is repeated timer!\n"
@@ -2201,6 +2204,9 @@ msgstr "Descargar plugins"
 msgid "Install plugins"
 msgstr "Instalar plugins"
 
+msgid "Init Vu+ MultiBoot"
+msgstr "Inicializar Vu+ MultiBoot"
+
 msgid "Downloading"
 msgstr "Descargando"
 
@@ -2309,8 +2315,8 @@ msgstr "Activar búsqueda automática rápida para %s"
 msgid "Enable fallback remote receiver"
 msgstr "Habilitar el receptor reserva para respaldo"
 
-msgid "Enable MultiBoot Kexec"
-msgstr "Habilitar MultiBoot Kexec"
+msgid "Enable Vu+ MultiBoot"
+msgstr "Habilitar Vu+ MultiBoot"
 
 msgid "Enable parental protection"
 msgstr "Activar protección parental"
@@ -3718,12 +3724,6 @@ msgstr "Kazakistán"
 msgid "Keep service"
 msgstr "Mantener canal"
 
-msgid "Kexec MultiBoot Manager"
-msgstr "Administrador Arranque Múltiple Kexec"
-
-msgid "Kexec MultiBoot Initialisation in progress!\n\nWill reboot after restoring any eMMC slots.\nThis can take from 1 -> 5 minutes per slot."
-msgstr "Inicialización MultiBoot Kexec en progreso!\n\nSe reiniciará después de restaurar cualquier slot eMMC.\nEsto puede tomar de 1 a 5 minutos por slot."
-
 msgid "Kenya"
 msgstr "Kenia"
 
@@ -4656,6 +4656,9 @@ msgstr "Ordenar por modos"
 msgid "Order by slots"
 msgstr "Ordenar por slots"
 
+msgid "Orde image modes and slots (requires receiver with feature)"
+msgstr "Ordena modos de imagen y slots (requiere receptor con esta función)"
+
 msgid "Overall progress:"
 msgstr "Progreso total:"
 
@@ -5161,6 +5164,9 @@ msgid ""
 msgstr ""
 "Añadir autotemporizador\n"
 "Ahora (Pulse largo)"
+
+msgid "Add USB slots (require receiver Vu+ 4k)"
+msgstr "Agregar slots USB (requiere receptor Vu+ 4k)"
 
 msgid ""
 "AutoTimer is not installed\n"
@@ -8049,6 +8055,18 @@ msgstr "Archivo VOB"
 msgid "VU+"
 msgstr "VU+"
 
+msgid "Vu+ MultiBoot Initialisation - will reboot after 10 seconds."
+msgstr "Inicialización de Vu+ MultiBoot: se reiniciará después de 10 segundos."
+
+msgid "Vu+ MultiBoot Initialisation in progress\n\nWill reboot after restoring any eMMC slots\nThis can take from 1 -> 5 minutes per slot."
+msgstr "Inicialización de Vu+ MultiBoot en progreso\n\nSe reiniciará después de restaurar cualquier slot eMMC\nEsto puede tomar de 1 a 5 minutos por slot."
+
+msgid "VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."
+msgstr "VuplusKexec: Crear entorno Vu+ Multiboot - no se puede completar, faltan archivos Vu+ Multiboot."
+
+msgid "Vu+ MultiBoot Manager"
+msgstr "Administrador Vu+ MultiBoot"
+
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
@@ -9840,6 +9858,12 @@ msgstr "Chequear sistema de archivos"
 msgid "Flash image"
 msgstr "Flashear imagen"
 
+msgid "FlashImage: Add USB STARTUP slots - No EXT4 USB attached."
+msgstr "FlashImage: Añadir slots de INICIO USB - Sin USB EXT4 conectado."
+
+msgid "FlashImage: Add USB STARTUP slots - USB (%s) only has %s free. At least 1024MB is required."
+msgstr "FlashImage: Agregar slots de INICIO USB - USB (%s) solo tiene %s libres. Se requieren al menos 1024 MB."
+
 msgid "GUI Skin"
 msgstr "Cambiar Skin"
 
@@ -11145,9 +11169,6 @@ msgstr "Código PIN necesario"
 msgid "Parental control services editor"
 msgstr "Editor de canales de control parental"
 
-msgid "Press Green key to enable MultiBoot!\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."
-msgstr "Pulse botón verde para habilitar MultiBoot\n\nSe reiniciará en 10 segundos,\na menos que tenga slots eMMC para restaurar.\nLa restauración de los slots eMMC puede llevar de 1 -> 5 minutos por slot."
-
 msgid "PiP setup"
 msgstr "Configuración PiP"
 
@@ -11528,6 +11549,9 @@ msgstr " Eventos\n"
 
 msgid "Add Channel"
 msgstr "Agregar canal"
+
+msgid "Add 4 more Vu+ Multiboot USB slots after slot %s ?"
+msgstr "¿Añadir 4 slots USB Vu+ Multiboot más después del slot %s?"
 
 msgid "Add Provider"
 msgstr "Agregar proveedor"
@@ -12001,6 +12025,12 @@ msgstr "Tipo de búsqueda para filtro"
 
 msgid "Select a timer to search"
 msgstr "Seleccione un temporizador para buscar"
+
+msgid "Select image and reboot"
+msgstr "Seleccionar imagen y reiniciar"
+
+msgid "Select image and delete"
+msgstr "Seleccionar imagen y eliminar"
 
 msgid "Select text to search for"
 msgstr "Seleccione texto para buscar"
@@ -12615,9 +12645,6 @@ msgstr ""
 "Recargar la lista de temporizadores.\n"
 "%d Temporizador Automático(s) deshabilitado porque el conflicto.\n"
 "%d doble Temporizdor Automático(s) reserva.\n"
-
-msgid "Remove forever"
-msgstr "Eliminar para siempre"
 
 msgid "Remove not existing events"
 msgstr "Eliminar eventos no existentes"
@@ -14903,14 +14930,11 @@ msgstr "Arrancar en imagen Android"
 msgid "Boot to Recovery menu"
 msgstr "Arrancar en menu Recuperación"
 
-msgid "Boot with Recovery image - slot0 %s"
-msgstr "Arrancar con imagen de recuperación - slot0 %s"
-
 msgid "Recovery"
 msgstr "Recuperación"
 
 msgid "Retrieving image slots - Please wait..."
-msgstr "Recuperando ranuras de imagen - Espere por favor..."
+msgstr "Recuperando slots de imagen - Espere por favor..."
 
 msgid "Flashing image successful"
 msgstr "Flash imagen con éxito"
@@ -15284,6 +15308,9 @@ msgstr "Seleccione siempre OK"
 
 msgid "Base transparency for teletext, more options available within teletext screen."
 msgstr "Transparencia base para teletexto, más opciones disponibles dentro de la pantalla de teletexto."
+
+msgid "Cancel the image selection and exit"
+msgstr "Cancelar la selección de imagen y salir"
 
 msgid "Cancel the selection"
 msgstr "Cancelar la selección"
@@ -16445,8 +16472,8 @@ msgstr "Pulse 'Aceptar' para eliminar el elemento o 'CH +/-' para alternar a la 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Pulse 'Aceptar' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
 
-msgid "Use the cursor keys to select an installed image then reboot."
-msgstr "Use las teclas del cursor para seleccionar una imagen instalada y luego reinicie."
+msgid "Use the cursor keys to select an installed image and press OK or GREEN button for reboot."
+msgstr "Use las teclas del cursor para seleccionar una imagen instalada y pulse OK o botón VERDE para reiniciar."
 
 msgid "Client Mode"
 msgstr "Modo Cliente"
