@@ -129,8 +129,8 @@ class Language:
 		return True
 
 	def activateLanguage(self, index):
-		from Tools import Notifications
 		from Screens.MessageBox import MessageBox
+		from Tools import Notifications
 		if not self.activateLanguage_TRY(index):
 			print("[Language] - retry with ", "en_US")
 			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using English", MessageBox.TYPE_INFO, timeout=3)
@@ -171,7 +171,6 @@ class Language:
 
 	def delLanguage(self, delLang=None):
 		from Components.config import config
-		from shutil import rmtree
 
 		if delLang:
 			lang = config.osd.language.value
