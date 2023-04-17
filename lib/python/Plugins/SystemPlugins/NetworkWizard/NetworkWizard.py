@@ -9,7 +9,8 @@ from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
 from Components.Language import language
 from Tools.Geolocation import geolocation
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Components.Timezones import TIMEZONE_FILE
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileReadXML
 from enigma import eTimer, eConsoleAppContainer
 
 
@@ -84,8 +85,14 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		if geolocationData.get("status", None) == "success":
 			Time.useGeolocation(self)  # set time zone auto.
 			Time.setSntpTime(self)  # set SNTP in crontab.
-			config.osd.language.value = language.getLanguage()
-			config.osd.language.save()
+			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
+			fileDom = fileReadXML(TIMEZONE_FILE)
+			if fileDom:
+				for city in fileDom.findall("zone"):
+					if config.timezone.val.value in city.attrib.get("name"):
+						localeCode = city.attrib.get("localeCode")
+						config.osd.language.value = localeCode
+						config.osd.language.save()
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):
