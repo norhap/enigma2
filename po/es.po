@@ -15306,9 +15306,6 @@ msgstr "Aceptar la selección actual"
 msgid "Always select OK"
 msgstr "Seleccione siempre OK"
 
-msgid "Base transparency for teletext, more options available within teletext screen."
-msgstr "Transparencia base para teletexto, más opciones disponibles dentro de la pantalla de teletexto."
-
 msgid "Cancel the image selection and exit"
 msgstr "Cancelar la selección de imagen y salir"
 
@@ -16472,8 +16469,14 @@ msgstr "Pulse 'Aceptar' para eliminar el elemento o 'CH +/-' para alternar a la 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
 msgstr "Pulse 'Aceptar' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
 
-msgid "Use the cursor keys to select an installed image and press OK or GREEN button for reboot."
-msgstr "Use las teclas del cursor para seleccionar una imagen instalada y pulse OK o botón VERDE para reiniciar."
+msgid "Select image and press OK or GREEN button for reboot."
+msgstr "Seleccione imagen y pulse el botón OK o VERDE para reiniciar."
+
+msgid "Select image or boot to Android image and press OK or GREEN button for reboot."
+msgstr "Seleccione la imagen o arrancar en imagen Android y presione OK o el botón VERDE para reiniciar."
+
+msgid "Select image or boot to recovery menu and press OK or GREEN button for reboot."
+msgstr "Seleccione la imagen o inicie el menú de recuperación y presione el botón OK o VERDE para reiniciar."
 
 msgid "Client Mode"
 msgstr "Modo Cliente"
