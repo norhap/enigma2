@@ -8,7 +8,7 @@ from enigma import eDVBDB, eDVBFrontendParametersSatellite, eDVBResourceManager,
 
 from Components.config import ConfigDateTime, ConfigFloat, ConfigInteger, ConfigNothing, ConfigOnOff, ConfigSatlist, ConfigSelection, ConfigSubDict, ConfigSubList, ConfigSubsection, ConfigText, ConfigYesNo, config
 from Components.About import getChipSetNumber
-from Components.SystemInfo import SystemInfo, MODEL
+from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_SKINS, fileReadXML, resolveFilename
 
@@ -919,6 +919,8 @@ class NimManager:
 							entry["internally_connectable"] = 1
 					elif id:
 						entry["internally_connectable"] = entry["frontend_device"] - 1
+						if SystemInfo["NimExceptionVuDuo2"] and entry["i2c"] != entries[id - 1]["i2c"]:
+							entry["internally_connectable"] = None
 			else:
 				entry["frontend_device"] = None
 			if "multi_type" not in entry:
@@ -1634,7 +1636,7 @@ def InitNimManager(nimmgr, update_slots=[]):
 		nim.turningspeedH = ConfigFloat(default=[2, 3], limits=[(0, 9), (0, 9)])
 		nim.turningspeedV = ConfigFloat(default=[1, 7], limits=[(0, 9), (0, 9)])
 		nim.powerMeasurement = ConfigYesNo(True)
-		nim.powerThreshold = ConfigInteger(default=MODEL == "dm8000" and 15 or 50, limits=(0, 100))
+		nim.powerThreshold = ConfigInteger(default=15 if SystemInfo["NimExceptionDMM8000"] else 50, limits=(0, 100))
 		nim.turningSpeed = ConfigSelection(turning_speed_choices, "fast")
 		btime = datetime(1970, 1, 1, 7, 0)
 		nim.fastTurningBegin = ConfigDateTime(default=mktime(btime.timetuple()), formatstring=_("%H:%M"), increment=900)
