@@ -1094,8 +1094,6 @@ def InitUsageConfig():
 
 	config.usage.multiboot_order = ConfigYesNo(default=True)
 
-	config.osd_alpha_teletext = ConfigSelectionNumber(default=255, stepwidth=1, min=0, max=255, wraparound=False)
-
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default=True)
 	config.epg.mhw = ConfigYesNo(default=False)

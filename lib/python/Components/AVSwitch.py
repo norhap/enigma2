@@ -701,8 +701,8 @@ def InitAVSwitch():
 	config.av.volume_stepsize.addNotifier(setVolumeStepsize)
 
 	if SystemInfo["CanChangeOsdAlpha"]:
-		def setAlpha(config):
+		def setOSDAlpha(config):
 			print("[AVSwitch] Write to /proc/stb/video/alpha")
 			open(SystemInfo["CanChangeOsdAlpha"], "w").write(str(config.value))
 		config.av.osd_alpha = ConfigSlider(default=255, limits=(0, 255))
-		config.av.osd_alpha.addNotifier(setAlpha)
+		config.av.osd_alpha.addNotifier(setOSDAlpha)
