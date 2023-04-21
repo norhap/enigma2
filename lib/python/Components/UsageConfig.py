@@ -1664,7 +1664,7 @@ def InitUsageConfig():
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[
 		("auto", _("Auto")),
 		("dvb", _("Transponder time")),
-		("ntp", _("Internet time (SNTP)"))
+		("ntp", _("Internet time (NTP)"))
 	])
 	config.ntp.timesync.addNotifier(timesyncChanged)
 

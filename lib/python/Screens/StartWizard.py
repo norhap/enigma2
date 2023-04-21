@@ -164,7 +164,7 @@ class AutoInstallWizard(Screen):
 			self.delay.callback.append(self.abort)
 			eActionMap.getInstance().bindAction('', 0, self.abort)
 			self.delay.startLongTimer(5)
-			Time.setSntpTime(self)  # set SNTP if necessary.
+			Time.setNTP(self)  # set NTP if necessary.
 
 	def abort(self, key=None, flag=None):
 		if hasattr(self, 'delay'):

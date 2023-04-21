@@ -84,7 +84,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 		if geolocationData.get("status", None) == "success":
 			Time.useGeolocation(self)  # set time zone auto.
-			Time.setSntpTime(self)  # set SNTP in crontab.
+			Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
 			fileDom = fileReadXML(TIMEZONE_FILE)
 			if fileDom:

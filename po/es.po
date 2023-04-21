@@ -4657,7 +4657,7 @@ msgid "Order by slots"
 msgstr "Ordenar por slots"
 
 msgid "Orde image per modes and slots (require receiver with mode slot 12)"
-msgstr "Ordene la imagen por modos y ranuras (requiere receptor con slot de modo 12)"
+msgstr "Ordene la imagen por modos y ranuras (requiere receptor con slot modo 12)"
 
 msgid "Overall progress:"
 msgstr "Progreso total:"
@@ -17174,8 +17174,8 @@ msgstr "Muy rápido"
 msgid "Transponder time"
 msgstr "Hora transpondedor"
 
-msgid "Internet time (SNTP)"
-msgstr "Hora internet (SNTP)"
+msgid "Internet time (NTP)"
+msgstr "Hora internet (NTP)"
 
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr "Elija el estilo de formato de visualización del display para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por el skin."
