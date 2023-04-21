@@ -99,6 +99,8 @@ def getMultibootslots():
 
 
 def getCurrentImage():
+	UUID = ""
+	UUIDnum = 0
 	if SystemInfo["canMultiBoot"]:
 		if not SystemInfo["hasKexec"]:  # No kexec kernel multiboot
 			slot = [x[-1] for x in open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().split() if x.startswith('rootsubdir')]
