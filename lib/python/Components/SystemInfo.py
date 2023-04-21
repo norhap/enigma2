@@ -207,6 +207,7 @@ SystemInfo["12V_Output"] = Misc_Options.getInstance().detected_12V_output()
 SystemInfo["ZapMode"] = fileCheck("/proc/stb/video/zapmode") or fileCheck("/proc/stb/video/zapping_mode")
 SystemInfo["NumFrontpanelLEDs"] = countFrontpanelLEDs()
 SystemInfo["FrontpanelDisplay"] = fileExists(scopeLCDSkin) and fileExists("/dev/dbox/oled0") or fileExists(scopeLCDSkin) and fileExists("/dev/dbox/lcd0")
+SystemInfo["NoHaveFrontpanelDisplay"] = not fileExists(scopeLCDSkin)
 SystemInfo["LCDsymbol_circle_recording"] = fileCheck("/proc/stb/lcd/symbol_circle") or MODEL in ("hd51", "vs1500") and fileCheck("/proc/stb/lcd/symbol_recording")
 SystemInfo["LCDsymbol_timeshift"] = fileCheck("/proc/stb/lcd/symbol_timeshift")
 SystemInfo["LCDshow_symbols"] = MODEL in ("et9x00", "hd51", "vs1500") and fileCheck("/proc/stb/lcd/show_symbols")
@@ -305,7 +306,6 @@ SystemInfo["MultibootStartupDevice"] = getMultibootStartupDevice()
 SystemInfo["canMode12"] = "%s_4.boxmode" % MODEL in cmdline and cmdline["%s_4.boxmode" % MODEL] in ("1", "12") and "192M"
 SystemInfo["canMultiBoot"] = getMultibootslots()
 SystemInfo["canDualBoot"] = fileExists("/dev/block/by-name/flag")
-SystemInfo["canFlashWithOfgwrite"] = BRAND != "dreambox"
 SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["NimExceptionVuDuo2"] = MODEL == "vuduo2"
 SystemInfo["NimExceptionDMM8000"] = SystemInfo["HasSVideo"]

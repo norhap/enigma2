@@ -94,7 +94,11 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 				<id val="lcd" />
 				<item entryID="display_skin_selector" level="0" text="Skin Setup" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
 				<item entryID="lcd_setup" level="1" text="LCD Setup" weight="10"><setup id="FrontDisplay" /></item>
-				<item entryID="led_setup" level="1" text="LED Setup" weight="15"><setup id="LEDDisplay" /></item>
+				<item entryID="led_setup" level="1" text="LED Setup" weight="15" requires="FrontpanelDisplay"><setup id="LEDDisplay" /></item>
+			</menu>
+			<menu entryID="leddisplay_selection" level="0" text="LED Setup" weight="6" requires="NoHaveFrontpanelDisplay">
+				<id val="leddisplay" />
+				<item entryID="led_setup" level="1" text="LED Setup" weight="10"><setup id="LEDDisplay" /></item>
 			</menu>
 			<item entryID="subtitle_setup" level="2" text="Subtitle Setup" weight="20"><setup id="Subtitle" /></item>
 			<item entryID="language_setup" level="0" text="Language Setup" weight="25"><screen module="LanguageSelection" /></item>
@@ -177,7 +181,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item entryID="software_update" level="0" text="Software Update" weight="25"><screen module="SoftwareUpdate" screen="UpdatePlugin" /></item>
 			<item entryID="device_setup" level="0" text="Keyboard / Remote Control Setup"><screen module="InputDeviceSetup" screen="InputDeviceSetup" /></item>
 			<item entryID="rfmod_setup" level="1" text="RF Modulator Output Setup" requires="RfModulator"><setup id="RFModulator" /></item>
-			<item entryID="flash_image" level="0" text="Flash Image" requires="canFlashWithOfgwrite"><screen module="FlashImage" screen="SelectImage" /></item>
+			<item entryID="flash_image" level="0" text="Flash Image"><screen module="FlashImage" screen="SelectImage" /></item>
 			<item entryID="factory_reset" level="0" text="Factory Reset"><screen module="FactoryReset" screen="FactoryReset" /></item>
 		</menu>
 	</menu>
