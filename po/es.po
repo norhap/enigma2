@@ -9573,6 +9573,12 @@ msgstr "saltar hacia delante"
 msgid "slot%s - %s"
 msgstr "slot%s - %s"
 
+msgid "slot0 - Recovery mode image (current)"
+msgstr "slot0 - Imagen del modo de recuperación (actual)"
+
+msgid "slot0 - Recovery mode image"
+msgstr "slot0 - Imagen del modo de recuperación"
+
 #, python-format
 msgid "slot%s - %s (current image)"
 msgstr "slot%s - %s (imagen actual)"
@@ -16476,10 +16482,13 @@ msgid "Select image and press OK or GREEN button for reboot."
 msgstr "Seleccione imagen y pulse el botón OK o VERDE para reiniciar."
 
 msgid "Select image or boot to Android image and press OK or GREEN button for reboot."
-msgstr "Seleccione la imagen o arrancar en imagen Android y presione OK o el botón VERDE para reiniciar."
+msgstr "Seleccione la imagen o arrancar en imagen Android y pulse OK o el botón VERDE para reiniciar."
 
 msgid "Select image or boot to recovery menu and press OK or GREEN button for reboot."
-msgstr "Seleccione la imagen o inicie el menú de recuperación y presione el botón OK o VERDE para reiniciar."
+msgstr "Seleccione la imagen o inicie el menú de recuperación y pulse el botón OK o VERDE para reiniciar."
+
+msgid "Select slot image or slot0 recovery mode image and press OK or GREEN button to reboot."
+msgstr "Seleccione la imagen slot o slot0 la imagen del modo de recuperación y pulse el botón OK o VERDE para reiniciar."
 
 msgid "Client Mode"
 msgstr "Modo Cliente"
