@@ -74,6 +74,7 @@ def getMultibootslots():
 							slot['kernel'] = "/linuxrootfs%s/zImage" % slotnumber
 						if os.path.exists(device) or device == 'ubi0:ubifs':
 							slot['device'] = device
+							slot["slotType"] = "eMMC" if "mmc" in slot["device"] else "USB"
 							slot['startupfile'] = os.path.basename(file)
 							if 'rootsubdir' in line:
 								SystemInfo["HasRootSubdir"] = True
@@ -161,12 +162,12 @@ def getImagelist(Recovery=None):
 	imagelist = {}
 	for slot in sorted(list(SystemInfo["canMultiBoot"].keys())):
 		if slot == 0:
-			if not Recovery:		# called by ImageManager
+			if not Recovery:  # called by ImageManager
 				continue
-			else:					# called by FlashImage
+			else:  # called by FlashImage
 				imagelist[slot] = {"imagename": _("Recovery Mode")}
 				continue
-		print("[multiboot] [GetImagelist] slot = ", slot)
+		print("[MultiBoot] [getImagelist] slot = ", slot)
 		BuildVersion = "  "
 		Build = " "  # ViX Build No.
 		Dev = " "  # ViX Dev No.
@@ -177,19 +178,22 @@ def getImagelist(Recovery=None):
 		imagedir = "/"
 		if SystemInfo["canMultiBoot"]:
 			tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
-			if SystemInfo["canMultiBoot"][slot]['device'] == 'ubi0:ubifs':
-				Console().ePopen('mount -t ubifs %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
-			else:
-				Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+			try:  # Avoid problems Dev lost USB Slots Kexec
+				if SystemInfo["canMultiBoot"][slot]['device'] == 'ubi0:ubifs':
+					Console().ePopen('mount -t ubifs %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+				else:
+					Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
+			except:
+				pass
 			imagedir = os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')]))
 			if os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2')):
 				if os.path.isfile(os.path.join(imagedir, "usr/lib/enigma.info")):
-					print("[multiboot] [BoxInfo] using BoxInfo")
+					print("[MultiBoot] [BoxInfo] using BoxInfo")
 					BuildVersion = createInfo(slot, imagedir=imagedir)
 				else:
-					print("[multiboot] [GetImagelist] 2 slot = %s imagedir = %s" % (slot, imagedir))
+					print("[MultiBoot] [getImagelist] 2 slot = %s imagedir = %s" % (slot, imagedir))
 					Creator = open("%s/etc/issue" % imagedir).readlines()[-2].capitalize().strip()[:-6]
-					print("[multiboot] [GetImagelist] Creator = %s imagedir = %s" % (Creator, imagedir))
+					print("[MultiBoot] [getImagelist] Creator = %s imagedir = %s" % (Creator, imagedir))
 					if Creator.startswith("Openvix"):
 						reader = boxbranding_reader(imagedir)
 						BuildType = reader.getImageType()
@@ -237,28 +241,28 @@ def bootmviSlot(imagedir="/", text=" ", slot=0):
 	outmviPath = os.path.join(imagedir, "usr/share/enigma2/bootlogo.mvi")
 	txtPath = os.path.join(imagedir, "usr/share/enigma2/bootlogo.txt")
 	text = "booting slot %s %s" % (slot, text)
-	print("[multiboot][bootmviSlot] inPath, outpath ", inmviPath, "   ", outmviPath)
+	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmviPath, "   ", outmviPath)
 	if os.path.exists(inmviPath):
 		if os.path.exists(outmviPath) and os.path.exists(txtPath) and open(txtPath).read() == text:
 			return
-		print("[multiboot][bootmviSlot] Copy /usr/share/bootlogo.mvi to /tmp/bootlogo.m1v")
+		print("[MultiBoot][bootmviSlot] Copy /usr/share/bootlogo.mvi to /tmp/bootlogo.m1v")
 		Console(binary=True).ePopen("cp %s /tmp/bootlogo.m1v" % inmviPath)
-		print("[multiboot][bootmviSlot] Dump iframe to png")
+		print("[MultiBoot][bootmviSlot] Dump iframe to png")
 		Console(binary=True).ePopen("ffmpeg -skip_frame nokey -i /tmp/bootlogo.m1v -vsync 0  -y  /tmp/out1.png 2>/dev/null")
 		Console(binary=True).ePopen("rm -f /tmp/mypicture.m1v")
 		if os.path.exists("/tmp/out1.png"):
 			img = Image.open("/tmp/out1.png")						# Open an Image
 		else:
-			print("[multiboot][bootmviSlot] unable to create new bootlogo cannot open out1.png")
+			print("[MultiBoot][bootmviSlot] unable to create new bootlogo cannot open out1.png")
 			return
 		I1 = ImageDraw.Draw(img)									# Call draw Method to add 2D graphics in an image
 		myFont = ImageFont.truetype("/usr/share/fonts/OpenSans-Regular.ttf", 65)		# Custom font style and font size
-		print("[multiboot][bootmviSlot] Write text to png")
+		print("[MultiBoot][bootmviSlot] Write text to png")
 		text = "booting slot %s %s" % (slot, text)
 		I1.text((52, 12), text, font=myFont, fill=(255, 0, 0))		# Add Text to an image
 		I1.text((50, 10), text, font=myFont, fill=(255, 255, 255))
 		img.save("/tmp/out1.png")									# Save the edited image
-		print("[multiboot][bootmviSlot] Repack bootlogo")
+		print("[MultiBoot][bootmviSlot] Repack bootlogo")
 		Console(binary=True).ePopen("ffmpeg -i /tmp/out1.png -r 25 -b 20000 -y /tmp/mypicture.m1v  2>/dev/null")
 		Console(binary=True).ePopen("cp /tmp/mypicture.m1v %s" % outmviPath)
 		with open(txtPath, "w") as f:
@@ -271,8 +275,8 @@ def VerDate(imagedir):
 	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
 	if fileExists(os.path.join(imagedir, "usr/share/bootlogo.mvi")):
 		date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
-	print("[multiboot][VerDate]1 date1, date2, date3", date1, "   ", date2, "   ", date3)
+	print("[MultiBoot][VerDate]1 date1, date2, date3", date1, "   ", date2, "   ", date3)
 	date = max(date1, date2, date3)
-	print("[multiboot][VerDate]2 date = %s" % date)
+	print("[MultiBoot][VerDate]2 date = %s" % date)
 	date = datetime.strptime(date, '%Y-%m-%d').strftime("%d-%m-%Y")
 	return date

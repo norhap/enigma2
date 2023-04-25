@@ -13,7 +13,7 @@ from enigma import eEPGCache
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
-from Screens.Standby import getReasons, QUIT_RESTART, TryQuitMainloop
+from Screens.Standby import getReasons, QUIT_RESTART, QUIT_REBOOT, TryQuitMainloop
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
@@ -264,18 +264,21 @@ class FlashImage(Screen):
 			self.message = _("%s\nDo you still want to flash image\n%s?") % (self.reasons, self.imagename)
 		else:
 			self.message = _("Do you want to flash image\n%s") % self.imagename
-		if SystemInfo["canMultiBoot"]:
+		if SystemInfo["canMultiBoot"] and SystemInfo["HasUsbhdd"]:
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
 			choices = []
 			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
-			for x in range(1, len(slotdict)):
+			numberSlots = len(slotdict) + 1 if not SystemInfo["hasKexec"] else len(slotdict)
+			for x in range(1, numberSlots):
 				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
-			for x in range(1, len(slotdict)):
+			for x in range(1, numberSlots):
 				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagesList[x]['imagename']), (x, "without backup")))
 			choices.append((_("No, do not flash image"), False))
 			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 		else:
+			self.session.openWithCallback(self.abort, MessageBox, _("Storage device not available.\nMount device or reboot system and try again."), type=MessageBox.TYPE_ERROR, timeout=10)
+		if not SystemInfo["canMultiBoot"]:
 			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup"), (_("No, do not flash image"), False)]
 			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=False, simple=True)
 
@@ -512,8 +515,8 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		if imagesList:
 			for index, x in enumerate(imagesList):
 				if SystemInfo["hasKexec"] and x == 1:
-					self["description"] = StaticText(_("Select slot image or slot0 recovery mode image and press OK or GREEN button to reboot."))
-					if x != self.currentimageslot:
+					self["description"] = StaticText(_("Select slot image and press OK or GREEN button to reboot."))
+					if not self.currentimageslot:  # Slot0
 						list.append(ChoiceEntryComponent('', ((_("slot0 - Recovery mode image (current)")), "Recovery")))
 					else:
 						list.append(ChoiceEntryComponent('', ((_("slot0 - Recovery mode image")), "Recovery")))
@@ -524,7 +527,13 @@ class MultibootSelection(SelectImage, HelpableScreen):
 						list.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesList[x]['imagename']), (x, 1))))
 						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
 					else:
-						list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
+						if not SystemInfo["hasKexec"]:
+							list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
+						else:
+							if x != self.currentimageslot:
+								list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))  # list USB eMMC slots not current
+							else:
+								list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)")) % (x, imagesList[x]['imagename']), (x, 1))))  # Slot current != Slot0
 		if list12:
 			self.blue = True
 			self["key_blue"].setText(_("Order by modes") if config.usage.multiboot_order.value else _("Order by slots"))
@@ -660,7 +669,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 				with open("/%s/STARTUP_%d" % (self.tmp_dir, usbslot), 'w') as f:
 					f.write(STARTUP_usbslot)
 				print("[MultibootSelection] STARTUP_%d --> %s, self.tmp_dir: %s" % (usbslot, STARTUP_usbslot, self.tmp_dir))
-			self.session.open(TryQuitMainloop, QUIT_RESTART)
+			self.session.open(TryQuitMainloop, QUIT_REBOOT)
 
 	def KexecMountRet(self, result=None, retval=None, extra_args=None):
 		self.device_uuid = "UUID=" + result.split("UUID=")[1].split(" ")[0].replace('"', '')

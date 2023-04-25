@@ -9574,10 +9574,10 @@ msgid "slot%s - %s"
 msgstr "slot%s - %s"
 
 msgid "slot0 - Recovery mode image (current)"
-msgstr "slot0 - Imagen del modo de recuperación (actual)"
+msgstr "slot0 - Imagen modo recuperación (actual)"
 
 msgid "slot0 - Recovery mode image"
-msgstr "slot0 - Imagen del modo de recuperación"
+msgstr "slot0 - Imagen modo recuperación"
 
 #, python-format
 msgid "slot%s - %s (current image)"
@@ -15399,6 +15399,9 @@ msgstr "Dispositivos Almacenamiento"
 msgid "Storage device not available or not initialized."
 msgstr "Dispositivo de almacenamiento no disponible o no inicializado."
 
+msgid "Storage device not available.\nMount device or reboot system and try again."
+msgstr "Dispositivo de almacenamiento no disponible.\nMonte el dispositivo o reinicie el sistema y vuelva a intentarlo."
+
 msgid "Detected tuners"
 msgstr "Sintonizadores detectados"
 
@@ -16487,8 +16490,8 @@ msgstr "Seleccione la imagen o arrancar en imagen Android y pulse OK o el botón
 msgid "Select image or boot to recovery menu and press OK or GREEN button for reboot."
 msgstr "Seleccione la imagen o inicie el menú de recuperación y pulse el botón OK o VERDE para reiniciar."
 
-msgid "Select slot image or slot0 recovery mode image and press OK or GREEN button to reboot."
-msgstr "Seleccione la imagen slot o slot0 la imagen del modo de recuperación y pulse el botón OK o VERDE para reiniciar."
+msgid "Select slot image and press OK or GREEN button to reboot."
+msgstr "Seleccione la imagen slot y pulse el botón OK o VERDE para reiniciar."
 
 msgid "Client Mode"
 msgstr "Modo Cliente"
