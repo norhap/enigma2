@@ -9571,17 +9571,17 @@ msgstr "saltar hacia delante"
 
 #, python-format
 msgid "slot%s - %s"
-msgstr "slot%s - %s"
+msgstr "slot%s %s - %s"
 
-msgid "slot0 - Recovery mode image (current)"
-msgstr "slot0 - Imagen modo recuperación (actual)"
+msgid "slot0 %s - Recovery mode image (current)"
+msgstr "slot0 %s - Imagen modo recuperación (actual)"
 
-msgid "slot0 - Recovery mode image"
-msgstr "slot0 - Imagen modo recuperación"
+msgid "slot0 %s - Recovery mode image"
+msgstr "slot0 %s - Imagen modo recuperación"
 
 #, python-format
-msgid "slot%s - %s (current image)"
-msgstr "slot%s - %s (imagen actual)"
+msgid "slot%s %s - %s (current image)"
+msgstr "slot%s %s - %s (imagen actual)"
 
 #, python-format
 msgid "slot%s - %s (current image) with, backup"
@@ -9592,20 +9592,20 @@ msgid "slot%s - %s (current image), without backup"
 msgstr "slot%s - %s (imagen actual) sin hacer backup"
 
 #, python-format
-msgid "slot%s - %s mode 1"
-msgstr "slot%s - %s modo 1"
+msgid "slot%s %s - %s mode 1"
+msgstr "slot%s %s - %s modo 1"
 
 #, python-format
-msgid "slot%s - %s mode 1 (current image)"
-msgstr "slot%s - %s modo 1 (imagen actual)"
+msgid "slot%s %s - %s mode 1 (current image)"
+msgstr "slot%s %s - %s modo 1 (imagen actual)"
 
 #, python-format
-msgid "slot%s - %s mode 12"
-msgstr "slot%s - %s modo 12"
+msgid "slot%s %s - %s mode 12"
+msgstr "slot%s %s - %s modo 12"
 
 #, python-format
-msgid "slot%s - %s mode 12 (current image)"
-msgstr "slot%s - %s modo 12 (imagen actual)"
+msgid "slot%s %s - %s mode 12 (current image)"
+msgstr "slot%s %s - %s modo 12 (imagen actual)"
 
 #, python-format
 msgid "slot%s - %s, with backup"

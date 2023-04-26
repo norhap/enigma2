@@ -268,7 +268,7 @@ class FlashImage(Screen):
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
 			choices = []
-			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')}
+			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')} if not SystemInfo["HasKexecUSB"] else {k: v for k, v in SystemInfo["canMultiBoot"].items()}
 			numberSlots = len(slotdict) + 1 if not SystemInfo["hasKexec"] else len(slotdict)
 			for x in range(1, numberSlots):
 				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
@@ -419,11 +419,22 @@ class FlashImage(Screen):
 				if not subdirs and files:
 					return checkimagefiles(files) and path
 		imagefiles = findimagefiles(self.unzippedimage)
+		mtd = SystemInfo["canMultiBoot"][self.multibootslot]["device"].split("/")[2]  # USB get mtd root fs slot kexec
 		if imagefiles:
-			if SystemInfo["canMultiBoot"]:
+			if SystemInfo["canMultiBoot"] and not SystemInfo["hasKexec"]:
 				command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
-			else:
+			elif not SystemInfo["canMultiBoot"]:
 				command = "/usr/bin/ofgwrite -k -r '%s'" % imagefiles
+			else:  # kexec
+				if self.multibootslot == 0:
+					from boxbranding import getMachineMtdKernel, getMachineMtdRoot
+					kz0 = getMachineMtdKernel()
+					rz0 = getMachineMtdRoot()
+					command = "/usr/bin/ofgwrite -kkz0 -rrz0 '%s'" % imagefiles	# slot0 treat as kernel/root only multiboot receiver
+				if SystemInfo["HasKexecUSB"] and mtd and "mmcblk" not in mtd:
+					command = "/usr/bin/ofgwrite -r%s -kzImage -s'%s/linuxrootfs' -m%s '%s'" % (mtd, MODEL[2:], self.multibootslot, imagefiles)  # USB flash slot kexec
+				else:
+					command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)  # eMMC flash slot kexec
 			self.containerofgwrite = Console()
 			self.containerofgwrite.ePopen(command, self.FlashimageDone)
 		else:
@@ -517,23 +528,23 @@ class MultibootSelection(SelectImage, HelpableScreen):
 				if SystemInfo["hasKexec"] and x == 1:
 					self["description"] = StaticText(_("Select slot image and press OK or GREEN button to reboot."))
 					if not self.currentimageslot:  # Slot0
-						list.append(ChoiceEntryComponent('', ((_("slot0 - Recovery mode image (current)")), "Recovery")))
+						list.append(ChoiceEntryComponent('', ((_("slot0 %s - Recovery mode image (current)")) % SystemInfo["canMultiBoot"][x]["slotType"], "Recovery")))
 					else:
-						list.append(ChoiceEntryComponent('', ((_("slot0 - Recovery mode image")), "Recovery")))
+						list.append(ChoiceEntryComponent('', ((_("slot0 %s - Recovery mode image")) % SystemInfo["canMultiBoot"][x]["slotType"], "Recovery")))
 				if imagesList[x]["imagename"] == _("Deleted image"):
 					self.deletedImagesExists = True
 				elif imagesList[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s mode 1")) % (x, imagesList[x]['imagename']), (x, 1))))
-						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s - %s mode 12")) % (x, imagesList[x]['imagename']), (x, 12))))
+						list.insert(index, ChoiceEntryComponent('', ((_("slot%s %s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s %s - %s mode 1")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))
+						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s %s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s %s - %s mode 12")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 12))))
 					else:
 						if not SystemInfo["hasKexec"]:
-							list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s - %s")) % (x, imagesList[x]['imagename']), (x, 1))))
+							list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s %s - %s")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))
 						else:
 							if x != self.currentimageslot:
 								list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))  # list USB eMMC slots not current
 							else:
-								list.append(ChoiceEntryComponent('', ((_("slot%s - %s (current image)")) % (x, imagesList[x]['imagename']), (x, 1))))  # Slot current != Slot0
+								list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s (current image)")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))  # Slot current != Slot0
 		if list12:
 			self.blue = True
 			self["key_blue"].setText(_("Order by modes") if config.usage.multiboot_order.value else _("Order by slots"))

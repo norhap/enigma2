@@ -76,6 +76,7 @@ def getMultibootslots():
 							slot['device'] = device
 							slot["slotType"] = "eMMC" if "mmc" in slot["device"] else "USB"
 							slot['startupfile'] = os.path.basename(file)
+							SystemInfo["HasMultibootMTD"] = slot.get("mtd")
 							if 'rootsubdir' in line:
 								SystemInfo["HasRootSubdir"] = True
 								slot['rootsubdir'] = getparam(line, 'rootsubdir')
