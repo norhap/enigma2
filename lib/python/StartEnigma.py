@@ -490,6 +490,11 @@ profile("Load:StackTracePrinter")
 from Components.StackTrace import StackTracePrinter
 StackTracePrinterInst = StackTracePrinter()
 
+profile("UsageConfig")
+from Components.UsageConfig import InitUsageConfig, getFileUsage
+InitUsageConfig()
+getFileUsage()
+
 
 def runScreenTest():
 	config.misc.startCounter.value += 1
@@ -649,10 +654,6 @@ profile("RecordingConfig")
 import Components.RecordingConfig
 Components.RecordingConfig.InitRecordingConfig()
 
-profile("UsageConfig")
-from Components.UsageConfig import InitUsageConfig, getFileUsage
-InitUsageConfig()
-getFileUsage()
 
 profile("TimeZones")
 import Components.Timezones
