@@ -1928,9 +1928,6 @@ msgstr "Eliminar archivo"
 msgid "Delete image"
 msgstr "Eliminar imagen"
 
-msgid "Delete or rename folder \"vuplus\" in path '%s' before initializing."
-msgstr "Elimine o cambie el nombre de la carpeta \"vuplus\" en la ruta '%s' antes de inicializar."
-
 msgid "Delete playlist entry"
 msgstr "Eliminar la entrada de la lista de reproducción"
 
