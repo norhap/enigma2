@@ -298,13 +298,16 @@ class RecordTimer(Timer):
 		# switch when one does something like I/O) we don't need to run the
 		# list-creating loop under the lock.
 		#
-		with writeLock:
-			file = open("%s.writing" % self.timersFilename, "w")
-			file.write("\n".join(timerList))
-			file.flush()
-			fsync(file.fileno())
-			file.close()
-			rename("%s.writing" % self.timersFilename, self.timersFilename)
+		try:
+			with writeLock:
+				file = open("%s.writing" % self.timersFilename, "w")
+				file.write("\n".join(timerList))
+				file.flush()
+				fsync(file.fileno())
+				file.close()
+				rename("%s.writing" % self.timersFilename, self.timersFilename)
+		except:
+			pass
 
 	def saveTimer(self):
 		return self.saveTimers()
