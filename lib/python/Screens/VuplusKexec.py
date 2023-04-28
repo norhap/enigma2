@@ -48,7 +48,7 @@ class VuplusKexec(Screen):
 		partitions = sorted(harddiskmanager.getMountedPartitions(), key=lambda partitions: partitions.device or "")
 		for partition in partitions:
 			fileForceUpdate = join(partition.mountpoint, "%s/force.update") % getImageFolder()
-			if getBoxType() == "vuzero4k" and fileExists(fileForceUpdate) and "noforce.update" not in fileForceUpdate:
+			if fileExists(fileForceUpdate) and "noforce.update" not in fileForceUpdate:
 				from shutil import move
 				move(fileForceUpdate, fileForceUpdate.replace("force.update", "noforce.update"))
 		self["actions"].setEnabled(False)  # This function takes time so disable the ActionMap to avoid responding to multiple button presses
