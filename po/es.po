@@ -1272,8 +1272,8 @@ msgstr "No se puede determinar"
 msgid "Cannot find any signal ..., aborting !"
 msgstr "No se encuentra señal …, abortando !"
 
-msgid "Cannot find images - please try later"
-msgstr "No se encuentran imágenes - prueba más tarde"
+msgid "Cannot find images - please try later or select an alternate image"
+msgstr "No se encuentran imágenes - prueba más tarde o seleccione una imagen alternativa"
 
 msgid "Cannot move to trash can"
 msgstr "No se puede mover a la papelera"
@@ -4646,6 +4646,9 @@ msgstr "Original"
 
 msgid "Other"
 msgstr "Otros"
+
+msgid "Other Images"
+msgstr "Otras Imágenes"
 
 msgid "Output"
 msgstr "Salida"
@@ -14396,9 +14399,6 @@ msgstr "URL alternativa para las imágenes listadas en FlashImage"
 
 msgid "Alternative URLs for DVB-T/C or ATSC"
 msgstr "URLs Alternativas para DVB-T/C o ATSC"
-
-msgid "Enter an URL where alternative images could be listed for FlashImage. Enter text 'all' for automatic access of many images."
-msgstr "Introduzca una URL donde se puedan listar imágenes alternativas para FlashImage. Ingrese el texto \"all\" en el teclado virtual para acceder automáticamente a todas las imágenes."
 
 msgid "Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"
 msgstr "No se pueden crear los directorios requeridos en el medio (ejemplo, una memoria USB o un disco duro). Verifique los medios y vuelva a intentarlo!"
