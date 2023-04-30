@@ -32,7 +32,7 @@ def languageNotifier(configElement):
 
 
 config.osd = ConfigSubsection()
-config.osd.language = ConfigText(default="en_US")
+config.osd.language = ConfigText(default="es_ES")
 config.osd.language.addNotifier(languageNotifier)
 
 
