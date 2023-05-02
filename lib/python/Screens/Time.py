@@ -1,6 +1,6 @@
 from enigma import eConsoleAppContainer
 from Components.ActionMap import ActionMap, HelpableActionMap
-from os.path import isfile, islink
+from os.path import isfile  #islink
 from Components.config import config, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
@@ -9,7 +9,7 @@ from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
 from Screens.Screen import Screen
 from Screens.HelpMenu import ShowRemoteControl
-from Tools.Directories import fileContains
+#from Tools.Directories import fileContains
 from Tools.Geolocation import geolocation
 
 
@@ -25,24 +25,22 @@ class Time(Setup):
 			eConsoleAppContainer().execute("opkg update && opkg install cronie")
 		self.selectionChanged()
 
-	#  def setSntpTime(self):
-	#	if config.ntp.timesync.value != "dvb":
-	#		if not fileContains("/etc/crontab", "30 *   *   *   * root sntp -S"):
-	#			eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
-	#	else:
-	#		eConsoleAppContainer().execute("sed -i '/sntp -S/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
 	def setNTP(self):
-		cmdntp = "root /usr/bin/ntpdate-sync silent"
-		linkup = "ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync"
+		#cmdntp = "root /usr/bin/ntpdate-sync silent"
+		#linkup = "ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync"
+		#if config.ntp.timesync.value != "dvb":
+			#if not fileContains("/etc/crontab", "ntpdate"):
+				#eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab;sed -i '$a@reboot %s'" % cmdntp + " " "/etc/crontab;sed -i '$a 30 *   *   *   * %s'" % cmdntp + " " "/etc/crontab")
+			#if not islink("/etc/network/if-up.d/ntpdate-sync"):
+				#eConsoleAppContainer().execute(linkup)
+		#else:
+			#if islink("/etc/network/if-up.d/ntpdate-sync"):
+				#eConsoleAppContainer().execute("unlink /etc/network/if-up.d/ntpdate-sync")
+			#eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab")
 		if config.ntp.timesync.value != "dvb":
-			if not fileContains("/etc/crontab", "ntpdate"):
-				eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab;sed -i '$a@reboot %s'" % cmdntp + " " "/etc/crontab;sed -i '$a 30 *   *   *   * %s'" % cmdntp + " " "/etc/crontab")
-			if not islink("/etc/network/if-up.d/ntpdate-sync"):
-				eConsoleAppContainer().execute(linkup)
+			eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
 		else:
-			if islink("/etc/network/if-up.d/ntpdate-sync"):
-				eConsoleAppContainer().execute("unlink /etc/network/if-up.d/ntpdate-sync")
-			eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab")
+			eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab")
 
 	def keySave(self):
 		if isfile("/etc/init.d/crond"):
