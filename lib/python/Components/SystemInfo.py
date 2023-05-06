@@ -198,6 +198,12 @@ SystemInfo["CommonInterfaceCIDelay"] = fileCheck("/proc/stb/tsmux/rmx_delay")
 for cislot in range(0, SystemInfo["CommonInterface"]):
 	SystemInfo["CI%dSupportsHighBitrates" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_tsclk" % cislot)
 	SystemInfo["CI%dRelevantPidsRoutingSupport" % cislot] = fileCheck("/proc/stb/tsmux/ci%d_relevant_pids_routing" % cislot)
+SystemInfo["HasSVideo"] = MODEL in ("dm8000")
+SystemInfo["NimExceptionVuDuo2"] = MODEL == "vuduo2"
+SystemInfo["NimExceptionDMM8000"] = SystemInfo["HasSVideo"]
+SystemInfo["FbcTunerPowerAlwaysOn"] = MODEL in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse")
+SystemInfo["HasPhysicalLoopthrough"] = ["Vuplus DVB-S NIM(AVL2108)", "GIGA DVB-S2 NIM (Internal)"]
+SystemInfo["HasFBCtuner"] = ["Vuplus DVB-C NIM(BCM3158)", "Vuplus DVB-C NIM(BCM3148)", "Vuplus DVB-S NIM(7376 FBC)", "Vuplus DVB-S NIM(45308X FBC)", "Vuplus DVB-S NIM(45208 FBC)", "DVB-S2 NIM(45208 FBC)", "DVB-S2X NIM(45308X FBC)", "DVB-S2 NIM(45308 FBC)", "DVB-C NIM(3128 FBC)", "BCM45208", "BCM45308X", "BCM3158"]
 SystemInfo["HasSoftcamInstalled"] = hassoftcaminstalled()
 SystemInfo["NumVideoDecoders"] = getNumVideoDecoders()
 SystemInfo["Udev"] = not fileExists("/dev/.devfsd")
@@ -207,6 +213,7 @@ SystemInfo["12V_Output"] = Misc_Options.getInstance().detected_12V_output()
 SystemInfo["ZapMode"] = fileCheck("/proc/stb/video/zapmode") or fileCheck("/proc/stb/video/zapping_mode")
 SystemInfo["NumFrontpanelLEDs"] = countFrontpanelLEDs()
 SystemInfo["FrontpanelDisplay"] = fileExists(scopeLCDSkin) and fileExists("/dev/dbox/oled0") or fileExists(scopeLCDSkin) and fileExists("/dev/dbox/lcd0")
+SystemInfo["DisplayLED"] = SystemInfo["FrontpanelDisplay"] and not SystemInfo["FbcTunerPowerAlwaysOn"]
 SystemInfo["NoHaveFrontpanelDisplay"] = not fileExists(scopeLCDSkin)
 SystemInfo["LCDsymbol_circle_recording"] = fileCheck("/proc/stb/lcd/symbol_circle") or MODEL in ("hd51", "vs1500") and fileCheck("/proc/stb/lcd/symbol_recording")
 SystemInfo["LCDsymbol_timeshift"] = fileCheck("/proc/stb/lcd/symbol_timeshift")
@@ -266,7 +273,6 @@ SystemInfo["HasComposite"] = getHaveRCA() == "True"
 SystemInfo["HasJack"] = getHaveAVJACK() == "True"
 SystemInfo["HasScart"] = getHaveSCART() == "True"
 SystemInfo["HasScartYUV"] = getHaveSCARTYUV() == "True"
-SystemInfo["HasSVideo"] = MODEL in ("dm8000")
 SystemInfo["HasYPbPr"] = getHaveYUV() == "True"
 SystemInfo["CanAutoVolume"] = fileHas("/proc/stb/audio/avl_choices", "none") or fileHas("/proc/stb/audio/avl_choices", "hdmi")
 SystemInfo["CanAutoVolumeLevel"] = fileExists("/proc/stb/audio/autovolumelevel_choices") and fileCheck("/proc/stb/audio/autovolumelevel")
@@ -307,11 +313,6 @@ SystemInfo["canMode12"] = "%s_4.boxmode" % MODEL in cmdline and cmdline["%s_4.bo
 SystemInfo["canMultiBoot"] = getMultibootslots()
 SystemInfo["canDualBoot"] = fileExists("/dev/block/by-name/flag")
 SystemInfo["BootDevice"] = getBootdevice()
-SystemInfo["NimExceptionVuDuo2"] = MODEL == "vuduo2"
-SystemInfo["NimExceptionDMM8000"] = SystemInfo["HasSVideo"]
-SystemInfo["FbcTunerPowerAlwaysOn"] = MODEL in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse")
-SystemInfo["HasPhysicalLoopthrough"] = ["Vuplus DVB-S NIM(AVL2108)", "GIGA DVB-S2 NIM (Internal)"]
-SystemInfo["HasFBCtuner"] = ["Vuplus DVB-C NIM(BCM3158)", "Vuplus DVB-C NIM(BCM3148)", "Vuplus DVB-S NIM(7376 FBC)", "Vuplus DVB-S NIM(45308X FBC)", "Vuplus DVB-S NIM(45208 FBC)", "DVB-S2 NIM(45208 FBC)", "DVB-S2X NIM(45308X FBC)", "DVB-S2 NIM(45308 FBC)", "DVB-C NIM(3128 FBC)", "BCM45208", "BCM45308X", "BCM3158"]
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
 SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")

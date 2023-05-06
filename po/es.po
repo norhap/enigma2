@@ -2017,6 +2017,12 @@ msgstr "Navegador de directorios"
 msgid "Disable"
 msgstr "Deshabilitar"
 
+msgid "Disable Fast Channel Change"
+msgstr "Deshabilitar Cambio Rápido Canal"
+
+msgid "Disable FCC during recordings"
+msgstr "Deshabilitar FCC durante las grabaciones"
+
 msgid "Disable Picture in Picture"
 msgstr "Desactivar PiP"
 
@@ -2314,6 +2320,9 @@ msgstr "Activar búsqueda automática rápida para %s"
 
 msgid "Enable fallback remote receiver"
 msgstr "Habilitar el receptor reserva para respaldo"
+
+msgid "Enable Fast Channel Change"
+msgstr "Habilitar Cambio Rápido Canal"
 
 msgid "Enable Vu+ MultiBoot"
 msgstr "Habilitar Vu+ MultiBoot"
@@ -2834,6 +2843,12 @@ msgstr "Islas Feroe"
 msgid "Fast"
 msgstr "Rápido"
 
+msgid "Fast Channel Change"
+msgstr "Cambio Rápido Canal"
+
+msgid "Fast Channel Change Setup"
+msgstr "Ajustes Cambio Rápido Canal (FCC)"
+
 msgid "Fast DiSEqC"
 msgstr "DiSEqC rápido"
 
@@ -2842,6 +2857,9 @@ msgstr "Búsqueda rápida"
 
 msgid "Fast epoch"
 msgstr "Parte temporal rápida"
+
+msgid "FCC enabled"
+msgstr "FCC habilitado"
 
 msgid "Favourites"
 msgstr "Favoritos"
@@ -4021,6 +4039,9 @@ msgstr "Mauritania"
 
 msgid "Mauritius"
 msgstr "Mauricio"
+
+msgid "Max channels"
+msgstr "Canales máximos"
 
 msgid "Max memory positions"
 msgstr "Posiciones máximas de memoria"
@@ -8615,6 +8636,9 @@ msgstr "Zap canal seleccionado, o muestre información evento"
 msgid "Zap up"
 msgstr "Zapea arriba"
 
+msgid "Zap Up/Down"
+msgstr "Zapea arriba - abajo"
+
 #, python-format
 msgid "Zapped to timer service %s as PiP!"
 msgstr "Zapeo al canal de temporizador %s como PiP!"
@@ -9570,7 +9594,7 @@ msgid "skip forward"
 msgstr "saltar hacia delante"
 
 #, python-format
-msgid "slot%s - %s"
+msgid "slot%s %s - %s"
 msgstr "slot%s %s - %s"
 
 msgid "slot0 %s - Recovery mode image (current)"
@@ -11960,6 +11984,9 @@ msgstr "Exportar seleccionado como Temporizador Automático"
 msgid "History"
 msgstr "Historia"
 
+msgid "History Prev/Next"
+msgstr "Historia Previo - Siguiente"
+
 msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
 msgstr "Cuántas entradas mantener en el historial de búsqueda como máximo. 0 deshabilita el historial por completo!"
 
@@ -13890,6 +13917,9 @@ msgstr "vista previa para la entrada seleccionada"
 
 msgid "previous entry"
 msgstr "entrada anterior"
+
+msgid "priority"
+msgstr "prioridad"
 
 msgid "progress bar"
 msgstr "barra progreso"
