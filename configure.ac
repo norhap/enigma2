@@ -382,6 +382,7 @@ AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm
 AM_CONDITIONAL(HAVE_COLORLCD3, test "$BOXTYPE" == "dm7080")
 AM_CONDITIONAL(HAVE_GRAUTEC70X0, test "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2" -o "$BOXTYPE" == "dm7080")
 AM_CONDITIONAL(HAVE_GRAUTEC8000, test "$BOXTYPE" == "dm8000")
+AM_CONDITIONAL(LCD_FRAMEBUFFER_MODE, test "$BOXTYPE" == et8500 -o "$BOXTYPE" == et8500s)
 
 if test "$BOXTYPE" == "mbmicro" -o "$BOXTYPE" == "e4hd" -o "$BOXTYPE" == "e4hdhybrid" -o "$BOXTYPE" == "twinboxlcd" -o "$BOXTYPE" == "singleboxlcd" -o "$BOXTYPE" == "twinboxlcdci5" -o "$BOXTYPE" == "sf208" -o "$BOXTYPE" == "sf228" -o "$BOXTYPE" == "sf238" -o "$BOXTYPE" == "odin2hybrid" -o "$BOXTYPE" == "odinplus"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
@@ -420,9 +421,9 @@ if test "$MACHINE_BRAND" == "dreambox"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "dm7080"; then
-	AC_DEFINE(DREAMBOX_DUAL_TUNER, 1,[define dreambox dual tuner])
-	AC_DEFINE(CONFIG_ION, 1,[define when we need to use ION allocator])
+if test "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et8500s"; then
+	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
+	AC_DEFINE(LCD_FRAMEBUFFER_MODE, 1,[define the framebuffer LCD mode])
 fi
 
 if test "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2" -o "$BOXTYPE" == "dm820" -o "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm800sev2"; then
