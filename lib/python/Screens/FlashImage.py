@@ -105,7 +105,7 @@ class SelectImage(Screen):
 				url = "%s%s" % (self.selectedImage["url"], MODEL)
 				try:
 					req = Request(url, None, {"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"})
-					self.jsonlist.update(dict(load(urlopen(req, timeout=3))))
+					self.jsonlist.update(load(urlopen(req, timeout=3)))
 				except:
 					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % url)
 
