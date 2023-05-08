@@ -1,7 +1,8 @@
-# -*- coding: utf-8 -*-
+from os.path import basename, normpath
+from enigma import iServiceInformation, eServiceReference
+
 from Components.Converter.Converter import Converter
 from Components.Element import cached, ElementError
-from enigma import iServiceInformation, eServiceReference
 from ServiceReference import ServiceReference
 from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
 from Components.config import config
@@ -38,8 +39,9 @@ class MovieInfo(Converter):
 		info = self.source.info
 		event = self.source.event
 		if info and service:
+			isDirectory = (service.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory
 			if self.type == self.MOVIE_SHORT_DESCRIPTION:
-				if (service.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
+				if isDirectory:
 					# Short description for Directory is the full path
 					return service.getPath()
 				return (info.getInfoString(service, iServiceInformation.sDescription)
@@ -61,15 +63,14 @@ class MovieInfo(Converter):
 					or info.getInfoString(service, iServiceInformation.sDescription)
 					or service.getPath())
 			elif self.type == self.MOVIE_NAME:
-				if (service.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
-					# Name for directory is the full path
-					return service.getPath()
+				if isDirectory:
+					return basename(normpath(service.getPath()))
 				return event and event.getEventName() or info and info.getName(service)
 			elif self.type == self.MOVIE_REC_SERVICE_NAME:
 				rec_ref_str = info.getInfoString(service, iServiceInformation.sServiceref)
 				return ServiceReference(rec_ref_str).getServiceName()
 			elif self.type == self.MOVIE_REC_FILESIZE:
-				if (service.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
+				if isDirectory:
 					return _("Directory")
 				filesize = info.getFileSize(service)
 				if filesize is not None:
