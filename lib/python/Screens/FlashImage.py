@@ -373,7 +373,7 @@ class FlashImage(Screen):
 			if "://" in self.source:
 				self["header"].setText(_("Downloading Image"))
 				self["info"].setText(self.imagename)
-				self.downloader = DownloadWithProgress(self.source, self.zippedimage)
+				self.downloader = DownloadWithProgress(self.source.replace(" ", "%20"), self.zippedimage)
 				self.downloader.addProgress(self.downloadProgress)
 				self.downloader.addEnd(self.downloadEnd)
 				self.downloader.addError(self.downloadError)
