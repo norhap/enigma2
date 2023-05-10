@@ -157,10 +157,11 @@ class SelectImage(Screen):
 			self.session.openWithCallback(self.reloadImagesList, FlashImage, currentSelected[0][0], currentSelected[0][1])
 
 	def reloadImagesList(self):
+		self["list"].setList([ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
+		self["list"].moveToIndex(0)
+		self.selectionChanged()
 		self.imagesList = {}
-		self.jsonlist = {}
-		self.expanded = []
-		self.getImagesList()
+		self.callLater(self.getImagesList)
 
 	def keyDelete(self):
 		currentSelected = self["list"].l.getCurrentSelection()[0][1]
@@ -182,10 +183,9 @@ class SelectImage(Screen):
 	def otherImagesCallback(self, image):
 		if image:
 			self.selectedImage = image[1]
-			self["list"].setList([ChoiceEntryComponent('', ((_("Retrieving image list - Please wait...")), "Waiter"))])
-			self["list"].moveToIndex(0)
-			self.selectionChanged()
-			self.callLater(self.reloadImagesList)
+			self.jsonlist = {}
+			self.expanded = []
+			self.reloadImagesList()
 
 	def selectionChanged(self):
 		currentSelected = self["list"].l.getCurrentSelection()
