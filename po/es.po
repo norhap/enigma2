@@ -4509,6 +4509,9 @@ msgstr "No, pero reiniciar desde el principio"
 msgid "No, do not flash image"
 msgstr "No, no flashear imagen"
 
+msgid "No, only image download"
+msgstr "No, solo descargar imagen"
+
 msgid "No, except Wakeup timer"
 msgstr "No, excepto el temporizador despertador"
 

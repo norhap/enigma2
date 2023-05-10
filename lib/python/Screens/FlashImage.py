@@ -273,12 +273,17 @@ class FlashImage(Screen):
 				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
 			for x in range(1, numberSlots):
 				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagesList[x]['imagename']), (x, "without backup")))
+			if "://" in self.source:
+				choices.append((_("No, only image download"), (1, "only download")))
 			choices.append((_("No, do not flash image"), False))
 			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 		else:
 			self.session.openWithCallback(self.abort, MessageBox, _("Storage device not available.\nMount device or reboot system and try again."), type=MessageBox.TYPE_ERROR, timeout=10)
 		if not SystemInfo["canMultiBoot"]:
-			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup"), (_("No, do not flash image"), False)]
+			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup")]
+			if "://" in self.source:
+				choices.append((_("No, only image download"), "only download"))
+			choices.append((_("No, do not flash image"), False))
 			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=False, simple=True)
 
 	def checkMedia(self, retval):
@@ -286,8 +291,10 @@ class FlashImage(Screen):
 			if SystemInfo["canMultiBoot"]:
 				self.multibootslot = retval[0]
 				doBackup = retval[1] == "with backup"
+				self.onlyDownload = retval[1] == "only download"
 			else:
 				doBackup = retval == "with backup"
+				self.onlyDownload = retval == "only download"
 
 			def findmedia(path):
 				def avail(path):
@@ -398,10 +405,13 @@ class FlashImage(Screen):
 		self.unzip()
 
 	def unzip(self):
-		self["header"].setText(_("Unzipping Image"))
-		self["info"].setText("%s\n%s" % (self.imagename, _("Please wait")))
-		self["progress"].hide()
-		self.callLater(self.doUnzip)
+		if self.onlyDownload:
+			self.session.openWithCallback(self.abort, MessageBox, _("Download Successsful\n%s") % self.imagename, type=MessageBox.TYPE_INFO, simple=True)
+		else:
+			self["header"].setText(_("Unzipping Image"))
+			self["info"].setText("%s\n%s" % (self.imagename, _("Please wait")))
+			self["progress"].hide()
+			self.callLater(self.doUnzip)
 
 	def doUnzip(self):
 		try:
