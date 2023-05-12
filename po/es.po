@@ -1347,12 +1347,6 @@ msgstr "Menú de contexto de canales"
 msgid "Channel list type"
 msgstr "Tipo de lista de canales"
 
-msgid "Channel list was successfully purged."
-msgstr "La lista de canales se purgó con éxito."
-
-msgid "Channel list is clean no characters to purge."
-msgstr "La lista de canales está limpia, no hay caracteres para purgar."
-
 msgid "Channel not in services list"
 msgstr "Canal no en lista de canales"
 
@@ -2207,6 +2201,9 @@ msgstr[1] "Hecho - Instalados, actualizados o borrados %d paquetes (%s)"
 msgid "Download plugins"
 msgstr "Descargar plugins"
 
+msgid "Download successfully\n%s"
+msgstr "Descarga con éxito\n%s"
+
 msgid "Install plugins"
 msgstr "Instalar plugins"
 
@@ -2242,8 +2239,8 @@ msgid "ERROR - failed to scan (%s)!"
 msgstr "ERROR - falló el búsqueda (%s)!"
 
 #, python-format
-msgid "ERROR downloading file %s. Use button YELLOW in server \"Purge channel list\""
-msgstr "ERROR al descargar el archivo %s. Use el botón AMARILLO en el servidor \"Purgar lista de canales\""
+msgid "ERROR downloading file %s/%s"
+msgstr "ERROR descargando archivo %s/%s"
 
 msgid "East"
 msgstr "Este"
@@ -2335,23 +2332,11 @@ msgid ""
 "\n"
 "\n"
 "You can use this receiver only in client mode using server channel list, timers and EPG."
-"\n"
-"\n"
-"If YELLOW button is available, it means that channel list include characters bad, e.g. \"+\", then list cannot be import from server."
-"\n"
-"\n"
-"If you press YELLOW button then it will clean up list to remove these characters."
 msgstr ""
 "Permita que el receptor servidor intente sintonizar canales que no se pueden sintonizar localmente, ej. el sintonizador está ocupado o el tipo de canal no está disponible en el sintonizador local."
 "\n"
 "\n"
 "Puede usar este receptor solo en modo cliente usando la lista de canales del servidor, temporizadores y EPG."
-"\n"
-"\n"
-"Si el botón AMARILLO está disponible, significa que la lista de canales incluye caracteres incorrectos, por ejemplo, \"+\", entonces la lista no se puede importar desde el servidor."
-"\n"
-"\n"
-"Si pulsa el botón AMARILLO, se limpiará la lista para eliminar estos caracteres."
 
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
@@ -18325,9 +18310,6 @@ msgstr "Idioma ya seleccionado."
 
 msgid "Jump to the currently active locale/language"
 msgstr "Ir al ajuste regional/idioma actualmente activo"
-
-msgid "Purge channel list"
-msgstr "Purgar lista de canales"
 
 msgid ""
 "GUI needs a restart to switch modes\n"
