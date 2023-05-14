@@ -60,7 +60,7 @@ class ImportChannels():
 		try:
 			return self.getUrl(self.url + "/api/settings")
 		except HTTPError as err:
-			self.ImportChannelsNotDone(True, _("%s") % err)
+			self.ImportChannelsNotDone(True, "%s" % err)
 			return
 
 	def getFallbackSettingsValue(self, settings, e2settingname):
@@ -234,9 +234,9 @@ class ImportChannels():
 					try:
 						content = self.getUrl("%s/file?file=%s/%s" % (self.url, channelslistpath, quote(file))).readlines()
 						content = map(lambda l: l.decode('utf-8', 'replace'), content)
-					except Exception as e:
-						print("[ImportChannels] Exception: %s" % str(e))
-						self.ImportChannelsNotDone(True, _("ERROR downloading file %s/%s") % (channelslistpath, file))
+					except Exception as err:
+						print("[ImportChannels] Exception: %s" % str(err))
+						self.ImportChannelsNotDone(True, _("%s\nRead failled %s/%s from %s") % (err, channelslistpath, file, self.url))
 						return
 				else:
 					with open('%s/%s' % (channelslistpath, file), 'r') as f:
@@ -277,7 +277,7 @@ class ImportChannels():
 				try:
 					open(join(self.tmp_dir, basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, channelslistpath, quote(file))).read())
 				except Exception as err:
-					self.ImportChannelsNotDone(True, _("Error: %s") % str(err))
+					self.ImportChannelsNotDone(True, _("%s\nFailed to download %s/%s from %s") % (err, channelslistpath, file, self.url))
 					return
 
 			print("[ImportChannels] Enumerate local files")

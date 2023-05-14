@@ -17824,6 +17824,12 @@ msgstr "'%s' no se puede vincular a grabaciones"
 msgid "Error: Invalid location!"
 msgstr "Error: Ubicación Inválida!"
 
+msgid "%s\nFailed to download %s/%s from %s"
+msgstr "%s\nFalló al descargar %s/%s desde %s"
+
+msgid "%s\nRead failled %s/%s from %s"
+msgstr "%s\nLectura fallida %s/%s desde %s"
+
 msgid "Switch to bookmarks panel"
 msgstr "Cambiar al panel de marcadores"
 
