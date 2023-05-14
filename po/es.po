@@ -11818,7 +11818,7 @@ msgid ""
 "Backup file is corrupt!\n"
 "Backup file will be deleted!"
 msgstr ""
-"¡El archivo de copia de está corrupto!\n"
+"¡La copia de archivo está corrupto!\n"
 "Se borrará el archivo de respaldo!"
 
 msgid "Backup file is not found!"
@@ -11832,69 +11832,6 @@ msgstr "Canales"
 
 msgid "Choice days for refresh"
 msgstr "Elige días para actualizar"
-
-msgid "Clear EPG"
-msgstr "Limpiar EPG"
-
-msgid "Clear all EPG"
-msgstr "Limpiar todo el EPG"
-
-msgid "Clear only epg.dat and epg.dat.backup"
-msgstr "Limpiar solo epg.dat y epg.dat.copia"
-
-msgid "Clear only in memory (RAM) EPG"
-msgstr "Borrar solo en memoria (RAM) EPG"
-
-msgid "Configuration save / load EPG"
-msgstr "Configuracin guardar/cargar EPG"
-
-msgid "Configure EPG load interval, if enabled. This is an option for experienced users."
-msgstr "Configure el intervalo de carga de EPG, si está habilitado. Esta es una opción para usuarios experimentados."
-
-msgid "Configure EPG save interval, if enabled."
-msgstr "Configure el intervalo de guardado EPG, si está habilitado."
-
-msgid "Create a backup cache file, after manually or automatically saving EPG."
-msgstr "Cree un archivo caché de copia, después de guardar manualmente o automáticamente EPG."
-
-msgid "Create backup when saving EPG"
-msgstr "Crear copia al guardar EPG"
-
-msgid "Current EPG cachefile:"
-msgstr "Actual archivo cache EPG:"
-
-msgid "Delay if not in standby (in minutes)"
-msgstr "Retraso si no está en modo de espera (en minutos)"
-
-msgid "Don't wait for the receiver to go into standby when starting a refresh cycle."
-msgstr "No espere a que el receptor entre en modo de espera al iniciar un ciclo de actualización."
-
-msgid "Duration to show each service (in seconds) for 'AutoZap'"
-msgstr "Duración para mostrar cada canal (en segundos) para 'AutoZapeo'"
-
-msgid "EPG Cache Check"
-msgstr "Comprobar EPG cache"
-
-msgid "EPG cache file filename"
-msgstr "Archivo EPG cache nombre del archivo"
-
-msgid "EPG cache file path"
-msgstr "Ruta del archivo EPG cache"
-
-msgid "EPG refresh auto-start earliest (hh:mm)"
-msgstr "Actualizar EPG auto-encendido más temprano (hh: mm)"
-
-msgid "EPG refresh auto-start latest (hh:mm)"
-msgstr "Actualizar EPG auto-encendido más tarde (hh: mm)"
-
-msgid "EPG refresh finished."
-msgstr "Actualizar EPG terminado."
-
-msgid "EPG refresh started in background."
-msgstr "La actualización de EPG comenzó en segundo plano."
-
-msgid "EPG refresh starts scanning channels."
-msgstr "La actualización EPG comienza a escanear canales."
 
 msgid "Not enough disk space. Please free up some disk space and try again. (%(req)d MB required, %(avail)d MB available)"
 msgstr "No hay suficiente espacio en el disco. Libere espacio en disco e inténtelo de nuevo. (%(req)d MB requerido, %(avail)d MB disponible)"
