@@ -61,6 +61,7 @@ class ImportChannels():
 			return self.getUrl(self.url + "/api/settings")
 		except HTTPError as err:
 			self.ImportChannelsNotDone(True, _("%s") % err)
+			return
 
 	def getFallbackSettingsValue(self, settings, e2settingname):
 		if isinstance(settings, bytes):
@@ -277,6 +278,7 @@ class ImportChannels():
 					open(join(self.tmp_dir, basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, channelslistpath, quote(file))).read())
 				except Exception as err:
 					self.ImportChannelsNotDone(True, _("Error: %s") % str(err))
+					return
 
 			print("[ImportChannels] Enumerate local files")
 			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')
