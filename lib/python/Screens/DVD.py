@@ -214,6 +214,7 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 		self["OkCancelActions"] = ActionMap(["OkCancelActions"],
 			{
 				"ok": self.keyOk,
+				"OK": self.doNothing,  # disable showing / toggle infobar in menu for key break event
 				"cancel": self.keyCancel,
 			}, -2)
 
@@ -428,7 +429,7 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 		if angleTuple:
 			angleString = ""
 			if angleTuple[1] > 1:
-				angleString = "%d / %d" % (angleTuple[0], angleTuple[1])
+				angleString = "%s %d / %d" % (_("Angle"), angleTuple[0], angleTuple[1])
 				self["anglePix"].show()
 			else:
 				self["anglePix"].hide()
@@ -532,7 +533,9 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 		self.sendKey(iServiceKeys.keyDown)
 
 	def keyOk(self):
+		self.skipToggleShow = True
 		if self.sendKey(iServiceKeys.keyOk) and not self.in_menu:
+			self.skipToggleShow = False
 			self.okButton()
 			print("[DVD] keyOk")
 			self.toggleInfo()
@@ -627,7 +630,7 @@ class DVDPlayer(Screen, InfoBarBase, InfoBarNotifications, InfoBarSeek, InfoBarP
 		except Exception as ex:
 #			If the service is an .iso or .img file we assume it is PAL
 #			Sorry we cannot open image files here.
-			print("[DVD] Cannot read file or is ISO/IMG :%s", ex)
+			print("[DVD] Cannot read file or is ISO/IMG: %s" % ex)
 		finally:
 			if ifofile is not None:
 				ifofile.close()
