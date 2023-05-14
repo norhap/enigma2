@@ -1677,6 +1677,9 @@ msgstr "Islas Cook"
 msgid "Copy"
 msgstr "Copiar"
 
+msgid "Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location."
+msgstr "Los volcados del núcleo son útiles para los desarrolladores en caso de un bloqueo FATAL SIGNAL en el código C++. El tamaño típico de volcado del núcleo es de 110 MB, por lo tanto, ajuste el espacio máximo utilizado y elija la ubicación adecuada."
+
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
@@ -2319,6 +2322,9 @@ msgstr "Activar búsqueda automática rápida"
 #, python-format
 msgid "Enable auto fast scan for %s"
 msgstr "Activar búsqueda automática rápida para %s"
+
+msgid "Enable core dumps *"
+msgstr "Habilitar volcados de núcleo *"
 
 msgid "Enable fallback remote receiver"
 msgstr "Habilitar el receptor reserva para respaldo"

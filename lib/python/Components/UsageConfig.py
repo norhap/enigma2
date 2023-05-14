@@ -1252,6 +1252,7 @@ def InitUsageConfig():
 	config.crash = ConfigSubsection()
 	config.crash.debugEPG = ConfigYesNo(default=False)
 	config.crash.debugDVBScan = ConfigYesNo(default=False)
+	config.crash.coredump = ConfigYesNo(default=False)
 
 	def updateStackTracePrinter(configElement):
 		from Components.StackTrace import StackTracePrinter
@@ -1298,7 +1299,7 @@ def InitUsageConfig():
 	config.crash.debugPath.addNotifier(updateDebugPath, immediate_feedback=False)
 	config.crash.debugFileCount = ConfigSelectionNumber(min=2, max=5, stepwidth=1, default=2, wraparound=True)
 	config.crash.daysloglimit = ConfigSelectionNumber(min=1, max=30, stepwidth=1, default=2, wraparound=True)
-	config.crash.sizeloglimit = ConfigSelectionNumber(min=1, max=20, stepwidth=1, default=5, wraparound=True)
+	config.crash.sizeloglimit = ConfigSelectionNumber(min=1, max=250, stepwidth=1, default=5, wraparound=True)
 	config.crash.debugFileCount.save_forced = True
 
 	config.logmanager = ConfigSubsection()

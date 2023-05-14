@@ -46,6 +46,35 @@ else
 	LIBS="@libdir@/libopen.so.0.0.0"
 fi
 
+# enigma2-core.dump.
+DEBUGDIR=`sed -En 's|^config\.crash\.debugPath=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
+if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
+	if [ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/" ]; then
+		COREDUMPSIZE=$((10 * 512 * 4 - 1 * 512 * 4)) # size is in blocks (512 byte) so this sets 10 MB - 1 MB for log files
+		COREDUMPFILE=${DEBUGDIR}%t-enigma2-core.dump
+	fi
+	if [ "$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')" != "" ]; then
+		COREDUMPSIZE=$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')
+		COREDUMPSIZE=$((${COREDUMPSIZE} * 512 * 4 - 1 * 512 * 4))
+	fi
+	echo ${COREDUMPFILE} > /proc/sys/kernel/core_pattern
+	ulimit -c ${COREDUMPSIZE}
+fi
+
+enigma2pid=$!
+
+# Enable generation of core dumps with ELF header included.
+# This seem to be required by gdb.
+# Would be default if kernel is configured with CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS.
+# Default coredump filter can only be set via kernel command line.
+# In all other cases this is only available per process.
+if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
+	COREDUMPFILTER=0x33
+	echo ${COREDUMPFILTER} > /proc/${enigma2pid}/coredump_filter
+fi
+
+wait ${enigma2pid}
+
 # This should not be done as it will suppress the appropriate diagnostic message from within Enigma2.
 #
 # if [ ! -e /etc/enigma2/settings ]; then
@@ -94,7 +123,6 @@ while : ; do
 	if [ "${DEBUG_LVL}" -lt "4" ]; then
 		LD_PRELOAD="${LIBS}" ENIGMA_DEBUG_LVL="${DEBUG_LVL}" ENIGMA_DEBUG_TIME="${DEBUG_TIME}" "@bindir@/enigma2"
 	else
-		DEBUGDIR=`sed -En 's|^config\.crash\.debugPath=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
 		[ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/"
 		# Remove old logfiles.
 		KEEP=`sed -En 's|^config\.crash\.debugFileCount=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
