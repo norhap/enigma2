@@ -2087,7 +2087,8 @@ void eDVBChannel::getNextSourceSpan(off_t current_offset, size_t bytes_read, off
 					m_skipmode_m = 0;
 					sof = 1;
 				}
-			} else
+			}
+			else
 			{
 					/* when skipping reverse, however, choose the zone before. */
 					/* This returns a size 0 block, in case you noticed... */
