@@ -9948,9 +9948,6 @@ msgstr "SoftCam & CI"
 msgid "Standby / restart"
 msgstr "Reposo & Reinicios"
 
-msgid "Tuner configuration"
-msgstr "Configuración del sintonizador"
-
 msgid "VCR scart"
 msgstr "SoftCam / CI"
 
@@ -14587,8 +14584,8 @@ msgstr "Le permite establecer un horario para importar la EPG y la lista de cana
 msgid "Are you sure you want to delete this:\n"
 msgstr "Estás seguro que quieres eliminar esto:\n"
 
-msgid "Client mode"
-msgstr "Modo Cliente"
+msgid "Client Mode Tuner Settings"
+msgstr "Ajustes Sintonizador Modo Cliente"
 
 msgid ""
 "Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared.\n"
