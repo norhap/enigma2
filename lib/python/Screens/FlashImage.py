@@ -15,7 +15,7 @@ from re import sub
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
-from Screens.Standby import getReasons, QUIT_RESTART, QUIT_REBOOT, TryQuitMainloop
+from Screens.Standby import getReasons, QUIT_RESTART, TryQuitMainloop
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.config import config, configfile
@@ -689,7 +689,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 				with open("/%s/STARTUP_%d" % (self.tmp_dir, usbslot), 'w') as f:
 					f.write(STARTUP_usbslot)
 				print("[MultibootSelection] STARTUP_%d --> %s, self.tmp_dir: %s" % (usbslot, STARTUP_usbslot, self.tmp_dir))
-			self.session.open(TryQuitMainloop, QUIT_REBOOT)
+			self.session.open(TryQuitMainloop, QUIT_RESTART)
 
 	def KexecMountRet(self, result=None, retval=None, extra_args=None):
 		self.device_uuid = "UUID=" + result.split("UUID=")[1].split(" ")[0].replace('"', '')
