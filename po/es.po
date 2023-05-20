@@ -47,8 +47,8 @@ msgstr ""
 "\n"
 "Pulsa OK en su mando para continuar."
 
-msgid "Press GREEN button to enable MultiBoot\n\nWill reboot within 10 seconds,\nunless you have eMMC slots to restore.\nRestoring eMMC slots can take from 1 -> 5 minutes per slot."
-msgstr "Pulse el botón VERDE para habilitar MultiBoot\n\nSe reiniciará en 10 segundos,\na menos que tenga slots eMMC para restaurar.\nLa restauración de las slots eMMC puede llevar de 1 a 5 minutos por slot."
+msgid "Press GREEN button to enable MultiBoot.\n\nYour receiver will reboot and create the eMMC partitions."
+msgstr "Pulse el botón VERDE para habilitar MultiBoot.\n\nSu receptor se reiniciará y creará las particiones eMMC."
 
 msgid "Press LEFT RIGHT OK or MENU to change path."
 msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para cambiar de ruta."
@@ -4669,7 +4669,7 @@ msgid "Order by slots"
 msgstr "Ordenar por slots"
 
 msgid "Orde image per modes and slots (require receiver with mode slot 12)"
-msgstr "Ordene la imagen por modos y ranuras (requiere receptor con slot modo 12)"
+msgstr "Ordene la imagen por modos y slots (requiere receptor con slot modo 12)"
 
 msgid "Overall progress:"
 msgstr "Progreso total:"
@@ -5071,6 +5071,9 @@ msgstr "Preparando… Espere"
 
 msgid "Press '0' to toggle PiP mode"
 msgstr "Pulse ‘0’ para alternar el modo PiP"
+
+msgid "Press \"Yes\" for Enable Vu+ MultiBoot.\n\nPress \"No\" to continue wizard."
+msgstr "Pulse \"Sí\" para Habilitar Vu+ MultiBoot.\n\nPulse \"No\" para continuar con el asistente."
 
 msgid "Press INFO on your remote control for additional information."
 msgstr "Pulse INFO en su mando para obtener información adicional."
@@ -8067,11 +8070,11 @@ msgstr "Archivo VOB"
 msgid "VU+"
 msgstr "VU+"
 
-msgid "Vu+ MultiBoot Initialisation - will reboot after 10 seconds."
-msgstr "Inicialización de Vu+ MultiBoot: se reiniciará después de 10 segundos."
+msgid "Vu+ MultiBoot Initialisation: Your receiver will reboot."
+msgstr "Inicialización de Vu+ MultiBoot: Su receptor va a reiniciar."
 
-msgid "Vu+ MultiBoot Initialisation in progress\n\nWill reboot after restoring any eMMC slots\nThis can take from 1 -> 5 minutes per slot."
-msgstr "Inicialización de Vu+ MultiBoot en progreso\n\nSe reiniciará después de restaurar cualquier slot eMMC\nEsto puede tomar de 1 a 5 minutos por slot."
+msgid "Creating eMMC slots in progress."
+msgstr "Creación de slots eMMC en curso."
 
 msgid "VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."
 msgstr "VuplusKexec: Crear entorno Vu+ Multiboot - no se puede completar, faltan archivos Vu+ Multiboot."

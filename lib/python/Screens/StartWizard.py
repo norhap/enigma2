@@ -13,6 +13,7 @@ from Components.ProgressBar import ProgressBar
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
+from Components.SystemInfo import SystemInfo
 from Components.config import config, ConfigBoolean, configfile
 from Tools.Geolocation import geolocation
 from Screens.LanguageSelection import LanguageWizard
@@ -185,6 +186,9 @@ wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinst
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
 if geolocationData.get("status", None) != "success":
 	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
+if SystemInfo["canKexec"]:
+	from Screens.VuplusKexec import VuWizard
+	wizardManager.registerWizard(VuWizard, config.misc.firstrun.value, priority=2)
 wizardManager.registerWizard(TimeWizard, config.misc.firstrun.value, priority=20)
 # if OverscanWizard:  # No ckeck for StartWizard.
 	# wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
