@@ -6,12 +6,6 @@ import glob
 import tempfile
 from subprocess import check_output
 from Components.SystemInfo import SystemInfo, BoxInfo as BoxInfoRunningInstance, BoxInformation
-from Tools.Directories import fileContains, fileExists
-
-if fileContains("/proc/cmdline", "kexec=1"):
-	from PIL import Image
-	from PIL import ImageDraw
-	from PIL import ImageFont
 
 
 class tmp:
@@ -246,6 +240,7 @@ def bootmviSlot(imagedir="/", text=" ", slot=0):
 	if os.path.exists(inmviPath):
 		if os.path.exists(outmviPath) and os.path.exists(txtPath) and open(txtPath).read() == text:
 			return
+		from PIL import Image, ImageDraw, ImageFont
 		print("[MultiBoot][bootmviSlot] Copy /usr/share/bootlogo.mvi to /tmp/bootlogo.m1v")
 		Console(binary=True).ePopen("cp %s /tmp/bootlogo.m1v" % inmviPath)
 		print("[MultiBoot][bootmviSlot] Dump iframe to png")
@@ -274,7 +269,7 @@ def VerDate(imagedir):
 	date3 = "00000000"
 	date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
 	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
-	if fileExists(os.path.join(imagedir, "usr/share/bootlogo.mvi")):
+	if os.path.exists(os.path.join(imagedir, "usr/share/bootlogo.mvi")):
 		date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
 	print("[MultiBoot][VerDate]1 date1, date2, date3", date1, "   ", date2, "   ", date3)
 	date = max(date1, date2, date3)
