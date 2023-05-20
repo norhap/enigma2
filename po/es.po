@@ -2096,12 +2096,8 @@ msgstr ""
 msgid "Do you really want to exit?"
 msgstr "¿Realmente quiere salir?"
 
-msgid ""
-"Do you really want to initialize the device?\n"
-"All data on the disk will be lost!"
-msgstr ""
-"¿Quiere inicializar el dispositivo?\n"
-"Todos los datos en el disco se perderán!"
+msgid "Want to format the device to Linux file system?\nAll data on the device will be lost!"
+msgstr "¿Quieres formatear el dispositivo con el sistema de archivos Linux?\n¡Se perderán todos los datos del dispositivo!"
 
 #, python-format
 msgid ""
@@ -2918,7 +2914,7 @@ msgid "Force legacy signal stats"
 msgstr "Forzar estadísticas de señales heredadas"
 
 msgid "Format"
-msgstr "Formato"
+msgstr "Formatear"
 
 msgid "Forward volume keys"
 msgstr "Teclas de volumen hacia adelante"
@@ -3270,7 +3266,7 @@ msgid "Time delay for the repeated transmission"
 msgstr "Retardo de tiempo para la transmisión repetida"
 
 msgid "The services/bouquets list is reloaded!"
-msgstr "La lista de canales ha sido recargada"
+msgstr "La lista de canales ha sido recargada!"
 
 msgid "The time is multiplied by the current repeat counter."
 msgstr "El tiempo se multiplica por el contador de repetición actual."
@@ -3564,9 +3560,6 @@ msgstr "Calidad de señal inicial"
 
 msgid "Initial signal quality:"
 msgstr "Calidad de señal inicial:"
-
-msgid "Initialize"
-msgstr "Inicializar"
 
 msgid "Initializing storage device..."
 msgstr "Inicializando el dispositivo de almacenamiento."
@@ -6115,8 +6108,8 @@ msgstr "Seleccionar ficheros/carpetas a copiar"
 msgid "Select function"
 msgstr "Seleccionar función"
 
-msgid "Select hard disk"
-msgstr "Seleccionar Disco Duro"
+msgid "Format Disk Settings"
+msgstr "Ajustes Formatear Disco"
 
 msgid "Select horizontal resolution:"
 msgstr "Seleccione la resolución horizontal:"
@@ -6394,8 +6387,8 @@ msgstr "Establece el directorio raíz de la lista de películas, para eliminar e
 msgid "Setup"
 msgstr "Configuración"
 
-msgid "Setup hard disk"
-msgstr "Configuración Disco Duro"
+msgid "Format Disk"
+msgstr "Formatear Disco"
 
 msgid "Setup menu"
 msgstr "Menú de configuración"
