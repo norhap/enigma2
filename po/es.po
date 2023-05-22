@@ -3419,6 +3419,9 @@ msgstr "IDLE"
 msgid "IP address"
 msgstr "Dirección IP"
 
+msgid "IP %s is not valid.\nDisable client mode if you are going to use this address."
+msgstr "IP %s no es válida.\nDesactive modo cliente si va a utilizar esta dirección."
+
 msgid "Port (httpport)"
 msgstr "Puerto (httpport)"
 
