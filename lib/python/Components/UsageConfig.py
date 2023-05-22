@@ -1,6 +1,6 @@
 from locale import AM_STR, PM_STR, nl_langinfo
 from os import makedirs, remove
-from os.path import exists, isfile, join as pathjoin, normpath
+from os.path import exists, isfile, join, normpath
 from time import mktime
 
 from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
@@ -307,7 +307,7 @@ def InitUsageConfig():
 	config.usage.default_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.default_path.load()
 	if config.usage.default_path.saved_value:
-		savedValue = pathjoin(config.usage.default_path.saved_value, "")
+		savedValue = join(config.usage.default_path.saved_value, "")
 		if savedValue and savedValue != defaultValue:
 			config.usage.default_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.default_path.value = savedValue
@@ -316,7 +316,7 @@ def InitUsageConfig():
 	config.usage.timer_path = ConfigSelection(default="<default>", choices=choiceList)
 	config.usage.timer_path.load()
 	if config.usage.timer_path.saved_value:
-		savedValue = config.usage.timer_path.saved_value if config.usage.timer_path.saved_value.startswith("<") else pathjoin(config.usage.timer_path.saved_value, "")
+		savedValue = config.usage.timer_path.saved_value if config.usage.timer_path.saved_value.startswith("<") else join(config.usage.timer_path.saved_value, "")
 		if savedValue and savedValue not in choiceList:
 			config.usage.timer_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.timer_path.value = savedValue
@@ -324,7 +324,7 @@ def InitUsageConfig():
 	config.usage.instantrec_path = ConfigSelection(default="<default>", choices=choiceList)
 	config.usage.instantrec_path.load()
 	if config.usage.instantrec_path.saved_value:
-		savedValue = config.usage.instantrec_path.saved_value if config.usage.instantrec_path.saved_value.startswith("<") else pathjoin(config.usage.instantrec_path.saved_value, "")
+		savedValue = config.usage.instantrec_path.saved_value if config.usage.instantrec_path.saved_value.startswith("<") else join(config.usage.instantrec_path.saved_value, "")
 		if savedValue and savedValue not in choiceList:
 			config.usage.instantrec_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.instantrec_path.value = savedValue
@@ -334,7 +334,7 @@ def InitUsageConfig():
 	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
-		savedValue = pathjoin(config.usage.timeshift_path.saved_value, "")
+		savedValue = join(config.usage.timeshift_path.saved_value, "")
 		if savedValue and savedValue != defaultValue:
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
@@ -1194,27 +1194,30 @@ def InitUsageConfig():
 				hddchoises.append((p.mountpoint, d))
 	config.misc.epgcachepath = ConfigSelection(default="/etc/enigma2/", choices=hddchoises)
 	config.misc.epgcachefilename = ConfigText(default="epg", fixed_size=False)
-	config.misc.epgcache_filename = ConfigText(default=pathjoin(config.misc.epgcachepath.value, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+	config.misc.epgcache_filename = ConfigText(default=join(config.misc.epgcachepath.value, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
 
 	def EpgCacheChanged(configElement):
-		config.misc.epgcache_filename.setValue(pathjoin(config.misc.epgcachepath.value, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+		config.misc.epgcache_filename.setValue(join(config.misc.epgcachepath.value, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
 		config.misc.epgcache_filename.save()
 		eEPGCache.getInstance().setCacheFile(config.misc.epgcache_filename.value)
 		epgcache = eEPGCache.getInstance()
 		epgcache.save()
 		for partition in harddiskmanager.getMountedPartitions():  # ckeck epg.dat file
-			if exists(partition.mountpoint):
-				path = normpath(partition.mountpoint)
+			path = normpath(partition.mountpoint)
 			if not config.misc.firstrun.value:
-				if not config.misc.epgcache_filename.value.startswith("/etc/enigma2/"):  # delete internal flash
-					if exists(pathjoin("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
-						remove(pathjoin("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
-					if path not in config.misc.epgcache_filename.value:  # delete on all devices with no value in config
-						if exists(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
-							remove(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
-				else:  # delete in all devices except internal flash
-					if exists(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
-						remove(pathjoin(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+				try:
+					if not config.misc.epgcache_filename.value.startswith("/etc/enigma2/"):  # delete internal flash
+						if exists(join("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
+							remove(join("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+						if path not in config.misc.epgcache_filename.value:  # delete on all devices with no value in config
+							if exists(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
+								remove(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+					else:  # delete in all devices except internal flash
+						if exists(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
+							remove(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+				except:
+					pass
+
 	config.misc.epgcachepath.addNotifier(EpgCacheChanged, immediate_feedback=False)
 	config.misc.epgcachefilename.addNotifier(EpgCacheChanged, immediate_feedback=False)
 
@@ -1285,7 +1288,7 @@ def InitUsageConfig():
 		if exists(partition.mountpoint):
 			path = normpath(partition.mountpoint)
 			if partition.mountpoint != "/":
-				debugPath.append((pathjoin(partition.mountpoint, "logs", ""), path))
+				debugPath.append((join(partition.mountpoint, "logs", ""), path))
 	config.crash.debugPath = ConfigSelection(default="/home/root/logs/", choices=debugPath)
 
 	def updateDebugPath(configElement):
