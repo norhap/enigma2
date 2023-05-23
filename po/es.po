@@ -53,6 +53,9 @@ msgstr "Pulse el botón VERDE para habilitar MultiBoot.\n\nSu receptor se reinic
 msgid "Press LEFT RIGHT OK or MENU to change path."
 msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para cambiar de ruta."
 
+msgid "Reload services/bouquets list"
+msgstr "Recargar lista de canales"
+
 msgid "Restore previous cuts..."
 msgstr "Restaurar cortes anteriores ..."
 
@@ -3265,6 +3268,9 @@ msgstr "Repita los comandos de espera y activación enviados"
 
 msgid "Time delay for the repeated transmission"
 msgstr "Retardo de tiempo para la transmisión repetida"
+
+msgid "The services/bouquets list is reloaded!"
+msgstr "La lista de canales ha sido recargada"
 
 msgid "The time is multiplied by the current repeat counter."
 msgstr "El tiempo se multiplica por el contador de repetición actual."
