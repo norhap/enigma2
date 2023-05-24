@@ -15,7 +15,7 @@ from Tools.Directories import fileReadLine, fileReadLines
 
 
 def getProcMounts():
-	mounts = fileReadLines("/proc/mounts", [])
+	mounts = fileReadLine("/proc/mounts").split('\n', 1)
 	result = [line.strip().split(" ") for line in mounts]
 	for item in result:
 		item[1] = item[1].replace("\\040", " ")  # Spaces are encoded as \040 in mounts
@@ -674,13 +674,6 @@ class HarddiskManager:
 					if len(partitions) != 0:
 						if removable:
 							SystemInfo["HasUsbhdd"][part] = len(partitions)
-						physicalDevice = realpath(pathjoin("/sys/block", blockdev, "device"))
-						for partition in partitions:
-							description = self.getUserfriendlyDeviceName(partition, physicalDevice)
-							print("[Harddisk] Found partition '%s', description='%s', device='%s'." % (partition, description, physicalDevice))
-							part = Partition(mountpoint=self.getMountpoint(partition, skiproot=True), description=description, force_mounted=True, device=partition)
-							self.partitions.append(part)
-							self.on_partition_list_change("add", part)
 				self.devices_scanned_on_init.append((blockdev, removable, is_cdrom, medium_found))
 
 	def enumerateNetworkMounts(self, refresh=False):
@@ -728,7 +721,6 @@ class HarddiskManager:
 		# physdev is the physical device path, which we (might) use to determine the userfriendly name
 		if not physdev:
 			dev, part = self.splitDeviceName(device)
-			devicePath = "/sys/block/%s" % dev
 			try:
 				physdev = realpath("/sys/block/" + dev + "/device")[4:]
 			except (IOError, OSError) as err:
@@ -747,7 +739,6 @@ class HarddiskManager:
 				self.hdd.append(Harddisk(device, removable))
 				self.hdd.sort()
 				SystemInfo["Harddisk"] = True
-			partitions = [partition for partition in sorted(listdir(devicePath)) if partition.startswith(dev)]
 			if len(partitions) != 0:
 				SystemInfo["HasUsbhdd"][device] = len(partitions)
 				print("[Harddisk]2 SystemInfo['HasUsbhdd']= %s" % SystemInfo["HasUsbhdd"])
