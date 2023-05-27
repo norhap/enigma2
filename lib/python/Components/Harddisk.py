@@ -15,7 +15,7 @@ from Tools.Directories import fileReadLine, fileReadLines
 
 
 def getProcMounts():
-	mounts = fileReadLine("/proc/mounts").split('\n', 1)
+	mounts = fileReadLines("/proc/mounts", [])
 	result = [line.strip().split(" ") for line in mounts]
 	for item in result:
 		item[1] = item[1].replace("\\040", " ")  # Spaces are encoded as \040 in mounts
@@ -713,7 +713,7 @@ class HarddiskManager:
 		dev = "/dev/%s" % device
 		for item in getProcMounts():
 			if (item[0] == dev and skiproot == None) or (item[0] == dev and skiproot == True and item[1] != "/"):
-				return item[1]
+				return pathjoin(item[1], "")
 		return None
 
 	def addHotplugPartition(self, device, physdev=None):
