@@ -496,14 +496,12 @@ def parseParameter(value):
 		return int(value)
 
 
-def parsePixmap(path, desktop, width=0, height=0):
+def parsePixmap(path, desktop):
 	option = path.find("#")
 	if option != -1:
 		path = path[:option]
-	if basename(path) in ("rc.png", "rc0.png", "rc1.png", "rc2.png", "oldrc.png"):
-		path = rc_model.getRcImg()
 	if isfile(path):
-		pixmap = LoadPixmap(path, desktop, None, width, height)
+		pixmap = LoadPixmap(path, desktop=desktop)
 		if pixmap is None:
 			skinError("Pixmap file '%s' could not be loaded" % path)
 	else:
@@ -521,6 +519,8 @@ def parseSize(value, scale, object=None, desktop=None):
 
 
 def parseValuePair(value, scale, object=None, desktop=None, size=None):
+	if value in variables:
+		value = variables[value]
 	(xValue, yValue) = value.split(",")  # These values will be stripped in parseCoordinate().
 	parentsize = eSize()
 	if object and ("c" in xValue or "c" in yValue or "e" in xValue or "e" in yValue or "%" in xValue or "%" in yValue):  # Need parent size for 'c', 'e' and '%'.
@@ -720,11 +720,12 @@ class AttributeParser:
 		return int(parseInteger(value) * self.scaleTuple[1][0] / self.scaleTuple[1][1])
 
 	def alphaTest(self, value):
+		# value = "blend" if value == "on" else value  workaround for renderer with transparent borders C++ does not use now BT_ALPHATEST for pixmap
 		self.guiObject.setAlphatest(parseAlphaTest(value))
 
 	def alphatest(self, value):  # This legacy definition uses an inconsistent name, use 'alphaTest' instead!
 		self.alphaTest(value)
-		# attribDeprecationWarning("alphatest", "alphaTest")
+		attribDeprecationWarning("alphatest", "alphaTest")
 
 	def animationMode(self, value):
 		self.guiObject.setAnimationMode(parseAnimationMode(value))
@@ -769,6 +770,8 @@ class AttributeParser:
 		pass
 
 	def flags(self, value):
+		if value in variables:
+			value = variables[value]
 		errors = []
 		flags = [x.strip() for x in value.split(",")]
 		for flag in flags:
@@ -799,11 +802,11 @@ class AttributeParser:
 
 	def halign(self, value):  # This legacy definition uses an inconsistent name, use 'horizontalAlignment' instead!
 		self.horizontalAlignment(value)
-		# attribDeprecationWarning("halign", "horizontalAlignment")
+		attribDeprecationWarning("halign", "horizontalAlignment")
 
 	def hAlign(self, value):  # This typo catcher definition uses an inconsistent name, use 'horizontalAlignment' instead!
 		self.horizontalAlignment(value)
-		# attribDeprecationWarning("hAlign", "horizontalAlignment")
+		attribDeprecationWarning("hAlign", "horizontalAlignment")
 
 	def horizontalAlignment(self, value):
 		self.guiObject.setHAlign(parseHorizontalAlignment(value))
@@ -840,10 +843,7 @@ class AttributeParser:
 		self.guiObject.setOverscan(value)
 
 	def pixmap(self, value):
-		# Why is this being forced?  Why not just use add the 'alphaTest' attribute?
-		# if value.endswith(".svg"):  # If the image is a SVG force alphatest to "blend".
-		# 	self.guiObject.setAlphatest(BT_ALPHABLEND)
-		self.guiObject.setPixmap(parsePixmap(value, self.desktop, self.guiObject.size().width(), self.guiObject.size().height()))
+		self.guiObject.setPixmap(parsePixmap(value, self.desktop))
 
 	def pointer(self, value):
 		(name, pos) = [x.strip() for x in value.split(":", 1)]
@@ -931,7 +931,7 @@ class AttributeParser:
 
 	def seek_pointer(self, value):  # This legacy definition uses an inconsistent name, use 'seekPointer' instead!
 		self.seekPointer(value)
-		# attribDeprecationWarning("seek_pointer", "seekPointer")
+		attribDeprecationWarning("seek_pointer", "seekPointer")
 
 	def seekPointer(self, value):
 		(name, pos) = [x.strip() for x in value.split(":", 1)]
@@ -989,11 +989,11 @@ class AttributeParser:
 
 	def valign(self, value):  # This legacy definition uses an inconsistent name, use 'verticalAlignment' instead!
 		self.verticalAlignment(value)
-		# attribDeprecationWarning("valign", "verticalAlignment")
+		attribDeprecationWarning("valign", "verticalAlignment")
 
 	def vAlign(self, value):  # This typo catcher definition uses an inconsistent name, use 'verticalAlignment' instead!
 		self.verticalAlignment(value)
-		# attribDeprecationWarning("vAlign", "verticalAlignment")
+		attribDeprecationWarning("vAlign", "verticalAlignment")
 
 	def valueFont(self, value):
 		self.guiObject.setValueFont(parseFont(value, self.scaleTuple))
@@ -1346,6 +1346,8 @@ class SkinContext:
 		return "Context (%s,%s)+(%s,%s)" % (self.x, self.y, self.w, self.h)
 
 	def parse(self, pos, size, font):
+		if size in variables:
+			size = variables[size]
 		if pos == "fill":
 			pos = (self.x, self.y)
 			size = (self.w, self.h)
@@ -1374,6 +1376,8 @@ class SkinContext:
 				size = (w, self.h)
 				self.w -= w
 			else:
+				if pos in variables:
+					pos = variables[pos]
 				size = (w, h)
 				pos = pos.split(",")
 				pos = (self.x + parseCoordinate(pos[0], self.w, size[0], font, self.scale[0]), self.y + parseCoordinate(pos[1], self.h, size[1], font, self.scale[1]))
@@ -1385,6 +1389,8 @@ class SkinContext:
 #
 class SkinContextStack(SkinContext):
 	def parse(self, pos, size, font):
+		if size in variables:
+			size = variables[size]
 		if pos == "fill":
 			pos = (self.x, self.y)
 			size = (self.w, self.h)
@@ -1405,6 +1411,8 @@ class SkinContextStack(SkinContext):
 				pos = (self.x + self.w - w, self.y)
 				size = (w, self.h)
 			else:
+				if pos in variables:
+					pos = variables[pos]
 				size = (w, h)
 				pos = pos.split(",")
 				pos = (self.x + parseCoordinate(pos[0], self.w, size[0], font, self.scale[0]), self.y + parseCoordinate(pos[1], self.h, size[1], font, self.scale[1]))
