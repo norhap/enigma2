@@ -12,10 +12,10 @@ from Components.UsageConfig import preferredPath
 class RecordPathsSettings(ConfigListScreen, Screen):
 	skin = """
 		<screen name="RecordPathsSettings" position="160,150" size="450,200" title="Recording paths">
-			<ePixmap pixmap="buttons/red.png" position="10,0" size="140,40" alphatest="on" />
-			<ePixmap pixmap="buttons/green.png" position="300,0" size="140,40" alphatest="on" />
-			<widget source="key_red" render="Label" position="10,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" transparent="1" />
-			<widget source="key_green" render="Label" position="300,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#1f771f" transparent="1" />
+			<ePixmap pixmap="buttons/red.png" position="10,0" size="140,40" alphaTest="on" />
+			<ePixmap pixmap="buttons/green.png" position="300,0" size="140,40" alphaTest="on" />
+			<widget source="key_red" render="Label" position="10,0" zPosition="1" size="140,40" font="Regular;20" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="300,0" zPosition="1" size="140,40" font="Regular;20" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#1f771f" transparent="1" />
 			<widget name="config" position="10,44" size="430,146" />
 		</screen>"""
 
