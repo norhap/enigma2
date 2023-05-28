@@ -185,7 +185,7 @@ geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,qu
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
 if geolocationData.get("status", None) != "success":
-	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value, priority=10)
+	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value and config.misc.firstrun.value, priority=10)
 if SystemInfo["canKexec"]:
 	from Screens.VuplusKexec import VuWizard
 	wizardManager.registerWizard(VuWizard, config.misc.firstrun.value, priority=2)
