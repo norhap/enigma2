@@ -36,8 +36,8 @@
 	<!-- WIZARD -->
 
 	<screen name="WizardSummary" position="fill">
-		<widget source="text" render="Label" position="top" size="*,180" font="FdLcD;60" halign="center" valign="center"/>
-		<widget source="parent.list" render="Label" position="fill" font="FdLcD;50" halign="center" valign="center">
+		<widget source="text" render="Label" position="top" size="*,180" font="FdLcD;60" horizontalAlignment="center" verticalAlignment="center"/>
+		<widget source="parent.list" render="Label" position="fill" font="FdLcD;50" horizontalAlignment="center" verticalAlignment="center">
 			<convert type="StringListSelection" />
 		</widget>
 	</screen>
