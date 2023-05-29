@@ -1019,6 +1019,12 @@ msgstr "Auto reproducir fichero Blu-ray"
 msgid "Auto scart switching"
 msgstr "Cambio de scart automático"
 
+msgid "Auto video mode selected"
+msgstr "Modo de video automático seleccionado"
+
+msgid "Auto video mode selected for the TV."
+msgstr "Modo de video automático seleccionado para su TV."
+
 msgid "Automatic"
 msgstr "Automático"
 
@@ -7974,6 +7980,9 @@ msgstr "Configuración de uso"
 msgid "Use"
 msgstr "Uso"
 
+msgid "Do you want to use automatic mode detection?\n\nThis option reads all the supported modes and automatically sets the highest resolution supported of your TV. Choose 'No' if you want to customize your settings."
+msgstr "¿Desea utilizar la detección de modo automático?\n\nEsta opción lee todos los modos admitidos y establece automáticamente la resolución más alta admitida por su televisor. Elija \"No\" si desea personalizar su configuración."
+
 msgid "Use DHCP"
 msgstr "Usa DHCP"
 
@@ -8113,6 +8122,9 @@ msgstr "Configuración de mejora de video"
 
 msgid "Video output"
 msgstr "Salida de video"
+
+msgid "Video output port selection.\n\nPress OK to select the video port.\n\nThe next output port will be automatically tried in 10 seconds."
+msgstr "Selección del puerto de salida de video.\n\nPulse \"OK\" para seleccionar el puerto de video.\n\nEl siguiente puerto de salida se probará automáticamente en 10 segundos."
 
 msgid "Video setup"
 msgstr "Configuración de video"
@@ -8865,6 +8877,12 @@ msgstr "día"
 
 msgid "default"
 msgstr "por defecto"
+
+msgid "Default video mode selected"
+msgstr "Modo de video predeterminado seleccionado"
+
+msgid "Default video mode selected for the TV."
+msgstr "Modo de video predeterminado seleccionado para el televisor."
 
 msgid "Delete cut"
 msgstr "Eliminar corte"
@@ -11530,31 +11548,14 @@ msgstr "Se realizó la copia con éxito. Continuaremos explicándole el proceso 
 msgid "Your receiver is shutting down. Please stand by..."
 msgstr "Su receptor se está apagando. Por favor, espere…"
 
-msgid "Refresh rate selection."
-msgstr "Selección de ratio de refresco."
+msgid "Select the refresh rate to be used on the TV."
+msgstr "Seleccione la frecuencia de actualización que se utilizará en su TV."
 
 msgid "Select refresh rate"
-msgstr "Seleccionar ratio de refresco"
+msgstr "Seleccionar frecuencia de actualización"
 
-msgid "Select video input with up/down buttons"
-msgstr "Seleccionar entrada de video con botones arriba/abajo"
-
-msgid "Select video mode."
-msgstr "Seleccionar modo de video."
-
-msgid ""
-"Video input selection.\n"
-"\n"
-"Press OK to use this input on your TV (or select if exist is another input port).\n"
-"\n"
-"The next input port and modes video will be automatically probed in 20 seconds."
-msgstr ""
-"Selección de entrada de video.\n"
-"Pulsa OK para usar esta entrada en su TV (o seleccione si existe otro puerto de entrada).\n"
-"El siguiente puerto de entrada y modos de video se probarán automáticamente en 20 segundos."
-
-msgid "Video mode selection."
-msgstr "Selección modo de video."
+msgid "Select video output port with UP/DOWN buttons"
+msgstr "Seleccionar entrada de video con botones ARRIBA/ABAJO"
 
 msgid ""
 "\n"
@@ -11997,6 +11998,9 @@ msgstr "Seleccionar imagen y eliminar"
 
 msgid "Select text to search for"
 msgstr "Seleccione texto para buscar"
+
+msgid "Select the video mode to be used on the TV.\n\nThe following video modes will change automatically in 10 seconds."
+msgstr "Seleccione el modo de video que se usará en el televisor.\n\nLos siguientes modos de video cambiaran automáticamente en 10 segundos."
 
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr "Seleccione tipo de filtro para la búsqueda. Pulse el botón +/- para mostrar/ocultar el filtro en la descripción después de la búsqueda."
@@ -13784,6 +13788,9 @@ msgstr "Mostrar mensaje de advertencia antes de la acción"
 
 msgid "Style services list"
 msgstr "Estilo de la lista canales"
+
+msgid "Use automatic mode detection"
+msgstr "Usar detección de modo automático"
 
 msgid "Use number zap"
 msgstr "Usar número zap"
