@@ -6,7 +6,7 @@ from Components.config import getConfigListEntry, config, ConfigBoolean, ConfigN
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 
-from Plugins.SystemPlugins.Videomode.VideoHardware import video_hw
+from Plugins.SystemPlugins.Videomode.VideoHardware import VIDEO
 
 config.misc.videowizardenabled = ConfigBoolean(default=True)
 
@@ -234,8 +234,8 @@ hotplug = None
 
 
 def startHotplug():
-	global hotplug, video_hw
-	hotplug = VideomodeHotplug(video_hw)
+	global hotplug, VIDEO
+	hotplug = VideomodeHotplug(VIDEO)
 	hotplug.start()
 
 
@@ -257,7 +257,7 @@ def autostart(reason, session=None, **kwargs):
 
 
 def videoSetupMain(session, **kwargs):
-	session.open(VideoSetup, video_hw)
+	session.open(VideoSetup, VIDEO)
 
 
 def startSetup(menuid):

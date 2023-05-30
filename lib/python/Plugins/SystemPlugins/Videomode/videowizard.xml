@@ -4,7 +4,7 @@
 self.portCount = len(self.listPorts())
 self.condition = self.portCount > 1
 if self.portCount == 1:
-	self.selection = "DVI"
+	self.selection = "HDMI"
 	self.portSelectionMoved()
 		</condition>
 		<text value="Video output port selection.\n\nPress OK to select the video port.\n\nThe next output port will be automatically tried in 10 seconds." />
@@ -18,7 +18,7 @@ self.selectKey("OK")
 
 	<step id="modesdetection" >
 		<condition>
-self.condition = self.port == "DVI"
+self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
 		<text value="Do you want to use automatic mode detection?\n\nThis option reads all the supported modes and automatically sets the highest resolution supported of your TV. Choose 'No' if you want to customize your settings." />
 		<displaytext value="Use automatic mode detection" />
@@ -35,7 +35,7 @@ self.selectKey("DOWN")
 
 	<step id="modedefault" timeoutstep="modeselection" timeout="1" timeoutaction="changestep">
 		<condition>
-self.condition = self.port == "DVI"
+self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
 		<text value="Default video mode selected for the TV." />
 		<displaytext value="Default video mode selected" />
@@ -47,7 +47,7 @@ config.av.edid_override.save()
 
 	<step id="modeauto" timeoutstep="modeselection" timeout="1" timeoutaction="changestep">
 		<condition>
-self.condition = self.port == "DVI"
+self.condition = (self.port == "DVI" or self.port == "HDMI")
 		</condition>
 		<text value="Auto video mode selected for the TV." />
 		<displaytext value="Auto video mode selected" />

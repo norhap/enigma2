@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesNo
-from Components.SystemInfo import SystemInfo, BRAND, MODEL, PLATFORM
+from Components.SystemInfo import SystemInfo, BRAND, MODEL
 from Tools.CList import CList
 import os
 from enigma import getDesktop
@@ -7,15 +7,6 @@ from Components.About import getChipSetNumber, getChipSetString
 from Tools.Directories import fileExists
 from Components.Console import Console
 import re
-
-socfamily = getChipSetNumber()
-chipsetstring = getChipSetString()
-has_scart = SystemInfo["HasScart"]
-has_yuv = SystemInfo["HasYPbPr"]
-has_rca = SystemInfo["HasComposite"]
-has_avjack = SystemInfo["HasJack"]
-has_hdmi = MODEL not in ("dm800", "dm8000")
-
 # The "VideoHardware" is the interface to /proc/stb/video.
 # It generates hotplug events, and gives you the list of
 # available and preferred modes, as well as handling the currently
@@ -83,10 +74,7 @@ class VideoHardware:
 								"60Hz": {60: "2160p"},
 								"multi": {50: "2160p50", 60: "2160p"},
 								"auto": {50: "2160p50", 60: "2160p", 24: "2160p24"}}
-		rates["2160p30"] = {"25Hz": {50: "2160p25"},
-								"30Hz": {60: "2160p30"},
-								"multi": {50: "2160p25", 60: "2160p30"},
-								"auto": {50: "2160p25", 60: "2160p30", 24: "2160p24"}}
+		rates["2160p30"] = {"30Hz": {60: "2160p30"}}
 
 	rates["smpte"] = {"50Hz": {50: "smpte50hz"},
 							"60Hz": {60: "smpte60hz"},
@@ -111,42 +99,42 @@ class VideoHardware:
 		"640x480": {60: "640x480"}
 	}
 
-	if has_scart:
+	if SystemInfo["HasScart"]:
 		modes["Scart"] = ["PAL", "NTSC", "Multi"]
-	if has_rca:
+	if SystemInfo["HasComposite"]:
 		modes["RCA"] = ["576i", "PAL", "NTSC", "Multi"]
-	if has_avjack:
+	if SystemInfo["HasJack"]:
 		modes["Jack"] = ["PAL", "NTSC", "Multi"]
 
-	if socfamily in ("7376", "7444"):
-		modes["DVI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
+	if getChipSetNumber() in ("7376", "7444", "72604"):
+		modes["HDMI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p"}
-	elif socfamily in ("7252", "7251", "7251s", "7252s", "72604", "7278", "3798mv200", "3798mv200h", "3798mv300", "3798mv310", "3798cv200") and not SystemInfo["Has24hz"]:
-		modes["DVI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "576i", "480p", "480i"]
+	elif getChipSetNumber() in ("7252", "7251", "7251s", "7252s", "7278",):
+		modes["HDMI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
-	elif SystemInfo["Has24hz"]:
-		modes["DVI"] = ["720p", "1080p", "2160p30", "1080i", "576p", "576i", "480p", "480i"]
+	elif getChipSetNumber() in ("3798mv200", "3798mv200h", "3798mv300", "3798mv310", "3798cv200",):
+		modes["HDMI"] = ["720p", "1080p", "2160p30", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p30"}
-	elif socfamily in ("7241", "7358", "7362", "73625", "7346", "7356", "73565", "7424", "7425", "7435", "7552", "7581", "7584", "75845", "7585", "pnx8493", "7162", "7111", "3716mv410", "3716mv430"):
-		modes["DVI"] = ["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"]
+	elif getChipSetNumber() in ("7241", "7358", "7362", "73625", "7346", "7356", "73565", "7424", "7425", "7435", "7552", "7581", "7584", "75845", "7585", "pnx8493", "7162", "7111", "3716mv410", "3716mv430"):
+		modes["HDMI"] = ["720p", "1080p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i"}
 	else:
-		modes["DVI"] = ["720p", "1080i", "576p", "576i", "480p", "480i"]
+		modes["HDMI"] = ["720p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080i"}
 
 	modes["DVI-PC"] = ["PC"]
 
-	if has_yuv:
-		modes["YPbPr"] = modes["DVI"]
+	if SystemInfo["HasYPbPr"]:
+		modes["YPbPr"] = modes["HDMI"]
 
-	if "YPbPr" in modes and not has_yuv:
+	if "YPbPr" in modes and not SystemInfo["HasYPbPr"]:
 		del modes["YPbPr"]
 
-	if "Scart" in modes and not has_scart and (has_rca or has_avjack):
+	if "Scart" in modes and not SystemInfo["HasScart"] and (SystemInfo["HasComposite"] or SystemInfo["HasJack"]):
 		modes["RCA"] = modes["Scart"]
 		del modes["Scart"]
 
-	if "Scart" in modes and not has_rca and not has_scart and not has_avjack:
+	if "Scart" in modes and not SystemInfo["HasComposite"] and not SystemInfo["HasScart"] and not SystemInfo["HasJack"]:
 		del modes["Scart"]
 
 	if MODEL == "hd2400":
@@ -197,12 +185,12 @@ class VideoHardware:
 		if "Scart" in self.modes and not self.getModeList("Scart"):
 			print("[Videomode] VideoHardware remove Scart because of not existing modes")
 			del self.modes["Scart"]
-		if "YPbPr" in self.modes and not has_yuv:
+		if "YPbPr" in self.modes and not SystemInfo["HasYPbPr"]:
 			del self.modes["YPbPr"]
-		if "Scart" in self.modes and not has_scart and (has_rca or has_avjack):
+		if "Scart" in self.modes and not SystemInfo["HasScart"] and (SystemInfo["HasComposite"] or SystemInfo["HasJack"]):
 			modes["RCA"] = modes["Scart"]
 			del self.modes["Scart"]
-		if "Scart" in self.modes and not has_rca and not has_scart and not has_avjack:
+		if "Scart" in self.modes and not SystemInfo["HasComposite"] and not SystemInfo["HasScart"] and not SystemInfo["HasJack"]:
 			del self.modes["Scart"]
 
 		self.createConfig()
@@ -330,7 +318,7 @@ class VideoHardware:
 		return True
 
 	def isPortUsed(self, port):
-		if port == "DVI":
+		if port == "HDMI":
 			self.readPreferredModes()
 			return len(self.modes_preferred) != 0
 		else:
@@ -362,11 +350,10 @@ class VideoHardware:
 		portlist = self.getPortList()
 		for port in portlist:
 			descr = port
-			if descr == 'DVI' and has_hdmi:
-				descr = 'HDMI'
-			elif descr == 'DVI-PC' and has_hdmi:
-				descr = 'HDMI-PC'
-			lst.append((port, descr))
+			if "HDMI" in port:
+				lst.insert(0, (port, descr))
+			else:
+				lst.append((port, descr))
 
 			# create list of available modes
 			modes = self.getModeList(port)
@@ -375,11 +362,9 @@ class VideoHardware:
 			for (mode, rates) in modes:
 				ratelist = []
 				for rate in rates:
-					if rate in ("auto"):
-						if SystemInfo["Has24hz"]:
-							ratelist.append((rate, mode == "2160p30" and "auto (25Hz 30Hz 24Hz)" or "auto (50Hz 60Hz 24Hz)"))
-					else:
-						ratelist.append((rate, rate == "multi" and (mode == "2160p30" and "multi (25Hz 30Hz)" or "multi (50Hz 60Hz)") or rate))
+					if rate == "auto" and not SystemInfo["Has24hz"]:
+						continue
+					ratelist.append((rate, rate))
 				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
 		config.av.videoport = ConfigSelection(choices=lst)
 
@@ -474,5 +459,5 @@ class VideoHardware:
 			print("[Videomode] Write to /proc/stb/video/policy2 failed.")
 
 
-video_hw = VideoHardware()
-video_hw.setConfiguredMode()
+VIDEO = VideoHardware()
+VIDEO.setConfiguredMode()
