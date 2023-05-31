@@ -286,9 +286,6 @@
 		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="255,64" font="FdLcD;12" horizontalAlignment="center"/>
 		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,50" size="255,14" font="FdLcD;12" horizontalAlignment="center" noWrap="1"/>
 	</screen>
-	<screen name="AboutSummary" position="0,0" size="255,64">
-		<widget source="AboutText" render="Label" position="0,0" size="255,64" font="FdLcD;11"/>
-	</screen>
 	<screen name="TimerEditListSummary" position="0,0" size="255,64">
 		<widget source="service" render="Label" position="0,0" size="160,22" font="FdLcD;18" horizontalAlignment="left" noWrap="1"/>
 		<widget source="name" render="Label" position="0,21" size="255,18" font="FdLcD;17" horizontalAlignment="left" noWrap="1"/>

@@ -110,13 +110,6 @@
 		<widget source="SetupValue" render="Label" position="0,78" size="220,50" font="FdLcD;22" horizontalAlignment="center" verticalAlignment="top" />
 	</screen>
 
-<!-- Blindscan-->
-	<screen name="SetupSummary2" position="0,0" size="220,176">
-		<widget source="SetupTitle" render="Label" position="0,0" foregroundColor="#FFFF00" size="220,25" font="FdLcD;24" horizontalAlignment="center" verticalAlignment="center" />
-		<widget source="SetupEntry" render="Label" position="0,26" size="220,50" font="FdLcD;24" horizontalAlignment="center" verticalAlignment="center" />
-		<widget source="SetupValue" render="Label" position="0,78" size="220,50" font="FdLcD;22" horizontalAlignment="center" verticalAlignment="top" />
-	</screen>
-
 <!-- misc-->
 	<screen name="SimpleSummary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,100" font="FdLcD;28" horizontalAlignment="center" verticalAlignment="center" />
@@ -228,10 +221,6 @@
 	<screen name="MessageBoxSimple_summary" position="0,0" size="220,176">
 		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="220,176" font="FdLcD;26" horizontalAlignment="center" />
 		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,135" size="220,28" font="FdLcD;26" horizontalAlignment="center" noWrap="1" />
-	</screen>
-	<screen name="AboutSummary" position="0,0" size="220,176">
-		<widget source="parent.Title" render="Label" position="top" size="*,100" font="FdLcD;28" horizontalAlignment="center" verticalAlignment="center" />
-		<panel position="bottom" size="*,24" name="SummaryClockPanel" />
 	</screen>
 	<screen name="TimerEditListSummary" position="0,0" size="220,176">
 		<widget source="service" render="Label" position="0,38" size="220,26" font="FdLcD;24" horizontalAlignment="left" noWrap="1" />

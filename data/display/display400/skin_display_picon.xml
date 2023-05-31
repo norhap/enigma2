@@ -401,9 +401,6 @@
 		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="400,240" font="FdLcD;24" horizontalAlignment="center" />
 		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,135" size="400,28" font="FdLcD;26" foregroundColor="#F4FA58" horizontalAlignment="center" noWrap="1" />
 	</screen>
-	<screen name="AboutSummary" position="0,0" size="400,240">
-		<widget source="parent.Title" render="Label" position="0,0" size="400,240" font="FdLcD;34" foregroundColor="#87CEFA" horizontalAlignment="center" verticalAlignment="center" />
-	</screen>
 
 <!-- LocationBox_summary -->
 	<screen name="LocationBox_summary" position="0,0" size="400,240">
