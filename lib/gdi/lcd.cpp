@@ -450,8 +450,3 @@ void eDBoxLCD::update()
 	dumpLCD2PNG();
 #endif
 }
-
-void eDBoxLCD::dumpLCD(bool png)
-{
-	return;
-}

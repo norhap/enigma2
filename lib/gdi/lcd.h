@@ -88,7 +88,6 @@ public:
 	int setLED(int value, int option);
 	void setInverted(unsigned char);
 	void setFlipped(bool);
-	void dumpLCD(bool);
 	void setDump(bool);
 	bool isOled() const { return !!lcd_type; };
 	void setPalette(gUnmanagedSurface){};
