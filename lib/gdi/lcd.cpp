@@ -33,10 +33,10 @@ eLCD *eLCD::getInstance()
 
 void eLCD::setSize(int xres, int yres, int bpp)
 {
+	_stride = xres * bpp / 8;
+	_buffer = new unsigned char[xres * yres * bpp / 8];
 	res = eSize(xres, yres);
-	_buffer = new unsigned char[xres * yres * bpp/8];
-	memset(_buffer, 0, res.height() * res.width() * bpp / 8);
-	_stride = res.width() * bpp / 8;
+	memset(_buffer, 0, xres * yres * bpp / 8);
 	eDebug("[eLCD] (%dx%dx%d) buffer %p %d bytes, stride %d", xres, yres, bpp, _buffer, xres * yres * bpp / 8, _stride);
 }
 
@@ -146,11 +146,16 @@ eDBoxLCD::eDBoxLCD()
 			lcd_type = 3;
 		}
 		eDebug("[eDboxLCD] xres=%d, yres=%d, bpp=%d lcd_type=%d", xres, yres, bpp, lcd_type);
-
-		instance = this;
-		setSize(xres, yres, bpp);
 	}
 #endif
+	if (FILE *file = fopen("/proc/stb/lcd/right_half", "w"))
+	{
+		fprintf(file, "skin");
+		fclose(file);
+	}
+	instance = this;
+
+	setSize(xres, yres, bpp);
 }
 
 void eDBoxLCD::setInverted(unsigned char inv)
@@ -167,31 +172,32 @@ void eDBoxLCD::setFlipped(bool onoff)
 
 void eDBoxLCD::setDump(bool onoff)
 {
- 	dump = onoff;
- 	dumpLCD2PNG();
+	dump = onoff;
+	dumpLCD2PNG();
 }
 
 int eDBoxLCD::setLCDContrast(int contrast)
 {
 #ifndef NO_LCD
 	if (lcdfd < 0)
-		return(0);
-
+		return 0;
 #ifndef LCD_IOCTL_SRV
 #define LCDSET 0x1000
 #define LCD_IOCTL_SRV (10 | LCDSET)
 #endif
-	eDebug("[eLCD] setLCDContrast %d", contrast);
+	eDebug("[eDboxLCD] setLCDContrast %d", contrast);
 
 	int fp;
-	if((fp = open("/dev/dbox/fp0", O_RDWR)) < 0)
+	if ((fp = open("/dev/dbox/fp0", O_RDWR)) < 0)
 	{
-		eDebug("[DboxLCD] can't open /dev/dbox/fp0: %m");
-		return(-1);
+		eDebug("[DboxLCD] can't open /dev/dbox/fp0");
+		return -1;
 	}
 
-	if(ioctl(lcdfd, LCD_IOCTL_SRV, &contrast) < 0)
-		eDebug("[DboxLCD] can't set lcd contrast: %m");
+	if (ioctl(lcdfd, LCD_IOCTL_SRV, &contrast) < 0)
+	{
+		eDebug("[eDboxLCD] can't set lcd contrast");
+	}
 	close(fp);
 #endif
 	return 0;
@@ -221,14 +227,14 @@ int eDBoxLCD::setLCDBrightness(int brightness)
 		int fp;
 		if ((fp = open("/dev/dbox/fp0", O_RDWR)) < 0)
 		{
-			eDebug("[eDboxLCD] can't open /dev/dbox/fp0: %m");
-			return(-1);
+			eDebug("[eDboxLCD] can't open /dev/dbox/fp0");
+			return -1;
 		}
 #ifndef FP_IOCTL_LCD_DIMM
 #define FP_IOCTL_LCD_DIMM 3
 #endif
 		if (ioctl(fp, FP_IOCTL_LCD_DIMM, &brightness) < 0)
-			eDebug("[eDboxLCD] can't set lcd brightness: %m");
+			eDebug("[eDboxLCD] can't set lcd brightness");
 		close(fp);
 	}
 #endif
@@ -376,7 +382,9 @@ void eDBoxLCD::update()
 					raw[(7 - y) * 132 + (131 - x)] = BIT_SWAP(pix ^ inverted);
 				}
 				else
+				{
 					raw[y * 132 + x] = pix ^ inverted;
+				}
 			}
 		}
 		write(lcdfd, raw, 132 * 8);
@@ -394,31 +402,22 @@ void eDBoxLCD::update()
 				for (unsigned int x = 0; x < width; x++)
 				{
 					if (flipped)
+					{
 						/* 8bpp, no bit swapping */
 						raw[(height - 1 - y) * width + (width - 1 - x)] = _buffer[y * width + x] ^ inverted;
+					}
 					else
+					{
 						raw[y * width + x] = _buffer[y * width + x] ^ inverted;
+					}
 				}
 			}
-			write(lcdfd, raw, 64 * 64);
+			write(lcdfd, raw, _stride * height);
 		}
 		else
-#if !defined(DREAMBOX_MOVE_LCD)
-			write(lcdfd, _buffer, _stride * res.height());
-#else
 		{
-			unsigned char gb_buffer[_stride * res.height()];
-			for (int offset = 0; offset < ((_stride * res.height())>>2); offset ++)
-			{
-				unsigned int src = 0;
-				if (offset%(_stride>>2) >= 4) // 4 is offset for dm9x0
-					src = ((unsigned int*)_buffer)[offset - 4];
-			//                                             blue                         red                  green low                     green high
-			((unsigned int*)gb_buffer)[offset] = ((src >> 3) & 0x001F001F) | ((src << 3) & 0xF800F800) | ((src >> 8) & 0x00E000E0) | ((src << 8) & 0x07000700);
-			}
-			write(lcdfd, gb_buffer, _stride * res.height());
+			write(lcdfd, _buffer, _stride * res.height());
 		}
-#endif
 	}
 	else /* lcd_type == 1 */
 	{
@@ -442,7 +441,9 @@ void eDBoxLCD::update()
 					raw[(63 - y) * 64 + (63 - x)] = byte;
 				}
 				else
+				{
 					raw[y * 64 + x] = pix;
+				}
 			}
 		}
 		write(lcdfd, raw, 64 * 64);
