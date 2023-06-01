@@ -213,7 +213,7 @@ SystemInfo["12V_Output"] = Misc_Options.getInstance().detected_12V_output()
 SystemInfo["ZapMode"] = fileCheck("/proc/stb/video/zapmode") or fileCheck("/proc/stb/video/zapping_mode")
 SystemInfo["NumFrontpanelLEDs"] = countFrontpanelLEDs()
 SystemInfo["FrontpanelDisplay"] = fileExists(scopeLCDSkin) and fileExists("/dev/dbox/oled0") or fileExists(scopeLCDSkin) and fileExists("/dev/dbox/lcd0")
-SystemInfo["DisplayLED"] = SystemInfo["FrontpanelDisplay"] and not SystemInfo["FbcTunerPowerAlwaysOn"]
+SystemInfo["DisplayLED"] = SystemInfo["FrontpanelDisplay"] and MODEL not in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse", "atemionemesis")
 SystemInfo["NoHaveFrontpanelDisplay"] = not fileExists(scopeLCDSkin)
 SystemInfo["LCDsymbol_circle_recording"] = fileCheck("/proc/stb/lcd/symbol_circle") or MODEL in ("hd51", "vs1500") and fileCheck("/proc/stb/lcd/symbol_recording")
 SystemInfo["LCDsymbol_timeshift"] = fileCheck("/proc/stb/lcd/symbol_timeshift")
@@ -329,8 +329,8 @@ SystemInfo["grautec"] = fileExists("/tmp/usbtft")
 SystemInfo["GraphicLCD"] = MODEL in ("vuultimo", "xpeedlx3", "et10000", "hd2400", "sezammarvel", "atemionemesis", "mbultra", "beyonwizt4", "osmio4kplus")
 SystemInfo["LCDMiniTV"] = fileExists("/proc/stb/lcd/mode")
 SystemInfo["LCDMiniTVPiP"] = SystemInfo["LCDMiniTV"] and MODEL not in ("gb800ueplus", "gbquad4k", "gbue4k")
-SystemInfo["DefaultDisplayBrightness"] = PLATFORM == "dm4kgen" and 8 or 5
-SystemInfo["DreamBoxAudio"] = PLATFORM == "dm4kgen" or MODEL in ("dm7080", "dm800")
+SystemInfo["DefaultDisplayBrightness"] = MODEL in ("dm900", "dm920") and 8 or 5
+SystemInfo["DreamBoxAudio"] = MODEL in ("dm900", "dm920", "dm7080", "dm800")
 SystemInfo["VFDDelay"] = MODEL in ("sf4008", "beyonwizu4")
 SystemInfo["FirstCheckModel"] = MODEL in ("tmtwin4k", "mbmicrov2", "revo4k", "force3uhd", "mbmicro", "e4hd", "e4hdhybrid", "valalinux", "lunix", "tmnanom3", "purehd", "force2nano", "purehdse") or BRAND in ("linkdroid", "wetek")
 SystemInfo["SecondCheckModel"] = MODEL in ("osninopro", "osnino", "osninoplus", "dm7020hd", "dm7020hdv2", "9910lx", "9911lx", "9920lx", "tmnanose", "tmnanoseplus", "tmnanosem2", "tmnanosem2plus", "tmnanosecombo", "force2plus", "force2", "force2se", "optimussos", "fusionhd", "fusionhdse", "force2plushv") or BRAND == "ixuss"

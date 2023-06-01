@@ -9214,11 +9214,11 @@ msgstr "menú"
 msgid "mins"
 msgstr "mins"
 
-msgid "minutes"
-msgstr "minutos"
-
 msgid "month"
 msgstr "mes"
+
+msgid "Minutes"
+msgstr "Minutos"
 
 msgid "motor sport"
 msgstr "deporte de motor"
@@ -9535,8 +9535,8 @@ msgstr "estado del búsqueda"
 msgid "science fiction/fantasy/horror"
 msgstr "ciencia ficción/fantasía/horror"
 
-msgid "seconds"
-msgstr "segundos"
+msgid "Seconds"
+msgstr "Segundos"
 
 msgid "select"
 msgstr "seleccionar"
@@ -14771,8 +14771,8 @@ msgstr "Configure el nivel de brillo de la pantalla del display para una operaci
 msgid "Dim delay"
 msgstr "Retraso débil"
 
-msgid "minute"
-msgstr "minuto"
+msgid "Minute"
+msgstr "Minuto"
 
 msgid "Dim the LCD after specified time."
 msgstr "Atenuar la pantalla LCD después de un tiempo especificado."

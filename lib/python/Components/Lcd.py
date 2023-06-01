@@ -6,7 +6,7 @@ from boxbranding import getDBoxLCD
 from enigma import eActionMap, eDBoxLCD, eTimer
 
 from Components.config import ConfigNothing, ConfigSelection, ConfigSlider, ConfigSubsection, ConfigYesNo, config
-from Components.SystemInfo import SystemInfo, MODEL, PLATFORM
+from Components.SystemInfo import SystemInfo, MODEL
 from Screens.InfoBar import InfoBar
 from Screens.Screen import Screen
 from Screens.Standby import inTryQuitMainloop
@@ -54,22 +54,22 @@ class IconCheckPoller:
 
 	def JobTask(self):
 		LinkState = 0
-		if exists('/sys/class/net/wlan0/operstate'):
-			LinkState = open('/sys/class/net/wlan0/operstate').read()
-			if LinkState != 'down':
-				LinkState = open('/sys/class/net/wlan0/operstate').read()
-		elif exists('/sys/class/net/eth0/operstate'):
-			LinkState = open('/sys/class/net/eth0/operstate').read()
-			if LinkState != 'down':
-				LinkState = open('/sys/class/net/eth0/carrier').read()
+		if exists("/sys/class/net/wlan0/operstate"):
+			LinkState = open("/sys/class/net/wlan0/operstate").read()
+			if LinkState != "down":
+				LinkState = open("/sys/class/net/wlan0/operstate").read()
+		elif exists("/sys/class/net/eth0/operstate"):
+			LinkState = open("/sys/class/net/eth0/operstate").read()
+			if LinkState != "down":
+				LinkState = open("/sys/class/net/eth0/carrier").read()
 		LinkState = LinkState[:1]
-		if exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == '1':
+		if exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "1":
 			f = open("/proc/stb/lcd/symbol_network", "w")
 			f.write(str(LinkState))
 			f.close()
-		elif exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == '0':
+		elif exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "0":
 			f = open("/proc/stb/lcd/symbol_network", "w")
-			f.write('0')
+			f.write("0")
 			f.close()
 		# from sys import version_info
 		# if version_info.major == 2:
@@ -347,11 +347,11 @@ def InitLcd():
 			("100", _("Fast"))
 		], default="300")
 		config.lcd.scroll_delay = ConfigSelection(choices=[
-			("10000", "10 %s" % _("seconds")),
-			("20000", "20 %s" % _("seconds")),
-			("30000", "30 %s" % _("seconds")),
-			("60000", "1 %s" % _("minute")),
-			("300000", "5 %s" % _("minutes")),
+			("10000", "10 %s" % _("Seconds")),
+			("20000", "20 %s" % _("Seconds")),
+			("30000", "30 %s" % _("Seconds")),
+			("60000", "1 %s" % _("Miinute")),
+			("300000", "5 %s" % _("Minutes")),
 			("noscrolling", _("Off"))
 		], default="10000")
 
@@ -556,7 +556,7 @@ def InitLcd():
 			("on", _("On"))
 		], default="on")
 		config.lcd.power4x7suspend.addNotifier(setPower4x7Suspend)
-		if PLATFORM in ("dm4kgen", "8100s"):
+		if MODEL in ("dm900", "dm920", "e4hdultra", "protek4k"):
 			standby_default = 4
 		elif MODEL in ("spycat4kmini", "osmega"):
 			standby_default = 10
@@ -567,7 +567,7 @@ def InitLcd():
 			config.lcd.contrast.addNotifier(setLCDcontrast)
 		else:
 			config.lcd.contrast = ConfigNothing()
-		if MODEL in ("h3", "ebox5000", "ebox5100", "sh1", "spycat", "novacombo", "novatwin"):
+		if MODEL in ("novatwin", "novacombo", "zgemmas2s", "zgemmash1", "zgemmash2", "zgemmass", "zgemmahs", "zgemmah2s", "zgemmah2h", "spycat"):
 			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 4))
 			config.lcd.bright = ConfigSlider(default=4, limits=(0, 4))
@@ -582,14 +582,14 @@ def InitLcd():
 		config.lcd.dimbright.addNotifier(setLCDdimbright)
 		config.lcd.dimbright.apply = lambda: setLCDdimbright(config.lcd.dimbright)
 		config.lcd.dimdelay = ConfigSelection(choices=[
-			("5", "5 %s" % _("seconds")),
-			("10", "10 %s" % _("seconds")),
-			("15", "15 %s" % _("seconds")),
-			("20", "20 %s" % _("seconds")),
-			("30", "30 %s" % _("seconds")),
-			("60", "1 %s" % _("minute")),
-			("120", "2 %s" % _("minutes")),
-			("300", "5 %s" % _("minutes")),
+			("5", "5 %s" % _("Seconds")),
+			("10", "10 %s" % _("Seconds")),
+			("15", "15 %s" % _("Seconds")),
+			("20", "20 %s" % _("Seconds")),
+			("30", "30 %s" % _("Seconds")),
+			("60", "1 %s" % _("Miinute")),
+			("120", "2 %s" % _("Minutes")),
+			("300", "5 %s" % _("Minutes")),
 			("0", _("Off"))
 		], default="0")
 		config.lcd.dimdelay.addNotifier(setLCDdimdelay)
@@ -623,7 +623,7 @@ def InitLcd():
 			config.lcd.showTv = ConfigYesNo(default=False)
 			config.lcd.showTv.addNotifier(lcdLiveTvChanged)
 
-		if SystemInfo["LCDMiniTV"] and PLATFORM not in ("gb7356", "gb7252", "gb72604"):
+		if SystemInfo["LCDMiniTV"] and MODEL not in ("gbquad", "gbquadplus", "gbquad4k", "gbue4k"):
 			config.lcd.minitvmode = ConfigSelection(choices=[
 				("0", _("Normal")),
 				("1", _("MiniTV")),
@@ -676,11 +676,11 @@ def InitLcd():
 					fileWriteLine(SystemInfo["VFD_initial_scroll_delay"], configElement.value)
 
 			config.usage.vfd_initial_scroll_delay = ConfigSelection(choices=[
-				("3000", "3 %s" % _("seconds")),
-				("5000", "5 %s" % _("seconds")),
-				("10000", "10 %s" % _("seconds")),
-				("20000", "20 %s" % _("seconds")),
-				("30000", "30 %s" % _("seconds")),
+				("3000", "3 %s" % _("Seconds")),
+				("5000", "5 %s" % _("Seconds")),
+				("10000", "10 %s" % _("Seconds")),
+				("20000", "20 %s" % _("Seconds")),
+				("30000", "30 %s" % _("Seconds")),
 				("0", _("No delay"))
 			], default="10000")
 			config.usage.vfd_initial_scroll_delay.addNotifier(initial_scroll_delay, immediate_feedback=False)
@@ -694,11 +694,11 @@ def InitLcd():
 					fileWriteLine(SystemInfo["VFD_final_scroll_delay"], configElement.value)
 
 			config.usage.vfd_final_scroll_delay = ConfigSelection(choices=[
-				("3000", "3 %s" % _("seconds")),
-				("5000", "5 %s" % _("seconds")),
-				("10000", "10 %s" % _("seconds")),
-				("20000", "20 %s" % _("seconds")),
-				("30000", "30 %s" % _("seconds")),
+				("3000", "3 %s" % _("Seconds")),
+				("5000", "5 %s" % _("Seconds")),
+				("10000", "10 %s" % _("Seconds")),
+				("20000", "20 %s" % _("Seconds")),
+				("30000", "30 %s" % _("Seconds")),
 				("0", _("No delay"))
 			], default="10000")
 			config.usage.vfd_final_scroll_delay.addNotifier(final_scroll_delay, immediate_feedback=False)
@@ -780,11 +780,11 @@ def InitLcd():
 			("100", _("Fast"))
 		], default="300")
 		config.lcd.scroll_delay = ConfigSelection(choices=[
-			("10000", "10 %s" % _("seconds")),
-			("20000", "20 %s" % _("seconds")),
-			("30000", "30 %s" % _("seconds")),
-			("60000", "1 %s" % _("minute")),
-			("300000", "5 %s" % _("minutes")),
+			("10000", "10 %s" % _("Seconds")),
+			("20000", "20 %s" % _("Seconds")),
+			("30000", "30 %s" % _("Seconds")),
+			("60000", "1 %s" % _("Miinute")),
+			("300000", "5 %s" % _("Minutes")),
 			("noscrolling", _("Off"))
 		], default="10000")
 		config.lcd.showoutputresolution = ConfigNothing()
