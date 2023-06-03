@@ -2,7 +2,7 @@
 from os.path import isfile, join as pathjoin
 from re import findall
 
-from boxbranding import getDisplayType, getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel, getMachineName
+from boxbranding import getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel, getMachineName
 from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform
 
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
@@ -111,15 +111,13 @@ BoxInfo = BoxInformation()
 
 MODEL = BoxInfo.getItem("model")
 DISPLAYMODEL = getMachineName()
+DISPLAYTYPE = BoxInfo.getItem("displaytype")
 BRAND = BoxInfo.getItem("displaybrand")
 PLATFORM = getPlatform()
 ARCHITECTURE = BoxInfo.getItem("architecture")
-SOC_FAMILY = BoxInfo.getItem("socfamily")
-DISPLAYTYPE = BoxInfo.getItem("displaytype")
 MTDROOTFS = BoxInfo.getItem("mtdrootfs")
 DISPLAYBRAND = BoxInfo.getItem("displaybrand")
 MACHINEBUILD = BoxInfo.getItem("machinebuild")
-
 
 SystemInfo["HasUsbhdd"] = {}
 SystemInfo["HasRootSubdir"] = False
@@ -184,13 +182,8 @@ SystemInfo["RCName"] = getRCName()
 SystemInfo["RCImage"] = getRCFile("png")
 SystemInfo["RCMapping"] = getRCFile("xml")
 SystemInfo["RemoteEnable"] = MODEL in ("dm800",)
-
-if MODEL in ("maram9", "axodin"):
-	repeat = 400
-else:
-	repeat = 100
-SystemInfo["RemoteRepeat"] = repeat
-SystemInfo["RemoteDelay"] = 200 if MODEL in ("maram9", "axodin") else 700
+SystemInfo["RemoteRepeat"] = 100
+SystemInfo["RemoteDelay"] = 700
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
@@ -228,17 +221,14 @@ SystemInfo["PowerLED2"] = fileCheck("/proc/stb/power/powerled2")
 SystemInfo["StandbyLED"] = fileCheck("/proc/stb/power/standbyled")
 SystemInfo["SuspendLED"] = fileCheck("/proc/stb/power/suspendled")
 SystemInfo["Display"] = SystemInfo["FrontpanelDisplay"] or SystemInfo["StandbyLED"]
-SystemInfo["ConfigDisplay"] = SystemInfo["FrontpanelDisplay"] and "7segment" not in getDisplayType()
-SystemInfo["7segment"] = "7segment" in getDisplayType()
-SystemInfo["textlcd"] = "textlcd" in getDisplayType() and "7segment" not in getDisplayType()
-SystemInfo["VFDRepeats"] = BRAND != "ixuss" and "textlcd 7segment" not in getDisplayType()
+SystemInfo["ConfigDisplay"] = SystemInfo["FrontpanelDisplay"] and "7segment" not in DISPLAYTYPE
+SystemInfo["7segment"] = "7segment" in DISPLAYTYPE
+SystemInfo["textlcd"] = "textlcd" in DISPLAYTYPE and "7segment" not in DISPLAYTYPE
 SystemInfo["VFD_scroll_repeats"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/scroll_repeats")
 SystemInfo["VFD_scroll_delay"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/scroll_delay")
 SystemInfo["VFD_initial_scroll_delay"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/initial_scroll_delay")
 SystemInfo["VFD_final_scroll_delay"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/final_scroll_delay")
 SystemInfo["VFDSymbols"] = getHaveVFDSymbol() == "True"
-SystemInfo["LcdLiveTV"] = fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable")
-SystemInfo["LcdLiveTVMode"] = fileCheck("/proc/stb/lcd/mode")
 SystemInfo["LcdLiveDecoder"] = fileCheck("/proc/stb/lcd/live_decoder")
 SystemInfo["LedPowerColor"] = fileCheck("/proc/stb/fp/ledpowercolor")
 SystemInfo["LedStandbyColor"] = fileCheck("/proc/stb/fp/ledstandbycolor")
@@ -316,9 +306,7 @@ SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
 SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
-SystemInfo["OScamInstalled"] = fileExists("/usr/bin/oscam") or fileExists("/usr/bin/oscam-emu") or fileExists("/usr/bin/oscam-trunk")
 SystemInfo["OScamIsActive"] = fileExists("/var/tmp/.oscam")
-SystemInfo["NCamInstalled"] = fileExists("/usr/bin/ncam")
 SystemInfo["NCamIsActive"] = fileExists("/var/tmp/.ncam")
 SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info", "CCcam-s2s") or fileHas("/tmp/ecm.info", "fta")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
@@ -327,6 +315,7 @@ SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and MODEL not i
 SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and MODEL == "multibox" or BRAND in ("wetek", "dreambox")
 SystemInfo["grautec"] = fileExists("/tmp/usbtft")
 SystemInfo["GraphicLCD"] = MODEL in ("vuultimo", "xpeedlx3", "et10000", "hd2400", "sezammarvel", "atemionemesis", "mbultra", "beyonwizt4", "osmio4kplus")
+SystemInfo["LcdLiveTV"] = fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable")
 SystemInfo["LCDMiniTV"] = fileExists("/proc/stb/lcd/mode")
 SystemInfo["LCDMiniTVPiP"] = SystemInfo["LCDMiniTV"] and MODEL not in ("gb800ueplus", "gbquad4k", "gbue4k")
 SystemInfo["DefaultDisplayBrightness"] = MODEL in ("dm900", "dm920") and 8 or 5
@@ -340,7 +329,6 @@ SystemInfo["ArchIsARM"] = ARCHITECTURE.startswith(("arm", "cortex"))
 SystemInfo["SeekStatePlay"] = False
 SystemInfo["StatePlayPause"] = False
 SystemInfo["StandbyState"] = False
-SystemInfo["LEDButtons"] = False
 SystemInfo["HasH9SD"] = MODEL in ("h9", "i55plus") and pathExists("/dev/mmcblk0p1")
 SystemInfo["HasSDnomount"] = MODEL in ("h9", "h3", "i55plus") and (False, "none") or MODEL in ("multibox", "h9combo", "h3") and (True, "mmcblk0")
 SystemInfo["canBackupEMC"] = MODEL in ("hd51", "vs1500", "h7", "8100s") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or MODEL in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none") or MODEL in ("cc1", "sx988", "ip8", "ustym4kottpremium", "og2ott4k", "sx88v2") and ("usb_update.bin", "none")

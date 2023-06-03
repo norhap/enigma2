@@ -10064,8 +10064,8 @@ msgstr "Cambiar de bouquet en zapeo rápido"
 msgid "Choose which tuner to configure."
 msgstr "Elegir el sintonizador a configurar."
 
-msgid "Clone TV screen to LCD"
-msgstr "Clonar pantalla de TV a LCD"
+msgid "Show MiniTV in LCD with PiP actived"
+msgstr "Mostrar MiniTV en LCD con PiP activado"
 
 msgid "Clone TV screen to LCD mode"
 msgstr "Modo de clonado de pantalla de TV a LCD"
@@ -10766,8 +10766,8 @@ msgstr "Salta a la TV en vivo mientras cambias de tiempo con plugins"
 msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
 msgstr "Si se establece en 'sí', le permite usar Timeshift con plugins de audio alternativos."
 
-msgid "Shows live tv or informations on LCD."
-msgstr "Mostrar tv en vivo o info en el LCD."
+msgid "Show live tv on LCD when PiP is enabled."
+msgstr "Mostrar tv en vivo en LCD cuando esta activado PiP."
 
 msgid "Slow motion speeds"
 msgstr "Velocidad de cámara lenta"
