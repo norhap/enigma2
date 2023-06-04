@@ -10064,8 +10064,8 @@ msgstr "Cambiar de bouquet en zapeo rápido"
 msgid "Choose which tuner to configure."
 msgstr "Elegir el sintonizador a configurar."
 
-msgid "Show MiniTV in LCD with PiP actived"
-msgstr "Mostrar MiniTV en LCD con PiP activado"
+msgid "Show MiniTV in LCD (require PiP actived)"
+msgstr "Mostrar MiniTV en LCD (requiere PiP activado)"
 
 msgid "Clone TV screen to LCD mode"
 msgstr "Modo de clonado de pantalla de TV a LCD"

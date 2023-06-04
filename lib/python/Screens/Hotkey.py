@@ -762,7 +762,7 @@ class InfoBarHotkey():
 			self.showMovies()
 
 	def ToggleLCDLiveTV(self):
-		config.lcd.showTv.value = not config.lcd.showTv.value
+		config.lcd.minitvdisplay.value = not config.lcd.minitvdisplay.value
 
 	def SourceActiveHdmiCec(self):
 		self.setHdmiCec("sourceactive")

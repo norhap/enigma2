@@ -60,7 +60,7 @@
 		<item level="0" text="Standby speed" description="The speed of the fan when your %s %s is in standby mode.">config.fans[0].pwm_standby</item>
 	</setup>
 	<setup key="FrontDisplay" title="Display Setup" requires="FrontpanelDisplay">
-		<item level="0" text="Show MiniTV in LCD with PiP actived" description="Show live tv on LCD when PiP is enabled.">config.lcd.fblcddisplay</item>
+		<item level="0" text="Show MiniTV in LCD (require PiP actived)" description="Show live tv on LCD when PiP is enabled.">config.lcd.minitvdisplay</item>
 		<item level="0" text="Use separate picon pack for front panel display" requires="VFD_scroll_repeats" description="Use piconlcd directory for picons on color LCD.">config.lcd.picon_pack</item>
 		<item level="0" text="Date style" description="Choose the front panel display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin." requires="FrontpanelDisplay">config.usage.date.display</item>
 		<item level="0" text="Time style" description="Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes. ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin." requires="FrontpanelDisplay">config.usage.time.display</item>

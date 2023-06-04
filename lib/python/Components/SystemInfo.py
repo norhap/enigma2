@@ -3,7 +3,7 @@ from os.path import isfile, join as pathjoin
 from re import findall
 
 from boxbranding import getHaveHDMIinFHD, getHaveHDMIinHD, getHaveAVJACK, getHaveSCART, getHaveYUV, getHaveSCARTYUV, getHaveRCA, getHaveTranscoding, getHaveMultiTranscoding, getHaveHDMI, getRCIDNum, getRCName, getRCType, getHaveVFDSymbol, getSoCFamily, getMachineMtdKernel, getMachineName
-from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform
+from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD
 
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
 from Tools.StbHardware import getWakeOnLANType
@@ -224,10 +224,10 @@ SystemInfo["Display"] = SystemInfo["FrontpanelDisplay"] or SystemInfo["StandbyLE
 SystemInfo["ConfigDisplay"] = SystemInfo["FrontpanelDisplay"] and "7segment" not in DISPLAYTYPE
 SystemInfo["7segment"] = "7segment" in DISPLAYTYPE
 SystemInfo["textlcd"] = "textlcd" in DISPLAYTYPE and "7segment" not in DISPLAYTYPE
-SystemInfo["VFD_scroll_repeats"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/scroll_repeats")
-SystemInfo["VFD_scroll_delay"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/scroll_delay")
-SystemInfo["VFD_initial_scroll_delay"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/initial_scroll_delay")
-SystemInfo["VFD_final_scroll_delay"] = MODEL != "et8500" and fileCheck("/proc/stb/lcd/final_scroll_delay")
+SystemInfo["VFD_scroll_repeats"] = eDBoxLCD.getInstance().get_VFD_scroll_repeats()
+SystemInfo["VFD_scroll_delay"] = eDBoxLCD.getInstance().get_VFD_scroll_delay()
+SystemInfo["VFD_initial_scroll_delay"] = eDBoxLCD.getInstance().get_VFD_initial_scroll_delay()
+SystemInfo["VFD_final_scroll_delay"] = eDBoxLCD.getInstance().get_VFD_final_scroll_delay()
 SystemInfo["VFDSymbols"] = getHaveVFDSymbol() == "True"
 SystemInfo["LcdLiveDecoder"] = fileCheck("/proc/stb/lcd/live_decoder")
 SystemInfo["LedPowerColor"] = fileCheck("/proc/stb/fp/ledpowercolor")

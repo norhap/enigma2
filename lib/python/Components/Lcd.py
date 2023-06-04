@@ -523,18 +523,19 @@ def InitLcd():
 			config.lcd.contrast.addNotifier(setLCDcontrast)
 		else:
 			config.lcd.contrast = ConfigNothing()
+
+		max_limit = 10
+		default_bright = 10
+
 		if MODEL in ("novatwin", "novacombo", "zgemmas2s", "zgemmash1", "zgemmash2", "zgemmass", "zgemmahs", "zgemmah2s", "zgemmah2h", "spycat"):
-			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 4))
-			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 4))
-			config.lcd.bright = ConfigSlider(default=4, limits=(0, 4))
+			max_limit = 4
+			default_bright = 4
 		elif MODEL in ("spycat4kmini", "osmega"):
-			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
-			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 10))
-			config.lcd.bright = ConfigSlider(default=10, limits=(0, 10))
-		else:
-			config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, 10))
-			config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, 10))
-			config.lcd.bright = ConfigSlider(default=SystemInfo["DefaultDisplayBrightness"], limits=(0, 10))
+			default_bright = SystemInfo["DefaultDisplayBrightness"]
+
+		config.lcd.standby = ConfigSlider(default=standby_default, limits=(0, max_limit))
+		config.lcd.dimbright = ConfigSlider(default=standby_default, limits=(0, max_limit))
+		config.lcd.bright = ConfigSlider(default=default_bright, limits=(0, max_limit))
 		config.lcd.dimbright.addNotifier(setLCDdimbright)
 		config.lcd.dimbright.apply = lambda: setLCDdimbright(config.lcd.dimbright)
 		config.lcd.dimdelay = ConfigSelection(choices=[
@@ -565,7 +566,7 @@ def InitLcd():
 		config.lcd.flip = ConfigYesNo(default=False)
 		config.lcd.flip.addNotifier(setLCDflipped)
 
-		if SystemInfo["VFD_scroll_repeats"] and not SystemInfo["7segment"]:
+		if SystemInfo["VFD_scroll_repeats"]:
 			def scroll_repeats(configElement):
 				fileWriteLine(SystemInfo["VFD_scroll_repeats"], configElement.value)
 
@@ -580,12 +581,10 @@ def InitLcd():
 			config.usage.vfd_scroll_repeats.addNotifier(scroll_repeats, immediate_feedback=False)
 		else:
 			config.usage.vfd_scroll_repeats = ConfigNothing()
-		if SystemInfo["VFD_scroll_delay"] and not SystemInfo["7segment"]:
+		if SystemInfo["VFD_scroll_delay"]:
 			def scroll_delay(configElement):
 				if SystemInfo["VFDDelay"]:
-					fileWriteLine(SystemInfo["VFD_scroll_delay"], hex(int(configElement.value)))
-				else:
-					fileWriteLine(SystemInfo["VFD_scroll_delay"], configElement.value)
+					fileWriteLine(SystemInfo["VFD_scroll_delay"], int(configElement.value))
 
 			config.usage.vfd_scroll_delay = ConfigSlider(default=150, increment=10, limits=(0, 500))
 			config.usage.vfd_scroll_delay.addNotifier(scroll_delay, immediate_feedback=False)
@@ -593,12 +592,10 @@ def InitLcd():
 		else:
 			config.lcd.hdd = ConfigNothing()
 			config.usage.vfd_scroll_delay = ConfigNothing()
-		if SystemInfo["VFD_initial_scroll_delay"] and not SystemInfo["7segment"]:
+		if SystemInfo["VFD_initial_scroll_delay"]:
 			def initial_scroll_delay(configElement):
 				if SystemInfo["VFDDelay"]:
-					fileWriteLine(SystemInfo["VFD_initial_scroll_delay"], hex(int(configElement.value)))
-				else:
-					fileWriteLine(SystemInfo["VFD_initial_scroll_delay"], configElement.value)
+					fileWriteLine(SystemInfo["VFD_initial_scroll_delay"], int(configElement.value))
 
 			config.usage.vfd_initial_scroll_delay = ConfigSelection(choices=[
 				("3000", "3 %s" % _("Seconds")),
@@ -611,12 +608,10 @@ def InitLcd():
 			config.usage.vfd_initial_scroll_delay.addNotifier(initial_scroll_delay, immediate_feedback=False)
 		else:
 			config.usage.vfd_initial_scroll_delay = ConfigNothing()
-		if SystemInfo["VFD_final_scroll_delay"] and not SystemInfo["7segment"]:
+		if SystemInfo["VFD_final_scroll_delay"]:
 			def final_scroll_delay(configElement):
 				if SystemInfo["VFDDelay"]:
-					fileWriteLine(SystemInfo["VFD_final_scroll_delay"], hex(int(configElement.value)))
-				else:
-					fileWriteLine(SystemInfo["VFD_final_scroll_delay"], configElement.value)
+					fileWriteLine(SystemInfo["VFD_final_scroll_delay"], int(configElement.value))
 
 			config.usage.vfd_final_scroll_delay = ConfigSelection(choices=[
 				("3000", "3 %s" % _("Seconds")),
@@ -667,20 +662,17 @@ def InitLcd():
 			("noscrolling", _("Off"))
 		], default="10000")
 		if SystemInfo["LcdLiveTV"]:
-			config.lcd.fblcddisplay = ConfigYesNo(default=True)
-			config.lcd.showTv = ConfigYesNo(default=False)
+			config.lcd.minitvdisplay = ConfigYesNo(default=True)
 			if "live_enable" in SystemInfo["LcdLiveTV"]:
-				def lcdLiveTvChanged(configElement):
+				def setLiveTvDisplay(configElement):
 					ilcd.setfblcddisplay("enable" if configElement.value else "disable")
-				config.lcd.fblcddisplay.addNotifier(lcdLiveTvChanged)
-				config.lcd.showTv.addNotifier(lcdLiveTvChanged)
+				config.lcd.minitvdisplay.addNotifier(setLiveTvDisplay)
 			else:
-				def setfblcddisplay(configElement):
+				def setLiveTvDisplay(configElement):
 					ilcd.setfblcddisplay("1" if configElement.value else "0")
-				config.lcd.fblcddisplay.addNotifier(setfblcddisplay)
-				config.lcd.showTv.addNotifier(setfblcddisplay)
+				config.lcd.minitvdisplay.addNotifier(setLiveTvDisplay)
 		else:
-			config.lcd.fblcddisplay = ConfigNothing()
+			config.lcd.minitvdisplay = ConfigNothing()
 		if SystemInfo["LCDMiniTV"] and MODEL not in ("gbquad", "gbquadplus", "gbquad4k", "gbue4k"):
 			config.lcd.minitvmode = ConfigSelection([
 				("0", _("normal")),
@@ -786,7 +778,7 @@ def InitLcd():
 		config.lcd.bright.apply = lambda: doNothing()
 		config.lcd.standby.apply = lambda: doNothing()
 		config.lcd.power = ConfigNothing()
-		config.lcd.fblcddisplay = ConfigNothing()
+		config.lcd.minitvdisplay = ConfigNothing()
 		config.lcd.mode = ConfigNothing()
 		config.lcd.hdd = ConfigNothing()
 		config.lcd.scroll_speed = ConfigSelection(choices=[
