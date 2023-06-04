@@ -662,7 +662,7 @@ def InitLcd():
 			("noscrolling", _("Off"))
 		], default="10000")
 		if SystemInfo["LcdLiveTV"]:
-			config.lcd.minitvdisplay = ConfigYesNo(default=True)
+			config.lcd.minitvdisplay = ConfigYesNo(default=False)
 			if "live_enable" in SystemInfo["LcdLiveTV"]:
 				def setLiveTvDisplay(configElement):
 					ilcd.setfblcddisplay("enable" if configElement.value else "disable")
