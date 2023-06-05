@@ -8123,8 +8123,8 @@ msgstr "Configuración de mejora de video"
 msgid "Video output"
 msgstr "Salida de video"
 
-msgid "Video output port selection.\n\nPress OK to select the video port.\n\nThe next output port will be automatically tried in 10 seconds."
-msgstr "Selección del puerto de salida de video.\n\nPulse \"OK\" para seleccionar el puerto de video.\n\nEl siguiente puerto de salida se probará automáticamente en 10 segundos."
+msgid "Video output port selection.\n\nPress OK to select the video port.\n\nThe next output port will be automatically tried in 20 seconds."
+msgstr "Selección del puerto de salida de video.\n\nPulse \"OK\" para seleccionar el puerto de video.\n\nEl siguiente puerto de salida se probará automáticamente en 20 segundos."
 
 msgid "Video setup"
 msgstr "Configuración de video"
@@ -11999,8 +11999,8 @@ msgstr "Seleccionar imagen y eliminar"
 msgid "Select text to search for"
 msgstr "Seleccione texto para buscar"
 
-msgid "Select the video mode to be used on the TV.\n\nThe following video modes will change automatically in 10 seconds."
-msgstr "Seleccione el modo de video que se usará en el televisor.\n\nLos siguientes modos de video cambiaran automáticamente en 10 segundos."
+msgid "Select the video mode to be used on the TV.\n\nThe following video modes will change automatically in 20 seconds."
+msgstr "Seleccione el modo de video que se usará en el televisor.\n\nLos siguientes modos de video cambiaran automáticamente en 20 segundos."
 
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr "Seleccione tipo de filtro para la búsqueda. Pulse el botón +/- para mostrar/ocultar el filtro en la descripción después de la búsqueda."
