@@ -952,6 +952,9 @@ msgstr ""
 msgid "Audio PID"
 msgstr "Audio PID"
 
+msgid "Audio auto volume"
+msgstr "Volumen automático de audio"
+
 msgid "Audio auto volume level"
 msgstr "Nivel de volumen de audio automático"
 
@@ -1570,7 +1573,7 @@ msgid "Configure the general audio volume step size (limit 1-10)."
 msgstr "Configure el tamaños de los pasos del volumen de audio (límite 1-10)."
 
 msgid "Configure the refresh rate of the screen."
-msgstr "Configura el ratio de refresco de la pantalla."
+msgstr "Configura la frecuencia de actualización de la pantalla."
 
 msgid "Configure the screen resolution in PC output mode."
 msgstr "Configure la resolución de pantalla en el modo de salida a PC."
@@ -5480,7 +5483,7 @@ msgid "Refresh"
 msgstr "Refrescar"
 
 msgid "Refresh rate"
-msgstr "Ratio de refresco"
+msgstr "Frecuencia de actualización"
 
 msgid "Refreshing image list - Please wait..."
 msgstr "Actualización de la lista de imágenes: espere …"
@@ -7660,8 +7663,8 @@ msgstr "Alternar entrada HDMI"
 msgid "Toggle display of the second InfoBar"
 msgstr "Alternar visualización de la segunda barra de información"
 
-msgid "Toggle LCD LiveTV"
-msgstr "Alternar LCD LiveTV"
+msgid "Toggle LCD LiveTV and PiP"
+msgstr "Alternar MiniTV LCD con PiP"
 
 msgid "Toggle PIPzap"
 msgstr "Alternar PiPzap"
