@@ -632,7 +632,7 @@ def InitAVSwitch():
 	else:
 		config.av.surround_3d_speaker = ConfigNothing()
 
-	if SystemInfo["CanAutoVolume"]:
+	if SystemInfo["CanAutoVolumeLevel"]:
 		choices = [
 			("none", _("Off")),
 			("hdmi", _("HDMI")),
@@ -641,20 +641,12 @@ def InitAVSwitch():
 		]
 		default = "none"
 
-		def setAutoVolume(configElement):
+		def setAutoVolumeLevel(configElement):
 			open("/proc/stb/audio/avl", "w").write(configElement.value)
 		with open("/proc/stb/audio/avl_choices", "r") as avl_choices:
 			avl_choices.read().split('\n', 1)[0]
 			avl_choices.close()
-		config.av.autovolume = ConfigSelection(choices=choices, default=default)
-		config.av.autovolume.addNotifier(setAutoVolume)
-	else:
-		config.av.autovolume = ConfigNothing()
-
-	if SystemInfo["CanAutoVolumeLevel"]:
-		def setAutoVolumeLevel(configElement):
-			open(SystemInfo["CanAutoVolumeLevel"], "w").write("enabled" if configElement.value else "disabled")
-		config.av.autovolumelevel = ConfigYesNo(default=False)
+		config.av.autovolumelevel = ConfigSelection(choices=choices, default=default)
 		config.av.autovolumelevel.addNotifier(setAutoVolumeLevel)
 
 	if SystemInfo["ScalerSharpness"]:

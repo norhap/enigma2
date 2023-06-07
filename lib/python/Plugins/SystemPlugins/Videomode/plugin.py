@@ -143,8 +143,8 @@ class VideoSetup(ConfigListScreen, Screen):
 			))
 			if SystemInfo["CanPcmMultichannel"]:
 				self.list.append(getConfigListEntry(_("Multichannel PCM"), config.av.multichannel_pcm, _("Configure whether multi channel PCM sound should be enabled.")))
-			if SystemInfo["CanAutoVolume"] or SystemInfo["CanAutoVolumeLevel"]:
-				self.list.append(getConfigListEntry(_("Audio auto volume level"), SystemInfo["CanAutoVolume"] and config.av.autovolume or SystemInfo["CanAutoVolumeLevel"] and config.av.autovolumelevel, _("This option allows you can to set the auto volume level.")))
+			if SystemInfo["CanAutoVolumeLevel"]:
+				self.list.append(getConfigListEntry(_("Audio auto volume level"), config.av.autovolumelevel, _("This option allows you can to set the auto volume level.")))
 			if SystemInfo["Can3DSurround"]:
 				self.list.append(getConfigListEntry(_("3D surround"), config.av.surround_3d, _("This option allows you to enable 3D surround sound.")))
 				if SystemInfo["Can3DSpeaker"] and config.av.surround_3d.value != "none":

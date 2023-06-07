@@ -952,9 +952,6 @@ msgstr ""
 msgid "Audio PID"
 msgstr "Audio PID"
 
-msgid "Audio auto volume"
-msgstr "Volumen automático de audio"
-
 msgid "Audio auto volume level"
 msgstr "Nivel de volumen de audio automático"
 

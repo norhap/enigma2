@@ -274,7 +274,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 				self.settings.surround_3d_speaker.addNotifier(self.change3DSurroundSpeaker, initial_call=False)
 				conflist.append(getConfigListEntry(_("3D surround speaker position on or off"), self.settings.surround_3d_speaker, None))
 
-			if SystemInfo["CanAutoVolume"]:
+			if SystemInfo["CanAutoVolumeLevel"]:
 				choice_list = [
 					("none", _("Off")),
 					("hdmi", _("HDMI")),
@@ -284,18 +284,6 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 				with open("/proc/stb/audio/avl_choices", "r") as avl_choices:
 					avl_choices.read().split('\n', 1)[0]
 					avl_choices.close()
-				self.settings.autovolume = ConfigSelection(choices=choice_list, default=config.av.autovolume.value)
-				self.settings.autovolume.addNotifier(self.changeAutoVolume, initial_call=False)
-				conflist.append(getConfigListEntry(_("Audio auto volume"), self.settings.autovolume, None))
-
-			if SystemInfo["CanAutoVolumeLevel"]:
-				choice_list = [
-					("disabled", _("Off")),
-					("enabled", _("On"))
-				]
-				with open("/proc/stb/audio/autovolumelevel_choices", "r") as autovolumelevel_choices:
-					autovolumelevel_choices.read().split('\n', 1)[0]
-					autovolumelevel_choices.close()
 				self.settings.autovolumelevel = ConfigSelection(choices=choice_list, default=config.av.autovolumelevel.value)
 				self.settings.autovolumelevel.addNotifier(self.changeAutoVolumeLevel, initial_call=False)
 				conflist.append(getConfigListEntry(_("Audio auto volume level"), self.settings.autovolumelevel, None))
@@ -458,11 +446,6 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		if surround_3d_speaker.value:
 			config.av.surround_3d_speaker.value = surround_3d_speaker.value
 		config.av.surround_3d_speaker.save()
-
-	def changeAutoVolume(self, autovolume):
-		if autovolume.value:
-			config.av.autovolume.value = autovolume.value
-		config.av.autovolume.save()
 
 	def changeAutoVolumeLevel(self, autovolumelevel):
 		if autovolumelevel.value:
