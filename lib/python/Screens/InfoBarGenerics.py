@@ -11,7 +11,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock, ACTIONKEY_RIGHT
-from Components.SystemInfo import SystemInfo, BRAND, MODEL, PLATFORM
+from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL, PLATFORM
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
@@ -4148,7 +4148,7 @@ class InfoBarHdmi2:
 		self.hdmi_enabled_full = False
 		self.hdmi_enabled_pip = False
 
-		if SystemInfo["HasHDMIin"]:
+		if BoxInfo.getItem("hashdmiin"):
 			if not self.hdmi_enabled_full:
 				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True), "blue")
 			if not self.hdmi_enabled_pip:

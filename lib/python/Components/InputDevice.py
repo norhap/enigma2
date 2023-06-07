@@ -7,7 +7,7 @@ from platform import machine
 from keyids import KEYIDS, KEYIDNAMES
 from struct import pack
 from Components.config import ConfigSelection, ConfigSelectionNumber, ConfigSubsection, ConfigText, ConfigYesNo, config
-from Components.SystemInfo import SystemInfo, BoxInfo
+from Components.SystemInfo import BoxInfo
 from Tools.Directories import resolveFilename, fileReadLine, fileReadLines, SCOPE_KEYMAPS, SCOPE_GUISKIN, fileReadXML
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -209,7 +209,7 @@ class RemoteControl:
 
 	def __init__(self):
 		self.model = BoxInfo.getItem("model")
-		self.rcName = SystemInfo["RCName"]
+		self.rcName = BoxInfo.getItem("rcname")
 		self.rcType = self.readRemoteControlType()
 		remotes = fileReadXML(resolveFilename(SCOPE_GUISKIN, "remotes.xml"), source=MODULE_NAME)
 		self.remotes = []
@@ -234,7 +234,7 @@ class RemoteControl:
 					print("[InputDevice] Default remote control identified as '%s'.  (model='%s', rcName='%s', rcType='%s')" % (remote[REMOTE_DISPLAY_NAME], self.model, self.rcName, self.rcType))
 					default = index
 		config.inputDevices.remotesIndex = ConfigSelection(choices=rcChoices, default=default)
-		self.remote = self.loadRemoteControl(SystemInfo["RCMapping"])
+		self.remote = self.loadRemoteControl(BoxInfo.getItem("RCMapping"))
 
 	def loadRemoteControl(self, filename):
 		print("[InputDevice] Loading remote control '%s'." % filename)
@@ -359,13 +359,13 @@ class InitInputDevices:
 	def setupConfigEntries(self, device):
 		setattr(config.inputDevices, device, ConfigSubsection())
 		configItem = getattr(config.inputDevices, device)
-		configItem.enabled = ConfigYesNo(default=SystemInfo["RemoteEnable"] == True)
+		configItem.enabled = ConfigYesNo(default=BoxInfo.getItem("RemoteEnable", False))
 		configItem.enabled.addNotifier(self.inputDevicesEnabledChanged)
 		configItem.name = ConfigText(default=inputDevices.devices[device]["name"])
 		configItem.name.addNotifier(self.inputDevicesNameChanged)
-		configItem.repeat = ConfigSelectionNumber(default=SystemInfo["RemoteRepeat"], min=0, max=500, stepwidth=10)
+		configItem.repeat = ConfigSelectionNumber(default=BoxInfo.getItem("RemoteRepeat", 100), min=0, max=500, stepwidth=10)
 		configItem.repeat.addNotifier(self.inputDevicesRepeatChanged)
-		configItem.delay = ConfigSelectionNumber(default=SystemInfo["RemoteDelay"], min=0, max=5000, stepwidth=100)
+		configItem.delay = ConfigSelectionNumber(default=BoxInfo.getItem("RemoteDelay", 700), min=0, max=5000, stepwidth=100)
 		configItem.delay.addNotifier(self.inputDevicesDelayChanged)
 
 	def inputDevicesEnabledChanged(self, configElement):

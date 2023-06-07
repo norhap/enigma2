@@ -12,7 +12,7 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
 from Tools.Directories import fileUpdateLine, InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
-from Components.SystemInfo import SystemInfo, ARCHITECTURE, MODEL
+from Components.SystemInfo import BoxInfo, SystemInfo, ARCHITECTURE, MODEL
 
 profile("Imports")
 from os.path import isdir, islink, join as pathjoin
@@ -536,7 +536,7 @@ def runScreenTest():
 	profile("Init:PowerKey")
 	power = PowerKey(session)
 
-	if SystemInfo["VFDSymbols"]:
+	if BoxInfo.getItem("vfdsymbol"):
 		profile("VFDSYMBOLS")
 		import Components.VfdSymbols
 		Components.VfdSymbols.SymbolsCheck(session)

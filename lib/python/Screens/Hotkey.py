@@ -2,7 +2,7 @@
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo, SystemInfo
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
@@ -213,7 +213,7 @@ def getHotkeyFunctions():
 		hotkey.functions.append((_("Move PiP"), "Infobar/movePiP", "InfoBar"))
 		hotkey.functions.append((_("Toggle PiPzap"), "Infobar/togglePipzap", "InfoBar"))
 	hotkey.functions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))
-	if SystemInfo["HasHDMIin"]:
+	if BoxInfo.getItem("hashdmiin"):
 		hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 		hotkey.functions.append((_("Toggle HDMI-In full screen"), "Infobar/HDMIInFull", "InfoBar"))
 		hotkey.functions.append((_("Toggle HDMI-In PiP"), "Infobar/HDMIInPiP", "InfoBar"))

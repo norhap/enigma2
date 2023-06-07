@@ -5,7 +5,7 @@ from Plugins.SystemPlugins.Videomode.VideoHardware import VIDEO
 from Components.config import ConfigBoolean, config, configfile
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
-from Components.SystemInfo import SystemInfo, BRAND, BoxInfo
+from Components.SystemInfo import BoxInfo, BRAND
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.Wizard import WizardSummary
 from Screens.WizardLanguage import WizardLanguage
@@ -90,7 +90,7 @@ class VideoWizard(WizardLanguage, ShowRemoteControl):
 		for modes in self.videoSwitch.getModeList(self.port):
 			if modes[0] == mode:
 				for rate in modes[1]:
-					if rate == "auto" and not SystemInfo["Has24hz"]:
+					if rate == "auto" and not BoxInfo.getItem("has24hz"):
 						continue
 					if self.port == "DVI-PC":
 						# print("[WizardVideo] listModes DEBUG: rate='%s'." % rate)

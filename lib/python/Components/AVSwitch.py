@@ -1,6 +1,6 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
-from Components.SystemInfo import SystemInfo, BRAND, MODEL
+from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL
 from os.path import exists
 
 
@@ -75,9 +75,9 @@ def InitAVSwitch():
 	colorformat_choices = {"cvbs": "CVBS"}
 
 	# when YUV, Scart or S-Video is not support by HW, don't let the user select it
-	if SystemInfo["HasYPbPr"]:
+	if BoxInfo.getItem("yuv"):
 		colorformat_choices["yuv"] = "YPbPr"
-	if SystemInfo["HasScart"]:
+	if BoxInfo.getItem("scart"):
 		colorformat_choices["rgb"] = "RGB"
 	if SystemInfo["HasSVideo"]:
 		colorformat_choices["svideo"] = "S-Video"

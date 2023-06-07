@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSelection, ConfigSubDict, ConfigYesNo
-from Components.SystemInfo import SystemInfo, BRAND, MODEL
+from Components.SystemInfo import BoxInfo, BRAND, MODEL
 from Tools.CList import CList
 import os
 from enigma import getDesktop
@@ -104,11 +104,11 @@ class VideoHardware:
 		"640x480": {60: "640x480"}
 	}
 
-	if SystemInfo["HasScart"]:
+	if BoxInfo.getItem("scart"):
 		modes["Scart"] = ["PAL", "NTSC", "Multi"]
-	if SystemInfo["HasComposite"]:
+	if BoxInfo.getItem("rca"):
 		modes["RCA"] = ["576i", "PAL", "NTSC", "Multi"]
-	if SystemInfo["HasJack"]:
+	if BoxInfo.getItem("avjack"):
 		modes["Jack"] = ["PAL", "NTSC", "Multi"]
 
 	if getChipSetNumber() in ("7376", "7444", "72604"):
@@ -126,17 +126,17 @@ class VideoHardware:
 
 	modes["DVI-PC"] = ["PC"]
 
-	if SystemInfo["HasYPbPr"]:
+	if BoxInfo.getItem("yuv"):
 		modes["YPbPr"] = modes["HDMI"]
 
-	if "YPbPr" in modes and not SystemInfo["HasYPbPr"]:
+	if "YPbPr" in modes and not BoxInfo.getItem("yuv"):
 		del modes["YPbPr"]
 
-	if "Scart" in modes and not SystemInfo["HasScart"] and (SystemInfo["HasComposite"] or SystemInfo["HasJack"]):
+	if "Scart" in modes and not BoxInfo.getItem("scart") and (BoxInfo.getItem("rca") or BoxInfo.getItem("avjack")):
 		modes["RCA"] = modes["Scart"]
 		del modes["Scart"]
 
-	if "Scart" in modes and not SystemInfo["HasComposite"] and not SystemInfo["HasScart"] and not SystemInfo["HasJack"]:
+	if "Scart" in modes and not BoxInfo.getItem("rca") and not BoxInfo.getItem("scart") and not BoxInfo.getItem("avjack"):
 		del modes["Scart"]
 
 	if MODEL == "hd2400":
@@ -187,12 +187,12 @@ class VideoHardware:
 		if "Scart" in self.modes and not self.getModeList("Scart"):
 			print("[Videomode] VideoHardware remove Scart because of not existing modes")
 			del self.modes["Scart"]
-		if "YPbPr" in self.modes and not SystemInfo["HasYPbPr"]:
+		if "YPbPr" in self.modes and not BoxInfo.getItem("yuv"):
 			del self.modes["YPbPr"]
-		if "Scart" in self.modes and not SystemInfo["HasScart"] and (SystemInfo["HasComposite"] or SystemInfo["HasJack"]):
+		if "Scart" in self.modes and not BoxInfo.getItem("scart") and (BoxInfo.getItem("rca") or BoxInfo.getItem("avjack")):
 			modes["RCA"] = modes["Scart"]
 			del self.modes["Scart"]
-		if "Scart" in self.modes and not SystemInfo["HasComposite"] and not SystemInfo["HasScart"] and not SystemInfo["HasJack"]:
+		if "Scart" in self.modes and not BoxInfo.getItem("rca") and not BoxInfo.getItem("scart") and not BoxInfo.getItem("avjack"):
 			del self.modes["Scart"]
 
 		self.createConfig()
@@ -288,7 +288,7 @@ class VideoHardware:
 			except IOError:
 				print("[Videomode] Write to /proc/stb/video/videomode failed.")
 
-		if SystemInfo["Has24hz"]:
+		if BoxInfo.getItem("has24hz"):
 			try:
 				print("[Videomode] Write to /proc/stb/video/videomode_24hz")
 				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
@@ -364,7 +364,7 @@ class VideoHardware:
 			for (mode, rates) in modes:
 				ratelist = []
 				for rate in rates:
-					if rate == "auto" and not SystemInfo["Has24hz"]:
+					if rate == "auto" and not BoxInfo.getItem("has24hz"):
 						continue
 					ratelist.append((rate, rate))
 				config.av.videorate[mode] = ConfigSelection(choices=ratelist)

@@ -1,5 +1,4 @@
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
-from boxbranding import getDisplayType, getHaveTranscoding, getHaveMultiTranscoding
 from os import listdir, popen, remove
 from os.path import getmtime, isfile, join as pathjoin
 from PIL import Image
@@ -25,7 +24,7 @@ from Components.Console import Console
 from Components.GUIComponent import GUIComponent
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
-from Components.SystemInfo import SystemInfo, BRAND, MODEL, DISPLAYMODEL
+from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL, DISPLAYMODEL
 
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
 from Tools.Geolocation import geolocation
@@ -207,7 +206,7 @@ class InformationImage(Screen, HelpableScreen):
 		self.images = (
 			(_("Front"), "%s%s.png", (boxes, MODEL)),
 			(_("Rear"), "%s%s-rear.png", (boxes, MODEL)),
-			(_("Remote Control"), "%s%s.png", (remotes, SystemInfo["RCName"])),
+			(_("Remote Control"), "%s%s.png", (remotes, BoxInfo.getItem("rcname"))),
 			(_("Flashing"), "%s%s-flashing.png", (boxes, MODEL)),
 			(_("Internal"), "%s%s-internal.png", (boxes, MODEL))
 		)
@@ -367,8 +366,8 @@ class About(Screen):
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
 		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"]:
-			if MODEL not in ("gbip4k",):
-				AboutText += _("Type Display: ") + getDisplayType() + "\n"
+			if not SystemInfo["NoHaveFrontpanelDisplay"]:
+				AboutText += _("Type Display: ") + BoxInfo.getItem("displaytype") + "\n"
 			else:
 				AboutText += _("No Display") + "\n"
 		servicemp3 = _("ServiceMP3. IPTV recording (Yes).")
@@ -657,8 +656,8 @@ class TunerInformation(InformationBase):
 		info.append(formatLine("", _("DVB API"), _("New"))) if float(dvbApiVersion) > 5 else info.append(formatLine("", _("DVB API"), _("Old")))
 		info.append(formatLine("", _("DVB API version"), dvbApiVersion))
 		info.append("")
-		info.append(formatLine("", _("Transcoding"), (_("Yes") if getHaveTranscoding() == "True" else _("No"))))
-		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if getHaveMultiTranscoding() == "True" else _("No"))))
+		info.append(formatLine("", _("Transcoding"), (_("Yes") if BoxInfo.getItem("transcoding") else _("No"))))
+		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if BoxInfo.getItem("multitranscoding") else _("No"))))
 		info.append("")
 		if fileHas("/tmp/dvbfetool.txt", "Mode 2: DVB-S"):
 			 info.append(formatLine("", _("DVB-S2/C/T2 Combined"), (_("Yes"))))
