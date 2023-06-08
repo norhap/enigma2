@@ -365,11 +365,10 @@ class About(Screen):
 
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
 
-		if SystemInfo["Display"] or SystemInfo["7segment"] or SystemInfo["textlcd"]:
-			if not SystemInfo["NoHaveFrontpanelDisplay"]:
-				AboutText += _("Type Display: ") + BoxInfo.getItem("displaytype") + "\n"
-			else:
-				AboutText += _("No Display") + "\n"
+		if BoxInfo.getItem("displaytype"):
+			AboutText += _("Type Display: ") + BoxInfo.getItem("displaytype") + "\n"
+		else:
+			AboutText += _("No Display") + "\n"
 		servicemp3 = _("ServiceMP3. IPTV recording (Yes).")
 		servicehisilicon = _("ServiceHisilicon. IPTV recording (No). (Recommended ServiceMP3).")
 		exteplayer3 = _("ServiceApp-ExtEplayer3. IPTV recording (No). (Recommended ServiceMP3).")

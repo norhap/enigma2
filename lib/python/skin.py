@@ -725,7 +725,7 @@ class AttributeParser:
 
 	def alphatest(self, value):  # This legacy definition uses an inconsistent name, use 'alphaTest' instead!
 		self.alphaTest(value)
-		attribDeprecationWarning("alphatest", "alphaTest")
+		# attribDeprecationWarning("alphatest", "alphaTest")
 
 	def animationMode(self, value):
 		self.guiObject.setAnimationMode(parseAnimationMode(value))
