@@ -5393,8 +5393,8 @@ msgstr "Grabando"
 msgid "Recording Actions"
 msgstr "Acciones de Grabación"
 
-msgid "Recording failed: Storage device free size %d GB."
-msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d GB."
+msgid "Recording failed: Storage device free size %d MB."
+msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d MB."
 
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
@@ -17704,8 +17704,8 @@ msgstr "Acciones Zoom"
 msgid "Timeshift Actions"
 msgstr "Acciones Timeshift"
 
-msgid "Timeshift failed: Storage device free size %d GB."
-msgstr "Timeshift fallido: Tamaño libre del dispositivo de almacenamiento %d GB."
+msgid "Timeshift failed: Storage device free size %d MB."
+msgstr "Timeshift fallido: Tamaño libre del dispositivo de almacenamiento %d MB."
 
 msgid "Timeshift not enough diskspace. Is device mounted?"
 msgstr "Timeshift no tiene suficiente espacio en disco. ¿Está montado el dispositivo?"
@@ -17752,8 +17752,8 @@ msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pul
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
 
-msgid "'%s' Storage device free size %d GB.\n%s"
-msgstr "Tamaño libre del dispositivo de almacenamiento %d GB.\n%s"
+msgid "'%s' Storage free size %d MB.\n%s"
+msgstr "Tamaño libre de almacenamiento %d MB.\n%s"
 
 msgid "'%s' does not exist.\n%s"
 msgstr "'%s' no existe.\n%s"
