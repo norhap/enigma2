@@ -6,37 +6,26 @@ datarootdir="@datarootdir@"
 
 export PATH="${PATH}:/usr/script"
 
+# LC_ALL available?
+if [ -z $LC_ALL ]; then
+	export LC_ALL=en_GB.utf8
+fi
+
 if [ -d /home/root ]; then
 	export HOME="/home/root"
 	cd
 fi
 
-MODELCHECK=`cat /proc/stb/info/boxtype`
-SOCFAMILY=`cat /proc/stb/info/chipset | cut -c 1-3`
-
-if [ -e /proc/stb/info/boxtype ]; then
-	if [ $MODELCHECK == "viper4k" ] || [ $MODELCHECK == "sf8008" ] || [ $MODELCHECK == "sf8008m" ] || [ $MODELCHECK == "sf8008opt" ] || [ $MODELCHECK == "beyonwizv2" ] || [ $MODELCHECK == "ustym4kpro" ] || [ $MODELCHECK == "cc1" ] || [ $MODELCHECK == "gbtrio4k" ] || [ $MODELCHECK == "gbtrio4kplus" ] || [ $MODELCHECK == "og2ott4k" ] || [ $MODELCHECK == "gbip4k" ] || [ $MODELCHECK == "sfx6008" ] || [ $stbcheck == "sx88v2" ]; then
-		count=`ps -ef |grep libreader |grep -v "grep" |wc -l`
-		if [ 0 == $count ];then
-			libreader 720P_50
-		fi
+if [ -f "@bindir@/libreader" ]; then
+	COUNT=`ps -ef | grep libreader | grep -v "grep" | wc -l`
+	if [ "${COUNT}" -eq "0" ];then
+		@bindir@/libreader 720P_50
 	fi
 fi
 
-if [ -f /proc/stb/fp/led_color ]; then
-	echo "00ffffff" > /proc/stb/fp/led_color
-elif [ -f /proc/stb/fp/led_brightness ]; then
-	echo "000000ff" > /proc/stb/fp/led_brightness
-fi
-
-if [ -f /proc/stb/fp/nec_ir ]; then
-	echo "1" > /proc/stb/fp/nec_ir
-	[ -f /sys/class/remote/amremote/protocol ] && echo "2" > /sys/class/remote/amremote/protocol
-fi
-
-# LC_ALL available?
-if [ -z $LC_ALL ]; then
-	export LC_ALL=en_GB.utf8
+#check for specific pagecache helper lib
+if [ -e @libdir@/libpagecache.so ]; then
+	LIBS="$LIBS @libdir@/libpagecache.so"
 fi
 
 # Check for sundtek tuner helper lib.
@@ -46,8 +35,14 @@ else
 	LIBS="@libdir@/libopen.so.0.0.0"
 fi
 
+if [ -f /proc/stb/fp/nec_ir ]; then
+	echo "1" > /proc/stb/fp/nec_ir
+	[ -f /sys/class/remote/amremote/protocol ] && echo "2" > /sys/class/remote/amremote/protocol
+fi
+
 # enigma2-core.dump.
 DEBUGDIR=`sed -En 's|^config\.crash\.debugPath=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
+
 if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
 	if [ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/" ]; then
 		COREDUMPSIZE=$((10 * 512 * 4 - 1 * 512 * 4)) # size is in blocks (512 byte) so this sets 10 MB - 1 MB for log files
@@ -161,16 +156,6 @@ while : ; do
 	case ${RET} in
 		1)
 			/sbin/halt
-			if [ $MODELCHECK == "wetekplay" ]; then
-				echo "0" > /sys/class/leds/wetek\:blue\:wifiled/brightness
-				echo "0" > /sys/class/leds/wetek\:blue\:ethled/brightness
-				echo "mem" > /sys/power/state
-			fi
-			if [ -f /proc/stb/fp/led_color ]; then
-				echo "00ffffff" > /proc/stb/fp/led_color
-			elif [ -f /proc/stb/fp/led_brightness ]; then
-				echo "00000008" > /proc/stb/fp/led_brightness
-			fi
 			;;
 		2)
 			[ -f /proc/stb/fp/force_restart ] && echo "1" > /proc/stb/fp/force_restart
