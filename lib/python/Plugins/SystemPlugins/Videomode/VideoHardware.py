@@ -111,10 +111,10 @@ class VideoHardware:
 	if BoxInfo.getItem("avjack"):
 		modes["Jack"] = ["PAL", "NTSC", "Multi"]
 
-	if getChipSetNumber() in ("7376", "7444", "72604"):
+	if getChipSetNumber() in ("7376", "7444"):
 		modes["HDMI"] = ["720p", "1080p", "2160p", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p"}
-	elif getChipSetNumber() in ("7252", "7251", "7251s", "7252s", "7278", "3798mv200", "3798mv200h", "3798mv300", "3798mv310", "3798cv200",):
+	elif getChipSetNumber() in ("7252", "7251", "7251s", "7252s", "7278", "3798mv200", "3798mv200h", "3798mv300", "3798mv310", "3798cv200", "72604"):
 		modes["HDMI"] = ["720p", "1080p", "2160p", "2160p30", "1080i", "576p", "576i", "480p", "480i"]
 		widescreen_modes = {"720p", "1080p", "1080i", "2160p", "2160p30"}
 	elif getChipSetNumber() in ("7241", "7358", "7362", "73625", "7346", "7356", "73565", "7424", "7425", "7435", "7552", "7581", "7584", "75845", "7585", "pnx8493", "7162", "7111", "3716mv410", "3716mv430"):
@@ -213,32 +213,27 @@ class VideoHardware:
 		try:
 			modes = open("/proc/stb/video/videomode_choices").read()[:-1]
 		except IOError:
-			print("[Videomode] Read /proc/stb/video/videomode_choices failed.")
+			print("[Videomode] couldn't read available videomodes.")
 			self.modes_available = []
 			return
 		self.modes_available = modes.split(' ')
 
 	def readPreferredModes(self):
 		if config.av.edid_override.value == False:
-			try:
+			if fileExists("/proc/stb/video/videomode_preferred"):
+				modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
+				self.modes_preferred = modes.split(' ')
+			elif fileExists("/proc/stb/video/videomode_edid"):
 				modes = open("/proc/stb/video/videomode_edid").read()[:-1]
 				self.modes_preferred = modes.split(' ')
-				print("[Videomode] VideoHardware reading edid modes: ", self.modes_preferred)
-			except IOError:
-				print("[Videomode] Read /proc/stb/video/videomode_edid failed.")
-				try:
-					modes = open("/proc/stb/video/videomode_preferred").read()[:-1]
-					self.modes_preferred = modes.split(' ')
-				except IOError:
-					print("[Videomode] Read /proc/stb/video/videomode_preferred failed.")
-					self.modes_preferred = self.modes_available
-
+			else:
+				self.modes_preferred = self.modes_available
 			if len(self.modes_preferred) <= 1:
 				self.modes_preferred = self.modes_available
-				print("[Videomode] VideoHardware reading preferred modes is empty, using all video modes")
+				print("[Videomode] reading preferred modes is empty, using all video modes")
 		else:
 			self.modes_preferred = self.modes_available
-			print("[Videomode] VideoHardware reading preferred modes override, using all video modes")
+			print("[Videomode] config.av.edid_override.value, using all video modes")
 
 		self.last_modes_preferred = self.modes_preferred
 
@@ -246,7 +241,7 @@ class VideoHardware:
 	def isModeAvailable(self, port, mode, rate):
 		rate = self.rates[mode][rate]
 		for mode in rate.values():
-			if port == "HDMI":
+			if port != "HDMI":
 				if mode not in self.modes_preferred:
 					return False
 			else:
@@ -258,7 +253,7 @@ class VideoHardware:
 		return mode in self.widescreen_modes
 
 	def setMode(self, port, mode, rate, force=None):
-		print("[Videomode] VideoHardware setMode - port:", port, "mode:", mode, "rate:", rate)
+		print("[Videomode] setMode - port:", port, "mode:", mode, "rate:", rate)
 		# we can ignore "port"
 		self.current_mode = mode
 		self.current_port = port
@@ -276,7 +271,6 @@ class VideoHardware:
 			mode_24 = mode_60
 			if force == 50:
 				mode_24 = mode_50
-
 		try:
 			open("/proc/stb/video/videomode_50hz", "w").write(mode_50)
 			open("/proc/stb/video/videomode_60hz", "w").write(mode_60)
@@ -364,9 +358,11 @@ class VideoHardware:
 			for (mode, rates) in modes:
 				ratelist = []
 				for rate in rates:
-					if rate == "auto" and not BoxInfo.getItem("has24hz"):
-						continue
-					ratelist.append((rate, rate))
+					if rate in ("auto"):
+						if BoxInfo.getItem("has24hz"):
+							ratelist.append((rate, mode == "2160p30" and "auto (25Hz 30Hz 24Hz)" or "auto (50Hz 60Hz 24Hz)"))
+					else:
+						ratelist.append((rate, rate == "multi" and (mode == "2160p30" and "multi (25Hz 30Hz)" or "multi (50Hz 60Hz)") or rate))
 				config.av.videorate[mode] = ConfigSelection(choices=ratelist)
 		config.av.videoport = ConfigSelection(choices=lst)
 
