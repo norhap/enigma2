@@ -80,8 +80,8 @@ wait ${enigma2pid}
 while : ; do
 	# Show backdrop on enigma2 start.
 	if [ -x @bindir@/showiframe ]; then
-		if [ -f @datadir@/backdrop.mvi ]; then
-			@bindir@/showiframe @datadir@/backdrop.mvi
+		if [ -f @datadir@/enigma2/backdrop.mvi ]; then
+			@bindir@/showiframe @datadir@/enigma2/backdrop.mvi
 		fi
 	fi
 
