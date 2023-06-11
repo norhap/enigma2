@@ -218,7 +218,10 @@ void eDVBServicePMTHandler::PATready(int)
 		int pmtpid_single = -1;
 		int pmtpid = -1;
 		int cnt=0;
-		std::vector<ProgramAssociationSection*>::const_iterator i;
+		int tsid=-1;
+		std::vector<ProgramAssociationSection*>::const_iterator i = ptr->getSections().begin();
+		tsid = (*i)->getTableIdExtension(); // in PAT this is the transport stream id
+		eDebug("[eDVBServicePMTHandler] PAT TSID: 0x%04x (%d)", tsid, tsid);
 		for (i = ptr->getSections().begin(); pmtpid == -1 && i != ptr->getSections().end(); ++i)
 		{
 			const ProgramAssociationSection &pat = **i;
@@ -476,7 +479,6 @@ void eDVBServicePMTHandler::OCready(int error)
 {
 	eDebug("[eDVBServicePMTHandler] OCready");
 	ePtr<eTable<OCSection> > ptr;
-/*
 	if (!m_OC.getCurrent(ptr))
 	{
 		for (std::vector<OCSection*>::const_iterator it = ptr->getSections().begin(); it != ptr->getSections().end(); ++it)
@@ -484,7 +486,6 @@ void eDVBServicePMTHandler::OCready(int error)
 			[[maybe_unused]] unsigned char* sectionData = (unsigned char*)(*it)->getData();
 		}
 	}
-*/
 	/* for now, do not keep listening for table updates */
 	m_OC.stop();
 }
