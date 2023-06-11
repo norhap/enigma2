@@ -42,6 +42,8 @@ static off_t fileSize(const std::string &basename)
 		filesize = (long long) s.st_size;
 	/* handling for old splitted recordings (enigma 1) */
 	int slice=1;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-truncation"
 	while(true)
 	{
 		snprintf(buf, sizeof(buf), ".%03d", slice++);
@@ -50,6 +52,7 @@ static off_t fileSize(const std::string &basename)
 			break;
 		filesize += (long long) s.st_size;
 	}
+#pragma GCC diagnostic pop
 	return filesize;
 }
 

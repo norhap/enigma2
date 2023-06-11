@@ -433,6 +433,7 @@ void eDBoxLCD::update()
 	if (lcdfd < 0)
 		return;
 
+	[[maybe_unused]] ssize_t ret; /* dummy value to store write return values */
 	if (lcd_type == 0 || lcd_type == 2)
 	{
 		unsigned char raw[132 * 8];
@@ -456,7 +457,7 @@ void eDBoxLCD::update()
 				}
 			}
 		}
-		write(lcdfd, raw, 132 * 8);
+		ret = write(lcdfd, raw, 132 * 8);
 	}
 	else if (lcd_type == 3)
 	{
@@ -481,11 +482,11 @@ void eDBoxLCD::update()
 					}
 				}
 			}
-			write(lcdfd, raw, _stride * height);
+			ret = write(lcdfd, raw, _stride * height);
 		}
 		else
 		{
-			write(lcdfd, _buffer, _stride * res.height());
+			ret = write(lcdfd, _buffer, _stride * res.height());
 		}
 	}
 	else /* lcd_type == 1 */
@@ -515,7 +516,7 @@ void eDBoxLCD::update()
 				}
 			}
 		}
-		write(lcdfd, raw, 64 * 64);
+		ret = write(lcdfd, raw, 64 * 64);
 	}
 #endif
 }

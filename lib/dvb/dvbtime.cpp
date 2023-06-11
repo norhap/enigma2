@@ -252,7 +252,7 @@ eDVBLocalTimeHandler *eDVBLocalTimeHandler::instance;
 DEFINE_REF(eDVBLocalTimeHandler);
 
 eDVBLocalTimeHandler::eDVBLocalTimeHandler()
-	:m_use_dvb_time(true), m_SyncTimeUsing(0), m_updateNonTunedTimer(eTimer::create(eApp)), m_time_ready(false)
+	:m_use_dvb_time(true), m_updateNonTunedTimer(eTimer::create(eApp)), m_time_ready(false), m_SyncTimeUsing(0)
 {
 	if ( !instance )
 		instance=this;
@@ -288,6 +288,7 @@ void eDVBLocalTimeHandler::readTimeOffsetData( const char* filename )
 	if (!f)
 		return;
 	char line[256];
+	[[maybe_unused]] char* ret = fgets(line, 256, f);
 	while (true)
 	{
 		if (!fgets( line, 256, f ))
@@ -418,7 +419,7 @@ void eDVBLocalTimeHandler::updateNonTuned()
 void eDVBLocalTimeHandler::updateTime( time_t tp_time, eDVBChannel *chan, int update_count )
 {
 
-	eDebug("[eDVBLocalTimerHandler] updateTime : %d" , tp_time);
+	eDebug("[eDVBLocalTimerHandler] updateTime : %ld" , tp_time);
 
 	if (m_SyncTimeUsing == 2) {
 		if(tp_time != 0 && tp_time != -1) { // -1 can be removed later

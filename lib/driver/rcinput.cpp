@@ -661,7 +661,7 @@ public:
 
 	void removeAll(void)
 	{
-		int size = items.size();
+		[[maybe_unused]] size_t size = items.size();
 		for (itemlist::iterator it = items.begin(); it != items.end(); ++it)
 		{
 			delete *it;
