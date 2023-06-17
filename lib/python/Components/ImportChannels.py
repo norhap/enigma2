@@ -16,7 +16,7 @@ import xml.etree.ElementTree as et
 from base64 import encodebytes
 from time import sleep
 
-supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
+supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.', 'iptosat.json', 'iptosat.conf')
 channelslistpath = "/etc/enigma2"
 channelsepg = False
 
