@@ -8821,6 +8821,9 @@ msgstr "lista negra"
 msgid "blue"
 msgstr "azul"
 
+msgid "Booting in slot %s %s"
+msgstr "Arrancando en slot %s %s"
+
 msgid "bottom"
 msgstr "abajo"
 

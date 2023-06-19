@@ -5,7 +5,7 @@ import os
 import glob
 import tempfile
 from subprocess import check_output
-from Components.SystemInfo import SystemInfo, BoxInfo as BoxInfoRunningInstance, BoxInformation
+from Components.SystemInfo import SystemInfo, BRAND, BoxInfo as BoxInfoRunningInstance, BoxInformation
 
 
 class tmp:
@@ -207,14 +207,14 @@ def getImagelist(Recovery=None):
 						date = VerDate(imagedir)
 						Creator = Creator.replace("-release", " ")
 						BuildVersion = "%s (%s)" % (Creator, date)
-				if SystemInfo["hasKexec"] and Recovery:
-					bootmviSlot(imagedir=imagedir, text=BuildVersion, slot=slot)
 				imagelist[slot] = {"imagename": "%s" % BuildVersion}
 			elif os.path.isfile(os.path.join(imagedir, "usr/bin/enigmax")):
 				imagelist[slot] = {"imagename": _("Deleted image")}
 			else:
 				imagelist[slot] = {"imagename": _("Empty slot")}
 			Console().ePopen('umount %s' % tmp.dir)
+		if not os.path.exists("/usr/share/enigma2/bootlogo.txt") and BRAND not in ("Edision",):
+			bootmviSlot(imagedir=imagedir, text=BuildVersion, slot=slot)
 		if not os.path.ismount(tmp.dir):
 			os.rmdir(tmp.dir)
 	return imagelist
@@ -231,46 +231,42 @@ def createInfo(slot, imagedir="/"):
 	return "%s %s %s %s %s (%s)" % (Creator, BuildImgVersion, BuildType, BuildVer, BuildDev, BuildDate)
 
 
-def bootmviSlot(imagedir="/", text=" ", slot=0):
-	inmviPath = os.path.join(imagedir, "usr/share/bootlogo.mvi")
-	outmviPath = os.path.join(imagedir, "usr/share/enigma2/bootlogo.mvi")
-	txtPath = os.path.join(imagedir, "usr/share/enigma2/bootlogo.txt")
-	text = "booting slot %s %s" % (slot, text)
+def bootmviSlot(imagedir="/", text=" ", slot=" "):
+	inmviPath = os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
+	outmviPath = os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
+	txtPath = os.path.join(imagedir, "/usr/share/enigma2/bootlogo.txt")
+	slot = getCurrentImage()
+	text = _("Booting in slot %s %s") % (slot, text)
 	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmviPath, "   ", outmviPath)
-	if os.path.exists(inmviPath):
-		if os.path.exists(outmviPath) and os.path.exists(txtPath) and open(txtPath).read() == text:
-			return
-		from PIL import Image, ImageDraw, ImageFont
-		print("[MultiBoot][bootmviSlot] Copy /usr/share/bootlogo.mvi to /tmp/bootlogo.m1v")
-		Console(binary=True).ePopen("cp %s /tmp/bootlogo.m1v" % inmviPath)
-		print("[MultiBoot][bootmviSlot] Dump iframe to png")
-		Console(binary=True).ePopen("ffmpeg -skip_frame nokey -i /tmp/bootlogo.m1v -vsync 0  -y  /tmp/out1.png 2>/dev/null")
-		Console(binary=True).ePopen("rm -f /tmp/mypicture.m1v")
-		if os.path.exists("/tmp/out1.png"):
-			img = Image.open("/tmp/out1.png")						# Open an Image
-		else:
-			print("[MultiBoot][bootmviSlot] unable to create new bootlogo cannot open out1.png")
-			return
-		I1 = ImageDraw.Draw(img)									# Call draw Method to add 2D graphics in an image
-		myFont = ImageFont.truetype("/usr/share/fonts/OpenSans-Regular.ttf", 65)		# Custom font style and font size
-		print("[MultiBoot][bootmviSlot] Write text to png")
-		text = "booting slot %s %s" % (slot, text)
-		I1.text((52, 12), text, font=myFont, fill=(255, 0, 0))		# Add Text to an image
-		I1.text((50, 10), text, font=myFont, fill=(255, 255, 255))
-		img.save("/tmp/out1.png")									# Save the edited image
-		print("[MultiBoot][bootmviSlot] Repack bootlogo")
-		Console(binary=True).ePopen("ffmpeg -i /tmp/out1.png -r 25 -b 20000 -y /tmp/mypicture.m1v  2>/dev/null")
-		Console(binary=True).ePopen("cp /tmp/mypicture.m1v %s" % outmviPath)
-		with open(txtPath, "w") as f:
-			f.write(text)
+	from PIL import Image, ImageDraw, ImageFont
+	print("[MultiBoot][bootmviSlot] Copy usr/share/enigma2/bootlogo.mvi to /tmp/bootlogo.m1v")
+	Console(binary=True).ePopen("cp %s /tmp/bootlogo.m1v" % inmviPath)
+	print("[MultiBoot][bootmviSlot] Dump iframe to png")
+	Console(binary=True).ePopen("ffmpeg -skip_frame nokey -i /tmp/bootlogo.m1v -vsync 0  -y  /tmp/out1.png 2>/dev/null")
+	Console(binary=True).ePopen("rm -f /tmp/mypicture.m1v")
+	if os.path.exists("/tmp/out1.png"):
+		img = Image.open("/tmp/out1.png")						# Open an Image
+	else:
+		print("[MultiBoot][bootmviSlot] unable to create new bootlogo cannot open out1.png")
+		return
+	I1 = ImageDraw.Draw(img)									# Call draw Method to add 2D graphics in an image
+	myFont = ImageFont.truetype("/usr/share/fonts/DejaVuSansCondensed-Bold.ttf", 30)		# Custom font style and font size
+	print("[MultiBoot][bootmviSlot] Write text to png")
+	I1.text((50, 22), text, font=myFont, fill=(255, 255, 255))
+	img.save("/tmp/out1.png")									# Save the edited image
+	print("[MultiBoot][bootmviSlot] Repack bootlogo")
+	Console(binary=True).ePopen("ffmpeg -i /tmp/out1.png -r 25 -b 20000 -y /tmp/mypicture.m1v  2>/dev/null")
+	Console(binary=True).ePopen("cp /tmp/mypicture.m1v %s" % outmviPath)
+	with open(txtPath, "w") as f:
+		f.write(text)
 
 
 def VerDate(imagedir):
 	date3 = "00000000"
-	date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
-	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
-	if os.path.exists(os.path.join(imagedir, "usr/share/bootlogo.mvi")):
-		date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
+	date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "/var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
+	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "/usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
+	if os.path.exists(os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")):
+		date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
 	print("[MultiBoot][VerDate]1 date1, date2, date3", date1, "   ", date2, "   ", date3)
 	date = max(date1, date2, date3)
 	print("[MultiBoot][VerDate]2 date = %s" % date)
