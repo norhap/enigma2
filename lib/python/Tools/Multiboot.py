@@ -5,7 +5,8 @@ import os
 import glob
 import tempfile
 from subprocess import check_output
-from Components.SystemInfo import SystemInfo, BRAND, BoxInfo as BoxInfoRunningInstance, BoxInformation
+from Components.SystemInfo import SystemInfo, BoxInfo as BoxInfoRunningInstance, BoxInformation
+from Components.About import getChipSetNumber
 
 
 class tmp:
@@ -213,7 +214,7 @@ def getImagelist(Recovery=None):
 			else:
 				imagelist[slot] = {"imagename": _("Empty slot")}
 			Console().ePopen('umount %s' % tmp.dir)
-		if not os.path.exists("/usr/share/enigma2/bootlogo.txt") and BRAND not in ("Edision",):
+		if not os.path.exists("/usr/share/enigma2/bootlogo.txt") and getChipSetNumber() not in ("72604",):
 			bootmviSlot(imagedir=imagedir, text=BuildVersion, slot=slot)
 		if not os.path.ismount(tmp.dir):
 			os.rmdir(tmp.dir)
