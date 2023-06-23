@@ -74,6 +74,22 @@ class MenuList(GUIComponent):
 		if self.instance:
 			self.instance.goLineUp()
 
+	def goFirst(self):
+		if self.instance:
+			self.instance.goFirst()
+
+	def goLeft(self):
+		if self.instance:
+			self.instance.goLeft()
+
+	def goRight(self):
+		if self.instance:
+			self.instance.goRight()
+
+	def goLast(self):
+		if self.instance:
+			self.instance.goLast()
+
 	def goLineDown(self):
 		if self.instance:
 			self.instance.goLineDown()

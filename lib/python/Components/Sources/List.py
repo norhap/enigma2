@@ -161,6 +161,13 @@ to generate HTML."""
 		except AttributeError:
 			return
 
+	def goFirst(self):
+		try:
+			instance = self.master.master.instance
+			instance.goFirst()
+		except AttributeError:
+			return
+
 	def goLeft(self):
 		try:
 			instance = self.master.master.instance
@@ -172,6 +179,13 @@ to generate HTML."""
 		try:
 			instance = self.master.master.instance
 			instance.goRight()
+		except AttributeError:
+			return
+
+	def goLast(self):
+		try:
+			instance = self.master.master.instance
+			instance.goLast()
 		except AttributeError:
 			return
 
