@@ -1626,8 +1626,8 @@ msgstr "Conectar"
 msgid "Connect to a wireless network"
 msgstr "Conectar a red inalámbrica"
 
-msgid "Connected"
-msgstr "Conectado"
+msgid "Connected through another tuner"
+msgstr "Conectado a través de otro sintonizador"
 
 msgid "Connected satellites"
 msgstr "Satélites conectados"
