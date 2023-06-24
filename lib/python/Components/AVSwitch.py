@@ -244,7 +244,6 @@ def InitAVSwitch():
 		if SystemInfo["havehdmicolorspacechoices"]:
 			with open("/proc/stb/video/hdmi_colorspace_choices", "r") as hdmicolorspace:
 				hdmicolorspace.read().split('\n', 1)[0]
-				hdmicolorspace.close()
 		config.av.hdmicolorspace = ConfigSelection(choices=choices, default=default)
 		config.av.hdmicolorspace.addNotifier(setHDMIColorspace)
 	else:
@@ -264,7 +263,6 @@ def InitAVSwitch():
 		if SystemInfo["havehdmicolorimetrychoices"]:
 			with open("/proc/stb/video/hdmi_colorimetry_choices", "r") as hdmicolorimetry:
 				hdmicolorimetry.read().split('\n', 1)[0]
-				hdmicolorimetry.close()
 		config.av.hdmicolorimetry = ConfigSelection(choices=choices, default=default)
 		config.av.hdmicolorimetry.addNotifier(setHDMIColorimetry)
 	else:
@@ -284,7 +282,6 @@ def InitAVSwitch():
 		if SystemInfo["havehdmicolordepthchoices"]:
 			with open("/proc/stb/video/hdmi_colordepth_choices", "r") as hdmicolordepth:
 				hdmicolordepth.read().split('\n', 1)[0]
-				hdmicolordepth.close()
 		config.av.hdmicolordepth = ConfigSelection(choices=choices, default=default)
 		config.av.hdmicolordepth.addNotifier(setHdmiColordepth)
 	else:
@@ -373,7 +370,6 @@ def InitAVSwitch():
 			try:
 				with open("/proc/stb/video/sync_mode_choices", "w") as syncmode:
 					syncmode.write(configElement.value)
-					syncmode.close()
 			except (IOError, OSError):
 				pass
 		config.av.sync_mode.addNotifier(setSyncMode)
@@ -396,7 +392,6 @@ def InitAVSwitch():
 		def setAC3Downmix(configElement):
 			with open("/proc/stb/audio/ac3", "w") as trackac3:
 				trackac3.write(configElement.value)
-				trackac3.close()
 			if SystemInfo.get("supportPcmMultichannel", False) and configElement.value == "passthrough":
 				SystemInfo["CanPcmMultichannel"] = True
 			else:
@@ -405,7 +400,6 @@ def InitAVSwitch():
 					config.av.multichannel_pcm.setValue(False)
 		with open("/proc/stb/audio/ac3_choices", "r") as ac3_choices:
 			ac3_choices.read().split('\n', 1)[0]
-			ac3_choices.close()
 		config.av.downmix_ac3 = ConfigSelection(choices=choices, default=default)
 		config.av.downmix_ac3.addNotifier(setAC3Downmix)
 
@@ -420,7 +414,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/aac", "w").write(configElement.value)
 		with open("/proc/stb/audio/aac_choices", "r") as aac_choices:
 			aac_choices.read().split('\n', 1)[0]
-			aac_choices.close()
 		config.av.downmix_aac = ConfigSelection(choices=choices, default=default)
 		config.av.downmix_aac.addNotifier(setAACDownmix)
 
@@ -441,7 +434,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/aacplus", "w").write(configElement.value)
 		with open("/proc/stb/audio/aacplus_choices", "r") as aacplus_choices:
 			aacplus_choices.read().split('\n', 1)[0]
-			aacplus_choices.close()
 		config.av.downmix_aacplus = ConfigSelection(choices=choices, default=default)
 		config.av.downmix_aacplus.addNotifier(setAACDownmixPlus)
 
@@ -456,7 +448,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/dts", "w").write(configElement.value)
 		with open("/proc/stb/audio/dts_choices", "r") as dts_choices:
 			dts_choices.read().split('\n', 1)[0]
-			dts_choices.close()
 		config.av.downmix_dts = ConfigSelection(choices=choices, default=default)
 		config.av.downmix_dts.addNotifier(setDTSDownmix)
 
@@ -481,7 +472,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/dtshd", "w").write(configElement.value)
 		with open("/proc/stb/audio/dtshd_choices", "r") as dtshd_choices:
 			dtshd_choices.read().split('\n', 1)[0]
-			dtshd_choices.close()
 		config.av.dtshd = ConfigSelection(choices=choices, default=default)
 		config.av.dtshd.addNotifier(setDTSHD)
 
@@ -497,7 +487,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/aac_transcode", "w").write(configElement.value)
 		with open("/proc/stb/audio/aac_transcode_choices", "r") as aac_transcode_choices:
 			aac_transcode_choices.read().split('\n', 1)[0]
-			aac_transcode_choices.close()
 		config.av.transcodeaac = ConfigSelection(choices=choices, default=default)
 		config.av.transcodeaac.addNotifier(setAACTranscode)
 	else:
@@ -533,7 +522,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/ac3plus", "w").write(configElement.value)
 		with open("/proc/stb/audio/ac3plus_choices", "r") as ac3plus_choices:
 			ac3plus_choices.read().split('\n', 1)[0]
-			ac3plus_choices.close()
 		config.av.transcodeac3plus = ConfigSelection(choices=choices, default=default)
 		config.av.transcodeac3plus.addNotifier(setAC3plusTranscode)
 
@@ -550,7 +538,6 @@ def InitAVSwitch():
 			open(SystemInfo["CanWMAPRO"], "w").write(configElement.value)
 		with open("/proc/stb/audio/wmapro_choices", "r") as wmapro_choices:
 			wmapro_choices.read().split('\n', 1)[0]
-			wmapro_choices.close()
 		config.av.wmapro = ConfigSelection(choices=choices, default=default)
 		config.av.wmapro.addNotifier(setWMAPRO)
 
@@ -589,7 +576,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/3d_surround", "w").write(configElement.value)
 		with open("/proc/stb/audio/3d_surround_choices", "r") as surround:
 			surround.read().split('\n', 1)[0]
-			surround.close()
 		config.av.surround_3d = ConfigSelection(choices=choices, default=default)
 		config.av.surround_3d.addNotifier(set3DSurround)
 	else:
@@ -607,7 +593,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/3d_surround_speaker_position", "w").write(configElement.value)
 		with open("/proc/stb/audio/3d_surround_speaker_position_choices", "r") as speaker:
 			speaker.read().split('\n', 1)[0]
-			speaker.close()
 		config.av.speaker_3d = ConfigSelection(choices=choices, default=default)
 		config.av.speaker_3d.addNotifier(set3DPosition)
 	else:
@@ -626,7 +611,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/3dsurround", "w").write(configElement.value)
 		with open("/proc/stb/audio/3dsurround_choices", "r") as surroundspeaker:
 			surroundspeaker.read().split('\n', 1)[0]
-			surroundspeaker.close()
 		config.av.surround_3d_speaker = ConfigSelection(choices=choices, default=default)
 		config.av.surround_3d_speaker.addNotifier(set3DPositionDisable)
 	else:
@@ -645,7 +629,6 @@ def InitAVSwitch():
 			open("/proc/stb/audio/avl", "w").write(configElement.value)
 		with open("/proc/stb/audio/avl_choices", "r") as avl_choices:
 			avl_choices.read().split('\n', 1)[0]
-			avl_choices.close()
 		config.av.autovolumelevel = ConfigSelection(choices=choices, default=default)
 		config.av.autovolumelevel.addNotifier(setAutoVolumeLevel)
 

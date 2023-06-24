@@ -357,7 +357,6 @@ class NCamInfo:
 			try:
 				with open(ecminfo, "r", encoding="ISO 8859-1") as fd:
 					data = fd.readlines()
-					fd.close()
 			except UnicodeDecodeError as err:
 				print("[NCamInfo] %s" % err)
 			if data:

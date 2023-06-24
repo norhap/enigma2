@@ -513,13 +513,11 @@ class ChannelContextMenu(Screen):
 		copy2("/etc/enigma2/bouquets.tv", "/etc/enigma2/unorderedbouquets")
 		with open("/etc/enigma2/bouquets.tv", "w") as fd:
 			fd.write('#NAME User - Bouquets (TV)' + "\n")
-			fd.close()
 		with open("/etc/enigma2/bouquets.tv", "a") as fd:
 			for filelist in sorted([x for x in listdir("/etc/enigma2") if "userbouquet." in x and ".tv" in x]):
 				namesbouquet = join(filelist)
 				bouquetstv = ('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "%s" ORDER BY bouquet' % namesbouquet)
 				fd.write(bouquetstv + "\n")
-			fd.close()
 		self.refreshBouquetList()
 
 	def unorderedBouquetList(self):

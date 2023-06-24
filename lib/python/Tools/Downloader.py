@@ -48,7 +48,6 @@ class DownloadWithProgress:
 				for buffer in response.iter_content(self.blockSize):
 					if self.stopFlag:
 						response.close()
-						fd.close()
 						unlink(self.outputFile)
 						return True
 					self.progress += len(buffer)

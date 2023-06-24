@@ -625,7 +625,6 @@ class MultibootSelection(SelectImage, HelpableScreen):
 					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot[0], SystemInfo["canMode12"], slot[0] * 2 + 1, MODEL)
 				with open(join(self.tmp_dir, "STARTUP", "w")) as f:
 					f.write(startupFileContents)
-					f.close()
 			self.cancel(2)
 
 	def selectionChanged(self):

@@ -1582,7 +1582,6 @@ class InfoBarSeek:
 				print("[InfoBarGenerics] Write to /proc/stb/lcd/symbol_hddprogress")
 				with open("/proc/stb/lcd/symbol_hddprogress", "w") as f:
 					f.write("0")
-					f.close()
 			self["SeekActions"].setEnabled(False)
 #			print("not seekable, return to play")
 			self.setSeekState(self.SEEK_STATE_PLAY)

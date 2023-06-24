@@ -93,7 +93,6 @@ def moviePlayState(cutsFileName, ref, length):
 			cut, cutType = cutsParser.unpack(data)
 			if cutType == 3:  # undocumented, but 3 appears to be the stop
 				lastPosition = cut
-		f.close()
 		# See what we have in RAM (it might help)
 		last = lastPlayPosFromCache(ref)
 		if last:

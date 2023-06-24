@@ -88,7 +88,6 @@ class Navigation:
 			print('[Navigation] RECTIMER: wakeup to standby detected.')
 			with open("/tmp/was_rectimer_wakeup", "w") as f:
 				f.write("1")
-				f.close()
 			# as we woke the box to record, place the box in standby.
 			self.standbytimer = eTimer()
 			self.standbytimer.callback.append(self.gotostandby)
@@ -98,7 +97,6 @@ class Navigation:
 			print('[Navigation] POWERTIMER: wakeup to standby detected.')
 			with open("/tmp/was_powertimer_wakeup", "w") as f:
 				f.write("1")
-				f.close()
 			# as a PowerTimer WakeToStandby was actiond to it.
 			self.standbytimer = eTimer()
 			self.standbytimer.callback.append(self.gotostandby)
@@ -151,17 +149,14 @@ class Navigation:
 				print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 				with open("/proc/stb/lcd/symbol_signal", "w") as f:
 					f.write(str(signal))
-					f.close()
 			except:
 				print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 				with open("/proc/stb/lcd/symbol_signal", "w") as f:
 					f.write("0")
-					f.close()
 		elif path.exists("/proc/stb/lcd/symbol_signal") and config.lcd.mode.value == '0':
 			print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("0")
-				f.close()
 		if ref is None:
 			self.stopService()
 			return 0
@@ -307,7 +302,6 @@ class Navigation:
 			print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("0")
-				f.close()
 
 	def pause(self, p):
 		return self.pnav and self.pnav.pause(p)

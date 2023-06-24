@@ -587,7 +587,6 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		if self.IPv6ConfigEntry.value == False and exists(disable_ipv6):
 			with open(disable_ipv6, "w") as fd:
 				fd.write("1")
-				fd.close()
 			print("[NetworkSetup] IPv6 is now deactived")
 			if exists(enable_ipv6):
 				Console().ePopen('rm %s' % enable_ipv6)
@@ -595,10 +594,8 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 			if exists(disable_ipv6):
 				with open(disable_ipv6, "w") as fd:
 					fd.write("0")
-					fd.close()
 				with open(enable_ipv6, "w") as fd:
 					fd.write("0")
-					fd.close()
 				print("[NetworkSetup] IPv6 is now actived")
 		self.restoreinetdData2()
 

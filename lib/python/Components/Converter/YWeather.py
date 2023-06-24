@@ -143,7 +143,6 @@ class YWeather(Poll, Converter, object):
 		try:
 			with open(save_to, "w") as f:
 				f.write(response.read().replace("><", ">\n<"))
-				f.close
 			print('[YWeather] fetchXML XML file retrieved and saved.')
 			return True
 		except:
@@ -173,7 +172,6 @@ class YWeather(Poll, Converter, object):
 		if not fileExists(XML_location) and self.fetchXML(XML_URL, XML_location) != True:
 			with open(XML_location, "w") as f:
 				f.write("None")
-				f.close
 			return 'N/A'
 		wday = 1
 		for line in open(XML_location):

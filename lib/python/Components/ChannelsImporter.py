@@ -355,7 +355,6 @@ class ChannelsImporter():
 			with open(self.DIR_TMP + destfile, 'wb') as f:
 				result = ftp.retrbinary('RETR %s' % sourcefile, f.write)
 				ftp.quit()
-				f.close()
 				if result.startswith("226"):
 					return True
 			return False

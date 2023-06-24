@@ -89,7 +89,6 @@ class Network:
 			if not os.path.isfile(enable_ipv6) and os.path.isfile(disable_ipv6):
 				with open(disable_ipv6, "w") as ipv6:
 					ipv6.write("1")
-					ipv6.close()
 		except:
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]

@@ -60,7 +60,6 @@ def profile(checkPoint):
 				(dev, fmt) = dev_fmt
 				with open(dev, "w") as f:
 					f.write(fmt % percentage)
-					f.close()
 
 
 def profileFinal():

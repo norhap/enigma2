@@ -23,20 +23,16 @@ class FrontpanelLed(Element):
 			print("[FrontpanelLed] Write to /proc/stb/fp/led%s_pattern" % str(self.which))
 			with open("/proc/stb/fp/led%s_pattern" % str(self.which), "w") as f:
 				f.write("%08x" % pattern)
-				f.close()
 		if self.which == 0:
 			if exists("/proc/stb/fp/led_set_pattern"):
 				print("[FrontpanelLed] Write to /proc/stb/fp/led_set_pattern")
 				with open("/proc/stb/fp/led_set_pattern", "w") as f:
 					f.write("%08x" % pattern_4bit)
-					f.close()
 			if exists("/proc/stb/fp/led_set_speed"):
 				print("[FrontpanelLed] Write to /proc/stb/fp/led_set_speed")
 				with open("/proc/stb/fp/led_set_speed", "w") as f:
 					f.write("%d" % speed)
-					f.close()
 			if exists("/proc/stb/fp/led_pattern_speed"):
 				print("[FrontpanelLed] Write to /proc/stb/fp/led_pattern_speed")
 				with open("/proc/stb/fp/led_pattern_speed", "w") as f:
 					f.write("%d" % speed)
-					f.close()

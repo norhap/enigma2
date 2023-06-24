@@ -134,7 +134,6 @@ def getKernelVersionString():
 	try:
 		with open("/proc/version", "r") as f:
 			kernelversion = f.read().split(" ", 4)[2].split("-", 2)[0]
-			f.close()
 			return kernelversion
 	except:
 		return kernelversion

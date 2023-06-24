@@ -181,7 +181,6 @@ class StandbyScreen(Screen):
 			if os.path.isfile(output):
 				with open(output, "w") as hdmi:
 					hdmi.write("off")
-					hdmi.close()
 
 		gotoShutdownTime = int(config.usage.standby_to_shutdown_timer.value)
 		if gotoShutdownTime:
@@ -245,7 +244,6 @@ class StandbyScreen(Screen):
 			if os.path.isfile(output):
 				with open(output, "w") as hdmi:
 					hdmi.write("on")
-					hdmi.close()
 
 	def setMute(self):
 		self.wasMuted = eDVBVolumecontrol.getInstance().isMuted()
@@ -439,14 +437,12 @@ class TryQuitMainloop(MessageBox):
 					print("[Standby] LCDminiTV off")
 					with open(mode, "w") as lcd:
 						lcd.write("0")
-						lcd.close()
 			if MODEL == "vusolo4k":
 				oled_brightness = "/proc/stb/fp/oled_brightness"
 				if os.path.isfile(oled_brightness):
 					print("[Standby] Brightness OLED off")
 					with open(oled_brightness, "w") as oled:
 						oled.write("0")
-						oled.close()
 			self.quitMainloop()
 		else:
 			MessageBox.close(self, True)

@@ -22,11 +22,9 @@ def getProcInfoTypeTuner():
 	if isfile(INFO_TYPE):
 		with open(INFO_TYPE, "r") as fd:
 			typetuner = fd.read().split('\n', 1)[0]
-			fd.close()
 	elif isfile(INFO_SUBTYPE):
 		with open(INFO_SUBTYPE, "r") as fd:
 			typetuner = fd.read().split('\n', 1)[0]
-			fd.close()
 	return typetuner
 
 
