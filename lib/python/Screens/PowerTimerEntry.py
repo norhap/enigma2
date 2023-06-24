@@ -2,7 +2,6 @@ from Screens.Screen import Screen
 from Components.config import ConfigSelection, ConfigSubList, ConfigDateTime, ConfigClock, ConfigYesNo, ConfigInteger, getConfigListEntry
 from Components.ActionMap import NumberActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.MenuList import MenuList
 from Components.Button import Button
 from Components.Label import Label
 from Components.Pixmap import Pixmap
