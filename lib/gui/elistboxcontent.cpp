@@ -1,5 +1,6 @@
 #include <lib/gui/elistbox.h>
 #include <lib/gui/elistboxcontent.h>
+#include <lib/gdi/epoint.h>
 #include <lib/gdi/font.h>
 #include <lib/python/python.h>
 #include <lib/gdi/epng.h>
@@ -582,7 +583,6 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 						{
 							if (PyTuple_Size(value) >= 3)
 							{
-								// FIXME: only one or all is supported
 								ePyObject plist = PyTuple_GET_ITEM(value, 2);
 								int entries = 0;
 								if (plist && PyList_Check(plist))
@@ -969,7 +969,6 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 
 		if (!items)
 		{
-			PyErr_Print();
 			eDebug("[eListboxPythonMultiContent] error getting item %d", cursor);
 			goto error_out;
 		}
@@ -1176,12 +1175,14 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 					continue;
 
 				const char *string = (PyUnicode_Check(pstring)) ? PyUnicode_AsUTF8(pstring) : "<not-a-string>";
+
 				int x = PyFloat_Check(px) ? (int)PyFloat_AsDouble(px) : PyLong_AsLong(px);
 
 				int y = PyFloat_Check(py) ? (int)PyFloat_AsDouble(py) : PyLong_AsLong(py);
 
 				int width = PyFloat_Check(pwidth) ? (int)PyFloat_AsDouble(pwidth) : PyLong_AsLong(pwidth);
 				int height = PyFloat_Check(pheight) ? (int)PyFloat_AsDouble(pheight) : PyLong_AsLong(pheight);
+
 				int flags = PyLong_AsLong(pflags);
 				int fnt = PyLong_AsLong(pfnt);
 				int bwidth = pborderWidth ? PyLong_AsLong(pborderWidth) : 0;
@@ -1508,6 +1509,7 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 
 				int width = PyFloat_Check(pwidth) ? (int)PyFloat_AsDouble(pwidth) : PyLong_AsLong(pwidth);
 				int height = PyFloat_Check(pheight) ? (int)PyFloat_AsDouble(pheight) : PyLong_AsLong(pheight);
+
 				int flags = 0;
 				ePtr<gPixmap> pixmap;
 				if (SwigFromPython(pixmap, ppixmap))
