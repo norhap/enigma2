@@ -8,7 +8,7 @@
 #include <lib/gdi/esize.h>
 #include <lib/base/init.h>
 #include <lib/base/init_num.h>
-#if defined(HAVE_7SEGMENT)
+#if defined(HAVE_TEXTLCD) || defined(HAVE_7SEGMENT)
 #include <lib/base/estring.h>
 #endif
 #include <lib/gdi/glcddc.h>
@@ -135,7 +135,7 @@ void eLCD::set_VFD_scroll_repeats(int delay) const
 	CFile::writeInt(VFD_scroll_repeats_proc, delay);
 }
 
-#if defined(HAVE_7SEGMENT)
+#if defined(HAVE_TEXTLCD) || defined(HAVE_7SEGMENT)
 void eLCD::renderText(ePoint start, const char *text)
 {
 	if (lcdfd >= 0 && start.y() < 5)
@@ -429,7 +429,7 @@ void eDBoxLCD::dumpLCD(bool png)
 
 void eDBoxLCD::update()
 {
-#ifndef HAVE_TEXTLCD
+#if !defined(HAVE_TEXTLCD) && !defined(HAVE_7SEGMENT)
 	if (lcdfd < 0)
 		return;
 
