@@ -314,8 +314,7 @@ class About(Screen):
 		AboutText += _("CPU: ") + cpu + "\n"
 		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
 		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"
-		AboutText += _("Image: ") + about.getImageTypeString() + "\n"
-		AboutText += _("Last update: ") + about.getUpdateDateString()
+		AboutText += _("Image: ") + about.getImageTypeString()
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
