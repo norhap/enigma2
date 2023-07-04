@@ -68,6 +68,8 @@ struct eListboxStyleSetted
 	bool background_color : 1;
 	bool foreground_color : 1;
 	bool background_color_selected : 1;
+	bool background_gradient_color : 1;
+	bool background_gradient_selected_color : 1;
 	bool foreground_color_selected : 1;
 	bool scrollbarforeground_color : 1;
 	bool scrollbarbackground_color : 1;
@@ -77,15 +79,23 @@ struct eListboxStyleSetted
 	bool overlay : 1;
 	bool max_rows : 1;
 	bool max_columns : 1;
+	bool zoom_content : 1;
+	bool zoom_move_content : 1;
 };
 
 struct eListboxStyle
 {
 	ePtr<gPixmap> m_background, m_selection, m_overlay;
-	gRGB m_background_color, m_background_color_selected, m_foreground_color, m_foreground_color_selected, m_border_color, m_scollbarborder_color, m_scrollbarforeground_color, m_scrollbarbackground_color, m_spacing_color;
+	gRGB m_background_color, m_background_color_selected, m_background_gradient_color_start, m_background_gradient_color_end, m_background_gradient_color_selected_start, m_background_gradient_color_selected_end, m_foreground_color, m_foreground_color_selected, m_border_color, m_scollbarborder_color, m_scrollbarforeground_color, m_scrollbarbackground_color, m_spacing_color;
 	int m_max_columns;
 	int m_max_rows;
+	int m_background_color_gradient_direction;
+	int m_background_color_gradient_selected_direction;
+	int m_background_color_gradient_flag;
+	int m_background_color_gradient_selected_flag;
 	float m_selection_zoom;
+	int m_selection_width;
+	int m_selection_height;
 
 	eListboxStyleSetted is_set;
 
@@ -185,11 +195,7 @@ public:
 		itemAlignJustifyBottom = itemVertialAlignBottom + itemHorizontalAlignJustify,
 		itemAlignJustifyLeft = itemVertialAlignJustify + itemHorizontalAlignLeft,
 		itemAlignJustifyRight = itemVertialAlignJustify + itemHorizontalAlignRight,
-		itemAlignJustifyFull =  itemVertialAlignJustify + itemHorizontalAlignJustify,
-
-		itemAlignDefault = itemAlignLeftTop,
-		itemAlignCenter = itemAlignCenterMiddle,
-		itemAlignJustify = itemAlignJustifyFull
+		itemAlignJustifyFull =  itemVertialAlignJustify + itemHorizontalAlignJustify
 	};
 
 	void setItemAlignment(int align);
@@ -252,6 +258,8 @@ public:
 
 	void setBackgroundColor(gRGB &col);
 	void setBackgroundColorSelected(gRGB &col);
+	void setBackgroundGradient(gRGB &start, gRGB &end, int direction, int flag);
+	void setBackgroundGradientSelected(gRGB &start, gRGB &end, int direction, int flag);
 	void setForegroundColor(gRGB &col);
 	void setForegroundColorSelected(gRGB &col);
 
@@ -294,6 +302,7 @@ public:
 	void setMaxColumns(int columns) {m_style.m_max_columns = columns; m_style.is_set.max_columns = 1;};
 	void setItemSpacing(const ePoint &spacing, bool innerOnly=false);
 	void setSelectionZoom(float zoom);
+	void setSelectionZoomSize(int width, int height, int zoomContentMode = 1);
 
 	void setOverlay(ePtr<gPixmap> &pm) { m_style.m_overlay = pm; m_style.is_set.overlay = 1; }
 
@@ -395,6 +404,7 @@ private:
 	int m_scrollbar_calcsize;
 
 	ePoint m_spacing;
+	ePoint m_defined_spacing;
 	bool m_spacing_innerOnly;
 	ePtr<iListboxContent> m_content;
 	eSlider *m_scrollbar;
