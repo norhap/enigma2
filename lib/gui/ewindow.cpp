@@ -26,7 +26,7 @@ eWindow::eWindow(eWidgetDesktop *desktop, int z): eWidget(0)
 			eWindow::m_has_animation_mode=1;
 		}
 	}
-	
+
 	m_desktop = desktop;
 		/* ask style manager for current style */
 	ePtr<eWindowStyleManager> mgr;
@@ -147,7 +147,7 @@ void eWindow::hide()
 }
 
 void eWindow::setAnimationMode(int mode)
-{ 
+{
 	/*
 	 * 0x00 = animation off
 	 * 0x01 = show on
@@ -157,3 +157,9 @@ void eWindow::setAnimationMode(int mode)
 	m_animation_mode = (eWindow::m_has_animation_mode==1) ? mode : 0;
 }
 
+void eWindow::setBackgroundGradient(const gRGB &startcolor, const gRGB &endcolor, int direction, int blend)
+{
+	/* set background gradient for child, too */
+	eWidget::setBackgroundGradient(startcolor,endcolor,direction,blend);
+	m_child->setBackgroundGradient(startcolor,endcolor,direction,blend);
+}
