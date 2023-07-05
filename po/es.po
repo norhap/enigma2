@@ -4511,8 +4511,8 @@ msgstr "No, no flashear imagen"
 msgid "No, only image download"
 msgstr "No, solo descargar imagen"
 
-msgid "No, except Wakeup timer"
-msgstr "No, excepto el temporizador despertador"
+msgid "No, except with wake up timer"
+msgstr "No, excepto con el temporizador despertador"
 
 msgid "No, never"
 msgstr "No, nunca"
@@ -4560,8 +4560,8 @@ msgstr "No probado:"
 msgid "Not yet implemented!"
 msgstr "Aún no implementado!"
 
-msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except Wakeup timer\"."
-msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o apagado\" en \"No, excepto el temporizador despertador\"."
+msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
+msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o apagado\" en \"No, excepto con el temporizador despertador\"."
 
 msgid ""
 "Nothing to scan!\n"
