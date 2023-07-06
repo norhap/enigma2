@@ -9960,7 +9960,7 @@ msgid "Multiboot Image Selector"
 msgstr "Seleccionar Imagen Multiboot"
 
 msgid "Plugins"
-msgstr "Complementos"
+msgstr "Plugins"
 
 msgid "Service"
 msgstr "Canal"
