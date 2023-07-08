@@ -60,6 +60,7 @@ EXTENSIONS = {
 	"ogv": "movie",
 	"m2ts": "movie",
 	"mts": "movie",
+	"stream": "movie",
 	"ts": "movie",
 	"webm": "movie",
 	"pva": "movie",
