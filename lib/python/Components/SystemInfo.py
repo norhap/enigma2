@@ -319,7 +319,7 @@ SystemInfo["ArchIsARM64"] = ARCHITECTURE == "aarch64" or "64" in ARCHITECTURE
 SystemInfo["ArchIsARM"] = ARCHITECTURE.startswith(("arm", "cortex"))
 SystemInfo["HasH9SD"] = MODEL in ("h9", "i55plus") and pathExists("/dev/mmcblk0p1")
 SystemInfo["HasSDnomount"] = MODEL in ("h9", "h3", "i55plus") and (False, "none") or MODEL in ("multibox", "h9combo", "h3") and (True, "mmcblk0")
-SystemInfo["canBackupEMC"] = MODEL in ("hd51", "vs1500", "h7", "8100s") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or MODEL in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none") or MODEL in ("cc1", "sx988", "ip8", "ustym4kottpremium", "og2ott4k", "sx88v2") and ("usb_update.bin", "none")
+SystemInfo["canBackupEMC"] = MODEL in ("hd51", "vs1500", "h7", "8100s") and ("disk.img", "%s" % SystemInfo["MultibootStartupDevice"]) or MODEL in ("xc7439", "osmio4k", "osmio4kplus", "osmini4k") and ("emmc.img", "%s" % SystemInfo["MultibootStartupDevice"]) or SystemInfo["DefineSat"] and ("usb_update.bin", "none") or MODEL in ("cc1", "sx988", "ip8", "ustym4kottpremium", "og2ott4k", "og2s4k", "sx88v2") and ("usb_update.bin", "none")
 SystemInfo["FrontpanelLEDBlinkControl"] = fileExists("/proc/stb/fp/led_blink")
 SystemInfo["FrontpanelLEDBrightnessControl"] = fileExists("/proc/stb/fp/led_brightness")
 SystemInfo["FrontpanelLEDColorControl"] = fileExists("/proc/stb/fp/led_color")
