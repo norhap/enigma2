@@ -845,7 +845,7 @@ msgstr "Cualquier actividad"
 msgid "Arabic"
 msgstr "Árabe"
 
-msgid "Are you sure to purge all deleted userbouquets?"
+msgid "Are you sure to purge all deleted user bouquets?"
 msgstr "Purgar todos los bouquets de usuario eliminados?"
 
 msgid "Are you sure to remove all %s services?"
@@ -9409,8 +9409,8 @@ msgstr "cultura popular/artes tradicionales"
 msgid "pre-school children's program"
 msgstr "programa para niños preescolares"
 
-msgid "purge deleted userbouquets"
-msgstr "purgar bouquets de usuario borrados"
+msgid "Purge deleted user bouquets"
+msgstr "Purgar bouquets de usuario eliminados"
 
 msgid "receiver software because updates are available."
 msgstr "software del receptor porque hay actualizaciones disponibles."
@@ -9505,8 +9505,8 @@ msgstr "Repetido"
 msgid "reserved for future use"
 msgstr "reservado para uso futuro"
 
-msgid "restore deleted userbouquets"
-msgstr "restaurar bouquets de usuario borrados"
+msgid "Restore deleted user bouquets"
+msgstr "Restaurar bouquets de usuario eliminados"
 
 msgid "reverse by date"
 msgstr "por fecha más antigua plano"
