@@ -1311,6 +1311,9 @@ msgstr "Centrar etiquetas de tiempo y eliminar fecha"
 msgid "Central African Republic"
 msgstr "República Centroafricana"
 
+msgid "CI Boot Delay"
+msgstr "Retraso inicio CI"
+
 msgid "Chad"
 msgstr "Chad"
 
@@ -2676,6 +2679,9 @@ msgstr "PiP Externo"
 msgid "External Storage %s"
 msgstr "Almacenamiento externo %s"
 
+msgid "extra high"
+msgstr "extra alto"
+
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Hora de final adicional para ignorar inactividad"
 
@@ -3363,6 +3369,9 @@ msgstr "Ocultar reproductor"
 
 msgid "Hierarchy info"
 msgstr "Info Jerarquía"
+
+msgid "high"
+msgstr "alto"
 
 msgid "High bitrate support"
 msgstr "Soporte de alta tasa de bits"
