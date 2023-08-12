@@ -2990,8 +2990,8 @@ class InfoBarInstantRecord:
 			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5	", maxSize=True, type=Input.NUMBER)
 
 	def inputAddRecordingTime(self, value):
-		if value:
-			print("[InfoBarGenerics] added", int(value), "minutes for recording.")
+		if value and value.replace(" ", "").isdigit():
+			print("[InfoBarInstantRecord] added %d minutes for recording." % int(value))
 			entry = self.recording[self.selectedEntry]
 			if int(value) != 0:
 				entry.autoincrease = False
@@ -3000,8 +3000,8 @@ class InfoBarInstantRecord:
 
 	def inputCallback(self, value):
 		entry = self.recording[self.selectedEntry]
-		if value:
-			print("[InfoBarGenerics] stopping recording after", int(value), "minutes.")
+		if value and value.replace(" ", "").isdigit():
+			print("[InfoBarInstantRecord] stopping recording after %d minutes." % int(value))
 			if int(value) != 0:
 				entry.autoincrease = False
 			entry.end = int(time()) + 60 * int(value)
