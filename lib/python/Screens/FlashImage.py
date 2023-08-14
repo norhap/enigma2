@@ -1,6 +1,6 @@
 from Screens.ChoiceBox import ChoiceBox
 from os import access, listdir, major, minor, mkdir, remove, rmdir, sep, stat, statvfs, walk, W_OK
-from os.path import isdir, isfile, join, splitext, islink, ismount, exists
+from os.path import exists, isdir, isfile, islink, ismount, join, normpath, splitext
 from json import load
 from zipfile import ZipFile
 from shutil import copyfile, rmtree
@@ -29,6 +29,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileContains
 from Tools.Downloader import DownloadWithProgress
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
+from Components.Harddisk import harddiskmanager
 
 
 def checkimagefiles(files):
@@ -242,6 +243,8 @@ class FlashImage(Screen):
 		self.source = source
 		self.imagename = imagename
 		self.reasons = getReasons(session)
+		self.path = None
+		self.folderunzipped = None
 		self["header"] = Label(_("Backup settings"))
 		self["info"] = Label(_("Save settings and EPG data"))
 		self["progress"] = ProgressBar()
@@ -255,7 +258,16 @@ class FlashImage(Screen):
 			"ok": self.ok,
 			"green": self.ok,
 		}, -1)
-
+		try:
+			for partition in harddiskmanager.getMountedPartitions():
+				self.path = normpath(partition.mountpoint)
+				if self.path != "/":
+					self.folderunzipped = join(self.path, self.imagename + ".unzipeed")
+					folderunzipped = self.path + '/' + self.folderunzipped
+					if exists(folderunzipped):
+						Console().ePopen('rm -rf ' + folderunzipped)
+		except Exception as err:
+			print(str(err))
 		self.callLater(self.confirmation)
 
 	def confirmation(self):
@@ -450,6 +462,11 @@ class FlashImage(Screen):
 			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
 
 	def FlashimageDone(self, data, retval, extra_args):
+		try:
+			if exists(self.unzippedimage):
+				Console().ePopen('rm -r -f ' + self.unzippedimage)
+		except Exception as err:
+			print(str(err))
 		self.containerofgwrite = None
 		if retval == 0:
 			self["header"].setText(_("Flashing image successful"))
