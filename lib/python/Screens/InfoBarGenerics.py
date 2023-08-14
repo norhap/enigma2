@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap, NumberActionMap
+from Components.AVSwitch import AVSwitch
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
 from Components.Label import Label
@@ -37,7 +38,7 @@ from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileHas, fileReadLine, fileWriteLine, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
-from enigma import eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
+from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
 from time import time, localtime, strftime
 from os.path import exists, isfile, splitext, join
 from os import listdir, remove
@@ -3330,8 +3331,8 @@ class InfoBarAspectSelection:
 			(_("16:10 PanScan"), "5"),
 			(_("16:9 Letterbox"), "6")
 		]
+
 		keys = ["green", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-		from Components.AVSwitch import AVSwitch
 		iAVSwitch = AVSwitch()
 		aspect = iAVSwitch.getAspectRatioSetting()
 		selection = 0
@@ -3349,7 +3350,6 @@ class InfoBarAspectSelection:
 				elif aspect[1] == "resolution":
 					self.ExGreen_toggleGreen()
 				else:
-					from Components.AVSwitch import AVSwitch
 					iAVSwitch = AVSwitch()
 					iAVSwitch.setAspectRatio(int(aspect[1]))
 					self.ExGreen_doHide()
@@ -3363,9 +3363,10 @@ class InfoBarResolutionSelection:
 		pass
 
 	def resolutionSelection(self):
-		xRes = int(fileReadLine("/proc/stb/vmpeg/0/xres", 0, source=MODULE_NAME), 16)
-		yRes = int(fileReadLine("/proc/stb/vmpeg/0/yres", 0, source=MODULE_NAME), 16)
-		fps = float(fileReadLine("/proc/stb/vmpeg/0/framerate", 50000, source=MODULE_NAME)) / 1000.0
+		avControl = eAVControl.getInstance()
+		fps = float(avControl.getFrameRate(50000)) / 1000.0
+		yRes = avControl.getResolutionY(0)
+		xRes = avControl.getResolutionX(0)
 		resList = []
 		resList.append((_("Exit"), "exit"))
 		resList.append((_("Auto (not available)"), "auto"))
@@ -3382,12 +3383,12 @@ class InfoBarResolutionSelection:
 				if videoMode[-1].isdigit():
 					video = "%sHz" % videoMode
 				resList.append((video, videoMode))
-		videoMode = fileReadLine("/proc/stb/video/videomode", "Unknown", source=MODULE_NAME)
+		videoMode = avControl.getVideoMode("Unknown")
 		keys = ["green", "yellow", "blue", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 		selection = 0
-		for item in range(len(resList)):
-			if resList[item][1] == videoMode:
-				selection = item
+		for index, item in enumerate(resList):
+			if item[1] == videoMode:
+				selection = index
 				break
 		print("[InfoBarGenerics] Current video mode is %s." % videoMode)
 		self.session.openWithCallback(self.resolutionSelected, ChoiceBox, text=_("Please select a resolution..."), list=resList, keys=keys, selection=selection)
@@ -4206,79 +4207,33 @@ class InfoBarHdmi2:
 			return _("Turn off HDMI-IN PiP mode")
 
 	def HDMIInPiP(self):
-		if PLATFORM == "dm4kgen" or MODEL in ("dm7080", "dm820"):
-			print("[InfoBarGenerics] Read /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
-			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
-			if check.startswith("off"):
-				print("[InfoBarGenerics] Write to /proc/stb/audio/hdmi_rx_monitor")
-				open("/proc/stb/audio/hdmi_rx_monitor", "w").write("on")
-				print("[InfoBarGenerics] Write to /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "w").write("on")
-			else:
-				print("[InfoBarGenerics] Write to /proc/stb/audio/hdmi_rx_monitor")
-				open("/proc/stb/audio/hdmi_rx_monitor", "w").write("off")
-				print("[InfoBarGenerics] Write to /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "w").write("off")
+		if not hasattr(self.session, 'pip') and not self.session.pipshown:
+			self.hdmi_enabled_pip = True
+			self.session.pip = self.session.instantiateDialog(PictureInPicture)
+			self.session.pip.playService(hdmiInServiceRef())
+			self.session.pip.show()
+			self.session.pipshown = True
+			self.session.pip.servicePath = self.servicelist.getCurrentServicePath()
 		else:
-			if not hasattr(self.session, 'pip') and not self.session.pipshown:
+			curref = self.session.pip.getCurrentService()
+			if curref and curref.type != eServiceReference.idServiceHDMIIn:
 				self.hdmi_enabled_pip = True
-				self.session.pip = self.session.instantiateDialog(PictureInPicture)
 				self.session.pip.playService(hdmiInServiceRef())
-				self.session.pip.show()
-				self.session.pipshown = True
 				self.session.pip.servicePath = self.servicelist.getCurrentServicePath()
 			else:
-				curref = self.session.pip.getCurrentService()
-				if curref and curref.type != eServiceReference.idServiceHDMIIn:
-					self.hdmi_enabled_pip = True
-					self.session.pip.playService(hdmiInServiceRef())
-					self.session.pip.servicePath = self.servicelist.getCurrentServicePath()
-				else:
-					self.hdmi_enabled_pip = False
-					self.session.pipshown = False
-					del self.session.pip
+				self.hdmi_enabled_pip = False
+				self.session.pipshown = False
+				del self.session.pip
 
 	def HDMIInFull(self):
-		if PLATFORM == "dm4kgen" or MODEL in ("dm7080", "dm820"):
-			print("[InfoBarGenerics] Read /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
-			check = open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "r").read()
-			if check.startswith("off"):
-				print("[InfoBarGenerics] Read /proc/stb/video/videomode")
-				self.oldvideomode = open("/proc/stb/video/videomode", "r").read()
-				print("[InfoBarGenerics] Read /proc/stb/video/videomode_50hz")
-				self.oldvideomode_50hz = open("/proc/stb/video/videomode_50hz", "r").read()
-				print("[InfoBarGenerics] Read /proc/stb/video/videomode_60hz")
-				self.oldvideomode_60hz = open("/proc/stb/video/videomode_60hz", "r").read()
-				if PLATFORM == "dm4kgen":
-					print("[InfoBarGenerics] Write to /proc/stb/video/videomode")
-					open("/proc/stb/video/videomode", "w").write("1080p")
-				else:
-					print("[InfoBarGenerics] Write to /proc/stb/video/videomode")
-					open("/proc/stb/video/videomode", "w").write("720p")
-				print("[InfoBarGenerics] Write to /proc/stb/audio/hdmi_rx_monitor")
-				open("/proc/stb/audio/hdmi_rx_monitor", "w").write("on")
-				print("[InfoBarGenerics] Write to /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "w").write("on")
-			else:
-				print("[InfoBarGenerics] Write to /proc/stb/audio/hdmi_rx_monitor")
-				open("/proc/stb/audio/hdmi_rx_monitor", "w").write("off")
-				print("[InfoBarGenerics] Write to /proc/stb/hdmi-rx/0/hdmi_rx_monitor")
-				open("/proc/stb/hdmi-rx/0/hdmi_rx_monitor", "w").write("off")
-				print("[InfoBarGenerics] Write to /proc/stb/video/videomode")
-				open("/proc/stb/video/videomode", "w").write(self.oldvideomode)
-				print("[InfoBarGenerics] Write to /proc/stb/video/videomode_50hz")
-				open("/proc/stb/video/videomode_50hz", "w").write(self.oldvideomode_50hz)
-				print("[InfoBarGenerics] Write to /proc/stb/video/videomode_60hz")
-				open("/proc/stb/video/videomode_60hz", "w").write(self.oldvideomode_60hz)
+		slist = self.servicelist
+		curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		if curref and curref.type != eServiceReference.idServiceHDMIIn:
+			self.hdmi_enabled_full = True
+			self.session.nav.playService(hdmiInServiceRef())
 		else:
-			slist = self.servicelist
-			curref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			if curref and curref.type != eServiceReference.idServiceHDMIIn:
-				self.hdmi_enabled_full = True
-				self.session.nav.playService(hdmiInServiceRef())
-			else:
-				self.hdmi_enabled_full = False
-				self.session.nav.playService(slist.servicelist.getCurrent())
+			self.hdmi_enabled_full = False
+			self.session.nav.playService(slist.servicelist.getCurrent())
 
 
 class InfoBarOpenOnTopHelper:

@@ -1,5 +1,5 @@
 from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService, eServiceReference
+from enigma import eAVControl, iServiceInformation, iPlayableService, eServiceReference
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
 
@@ -119,59 +119,79 @@ class ServiceInfo(Converter):
 			return info.getInfoString(what)
 		return convert(v)
 
-	def _getProcVal(self, pathname, base=10):
-		val = None
-		try:
-			f = open(pathname, "r")
-			val = int(f.read(), base)
-			f.close()
-			if val >= 2 ** 31:
-				val -= 2 ** 32
-		except Exception as e:
-			pass
-		return val
+#	def _getProcVal(self, pathname, base=10):
+#		val = None
+#		try:
+#			f = open(pathname, "r")
+#			val = int(f.read(), base)
+#			f.close()
+#			if val >= 2 ** 31:
+#				val -= 2 ** 32
+#		except Exception:
+#			pass
+#		return val
 
-	def _getVal(self, pathname, info, infoVal, base=10):
-		if self._isHDMIIn(info):
-			return None
-		val = self._getProcVal(pathname, base=base)
+#	def _getVal(self, pathname, info, infoVal, base=10):
+#		if self._isHDMIIn(info):
+#			return None
+#		val = self._getProcVal(pathname, base=base)
+#		return val if val is not None else info.getInfo(infoVal)
 
-		return val if val is not None else info.getInfo(infoVal)
+#	def _getValInt(self, pathname, info, infoVal, base=10, default=-1):
+#		val = self._getVal(pathname, info, infoVal, base)
+#		return val if val is not None else default
 
-	def _getValInt(self, pathname, info, infoVal, base=10, default=-1):
-		val = self._getVal(pathname, info, infoVal, base)
-		return val if val is not None else default
-
-	def _getValStr(self, pathname, info, infoVal, base=10, convert=lambda x: "%d" % x):
-		if self._isHDMIIn(info):
-			return "N/A"
-		val = self._getProcVal(pathname, base=base)
-
-		return convert(val) if val is not None else self.getServiceInfoString(info, infoVal, convert)
+#	def _getValStr(self, pathname, info, infoVal, base=10, convert=lambda x: "%d" % x):
+#		if self._isHDMIIn(info):
+#			return "N/A"
+#		val = self._getProcVal(pathname, base=base)
+#		return convert(val) if val is not None else self.getServiceInfoString(info, infoVal, convert)
 
 	def _getVideoHeight(self, info):
-		return self._getValInt("/proc/stb/vmpeg/0/yres", info, iServiceInformation.sVideoHeight, base=16)
+		if self._isHDMIIn(info):
+			return -1
+		val = eAVControl.getInstance().getResolutionY(0)
+		return val if val else info.getInfo(iServiceInformation.sVideoHeight)
 
 	def _getVideoHeightStr(self, info, convert=lambda x: "%d" % x if x > 0 else "?"):
-		return self._getValStr("/proc/stb/vmpeg/0/yres", info, iServiceInformation.sVideoHeight, base=16, convert=convert)
+		if self._isHDMIIn(info):
+			return "?"
+		val = eAVControl.getInstance().getResolutionY(0)
+		return convert(val) if val else self.getServiceInfoString(info, iServiceInformation.sVideoHeight, convert)
 
 	def _getVideoWidth(self, info):
-		return self._getValInt("/proc/stb/vmpeg/0/xres", info, iServiceInformation.sVideoWidth, base=16)
+		if self._isHDMIIn(info):
+			return -1
+		val = eAVControl.getInstance().getResolutionX(0)
+		return val if val else info.getInfo(iServiceInformation.sVideoWidth)
 
 	def _getVideoWidthStr(self, info, convert=lambda x: "%d" % x if x > 0 else "?"):
-		return self._getValStr("/proc/stb/vmpeg/0/xres", info, iServiceInformation.sVideoWidth, base=16, convert=convert)
+		if self._isHDMIIn(info):
+			return "?"
+		val = eAVControl.getInstance().getResolutionX(0)
+		return convert(val) if val else self.getServiceInfoString(info, iServiceInformation.sVideoWidth, convert)
 
 	def _getFrameRate(self, info):
-		return self._getValInt("/proc/stb/vmpeg/0/framerate", info, iServiceInformation.sFrameRate)
+		if self._isHDMIIn(info):
+			return -1
+		val = eAVControl.getInstance().getFrameRate(0)
+		return val if val else info.getInfo(iServiceInformation.sFrameRate)
 
 	def _getFrameRateStr(self, info, convert=lambda x: "%d" % x if x > 0 else ""):
-		return self._getValStr("/proc/stb/vmpeg/0/framerate", info, iServiceInformation.sFrameRate, convert=convert)
+		if self._isHDMIIn(info):
+			return ""
+		val = eAVControl.getInstance().getFrameRate(0)
+		return convert(val) if val else self.getServiceInfoString(info, iServiceInformation.sFrameRate, convert)
 
 	def _getProgressive(self, info):
-		return self._getValInt("/proc/stb/vmpeg/0/progressive", info, iServiceInformation.sProgressive, default=0)
+		if self._isHDMIIn(info):
+			return 0
+		return eAVControl.getInstance().getProgressive()
 
-	def _getProgressiveStr(self, info, convert=lambda x: "" if x else "i"):
-		return self._getValStr("/proc/stb/vmpeg/0/progressive", info, iServiceInformation.sProgressive, convert=convert)
+	def _getProgressiveStr(self, info):
+		if self._isHDMIIn(info):
+			return "i"
+		return "p" if eAVControl.getInstance().getProgressive() else "i"
 
 	@cached
 	def getBoolean(self):
@@ -186,11 +206,15 @@ class ServiceInfo(Converter):
 		video_height = self._getVideoHeight(info)
 		video_width = self._getVideoWidth(info)
 
+		f = None
 		if exists("/proc/stb/vmpeg/0/aspect"):
 			f = open("/proc/stb/vmpeg/0/aspect", "r")
+		elif exists("/sys/class/video/screen_mode"):
+			f = open("/sys/class/video/screen_mode", "r")
+		if f:
 			try:
 				video_aspect = int(f.read())
-			except:
+			except Exception:
 				pass
 			f.close()
 
@@ -251,7 +275,7 @@ class ServiceInfo(Converter):
 			if info.getInfo(iServiceInformation.sGamma) > 0:
 				return False
 			else:
-				return video_width >= 721 and video_width < 1980
+				return video_width >= 721 and video_width < 2160
 		elif self.type == self.IS_1080:
 			return video_height > 1000 and video_height <= 1080
 		elif self.type == self.IS_720:
@@ -264,7 +288,7 @@ class ServiceInfo(Converter):
 			if info.getInfo(iServiceInformation.sGamma) > 0:
 				return False
 			else:
-				return video_width > 2160 and video_width <= 3840
+				return video_width >= 2160 and video_width <= 3840
 		elif self.type == self.IS_IPSTREAM:
 			return service.streamed() is not None
 		elif self.type == self.IS_SDR:
@@ -311,18 +335,11 @@ class ServiceInfo(Converter):
 		elif self.type == self.SID:
 			return self.getServiceInfoHexString(info, iServiceInformation.sSID)
 		elif self.type == self.FRAMERATE:
-			video_rate = None
-			if exists("/proc/stb/vmpeg/0/framerate"):
-				f = open("/proc/stb/vmpeg/0/framerate", "r")
-				try:
-					video_rate = int(f.read())
-				except:
-					pass
-				f.close()
+			video_rate = eAVControl.getInstance().getFrameRate(0)
 			if not video_rate:
 				try:
 					video_rate = int(self.getServiceInfoString(info, iServiceInformation.sFrameRate))
-				except:
+				except Exception:
 					return "N/A fps"
 			return video_rate, lambda x: "%d fps" % ((x + 500) / 1000)
 		elif self.type == self.PROGRESSIVE:
@@ -379,38 +396,17 @@ class ServiceInfo(Converter):
 			return -1
 
 		if self.type == self.XRES:
-			video_width = None
-			if exists("/proc/stb/vmpeg/0/xres"):
-				f = open("/proc/stb/vmpeg/0/xres", "r")
-				try:
-					video_width = int(f.read(), 16)
-				except:
-					video_width = None
-				f.close()
+			video_width = eAVControl.getInstance().getResolutionX(0)
 			if not video_width:
 				video_width = info.getInfo(iServiceInformation.sVideoWidth)
 			return str(video_width)
 		elif self.type == self.YRES:
-			video_height = None
-			if exists("/proc/stb/vmpeg/0/yres"):
-				f = open("/proc/stb/vmpeg/0/yres", "r")
-				try:
-					video_height = int(f.read(), 16)
-				except:
-					video_height = None
-				f.close()
+			video_height = eAVControl.getInstance().getResolutionY(0)
 			if not video_height:
 				video_height = info.getInfo(iServiceInformation.sVideoHeight)
 			return str(video_height)
 		elif self.type == self.FRAMERATE:
-			video_rate = None
-			if exists("/proc/stb/vmpeg/0/framerate"):
-				f = open("/proc/stb/vmpeg/0/framerate", "r")
-				try:
-					video_rate = f.read()
-				except:
-					pass
-				f.close()
+			video_rate = eAVControl.getInstance().getFrameRate(0)
 			if not video_rate:
 				video_rate = info.getInfo(iServiceInformation.sFrameRate)
 			return str(video_rate)

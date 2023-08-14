@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
-from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
+from enigma import eAVControl, eAVSwitch, eDVBVolumecontrol, getDesktop
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL
 from os.path import exists
 
@@ -7,13 +7,13 @@ from os.path import exists
 class AVSwitch:
 	def setInput(self, input):
 		INPUT = {"ENCODER": 0, "SCART": 1, "AUX": 2}
-		eAVSwitch.getInstance().setInput(INPUT[input])
+		eAVControl.getInstance().setInput(str(INPUT[input]))
 
 	def setColorFormat(self, value):
-		eAVSwitch.getInstance().setColorFormat(value)
+		eAVControl.getInstance().setColorFormat(str(value))
 
 	def setAspectRatio(self, value):
-		eAVSwitch.getInstance().setAspectRatio(value)
+		eAVControl.getInstance().setAspectRatio(value)
 
 	def setSystem(self, value):
 		eAVSwitch.getInstance().setVideomode(value)
@@ -63,7 +63,7 @@ class AVSwitch:
 			value = 2  # auto(4:3_off)
 		else:
 			value = 1  # auto
-		eAVSwitch.getInstance().setWSS(value)
+		eAVControl.getInstance().setWSS(value)
 
 
 def InitAVSwitch():
