@@ -1,5 +1,5 @@
 from os import listdir
-from os.path import basename, dirname, isdir, join as pathjoin, normpath, realpath, exists
+from os.path import basename, dirname, isdir, join, normpath, realpath, exists
 from re import compile
 
 from enigma import BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, eServiceCenter, eServiceReference, gFont
@@ -118,11 +118,11 @@ class FileList(MenuList):
 		self.serviceHandler = eServiceCenter.getInstance()
 
 	def refreshMountpoints(self):
-		self.mountpoints = [pathjoin(p.mountpoint, "") for p in harddiskmanager.getMountedPartitions()]
+		self.mountpoints = [join(p.mountpoint, "") for p in harddiskmanager.getMountedPartitions()]
 		self.mountpoints.sort(reverse=True)
 
 	def getMountpoint(self, file):
-		file = pathjoin(realpath(file), "")
+		file = join(realpath(file), "")
 		for m in self.mountpoints:
 			if file.startswith(m):
 				return m
@@ -140,7 +140,7 @@ class FileList(MenuList):
 			while last != "/" and mp == self.getMountpoint(file):
 				last = file
 				file = dirname(file)
-			return pathjoin(last, "")
+			return join(last, "")
 
 	def getSelection(self):
 		if self.l.getCurrentSelection() is None:
@@ -179,7 +179,7 @@ class FileList(MenuList):
 
 		if directory is None and self.showMountpoints:  # present available mountpoints
 			for p in harddiskmanager.getMountedPartitions():
-				path = pathjoin(p.mountpoint, "")
+				path = join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
 					self.list.append(FileEntryComponent(name=p.description, absolute=path, isDir=True))
 			files = []
@@ -395,7 +395,7 @@ class MultiFileSelectList(FileList):
 
 		if directory is None and self.showMountpoints:  # present available mountpoints
 			for p in harddiskmanager.getMountedPartitions():
-				path = pathjoin(p.mountpoint, "")
+				path = join(p.mountpoint, "")
 				if path not in self.inhibitMounts and not self.inParentDirs(path, self.inhibitDirs):
 					self.list.append(MultiFileSelectEntryComponent(name=p.description, absolute=path, isDir=True))
 			files = []

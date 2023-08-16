@@ -1,5 +1,5 @@
 from glob import glob
-from os.path import basename, dirname, isfile, join as pathjoin, splitext
+from os.path import basename, dirname, isfile, splitext
 from os import listdir, unlink
 from xml.etree.cElementTree import Element, ElementTree, fromstring
 

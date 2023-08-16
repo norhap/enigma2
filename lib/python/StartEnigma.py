@@ -15,7 +15,7 @@ from Components.config import ConfigSubsection, ConfigInteger, ConfigText, Confi
 from Components.SystemInfo import BoxInfo, SystemInfo, ARCHITECTURE, MODEL
 
 profile("Imports")
-from os.path import isdir, islink, join as pathjoin
+from os.path import isdir, islink, join
 from traceback import print_exc
 from time import time
 from sys import stdout
@@ -38,7 +38,7 @@ config.osd.language.addNotifier(languageNotifier)
 
 def setEPGCachePath(configElement):
 	if isdir(configElement.value) or islink(configElement.value):
-		configElement.value = pathjoin(configElement.value, "epg.dat")
+		configElement.value = join(configElement.value, "epg.dat")
 	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
 
 

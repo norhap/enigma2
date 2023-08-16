@@ -1,6 +1,6 @@
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
 from os import listdir, popen, remove
-from os.path import getmtime, isfile, join as pathjoin
+from os.path import getmtime, isfile, join
 from PIL import Image
 import skin
 import os
@@ -86,7 +86,7 @@ class InformationBase(Screen, HelpableScreen):
 			"right": self.displayInformation,
 			"left": self.displayInformation,
 		}, prio=0, description=_("Common Information Actions"))
-		if isfile(resolveFilename(SCOPE_PLUGINS, pathjoin("boxes", "%s.png" % (MODEL)))):
+		if isfile(resolveFilename(SCOPE_PLUGINS, join("boxes", "%s.png" % (MODEL)))):
 			self["key_info"] = StaticText(_("INFO"))
 			self["infoActions"] = HelpableActionMap(self, ["InfoActions"], {
 				"info": (self.showReceiverImage, _("Show receiver image(s)"))
@@ -758,7 +758,7 @@ class Devices(Screen):
 				self.mountinfo += "%s (%sB, %sB %s)" % (ipaddress, mounttotal, mountfree, _("free"))
 		if pathExists("/media/autofs"):
 			for entry in sorted(listdir("/media/autofs")):
-				mountEntry = pathjoin("/media/autofs", entry)
+				mountEntry = join("/media/autofs", entry)
 				self.mountinfo += _("\n %s " % (mountEntry))
 
 		if self.mountinfo:

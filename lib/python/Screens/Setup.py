@@ -1,5 +1,5 @@
 from gettext import dgettext
-from os.path import getmtime, join as pathjoin
+from os.path import getmtime, join
 from xml.etree.cElementTree import ParseError, fromstring, parse
 
 from skin import setups
@@ -336,7 +336,7 @@ def setupDom(setup=None, plugin=None):
 				pass
 
 	setupFileDom = fromstring("<setupxml></setupxml>")
-	setupFile = resolveFilename(SCOPE_PLUGINS, pathjoin(plugin, "setup.xml")) if plugin else resolveFilename(SCOPE_SKINS, "setup.xml")
+	setupFile = resolveFilename(SCOPE_PLUGINS, join(plugin, "setup.xml")) if plugin else resolveFilename(SCOPE_SKINS, "setup.xml")
 	global domSetups, setupModTimes
 	try:
 		modTime = getmtime(setupFile)

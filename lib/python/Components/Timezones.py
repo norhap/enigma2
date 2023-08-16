@@ -1,6 +1,6 @@
 from errno import ENOENT
 from os import environ, path, symlink, unlink, walk
-from os.path import exists, isfile, join as pathjoin, realpath
+from os.path import exists, isfile, join, realpath
 from time import gmtime, localtime, strftime, time, tzset
 from xml.etree.cElementTree import ParseError, parse
 
@@ -165,7 +165,7 @@ class Timezones:
 				name = name
 				zonePath = zone.get("zone", "")
 				zonePath = zonePath
-				if exists(pathjoin(TIMEZONE_DATA, zonePath)):
+				if exists(join(TIMEZONE_DATA, zonePath)):
 					zones.append((zonePath, name))
 				else:
 					print("[Timezones] Warning: Classic time zone '%s' (%s) is not available in '%s'!" % (name, zonePath, TIMEZONE_DATA))
@@ -197,12 +197,12 @@ class Timezones:
 		return areaDefaultZone.setdefault(area, choices[0][0])
 
 	def activateTimezone(self, zone, area, runCallbacks=True):
-		tz = zone if area in ("Classic", "Generic") else pathjoin(area, zone)
-		file = pathjoin(TIMEZONE_DATA, tz)
+		tz = zone if area in ("Classic", "Generic") else join(area, zone)
+		file = join(TIMEZONE_DATA, tz)
 		if not isfile(file):
 			print("[Timezones] Error: The time zone '%s' is not available!  Using 'UTC' instead." % tz)
 			tz = "UTC"
-			file = pathjoin(TIMEZONE_DATA, tz)
+			file = join(TIMEZONE_DATA, tz)
 		print("[Timezones] Setting time zone to '%s'." % tz)
 		try:
 			unlink("/etc/localtime")

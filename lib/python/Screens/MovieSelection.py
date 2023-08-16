@@ -1,7 +1,7 @@
 from pickle import dump, load
 
 from os import W_OK, access, listdir, mkdir, rename, rmdir, stat
-from os.path import abspath, basename, exists, isdir, isfile, join as pathjoin, normpath, pardir, realpath, split, splitext
+from os.path import abspath, basename, exists, isdir, isfile, join, normpath, pardir, realpath, split, splitext
 from time import time
 
 from enigma import eRCInput, eServiceCenter, eServiceReference, eSize, eTimer, iPlayableService, iServiceInformation, getPrevAsciiCode
@@ -205,19 +205,19 @@ def createMoveList(serviceref, dest):
 		# Move file to itself is allowed, so we have to check it.
 		raise Exception(_("Refusing to move to the same directory"))
 	# Make a list of items to move.
-	moveList = [(src, pathjoin(dest, srcName))]
+	moveList = [(src, join(dest, srcName))]
 	if isinstance(serviceref, str) or not serviceref.flags & eServiceReference.mustDescent:
 		# Real movie, add extra files...
 		srcBase = splitext(src)[0]
 		baseName = split(srcBase)[1]
 		eitName = "%s.eit" % srcBase
 		if exists(eitName):
-			moveList.append((eitName, pathjoin(dest, "%s.eit" % baseName)))
+			moveList.append((eitName, join(dest, "%s.eit" % baseName)))
 		baseName = split(src)[1]
 		for ext in ("%s.ap", "%s.cuts", "%s.meta", "%s.sc"):
 			candidate = ext % src
 			if exists(candidate):
-				moveList.append((candidate, pathjoin(dest, ext % baseName)))
+				moveList.append((candidate, join(dest, ext % baseName)))
 	return moveList
 
 
@@ -749,8 +749,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if current is not None:
 				if self["list"].getCurrentIndex() > 0:
 					path = current.getPath()
-					path = abspath(pathjoin(path, pardir))
-					path = abspath(pathjoin(path, pardir))
+					path = abspath(join(path, pardir))
+					path = abspath(join(path, pardir))
 					self.gotFilename(path)
 
 	def __onClose(self):
@@ -1025,11 +1025,11 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if current is not None:
 			path = current.getPath()
 			if current.flags & eServiceReference.mustDescent:
-				if BlurayPlayer is not None and isdir(pathjoin(path, "BDMV/STREAM/")):
+				if BlurayPlayer is not None and isdir(join(path, "BDMV/STREAM/")):
 					# force a BLU-RAY extention
 					Screens.InfoBar.InfoBar.instance.checkTimeshiftRunning(boundFunction(self.itemSelectedCheckTimeshiftCallback, "bluray", path))
 					return
-				if isdir(pathjoin(path, "VIDEO_TS/")) or exists(pathjoin(path, "VIDEO_TS.IFO")):
+				if isdir(join(path, "VIDEO_TS/")) or exists(join(path, "VIDEO_TS.IFO")):
 					# force a DVD extention
 					Screens.InfoBar.InfoBar.instance.checkTimeshiftRunning(boundFunction(self.itemSelectedCheckTimeshiftCallback, ".img", path))
 					return
@@ -1102,7 +1102,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def saveLocalSettings(self):
 		if not config.movielist.settings_per_directory.value:
 			return
-		path = pathjoin(config.movielist.last_videodir.value, ".e2settings.pkl")
+		path = join(config.movielist.last_videodir.value, ".e2settings.pkl")
 		try:
 			file = open(path, "wb")
 			dump(self.settings, file)
@@ -1119,7 +1119,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def loadLocalSettings(self):
 		'Load settings, called when entering a directory'
 		if config.movielist.settings_per_directory.value:
-			path = pathjoin(config.movielist.last_videodir.value, ".e2settings.pkl")
+			path = join(config.movielist.last_videodir.value, ".e2settings.pkl")
 			try:
 				file = open(path, "rb")
 				updates = load(file)
@@ -1528,13 +1528,13 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def isBlurayFolderAndFile(self, service):
 		self.playfile = ""
-		folder = pathjoin(service.getPath(), "STREAM/")
+		folder = join(service.getPath(), "STREAM/")
 		if "BDMV/STREAM/" not in folder:
 			folder = "%s%s" % (folder[:-7], "BDMV/STREAM/")
 		if isdir(folder):
 			fileSize = 0
 			for name in listdir(folder):
-				filename = pathjoin(folder, name)
+				filename = join(folder, name)
 				try:
 					if name.endswith(".m2ts"):
 						size = stat(filename).st_size
@@ -1603,7 +1603,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			return
 		msg = None
 		try:
-			path = pathjoin(config.movielist.last_videodir.value, name)
+			path = join(config.movielist.last_videodir.value, name)
 			mkdir(path)
 			if not path.endswith("/"):
 				path += "/"
@@ -1707,7 +1707,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				msg = None
 				path, filename = split(oldfilename)
 				if item[0].flags & eServiceReference.mustDescent:  # directory
-					newfilename = pathjoin(path, newbasename)
+					newfilename = join(path, newbasename)
 					print("[MovieSelection] rename dir", oldfilename, "to", newfilename)
 					rename(oldfilename, newfilename)
 				else:
@@ -1716,8 +1716,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					renamelist = []
 					dont_rename = False
 					for ext in (".eit", "%s.cuts" % self.extension, self.extension):
-						newfilename = "%s%s" % (pathjoin(path, newbasename), ext)
-						oldfilename = "%s%s" % (pathjoin(path, oldbasename), ext)
+						newfilename = "%s%s" % (join(path, newbasename), ext)
+						oldfilename = "%s%s" % (join(path, oldbasename), ext)
 						if not isfile(oldfilename):  # .eit and .cuts maybe not present
 							continue
 						if not isfile(newfilename):
@@ -1772,7 +1772,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				base = split(path)[0]
 				for fn in listdir(base):
 					if not fn.startswith("."):  # Skip hidden things
-						d = pathjoin(base, fn)
+						d = join(base, fn)
 						if isdir(d) and (d not in inlist):
 							bookmarks.append((fn, d))
 							inlist.append(d)
@@ -1910,7 +1910,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						are_you_sure = _("Do you really want to delete %s ?") % name
 				for fn in listdir(cur_path):
 					if (fn != ".") and (fn != ".."):
-						ffn = pathjoin(cur_path, fn)
+						ffn = join(cur_path, fn)
 						if isdir(ffn):
 							subdirs += 1
 						else:
@@ -1940,7 +1940,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						return
 				for fn in listdir(cur_path):
 					if (fn != ".") and (fn != ".."):
-						ffn = pathjoin(cur_path, fn)
+						ffn = join(cur_path, fn)
 						if isdir(ffn):
 							subdirs += 1
 						else:

@@ -1,6 +1,6 @@
 from errno import ENOENT, EXDEV
 from os import F_OK, R_OK, W_OK, access, chmod, link, listdir, makedirs, mkdir, readlink, remove, rename, rmdir, sep, stat, statvfs, symlink, utime, walk
-from os.path import basename, dirname, exists, getsize, isdir, isfile, islink, join as pathjoin, normpath, splitext
+from os.path import basename, dirname, exists, getsize, isdir, isfile, islink, join, normpath, splitext
 from re import compile
 from shutil import copy2
 from stat import S_IMODE
@@ -84,7 +84,7 @@ def InitDefaultPaths():
 def resolveFilename(scope, base="", path_prefix=None):
 	if str(base).startswith("~%s" % sep):  # You can only use the ~/ if we have a prefix directory.
 		if path_prefix:
-			base = pathjoin(path_prefix, base[2:])
+			base = join(path_prefix, base[2:])
 		else:
 			print("[Directories] Warning: resolveFilename called with base starting with '~%s' but 'path_prefix' is None!" % sep)
 	if str(base).startswith(sep):  # Don't further resolve absolute paths.
@@ -115,7 +115,7 @@ def resolveFilename(scope, base="", path_prefix=None):
 		# 	baseList.append("%s%s" % (base[:-3], "png"))
 		for item in resolveList:
 			# for base in baseList:
-			file = pathjoin(item, base)
+			file = join(item, base)
 			if exists(file):
 				return file
 		return base
@@ -125,17 +125,17 @@ def resolveFilename(scope, base="", path_prefix=None):
 		if scope == SCOPE_GUISKIN:  # If the scope is SCOPE_GUISKIN append the current skin to the scope path.
 			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 			skin = dirname(config.skin.primary_skin.value)
-			path = pathjoin(path, skin)
+			path = join(path, skin)
 	elif scope == SCOPE_GUISKIN:
 		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 		skin = dirname(config.skin.primary_skin.value)
 		resolveList = [
-			pathjoin(scopeConfig, skin),
-			# pathjoin(scopeConfig, "skin_common"),
+			join(scopeConfig, skin),
+			# join(scopeConfig, "skin_common"),
 			scopeConfig,  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
-			pathjoin(scopeGUISkin, skin),
-			pathjoin(scopeGUISkin, "skin_fallback_%d" % getDesktop(0).size().height()),
-			pathjoin(scopeGUISkin, "skin_default"),
+			join(scopeGUISkin, skin),
+			join(scopeGUISkin, "skin_fallback_%d" % getDesktop(0).size().height()),
+			join(scopeGUISkin, "skin_default"),
 			scopeGUISkin  # Can we deprecate top level of SCOPE_GUISKIN directory to allow a clean up?
 		]
 		path = itemExists(resolveList, base)
@@ -143,12 +143,12 @@ def resolveFilename(scope, base="", path_prefix=None):
 		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 		skin = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else ""
 		resolveList = [
-			pathjoin(scopeConfig, "display", skin),
-			pathjoin(scopeConfig, "display", "skin_common"),
+			join(scopeConfig, "display", skin),
+			join(scopeConfig, "display", "skin_common"),
 			scopeConfig,  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
-			pathjoin(scopeLCDSkin, skin),
-			pathjoin(scopeLCDSkin, "skin_fallback_%s" % getDesktop(1).size().height()),
-			pathjoin(scopeLCDSkin, "skin_default"),
+			join(scopeLCDSkin, skin),
+			join(scopeLCDSkin, "skin_fallback_%s" % getDesktop(1).size().height()),
+			join(scopeLCDSkin, "skin_default"),
 			scopeLCDSkin  # Can we deprecate top level of SCOPE_LCDSKIN directory to allow a clean up?
 		]
 		path = itemExists(resolveList, base)
@@ -157,34 +157,34 @@ def resolveFilename(scope, base="", path_prefix=None):
 		skin = dirname(config.skin.primary_skin.value)
 		display = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
 		resolveList = [
-			pathjoin(scopeConfig, "fonts"),
-			pathjoin(scopeConfig, skin, "fonts"),
-			pathjoin(scopeConfig, skin)
+			join(scopeConfig, "fonts"),
+			join(scopeConfig, skin, "fonts"),
+			join(scopeConfig, skin)
 		]
 		if display:
-			resolveList.append(pathjoin(scopeConfig, "display", display, "fonts"))
-			resolveList.append(pathjoin(scopeConfig, "display", display))
-		resolveList.append(pathjoin(scopeConfig, "skin_common", "fonts"))
-		resolveList.append(pathjoin(scopeConfig, "skin_common"))
+			resolveList.append(join(scopeConfig, "display", display, "fonts"))
+			resolveList.append(join(scopeConfig, "display", display))
+		resolveList.append(join(scopeConfig, "skin_common", "fonts"))
+		resolveList.append(join(scopeConfig, "skin_common"))
 		resolveList.append(scopeConfig)  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
-		resolveList.append(pathjoin(scopeGUISkin, skin, "fonts"))
-		resolveList.append(pathjoin(scopeGUISkin, skin))
-		resolveList.append(pathjoin(scopeGUISkin, "skin_default", "fonts"))
-		resolveList.append(pathjoin(scopeGUISkin, "skin_default"))
+		resolveList.append(join(scopeGUISkin, skin, "fonts"))
+		resolveList.append(join(scopeGUISkin, skin))
+		resolveList.append(join(scopeGUISkin, "skin_default", "fonts"))
+		resolveList.append(join(scopeGUISkin, "skin_default"))
 		if display:
-			resolveList.append(pathjoin(scopeLCDSkin, display, "fonts"))
-			resolveList.append(pathjoin(scopeLCDSkin, display))
-		resolveList.append(pathjoin(scopeLCDSkin, "skin_default", "fonts"))
-		resolveList.append(pathjoin(scopeLCDSkin, "skin_default"))
+			resolveList.append(join(scopeLCDSkin, display, "fonts"))
+			resolveList.append(join(scopeLCDSkin, display))
+		resolveList.append(join(scopeLCDSkin, "skin_default", "fonts"))
+		resolveList.append(join(scopeLCDSkin, "skin_default"))
 		resolveList.append(scopeFonts)
 		path = itemExists(resolveList, base)
 	elif scope == SCOPE_PLUGIN:
-		file = pathjoin(scopePlugins, base)
+		file = join(scopePlugins, base)
 		if exists(file):
 			path = file
 	else:
 		path, flags = defaultPaths.get(scope)
-		path = pathjoin(path, base)
+		path = join(path, base)
 	path = normpath(path)
 	if isdir(path) and not path.endswith(sep):  # If the path is a directory then ensure that it ends with a "/".
 		path = "%s%s" % (path, sep)
@@ -319,7 +319,7 @@ def defaultRecordingLocation(candidate=None):
 		if not path:  # If we haven't found a viable candidate yet, try remote mounts.
 			path = bestRecordingLocation([mount for mount in mounts if not mount[0].startswith("/dev/")])
 	if path:
-		movie = pathjoin(path, "movie", "")  # If there's a movie subdir, we'd probably want to use that (directories need to end in sep).
+		movie = join(path, "movie", "")  # If there's a movie subdir, we'd probably want to use that (directories need to end in sep).
 		if isdir(movie):
 			path = movie
 	return path
@@ -358,8 +358,8 @@ def getRecordingFilename(basename, dirname=None):
 		dirname = defaultRecordingLocation()
 	else:
 		if not dirname.startswith(sep):
-			dirname = pathjoin(defaultRecordingLocation(), dirname)
-	filename = pathjoin(dirname, filename)
+			dirname = join(defaultRecordingLocation(), dirname)
+	filename = join(dirname, filename)
 	next = 0
 	path = filename
 	while isfile("%s.ts" % path) or isfile("%s.stream" % path):
@@ -376,7 +376,7 @@ def copyFile(src, dst):
 		return -1
 	return 0
 	# if isdir(dst):
-	# 	dst = pathjoin(dst, basename(src))
+	# 	dst = join(dst, basename(src))
 	# try:
 	# 	with open(src, "rb") as fd1:
 	# 		with open(dst, "w+b") as fd2:
@@ -410,14 +410,14 @@ def copyfile(src, dst):
 def copyTree(src, dst, symlinks=False):
 	names = listdir(src)
 	if isdir(dst):
-		dst = pathjoin(dst, basename(src))
+		dst = join(dst, basename(src))
 		if not isdir(dst):
 			mkdir(dst)
 	else:
 		makedirs(dst)
 	for name in names:
-		srcName = pathjoin(src, name)
-		dstName = pathjoin(dst, name)
+		srcName = join(src, name)
+		dstName = join(dst, name)
 		try:
 			if symlinks and islink(srcName):
 				linkTo = readlink(srcName)
@@ -595,7 +595,7 @@ def getSize(path, pattern=".*"):
 	pathSize = 0
 	if isdir(path):
 		for file in crawlDirectory(path, pattern):
-			pathSize += getsize(pathjoin(file[0], file[1]))
+			pathSize += getsize(join(file[0], file[1]))
 	elif isfile(path):
 		pathSize = getsize(path)
 	return pathSize
@@ -618,9 +618,9 @@ def lsof():  # List of open files.
 	for pid in listdir("/proc"):
 		if pid.isdigit():
 			try:
-				prog = readlink(pathjoin("/proc", pid, "exe"))
-				dir = pathjoin("/proc", pid, "fd")
-				for file in [pathjoin(dir, file) for file in listdir(dir)]:
+				prog = readlink(join("/proc", pid, "exe"))
+				dir = join("/proc", pid, "fd")
+				for file in [join(dir, file) for file in listdir(dir)]:
 					lsof.append((pid, prog, readlink(file)))
 			except (IOError, OSError) as err:
 				pass
@@ -648,6 +648,6 @@ def isPluginInstalled(pluginName, pluginFile="plugin", pluginType=None):
 		types = [pluginType]
 	for type in types:
 		for extension in ["c", ""]:
-			if isfile(pathjoin(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):
+			if isfile(join(scopePlugins, type, pluginName, "%s.py%s" % (pluginFile, extension))):
 				return True
 	return False

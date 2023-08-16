@@ -1,6 +1,6 @@
 from fcntl import ioctl
 from os import listdir, major, minor, mkdir, popen, rmdir, sep, stat, statvfs, system, unlink, lstat, walk
-from os.path import abspath, dirname, exists, ismount, join as pathjoin, normpath, realpath, islink, isfile
+from os.path import abspath, dirname, exists, ismount, join, normpath, realpath, islink, isfile
 from re import search
 from time import sleep, time
 
@@ -50,7 +50,7 @@ def getFolderSize(path):
 		for dirpath, dirnames, filenames in walk(path):
 			total_bytes += lstat(dirpath).st_blocks * 512
 			for f in filenames:
-				fp = pathjoin(dirpath, f)
+				fp = join(dirpath, f)
 				if islink(fp):
 					continue
 				st = lstat(fp)
@@ -59,7 +59,7 @@ def getFolderSize(path):
 				have.append(st.st_ino)
 				total_bytes += st.st_blocks * 512
 			for d in dirnames:
-				dp = pathjoin(dirpath, d)
+				dp = join(dirpath, d)
 		return total_bytes
 
 
@@ -80,7 +80,7 @@ class Harddisk:
 		self.phys_path = realpath(self.sysfsPath("device"))
 		self.removable = removable
 		self.internal = "ide" in self.phys_path or "pci" in self.phys_path or "ahci" in self.phys_path or "sata" in self.phys_path
-		data = fileReadLine(pathjoin("/sys/block", device, "queue/rotational"), "1")
+		data = fileReadLine(join("/sys/block", device, "queue/rotational"), "1")
 		self.rotational = int(data)
 		if SystemInfo["Udev"]:
 			self.dev_path = "/dev/" + self.device
@@ -116,10 +116,10 @@ class Harddisk:
 			else:
 				return "%s%s" % (self.dev_path, n)
 		else:
-			return pathjoin(self.dev_path, "part%s" % n)
+			return join(self.dev_path, "part%s" % n)
 
 	def sysfsPath(self, filename):
-		return pathjoin("/sys/block", self.device, filename)
+		return join("/sys/block", self.device, filename)
 
 	def stop(self):
 		if self.timer:
@@ -173,7 +173,7 @@ class Harddisk:
 
 	def model(self):
 		if self.device[:2] == "hd":
-			return fileReadLine(pathjoin("/proc/ide", self.device, "model"), _("Unknown"))
+			return fileReadLine(join("/proc/ide", self.device, "model"), _("Unknown"))
 		elif self.device[:2] == "sd":
 			vendor = fileReadLine(self.sysfsPath("device/vendor"), _("Unknown"))
 			model = fileReadLine(self.sysfsPath("device/model"), _("Unknown"))
@@ -313,7 +313,7 @@ class Harddisk:
 		h.close()
 
 	def createMovieDir(self):
-		mkdir(pathjoin(self.mount_path, 'movie'))
+		mkdir(join(self.mount_path, 'movie'))
 
 	def createInitializeJob(self):
 		print("[Harddisk] Initializing storage device...")
@@ -446,7 +446,7 @@ class Harddisk:
 	# we set the hdd into standby.
 	#
 	def readStats(self):
-		line = fileReadLine(pathjoin("/sys/block", self.device, "stat"))
+		line = fileReadLine(join("/sys/block", self.device, "stat"))
 		if line is None:
 			return -1, -1
 		data = line.split(None, 5)
@@ -619,9 +619,9 @@ class HarddiskManager:
 		partitions = []
 		try:
 			if exists(devpath + "/removable"):
-				removable = bool(int(fileReadLine(pathjoin(devpath, "/removable"), "0")))
+				removable = bool(int(fileReadLine(join(devpath, "/removable"), "0")))
 			if exists(devpath + "/dev"):
-				dev = fileReadLine(pathjoin(devpath, "dev"))
+				dev = fileReadLine(join(devpath, "dev"))
 				subdev = False if int(dev.split(":")[1]) % 32 == 0 else True
 				dev = int(dev.split(":")[0])
 			else:
@@ -638,7 +638,7 @@ class HarddiskManager:
 				is_cdrom = True
 			if blockdev[0:2] == "hd":
 				try:
-					if "cdrom" in fileReadLine(pathjoin("/proc/ide", blockdev, "media"), ""):
+					if "cdrom" in fileReadLine(join("/proc/ide", blockdev, "media"), ""):
 						is_cdrom = True
 				except (IOError, OSError):
 					error = True
@@ -657,8 +657,8 @@ class HarddiskManager:
 		# check for medium
 		medium_found = True
 		try:
-			if exists(pathjoin("/dev", blockdev)):
-				open(pathjoin("/dev", blockdev)).close()
+			if exists(join("/dev", blockdev)):
+				open(join("/dev", blockdev)).close()
 		except (IOError, OSError) as err:
 			if err.errno == 159:  # no medium present
 				medium_found = False
@@ -682,20 +682,20 @@ class HarddiskManager:
 		if len(netmount) > 0:
 			for fil in netmount:
 				if ismount("/media/net/" + fil):
-					print("[Harddisk] New network mount '%s' -> '%s'." % (fil, pathjoin("/media/net/", fil)))
+					print("[Harddisk] New network mount '%s' -> '%s'." % (fil, join("/media/net/", fil)))
 					if refresh:
-						self.addMountedPartition(device=pathjoin('/media/net/', fil + '/'), desc=fil)
+						self.addMountedPartition(device=join('/media/net/', fil + '/'), desc=fil)
 					else:
-						self.partitions.append(Partition(mountpoint=pathjoin('/media/net/', fil + '/'), description=fil))
+						self.partitions.append(Partition(mountpoint=join('/media/net/', fil + '/'), description=fil))
 		autofsmount = (exists("/media/autofs") and listdir("/media/autofs")) or ""
 		if len(autofsmount) > 0:
 			for fil in autofsmount:
 				if ismount("/media/autofs/" + fil) or exists("/media/autofs/" + fil):
-					print("[Harddisk] New network mount '%s' -> '%s'." % (fil, pathjoin("/media/autofs", fil)))
+					print("[Harddisk] New network mount '%s' -> '%s'." % (fil, join("/media/autofs", fil)))
 					if refresh:
-						self.addMountedPartition(device=pathjoin('/media/autofs/', fil + '/'), desc=fil)
+						self.addMountedPartition(device=join('/media/autofs/', fil + '/'), desc=fil)
 					else:
-						self.partitions.append(Partition(mountpoint=pathjoin('/media/autofs/', fil + '/'), description=fil))
+						self.partitions.append(Partition(mountpoint=join('/media/autofs/', fil + '/'), description=fil))
 		if ismount("/media/hdd") and "/media/hdd/" not in [p.mountpoint for p in self.partitions]:
 			print("[Harddisk] New network mount being used as HDD replacement -> '/media/hdd/'.")
 			if refresh:
@@ -713,7 +713,7 @@ class HarddiskManager:
 		dev = "/dev/%s" % device
 		for item in getProcMounts():
 			if (item[0] == dev and skiproot == None) or (item[0] == dev and skiproot == True and item[1] != "/"):
-				return pathjoin(item[1], "")
+				return join(item[1], "")
 		return None
 
 	def addHotplugPartition(self, device, physdev=None):
@@ -827,11 +827,11 @@ class HarddiskManager:
 	def getUserfriendlyDeviceName(self, dev, phys):
 		dev, part = self.splitDeviceName(dev)
 		description = _("External Storage %s") % dev
-		if exists(pathjoin('/sys' + phys + '/model')):
+		if exists(join('/sys' + phys + '/model')):
 			print("[Harddisk] Read model")
-			description = fileReadLine(pathjoin("/sys" + phys + "/model"))
-		elif exists(pathjoin('/sys' + phys + '/name')):
-			description = fileReadLine(pathjoin("/sys" + phys + "/name"))
+			description = fileReadLine(join("/sys" + phys + "/model"))
+		elif exists(join('/sys' + phys + '/name')):
+			description = fileReadLine(join("/sys" + phys + "/name"))
 		else:
 			print("[Harddisk] couldn't read model: ")
 		if part and part != 1:

@@ -1,6 +1,6 @@
 from errno import ENOENT
 from os import _exit, listdir, remove, system
-from os.path import isdir, join as pathjoin
+from os.path import isdir, join
 from shutil import rmtree
 
 from Components.config import ConfigYesNo, config
@@ -108,7 +108,7 @@ class FactoryReset(Setup, ProtectedScreen):
 		if self.resetFull.value:
 			print("[FactoryReset] Performing a full factory reset.")
 			self.wipeFiles(configDir, [""])
-			defaultFiles = pathjoin(resolveFilename(SCOPE_SKINS), "defaults", ".")
+			defaultFiles = join(resolveFilename(SCOPE_SKINS), "defaults", ".")
 			if isdir(defaultFiles):
 				print("[FactoryReset] Copying default configuration from '%s'." % defaultFiles)
 				system("cp -a %s %s" % (defaultFiles, configDir))
@@ -151,7 +151,7 @@ class FactoryReset(Setup, ProtectedScreen):
 
 	def wipeFiles(self, path, fileList):
 		for file in fileList:
-			target = pathjoin(path, file)
+			target = join(path, file)
 			try:
 				if isdir(target):
 					# print("[FactoryReset] DEBUG: Removing directory '%s'." % target)

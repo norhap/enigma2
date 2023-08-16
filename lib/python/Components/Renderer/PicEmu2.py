@@ -1,4 +1,4 @@
-from os.path import isfile, join as pathjoin
+from os.path import isfile, join
 
 from enigma import ePixmap, iServiceInformation
 
@@ -93,7 +93,7 @@ class PicEmu2(Renderer):
 
 	def findPicon(self, serviceName):
 		for path in self.searchPaths:
-			pngName = pathjoin(path, self.path, "%s.png" % serviceName)
+			pngName = join(path, self.path, "%s.png" % serviceName)
 			if isfile(pngName):
 				return pngName
 		return ""

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from os.path import isfile, join as pathjoin
+from os.path import isfile, join
 from re import findall
 
 from boxbranding import getMachineName
@@ -15,7 +15,7 @@ class BoxInformation:
 	def __init__(self, root=""):
 		self.immutableList = []
 		self.boxInfo = {}
-		file = root + pathjoin(resolveFilename(SCOPE_LIBDIR), "enigma.info")
+		file = root + join(resolveFilename(SCOPE_LIBDIR), "enigma.info")
 		self.boxInfo["overrideactive"] = False  # not currently used by us
 		lines = fileReadLines(file)
 		if lines:
@@ -144,9 +144,9 @@ if (isfile("/proc/cmdline")):
 
 
 def getRCFile(ext):
-	filename = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "%s.%s" % (BoxInfo.getItem("rcname"), ext)))
+	filename = resolveFilename(SCOPE_SKINS, join("rc_models", "%s.%s" % (BoxInfo.getItem("rcname"), ext)))
 	if not isfile(filename):
-		filename = resolveFilename(SCOPE_SKINS, pathjoin("rc_models", "dmm1.%s" % ext))
+		filename = resolveFilename(SCOPE_SKINS, join("rc_models", "dmm1.%s" % ext))
 	return filename
 
 
