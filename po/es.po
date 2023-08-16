@@ -4748,8 +4748,8 @@ msgstr "Administrador de paquetes"
 #, python-format
 msgid "List version %(ver)d, found %(num)d channel"
 msgid_plural "List version %(ver)d, found %(num)d channels"
-msgstr[0] "Lista de versión %(ver)d, encontrada %(num)d canal"
-msgstr[1] "Lista de la versión %(ver)d, encontrada %(num)d canales"
+msgstr[0] "Lista de versión %(ver)d, encontrado %(num)d canal"
+msgstr[1] "Lista de la versión %(ver)d, encontrados %(num)d canales"
 
 msgid "Pakistan"
 msgstr "Pakistan"

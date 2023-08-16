@@ -155,7 +155,7 @@ class FastScanScreen(ConfigListScreen, Screen):
 		<widget name="introduction" position="10,265" size="500,25" font="Regular;20" horizontalAlignment="center" />
 	</screen>"""
 
-	def __init__(self, session):
+	def __init__(self, session, nimList):
 		Screen.__init__(self, session)
 
 		self.setTitle(_("FastScan"))
@@ -174,7 +174,6 @@ class FastScanScreen(ConfigListScreen, Screen):
 
 		def providerChanged(configEntry):
 			if configEntry.value:
-				nimList = [(str(x), nimmanager.nim_slots[x].friendly_full_description) for x in nimmanager.getNimListForSat(transponders[[x[1][0] for x in providers if x[0] == configEntry.value][0]][3])]
 				self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
 				self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims)
 
@@ -341,7 +340,13 @@ def FastScanMain(session, **kwargs):
 	if session.nav.RecordTimer.isRecording():
 		session.open(MessageBox, _("A recording is currently running. Please stop the recording before starting a service scan."), MessageBox.TYPE_ERROR)
 	else:
-		session.open(FastScanScreen)
+		nimList = []
+		# collect all nims which are *not* set to "nothing"
+		for nims in nimmanager.nim_slots:
+			if not nims.isCompatible("DVB-S"):
+				continue
+			nimList.append((str(nims.slot), nims.friendly_full_description))
+		session.open(FastScanScreen, nimList) if nimList else session.open(MessageBox, _("No suitable sat tuner found!"), MessageBox.TYPE_ERROR)
 
 
 Session = None
