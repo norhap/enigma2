@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
-from enigma import eAVControl, eAVSwitch, eDVBVolumecontrol, getDesktop
+from enigma import eAVControl, eDVBVolumecontrol, getDesktop
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL
 from os.path import exists
 
@@ -14,9 +14,6 @@ class AVSwitch:
 
 	def setAspectRatio(self, value):
 		eAVControl.getInstance().setAspectRatio(value)
-
-	def setSystem(self, value):
-		eAVSwitch.getInstance().setVideomode(value)
 
 	def getOutputAspect(self):
 		valstr = config.av.aspectratio.value
@@ -167,24 +164,19 @@ def InitAVSwitch():
 		map = {"4_3_letterbox": 0, "4_3_panscan": 1, "16_9": 2, "16_9_always": 3, "16_10_letterbox": 4, "16_10_panscan": 5, "16_9_letterbox": 6}
 		iAVSwitch.setAspectRatio(map[configElement.value])
 
-	def setSystem(configElement):
-		map = {"pal": 0, "ntsc": 1, "multinorm": 2}
-		iAVSwitch.setSystem(map[configElement.value])
-
 	def setWSS(configElement):
 		iAVSwitch.setAspectWSS()
 
 	# this will call the "setup-val" initial
 	config.av.colorformat.addNotifier(setColorFormat)
 	config.av.aspectratio.addNotifier(setAspectRatio)
-	config.av.tvsystem.addNotifier(setSystem)
 	config.av.wss.addNotifier(setWSS)
 
 	iAVSwitch.setInput("ENCODER")  # init on startup
 	if MODEL in ("gb7356", "et5x00", "et6x00", "ixussone", "ixusszero", "axodin", "axase3", "optimussos1", "optimussos2", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "twinboxlcd"):
 		detected = False
 	else:
-		detected = eAVSwitch.getInstance().haveScartSwitch()
+		detected = eAVControl.getInstance().hasScartSwitch()
 
 	SystemInfo["ScartSwitch"] = detected
 
