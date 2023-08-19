@@ -32,12 +32,11 @@ class StartWizard(WizardLanguage, ShowRemoteControl):
 		WizardLanguage.__init__(self, session, showSteps=False)
 		ShowRemoteControl.__init__(self)
 		self["wizard"] = Pixmap()
-		self["lab1"] = StaticText(_("OpenVision"))
-		self["lab2"] = StaticText(_("Lets define enigma2 once more"))
-		self["lab3"] = StaticText(_("Report problems to:"))
-		self["lab4"] = StaticText(_("https://openvision.tech"))
-		self["lab5"] = StaticText(_("Sources are available at:"))
-		self["lab6"] = StaticText(_("https://github.com/OpenVisionE2"))
+		self["lab1"] = StaticText(_("norhap"))
+		self["lab2"] = StaticText(_("Report problems to:"))
+		self["lab3"] = StaticText(_("telegram @norhap"))
+		self["lab4"] = StaticText(_("Sources are available at:"))
+		self["lab5"] = StaticText(_("https://github.com/norhap"))
 
 	def markDone(self):
 		config.misc.firstrun.value = 0

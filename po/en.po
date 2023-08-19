@@ -4163,10 +4163,6 @@ msgstr "Copy to bouquets"
 msgid "Copying files"
 msgstr "Long filenames"
 
-#, python-format
-msgid "Copyright %s 2018-%s Team OpenVision"
-msgstr ""
-
 #, fuzzy
 msgid "Cornish"
 msgstr "Danish"
@@ -7921,7 +7917,7 @@ msgstr ""
 msgid ""
 "It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
-"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at https://forum.openvision.tech\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at telegram @norhap\n"
 "\n"
 msgstr ""
 
@@ -9961,34 +9957,6 @@ msgstr ""
 #, fuzzy
 msgid "OpenVPN setup"
 msgstr "PiP setup"
-
-#, fuzzy
-msgid "OpenVision"
-msgstr "Extensions"
-
-#, fuzzy
-msgid "OpenVision Information"
-msgstr "Information"
-
-msgid "OpenVision Information Actions"
-msgstr ""
-
-msgid "OpenVision is an open source project with no commercial funding."
-msgstr ""
-
-#, fuzzy
-msgid "OpenVision language"
-msgstr "original language"
-
-#, fuzzy
-msgid "OpenVision module"
-msgstr "Transmission mode"
-
-msgid "OpenVision revision"
-msgstr ""
-
-msgid "OpenVision version"
-msgstr ""
 
 msgid "Operating LED brightness."
 msgstr ""
@@ -14883,9 +14851,6 @@ msgstr ""
 msgid "The speed of the fan when your %s %s is in standby mode."
 msgstr ""
 
-msgid "The team relies on donations to fund OpenVision development."
-msgstr ""
-
 #, fuzzy
 msgid "The timer file (pm_timers.xml) is corrupt and could not be loaded."
 msgstr "The timer file (timers.xml) is corrupt and could not be loaded."
@@ -17937,12 +17902,6 @@ msgstr ""
 
 msgid "horizontal"
 msgstr "horizontal"
-
-msgid "https://github.com/OpenVisionE2"
-msgstr ""
-
-msgid "https://openvision.tech"
-msgstr ""
 
 msgid "information/education/school program"
 msgstr "information/education/school program"

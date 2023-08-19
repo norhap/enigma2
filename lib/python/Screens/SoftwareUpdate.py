@@ -114,18 +114,12 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					lang = language.getLanguage()
 					if lang in message:
 						message = message[lang]
-					elif 'en_US' in message:
+					if 'en_US' in message:
 						message = message['en_US']
-					else:
-						message = _("The current image might not be stable.\nFor more information see %s.") % ("https://images.openvision.dedyn.io")
 
 			except Exception as e:
 				print("[SoftwareUpdate] status error: ", str(e))
-				message = _("The current image might not be stable.\nFor more information see %s.") % ("https://forum.openvision.tech")
-
-		# enable the status message when we have a status domain not yet.
-		# else:
-			# message = _("The status of the current image could not be checked because %s can not be reached.") % ("https://images.openvision.dedyn.io")
+				message = _("The current image might not be stable.\nFor more information see telegram @norhap.")
 
 		# show the user the message first
 		if message is not None:
