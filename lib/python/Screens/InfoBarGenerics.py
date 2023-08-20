@@ -2753,14 +2753,13 @@ class InfoBarInstantRecord:
 				self.recording = InfoBarInstance.recording
 
 	def moveToTrash(self, entry):
-		print("[InfoBarGenerics] instantRecord stop and delete recording: ", entry.name)
-		import Tools.Trashcan
-		trash = Tools.Trashcan.createTrashFolder(entry.Filename)
-		from Screens.MovieSelection import moveServiceFiles
-# Don't crash on errors...the sub-handlers trap and re-raise errors...
 		try:
+			print("[InfoBarGenerics] instantRecord stop and delete recording: ", entry.name)
+			import Tools.Trashcan
+			trash = Tools.Trashcan.createTrashFolder(entry.Filename)
+			from Screens.MovieSelection import moveServiceFiles
 			moveServiceFiles(entry.Filename, trash, entry.name, allowCopy=False)
-		except:
+		except Exception:  # If entry-name is in the trash and we cancel again, we will not have attributes of the file name.
 			pass
 
 	def stopCurrentRecording(self, entry=-1):
@@ -2972,12 +2971,14 @@ class InfoBarInstantRecord:
 				if self.recording[self.selectedEntry].end != ret[1]:
 					self.recording[self.selectedEntry].autoincrease = False
 				self.recording[self.selectedEntry].end = ret[1]
+			self.session.nav.RecordTimer.timeChanged(self.recording[self.selectedEntry])
 		else:
 			if self.recording[self.selectedEntry].end != int(time()):
 				self.recording[self.selectedEntry].autoincrease = False
 			self.recording[self.selectedEntry].end = int(time())
 			AddNotification(MessageBox, _("Recording timer was canceled"), type=MessageBox.TYPE_INFO, timeout=5)
-		self.session.nav.RecordTimer.timeChanged(self.recording[self.selectedEntry])
+			self.moveToTrash(self.recording[self.selectedEntry])  # move to trash if cancel.
+			self.session.nav.RecordTimer.removeEntry(self.recording[self.selectedEntry])  # remove timer list if cancel.
 
 	def changeDuration(self, entry):
 		if entry is not None and entry >= 0:
@@ -2990,7 +2991,7 @@ class InfoBarInstantRecord:
 			self.session.openWithCallback(self.inputAddRecordingTime, InputBox, title=_("How many minutes do you want add to the recording?"), text="5	", maxSize=True, type=Input.NUMBER)
 
 	def inputAddRecordingTime(self, value):
-		if value and value.replace(" ", "").isdigit():
+		if value and value.replace(" ", ""):
 			print("[InfoBarInstantRecord] added %d minutes for recording." % int(value))
 			entry = self.recording[self.selectedEntry]
 			if int(value) != 0:
@@ -3000,17 +3001,20 @@ class InfoBarInstantRecord:
 
 	def inputCallback(self, value):
 		entry = self.recording[self.selectedEntry]
-		if value and value.replace(" ", "").isdigit():
+		if value and value.replace(" ", ""):
 			print("[InfoBarInstantRecord] stopping recording after %d minutes." % int(value))
 			if int(value) != 0:
 				entry.autoincrease = False
 			entry.end = int(time()) + 60 * int(value)
+			self.session.nav.RecordTimer.timeChanged(entry)
 		else:
 			if entry.end != int(time()):
 				entry.autoincrease = False
+				self.session.nav.RecordTimer.timeChanged(entry)
 			entry.end = int(time())
 			AddNotification(MessageBox, _("Recording timer was canceled"), type=MessageBox.TYPE_INFO, timeout=5)
-		self.session.nav.RecordTimer.timeChanged(entry)
+			self.moveToTrash(entry)  # move to trash if cancel.
+			self.session.nav.RecordTimer.removeEntry(entry)  # remove timer list if cancel.
 
 	def isTimerRecordRunning(self):
 		identical = timers = 0
