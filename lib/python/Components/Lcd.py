@@ -33,7 +33,14 @@ def IconCheck(session=None, **kwargs):
 
 class IconCheckPoller:
 	def __init__(self):
+		self.symbolNetwork = exists("/proc/stb/lcd/symbol_network")
+		self.symbolUsb = exists("/proc/stb/lcd/symbol_usb")
+		self.lcdMode = config.lcd.mode.value
+		config.lcd.mode.addNotifier(self.setLCDmode)
 		self.timer = eTimer()
+
+	def setLCDmode(self, configElement):
+		self.lcdMode = configElement.value
 
 	def start(self):
 		if self.iconcheck not in self.timer.callback:
@@ -46,64 +53,36 @@ class IconCheckPoller:
 		self.timer.stop()
 
 	def iconcheck(self):
-		try:
-			threads.deferToThread(self.jobTask)
-		except:
-			pass
+		threads.deferToThread(self.jobTask)
+
+	def jobTask(self):
+		if self.symbolNetwork and self.lcdMode:
+			linkState = "0"
+			if exists("/sys/class/net/wlan0/operstate"):
+				linkState = fileReadLine("/sys/class/net/wlan0/operstate")
+				if linkState != "down":
+					linkState = fileReadLine("/sys/class/net/wlan0/carrier")
+			elif exists("/sys/class/net/eth0/operstate"):
+				linkState = fileReadLine("/sys/class/net/eth0/operstate")
+				if linkState != "down":
+					linkState = fileReadLine("/sys/class/net/eth0/carrier")
+		if self.symbolUsb:
+			from usb import busses
+			USBState = 0
+			try:
+				for bus in busses():
+					devices = bus.devices
+					for dev in devices:
+						if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor != 3034 and dev.idVendor > 0:
+							USBState = 1
+							print("Device:", dev.filename)
+							print("Number:", dev.deviceClass)
+							print("idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor))
+							print("idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct))
+			except Exception as err:
+				print("[IconCheckPoller] Error get USB devices!  (%s)" % str(err))
+			fileWriteLine("/proc/stb/lcd/symbol_usb", USBState)
 		self.timer.startLongTimer(30)
-
-	def JobTask(self):
-		LinkState = 0
-		if exists("/sys/class/net/wlan0/operstate"):
-			LinkState = open("/sys/class/net/wlan0/operstate").read()
-			if LinkState != "down":
-				LinkState = open("/sys/class/net/wlan0/operstate").read()
-		elif exists("/sys/class/net/eth0/operstate"):
-			LinkState = open("/sys/class/net/eth0/operstate").read()
-			if LinkState != "down":
-				LinkState = open("/sys/class/net/eth0/carrier").read()
-		LinkState = LinkState[:1]
-		if exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "1":
-			f = open("/proc/stb/lcd/symbol_network", "w")
-			f.write(str(LinkState))
-			f.close()
-		elif exists("/proc/stb/lcd/symbol_network") and config.lcd.mode.value == "0":
-			f = open("/proc/stb/lcd/symbol_network", "w")
-			f.write("0")
-			f.close()
-		# from sys import version_info
-		# if version_info.major == 2:
-			# from usb import busses
-			# USBState = 0
-			# busses = usb.busses()
-			# for bus in busses:
-				# devices = bus.devices
-				# for dev in devices:
-					# if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor > 0:
-		# if version_info.major == 2:
-			# from usb import busses
-			# USBState = 0
-			# busses = usb.busses()
-			# for bus in busses:
-				# devices = bus.devices
-				# for dev in devices:
-					# if dev.deviceClass != 9 and dev.deviceClass != 2 and dev.idVendor > 0:
-						# print ' '
-						# print "Device:", dev.filename
-						# print "  Number:", dev.deviceClass
-						# print "  idVendor: %d (0x%04x)" % (dev.idVendor, dev.idVendor)
-						# print "  idProduct: %d (0x%04x)" % (dev.idProduct, dev.idProduct)
-						# USBState = 1
-			# if exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '1':
-				# f = open("/proc/stb/lcd/symbol_usb", "w")
-				# f.write(str(USBState))
-				# f.close()
-			# elif exists("/proc/stb/lcd/symbol_usb") and config.lcd.mode.value == '0':
-				# f = open("/proc/stb/lcd/symbol_usb", "w")
-				# f.write('0')
-				# f.close()
-
-			# self.timer.startLongTimer(30)
 
 
 class LCD:
@@ -334,9 +313,6 @@ def InitLcd():
 
 		def setLCDflipped(configElement):
 			ilcd.setFlipped(configElement.value)
-
-		def setLCDmode(configElement):
-			ilcd.setMode(configElement.value)
 
 		def setLCDpower(configElement):
 			ilcd.setPower(configElement.value)
@@ -625,10 +601,10 @@ def InitLcd():
 		else:
 			config.usage.vfd_final_scroll_delay = ConfigNothing()
 		if exists("/proc/stb/lcd/show_symbols"):
-			config.lcd.mode = ConfigSelection(choices=[
-				("0", _("No")),
-				("1", _("Yes"))
-			], default="1")
+			def setLCDmode(configElement):
+				ilcd.setMode("1" if configElement.value else "0")
+
+			config.lcd.mode = ConfigYesNo(default=True)
 			config.lcd.mode.addNotifier(setLCDmode)
 		else:
 			config.lcd.mode = ConfigNothing()
