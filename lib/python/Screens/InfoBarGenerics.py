@@ -188,14 +188,15 @@ def getActiveSubservicesForCurrentChannel(current_service):
 					activeSubservices.append((servicename + " " + schedule + " " + title, subservice))
 				elif title:
 					activeSubservices.append((servicename + " " + title, subservice))
+			activeSubservices.append((servicename, subservice))
 		return activeSubservices
 
 
 def hasActiveSubservicesForCurrentChannel(current_service):
 	if current_service and "%3a" not in current_service:
 		current_service = ':'.join(current_service.split(':')[:11])
-	activeSubservices = getActiveSubservicesForCurrentChannel(current_service)
-	return bool(activeSubservices and len(activeSubservices) > 1)
+	subservices = getPossibleSubservicesForCurrentChannel(current_service)
+	return bool(subservices and len(subservices) > 1)
 
 
 class InfoBarDish:

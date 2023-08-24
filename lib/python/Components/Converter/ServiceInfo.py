@@ -2,7 +2,7 @@ from Components.Converter.Converter import Converter
 from enigma import eAVControl, iServiceInformation, iPlayableService, eServiceReference
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
-
+from Components.Converter.Poll import Poll
 from Tools.Transponder import ConvertToHumanReadable
 
 from os.path import exists
@@ -10,7 +10,7 @@ from os.path import exists
 WIDESCREEN = [1, 3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
 
-class ServiceInfo(Converter):
+class ServiceInfo(Poll, Converter):
 	HAS_TELETEXT = 1
 	IS_MULTICHANNEL = 2
 	AUDIO_STEREO = 3
@@ -53,7 +53,10 @@ class ServiceInfo(Converter):
 	VIDEO_INFO = 40
 
 	def __init__(self, type):
+		Poll.__init__(self)
 		Converter.__init__(self, type)
+		self.poll_interval = 10000
+		self.poll_enabled = True
 		self.type, self.interesting_events = {
 			"HasTelext": (self.HAS_TELETEXT, (iPlayableService.evUpdatedInfo,)),
 			"IsMultichannel": (self.IS_MULTICHANNEL, (iPlayableService.evUpdatedInfo,)),
@@ -235,7 +238,7 @@ class ServiceInfo(Converter):
 				while idx < n:
 					i = audio.getTrackInfo(idx)
 					description = i.getDescription()
-					if description and description.split()[0] in ("AC3", "AC-3", "AC3+", "DTS"):  # some audio description has 'audio' as additional value (e.g. 'AC-3 audio')
+					if description and description.split()[0] in ("AC3", "AC3+", "DTS", "DTS-HD", "AC4", "LPCM", "Dolby", "HE-AAC"):  # some audio description has 'audio' as additional value (e.g. 'AC-3 audio')
 						if self.type == self.IS_MULTICHANNEL:
 							return True
 						elif self.type == self.AUDIO_STEREO:
@@ -374,7 +377,7 @@ class ServiceInfo(Converter):
 			return out
 		elif self.type == self.VIDEO_INFO:
 			if self._isHDMIIn(info):
-					return ""
+				return ""
 			progressive = self._getProgressiveStr(info)
 			fieldrate = self._getFrameRate(info)
 			if fieldrate > 0:
