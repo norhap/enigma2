@@ -266,6 +266,9 @@ class PliExtraInfo(Poll, Converter):
 		gamma = ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
 		return str(video_width) + "x" + str(video_height) + video_pol + fps + addspace(gamma)
 
+	def createGamma(self, info):
+		return gamma_data.get(info.getInfo(iServiceInformation.sGamma), "")
+
 	def createVideoCodec(self, info):
 		return codec_data.get(info.getInfo(iServiceInformation.sVideoType), _("N/A"))
 
