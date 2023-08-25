@@ -144,28 +144,21 @@ class ServiceInfo(Screen):
 			aspect = "-"
 			videocodec = "-"
 			resolution = "-"
+			fps = ""
 			if self.info:
-				from Components.Converter.PliExtraInfo import codec_data
+				from enigma import eAVControl
+				from Components.Converter.PliExtraInfo import codec_data, gamma_data
+				avControl = eAVControl.getInstance()
 				videocodec = codec_data.get(self.info.getInfo(iServiceInformation.sVideoType), "N/A")
-				width = self.info.getInfo(iServiceInformation.sVideoWidth)
-				height = self.info.getInfo(iServiceInformation.sVideoHeight)
-				if width > 0 and height > 0:
-					resolution = videocodec + " - "
-					resolution += "%dx%d - " % (width, height)
-					fps = (self.info.getInfo(iServiceInformation.sFrameRate) + 500) // 1000
-					if fps in (0, -1):
-						try:
-							fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) // 1000
-						except:
-							pass
-					resolution += str(fps)
-					resolution += (" i", " p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
-					aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
-					aspect = aspect in (1, 2, 5, 6, 9, 0xA, 0xD, 0xE) and "4:3" or "16:9"
-					resolution += " - [" + aspect + "]"
-				gamma = ("SDR", "HDR", "HDR10", "HLG", "")[self.info.getInfo(iServiceInformation.sGamma)]
-				if gamma:
-					resolution += " - " + gamma
+				gamma = gamma_data.get(self.info.getInfo(iServiceInformation.sVideoType), "")
+				video_rate = avControl.getFrameRate()
+				fps = str((video_rate + 500) // 1000)
+				video_width = avControl.getResolutionX()
+				video_height = avControl.getResolutionY()
+				progressive = ("i", "p", "")[self.info.getInfo(iServiceInformation.sProgressive)]
+				aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
+				aspect = aspect in (1, 2, 5, 6, 9, 0xA, 0xD, 0xE) and "4:3" or "16:9"
+				resolution = videocodec + " - " + gamma + " %dx%d - " % (video_width, video_height) + fps + progressive + " " + aspect
 			self.service = self.session.nav.getCurrentService()
 			if "%3a//" in refstr and reftype not in (1, 257, 4098, 4114):
 			# IPTV 4097 5001, no PIDs shown
