@@ -7114,6 +7114,9 @@ msgstr "Cambiar de canal hacia abajo"
 msgid "Switch channel up"
 msgstr "Cambiar de canal hacia arriba"
 
+msgid "Switch to filelist"
+msgstr "Cambiar a lista de archivos"
+
 msgid "Switch to TV mode"
 msgstr "Cambiar a modo TV"
 
@@ -9730,9 +9733,6 @@ msgstr "Dejar de usar como canal de inicio"
 
 msgid "successful"
 msgstr "exitoso"
-
-msgid "switch to filelist"
-msgstr "cambia a lista de archivos"
 
 msgid "switch to the next angle"
 msgstr "cambia al siguiente ángulo"
