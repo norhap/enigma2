@@ -262,9 +262,8 @@ class PliExtraInfo(Poll, Converter):
 		video_pol = "p" if avControl.getProgressive() else "i"
 		video_width = avControl.getResolutionX(0)
 		video_height = avControl.getResolutionY(0)
-		fps = str((video_rate + 500) / 1000)
-		gamma = ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
-		return str(video_width) + "x" + str(video_height) + video_pol + fps + addspace(gamma)
+		fps = str((video_rate + 500) // 1000)
+		return str(video_width) + "x" + str(video_height) + " " + fps + video_pol
 
 	def createGamma(self, info):
 		return gamma_data.get(info.getInfo(iServiceInformation.sGamma), "")
