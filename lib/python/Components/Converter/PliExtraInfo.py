@@ -449,7 +449,7 @@ class PliExtraInfo(Poll, Converter):
 			return self.createResolution(info)
 
 		if textType == "ResolutionString":
-			return addspace(self.createResolution(info)) + self.createGamma(info)
+			return addspace(self.createResolution(info)) + self.createGamma(info) if self.createGamma(info) else addspace(self.createResolution(info))
 
 		if textType == "VideoCodec":
 			return self.createVideoCodec(info)

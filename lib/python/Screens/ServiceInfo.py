@@ -158,7 +158,7 @@ class ServiceInfo(Screen):
 				video_pol = "p" if avControl.getProgressive() else "i"
 				aspect = self.getServiceInfoValue(iServiceInformation.sAspect)
 				aspect = aspect in (1, 2, 5, 6, 9, 0xA, 0xD, 0xE) and "4:3" or "16:9"
-				resolution = videocodec + " - " + gamma + " %dx%d - " % (video_width, video_height) + fps + video_pol + " " + aspect
+				resolution = videocodec + " - " + gamma + " %dx%d - " % (video_width, video_height) + fps + video_pol + " " + aspect if gamma else videocodec + " - " + "%dx%d - " % (video_width, video_height) + fps + video_pol + " " + aspect
 			self.service = self.session.nav.getCurrentService()
 			if "%3a//" in refstr and reftype not in (1, 257, 4098, 4114):
 			# IPTV 4097 5001, no PIDs shown
