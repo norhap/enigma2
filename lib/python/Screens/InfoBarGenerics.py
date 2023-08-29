@@ -3293,6 +3293,7 @@ class InfoBarAspectSelection:
 	def __init__(self):
 		self["AspectSelectionAction"] = HelpableActionMap(self, ["InfobarAspectSelectionActions"], {
 			"aspectSelection": (self.ExGreen_toggleGreen, _("Aspect ratio list")),
+			"exitLong": (self.switchTo720p, _("Switch to 720p video?")),
 		}, prio=0, description=_("Aspect Ratio Actions"))
 		self.__ExGreen_state = self.STATE_HIDDEN
 
@@ -3346,6 +3347,23 @@ class InfoBarAspectSelection:
 				selection = item
 				break
 		self.session.openWithCallback(self.aspectSelected, ChoiceBox, text=_("Please select an aspect ratio..."), list=aspectList, keys=keys, selection=selection)
+
+	def changeVideoMode(self, confirmed):
+		from Plugins.SystemPlugins.Videomode.VideoHardware import VIDEO
+		port = config.av.videoport.value
+		mode = config.av.videomode[port].value
+		rate = config.av.videorate[mode].value
+		self.last_used_video_mode = (port, mode, rate)  # have video 720p
+		if not confirmed:   # return to the last used video mode
+			config.av.videoport.value = self.last_used_video_mode[0]
+			config.av.videomode[self.last_used_video_mode[0]].value = self.last_used_video_mode[1]
+			config.av.videorate[self.last_used_video_mode[1]].value = self.last_used_video_mode[2]
+			VIDEO.setMode(*self.last_used_video_mode)
+
+	def switchTo720p(self):  # use 720p video mode recover signal on your video port
+		from Plugins.SystemPlugins.Videomode.VideoHardware import VIDEO
+		VIDEO.setMode("HDMI", "720p", "50Hz")
+		self.session.openWithCallback(self.changeVideoMode, MessageBox, _("This function recovers your video signal in case it is lost.\nIf this is the case, after switching to 720p video:\nGo to Menu -> Setup -> Audio / Video -> A/V settings and set correct resolution.\nWant to switch to video 720p?"), MessageBox.TYPE_YESNO, timeout=30, simple=True)
 
 	def aspectSelected(self, aspect):
 		if not aspect is None:

@@ -1584,8 +1584,8 @@ msgstr "Configure la nitidez de la escala de video."
 msgid "Configure the transparency of the OSD."
 msgstr "Configure la transparencia del OSD."
 
-msgid "Configure the video output mode (or resolution)."
-msgstr "Configure el modo de salida de video (o resolución)."
+msgid "Set the video output mode (or resolution).\n\nWARNING: If the chosen video mode causes a loss of signal on your video port, long press EXIT button."
+msgstr "Configure el modo de salida de video (o resolución).\n\nADVERTENCIA: Si el modo de vídeo elegido provoca la pérdida de señal en el puerto de vídeo, pulse prolongadamente el botón EXIT."
 
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr "Configure este sintonizador usando opciones simples o avanzadas, o buclee a través de otro sintonizador, o copie una configuración desde otro sintonizador, o desactívela."
@@ -1609,7 +1609,7 @@ msgid "Configure your wireless LAN again"
 msgstr "Configura su red inalámbrica WLAN-WiFi"
 
 msgid "Configures which video output connector will be used."
-msgstr "Configura qué conector de salida de video se utilizará."
+msgstr "Configura qué conector de salida de video se usará."
 
 msgid "Configuring"
 msgstr "Configurando"
@@ -3246,6 +3246,9 @@ msgstr "Cuando el receptor sale del modo reposo, ordenará al televisor que camb
 
 msgid "Switch off the TV to correct input"
 msgstr "Apague el televisor para corregir la entrada"
+
+msgid "Switch to 720p video?"
+msgstr "¿Cambiar a vídeo 720p?"
 
 msgid "Some TVs can't switch to the correct input if another HDMI port is active. This setting sets the TV to standby before the switch. (If the TV does not turn back on it may require a slower transmission interval or the repetition of the wake-up command.)"
 msgstr "Algunos televisores no pueden cambiar a la entrada correcta si otro puerto HDMI está activo. Esta configuración pone el televisor en modo de espera antes del cambio. (Si el televisor no se vuelve a encender, es posible que requiera un intervalo de transmisión más lento o la repetición del comando de activación)."
@@ -7513,7 +7516,9 @@ msgstr "Este plugin será instalado."
 msgid "This plugin will be removed."
 msgstr "Este plugin será borrado."
 
-#, python-format
+msgid "This function recovers your video signal in case it is lost.\nIf this is the case, after switching to 720p video:\nGo to Menu -> Setup -> Audio / Video -> A/V settings and set correct resolution.\nWant to switch to video 720p?"
+msgstr "Esta función recupera su señal de video en caso de que se pierda.\nSi este es el caso, después de cambiar a video de 720p:\nVaya a Menú -> Configuración -> Audio & Video -> Ajustes A/V y establezca una resolución correcta.\n¿Quiere cambiar a vídeo 720p?"
+
 msgid "This receiver cannot decode %s streams!"
 msgstr "¡Este receptor no puede decodificar %s streams!"
 
@@ -7998,8 +8003,8 @@ msgstr "Configuración de uso"
 msgid "Use"
 msgstr "Uso"
 
-msgid "Do you want to use automatic mode detection?\n\nThis option reads all the supported modes and automatically sets the highest resolution supported of your TV. Choose 'No' if you want to customize your settings."
-msgstr "¿Desea utilizar la detección de modo automático?\n\nEsta opción lee todos los modos admitidos y establece automáticamente la resolución más alta admitida por su televisor. Elija \"No\" si desea personalizar su configuración."
+msgid "Do you want to use auto mode detection?\n\nThis option reads all supported modes and automatically sets the highest resolution supported by your TV. Choose 'No' if you want to customize your settings.\n\nWARNING: If on the next screen you lose signal on your video mode, long press EXIT button to return to the list of video modes."
+msgstr "¿Desea utilizar la detección de modo automático?\n\nEsta opción lee todos los modos admitidos y establece automáticamente la resolución más alta admitida por su televisor. Elija \"No\" si desea personalizar su configuración.\n\nADVERTENCIA: Si en la siguiente pantalla un modo de video provoca pérdida de señal, mantenga pulsado el botón EXIT para regresar a la lista de modos de video."
 
 msgid "Use DHCP"
 msgstr "Usa DHCP"
@@ -12017,8 +12022,8 @@ msgstr "Seleccionar imagen y eliminar"
 msgid "Select text to search for"
 msgstr "Seleccione texto para buscar"
 
-msgid "Select the video mode to be used on the TV.\n\nThe following video modes will change automatically in 20 seconds."
-msgstr "Seleccione el modo de video que se usará en el televisor.\n\nLos siguientes modos de video cambiaran automáticamente en 20 segundos."
+msgid "Select the video mode to be used on the TV.\n\nThe following video modes will automatically change in 20 seconds.\n\nWARNING: If a video mode causes signal loss, hold the EXIT button to return to the mode video list."
+msgstr "Seleccione el modo de video que se usará en el televisor.\n\nLos siguientes modos de video cambiarán automáticamente en 20 segundos.\n\nADVERTENCIA: Si un modo de video provoca pérdida de señal, mantenga pulsado el botón EXIT para regresar a la lista de modos de video."
 
 msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
 msgstr "Seleccione tipo de filtro para la búsqueda. Pulse el botón +/- para mostrar/ocultar el filtro en la descripción después de la búsqueda."
