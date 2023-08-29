@@ -3,7 +3,7 @@ from os.path import isfile, join
 from re import findall
 
 from boxbranding import getMachineName
-from enigma import Misc_Options, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD
+from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD
 
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
 from Tools.StbHardware import getWakeOnLANType
@@ -187,7 +187,7 @@ BoxInfo.setItem("RCMapping", getRCFile("xml"))
 BoxInfo.setItem("RemoteEnable", MODEL == "dm800")
 BoxInfo.setItem("RemoteRepeat", 100)
 BoxInfo.setItem("RemoteDelay", 700)
-BoxInfo.setItem("has24hz", fileCheck("/proc/stb/video/videomode_24hz"))
+BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
