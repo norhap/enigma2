@@ -7516,8 +7516,8 @@ msgstr "Este plugin será instalado."
 msgid "This plugin will be removed."
 msgstr "Este plugin será borrado."
 
-msgid "This function recovers your video signal in case it is lost.\nIf this is the case, after switching to 720p video:\nGo to Menu -> Setup -> Audio / Video -> A/V settings and set correct resolution.\nWant to switch to video 720p?"
-msgstr "Esta función recupera su señal de video en caso de que se pierda.\nSi este es el caso, después de cambiar a video de 720p:\nVaya a Menú -> Configuración -> Audio & Video -> Ajustes A/V y establezca una resolución correcta.\n¿Quiere cambiar a vídeo 720p?"
+msgid "This function recovers your video signal in case of loss. The video has been changed to 720p.\nIf this is your case, please keep the video at 720P and do the following:\nGo to Menu > Setup > Audio / Video > A/V settings and set the correct resolution.\nDo you want to keep the video at 720p?"
+msgstr "Esta función recupera su señal de video en caso de pérdida. Se ha cambiado el video a 720p.\nSi este es su caso, mantenga el video a 720P y haga lo siguiente:\nVaya a Menú > Configuracón > Audio & Video > Ajustes A/V y establezca una resolución correcta.\n¿Quieres mantener el vídeo a 720p?"
 
 msgid "This receiver cannot decode %s streams!"
 msgstr "¡Este receptor no puede decodificar %s streams!"
