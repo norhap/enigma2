@@ -158,12 +158,17 @@ def InitUsageConfig():
 	config.usage.volume_instead_of_channelselection = ConfigYesNo(default=False)
 	config.usage.channelselection_preview = ConfigYesNo(default=False)
 	config.usage.show_spinner = ConfigYesNo(default=True)
+	config.usage.plugin_sort_weight = ConfigDictionarySet()
 	config.usage.menu_sort_weight = ConfigDictionarySet(default={"mainmenu": {"submenu": {}}})
 	config.usage.menu_sort_mode = ConfigSelection(default="user", choices=[
 		("a_z", _("Alphabetical")),
 		("default", _("Default")),
 		("user", _("User defined")),
 		("user_hidden", _("User defined hidden"))
+	])
+	config.usage.pluginListLayout = ConfigSelection(default="grid", choices=[
+		("list", _("View as list")),
+		("grid", _("View as grid"))
 	])
 	if MODEL.startswith("bey"):
 		config.usage.show_genre_info = ConfigYesNo(default=True)
