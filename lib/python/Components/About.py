@@ -9,7 +9,7 @@ from fcntl import ioctl
 from struct import pack, unpack
 from subprocess import PIPE, Popen
 from Components.Console import Console
-from Components.SystemInfo import SystemInfo, ARCHITECTURE, MODEL
+from Components.SystemInfo import SystemInfo
 from Tools.HardwareInfo import HardwareInfo
 
 
@@ -109,10 +109,7 @@ def getGStreamerVersionString():
 def getFFmpegVersionString():
 	try:
 		from glob import glob
-		if not ARCHITECTURE == "aarch64":
-			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
-		else:
-			  ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
 	except:
 		return _("Not installed")
@@ -233,15 +230,11 @@ def getCPUArch():
 
 
 def getDriverInstalledDate():
+	from glob import glob
 	try:
-		from glob import glob
 		try:
-			if MODEL in ("dm800", "dm8000"):
-				driver = [x.split("-")[-2:-1][0][-9:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
-			else:
-				driver = [x.split("-")[-2:-1][0][-8:] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
-				return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
+			driver = [x.split("-")[-2] for x in open(glob("/var/lib/opkg/info/*-dvb-modules-*.control")[0], "r") if x.startswith("Version:")][0]
+			return "%s-%s-%s" % (driver[:4], driver[4:6], driver[6:])
 		except:
 			try:
 				driver = [x.split("Version:") for x in open(glob("/var/lib/opkg/info/*-dvb-proxy-*.control")[0], "r") if x.startswith("Version:")][0]
