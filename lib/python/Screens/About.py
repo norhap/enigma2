@@ -309,8 +309,8 @@ class About(Screen):
 		cpu = about.getCPUInfoString()
 		AboutText += _("ChipSet: ") + about.getChipSetString() + "\n"
 		AboutText += _("CPU: ") + cpu + "\n"
-		AboutText += _("Fabricante CPU: ") + about.getCPUBrand() + "\n"
-		AboutText += _("CPU Arquitectura: ") + about.getCPUArch() + "\n"
+		AboutText += _("CPU Manufacturer: ") + about.getCPUBrand() + "\n"
+		AboutText += _("CPU Architecture: ") + about.getCPUArch() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString()
 
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
@@ -1223,11 +1223,11 @@ class CommitInfoDevelop(Screen):
 		self.project = 0
 		self.projects = [
 			("https://api.github.com/repos/norhap/enigma2/commits", "Enigma2"),
-			("https://api.github.com/repos/satdreamgr/oe-core/commits", "Satdreamgr Oe Core"),
+			("https://api.github.com/repos/OpenPLi/openpli-oe-core/commits", "OpenPLi Oe Core"),
 			("https://api.github.com/repos/norhap/enigma2-plugins/commits", "Enigma2 Plugins"),
 			("https://api.github.com/repos/norhap/openvision-core-plugin/commits", "Plugin Vision Core"),
 			("https://api.github.com/repos/norhap/OctEtFHD-skin/commits", "Skin OpenVision FHD"),
-			("https://api.github.com/repos/E2OpenPlugins/e2openplugin-OpenWebif/commits", "OpenWebif")
+			("https://api.github.com/repos/oe-alliance/OpenWebif/commits", "OpenWebif 2.0")
 		]
 		self.cachedProjects = {}
 		self.Timer = eTimer()

@@ -177,7 +177,7 @@ def getCPUInfoString():
 			temperature = open("/proc/stb/sensors/temp/value").readline().replace('\n', '')
 		elif isfile("/sys/devices/virtual/thermal/thermal_zone0/temp"):
 			try:
-				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip()) / 1000
+				temperature = int(open("/sys/devices/virtual/thermal/thermal_zone0/temp").read().strip()) // 1000
 			except:
 				pass
 		elif isfile("/proc/hisi/msp/pm_cpu"):

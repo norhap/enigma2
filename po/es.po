@@ -15419,8 +15419,11 @@ msgstr "Alias"
 msgid "CIFS/Samba"
 msgstr "CIFS/Samba"
 
-msgid "CPU architecture: "
-msgstr "Arquitectura CPU: "
+msgid "CPU Architecture: "
+msgstr "CPU Arquitectura: "
+
+msgid "CPU Manufacturer: "
+msgstr "CPU Fabricante: "
 
 msgid "Checking feeds"
 msgstr "Comprobando feeds"
