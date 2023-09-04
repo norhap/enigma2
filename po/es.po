@@ -15864,7 +15864,7 @@ msgid "Bytes received:"
 msgstr "Bytes recibidos:"
 
 msgid "Bytes sent:"
-msgstr "Bytes expedidos:"
+msgstr "Bytes enviados:"
 
 msgid "Speed:"
 msgstr "Velocidad:"
@@ -16783,8 +16783,11 @@ msgstr "Activo desde hace: "
 msgid "Mobile: "
 msgstr "Móvil: "
 
-msgid "Public IP: "
-msgstr "IP Pública: "
+msgid "IPv4 public address:"
+msgstr "Dirección pública IPv4:"
+
+msgid "IPv6 public address:"
+msgstr "Dirección pública IPv6:"
 
 msgid "Static IP Router"
 msgstr "Router IP Estática"

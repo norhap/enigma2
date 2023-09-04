@@ -877,11 +877,35 @@ class SystemNetworkInfo(Screen):
 			if 'hwaddr' in wlan3:
 				self.AboutText += _("MAC:") + "\t" + "\t" + wlan3['hwaddr'] + "\n"
 			self.iface = 'wlan3'
-
 		rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
-		self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\n"
-		self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\n"
-
+		if rx_bytes[5:6] and not rx_bytes[6:7]:
+			self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (KB)" + "\n"
+		elif rx_bytes[6:7] and not rx_bytes[7:8]:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (MB)" + "\n"
+		elif rx_bytes[7:8] and not rx_bytes[8:9]:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (MB)" + "\n"
+		elif rx_bytes[8:9] and not rx_bytes[9:10]:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (MB)" + "\n"
+		elif rx_bytes[9:10] and not rx_bytes[10:11]:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (GB)" + "\n"
+		elif rx_bytes[10:11] and not rx_bytes[10:12]:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (GB)" + "\n"
+		else:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (GB)" + "\n"
+		if tx_bytes[5:6] and not tx_bytes[6:7]:
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (KB)" + "\n"
+		elif tx_bytes[6:7] and not tx_bytes[7:8]:
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + "." + tx_bytes[1:3] + " (MB)" + "\n"
+		elif tx_bytes[7:8] and not tx_bytes[8:9]:
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + "." + tx_bytes[2:4] + " (MB)" + "\n"
+		elif tx_bytes[8:9] and not tx_bytes[9:10]:
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + "." + tx_bytes[3:5] + " (MB)" + "\n"
+		elif tx_bytes[9:10] and not tx_bytes[10:11]:
+			self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (GB)" + "\n"
+		elif tx_bytes[10:11] and not tx_bytes[10:12]:
+			self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (GB)" + "\n"
+		else:
+			self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (GB)" + "\n"
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
 		isp = geolocationData.get("isp", None)
 		isporg = geolocationData.get("org", None)
@@ -907,21 +931,28 @@ class SystemNetworkInfo(Screen):
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
-
-		publicip = geolocationData.get("query", None)
-		if str(publicip) != "":
-			self.AboutText += _("Public IP: ") + "\t" + "\t" + str(publicip) + "\n" + "\n"
-
 		self.console = Console()
+		self.console.ePopen('/sbin/ifconfig %s' % self.iface, self.getIPv6Address)
 		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
 
+	def getIPv6Address(self, result, retval, extra_args):
+		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
+		ipv4address = geolocationData.get("query", None)
+		if ipv4address:  # get IPv4
+			self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
+		ipv6address = result.split('\n')
+		for line in ipv6address:  # get IPv6
+			if "inet6 addr:" in line:
+				ipv6address = line.split(': ')[1][:-4].replace(" Scope:", "")
+				self.AboutText += _("IPv6 public address:") + "\t" + ipv6address + "\n"
+		self["AboutScrollLabel"].setText(self.AboutText)
+
 	def SpeedFinished(self, result, retval, extra_args):
-		result_tmp = str(result).split('\n')
+		result_tmp = result.split('\n')
 		for line in result_tmp:
-			if 'Speed:' in line:
+			if "Speed:" in line:
 				speed = line.split(': ')[1][:-4]
 				self.AboutText += _("Speed:") + "\t" + "\t" + speed + _('Mb/s')
-
 		hostname = open('/proc/sys/kernel/hostname').read()
 		self.AboutText += "\n" + _("Hostname:") + "\t" + "\t" + hostname + "\n"
 		self["AboutScrollLabel"].setText(self.AboutText)
@@ -1099,10 +1130,10 @@ class SystemMemoryInfo(Screen):
 			tstLine = out_lines[lidx].split()
 			if "MemTotal:" in tstLine:
 				MemTotal = out_lines[lidx].split()
-				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "," + MemTotal[1][3:5] + " GB" + "\n"
+				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "." + MemTotal[1][3:5] + " GB" + "\n"
 			if "MemFree:" in tstLine:
 				MemFree = out_lines[lidx].split()
-				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "," + MemFree[1][2:4] + " GB" + "\n"
+				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "." + MemFree[1][2:4] + " GB" + "\n"
 			if "Buffers:" in tstLine:
 				Buffers = out_lines[lidx].split()
 				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1][0:1] + " MB" + "\n"
@@ -1113,7 +1144,7 @@ class SystemMemoryInfo(Screen):
 				elif Cached[1][5:6]:
 					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:3] + " MB" + "\n"
 				else:
-					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:1] + "," + Cached[1][3:5] + " GB" + "\n"
+					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:1] + " GB" + "\n"
 			if "SwapTotal:" in tstLine:
 				SwapTotal = out_lines[lidx].split()
 				if SwapTotal[1][0:3] == "0":
@@ -1125,7 +1156,7 @@ class SystemMemoryInfo(Screen):
 				elif SwapTotal[1][5:6]:
 					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:3] + " MB" + "\n"
 				else:
-					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:1] + "," + SwapTotal[1][3:4] + " GB" + "\n"
+					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:1] + " GB" + "\n"
 			if "SwapFree:" in tstLine:
 				SwapFree = out_lines[lidx].split()
 				if SwapFree[1][0:3] == "0":
@@ -1137,7 +1168,7 @@ class SystemMemoryInfo(Screen):
 				elif SwapFree[1][5:6]:
 					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:3] + " MB" + "\n"
 				else:
-					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:1] + "," + SwapFree[1][3:4] + " GB" + "\n"
+					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:1] + " GB" + "\n"
 
 		self["actions"].setEnabled(False)
 		self.Console = Console()
