@@ -512,6 +512,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		{
 			"cancel": self.keyCancel,
 			"ok": self.ok,
+			"save": self.ok,
 			"left": self.keyLeft,
 			"right": self.keyRight
 		}, -2)
