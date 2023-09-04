@@ -81,7 +81,8 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			if self.setupImage:
 				self["setupimage"] = Pixmap()
 			else:
-				print("[Setup] Error: Unable to load image '%s'!" % setupImage)
+				print("[Setup] Error: Setup image '%s' is not a file!" % setupImage)
+				self.setupImage = None
 		else:
 			self.setupImage = None
 		self["config"].onSelectionChanged.append(self.selectionChanged)
