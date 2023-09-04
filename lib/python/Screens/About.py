@@ -9,7 +9,6 @@ from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
 from Screens.MessageBox import MessageBox
-
 from Components.config import config
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Sources.StaticText import StaticText
@@ -25,12 +24,10 @@ from Components.GUIComponent import GUIComponent
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL, DISPLAYMODEL
-
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
 from Tools.Geolocation import geolocation
 from Tools.StbHardware import getFPVersion, getProcInfoTypeTuner
 from Tools.LoadPixmap import LoadPixmap
-
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -39,9 +36,11 @@ INFO_COLOR = {
 	"B": None,
 	"N": 0x00ffffff,  # Normal.
 	"H": 0x00ffffff,  # Headings.
-	"P": 0x00888888,  # Prompts.
-	"V": 0x00888888,  # Values.
-	"M": 0x00ffff00  # Messages.
+	"S": 0x00ffffff,  # Subheadings.
+	"P": 0x00cccccc,  # Prompts.
+	"V": 0x00cccccc,  # Values.
+	"M": 0x00ffff00,  # Messages.
+	"F": 0x0000ffff  # Features.
 }
 
 
@@ -305,17 +304,14 @@ class About(Screen):
 		if fileExists("/proc/stb/info/sn"):
 			hwserial = open("/proc/stb/info/sn", "r").read().strip()
 			AboutText += _("Hardware serial: ") + hwserial + "\n"
-
 		cpu = about.getCPUInfoString()
 		AboutText += _("ChipSet: ") + about.getChipSetString() + "\n"
 		AboutText += _("CPU: ") + cpu + "\n"
 		AboutText += _("CPU Manufacturer: ") + about.getCPUBrand() + "\n"
 		AboutText += _("CPU Architecture: ") + about.getCPUArch() + "\n"
 		AboutText += _("Image: ") + about.getImageTypeString()
-
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
-
 		EnigmaVersion = about.getEnigmaVersionString()
 		EnigmaVersion = EnigmaVersion.rsplit("-", EnigmaVersion.count("-") - 2)
 		if len(EnigmaVersion) == 3:
@@ -327,16 +323,12 @@ class About(Screen):
 		AboutText += "\n" + EnigmaVersion + "\n"
 		if "+" in getE2Rev():
 			AboutText += _("Enigma2 revision: ") + getE2Rev().split("+")[1] + "\n"
-
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
-
 		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
-
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString().replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
-
 		FFmpegVersion = _("FFmpeg version: ") + about.getFFmpegVersionString()
 		self["FFmpegVersion"] = StaticText(FFmpegVersion)
 		AboutText += FFmpegVersion + "\n"
@@ -351,16 +343,13 @@ class About(Screen):
 			fp_version = _("Frontprocessor version: %s") % fp_version
 			AboutText += fp_version
 			self["FPVersion"] = StaticText(fp_version)
-
 		if SystemInfo["HDMICEC"] and config.hdmicec.enabled.value:
 			address = config.hdmicec.fixed_physical_address.value if config.hdmicec.fixed_physical_address.value != "0.0.0.0" else _("No fixed address set")
 			AboutText += "\n" + _("HDMI-CEC Enabled") + ": " + address
 		else:
 			hdmicec_disabled = _("Disabled")
 			AboutText += "\n" + _("HDMI-CEC %s") % hdmicec_disabled
-
 		AboutText += "\n" + _('Skin & Resolution: %s (%sx%s)\n') % (config.skin.primary_skin.value.split('/')[0], getDesktop(0).size().width(), getDesktop(0).size().height())
-
 		if BoxInfo.getItem("displaytype"):
 			AboutText += _("Type Display: ") + BoxInfo.getItem("displaytype") + "\n"
 		else:
@@ -394,10 +383,8 @@ class About(Screen):
 			else:
 				player = _("Not installed")
 		AboutText += _("Player: %s") % player
-
 		AboutText += "\n"
 		AboutText += _("Uptime: ") + about.getBoxUptime()
-
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
 		self["actions"] = ActionMap(["ColorActionsAbout", "DirectionActions"], {
 			"cancel": self.close,
@@ -493,7 +480,7 @@ class BenchmarkInformation(InformationBase):
 		info.append(formatLine("H", "%s %s %s" % (_("Benchmark for"), BRAND, DISPLAYMODEL)))
 		info.append("")
 		for index, cpu in enumerate(self.cpuTypes):
-			info.append(formatLine("P1", _("CPU / Core %d type") % index, cpu))
+			info.append(formatLine("P1", "CPU Core %d" % index, cpu))
 		info.append("")
 		info.append(formatLine("P1", _("CPU benchmark"), _("%d DMIPS per core") % self.cpuBenchmark if self.cpuBenchmark else _("Calculating benchmark...")))
 		count = len(self.cpuTypes)
@@ -521,7 +508,6 @@ class Geolocation(Screen):
 		self["key_red"] = Button(_("Close"))
 		GeolocationText = _("Information about your Geolocation data") + "\n"
 		GeolocationText += "\n"
-
 		try:
 			geolocationData = geolocation.getGeolocationData(fields="continent,country,regionName,city,timezone,currency,lat,lon", useCache=True)
 			continent = geolocationData.get("continent", None)
@@ -529,52 +515,42 @@ class Geolocation(Screen):
 				continent = str(continent)
 			if continent != None:
 				GeolocationText += _("Continent: ") + "\t" + continent + "\n"
-
 			country = geolocationData.get("country", None)
 			if isinstance(country, str):
 				country = str(country)
 			if country != None:
 				GeolocationText += _("Country: ") + "\t" + country + "\n"
-
 			state = geolocationData.get("regionName", None)
 			if isinstance(state, str):
 				state = str(state)
 			if state != None:
 				GeolocationText += _("State: ") + "\t" + state + "\n"
-
 			city = geolocationData.get("city", None)
 			if isinstance(city, str):
 				city = str(city)
 			if city != None:
 				GeolocationText += _("City: ") + "\t" + city + "\n"
-
 			GeolocationText += "\n"
-
 			timezone = geolocationData.get("timezone", None)
 			if isinstance(timezone, str):
 				timezone = str(timezone)
 			if timezone != None:
 				GeolocationText += _("Timezone: ") + "\t" + timezone + "\n"
-
 			currency = geolocationData.get("currency", None)
 			if isinstance(currency, str):
 				currency = str(currency)
 			if currency != None:
 				GeolocationText += _("Currency: ") + "\t" + currency + "\n"
-
 			GeolocationText += "\n"
-
 			latitude = geolocationData.get("lat", None)
 			if str(float(latitude)) != None:
 				GeolocationText += _("Latitude: ") + "\t" + str(float(latitude)) + "\n"
-
 			longitude = geolocationData.get("lon", None)
 			if str(float(longitude)) != None:
 				GeolocationText += _("Longitude: ") + "\t" + str(float(longitude)) + "\n"
 			self["AboutScrollLabel"] = ScrollLabel(GeolocationText)
 		except Exception as err:
 			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection"))
-
 		self["actions"] = ActionMap(["ColorActionsAbout", "SetupActions", "DirectionActions"], {
 			"red": self.close,
 			"ok": self.close,
@@ -655,7 +631,6 @@ class TunerInformation(InformationBase):
 		info.append("")
 		if fileHas("/tmp/dvbfetool.txt", "Mode 2: DVB-S"):
 			 info.append(formatLine("", _("DVB-S2/C/T2 Combined"), (_("Yes"))))
-
 		info.append(formatLine("", _("DVB-S2X"), (_("Yes") if fileHas("/tmp/dvbfetool.txt", "DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi") else _("No"))))
 		info.append(formatLine("", _("DVB-S"), (_("Yes") if "DVBS" in dvbFeToolTxt or "DVB-S" in dvbFeToolTxt else _("No"))))
 		info.append(formatLine("", _("DVB-T"), (_("Yes") if "DVBT" in dvbFeToolTxt or "DVB-T" in dvbFeToolTxt else _("No"))))
@@ -735,7 +710,6 @@ class Devices(Screen):
 				self.list.append(line)
 		self.list = '\n'.join(self.list)
 		self["hdd"].setText(self.list)
-
 		self.Console.ePopen("df -mh | grep -v '^Filesystem'", self.Stage1Complete)
 
 	def Stage1Complete(self, result, retval, extra_args=None):
@@ -755,7 +729,6 @@ class Devices(Screen):
 			for entry in sorted(listdir("/media/autofs")):
 				mountEntry = join("/media/autofs", entry)
 				self.mountinfo += _("\n %s " % (mountEntry))
-
 		if self.mountinfo:
 			self["mounts"].setText(self.mountinfo)
 		else:
@@ -813,11 +786,9 @@ class SystemNetworkInfo(Screen):
 			"downRepeated": self.doNothing,
 			"upRepeated": self.doNothing
 		})
-
 		self.iface = None
 		self.createscreen()
 		self.iStatus = None
-
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
@@ -827,7 +798,6 @@ class SystemNetworkInfo(Screen):
 				pass
 			self.resetList()
 			self.onClose.append(self.cleanup)
-
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createscreen(self):
@@ -841,7 +811,6 @@ class SystemNetworkInfo(Screen):
 			if 'hwaddr' in eth0:
 				self.AboutText += _("MAC:") + "\t" + "\t" + eth0['hwaddr'] + "\n"
 			self.iface = 'eth0'
-
 		eth1 = about.getIfConfig('eth1')
 		if 'addr' in eth1:
 			self.AboutText += _("IP:") + "\t" + "\t" + eth1['addr'] + "\n"
@@ -850,7 +819,6 @@ class SystemNetworkInfo(Screen):
 			if 'hwaddr' in eth1:
 				self.AboutText += _("MAC:") + "\t" + "\t" + eth1['hwaddr'] + "\n"
 			self.iface = 'eth1'
-
 		ra0 = about.getIfConfig('ra0')
 		if 'addr' in ra0:
 			self.AboutText += _("IP:") + "\t" + "\t" + ra0['addr'] + "\n"
@@ -859,7 +827,6 @@ class SystemNetworkInfo(Screen):
 			if 'hwaddr' in ra0:
 				self.AboutText += _("MAC:") + "\t" + "\t" + ra0['hwaddr'] + "\n"
 			self.iface = 'ra0'
-
 		wlan0 = about.getIfConfig('wlan0')
 		if 'addr' in wlan0:
 			self.AboutText += _("IP:") + "\t" + "\t" + wlan0['addr'] + "\n"
@@ -868,7 +835,6 @@ class SystemNetworkInfo(Screen):
 			if 'hwaddr' in wlan0:
 				self.AboutText += _("MAC:") + "\t" + "\t" + wlan0['hwaddr'] + "\n"
 			self.iface = 'wlan0'
-
 		wlan3 = about.getIfConfig('wlan3')
 		if 'addr' in wlan3:
 			self.AboutText += _("IP:") + "\t" + "\t" + wlan3['addr'] + "\n"
@@ -878,7 +844,9 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += _("MAC:") + "\t" + "\t" + wlan3['hwaddr'] + "\n"
 			self.iface = 'wlan3'
 		rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
-		if rx_bytes[5:6] and not rx_bytes[6:7]:
+		if rx_bytes[4:5] and not rx_bytes[5:6]:
+			self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (KB)" + "\n"
+		elif rx_bytes[5:6] and not rx_bytes[6:7]:
 			self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (KB)" + "\n"
 		elif rx_bytes[6:7] and not rx_bytes[7:8]:
 			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (MB)" + "\n"
@@ -892,14 +860,16 @@ class SystemNetworkInfo(Screen):
 			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (GB)" + "\n"
 		else:
 			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (GB)" + "\n"
-		if tx_bytes[5:6] and not tx_bytes[6:7]:
+		if tx_bytes[4:5] and not tx_bytes[5:6]:
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (KB)" + "\n"
+		elif tx_bytes[5:6] and not tx_bytes[6:7]:
 			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (KB)" + "\n"
 		elif tx_bytes[6:7] and not tx_bytes[7:8]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + "." + tx_bytes[1:3] + " (MB)" + "\n"
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (MB)" + "\n"
 		elif tx_bytes[7:8] and not tx_bytes[8:9]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + "." + tx_bytes[2:4] + " (MB)" + "\n"
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (MB)" + "\n"
 		elif tx_bytes[8:9] and not tx_bytes[9:10]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + "." + tx_bytes[3:5] + " (MB)" + "\n"
+			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (MB)" + "\n"
 		elif tx_bytes[9:10] and not tx_bytes[10:11]:
 			self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (GB)" + "\n"
 		elif tx_bytes[10:11] and not tx_bytes[10:12]:
@@ -919,13 +889,11 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + (isporg) + "\n"
 			else:
 				self.AboutText += "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
-
 		mobile = geolocationData.get("mobile", False)
 		if mobile:
 			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
-
 		proxy = geolocationData.get("proxy", False)
 		if proxy:
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n"
@@ -969,14 +937,7 @@ class SystemNetworkInfo(Screen):
 		self.LinkState = None
 		if data != None and data:
 			if status != None:
-# getDataForInterface()->iwconfigFinished() in
-# Plugins/SystemPlugins/WirelessLan/Wlan.py sets fields to boolean False
-# if there is no info for them, so we need to check that possibility
-# for each status[self.iface] field...
-#
 				if self.iface == 'wlan0' or self.iface == 'wlan3' or self.iface == 'ra0':
-# accesspoint is used in the "enc" code too, so we get it regardless
-#
 					if not status[self.iface]["accesspoint"]:
 						accesspoint = _("Unknown")
 					else:
@@ -987,7 +948,6 @@ class SystemNetworkInfo(Screen):
 							accesspoint = status[self.iface]["accesspoint"]
 					if 'BSSID' in self:
 						self.AboutText += _('Accesspoint:') + '\t' + accesspoint + '\n'
-
 					if 'ESSID' in self:
 						if not status[self.iface]["essid"]:
 							essid = _("Unknown")
@@ -997,14 +957,12 @@ class SystemNetworkInfo(Screen):
 							else:
 								essid = status[self.iface]["essid"]
 						self.AboutText += _('SSID:') + '\t' + '\t' + essid + '\n'
-
 					if 'quality' in self:
 						if not status[self.iface]["quality"]:
 							quality = _("Unknown")
 						else:
 							quality = status[self.iface]["quality"]
 						self.AboutText += _('Link quality:') + '\t' + quality + '\n'
-
 					if 'bitrate' in self:
 						if not status[self.iface]["bitrate"]:
 							bitrate = _("Unknown")
@@ -1014,14 +972,12 @@ class SystemNetworkInfo(Screen):
 							else:
 								bitrate = str(status[self.iface]["bitrate"]) + " Mb/s"
 						self.AboutText += _('Bitrate:') + '\t' + '\t' + bitrate + '\n'
-
 					if 'signal' in self:
 						if not status[self.iface]["signal"]:
 							signal = _("Unknown")
 						else:
 							signal = status[self.iface]["signal"]
 						self.AboutText += _('Signal strength:') + '\t' + str(signal) + '\n'
-
 					if 'enc' in self:
 						if not status[self.iface]["encryption"]:
 							encryption = _("Unknown")
@@ -1034,7 +990,6 @@ class SystemNetworkInfo(Screen):
 							else:
 								encryption = _("Enabled")
 						self.AboutText += _('Encryption:') + '\t' + '\t' + encryption + '\n'
-
 					if ((status[self.iface]["essid"] and status[self.iface]["essid"] == "off") or
 						not status[self.iface]["accesspoint"] or
 						status[self.iface]["accesspoint"] == "Not-Associated"):
@@ -1121,7 +1076,6 @@ class SystemMemoryInfo(Screen):
 			"left": self.doNothing,
 			"right": self.doNothing
 		})
-
 		out_lines = open("/proc/meminfo").readlines()
 		self.AboutText = "RAM" + '\n\n'
 		RamTotal = "-"
@@ -1169,7 +1123,6 @@ class SystemMemoryInfo(Screen):
 					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:3] + " MB" + "\n"
 				else:
 					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:1] + " GB" + "\n"
-
 		self["actions"].setEnabled(False)
 		self.Console = Console()
 		self.Console.ePopen("df -mh / | grep -v '^Filesystem'", self.Stage1Complete2)
@@ -1179,11 +1132,9 @@ class SystemMemoryInfo(Screen):
 		flash = flash.split()
 		RamTotal = flash[1]
 		RamFree = flash[3]
-
 		self.AboutText += "\n\nFLASH" + '\n\n'
 		self.AboutText += _("Total:") + "\t" + "\t" + RamTotal.replace('G', ' G').replace('M', ' M') + "B" + "\n"
 		self.AboutText += _("Free:") + "\t" + "\t" + RamFree.replace('G', ' G').replace('M', ' M') + "B" + "\n\n"
-
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
 
@@ -1204,12 +1155,9 @@ class TranslationInfo(Screen):
 		self["lab4"] = StaticText(_("Sources are available at:"))
 		self["lab5"] = StaticText(_("https://github.com/norhap"))
 		# don't remove the string out of the _(), or it can't be "translated" anymore.
-
 		# TRANSLATORS: Add here whatever should be shown in the "translator" about screen, up to 6 lines (use \n for newline)
-
 		if info == "TRANSLATOR_INFO":
 			info = "(N/A)"
-
 		infolines = _("").split("\n")
 		infomap = {}
 		for x in infolines:
@@ -1219,13 +1167,10 @@ class TranslationInfo(Screen):
 			(type, value) = l
 			infomap[type] = value
 		print(infomap)
-
 		translator_name = infomap.get("Language-Team", "none")
 		if translator_name == "none":
 			translator_name = infomap.get("Last-Translator", "")
-
 		self["TranslatorName"] = StaticText(translator_name)
-
 		self["actions"] = ActionMap(["SetupActions"], {
 			"cancel": self.close,
 			"ok": self.close,
@@ -1353,7 +1298,6 @@ class MemoryInfo(Screen):
 		self["lab3"] = StaticText(_("telegram @norhap"))
 		self["lab4"] = StaticText(_("Sources are available at:"))
 		self["lab5"] = StaticText(_("https://github.com/norhap"))
-
 		self["actions"] = ActionMap(["ColorActionsAbout"], {
 			"cancel": self.close,
 			"red": self.close,
@@ -1361,11 +1305,8 @@ class MemoryInfo(Screen):
 			"green": self.getMemoryInfo,
 			"blue": self.clearMemory,
 		})
-
 		self["params"] = MemoryInfoSkinParams()
-
 		self['info'] = Label(_("This info is for developers only.\nFor normal users it is not relevant.\nPlease don't panic if you see values displayed looking suspicious!"))
-
 		self.setTitle(_("Memory Info"))
 		self.onLayoutFinish.append(self.getMemoryInfo)
 
@@ -1441,7 +1382,6 @@ class Troubleshoot(Screen):
 		self["lab3"] = StaticText(_("telegram @norhap"))
 		self["lab4"] = StaticText(_("Sources are available at:"))
 		self["lab5"] = StaticText(_("https://github.com/norhap"))
-
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ColorActionsAbout"], {
 			"cancel": self.close,
 			"up": self["AboutScrollLabel"].pageUp,
@@ -1461,7 +1401,6 @@ class Troubleshoot(Screen):
 			"leftRepeated": self.doNothing,
 			"rightRepeated": self.doNothing
 		})
-
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)

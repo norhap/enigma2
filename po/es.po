@@ -17691,9 +17691,6 @@ msgstr "Calculando espere..."
 msgid "Benchmark for"
 msgstr "Caracteristicas CPU DMIPS RAM de su"
 
-msgid "CPU / Core %d type"
-msgstr "CPU / Core %d"
-
 msgid "CPU benchmark"
 msgstr "CPU"
 
