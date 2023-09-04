@@ -4087,8 +4087,8 @@ msgstr "El medio no es un DVD grabable!"
 msgid "Medium is not empty!"
 msgstr "El medio no está vacío!"
 
-msgid "Memory"
-msgstr "Memoria"
+msgid "Memory Ram & Flash"
+msgstr "Memoria Ram & Flash"
 
 msgid "Memory Info"
 msgstr "Información de memoria"
@@ -7564,8 +7564,8 @@ msgstr "Este plugin será instalado."
 msgid "This plugin will be removed."
 msgstr "Este plugin será borrado."
 
-msgid "This function recovers your video signal in case of loss. The video has been changed to 720p.\nIf this is your case, please keep the video at 720P and do the following:\nGo to Menu > Setup > Audio / Video > A/V settings and set the correct resolution.\nDo you want to keep the video at 720p?"
-msgstr "Esta función recupera su señal de video en caso de pérdida. Se ha cambiado el video a 720p.\nSi este es su caso, mantenga el video a 720P y haga lo siguiente:\nVaya a Menú > Configuracón > Audio & Video > Ajustes A/V y establezca una resolución correcta.\n¿Quieres mantener el vídeo a 720p?"
+msgid "This function recovers your video signal in case of loss. The video has been changed to 720p.\nIf this is your case, please keep the video at 720P and do the following:\nGo to Menu > Setup > Audio & Video > Audio & Video Settings\nNow set a correct resolution.\n\nDo you want to keep the video at 720p?"
+msgstr "Esta función recupera su señal de video en caso de pérdida. Se ha cambiado el video a 720p.\nSi este es su caso, mantenga el video a 720P y haga lo siguiente:\nVaya a Menú > Configuracón > Audio & Video > Ajustes Audio & Video\nAhora establezca una resolución correcta.\n\n¿Quieres mantener el vídeo a 720p?"
 
 msgid "This receiver cannot decode %s streams!"
 msgstr "¡Este receptor no puede decodificar %s streams!"
@@ -9961,7 +9961,7 @@ msgstr "Zapea y graba"
 msgid "zapped"
 msgstr "zapeado"
 
-msgid "Audio / Video"
+msgid "Audio & Video"
 msgstr "Audio & Video"
 
 msgid "Automatic scan"
@@ -16862,10 +16862,10 @@ msgid "Subtitle Setup"
 msgstr "Configuración Subtítulos"
 
 msgid "Audio/Video Setup"
-msgstr "Ajustes Audio Video"
+msgstr "Ajustes Audio & Video"
 
-msgid "A/V settings"
-msgstr "Ajustes A/V"
+msgid "Audio & Video Settings"
+msgstr "Ajustes Audio & Video"
 
 msgid "Storage"
 msgstr "Almacenamiento"

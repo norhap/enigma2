@@ -17,7 +17,7 @@ class VideoSetup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		# for the skin: first try VideoSetup, then Setup, this allows individual skinning
 		self.skinName = ["VideoSetup", "Setup"]
-		self.setTitle(_("A/V settings"))
+		self.setTitle(_("Audio & Video Settings"))
 		self.hw = hw
 		self.onChangedEntry = []
 
@@ -264,7 +264,7 @@ def startSetup(menuid):
 	if menuid != "video":
 		return []
 
-	return [(_("A/V settings"), videoSetupMain, "av_setup", 40)]
+	return [(_("Audio & Video Settings"), videoSetupMain, "av_setup", 40)]
 
 
 def VideoWizard(*args, **kwargs):

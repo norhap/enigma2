@@ -722,11 +722,11 @@ class Devices(Screen):
 					hddp = hddp.replace('Internal', 'ATA Bus ')
 				free = hdd.Totalfree()
 				if ((float(free) / 1024) / 1024) >= 1:
-					freeline = _("Free: ") + str(round(((float(free) / 1024) / 1024), 2)) + _("TB")
+					freeline = _("Free: ") + str(round(((float(free) / 1024) / 1024), 2)) + "TB"
 				elif (free / 1024) >= 1:
-					freeline = _("Free: ") + str(round((float(free) / 1024), 2)) + _("GB")
+					freeline = _("Free: ") + str(round((float(free) / 1024), 2)) + "GB"
 				elif free >= 1:
-					freeline = _("Free: ") + str(free) + _("MB")
+					freeline = _("Free: ") + str(free) + "MB"
 				elif "Generic(STORAGE" in hddp:
 					continue
 				else:
@@ -1072,7 +1072,7 @@ class SystemNetworkInfo(Screen):
 class SystemMemoryInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		screentitle = _("Memory")
+		screentitle = _("Memoria Ram & Flash")
 		title = screentitle
 		Screen.setTitle(self, title)
 		self.skinName = ["SystemMemoryInfo", "About"]
@@ -1092,29 +1092,52 @@ class SystemMemoryInfo(Screen):
 		})
 
 		out_lines = open("/proc/meminfo").readlines()
-		self.AboutText = _("RAM") + '\n\n'
+		self.AboutText = "RAM" + '\n\n'
 		RamTotal = "-"
 		RamFree = "-"
 		for lidx in range(len(out_lines) - 1):
 			tstLine = out_lines[lidx].split()
 			if "MemTotal:" in tstLine:
 				MemTotal = out_lines[lidx].split()
-				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1] + "\n"
+				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "," + MemTotal[1][3:5] + " GB" + "\n"
 			if "MemFree:" in tstLine:
 				MemFree = out_lines[lidx].split()
-				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1] + "\n"
+				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "," + MemFree[1][2:4] + " GB" + "\n"
 			if "Buffers:" in tstLine:
 				Buffers = out_lines[lidx].split()
-				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1] + "\n"
+				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1][0:1] + " MB" + "\n"
 			if "Cached:" in tstLine:
 				Cached = out_lines[lidx].split()
-				self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1] + "\n"
+				if Cached[1][4:5] and not Cached[1][5:6]:
+					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:2] + " MB" + "\n"
+				elif Cached[1][5:6]:
+					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:3] + " MB" + "\n"
+				else:
+					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:1] + "," + Cached[1][3:5] + " GB" + "\n"
 			if "SwapTotal:" in tstLine:
 				SwapTotal = out_lines[lidx].split()
-				self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1] + "\n"
+				if SwapTotal[1][0:3] == "0":
+					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:2] + "\n"
+				elif SwapTotal[1][3:4] and not SwapTotal[1][4:5]:
+					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:1] + " MB" + "\n"
+				elif SwapTotal[1][4:5] and not SwapTotal[1][5:6]:
+					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:2] + " MB" + "\n"
+				elif SwapTotal[1][5:6]:
+					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:3] + " MB" + "\n"
+				else:
+					self.AboutText += _("Total swap:") + "\t" + "\t" + SwapTotal[1][0:1] + "," + SwapTotal[1][3:4] + " GB" + "\n"
 			if "SwapFree:" in tstLine:
 				SwapFree = out_lines[lidx].split()
-				self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1] + "\n\n"
+				if SwapFree[1][0:3] == "0":
+					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:2] + "\n"
+				elif SwapFree[1][3:4] and not SwapFree[1][4:5]:
+					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:1] + " MB" + "\n"
+				elif SwapFree[1][4:5] and not SwapFree[1][5:6]:
+					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:2] + " MB" + "\n"
+				elif SwapFree[1][5:6]:
+					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:3] + " MB" + "\n"
+				else:
+					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:1] + "," + SwapFree[1][3:4] + " GB" + "\n"
 
 		self["actions"].setEnabled(False)
 		self.Console = Console()
@@ -1126,9 +1149,9 @@ class SystemMemoryInfo(Screen):
 		RamTotal = flash[1]
 		RamFree = flash[3]
 
-		self.AboutText += _("FLASH") + '\n\n'
-		self.AboutText += _("Total:") + "\t" + "\t" + RamTotal + "\n"
-		self.AboutText += _("Free:") + "\t" + "\t" + RamFree + "\n\n"
+		self.AboutText += "\n\nFLASH" + '\n\n'
+		self.AboutText += _("Total:") + "\t" + "\t" + RamTotal.replace('G', ' G').replace('M', ' M') + "B" + "\n"
+		self.AboutText += _("Free:") + "\t" + "\t" + RamFree.replace('G', ' G').replace('M', ' M') + "B" + "\n\n"
 
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
