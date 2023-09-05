@@ -14404,7 +14404,7 @@ msgid "Please setup the following basic configs!"
 msgstr "Por favor, configure las siguientes configuraciones básicas!"
 
 msgid "Enter"
-msgstr "Entrar"
+msgstr "Introducir cambios"
 
 msgid ""
 "\n"
@@ -15737,8 +15737,11 @@ msgstr "DLNA estricto"
 msgid "Stripes"
 msgstr "Rayas"
 
-msgid "Successfully restored /etc/inetd.conf!"
-msgstr "Restaurado correctamente /etc/inetd.conf!"
+msgid "Successfully restored /etc/inetd.conf.\n\nIPv6 is now enabled"
+msgstr "Restaurado correctamente /etc/inetd.conf.\n\nIPv6 está ahora habilitado"
+
+msgid "Successfully restored /etc/inetd.conf.\n\nIPv6 is now disabled"
+msgstr "Restaurado correctamente /etc/inetd.conf.\n\nIPv6 está ahora deshabilitado"
 
 msgid "Telnet"
 msgstr "Telnet"

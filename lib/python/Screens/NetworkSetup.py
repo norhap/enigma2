@@ -35,13 +35,13 @@ import glob
 import fnmatch
 from Components.ScrollLabel import ScrollLabel
 
+MAC_WILDCARD_FILE = "/etc/enigma2/hwmac"
 macaddress = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_LINK][0])["addr"].upper())
 config.macaddress = ConfigSubsection()
 config.macaddress.interfaces = ConfigSelection(default="1", choices=[("1", "eth0")])
 config.macaddress.mac = ConfigText(default="", fixed_size=False)
 config.macaddress.change = ConfigText(default="%s" % macaddress)
 configmac = config.macaddress
-
 # Define a function to determine whether a service is configured to start at boot time.
 # This checks for a start file in rc2.d (rc4.d might be more appropriate, but historically it's been rc2.d, so...).
 
@@ -49,7 +49,6 @@ configmac = config.macaddress
 def ServiceIsEnabled(service_name):
 	starter_list = glob.glob("/etc/rc2.d/S*" + service_name)
 	return len(starter_list) > 0
-
 # Lets have some global functions to reduce python code
 
 
@@ -429,14 +428,14 @@ class MACSettings(Setup):
 
 	def macCurrent(self):
 		macaddress = configmac.mac.value
-		macdata = open("/etc/enigma2/hwmac", "w")
+		macdata = open(MAC_WILDCARD_FILE, "w")
 		macdata.write(macaddress)
 		macdata.close()
 
 	def writereadMAC(self):
 		configmac.mac.value = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_LINK][0])["addr"].upper())
 		self.macCurrent()
-		with open("/etc/enigma2/hwmac") as hwmac:
+		with open(MAC_WILDCARD_FILE) as hwmac:
 			self.macUpdated = hwmac.read()
 
 		configmac.change.value = str(self.macUpdated.upper().strip())
@@ -456,10 +455,19 @@ class MACSettings(Setup):
 					CurrentIP = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_INET][0])["addr"])
 				except:
 					CurrentIP = "unknown"
+					if exists(MAC_WILDCARD_FILE):
+						Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 				self.session.open(MessageBox, _("MAC address successfully changed.\nNew MAC address: ") + configmac.change.value + "\nIP: " + CurrentIP, MessageBox.TYPE_INFO, timeout=10)
+				if exists(MAC_WILDCARD_FILE):
+					Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 				self.close()
 			else:
+				if exists(MAC_WILDCARD_FILE):
+					Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 				self.session.open(MessageBox, _("Not valide MAC address"), MessageBox.TYPE_INFO, timeout=10)
+		else:
+			if exists(MAC_WILDCARD_FILE):
+				Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 
 	def checkInterfaces(self):
 		with open("/etc/network/interfaces", "r") as interfaces:
@@ -480,6 +488,8 @@ class MACSettings(Setup):
 			interfaceswrite.close()
 
 	def keyCancel(self):
+		if exists(MAC_WILDCARD_FILE):
+			Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 		self.close()
 
 
@@ -488,26 +498,21 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		Screen.setTitle(self, _("IPv6 support"))
-
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_blue"] = StaticText(_("Restore inetd"))
-
 		self["introduction"] = StaticText(_("Enable or disable IPv6"))
-
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.keyCancel, _("Exit IPv6 configuration")),
 			"ok": (self.ok, _("Activate IPv6 configuration")),
 			})
-
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.keyCancel, _("Exit IPv6 configuration")),
 			"green": (self.ok, _("Activate IPv6 configuration")),
 			"blue": (self.restoreinetdData2, _("Restore inetd.conf")),
 			})
-
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
@@ -516,12 +521,11 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 			"left": self.keyLeft,
 			"right": self.keyRight
 		}, -2)
-
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
 		if exists(disable_ipv6):
-			status_ipv6 = open("/proc/sys/net/ipv6/conf/all/disable_ipv6", "r").read()
+			status_ipv6 = open(disable_ipv6).read()
 			if int(status_ipv6) == 1:
 				self.ipv6 = False
 				print("[NetworkSetup] IPv6 is deactived")
@@ -544,7 +548,6 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		if self.IPv6ConfigEntry.value == True:
 			sockTypetcp = "tcp6"
 			sockTypeudp = "udp6"
-
 		inetdData = "# /etc/inetd.conf:  see inetd(8) for further informations.\n"
 		inetdData += "#\n"
 		inetdData += "# Internet server configuration database\n"
@@ -574,13 +577,14 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 			inetdData += "#netbios-ns	dgram	" + sockTypeudp + "	wait	root	/usr/sbin/nmbd	nmbd\n"
 		if fileExists("/usr/bin/streamproxy"):
 			inetdData += "8001	stream	" + sockTypetcp + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
-
 		if fileExists("/usr/bin/transtreamproxy"):
 			inetdData += "8002	stream	" + sockTypetcp + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
-
 		open("/etc/inetd.conf", "w").write(inetdData)
-
-		self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf!"), type=MessageBox.TYPE_INFO, timeout=10)
+		enable_ipv6 = "/etc/enigma2/ipv6"
+		if exists(enable_ipv6):
+			self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf.\n\nIPv6 is now enabled"), type=MessageBox.TYPE_INFO, timeout=10)
+		else:
+			self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf.\n\nIPv6 is now disabled"), type=MessageBox.TYPE_INFO, timeout=10)
 
 	def ok(self):
 		enable_ipv6 = "/etc/enigma2/ipv6"
@@ -596,7 +600,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 				with open(disable_ipv6, "w") as fd:
 					fd.write("0")
 				with open(enable_ipv6, "w") as fd:
-					fd.write("0")
+					fd.write("1")
 				print("[NetworkSetup] IPv6 is now actived")
 		self.restoreinetdData2()
 
