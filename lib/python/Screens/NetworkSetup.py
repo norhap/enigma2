@@ -618,7 +618,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 class InetdRecovery(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Inetd recovery"))
+		Screen.setTitle(self, _("Inetd Recovery"))
 		self["key_red"] = Label(_("Cancel"))
 		self["key_blue"] = Label(_("Recover"))
 		self["introduction"] = Label(_("Use config file /etc/\"inetd.conf\" in mode IPv6 compatible with IPv4."))

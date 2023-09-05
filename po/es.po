@@ -15513,7 +15513,7 @@ msgstr "Inadyn log"
 msgid "Inadyn setup"
 msgstr "Configurar Inadyn"
 
-msgid "Inetd recovery"
+msgid "Inetd Recovery"
 msgstr "Recuperación Inetd"
 
 msgid "Inotify monitoring"
