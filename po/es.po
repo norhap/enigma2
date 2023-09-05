@@ -8216,11 +8216,11 @@ msgstr "Códecvideo, tamaño formato"
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-msgid "View as grid"
-msgstr "Ver como cuadrícula"
+msgid "Grid mode"
+msgstr "Modo cuadrícula"
 
-msgid "View as list"
-msgstr "Ver como lista"
+msgid "List mode"
+msgstr "Modo lista"
 
 msgid "View Rass interactive..."
 msgstr "Ver Rass interactivo…"

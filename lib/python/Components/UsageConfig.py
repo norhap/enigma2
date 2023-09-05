@@ -166,9 +166,9 @@ def InitUsageConfig():
 		("user", _("User defined")),
 		("user_hidden", _("User defined hidden"))
 	])
-	config.usage.pluginListLayout = ConfigSelection(default="grid", choices=[
-		("list", _("View as list")),
-		("grid", _("View as grid"))
+	config.usage.pluginListLayout = ConfigSelection(default="gridmode", choices=[
+		("gridmode", _("Grid mode")),
+		("listmode", _("List mode"))
 	])
 	if MODEL.startswith("bey"):
 		config.usage.show_genre_info = ConfigYesNo(default=True)
