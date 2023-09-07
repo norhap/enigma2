@@ -7443,6 +7443,9 @@ msgstr "Actualmente no hay acciones pendientes."
 msgid "There are no updates available."
 msgstr "No hay actualizaciones disponibles."
 
+msgid "There is no service with this number"
+msgstr "No existe canal con este número"
+
 msgid "There is no signal to lock on !"
 msgstr "¡No hay señal para bloquear!"
 
@@ -8247,7 +8250,7 @@ msgid "View list of available default settings"
 msgstr "Ver lista de listas de canales disponibles"
 
 msgid "View list of available display and userinterface extensions."
-msgstr "Ver lista de extensiones de pantalla e interfaz de usuario disponibles."
+msgstr "Ver la lista de extensiones de interfaz de usuario y visualización disponibles."
 
 msgid "View list of available multimedia extensions."
 msgstr "Ver lista de extensiones de multimedia disponibles."
@@ -10199,7 +10202,7 @@ msgid "Configure if behind the subtitles a background is shown."
 msgstr "Configure si detrás de los subtítulos se muestra un fondo."
 
 msgid "Configure if service picons will be shown in display (when supported by the skin)."
-msgstr "Configure si los picons de canal se mostrarán en la pantalla (cuando lo admita el skin)."
+msgstr "Configure si los picons de canal se mostrarán en el display (cuando lo admita el skin)."
 
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr "Configure si los picons de canal se mostrarán en la lista de canales."
@@ -10418,13 +10421,13 @@ msgid "Delay for external subtitles"
 msgstr "Retardo para subtítulos externos"
 
 msgid "Delay in miliseconds after finish scrolling text on display."
-msgstr "Retardo en milisegundos después de finalizar el desplazamiento del texto en pantalla."
+msgstr "Retardo en milisegundos después de finalizar el desplazamiento del texto en display."
 
 msgid "Delay in miliseconds before start of scrolling text on display."
-msgstr "Retardo en milisegundos antes de comenzar el desplazamiento del texto en pantalla."
+msgstr "Retardo en milisegundos antes de comenzar el desplazamiento del texto en display."
 
 msgid "Delay in miliseconds between scrolling characters on display."
-msgstr "Retardo en milisegundos entre el desplazamiento del caracteres en pantalla."
+msgstr "Retardo en milisegundos entre el desplazamiento del caracteres en display."
 
 msgid "Descramble receiving http streams"
 msgstr "Descifrar recibiendo streams http"
@@ -10547,7 +10550,7 @@ msgid "Hide zap errors"
 msgstr "Ocultar errores de zapeo"
 
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
-msgstr "Si está habilitado, la pantalla muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
+msgstr "Si está habilitado, el display muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
 
 msgid "Ignore DVB-C namespace sub network"
 msgstr "Ignorar DVB-C espacio de nombres subred"
@@ -10625,7 +10628,7 @@ msgid "Number of channels shown in channel selection list"
 msgstr "Número de canales que se muestran en la lista de canales"
 
 msgid "Number of repeating text on display."
-msgstr "Número de texto repetido en pantalla."
+msgstr "Número de texto repetido en display."
 
 msgid "OSD Setup"
 msgstr "Ajustes OSD"
@@ -10638,9 +10641,6 @@ msgstr "En ONID válidos, ignore la parte de la frecuencia de subred"
 
 msgid "Position of completed timers in timerlist"
 msgstr "Posición de temporizadores completados en lista de temporizadores"
-
-msgid "Power on display"
-msgstr "Encender pantalla"
 
 msgid "Prefer AC3 track"
 msgstr "Preferir pista AC3"
@@ -10802,7 +10802,7 @@ msgid "Show picons in channel selection list"
 msgstr "Mostrar picons en la lista de canales"
 
 msgid "Show picons in display"
-msgstr "Mostrar picons en pantalla"
+msgstr "Mostrar picons en display"
 
 msgid "Show positioner movement"
 msgstr "Mostrar movimiento del motor"
@@ -10833,9 +10833,6 @@ msgstr "Mostrar configuración de softcam en menú de extensiones"
 
 msgid "Show status icons in movielist"
 msgstr "Mostrar iconos de status en lista de películas"
-
-msgid "Show symbols on display"
-msgstr "Mostrar símbolos en pantalla"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar advertencia al detener timeshift"
@@ -10924,14 +10921,8 @@ msgstr "Esta opción le permite elegir si desea mostrar o no información de gé
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus"
 msgstr "Esta opción le permite ocultar y ordenar las entradas del menú. Al seleccionar 'definido por el usuario', puede cambiar el orden y ocultar los elementos del menú mediante el botón azul. Si NO está 'definido por el usuario', el botón azul NO se muestra en los menús"
 
-msgid "This option allows you to power off the display."
-msgstr "Esta opción te permite apagar la pantalla."
-
-msgid "This option allows you to show all symbols on the display."
-msgstr "Esta opción le permite mostrar todos los símbolos en la pantalla."
-
-msgid "This option allows you to show menu number quick links."
-msgstr "Esta opción le permite mostrar números que accederán directos al menú."
+msgid "This option allows you to Power Off the display."
+msgstr "Esta opción te permite apagar el display."
 
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Esta opción le permite mostrar la ruta de pantalla completa que conduce a la pantalla actual."
@@ -13860,9 +13851,6 @@ msgstr "Configurar la historia de Zap:"
 msgid "Show duration events"
 msgstr "Mostrar duración de eventos"
 
-msgid "Show panel buttons on display"
-msgstr "Mostrar los botones del panel en la pantalla"
-
 msgid "Show warning message before action"
 msgstr "Mostrar mensaje de advertencia antes de la acción"
 
@@ -14894,7 +14882,7 @@ msgid "Disable the HDD Process on VFD."
 msgstr "Deshabilite el proceso HDD en VFD."
 
 msgid "Show HDMI Output Resulution."
-msgstr "Mostrar resolución HDMI en display."
+msgstr "Muestra la resolución de salida HDMI."
 
 msgid "LED color during normal operations"
 msgstr "Color del LED durante las operaciones normales"
@@ -14936,7 +14924,7 @@ msgid "real recordings or streaming"
 msgstr "grabaciones reales o streaming"
 
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
-msgstr "Configure si el símbolo de 'grabación' (en el aspecto de la pantalla y en el aspecto de la pantalla LCD) es visible solo para grabaciones reales o también para grabaciones de streaming y falsas (por ejemplo, EPGrefresh)."
+msgstr "Configure si el símbolo de 'grabación' (en el skin display y en el skin LCD) es visible solo para grabaciones reales o también para grabaciones de streaming y falsas (por ejemplo, EPGrefresh)."
 
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr "Seleccione el protocolo utilizado por su dispositivo SCR. Las opciones son 'SCR Unicable' (Unicable) o 'SCR JESS' (JESS, también conocido como Unicable II)."
@@ -15207,7 +15195,7 @@ msgid "Teletext font and resolution"
 msgstr "Fuente y resolución de teletexto"
 
 msgid "Configure the display resolution and the font used for teletext."
-msgstr "Configure la resolución del display y la fuente utilizada para el teletexto."
+msgstr "Configure la resolución de pantalla y la fuente utilizada para el teletexto."
 
 msgid "TrueType font (HD)"
 msgstr "Fuente (HD)"
@@ -15316,18 +15304,6 @@ msgstr "Símbolo REC en reposo"
 
 msgid "Configure how to show REC symbol in standby (this needs an enigma2 restart)."
 msgstr "Configurar cómo mostrar el símbolo REC en standby (esto necesita un reinicio de enigma2)."
-
-msgid "This option allows you to Power Off the display."
-msgstr "Esta opción le permite apagar la pantalla display."
-
-msgid "PowerControl front display normal mode"
-msgstr "Control Encendido display en modo normal"
-
-msgid "PowerControl front display standby mode"
-msgstr "Control Encendido display en modo reposo"
-
-msgid "PowerControl front display suspend mode"
-msgstr "Control Encendido display en modo reposo profundo"
 
 msgid "Show in Standby"
 msgstr "Mostrar en standby"
@@ -15737,11 +15713,11 @@ msgstr "DLNA estricto"
 msgid "Stripes"
 msgstr "Rayas"
 
-msgid "Successfully restored /etc/inetd.conf.\n\nIPv6 is now enabled"
-msgstr "Restaurado correctamente /etc/inetd.conf.\n\nIPv6 está ahora habilitado"
+msgid "Successfully restored /etc/inetd.conf\n\nIPv6 is now enabled"
+msgstr "Restaurado correctamente /etc/inetd.conf\n\nIPv6 está ahora habilitado"
 
-msgid "Successfully restored /etc/inetd.conf.\n\nIPv6 is now disabled"
-msgstr "Restaurado correctamente /etc/inetd.conf.\n\nIPv6 está ahora deshabilitado"
+msgid "Successfully restored /etc/inetd.conf\n\nIPv6 is now disabled"
+msgstr "Restaurado correctamente /etc/inetd.conf\n\nIPv6 está ahora deshabilitado"
 
 msgid "Telnet"
 msgstr "Telnet"
@@ -16025,7 +16001,7 @@ msgid "Overwrite configuration files during software update?"
 msgstr "Sobrescribir archivos de configuración durante la actualización de software?"
 
 msgid "Really update the front panel and reboot now?"
-msgstr "Realmente actualizar el display y reiniciar ahora?"
+msgstr "Realmente actualizar el panel frontal y reiniciar ahora?"
 
 msgid "Really update the frontprocessor and reboot now?"
 msgstr "Realmente actualizar el procesador frontal y reiniciar ahora?"
@@ -16379,7 +16355,7 @@ msgid "Use the alternative screen"
 msgstr "Usar una pantalla alternativa para lista de peliculas"
 
 msgid "Use adaptive date display"
-msgstr "Usar display con fecha adaptativa"
+msgstr "Usar visualización con fecha adaptativa"
 
 msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'. It hides the year for recordings made this year. It hides the day of the week for recordings made in previous years."
 msgstr "La visualización de fecha adaptable permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
@@ -16580,7 +16556,7 @@ msgid "Power LED state when running."
 msgstr "Estado del LED de encendido cuando está en marcha."
 
 msgid "Power On Display"
-msgstr "Encendido de pantalla display"
+msgstr "Encender display"
 
 msgid "Swap EN300743 mapping table"
 msgstr "Intercambiar mapeo de la tabla EN300743"
@@ -16704,12 +16680,6 @@ msgstr "Seleccione el modo pantalla deseado..."
 
 msgid "Please select a resolution..."
 msgstr "Seleccione resolución..."
-
-msgid "Number of digits in channel number"
-msgstr "Número de dígitos en número de canal"
-
-msgid "This allows you to set the number of digits you can input when selecting channels using number input."
-msgstr "Esto le permite establecer el número de dígitos que puede ingresar al seleccionar canales mediante el ingreso de números."
 
 msgid "Log python stack trace on spinner"
 msgstr "Seguimiento de registro con spinner (ruleta)"
@@ -16982,22 +16952,22 @@ msgid "Operating LED status while running"
 msgstr "Estado del LED en funcionamiento"
 
 msgid "Switch on the display during Standby Mode"
-msgstr "Encender la pantalla en standby"
+msgstr "Encender el display en standby"
 
 msgid "Switch on the display during Suspend Mode"
-msgstr "Encender la pantalla durante reposo profundo"
+msgstr "Encender el display durante reposo profundo"
 
 msgid "Switch on the display during operation"
-msgstr "Encender la pantalla durante el funcionamiento"
+msgstr "Encender el display durante el funcionamiento"
 
 msgid "With this option you can switch on the display during operation."
-msgstr "Con esta opción puede encender la pantalla durante el funcionamiento."
+msgstr "Con esta opción puede encender el display durante el funcionamiento."
 
 msgid "With this option you can switch on the display in Deep Standby Mode."
-msgstr "Con esta opción puede encender la pantalla en reposo profundo."
+msgstr "Con esta opción puede encender el display en reposo profundo."
 
 msgid "With this option you can switch on the display in Standby Mode."
-msgstr "Con esta opción puede encender la pantalla en standby."
+msgstr "Con esta opción puede encender el display en standby."
 
 msgid "Set the scrolling speed of text on the front panel display."
 msgstr "Configure la velocidad de desplazamiento del texto en display."
