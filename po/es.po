@@ -5525,7 +5525,7 @@ msgid "Reflash recommended!"
 msgstr "Reflasheo recomendado!"
 
 msgid "Refresh"
-msgstr "Refrescar"
+msgstr "Actualizar"
 
 msgid "Refresh rate"
 msgstr "Frecuencia de actualización"
