@@ -617,6 +617,9 @@ msgstr "Activar PiP"
 msgid "Activate current configuration"
 msgstr "Activar configuración actual"
 
+msgid "Activate movement"
+msgstr "Activar movimiento"
+
 msgid "Activate timeshift End"
 msgstr "Activar final de Timeshift"
 
@@ -1855,6 +1858,9 @@ msgstr "Danés"
 
 msgid "Date"
 msgstr "Fecha"
+
+msgid "Deactivate movement"
+msgstr "Desactivar movimiento"
 
 msgid "Date/time input"
 msgstr "Entrada de fecha/hora"
@@ -4129,12 +4135,6 @@ msgstr "Modo"
 msgctxt "Video output mode"
 msgid "Mode"
 msgstr "Modo"
-
-msgid "Move Mode Off"
-msgstr "Desactivar movimiento"
-
-msgid "Move Mode On"
-msgstr "Activar movimiento"
 
 msgid "Model"
 msgstr "Modelo"
@@ -8989,7 +8989,7 @@ msgid "disable intro screen"
 msgstr "desactivar la pantalla de introducción"
 
 msgid "Disable move mode"
-msgstr "Desactivar movimiento"
+msgstr "Desactivar modo movimiento"
 
 msgid "disabled"
 msgstr "desactivado"

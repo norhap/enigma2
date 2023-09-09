@@ -858,8 +858,10 @@ class SystemNetworkInfo(Screen):
 			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (GB)" + "\n"
 		elif rx_bytes[10:11] and not rx_bytes[10:12]:
 			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (GB)" + "\n"
-		else:
+		elif rx_bytes[10:12] and not rx_bytes[10:13]:
 			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (GB)" + "\n"
+		else:
+			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (TB)" + "\n"
 		if tx_bytes[4:5] and not tx_bytes[5:6]:
 			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (KB)" + "\n"
 		elif tx_bytes[5:6] and not tx_bytes[6:7]:
