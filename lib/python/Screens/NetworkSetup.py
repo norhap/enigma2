@@ -42,10 +42,11 @@ config.macaddress.interfaces = ConfigSelection(default="1", choices=[("1", "eth0
 config.macaddress.mac = ConfigText(default="", fixed_size=False)
 config.macaddress.change = ConfigText(default="%s" % macaddress)
 configmac = config.macaddress
+disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
+
+
 # Define a function to determine whether a service is configured to start at boot time.
 # This checks for a start file in rc2.d (rc4.d might be more appropriate, but historically it's been rc2.d, so...).
-
-
 def ServiceIsEnabled(service_name):
 	starter_list = glob.glob("/etc/rc2.d/S*" + service_name)
 	return len(starter_list) > 0
@@ -424,6 +425,7 @@ class MACSettings(Setup):
 			"cancel": self.keyCancel,
 			"ok": self.ok,
 		}, -2)
+		self.iface = "eth0"
 		self.writereadMAC()
 
 	def macCurrent(self):
@@ -433,11 +435,10 @@ class MACSettings(Setup):
 		macdata.close()
 
 	def writereadMAC(self):
-		configmac.mac.value = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_LINK][0])["addr"].upper())
+		configmac.mac.value = str(dict(netifaces.ifaddresses(str(self.iface))[netifaces.AF_LINK][0])["addr"].upper())
 		self.macCurrent()
 		with open(MAC_WILDCARD_FILE) as hwmac:
 			self.macUpdated = hwmac.read()
-
 		configmac.change.value = str(self.macUpdated.upper().strip())
 
 	def ok(self):
@@ -448,13 +449,13 @@ class MACSettings(Setup):
 		if answer:
 			if re.match("\w{2}:\w{2}:\w{2}:\w{2}:\w{2}:\w{2}", configmac.change.value):
 				configmac.change.save()
-				self.Console.ePopen("ifconfig eth0 down && ifconfig eth0 down hw ether " + str(configmac.change.value) + " ifconfig eth0 up")
+				self.Console.ePopen("ifconfig " + str(self.iface) + " down && ifconfig " + str(self.iface) + " down hw ether " + str(configmac.change.value) + " ifconfig " + str(self.iface) + " up")
 				self.checkInterfaces()
-				self.Console.ePopen("ifdown -v -f eth0; ifup -v eth0")
+				self.Console.ePopen("ifdown -v -f " + str(self.iface) + "; ifup -v " + str(self.iface))
 				try:
-					CurrentIP = str(dict(netifaces.ifaddresses("eth0")[netifaces.AF_INET][0])["addr"])
+					CurrentIP = str(dict(netifaces.ifaddresses(str(self.iface))[netifaces.AF_INET][0])["addr"])
 				except:
-					CurrentIP = "unknown"
+					CurrentIP = _("unknown")
 					if exists(MAC_WILDCARD_FILE):
 						Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 				self.session.open(MessageBox, _("MAC address successfully changed.\nNew MAC address: ") + configmac.change.value + "\nIP: " + CurrentIP, MessageBox.TYPE_INFO, timeout=10)
@@ -497,57 +498,61 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		Screen.setTitle(self, _("IPv6 support"))
+		Screen.setTitle(self, _("Enable or Disable IPv6"))
+		self.sockTypetcp = "tcp"
+		self.sockTypeudp = "udp"
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-		self["key_blue"] = StaticText(_("Restore inetd"))
-		self["introduction"] = StaticText(_("Enable or disable IPv6"))
+		self["key_blue"] = StaticText(_("Inetd default"))
+		self["introduction"] = StaticText(_("Enable or disable IPv6.\nButton BLUE set file inetd.conf default (mode IPv4)."))
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
-			"cancel": (self.keyCancel, _("Exit IPv6 configuration")),
-			"ok": (self.ok, _("Activate IPv6 configuration")),
+			"cancel": (self.keyCancel, _("Exit IPv6 settings")),
+			"ok": (self.keySave, _("Save IPv6 settings")),
 			})
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
-			"red": (self.keyCancel, _("Exit IPv6 configuration")),
-			"green": (self.ok, _("Activate IPv6 configuration")),
-			"blue": (self.restoreinetdData2, _("Restore inetd.conf")),
+			"red": (self.keyCancel, _("Exit IPv6 settings")),
+			"green": (self.keySave, _("Save IPv6 settings")),
+			"blue": (self.resetInetdData, _("Inetd default")),
 			})
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"cancel": self.keyCancel,
-			"ok": self.ok,
-			"save": self.ok,
+			"ok": self.keySave,
+			"save": self.keySave,
 			"left": self.keyLeft,
 			"right": self.keyRight
 		}, -2)
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
-		disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
-		if exists(disable_ipv6):
-			status_ipv6 = open(disable_ipv6).read()
-			if int(status_ipv6) == 1:
-				self.ipv6 = False
-				print("[NetworkSetup] IPv6 is deactived")
-			else:
-				self.ipv6 = True
-				print("[NetworkSetup] IPv6 is actived")
+		status_ipv6 = open(disable_ipv6).read()
+		if int(status_ipv6) == 1:
+			self.ipv6 = False
+			print("[NetworkSetup] IPv6 is deactived")
+		else:
+			self.ipv6 = True
+			print("[NetworkSetup] IPv6 is actived")
 		self.IPv6ConfigEntry = NoSave(ConfigYesNo(default=self.ipv6 or False))
-		self.createSetup()
+		self.createConfig()
 
-	def createSetup(self):
+	def createConfig(self):
 		self.list = []
 		self.IPv6Entry = getConfigListEntry(_("IPv6 support"), self.IPv6ConfigEntry)
 		self.list.append(self.IPv6Entry)
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
-	def restoreinetdData2(self):
-		sockTypetcp = "tcp"
-		sockTypeudp = "udp"
+	def resetInetdData(self):
+		self.writeInetdData()
+
+	def setDataInetd(self):
 		if self.IPv6ConfigEntry.value == True:
-			sockTypetcp = "tcp6"
-			sockTypeudp = "udp6"
+			self.sockTypetcp = "tcp6"
+			self.sockTypeudp = "udp6"
+		self.writeInetdData()
+
+	def writeInetdData(self):
 		inetdData = "# /etc/inetd.conf:  see inetd(8) for further informations.\n"
 		inetdData += "#\n"
 		inetdData += "# Internet server configuration database\n"
@@ -558,37 +563,43 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		inetdData += "# <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>\n"
 		inetdData += "#\n"
 		inetdData += "#:INTERNAL: Internal services\n"
-		inetdData += "#echo	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#echo	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#chargen	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#chargen	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#discard	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#discard	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#daytime	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#daytime	dgram	" + sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#echo	stream	" + self.sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#echo	dgram	" + self.sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#chargen	stream	" + self.sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#chargen	dgram	" + self.sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#discard	stream	" + self.sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#discard	dgram	" + self.sockTypeudp + "	wait	root	internal\n"
+		inetdData += "#daytime	stream	" + self.sockTypetcp + "	nowait	root	internal\n"
+		inetdData += "#daytime	dgram	" + self.sockTypeudp + "	wait	root	internal\n"
 		inetdData += "#time	stream	tcp	nowait	root	internal\n"
-		inetdData += "#time	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "ftp	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
-		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	ftpd	ftpd -w /\n"
-		inetdData += "telnet	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
+		inetdData += "#time	dgram	" + self.sockTypeudp + "	wait	root	internal\n"
+		inetdData += "ftp	stream	" + self.sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
+		inetdData += "#ftp	stream	" + self.sockTypetcp + "	nowait	root	ftpd	ftpd -w /\n"
+		inetdData += "telnet	stream	" + self.sockTypetcp + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
 		if fileExists("/usr/sbin/smbd"):
-			inetdData += "#microsoft-ds	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/smbd	smbd\n"
+			inetdData += "#microsoft-ds	stream	" + self.sockTypetcp + "	nowait	root	/usr/sbin/smbd	smbd\n"
 		if fileExists("/usr/sbin/nmbd"):
-			inetdData += "#netbios-ns	dgram	" + sockTypeudp + "	wait	root	/usr/sbin/nmbd	nmbd\n"
+			inetdData += "#netbios-ns	dgram	" + self.sockTypeudp + "	wait	root	/usr/sbin/nmbd	nmbd\n"
 		if fileExists("/usr/bin/streamproxy"):
-			inetdData += "8001	stream	" + sockTypetcp + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
+			inetdData += "8001	stream	" + self.sockTypetcp + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
 		if fileExists("/usr/bin/transtreamproxy"):
-			inetdData += "8002	stream	" + sockTypetcp + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
+			inetdData += "8002	stream	" + self.sockTypetcp + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
 		open("/etc/inetd.conf", "w").write(inetdData)
 		enable_ipv6 = "/etc/enigma2/ipv6"
 		if exists(enable_ipv6):
-			self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf\n\nIPv6 is now enabled"), type=MessageBox.TYPE_INFO, timeout=10)
+			self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf\n\nIPv6 is enabled"), type=MessageBox.TYPE_INFO, timeout=10)
 		else:
-			self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf\n\nIPv6 is now disabled"), type=MessageBox.TYPE_INFO, timeout=10)
+			self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf\n\nIPv6 is disabled"), type=MessageBox.TYPE_INFO, timeout=10)
+		self.inetdRestart()
+		self.close()
 
-	def ok(self):
+	def inetdRestart(self):
+		commands = []
+		if fileExists("/etc/init.d/inetd.busybox"):
+			commands.append('/etc/init.d/inetd.busybox restart')
+
+	def keySave(self):
 		enable_ipv6 = "/etc/enigma2/ipv6"
-		disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
 		if self.IPv6ConfigEntry.value == False and exists(disable_ipv6):
 			with open(disable_ipv6, "w") as fd:
 				fd.write("1")
@@ -596,104 +607,23 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 			if exists(enable_ipv6):
 				Console().ePopen('rm %s' % enable_ipv6)
 		else:
-			if exists(disable_ipv6):
-				with open(disable_ipv6, "w") as fd:
-					fd.write("0")
-				with open(enable_ipv6, "w") as fd:
-					fd.write("1")
-				print("[NetworkSetup] IPv6 is now actived")
-		self.restoreinetdData2()
-
-	def run(self):
-		self.ok()
+			with open(disable_ipv6, "w") as fd:
+				fd.write("0")
+			with open(enable_ipv6, "w") as fd:
+				fd.write("1")
+			print("[NetworkSetup] IPv6 is now actived")
+		self.setDataInetd()
 
 	def keyCancel(self):
-		self.close()
+		ConfigListScreen.keyCancel(self)
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
+		self.createConfig()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
-
-
-class InetdRecovery(Screen, ConfigListScreen):
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		Screen.setTitle(self, _("Inetd Recovery"))
-		self["key_red"] = Label(_("Cancel"))
-		self["key_blue"] = Label(_("Recover"))
-		self["introduction"] = Label(_("Use config file /etc/\"inetd.conf\" in mode IPv6 compatible with IPv4."))
-		self.list = []
-
-		self.ipv6 = NoSave(ConfigYesNo(default=False))
-		self.list.append(getConfigListEntry(_("IPv6"), self.ipv6))
-
-		ConfigListScreen.__init__(self, self.list)
-
-		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"], {
-			"cancel": (self.close, _("Exit inetd recovery"))
-		})
-		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"], {
-			"red": (self.close, _("Exit inetd recovery")),
-			"blue": (self.keyBlue, _("Recover inetd")),
-		})
-
-	def keyBlue(self):
-		self.IPv6ConfigEntry = NoSave(ConfigYesNo(default=self.ipv6 or False))
-		if self.IPv6ConfigEntry.value == False:
-			sockTypetcp = "tcp"
-			sockTypeudp = "udp"
-		else:
-			sockTypetcp = "tcp6"
-			sockTypeudp = "udp6"
-
-		inetdData = "# /etc/inetd.conf:  see inetd(8) for further informations.\n"
-		inetdData += "#\n"
-		inetdData += "# Internet server configuration database\n"
-		inetdData += "#\n"
-		inetdData += "# If you want to disable an entry so it isn't touched during\n"
-		inetdData += "# package updates just comment it out with a single '#' character.\n"
-		inetdData += "#\n"
-		inetdData += "# <service_name> <sock_type> <proto> <flags> <user> <server_path> <args>\n"
-		inetdData += "#\n"
-		inetdData += "#:INTERNAL: Internal services\n"
-		inetdData += "#echo	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#echo	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#chargen	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#chargen	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#discard	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#discard	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#daytime	stream	" + sockTypetcp + "	nowait	root	internal\n"
-		inetdData += "#daytime	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "#time	stream	tcp	nowait	root	internal\n"
-		inetdData += "#time	dgram	" + sockTypeudp + "	wait	root	internal\n"
-		inetdData += "ftp	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/vsftpd	vsftpd\n"
-		inetdData += "#ftp	stream	" + sockTypetcp + "	nowait	root	ftpd	ftpd -w /\n"
-		inetdData += "telnet	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/telnetd	telnetd\n"
-		if fileExists("/usr/sbin/smbd"):
-			inetdData += "#microsoft-ds	stream	" + sockTypetcp + "	nowait	root	/usr/sbin/smbd	smbd\n"
-		if fileExists("/usr/sbin/nmbd"):
-			inetdData += "#netbios-ns	dgram	" + sockTypeudp + "	wait	root	/usr/sbin/nmbd	nmbd\n"
-		if fileExists("/usr/bin/streamproxy"):
-			inetdData += "8001	stream	" + sockTypetcp + "	nowait	root	/usr/bin/streamproxy	streamproxy\n"
-
-		if fileExists("/usr/bin/transtreamproxy"):
-			inetdData += "8002	stream	" + sockTypetcp + "	nowait	root	/usr/bin/transtreamproxy	transtreamproxy\n"
-
-		open("/etc/inetd.conf", "w").write(inetdData)
-
-		self.inetdRestart()
-
-		self.session.open(MessageBox, _("Successfully restored /etc/inetd.conf!"), type=MessageBox.TYPE_INFO, timeout=10)
-		self.close()
-
-	def inetdRestart(self):
-		commands = []
-		if fileExists("/etc/init.d/inetd.busybox"):
-			commands.append('/etc/init.d/inetd.busybox restart')
+		self.createConfig()
 
 
 class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
@@ -1156,9 +1086,9 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self.session.open(NetworkAdapterTest, self.iface)
 		if self["menulist"].getCurrent()[1] == 'dns':
 			self.session.open(DNSSettings)
-		if self["menulist"].getCurrent()[1] == 'mac':
+		if self["menulist"].getCurrent()[1] == 'mac' and not iNetwork.isWirelessInterface(self.iface):
 			self.session.open(MACSettings)
-		if self["menulist"].getCurrent()[1] == 'ipv6':
+		if self["menulist"].getCurrent()[1] == 'ipv6' and exists(disable_ipv6):
 			self.session.open(IPv6Setup)
 		if self["menulist"].getCurrent()[1] == 'scanwlan':
 			try:
@@ -1227,10 +1157,10 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self["description"].setText(_("Use the network wizard to configure your network\n") + self.oktext)
 		if self["menulist"].getCurrent()[1][0] == 'extendedSetup':
 			self["description"].setText(_(self["menulist"].getCurrent()[1][1]) + self.oktext)
-		if self["menulist"].getCurrent()[1] == 'mac':
+		if self["menulist"].getCurrent()[1] == 'mac' and not iNetwork.isWirelessInterface(self.iface):
 			self["description"].setText(_("Set the MAC address of your receiver.\n") + self.oktext)
-		if self["menulist"].getCurrent()[1] == 'ipv6':
-			self["description"].setText(_("Enable/Disable IPv6 support of your receiver.\n") + self.oktext)
+		if self["menulist"].getCurrent()[1] == 'ipv6' and exists(disable_ipv6):
+			self["description"].setText(_("Enable or disable IPv6 support of your receiver.\n") + self.oktext)
 
 	def updateStatusbar(self, data=None):
 		self.mainmenu = self.genMainMenu()
@@ -1287,10 +1217,10 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 
 		if exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			menu.append((_("Network wizard"), "openwizard"))
-		if self.iface == 'eth0':
-			menu.append((_("Enable/Disable IPv6"), "ipv6"))
-		menu.append((_("MAC Address Setup"), "mac"))  # with this ident we collect MAC settings for wlan0 and eth0.
-
+		if exists(disable_ipv6):
+			menu.append((_("Enable or Disable IPv6"), "ipv6"))
+		if not iNetwork.isWirelessInterface(self.iface):
+			menu.append((_("MAC Address Setup"), "mac"))  # MAC only with eth0.
 		return menu
 
 	def AdapterSetupClosed(self, *ret):

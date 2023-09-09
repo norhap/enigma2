@@ -15386,8 +15386,8 @@ msgstr "Configurar AFP"
 msgid "AFP setup"
 msgstr "Configurar AFP"
 
-msgid "Activate IPv6 configuration"
-msgstr "Activar la configuración de IPv6"
+msgid "Save IPv6 settings"
+msgstr "Guardar ajustes IPv6"
 
 msgid "Alias"
 msgstr "Alias"
@@ -15441,20 +15441,17 @@ msgstr ""
 "Quieres instalar también el cliente samba?\n"
 "Esto le permite montar sus recursos compartidos de Windows en este dispositivo."
 
-msgid "Enable or disable IPv6"
+msgid "Enable or Disable IPv6"
 msgstr "Habilitar o Deshabilitar IPv6"
 
-msgid "Enable/Disable IPv6"
-msgstr "Habilitar/Deshabilitar IPv6"
+msgid "Enable or disable IPv6.\nButton BLUE set file inetd.conf default (mode IPv4)."
+msgstr "Habilite o deshabilite IPv6.\nEl botón AZUL configura el archivo inetd.conf por defecto (modo IPv4)."
 
-msgid "Enable/Disable IPv6 support of your receiver.\n"
-msgstr "Habilite/deshabilite la compatibilidad con IPv6 de su receptor.\n"
+msgid "Enable or disable IPv6 support of your receiver.\n"
+msgstr "Habilite o deshabilite la compatibilidad con IPv6 de su receptor.\n"
 
-msgid "Exit IPv6 configuration"
-msgstr "Salir de la configuración IPv6"
-
-msgid "Exit inetd recovery"
-msgstr "Salir de inetd recovery"
+msgid "Exit IPv6 settings"
+msgstr "Salir de los ajustes IPv6"
 
 msgid "Exit mounts setup menu"
 msgstr "Salir del menú de configuración de montajes"
@@ -15489,8 +15486,8 @@ msgstr "Inadyn log"
 msgid "Inadyn setup"
 msgstr "Configurar Inadyn"
 
-msgid "Inetd Recovery"
-msgstr "Recuperación Inetd"
+msgid "Inetd default"
+msgstr "Inetd por defecto"
 
 msgid "Inotify monitoring"
 msgstr "Monitoreo de Inotify"
@@ -15582,23 +15579,8 @@ msgstr "Quiere instalar \"%s\" ?"
 msgid "Do you want to remove \"%s\" ?"
 msgstr "Quiere eliminar \"%s\" ?"
 
-msgid "Recover"
-msgstr "Recuperar"
-
-msgid "Recover inetd"
-msgstr "Recuperar inetd"
-
 msgid "Remove service"
 msgstr "Eliminar canal"
-
-msgid "Restore inetd"
-msgstr "Restaurar inetd"
-
-msgid "Restore inetd.conf"
-msgstr "Restaurar inetd.conf"
-
-msgid "Use config file /etc/\"inetd.conf\" in mode IPv6 compatible with IPv4."
-msgstr "Utilice el archivo config /etc/\"inetd.conf\" en modo IPv6 compatible con IPv4."
 
 msgid "SABnzbd"
 msgstr "SABnzbd"
@@ -15713,11 +15695,11 @@ msgstr "DLNA estricto"
 msgid "Stripes"
 msgstr "Rayas"
 
-msgid "Successfully restored /etc/inetd.conf\n\nIPv6 is now enabled"
-msgstr "Restaurado correctamente /etc/inetd.conf\n\nIPv6 está ahora habilitado"
+msgid "Successfully restored /etc/inetd.conf\n\nIPv6 is enabled"
+msgstr "Restaurado correctamente /etc/inetd.conf\n\nIPv6 está habilitado"
 
-msgid "Successfully restored /etc/inetd.conf\n\nIPv6 is now disabled"
-msgstr "Restaurado correctamente /etc/inetd.conf\n\nIPv6 está ahora deshabilitado"
+msgid "Successfully restored /etc/inetd.conf\n\nIPv6 is disabled"
+msgstr "Restaurado correctamente /etc/inetd.conf\n\nIPv6 está deshabilitado"
 
 msgid "Telnet"
 msgstr "Telnet"
@@ -18633,8 +18615,8 @@ msgstr "Parece que estás en Timeshift!"
 msgid "Interface to change MAC"
 msgstr "Interfaz para cambiar MAC"
 
-msgid "Network interface for change MAC address. For change MAC WiFi activate LAN-WLAN DHCP."
-msgstr "Interfaz de red para cambiar dirección MAC. Para cambiar MAC WiFi activar LAN-WLAN DHCP."
+msgid "Network interface for change MAC address."
+msgstr "Interfaz de red para cambiar dirección MAC."
 
 msgid "No log: please try later again"
 msgstr "Sin registro: inténtelo más tarde de nuevo"
