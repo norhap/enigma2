@@ -493,6 +493,11 @@ class MACSettings(Setup):
 			Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 		self.close()
 
+	def keySave(self):
+		if exists(MAC_WILDCARD_FILE):
+			Console().ePopen('rm ' + MAC_WILDCARD_FILE)
+		Setup.keySave(self)
+
 
 class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 	def __init__(self, session):
