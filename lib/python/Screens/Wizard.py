@@ -8,7 +8,7 @@ from Components.ConfigList import ConfigList
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.Slider import Slider
-from Components.SystemInfo import BRAND, MODEL
+from Components.SystemInfo import BRAND, DISPLAYMODEL
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
@@ -443,7 +443,21 @@ class Wizard(Screen):
 		return False
 
 	def getTranslation(self, text):
-		return _(text).replace("%s %s", "%s %s" % (BRAND, MODEL))
+		text = _(text)
+		brandmodel = "%s %s" % (BRAND, DISPLAYMODEL)
+		if "[TUNER]" in text and self.currStep and self.currStep in self.wizard:
+			currStep = self.wizard[self.currStep].get("id", "")
+			tuner = currStep[-1].upper() if len(currStep) == 4 and currStep.startswith("nim") else _("N/A")
+		else:
+			tuner = ""
+		textSubstitutions = [
+			("%s %s", brandmodel),
+			("[BRANDMODEL]", brandmodel),
+			("[TUNER]", tuner)
+		]
+		for marker, substitute in textSubstitutions:
+			text = text.replace(marker, substitute)
+		return text
 
 	def updateText(self, firstset=False):
 		text = self.getTranslation(self.wizard[self.currStep]["text"])
