@@ -1,11 +1,11 @@
 #ifndef __dvb_fbc_h
 #define __dvb_fbc_h
 
+/* FBC Manager */
 #include <lib/base/ebase.h>
 #include <lib/base/object.h>
 #include <lib/base/eptrlist.h>
 #include <lib/dvb/idvb.h>
-
 #include <map>
 #include <bitset>
 
@@ -46,7 +46,7 @@ private:
 	static void SetProcFBCID(int, int, bool);
 	static int FESlotID(eDVBRegisteredFrontend *);
 	static bool IsLinked(eDVBRegisteredFrontend *);
-	static bool IsSCR(eDVBRegisteredFrontend *);
+ 	static bool isUnicable(eDVBRegisteredFrontend *fe);
 	static eDVBRegisteredFrontend* FrontendGetLinkPtr(eDVBFrontend *, link_ptr_t);
 	static eDVBRegisteredFrontend* FrontendGetLinkPtr(eDVBRegisteredFrontend *, link_ptr_t);
 	static void FrontendSetLinkPtr(eDVBRegisteredFrontend *, link_ptr_t, eDVBRegisteredFrontend *);
@@ -55,11 +55,9 @@ private:
 	static eDVBRegisteredFrontend *GetHead(eDVBRegisteredFrontend *);
 	static eDVBRegisteredFrontend *GetTail(eDVBRegisteredFrontend *);
 	static void UpdateLNBSlotMask(int, int, bool);
-
-	bool IsFBCLink(int fe_id) const;
 	bool IsSameFBCSet(int, int) const;
 	bool IsRootFE(eDVBRegisteredFrontend *) const;
-	bool IsFEUsed(eDVBRegisteredFrontend *, bool) const;
+ 	bool IsFEUsed(eDVBRegisteredFrontend *, bool) const;
 	int GetFBCID(int) const;
 	int GetDefaultFBCID(int) const;
 
@@ -67,14 +65,12 @@ private:
 
 	void ConnectLink(eDVBRegisteredFrontend *, eDVBRegisteredFrontend *, eDVBRegisteredFrontend *, bool) const;
 	void DisconnectLink(eDVBRegisteredFrontend *, eDVBRegisteredFrontend *, eDVBRegisteredFrontend *, bool) const;
-
 	void PrintLinks(eDVBRegisteredFrontend *fe) const;
 
 public:
 	static eFBCTunerManager* getInstance();
 	eFBCTunerManager(ePtr<eDVBResourceManager> res_mgr);
 	virtual ~eFBCTunerManager();
-
 	int GetFBCSetID(int) const;
 	int getLinkedSlotID(int feid) const;
 	void SetDefaultFBCID(eDVBRegisteredFrontend *) const;
@@ -83,6 +79,8 @@ public:
 	bool CanLink(eDVBRegisteredFrontend *) const;
 	void AddLink(eDVBRegisteredFrontend *, eDVBRegisteredFrontend *, bool) const;
 	void Unlink(eDVBRegisteredFrontend *) const;
+	bool IsFBCLink(int fe_id) const;
 };
 
-#endif
+#endif /* __dvb_fbc_h */
+
