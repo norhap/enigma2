@@ -103,9 +103,14 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 		self.list.append(getConfigListEntry(_("Import from remote receiver URL"),
 			config.usage.remote_fallback_import,
 			_("Import channels and/or EPG from remote receiver URL or IP.")))
-		if isPluginInstalled("FastChannelChange") and config.plugins.fccsetup.activate.value and config.usage.remote_fallback_enabled.value:
-			config.plugins.fccsetup.activate.value = False
-			config.plugins.fccsetup.activate.save()
+		if isPluginInstalled("FastChannelChange") and isPluginInstalled("IPToSAT"):
+			if config.usage.remote_fallback_enabled.value and not config.misc.firstrun.value and config.plugins.fccsetup.activate.value:
+				from Screens.Standby import TryQuitMainloop
+				config.plugins.fccsetup.activate.value = False
+				config.plugins.fccsetup.activate.save()
+				config.plugins.IPToSAT.enable.value = False
+				config.plugins.IPToSAT.enable.save()
+				self.session.open(TryQuitMainloop, 3)
 		if config.usage.remote_fallback_enabled.value or config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,
