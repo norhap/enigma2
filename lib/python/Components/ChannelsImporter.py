@@ -17,7 +17,6 @@ autoClientModeTimer = None
 
 def autostart():
 	global autoClientModeTimer
-	now = int(time())
 	print("[ChannelsImporter] ClientModeScheduler ClientModeautostart AutoStart Enabled")
 	if autoClientModeTimer is None:
 		autoClientModeTimer = AutoClientModeTimer()
