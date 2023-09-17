@@ -374,7 +374,7 @@ class ChannelsImporter():
 		try:
 			req = Request(url)
 			response = urlopen(req)
-			print('[ChannelsImporter] saveEPGonRemoteReceiver Response: %d, %s' % (response.getcode(), response.read().strip().replace("\r", "").replace("\n", "")))
+			print("[ChannelsImporter][saveEPGonRemoteReceiver] Response: %d, %s" % (response.getcode(), response.read().decode().strip().replace("\r", "").replace("\n", "")))
 		except HTTPError as err:
 			print('[ChannelsImporter] saveEPGonRemoteReceiver ERROR: %s', err)
 		except URLError as err:
