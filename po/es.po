@@ -17792,8 +17792,14 @@ msgstr "'%s' no se puede escribir.\n%s"
 msgid "'%s' can't be linked to recordings"
 msgstr "'%s' no se puede vincular a grabaciones"
 
-msgid "Error: Invalid location!"
-msgstr "Error: Ubicación Inválida!"
+msgid "This selection is an invalid location"
+msgstr "Esta selección es una ubicación inválida"
+
+msgid "Default Folder"
+msgstr "Carpeta Seleccionada"
+
+msgid "Select Location"
+msgstr "Seleccionar Ubicación"
 
 msgid "%s\nFailed to download %s/%s from %s"
 msgstr "%s\nFalló al descargar %s/%s desde %s"

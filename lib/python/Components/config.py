@@ -1806,15 +1806,6 @@ class ConfigDirectory(ConfigText):
 		if callable(callback):
 			callback()
 
-	def getMulti(self, selected):
-		if self.text == "":
-			return ("mtext"[1 - selected:], _("List of storage devices"), list(range(0)))
-		else:
-			return ConfigText.getMulti(self, selected)
-
-	def onSelect(self, session):
-		self.allmarked = (self.value != "")
-
 	def getValue(self):
 		if self.text == "":
 			return None
@@ -1825,6 +1816,17 @@ class ConfigDirectory(ConfigText):
 		if value is None:
 			value = ""
 		ConfigText.setValue(self, value)
+
+	value = property(getValue, setValue)
+
+	def getMulti(self, selected):
+		if self.text == "":
+			return ("mtext"[1 - selected:], _("List of storage devices"), list(range(0)))
+		else:
+			return ConfigText.getMulti(self, selected)
+
+	def onSelect(self, session):
+		self.allmarked = (self.value != "")
 
 
 class ConfigMACText(ConfigText):

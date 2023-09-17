@@ -214,7 +214,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 	def updateTarget(self):
 		directory = self.getCurrentSelection()
 		if directory is None:
-			self["target"].setText(_("Error: Invalid location!"))
+			self["target"].setText(_("This selection is an invalid location"))
 			self["key_green"].setText("")
 			self["selectAction"].setEnabled(False)
 			self["bookmarkAction"].setEnabled(False)
