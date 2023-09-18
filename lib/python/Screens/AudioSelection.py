@@ -17,6 +17,7 @@ from Components.SystemInfo import SystemInfo
 from Components.VolumeControl import VolumeControl
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from Components.Converter.VAudioInfo import StdAudioDesc
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
@@ -297,7 +298,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 					number = str(x + 1)
 					i = audio.getTrackInfo(x)
 					languages = i.getLanguage().split('/')
-					description = i.getDescription() or ""
+					description = StdAudioDesc(i.getDescription())
 					selected = ""
 					language = ""
 					if selectedAudio == x:

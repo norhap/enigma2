@@ -3,6 +3,46 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
 
+# Common function to standardize the display of Audio Codecs
+# _acedits is a list of text conversions (from, to) that are done in the
+# order given.
+#
+_acedits = (
+    ("A_", ""),
+    ("AC-3", "AC3"),
+    ("(ATSC A/52)", ""),
+    ("(ATSC A/52B)", ""),
+    (" Layer 2 (MP2)", ""),
+    (" Layer 3 (MP3)", "MP3"),
+    ("-1", ""),
+    ("-2", ""),
+    ("2-", ""),
+    ("-4 AAC", "AAC"),
+    ("4-AAC", "HE-AAC"),
+    ("audio", ""),
+    ("/L3", ""),
+    ("/mpeg", "AAC"),
+    ("/x-", ""),
+    ("raw", "Dolby TrueHD"),
+    ("E-AC3", "AC3+"),
+    ("EAC3", "AC3+"),
+    ("IPCM", "AC3"),
+    ("LPCM", "AC3+"),
+    ("AAC_PLUS", "AAC+"),
+    ("AAC_LATM", "AAC"),
+    ("WMA/PRO", "WMA Pro"),
+    ("MPEG", "MPEG1 Layer II"),
+    ("MPEG1 Layer II AAC", "AAC"),
+    ("MPEG1 Layer IIAAC", "AAC"),
+    ("MPEG1 Layer IIMP3", "MP3"),
+)
+
+
+def StdAudioDesc(description):
+    for orig, repl in _acedits:
+        description = description.replace(orig, repl)
+    return description
+
 
 class VAudioInfo(Poll, Converter, object):
 	GET_AUDIO_ICON = 0
@@ -66,8 +106,8 @@ class VAudioInfo(Poll, Converter, object):
 		description_str = _('unknown')
 		if self.getAudio():
 			languages = self.getLanguage()
-			description = self.audio_info.getDescription()
-			description_str = description.split(' ')
+			description = StdAudioDesc(self.audio_info.getDescription()) or ""
+			description_str = description.split(" ")
 			if len(description_str) and description_str[0] in languages:
 				return languages
 			if description.lower() in languages.lower():

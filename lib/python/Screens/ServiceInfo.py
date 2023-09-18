@@ -9,6 +9,7 @@ from ServiceReference import ServiceReference
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
 import skin
+from Components.Converter.VAudioInfo import StdAudioDesc
 
 TYPE_TEXT = 0
 TYPE_VALUE_HEX = 1
@@ -227,7 +228,7 @@ class ServiceInfo(Screen):
 		if self.numberofTracks:
 			currentTrack = self.audio.getCurrentTrack()
 			for i in range(0, self.numberofTracks):
-				audioDesc = self.audio.getTrackInfo(i).getDescription()
+				audioDesc = StdAudioDesc(self.audio.getTrackInfo(i).getDescription())
 				audioPID = self.audio.getTrackInfo(i).getPID()
 				audioLang = self.audio.getTrackInfo(i).getLanguage()
 				if audioLang == "":
