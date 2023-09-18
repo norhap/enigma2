@@ -2713,7 +2713,7 @@
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/skin_default/buttons/key_help.png" position="18,1035" size="64,43"/>
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/skin_default/buttons/key_exit.png" position="85,1035" size="64,43"/>
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/skin_default/buttons/key_menu.png" position="1565,680" size="64,43"/>
-		<widget source="pluginList" render="Listbox" position="26,142" size="1250,820" conditional="pluginList" listOrientation="vertical" scrollbarMode="showOnDemand">
+		<widget source="pluginList" render="Listbox" position="26,142" size="1250,800" conditional="pluginList" listOrientation="vertical" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light">
 			<convert type="TemplatedMultiContent">
 				{
 				"template":
@@ -2727,7 +2727,7 @@
 				}
 			</convert>
 		</widget>
-		<widget source="pluginGrid" render="Listbox" position="24,142" size="1255,820" conditional="pluginGrid" listOrientation="grid" scrollbarMode="showOnDemand">
+		<widget source="pluginGrid" render="Listbox" position="24,142" size="1255,800" conditional="pluginGrid" listOrientation="grid" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light">
 			<convert type="TemplatedMultiContent">
 				{
 				"template":
