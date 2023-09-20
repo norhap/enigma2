@@ -13963,7 +13963,7 @@ msgid "Duration type"
 msgstr "Tipo de Duración"
 
 msgid "History zap: count %d"
-msgstr "Historial zap: contar %d"
+msgstr "Historial zap: %d contados"
 
 msgid "Del entry  Clear history        Preview"
 msgstr "Borrar entrada  Limpiar historia      Vista previa"
