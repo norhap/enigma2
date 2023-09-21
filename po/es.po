@@ -2065,6 +2065,9 @@ msgstr "Mostrar contenido >16:9 como"
 msgid "Display and userinterface"
 msgstr "Pantalla e interfaz de usuario"
 
+msgid "Display the virtual keyboard for data entry"
+msgstr "Mostrar el teclado virtual para la entrada de datos"
+
 msgid "Djibouti"
 msgstr "Djibouti"
 
