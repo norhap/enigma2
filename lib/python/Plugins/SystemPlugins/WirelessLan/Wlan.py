@@ -89,7 +89,7 @@ class Wlan:
 		except:
 			scanresults = None
 			print("[Wlan] No wireless networks could be found")
-		if scanresults != None:
+		if scanresults:
 			for i in range(len(scanresults)):
 				bssid = scanresults[i].ssid
 				aps[bssid] = {
@@ -175,12 +175,12 @@ class wpaSupplicant:
 		except:
 			print("[Wlan] Error parsing ", configfile)
 			wsconfig = {
-					'hiddenessid': False,
-					'ssid': "",
-					'encryption': "WPA2",
-					'wepkeytype': "ASCII",
-					'key': "",
-				}
+				'hiddenessid': False,
+				'ssid': "",
+				'encryption': "WPA2",
+				'wepkeytype': "ASCII",
+				'key': "",
+			}
 
 		for (k, v) in list(wsconf.items()):
 			print("[Wlan] wsconf [%s] %s" % (k, v))
@@ -292,12 +292,12 @@ class wpaSupplicant:
 			config.plugins.wlan.encryption.value = encryption
 
 			wsconfig = {
-					'hiddenessid': config.plugins.wlan.hiddenessid.value,
-					'ssid': config.plugins.wlan.essid.value,
-					'encryption': config.plugins.wlan.encryption.value,
-					'wepkeytype': config.plugins.wlan.wepkeytype.value,
-					'key': config.plugins.wlan.psk.value,
-				}
+				'hiddenessid': config.plugins.wlan.hiddenessid.value,
+				'ssid': config.plugins.wlan.essid.value,
+				'encryption': config.plugins.wlan.encryption.value,
+				'wepkeytype': config.plugins.wlan.wepkeytype.value,
+				'key': config.plugins.wlan.psk.value,
+			}
 
 			for (key, item) in list(wsconfig.items()):
 				if item == "None" or item == "":
@@ -314,12 +314,12 @@ class wpaSupplicant:
 		except:
 			print("[Wlan] Error parsing ", configfile)
 			wsconfig = {
-					'hiddenessid': False,
-					'ssid': "",
-					'encryption': "WPA2",
-					'wepkeytype': "ASCII",
-					'key': "",
-				}
+				'hiddenessid': False,
+				'ssid': "",
+				'encryption': "WPA2",
+				'wepkeytype': "ASCII",
+				'key': "",
+			}
 		# print("[Wlan] WS-CONFIG-->",wsconfig)
 		return wsconfig
 
@@ -415,7 +415,7 @@ class Status:
 						signal = line[line.index('Signal level') + 13:len(line)]
 				if signal:
 					data['signal'] = signal
-		if ssid != None and ssid != "off" and ssid != "":
+		if ssid and ssid != "off" and ssid != "":
 			try:
 				scanresults = list(Cell.all(iface, 5))
 				print("[Wlan] Scan results = %s" % scanresults)
@@ -423,7 +423,7 @@ class Status:
 				scanresults = None
 				print("[Wlan] No wireless networks could be found")
 			aps = {}
-			if scanresults != None:
+			if scanresults:
 				for i in range(len(scanresults)):
 					bssid = scanresults[i].ssid
 					aps[bssid] = {

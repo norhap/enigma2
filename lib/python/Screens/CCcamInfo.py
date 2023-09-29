@@ -3,7 +3,7 @@
 from base64 import b64encode
 from os import listdir, remove, rename, system, path
 
-from enigma import eListboxPythonMultiContent, eTimer, gFont, RT_HALIGN_RIGHT, getDesktop
+from enigma import eListboxPythonMultiContent, gFont, RT_HALIGN_RIGHT, getDesktop
 
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, getConfigListEntry
@@ -13,7 +13,6 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend
 from Components.ScrollLabel import ScrollLabel
-from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 
 from Screens.LocationBox import LocationBox
@@ -412,29 +411,29 @@ class CCcamInfoMain(Screen):
 
 		self["actions"] = NumberActionMap(["CCcamInfoActions"],
 			{
-				"1": self.keyNumberGlobal,
-				"2": self.keyNumberGlobal,
-				"3": self.keyNumberGlobal,
-				"4": self.keyNumberGlobal,
-				"5": self.keyNumberGlobal,
-				"6": self.keyNumberGlobal,
-				"7": self.keyNumberGlobal,
-				"8": self.keyNumberGlobal,
-				"9": self.keyNumberGlobal,
-				"0": self.keyNumberGlobal,
-				"red": self.red,
-				"green": self.green,
-				"yellow": self.yellow,
-				"blue": self.blue,
-				"menu": self.menu,
-				"info": self.info,
-				"ok": self.okClicked,
-				"cancel": self.close,
-				"up": self.up,
-				"down": self.down,
-				"left": self.left,
-				"right": self.right
-			}, -2)
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+			"0": self.keyNumberGlobal,
+			"red": self.red,
+			"green": self.green,
+			"yellow": self.yellow,
+			"blue": self.blue,
+			"menu": self.menu,
+			"info": self.info,
+			"ok": self.okClicked,
+			"cancel": self.close,
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.right
+		}, -2)
 
 		self.onLayoutFinish.append(self.updateMenuList)
 
@@ -497,7 +496,7 @@ class CCcamInfoMain(Screen):
 			self.showInfo(_("Using old profile: ") + self.url, _("Profile"))
 
 	def keyNumberGlobal(self, idx):
-		if self.working == False and (idx < len(self.menu_list)):
+		if not self.working and (idx < len(self.menu_list)):
 			self.working = True
 			sel = self.menu_list[idx]
 
@@ -824,13 +823,13 @@ class CCcamInfoInfoScreen(Screen):
 
 		self["actions"] = ActionMap(["CCcamInfoActions"],
 			{
-				"ok": self.close,
-				"cancel": self.close,
-				"up": self["text"].pageUp,
-				"down": self["text"].pageDown,
-				"left": self["text"].pageUp,
-				"right": self["text"].pageDown,
-			}, -1)
+			"ok": self.close,
+			"cancel": self.close,
+			"up": self["text"].pageUp,
+			"down": self["text"].pageDown,
+			"left": self["text"].pageUp,
+			"right": self["text"].pageDown,
+		}, -1)
 
 		self["key_red"] = Label(_("Cancel"))
 		self["shortcuts"] = ActionMap(["ShortcutActions"],
@@ -891,7 +890,7 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 		getPage(self.url + "/providers", self.readProvidersCallback, self.readError)
 
 	def readError(self, error=None):
-#		self.session.open(MessageBox, _("Error reading webpage!"), MessageBox.TYPE_ERROR)
+		# self.session.open(MessageBox, _("Error reading webpage!"), MessageBox.TYPE_ERROR)
 		self.working = False
 
 	def readSharesCallback(self, html):
@@ -1044,10 +1043,10 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 									totalcards += 1
 									# maxdown = list[6]
 									# while maxdown.startswith(" "):
-										# maxdown = maxdown[1:]
-										# down = maxdown
+									# maxdown = maxdown[1:]
+									# down = maxdown
 									# if int(down)>0:
-										# resharecards +=1
+									# resharecards +=1
 
 		self.instance.setTitle("%s (%s %d) %s %s" % (_("Share View"), _("Total cards:"), totalcards, _("Hops:"), ulevel))
 		self["title"].setText("%s (%s %d) %s %s" % (_("Share View"), _("Total cards:"), totalcards, _("Hops:"), ulevel))
@@ -1291,13 +1290,13 @@ class CCcamInfoRemoteBoxMenu(Screen):
 
 		self["actions"] = ActionMap(["CCcamInfoActions"],
 			{
-				"cancel": self.exit,
-				"ok": self.profileSelected,
-				"red": self.delete,
-				"green": self.new,
-				"yellow": self.location,
-				"blue": self.edit
-			}, -1)
+			"cancel": self.exit,
+			"ok": self.profileSelected,
+			"red": self.delete,
+			"green": self.new,
+			"yellow": self.location,
+			"blue": self.edit
+		}, -1)
 
 		self.onLayoutFinish.append(self.readProfiles)
 
@@ -1417,12 +1416,12 @@ class CCcamInfoShareInfo(Screen):
 
 		self["actions"] = ActionMap(["CCcamInfoActions"],
 			{
-				"cancel": self.exit,
-				"red": self.uhopsPlus,
-				"green": self.uhopsMinus,
-				"yellow": self.maxdownPlus,
-				"blue": self.maxdownMinus
-			}, -1)
+			"cancel": self.exit,
+			"red": self.uhopsPlus,
+			"green": self.uhopsMinus,
+			"yellow": self.maxdownPlus,
+			"blue": self.maxdownMinus
+		}, -1)
 
 		self.onLayoutFinish.append(self.readShares)
 
@@ -1548,13 +1547,13 @@ class CCcamInfoConfigSwitcher(Screen):
 
 		self["actions"] = ActionMap(["CCcamInfoActions"],
 			{
-				"ok": self.activate,
-				"cancel": self.close,
-				"red": self.delete,
-				"green": self.activate,
-				"yellow": self.rename,
-				"blue": self.showContent
-			}, -1)
+			"ok": self.activate,
+			"cancel": self.close,
+			"red": self.delete,
+			"green": self.activate,
+			"yellow": self.rename,
+			"blue": self.showContent
+		}, -1)
 
 		self.onLayoutFinish.append(self.showConfigs)
 
@@ -1663,12 +1662,12 @@ class CCcamInfoMenuConfig(Screen):
 
 		self["actions"] = ActionMap(["CCcamInfoActions"],
 			{
-				"ok": self.changeState,
-				"cancel": self.close,
-				"red": self.close,
-				"green": self.save,
-				"yellow": self.location
-			}, -1)
+			"ok": self.changeState,
+			"cancel": self.close,
+			"red": self.close,
+			"green": self.save,
+			"yellow": self.location
+		}, -1)
 
 		self.onLayoutFinish.append(self.showConfigs)
 

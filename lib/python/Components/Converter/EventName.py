@@ -7,6 +7,7 @@ from Components.config import config
 from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from time import localtime, mktime, strftime
+from gettext import pgettext
 
 
 class ETSIClassifications(dict):
@@ -215,7 +216,7 @@ class EventName(Converter):
 		event = self.source.event
 		if event is None:
 			return ""
-
+		getCrid = ""
 		if self.type == self.NAME:
 			return self.trimText(event.getEventName())
 		elif self.type in (self.RATING, self.SRATING, self.RATINGICON):

@@ -2,7 +2,6 @@ from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.FileList import FileList
 from Components.Sources.StaticText import StaticText
-from Components.MediaPlayer import PlayList
 from Components.config import config, getConfigListEntry, ConfigYesNo, ConfigDirectory
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap
@@ -38,7 +37,7 @@ class DirectoryBrowser(Screen, HelpableScreen):
 				"red": self.exit,
 				"ok": self.ok,
 				"cancel": self.exit
-			})
+		})
 
 	def ok(self):
 		if self.filelist.canDescent():
@@ -104,5 +103,5 @@ class MediaPlayerSettings(ConfigListScreen, Screen):
 
 	def DirectoryBrowserClosed(self, path):
 		print("[MediaPlayer] PathBrowserClosed:" + str(path))
-		if path != False:
+		if path:
 			config.mediaplayer.defaultDir.setValue(path)

@@ -20,8 +20,8 @@ class FixedMenu(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
-				"ok": self.okbuttonClick,
-				"cancel": self.close
-			})
+			"ok": self.okbuttonClick,
+			"cancel": self.close
+		})
 
 		self["title"] = StaticText(title)

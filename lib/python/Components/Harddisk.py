@@ -58,8 +58,6 @@ def getFolderSize(path):
 					continue  # skip hardlinks which were already counted
 				have.append(st.st_ino)
 				total_bytes += st.st_blocks * 512
-			for d in dirnames:
-				dp = join(dirpath, d)
 		return total_bytes
 
 
@@ -469,9 +467,9 @@ class Harddisk:
 		t = time()
 		idle_time = t - self.last_access
 		stats = self.readStats()
-		l = sum(stats)
-		if l != self.last_stat and l >= 0:  # access
-			self.last_stat = l
+		data = sum(stats)
+		if data != self.last_stat and data >= 0:  # access
+			self.last_stat = data
 			self.last_access = t
 			idle_time = 0
 			self.is_sleeping = False
@@ -712,7 +710,7 @@ class HarddiskManager:
 	def getMountpoint(self, device, skiproot=None):
 		dev = "/dev/%s" % device
 		for item in getProcMounts():
-			if (item[0] == dev and skiproot == None) or (item[0] == dev and skiproot == True and item[1] != "/"):
+			if (item[0] == dev and skiproot is None) or (item[0] == dev and skiproot is True and item[1] != "/"):
 				return join(item[1], "")
 		return None
 

@@ -22,7 +22,6 @@ from Components.Harddisk import harddiskmanager
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigText, ConfigLocations, ConfigYesNo, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Console import Console
-from Components.SelectionList import SelectionList
 from Components.PluginComponent import plugins
 from Components.PackageInfo import PackageInfoHandler
 from Components.Language import language
@@ -33,6 +32,7 @@ from enigma import ePicLoad, eRCInput, getPrevAsciiCode, eEnv
 from twisted.web import client
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
+from gettext import ngettext
 
 config.plugins.configurationbackup = ConfigSubsection()
 config.plugins.configurationbackup.backuplocation = ConfigText(default='/media/hdd/', visible_width=50, fixed_size=False)
@@ -40,11 +40,11 @@ config.plugins.configurationbackup.backupdirs = ConfigLocations(default=[eEnv.re
 
 config.plugins.softwaremanager = ConfigSubsection()
 config.plugins.softwaremanager.overwriteConfigFiles = ConfigSelection(
-				[
-					("Y", _("Yes, always")),
-					("N", _("No, never")),
-					("ask", _("Always ask"))
-				], "Y")
+	[
+		("Y", _("Yes, always")),
+		("N", _("No, never")),
+		("ask", _("Always ask"))
+	], "Y")
 config.plugins.softwaremanager.onSetupMenu = ConfigYesNo(default=True)
 config.plugins.softwaremanager.onBlueButton = ConfigYesNo(default=False)
 config.plugins.softwaremanager.epgcache = ConfigYesNo(default=False)
@@ -319,7 +319,7 @@ class UpdatePluginMenu(Screen):
 		self.session.open(MessageBox, _("Backup completed.") if retval else _("Backup failed."), MessageBox.TYPE_INFO, timeout=10)
 
 	def startRestore(self, ret=False):
-		if (ret == True):
+		if ret:
 			self.exe = True
 			self.session.open(RestoreScreen, runRestore=True)
 
@@ -362,10 +362,10 @@ class SoftwareManagerSetup(ConfigListScreen, Screen):
 		self.setTitle(_("Software Manager Setup"))
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 			{
-				"cancel": self.keyCancel,
-				"save": self.apply,
-				"menu": self.closeRecursive,
-			}, -2)
+			"cancel": self.keyCancel,
+			"save": self.apply,
+			"menu": self.closeRecursive,
+		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))
 		self["key_yellow"] = StaticText()
@@ -460,9 +460,9 @@ class SoftwareManagerInfo(Screen):
 
 		self["actions"] = ActionMap(["ShortcutActions", "WizardActions"],
 			{
-				"back": self.close,
-				"red": self.close,
-			}, -2)
+			"back": self.close,
+			"red": self.close,
+		}, -2)
 
 		self.list = []
 		self["list"] = List(self.list)
@@ -551,7 +551,7 @@ class PluginManager(Screen, PackageInfoHandler):
 
 		self.cmdList = []
 		self.oktext = _("\nAfter pressing OK, please wait!")
-		if not self.selectionChanged in self["list"].onSelectionChanged:
+		if self.selectionChanged not in self["list"].onSelectionChanged:
 			self["list"].onSelectionChanged.append(self.selectionChanged)
 
 		self.currList = ""
@@ -696,7 +696,7 @@ class PluginManager(Screen, PackageInfoHandler):
 				if current[7] != '':
 					idx = self["list"].getIndex()
 					detailsFile = self.list[idx][1]
-					if self.list[idx][7] == True:
+					if self.list[idx][7]:
 						for entry in self.selectedFiles:
 							if entry[0] == detailsFile:
 								self.selectedFiles.remove(entry)
@@ -1505,7 +1505,7 @@ class PacketManager(Screen, NumericalTextInput):
 		self.cmdList = []
 		self.cachelist = []
 		self.cache_ttl = 86400  # 600 is default, 0 disables, Seconds cache is considered valid (24h should be ok for caching opkgs)
-		self.cache_file = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/SoftwareManager/packetmanager.cache') #Path to cache directory
+		self.cache_file = eEnv.resolve('${libdir}/enigma2/python/Plugins/SystemPlugins/SoftwareManager/packetmanager.cache')  # Path to cache directory
 		self.oktext = _("\nAfter pressing OK, please wait!")
 		self.unwanted_extensions = ('-dev', '-staticdev', '-dbg', '-doc', '-src', '-po', '--pycache--')
 		self.opkg = OpkgComponent()

@@ -225,12 +225,12 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 				"leave": (self.exit, _("Exit editor")),
 				"showMenu": (self.showMenu, _("Menu")),
 				"backMenu": (self.backMenu, _("Restore previous cuts...")),
-			}, prio=-4)
+		}, prio=-4)
 
 		self.onExecBegin.append(self.showTutorial)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evCuesheetChanged: self.refillList
-			})
+			iPlayableService.evCuesheetChanged: self.refillList
+		})
 
 		# to track new entries we save the last version of the cutlist
 		self.last_cuts = self.getCutlist()
@@ -562,9 +562,9 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			self.setCutListEnable()
 		elif result == CutListContextMenu.RET_EXECUTECUTS:
 			try:
-				self.session.nav.stopService()	# need to stop to save the cuts file
+				self.session.nav.stopService()  # need to stop to save the cuts file
 				self.session.openWithCallback(self.executeCallback, MovieCut, self.service)
-			except ImportError as e:
+			except ImportError:
 				self.session.open(MessageBox, _("The MovieCut plugin is not installed."), type=MessageBox.TYPE_INFO, timeout=10)
 		elif result == CutListContextMenu.RET_GRABFRAME:
 			self.grabFrame()

@@ -2,7 +2,7 @@
 import mmap
 import re
 
-from enigma import ePicLoad, getDesktop
+from enigma import ePicLoad
 from os import listdir
 from os.path import dirname, exists, isdir, join
 
@@ -48,8 +48,7 @@ class SkinSelector(Screen, HelpableScreen):
 		30,
 		85, 650, 25, 20,
 		10, 50, 140, 40, 20,
-		160, 50, 140, 40, 20
-	]
+		160, 50, 140, 40, 20]
 
 	def __init__(self, session, screenTitle=_("GUI Skin")):
 		Screen.__init__(self, session, mandatoryWidgets=["description", "skins"])
@@ -130,7 +129,7 @@ class SkinSelector(Screen, HelpableScreen):
 									"8640": _("16K")
 								}
 								mm = mmap.mmap(fd.fileno(), 0, prot=mmap.PROT_READ)
-								skinheight = re.search(b"\<?resolution.*?\syres\s*=\s*\"(\d+)\"", mm).group(1)
+								skinheight = re.search(br"\<?resolution.*?\syres\s*=\s*\"(\d+)\"", mm).group(1)
 								resolution = skinheight and resolutions.get(skinheight.decode(), None)
 								mm.close()
 						except:

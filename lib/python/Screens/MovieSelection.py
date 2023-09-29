@@ -11,8 +11,7 @@ from RecordTimer import AFTEREVENT, RecordTimerEntry
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ChoiceList import ChoiceEntryComponent, ChoiceList
-from Components.config import ConfigLocations, ConfigSelection, ConfigInteger, ConfigSelectionNumber, ConfigSet, ConfigSubsection, ConfigText, ConfigYesNo, config, getConfigListEntry
-from Components.ConfigList import ConfigListScreen
+from Components.config import ConfigLocations, ConfigSelection, ConfigInteger, ConfigSelectionNumber, ConfigSet, ConfigSubsection, ConfigText, ConfigYesNo, config
 from Components.DiskInfo import DiskInfo
 from Components.Harddisk import harddiskmanager
 from Components.Label import Label
@@ -953,7 +952,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def __evEOF(self):
 		playInBackground = self.list.playInBackground
-		playInForeground = self.list.playInForeground
 		if not playInBackground:
 			print("[MovieSelection] Not playing anything in background")
 			return
@@ -1125,7 +1123,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				updates = load(file)
 				file.close()
 				self.applyConfigSettings(updates)
-			except (IOError, OSError) as e:
+			except (IOError, OSError):
 				updates = {
 					"moviesort": config.movielist.moviesort.default,
 					"description": config.movielist.description.default,
@@ -1140,7 +1138,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				"moviesort": config.movielist.moviesort.value,
 				"description": config.movielist.description.value,
 				"movieoff": config.usage.on_movie_eof.value
-				}
+			}
 			self.applyConfigSettings(updates)
 
 		# Remember this starting sort method for this dir.
@@ -1339,7 +1337,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if self.reload_sel is None:
 			self.reload_sel = self.getCurrent()
 		if config.usage.movielist_trashcan.value and access(config.movielist.last_videodir.value, W_OK):
-			trash = createTrashFolder(config.movielist.last_videodir.value)
+			createTrashFolder(config.movielist.last_videodir.value)
 		self.loadLocalSettings()
 		self["list"].reload(self.current_ref, self.selected_tags)
 		self.updateTags()
@@ -1386,7 +1384,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				parentalControl.setSessionPinCached()
 				parentalControl.hideBlacklist()
 				self.gotFilename(res, selItem)
-			elif result == False:
+			elif not result:
 				self.session.open(MessageBox, _("The PIN code you entered is wrong."), MessageBox.TYPE_INFO, timeout=5)
 		if not res:
 			return
@@ -1418,7 +1416,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					_("Directory %s does not exist.") % res,
 					type=MessageBox.TYPE_ERROR,
 					timeout=5
-					)
+				)
 				mbox.setTitle(self.getTitle())
 
 	def pinEntered(self, answer):
@@ -1439,7 +1437,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def showTagsN(self, tagele):
 		if not self.tags:
 			self.showTagWarning()
-		elif not tagele or (self.selected_tags and tagele.value in self.selected_tags) or not tagele.value in self.tags:
+		elif not tagele or (self.selected_tags and tagele.value in self.selected_tags) or tagele.value not in self.tags:
 			self.showTagsMenu(tagele)
 		else:
 			self.selected_tags_ele = tagele

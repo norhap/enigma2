@@ -26,7 +26,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 from Components.SystemInfo import SystemInfo, MODEL
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileContains
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import DownloadWithProgress
 from Tools.Multiboot import getImagelist, getCurrentImage, getCurrentImageMode, deleteImage, restoreImages
 from Components.Harddisk import harddiskmanager
@@ -179,7 +179,7 @@ class SelectImage(Screen):
 				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
 
 	def otherImages(self):
-		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=sorted([(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds if feedinfo.tag == "ImageFeed" and not "OpenPLi" in feedinfo.attrib["name"]]), windowTitle=_("Select Image"))
+		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=sorted([(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds if feedinfo.tag == "ImageFeed" and "OpenPLi" not in feedinfo.attrib["name"]]), windowTitle=_("Select Image"))
 
 	def otherImagesCallback(self, image):
 		if image:
@@ -451,7 +451,7 @@ class FlashImage(Screen):
 					from boxbranding import getMachineMtdKernel, getMachineMtdRoot
 					kz0 = getMachineMtdKernel()
 					rz0 = getMachineMtdRoot()
-					command = "/usr/bin/ofgwrite -kkz0 -rrz0 '%s'" % imagefiles	# slot0 treat as kernel/root only multiboot receiver
+					command = "/usr/bin/ofgwrite -kkz0 -rrz0 '%s'" % imagefiles  # slot0 treat as kernel/root only multiboot receiver
 				if SystemInfo["HasKexecUSB"] and mtd and "mmcblk" not in mtd:
 					command = "/usr/bin/ofgwrite -r%s -kzImage -s'%s/linuxrootfs' -m%s '%s'" % (mtd, MODEL[2:], self.multibootslot, imagefiles)  # USB flash slot kexec
 				else:
@@ -697,7 +697,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		else:
 			boxmodel = MODEL[2:]
 			for usbslot in range(hiKey + 1, hiKey + 5):
-				STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, SystemInfo["VuUUIDSlot"][0], boxmodel, usbslot) # /STARTUP_<n>
+				STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, SystemInfo["VuUUIDSlot"][0], boxmodel, usbslot)  # /STARTUP_<n>
 				if boxmodel in ("duo4k"):
 					STARTUP_usbslot += " rootwait=40"
 				elif boxmodel in ("duo4kse"):
@@ -712,7 +712,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		usb = result.split(":")[0]
 		boxmodel = MODEL[2:]
 		for usbslot in range(4, 8):
-			STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, self.device_uuid, boxmodel, usbslot) # /STARTUP_<n>
+			STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, self.device_uuid, boxmodel, usbslot)  # /STARTUP_<n>
 			if boxmodel in ("duo4k"):
 				STARTUP_usbslot += " rootwait=40"
 			elif boxmodel in ("duo4kse"):

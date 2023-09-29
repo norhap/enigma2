@@ -1,4 +1,3 @@
-from os.path import join
 from Tools.Directories import SCOPE_SKINS, resolveFilename
 
 hw_info = None

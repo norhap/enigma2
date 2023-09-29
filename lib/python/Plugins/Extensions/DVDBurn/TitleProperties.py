@@ -1,6 +1,5 @@
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
-from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from enigma import ePicLoad
@@ -133,7 +132,7 @@ class TitleProperties(Screen, ConfigListScreen):
 	def ok(self):
 		# key = self.keydict[self["config"].getCurrent()[1]]
 		# if key in self.project.filekeys:
-			# self.session.openWithCallback(self.FileBrowserClosed, FileBrowser, key, self.settings)
+		# self.session.openWithCallback(self.FileBrowserClosed, FileBrowser, key, self.settings)
 		pass
 
 	def cancel(self):

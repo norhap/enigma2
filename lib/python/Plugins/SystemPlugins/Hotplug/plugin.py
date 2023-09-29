@@ -155,7 +155,7 @@ class OpkgInstaller(Screen):
 
 def filescan_open(list, session, **kwargs):
 	filelist = [x.path for x in list]
-	session.open(OpkgInstaller, filelist) # list
+	session.open(OpkgInstaller, filelist)  # list
 
 
 def autostart(reason, **kwargs):
@@ -176,12 +176,11 @@ def filescan(**kwargs):
 	return \
 		Scanner(mimetypes=["application/x-debian-package"],
 			paths_to_scan=[
-					ScanPath(path="ipk", with_subdirs=True),
-					ScanPath(path="", with_subdirs=False),
-				],
+				ScanPath(path="ipk", with_subdirs=True),
+				ScanPath(path="", with_subdirs=False),],
 			name="Opkg",
 			description=_("Install extensions"),
-			openfnc=filescan_open, )
+			openfnc=filescan_open,)
 
 
 def Plugins(**kwargs):

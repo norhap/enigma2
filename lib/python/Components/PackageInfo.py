@@ -65,10 +65,8 @@ class InfoHandler(xml.sax.ContentHandler):
 				if "name" not in attrs:
 					self.printError("file tag with no name attribute")
 				else:
-					if "directory" not in attrs:
-						directory = self.directory
 					type = attrs["type"]
-					if not type in self.validFileTypes:
+					if type not in self.validFileTypes:
 						self.printError("file tag with invalid type attribute")
 					else:
 						self.filetype = type
@@ -191,7 +189,7 @@ class PackageInfoHandler:
 			self.directory = [self.directory]
 
 		for directory in self.directory:
-			packages += crawlDirectory(directory, ".*\.info$")
+			packages += crawlDirectory(directory, r".*\.info$")
 
 		for package in packages:
 			self.readInfo(package[0] + "/", package[0] + "/" + package[1])
@@ -236,7 +234,6 @@ class PackageInfoHandler:
 		return self.packageDetails
 
 	def prerequisiteMet(self, prerequisites):
-		met = True
 		if self.neededTag is None:
 			if "tag" in prerequisites:
 				return False
@@ -244,7 +241,7 @@ class PackageInfoHandler:
 				return True
 		else:
 			if "tag" in prerequisites:
-				if not self.neededTag in prerequisites["tag"]:
+				if self.neededTag not in prerequisites["tag"]:
 					return False
 			else:
 				return False
@@ -254,7 +251,7 @@ class PackageInfoHandler:
 				return False
 		else:
 			if "flag" in prerequisites:
-				if not self.neededFlag in prerequisites["flag"]:
+				if self.neededFlag not in prerequisites["flag"]:
 					return False
 			else:
 				return True
@@ -305,7 +302,7 @@ class PackageInfoHandler:
 	def installNext(self, *args, **kwargs):
 		if self.reloadFavourites:
 			self.reloadFavourites = False
-			db = eDVBDB.getInstance().reloadBouquets()
+			eDVBDB.getInstance().reloadBouquets()
 
 		self.currentIndex += 1
 		attributes = self.installingAttributes

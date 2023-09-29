@@ -512,11 +512,11 @@ class DiseqcTesterTestTypeSelection(ConfigListScreen, Screen):
 
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 			{
-				"cancel": self.keyCancel,
-				"save": self.keyOK,
-				"ok": self.keyOK,
-				"menu": self.closeRecursive,
-			}, -2)
+			"cancel": self.keyCancel,
+			"save": self.keyOK,
+			"ok": self.keyOK,
+			"menu": self.closeRecursive,
+		}, -2)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))

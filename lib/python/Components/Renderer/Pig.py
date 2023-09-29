@@ -1,6 +1,4 @@
-##
-## P(icture)i(n)g(raphics) renderer
-##
+# P(icture)i(n)g(raphics) renderer
 from Components.Renderer.Renderer import Renderer
 from enigma import eVideoWidget, getDesktop
 from Screens.PictureInPicture import PipPigMode

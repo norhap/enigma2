@@ -172,12 +172,10 @@ class Audio(Converter, object):
 			print("[Audio] Read /proc/stb/sensors/temp0/value failed.")
 			print("[Audio] Read /proc/stb/sensors/temp0/unit failed.")
 
-	def getCryptInfo(self):
+	def getCryptInfo(self, info):
 		isCrypted = info.getInfo(iServiceInformation.sIsCrypted)
 		if isCrypted == 1:
-			id_ecm = ""
 			caID = ""
-			syID = ""
 			try:
 				print("[Audio] Read /tmp/ecm.info")
 				file = open("/tmp/ecm.info", "r")
@@ -212,7 +210,6 @@ class Audio(Converter, object):
 		except:
 			print("[Audio] Read /tmp/ecm.info failed.")
 			return ""
-		ee = 0
 		caid = "0000"
 		provid = "0000"
 		while True:
@@ -252,6 +249,7 @@ class Audio(Converter, object):
 			return ""
 		boxidString = ""
 		caIdString = ""
+		currentLine = ""
 		using = ""
 		address = ""
 		network = ""
@@ -324,7 +322,6 @@ class Audio(Converter, object):
 		if not info:
 			return ""
 
-		nazwaemu = "CI"
 		if (self.type == self.PROV_CA_ID or self.type == self.PROV_ID or self.type == self.CAID_ID) and (info.getInfo(iServiceInformation.sIsCrypted) == 1):
 			return self.getStreamInfo(self.type)
 

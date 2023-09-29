@@ -81,7 +81,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 			"audioSelectionLong": (self.audioSelectionLong, _("Toggle Digital downmix")),
 			"subtitleSelection": (self.keyAudioSubtitle, _("Subtitle selection")),
 			"menu": (self.openAutoLanguageSetup, _("Automatic Language and Subtitles Setup"))
-			}, description=_("Audio and subtitles actions"))
+		}, description=_("Audio and subtitles actions"))
 		self.settings = ConfigSubsection()
 		choicelist = [
 			(PAGE_AUDIO, ""),
@@ -379,7 +379,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 					idx += 1
 			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
 
-			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0) and not ".DVDPlayer'>" in repr(self.infobar):
+			if self.infobar.selected_subtitle and self.infobar.selected_subtitle != (0, 0, 0, 0) and ".DVDPlayer'>" not in repr(self.infobar):
 				conflist.append(getConfigListEntry(_("Subtitle quickmenu"), ConfigNothing(), None))
 
 		if len(conflist) > 0 and conflist[0][0]:
@@ -531,7 +531,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 					self.session.open(QuickSubtitlesConfigMenu, self.infobar)  # sub title config screen
 			else:
 				ConfigListScreen.keyRight(self)
-		if self.focus == FOCUS_STREAMS and self["streams"].count() and config == False:
+		if self.focus == FOCUS_STREAMS and self["streams"].count() and not config:
 			self["streams"].setIndex(self["streams"].count() - 1)
 
 	def keyRed(self):

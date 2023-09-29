@@ -22,6 +22,7 @@ from Components.Slider import Slider
 from Components.SystemInfo import BoxInfo, BRAND, DISPLAYMODEL
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
+from gettext import ngettext
 
 
 class UpdatePlugin(Screen, ProtectedScreen):

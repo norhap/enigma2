@@ -33,7 +33,7 @@ class VuplusKexec(Screen):
 		Screen.__init__(self, session)
 		self.title = _("Vu+ MultiBoot Manager")
 		self["description"] = StaticText(_("Press GREEN button to enable MultiBoot.\n\nYour receiver will reboot and create the eMMC partitions."))
-#		self["key_red"] = StaticText(_("Cancel"))
+		# self["key_red"] = StaticText(_("Cancel"))
 		self["footnote"] = StaticText()
 		self["key_green"] = StaticText(_("Init Vu+ MultiBoot"))
 		self["actions"] = ActionMap(["SetupActions"],

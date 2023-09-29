@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from . import DVDProject
-from . import TitleList
 from . import TitleCutter
 from . import TitleProperties
 from . import ProjectSettings
@@ -68,22 +67,22 @@ class TitleList(Screen, HelpableScreen):
 
 		self["titleactions"] = HelpableActionMap(self, ["DVDTitleList"],
 			{
-				"addTitle": (self.addTitle, _("Add a new title"), _("Add title")),
-				"titleProperties": (self.titleProperties, _("Properties of current title"), _("Title properties")),
-				"removeCurrentTitle": (self.removeCurrentTitle, _("Remove currently selected title"), _("Remove title")),
-				"settings": (self.settings, _("Collection settings"), _("Settings")),
-				"burnProject": (self.askBurnProject, _("Burn DVD"), _("Burn DVD")),
-			})
+			"addTitle": (self.addTitle, _("Add a new title"), _("Add title")),
+			"titleProperties": (self.titleProperties, _("Properties of current title"), _("Title properties")),
+			"removeCurrentTitle": (self.removeCurrentTitle, _("Remove currently selected title"), _("Remove title")),
+			"settings": (self.settings, _("Collection settings"), _("Settings")),
+			"burnProject": (self.askBurnProject, _("Burn DVD"), _("Burn DVD")),
+		})
 
 		self["MovieSelectionActions"] = HelpableActionMap(self, ["MovieSelectionActions"],
 			{
-				"contextMenu": (self.showMenu, _("menu")),
-			})
+			"contextMenu": (self.showMenu, _("menu")),
+		})
 
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
-				"cancel": self.leave
-			})
+			"cancel": self.leave
+		})
 
 		self["key_red"] = StaticText()
 		self["key_green"] = StaticText(_("Add title"))
@@ -194,7 +193,7 @@ class TitleList(Screen, HelpableScreen):
 				self["key_green"] = StaticText(_("Add"))
 				self["key_yellow"] = StaticText(_("Edit title"))
 				self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
-				{
+					{
 					"red": (self.close, _("Close title selection")),
 					"green": (self.insertWithoutEdit, ("insert without cutlist editor")),
 					"yellow": (self.movieSelected, _("Add a new title"))
@@ -378,7 +377,7 @@ class TitleList(Screen, HelpableScreen):
 
 	def DVDformatCB(self, answer):
 		t = self.current_edit_title
-		if answer == True:
+		if answer:
 			self.project.settings.authormode.setValue("data_ts")
 			self.updateTitleList()
 		else:

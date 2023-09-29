@@ -1,4 +1,3 @@
-from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigBoolean
 

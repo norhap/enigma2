@@ -16,7 +16,6 @@ class ChoiceBox(Screen, HelpableScreen):
 	def __init__(self, session, text=None, list=None, keys=None, selection=0, skinName=None, windowTitle=None, title=None, skin_name=None):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		from .ChoiceBox import OrderedChoiceBox
 		if title is not None:  # Process legacy title argument.
 			text = title
 		if text is None:

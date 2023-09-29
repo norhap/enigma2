@@ -1,6 +1,5 @@
-#
 # create links for picon
-#   usage: create_picon_providers lamedb
+# usage: create_picon_providers lamedb
 # run in picon directory.
 # It will read the servicenames from the lamedb and create symlinks
 # for the servicereference names.
@@ -32,11 +31,11 @@ while len(f) > 2:
 
 	sat = str(ref[1] / 16 / 16 / 16 / 16)
 
-#	SID:NS:TSID:ONID:STYPE:UNUSED(channelnumber in enigma1)
-#	X   X  X    X    D     D
+# SID:NS:TSID:ONID:STYPE:UNUSED(channelnumber in enigma1)
+# X   X  X    X    D     D
 
-#	REFTYPE:FLAGS:STYPE:SID:TSID:ONID:NS:PARENT_SID:PARENT_TSID:UNUSED
-#   D       D     X     X   X    X    X  X          X           X
+# REFTYPE:FLAGS:STYPE:SID:TSID:ONID:NS:PARENT_SID:PARENT_TSID:UNUSED
+# D       D     X     X   X    X    X  X          X           X
 
 	refstr = "1:0:%X:%X:%X:%X:%X:0:0:0" % (ref[4], ref[0], ref[2], ref[3], ref[1])
 	refstr = refstr.replace(':', '_')

@@ -17,6 +17,7 @@ from Tools.Notifications import AddNotification
 from time import time, localtime
 from GlobalActions import globalActionMap
 from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService
+from gettext import ngettext
 
 inStandby = None
 infoBarInstance = None

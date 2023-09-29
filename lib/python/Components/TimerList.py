@@ -12,11 +12,9 @@ from timer import TimerEntry
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 
 
+# <Name of the Timer>     <Service>
+# <state>  <orb.pos.>  <start, end>
 class TimerList(GUIComponent):
-#
-#  | <Name of the Timer>     <Service>  |
-#  | <state>  <orb.pos.>  <start, end>  |
-#
 	def buildTimerEntry(self, timer, processed):
 		width = self.l.getItemSize().width()
 		res = [None]

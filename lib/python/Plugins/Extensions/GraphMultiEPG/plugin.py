@@ -4,7 +4,6 @@ from Screens.ChannelSelection import SimpleChannelSelection
 import Screens.InfoBar
 from enigma import eServiceCenter, eServiceReference
 from ServiceReference import ServiceReference
-from Screens.Screen import Screen
 from Components.config import config
 
 Session = None
@@ -18,7 +17,7 @@ ref = None
 def zapToService(service, preview=False, zapback=False):
 	if Servicelist.startServiceRef is None:
 		Servicelist.startServiceRef = Session.nav.getCurrentlyPlayingServiceOrGroup()
-	if not service is None:
+	if service:
 		if not preview and not zapback:
 			if Servicelist.getRoot() != epg_bouquet:
 				Servicelist.clearPath()
@@ -41,7 +40,7 @@ def zapToService(service, preview=False, zapback=False):
 def getBouquetServices(bouquet):
 	services = []
 	Servicelist = eServiceCenter.getInstance().list(bouquet)
-	if not Servicelist is None:
+	if Servicelist:
 		while True:
 			service = Servicelist.getNext()
 			if not service.valid():  # check if end of list

@@ -179,7 +179,7 @@ class VRunningText(Renderer):
 		# self.changed((self.CHANGED_DEFAULT,))
 
 	def changed(self, what):
-		if not self.mTimer is None:
+		if self.mTimer:
 			self.mTimer.stop()
 		if what[0] == self.CHANGED_CLEAR:
 			self.txtext = ""
@@ -199,12 +199,12 @@ class VRunningText(Renderer):
 		# if not self.scolor is None:
 		# self.instance.writeText( eRect(X-self.soffset[0], Y-self.soffset[1], self.W-self.soffset[0], self.H-self.soffset[1]), self.scolor, self.bcolor, self.txfont, self.txtext, self.txtflags )
 		# self.instance.writeText( eRect(X, Y, self.W, self.H), self.fcolor, self.bcolor, self.txfont, self.txtext, self.txtflags )
-		if not self.scolor is None:
+		if self.scolor:
 			fcolor = self.scolor
 		else:
 			fcolor = self.fcolor
 		self.instance.writeText(eRect(X - self.soffset[0], Y - self.soffset[1], self.W, self.H), fcolor, self.bcolor, self.txfont, self.txtext, self.txtflags)
-		if not self.scolor is None:
+		if self.scolor:
 			self.instance.writeText(eRect(X, Y, self.W, self.H), self.fcolor, self.scolor, self.txfont, self.txtext, self.txtflags)
 
 	def calcMoving(self):
@@ -212,16 +212,16 @@ class VRunningText(Renderer):
 			return False
 		if self.type == NONE:
 			return False
-		if self.test_label is None:
+		if not self.test_label:
 			return False
 		self.test_label.setText(self.txtext)
 		text_size = self.test_label.calculateSize()
 		text_width = text_size.width()
 		text_height = text_size.height()
 
-#		self.type =		0 - NONE; 1 - RUNNING; 2 - SWIMMING; 3 - AUTO(???)
-#		self.direction =	0 - LEFT; 1 - RIGHT;   2 - TOP;      3 - BOTTOM
-#		self.halign =		0 - LEFT; 1 - RIGHT;   2 -CENTER;    3 - BLOCK
+# self.type =		0 - NONE; 1 - RUNNING; 2 - SWIMMING; 3 - AUTO(???)
+# self.direction =	0 - LEFT; 1 - RIGHT;   2 - TOP;      3 - BOTTOM
+# self.halign =		0 - LEFT; 1 - RIGHT;   2 -CENTER;    3 - BLOCK
 
 		if self.direction in (LEFT, RIGHT):
 			if self.type == RUNNING:		# scroll_type == RUNNING
@@ -239,7 +239,7 @@ class VRunningText(Renderer):
 					self.mStop = self.B - text_width + self.soffset[0] - self.mStep
 					self.P = self.A
 
-				if not self.mStartPoint is None:
+				if self.mStartPoint:
 					if self.direction == LEFT:
 						# self.P = min(self.B, max(self.A, self.mStartPoint))
 						self.mStop = self.P = max(self.A, min(self.W, self.mStartPoint))
@@ -301,7 +301,7 @@ class VRunningText(Renderer):
 					self.mStop = self.B - text_height + self.soffset[1] - self.mStep - 9
 					self.P = self.A
 
-				if not self.mStartPoint is None:
+				if self.mStartPoint:
 					if self.direction == TOP:
 						self.mStop = self.P = max(self.A, min(self.H, self.mStartPoint))
 					else:

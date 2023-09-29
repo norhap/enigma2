@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Components.Converter.Poll import Poll
 from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService
+from enigma import iServiceInformation, iPlayableService, iServiceInformation_ENUMS
 from Components.config import config
 from Components.Element import cached
 
@@ -360,11 +360,11 @@ class ServiceInfoEX(Poll, Converter, object):
 			return audio and audio.getNumberOfTracks() > 1
 		elif self.type == self.SUBTITLES_AVAILABLE:
 			try:
-			       subtitle = service and service.subtitle()
-			       subtitlelist = subtitle and subtitle.getSubtitleList()
+				subtitle = service and service.subtitle()
+				subtitlelist = subtitle and subtitle.getSubtitleList()
 			except:
-			       subtitle = service and service.subtitleTracks()
-			       subtitlelist = subtitle and subtitle.getNumberOfSubtitleTracks()
+				subtitle = service and service.subtitleTracks()
+				subtitlelist = subtitle and subtitle.getNumberOfSubtitleTracks()
 			if subtitlelist:
 				return len(subtitlelist) > 0
 			return False

@@ -49,7 +49,7 @@ class ConverterRotator(Poll, Converter, object):
 			if len(self.sourceList):
 				self.mainstream = self.sourceList.pop(0)[0]
 		# if what[0] == self.CHANGED_POLL and \
-		#   self.poll_enabled and \
-		#   not self.sourceList[self.sourceIndex][1]:
-		#	return
+		# self.poll_enabled and \
+		# not self.sourceList[self.sourceIndex][1]:
+		# return
 		self.downstream_elements.changed(what)

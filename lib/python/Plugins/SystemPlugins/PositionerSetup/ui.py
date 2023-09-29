@@ -1,12 +1,10 @@
 from __future__ import print_function
-from enigma import eTimer, eDVBResourceManager, eDVBDiseqcCommand, eDVBFrontendParametersSatellite, iDVBFrontend
+from enigma import eTimer, eDVBSatelliteEquipmentControl, eDVBResourceManager, eDVBDiseqcCommand, eDVBFrontendParametersSatellite, iDVBFrontend
 from time import sleep
 from operator import mul as mul
 from random import SystemRandom as SystemRandom
 from threading import Thread as Thread
 from threading import Event as Event
-
-from enigma import eTimer, eDVBSatelliteEquipmentControl, eDVBResourceManager, eDVBDiseqcCommand, eDVBFrontendParametersSatellite, iDVBFrontend
 
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Button import Button
@@ -237,7 +235,7 @@ class PositionerSetup(Screen):
 		self.statusMsgTimeoutTicks = 0
 		self.statusMsgBlinking = False
 		self.statusMsgBlinkCount = 0
-		self.statusMsgBlinkRate = 500 // self.UPDATE_INTERVAL	# milliseconds
+		self.statusMsgBlinkRate = 500 // self.UPDATE_INTERVAL  # milliseconds
 		self.tuningChangedTo(tp)
 
 		self["actions"] = NumberActionMap(["DirectionActions", "OkCancelActions", "ColorActions", "TimerEditActions", "InputActions", "InfobarMenuActions", "SetupActions"],
@@ -393,7 +391,7 @@ class PositionerSetup(Screen):
 			self.rotorPositions = nim.rotorPositions.value
 			self.turningspeedH = nim.turningspeedH.float
 			self.turningspeedV = nim.turningspeedV.float
-		else:	# it is advanced
+		else:  # it is advanced
 			lnb = None
 			self.printMsg(_("Configuration mode: %s") % _("advanced"))
 			fe_data = {}
@@ -794,7 +792,7 @@ class PositionerSetup(Screen):
 			lon = self.sitelon
 			if lon >= 180:
 				lon -= 360
-			if lon < -30:	# americas, make unsigned binary west positive polarity
+			if lon < -30:  # americas, make unsigned binary west positive polarity
 				lon = -lon
 			lon = int(round(lon)) & 0xFF
 			lat = int(round(self.sitelat)) & 0xFF
@@ -869,9 +867,9 @@ class PositionerSetup(Screen):
 	def gotTsidOnid(self, tsid, onid):
 		colors = parameters.get("PositionerOnidTsidcolors", (0x0000FF00, 0x00FF0000))  # "valid", "not valid"
 		if tsid == self.tsid and onid == self.onid:
-			msg = "\c%08x" % colors[0] + _("This valid ONID/TSID")
+			msg = r"\c%08x" % colors[0] + _("This valid ONID/TSID")
 		else:
-			msg = "\c%08x" % colors[1] + _("This not valid ONID/TSID")
+			msg = r"\c%08x" % colors[1] + _("This not valid ONID/TSID")
 		self.statusMsg(msg, blinking=True, timeout=10)
 		if self.raw_channel:
 			self.raw_channel.receivedTsidOnid.get().remove(self.gotTsidOnid)
@@ -1022,13 +1020,13 @@ class PositionerSetup(Screen):
 			turningspeed = self.turningspeedV
 		return max(turningspeed, 0.1)
 
-	TURNING_START_STOP_DELAY = 1.600	# seconds
+	TURNING_START_STOP_DELAY = 1.600    # seconds
 	MAX_SEARCH_ANGLE = 12.0				# degrees
 	MAX_FOCUS_ANGLE = 6.0				# degrees
 	LOCK_LIMIT = 0.1					# ratio
 	MEASURING_TIME = 2.500				# seconds
 
-	def measure(self, time=MEASURING_TIME):	# time in seconds
+	def measure(self, time=MEASURING_TIME):	 # time in seconds
 		self.snr_percentage = 0.0
 		self.lock_count = 0.0
 		self.stat_count = 0
@@ -1482,9 +1480,9 @@ class TunerScreen(ConfigListScreen, Screen):
 		orb_pos = self.fe_data.get("orbital_position", None)
 		self.tuning = ConfigSubsection()
 		self.tuning.type = ConfigSelection(
-				default="manual_transponder",
-				choices={"manual_transponder": _("Manual transponder"),
-							"predefined_transponder": _("Predefined transponder")})
+			default="manual_transponder",
+			choices={"manual_transponder": _("Manual transponder"),
+					"predefined_transponder": _("Predefined transponder")})
 		self.tuning.sat = ConfigSatlist(list=satlist)
 		if orb_pos is not None:
 			orb_pos_str = str(orb_pos)
