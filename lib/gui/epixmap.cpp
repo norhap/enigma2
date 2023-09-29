@@ -16,6 +16,9 @@ void ePixmap::setAlphatest(int alphatest)
 
 void ePixmap::setScale(int scale)
 {
+	// support old python code beacause the old code will only support BT_SCALE
+	scale = (scale) ? gPainter::BT_SCALE : 0;
+
 	if (m_scale != scale)
 	{
 		m_scale = scale;
