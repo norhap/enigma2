@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
-from Screens.ChannelSelection import *
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Standby import TryQuitMainloop
 from Screens.MessageBox import MessageBox
+from Screens.ChannelSelection import ChannelSelectionBase
 from Components.ActionMap import ActionMap
-from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
-from Components.config import ConfigNothing
+from Components.config import config, ConfigNothing
 from Components.ConfigList import ConfigList
 from Components.Label import Label
 from Components.SelectionList import SelectionList
-from Components.MenuList import MenuList
 from Components.SystemInfo import SystemInfo
+from Components.NimManager import nimmanager
 from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
 from xml.etree.cElementTree import parse
-from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv, eServiceCenter
+from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv, eServiceCenter, eServiceReference
 from Tools.BoundFunction import boundFunction
 from Tools.CIHelper import cihelper
 from Tools.XMLTools import stringToXML
@@ -45,7 +44,7 @@ class CIselectMainMenu(Screen):
 				"red": self.close,
 				"ok": self.greenPressed,
 				"cancel": self.close
-			}, -1)
+		}, -1)
 
 		NUM_CI = SystemInfo["CommonInterface"]
 
@@ -128,13 +127,13 @@ class CIconfigMenu(Screen):
 
 		self["actions"] = ActionMap(["ColorActions", "SetupActions", "MenuActions"],
 			{
-				"green": self.greenPressed,
-				"red": self.redPressed,
-				"yellow": self.yellowPressed,
-				"blue": self.bluePressed,
-				"menu": self.menuPressed,
-				"cancel": self.cancel
-			}, -1)
+			"green": self.greenPressed,
+			"red": self.redPressed,
+			"yellow": self.yellowPressed,
+			"blue": self.bluePressed,
+			"menu": self.menuPressed,
+			"cancel": self.cancel
+		}, -1)
 
 		print("[CommonInterfaceAssignment] CI_Wizzard_Config Configuring CI Slots : %d  " % self.ci_slot)
 
@@ -215,7 +214,7 @@ class CIconfigMenu(Screen):
 				for ref in args[0]:
 					service_ref = ServiceReference(ref)
 					service_name = service_ref.getServiceName()
-					if len(service_name) and find_in_list(self.servicelist, service_name, 0) == False:
+					if len(service_name) and not find_in_list(self.servicelist, service_name, 0):
 						str_service = service_ref.ref.toString()
 						split_ref = str_service.split(":")
 						if split_ref[0] == "1" and not str_service.startswith("1:134:") and "%3a//" not in str_service:
@@ -227,7 +226,7 @@ class CIconfigMenu(Screen):
 				if ref:
 					service_ref = ServiceReference(ref)
 					service_name = service_ref.getServiceName()
-					if find_in_list(self.servicelist, service_name, 0) == False:
+					if not find_in_list(self.servicelist, service_name, 0):
 						str_service = service_ref.ref.toString()
 						split_ref = str_service.split(":")
 						if split_ref[0] == "1" and not str_service.startswith("1:134:") and "%3a//" not in str_service:
@@ -242,7 +241,7 @@ class CIconfigMenu(Screen):
 				for ref in args[0]:
 					service_ref = ServiceReference(ref)
 					service_name = service_ref.getServiceName()
-					if len(service_name) and find_in_list(self.servicelist, service_name, 0) == False:
+					if len(service_name) and not find_in_list(self.servicelist, service_name, 0):
 						split_ref = service_ref.ref.toString().split(":")
 						if split_ref[0] == "1":
 							self.servicelist.append((service_name, ConfigNothing(), 0, service_ref.ref.toString()))
@@ -251,7 +250,7 @@ class CIconfigMenu(Screen):
 			else:
 				name = args[0]
 				dvbnamespace = args[1]
-				if find_in_list(self.servicelist, name, 0) == False:
+				if not find_in_list(self.servicelist, name, 0):
 					self.servicelist.append((name, ConfigNothing(), 1, dvbnamespace))
 					self["ServiceList"].l.setList(self.servicelist)
 					self.setServiceListInfo()
@@ -374,12 +373,12 @@ class easyCIconfigMenu(CIconfigMenu):
 		CIconfigMenu.__init__(self, session, ci_slot)
 		self["actions"] = ActionMap(["ColorActions", "SetupActions", "MenuActions"],
 			{
-				"green": self.greenPressed,
-				"red": self.redPressed,
-				"yellow": self.yellowPressed,
-				"menu": self.menuPressed,
-				"cancel": self.cancel
-			}, -1)
+			"green": self.greenPressed,
+			"red": self.redPressed,
+			"yellow": self.yellowPressed,
+			"menu": self.menuPressed,
+			"cancel": self.cancel
+		}, -1)
 
 
 class CAidSelect(Screen):
@@ -445,17 +444,17 @@ class myProviderSelection(ChannelSelectionBase):
 		ChannelSelectionBase.__init__(self, session)
 		self.setTitle(_("Select provider to add..."))
 		self.onShown.append(self.showSatellites)
-		self.bouquet_mark_edit = EDIT_BOUQUET
+		self.bouquet_mark_edit = 1
 
 		self["actions"] = ActionMap(["OkCancelActions", "ChannelSelectBaseActions"],
 			{
-				"showFavourites": self.showFavourites,
-				"showAllServices": self.showAllServices,
-				"showProviders": self.showProviders,
-				"showSatellites": boundFunction(self.showSatellites, changeMode=True),
-				"cancel": self.cancel,
-				"ok": self.channelSelected
-			})
+			"showFavourites": self.showFavourites,
+			"showAllServices": self.showAllServices,
+			"showProviders": self.showProviders,
+			"showSatellites": boundFunction(self.showSatellites, changeMode=True),
+			"cancel": self.cancel,
+			"ok": self.channelSelected
+		})
 		self["key_red"] = StaticText(_("Close"))
 		self["key_green"] = StaticText()
 		self["key_yellow"] = StaticText()
@@ -490,7 +489,7 @@ class myProviderSelection(ChannelSelectionBase):
 						elif choice[1] == "providerlist":
 							serviceHandler = eServiceCenter.getInstance()
 							servicelist = serviceHandler.list(ref)
-							if not servicelist is None:
+							if servicelist:
 								providerlist = []
 								while True:
 									service = servicelist.getNext()
@@ -526,7 +525,7 @@ class myProviderSelection(ChannelSelectionBase):
 				if justSet:
 					serviceHandler = eServiceCenter.getInstance()
 					servicelist = serviceHandler.list(ref)
-					if not servicelist is None:
+					if servicelist:
 						while True:
 							service = servicelist.getNext()
 							if not service.valid():  # check if end of list
@@ -582,18 +581,18 @@ class myChannelSelection(ChannelSelectionBase):
 		ChannelSelectionBase.__init__(self, session)
 		self.setTitle(_("Select service to add..."))
 		self.onShown.append(self.__onExecCallback)
-		self.bouquet_mark_edit = OFF
+		self.bouquet_mark_edit = 0
 
 		self["actions"] = ActionMap(["OkCancelActions", "TvRadioActions", "ChannelSelectBaseActions"],
 			{
-				"showProviders": self.showProviders,
-				"showSatellites": boundFunction(self.showSatellites, changeMode=True),
-				"showAllServices": self.showAllServices,
-				"cancel": self.cancel,
-				"ok": self.channelSelected,
-				"keyRadio": self.setModeRadio,
-				"keyTV": self.setModeTv
-			})
+			"showProviders": self.showProviders,
+			"showSatellites": boundFunction(self.showSatellites, changeMode=True),
+			"showAllServices": self.showAllServices,
+			"cancel": self.cancel,
+			"ok": self.channelSelected,
+			"keyRadio": self.setModeRadio,
+			"keyTV": self.setModeTv
+		})
 
 		self["key_red"] = StaticText(_("All"))
 		self["key_green"] = StaticText(_("Close"))
@@ -628,7 +627,7 @@ class myChannelSelection(ChannelSelectionBase):
 		if answer and ref:
 			serviceHandler = eServiceCenter.getInstance()
 			servicelist = serviceHandler.list(ref)
-			if not servicelist is None:
+			if servicelist:
 				providerlist = []
 				while True:
 					service = servicelist.getNext()

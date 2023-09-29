@@ -369,7 +369,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 	def isWlanPluginInstalled(self):
 		try:
 			from Plugins.SystemPlugins.WirelessLan.Wlan import iWlan
-		except ImportError as e:
+		except ImportError:
 			self.WlanPluginInstalled = False
 		else:
 			self.WlanPluginInstalled = True

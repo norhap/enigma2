@@ -17,7 +17,7 @@ def filter(g):
 			continue
 
 		if t[1] != "\n":
-#			print(t)
+			# print(t)
 			yield t[1]
 
 
@@ -35,7 +35,7 @@ def do_file(f, mode):
 	while True:
 		try:
 			t = next(tokens)
-		except Exception as e:
+		except:
 			break
 
 		if t == "class":

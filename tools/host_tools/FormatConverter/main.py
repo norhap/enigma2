@@ -37,6 +37,6 @@ while True:
 			break
 
 		datasources[index].getCapabilities()[action][1]()
-		#except:
-		#	print(sys.exc_info())
-		#	print("sorry, could not execute that command")
+		# except:
+		# print(sys.exc_info())
+		# print("sorry, could not execute that command")

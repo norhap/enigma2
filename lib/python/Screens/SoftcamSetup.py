@@ -1,4 +1,4 @@
-from enigma import eTimer, getDesktop
+from enigma import eTimer
 from os.path import isfile
 
 from Screens.MessageBox import MessageBox

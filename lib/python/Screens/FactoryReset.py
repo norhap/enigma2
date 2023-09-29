@@ -4,7 +4,6 @@ from os.path import isdir, join
 from shutil import rmtree
 
 from Components.config import ConfigYesNo, config
-from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Setup import Setup

@@ -124,7 +124,7 @@ class YWeather(Poll, Converter, object):
 		self.poll_interval = self.time_update_ms
 		self.poll_enabled = True
 
-	def fetchXML(self, URL, save_to):
+	def fetchXML(self, url, save_to):
 		socket_timeout = 10
 		socket.setdefaulttimeout(socket_timeout)
 		request = Request(url)
@@ -169,7 +169,7 @@ class YWeather(Poll, Converter, object):
 		if fileExists(XML_location) and (int((time.time() - os.stat(XML_location).st_mtime) / 60) >= self.time_update):
 			os.remove(XML_location)
 		XML_URL = "https://query.yahooapis.com/v1/public/yql?q=select%%20*%%20from%%20weather.forecast%%20where%%20woeid=%ss%%20AND%%20u=%%22c%%22" % self.weather_city
-		if not fileExists(XML_location) and self.fetchXML(XML_URL, XML_location) != True:
+		if not fileExists(XML_location) and self.fetchXML(XML_URL, XML_location) is not True:
 			with open(XML_location, "w") as f:
 				f.write("None")
 			return 'N/A'

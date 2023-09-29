@@ -154,10 +154,10 @@ class VideoEnhancement:
 					self.setConfiguredValues()
 
 			config.pep.split = ConfigSelection(choices={
-					"off": _("Off"),
-					"left": _("Left"),
-					"right": _("Right")},
-					default="off")
+				"off": _("Off"),
+				"left": _("Left"),
+				"right": _("Right")},
+				default="off")
 			config.pep.split.addNotifier(setSplitMode)
 		else:
 			config.pep.split = NoSave(ConfigNothing())

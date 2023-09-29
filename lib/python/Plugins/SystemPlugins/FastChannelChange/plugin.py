@@ -68,8 +68,8 @@ class FCCSupport:
 		self.changeEventTracker()
 		SystemInfo["FCCactive"] = self.fccSetupActivate
 
-#		from Screens.PictureInPicture import on_pip_start_stop
-#		on_pip_start_stop.append(self.FCCForceStopforPIP)
+		# from Screens.PictureInPicture import on_pip_start_stop
+		# on_pip_start_stop.append(self.FCCForceStopforPIP)
 
 	def setProcFCC(self, value):
 		procPath = "/proc/stb/frontend/fbc/fcc"
@@ -197,7 +197,7 @@ class FCCSupport:
 					iPlayableService.evEnd: self.getEvEnd,
 					iPlayableService.evTunedIn: self.getEvTunedIn,
 					iPlayableService.evTuneFailed: self.getEvTuneFailed
-					})
+				})
 
 		elif self.__event_tracker:
 			# run ServiceEventTracker.__del_event()
@@ -500,20 +500,17 @@ def Plugins(**kwargs):
 	list = []
 
 	if max_fcc > 0:
-		list.append(
-			PluginDescriptor(name="FCCSupport",
+		list.append(PluginDescriptor(name="FCCSupport",
 			description="Fast Channel Change support",
 			where=[PluginDescriptor.WHERE_SESSIONSTART],
 			fnc=FCCSupportInit))
 
-		list.append(
-			PluginDescriptor(name="FCCExtensionMenu",
+		list.append(PluginDescriptor(name="FCCExtensionMenu",
 			description="Fast Channel Change menu",
 			where=[PluginDescriptor.WHERE_EXTENSIONSINGLE],
 			fnc=addExtentions))
 
-		list.append(
-			PluginDescriptor(name="FCCSetup",
+		list.append(PluginDescriptor(name="FCCSetup",
 			description=_("Fast Channel Change Setup"),
 			where=[PluginDescriptor.WHERE_MENU],
 			needsRestart=False,

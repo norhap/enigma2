@@ -113,22 +113,22 @@ class EPGList(GUIComponent):
 	def moveDown(self):
 		self.instance.moveSelection(self.instance.moveDown)
 
-	def connectSelectionChanged(func):
+	def connectSelectionChanged(self, func):
 		if not self.onSelChanged.count(func):
 			self.onSelChanged.append(func)
 
-	def disconnectSelectionChanged(func):
+	def disconnectSelectionChanged(self, func):
 		self.onSelChanged.remove(func)
 
 	def selectionChanged(self):
 		for x in self.onSelChanged:
 			if x is not None:
 				x()
-#				try:
-#					x()
-#				except:  # FIXME!!!
-#					print("FIXME in EPGList.selectionChanged")
-#					pass
+				# try:
+				# x()
+				# except:  # FIXME!!!
+				# print("FIXME in EPGList.selectionChanged")
+				# pass
 
 	GUI_WIDGET = eListbox
 
@@ -356,7 +356,6 @@ class EPGList(GUIComponent):
 		if not serviceref:
 			return
 		index = 0
-		refstr = serviceref.toString()
 		for x in self.list:
 			if CompareWithAlternatives(x[1], serviceref):
 				self.instance.moveSelectionTo(index)

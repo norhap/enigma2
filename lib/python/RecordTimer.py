@@ -1,5 +1,5 @@
 from bisect import insort
-from os import fsync, makedirs, remove, rename, statvfs, sys
+from os import fsync, makedirs, remove, rename, statvfs
 from os.path import exists, isdir, realpath
 from sys import maxsize
 from threading import Lock
@@ -20,7 +20,7 @@ from Screens.MessageBox import MessageBox
 from Screens.PictureInPicture import PictureInPicture
 import Screens.Standby
 import Screens.InfoBar
-from Tools import Notifications, ASCIItranslit, Trashcan
+from Tools import ASCIItranslit, Trashcan
 from Tools.Alternatives import ResolveCiAlternative
 from Tools.CIHelper import cihelper
 from Tools.Directories import SCOPE_CONFIG, fileReadXML, getRecordingFilename, resolveFilename, isPluginInstalled
@@ -134,7 +134,7 @@ n_recordings = 0  # Must be zero when we start running.
 
 
 def SetIconDisplay(nrec):
-	if SID_code_states[0] == None:  # Not the code for us
+	if not SID_code_states[0]:  # Not the code for us
 		return
 	(wdev, max_states) = SID_code_states
 	if nrec == 0:                   # An absolute setting - clear it...
@@ -270,8 +270,8 @@ class RecordTimer(Timer):
 			if timer.flags:
 				timerEntry.append("flags=\"%s\"" % " ".join([stringToXML(x) for x in timer.flags]))
 			timerList.append("\t<timer %s>" % " ".join(timerEntry))
-			for time, code, msg in timer.log_entries:
-				timerList.append("\t\t<log code=\"%d\" time=\"%d\">%s</log>" % (code, time, stringToXML(msg)))
+			for timetimer, code, msg in timer.log_entries:
+				timerList.append("\t\t<log code=\"%d\" time=\"%d\">%s</log>" % (code, timetimer, stringToXML(msg)))
 			timerList.append("\t</timer>")
 		timerList.append("</timers>\n")
 		#

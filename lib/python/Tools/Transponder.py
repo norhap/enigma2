@@ -24,7 +24,7 @@ def getMHz(frequency):
 	return (frequency + 50000) // 100000 // 10.
 
 # Note: newly added region add into ImportChannels to getTerrestrialRegion()
-#	due using for fallback tuner too
+# due using for fallback tuner too
 
 
 def getChannelNumber(frequency, nim):
@@ -74,7 +74,7 @@ def channel2frequency(channel, nim):
 			return None  # FIXME
 	elif "Zealand" in descr and 25 <= channel <= 50:
 			return (506000 + 8000 * (int(channel) - 25)) * 1000
-	else:	# Australian rules
+	else:  # Australian rules
 		res = 474000000
 		if channel != "9A":
 			ch = int(channel)

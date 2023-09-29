@@ -5,7 +5,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from . import VideoEnhancement
+from .VideoEnhancement import VideoEnhancement
 import os
 import skin
 
@@ -42,20 +42,20 @@ class VideoEnhancementSetup(ConfigListScreen, Screen):
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"],
 			{
-				"cancel": self.keyCancel,
-				"save": self.apply,
-				"yellow": self.keyYellow,
-				"blue": self.keyBlue,
-				"menu": self.closeRecursive,
-				"left": self.keyLeft,
-				"right": self.keyRight
-			}, -2)
+			"cancel": self.keyCancel,
+			"save": self.apply,
+			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
+			"menu": self.closeRecursive,
+			"left": self.keyLeft,
+			"right": self.keyRight
+		}, -2)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 		self["key_yellow"] = StaticText(_("Last config"))
 		self["key_blue"] = StaticText(_("Default"))
-		if not self.SelectionChanged in self["config"].onSelectionChanged:
+		if self.SelectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.SelectionChanged)
 		self.rememberOldSettings()
 		self.changedEntry()
@@ -276,11 +276,11 @@ class VideoEnhancementPreview(ConfigListScreen, Screen):
 
 		self["actions"] = ActionMap(["SetupActions"],
 			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-				"left": self.keyLeft,
-				"right": self.keyRight
-			}, -2)
+			"cancel": self.keyCancel,
+			"save": self.keySave,
+			"left": self.keyLeft,
+			"right": self.keyRight
+		}, -2)
 
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("OK"))

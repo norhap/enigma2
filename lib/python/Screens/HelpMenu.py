@@ -15,6 +15,7 @@ from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 from Tools.LoadPixmap import LoadPixmap
+from gettext import pgettext
 
 config.misc.rcused = ConfigInteger(default=1)
 

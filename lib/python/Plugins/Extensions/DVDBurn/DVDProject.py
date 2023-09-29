@@ -145,12 +145,12 @@ class DVDProject:
 			# return False
 			return True
 
-	def xmlAttributesToConfig(self, node, config):
+	def xmlAttributesToConfig(self, node):
 		try:
 			i = 0
 			# if node.attributes.length < len(config.dict())-1:
-				# self.error = "project attributes missing"
-				# raise AttributeError
+			# self.error = "project attributes missing"
+			# raise AttributeError
 			while i < node.attributes.length:
 				item = node.attributes.item(i)
 				key = item.name

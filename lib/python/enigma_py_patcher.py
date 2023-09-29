@@ -1,4 +1,4 @@
-#read the comment to this file in lib/service/iservice.h !!
+# read the comment to this file in lib/service/iservice.h !!
 import sys
 import os
 

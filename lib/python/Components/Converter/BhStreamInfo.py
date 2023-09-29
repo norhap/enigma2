@@ -2,9 +2,7 @@ from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
 import NavigationInstance
-from ServiceReference import ServiceReference
 from enigma import iServiceInformation, iPlayableService
-from Tools.Transponder import ConvertToHumanReadable
 
 
 class BhStreamInfo(Poll, Converter, object):
@@ -60,19 +58,16 @@ class BhStreamInfo(Poll, Converter, object):
 				return ''
 
 	@cached
-	def getText(self):
+	def getText(self, tp):
 		service = self.source.service
 		info = service and service.info()
 		if not info:
 			return ''
-			if tp:
-				tpinfo = ConvertToHumanReadable(tp)
-			if not tp:
-				tp = info.getInfoObject(iServiceInformation.sTransponderData)
-				tpinfo = ConvertToHumanReadable(tp)
+		else:
+			tp = info.getInfoObject(iServiceInformation.sTransponderData)
 		if self.type == self.DUMMY:
 			refstr = str(self.reference())
-			if '%3a' in refstrr:
+			if '%3a' in refstr:
 				return self.streamurl()
 		else:
 			if self.type == self.STREAMURL:

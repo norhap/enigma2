@@ -12,7 +12,6 @@ from Components.Sources.Boolean import Boolean
 
 # for HelpWindow
 from Components.Pixmap import Pixmap
-from enigma import ePoint
 
 
 class ClientModeScreen(ConfigListScreen, Screen):
@@ -86,7 +85,7 @@ class ClientModeScreen(ConfigListScreen, Screen):
 
 	def saveconfig(self):
 		nim_config_list = []
-		if self.initial_state != config.clientmode.enabled.value and self.initial_state == False:  # switching to client mode
+		if self.initial_state != config.clientmode.enabled.value and not self.initial_state:  # switching to client mode
 			# save normal mode config so it can be reinsated when returning to normal mode
 			nim_config_list = []
 			for x in config.Nims:

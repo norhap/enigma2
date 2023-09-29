@@ -6,14 +6,13 @@ from skin import findSkinScreen
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Button import Button
 from Components.config import ConfigDictionarySet, NoSave, config, configfile
-from Components.NimManager import nimmanager
+from Components.NimManager import nimmanager  # This import, although not defined, is necessary for the search and scan menu
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
 from Components.SystemInfo import SystemInfo
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
-from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
@@ -32,7 +31,7 @@ lastMenuID = None
 
 def default_skin():
 	for line in open("/etc/enigma2/settings"):
-		if not "config.skin.primary_skin" in line:
+		if "config.skin.primary_skin" not in line:
 			return default_skin
 
 
@@ -151,9 +150,9 @@ class Menu(Screen, ProtectedScreen):
 	def runScreen(self, arg):
 		# arg[0] is the module (as string)
 		# arg[1] is Screen inside this module
-		#	plus possible arguments, as
-		#	string (as we want to reference
-		#	stuff which is just imported)
+		# plus possible arguments, as
+		# string (as we want to reference
+		# stuff which is just imported)
 		if arg[0] != "":
 			exec("from %s import %s" % (arg[0], arg[1].split(",")[0]))
 			self.openDialog(*eval(arg[1]))

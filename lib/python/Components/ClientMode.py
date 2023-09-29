@@ -1,4 +1,4 @@
-from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, ConfigSelection, ConfigIP, ConfigInteger, ConfigSubList, ConfigClock
+from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, ConfigSelection, ConfigIP, ConfigInteger, ConfigClock
 from Components.SystemInfo import SystemInfo
 
 
@@ -7,8 +7,8 @@ def InitClientMode():
 	config.clientmode.enabled = ConfigYesNo(default=False)
 
 	def clientModeChanged(configElement):
-		SystemInfo["ClientModeEnabled"] = configElement.value == True
-		SystemInfo["ClientModeDisabled"] = configElement.value != True
+		SystemInfo["ClientModeEnabled"] = configElement.value is True
+		SystemInfo["ClientModeDisabled"] = configElement.value is not True
 	config.clientmode.enabled.addNotifier(clientModeChanged, immediate_feedback=True, initial_call=True)
 	config.clientmode.serverAddressType = ConfigSelection(default="ip", choices=[("ip", _("IP")), ("domain", _("Domain"))])
 	config.clientmode.serverIP = ConfigIP(default=[0, 0, 0, 0], auto_jump=True)

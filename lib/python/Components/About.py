@@ -1,14 +1,13 @@
 from os import stat
 from os.path import isfile
 from sys import maxsize, modules, version_info
-
+from gettext import ngettext
 import time
 from re import search
 from socket import socket, AF_INET, inet_ntoa, SOCK_DGRAM
 from fcntl import ioctl
 from struct import pack, unpack
 from subprocess import PIPE, Popen
-from Components.Console import Console
 from Components.SystemInfo import SystemInfo
 from Tools.HardwareInfo import HardwareInfo
 
@@ -182,7 +181,7 @@ def getCPUInfoString():
 				pass
 		elif isfile("/proc/hisi/msp/pm_cpu"):
 			try:
-				temperature = search('temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
+				temperature = search(r'temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
 			except:
 				pass
 		if temperature:

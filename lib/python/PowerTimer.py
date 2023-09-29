@@ -72,7 +72,7 @@ class PowerTimer(Timer):
 		overlapText = [_("Timer overlaps detected in pm_timers.xml!"), _("Please check all timers!")]
 		for timer in timersDom.findall("timer"):
 			newTimer = self.createTimer(timer)
-			if (self.record(newTimer, True, dosave=False) is not None) and (check == True):
+			if (self.record(newTimer, True, dosave=False) is not None) and check:
 				AddPopup("\n".join(overlapText), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerLoadFailed")
 				check = False  # At moment it is enough when the message is displayed one time.
 
@@ -454,17 +454,13 @@ class PowerTimerEntry(TimerEntry, object):
 				from Components.Converter.ClientsStreaming import ClientsStreaming
 				if ((not Screens.Standby.inStandby and NavigationInstance.instance.getCurrentlyPlayingServiceReference() and
 					("0:0:0:0:0:0:0:0:0" in NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString() or
-					 "4097:" in NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
-					 ) or
-					 (int(ClientsStreaming("NUMBER").getText()) > 0)
-					) or
+					"4097:" in NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()) or
+					(int(ClientsStreaming("NUMBER").getText()) > 0)) or
 					(NavigationInstance.instance.RecordTimer.isRecording() or
-					 abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or
-					 abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900) or
-					 (self.autosleepinstandbyonly == "yes" and not Screens.Standby.inStandby) or
-					 (self.autosleepinstandbyonly == "yes" and Screens.Standby.inStandby and internalHDDNotSleeping()
-					)
-				   ):
+					abs(NavigationInstance.instance.RecordTimer.getNextRecordingTime() - time()) <= 900 or
+					abs(NavigationInstance.instance.RecordTimer.getNextZapTime() - time()) <= 900) or
+					(self.autosleepinstandbyonly == "yes" and not Screens.Standby.inStandby) or
+					(self.autosleepinstandbyonly == "yes" and Screens.Standby.inStandby and internalHDDNotSleeping())):
 					self.do_backoff()  # Retry.
 					return False
 				if not Screens.Standby.inTryQuitMainloop:  # Not a shutdown messagebox is open.

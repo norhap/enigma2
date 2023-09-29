@@ -1,6 +1,6 @@
 from gettext import dgettext
 from os.path import getmtime, join
-from xml.etree.cElementTree import ParseError, fromstring, parse
+from xml.etree.cElementTree import fromstring
 
 from skin import setups
 from Components.config import ConfigBoolean, ConfigNothing, ConfigSelection, config

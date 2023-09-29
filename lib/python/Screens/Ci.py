@@ -12,6 +12,7 @@ from enigma import eTimer, eDVBCI_UI
 from os import remove
 from os.path import exists
 import Screens.Standby
+from gettext import ngettext
 
 forceNotShowCiMessages = False
 
@@ -109,7 +110,7 @@ class MMIDialog(Screen):
 				"8": self.keyNumberGlobal,
 				"9": self.keyNumberGlobal,
 				"0": self.keyNumberGlobal
-			}, -1)
+		}, -1)
 
 		self.action = action
 		self.screen_data = screen_data
@@ -400,7 +401,7 @@ class CiSelection(Screen):
 				"right": self.keyLeft,
 				"ok": self.okbuttonClick,
 				"cancel": self.cancel
-			}, -1)
+		}, -1)
 
 		self.dlg = None
 		self.state = {}
@@ -539,7 +540,7 @@ class CiSelection(Screen):
 				authFile = "/etc/ciplus/ci_auth_slot_%d.bin" % slot
 				if exists(authFile):
 					remove(authFile)
-			elif action == 1: #init
+			elif action == 1:  # init
 				eDVBCI_UI.getInstance().setInit(slot)
 			elif action == 5:
 				self.session.openWithCallback(self.cancelCB, PermanentPinEntry, config.ci[slot].static_pin, _("Smartcard PIN"))
