@@ -16,9 +16,9 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu,
 		Screen.__init__(self, session)
 		self.setTitle(_("Subservices"))
 		for x in InfoBarBase, InfoBarShowHide, InfoBarMenu, \
-				InfoBarInstantRecord, InfoBarSeek, InfoBarTimeshift, \
-				InfoBarTimeshiftState, InfoBarSubtitleSupport, \
-				InfoBarExtensions, InfoBarAudioSelection:
+			InfoBarInstantRecord, InfoBarSeek, InfoBarTimeshift, \
+			InfoBarTimeshiftState, InfoBarSubtitleSupport, \
+			InfoBarExtensions, InfoBarAudioSelection:
 			x.__init__(self)
 		self.restoreService = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 		self.subservices = subservices
@@ -27,23 +27,23 @@ class SubservicesQuickzap(InfoBarBase, InfoBarShowHide, InfoBarMenu,
 		self.currentSubserviceNumberLabel = self["CurrentSubserviceNumber"]
 		self["actions"] = NumberActionMap(["InfobarSubserviceQuickzapActions", "NumberActions", "DirectionActions", "ColorActions"],
 			{
-				"up": self.showSelection,
-				"down": self.showSelection,
-				"right": self.nextSubservice,
-				"left": self.previousSubservice,
-				"green": self.showSelection,
-				"exit": self.quitQuestion,
-				"1": self.keyNumberGlobal,
-				"2": self.keyNumberGlobal,
-				"3": self.keyNumberGlobal,
-				"4": self.keyNumberGlobal,
-				"5": self.keyNumberGlobal,
-				"6": self.keyNumberGlobal,
-				"7": self.keyNumberGlobal,
-				"8": self.keyNumberGlobal,
-				"9": self.keyNumberGlobal,
-				"0": self.keyNumberGlobal
-			}, 0)
+			"up": self.showSelection,
+			"down": self.showSelection,
+			"right": self.nextSubservice,
+			"left": self.previousSubservice,
+			"green": self.showSelection,
+			"exit": self.quitQuestion,
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+			"0": self.keyNumberGlobal
+		}, 0)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 		self.onClose.append(self.__onClose)
 

@@ -133,11 +133,6 @@ class AutoClientModeTimer:
 				ClientModeTime = 0
 				print("[ChannelsImporter] ClientModeScheduler doneConfiguring Schedule Disabled at", strftime("%c", localtime(now)))
 				autoClientModeTimer.backupstop()
-		if ClientModeTime > 0:
-			t = localtime(ClientModeTime)
-			clientmodetext = strftime(_("%a %e %b  %-H:%M"), t)
-		else:
-			clientmodetext = ""
 
 
 class ChannelsImporter():

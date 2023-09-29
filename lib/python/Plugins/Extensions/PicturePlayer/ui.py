@@ -9,9 +9,9 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.FileList import FileList
 from Components.Sources.List import List
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.ConfigList import ConfigListScreen
 
-from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, KEY_LEFT, KEY_RIGHT, getConfigListEntry
+from Components.config import config, ConfigSubsection, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, getConfigListEntry
 import skin
 
 config.pic = ConfigSubsection()
@@ -76,7 +76,7 @@ class picshow(Screen):
 		if not pathExists(currDir):
 			currDir = "/"
 
-		self.filelist = FileList(currDir, matchingPattern="(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif|svg)")
+		self.filelist = FileList(currDir, matchingPattern=r"(?i)^.*\.(jpeg|jpg|jpe|png|bmp|gif|svg)")
 		self["filelist"] = self.filelist
 		self["filelist"].onSelectionChanged.append(self.selectionChanged)
 
@@ -174,11 +174,11 @@ class Pic_Setup(ConfigListScreen, Screen):
 		self.setTitle(_("Settings"))
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
 			{
-				"cancel": self.keyCancel,
-				"save": self.keySave,
-				"ok": self.keySave,
-				"menu": self.closeRecursive,
-			}, -2)
+			"cancel": self.keyCancel,
+			"save": self.keySave,
+			"ok": self.keySave,
+			"menu": self.closeRecursive,
+		}, -2)
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
 
@@ -219,7 +219,7 @@ class Pic_Exif(Screen):
 		self.setTitle(_("Info"))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
-		{
+			{
 			"cancel": self.close
 		}, -1)
 
@@ -273,7 +273,7 @@ class Pic_Thumb(Screen):
 			absY = self.spaceY + (posY * (self.spaceY + self.picY))
 			self.positionlist.append((absX, absY))
 			skincontent += "<widget source=\"label" + str(x) + "\" render=\"Label\" position=\"" + str(absX + 5) + "," + str(absY + self.picY - textsize) + "\" size=\"" + str(self.picX - 10) + "," + str(textsize) \
-					+ "\" font=\"Regular;" + str(thumtxt) + "\" zPosition=\"2\" transparent=\"1\" noWrap=\"1\" foregroundColor=\"" + self.textcolor + "\" />"
+				+ "\" font=\"Regular;" + str(thumtxt) + "\" zPosition=\"2\" transparent=\"1\" noWrap=\"1\" foregroundColor=\"" + self.textcolor + "\" />"
 			skincontent += "<widget name=\"thumb" + str(x) + "\" position=\"" + str(absX + 5) + "," + str(absY + 5) + "\" size=\"" + str(self.picX - 10) + "," + str(self.picY - (textsize * 2)) + "\" zPosition=\"2\" transparent=\"1\" alphaTest=\"on\" />"
 
 		# Screen, backgroundlabel and MovingPixmap
@@ -310,7 +310,7 @@ class Pic_Thumb(Screen):
 		framePos = 0
 		Page = 0
 		for x in piclist:
-			if x[0][1] == False:
+			if not x[0][1]:
 				self.filelist.append((index, framePos, Page, x[0][0], path + x[0][0]))
 				index += 1
 				framePos += 1
@@ -475,12 +475,12 @@ class Pic_Full_View(Screen):
 
 		for x in filelist:
 			if len(filelist[0]) == 3:  # orig. filelist
-				if x[0][1] == False:
+				if not x[0][1]:
 					self.filelist.append(path + x[0][0])
 				else:
 					self.dirlistcount += 1
 			elif len(filelist[0]) == 2:  # scanlist
-				if x[0][1] == False:
+				if not x[0][1]:
 					self.filelist.append(x[0][0])
 				else:
 					self.dirlistcount += 1
@@ -508,7 +508,7 @@ class Pic_Full_View(Screen):
 			self.session.nav.stopService()
 		self.setConf()
 		self["play_icon"].hide()
-		if config.pic.infoline.value == False:
+		if not config.pic.infoline.value:
 			self["file"].setText("")
 		self.start_decode()
 
@@ -564,7 +564,7 @@ class Pic_Full_View(Screen):
 
 	def slidePic(self):
 		print("[PicturePlayer] slide to next Picture index=" + str(self.lastindex))
-		if config.pic.loop.value == False and self.lastindex == self.maxentry:
+		if not config.pic.loop.value and self.lastindex == self.maxentry:
 			self.PlayPause()
 		self.shownow = True
 		self.ShowPicture()

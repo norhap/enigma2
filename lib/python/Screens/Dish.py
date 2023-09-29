@@ -157,7 +157,7 @@ class Dish(Screen):
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			pmt = info and info.getInfo(iServiceInformation.sPMTPID) or -1
-			if pmt != None and pmt >= 0:
+			if pmt and pmt >= 0:
 				print("[Dish] tuned, closing...")
 				self.__toHide()
 			else:
@@ -317,8 +317,8 @@ class Dishpip(Dish, Screen):
 			if self.close_timeout <= 3:
 				self.__toHide()
 			# elif not self.getRotorMovingState():
-			#	self.turnTimer.stop()
-			#	self.timeoutTimer.start(10000, True)
+			# self.turnTimer.stop()
+			# self.timeoutTimer.start(10000, True)
 		else:
 			if not self.getRotorMovingState():
 				self.turnTimer.stop()

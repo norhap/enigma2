@@ -29,8 +29,8 @@ class SymbolsCheckPoller:
 		self.timer = eTimer()
 		self.onClose = []
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
-			})
+			iPlayableService.evUpdatedInfo: self.__evUpdatedInfo,
+		})
 
 	def __onClose(self):
 		pass

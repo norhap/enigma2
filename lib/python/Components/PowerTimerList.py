@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from enigma import eListboxPythonMultiContent, eListbox, gFont, getDesktop, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM
+from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_BOTTOM
 from Components.GUIComponent import GUIComponent
 from skin import parseFont
 from Tools.FuzzyDate import FuzzyTime
@@ -11,11 +11,7 @@ from PowerTimer import AFTEREVENT, TIMERTYPE
 
 class PowerTimerList(GUIComponent, object):
 
-#  | <Service>     <Name of the Timer>  |
-#  | <start, end>              <state>  |
-
 	def buildTimerEntry(self, timer, processed):
-		screenwidth = getDesktop(0).size().width()
 		timertype = {
 			TIMERTYPE.WAKEUP: _("Wake up"),
 			TIMERTYPE.WAKEUPTOSTANDBY: _("Wake up to standby"),
@@ -25,14 +21,14 @@ class PowerTimerList(GUIComponent, object):
 			TIMERTYPE.DEEPSTANDBY: _("Deep standby"),
 			TIMERTYPE.REBOOT: _("Reboot"),
 			TIMERTYPE.RESTART: _("Restart GUI")
-			}[timer.timerType]
+		}[timer.timerType]
 
 		afterevent = {
 			AFTEREVENT.NONE: _("Nothing"),
 			AFTEREVENT.WAKEUPTOSTANDBY: _("Wake up to standby"),
 			AFTEREVENT.STANDBY: _("Standby"),
 			AFTEREVENT.DEEPSTANDBY: _("Deep standby")
-			}[timer.afterEvent]
+		}[timer.afterEvent]
 
 		height = self.l.getItemSize().height()
 		width = self.l.getItemSize().width()

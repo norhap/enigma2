@@ -379,7 +379,7 @@ class LocaleSelection(Screen, HelpableScreen):
 
 	def keyCancel(self, closeParameters=()):
 		# if self["locales"].isChanged():
-		#	self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), default=False)
+		# self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"), default=False)
 		# else:
 		international.activateLocale(self.initialLocale, runCallbacks=False)
 		self.close(*closeParameters)

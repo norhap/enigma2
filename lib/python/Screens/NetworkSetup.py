@@ -1,5 +1,4 @@
 import netifaces
-import io
 from os import listdir, makedirs, remove, unlink, rename
 from os.path import exists
 import re
@@ -14,7 +13,7 @@ from Components.Sources.List import List
 from Components.Label import Label, MultiColorLabel
 from Components.Pixmap import Pixmap, MultiPixmap
 from Components.MenuList import MenuList
-from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigMacText, ConfigSubsection, ConfigNumber, ConfigLocations
+from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText, ConfigPassword, ConfigSelection, getConfigListEntry, ConfigSubsection, ConfigNumber, ConfigLocations
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
@@ -29,7 +28,6 @@ from Screens.Standby import TryQuitMainloop
 from random import Random
 import time
 from Components.FileList import MultiFileSelectList
-from Screens.VirtualKeyBoard import VirtualKeyBoard
 import string
 import glob
 import fnmatch
@@ -161,19 +159,19 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 			{
 			"cancel": (self.close, _("Exit network interface list")),
 			"ok": (self.okbuttonClick, _("Select interface")),
-			})
+		})
 
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("Exit network interface list")),
 			"green": (self.okbuttonClick, _("Select interface")),
 			"blue": (self.openNetworkWizard, _("Use the network wizard to configure selected network adapter")),
-			})
+		})
 
 		self["DefaultInterfaceAction"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"yellow": (self.setDefaultInterface, [_("Set interface as default Interface"), _("* Only available if more than one interface is active.")]),
-			})
+		})
 
 		self.adapters = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList()]
 
@@ -256,7 +254,6 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 
 	def setDefaultInterface(self):
 		selection = self["list"].getCurrent()
-		num_if = len(self.list)
 		old_default_gw = None
 		num_configured_if = len(iNetwork.getConfiguredAdapters())
 		if exists("/etc/default_gw"):
@@ -309,7 +306,7 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		if exists(resolveFilename(SCOPE_PLUGINS, "SystemPlugins/NetworkWizard/networkwizard.xml")):
 			try:
 				from Plugins.SystemPlugins.NetworkWizard.NetworkWizard import NetworkWizard
-			except ImportError as e:
+			except ImportError:
 				self.session.open(MessageBox, _("The network wizard extension is not installed!\nPlease install it."), type=MessageBox.TYPE_INFO, timeout=10)
 			else:
 				selection = self["list"].getCurrent()
@@ -447,7 +444,7 @@ class MACSettings(Setup):
 	def changeMac(self, answer=False):
 		self.Console = Console()
 		if answer:
-			if re.match("\w{2}:\w{2}:\w{2}:\w{2}:\w{2}:\w{2}", configmac.change.value):
+			if re.match(r"\w{2}:\w{2}:\w{2}:\w{2}:\w{2}:\w{2}", configmac.change.value):
 				configmac.change.save()
 				self.Console.ePopen("ifconfig " + str(self.iface) + " down && ifconfig " + str(self.iface) + " down hw ether " + str(configmac.change.value) + " ifconfig " + str(self.iface) + " up")
 				self.checkInterfaces()
@@ -514,15 +511,15 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 			{
 			"cancel": (self.keyCancel, _("Exit IPv6 settings")),
 			"ok": (self.keySave, _("Save IPv6 settings")),
-			})
+		})
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.keyCancel, _("Exit IPv6 settings")),
 			"green": (self.keySave, _("Save IPv6 settings")),
 			"blue": (self.resetInetdData, _("Inetd default")),
-			})
+		})
 		self["actions"] = NumberActionMap(["SetupActions"],
-		{
+			{
 			"cancel": self.keyCancel,
 			"ok": self.keySave,
 			"save": self.keySave,
@@ -552,7 +549,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		self.writeInetdData()
 
 	def setDataInetd(self):
-		if self.IPv6ConfigEntry.value == True:
+		if self.IPv6ConfigEntry.value:
 			self.sockTypetcp = "tcp6"
 			self.sockTypeudp = "udp6"
 		self.writeInetdData()
@@ -599,13 +596,12 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		self.close()
 
 	def inetdRestart(self):
-		commands = []
 		if fileExists("/etc/init.d/inetd.busybox"):
 			commands.append('/etc/init.d/inetd.busybox restart')
 
 	def keySave(self):
 		enable_ipv6 = "/etc/enigma2/ipv6"
-		if self.IPv6ConfigEntry.value == False and exists(disable_ipv6):
+		if not self.IPv6ConfigEntry.value and exists(disable_ipv6):
 			with open(disable_ipv6, "w") as fd:
 				fd.write("1")
 			print("[NetworkSetup] IPv6 is now deactived")
@@ -655,17 +651,17 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			{
 			"cancel": (self.keyCancel, _("exit network adapter configuration")),
 			"ok": (self.keySave, _("activate network adapter configuration")),
-			})
+		})
 
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.keyCancel, _("exit network adapter configuration")),
 			"green": (self.keySave, _("activate network adapter configuration")),
 			"blue": (self.KeyBlue, _("open nameserver configuration")),
-			})
+		})
 
 		self["actions"] = NumberActionMap(["SetupActions"],
-		{
+			{
 			"cancel": self.keyCancel,
 			"ok": self.keySave,
 			"left": self.keyLeft,
@@ -1021,21 +1017,21 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			"down": (self.down, _("move down to next entry")),
 			"left": (self.left, _("move up to first entry")),
 			"right": (self.right, _("move down to last entry")),
-			})
+		})
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.close, _("exit networkadapter setup menu")),
 			"ok": (self.ok, _("select menu entry")),
-			})
+		})
 
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("exit networkadapter setup menu")),
-			})
+		})
 
 		self["actions"] = NumberActionMap(["WizardActions", "ShortcutActions"],
-		{
+			{
 			"ok": self.ok,
 			"back": self.close,
 			"up": self.up,
@@ -1078,13 +1074,13 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			if iNetwork.isWirelessInterface(self.iface):
 				try:
 					from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan
-				except ImportError as e:
+				except ImportError:
 					self.session.open(MessageBox, self.missingwlanplugintxt, type=MessageBox.TYPE_INFO, timeout=10)
 				else:
 					if self.queryWirelessDevice(self.iface):
 						self.session.openWithCallback(self.AdapterSetupClosed, AdapterSetup, self.iface)
 					else:
-						self.showErrorMessage()	# Display Wlan not available Message
+						self.showErrorMessage()	 # Display Wlan not available Message
 			else:
 				self.session.openWithCallback(self.AdapterSetupClosed, AdapterSetup, self.iface)
 		if self["menulist"].getCurrent()[1] == 'test':
@@ -1098,23 +1094,23 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		if self["menulist"].getCurrent()[1] == 'scanwlan':
 			try:
 				from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan
-			except ImportError as e:
+			except ImportError:
 				self.session.open(MessageBox, self.missingwlanplugintxt, type=MessageBox.TYPE_INFO, timeout=10)
 			else:
 				if self.queryWirelessDevice(self.iface):
 					self.session.openWithCallback(self.WlanScanClosed, WlanScan, self.iface)
 				else:
-					self.showErrorMessage()	# Display Wlan not available Message
+					self.showErrorMessage()  # Display Wlan not available Message
 		if self["menulist"].getCurrent()[1] == 'wlanstatus':
 			try:
 				from Plugins.SystemPlugins.WirelessLan.plugin import WlanStatus
-			except ImportError as e:
+			except ImportError:
 				self.session.open(MessageBox, self.missingwlanplugintxt, type=MessageBox.TYPE_INFO, timeout=10)
 			else:
 				if self.queryWirelessDevice(self.iface):
 					self.session.openWithCallback(self.WlanStatusClosed, WlanStatus, self.iface)
 				else:
-					self.showErrorMessage()	# Display Wlan not available Message
+					self.showErrorMessage()  # Display Wlan not available Message
 		if self["menulist"].getCurrent()[1] == 'lanrestart':
 			self.session.openWithCallback(self.restartLan, MessageBox, (_("Are you sure you want to restart your network interfaces?\n\n") + self.oktext))
 		if self["menulist"].getCurrent()[1] == 'openwizard':
@@ -1233,13 +1229,13 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			if ret[0] == 'ok' and (iNetwork.isWirelessInterface(self.iface) and iNetwork.getAdapterAttribute(self.iface, "up")):
 				try:
 					from Plugins.SystemPlugins.WirelessLan.plugin import WlanStatus
-				except ImportError as e:
+				except ImportError:
 					self.session.open(MessageBox, self.missingwlanplugintxt, type=MessageBox.TYPE_INFO, timeout=10)
 				else:
 					if self.queryWirelessDevice(self.iface):
 						self.session.openWithCallback(self.WlanStatusClosed, WlanStatus, self.iface)
 					else:
-						self.showErrorMessage()	# Display Wlan not available Message
+						self.showErrorMessage()  # Display Wlan not available Message
 			else:
 				self.updateStatusbar()
 		else:
@@ -1302,7 +1298,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		iNetwork.stopPingConsole()
 		try:
 			from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
-		except ImportError as e:
+		except ImportError:
 			pass
 		else:
 			iStatus.stopWlanConsole()
@@ -1452,15 +1448,15 @@ class NetworkAdapterTest(Screen):
 			self["DhcpInfo_Text"].setForegroundColorNum(1)
 			self["DNSInfo"].setPixmapNum(0)
 			self["DNSInfo_Text"].setForegroundColorNum(1)
-			self["IPInfo"].setPixmapNum(1)			# active
-			self["IPInfo_Text"].setForegroundColorNum(2)	# active
+			self["IPInfo"].setPixmapNum(1)  # active
+			self["IPInfo_Text"].setForegroundColorNum(2)  # active
 		if button == 5:
 			self["IPInfo"].setPixmapNum(0)
 			self["IPInfo_Text"].setForegroundColorNum(1)
 			self["EditSettingsButton"].setPixmapNum(0)
 			self["EditSettings_Text"].setForegroundColorNum(0)
 			self["DNSInfo"].setPixmapNum(1)			# active
-			self["DNSInfo_Text"].setForegroundColorNum(2)	# active
+			self["DNSInfo_Text"].setForegroundColorNum(2)  # active
 		if button == 6:
 			self["DNSInfo"].setPixmapNum(0)
 			self["DNSInfo_Text"].setForegroundColorNum(1)
@@ -1751,7 +1747,7 @@ class NetworkAdapterTest(Screen):
 		iNetwork.stopDNSConsole()
 		try:
 			from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
-		except ImportError as e:
+		except ImportError:
 			pass
 		else:
 			iStatus.stopWlanConsole()
@@ -1775,21 +1771,21 @@ class NetworkMountsMenu(Screen, HelpableScreen):
 			"down": (self.down, _("Move down to next entry")),
 			"left": (self.left, _("Move up to first entry")),
 			"right": (self.right, _("Move down to last entry")),
-			})
+		})
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
 			"cancel": (self.close, _("Exit mounts setup menu")),
 			"ok": (self.ok, _("Select menu entry")),
-			})
+		})
 
 		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
 			{
 			"red": (self.close, _("Exit networkadapter setup menu")),
-			})
+		})
 
 		self["actions"] = NumberActionMap(["WizardActions", "ShortcutActions"],
-		{
+			{
 			"ok": self.ok,
 			"back": self.close,
 			"up": self.up,
@@ -2032,7 +2028,6 @@ class NetworkFtp(NSCommon, Screen):
 		return NetworkServicesSummary
 
 	def FtpStartStop(self):
-		commands = []
 		if not fileExists('/etc/pam.d/vsftpd'):
 			commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
 		if fileExists('/etc/pam.d/vsftpd'):
@@ -2040,7 +2035,6 @@ class NetworkFtp(NSCommon, Screen):
 		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
 
 	def activateFtp(self):
-		commands = []
 		if fileExists('/etc/pam.d/vsftpd'):
 			commands.append('mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
 		else:
@@ -2291,7 +2285,6 @@ class NetworkZeroTier(NSCommon, Screen):
 		self.session.open(NetworkZeroTierLog)
 
 	def ZeroTierStartStop(self):
-		commands = []
 		if fileExists('/etc/init.d/zerotier'):
 			if self.my_zerotier_run:
 				commands.append('/etc/init.d/zerotier stop')
@@ -2390,7 +2383,6 @@ class NetworkSamba(NSCommon, Screen):
 		self.session.open(NetworkSambaLog)
 
 	def SambaStartStop(self):
-		commands = []
 		if not self.my_Samba_run:
 			commands.append('/etc/init.d/samba.sh start')
 		elif self.my_Samba_run:
@@ -2400,7 +2392,6 @@ class NetworkSamba(NSCommon, Screen):
 		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
 
 	def activateSamba(self):
-		commands = []
 		if fileExists('/etc/rc2.d/S20samba.sh'):
 			commands.append('update-rc.d -f samba.sh remove')
 		else:
@@ -2485,7 +2476,6 @@ class NetworkTelnet(NSCommon, Screen):
 		return NetworkServicesSummary
 
 	def TelnetStartStop(self):
-		commands = []
 		if fileExists('/bin/busybox.nosuid'):
 			if self.my_telnet_run:
 				commands.append('killall telnetd ; rm -f /usr/sbin/telnetd')
@@ -2494,7 +2484,6 @@ class NetworkTelnet(NSCommon, Screen):
 			self.Console.eBatch(commands, self.StartStopCallback, debug=True)
 
 	def activateTelnet(self):
-		commands = []
 		if fileExists('/usr/sbin/telnetd'):
 			commands.append('rm -f /usr/sbin/telnetd')
 		else:
@@ -2667,7 +2656,7 @@ class NetworkInadynSetup(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self.updateList()
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def createSummary(self):
@@ -2793,9 +2782,9 @@ class NetworkInadynLog(Screen):
 		self.skinName = "NetworkServiceLog"
 		self['infotext'] = ScrollLabel('')
 		self['actions'] = ActionMap(['WizardActions', 'DirectionActions', 'ColorActions'], {'ok': self.close,
-		 'back': self.close,
-		 'up': self['infotext'].pageUp,
-		 'down': self['infotext'].pageDown})
+			'back': self.close,
+			'up': self['infotext'].pageUp,
+			'down': self['infotext'].pageDown})
 		strview = ''
 		if fileExists('/tmp/inadyn_ip.cache'):
 			f = open('/tmp/inadyn_ip.cache', 'r')
@@ -2982,7 +2971,7 @@ class NetworkuShareSetup(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self.updateList()
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def createSummary(self):
@@ -3174,7 +3163,7 @@ class uShareSelection(Screen):
 			"down": self.down,
 			"up": self.up
 		}, -1)
-		if not self.selectionChanged in self["checkList"].onSelectionChanged:
+		if self.selectionChanged not in self["checkList"].onSelectionChanged:
 			self["checkList"].onSelectionChanged.append(self.selectionChanged)
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -3401,7 +3390,7 @@ class NetworkMiniDLNASetup(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self.updateList()
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 
 	def createSummary(self):
@@ -3580,7 +3569,7 @@ class MiniDLNASelection(Screen):
 			"down": self.down,
 			"up": self.up
 		}, -1)
-		if not self.selectionChanged in self["checkList"].onSelectionChanged:
+		if self.selectionChanged not in self["checkList"].onSelectionChanged:
 			self["checkList"].onSelectionChanged.append(self.selectionChanged)
 		self.onLayoutFinish.append(self.layoutFinished)
 

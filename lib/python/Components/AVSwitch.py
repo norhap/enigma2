@@ -1,5 +1,5 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
-from enigma import eAVControl, eDVBVolumecontrol, getDesktop
+from enigma import eAVControl, eDVBVolumecontrol
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL
 from os.path import exists
 
@@ -79,27 +79,27 @@ def InitAVSwitch():
 
 	config.av.colorformat = ConfigSelection(choices=colorformat_choices, default="cvbs")
 	config.av.aspectratio = ConfigSelection(choices={
-			"4_3_letterbox": _("4:3 Letterbox"),
-			"4_3_panscan": _("4:3 PanScan"),
-			"16_9": _("16:9"),
-			"16_9_always": _("16:9 always"),
-			"16_10_letterbox": _("16:10 Letterbox"),
-			"16_10_panscan": _("16:10 PanScan"),
-			"16_9_letterbox": _("16:9 Letterbox")},
-			default="16_9")
+		"4_3_letterbox": _("4:3 Letterbox"),
+		"4_3_panscan": _("4:3 PanScan"),
+		"16_9": _("16:9"),
+		"16_9_always": _("16:9 always"),
+		"16_10_letterbox": _("16:10 Letterbox"),
+		"16_10_panscan": _("16:10 PanScan"),
+		"16_9_letterbox": _("16:9 Letterbox")},
+		default="16_9")
 	config.av.aspect = ConfigSelection(choices={
-			"4_3": _("4:3"),
-			"16_9": _("16:9"),
-			"16_10": _("16:10"),
-			"auto": _("Automatic")},
-			default="auto")
+		"4_3": _("4:3"),
+		"16_9": _("16:9"),
+		"16_10": _("16:10"),
+		"auto": _("Automatic")},
+		default="auto")
 	policy2_choices = {
-	# TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
-	"letterbox": _("Letterbox"),
-	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
-	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"scale": _("Just scale")}
+		# TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
+		"letterbox": _("Letterbox"),
+		# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
+		"panscan": _("Pan&scan"),
+		# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
+		"scale": _("Just scale")}
 	if exists("/proc/stb/video/policy2_choices"):
 		try:
 			if "full" in open("/proc/stb/video/policy2_choices").read().split('\n', 1)[0]:
@@ -115,12 +115,12 @@ def InitAVSwitch():
 			print("[AVSwitch] Read /proc/stb/video/policy2_choices failed.")
 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default="scale")
 	policy_choices = {
-	# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
-	"pillarbox": _("Pillarbox"),
-	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
-	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"scale": _("Just scale")}
+		# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
+		"pillarbox": _("Pillarbox"),
+		# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
+		"panscan": _("Pan&scan"),
+		# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
+		"scale": _("Just scale")}
 	if exists("/proc/stb/video/policy_choices"):
 		try:
 			if "nonlinear" in open("/proc/stb/video/policy_choices").read().split('\n', 1)[0]:

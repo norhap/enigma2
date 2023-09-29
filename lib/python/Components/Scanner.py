@@ -67,7 +67,7 @@ add_type("video/mpeg", ".wtv")
 
 def getType(file):
 	(type, _) = guess_type(file)
-	if type == None:
+	if not type:
 		# Detect some unknown types
 		if file[-12:].lower() == "video_ts.ifo":
 			return "video/x-dvd"
@@ -96,14 +96,14 @@ class Scanner:
 		return True
 
 	def handleFile(self, res, file):
-		if (self.mimetypes == None or file.mimetype in self.mimetypes) and self.checkFile(file):
+		if (not self.mimetypes or file.mimetype in self.mimetypes) and self.checkFile(file):
 			res.setdefault(self, []).append(file)
 
 	def __repr__(self):
 		return "<Scanner " + self.name + ">"
 
 	def open(self, list, *args, **kwargs):
-		if self.openfnc != None:
+		if self.openfnc:
 			self.openfnc(list, *args, **kwargs)
 
 
@@ -131,7 +131,7 @@ class ScanPath:
 class ScanFile:
 	def __init__(self, path, mimetype=None, size="", autodetect=True):
 		self.path = path
-		if mimetype == None and autodetect:
+		if not mimetype and autodetect:
 			self.mimetype = getType(path)
 		else:
 			self.mimetype = mimetype
@@ -143,7 +143,7 @@ class ScanFile:
 
 def execute(option):
 	print("[Scanner] execute", option)
-	if option == None:
+	if not option:
 		return
 
 	(_, scanner, files, session) = option

@@ -27,7 +27,7 @@ class StackTracePrinter(Thread):
 			self.start()
 
 	def run(self):
-		while (self.__running == True):
+		while (self.__running):
 			if (os.path.isfile("/tmp/doPythonStackTrace")):
 				os.remove("/tmp/doPythonStackTrace")
 				if config.crash.pythonStackOnSpinner.value:

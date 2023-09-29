@@ -33,7 +33,7 @@ class MessageBox(Screen, HelpableScreen):
 		self["text"] = Label(text)
 		self.type = type
 		if type == self.TYPE_YESNO:
-			self.list = [(_("Yes"), True), (_("No"), False)] if list == None else list
+			self.list = [(_("Yes"), True), (_("No"), False)] if list is None else list
 			self["list"] = MenuList(self.list)
 			if isinstance(default, int):
 				self["list"].moveToIndex(default)
@@ -46,10 +46,10 @@ class MessageBox(Screen, HelpableScreen):
 			self["list"] = MenuList([])
 			self["list"].hide()
 		self.timeout = timeout
-		if close_on_any_key == True:  # Process legacy close_on_any_key argument.
+		if close_on_any_key is True:  # Process legacy close_on_any_key argument.
 			closeOnAnyKey = True
 		self.closeOnAnyKey = closeOnAnyKey
-		if enable_input == False:  # Process legacy enable_input argument.
+		if enable_input is False:  # Process legacy enable_input argument.
 			enableInput = False
 		if enableInput:
 			if self.list:
@@ -78,9 +78,9 @@ class MessageBox(Screen, HelpableScreen):
 					"ok": (self.select, _("Close the window"))
 				}, prio=0, description=_("Message Box Actions"))
 		self.msgBoxID = msgBoxID
-		if picon != None:  # Process legacy picon argument.
+		if picon:  # Process legacy picon argument.
 			typeIcon = picon
-		if typeIcon == None:
+		if not typeIcon:
 			typeIcon = type
 		self.typeIcon = typeIcon
 		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
@@ -102,16 +102,16 @@ class MessageBox(Screen, HelpableScreen):
 				self["InfoPixmap"].show()
 			elif typeIcon == self.TYPE_ERROR:
 				self["ErrorPixmap"].show()
-		if timeout_default != None:  # Process legacy timeout_default argument.
+		if timeout_default:  # Process legacy timeout_default argument.
 			timeoutDefault = timeout_default
 		self.timeoutDefault = timeoutDefault
-		if title != None:  # Process legacy title argument.
+		if title:  # Process legacy title argument.
 			windowTitle = title
 		for nameTitle in range(type):
 			self.windowTitle = windowTitle or self.type < self.TYPE_MESSAGE and [_("Question"), _("Information"), _("Warning"), _("Error")][nameTitle] or _("Message")
 		self.baseTitle = self.windowTitle
 		self.activeTitle = self.windowTitle
-		if skin_name != None:  # Process legacy skin_name argument.
+		if skin_name:  # Process legacy skin_name argument.
 			skinName = skin_name
 		self.skinName = ["MessageBox"]
 		if simple:  # Process legacy simple argument, use skinName instead.
@@ -135,7 +135,7 @@ class MessageBox(Screen, HelpableScreen):
 		if self.typeIcon:
 			self["icon"].setPixmapNum(self.typeIcon - 1)
 		prefix = self.windowTitle
-		if self.baseTitle == None:
+		if not self.baseTitle:
 			title = self.getTitle()
 			if title:
 				self.baseTitle = title % prefix if "%s" in title else title
@@ -149,7 +149,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.timer.start(25)
 
 	def processTimer(self):
-		if self.activeTitle == None:  # Check if the title has been externally changed and if so make it the dominant title.
+		if not self.activeTitle:  # Check if the title has been externally changed and if so make it the dominant title.
 			self.activeTitle = self.getTitle()
 			if "%s" in self.activeTitle:
 				self.activeTitle = self.activeTitle % self.windowTitle
@@ -162,7 +162,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.timeout -= 1
 		else:
 			self.stopTimer("Timeout!")
-			if self.timeoutDefault != None:
+			if self.timeoutDefault:
 				self.close(self.timeoutDefault)
 			else:
 				self.select()
@@ -171,7 +171,7 @@ class MessageBox(Screen, HelpableScreen):
 		print("[MessageBox] %s" % reason)
 		self.timer.stop()
 		self.timeout = 0
-		if self.baseTitle != None:
+		if self.baseTitle:
 			self.setTitle(self.baseTitle, showPath=False)
 
 	def cancel(self):

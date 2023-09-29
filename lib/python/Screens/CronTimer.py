@@ -54,7 +54,7 @@ class CronTimers(Screen):
 			"yellow": self.CrondStart,
 			"blue": self.autostart
 		})
-		if not self.selectionChanged in self["list"].onSelectionChanged:
+		if self.selectionChanged not in self["list"].onSelectionChanged:
 			self["list"].onSelectionChanged.append(self.selectionChanged)
 		self.service_name = "cronie"
 		self.onLayoutFinish.append(self.InstallCheck)
@@ -240,9 +240,9 @@ class CronTimers(Screen):
 			mysel = self["list"].getCurrent()
 			if mysel:
 				myline = mysel[1]
-				open("/etc/cron/crontabs/root.tmp", "w").writelines([l for l in open("/etc/cron/crontabs/root").readlines() if myline not in l])
+				open("/etc/cron/crontabs/root.tmp", "w").writelines([x for x in open("/etc/cron/crontabs/root").readlines() if myline not in x])
 				rename("/etc/cron/crontabs/root.tmp", "/etc/cron/crontabs/root")
-				rc = Console().ePopen("crontab /etc/cron/crontabs/root -c /etc/cron/crontabs")
+				Console().ePopen("crontab /etc/cron/crontabs/root -c /etc/cron/crontabs")
 				self.updateList()
 
 	def info(self):
@@ -379,13 +379,13 @@ class CronTimersConfig(Screen, ConfigListScreen):
 			command = config.crontimers.user_command.value
 
 		open("/etc/cron/crontabs/root", "a").write(newcron)
-		rc = Console().ePopen("crontab /etc/cron/crontabs/root -c /etc/cron/crontabs")
+		Console().ePopen("crontab /etc/cron/crontabs/root -c /etc/cron/crontabs")
 		config.crontimers.predefined_command.value = "None"
 		config.crontimers.user_command.value = "None"
 		config.crontimers.runwhen.value = "Daily"
 		config.crontimers.dayofweek.value = "Monday"
 		config.crontimers.dayofmonth.value = 1
-		config.crontimers.cmdtime.value, mytmpt = ([0, 0], [0, 0])
+		config.crontimers.cmdtime.value = ([0, 0], [0, 0])
 		self.close()
 		rootcrontabs = "/etc/cron/crontabs/root"
 		linkrootvar = "/var/spool/cron/crontabs/root"

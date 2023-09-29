@@ -61,7 +61,7 @@ class ServiceName2(Converter, object):
 		def searchService(serviceHandler, bouquet):
 			istype = False
 			servicelist = serviceHandler.list(bouquet)
-			if not servicelist:
+			if servicelist:
 				while True:
 					s = servicelist.getNext()
 					if not s.valid():
@@ -89,7 +89,7 @@ class ServiceName2(Converter, object):
 			isService = searchService(serviceHandler, bouquet)
 		else:
 			bouquetlist = serviceHandler.list(bouquet)
-			if not bouquetlist is None:
+			if bouquetlist:
 				while True:
 					bouquet = bouquetlist.getNext()
 					if not bouquet.valid():
@@ -103,7 +103,7 @@ class ServiceName2(Converter, object):
 	def getServiceNumber(self, ref):
 		def searchHelper(serviceHandler, num, bouquet):
 			servicelist = serviceHandler.list(bouquet)
-			if not servicelist is None:
+			if servicelist:
 				while True:
 					s = servicelist.getNext()
 					if not s.valid():
@@ -146,16 +146,16 @@ class ServiceName2(Converter, object):
 				cur = eServiceReference(rootstr)
 				bouquet = eServiceReference(bqrootstr)
 				bouquetlist = serviceHandler.list(bouquet)
-				if not bouquetlist is None:
+				if bouquetlist:
 					while True:
 						bouquet = bouquetlist.getNext()
 						if not bouquet.valid():
 							break
 						if bouquet.flags & eServiceReference.isDirectory:
 							service, number = searchHelper(serviceHandler, number, bouquet)
-							if not service is None and cur == bouquet:
+							if service and cur == bouquet:
 								break
-			if not service is None:
+			if service:
 				info = serviceHandler.info(bouquet)
 				name = info and info.getName(bouquet) or ''
 				return number, name
@@ -170,14 +170,14 @@ class ServiceName2(Converter, object):
 			provider_root = eServiceReference(rootstr)
 			serviceHandler = eServiceCenter.getInstance()
 			providerlist = serviceHandler.list(provider_root)
-			if not providerlist is None:
+			if providerlist:
 				while True:
 					provider = providerlist.getNext()
 					if not provider.valid():
 						break
 					if provider.flags & eServiceReference.isDirectory:
 						servicelist = serviceHandler.list(provider)
-						if not servicelist is None:
+						if servicelist:
 							while True:
 								service = servicelist.getNext()
 								if not service.valid():
@@ -215,7 +215,7 @@ class ServiceName2(Converter, object):
 				fmt = ["O ", "s ", "M ", "F ", "p ", "Y ", "f"]  # (orbital_position frequency polarization symbol_rate fec)
 		for line in fmt:
 			f = line[:1]
-			if f == 't':  # %t - tuner_type (dvb-s/s2/c/t)
+			if f == 't':
 				if type == 'DVB-S':
 					result += _("Satellite")
 				elif type == 'DVB-C':
@@ -226,30 +226,29 @@ class ServiceName2(Converter, object):
 					result += _('Stream-tv')
 				else:
 					result += 'N/A'
-			elif f == 's':	# %s - system (dvb-s/s2/c/t)
+			elif f == 's':
 				if type == 'DVB-S':
 					x = self.tpdata.get('system', 0)
 					result += x in range(2) and {0: 'DVB-S', 1: 'DVB-S2'}[x] or ''
 				else:
 					result += type
-			elif f == 'F':	# %F - frequency (dvb-s/s2/c/t) in KHz
+			elif f == 'F':
 				if type in ('DVB-S', 'DVB-C') and self.tpdata.get('frequency', 0) > 0:
 					result += '%d MHz' % (self.tpdata.get('frequency', 0) / 1000)
 				if type in ('DVB-T'):
 					result += '%.3f MHz' % (((self.tpdata.get('frequency', 0) + 500) / 1000) / 1000.0)
-#					result += '%.3f'%(((self.tpdata.get('frequency', 0) / 1000) +1) / 1000.0) + " MHz "
-			elif f == 'f':	# %f - fec_inner (dvb-s/s2/c/t)
+			elif f == 'f':
 				if type in ('DVB-S', 'DVB-C'):
 					x = self.tpdata.get('fec_inner', 15)
 					result += x in list(range(10)) + [15] and {0: 'Auto', 1: '1/2', 2: '2/3', 3: '3/4', 4: '5/6', 5: '7/8', 6: '8/9', 7: '3/5', 8: '4/5', 9: '9/10', 15: 'None'}[x] or ''
 				elif type == 'DVB-T':
 					x = self.tpdata.get('code_rate_lp', 5)
 					result += x in range(6) and {0: '1/2', 1: '2/3', 2: '3/4', 3: '5/6', 4: '7/8', 5: 'Auto'}[x] or ''
-			elif f == 'i':	# %i - inversion (dvb-s/s2/c/t)
+			elif f == 'i':
 				if type in ('DVB-S', 'DVB-C', 'DVB-T'):
 					x = self.tpdata.get('inversion', 2)
 					result += x in range(3) and {0: 'On', 1: 'Off', 2: 'Auto'}[x] or ''
-			elif f == 'O':	# %O - orbital_position (dvb-s/s2)
+			elif f == 'O':
 				if type == 'DVB-S':
 					x = self.tpdata.get('orbital_position', 0)
 					result += x > 1800 and "%d.%d°W" % ((3600 - x) / 10, (3600 - x) % 10) or "%d.%d°E" % (x / 10, x % 10)
@@ -259,54 +258,54 @@ class ServiceName2(Converter, object):
 					result += 'DVB-C'
 				elif type == 'Iptv':
 					result += 'Stream'
-			elif f == 'M':	# %M - modulation (dvb-s/s2/c)
+			elif f == 'M':
 				x = self.tpdata.get('modulation', 1)
 				if type == 'DVB-S':
 					result += x in range(4) and {0: 'Auto', 1: 'QPSK', 2: '8PSK', 3: 'QAM16'}[x] or ''
 				elif type == 'DVB-C':
 					result += x in range(6) and {0: 'Auto', 1: 'QAM16', 2: 'QAM32', 3: 'QAM64', 4: 'QAM128', 5: 'QAM256'}[x] or ''
-			elif f == 'p':	# %p - polarization (dvb-s/s2)
+			elif f == 'p':
 				if type == 'DVB-S':
 					x = self.tpdata.get('polarization', 0)
 					result += x in range(4) and {0: 'H', 1: 'V', 2: 'LHC', 3: 'RHC'}[x] or '?'
-			elif f == 'Y':	# %Y - symbol_rate (dvb-s/s2/c)
+			elif f == 'Y':
 				if type in ('DVB-S', 'DVB-C'):
 					result += '%d' % (self.tpdata.get('symbol_rate', 0) / 1000)
-			elif f == 'r':	# %r - rolloff (dvb-s2)
+			elif f == 'r':
 				if not self.isStream:
 					x = self.tpdata.get('rolloff')
-					if not x is None:
+					if x:
 						result += x in range(3) and {0: '0.35', 1: '0.25', 2: '0.20'}[x] or ''
-			elif f == 'o':	# %o - pilot (dvb-s2)
+			elif f == 'o':
 				if not self.isStream:
 					x = self.tpdata.get('pilot')
-					if not x is None:
+					if x:
 						result += x in range(3) and {0: 'Off', 1: 'On', 2: 'Auto'}[x] or ''
-			elif f == 'c':	# %c - constellation (dvb-t)
+			elif f == 'c':
 				if type == 'DVB-T':
 					x = self.tpdata.get('constellation', 3)
 					result += x in range(4) and {0: 'QPSK', 1: 'QAM16', 2: 'QAM64', 3: 'Auto'}[x] or ''
-			elif f == 'l':	# %l - code_rate_lp (dvb-t)
+			elif f == 'l':
 				if type == 'DVB-T':
 					x = self.tpdata.get('code_rate_lp', 5)
 					result += x in range(6) and {0: '1/2', 1: '2/3', 2: '3/4', 3: '5/6', 4: '7/8', 5: 'Auto'}[x] or ''
-			elif f == 'h':	# %h - code_rate_hp (dvb-t)
+			elif f == 'h':
 				if type == 'DVB-T':
 					x = self.tpdata.get('code_rate_hp', 5)
 					result += x in range(6) and {0: '1/2', 1: '2/3', 2: '3/4', 3: '5/6', 4: '7/8', 5: 'Auto'}[x] or ''
-			elif f == 'm':	# %m - transmission_mode (dvb-t)
+			elif f == 'm':
 				if type == 'DVB-T':
 					x = self.tpdata.get('transmission_mode', 2)
 					result += x in range(3) and {0: '2k', 1: '8k', 2: 'Auto'}[x] or ''
-			elif f == 'g':	# %g - guard_interval (dvb-t)
+			elif f == 'g':
 				if type == 'DVB-T':
 					x = self.tpdata.get('guard_interval', 4)
 					result += x in range(5) and {0: '1/32', 1: '1/16', 2: '1/8', 3: '1/4', 4: 'Auto'}[x] or ''
-			elif f == 'b':	# %b - bandwidth (dvb-t)
+			elif f == 'b':
 				if type == 'DVB-T':
 					x = self.tpdata.get('bandwidth', 1)
 					result += x in range(4) and {0: '8 MHz', 1: '7 MHz', 2: '6 MHz', 3: 'Auto'}[x] or ''
-			elif f == 'e':	# %e - hierarchy_information (dvb-t)
+			elif f == 'e':
 				if type == 'DVB-T':
 					x = self.tpdata.get('hierarchy_information', 4)
 					result += x in range(5) and {0: 'None', 1: '1', 2: '2', 3: '4', 4: 'Auto'}[x] or ''
@@ -567,14 +566,14 @@ class ServiceName2(Converter, object):
 				return ""
 			for line in tmp:
 				f = line[:1]
-				if f == 'N':	# %N - Name
+				if f == 'N':  # %N - Name
 					name = ref and (info.getName(ref) or 'N/A') or (info.getName() or 'N/A')
 					postfix = ''
 					if self.ref:
 						postfix = " (alter)"
 					name += postfix
 					ret += name.replace('\xc2\x86', '').replace('\xc2\x87', '')
-				elif f == 'n':	# %n - Number
+				elif f == 'n':
 					try:
 						service = self.source.serviceref
 						num = service and service.getChannelNum() or None
@@ -585,10 +584,10 @@ class ServiceName2(Converter, object):
 					else:
 						num, bouq = self.getServiceNumber(ref or eServiceReference(info.getInfoString(iServiceInformation.sServiceref)))
 						ret += num and str(num) or ''
-				elif f == 'B':	# %B - Bouquet
+				elif f == 'B':
 					num, bouq = self.getServiceNumber(ref or eServiceReference(info.getInfoString(iServiceInformation.sServiceref)))
 					ret += bouq
-				elif f == 'P':	# %P - Provider
+				elif f == 'P':
 					if self.isStream:
 						if self.refstr and '%3a//' in self.refstr:
 							ret += self.getIPTVProvider(self.refstr)
@@ -602,12 +601,12 @@ class ServiceName2(Converter, object):
 								ret += self.getProviderName(ref)
 							else:
 								ret += info.getInfoString(iServiceInformation.sProvider) or ''
-				elif f == 'R':	# %R - Reference
+				elif f == 'R':
 					if self.refstr:
 						ret += self.refstr
 					else:
 						ret += refstr
-				elif f == 'S':	# %S - Satellite
+				elif f == 'S':
 					if self.isStream:
 						ret += _("Internet")
 					else:
@@ -615,7 +614,7 @@ class ServiceName2(Converter, object):
 							ret += self.getSatelliteName(self.ref)
 						else:
 							ret += self.getSatelliteName(ref or eServiceReference(info.getInfoString(iServiceInformation.sServiceref)))
-				elif f == 'A':	# %A - AllRef
+				elif f == 'A':
 					tmpref = self.getReferenceType(refstr, ref)
 					if 'Bouquet' in tmpref or 'Satellit' in tmpref or 'Provider' in tmpref:
 						ret += ' '
@@ -639,7 +638,7 @@ class ServiceName2(Converter, object):
 			self.what = None
 
 	def forceChanged(self, what):
-		if what == True:
+		if what:
 			self.refstr = self.isStream = self.ref = self.info = self.tpdata = None
 			Converter.changed(self, (self.CHANGED_ALL,))
 			self.what = None

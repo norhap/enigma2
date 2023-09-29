@@ -81,12 +81,12 @@ class PicEmu2(Renderer):
 				if not ncam:
 					for caid in caids:
 						sName = self.camds.get(line[0:4])
-						if sName != None:
+						if sName:
 							return sName
 				else:
 					for caid in caids:
 						sName = self.ncam.get(line[0:4])
-						if sName != None:
+						if sName:
 							return sName
 		except IOError as err:
 			print("[PicEmu2] %s" % err)

@@ -3,7 +3,6 @@ from timer import TimerEntry as RealTimerEntry
 
 from PowerTimer import PowerTimerEntry, AFTEREVENT
 from Components.ActionMap import ActionMap
-from Components.Button import Button
 from Components.config import config
 from Components.Label import Label
 from Components.PowerTimerList import PowerTimerList
@@ -44,16 +43,16 @@ class PowerTimerEditList(Screen):
 		self["description"] = Label()
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
 			{
-				"ok": self.openEdit,
-				"cancel": self.leave,
-				"green": self.addCurrentTimer,
-				"blue": self.enableDisableTimerLog,
-				"log": self.showLog,
-				"left": self.left,
-				"right": self.right,
-				"up": self.up,
-				"down": self.down
-			}, -1)
+			"ok": self.openEdit,
+			"cancel": self.leave,
+			"green": self.addCurrentTimer,
+			"blue": self.enableDisableTimerLog,
+			"log": self.showLog,
+			"left": self.left,
+			"right": self.right,
+			"up": self.up,
+			"down": self.down
+		}, -1)
 		self.session.nav.PowerTimer.on_state_change.append(self.onStateChange)
 		self.onShown.append(self.updateState)
 
@@ -158,7 +157,7 @@ class PowerTimerEditList(Screen):
 
 		showCleanup = True
 		for x in self.list:
-			if (not x[0].disabled) and (x[1] == True):
+			if not x[0].disabled and x[1]:
 				break
 		else:
 			showCleanup = False

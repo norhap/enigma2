@@ -136,7 +136,6 @@ def getBoxDisplayName():  # This function returns a tuple like ("BRANDNAME", "BO
 
 
 # Parse the boot commandline.
-from os.path import isfile
 if (isfile("/proc/cmdline")):
 	with open("/proc/cmdline", "r") as fd:
 		cmdline = fd.read()

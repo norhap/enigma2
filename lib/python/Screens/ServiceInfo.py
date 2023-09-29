@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from Components.GUIComponent import GUIComponent
 from Screens.Screen import Screen
-from Screens.AudioSelection import AudioSelection
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from ServiceReference import ServiceReference
 from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eServiceCenter, eDVBFrontendParametersSatellite, RT_HALIGN_LEFT, RT_VALIGN_CENTER
-from Tools.Transponder import ConvertToHumanReadable, getChannelNumber
+from Tools.Transponder import ConvertToHumanReadable
 import skin
 from Components.Converter.VAudioInfo import StdAudioDesc
 
@@ -162,7 +161,7 @@ class ServiceInfo(Screen):
 				resolution = videocodec + " - " + gamma + " %dx%d - " % (video_width, video_height) + fps + video_pol + " " + aspect if gamma else videocodec + " - " + "%dx%d - " % (video_width, video_height) + fps + video_pol + " " + aspect
 			self.service = self.session.nav.getCurrentService()
 			if "%3a//" in refstr and reftype not in (1, 257, 4098, 4114):
-			# IPTV 4097 5001, no PIDs shown
+				# IPTV 4097 5001, no PIDs shown
 				fillList = [(_("Service name"), name, TYPE_TEXT),
 					(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 					(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
@@ -170,22 +169,22 @@ class ServiceInfo(Screen):
 				subList = self.getSubtitleList()
 			else:
 				if ":/" in refstr:
-				# mp4 videos, dvb-s-t recording
+					# mp4 videos, dvb-s-t recording
 					fillList = [(_("Service name"), name, TYPE_TEXT),
 						(_("Videocodec, size & format"), resolution, TYPE_TEXT),
 						(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 						(_("Filename"), refstr.split(":")[10], TYPE_TEXT)]
 				else:
-				# fallback, movistartv, live dvb-s-t
+					# fallback, movistartv, live dvb-s-t
 					fillList = [(_("Service name"), name, TYPE_TEXT),
 						(_("Provider"), self.getServiceInfoValue(iServiceInformation.sProvider), TYPE_TEXT),
 						(_("Videocodec, size & format"), resolution, TYPE_TEXT)]
 					if "%3a//" in refstr:
-					# fallback, movistartv
+						# fallback, movistartv
 						fillList = fillList + [(_("Service reference"), ":".join(refstr.split(":")[:9]), TYPE_TEXT),
 							(_("URL"), refstr.split(":")[10].replace("%3a", ":"), TYPE_TEXT)]
 					else:
-					# live dvb-s-t
+						# live dvb-s-t
 						fillList = fillList + [(_("Service reference"), refstr, TYPE_TEXT)]
 				self.audio = self.service and self.service.audioTracks()
 				self.numberofTracks = self.audio.getNumberOfTracks() if self.audio else 0
@@ -200,7 +199,7 @@ class ServiceInfo(Screen):
 					+ trackList + [(_("PCR PID"), self.getServiceInfoValue(iServiceInformation.sPCRPID), TYPE_VALUE_HEX_DEC, 4),
 					(_("PMT PID"), self.getServiceInfoValue(iServiceInformation.sPMTPID), TYPE_VALUE_HEX_DEC, 4),
 					(_("TXT PID"), self.getServiceInfoValue(iServiceInformation.sTXTPID), TYPE_VALUE_HEX_DEC, 4)])
-				if self.showAll == True:
+				if self.showAll:
 					fillList = fillList + self.subList
 
 			self.fillList(fillList)

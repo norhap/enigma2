@@ -27,7 +27,7 @@ class ImportChannels():
 	DIR_TMP = "/tmp/"
 
 	def __init__(self):
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value and not "ChannelsImport" in [x.name for x in threading.enumerate()]:
+		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value and "ChannelsImport" not in [x.name for x in threading.enumerate()]:
 			self.header = None
 			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_url.value != "same" and config.usage.remote_fallback_import_url.value:
 				self.url = config.usage.remote_fallback_import_url.value.rsplit(":", 1)[0]
@@ -233,7 +233,7 @@ class ImportChannels():
 				if remote:
 					try:
 						content = self.getUrl("%s/file?file=%s/%s" % (self.url, channelslistpath, quote(file))).readlines()
-						content = map(lambda l: l.decode('utf-8', 'replace'), content)
+						content = map(lambda x: x.decode('utf-8', 'replace'), content)
 					except Exception as err:
 						print("[ImportChannels] Exception: %s" % str(err))
 						self.ImportChannelsNotDone(True, _("%s\nRead failled %s/%s from %s") % (err, channelslistpath, file, self.url))
@@ -248,7 +248,7 @@ class ImportChannels():
 
 			# check the contents for more bouquet files
 			for line in content:
-#				print ("[ImportChannels] %s" % line)
+				# print ("[ImportChannels] %s" % line)
 				# check if it contains another bouquet reference
 				r = re.match('#SERVICE 1:7:%d:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet' % type, line)
 				if r:
@@ -283,7 +283,7 @@ class ImportChannels():
 				try:
 					open(join(self.tmp_dir, basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, channelslistpath, quote(file))).read())
 				except Exception as err:
-					if not "epg" in self.remote_fallback_import:
+					if "epg" not in self.remote_fallback_import:
 						self.ImportChannelsNotDone(True, _("%s\nFailed to download %s/%s from %s") % (err, channelslistpath, file, self.url))
 					if channelsepg:
 						config.usage.remote_fallback_import.value = "channels_epg"
@@ -308,7 +308,7 @@ class ImportChannels():
 			InfoBar.instance.servicelist.showAllServices()
 			InfoBar.instance.servicelist.showFavourites()
 			self.ImportChannelsDone(True, _("Channels imported successfully from %s") % self.url)
-			if not files and not config.clientmode.enabled.value and not "0.0.0.0" in ClientModeScreen.getRemoteAddress(self):
+			if not files and not config.clientmode.enabled.value and "0.0.0.0" not in ClientModeScreen.getRemoteAddress(self):
 				from Components.ChannelsImporter import ChannelsImporter  # resource to import channels from ChannelsImporter
 				ChannelsImporter()
 

@@ -7,7 +7,6 @@ from Components.GUIComponent import GUIComponent
 from Components.EpgList import Rect
 from Components.Sources.Event import Event
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest
-from Components.TimerList import TimerList
 from Components.Renderer.Picon import getPiconName
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
@@ -333,11 +332,11 @@ class EPGList(GUIComponent):
 		event = self.getEventFromId(service, eventid)  # get full event info
 		return (event, service)
 
-	def connectSelectionChanged(func):
+	def connectSelectionChanged(self, func):
 		if not self.onSelChanged.count(func):
 			self.onSelChanged.append(func)
 
-	def disconnectSelectionChanged(func):
+	def disconnectSelectionChanged(self, func):
 		self.onSelChanged.remove(func)
 
 	def serviceChanged(self):
@@ -470,19 +469,19 @@ class EPGList(GUIComponent):
 		res = [None]
 		if bgpng is not None:  # bacground for service rect
 			res.append(MultiContentEntryPixmapAlphaTest(
-					pos=(r1.x + self.serviceBorderVerWidth, r1.y + self.serviceBorderHorWidth),
-					size=(r1.w - 2 * self.serviceBorderVerWidth, r1.h - 2 * self.serviceBorderHorWidth),
-					png=bgpng,
-					flags=BT_SCALE))
+				pos=(r1.x + self.serviceBorderVerWidth, r1.y + self.serviceBorderHorWidth),
+				size=(r1.w - 2 * self.serviceBorderVerWidth, r1.h - 2 * self.serviceBorderHorWidth),
+				png=bgpng,
+				flags=BT_SCALE))
 		else:
 			res.append(MultiContentEntryText(
-					pos=(r1.x, r1.y),
-					size=(r1.w, r1.h),
-					font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
-					text="",
-					color=None, color_sel=None,
-					backcolor=serviceBackColor, backcolor_sel=serviceBackColor,
-					border_width=self.serviceBorderWidth, border_color=self.borderColorService))
+				pos=(r1.x, r1.y),
+				size=(r1.w, r1.h),
+				font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
+				text="",
+				color=None, color_sel=None,
+				backcolor=serviceBackColor, backcolor_sel=serviceBackColor,
+				border_width=self.serviceBorderWidth, border_color=self.borderColorService))
 		displayPicon = None
 		if self.number_width:
 			res.append(MultiContentEntryText(
@@ -893,56 +892,56 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			Screen.setTitle(self, bouquetname)
 
 		self["list"] = EPGList(selChangedCB=self.onSelectionChanged,
-					timer=self.session.nav.RecordTimer,
-					time_epoch=config.misc.graph_mepg.prev_time_period.value,
-					overjump_empty=config.misc.graph_mepg.overjump.value,
-					epg_bouquet=epg_bouquet)
+			timer=self.session.nav.RecordTimer,
+			time_epoch=config.misc.graph_mepg.prev_time_period.value,
+			overjump_empty=config.misc.graph_mepg.overjump.value,
+			epg_bouquet=epg_bouquet)
 
 		HelpableScreen.__init__(self)
 		self["okactions"] = HelpableActionMap(self, ["OkCancelActions"],
 			{
-				"cancel": (self.closeScreen, _("Exit EPG")),
-				"ok": (self.eventSelected, _("Zap to selected channel, or show detailed event info (depends on configuration)"))
-			}, -1)
+			"cancel": (self.closeScreen, _("Exit EPG")),
+			"ok": (self.eventSelected, _("Zap to selected channel, or show detailed event info (depends on configuration)"))
+		}, -1)
 		self["okactions"].csel = self
 		self["gmepgactions"] = HelpableActionMap(self, ["GMEPGSelectActions"],
 			{
-				"timerAdd": (self.timerAdd, _("Add/remove change timer for current event")),
-				"info": (self.infoKeyPressed, _("Show detailed event info")),
-				"red": (self.zapTo, _("Zap to selected channel")),
-				"blue": (self.addAutoTimer, _("Add autotimer")),
-				"blue_long": (self.togglePrimeNow, _("Goto specific date/time")),
-				"yellow": (self.swapMode, _("Switch between normal mode and list mode")),
-				"text": (self.enterDateTime, _("Goto specific date/time")),
-				"menu": (self.furtherOptions, _("Further Options")),
-				"nextBouquet": (self.nextBouquet, self.getKeyNextBouquetHelptext),
-				"prevBouquet": (self.prevBouquet, self.getKeyPrevBouquetHelptext),
-				"nextService": (self.nextPressed, _("Goto next page of events")),
-				"prevService": (self.prevPressed, _("Goto previous page of events")),
-				"preview": (self.preview, _("Preview selected channel")),
-				"window": (self.showhideWindow, _("Show/hide window")),
-				"nextDay": (self.nextDay, _("Goto next day of events")),
-				"prevDay": (self.prevDay, _("Goto previous day of events")),
-				"moveUp": (self.moveUp, _("Goto up service")),
-				"moveDown": (self.moveDown, _("Goto down service"))
-			}, -1)
+			"timerAdd": (self.timerAdd, _("Add/remove change timer for current event")),
+			"info": (self.infoKeyPressed, _("Show detailed event info")),
+			"red": (self.zapTo, _("Zap to selected channel")),
+			"blue": (self.addAutoTimer, _("Add autotimer")),
+			"blue_long": (self.togglePrimeNow, _("Goto specific date/time")),
+			"yellow": (self.swapMode, _("Switch between normal mode and list mode")),
+			"text": (self.enterDateTime, _("Goto specific date/time")),
+			"menu": (self.furtherOptions, _("Further Options")),
+			"nextBouquet": (self.nextBouquet, self.getKeyNextBouquetHelptext),
+			"prevBouquet": (self.prevBouquet, self.getKeyPrevBouquetHelptext),
+			"nextService": (self.nextPressed, _("Goto next page of events")),
+			"prevService": (self.prevPressed, _("Goto previous page of events")),
+			"preview": (self.preview, _("Preview selected channel")),
+			"window": (self.showhideWindow, _("Show/hide window")),
+			"nextDay": (self.nextDay, _("Goto next day of events")),
+			"prevDay": (self.prevDay, _("Goto previous day of events")),
+			"moveUp": (self.moveUp, _("Goto up service")),
+			"moveDown": (self.moveDown, _("Goto down service"))
+		}, -1)
 		self["gmepgactions"].csel = self
 
 		self["inputactions"] = HelpableActionMap(self, ["InputActions"],
 			{
-				"left": (self.leftPressed, _("Go to previous event")),
-				"right": (self.rightPressed, _("Go to next event")),
-				"1": (self.key1, _("Set time window to 1 hour")),
-				"2": (self.key2, _("Set time window to 2 hours")),
-				"3": (self.key3, _("Set time window to 3 hours")),
-				"4": (self.key4, _("Set time window to 4 hours")),
-				"5": (self.key5, _("Set time window to 5 hours")),
-				"6": (self.key6, _("Set time window to 6 hours")),
-				"7": (self.prevPage, _("Go to previous page of service")),
-				"9": (self.nextPage, _("Go to next page of service")),
-				"8": (self.toTop, _("Go to first service")),
-				"0": (self.toEnd, _("Go to last service"))
-			}, -1)
+			"left": (self.leftPressed, _("Go to previous event")),
+			"right": (self.rightPressed, _("Go to next event")),
+			"1": (self.key1, _("Set time window to 1 hour")),
+			"2": (self.key2, _("Set time window to 2 hours")),
+			"3": (self.key3, _("Set time window to 3 hours")),
+			"4": (self.key4, _("Set time window to 4 hours")),
+			"5": (self.key5, _("Set time window to 5 hours")),
+			"6": (self.key6, _("Set time window to 6 hours")),
+			"7": (self.prevPage, _("Go to previous page of service")),
+			"9": (self.nextPage, _("Go to next page of service")),
+			"8": (self.toTop, _("Go to first service")),
+			"0": (self.toEnd, _("Go to last service"))
+		}, -1)
 		self["inputactions"].csel = self
 
 		self.protectContextMenu = True

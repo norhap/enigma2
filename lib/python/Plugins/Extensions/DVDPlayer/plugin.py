@@ -62,14 +62,12 @@ def filescan(**kwargs):
 	return [
 		LocalScanner(mimetypes=["video/x-dvd", "video/x-dvd-iso"],
 			paths_to_scan=[
-					ScanPath(path="video_ts", with_subdirs=False),
-					ScanPath(path="VIDEO_TS", with_subdirs=False),
-					ScanPath(path="", with_subdirs=False),
-				],
+				ScanPath(path="video_ts", with_subdirs=False),
+				ScanPath(path="VIDEO_TS", with_subdirs=False),
+				ScanPath(path="", with_subdirs=False),],
 			name="DVD",
 			description=_("Play DVD"),
-			openfnc=filescan_open,
-		)]
+			openfnc=filescan_open,)]
 
 
 def onPartitionChange(action, partition):

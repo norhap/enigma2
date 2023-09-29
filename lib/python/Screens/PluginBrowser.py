@@ -1,7 +1,7 @@
 from os import unlink
 from os.path import isfile, normpath
 from enigma import checkInternetAccess, eConsoleAppContainer, eDVBDB, eTimer, gRGB
-from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap, HelpableNumberActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Screens.HelpMenu import HelpableScreen
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.GUIComponent import GUIComponent

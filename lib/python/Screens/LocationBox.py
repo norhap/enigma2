@@ -1,6 +1,6 @@
 # Generic Screen to select a path/filename combination
 
-from os import sep, stat, statvfs
+from os import sep, lstat, statvfs
 from os.path import exists, isdir, join
 
 from enigma import eTimer
@@ -27,7 +27,7 @@ defaultInhibitDirs = list(DEFAULT_INHIBIT_DIRECTORIES)
 DEFAULT_INHIBIT_DEVICES = []
 for dir in DEFAULT_INHIBIT_DIRECTORIES + ("/", "/media"):
 	if isdir(dir):
-		device = stat(dir).st_dev
+		device = lstat(dir).st_dev
 		if device not in DEFAULT_INHIBIT_DEVICES:
 			DEFAULT_INHIBIT_DEVICES.append(device)
 DEFAULT_INHIBIT_DEVICES = tuple(DEFAULT_INHIBIT_DEVICES)
@@ -133,8 +133,8 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 		}, prio=0, description=_("LocationBox Actions"))
 		self["selectAction"].setEnabled(True)
 		self["panelActions"] = LocationBoxActionMap(self, ["LocationBoxActions", "NavigationActions"], {
-			#"first": (self.switchToFileList, _("Switch to directories panel")),
-			#"last": (self.switchToBookList, _("Switch to bookmarks panel")),
+			# "first": (self.switchToFileList, _("Switch to directories panel")),
+			# "last": (self.switchToBookList, _("Switch to bookmarks panel")),
 			"left": (self.switchToFileList, _("Switch to directories panel")),
 			"right": (self.switchToBookList, _("Switch to bookmarks panel")),
 			"swap": (self.swapPanels, _("Switch to the other panel"))

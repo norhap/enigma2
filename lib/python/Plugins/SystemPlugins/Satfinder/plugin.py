@@ -528,10 +528,10 @@ class Satfinder(ScanSetup):
 				self.transponder[7],  # modulation
 				self.transponder[8],  # rolloff
 				self.transponder[9],  # pilot
-				self.transponder[10], # input stream id
-				self.transponder[11], # pls mode
-				self.transponder[12], # pls code
-				self.transponder[13], # t2mi_plp_id
+				self.transponder[10],  # input stream id
+				self.transponder[11],  # pls mode
+				self.transponder[12],  # pls code
+				self.transponder[13],  # t2mi_plp_id
 				self.transponder[14]  # t2mi_pid
 			)
 		elif self.DVB_type.value == "DVB-T":
@@ -691,7 +691,7 @@ class SatfinderExtra(Satfinder):
 					if fd:
 						section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
 					if section is None:
-						time.sleep(0.1)	# no data.. so we wait a bit
+						time.sleep(0.1)  # no data.. so we wait a bit
 						continue
 
 					if section["header"]["table_id"] == sdt_current_table_id and not sdt_current_completed:
@@ -779,7 +779,7 @@ class SatfinderExtra(Satfinder):
 
 			section = dvbreader.read_nit(fd, nit_current_table_id, nit_other_table_id)
 			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
+				time.sleep(0.1)  # no data.. so we wait a bit
 				continue
 
 			if section["header"]["table_id"] == nit_current_table_id and not nit_current_completed:
@@ -878,11 +878,11 @@ class SatfinderExtra(Satfinder):
 			return
 		tv = [1, 17, 22, 25]
 		radio = [2, 10]
-		green = "\c0088ff88"  # FTA tv
-		red = "\c00ff8888"  # encrypted tv
-		yellow = "\c00ffff00"  # data/interactive/catch-all/etc
-		blue = "\c007799ff"  # radio
-		default = "\c00ffffff"  # colour default white
+		green = r"\c0088ff88"  # FTA tv
+		red = r"\c00ff8888"  # encrypted tv
+		yellow = r"\c00ffff00"  # data/interactive/catch-all/etc
+		blue = r"\c007799ff"  # radio
+		default = r"\c00ffffff"  # colour default white
 		dash = "%s%s" % (default, "- ")
 		services = []
 		legend = "%s:  %s%s  %s%s  %s%s  %s%s\n" % (_("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))

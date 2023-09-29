@@ -61,7 +61,7 @@ class TunerInfo(GUIComponent):
 			value = self.getValue(self.LOCK)
 
 		if self.type == self.SNR_DB:
-			if value != None and value != 0x12345678:
+			if value and value != 0x12345678:
 				self.setText("%3.02f dB" % (value / 100.0))
 			else:
 				self.setText("")
@@ -93,9 +93,9 @@ class TunerInfo(GUIComponent):
 				return self.statusDict.get("tuner_locked", 0)
 		elif self.servicefkt:
 			service = self.servicefkt()
-			if service != None:
+			if service:
 				feinfo = service.frontendInfo()
-				if feinfo != None:
+				if feinfo:
 					if what == self.SNR_DB:
 						return feinfo.getFrontendInfo(iFrontendInformation.signalQualitydB)
 					elif what == self.SNR:
@@ -132,7 +132,7 @@ class TunerInfo(GUIComponent):
 	def postWidgetCreate(self, instance):
 		if instance is None:
 			return
-		if self.message != None:
+		if self.message:
 			instance.setText(self.message)
-		elif self.value != None:
+		elif self.value:
 			instance.setValue(self.value)

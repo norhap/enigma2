@@ -5,12 +5,12 @@ from Components.Converter.Poll import Poll
 from os import popen, statvfs
 
 SIZE_UNITS = ["B",
- "KB",
- "MB",
- "GB",
- "TB",
- "PB",
- "EB"]
+	"KB",
+	"MB",
+	"GB",
+	"TB",
+	"PB",
+	"EB"]
 
 
 class ProgressDiskSpaceInfo(Poll, Converter):
@@ -83,18 +83,14 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 			if list[0] == 0:
 				text = _("%s: Not Available") % entry[1]
 			elif self.shortFormat:
-				text = _("%s: %s, in use: %s%%") % (entry[1], self.getSizeStr(list[0]), list[3])
+				text = _("%s: %s, in use: %s%%") % (entry[1],
+				self.getSizeStr(list[0]), list[3])
 			elif self.fullFormat:
 				text = _("%s: %s Free: %s Used: %s (%s%%)") % (entry[1],
-				self.getSizeStr(list[0]),
-				self.getSizeStr(list[2]),
-				self.getSizeStr(list[1]),
-				list[3])
+				self.getSizeStr(list[0]), self.getSizeStr(list[2]), self.getSizeStr(list[1]), list[3])
 			else:
 				text = _("%s: %s Used: %s Free: %s") % (entry[1],
-				self.getSizeStr(list[0]),
-				self.getSizeStr(list[1]),
-				self.getSizeStr(list[2]))
+				self.getSizeStr(list[0]), self.getSizeStr(list[1]), self.getSizeStr(list[2]))
 		return text
 
 	@cached
@@ -146,13 +142,10 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 		return textvalue
 
 	def getMemInfo(self, value):
-		result = [0,
-		0,
-		0,
-		0]
+		result = [0, 0, 0, 0]
 		try:
 			check = 0
-#			print("[ProgressDiskSpaceInfo] Read /proc/meminfo")
+			#  print("[ProgressDiskSpaceInfo] Read /proc/meminfo")
 			fd = open('/proc/meminfo')
 			for line in fd:
 				if value + "Total" in line:
@@ -177,11 +170,11 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 
 		def isMountPoint():
 			try:
-#				print("[ProgressDiskSpaceInfo] Read /proc/mounts")
+				#  print("[ProgressDiskSpaceInfo] Read /proc/mounts")
 				fd = open('/proc/mounts', 'r')
 				for line in fd:
-					l = line.split()
-					if len(l) > 1 and l[1] == path:
+					fdread = line.split()
+					if len(fdread) > 1 and fdread[1] == path:
 						return True
 
 				fd.close()
@@ -191,10 +184,7 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 
 			return False
 
-		result = [0,
-		0,
-		0,
-		0]
+		result = [0, 0, 0, 0]
 		if isMountPoint():
 			try:
 				st = statvfs(path)
@@ -218,13 +208,4 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 				u += 1
 		else:
 			fmt = "%(size)u %(unit)s"
-		return fmt % {"size": value,
-		"frac": fractal,
-		"unit": SIZE_UNITS[u]}
-
-	def doSuspend(self, suspended):
-		if suspended:
-			self.poll_enabled = False
-		else:
-			self.downstream_elements.changed((self.CHANGED_POLL,))
-			self.poll_enabled = True
+		return fmt % {"size": value, "frac": fractal, "unit": SIZE_UNITS[u]}

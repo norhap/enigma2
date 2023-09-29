@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from Components.Converter.Converter import Converter
 from Components.Element import cached
-from ServiceReference import ServiceReference
 from enigma import eServiceCenter, eServiceReference, iServiceInformation, eDVBFrontendParametersSatellite, eDVBFrontendParametersCable
-from string import upper
-import gettext
 from Components.Converter.Poll import Poll
 
 
@@ -991,7 +988,6 @@ class ExtremeInfo(Poll, Converter, object):
 		emu = ''
 		cs = ''
 		content = ''
-		contentInfo = content.split('\n')
 		if content != '':
 			emu = content
 			if emu.__contains__('\n'):
@@ -1019,8 +1015,6 @@ class ExtremeInfo(Poll, Converter, object):
 			content = open("/tmp/cam.info", "r").read()
 		except:
 			content = ''
-
-		contentInfo = content.split('\n')
 		if content != '':
 			return content
 		return 'No emu or unknown'
@@ -1129,7 +1123,7 @@ class ExtremeInfo(Poll, Converter, object):
 						item = line.split(':', 1)
 						if len(item) > 1:
 							info[item[0].strip().lower()] = item[1].strip()
-						elif not 'caid' in info:
+						elif 'caid' not in info:
 							x = line.lower().find('caid')
 							if x != -1:
 								y = line.find(',')

@@ -6,7 +6,7 @@ from Components.ActionMap import NumberActionMap
 from Components.config import ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ConfigPassword, ConfigText, config
 from Components.ConfigList import ConfigList
 from Components.Label import Label
-from Components.MenuList import MenuList
+# from Components.MenuList import MenuList
 from Components.Slider import Slider
 from Components.SystemInfo import BRAND, DISPLAYMODEL
 from Components.Sources.List import List
@@ -526,7 +526,7 @@ class Wizard(Screen):
 				self.afterAsyncCode()
 
 	def afterAsyncCode(self):
-		if not self.updateValues in self.onShown:
+		if self.updateValues not in self.onShown:
 			self.onShown.append(self.updateValues)
 		if self.codeafter:
 			if self.wizard[self.prevStep]["nextstep"] is not None:

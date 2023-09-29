@@ -16,6 +16,7 @@ from enigma import eServiceReference
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 import os
+from gettext import pgettext
 
 
 class hotkey:

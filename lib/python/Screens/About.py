@@ -1,10 +1,8 @@
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
-from os import listdir, popen, remove
+from os import listdir, remove
 from os.path import getmtime, isfile, join
 from PIL import Image
 import skin
-import os
-import re
 from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -12,7 +10,7 @@ from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.Sources.StaticText import StaticText
-from Components.Harddisk import harddiskmanager, Harddisk
+from Components.Harddisk import harddiskmanager
 from Components.NimManager import nimmanager
 from Components.About import about
 from Components.ScrollLabel import ScrollLabel
@@ -24,7 +22,7 @@ from Components.GUIComponent import GUIComponent
 from Components.Pixmap import MultiPixmap, Pixmap
 from Components.Network import iNetwork
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL, DISPLAYMODEL
-from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, fileWriteLine, isPluginInstalled
+from Tools.Directories import SCOPE_PLUGINS, resolveFilename, fileExists, fileHas, pathExists, fileReadLines, isPluginInstalled
 from Tools.Geolocation import geolocation
 from Tools.StbHardware import getFPVersion, getProcInfoTypeTuner
 from Tools.LoadPixmap import LoadPixmap
@@ -138,20 +136,6 @@ class InformationBase(Screen, HelpableScreen):
 		return InformationSummary
 
 
-def formatLine(style, left, right=None):
-	styleLen = len(style)
-	leftStartColor = "" if styleLen > 0 and style[0] == "B" else "\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
-	leftEndColor = "" if leftStartColor == "" else "\c%08x" % INFO_COLOR["N"]
-	leftIndent = "    " * int(style[1]) if styleLen > 1 and style[1].isdigit() else ""
-	rightStartColor = "" if styleLen > 2 and style[2] == "B" else "\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
-	rightEndColor = "" if rightStartColor == "" else "\c%08x" % INFO_COLOR["N"]
-	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
-	if right is None:
-		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ""
-		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
-	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
-
-
 class InformationImage(Screen, HelpableScreen):
 	skin = """
 	<screen name="InformationImage" title="Receiver Image" position="center,center" size="950,560">
@@ -259,11 +243,11 @@ class InformationImage(Screen, HelpableScreen):
 
 def formatLine(style, left, right=None):
 	styleLen = len(style)
-	leftStartColor = "" if styleLen > 0 and style[0] == "B" else "\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
-	leftEndColor = "" if leftStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	leftStartColor = "" if styleLen > 0 and style[0] == "B" else r"\c%08x" % (INFO_COLOR.get(style[0], "P") if styleLen > 0 else INFO_COLOR["P"])
+	leftEndColor = "" if leftStartColor == "" else r"\c%08x" % INFO_COLOR["N"]
 	leftIndent = "    " * int(style[1]) if styleLen > 1 and style[1].isdigit() else ""
-	rightStartColor = "" if styleLen > 2 and style[2] == "B" else "\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
-	rightEndColor = "" if rightStartColor == "" else "\c%08x" % INFO_COLOR["N"]
+	rightStartColor = "" if styleLen > 2 and style[2] == "B" else r"\c%08x" % (INFO_COLOR.get(style[2], "V") if styleLen > 2 else INFO_COLOR["V"])
+	rightEndColor = "" if rightStartColor == "" else r"\c%08x" % INFO_COLOR["N"]
 	rightIndent = "    " * int(style[3]) if styleLen > 3 and style[3].isdigit() else ""
 	if right is None:
 		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ""
@@ -513,43 +497,43 @@ class Geolocation(Screen):
 			continent = geolocationData.get("continent", None)
 			if isinstance(continent, str):
 				continent = str(continent)
-			if continent != None:
+			if continent:
 				GeolocationText += _("Continent: ") + "\t" + continent + "\n"
 			country = geolocationData.get("country", None)
 			if isinstance(country, str):
 				country = str(country)
-			if country != None:
+			if country:
 				GeolocationText += _("Country: ") + "\t" + country + "\n"
 			state = geolocationData.get("regionName", None)
 			if isinstance(state, str):
 				state = str(state)
-			if state != None:
+			if state:
 				GeolocationText += _("State: ") + "\t" + state + "\n"
 			city = geolocationData.get("city", None)
 			if isinstance(city, str):
 				city = str(city)
-			if city != None:
+			if city:
 				GeolocationText += _("City: ") + "\t" + city + "\n"
 			GeolocationText += "\n"
 			timezone = geolocationData.get("timezone", None)
 			if isinstance(timezone, str):
 				timezone = str(timezone)
-			if timezone != None:
+			if timezone:
 				GeolocationText += _("Timezone: ") + "\t" + timezone + "\n"
 			currency = geolocationData.get("currency", None)
 			if isinstance(currency, str):
 				currency = str(currency)
-			if currency != None:
+			if currency:
 				GeolocationText += _("Currency: ") + "\t" + currency + "\n"
 			GeolocationText += "\n"
 			latitude = geolocationData.get("lat", None)
-			if str(float(latitude)) != None:
+			if float(latitude):
 				GeolocationText += _("Latitude: ") + "\t" + str(float(latitude)) + "\n"
 			longitude = geolocationData.get("lon", None)
-			if str(float(longitude)) != None:
+			if float(longitude):
 				GeolocationText += _("Longitude: ") + "\t" + str(float(longitude)) + "\n"
 			self["AboutScrollLabel"] = ScrollLabel(GeolocationText)
-		except Exception as err:
+		except Exception:
 			self["AboutScrollLabel"] = ScrollLabel(_("Requires internet connection"))
 		self["actions"] = ActionMap(["ColorActionsAbout", "SetupActions", "DirectionActions"], {
 			"red": self.close,
@@ -630,7 +614,7 @@ class TunerInformation(InformationBase):
 		info.append(formatLine("", _("MultiTranscoding"), (_("Yes") if BoxInfo.getItem("multitranscoding") else _("No"))))
 		info.append("")
 		if fileHas("/tmp/dvbfetool.txt", "Mode 2: DVB-S"):
-			 info.append(formatLine("", _("DVB-S2/C/T2 Combined"), (_("Yes"))))
+			info.append(formatLine("", _("DVB-S2/C/T2 Combined"), (_("Yes"))))
 		info.append(formatLine("", _("DVB-S2X"), (_("Yes") if fileHas("/tmp/dvbfetool.txt", "DVB-S2X") or pathExists("/proc/stb/frontend/0/t2mi") or pathExists("/proc/stb/frontend/1/t2mi") else _("No"))))
 		info.append(formatLine("", _("DVB-S"), (_("Yes") if "DVBS" in dvbFeToolTxt or "DVB-S" in dvbFeToolTxt else _("No"))))
 		info.append(formatLine("", _("DVB-T"), (_("Yes") if "DVBT" in dvbFeToolTxt or "DVB-T" in dvbFeToolTxt else _("No"))))
@@ -886,8 +870,8 @@ class SystemNetworkInfo(Screen):
 		if isinstance(isporg, str):
 			isporg = str(isporg)
 		self.AboutText += "\n"
-		if isp != None:
-			if isporg != None:
+		if isp:
+			if isporg:
 				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + (isporg) + "\n"
 			else:
 				self.AboutText += "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
@@ -937,8 +921,8 @@ class SystemNetworkInfo(Screen):
 
 	def getInfoCB(self, data, status):
 		self.LinkState = None
-		if data != None and data:
-			if status != None:
+		if data and data:
+			if status:
 				if self.iface == 'wlan0' or self.iface == 'wlan3' or self.iface == 'ra0':
 					if not status[self.iface]["accesspoint"]:
 						accesspoint = _("Unknown")
@@ -1207,7 +1191,6 @@ class CommitInfoDevelop(Screen):
 			"down": self["AboutScrollLabel"].pageDown,
 			"left": self.left,
 			"right": self.right,
-			"upUp": self.doNothing,
 			"downUp": self.doNothing,
 			"upUp": self.doNothing,
 			"rightUp": self.doNothing,
@@ -1360,7 +1343,7 @@ class MemoryInfoSkinParams(GUIComponent):
 		self.rows_in_column = 25
 
 	def applySkin(self, desktop, screen):
-		if self.skinAttributes != None:
+		if self.skinAttributes:
 			attribs = []
 			for (attrib, value) in self.skinAttributes:
 				if attrib == "rowsincolumn":
@@ -1429,7 +1412,7 @@ class Troubleshoot(Screen):
 	def green(self):
 		if self.commandIndex >= self.numberOfCommands:
 			try:
-				os.remove(self.commands[self.commandIndex][4:])
+				remove(self.commands[self.commandIndex][4:])
 			except:
 				pass
 			self.updateOptions()
@@ -1439,7 +1422,7 @@ class Troubleshoot(Screen):
 		if answer:
 			for fileName in self.getLogFilesList():
 				try:
-					os.remove(fileName)
+					remove(fileName)
 				except:
 					pass
 			self.updateOptions()
@@ -1476,19 +1459,19 @@ class Troubleshoot(Screen):
 
 	def getDebugFilesList(self):
 		import glob
-		return [x for x in sorted(glob.glob("/home/root/logs/enigma2_debug_*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))]
+		return [x for x in sorted(glob.glob("/home/root/logs/enigma2_debug_*.log"), key=lambda x: isfile(x) and getmtime(x))]
 
 	def getLogFilesList(self):
 		import glob
 		home_root = "/home/root/logs/enigma2_crash.log"
 		tmp = "/tmp/enigma2_crash.log"
-		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: os.path.isfile(x) and os.path.getmtime(x))] + (os.path.isfile(home_root) and [home_root] or []) + (os.path.isfile(tmp) and [tmp] or [])
+		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: isfile(x) and getmtime(x))] + (isfile(home_root) and [home_root] or []) + (isfile(tmp) and [tmp] or [])
 
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages"]
 		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps -l", "cat /var/volatile/log/messages"]
 		install_log = "/home/root/autoinstall.log"
-		if os.path.isfile(install_log):
+		if isfile(install_log):
 				self.titles.append("%s" % install_log)
 				self.commands.append("cat %s" % install_log)
 		self.numberOfCommands = len(self.commands)
