@@ -1,4 +1,3 @@
-from xml.etree.cElementTree import ParseError, parse
 from Components.InputDevice import remoteControl
 from keyids import KEYIDS
 from Components.config import ConfigInteger, config

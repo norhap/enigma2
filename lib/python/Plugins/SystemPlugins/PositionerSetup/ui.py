@@ -19,7 +19,6 @@ from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.TunerInfo import TunerInfo
 from Components.TuneTest import Tuner
-from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBar import InfoBar
 from Screens.MessageBox import MessageBox

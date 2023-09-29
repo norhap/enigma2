@@ -9,7 +9,6 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
 profile("LOAD:enigma")
-from os import sys
 from os.path import exists
 
 profile("LOAD:InfoBarGenerics")

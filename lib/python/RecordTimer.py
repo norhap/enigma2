@@ -1,5 +1,5 @@
 from bisect import insort
-from os import fsync, makedirs, remove, rename, statvfs, sys
+from os import fsync, makedirs, remove, rename, statvfs
 from os.path import exists, isdir, realpath
 from sys import maxsize
 from threading import Lock

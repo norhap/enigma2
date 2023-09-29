@@ -2,14 +2,13 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import string
 import re
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, property_lexical_handler
 try:
 	from _xmlplus.sax.saxlib import LexicalHandler
 	no_comments = False
-except ImportError as e:
+except ImportError:
 	class LexicalHandler:
 		pass
 	no_comments = True
