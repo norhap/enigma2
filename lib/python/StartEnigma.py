@@ -10,9 +10,9 @@ enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 
-from Tools.Directories import fileUpdateLine, InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
+from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
-from Components.SystemInfo import BoxInfo, SystemInfo, ARCHITECTURE, MODEL
+from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL
 
 profile("Imports")
 from os.path import isdir, islink, join
@@ -88,14 +88,14 @@ config.misc.startCounter = ConfigInteger(default=0)  # Number of e2 starts.
 # config.misc.locale.addNotifier(localeNotifier)  # This should not be enabled while config.osd.language is in use!
 # demo code for use of standby enter leave callbacks
 # def leaveStandby():
-#	print("!!!!!!!!!!!!!!!!!leave standby")
+# print("!!!!!!!!!!!!!!!!!leave standby")
 
 # def standbyCountChanged(configElement):
-#	print("!!!!!!!!!!!!!!!!!enter standby num", configElement.value)
-#	from Screens.Standby import inStandby
-#	inStandby.onClose.append(leaveStandby)
+# print("!!!!!!!!!!!!!!!!!enter standby num", configElement.value)
+# from Screens.Standby import inStandby
+# inStandby.onClose.append(leaveStandby)
 
-#config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call = False)
+# config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call = False)
 ####################################################
 
 profile("Twisted")
@@ -143,7 +143,6 @@ from Components.PluginComponent import plugins
 profile("LOAD:Wizard")
 from Screens.Wizard import wizardManager
 from Screens.StartWizard import *
-from Screens.HelpMenu import ShowRemoteControl
 from Tools.BoundFunction import boundFunction
 from Plugins.Plugin import PluginDescriptor
 
@@ -181,24 +180,24 @@ Screen.globalScreen = Globals()
 # Session.open:
 # * push current active dialog ('current_dialog') onto stack
 # * call execEnd for this dialog
-#	* clear in_exec flag
-#	* hide screen
+# * clear in_exec flag
+# * hide screen
 # * instantiate new dialog into 'current_dialog'
-#	* create screens, components
-#	* read, apply skin
-#	* create GUI for screen
+# * create screens, components
+# * read, apply skin
+# * create GUI for screen
 # * call execBegin for new dialog
-#	* set in_exec
-#	* show gui screen
-#	* call components' / screen's onExecBegin
+# * set in_exec
+# * show gui screen
+# * call components' / screen's onExecBegin
 # ... screen is active, until it calls 'close'...
 # Session.close:
 # * assert in_exec
 # * save return value
 # * start deferred close handler ('onClose')
 # * execEnd
-#	* clear in_exec
-#	* hide screen
+# * clear in_exec
+# * hide screen
 # .. a moment later:
 # Session.doClose:
 # * destroy screen
@@ -237,7 +236,7 @@ class Session:
 
 		if self.current_dialog.isTmp:
 			self.current_dialog.doClose()
-#			dump(self.current_dialog)
+			# dump(self.current_dialog)
 			del self.current_dialog
 		else:
 			del self.current_dialog.callback
@@ -342,7 +341,7 @@ class Session:
 			if self.dialog_stack and not self.in_exec:
 				print("[StartEnigma] Error: Modal open are allowed only from a screen which is modal!")  # ...unless it's the very first screen.
 		except RuntimeError as err:
-			  print(err)
+			print(err)
 		self.pushCurrent()
 		dialog = self.current_dialog = self.instantiateDialog(screen, *arguments, **kwargs)
 		dialog.isTmp = True
@@ -473,7 +472,7 @@ class AutoScartControl:
 		self.VCRSbChanged(self.current_vcr_sb)
 
 	def VCRSbChanged(self, value):
-		#print("vcr sb changed to", value)
+		# print("vcr sb changed to", value)
 		self.current_vcr_sb = value
 		if config.av.vcrswitch.value or value > 2:
 			if value:
@@ -515,7 +514,7 @@ def runScreenTest():
 	profile("wizards")
 	screensToRun += wizardManager.getWizards()
 	screensToRun.append((100, InfoBar.InfoBar))
-	#screensToRun.sort(key=lambda x: x[0])  # works in both Pythons but let's not use sort method here first we must see if we have work network in the wizard.
+	# screensToRun.sort(key=lambda x: x[0])  # works in both Pythons but let's not use sort method here first we must see if we have work network in the wizard.
 	enigma.ePythonConfigQuery.setQueryFunc(configfile.getResolvedKey)
 
 	def runNextScreen(session, screensToRun, *result):
@@ -696,9 +695,9 @@ import Components.EpgLoadSave
 Components.EpgLoadSave.EpgCacheSaveCheck()
 Components.EpgLoadSave.EpgCacheLoadCheck()
 
-#if config.clientmode.enabled.value:  # add to navigation instance for the user to decide if channels are imported or not after restarting enigma2.
-	#import Components.ChannelsImporter
-	#Components.ChannelsImporter.autostart()
+# if config.clientmode.enabled.value:  # add to navigation instance for the user to decide if channels are imported or not after restarting enigma2.
+# import Components.ChannelsImporter
+# Components.ChannelsImporter.autostart()
 
 try:
 	runScreenTest()

@@ -20,7 +20,7 @@ from urllib.error import URLError
 from urllib.parse import quote_plus
 from urllib.request import HTTPHandler, HTTPDigestAuthHandler, HTTPPasswordMgrWithDefaultRealm, Request, urlopen, build_opener, install_opener
 
-###global
+# global
 f = 1
 sizeH = 700
 HDSKIN = False
@@ -36,7 +36,7 @@ elif screenwidth and screenwidth > 1920:
 elif screenwidth and screenwidth > 1024:
 	sizeH = screenwidth - 100
 	HDSKIN = True
-###global
+# global
 
 
 class OSCamInfo:
@@ -92,7 +92,7 @@ class OSCamInfo:
 
 	def getUserData(self):
 		[webif, port, conf, ipcompiled, conffile] = self.confPath()
-		if conf == None:
+		if not conf:
 			conf = ""
 		if conffile == "":
 			conffile = "oscam.conf"
@@ -107,7 +107,7 @@ class OSCamInfo:
 		ret = _("OSCam webif disabled")
 
 		if webif and port is not None:
-		# oscam reports it got webif support and webif is running (Port != 0)
+			# oscam reports it got webif support and webif is running (Port != 0)
 			if conf is not None and exists(conf):
 				# If we have a config file, we need to investigate it further
 				with open(conf, 'r') as data:
@@ -205,12 +205,12 @@ class OSCamInfo:
 		if result[0]:
 			if not self.showLog:
 				data = ElementTree.XML(result[1])
-#				if typ=="version":
-#					if "version" in data.attrib:
-#						self.version = data.attrib["version"]
-#					else:
-#						self.version = "n/a"
-#					return self.version
+# if typ=="version":
+# if "version" in data.attrib:
+# self.version = data.attrib["version"]
+# else:
+# self.version = "n/a"
+# return self.version
 				status = data.find("status")
 				clients = status.findall("client")
 				for cl in clients:
@@ -339,6 +339,7 @@ class OSCamInfo:
 	def getClients(self):
 		xmldata = self.openWebIF()
 		clientnames = []
+		readers = []
 		if xmldata[0]:
 			data = ElementTree.XML(xmldata[1])
 			status = data.find("status")
@@ -369,11 +370,11 @@ class OSCamInfo:
 						result.append((_("Provider"), i.split(":")[1].strip()))
 					elif "reader" in i:
 						result.append((_("Reader"), i.split(":")[1].strip()))
-					elif "from" in i and not "cache" in i:
+					elif "from" in i and "cache" not in i:
 						result.append((_("Address"), i.split(":")[1].strip()))
 					elif "from" in i and "cache" in i:
 						result.append((_("From"), i.split(":")[1].strip()))
-					elif "protocol" in i and not "none" in i:
+					elif "protocol" in i and "none" not in i:
 						result.append((_("Protocol"), i.split(":")[1].strip()))
 					elif "none" in i:
 						result.append(("CacheEX", i.split(":")[1].strip().replace("none", "cacheex")))
@@ -611,8 +612,7 @@ class OSCamECMInfo(Screen, OSCamInfo):
 		return [
 			"",
 			(eListboxPythonMultiContent.TYPE_TEXT, int(10 * f), int(2 * f), int(300 * f), int(30 * f), 0, RT_HALIGN_LEFT, listentry[0]),
-			(eListboxPythonMultiContent.TYPE_TEXT, int(280 * f), int(2 * f), int(320 * f), int(30 * f), 0, RT_HALIGN_LEFT, listentry[1])
-			]
+			(eListboxPythonMultiContent.TYPE_TEXT, int(280 * f), int(2 * f), int(320 * f), int(30 * f), 0, RT_HALIGN_LEFT, listentry[1])]
 
 	def showData(self):
 		data = self.getECMInfo(self.ecminfo)
@@ -965,10 +965,9 @@ class OSCamEntitlements(Screen, OSCamInfo):
 			for j in prov:
 				providertxt += "%s - %s%s" % (j[0], j[1], linefeed)
 			res.append((ca_id,
-					csystem,
-					str(hops[1]), str(hops[2]), str(hops[3]), str(hops[4]), str(hops[5]), str(csum), str(creshare),
-					providertxt[:-1]
-					))
+				csystem,
+				str(hops[1]), str(hops[2]), str(hops[3]), str(hops[4]), str(hops[5]), str(csum), str(creshare),
+				providertxt[:-1]))
 			outlist.append(res)
 		return res
 
@@ -1104,10 +1103,9 @@ class OSCamReaderStats(Screen, OSCamInfo):
 			for j in prov:
 				providertxt += "%s - %s%s" % (j[0], j[1], linefeed)
 			res.append((ca_id,
-					csystem,
-					str(hops[1]), str(hops[2]), str(hops[3]), str(hops[4]), str(hops[5]), str(csum), str(creshare),
-					providertxt[:-1]
-					))
+				csystem,
+				str(hops[1]), str(hops[2]), str(hops[3]), str(hops[4]), str(hops[5]), str(csum), str(creshare),
+				providertxt[:-1]))
 			outlist.append(res)
 		return res
 
@@ -1124,16 +1122,15 @@ class OSCamReaderStats(Screen, OSCamInfo):
 			if xmldata[0]:
 				xdata = ElementTree.XML(xmldata[1])
 				rdr = xdata.find("reader")
-#					emms = rdr.find("emmstats")
-#					if "totalwritten" in emms.attrib:
-#						emm_wri = emms.attrib["totalwritten"]
-#					if "totalskipped" in emms.attrib:
-#						emm_ski = emms.attrib["totalskipped"]
-#					if "totalblocked" in emms.attrib:
-#						emm_blk = emms.attrib["totalblocked"]
-#					if "totalerror" in emms.attrib:
-#						emm_err = emms.attrib["totalerror"]
-
+				# emms = rdr.find("emmstats")
+				# if "totalwritten" in emms.attrib:
+				# emm_wri = emms.attrib["totalwritten"]
+				# if "totalskipped" in emms.attrib:
+				# emm_ski = emms.attrib["totalskipped"]
+				# if "totalblocked" in emms.attrib:
+				# emm_blk = emms.attrib["totalblocked"]
+				# if "totalerror" in emms.attrib:
+				# emm_err = emms.attrib["totalerror"]
 				ecmstat = rdr.find("ecmstats")
 				totalecm = ecmstat.attrib["totalecm"]
 				ecmcount = int(ecmstat.attrib["count"])
@@ -1161,8 +1158,8 @@ class OSCamReaderStats(Screen, OSCamInfo):
 								last_req = ""
 						else:
 							avg_time = last_time = last_req = ""
-#						if lastreq != "":
-#							last_req = lastreq.split("T")[1][:-5]
+						# if lastreq != "":
+							# last_req = lastreq.split("T")[1][:-5]
 						if self.allreaders:
 							result.append((i[1], caid, channel, avg_time, last_time, rcs, last_req, int(num)))
 							title2 = _("( All readers)")

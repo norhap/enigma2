@@ -64,23 +64,22 @@ class FallbackTimerList():
 		except Exception as e:
 			self.fallback(e)
 		self.list = [
-				FallbackTimerClass(
-					service_ref=str(timer.findtext("e2servicereference", '')),
-					name=str(timer.findtext("e2name", '')),
-					disabled=int(timer.findtext("e2disabled", 0)),
-					timebegin=int(timer.findtext("e2timebegin", 0)),
-					timeend=int(timer.findtext("e2timeend", 0)),
-					duration=int(timer.findtext("e2duration", 0)),
-					startprepare=int(timer.findtext("e2startprepare", 0)),
-					state=int(timer.findtext("e2state", 0)),
-					repeated=int(timer.findtext("e2repeated", 0)),
-					justplay=int(timer.findtext("e2justplay", 0)),
-					eit=int(timer.findtext("e2eit", -1)),
-					afterevent=int(timer.findtext("e2afterevent", 0)),
-					dirname=str(timer.findtext("e2location", '')),
-					description=str(timer.findtext("e2description", '')))
-			for timer in root.findall("e2timer")
-		]
+			FallbackTimerClass(
+				service_ref=str(timer.findtext("e2servicereference", '')),
+				name=str(timer.findtext("e2name", '')),
+				disabled=int(timer.findtext("e2disabled", 0)),
+				timebegin=int(timer.findtext("e2timebegin", 0)),
+				timeend=int(timer.findtext("e2timeend", 0)),
+				duration=int(timer.findtext("e2duration", 0)),
+				startprepare=int(timer.findtext("e2startprepare", 0)),
+				state=int(timer.findtext("e2state", 0)),
+				repeated=int(timer.findtext("e2repeated", 0)),
+				justplay=int(timer.findtext("e2justplay", 0)),
+				eit=int(timer.findtext("e2eit", -1)),
+				afterevent=int(timer.findtext("e2afterevent", 0)),
+				dirname=str(timer.findtext("e2location", '')),
+				description=str(timer.findtext("e2description", '')))
+			for timer in root.findall("e2timer")]
 		print("[FallbackTimer] read %s timers from fallback tuner" % len(self.list))
 		self.parent.session.nav.RecordTimer.setFallbackTimerList(self.list)
 		self.fallback()

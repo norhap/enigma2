@@ -138,7 +138,7 @@ class AutoInstallWizard(Screen):
 			if self.container.execute('opkg install "%s"' % self.package):
 				raise Exception(_("failed to execute command!"))
 				self.appClosed(True)
-		except Exception as e:
+		except Exception:
 			self.appClosed(True)
 
 	def dataAvail(self, data):
@@ -190,5 +190,5 @@ if SystemInfo["canKexec"]:
 	wizardManager.registerWizard(VuWizard, config.misc.firstrun.value, priority=2)
 wizardManager.registerWizard(TimeWizard, config.misc.firstrun.value, priority=20)
 # if OverscanWizard:  # No ckeck for StartWizard.
-	# wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
+# wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
 wizardManager.registerWizard(StartWizard, config.misc.firstrun.value, priority=40)

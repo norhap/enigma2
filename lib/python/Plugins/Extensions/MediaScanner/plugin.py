@@ -116,6 +116,7 @@ def movielist_open(list, session, **kwargs):
 
 def filescan_open(list, session, **kwargs):
 	filelist = [x.path for x in list]
+	from Plugins.SystemPlugins.Hotplug import OpkgInstaller
 	session.open(OpkgInstaller, filelist)  # list
 
 
@@ -124,45 +125,35 @@ def filescan(**kwargs):
 	return [
 		Scanner(mimetypes=["video/mpeg", "video/MP2T", "video/x-msvideo", "video/mkv", "video/avi"],
 			paths_to_scan=[
-					ScanPath(path="", with_subdirs=False),
-					ScanPath(path="movie", with_subdirs=False),
-				],
+				ScanPath(path="", with_subdirs=False),
+				ScanPath(path="movie", with_subdirs=False),],
 			name="Movie",
 			description=_("View Movies..."),
-			openfnc=movielist_open,
-		),
+			openfnc=movielist_open,),
 		Scanner(mimetypes=["video/x-vcd"],
 			paths_to_scan=[
-					ScanPath(path="mpegav", with_subdirs=False),
-					ScanPath(path="MPEGAV", with_subdirs=False),
-				],
+				ScanPath(path="mpegav", with_subdirs=False),
+				ScanPath(path="MPEGAV", with_subdirs=False),],
 			name="Video CD",
 			description=_("View Video CD..."),
-			openfnc=movielist_open,
-		),
+			openfnc=movielist_open,),
 		Scanner(mimetypes=["audio/mpeg", "audio/x-wav", "application/ogg", "audio/x-flac"],
 			paths_to_scan=[
-					ScanPath(path="", with_subdirs=False),
-				],
+				ScanPath(path="", with_subdirs=False),],
 			name="Music",
 			description=_("Play Music..."),
-			openfnc=movielist_open,
-		),
+			openfnc=movielist_open,),
 		Scanner(mimetypes=["audio/x-cda"],
 			paths_to_scan=[
-					ScanPath(path="", with_subdirs=False),
-				],
+				ScanPath(path="", with_subdirs=False),],
 			name="Audio-CD",
 			description=_("Play Audio-CD..."),
-			openfnc=movielist_open,
-		),
-		]
+			openfnc=movielist_open,),]
 
 
 def Plugins(**kwargs):
 	return [
 		PluginDescriptor(name=_("Media scanner"), description=_("Scan files..."), where=PluginDescriptor.WHERE_PLUGINMENU, icon="MediaScanner.png", needsRestart=True, fnc=main),
-#		PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc=menuHook),
+		# PluginDescriptor(where = PluginDescriptor.WHERE_MENU, fnc=menuHook),
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=sessionstart),
-		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart)
-		]
+		PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart)]

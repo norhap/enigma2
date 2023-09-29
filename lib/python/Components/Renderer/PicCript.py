@@ -115,17 +115,17 @@ class PicCript(Renderer):
 				if not mgcamd and not cccam:
 					for caid in caids:
 						sName = self.condAccessIds.get(line[8:10])
-						if sName != None:
+						if sName:
 							return sName
 				if cccam:
 					for caid in caids:
 						sName = self.condAccessIds.get(line[14:16])
-						if sName != None:
+						if sName:
 							return sName
 				else:
 					for caid in caids:
 						sName = self.condAccessIdsMgcamd.get(line[26:28])
-						if sName != None:
+						if sName:
 							return sName
 		except IOError as err:
 			print("[PicCript] %s" % err)

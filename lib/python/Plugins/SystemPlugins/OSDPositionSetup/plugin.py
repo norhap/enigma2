@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-from Screens.Screen import Screen
 from Components.config import config, ConfigSubsection, ConfigInteger
 
 config.plugins.OSDPositionSetup = ConfigSubsection()

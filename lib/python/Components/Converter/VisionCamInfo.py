@@ -18,7 +18,6 @@ class VisionCamInfo(Poll, Converter, object):
 		info = service and service.info()
 		if not service:
 			return None
-		camd = ""
 		serlist = None
 		camdlist = None
 		nameemu = []

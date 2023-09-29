@@ -7,15 +7,15 @@ from Components.GUIComponent import GUIComponent
 from Tools.FuzzyDate import FuzzyTime
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress
 from Components.config import config
+from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eSize, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER, eServiceReference, eServiceCenter, eTimer, getDesktop
 from Components.Renderer.Picon import getPiconName
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_GUISKIN, resolveFilename
 from Screens.LocationBox import defaultInhibitDirs
-from ServiceReference import ServiceReference
 from Tools.Trashcan import getTrashFolder
 import NavigationInstance
 import skin
-from enigma import eListboxPythonMultiContent, eListbox, gFont, iServiceInformation, eSize, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER, eServiceReference, eServiceCenter, eTimer, getDesktop
+from gettext import ngettext
 
 AUDIO_EXTENSIONS = frozenset((".dts", ".mp3", ".wav", ".wave", ".wv", ".oga", ".ogg", ".flac", ".m4a", ".mp2", ".m2a", ".wma", ".ac3", ".mka", ".aac", ".ape", ".alac", ".amr", ".au", ".mid"))
 DVD_EXTENSIONS = frozenset((".iso", ".img", ".nrg"))
@@ -177,8 +177,7 @@ class MovieList(GUIComponent):
 # The numbering starts after SORT_* values above.
 # in MovieSelection.py (that has no SORT_GROUPWISE)
 # NOTE! that these two *must* *follow on* from the end of the
-#		SORT_* items above!
-#
+# SORT_* items above!
 	TRASHSORT_SHOWRECORD = 16
 	TRASHSORT_SHOWDELETE = 17
 	UsingTrashSort = False
@@ -278,7 +277,7 @@ class MovieList(GUIComponent):
 			self.reloadDelayTimer.start(5000, 1)
 
 	def connectSelChanged(self, fnc):
-		if not fnc in self.onSelectionChanged:
+		if fnc not in self.onSelectionChanged:
 			self.onSelectionChanged.append(fnc)
 
 	def disconnectSelChanged(self, fnc):
@@ -438,7 +437,7 @@ class MovieList(GUIComponent):
 			if config.usage.load_length_of_movies_in_moviellist.value:
 				data.len = x[1].getLength(x[0])  # recalc the movie length...
 			else:
-				data.len = 0 # dont recalc movielist to speedup loading the list
+				data.len = 0  # dont recalc movielist to speedup loading the list
 			self.list[cur_idx] = (x[0], x[1], x[2], data)  # update entry in list... so next time we don't need to recalc
 			if config.movielist.show_underlines.value:
 				data.txt = info.getName(serviceref)
@@ -490,12 +489,12 @@ class MovieList(GUIComponent):
 		def addProgress():
 			# icon/progress
 			if data:
-				if switch == 'i' and hasattr(data, 'icon') and data.icon is not None:
+				if switch == 'i' and hasattr(data, 'icon') and data.icon:
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(colX, self.partIconeShift), size=(iconSize, data.icon.size().height()), png=data.icon))
 				elif switch in ('p', 's'):
-					if hasattr(data, 'part') and data.part != None and data.part > 0:
+					if hasattr(data, 'part') and data.part and data.part > 0:
 						res.append(MultiContentEntryProgress(pos=(colX, self.pbarShift), size=(iconSize, self.pbarHeight), percent=data.part, borderWidth=2, foreColor=data.partcol, foreColorSelected=None, backColor=None, backColorSelected=None))
-					elif hasattr(data, 'icon') and data.icon is not None:
+					elif hasattr(data, 'icon') and data.icon:
 						res.append(MultiContentEntryPixmapAlphaTest(pos=(colX, self.pbarShift), size=(iconSize, self.pbarHeight), png=data.icon))
 			return iconSize
 
@@ -680,7 +679,7 @@ class MovieList(GUIComponent):
 			begin2 = 0
 			if MovieList.UsingTrashSort:
 				f_path = serviceref.getPath()
-				if os.path.exists(f_path):	# Override with deltime for sorting
+				if os.path.exists(f_path):		# Override with deltime for sorting
 					if MovieList.UsingTrashSort == MovieList.TRASHSORT_SHOWRECORD:
 						begin2 = begin		# Save for later re-instatement
 					begin = os.stat(f_path).st_ctime
@@ -719,7 +718,7 @@ class MovieList(GUIComponent):
 				this_tags_fullname = set(this_tags_fullname)
 				this_tags = set(this_tags)
 				if not this_tags.issuperset(filter_tags) and not this_tags_fullname.issuperset(filter_tags):
-#					print("Skipping", name, "tags=", this_tags, " filter=", filter_tags)
+					# print("Skipping", name, "tags=", this_tags, " filter=", filter_tags)
 					continue
 			if begin2 != 0:
 				self.list.append((serviceref, info, begin, -1, begin2))
@@ -884,7 +883,7 @@ class MovieList(GUIComponent):
 			# Only use directory basename for sorting.
 			try:
 				name = os.path.basename(os.path.normpath(name))
-			except (IOError, OSError) as err:
+			except (IOError, OSError):
 				pass
 		# print("[MovieList] Sorting for -%s-" % name)
 		return (1, name, -x[2])
@@ -988,7 +987,7 @@ class MovieList(GUIComponent):
 					found = True
 					self.instance.moveSelectionTo(index + currentIndex + 1)
 					break
-		if found == False and currentIndex > 0:
+		if not found and currentIndex > 0:
 			itemsAbove = self.list[1:currentIndex]  # first item (0) points parent folder - no point to include
 			for index, item in enumerate(itemsAbove):
 				if not item[1]:

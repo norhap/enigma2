@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Components.config import config
 from Components.Console import Console
 from Components.About import about
 from Components.PackageInfo import PackageInfoHandler
@@ -43,12 +42,12 @@ class SoftwareTools(PackageInfoHandler):
 		pass
 
 	def startSoftwareTools(self, callback=None):
-		if callback is not None:
+		if callback:
 			self.NotifierCallback = callback
 		iNetwork.checkNetworkState(self.checkNetworkCB)
 
 	def checkNetworkCB(self, data):
-		if data is not None:
+		if data:
 			if data <= 2:
 				self.NetworkConnectionAvailable = True
 				self.getUpdates()
@@ -58,50 +57,50 @@ class SoftwareTools(PackageInfoHandler):
 
 	def getUpdates(self, callback=None):
 		if self.lastDownloadDate is None:
-				if self.NetworkConnectionAvailable == True:
+				if self.NetworkConnectionAvailable:
 					self.lastDownloadDate = time()
 					if not self.list_updating and callback is None:
 						self.list_updating = True
 						self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-					elif not self.list_updating and callback is not None:
+					elif not self.list_updating and callback:
 						self.list_updating = True
 						self.NotifierCallback = callback
 						self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-					elif self.list_updating and callback is not None:
+					elif self.list_updating and callback:
 						self.NotifierCallback = callback
 				else:
 					self.list_updating = False
-					if callback is not None:
+					if callback:
 						callback(False)
-					elif self.NotifierCallback is not None:
+					elif self.NotifierCallback:
 						self.NotifierCallback(False)
 		else:
-			if self.NetworkConnectionAvailable == True:
+			if self.NetworkConnectionAvailable:
 				self.lastDownloadDate = time()
 				if not self.list_updating and callback is None:
 					self.list_updating = True
 					self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-				elif not self.list_updating and callback is not None:
+				elif not self.list_updating and callback:
 					self.list_updating = True
 					self.NotifierCallback = callback
 					self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-				elif self.list_updating and callback is not None:
+				elif self.list_updating and callback:
 					self.NotifierCallback = callback
 			else:
-				if self.list_updating and callback is not None:
+				if self.list_updating and callback:
 						self.NotifierCallback = callback
 						self.startOpkgListAvailable()
 				else:
 					self.list_updating = False
-					if callback is not None:
+					if callback:
 						callback(False)
-					elif self.NotifierCallback is not None:
+					elif self.NotifierCallback:
 						self.NotifierCallback(False)
 
 	def opkgCallback(self, event, param):
 		if event == OpkgComponent.EVENT_ERROR:
 			self.list_updating = False
-			if self.NotifierCallback is not None:
+			if self.NotifierCallback:
 				self.NotifierCallback(False)
 		elif event == OpkgComponent.EVENT_DONE:
 			if self.list_updating:
@@ -109,7 +108,7 @@ class SoftwareTools(PackageInfoHandler):
 		pass
 
 	def startOpkgListAvailable(self, callback=None):
-		if callback is not None:
+		if callback:
 			self.list_updating = True
 		if self.list_updating:
 			if not self.UpdateConsole:
@@ -140,14 +139,14 @@ class SoftwareTools(PackageInfoHandler):
 			self.list_updating = False
 			if self.UpdateConsole:
 				if not self.UpdateConsole.appContainers:
-					if callback is not None:
+					if callback:
 						callback(False)
 
 	def startInstallMetaPackage(self, callback=None):
-		if callback is not None:
+		if callback:
 			self.list_updating = True
 		if self.list_updating:
-			if self.NetworkConnectionAvailable == True:
+			if self.NetworkConnectionAvailable:
 				if not self.UpdateConsole:
 					self.UpdateConsole = Console()
 				cmd = self.opkg.opkg + " install enigma2-meta enigma2-plugins-meta"
@@ -169,11 +168,11 @@ class SoftwareTools(PackageInfoHandler):
 			self.list_updating = False
 			if self.UpdateConsole:
 				if not self.UpdateConsole.appContainers:
-					if callback is not None:
+					if callback:
 						callback(False)
 
 	def startOpkgListInstalled(self, callback=None):
-		if callback is not None:
+		if callback:
 			self.list_updating = True
 		if self.list_updating:
 			if not self.UpdateConsole:
@@ -210,7 +209,7 @@ class SoftwareTools(PackageInfoHandler):
 			self.list_updating = False
 			if self.UpdateConsole:
 				if not self.UpdateConsole.appContainers:
-					if callback is not None:
+					if callback:
 						callback(False)
 
 	def countUpdates(self, callback=None):
@@ -229,10 +228,10 @@ class SoftwareTools(PackageInfoHandler):
 		self.list_updating = False
 		if self.UpdateConsole:
 			if not self.UpdateConsole.appContainers:
-				if callback is not None:
+				if callback:
 					callback(True)
 					callback = None
-				elif self.NotifierCallback is not None:
+				elif self.NotifierCallback:
 					self.NotifierCallback(True)
 					self.NotifierCallback = None
 
@@ -247,18 +246,18 @@ class SoftwareTools(PackageInfoHandler):
 		if result:
 			if self.Console:
 				if not self.Console.appContainers:
-					if callback is not None:
+					if callback:
 						callback(True)
 						callback = None
 
 	def cleanupSoftwareTools(self):
 		self.list_updating = False
-		if self.NotifierCallback is not None:
+		if self.NotifierCallback:
 			self.NotifierCallback = None
 		self.opkg.stop()
-		if self.Console is not None:
+		if self.Console:
 			self.Console.killAll()
-		if self.UpdateConsole is not None:
+		if self.UpdateConsole:
 			self.UpdateConsole.killAll()
 
 	def verifyPrerequisites(self, prerequisites):

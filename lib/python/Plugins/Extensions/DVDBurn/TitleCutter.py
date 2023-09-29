@@ -10,9 +10,9 @@ class TitleCutter(CutListEditor):
 		self.skin = CutListEditor.skin
 		self.t = t
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evUpdatedInfo: self.getPMTInfo,
-				iPlayableService.evCuesheetChanged: self.refillList
-			})
+			iPlayableService.evUpdatedInfo: self.getPMTInfo,
+			iPlayableService.evCuesheetChanged: self.refillList
+		})
 		self.onExecBegin.remove(self.showTutorial)
 
 	def getPMTInfo(self):
@@ -22,7 +22,7 @@ class TitleCutter(CutListEditor):
 		if n > 0:
 			from .DVDTitle import ConfigFixedText
 			from .TitleProperties import languageChoices
-			from Components.config import config, ConfigSubsection, ConfigSubList, ConfigSelection, ConfigYesNo
+			from Components.config import ConfigSubsection, ConfigSubList, ConfigSelection, ConfigYesNo
 			self.t.properties.audiotracks = ConfigSubList()
 			for x in range(n):
 				i = audio.getTrackInfo(x)

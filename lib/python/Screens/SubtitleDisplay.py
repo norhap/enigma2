@@ -2,7 +2,6 @@
 from Screens.Screen import Screen
 from Components.Label import Label
 from enigma import eTimer, getDesktop, eActionMap, gFont
-from Components.ActionMap import ActionMap
 from sys import maxsize
 
 

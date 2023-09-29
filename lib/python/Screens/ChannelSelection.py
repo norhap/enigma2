@@ -9,21 +9,21 @@ from Components.ServiceList import ServiceList, refreshServiceList
 from Components.ActionMap import NumberActionMap, ActionMap, HelpableActionMap
 from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
-profile("ChannelSelection.py 1")
+# profile("ChannelSelection.py 1")
 from Screens.EpgSelection import EPGSelection
 from enigma import eServiceReference, eServiceReferenceDVB, eEPGCache, eServiceCenter, eRCInput, eTimer, eDVBDB, iPlayableService, iServiceInformation, getPrevAsciiCode
 from Components.config import config, configfile, ConfigSubsection, ConfigText, ConfigYesNo
 from Tools.NumericalTextInput import NumericalTextInput, MAP_SEARCH
-profile("ChannelSelection.py 2")
+# profile("ChannelSelection.py 2")
 from Components.NimManager import nimmanager
-profile("ChannelSelection.py 2.1")
+# profile("ChannelSelection.py 2.1")
 from Components.Sources.RdsDecoder import RdsDecoder
-profile("ChannelSelection.py 2.2")
+# profile("ChannelSelection.py 2.2")
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.Event import Event
-profile("ChannelSelection.py 2.3")
+# profile("ChannelSelection.py 2.3")
 from Components.Input import Input
-profile("ChannelSelection.py 3")
+# profile("ChannelSelection.py 3")
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.SystemInfo import SystemInfo
 from Screens.InputBox import PinInput
@@ -31,7 +31,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
 from Screens.ServiceInfo import ServiceInfo
 from Screens.Hotkey import InfoBarHotkey, hotkeyActionMap, hotkey
-profile("ChannelSelection.py 4")
+# profile("ChannelSelection.py 4")
 from Screens.PictureInPicture import PictureInPicture
 from Screens.RdsDisplay import RassInteractive
 from ServiceReference import ServiceReference, service_types_tv_ref, service_types_radio_ref, serviceRefAppendPath
@@ -65,7 +65,7 @@ class BouquetSelector(Screen):
 			{
 				"ok": self.okbuttonClick,
 				"cancel": self.cancelClick
-			})
+		})
 		entrys = [(x[0], x[1]) for x in bouquets]
 		self["menu"] = MenuList(entrys, enableWrapAround)
 
@@ -146,7 +146,7 @@ class ChannelContextMenu(Screen):
 				"5": self.addServiceToBouquetOrAlternative,
 				"6": self.toggleMoveModeSelect,
 				"8": self.removeEntry
-			})
+		})
 		menu = []
 
 		self.removeFunction = False
@@ -238,7 +238,7 @@ class ChannelContextMenu(Screen):
 						else:
 							append_when_current_valid(current, menu, (_("Remove selected satellite"), self.removeSatelliteServices), level=0)
 					if haveBouquets:
-						if not self.inBouquet and not "PROVIDERS" in current_sel_path:
+						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						append_when_current_valid(current, menu, (_("Remove all new found flags"), self.removeAllNewFoundFlags), level=0)
@@ -265,7 +265,7 @@ class ChannelContextMenu(Screen):
 					append_when_current_valid(current, menu, (_("Purge deleted user bouquets"), self.purgeDeletedBouquets), level=0)
 					append_when_current_valid(current, menu, (_("Restore deleted user bouquets"), self.restoreDeletedBouquets), level=0)
 				append_when_current_valid(current, menu, (_("Reload services/bouquets list"), self.reloadServicesBouquets), level=2)
-		if self.inBouquet: # current list is editable?
+		if self.inBouquet:  # current list is editable?
 			if csel.bouquet_mark_edit == OFF:
 				if csel.movemode:
 					append_when_current_valid(current, menu, (_("Disable move mode"), self.toggleMoveMode), level=0, key="6")
@@ -869,7 +869,7 @@ class ChannelSelectionEPG(InfoBarHotkey):
 	def getServicesList(self, root):
 		services = []
 		servicelist = root and eServiceCenter.getInstance().list(root)
-		if not servicelist is None:
+		if servicelist:
 			while True:
 				service = servicelist.getNext()
 				if not service.valid():
@@ -1000,10 +1000,10 @@ class ChannelSelectionEdit:
 		self["ChannelSelectEditActions"] = ChannelSelectionEditActionMap(self, ["ChannelSelectEditActions", "OkCancelActions"],
 			{
 				"contextMenu": self.doContext,
-			})
+		})
 
 	def getMutableList(self, root=eServiceReference()):
-		if not self.mutableList is None:
+		if self.mutableList:
 			return self.mutableList
 		serviceHandler = eServiceCenter.getInstance()
 		if not root.valid():
@@ -1340,7 +1340,7 @@ class ChannelSelectionEdit:
 
 	def addServiceToBouquet(self, dest, service=None):
 		mutableList = self.getMutableList(dest)
-		if not mutableList is None:
+		if mutableList:
 			if service is None:  # use current selected service
 				service = self.servicelist.getCurrent()
 			if not mutableList.addService(service):
@@ -1453,30 +1453,30 @@ class ChannelSelectionBase(Screen):
 
 		self["ChannelSelectBaseActions"] = NumberActionMap(["ChannelSelectBaseActions", "NumberActions", "InputAsciiActions"],
 			{
-				"showFavourites": self.showFavourites,
-				"showAllServices": self.showAllServices,
-				"showProviders": self.showProviders,
-				"showSatellites": boundFunction(self.showSatellites, changeMode=True),
-				"nextBouquet": self.nextBouquet,
-				"prevBouquet": self.prevBouquet,
-				"nextMarker": self.nextMarker,
-				"prevMarker": self.prevMarker,
-				"gotAsciiCode": self.keyAsciiCode,
-				"keyLeft": self.keyLeft,
-				"keyRight": self.keyRight,
-				"keyRecord": self.keyRecord,
-				"toggleTwoLines": self.toggleTwoLines,
-				"1": self.keyNumberGlobal,
-				"2": self.keyNumberGlobal,
-				"3": self.keyNumberGlobal,
-				"4": self.keyNumberGlobal,
-				"5": self.keyNumberGlobal,
-				"6": self.keyNumberGlobal,
-				"7": self.keyNumberGlobal,
-				"8": self.keyNumberGlobal,
-				"9": self.keyNumberGlobal,
-				"0": self.keyNumber0
-			}, -2)
+			"showFavourites": self.showFavourites,
+			"showAllServices": self.showAllServices,
+			"showProviders": self.showProviders,
+			"showSatellites": boundFunction(self.showSatellites, changeMode=True),
+			"nextBouquet": self.nextBouquet,
+			"prevBouquet": self.prevBouquet,
+			"nextMarker": self.nextMarker,
+			"prevMarker": self.prevMarker,
+			"gotAsciiCode": self.keyAsciiCode,
+			"keyLeft": self.keyLeft,
+			"keyRight": self.keyRight,
+			"keyRecord": self.keyRecord,
+			"toggleTwoLines": self.toggleTwoLines,
+			"1": self.keyNumberGlobal,
+			"2": self.keyNumberGlobal,
+			"3": self.keyNumberGlobal,
+			"4": self.keyNumberGlobal,
+			"5": self.keyNumberGlobal,
+			"6": self.keyNumberGlobal,
+			"7": self.keyNumberGlobal,
+			"8": self.keyNumberGlobal,
+			"9": self.keyNumberGlobal,
+			"0": self.keyNumber0
+		}, -2)
 		self.maintitle = _("Channel selection")
 		self.recallBouquetMode()
 
@@ -1488,7 +1488,7 @@ class ChannelSelectionBase(Screen):
 		if 'userbouquet.' in bouquet.toCompareString():
 			serviceHandler = eServiceCenter.getInstance()
 			servicelist = serviceHandler.list(bouquet)
-			if not servicelist is None:
+			if servicelist:
 				while True:
 					serviceIterator = servicelist.getNext()
 					if not serviceIterator.valid():  # check if end of list
@@ -1690,7 +1690,7 @@ class ChannelSelectionBase(Screen):
 					addCableAndTerrestrialLater = []
 					serviceHandler = eServiceCenter.getInstance()
 					servicelist = serviceHandler.list(ref)
-					if not servicelist is None:
+					if servicelist:
 						while True:
 							service = servicelist.getNext()
 							if not service.valid():  # check if end of list
@@ -2027,22 +2027,22 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 
 		self["actions"] = ActionMap(["OkCancelActions", "TvRadioActions"],
 			{
-				"cancel": self.cancel,
-				"ok": self.channelSelected,
-				"keyRadio": self.doRadioButton,
-				"keyTV": self.doTVButton,
-			})
+			"cancel": self.cancel,
+			"ok": self.channelSelected,
+			"keyRadio": self.doRadioButton,
+			"keyTV": self.doTVButton,
+		})
 
 		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
 			{
-				"showEPGList": self.showEPGList,
-				"info": self.showEPGList
-			})
+			"showEPGList": self.showEPGList,
+			"info": self.showEPGList
+		})
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evStart: self.__evServiceStart,
-				iPlayableService.evEnd: self.__evServiceEnd
-			})
+			iPlayableService.evStart: self.__evServiceStart,
+			iPlayableService.evEnd: self.__evServiceEnd
+		})
 
 		self.startServiceRef = None
 
@@ -2486,7 +2486,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		else:
 			lastservice = eServiceReference(self.lastservice.value)
 			if lastservice.valid() and self.getCurrentSelection() == lastservice:
-				pass	# keep current selection
+				pass  # keep current selection
 			else:
 				self.setCurrentSelection(playingref)
 
@@ -2573,19 +2573,19 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 
 		self["actions"] = ActionMap(["OkCancelActions", "TvRadioActions"],
 			{
-				"keyTV": self.cancel,
-				"keyRadio": self.cancel,
-				"cancel": self.cancel,
-				"ok": self.channelSelected,
-				"audio": self.audioSelection
-			})
+			"keyTV": self.cancel,
+			"keyRadio": self.cancel,
+			"cancel": self.cancel,
+			"ok": self.channelSelected,
+			"audio": self.audioSelection
+		})
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evStart: self.__evServiceStart,
-				iPlayableService.evEnd: self.__evServiceEnd
-			})
+			iPlayableService.evStart: self.__evServiceStart,
+			iPlayableService.evEnd: self.__evServiceEnd
+		})
 
-########## RDS Radiotext / Rass Support BEGIN
+		# RDS Radiotext / Rass Support BEGIN
 		self.infobar = infobar  # reference to real infobar (the one and only)
 		self["RdsDecoder"] = self.info["RdsDecoder"]
 		self["RdsActions"] = HelpableActionMap(self, ["InfobarRdsActions"],
@@ -2613,7 +2613,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 
 	def RassInteractivePossibilityChanged(self, state):
 		self["RdsActions"].setEnabled(state)
-########## RDS Radiotext / Rass Support END
+		# RDS Radiotext / Rass Support END
 
 	def __onExecBegin(self):
 		self.info.show()
@@ -2725,7 +2725,7 @@ class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 				"ok": self.channelSelected,
 				"keyRadio": self.setModeRadio,
 				"keyTV": self.setModeTv,
-			})
+		})
 		self.bouquet_mark_edit = OFF
 		if isinstance(title, str):
 			self.maintitle = title

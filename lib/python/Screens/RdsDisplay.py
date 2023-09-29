@@ -30,11 +30,11 @@ class RdsInfoDisplay(Screen):
 		Screen.__init__(self, session)
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evEnd: self.__serviceStopped,
-				iPlayableService.evUpdatedRadioText: self.RadioTextChanged,
-				iPlayableService.evUpdatedRtpText: self.RtpTextChanged,
-				iPlayableService.evUpdatedRassInteractivePicMask: self.RassInteractivePicMaskChanged,
-			})
+			iPlayableService.evEnd: self.__serviceStopped,
+			iPlayableService.evUpdatedRadioText: self.RadioTextChanged,
+			iPlayableService.evUpdatedRtpText: self.RtpTextChanged,
+			iPlayableService.evUpdatedRassInteractivePicMask: self.RassInteractivePicMaskChanged,
+		})
 
 		self["RadioText"] = Label()
 		self["RtpText"] = Label()
@@ -103,26 +103,26 @@ class RassInteractive(Screen):
 
 		self["actions"] = NumberActionMap(["NumberActions", "RassInteractiveActions"],
 			{
-				"exit": self.close,
-				"0": lambda x: self.numPressed(0),
-				"1": lambda x: self.numPressed(1),
-				"2": lambda x: self.numPressed(2),
-				"3": lambda x: self.numPressed(3),
-				"4": lambda x: self.numPressed(4),
-				"5": lambda x: self.numPressed(5),
-				"6": lambda x: self.numPressed(6),
-				"7": lambda x: self.numPressed(7),
-				"8": lambda x: self.numPressed(8),
-				"9": lambda x: self.numPressed(9),
-				"nextPage": self.nextPage,
-				"prevPage": self.prevPage,
-				"nextSubPage": self.nextSubPage,
-				"prevSubPage": self.prevSubPage
-			})
+			"exit": self.close,
+			"0": lambda x: self.numPressed(0),
+			"1": lambda x: self.numPressed(1),
+			"2": lambda x: self.numPressed(2),
+			"3": lambda x: self.numPressed(3),
+			"4": lambda x: self.numPressed(4),
+			"5": lambda x: self.numPressed(5),
+			"6": lambda x: self.numPressed(6),
+			"7": lambda x: self.numPressed(7),
+			"8": lambda x: self.numPressed(8),
+			"9": lambda x: self.numPressed(9),
+			"nextPage": self.nextPage,
+			"prevPage": self.prevPage,
+			"nextSubPage": self.nextSubPage,
+			"prevSubPage": self.prevSubPage
+		})
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evUpdatedRassInteractivePicMask: self.recvRassInteractivePicMaskChanged
-			})
+			iPlayableService.evUpdatedRassInteractivePicMask: self.recvRassInteractivePicMaskChanged
+		})
 
 		self["subpages_1"] = Pixmap()
 		self["subpages_2"] = Pixmap()

@@ -1,7 +1,6 @@
 from urllib.parse import urlencode
 from urllib.request import urlopen
 from urllib.error import URLError
-import sys
 import re
 import json
 WOEID_SEARCH_URL = 'http://query.yahooapis.com/v1/public/yql'

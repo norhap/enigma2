@@ -11,15 +11,13 @@ from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
-from Screens.InputBox import PinInput
 from ServiceReference import ServiceReference
 from Screens.TimerEntry import TimerEntry, TimerLog
 from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
 from time import time
 from timer import TimerEntry as RealTimerEntry
-from ServiceReference import ServiceReference
-from enigma import eServiceReference, eEPGCache
+from enigma import eEPGCache
 
 
 class TimerEditList(Screen, ProtectedScreen):
@@ -53,19 +51,19 @@ class TimerEditList(Screen, ProtectedScreen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "NavigationActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
 			{
-				"ok": self.openEdit,
-				"cancel": self.leave,
-				"green": self.addCurrentTimer,
-				"log": self.showLog,
-				"left": self.pageUp,
-				"right": self.pageDown,
-				"up": self.moveUp,
-				"down": self.moveDown,
-				"upUp": self.doNothing,
-				"downUp": self.doNothing,
-				"leftUp": self.pageUp,
-				"rightUp": self.pageDown
-			}, -1)
+			"ok": self.openEdit,
+			"cancel": self.leave,
+			"green": self.addCurrentTimer,
+			"log": self.showLog,
+			"left": self.pageUp,
+			"right": self.pageDown,
+			"up": self.moveUp,
+			"down": self.moveDown,
+			"upUp": self.doNothing,
+			"downUp": self.doNothing,
+			"leftUp": self.pageUp,
+			"rightUp": self.pageDown
+		}, -1)
 		self.setTitle(_("Timer overview"))
 
 		self.session.nav.RecordTimer.on_state_change.append(self.onStateChange)
@@ -223,7 +221,7 @@ class TimerEditList(Screen, ProtectedScreen):
 
 		showCleanup = True
 		for x in self.list:
-			if (not x[0].disabled) and (x[1] == True):
+			if not x[0].disabled and x[1]:
 				break
 		else:
 			showCleanup = False
@@ -415,7 +413,7 @@ class TimerSanityConflict(Screen):
 		for x in timer:
 			self.list.append((timer[count], False))
 			count += 1
-		warning_color = "\c00ffff00"  # yellow
+		warning_color = r"\c00ffff00"  # yellow
 		title_text = count == 1 and warning_color + _("Channel not in services list") or warning_color + _("Timer sanity error")
 		self.setTitle(title_text)
 
@@ -428,17 +426,17 @@ class TimerSanityConflict(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions", "MenuActions"],
 			{
-				"cancel": self.leave_cancel,
-				"red": self.leave_cancel,
-				"green": self.editTimer,
-				"ok": self.editTimer,
-				"yellow": self.toggleTimer,
-				"blue": self.ignoreConflict,
-				"up": self.moveUp,
-				"down": self.moveDown,
-				"log": self.showLog,
-				"menu": self.openExtendedSetup
-			}, -1)
+			"cancel": self.leave_cancel,
+			"red": self.leave_cancel,
+			"green": self.editTimer,
+			"ok": self.editTimer,
+			"yellow": self.toggleTimer,
+			"blue": self.ignoreConflict,
+			"up": self.moveUp,
+			"down": self.moveDown,
+			"log": self.showLog,
+			"menu": self.openExtendedSetup
+		}, -1)
 		self.onShown.append(self.updateState)
 
 	def getTimerList(self, timer):
@@ -455,7 +453,7 @@ class TimerSanityConflict(Screen):
 			return 0
 
 	def editTimerCallBack(self, answer=None):
-		if answer and len(answer) > 1 and answer[0] == True:
+		if answer and len(answer) > 1 and answer[0]:
 			self.session.nav.RecordTimer.timeChanged(answer[1])
 			if not answer[1].disabled:
 				if not self.isResolvedConflict(answer[1]):

@@ -123,34 +123,6 @@ class ServiceInfo(Poll, Converter):
 			return info.getInfoString(what)
 		return convert(v)
 
-#	def _getProcVal(self, pathname, base=10):
-#		val = None
-#		try:
-#			f = open(pathname, "r")
-#			val = int(f.read(), base)
-#			f.close()
-#			if val >= 2 ** 31:
-#				val -= 2 ** 32
-#		except Exception:
-#			pass
-#		return val
-
-#	def _getVal(self, pathname, info, infoVal, base=10):
-#		if self._isHDMIIn(info):
-#			return None
-#		val = self._getProcVal(pathname, base=base)
-#		return val if val is not None else info.getInfo(infoVal)
-
-#	def _getValInt(self, pathname, info, infoVal, base=10, default=-1):
-#		val = self._getVal(pathname, info, infoVal, base)
-#		return val if val is not None else default
-
-#	def _getValStr(self, pathname, info, infoVal, base=10, convert=lambda x: "%d" % x):
-#		if self._isHDMIIn(info):
-#			return "N/A"
-#		val = self._getProcVal(pathname, base=base)
-#		return convert(val) if val is not None else self.getServiceInfoString(info, infoVal, convert)
-
 	def _getVideoHeight(self, info):
 		if self._isHDMIIn(info):
 			return -1

@@ -117,7 +117,7 @@ class CaidInfo2(Converter, object):
 			self.type = self.CRDTXT
 		elif type == "Short":
 			self.type = self.SHORT
-		elif type == "Default" or type == "" or type == None or type == "%":
+		elif type == "Default" or type is None or type == "%":
 			self.type = self.ALL
 		else:
 			self.type = self.FORMAT
@@ -576,13 +576,13 @@ class CaidInfo2(Converter, object):
 									item[1] = item[1][tt + 1:]
 							info[item[0].strip().lower()] = item[1].strip()
 						else:
-							if not 'caid' in info or not 'CaID' in info:
+							if 'caid' not in info or 'CaID' not in info:
 								x = line.lower().find("caid")
 								if x != -1:
 									y = line.find(",")
 									if y != -1:
 										info["caid"] = line[x + 5:y]
-							if not 'pid' in info:
+							if 'pid' not in info:
 								x = line.lower().find("pid")
 								if x != -1:
 									y = line.find(" =")

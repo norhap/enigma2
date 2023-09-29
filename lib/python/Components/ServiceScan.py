@@ -2,6 +2,7 @@
 from enigma import eComponentScan, iDVBFrontend, eTimer
 from Components.NimManager import nimmanager as nimmgr
 from Tools.Transponder import getChannelNumber
+from gettext import ngettext
 
 
 class ServiceScan:
@@ -17,7 +18,7 @@ class ServiceScan:
 		1: _("error while scanning"),
 		2: _("no resource manager"),
 		3: _("no channel list")
-		}
+	}
 
 	def scanStatusChanged(self):
 		if self.state == self.Running:

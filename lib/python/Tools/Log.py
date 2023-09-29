@@ -47,7 +47,7 @@ class Log(object):
 		msg = ""
 		if not text:
 			text = "<no detail>"
-		if cls != None:
+		if cls:
 			cls = cls.__class__.__name__
 			msg = "%s [%s.%s] :: %s" % (type, cls, func, text)
 		else:

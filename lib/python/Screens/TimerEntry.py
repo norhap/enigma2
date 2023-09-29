@@ -22,7 +22,6 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.TagEditor import TagEditor
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Tools.Alternatives import GetWithAlternative
 from Tools.FallbackTimer import FallbackTimerDirs
 
 
@@ -535,7 +534,7 @@ class TimerEntry(ConfigListScreen, Screen):
 			self["config"].invalidate(self.entryEndTime)
 
 	def subserviceSelected(self, service):
-		if not service is None:
+		if service:
 			self.timer.service_ref = ServiceReference(service[1])
 		self.saveTimer()
 		self.close((True, self.timer))

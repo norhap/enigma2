@@ -12,9 +12,9 @@ class RefString(Converter, object):
 		Converter.__init__(self, type)
 		self.CHANSEL = None
 		self.type = {
-				"CurrentRef": self.CURRENT,
-				"ServicelistRef": self.EVENT
-			}[type]
+			"CurrentRef": self.CURRENT,
+			"ServicelistRef": self.EVENT
+		}[type]
 
 	@cached
 	def getText(self):
@@ -29,7 +29,7 @@ class RefString(Converter, object):
 			else:
 				return str(self.source.service.toString())
 		elif (self.type == self.CURRENT):
-			if self.CHANSEL == None:
+			if not self.CHANSEL:
 				self.CHANSEL = InfoBar.instance.servicelist
 			vSrv = self.CHANSEL.servicelist.getCurrent()
 			return str(vSrv.toString())

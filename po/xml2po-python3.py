@@ -2,14 +2,13 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import string
 import re
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, property_lexical_handler
 try:
 	from _xmlplus.sax.saxlib import LexicalHandler
 	no_comments = False
-except ImportError as e:
+except ImportError:
 	class LexicalHandler:
 		pass
 	no_comments = True
@@ -20,7 +19,7 @@ class parseXML(ContentHandler, LexicalHandler):
 		self.isPointsElement, self.isReboundsElement = 0, 0
 		self.attrlist = attrlist
 		self.last_comment = None
-		self.ishex = re.compile('#[0-9a-fA-F]+\Z')
+		self.ishex = re.compile(r'#[0-9a-fA-F]+\Z')
 
 	def comment(self, comment):
 		if "TRANSLATORS:" in comment:

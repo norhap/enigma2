@@ -1,7 +1,7 @@
 from os.path import isfile
 from fcntl import ioctl
 from struct import pack, unpack
-from time import time, localtime, gmtime
+from time import time, localtime, timezone
 from Tools.Directories import fileExists, fileReadLine
 from boxbranding import getMachineBuild
 
@@ -60,13 +60,12 @@ def setFPWakeuptime(wutime):
 
 
 def setRTCoffset(forsleep=None):
-	import time
-	if time.localtime().tm_isdst == 0:
-		forsleep = 7200 + time.timezone
+	if localtime().tm_isdst == 0:
+		forsleep = 7200 + timezone
 	else:
-		forsleep = 3600 - time.timezone
+		forsleep = 3600 - timezone
 
-	t_local = time.localtime(int(time.time()))
+	t_local = localtime(int(time()))
 
 	# Set RTC OFFSET (diff. between UTC and Local Time)
 	try:

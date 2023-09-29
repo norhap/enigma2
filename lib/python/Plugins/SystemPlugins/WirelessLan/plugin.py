@@ -7,14 +7,13 @@ from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.config import config, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword
 from Components.Network import iNetwork
-from Components.Console import Console
 from Components.SystemInfo import MODEL
 from Plugins.Plugin import PluginDescriptor
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.SystemPlugins.WirelessLan.Wlan import iWlan, iStatus, getWlanConfigName, existBcmWifi
-from time import time
 import re
+from gettext import ngettext
 
 plugin_path = eEnv.resolve("${libdir}/enigma2/python/Plugins/SystemPlugins/WirelessLan")
 

@@ -17,7 +17,7 @@ def getTrashFolder(path=None):
 			return ""
 		else:
 			trashcan = Harddisk.findMountPoint(os.path.realpath(path))
-			if '/movie' in path and not "/net/movie" in path:
+			if '/movie' in path and "/net/movie" not in path:
 				trashcan = os.path.join(trashcan, 'movie')
 			elif "/net/movie" in path:
 				trashcan = os.path.join(trashcan)
@@ -247,7 +247,7 @@ class CleanTrashTask(Components.Task.PythonTask):
 				size = 0
 				for root, dirs, files in os.walk(trashfolder, topdown=False):
 					for name in files:
-# Don't delete any per-directory config files from .Trash if the option is in use
+						# Don't delete any per-directory config files from .Trash if the option is in use
 						if (config.movielist.settings_per_directory.value and name == ".e2settings.pkl"):
 							continue
 						try:

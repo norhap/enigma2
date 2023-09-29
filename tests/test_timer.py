@@ -3,7 +3,7 @@ import enigma
 import time
 import tests
 
-#enigma.reset()
+# enigma.reset()
 
 
 def test_timer(repeat=0, timer_start=3600, timer_length=1000, sim_length=86400 * 7):
@@ -28,7 +28,7 @@ def test_timer(repeat=0, timer_start=3600, timer_length=1000, sim_length=86400 *
 	import RecordTimer
 
 	timer = RecordTimer.createTimer(xml.etree.cElementTree.fromstring(
-	"""
+		"""
 		<timer
 			begin="%d"
 			end="%d"
@@ -40,8 +40,7 @@ def test_timer(repeat=0, timer_start=3600, timer_length=1000, sim_length=86400 *
 			eit="56422"
 			disabled="0"
 			justplay="0">
-	</timer>""" % (at + timer_start, at + timer_start + timer_length, repeat)
-	))
+		</timer>""" % (at + timer_start, at + timer_start + timer_length, repeat)))
 
 	t.record(timer)
 
@@ -88,6 +87,6 @@ import os
 os.environ['TZ'] = 'CET'
 time.tzset()
 
-#log(test_timer, test_name = "test_timer_repeating", base_time = calendar.timegm((2007, 3, 1, 12, 0, 0)), repeat=0x7f, sim_length = 86400 * 7)
+# log(test_timer, test_name = "test_timer_repeating", base_time = calendar.timegm((2007, 3, 1, 12, 0, 0)), repeat=0x7f, sim_length = 86400 * 7)
 log(test_timer, test_name="test_timer_repeating_dst_skip", base_time=calendar.timegm((2007, 3, 20, 0, 0, 0)), timer_start=3600, repeat=0x7f, sim_length=86400 * 7)
-#log(test_timer, test_name = "test_timer_repeating_dst_start", base_time = calendar.timegm((2007, 3, 20, 0, 0, 0)), timer_start = 10000, repeat=0x7f, sim_length = 86400 * 7)
+# log(test_timer, test_name = "test_timer_repeating_dst_start", base_time = calendar.timegm((2007, 3, 20, 0, 0, 0)), timer_start = 10000, repeat=0x7f, sim_length = 86400 * 7)

@@ -26,22 +26,22 @@ class ServiceInfo2(Poll, Converter, object):
 		Converter.__init__(self, type)
 		Poll.__init__(self)
 		self.type, self.interesting_events = {
-				"xAPID": (self.xAPID, (iPlayableService.evUpdatedInfo,)),
-				"xVPID": (self.xVPID, (iPlayableService.evUpdatedInfo,)),
-				"xSID": (self.xSID, (iPlayableService.evUpdatedInfo,)),
-				"xONID": (self.xONID, (iPlayableService.evUpdatedInfo,)),
-				"xTSID": (self.xTSID, (iPlayableService.evUpdatedInfo,)),
-				"sCAIDs": (self.sCAIDs, (iPlayableService.evUpdatedInfo,)),
-				"yAll": (self.yAll, (iPlayableService.evUpdatedInfo,)),
-				"xAll": (self.xAll, (iPlayableService.evUpdatedInfo,)),
-				"xVTYPE": (self.xVTYPE, (iPlayableService.evUpdatedInfo,)),
-				"xATYPE": (self.xATYPE, (iPlayableService.evUpdatedInfo,)),
-				"xALLTYPE": (self.xALLTYPE, (iPlayableService.evUpdatedInfo,)),
-				"VideoHeight": (self.VideoHeight, (iPlayableService.evUpdatedInfo,)),
-				"VideoWidth": (self.VideoWidth, (iPlayableService.evUpdatedInfo,)),
-				"Framerate": (self.Framerate, (iPlayableService.evVideoSizeChanged, iPlayableService.evUpdatedInfo,)),
-				"Provider": (self.Provider, (iPlayableService.evUpdatedInfo,)),
-			}[type]
+			"xAPID": (self.xAPID, (iPlayableService.evUpdatedInfo,)),
+			"xVPID": (self.xVPID, (iPlayableService.evUpdatedInfo,)),
+			"xSID": (self.xSID, (iPlayableService.evUpdatedInfo,)),
+			"xONID": (self.xONID, (iPlayableService.evUpdatedInfo,)),
+			"xTSID": (self.xTSID, (iPlayableService.evUpdatedInfo,)),
+			"sCAIDs": (self.sCAIDs, (iPlayableService.evUpdatedInfo,)),
+			"yAll": (self.yAll, (iPlayableService.evUpdatedInfo,)),
+			"xAll": (self.xAll, (iPlayableService.evUpdatedInfo,)),
+			"xVTYPE": (self.xVTYPE, (iPlayableService.evUpdatedInfo,)),
+			"xATYPE": (self.xATYPE, (iPlayableService.evUpdatedInfo,)),
+			"xALLTYPE": (self.xALLTYPE, (iPlayableService.evUpdatedInfo,)),
+			"VideoHeight": (self.VideoHeight, (iPlayableService.evUpdatedInfo,)),
+			"VideoWidth": (self.VideoWidth, (iPlayableService.evUpdatedInfo,)),
+			"Framerate": (self.Framerate, (iPlayableService.evVideoSizeChanged, iPlayableService.evUpdatedInfo,)),
+			"Provider": (self.Provider, (iPlayableService.evUpdatedInfo,)),
+		}[type]
 		self.poll_interval = 1000
 		self.poll_enabled = True
 

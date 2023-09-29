@@ -4,10 +4,9 @@ from os.path import realpath
 from time import localtime, strftime, struct_time
 
 from enigma import getPrevAsciiCode
+import unicodedata
 
-from Components.SystemInfo import SystemInfo
 from Tools.Directories import SCOPE_CONFIG, fileAccess, resolveFilename
-from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
 from Components.Harddisk import harddiskmanager  # This import is order critical!
 
@@ -998,7 +997,7 @@ class ConfigSequence(ConfigElement):
 		# 	raise ValueError("[Config] Error: Lengths of default and limits must match!")
 		if censor_char is not None:  # DEBUG: This captures the censor character from legacy code!
 			censor = censor_char
-		if censor != "" and (isinstance(censor, str) and len(censor) != 1) and (isinstance(censor, unicode) and len(censor) != 1):
+		if censor != "" and (isinstance(censor, str) and len(censor) != 1) and (isinstance(censor, unicodedata) and len(censor) != 1):
 			raise ValueError("[Config] Error: Censor must be a single char (or \"\")!")
 		self.seperator = seperator
 		self.limits = limits
@@ -1352,7 +1351,7 @@ class ConfigPIN(ConfigInteger):
 	def __init__(self, default, pinLength=4, censor="\u2022"):
 		if not isinstance(default, int):
 			raise TypeError("[Config] Error: 'ConfigPIN' default must be an integer!")
-		if censor != "" and (isinstance(censor, str) and len(censor) != 1):  # and (isinstance(censor, unicode) and len(censor) != 1):
+		if censor != "" and (isinstance(censor, str) and len(censor) != 1):  # and (isinstance(censor, unicodedata) and len(censor) != 1):
 			raise ValueError("[Config] Error: Censor must be a single char (or \"\")!")
 		censor = censor
 		ConfigInteger.__init__(self, default=default, limits=(0, (10 ** pinLength) - 1), censor=censor)
@@ -1957,7 +1956,7 @@ class ConfigNumber(ConfigText):
 class ConfigPassword(ConfigText):
 	def __init__(self, default="", fixed_size=False, visible_width=False, censor="\u2022"):
 		ConfigText.__init__(self, default=default, fixed_size=fixed_size, visible_width=visible_width)
-		if censor != "" and (isinstance(censor, str) and len(censor) != 1) and (isinstance(censor, unicode) and len(censor) != 1):
+		if censor != "" and (isinstance(censor, str) and len(censor) != 1) and (isinstance(censor, unicodedata) and len(censor) != 1):
 			raise ValueError("[Config] Error: Censor must be a single char (or \"\")!")
 		self.censor = censor
 		self.hidden = True

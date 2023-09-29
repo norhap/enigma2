@@ -21,7 +21,6 @@ class OSD3DSetupScreen(ConfigListScreen, Screen):
 		self.setTitle(_("OSD 3D setup"))
 
 		from Components.ActionMap import ActionMap
-		from Components.Button import Button
 
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("Save"))
@@ -93,8 +92,8 @@ class auto3D(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				iPlayableService.evStart: self.__evStart
-			})
+			iPlayableService.evStart: self.__evStart
+		})
 
 	def checkIfDedicated3D(self):
 			service = self.session.nav.getCurrentlyPlayingServiceReference()

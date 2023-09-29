@@ -7,7 +7,7 @@ import Components.Task
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile
-from Components.FileList import FileList, MultiFileSelectList
+from Components.FileList import MultiFileSelectList
 from Components.GUIComponent import GUIComponent
 from Components.MenuList import MenuList
 from Components.VariableText import VariableText
@@ -158,7 +158,7 @@ class LogManager(Screen):
 		self["list"] = self.filelist
 		self["LogsSize"] = self.logsinfo = LogInfo(config.crash.debugPath.value, LogInfo.USED, update=False)
 		self.onLayoutFinish.append(self.layoutFinished)
-		if not self.selectionChanged in self["list"].onSelectionChanged:
+		if self.selectionChanged not in self["list"].onSelectionChanged:
 			self["list"].onSelectionChanged.append(self.selectionChanged)
 
 	def createSummary(self):

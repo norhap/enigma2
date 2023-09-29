@@ -12,12 +12,12 @@ class TextBox(Screen):
 		self["text"] = ScrollLabel(self.text)
 
 		self["actions"] = ActionMap(["OkCancelActions", "NavigationActions"],
-				{
-					"cancel": self.close,
-					"ok": self.close,
-					"up": self["text"].pageUp,
-					"down": self["text"].pageDown,
-				}, -1)
+			{
+			"cancel": self.close,
+			"ok": self.close,
+			"up": self["text"].pageUp,
+			"down": self["text"].pageDown,
+		}, -1)
 
 		if title:
 			self.setTitle(title)

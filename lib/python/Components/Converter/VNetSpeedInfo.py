@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Components.Label import Label
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll

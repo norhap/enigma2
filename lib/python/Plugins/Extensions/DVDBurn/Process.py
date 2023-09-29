@@ -1,7 +1,8 @@
 from Components.Task import Task, Job, DiskspacePrecondition, Condition, ToolExistsPrecondition
 from Components.Harddisk import harddiskmanager
 from Screens.MessageBox import MessageBox
-import os
+from os import listdir, remove
+from os.path import exists
 
 
 class png2yuvTask(Task):
@@ -77,7 +78,6 @@ class CopyMeta(Task):
 	def __init__(self, job, sourcefile):
 		Task.__init__(self, job, "Copy title meta files")
 		self.setTool("cp")
-		from os import listdir
 		path, filename = sourcefile.rstrip("/").rsplit("/", 1)
 		tsfiles = listdir(path)
 		for file in tsfiles:
@@ -187,10 +187,9 @@ class DemuxTask(Task):
 		print(self.mplex_streamfiles)
 
 		if failed:
-			import os
 			for file in self.generated_files:
 				try:
-					os.remove(file)
+					remove(file)
 				except OSError:
 					pass
 
@@ -456,7 +455,7 @@ class PreviewTask(Task):
 		self.finish(aborted=True)
 
 	def previewCB(self, answer):
-		if answer == True:
+		if answer:
 			self.previewProject()
 		else:
 			self.closedCB(True)
@@ -469,7 +468,7 @@ class PreviewTask(Task):
 			AddNotificationWithCallback(self.closedCB, MessageBox, _("Do you want to burn this collection to DVD medium?"))
 
 	def closedCB(self, answer):
-		if answer == True:
+		if answer:
 			Task.processFinished(self, 0)
 		else:
 			Task.processFinished(self, 1)
@@ -544,7 +543,6 @@ class MenuImageTask(Task):
 		# try:
 		import ImageDraw
 		import Image
-		import os
 		s = self.job.project.menutemplate.settings
 		s_top = s.margin_top.getValue()
 		s_bottom = s.margin_bottom.getValue()
@@ -673,7 +671,7 @@ class MenuImageTask(Task):
 		open(self.spuxmlfilename, "w").write(spuxml)
 		Task.processFinished(self, 0)
 		# except:
-			# Task.processFinished(self, 1)
+		# Task.processFinished(self, 1)
 
 	def getPosition(self, offset, left, top, right, bottom, size):
 		pos = [left, top]
@@ -920,7 +918,7 @@ class DVDJob(Job):
 		if self.menupreview:
 			PreviewTask(self, self.workspace + "/dvd/VIDEO_TS/")
 		else:
-			hasProjectX = os.path.exists('/usr/bin/projectx')
+			hasProjectX = exists('/usr/bin/projectx')
 			print("[DVDBurn] DVDJob hasProjectX=", hasProjectX)
 			for self.i in range(nr_titles):
 				self.title = self.project.titles[self.i]

@@ -1,5 +1,5 @@
 from Tools.Profile import profile
-from enigma import eServiceReference
+from enigma import eServiceReference, eServiceCenter, iPlayableService
 from Components.SystemInfo import BRAND, MODEL
 from Tools.Directories import fileExists, isPluginInstalled
 # workaround for required config entry dependencies.
@@ -9,9 +9,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 
 profile("LOAD:enigma")
-import enigma
-import os
-from os import sys
+from os.path import exists
 
 profile("LOAD:InfoBarGenerics")
 from Screens.InfoBarGenerics import InfoBarShowHide, \
@@ -63,21 +61,21 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.radioTV = 0
 		self.allowPiP = True
 		for x in HelpableScreen, \
-				InfoBarBase, InfoBarShowHide, \
-				InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarEPG, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
-				InfoBarInstantRecord, InfoBarAudioSelection, InfoBarRedButton, InfoBarTimerButton, InfoBarUnhandledKey, InfoBarVmodeButton, \
-				InfoBarAdditionalInfo, InfoBarNotifications, InfoBarDish, InfoBarSubserviceSelection, InfoBarBuffer, \
-				InfoBarTimeshift, InfoBarSeek, InfoBarCueSheetSupport, InfoBarSummarySupport, InfoBarTimeshiftState, \
-				InfoBarTeletextPlugin, InfoBarExtensions, InfoBarPiP, InfoBarSubtitleSupport, InfoBarJobman, InfoBarZoom, InfoBarOpenOnTopHelper, InfoBarPowersaver, \
-				InfoBarHdmi2, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarHotkey:
+			InfoBarBase, InfoBarShowHide, \
+			InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarEPG, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
+			InfoBarInstantRecord, InfoBarAudioSelection, InfoBarRedButton, InfoBarTimerButton, InfoBarUnhandledKey, InfoBarVmodeButton, \
+			InfoBarAdditionalInfo, InfoBarNotifications, InfoBarDish, InfoBarSubserviceSelection, InfoBarBuffer, \
+			InfoBarTimeshift, InfoBarSeek, InfoBarCueSheetSupport, InfoBarSummarySupport, InfoBarTimeshiftState, \
+			InfoBarTeletextPlugin, InfoBarExtensions, InfoBarPiP, InfoBarSubtitleSupport, InfoBarJobman, InfoBarZoom, InfoBarOpenOnTopHelper, InfoBarPowersaver, \
+			InfoBarHdmi2, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarHotkey:
 			x.__init__(self)
 
 		self.helpList.append((self["actions"], "InfobarActions", [("showMovies", _("Watch recordings"))]))
 		self.helpList.append((self["actions"], "InfobarActions", [("showRadio", _("Listen to the radio"))]))
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
-				enigma.iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
-			})
+			iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
+		})
 
 		self.current_begin_time = 0
 		if InfoBar.instance is not None:
@@ -100,16 +98,12 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 				if old_begin_time and old_begin_time != self.current_begin_time:
 					self.doShow()
 
-	def __checkServiceStarted(self):
-		self.__serviceStarted(True)
-		self.onExecBegin.remove(self.__checkServiceStarted)
-
 	def serviceStarted(self):  # override from InfoBarShowHide
 		new = self.servicelist.newServicePlayed()
 		if self.execing:
 			InfoBarShowHide.serviceStarted(self)
 			self.current_begin_time = 0
-		elif not self.__checkServiceStarted in self.onShown and new:
+		elif self.__checkServiceStarted not in self.onShown and new:
 			self.onShown.append(self.__checkServiceStarted)
 
 	def __checkServiceStarted(self):
@@ -154,16 +148,16 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.servicelist.correctChannelNumber()
 
 	def restartLastMovie(self):
-		service = enigma.eServiceReference(config.usage.last_movie_played.value)
+		service = eServiceReference(config.usage.last_movie_played.value)
 		if service:
-			if os.path.exists(service.getPath()):
+			if exists(service.getPath()):
 				from Components.ParentalControl import parentalControl
 				if parentalControl.isServicePlayable(service, self.openMoviePlayer):
 					self.openMoviePlayer(service)
 
 	def showMovies(self, defaultRef=None):
 		self.lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.session.openWithCallback(self.movieSelected, MovieSelection, defaultRef or enigma.eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled=self.timeshiftEnabled())
+		self.session.openWithCallback(self.movieSelected, MovieSelection, defaultRef or eServiceReference(config.usage.last_movie_played.value), timeshiftEnabled=self.timeshiftEnabled())
 
 	def movieSelected(self, service):
 		ref = self.lastservice
@@ -237,12 +231,12 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.allowPiP = True
 
 		for x in HelpableScreen, InfoBarShowHide, InfoBarMenu, \
-				InfoBarBase, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord, InfoBarVmodeButton, \
-				InfoBarAudioSelection, InfoBarNotifications, InfoBarResolutionSelection, InfoBarAspectSelection, \
-				InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, \
-				InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, \
-				InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport, InfoBarExtensions, \
-				InfoBarPlugins, InfoBarPiP, InfoBarZoom, InfoBarHotkey:
+			InfoBarBase, InfoBarSeek, InfoBarShowMovies, InfoBarInstantRecord, InfoBarVmodeButton, \
+			InfoBarAudioSelection, InfoBarNotifications, InfoBarResolutionSelection, InfoBarAspectSelection, \
+			InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, \
+			InfoBarMoviePlayerSummarySupport, InfoBarSubtitleSupport, \
+			InfoBarTeletextPlugin, InfoBarServiceErrorPopupSupport, InfoBarExtensions, \
+			InfoBarPlugins, InfoBarPiP, InfoBarZoom, InfoBarHotkey:
 			x.__init__(self)
 
 		self.servicelist = slist
@@ -342,7 +336,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			return
 		if answer in ("quitanddelete", "quitanddeleteconfirmed", "deleteandmovielist", "deleteandmovielistconfirmed"):
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
-			serviceHandler = enigma.eServiceCenter.getInstance()
+			serviceHandler = eServiceCenter.getInstance()
 			if answer in ("quitanddelete", "deleteandmovielist"):
 				msg = ''
 				if config.usage.movielist_trashcan.value:
@@ -616,4 +610,4 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		AddPopup(text="%s/%s: %s" % (index, n, self.ref2HumanName(ref)), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def ref2HumanName(self, ref):
-		return enigma.eServiceCenter.getInstance().info(ref).getName(ref)
+		return eServiceCenter.getInstance().info(ref).getName(ref)

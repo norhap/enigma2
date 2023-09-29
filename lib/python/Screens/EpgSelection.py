@@ -5,7 +5,7 @@ from Components.config import config, ConfigClock
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 from Components.EpgList import EPGList, EPG_TYPE_SINGLE, EPG_TYPE_SIMILAR, EPG_TYPE_MULTI, EPG_TYPE_PARTIAL
-from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.ActionMap import ActionMap
 from Components.UsageConfig import preferredTimerPath
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
@@ -27,6 +27,7 @@ from Components.Button import Button
 from Tools.Directories import isPluginInstalled
 from Screens.MessageBox import MessageBox
 from Components.Console import Console
+from gettext import pgettext
 
 mepg_config_initialized = False
 

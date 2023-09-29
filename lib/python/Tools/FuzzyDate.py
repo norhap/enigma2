@@ -32,7 +32,8 @@ def FuzzyTime(t, inPast=False):
 
 
 if __name__ == "__main__":
-	def _(x): return x
+	def _(x):
+		return x
 	print("[FuzzyDate] now: %s %s" % FuzzyTime(time()))
 	for i in range(1, 14):
 		print("+%2s day(s):  %s " % (i, FuzzyTime(time() + 86400 * i)))
