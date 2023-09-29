@@ -3,7 +3,7 @@ from xml.sax.handler import ContentHandler
 from enigma import eEnv, eTimer
 
 from Components.ActionMap import NumberActionMap
-from Components.config import ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ConfigPassword, ConfigText
+from Components.config import config, ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ConfigPassword, ConfigText
 from Components.ConfigList import ConfigList
 from Components.Label import Label
 # from Components.MenuList import MenuList
