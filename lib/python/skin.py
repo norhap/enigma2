@@ -3,7 +3,7 @@ from os.path import dirname, isfile, splitext
 from os import unlink
 from xml.etree.cElementTree import Element, ElementTree, fromstring
 
-from enigma import BT_ALPHABLEND, BT_ALPHATEST, BT_HALIGN_CENTER, BT_HALIGN_LEFT, BT_HALIGN_RIGHT, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_BOTTOM, BT_VALIGN_CENTER, BT_VALIGN_TOP, addFont, eLabel, eListbox, ePixmap, ePoint, eRect, eRectangle, eSize, eSlider, eSubtitleWidget, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, getFontFaces, gMainDC, gRGB
+from enigma import BT_ALPHABLEND, BT_ALPHATEST, BT_HALIGN_CENTER, BT_HALIGN_LEFT, BT_HALIGN_RIGHT, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_BOTTOM, BT_VALIGN_CENTER, BT_VALIGN_TOP, addFont, eLabel, eListbox, ePixmap, ePoint, eRect, eRectangle, eSize, eSlider, eSubtitleWidget, eWidget, eWindow, eWindowStyleManager, eWindowStyleSkinned, getDesktop, gFont, getFontFaces, gMainDC, gRGB
 
 from Components.config import ConfigSubsection, ConfigText, config, ConfigYesNo
 # from Components.RcModel import rc_model
@@ -50,6 +50,7 @@ windowStyles = {}  # Dictionary of window styles for each screen ID.
 resolutions = {}  # Dictionary of screen resolutions for each screen ID.
 scrollLabelStyle = {}  # Dictionary of scrollLabel widget defaults.
 constantWidgets = {}
+layouts = {}
 variables = {}
 
 config.skin = ConfigSubsection()
@@ -424,15 +425,15 @@ def parseGradient(value):
 	data = [x.strip() for x in value.split(",")]
 	if len(data) > 2:
 		options = {
-			"horizontal": ePixmap.GRADIENT_HORIZONTAL,
-			"vertical": ePixmap.GRADIENT_VERTICAL,
+			"horizontal": eWidget.GRADIENT_HORIZONTAL,
+			"vertical": eWidget.GRADIENT_VERTICAL,
 		}
-		direction = parseOptions(options, "gradient", data[2], ePixmap.GRADIENT_VERTICAL)
-		alphaBend = BT_ALPHABLEND if len(data) == 4 and parseBoolean("1", data[3]) else 0
+		direction = parseOptions(options, "gradient", data[2], eWidget.GRADIENT_VERTICAL)
+		alphaBend = 1 if len(data) == 4 and parseBoolean("1", data[3]) else 0
 		return (parseColor(data[0], default=0x00000000), parseColor(data[1], 0x00FFFFFF), direction, alphaBend)
 	else:
 		skinError("The gradient '%s' must be 'startColor,endColor,direction[,blend]', using '#00000000,#00FFFFFF,vertical' (Black,White,vertical)" % value)
-		return (0x000000, 0x00FFFFFF, ePixmap.GRADIENT_VERTICAL, 0)
+		return (0x000000, 0x00FFFFFF, eWidget.GRADIENT_VERTICAL, 0)
 
 
 def parseHorizontalAlignment(value):
@@ -551,6 +552,28 @@ def parsePixmap(path, desktop):
 
 def parsePosition(value, scale, object=None, desktop=None, size=None):
 	return ePoint(*parseValuePair(value, scale, object, desktop, size))
+
+
+def parseRadius(value):
+	data = [x.strip() for x in value.split(";")]
+	if len(data) == 2:
+		edges = [x.strip() for x in data[1].split(",")]
+		edgesMask = {
+			"topLeft": eWidget.RADIUS_TOP_LEFT,
+			"topRight": eWidget.RADIUS_TOP_RIGHT,
+			"top": eWidget.RADIUS_TOP,
+			"bottomLeft": eWidget.RADIUS_BOTTOM_LEFT,
+			"bottomRight": eWidget.RADIUS_BOTTOM_RIGHT,
+			"bottom": eWidget.RADIUS_BOTTOM,
+			"left": eWidget.RADIUS_LEFT,
+			"right": eWidget.RADIUS_RIGHT,
+		}
+		edgeValue = 0
+		for e in edges:
+			edgeValue += edgesMask.get(e, 0)
+		return int(data[0]), edgeValue
+	else:
+		return int(data[0]), eWidget.RADIUS_ALL
 
 
 def parseSize(value, scale, object=None, desktop=None):
@@ -790,9 +813,6 @@ class AttributeParser:
 	def backgroundGradient(self, value):
 		self.guiObject.setBackgroundGradient(*parseGradient(value))
 
-	def backgroundGradientSelected(self, value):
-		self.guiObject.setBackgroundGradientSelected(*parseGradient(value))
-
 	def backgroundCrypted(self, value):
 		self.guiObject.setBackgroundColor(parseColor(value, 0x00000000))
 
@@ -810,6 +830,10 @@ class AttributeParser:
 
 	def borderWidth(self, value):
 		self.guiObject.setBorderWidth(self.applyVerticalScale(value))
+
+	def cornerRadius(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setCornerRadius(radius, edgeValue)
 
 	def conditional(self, value):
 		pass
@@ -851,6 +875,9 @@ class AttributeParser:
 	def foregroundEncrypted(self, value):
 		self.guiObject.setForegroundColor(parseColor(value, 0x00FFFFFF))
 
+	def foregroundGradient(self, value):
+		self.guiObject.setForegroundGradient(*parseGradient(value))
+
 	def foregroundNotCrypted(self, value):
 		self.guiObject.setForegroundColor(parseColor(value, 0x00FFFFFF))
 
@@ -873,6 +900,34 @@ class AttributeParser:
 
 	def itemAlignment(self, value):
 		self.guiObject.setItemAlignment(parseItemAlignment(value))
+
+	def itemCornerRadius(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setItemCornerRadius(radius, edgeValue)
+
+	def itemCornerRadiusSelected(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setItemCornerRadiusSelected(radius, edgeValue)
+
+	def itemCornerRadiusMarked(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setItemCornerRadiusMarked(radius, edgeValue)
+
+	def itemCornerRadiusMarkedAndSelected(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setItemCornerRadiusMarkedAndSelected(radius, edgeValue)
+
+	def itemGradient(self, value):
+		self.guiObject.setItemGradient(*parseGradient(value))
+
+	def itemGradientSelected(self, value):
+		self.guiObject.setItemGradientSelected(*parseGradient(value))
+
+	def itemGradientMarked(self, value):
+		self.guiObject.setItemGradientMarked(*parseGradient(value))
+
+	def itemGradientMarkedAndSelected(self, value):
+		self.guiObject.setItemGradientMarkedAndSelected(*parseGradient(value))
 
 	def itemHeight(self, value):
 		# print("[Skin] DEBUG: Scale itemHeight %d -> %d." % (int(value), self.applyVerticalScale(value)))
@@ -947,6 +1002,15 @@ class AttributeParser:
 		self.scrollbarBackgroundPixmap(value)
 		attribDeprecationWarning("scrollbarbackgroundPixmap", "scrollbarBackgroundPixmap")
 
+	def scrollbarBackgroundColor(self, value):
+		self.guiObject.setScrollbarBackgroundColor(parseColor(value, 0x00000000))
+
+	def scrollbarBorderColor(self, value):
+		self.guiObject.setScrollbarBorderColor(parseColor(value, 0x00FFFFFF))
+
+	def scrollbarGradient(self, value):
+		self.guiObject.setScrollbarGradient(*parseGradient(value))
+
 	def scrollbarMode(self, value):
 		self.guiObject.setScrollbarMode(parseScrollbarMode(value))
 
@@ -956,14 +1020,12 @@ class AttributeParser:
 	def scrollbarScroll(self, value):
 		self.guiObject.setScrollbarScroll(parseScrollbarScroll(value))
 
-	def scrollbarBackgroundColor(self, value):
-		self.guiObject.setScrollbarBackgroundColor(parseColor(value, 0x00000000))
-
-	def scrollbarBorderColor(self, value):
-		self.guiObject.setScrollbarBorderColor(parseColor(value, 0x00FFFFFF))
-
 	def scrollbarLength(self, value):
 		self.guiObject.setScrollbarLength(parseScrollbarLength(value, 0))
+
+	def scrollbarRadius(self, value):
+		radius, edgeValue = parseRadius(value)
+		self.guiObject.setScrollbarRadius(radius, edgeValue)
 
 	def scrollbarSliderBorderColor(self, value):  # This legacy definition uses an inconsistent name, use'scrollbarBorderColor' instead!
 		self.scrollbarBorderColor(value)
@@ -1099,6 +1161,12 @@ class AttributeParser:
 
 	def verticalAlignment(self, value):
 		self.guiObject.setVAlign(parseVerticalAlignment(value))
+
+	def widgetBorderColor(self, value):
+		self.guiObject.setWidgetBorderColor(parseColor(value, 0x00FFFFFF))
+
+	def widgetBorderWidth(self, value):
+		self.guiObject.setWidgetBorderWidth(self.applyVerticalScale(value))
 
 	def wrap(self, value):
 		self.guiObject.setWrap(parseWrap(value))
@@ -1276,6 +1344,11 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 			name = constant_widget.attrib.get("name")
 			if name:
 				constantWidgets[name] = constant_widget
+	for tag in domSkin.findall("layouts"):
+		for layout in tag.findall("layout"):
+			name = layout.attrib.get("name")
+			if name:
+				layouts[name] = layout
 	for tag in domSkin.findall("variables"):
 		for parameter in tag.findall("variable"):
 			name = parameter.attrib.get("name")
@@ -1588,6 +1661,36 @@ def readSkin(screen, skin, names, desktop):
 	screen.renderer = []
 	usedComponents = set()
 
+	def processConstant(constant_widget, context):
+		wname = constant_widget.attrib.get("name")
+		if wname:
+			try:
+				cwvalue = constantWidgets[wname]
+			except KeyError:
+				raise SkinError("Given constant-widget '%s' not found in skin" % wname)
+		if cwvalue:
+			for x in cwvalue:
+				myScreen.append((x))
+		try:
+			myScreen.remove(constant_widget)
+		except ValueError:
+			pass
+
+	def processLayouts(layout, context):
+		wname = layout.attrib.get("name")
+		if wname:
+			try:
+				cwvalue = layouts[wname]
+			except KeyError:
+				raise SkinError("Given layout '%s' not found in skin" % wname)
+		if cwvalue:
+			for x in cwvalue:
+				myScreen.append((x))
+		try:
+			myScreen.remove(layout)
+		except ValueError:
+			pass
+
 	def processNone(widget, context):
 		pass
 
@@ -1701,6 +1804,10 @@ def readSkin(screen, skin, names, desktop):
 
 	def processScreen(widget, context):
 		widgets = widget
+		for w in widgets.findall('constant-widget'):
+			processConstant(w, context)
+		for l in widgets.findall('layout'):
+			processLayouts(l, context)
 		for w in widgets:
 			conditional = w.attrib.get("conditional")
 			if conditional and not [i for i in conditional.split(",") if i in screen.keys()]:
@@ -1739,6 +1846,8 @@ def readSkin(screen, skin, names, desktop):
 
 	processors = {
 		None: processNone,
+		"constant-widget": processConstant,
+		"layout": processLayouts,
 		"widget": processWidget,
 		"applet": processApplet,
 		"eLabel": processLabel,
