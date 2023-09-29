@@ -7,7 +7,6 @@ from Tools.Directories import fileExists
 from Components.ParentalControl import parentalControl
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import SystemInfo, BRAND, MODEL, PLATFORM
-from time import time
 from time import sleep
 
 POLLTIME = 5  # seconds
