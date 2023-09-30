@@ -8,6 +8,10 @@
 #include <lib/gdi/pixmapcache.h>
 #include <unistd.h>
 
+#include <map>
+#include <string>
+#include <lib/base/elock.h>
+
 extern "C" {
 #include <jpeglib.h>
 #include <gif_lib.h>
@@ -15,61 +19,6 @@ extern "C" {
 
 #include <nanosvg.h>
 #include <nanosvgrast.h>
-
-/* Keep a table of already-loaded pixmaps, and return the old one when
- * needed. The "dispose" method isn't very efficient, but not having
- * to load the same pixmap twice will probably make up for that.
- * There is a race condition, when two threads load the same image,
- * the worst case scenario is then that the pixmap is loaded twice. This
- * isn't any worse than before, and all the UI pixmaps will be loaded
- * from the same thread anyway. */
-
-typedef std::map<std::string, gPixmap*> NameToPixmap;
-static eSingleLock pixmapTableLock;
-static NameToPixmap pixmapTable;
-
-static void pixmapDisposed(gPixmap* pixmap)
-{
-	eSingleLocker lock(pixmapTableLock);
-	for (NameToPixmap::iterator it = pixmapTable.begin();
-		 it != pixmapTable.end();
-		 ++it)
-	{
-		 if (it->second == pixmap)
-		 {
-			 pixmapTable.erase(it);
-			 break;
-		 }
-
-	}
-}
-
-static int pixmapFromTable(ePtr<gPixmap> &result, const char *filename)
-{
-	/* Prevent a deadlock: assigning a pixmap to result may cause the
-	 * previous to be destroyed, which would call pixmapDisposed which
-	 * in turn would aquire the lock a second time. */
-	ePtr<gPixmap> disposeMeOutsideTheLock(result);
-	{
-		eSingleLocker lock(pixmapTableLock);
-		NameToPixmap::iterator it = pixmapTable.find(filename);
-		if (it != pixmapTable.end())
-		{
-			result = it->second; /* Yay, re-use the pixmap */
-			return 0;
-		}
-		else
-		{
-			return -1;
-		}
-	}
-}
-
-static void pixmapToTable(ePtr<gPixmap> &result, const char *filename)
-{
-	eSingleLocker lock(pixmapTableLock);
-	pixmapTable[filename] = result;
-}
 
 /* TODO: I wonder why this function ALWAYS returns 0 */
 int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel, int cached)
@@ -186,6 +135,18 @@ int loadPNG(ePtr<gPixmap> &result, const char *filename, int accel, int cached)
 	png_read_image(png_ptr, rowptr);
 
 	delete [] rowptr;
+
+	if (color_type == PNG_COLOR_TYPE_RGBA || color_type == PNG_COLOR_TYPE_GA)
+		surface->transparent = true;
+	else
+	{
+		png_bytep trans_alpha = NULL;
+		int num_trans = 0;
+		png_color_16p trans_color = NULL;
+
+		png_get_tRNS(png_ptr, info_ptr, &trans_alpha, &num_trans, &trans_color);
+		surface->transparent = (trans_alpha != NULL);
+	}
 
 	int num_palette = -1, num_trans = -1;
 	if (color_type == PNG_COLOR_TYPE_PALETTE) {
@@ -304,13 +265,13 @@ int loadJPG(ePtr<gPixmap> &result, const char *filename, ePtr<gPixmap> alpha, in
 		}
 		if (grayscale)
 		{
-			eWarning("[loadJPG] no support for grayscale + alpha at the moment");
+			eWarning("[loadJPG] we don't support grayscale + alpha at the moment");
 			alpha = 0;
 		}
 	}
 
 	result = new gPixmap(cinfo.output_width, cinfo.output_height, grayscale ? 8 : 32, cached ? PixmapCache::PixmapDisposed : NULL);
-
+	result->surface->transparent = false;
 	row_stride = cinfo.output_width * cinfo.output_components;
 	buffer = (*cinfo.mem->alloc_sarray)((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
 	while (cinfo.output_scanline < cinfo.output_height) {
@@ -669,6 +630,7 @@ int loadGIF(ePtr<gPixmap> &result, const char *filename, int accel,int cached)
 	surface->clut.data = m_filepara->palette;
 	surface->clut.colors = m_filepara->palette_size;
 	m_filepara->palette = NULL; // transfer ownership
+	int o_y=0, u_y=0, v_x=0, h_x=0;
 	int extra_stride = surface->stride - surface->x;
 
 	unsigned char *tmp_buffer=((unsigned char *)(surface->data));

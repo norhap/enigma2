@@ -82,6 +82,7 @@ public:
 	};
 
 	void setColor(int what, const gRGB &back);
+	gRGB getColor(int what);
 
 	void setTitleOffset(const eSize &offset);
 	void setTitleFont(gFont *fnt);
@@ -89,7 +90,7 @@ public:
 	void setListboxFont(gFont *fnt);
 	void setEntryFont(gFont *fnt);
 	void setValueFont(gFont *fnt);
-	
+
 private:
 	struct borderSet
 	{
