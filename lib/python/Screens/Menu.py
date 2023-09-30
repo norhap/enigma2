@@ -6,7 +6,7 @@ from skin import findSkinScreen
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Button import Button
 from Components.config import ConfigDictionarySet, NoSave, config, configfile
-from Components.NimManager import nimmanager  # This import, although not defined, is necessary for the search and scan menu
+from Components.NimManager import nimmanager  # This import, although not defined, is necessary for the search and scan menu  # noqa: F401
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
 from Components.SystemInfo import SystemInfo

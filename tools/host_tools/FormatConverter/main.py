@@ -3,7 +3,7 @@ from __future__ import print_function
 from datasource import genericdatasource
 from satxml import satxml
 from lamedb import lamedb
-from input import *
+from input import *  # noqa: F403
 import os
 
 maindata = genericdatasource()

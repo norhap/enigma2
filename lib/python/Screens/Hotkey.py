@@ -3,7 +3,7 @@ from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.SystemInfo import BoxInfo, SystemInfo
-from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo  # noqa: F401
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
@@ -714,7 +714,7 @@ class InfoBarHotkey():
 				from Screens.SoftcamSetup import SoftcamSetup
 				self.session.open(SoftcamSetup)
 			elif selected[0] == "Setup":
-				from Screens.Setup import Setup
+				from Screens.Setup import Setup  # noqa: F401
 				exec("self.session.open(Setup, \"%s\")" % selected[1])
 			elif selected[0].startswith("Zap"):
 				if selected[0] == "ZapPanic":

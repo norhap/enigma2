@@ -1,6 +1,6 @@
 from Tools.Profile import profile, profileFinal  # This facilitates the start up progress counter.
 profile("StartPython")
-import Tools.RedirectOutput
+import Tools.RedirectOutput  # noqa: F401
 
 import enigma
 import eBaseImpl
@@ -142,7 +142,7 @@ from Components.PluginComponent import plugins
 
 profile("LOAD:Wizard")
 from Screens.Wizard import wizardManager
-from Screens.StartWizard import *
+from Screens.StartWizard import *  # noqa: F401, F403
 from Tools.BoundFunction import boundFunction
 from Plugins.Plugin import PluginDescriptor
 
@@ -645,7 +645,7 @@ import Components.AVSwitch
 Components.AVSwitch.InitAVSwitch()
 
 profile("FanControl")
-from Components.FanControl import fancontrol
+from Components.FanControl import fancontrol  # noqa: F401
 
 profile("HdmiRecord")
 import Components.HdmiRecord
