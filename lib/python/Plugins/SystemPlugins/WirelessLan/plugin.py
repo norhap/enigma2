@@ -2,7 +2,7 @@ from enigma import eTimer, eEnv
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import MultiPixmap
-from Components.Label import Label
+from Components.Label import Label  # noqa: F401
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Components.config import config, ConfigYesNo, NoSave, ConfigSubsection, ConfigText, ConfigSelection, ConfigPassword

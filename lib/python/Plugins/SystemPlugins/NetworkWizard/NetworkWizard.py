@@ -7,7 +7,7 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
-from Components.Language import language
+from Components.Language import language  # noqa: F401 possible use line 87
 from Tools.Geolocation import geolocation
 from Components.Timezones import TIMEZONE_FILE
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileReadXML
@@ -368,7 +368,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 
 	def isWlanPluginInstalled(self):
 		try:
-			from Plugins.SystemPlugins.WirelessLan.Wlan import iWlan
+			from Plugins.SystemPlugins.WirelessLan.Wlan import iWlan  # noqa: F401
 		except ImportError:
 			self.WlanPluginInstalled = False
 		else:

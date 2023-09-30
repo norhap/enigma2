@@ -460,10 +460,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		tPreview = _("Preview")
 		tFwd = "%s (%s)" % (_("skip forward"), tPreview)
 		tBack = "%s (%s)" % (_("skip backward"), tPreview)
-		sfwd = lambda: self.seekRelative(1, config.seek.selfdefined_46.value * 90000)
-		ssfwd = lambda: self.seekRelative(1, config.seek.selfdefined_79.value * 90000)
-		sback = lambda: self.seekRelative(-1, config.seek.selfdefined_46.value * 90000)
-		ssback = lambda: self.seekRelative(-1, config.seek.selfdefined_79.value * 90000)
+		sfwd = lambda: self.seekRelative(1, config.seek.selfdefined_46.value * 90000)  # noqa: E731
+		ssfwd = lambda: self.seekRelative(1, config.seek.selfdefined_79.value * 90000)  # noqa: E731
+		sback = lambda: self.seekRelative(-1, config.seek.selfdefined_46.value * 90000)  # noqa: E731
+		ssback = lambda: self.seekRelative(-1, config.seek.selfdefined_79.value * 90000)  # noqa: E731
 		self["SeekActions"] = HelpableActionMap(self, ["MovielistSeekActions"], {
 			"playpauseService": (self.preview, _("Preview")),
 			"seekFwd": (sfwd, tFwd),
@@ -2120,7 +2120,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def installedMovieManagerPlugin(self):
 		try:
-			from Plugins.Extensions.MovieManager.ui import MovieManager
+			from Plugins.Extensions.MovieManager.ui import MovieManager  # noqa: F401
 			return True
 		except Exception as e:
 			print("[MovieSelection] MovieManager is not installed...", e)

@@ -3,7 +3,7 @@ from os.path import exists, join
 from Components.Harddisk import harddiskmanager
 from Components.ActionMap import ActionMap
 from Components.Console import Console
-from Components.Label import Label
+from Components.Label import Label  # noqa: F401
 from Components.config import config
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox

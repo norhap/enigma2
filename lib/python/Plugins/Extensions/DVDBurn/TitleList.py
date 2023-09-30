@@ -15,9 +15,9 @@ from Components.ActionMap import HelpableActionMap, ActionMap
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.Sources.Progress import Progress
-from Components.MultiContent import MultiContentEntryText
+from Components.MultiContent import MultiContentEntryText  # noqa: F401
 from Components.Label import MultiColorLabel
-from enigma import gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT
+from enigma import gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT  # noqa: F401
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 

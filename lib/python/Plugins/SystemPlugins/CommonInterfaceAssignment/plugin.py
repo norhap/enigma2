@@ -8,7 +8,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigNothing
 from Components.ConfigList import ConfigList
-from Components.Label import Label
+from Components.Label import Label  # noqa: F401
 from Components.SelectionList import SelectionList
 from Components.SystemInfo import SystemInfo
 from Components.NimManager import nimmanager

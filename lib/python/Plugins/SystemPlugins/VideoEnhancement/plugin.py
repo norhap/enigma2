@@ -5,7 +5,7 @@ from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from .VideoEnhancement import VideoEnhancement
+from .VideoEnhancement import VideoEnhancement  # noqa: F401
 import os
 import skin
 
