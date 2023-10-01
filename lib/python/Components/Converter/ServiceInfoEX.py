@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from Components.Converter.Poll import Poll
 from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService, iServiceInformation_ENUMS
+from enigma import iServiceInformation, iPlayableService
 from Components.config import config
 from Components.Element import cached
 
@@ -346,10 +346,6 @@ class ServiceInfoEX(Poll, Converter, object):
 			subservices = service.subServices()
 			return subservices and subservices.getNumberOfSubservices() > 0
 		elif self.type == self.HAS_HBBTV:
-			try:
-				return info.getInfoString(iServiceInformation_ENUMS.sHBBTVUrl) != ''
-			except:
-				pass
 			try:
 				return info.getInfoString(iServiceInformation.sHBBTVUrl) != ''
 			except:
