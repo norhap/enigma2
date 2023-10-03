@@ -977,6 +977,7 @@
 
 	<map context="TimerEditActions">
 		<key id="KEY_INFO" mapto="log" flags="m" />
+		<key id="KEY_EPG" mapto="log" flags="m" />
 	</map>
 
 	<map context="EPGSelectActions">
