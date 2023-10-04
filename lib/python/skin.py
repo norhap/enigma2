@@ -891,15 +891,11 @@ class AttributeParser:
 
 	def halign(self, value):  # This legacy definition uses an inconsistent name, use 'horizontalAlignment' instead!
 		self.horizontalAlignment(value)
-		attribDeprecationWarning("halign", "horizontalAlignment")
+		# attribDeprecationWarning("halign", "horizontalAlignment")
 
 	def hAlign(self, value):  # This typo catcher definition uses an inconsistent name, use 'horizontalAlignment' instead!
 		self.horizontalAlignment(value)
 		attribDeprecationWarning("hAlign", "horizontalAlignment")
-
-	def halign(self, value):  # This legacy definition uses an inconsistent name, use 'horizontalAlignment' instead!
-		self.horizontalAlignment(value)
-		# attribDeprecationWarning("halign", "horizontalAlignment")
 
 	def horizontalAlignment(self, value):
 		self.guiObject.setHAlign(parseHorizontalAlignment(value))
@@ -1151,15 +1147,11 @@ class AttributeParser:
 
 	def valign(self, value):  # This legacy definition uses an inconsistent name, use 'verticalAlignment' instead!
 		self.verticalAlignment(value)
-		attribDeprecationWarning("valign", "verticalAlignment")
+		# attribDeprecationWarning("valign", "verticalAlignment")
 
 	def vAlign(self, value):  # This typo catcher definition uses an inconsistent name, use 'verticalAlignment' instead!
 		self.verticalAlignment(value)
 		attribDeprecationWarning("vAlign", "verticalAlignment")
-
-	def valign(self, value):  # This legacy definition uses an inconsistent name, use 'verticalAlignment' instead!
-		self.verticalAlignment(value)
-		# attribDeprecationWarning("valign", "verticalAlignment")
 
 	def valueFont(self, value):
 		self.guiObject.setValueFont(parseFont(value, self.scaleTuple))

@@ -71,7 +71,7 @@ def RemovePopup(id):
 			x[1].close()
 
 
-from Screens.MessageBox import MessageBox
+from Screens.MessageBox import MessageBox  # noqa: E402 module level import not at top of file
 
 
 def AddPopup(text, type, timeout, id=None):

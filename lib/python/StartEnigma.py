@@ -1,24 +1,20 @@
+import enigma  # noqa: E402
+import eBaseImpl  # noqa: E402
+import eConsoleImpl  # noqa: E402
 from Tools.Profile import profile, profileFinal  # This facilitates the start up progress counter.
 profile("StartPython")
-import Tools.RedirectOutput  # noqa: F401
-
-import enigma
-import eBaseImpl
-import eConsoleImpl
-
+import Tools.RedirectOutput  # noqa: F401, E402
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
-
-from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN
-from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile
-from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL
-
+from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN  # noqa: E402
+from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile  # noqa: E402
+from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL  # noqa: E402
 profile("Imports")
-from os.path import isdir, islink, join
-from traceback import print_exc
-from time import time
-from sys import stdout
+from os.path import isdir, islink, join  # noqa: E402
+from traceback import print_exc  # noqa: E402
+from time import time  # noqa: E402
+from sys import stdout  # noqa: E402
 
 if ARCHITECTURE == "aarch64":
 	import usb.core
@@ -51,23 +47,23 @@ config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
 config.misc.load_unlinked_userbouquets.addNotifier(setLoadUnlinkedUserbouquets)
 
 profile("ClientMode")
-import Components.ClientMode
+import Components.ClientMode  # noqa: E402
 Components.ClientMode.InitClientMode()
 enigma.eDVBDB.getInstance().reloadBouquets() if not config.clientmode.enabled.value or not config.clientmode_import_restart.value else None
 
 profile("SimpleSummary")
-from Screens import InfoBar
-from Screens.SimpleSummary import SimpleSummary
+from Screens import InfoBar  # noqa: E402
+from Screens.SimpleSummary import SimpleSummary  # noqa: E402
 
 profile("ParentalControl")
-import Components.ParentalControl
+import Components.ParentalControl  # noqa: E402
 Components.ParentalControl.InitParentalControl()
 
 profile("LOAD:Navigation")
-from Navigation import Navigation
+from Navigation import Navigation  # noqa: E402
 
 profile("LOAD:skin")
-from skin import readSkin
+from skin import readSkin  # noqa: E402
 
 config.misc.blackradiopic = ConfigText(default=resolveFilename(SCOPE_GUISKIN, "black.mvi"))
 config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_GUISKIN, "radio.mvi"))
@@ -138,13 +134,13 @@ except ImportError:
 profile("LOAD:Plugin")
 
 # initialize autorun plugins and plugin menu entries
-from Components.PluginComponent import plugins
+from Components.PluginComponent import plugins  # noqa: E402
 
 profile("LOAD:Wizard")
-from Screens.Wizard import wizardManager
-from Screens.StartWizard import *  # noqa: F401, F403
-from Tools.BoundFunction import boundFunction
-from Plugins.Plugin import PluginDescriptor
+from Screens.Wizard import wizardManager  # noqa: E402
+from Screens.StartWizard import *  # noqa: E402, F401, F403
+from Tools.BoundFunction import boundFunction  # noqa: E402
+from Plugins.Plugin import PluginDescriptor  # noqa: E402
 
 profile("misc")
 had = dict()
@@ -170,9 +166,9 @@ def dump(dir, p=""):
 
 
 profile("LOAD:ScreenGlobals")
-from Screens.Globals import Globals
-from Screens.SessionGlobals import SessionGlobals
-from Screens.Screen import Screen
+from Screens.Globals import Globals  # noqa: E402
+from Screens.SessionGlobals import SessionGlobals  # noqa: E402
+from Screens.Screen import Screen  # noqa: E402
 
 profile("Screen")
 Screen.globalScreen = Globals()
@@ -389,9 +385,9 @@ class Session:
 
 
 profile("Standby,PowerKey")
-import Screens.Standby
-from Screens.Menu import MainMenu, mdom
-from GlobalActions import globalActionMap
+import Screens.Standby  # noqa: E402
+from Screens.Menu import MainMenu, mdom  # noqa: E402
+from GlobalActions import globalActionMap  # noqa: E402
 
 
 class PowerKey:
@@ -482,17 +478,17 @@ class AutoScartControl:
 
 
 profile("Load:CI")
-from Screens.Ci import CiHandler
+from Screens.Ci import CiHandler  # noqa: E402
 
 profile("Load:VolumeControl")
-from Components.VolumeControl import VolumeControl
+from Components.VolumeControl import VolumeControl  # noqa: E402
 
 profile("Load:StackTracePrinter")
-from Components.StackTrace import StackTracePrinter
+from Components.StackTrace import StackTracePrinter  # noqa: E402
 StackTracePrinterInst = StackTracePrinter()
 
 profile("UsageConfig")
-from Components.UsageConfig import InitUsageConfig, getFileUsage
+from Components.UsageConfig import InitUsageConfig, getFileUsage  # noqa: E402
 InitUsageConfig()
 getFileUsage()
 
@@ -632,66 +628,66 @@ def runScreenTest():
 
 
 profile("Init:skin")
-from skin import InitSkins
+from skin import InitSkins  # noqa: E402
 InitSkins()
 
 profile("InputDevice")
-import Components.InputDevice
+import Components.InputDevice  # noqa: E402
 Components.InputDevice.InitInputDevices()
-import Components.InputHotplug
+import Components.InputHotplug  # noqa: E402
 
 profile("AVSwitch")
-import Components.AVSwitch
+import Components.AVSwitch  # noqa: E402
 Components.AVSwitch.InitAVSwitch()
 
 profile("FanControl")
-from Components.FanControl import fancontrol  # noqa: F401
+from Components.FanControl import fancontrol  # noqa: F401, E402
 
 profile("HdmiRecord")
-import Components.HdmiRecord
+import Components.HdmiRecord  # noqa: E402
 Components.HdmiRecord.InitHdmiRecord()
 
 profile("RecordingConfig")
-import Components.RecordingConfig
+import Components.RecordingConfig  # noqa: E402
 Components.RecordingConfig.InitRecordingConfig()
 
 
 profile("TimeZones")
-import Components.Timezones
+import Components.Timezones  # noqa: E402
 Components.Timezones.InitTimeZones()
 
 profile("loadKeymap")
-from Components.ActionMap import loadKeymap
+from Components.ActionMap import loadKeymap  # noqa: E402
 loadKeymap(config.usage.keymap.value)
 
 profile("Network")
-import Components.Network
+import Components.Network  # noqa: E402
 Components.Network.InitNetwork()
 
 profile("LCD")
-import Components.Lcd
+import Components.Lcd  # noqa: E402
 Components.Lcd.InitLcd()
 Components.Lcd.IconCheck()
 
 enigma.eAVControl.getInstance().disableHDMIIn()
 
 profile("RFMod")
-import Components.RFmod
+import Components.RFmod  # noqa: E402
 Components.RFmod.InitRFmod()
 
 profile("Init:CI")
-import Screens.Ci
+import Screens.Ci  # noqa: E402
 Screens.Ci.InitCiConfig()
 
 profile("Init:LogManager")
-import Screens.LogManager
+import Screens.LogManager  # noqa: E402
 Screens.LogManager.AutoLogManager()
 
 profile("RcModel")
-import Components.RcModel
+import Components.RcModel  # noqa: E402
 
 profile("EpgCacheSched")
-import Components.EpgLoadSave
+import Components.EpgLoadSave  # noqa: E402
 Components.EpgLoadSave.EpgCacheSaveCheck()
 Components.EpgLoadSave.EpgCacheLoadCheck()
 

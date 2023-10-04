@@ -1305,7 +1305,7 @@ def filescan(**kwargs):
 			openfnc=audioCD_open,),]
 
 
-from Plugins.Plugin import PluginDescriptor
+from Plugins.Plugin import PluginDescriptor  # noqa: E402 module level import not at top of file
 
 
 def Plugins(**kwargs):

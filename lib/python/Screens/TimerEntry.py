@@ -390,7 +390,7 @@ class TimerEntry(ConfigListScreen, Screen):
 	def RemoteSubserviceSelected(self, service):
 		if service:
 			# Ouch, this hurts a little.
-			service_ref = timerentry_service_ref
+			service_ref = self.timerentry_service_ref
 			self.timerentry_service_ref = ServiceReference(service[1])
 			eit = self.timer.eit
 			self.timer.eit = None

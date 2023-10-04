@@ -1,6 +1,7 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.Scanner import scanDevice
 from Screens.InfoBar import InfoBar
+from Components.Harddisk import harddiskmanager
 import os
 
 
@@ -50,9 +51,6 @@ def main(session, **kwargs):
 
 def menuEntry(*args):
 	mountpoint_choosen(args)
-
-
-from Components.Harddisk import harddiskmanager
 
 
 def menuHook(menuid):

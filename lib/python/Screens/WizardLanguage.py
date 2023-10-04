@@ -19,10 +19,10 @@ class WizardLanguage(Wizard):
 			self.session.open(LanguageWizard)
 
 	if not config.misc.firstrun.value:
-		def __init__(self, session, showSteps=True, showStepSlider=True, showList=True, showConfig=True):
+		def __init__(self, session, showSteps=True, showStepSlider=True, showList=True, showConfig=True):  # noqa: F811 redefinition of unused
 			Wizard.__init__(self, session, showSteps, showStepSlider, showList, showConfig)
 			self["key_red"] = Label()
 			self["languagetext"] = Label(_("Change Language"))
 
-		def red(self):
+		def red(self):  # noqa: F811 redefinition of unused
 			self.session.open(LanguageWizard)

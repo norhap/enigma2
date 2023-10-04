@@ -1,3 +1,4 @@
+from Tools.ISO639 import LanguageCodes
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -137,9 +138,6 @@ class TitleProperties(Screen, ConfigListScreen):
 
 	def cancel(self):
 		self.close()
-
-
-from Tools.ISO639 import LanguageCodes
 
 
 class LanguageChoices():

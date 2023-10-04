@@ -57,23 +57,23 @@ class SoftwareTools(PackageInfoHandler):
 
 	def getUpdates(self, callback=None):
 		if self.lastDownloadDate is None:
-				if self.NetworkConnectionAvailable:
-					self.lastDownloadDate = time()
-					if not self.list_updating and callback is None:
-						self.list_updating = True
-						self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-					elif not self.list_updating and callback:
-						self.list_updating = True
-						self.NotifierCallback = callback
-						self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
-					elif self.list_updating and callback:
-						self.NotifierCallback = callback
-				else:
-					self.list_updating = False
-					if callback:
-						callback(False)
-					elif self.NotifierCallback:
-						self.NotifierCallback(False)
+			if self.NetworkConnectionAvailable:
+				self.lastDownloadDate = time()
+				if not self.list_updating and callback is None:
+					self.list_updating = True
+					self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
+				elif not self.list_updating and callback:
+					self.list_updating = True
+					self.NotifierCallback = callback
+					self.opkg.startCmd(OpkgComponent.CMD_UPDATE)
+				elif self.list_updating and callback:
+					self.NotifierCallback = callback
+			else:
+				self.list_updating = False
+				if callback:
+					callback(False)
+				elif self.NotifierCallback:
+					self.NotifierCallback(False)
 		else:
 			if self.NetworkConnectionAvailable:
 				self.lastDownloadDate = time()
@@ -88,8 +88,8 @@ class SoftwareTools(PackageInfoHandler):
 					self.NotifierCallback = callback
 			else:
 				if self.list_updating and callback:
-						self.NotifierCallback = callback
-						self.startOpkgListAvailable()
+					self.NotifierCallback = callback
+					self.startOpkgListAvailable()
 				else:
 					self.list_updating = False
 					if callback:
@@ -134,7 +134,7 @@ class SoftwareTools(PackageInfoHandler):
 				else:
 					if self.UpdateConsole:
 						if not self.UpdateConsole.appContainers:
-								callback(True)
+							callback(True)
 		else:
 			self.list_updating = False
 			if self.UpdateConsole:
@@ -163,7 +163,7 @@ class SoftwareTools(PackageInfoHandler):
 			else:
 				if self.UpdateConsole:
 					if not self.UpdateConsole.appContainers:
-							callback(True)
+						callback(True)
 		else:
 			self.list_updating = False
 			if self.UpdateConsole:
@@ -204,7 +204,7 @@ class SoftwareTools(PackageInfoHandler):
 			else:
 				if self.UpdateConsole:
 					if not self.UpdateConsole.appContainers:
-							callback(True)
+						callback(True)
 		else:
 			self.list_updating = False
 			if self.UpdateConsole:

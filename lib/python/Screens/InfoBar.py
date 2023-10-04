@@ -1,16 +1,14 @@
-from Tools.Profile import profile
-from enigma import eServiceReference, eServiceCenter, iPlayableService
-from Components.SystemInfo import BRAND, MODEL
-from Tools.Directories import fileExists, isPluginInstalled
-# workaround for required config entry dependencies.
-from Screens.MovieSelection import MovieSelection, moveServiceFiles
-
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-
-profile("LOAD:enigma")
 from os.path import exists
-
+from Tools.Profile import profile
+profile("LOAD:enigma")
+from enigma import eServiceReference, eServiceCenter, iPlayableService  # noqa: E402
+from Components.SystemInfo import BRAND, MODEL  # noqa: E402
+from Tools.Directories import fileExists, isPluginInstalled  # noqa: E402
+# workaround for required config entry dependencies.
+from Screens.MovieSelection import MovieSelection, moveServiceFiles  # noqa: E402
+from Screens.Hotkey import InfoBarHotkey  # noqa: E402
+from Screens.Screen import Screen  # noqa: E402
+from Screens.MessageBox import MessageBox  # noqa: E402
 profile("LOAD:InfoBarGenerics")
 from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
@@ -20,16 +18,13 @@ from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarServiceNotifications, InfoBarPVRState, InfoBarCueSheetSupport, InfoBarBuffer, \
 	InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, \
 	InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarZoom, InfoBarOpenOnTopHelper, InfoBarPowersaver, \
-	InfoBarHDMI, InfoBarHdmi2, setResumePoint, delResumePoint
-from Screens.Hotkey import InfoBarHotkey
-
+	InfoBarHDMI, InfoBarHdmi2, setResumePoint, delResumePoint  # noqa: E402
 profile("LOAD:InitBar_Components")
-from Components.ActionMap import HelpableActionMap
-from Components.config import config
-from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
-
+from Components.ActionMap import HelpableActionMap  # noqa: E402
+from Components.config import config  # noqa: E402
+from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase  # noqa: E402
 profile("LOAD:HelpableScreen")
-from Screens.HelpMenu import HelpableScreen
+from Screens.HelpMenu import HelpableScreen  # noqa: E402
 
 
 class InfoBar(InfoBarBase, InfoBarShowHide,

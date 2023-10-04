@@ -986,7 +986,7 @@ class InfoBarChannelSelection:
 						else:
 							isPlayable = isPlayableForCur(cur)
 					if cur and (cur.toString() == prev or isPlayable):
-							break
+						break
 		else:
 			self.servicelist.moveUp()
 		self.servicelist.zap(enable_pipzap=True)
@@ -1008,7 +1008,7 @@ class InfoBarChannelSelection:
 						else:
 							isPlayable = isPlayableForCur(cur)
 					if cur and (cur.toString() == prev or isPlayable):
-							break
+						break
 		else:
 			self.servicelist.moveDown()
 		self.servicelist.zap(enable_pipzap=True)
@@ -1862,7 +1862,7 @@ class InfoBarSeek:
 			self.jumpNextMark()
 
 
-from Screens.PVRState import PVRState, TimeshiftState
+from Screens.PVRState import PVRState, TimeshiftState  # noqa: E402 module level import not at top of file
 
 
 class InfoBarPVRState:
@@ -2339,7 +2339,7 @@ class InfoBarTimeshift():
 			self.ts_current_event_timer.startLongTimer(duration)
 
 
-from Screens.PiPSetup import PiPSetup
+from Screens.PiPSetup import PiPSetup  # noqa: E402 module level import not at top of file
 
 
 class InfoBarExtensions:
@@ -2512,8 +2512,8 @@ class InfoBarExtensions:
 			self.message.close()
 
 
-from Tools.BoundFunction import boundFunction
-import inspect
+from Tools.BoundFunction import boundFunction  # noqa: E402 module level import not at top of file
+import inspect  # noqa: E402 module level import not at top of file
 
 # depends on InfoBarExtensions
 
@@ -2541,7 +2541,7 @@ class InfoBarPlugins:
 			plugin.__call__(session=self.session)
 
 
-from Components.Task import job_manager
+from Components.Task import job_manager  # noqa: E402 module level import not at top of file
 
 
 class InfoBarJobman:
@@ -2738,7 +2738,7 @@ class InfoBarPiP:
 			self.showPiP()
 
 
-from RecordTimer import parseEvent
+from RecordTimer import parseEvent  # noqa: E402 module level import not at top of file
 
 
 class InfoBarInstantRecord:
@@ -3234,7 +3234,7 @@ class InfoBarSubserviceSelection:
 			self.bouquets = self.bsel = self.selectedSubservice = None
 
 
-from Components.Sources.HbbtvApplication import HbbtvApplication
+from Components.Sources.HbbtvApplication import HbbtvApplication  # noqa: E402 module level import not at top of file
 gHbbtvApplication = HbbtvApplication()
 
 

@@ -671,8 +671,8 @@ class MultibootSelection(SelectImage, HelpableScreen):
 							continue
 			print("[MultibootSelection] hdd available ", hdd)
 			if not hdd:
-					self.session.open(MessageBox, _("FlashImage: Add USB STARTUP slots - No EXT4 USB attached."), MessageBox.TYPE_INFO, timeout=10)
-					self.cancel()
+				self.session.open(MessageBox, _("FlashImage: Add USB STARTUP slots - No EXT4 USB attached."), MessageBox.TYPE_INFO, timeout=10)
+				self.cancel()
 			else:
 				usb = hdd[0][0:3]
 				free = Harddisk(usb).Totalfree()
