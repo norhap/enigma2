@@ -290,10 +290,10 @@ def getBoxUptime():
 			days = secs / 86400
 			secs = secs % 86400
 			time = ngettext("%d day", "%d days", days) % days + " "
-		h = secs / 3600
-		m = (secs % 3600) / 60
-		time += ngettext("%d hour", "%d hours", h) % h + " "
-		time += ngettext("%d minute", "%d minutes", m) % m
+		h = secs // 3600
+		m = (secs % 3600) // 60
+		time += ngettext("%d hour", "%d hours", h) % h + " " if h > 1 else ngettext("%d hour", "%d hour", h) % h + " "
+		time += ngettext("%d minute", "%d minutes", m) % m if m > 1 else ngettext("%d minute", "%d minute", m) % m
 		return "%s" % time
 	except:
 		return '-'
