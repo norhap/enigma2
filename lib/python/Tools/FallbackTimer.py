@@ -16,6 +16,7 @@ class FallbackTimerList():
 		self.parent = parent
 		self.headers = {}
 		if isPluginInstalled("Vision"):
+			from Plugins.SystemPlugins.Vision import ClientModeBox  # noqa: F401
 			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value or config.ipboxclient.remotetimers.value:
 				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
 				if config.usage.remote_fallback_openwebif_customize.value:
