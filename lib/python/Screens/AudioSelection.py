@@ -18,9 +18,13 @@ from Components.VolumeControl import VolumeControl
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.Converter.VAudioInfo import StdAudioDesc
+from Tools.Directories import resolveFilename, SCOPE_GUISKIN
+from Tools.LoadPixmap import LoadPixmap
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
+
+selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/audioselectionmark.png"))
 
 
 class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
@@ -319,7 +323,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						else:
 							language += lang
 						cnt += 1
-					streams.append((x, "", number, description, language, selected))
+					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 			else:
 				conflist.append(("",))
 			if SystemInfo["Canedidchecking"]:
@@ -375,7 +379,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						except Exception:
 							description = _("unknown") + ": %s" % x[2]
 						number = str(int(number) + 1)
-					streams.append((x, "", number, description, language, selected))
+					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 					idx += 1
 			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
 
