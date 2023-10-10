@@ -371,6 +371,7 @@ class Menu(Screen, ProtectedScreen):
 		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
 		self.menuID = None
+		count = 0
 		for x in self.parentmenu:  # walk through the actual nodelist
 			if not x.tag:
 				continue
