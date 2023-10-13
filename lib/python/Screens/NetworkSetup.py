@@ -1093,7 +1093,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			self.session.open(IPv6Setup)
 		if self["menulist"].getCurrent()[1] == 'scanwlan':
 			try:
-				from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan
+				from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan  # noqa: F811 redefinition of unused
 			except ImportError:
 				self.session.open(MessageBox, self.missingwlanplugintxt, type=MessageBox.TYPE_INFO, timeout=10)
 			else:

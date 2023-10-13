@@ -196,7 +196,7 @@ def isNextWakeupTime(standby_timer=False):
 				return -1
 		wakeup_day, wakeup_time = WakeupDayTimeOfWeek()
 		if wakeup_day == -1:
-				return -1
+			return -1
 		elif wakeup_day == 0:
 			return wakeup_time
 		return wakeup_time + (86400 * wakeup_day)

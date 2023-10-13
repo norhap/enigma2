@@ -275,30 +275,27 @@ class CIconfigMenu(Screen):
 
 	def saveXML(self):
 		try:
-			fp = file(self.filename, 'w')
-			fp.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n")
-			fp.write("<ci>\n")
-			fp.write("\t<slot>\n")
-			fp.write("\t\t<id>%s</id>\n" % self.ci_slot)
-			for item in self.selectedcaid:
-				if len(self.selectedcaid):
-					fp.write("\t\t<caid id=\"%s\" />\n" % item[0])
-			for item in self.servicelist:
-				if len(self.servicelist):
+			with open(self.filename, "w") as fd:
+				fd.write("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n")
+				fd.write("<ci>\n")
+				fd.write("\t<slot>\n")
+				fd.write(f"\t\t<id>{self.ci_slot}</id>\n")
+				for item in self.selectedcaid:
+					fd.write("\t\t<caid id=\"%s\" />\n" % item[0])
+				for item in self.servicelist:
 					name = item[0].replace('<', '&lt;')
 					name = name.replace('&', '&amp;')
 					name = name.replace('>', '&gt;')
 					name = name.replace('"', '&quot;')
 					name = name.replace("'", '&apos;')
 					if item[2] == 1:
-						fp.write("\t\t<provider name=\"%s\" dvbnamespace=\"%s\" />\n" % (stringToXML(name), item[3]))
+						fd.write("\t\t<provider name=\"%s\" dvbnamespace=\"%s\" />\n" % (stringToXML(name), item[3]))
 					else:
-						fp.write("\t\t<service name=\"%s\" ref=\"%s\" />\n" % (stringToXML(name), item[3]))
-			fp.write("\t</slot>\n")
-			fp.write("</ci>\n")
-			fp.close()
-		except:
-			print("[CommonInterfaceAssignment] CI_Config_CI%d xml not written" % self.ci_slot)
+						fd.write("\t\t<service name=\"%s\" ref=\"%s\" />\n" % (stringToXML(name), item[3]))
+				fd.write("\t</slot>\n")
+				fd.write("</ci>\n")
+		except OSError:
+			print(f"[CI_Config_CI{self.ci_slot}] xml not written")
 			os.unlink(self.filename)
 
 	def loadXML(self):

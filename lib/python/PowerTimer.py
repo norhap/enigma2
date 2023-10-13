@@ -310,15 +310,15 @@ class PowerTimer(Timer):
 			if not config.misc.RestartUI.value and \
 				not config.plugins.epgimport.shutdown.value and \
 				not config.plugins.epgimport.standby_afterwakeup.value:
-					if not isPluginInstalled("EPGRefresh"):
+				if not isPluginInstalled("EPGRefresh"):
+					return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s %s") % (BRAND, DISPLAYMODEL), type=MessageBox.TYPE_INFO, timeout=0)
+				else:
+					refreshwakeup = config.plugins.epgrefresh.begin.value
+					refreshtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, refreshwakeup[0], refreshwakeup[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
+					if (refreshtime - begin) < 360 and (refreshtime - begin) > 0:
+						return None
+					elif (importtime - begin) < 240 and (importtime - begin) > 0:
 						return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s %s") % (BRAND, DISPLAYMODEL), type=MessageBox.TYPE_INFO, timeout=0)
-					else:
-						refreshwakeup = config.plugins.epgrefresh.begin.value
-						refreshtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, refreshwakeup[0], refreshwakeup[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
-						if (refreshtime - begin) < 360 and (refreshtime - begin) > 0:
-							return None
-						elif (importtime - begin) < 240 and (importtime - begin) > 0:
-							return AddPopup(_("Plugin EPGImport actived EPG import and woke up your %s %s") % (BRAND, DISPLAYMODEL), type=MessageBox.TYPE_INFO, timeout=0)
 		return None
 
 

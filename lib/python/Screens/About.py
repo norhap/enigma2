@@ -1472,8 +1472,8 @@ class Troubleshoot(Screen):
 		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps -l", "cat /var/volatile/log/messages"]
 		install_log = "/home/root/autoinstall.log"
 		if isfile(install_log):
-				self.titles.append("%s" % install_log)
-				self.commands.append("cat %s" % install_log)
+			self.titles.append("%s" % install_log)
+			self.commands.append("cat %s" % install_log)
 		self.numberOfCommands = len(self.commands)
 		fileNames = self.getLogFilesList()
 		if fileNames:

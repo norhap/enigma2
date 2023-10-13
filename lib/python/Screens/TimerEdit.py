@@ -475,13 +475,13 @@ class TimerSanityConflict(Screen):
 			self.leave_ok()
 
 	def ignoreConflict(self):
-			selected_timer = self["timerlist"].getCurrent()
-			if selected_timer and selected_timer.conflict_detection:
-				if config.usage.show_timer_conflict_warning.value:
-					list = [(_("yes"), True), (_("no"), False), (_("yes") + " " + _("and never ask this again"), "never")]
-					self.session.openWithCallback(self.ignoreConflictConfirm, MessageBox, _("Warning!\nThis is an option for advanced users.\nReally disable timer conflict detection?"), list=list)
-				else:
-					self.ignoreConflictConfirm(True)
+		selected_timer = self["timerlist"].getCurrent()
+		if selected_timer and selected_timer.conflict_detection:
+			if config.usage.show_timer_conflict_warning.value:
+				list = [(_("yes"), True), (_("no"), False), (_("yes") + " " + _("and never ask this again"), "never")]
+				self.session.openWithCallback(self.ignoreConflictConfirm, MessageBox, _("Warning!\nThis is an option for advanced users.\nReally disable timer conflict detection?"), list=list)
+			else:
+				self.ignoreConflictConfirm(True)
 
 	def ignoreConflictConfirm(self, answer):
 		selected_timer = self["timerlist"].getCurrent()

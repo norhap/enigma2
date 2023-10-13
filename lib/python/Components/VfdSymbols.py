@@ -13,11 +13,11 @@ POLLTIME = 5  # seconds
 
 
 def SymbolsCheck(session, **kwargs):
-		global symbolspoller, POLLTIME
-		if SystemInfo["FirstCheckModel"] or SystemInfo["SecondCheckModel"] or SystemInfo["DefineSat"]:
-			POLLTIME = 1
-		symbolspoller = SymbolsCheckPoller(session)
-		symbolspoller.start()
+	global symbolspoller, POLLTIME
+	if SystemInfo["FirstCheckModel"] or SystemInfo["SecondCheckModel"] or SystemInfo["DefineSat"]:
+		POLLTIME = 1
+	symbolspoller = SymbolsCheckPoller(session)
+	symbolspoller.start()
 
 
 class SymbolsCheckPoller:

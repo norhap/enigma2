@@ -128,7 +128,7 @@ SystemInfo["SeekStatePlay"] = False
 SystemInfo["StatePlayPause"] = False
 SystemInfo["StandbyState"] = False
 SystemInfo["FCCactive"] = False
-from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # This import needs to be here to avoid a SystemInfo load loop!
+from Tools.Multiboot import getMultibootStartupDevice, getMultibootslots  # noqa: E402 module level import not at top of file
 
 
 def getBoxDisplayName():  # This function returns a tuple like ("BRANDNAME", "BOXNAME")

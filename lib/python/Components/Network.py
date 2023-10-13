@@ -261,16 +261,16 @@ class Network:
 		name = None
 		if self.isWirelessInterface(iface):
 			if iface not in self.wlan_interfaces:
-				name = _("WLAN connection")
+				name = _("WLAN connection")  # noqa: F405
 				if len(self.wlan_interfaces):
 					name += " " + str(len(self.wlan_interfaces) + 1)
 				self.wlan_interfaces.append(iface)
 		else:
 			if iface not in self.lan_interfaces:
 				if iface == "eth1":
-					name = _("VLAN connection")
+					name = _("VLAN connection")  # noqa: F405
 				else:
-					name = _("LAN connection")
+					name = _("LAN connection")  # noqa: F405
 				if len(self.lan_interfaces) and not iface == "eth1":
 					name += " " + str(len(self.lan_interfaces) + 1)
 				self.lan_interfaces.append(iface)
@@ -278,7 +278,7 @@ class Network:
 
 	def getFriendlyAdapterDescription(self, iface):
 		if not self.isWirelessInterface(iface):
-			return _('Ethernet network interface')
+			return _('Ethernet network interface')  # noqa: F405
 
 		moduledir = self.getWlanModuleDir(iface)
 		if moduledir:
@@ -316,9 +316,9 @@ class Network:
 		elif os.path.isdir('/tmp/bcm/' + iface):
 			name = 'Broadcom'
 		else:
-			name = _('Unknown')
+			name = _('Unknown')  # noqa: F405
 
-		return name + ' ' + _('wireless network interface')
+		return name + ' ' + _('wireless network interface')  # noqa: F405
 
 	def getAdapterName(self, iface):
 		return iface

@@ -308,7 +308,6 @@
 		<widget source="parent.Title" render="Label" position="0,38" size="390,26" font="FdLcD;24" horizontalAlignment="left" noWrap="1" />
 		<widget source="parent.swapname_summary" render="Label" position="0,66" size="390,20" font="FdLcD;19" horizontalAlignment="left" noWrap="1" />
 		<widget source="parent.swapactive_summary" render="Label" position="0,93" size="390,16" font="FdLcD;14" horizontalAlignment="left" transparent="1" />
-		<panel name="SummaryIconsPanel" />
 		<panel name="SummaryClockPanel" />
 	</screen>
 	<screen name="UpdatePlugin_summary" position="0,0" size="390,240">

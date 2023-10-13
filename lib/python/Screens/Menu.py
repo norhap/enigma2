@@ -371,6 +371,7 @@ class Menu(Screen, ProtectedScreen):
 		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
 		self.menuID = None
+		count = 0
 		for x in self.parentmenu:  # walk through the actual nodelist
 			if not x.tag:
 				continue
@@ -390,23 +391,23 @@ class Menu(Screen, ProtectedScreen):
 
 		if self.menuID:
 			# plugins
-			for l in plugins.getPluginsForMenu(self.menuID):
+			for pluginmenu in plugins.getPluginsForMenu(self.menuID):
 				# check if a plugin overrides an existing menu
-				plugin_menuid = l[2]
+				plugin_menuid = pluginmenu[2]
 				for x in self.list:
 					if x[2] == plugin_menuid:
 						self.list.remove(x)
 						break
-				self.list.append((l[0], boundFunction(l[1], self.session, close=self.close), l[2], l[3] or 50))
+				self.list.append((pluginmenu[0], boundFunction(pluginmenu[1], self.session, close=self.close), pluginmenu[2], pluginmenu[3] or 50))
 
 		if "user" in config.usage.menu_sort_mode.value and self.menuID == "mainmenu":
 			plugin_list = []
 			id_list = []
-			for l in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
-				l.id = (l.name.lower()).replace(" ", "_")
-				if l.id not in id_list:
-					id_list.append(l.id)
-					plugin_list.append((l.name, boundFunction(l.__call__, self.session), l.id, 200))
+			for pluginmenu in plugins.getPlugins([PluginDescriptor.WHERE_PLUGINMENU, PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_EVENTINFO]):
+				pluginmenu.id = (pluginmenu.name.lower()).replace(" ", "_")
+				if pluginmenu.id not in id_list:
+					id_list.append(pluginmenu.id)
+					plugin_list.append((pluginmenu.name, boundFunction(pluginmenu.__call__, self.session), pluginmenu.id, 200))
 
 		if self.menuID is not None and "user" in config.usage.menu_sort_mode.value:
 			self.sub_menu_sort = NoSave(ConfigDictionarySet())

@@ -190,15 +190,7 @@ def getImagelist(Recovery=None):
 					print("[MultiBoot] [getImagelist] 2 slot = %s imagedir = %s" % (slot, imagedir))
 					Creator = open("%s/etc/issue" % imagedir).readlines()[-2].capitalize().strip()[:-6]
 					print("[MultiBoot] [getImagelist] Creator = %s imagedir = %s" % (Creator, imagedir))
-					if Creator.startswith("Openvix"):
-						reader = boxbranding_reader(imagedir)
-						BuildType = reader.getImageType()
-						Build = reader.getImageBuild()
-						Creator = Creator.replace("-release", " rel")
-						Dev = BuildType != "release" and " %s" % reader.getImageDevBuild() or ""
-						date = VerDate(imagedir)
-						BuildVersion = "%s %s %s %s (%s)" % (Creator, BuildType[0:3], Build, Dev, date)
-					elif SystemInfo["hasKexec"] and os.path.isfile(os.path.join(imagedir, "etc/vtiversion.info")):
+					if SystemInfo["hasKexec"] and os.path.isfile(os.path.join(imagedir, "etc/vtiversion.info")):
 						Vti = open(os.path.join(imagedir, "etc/vtiversion.info")).read()
 						date = VerDate(imagedir)
 						Creator = Vti[0:3]

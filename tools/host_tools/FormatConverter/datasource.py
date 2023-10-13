@@ -84,8 +84,8 @@ class genericdatasource(datasource):
 			if action == "copy":
 				print("[datasource] copying ")
 			elif action == "merge":
-				print("[datasource] merging ")
-			print("[datasource] from %s to %s" % (self.source.getName(), self.destination.getName()))
+				print("merging ", end=' ')
+			print(f"from {self.source.getName()} to {self.destination.getName()}")
 			countsat = 0
 			counttransponder = 0
 			if action == "copy":
@@ -96,14 +96,14 @@ class genericdatasource(datasource):
 				for transponder in self.source.transponderlist[satpos]:
 					counttransponder += 1
 					self.destination.addTransponder(satpos, transponder)
-			print("[datasource] copied %d sats with %d transponders" % (countsat, counttransponder))
+			print(f"copied {countsat} sats with {counttransponder} transponders")
 
 	def selectDatasource(self):
 		list = []
 		sources = []
 		for source in self.datasources:
 			if source != self:
-				list.append(source.getName() + (" (%d sats)" % len(source.transponderlist.keys())))
+				list.append(source.getName() + f" ({len(source.transponderlist.keys())} sats)")
 				sources.append(source)
 		choice = inputChoices(list)
 		if choice is None:

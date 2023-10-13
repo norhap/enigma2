@@ -37,7 +37,7 @@ class InfoHandler(xml.sax.ContentHandler):
 
 		if name in ("hardware", "bcastsystem", "satellite", "tag", "flag"):
 			if "type" not in attrs:
-					self.printError(str(name) + " tag with no type attribute")
+				self.printError(str(name) + " tag with no type attribute")
 			if self.elements[-3] in ("default", "package"):
 				prerequisites = self.globalprerequisites
 			else:
@@ -238,7 +238,7 @@ class PackageInfoHandler:
 			if "tag" in prerequisites:
 				return False
 		elif self.neededTag == 'ALL_TAGS':
-				return True
+			return True
 		else:
 			if "tag" in prerequisites:
 				if self.neededTag not in prerequisites["tag"]:
