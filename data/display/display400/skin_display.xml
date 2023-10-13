@@ -368,4 +368,9 @@
 		<panel name="SummaryTunerStatusPanel" />
 		<panel name="SummaryClockPanel" />
 	</screen>
+	<!-- SKINSELECTOR -->
+	<screen name="SkinSelectorSummary" position="0,0" size="400,240">
+		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" halign="center" valign="top" zPosition="2" />
+		<widget source="Name" render="Label" position="10,75" size="375,50" font="FdLcD;30" halign="center" valign="top" zPosition="2" />
+	</screen>
 </skin>
