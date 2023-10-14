@@ -27,21 +27,19 @@ def test_timer(repeat=0, timer_start=3600, timer_length=1000, sim_length=86400 *
 	import xml.etree.cElementTree
 	import RecordTimer
 
-	timer = RecordTimer.createTimer(xml.etree.cElementTree.fromstring(
-	f"""
-\t\t<timer
-\t\t\tbegin="{at + timer_start}"
-\t\t\tend="{at + timer_start + timer_length}"
-\t\t\tserviceref="1:0:1:6DD2:44D:1:C00000:0:0:0:"
-\t\t\trepeated="{repeat}"
-\t\t\tname="Test Event Name"
-\t\t\tdescription="Test Event Description"
-\t\t\tafterevent="nothing"
-\t\t\teit="56422"
-\t\t\tdisabled="0"
-\t\t\tjustplay="0">
-\t</timer>"""
-	))
+	timer = RecordTimer.createTimer(xml.etree.cElementTree.fromstring(f"""
+		\t\t<timer
+		\t\t\tbegin="{at + timer_start}"
+		\t\t\tend="{at + timer_start + timer_length}"
+		\t\t\tserviceref="1:0:1:6DD2:44D:1:C00000:0:0:0:"
+		\t\t\trepeated="{repeat}"
+		\t\t\tname="Test Event Name"
+		\t\t\tdescription="Test Event Description"
+		\t\t\tafterevent="nothing"
+		\t\t\teit="56422"
+		\t\t\tdisabled="0"
+		\t\t\tjustplay="0">
+		\t</timer>"""))
 
 	t.record(timer)
 
