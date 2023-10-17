@@ -1,5 +1,5 @@
 from enigma import eTimer
-from Screens.Screen import Screen
+from Screens.Screen import Screen, ScreenSummary
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.Label import Label
@@ -254,9 +254,9 @@ class LanguageWizard(LanguageSelection, ShowRemoteControl):
 		self["summarytext"].setText(_cached("T1"))
 
 	def createSummary(self):
-		return LanguageWizardSummary
+		return ScreenSummary
 
 
-class LanguageWizardSummary(Screen):
+class LanguageWizardSummary(Screen):  # WARNING: necessary for initialize the wizard if there is no internet
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent)

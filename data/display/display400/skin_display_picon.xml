@@ -593,4 +593,8 @@
 		<panel name="SummaryClockPanel" />
 		<panel name="MeinTunerInfoPanel" />
 	</screen>
+	<screen name="SkinSelectorSummary" position="0,0" size="400,240">
+		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="Name" render="Label" position="10,75" size="375,50" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+	</screen>
 </skin>

@@ -368,4 +368,27 @@
 		<panel name="SummaryTunerStatusPanel" />
 		<panel name="SummaryClockPanel" />
 	</screen>
+	<!-- SKINSELECTOR -->
+	<screen name="SkinSelectorSummary" position="0,0" size="400,240">
+		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="Name" render="Label" position="10,75" size="375,50" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+	</screen>
+	<screen name="LanguageSelection_summary" position="0,0" size="400,240">
+		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="parent.languages" render="Listbox" position="0,55" size="395,183" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" transparent="1">
+			<convert type="TemplatedMultiContent">
+				{"template":[
+				MultiContentEntryText(pos=(120,15),size=(390,50),flags=RT_HALIGN_LEFT,text=1),# index 1 is the language name,
+				MultiContentEntryPixmapAlphaBlend(pos=(20,0),size=(64,64),png=2),# index 2 is the pixmap
+				],
+				"fonts":[gFont("FdLcD",32)],
+				"itemHeight":63}
+			</convert>
+		</widget>
+	</screen>
+	<screen name="LanguageWizardSummary" position="0,0" size="400,240">
+		<widget source="parent.Title" render="Label" position="10,0" size="375,35" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="parent.summarytext" render="Label" position="10,40" size="375,150" font="FdLcD;25" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="parent.summarylangsel" render="Label" position="10,195" foregroundColor="#87CEFA" size="375,35" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+	</screen>
 </skin>
