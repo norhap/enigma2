@@ -16,6 +16,7 @@ from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
 from os import path
+from Screens.InfoBarGenerics import streamrelay
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 
@@ -165,7 +166,7 @@ class Navigation:
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session] or adjust)), session=session):
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
-				playref = getBestPlayableServiceReference(ref, oldref)
+				playref = streamrelay.streamrelayChecker(getBestPlayableServiceReference(ref, oldref))
 				if playref and config.misc.use_ci_assignment.value and not isPlayableForCur(playref):
 					alternative_ci_ref = ResolveCiAlternative(ref, playref)
 					if alternative_ci_ref:
@@ -184,7 +185,7 @@ class Navigation:
 							print("[Navigation] Failed to start: ", alternativeref.toString())
 							self.currentlyPlayingServiceReference = None
 							self.currentlyPlayingServiceOrGroup = None
-							if oldref and "://" in oldref.getPath():
+							if oldref and ("://" in oldref.getPath() or streamrelay.checkService(oldref)):
 								print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 								self.retryServicePlayTimer = eTimer()
 								self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
@@ -204,6 +205,7 @@ class Navigation:
 				else:
 					self.skipServiceReferenceReset = True
 				self.currentlyPlayingServiceReference = playref
+				playref = streamrelay.streamrelayChecker(playref)
 				self.currentlyPlayingServiceOrGroup = ref
 				if startPlayingServiceOrGroup and startPlayingServiceOrGroup.flags & eServiceReference.isGroup and not ref.flags & eServiceReference.isGroup:
 					self.currentlyPlayingServiceOrGroup = startPlayingServiceOrGroup
@@ -241,7 +243,7 @@ class Navigation:
 					print("[Navigation] Failed to start: ", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
-					if oldref and "://" in oldref.getPath():
+					if oldref and ("://" in oldref.getPath() or streamrelay.checkService(oldref)):
 						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
@@ -269,10 +271,14 @@ class Navigation:
 		if ref:
 			if ref.flags & eServiceReference.isGroup:
 				ref = getBestPlayableServiceReference(ref, eServiceReference(), simulate)
+			ref = streamrelay.streamrelayChecker(ref)
 			service = ref and self.pnav and self.pnav.recordService(ref, simulate)
 			if service is None:
 				print("[Navigation] record returned non-zero")
 		return service
+
+	def restartService(self):
+		self.playService(self.currentlyPlayingServiceOrGroup, forceRestart=True)
 
 	def stopRecordService(self, service):
 		ret = -1
