@@ -1651,6 +1651,8 @@ def InitUsageConfig():
 
 	config.misc.softcam_setup = ConfigSubsection()
 	config.misc.softcam_setup.extension_menu = ConfigYesNo(default=True)
+	config.misc.softcam_streamrelay_url = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
+	config.misc.softcam_streamrelay_port = ConfigInteger(default=17999, limits=(0, 65535))
 
 	config.ntp = ConfigSubsection()
 	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)

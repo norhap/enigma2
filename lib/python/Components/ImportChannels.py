@@ -16,7 +16,7 @@ import xml.etree.ElementTree as et
 from base64 import encodebytes
 from time import sleep
 
-supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.', 'iptosat.json', 'iptosatchlist.json', 'iptosat.conf')
+supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.', 'iptosat')
 channelslistpath = "/etc/enigma2"
 channelsepg = False
 
@@ -273,7 +273,7 @@ class ImportChannels():
 
 			print("[ImportChannels] Enumerate remote support files")
 			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, channelslistpath)).read())["files"]:
-				if basename(file).startswith(supportfiles):
+				if basename(file).startswith(supportfiles) and "opkg" not in file:
 					files.append(file.replace(channelslistpath, ''))
 
 			print("[ImportChannels] Fetch remote files")

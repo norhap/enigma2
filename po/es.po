@@ -4915,6 +4915,12 @@ msgstr "Reproducir grabaciones"
 msgid "Please add titles to the compilation."
 msgstr "Añadir títulos a la compilación."
 
+msgid "Play service with streamrelay"
+msgstr "Canal con reproducción streamrelay"
+
+msgid "Play service without streamrelay"
+msgstr "Canal sin reproducción streamrelay"
+
 msgid "Please change recording endtime"
 msgstr "Cambiar el tiempo final de la grabación"
 
@@ -7072,6 +7078,12 @@ msgstr "Posición guardada"
 msgid "Stream"
 msgstr "Transmisión"
 
+msgid "Streamrelay port"
+msgstr "Puerto streamrelay"
+
+msgid "Streamrelay URL"
+msgstr "URL streamrelay"
+
 msgid "Stream request"
 msgstr "Solicitud de stream"
 
@@ -7327,6 +7339,9 @@ msgstr ""
 "El directorio %s no se puede escribir.\n"
 "Seleccione un directorio que permita escritura en su lugar."
 
+msgid "Server IP address used to decrypt channels that can only be done via streamrelay."
+msgstr "Dirección IP del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante streamrelay."
+
 msgid "%s connected successfully.\nPlayable files found."
 msgstr "%s conectado con éxito.\nSe encontraron archivos reproducibles."
 
@@ -7376,6 +7391,9 @@ msgstr ""
 "Si ves las puntas de las ocho flechas, entonces su TV tiene el overscan deshabilitado.\n"
 "\n"
 "Test Pattern por TigerDave - www.tigerdave.com/ht_menu.htm"
+
+msgid "Server port used to decrypt channels that can only be done using streamrelay."
+msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante streamrelay."
 
 msgid "The PIN code you entered is wrong."
 msgstr "El código PIN introducido es incorrecto."
