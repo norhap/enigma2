@@ -147,15 +147,12 @@ class Navigation:
 					signal = 1
 				else:
 					signal = 0
-				print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 				with open("/proc/stb/lcd/symbol_signal", "w") as f:
 					f.write(str(signal))
 			except:
-				print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 				with open("/proc/stb/lcd/symbol_signal", "w") as f:
 					f.write("0")
 		elif path.exists("/proc/stb/lcd/symbol_signal") and config.lcd.mode.value == '0':
-			print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("0")
 		if ref is None:
@@ -305,7 +302,6 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		if path.exists("/proc/stb/lcd/symbol_signal"):
-			print("[Navigation] Write to /proc/stb/lcd/symbol_signal")
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("0")
 
