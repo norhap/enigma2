@@ -56,6 +56,15 @@ AC_ARG_WITH(boxtype,
 AC_SUBST(BOXTYPE)
 AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
+AM_CONDITIONAL(VUSOLO4K, test "$BOXTYPE" == vusolo4k)
+AM_CONDITIONAL(VUUNO4K, test "$BOXTYPE" == vuuno4k)
+AM_CONDITIONAL(VUUNO4KSE, test "$BOXTYPE" == vuuno4kse)
+AM_CONDITIONAL(VUULTIMO4K, test "$BOXTYPE" == vuultimo4k)
+AM_CONDITIONAL(VUDUO4K, test "$BOXTYPE" == vuduo4k)
+AM_CONDITIONAL(VUDUO4KSE, test "$BOXTYPE" == vuduo4kse)
+AM_CONDITIONAL(GB7252, test "$BOXTYPE" == gbue4k)
+AM_CONDITIONAL(GB7252, test "$BOXTYPE" == gbquad4k)
+
 AC_ARG_WITH(brandname,
 	[  --with-brandname=NAME brand name [[none,dreambox...]]],
 	[MACHINE_BRAND="$withval"],[MACHINE_BRAND="dreambox"])
@@ -776,12 +785,14 @@ lib/python/Plugins/Extensions/MediaPlayer/Makefile
 lib/python/Plugins/Extensions/MediaPlayer/meta/Makefile
 lib/python/Plugins/Extensions/MediaScanner/Makefile
 lib/python/Plugins/Extensions/MediaScanner/meta/Makefile
+lib/python/Plugins/Extensions/MiniTV/Makefile
 lib/python/Plugins/Extensions/PicturePlayer/Makefile
 lib/python/Plugins/Extensions/PicturePlayer/meta/Makefile
 lib/python/Plugins/Extensions/PicturePlayer/data/Makefile
 lib/python/Plugins/Extensions/SocketMMI/Makefile
 lib/python/Plugins/Extensions/SocketMMI/meta/Makefile
 lib/python/Plugins/Extensions/SocketMMI/src/Makefile
+lib/python/Plugins/Extensions/QuadPip/Makefile
 lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/Makefile
 lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/meta/Makefile
 lib/python/Plugins/SystemPlugins/DefaultServicesScanner/Makefile
