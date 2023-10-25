@@ -69,7 +69,7 @@ protected:
 private:
 	typedef std::list<eServiceReference> list;
 
-	bool checkServiceIsRecorded(eServiceReference &ref);
+	bool checkServiceIsRecorded(eServiceReference ref,pNavigation::RecordType type);
 
 	std::map<int, ePtr<gFont>> m_fonts;
 

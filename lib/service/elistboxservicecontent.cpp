@@ -521,10 +521,10 @@ eListboxPythonServiceContent::eListboxPythonServiceContent()
 	m_servicelist = true;
 }
 
-bool eListboxPythonServiceContent::checkServiceIsRecorded(eServiceReference &ref)
+bool eListboxPythonServiceContent::checkServiceIsRecorded(eServiceReference ref,pNavigation::RecordType type)
 {
 	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService*> > recordedServices;
-	recordedServices = eNavigation::getInstance()->getRecordingsServices();
+	recordedServices = eNavigation::getInstance()->getRecordingsServices(type);
 	for (std::map<ePtr<iRecordableService>, eServiceReference >::iterator it = recordedServices.begin(); it != recordedServices.end(); ++it)
 	{
 		if (ref.flags & eServiceReference::isGroup)
@@ -556,9 +556,9 @@ void eListboxPythonServiceContent::setBuildArgs(int selected)
 	eServiceReference &ref = *m_service_cursor;
 	bool isMarker = ref.flags & eServiceReference::isMarker;
 	bool isPlayable = !(ref.flags & eServiceReference::isDirectory || isMarker);
-	bool isRecorded = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref);
-	bool isStreamed = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref);
-	bool isPseudoRecorded = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref);
+	bool isRecorded = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref,pNavigation::RecordType(pNavigation::isRealRecording|pNavigation::isUnknownRecording));
+	bool isStreamed = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref,pNavigation::isStreaming);
+	bool isPseudoRecorded = m_record_indicator_mode && isPlayable && checkServiceIsRecorded(ref,pNavigation::isPseudoRecording);
 	bool marked = ((m_current_marked && selected) || (cursorValid() && isMarked(*m_service_cursor)));
 
 	// status bitmask
