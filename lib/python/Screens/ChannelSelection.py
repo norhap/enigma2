@@ -195,7 +195,7 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.toggleVBI), level=1)
 						else:
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
-						if BoxInfo.getItem("ICam"):
+						if BoxInfo.getItem("StreamRelay"):
 							if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
 								append_when_current_valid(current, menu, (_("Play service without streamrelay"), self.toggleStreamrelay), level=1)
 							else:

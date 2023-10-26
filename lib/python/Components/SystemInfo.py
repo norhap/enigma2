@@ -189,9 +189,11 @@ BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 
-from process import ProcessList  # items availables for streamrelay
-ICam = str(ProcessList().named("oscam-emu")).strip("[]")
-BoxInfo.setItem("ICam", ICam)
+from process import ProcessList
+STREAM_RELAY_PROC = ["oscam-emu",]  # add more cams
+for cam in STREAM_RELAY_PROC:
+	streamrelay = str(ProcessList().named(cam)).strip("[]")
+	BoxInfo.setItem("StreamRelay", streamrelay)  # items availables for streamrelay
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
