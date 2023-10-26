@@ -656,6 +656,9 @@ msgstr "Agregar fichero a la lista de reproducción"
 msgid "Add files to playlist"
 msgstr "Agregar ficheros a la lista de reproducción"
 
+msgid "Add New Quad Channel Entry"
+msgstr "Añadir nueva entrada de canal quad"
+
 msgid "Add provider"
 msgstr "Añadir proveedor"
 
@@ -1433,6 +1436,9 @@ msgstr "Chino - Simplificado"
 msgid "Chinese - Traditional"
 msgstr "Chino - Tradicional"
 
+msgid "Choice where to put '%s'"
+msgstr "Elección dónde colocar '%s'"
+
 msgid "Choose Tuner"
 msgstr "Elegir Sintonizador"
 
@@ -1749,6 +1755,9 @@ msgstr "Cuba"
 msgid "Curacao"
 msgstr "Curacao"
 
+msgid " (current channel)"
+msgstr " (canal actual)"
+
 msgid "Current CEC address"
 msgstr "Dirección CEC actual"
 
@@ -2041,6 +2050,9 @@ msgstr "Deshabilitar Cambio Rápido Canal"
 msgid "Disable FCC during recordings"
 msgstr "Deshabilitar FCC durante las grabaciones"
 
+msgid "Disable MiniTV"
+msgstr "Desactivar MiniTV"
+
 msgid "Disable Picture in Picture"
 msgstr "Desactivar PiP"
 
@@ -2254,6 +2266,12 @@ msgstr "ECM Info"
 msgid "EPG"
 msgstr "EPG"
 
+msgid "EPG key : Switch to quad PiP entry\nOk key : Add to new entry\nPVR key : Input channel name\nExit key : Finish channel edit"
+msgstr "Tecla EPG: Cambiar a entrada PiP cuádruple\n Tecla Aceptar: Agregar a nueva entrada\n Tecla PVR: Introducir nombre del canal\n Tecla Salir: Finalizar edición del canal"
+
+msgid "EPG key : Switch to channel list\nOk key : Remove selected channel\nPVR key : Input channel name\nExit key : Finish channel edit"
+msgstr "Tecla EPG: Cambiar a entrada PiP cuádruple\n Tecla Aceptar: Agregar a nueva entrada\n Tecla PVR: Introducir nombre del canal\n Tecla Salir: Finalizar edición del canal"
+
 msgid "EPG only"
 msgstr "Solo EPG"
 
@@ -2288,6 +2306,9 @@ msgstr "Desactivar edición"
 
 msgid "Edit Mode On"
 msgstr "Activar edición"
+
+msgid "Edit Quad Channel Entry"
+msgstr "Editar la entrada del canal quad"
 
 msgid "Edit selection"
 msgstr "Editar selección"
@@ -2352,6 +2373,9 @@ msgstr "Habilitar el receptor reserva para respaldo"
 
 msgid "Enable Fast Channel Change"
 msgstr "Habilitar Cambio Rápido Canal"
+
+msgid "Enable Quad PiP"
+msgstr "Habilitar Quad PiP"
 
 msgid "Enable Vu+ MultiBoot"
 msgstr "Habilitar Vu+ MultiBoot"
@@ -2579,6 +2603,9 @@ msgstr "Salir de EPG"
 msgid "Exit editor"
 msgstr "Salir del editor"
 
+msgid "Exit quad PiP"
+msgstr "Salir de Quad PiP"
+
 msgid "Select Input Device"
 msgstr "Seleccionar Dispositivo de Entrada"
 
@@ -2590,6 +2617,9 @@ msgstr "Salir de la selección de dispositivo de entrada"
 
 msgid "Exit input device selection and close all menus"
 msgstr "Salir de la selección del dispositivo de entrada y cerrar todos los menús"
+
+msgid "Exit Quad Channel Selection"
+msgstr "Salir de la selección de canal quad"
 
 msgid "Input Device Actions"
 msgstr "Acciones del dispositivo de entrada"
@@ -2621,6 +2651,9 @@ msgstr "Intervalo entre teclas al repetir (milisegundos)"
 msgid "Select the time delay between each repeat of the button."
 msgstr "Seleccione el tiempo de retraso entre cada repetición del botón."
 
+msgid "Input channel name."
+msgstr "Nombre del canal introducido."
+
 msgid "Input Device Driver Setup"
 msgstr "Ajustes Entrada Dispositivos"
 
@@ -2632,6 +2665,9 @@ msgstr "Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"
 
 msgid "Is the remote control working okay?"
 msgstr "Funciona bien el mando a distancia?"
+
+msgid " <empty>"
+msgstr " <vacío>"
 
 msgid "Exit media player?"
 msgstr "Salir del reproductor?"
@@ -2751,6 +2787,9 @@ msgstr "FEC:"
 
 msgid "FTA"
 msgstr "FTA"
+
+msgid "Select Quad Channels"
+msgstr "Seleccionar canales cuádruples"
 
 msgid "Select 'Yes' to remove all settings, tuning data, timers, resume pointers etc. Selecting this option will restore the configuration to the initial settings before any configuration settings were applied. This is the most reliable form of Factory Reset."
 msgstr "Seleccione 'Sí' para eliminar todos los ajustes, datos de ajuste, temporizadores, punteros de reanudación, etc. Al seleccionar esta opción, se restaurará la configuración a los ajustes iniciales antes de que se aplicaran los ajustes de configuración. Esta es la forma más confiable de restablecimiento de fábrica."
@@ -4108,6 +4147,9 @@ msgstr "Índice de memoria"
 msgid "Menu"
 msgstr "Menú"
 
+msgid "  Menu key : Select quad channel"
+msgstr "  Botón MENU: Seleccionar canal quad"
+
 #, python-format
 msgid "Menusort (%s)"
 msgstr "Clasificación de menú (%s)"
@@ -4283,6 +4325,9 @@ msgstr "NIM & Tipo"
 msgid "NO"
 msgstr "NO"
 
+msgid " <No Channel>"
+msgstr " <No hay Canal>"
+
 msgid "NTSC"
 msgstr "NTSC"
 
@@ -4391,6 +4436,9 @@ msgstr "Niue"
 
 msgid "No"
 msgstr "No"
+
+msgid "No channel"
+msgstr "Ningún canal"
 
 msgid "No (supported) DVDROM found!"
 msgstr "DVDROM (soportado) no encontrado!"
@@ -4592,6 +4640,9 @@ msgstr "Aún no implementado!"
 
 msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
 msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o apagado\" en \"No, excepto con el temporizador despertador\"."
+
+msgid "Next quad PiP channel"
+msgstr "Siguiente canal Quad PiP"
 
 msgid ""
 "Nothing to scan!\n"
@@ -5155,6 +5206,9 @@ msgstr "Pulse OK para mantener el actualmente seleccionado skin %s."
 msgid "Press OK to activate the selected skin %s."
 msgstr "Pulse OK para activar el seleccionado skin %s."
 
+msgid "Quad PiP is not available."
+msgstr "No está disponible la función Quad PiP."
+
 msgid ""
 "To apply the selected '%s' skin the GUI needs to restart.\n"
 "Would you like to restart the GUI now?"
@@ -5380,6 +5434,9 @@ msgstr "Versión de Python: "
 msgid "Qatar"
 msgstr "Qatar"
 
+msgid "Quad PiP Channel Selection"
+msgstr "Selección de canal Quad PiP"
+
 msgid "Question"
 msgstr "Pregunta"
 
@@ -5524,6 +5581,9 @@ msgstr "Botón AMARILLO"
 msgid "BLUE button"
 msgstr "Botón AZUL"
 
+msgid "Receiver does not support Quad PiP."
+msgstr "El receptor no soporta Quad PiP."
+
 msgid "Red colored"
 msgstr "Coloreado en rojo"
 
@@ -5587,11 +5647,20 @@ msgstr "Eliminar Marcador"
 msgid "Delete bookmark"
 msgstr "Eliminar marcador"
 
+msgid "Really delete this entry?"
+msgstr "¿Estas seguro de borrar esta entrada?"
+
+msgid "  Red key : Show/Hide channel name"
+msgstr "  Tecla roja: Mostrar/Ocultar nombre de canal"
+
 msgid "Remove currently selected title"
 msgstr "Eliminar el título seleccionado actualmente"
 
 msgid "Remove plugins"
 msgstr "Eliminar plugins"
+
+msgid "Remove Quad Channel Entry"
+msgstr "Eliminar la entrada del canal quad"
 
 msgid "Remove this logfile"
 msgstr "Eliminar este registro"
@@ -6156,6 +6225,9 @@ msgstr "Seleccionar lugar para copias de seguridad"
 msgid "Select channel"
 msgstr "Seleccionar Canal"
 
+msgid "Select channel audio"
+msgstr "Seleccione el canal de audio"
+
 msgid "Select channel to record from"
 msgstr "Seleccionar canal desde el que grabar"
 
@@ -6486,6 +6558,9 @@ msgstr "Mostrar selección de audio"
 msgid "Change AC3 audio track"
 msgstr "Cambiar pista de audio AC3"
 
+msgid "Show channel selection"
+msgstr "Mostrar selección de canales"
+
 msgid "Show CI messages"
 msgstr "Mostrar mensajes CI"
 
@@ -6497,6 +6572,9 @@ msgstr "Mostrar EPG…"
 
 msgid "Show Games show"
 msgstr "Mostrar Games show"
+
+msgid "Show/Hide focus bar"
+msgstr "Mostrar/Ocultar barra de enfoque"
 
 msgid "Show InfoBar"
 msgstr "Mostrar InfoBar"
@@ -9507,6 +9585,9 @@ msgstr "cultura popular/artes tradicionales"
 msgid "pre-school children's program"
 msgstr "programa para niños preescolares"
 
+msgid "Prev quad PiP channel"
+msgstr "Canal Quad PiP anterior"
+
 msgid "Purge deleted user bouquets"
 msgstr "Purgar bouquets de usuario eliminados"
 
@@ -10492,6 +10573,9 @@ msgstr "Activar EIT EPG"
 msgid "Enable MHW EPG"
 msgstr "Activar MHW EPG"
 
+msgid "Enable MiniTV"
+msgstr "Habilitar MiniTV"
+
 msgid "Enable Netmed EPG"
 msgstr "Activar Netmed EPG"
 
@@ -11175,6 +11259,9 @@ msgstr "Cuando no es cero, una grabación se detendrá más tarde que la hora de
 
 msgid "Yellow DVB subtitles"
 msgstr "Subtítulos DVB amarillos"
+
+msgid "Zap focused channel on full screen"
+msgstr "Zapear canal enfocado en pantalla completa"
 
 msgid "Zap mode"
 msgstr "Modo Zap"
@@ -15773,6 +15860,12 @@ msgstr "Ajustes uShare"
 
 msgid "Show Main Menu as"
 msgstr "Mostrar menú principal como"
+
+msgid "Show Live in MiniTV"
+msgstr "Mostrar directo en MiniTV"
+
+msgid "Show PiP in MiniTV"
+msgstr "Mostrar PiP en MiniTV"
 
 msgid "Choose style of main menus"
 msgstr "Elige el estilo de los menús principales"

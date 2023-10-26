@@ -73,18 +73,18 @@ RESULT eNavigation::getCurrentService(ePtr<iPlayableService> &service)
 
 RESULT eNavigation::stopService(void)
 {
-		/* check if there is a running service... */
+	/* check if there is a running service... */
 	if (!m_runningService)
 		return 1;
 
 	ePtr<iPlayableService> tmp = m_runningService;
-	m_runningService=0;
+	m_runningService = 0;
 	tmp->stop();
 
 	/* send stop event */
 	m_event(iPlayableService::evEnd);
 
-		/* kill service. */
+	/* kill service. */
 	m_service_event_conn = 0;
 
 #if defined(HAVE_FCC)
@@ -93,7 +93,7 @@ RESULT eNavigation::stopService(void)
 	return 0;
 }
 
-RESULT eNavigation::recordService(const eServiceReference &ref, ePtr<iRecordableService> &service, bool simulate)
+RESULT eNavigation::recordService(const eServiceReference &ref, ePtr<iRecordableService> &service, bool simulate, pNavigation::RecordType type)
 {
 	ASSERT(m_servicehandler);
 	RESULT res = m_servicehandler->record(ref, service);
@@ -110,8 +110,9 @@ RESULT eNavigation::recordService(const eServiceReference &ref, ePtr<iRecordable
 		{
 			ePtr<eConnection> conn;
 			service->connectEvent(sigc::mem_fun(*this, &eNavigation::recordEvent), conn);
-			m_recordings[service]=conn;
-			m_recordings_services[service]=ref;
+			m_recordings[service] = conn;
+			m_recordings_services[service] = ref;
+			m_recordings_types[service] = type;
 		}
 	}
 	return res;
@@ -120,7 +121,7 @@ RESULT eNavigation::recordService(const eServiceReference &ref, ePtr<iRecordable
 RESULT eNavigation::stopRecordService(ePtr<iRecordableService> &service)
 {
 	service->stop();
-	std::set<ePtr<iRecordableService> >::iterator it =
+	std::set<ePtr<iRecordableService>>::iterator it =
 		m_simulate_recordings.find(service);
 	if (it != m_simulate_recordings.end())
 	{
@@ -129,35 +130,98 @@ RESULT eNavigation::stopRecordService(ePtr<iRecordableService> &service)
 	}
 	else
 	{
-		std::map<ePtr<iRecordableService>, ePtr<eConnection> >::iterator it =
+		std::map<ePtr<iRecordableService>, ePtr<eConnection>>::iterator it =
 			m_recordings.find(service);
 		if (it != m_recordings.end())
 		{
 			m_recordings.erase(it);
 			/* send stop event */
 			m_record_event(service, iRecordableService::evEnd);
-			std::map<ePtr<iRecordableService>, eServiceReference >::iterator it =
+			std::map<ePtr<iRecordableService>, eServiceReference>::iterator it_services =
 				m_recordings_services.find(service);
-			if (it != m_recordings_services.end())
+			if (it_services != m_recordings_services.end())
 			{
-				m_recordings_services.erase(it);
+				m_recordings_services.erase(it_services);
+			}
+			std::map<ePtr<iRecordableService>, pNavigation::RecordType>::iterator it_types =
+				m_recordings_types.find(service);
+			if (it_types != m_recordings_types.end())
+			{
+				m_recordings_types.erase(it_types);
 			}
 			return 0;
 		}
 	}
 
-	eDebug("[eNavigation] try to stop non running recording!!");  // this should not happen
+	eDebug("[eNavigation] try to stop non running recording!!"); // this should not happen
 	return -1;
 }
 
-void eNavigation::getRecordings(std::vector<ePtr<iRecordableService> > &recordings, bool simulate)
+void eNavigation::getRecordings(std::vector<ePtr<iRecordableService>> &recordings, bool simulate, pNavigation::RecordType type)
 {
 	if (simulate)
-		for (std::set<ePtr<iRecordableService> >::iterator it(m_simulate_recordings.begin()); it != m_simulate_recordings.end(); ++it)
+		for (std::set<ePtr<iRecordableService>>::iterator it(m_simulate_recordings.begin()); it != m_simulate_recordings.end(); ++it)
 			recordings.push_back(*it);
 	else
-		for (std::map<ePtr<iRecordableService>, ePtr<eConnection> >::iterator it(m_recordings.begin()); it != m_recordings.end(); ++it)
-			recordings.push_back(it->first);
+		for (std::map<ePtr<iRecordableService>, ePtr<eConnection>>::iterator it(m_recordings.begin()); it != m_recordings.end(); ++it)
+		{
+			if (m_recordings_types[it->first] & type)
+			{
+				recordings.push_back(it->first);
+			}
+		}
+}
+
+void eNavigation::getRecordingsServicesOnly(std::vector<eServiceReference> &services, pNavigation::RecordType type)
+{
+	for (std::map<ePtr<iRecordableService>, eServiceReference>::iterator it(m_recordings_services.begin()); it != m_recordings_services.end(); ++it)
+	{
+		if (m_recordings_types[it->first] & type)
+		{
+			services.push_back(it->second);
+		}
+	}
+}
+
+void eNavigation::getRecordingsTypesOnly(std::vector<pNavigation::RecordType> &returnedTypes, pNavigation::RecordType type)
+{
+	for (std::map<ePtr<iRecordableService>, pNavigation::RecordType>::iterator it(m_recordings_types.begin()); it != m_recordings_types.end(); ++it)
+	{
+		if (m_recordings_types[it->first] & type)
+		{
+			returnedTypes.push_back(it->second);
+		}
+	}
+}
+
+void eNavigation::getRecordingsSlotIDsOnly(std::vector<int> &slotids, pNavigation::RecordType type)
+{
+	for (std::map<ePtr<iRecordableService>, eServiceReference>::iterator it(m_recordings_services.begin()); it != m_recordings_services.end(); ++it)
+	{
+		if (m_recordings_types[it->first] & type)
+		{
+			ePtr<iFrontendInformation> fe_info;
+			it->first->frontendInfo(fe_info);
+			if (fe_info)
+				slotids.push_back(fe_info->getFrontendInfo(iFrontendInformation_ENUMS::frontendNumber));
+			else
+				slotids.push_back(-1);
+		}
+	}
+}
+
+std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> eNavigation::getRecordingsServices(pNavigation::RecordType type)
+{
+	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> m_recordings_services_filtered;
+
+	for (std::map<ePtr<iRecordableService>, eServiceReference>::iterator it(m_recordings_services.begin()); it != m_recordings_services.end(); ++it)
+	{
+		if (m_recordings_types[it->first] & type)
+		{
+			m_recordings_services_filtered[it->first] = m_recordings_services[it->first];
+		}
+	}
+	return m_recordings_services_filtered;
 }
 
 RESULT eNavigation::pause(int dop)
