@@ -1692,6 +1692,9 @@ msgstr "Islas Cook"
 msgid "Copy"
 msgstr "Copiar"
 
+msgid "Copy To Stream Relay"
+msgstr "Copiar a retransmisión de stream"
+
 msgid "Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location."
 msgstr "Los volcados del núcleo son útiles para los desarrolladores en caso de un bloqueo FATAL SIGNAL en el código C++. El tamaño típico de volcado del núcleo es de 110 MB, por lo tanto, ajuste el espacio máximo utilizado y elija la ubicación adecuada."
 
@@ -4966,11 +4969,11 @@ msgstr "Reproducir grabaciones"
 msgid "Please add titles to the compilation."
 msgstr "Añadir títulos a la compilación."
 
-msgid "Play service with streamrelay"
-msgstr "Canal con reproducción streamrelay"
+msgid "Play service with Stream Relay"
+msgstr "Canal con reproducción retransmisión de stream"
 
-msgid "Play service without streamrelay"
-msgstr "Canal sin reproducción streamrelay"
+msgid "Play service without Stream Relay"
+msgstr "Canal sin reproducción retransmisión de stream"
 
 msgid "Please change recording endtime"
 msgstr "Cambiar el tiempo final de la grabación"
@@ -7156,11 +7159,11 @@ msgstr "Posición guardada"
 msgid "Stream"
 msgstr "Transmisión"
 
-msgid "Streamrelay port"
-msgstr "Puerto streamrelay"
+msgid "Stream Relay port"
+msgstr "Puerto retransmisión de stream"
 
-msgid "Streamrelay URL"
-msgstr "URL streamrelay"
+msgid "Stream Relay URL"
+msgstr "URL retransmisión de stream"
 
 msgid "Stream request"
 msgstr "Solicitud de stream"
@@ -7417,8 +7420,8 @@ msgstr ""
 "El directorio %s no se puede escribir.\n"
 "Seleccione un directorio que permita escritura en su lugar."
 
-msgid "Server IP address used to decrypt channels that can only be done via streamrelay."
-msgstr "Dirección IP del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante streamrelay."
+msgid "Server IP address used to decrypt channels that can only be done via Stream Relay."
+msgstr "Dirección IP del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante retransmisión de stream."
 
 msgid "%s connected successfully.\nPlayable files found."
 msgstr "%s conectado con éxito.\nSe encontraron archivos reproducibles."
@@ -7470,8 +7473,8 @@ msgstr ""
 "\n"
 "Test Pattern por TigerDave - www.tigerdave.com/ht_menu.htm"
 
-msgid "Server port used to decrypt channels that can only be done using streamrelay."
-msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante streamrelay."
+msgid "Server port used to decrypt channels that can only be done using Stream Relay."
+msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante retransmisión de stream."
 
 msgid "The PIN code you entered is wrong."
 msgstr "El código PIN introducido es incorrecto."
