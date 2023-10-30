@@ -647,6 +647,9 @@ msgstr "Añadir Marcador"
 msgid "Add directory to playlist"
 msgstr "Agregar directorio a la lista de reproducción"
 
+msgid "Add DNS"
+msgstr "Añadir DNS"
+
 msgid "Add USB slots"
 msgstr "Añadir slots USB"
 
@@ -5658,6 +5661,9 @@ msgstr "  Tecla roja: Mostrar/Ocultar nombre de canal"
 
 msgid "Remove currently selected title"
 msgstr "Eliminar el título seleccionado actualmente"
+
+msgid "Remove DNS"
+msgstr "Eliminar DNS"
 
 msgid "Remove plugins"
 msgstr "Eliminar plugins"
