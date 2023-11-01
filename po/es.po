@@ -5232,8 +5232,8 @@ msgstr ""
 msgid "Press OK to activate the settings."
 msgstr "Pulse OK para activar la configuración."
 
-msgid "%s\n\nYou can use the DNS provided by other servers in Static IP Router."
-msgstr "%s\n\nPuede utilizar los DNS proporcionados por otros servidores en Router IP Estática."
+msgid "%s\n\nYou can use the DNS provided by other servers in Static IP Router.\n\nTo change DNS manually, delete DNS 2 with BLUE button (do not delete DNS 1), press YELLOW button and start editing from DNS 1."
+msgstr "%s\n\nPuede utilizar los DNS proporcionados por otros servidores en Router IP Estática.\n\nPara cambiar DNS de forma manual, elimine DNS 2 con boton AZUL (no elimine DNS 1), pulse botón AMARILLO y comienza a editar desde DNS 1."
 
 msgid "%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver."
 msgstr "%s\n\nSi los DNS de otros servidores aún se mantienen en DHCP Router, para obtener los DNS de su Router, reinicie el receptor."
