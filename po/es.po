@@ -614,6 +614,12 @@ msgstr "Activar HbbTV (Botón Rojo)"
 msgid "Activate Picture in Picture"
 msgstr "Activar PiP"
 
+msgid "Activate Picture in Picture - Disable LcdLiveTV"
+msgstr "Activar PiP - Deshabilitado MiniTVLcd"
+
+msgid "Activate Picture in Picture - Enable LcdLiveTV"
+msgstr "Activar PiP - Habilitado MiniTVLcd"
+
 msgid "Activate current configuration"
 msgstr "Activar configuración actual"
 
@@ -2925,6 +2931,9 @@ msgstr "Parte temporal rápida"
 
 msgid "FCC enabled"
 msgstr "FCC habilitado"
+
+msgid "FCC was disabled for Quad PiP"
+msgstr "FCC fue deshabilitado para Quad PiP"
 
 msgid "Favourites"
 msgstr "Favoritos"
