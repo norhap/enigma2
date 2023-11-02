@@ -11,7 +11,7 @@ from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 # profile("ChannelSelection.py 1")
 from Screens.EpgSelection import EPGSelection
-from enigma import eServiceReference, eServiceReferenceDVB, eEPGCache, eServiceCenter, eRCInput, eTimer, eDVBDB, iPlayableService, iServiceInformation, getPrevAsciiCode
+from enigma import eServiceReference, eServiceReferenceDVB, eEPGCache, eServiceCenter, eRCInput, eTimer, eDVBDB, iPlayableService, iServiceInformation, getPrevAsciiCode, eDBoxLCD
 from Components.config import config, configfile, ConfigSubsection, ConfigText, ConfigYesNo
 from Tools.NumericalTextInput import NumericalTextInput, MAP_SEARCH
 # profile("ChannelSelection.py 2")
@@ -590,7 +590,7 @@ class ChannelContextMenu(Screen):
 				if SystemInfo["LCDMiniTVPiP"] and int(config.lcd.modepip.value) >= 1:
 					print('[ChannelSelection] LCDMiniTV disable PIP')
 					print("[ChannelSelection] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modeminitv.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 			self.session.pip = self.session.instantiateDialog(PictureInPicture)
 			self.session.pip.setAnimationMode(0)
 			self.session.pip.show()
@@ -601,7 +601,7 @@ class ChannelContextMenu(Screen):
 				if SystemInfo["LCDMiniTVPiP"] and int(config.lcd.modepip.value) >= 1:
 					print('[ChannelSelection] LCDMiniTV enable PIP')
 					print("[ChannelSelection] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modepip.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 					print("[ChannelSelection] Write to /proc/stb/vmpeg/1/dst_width")
 					open("/proc/stb/vmpeg/1/dst_width", "w").write("0")
 					print("[ChannelSelection] Write to /proc/stb/vmpeg/1/dst_height")
@@ -615,7 +615,7 @@ class ChannelContextMenu(Screen):
 				if SystemInfo["LCDMiniTV"] and int(config.lcd.modepip.value) >= 1:
 					print('[ChannelSelection] LCDMiniTV disable PIP')
 					print("[ChannelSelection] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modepip.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 				self.session.openWithCallback(self.close, MessageBox, _("Could not open Picture in Picture"), MessageBox.TYPE_ERROR)
 		else:
 			return 0

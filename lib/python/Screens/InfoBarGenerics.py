@@ -2703,7 +2703,7 @@ class InfoBarPiP:
 				if SystemInfo["LCDMiniTV"] and int(config.lcd.modepip.value) >= 1:
 					print('[InfoBarGenerics] LCDMiniTV disable PIP')
 					print("[InfoBarGenerics] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modeminitv.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 				self.session.pipshown = False
 			if hasattr(self, "ScreenSaverTimerStart"):
 				self.ScreenSaverTimerStart()
@@ -2718,7 +2718,7 @@ class InfoBarPiP:
 				if SystemInfo["LCDMiniTVPiP"] and int(config.lcd.modepip.value) >= 1:
 					print('[InfoBarGenerics] LCDMiniTV enable PIP')
 					print("[InfoBarGenerics] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modepip.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 					print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_width")
 					open("/proc/stb/vmpeg/1/dst_width", "w").write("0")
 					print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_height")
@@ -2733,7 +2733,7 @@ class InfoBarPiP:
 					if SystemInfo["LCDMiniTVPiP"] and int(config.lcd.modepip.value) >= 1:
 						print('[InfoBarGenerics] LCDMiniTV enable PIP')
 						print("[InfoBarGenerics] Write to /proc/stb/lcd/mode")
-						open("/proc/stb/lcd/mode", "w").write(config.lcd.modepip.value)
+						eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 						print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_width")
 						open("/proc/stb/vmpeg/1/dst_width", "w").write("0")
 						print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_height")

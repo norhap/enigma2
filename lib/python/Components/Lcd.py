@@ -245,9 +245,8 @@ class LCD:
 		eDBoxLCD.getInstance().setLED(value, 2)
 
 	def setLCDMiniTVMode(self, value):
-		if SystemInfo["LCDMiniTV"]:
-			print("[Lcd] setLCDMiniTVMode='%s'." % value)
-			fileWriteLine("/proc/stb/lcd/mode", value)
+		print(f"[Lcd] setLCDMiniTVMode='{value}'.")
+		eDBoxLCD.getInstance().setLCDMode(value)
 
 	def setLCDMiniTVPIPMode(self, value):
 		print("[Lcd] setLCDMiniTVPIPMode='%s'." % value)
