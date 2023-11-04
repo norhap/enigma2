@@ -5,6 +5,7 @@ from re import findall
 from boxbranding import getMachineName
 from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD
 
+from process import ProcessList
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
 from Tools.StbHardware import getWakeOnLANType
 
@@ -188,10 +189,10 @@ BoxInfo.setItem("RemoteRepeat", 100)
 BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
+BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
 
-from process import ProcessList
-STREAM_RELAY_PROC = ["oscam-emu",]  # add more cams
-for cam in STREAM_RELAY_PROC:
+API_STREAMRELAY = ["oscam-emu",]  # add more cams
+for cam in API_STREAMRELAY:
 	streamrelay = str(ProcessList().named(cam)).strip("[]")
 	BoxInfo.setItem("StreamRelay", streamrelay)  # items availables for streamrelay
 

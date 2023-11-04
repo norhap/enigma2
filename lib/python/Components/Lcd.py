@@ -245,9 +245,8 @@ class LCD:
 		eDBoxLCD.getInstance().setLED(value, 2)
 
 	def setLCDMiniTVMode(self, value):
-		if SystemInfo["LCDMiniTV"]:
-			print("[Lcd] setLCDMiniTVMode='%s'." % value)
-			fileWriteLine("/proc/stb/lcd/mode", value)
+		print(f"[Lcd] setLCDMiniTVMode='{value}'.")
+		eDBoxLCD.getInstance().setLCDMode(value)
 
 	def setLCDMiniTVPIPMode(self, value):
 		print("[Lcd] setLCDMiniTVPIPMode='%s'." % value)
@@ -636,18 +635,19 @@ def InitLcd():
 			("300000", "5 %s" % _("Minutes")),
 			("noscrolling", _("Off"))
 		], default="10000")
-		if SystemInfo["LcdLiveTV"]:
-			config.lcd.minitvdisplay = ConfigYesNo(default=False)
-			if "live_enable" in SystemInfo["LcdLiveTV"]:
-				def setLiveTvDisplay(configElement):
-					ilcd.setfblcddisplay("enable" if configElement.value else "disable")
-				config.lcd.minitvdisplay.addNotifier(setLiveTvDisplay)
-			else:
-				def setLiveTvDisplay(configElement):
-					ilcd.setfblcddisplay("1" if configElement.value else "0")
-				config.lcd.minitvdisplay.addNotifier(setLiveTvDisplay)
-		else:
-			config.lcd.minitvdisplay = ConfigNothing()
+	# disabled use plugin MiniTV
+	#   if SystemInfo["LcdLiveTV"]:
+	# 		config.lcd.minitvdisplay = ConfigYesNo(default=False)
+	# 		if "live_enable" in SystemInfo["LcdLiveTV"]:
+	# 			def setLiveTvDisplay(configElement):
+	# 				ilcd.setfblcddisplay("enable" if configElement.value else "disable")
+	# 			config.lcd.minitvdisplay.addNotifier(setLiveTvDisplay)
+	# 		else:
+	# 			def setLiveTvDisplay(configElement):
+	# 				ilcd.setfblcddisplay("1" if configElement.value else "0")
+	# 			config.lcd.minitvdisplay.addNotifier(setLiveTvDisplay)
+	# 	else:
+	# 		config.lcd.minitvdisplay = ConfigNothing()
 		if SystemInfo["LCDMiniTV"] and MODEL not in ("gbquad", "gbquadplus", "gbquad4k", "gbue4k"):
 			config.lcd.minitvmode = ConfigSelection([
 				("0", _("normal")),

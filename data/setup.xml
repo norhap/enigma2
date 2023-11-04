@@ -60,7 +60,6 @@
 		<item level="0" text="Standby speed" description="The speed of the fan when your %s %s is in standby mode.">config.fans[0].pwm_standby</item>
 	</setup>
 	<setup key="FrontDisplay" title="Display Setup" requires="FrontpanelDisplay">
-		<item level="0" text="Show MiniTV in LCD (require PiP actived)" description="Show live tv on LCD when PiP is enabled.">config.lcd.minitvdisplay</item>
 		<item level="0" text="Use separate picon pack for front panel display" requires="VFD_scroll_repeats" description="Use piconlcd directory for picons on color LCD.">config.lcd.picon_pack</item>
 		<item level="0" text="Date style" description="Choose the front panel display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin." requires="FrontpanelDisplay">config.usage.date.display</item>
 		<item level="0" text="Time style" description="Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes. ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin." requires="FrontpanelDisplay">config.usage.time.display</item>
@@ -444,8 +443,8 @@
 		<item level="2" text="Descramble receiving http streams" requires="HasOfflineDecoding" description="When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off.">config.streaming.descramble_client</item>
 		<item level="2" text="Require authentication for http streams" description="When enabled, authentication is required to watch http streams.">config.streaming.authentication</item>
 		<item level="2" text="Delay start http(s) stream" description="Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC.">config.usage.http_startdelay</item>
-		<item level="2" text="Streamrelay URL" description="Server IP address used to decrypt channels that can only be done via streamrelay." requires="StreamRelay">config.misc.softcam_streamrelay_url</item>
-		<item level="2" text="Streamrelay port" description="Server port used to decrypt channels that can only be done using streamrelay." requires="StreamRelay">config.misc.softcam_streamrelay_port</item>
+		<item level="2" text="Stream Relay URL" description="Server IP address used to decrypt channels that can only be done via Stream Relay." requires="StreamRelay">config.misc.softcam_streamrelay_url</item>
+		<item level="2" text="Stream Relay port" description="Server port used to decrypt channels that can only be done using Stream Relay." requires="StreamRelay">config.misc.softcam_streamrelay_port</item>
 		<item level="2" text="Fan operation" description="Configure how the fan should operate" requires="Fan">config.usage.fan</item>
 		<item level="2" text="Fan speed" description="Configure the speed of the fan" requires="FanPWM">config.usage.fanspeed</item>
 		<item level="2" text="Wake On LAN" description="When enabled the set top box is able to wakeup on LAN" requires="WakeOnLAN">config.usage.wakeOnLAN</item>

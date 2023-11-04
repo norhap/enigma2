@@ -16,7 +16,7 @@ from Tools.Directories import mediaFilesInUse
 from Tools.Notifications import AddNotification
 from time import time, localtime
 from GlobalActions import globalActionMap
-from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService
+from enigma import eDVBVolumecontrol, eTimer, eDVBLocalTimeHandler, eServiceReference, eStreamServer, quitMainloop, iRecordableService, eDBoxLCD
 from gettext import ngettext
 
 inStandby = None
@@ -433,11 +433,8 @@ class TryQuitMainloop(MessageBox):
 				config.misc.RestartUI.value = True
 				config.misc.RestartUI.save()
 			if SystemInfo["Display"] and SystemInfo["LCDMiniTV"]:
-				mode = "/proc/stb/lcd/mode"
-				if os.path.isfile(mode):
-					print("[Standby] LCDminiTV off")
-					with open(mode, "w") as lcd:
-						lcd.write("0")
+				print("[Standby] LCDminiTV off")
+				eDBoxLCD.getInstance().setLCDMode("0")
 			if MODEL == "vusolo4k":
 				oled_brightness = "/proc/stb/fp/oled_brightness"
 				if os.path.isfile(oled_brightness):

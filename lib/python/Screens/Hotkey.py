@@ -46,9 +46,7 @@ class hotkey:
 		("Radio", "radio", ""),
 		("Radio" + " " + _("long"), "radio_long", ""),
 		("TV", "showTv", ""),
-		("TV" + " " + _("long"), "showTv_long", SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV" or ""),
 		("TV2", "toggleTvRadio", ""),
-		("TV2" + " " + _("long"), "toggleTvRadio_long", SystemInfo["LcdLiveTV"] and "Infobar/ToggleLCDLiveTV" or ""),
 		("Teletext", "text", ""),
 		("Help", "displayHelp", ""),
 		("Help" + " " + _("long"), "displayHelp_long", ""),
@@ -218,8 +216,6 @@ def getHotkeyFunctions():
 		hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 		hotkey.functions.append((_("Toggle HDMI-In full screen"), "Infobar/HDMIInFull", "InfoBar"))
 		hotkey.functions.append((_("Toggle HDMI-In PiP"), "Infobar/HDMIInPiP", "InfoBar"))
-	if SystemInfo["LcdLiveTV"]:
-		hotkey.functions.append((_("Toggle LCD LiveTV and PiP"), "Infobar/ToggleLCDLiveTV", "InfoBar"))
 	hotkey.functions.append((_("Toggle dashed flickering line for this service"), "Infobar/ToggleHideVBI", "InfoBar"))
 	hotkey.functions.append((_("Do nothing"), "Void", "InfoBar"))
 	if SystemInfo["HDMICEC"]:
@@ -761,9 +757,6 @@ class InfoBarHotkey():
 			self.openServiceList()
 		elif hasattr(self, "showMovies"):
 			self.showMovies()
-
-	def ToggleLCDLiveTV(self):
-		config.lcd.minitvdisplay.value = not config.lcd.minitvdisplay.value
 
 	def SourceActiveHdmiCec(self):
 		self.setHdmiCec("sourceactive")

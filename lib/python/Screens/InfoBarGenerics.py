@@ -38,7 +38,7 @@ from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileWriteLine, fileReadLines, fileWriteLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
-from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
+from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
 from time import time, localtime, strftime
 from os.path import exists, isfile, splitext, join
 from os import listdir, remove
@@ -165,16 +165,26 @@ class InfoBarStreamRelay:
 		fileWriteLines(self.FILENAME, self.streamRelay, source=self.__class__.__name__)
 
 	def toggle(self, nav, service):
-		service = service or nav.getCurrentlyPlayingServiceReference()
-		if service:
-			servicestring = service.toString()
-			if servicestring in self.streamRelay:
-				self.streamRelay.remove(servicestring)
-			else:
-				self.streamRelay.append(servicestring)
-				if nav.getCurrentlyPlayingServiceReference():
-					nav.restartService()
+		if isinstance(service, list):
+			serviceList = service
+			for service in serviceList:
+				servicestring = service.toString()
+				if servicestring in self.streamRelay:
+					self.streamRelay.remove(servicestring)
+				else:
+					self.streamRelay.append(servicestring)
 			self.write()
+		else:
+			service = service or nav.getCurrentlyPlayingServiceReference()
+			if service:
+				servicestring = service.toString()
+				if servicestring in self.streamRelay:
+					self.streamRelay.remove(servicestring)
+				else:
+					self.streamRelay.append(servicestring)
+					if nav.getCurrentlyPlayingServiceReference() == service:  # if nav.getCurrentlyPlayingServiceReference():
+						nav.restartService()
+				self.write()
 
 	def streamrelayChecker(self, playref):
 		playrefstring = playref.toString()
@@ -2409,6 +2419,9 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getLogManager, type=InfoBarExtensions.EXTENSION_LIST)
 
+		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
+			p.__call__(self)
+
 	def getOSCam(self):
 		return _("OSCam Info")
 
@@ -2650,9 +2663,17 @@ class InfoBarPiP:
 
 	def getShowHideName(self):
 		if self.session.pipshown:
-			return _("Disable Picture in Picture")
+			if SystemInfo["LcdLiveTV"] and config.plugins.minitv.enable.value == "enable":
+				return _("Disable Picture in Picture - Disable in LCD MiniTV")
+			else:
+				return _("Disable Picture in Picture")
 		else:
-			return _("Activate Picture in Picture")
+			if SystemInfo["LcdLiveTV"] and config.plugins.minitv.enable.value == "disable":
+				return _("Activate Picture in Picture")
+			elif SystemInfo["LcdLiveTV"]:
+				return _("Activate Picture in Picture - Enable in LCD MiniTV")
+			else:
+				return _("Activate Picture in Picture")
 
 	def getSwapName(self):
 		return _("Swap services")
@@ -2693,7 +2714,7 @@ class InfoBarPiP:
 				if SystemInfo["LCDMiniTV"] and int(config.lcd.modepip.value) >= 1:
 					print('[InfoBarGenerics] LCDMiniTV disable PIP')
 					print("[InfoBarGenerics] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modeminitv.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modeminitv.value)
 				self.session.pipshown = False
 			if hasattr(self, "ScreenSaverTimerStart"):
 				self.ScreenSaverTimerStart()
@@ -2708,7 +2729,7 @@ class InfoBarPiP:
 				if SystemInfo["LCDMiniTVPiP"] and int(config.lcd.modepip.value) >= 1:
 					print('[InfoBarGenerics] LCDMiniTV enable PIP')
 					print("[InfoBarGenerics] Write to /proc/stb/lcd/mode")
-					open("/proc/stb/lcd/mode", "w").write(config.lcd.modepip.value)
+					eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 					print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_width")
 					open("/proc/stb/vmpeg/1/dst_width", "w").write("0")
 					print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_height")
@@ -2723,7 +2744,7 @@ class InfoBarPiP:
 					if SystemInfo["LCDMiniTVPiP"] and int(config.lcd.modepip.value) >= 1:
 						print('[InfoBarGenerics] LCDMiniTV enable PIP')
 						print("[InfoBarGenerics] Write to /proc/stb/lcd/mode")
-						open("/proc/stb/lcd/mode", "w").write(config.lcd.modepip.value)
+						eDBoxLCD.getInstance().setLCDMode(config.lcd.modepip.value)
 						print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_width")
 						open("/proc/stb/vmpeg/1/dst_width", "w").write("0")
 						print("[InfoBarGenerics] Write to /proc/stb/vmpeg/1/dst_height")
