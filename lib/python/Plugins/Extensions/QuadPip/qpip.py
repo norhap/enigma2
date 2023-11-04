@@ -8,8 +8,8 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.Slider import Slider
 from Components.Sources.List import List
-from Components.SystemInfo import BoxInfo
-
+from Components.SystemInfo import SystemInfo, BoxInfo
+from Tools.Directories import isPluginInstalled
 from Screens.ChannelSelection import ChannelSelectionBase
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -645,6 +645,7 @@ class QuadPipScreen(Screen, FocusShowHide, HelpableScreen):
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Quad PiP Screen"))
 		if config.plugins.fccsetup.activate.value:
+			SystemInfo["FCCactive"] = True
 			config.plugins.fccsetup.activate.value = False
 			config.plugins.fccsetup.activate.save()
 			self["text3"] = Label(_("FCC was disabled for Quad PiP"))
@@ -745,11 +746,12 @@ class QuadPipScreen(Screen, FocusShowHide, HelpableScreen):
 		self.disableQuadPip()
 		setDecoderMode("normal")
 
-		if BoxInfo.getItem("FastChannelChange", False):
-			self.enableFCC()
-
-		if BoxInfo.getItem("MiniTV", False):
+		if isPluginInstalled("MiniTV") and BoxInfo.getItem("MiniTV", False):
 			self.enableMiniTV()
+		# if SystemInfo["FCCactive"]:
+			# self.enableFCC()
+		self.qpipChannelList.saveAll()
+		self.session.nav.playService(self.oldService)
 
 		self.qpipChannelList.saveAll()
 		self.session.nav.playService(self.oldService)
@@ -817,6 +819,9 @@ class QuadPipScreen(Screen, FocusShowHide, HelpableScreen):
 		self["ch4"].resize(int(ch4_posMap[2]), int(ch4_posMap[3]))
 
 	def keyExit(self):
+		if SystemInfo["FCCactive"]:
+			config.plugins.fccsetup.activate.value = True
+			config.plugins.fccsetup.activate.save()
 		self.close()
 
 	def keyOk(self):

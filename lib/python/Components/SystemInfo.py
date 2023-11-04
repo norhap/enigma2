@@ -189,6 +189,7 @@ BoxInfo.setItem("RemoteRepeat", 100)
 BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
+BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
 
 API_STREAMRELAY = ["oscam-emu",]  # add more cams
 for cam in API_STREAMRELAY:

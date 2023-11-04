@@ -38,7 +38,7 @@ from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileWriteLine, fileReadLines, fileWriteLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
-from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB
+from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
 from time import time, localtime, strftime
 from os.path import exists, isfile, splitext, join
 from os import listdir, remove
@@ -2419,6 +2419,9 @@ class InfoBarExtensions:
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getLogManager, type=InfoBarExtensions.EXTENSION_LIST)
 
+		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
+			p.__call__(self)
+
 	def getOSCam(self):
 		return _("OSCam Info")
 
@@ -2660,12 +2663,15 @@ class InfoBarPiP:
 
 	def getShowHideName(self):
 		if self.session.pipshown:
-			return _("Disable Picture in Picture")
+			if SystemInfo["LcdLiveTV"] and config.plugins.minitv.enable.value == "enable":
+				return _("Disable Picture in Picture - Disable in LCD MiniTV")
+			else:
+				return _("Disable Picture in Picture")
 		else:
-			if SystemInfo["LcdLiveTV"] and not config.lcd.minitvdisplay.value:
-				return _("Activate Picture in Picture - Disable LcdLiveTV")
+			if SystemInfo["LcdLiveTV"] and config.plugins.minitv.enable.value == "disable":
+				return _("Activate Picture in Picture")
 			elif SystemInfo["LcdLiveTV"]:
-				return _("Activate Picture in Picture - Enable LcdLiveTV")
+				return _("Activate Picture in Picture - Enable in LCD MiniTV")
 			else:
 				return _("Activate Picture in Picture")
 
