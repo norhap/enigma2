@@ -2434,7 +2434,7 @@ class InfoBarExtensions:
 	def getOSCamInfo(self):
 		import process
 		p = process.ProcessList()
-		oscam = str(p.named("oscam")).strip("[]")
+		oscam = str(p.named("oscam")).strip("[]") or str(p.named("oscam-emu")).strip("[]")
 		if oscam:
 			return [((boundFunction(self.getOSCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
