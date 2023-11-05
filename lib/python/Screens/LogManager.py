@@ -2,7 +2,7 @@
 from enigma import eTimer, eBackgroundFileEraser, eLabel, gFont, fontRenderClass
 from os import remove, walk, stat, rmdir, listdir
 from os.path import join, getsize, isdir, exists
-from time import time
+from time import time, sleep
 import Components.Task
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -274,7 +274,12 @@ class LogManager(Screen):
 		if answer:
 			from enigma import eConsoleAppContainer
 			eConsoleAppContainer().execute("rm -f " + config.crash.debugPath.value + "*")
-			self.close()
+			sleep(0.3)
+			self["LogsSize"].update(config.crash.debugPath.value)
+			self["key_red"].setText("")
+			self["key_green"].setText("")
+			self["key_yellow"].setText("")
+			self["key_blue"].setText("")
 
 	def doDelete1(self, answer):
 		self.selectedFiles = self["list"].getSelectedList()
