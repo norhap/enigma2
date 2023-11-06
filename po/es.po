@@ -4118,6 +4118,9 @@ msgstr "Madagascar"
 msgid "Main Menu"
 msgstr "Menú Principal"
 
+msgid "Main menu"
+msgstr "Menú principal"
+
 msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu."
 msgstr "Permite iniciar manualmente los canales de importación y/o EPG a través del menú de extensión."
 
@@ -7310,7 +7313,7 @@ msgstr "Surinam"
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard y Jan Mayen"
 
-msgid "Swap PIP"
+msgid "Swap PiP"
 msgstr "Intercambiar PiP"
 
 msgid "Swap PiP and main picture"
@@ -7934,14 +7937,26 @@ msgstr "Ir a Selección de Subtítulos"
 msgid "Today"
 msgstr "Hoy"
 
-msgid "Toggle HDMI In"
-msgstr "Alternar entrada HDMI"
-
 msgid "Toggle display of the second InfoBar"
 msgstr "Alternar visualización de la segunda barra de información"
 
+msgid "Toggle HDMI In"
+msgstr "Alternar entrada HDMI"
+
+msgid "Toggle HDMI-In full screen"
+msgstr "Alternar HDMI-In a pantalla completa"
+
+msgid "Toggle HDMI-In PiP"
+msgstr "Alternar HDMI-In a PiP"
+
 msgid "Toggle move mode"
 msgstr "Alternar modo movimiento"
+
+msgid "Show - Toggle PiP"
+msgstr "Mostrar - Alternar PiP"
+
+msgid "Show - Toggle PiP (Enable in LCD MiniTV)"
+msgstr "Mostrar - Alternar PiP (Habilitado en LCD MiniTV)"
 
 msgid "Toggle PIPzap"
 msgstr "Alternar PiPzap"
@@ -7958,11 +7973,20 @@ msgstr "Alternar la línea parpadeante discontinua para este canal"
 msgid "Toggle infoBar"
 msgstr "Alternar infoBar"
 
+msgid "Toggle PiPzap"
+msgstr "Alternar PiPzap"
+
 msgid "Toggle show/hide"
 msgstr "Mostrar/ocultar"
 
+msgid "Toggle subtitles show/hide"
+msgstr "Alternar subtítulos Mostrar/ocultar"
+
 msgid "Toggle the TV and the radio player"
 msgstr "Alterna la televisión y el reproductor de radio"
+
+msgid "Toggle videomode"
+msgstr "Alternar modo video"
 
 msgid "Togo"
 msgstr "Togo"
@@ -8341,6 +8365,9 @@ msgstr "Transpondedor definido por el usuario"
 
 msgid "User Interface"
 msgstr "Interfaz de Usuario"
+
+msgid "User interface"
+msgstr "Interfaz de usuario"
 
 msgid "User Interface Setup"
 msgstr "Ajustes Interfaz de Usuario"
@@ -11122,6 +11149,9 @@ msgstr "Selección de idioma de subtítulos 4"
 
 msgid "Subtitle position"
 msgstr "Posición de los subtítulos"
+
+msgid "Subtitles Settings"
+msgstr "Ajustes Subtítulos"
 
 msgid "Automatic Language and Subtitles Setup"
 msgstr "Ajustes Lenguaje Automático & Subtítulos"
