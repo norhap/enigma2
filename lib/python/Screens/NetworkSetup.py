@@ -411,7 +411,20 @@ class DNSSettings(Setup, HelpableScreen):
 		for nameserver in self.nameserverEntries:
 			iNetwork.addNameserver(nameserver.value)
 		iNetwork.writeNameserverConfig()
-		Setup.keySave(self)
+		if config.usage.dns.default == "dhcp-router":
+			if config.usage.dns.value == "staticip":
+				config.usage.dns.value = config.usage.dns.default  # invalidate item staticip and save dhcp if dhcp is default
+				Setup.keySave(self)
+			else:
+				Setup.keySave(self)
+		elif config.usage.dns.default == "staticip":
+			if config.usage.dns.value == "dhcp-router":
+				config.usage.dns.value = config.usage.dns.default  # invalidate item dhcp and save staticip if staticip is default
+				Setup.keySave(self)
+			else:
+				Setup.keySave(self)
+		else:
+			Setup.keySave(self)
 
 	def keyCancel(self):
 		current = self["config"].getCurrent()[1]
