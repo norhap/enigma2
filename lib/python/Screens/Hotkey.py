@@ -10,7 +10,7 @@ from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, isPluginInstalled
 from ServiceReference import ServiceReference
 from enigma import eServiceReference
 from Components.Pixmap import Pixmap
@@ -207,7 +207,13 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Toggle videomode"), "Infobar/ToggleVideoMode", "InfoBar"))
 	hotkey.functions.append((_("Toggle subtitles show/hide"), "Infobar/toggleSubtitleShown", "InfoBar"))
 	if SystemInfo["PIPAvailable"]:
-		hotkey.functions.append((_("Show PiP"), "Infobar/showPiP", "InfoBar"))
+		if SystemInfo["LcdLiveTV"] and isPluginInstalled("MiniTV"):
+			if config.plugins.minitv.enable.value == "enable":
+				hotkey.functions.append((_("Show - Toggle PiP (Enable in LCD MiniTV)"), "Infobar/showPiP", "InfoBar"))
+			else:
+				hotkey.functions.append((_("Show - Toggle PiP"), "Infobar/showPiP", "InfoBar"))
+		else:
+			hotkey.functions.append((_("Show - Toggle PiP"), "Infobar/showPiP", "InfoBar"))
 		hotkey.functions.append((_("Swap PiP"), "Infobar/swapPiP", "InfoBar"))
 		hotkey.functions.append((_("Move PiP"), "Infobar/movePiP", "InfoBar"))
 		hotkey.functions.append((_("Toggle PiPzap"), "Infobar/togglePipzap", "InfoBar"))
@@ -259,7 +265,7 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Recording Setup"), "Setup/recording", "Setup"))
 	hotkey.functions.append((_("Harddisk Setup"), "Setup/harddisk", "Setup"))
 	hotkey.functions.append((_("Subtitles Settings"), "Setup/subtitlesetup", "Setup"))
-	hotkey.functions.append((_("Locale/Language"), "Module/Screens.LanguageSelection/LanguageSelection", "Setup"))
+	hotkey.functions.append((_("Language Setup"), "Module/Screens.LanguageSelection/LanguageSelection", "Setup"))
 	hotkey.functions.append((_("OSCam Info"), "Module/Screens.OScamInfo/OSCamInfoMenu", "Setup"))
 	hotkey.functions.append((_("NCam Info"), "Module/Screens.NcamInfo/NCamInfoMenu", "Setup"))
 	hotkey.functions.append((_("CCcam Info"), "Module/Screens.CCcamInfo/CCcamInfoMain", "Setup"))

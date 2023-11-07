@@ -192,6 +192,7 @@ BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hd
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
 
 API_STREAMRELAY = ["oscam-emu",]  # add more cams
+
 for cam in API_STREAMRELAY:
 	streamrelay = str(ProcessList().named(cam)).strip("[]")
 	BoxInfo.setItem("StreamRelay", streamrelay)  # items availables for streamrelay
@@ -303,9 +304,9 @@ SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
 SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
-SystemInfo["OScamIsActive"] = fileExists("/var/tmp/.oscam")
-SystemInfo["NCamIsActive"] = fileExists("/var/tmp/.ncam")
-SystemInfo["CCcamIsActive"] = fileHas("/tmp/ecm.info", "CCcam-s2s") or fileHas("/tmp/ecm.info", "fta")
+SystemInfo["OScamIsActive"] = str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]")
+SystemInfo["NCamIsActive"] = str(ProcessList().named("ncam")).strip("[]")
+SystemInfo["CCcamIsActive"] = str(ProcessList().named("CCcam")).strip("[]")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = MODEL in ("ustym4kpro", "beyonwizv2", "viper4k", "sf8008", "gbtrio4k", "gbtrio4kplus", "gbip4k", "qviart5")
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and MODEL not in ("hd51", "h7")

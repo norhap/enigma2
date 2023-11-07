@@ -2434,7 +2434,7 @@ class InfoBarExtensions:
 	def getOSCamInfo(self):
 		import process
 		p = process.ProcessList()
-		oscam = str(p.named("oscam")).strip("[]")
+		oscam = str(p.named("oscam")).strip("[]") or str(p.named("oscam-emu")).strip("[]")
 		if oscam:
 			return [((boundFunction(self.getOSCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
@@ -2663,15 +2663,19 @@ class InfoBarPiP:
 
 	def getShowHideName(self):
 		if self.session.pipshown:
-			if SystemInfo["LcdLiveTV"] and config.plugins.minitv.enable.value == "enable":
-				return _("Disable Picture in Picture - Disable in LCD MiniTV")
+			if SystemInfo["LcdLiveTV"] and isPluginInstalled("MiniTV"):
+				if config.plugins.minitv.enable.value == "enable":
+					return _("Disable Picture in Picture - Disable in LCD MiniTV")
+				else:
+					return _("Disable Picture in Picture")
 			else:
 				return _("Disable Picture in Picture")
 		else:
-			if SystemInfo["LcdLiveTV"] and config.plugins.minitv.enable.value == "disable":
-				return _("Activate Picture in Picture")
-			elif SystemInfo["LcdLiveTV"]:
-				return _("Activate Picture in Picture - Enable in LCD MiniTV")
+			if SystemInfo["LcdLiveTV"] and isPluginInstalled("MiniTV"):
+				if config.plugins.minitv.enable.value == "disable":
+					return _("Activate Picture in Picture")
+				else:
+					return _("Activate Picture in Picture - Enable in LCD MiniTV")
 			else:
 				return _("Activate Picture in Picture")
 
