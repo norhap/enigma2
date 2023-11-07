@@ -48,6 +48,7 @@ class Screen(dict):
 		self["ScreenPath"] = StaticText()
 		self.screenPath = ""  # This is the current screen path without the title.
 		self.screenTitle = ""  # This is the current screen title without the path.
+		self.handledWidgets = []
 
 	def __repr__(self):
 		return str(type(self))
@@ -258,7 +259,7 @@ class Screen(dict):
 					if depr:
 						print("[Screen] WARNING: OBSOLETE COMPONENT '%s' USED IN SKIN. USE '%s' INSTEAD!" % (name, depr[0]))
 						print("[Screen] OBSOLETE COMPONENT WILL BE REMOVED %s, PLEASE UPDATE!" % depr[1])
-				elif not depr:
+				elif not depr and name not in self.handledWidgets:
 					print("[Screen] Warning: Skin is missing element '%s' in %s." % (name, str(self)))
 		for item in self.additionalWidgets:
 			if not updateonly:

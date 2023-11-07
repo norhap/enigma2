@@ -1,6 +1,6 @@
 installdir = $(pkglibdir)/python/Components
 
-SUBDIRS = Sources Converter Renderer
+SUBDIRS = Sources Converter Renderer Addons
 
 install_PYTHON = \
 	__init__.py \
