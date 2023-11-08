@@ -320,8 +320,7 @@ class DNSSettings(Setup, HelpableScreen):
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Settings DNS Server"))
 		self["key_yellow"] = StaticText("")
-		if config.usage.dns.value == "staticip":
-			self["key_yellow"].setText(_("Add DNS"))
+		self["key_blue"] = StaticText("")
 		self.backupNameserverList = iNetwork.getNameserverList()[:]
 		self["addAction"] = HelpableActionMap(self, ["ColorActions"], {
 			"red": (self.keyCancel, _("Exit nameserver configuration")),
@@ -367,7 +366,9 @@ class DNSSettings(Setup, HelpableScreen):
 			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
 			self["introduction"] = StaticText(introduction)
 		elif config.usage.dns.value == "staticip":
-			self["introduction"] = StaticText(_("%s\n\nYou can use the DNS provided by other servers in Static IP Router.\n\nTo change DNS manually, delete DNS 2 with BLUE button (do not delete DNS 1), press YELLOW button and start editing from DNS 1.") % introduction)
+			self["key_yellow"].setText(_("Add DNS"))
+			self["key_blue"].setText(_("Remove DNS"))
+			self["introduction"] = StaticText(_("%s\n\nYou can use the DNS provided by other servers in Static IP Router.\n\nIf you add or remove DNS, start editing the DNS 1 first") % introduction)
 		elif config.usage.dns.value == "dhcp-router":
 			self["introduction"] = StaticText(_("%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver.") % introduction)
 		else:
@@ -403,7 +404,6 @@ class DNSSettings(Setup, HelpableScreen):
 		self.dnsStart = len(dnsNameList)
 		for item, entry in enumerate([NoSave(ConfigIP(default=x)) for x in self.nameservers], start=1):
 			self.dnsLength = item
-			self["key_blue"].setText(_("Remove DNS") if self.dnsLength > 1 and config.usage.dns.value == "staticip" else "")
 
 	def keySave(self):
 		self.RefreshNameServerUsed()
@@ -442,24 +442,17 @@ class DNSSettings(Setup, HelpableScreen):
 
 	def addDNServer(self):
 		if config.usage.dns.value == "staticip":
-			if self.dnsLength == 1:
-				iNetwork.addNameserver([0, 0, 0, 0])
-				self.nameservers = [[0, 0, 0, 0]]
-				self["key_blue"].setText(_("Remove DNS"))
+			iNetwork.addNameserver([0, 0, 0, 0])
 			self.createSetup()
 
 	def removeDNServer(self):
 		if config.usage.dns.value == "staticip":
 			index = self["config"].getCurrentIndex() - self.dnsStart
-			if self.dnsLength == 1:
-				iNetwork.addNameserver([0, 0, 0, 0])  # remove always self.dnsLength > 1 or add if == 1
-			else:
-				if _("DNS server name") not in self["config"].getCurrent():
-					del self.nameservers[index]
+			if _("DNS server name") not in self["config"].getCurrent():
+				del self.nameservers[index]
 			self.createSetup()
 			if index == self.dnsLength:
 				index -= 1
-			self["config"].setCurrentIndex(self.dnsStart + index)
 
 	def keyMenu(self):
 		Setup.keyMenu(self)
