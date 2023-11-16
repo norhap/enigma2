@@ -275,6 +275,7 @@ class LogManager(Screen):
 			from enigma import eConsoleAppContainer
 			eConsoleAppContainer().execute("rm -f " + config.crash.debugPath.value + "*")
 			sleep(0.3)
+			self["list"].changeDir(self.defaultDir)
 			self["LogsSize"].update(config.crash.debugPath.value)
 			self["key_red"].setText("")
 			self["key_green"].setText("")
