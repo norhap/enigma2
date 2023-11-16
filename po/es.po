@@ -5551,7 +5551,7 @@ msgid "Rating undefined"
 msgstr "Clasificación indefinida"
 
 msgid "Really close without saving settings?"
-msgstr "Cerrar sin guardar configuración?"
+msgstr "¿Cerrar sin guardar configuración?"
 
 msgid "Delete finished timers?"
 msgstr "¿Eliminar temporizadores finalizados?"

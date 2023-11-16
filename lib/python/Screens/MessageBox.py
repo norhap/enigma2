@@ -3,7 +3,7 @@ from enigma import eTimer
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.Pixmap import MultiPixmap, Pixmap
+from Components.Pixmap import MultiPixmap
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen, ScreenSummary
@@ -86,22 +86,6 @@ class MessageBox(Screen, HelpableScreen):
 		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
 		if typeIcon:
 			self["icon"] = MultiPixmap()  # These line can go with new skins that only use self["icon"]...
-			self["QuestionPixmap"] = Pixmap()  # These lines are to be compatible with the old Pixmaps.
-			self["QuestionPixmap"].hide()
-			self["InfoPixmap"] = Pixmap()
-			self["InfoPixmap"].hide()
-			self["WarningPixmap"] = Pixmap()
-			self["WarningPixmap"].hide()
-			self["ErrorPixmap"] = Pixmap()
-			self["ErrorPixmap"].hide()
-			if typeIcon == self.TYPE_YESNO:
-				self["QuestionPixmap"].show()
-			elif typeIcon == self.TYPE_WARNING:
-				self["WarningPixmap"].show()
-			elif typeIcon == self.TYPE_INFO:
-				self["InfoPixmap"].show()
-			elif typeIcon == self.TYPE_ERROR:
-				self["ErrorPixmap"].show()
 		if timeout_default:  # Process legacy timeout_default argument.
 			timeoutDefault = timeout_default
 		self.timeoutDefault = timeoutDefault
