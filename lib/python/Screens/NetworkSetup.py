@@ -685,7 +685,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.extended = None
 		self.applyConfigRef = None
 		self.finished_cb = None
-		self.oktext = _("Press OK on your remote control to continue.")
+		self.oktext = _("Press OK to confirm.")
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
 
 		self.createConfig()
@@ -1050,7 +1050,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self["statuspic"] = MultiPixmap()
 		self["statuspic"].hide()
 		self["devicepic"] = MultiPixmap()
-		self.oktext = _("Press OK on your remote control to continue.")
+		self.oktext = _("Press OK to confirm.")
 		self.reboottext = _("Your receiver will restart after pressing OK on your remote control.")
 		self.errortext = _("No working wireless network interface found.\n Please verify that you have attached a compatible WLAN device or enable your local network interface.")
 		self.missingwlanplugintxt = _("The wireless LAN plugin is not installed!\nPlease install it.")
