@@ -1711,7 +1711,7 @@ msgid "Copy"
 msgstr "Copiar"
 
 msgid "Copy To Stream Relay"
-msgstr "Copiar a retransmisión de stream"
+msgstr "Copiar a lista Stream Relay"
 
 msgid "Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location."
 msgstr "Los volcados del núcleo son útiles para los desarrolladores en caso de un bloqueo FATAL SIGNAL en el código C++. El tamaño típico de volcado del núcleo es de 110 MB, por lo tanto, ajuste el espacio máximo utilizado y elija la ubicación adecuada."
@@ -5043,10 +5043,10 @@ msgid "Please add titles to the compilation."
 msgstr "Añadir títulos a la compilación."
 
 msgid "Play service with Stream Relay"
-msgstr "Canal con reproducción retransmisión de stream"
+msgstr "Canal con reproducción Stream Relay"
 
 msgid "Play service without Stream Relay"
-msgstr "Canal sin reproducción retransmisión de stream"
+msgstr "Canal sin reproducción Stream Relay"
 
 msgid "Please change recording endtime"
 msgstr "Cambiar el tiempo final de la grabación"
@@ -7254,10 +7254,13 @@ msgid "Stream"
 msgstr "Transmisión"
 
 msgid "Stream Relay port"
-msgstr "Puerto retransmisión de stream"
+msgstr "Puerto Stream Relay"
 
 msgid "Stream Relay URL"
-msgstr "URL retransmisión de stream"
+msgstr "URL Stream Relay"
+
+msgid "Stream Relay switch delay"
+msgstr "Retardo del cambio en Stream Relay"
 
 msgid "Stream request"
 msgstr "Solicitud de stream"
@@ -7515,7 +7518,7 @@ msgstr ""
 "Seleccione un directorio que permita escritura en su lugar."
 
 msgid "Server IP address used to decrypt channels that can only be done via Stream Relay."
-msgstr "Dirección IP del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante retransmisión de stream."
+msgstr "Dirección IP del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante Stream Relay."
 
 msgid ""
 "%s connected successfully.\n"
@@ -7572,7 +7575,7 @@ msgstr ""
 "Test Pattern por TigerDave - www.tigerdave.com/ht_menu.htm"
 
 msgid "Server port used to decrypt channels that can only be done using Stream Relay."
-msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante retransmisión de stream."
+msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante Stream Relay."
 
 msgid "The PIN code you entered is wrong."
 msgstr "El código PIN introducido es incorrecto."
@@ -12986,6 +12989,9 @@ msgstr "Seleccione el bouquet para grabar en"
 
 msgid "Select channel to record on"
 msgstr "Seleccione el canal para grabar en"
+
+msgid "Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
+msgstr "Seleccione el retraso que se utilizará al cerrar un canal Stream Relay antes de reasignar el sintonizador a otro canal. El uso de '0' sólo se recomienda para cajas con múltiples sintonizadores de satélite."
 
 msgid "Select the count of the last saved searchlogs (min=5 max=20)"
 msgstr "Seleccione el recuento de los últimos registros de búsqueda guardados (mínimo=5 máximo=20)"
