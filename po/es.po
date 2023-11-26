@@ -6685,6 +6685,9 @@ msgstr "Mostrar menú de selección de bouquet"
 msgid "Show detailed event info"
 msgstr "Mostrar info detallada del evento"
 
+msgid "Show disabled timers"
+msgstr "Mostrar temporizadores deshabilitados"
+
 msgid "Show event details"
 msgstr "Mostrar detalles del evento"
 
