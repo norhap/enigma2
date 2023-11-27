@@ -25,7 +25,7 @@ from Components.Sources.Event import Event
 from Components.Input import Input
 # profile("ChannelSelection.py 3")
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
-from Components.SystemInfo import BoxInfo, SystemInfo
+from Components.SystemInfo import SystemInfo
 from Screens.InputBox import PinInput
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
@@ -46,6 +46,7 @@ from Screens.EventView import EventViewEPGSelect
 from os import listdir, remove, rename
 from os.path import isfile
 from time import time
+from process import ProcessList
 
 profile("ChannelSelection.py after imports")
 
@@ -173,6 +174,11 @@ class ChannelContextMenu(Screen):
 		inAlternativeList = current_root and 'FROM BOUQUET "alternatives' in current_root.getPath()
 		self.inBouquet = csel.getMutableList() is not None
 		haveBouquets = config.usage.multibouquet.value
+		streamrelay = ""  # show items only if there are icam processes
+		API_STREAMRELAY = ["oscam-emu",]  # add more cams
+		for cam in API_STREAMRELAY:
+			streamrelay = str(ProcessList().named(cam)).strip("[]")
+			break
 		from Components.ParentalControl import parentalControl
 		self.parentalControl = parentalControl
 		self.parentalControlEnabled = config.ParentalControl.servicepin[0].value and config.ParentalControl.servicepinactive.value
@@ -208,7 +214,7 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.toggleVBI), level=1)
 						else:
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
-						if BoxInfo.getItem("StreamRelay"):
+						if streamrelay:
 							if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
 								append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay), level=1)
 							else:
@@ -258,7 +264,7 @@ class ChannelContextMenu(Screen):
 					if haveBouquets:
 						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
-							if BoxInfo.getItem("StreamRelay"):
+							if streamrelay:
 								append_when_current_valid(current, menu, (_("Copy To Stream Relay"), self.copyCurrentToStreamRelay))
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						append_when_current_valid(current, menu, (_("Remove all new found flags"), self.removeAllNewFoundFlags), level=0)
