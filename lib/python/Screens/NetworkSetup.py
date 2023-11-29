@@ -339,7 +339,7 @@ class DNSSettings(Setup, HelpableScreen):
 		self.createSetup()
 		strdns = str(self.backupNameserverList)
 		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
-		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2"):
+		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
 			if fileContains("/etc/network/interfaces", "iface eth0 inet static") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
@@ -359,6 +359,8 @@ class DNSSettings(Setup, HelpableScreen):
 				servername = _("OpenDNS")
 			elif "220. 222" in dns:
 				servername = _("OpenDNS-2")
+			elif "103. 86" in dns:
+				servername = _("NordVPN")
 			else:
 				servername = _("Cloudflare")
 		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns)
@@ -389,6 +391,8 @@ class DNSSettings(Setup, HelpableScreen):
 			self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 220, 222])), NoSave(ConfigIP(default=[208, 67, 222, 220]))]
 		elif config.usage.dns.value == 'cloudflare':
 			self.nameserverEntries = [NoSave(ConfigIP(default=[1, 1, 1, 1])), NoSave(ConfigIP(default=[1, 0, 0, 1]))]
+		elif config.usage.dns.value == 'nordvpn':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[103, 86, 96, 100])), NoSave(ConfigIP(default=[103, 86, 99, 100]))]
 		else:
 			self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
 		self.list = []
