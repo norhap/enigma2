@@ -73,7 +73,7 @@ config.misc.graph_mepg.show_timelines = ConfigSelection(default="all", choices=[
 config.misc.graph_mepg.servicename_alignment = ConfigSelection(default=possibleAlignmentChoices[0][0], choices=possibleAlignmentChoices)
 config.misc.graph_mepg.extension_menu = ConfigYesNo(default=False)
 config.misc.graph_mepg.show_record_clocks = ConfigYesNo(default=True)
-config.misc.graph_mepg.show_disabled_timers = ConfigYesNo(default=False)
+config.misc.graph_mepg.show_disabled_timers = ConfigYesNo(default=True)
 config.misc.graph_mepg.zap_blind_bouquets = ConfigYesNo(default=True)
 
 listscreen = config.misc.graph_mepg.default_mode.value
@@ -585,7 +585,6 @@ class EPGList(GUIComponent):
 					bgpng = self.disEvPix
 					foreColor = self.foreColorDis
 					backColor = self.backColorDis
-
 				elif stime <= now and now < stime + duration:
 					bgpng = self.nowEvPix
 				elif currentservice:

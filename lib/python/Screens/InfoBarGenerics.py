@@ -155,7 +155,10 @@ class InfoBarStreamRelay:
 
 	FILENAME = "/etc/enigma2/whitelist_streamrelay"
 
-	def __init__(self) -> None:
+	def __init__(self):
+		self.reload()
+
+	def reload(self):
 		self.streamRelay = fileReadLines(self.FILENAME, default=[], source=self.__class__.__name__)
 
 	def check(self, nav, service):
@@ -182,7 +185,7 @@ class InfoBarStreamRelay:
 					self.streamRelay.remove(servicestring)
 				else:
 					self.streamRelay.append(servicestring)
-					if nav.getCurrentlyPlayingServiceReference() == service:  # if nav.getCurrentlyPlayingServiceReference():
+					if nav.getCurrentlyPlayingServiceReference() == service:
 						nav.restartService()
 				self.write()
 
@@ -195,8 +198,10 @@ class InfoBarStreamRelay:
 			else:
 				playrefmod = playrefstring
 			playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
-			print(f"[{self.__class__.__name__} Play service {playref.toString()} via streamrelay")
-		return playref
+			print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
+			playref.setAlternativeUrl(playrefstring)
+			return (playref, True)
+		return (playref, False)
 
 	def checkService(self, service):
 		return service and service.toString() in self.streamRelay

@@ -1717,11 +1717,9 @@ def readSkin(screen, skin, names, desktop):
 		# widgets (source->renderer).
 		widgetName = widget.attrib.get("name")
 		widgetSource = widget.attrib.get("source")
-		widgetConnection = widget.attrib.get("connection")
-		widgetClass = widget.attrib.get("addon")
-		source = None
-		if widgetName is None and widgetSource is None and widgetClass is None:
-			raise SkinError("The widget has no name, no source and no addon type specified")
+		if widgetName is None and widgetSource is None:
+			raise SkinError("The widget has no name and no source")
+			return
 		if widgetName:
 			# print(f"[Skin] DEBUG: Widget name='{widgetName}'.")
 			usedComponents.add(widgetName)
@@ -1757,10 +1755,7 @@ def readSkin(screen, skin, names, desktop):
 				raise SkinError(f"The source '{widgetSource}' was not found in screen '{myName}'")
 			widgetRenderer = widget.attrib.get("render")
 			if not widgetRenderer:
-				if widgetSource:
-					raise SkinError(f"For source '{widgetSource}' a renderer must be defined with a 'render=' attribute")
-				elif widgetConnection:
-					raise SkinError(f"For connection '{widgetConnection}' a renderer must be defined with a 'render=' attribute")
+				raise SkinError(f"For source '{widgetSource}' a renderer must be defined with a 'render=' attribute")
 			for converter in widget.findall("convert"):
 				converterType = converter.get("type")
 				assert converterType, "[Skin] The 'convert' tag needs a 'type' attribute!"
@@ -1787,32 +1782,11 @@ def readSkin(screen, skin, names, desktop):
 			except ImportError as err:
 				raise SkinError(f"Renderer '{widgetRenderer}' not found")
 			renderer = rendererClass()  # Instantiate renderer.
-			if source:
-				renderer.connect(source)  # Connect to source.
+			renderer.connect(source)  # Connect to source.
+			renderer.label_name = widgetSource or widgetName  # allows that it can be checked a label exists in the skin
 			attributes = renderer.skinAttributes = []
 			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source"))
 			screen.renderer.append(renderer)
-		elif widgetClass:
-			try:
-				addonClass = my_import(".".join(("Components", "Addons", widgetClass))).__dict__.get(widgetClass)
-			except ImportError:
-				raise SkinError("GUI Addon '%s' not found" % widgetClass)
-
-			if not widgetConnection:
-				raise SkinError(f"The widget is from addon type: {widgetClass} , but no connection is specified.")
-
-			i = 0
-			widgetClassNameBase = f"{name}_{widgetClass}_{widgetConnection}_"
-			while f"{widgetClassNameBase}{str(i)}" in usedComponents:
-				i += 1
-			widgetClassName = f"{widgetClassNameBase}{str(i)}"
-
-			usedComponents.add(widgetClassName)
-
-			screen[widgetClassName] = addonClass()
-			screen[widgetClassName].connectRelatedElement(widgetConnection, screen)
-			screen[widgetClassName].skinAttributes = []
-			collectAttributes([], widget, context, skinPath, ignore=("addon",))
 
 	def processApplet(widget, context):
 		try:
@@ -1859,9 +1833,6 @@ def readSkin(screen, skin, names, desktop):
 				continue
 			objecttypes = widget.attrib.get("objectTypes", "").split(",")
 			if len(objecttypes) > 1 and (objecttypes[0] not in screen.keys() or not [x for x in objecttypes[1:] if x == screen[objecttypes[0]].__class__.__name__]):
-				continue
-			objecttypesinverted = widget.attrib.get("objectTypesInverted", "").split(",")
-			if len(objecttypesinverted) > 1 and (objecttypesinverted[0] not in list(screen.keys()) or [i for i in objecttypesinverted[1:] if i == screen[objecttypesinverted[0]].__class__.__name__]):
 				continue
 			includes = widget.attrib.get("includes")
 			if includes and not [x for x in includes.split(",") if x in screen.keys()]:
@@ -1932,25 +1903,6 @@ def readSkin(screen, skin, names, desktop):
 # a simple scan of the XML and no skin processing is performed.
 #
 def findWidgets(name):
-	def recurseNamelessPanel(panel):
-		widgets = panel.findall("widget")
-		if widgets is not None:
-			for widget in widgets:
-				name = widget.get("name", None)
-				if name is not None:
-					widgetSet.add(name)
-				source = widget.get("source", None)
-				if source is not None:
-					widgetSet.add(source)
-		panels = panel.findall("panel")
-		if panels is not None:
-			for childPanel in panels:
-				name = childPanel.get("name", None)
-				if name:
-					widgetSet.update(findWidgets(name))
-				else:
-					recurseNamelessPanel(childPanel)
-
 	widgetSet = set()
 	element, path = domScreens.get(name, (None, None))
 	if element is not None:
@@ -1963,18 +1915,12 @@ def findWidgets(name):
 				source = widget.get("source", None)
 				if source is not None:
 					widgetSet.add(source)
-				addonConnection = widget.get("connection", None)
-				if addonConnection is not None:
-					for x in addonConnection.split(","):
-						widgetSet.add(x)
 		panels = element.findall("panel")
 		if panels is not None:
 			for panel in panels:
 				name = panel.get("name", None)
 				if name:
 					widgetSet.update(findWidgets(name))
-				else:
-					recurseNamelessPanel(panel)
 	return widgetSet
 
 

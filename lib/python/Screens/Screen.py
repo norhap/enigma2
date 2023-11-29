@@ -48,7 +48,8 @@ class Screen(dict):
 		self["ScreenPath"] = StaticText()
 		self.screenPath = ""  # This is the current screen path without the title.
 		self.screenTitle = ""  # This is the current screen title without the path.
-		self.handledWidgets = []
+		self.availableLabels = []
+		self.noScreenPathSource = False
 
 	def __repr__(self):
 		return str(type(self))
@@ -120,6 +121,10 @@ class Screen(dict):
 		# DEBUG: self.alreadyShown = True
 		self.already_shown = True
 		self.instance.show()
+		if self["ScreenPath"].text and "ScreenPath" not in self.availableLabels:
+			self["Title"].text = "%s %s" % (self["ScreenPath"].text, self["Title"].text) if self["ScreenPath"].text else self["Title"].text
+			self["ScreenPath"].text = ""
+			self.noScreenPathSource = True
 		for callback in self.onShow:
 			callback()
 		for value in list(self.values()) + self.renderer:
@@ -164,7 +169,7 @@ class Screen(dict):
 		except AttributeError:
 			pass
 		self.screenTitle = title
-		if showPath and config.usage.showScreenPath.value == "large" and title:
+		if showPath and (config.usage.showScreenPath.value == "large" or self.noScreenPathSource) and title:
 			screenPath = ""
 			screenTitle = "%s > %s" % (self.screenPath, title) if self.screenPath else title
 		elif showPath and config.usage.showScreenPath.value == "small":
@@ -245,6 +250,9 @@ class Screen(dict):
 
 	def createGUIScreen(self, parent, desktop, updateonly=False):
 		for item in self.renderer:
+			label_name = item.label_name
+			if label_name:
+				self.availableLabels.append(label_name)
 			if isinstance(item, GUIComponent):
 				if not updateonly:
 					item.GUIcreate(parent)
@@ -259,7 +267,7 @@ class Screen(dict):
 					if depr:
 						print("[Screen] WARNING: OBSOLETE COMPONENT '%s' USED IN SKIN. USE '%s' INSTEAD!" % (name, depr[0]))
 						print("[Screen] OBSOLETE COMPONENT WILL BE REMOVED %s, PLEASE UPDATE!" % depr[1])
-				elif not depr and name not in self.handledWidgets:
+				elif not depr:
 					print("[Screen] Warning: Skin is missing element '%s' in %s." % (name, str(self)))
 		for item in self.additionalWidgets:
 			if not updateonly:
