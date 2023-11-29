@@ -111,7 +111,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				config.plugins.IPToSAT.enable.value = False
 				config.plugins.IPToSAT.enable.save()
 				self.session.open(TryQuitMainloop, 3)
-		if config.usage.remote_fallback_enabled.value or config.usage.remote_fallback_import.value:
+		if config.usage.remote_fallback_enabled.value:
 			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,
 				_("When enabled the timer from the fallback tuner is imported.")))
@@ -129,7 +129,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback,
 					_("URL of fallback remote receiver.")))
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value:
+		if config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Import remote receiver URL"),
 				self.avahiselect_seperate,
 				_("URL of fallback remote receiver.")))
@@ -144,7 +144,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback_import_url,
 					_("URL of fallback remote receiver.")))
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value:
+		if config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Also import at reboot/restart enigma2"),
 				config.usage.remote_fallback_import_restart,
 				_("Import channels and/or EPG from remote receiver URL when receiver or enigma2 is restarted.")))
@@ -160,6 +160,7 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Show notification when import channels was not successful"),
 				config.usage.remote_fallback_nok,
 				_("Show notification when import channels and/or EPG from remote receiver URL did not complete.")))
+		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback.value:
 			self.list.append(getConfigListEntry(_("Customize OpenWebIF settings for fallback tuner"),
 				config.usage.remote_fallback_openwebif_customize,
 				_("When enabled you can customize the OpenWebIf settings for the fallback tuner.")))
@@ -173,7 +174,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry("  %s" % _("Port"),
 					config.usage.remote_fallback_openwebif_port,
 					"%s" % _("Set the port of the OpenWebif from your fallback tuner.")))
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback.value:
 			self.list.append(getConfigListEntry(_("Alternative URLs for DVB-T/C or ATSC"),
 				config.usage.remote_fallback_alternative,
 				_("Set alternative fallback tuners for DVB-T/C or ATSC.")))
@@ -296,8 +296,6 @@ class SetupFallbacktuner(ConfigListScreen, Screen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
