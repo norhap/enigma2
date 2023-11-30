@@ -1592,7 +1592,7 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_usecache = ConfigYesNo(default=True)
 
 	config.oscaminfo = ConfigSubsection()
-	if SystemInfo["OScamIsActive"]:
+	if SystemInfo["OSCamIsActive"]:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=True)
 	else:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=False)

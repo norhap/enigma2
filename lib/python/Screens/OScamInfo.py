@@ -572,7 +572,7 @@ class OSCamInfoMenu(Screen):
 
 	def showMenu(self):
 		entr = self.buildMenu(self.menu)
-		if SystemInfo["OScamIsActive"]:
+		if SystemInfo["OSCamIsActive"]:
 			self.setTitle(_("OSCam Info - Main Menu"))
 		self["mainmenu"].l.setList(entr)
 		self["mainmenu"].moveToIndex(0)

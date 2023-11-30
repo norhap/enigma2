@@ -174,11 +174,7 @@ class ChannelContextMenu(Screen):
 		inAlternativeList = current_root and 'FROM BOUQUET "alternatives' in current_root.getPath()
 		self.inBouquet = csel.getMutableList() is not None
 		haveBouquets = config.usage.multibouquet.value
-		streamrelay = ""  # show items only if there are icam processes
-		API_STREAMRELAY = ["oscam-emu",]  # add more cams
-		for cam in API_STREAMRELAY:
-			streamrelay = str(ProcessList().named(cam)).strip("[]")
-			break
+		streamrelay = True if str(ProcessList().named("oscam-emu")).strip("[]") else False
 		from Components.ParentalControl import parentalControl
 		self.parentalControl = parentalControl
 		self.parentalControlEnabled = config.ParentalControl.servicepin[0].value and config.ParentalControl.servicepinactive.value

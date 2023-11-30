@@ -51,6 +51,7 @@ from Screens.Menu import MainMenu, mdom
 import pickle
 from sys import maxsize
 from gettext import ngettext
+from process import ProcessList
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -2437,28 +2438,19 @@ class InfoBarExtensions:
 		return _("CCcam Info")
 
 	def getOSCamInfo(self):
-		import process
-		p = process.ProcessList()
-		oscam = str(p.named("oscam")).strip("[]") or str(p.named("oscam-emu")).strip("[]")
-		if oscam:
+		if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
 			return [((boundFunction(self.getOSCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getNCamInfo(self):
-		import process
-		p = process.ProcessList()
-		ncam = str(p.named("ncam")).strip("[]")
-		if ncam:
+		if str(ProcessList().named("ncam")).strip("[]"):
 			return [((boundFunction(self.getNCam), boundFunction(self.openNCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getCCcamInfo(self):
-		import process
-		p = process.ProcessList()
-		CCcam = str(p.named("CCcam")).strip("[]")
-		if CCcam:
+		if str(ProcessList().named("CCcam")).strip("[]"):
 			return [((boundFunction(self.getCCcam), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
 		else:
 			return []
