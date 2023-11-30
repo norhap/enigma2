@@ -4065,7 +4065,7 @@ class InfoBarServiceErrorPopupSupport:
 				self.session.nav.currentlyPlayingServiceReference = None
 				self.session.nav.currentlyPlayingServiceOrGroup = None
 
-			if error == self.last_error:
+			if error == self.last_error or not self.last_error and isPluginInstalled("IPToSAT"):
 				error = None
 			else:
 				self.last_error = error
