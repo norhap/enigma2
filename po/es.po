@@ -7256,6 +7256,12 @@ msgstr "Transmisión"
 msgid "Stream Relay port"
 msgstr "Puerto Stream Relay"
 
+msgid "Stream Relay Settings"
+msgstr "Ajustes Stream Relay"
+
+msgid "Stream Relay Setup Actions"
+msgstr "Acciones Stream Relay"
+
 msgid "Stream Relay URL"
 msgstr "URL Stream Relay"
 

@@ -333,6 +333,11 @@
 		<item level="0" text="Select cardserver" description="Select a cardserver from the available list." conditional="config.misc.cardservers.value != ''">config.misc.cardservers</item>
 		<item level="0" text="Restart" description="Reset the selected devices and save changes of your config when the GREEN button is pressed.">config.misc.restarts</item>
 	</setup>
+	<setup key="StreamRelay" title="Stream Relay Settings">
+		<item level="2" text="Stream Relay URL" description="Server IP address used to decrypt channels that can only be done via Stream Relay.">config.misc.softcam_streamrelay_url</item>
+		<item level="2" text="Stream Relay port" description="Server port used to decrypt channels that can only be done using Stream Relay.">config.misc.softcam_streamrelay_port</item>
+		<item level="2" text="Stream Relay switch delay" description="Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
+	</setup>
 	<setup key="OSCamInfo" title="OSCam Info Setup">
 		<item level="0" text="Read userdata from oscam.conf" description="Read userdata from oscam.conf.">config.oscaminfo.userdatafromconf</item>
 		<if conditional="not config.oscaminfo.userdatafromconf.value">
@@ -443,9 +448,6 @@
 		<item level="2" text="Descramble receiving http streams" requires="HasOfflineDecoding" description="When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off.">config.streaming.descramble_client</item>
 		<item level="2" text="Require authentication for http streams" description="When enabled, authentication is required to watch http streams.">config.streaming.authentication</item>
 		<item level="2" text="Delay start http(s) stream" description="Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC.">config.usage.http_startdelay</item>
-		<item level="2" text="Stream Relay URL" description="Server IP address used to decrypt channels that can only be done via Stream Relay.">config.misc.softcam_streamrelay_url</item>
-		<item level="2" text="Stream Relay port" description="Server port used to decrypt channels that can only be done using Stream Relay.">config.misc.softcam_streamrelay_port</item>
-		<item level="2" text="Stream Relay switch delay" description="Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
 		<item level="2" text="Fan operation" description="Configure how the fan should operate" requires="Fan">config.usage.fan</item>
 		<item level="2" text="Fan speed" description="Configure the speed of the fan" requires="FanPWM">config.usage.fanspeed</item>
 		<item level="2" text="Wake On LAN" description="When enabled the set top box is able to wakeup on LAN" requires="WakeOnLAN">config.usage.wakeOnLAN</item>

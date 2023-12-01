@@ -144,6 +144,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<id val="cam" />
 		-->
 		<item entryID="softcam_setup" level="0" text="Softcam" weight="5"><screen module="SoftcamSetup" screen="SoftcamSetup" /></item>
+		<item key="streamrelay_settings" level="0" text="Stream Relay Settings" weight="110" requires="StreamRelay"><screen module="SoftcamSetup" screen="StreamRelaySetup" /></item>
 		<!--
 		</menu>
 		-->
