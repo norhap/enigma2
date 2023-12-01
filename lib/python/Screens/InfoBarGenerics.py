@@ -1588,7 +1588,7 @@ class InfoBarSeek:
 		return (0, -n, 0, "<< %dx" % n)
 
 	def makeStateSlowMotion(self, n):
-		return (0, 0, n, "/%d" % n)
+		return (0, 0, n, "/ %d" % n)
 
 	def isStateForward(self, state):
 		return state[1] > 1
@@ -1941,7 +1941,7 @@ class InfoBarPVRState:
 		self.force_show = force_show
 
 	def _mayShow(self):
-		if self.shown and self.seekstate != self.SEEK_STATE_PLAY:
+		if self.shown:
 			self.pvrStateDialog.show()
 		if self.shown and self.seekstate != self.SEEK_STATE_EOF:
 			self.DimmingTimer.stop()
@@ -1951,8 +1951,15 @@ class InfoBarPVRState:
 
 	def __playStateChanged(self, state):
 		playstateString = state[3]
+		playstate = playstateString.split()
+		pixmapnum = [">", '||', 'END', '>>', '<<', '/'].index(playstate[0])
 		self.pvrStateDialog["state"].setText(playstateString)
-
+		self.pvrStateDialog["statusicon"].setPixmapNum(pixmapnum)
+		self.pvrStateDialog["speed"].setText(playstate[1] if len(playstate) > 1 else "")
+		if "state" in self:
+			self["state"].setText(playstateString)
+			self["statusicon"].setPixmapNum(pixmapnum)
+			self["speed"].setText(playstate[1] if len(playstate) > 1 else "")
 		# if we return into "PLAY" state, ensure that the dialog gets hidden if there will be no infobar displayed
 		if not config.usage.show_infobar_on_skip.value and self.seekstate == self.SEEK_STATE_PLAY and not self.force_show:
 			self.pvrStateDialog.hide()

@@ -9,6 +9,8 @@ from Screens.MovieSelection import MovieSelection, moveServiceFiles  # noqa: E40
 from Screens.Hotkey import InfoBarHotkey  # noqa: E402
 from Screens.Screen import Screen  # noqa: E402
 from Screens.MessageBox import MessageBox  # noqa: E402
+from Components.Label import Label
+from Components.Pixmap import MultiPixmap
 profile("LOAD:InfoBarGenerics")
 from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
@@ -50,7 +52,6 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			"ZoomOff": (self.ZoomOff, _("Zoom Off"))
 		}, prio=2, description=_("Live TV Actions"))
 		if isPluginInstalled("AutoTimer"):
-			from Components.Label import Label
 			self["key_yellow"] = Label()
 			self["key_yellow"].setText(_("AutoTimer"))
 		self.radioTV = 0
@@ -222,6 +223,10 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			"left": (self.left, (_("Scan backwards"), _("Pressing this button multiple times will increase the rate of backward scan."))),
 			"right": (self.right, (_("Scan forwards"), _("Pressing this button multiple times will increase the rate of forward scan.")))
 		}, prio=-2, description=_("Movie Player Actions"))
+
+		self["state"] = Label()
+		self["speed"] = Label()
+		self["statusicon"] = MultiPixmap()
 
 		self.allowPiP = True
 
