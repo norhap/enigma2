@@ -168,6 +168,13 @@ class InfoBarStreamRelay:
 
 	def write(self):
 		fileWriteLines(self.FILENAME, self.streamRelay, source=self.__class__.__name__)
+		references = ""
+		with open(self.FILENAME, "r") as fr:
+			references = fr.readlines()
+		with open(self.FILENAME, "w") as fw:
+			for reference in references:
+				if ":" in reference:
+					fw.write(reference)
 
 	def toggle(self, nav, service):
 		if isinstance(service, list):

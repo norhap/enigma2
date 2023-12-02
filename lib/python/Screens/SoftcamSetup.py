@@ -1,5 +1,5 @@
 from enigma import eTimer
-from os.path import isfile
+from os.path import isfile, exists
 from ServiceReference import ServiceReference
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import HelpableActionMap
@@ -171,6 +171,17 @@ class StreamRelaySetup(Setup):
 		}, prio=0, description=_("Stream Relay Setup Actions"))
 		self["removeActions"].setEnabled(False)
 
+	def removeLineBreaks(self):
+		FILENAME = "/etc/enigma2/whitelist_streamrelay"
+		references = ""
+		if exists(FILENAME):
+			with open(FILENAME, "r") as fr:
+				references = fr.readlines()
+			with open(FILENAME, "w") as fw:
+				for reference in references:
+					if ":" in reference:
+						fw.write(reference)
+
 	def layoutFinished(self):
 		Setup.layoutFinished(self)
 		self.createItems()
@@ -217,6 +228,7 @@ class StreamRelaySetup(Setup):
 			index = self["config"].getCurrentIndex()
 			self.createItems()
 			self["config"].setCurrentIndex(index)
+		self.removeLineBreaks()
 
 	def keyAddService(self):
 		def keyAddServiceCallback(*result):
@@ -227,7 +239,7 @@ class StreamRelaySetup(Setup):
 					self.services.append(serviceref)
 					self.createItems()
 					self["config"].setCurrentIndex(2)
-
+			self.removeLineBreaks()
 		from Screens.ChannelSelection import SimpleChannelSelection  # This must be here to avoid a boot loop!
 		self.session.openWithCallback(keyAddServiceCallback, SimpleChannelSelection, _("Select"), currentBouquet=True)
 
