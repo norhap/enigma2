@@ -40,7 +40,7 @@ class MessageBox(Screen, HelpableScreen):
 			elif default in (True, False):
 				self["list"].moveToIndex(0 if default else 1)
 			else:
-				print("[MessageBox] Error: The context of the default (%s) can't be determined!" % default)
+				print(f"[MessageBox] Error: The context of the default ({default}) can't be determined!")
 		else:
 			self.list = []
 			self["list"] = MenuList([])
@@ -110,7 +110,7 @@ class MessageBox(Screen, HelpableScreen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def __repr__(self):
-		return "%s(%s)" % (str(type(self)), self.text)
+		return f"{str(type(self))}({self.text})"
 
 	def layoutFinished(self):
 		if self.list:
@@ -129,7 +129,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.baseTitle = self.baseTitle % prefix
 		self.setTitle(self.baseTitle, showPath=False)
 		if self.timeout > 0:
-			print("[MessageBox] Timeout set to %d seconds." % self.timeout)
+			print(f"[MessageBox] Timeout set to {self.timeout} seconds.")
 			self.timer.start(25)
 
 	def processTimer(self):
@@ -141,7 +141,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.baseTitle = self.activeTitle
 		if self.timeout > 0:
 			if self.baseTitle:
-				self.setTitle("%s (%d)" % (self.baseTitle, self.timeout), showPath=False)
+				self.setTitle(f"{self.baseTitle} ({self.timeout})", showPath=False)
 			self.timer.start(1000)
 			self.timeout -= 1
 		else:
@@ -152,7 +152,7 @@ class MessageBox(Screen, HelpableScreen):
 				self.select()
 
 	def stopTimer(self, reason):
-		print("[MessageBox] %s" % reason)
+		print(f"[MessageBox] {reason}")
 		self.timer.stop()
 		self.timeout = 0
 		if self.baseTitle:
@@ -216,7 +216,7 @@ class MessageBoxSummary(ScreenSummary):
 		ScreenSummary.__init__(self, session, parent=parent)
 		self["text"] = StaticText(parent.text)
 		self["option"] = StaticText("")
-		if hasattr(self, "list"):
+		if hasattr(parent, "list"):
 			if self.addWatcher not in self.onShow:
 				self.onShow.append(self.addWatcher)
 			if self.removeWatcher not in self.onHide:
