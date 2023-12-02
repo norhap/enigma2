@@ -127,11 +127,14 @@ class Dish(Screen):
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
 		if SystemInfo["isRotorTuner"] and self.showdish:
+			from Screens.InfoBarGenerics import streamrelay
+			playingref = self.session.nav.getCurrentlyPlayingServiceReference()
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			data = info and info.getInfoObject(iServiceInformation.sTransponderData)
-			if not data or data == -1:
-				return
+			for serviceref in streamrelay.data.copy():
+				if not data or data == -1 or playingref.toString() in serviceref:
+					return
 			tuner_type = data.get("tuner_type")
 			if tuner_type and "DVB-S" in tuner_type:
 				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
@@ -328,10 +331,12 @@ class Dishpip(Dish, Screen):
 		if self.__state == self.STATE_SHOWN:
 			self.__toHide()
 		if ref and SystemInfo["isRotorTuner"]:
+			from Screens.InfoBarGenerics import streamrelay
 			info = eServiceCenter.getInstance().info(ref)
 			data = info and info.getInfoObject(ref, iServiceInformation.sTransponderData)
-			if not data or data == -1:
-				return
+			for serviceref in streamrelay.data.copy():
+				if not data or data == -1 or ref.toString() in serviceref:
+					return
 			tuner_type = data.get("tuner_type")
 			if tuner_type and "DVB-S" in tuner_type:
 				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
