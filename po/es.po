@@ -2908,6 +2908,9 @@ msgstr "Eliminar completo datos de temporizadores"
 msgid "Remove all other data"
 msgstr "Eliminar completo otros datos"
 
+msgid "Remove channel"
+msgstr "Eliminar canal"
+
 msgid "Remove Confirmation"
 msgstr "Confirmación Eliminar"
 
@@ -11886,8 +11889,8 @@ msgstr ""
 msgid " events\n"
 msgstr " Eventos\n"
 
-msgid "Add Channel"
-msgstr "Agregar canal"
+msgid "Add channel"
+msgstr "Añadir canal"
 
 msgid "Add 4 more Vu+ Multiboot USB slots after slot %s ?"
 msgstr "¿Añadir 4 slots USB Vu+ Multiboot más después del slot %s?"

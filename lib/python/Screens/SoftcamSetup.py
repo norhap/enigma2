@@ -206,11 +206,11 @@ class StreamRelaySetup(Setup):
 	def updateButtons(self):
 		if self.services and isinstance(self.getCurrentItem(), ConfigNothing):
 			self["removeActions"].setEnabled(True)
-			self["key_blue"].setText(_("Remove"))
+			self["key_blue"].setText(_("Remove channel"))
 		else:
 			self["removeActions"].setEnabled(False)
 			self["key_blue"].setText("")
-		self["key_yellow"].setText(_("Add service"))
+		self["key_yellow"].setText(_("Add channel"))
 
 	def keySelect(self):
 		if not isinstance(self.getCurrentItem(), ConfigNothing):
