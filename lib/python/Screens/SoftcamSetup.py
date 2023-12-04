@@ -188,12 +188,15 @@ class StreamRelaySetup(Setup):
 
 	def createItems(self):
 		self.serviceitems = []
+		green = r"\c0088ff88"
+		yellow = r"\c00ffff00"
+		listheader = _("Services Stream Relay:")
 		if self.services:
-			self.serviceitems.append(("**************************",))
+			self.serviceitems.append((f"{green}{listheader}",))
 		for serviceref in self.services:
 			service = ServiceReference(serviceref)
 			if serviceref:
-				self.serviceitems.append((service.getServiceName(), NoSave(ConfigNothing()), serviceref))
+				self.serviceitems.append((f"{yellow}{service.getServiceName()}", NoSave(ConfigNothing()), serviceref))
 		self.createSetup()
 
 	def createSetup(self):

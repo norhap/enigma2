@@ -5051,6 +5051,9 @@ msgstr "Canal con reproducción Stream Relay"
 msgid "Play service without Stream Relay"
 msgstr "Canal sin reproducción Stream Relay"
 
+msgid "Services Stream Relay:"
+msgstr "Canales Stream Relay:"
+
 msgid "Please change recording endtime"
 msgstr "Cambiar el tiempo final de la grabación"
 
