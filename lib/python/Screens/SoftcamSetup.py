@@ -170,15 +170,16 @@ class StreamRelaySetup(Setup):
 			"blue": (self.keyRemoveService, _("Play service without Stream Relay"))
 		}, prio=0, description=_("Stream Relay Setup Actions"))
 		self["removeActions"].setEnabled(False)
+		self.references = None
+		self.removeLineBreaks()
 
 	def removeLineBreaks(self):
 		FILENAME = "/etc/enigma2/whitelist_streamrelay"
-		references = ""
 		if exists(FILENAME):
 			with open(FILENAME, "r") as fr:
-				references = fr.readlines()
+				self.references = fr.readlines()
 			with open(FILENAME, "w") as fw:
-				for reference in references:
+				for reference in self.references:
 					if ":" in reference:
 						fw.write(reference)
 
@@ -191,7 +192,7 @@ class StreamRelaySetup(Setup):
 		green = r"\c0088ff88"
 		yellow = r"\c00ffff00"
 		listheader = _("Services Stream Relay:")
-		if self.services:
+		if self.services and self.references:
 			self.serviceitems.append((f"{green}{listheader}",))
 		for serviceref in self.services:
 			service = ServiceReference(serviceref)
