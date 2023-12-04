@@ -42,7 +42,6 @@ from Tools.CopyFiles import copyFiles, deleteFiles, moveFiles
 from Tools.Directories import SCOPE_HDD, resolveFilename, isPluginInstalled
 from Tools.NumericalTextInput import MAP_SEARCH_UPCASE, NumericalTextInput
 from Tools.Trashcan import TrashInfo, cleanAll, createTrashFolder, getTrashFolder
-from time import localtime, strftime
 if isPluginInstalled("BlurayPlayer"):
 	from Plugins.Extensions import BlurayPlayer
 else:
@@ -296,13 +295,6 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
-		info = serviceref and eServiceCenter.getInstance().info(serviceref)
-		if info:
-			timeCreate = strftime("%A %d %b %Y", localtime(info.getInfo(serviceref, iServiceInformation.sTimeCreate)))
-			duration = "%d min" % (info.getLength(serviceref) / 60)
-			filesize = "%d MB" % (info.getInfoObject(serviceref, iServiceInformation.sFileSize) / (1024 * 1024))
-			moviedetails = "%s  •  %s  •  %s" % (timeCreate, duration, filesize)
-			self["moviedetails"].setText(moviedetails)
 
 
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, ProtectedScreen):
@@ -344,7 +336,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["chosenletter"].visible = False
 
 		self["waitingtext"] = Label(_("Please wait... Loading list..."))
-		self["moviedetails"] = Label()
 
 		self.LivePlayTimer = eTimer()
 		self.LivePlayTimer.timeout.get().append(self.LivePlay)
@@ -1361,7 +1352,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if self.reload_home:
 				self["list"].moveToFirstMovie()
 		self["freeDiskSpace"].update()
-		title += "  •  " + self.diskinfo.getText()
 		self.setTitle(title)
 		self["waitingtext"].visible = False
 		self.createPlaylist()
