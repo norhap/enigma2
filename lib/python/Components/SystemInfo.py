@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from os import listdir
 from os.path import isfile, join
 from re import findall
 
@@ -11,13 +10,6 @@ from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck
 from Tools.StbHardware import getWakeOnLANType
 
 SystemInfo = {}
-
-
-def StreamRelay():
-	for cam in listdir("/etc/init.d"):
-		if cam.endswith("oscam-emu"):
-			return True
-	return False
 
 
 class BoxInformation:
@@ -198,7 +190,7 @@ BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
-BoxInfo.setItem("StreamRelay", StreamRelay())
+BoxInfo.setItem("StreamRelay", False)
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()

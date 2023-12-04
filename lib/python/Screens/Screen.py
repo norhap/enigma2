@@ -2,6 +2,8 @@ from enigma import eRCInput, eTimer, eWindow, getDesktop
 
 from skin import GUI_SKIN_ID, applyAllAttributes
 from Components.config import config
+from Components.SystemInfo import BoxInfo
+from process import ProcessList
 from Components.GUIComponent import GUIComponent
 from Components.Sources.Source import Source
 from Components.Sources.StaticText import StaticText
@@ -111,6 +113,7 @@ class Screen(dict):
 			self.session.close(self, *retval)
 
 	def show(self):
+		BoxInfo.setItem("StreamRelay", True if str(ProcessList().named("oscam-emu")).strip("[]") else False)
 		print("[Screen] Showing screen '%s'." % self.skinName)  # To ease identification of screens.
 		# DEBUG: if (self.shown and self.alreadyShown) or not self.instance:
 		if (self.shown and self.already_shown) or not self.instance:
