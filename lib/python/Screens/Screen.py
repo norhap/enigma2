@@ -114,7 +114,7 @@ class Screen(dict):
 
 	def show(self):
 		BoxInfo.setItem("StreamRelay", True if str(ProcessList().named("oscam-emu")).strip("[]") else False)
-		print("[Screen] Showing screen '%s'." % self.skinName)  # To ease identification of screens.
+		print(f"[Screen] Showing screen {self.skinName}.")  # To ease identification of screens.
 		# DEBUG: if (self.shown and self.alreadyShown) or not self.instance:
 		if (self.shown and self.already_shown) or not self.instance:
 			return
@@ -168,9 +168,9 @@ class Screen(dict):
 		self.screenTitle = title
 		if showPath and config.usage.showScreenPath.value == "large" and title:
 			screenPath = ""
-			screenTitle = "%s > %s" % (self.screenPath, title) if self.screenPath else title
+			screenTitle = f"{self.screenPath} > {title}" if self.screenPath else title
 		elif showPath and config.usage.showScreenPath.value == "small":
-			screenPath = "%s >" % self.screenPath if self.screenPath else ""
+			screenPath = f"{self.screenPath} >" if self.screenPath else ""
 			screenTitle = title
 		else:
 			screenPath = ""
@@ -251,7 +251,7 @@ class Screen(dict):
 				if not updateonly:
 					item.GUIcreate(parent)
 				if not item.applySkin(desktop, self):
-					print("[Screen] Warning: Skin is missing renderer '%s' in %s." % (item, str(self)))
+					print(f"[Screen] Warning: Skin is missing renderer {item} in {str(self)}.")
 		for (name, item) in self.items():
 			if isinstance(item, GUIComponent):
 				if not updateonly:
@@ -259,10 +259,10 @@ class Screen(dict):
 				depr = item.deprecationInfo
 				if item.applySkin(desktop, self):
 					if depr:
-						print("[Screen] WARNING: OBSOLETE COMPONENT '%s' USED IN SKIN. USE '%s' INSTEAD!" % (name, depr[0]))
-						print("[Screen] OBSOLETE COMPONENT WILL BE REMOVED %s, PLEASE UPDATE!" % depr[1])
+						print(f"[Screen] WARNING: OBSOLETE COMPONENT {name} USED IN SKIN. USE {depr[0]} INSTEAD!")
+						print(f"[Screen] OBSOLETE COMPONENT WILL BE REMOVED {depr[1]}, PLEASE UPDATE!")
 				elif not depr:
-					print("[Screen] Warning: Skin is missing element '%s' in %s." % (name, str(self)))
+					print(f"[Screen] Warning: Skin is missing element {name} in {str(self)}.")
 		for item in self.additionalWidgets:
 			if not updateonly:
 				item.instance = item.widget(parent)
@@ -306,8 +306,8 @@ class ScreenSummary(Screen):
 		names = parent.skinName
 		if not isinstance(names, list):
 			names = [names]
-		self.skinName = ["%sSummary" % x for x in names]
-		self.skinName += ["%s_summary" % x for x in names]  # DEBUG: Old summary screens currently kept for compatibility.
+		self.skinName = [f"{x}Summary" for x in names]
+		self.skinName += [f"{x}_summary" for x in names]  # DEBUG: Old summary screens currently kept for compatibility.
 		className = self.__class__.__name__
 		if className != "ScreenSummary" and className not in self.skinName:  # e.g. if a module uses Screens.Setup.SetupSummary the skin needs to be available directly
 			self.skinName.append(className)
