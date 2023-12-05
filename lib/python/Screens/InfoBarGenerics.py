@@ -164,7 +164,7 @@ class InfoBarStreamRelay:
 		self.streamRelay = [streamRelay for streamRelay in self.streamRelay if streamRelay]
 
 	def check(self, nav, service):
-		return (service or nav.getCurrentlyPlayingServiceReference()) and service.toString() in self.streamRelay
+		return nav.getCurrentlyPlayingServiceReference() and service.toString() in self.streamRelay
 
 	def write(self):
 		fileWriteLines(self.FILENAME, self.streamRelay, source=self.__class__.__name__)
@@ -183,16 +183,14 @@ class InfoBarStreamRelay:
 			self.streamRelay = list(set(serviceList + self.streamRelay))
 			self.write()
 		else:
-			service = service or nav.getCurrentlyPlayingServiceReference()
-			if service:
-				servicestring = service.toString()
-				if servicestring in self.streamRelay:
-					self.streamRelay.remove(servicestring)
-				else:
-					self.streamRelay.append(servicestring)
-					if nav.getCurrentlyPlayingServiceReference():
-						nav.restartService()
-				self.write()
+			servicestring = service.toString()
+			if servicestring in self.streamRelay:
+				self.streamRelay.remove(servicestring)
+			else:
+				self.streamRelay.append(servicestring)
+			if nav.getCurrentlyPlayingServiceReference():
+				nav.restartService()
+			self.write()
 
 	def getData(self):
 		return self.streamRelay
