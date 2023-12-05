@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
+import Screens.InfoBar
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigInteger
 from Components.Sources.Boolean import Boolean
@@ -127,14 +128,12 @@ class Dish(Screen):
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
 		if SystemInfo["isRotorTuner"] and self.showdish:
-			from Screens.InfoBarGenerics import streamrelay
 			playingref = self.session.nav.getCurrentlyPlayingServiceReference()
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			data = info and info.getInfoObject(iServiceInformation.sTransponderData)
-			for serviceref in streamrelay.data.copy():
-				if not data or data == -1 or playingref.toString() in serviceref:
-					return
+			if not data or data == -1 or Screens.InfoBar.InfoBar.instance.checkStreamrelay(playingref):
+				return
 			tuner_type = data.get("tuner_type")
 			if tuner_type and "DVB-S" in tuner_type:
 				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
@@ -331,12 +330,10 @@ class Dishpip(Dish, Screen):
 		if self.__state == self.STATE_SHOWN:
 			self.__toHide()
 		if ref and SystemInfo["isRotorTuner"]:
-			from Screens.InfoBarGenerics import streamrelay
 			info = eServiceCenter.getInstance().info(ref)
 			data = info and info.getInfoObject(ref, iServiceInformation.sTransponderData)
-			for serviceref in streamrelay.data.copy():
-				if not data or data == -1 or ref.toString() in serviceref:
-					return
+			if not data or data == -1 or Screens.InfoBar.InfoBar.instance.checkStreamrelay(ref):
+				return
 			tuner_type = data.get("tuner_type")
 			if tuner_type and "DVB-S" in tuner_type:
 				cur_orbpos = data.get("orbital_position", INVALID_POSITION)
