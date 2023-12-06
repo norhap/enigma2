@@ -167,14 +167,9 @@ class InfoBarStreamRelay:
 		return nav.getCurrentlyPlayingServiceReference() and service.toString() in self.streamRelay
 
 	def write(self):
-		fileWriteLines(self.FILENAME, self.streamRelay, source=self.__class__.__name__)
-		references = ""
-		with open(self.FILENAME, "r") as fr:
-			references = fr.readlines()
-		with open(self.FILENAME, "w") as fw:
-			for reference in references:
-				if ":" in reference:
-					fw.write(reference)
+		self.streamRelay.sort(key=lambda ref: (int((x := ref.split(":"))[6], 16), int(x[5], 16), int(x[4], 16), int(x[3], 16)))
+		with open(self.FILENAME, 'w') as whitelist_streamrelay:
+			whitelist_streamrelay.write('\n'.join(self.streamRelay))
 
 	def toggle(self, nav, service):
 		if isinstance(service, list):

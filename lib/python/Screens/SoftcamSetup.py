@@ -170,18 +170,6 @@ class StreamRelaySetup(Setup):
 			"blue": (self.keyRemoveService, _("Play service without Stream Relay"))
 		}, prio=0, description=_("Stream Relay Setup Actions"))
 		self["removeActions"].setEnabled(False)
-		self.references = None
-		self.removeLineBreaks()
-
-	def removeLineBreaks(self):
-		FILENAME = "/etc/enigma2/whitelist_streamrelay"
-		if exists(FILENAME):
-			with open(FILENAME, "r") as fr:
-				self.references = fr.readlines()
-			with open(FILENAME, "w") as fw:
-				for reference in self.references:
-					if ":" in reference:
-						fw.write(reference)
 
 	def layoutFinished(self):
 		Setup.layoutFinished(self)
@@ -192,7 +180,7 @@ class StreamRelaySetup(Setup):
 		green = r"\c0088ff88"
 		yellow = r"\c00ffff00"
 		listheader = _("Services Stream Relay:")
-		if self.services and self.references:
+		if self.services:
 			self.serviceitems.append((f"{green}{listheader}",))
 		for serviceref in self.services:
 			service = ServiceReference(serviceref)
@@ -232,7 +220,6 @@ class StreamRelaySetup(Setup):
 			index = self["config"].getCurrentIndex()
 			self.createItems()
 			self["config"].setCurrentIndex(index)
-		self.removeLineBreaks()
 
 	def keyAddService(self):
 		def keyAddServiceCallback(*result):
@@ -243,7 +230,6 @@ class StreamRelaySetup(Setup):
 					self.services.append(serviceref)
 					self.createItems()
 					self["config"].setCurrentIndex(2)
-			self.removeLineBreaks()
 		from Screens.ChannelSelection import SimpleChannelSelection  # This must be here to avoid a boot loop!
 		self.session.openWithCallback(keyAddServiceCallback, SimpleChannelSelection, _("Select"), currentBouquet=True)
 
