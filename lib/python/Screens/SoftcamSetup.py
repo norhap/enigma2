@@ -175,8 +175,25 @@ class StreamRelaySetup(Setup):
 		Setup.layoutFinished(self)
 		self.createItems()
 
+	def getOrbPos(self, sref):
+		orbpos = 0
+		orbposText = ""
+		try:
+			orbpos = int(sref.split(":")[6], 16) >> 16
+			if 1 <= orbpos <= 3600:
+				if orbpos > 1800:  # West.
+					orbpos = 3600 - orbpos
+					direction = _("W")
+				else:
+					direction = _("E")
+				orbposText = "%d.%d %s%s" % (orbpos / 10, orbpos % 10, "\u00B0", direction)
+		except:
+			pass
+		return orbpos, orbposText
+
 	def createItems(self):
 		self.serviceitems = []
+		red = r"\c00ff8888"
 		green = r"\c0088ff88"
 		yellow = r"\c00ffff00"
 		listheader = _("Services Stream Relay:")
@@ -184,8 +201,9 @@ class StreamRelaySetup(Setup):
 			self.serviceitems.append((f"{green}{listheader}",))
 		for serviceref in self.services:
 			service = ServiceReference(serviceref)
+			orbPos, orbPosText = self.getOrbPos(serviceref)
 			if serviceref:
-				self.serviceitems.append((f"{yellow}{service.getServiceName()}", NoSave(ConfigNothing()), serviceref))
+				self.serviceitems.append((f"{yellow}{service.getServiceName()}    {red}{orbPosText}", NoSave(ConfigNothing()), serviceref, orbPos))
 		self.createSetup()
 
 	def createSetup(self):
