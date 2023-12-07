@@ -261,16 +261,15 @@ class Navigation:
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 						self.retryServicePlayTimer.start(500, True)
-				elif SystemInfo["FbcTunerPowerAlwaysOn"] and SystemInfo["FCCactive"]:
+				elif SystemInfo["FbcTunerPowerAlwaysOn"]:
 					if oldref and ("://" in oldref.getPath() or streamrelay.checkService(oldref)):
-						print("[Navigation] FCC active -> FTA channel with or without active stream relay")  # stop and restart service with timer
+						print("[Navigation] Zap any service with SR or not SR with FCC active or not active and any config Mode tuner FBC")  # stop and restart service with timer
 						self.currentlyPlayingServiceReference = None
 						self.currentlyPlayingServiceOrGroup = None
 						self.pnav.stopService()
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
-						self.retryServicePlayTimer.start(500, True)
-						return 0
+						self.retryServicePlayTimer.start(3000, True)
 				self.skipServiceReferenceReset = False
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:
 					self.isCurrentServiceStreamRelay = True
