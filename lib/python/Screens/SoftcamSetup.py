@@ -11,6 +11,7 @@ from Screens.InfoBarGenerics import streamrelay
 from Tools.camcontrol import CamControl
 from Tools.Directories import isPluginInstalled
 from Tools.GetEcmInfo import GetEcmInfo
+from process import ProcessList
 
 
 class SoftcamSetup(Setup):
@@ -220,7 +221,8 @@ class StreamRelaySetup(Setup):
 		else:
 			self["removeActions"].setEnabled(False)
 			self["key_blue"].setText("")
-		self["key_yellow"].setText(_("Add channel"))
+		if str(ProcessList().named("oscam-emu")).strip("[]"):
+			self["key_yellow"].setText(_("Add channel"))
 
 	def keySelect(self):
 		if not isinstance(self.getCurrentItem(), ConfigNothing):
@@ -240,16 +242,17 @@ class StreamRelaySetup(Setup):
 			self["config"].setCurrentIndex(index)
 
 	def keyAddService(self):
-		def keyAddServiceCallback(*result):
-			if result:
-				service = ServiceReference(result[0])
-				serviceref = str(service)
-				if serviceref not in self.services:
-					self.services.append(serviceref)
-					self.createItems()
-					self["config"].setCurrentIndex(2)
-		from Screens.ChannelSelection import SimpleChannelSelection  # This must be here to avoid a boot loop!
-		self.session.openWithCallback(keyAddServiceCallback, SimpleChannelSelection, _("Select"), currentBouquet=True)
+		if str(ProcessList().named("oscam-emu")).strip("[]"):
+			def keyAddServiceCallback(*result):
+				if result:
+					service = ServiceReference(result[0])
+					serviceref = str(service)
+					if serviceref not in self.services:
+						self.services.append(serviceref)
+						self.createItems()
+						self["config"].setCurrentIndex(2)
+			from Screens.ChannelSelection import SimpleChannelSelection  # This must be here to avoid a boot loop!
+			self.session.openWithCallback(keyAddServiceCallback, SimpleChannelSelection, _("Select"), currentBouquet=True)
 
 	def keySave(self):
 		streamrelay.data = self.services

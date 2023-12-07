@@ -25,7 +25,7 @@ from Components.Sources.Event import Event
 from Components.Input import Input
 # profile("ChannelSelection.py 3")
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
-from Components.SystemInfo import SystemInfo, BoxInfo
+from Components.SystemInfo import SystemInfo
 from Screens.InputBox import PinInput
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.MessageBox import MessageBox
@@ -46,6 +46,7 @@ from Screens.EventView import EventViewEPGSelect
 from os import listdir, remove, rename
 from os.path import isfile
 from time import time
+from process import ProcessList
 
 profile("ChannelSelection.py after imports")
 
@@ -223,7 +224,7 @@ class ChannelContextMenu(Screen):
 						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
 							append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay), level=1)
 						else:
-							if BoxInfo.getItem("StreamRelay"):
+							if str(ProcessList().named("oscam-emu")).strip("[]"):
 								if SystemInfo["FbcTunerPowerAlwaysOn"] and not config.servicelist.startupservice.value == current.toString() or not SystemInfo["FbcTunerPowerAlwaysOn"]:
 									append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
@@ -271,7 +272,7 @@ class ChannelContextMenu(Screen):
 					if haveBouquets:
 						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
-							if BoxInfo.getItem("StreamRelay"):
+							if str(ProcessList().named("oscam-emu")).strip("[]"):
 								append_when_current_valid(current, menu, (_("Copy To Stream Relay"), self.copyCurrentToStreamRelay))
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						append_when_current_valid(current, menu, (_("Remove all new found flags"), self.removeAllNewFoundFlags), level=0)
