@@ -22,7 +22,6 @@ from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer
 from Components.SystemInfo import MODEL
-import subprocess as commands
 from Components.Console import Console
 from Screens.Standby import TryQuitMainloop
 from random import Random
@@ -586,6 +585,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		self.createConfig()
 
 	def createConfig(self):
+		self.commands = []
 		self.list = []
 		self.IPv6Entry = getConfigListEntry(_("IPv6 support"), self.IPv6ConfigEntry)
 		self.list.append(self.IPv6Entry)
@@ -644,7 +644,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 
 	def inetdRestart(self):
 		if fileExists("/etc/init.d/inetd.busybox"):
-			commands.append('/etc/init.d/inetd.busybox restart')
+			self.commands.append('/etc/init.d/inetd.busybox restart')
 
 	def keySave(self):
 		enable_ipv6 = "/etc/enigma2/ipv6"
@@ -2071,23 +2071,24 @@ class NetworkFtp(NSCommon, Screen):
 		self.Console = Console()
 		self.onLayoutFinish.append(self.updateService)
 		self.reboot_at_end = False
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
 
 	def FtpStartStop(self):
 		if not fileExists('/etc/pam.d/vsftpd'):
-			commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
+			self.commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
 		if fileExists('/etc/pam.d/vsftpd'):
-			commands.append('killall vsftpd ; mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('killall vsftpd ; mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateFtp(self):
 		if fileExists('/etc/pam.d/vsftpd'):
-			commands.append('mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
+			self.commands.append('mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
 		else:
-			commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def updateService(self):
 		import process
@@ -2325,6 +2326,7 @@ class NetworkZeroTier(NSCommon, Screen):
 		self.service_name = 'zerotier'
 		self.onLayoutFinish.append(self.InstallCheck)
 		self.reboot_at_end = False
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
@@ -2335,10 +2337,10 @@ class NetworkZeroTier(NSCommon, Screen):
 	def ZeroTierStartStop(self):
 		if fileExists('/etc/init.d/zerotier'):
 			if self.my_zerotier_run:
-				commands.append('/etc/init.d/zerotier stop')
+				self.commands.append('/etc/init.d/zerotier stop')
 			else:
-				commands.append('/etc/init.d/zerotier start')
-			self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+				self.commands.append('/etc/init.d/zerotier start')
+			self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateZeroTier(self):
 		if ServiceIsEnabled('zerotier'):
@@ -2423,6 +2425,7 @@ class NetworkSamba(NSCommon, Screen):
 		self.service_name = 'samba-base'
 		self.onLayoutFinish.append(self.InstallCheck)
 		self.reboot_at_end = True
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
@@ -2432,19 +2435,19 @@ class NetworkSamba(NSCommon, Screen):
 
 	def SambaStartStop(self):
 		if not self.my_Samba_run:
-			commands.append('/etc/init.d/samba.sh start')
+			self.commands.append('/etc/init.d/samba.sh start')
 		elif self.my_Samba_run:
-			commands.append('/etc/init.d/samba.sh stop')
-			commands.append('killall nmbd')
-			commands.append('killall smbd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('/etc/init.d/samba.sh stop')
+			self.commands.append('killall nmbd')
+			self.commands.append('killall smbd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateSamba(self):
 		if fileExists('/etc/rc2.d/S20samba.sh'):
-			commands.append('update-rc.d -f samba.sh remove')
+			self.commands.append('update-rc.d -f samba.sh remove')
 		else:
-			commands.append('update-rc.d -f samba.sh defaults')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('update-rc.d -f samba.sh defaults')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def updateService(self):
 		import process
@@ -2519,6 +2522,7 @@ class NetworkTelnet(NSCommon, Screen):
 		self.my_telnet_run = False
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'green': self.TelnetStartStop, 'yellow': self.activateTelnet})
 		self.reboot_at_end = False
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
@@ -2526,17 +2530,17 @@ class NetworkTelnet(NSCommon, Screen):
 	def TelnetStartStop(self):
 		if fileExists('/bin/busybox.nosuid'):
 			if self.my_telnet_run:
-				commands.append('killall telnetd ; rm -f /usr/sbin/telnetd')
+				self.commands.append('killall telnetd ; rm -f /usr/sbin/telnetd')
 			else:
-				commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
-			self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+				self.commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
+			self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateTelnet(self):
 		if fileExists('/usr/sbin/telnetd'):
-			commands.append('rm -f /usr/sbin/telnetd')
+			self.commands.append('rm -f /usr/sbin/telnetd')
 		else:
-			commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def updateService(self):
 		import process
