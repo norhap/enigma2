@@ -35,13 +35,14 @@ from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
 from Tools.ASCIItranslit import legacyEncode
-from Tools.Directories import fileExists, fileWriteLine, fileReadLines, fileWriteLines, getRecordingFilename, moveFiles, isPluginInstalled
+from Tools.Directories import fileExists, fileWriteLine, fileReadLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
 from time import time, localtime, strftime
 from os.path import exists, isfile, splitext, join
 from os import listdir, remove
+from re import match
 from bisect import insort
 import itertools
 import datetime
@@ -160,58 +161,61 @@ class InfoBarStreamRelay:
 		self.reload()
 
 	def reload(self):
-		self.streamRelay = fileReadLines(self.FILENAME, default=[], source=self.__class__.__name__)
-		self.streamRelay = [streamRelay for streamRelay in self.streamRelay if streamRelay]
+		data = fileReadLines(self.FILENAME, default=[], source=self.__class__.__name__)
+		self.__services = self.__sanitizeData(data)
+
+	def __sanitizeData(self, data: list):
+		return list(set([match(r"([0-9A-F]+:){10}", line.strip()).group(0) for line in data if line and match(r"^(?:[0-9A-F]+:){10}", line.strip())]))
 
 	def check(self, nav, service):
-		return nav.getCurrentlyPlayingServiceReference() and service.toString() in self.streamRelay
+		return nav.getCurrentlyPlayingServiceReference() and service.toCompareString() in self.__services
 
 	def write(self):
-		self.streamRelay.sort(key=lambda ref: (int((x := ref.split(":"))[6], 16), int(x[5], 16), int(x[4], 16), int(x[3], 16)))
+		self.__services.sort(key=lambda ref: (int((x := ref.split(":"))[6], 16), int(x[5], 16), int(x[4], 16), int(x[3], 16)))
 		with open(self.FILENAME, 'w') as whitelist_streamrelay:
-			whitelist_streamrelay.write('\n'.join(self.streamRelay))
+			whitelist_streamrelay.write('\n'.join(self.__services))
 
 	def toggle(self, nav, service):
 		if isinstance(service, list):
 			serviceList = service
-			serviceList = [service.toString() for service in serviceList]
-			self.streamRelay = list(set(serviceList + self.streamRelay))
+			serviceList = [service.toCompareString() for service in serviceList]
+			self.__services = list(set(serviceList + self.__services))
 			self.write()
 		else:
-			servicestring = service.toString()
-			if servicestring in self.streamRelay:
-				self.streamRelay.remove(servicestring)
+			servicestring = service.toCompareString()
+			if servicestring in self.__services:
+				self.__services.remove(servicestring)
 			else:
-				self.streamRelay.append(servicestring)
+				self.__services.append(servicestring)
 			if nav.getCurrentlyPlayingServiceReference():
 				nav.restartService()
 			self.write()
 
-	def getData(self):
-		return self.streamRelay
+	def __getData(self):
+		return self.__services
 
-	def setData(self, value):
-		self.streamRelay = value
+	def __setData(self, value):
+		self.__services = value
 		self.write()
 
-	data = property(getData, setData)
+	data = property(__getData, __setData)
 
 	def streamrelayChecker(self, playref):
-		playrefstring = playref.toString()
-		if "%3a//" not in playrefstring and playrefstring in self.streamRelay:
+		playrefstring = playref.toCompareString()
+		if "%3a//" not in playrefstring and playrefstring in self.__services:
 			url = f'http://{".".join("%d" % d for d in config.misc.softcam_streamrelay_url.value)}:{config.misc.softcam_streamrelay_port.value}/'
 			if "127.0.0.1" in url:
 				playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
 			else:
 				playrefmod = playrefstring
 			playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
-			print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
+			print(f"[{self.__class__.__name__}] Play service {playref.toCompareString()} via streamrelay")
 			playref.setAlternativeUrl(playrefstring)
 			return (playref, True)
 		return (playref, False)
 
 	def checkService(self, service):
-		return service and service.toString() in self.streamRelay
+		return service and service.toCompareString() in self.__services
 
 
 streamrelay = InfoBarStreamRelay()
