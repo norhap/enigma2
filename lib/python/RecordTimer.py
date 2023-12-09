@@ -581,7 +581,7 @@ class RecordTimer(Timer):
 		return self.timer_list + self.fallback_timer_list
 
 	def getDisabledTimers(self):
-		return self.processed_timers # TODO add  fallback processed timers too
+		return self.processed_timers  # TODO add fallback processed timers too
 
 	def isInTimer(self, eventid, begin, duration, service, disabledTimers=False):
 		returnValue = None
