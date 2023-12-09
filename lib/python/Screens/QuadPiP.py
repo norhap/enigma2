@@ -2,7 +2,6 @@ from Screens.Screen import Screen
 from enigma import ePoint, eSize, eServiceCenter, getBestPlayableServiceReference, eServiceReference
 from Components.VideoWindow import VideoWindow
 from Screens.InfoBarGenerics import streamrelay
-from Screens.Screen import Screen
 
 
 class QuadPiP(Screen):
