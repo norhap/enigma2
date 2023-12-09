@@ -95,7 +95,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				version = open("/etc/issue").readlines()[-2].split()[1]
 
 				# do we have an entry for this version
-				if (version in status or 'all' in status) and (machine in status[version]['machines'] or 'all' in status[version]['machines']):
+				if (version in status or 'all' in status) and ('machine' in status[version]['machines'] or 'all' in status[version]['machines']):
 					if 'abort' in status[version]:
 						abort = status[version]['abort']
 					if 'from' in status[version]:

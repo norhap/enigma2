@@ -16,7 +16,7 @@ class QuadPiP(Screen):
 		self.skinName = "PictureInPicture"
 
 	def LayoutFinished(self):
-		#self["video"].instance.setAdjustPosition(False)
+		# self["video"].instance.setAdjustPosition(False)
 		self.onLayoutFinish.remove(self.LayoutFinished)
 		x = self.pos[0]
 		y = self.pos[1]
