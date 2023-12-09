@@ -9,8 +9,8 @@ from Screens.MovieSelection import MovieSelection, moveServiceFiles  # noqa: E40
 from Screens.Hotkey import InfoBarHotkey  # noqa: E402
 from Screens.Screen import Screen  # noqa: E402
 from Screens.MessageBox import MessageBox  # noqa: E402
-from Components.Label import Label
-from Components.Pixmap import MultiPixmap
+from Components.Label import Label  # noqa: E402
+from Components.Pixmap import MultiPixmap  # noqa: E402
 profile("LOAD:InfoBarGenerics")
 from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
@@ -404,14 +404,14 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			else:
 				if answer == "playlist":
 					self.leavePlayerConfirmed([True, "movielist"])
-				elif answer == "loop" and lenght > 0:
+				elif answer == "loop" and length > 0:
 					self.leavePlayerConfirmed([True, "loop"])
 				else:
 					self.leavePlayerConfirmed([True, "quit"])
 		elif answer in ("repeatcurrent"):
 			if config.usage.next_movie_msg.value:
-				(item, lenght) = self.getPlaylistServiceInfo(self.cur_service)
-				self.displayPlayedName(self.cur_service, item, lenght)
+				(item, length) = self.getPlaylistServiceInfo(self.cur_service)
+				self.displayPlayedName(self.cur_service, item, length)
 			self.session.nav.stopService()
 			self.session.nav.playService(self.cur_service)
 
