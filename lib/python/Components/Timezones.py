@@ -83,6 +83,17 @@ def InitTimeZones():
 	config.timezone.val.addNotifier(timezoneNotifier)
 
 
+def localeCode():
+	localecode = "en_US"
+	if TIMEZONE_FILE:
+		with open(TIMEZONE_FILE, "r") as fr:
+			for city in fr.readlines():
+				if config.timezone.val.value in city:
+					localecode = city.split('localeCode="')[1].split('" />')[0]
+					break
+	return localecode
+
+
 class Timezones:
 	def __init__(self):
 		self.timezones = {}
