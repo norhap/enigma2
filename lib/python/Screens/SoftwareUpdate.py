@@ -261,7 +261,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		self.activityTimer.stop()
 		self.activityslider.value = 0
 		self.package.text = txt
-		self.status.text = _("Press OK on your remote control to continue.")
+		self.status.text = _("Press OK to continue.")
 
 	def startActualUpgrade(self, answer):
 		if not answer or not answer[1]:

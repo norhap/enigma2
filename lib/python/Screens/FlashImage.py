@@ -274,7 +274,7 @@ class FlashImage(Screen):
 		if self.reasons:
 			self.message = _("%s\nDo you still want to flash image\n%s?") % (self.reasons, self.imagename)
 		else:
-			self.message = _("Do you want to flash image\n%s") % self.imagename
+			self.message = _("Do you want to flash image\n%s") % self.imagename if not SystemInfo["canKexec"] else _("Unable to complete - Kexec Multiboot files missing!")
 		if SystemInfo["canMultiBoot"] and SystemInfo["HasUsbhdd"]:
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
@@ -290,9 +290,7 @@ class FlashImage(Screen):
 			choices.append((_("No, do not flash image"), False))
 			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Storage device not available.\nMount device or reboot system and try again."), type=MessageBox.TYPE_ERROR, timeout=10)
-		if not SystemInfo["canMultiBoot"]:
-			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup")]
+			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup")] if not SystemInfo["canKexec"] else []
 			if "://" in self.source:
 				choices.append((_("No, only image download"), "only download"))
 			choices.append((_("No, do not flash image"), False))
