@@ -1080,7 +1080,7 @@ msgid "Backing up to: %s"
 msgstr "Copia de seguridad hasta: %s"
 
 msgid "Backup completed."
-msgstr "Copia de seguridad completada."
+msgstr "Copia de seguridad completa."
 
 msgid "Backup failed."
 msgstr "Copia de seguridad falló."
@@ -6124,8 +6124,8 @@ msgstr "Búsqueda SR adicional"
 #, python-format
 msgid "Scan completed, %d channel found."
 msgid_plural "Scan completed, %d channels found."
-msgstr[0] "Búsqueda completada, %d canal encontrado."
-msgstr[1] "Búsqueda completada, %d canales encontrados."
+msgstr[0] "Búsqueda completa, %d canal encontrado."
+msgstr[1] "Búsqueda completa, %d canales encontrados."
 
 msgid "Scan failed!"
 msgstr "Busqueda fallida!"
@@ -6159,8 +6159,8 @@ msgstr[1] "Escaneando - %d%% completados"
 #, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
-msgstr[0] "Búsqueda completada, %d canal encontrado"
-msgstr[1] "Búsqueda completada, %d canales encontrados"
+msgstr[0] "Búsqueda completa, %d canal encontrado"
+msgstr[1] "Búsqueda completa, %d canales encontrados"
 
 msgid "Scanning failed!"
 msgstr "¡Escaneado fallido!"
@@ -8268,8 +8268,8 @@ msgstr "Actualizar solo lista de canales"
 #, python-format
 msgid "Update completed, %d package was installed."
 msgid_plural "Update completed, %d packages were installed."
-msgstr[0] "Actualización completada, %d paquete instalado."
-msgstr[1] "Actualización completada, %d paquetes instalados."
+msgstr[0] "Actualización completa, %d paquete instalado."
+msgstr[1] "Actualización completa, %d paquetes instalados."
 
 msgid "Update completed. Do you want to reboot your %s %s?"
 msgstr "Actualización completa. ¿Quieres reiniciar su %s %s?"
@@ -14489,7 +14489,7 @@ msgid "Autoinstalling %s"
 msgstr "Autoinstalación %s"
 
 msgid "Autoinstalling Completed"
-msgstr "Autoinstalación completada"
+msgstr "Autoinstalación completa"
 
 msgid "Autoinstalling please wait for packages being updated"
 msgstr "Instalación automática, espere actualizando los paquetes"
