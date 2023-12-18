@@ -11200,6 +11200,18 @@ msgstr "Zona horaria"
 msgid "Tuner slot"
 msgstr "Ranura del sintonizador"
 
+msgid "Turn off HDMI-IN Full screen mode"
+msgstr "Desactivar HDMI-IN modo pantalla completa"
+
+msgid "Turn off HDMI-IN PiP mode"
+msgstr "Desactivar modo PiP HDMI-IN"
+
+msgid "Turn on HDMI-IN PiP mode"
+msgstr "Activar modo PiP HDMI-IN"
+
+msgid "Turn on HDMI-IN Full screen mode"
+msgstr "Activar HDMI-IN modo pantalla completa"
+
 msgid "Turn on the power LED during standby."
 msgstr "Encienda el LED de encendido durante standby o reposo profundo."
 
