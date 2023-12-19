@@ -2508,7 +2508,7 @@ class InfoBarExtensions:
 
 	def updateExtensions(self):
 		self.extensionsList = []
-		self.availableKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue"]
+		self.availableKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue", "bullet"]
 		self.extensionKeys = {}
 		for x in self.list:
 			if x[0] == self.EXTENSION_SINGLE:
@@ -4277,9 +4277,9 @@ class InfoBarHdmi2:
 
 		if BoxInfo.getItem("hashdmiin"):
 			if not self.hdmi_enabled_full:
-				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True), "blue")
+				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True), "bullet")
 			if not self.hdmi_enabled_pip:
-				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True), "green")
+				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True), "bullet")
 		self["HDMIActions"] = HelpableActionMap(self, ["InfobarHDMIActions"], {
 			"HDMIin": (self.HDMIIn, _("Switch to HDMI-IN mode")),
 			"HDMIinLong": (self.HDMIInLong, _("Switch to HDMI-IN mode")),
