@@ -346,22 +346,22 @@ class DNSSettings(Setup, HelpableScreen):
 			else:
 				config.usage.dns.default = "dhcp-router"
 				config.usage.dns.value = config.usage.dns.default
-				servername = _("DHCP Router")
+				servername = "DHCP Router"
 		else:
 			if "8. 8." in dns:
-				servername = _("Google DNS")
+				servername = "Google DNS"
 			elif "9. 9. 9. 9" in dns:
-				servername = _("Quad9 Security")
+				servername = "Quad9 Security"
 			elif "9. 9. 9. 10" in dns:
-				servername = _("Quad9 No Security")
+				servername = "Quad9 No Security"
 			elif "222. 222" in dns:
-				servername = _("OpenDNS")
+				servername = "OpenDNS"
 			elif "220. 222" in dns:
-				servername = _("OpenDNS-2")
+				servername = "OpenDNS-2"
 			elif "103. 86" in dns:
-				servername = _("NordVPN")
+				servername = "NordVPN"
 			else:
-				servername = _("Cloudflare")
+				servername = "Cloudflare"
 		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns)
 		if "0. 0. 0. 0" in dns:
 			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
