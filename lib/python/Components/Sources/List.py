@@ -62,6 +62,13 @@ to generate HTML."""
 		for callback in self.onSelectionChanged:
 			callback()
 
+	def selectionEnabled(self, enabled):
+		try:
+			instance = self.master.master.instance
+			instance.selectionEnabled(enabled)
+		except AttributeError:
+			return
+
 	@cached
 	def getCurrent(self):
 		return self.master is not None and self.master.current
