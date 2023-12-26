@@ -11916,7 +11916,7 @@ msgid "Automatic import EPG"
 msgstr "Importación Automática EPG"
 
 msgid "Channel Selection"
-msgstr "Selección del canal"
+msgstr "Selección de Canal"
 
 msgid "Choice days for start import"
 msgstr "Días de elección para la importación inicial"
