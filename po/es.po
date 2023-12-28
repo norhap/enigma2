@@ -10771,9 +10771,6 @@ msgstr "Habilitar el caché de teletexto"
 msgid "Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch."
 msgstr "Habilite para mostrar todas las opciones de configuración Verdadero/Falso, Sí/No, Encendido/Apagado y Habilitar/Deshabilitar como un interruptor gráfico."
 
-msgid "Enable volume control with arrow buttons"
-msgstr "Habilite el control de volumen con botones flecha (cruzeta del botón OK)"
-
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zapping con CH +/-, B +/-, P +/-"
 
@@ -11271,9 +11268,6 @@ msgstr "Cuando está habilitado, el receptor se puede activar desde su LAN"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Cuando está habilitado, cuando selecciona un nuevo canal en la lista de canales, la lista de canales no se cierra. Solo se cerrará cuando seleccione el canal de reproducción actual. Este es un tipo de modo de vista previa"
-
-msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr "Cuando está habilitado, puede controlar el volumen con los botones de flecha en lugar de obtener la lista de canales"
 
 msgid "When enabled you can zap channels with the CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr "Cuando está habilitado, puede eliminar los canales con los botones CH +/-, B +/-, P +/- en lugar de abrir la lista de canales."
@@ -11915,8 +11909,8 @@ msgstr "Importación Automática EPG"
 msgid "Automatic import EPG"
 msgstr "Importación Automática EPG"
 
-msgid "Channel Selection"
-msgstr "Selección de Canal"
+msgid "Channel List Settings"
+msgstr "Ajustes Lista de Canales"
 
 msgid "Choice days for start import"
 msgstr "Días de elección para la importación inicial"
