@@ -1107,7 +1107,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			except InterfaceError as err:
 				print("[NetworkSetup] queryWirelessDevice InterfaceError:", err)
 				return False
-			except (IOError, OSError) as err:
+			except OSError as err:
 				if err.errno in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
 					return False
 				else:

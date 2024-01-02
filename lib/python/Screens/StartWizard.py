@@ -130,7 +130,7 @@ class AutoInstallWizard(Screen):
 		try:
 			print("[StartWizard] Write to /proc/progress")
 			open("/proc/progress", "w").write(str(self["progress"].value))
-		except IOError:
+		except OSError:
 			print("[StartWizard] Write to /proc/progress failed.")
 		self.package = self.packages.pop(0)
 		self["header"].setText(_("Autoinstalling %s") % self.package + " - %s%%" % self["progress"].value)

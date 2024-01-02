@@ -49,7 +49,7 @@ def enumFeeds():
 					yield feed.split()[1]
 			except IndexError:
 				pass
-			except IOError:
+			except OSError:
 				pass
 
 
@@ -84,7 +84,7 @@ def enumPlugins(filter_start=''):
 							description = description.split(' ', 1)[1]
 					yield package, version, description.strip()
 					package = None
-		except IOError:
+		except OSError:
 			pass
 
 

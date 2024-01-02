@@ -884,7 +884,7 @@ class MovieList(GUIComponent):
 			# Only use directory basename for sorting.
 			try:
 				name = os.path.basename(os.path.normpath(name))
-			except (IOError, OSError):
+			except OSError:
 				pass
 		# print("[MovieList] Sorting for -%s-" % name)
 		return (1, name, -x[2])

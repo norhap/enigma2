@@ -24,7 +24,7 @@ class AVSwitch:
 				print("[AVSwitch] Read /proc/stb/vmpeg/0/aspect")
 				if "1" in open("/proc/stb/vmpeg/0/aspect", "r").read().split('\n', 1)[0]:  # 4:3
 					return (4, 3)
-			except IOError:
+			except OSError:
 				print("[AVSwitch] Read /proc/stb/vmpeg/0/aspect failed.")
 		elif valstr in ("16_9_always", "16_9_letterbox"):  # 16:9
 			pass
@@ -282,7 +282,7 @@ def InitAVSwitch():
 			try:
 				with open("/proc/stb/video/hdmi_hdrtype", "w") as hdmihdrtype:
 					hdmihdrtype.write(configElement.value)
-			except (IOError, OSError):
+			except OSError:
 				pass
 		config.av.hdmihdrtype = ConfigSelection(choices={
 			"auto": _("Auto"),
@@ -343,7 +343,7 @@ def InitAVSwitch():
 				with open("/proc/stb/hdmi/audio_source", "w") as hdmi_audio_source:
 					hdmi_audio_source.write(configElement.value)
 					hdmi_audio_source.close()
-			except (IOError, OSError):
+			except OSError:
 				pass
 		config.av.hdmi_audio_source.addNotifier(setAudioSource)
 	else:
@@ -360,7 +360,7 @@ def InitAVSwitch():
 			try:
 				with open("/proc/stb/video/sync_mode_choices", "w") as syncmode:
 					syncmode.write(configElement.value)
-			except (IOError, OSError):
+			except OSError:
 				pass
 		config.av.sync_mode.addNotifier(setSyncMode)
 	else:
@@ -631,7 +631,7 @@ def InitAVSwitch():
 				open("/proc/stb/vmpeg/0/pep_scaler_sharpness", "w").write("%0.8X" % myval)
 				print("[AVSwitch] Write to /proc/stb/vmpeg/0/pep_apply")
 				open("/proc/stb/vmpeg/0/pep_apply", "w").write("1")
-			except IOError:
+			except OSError:
 				print("[AVSwitch] couldn't write pep_scaler_sharpness")
 
 		if MODEL == "gb7356":

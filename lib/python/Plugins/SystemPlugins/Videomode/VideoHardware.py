@@ -259,26 +259,26 @@ class VideoHardware:
 		try:
 			open("/proc/stb/video/videomode_50hz", "w").write(mode_50)
 			open("/proc/stb/video/videomode_60hz", "w").write(mode_60)
-		except IOError:
+		except OSError:
 			print("[Videomode] cannot open /proc/stb/video/videomode failed.")
 			try:
 				# fallback if no possibility to setup 50/60 hz mode
 				open("/proc/stb/video/videomode", "w").write(mode_50)
-			except IOError:
+			except OSError:
 				print("[Videomode] Write to /proc/stb/video/videomode failed.")
 
 		if BoxInfo.getItem("has24hz"):
 			try:
 				print("[Videomode] Write to /proc/stb/video/videomode_24hz")
 				open("/proc/stb/video/videomode_24hz", "w").write(mode_24)
-			except IOError:
+			except OSError:
 				print("[Videomode] cannot open /proc/stb/video/videomode_24hz")
 
 		if BRAND == "GigaBlue":
 			try:
 				# use 50Hz mode (if available) for booting
 				open("/etc/videomode", "w").write(mode_50)
-			except IOError:
+			except OSError:
 				print("[Videomode] Write to /etc/videomode failed.")
 
 		self.updateAspect(None)

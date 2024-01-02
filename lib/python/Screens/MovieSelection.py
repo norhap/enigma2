@@ -1123,7 +1123,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				updates = load(file)
 				file.close()
 				self.applyConfigSettings(updates)
-			except (IOError, OSError):
+			except OSError:
 				updates = {
 					"moviesort": config.movielist.moviesort.default,
 					"description": config.movielist.description.default,
@@ -1539,7 +1539,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						if size > fileSize:
 							fileSize = size
 							self.playfile = filename
-				except (IOError, OSError) as err:
+				except OSError as err:
 					print("[MovieSelection] Error %d: Unable to calculate size for '%s'!  (%s)" % (err.errno, filename, err.strerror))
 			if self.playfile:
 				return True
@@ -1606,7 +1606,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if not path.endswith("/"):
 				path += "/"
 			self.reloadList(sel=eServiceReference("2:0:1:0:0:0:0:0:0:0:%s" % path))
-		except (IOError, OSError) as e:
+		except OSError as e:
 			print("[MovieSelection] Error %s:" % e.errno, e)
 			if e.errno == 17:
 				msg = _("The path %s already exists.") % name
@@ -1729,7 +1729,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							print("[MovieSelection] rename", r[0], "to", r[1])
 							rename(r[0], r[1])
 				self.reloadList(sel=eServiceReference("2:0:1:0:0:0:0:0:0:0:%s" % newfilename))
-			except (IOError, OSError) as e:
+			except OSError as e:
 				print("[MovieSelection] Error %s:" % e.errno, e)
 				if e.errno == 17:
 					msg = _("The path %s already exists.") % name

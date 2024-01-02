@@ -37,12 +37,12 @@ def getFPVersion():
 			ret = open("/proc/stb/fp/version", "r").read()
 		else:
 			ret = int(open("/proc/stb/fp/version", "r").read())
-	except (IOError, OSError):
+	except OSError:
 		if isfile("/dev/dbox/fp0"):
 			try:
 				with open("/dev/dbox/fp0") as fd:
 					ret = ioctl(fd.fileno(), 0)
-			except (IOError, OSError) as err:
+			except OSError as err:
 				print("[StbHardware] %s" % err)
 	return ret
 
@@ -50,12 +50,12 @@ def getFPVersion():
 def setFPWakeuptime(wutime):
 	try:
 		open("/proc/stb/fp/wakeup_time", "w").write(str(wutime))
-	except IOError:
+	except OSError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ioctl(fp.fileno(), 6, pack('L', wutime))  # set wake up
 			fp.close()
-		except IOError:
+		except OSError:
 			print("[StbHardware] setFPWakeupTime failed!")
 
 
@@ -71,7 +71,7 @@ def setRTCoffset(forsleep=None):
 	try:
 		open("/proc/stb/fp/rtc_offset", "w").write(str(forsleep))
 		print("[StbHardware] set RTC offset to %s sec." % (forsleep))
-	except IOError:
+	except OSError:
 		print("[StbHardware] setRTCoffset failed!")
 
 
@@ -80,12 +80,12 @@ def setRTCtime(wutime):
 		setRTCoffset()
 	try:
 		open("/proc/stb/fp/rtc", "w").write(str(wutime))
-	except IOError:
+	except OSError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ioctl(fp.fileno(), 0x101, pack('L', wutime))  # set wake up
 			fp.close()
-		except IOError:
+		except OSError:
 			print("[StbHardware] setRTCtime failed!")
 
 
@@ -93,12 +93,12 @@ def getFPWakeuptime():
 	ret = 0
 	try:
 		ret = int(open("/proc/stb/fp/wakeup_time", "r").read())
-	except IOError:
+	except OSError:
 		try:
 			fp = open("/dev/dbox/fp0")
 			ret = unpack('L', ioctl(fp.fileno(), 5, '	 '))[0]  # get wakeuptime
 			fp.close()
-		except IOError:
+		except OSError:
 			print("[StbHardware] getFPWakeupTime failed!")
 	return ret
 
@@ -122,7 +122,7 @@ def getFPWasTimerWakeup(check=False):
 			fp = open("/dev/dbox/fp0")
 			wasTimerWakeup = unpack('B', ioctl(fp.fileno(), 9, ' '))[0] and True or False
 			fp.close()
-		except IOError:
+		except OSError:
 			print("[StbHardware] wasTimerWakeup failed!")
 			isError = True
 	if wasTimerWakeup:
@@ -141,5 +141,5 @@ def clearFPWasTimerWakeup():
 			fp = open("/dev/dbox/fp0")
 			ioctl(fp.fileno(), 10)
 			fp.close()
-		except IOError:
+		except OSError:
 			print("clearFPWasTimerWakeup failed!")
