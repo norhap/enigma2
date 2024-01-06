@@ -942,7 +942,8 @@ class RecordTimerEntry(TimerEntry, object):
 
 	def getEventFromEPG(self):
 		epgcache = eEPGCache.getInstance()
-		queryTime = self.begin + (self.end - self.begin) // 2
+		# This might need further investigation. Dp npt get exactly the middle, take 20% so we usually expect to get first event.
+		queryTime = self.begin + (self.end - self.begin) // 5
 		ref = self.service_ref and self.service_ref.ref
 		return epgcache.lookupEventTime(ref, queryTime)
 
