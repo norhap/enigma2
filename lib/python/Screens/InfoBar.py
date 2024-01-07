@@ -1,6 +1,6 @@
 from os.path import exists
-from Tools.Profile import profile
-profile("LOAD:enigma")
+from enigma import eProfileWrite
+eProfileWrite("LOAD:enigma")
 from enigma import eServiceReference, eServiceCenter, iPlayableService  # noqa: E402
 from Components.SystemInfo import BRAND, MODEL  # noqa: E402
 from Tools.Directories import fileExists, isPluginInstalled  # noqa: E402
@@ -11,7 +11,8 @@ from Screens.Screen import Screen  # noqa: E402
 from Screens.MessageBox import MessageBox  # noqa: E402
 from Components.Label import Label  # noqa: E402
 from Components.Pixmap import MultiPixmap  # noqa: E402
-profile("LOAD:InfoBarGenerics")
+eProfileWrite("LOAD:InfoBarGenerics")
+
 from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarNumberZap, InfoBarChannelSelection, InfoBarMenu, InfoBarRdsDecoder, InfoBarResolutionSelection, InfoBarAspectSelection, \
 	InfoBarEPG, InfoBarSeek, InfoBarInstantRecord, InfoBarRedButton, InfoBarTimerButton, InfoBarVmodeButton, \
@@ -21,11 +22,11 @@ from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, \
 	InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarZoom, InfoBarOpenOnTopHelper, InfoBarPowersaver, \
 	InfoBarHDMI, InfoBarHdmi2, setResumePoint, delResumePoint  # noqa: E402
-profile("LOAD:InitBar_Components")
+eProfileWrite("LOAD:InitBar_Components")
 from Components.ActionMap import HelpableActionMap  # noqa: E402
 from Components.config import config  # noqa: E402
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase  # noqa: E402
-profile("LOAD:HelpableScreen")
+eProfileWrite("LOAD:HelpableScreen")
 from Screens.HelpMenu import HelpableScreen  # noqa: E402
 
 

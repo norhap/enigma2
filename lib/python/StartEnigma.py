@@ -1,8 +1,6 @@
 import enigma  # noqa: E402
 import eBaseImpl  # noqa: E402
 import eConsoleImpl  # noqa: E402
-from Tools.Profile import profile, profileFinal  # This facilitates the start up progress counter.
-profile("StartPython")
 import Tools.RedirectOutput  # noqa: F401, E402
 enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
@@ -11,11 +9,11 @@ from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, 
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile  # noqa: E402
 from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL  # noqa: E402
 from Components.Timezones import InitTimeZones, localeCode  # noqa: E402
-profile("Imports")
 from os.path import isdir, islink, join  # noqa: E402
 from traceback import print_exc  # noqa: E402
 from time import time  # noqa: E402
 from sys import stdout  # noqa: E402
+enigma.eProfileWrite("Imports")
 
 if ARCHITECTURE == "aarch64":
 	import usb.core
@@ -23,7 +21,7 @@ if ARCHITECTURE == "aarch64":
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
 
-profile("TimeZones")
+enigma.eProfileWrite("TimeZones")
 InitTimeZones()
 
 
@@ -47,36 +45,36 @@ def setLoadUnlinkedUserbouquets(configElement):
 	enigma.eDVBDB.getInstance().setLoadUnlinkedUserbouquets(configElement.value)
 
 
-profile("Bouquets")
+enigma.eProfileWrite("Bouquets")
 config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
 config.misc.load_unlinked_userbouquets.addNotifier(setLoadUnlinkedUserbouquets)
 
-profile("ClientMode")
+enigma.eProfileWrite("ClientMode")
 import Components.ClientMode  # noqa: E402
 Components.ClientMode.InitClientMode()
 enigma.eDVBDB.getInstance().reloadBouquets() if not config.clientmode.enabled.value or not config.clientmode_import_restart.value else None
 
-profile("SimpleSummary")
+enigma.eProfileWrite("SimpleSummary")
 from Screens import InfoBar  # noqa: E402
 from Screens.SimpleSummary import SimpleSummary  # noqa: E402
 
-profile("ParentalControl")
+enigma.eProfileWrite("ParentalControl")
 import Components.ParentalControl  # noqa: E402
 Components.ParentalControl.InitParentalControl()
 
-profile("LOAD:Navigation")
+enigma.eProfileWrite("LOAD:Navigation")
 from Navigation import Navigation  # noqa: E402
 
-profile("LOAD:skin")
+enigma.eProfileWrite("LOAD:skin")
 from skin import readSkin  # noqa: E402
 
 config.misc.blackradiopic = ConfigText(default=resolveFilename(SCOPE_GUISKIN, "black.mvi"))
 config.misc.radiopic = ConfigText(default=resolveFilename(SCOPE_GUISKIN, "radio.mvi"))
 
-profile("CreateDefaultPaths")
+enigma.eProfileWrite("CreateDefaultPaths")
 InitDefaultPaths()
 
-profile("InitializeConfigs")
+enigma.eProfileWrite("InitializeConfigs")
 config.misc.DeepStandby = NoSave(ConfigYesNo(default=False))  # Detect deepstandby.
 config.misc.epgcache_filename = ConfigText(default="/hdd/epg.dat", fixed_size=False)
 config.misc.prev_wakeup_time = ConfigInteger(default=0)
@@ -99,7 +97,7 @@ config.misc.startCounter = ConfigInteger(default=0)  # Number of e2 starts.
 # config.misc.standbyCounter.addNotifier(standbyCountChanged, initial_call = False)
 ####################################################
 
-profile("Twisted")
+enigma.eProfileWrite("Twisted")
 try:  # Configure the twisted processor
 	from twisted.python.runtime import platform
 	platform.supportsThreads = lambda: True
@@ -136,18 +134,18 @@ try:  # Configure the twisted logging
 except ImportError:
 	print("[StartEnigma] Error: Twisted not available!")
 
-profile("LOAD:Plugin")
+enigma.eProfileWrite("LOAD:Plugin")
 
 # initialize autorun plugins and plugin menu entries
 from Components.PluginComponent import plugins  # noqa: E402
 
-profile("LOAD:Wizard")
+enigma.eProfileWrite("LOAD:Wizard")
 from Screens.Wizard import wizardManager  # noqa: E402
 from Screens.StartWizard import *  # noqa: E402, F401, F403
 from Tools.BoundFunction import boundFunction  # noqa: E402
 from Plugins.Plugin import PluginDescriptor  # noqa: E402
 
-profile("misc")
+enigma.eProfileWrite("misc")
 had = dict()
 
 
@@ -170,12 +168,12 @@ def dump(dir, p=""):
 # display
 
 
-profile("LOAD:ScreenGlobals")
+enigma.eProfileWrite("LOAD:ScreenGlobals")
 from Screens.Globals import Globals  # noqa: E402
 from Screens.SessionGlobals import SessionGlobals  # noqa: E402
 from Screens.Screen import Screen  # noqa: E402
 
-profile("Screen")
+enigma.eProfileWrite("Screen")
 Screen.globalScreen = Globals()
 
 # Session.open:
@@ -389,7 +387,7 @@ class Session:
 			self.summary.show()
 
 
-profile("Standby,PowerKey")
+enigma.eProfileWrite("Standby,PowerKey")
 import Screens.Standby  # noqa: E402
 from Screens.Menu import MainMenu, mdom  # noqa: E402
 from GlobalActions import globalActionMap  # noqa: E402
@@ -451,7 +449,7 @@ class PowerKey:
 
 
 if enigma.eAVControl.getInstance().hasScartSwitch():
-	profile("Scart")
+	enigma.eProfileWrite("Scart")
 	print("[StartEnigma] Initialising Scart module")
 	from Screens.Scart import Scart
 
@@ -482,17 +480,17 @@ class AutoScartControl:
 				self.scartDialog.switchToTV()
 
 
-profile("Load:CI")
+enigma.eProfileWrite("Load:CI")
 from Screens.Ci import CiHandler  # noqa: E402
 
-profile("Load:VolumeControl")
+enigma.eProfileWrite("Load:VolumeControl")
 from Components.VolumeControl import VolumeControl  # noqa: E402
 
-profile("Load:StackTracePrinter")
+enigma.eProfileWrite("Load:StackTracePrinter")
 from Components.StackTrace import StackTracePrinter  # noqa: E402
 StackTracePrinterInst = StackTracePrinter()
 
-profile("UsageConfig")
+enigma.eProfileWrite("UsageConfig")
 from Components.UsageConfig import InitUsageConfig, getFileUsage  # noqa: E402
 InitUsageConfig()
 getFileUsage()
@@ -502,17 +500,17 @@ def runScreenTest():
 	config.misc.startCounter.value += 1
 	config.misc.startCounter.save()
 
-	profile("readPluginList")
+	enigma.eProfileWrite("readPluginList")
 	enigma.pauseInit()
 	plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 	enigma.resumeInit()
 
-	profile("Init:Session")
+	enigma.eProfileWrite("Init:Session")
 	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value)  # wake up to standby for RecordTimer and PowerTimer.
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
 	CiHandler.setSession(session)
 	screensToRun = [p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
-	profile("wizards")
+	enigma.eProfileWrite("wizards")
 	screensToRun += wizardManager.getWizards()
 	screensToRun.append((100, InfoBar.InfoBar))
 	# screensToRun.sort(key=lambda x: x[0])  # works in both Pythons but let's not use sort method here first we must see if we have work network in the wizard.
@@ -533,28 +531,27 @@ def runScreenTest():
 
 	config.misc.epgcache_filename.addNotifier(setEPGCachePath)
 	runNextScreen(session, screensToRun)
-	profile("Init:VolumeControl")
+	enigma.eProfileWrite("Init:VolumeControl")
 	vol = VolumeControl(session)
-	profile("Init:PowerKey")
+	enigma.eProfileWrite("Init:PowerKey")
 	power = PowerKey(session)
 
 	if BoxInfo.getItem("vfdsymbol"):
-		profile("VFDSYMBOLS")
+		enigma.eProfileWrite("VFDSYMBOLS")
 		import Components.VfdSymbols
 		Components.VfdSymbols.SymbolsCheck(session)
 
 	# we need session.scart to access it from within menu.xml
 	session.scart = AutoScartControl(session) if enigma.eAVControl.getInstance().hasScartSwitch() else None
 
-	profile("Init:Trashcan")
+	enigma.eProfileWrite("Init:Trashcan")
 	import Tools.Trashcan
 	Tools.Trashcan.init(session)
 
-	profile("RunReactor")
-	profileFinal()
+	enigma.eProfileWrite("RunReactor")
 	runReactor()
 
-	profile("wakeup")
+	enigma.eProfileWrite("wakeup")
 	from Tools.StbHardware import setFPWakeuptime, setRTCtime
 	from Screens.SleepTimerEdit import isNextWakeupTime
 	powerTimerWakeupAuto = False
@@ -619,12 +616,12 @@ def runScreenTest():
 	config.misc.isNextRecordTimerAfterEventActionAuto.value = recordTimerWakeupAuto
 	config.misc.isNextRecordTimerAfterEventActionAuto.save()
 
-	profile("stopService")
+	enigma.eProfileWrite("stopService")
 	session.nav.stopService()
-	profile("nav shutdown")
+	enigma.eProfileWrite("nav shutdown")
 	session.nav.shutdown()
 
-	profile("configfile.save")
+	enigma.eProfileWrite("configfile.save")
 	configfile.save()
 	from Screens import InfoBarGenerics
 	InfoBarGenerics.saveResumePoints()
@@ -632,61 +629,61 @@ def runScreenTest():
 	return 0
 
 
-profile("Init:skin")
+enigma.eProfileWrite("Init:skin")
 from skin import InitSkins  # noqa: E402
 InitSkins()
 
-profile("InputDevice")
+enigma.eProfileWrite("InputDevice")
 import Components.InputDevice  # noqa: E402
 Components.InputDevice.InitInputDevices()
 import Components.InputHotplug  # noqa: E402
 
-profile("AVSwitch")
+enigma.eProfileWrite("AVSwitch")
 import Components.AVSwitch  # noqa: E402
 Components.AVSwitch.InitAVSwitch()
 
-profile("FanControl")
+enigma.eProfileWrite("FanControl")
 from Components.FanControl import fancontrol  # noqa: F401, E402
 
-profile("HdmiRecord")
+enigma.eProfileWrite("HdmiRecord")
 import Components.HdmiRecord  # noqa: E402
 Components.HdmiRecord.InitHdmiRecord()
 
-profile("RecordingConfig")
+enigma.eProfileWrite("RecordingConfig")
 import Components.RecordingConfig  # noqa: E402
 Components.RecordingConfig.InitRecordingConfig()
 
-profile("loadKeymap")
+enigma.eProfileWrite("loadKeymap")
 from Components.ActionMap import loadKeymap  # noqa: E402
 loadKeymap(config.usage.keymap.value)
 
-profile("Network")
+enigma.eProfileWrite("Network")
 import Components.Network  # noqa: E402
 Components.Network.InitNetwork()
 
-profile("LCD")
+enigma.eProfileWrite("LCD")
 import Components.Lcd  # noqa: E402
 Components.Lcd.InitLcd()
 Components.Lcd.IconCheck()
 
 enigma.eAVControl.getInstance().disableHDMIIn()
 
-profile("RFMod")
+enigma.eProfileWrite("RFMod")
 import Components.RFmod  # noqa: E402
 Components.RFmod.InitRFmod()
 
-profile("Init:CI")
+enigma.eProfileWrite("Init:CI")
 import Screens.Ci  # noqa: E402
 Screens.Ci.InitCiConfig()
 
-profile("Init:LogManager")
+enigma.eProfileWrite("Init:LogManager")
 import Screens.LogManager  # noqa: E402
 Screens.LogManager.AutoLogManager()
 
-profile("RcModel")
+enigma.eProfileWrite("RcModel")
 import Components.RcModel  # noqa: E402
 
-profile("EpgCacheSched")
+enigma.eProfileWrite("EpgCacheSched")
 import Components.EpgLoadSave  # noqa: E402
 Components.EpgLoadSave.EpgCacheSaveCheck()
 Components.EpgLoadSave.EpgCacheLoadCheck()
