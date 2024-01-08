@@ -4,6 +4,7 @@ from json import load
 from os import listdir
 from time import altzone, gmtime, strftime
 from urllib.request import urlopen
+from email.utils import parsedate_to_datetime
 
 from enigma import eTimer, eDVBDB
 from Screens.ChoiceBox import ChoiceBox
@@ -95,7 +96,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 				version = open("/etc/issue").readlines()[-2].split()[1]
 
 				# do we have an entry for this version
-				if (version in status or 'all' in status) and (machine in status[version]['machines'] or 'all' in status[version]['machines']):
+				if (version in status or 'all' in status) and ('machine' in status[version]['machines'] or 'all' in status[version]['machines']):
 					if 'abort' in status[version]:
 						abort = status[version]['abort']
 					if 'from' in status[version]:
@@ -137,7 +138,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 	def getLatestImageTimestamp(self):
 		def gettime(url):
 			try:
-				return strftime("%Y-%m-%d %H:%M:%S", gmtime(timegm(urlopen("%s/Packages.gz" % url).info().getdate('Last-Modified')) - altzone))
+				print('[UpdatePlugin] Trying to fetch time from %s' % url)
+				return strftime("%Y-%m-%d %H:%M:%S", gmtime(int(parsedate_to_datetime(urlopen("%s/Packages.gz" % url, timeout=1).headers['last-modified']).timestamp()) - altzone))
 			except Exception as er:
 				# print('[SoftwareUpdate] Error in get timestamp', er)
 				return ""
@@ -261,7 +263,7 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		self.activityTimer.stop()
 		self.activityslider.value = 0
 		self.package.text = txt
-		self.status.text = _("Press OK on your remote control to continue.")
+		self.status.text = _("Press OK to continue.")
 
 	def startActualUpgrade(self, answer):
 		if not answer or not answer[1]:

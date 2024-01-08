@@ -127,7 +127,7 @@ class PicCript(Renderer):
 						sName = self.condAccessIdsMgcamd.get(line[26:28])
 						if sName:
 							return sName
-		except IOError as err:
+		except OSError as err:
 			print("[PicCript] %s" % err)
 
 	def findPicon(self, serviceName):

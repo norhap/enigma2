@@ -227,7 +227,7 @@ class RestoreMenu(Screen):
 	def fill_list(self):
 		self.flist = []
 		self.path = getBackupPath()
-		if path.exists(self.path is False):
+		if not path.exists(self.path):
 			makedirs(self.path)
 		for file in listdir(self.path):
 			if (file.endswith(".tar.gz")):

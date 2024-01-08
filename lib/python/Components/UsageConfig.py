@@ -23,14 +23,15 @@ visuallyImpairedCommentary = "NAR qad"
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
 	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
-		("dhcp-router", _("DHCP Router")),
+		("dhcp-router", "DHCP Router"),
 		("staticip", _("Static IP Router")),
-		("google", _("Google DNS")),
-		("quad9security", _("Quad9 Security")),
-		("quad9nosecurity", _("Quad9 No Security")),
-		("cloudflare", _("Cloudflare")),
-		("opendns", _("OpenDNS")),
-		("opendns-2", _("OpenDNS-2"))
+		("google", "Google DNS"),
+		("quad9security", "Quad9 Security"),
+		("quad9nosecurity", "Quad9 No Security"),
+		("cloudflare", "Cloudflare"),
+		("nordvpn", "NordVPN"),
+		("opendns", "OpenDNS"),
+		("opendns-2", "OpenDNS-2")
 	])
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)
@@ -149,7 +150,6 @@ def InitUsageConfig():
 	config.usage.oldstyle_channel_select_controls = ConfigYesNo(default=False)
 	config.usage.zap_with_ch_buttons = ConfigYesNo(default=False)
 	config.usage.ok_is_channelselection = ConfigYesNo(default=False)
-	config.usage.volume_instead_of_channelselection = ConfigYesNo(default=False)
 	config.usage.channelselection_preview = ConfigYesNo(default=False)
 	config.usage.show_spinner = ConfigYesNo(default=True)
 	config.usage.plugin_sort_weight = ConfigDictionarySet()
@@ -1244,7 +1244,6 @@ def InitUsageConfig():
 		config.usage.output_12V.addNotifier(set12VOutput, immediate_feedback=False)
 
 	config.usage.keymap = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keymap.xml"))
-	config.usage.keytrans = ConfigText(default=eEnv.resolve("${datadir}/enigma2/keytranslation.xml"))
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 	config.misc.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
 
@@ -1591,7 +1590,7 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_usecache = ConfigYesNo(default=True)
 
 	config.oscaminfo = ConfigSubsection()
-	if SystemInfo["OScamIsActive"]:
+	if SystemInfo["OSCamIsActive"]:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=True)
 	else:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
@@ -1653,7 +1652,7 @@ def InitUsageConfig():
 	config.misc.softcam_setup.extension_menu = ConfigYesNo(default=True)
 	config.misc.softcam_streamrelay_url = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
 	config.misc.softcam_streamrelay_port = ConfigInteger(default=17999, limits=(0, 65535))
-	config.misc.softcam_streamrelay_delay = ConfigSelectionNumber(min=0, max=2000, stepwidth=50, default=100, wraparound=True)
+	config.misc.softcam_streamrelay_delay = ConfigSelectionNumber(min=0, max=2000, stepwidth=50, default=0, wraparound=True)
 
 	config.ntp = ConfigSubsection()
 	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)

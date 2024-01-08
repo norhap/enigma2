@@ -13,8 +13,9 @@ class MessageBox(Screen, HelpableScreen):
 	skin = """
 	<screen name="MessageBox" position="center,center" size="520,225" resolution="1280,720">
 		<widget name="icon" pixmaps="icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="10,10" size="53,53" alphaTest="blend" conditional="icon" scale="1" transparent="1" />
-		<widget name="text" position="75,10" size="435,55" font="Regular;22" transparent="1" />
-		<widget name="list" position="10,75" size="500,140" conditional="list" enableWrapAround="1" font="Regular;25" itemHeight="35" scrollbarMode="showOnDemand" transparent="1" />
+		<widget name="text" position="75,10" size="435,160" font="Regular;20" transparent="1" />
+		<widget name="list" position="10,173" size="500,50" conditional="list" enableWrapAround="1" font="Regular;20" itemHeight="23" scrollbarMode="showOnDemand" transparent="1" />
+		<widget name="autoresize" conditional="autoresize" position="75,10" size="435,160" font="Regular;20" transparent="1"/>
 	</screen>"""
 
 	TYPE_NOICON = 0
@@ -25,7 +26,7 @@ class MessageBox(Screen, HelpableScreen):
 	TYPE_MESSAGE = 5
 
 	def __init__(self, session, text, type=TYPE_YESNO, timeout=-1, list=None, default=True, closeOnAnyKey=False, enableInput=True, msgBoxID=None, typeIcon=None, timeoutDefault=None, windowTitle=None, skinName=None, close_on_any_key=False, enable_input=True, timeout_default=None, title=None, picon=None, skin_name=None, simple=None):
-		Screen.__init__(self, session)
+		Screen.__init__(self, session, mandatoryWidgets=["autoresize", "icon", "list", "text"])
 		HelpableScreen.__init__(self)
 		self.timerRunning = False
 		self["autoresize"] = Label("")
@@ -40,7 +41,7 @@ class MessageBox(Screen, HelpableScreen):
 			elif default in (True, False):
 				self["list"].moveToIndex(0 if default else 1)
 			else:
-				print("[MessageBox] Error: The context of the default (%s) can't be determined!" % default)
+				print(f"[MessageBox] Error: The context of the default ({default}) can't be determined!")
 		else:
 			self.list = []
 			self["list"] = MenuList([])
@@ -110,7 +111,7 @@ class MessageBox(Screen, HelpableScreen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def __repr__(self):
-		return "%s(%s)" % (str(type(self)), self.text)
+		return f"{str(type(self))}({self.text})"
 
 	def layoutFinished(self):
 		if self.list:
@@ -129,7 +130,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.baseTitle = self.baseTitle % prefix
 		self.setTitle(self.baseTitle, showPath=False)
 		if self.timeout > 0:
-			print("[MessageBox] Timeout set to %d seconds." % self.timeout)
+			print(f"[MessageBox] Timeout set to {self.timeout} seconds.")
 			self.timer.start(25)
 
 	def processTimer(self):
@@ -141,7 +142,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.baseTitle = self.activeTitle
 		if self.timeout > 0:
 			if self.baseTitle:
-				self.setTitle("%s (%d)" % (self.baseTitle, self.timeout), showPath=False)
+				self.setTitle(f"{self.baseTitle} ({self.timeout})", showPath=False)
 			self.timer.start(1000)
 			self.timeout -= 1
 		else:
@@ -152,7 +153,7 @@ class MessageBox(Screen, HelpableScreen):
 				self.select()
 
 	def stopTimer(self, reason):
-		print("[MessageBox] %s" % reason)
+		print(f"[MessageBox] {reason}")
 		self.timer.stop()
 		self.timeout = 0
 		if self.baseTitle:
@@ -216,7 +217,7 @@ class MessageBoxSummary(ScreenSummary):
 		ScreenSummary.__init__(self, session, parent=parent)
 		self["text"] = StaticText(parent.text)
 		self["option"] = StaticText("")
-		if hasattr(self, "list"):
+		if parent.list:
 			if self.addWatcher not in self.onShow:
 				self.onShow.append(self.addWatcher)
 			if self.removeWatcher not in self.onHide:

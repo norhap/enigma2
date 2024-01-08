@@ -65,7 +65,7 @@ class PowerTimer(Timer):
 			print("[PowerTimer] Error: Loading 'pm_timers.xml' failed!")
 			try:
 				rename(self.timersFilename, "%s_bad" % self.timersFilename)
-			except (IOError, OSError) as err:
+			except OSError as err:
 				print("[PowerTimer] Error %d: Renaming broken timer file failed!  (%s)" % (err.errno, err.strerror))
 			return
 		check = True

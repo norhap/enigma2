@@ -10,6 +10,7 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN  # noqa: E402
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile  # noqa: E402
 from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL  # noqa: E402
+from Components.Timezones import InitTimeZones, localeCode  # noqa: E402
 profile("Imports")
 from os.path import isdir, islink, join  # noqa: E402
 from traceback import print_exc  # noqa: E402
@@ -22,13 +23,17 @@ if ARCHITECTURE == "aarch64":
 	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib/libusb-1.0.so.0")
 
 
+profile("TimeZones")
+InitTimeZones()
+
+
 def languageNotifier(configElement):
 	from Components.Language import language
 	language.activateLanguage(configElement.value)
 
 
 config.osd = ConfigSubsection()
-config.osd.language = ConfigText(default="es_ES")
+config.osd.language = ConfigText(default=localeCode())
 config.osd.language.addNotifier(languageNotifier)
 
 
@@ -650,11 +655,6 @@ Components.HdmiRecord.InitHdmiRecord()
 profile("RecordingConfig")
 import Components.RecordingConfig  # noqa: E402
 Components.RecordingConfig.InitRecordingConfig()
-
-
-profile("TimeZones")
-import Components.Timezones  # noqa: E402
-Components.Timezones.InitTimeZones()
 
 profile("loadKeymap")
 from Components.ActionMap import loadKeymap  # noqa: E402

@@ -23,7 +23,7 @@ while True:
 	list = []
 	for index in list(range(len(datasources))):
 		list.append(datasources[index].getName() + f" ({len(datasources[index].transponderlist.keys())} sats)")
-	index = inputChoices(list, "q", "quit")
+	index = inputChoices(list, "q", "quit")  # noqa: F405
 	if index is None:
 		break
 

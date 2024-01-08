@@ -2,10 +2,13 @@ from enigma import eRCInput, eTimer, eWindow, getDesktop
 
 from skin import GUI_SKIN_ID, applyAllAttributes
 from Components.config import config
+from Components.SystemInfo import BoxInfo
 from Components.GUIComponent import GUIComponent
 from Components.Sources.Source import Source
 from Components.Sources.StaticText import StaticText
 from Tools.CList import CList
+from Tools.Directories import fileContains
+from process import ProcessList
 
 
 # The lines marked DEBUG: are proposals for further fixes or improvements when partner code is updated.
@@ -48,8 +51,6 @@ class Screen(dict):
 		self["ScreenPath"] = StaticText()
 		self.screenPath = ""  # This is the current screen path without the title.
 		self.screenTitle = ""  # This is the current screen title without the path.
-		self.availableLabels = []
-		self.noScreenPathSource = False
 
 	def __repr__(self):
 		return str(type(self))
@@ -113,7 +114,8 @@ class Screen(dict):
 			self.session.close(self, *retval)
 
 	def show(self):
-		print("[Screen] Showing screen '%s'." % self.skinName)  # To ease identification of screens.
+		BoxInfo.setItem("StreamRelay", True if fileContains("/etc/enigma2/whitelist_streamrelay", ":") or str(ProcessList().named("oscam-emu")).strip("[]") else False)
+		print(f"[Screen] Showing screen {self.skinName}.")  # To ease identification of screens.
 		# DEBUG: if (self.shown and self.alreadyShown) or not self.instance:
 		if (self.shown and self.already_shown) or not self.instance:
 			return
@@ -121,10 +123,6 @@ class Screen(dict):
 		# DEBUG: self.alreadyShown = True
 		self.already_shown = True
 		self.instance.show()
-		if self["ScreenPath"].text and "ScreenPath" not in self.availableLabels:
-			self["Title"].text = "%s %s" % (self["ScreenPath"].text, self["Title"].text) if self["ScreenPath"].text else self["Title"].text
-			self["ScreenPath"].text = ""
-			self.noScreenPathSource = True
 		for callback in self.onShow:
 			callback()
 		for value in list(self.values()) + self.renderer:
@@ -169,11 +167,11 @@ class Screen(dict):
 		except AttributeError:
 			pass
 		self.screenTitle = title
-		if showPath and (config.usage.showScreenPath.value == "large" or self.noScreenPathSource) and title:
+		if showPath and config.usage.showScreenPath.value == "large" and title:
 			screenPath = ""
-			screenTitle = "%s > %s" % (self.screenPath, title) if self.screenPath else title
+			screenTitle = f"{self.screenPath} > {title}" if self.screenPath else title
 		elif showPath and config.usage.showScreenPath.value == "small":
-			screenPath = "%s >" % self.screenPath if self.screenPath else ""
+			screenPath = f"{self.screenPath} >" if self.screenPath else ""
 			screenTitle = title
 		else:
 			screenPath = ""
@@ -250,14 +248,11 @@ class Screen(dict):
 
 	def createGUIScreen(self, parent, desktop, updateonly=False):
 		for item in self.renderer:
-			label_name = item.label_name
-			if label_name:
-				self.availableLabels.append(label_name)
 			if isinstance(item, GUIComponent):
 				if not updateonly:
 					item.GUIcreate(parent)
 				if not item.applySkin(desktop, self):
-					print("[Screen] Warning: Skin is missing renderer '%s' in %s." % (item, str(self)))
+					print(f"[Screen] Warning: Skin is missing renderer {item} in {str(self)}.")
 		for (name, item) in self.items():
 			if isinstance(item, GUIComponent):
 				if not updateonly:
@@ -265,10 +260,10 @@ class Screen(dict):
 				depr = item.deprecationInfo
 				if item.applySkin(desktop, self):
 					if depr:
-						print("[Screen] WARNING: OBSOLETE COMPONENT '%s' USED IN SKIN. USE '%s' INSTEAD!" % (name, depr[0]))
-						print("[Screen] OBSOLETE COMPONENT WILL BE REMOVED %s, PLEASE UPDATE!" % depr[1])
+						print(f"[Screen] WARNING: OBSOLETE COMPONENT {name} USED IN SKIN. USE {depr[0]} INSTEAD!")
+						print(f"[Screen] OBSOLETE COMPONENT WILL BE REMOVED {depr[1]}, PLEASE UPDATE!")
 				elif not depr:
-					print("[Screen] Warning: Skin is missing element '%s' in %s." % (name, str(self)))
+					print(f"[Screen] Warning: Skin is missing element {name} in {str(self)}.")
 		for item in self.additionalWidgets:
 			if not updateonly:
 				item.instance = item.widget(parent)
@@ -312,8 +307,8 @@ class ScreenSummary(Screen):
 		names = parent.skinName
 		if not isinstance(names, list):
 			names = [names]
-		self.skinName = ["%sSummary" % x for x in names]
-		self.skinName += ["%s_summary" % x for x in names]  # DEBUG: Old summary screens currently kept for compatibility.
+		self.skinName = [f"{x}Summary" for x in names]
+		self.skinName += [f"{x}_summary" for x in names]  # DEBUG: Old summary screens currently kept for compatibility.
 		className = self.__class__.__name__
 		if className != "ScreenSummary" and className not in self.skinName:  # e.g. if a module uses Screens.Setup.SetupSummary the skin needs to be available directly
 			self.skinName.append(className)

@@ -93,7 +93,7 @@ class Harddisk:
 				disk_path = dev_path + "/disc"
 				try:
 					rdev = stat(disk_path).st_rdev
-				except (IOError, OSError):
+				except OSError:
 					continue
 				if s_major == major(rdev) and s_minor == minor(rdev):
 					self.dev_path = dev_path
@@ -187,7 +187,7 @@ class Harddisk:
 			try:
 				stat = statvfs(dev)
 				return (stat.f_bfree // 1000) * (stat.f_bsize // 1024)
-			except (IOError, OSError):
+			except OSError:
 				pass
 		return -1
 
@@ -201,7 +201,7 @@ class Harddisk:
 			try:
 				stat = statvfs(mpath)
 				freetot += (stat.f_bfree // 1000) * (stat.f_bsize // 1000)
-			except (IOError, OSError):
+			except OSError:
 				pass
 		return freetot
 
@@ -213,7 +213,7 @@ class Harddisk:
 		if SystemInfo["Udev"]:
 			try:
 				devdir = listdir("/dev")
-			except (IOError, OSError):
+			except OSError:
 				return -1
 			for filename in devdir:
 				if filename.startswith(self.device):
@@ -221,7 +221,7 @@ class Harddisk:
 		else:
 			try:
 				idedir = listdir(self.dev_path)
-			except (IOError, OSError):
+			except OSError:
 				return -1
 			for filename in idedir:
 				if filename.startswith("disc"):
@@ -517,14 +517,14 @@ class Partition:
 		try:
 			s = self.stat()
 			return s.f_bavail * s.f_bsize
-		except (IOError, OSError):
+		except OSError:
 			return None
 
 	def total(self):
 		try:
 			s = self.stat()
 			return s.f_blocks * s.f_bsize
-		except (IOError, OSError):
+		except OSError:
 			return None
 
 	def tabbedDescription(self):
@@ -638,7 +638,7 @@ class HarddiskManager:
 				try:
 					if "cdrom" in fileReadLine(join("/proc/ide", blockdev, "media"), ""):
 						is_cdrom = True
-				except (IOError, OSError):
+				except OSError:
 					error = True
 			# check for partitions
 			if not is_cdrom and not is_mmc and exists(devpath):
@@ -650,14 +650,14 @@ class HarddiskManager:
 					partitions.append(partition)
 			else:
 				self.cd = blockdev
-		except (IOError, OSError):
+		except OSError:
 			error = True
 		# check for medium
 		medium_found = True
 		try:
 			if exists(join("/dev", blockdev)):
 				open(join("/dev", blockdev)).close()
-		except (IOError, OSError) as err:
+		except OSError as err:
 			if err.errno == 159:  # no medium present
 				medium_found = False
 		return error, blacklisted, removable, is_cdrom, partitions, medium_found
@@ -721,7 +721,7 @@ class HarddiskManager:
 			dev, part = self.splitDeviceName(device)
 			try:
 				physdev = realpath("/sys/block/" + dev + "/device")[4:]
-			except (IOError, OSError) as err:
+			except OSError as err:
 				physdev = dev
 				print("[Harddisk] Error %d: Couldn't determine blockdev physdev for device '%s'!  (%s)" % (err.errno, device, err.strerror))
 		error, blacklisted, removable, is_cdrom, partitions, medium_found = self.getBlockDevInfo(device)
@@ -749,7 +749,7 @@ class HarddiskManager:
 			dev, part = self.splitDeviceName(device)
 			try:
 				physdev = realpath("/sys/block/" + dev + "/device")[4:]
-			except (IOError, OSError) as err:
+			except OSError as err:
 				physdev = dev
 				print("[Harddisk] Error %d: Couldn't determine blockdev physdev for device '%s'!  (%s)" % (err.errno, device, err.strerror))
 		error, blacklisted, removable, is_cdrom, partitions, medium_found = self.getBlockDevInfo(device)
@@ -859,7 +859,7 @@ class HarddiskManager:
 			cd = open(device)
 			ioctl(cd.fileno(), ioctl_flag, speed)
 			cd.close()
-		except (IOError, OSError) as err:
+		except OSError as err:
 			print("[Harddisk] Error %s: Failed to set '%s' speed to '%s'!  (%s)" % (err.errno, device, speed, err.strerror))
 
 
@@ -873,7 +873,7 @@ class UnmountTask(Task.LoggingTask):
 		try:
 			dev = self.hdd.disk_path.split(sep)[-1]
 			open("/dev/nomount.%s" % dev, "wb").close()
-		except (IOError, OSError) as err:
+		except OSError as err:
 			print("[Harddisk] Error %d: UnmountTask failed to create '/dev/nomount' file!  (%s)" % (err.errno, err.strerror))
 		self.setTool("umount")
 		self.args.append("-f")
@@ -890,7 +890,7 @@ class UnmountTask(Task.LoggingTask):
 		for path in self.mountpoints:
 			try:
 				rmdir(path)
-			except (IOError, OSError) as err:
+			except OSError as err:
 				print("[Harddisk] Error %d: UnmountTask failed to remove path '%s'!  (%s)" % (err.errno, path, err.strerror))
 
 
@@ -903,7 +903,7 @@ class MountTask(Task.LoggingTask):
 		try:
 			dev = self.hdd.disk_path.split(sep)[-1]
 			unlink("/dev/nomount.%s" % dev)
-		except (IOError, OSError) as err:
+		except OSError as err:
 			print("[Harddisk] Error %d: MountTask failed to remove '/dev/nomount' file!  (%s)" % (err.errno, err.strerror))
 		if self.hdd.mount_device is None:
 			dev = self.hdd.partitionPath("1")  # Try mounting through fstab first.

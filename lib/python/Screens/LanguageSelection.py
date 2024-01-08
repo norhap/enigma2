@@ -183,6 +183,7 @@ class LanguageSelection(Screen):
 					if area in zone.attrib.get("zone"):
 						city = zone.attrib.get("zone").split("/")[1]
 						config.timezone.val.value = city
+						config.timezone.val.save()
 			config.ntp.timesync.value = "dvb"
 		self.setTitle(_cached("T2"))
 		self["summarylangname"].setText(_cached("T2"))

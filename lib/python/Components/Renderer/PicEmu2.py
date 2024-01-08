@@ -88,7 +88,7 @@ class PicEmu2(Renderer):
 						sName = self.ncam.get(line[0:4])
 						if sName:
 							return sName
-		except IOError as err:
+		except OSError as err:
 			print("[PicEmu2] %s" % err)
 
 	def findPicon(self, serviceName):

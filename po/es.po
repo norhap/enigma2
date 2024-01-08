@@ -40,12 +40,8 @@ msgstr "Administre extensiones o complementos para su receptor."
 msgid "Online update of your receiver software."
 msgstr "Actualizacion en linea del software de su receptor."
 
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Pulsa OK en su mando para continuar."
+msgid "Press OK to continue."
+msgstr "Pulse OK para continuar."
 
 msgid ""
 "Press GREEN button to enable MultiBoot.\n"
@@ -1084,7 +1080,7 @@ msgid "Backing up to: %s"
 msgstr "Copia de seguridad hasta: %s"
 
 msgid "Backup completed."
-msgstr "Copia de seguridad completada."
+msgstr "Copia de seguridad completa."
 
 msgid "Backup failed."
 msgstr "Copia de seguridad falló."
@@ -2907,6 +2903,9 @@ msgstr "Eliminar completo datos de temporizadores"
 
 msgid "Remove all other data"
 msgstr "Eliminar completo otros datos"
+
+msgid "Remove channel"
+msgstr "Eliminar canal"
 
 msgid "Remove Confirmation"
 msgstr "Confirmación Eliminar"
@@ -5048,6 +5047,9 @@ msgstr "Canal con reproducción Stream Relay"
 msgid "Play service without Stream Relay"
 msgstr "Canal sin reproducción Stream Relay"
 
+msgid "Services Stream Relay:"
+msgstr "Canales Stream Relay:"
+
 msgid "Please change recording endtime"
 msgstr "Cambiar el tiempo final de la grabación"
 
@@ -6122,8 +6124,8 @@ msgstr "Búsqueda SR adicional"
 #, python-format
 msgid "Scan completed, %d channel found."
 msgid_plural "Scan completed, %d channels found."
-msgstr[0] "Búsqueda completada, %d canal encontrado."
-msgstr[1] "Búsqueda completada, %d canales encontrados."
+msgstr[0] "Búsqueda completa, %d canal encontrado."
+msgstr[1] "Búsqueda completa, %d canales encontrados."
 
 msgid "Scan failed!"
 msgstr "Busqueda fallida!"
@@ -6157,8 +6159,8 @@ msgstr[1] "Escaneando - %d%% completados"
 #, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
-msgstr[0] "Búsqueda completada, %d canal encontrado"
-msgstr[1] "Búsqueda completada, %d canales encontrados"
+msgstr[0] "Búsqueda completa, %d canal encontrado"
+msgstr[1] "Búsqueda completa, %d canales encontrados"
 
 msgid "Scanning failed!"
 msgstr "¡Escaneado fallido!"
@@ -7256,6 +7258,12 @@ msgstr "Transmisión"
 msgid "Stream Relay port"
 msgstr "Puerto Stream Relay"
 
+msgid "Stream Relay Settings"
+msgstr "Ajustes Stream Relay"
+
+msgid "Stream Relay Setup Actions"
+msgstr "Acciones Stream Relay"
+
 msgid "Stream Relay URL"
 msgstr "URL Stream Relay"
 
@@ -8260,8 +8268,8 @@ msgstr "Actualizar solo lista de canales"
 #, python-format
 msgid "Update completed, %d package was installed."
 msgid_plural "Update completed, %d packages were installed."
-msgstr[0] "Actualización completa, paquete %d se instaló."
-msgstr[1] "Actualización completa, paquetes %d se instalaron."
+msgstr[0] "Actualización completa, %d paquete instalado."
+msgstr[1] "Actualización completa, %d paquetes instalados."
 
 msgid "Update completed. Do you want to reboot your %s %s?"
 msgstr "Actualización completa. ¿Quieres reiniciar su %s %s?"
@@ -10763,9 +10771,6 @@ msgstr "Habilitar el caché de teletexto"
 msgid "Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch."
 msgstr "Habilite para mostrar todas las opciones de configuración Verdadero/Falso, Sí/No, Encendido/Apagado y Habilitar/Deshabilitar como un interruptor gráfico."
 
-msgid "Enable volume control with arrow buttons"
-msgstr "Habilite el control de volumen con botones flecha (cruzeta del botón OK)"
-
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zapping con CH +/-, B +/-, P +/-"
 
@@ -11192,6 +11197,18 @@ msgstr "Zona horaria"
 msgid "Tuner slot"
 msgstr "Ranura del sintonizador"
 
+msgid "Turn off HDMI-IN Full screen mode"
+msgstr "Desactivar HDMI-IN modo pantalla completa"
+
+msgid "Turn off HDMI-IN PiP mode"
+msgstr "Desactivar modo PiP HDMI-IN"
+
+msgid "Turn on HDMI-IN PiP mode"
+msgstr "Activar modo PiP HDMI-IN"
+
+msgid "Turn on HDMI-IN Full screen mode"
+msgstr "Activar HDMI-IN modo pantalla completa"
+
 msgid "Turn on the power LED during standby."
 msgstr "Encienda el LED de encendido durante standby o reposo profundo."
 
@@ -11251,9 +11268,6 @@ msgstr "Cuando está habilitado, el receptor se puede activar desde su LAN"
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Cuando está habilitado, cuando selecciona un nuevo canal en la lista de canales, la lista de canales no se cierra. Solo se cerrará cuando seleccione el canal de reproducción actual. Este es un tipo de modo de vista previa"
-
-msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr "Cuando está habilitado, puede controlar el volumen con los botones de flecha en lugar de obtener la lista de canales"
 
 msgid "When enabled you can zap channels with the CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr "Cuando está habilitado, puede eliminar los canales con los botones CH +/-, B +/-, P +/- en lugar de abrir la lista de canales."
@@ -11880,8 +11894,8 @@ msgstr ""
 msgid " events\n"
 msgstr " Eventos\n"
 
-msgid "Add Channel"
-msgstr "Agregar canal"
+msgid "Add channel"
+msgstr "Añadir canal"
 
 msgid "Add 4 more Vu+ Multiboot USB slots after slot %s ?"
 msgstr "¿Añadir 4 slots USB Vu+ Multiboot más después del slot %s?"
@@ -11895,8 +11909,8 @@ msgstr "Importación Automática EPG"
 msgid "Automatic import EPG"
 msgstr "Importación Automática EPG"
 
-msgid "Channel Selection"
-msgstr "Selección del canal"
+msgid "Channel List Settings"
+msgstr "Ajustes Lista de Canales"
 
 msgid "Choice days for start import"
 msgstr "Días de elección para la importación inicial"
@@ -14469,7 +14483,7 @@ msgid "Autoinstalling %s"
 msgstr "Autoinstalación %s"
 
 msgid "Autoinstalling Completed"
-msgstr "Autoinstalación completada"
+msgstr "Autoinstalación completa"
 
 msgid "Autoinstalling please wait for packages being updated"
 msgstr "Instalación automática, espere actualizando los paquetes"
@@ -15680,13 +15694,6 @@ msgstr "Dispositivos Almacenamiento"
 
 msgid "Storage device not available or not initialized."
 msgstr "Dispositivo de almacenamiento no disponible o no inicializado."
-
-msgid ""
-"Storage device not available.\n"
-"Mount device or reboot system and try again."
-msgstr ""
-"Dispositivo de almacenamiento no disponible.\n"
-"Monte el dispositivo o reinicie el sistema y vuelva a intentarlo."
 
 msgid "Detected tuners"
 msgstr "Sintonizadores detectados"

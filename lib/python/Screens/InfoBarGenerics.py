@@ -35,13 +35,14 @@ from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
 from Tools.ASCIItranslit import legacyEncode
-from Tools.Directories import fileExists, fileWriteLine, fileReadLines, fileWriteLines, getRecordingFilename, moveFiles, isPluginInstalled
+from Tools.Directories import fileExists, fileWriteLine, fileReadLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
 from time import time, localtime, strftime
 from os.path import exists, isfile, splitext, join
 from os import listdir, remove
+from re import match
 from bisect import insort
 import itertools
 import datetime
@@ -51,6 +52,7 @@ from Screens.Menu import MainMenu, mdom
 import pickle
 from sys import maxsize
 from gettext import ngettext
+from process import ProcessList
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -159,52 +161,61 @@ class InfoBarStreamRelay:
 		self.reload()
 
 	def reload(self):
-		self.streamRelay = fileReadLines(self.FILENAME, default=[], source=self.__class__.__name__)
+		data = fileReadLines(self.FILENAME, default=[], source=self.__class__.__name__)
+		self.__services = self.__sanitizeData(data)
+
+	def __sanitizeData(self, data: list):
+		return list(set([match(r"([0-9A-F]+:){10}", line.strip()).group(0) for line in data if line and match(r"^(?:[0-9A-F]+:){10}", line.strip())]))
 
 	def check(self, nav, service):
-		return (service or nav.getCurrentlyPlayingServiceReference()) and service.toString() in self.streamRelay
+		return nav.getCurrentlyPlayingServiceReference() and service.toCompareString() in self.__services
 
 	def write(self):
-		fileWriteLines(self.FILENAME, self.streamRelay, source=self.__class__.__name__)
+		self.__services.sort(key=lambda ref: (int((x := ref.split(":"))[6], 16), int(x[5], 16), int(x[4], 16), int(x[3], 16)))
+		with open(self.FILENAME, 'w') as whitelist_streamrelay:
+			whitelist_streamrelay.write('\n'.join(self.__services))
 
 	def toggle(self, nav, service):
 		if isinstance(service, list):
 			serviceList = service
-			for service in serviceList:
-				servicestring = service.toString()
-				if servicestring in self.streamRelay:
-					self.streamRelay.remove(servicestring)
-				else:
-					self.streamRelay.append(servicestring)
+			serviceList = [service.toCompareString() for service in serviceList]
+			self.__services = list(set(serviceList + self.__services))
 			self.write()
 		else:
-			service = service or nav.getCurrentlyPlayingServiceReference()
-			if service:
-				servicestring = service.toString()
-				if servicestring in self.streamRelay:
-					self.streamRelay.remove(servicestring)
-				else:
-					self.streamRelay.append(servicestring)
-					if nav.getCurrentlyPlayingServiceReference() == service:
-						nav.restartService()
-				self.write()
+			servicestring = service.toCompareString()
+			if servicestring in self.__services:
+				self.__services.remove(servicestring)
+			else:
+				self.__services.append(servicestring)
+			if nav.getCurrentlyPlayingServiceReference():
+				nav.restartService()
+			self.write()
+
+	def __getData(self):
+		return self.__services
+
+	def __setData(self, value):
+		self.__services = value
+		self.write()
+
+	data = property(__getData, __setData)
 
 	def streamrelayChecker(self, playref):
-		playrefstring = playref.toString()
-		if "%3a//" not in playrefstring and playrefstring in self.streamRelay:
+		playrefstring = playref.toCompareString()
+		if "%3a//" not in playrefstring and playrefstring in self.__services:
 			url = f'http://{".".join("%d" % d for d in config.misc.softcam_streamrelay_url.value)}:{config.misc.softcam_streamrelay_port.value}/'
 			if "127.0.0.1" in url:
 				playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
 			else:
 				playrefmod = playrefstring
 			playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
-			print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
+			print(f"[{self.__class__.__name__}] Play service {playref.toCompareString()} via streamrelay")
 			playref.setAlternativeUrl(playrefstring)
 			return (playref, True)
 		return (playref, False)
 
 	def checkService(self, service):
-		return service and service.toString() in self.streamRelay
+		return service and service.toCompareString() in self.__services
 
 
 streamrelay = InfoBarStreamRelay()
@@ -925,95 +936,55 @@ class InfoBarChannelSelection:
 			self.servicelist.historyNext()
 
 	def keyUpCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
-			self.zapDown()
-		elif config.usage.volume_instead_of_channelselection.value:
-			self.volumeUp()
-		else:
-			self.switchChannelUp()
+		self.zapDown() if config.usage.oldstyle_zap_controls.value else self.switchChannelUp()
 
 	def keyDownCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
-			self.zapUp()
-		elif config.usage.volume_instead_of_channelselection.value:
-			self.volumeDown()
-		else:
-			self.switchChannelDown()
+		self.zapUp() if config.usage.oldstyle_zap_controls.value else self.switchChannelDown()
 
 	def keyLeftCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
-			if config.usage.volume_instead_of_channelselection.value:
-				self.volumeDown()
-			else:
-				self.switchChannelUp()
-		else:
-			self.zapUp()
+		self.switchChannelUp() if config.usage.oldstyle_zap_controls.value else self.zapUp()
 
 	def keyRightCheck(self):
-		if config.usage.oldstyle_zap_controls.value:
-			if config.usage.volume_instead_of_channelselection.value:
-				self.volumeUp()
-			else:
-				self.switchChannelDown()
-		else:
-			self.zapDown()
+		self.switchChannelDown() if config.usage.oldstyle_zap_controls.value else self.zapDown()
 
 	def keyChannelUpCheck(self):
-		if config.usage.zap_with_ch_buttons.value:
-			self.zapDown()
-		else:
-			self.openServiceList()
+		self.zapDown() if config.usage.zap_with_ch_buttons.value else self.openServiceList()
 
 	def keyChannelDownCheck(self):
-		if config.usage.zap_with_ch_buttons.value:
-			self.zapUp()
-		else:
-			self.openServiceList()
+		self.zapUp() if config.usage.zap_with_ch_buttons.value else self.openServiceList()
 
 	def getKeyUpHelptext(self):
 		if config.usage.oldstyle_zap_controls.value:
 			value = _("Switch to next channel")
 		else:
-			if config.usage.volume_instead_of_channelselection.value:
-				value = _("Volume up")
-			else:
-				value = _("Open service list")
-				if "keep" not in config.usage.servicelist_cursor_behavior.value:
-					value += " " + _("and select previous channel")
+			value = _("Open service list")
+			if "keep" not in config.usage.servicelist_cursor_behavior.value:
+				value += " " + _("and select previous channel")
 		return value
 
 	def getKeyDownHelpText(self):
 		if config.usage.oldstyle_zap_controls.value:
 			value = _("Switch to previous channel")
 		else:
-			if config.usage.volume_instead_of_channelselection.value:
-				value = _("Volume down")
-			else:
-				value = _("Open service list")
-				if "keep" not in config.usage.servicelist_cursor_behavior.value:
-					value += " " + _("and select next channel")
+			value = _("Open service list")
+			if "keep" not in config.usage.servicelist_cursor_behavior.value:
+				value += " " + _("and select next channel")
 		return value
 
 	def getKeyLeftHelptext(self):
 		if config.usage.oldstyle_zap_controls.value:
-			if config.usage.volume_instead_of_channelselection.value:
-				value = _("Volume down")
-			else:
-				value = _("Open service list")
-				if "keep" not in config.usage.servicelist_cursor_behavior.value:
-					value += " " + _("and select previous channel")
+			value = _("Open service list")
+			if "keep" not in config.usage.servicelist_cursor_behavior.value:
+				value += " " + _("and select previous channel")
 		else:
 			value = _("Switch to previous channel")
 		return value
 
 	def getKeyRightHelptext(self):
 		if config.usage.oldstyle_zap_controls.value:
-			if config.usage.volume_instead_of_channelselection.value:
-				value = _("Volume up")
-			else:
-				value = _("Open service list")
-				if "keep" not in config.usage.servicelist_cursor_behavior.value:
-					value += " " + _("and select next channel")
+			value = _("Open service list")
+			if "keep" not in config.usage.servicelist_cursor_behavior.value:
+				value += " " + _("and select next channel")
 		else:
 			value = _("Switch to next channel")
 		return value
@@ -1587,7 +1558,7 @@ class InfoBarSeek:
 		return (0, -n, 0, "<< %dx" % n)
 
 	def makeStateSlowMotion(self, n):
-		return (0, 0, n, "/%d" % n)
+		return (0, 0, n, "/ %d" % n)
 
 	def isStateForward(self, state):
 		return state[1] > 1
@@ -1940,7 +1911,7 @@ class InfoBarPVRState:
 		self.force_show = force_show
 
 	def _mayShow(self):
-		if self.shown and self.seekstate != self.SEEK_STATE_PLAY:
+		if self.shown:
 			self.pvrStateDialog.show()
 		if self.shown and self.seekstate != self.SEEK_STATE_EOF:
 			self.DimmingTimer.stop()
@@ -1950,8 +1921,15 @@ class InfoBarPVRState:
 
 	def __playStateChanged(self, state):
 		playstateString = state[3]
+		playstate = playstateString.split()
+		pixmapnum = [">", '||', 'END', '>>', '<<', '/'].index(playstate[0])
 		self.pvrStateDialog["state"].setText(playstateString)
-
+		self.pvrStateDialog["statusicon"].setPixmapNum(pixmapnum)
+		self.pvrStateDialog["speed"].setText(playstate[1] if len(playstate) > 1 else "")
+		if "state" in self:
+			self["state"].setText(playstateString)
+			self["statusicon"].setPixmapNum(pixmapnum)
+			self["speed"].setText(playstate[1] if len(playstate) > 1 else "")
 		# if we return into "PLAY" state, ensure that the dialog gets hidden if there will be no infobar displayed
 		if not config.usage.show_infobar_on_skip.value and self.seekstate == self.SEEK_STATE_PLAY and not self.force_show:
 			self.pvrStateDialog.hide()
@@ -2437,28 +2415,19 @@ class InfoBarExtensions:
 		return _("CCcam Info")
 
 	def getOSCamInfo(self):
-		import process
-		p = process.ProcessList()
-		oscam = str(p.named("oscam")).strip("[]") or str(p.named("oscam-emu")).strip("[]")
-		if oscam:
+		if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
 			return [((boundFunction(self.getOSCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getNCamInfo(self):
-		import process
-		p = process.ProcessList()
-		ncam = str(p.named("ncam")).strip("[]")
-		if ncam:
+		if str(ProcessList().named("ncam")).strip("[]"):
 			return [((boundFunction(self.getNCam), boundFunction(self.openNCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
 	def getCCcamInfo(self):
-		import process
-		p = process.ProcessList()
-		CCcam = str(p.named("CCcam")).strip("[]")
-		if CCcam:
+		if str(ProcessList().named("CCcam")).strip("[]"):
 			return [((boundFunction(self.getCCcam), boundFunction(self.openCCcamInfo), lambda: True), None)] or []
 		else:
 			return []
@@ -2499,7 +2468,7 @@ class InfoBarExtensions:
 
 	def updateExtensions(self):
 		self.extensionsList = []
-		self.availableKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue"]
+		self.availableKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue", "bullet"]
 		self.extensionKeys = {}
 		for x in self.list:
 			if x[0] == self.EXTENSION_SINGLE:
@@ -4073,7 +4042,7 @@ class InfoBarServiceErrorPopupSupport:
 				self.session.nav.currentlyPlayingServiceReference = None
 				self.session.nav.currentlyPlayingServiceOrGroup = None
 
-			if error == self.last_error:
+			if error == self.last_error or not self.last_error and isPluginInstalled("IPToSAT"):
 				error = None
 			else:
 				self.last_error = error
@@ -4268,9 +4237,9 @@ class InfoBarHdmi2:
 
 		if BoxInfo.getItem("hashdmiin"):
 			if not self.hdmi_enabled_full:
-				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True), "blue")
+				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True), "bullet")
 			if not self.hdmi_enabled_pip:
-				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True), "green")
+				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True), "bullet")
 		self["HDMIActions"] = HelpableActionMap(self, ["InfobarHDMIActions"], {
 			"HDMIin": (self.HDMIIn, _("Switch to HDMI-IN mode")),
 			"HDMIinLong": (self.HDMIInLong, _("Switch to HDMI-IN mode")),

@@ -1,15 +1,13 @@
-# -*- coding: utf-8 -*-
+from ast import literal_eval
 from os.path import isfile, join
 from re import findall
-
+from hashlib import md5
 from boxbranding import getMachineName
 from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD
 
 from process import ProcessList
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
 from Tools.StbHardware import getWakeOnLANType
-
-SystemInfo = {}
 
 
 class BoxInformation:
@@ -18,58 +16,33 @@ class BoxInformation:
 		self.boxInfo = {}
 		file = root + join(resolveFilename(SCOPE_LIBDIR), "enigma.info")
 		self.boxInfo["overrideactive"] = False  # not currently used by us
+		self.boxInfo["checksumerror"] = True
 		lines = fileReadLines(file)
 		if lines:
 			for line in lines:
-				if line.startswith("#") or line.strip() == "" or line.strip().lower().startswith("checksum") or "=" not in line:
+				if line.startswith("#") or line.strip() == "" or "=" not in line:
 					continue
 				item, value = [x.strip() for x in line.split("=", 1)]
-				if item:
-					self.immutableList.append(item)
-					# Temporary fix: some items that look like floats are not floats and should be handled as strings, e.g. python "3.10" should not be processed as "3.1".
-					if not (value.startswith("\"") or value.startswith("'")) and item in ("python", "imageversion", "imgversion"):
-						value = '"' + value + '"'  # wrap it so it is treated as a string
-					self.boxInfo[item] = self.processValue(value)
-			# print("[SystemInfo] Enigma information file data loaded into BoxInfo.")
+				if item.lower() == "checksum":
+					self.boxInfo["checksumerror"] = (i := lines.index(line)) < 1 or md5(bytearray("\n".join(lines[:i]) + "\n", "UTF-8", errors="ignore")).hexdigest() != value
+				elif item:
+					self.setItem(item, self.processValue(value), immutable=True)
+			if self.boxInfo["checksumerror"]:
+				print(f"[BoxInfo] Data integrity of {file} could not be verified.")
 		else:
-			print("[BoxInfo] ERROR: %s is not available!  The system is unlikely to boot or operate correctly." % file)
+			print(f"[BoxInfo] ERROR: {file} is not available!  The system is unlikely to boot or operate correctly.")
 
 	def processValue(self, value):
-		if value is None:
-			pass
-		elif (value.startswith("\"") or value.startswith("'")) and value.endswith(value[0]):
-			value = value[1:-1]
-		elif value.startswith("(") and value.endswith(")"):
-			data = []
-			for item in [x.strip() for x in value[1:-1].split(",")]:
-				data.append(self.processValue(item))
-			value = tuple(data)
-		elif value.startswith("[") and value.endswith("]"):
-			data = []
-			for item in [x.strip() for x in value[1:-1].split(",")]:
-				data.append(self.processValue(item))
-			value = list(data)
-		elif value.upper() == "NONE":
-			value = None
-		elif value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
-			value = False
+		if value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
+			return False
 		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
-			value = True
-		elif value.isdigit() or ((value[0:1] == "-" or value[0:1] == "+") and value[1:].isdigit()):
-			if value[0] != "0":  # if this is zero padded it must be a string, so skip
-				value = int(value)
-		elif value.startswith("0x") or value.startswith("0X"):
-			value = int(value, 16)
-		elif value.startswith("0o") or value.startswith("0O"):
-			value = int(value, 8)
-		elif value.startswith("0b") or value.startswith("0B"):
-			value = int(value, 2)
-		else:
-			try:
-				value = float(value)
-			except ValueError:
-				pass
-		return value
+			return True
+		elif value.upper() == "NONE":
+			return None
+		try:
+			return literal_eval(value)
+		except Exception:
+			return value
 
 	def getEnigmaInfoList(self):
 		return sorted(self.immutableList)
@@ -81,27 +54,20 @@ class BoxInformation:
 		return sorted(list(self.boxInfo.keys()))
 
 	def getItem(self, item, default=None):
-		if item in self.boxInfo:
-			value = self.boxInfo[item]
-		elif item in SystemInfo:
-			value = SystemInfo[item]
-		else:
-			value = default
-		return value
+		return self.boxInfo.get(item, default)
 
 	def setItem(self, item, value, immutable=False, forceOverride=False):
 		if item in self.immutableList and not forceOverride:
-			print("[BoxInfo] Error: Item '%s' is immutable and can not be %s!" % (item, "changed" if item in self.boxInfo else "added"))
+			print(f"[BoxInfo] Error: Item '{item}' is immutable and can not be {'changed' if item in self.boxInfo else 'added'}!")
 			return False
 		if immutable and item not in self.immutableList:
 			self.immutableList.append(item)
 		self.boxInfo[item] = value
-		SystemInfo[item] = value
 		return True
 
-	def deleteItem(self, item):
-		if item in self.immutableList:
-			print("[BoxInfo] Error: Item '%s' is immutable and can not be deleted!" % item)
+	def deleteItem(self, item, forceOverride=False):
+		if item in self.immutableList and not forceOverride:
+			print(f"[BoxInfo] Error: Item {item} is immutable and can not be deleted!")
 		elif item in self.boxInfo:
 			del self.boxInfo[item]
 			return True
@@ -109,6 +75,7 @@ class BoxInformation:
 
 
 BoxInfo = BoxInformation()
+SystemInfo = BoxInfo.boxInfo
 
 MODEL = BoxInfo.getItem("model")
 DISPLAYMODEL = getMachineName()
@@ -190,6 +157,7 @@ BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
+BoxInfo.setItem("StreamRelay", False)
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
@@ -298,8 +266,7 @@ SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
 SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
-SystemInfo["OScamIsActive"] = str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]")
-SystemInfo["StreamRelay"] = str(ProcessList().named("oscam-emu")).strip("[]")
+SystemInfo["OSCamIsActive"] = str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]")
 SystemInfo["NCamIsActive"] = str(ProcessList().named("ncam")).strip("[]")
 SystemInfo["CCcamIsActive"] = str(ProcessList().named("CCcam")).strip("[]")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")

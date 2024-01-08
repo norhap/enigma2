@@ -29,7 +29,7 @@ class MovieBarInfo(Converter, object):
 					f = open(movie_meta, "rb")
 					rec_ref = f.readlines()
 					f.close()
-				except IOError:
+				except OSError:
 					return ""
 				if len(rec_ref):
 					return rec_ref[0].rstrip('\n')
@@ -40,7 +40,7 @@ class MovieBarInfo(Converter, object):
 					f = open(movie_meta, "rb")
 					rec_ref = f.readlines()
 					f.close()
-				except IOError:
+				except OSError:
 					return ""
 				if len(rec_ref):
 					return rec_ref[2].rstrip('\n')

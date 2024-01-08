@@ -42,8 +42,9 @@ fonts = {  # Dictionary of predefined and skin defined font aliases.
 	"Body": ("Regular", 18, 22, 16),
 	"ChoiceList": ("Regular", 20, 24, 18)
 }
-menus = {}  # Dictionary of images associated with menu entries.
 parameters = {}  # Dictionary of skin parameters used to modify code behavior.
+screens = {}  # Dictionary of images associated with screen entries.
+menus = {}  # Dictionary of images associated with menu entries.
 setups = {}  # Dictionary of images associated with setup menus.
 switchPixmap = {}  # Dictionary of switch images.
 windowStyles = {}  # Dictionary of window styles for each screen ID.
@@ -912,6 +913,9 @@ class AttributeParser:
 		self.horizontalAlignment(value)
 		# attribDeprecationWarning("halign", "horizontalAlignment")
 
+	def headerFont(self, value):
+		self.guiObject.setHeaderFont(parseFont(value, self.scaleTuple))
+
 	def horizontalAlignment(self, value):
 		self.guiObject.setHAlign(parseHorizontalAlignment(value))
 
@@ -1334,10 +1338,19 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 				parameters[name] = list(map(parseParameter, [x.strip() for x in value.split(",")])) if "," in value else parseParameter(value)
 			else:
 				skinError(f"Tag 'parameter' needs a name and value, got name='{name}' and size='{value}'")
+	for tag in domSkin.findall("screens"):
+		for screen in tag.findall("screen"):
+			key = screen.attrib.get("key")
+			image = screen.attrib.get("image")
+			if key and image:
+				screens[key] = image
+				# print(f"[Skin] DEBUG: Screen key='{key}', image='{image}'.")
+			else:
+				skinError(f"Tag 'screen' needs key and image, got key='{key}' and image='{image}'")
 	for tag in domSkin.findall("menus"):
-		for setup in tag.findall("menu"):
-			key = setup.attrib.get("key")
-			image = setup.attrib.get("image")
+		for menu in tag.findall("menu"):
+			key = menu.attrib.get("key")
+			image = menu.attrib.get("image")
 			if key and image:
 				menus[key] = image
 				# print(f"[Skin] DEBUG: Menu key='{key}', image='{image}'.")
@@ -1426,8 +1439,14 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 				except Exception as err:
 					skinError(f"Unknown style color name '{name}' ({err})")
 		for configList in tag.findall("configList"):
-			style.setEntryFont(parseFont(configList.attrib.get("entryFont", "Regular;20"), ((1, 1), (1, 1))))
-			style.setValueFont(parseFont(configList.attrib.get("valueFont", "Regular;20"), ((1, 1), (1, 1))))
+			if "entryFont" in configList.attrib:
+				style.setEntryFont(parseFont(configList.attrib.get("entryFont", "Regular;20"), ((1, 1), (1, 1))))
+			if "valueFont" in configList.attrib:
+				style.setValueFont(parseFont(configList.attrib.get("valueFont", "Regular;18"), ((1, 1), (1, 1))))
+			if "headerFont" in configList.attrib:
+				style.setHeaderFont(parseFont(configList.attrib.get("headerFont", "Regular;20"), ((1, 1), (1, 1))))
+			style.setValue(eWindowStyleSkinned.valueEntryLeftOffset, parseInteger(configList.attrib.get("entryLeftOffset", "15")))
+			style.setValue(eWindowStyleSkinned.valueHeaderLeftOffset, parseInteger(configList.attrib.get("headerLeftOffset", "15")))
 		for label in tag.findall("label"):
 			style.setLabelFont(parseFont(label.attrib.get("font", "Regular;20"), ((1, 1), (1, 1))))
 		for listBox in tag.findall("listbox"):
@@ -1511,6 +1530,7 @@ class SizeTuple(tuple):
 
 class SkinContext:
 	def __init__(self, parent=None, pos=None, size=None, font=None):
+		self.spacing = 0
 		if parent:
 			if pos is None:
 				self.x = None
@@ -1609,6 +1629,84 @@ class SkinContextStack(SkinContext):
 		return (SizeTuple(pos), SizeTuple(size))
 
 
+class SkinContextVertical(SkinContext):
+	def parse(self, pos, size, font):
+		if size in variables:
+			size = variables[size]
+		if pos == "fill":
+			pos = (self.x, self.y)
+			size = (self.w, self.h)
+			self.w = 0
+			self.h = 0
+		else:
+			(width, height) = size.split(",")
+			width = parseCoordinate(width, self.w, 0, font, self.scale[0])
+			height = parseCoordinate(height, self.h, 0, font, self.scale[1])
+			left = self.x
+			p = pos.split(",")
+			if len(p) == 2 and p[1] in ("top", "bottom") and p[0].isdigit():
+				left = int(int(p[0]) * self.scale[0][0] / self.scale[0][1])
+				pos = p[1]
+			if pos == "bottom":
+				pos = (left, self.y + self.h - height)
+				size = (width, height)
+				self.h -= (height + self.spacing)
+			elif pos == "top":
+				pos = (left, self.y)
+				size = (width, height)
+				self.h -= (height + self.spacing)
+				self.y += (height + self.spacing)
+			else:
+				if pos in variables:
+					pos = variables[pos]
+				size = (width, height)
+				pos = pos.split(",")
+				pos = (self.x + parseCoordinate(pos[0], self.w, size[0], font, self.scale[0]), self.y + parseCoordinate(pos[1], self.h, size[1], font, self.scale[1]))
+				self.h -= (height + self.spacing)
+				self.y += (height + self.spacing)
+		# print(f"[Skin] SkinContextVertical DEBUG: Scale={self.scale}, Pos={SizeTuple(pos)}, Size={SizeTuple(size)}.")
+		return (SizeTuple(pos), SizeTuple(size))
+
+
+class SkinContextHorizontal(SkinContext):
+	def parse(self, pos, size, font):
+		if size in variables:
+			size = variables[size]
+		if pos == "fill":
+			pos = (self.x, self.y)
+			size = (self.w, self.h)
+			self.w = 0
+			self.h = 0
+		else:
+			(width, height) = size.split(",")
+			width = parseCoordinate(width, self.w, 0, font, self.scale[0])
+			height = parseCoordinate(height, self.h, 0, font, self.scale[1])
+			top = self.y
+			p = pos.split(",")
+			if len(p) == 2 and p[0] in ("left", "right") and p[1].isdigit():
+				top = int(int(p[1]) * self.scale[0][0] / self.scale[0][1])
+				pos = p[0]
+			if pos == "left":
+				pos = (self.x, top)
+				size = (width, height)
+				self.x += (width + self.spacing)
+				self.w -= (width + self.spacing)
+			elif pos == "right":
+				pos = (self.x + self.w - width, top)
+				size = (width, height)
+				self.w -= (width + self.spacing)
+			else:
+				if pos in variables:
+					pos = variables[pos]
+				size = (width, height)
+				pos = pos.split(",")
+				pos = (self.x + parseCoordinate(pos[0], self.w, size[0], font, self.scale[0]), self.y + parseCoordinate(pos[1], self.h, size[1], font, self.scale[1]))
+				self.w -= (width + self.spacing)
+				self.x += (width + self.spacing)
+		# print(f"[Skin] SkinContextHorizontal DEBUG: Scale={self.scale}, Pos={SizeTuple(pos)}, Size={SizeTuple(size)}.")
+		return (SizeTuple(pos), SizeTuple(size))
+
+
 class SkinError(Exception):
 	def __init__(self, errorMessage):
 		self.errorMessage = errorMessage
@@ -1631,7 +1729,7 @@ def readSkin(screen, skin, names, desktop):
 				myName = name  # Use this name for debug output.
 				break
 			else:
-				widgetList = ", ".join(screen.mandatoryWidgets)
+				widgetList = "', '".join(screen.mandatoryWidgets)
 				print(f"[Skin] Warning: Skin screen '{name}' rejected as it does not offer all the mandatory widgets '{widgetList}'!")
 				myScreen = None
 	else:
@@ -1639,7 +1737,7 @@ def readSkin(screen, skin, names, desktop):
 	if myScreen is None:  # Otherwise try embedded skin.
 		myScreen = getattr(screen, "parsedSkin", None)
 	if myScreen is None and getattr(screen, "skin", None):  # Try uncompiled embedded skin.
-		if isinstance(screen.skin, list):
+		if isinstance(screen.skin, list):  # This mode of skin scaling is deprecated!
 			print(f"[Skin] Resizable embedded skin template found in '{myName}'.")
 			skin = screen.skin[0] % tuple([int(x * getSkinFactor()) for x in screen.skin[1:]])
 		else:
@@ -1783,7 +1881,6 @@ def readSkin(screen, skin, names, desktop):
 				raise SkinError(f"Renderer '{widgetRenderer}' not found")
 			renderer = rendererClass()  # Instantiate renderer.
 			renderer.connect(source)  # Connect to source.
-			renderer.label_name = widgetSource or widgetName  # allows that it can be checked a label exists in the skin
 			attributes = renderer.skinAttributes = []
 			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source"))
 			screen.renderer.append(renderer)
@@ -1856,9 +1953,17 @@ def readSkin(screen, skin, names, desktop):
 			else:
 				processScreen(screen[0], context)
 		layout = widget.attrib.get("layout")
-		contextClass = SkinContextStack if layout == "stack" else SkinContext
+		classes = {
+			"stack": SkinContextStack,
+			"vertical": SkinContextVertical,
+			"horizontal": SkinContextHorizontal,
+		}
+		contextClass = classes.get(layout, SkinContext)
 		try:
 			contextScreen = contextClass(context, widget.attrib.get("position"), widget.attrib.get("size"), widget.attrib.get("font"))
+			spacing = widget.attrib.get("spacing")
+			if spacing:
+				contextScreen.spacing = int(spacing)
 		except Exception as err:
 			raise SkinError(f"Failed to create skin context (position='{widget.attrib.get('position')}', size='{widget.attrib.get('size')}', font='{widget.attrib.get('font')}') in context '{context}': {err}")
 		processScreen(widget, contextScreen)
@@ -1876,12 +1981,12 @@ def readSkin(screen, skin, names, desktop):
 	}
 
 	try:
-		msg = f" from list '{', '.join(names)}'" if len(names) > 1 else ""
+		msg = f", from list '{', '.join(names)}'," if len(names) > 1 else ""
 		posX = "?" if context.x is None else str(context.x)
 		posY = "?" if context.y is None else str(context.y)
 		sizeW = "?" if context.w is None else str(context.w)
 		sizeH = "?" if context.h is None else str(context.h)
-		print(f"[Skin] Processing screen '{myName}'{msg}, position=({posX}, {posY}), size=({sizeW}x{sizeH}) for module '{screen.__class__.__name__}'.")
+		print(f"[Skin] Processing screen '{myName}'{msg} position=({posX},{posY}), size=({sizeW},{sizeH}) for module '{screen.__class__.__name__}'.")
 		context.x = 0  # Reset offsets, all components are relative to screen coordinates.
 		context.y = 0
 		processScreen(myScreen, context)
@@ -1898,6 +2003,21 @@ def readSkin(screen, skin, names, desktop):
 	usedComponents = None
 
 
+# Search the domScreens dictionary to see if any of the screen names provided
+# have a skin based screen.  This will allow coders to know if the named
+# screen will be skinned by the skin code.  A return of None implies that the
+# code must provide its own skin for the screen to be displayed to the user.
+#
+def findSkinScreen(names):
+	if not isinstance(names, list):
+		names = [names]
+	for name in names:  # Try all names given, the first one found is the one that will be used by the skin engine.
+		screen, path = domScreens.get(name, (None, None))
+		if screen:  # is not None:
+			return name
+	return None
+
+
 # Return a set of all the widgets found in a screen. Panels will be expanded
 # recursively until all referenced widgets are captured. This code only performs
 # a simple scan of the XML and no skin processing is performed.
@@ -1905,20 +2025,20 @@ def readSkin(screen, skin, names, desktop):
 def findWidgets(name):
 	widgetSet = set()
 	element, path = domScreens.get(name, (None, None))
-	if element is not None:
+	if element:
 		widgets = element.findall("widget")
-		if widgets is not None:
+		if widgets:
 			for widget in widgets:
-				name = widget.get("name", None)
-				if name is not None:
+				name = widget.get("name")
+				if name:
 					widgetSet.add(name)
-				source = widget.get("source", None)
-				if source is not None:
+				source = widget.get("source")
+				if source:
 					widgetSet.add(source)
 		panels = element.findall("panel")
-		if panels is not None:
+		if panels:
 			for panel in panels:
-				name = panel.get("name", None)
+				name = panel.get("name")
 				if name:
 					widgetSet.update(findWidgets(name))
 	return widgetSet
@@ -1935,32 +2055,10 @@ def getScrollLabelStyle(element):
 # default screen resolution of HD (720p).  That is the scale factor for a HD
 # screen will be 1.
 #
+# NOTE: This function is deprecated for openATV!
+#
 def getSkinFactor(screen=GUI_SKIN_ID):
 	skinfactor = getDesktop(screen).size().height() / 720.0
 	# if skinfactor not in [0.8, 1, 1.5, 3, 6]:
 	# 	print(f"[Skin] Warning: Unexpected result for getSkinFactor '{skinfactor:.4f}'!")
 	return skinfactor
-
-
-# Search the domScreens dictionary to see if any of the screen names provided
-# have a skin based screen.  This will allow coders to know if the named
-# screen will be skinned by the skin code.  A return of None implies that the
-# code must provide its own skin for the screen to be displayed to the user.
-#
-def findSkinScreen(names):
-	if not isinstance(names, list):
-		names = [names]
-	for name in names:  # Try all names given, the first one found is the one that will be used by the skin engine.
-		screen, path = domScreens.get(name, (None, None))
-		if screen is not None:
-			return name
-	return None
-
-
-def dump(x, i=0):
-	print(" " * i + str(x))
-	try:
-		for node in x.childNodes:
-			dump(node, i + 1)
-	except Exception:
-		pass

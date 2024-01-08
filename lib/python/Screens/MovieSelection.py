@@ -42,7 +42,6 @@ from Tools.CopyFiles import copyFiles, deleteFiles, moveFiles
 from Tools.Directories import SCOPE_HDD, resolveFilename, isPluginInstalled
 from Tools.NumericalTextInput import MAP_SEARCH_UPCASE, NumericalTextInput
 from Tools.Trashcan import TrashInfo, cleanAll, createTrashFolder, getTrashFolder
-from time import localtime, strftime
 if isPluginInstalled("BlurayPlayer"):
 	from Plugins.Extensions import BlurayPlayer
 else:
@@ -296,13 +295,6 @@ class SelectionEventInfo:
 	def updateEventInfo(self):
 		serviceref = self.getCurrent()
 		self["Service"].newService(serviceref)
-		info = serviceref and eServiceCenter.getInstance().info(serviceref)
-		if info:
-			timeCreate = strftime("%A %d %b %Y", localtime(info.getInfo(serviceref, iServiceInformation.sTimeCreate)))
-			duration = "%d min" % (info.getLength(serviceref) / 60)
-			filesize = "%d MB" % (info.getInfoObject(serviceref, iServiceInformation.sFileSize) / (1024 * 1024))
-			moviedetails = "%s  •  %s  •  %s" % (timeCreate, duration, filesize)
-			self["moviedetails"].setText(moviedetails)
 
 
 class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, ProtectedScreen):
@@ -344,7 +336,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["chosenletter"].visible = False
 
 		self["waitingtext"] = Label(_("Please wait... Loading list..."))
-		self["moviedetails"] = Label()
 
 		self.LivePlayTimer = eTimer()
 		self.LivePlayTimer.timeout.get().append(self.LivePlay)
@@ -1132,7 +1123,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				updates = load(file)
 				file.close()
 				self.applyConfigSettings(updates)
-			except (IOError, OSError):
+			except OSError:
 				updates = {
 					"moviesort": config.movielist.moviesort.default,
 					"description": config.movielist.description.default,
@@ -1361,7 +1352,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if self.reload_home:
 				self["list"].moveToFirstMovie()
 		self["freeDiskSpace"].update()
-		title += "  •  " + self.diskinfo.getText()
 		self.setTitle(title)
 		self["waitingtext"].visible = False
 		self.createPlaylist()
@@ -1549,7 +1539,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						if size > fileSize:
 							fileSize = size
 							self.playfile = filename
-				except (IOError, OSError) as err:
+				except OSError as err:
 					print("[MovieSelection] Error %d: Unable to calculate size for '%s'!  (%s)" % (err.errno, filename, err.strerror))
 			if self.playfile:
 				return True
@@ -1616,7 +1606,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			if not path.endswith("/"):
 				path += "/"
 			self.reloadList(sel=eServiceReference("2:0:1:0:0:0:0:0:0:0:%s" % path))
-		except (IOError, OSError) as e:
+		except OSError as e:
 			print("[MovieSelection] Error %s:" % e.errno, e)
 			if e.errno == 17:
 				msg = _("The path %s already exists.") % name
@@ -1739,7 +1729,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							print("[MovieSelection] rename", r[0], "to", r[1])
 							rename(r[0], r[1])
 				self.reloadList(sel=eServiceReference("2:0:1:0:0:0:0:0:0:0:%s" % newfilename))
-			except (IOError, OSError) as e:
+			except OSError as e:
 				print("[MovieSelection] Error %s:" % e.errno, e)
 				if e.errno == 17:
 					msg = _("The path %s already exists.") % name

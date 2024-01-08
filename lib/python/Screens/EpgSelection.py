@@ -529,7 +529,7 @@ class EPGSelection(Screen):
 							self.session.nav.RecordTimer.timeChanged(x)
 					simulTimerList = self.session.nav.RecordTimer.record(entry)
 					if simulTimerList is not None:
-						self.session.openWithCallback(boundFunction(self.finishedEdit, service_ref, begin, end), TimerSanityConflict, simulTimerList)
+						self.session.openWithCallback(boundFunction(self.finishedEdit), TimerSanityConflict, simulTimerList)
 						return
 					else:
 						self.session.nav.RecordTimer.timeChanged(entry)

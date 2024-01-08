@@ -1,15 +1,17 @@
 from enigma import eTimer
-from os.path import isfile
-
+from os.path import isfile, exists
+from ServiceReference import ServiceReference
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import HelpableActionMap
-from Components.config import ConfigSelection, config
+from Components.config import ConfigNothing, NoSave, ConfigSelection, config
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
+from Screens.InfoBarGenerics import streamrelay
 from Tools.camcontrol import CamControl
 from Tools.Directories import isPluginInstalled
 from Tools.GetEcmInfo import GetEcmInfo
+from process import ProcessList
 
 
 class SoftcamSetup(Setup):
@@ -153,3 +155,105 @@ class SoftcamSetup(Setup):
 	def restartCardServer(self):
 		if hasattr(self, "cardservers"):
 			self.restart(device="c")
+
+
+class StreamRelaySetup(Setup):
+	def __init__(self, session):
+		self.serviceitems = []
+		self.services = streamrelay.data.copy()
+		Setup.__init__(self, session=session, setup="StreamRelay")
+		self["key_yellow"] = StaticText()
+		self["key_blue"] = StaticText()
+		self["addActions"] = HelpableActionMap(self, ["ColorActions"], {
+			"yellow": (self.keyAddService, _("Play service with Stream Relay"))
+		}, prio=0, description=_("Stream Relay Setup Actions"))
+		self["removeActions"] = HelpableActionMap(self, ["ColorActions"], {
+			"blue": (self.keyRemoveService, _("Play service without Stream Relay"))
+		}, prio=0, description=_("Stream Relay Setup Actions"))
+		self["removeActions"].setEnabled(False)
+
+	def layoutFinished(self):
+		Setup.layoutFinished(self)
+		self.createItems()
+
+	def getOrbPos(self, sref):
+		orbpos = 0
+		orbposText = ""
+		try:
+			orbpos = int(sref.split(":")[6], 16) >> 16
+			if 1 <= orbpos <= 3600:
+				if orbpos > 1800:  # West.
+					orbpos = 3600 - orbpos
+					direction = _("W")
+				else:
+					direction = _("E")
+				orbposText = "%d.%d %s%s" % (orbpos / 10, orbpos % 10, "\u00B0", direction)
+		except:
+			pass
+		return orbpos, orbposText
+
+	def createItems(self):
+		self.serviceitems = []
+		red = r"\c00ff8888"
+		green = r"\c0088ff88"
+		yellow = r"\c00ffff00"
+		listheader = _("Services Stream Relay:")
+		if self.services:
+			self.serviceitems.append((f"{green}{listheader}",))
+		for serviceref in self.services:
+			service = ServiceReference(serviceref)
+			orbPos, orbPosText = self.getOrbPos(serviceref)
+			if serviceref:
+				self.serviceitems.append((f"{yellow}{service.getServiceName()}    {red}{orbPosText}", NoSave(ConfigNothing()), serviceref, orbPos))
+		self.createSetup()
+
+	def createSetup(self):
+		Setup.createSetup(self, appendItems=self.serviceitems)
+
+	def selectionChanged(self):
+		self.updateButtons()
+		Setup.selectionChanged(self)
+
+	def updateButtons(self):
+		if self.services and isinstance(self.getCurrentItem(), ConfigNothing):
+			self["removeActions"].setEnabled(True)
+			self["key_blue"].setText(_("Remove channel"))
+		else:
+			self["removeActions"].setEnabled(False)
+			self["key_blue"].setText("")
+		if str(ProcessList().named("oscam-emu")).strip("[]"):
+			self["key_yellow"].setText(_("Add channel"))
+
+	def keySelect(self):
+		if not isinstance(self.getCurrentItem(), ConfigNothing):
+			Setup.keySelect(self)
+
+	def keyMenu(self):
+		if not isinstance(self.getCurrentItem(), ConfigNothing):
+			Setup.keyMenu(self)
+
+	def keyRemoveService(self):
+		currentItem = self.getCurrentItem()
+		if currentItem:
+			serviceref = self["config"].getCurrent()[2]
+			self.services.remove(serviceref)
+			index = self["config"].getCurrentIndex()
+			self.createItems()
+			self["config"].setCurrentIndex(index)
+
+	def keyAddService(self):
+		if str(ProcessList().named("oscam-emu")).strip("[]"):
+			def keyAddServiceCallback(*result):
+				if result:
+					service = ServiceReference(result[0])
+					serviceref = str(service)
+					if serviceref not in self.services:
+						self.services.append(serviceref)
+						self.createItems()
+						self["config"].setCurrentIndex(2)
+			from Screens.ChannelSelection import SimpleChannelSelection  # This must be here to avoid a boot loop!
+			self.session.openWithCallback(keyAddServiceCallback, SimpleChannelSelection, _("Select"), currentBouquet=True)
+
+	def keySave(self):
+		streamrelay.data = self.services
+		Setup.keySave(self)

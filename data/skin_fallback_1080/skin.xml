@@ -398,7 +398,7 @@
 		<widget source="key_menu" conditional="key_menu" render="Label" position="225,1040" size="200,35" backgroundColor="key_back" font="Regular;24" horizontalAlignment="center" verticalAlignment="center">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget name="config" itemHeight="50" entryFont="RegularBold;26" valueFont="Regular;22" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" enableWrapAround="1" backgroundColor="OE_Background" position="26,140" size="1250,800" transparent="1"/>
+		<widget name="config" itemHeight="50" font="RegularBold;26" headerFont="RegularBold;30" entryFont="RegularBold;26" valueFont="Regular;22" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" enableWrapAround="1" backgroundColor="OE_Background" position="26,140" size="1250,800" transparent="1"/>
 	</screen>
 	<!-- MENU SORT -->
 	<screen name="MenuSort" position="fill" backgroundColor="transparent" flags="wfNoBorder">
@@ -2864,10 +2864,12 @@
 		<!-- Clock -->
 		<panel name="Clock"/>
 	</screen>
+	<!-- PVR STATE -->
 	<screen name="PVRState" backgroundColor="transparent" flags="wfNoBorder" position="80,105" size="270,74" zPosition="8">
 		<eLabel backgroundColor="OE_NewBg2" position="10,0" size="60,74" zPosition="-10"/>
 		<eLabel backgroundColor="OE_Background" position="0,10" size="270,54" zPosition="-11" verticalAlignment="center"/>
-		<!-- Widget -->
+		<widget name="statusicon" position="42,110" size="25,25" pixmaps="OctEtFHD/icons/mp_play.png,OctEtFHD/icons/mp_pause.png,OctEtFHD/icons/mp_stop.png,OctEtFHD/icons/mp_forward.png,OctEtFHD/icons/mp_backward.png,OctEtFHD/icons/mp_slow.png" zPosition="5" alphaTest="on"/>
+		<widget name="speed" position="72,105" size="110,40" font="Regular;30" backgroundColor="secondBG" borderWidth="3" borderColor="black" transparent="1" zPosition="5"/>
 		<widget name="state" position="70,12" size="200,50" font="RegularBold;34" backgroundColor="OE_Background" transparent="1" verticalAlignment="center" horizontalAlignment="center"/>
 	</screen>
 	<!-- QUICK SUBTITLES CONFIG KEY BLUE -->
@@ -3393,7 +3395,9 @@
 	<screen name="TimeshiftLive" backgroundColor="transparent" flags="wfNoBorder" position="80,105" size="310,74" zPosition="8">
 		<eLabel backgroundColor="un800000" position="0,10" size="310,54" zPosition="-11" verticalAlignment="center"/>
 		<eLabel backgroundColor="OE_NewBg2" position="10,0" size="60,74" zPosition="-10"/>
-		<widget name="state" conditional="state" position="30,20" size="1000,42" font="RegularBold;30" backgroundColor="OE_NewBg2" transparent="1"/>
+		<widget name="state" conditional="state" position="30,25" size="0,0" font="RegularBold;30" backgroundColor="OE_NewBg2" transparent="1"/>
+		<widget name="statusicon" position="28,25" size="25,25" pixmaps="OctEtFHD/icons/mp_play.png,OctEtFHD/icons/mp_pause.png,OctEtFHD/icons/mp_stop.png,OctEtFHD/icons/mp_forward.png,OctEtFHD/icons/mp_backward.png,OctEtFHD/icons/mp_slow.png" zPosition="5" alphaTest="on"/>
+		<widget name="speed" conditional="speed" position="20,105" size="110,40" font="RegularBold;30" transparent="1"/>
 		<eLabel text="Timeshift Live" position="80,12" size="220,50" font="RegularBold;28" backgroundColor="un800000" transparent="1" verticalAlignment="center" horizontalAlignment="left"/>
 	</screen>
 		<!-- SOFTWARE UPDATE -->
@@ -5534,10 +5538,10 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<eLabel position="1398,30" size="2,37" backgroundColor="#0000fafa" zPosition="16"/>
 		<eLabel position="1400,65" size="370,2" backgroundColor="#0000fafa" zPosition="16"/>
 		<eLabel position="1770,30" size="2,37" backgroundColor="#0000fafa" zPosition="16"/>
-		<widget source="progress_text" render="Label" position="1250,35" size="155,50" font="RegularBold;26" horizontalAlignment="left" backgroundColor="OE_NewBg2">
+		<widget source="progress_text" conditional="progress_text" render="Label" position="1250,35" size="155,50" font="RegularBold;26" horizontalAlignment="left" backgroundColor="OE_NewBg2">
 			<convert type="ProgressToText">InText</convert>
 		</widget>
-		<widget source="progress_text" render="Label" position="1780,35" size="140,50" font="RegularBold;26" horizontalAlignment="left" backgroundColor="OE_NewBg2">
+		<widget source="progress_text" conditional="progress_text" render="Label" position="1780,35" size="140,50" font="RegularBold;26" horizontalAlignment="left" backgroundColor="OE_NewBg2">
 			<convert type="ProgressToText">InPercent</convert>
 		</widget>
 	</screen>

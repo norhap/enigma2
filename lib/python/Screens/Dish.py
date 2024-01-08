@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
+import Screens.InfoBar
 from Components.Pixmap import Pixmap
 from Components.config import config, ConfigInteger
 from Components.Sources.Boolean import Boolean
@@ -127,10 +128,11 @@ class Dish(Screen):
 		if self.__state == self.STATE_SHOWN:
 			self.hide()
 		if SystemInfo["isRotorTuner"] and self.showdish:
+			playingref = self.session.nav.getCurrentlyPlayingServiceReference()
 			service = self.session.nav.getCurrentService()
 			info = service and service.info()
 			data = info and info.getInfoObject(iServiceInformation.sTransponderData)
-			if not data or data == -1:
+			if not data or data == -1 or Screens.InfoBar.InfoBar.instance.checkStreamrelay(playingref):
 				return
 			tuner_type = data.get("tuner_type")
 			if tuner_type and "DVB-S" in tuner_type:
@@ -330,7 +332,7 @@ class Dishpip(Dish, Screen):
 		if ref and SystemInfo["isRotorTuner"]:
 			info = eServiceCenter.getInstance().info(ref)
 			data = info and info.getInfoObject(ref, iServiceInformation.sTransponderData)
-			if not data or data == -1:
+			if not data or data == -1 or Screens.InfoBar.InfoBar.instance.checkStreamrelay(ref):
 				return
 			tuner_type = data.get("tuner_type")
 			if tuner_type and "DVB-S" in tuner_type:

@@ -84,7 +84,7 @@ def findSafeRecordPath(dirname):
 	if not isdir(dirname):
 		try:
 			makedirs(dirname)
-		except (IOError, OSError) as err:
+		except OSError as err:
 			print("[RecordTimer] Error %d: Failed to create dir '%s'!  (%s)" % (err.errno, dirname, err.strerror))
 			return None
 	return dirname
@@ -214,7 +214,7 @@ class RecordTimer(Timer):
 			print("[RecordTimer] Error: Loading 'timers.xml' failed!")
 			try:
 				rename(self.timersFilename, "%s_bad" % self.timersFilename)
-			except (IOError, OSError) as err:
+			except OSError as err:
 				print("[RecordTimer] Error %d: Renaming broken timer file failed!  (%s)" % (err.errno, err.strerror))
 			return
 		check = False
@@ -581,7 +581,7 @@ class RecordTimer(Timer):
 		return self.timer_list + self.fallback_timer_list
 
 	def getDisabledTimers(self):
-		return self.processed_timers # TODO add  fallback processed timers too
+		return self.processed_timers  # TODO add fallback processed timers too
 
 	def isInTimer(self, eventid, begin, duration, service, disabledTimers=False):
 		returnValue = None
@@ -942,7 +942,8 @@ class RecordTimerEntry(TimerEntry, object):
 
 	def getEventFromEPG(self):
 		epgcache = eEPGCache.getInstance()
-		queryTime = self.begin + (self.end - self.begin) // 2
+		# This might need further investigation. Dp npt get exactly the middle, take 20% so we usually expect to get first event.
+		queryTime = self.begin + (self.end - self.begin) // 5
 		ref = self.service_ref and self.service_ref.ref
 		return epgcache.lookupEventTime(ref, queryTime)
 

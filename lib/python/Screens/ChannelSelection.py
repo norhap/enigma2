@@ -174,11 +174,6 @@ class ChannelContextMenu(Screen):
 		inAlternativeList = current_root and 'FROM BOUQUET "alternatives' in current_root.getPath()
 		self.inBouquet = csel.getMutableList() is not None
 		haveBouquets = config.usage.multibouquet.value
-		streamrelay = ""  # show items only if there are icam processes
-		API_STREAMRELAY = ["oscam-emu",]  # add more cams
-		for cam in API_STREAMRELAY:
-			streamrelay = str(ProcessList().named(cam)).strip("[]")
-			break
 		from Components.ParentalControl import parentalControl
 		self.parentalControl = parentalControl
 		self.parentalControlEnabled = config.ParentalControl.servicepin[0].value and config.ParentalControl.servicepinactive.value
@@ -190,10 +185,22 @@ class ChannelContextMenu(Screen):
 				if isPlayable:
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU):
 						append_when_current_valid(current, menu, (p.name, boundFunction(self.runPlugin, p)), key="bullet")
-					if config.servicelist.startupservice.value == current.toString():
-						append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
+					if SystemInfo["FbcTunerPowerAlwaysOn"]:
+						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current) and config.servicelist.startupservice.value == current.toString():
+							config.servicelist.startupservice.value = None
+							config.servicelist.startupservice_onstandby.value = False
+							config.servicelist.startupservice.save()
+							config.servicelist.startupservice_onstandby.save()
+						elif config.servicelist.startupservice.value == current.toString():
+							append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
+						else:
+							if not Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
+								append_when_current_valid(current, menu, (_("Set as startup service"), self.setStartupService), level=0)
 					else:
-						append_when_current_valid(current, menu, (_("Set as startup service"), self.setStartupService), level=0)
+						if config.servicelist.startupservice.value == current.toString():
+							append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
+						else:
+							append_when_current_valid(current, menu, (_("Set as startup service"), self.setStartupService), level=0)
 					if self.parentalControlEnabled:
 						if self.parentalControl.getProtectionLevel(current.toCompareString()) == -1:
 							append_when_current_valid(current, menu, (_("Add to parental protection"), boundFunction(self.addParentalProtection, current)), level=0)
@@ -214,11 +221,12 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.toggleVBI), level=1)
 						else:
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
-						if streamrelay:
-							if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
-								append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay), level=1)
-							else:
-								append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleStreamrelay), level=1)
+						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
+							append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay), level=1)
+						else:
+							if str(ProcessList().named("oscam-emu")).strip("[]"):
+								if SystemInfo["FbcTunerPowerAlwaysOn"] and not config.servicelist.startupservice.value == current.toString() or not SystemInfo["FbcTunerPowerAlwaysOn"]:
+									append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							# Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:
@@ -264,7 +272,7 @@ class ChannelContextMenu(Screen):
 					if haveBouquets:
 						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
-							if streamrelay:
+							if str(ProcessList().named("oscam-emu")).strip("[]"):
 								append_when_current_valid(current, menu, (_("Copy To Stream Relay"), self.copyCurrentToStreamRelay))
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						append_when_current_valid(current, menu, (_("Remove all new found flags"), self.removeAllNewFoundFlags), level=0)
@@ -486,7 +494,7 @@ class ChannelContextMenu(Screen):
 
 	def openSetup(self):
 		from Screens.Setup import Setup
-		self.session.openWithCallback(self.cancelClick, Setup, "UserInterface")
+		self.session.openWithCallback(self.cancelClick, Setup, "channelselection")
 
 	def cancelClick(self, dummy=False):
 		self.close(False)

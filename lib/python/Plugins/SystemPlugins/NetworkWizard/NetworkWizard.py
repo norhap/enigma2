@@ -1,3 +1,4 @@
+from enigma import eTimer, eConsoleAppContainer
 from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
@@ -9,9 +10,8 @@ from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
 from Components.Language import language  # noqa: F401 possible use line 87
 from Tools.Geolocation import geolocation
-from Components.Timezones import TIMEZONE_FILE
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileReadXML
-from enigma import eTimer, eConsoleAppContainer
+from Components.Timezones import localeCode
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
 class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
@@ -85,13 +85,11 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 			Time.useGeolocation(self)  # set time zone auto.
 			Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
-			fileDom = fileReadXML(TIMEZONE_FILE)
-			if fileDom:
-				for city in fileDom.findall("zone"):
-					if config.timezone.val.value in city.attrib.get("name"):
-						localeCode = city.attrib.get("localeCode")
-						config.osd.language.value = localeCode
-						config.osd.language.save()
+			if config.misc.firstrun.value and config.osd.language.value != localeCode():
+				from Screens.Standby import TryQuitMainloop  # noqa: E402
+				config.osd.language.value = localeCode()
+				config.osd.language.save()
+				self.session.open(TryQuitMainloop, 3)
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):

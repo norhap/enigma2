@@ -198,7 +198,7 @@ def getChipSetString():
 	try:
 		chipset = open("/proc/stb/info/chipset", "r").read()
 		return str(chipset.lower().replace('\n', ''))
-	except IOError:
+	except OSError:
 		return _("undefined")
 
 
@@ -208,7 +208,7 @@ def getChipSetNumber():
 		chipset = f.read()
 		f.close()
 		return str(chipset.lower().replace('\n', '').replace('brcm', '').replace('bcm', ''))
-	except IOError:
+	except OSError:
 		return _("unavailable")
 
 

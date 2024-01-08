@@ -2,7 +2,6 @@ from Screens.Screen import Screen
 from enigma import ePoint, eSize, eServiceCenter, getBestPlayableServiceReference, eServiceReference
 from Components.VideoWindow import VideoWindow
 from Screens.InfoBarGenerics import streamrelay
-from Screens.Screen import Screen
 
 
 class QuadPiP(Screen):
@@ -16,7 +15,7 @@ class QuadPiP(Screen):
 		self.skinName = "PictureInPicture"
 
 	def LayoutFinished(self):
-		#self["video"].instance.setAdjustPosition(False)
+		# self["video"].instance.setAdjustPosition(False)
 		self.onLayoutFinish.remove(self.LayoutFinished)
 		x = self.pos[0]
 		y = self.pos[1]

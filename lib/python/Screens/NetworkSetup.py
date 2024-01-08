@@ -22,7 +22,6 @@ from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer
 from Components.SystemInfo import MODEL
-import subprocess as commands
 from Components.Console import Console
 from Screens.Standby import TryQuitMainloop
 from random import Random
@@ -339,7 +338,7 @@ class DNSSettings(Setup, HelpableScreen):
 		self.createSetup()
 		strdns = str(self.backupNameserverList)
 		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
-		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2"):
+		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
 			if fileContains("/etc/network/interfaces", "iface eth0 inet static") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
@@ -347,20 +346,22 @@ class DNSSettings(Setup, HelpableScreen):
 			else:
 				config.usage.dns.default = "dhcp-router"
 				config.usage.dns.value = config.usage.dns.default
-				servername = _("DHCP Router")
+				servername = "DHCP Router"
 		else:
 			if "8. 8." in dns:
-				servername = _("Google DNS")
+				servername = "Google DNS"
 			elif "9. 9. 9. 9" in dns:
-				servername = _("Quad9 Security")
+				servername = "Quad9 Security"
 			elif "9. 9. 9. 10" in dns:
-				servername = _("Quad9 No Security")
+				servername = "Quad9 No Security"
 			elif "222. 222" in dns:
-				servername = _("OpenDNS")
+				servername = "OpenDNS"
 			elif "220. 222" in dns:
-				servername = _("OpenDNS-2")
+				servername = "OpenDNS-2"
+			elif "103. 86" in dns:
+				servername = "NordVPN"
 			else:
-				servername = _("Cloudflare")
+				servername = "Cloudflare"
 		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns)
 		if "0. 0. 0. 0" in dns:
 			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
@@ -389,6 +390,8 @@ class DNSSettings(Setup, HelpableScreen):
 			self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 220, 222])), NoSave(ConfigIP(default=[208, 67, 222, 220]))]
 		elif config.usage.dns.value == 'cloudflare':
 			self.nameserverEntries = [NoSave(ConfigIP(default=[1, 1, 1, 1])), NoSave(ConfigIP(default=[1, 0, 0, 1]))]
+		elif config.usage.dns.value == 'nordvpn':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[103, 86, 96, 100])), NoSave(ConfigIP(default=[103, 86, 99, 100]))]
 		else:
 			self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
 		self.list = []
@@ -582,6 +585,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 		self.createConfig()
 
 	def createConfig(self):
+		self.commands = []
 		self.list = []
 		self.IPv6Entry = getConfigListEntry(_("IPv6 support"), self.IPv6ConfigEntry)
 		self.list.append(self.IPv6Entry)
@@ -640,7 +644,7 @@ class IPv6Setup(Screen, ConfigListScreen, HelpableScreen):
 
 	def inetdRestart(self):
 		if fileExists("/etc/init.d/inetd.busybox"):
-			commands.append('/etc/init.d/inetd.busybox restart')
+			self.commands.append('/etc/init.d/inetd.busybox restart')
 
 	def keySave(self):
 		enable_ipv6 = "/etc/enigma2/ipv6"
@@ -1103,7 +1107,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			except InterfaceError as err:
 				print("[NetworkSetup] queryWirelessDevice InterfaceError:", err)
 				return False
-			except (IOError, OSError) as err:
+			except OSError as err:
 				if err.errno in (errno.EOPNOTSUPP, errno.ENODEV, errno.EPERM):
 					return False
 				else:
@@ -2067,23 +2071,24 @@ class NetworkFtp(NSCommon, Screen):
 		self.Console = Console()
 		self.onLayoutFinish.append(self.updateService)
 		self.reboot_at_end = False
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
 
 	def FtpStartStop(self):
 		if not fileExists('/etc/pam.d/vsftpd'):
-			commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
+			self.commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
 		if fileExists('/etc/pam.d/vsftpd'):
-			commands.append('killall vsftpd ; mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('killall vsftpd ; mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateFtp(self):
 		if fileExists('/etc/pam.d/vsftpd'):
-			commands.append('mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
+			self.commands.append('mv /etc/pam.d/vsftpd /etc/pam.d/vsftpdd')
 		else:
-			commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('mv /etc/pam.d/vsftpdd /etc/pam.d/vsftpd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def updateService(self):
 		import process
@@ -2321,6 +2326,7 @@ class NetworkZeroTier(NSCommon, Screen):
 		self.service_name = 'zerotier'
 		self.onLayoutFinish.append(self.InstallCheck)
 		self.reboot_at_end = False
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
@@ -2331,10 +2337,10 @@ class NetworkZeroTier(NSCommon, Screen):
 	def ZeroTierStartStop(self):
 		if fileExists('/etc/init.d/zerotier'):
 			if self.my_zerotier_run:
-				commands.append('/etc/init.d/zerotier stop')
+				self.commands.append('/etc/init.d/zerotier stop')
 			else:
-				commands.append('/etc/init.d/zerotier start')
-			self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+				self.commands.append('/etc/init.d/zerotier start')
+			self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateZeroTier(self):
 		if ServiceIsEnabled('zerotier'):
@@ -2419,6 +2425,7 @@ class NetworkSamba(NSCommon, Screen):
 		self.service_name = 'samba-base'
 		self.onLayoutFinish.append(self.InstallCheck)
 		self.reboot_at_end = True
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
@@ -2428,19 +2435,19 @@ class NetworkSamba(NSCommon, Screen):
 
 	def SambaStartStop(self):
 		if not self.my_Samba_run:
-			commands.append('/etc/init.d/samba.sh start')
+			self.commands.append('/etc/init.d/samba.sh start')
 		elif self.my_Samba_run:
-			commands.append('/etc/init.d/samba.sh stop')
-			commands.append('killall nmbd')
-			commands.append('killall smbd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('/etc/init.d/samba.sh stop')
+			self.commands.append('killall nmbd')
+			self.commands.append('killall smbd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateSamba(self):
 		if fileExists('/etc/rc2.d/S20samba.sh'):
-			commands.append('update-rc.d -f samba.sh remove')
+			self.commands.append('update-rc.d -f samba.sh remove')
 		else:
-			commands.append('update-rc.d -f samba.sh defaults')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('update-rc.d -f samba.sh defaults')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def updateService(self):
 		import process
@@ -2515,6 +2522,7 @@ class NetworkTelnet(NSCommon, Screen):
 		self.my_telnet_run = False
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'green': self.TelnetStartStop, 'yellow': self.activateTelnet})
 		self.reboot_at_end = False
+		self.commands = []
 
 	def createSummary(self):
 		return NetworkServicesSummary
@@ -2522,17 +2530,17 @@ class NetworkTelnet(NSCommon, Screen):
 	def TelnetStartStop(self):
 		if fileExists('/bin/busybox.nosuid'):
 			if self.my_telnet_run:
-				commands.append('killall telnetd ; rm -f /usr/sbin/telnetd')
+				self.commands.append('killall telnetd ; rm -f /usr/sbin/telnetd')
 			else:
-				commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
-			self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+				self.commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
+			self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def activateTelnet(self):
 		if fileExists('/usr/sbin/telnetd'):
-			commands.append('rm -f /usr/sbin/telnetd')
+			self.commands.append('rm -f /usr/sbin/telnetd')
 		else:
-			commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
-		self.Console.eBatch(commands, self.StartStopCallback, debug=True)
+			self.commands.append('ln -s /bin/busybox.nosuid /usr/sbin/telnetd')
+		self.Console.eBatch(self.commands, self.StartStopCallback, debug=True)
 
 	def updateService(self):
 		import process

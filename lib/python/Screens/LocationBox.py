@@ -404,7 +404,7 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 					stats = statvfs(currentFolder)
 					if (stats.f_bavail * stats.f_bsize) / 1000000 > self.minFree:
 						return self.selectConfirmed(True)  # There is enough free space.
-				except (IOError, OSError):
+				except OSError:
 					pass
 				self.session.openWithCallback(self.selectConfirmed, MessageBox, _("There may not be enough space on the selected location.\n\nDo you really want to continue?"))
 
