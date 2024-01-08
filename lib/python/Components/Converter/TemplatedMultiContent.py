@@ -1,4 +1,5 @@
 from enigma import eListboxPythonMultiContent, gFont
+
 from Components.Converter.StringList import StringList
 
 
@@ -16,7 +17,6 @@ class TemplatedMultiContent(StringList):
 		del loc["args"]
 		self.activeStyle = None
 		self.template = eval(args, {}, loc)
-		self.orientations = {"orHorizontal": eListbox.orHorizontal, "orVertical": eListbox.orVertical, "orGrid": eListbox.orGrid}
 		self.scale = None
 		if "template" in self.template or "templates" in self.template:
 			if "template" in self.template or "default" in self.template["templates"]:
@@ -122,68 +122,3 @@ class TemplatedMultiContent(StringList):
 			self.content.setList(contentList)
 		setTemplate()
 		self.downstream_elements.changed(what)
-
-	def scaleTemplate(self, template, itemWidth, itemHeight):
-		from enigma import gFont
-		print("[TemplatedMultiContent] DEBUG: Scale template.")
-		scaleFactorVertical = self.scale[1][0] / self.scale[1][1]
-		scaleFactorHorizontal = self.scale[0][0] / self.scale[0][1]
-		itemWidth = int(itemWidth * scaleFactorHorizontal)
-		itemHeight = int(itemHeight * scaleFactorVertical)
-		scaledTemplate = []
-		fonts = []
-		for font in self.template["fonts"]:
-			fonts.append(gFont(font.family, int(font.pointSize * scaleFactorVertical)))
-		for content in template:
-			elements = list(content)
-			elements[1] = int(elements[1] * scaleFactorVertical)
-			elements[2] = int(elements[2] * scaleFactorHorizontal)
-			elements[3] = int(elements[3] * scaleFactorVertical)
-			elements[4] = int(elements[4] * scaleFactorHorizontal)
-			scaledTemplate.append(tuple(elements))
-		return scaledTemplate, itemHeight, itemWidth, fonts
-
-	def setTemplate(self):
-		if self.source:
-			style = self.source.style
-			if style == self.active_style:
-				return
-			templates = self.template.get("templates")  # If skin defined "templates", that means that it defines multiple styles in a dictionary but template should still be a default.
-			template = self.template.get("template")
-			if "itemHeight" in self.template:
-				itemHeight = self.template["itemHeight"]
-				itemWidth = itemHeight
-			if "itemWidth" in self.template:
-				itemWidth = self.template["itemWidth"]
-			if "itemSize" in self.template:
-				itemWidth = self.template["itemSize"]
-				itemHeight = itemWidth
-			orientation = self.template.get("orientation")
-			selectionEnabled = self.template.get("selectionEnabled", None)
-			scrollbarMode = self.template.get("scrollbarMode", None)
-			if templates and style and style in templates:  # If we have a custom style defined in the source, and different templates in the skin, look the template up.
-				template = templates[style][1]
-				if isinstance(templates[style][0], tuple):
-					itemWidth = templates[style][0][0]
-					itemHeight = templates[style][0][1]
-				else:
-					itemWidth = templates[style][0]
-					itemHeight = itemWidth
-				if len(templates[style]) > 2:
-					selectionEnabled = templates[style][2]
-				if len(templates[style]) > 3:
-					scrollbarMode = templates[style][3]
-			if self.scale:
-				template, itemWidth, itemHeight, fonts = self.scaleTemplate(template, itemWidth, itemHeight)
-				for index, font in enumerate(fonts):
-					self.content.setFont(index, font)
-			self.content.setTemplate(template)
-			self.content.setItemWidth(int(itemWidth))
-			self.content.setItemHeight(int(itemHeight))
-			if selectionEnabled is not None:
-				self.selectionEnabled = selectionEnabled
-			if scrollbarMode is not None:
-				self.scrollbarMode = scrollbarMode
-			if orientation is not None:
-				self.content.setOrientation(self.orientations.get(orientation, self.orientations["orVertical"]))
-			self.active_style = style
