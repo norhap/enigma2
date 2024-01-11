@@ -1,8 +1,7 @@
 #!/usr/bin/python
-from __future__ import print_function
 import sys
-import os
-import string
+from os import listdir
+from os.path import isdir, join
 import re
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler, property_lexical_handler
@@ -47,24 +46,20 @@ if not no_comments:
 	parser.setProperty(property_lexical_handler, contentHandler)
 
 for arg in sys.argv[1:]:
-	if os.path.isdir(arg):
-		for file in os.listdir(arg):
+	if isdir(arg):
+		for file in listdir(arg):
 			if file.endswith(".xml"):
-				parser.parse(os.path.join(arg, file))
+				parser.parse(join(arg, file))
 	else:
 		parser.parse(arg)
-
-	attrlist = list(attrlist)
-	attrlist.sort(key=lambda a: a[0])
-
-	for (k, c) in attrlist:
-		print()
-		print('#: ' + arg)
-		string.replace(k, "\\n", "\"\n\"")
-		if c:
-			for l in c.split('\n'):
-				print("#. ", l)
-		print('msgid "' + str(k) + '"')
-		print('msgstr ""')
-
-	attrlist = set()
+	attributes = list(attributes)  # noqa: F821
+	attributes.sort(key=lambda x: x[0])
+	for (key, value) in attributes:
+		print(f"\n#: {arg}")
+		key.replace("\\n", "\"\n\"")
+		if value:
+			for line in value.split("\n"):
+				print(f"#. {line}")
+		print(f"msgid \"{key}\"")
+		print("msgstr \"\"")
+	attributes = set()
