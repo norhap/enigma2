@@ -33,12 +33,6 @@ class BoxInformation:
 			print(f"[BoxInfo] ERROR: {file} is not available!  The system is unlikely to boot or operate correctly.")
 
 	def processValue(self, value):
-		if value.upper() in ("FALSE", "NO", "OFF", "DISABLED"):
-			return False
-		elif value.upper() in ("TRUE", "YES", "ON", "ENABLED"):
-			return True
-		elif value.upper() == "NONE":
-			return None
 		try:
 			return literal_eval(value)
 		except Exception:
@@ -56,18 +50,21 @@ class BoxInformation:
 	def getItem(self, item, default=None):
 		return self.boxInfo.get(item, default)
 
-	def setItem(self, item, value, immutable=False, forceOverride=False):
-		if item in self.immutableList and not forceOverride:
+	def setItem(self, item, value, immutable=False):
+		if item in self.immutableList:
 			print(f"[BoxInfo] Error: Item '{item}' is immutable and can not be {'changed' if item in self.boxInfo else 'added'}!")
 			return False
-		if immutable and item not in self.immutableList:
+		if immutable:
 			self.immutableList.append(item)
 		self.boxInfo[item] = value
 		return True
 
-	def deleteItem(self, item, forceOverride=False):
-		if item in self.immutableList and not forceOverride:
-			print(f"[BoxInfo] Error: Item {item} is immutable and can not be deleted!")
+	def setMutableItem(self, item, value):
+		self.boxInfo[item] = value
+
+	def deleteItem(self, item):
+		if item in self.immutableList:
+			print(f"[BoxInfo] Error: Item '{item}' is immutable and can not be deleted!")
 		elif item in self.boxInfo:
 			del self.boxInfo[item]
 			return True
@@ -75,7 +72,29 @@ class BoxInformation:
 
 
 BoxInfo = BoxInformation()
-SystemInfo = BoxInfo.boxInfo
+
+
+class SystemInformation(dict):
+	def __getitem__(self, item):
+		return BoxInfo.boxInfo[item]
+
+	def __setitem__(self, item, value):
+		if item in BoxInfo.immutableList:
+			print(f"[SystemInfo] Error: Item '{item}' is immutable and can not be {'changed' if item in BoxInfo.boxInfo else 'added'}!")
+		else:
+			BoxInfo.boxInfo[item] = value
+
+	def __delitem__(self, item):
+		if item in BoxInfo.immutableList:
+			print(f"[SystemInfo] Error: Item '{item}' is immutable and can not be deleted!")
+		else:
+			del BoxInfo.boxInfo[item]
+
+	def get(self, item, default=None):
+		return BoxInfo.boxInfo[item] if item in BoxInfo.boxInfo else default
+
+
+SystemInfo = SystemInformation()
 
 MODEL = BoxInfo.getItem("model")
 DISPLAYMODEL = getMachineName()
