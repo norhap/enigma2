@@ -1354,7 +1354,7 @@ class InfoBarEPG:
 		plugin.__call__(session=self.session, servicelist=self.servicelist)
 
 	def showEventInfoPlugins(self):
-		if BRAND not in ("xtrend", "odin", "INI", "dags", "GigaBlue", "xp"):
+		if BRAND not in ("xtrend", "odin", "ini", "dags", "GigaBlue", "xp"):
 			pluginlist = self.getEPGPluginList()
 			if pluginlist:
 				self.session.openWithCallback(self.EventInfoPluginChosen, OrderedChoiceBox, text=_("Please choose an extension..."), list=pluginlist, order="eventInfoOrder", skinName="EPGExtensionsList", windowTitle=_("Events Info Menu"))

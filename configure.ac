@@ -52,18 +52,34 @@ AC_DEFINE_UNQUOTED(CRASH_EMAILADDR,"$CRASHLOGEMAIL",[crash log email address])
 
 AC_ARG_WITH(boxtype,
 	[  --with-boxtype=NAME box type [[none,dm800...]]],
-	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
-AC_SUBST(BOXTYPE)
-AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
+	[MACHINE="$withval"],[MACHINE="dm800"])
+AC_SUBST(MACHINE)
+AC_DEFINE_UNQUOTED(MACHINE,"$MACHINE",[box type])
 
-AM_CONDITIONAL(VUSOLO4K, test "$BOXTYPE" == vusolo4k)
-AM_CONDITIONAL(VUUNO4K, test "$BOXTYPE" == vuuno4k)
-AM_CONDITIONAL(VUUNO4KSE, test "$BOXTYPE" == vuuno4kse)
-AM_CONDITIONAL(VUULTIMO4K, test "$BOXTYPE" == vuultimo4k)
-AM_CONDITIONAL(VUDUO4K, test "$BOXTYPE" == vuduo4k)
-AM_CONDITIONAL(VUDUO4KSE, test "$BOXTYPE" == vuduo4kse)
-AM_CONDITIONAL(GB7252, test "$BOXTYPE" == gbue4k)
-AM_CONDITIONAL(GB7252, test "$BOXTYPE" == gbquad4k)
+AM_CONDITIONAL(VUSOLO4K, test "$MACHINE" == vusolo4k)
+AM_CONDITIONAL(VUUNO4K, test "$MACHINE" == vuuno4k)
+AM_CONDITIONAL(VUUNO4KSE, test "$MACHINE" == vuuno4kse)
+AM_CONDITIONAL(VUULTIMO4K, test "$MACHINE" == vuultimo4k)
+AM_CONDITIONAL(VUDUO4K, test "$MACHINE" == vuduo4k)
+AM_CONDITIONAL(VUDUO4KSE, test "$MACHINE" == vuduo4kse)
+AM_CONDITIONAL(GB7252, test "$MACHINE" == gbue4k)
+AM_CONDITIONAL(GB7252, test "$MACHINE" == gbquad4k)
+
+if test "$MACHINE" == "vusolo4k"; then
+	AC_DEFINE(HWVUSOLO4K, 1,[vusolo4k])
+elif test "$MACHINE" == "vuultimo4k"; then
+	AC_DEFINE(HWULTIMO4K, 1,[vuultimo4k])
+elif test "$MACHINE" == "h7"; then
+	AC_DEFINE(HWH7, 1,[h7])
+elif test "$MACHINE" == "pulse4k"; then
+	AC_DEFINE(HWPULSE4K, 1,[pulse4k])
+elif test "$MACHINE" == "pulse4kmini"; then
+	AC_DEFINE(HWPULSE4KMINI, 1,[pulse4kmini])
+elif test "$MACHINE" == "gbue4k"; then
+	AC_DEFINE(HWGBUE4K, 1,[gbue4k])
+elif test "$MACHINE" == "gbtrio4kpro"; then
+	AC_DEFINE(HWGBTRIO4KPRO, 1,[gbtrio4kpro])	
+fi
 
 AC_ARG_WITH(brandname,
 	[  --with-brandname=NAME brand name [[none,dreambox...]]],
@@ -313,8 +329,8 @@ AC_ARG_WITH(amlogic,
 
 FFMPEG_CFLAGS=" "
 
-AM_CONDITIONAL(DREAMNEXTGEN, test "$BOXTYPE" == dreamone -o "$BOXTYPE" == dreamtwo)
-if test "$BOXTYPE" == "dreamone" -o "$BOXTYPE" == "dreamtwo"; then
+AM_CONDITIONAL(DREAMNEXTGEN, test "$MACHINE" == dreamone -o "$MACHINE" == dreamtwo)
+if test "$MACHINE" == "dreamone" -o "$MACHINE" == "dreamtwo"; then
 	ALSA_CFLAGS="-lasound"
 	FFMPEG_CFLAGS=" -lavdevice -lavformat -lavcodec -lswresample -lswscale -lavutil -lm "
 	#AC_DEFINE(DREAMNEXTGEN, 1, [Dreambox NexT Generation Hardware])
@@ -408,30 +424,30 @@ AC_ARG_WITH(subttxtabnormalptsdiffs,
 )
 AC_DEFINE_UNQUOTED(SUBT_TXT_ABNORMAL_PTS_DIFFS, $with_subttxtabnormalptsdiffs,[Configure abnormal pts for subtitle and teletext])
 
-AM_CONDITIONAL(DM9X0, test `echo "$BOXTYPE" | cut -b 1-3` == "dm9")
+AM_CONDITIONAL(DM9X0, test `echo "$MACHINE" | cut -b 1-3` == "dm9")
 AM_CONDITIONAL(DREAMBOXDMM2, test "$PLATFORM" == "dm4kgen" -o "$PLATFORM" == "dm3gen" -o "$PLATFORM" == "dm2gen")
 
-AM_CONDITIONAL(HAVE_COLORLCD1, test "$BOXTYPE" == "dm8000" -o "$BOXTYPE" == "dm800" -o "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2")
-AM_CONDITIONAL(HAVE_COLORLCD2, test "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm800sev2" -o "$BOXTYPE" == "dm820")
-AM_CONDITIONAL(HAVE_COLORLCD3, test "$BOXTYPE" == "dm7080")
-AM_CONDITIONAL(HAVE_GRAUTEC70X0, test "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2" -o "$BOXTYPE" == "dm7080")
-AM_CONDITIONAL(HAVE_GRAUTEC8000, test "$BOXTYPE" == "dm8000")
-AM_CONDITIONAL(LCD_FRAMEBUFFER_MODE, test "$BOXTYPE" == et8500 -o "$BOXTYPE" == et8500s -o "$BOXTYPE" == 8100s)
+AM_CONDITIONAL(HAVE_COLORLCD1, test "$MACHINE" == "dm8000" -o "$MACHINE" == "dm800" -o "$MACHINE" == "dm7020hd" -o "$MACHINE" == "dm7020hdv2")
+AM_CONDITIONAL(HAVE_COLORLCD2, test "$MACHINE" == "dm800se" -o "$MACHINE" == "dm800sev2" -o "$MACHINE" == "dm820")
+AM_CONDITIONAL(HAVE_COLORLCD3, test "$MACHINE" == "dm7080")
+AM_CONDITIONAL(HAVE_GRAUTEC70X0, test "$MACHINE" == "dm7020hd" -o "$MACHINE" == "dm7020hdv2" -o "$MACHINE" == "dm7080")
+AM_CONDITIONAL(HAVE_GRAUTEC8000, test "$MACHINE" == "dm8000")
+AM_CONDITIONAL(LCD_FRAMEBUFFER_MODE, test "$MACHINE" == et8500 -o "$MACHINE" == et8500s -o "$MACHINE" == 8100s)
 
-if test "$BOXTYPE" == "u41" -o "$BOXTYPE" == "u42" -o "$BOXTYPE" == "u43" -o "$BOXTYPE" == "u45"; then
+if test "$MACHINE" == "u41" -o "$MACHINE" == "u42" -o "$MACHINE" == "u43" -o "$MACHINE" == "u45"; then
 	AC_DEFINE(USE_VIDEO_MODE_HD, 1,[define use valid Video Modes])
 fi
 
-if test "$BOXTYPE" == "mbmicro" -o "$BOXTYPE" == "e4hd" -o "$BOXTYPE" == "e4hdhybrid" -o "$BOXTYPE" == "twinboxlcd" -o "$BOXTYPE" == "singleboxlcd" -o "$BOXTYPE" == "twinboxlcdci5" -o "$BOXTYPE" == "sf208" -o "$BOXTYPE" == "sf228" -o "$BOXTYPE" == "sf238" -o "$BOXTYPE" == "odin2hybrid" -o "$BOXTYPE" == "odinplus"; then
+if test "$MACHINE" == "mbmicro" -o "$MACHINE" == "e4hd" -o "$MACHINE" == "e4hdhybrid" -o "$MACHINE" == "twinboxlcd" -o "$MACHINE" == "singleboxlcd" -o "$MACHINE" == "twinboxlcdci5" -o "$MACHINE" == "sf208" -o "$MACHINE" == "sf228" -o "$MACHINE" == "sf238" -o "$MACHINE" == "odin2hybrid" -o "$MACHINE" == "odinplus"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "8100s"; then
+if test "$MACHINE" == "8100s"; then
 	AC_DEFINE(KEY_VIDEO_TO_KEY_BOOKMARKS, 1,[define when rc sends a KEY_VIDEO event for its KEY_BOOKMARKS])
 	AC_DEFINE(LCD_FRAMEBUFFER_MODE, 1,[define the framebuffer LCD mode])
 fi
 
-if test "$BOXTYPE" == "blackbox7405"; then
+if test "$MACHINE" == "blackbox7405"; then
 	AC_DEFINE(KEY_PLAY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_MEDIA_TO_KEY_BOOKMARKS, 1,[define when rc sends a KEY_MEDIA event for its KEY_BOOKMARKS key])
 	AC_DEFINE(KEY_VIDEO_IS_KEY_SCREEN, 1,[define when rc sends a KEY_VIDEO event for its KEY_SCREEN key])
@@ -439,13 +455,13 @@ if test "$BOXTYPE" == "blackbox7405"; then
 	AC_DEFINE(KEY_TIME_TO_KEY_SLOW, 1,[define when rc sends a KEY_TOME event for its KEY_SLOW key])
 fi
 
-if test "$BOXTYPE" == "bwidowx" -o "$BOXTYPE" == "bwidowx2"; then
+if test "$MACHINE" == "bwidowx" -o "$MACHINE" == "bwidowx2"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(KEY_ZOOM_TO_KEY_SCREEN, 1,[define when rc sends a KEY_ZOOM event for its KEY_SCREEN key])
 	AC_DEFINE(KEY_LAST_TO_KEY_PVR, 1,[define when rc sends a KEY_LAST event for its KEY_PVR key])
 fi
 
-if test "$BOXTYPE" == "sf8008" -o "$BOXTYPE" == "sf8008m" -o "$BOXTYPE" == "ustym4kpro" -o "$BOXTYPE" == "gbtrio4k" -o "$BOXTYPE" == "gbtrio4kplus" -o "$BOXTYPE" == "gbip4k" -o "$BOXTYPE" == "beyonwizv2" -o "$BOXTYPE" == "viper4k" -o "$BOXTYPE" == "qviart5" -o "$BOXTYPE" == "og2ott4k" -o "$BOXTYPE" == "og2s4k" -o "$BOXTYPE" == "sfx6008" -o "$BOXTYPE" == "sx88v2"; then
+if test "$MACHINE" == "sf8008" -o "$MACHINE" == "sf8008m" -o "$MACHINE" == "ustym4kpro" -o "$MACHINE" == "gbtrio4k" -o "$MACHINE" == "gbtrio4kplus" -o "$MACHINE" == "gbip4k" -o "$MACHINE" == "beyonwizv2" -o "$MACHINE" == "viper4k" -o "$MACHINE" == "qviart5" -o "$MACHINE" == "og2ott4k" -o "$MACHINE" == "og2s4k" -o "$MACHINE" == "sfx6008" -o "$MACHINE" == "sx88v2"; then
 	AC_DEFINE(HAVE_HISILICON, 1,[define it is a HISILICON chip])
 	AC_DEFINE(CONFIG_HISILICON_FB, 1,[define add HISILICON framebuffer blit])
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
@@ -460,26 +476,26 @@ if test "$MACHINE_BRAND" == "dreambox"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et8500s"; then
+if test "$MACHINE" == "et8500" -o "$MACHINE" == "et8500s"; then
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 	AC_DEFINE(LCD_FRAMEBUFFER_MODE, 1,[define the framebuffer LCD mode])
 fi
 
-if test "$BOXTYPE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2" -o "$BOXTYPE" == "dm820" -o "$BOXTYPE" == "dm800se" -o "$BOXTYPE" == "dm800sev2"; then
+if test "$MACHINE" == "dm7020hd" -o "$MACHINE" == "dm7020hdv2" -o "$MACHINE" == "dm820" -o "$MACHINE" == "dm800se" -o "$MACHINE" == "dm800sev2"; then
 	AC_DEFINE(DREAMBOX_DUAL_TUNER, 1,[define dreambox dual tuner])
 fi
 
-if test "$BOXTYPE" == "dm820" -o "$BOXTYPE" == "dm520"; then
+if test "$MACHINE" == "dm820" -o "$MACHINE" == "dm520"; then
 	AC_DEFINE(CONFIG_ION, 1,[define when we need to use ION allocator])
 fi
 
-if test `echo "$BOXTYPE" | cut -b 1-3` == "dm9"; then
+if test `echo "$MACHINE" | cut -b 1-3` == "dm9"; then
 	AC_DEFINE(DREAMBOX_DUAL_TUNER, 1,[define dreambox dual tuner])
 	AC_DEFINE(CONFIG_ION, 1,[define when we need to use ION allocator])
 	AC_DEFINE(DREAMBOX_MOVE_LCD, 1,[define when we need to move lcd text a bit to the right])
 fi
 
-if test "$BOXTYPE" == "e4hd" -o "$BOXTYPE" == "e4hdhybrid"; then
+if test "$MACHINE" == "e4hd" -o "$MACHINE" == "e4hdhybrid"; then
 	AC_DEFINE(KEY_POWER2_TO_KEY_WWW, 1,[define when rc sends a KEY_POWER2 event for its KEY_WWW key])
 	AC_DEFINE(KEY_DIRECTORY_TO_KEY_FILE, 1,[define when rc sends a KEY_DIRECTORY event for its KEY_FILE key])
 fi
@@ -490,52 +506,52 @@ if test "$MACHINE_BRAND" == "ebox"; then
 	AC_DEFINE(KEY_MODE_TO_KEY_AUDIO, 1,[define when rc sends a KEY_MODE event for its AV plus])
 fi
 
-if test "$BOXTYPE" == "et10000"; then
+if test "$MACHINE" == "et10000"; then
 	AC_DEFINE(HAVE_BWLCD128, 1,[define when using a 128x32 black and white display device])
 fi
 
-if test "$BOXTYPE" == "et4x00" -o "$BOXTYPE" == "et5x00" -o "$BOXTYPE" == "et6x00" -o "$BOXTYPE" == "et7x00" -o "$BOXTYPE" == "et9x00" -o "$BOXTYPE" == "et8000" -o "$BOXTYPE" == "et8500" -o "$BOXTYPE" == "et10000"; then
+if test "$MACHINE" == "et4x00" -o "$MACHINE" == "et5x00" -o "$MACHINE" == "et6x00" -o "$MACHINE" == "et7x00" -o "$MACHINE" == "et9x00" -o "$MACHINE" == "et8000" -o "$MACHINE" == "et8500" -o "$MACHINE" == "et10000"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi
 
-if test "$BOXTYPE" == "et8500"; then
+if test "$MACHINE" == "et8500"; then
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 	AC_DEFINE(HAVE_COLORLCD720, 1,[define when using a 720x576 color display device])
 fi
 
-if test "$BOXTYPE" == "et1x000" -o "$BOXTYPE" == "et7x00" -o "$BOXTYPE" == "ultramini"; then
+if test "$MACHINE" == "et1x000" -o "$MACHINE" == "et7x00" -o "$MACHINE" == "ultramini"; then
 	AC_DEFINE(KEY_F1_TO_KEY_F2, 1,[define when rc sends a KEY_F1 event for its KEY_F2 key])
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 fi
 
-if test "$BOXTYPE" == "et13000" -o "$BOXTYPE" == "beyonwizu4"; then
+if test "$MACHINE" == "et13000" -o "$MACHINE" == "beyonwizu4"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_BOOKMARKS_IS_KEY_DIRECTORY, 1,[define when rc sends a KEY_BOOKMARKS but other box use this key for different mapping we remap to KEY_DIRECTORY])
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 fi
 
-if test "$BOXTYPE" == "enfinity" -o "$BOXTYPE" == "marvel1" -o "$BOXTYPE" == "bre2ze"; then
+if test "$MACHINE" == "enfinity" -o "$MACHINE" == "marvel1" -o "$MACHINE" == "bre2ze"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_MEDIA_TO_KEY_LIST, 1,[define when rc sends a KEY_MEDIA event for its KEY_LIST key])
 fi
 
-if test "$BOXTYPE" == "x2plus"; then
+if test "$MACHINE" == "x2plus"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "dm7080" -o "$BOXTYPE" == "dm820" -o "$BOXTYPE" == "dm900" -o "$BOXTYPE" == "dm920"; then
+if test "$MACHINE" == "dm7080" -o "$MACHINE" == "dm820" -o "$MACHINE" == "dm900" -o "$MACHINE" == "dm920"; then
 	AC_DEFINE(HAVE_HDMIIN_DM, 1,[has hdmi in dm])
 fi
 
-if test "$MACHINE_BRAND" == "formuler" -o "$BOXTYPE" == "triplex" -o "$BOXTYPE" == "sf108" -o "$BOXTYPE" == "ultrabox"; then
+if test "$MACHINE_BRAND" == "formuler" -o "$MACHINE" == "triplex" -o "$MACHINE" == "sf108" -o "$MACHINE" == "ultrabox"; then
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 	AC_DEFINE(KEY_LAST_TO_KEY_BACK, 1,[define when rc sends a KEY_LAST event for its KEY_BACK key])
 	AC_DEFINE(KEY_BOOKMARKS_TO_KEY_MEDIA, 1,[define when rc Playlist sends a KEY_BOOKMARKS event for its KEY_MEDIA key])
 	AC_DEFINE(KEY_VIDEO_TO_KEY_FAVORITES, 1,[define when rc FAV key sends a KEY_VIDEO event for its KEY_FAVORITES key])
 fi
 
-if test "$BOXTYPE" == "gb800solo" -o "$BOXTYPE" == "gb800se" -o "$BOXTYPE" == "gb800ue" -o "$BOXTYPE" == "gbquad" -o "$BOXTYPE" == "gb800seplus" -o "$BOXTYPE" == "gb800ueplus" -o "$BOXTYPE" == "gbquadplus" -o "$BOXTYPE" == "gbipbox" -o "$BOXTYPE" == "gbultrase" -o "$BOXTYPE" == "gbultraue" -o "$BOXTYPE" == "gbultraueh" -o "$BOXTYPE" == "gbx1" -o "$BOXTYPE" == "gbx2" -o "$BOXTYPE" == "gbx3" -o "$BOXTYPE" == "gbx3h"; then
+if test "$MACHINE" == "gb800solo" -o "$MACHINE" == "gb800se" -o "$MACHINE" == "gb800ue" -o "$MACHINE" == "gbquad" -o "$MACHINE" == "gb800seplus" -o "$MACHINE" == "gb800ueplus" -o "$MACHINE" == "gbquadplus" -o "$MACHINE" == "gbipbox" -o "$MACHINE" == "gbultrase" -o "$MACHINE" == "gbultraue" -o "$MACHINE" == "gbultraueh" -o "$MACHINE" == "gbx1" -o "$MACHINE" == "gbx2" -o "$MACHINE" == "gbx3" -o "$MACHINE" == "gbx3h"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_GUIDE_TO_KEY_EPG, 1,[define when rc sends a KEY_HELP event for its KEY_EPG key])
 	AC_DEFINE(KEY_F2_TO_KEY_F6, 1,[define when rc sends a KEY_F2 event for its KEY_F6 key])
@@ -543,7 +559,7 @@ if test "$BOXTYPE" == "gb800solo" -o "$BOXTYPE" == "gb800se" -o "$BOXTYPE" == "g
 	AC_DEFINE(KEY_HOME_TO_KEY_UNKNOWN, 1,[define when rc sends a KEY_UNKNOWN event for its KEY_HOME key])	
 fi
 
-if test "$BOXTYPE" == "gbquad4k" -o "$BOXTYPE" == "gbue4k" -o "$BOXTYPE" == "gbx34k"; then
+if test "$MACHINE" == "gbquad4k" -o "$MACHINE" == "gbue4k" -o "$MACHINE" == "gbx34k"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_GUIDE_TO_KEY_EPG, 1,[define when rc sends a KEY_HELP event for its KEY_EPG key])
 	AC_DEFINE(KEY_F2_TO_KEY_F6, 1,[define when rc sends a KEY_F2 event for its KEY_F6 key])
@@ -552,20 +568,20 @@ if test "$BOXTYPE" == "gbquad4k" -o "$BOXTYPE" == "gbue4k" -o "$BOXTYPE" == "gbx
 	AC_DEFINE(VIDEO_MODE_50, 1,[gigablue workaround for wrong videomode proc])
 fi
 
-if test "$BOXTYPE" == "gbquad4k" -o "$BOXTYPE" == "vuuno4kse"; then
+if test "$MACHINE" == "gbquad4k" -o "$MACHINE" == "vuuno4kse"; then
 	AC_DEFINE(HAVE_COLORLCD400, 1,[define when using a 400x176 color display device])
 fi
 
-if test "$BOXTYPE" == "gbue4k"; then
+if test "$MACHINE" == "gbue4k"; then
 	AC_DEFINE(HAVE_COLORLCD220, 1,[define when using a 220x176 color display device])
 fi
 
-if test "$BOXTYPE" == "hd2400" -o "$BOXTYPE" == "hd11" -o "$BOXTYPE" == "hd1100" -o "$BOXTYPE" == "hd1200" -o "$BOXTYPE" == "hd500c" -o "$BOXTYPE" == "hd530c" -o "$BOXTYPE" == "hd1265" -o "$BOXTYPE" == "hd1500" -o "$BOXTYPE" == "hd51" -o "$BOXTYPE" == "hd60" -o "$BOXTYPE" == "hd61" -o "$BOXTYPE" == "hd66se" -o "$BOXTYPE" == "pulse4k" -o "$BOXTYPE" == "pulse4kmini" -o "$BOXTYPE" == "hd52" -o "$BOXTYPE" == "vs1000" -o "$BOXTYPE" == "vs1500"; then
+if test "$MACHINE" == "hd2400" -o "$MACHINE" == "hd11" -o "$MACHINE" == "hd1100" -o "$MACHINE" == "hd1200" -o "$MACHINE" == "hd500c" -o "$MACHINE" == "hd530c" -o "$MACHINE" == "hd1265" -o "$MACHINE" == "hd1500" -o "$MACHINE" == "hd51" -o "$MACHINE" == "hd60" -o "$MACHINE" == "hd61" -o "$MACHINE" == "hd66se" -o "$MACHINE" == "pulse4k" -o "$MACHINE" == "pulse4kmini" -o "$MACHINE" == "hd52" -o "$MACHINE" == "vs1000" -o "$MACHINE" == "vs1500"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi
 
-if test "$BOXTYPE" == "hd2400" -o "$BOXTYPE" == "vuultimo"; then
+if test "$MACHINE" == "hd2400" -o "$MACHINE" == "vuultimo"; then
 	AC_DEFINE(HAVE_BWLCD255, 1,[define when using a 255x64 black and white display device])
 fi
 
@@ -585,42 +601,42 @@ if test "$MACHINE_BRAND" == "ixuss"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 fi
 
-if test `echo "$BOXTYPE" | cut -b 1-7` == "mbmicro"; then
+if test `echo "$MACHINE" | cut -b 1-7` == "mbmicro"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(FORCE_NO_FILL_ACCELERATION, 1,[define when the framebuffer acceleration does not have fill support])
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "axodin"; then
+if test "$MACHINE" == "axodin"; then
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 	AC_DEFINE(KEY_POWER2_TO_KEY_WWW, 1,[define when rc sends a KEY_POWER2 event for its KEY_WWW key])
 	AC_DEFINE(KEY_DIRECTORY_TO_KEY_FILE, 1,[define when rc sends a KEY_DIRECTORY event for its KEY_FILE key])
 fi
 
-if test "$BOXTYPE" == "maram9"; then
+if test "$MACHINE" == "maram9"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 fi
 
-if test "$BOXTYPE" == "osnino" -o "$BOXTYPE" == "osninoplus" -o "$BOXTYPE" == "osninopro" -o "$BOXTYPE" == "osmio4k" -o "$BOXTYPE" == "osmio4kplus" -o "$BOXTYPE" == "osmini4k"; then
+if test "$MACHINE" == "osnino" -o "$MACHINE" == "osninoplus" -o "$MACHINE" == "osninopro" -o "$MACHINE" == "osmio4k" -o "$MACHINE" == "osmio4kplus" -o "$MACHINE" == "osmini4k"; then
 	AC_DEFINE(KEY_MEDIA_TO_KEY_LIST, 1,[define when rc sends a MEDIA event for its LIST])
 	AC_DEFINE(KEY_VIDEO_TO_KEY_ANGLE, 1,[define when rc sends a VIDEO event for its ANGLE])
 fi
 
-if test "$BOXTYPE" == "osmio4k" -o "$BOXTYPE" == "osmio4kplus" -o "$BOXTYPE" == "osmini4k"; then
+if test "$MACHINE" == "osmio4k" -o "$MACHINE" == "osmio4kplus" -o "$MACHINE" == "osmini4k"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "sf5008"; then
+if test "$MACHINE" == "sf5008"; then
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
 	AC_DEFINE(KEY_LIST_TO_KEY_PVR, 1,[define when rc sends a KEY_LIST event for its KEY_PVR key])
 fi
 
-if test "$BOXTYPE" == "sh1" -o "$BOXTYPE" == "lc"; then
+if test "$MACHINE" == "sh1" -o "$MACHINE" == "lc"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
-if test "$BOXTYPE" == "tiviarmin"; then
+if test "$MACHINE" == "tiviarmin"; then
 	AC_DEFINE(TIVIARRC, 1,[define use Tiviar RC keymap])
 fi
 
@@ -629,7 +645,7 @@ if test "$MACHINE_BRAND" == "dinobot"; then
 	AC_DEFINE(KEY_F6_TO_KEY_VIDEO, 1,[define when rc VIDEO key sends a KEY_F6 event for its KEY_VIDEO key])
 fi
 
-if test "$BOXTYPE" == "dinobot4kmini" -o "$BOXTYPE" == "arivatwin" -o "$BOXTYPE" == "arivacombo"; then
+if test "$MACHINE" == "dinobot4kmini" -o "$MACHINE" == "arivatwin" -o "$MACHINE" == "arivacombo"; then
 	AC_DEFINE(KEY_F6_TO_KEY_FAVORITES, 1,[define when rc FAV key sends a KEY_F6 event for its KEY_FAVORITES key])
 	AC_DEFINE(KEY_CONTEXT_MENU_TO_KEY_BACK, 1,[define when rc MOUSE key sends a KEY_CONTEXT_MENU event for its KEY_BACK key])
 	AC_DEFINE(KEY_WWW_TO_KEY_FILE, 1,[define when rc HOME key sends a KEY_WWW event for its KEY_FILE key])
@@ -637,7 +653,7 @@ if test "$BOXTYPE" == "dinobot4kmini" -o "$BOXTYPE" == "arivatwin" -o "$BOXTYPE"
 	AC_DEFINE(HAVE_HISILICON, 1,[define it is a HISILICON chip])
 fi
 
-if test "$BOXTYPE" == "tyrant" -o "$BOXTYPE" == "xcombo" -o "$BOXTYPE" == "enibox" -o "$BOXTYPE" == "mago" -o "$BOXTYPE" == "x1plus" -o "$BOXTYPE" == "sf108"; then
+if test "$MACHINE" == "tyrant" -o "$MACHINE" == "xcombo" -o "$MACHINE" == "enibox" -o "$MACHINE" == "mago" -o "$MACHINE" == "x1plus" -o "$MACHINE" == "sf108"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi
@@ -649,28 +665,28 @@ if test "$MACHINE_BRAND" == "Vu+"; then
 	AC_DEFINE(KEY_EDIT_TO_KEY_TIME, 1,[define when rc sends a KEY_TIME event for its KEY_EDIT key])
 fi
 
-if test "$BOXTYPE" == "vuduo2"; then
+if test "$MACHINE" == "vuduo2"; then
 	AC_DEFINE(HAVE_BWLCD140, 1,[define when using a 140x32 black and white display device])
 	AC_DEFINE(FORCE_AUTO_INV, 1,[force Inversion auto for vuplus mipsel boxes])
 fi
 
-if test "$BOXTYPE" == "vusolo4k" -o "$BOXTYPE" == "vuduo4k" -o "$BOXTYPE" == "vuduo4kse"; then
+if test "$MACHINE" == "vusolo4k" -o "$MACHINE" == "vuduo4k" -o "$MACHINE" == "vuduo4kse"; then
 	AC_DEFINE(HAVE_COLORLCD480, 1,[define when using a 480x320 color display device])
 fi
 
-if test "$BOXTYPE" == "vuultimo4k"; then
+if test "$MACHINE" == "vuultimo4k"; then
 	AC_DEFINE(HAVE_COLORLCD800, 1,[define when using a 800x480 color display device])
 fi
 
-if test "$BOXTYPE" == "vuzero" -o "$BOXTYPE" == "vuuno" -o "$BOXTYPE" == "vuultimo" -o "$BOXTYPE" == "vusolose" -o "$BOXTYPE" == "vusolo2" -o "$BOXTYPE" == "vusolo" -o "$BOXTYPE" == "vuduo"; then
+if test "$MACHINE" == "vuzero" -o "$MACHINE" == "vuuno" -o "$MACHINE" == "vuultimo" -o "$MACHINE" == "vusolose" -o "$MACHINE" == "vusolo2" -o "$MACHINE" == "vusolo" -o "$MACHINE" == "vuduo"; then
 	AC_DEFINE(FORCE_AUTO_INV, 1,[force Inversion auto for vuplus mipsel boxes])
 fi
 
-if test "$BOXTYPE" == "sf4008" -o "$BOXTYPE" == "beyonwizu4"; then
+if test "$MACHINE" == "sf4008" -o "$MACHINE" == "beyonwizu4"; then
 	AC_DEFINE(LCD_SCROLL_HEX, 1,[define LCD scroll values in hex])
 fi
 
-if test "$MACHINE_BRAND" == "wetek" -o "$BOXTYPE" == "x8hp"; then
+if test "$MACHINE_BRAND" == "wetek" -o "$MACHINE" == "x8hp"; then
 	AC_DEFINE(KEY_F7_TO_KEY_MENU, 1,[define when rc sends a KEY_F7 event for its KEY_MENU])
 	AC_DEFINE(KEY_F1_TO_KEY_MEDIA, 1,[define when rc sends a KEY_F1 event for its KEY_MEDIA])
 	AC_DEFINE(KEY_HOME_TO_KEY_INFO, 1,[define when rc sends a KEY_HOME event for its KEY_INFO])
@@ -680,7 +696,17 @@ if test "$MACHINE_BRAND" == "wetek" -o "$BOXTYPE" == "x8hp"; then
 	AC_DEFINE(WETEKRC, 1, [WeTek remote uses BACKSPACE to toggle extended functions on numeric buttons])
 fi
 
-if test "$BOXTYPE" == "spycat" -o "$BOXTYPE" == "spycatmini" -o "$BOXTYPE" == "spycatminiplus" -o "$BOXTYPE" == "osmini" -o "$BOXTYPE" == "osminiplus" -o "$BOXTYPE" == "osmega" -o "$BOXTYPE" == "spycat4kmini" -o "$BOXTYPE" == "spycat4k" -o "$BOXTYPE" == "spycat4kcombo"; then
+if test "$MACHINE" == "classm" -o "$MACHINE" == "axodin" -o "$MACHINE" == "axodinc" -o "$MACHINE" == "starsatlx" -o "$MACHINE" == "evo" -o "$MACHINE" == "genius" -o "$MACHINE" == "galaxym6"; then
+	AC_DEFINE(PROFILE1, 1,[profile1])
+elif test "$MACHINE" == "gb800solo" -o "$MACHINE" == "gb800se" -o "$MACHINE" == "gb800seplus" -o "$MACHINE" == "gbultrase"; then
+	AC_DEFINE(PROFILE2, 1,[profile2])
+elif test "$MACHINE" == "osmini" -o "$MACHINE" == "spycatmini" -o "$MACHINE" == "osminiplus" -o "$MACHINE" == "spycatminiplus"; then
+	AC_DEFINE(PROFILE3, 1,[profile3])
+elif test "$MACHINE" == "atemionemesis" -o "$MACHINE" == "sezammarvel" -o "$MACHINE" == "xpeedlx3"; then
+	AC_DEFINE(PROFILE4, 1,[profile4])
+fi
+
+if test "$MACHINE" == "spycat" -o "$MACHINE" == "spycatmini" -o "$MACHINE" == "spycatminiplus" -o "$MACHINE" == "osmini" -o "$MACHINE" == "osminiplus" -o "$MACHINE" == "osmega" -o "$MACHINE" == "spycat4kmini" -o "$MACHINE" == "spycat4k" -o "$MACHINE" == "spycat4kcombo"; then
 	AC_DEFINE(KEY_MEDIA_TO_KEY_LIST, 1,[define when rc sends a MEDIA event for its LIST])
 fi
 

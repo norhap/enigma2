@@ -43,6 +43,7 @@ is usually caused by not marking PSignals as immutable.
 #include <lib/base/message.h>
 #include <lib/base/e2avahi.h>
 #include <lib/base/internetcheck.h>
+#include <lib/base/profile.h>
 #include <lib/driver/rc.h>
 #include <lib/driver/rcinput_swig.h>
 #include <lib/service/event.h>
@@ -121,6 +122,7 @@ is usually caused by not marking PSignals as immutable.
 #include <lib/gdi/picload.h>
 #include <lib/dvb/fcc.h>
 #include <lib/gdi/accel.h>
+#include <include/hardwaredb.h>
 %}
 
 %feature("ref")   iObject "$this->AddRef(); /* eDebug(\"AddRef (%s:%d)!\", __FILE__, __LINE__); */ "
@@ -475,9 +477,38 @@ void setACCELDebug(int enable)
 }
 %}
 
+PyObject *getDeviceDB();
+%{
+PyObject *getDeviceDB()
+{
+	ePyObject result = PyDict_New();
+	for (const auto & [ key, value ] : HardwareDB) {
+		PutToDict(result, key.c_str(), value.c_str());
+	}
+    return result;
+}
+%}
+
+void eProfileDone();
+%{
+void eProfileDone()
+{
+	eProfile::getInstance().close();
+}
+%}
+
+void eProfileWrite(const char*);
+%{
+void eProfileWrite(const char* checkPoint)
+{
+	eProfile::getInstance().write(checkPoint);
+}
+%}
+
+
 /************** temp *****************/
 
-/* need a better place for this, i agree. */
+	/* need a better place for this, i agree. */
 %{
 extern void runMainloop();
 extern void quitMainloop(int exit_code);
