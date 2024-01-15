@@ -55,6 +55,9 @@ class PowerTimer(Timer):
 		self.loadTimers()
 		if self.getWakeupEPGImport is not None:
 			self.getWakeupEPGImport()
+		if isPluginInstalled("IPToSAT"):  # activate timer to update bouquets with IPToSAT
+			from Plugins.Extensions.IPToSAT.plugin import TimerUpdateCategories
+			self.timerinstance = TimerUpdateCategories(self)
 
 	def loadTimers(self):
 		timersDom = fileReadXML(self.timersFilename, source=MODULE_NAME)
