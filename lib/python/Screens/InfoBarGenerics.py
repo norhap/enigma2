@@ -2,7 +2,7 @@
 from Screens.ChannelSelection import ChannelSelection, BouquetSelector, SilentBouquetSelector
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
 from Components.AVSwitch import AVSwitch
-from Components.Harddisk import harddiskmanager
+from Components.Harddisk import harddiskmanager, findMountPoint
 from Components.Input import Input
 from Components.Label import Label
 from Components.MovieList import AUDIO_EXTENSIONS, MOVIE_EXTENSIONS, DVD_EXTENSIONS
@@ -40,7 +40,7 @@ from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_n
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
 from time import time, localtime, strftime
-from os.path import exists, isfile, splitext, join
+from os.path import exists, isfile, ismount, realpath, splitext, join
 from os import listdir, remove
 from re import match
 from bisect import insort
@@ -77,18 +77,19 @@ def setResumePoint(session):
 			if not pos[0]:
 				key = ref.toString()
 				lru = int(time())
-				l = seek.getLength()
-				if l:
-					l = l[1]
+				sl = seek.getLength()
+				if sl:
+					sl = sl[1]
 				else:
-					l = None
-				resumePointCache[key] = [lru, pos[1], l]
-				if len(resumePointCache) > 50:
-					candidate = key
-					for k, v in resumePointCache.items():
-						if v[0] < lru:
-							candidate = k
-					del resumePointCache[candidate]
+					sl = None
+				resumePointCache[key] = [lru, pos[1], sl]
+				for k, v in list(resumePointCache.items()):
+					if v[0] < lru:
+						candidate = k
+						filepath = realpath(candidate.split(':')[-1])
+						mountpoint = findMountPoint(filepath)
+						if ismount(mountpoint) and not exists(filepath):
+							del resumePointCache[candidate]
 				if lru - resumePointCacheLast > 3600:
 					saveResumePoints()
 
@@ -118,20 +119,26 @@ def getResumePoint(session):
 def saveResumePoints():
 	global resumePointCache, resumePointCacheLast
 	try:
-		f = open('/etc/enigma2/resumepoints.pkl', 'wb')
-		pickle.dump(resumePointCache, f, pickle.HIGHEST_PROTOCOL)
-		f.close()
+		with open('/etc/enigma2/resumepoints.pkl', 'wb') as f:
+			pickle.dump(resumePointCache, f, pickle.HIGHEST_PROTOCOL)
 	except Exception as ex:
-		print("[InfoBarGenerics] Failed to write resumepoints:", ex)
+		print("[saveResumePoints] Failed to write resumepoints:", ex)
 	resumePointCacheLast = int(time())
 
 
 def loadResumePoints():
 	try:
-		return pickle.load(open('/etc/enigma2/resumepoints.pkl', 'rb'))
+		with open('/etc/enigma2/resumepoints.pkl', 'rb') as f:
+			pickleFile = pickle.load(f)
+		return pickleFile
 	except Exception as ex:
-		print("[InfoBarGenerics] Failed to load resumepoints:", ex)
+		print("[loadResumePoints] Failed to load resumepoints:", ex)
 		return {}
+
+
+def updateResumePointCache():
+	global resumePointCache
+	resumePointCache = loadResumePoints()
 
 
 resumePointCache = loadResumePoints()
