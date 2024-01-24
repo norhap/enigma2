@@ -624,7 +624,12 @@ void eDVBScan::addLcnToDB(eDVBNamespace ns, eOriginalNetworkID onid, eTransportS
 		int size = 0;
 		bool added = false;
 		[[maybe_unused]] size_t ret; /* dummy value to store fread return values */
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-overflow"
 		sprintf(row, "%08x:%04x:%04x:%04x:%05d:%08d\n", ns.get(), onid.get(), tsid.get(), sid.get(), lcn, signal);
+#pragma GCC diagnostic pop
+
 		fseek(m_lcn_file, 0, SEEK_END);
 		size = ftell(m_lcn_file);
 		
