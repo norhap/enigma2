@@ -150,6 +150,7 @@ private:
 	bool load_epg;
 	PSignal0<void> epgCacheStarted;
 	bool m_debug;
+	bool m_saveepg;
 
 #ifdef ENABLE_PRIVATE_EPG
 	contentMaps content_time_tables;
@@ -178,6 +179,9 @@ private:
 #endif // SWIG
 public:
 	static eEPGCache *getInstance() { return instance; }
+
+	void setDebug(bool enabled) { m_debug = enabled; }
+	void setSave(bool enabled) { m_saveepg = enabled; }
 
 	void crossepgImportEPGv21(std::string dbroot);
 	void clear();

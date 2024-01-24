@@ -1093,6 +1093,8 @@ def InitUsageConfig():
 
 	config.usage.multiboot_order = ConfigYesNo(default=True)
 
+	config.crash = ConfigSubsection()
+
 	config.epg = ConfigSubsection()
 	config.epg.eit = ConfigYesNo(default=True)
 	config.epg.mhw = ConfigYesNo(default=False)
@@ -1104,6 +1106,12 @@ def InitUsageConfig():
 	config.epg.saveepg = ConfigYesNo(default=True)
 
 	config.epg.maxdays = ConfigSelectionNumber(min=1, max=365, stepwidth=1, default=7, wraparound=True)
+
+	def showEPGChanged(configElement):
+		from enigma import eEPGCache
+		eEPGCache.getInstance().setSave(configElement.value)
+
+	config.epg.saveepg.addNotifier(showEPGChanged, immediate_feedback=False, initial_call=False)
 
 	def EpgmaxdaysChanged(configElement):
 		from enigma import eEPGCache
@@ -1150,12 +1158,12 @@ def InitUsageConfig():
 		if not config.epg.opentv.value:
 			mask &= ~eEPGCache.OPENTV
 		eEPGCache.getInstance().setEpgSources(mask)
-	config.epg.eit.addNotifier(EpgSettingsChanged)
-	config.epg.mhw.addNotifier(EpgSettingsChanged)
-	config.epg.freesat.addNotifier(EpgSettingsChanged)
-	config.epg.viasat.addNotifier(EpgSettingsChanged)
-	config.epg.netmed.addNotifier(EpgSettingsChanged)
-	config.epg.virgin.addNotifier(EpgSettingsChanged)
+	config.epg.eit.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.mhw.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.freesat.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.viasat.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.netmed.addNotifier(EpgSettingsChanged, initial_call=False)
+	config.epg.virgin.addNotifier(EpgSettingsChanged, initial_call=False)
 	config.epg.opentv.addNotifier(EpgSettingsChanged)
 
 	config.epg.histminutes = ConfigSelectionNumber(min=0, max=120, stepwidth=15, default=0, wraparound=True)
@@ -1169,7 +1177,7 @@ def InitUsageConfig():
 	config.epg.fulldescription_separator = ConfigSelection(default="nothing", choices=choicelist)
 	choicelist = [("no", _("no")), ("nothing", _("omit")), ("space", _("space")), ("dot", ". "), ("dash", " - "), ("asterisk", " * "), ("hashtag", " # ")]
 	config.epg.replace_newlines = ConfigSelection(default="space", choices=choicelist)
-
+	config.crash.debugEPG = ConfigYesNo(default=False)
 	config.epg.cacheloadsched = ConfigYesNo(default=False)
 	config.epg.cachesavesched = ConfigYesNo(default=False)
 
@@ -1184,6 +1192,12 @@ def InitUsageConfig():
 	config.epg.cachesavesched.addNotifier(EpgCacheSaveSchedChanged, immediate_feedback=False)
 	config.epg.cacheloadtimer = ConfigSelectionNumber(default=24, stepwidth=1, min=1, max=24, wraparound=True)
 	config.epg.cachesavetimer = ConfigSelectionNumber(default=24, stepwidth=1, min=1, max=24, wraparound=True)
+
+	def debugEPGhanged(configElement):
+		from enigma import eEPGCache
+		eEPGCache.getInstance().setDebug(configElement.value)
+
+	config.crash.debugEPG.addNotifier(debugEPGhanged, immediate_feedback=False, initial_call=False)
 
 	hddchoises = [("/etc/enigma2/", "Internal Flash")]
 	for p in harddiskmanager.getMountedPartitions():
@@ -1247,8 +1261,6 @@ def InitUsageConfig():
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 	config.misc.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
 
-	config.crash = ConfigSubsection()
-	config.crash.debugEPG = ConfigYesNo(default=False)
 	config.crash.debugDVBScan = ConfigYesNo(default=False)
 	config.crash.coredump = ConfigYesNo(default=False)
 
