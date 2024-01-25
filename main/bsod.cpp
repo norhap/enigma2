@@ -15,15 +15,9 @@
 #include <lib/gdi/gmaindc.h>
 #include <asm/ptrace.h>
 #include "version_info.h"
+#include <lib/base/modelinformation.h>
 
 /************************************************/
-
-static const char *crash_emailaddr =
-#ifndef CRASH_EMAILADDR
-	"telegram @norhap or https://github.com/norhap";
-#else
-	CRASH_EMAILADDR;
-#endif
 
 /* Defined in eerror.cpp */
 void retrieveLogBuffer(const char **p1, unsigned int *s1, const char **p2, unsigned int *s2);
@@ -162,7 +156,7 @@ void bsodFatal(const char *component)
 		strftime(tm_str, sizeof(tm_str), "%a %b %_d %T %Y", &tm);
 
 		fprintf(f,
-			"Open Vision Enigma2 crash log\n\n"
+			"Norhap Enigma2 crash log\n\n"
 			"crashdate=%s\n"
 			"compiledate=%s\n"
 			"skin=%s\n"
@@ -178,28 +172,17 @@ void bsodFatal(const char *component)
 			enigma2_rev,
 			component);
 
-		std::ifstream in(eEnv::resolve("${libdir}/enigma.info").c_str());
+		eModelInformation &modelinformation = eModelInformation::getInstance();
+
 		const std::list<std::string> enigmainfovalues {
-			"model="
+			"model",
+			"imageversion",
+			"imagetype"
 		};
 
-		if (in.good()) {
-			do
-			{
-				std::string line;
-				std::getline(in, line);
-				for(std::list<std::string>::const_iterator i = enigmainfovalues.begin(); i != enigmainfovalues.end(); ++i)
-				{
-					if (line.find(i->c_str()) != std::string::npos) {
-						line.erase(std::remove( line.begin(), line.end(), '\"' ),line.end());
-						line.erase(std::remove( line.begin(), line.end(), '\'' ),line.end());
-						fprintf(f, "%s\n", line.c_str());
-						break;
-					}
-				}
-			}
-			while (in.good());
-			in.close();
+		for(std::list<std::string>::const_iterator i = enigmainfovalues.begin(); i != enigmainfovalues.end(); ++i)
+		{
+			fprintf(f, "%s=%s\n", i->c_str(), modelinformation.getValue(i->c_str()).c_str());
 		}
 
 		fprintf(f, "\n");
@@ -216,7 +199,7 @@ void bsodFatal(const char *component)
 
 		/* dump the kernel log */
 		getKlog(f);
-
+		fsync(fileno(f));
 		fclose(f);
 	}
 
@@ -240,7 +223,7 @@ void bsodFatal(const char *component)
 	os.clear();
 	os << "We are really sorry. Your STB encountered "
 		"a software problem, and needs to be restarted.\n"
-		"Please send the logfile " << crashlog_name << " to " << crash_emailaddr << ".\n"
+		"Please send the logfile " << crashlog_name << " telegram @norhap or https://github.com/norhap.\n"
 		"Better to enable Twisted log after and send us the twisted.log also.\n"
 		"Your STB restarts in 10 seconds!\n"
 		"Component: " << component;
