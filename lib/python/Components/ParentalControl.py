@@ -29,7 +29,7 @@ def InitParentalControl():
 	config.ParentalControl.retries.servicepin.time = ConfigInteger(default=3)
 	config.ParentalControl.servicepin = ConfigSubList()
 	config.ParentalControl.servicepin.append(ConfigPIN(default=0))
-	config.ParentalControl.age = ConfigSelection(default="18", choices=[("0", _("No age block"))] + list((str(x), "%d+" % x) for x in range(3, 19)))
+	config.ParentalControl.age = ConfigSelection(default=18, choices=[(0, _("No age block"))] + list((x, "%d+" % x) for x in range(3, 19)))
 	config.ParentalControl.hideBlacklist = ConfigYesNo(default=False)
 	config.ParentalControl.config_sections = ConfigSubsection()
 	config.ParentalControl.config_sections.main_menu = ConfigYesNo(default=False)
@@ -89,18 +89,18 @@ class ParentalControl:
 				service = refstr and eServiceReference(refstr).toCompareString()
 			if [x for x in path[1:].split("/") if x.startswith(".") and not x == ".Trash"]:
 				age = 18
-		elif int(config.ParentalControl.age.value):
+		elif config.ParentalControl.age.value:
 			event = info and info.getEvent(ref)
 			rating = event and event.getParentalData()
 			age = rating and rating.getRating()  # rating.getRating() = (age - 3) if rating.getRating().
 			age = age and age <= 15 and age + 3 or 0
 			if age == 0:
 				try:  # Age control based on getExtendedDescription also valid for EIT.
-					agecontrol = "%s" % int(config.ParentalControl.age.value)
+					agecontrol = "%s" % config.ParentalControl.age.value
 					description = event.getExtendedDescription().strip()
-					if "(+%s)" % int(config.ParentalControl.age.value) in str(description):
+					if "(+%s)" % config.ParentalControl.age.value in str(description):
 						rating = event.getExtendedDescription().lstrip(")")
-					elif "+%s" % int(config.ParentalControl.age.value) in str(description) or "-%s" % int(config.ParentalControl.age.value) in str(description):
+					elif "+%s" % config.ParentalControl.age.value in str(description) or "-%s" % config.ParentalControl.age.value in str(description):
 						rating = event.getExtendedDescription().strip()
 					elif "TP" in str(description):  # Add here future EPG character filters for other platforms EPG.
 						rating = None
@@ -111,7 +111,7 @@ class ParentalControl:
 								return age or service and service in self.blacklist
 				except Exception as err:
 					print(err)
-		return (age and age >= int(config.ParentalControl.age.value)) or service and service in self.blacklist
+		return (age and age >= config.ParentalControl.age.value) or service and service in self.blacklist
 
 	def isServicePlayable(self, ref, callback, session=None):
 		self.session = session
