@@ -1009,6 +1009,9 @@ msgstr "Modo de autoría"
 msgid "Auto"
 msgstr "Auto"
 
+msgid "Auto detect"
+msgstr "Detección automática"
+
 msgid "Auto DiSEqC"
 msgstr "DiSEqC Automático"
 
