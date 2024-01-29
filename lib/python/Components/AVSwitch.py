@@ -113,7 +113,7 @@ def InitAVSwitch():
 				policy2_choices.update({"auto": _("Auto")})
 		except:
 			print("[AVSwitch] Read /proc/stb/video/policy2_choices failed.")
-	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default="scale")
+	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default="letterbox")
 	policy_choices = {
 		# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
 		"pillarbox": _("Pillarbox"),
@@ -140,7 +140,7 @@ def InitAVSwitch():
 				policy_choices.update({"auto": _("Auto")})
 		except:
 			print("[AVSwitch] Read /proc/stb/video/policy_choices failed.")
-	config.av.policy_43 = ConfigSelection(choices=policy_choices, default="scale")
+	config.av.policy_43 = ConfigSelection(choices=policy_choices, default="pillarbox")
 	config.av.tvsystem = ConfigSelection(choices={"pal": "PAL", "ntsc": "NTSC", "multinorm": "multinorm"}, default="pal")
 	config.av.wss = ConfigEnableDisable(default=True)
 	config.av.generalAC3delay = ConfigSelectionNumber(-1000, 1000, 5, default=0)
