@@ -181,7 +181,7 @@ public:
 #endif
 	bool operator==(const eServiceReference &c) const
 	{
-		if (type != c.type)
+		if (!c || type != c.type)
 			return 0;
 		return (memcmp(data, c.data, sizeof(int)*8)==0) && (path == c.path);
 	}
@@ -191,6 +191,8 @@ public:
 	}
 	bool operator<(const eServiceReference &c) const
 	{
+		if (!c) return 0;
+		
 		if (type < c.type)
 			return 1;
 
