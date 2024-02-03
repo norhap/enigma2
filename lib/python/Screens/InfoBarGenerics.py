@@ -194,7 +194,7 @@ class InfoBarStreamRelay:
 				self.__services.remove(servicestring)
 			else:
 				self.__services.append(servicestring)
-			if nav.getCurrentlyPlayingServiceReference():
+			if nav.getCurrentlyPlayingServiceReference() == service:
 				nav.restartService()
 			self.write()
 
