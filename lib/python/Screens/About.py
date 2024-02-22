@@ -338,35 +338,35 @@ class About(Screen):
 			AboutText += _("Type Display: ") + BoxInfo.getItem("displaytype") + "\n"
 		else:
 			AboutText += _("No Display") + "\n"
-		servicemp3 = _("ServiceMP3. IPTV recording (Yes).")
-		servicehisilicon = _("ServiceHisilicon. IPTV recording (No). (Recommended ServiceMP3).")
-		exteplayer3 = _("ServiceApp-ExtEplayer3. IPTV recording (No). (Recommended ServiceMP3).")
-		gstplayer = _("ServiceApp-GstPlayer. IPTV recording (No). (Recommended ServiceMP3).")
+		servicemp3 = "ServiceMP3"
+		servicehisilicon = "ServiceHisilicon"
+		exteplayer3 = "ServiceApp-ExtEplayer3"
+		gstplayer = "ServiceApp-GstPlayer"
 		if isPluginInstalled("ServiceApp"):
 			if isPluginInstalled("ServiceMP3"):
 				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
-					player = "%s" % exteplayer3
+					player = f"{exteplayer3}"
 				else:
-					player = "%s" % gstplayer
+					player = f"{gstplayer}"
 				if not config.plugins.serviceapp.servicemp3.replace.value:
-					player = "%s" % servicemp3
+					player = f"{servicemp3}"
 			elif isPluginInstalled("ServiceHisilicon"):
 				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
-					player = "%s" % exteplayer3
+					player = f"{exteplayer3}"
 				else:
-					player = "%s" % gstplayer
+					player = f"{gstplayer}"
 				if not config.plugins.serviceapp.servicemp3.replace.value:
-					player = "%s" % servicehisilicon
+					player = f"{servicehisilicon}"
 			else:
 				player = _("Not installed")
 		else:
 			if isPluginInstalled("ServiceMP3"):
-				player = "%s" % servicemp3
+				player = f"{servicemp3}"
 			elif isPluginInstalled("ServiceHisilicon"):
-				player = "%s" % servicehisilicon
+				player = f"{servicehisilicon}"
 			else:
 				player = _("Not installed")
-		AboutText += _("Player: %s") % player
+		AboutText += _("Player:") + f" {player}"
 		AboutText += "\n"
 		AboutText += _("Uptime: ") + about.getBoxUptime()
 		self["AboutScrollLabel"] = ScrollLabel(AboutText)
