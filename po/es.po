@@ -11006,7 +11006,7 @@ msgid "Setup mode"
 msgstr "Modo de configuración"
 
 msgid "Show EIT now/next in infobar"
-msgstr "Mostrar EIT ahora/siguiente en Infobar"
+msgstr "Mostrar EIT ahora / siguiente en las barras de información"
 
 msgid "Show SNR percentage instead of dB value"
 msgstr "Mostrar porcentaje de SNR en lugar de valor de dB"
@@ -16344,8 +16344,8 @@ msgstr "Guardar cada (horas)"
 msgid "Your %s %s stores the EPG data every (hours)."
 msgstr "Su %s %s almacena los datos guardados en EPG cada (horas)."
 
-msgid "Display the EIT now/next eventdata in infobar."
-msgstr "Visualizar datos ahora/siguiente EIT en la barra de información."
+msgid "Show and prioritize the event now and next with EIT in the information bars, over the EPG cache with EPG IMPORT."
+msgstr "Muestra y prioriza los eventos ahora y siguiente con EIT en las barras de información, sobre el caché EPG con EPG IMPORT."
 
 msgid "Country for EPG event rating information"
 msgstr "País para la información de clasificación de eventos EPG"
