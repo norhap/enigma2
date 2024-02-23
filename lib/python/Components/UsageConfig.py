@@ -311,6 +311,8 @@ def InitUsageConfig():
 			config.usage.default_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.default_path.value = savedValue
 	config.usage.default_path.save()
+	if config.usage.default_path.value != "/" and not exists(defaultValue):
+		makedirs(defaultValue, 0o755)
 	choiceList = [("<default>", "<default>"), ("<current>", "<current>"), ("<timer>", "<timer>")]
 	config.usage.timer_path = ConfigSelection(default="<default>", choices=choiceList)
 	config.usage.timer_path.load()
