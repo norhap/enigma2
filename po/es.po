@@ -16344,8 +16344,8 @@ msgstr "Guardar cada (horas)"
 msgid "Your %s %s stores the EPG data every (hours)."
 msgstr "Su %s %s almacena los datos guardados en EPG cada (horas)."
 
-msgid "Show and prioritize the event now and next with EIT in the information bars, over the EPG cache with EPG IMPORT."
-msgstr "Muestra y prioriza los eventos ahora y siguiente con EIT en las barras de información, sobre el caché EPG con EPG IMPORT."
+msgid "Show and prioritize the event now and next with EIT in the information bars."
+msgstr "Muestra y prioriza los eventos ahora y siguiente con EIT en las barras de información."
 
 msgid "Country for EPG event rating information"
 msgstr "País para la información de clasificación de eventos EPG"
@@ -19118,8 +19118,8 @@ msgstr ""
 msgid "Player:"
 msgstr "Reproductor:"
 
-msgid "IPTV recording with ServiceApp enabled - recording canceled"
-msgstr "Grabación de IPTV con ServiceApp habilitado - grabación cancelada"
+msgid "IPTV - recording with ServiceApp enabled - no possible recording"
+msgstr "IPTV - Grabación con ServiceApp habilitado - no es posible grabar"
 
 msgid "Not installed"
 msgstr "No instalado"

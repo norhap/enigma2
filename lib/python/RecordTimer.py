@@ -351,7 +351,7 @@ class RecordTimer(Timer):
 		if w.service_ref.ref.toString().startswith("4097:") and isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value or w.service_ref.ref.toString()[:4] in ("5001", "5002"):
 			print("[RecordTimer][doActivate] ServiceApp enabled - recording disabled")
 			w.state = RecordTimerEntry.StateEnded
-			AddPopup(_("IPTV recording with ServiceApp enabled - recording canceled"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
+			AddPopup(f"Stream {w.service_ref.ref.toString()[:4]} " + _("IPTV - recording with ServiceApp enabled - no possible recording"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer which has already passed,
 		# simply abort the timer. don't run trough all the stages.
 		elif w.shouldSkip():

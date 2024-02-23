@@ -33,7 +33,7 @@
 		<item level="2" text="Save EPG data" description="Configure if epg.dat should be saved at all.">config.epg.saveepg</item>
 		<item level="2" text="Automatic save" description="Allows your %s %s to store the EPG data regularly.">config.epg.cachesavesched</item>
 		<item level="2" text="Save every (in hours)" requires="config.epg.cachesavesched" description="Your %s %s stores the EPG data every (hours).">config.epg.cachesavetimer</item>
-		<item level="2" text="Show EIT now/next in infobar" description="Show and prioritize the event now and next with EIT in the information bars, over the EPG cache with EPG IMPORT.">config.usage.show_eit_nownext</item>
+		<item level="2" text="Show EIT now/next in infobar" description="Show and prioritize the event now and next with EIT in the information bars.">config.usage.show_eit_nownext</item>
 		<item level="2" text="Enable EIT EPG" description="Use EIT EPG information when it is available.">config.epg.eit</item>
 		<item level="2" text="Enable MHW EPG" description="Use MHW EPG information when it is available.">config.epg.mhw</item>
 		<item level="2" text="Enable FreeSat EPG" description="Use FreeSat EPG information when it is available.">config.epg.freesat</item>
