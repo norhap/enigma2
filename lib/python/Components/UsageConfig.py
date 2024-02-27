@@ -302,7 +302,15 @@ def InitUsageConfig():
 		m = i / 60
 		choicelist.append((str(i), ngettext("%d minute", "%d minutes", m) % m))
 	config.usage.pip_last_service_timeout = ConfigSelection(default="0", choices=choicelist)
-	defaultValue = resolveFilename(SCOPE_HDD)
+	path = ""
+	for partition in harddiskmanager.getMountedPartitions():
+		directories = normpath(partition.mountpoint)
+		if directories != "/" and not exists(str(directories + "/movie")):
+			makedirs(directories + "/movie")
+		if directories != "/" and "movie" in directories:
+			path = join(directories + "/")
+			break
+	defaultValue = path if path and "/net/movie" not in path or path and "/autofs/movie" not in path else resolveFilename(SCOPE_HDD)
 	config.usage.default_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.default_path.load()
 	if config.usage.default_path.saved_value:
@@ -310,9 +318,6 @@ def InitUsageConfig():
 		if savedValue and savedValue != defaultValue:
 			config.usage.default_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.default_path.value = savedValue
-	config.usage.default_path.save()
-	if config.usage.default_path.value != "/" and not exists(defaultValue):
-		makedirs(defaultValue, 0o755)
 	choiceList = [("<default>", "<default>"), ("<current>", "<current>"), ("<timer>", "<timer>")]
 	config.usage.timer_path = ConfigSelection(default="<default>", choices=choiceList)
 	config.usage.timer_path.load()
@@ -321,7 +326,6 @@ def InitUsageConfig():
 		if savedValue and savedValue not in choiceList:
 			config.usage.timer_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.timer_path.value = savedValue
-	config.usage.timer_path.save()
 	config.usage.instantrec_path = ConfigSelection(default="<default>", choices=choiceList)
 	config.usage.instantrec_path.load()
 	if config.usage.instantrec_path.saved_value:
@@ -329,9 +333,7 @@ def InitUsageConfig():
 		if savedValue and savedValue not in choiceList:
 			config.usage.instantrec_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.instantrec_path.value = savedValue
-	config.usage.instantrec_path.save()
-	SCOPE_USB_TIMESHIFT_RECORDINGS = "/media/usb/timeshift/recordings/"
-	defaultValue = resolveFilename(SCOPE_TIMESHIFT) if exists(resolveFilename(SCOPE_HDD)) else SCOPE_USB_TIMESHIFT_RECORDINGS
+	defaultValue = resolveFilename(SCOPE_TIMESHIFT) if exists(resolveFilename(SCOPE_HDD)) else path + "recordings/"
 	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
@@ -340,8 +342,7 @@ def InitUsageConfig():
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
 	if config.usage.timeshift_path.value != "/" and not exists(config.usage.timeshift_path.value):
-		makedirs(config.usage.timeshift_path.value, 0o755)  # Create Timeshift DefaultValue directorie and users Directories. PathStatus of Timeshift module values this directorie.
-	config.usage.timeshift_path.save()
+		makedirs(config.usage.timeshift_path.value, 0o755)
 	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
 	config.usage.timeshift_skipreturntolive = ConfigYesNo(default=False)
 

@@ -414,8 +414,23 @@ class LocationBox(Screen, NumericalTextInput, HelpableScreen):
 			if self.bookmarks and self.bookmarksList != sorted(self.bookmarks.value):
 				self.bookmarks.value = self.bookmarksList
 				self.bookmarks.save()
+				self.setPathInfoConfig(path)
 			self.disableTimer()
 			self.close(path)
+
+	def setPathInfoConfig(self, path):
+		if "net" in path and "/media/hdd/movie/" not in self.bookmarks.value or "autofs" in path and "/media/hdd/movie/" not in self.bookmarks.value:
+			if len(self.bookmarks.value) >= 1 and config.usage.default_path.value != path:
+				self.session.open(MessageBox, _("Path not yet set: press MENU and choose") + f" {path}", type=MessageBox.TYPE_ERROR, simple=True, default=False, timeout=10)
+				return
+		if "net" in path and "/media/hdd/movie/" in self.bookmarks.value or "autofs" in path and "/media/hdd/movie/" in self.bookmarks.value:
+			if len(self.bookmarks.value) >= 1 and config.usage.default_path.value != path:
+				self.session.open(MessageBox, _("Path not yet set: press MENU and choose") + f" {path}", type=MessageBox.TYPE_ERROR, simple=True, default=False, timeout=10)
+				return
+		if "timeshift" in path:
+			if len(self.bookmarks.value) >= 1 and config.usage.timeshift_path.value != path:
+				self.session.open(MessageBox, _("Path not yet set: press MENU and choose") + f" {path}", type=MessageBox.TYPE_ERROR, simple=True, default=False, timeout=10)
+				return
 
 	def keyNumberGlobal(self, digit):
 		self.timer.stop()

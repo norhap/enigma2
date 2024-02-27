@@ -2583,6 +2583,9 @@ msgstr ""
 msgid "Error executing plugin"
 msgstr "Error ejecutando plugin"
 
+msgid "Error getting link via %s\n%s"
+msgstr "Error al obtener el enlace a través de %s\n%s"
+
 msgid "Server Error: %s %s is included in bouquets.tv and does not exist in channel list"
 msgstr "Error en Servidor: %s el archivo %s está incluido en bouquets.tv y no existe en la lista de canales"
 
@@ -12906,6 +12909,9 @@ msgstr "Anular encontrado con canal alternativo"
 
 msgid "Path debug log"
 msgstr "Ruta de registro de depuración"
+
+msgid "Path not yet set: press MENU and choose"
+msgstr "Ruta aún no establecida: pulse MENU y elige"
 
 msgid "Percentage ratio for duplicates matches"
 msgstr "Porcentaje de duplicados"
