@@ -7,6 +7,7 @@ from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Label import Label
 from Components.Input import Input
 from Tools.BoundFunction import boundFunction
+from Tools.Directories import isPluginInstalled
 from Tools.Notifications import AddPopup
 from time import time
 
@@ -107,7 +108,10 @@ class PinInput(InputBox):
 		}, -1)
 
 		if service and simple:
-			self.skinName = "PinInputPopup"
+			if isPluginInstalled("IPToSAT") and not config.plugins.IPToSAT.enable.value or not isPluginInstalled("IPToSAT"):
+				self.skinName = "PinInputPopup"
+			else:
+				self.skinName = "PinInputPopupIPToSAT"
 
 		if self.getTries() == 0:
 			if (self.triesEntry.time.value + (self.waitTime * 60)) > time():

@@ -5,7 +5,7 @@ from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
 from Tools.BoundFunction import boundFunction
 from ServiceReference import ServiceReference
-from Tools.Directories import resolveFilename, SCOPE_CONFIG
+from Tools.Directories import resolveFilename, SCOPE_CONFIG, isPluginInstalled
 from Tools.Notifications import AddPopup, AddNotificationParentalControl, RemovePopup
 from enigma import eTimer, eServiceCenter, iServiceInformation, eServiceReference, eDVBDB
 import time
@@ -128,6 +128,8 @@ class ParentalControl:
 				self.PinDlg = session.openWithCallback(boundFunction(self.servicePinEntered, ref), PinInput, triesEntry=config.ParentalControl.retries.servicepin, pinList=self.getPinList(), service=ServiceReference(ref).getServiceName(), title=title, windowTitle=_("Parental control"), simple=False, zap=True)
 			else:
 				AddNotificationParentalControl(boundFunction(self.servicePinEntered, ref), PinInput, triesEntry=config.ParentalControl.retries.servicepin, pinList=self.getPinList(), service=ServiceReference(ref).getServiceName(), title=title, windowTitle=_("Parental control"), zap=True)
+				if isPluginInstalled("IPToSAT") and config.plugins.IPToSAT.enable.value:
+					return True
 			return False
 		else:
 			return True
@@ -209,7 +211,8 @@ class ParentalControl:
 			if self.session:
 				self.session.open(MessageBox, messageText, MessageBox.TYPE_INFO, timeout=5)
 			else:
-				AddPopup(messageText, MessageBox.TYPE_ERROR, timeout=5)
+				if isPluginInstalled("IPToSAT") and not config.plugins.IPToSAT.enable.value or not isPluginInstalled("IPToSAT"):
+					AddPopup(messageText, MessageBox.TYPE_ERROR, timeout=5)
 
 	def saveListToFile(self, sWhichList, vList):
 		file = open(resolveFilename(SCOPE_CONFIG, sWhichList), 'w')
