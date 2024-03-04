@@ -82,26 +82,26 @@ class Geolocation:
 			return self.geolocation
 		# internetAccess = checkInternetAccess("ip-api.com", 5)
 		# if internetAccess == 0:  # 0=Site reachable, 1=DNS error, 2=Other network error, 3=No link, 4=No active adapter.
-			try:
-				response = get("http://ip-api.com/json/?fields=%s" % fields, timeout=(3, 2))
-				if response.status_code == 200 and response.content:
-					geolocation = loads(response.content)
-					status = geolocation.get("status", "unknown/undefined")
-					if status and status == "success":
-						print("[Geolocation] Geolocation data retrieved.")
-						for key in geolocation.keys():
-							self.geolocation[key] = geolocation[key]
-						return self.geolocation
-					else:
-						print("[Geolocation] Error: Geolocation lookup returned '%s' status!  Message '%s' returned." % (status, geolocation.get("message", None)))
+		try:
+			response = get("http://ip-api.com/json/?fields=%s" % fields, timeout=(3, 2))
+			if response.status_code == 200 and response.content:
+				geolocation = loads(response.content)
+				status = geolocation.get("status", "unknown/undefined")
+				if status and status == "success":
+					print("[Geolocation] Geolocation data retrieved.")
+					for key in geolocation.keys():
+						self.geolocation[key] = geolocation[key]
+					return self.geolocation
 				else:
-					print("[Geolocation] Error: Geolocation lookup returned a status code of %d!" % response.status_code)
-			except exceptions.RequestException as err:
-				print("[Geolocation] Error: Geolocation server connection failure! (%s)" % str(err))
-			except ValueError:
-				print("[Geolocation] Error: Geolocation data returned can not be processed!")
-			except Exception as err:
-				print("[Geolocation] Error: Unexpected error!  (%s)" % str(err))
+					print("[Geolocation] Error: Geolocation lookup returned '%s' status!  Message '%s' returned." % (status, geolocation.get("message", None)))
+			else:
+				print("[Geolocation] Error: Geolocation lookup returned a status code of %d!" % response.status_code)
+		except exceptions.RequestException as err:
+			print("[Geolocation] Error: Geolocation server connection failure! (%s)" % str(err))
+		except ValueError:
+			print("[Geolocation] Error: Geolocation data returned can not be processed!")
+		except Exception as err:
+			print("[Geolocation] Error: Unexpected error!  (%s)" % str(err))
 		# elif internetAccess == 1:
 		# 	print("[Geolocation] Error: Geolocation server DNS error!")
 		# elif internetAccess == 2:
