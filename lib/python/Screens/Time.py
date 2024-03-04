@@ -1,7 +1,7 @@
 from enigma import eConsoleAppContainer
 from Components.ActionMap import ActionMap, HelpableActionMap
 from os.path import isfile  # islink
-from Components.config import config, getConfigListEntry
+from Components.config import config, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -9,8 +9,9 @@ from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
 from Screens.Screen import Screen
 from Screens.HelpMenu import ShowRemoteControl
-# from Tools.Directories import fileContains
-from Tools.Geolocation import geolocation
+from Tools.Directories import fileContains
+# from Tools.Geolocation import geolocation
+from requests import get
 
 
 class Time(Setup):
@@ -65,35 +66,45 @@ class Time(Setup):
 		Setup.selectionChanged(self)
 
 	def useGeolocation(self):
-		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
-		if geolocationData.get("proxy", True) and hasattr(self, "setFootnote"):
-			self.setFootnote(_("Geolocation is not available."))
+		try:
+			publicip = get("http://api.ipify.org?format=json/", verify=False)
+			timezone = get(f"http://worldtimeapi.org/api/ip:{publicip.content}", verify=False)
+			if timezone.content:
+				with open("/usr/share/zoneinfo/timezone", "wb") as tz:
+					tz.write(timezone.content)
+		except Exception:
+			self.setFootnote(_("Geolocation is not available. There is no Internet.\nPress \"OK\" to continue wizard."))
 			return
-		tz = geolocationData.get("timezone", None)
-		if tz is None and hasattr(self, "setFootnote"):
-			self.setFootnote(_("Geolocation does not contain time zone information."))
-		else:
-			areaItem = None
-			valItem = None
-			for item in self["config"].list:
-				if item[1] is config.timezone.area:
-					areaItem = item
-				if item[1] is config.timezone.val:
-					valItem = item
-			area, zone = tz.split("/", 1)
-			config.timezone.area.value = area
-			if areaItem is not None:
-				areaItem[1].changed()
-			self["config"].invalidate(areaItem)
-			config.timezone.val.value = zone
-			if valItem is not None:
-				valItem[1].changed()
-			self["config"].invalidate(valItem)
-			try:
-				self.setFootnote(_("Geolocation has been used to set the time zone."))
-			except KeyError:
-				pass
-			self.setNTP()
+		areaItem = None
+		valItem = None
+		for item in self["config"].list:
+			if item[1] is config.timezone.area:
+				areaItem = item
+			if item[1] is config.timezone.val:
+				valItem = item
+		with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+			result = tzread.readlines()
+			for tz in result:
+				if "timezone" in tz:
+					config.timezone.area.value = tz.split('"timezone":"')[1].split('/')[0]
+					break
+		if areaItem is not None:
+			areaItem[1].changed()
+		self["config"].invalidate(areaItem)
+		with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+			result = tzread.readlines()
+			for tz in result:
+				if "timezone" in tz:
+					config.timezone.val.value = tz.split('/')[1].split('",')[0]
+					break
+		if valItem is not None:
+			valItem[1].changed()
+		self["config"].invalidate(valItem)
+		try:
+			self.setFootnote(_("Geolocation has been used to set the time zone."))
+		except KeyError:
+			pass
+		self.setNTP()
 
 
 class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
@@ -185,6 +196,11 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self.selectKey("OK")
 
 	def getTimeList(self):
+		config.ntp.timesync = ConfigSelection(default="ntp", choices=[
+			("auto", _("Auto")),
+			("dvb", _("Transponder time")),
+			("ntp", _("Internet time (SNTP)"))
+		])
 		self.list = []
 		self.list.append(getConfigListEntry(_("Time zone area"), config.timezone.area))
 		self.list.append(getConfigListEntry(_("Time zone"), config.timezone.val))
@@ -196,14 +212,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self["config"].setList(self.list)
 
 	def geolocationWizard(self):
-		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
-		if geolocationData.get("proxy", True):
-			self["text"].setText(_("Geolocation is not available. There is no Internet.\nPress \"OK\" to continue wizard."))
-			return
-		tz = geolocationData.get("timezone", None)
-		if not tz:
-			self["text"].setText(_("Geolocation does not contain time zone information."))
-		else:
+		if fileContains("/usr/share/zoneinfo/timezone", "timezone"):
 			areaItem = None
 			valItem = None
 			for item in self["config"].list:
@@ -211,16 +220,26 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 					areaItem = item
 				if item[1] is config.timezone.val:
 					valItem = item
-			area, zone = tz.split("/", 1)
-			config.timezone.area.value = area
-			if areaItem:
+			with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+				result = tzread.readlines()
+				for tz in result:
+					if "timezone" in tz:
+						config.timezone.area.value = tz.split('"timezone":"')[1].split('/')[0]
+						break
+			if areaItem is not None:
 				areaItem[1].changed()
 			self["config"].invalidate(areaItem)
-			config.timezone.val.value = zone
-			if valItem:
+			with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+				result = tzread.readlines()
+				for tz in result:
+					if "timezone" in tz:
+						config.timezone.val.value = tz.split('/')[1].split('",')[0]
+						break
+			if valItem is not None:
 				valItem[1].changed()
 			self["config"].invalidate(valItem)
 			self["text"].setText(_("Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."))
+			Time.setNTP(self)
 
 	def keySave(self):
 		ConfigListScreen.keySave(self)

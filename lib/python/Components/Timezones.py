@@ -2,11 +2,10 @@ from errno import ENOENT
 from os import environ, symlink, unlink, walk
 from os.path import exists, isfile, join, realpath
 from time import gmtime, localtime, strftime, tzset
-
-from Components.config import ConfigSelection, ConfigSubsection, config
-from Tools.Directories import fileReadXML, fileWriteLine
+from urllib.request import urlopen, Request
+from Components.config import ConfigSelection, ConfigSubsection, config, ConfigBoolean, ConfigText
+from Tools.Directories import fileContains, fileReadXML, fileWriteLine
 from Tools.StbHardware import setRTCoffset
-
 MODULE_NAME = __name__.split(".")[-1]
 
 # The DEFAULT_AREA setting is usable by the image maintainers to select the
@@ -86,11 +85,47 @@ def InitTimeZones():
 def localeCode():
 	localecode = "en_US"
 	if TIMEZONE_FILE:
-		with open(TIMEZONE_FILE, "r") as fr:
-			for city in fr.readlines():
-				if config.timezone.val.value in city:
-					localecode = city.split('localeCode="')[1].split('" />')[0]
-					break
+		header = {"User-Agent": "Enigma2 - TimeZone"}
+		responseip = ""
+		responsetz = ""
+		config.misc.firstrun = ConfigBoolean(default=True)
+		if config.misc.firstrun.value:
+			try:
+				publicip = "http://api.ipify.org?format=json/"
+				iprequest = Request(publicip, headers=header)
+				responseip = urlopen(iprequest)
+				publicip = responseip.read()
+				tz = f"http://worldtimeapi.org/api/ip:{publicip}"
+				timezonerequest = Request(tz, headers=header)
+				responsetz = urlopen(timezonerequest)
+				timezone = responsetz.read()
+				with open("/usr/share/zoneinfo/timezone", "wb") as tzwrite:
+					tzwrite.write(timezone)
+			except Exception:
+				pass
+			if not fileContains("/usr/share/zoneinfo/timezone", "timezone"):
+				with open(TIMEZONE_FILE, "r") as fr:
+					for city in fr.readlines():
+						if "Madrid" in city:
+							localecode = city.split('localeCode="')[1].split('" />')[0]
+							config.timezone.val.value = "Madrid"
+							config.osd.language = ConfigText(default=localecode)
+							config.osd.language.save()
+							break
+			else:
+				with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+					result = tzread.readlines()
+					for tz in result:
+						if "timezone" in tz:
+							config.timezone.area.value = tz.split('"timezone":"')[1].split('/')[0]
+							config.timezone.val.value = tz.split('/')[1].split('",')[0]
+						with open(TIMEZONE_FILE, "r") as fr:
+							for city in fr.readlines():
+								if config.timezone.val.value in city:
+									localecode = city.split('localeCode="')[1].split('" />')[0]
+									config.osd.language = ConfigText(default=localecode)
+									config.osd.language.save()
+									break
 	return localecode
 
 

@@ -1,7 +1,8 @@
 from json import loads
 from requests import exceptions, get
-from enigma import checkInternetAccess
+# from enigma import checkInternetAccess
 
+from urllib3 import disable_warnings, exceptions
 # Data available from http://ip-api.com/json/:
 #
 # 	Name		Description				Example			Type
@@ -80,20 +81,26 @@ class Geolocation:
 		if useCache and self.checkGeolocationData(fields):
 			print("[Geolocation] Using cached data.")
 			return self.geolocation
-		internetAccess = checkInternetAccess("ip-api.com", 5)
-		if internetAccess == 0:  # 0=Site reachable, 1=DNS error, 2=Other network error, 3=No link, 4=No active adapter.
+		# internetAccess = checkInternetAccess("ip-api.com", 5)
+		# if internetAccess == 0:  # 0=Site reachable, 1=DNS error, 2=Other network error, 3=No link, 4=No active adapter.
 			try:
-				response = get("http://ip-api.com/json/?fields=%s" % fields, timeout=(3, 2))
-				if response.status_code == 200 and response.content:
+				# response = get("http://ip-api.com/json/?fields=%s" % fields, timeout=(3, 2))
+				# if response.status_code == 200 and response.content:
+				disable_warnings(exceptions.InsecureRequestWarning)
+				response = get("http://ip-api.com/json/", verify=False)
+				if response.content:
 					geolocation = loads(response.content)
-					status = geolocation.get("status", "unknown/undefined")
-					if status and status == "success":
-						print("[Geolocation] Geolocation data retrieved.")
-						for key in geolocation.keys():
-							self.geolocation[key] = geolocation[key]
-						return self.geolocation
-					else:
-						print("[Geolocation] Error: Geolocation lookup returned '%s' status!  Message '%s' returned." % (status, geolocation.get("message", None)))
+					# status = geolocation.get("status", "unknown/undefined")
+					# if status and status == "success":
+					# 	print("[Geolocation] Geolocation data retrieved.")
+					# 	for key in geolocation.keys():
+					# 		self.geolocation[key] = geolocation[key]
+					# 	return self.geolocation
+					# else:
+					# # 	print("[Geolocation] Error: Geolocation lookup returned '%s' status!  Message '%s' returned." % (status, geolocation.get("message", None)))
+					for key in geolocation.keys():
+						self.geolocation[key] = geolocation[key]
+					return self.geolocation
 				else:
 					print("[Geolocation] Error: Geolocation lookup returned a status code of %d!" % response.status_code)
 			except exceptions.RequestException as err:
@@ -102,14 +109,14 @@ class Geolocation:
 				print("[Geolocation] Error: Geolocation data returned can not be processed!")
 			except Exception as err:
 				print("[Geolocation] Error: Unexpected error!  (%s)" % str(err))
-		elif internetAccess == 1:
-			print("[Geolocation] Error: Geolocation server DNS error!")
-		elif internetAccess == 2:
-			print("[Geolocation] Error: Internet access error!")
-		elif internetAccess == 3:
-			print("[Geolocation] Error: Network adapter not connected to a network!")
-		elif internetAccess == 4:
-			print("[Geolocation] Error: No network adapter enabled/available!")
+		# elif internetAccess == 1:
+		# 	print("[Geolocation] Error: Geolocation server DNS error!")
+		# elif internetAccess == 2:
+		# 	print("[Geolocation] Error: Internet access error!")
+		# elif internetAccess == 3:
+		# 	print("[Geolocation] Error: Network adapter not connected to a network!")
+		# elif internetAccess == 4:
+		# 	print("[Geolocation] Error: No network adapter enabled/available!")
 		return {}
 
 	def fieldsToNumber(self, fields):
