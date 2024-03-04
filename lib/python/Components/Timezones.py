@@ -99,9 +99,9 @@ def localeCode():
 				timezonerequest = Request(tz, headers=header)
 				responsetz = urlopen(timezonerequest)
 				timezone = responsetz.read()
-				with open("/usr/share/zoneinfo/timezone", "wb") as tzwrite:
+				with open(TIMEZONE_DATA + "timezone", "wb") as tzwrite:
 					tzwrite.write(timezone)
-				with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+				with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 					result = tzread.readlines()
 					for tz in result:
 						if "timezone" in tz:
@@ -173,7 +173,7 @@ class Timezones:
 					zones = self.timezones[area] + zones
 				self.timezones[area] = self.gmtSort(zones)
 		if len(self.timezones) == 0:
-			print("[Timezones] Warning: No areas or zones found in '%s'!" % TIMEZONE_DATA)
+			print(f"[Timezones] Warning: No areas or zones found in '{TIMEZONE_DATA}'!")
 			self.timezones["Generic"] = [("UTC", "UTC")]
 
 	def gmtSort(self, zones):  # If the Zone starts with "GMT" then those Zones will be sorted in GMT order with GMT-14 first and GMT+12 last.
@@ -203,7 +203,7 @@ class Timezones:
 				if exists(join(TIMEZONE_DATA, zonePath)):
 					zones.append((zonePath, name))
 				else:
-					print("[Timezones] Warning: Classic time zone '%s' (%s) is not available in '%s'!" % (name, zonePath, TIMEZONE_DATA))
+					print(f"[Timezones] Warning: Classic time zone '{name}' {(zonePath)} is not available in '{TIMEZONE_DATA}'!")
 			self.timezones["Classic"] = zones
 		if len(zones) == 0:
 			self.timezones["Classic"] = [("UTC", "UTC")]

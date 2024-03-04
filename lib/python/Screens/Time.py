@@ -5,6 +5,7 @@ from Components.config import config, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from Components.Timezones import TIMEZONE_DATA
 from Components.Sources.StaticText import StaticText
 from Screens.Setup import Setup
 from Screens.Screen import Screen
@@ -70,7 +71,7 @@ class Time(Setup):
 			publicip = get("http://api.ipify.org?format=json/", verify=False)
 			timezone = get(f"http://worldtimeapi.org/api/ip:{publicip.content}", verify=False)
 			if timezone.content:
-				with open("/usr/share/zoneinfo/timezone", "wb") as tz:
+				with open(TIMEZONE_DATA + "timezone", "wb") as tz:
 					tz.write(timezone.content)
 		except Exception:
 			self.setFootnote(_("Geolocation is not available. No Internet."))
@@ -82,7 +83,7 @@ class Time(Setup):
 				areaItem = item
 			if item[1] is config.timezone.val:
 				valItem = item
-		with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+		with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 			result = tzread.readlines()
 			for tz in result:
 				if "timezone" in tz:
@@ -91,7 +92,7 @@ class Time(Setup):
 		if areaItem is not None:
 			areaItem[1].changed()
 		self["config"].invalidate(areaItem)
-		with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+		with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 			result = tzread.readlines()
 			for tz in result:
 				if "timezone" in tz:
@@ -224,7 +225,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 					areaItem = item
 				if item[1] is config.timezone.val:
 					valItem = item
-			with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+			with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 				result = tzread.readlines()
 				for tz in result:
 					if "timezone" in tz:
@@ -233,7 +234,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 			if areaItem is not None:
 				areaItem[1].changed()
 			self["config"].invalidate(areaItem)
-			with open("/usr/share/zoneinfo/timezone", "r") as tzread:
+			with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 				result = tzread.readlines()
 				for tz in result:
 					if "timezone" in tz:
