@@ -903,6 +903,14 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += _("IPv4 public address:") + "\t" + str(publicip) + "\n"
 			except Exception:
 				pass
+			# try:
+			# 	ip = get("https://freeipapi.com/api/json/")  # FREE ALTERNATIVE https://freeipapi.com/api/json/
+			# 	from json import loads
+			# 	dictionary = loads(ip.content)
+			# 	publicip = dictionary.get("ipAddress", "")
+			# 	self.AboutText += _("IPv4 public address:") + "\t" + str(publicip) + "\n"
+			# except Exception:
+			# 	pass
 		ipv6address = result.split('\n')
 		for line in ipv6address:  # get IPv6
 			if "inet6 addr:" in line:

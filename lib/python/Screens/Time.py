@@ -68,6 +68,11 @@ class Time(Setup):
 
 	def useGeolocation(self):
 		try:
+			# ip = get("https://freeipapi.com/api/json/", verify=False)  # FREE ALTERNATIVE https://freeipapi.com/api/json/
+			# from json import loads
+			# dictionary = loads(ip.content)
+			# publicip = dictionary.get("ipAddress", "")
+			# timezone = get(f"http://worldtimeapi.org/api/ip:{publicip}", verify=False)
 			publicip = get("http://api.ipify.org?format=json/", verify=False)  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
 			timezone = get(f"http://worldtimeapi.org/api/ip:{publicip.content}", verify=False)
 			if timezone.content:

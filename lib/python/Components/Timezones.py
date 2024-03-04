@@ -91,6 +91,11 @@ def localeCode():
 		config.misc.firstrun = ConfigBoolean(default=True)
 		if config.misc.firstrun.value:
 			try:
+				# from requests import get
+				# from json import loads
+				# ip = get("https://freeipapi.com/api/json/", verify=False)  # FREE ALTERNATIVE https://freeipapi.com/api/json/
+				# dictionary = loads(ip.content)
+				# publicip = dictionary.get("ipAddress", "")
 				publicip = "http://api.ipify.org?format=json/"  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
 				iprequest = Request(publicip, headers=header)
 				responseip = urlopen(iprequest)
