@@ -10,7 +10,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
 from Components.Language import language  # noqa: F401 possible use line 87
 from Tools.Geolocation import geolocation
-from Components.Timezones import localeCode
+# from Components.Timezones import localeCode
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 

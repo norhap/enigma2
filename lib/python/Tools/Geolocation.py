@@ -2,7 +2,6 @@ from json import loads
 from requests import exceptions, get
 # from enigma import checkInternetAccess
 
-from urllib3 import disable_warnings, exceptions
 # Data available from http://ip-api.com/json/:
 #
 # 	Name		Description				Example			Type
@@ -86,7 +85,6 @@ class Geolocation:
 			try:
 				# response = get("http://ip-api.com/json/?fields=%s" % fields, timeout=(3, 2))
 				# if response.status_code == 200 and response.content:
-				disable_warnings(exceptions.InsecureRequestWarning)
 				response = get("http://ip-api.com/json/", verify=False)
 				if response.content:
 					geolocation = loads(response.content)

@@ -85,9 +85,9 @@ class Language:
 		from Tools import Notifications
 		from Screens.MessageBox import MessageBox
 		if index not in self.lang:
-			print("[Language] Selected language %s is not installed, fallback to en_US!" % index)
-			index = "en_US"
-			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using English", MessageBox.TYPE_INFO, timeout=3)
+			print("[Language] Selected language %s is not installed, fallback to es_ES!" % index)
+			index = "es_ES"
+			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using Spanish", MessageBox.TYPE_INFO, timeout=3)
 		lang = self.lang[index]
 		print("[Language] Activating language " + lang[0])
 		self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index], fallback=True)
@@ -131,9 +131,9 @@ class Language:
 		from Screens.MessageBox import MessageBox
 		from Tools import Notifications
 		if not self.activateLanguage_TRY(index):
-			print("[Language] - retry with ", "en_US")
-			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using English", MessageBox.TYPE_INFO, timeout=3)
-			self.activateLanguage_TRY("en_US")
+			print("[Language] - retry with ", "es_ES")
+			Notifications.AddNotification(MessageBox, _("The selected language is unavailable - using Spanish"), MessageBox.TYPE_INFO, timeout=3)
+			self.activateLanguage_TRY("es_ES")
 
 	def activateLanguageIndex(self, index):
 		if index < len(self.langlist):

@@ -7601,6 +7601,9 @@ msgstr "Los resultados han sido escritos en %s"
 msgid "The saved PIN was cleared."
 msgstr "Se borró el PIN guardado."
 
+msgid "The selected language is unavailable - using Spanish"
+msgstr "El idioma seleccionado no está disponible - usando Español"
+
 msgid "The sleep timer has been activated."
 msgstr "El temporizador de reposo se ha activado."
 
@@ -17168,15 +17171,8 @@ msgstr "Acciones configuración de tiempo"
 msgid "Geolocation does not contain time zone information."
 msgstr "La geolocalización no contiene información sobre la zona horaria."
 
-msgid "Geolocation is not available."
-msgstr "La geolocalización no está disponible."
-
-msgid ""
-"Geolocation is not available. There is no Internet.\n"
-"Press \"OK\" to continue wizard."
-msgstr ""
-"La geolocalización no está disponible. No hay Internet.\n"
-"Pulse \"OK\" para continuar con el asistente."
+msgid "Geolocation is not available. No Internet."
+msgstr "La geolocalización no está disponible. No tiene Internet."
 
 msgid "Geolocation has been used to set the time zone."
 msgstr "Se ha utilizado la geolocalización para establecer la zona horaria."

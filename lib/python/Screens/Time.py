@@ -73,7 +73,7 @@ class Time(Setup):
 				with open("/usr/share/zoneinfo/timezone", "wb") as tz:
 					tz.write(timezone.content)
 		except Exception:
-			self.setFootnote(_("Geolocation is not available. There is no Internet.\nPress \"OK\" to continue wizard."))
+			self.setFootnote(_("Geolocation is not available. No Internet."))
 			return
 		areaItem = None
 		valItem = None
@@ -180,7 +180,11 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 			"yellow": self.keyGeolocation,
 			"ok": self.keySave,
 			"red": self.keySave,
-			"back": self.keySave
+			"back": self.keySave,
+			"left": self.keyLeft,
+			"right": self.keyRight,
+			"up": self.moveUp,
+			"down": self.moveDown
 		}, -2)
 		self.onLayoutFinish.append(self.selectKeys)
 		self.getTimeList()
@@ -248,3 +252,15 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 
 	def keyGeolocation(self):
 		self.geolocationWizard()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+
+	def moveUp(self):
+		self["config"].moveUp()
+
+	def moveDown(self):
+		self["config"].moveDown()

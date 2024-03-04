@@ -116,8 +116,8 @@ class UpdatePlugin(Screen, ProtectedScreen):
 					lang = language.getLanguage()
 					if lang in message:
 						message = message[lang]
-					if 'en_US' in message:
-						message = message['en_US']
+					if 'es_ES' in message:
+						message = message['es_ES']
 
 			except Exception as e:
 				print("[SoftwareUpdate] status error: ", str(e))

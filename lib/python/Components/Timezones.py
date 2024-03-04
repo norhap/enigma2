@@ -83,7 +83,7 @@ def InitTimeZones():
 
 
 def localeCode():
-	localecode = "en_US"
+	localecode = "es_ES"
 	if TIMEZONE_FILE:
 		header = {"User-Agent": "Enigma2 - TimeZone"}
 		responseip = ""
@@ -101,18 +101,6 @@ def localeCode():
 				timezone = responsetz.read()
 				with open("/usr/share/zoneinfo/timezone", "wb") as tzwrite:
 					tzwrite.write(timezone)
-			except Exception:
-				pass
-			if not fileContains("/usr/share/zoneinfo/timezone", "timezone"):
-				with open(TIMEZONE_FILE, "r") as fr:
-					for city in fr.readlines():
-						if "Madrid" in city:
-							localecode = city.split('localeCode="')[1].split('" />')[0]
-							config.timezone.val.value = "Madrid"
-							config.osd.language = ConfigText(default=localecode)
-							config.osd.language.save()
-							break
-			else:
 				with open("/usr/share/zoneinfo/timezone", "r") as tzread:
 					result = tzread.readlines()
 					for tz in result:
@@ -126,6 +114,8 @@ def localeCode():
 									config.osd.language = ConfigText(default=localecode)
 									config.osd.language.save()
 									break
+			except Exception:
+				pass
 	return localecode
 
 

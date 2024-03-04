@@ -185,7 +185,7 @@ class Keyboard:
 
 	def getDefaultKeyboardMap(self):
 		# locale = international.getLocale()
-		locale = "en_US"  # language.getLanguage()
+		locale = "es_ES"  # language.getLanguage()
 		if locale:
 			for keyboardMap in self.keyboardMaps:  # See if there is a keyboard keymap specific to the current locale.
 				if keyboardMap[0].startswith(locale):
