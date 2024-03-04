@@ -14,6 +14,7 @@ from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.SystemInfo import SystemInfo
+from Components.Timezones import TIMEZONE_DATA
 from Components.config import config, ConfigBoolean, configfile
 # from Tools.Geolocation import geolocation
 from Tools.Directories import fileContains
@@ -184,7 +185,7 @@ if not os.path.isfile("/etc/installed"):
 # geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
-if not fileContains("/usr/share/zoneinfo/timezone", "timezone"):
+if not fileContains(TIMEZONE_DATA + "timezone", "timezone"):
 	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value and config.misc.firstrun.value, priority=10)
 if SystemInfo["canKexec"]:
 	from Screens.VuplusKexec import VuWizard

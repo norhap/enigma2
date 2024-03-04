@@ -6,6 +6,7 @@ from urllib.request import urlopen, Request
 from Components.config import ConfigSelection, ConfigSubsection, config, ConfigBoolean, ConfigText
 from Tools.Directories import fileReadXML, fileWriteLine
 from Tools.StbHardware import setRTCoffset
+
 MODULE_NAME = __name__.split(".")[-1]
 
 # The DEFAULT_AREA setting is usable by the image maintainers to select the
