@@ -898,7 +898,7 @@ class SystemNetworkInfo(Screen):
 		else:
 			publicip = ""
 			try:
-				ip = get("http://api.ipify.org?format=json/")
+				ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
 				publicip = ip.content.decode()  # get IPv4
 				self.AboutText += _("IPv4 public address:") + "\t" + str(publicip) + "\n"
 			except Exception:

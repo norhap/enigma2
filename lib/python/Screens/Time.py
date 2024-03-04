@@ -68,7 +68,7 @@ class Time(Setup):
 
 	def useGeolocation(self):
 		try:
-			publicip = get("http://api.ipify.org?format=json/", verify=False)
+			publicip = get("http://api.ipify.org?format=json/", verify=False)  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
 			timezone = get(f"http://worldtimeapi.org/api/ip:{publicip.content}", verify=False)
 			if timezone.content:
 				with open(TIMEZONE_DATA + "timezone", "wb") as tz:
@@ -217,7 +217,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self["config"].setList(self.list)
 
 	def geolocationWizard(self):
-		if fileContains("/usr/share/zoneinfo/timezone", "timezone"):
+		if fileContains(TIMEZONE_DATA + "timezone", "timezone"):
 			areaItem = None
 			valItem = None
 			for item in self["config"].list:
