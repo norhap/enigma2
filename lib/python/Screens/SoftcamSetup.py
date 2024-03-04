@@ -1,5 +1,5 @@
 from enigma import eTimer
-from os.path import isfile, exists
+from os.path import isfile
 from ServiceReference import ServiceReference
 from Screens.MessageBox import MessageBox
 from Components.ActionMap import HelpableActionMap

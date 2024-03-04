@@ -4,7 +4,7 @@ from os.path import exists, isfile, join, realpath
 from time import gmtime, localtime, strftime, tzset
 from urllib.request import urlopen, Request
 from Components.config import ConfigSelection, ConfigSubsection, config, ConfigBoolean, ConfigText
-from Tools.Directories import fileContains, fileReadXML, fileWriteLine
+from Tools.Directories import fileReadXML, fileWriteLine
 from Tools.StbHardware import setRTCoffset
 MODULE_NAME = __name__.split(".")[-1]
 

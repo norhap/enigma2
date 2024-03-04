@@ -3,7 +3,7 @@ from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
 from Screens.Time import Time
-from Components.config import config
+# from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
