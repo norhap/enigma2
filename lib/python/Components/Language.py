@@ -87,7 +87,7 @@ class Language:
 		if index not in self.lang:
 			print("[Language] Selected language %s is not installed, fallback to es_ES!" % index)
 			index = "es_ES"
-			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using Spanish", MessageBox.TYPE_INFO, timeout=3)
+			Notifications.AddNotification(MessageBox, _("The selected language is unavailable - using Spanish"), MessageBox.TYPE_INFO, timeout=3)
 		lang = self.lang[index]
 		print("[Language] Activating language " + lang[0])
 		self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index], fallback=True)

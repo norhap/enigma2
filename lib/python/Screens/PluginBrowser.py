@@ -1,8 +1,9 @@
 from os import unlink
 from os.path import isfile, normpath
-from enigma import checkInternetAccess, eConsoleAppContainer, eDVBDB, eTimer, gRGB
+from enigma import eConsoleAppContainer, eDVBDB, eTimer, gRGB
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Screens.HelpMenu import HelpableScreen
+from Components.About import getIfConfig
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
 from Components.GUIComponent import GUIComponent
 from Components.Sources.List import List
@@ -39,8 +40,6 @@ config.misc.pluginbrowser.softcams = ConfigYesNo(default=True)
 config.misc.pluginbrowser.systemplugins = ConfigYesNo(default=True)
 config.misc.pluginbrowser.weblinks = ConfigYesNo(default=True)
 config.misc.pluginbrowser.plugin_order = ConfigText(default="")
-
-INTERNET_TIMEOUT = 2
 
 
 def languageChanged():
@@ -227,8 +226,9 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 			self["key_red"].setText(_("Remove plugins"))
 			self["key_blue"].setText(_("Edit Mode On"))
 			self["pluginRemoveActions"].setEnabled(True)
-			internetAccess = checkInternetAccess("ip-api.com", INTERNET_TIMEOUT)
-			if internetAccess == 0:  # 0=Site reachable, 1=DNS error, 2=Other network error, 3=No link, 4=No active adapter.
+			eth0 = getIfConfig("eth0")
+			wlan0 = getIfConfig("wlan0")
+			if "addr" in eth0 or "addr" in wlan0:
 				self["key_green"].setText(_("Download plugins"))
 				self["pluginDownloadActions"].setEnabled(True)
 			else:
