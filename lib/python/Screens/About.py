@@ -1,6 +1,7 @@
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
 from os import listdir, remove
 from os.path import getmtime, isfile, join
+from requests import get
 from PIL import Image
 import skin
 from skin import parameters
@@ -894,6 +895,14 @@ class SystemNetworkInfo(Screen):
 		ipv4address = geolocationData.get("query", None)
 		if ipv4address:  # get IPv4
 			self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
+		else:
+			publicip = ""
+			try:
+				ip = get("http://api.ipify.org?format=json/")
+				publicip = ip.content.decode()  # get IPv4
+				self.AboutText += _("IPv4 public address:") + "\t" + str(publicip) + "\n"
+			except Exception:
+				pass
 		ipv6address = result.split('\n')
 		for line in ipv6address:  # get IPv6
 			if "inet6 addr:" in line:
