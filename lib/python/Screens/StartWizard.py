@@ -16,12 +16,14 @@ from Components.ScrollLabel import ScrollLabel
 from Components.SystemInfo import SystemInfo
 from Components.Timezones import TIMEZONE_DATA
 from Components.config import config, ConfigBoolean, configfile
-# from Tools.Geolocation import geolocation
-from Tools.Directories import fileContains
+from Components.About import getIfConfig
 from Screens.LanguageSelection import LanguageWizard
 from Screens.Time import TimeWizard
 from enigma import eConsoleAppContainer, eTimer, eActionMap
 import os
+
+eth0 = getIfConfig("eth0")
+wlan0 = getIfConfig("wlan0")
 
 config.misc.firstrun = ConfigBoolean(default=True)
 config.misc.languageselected = ConfigBoolean(default=True)
@@ -182,10 +184,9 @@ class AutoInstallWizard(Screen):
 
 if not os.path.isfile("/etc/installed"):
 	eConsoleAppContainer().execute("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
-# geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
-if not fileContains(TIMEZONE_DATA + "timezone", "timezone"):
+if "addr" not in eth0 or "addr" not in wlan0:
 	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value and config.misc.firstrun.value, priority=10)
 if SystemInfo["canKexec"]:
 	from Screens.VuplusKexec import VuWizard

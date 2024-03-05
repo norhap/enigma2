@@ -896,19 +896,19 @@ class SystemNetworkInfo(Screen):
 		if ipv4address:  # get IPv4
 			self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
 		else:
-			publicip = ""
+			ipv4address = ""
 			try:
 				ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
-				publicip = ip.content.decode()  # get IPv4
-				self.AboutText += _("IPv4 public address:") + "\t" + str(publicip) + "\n"
+				ipv4address = ip.content.decode()  # get IPv4
+				self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
 			except Exception:
 				pass
 			# try:
 			# 	ip = get("https://freeipapi.com/api/json/")  # FREE ALTERNATIVE https://freeipapi.com/api/json/
 			# 	from json import loads
 			# 	dictionary = loads(ip.content)
-			# 	publicip = dictionary.get("ipAddress", "")
-			# 	self.AboutText += _("IPv4 public address:") + "\t" + str(publicip) + "\n"
+			# 	ipv4address = dictionary.get("ipAddress", "")  # get IPv4
+			# 	self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
 			# except Exception:
 			# 	pass
 		ipv6address = result.split('\n')

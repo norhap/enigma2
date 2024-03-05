@@ -11,7 +11,7 @@ from Screens.Setup import Setup
 from Screens.Screen import Screen
 from Screens.HelpMenu import ShowRemoteControl
 from Tools.Directories import fileContains
-# from Tools.Geolocation import geolocation
+from Tools.Geolocation import geolocation
 from requests import get
 
 
@@ -67,20 +67,8 @@ class Time(Setup):
 		Setup.selectionChanged(self)
 
 	def useGeolocation(self):
-		try:
-			# ip = get("https://freeipapi.com/api/json/", verify=False)  # FREE ALTERNATIVE https://freeipapi.com/api/json/
-			# from json import loads
-			# dictionary = loads(ip.content)
-			# publicip = dictionary.get("ipAddress", "")
-			# timezone = get(f"http://worldtimeapi.org/api/ip:{publicip}", verify=False)
-			publicip = get("http://api.ipify.org?format=json/", verify=False)  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
-			timezone = get(f"http://worldtimeapi.org/api/ip:{publicip.content}", verify=False)
-			if timezone.content:
-				with open(TIMEZONE_DATA + "timezone", "wb") as tz:
-					tz.write(timezone.content)
-		except Exception:
-			self.setFootnote(_("Geolocation is not available. No Internet."))
-			return
+		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
+		tz = geolocationData.get("timezone", None)
 		areaItem = None
 		valItem = None
 		for item in self["config"].list:
@@ -88,21 +76,43 @@ class Time(Setup):
 				areaItem = item
 			if item[1] is config.timezone.val:
 				valItem = item
-		with open(TIMEZONE_DATA + "timezone", "r") as tzread:
-			result = tzread.readlines()
-			for tz in result:
-				if "timezone" in tz:
-					config.timezone.area.value = tz.split('"timezone":"')[1].split('/')[0]
-					break
-		if areaItem is not None:
-			areaItem[1].changed()
-		self["config"].invalidate(areaItem)
-		with open(TIMEZONE_DATA + "timezone", "r") as tzread:
-			result = tzread.readlines()
-			for tz in result:
-				if "timezone" in tz:
-					config.timezone.val.value = tz.split('/')[1].split('",')[0]
-					break
+		if tz:
+			area, zone = tz.split("/", 1)
+			config.timezone.area.value = area
+			if areaItem is not None:
+				areaItem[1].changed()
+			self["config"].invalidate(areaItem)
+			config.timezone.val.value = zone
+		else:
+			try:
+				# ip = get("https://freeipapi.com/api/json/", verify=False)  # FREE ALTERNATIVE https://freeipapi.com/api/json/
+				# from json import loads
+				# dictionary = loads(ip.content)
+				# publicip = dictionary.get("ipAddress", "")
+				# timezone = get(f"http://worldtimeapi.org/api/ip:{publicip}", verify=False)
+				publicip = get("http://api.ipify.org?format=json/", verify=False)  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
+				timezone = get(f"http://worldtimeapi.org/api/ip:{publicip.content}", verify=False)
+				if timezone.content:
+					with open(TIMEZONE_DATA + "timezone", "wb") as tz:
+						tz.write(timezone.content)
+					with open(TIMEZONE_DATA + "timezone", "r") as tzread:
+						result = tzread.readlines()
+						for timezone in result:
+							if "timezone" in timezone:
+								config.timezone.area.value = timezone.split('"timezone":"')[1].split('/')[0]
+								break
+					if areaItem is not None:
+						areaItem[1].changed()
+					self["config"].invalidate(areaItem)
+					with open(TIMEZONE_DATA + "timezone", "r") as tzread:
+						result = tzread.readlines()
+						for timezone in result:
+							if "timezone" in timezone:
+								config.timezone.val.value = timezone.split('/')[1].split('",')[0]
+								break
+			except Exception:
+				self.setFootnote(_("Geolocation is not available. No Internet."))
+				return
 		if valItem is not None:
 			valItem[1].changed()
 		self["config"].invalidate(valItem)
@@ -222,34 +232,47 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self["config"].setList(self.list)
 
 	def geolocationWizard(self):
-		if fileContains(TIMEZONE_DATA + "timezone", "timezone"):
-			areaItem = None
-			valItem = None
-			for item in self["config"].list:
-				if item[1] is config.timezone.area:
-					areaItem = item
-				if item[1] is config.timezone.val:
-					valItem = item
+		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
+		tz = geolocationData.get("timezone", None)
+		areaItem = None
+		valItem = None
+		for item in self["config"].list:
+			if item[1] is config.timezone.area:
+				areaItem = item
+			if item[1] is config.timezone.val:
+				valItem = item
+		if not fileContains(TIMEZONE_DATA + "timezone", "timezone"):
+			if tz:
+				area, zone = tz.split("/", 1)
+				config.timezone.area.value = area
+				if areaItem is not None:
+					areaItem[1].changed()
+				self["config"].invalidate(areaItem)
+				config.timezone.val.value = zone
+			else:
+				self["text"].setText(_("Geolocation is not available. No Internet."))
+				return
+		else:
 			with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 				result = tzread.readlines()
-				for tz in result:
-					if "timezone" in tz:
-						config.timezone.area.value = tz.split('"timezone":"')[1].split('/')[0]
+				for timezone in result:
+					if "timezone" in timezone:
+						config.timezone.area.value = timezone.split('"timezone":"')[1].split('/')[0]
 						break
 			if areaItem is not None:
 				areaItem[1].changed()
 			self["config"].invalidate(areaItem)
 			with open(TIMEZONE_DATA + "timezone", "r") as tzread:
 				result = tzread.readlines()
-				for tz in result:
-					if "timezone" in tz:
-						config.timezone.val.value = tz.split('/')[1].split('",')[0]
+				for timezone in result:
+					if "timezone" in timezone:
+						config.timezone.val.value = timezone.split('/')[1].split('",')[0]
 						break
-			if valItem is not None:
-				valItem[1].changed()
-			self["config"].invalidate(valItem)
-			self["text"].setText(_("Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."))
-			Time.setNTP(self)
+		if valItem is not None:
+			valItem[1].changed()
+		self["config"].invalidate(valItem)
+		self["text"].setText(_("Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."))
+		Time.setNTP(self)
 
 	def keySave(self):
 		ConfigListScreen.keySave(self)

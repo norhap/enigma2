@@ -4,6 +4,7 @@ from os.path import exists, isfile, join, realpath
 from time import gmtime, localtime, strftime, tzset
 from urllib.request import urlopen, Request
 from Components.config import ConfigSelection, ConfigSubsection, config, ConfigBoolean, ConfigText
+from Tools.Geolocation import geolocation
 from Tools.Directories import fileReadXML, fileWriteLine
 from Tools.StbHardware import setRTCoffset
 
@@ -84,14 +85,27 @@ def InitTimeZones():
 
 
 def localeCode():
-	localecode = "es_ES"
-	if TIMEZONE_FILE:
-		header = {"User-Agent": "Enigma2 - TimeZone"}
-		responseip = ""
-		responsetz = ""
-		config.misc.firstrun = ConfigBoolean(default=True)
-		if config.misc.firstrun.value:
+	localecode = ""
+	config.misc.firstrun = ConfigBoolean(default=True)
+	if TIMEZONE_FILE and config.misc.firstrun.value:
+		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
+		tz = geolocationData.get("timezone", None)
+		if tz:
+			area, zone = tz.split("/", 1)
+			config.timezone.area.value = area
+			config.timezone.val.value = zone
+			with open(TIMEZONE_FILE, "r") as fr:
+				for city in fr.readlines():
+					if config.timezone.val.value in city:
+						localecode = city.split('localeCode="')[1].split('" />')[0]
+						config.osd.language = ConfigText(default=localecode)
+						config.osd.language.save()
+						break
+		else:
 			try:
+				header = {"User-Agent": "Enigma2 - TimeZone"}
+				responseip = ""
+				responsetz = ""
 				# from requests import get
 				# from json import loads
 				# ip = get("https://freeipapi.com/api/json/", verify=False)  # FREE ALTERNATIVE https://freeipapi.com/api/json/
@@ -122,6 +136,15 @@ def localeCode():
 									break
 			except Exception:
 				pass
+	else:
+		if TIMEZONE_FILE:
+			with open(TIMEZONE_FILE, "r") as fr:
+				for city in fr.readlines():
+					if config.timezone.val.value in city:
+						localecode = city.split('localeCode="')[1].split('" />')[0]
+						break
+					else:
+						localecode = "es_ES"
 	return localecode
 
 

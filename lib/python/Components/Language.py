@@ -82,12 +82,9 @@ class Language:
 		self.langlistselection.append((str(lang + "_" + country), name))
 
 	def activateLanguage_TRY(self, index):
-		from Tools import Notifications
-		from Screens.MessageBox import MessageBox
 		if index not in self.lang:
 			print("[Language] Selected language %s is not installed, fallback to es_ES!" % index)
 			index = "es_ES"
-			Notifications.AddNotification(MessageBox, _("The selected language is unavailable - using Spanish"), MessageBox.TYPE_INFO, timeout=3)
 		lang = self.lang[index]
 		print("[Language] Activating language " + lang[0])
 		self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index], fallback=True)
@@ -132,7 +129,7 @@ class Language:
 		from Tools import Notifications
 		if not self.activateLanguage_TRY(index):
 			print("[Language] - retry with ", "es_ES")
-			Notifications.AddNotification(MessageBox, _("The selected language is unavailable - using Spanish"), MessageBox.TYPE_INFO, timeout=3)
+			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using Spanish", MessageBox.TYPE_INFO, timeout=3)
 			self.activateLanguage_TRY("es_ES")
 
 	def activateLanguageIndex(self, index):
@@ -174,7 +171,7 @@ class Language:
 		if delLang:
 			lang = config.osd.language.value
 			print("[Language] DELETE LANG", delLang)
-			if delLang[:2] == "en":
+			if delLang[:2] == "es":
 				print("[Language] Default Language can not be deleted !!")
 				return
 			elif delLang == "pt_BR":
@@ -189,12 +186,12 @@ class Language:
 			ll = listdir(LPATH)
 			for x in ll:
 				if len(x) > 2:
-					if x != lang and x[:2] != "en":
+					if x != lang and x[:2] != "es":
 						x = x.lower()
 						x = x.replace('_', '-')
 						system("opkg remove --autoremove --force-depends " + Lpackagename + x)
 				else:
-					if x != lang[:2] and x != "en":
+					if x != lang[:2] and x != "es":
 						system("opkg remove --autoremove --force-depends " + Lpackagename + x)
 					elif x == "pt":
 						if x != lang:

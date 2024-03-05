@@ -7601,9 +7601,6 @@ msgstr "Los resultados han sido escritos en %s"
 msgid "The saved PIN was cleared."
 msgstr "Se borró el PIN guardado."
 
-msgid "The selected language is unavailable - using Spanish"
-msgstr "El idioma seleccionado no está disponible - usando Español"
-
 msgid "The sleep timer has been activated."
 msgstr "El temporizador de reposo se ha activado."
 
@@ -8951,6 +8948,9 @@ msgstr "Su %s %s se está apagando"
 
 msgid "Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your %s %s."
 msgstr "Su receptor podría estar inutilizable ahora. Consulte el manual para obtener más ayuda antes de reiniciar su %s %s."
+
+msgid "Your receiver does not have an internet connection"
+msgstr "Su receptor no tiene conexión a Internet"
 
 msgid "Your receiver will got to stand by due to the sleeptimer."
 msgstr "Su receptor se pondrá en reposo debido al temporizador de apagado automático."
