@@ -8,8 +8,9 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
-from Components.Language import language  # noqa: F401 possible use line 87
-from Tools.Geolocation import geolocation
+# from Components.Language import language
+# from Tools.Geolocation import geolocation
+from Components.About import getIfConfig
 # from Components.Timezones import localeCode
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
@@ -76,12 +77,11 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		self.rescanTimer.callback.append(self.rescanTimerFired)
 		self.getInstalledInterfaceCount()
 		self.isWlanPluginInstalled()
-		# from Components.About import getIfConfig (These commented lines also work).
-		# eth0 = getIfConfig("eth0")
-		# wlan0 = getIfConfig("wlan0")
-		# if "addr" in eth0 or "addr" in wlan0:
-		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
-		if geolocationData.get("status", None) == "success":
+		# geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
+		# if geolocationData.get("status", None) == "success":
+		eth0 = getIfConfig("eth0")
+		wlan0 = getIfConfig("wlan0")
+		if "addr" in eth0 or "addr" in wlan0:
 			Time.useGeolocation(self)  # set time zone auto.
 			Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
