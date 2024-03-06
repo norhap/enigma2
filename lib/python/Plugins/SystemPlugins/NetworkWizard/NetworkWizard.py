@@ -11,7 +11,7 @@ from Components.Network import iNetwork
 # from Components.Language import language
 # from Tools.Geolocation import geolocation
 from Components.About import getIfConfig
-# from Components.Timezones import localeCode
+# from Components.Timezones import languageCode
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
@@ -85,9 +85,9 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 			Time.useGeolocation(self)  # set time zone auto.
 			Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
-			# if config.misc.firstrun.value and config.osd.language.value != localeCode():
+			# if config.misc.firstrun.value and config.osd.language.value != languageCode():
 			# 	from Screens.Standby import TryQuitMainloop  # noqa: E402
-			# 	config.osd.language.value = localeCode()
+			# 	config.osd.language.value = languageCode()
 			# 	config.osd.language.save()
 			# 	self.session.open(TryQuitMainloop, 3)
 

@@ -186,7 +186,7 @@ if not os.path.isfile("/etc/installed"):
 	eConsoleAppContainer().execute("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
-if "addr" not in eth0 or "addr" not in wlan0:
+if "addr" not in eth0 and "addr" not in wlan0:
 	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value and config.misc.firstrun.value, priority=10)
 if SystemInfo["canKexec"]:
 	from Screens.VuplusKexec import VuWizard

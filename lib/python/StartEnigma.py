@@ -8,7 +8,7 @@ enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN  # noqa: E402
 from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile  # noqa: E402
 from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL  # noqa: E402
-from Components.Timezones import InitTimeZones, localeCode  # noqa: E402
+from Components.Timezones import InitTimeZones, languageCode  # noqa: E402
 from os.path import isdir, islink, join  # noqa: E402
 from traceback import print_exc  # noqa: E402
 from time import time  # noqa: E402
@@ -31,7 +31,7 @@ def languageNotifier(configElement):
 
 
 config.osd = ConfigSubsection()
-config.osd.language = ConfigText(default=localeCode())
+config.osd.language = ConfigText(default=languageCode())
 config.osd.language.addNotifier(languageNotifier)
 
 
