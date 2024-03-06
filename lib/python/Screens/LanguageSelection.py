@@ -82,12 +82,18 @@ class LanguageSelection(Screen):
 		self.selectActiveLanguage()
 
 	def selectActiveLanguage(self):
-		activeLanguage = language.getActiveLanguage()
-		pos = 0
-		for pos, x in enumerate(self.list):
-			if x[0] == activeLanguage:
-				self["languages"].index = pos
-				break
+		try:
+			if len(language.getLanguageList()) < 2:
+				self.oldActiveLanguage = language.getActiveLanguage()
+			else:
+				activeLanguage = language.getActiveLanguage()
+			pos = 0
+			for pos, x in enumerate(self.list):
+				if x[0] == self.oldActiveLanguage or x[0] == activeLanguage:
+					self["languages"].index = pos
+					break
+		except Exception:
+			self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 
 	def save(self):
 		self.run()
