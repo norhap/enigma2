@@ -152,7 +152,7 @@ def languageCode():
 						languagecode = city.split('localeCode="')[1].split('" />')[0]
 						with open(LANGUAGE_CODE, "w") as fw:
 							fw.write(languagecode)
-							break
+						break
 		else:
 			languagecode = "es_ES"
 	return languagecode
