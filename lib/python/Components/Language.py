@@ -193,12 +193,7 @@ class Language:
 				else:
 					if x != lang[:2] and x != "es":
 						system("opkg remove --autoremove --force-depends " + Lpackagename + x)
-					elif x == "pt":
-						if x != lang:
-							system("opkg remove --autoremove --force-depends " + Lpackagename + x)
-
 		system("touch /etc/enigma2/.removelang")
-
 		self.InitLang()
 
 	def updateLanguageCache(self):

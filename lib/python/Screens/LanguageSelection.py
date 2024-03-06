@@ -53,7 +53,7 @@ class LanguageSelection(Screen):
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = Label(_("Add Language"))
 		self["key_blue"] = Label(_("Delete Language(s)"))
-		self["description"] = Label(_("'Save' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but English and selected language, You also have the option to remove the selected language."))
+		self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but Spanish and selected language.\nYou also have the option to remove only the selected language."))
 
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -109,7 +109,7 @@ class LanguageSelection(Screen):
 		if answer is True:
 			self.session.open(TryQuitMainloop, 3)
 		else:
-			self.close()
+			self.run()
 
 	def cancel(self):
 		language.activateLanguage(self.oldActiveLanguage)
@@ -127,7 +127,10 @@ class LanguageSelection(Screen):
 			if curlang == t[0]:
 				lang = t[1]
 				break
-		self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except English and the selected language.\n\nSelect 'No' to delete only the chosen language:\n\n") + _("%s") % (lang), default=config.osd.language.value)
+		if config.osd.language.value not in ("es_ES"):
+			self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except Spanish and the selected language.\n\nSelect 'No' to delete only the chosen language:\n\n") + _("%s") % (lang), default=config.osd.language.value)
+		else:
+			self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except Spanish."))
 
 	def delLangCB(self, answer):
 		if answer:
@@ -137,15 +140,18 @@ class LanguageSelection(Screen):
 			self.selectActiveLanguage()
 			config.pluginbrowser.languages_po.save()
 		else:
-			curlang = config.osd.language.value
-			lang = curlang
-			languageList = language.getLanguageListSelection()
-			# print("[LanguageSelection] deleting language  lang = %s, languagelist = %s", %(lang, languageList))
-			for t in languageList:
-				if curlang == t[0]:
-					lang = t[1]
-					break
-			self.session.openWithCallback(self.deletelanguagesCB, MessageBox, _("Do you really want to delete selected language?\n\n") + _("%s") % (lang), default=False)
+			if config.osd.language.value != "es_ES":
+				curlang = config.osd.language.value
+				lang = curlang
+				languageList = language.getLanguageListSelection()
+				# print("[LanguageSelection] deleting language  lang = %s, languagelist = %s", %(lang, languageList))
+				for t in languageList:
+					if curlang == t[0]:
+						lang = t[1]
+						break
+				self.session.openWithCallback(self.deletelanguagesCB, MessageBox, _("Do you really want to delete selected language?\n\n") + _("%s") % (lang), default=False)
+			else:
+				self.close()
 
 	def deletelanguagesCB(self, answer):
 		if answer:
@@ -155,7 +161,6 @@ class LanguageSelection(Screen):
 			language.activateLanguage(self.oldActiveLanguage)
 			self.updateList()
 			self.selectActiveLanguage()
-		# self.close()
 
 	def run(self, justlocal=False):
 		# print("[LanguageSelection] updating language...")
@@ -201,7 +206,7 @@ class LanguageSelection(Screen):
 	def updateList(self):
 		languageList = language.getLanguageList()
 		if not languageList:  # no language available => display only english
-			list = [LanguageEntryComponent("en", "English (UK)", "en_GB")]
+			list = [LanguageEntryComponent("es", "Español", "es_ES")]
 		else:
 			list = [LanguageEntryComponent(file=x[1][2].lower(), name=x[1][0], index=x[0]) for x in languageList]
 		self.list = list
