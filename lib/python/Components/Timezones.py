@@ -146,15 +146,17 @@ def languageCode():
 			with open(LANGUAGE_CODE, "r") as fr:
 				languagecode = fr.read().split('\n', 1)[0]
 		elif exists(TIMEZONE_FILE):
-			with open(TIMEZONE_FILE, "r") as fr:
-				for city in fr.readlines():
-					if config.timezone.val.value in city:
-						languagecode = city.split('localeCode="')[1].split('" />')[0]
-						with open(LANGUAGE_CODE, "w") as fw:
-							fw.write(languagecode)
-						break
-		else:
-			languagecode = "es_ES"
+			from enigma import checkInternetAccess
+			if checkInternetAccess("google.com") == 0:  # noqa: E402
+				with open(TIMEZONE_FILE, "r") as fr:
+					for city in fr.readlines():
+						if config.timezone.val.value in city:
+							languagecode = city.split('localeCode="')[1].split('" />')[0]
+							with open(LANGUAGE_CODE, "w") as fw:
+								fw.write(languagecode)
+							break
+			else:
+				languagecode = "es_ES"
 	return languagecode
 
 

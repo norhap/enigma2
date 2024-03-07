@@ -1,3 +1,4 @@
+from enigma import checkInternetAccess, eConsoleAppContainer, eTimer, eActionMap
 from Screens.Wizard import wizardManager
 from Screens.Screen import Screen
 from Screens.Time import Time
@@ -16,14 +17,9 @@ from Components.ScrollLabel import ScrollLabel
 from Components.SystemInfo import SystemInfo
 from Components.Timezones import TIMEZONE_DATA
 from Components.config import config, ConfigBoolean, configfile
-from Components.About import getIfConfig
 from Screens.LanguageSelection import LanguageWizard
 from Screens.Time import TimeWizard
-from enigma import eConsoleAppContainer, eTimer, eActionMap
 import os
-
-eth0 = getIfConfig("eth0")
-wlan0 = getIfConfig("wlan0")
 
 config.misc.firstrun = ConfigBoolean(default=True)
 config.misc.languageselected = ConfigBoolean(default=True)
@@ -186,7 +182,7 @@ if not os.path.isfile("/etc/installed"):
 	eConsoleAppContainer().execute("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
 wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
-if "addr" not in eth0 and "addr" not in wlan0:
+if checkInternetAccess("google.com") != 0:
 	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value and config.misc.firstrun.value, priority=10)
 if SystemInfo["canKexec"]:
 	from Screens.VuplusKexec import VuWizard
