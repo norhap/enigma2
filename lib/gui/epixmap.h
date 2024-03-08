@@ -17,8 +17,6 @@ public:
 	void setAlphatest(int alphatest); /* 1 for alphatest, 2 for alphablend */
 	void setScale(int scale);		  // DEPRECATED
 	void setPixmapScale(int flags);
-	void setBorderWidth(int pixel) override;
-	void setBorderColor(const gRGB &color) override;
 
 protected:
 	ePtr<gPixmap> m_pixmap;
@@ -30,9 +28,6 @@ private:
 	{
 		evtChangedPixmap = evtUserWidget,
 	};
-	bool m_have_border_color;
-	int m_border_width;
-	gRGB m_border_color;
 };
 
 #endif
