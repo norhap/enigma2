@@ -146,8 +146,8 @@ def languageCode():
 			with open(LANGUAGE_CODE, "r") as fr:
 				languagecode = fr.read().split('\n', 1)[0]
 		elif exists(TIMEZONE_FILE):
-			from enigma import checkInternetAccess
-			if checkInternetAccess("google.com") == 0:  # noqa: E402
+			from enigma import checkInternetAccess  # noqa: E402
+			if checkInternetAccess("google.com") == 0:
 				with open(TIMEZONE_FILE, "r") as fr:
 					for city in fr.readlines():
 						if config.timezone.val.value in city:

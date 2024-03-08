@@ -15,7 +15,6 @@ from Components.Sources.StaticText import StaticText
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.SystemInfo import SystemInfo
-from Components.Timezones import TIMEZONE_DATA
 from Components.config import config, ConfigBoolean, configfile
 from Screens.LanguageSelection import LanguageWizard
 from Screens.Time import TimeWizard
