@@ -188,6 +188,8 @@ class OSCamInfo:
 				err = str(e.code)
 		if err is not False:
 			print("[OSCamInfo] Open WebIF error: %s" % err)
+			if "113" in err:
+				err = _("Update the IP used in OSCam -> settings")
 			return False, err
 		else:
 			return True, data
