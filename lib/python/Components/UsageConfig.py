@@ -1282,7 +1282,9 @@ def InitUsageConfig():
 	config.misc.epgratingcountry = ConfigSelection(default="", choices=[
 		("", _("Auto detect")),
 		("ETSI", _("Generic")),
-		("AUS", _("Australia"))
+		("AUS", _("Australia")),
+		("GBR", _("Great Britain")),
+		("ITA", _("Italy"))
 	])
 	config.misc.epggenrecountry = ConfigSelection(default="", choices=[
 		("", _("Auto detect")),
