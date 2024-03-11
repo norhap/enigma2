@@ -112,16 +112,15 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item entryID="netmounts_setup" level="1" text="Mounts" weight="10"><screen module="NetworkSetup" screen="NetworkMountsMenu" /></item>
 			<menu entryID="services_menu" level="0" text="Utilities" weight="15">
 				<id val="netservices" />
-				<item entryID="netafp_setup" level="2" text="AFP" weight="5"><screen module="NetworkSetup" screen="NetworkAfp" /></item>
 				<item entryID="netftp_setup" level="2" text="FTP" weight="10"><screen module="NetworkSetup" screen="NetworkFtp" /></item>
-				<item entryID="Inadyn_setup" level="2" text="Inadyn" weight="15"><screen module="NetworkSetup" screen="NetworkInadyn" /></item>
-				<item entryID="minidlna_setup" level="2" text="MiniDLNA" weight="20"><screen module="NetworkSetup" screen="NetworkMiniDLNA" /></item>
-				<item entryID="netnfs_setup" level="2" text="NFS" weight="25"><screen module="NetworkSetup" screen="NetworkNfs" /></item>
+				<item entryID="nettelnet_setup" level="2" text="Telnet" weight="15"><screen module="NetworkSetup" screen="NetworkTelnet" /></item>
+				<item entryID="netnfs_setup" level="2" text="NFS" weight="20"><screen module="NetworkSetup" screen="NetworkNfs" /></item>
+				<item entryID="minidlna_setup" level="2" text="MiniDLNA" weight="25"><screen module="NetworkSetup" screen="NetworkMiniDLNA" /></item>
 				<item entryID="netvpn_setup" level="2" text="OpenVPN" weight="30"><screen module="NetworkSetup" screen="NetworkOpenvpn" /></item>
 				<item entryID="netzerotier_setup" level="2" text="ZeroTierVPN" weight="35"><screen module="NetworkSetup" screen="NetworkZeroTier" /></item>
 				<item entryID="netsabnzbd_setup" level="2" text="SABnzbd" weight="40"><screen module="NetworkSetup" screen="NetworkSABnzbd" /></item>
 				<item entryID="netsmba_setup" level="2" text="CIFS/Samba" weight="45"><screen module="NetworkSetup" screen="NetworkSamba" /></item>
-				<item entryID="nettelnet_setup" level="2" text="Telnet" weight="50"><screen module="NetworkSetup" screen="NetworkTelnet" /></item>
+				<item entryID="Inadyn_setup" level="2" text="Inadyn" weight="50"><screen module="NetworkSetup" screen="NetworkInadyn" /></item>
 				<item entryID="netushare_setup" level="2" text="uShare" weight="55"><screen module="NetworkSetup" screen="NetworkuShare" /></item>
 				<item entryID="netsatip_setup" level="2" text="SATPI" weight="60"><screen module="NetworkSetup" screen="NetworkSATPI" /></item>
 			</menu>
