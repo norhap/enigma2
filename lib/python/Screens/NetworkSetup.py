@@ -25,7 +25,6 @@ from Components.SystemInfo import MODEL
 from Components.Console import Console
 from Screens.Standby import TryQuitMainloop
 from random import Random
-import time
 from Components.FileList import MultiFileSelectList
 import string
 import glob
@@ -52,13 +51,12 @@ def ServiceIsEnabled(service_name):
 
 class NSCommon:
 	def StartStopCallback(self, result=None, retval=None, extra_args=None):
-		time.sleep(3)
 		self.updateService()
 
 	def removeComplete(self, result=None, retval=None, extra_args=None):
 		if self.reboot_at_end:
 			self.session.open(TryQuitMainloop, 2)
-		self.message.close()
+		self.message.close(False)
 		self.close()
 
 	def installComplete(self, result=None, retval=None, extra_args=None):
@@ -67,8 +65,7 @@ class NSCommon:
 			self.session.open(TryQuitMainloop, 2)
 		else:
 			self.updateService()
-		self.message.close()
-		self.close()
+		self.message.close(False)
 
 	def doRemove(self, callback, pkgname):
 		self.message = self.session.open(MessageBox, _("Please wait..."), MessageBox.TYPE_INFO, enable_input=False)
@@ -78,7 +75,7 @@ class NSCommon:
 	def doInstall(self, callback, pkgname):
 		self.message = self.session.open(MessageBox, _("Please wait..."), MessageBox.TYPE_INFO, enable_input=False)
 		self.message.setTitle(_('Installing service'))
-		self.Console.ePopen('opkg install ' + pkgname, callback)
+		self.Console.ePopen('opkg install ' + pkgname + ' >/dev/null 2>&1', callback)
 
 	def checkNetworkState(self, str, retval, extra_args):
 		if 'Collected errors' in str:
@@ -96,9 +93,9 @@ class NSCommon:
 		if 'bad address' in result:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your receiver is not connected to the internet, please check your network settings and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		if self.reboot_at_end:
-			mtext = _('Your receiver will be restarted after the installation of the service\nAre you ready to install "%s" ?') % self.service_name
+			mtext = _('Your receiver will be restarted after the installation of the service\nDo you want to install \"%s\"?') % self.service_name
 		else:
-			mtext = _("Do you want to install \"%s\" ?") % self.service_name
+			mtext = _("Do you want to install \"%s\"?") % self.service_name
 		self.session.openWithCallback(self.InstallPackage, MessageBox, mtext, MessageBox.TYPE_YESNO)
 		if ('wget returned 1' or 'wget returned 255' or '404 Not Found') in result:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Please wait while feeds state is being checked."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
@@ -109,10 +106,10 @@ class NSCommon:
 	def RemovedataAvail(self, str, retval, extra_args):
 		if str:
 			if self.reboot_at_end:
-				restartbox = self.session.openWithCallback(self.RemovePackage, MessageBox, _('Your receiver will be restarted after the removal of the service\nDo you want to remove the service now ?'), MessageBox.TYPE_YESNO)
-				restartbox.setTitle(_('Are you ready to remove "%s" ?') % self.service_name)
+				restartbox = self.session.openWithCallback(self.RemovePackage, MessageBox, _('Your receiver will be restarted after the removal of the service\nDo you want to remove the service now?'), MessageBox.TYPE_YESNO)
+				restartbox.setTitle(_('Do you want to remove "%s"?') % self.service_name)
 			else:
-				self.session.openWithCallback(self.RemovePackage, MessageBox, _("Do you want to remove \"%s\" ?") % self.service_name, MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.RemovePackage, MessageBox, _("Do you want to remove \"%s\"?") % self.service_name, MessageBox.TYPE_YESNO)
 		else:
 			self.updateService()
 
@@ -1997,11 +1994,9 @@ class NetworkSABnzbd(NSCommon, Screen):
 	def SABnzbStartStop(self):
 		if not self.my_sabnzbd_run:
 			self.Console.ePopen('/etc/init.d/sabnzbd start')
-			time.sleep(3)
 			self.updateService()
 		elif self.my_sabnzbd_run:
 			self.Console.ePopen('/etc/init.d/sabnzbd stop')
-			time.sleep(3)
 			self.updateService()
 
 	def activateSABnzbd(self):
@@ -2009,7 +2004,6 @@ class NetworkSABnzbd(NSCommon, Screen):
 			self.Console.ePopen('update-rc.d -f sabnzbd remove')
 		else:
 			self.Console.ePopen('update-rc.d -f sabnzbd defaults')
-		time.sleep(3)
 		self.updateService()
 
 	def updateService(self, result=None, retval=None, extra_args=None):
@@ -2238,7 +2232,6 @@ class NetworkOpenvpn(NSCommon, Screen):
 		else:
 			print("[NetworkSetup] config in /etc/openvpn")
 
-		time.sleep(3)
 		self.updateService()
 
 	def activateVpn(self):
@@ -2289,7 +2282,6 @@ class NetworkVpnLog(Screen):
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'up': self['infotext'].pageUp, 'down': self['infotext'].pageDown})
 		strview = ''
 		self.Console.ePopen('tail /var/log/messages > /var/log/openvpn.log')
-		time.sleep(1)
 		if fileExists('/var/log/openvpn.log'):
 			with open('/var/log/openvpn.log', 'r') as f:
 				for line in f.readlines():
@@ -2391,7 +2383,6 @@ class NetworkZeroTierLog(Screen):
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'up': self['infotext'].pageUp, 'down': self['infotext'].pageDown})
 		strview = ''
 		self.Console.ePopen('tail /var/log/messages > /var/log/zerotier.log')
-		time.sleep(1)
 		if fileExists('/tmp/ZeroTier.log'):
 			with open('/tmp/ZeroTier.log', "r") as f:
 				for line in f.readlines():
@@ -2491,7 +2482,6 @@ class NetworkSambaLog(Screen):
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'up': self['infotext'].pageUp, 'down': self['infotext'].pageDown})
 		strview = ''
 		self.Console.ePopen('tail /var/log/samba/*log* > /var/log/samba/samba.log')
-		time.sleep(1)
 		if fileExists('/var/log/samba/samba.log'):
 			with open('/var/log/samba/samba.log', 'r') as f:
 				for line in f.readlines():
@@ -3256,7 +3246,6 @@ class NetworkuShareLog(Screen):
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'up': self['infotext'].pageUp, 'down': self['infotext'].pageDown})
 		strview = ''
 		self.Console.ePopen('tail /tmp/uShare.log > /tmp/tmp.log')
-		time.sleep(1)
 		if fileExists('/tmp/tmp.log'):
 			with open('/tmp/tmp.log', 'r') as f:
 				for line in f.readlines():
@@ -3656,7 +3645,6 @@ class NetworkMiniDLNALog(Screen):
 		self['actions'] = ActionMap(['WizardActions', 'ColorActions'], {'ok': self.close, 'back': self.close, 'up': self['infotext'].pageUp, 'down': self['infotext'].pageDown})
 		strview = ''
 		self.Console.ePopen('tail /var/volatile/tmp/minidlna.log > /tmp/tmp.log')
-		time.sleep(1)
 		if fileExists('/tmp/tmp.log'):
 			with open('/tmp/tmp.log', 'r') as f:
 				for line in f.readlines():
