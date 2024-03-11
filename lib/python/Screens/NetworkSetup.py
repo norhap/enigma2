@@ -92,13 +92,15 @@ class NSCommon:
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
 		if 'bad address' in result:
 			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your receiver is not connected to the internet, please check your network settings and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+			return
+		if 'wget returned' in result or 'Not Found' in result:
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("The server is not available. There is no access to the URL."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+			return
 		if self.reboot_at_end:
 			mtext = _('Your receiver will be restarted after the installation of the service\nDo you want to install \"%s\"?') % self.service_name
 		else:
 			mtext = _("Do you want to install \"%s\"?") % self.service_name
 		self.session.openWithCallback(self.InstallPackage, MessageBox, mtext, MessageBox.TYPE_YESNO)
-		if ('wget returned 1' or 'wget returned 255' or '404 Not Found') in result:
-			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Please wait while feeds state is being checked."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 
 	def UninstallCheck(self):
 		self.Console.ePopen('opkg list_installed ' + self.service_name, self.RemovedataAvail)
@@ -125,7 +127,7 @@ class NSCommon:
 			self.close()
 
 	def InstallPackageFailed(self, val):
-		self.feedscheck.close()
+		self.feedscheck.close(False)
 		self.close()
 
 	def InstallCheck(self):

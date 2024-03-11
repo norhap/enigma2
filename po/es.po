@@ -11186,6 +11186,9 @@ msgstr "Color de subtítulos del teletexto"
 msgid "Test mode"
 msgstr "Modo test"
 
+msgid "The server is not available. There is no access to the URL."
+msgstr "El servidor no está disponible. No hay acceso a la URL."
+
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Esta opción le permite agregar la configuración de softcam en el menú de extensiones."
 
