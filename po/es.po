@@ -16039,8 +16039,8 @@ msgstr "Actualización de tiempo en minutos:"
 msgid "Unable to change password!"
 msgstr "No se puede cambiar la contraseña!"
 
-msgid "Utilities"
-msgstr "Utilidades"
+msgid "Network Services"
+msgstr "Servicios de Red"
 
 msgid "Web interface"
 msgstr "Interfaz Web"

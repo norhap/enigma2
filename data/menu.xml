@@ -110,7 +110,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<id val="network" />
 			<item entryID="device_setup" level="0" text="Device" weight="5"><screen module="NetworkSetup" screen="NetworkAdapterSelection" /></item>
 			<item entryID="netmounts_setup" level="1" text="Mounts" weight="10"><screen module="NetworkSetup" screen="NetworkMountsMenu" /></item>
-			<menu entryID="services_menu" level="0" text="Utilities" weight="15">
+			<menu entryID="services_menu" level="0" text="Network Services" weight="15">
 				<id val="netservices" />
 				<item entryID="netftp_setup" level="2" text="FTP" weight="10"><screen module="NetworkSetup" screen="NetworkFtp" /></item>
 				<item entryID="nettelnet_setup" level="2" text="Telnet" weight="15"><screen module="NetworkSetup" screen="NetworkTelnet" /></item>
