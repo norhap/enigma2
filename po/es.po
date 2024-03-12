@@ -11186,8 +11186,10 @@ msgstr "Color de subtítulos del teletexto"
 msgid "Test mode"
 msgstr "Modo test"
 
-msgid "The server is not available. There is no access to the URL."
-msgstr "El servidor no está disponible. No hay acceso a la URL."
+msgid "No response in server URL.\n"
+"Does not have access to sources."
+msgstr "No hay respuesta en la URL del servidor.\n"
+"No tiene acceso a las fuentes."
 
 msgid "This option allows you to add the softcam setup in the extensions menu."
 msgstr "Esta opción le permite agregar la configuración de softcam en el menú de extensiones."
@@ -16043,7 +16045,7 @@ msgid "Unable to change password!"
 msgstr "No se puede cambiar la contraseña!"
 
 msgid "Network Services"
-msgstr "Servicios de Red"
+msgstr "Servicios"
 
 msgid "Web interface"
 msgstr "Interfaz Web"
@@ -16056,9 +16058,6 @@ msgstr "Debe establecer una contraseña de root para poder utilizar los canales 
 
 msgid "You must set at least one command"
 msgstr "Debe establecer al menos un comando"
-
-msgid "Your receiver is not connected to the internet, please check your network settings and try again."
-msgstr "Su receptor no está conectado a Internet, verifique la configuración de su red e intente nuevamente."
 
 msgid ""
 "Your receiver will be restarted after the installation of service\n"

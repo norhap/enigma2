@@ -90,11 +90,8 @@ class NSCommon:
 			self.updateService()
 
 	def checkNetworkStateFinished(self, result, retval, extra_args=None):
-		if 'bad address' in result:
-			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("Your receiver is not connected to the internet, please check your network settings and try again."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
-			return
-		if 'wget returned' in result or 'Not Found' in result:
-			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("The server is not available. There is no access to the URL."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		if 'wget returned' in result or 'Not Found' in result or 'bad address' in result:
+			self.session.openWithCallback(self.InstallPackageFailed, MessageBox, _("No response in server URL.\nDoes not have access to sources."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 			return
 		if self.reboot_at_end:
 			mtext = _('Your receiver will be restarted after the installation of the service\nDo you want to install \"%s\"?') % self.service_name
