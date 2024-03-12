@@ -515,8 +515,8 @@ class MACSettings(Setup):
 				interfaces.write(interfacesdata)
 		else:
 			with open("/etc/network/interfaces", "r") as interfaces:
-				with open("/etc/network/interfaces", "w") as interfaceswrite:
-					for line in interfaces.readlines():
+				for line in interfaces.readlines():
+					with open("/etc/network/interfaces", "w") as interfaceswrite:
 						interfaceswrite.write(line)
 						if "iface eth0 inet dhcp" in line or "iface eth0 inet static" in line:
 							newmac = "	hwaddress ether " + configmac.change.value
