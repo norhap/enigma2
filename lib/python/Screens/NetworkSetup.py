@@ -514,13 +514,14 @@ class MACSettings(Setup):
 			with open("/etc/network/interfaces", "w") as interfaces:
 				interfaces.write(interfacesdata)
 		else:
-			with open("/etc/network/interfaces", "r") as interfaces:
-				for line in interfaces.readlines():
-					with open("/etc/network/interfaces", "w") as interfaceswrite:
-						interfaceswrite.write(line)
-						if "iface eth0 inet dhcp" in line or "iface eth0 inet static" in line:
-							newmac = "	hwaddress ether " + configmac.change.value
-							interfaceswrite.write(newmac + "\n")
+			interfacesdata = open("/etc/network/interfaces", "r").readlines()
+			interfaceswrite = open("/etc/network/interfaces", "w")
+			for line in interfacesdata:
+				interfaceswrite.write(line)
+				if "iface eth0 inet dhcp" in line or "iface eth0 inet static" in line:
+					newmac = "	hwaddress ether " + configmac.change.value
+					interfaceswrite.write(newmac + "\n")
+			interfaceswrite.close()
 
 	def keyCancel(self):
 		if exists(MAC_WILDCARD_FILE):
