@@ -113,9 +113,9 @@ class UpdatePluginMenu(Screen):
 		self.skin_path = plugin_path
 		self.menu = args
 		self.list = []
-		self.oktext = _("\nPress OK on your remote control to continue.")
-		self.menutext = _("Press MENU on your remote control for additional options.")
-		self.infotext = _("Press INFO on your remote control for additional information.")
+		self.oktext = _("\nPress OK to continue.")
+		self.menutext = _("Press MENU for additional options.")
+		self.infotext = _("Press INFO for additional information.")
 		self.text = ""
 		self.backupdirs = ' '.join(config.plugins.configurationbackup.backupdirs.value)
 		if self.menu == 0:

@@ -43,6 +43,9 @@ msgstr "Actualizacion en linea del software de su receptor."
 msgid "Press OK to continue."
 msgstr "Pulse OK para continuar."
 
+msgid "\nPress OK to continue."
+msgstr "\nPulse OK para continuar."
+
 msgid ""
 "Press GREEN button to enable MultiBoot.\n"
 "\n"
@@ -5285,11 +5288,11 @@ msgstr ""
 "\n"
 "Pulse \"No\" para continuar con el asistente."
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Pulse INFO en su mando para obtener información adicional."
+msgid "Press INFO for additional information."
+msgstr "Pulse INFO para obtener información adicional."
 
-msgid "Press MENU on your remote control for additional options."
-msgstr "Pulse MENÚ en su mando para opciones adicionales."
+msgid "Press MENU for additional options."
+msgstr "Pulse MENÚ para opciones adicionales."
 
 msgid "Press OK to confirm."
 msgstr "Pulse OK para confirmar."
