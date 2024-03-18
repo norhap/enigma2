@@ -37,7 +37,7 @@ from ServiceReference import ServiceReference, service_types_tv_ref, service_typ
 from Tools.BoundFunction import boundFunction
 from Tools.Notifications import RemovePopup
 from Tools.Alternatives import GetWithAlternative
-from Tools.Directories import isPluginInstalled
+from Tools.Directories import fileContains, isPluginInstalled
 from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
@@ -161,7 +161,8 @@ class ChannelContextMenu(Screen):
 				"8": self.removeEntry
 		})
 		menu = []
-
+		self.configStreamRelay = None
+		self.refChannelIPToSAT = None
 		self.removeFunction = False
 		self.addFunction = False
 		self.PiPAvailable = False
@@ -221,11 +222,22 @@ class ChannelContextMenu(Screen):
 						else:
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
 						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
-							append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay), level=1)
+							append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleWithoutStreamrelay), level=1)
 						else:
-							if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
-								if SystemInfo["FbcTunerPowerAlwaysOn"] and not config.servicelist.startupservice.value == current.toString() or not SystemInfo["FbcTunerPowerAlwaysOn"]:
-									append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleStreamrelay), level=1)
+							if str(ProcessList().named("oscam")).strip("[]"):
+								self.configStreamRelay = "/etc/tuxbox/config/oscam/oscam.conf"
+							elif str(ProcessList().named("oscam-emu")).strip("[]"):
+								self.configStreamRelay = "/etc/tuxbox/config/oscam-emu/oscam.conf"
+							if self.configStreamRelay:
+								if isfile("/etc/enigma2/iptosat.json"):
+									with open("/etc/enigma2/iptosat.json", "r") as fr:
+										for refiptosat in fr.readlines():
+											if "sref" in refiptosat and current.toString() in refiptosat:
+												self.refChannelIPToSAT = refiptosat.split(': "')[1].split('"')[0]
+												break
+								if not self.refChannelIPToSAT:
+									if SystemInfo["FbcTunerPowerAlwaysOn"] and not config.servicelist.startupservice.value == current.toString() or not SystemInfo["FbcTunerPowerAlwaysOn"]:
+										append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleWithStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							# Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:
@@ -376,7 +388,14 @@ class ChannelContextMenu(Screen):
 		Screens.InfoBar.InfoBar.instance.showHideVBI()
 		self.close()
 
-	def toggleStreamrelay(self):
+	def toggleWithStreamrelay(self):
+		if fileContains(self.configStreamRelay, "streamrelay"):
+			Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
+			self.close()
+		else:
+			self.session.open(MessageBox, _("StreamRelay is disabled in OSCam"), MessageBox.TYPE_ERROR, default=False, simple=True, timeout=10)
+
+	def toggleWithoutStreamrelay(self):
 		Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
 		self.close()
 

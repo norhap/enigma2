@@ -7292,6 +7292,9 @@ msgstr "Clientes en Streaming"
 msgid "Streaming clients info"
 msgstr "Info Clientes en Streaming"
 
+msgid "StreamRelay is disabled in OSCam"
+msgstr "StreamRelay está deshabilitado en OSCam"
+
 msgid "Strongest position"
 msgstr "Posición más fuerte"
 
