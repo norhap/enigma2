@@ -223,7 +223,7 @@ class ChannelContextMenu(Screen):
 						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
 							append_when_current_valid(current, menu, (_("Play service without Stream Relay"), self.toggleStreamrelay), level=1)
 						else:
-							if str(ProcessList().named("oscam-emu")).strip("[]"):
+							if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
 								if SystemInfo["FbcTunerPowerAlwaysOn"] and not config.servicelist.startupservice.value == current.toString() or not SystemInfo["FbcTunerPowerAlwaysOn"]:
 									append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
@@ -271,7 +271,7 @@ class ChannelContextMenu(Screen):
 					if haveBouquets:
 						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
-							if str(ProcessList().named("oscam-emu")).strip("[]"):
+							if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
 								append_when_current_valid(current, menu, (_("Copy To Stream Relay"), self.copyCurrentToStreamRelay))
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						append_when_current_valid(current, menu, (_("Remove all new found flags"), self.removeAllNewFoundFlags), level=0)
