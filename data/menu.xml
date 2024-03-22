@@ -108,7 +108,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<!-- Menu / Setup / Network -->
 		<menu entryID="network_setup" level="0" text="Network" weight="25">
 			<id val="network" />
-			<item entryID="device_setup" level="0" text="Device" weight="5"><screen module="NetworkSetup" screen="NetworkAdapterSelection" /></item>
+			<item entryID="device_setup" level="0" text="Adapter settings" weight="5"><screen module="NetworkSetup" screen="NetworkAdapterSelection" /></item>
 			<item entryID="netmounts_setup" level="1" text="Mounts" weight="10"><screen module="NetworkSetup" screen="NetworkMountsMenu" /></item>
 			<menu entryID="services_menu" level="0" text="Network Services" weight="15">
 				<id val="netservices" />

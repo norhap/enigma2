@@ -3,9 +3,11 @@ import os
 import re
 import netifaces as ni
 from socket import *  # noqa: F403
+from process import ProcessList
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from Tools.Directories import fileContains
 from Components.config import config
 
 
@@ -270,9 +272,15 @@ class Network:
 				if iface == "eth1":
 					name = _("VLAN connection")  # noqa: F405
 				else:
-					name = _("LAN connection")  # noqa: F405
+					if str(ProcessList().named("zerotier-one")).strip("[]"):
+						name = _("LAN connection") if fileContains("/etc/network/interfaces", "wireless") else _("VPN connection ZeroTier")  # noqa: F405
+					else:
+						name = _("LAN connection")  # noqa: F405
 				if len(self.lan_interfaces) and not iface == "eth1":
-					name += " " + str(len(self.lan_interfaces) + 1)
+					if str(ProcessList().named("zerotier-one")).strip("[]"):
+						name = _("VPN connection ZeroTier") if fileContains("/etc/network/interfaces", "wireless") else _("LAN connection")  # noqa: F405
+					else:  # others VPN
+						name = _("VPN connection") if fileContains("/etc/network/interfaces", "wireless") else _("LAN connection")  # noqa: F405
 				self.lan_interfaces.append(iface)
 		return name
 
