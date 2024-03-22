@@ -187,6 +187,11 @@ class StreamRelaySetup(Setup):
 					direction = _("W")
 				else:
 					direction = _("E")
+			if orbpos == 0xEEEE:
+				orbposText = "DVB-T"
+			elif orbpos == 0xFFFF:
+				orbposText = "DVB-C"
+			else:
 				orbposText = "%d.%d %s%s" % (orbpos / 10, orbpos % 10, "\u00B0", direction)
 		except:
 			pass
