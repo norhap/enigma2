@@ -263,24 +263,21 @@ class Network:
 		name = None
 		if self.isWirelessInterface(iface):
 			if iface not in self.wlan_interfaces:
-				name = _("WLAN connection")  # noqa: F405
-				if len(self.wlan_interfaces):
-					name += " " + str(len(self.wlan_interfaces) + 1)
 				self.wlan_interfaces.append(iface)
+				name = _("WLAN connection")
 		else:
 			if iface not in self.lan_interfaces:
 				if iface == "eth1":
 					name = _("VLAN connection")  # noqa: F405
-				else:
+				if iface not in self.wlan_interfaces:
+					name = _("LAN connection")  # noqa: F405
+				if len(self.lan_interfaces):
 					if str(ProcessList().named("zerotier-one")).strip("[]"):
-						name = _("LAN connection") if fileContains("/etc/network/interfaces", "wireless") else _("VPN connection ZeroTier")  # noqa: F405
-					else:
-						name = _("LAN connection")  # noqa: F405
-				if len(self.lan_interfaces) and not iface == "eth1":
-					if str(ProcessList().named("zerotier-one")).strip("[]"):
-						name = _("VPN connection ZeroTier") if fileContains("/etc/network/interfaces", "wireless") else _("LAN connection")  # noqa: F405
+						name = _("LAN connection") if not fileContains("/etc/network/interfaces", "wireless") else _("VPN connection ZeroTier")  # noqa: F405  # noqa: F405
 					else:  # others VPN
-						name = _("VPN connection") if fileContains("/etc/network/interfaces", "wireless") else _("LAN connection")  # noqa: F405
+						name = _("VPN connection")  # noqa: F405
+				else:
+					name = _("VPN connection ZeroTier") if not fileContains("/etc/network/interfaces", "wireless") else _("LAN connection")  # noqa: F405
 				self.lan_interfaces.append(iface)
 		return name
 
