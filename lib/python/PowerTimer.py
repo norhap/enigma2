@@ -33,7 +33,7 @@ def setcliJoinZerotier(backupnetworkid):  # install in first run enigma ZeroTier
 					if line.startswith('config.plugins.IPToSAT.networkidzerotier'):
 						networkid = line.strip().split('=')[1]
 						if networkid:
-							eConsoleAppContainer().execute(f'opkg update ; opkg install zerotier ; /etc/init.d/zerotier start ; update-rc.d -f zerotier defaults ; sleep 10 ; zerotier-cli join {networkid}')
+							eConsoleAppContainer().execute(f'opkg update ; opkg install zerotier ; /etc/init.d/zerotier start ; update-rc.d -f zerotier defaults ; sleep 15 ; zerotier-cli join {networkid}')
 							break
 		tar.close()
 	except Exception:
