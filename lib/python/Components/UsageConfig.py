@@ -1,6 +1,6 @@
 from locale import AM_STR, PM_STR, nl_langinfo
-from os import makedirs, remove
-from os.path import exists, isfile, join, normpath
+from os import listdir, makedirs, remove
+from os.path import exists, isdir, isfile, join, normpath
 from time import mktime
 
 from enigma import eBackgroundFileEraser, eDVBDB, eEnv, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
@@ -302,15 +302,21 @@ def InitUsageConfig():
 		m = i / 60
 		choicelist.append((str(i), ngettext("%d minute", "%d minutes", m) % m))
 	config.usage.pip_last_service_timeout = ConfigSelection(default="0", choices=choicelist)
-	path = ""
+	moviesPath = ""
+	timeshiftPath = ""
 	for partition in harddiskmanager.getMountedPartitions():
 		directories = normpath(partition.mountpoint)
 		if directories != "/" and not exists(str(directories + "/movie")):
 			makedirs(directories + "/movie")
 		if directories != "/" and "movie" in directories:
-			path = join(directories + "/")
-			break
-	defaultValue = path if path and "/net/movie" not in path or path and "/autofs/movie" not in path else resolveFilename(SCOPE_HDD)
+			moviesPath = join(directories + "/")
+		for timeshiftpath in ["/media/%s/timeshift" % media for media in listdir("/media/") if isdir(join("/media/", media))]:
+			if exists(str(timeshiftpath)):
+				if not exists(str(timeshiftpath + "/recordings")):
+					makedirs(timeshiftpath + "/recordings")
+				timeshiftPath = timeshiftpath + "/recordings/"
+				break
+	defaultValue = moviesPath if moviesPath and "/net/movie" not in moviesPath or moviesPath and "/autofs/movie" not in moviesPath else resolveFilename(SCOPE_HDD)
 	config.usage.default_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.default_path.load()
 	if config.usage.default_path.saved_value:
@@ -333,7 +339,7 @@ def InitUsageConfig():
 		if savedValue and savedValue not in choiceList:
 			config.usage.instantrec_path.setChoices(choiceList + [(savedValue, savedValue)], default="<default>")
 			config.usage.instantrec_path.value = savedValue
-	defaultValue = resolveFilename(SCOPE_TIMESHIFT) if exists(resolveFilename(SCOPE_HDD)) else path + "recordings/"
+	defaultValue = timeshiftPath if timeshiftPath else resolveFilename(SCOPE_TIMESHIFT)
 	config.usage.timeshift_path = ConfigSelection(default=defaultValue, choices=[(defaultValue, defaultValue)])
 	config.usage.timeshift_path.load()
 	if config.usage.timeshift_path.saved_value:
@@ -341,8 +347,6 @@ def InitUsageConfig():
 		if savedValue and savedValue != defaultValue:
 			config.usage.timeshift_path.setChoices([(defaultValue, defaultValue), (savedValue, savedValue)], default=defaultValue)
 			config.usage.timeshift_path.value = savedValue
-	if config.usage.timeshift_path.value != "/" and not exists(config.usage.timeshift_path.value):
-		makedirs(config.usage.timeshift_path.value, 0o755)
 	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
 	config.usage.timeshift_skipreturntolive = ConfigYesNo(default=False)
 
