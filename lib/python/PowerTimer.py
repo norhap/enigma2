@@ -21,25 +21,6 @@ from Tools.XMLTools import stringToXML
 MODULE_NAME = __name__.split(".")[-1]
 
 
-def setcliJoinZerotier(backupnetworkid):  # install in first run enigma ZeroTier
-	try:
-		from enigma import eConsoleAppContainer  # noqa: E402
-		import tarfile
-		tar = tarfile.open(backupnetworkid)
-		for member in tar.getmembers():
-			if member.name == 'etc/enigma2/settings':
-				for line in tar.extractfile(member):
-					line = line.decode()
-					if line.startswith('config.plugins.IPToSAT.networkidzerotier'):
-						networkid = line.strip().split('=')[1]
-						if networkid:
-							eConsoleAppContainer().execute(f'opkg update ; opkg install zerotier ; /etc/init.d/zerotier start ; update-rc.d -f zerotier defaults ; sleep 15 ; zerotier-cli join {networkid}')
-							break
-		tar.close()
-	except Exception:
-		pass
-
-
 # Parses an event, and gives out a (begin, end)-tuple.
 #
 def parseEvent(event):
@@ -77,15 +58,6 @@ class PowerTimer(Timer):
 		# if isPluginInstalled("IPToSAT"):  # activate timer to update bouquets with IPToSAT
 		# 	from Plugins.Extensions.IPToSAT.plugin import TimerUpdateCategories
 		# 	self.timerinstance = TimerUpdateCategories(self)
-		if config.misc.firstrun.value:  # install in first run enigma ZeroTier
-			from Components.Harddisk import harddiskmanager  # noqa: E402
-			from os.path import normpath  # noqa: E402
-			for partition in harddiskmanager.getMountedPartitions():
-				path = normpath(partition.mountpoint)
-				if path != "/" and "net" not in path and "autofs" not in path:
-					for backupnetworkid in [f"{path}/backup/NetworkID.tar.gz"]:
-						if exists(str(backupnetworkid)):
-							setcliJoinZerotier(backupnetworkid)
 
 	def loadTimers(self):
 		timersDom = fileReadXML(self.timersFilename, source=MODULE_NAME)
