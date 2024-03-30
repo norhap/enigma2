@@ -331,7 +331,7 @@ msgid ""
 "Press exit to close"
 msgstr ""
 "%s\n"
-"Presiona OK para la selección de arranque múltiple\n"
+"Pulsa OK para la selección de arranque múltiple\n"
 "Pulsa exit para cerrar"
 
 #, python-format
@@ -1296,6 +1296,9 @@ msgstr "Canadá"
 msgid "Cancel"
 msgstr "Cancelar"
 
+msgid "Cancel execution?"
+msgstr "¿Cancelar la ejecución?"
+
 msgid "Cancelled upon user request"
 msgstr "Cancelado a petición del usuario"
 
@@ -1345,7 +1348,7 @@ msgid "Change Language"
 msgstr "Cambiar idioma"
 
 msgid "Change PIN Pressing [OK]"
-msgstr "Cambiar PIN Presionando [OK]"
+msgstr "Cambiar PIN Pulsando [OK]"
 
 msgid "Change recording (add time)"
 msgstr "Cambiar grabación (añadir tiempo)"
@@ -1385,6 +1388,9 @@ msgstr "Tipo de lista de canales"
 
 msgid "Channel not in services list"
 msgstr "Canal no en lista de canales"
+
+msgid "Channel played with IPToSAT"
+msgstr "Canal reproducido con IPToSAT"
 
 msgid "Channel selection"
 msgstr "Selección de canal"
@@ -6582,7 +6588,7 @@ msgid "Services"
 msgstr "Canales"
 
 msgid "Set PIN Pressing [OK]"
-msgstr "Establezca PIN Presionando [OK]"
+msgstr "Establezca PIN Pulsando [OK]"
 
 msgid "Set all hotkey to default?"
 msgstr "¿Establecer todas las hotkeys por defecto?"
@@ -14723,7 +14729,7 @@ msgid ""
 "Press OK or Exit to abort!"
 msgstr ""
 "\n"
-"Presiona OK o Salir para abortar!"
+"Pulse OK o Salir para abortar!"
 
 msgid "update bookmarks"
 msgstr "actualizar marcadores"

@@ -5,8 +5,10 @@ from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
+from Tools.Directories import isPluginInstalled
 from Components.Converter.Poll import Poll
 from skin import parameters
+import NavigationInstance
 
 caid_data = (
 	("0x0100", "0x01ff", "Seca", "S", True),
@@ -244,13 +246,26 @@ class PliExtraInfo(Poll, Converter):
 		return res
 
 	def createCryptoSpecial(self, info):
-		caid_name = "FTA"
+		serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
+		if isPluginInstalled("IPToSAT"):
+			from Plugins.Extensions.IPToSAT.plugin import getPlaylist  # noqa: E402
+			for sref in getPlaylist()['playlist']:
+				for reference in sref['sref']:
+					if "http" in serviceref:
+						caid_name = "Stream IPTV"
+					elif reference in serviceref and config.plugins.IPToSAT.enable.value:
+						caid_name = _("Channel played with IPToSAT")
+					else:
+						caid_name = "FTA"
+					break
+		else:
+			caid_name = "Stream IPTV" if "http" in serviceref else "FTA"
 		try:
 			for caid_entry in caid_data:
 				if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
 					caid_name = caid_entry[2]
 					break
-			return caid_name + ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16))
+			return caid_name + ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16)) if "IPToSAT" not in caid_name and "IPTV" not in caid_name else caid_name
 		except:
 			pass
 		return ""
