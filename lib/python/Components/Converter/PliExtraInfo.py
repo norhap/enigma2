@@ -246,21 +246,21 @@ class PliExtraInfo(Poll, Converter):
 		return res
 
 	def createCryptoSpecial(self, info):
-		serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
-		if isPluginInstalled("IPToSAT"):
-			from Plugins.Extensions.IPToSAT.plugin import getPlaylist  # noqa: E402
-			for sref in getPlaylist()['playlist']:
-				for reference in sref['sref']:
-					if "http" in serviceref:
-						caid_name = "Stream IPTV"
-					elif reference in serviceref and config.plugins.IPToSAT.enable.value:
-						caid_name = _("Channel played with IPToSAT")
-					else:
-						caid_name = "FTA"
-					break
-		else:
-			caid_name = "Stream IPTV" if "http" in serviceref else "FTA"
 		try:
+			serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
+			if isPluginInstalled("IPToSAT"):
+				from Plugins.Extensions.IPToSAT.plugin import getPlaylist  # noqa: E402
+				for sref in getPlaylist()['playlist']:
+					for reference in sref['sref']:
+						if "http" in serviceref:
+							caid_name = "Stream IPTV"
+						elif reference in serviceref and config.plugins.IPToSAT.enable.value:
+							caid_name = _("Channel played with IPToSAT")
+						else:
+							caid_name = "FTA"
+						break
+			else:
+				caid_name = "Stream IPTV" if "http" in serviceref else "FTA"
 			for caid_entry in caid_data:
 				if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
 					caid_name = caid_entry[2]
