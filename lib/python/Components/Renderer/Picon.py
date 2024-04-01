@@ -1,10 +1,11 @@
-import os
-import re
+from os.path import isdir, join
+from os import listdir
+from re import sub
 import unicodedata
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 from Tools.Alternatives import GetWithAlternative
-from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename
+from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename, sanitizeFilename
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
 
@@ -22,9 +23,9 @@ class PiconLocator:
 
 	def __onMountpointAdded(self, mountpoint):
 		try:
-			path = os.path.join(mountpoint, self.piconDirectories) + '/'
-			if os.path.isdir(path) and path not in self.searchPaths:
-				for fn in os.listdir(path):
+			path = join(mountpoint, self.piconDirectories) + '/'
+			if isdir(path) and path not in self.searchPaths:
+				for fn in listdir(path):
 					if fn.endswith('.png') or fn.endswith('.svg'):
 						print("[Picon] adding path:", path)
 						self.searchPaths.append(path)
@@ -33,7 +34,7 @@ class PiconLocator:
 			pass
 
 	def __onMountpointRemoved(self, mountpoint):
-		path = os.path.join(mountpoint, self.piconDirectories) + '/'
+		path = join(mountpoint, self.piconDirectories) + '/'
 		try:
 			self.searchPaths.remove(path)
 			print("[Picon] removed path:", path)
@@ -87,28 +88,12 @@ class PiconLocator:
 			fields[2] = '1'
 			pngname = self.findPicon('_'.join(fields))
 		if not pngname:  # picon by channel name
-			name = ServiceReference(serviceName).getServiceName()
-			name = unicodedata.normalize('NFKD', str(name)).encode('ASCII', 'ignore').decode('ASCII', 'ignore')
-			name = re.sub('[^a-z0-9]', '', name.replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
-			if len(name) > 0:
-				pngname = self.findPicon(name)
-				if not pngname:
-					name = re.sub("(fhd|uhd|hd|sd|4k)$", "", name)
-					if name:
-						pngname = self.findPicon(name)
-				if not pngname and len(name) > 6:
-					series = re.sub(r's[0-9]*e[0-9]*$', '', name)
-					pngname = self.findPicon(series)
-		if not pngname:  # picon default
-			tmp = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')  # picon_default in current active skin
-			tmp2 = self.findPicon("picon_default")  # picon_default in picon folder
-			if pathExists(tmp2):
-				pngname = tmp2
-			else:
-				if pathExists(tmp):
-					pngname = tmp
-				else:
-					pngname = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')
+			if (sName := ServiceReference(serviceName).getServiceName()) and "SID 0x" not in sName and (utf8Name := sanitizeFilename(sName).lower()) and utf8Name != "__":  # avoid lookups on zero length service names
+				legacyName = sub("[^a-z0-9]", "", utf8Name.replace("&", "and").replace("+", "plus").replace("*", "star"))  # legacy ascii service name picons
+				pngname = self.findPicon(utf8Name) or legacyName and self.findPicon(legacyName) or self.findPicon(sub(r"(fhd|uhd|hd|sd|4k)$", "", utf8Name).strip()) or legacyName and self.findPicon(sub(r"(fhd|uhd|hd|sd|4k)$", "", legacyName).strip())
+		if not pngname:  # picon default channelslist movieselection etc..
+			if resolveFilename(SCOPE_GUISKIN, 'picon_default.png'):
+				pngname = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')
 		return pngname
 
 
