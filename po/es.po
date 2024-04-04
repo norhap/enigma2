@@ -4843,6 +4843,18 @@ msgstr "Abra la pantalla de configuración del navegador de plugins"
 msgid "Options disable timer"
 msgstr "Opciones de temporizador desactivado"
 
+msgid "OpenVPN"
+msgstr "OpenVPN"
+
+msgid "OpenVPN connection"
+msgstr "Conexión OpenVPN"
+
+msgid "OpenVPN log"
+msgstr "OpenVPN log"
+
+msgid "OpenVPN setup"
+msgstr "Configurar OpenVPN"
+
 msgid "Orbital position"
 msgstr "Posición orbital"
 
@@ -4972,6 +4984,15 @@ msgstr "Similar completo"
 
 msgid "Partial EPG"
 msgstr "Similar completo"
+
+msgid "Password changed."
+msgstr "Contraseña Cambiada."
+
+msgid "Password setup"
+msgstr "Configurar contraseña"
+
+msgid "Please wait while feeds state is being checked."
+msgstr "Espere mientras se verifica el estado de los feeds."
 
 msgid "Pause and start timeshift"
 msgstr "Pausar y comenzar el cambio de tiempo"
@@ -5321,6 +5342,9 @@ msgstr "Pulse OK para activar el seleccionado skin %s."
 
 msgid "Quad PiP is not available."
 msgstr "No está disponible la función Quad PiP."
+
+msgid "Press OK to activate current MAC address."
+msgstr "Pulse OK para activar la actual dirección MAC."
 
 msgid ""
 "To apply the selected '%s' skin the GUI needs to restart.\n"
@@ -15886,27 +15910,6 @@ msgstr "Nueva contraseña"
 
 msgid "News"
 msgstr "Novedades"
-
-msgid "OpenVPN"
-msgstr "OpenVPN"
-
-msgid "OpenVPN log"
-msgstr "OpenVPN log"
-
-msgid "OpenVPN setup"
-msgstr "Configurar OpenVPN"
-
-msgid "Password changed."
-msgstr "Contraseña Cambiada."
-
-msgid "Password setup"
-msgstr "Configurar contraseña"
-
-msgid "Please wait while feeds state is being checked."
-msgstr "Espere mientras se verifica el estado de los feeds."
-
-msgid "Press OK to activate current MAC address."
-msgstr "Pulse OK para activar la actual dirección MAC."
 
 msgid "Random password"
 msgstr "Contraseña aleatoria"
