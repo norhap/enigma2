@@ -206,7 +206,7 @@
 		<item level="0" text="Background delete speed" description="Configure the speed of the background deletion process. Lower speed will consume less hard disk drive performance.">config.misc.erase_speed</item>
 		<item level="0" text="Font size" description="This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size">config.movielist.fontsize</item>
 		<item level="0" text="Number of rows" description="Number of rows to display">config.movielist.itemsperpage</item>
-		<item level="0" text="Use slim screen" description="Use the alternative screen">config.movielist.useslim</item>
+		<item level="0" text="Use slim screen" description="Use the alternative screen"  conditional="config.movielist.movieselectionslim.value">config.movielist.useslim</item>
 		<item level="0" text="Use adaptive date display" description="Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'. It hides the year for recordings made this year. It hides the day of the week for recordings made in previous years.">config.movielist.use_fuzzy_dates</item>
 		<item level="0" text="Sort" description="Set the default sorting method.">config.movielist.moviesort</item>
 		<item level="0" text="Sort Trash by deletion time" description="Use the deletion time to sort Trash directories. Most recently deleted at the top.">config.usage.trashsort_deltime</item>

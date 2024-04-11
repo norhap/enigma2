@@ -6,6 +6,7 @@ from time import time
 
 from enigma import eRCInput, eServiceCenter, eServiceReference, eSize, eTimer, iPlayableService, iServiceInformation, getPrevAsciiCode
 
+from skin import findSkinScreen
 import NavigationInstance
 from RecordTimer import AFTEREVENT, RecordTimerEntry
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
@@ -102,6 +103,7 @@ config.movielist.last_selected_tags = ConfigSet([], default=[])
 config.movielist.curentlyplayingservice = ConfigText()
 config.movielist.fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-20, max=20, wraparound=True)
 config.movielist.itemsperpage = ConfigSelectionNumber(default=15, stepwidth=1, min=3, max=30, wraparound=True)
+config.movielist.movieselectionslim = ConfigYesNo(default=True)
 config.movielist.useslim = ConfigYesNo(default=False)
 config.movielist.use_fuzzy_dates = ConfigYesNo(default=True)
 # config.movielist.moviesort = ConfigInteger(default=MovieList.SORT_GROUPWISE)
@@ -306,6 +308,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def __init__(self, session, selectedmovie=None, timeshiftEnabled=False):
 		Screen.__init__(self, session)
+		if not findSkinScreen('MovieSelectionSlim'):
+			config.movielist.movieselectionslim.value = False
 		if config.movielist.useslim.value:
 			self.skinName = ["MovieSelectionSlim", "MovieSelection"]
 		else:
