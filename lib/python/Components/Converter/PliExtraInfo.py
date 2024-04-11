@@ -248,8 +248,10 @@ class PliExtraInfo(Poll, Converter):
 	def createCryptoSpecial(self, info):
 		try:
 			serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
-			if fileContains("/etc/enigma2/iptosat.json", str(serviceref)):
-				caid_name = _("Channel played with IPToSAT")
+			if fileContains("/etc/enigma2/iptosat.json", str(serviceref)) and fileContains("/etc/enigma2/iptosat.json", "nogal"):
+				caid_name = _("Channel in IPToSAT (main list)")
+			elif fileContains("/etc/enigma2/iptosat.json", str(serviceref)):
+				caid_name = _("Channel in IPToSAT (second list)")
 			elif "http" in serviceref:
 				caid_name = "Stream IPTV"
 			else:
