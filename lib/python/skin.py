@@ -756,6 +756,8 @@ def collectAttributes(skinAttributes, node, context, skinPath=None, ignore=(), f
 	size = None
 	pos = None
 	font = None
+	selectionZoom = None
+	selectionZoomSize = None
 	for attrib, value in node.items():  # Walk all attributes.
 		if attrib not in ignore:
 			newValue = value
@@ -779,12 +781,21 @@ def collectAttributes(skinAttributes, node, context, skinPath=None, ignore=(), f
 			elif attrib == "font":
 				font = newValue
 				skinAttributes.append((attrib, newValue))
+			elif attrib == "selectionZoom":
+				selectionZoom = newValue
+			elif attrib == "selectionZoomSize":
+				selectionZoomSize = newValue
 			else:
 				skinAttributes.append((attrib, newValue))
-	if pos is not None:
+
+	if selectionZoom is not None:  # The "selectionZoom" attribute must be after the item size attributes.
+		skinAttributes.append(("selectionZoom", selectionZoom))
+	if selectionZoomSize is not None:  # The "selectionZoomSize" attribute must be after the item size attributes.
+		skinAttributes.append(("selectionZoomSize", selectionZoomSize))
+	if pos is not None:  # The "position" attribute must be after the all other attributes.
 		pos, size = context.parse(pos, size, font)
 		skinAttributes.append(("position", pos))
-	if size is not None:
+	if size is not None:  # The "size" attribute must be after the "position" attribute.
 		skinAttributes.append(("size", size))
 
 
