@@ -331,7 +331,7 @@ class TimerEditList(Screen, ProtectedScreen):
 		self.addTimer(timer)
 
 	def addTimer(self, timer):
-		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer)
+		self.session.openWithCallback(self.finishedAdd, TimerEntry, timer, newEntry=True)
 
 	def finishedEdit(self, answer):
 		print("[TimerEdit] finished edit")
