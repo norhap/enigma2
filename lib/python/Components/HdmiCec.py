@@ -475,6 +475,9 @@ CECdat = {
 
 class HdmiCec:
 	instance = None
+	KEY_VOLUP = 115
+	KEY_VOLDOWN = 114
+	KEY_VOLMUTE = 113
 
 	def __init__(self):
 		if config.hdmicec.enabled.value:
@@ -1082,16 +1085,16 @@ class HdmiCec:
 		address = keyEvent
 		data = b""
 		if keyEvent in (0, 2):
-			if keyCode == 115:
+			if keyCode == self.KEY_VOLUP:
 				cmd = 0x44
 				data = pack("B", 0x41)
-			elif keyCode == 114:
+			elif keyCode == self.KEY_VOLDOWN:
 				cmd = 0x44
 				data = pack("B", 0x42)
-			elif keyCode == 113:
+			elif keyCode == self.KEY_VOLMUTE:
 				cmd = 0x44
 				data = pack("B", 0x43)
-		elif keyEvent == 1 and keyCode in (113, 114, 115):
+		elif keyEvent == 1 and keyCode in (self.KEY_VOLMUTE, self.KEY_VOLDOWN, self.KEY_VOLUP):
 			cmd = 0x45
 		if cmd:
 			if isinstance(data, bytes):
@@ -1391,6 +1394,30 @@ class HdmiCec:
 					remove(f)
 				except Exception as e:
 					self.CECwritedebug(f"[HdmiCec] remove file '{f}' failed - error: {e}", True)
+
+	def keyVolUp(self):  # keyVolUp for hbbtv
+		if self.volumeForwardingEnabled:
+			self.keyEvent(self.KEY_VOLUP, 0)
+			self.keyEvent(self.KEY_VOLUP, 1)
+			return 1
+		else:
+			return 0
+
+	def keyVolDown(self):  # keyVolDown for hbbtv
+		if self.volumeForwardingEnabled:
+			self.keyEvent(self.KEY_VOLDOWN, 0)
+			self.keyEvent(self.KEY_VOLDOWN, 1)
+			return 1
+		else:
+			return 0
+
+	def keyVolMute(self):  # keyVolMute for hbbtv
+		if self.volumeForwardingEnabled:
+			self.keyEvent(self.KEY_VOLMUTE, 0)
+			self.keyEvent(self.KEY_VOLMUTE, 1)
+			return 1
+		else:
+			return 0
 
 
 hdmi_cec = HdmiCec()
