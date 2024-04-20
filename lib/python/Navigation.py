@@ -216,9 +216,9 @@ class Navigation:
 					self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
 				setPriorityFrontend = False
 				if SystemInfo["DVB-T_priority_tuner_available"] or SystemInfo["DVB-C_priority_tuner_available"] or SystemInfo["DVB-S_priority_tuner_available"] or SystemInfo["ATSC_priority_tuner_available"]:
-					str_service = playref.toString()
+					str_service = self.currentlyPlayingServiceReference.toString()
 					if '%3a//' not in str_service and not str_service.rsplit(":", 1)[1].startswith("/"):
-						type_service = playref.getUnsignedData(4) >> 16
+						type_service = self.currentlyPlayingServiceReference.getUnsignedData(4) >> 16
 						if type_service == 0xEEEE:
 							if SystemInfo["DVB-T_priority_tuner_available"] and config.usage.frontend_priority_dvbt.value != "-2":
 								if config.usage.frontend_priority_dvbt.value != config.usage.frontend_priority.value:
