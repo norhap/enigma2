@@ -182,6 +182,7 @@ def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), scree
 							res = [parseInteger(x.strip()) for x in res.split(",")]
 							msg = f", resolution {res[0]}x{res[1]}," if len(res) == 2 and res[0] and res[1] else ""
 							print(f"[Skin] Loading screen '{name}'{msg} from '{filename}'.  (scope={scope})")
+							# print(f"[Skin] Loading screen '{name}'{f", resolution {res[0]}x{res[1]}," if len(res) == 2 and res[0] and res[1] else ""} from '{filename}'.  (scope={scope})")
 						domScreens[name] = (element, f"{dirname(filename)}/")
 			elif element.tag == "windowstyle":  # Process the windowstyle element.
 				scrnID = element.attrib.get("id")
@@ -290,6 +291,7 @@ def parseOptions(options, attribute, value, default):
 		else:
 			optionList = "', '".join(options.keys())
 			skinError(f"The '{attribute}' value '{value}' is invalid, acceptable options are '{optionList}'")
+			# skinError(f"The '{attribute}' value '{value}' is invalid, acceptable options are '{"', '".join(options.keys())}'")
 			value = default
 	else:
 		skinError(f"The '{attribute}' parser is not correctly initialized")
@@ -624,6 +626,15 @@ def parseSize(value, scale, object=None, desktop=None):
 	return eSize(*parseValuePair(value, scale, object, desktop))
 
 
+def parseTabWidth(value, default):
+	if value and value.isdigit():
+		return int(value)
+	options = {
+		"auto": -1
+	}
+	return options.get(value, default)
+
+
 def parseValuePair(value, scale, object=None, desktop=None, size=None):
 	if value in variables:
 		value = variables[value]
@@ -927,6 +938,7 @@ class AttributeParser:
 		if errors:
 			errorList = "', '".join(errors)
 			print(f"[Skin] Error: Attribute 'flags' with value '{value}' has invalid element(s) '{errorList}'!")
+			# print(f"[Skin] Error: Attribute 'flags' with value '{value}' has invalid element(s) '{"', '".join(errors)}'!")
 
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
@@ -1185,7 +1197,7 @@ class AttributeParser:
 		self.guiObject.setSpacingColor(parseColor(value, 0x00000000))
 
 	def tabWidth(self, value):
-		self.guiObject.setTabWidth(value if value.isdigit() else -1)
+		self.guiObject.setTabWidth(parseTabWidth(value, -1))
 
 	def text(self, value):
 		if value:
@@ -1786,6 +1798,7 @@ def readSkin(screen, skin, names, desktop):
 			else:
 				widgetList = "', '".join(screen.mandatoryWidgets)
 				print(f"[Skin] Warning: Skin screen '{name}' rejected as it does not offer all the mandatory widgets '{widgetList}'!")
+				# print(f"[Skin] Warning: Skin screen '{name}' rejected as it does not offer all the mandatory widgets '{"', '".join(screen.mandatoryWidgets)}'!")
 				myScreen = None
 	else:
 		myName = f"<embedded-in-{screen.__class__.__name__}>"
@@ -2051,6 +2064,7 @@ def readSkin(screen, skin, names, desktop):
 		sizeW = "?" if context.w is None else str(context.w)
 		sizeH = "?" if context.h is None else str(context.h)
 		print(f"[Skin] Processing screen '{myName}'{msg} position=({posX},{posY}), size=({sizeW},{sizeH}) for module '{screen.__class__.__name__}'.")
+		# print(f"[Skin] Processing screen '{myName}'{f", from list '{", ".join(names)}'," if len(names) > 1 else ""} position=({posX},{posY}), size=({sizeW},{sizeH}) for module '{screen.__class__.__name__}'.")
 		context.x = 0  # Reset offsets, all components are relative to screen coordinates.
 		context.y = 0
 		processScreen(myScreen, context)
@@ -2090,21 +2104,21 @@ def findSkinScreen(names):
 def findWidgets(name):
 	widgetSet = set()
 	element, path = domScreens.get(name, (None, None))
-	if element:
+	if element is not None:
 		widgets = element.findall("widget")
-		if widgets:
+		if widgets is not None:
 			for widget in widgets:
 				name = widget.get("name")
-				if name:
+				if name is not None:
 					widgetSet.add(name)
 				source = widget.get("source")
-				if source:
+				if source is not None:
 					widgetSet.add(source)
 		panels = element.findall("panel")
-		if panels:
+		if panels is not None:
 			for panel in panels:
 				name = panel.get("name")
-				if name:
+				if name is not None:
 					widgetSet.update(findWidgets(name))
 	return widgetSet
 
