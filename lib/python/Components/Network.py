@@ -273,20 +273,20 @@ class Network:
 				if iface == "eth1":
 					name = _("VLAN connection")  # noqa: F405
 				else:
-					if wirelesslan:  # with WLAN second adapter is LAN
+					if wirelesslan:
 						name = _("LAN connection")  # noqa: F405
-					else:  # witout WLAN then first adapter is VPN
+						if len(self.lan_interfaces):
+							if zerotier:
+								name = _("VPN connection ZeroTier")  # noqa: F405
+							if openvpn:
+								name = _("OpenVPN connection")  # noqa: F405
+					else:
 						if zerotier:
 							name = _("VPN connection ZeroTier")  # noqa: F405
-						elif openvpn:
+						if openvpn:
 							name = _("OpenVPN connection")  # noqa: F405
-						else:  # if there are no VPNs, first and adapter unique is LAN
+						if len(self.lan_interfaces):
 							name = _("LAN connection")  # noqa: F405
-					if len(self.lan_interfaces):  # WLAN LAN and VPN
-						if zerotier:
-							name = _("VPN connection ZeroTier") if wirelesslan else _("LAN connection")  # noqa: F405
-						elif openvpn:
-							name = _("OpenVPN connection") if wirelesslan else _("LAN connection")  # noqa: F405
 				self.lan_interfaces.append(iface)
 		return name
 
