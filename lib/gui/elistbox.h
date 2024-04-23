@@ -319,7 +319,9 @@ public:
 	void setHeaderFont(gFont *font) { m_style.m_headerfont = font; }
 	void setVAlign(int align) { m_style.m_valign = align; }
 	void setHAlign(int align) { m_style.m_halign = align; }
-	void setTextPadding(const eRect &padding) { m_style.m_text_padding = padding; }
+
+	void setPadding(const eRect &padding) override { m_style.m_text_padding = padding; }
+	eRect getPadding() override { return m_style.m_text_padding; }
 
 	void setScrollbarBorderColor(const gRGB &col);
 	void setScrollbarForegroundColor(gRGB &col);
