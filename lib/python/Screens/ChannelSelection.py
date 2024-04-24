@@ -185,22 +185,10 @@ class ChannelContextMenu(Screen):
 				if isPlayable:
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU):
 						append_when_current_valid(current, menu, (p.name, boundFunction(self.runPlugin, p)), key="bullet")
-					if SystemInfo["FbcTunerPowerAlwaysOn"]:
-						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current) and config.servicelist.startupservice.value == current.toString():
-							config.servicelist.startupservice.value = None
-							config.servicelist.startupservice_onstandby.value = False
-							config.servicelist.startupservice.save()
-							config.servicelist.startupservice_onstandby.save()
-						elif config.servicelist.startupservice.value == current.toString():
-							append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
-						else:
-							if not Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
-								append_when_current_valid(current, menu, (_("Set as startup service"), self.setStartupService), level=0)
+					if config.servicelist.startupservice.value == current.toString():
+						append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
 					else:
-						if config.servicelist.startupservice.value == current.toString():
-							append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
-						else:
-							append_when_current_valid(current, menu, (_("Set as startup service"), self.setStartupService), level=0)
+						append_when_current_valid(current, menu, (_("Set as startup service"), self.setStartupService), level=0)
 					if self.parentalControlEnabled:
 						if self.parentalControl.getProtectionLevel(current.toCompareString()) == -1:
 							append_when_current_valid(current, menu, (_("Add to parental protection"), boundFunction(self.addParentalProtection, current)), level=0)
@@ -236,8 +224,7 @@ class ChannelContextMenu(Screen):
 												self.refChannelIPToSAT = refiptosat.split(': "')[1].split('"')[0]
 												break
 								if not self.refChannelIPToSAT:
-									if SystemInfo["FbcTunerPowerAlwaysOn"] and not config.servicelist.startupservice.value == current.toString() or not SystemInfo["FbcTunerPowerAlwaysOn"]:
-										append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleWithStreamrelay), level=1)
+									append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleWithStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							# Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:
