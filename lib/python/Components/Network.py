@@ -283,9 +283,13 @@ class Network:
 					else:
 						if zerotier:
 							name = _("VPN connection ZeroTier")  # noqa: F405
+							if len(self.lan_interfaces):
+								name = _("LAN connection")  # noqa: F405
 						if openvpn:
 							name = _("OpenVPN connection")  # noqa: F405
-						if len(self.lan_interfaces):
+							if len(self.lan_interfaces):
+								name = _("LAN connection")  # noqa: F405
+						if not zerotier and not openvpn:
 							name = _("LAN connection")  # noqa: F405
 				self.lan_interfaces.append(iface)
 		return name
