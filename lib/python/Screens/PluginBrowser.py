@@ -1,6 +1,7 @@
 from os import unlink
 from os.path import isfile, normpath
-from enigma import checkInternetAccess, eConsoleAppContainer, eDVBDB, eTimer, gRGB
+from enigma import eConsoleAppContainer, eDVBDB, eTimer, gRGB
+from urllib.request import urlopen, Request
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Screens.HelpMenu import HelpableScreen
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
@@ -184,6 +185,7 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 		self.sortMode = False
 		self.selectedPlugin = None
 		self.urlServer = None
+		self.urlResponse = None
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onFirstExecBegin.append(self.checkWarnings)
 		self.onShown.append(self.updatePluginList)
@@ -193,7 +195,7 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 		if isfile("/etc/opkg/all-feed.conf"):
 			with open("/etc/opkg/all-feed.conf", "r") as fr:
 				url = fr.read().split('//')[1].split('/')[0]
-				self.urlServer = url
+				self.urlServer = "http://" + url
 
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value and not config.ParentalControl.config_sections.main_menu.value and config.ParentalControl.config_sections.plugin_browser.value
@@ -233,13 +235,16 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 			self["key_red"].setText(_("Remove plugins"))
 			self["key_blue"].setText(_("Edit Mode On"))
 			self["pluginRemoveActions"].setEnabled(True)
-			if self.urlServer and checkInternetAccess(self.urlServer) == 0:
-				self["key_green"].setText(_("Download plugins"))
-				self["pluginDownloadActions"].setEnabled(True)
-			else:
+			try:
+				request = Request(self.urlServer)
+				self.urlResponse = urlopen(request, timeout=5)
+			except Exception:
 				self["key_green"].setText("")
 				self["description"].setText(_("No response in server URL.\nDoes not have access to sources."))
 				self["pluginDownloadActions"].setEnabled(False)
+			if self.urlServer and self.urlResponse:
+				self["key_green"].setText(_("Download plugins"))
+				self["pluginDownloadActions"].setEnabled(True)
 			self["pluginEditActions"].setEnabled(False)
 		self[self.layout].updateList(self.pluginList)
 
