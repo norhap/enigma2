@@ -347,3 +347,11 @@ class Navigation:
 
 	def getClientsStreaming(self):
 		return eStreamServer.getInstance() and eStreamServer.getInstance().getConnectedClients()
+
+	# def getChannelIPToSAT(self):
+	# 	if path.exists("/etc/enigma2/iptosat.json"):
+	# 		with open("/etc/enigma2/iptosat.json", "r") as fr:
+	# 			for refiptosat in fr.readlines():
+	# 				if "sref" in refiptosat and str(self.currentlyPlayingServiceReference.toString()) in refiptosat:
+	# 					return True
+	# 			return False
