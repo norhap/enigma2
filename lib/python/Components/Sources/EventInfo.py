@@ -20,7 +20,7 @@ class pServiceEvent(object):
 		self.m_ShortDescriptionNext = ""
 		self.m_ExtendedDescriptionNow = ""
 		self.m_ExtendedDescriptionNext = ""
-		self.m_Begin = time()
+		self.m_Begin = int(time())
 		self.m_Duration = 0
 
 		sTagTitle = info.getInfoString(iServiceInformation.sTagTitle)
