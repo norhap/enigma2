@@ -3959,6 +3959,9 @@ msgstr "Laos"
 msgid "Large"
 msgstr "Largo"
 
+msgid "Last Scanned"
+msgstr "Último Escaneado"
+
 msgid "Last config"
 msgstr "Última Configuración"
 

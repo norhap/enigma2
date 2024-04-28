@@ -290,7 +290,8 @@ class ChannelContextMenu(Screen):
 					else:
 						append_when_current_valid(current, menu, (_("Remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0)
 				menu.append(ChoiceEntryComponent("dummy", (_("Add bouquet"), self.showBouquetInputBox)))
-				append_when_current_valid(current, menu, (_("Rename entry"), self.renameEntry), level=0, key="2")
+				if _("Last Scanned") not in self.getCurrentSelectionName():
+					append_when_current_valid(current, menu, (_("Rename entry"), self.renameEntry), level=0, key="2")
 				append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 				self.removeFunction = self.removeBouquet
 				if removed_userbouquets_available():
