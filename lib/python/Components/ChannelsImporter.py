@@ -3,14 +3,13 @@ from Tools.Notifications import AddNotificationWithID
 from Screens.MessageBox import MessageBox
 # for scheduler
 from time import mktime, strftime, time, localtime
-from enigma import eTimer
+from enigma import eDVBDB, eTimer, eServiceReference
 
 # for downloader
 import os
 import re
 from urllib.error import URLError, HTTPError
 from urllib.request import Request, urlopen
-from enigma import eServiceReference, eDVBDB
 
 autoClientModeTimer = None
 
