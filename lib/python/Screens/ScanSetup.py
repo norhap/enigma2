@@ -409,6 +409,8 @@ class TerrestrialTransponderSearchSupport:
 				self.terrestrialTransponderSearch(freq, bandWidth)
 
 	def getTerrestrialTransponderData(self, str):
+		if isinstance(str, bytes):
+			str = str.decode()
 		print("[getTerrestrialTransponderData] ", str)
 		if self.terrestrial_tunerName.startswith("Sundtek"):
 			str = self.remaining_data + str
