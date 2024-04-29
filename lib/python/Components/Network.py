@@ -266,31 +266,27 @@ class Network:
 		openvpn = glob("/etc/rc2.d/S*openvpn")
 		if self.isWirelessInterface(iface):
 			if iface not in self.wlan_interfaces:  # with WLAN first adapter is WLAN
-				self.wlan_interfaces.append(iface)
 				name = _("WLAN connection")  # noqa: F405
+				self.wlan_interfaces.append(iface)
 		else:
+			zerotiername = _("VPN connection ZeroTier")  # noqa: F405
+			openvpnname = _("OpenVPN connection")  # noqa: F405
+			lanname = _("LAN connection")  # noqa: F405
 			if iface not in self.lan_interfaces:
 				if iface == "eth1":
 					name = _("VLAN connection")  # noqa: F405
 				else:
 					if wirelesslan:
-						name = _("LAN connection")  # noqa: F405
+						name = lanname
 						if len(self.lan_interfaces):
-							if zerotier:
-								name = _("VPN connection ZeroTier")  # noqa: F405
-							if openvpn:
-								name = _("OpenVPN connection")  # noqa: F405
+							name = zerotiername if zerotier else openvpnname
 					else:
 						if zerotier:
-							name = _("VPN connection ZeroTier")  # noqa: F405
-							if len(self.lan_interfaces):
-								name = _("LAN connection")  # noqa: F405
+							name = zerotiername
 						if openvpn:
-							name = _("OpenVPN connection")  # noqa: F405
-							if len(self.lan_interfaces):
-								name = _("LAN connection")  # noqa: F405
-						if not zerotier and not openvpn:
-							name = _("LAN connection")  # noqa: F405
+							name = openvpnname
+						if len(self.lan_interfaces):
+							name = lanname
 				self.lan_interfaces.append(iface)
 		return name
 

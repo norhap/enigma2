@@ -1,6 +1,7 @@
 from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl, eLabel, eTimer, getDesktop, getE2Rev, ePoint, eSize
 from os import listdir, remove
 from os.path import getmtime, isfile, join
+from glob import glob
 from requests import get
 from PIL import Image
 import skin
@@ -889,9 +890,8 @@ class SystemNetworkInfo(Screen):
 		else:
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
 		self.console = Console()
-		if hasattr(self, "AboutText"):
-			self.console.ePopen('/sbin/ifconfig %s' % self.iface, self.getIPv6Address)
-			self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
+		self.console.ePopen('/sbin/ifconfig %s' % self.iface, self.getIPv6Address)
+		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
 
 	def getIPv6Address(self, result, retval, extra_args):
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
@@ -1012,9 +1012,9 @@ class SystemNetworkInfo(Screen):
 
 	def updateStatusbar(self):
 		self["IFtext"].setText(_("Network:"))
-		self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 		self["Statustext"].setText(_("Link:"))
 		if iNetwork.isWirelessInterface(self.iface):
+			self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 			self["devicepic"].setPixmapNum(1)
 			try:
 				self.iStatus.getDataForInterface(self.iface, self.getInfoCB)
@@ -1022,6 +1022,10 @@ class SystemNetworkInfo(Screen):
 				self["statuspic"].setPixmapNum(1)
 				self["statuspic"].show()
 		else:
+			if glob("/etc/rc2.d/S*zerotier") or glob("/etc/rc2.d/S*openvpn"):
+				self["IF"].setText(_("LAN connection"))
+			else:
+				self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 			iNetwork.getLinkState(self.iface, self.dataAvail)
 			self["devicepic"].setPixmapNum(0)
 		self["devicepic"].show()

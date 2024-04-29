@@ -5642,7 +5642,7 @@ msgid "Really upgrade the frontprocessor and reboot now?"
 msgstr "¿Actualizar el procesador y reiniciar ahora?"
 
 msgid "Really upgrade your settop box and reboot now?"
-msgstr "¿Actualizar su aparato y reiniciar ahora?"
+msgstr "¿Actualizar su receptor y reiniciar ahora?"
 
 msgid "Reboot"
 msgstr "Reiniciar"
@@ -7696,12 +7696,8 @@ msgstr ""
 msgid "The user interface of your %s %s is restarting in debug mode"
 msgstr "La interfaz de usuario de su %s %s está reiniciando en modo debug"
 
-msgid ""
-"The wireless LAN plugin is not installed!\n"
-"Please install it and choose what you want to do next."
-msgstr ""
-"El plugin de LAN inalámbrica no está instalado!\n"
-"Instálalo y elige lo que quieres hacer a continuación."
+msgid "Please choose what you want to do next."
+msgstr "Elija lo que desea hacer a continuación."
 
 msgid ""
 "The wireless LAN plugin is not installed!\n"
