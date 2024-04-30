@@ -153,7 +153,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 
 	def listInterfaces(self):
 		self.checkOldInterfaceState()
-		list = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList()]
+		list = [(iNetwork.getFriendlyAdapterName(x), x) for x in iNetwork.getAdapterList() if "VPN" not in iNetwork.getFriendlyAdapterName(x)]
 		list.append((_("Exit network wizard"), "end"))
 		return list
 
