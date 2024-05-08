@@ -43,7 +43,8 @@ from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
 from os import listdir, remove, rename
-from os.path import isfile
+from os.path import exists, isfile, join
+from shutil import copy2
 from time import time
 from process import ProcessList
 
@@ -290,8 +291,10 @@ class ChannelContextMenu(Screen):
 					else:
 						append_when_current_valid(current, menu, (_("Remove bouquet from parental protection"), boundFunction(self.removeParentalProtection, current)), level=0)
 				menu.append(ChoiceEntryComponent("dummy", (_("Add bouquet"), self.showBouquetInputBox)))
-				if _("Last Scanned") not in self.getCurrentSelectionName():
+				if self.getCurrentSelectionName() != _("Last Scanned"):
 					append_when_current_valid(current, menu, (_("Rename entry"), self.renameEntry), level=0, key="2")
+				else:
+					append_when_current_valid(current, menu, (_("Rename entry and create new bouquet"), self.renameEntry), level=0, key="2")
 				append_when_current_valid(current, menu, (_("Remove entry"), self.removeEntry), level=0, key="8")
 				self.removeFunction = self.removeBouquet
 				if removed_userbouquets_available():
@@ -551,8 +554,6 @@ class ChannelContextMenu(Screen):
 		self.close()
 
 	def sortedBouquetList(self):
-		from os.path import join
-		from shutil import copy2
 		copy2("/etc/enigma2/bouquets.tv", "/etc/enigma2/unorderedbouquets")
 		with open("/etc/enigma2/bouquets.tv", "w") as fd:
 			fd.write('#NAME User - Bouquets (TV)' + "\n")
@@ -1066,7 +1067,36 @@ class ChannelSelectionEdit:
 		if cur and cur.valid():
 			name = eServiceCenter.getInstance().info(cur) and hasattr(eServiceCenter.getInstance().info(cur), "getName") and eServiceCenter.getInstance().info(cur).getName(cur) or ServiceReference(cur).getServiceName() or ""
 			name = name.replace('\xc2\x86', '').replace('\xc2\x87', '')
-			if name:
+			if name == _("Last Scanned"):
+				lastscanned = "/etc/enigma2/userbouquet.LastScanned.tv"
+				rename_lastscan = "/etc/enigma2/userbouquet.lastscanned1.tv"
+				nameuserbouquet = "lastscanned1"
+				bouquetstv = "/etc/enigma2/bouquets.tv"
+				for bouquet_number in range(1, 100):
+					if exists(str(rename_lastscan)) and str(bouquet_number) not in rename_lastscan:
+						rename_lastscan = f"/etc/enigma2/userbouquet.lastscanned{bouquet_number}.tv"
+						nameuserbouquet = f"lastscanned{bouquet_number}"
+				with open(bouquetstv, "r") as fr:
+					previous_bouquetstv = fr.readlines()
+					with open(bouquetstv, "w") as fw:
+						for line in previous_bouquetstv:
+							if "LastScanned" in line:
+								line = line.replace("LastScanned", nameuserbouquet)
+							fw.write(line)
+				if exists(str(lastscanned)):
+					rename(lastscanned, rename_lastscan)
+					if exists(str(rename_lastscan)):
+						with open(rename_lastscan, "r") as fr:
+							bouquetread = fr.readlines()
+							with open(rename_lastscan, "w") as fw:
+								for line in bouquetread:
+									fw.write(line.replace(_("Last Scanned"), _("Bouquet created to rename")))
+				eDVBDB.getInstance().reloadBouquets()
+				Screens.InfoBar.InfoBar.instance.servicelist.showAllServices()
+				Screens.InfoBar.InfoBar.instance.servicelist.showFavourites()
+				self.session.open(MessageBox, _("From \"Last Scanned\" a new bouquet was created with this name:\n\n\"Bouquet created to rename\"\n\nChange the name again with your chosen one."), MessageBox.TYPE_INFO, default=False, simple=True, timeout=10)
+				Screens.InfoBar.InfoBar.instance.servicelist.showFavourites()
+			else:
 				self.session.openWithCallback(self.renameEntryCallback, VirtualKeyBoard, title=_("Please enter new name:"), text=name)
 		else:
 			return 0

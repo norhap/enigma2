@@ -3124,6 +3124,9 @@ msgstr "Viernes"
 msgid "From:"
 msgstr "Desde:"
 
+msgid "From \"Last Scanned\" a new bouquet was created with this name:\n\n\"Bouquet created to rename\"\n\nChange the name again with your chosen one."
+msgstr "Desde \"Último escaneo\" se creó un nuevo bouquet con este nombre:\n\n\"Bouquet creado a renombrar\"\n\nCambie el nombre nuevamente con su elegido."
+
 #, python-format
 msgid "Frontprocessor version: %s"
 msgstr "Procesador frontal: %s"
@@ -3959,11 +3962,11 @@ msgstr "Laos"
 msgid "Large"
 msgstr "Largo"
 
-msgid "Last Scanned"
-msgstr "Último Escaneado"
-
 msgid "Last config"
 msgstr "Última Configuración"
+
+msgid "Last Scanned"
+msgstr "Último Escaneo"
 
 msgid "Last speed"
 msgstr "Última velocidad"
@@ -9904,6 +9907,9 @@ msgstr "Eliminar satélite seleccionado"
 msgid "Rename entry"
 msgstr "Renombrar entrada"
 
+msgid "Rename entry and create new bouquet"
+msgstr "Cambiar nombre de la entrada y crear un nuevo bouquet"
+
 msgid "Repeat playlist"
 msgstr "Repetir lista de reproducción"
 
@@ -12240,6 +12246,9 @@ msgstr "La copia del archivo no se encuentra!"
 
 msgid "Bouquets"
 msgstr "Bouquets"
+
+msgid "Bouquet created to rename"
+msgstr "Bouquet creado a renombrar"
 
 msgid "Channels"
 msgstr "Canales"

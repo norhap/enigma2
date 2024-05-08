@@ -7,7 +7,8 @@ from Components.ActionMap import ActionMap
 from Components.FIFOList import FIFOList
 from Components.Sources.FrontendInfo import FrontendInfo
 from Components.config import config
-from enigma import eServiceReference
+from enigma import eServiceReference, eDVBDB
+from os.path import exists
 
 
 class ServiceScanSummary(Screen):
@@ -71,11 +72,19 @@ class ServiceScan(Screen):
 		if self.currentInfobar.__class__.__name__ == "InfoBar":
 			self.close(returnValue)
 		self.close()
+		if exists(str(self.bouquetLastScanned)) and "en" not in config.osd.language.value:
+			with open(self.bouquetLastScanned, "r") as fr:
+				bouquetread = fr.readlines()
+				with open(self.bouquetLastScanned, "w") as fw:
+					for line in bouquetread:
+						fw.write(line.replace("Last Scanned", _("Last Scanned")))
+			eDVBDB.getInstance().reloadBouquets()
 
 	def __init__(self, session, scanList):
 		Screen.__init__(self, session)
 
 		self.scanList = scanList
+		self.bouquetLastScanned = "/etc/enigma2/userbouquet.LastScanned.tv"
 
 		if hasattr(session, 'infobar'):
 			self.currentInfobar = Screens.InfoBar.InfoBar.instance
