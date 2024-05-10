@@ -3,7 +3,7 @@ from os.path import isfile, join
 from re import findall
 from hashlib import md5
 from boxbranding import getMachineName
-from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD
+from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD, getBoxType
 
 from process import ProcessList
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
@@ -289,7 +289,7 @@ SystemInfo["OSCamIsActive"] = str(ProcessList().named("oscam")).strip("[]") or s
 SystemInfo["NCamIsActive"] = str(ProcessList().named("ncam")).strip("[]")
 SystemInfo["CCcamIsActive"] = str(ProcessList().named("CCcam")).strip("[]")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
-SystemInfo["DefineSat"] = MODEL in ("ustym4kpro", "beyonwizv2", "viper4k", "sf8008", "gbtrio4k", "gbtrio4kplus", "gbip4k", "qviart5")
+SystemInfo["DefineSat"] = MODEL in ("ustym4kpro", "beyonwizv2", "viper4k", "gbtrio4k", "gbtrio4kplus", "gbip4k", "qviart5") or getBoxType() in ("sf8008")
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and MODEL not in ("hd51", "h7")
 SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and MODEL == "multibox" or BRAND in ("wetek", "dreambox")
 SystemInfo["grautec"] = fileExists("/tmp/usbtft")

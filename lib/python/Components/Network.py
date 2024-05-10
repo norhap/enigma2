@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from enigma import getBoxType
+
 from os import listdir
 from os.path import basename, exists, isdir, isfile, realpath
 import re
@@ -276,7 +278,7 @@ class Network:
 				if iface == "eth1":
 					name = _("VLAN connection")  # noqa: F405
 				else:
-					if wirelesslan:
+					if wirelesslan and getBoxType() not in ("sf8008"):  # STBs with WLAN in last position
 						name = lanname
 						if len(self.lan_interfaces):
 							name = zerotiername if zerotier else openvpnname
