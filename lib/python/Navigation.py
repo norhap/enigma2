@@ -29,8 +29,6 @@ class Navigation:
 		NavigationInstance.instance = self
 		self.ServiceHandler = eServiceCenter.getInstance()
 
-		import Navigation as Nav
-		Nav.navcore = self
 		Screens.Standby.TVstate()
 		self.pnav = pNavigation()
 		self.pnav.m_event.get().append(self.dispatchEvent)
