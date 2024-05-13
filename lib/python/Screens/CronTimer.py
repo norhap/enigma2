@@ -394,11 +394,9 @@ class CronTimersConfig(Screen, ConfigListScreen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
 
 	def moveUp(self):
 		self["config"].instance.moveSelection(self["config"].instance.moveUp)
