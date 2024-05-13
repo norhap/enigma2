@@ -76,7 +76,6 @@ class Language:
 			if lang in self.ll or (lang + "_" + country) in self.ll:
 				self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
 				self.langlist.append(str(lang + "_" + country))
-
 		except:
 			print("[Language] Language " + str(name) + " not found")
 		self.langlistselection.append((str(lang + "_" + country), name))
@@ -167,7 +166,6 @@ class Language:
 
 	def delLanguage(self, delLang=None):
 		from Components.config import config
-
 		if delLang:
 			lang = config.osd.language.value
 			print("[Language] DELETE LANG", delLang)
