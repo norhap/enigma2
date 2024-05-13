@@ -34,7 +34,7 @@
 		<button keyid="KEY_RIGHT" label="RIGHT" title="Right" pos="86,253" shape="rect" size="20,35" />
 		<button keyid="KEY_DOWN" label="DOWN" title="Down" pos="59,280" shape="rect" size="38,20" />
 		<button keyid="KEY_INFO" label="INFO" title="Info" pos="22,287" shape="circle" radius="12" />
-		<button keyid="KEY_BACK" label="RECALL" title="Recall" pos="98,287" shape="circle" radius="12" />
+		<button keyid="KEY_BACK" remap="KEY_EXIT" label="RECALL" title="Recall" pos="98,287" shape="circle" radius="12" />
 		<button keyid="KEY_VOLUMEUP" label="VOL+" title="Volume +" pos="27,315" shape="rect" size="24,20" />
 		<button keyid="KEY_CHANNELUP" label="BOUQUET+" title="Channel +" pos="92,315" shape="rect" size="24,20" />
 		<button keyid="KEY_VIDEO" label="VIDEO" title="Playlist" pos="60,316" shape="rect" size="24,16" />
