@@ -1,6 +1,9 @@
 import os
 import time
 from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, ePicLoad, eServiceReference, getDesktop
+
+from shutil import move
+from glob import glob
 from ServiceReference import ServiceReference
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -135,6 +138,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		self.playlist = MyPlayList()
 		self.is_closing = False
 		self.delname = ""
+		self.playliste2pls = resolveFilename(SCOPE_CONFIG, "playlist.e2pls")
 		self.playlistname = ""
 		self["playlist"] = self.playlist
 
@@ -590,7 +594,8 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		menu.append((_("Load playlist"), "loadplaylist"))
 		if config.usage.setup_level.index >= 1:  # intermediate+
 			menu.append((_("Save playlist"), "saveplaylist"))
-			menu.append((_("Delete saved playlist"), "deleteplaylist"))
+			if glob("/etc/enigma2/playlist/*.e2pls") or os.path.exists(resolveFilename(SCOPE_CONFIG, "playlist.e2pls")):
+				menu.append((_("Delete saved playlist"), "deleteplaylist"))
 			menu.append((_("Edit settings"), "settings"))
 		if self.pipZapAvailable:
 			menu.append((_("Menu") + " PiP", "pip"))
@@ -743,6 +748,8 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.playlist.updateList()
 
 	def delete_saved_playlist(self):
+		if os.path.exists(str(self.playliste2pls)) and not os.path.exists(resolveFilename(SCOPE_PLAYLIST, "playlist.e2pls")):
+			move(self.playliste2pls, resolveFilename(SCOPE_PLAYLIST))
 		listpath = self.get_playlists()
 		if listpath:
 			self.session.openWithCallback(self.DeletePlaylistSelected, ChoiceBox, title=_("Please select a playlist to delete..."), list=listpath)
@@ -752,7 +759,10 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 	def DeletePlaylistSelected(self, path):
 		if path is not None:
 			self.delname = path[1]
-			self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s?") % (path[1]))
+			if "playlist.e2pls" in (path[1]):
+				config.mediaplayer.savePlaylistOnExit.value = False
+				config.mediaplayer.savePlaylistOnExit.save()
+			self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s ?") % (path[1]))
 
 	def deleteConfirmed(self, confirmed):
 		if confirmed:
@@ -761,6 +771,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			except OSError as e:
 				print("[MediaPlayer] delete failed:", e)
 				self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
+			self.clear_playlist()
 
 	def clear_playlist(self):
 		self.isAudioCD = False
@@ -807,7 +818,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			if not offline.deleteFromDisk(1):
 				result = True
 		if result:
-			self.session.openWithCallback(self.deleteConfirmed_offline, MessageBox, _("Do you really want to delete %s?") % (name))
+			self.session.openWithCallback(self.deleteConfirmed_offline, MessageBox, _("Do you really want to delete %s ?") % (name))
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("You cannot delete this!"), MessageBox.TYPE_ERROR)
 

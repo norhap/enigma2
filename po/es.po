@@ -16587,7 +16587,7 @@ msgid "Device mounts"
 msgstr "Montajes dispositivos"
 
 msgid "Do you really want to delete %s ?"
-msgstr "Realmente quieres eliminar %s?"
+msgstr "¿Quieres eliminar %s?"
 
 msgid "Do you really want to delete ?"
 msgstr "Realmente quieres eliminar ?"
