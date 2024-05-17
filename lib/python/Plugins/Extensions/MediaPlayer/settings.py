@@ -74,6 +74,7 @@ class MediaPlayerSettings(ConfigListScreen, Screen):
 		self["setupActions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"green": self.keySave,
+			"save": self.keySave,
 			"red": self.keyCancel,
 			"cancel": self.keyCancel,
 			"ok": self.ok,
@@ -94,6 +95,11 @@ class MediaPlayerSettings(ConfigListScreen, Screen):
 			self["config"].setList(self.list)
 		except KeyError:
 			print("[MediaPlayer] keyError")
+
+	def keySave(self):
+		if not config.mediaplayer.defaultDir.value:
+			config.mediaplayer.defaultDir.value = config.usage.default_path.value
+		ConfigListScreen.keySave(self)
 
 	def ok(self):
 		if self["config"].getCurrent()[1] == config.mediaplayer.defaultDir:
