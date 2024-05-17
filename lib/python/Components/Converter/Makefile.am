@@ -12,4 +12,5 @@ install_PYTHON = \
 	EtAnalogClock.py ExtendedServiceInfo.py ExtremeInfo.py VExtraNumText.py VWeather.py VtiTempFan.py \
 	HbbtvApplicationInfo.py BhAnalogic.py BhStreamInfo.py VNetSpeedInfo.py VisionCamInfo.py CaidInfo2.py \
 	RefString.py CpuUsage.py ProgressDiskSpaceInfo.py RouteInfo.py ServiceInfoEX.py Audio.py \
-	TextAddAfter.py TextAddBefore.py Textreplace.py TextToUpper.py MovieBarInfo.py HddState.py VAudioInfo.py
+	TextAddAfter.py TextAddBefore.py Textreplace.py TextToUpper.py MovieBarInfo.py HddState.py \
+	VAudioInfo.py XmlMultiContent.py
