@@ -2746,7 +2746,7 @@ msgid " <empty>"
 msgstr " <vacío>"
 
 msgid "Exit media player?"
-msgstr "Salir del reproductor?"
+msgstr "¿Salir del reproductor?"
 
 msgid "Exit mediaplayer"
 msgstr "Salir del reproductor"

@@ -97,8 +97,6 @@ class MediaPlayerSettings(ConfigListScreen, Screen):
 			print("[MediaPlayer] keyError")
 
 	def keySave(self):
-		if not config.mediaplayer.defaultDir.value:
-			config.mediaplayer.defaultDir.value = config.usage.default_path.value
 		ConfigListScreen.keySave(self)
 
 	def ok(self):
