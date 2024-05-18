@@ -1,4 +1,4 @@
-from enigma import eLabel, eListbox, ePoint, eSize, eSlider, eWidget, fontRenderClass
+from enigma import eLabel, eListbox, ePoint, eSize, eSlider, eWidget
 
 from skin import applyAllAttributes, parseBoolean, parseGradient, parseInteger, parseRadius, parseScrollbarMode, parseScrollbarScroll, scrollLabelStyle
 from Components.GUIComponent import GUIComponent

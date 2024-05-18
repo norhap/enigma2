@@ -6,8 +6,6 @@ from Components.Converter.Poll import Poll
 from Components.Converter.VAudioInfo import StdAudioDesc
 from Tools.Transponder import ConvertToHumanReadable
 
-from os.path import exists
-
 WIDESCREEN = [1, 3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
 
