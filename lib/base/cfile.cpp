@@ -101,8 +101,7 @@ int CFile::parseIntHex(int *result, const char *fileName, const char *moduleName
 	if (!f)
 	{
 		if (!(flags & CFILE_FLAGS_SUPPRESS_NOT_EXISTS))
-			eDebugErrorOpenFile(moduleName, fileName);
-		return -1;
+			return -1;
 	}
 	if (fscanf(f, "%x", result) != 1)
 	{
