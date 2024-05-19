@@ -4239,6 +4239,9 @@ msgstr "Mayotte"
 msgid "Media player"
 msgstr "Reproductor MediaPlayer"
 
+msgid "Media Player Settings"
+msgstr "Ajustes  Reproductor MediaPlayer"
+
 msgid "Media scanner"
 msgstr "Escáner de medios"
 
@@ -7113,6 +7116,9 @@ msgstr "Especifique un tiempo adicional para ignorar la inactividad del temporiz
 
 msgid "Specify if you want to set the blocktimes separately by weekday"
 msgstr "Especifique si desea establecer los tiempos de bloqueo por separado por día de la semana"
+
+msgid "Specify the directory to use when starting Media Player."
+msgstr "Especifique el directorio que se utilizará al iniciar Media Player."
 
 msgid "Specify the end time to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Especifique la hora de finalización para ignorar el temporizador de apagado cuando el receptor está en modo de reposo"
@@ -13129,6 +13135,24 @@ msgstr "Establecer la duración máxima"
 
 msgid "Set this NO to disable this AutoTimer."
 msgstr "Establezca este NO para deshabilitar este Temporizador Automático."
+
+msgid "Set this to 'Yes' to automatically hide the InfoBar when the media starts playing. If set to 'No' the InfoBar will remain on screen."
+msgstr "Establezca esto en 'Sí' para ocultar automáticamente la barra de información cuando los medios comiencen a reproducirse. Si se establece en 'No', la barra de información permanecerá en la pantalla."
+
+msgid "Set this to 'Yes' to display the Media Player menu item in the Main Menu. If set to 'No' Media Player can still be started from the Plugins list."
+msgstr "Establezca esto en 'Sí' para mostrar el elemento de menú del Reproductor multimedia en el menú principal. Si está configurado en 'No', el Reproductor multimedia aún se puede iniciar desde la lista de complementos."
+
+msgid "Set this to 'Yes' to keep playing this play list in a continuously repeating loop. If set to 'No' the play list will only be played once."
+msgstr "Configúrelo en 'Sí' para seguir reproduciendo esta lista de reproducción en un bucle que se repite continuamente. Si se establece en 'No', la lista de reproducción sólo se reproducirá una vez."
+
+msgid "Set this to 'Yes' to save the current directory when exiting the Media Player."
+msgstr "Establezca esto en 'Sí' para guardar el directorio actual al salir del Reproductor multimedia."
+
+msgid "Set this to 'Yes' to save the current play list when exiting the Media Player."
+msgstr "Configúrelo en 'Sí' para guardar la lista de reproducción actual al salir del Reproductor multimedia."
+
+msgid "Set this to 'Yes' to sort the playlists alphabetically."
+msgstr "Configúrelo en 'Sí' para ordenar las listas de reproducción alfabéticamente."
 
 msgid "Set timer type: zap, simple record, zap+record (always zap to service before start record)."
 msgstr "Establezca el tipo de temporizador: zap, registro simple, zap + registro (siempre vuelva al canal antes de comenzar el registro)"

@@ -23,7 +23,7 @@ from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Components.Playlist import PlaylistIOInternal, PlaylistIOM3U, PlaylistIOPLS
 from Components.config import config
 from Components.SystemInfo import SystemInfo
-from Tools.Directories import fileExists, resolveFilename, SCOPE_CONFIG, SCOPE_PLAYLIST, SCOPE_GUISKIN
+from Tools.Directories import fileExists, resolveFilename, SCOPE_CONFIG, SCOPE_PLAYLIST, SCOPE_GUISKIN, fileContains
 from Tools.BoundFunction import boundFunction
 from Plugins.Extensions.MediaPlayer.settings import MediaPlayerSettings
 import random
@@ -137,7 +137,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			defaultDir = ""
 		if defaultDir == "":
 			defaultDir = None
-		if not config.mediaplayer.saveDirOnExit.value:
+		if not fileContains("/etc/enigma2/settings", "defaultDir=None"):
 			config.mediaplayer.defaultDir.save()
 		self.filelist = FileList(defaultDir, matchingPattern=r"(?i)^.*\.(dts|mp3|wav|wave|wv|oga|ogg|flac|m4a|mp2|m2a|wma|ac3|mka|aac|ape|alac|mpg|vob|m4v|mkv|avi|divx|dat|flv|mp4|mov|wmv|asf|3gp|3g2|mpeg|mpe|rm|rmvb|ogm|ogv|m2ts|mts|ts|m3u|e2pls|pls|amr|au|mid|pva|wtv)", useServiceRef=True, additionalExtensions="4098:m3u 4098:e2pls 4098:pls")
 		self["filelist"] = self.filelist
