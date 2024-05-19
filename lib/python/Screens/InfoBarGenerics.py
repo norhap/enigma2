@@ -3547,6 +3547,8 @@ class InfoBarVmodeButton:
 		policy = config.av.policy_169 if self.isWideScreen() else config.av.policy_43
 		policy.value = policy.choices[(policy.choices.index(policy.value) + 1) % len(policy.choices)]
 		self.VideoMode_window.setText(policy.value)
+		config.av.policy_169.save()
+		config.av.policy_43.save()
 
 	def isWideScreen(self):
 		from Components.Converter.ServiceInfo import WIDESCREEN
