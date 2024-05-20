@@ -278,10 +278,21 @@ class Network:
 				if iface == "eth1":
 					name = _("VLAN connection")  # noqa: F405
 				else:
-					if wirelesslan and getBoxType() not in ("sf8008"):  # STBs with WLAN in last position
-						name = lanname
-						if len(self.lan_interfaces):
-							name = zerotiername if zerotier else openvpnname
+					if wirelesslan:
+						if getBoxType() not in ("sf8008"):  # STBs with WLAN in first position
+							name = lanname
+							if len(self.lan_interfaces):
+								name = zerotiername if zerotier else openvpnname
+						else:  # STBs with WLAN in last position
+							if zerotier:
+								name = zerotiername
+							if openvpn:
+								name = openvpnname
+							if len(self.lan_interfaces):
+								name = lanname
+							else:
+								if config.misc.firstrun.value:
+									name = lanname
 					else:
 						if zerotier:
 							name = zerotiername
