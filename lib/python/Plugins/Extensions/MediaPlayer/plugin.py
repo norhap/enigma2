@@ -1,9 +1,8 @@
 import os
+from glob import glob
 import time
 from enigma import iPlayableService, eTimer, eServiceCenter, iServiceInformation, ePicLoad, eServiceReference, getDesktop
 
-from shutil import move
-from glob import glob
 from ServiceReference import ServiceReference
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -586,26 +585,29 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		menu = []
 		if len(self.cdAudioTrackFiles):
 			menu.insert(0, (_("Play audio-CD..."), "audiocd"))
+		if self.playlist.list:
+			if self.currList != "filelist":
+				menu.append((_("Switch to filelist"), "filelist"))
+			else:
+				menu.append((_("Switch to playlist"), "playlist"))
+			menu.append((_("Save playlist"), "saveplaylist"))
 		if self.currList == "filelist":
 			if self.filelist.canDescent():
 				menu.append((_("Add directory to playlist"), "copydir"))
 			else:
 				menu.append((_("Add files to playlist"), "copyfiles"))
-			menu.append((_("Switch to playlist"), "playlist"))
 			if config.usage.setup_level.index >= 1:  # intermediate+
 				menu.append((_("Delete file"), "deletefile"))
 		else:
-			menu.append((_("Switch to filelist"), "filelist"))
 			menu.append((_("Clear playlist"), "clear"))
 			menu.append((_("Delete entry"), "deleteentry"))
 			if config.usage.setup_level.index >= 1:  # intermediate+
 				menu.append((_("Shuffle playlist"), "shuffle"))
 		menu.append((_("Hide player"), "hide"))
-		menu.append((_("Load playlist"), "loadplaylist"))
+		if glob("/etc/enigma2/playlist/*.e2pls"):
+			menu.append((_("Load playlist"), "loadplaylist"))
+			menu.append((_("Delete saved playlist"), "deleteplaylist"))
 		if config.usage.setup_level.index >= 1:  # intermediate+
-			menu.append((_("Save playlist"), "saveplaylist"))
-			if glob("/etc/enigma2/playlist/*.e2pls") or os.path.exists(resolveFilename(SCOPE_CONFIG, "playlist.e2pls")):
-				menu.append((_("Delete saved playlist"), "deleteplaylist"))
 			menu.append((_("Edit settings"), "settings"))
 		if self.pipZapAvailable:
 			menu.append((_("Menu") + " PiP", "pip"))
@@ -715,16 +717,16 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		self.session.openWithCallback(self.save_playlist2, InputBox, title=_("Please enter filename (empty = use current date)"), windowTitle=_("Save playlist"), text=self.playlistname)
 
 	def save_playlist2(self, name):
-		if name is not None:
-			name = name.strip()
-			if name == "":
-				name = time.strftime("%y%m%d_%H%M%S")
-			self.playlistname = name
-			name += ".e2pls"
-			self.playlistIOInternal.clear()
-			for x in self.playlist.list:
-				self.playlistIOInternal.addService(ServiceReference(x[0]))
-			self.playlistIOInternal.save(resolveFilename(SCOPE_PLAYLIST) + name)
+		if self.playlist.list:
+			if name is not None:
+				name = name.strip()
+				if name == "":
+					name = time.strftime("%y%m%d_%H%M%S.e2pls")
+				self.playlistname = name
+				self.playlistIOInternal.clear()
+				for x in self.playlist.list:
+					self.playlistIOInternal.addService(ServiceReference(x[0]))
+				self.playlistIOInternal.save(resolveFilename(SCOPE_PLAYLIST) + name)
 
 	def get_playlists(self):
 		listpath = []
@@ -742,8 +744,6 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 		listpath = self.get_playlists()
 		if listpath:
 			self.session.openWithCallback(self.PlaylistSelected, ChoiceBox, title=_("Please select a playlist..."), list=listpath)
-		else:
-			self.session.open(MessageBox, _("There are no saved playlists to load!"), MessageBox.TYPE_ERROR)
 
 	def PlaylistSelected(self, path):
 		if path is not None:
@@ -758,32 +758,22 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			self.playlist.updateList()
 
 	def delete_saved_playlist(self):
-		if os.path.exists(str(self.playliste2pls)) and not os.path.exists(resolveFilename(SCOPE_PLAYLIST, "playlist.e2pls")):
-			move(self.playliste2pls, resolveFilename(SCOPE_PLAYLIST))
 		listpath = self.get_playlists()
 		if listpath:
 			self.session.openWithCallback(self.DeletePlaylistSelected, ChoiceBox, title=_("Please select a playlist to delete..."), list=listpath)
-		else:
-			self.session.open(MessageBox, _("There are no saved playlists to delete!"), MessageBox.TYPE_ERROR)
 
 	def DeletePlaylistSelected(self, path):
 		if path is not None:
 			self.delname = path[1]
-			if "playlist.e2pls" in (path[1]):
-				config.mediaplayer.savePlaylistOnExit.value = False
-				config.mediaplayer.savePlaylistOnExit.save()
 			self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s ?") % (path[1]))
 
 	def deleteConfirmed(self, confirmed):
 		if confirmed:
 			try:
 				os.remove(self.delname)
-				if os.path.exists(str(self.playliste2pls)):
-					os.remove(self.playliste2pls)
 			except OSError as e:
 				print("[MediaPlayer] delete failed:", e)
 				self.session.open(MessageBox, _("Delete failed!"), MessageBox.TYPE_ERROR)
-			self.clear_playlist()
 
 	def clear_playlist(self):
 		self.isAudioCD = False
