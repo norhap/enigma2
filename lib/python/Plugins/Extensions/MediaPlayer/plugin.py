@@ -609,7 +609,9 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			menu.append((_("Delete saved playlist"), "deleteplaylist"))
 		if config.usage.setup_level.index >= 1:  # intermediate+
 			menu.append((_("Edit settings"), "settings"))
-		if self.pipZapAvailable:
+		if self.pipZapAvailable and not hasattr(InfoBar.instance.session, "pip"):
+			menu.append((_("Activate Picture in Picture"), "pip"))
+		elif hasattr(InfoBar.instance.session, "pip"):
 			menu.append((_("Menu") + " PiP", "pip"))
 			if self.isPiPzap():
 				menu.append((_("Open service list"), "servicelist"))

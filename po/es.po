@@ -4355,7 +4355,7 @@ msgid "Move PiP to main picture"
 msgstr "Mover PiP a la imagen principal"
 
 msgid "Move Picture in Picture"
-msgstr "Mover Picture in Picture"
+msgstr "Mover PiP"
 
 msgid "Move east"
 msgstr "Mueve al este"
@@ -9804,9 +9804,6 @@ msgstr "pausando"
 
 msgid "performing arts"
 msgstr "artes escénicas"
-
-msgid "Play as Picture in Picture"
-msgstr "Activar PiP"
 
 msgid "play in mainwindow"
 msgstr "reproducir en ventana principal"

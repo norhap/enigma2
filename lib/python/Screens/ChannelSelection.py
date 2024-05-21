@@ -257,7 +257,7 @@ class ChannelContextMenu(Screen):
 						if self.csel.dopipzap:
 							append_when_current_valid(current, menu, (_("Play in main window"), self.playMain), level=0, key="red")
 						else:
-							append_when_current_valid(current, menu, (_("Play as Picture in Picture"), self.showServiceInPiP), level=0, key="blue")
+							append_when_current_valid(current, menu, (_("Activate Picture in Picture"), self.showServiceInPiP), level=0, key="blue")
 					append_when_current_valid(current, menu, (_("Find currently playing service"), self.findCurrentlyPlayed), level=0, key="3")
 				else:
 					if 'FROM SATELLITES' in current_root.getPath() and current and _("Services") in eServiceCenter.getInstance().info(current).getName(current):
