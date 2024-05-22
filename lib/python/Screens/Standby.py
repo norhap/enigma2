@@ -21,7 +21,7 @@ from gettext import ngettext
 
 inStandby = None
 infoBarInstance = None
-TVinStandby = None
+# TVinStandby = None
 
 QUIT_SHUTDOWN = 1
 QUIT_REBOOT = 2
@@ -40,10 +40,10 @@ QUIT_WOL = 45
 
 class TVstate:  # load in Navigation
 	def __init__(self):
-		global TVinStandby
-		if TVinStandby is not None:
-			print("[Standby] only one TVstate instance is allowed!")
-		TVinStandby = self
+#		global TVinStandby
+#		if TVinStandby is not None:
+#			print("[Standby] only one TVstate instance is allowed!")
+#		TVinStandby = self
 
 		try:
 			import Components.HdmiCec
@@ -96,6 +96,9 @@ class TVstate:  # load in Navigation
 				self.hdmicec_instance.wakeupMessages()
 			elif value == 'standby':
 				self.hdmicec_instance.standbyMessages()
+
+
+tvState = TVstate()
 
 
 def isInfoBarInstance():

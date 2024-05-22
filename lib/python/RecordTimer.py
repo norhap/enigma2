@@ -19,6 +19,7 @@ from Components.UsageConfig import defaultMoviePath, preferredInstantRecordPath,
 from Screens.MessageBox import MessageBox
 from Screens.PictureInPicture import PictureInPicture
 import Screens.Standby
+from Screens.Standby import tvState
 import Screens.InfoBar
 from Tools import ASCIItranslit, Trashcan
 from Tools.Alternatives import ResolveCiAlternative
@@ -1063,7 +1064,7 @@ class RecordTimerEntry(TimerEntry, object):
 		self.log(5, "Activating state %d." % next_state)
 		if next_state == self.StatePrepared:
 			if self.always_zap:
-				Screens.Standby.TVinStandby.skipHdmiCecNow('zapandrecordtimer')
+				tvState.skipHdmiCecNow('zapandrecordtimer')
 				if Screens.Standby.inStandby:
 					self.log(5, "Wakeup and zap to recording service.")
 					RecordTimerEntry.setWasInStandby()
@@ -1147,7 +1148,7 @@ class RecordTimerEntry(TimerEntry, object):
 			if self.cancelled:
 				return True
 			if self.justplay:
-				Screens.Standby.TVinStandby.skipHdmiCecNow('zaptimer')
+				tvState.skipHdmiCecNow('zaptimer')
 				if Screens.Standby.inStandby:
 					if RecordTimerEntry.wasInDeepStandby and self.zap_wakeup in ("always", "from_deep_standby") or self.zap_wakeup in ("always", "from_standby"):
 						self.log(11, "Wake up and zap.")
