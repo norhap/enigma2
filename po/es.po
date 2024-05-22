@@ -1907,8 +1907,8 @@ msgstr "Fecha"
 msgid "Deactivate movement"
 msgstr "Desactivar movimiento"
 
-msgid "Date/time input"
-msgstr "Entrada de fecha/hora"
+msgid "Enter date and time"
+msgstr "Introducir fecha y hora"
 
 msgid "Deep standby"
 msgstr "Reposo profundo"
@@ -11068,6 +11068,12 @@ msgstr "Seleccione el modo en que debe mostrarse la televisión en vivo en la pa
 
 msgid "Set fps for external subtitles"
 msgstr "Establecer fps para subtítulos externos"
+
+msgid "Set the date."
+msgstr "Establezca la fecha."
+
+msgid "Set the time."
+msgstr "Establezca la hora."
 
 msgid "Set the type of the progress indication in the channel selection screen."
 msgstr "Establecer el tipo de indicación de progreso en la lista de canales."

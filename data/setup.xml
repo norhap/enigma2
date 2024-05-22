@@ -393,6 +393,10 @@
 		<item level="1" text="Time synchronization method" description="Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available.">config.ntp.timesync</item>
 		<item level="1" text="NTP Hostname" conditional="config.ntp.timesync.value != 'dvb'" description="The hostname or the IP address of the NTP server to synchronise the time with.">config.ntp.server</item>
 	</setup>
+	<setup key="TimeDateInput" title="Enter date and time">
+		<item level="0" text="Date" description="Set the date.">self.timeinput_date </item>
+		<item level="0" text="Time" description="Set the time.">self.timeinput_time</item>
+	</setup>
 	<setup key="Timeshift" title="Timeshift Setup">
 		<item level="0" text="Location of recordings in Timeshift" description="Set the default location for your timeshift files. Press OK to add new locations, LEFT/RIGHT to select any existing locations.">config.usage.timeshift_path</item>
 		<item level="1" text="Automatically start timeshift after" description="When enabled, timeshift starts automatically in background after the specified time. Timeshift recording will start for each started service, the previous one is deleted. This background recording is not saved unless you press the PLAY-PAUSE, if zap to another service then you will have options to save the previous service recording.">config.usage.timeshift_start_delay</item>
