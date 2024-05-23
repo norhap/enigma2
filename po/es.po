@@ -2098,6 +2098,9 @@ msgstr "Desactivar PiP - Desactivar en LCD MiniTV"
 msgid "Disable current event but not coming events"
 msgstr "Desactivar evento actual pero no los siguientes"
 
+msgid "Disable operator profiles"
+msgstr "Deshabilitar perfiles de operador"
+
 msgid "Disable timer"
 msgstr "Desactivar temporizador"
 
@@ -2652,6 +2655,9 @@ msgstr "En todos lados"
 
 msgid "Exceeds dual layer medium!"
 msgstr "Excede el medio de doble capa!"
+
+msgid "Exclude first CA device"
+msgstr "Excluir el primer dispositivo CA"
 
 msgid "Execution finished!!"
 msgstr "Ejecución finalizada!"

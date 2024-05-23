@@ -47,6 +47,7 @@ def InitCiConfig():
 			config.ci[slot].static_pin = ConfigPIN(default=0)
 			config.ci[slot].show_ci_messages = ConfigYesNo(default=True)
 			config.ci[slot].disable_operator_profile = ConfigYesNo(default=False)
+			config.ci[slot].exclude_ca0_device = ConfigYesNo(default=False)
 			if SystemInfo["CI%dSupportsHighBitrates" % slot]:
 				highBitrateChoices = [("normal", _("normal")), ("high", _("high"))]
 				if exists("/proc/stb/tsmux/ci%d_tsclk_choices" % slot):
@@ -480,6 +481,7 @@ class CiSelection(Screen):
 		self.list.append(getConfigListEntry(_("Show CI messages"), config.ci[slot].show_ci_messages, 3, slot))
 		self.list.append(getConfigListEntry(_("Disable operator profiles"), config.ci[slot].disable_operator_profile, 3, slot))
 		self.list.append(getConfigListEntry(_("Multiple service support"), config.ci[slot].canDescrambleMultipleServices, 3, slot))
+		self.list.append((_("Exclude first CA device"), config.ci[slot].exclude_ca0_device, 3, slot))
 		if SystemInfo["CI%dSupportsHighBitrates" % slot]:
 			self.list.append(getConfigListEntry(_("High bitrate support"), config.ci[slot].highBitrate, 3, slot))
 		if SystemInfo["CI%dRelevantPidsRoutingSupport" % slot]:
