@@ -97,6 +97,7 @@ class MediaPlayerInfoBar(Screen):
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
+		self["statusicon"] = MultiPixmap()
 		self.skinName = "MoviePlayer"
 
 
