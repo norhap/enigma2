@@ -605,7 +605,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			if config.usage.setup_level.index >= 1:  # intermediate+
 				menu.append((_("Shuffle playlist"), "shuffle"))
 		if not self.mediaPlayerInfoBar.shown:
-			menu.append((_("Hide player"), "hide"))
+			menu.append((_("Hide lists"), "hide"))
 		if glob("/etc/enigma2/playlist/*.e2pls"):
 			menu.append((_("Load playlist"), "loadplaylist"))
 			menu.append((_("Delete saved playlist"), "deleteplaylist"))

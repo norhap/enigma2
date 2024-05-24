@@ -11,7 +11,7 @@ config.mediaplayer.savePlaylistOnExit = ConfigYesNo(default=True)
 config.mediaplayer.saveDirOnExit = ConfigYesNo(default=False)
 config.mediaplayer.defaultDir = ConfigDirectory()
 config.mediaplayer.sortPlaylists = ConfigYesNo(default=False)
-config.mediaplayer.alwaysHideInfoBar = ConfigYesNo(default=True)
+config.mediaplayer.alwaysHideInfoBar = ConfigYesNo(default=False)
 config.mediaplayer.onMainMenu = ConfigYesNo(default=True)
 
 

@@ -3527,8 +3527,8 @@ msgstr "Ocultar extensiones de archivos"
 msgid "Hide parentel locked services"
 msgstr "Ocultar los canales de bloqueo parental"
 
-msgid "Hide player"
-msgstr "Ocultar reproductor"
+msgid "Hide lists"
+msgstr "Ocultar listas"
 
 msgid "Hierarchy info"
 msgstr "Info Jerarquía"
