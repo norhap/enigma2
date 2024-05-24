@@ -1,4 +1,5 @@
 from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo, ConfigEnableDisable, ConfigSubsection, ConfigBoolean, ConfigSelectionNumber, ConfigNothing, NoSave
+from Components.About import getChipSet
 from enigma import eAVControl, eDVBVolumecontrol
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, MODEL
 from os.path import exists
@@ -229,7 +230,7 @@ def InitAVSwitch():
 					("422", _("422")),
 					("444", _("444"))
 				]
-				default = "auto"
+				default = "auto" if getChipSet() not in ("3798mv200") else "420"
 
 		def setHDMIColorspace(configElement):
 			open("/proc/stb/video/hdmi_colorspace", "w").write(configElement.value)

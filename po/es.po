@@ -7788,8 +7788,8 @@ msgstr "Esta opción le permite configurar la profundidad de color para UHD"
 msgid "This option allows you to configure the Colorimetry for HDR."
 msgstr "Esta opción le permite configurar la colorimetría para HDR."
 
-msgid "This option allows you to configure the Colorspace from Auto to RGB"
-msgstr "Esta opción le permite configurar el espacio de color, de automático a RGB"
+msgid "This option allows you to configure the Colorspace HDMI."
+msgstr "Esta opción le permite configurar el espacio de color HDMI."
 
 msgid "This option allows you to configure the HDR type."
 msgstr "Esta opción te permite configurar el tipo de HDR."

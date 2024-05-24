@@ -202,7 +202,7 @@ def getChipSetString():
 		return _("undefined")
 
 
-def getChipSetNumber():
+def getChipSet():
 	try:
 		f = open('/proc/stb/info/chipset', 'r')
 		chipset = f.read()

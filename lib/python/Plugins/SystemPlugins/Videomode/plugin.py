@@ -94,7 +94,7 @@ class VideoSetup(ConfigListScreen, Screen):
 				if SystemInfo["Canedidchecking"]:
 					self.list.append(getConfigListEntry(_("Bypass HDMI EDID checking"), config.av.bypass_edid_checking, _("Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs.")))
 				if SystemInfo["havehdmicolorspace"]:
-					self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you to configure the Colorspace from Auto to RGB")))
+					self.list.append(getConfigListEntry(_("HDMI Colorspace"), config.av.hdmicolorspace, _("This option allows you to configure the Colorspace HDMI.")))
 				if SystemInfo["havehdmicolordepth"]:
 					self.list.append(getConfigListEntry(_("HDMI Colordepth"), config.av.hdmicolordepth, _("This option allows you to configure the Colordepth for UHD")))
 				if SystemInfo["havehdmicolorimetry"]:

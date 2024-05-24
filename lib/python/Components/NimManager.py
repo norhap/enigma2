@@ -7,7 +7,7 @@ from time import localtime, mktime
 from enigma import eDVBDB, eDVBFrontendParametersSatellite, eDVBResourceManager, eDVBSatelliteDiseqcParameters as diseqcParam, eDVBSatelliteEquipmentControl as secClass, eDVBSatelliteRotorParameters as rotorParam, eDVBSatelliteSwitchParameters as switchParam
 
 from Components.config import ConfigDateTime, ConfigFloat, ConfigInteger, ConfigNothing, ConfigOnOff, ConfigSatlist, ConfigSelection, ConfigSubDict, ConfigSubList, ConfigSubsection, ConfigText, ConfigYesNo, config
-from Components.About import getChipSetNumber
+from Components.About import getChipSet
 from Components.SystemInfo import SystemInfo
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_SKINS, fileReadXML, resolveFilename
@@ -117,7 +117,7 @@ class SecConfigure:
 
 	def linkNIMs(self, sec, nim1, nim2):
 		print("[NimManager] SecConfigure: Link tuner '%s' to tuner '%s'." % (nim1, nim2))
-		if (nim2 == nim1 - 1) or '7356' in getChipSetNumber():
+		if (nim2 == nim1 - 1) or '7356' in getChipSet():
 			self.linkInternally(nim1)
 		sec.setTunerLinked(nim1, nim2)
 
@@ -914,7 +914,7 @@ class NimManager:
 			entry["internally_connectable"] = None
 			if "frontend_device" in entry:  # check if internally connectable
 				if exists("/proc/stb/frontend/%d/rf_switch" % entry["frontend_device"]) and (not id or entries[id]["name"] == entries[id - 1]["name"]):
-					if '7356' in getChipSetNumber():
+					if '7356' in getChipSet():
 						if not id:
 							entry["internally_connectable"] = 1
 					elif id:
