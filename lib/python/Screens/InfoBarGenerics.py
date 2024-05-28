@@ -2463,19 +2463,19 @@ class InfoBarExtensions:
 		self.extensionsList.append(extension)
 		if key is not None and key in self.extensionKeys:
 			key = None
-
 		if key is None:
 			for x in self.availableKeys:
 				if x not in self.extensionKeys:
 					key = x
 					break
-
 		if key is not None:
 			self.extensionKeys[key] = len(self.extensionsList) - 1
 
 	def updateExtensions(self):
 		self.extensionsList = []
-		self.availableKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "red", "green", "yellow", "blue", "bullet"]
+		self.allExtensionsList = list("1234567890abcdefghijklmnopqrstuvwxyz")
+		self.availableKeys = ["red", "green", "yellow", "blue", "bullet"]
+		self.availableKeys[5:5] = self.allExtensionsList
 		self.extensionKeys = {}
 		for x in self.list:
 			if x[0] == self.EXTENSION_SINGLE:
