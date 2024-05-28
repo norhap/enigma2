@@ -3871,8 +3871,8 @@ msgstr "Italiano"
 msgid "Italy"
 msgstr "Italia"
 
-msgid "Items per page "
-msgstr "Canales por página "
+msgid "Items per page"
+msgstr "Canales por página"
 
 msgid "Items per page for list screen"
 msgstr "Canales por página en lista con pantalla"
@@ -5458,6 +5458,9 @@ msgstr "Vista previa del canal seleccionado"
 
 msgid "Primary DNS"
 msgstr "DNS Primario"
+
+msgid "Prime time"
+msgstr "Hora máxima audiencia"
 
 msgid ""
 "Add autotimer\n"
