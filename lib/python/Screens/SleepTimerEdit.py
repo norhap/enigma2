@@ -8,7 +8,7 @@ from time import time, localtime, mktime
 
 class SleepTimerEdit(Setup):
 	def __init__(self, session):
-		Setup.__init__(self, session, None)
+		Setup.__init__(self, session, None, blue_button={'function': self.startSleeptimer, 'helptext': _("Start - Stop Sleeptimer")})
 		self.skinName = ["SleepTimerSetup", "Setup"]
 		self.setTitle(_("SleepTimer Configuration"))
 
@@ -99,19 +99,21 @@ class SleepTimerEdit(Setup):
 						config.usage.wakeup_time[i]))
 		self["config"].list = conflist
 		self["config"].l.setList(conflist)
+		self["key_blue"].text = _("Stop Sleeptimer") if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
 
 	def keySave(self):
 		if self["config"].isChanged():
 			Setup.keySave(self)
-		if self.getCurrentEntry().startswith(_("Sleeptimer")):
-			sleepTimer = config.usage.sleep_timer.value
-			if sleepTimer == "event_standby":
-				sleepTimer = self.currentEventTime()
-			else:
-				sleepTimer = int(sleepTimer)
-			if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
-				InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
-			self.close(True)
+
+	def startSleeptimer(self):
+		sleepTimer = config.usage.sleep_timer.value
+		if sleepTimer == "event_standby":
+			sleepTimer = self.currentEventTime()
+		else:
+			sleepTimer = int(sleepTimer)
+		if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
+			InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
+		Setup.keySave(self)
 
 	def currentEventTime(self):
 		remaining = 0

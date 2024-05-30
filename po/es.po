@@ -7219,6 +7219,15 @@ msgstr "Comenzar decodificado offline"
 msgid "Start recording?"
 msgstr "Comenzar grabación?"
 
+msgid "Start - Stop Sleeptimer"
+msgstr "Iniciar - Parar Temporizador de descanso"
+
+msgid "Start Sleeptimer"
+msgstr "Iniciar Temporizador de descanso"
+
+msgid "Stop Sleeptimer"
+msgstr "Parar Temporizador de descanso"
+
 msgid "Start teletext"
 msgstr "Iniciar Teletexto"
 
