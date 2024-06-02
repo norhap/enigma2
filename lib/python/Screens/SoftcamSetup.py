@@ -149,13 +149,6 @@ class SoftcamSetup(Setup):
 		if newEcmFound:
 			self["info"].setText("".join(ecmInfo))
 
-	def restartSoftcam(self):
-		self.restart(device="s")
-
-	def restartCardServer(self):
-		if hasattr(self, "cardservers"):
-			self.restart(device="c")
-
 
 class StreamRelaySetup(Setup):
 	def __init__(self, session):
