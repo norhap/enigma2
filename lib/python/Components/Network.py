@@ -279,7 +279,7 @@ class Network:
 					name = _("VLAN connection")  # noqa: F405
 				else:
 					if wirelesslan:
-						if getBoxType() not in ("sf8008"):  # STBs with WLAN in first position
+						if getBoxType() not in ("sf8008", "vuuno4kse"):  # STBs with WLAN in first position
 							name = lanname
 							if len(self.lan_interfaces):
 								name = zerotiername if zerotier else openvpnname
