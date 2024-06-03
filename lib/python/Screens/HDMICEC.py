@@ -10,9 +10,11 @@ class HDMICECSetup(Setup):
 		Setup.__init__(self, session=session, setup="HDMICEC")
 		self.setTitle(_("HDMI-CEC Settings"))
 		self["addressActions"] = HelpableActionMap(self, ["ColorActions"], {
+			"green": self.keySave,
 			"yellow": (self.updateFixedAddress, _("Set current CEC address as fixed address"))
 		}, prio=0, description=_("HDMI-CEC Setup Actions"))
 		self["defaultActions"] = HelpableActionMap(self, ["ColorActions"], {
+			"green": self.keySave,
 			"blue": (self.setDefaults, _("Reset HDMI-CEC settings to default"))
 		}, prio=0, description=_("HDMI-CEC Setup Actions"))
 		self["key_yellow"] = StaticText()
