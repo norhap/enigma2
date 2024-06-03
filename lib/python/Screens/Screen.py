@@ -265,7 +265,7 @@ class Screen(dict):
 					if depr:
 						print(f"[Screen] WARNING: OBSOLETE COMPONENT {name} USED IN SKIN. USE {depr[0]} INSTEAD!")
 						print(f"[Screen] OBSOLETE COMPONENT WILL BE REMOVED {depr[1]}, PLEASE UPDATE!")
-				elif not depr and key not in self.ignoreWidgets:
+				elif not depr and name not in self.ignoreWidgets:
 					print(f"[Screen] Warning: Skin is missing element {name} in {str(self)}.")
 		for item in self.additionalWidgets:
 			if not updateonly:
