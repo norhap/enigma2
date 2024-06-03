@@ -415,7 +415,6 @@
 		<item level="1" text="Show setup default value" description="This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description.">config.usage.setupShowDefault</item>
 		<item level="0" text="Add legacy LEFT/RIGHT actions" description="Select 'Yes' to enable use of the LEFT/RIGHT buttons to move PageUp/PageDown when the LEFT/RIGHT buttons are otherwise undefined. This provides legacy navigation for users who prefer it.">config.misc.actionLeftRightToPageUpPageDown</item>
 		<item level="1" text="Show screen path" description="This option allows you to show the full screen path leading to the current screen.">config.usage.showScreenPath</item>
-		<item level="0" text="Show menu or plugin numbers" description="This option allows you to show menu and/or plugin number quick links.">config.usage.menu_show_numbers</item>
 		<item level="0" text="Input scroll position" description="When the input cursor reaches this point (percentage of the width, from either side) scroll the text to the cursor.">config.usage.cursorscroll</item>
 		<item level="2" text="Show softcam setup in extensions menu" description="This option allows you to add the softcam setup in the extensions menu." requires="HasSoftcamInstalled">config.misc.softcam_setup.extension_menu</item>
 		<item level="1" text="Zap mode" requires="ZapMode" description="Configure the way in which your %s %s changes channels.">config.misc.zapmode</item>
@@ -521,6 +520,7 @@
 		<item level="2" text="Show VCR scart on main menu" description="When enabled, the VCR scart option will be shown on the main menu" requires="ScartSwitch">config.usage.show_vcr_scart</item>
 		<item level="2" text="Show Boolean values as graphical switch" description="Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch.">config.usage.boolean_graphic</item>
 		<item level="2" text="Show additional slider value" description="Enable the current value of the slider at end of the slider bar.">config.usage.show_slider_value</item>
+		<item level="0" text="Show menu numbers" description="This option allows you to display numbers that will directly access the menu.">config.usage.menu_show_numbers</item>		
 		<item level="0" text="Sort order for help screen" description="Choose the order in which items are displayed in Help windows">config.usage.helpSortOrder</item>
 		<item level="0" text="Animation speed of help indicators" description="Control the animation speed of the button indicators in the Help screen. 'Disabled' turns off animation so that indicators jump between buttons.">config.usage.helpAnimationSpeed</item>
 	</setup>

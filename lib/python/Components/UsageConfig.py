@@ -168,12 +168,7 @@ def InitUsageConfig():
 		config.usage.show_genre_info = ConfigYesNo(default=True)
 	else:
 		config.usage.show_genre_info = ConfigYesNo(default=False)
-	config.usage.menu_show_numbers = ConfigSelection(default="no", choices=[
-		("no", _("No")),
-		("menu&plugins", _("In menu and plugins")),
-		("menu", _("In menu only")),
-		("plugins", _("In plugins only"))
-	])
+	config.usage.menu_show_numbers = ConfigYesNo(default=False)
 	config.usage.showScreenPath = ConfigSelection(default="small", choices=[
 		("off", _("Disabled")),
 		("small", _("Small")),

@@ -363,7 +363,7 @@ class Menu(Screen, ProtectedScreen):
 		self.okbuttonClick()
 
 	def showHelp(self):
-		if config.usage.menu_show_numbers.value not in ("menu&plugins", "menu"):
+		if not config.usage.menu_show_numbers.value:
 			self.showNumericHelp = not self.showNumericHelp
 			self.createMenuList(self.showNumericHelp)
 
@@ -431,7 +431,7 @@ class Menu(Screen, ProtectedScreen):
 			# Sort by Weight
 			self.list.sort(key=lambda x: int(x[3]))
 
-		if config.usage.menu_show_numbers.value in ("menu&plugins", "menu") or showNumericHelp:
+		if config.usage.menu_show_numbers.value or showNumericHelp:
 			self.list = [(str(x[0] + 1) + " " + x[1][0], x[1][1], x[1][2]) for x in enumerate(self.list)]
 
 		self["menu"].setList(self.list)
