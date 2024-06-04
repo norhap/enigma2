@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from enigma import eDVBDB, getLinkedSlotID, eDVBResourceManager
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Components.SystemInfo import SystemInfo
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigListScreen
 from Components.NimManager import nimmanager
 from Components.Button import Button
 from Components.Label import Label
@@ -23,7 +23,18 @@ from time import mktime, localtime, time
 from datetime import datetime
 
 
-class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
+class NimSetup(Setup, ServiceStopScreen):
+	def __init__(self, session, slotid):
+		self.slotid = slotid
+		self.nim = nimmanager.nim_slots[slotid]
+		self.nimConfig = self.nim.config
+		Setup.__init__(self, session, None,
+			yellow_button={'function': self.key_yellow, 'helptext': _("Toggle Configuration Mode or Auto DiSEqC")},
+			blue_button={'function': self.key_blue, 'helptext': _("Set all the settings back as they were")})
+		ServiceStopScreen.__init__(self)
+		self.createSetup()
+		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
+
 	def createSimpleSetup(self, list, mode):
 		nim = self.nimConfig
 
@@ -319,10 +330,10 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		self.setTextKeyYellow()
+		self["key_yellow"].setText((self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value)) and _("Auto DiSEqC") or self.configMode and _("Configuration mode") or "")
+		self["key_blue"].setText(self.isChanged() and _("Set default") or "")
 
 	def newConfig(self):
-		self.setTextKeyBlue()
 		if self["config"].getCurrent() == self.multiType:
 			update_slots = [self.slotid]
 			from Components.NimManager import InitNimManager
@@ -536,7 +547,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			self.fillListWithAdvancedSatEntrys(Sat)
 		self["config"].list = self.list
 
-	def keyOk(self):
+	def keySelect(self):
 		if self.isChanged():
 			self.stopService()
 		if self["config"].getCurrent() == self.advancedSelectSatsEntry:
@@ -546,7 +557,7 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 			conf = self.nimConfig.userSatellitesList
 			self.session.openWithCallback(boundFunction(self.updateConfUserSatellitesList, conf), SelectSatsEntryScreen, userSatlist=conf.value)
 		else:
-			self.keySave()
+			Setup.keySelect(self)
 
 	def updateConfUserSatellitesList(self, conf, val=None):
 		if val is not None:
@@ -598,60 +609,36 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		else:
 			self.restartPrevService()
 
-	def __init__(self, session, slotid):
-		Screen.__init__(self, session)
-		self.list = []
-		ServiceStopScreen.__init__(self)
-		ConfigListScreen.__init__(self, self.list, on_change=self.changedEntry)
-
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self["key_yellow"] = StaticText("")
-		self["key_blue"] = StaticText("")
-		self["description"] = Label("")
-		self["actions"] = ActionMap(["SetupActions", "SatlistShortcutAction"],
-		{
-			"ok": self.keyOk,
-			"save": self.keySave,
-			"cancel": self.keyCancel,
-			"changetype": self.changeConfigurationMode,
-			"left": self.keyLeft,
-			"right": self.keyRight,
-			"nothingconnected": self.nothingConnectedShortcut
-		}, -2)
-
-		self.slotid = slotid
-		self.nim = nimmanager.nim_slots[slotid]
-		self.nimConfig = self.nim.config
-		self.createSetup()
-		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
+	def changedEntry(self):
+		current = self["config"].getCurrent()
+		if current[1].isChanged():
+			self.manipulatedItems.append(current)  # keep track of all manipulated items including ones that have been removed from self["config"].list
+		elif current in self.manipulatedItems:
+			self.manipulatedItems.remove(current)
+		if isinstance(current[1], (ConfigBoolean, ConfigSelection)):
+			self.createSetup()
+		Setup.changedEntry(self)  # force summary update immediately, not just on select/deselect
 
 	def keyLeft(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
 			return
-		ConfigListScreen.keyLeft(self)
+		Setup.keyLeft(self)
 		if self["config"].getCurrent() in (self.advancedSelectSatsEntry, self.selectSatsEntry):
 			self.keyOk()
 		else:
 			self.newConfig()
 
-	def setTextKeyYellow(self):
-		self["key_yellow"].setText((self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value)) and _("Auto DiSEqC") or self.configMode and _("Configuration mode") or "")
-
-	def setTextKeyBlue(self):
-		self["key_blue"].setText(self.isChanged() and _("Set default") or "")
-
 	def keyRight(self):
 		if self.nim.isFBCLink() and self["config"].getCurrent() in (self.advancedLof, self.advancedConnected):
 			return
-		ConfigListScreen.keyRight(self)
+		Setup.keyRight(self)
 		if self["config"].getCurrent() in (self.advancedSelectSatsEntry, self.selectSatsEntry):
 			self.keyOk()
 		else:
 			self.newConfig()
 
 	def handleKeyFileCallback(self, answer):
-		ConfigListScreen.handleKeyFileCallback(self, answer)
+		Setup.handleKeyFileCallback(self, answer)
 		self.newConfig()
 
 	def keyCancel(self):
@@ -724,20 +711,18 @@ class NimSetup(ConfigListScreen, ServiceStopScreen, Screen):
 		self.saveAll()
 		self.restartPrevService()
 
-	def changeConfigurationMode(self):
+	def key_yellow(self):
 		if self.nimConfig.configMode.value == "simple" and self.nimConfig.diseqcMode.value in ("single", "diseqc_a_b", "diseqc_a_b_c_d") and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value):
 			self.autoDiseqcRun(self.nimConfig.diseqcMode.value == "diseqc_a_b_c_d" and 4 or self.nimConfig.diseqcMode.value == "diseqc_a_b" and 2 or 1)
 		elif self.configMode:
 			self.nimConfig.configMode.selectNext()
 			self["config"].invalidate(self.configMode)
-			self.setTextKeyBlue()
 			self.createSetup()
 
-	def nothingConnectedShortcut(self):
+	def key_blue(self):
 		if self.isChanged():
 			for x in self["config"].list:
 				x[1].cancel()
-			self.setTextKeyBlue()
 			self.createSetup()
 
 	def countrycodeToCountry(self, cc):

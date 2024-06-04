@@ -54,7 +54,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		<widget name="HelpWindow" position="0,0" size="0,0" alphaTest="blend" conditional="HelpWindow" transparent="1" zPosition="+1" />
 	</screen>"""
 
-	def __init__(self, session, setup, plugin=None, PluginLanguageDomain=None):
+	def __init__(self, session, setup=None, plugin=None, PluginLanguageDomain=None, yellow_button=None, blue_button=None):
 		Screen.__init__(self, session, mandatoryWidgets=["config", "footnote", "description"])
 		HelpableScreen.__init__(self)
 		self.setup = setup
@@ -67,7 +67,7 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 			self.skinName.append("Setup%s" % setup)
 		self.skinName.append("Setup")
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry, fullUI=True)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry, fullUI=True, yellow_button=yellow_button, blue_button=blue_button)
 		self["footnote"] = Label()
 		self["footnote"].hide()
 		self["description"] = Label()

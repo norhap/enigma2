@@ -5758,8 +5758,14 @@ msgstr "Botón VERDE"
 msgid "YELLOW button"
 msgstr "Botón AMARILLO"
 
+msgid "YELLOW button function"
+msgstr "Función del botón AMARILLO"
+
 msgid "BLUE button"
 msgstr "Botón AZUL"
+
+msgid "BLUE button function"
+msgstr "Función del botón AZUL"
 
 msgid "Receiver does not support Quad PiP."
 msgstr "El receptor no soporta Quad PiP."
@@ -8069,6 +8075,9 @@ msgstr "Alternar el modo TV/RADIO"
 
 msgid "Toggle a cut mark at the current position"
 msgstr "Alternar una marca de corte en la posición actual"
+
+msgid "Toggle Configuration Mode or Auto DiSEqC"
+msgstr "Alternar modo de configuración o Auto DiSEqC"
 
 msgid "Toggle dashed flickering line for this service"
 msgstr "Alternar la línea parpadeante discontinua para este canal"
@@ -11084,6 +11093,9 @@ msgstr "Repetición de texto"
 
 msgid "Selects the mode how live tv should be shown on the LCD."
 msgstr "Seleccione el modo en que debe mostrarse la televisión en vivo en la pantalla LCD."
+
+msgid "Set all the settings back as they were"
+msgstr "Restablecer todas las configuraciones como estaban"
 
 msgid "Set fps for external subtitles"
 msgstr "Establecer fps para subtítulos externos"
