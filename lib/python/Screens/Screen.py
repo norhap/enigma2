@@ -115,7 +115,7 @@ class Screen(dict):
 			self.session.close(self, *retval)
 
 	def show(self):
-		BoxInfo.setItem("StreamRelay", True if fileContains("/etc/enigma2/whitelist_streamrelay", ":") or str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]") else False)
+		BoxInfo.setItem("StreamRelay", True if fileContains("/etc/enigma2/whitelist_streamrelay", ":") or str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]") or str(ProcessList().named("ncam")).strip("[]") else False)
 		print(f"[Screen] Showing screen {self.skinName}.")  # To ease identification of screens.
 		# DEBUG: if (self.shown and self.alreadyShown) or not self.instance:
 		if (self.shown and self.already_shown) or not self.instance:

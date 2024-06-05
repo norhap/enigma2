@@ -217,6 +217,8 @@ class ChannelContextMenu(Screen):
 								self.configStreamRelay = "/etc/tuxbox/config/oscam/oscam.conf"
 							elif str(ProcessList().named("oscam-emu")).strip("[]"):
 								self.configStreamRelay = "/etc/tuxbox/config/oscam-emu/oscam.conf"
+							elif str(ProcessList().named("ncam")).strip("[]"):
+								self.configStreamRelay = "/etc/tuxbox/config/ncam/ncam.conf"
 							if self.configStreamRelay:
 								if isfile("/etc/enigma2/iptosat.json"):
 									with open("/etc/enigma2/iptosat.json", "r") as fr:
@@ -271,7 +273,7 @@ class ChannelContextMenu(Screen):
 					if haveBouquets:
 						if not self.inBouquet and "PROVIDERS" not in current_sel_path:
 							append_when_current_valid(current, menu, (_("Copy to bouquets"), self.copyCurrentToBouquetList), level=0)
-							if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
+							if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]") or str(ProcessList().named("ncam")).strip("[]"):
 								append_when_current_valid(current, menu, (_("Copy To Stream Relay"), self.copyCurrentToStreamRelay))
 					if ("flags == %d" % (FLAG_SERVICE_NEW_FOUND)) in current_sel_path:
 						append_when_current_valid(current, menu, (_("Remove all new found flags"), self.removeAllNewFoundFlags), level=0)
@@ -384,7 +386,7 @@ class ChannelContextMenu(Screen):
 			Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
 			self.close()
 		else:
-			self.session.open(MessageBox, _("StreamRelay is disabled in OSCam"), MessageBox.TYPE_ERROR, default=False, simple=True, timeout=10)
+			self.session.open(MessageBox, _("StreamRelay is disabled in the cam module config"), MessageBox.TYPE_ERROR, default=False, simple=True, timeout=10)
 
 	def toggleWithoutStreamrelay(self):
 		Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
