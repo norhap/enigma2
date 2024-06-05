@@ -40,11 +40,10 @@ QUIT_WOL = 45
 
 class TVstate:  # load in Navigation
 	def __init__(self):
-#		global TVinStandby
-#		if TVinStandby is not None:
-#			print("[Standby] only one TVstate instance is allowed!")
-#		TVinStandby = self
-
+		# global TVinStandby
+		# if TVinStandby is not None:
+		# 	print("[Standby] only one TVstate instance is allowed!")
+		# TVinStandby = self
 		try:
 			import Components.HdmiCec
 			self.hdmicec_instance = Components.HdmiCec.hdmi_cec.instance
