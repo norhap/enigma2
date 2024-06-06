@@ -40,6 +40,11 @@ class MenuList(GUIComponent):
 		if self.instance:
 			self.instance.enableAutoNavigation(enabled)
 
+	def updateEntry(self, index, data):
+		if self.list and index < len(self.list):
+			self.list[index] = data
+			self.l.updateEntry(index, data)
+
 	def getCurrent(self):
 		return self.l.getCurrentSelection()
 
