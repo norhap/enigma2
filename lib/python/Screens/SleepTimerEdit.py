@@ -99,7 +99,9 @@ class SleepTimerEdit(Setup):
 						config.usage.wakeup_time[i]))
 		self["config"].list = conflist
 		self["config"].l.setList(conflist)
-		self["key_blue"].text = _("Stop Sleeptimer") if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
+		current = self["config"].getCurrent()
+		if current[1] == config.usage.sleep_timer:
+			self["key_blue"].text = _("Stop Sleeptimer") if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
 
 	def keySave(self):
 		if self["config"].isChanged():
