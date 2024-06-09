@@ -4,7 +4,6 @@ from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import NumberActionMap
 from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, configfile
 
-from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput
 from Tools.BoundFunction import boundFunction
@@ -37,21 +36,8 @@ class ParentalControlSetup(ConfigListScreen, ProtectedScreen, Screen):
 		self.setTitle(_("Parental control setup"))
 
 		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry, fullUI=True)
 		self.createSetup(initial=True)
-
-		self["actions"] = NumberActionMap(["SetupActions", "MenuActions"],
-		{
-			"cancel": self.keyCancel,
-			"save": self.keySave,
-			"ok": self.keyOK,
-			"menu": self.closeRecursive,
-			"left": self.keyLeft,
-			"right": self.keyRight
-		}, -2)
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-		self.recursive = False
 
 	def isProtected(self):
 		return (not config.ParentalControl.setuppinactive.value and config.ParentalControl.servicepinactive.value) or\
@@ -95,7 +81,7 @@ class ParentalControlSetup(ConfigListScreen, ProtectedScreen, Screen):
 			self.list.append(self.changePin)
 		self["config"].list = self.list
 
-	def keyOK(self):
+	def keySelect(self):
 		if self["config"].l.getCurrentSelection() == self.changePin:
 			if config.ParentalControl.servicepin[0].value:
 				self.session.openWithCallback(self.oldPinEntered, PinInput, pinList=[x.value for x in config.ParentalControl.servicepin], triesEntry=config.ParentalControl.retries.servicepin, title=_("Please enter the old PIN code"), windowTitle=_("Enter PIN code"))
@@ -121,29 +107,12 @@ class ParentalControlSetup(ConfigListScreen, ProtectedScreen, Screen):
 		self.keySave()
 
 	def keyCancel(self):
-		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
-		else:
-			self.close()
-
-	def cancelConfirm(self, answer):
-		if answer:
-			for x in self["config"].list:
-				x[1].cancel()
-			self.close()
+		ConfigListScreen.keyCancel(self)
 
 	def keySave(self):
-		if self["config"].isChanged():
-			for x in self["config"].list:
-				x[1].save()
-			configfile.save()
-			from Components.ParentalControl import parentalControl
-			parentalControl.hideBlacklist()
-		self.close(self.recursive)
-
-	def closeRecursive(self):
-		self.recursive = True
-		self.keySave()
+		ConfigListScreen.keySave(self)
+		from Components.ParentalControl import parentalControl
+		parentalControl.hideBlacklist()
 
 	def keyNumberGlobal(self, number):
 		pass

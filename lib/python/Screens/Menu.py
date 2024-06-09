@@ -35,10 +35,10 @@ def default_skin():
 			return default_skin
 
 
-def MenuEntryPixmap(entryID, png_cache, lastMenuID):
-	png = png_cache.get(entryID, None)
+def MenuEntryPixmap(key, png_cache, lastMenuID):
+	png = png_cache.get(key, None)
 	if png is None:
-		pngPath = resolveFilename(SCOPE_GUISKIN, "mainmenu/" + entryID + ".png")
+		pngPath = resolveFilename(SCOPE_GUISKIN, "mainmenu/" + key + ".png")
 		pos = config.skin.primary_skin.value.rfind("/")
 		if pos > -1:
 			current_skin = config.skin.primary_skin.value[:pos + 1]
@@ -49,7 +49,7 @@ def MenuEntryPixmap(entryID, png_cache, lastMenuID):
 		if png is None:
 			if lastMenuID is not None:
 				png = png_cache.get(lastMenuID, None)
-			png_cache[entryID] = png
+			png_cache[key] = png
 	if png is None:
 		png = png_cache.get("missing", None)
 		if png is None:
@@ -176,7 +176,7 @@ class Menu(Screen, ProtectedScreen):
 				return
 
 		MenuTitle = _(node.get("text", "??"))
-		entryID = node.get("entryID", "undefined")
+		key = node.get("key", "undefined")
 		weight = node.get("weight", 50)
 		x = node.get("flushConfigOnClose")
 		if x:
@@ -184,7 +184,7 @@ class Menu(Screen, ProtectedScreen):
 		else:
 			a = boundFunction(self.session.openWithCallback, self.menuClosed, Menu, node)
 		# TODO add check if !empty(node.childNodes)
-		destList.append((MenuTitle, a, entryID, weight))
+		destList.append((MenuTitle, a, key, weight))
 
 	def menuClosedWithConfigFlush(self, *res):
 		configfile.save()
@@ -212,7 +212,7 @@ class Menu(Screen, ProtectedScreen):
 		if conditional and not eval(conditional):
 			return
 		item_text = node.get("text", "")
-		entryID = node.get("entryID", "undefined")
+		key = node.get("key", "undefined")
 		weight = node.get("weight", 50)
 		for x in node:
 			if x.tag == "screen":
@@ -233,10 +233,10 @@ class Menu(Screen, ProtectedScreen):
 				args = x.text or ""
 				screen += ", " + args
 
-				destList.append((_(item_text or "??"), boundFunction(self.runScreen, (module, screen)), entryID, weight))
+				destList.append((_(item_text or "??"), boundFunction(self.runScreen, (module, screen)), key, weight))
 				return
 			elif x.tag == "code":
-				destList.append((_(item_text or "??"), boundFunction(self.execText, x.text), entryID, weight))
+				destList.append((_(item_text or "??"), boundFunction(self.execText, x.text), key, weight))
 				return
 			elif x.tag == "setup":
 				id = x.get("id")
@@ -244,9 +244,9 @@ class Menu(Screen, ProtectedScreen):
 					item_text = _(getSetupTitle(id))
 				else:
 					item_text = _(item_text)
-				destList.append((item_text, boundFunction(self.openSetup, id), entryID, weight))
+				destList.append((item_text, boundFunction(self.openSetup, id), key, weight))
 				return
-		destList.append((item_text, self.nothing, entryID, weight))
+		destList.append((item_text, self.nothing, key, weight))
 
 	def sortByName(self, listentry):
 		return listentry[0].lower()
