@@ -615,23 +615,26 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 			self.keyOk()
 
 	def keyOk(self):
-		if self.focus == FOCUS_STREAMS and self["streams"].list:
-			cur = self["streams"].getCurrent()
-			if self.settings.menupage.value == PAGE_AUDIO and cur[0] is not None:
-				self.changeAudio(cur[0])
-				self.__updatedInfo()
-			if self.settings.menupage.value == PAGE_SUBTITLES and cur[0] is not None:
-				if self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
-					self.enableSubtitle(None)
-					selectedidx = self["streams"].getIndex()
+		try:
+			if self.focus == FOCUS_STREAMS and self["streams"].list:
+				cur = self["streams"].getCurrent()
+				if self.settings.menupage.value == PAGE_AUDIO and cur[0] is not None:
+					self.changeAudio(cur[0])
 					self.__updatedInfo()
-					self["streams"].setIndex(selectedidx)
-				else:
-					self.enableSubtitle(cur[0][:5])
-					self.__updatedInfo()
+				if self.settings.menupage.value == PAGE_SUBTITLES and cur[0] is not None:
+					if self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
+						self.enableSubtitle(None)
+						selectedidx = self["streams"].getIndex()
+						self.__updatedInfo()
+						self["streams"].setIndex(selectedidx)
+					else:
+						self.enableSubtitle(cur[0][:5])
+						self.__updatedInfo()
+				self.close(0)
+			elif self.focus == FOCUS_CONFIG:
+				self.keyRight()
+		except Exception:
 			self.close(0)
-		elif self.focus == FOCUS_CONFIG:
-			self.keyRight()
 
 	def openAutoLanguageSetup(self):
 		if self.protectContextMenu and config.ParentalControl.setuppinactive.value and config.ParentalControl.config_sections.context_menus.value:
@@ -735,7 +738,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 		self["actions"] = NumberActionMap(["SetupActions"],
 		{
 			"cancel": self.cancel,
-			"ok": self.ok,
+			"ok": self.keySave,
 		}, -2)
 
 		self.onLayoutFinish.append(self.layoutFinished)
@@ -777,6 +780,5 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 		self.center_dvb_subs.removeNotifier(self.setCenterDvbSubs)
 		self.close()
 
-	def ok(self):
-		config.subtitles.save()
-		self.close()
+	def keySave(self):
+		ConfigListScreen.keySave(self)
