@@ -10572,9 +10572,6 @@ msgstr "Configure si y cómo se mostrará el indicador de grabación en la lista
 msgid "Configure if and how wide columns will be shown in the channel selection list."
 msgstr "Configure si y cómo se mostrará el ancho de las columnas en la lista de canales."
 
-msgid "Configure if behind the subtitles a background is shown."
-msgstr "Configure si detrás de los subtítulos se muestra un fondo."
-
 msgid "Configure if service picons will be shown in display (when supported by the skin)."
 msgstr "Configure si los picons de canal se mostrarán en el display (cuando lo admita el skin)."
 
@@ -11136,9 +11133,6 @@ msgstr "Mostrar VCR scart en menú principal"
 msgid "Show animation while busy"
 msgstr "Mostrar animación cuando esté ocupado"
 
-msgid "Show background behind subtitles"
-msgstr "Mostrar fondo tras los subtítulos"
-
 msgid "Show background in radio mode"
 msgstr "Mostrar fondo en modo radio"
 
@@ -11255,6 +11249,9 @@ msgstr "Alineamiento de subtítulos"
 
 msgid "Subtitle border width"
 msgstr "Anchura del borde de subtítulos"
+
+msgid "Subtitle black transparency"
+msgstr "Transparencia negra de subtítulos"
 
 msgid "Subtitle delay when timing is bad"
 msgstr "Retraso de subtítulos cuando el tiempo es incorrecto"
@@ -12723,6 +12720,9 @@ msgstr "Cerrar, guardar cambios y buscar ahora"
 
 msgid "Configure AutoTimer behavior"
 msgstr "Configurar el comportamiento del temporizador automático"
+
+msgid "Configure the transparency of the black background of subtitles."
+msgstr "Configura la transparencia del fondo negro de los subtítulos."
 
 msgid "Control recording completely by service"
 msgstr "Controle la grabación completamente por canal"

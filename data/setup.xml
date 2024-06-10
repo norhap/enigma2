@@ -364,11 +364,12 @@
 	<setup key="Subtitle" title="Subtitle Setup">
 		<item level="0" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
 		<item level="2" text="Use original teletext position" description="When enabled, teletext subtitles will be displayed at their original position.">config.subtitles.ttx_subtitle_original_position</item>
-		<item level="1" requires="!config.subtitles.ttx_subtitle_original_position" text="Subtitle position" description="Set the vertical position of subtitles, measured from the bottom of the screen.">config.subtitles.ttx_subtitle_position</item>
+		<item level="2" text="Subtitle position" description="Set the vertical position of subtitles, measured from the bottom of the screen.">config.subtitles.ttx_subtitle_position</item>
+		<item level="2" text="Subtitle position" description="Set the vertical position of subtitles, measured from the bottom of the screen.">config.subtitles.subtitle_position</item>
 		<item level="2" text="Rewrap subtitles" description="When enabled, reformat subtitles to match the width of the screen.">config.subtitles.subtitle_rewrap</item>
 		<item level="2" text="Subtitle alignment" description="Configure the horizontal alignment of the subtitles.">config.subtitles.subtitle_alignment</item>
 		<item level="2" text="Subtitle border width" description="Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background.">config.subtitles.subtitle_borderwidth</item>
-		<item level="0" text="Show background behind subtitles" description="Configure if behind the subtitles a background is shown.">config.subtitles.showbackground</item>
+		<item level="0" text="Subtitle black transparency" description="Configure the transparency of the black background of subtitles.">config.subtitles.subtitles_backtrans</item>
 		<item level="2" text="Subtitle font size" description="Configure the font size of the subtitles.">config.subtitles.subtitle_fontsize</item>
 		<item level="2" text="Subtitle delay when timing lacks" description="Configure the subtitle delay when timing information is not available.">config.subtitles.subtitle_noPTSrecordingdelay</item>
 		<item level="0" text="Yellow DVB subtitles" description="When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color.">config.subtitles.dvb_subtitles_yellow</item>
@@ -520,7 +521,7 @@
 		<item level="2" text="Show VCR scart on main menu" description="When enabled, the VCR scart option will be shown on the main menu" requires="ScartSwitch">config.usage.show_vcr_scart</item>
 		<item level="2" text="Show Boolean values as graphical switch" description="Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch.">config.usage.boolean_graphic</item>
 		<item level="2" text="Show additional slider value" description="Enable the current value of the slider at end of the slider bar.">config.usage.show_slider_value</item>
-		<item level="0" text="Show menu numbers" description="This option allows you to display numbers that will directly access the menu.">config.usage.menu_show_numbers</item>		
+		<item level="0" text="Show menu numbers" description="This option allows you to display numbers that will directly access the menu.">config.usage.menu_show_numbers</item>
 		<item level="0" text="Sort order for help screen" description="Choose the order in which items are displayed in Help windows">config.usage.helpSortOrder</item>
 		<item level="0" text="Animation speed of help indicators" description="Control the animation speed of the button indicators in the Help screen. 'Disabled' turns off animation so that indicators jump between buttons.">config.usage.helpAnimationSpeed</item>
 	</setup>
