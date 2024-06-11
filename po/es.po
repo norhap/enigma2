@@ -1596,8 +1596,8 @@ msgstr "Configure la relación de aspecto de la pantalla."
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Configura la duración en horas en las que el receptor se deba ir a reposo cuando no está controlado."
 
-msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
-msgstr "Configura la duración en minutos para el temporizador de descanso. Selecciona esta entrada y pulsa OK o verde para iniciar/parar el temporizador de descanso"
+msgid "Configure the duration in minutes for the sleeptimer. Select this entry and press BLUE to start/stop the sleeptimer"
+msgstr "Configura la duración en minutos para el temporizador de descanso. Selecciona esta entrada y pulse AZUL para iniciar/parar el temporizador de descanso"
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
 msgstr "Configure la duración cuando el receptor debe apagarse en caso de que esté en modo de reposo."
