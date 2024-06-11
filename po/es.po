@@ -1266,6 +1266,9 @@ msgstr "Cable"
 msgid "Cable Scan"
 msgstr "Búsqueda de cable"
 
+msgid "Cable Scan Settings"
+msgstr "Ajustes Búsqueda de cable"
+
 msgid "Cabo Verde"
 msgstr "Cabo Verde"
 
@@ -1647,8 +1650,8 @@ msgstr "Configure qué formato de color se debe usar en la salida SCART."
 msgid "Configure your internal LAN"
 msgstr "Configura su red LAN por cable"
 
-msgid "Configure your network settings and press OK to scan"
-msgstr "Configura tus ajustes de red y pulsa OK para escanear"
+msgid "Configure your network settings and press BLUE to scan"
+msgstr "Configura tus ajustes de red y pulsa AZUL para escanear"
 
 msgid "Configure your wireless LAN again"
 msgstr "Configura su red inalámbrica WLAN-WiFi"
@@ -2312,6 +2315,9 @@ msgstr "E"
 
 msgid "ECM Info"
 msgstr "ECM Info"
+
+msgid "End cut"
+msgstr "Corte final"
 
 msgid "EPG"
 msgstr "EPG"
@@ -4500,6 +4506,9 @@ msgstr "Red"
 msgid "Network ID"
 msgstr "ID de Red"
 
+msgid "Network ID (0 - all networks)"
+msgstr "ID de Red (0 - redes completas)"
+
 msgid "Network Info:"
 msgstr "Información de red:"
 
@@ -6259,7 +6268,7 @@ msgid "Scanning failed!"
 msgstr "¡Escaneado fallido!"
 
 msgid "Scanning..."
-msgstr "Escaneado…"
+msgstr "Escaneando…"
 
 msgid "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr "Escanea lamedbs por defecto ordenados por satélite con un motor de plato conectado"
@@ -10140,17 +10149,11 @@ msgstr "magacine de deportes"
 msgid "standard"
 msgstr "estándar"
 
+msgid "Start Cablescan"
+msgstr "Iniciar Búsqueda cable"
+
 msgid "Start cut"
 msgstr "Empezar corte"
-
-msgid "End cut"
-msgstr "Corte final"
-
-msgid "Step back"
-msgstr "Paso atrás"
-
-msgid "Step forward"
-msgstr "Un paso adelante"
 
 msgid "Start cut here"
 msgstr "Comenzar corte aquí"
@@ -10163,6 +10166,12 @@ msgstr "Directorio de inicio"
 
 msgid "starts in a few seconds"
 msgstr "empieza en unos segundos"
+
+msgid "Step back"
+msgstr "Paso atrás"
+
+msgid "Step forward"
+msgstr "Un paso adelante"
 
 msgid "stepsize"
 msgstr "tamaño del paso"

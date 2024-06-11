@@ -5,7 +5,7 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigInteger, getConfigListEntry, ConfigFloat
-from Components.ConfigList import ConfigListScreen
+from Screens.Setup import Setup
 from Components.Sources.StaticText import StaticText
 from Components.ProgressBar import ProgressBar
 from Components.Pixmap import Pixmap
@@ -60,7 +60,7 @@ class CableScan:
 
 class CableScanStatus(Screen):
 	skin = """
-	<screen position="center,115" size="420,180" title="Cable Scan">
+	<screen position="center,115" size="420,180" title="Cable Scan Settings">
 		<widget name="frontend" pixmap="icons/scan-c.png" position="5,5" size="64,64" transparent="1" alphaTest="on" />
 		<widget name="scan_state" position="10,120" zPosition="2" size="400,30" font="Regular;18" />
 		<widget name="scan_progress" position="10,155" size="400,15" pixmap="progress_big.png" borderWidth="2" borderColor="#cccccc" />
@@ -68,7 +68,7 @@ class CableScanStatus(Screen):
 
 	def __init__(self, session, scanTuner, scanNetwork, scanFrequency, scanSymbolRate, scanModulation, keepNumbers, hdList):
 		Screen.__init__(self, session)
-		self.setTitle(_("Cable Scan"))
+		self.setTitle(_("Cable Scan Settings"))
 		self.scanTuner = scanTuner
 		self.scanNetwork = scanNetwork
 		self.scanFrequency = scanFrequency
@@ -116,46 +116,13 @@ config.plugins.CableScan.modulation = ConfigSelection(
 config.plugins.CableScan.auto = ConfigYesNo(default=True)
 
 
-class CableScanScreen(ConfigListScreen, Screen):
-	skin = """
-	<screen position="center,115" size="520,390" title="Cable Scan">
-		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
-		<widget name="introduction" position="10,265" size="500,50" font="Regular;20" horizontalAlignment="center" />
-		<ePixmap pixmap="buttons/red.png" position="100,330" size="140,40" alphaTest="on"/>
-		<ePixmap pixmap="buttons/green.png" position="270,330" size="140,40" alphaTest="on"/>
-		<widget source="key_red" render="Label" position="100,330" zPosition="1" size="135,40" font="Regular;19" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#9f1313" transparent="1"/>
-		<widget source="key_green" render="Label" position="270,330" zPosition="1" size="135,40" font="Regular;19" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#1f771f" transparent="1"/>
-	</screen>"""
-
+class SetupCableScan(Setup):
 	def __init__(self, session, nimlist):
-		Screen.__init__(self, session)
-
-		self.setTitle(_("Cable Scan"))
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Save"))
-
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
-		{
-			"ok": self.keyGo,
-			"cancel": self.keyCancel,
-			"save": self.keySave,
-			"menu": self.closeRecursive,
-		}, -2)
-
-		self.nimlist = nimlist
+		Setup.__init__(self, session, setup="cablescan", plugin="SystemPlugins/CableScan", blue_button={'function': self.startScan, 'text': _("Start Cablescan"), 'helptext': _("Start Cablescan")})
 		self.prevservice = None
-
-		self.list = []
-		self.list.append(getConfigListEntry(_('Frequency'), config.plugins.CableScan.frequency))
-		self.list.append(getConfigListEntry(_('Symbol rate'), config.plugins.CableScan.symbolrate))
-		self.list.append(getConfigListEntry(_('Modulation'), config.plugins.CableScan.modulation))
-		self.list.append(getConfigListEntry(_('Network ID') + _(' (0 - all networks)'), config.plugins.CableScan.networkid))
-		self.list.append(getConfigListEntry(_("Use official channel numbering"), config.plugins.CableScan.keepnumbering))
-		self.list.append(getConfigListEntry(_("HD list"), config.plugins.CableScan.hdlist))
-		self.list.append(getConfigListEntry(_("Enable auto cable scan"), config.plugins.CableScan.auto))
-
-		ConfigListScreen.__init__(self, self.list, session)
-		self["introduction"] = Label(_("Configure your network settings and press OK to scan"))
+		self.setTitle(_("Cable Scan Settings"))
+		self.nimlist = nimlist
+		self["introduction"] = Label(_("Configure your network settings and press BLUE to scan"))
 
 	def restoreService(self):
 		if self.prevservice:
@@ -163,12 +130,7 @@ class CableScanScreen(ConfigListScreen, Screen):
 
 	def keySave(self):
 		self.restoreService()
-		config.plugins.CableScan.save()
-		self.close()
-
-	def keyGo(self):
-		config.plugins.CableScan.save()
-		self.startScan()
+		Setup.keySave(self)
 
 	def getFreeTuner(self):
 		dvbc_tuners_mask = sum([2**int(x) for x in self.nimlist])
@@ -194,13 +156,10 @@ class CableScanScreen(ConfigListScreen, Screen):
 	def keyCancel(self):
 		refreshServiceList()
 		self.restoreService()
-		if self["config"].isChanged():
-			for x in self["config"].list:
-				x[1].cancel()
-		self.close()
+		Setup.keyCancel(self)
 
 
-class CableScanAutoScreen(CableScanScreen):
+class CableScanAutoScreen(SetupCableScan):
 	def __init__(self, session, nimlist):
 		print("[CableScan] start")
 		Screen.__init__(self, session)
@@ -248,7 +207,7 @@ CableScanAutoStartTimer = eTimer()
 
 
 def CableScanMain(session, **kwargs):
-	session.open(CableScanScreen, nimmanager.getEnabledNimListOfType("DVB-C"))
+	session.open(SetupCableScan, nimmanager.getEnabledNimListOfType("DVB-C"))
 
 
 def restartScanAutoStartTimer(reply=False):
@@ -294,14 +253,14 @@ def autostart(reason, **kwargs):
 
 def CableScanStart(menuid, **kwargs):
 	if menuid == "scan" and nimmanager.getEnabledNimListOfType("DVB-C"):
-		return [(_("Cable Scan"), CableScanMain, "cablescan", None)]
+		return [(_("Cable Scan Settings"), CableScanMain, "cablescan", None)]
 	else:
 		return []
 
 
 def Plugins(**kwargs):
 	if nimmanager.hasNimType("DVB-C"):
-		return [PluginDescriptor(name=_("Cable Scan"), description="Scan cable provider channels", where=PluginDescriptor.WHERE_MENU, fnc=CableScanStart),
+		return [PluginDescriptor(name=_("Cable Scan Settings"), description="Scan cable provider channels", where=PluginDescriptor.WHERE_MENU, fnc=CableScanStart),
 			PluginDescriptor(where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
 	else:
 		return []

@@ -1,0 +1,12 @@
+<!--suppress XmlUnboundNsPrefix -->
+<setupxml>
+    <setup key="cablescan" title="Cable Scan Settings">
+        <item text="Frequency">config.plugins.CableScan.frequency</item>
+        <item text="Symbol rate">config.plugins.CableScan.symbolrate</item>
+        <item text="Modulation">config.plugins.CableScan.modulation</item>
+        <item text="Network ID (0 - all networks)">config.plugins.CableScan.networkid</item>
+        <item text="Use official channel numbering">config.plugins.CableScan.keepnumbering</item>
+        <item text="HD list">config.plugins.CableScan.hdlist</item>
+        <item text="Enable auto cable scan">config.plugins.CableScan.auto</item>
+    </setup>
+</setupxml>
