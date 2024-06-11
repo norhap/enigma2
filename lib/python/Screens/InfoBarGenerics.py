@@ -4157,6 +4157,7 @@ class InfoBarPowersaver:
 
 	def setSleepTimer(self, sleepTime):
 		print("[InfoBarGenerics] Powersaver set sleeptimer", sleepTime)
+		message = ""
 		if sleepTime:
 			m = abs(sleepTime / 60)
 			message = _("The sleep timer has been activated.") + "\n" + _("And will put your receiver in standby over ") + ngettext("%d minute", "%d minutes", m) % m
