@@ -3215,7 +3215,7 @@ class InfoBarSubserviceSelection:
 					ref.setAlternativeUrl(newurl)
 					break
 			if wrappererror:
-				Notifications.AddPopup(text=wrappererror, type=MessageBox.TYPE_ERROR, timeout=5, id="channelzapwrapper")
+				AddPopup(text=wrappererror, type=MessageBox.TYPE_ERROR, timeout=5, id="channelzapwrapper")
 		self.session.nav.playService(ref, checkParentalControl=False, adjust=False)
 
 	def changeSubservice(self, direction):
@@ -4166,7 +4166,7 @@ class InfoBarPowersaver:
 		else:
 			message = _("The sleep timer has been disabled.")
 			self.sleepTimer.stop()
-		AddPopup(message, type=MessageBox.TYPE_INFO, timeout=5)
+		AddPopup(text=message, type=MessageBox.TYPE_INFO, timeout=5, id="None")
 
 	def sleepTimerTimeout(self):
 		if not inStandby:
