@@ -43,11 +43,12 @@ class ConsoleItem:
 		del self.containers[self.name]
 		del self.container.dataAvail[:]
 		del self.container.appClosed[:]
-		self.container = None
-		if self.callback:
-			appResults = b"".join(self.appResults)
-			appResults = appResults if self.binary else appResults.decode()
-			self.callback(appResults, retVal, self.extraArgs)
+		del self.container
+		callback = self.callback
+		if callback:
+			data = b"".join(self.appResults)
+			data = data if self.binary else data.decode()
+			callback(data, retVal, self.extraArgs)
 
 
 class Console(object):
