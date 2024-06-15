@@ -13,9 +13,10 @@ from Components.Harddisk import harddiskmanager
 from keyids import KEYIDS
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
-from Components.SystemInfo import SystemInfo, MODEL
-from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, resolveFilename
+from Components.SystemInfo import BoxInfo, SystemInfo, MODEL
+from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, fileWriteLine, resolveFilename
 
+MODULE_NAME = __name__.split(".")[-1]
 originalAudioTracks = "orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth"
 visuallyImpairedCommentary = "NAR qad"
 
@@ -1082,12 +1083,12 @@ def InitUsageConfig():
 		config.usage.fanspeed = ConfigSlider(default=127, increment=8, limits=(0, 255))
 		config.usage.fanspeed.addNotifier(fanSpeedChanged)
 
-	if SystemInfo["WakeOnLAN"]:
+	config.network = ConfigSubsection()
+	if BoxInfo.getItem("WakeOnLAN"):
 		def wakeOnLANChanged(configElement):
-			open(SystemInfo["WakeOnLAN"], "w").write(SystemInfo["WakeOnLANType"][configElement.value])
-		config.usage.wakeOnLAN = ConfigYesNo(default=False)
-		config.usage.wakeOnLAN.addNotifier(wakeOnLANChanged)
-
+			fileWriteLine(BoxInfo.getItem("WakeOnLAN"), BoxInfo.getItem("WakeOnLANType")[configElement.value], source=MODULE_NAME)
+		config.network.wol = ConfigYesNo(default=False)
+		config.network.wol.addNotifier(wakeOnLANChanged)
 	config.usage.boolean_graphic = ConfigYesNo(default=True)
 	config.usage.show_slider_value = ConfigYesNo(default=True)
 	config.usage.cursorscroll = ConfigSelectionNumber(min=0, max=50, stepwidth=5, default=0, wraparound=True)

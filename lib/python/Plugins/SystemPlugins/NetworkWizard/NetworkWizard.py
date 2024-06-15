@@ -3,15 +3,16 @@ from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
 from Screens.Time import Time
-# from Components.config import config
+from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
+from Components.SystemInfo import BoxInfo
 # from Components.Language import language
 # from Tools.Geolocation import geolocation
 # from Components.Timezones import languageCode
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileContains, resolveFilename, SCOPE_PLUGINS
 
 
 class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
@@ -242,7 +243,10 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 			self.InterfaceState = True
 		else:
 			self.InterfaceState = False
-		self.AdapterRef.close(True)
+		if hasattr(self, "AdapterRef"):
+			self.AdapterRef.close(True)
+		else:
+			self.close()
 
 	def checkWlanStateCB(self, data, status):
 		if data is not None:
@@ -269,6 +273,9 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 
 	def checkNetworkCB(self, data):
 		if data:
+			if BoxInfo.getItem("WakeOnLAN"):
+				if config.network.wol.value and not fileContains("/etc/crontab", "ifdown -v -f eth0"):
+					eConsoleAppContainer().execute("sed -i '$a@reboot root ifdown -v -f eth0; ifup -v eth0' /etc/crontab")  # up WOL from deep sleep
 			if iNetwork.isWirelessInterface(self.selectedInterface):
 				if self.WlanPluginInstalled:
 					from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus

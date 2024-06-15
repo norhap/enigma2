@@ -5131,6 +5131,9 @@ msgstr "Reproducir grabaciones"
 msgid "Please add titles to the compilation."
 msgstr "Añadir títulos a la compilación."
 
+msgid "Please contact the manufacturer for clarification."
+msgstr "Comuníquese con el fabricante para obtener aclaraciones."
+
 msgid "Play service with Stream Relay"
 msgstr "Canal con reproducción Stream Relay"
 
@@ -8466,6 +8469,9 @@ msgstr "Usar interfaz"
 msgid "Use official channel numbering"
 msgstr "Usar el orden de numeración oficial"
 
+msgid "Use only for Wake on WLan (WoW)"
+msgstr "Usar solo para Wake on WLan (WoW)"
+
 msgid "Use power measurement"
 msgstr "Usar medidor de alimentación"
 
@@ -11380,8 +11386,8 @@ msgstr "Ajustes Modo Usuario"
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
 msgstr "Por lo general, cuando el idioma de los subtítulos es el mismo que el del audio, los subtítulos no se usarán. Habilite esta opción para permitir el uso de estos subtítulos."
 
-msgid "Wake On LAN"
-msgstr "Wake On LAN"
+msgid "Enable Wake On LAN"
+msgstr "Activar Wake On LAN"
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Cuando está habilitado, enigma2 cargará los bouquets de usuario no vinculados. Esto significa que los bouquets de usuario que están disponibles, pero que no están incluidos en los archivos bouquets.tv o bouquets.radio, aún se cargarán. Esto le permite, por ejemplo, mantener su propio bouquet de usuario mientras se actualizan las configuraciones instaladas"
@@ -11395,8 +11401,8 @@ msgstr "Cuando está habilitado, los botones de flecha alrededor del botón OK s
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Cuando está habilitado los botones izquierdo, derecho, CH +/-, B +/-, P +/- seguirán los controles zap de estilo ‘neutrino’ en lugar del estilo enigma2."
 
-msgid "When enabled the set top box is able to wakeup on LAN"
-msgstr "Cuando está habilitado, el receptor se puede activar desde su LAN"
+msgid "When enabled the set top box is able to wakeup on LAN."
+msgstr "Cuando está habilitado, el receptor se puede activar desde su LAN."
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Cuando está habilitado, cuando selecciona un nuevo canal en la lista de canales, la lista de canales no se cierra. Solo se cerrará cuando seleccione el canal de reproducción actual. Este es un tipo de modo de vista previa"

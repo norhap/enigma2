@@ -21,7 +21,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, fil
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer
-from Components.SystemInfo import MODEL
+from Components.SystemInfo import BoxInfo, MODEL
 from Components.Console import Console
 from Screens.Standby import TryQuitMainloop
 from random import Random
@@ -719,6 +719,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["DNS1"] = StaticText()
 		self["DNS2"] = StaticText()
 		self["introduction"] = StaticText(_("Current settings:"))
+		self["description"] = Label("")
 
 		self["IPtext"] = StaticText(_("IP address"))
 		self["Netmasktext"] = StaticText(_("Netmask"))
@@ -781,7 +782,18 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.weplist = None
 		self.wsconfig = None
 		self.default = None
-
+		self.onlyWakeOnWiFi = False
+		self.WakeOnWiFiEntry = False
+		if iNetwork.canWakeOnWiFi(self.iface):
+			iface_file = "/etc/network/interfaces"
+			default_v = False
+			if exists(iface_file):
+				with open(iface_file) as f:
+					output = f.read()
+				search_str = f"# Only WakeOnWiFi {self.iface}"
+				if output.find(search_str) >= 0:
+					default_v = True
+			self.onlyWakeOnWiFi = NoSave(ConfigYesNo(default=default_v))
 		if iNetwork.isWirelessInterface(self.iface):
 			from Plugins.SystemPlugins.WirelessLan.Wlan import wpaSupplicant
 			self.ws = wpaSupplicant()
@@ -821,11 +833,15 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 
 	def createSetup(self):
+		if BoxInfo.getItem("WakeOnLAN"):
+			self.wolstartvalue = config.network.wol.value
 		self.list = []
 		self.InterfaceEntry = getConfigListEntry(_("Use interface"), self.activateInterfaceEntry)
-
 		self.list.append(self.InterfaceEntry)
-		if self.activateInterfaceEntry.value:
+		if self.onlyWakeOnWiFi:
+			self.WakeOnWiFiEntry = getConfigListEntry(_("Use only for Wake on WLan (WoW)"), self.onlyWakeOnWiFi)
+			self.list.append(self.WakeOnWiFiEntry)
+		if self.activateInterfaceEntry.value or (self.onlyWakeOnWiFi and self.onlyWakeOnWiFi.value):
 			self.dhcpEntry = getConfigListEntry(_("Use DHCP"), self.dhcpConfigEntry)
 			self.list.append(self.dhcpEntry)
 			if not self.dhcpConfigEntry.value:
@@ -835,7 +851,14 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				self.list.append(self.gatewayEntry)
 				if self.hasGatewayConfigEntry.value:
 					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
-
+			havewol = False
+			if BoxInfo.getItem("WakeOnLAN") and MODEL not in ("et10000", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "gbipbox", "gbquad", "gbx1", "gbx2", "gbx3", "gbx3h"):
+				havewol = True
+			if MODEL in ("et10000", "vuultimo4k", "vuduo4kse") and self.iface == "eth0":
+				havewol = False
+			if havewol and self.onlyWakeOnWiFi is not True and "wlan" not in self.iface:
+				self.list.append(getConfigListEntry(_("Enable Wake On LAN"),
+					config.network.wol, _("When enabled the set top box is able to wakeup on LAN.")))
 			self.extended = None
 			self.configStrings = None
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKSETUP):
@@ -868,33 +891,30 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.session.openWithCallback(self.DNSSettingsClosed, DNSSettings)
 
 	def newConfig(self):
-		if self["config"].getCurrent() == self.InterfaceEntry:
-			self.createSetup()
-		if self["config"].getCurrent() == self.dhcpEntry:
-			self.createSetup()
-		if self["config"].getCurrent() == self.gatewayEntry:
-			self.createSetup()
-		if iNetwork.isWirelessInterface(self.iface):
-			if self["config"].getCurrent() == self.encryption:
-				self.createSetup()
+		if self["config"].getCurrent() == self.WakeOnWiFiEntry:
+			iNetwork.onlyWoWifaces[self.iface] = self.onlyWakeOnWiFi.value
+			open(BoxInfo.getItem("WakeOnLAN"), "w").write(BoxInfo.getItem("WakeOnLANType")[self.onlyWakeOnWiFi.value])
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
+		self.createSetup()
 		self.newConfig()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
+		self.createSetup()
 		self.newConfig()
 
 	def keySave(self):
 		self.hideInputHelp()
-		if self["config"].isChanged():
+		if self["config"].isChanged() or (BoxInfo.getItem("WakeOnLAN") and self.wolstartvalue != config.network.wol.value):
 			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext))
 		else:
 			if self.finished_cb:
 				self.finished_cb()
 			else:
 				self.close('cancel')
+		config.network.save()
 
 	def keySaveConfirm(self, ret=False):
 		if ret:
@@ -984,6 +1004,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def keyCancelConfirm(self, result):
 		if not result:
 			return
+		if BoxInfo.getItem("WakeOnLAN"):
+			config.network.wol.setValue(self.wolstartvalue)
 		if not self.oldInterfaceState:
 			iNetwork.deactivateInterface(self.iface, self.keyCancelCB)
 		else:
@@ -991,7 +1013,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def keyCancel(self):
 		self.hideInputHelp()
-		if self["config"].isChanged():
+		if self["config"].isChanged() or (BoxInfo.getItem("WakeOnLAN") and self.wolstartvalue != config.network.wol.value):
 			self.session.openWithCallback(self.keyCancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
 			self.close('cancel')

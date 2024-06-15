@@ -177,6 +177,8 @@ BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
 BoxInfo.setItem("StreamRelay", False)
+BoxInfo.setItem("WakeOnLAN", fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol"))
+BoxInfo.setItem("WakeOnLANType", getWakeOnLANType(BoxInfo.getItem("WakeOnLAN")))
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
@@ -229,8 +231,6 @@ SystemInfo["Power4x7On"] = fileCheck("/proc/stb/fp/power4x7on")
 SystemInfo["Power4x7Standby"] = fileCheck("/proc/stb/fp/power4x7standby")
 SystemInfo["Power4x7Suspend"] = fileCheck("/proc/stb/fp/power4x7suspend")
 SystemInfo["MaxPIPSize"] = MODEL in ("hd51", "h7", "vs1500", "e4hdultra") and (360, 288) or (540, 432)
-SystemInfo["WakeOnLAN"] = fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol")
-SystemInfo["WakeOnLANType"] = getWakeOnLANType(SystemInfo["WakeOnLAN"]) if SystemInfo["WakeOnLAN"] else False
 SystemInfo["HasExternalPIP"] = PLATFORM != "1genxt" and fileCheck("/proc/stb/vmpeg/1/external")
 SystemInfo["VideoDestinationConfigurable"] = fileExists("/proc/stb/vmpeg/0/dst_left")
 SystemInfo["hasPIPVisibleProc"] = fileCheck("/proc/stb/vmpeg/1/visible")
