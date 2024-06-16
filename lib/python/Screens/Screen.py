@@ -1,14 +1,16 @@
 from enigma import eRCInput, eTimer, eWindow, getDesktop
 
-from skin import GUI_SKIN_ID, applyAllAttributes
+from skin import GUI_SKIN_ID, applyAllAttributes, menus, screens, setups
 from Components.config import config
 from Components.SystemInfo import BoxInfo
 from Components.GUIComponent import GUIComponent
+from Components.Pixmap import Pixmap
 from Components.Sources.Source import Source
 from Components.Sources.StaticText import StaticText
 from Tools.CList import CList
 from Tools.Directories import fileContains
 from process import ProcessList
+from Tools.LoadPixmap import LoadPixmap
 
 
 # The lines marked DEBUG: are proposals for further fixes or improvements when partner code is updated.
@@ -20,7 +22,8 @@ class Screen(dict):
 
 	def __init__(self, session, parent=None, mandatoryWidgets=None):
 		dict.__init__(self)
-		self.skinName = self.__class__.__name__
+		className = self.__class__.__name__
+		self.skinName = className
 		self.session = session
 		self.parent = parent
 		self.mandatoryWidgets = mandatoryWidgets
@@ -52,6 +55,9 @@ class Screen(dict):
 		self["ScreenPath"] = StaticText()
 		self.screenPath = ""  # This is the current screen path without the title.
 		self.screenTitle = ""  # This is the current screen title without the path.
+		self.screenImage = self.checkImage(className)  # This is the current screen image name.
+		if self.screenImage:
+			self["Image"] = Pixmap()
 
 	def __repr__(self):
 		return str(type(self))
@@ -185,6 +191,36 @@ class Screen(dict):
 
 	title = property(getTitle, setTitle)
 
+	def checkImage(self, image, source=None):
+		screenImage = None
+		if image:
+			images = {
+				# "screen": screens,
+				"menu": menus,
+				"setup": setups
+			}.get(source, screens)
+			defaultImage = images.get("default", "")
+			screenImage = images.get(image, defaultImage)
+			if screenImage:
+				screenImage = resolveFilename(SCOPE_GUISKIN, screenImage)
+				msg = f"{'Default' if screenImage == defaultImage and image != 'default' else 'Specified'} {source if source else 'screen'} image for '{image}' is '{screenImage}'"
+				if isfile(screenImage):
+					print(f"[Screen] {msg}.")
+				else:
+					print(f"[Screen] Error: {msg} but this is not a file!")
+					screenImage = None
+		return screenImage
+
+	def setImage(self, image, source=None):
+		self.screenImage = self.checkImage(image, source=source)
+		if self.screenImage and "Image" not in self:
+			self["Image"] = Pixmap()
+
+	def getImage(self):
+		return self.screenImage
+
+	image = property(getImage, setImage)
+
 	def setFocus(self, object):
 		self.instance.setFocus(object.instance)
 
@@ -247,6 +283,9 @@ class Screen(dict):
 					self.setTitle(_(attribute[1]))
 		self.scale = ((bounds[0], resolution[0]), (bounds[1], resolution[1]))
 		applyAllAttributes(self.instance, self.desktop, self.skinAttributes, self.scale)
+		if self.screenImage:
+			screenImage = LoadPixmap(self.screenImage)
+			self["Image"].instance.setPixmap(screenImage)
 		self.createGUIScreen(self.instance, self.desktop)
 
 	def createGUIScreen(self, parent, desktop, updateonly=False):

@@ -1044,6 +1044,11 @@
 		<key id="KEY_NEXT" mapto="moveDown" flags="m" />
 	</map>
 
+	<map context="DirectionActionsMenuSort">
+		<key id="KEY_PREVIOUS" mapto="moveUp" flags="m" />
+		<key id="KEY_NEXT" mapto="moveDown" flags="m" />
+	</map>
+
 	<map context="AudioSelectionActions">
 		<key id="KEY_RED" mapto="red" flags="m" />
 		<key id="KEY_GREEN" mapto="green" flags="m" />

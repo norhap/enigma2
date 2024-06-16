@@ -1,8 +1,9 @@
+from os.path import isdir, isfile
 from xml.etree.cElementTree import parse
 
 from enigma import eTimer
 
-from skin import findSkinScreen
+from skin import findSkinScreen, menus
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Button import Button
 from Components.config import ConfigDictionarySet, NoSave, config, configfile
@@ -26,36 +27,14 @@ file = open(resolveFilename(SCOPE_SKINS, "menu.xml"), "r")
 mdom = parse(file)
 file.close()
 
-lastMenuID = None
+imageCache = {}
+lastKey = None
 
 
 def default_skin():
 	for line in open("/etc/enigma2/settings"):
 		if "config.skin.primary_skin" not in line:
 			return default_skin
-
-
-def MenuEntryPixmap(key, png_cache, lastMenuID):
-	png = png_cache.get(key, None)
-	if png is None:
-		pngPath = resolveFilename(SCOPE_GUISKIN, "mainmenu/" + key + ".png")
-		pos = config.skin.primary_skin.value.rfind("/")
-		if pos > -1:
-			current_skin = config.skin.primary_skin.value[:pos + 1]
-		else:
-			current_skin = ""
-		if current_skin in pngPath and current_skin or not current_skin:
-			png = LoadPixmap(pngPath, cached=True)
-		if png is None:
-			if lastMenuID is not None:
-				png = png_cache.get(lastMenuID, None)
-			png_cache[key] = png
-	if png is None:
-		png = png_cache.get("missing", None)
-		if png is None:
-			png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "mainmenu/missing.png"), cached=True)
-			png_cache["missing"] = png
-	return png
 
 
 def MenuEntryName(name):
@@ -132,16 +111,15 @@ class MenuSummary(Screen):
 
 class Menu(Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
-	png_cache = {}
 
 	def okbuttonClick(self):
-		global lastMenuID
+		global lastKey
 		if self.number:
 			self["menu"].setIndex(self.number - 1)
 		self.resetNumberKey()
 		selection = self["menu"].getCurrent()
 		if selection and selection[1]:
-			lastMenuID = selection[2]
+			lastKey = selection[2]
 			selection[1]()
 
 	def execText(self, text):
@@ -166,8 +144,8 @@ class Menu(Screen, ProtectedScreen):
 	def openSetup(self, dialog):
 		self.session.openWithCallback(self.menuClosed, Setup, dialog)
 
-	def addMenu(self, destList, node):
-		requires = node.get("requires")
+	def addMenu(self, destList, menu):
+		requires = menu.get("requires")
 		if requires:
 			if requires[0] == "!":
 				if SystemInfo.get(requires[1:], False):
@@ -175,46 +153,66 @@ class Menu(Screen, ProtectedScreen):
 			elif not SystemInfo.get(requires, False):
 				return
 
-		MenuTitle = _(node.get("text", "??"))
-		key = node.get("key", "undefined")
-		weight = node.get("weight", 50)
-		x = node.get("flushConfigOnClose")
+		MenuTitle = _(menu.get("text", "??"))
+		key = menu.get("key", "undefined")
+		weight = menu.get("weight", 50)
+		image = self.getMenuEntryImage(key, lastKey)
+		x = menu.get("flushConfigOnClose")
 		if x:
-			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, node)
+			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, menu)
 		else:
-			a = boundFunction(self.session.openWithCallback, self.menuClosed, Menu, node)
-		# TODO add check if !empty(node.childNodes)
+			a = boundFunction(self.session.openWithCallback, self.menuClosed, Menu, menu)
+		# TODO add check if !empty(menu.childNodes)
 		destList.append((MenuTitle, a, key, weight))
+
+	def getMenuEntryImage(self, key, lastKey):
+		global imageCache
+		image = imageCache.get(key)
+		menuImageLibrary = resolveFilename(SCOPE_GUISKIN, "mainmenu")
+		self.menuImageLibrary = menuImageLibrary if isdir(menuImageLibrary) else None
+		if image is None:
+			imageFile = resolveFilename(SCOPE_GUISKIN, f"mainmenu/{key}.png" if self.menuImageLibrary else menus.get(key, ""))
+			if imageFile and isfile(imageFile):
+				image = LoadPixmap(imageFile, cached=True)
+				if image:
+					print(f"[Menu] Menu image for menu ID '{key}' is '{imageFile}'.")
+					imageCache[key] = image
+				else:
+					print(f"[Menu] Error: Unable to load image '{imageFile}'!")
+					if lastKey:
+						image = imageCache.get(lastKey)
+		return image
 
 	def menuClosedWithConfigFlush(self, *res):
 		configfile.save()
 		self.menuClosed(*res)
 
 	def menuClosed(self, *res):
-		global lastMenuID
+		global lastKey
 		if res and res[0]:
-			lastMenuID = None
+			lastKey = None
 			self.close(True)
 		elif len(self.list) == 1:
 			self.close()
 		else:
 			self.createMenuList()
 
-	def addItem(self, destList, node):
-		requires = node.get("requires")
+	def addItem(self, destList, menu):
+		requires = menu.get("requires")
 		if requires:
 			if requires[0] == "!":
 				if SystemInfo.get(requires[1:], False):
 					return
 			elif not SystemInfo.get(requires, False):
 				return
-		conditional = node.get("conditional")
+		conditional = menu.get("conditional")
 		if conditional and not eval(conditional):
 			return
-		item_text = node.get("text", "")
-		key = node.get("key", "undefined")
-		weight = node.get("weight", 50)
-		for x in node:
+		item_text = menu.get("text", "")
+		key = menu.get("key", "undefined")
+		weight = menu.get("weight", 50)
+		image = self.getMenuEntryImage(key, lastKey)
+		for x in menu:
 			if x.tag == "screen":
 				module = x.get("module")
 				screen = x.get("screen")
@@ -246,7 +244,7 @@ class Menu(Screen, ProtectedScreen):
 					item_text = _(item_text)
 				destList.append((item_text, boundFunction(self.openSetup, id), key, weight))
 				return
-		destList.append((item_text, self.nothing, key, weight))
+		destList.append((item_text, self.nothing, key, weight, image))
 
 	def sortByName(self, listentry):
 		return listentry[0].lower()
@@ -256,10 +254,11 @@ class Menu(Screen, ProtectedScreen):
 		Screen.__init__(self, session)
 		self["key_blue"] = StaticText("")
 		self["menu"] = List([])
-		self["menu"].enableWrapAround = True
+		self["menu"].onSelectionChanged.append(self.selectionChanged)
+		self["menuimage"] = Pixmap()
 		self.showNumericHelp = False
 		self.createMenuList()
-
+		ProtectedScreen.__init__(self)
 		# for the skin: first try a menu_<menuID>, then Menu
 		self.skinName = []
 		if self.menuID is not None:
@@ -270,7 +269,7 @@ class Menu(Screen, ProtectedScreen):
 			else:
 				self.skinName.append("menu_" + self.menuID)
 		self.skinName.append("Menu")
-		ProtectedScreen.__init__(self)
+
 		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NumberActions", "HelpActions", "ColorActions"], {
 			"ok": self.okbuttonClick,
 			"cancel": self.closeNonRecursive,
@@ -350,6 +349,9 @@ class Menu(Screen, ProtectedScreen):
 		if len(self.list) == 1:
 			self.onExecBegin.append(self.__onExecBegin)
 
+	def selectionChanged(self):
+		self["menuimage"].instance.setPixmap(self.getMenuEntryImage(self.menuID, lastKey))
+
 	def openTestA(self):
 		self.session.open(AnimMain, self.list, self.menu_title)
 		self.close()
@@ -371,7 +373,6 @@ class Menu(Screen, ProtectedScreen):
 		self["key_blue"].text = _("Edit menu") if config.usage.menu_sort_mode.value == "user" else ""
 		self.list = []
 		self.menuID = None
-		count = 0
 		for x in self.parentmenu:  # walk through the actual nodelist
 			if not x.tag:
 				continue
@@ -379,15 +380,12 @@ class Menu(Screen, ProtectedScreen):
 				item_level = int(x.get("level", 0))
 				if item_level <= config.usage.setup_level.index:
 					self.addItem(self.list, x)
-					count += 1
 			elif x.tag == "menu":
 				item_level = int(x.get("level", 0))
 				if item_level <= config.usage.setup_level.index:
 					self.addMenu(self.list, x)
-					count += 1
 			elif x.tag == "id":
 				self.menuID = x.get("val")
-				count = 0
 
 		if self.menuID:
 			# plugins
@@ -496,9 +494,9 @@ class Menu(Screen, ProtectedScreen):
 
 
 class MenuSort(Menu):
-	def __init__(self, session, parent):
+	def __init__(self, session, parentmenu):
 		self.somethingChanged = False
-		Menu.__init__(self, session, parent)
+		Menu.__init__(self, session, parentmenu)
 		self.skinName = "MenuSort"
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Save changes"))
@@ -506,16 +504,14 @@ class MenuSort(Menu):
 		self["key_blue"] = StaticText(_("Reset order (All)"))
 		self["menu"].onSelectionChanged.append(self.selectionChanged)
 
-		self["MoveActions"] = ActionMap(["WizardActions", "DirectionActions"], {
+		self["MoveActions"] = ActionMap(["DirectionActionsMenuSort", "ColorActions"], {
 			"moveUp": boundFunction(self.moveChoosen, -1),
 			"moveDown": boundFunction(self.moveChoosen, +1),
-		}, -1)
-		self["EditActions"] = ActionMap(["ColorActions"], {
 			"red": self.closeMenuSort,
 			"green": self.keySave,
 			"yellow": self.keyToggleShowHide,
 			"blue": self.resetSortOrder,
-		})
+		}, -1)
 		self.onLayoutFinish.append(self.selectionChanged)
 
 	def isProtected(self):
@@ -621,7 +617,7 @@ class AnimMain(Screen):
 		self["red"] = Button(_("Exit"))
 		self["green"] = Button(_("Select"))
 		self["yellow"] = Button(_("Config"))
-		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "DirectionActions", "NumberActions", "ColorActions"], {
+		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NavigationActions", "NumberActions", "ColorActions"], {
 			"ok": self.okbuttonClick,
 			"cancel": self.closeNonRecursive,
 			"left": self.key_left,
@@ -778,7 +774,7 @@ class IconMain(Screen):
 		self["red"] = Button(_("Exit"))
 		self["green"] = Button(_("Select"))
 		self["yellow"] = Button(_("Config"))
-		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "DirectionActions", "NumberActions", "ColorActions"], {
+		self["actions"] = NumberActionMap(["OkCancelActions", "MenuActions", "NavigationActions", "NumberActions", "ColorActions"], {
 			"ok": self.okbuttonClick,
 			"cancel": self.closeNonRecursive,
 			"left": self.key_left,
