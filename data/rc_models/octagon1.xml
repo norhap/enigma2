@@ -18,8 +18,8 @@
 		<button keyid="KEY_PREVIOUS" label="ARROWLEFT" title="Prev / ArrowLeft" pos="24,156" shape="circle" radius="12" />
 		<button keyid="KEY_0" label="0" title="0" pos="59,156" shape="circle" radius="12" />
 		<button keyid="KEY_NEXT" label="ARROWRIGHT" title="Next / ArrowRight" pos="94,156" shape="circle" radius="12" />
-		<button keyid="KEY_F1" label="F1" title="F1" pos="22,179" shape="rect" size="23,16" />
-		<button keyid="KEY_F2" label="F2" title="F2" pos="47,179" shape="rect" size="23,16" />
+		<button keyid="KEY_F1" remap="KEY_PREVIOUS" title="F1" pos="22,179" shape="rect" size="23,16" />
+		<button keyid="KEY_F2" remap="KEY_NEXT" title="F2" pos="47,179" shape="rect" size="23,16" />
 		<button keyid="KEY_F3" label="F3" title="F3" pos="73,179" shape="rect" size="23,16" />
 		<button keyid="KEY_F4" label="F4" title="F4" pos="98,179" shape="rect" size="23,16" />
 		<button keyid="KEY_MUTE" label="MUTE" title="Mute" pos="23,198" shape="rect" size="23,16" />
