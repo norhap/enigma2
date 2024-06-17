@@ -1,9 +1,9 @@
+from enigma import eBackgroundFileEraser, eActionMap, eDVBDB, eEnv, eSubtitleSettings, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
+
 from locale import AM_STR, PM_STR, nl_langinfo
 from os import listdir, makedirs, remove
 from os.path import exists, isdir, isfile, join, normpath
 from time import mktime
-
-from enigma import eBackgroundFileEraser, eDVBDB, eEnv, eSubtitleSettings, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
 from gettext import ngettext
 from skin import parameters
 from Components.About import GetIPsFromNetworkInterfaces
@@ -472,20 +472,24 @@ def InitUsageConfig():
 	config.usage.standby_to_shutdown_timer_blocktime_begin = ConfigClock(default=mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
 	config.usage.standby_to_shutdown_timer_blocktime_end = ConfigClock(default=mktime((1970, 1, 1, 23, 0, 0, 0, 0, 0)))
 
-	config.usage.long_press_emulation_key = ConfigSelection(default="0", choices=[
-		("0", _("None")),
-		(str(KEYIDS["KEY_TV"]), _("TV")),
-		(str(KEYIDS["KEY_RADIO"]), _("Radio")),
-		(str(KEYIDS["KEY_AUDIO"]), _("Audio")),
-		(str(KEYIDS["KEY_VIDEO"]), _("List Fav")),
-		(str(KEYIDS["KEY_HOME"]), _("Home")),
-		(str(KEYIDS["KEY_END"]), _("End")),
-		(str(KEYIDS["KEY_HELP"]), _("Help")),
-		(str(KEYIDS["KEY_INFO"]), _("Info (EPG)")),
-		(str(KEYIDS["KEY_TEXT"]), _("Teletext")),
-		(str(KEYIDS["KEY_SUBTITLE"]), _("Subtitle")),
-		(str(KEYIDS["KEY_FAVORITES"]), _("Favorites"))
+	def setLongPressedEmulationKey(configElement):
+		eActionMap.getInstance().setLongPressedEmulationKey(configElement.value)
+
+	config.usage.long_press_emulation_key = ConfigSelection(default=0, choices=[
+		(0, _("None")),
+		(KEYIDS["KEY_TV"], _("TV")),
+		(KEYIDS["KEY_RADIO"], _("Radio")),
+		(KEYIDS["KEY_AUDIO"], _("Audio")),
+		(KEYIDS["KEY_VIDEO"], _("List Fav")),
+		(KEYIDS["KEY_HOME"], _("Home")),
+		(KEYIDS["KEY_END"], _("End")),
+		(KEYIDS["KEY_HELP"], _("Help")),
+		(KEYIDS["KEY_INFO"], _("Info (EPG)")),
+		(KEYIDS["KEY_TEXT"], _("Teletext")),
+		(KEYIDS["KEY_SUBTITLE"], _("Subtitle")),
+		(KEYIDS["KEY_FAVORITES"], _("Favorites"))
 	])
+	config.usage.long_press_emulation_key.addNotifier(setLongPressedEmulationKey)
 
 	choicelist = [("0", _("Disabled"))]
 	for m in (1, 5, 10, 15, 30, 60):
