@@ -856,9 +856,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				havewol = True
 			if MODEL in ("et10000", "vuultimo4k", "vuduo4kse") and self.iface == "eth0":
 				havewol = False
-			if havewol and self.onlyWakeOnWiFi is not True and "wlan" not in self.iface:
+			if havewol and self.onlyWakeOnWiFi is False and "eth" in self.iface:
 				self.list.append(getConfigListEntry(_("Enable Wake On LAN"),
-					config.network.wol, _("When enabled the set top box is able to wakeup on LAN.")))
+					config.network.wol, _("Enabled the receiver is able to wakeup on LAN. Command: \"ether-wake MAC\"")))
 			self.extended = None
 			self.configStrings = None
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_NETWORKSETUP):

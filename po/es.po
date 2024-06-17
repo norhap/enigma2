@@ -11404,8 +11404,8 @@ msgstr "Cuando está habilitado, los botones de flecha alrededor del botón OK s
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr "Cuando está habilitado los botones izquierdo, derecho, CH +/-, B +/-, P +/- seguirán los controles zap de estilo ‘neutrino’ en lugar del estilo enigma2."
 
-msgid "When enabled the set top box is able to wakeup on LAN."
-msgstr "Cuando está habilitado, el receptor se puede activar desde su LAN."
+msgid "Enabled the receiver is able to wakeup on LAN. Command: \"ether-wake MAC\""
+msgstr "Habilitado, el receptor puede reactivarse en LAN. Comando: \"ether-wake MAC\""
 
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr "Cuando está habilitado, cuando selecciona un nuevo canal en la lista de canales, la lista de canales no se cierra. Solo se cerrará cuando seleccione el canal de reproducción actual. Este es un tipo de modo de vista previa"
