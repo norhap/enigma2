@@ -842,8 +842,8 @@ msgstr "Ocurrió un error al descargar lista de paquetes. Por favor, reintenta."
 msgid "An unknown error occurred!"
 msgstr "Ocurrió un error desconocido!"
 
-msgid "And will put your receiver in standby over "
-msgstr "Y pondrá el receptor en modo de reposo "
+msgid "And will put your receiver in standby over in "
+msgstr "Y pondrá el receptor en standby en "
 
 msgid "Andorra"
 msgstr "Andorra"
@@ -1599,8 +1599,11 @@ msgstr "Configure la relación de aspecto de la pantalla."
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Configura la duración en horas en las que el receptor se deba ir a reposo cuando no está controlado."
 
-msgid "Configure the duration in minutes for the sleeptimer. Select this entry and press BLUE to start/stop the sleeptimer"
-msgstr "Configura la duración en minutos para el temporizador de descanso. Selecciona esta entrada y pulse AZUL para iniciar/parar el temporizador de descanso"
+msgid "Configure the duration in minutes for the sleeptimer.\nSelect the entry and press BLUE to restart the sleeptimer or press YELLOW for stop the sleeptimer current."
+msgstr "Configure la duración en minutos del temporizador de descanso.\nSeleccione la entrada y pulse AZUL para reiniciar el temporizador de descanso o pulse AMARILLO para detener el temporizador de descanso actual."
+
+msgid "Configure the duration in minutes for the sleeptimer. Select the entry and press BLUE to start the sleeptimer."
+msgstr "Configura la duración en minutos para el temporizador de descanso. Selecciona la entrada y pulse AZUL para iniciar el temporizador de descanso."
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
 msgstr "Configure la duración cuando el receptor debe apagarse en caso de que esté en modo de reposo."
@@ -7231,8 +7234,8 @@ msgstr "Comenzar decodificado offline"
 msgid "Start recording?"
 msgstr "Comenzar grabación?"
 
-msgid "Start - Stop Sleeptimer"
-msgstr "Iniciar - Parar Temporizador de descanso"
+msgid "Restart Sleeptimer"
+msgstr "Reiniciar Temporizador"
 
 msgid "Start Sleeptimer"
 msgstr "Iniciar Temporizador de descanso"
@@ -7716,10 +7719,10 @@ msgid "The saved PIN was cleared."
 msgstr "Se borró el PIN guardado."
 
 msgid "The sleep timer has been activated."
-msgstr "El temporizador de reposo se ha activado."
+msgstr "El temporizador de descanso se ha activado."
 
 msgid "The sleep timer has been disabled."
-msgstr "El temporizador de reposo se ha desactivado."
+msgstr "El temporizador de descanso se ha desactivado."
 
 msgid ""
 "The software management extension is not installed!\n"
@@ -9068,11 +9071,11 @@ msgstr "Su receptor podría estar inutilizable ahora. Consulte el manual para ob
 msgid "Your receiver does not have an internet connection"
 msgstr "Su receptor no tiene conexión a Internet"
 
-msgid "Your receiver will got to stand by due to the sleeptimer."
-msgstr "Su receptor se pondrá en reposo debido al temporizador de apagado automático."
+msgid "Your receiver will got to standby due to the sleeptimer."
+msgstr "Su receptor se pondrá en standby debido al temporizador de descanso automático."
 
 msgid "Your receiver will got to standby due to inactivity."
-msgstr "Su receptor estará en modo de reposo debido a la inactividad."
+msgstr "Su receptor estará en modo standby debido a la inactividad."
 
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr "Su receptor se reiniciará tras presionar OK en su mando a distancia."

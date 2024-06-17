@@ -4160,7 +4160,7 @@ class InfoBarPowersaver:
 		message = ""
 		if sleepTime:
 			m = abs(sleepTime / 60)
-			message = _("The sleep timer has been activated.") + "\n" + _("And will put your receiver in standby over ") + ngettext("%d minute", "%d minutes", m) % m
+			message = _("The sleep timer has been activated.") + "\n" + _("And will put your receiver in standby over in ") + ngettext("%d minute", "%d minutes", m) % m
 			self.sleepTimer.startLongTimer(sleepTime)
 			self.sleepStartTime = time() + sleepTime
 		else:
@@ -4171,7 +4171,7 @@ class InfoBarPowersaver:
 	def sleepTimerTimeout(self):
 		if not inStandby:
 			list = [(_("No"), False), (_("Extend sleeptimer 15 minutes"), "extend"), (_("Yes"), True)]
-			message = _("Your receiver will got to stand by due to the sleeptimer.")
+			message = _("Your receiver will got to standby due to the sleeptimer.")
 			message += "\n" + _("Do you want this?")
 			self.session.openWithCallback(self.sleepTimerTimeoutCallback, MessageBox, message, timeout=60, simple=True, list=list, timeout_default=True)
 

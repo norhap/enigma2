@@ -8,7 +8,7 @@ from time import time, localtime, mktime
 
 class SleepTimerEdit(Setup):
 	def __init__(self, session):
-		Setup.__init__(self, session, None, blue_button={'function': self.startSleeptimer, 'helptext': _("Start - Stop Sleeptimer")})
+		Setup.__init__(self, session, yellow_button={'function': self.stopSleeptimer, 'helptext': _("Stop Sleeptimer")}, blue_button={'function': self.startSleeptimer, 'helptext': _("Start Sleeptimer")})
 		self.skinName = ["SleepTimerSetup", "Setup"]
 		self.setTitle(_("SleepTimer Configuration"))
 
@@ -19,13 +19,17 @@ class SleepTimerEdit(Setup):
 			_("Startup the set top box in standby from deepstandby or from turn off.")))
 		if InfoBar.instance and InfoBar.instance.sleepTimer.isActive():
 			statusSleeptimerText = _("(activated +%d min)") % InfoBar.instance.sleepTimerState()
-			self["key_blue"].text = _("Stop Sleeptimer") if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
+			self["key_blue"].text = "" if config.usage.sleep_timer.value == "0" else _("Restart Sleeptimer")
+			self["key_yellow"].text = _("Stop Sleeptimer")
+			conflist.append((_("Sleeptimer") + " " + statusSleeptimerText,
+				config.usage.sleep_timer,
+				_("Configure the duration in minutes for the sleeptimer.\nSelect the entry and press BLUE to restart the sleeptimer or press YELLOW for stop the sleeptimer current.")))
 		else:
 			statusSleeptimerText = _("(not activated)")
 			self["key_blue"].text = "" if config.usage.sleep_timer.value == "0" else _("Start Sleeptimer")
-		conflist.append((_("Sleeptimer") + " " + statusSleeptimerText,
-			config.usage.sleep_timer,
-			_("Configure the duration in minutes for the sleeptimer. Select this entry and press BLUE to start/stop the sleeptimer")))
+			conflist.append((_("Sleeptimer") + " " + statusSleeptimerText,
+				config.usage.sleep_timer,
+				_("Configure the duration in minutes for the sleeptimer. Select the entry and press BLUE to start the sleeptimer.")))
 		conflist.append((_("Inactivity Sleeptimer"),
 			config.usage.inactivity_timer,
 			_("Configure the duration in hours the receiver should go to standby when the receiver is not controlled.")))
@@ -116,6 +120,11 @@ class SleepTimerEdit(Setup):
 				sleepTimer = int(sleepTimer)
 			if sleepTimer or not self.getCurrentEntry().endswith(_("(not activated)")):
 				InfoBar.instance and InfoBar.instance.setSleepTimer(sleepTimer)
+			self.close(True)
+
+	def stopSleeptimer(self):
+		if self["key_yellow"].text:
+			InfoBar.instance and InfoBar.instance.setSleepTimer(0)
 			self.close(True)
 
 	def currentEventTime(self):
