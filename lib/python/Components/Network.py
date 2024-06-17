@@ -393,7 +393,7 @@ class Network:
 		if iface in self.ifaces:
 			self.ifaces[iface][attribute] = value
 		if BoxInfo.getItem("WakeOnLAN") and iface not in self.wlan_interfaces:
-			if config.network.wol.value and self.ifaces[iface][attribute] == False:
+			if config.network.wol.value and self.ifaces[iface][attribute] is False:
 				self.ifaces[iface][attribute] = True  # if down netowork and not attribute then: attribute True for WOL
 
 	def removeAdapterAttribute(self, iface, attribute):
