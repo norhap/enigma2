@@ -90,19 +90,24 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<id val="osd_menu" />
 			<item key="user_interface" level="0" text="User Interface Setup" weight="5"><setup id="UserInterface" /></item>
 			<item key="primary_skin_selector" level="0" text="Skin Setup" weight="10"><screen module="SkinSelector" screen="SkinSelector" /></item>
-			<menu key="display_selection" level="0" text="Front Panel Display" weight="15" requires="FrontpanelDisplay">
-				<id val="lcd" />
-				<item key="display_skin_selector" level="0" text="Skin Setup" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
-				<item key="lcd_setup" level="1" text="LCD Setup" weight="10"><setup id="FrontDisplay" /></item>
-				<item key="led_setup" level="1" text="LED Setup" weight="15" requires="DisplayLED"><setup id="LEDDisplay" /></item>
-			</menu>
-			<menu key="leddisplay_selection" level="0" text="LED Setup" weight="6" requires="NoHaveFrontpanelDisplay">
-				<id val="leddisplay" />
-				<item key="led_setup" level="1" text="LED Setup" weight="10"><setup id="LEDDisplay" /></item>
-			</menu>
 			<item key="subtitle_setup" level="2" text="Subtitle Setup" weight="20"><setup id="Subtitle" /></item>
 			<item key="language_setup" level="0" text="Language Setup" weight="25"><screen module="LanguageSelection" /></item>
 			<item key="parental_setup" level="0" text="Parental Control Setup" weight="30"><screen module="ParentalControlSetup" screen="ParentalControlSetup" /></item>
+		</menu>
+
+		<menu key="display_selection" level="0" text="Front Panel Display" weight="15" requires="FrontpanelDisplay">
+			<id val="lcd" />
+			<item key="display_skin_selector" level="0" text="Skin Setup" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
+			<item key="lcd_setup" level="1" text="LCD Setup" weight="10"><setup id="FrontDisplay" /></item>
+			<menu key="leddisplay_selection" level="0" text="LED Setup" weight="15" requires="FrontpanelDisplay">
+				<id val="led" />
+				<item key="led_setup" level="1" text="LED Setup" weight="15" requires="DisplayLED"><setup id="LEDDisplay" /></item>
+			</menu>
+		</menu>
+
+		<menu key="leddisplay_selection" level="0" text="LED Setup" weight="6" requires="NoHaveFrontpanelDisplay">
+			<id val="leddisplay" />
+			<item key="led_setup" level="1" text="LED Setup" weight="10"><setup id="LEDDisplay" /></item>
 		</menu>
 
 		<!-- Menu / Setup / Network -->
@@ -128,25 +133,13 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		</menu>
 
 		<!-- Menu / Setup / Common Interface -->
-		<!-- No point in a sub menu for only one item!
-		<menu key="cicam_setup" level="0" text="Common Interface" weight="7" requires="CommonInterface">
-			<id val="cicam" />
-		-->
-		<item key="ci_setup" level="0" text="Common Interface" weight="5" requires="CommonInterface"><screen module="Ci" screen="CiSelection" /></item>
-		<!--
-		</menu>
-		-->
-
 		<!-- Menu / Setup / Softcam -->
-		<!-- No point in a sub menu for only one item!
 		<menu key="cam_setup" level="0" text="SoftCam / CI" weight="10">
 			<id val="cam" />
-		-->
-		<item key="softcam_setup" level="0" text="Softcam" weight="5"><screen module="SoftcamSetup" screen="SoftcamSetup" /></item>
-		<item key="streamrelay_settings" level="0" text="Stream Relay Settings" weight="110" requires="StreamRelay"><screen module="SoftcamSetup" screen="StreamRelaySetup" /></item>
-		<!--
+			<item key="softcam_setup" level="0" text="Softcam" weight="5"><screen module="SoftcamSetup" screen="SoftcamSetup" /></item>
+			<item key="streamrelay_settings" level="0" text="Stream Relay Settings" weight="110" requires="StreamRelay"><screen module="SoftcamSetup" screen="StreamRelaySetup" /></item>
+			<item key="ci_setup" level="0" text="Common Interface" weight="5" requires="CommonInterface"><screen module="Ci" screen="CiSelection" /></item>
 		</menu>
-		-->
 
 		<!-- Menu / Setup / Storage -->
 		<menu key="hardisk_selection" level="0" text="Storage" requires="Harddisk" weight="40">
@@ -166,7 +159,10 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		</menu>
 
 		<!-- Menu / Setup / Time -->
-		<item key="time_setup" level="0" text="Time" weight="50"><screen module="Time" screen="Time" /></item>
+		<menu key="time_setup" level="1" text="Time" weight="45">
+			<id val="time" />
+			<item key="time_setup" level="0" text="Time" weight="50"><screen module="Time" screen="Time" /></item>
+		</menu>
 
 		<!-- Menu / Setup / System -->
 		<menu key="system_selection" level="0" text="System" weight="55">
@@ -178,7 +174,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item key="logs_man" level="2" text="Logs Manager"><screen module="LogManager" screen="LogManager" /></item>
 			<item key="input_device_setup" level="1" text="Input Devices"><screen module="InputDeviceSetup" screen="InputDeviceSelection" /></item>
 			<item key="software_update" level="0" text="Software Update" weight="25"><screen module="SoftwareUpdate" screen="UpdatePlugin" /></item>
-			<item key="device_setup" level="0" text="Keyboard / Remote Control Setup"><screen module="InputDeviceSetup" screen="InputDeviceSetup" /></item>
+			<item key="input_device_remote_control" level="0" text="Keyboard / Remote Control Setup"><screen module="InputDeviceSetup" screen="InputDeviceSetup" /></item>
 			<item key="rfmod_setup" level="1" text="RF Modulator Output Setup" requires="RfModulator"><setup id="RFModulator" /></item>
 			<item key="flash_image" level="0" text="Flash Image"><screen module="FlashImage" screen="SelectImage" /></item>
 			<item key="factory_reset" level="0" text="Factory Reset"><screen module="FactoryReset" screen="FactoryReset" /></item>
@@ -230,7 +226,7 @@ self.session.scart.VCRSbChanged(3)
 		<item key="multiboot" level="0" text="Multiboot Image Selector" weight="40" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
 		<item key="enable_kexec_multiboot" level="2" text="Enable Vu+ MultiBoot" requires="canKexec"><screen module="VuplusKexec" screen="VuplusKexec">1</screen></item>
 		<item key="restart" level="0" text="Restart" weight="35"><screen module="Standby" screen="TryQuitMainloop">2</screen></item>
-		<item weight="24" level="0" text="Switch to Android" requires="canDualBoot" key="dualboot"><screen module="Standby" screen="SwitchToAndroid" /></item>
+		<item key="dualboot" level="0" text="Switch to Android" weight="24" requires="canDualBoot"><screen module="Standby" screen="SwitchToAndroid" /></item>
 		<item key="deep_standby" level="0" text="Deep Standby" weight="45" requires="DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
 		<item key="deep_standby" level="0" text="Shutdown" weight="50" requires="!DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
 		<item key="maintenance_mode" level="0" text="Recovery Mode" weight="55" requires="RecoveryMode"><screen module="Standby" screen="TryQuitMainloop">16</screen></item>
