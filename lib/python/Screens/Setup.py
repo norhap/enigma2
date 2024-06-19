@@ -102,12 +102,12 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 					# This may not be appropriate if conditional setup blocks become available.
 					break
 			if appendItems:
-				self.list + appendItems
+				self.list = self.list + appendItems  # list + items with header
 			if title:
 				title = dgettext(self.pluginLanguageDomain, title) if self.pluginLanguageDomain else _(title)
 			self.setTitle(title if title else _("Setup"))
-			if not self.list:  # This forces the self["config"] list to be cleared if there are no eligible items available to be displayed.
-				self["config"].list = self.list
+			if not self.list:
+				self["config"].setList(self.list)
 			elif self.list != oldList or self.showDefaultChanged or self.graphicSwitchChanged:
 				currentItem = self["config"].getCurrent()
 				self["config"].setList(self.list)
