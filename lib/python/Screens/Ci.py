@@ -544,7 +544,6 @@ class CiSelection(Screen):
 				if isinstance(cur[1], ConfigBoolean):
 					self.keyRight()
 				elif isinstance(cur[1], ConfigSelection):
-					pass
 					self.keySelection()
 			elif action == 0:  # reset
 				eDVBCI_UI.getInstance().setReset(slot)
