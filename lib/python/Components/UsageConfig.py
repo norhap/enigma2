@@ -580,30 +580,28 @@ def InitUsageConfig():
 	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
 
 	if SystemInfo["7segment"]:
-		config.usage.blinking_display_clock_during_recording = ConfigSelection(default="Rec", choices=[
+		config.usage.blinking_in_standby_during_recording = ConfigSelection(default="Rec", choices=[
 			("Rec", _("REC")),
 			("RecBlink", _("Blinking REC")),
 			("Time", _("Time")),
 			("Nothing", _("Nothing"))
 		])
-	else:
-		config.usage.blinking_display_clock_during_recording = ConfigYesNo(default=False)
-
-	# blink for displaytext not in 7segment
-	if SystemInfo["textlcd"]:
-		config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default="Channel", choices=[
-			("Rec", _("REC symbol")),
-			("RecBlink", _("Blinking REC symbol")),
-			("Channel", _("Channel name"))
-		])
-	if SystemInfo["7segment"]:
 		config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default="Rec", choices=[
 			("Rec", _("REC")),
 			("RecBlink", _("Blinking REC")),
 			("Time", _("Time"))
 		])
 	else:
-		config.usage.blinking_rec_symbol_during_recording = ConfigYesNo(default=True)
+		# blink for displaytext not in 7segment
+		if SystemInfo["textlcd"]:
+			config.usage.blinking_rec_symbol_during_recording = ConfigSelection(default="Channel", choices=[
+				("Rec", _("REC symbol")),
+				("RecBlink", _("Blinking REC symbol")),
+				("Channel", _("Channel name"))
+			])
+		else:
+			config.usage.blinking_in_standby_during_recording = ConfigYesNo(default=False)
+			config.usage.blinking_rec_symbol_during_recording = ConfigYesNo(default=True)
 
 	# show/hide time in display in standby
 	config.usage.show_in_standby = ConfigSelection(default="time", choices=[

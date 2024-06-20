@@ -220,7 +220,7 @@
 		</widget>
 		<!-- Recording indicator-->
 		<widget source="session.RecordState" render="FixedLabel" text="REC" foregroundColor="#FF0000" position="0,48" size="48,16" font="Regular;16" horizontalAlignment="center" zPosition="1" >
-			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<!-- Remaining movie time -->

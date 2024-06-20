@@ -85,7 +85,7 @@
 		<item level="1" requires="LCDMiniTV" text="Show PIP in the front panel display" description="Show PIP in the front panel display.">config.lcd.modepip</item>
 		<item level="1" requires="LCDMiniTV" text="Set framerate for MiniTV" description="Show framerate MiniTV in the front panel display.">config.lcd.fpsminitv</item>
 		<item level="1" text="REC symbol in use" description="Configure how to show REC symbol in use (this needs an enigma2 restart)." requires="FrontpanelDisplay">config.usage.blinking_rec_symbol_during_recording</item>
-		<item level="1" text="REC symbol in Standby" description="Configure how to show REC symbol in standby (this needs an enigma2 restart)." requires="FrontpanelDisplay">config.usage.blinking_display_clock_during_recording</item>
+		<item level="1" text="REC symbol in Standby" description="Configure how to show REC symbol in standby (this needs an enigma2 restart)." requires="FrontpanelDisplay">config.usage.blinking_in_standby_during_recording</item>
 		<item level="1" requires="ConfigDisplay" text="Scrolling speed (software renderer)" description="Set the scrolling speed of text on the front panel display, this is used by software renderer in some skins.">config.lcd.scroll_speed</item>
 		<item level="1" requires="ConfigDisplay" text="Scrolling delay (software renderer)" description="Set the delay time between repeated loops, this is used by software renderer in some skins.">config.lcd.scroll_delay</item>
 		<item level="0" requires="ConfigDisplay" text="Show HDD progress" description="Disable the HDD Process on VFD.">config.lcd.hdd</item>
@@ -171,10 +171,12 @@
 		<item level="0" requires="SuspendLED" text="Power LED state in Deep-Standby" description="Power LED state during deep-standby.">config.usage.lcd_deepstandbypowerled</item>
 		<item level="0" requires="LedPowerColor" text="Operating LED status while running" description="Configure color of the LED when is operation.">config.lcd.ledpowercolor</item>
 		<item level="0" requires="LedSuspendColor" text="Operating LED status in deep standby mode" description="Configure color front LED during deep standby mode.">config.lcd.ledsuspendcolor</item>
-		<item level="0" text="Brightness" description="Configure the brightness level of the front panel display." requires="NoHaveFrontpanelDisplay">config.lcd.bright</item>
-		<item level="0" text="Brightness (Dimmed)" description="Configure the brightness level of the front panel display for dimmed operation." requires="NoHaveFrontpanelDisplay">config.lcd.dimbright</item>
-		<item level="0" text="Dim delay" description="Dim the LCD after specified time." requires="NoHaveFrontpanelDisplay">config.lcd.dimdelay</item>
-		<item level="0" text="Standby" description="Configure the brightness level of the front panel display during standby." requires="NoHaveFrontpanelDisplay">config.lcd.standby</item>
+		<if requires="NoHaveFrontpanelDisplay">		
+			<item level="0" text="Brightness" description="Configure the brightness level of the front panel display.">config.lcd.bright</item>
+			<item level="0" text="Brightness (Dimmed)" description="Configure the brightness level of the front panel display for dimmed operation.">config.lcd.dimbright</item>
+			<item level="0" text="Dim delay" description="Dim the LCD after specified time.">config.lcd.dimdelay</item>
+			<item level="0" text="Standby" description="Configure the brightness level of the front panel display during standby.">config.lcd.standby</item>
+		</if>		
 	</setup>
 	<setup key="Logs" title="Logs Setup">
 		<item level="2" text="Debug logging *" description="Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged. These logs can be helpful for developers in finding and fixing problems.">config.crash.debugLevel</item>

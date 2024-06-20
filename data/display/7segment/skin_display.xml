@@ -163,15 +163,15 @@ and the display skin will not be displayed
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="0,0" size="1,1" text="REC ">
-			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,RecBlink,CheckSourceBoolean</convert>
+			<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,RecBlink,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide">Blink,3000</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="0,0" size="1,1" text="REC ">
-			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,Rec,CheckSourceBoolean</convert>
+			<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,Rec,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="0,0" size="1,1" text="    ">
-			<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,Nothing,CheckSourceBoolean</convert>
+			<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,Nothing,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide" />
 		</widget>
 	</screen>

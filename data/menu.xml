@@ -99,15 +99,10 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<id val="lcd" />
 			<item key="display_skin_selector" level="0" text="Skin Setup" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
 			<item key="lcd_setup" level="1" text="LCD Setup" weight="10"><setup id="FrontDisplay" /></item>
-			<menu key="leddisplay_selection" level="0" text="LED Setup" weight="15" requires="FrontpanelDisplay">
+			<menu key="leddisplay_selection" level="0" text="LED Setup" weight="15" requires="DisplayLED">
 				<id val="led" />
-				<item key="led_setup" level="1" text="LED Setup" weight="15" requires="DisplayLED"><setup id="LEDDisplay" /></item>
+				<item key="led_setup" level="1" text="LED Setup" weight="15"><setup id="LEDDisplay" /></item>
 			</menu>
-		</menu>
-
-		<menu key="leddisplay_selection" level="0" text="LED Setup" weight="6" requires="NoHaveFrontpanelDisplay">
-			<id val="leddisplay" />
-			<item key="led_setup" level="1" text="LED Setup" weight="10"><setup id="LEDDisplay" /></item>
 		</menu>
 
 		<!-- Menu / Setup / Network -->

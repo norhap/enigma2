@@ -66,10 +66,6 @@
 			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="0,200" size="110,25" foregroundColor="#ff0000" font="FdLcD;24" zPosition="1" noWrap="1" >
-			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,False,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide" />
-		</widget>
 		<panel name="SummaryClockPanel" />
 	</screen>
 
@@ -175,12 +171,8 @@
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="center,200" size="190,22" font="FdLcD;22" zPosition="2" verticalAlignment="bottom" horizontalAlignment="center" noWrap="1" foregroundColor="#ff0000" >
-			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="Recording" position="center,200" size="190,22" font="FdLcD;22" zPosition="2" verticalAlignment="bottom" horizontalAlignment="center" noWrap="1" foregroundColor="#ff0000" >
-			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,False,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide" />
 		</widget>
 	</screen>
 
@@ -344,15 +336,6 @@
 		<widget source="session.CurrentService" render="Label" position="0,194" size="400,46" font="FdLcD;46" horizontalAlignment="right" transparent="1">
 			<convert type="ServicePosition">Remaining,Negate</convert>
 			<!--convert type="ServicePosition">Summary</convert-->
-		</widget>
-		<!-- Recording indicator-->
-		<widget source="session.RecordState" render="FixedLabel" text="REC" position="350,0" size="50,22" horizontalAlignment="right" foregroundColor="#ff0000" font="FdLcD;19"  zPosition="1" noWrap="1" >
-			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
-		<widget source="session.RecordState" render="FixedLabel" text="REC" position="350,0" size="50,22" horizontalAlignment="right" foregroundColor="#ff0000" font="FdLcD;19"  zPosition="1" noWrap="1" >
-			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,False,CheckSourceBoolean</convert>
-			<convert type="ConditionalShowHide" />
 		</widget>
 	</screen>
 	<screen name="CrossEPG_Downloader_summary" position="0,0" size="400,240">

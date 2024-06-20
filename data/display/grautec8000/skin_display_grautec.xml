@@ -37,7 +37,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" foregroundColor="white" backgroundColor="#FF0000">
@@ -52,7 +52,7 @@
 		<convert type="ClockToText">Default</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="Recording" position="0,160" size="400,60" font="LCD1;60" horizontalAlignment="center" zPosition="3" transparent="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	 </widget>
 	 <widget source="global.CurrentTime" render="Label" position="0,160" size="400,60" font="LCD1;55" zPosition="2" transparent="1" horizontalAlignment="center">
@@ -83,7 +83,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -111,7 +111,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -140,7 +140,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -191,7 +191,7 @@
 	</widget>
 	<widget source="parent.TimeStr" render="Label" position="200,188" size="200,50" horizontalAlignment="right" font="LCD1;52" verticalAlignment="top" foregroundColor="oled1" backgroundColor="#000000"/>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -211,7 +211,7 @@
 		<convert type="ClockToText">Format:%H:%M:%S</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -233,7 +233,7 @@
 		<convert type="ServicePosition">Remaining,Negate</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -252,7 +252,7 @@
 		<convert type="ClockToText">Format:%H:%M:%S</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="180,188" size="220,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -285,7 +285,7 @@
 		<convert type="MovieInfo">FileSize</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="180,188" size="220,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -306,7 +306,7 @@
 		<convert type="MovieInfo">FileSize</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="180,188" size="220,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -349,7 +349,7 @@
 		<convert type="ServicePosition">Remaining,Negate</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -371,7 +371,7 @@
 		<convert type="ServicePosition">Remaining,Negate</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="center" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -564,7 +564,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -588,7 +588,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -611,7 +611,7 @@
 		<convert type="MovieInfo">FileSize</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="180,188" size="220,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -638,7 +638,7 @@
 		<convert type="ServicePosition">Remaining,Negate</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -744,7 +744,7 @@
 		<convert type="ServicePosition">Remaining</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -790,7 +790,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -820,7 +820,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -846,7 +846,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -864,7 +864,7 @@
 	<convert type="ClockToText">Format:%H:%M:%S</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -908,7 +908,7 @@
 	</widget>
 	<eLabel text="Timer+" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" foregroundColor="oled1" backgroundColor="#000000" />
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -928,7 +928,7 @@
 		<convert type="ClockToText">WithSeconds</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -956,7 +956,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -982,7 +982,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1008,7 +1008,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1034,7 +1034,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1060,7 +1060,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1086,7 +1086,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1112,7 +1112,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1138,7 +1138,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1164,7 +1164,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1190,7 +1190,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1216,7 +1216,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1242,7 +1242,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1268,7 +1268,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1294,7 +1294,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1320,7 +1320,7 @@
 		<convert type="RemainingToText">inMinutes</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1344,7 +1344,7 @@
 			<convert type="ServicePosition">Remaining,Negate</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text="REC" position="200,188" size="200,50" font="LCD1;52" horizontalAlignment="right" verticalAlignment="top" zPosition="1" foregroundColor="#FF0000" backgroundColor="#000000" >
-		<convert type="ConfigEntryTest">config.usage.blinking_display_clock_during_recording,True,CheckSourceBoolean</convert>
+		<convert type="ConfigEntryTest">config.usage.blinking_in_standby_during_recording,True,CheckSourceBoolean</convert>
 		<convert type="ConditionalShowHide">Blink</convert>
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
