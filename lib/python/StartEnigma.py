@@ -448,7 +448,7 @@ class PowerKey:
 			return 0
 
 
-if enigma.eAVControl.getInstance().hasScartSwitch():
+if BoxInfo.getItem("scart"):
 	enigma.eProfileWrite("Scart")
 	print("[StartEnigma] Initialising Scart module")
 	from Screens.Scart import Scart
@@ -542,7 +542,7 @@ def runScreenTest():
 		Components.VfdSymbols.SymbolsCheck(session)
 
 	# we need session.scart to access it from within menu.xml
-	session.scart = AutoScartControl(session) if enigma.eAVControl.getInstance().hasScartSwitch() else None
+	session.scart = AutoScartControl(session) if BoxInfo.getItem("scart") else None
 
 	enigma.eProfileWrite("Init:Trashcan")
 	import Tools.Trashcan

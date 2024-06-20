@@ -1,6 +1,6 @@
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo, SystemInfo
 from Components.ConfigList import ConfigListScreen
 from Components.config import getConfigListEntry, config, ConfigBoolean, ConfigNothing
 from Components.Label import Label
@@ -115,7 +115,7 @@ class VideoSetup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Color format"), config.av.colorformat, _("Configure which color format should be used on the SCART output.")))
 			if level >= 1:
 				self.list.append(getConfigListEntry(_("WSS on 4:3"), config.av.wss, _("When enabled, content with an aspect ratio of 4:3 will be stretched to fit the screen.")))
-				if SystemInfo["ScartSwitch"]:
+				if BoxInfo.getItem("scart"):
 					self.list.append(getConfigListEntry(_("Auto scart switching"), config.av.vcrswitch, _("When enabled, your receiver will detect activity on the VCR SCART input.")))
 
 		if level >= 1:

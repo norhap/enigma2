@@ -518,7 +518,7 @@
 		<item level="2" text="Behavior of '0' button in PiP mode" description="Configure the function of the '0' button when Picture in Picture is active." requires="PIPAvailable">config.usage.pip_zero_button</item>
 		<item level="2" text="Close PiP with 'exit' button" description="When enabled the Picture in Picture window can be closed with 'exit' button." requires="PIPAvailable">config.usage.pip_hideOnExit</item>
 		<item level="2" text="Remember last service in PiP" description="Configure if and how long the latest service in Picture in Picture mode will be remembered." requires="PIPAvailable">config.usage.pip_last_service_timeout</item>
-		<item level="2" text="Show VCR scart on main menu" description="When enabled, the VCR scart option will be shown on the main menu" requires="ScartSwitch">config.usage.show_vcr_scart</item>
+		<item level="2" text="Show VCR scart on main menu" description="When enabled, the VCR scart option will be shown on the main menu" requires="scart">config.usage.show_vcr_scart</item>
 		<item level="2" text="Show Boolean values as graphical switch" description="Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch.">config.usage.boolean_graphic</item>
 		<item level="2" text="Show additional slider value" description="Enable the current value of the slider at end of the slider bar.">config.usage.show_slider_value</item>
 		<item level="0" text="Show menu numbers" description="This option allows you to display numbers that will directly access the menu.">config.usage.menu_show_numbers</item>

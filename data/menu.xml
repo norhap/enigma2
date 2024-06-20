@@ -204,7 +204,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 	</menu>
 
 	<!-- Menu / VCR Scart -->
-	<item key="scart_switch" level="1" text="VCR Scart" weight="25" conditional="config.usage.show_vcr_scart.value" requires="ScartSwitch">
+	<item key="scart_switch" level="1" text="VCR Scart" weight="25" conditional="config.usage.show_vcr_scart.value" requires="scart">
 		<code>
 self.session.scart.VCRSbChanged(3)
 		</code>

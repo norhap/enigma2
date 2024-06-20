@@ -9,7 +9,7 @@ from Components.config import config
 from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
-from Components.SystemInfo import SystemInfo, MODEL, BRAND, DISPLAYMODEL
+from Components.SystemInfo import BoxInfo, SystemInfo, MODEL, BRAND, DISPLAYMODEL
 from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediaFilesInUse
@@ -175,7 +175,7 @@ class StandbyScreen(Screen):
 			del self.session.pip
 		self.session.pipshown = False
 
-		if SystemInfo["ScartSwitch"]:
+		if BoxInfo.getItem("scart"):
 			self.avswitch.setInput("SCART")
 		else:
 			self.avswitch.setInput("AUX")

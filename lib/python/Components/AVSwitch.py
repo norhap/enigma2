@@ -174,12 +174,6 @@ def InitAVSwitch():
 	config.av.wss.addNotifier(setWSS)
 
 	iAVSwitch.setInput("ENCODER")  # init on startup
-	if MODEL in ("gb7356", "et5x00", "et6x00", "ixussone", "ixusszero", "axodin", "axase3", "optimussos1", "optimussos2", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "twinboxlcd"):
-		detected = False
-	else:
-		detected = eAVControl.getInstance().hasScartSwitch()
-
-	SystemInfo["ScartSwitch"] = detected
 
 	if SystemInfo["Canedidchecking"]:
 		choices = [
