@@ -5063,7 +5063,9 @@
 				}
 			</convert>
 		</widget>
-		<widget name="menuimage" position="80,260" size="260,100" alphaTest="blend" conditional="menuimage" backgroundColor="OE_NewBg2"/>
+		<!-- menuimage only with folder mainmenu-->
+		<!-- widget name="menuimage" position="80,260" size="260,100" alphaTest="blend" conditional="menuimage" backgroundColor="OE_NewBg2"/-->
+		<!-- IMAGES MAIN MENU-->
 		<widget source="menu" render="FixedLabel" text="Plugin IPToSAT" position="15,250" size="260,40" backgroundColor="OE_NewBg2" font="RegularBold;32">
 			<convert type="MenuEntryCompare">iptosat_menu</convert>
 			<convert type="ConditionalShowHide"/>
@@ -5088,6 +5090,19 @@
 			<convert type="MenuEntryCompare">info_screen</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/media_player.png" position="80,260" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">media_player</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/timermenu.png" position="80,260" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">timer_menu</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/shutdown.png" position="80,260" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">standby_restart_list</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<!-- IMAGE ITEM KEYS SUBMENUS (IF MOVE POSITION WITH MENUSORT)-->
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/information.png" position="80,260" render="Pixmap" size="100,100">
 			<convert type="MenuEntryCompare">about_screen</convert>
 			<convert type="ConditionalShowHide"/>
@@ -5118,18 +5133,6 @@
 		</widget>
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/information.png" position="80,260" render="Pixmap" size="100,100">
 			<convert type="MenuEntryCompare">streaming_clients_info_screen</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/media_player.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">media_player</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/timermenu.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">timer_menu</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/shutdown.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">standby_restart_list</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/shutdown.png" position="80,260" render="Pixmap" size="100,100">
@@ -5176,67 +5179,6 @@
 			<convert type="MenuEntryCompare">android_mode</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/network.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">network_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/harddisk.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">hardisk_selection</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/rec.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">rec_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/system.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">system_selection</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/lcd.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">display_selection</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/led.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">leddisplay_selection</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/video.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">video_selection</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">epg_menu</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/scan.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">service_searching_selection</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/cam.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">cam_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/ci_setup.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">ci_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/osd_menu.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">osd_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/time.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">time_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/software_manager.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">software_manager</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/autobackup.png" position="80,158" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">autobackup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<!-- IMAGE FIRST ITEM SUBMENUS -->
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/timermenu.png" position="80,260" render="Pixmap" size="100,100">
 			<convert type="MenuEntryCompare">timer_edit</convert>
 			<convert type="ConditionalShowHide"/>
@@ -5291,26 +5233,6 @@
 		</widget>
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/cam.png" position="80,260" render="Pixmap" size="100,100">
 			<convert type="MenuEntryCompare">softcamsetup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">epg_setup</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">epgloadsave_menu</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">saveepgcache</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">loadepgcache</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,260" render="Pixmap" size="100,100">
-			<convert type="MenuEntryCompare">deleteepgcache</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/lcd.png" position="80,260" render="Pixmap" size="100,100">
@@ -5427,6 +5349,91 @@
 		</widget>
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/system.png" position="80,260" render="Pixmap" size="100,100">
 			<convert type="MenuEntryCompare">factory_reset</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,260" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">epgloadsave_menu</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<!-- IMAGES UP IN SUBMENUS-->
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/network.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">network_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/harddisk.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">hardisk_selection</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/rec.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">rec_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/system.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">system_selection</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/lcd.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">display_selection</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/led.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">leddisplay_selection</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/video.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">video_selection</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">epg_menu</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/epg_setup.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">epg_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/saveepgcache.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">saveepgcache</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/loadepgcache.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">loadepgcache</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/deleteepgcache.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">deleteepgcache</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/saveepgcache.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">epgimporter</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/scan.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">service_searching_selection</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/cam.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">cam_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/ci_setup.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">ci_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/osd_menu.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">osd_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/time.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">time_setup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/software_manager.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">software_manager</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/autobackup.png" position="80,158" render="Pixmap" size="100,100">
+			<convert type="MenuEntryCompare">autobackup</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
