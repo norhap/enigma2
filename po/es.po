@@ -15335,8 +15335,8 @@ msgstr "Muestra la resolución de salida HDMI."
 msgid "LED color during normal operations"
 msgstr "Color del LED durante las operaciones normales"
 
-msgid "Configure front LED color during normal operations (this needs an enigma2 restart)."
-msgstr "Configure el color del LED frontal durante las operaciones normales (esto necesita un reinicio de enigma2)."
+msgid "Configure front LED color during normal operations."
+msgstr "Configure el color del LED frontal durante las operaciones normales."
 
 msgid "LED color during recording"
 msgstr "Color del LED durante la grabación"
@@ -15744,14 +15744,14 @@ msgstr "Fuente fija X11 (SD)"
 msgid "REC symbol in use"
 msgstr "Símbolo REC en uso"
 
-msgid "Configure how to show REC symbol in use (this needs an enigma2 restart)."
-msgstr "Configurar cómo mostrar el símbolo REC en funcionamiento (esto necesita un reinicio de enigma2)."
+msgid "Configure how to show REC symbol in use."
+msgstr "Configurar cómo mostrar el símbolo REC en uso."
 
 msgid "REC symbol in Standby"
 msgstr "Símbolo REC en reposo"
 
-msgid "Configure how to show REC symbol in standby (this needs an enigma2 restart)."
-msgstr "Configurar cómo mostrar el símbolo REC en standby (esto necesita un reinicio de enigma2)."
+msgid "Configure how to show REC symbol in standby."
+msgstr "Configurar cómo mostrar el símbolo REC en standby."
 
 msgid "Show in Standby"
 msgstr "Mostrar en standby"
