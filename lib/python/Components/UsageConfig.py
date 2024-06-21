@@ -1402,7 +1402,6 @@ def InitUsageConfig():
 		(2, _("Yellow"))
 	])
 	config.subtitles.ttx_subtitle_colors.addNotifier(setTTXSubtitleColors)
-	config.subtitles.ttx_subtitle_position = ConfigSelection(default=50, choices=[(x, _("%d Pixels") % x) for x in list(range(0, 91, 10)) + list(range(100, 451, 50))])
 
 	def setTTXSubtitleOriginalPosition(configElement):
 		eSubtitleSettings.setTTXSubtitleOriginalPosition(configElement.value)
