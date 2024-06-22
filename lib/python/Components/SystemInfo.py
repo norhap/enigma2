@@ -178,7 +178,7 @@ BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hd
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
 BoxInfo.setItem("StreamRelay", False)
 BoxInfo.setItem("WakeOnLAN", fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol"))
-BoxInfo.setItem("WakeOnLANType", getWakeOnLANType(BoxInfo.getItem("WakeOnLAN")))
+BoxInfo.setItem("WakeOnLANType", getWakeOnLANType(BoxInfo.getItem("WakeOnLAN")) if BoxInfo.getItem("WakeOnLAN") else None)
 BoxInfo.setItem("AISubs", fileExists("/etc/init.d/aisocket"))
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
