@@ -14,7 +14,7 @@ from Components.SystemInfo import SystemInfo
 from Components.NimManager import nimmanager
 from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
-from xml.etree.cElementTree import parse
+from xml.etree.ElementTree import parse
 from enigma import eDVBCI_UI, eDVBCIInterfaces, eEnv, eServiceCenter, eServiceReference
 from Tools.BoundFunction import boundFunction
 from Tools.CIHelper import cihelper
