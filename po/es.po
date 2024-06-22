@@ -525,6 +525,18 @@ msgstr "Un temporizador de grabación completado está a punto de apagar su rece
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Un EPG gráfico para todos los canales de un bouquet específico"
 
+msgid "AI-Powered translation color"
+msgstr "Color de traducción impulsado por IA"
+
+msgid "AI-Powered translation enabled"
+msgstr "Traducción impulsada por IA habilitada"
+
+msgid "AI-Powered language translation"
+msgstr "Traducción de idiomas impulsado por IA"
+
+msgid "AI-Powered translation subscription code"
+msgstr "Código de suscripción de traducción impulsada por IA"
+
 #, python-format
 msgid ""
 "A recording has started:\n"
@@ -1596,6 +1608,12 @@ msgstr "Configure el tipo de mando a distancia"
 msgid "Configure the aspect ratio of the screen."
 msgstr "Configure la relación de aspecto de la pantalla."
 
+msgid "Configure the AI-Powered translation language."
+msgstr "Configure el idioma de traducción impulsado por IA."
+
+msgid "Configure the color of the AI-Powered translations."
+msgstr "Configure el color de las traducciones impulsadas por IA."
+
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Configura la duración en horas en las que el receptor se deba ir a reposo cuando no está controlado."
 
@@ -2430,6 +2448,9 @@ msgstr "Activar"
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para antena activa"
 
+msgid "Enable AI-Powered translation for all teletext and DVB subtitles."
+msgstr "Habilite la traducción impulsada por IA para todos los subtítulos de teletexto y DVB."
+
 msgid "Enable auto cable scan"
 msgstr "Activar búsqueda automática de cable"
 
@@ -2566,6 +2587,9 @@ msgstr "Ingrese su frecuencia de oscilador local de banda alta. Para obtener má
 
 msgid "Enter your low band local oscillator frequency. For more information consult the spec sheet of your LNB."
 msgstr "Ingrese la frecuencia de su oscilador local de banda baja. Para obtener más información, consulte la hoja de especificaciones de su LNB."
+
+msgid "Enter your subscription code, the unified code for trial is 15."
+msgstr "Ingrese su código de suscripción, el código unificado para probar es 15."
 
 msgid "Equal to"
 msgstr "Igual a"

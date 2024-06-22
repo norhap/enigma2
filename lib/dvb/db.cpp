@@ -8,7 +8,7 @@
 #include <lib/base/eenv.h>
 #include <lib/base/eerror.h>
 #include <lib/base/estring.h>
-#include <lib/base/nconfig.h>
+#include <lib/base/esettings.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <dvbsi++/service_description_section.h>
@@ -237,7 +237,6 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		return 1;
 
 	ePtr<eDVBResourceManager> res_mgr;
-	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
 
 	if (eDVBResourceManager::getInstance(res_mgr))
 		eDebug("[eDVBService] isPlayble... no res manager!!");
@@ -251,8 +250,7 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 
 		if (res_mgr->canAllocateChannel(chid, chid_ignore, system, simulate))
 		{
-			bool use_ci_assignment = eConfigManager::getConfigBoolValue("config.misc.use_ci_assignment", false);
-			if (use_ci_assignment)
+			if (eSettings::use_ci_assignment)
 			{
 				int is_ci_playable = 1;
 				PyObject *pName, *pModule, *pFunc;
@@ -284,7 +282,7 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 			}
 			return 1;
 		}
-		if (remote_fallback_enabled)
+		if (eSettings::remote_fallback_enabled)
 			return 2;
 	}
 

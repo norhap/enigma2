@@ -171,12 +171,12 @@
 		<item level="0" requires="SuspendLED" text="Power LED state in Deep-Standby" description="Power LED state during deep-standby.">config.usage.lcd_deepstandbypowerled</item>
 		<item level="0" requires="LedPowerColor" text="Operating LED status while running" description="Configure color of the LED when is operation.">config.lcd.ledpowercolor</item>
 		<item level="0" requires="LedSuspendColor" text="Operating LED status in deep standby mode" description="Configure color front LED during deep standby mode.">config.lcd.ledsuspendcolor</item>
-		<if requires="NoHaveFrontpanelDisplay">		
+		<if requires="NoHaveFrontpanelDisplay">
 			<item level="0" text="Brightness" description="Configure the brightness level of the front panel display.">config.lcd.bright</item>
 			<item level="0" text="Brightness (Dimmed)" description="Configure the brightness level of the front panel display for dimmed operation.">config.lcd.dimbright</item>
 			<item level="0" text="Dim delay" description="Dim the LCD after specified time.">config.lcd.dimdelay</item>
 			<item level="0" text="Standby" description="Configure the brightness level of the front panel display during standby.">config.lcd.standby</item>
-		</if>		
+		</if>
 	</setup>
 	<setup key="Logs" title="Logs Setup">
 		<item level="2" text="Debug logging *" description="Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged. These logs can be helpful for developers in finding and fixing problems.">config.crash.debugLevel</item>
@@ -364,7 +364,13 @@
 		<item level="0" text="Update interval (in seconds)" description="Time interval for screens update Clients/Servers/Log (in seconds)." conditional="config.ncaminfo.autoupdate.value">config.ncaminfo.intervall</item>
 	</setup>
 	<setup key="Subtitle" title="Subtitle Setup">
-		<item level="0" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
+		<if requires="AISubs">
+			<item level="2" text="AI-Powered translation enabled" description="Enable AI-Powered translation for all teletext and DVB subtitles.">config.subtitles.ai_enabled</item>
+			<item level="2" text="AI-Powered language translation" description="Configure the AI-Powered translation language.">config.subtitles.ai_translate_to</item>
+			<item level="2" text="AI-Powered translation subscription code" description="Enter your subscription code, the unified code for trial is 15.">config.subtitles.ai_subscription_code</item>
+			<item level="2" text="AI-Powered translation color" description="Configure the color of the AI-Powered translations.">config.subtitles.ai_subtitle_colors</item>
+		</if>
+		<item level="2" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
 		<item level="2" text="Use original teletext position" description="When enabled, teletext subtitles will be displayed at their original position.">config.subtitles.ttx_subtitle_original_position</item>
 		<item level="2" text="Subtitle position" description="Set the vertical position of subtitles, measured from the bottom of the screen.">config.subtitles.subtitle_position</item>
 		<item level="2" text="Rewrap subtitles" description="When enabled, reformat subtitles to match the width of the screen.">config.subtitles.subtitle_rewrap</item>
