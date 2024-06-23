@@ -462,6 +462,11 @@ const char *getPlatform()
 	return PLATFORM;
 }
 
+int getE2Flags()
+{
+	return 1;
+}
+
 #include <malloc.h>
 
 void dump_malloc_stats(void)
