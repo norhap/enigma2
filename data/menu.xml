@@ -12,24 +12,20 @@
 	<code> .. code .. </code>
 		"exec"s code.
 -->
-
-<!-- Main Menu -->
+	<!-- Main Menu -->
 <menu key="main_menu" level="0" text="Main Menu">
 	<id val="mainmenu" />
-
-	<!-- Menu / Setup -->
+	<!-- Main Menu > Setup -->
 	<menu key="setup_selection" level="0" text="Setup" flushConfigOnClose="5" weight="5">
 		<id val="setup" />
-
-		<!-- Menu / Setup / Audio and Video -->
+		<!-- Main Menu > Setup > Audio and Video -->
 		<menu key="video_selection" level="0" text="Audio &amp; Video" weight="5">
 			<id val="video" />
 			<item key="av_setup" level="0" text="Audio/Video Setup" weight="5"><setup id="AudioVideo" /></item>
 			<item key="autolanguage_setup" level="0" text="Automatic Language and Subtitles Setup" weight="10"><setup id="AutoLanguage" /></item>
 			<item key="hdmicec" level="0" text="HDMI-CEC Settings" weight="55" requires="HDMICEC"><screen module="HDMICEC" screen="HDMICECSetup" /></item>
 		</menu>
-
-		<!-- Menu / Setup / Tuners and Scanning -->
+		<!-- Main Menu > Setup > Tuners and Scanning -->
 		<menu key="service_searching_selection" level="0" text="Tuners &amp; scanning" weight="10">
 			<id val="scan" />
 			<item key="tuner_setup" level="0" text="Tuner Configuration" weight="5" conditional="nimmanager.nim_slots" requires="ClientModeDisabled"><screen module="Satconfig" screen="NimSelection" /></item>
@@ -38,11 +34,11 @@
 			<item key="manual_scan" level="0" text="Manual Scan" weight="20" conditional="nimmanager.somethingConnected()" requires="ClientModeDisabled"><screen module="ScanSetup" /></item>
 			<item key="fallbacktuner_settings" level="0" text="Fallback remote receiver setup" weight="25" requires="ClientModeDisabled"><screen module="SetupFallbacktuner" /></item>
 		</menu>
-
-		<!-- Menu / Setup / EPG -->
+		<!-- Main Menu > Setup > EPG -->
 		<menu key="epg_menu" level="0" text="EPG" weight="15">
 			<id val="epg" />
 			<item key="epg_setup" level="0" text="EPG Setup" weight="5"><setup id="EPG" /></item>
+			<!-- Main Menu > Setup > EPG > Save-Load-Delete -->
 			<menu key="epgloadsave_menu" level="2" text="Save-Load-Delete" weight="10">
 				<id val="epgloadsave_menu" />
 				<item key="saveepgcache" level="0" text="Save EPG Cache">
@@ -72,11 +68,12 @@ self.session.openWithCallback(msgClosed, EpgLoadMsg)
 from Components.EpgLoadSave import EpgDeleteMsg
 def msgClosed(ret):
 	if ret:
-		import os
-		from Components.config import config
-		if os.path.exists(config.misc.epgcache_filename.value):
-			os.remove(config.misc.epgcache_filename.value)
+		from os import remove
+		from os.path import exists
 		from enigma import eEPGCache
+		from Components.config import config
+		if exists(config.misc.epgcache_filename.value):
+			remove(config.misc.epgcache_filename.value)
 		epgcache = eEPGCache.getInstance()
 		epgcache.flushEPG()
 self.session.openWithCallback(msgClosed, EpgDeleteMsg)
@@ -84,8 +81,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 				</item>
 			</menu>
 		</menu>
-
-		<!-- Menu / Setup / User Interface -->
+		<!-- Main Menu > Setup > User Interface -->
 		<menu key="osd_setup" level="0" text="User Interface" weight="20">
 			<id val="osd_menu" />
 			<item key="user_interface" level="0" text="User Interface Setup" weight="5"><setup id="UserInterface" /></item>
@@ -94,7 +90,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item key="language_setup" level="0" text="Language Setup" weight="25"><screen module="LanguageSelection" /></item>
 			<item key="parental_setup" level="0" text="Parental Control Setup" weight="30"><screen module="ParentalControlSetup" screen="ParentalControlSetup" /></item>
 		</menu>
-
+		<!-- Main Menu > Setup > Panel Frontal Display and LED Display -->
 		<menu key="display_selection" level="0" text="Front Panel Display" weight="15" requires="FrontpanelDisplay">
 			<id val="lcd" />
 			<item key="display_skin_selector" level="0" text="Skin Setup" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
@@ -104,8 +100,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 				<item key="led_setup" level="1" text="LED Setup" weight="15"><setup id="LEDDisplay" /></item>
 			</menu>
 		</menu>
-
-		<!-- Menu / Setup / Network -->
+		<!-- Main Menu > Setup > Network -->
 		<menu key="network_setup" level="0" text="Network" weight="25">
 			<id val="network" />
 			<item key="device_setup" level="0" text="Adapter settings" weight="5"><screen module="NetworkSetup" screen="NetworkAdapterSelection" /></item>
@@ -126,25 +121,21 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			</menu>
 			<item key="password_setup" level="2" text="Password" weight="25"><screen module="NetworkSetup" screen="NetworkPassword" /></item>
 		</menu>
-
-		<!-- Menu / Setup / Common Interface -->
-		<!-- Menu / Setup / Softcam -->
+		<!-- Main Menu > Setup > Softcam StreamRelay and Common Interface -->
 		<menu key="cam_setup" level="0" text="SoftCam / CI" weight="10">
 			<id val="cam" />
 			<item key="softcam_setup" level="0" text="Softcam" weight="5"><screen module="SoftcamSetup" screen="SoftcamSetup" /></item>
 			<item key="streamrelay_settings" level="0" text="Stream Relay Settings" weight="110" requires="StreamRelay"><screen module="SoftcamSetup" screen="StreamRelaySetup" /></item>
 			<item key="ci_setup" level="0" text="Common Interface" weight="5" requires="CommonInterface"><screen module="Ci" screen="CiSelection" /></item>
 		</menu>
-
-		<!-- Menu / Setup / Storage -->
+		<!-- Main Menu > Setup > Storage -->
 		<menu key="hardisk_selection" level="0" text="Storage" requires="Harddisk" weight="40">
 			<id val="harddisk" />
 			<item key="harddisk_setup" level="0" text="Harddisk Setup" weight="5"><setup id="HardDisk" /></item>
 			<item key="harddisk_init" level="0" text="Format Disk Settings" weight="10"><screen module="HarddiskSetup" screen="HarddiskSelection" /></item>
 			<item key="harddisk_check" level="0" text="Filesystem Check" weight="15"><screen module="HarddiskSetup" screen="HarddiskFsckSelection" /></item>
 		</menu>
-
-		<!-- Menu / Setup / Recordings, Playback & Timeshift -->
+		<!-- Main Menu > Setup > Recordings, Playback & Timeshift -->
 		<menu key="rec_setup" level="1" text="Recording Paths" weight="45">
 			<id val="rec" />
 			<item key="setup_MovieSelection" level="0" text="Movie Selection Setup" weight="5"><screen module="MovieSelection" screen="MovieSelectionSetup" /></item>
@@ -152,14 +143,12 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item key="recording_setup" level="0" text="Recording Setup" weight="15"><screen module="Recording" screen="RecordingSettings" /></item>
 			<item key="timeshift_setup" level="0" text="Timeshift Setup" weight="20"><screen module="Timeshift" screen="TimeshiftSettings" /></item>
 		</menu>
-
-		<!-- Menu / Setup / Time -->
+		<!-- Main Menu > Setup > Time -->
 		<menu key="time_setup" level="1" text="Time" weight="45">
 			<id val="time" />
 			<item key="time_setup" level="0" text="Time" weight="50"><screen module="Time" screen="Time" /></item>
 		</menu>
-
-		<!-- Menu / Setup / System -->
+		<!-- Main Menu > Setup > System -->
 		<menu key="system_selection" level="0" text="System" weight="55">
 			<id val="system" />
 			<item key="accesslevel_setup" level="0" text="User Mode Setup"><setup id="AccessLevel" /></item>
@@ -175,11 +164,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item key="factory_reset" level="0" text="Factory Reset"><screen module="FactoryReset" screen="FactoryReset" /></item>
 		</menu>
 	</menu>
-
-	<!-- Menu / Plugins -->
-	<item key="plugin_selection" level="0" text="Plugins" weight="10"><screen module="PluginBrowser" screen="PluginBrowser" /></item>
-
-	<!-- Menu / Timers -->
+	<!-- Main Menu > Timers -->
 	<menu key="timer_menu" level="0" text="Timers" weight="15">
 		<id val="timermenu" />
 		<item key="timer_edit" level="0" text="Timers" weight="5"><screen module="TimerEdit" screen="TimerEditList" /></item>
@@ -187,8 +172,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<item key="sleep" level="0" text="Sleep Timer" weight="30"><screen module="SleepTimerEdit" screen="SleepTimerEdit" /></item>
 		<item key="powertimer_edit" level="0" text="Power Timers" weight="15"><screen module="PowerTimerEdit" screen="PowerTimerEditList" /></item>
 	</menu>
-
-	<!-- Menu / Information -->
+	<!-- Main Menu > Information -->
 	<menu key="info_screen" level="0" text="Information" weight="20">
 		<id val="information" />
 		<item key="about_screen" level="0" text="About" weight="5"><screen module="About" /></item>
@@ -202,15 +186,15 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<item key="BenchmarkInformation_screen" level="0" text="Benchmark Information" weight="40"><screen module="About" screen="BenchmarkInformation" /></item>
 		<item key="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="50"><screen module="StreamingClientsInfo" /></item>
 	</menu>
-
-	<!-- Menu / VCR Scart -->
+	<!-- Main Menu > Plugins -->
+	<item key="plugin_selection" level="0" text="Plugins" weight="10"><screen module="PluginBrowser" screen="PluginBrowser" /></item>
+	<!-- Main Menu > VCR Scart -->
 	<item key="scart_switch" level="1" text="VCR Scart" weight="25" conditional="config.usage.show_vcr_scart.value" requires="scart">
 		<code>
 self.session.scart.VCRSbChanged(3)
 		</code>
 	</item>
-
-	<!-- Menu / Standby and Restart -->
+	<!-- Main Menu > Standby and Restart -->
 	<menu key="standby_restart_list" level="0" text="Standby / restart" weight="99">
 		<id val="shutdown" />
 		<item key="standby" level="0" text="Standby" weight="5"><screen module="Standby" screen="Standby" /></item>

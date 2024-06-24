@@ -1,9 +1,9 @@
-from os.path import isdir, isfile
+from glob import glob
 from xml.etree.ElementTree import parse
 
 from enigma import eTimer
 
-from skin import findSkinScreen, menus
+from skin import findSkinScreen
 from Components.ActionMap import NumberActionMap, ActionMap
 from Components.Button import Button
 from Components.config import ConfigDictionarySet, NoSave, config, configfile
@@ -19,7 +19,7 @@ from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
 from Screens.Setup import Setup, getSetupTitle
 from Tools.BoundFunction import boundFunction
-from Tools.Directories import SCOPE_GUISKIN, SCOPE_SKINS, resolveFilename
+from Tools.Directories import SCOPE_SKINS, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 
 # Read the menu
@@ -156,7 +156,6 @@ class Menu(Screen, ProtectedScreen):
 		MenuTitle = _(menu.get("text", "??"))
 		key = menu.get("key", "undefined")
 		weight = menu.get("weight", 50)
-		image = self.getMenuEntryImage(key, lastKey)
 		x = menu.get("flushConfigOnClose")
 		if x:
 			a = boundFunction(self.session.openWithCallback, self.menuClosedWithConfigFlush, Menu, menu)
@@ -168,19 +167,12 @@ class Menu(Screen, ProtectedScreen):
 	def getMenuEntryImage(self, key, lastKey):
 		global imageCache
 		image = imageCache.get(key)
-		menuImageLibrary = resolveFilename(SCOPE_GUISKIN, "mainmenu")
-		self.menuImageLibrary = menuImageLibrary if isdir(menuImageLibrary) else None
-		if image is None:
-			imageFile = resolveFilename(SCOPE_GUISKIN, f"mainmenu/{key}.png" if self.menuImageLibrary else menus.get(key, ""))
-			if imageFile and isfile(imageFile):
+		imageSearch = glob(f'/usr/share/enigma2/*/*/{key}.png')
+		for picturefile in imageSearch:
+			imageFile = picturefile.replace("['/", "").replace("']", "")
+			if imageFile:
 				image = LoadPixmap(imageFile, cached=True)
-				if image:
-					print(f"[Menu] Menu image for menu ID '{key}' is '{imageFile}'.")
-					imageCache[key] = image
-				else:
-					print(f"[Menu] Error: Unable to load image '{imageFile}'!")
-					if lastKey:
-						image = imageCache.get(lastKey)
+				print(f"[Menu] menuimage '{key}.png")
 		return image
 
 	def menuClosedWithConfigFlush(self, *res):
@@ -210,8 +202,8 @@ class Menu(Screen, ProtectedScreen):
 			return
 		item_text = menu.get("text", "")
 		key = menu.get("key", "undefined")
+		print(f"[Menu] MenuEntryCompare (Sources) for this menu '{key}")
 		weight = menu.get("weight", 50)
-		image = self.getMenuEntryImage(key, lastKey)
 		for x in menu:
 			if x.tag == "screen":
 				module = x.get("module")
@@ -244,7 +236,7 @@ class Menu(Screen, ProtectedScreen):
 					item_text = _(item_text)
 				destList.append((item_text, boundFunction(self.openSetup, id), key, weight))
 				return
-		destList.append((item_text, self.nothing, key, weight, image))
+		destList.append((item_text, self.nothing, key, weight))
 
 	def sortByName(self, listentry):
 		return listentry[0].lower()
@@ -601,13 +593,11 @@ class AnimMain(Screen):
 		self.skinName = "Animmain"
 		self.tlist = tlist
 		ipage = 1
-		list = []
 		nopic = len(tlist)
 		self.pos = []
 		self.index = 0
 		title = menuTitle
 		self["title"] = Button(title)
-		list = []
 		tlist = []
 		self["label1"] = StaticText()
 		self["label2"] = StaticText()
@@ -750,7 +740,6 @@ class IconMain(Screen):
 		self.indx = []
 		n1 = len(tlist)
 		self.picnum = n1
-		list = []
 		tlist = []
 		self["label1"] = StaticText()
 		self["label2"] = StaticText()
