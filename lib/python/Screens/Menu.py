@@ -167,12 +167,14 @@ class Menu(Screen, ProtectedScreen):
 	def getMenuEntryImage(self, key, lastKey):
 		global imageCache
 		image = imageCache.get(key)
-		imageSearch = glob(f'/usr/share/enigma2/*/*/{key}.png')
+		skinDefaultFolder = resolveFilename(SCOPE_SKINS, "OctEtFHD")
+		imageSearch = glob(f'/usr/share/enigma2/*/mainmenu/{key}.png') if skinDefaultFolder else glob(f'/usr/share/enigma2/*/*/{key}.png')
 		for picturefile in imageSearch:
 			imageFile = picturefile.replace("['/", "").replace("']", "")
 			if imageFile:
 				image = LoadPixmap(imageFile, cached=True)
 				print(f"[Menu] menuimage '{key}.png")
+				break
 		return image
 
 	def menuClosedWithConfigFlush(self, *res):
