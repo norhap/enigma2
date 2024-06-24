@@ -16196,7 +16196,7 @@ msgid "Unable to change password!"
 msgstr "No se puede cambiar la contraseña!"
 
 msgid "Network Services"
-msgstr "Servicios"
+msgstr "Servicios de red"
 
 msgid "Web interface"
 msgstr "Interfaz Web"

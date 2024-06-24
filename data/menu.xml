@@ -107,17 +107,17 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 			<item key="netmounts_setup" level="1" text="Mounts" weight="10"><screen module="NetworkSetup" screen="NetworkMountsMenu" /></item>
 			<menu key="services_menu" level="0" text="Network Services" weight="15">
 				<id val="netservices" />
-				<item key="netftp_setup" level="2" text="FTP" weight="10"><screen module="NetworkSetup" screen="NetworkFtp" /></item>
-				<item key="nettelnet_setup" level="2" text="Telnet" weight="15"><screen module="NetworkSetup" screen="NetworkTelnet" /></item>
-				<item key="netnfs_setup" level="2" text="NFS" weight="20"><screen module="NetworkSetup" screen="NetworkNfs" /></item>
-				<item key="minidlna_setup" level="2" text="MiniDLNA" weight="25"><screen module="NetworkSetup" screen="NetworkMiniDLNA" /></item>
-				<item key="netvpn_setup" level="2" text="OpenVPN" weight="30"><screen module="NetworkSetup" screen="NetworkOpenvpn" /></item>
-				<item key="netzerotier_setup" level="2" text="ZeroTierVPN" weight="35"><screen module="NetworkSetup" screen="NetworkZeroTier" /></item>
-				<item key="netsabnzbd_setup" level="2" text="SABnzbd" weight="40"><screen module="NetworkSetup" screen="NetworkSABnzbd" /></item>
-				<item key="netsmba_setup" level="2" text="CIFS/Samba" weight="45"><screen module="NetworkSetup" screen="NetworkSamba" /></item>
-				<item key="Inadyn_setup" level="2" text="Inadyn" weight="50"><screen module="NetworkSetup" screen="NetworkInadyn" /></item>
-				<item key="netushare_setup" level="2" text="uShare" weight="55"><screen module="NetworkSetup" screen="NetworkuShare" /></item>
-				<item key="netsatip_setup" level="2" text="SATPI" weight="60"><screen module="NetworkSetup" screen="NetworkSATPI" /></item>
+				<item key="networkservices" level="2" text="FTP" weight="10"><screen module="NetworkSetup" screen="NetworkFtp" /></item>
+				<item key="networkservices" level="2" text="Telnet" weight="15"><screen module="NetworkSetup" screen="NetworkTelnet" /></item>
+				<item key="networkservices" level="2" text="NFS" weight="20"><screen module="NetworkSetup" screen="NetworkNfs" /></item>
+				<item key="networkservices" level="2" text="MiniDLNA" weight="25"><screen module="NetworkSetup" screen="NetworkMiniDLNA" /></item>
+				<item key="networkservices" level="2" text="OpenVPN" weight="30"><screen module="NetworkSetup" screen="NetworkOpenvpn" /></item>
+				<item key="networkservices" level="2" text="ZeroTierVPN" weight="35"><screen module="NetworkSetup" screen="NetworkZeroTier" /></item>
+				<item key="networkservices" level="2" text="SABnzbd" weight="40"><screen module="NetworkSetup" screen="NetworkSABnzbd" /></item>
+				<item key="networkservices" level="2" text="CIFS/Samba" weight="45"><screen module="NetworkSetup" screen="NetworkSamba" /></item>
+				<item key="networkservices" level="2" text="Inadyn" weight="50"><screen module="NetworkSetup" screen="NetworkInadyn" /></item>
+				<item key="networkservices" level="2" text="uShare" weight="55"><screen module="NetworkSetup" screen="NetworkuShare" /></item>
+				<item key="networkservices" level="2" text="SATPI" weight="60"><screen module="NetworkSetup" screen="NetworkSATPI" /></item>
 			</menu>
 			<item key="password_setup" level="2" text="Password" weight="25"><screen module="NetworkSetup" screen="NetworkPassword" /></item>
 		</menu>

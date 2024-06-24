@@ -5063,9 +5063,8 @@
 				}
 			</convert>
 		</widget>
-		<!-- menuimage only with folder mainmenu-->
-		<!-- widget name="menuimage" position="80,260" size="260,100" alphaTest="blend" conditional="menuimage" backgroundColor="OE_NewBg2"/-->
-		<!-- IMAGES MAIN MENU-->
+		<widget name="menuimage" position="80,260" size="260,100" alphaTest="blend" conditional="menuimage" backgroundColor="OE_NewBg2"/>
+		<!-- IMAGES MAIN MENU NOT menuimage-->
 		<widget source="menu" render="FixedLabel" text="Plugin IPToSAT" position="15,250" size="260,40" backgroundColor="OE_NewBg2" font="RegularBold;32">
 			<convert type="MenuEntryCompare">iptosat_menu</convert>
 			<convert type="ConditionalShowHide"/>
@@ -5434,6 +5433,10 @@
 		</widget>
 		<widget source="menu" alphaTest="blend" pixmap="OctEtFHD/mainmenu/autobackup.png" position="80,158" render="Pixmap" size="100,100">
 			<convert type="MenuEntryCompare">autobackup</convert>
+			<convert type="ConditionalShowHide"/>
+		</widget>
+		<widget source="menu" render="FixedLabel" text="Network Services" position="5,250" size="260,70" backgroundColor="OE_NewBg2" horizontalAlignment="center" font="RegularBold;28">
+			<convert type="MenuEntryCompare">networkservices</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
 	</screen>
