@@ -17,6 +17,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen, ScreenSummary
 from Screens.Standby import TryQuitMainloop, QUIT_RESTART
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN, SCOPE_LCDSKIN, SCOPE_SKINS, fileReadXML
+# from xml.etree.ElementTree import parse
 
 
 class SkinSelector(Screen, HelpableScreen):
@@ -113,6 +114,12 @@ class SkinSelector(Screen, HelpableScreen):
 				skin = join(dir, skinFile)
 				skinPath = join(self.rootDir, skin)
 				if exists(skinPath):
+					# with open(skinPath, "r") as file:  # second XML file checking method.
+						# try:
+							# parseDone = parse(file)
+						# except Exception:
+							# parseError = _("File error %s") % skin
+							# parseDone = False
 					parseDone = fileReadXML(skinPath)
 					parseError = _("File error %s") % skin
 					resolution = None
