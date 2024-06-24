@@ -23,9 +23,8 @@ from Tools.Directories import SCOPE_SKINS, resolveFilename
 from Tools.LoadPixmap import LoadPixmap
 
 # Read the menu
-file = open(resolveFilename(SCOPE_SKINS, "menu.xml"), "r")
-mdom = parse(file)
-file.close()
+with open(resolveFilename(SCOPE_SKINS, "menu.xml"), "r") as file:
+	mdom = parse(file)
 
 imageCache = {}
 lastKey = None
