@@ -269,8 +269,8 @@ class Screen(dict):
 				elif not depr and name not in self.ignoreWidgets:
 					if name in ("config", "footnote", "description", "information",
 						"name", "image", "filetext", "quickselect", "autoresize", "icon",
-						"list", "text", "pluginGrid", "pluginList", "skins"):
-						print(f"[[Skin] Error] Warning: widget '{name}' is missing in mandatory widgets' in {str(self)}.!")
+						"list", "text", "pluginGrid", "pluginList", "skins") and name not in self.items():  # detect errors in skin embedded.
+						print(f"[Screen] Skin Error <embedded-{str(self)}: widget '{name}' is missing in mandatory widgets.!")
 					else:
 						print(f"[Screen] Warning: Skin is missing element {name} in {str(self)}.")
 		for item in self.additionalWidgets:
