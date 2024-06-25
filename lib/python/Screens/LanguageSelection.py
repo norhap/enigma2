@@ -115,9 +115,10 @@ class LanguageSelection(Screen):
 			self.run()
 
 	def cancel(self):
-		language.activateLanguage(self.oldActiveLanguage)
-		config.osd.language.setValue(self.oldActiveLanguage)
-		config.osd.language.save()
+		if self.oldActiveLanguage != config.osd.language.value:
+			language.activateLanguage(self.oldActiveLanguage)
+			config.osd.language.setValue(self.oldActiveLanguage)
+			config.osd.language.save()
 		self.close()
 
 	def delLang(self):
