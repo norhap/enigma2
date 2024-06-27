@@ -1591,7 +1591,47 @@ def InitUsageConfig():
 
 	# AI start
 	if BoxInfo.getItem("AISubs"):
-		from Components.Language_cache import LANGUAGE_AI  # noqa: E402
+		LANGUAGE_AI = {
+			"ar": ("Arabic"),
+			"bg": ("Български"),
+			"nb": ("Norsk Bokmål"),
+			"ca": ("Català"),
+			"cs": ("Česky"),
+			"zh": ("Chinese"),
+			"da": ("Dansk"),
+			"de": ("Deutsch"),
+			"el": ("Ελληνικά"),
+			"en": ("English"),
+			"es": ("Español"),
+			"et": ("Eesti"),
+			"fa": ("Persian"),
+			"fi": ("Suomi"),
+			"fr": ("Français"),
+			"fy": ("Frysk"),
+			"he": ("Hebrew"),
+			"hr": ("Hrvatski"),
+			"hu": ("Magyar"),
+			"id": ("Indonesian"),
+			"is": ("Íslenska"),
+			"it": ("Italiano"),
+			"ku": ("Kurdish"),
+			"lt": ("Lietuvių"),
+			"lv": ("Latviešu"),
+			"nl": ("Nederlands"),
+			"no": ("Norsk"),
+			"pl": ("Polski"),
+			"pt": ("Portuguese"),
+			"ro": ("Romanian"),
+			"ru": ("Русский"),
+			"sk": ("Slovensky"),
+			"sl": ("Slovenščina"),
+			"sr": ("Srpski"),
+			"sv": ("Svenska"),
+			"th": ("ภาษาไทย"),
+			"tr": ("Türkçe"),
+			"uk": ("Українська"),
+			"vi": ("Tiếng Việt")
+		}
 
 		def setAiEnabled(configElement):
 			eSubtitleSettings.setAiEnabled(configElement.value)
