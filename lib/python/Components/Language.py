@@ -238,14 +238,20 @@ LANG_TEXT = {
 		"T3": "Άκυρο ",
 		"T4": "Αποθήκευση",
 	},
-	"en_GB": {
-		"T1": "Use UP and DOWN keys to select or Menu to install your language.. Afterwards press the OK button.",
+	"en_AU": {
+		"T1": "Use the UP and DOWN keys to select or Menu to install your language. Then press the OK key.",
 		"T2": "Language selection",
 		"T3": "Cancel",
 		"T4": "Save",
 	},
 	"en_US": {
-		"T1": "Use UP and DOWN keys to select or Menu to install your language. Afterwards press the OK button.",
+		"T1": "Use the UP and DOWN keys to select or Menu to install your language. Then press the OK key.",
+		"T2": "Language selection",
+		"T3": "Cancel",
+		"T4": "Save",
+	},
+	"en_GB": {
+		"T1": "Use the UP and DOWN keys to select or Menu to set your language. Then press the OK key.",
 		"T2": "Language selection",
 		"T3": "Cancel",
 		"T4": "Save",
