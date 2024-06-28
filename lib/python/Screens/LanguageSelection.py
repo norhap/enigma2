@@ -54,9 +54,12 @@ class LanguageSelection(Screen):
 		self["key_red"] = StaticText("")
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = Label(_("Add Language"))
-		self["key_blue"] = Label(_("Delete Language(s)"))
-		self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but Spanish and selected language.\nYou also have the option to remove only the selected language."))
-
+		if len(language.getLanguageList()) > 1:
+			self["key_blue"] = StaticText(_("Delete Language(s)")) if len(language.getLanguageList()) > 1 else StaticText("")
+			self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but Spanish and selected language.\nYou also have the option to remove only the selected language."))
+		else:
+			self["key_blue"] = StaticText("")
+			self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s)."))
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"left": self.pageUp,
@@ -132,17 +135,18 @@ class LanguageSelection(Screen):
 		self.close()
 
 	def delLang(self):
-		curlang = config.osd.language.value
-		lang = curlang
-		languageList = language.getLanguageListSelection()
-		for t in languageList:
-			if curlang == t[0]:
-				lang = t[1]
-				break
-		if config.osd.language.value not in ("es_ES"):
-			self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except Spanish and the selected language.\n\nSelect 'No' to delete only the chosen language:\n\n") + lang)
-		else:
-			self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except Spanish."))
+		if len(language.getLanguageList()) > 1:
+			curlang = config.osd.language.value
+			lang = curlang
+			languageList = language.getLanguageListSelection()
+			for t in languageList:
+				if curlang == t[0]:
+					lang = t[1]
+					break
+			if config.osd.language.value not in ("es_ES"):
+				self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except Spanish and the selected language.\n\nSelect 'No' to delete only the chosen language:\n\n") + lang)
+			else:
+				self.session.openWithCallback(self.delLangCB, MessageBox, _("Select 'Yes' to remove all languages except Spanish."))
 
 	def delLangCB(self, answer):
 		if answer:

@@ -19143,6 +19143,15 @@ msgstr ""
 "\"Eliminar Lenguaje(s)\" permite eliminar todo menos el Español y el idioma seleccionado.\n"
 "También tienes opción de eliminar solo el idioma seleccionado."
 
+msgid ""
+"'Save' or 'OK' changes active language.\n"
+"\n"
+"'Add Language' or MENU adds additional language(s)."
+msgstr ""
+"\"Guardar\" o \"OK\" cambia el idioma activo.\n"
+"\n"
+"\"Añadir Lenguaje\" o \"MENÚ\" agrega idioma(s) adicional(es)."
+
 msgid "Updating cache"
 msgstr "Actualizando caché"
 
