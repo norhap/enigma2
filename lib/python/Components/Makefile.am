@@ -34,7 +34,6 @@ install_PYTHON = \
 	InputHotplug.py \
 	Label.py \
 	Language.py \
-	Language_cache.py \
 	Lcd.py \
 	MediaPlayer.py \
 	MenuList.py \

@@ -4,8 +4,7 @@ from Screens.Screen import Screen, ScreenSummary
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.Label import Label
-from Components.Language import language
-from Components.Language_cache import LANG_TEXT
+from Components.Language import language, LANG_TEXT
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
@@ -81,7 +80,6 @@ class LanguageSelection(Screen):
 
 	def startupdateCache(self):
 		self.updateTimer.stop()
-		language.updateLanguageCache()
 		self["languages"].setList(self.list)
 		self.selectActiveLanguage()
 
@@ -100,7 +98,7 @@ class LanguageSelection(Screen):
 			if MODEL in ("osmio4kplus"):  # Reconfigure the selected language.
 				config.osd.language.setValue(config.osd.language.value)
 				language.activateLanguage(config.osd.language.value)
-				sleep(0.5)
+				sleep(0.8)
 			self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 
 	def save(self):
@@ -116,7 +114,7 @@ class LanguageSelection(Screen):
 				if MODEL in ("osmio4kplus"):  # Reconfigure the selected language.
 					config.osd.language.setValue(config.osd.language.value)
 					language.activateLanguage(config.osd.language.value)
-					sleep(0.5)
+					sleep(0.8)
 				self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 			else:
 				self.close()
@@ -239,9 +237,6 @@ class LanguageSelection(Screen):
 		if MODEL in ("osmio4kplus"):  # Reconfigure the selected language.
 			config.osd.language.setValue(config.osd.language.value)
 			language.activateLanguage(config.osd.language.value)
-			sleep(0.5)
-			# set default OSD config the installed language.
-			self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 
 	def changed(self):
 		self.run(justlocal=True)
