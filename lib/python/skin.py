@@ -137,7 +137,7 @@ def InitSkins():
 	# add skin user fallback for scope skins skin_fallback_1080 in skin_1080.xml
 	result = None
 	if isfile(resolveFilename(SCOPE_SKINS, config.skin.primary_skin.value)):
-		name = USER_SKIN_TEMPLATE % dirname(config.skin.primary_skin.value)
+		name = USER_SKIN_TEMPLATE % dirname(str(config.skin.primary_skin.value))
 		if isfile(resolveFilename(SCOPE_GUISKIN, name)):
 			result = loadSkin(name, scope=SCOPE_GUISKIN, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID)
 	# only with skin_user.xml in /usr/share/enigma2/
