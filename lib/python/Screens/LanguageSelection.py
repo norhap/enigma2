@@ -207,6 +207,8 @@ class LanguageSelection(Screen):
 		self["summarylangsel"].setText(self["languages"].getCurrent()[1])
 		self["key_red"].setText(_cached("T3"))
 		self["key_green"].setText(_cached("T4"))
+		self["key_yellow"].setText(_cached("T5"))
+		self["key_blue"].setText(_cached("T6"))
 
 		if justlocal:
 			return
