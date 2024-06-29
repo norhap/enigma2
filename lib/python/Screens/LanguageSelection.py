@@ -53,11 +53,12 @@ class LanguageSelection(Screen):
 		self["key_red"] = StaticText("")
 		self["key_green"] = StaticText("")
 		self["key_yellow"] = Label(_("Add Language"))
+		self["key_blue"] = StaticText("")
 		if len(language.getLanguageList()) > 1:
-			self["key_blue"] = StaticText(_("Delete Language(s)")) if len(language.getLanguageList()) > 1 else StaticText("")
+			self["key_blue"] = StaticText(_("Delete Language(s)"))
 			self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but Spanish and selected language.\nYou also have the option to remove only the selected language."))
 		else:
-			self["key_blue"] = StaticText("")
+			self["key_blue"].setText("")
 			self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s)."))
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
@@ -87,6 +88,7 @@ class LanguageSelection(Screen):
 		try:
 			if len(language.getLanguageList()) < 2:  # refresh cache to language default if index is one.
 				self.oldActiveLanguage = language.getActiveLanguage()
+				self["key_blue"].setText("")
 			else:
 				activeLanguage = language.getActiveLanguage()
 			pos = 0
@@ -208,7 +210,8 @@ class LanguageSelection(Screen):
 		self["key_red"].setText(_cached("T3"))
 		self["key_green"].setText(_cached("T4"))
 		self["key_yellow"].setText(_cached("T5"))
-		self["key_blue"].setText(_cached("T6"))
+		if len(language.getLanguageList()) > 1:
+			self["key_blue"].setText(_cached("T6"))
 
 		if justlocal:
 			return
