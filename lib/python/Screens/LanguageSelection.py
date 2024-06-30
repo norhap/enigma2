@@ -4,7 +4,7 @@ from Screens.Screen import Screen, ScreenSummary
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.Label import Label
-from Components.Language import language, LANG_TEXT
+from Components.Language import language
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
@@ -28,10 +28,6 @@ def LanguageEntryComponent(file, name, index):
 	return res
 
 
-def _cached(x):
-	return LANG_TEXT.get(config.osd.language.value, {}).get(x, "")
-
-
 class LanguageSelection(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -39,11 +35,10 @@ class LanguageSelection(Screen):
 
 		language.InitLang()
 		self.oldActiveLanguage = language.getActiveLanguage()
-		self.catalog = language.getActiveCatalog()
+		self.catalog = language.getActiveCatalog()# This initializes the full translation of this screen in the selected language.
 
 		self.list = []
-		self["summarylangname"] = StaticText()
-		self["summarylangsel"] = StaticText()
+		self["summarylangsel"] = StaticText() # FRONT PANEL DISPLAY
 		self["languages"] = List(self.list)
 		self["languages"].onSelectionChanged.append(self.changed)
 
@@ -52,14 +47,9 @@ class LanguageSelection(Screen):
 
 		self["key_red"] = StaticText("")
 		self["key_green"] = StaticText("")
-		self["key_yellow"] = Label(_("Add Language"))
+		self["key_yellow"] = StaticText("")
 		self["key_blue"] = StaticText("")
-		if len(language.getLanguageList()) > 1:
-			self["key_blue"] = StaticText(_("Delete Language(s)"))
-			self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but Spanish and selected language.\nYou also have the option to remove only the selected language."))
-		else:
-			self["key_blue"].setText("")
-			self["description"] = Label(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s)."))
+		self["description"] = Label()
 		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"left": self.pageUp,
@@ -74,6 +64,7 @@ class LanguageSelection(Screen):
 		}, -1)
 
 	def updateCache(self):
+		self.setTitle(_("Updating cache"))
 		self["languages"].setList([('update cache', _('Updating cache, please wait...'), None)])
 		self.updateTimer = eTimer()
 		self.updateTimer.callback.append(self.startupdateCache)
@@ -181,8 +172,6 @@ class LanguageSelection(Screen):
 		lang = self["languages"].getCurrent()[0]
 
 		if lang == 'update cache':
-			self.setTitle(_("Updating Cache"))
-			self["summarylangname"].setText(_("Updating cache"))
 			return
 
 		if lang != config.osd.language.value:
@@ -204,15 +193,17 @@ class LanguageSelection(Screen):
 						config.timezone.val.value = city
 						config.timezone.val.save()
 			config.ntp.timesync.value = "dvb"
-		self.setTitle(_cached("T2"))
-		self["summarylangname"].setText(_cached("T2"))
-		self["summarylangsel"].setText(self["languages"].getCurrent()[1])
-		self["key_red"].setText(_cached("T3"))
-		self["key_green"].setText(_cached("T4"))
-		self["key_yellow"].setText(_cached("T5"))
+		self.setTitle(_("Language selection"))
+		self["summarylangsel"].setText(self["languages"].getCurrent()[1]) # FRONT PANEL DISPLAY
+		self["key_red"].setText(_("Cancel"))
+		self["key_green"].setText(_("Save"))
+		self["key_yellow"].setText(_("Add Language"))
 		if len(language.getLanguageList()) > 1:
-			self["key_blue"].setText(_cached("T6"))
-
+			self["key_blue"].setText(_("Delete Language(s)"))
+			self["description"].setText(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s).\n\n'Delete Language' allows either deletion of all but Spanish and selected language.\nYou also have the option to remove only the selected language."))
+		else:
+			self["key_blue"].setText("")
+			self["description"].setText(_("'Save' or 'OK' changes active language.\n\n'Add Language' or MENU adds additional language(s)."))
 		if justlocal:
 			return
 
@@ -252,6 +243,14 @@ class LanguageSelection(Screen):
 	def pageDown(self):
 		self["languages"].pageDown()
 
+	def createSummary(self):
+		return LanguageSelectionSummary
+
+
+class LanguageSelectionSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent)
+
 
 class LanguageWizard(LanguageSelection, ShowRemoteControl):
 	def __init__(self, session):
@@ -260,10 +259,11 @@ class LanguageWizard(LanguageSelection, ShowRemoteControl):
 		global inWizzard
 		inWizzard = True
 		self.onLayoutFinish.append(self.selectKeys)
-
+		# TV
 		self["wizard"] = Pixmap()
-		self["summarytext"] = StaticText()
 		self["text"] = Label()
+		# FRONT PANEL DISPLAY
+		self["summarytext"] = StaticText()
 		self.setText()
 
 	def selectKeys(self):
@@ -276,13 +276,16 @@ class LanguageWizard(LanguageSelection, ShowRemoteControl):
 		self.setText()
 
 	def setText(self):
-		self["text"].setText(_cached("T1"))
-		self["summarytext"].setText(_cached("T1"))
+		text = _("Use the UP and DOWN keys to select the language, then press OK button. By pressing MENU you can install a new language.")
+		# TV
+		self["text"].setText(text)
+		# FRONT PANEL DISPLAY
+		self["summarytext"].setText(text)
 
 	def createSummary(self):
-		return ScreenSummary
+		return LanguageWizardSummary
 
 
-class LanguageWizardSummary(Screen):  # WARNING: necessary for initialize the wizard if there is no internet
+class LanguageWizardSummary(Screen):  # WARNING: necessary for initialize the wizard if there is not internet
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent)

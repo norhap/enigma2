@@ -7,7 +7,7 @@ self.selectKey("OK")
 			</code>
 		</step>
 		<step id="introduction" >
-			<text value="Use the up/down keys on your remote control to select an option. After, press OK."/>
+			<text value="Use the UP and DOWN keys to select the language, then press OK button. By pressing MENU you can install a new language."/>
 			<list>
 				<listentry caption="Use the wizard to set up basic features" step="network"/>
 				<listentry caption="Exit the wizard" step="end"/>
