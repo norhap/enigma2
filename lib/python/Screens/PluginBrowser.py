@@ -19,7 +19,7 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
-from Screens.Screen import Screen, ScreenSummary
+from Screens.Screen import Screen
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, isPluginInstalled
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
@@ -106,7 +106,7 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 		Screen.__init__(self, session, mandatoryWidgets=[self.layout])
 		HelpableScreen.__init__(self)
 		NumericalTextInput.__init__(self, handleTimeout=False, mode="SearchUpper")
-		self.skinName = ["PluginBrowserGrid" if config.usage.pluginListLayout.value == "gridmode" else "PluginBrowserList", "PluginBrowser"]
+		self.skinName = ["PluginBrowserGrid" if config.usage.pluginListLayout.value == "gridmode" else "PluginBrowser"]
 		self.setTitle(_("Plugin Browser"))
 		ProtectedScreen.__init__(self)
 		self.firsttime = True
@@ -479,10 +479,9 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 				self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginManager)
 
 
-class PluginBrowserSummary(ScreenSummary):
+class PluginBrowserSummary(Screen):
 	def __init__(self, session, parent):
-		ScreenSummary.__init__(self, session, parent=parent)
-		self.skinName = ["PluginBrowserSummary"]
+		Screen.__init__(self, session, parent=parent)
 		self["entry"] = StaticText("")
 		self["desc"] = StaticText("")
 		self.onShow.append(self.addWatcher)
