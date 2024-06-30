@@ -246,7 +246,7 @@
 	</screen>
 	<screen name="LanguageWizardSummary" position="0,0" size="220,176">
 		<widget source="parent.summarytext" render="Label" position="0,0" size="220,55" font="FdLcD;24" horizontalAlignment="center" />
-		<widget source="parent.summarylangname" render="Label" position="0,85" size="220,124" font="FdLcD;24" horizontalAlignment="center" />
+		<widget source="parent.summarylangsel" render="Label" position="0,85" size="220,124" font="FdLcD;24" horizontalAlignment="center" />
 <!-- 		<widget source="parent.flag" render="Pixmap" position="0,0" size="110,40" backgroundColor="#ff000000" /> -->
 	</screen>
 

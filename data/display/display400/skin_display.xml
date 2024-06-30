@@ -268,7 +268,7 @@
 	</screen>
 	<screen name="LanguageWizardSummary" position="0,0" size="400,240">
 		<widget source="parent.summarytext" render="Label" position="0,0" size="400,55" font="FdLcD;24" horizontalAlignment="center" />
-		<widget source="parent.summarylangname" render="Label" position="0,85" size="400,124" font="FdLcD;24" horizontalAlignment="center" />
+		<widget source="parent.summarylangsel" render="Label" position="0,85" size="400,124" font="FdLcD;24" horizontalAlignment="center" />
 <!-- 		<widget source="parent.flag" render="Pixmap" position="0,0" size="110,40" backgroundColor="#ff000000" /> -->
 	</screen>
 
@@ -356,7 +356,7 @@
 		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 		<widget source="Name" render="Label" position="10,75" size="375,50" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 	</screen>
-	<screen name="LanguageSelection_summary" position="0,0" size="400,240">
+	<screen name="LanguageSelectionSummary" position="0,0" size="400,240">
 		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 		<widget source="parent.languages" render="Listbox" position="0,55" size="395,183" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" transparent="1">
 			<convert type="TemplatedMultiContent">

@@ -303,7 +303,7 @@
 	</screen>
 	<screen name="LanguageWizardSummary" position="0,0" size="255,64">
 		<widget source="parent.summarytext" render="Label" position="0,0" size="255,64" font="FdLcD;12" horizontalAlignment="center"/>
-		<widget source="parent.summarylangname" render="Label" position="0,50" size="255,14" font="FdLcD;12" horizontalAlignment="center" noWrap="1"/>
+		<widget source="parent.summarylangsel" render="Label" position="0,50" size="255,14" font="FdLcD;12" horizontalAlignment="center" noWrap="1"/>
 	</screen>
 	<screen name="VideoWizardSummary" position="0,0" size="255,64">
 		<widget source="text" render="Label" position="0,0" size="255,64" font="FdLcD;12" horizontalAlignment="center"/>

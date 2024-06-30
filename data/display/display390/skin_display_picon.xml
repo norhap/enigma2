@@ -472,7 +472,7 @@
 	</screen>
 	<screen name="LanguageWizardSummary" position="0,0" size="390,240">
 		<widget source="parent.summarytext" render="Label" position="0,0" size="390,55" font="FdLcD;24" horizontalAlignment="center" />
-		<widget source="parent.summarylangname" render="Label" position="0,85" size="390,124" font="FdLcD;24" horizontalAlignment="center" />
+		<widget source="parent.summarylangsel" render="Label" position="0,85" size="390,124" font="FdLcD;24" horizontalAlignment="center" />
 	</screen>
 <!-- Neu -->
 	<screen name="BackupSelection_summary" position="0,0" size="390,240">

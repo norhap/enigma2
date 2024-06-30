@@ -470,7 +470,7 @@
 	</screen>
 	<screen name="LanguageWizardSummary" position="5,0" size="471,320">
 		<widget source="parent.summarytext" render="Label" position="0,0" size="471,73" font="FdLcD;24" horizontalAlignment="center" />
-		<widget source="parent.summarylangname" render="Label" position="0,113" size="471,165" font="FdLcD;24" horizontalAlignment="center" />
+		<widget source="parent.summarylangsel" render="Label" position="0,113" size="471,165" font="FdLcD;24" horizontalAlignment="center" />
 	</screen>
 
 <!-- Neu -->

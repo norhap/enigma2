@@ -312,12 +312,14 @@
 			<convert type="StringListSelection" />
 		</widget>
 	</screen>
-	<screen name="LanguageSelection_summary" position="0,0" size="128,64">
-		<widget source="parent.summarylangsel" render="Label" position="0,0" size="128,32" font="FdLcD;12" horizontalAlignment="center" />
+	<screen name="LanguageSelectionSummary" position="0,0" size="128,64">
+		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />	
+		<widget source="parent.summarylangsel" render="Label" position="0,13" size="128,40" font="FdLcD;12" horizontalAlignment="center" />
 	</screen>
-	<screen name="LanguageWizar_dSummary" position="0,0" size="128,32">
-		<widget source="parent.summarylangsel" render="Label" position="0,0" size="128,32" font="FdLcD;12" horizontalAlignment="center" />
-	</screen>
+	<screen name="LanguageWizardSummary" position="0,0" size="128,64">
+		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />	
+		<widget source="parent.summarytext" render="Label" position="0,13" size="128,50" font="FdLcD;12" horizontalAlignment="center" />
+	</screen>	
 
 <!-- DVD -->
 	<screen name="DVDSummary" position="fill">
