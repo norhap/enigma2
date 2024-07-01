@@ -1,12 +1,11 @@
 # -*- coding: UTF-8 -*-
 import gettext
 from locale import LC_CTYPE, LC_COLLATE, LC_TIME, LC_MONETARY, LC_MESSAGES, LC_NUMERIC, setlocale
-from os import listdir, environ, mkdir, path, system
-from time import time, localtime, strftime
+from os import listdir, environ, system
 from Tools.Directories import SCOPE_LANGUAGE, resolveFilename
 
-LPATH = resolveFilename(SCOPE_LANGUAGE, "")
-Lpackagename = "enigma2-locale-"
+DATADIR_PO = resolveFilename(SCOPE_LANGUAGE)
+packageprefix = "enigma2-locale-"
 
 
 class Language:
@@ -23,7 +22,7 @@ class Language:
 	def InitLang(self):
 		self.langlist = []
 		self.langlistselection = []
-		self.ll = listdir(LPATH)
+		self.directoryLangs = listdir(DATADIR_PO)
 		# FIXME make list dynamically
 		# name, iso-639 language, iso-3166 country. Please don't mix language&country!
 		self.addLanguage("Arabic", "ar", "AE", "ISO-8859-15")
@@ -73,7 +72,7 @@ class Language:
 
 	def addLanguage(self, name, lang, country, encoding):
 		try:
-			if lang in self.ll or (lang + "_" + country) in self.ll:
+			if lang in self.directoryLangs or (lang + "_" + country) in self.directoryLangs:
 				self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
 				self.langlist.append(str(lang + "_" + country))
 		except:
@@ -154,22 +153,21 @@ class Language:
 			elif delLang == "pt_BR":
 				delLang = delLang.lower()
 				delLang = delLang.replace('_', '-')
-				system("opkg remove --autoremove --force-depends " + Lpackagename + delLang)
+				system("opkg remove --autoremove --force-depends " + packageprefix + delLang)
 			else:
-				system("opkg remove --autoremove --force-depends " + Lpackagename + delLang[:2])
+				system("opkg remove --autoremove --force-depends " + packageprefix + delLang[:2])
 		else:
 			lang = self.activeLanguage
 			print(f"[Language] Delete all lang except, {lang}")
-			ll = listdir(LPATH)
-			for x in ll:
+			for x in self.directoryLangs:
 				if len(x) > 2:
 					if x != lang and x[:2] != "es":
 						x = x.lower()
 						x = x.replace('_', '-')
-						system("opkg remove --autoremove --force-depends " + Lpackagename + x)
+						system("opkg remove --autoremove --force-depends " + packageprefix + x)
 				else:
 					if x != lang[:2] and x != "es":
-						system("opkg remove --autoremove --force-depends " + Lpackagename + x)
+						system("opkg remove --autoremove --force-depends " + packageprefix + x)
 		system("touch /etc/enigma2/.removelang")
 		self.InitLang()
 

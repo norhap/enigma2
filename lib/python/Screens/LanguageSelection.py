@@ -1,6 +1,6 @@
 from enigma import eTimer
 from time import sleep
-from Screens.Screen import Screen, ScreenSummary
+from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config
 from Components.Label import Label
