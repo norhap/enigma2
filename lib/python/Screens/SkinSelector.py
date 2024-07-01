@@ -57,7 +57,7 @@ class SkinSelector(Screen, HelpableScreen):
 
 		element = domScreens.get("SkinSelector", (None, None))[0]
 		Screen.setTitle(self, screenTitle)
-		self.rootDir = resolveFilename(SCOPE_SKINS)
+		self.dataDirRoot = resolveFilename(SCOPE_SKINS)
 		self.config = config.skin.primary_skin
 		self.current = currentPrimarySkin
 		self.xmlList = ["skin.xml"]
@@ -108,20 +108,20 @@ class SkinSelector(Screen, HelpableScreen):
 		displayGrautec = join(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_grautec.xml")
 		skinList = []
 		# Find and list the available skins...
-		for dir in [dir for dir in listdir(self.rootDir) if isdir(join(self.rootDir, dir))]:
-			previewPath = join(self.rootDir, dir)
+		for directory in [directory for directory in listdir(self.dataDirRoot) if isdir(join(self.dataDirRoot, directory))]:
+			previewPath = join(self.dataDirRoot, directory)
 			for skinFile in self.xmlList:
-				skin = join(dir, skinFile)
-				skinPath = join(self.rootDir, skin)
+				path = join(directory, skinFile)
+				skinPath = join(self.dataDirRoot, path)
 				if exists(skinPath):
 					# with open(skinPath, "r") as file:  # second XML file checking method.
-						# try:
-							# parseDone = parse(file)
-						# except Exception:
-							# parseError = _("File error %s") % skin
-							# parseDone = False
+					# try:
+					# parseDone = parse(file)
+					# except Exception:
+					# parseError = _("File error %s") % skin
+					# parseDone = False
 					parseDone = fileReadXML(skinPath)
-					parseError = _("File error %s") % skin
+					parseError = _("File error %s") % path
 					resolution = None
 					if skinFile == "skin.xml":
 						try:
@@ -145,27 +145,27 @@ class SkinSelector(Screen, HelpableScreen):
 						# Code can be added here to reject unsupported resolutions.
 					# The "piconprev.png" image should be "prevpicon.png" to keep it with its partner preview image.
 					preview = join(previewPath, "piconprev.png" if skinFile == "skin_display_picon.xml" else "prev.png")
-					if skin == EMERGENCY_SKIN:
-						list = [EMERGENCY_NAME, emergency, dir, skin, resolution, preview]
-					elif skin == DEFAULT_SKIN:
-						list = [dir, default, dir, skin, resolution, preview]
-					elif skin == DEFAULT_DISPLAY_SKIN:
-						list = [DEFAULT_DISPLAY_SKIN.split(".")[0].split("/")[1], default, dir, skin, DEFAULT_DISPLAY_SKIN.split("/skin_")[1], preview]
-					elif skin == displayPicon:
-						list = [displayPicon.split(".")[0].split("/")[1], default, dir, skin, displayPicon.split("/skin_")[1], preview]
-					elif skin == displayGrautec:
-						list = [displayGrautec.split(".")[0].split("/")[1], default, dir, skin, displayGrautec.split("/skin_")[1], preview]
+					if path == EMERGENCY_SKIN:
+						list = [EMERGENCY_NAME, emergency, directory, path, resolution, preview]
+					elif path == DEFAULT_SKIN:
+						list = [directory, default, directory, path, resolution, preview]
+					elif path == DEFAULT_DISPLAY_SKIN:
+						list = [DEFAULT_DISPLAY_SKIN.split(".")[0].split("/")[1], default, directory, path, DEFAULT_DISPLAY_SKIN.split("/skin_")[1], preview]
+					elif path == displayPicon:
+						list = [displayPicon.split(".")[0].split("/")[1], default, directory, path, displayPicon.split("/skin_")[1], preview]
+					elif path == displayGrautec:
+						list = [displayGrautec.split(".")[0].split("/")[1], default, directory, path, displayGrautec.split("/skin_")[1], preview]
 					else:
-						list = [dir, "", dir, skin, resolution, preview]
+						list = [directory, "", directory, path, resolution, preview]
 					if not parseDone:
 						list[1] = parseError
-					elif skin == self.current and "fallback" in skin:
+					elif path == self.current and "fallback" in path:
 						list[1] = "%s %s" % (current, emergency)
-					elif skin == self.current and EMERGENCY_NAME in skin:
+					elif path == self.current and EMERGENCY_NAME in path:
 						list[1] = current
-					elif skin != self.current and EMERGENCY_NAME in skin:
+					elif path != self.current and EMERGENCY_NAME in path:
 						list[1] = default
-					elif skin == self.current:
+					elif path == self.current:
 						list[1] = current
 					list.append("%s (%s)" % (list[0], list[1]) if list[1] else list[0])
 					if list[1]:
@@ -183,12 +183,12 @@ class SkinSelector(Screen, HelpableScreen):
 
 	def loadPreview(self):
 		self.currentSelectedSkin = self["skins"].getCurrent()
-		preview, resolution, skin = self.currentSelectedSkin[6], self.currentSelectedSkin[5], self.currentSelectedSkin[4]
+		preview, resolution, path = self.currentSelectedSkin[6], self.currentSelectedSkin[5], self.currentSelectedSkin[4]
 		self.changedEntry()
 		if not exists(preview):
 			preview = resolveFilename(SCOPE_GUISKIN, "noprev.png")
 		self.picload.startDecode(preview)
-		if skin == self.config.value:
+		if path == self.config.value:
 			self["description"].setText(_("Press OK to keep the currently selected skin %s.") % resolution)
 		else:
 			self["description"].setText(_("Press OK to activate the selected skin %s.") % resolution)
@@ -200,22 +200,22 @@ class SkinSelector(Screen, HelpableScreen):
 		self.close(True)
 
 	def save(self):
-		label, skin = self.currentSelectedSkin[1], self.currentSelectedSkin[4]
-		if skin == self.config.value:
-			if skin == self.current:
-				print("[SkinSelector] Selected skin: '%s' (Unchanged!)" % join(self.rootDir, skin))
+		label, path = self.currentSelectedSkin[1], self.currentSelectedSkin[4]
+		if path == self.config.value:
+			if path == self.current:
+				print("[SkinSelector] Selected skin: '%s' (Unchanged!)" % join(self.dataDirRoot, path))
 				self.cancel()
 			else:
-				print("[SkinSelector] Selected skin: '%s' (Trying to restart again!)" % join(self.rootDir, skin))
+				print("[SkinSelector] Selected skin: '%s' (Trying to restart again!)" % join(self.dataDirRoot, path))
 				restartBox = self.session.openWithCallback(self.restartGUI, MessageBox, _("To apply the selected '%s' skin the GUI needs to restart.\nWould you like to restart the GUI now?") % label, MessageBox.TYPE_YESNO)
 				restartBox.setTitle(_("SkinSelector: Restart GUI"))
-		elif skin == self.current:
-			print("[SkinSelector] Selected skin: '%s' (Pending skin '%s' cancelled!)" % (join(self.rootDir, skin), join(self.rootDir, self.config.value)))
-			self.config.value = skin
+		elif path == self.current:
+			print("[SkinSelector] Selected skin: '%s' (Pending skin '%s' cancelled!)" % (join(self.dataDirRoot, path), join(self.dataDirRoot, self.config.value)))
+			self.config.value = path
 			self.config.save()
 			self.cancel()
 		else:
-			print("[SkinSelector] Selected skin: '%s'" % join(self.rootDir, skin))
+			print("[SkinSelector] Selected skin: '%s'" % join(self.dataDirRoot, path))
 			restartBox = self.session.openWithCallback(self.restartGUI, MessageBox, _("To save and apply the selected '%s' skin the GUI needs to restart.\nWould you like to save the selection and restart the GUI now?") % label, MessageBox.TYPE_YESNO)
 			restartBox.setTitle(_("SkinSelector: Restart GUI"))
 
@@ -264,7 +264,7 @@ class LcdSkinSelector(SkinSelector):
 	def __init__(self, session, screenTitle=_("Display Skin")):
 		SkinSelector.__init__(self, session, screenTitle=screenTitle)
 		self.skinName = ["LcdSkinSelector", "SkinSelector"]
-		self.rootDir = resolveFilename(SCOPE_LCDSKIN)
+		self.dataDirRoot = resolveFilename(SCOPE_LCDSKIN)
 		self.config = config.skin.display_skin
 		self.current = currentDisplaySkin
 		self.xmlList = ["skin_display.xml", "skin_display_picon.xml", "skin_display_grautec.xml"]
