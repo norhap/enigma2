@@ -79,9 +79,10 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		self.isWlanPluginInstalled()
 		# geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 		# if geolocationData.get("status", None) == "success":
-		if checkInternetAccess("google.com") == 0:
-			Time.useGeolocation(self)  # set time zone auto.
-			Time.setNTP(self)  # set NTP in crontab.
+		if config.misc.firstrun.value:
+			if checkInternetAccess("google.com") == 0:
+				Time.useGeolocation(self)  # set time zone auto.
+				Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
 			# if config.misc.firstrun.value and config.osd.language.value != languageCode():
 			# 	from Screens.Standby import TryQuitMainloop  # noqa: E402
