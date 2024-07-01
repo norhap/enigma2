@@ -77,14 +77,14 @@ class LanguageSelection(Screen):
 
 	def selectActiveLanguage(self):
 		try:
-			if len(language.getLanguageList()) < 2:  # refresh cache to language default if index is one.
+			if len(language.getLanguageList()) < 2:  # Language Spanish default if index is one.
 				self.oldActiveLanguage = language.getActiveLanguage()
 				self["key_blue"].setText("")
 			else:
 				activeLanguage = language.getActiveLanguage()
 			pos = 0
 			for pos, x in enumerate(self.list):
-				if x[0] == self.oldActiveLanguage or x[0] == activeLanguage:
+				if x[0] == self.oldActiveLanguage or x[0] == activeLanguage:  # self.oldActiveLanguage == "es_ES" Spanish takes over OSD.
 					self["languages"].index = pos
 					break
 		except Exception:
@@ -164,7 +164,7 @@ class LanguageSelection(Screen):
 			curlang = config.osd.language.value
 			lang = curlang
 			language.delLanguage(delLang=lang)
-			language.activateLanguage(self.oldActiveLanguage)
+			self.oldActiveLanguage = "es_ES"  # Spanish takes over OSD.
 			self.updateList()
 			self.selectActiveLanguage()
 
