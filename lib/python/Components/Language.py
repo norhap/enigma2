@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 import gettext
-import locale
+from locale import LC_CTYPE, LC_COLLATE, LC_TIME, LC_MONETARY, LC_MESSAGES, LC_NUMERIC, setlocale
 from os import listdir, environ, mkdir, path, system
 from time import time, localtime, strftime
 from Tools.Directories import SCOPE_LANGUAGE, resolveFilename
@@ -77,63 +77,42 @@ class Language:
 				self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
 				self.langlist.append(str(lang + "_" + country))
 		except:
-			print("[Language] Language " + str(name) + " not found")
+			print(f"[Language] Language {str(name)} not found")
 		self.langlistselection.append((str(lang + "_" + country), name))
 
-	def activateLanguage_TRY(self, index):
-		if index not in self.lang:
-			print("[Language] Selected language %s is not installed, fallback to es_ES!" % index)
-			index = "es_ES"
-		lang = self.lang[index]
-		print("[Language] Activating language " + lang[0])
-		self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), languages=[index], fallback=True)
+	def activateLanguage_TRY(self, locale):
+		if locale not in self.lang:
+			print(f"[Language] Selected language {locale} is not installed, fallback to es_ES!")
+			locale = "es_ES"
+		lang = self.lang[locale]
+		print(f"[Language] Activating language {lang[0]}")
+		self.catalog = gettext.translation('enigma2', resolveFilename(SCOPE_LANGUAGE), languages=[locale], fallback=True)
 		self.catalog.install(names=("ngettext", "pgettext"))
-		self.activeLanguage = index
-		self.gotLanguage = self.getLanguage()
-		for x in self.callbacks:
-			if x:
-				x()
-
-		# NOTE: we do not use LC_ALL, because LC_ALL will not set any of the categories, when one of the categories fails.
-		# We'd rather try to set all available categories, and ignore the others
-		for category in [locale.LC_CTYPE, locale.LC_COLLATE, locale.LC_TIME, locale.LC_MONETARY, locale.LC_MESSAGES, locale.LC_NUMERIC]:
+		self.activeLanguage = locale
+		# LC_ALL use default (C) locale = getlocale() then don't include it in this for.
+		for category in [LC_CTYPE, LC_COLLATE, LC_TIME, LC_MONETARY, LC_MESSAGES, LC_NUMERIC]:
 			try:
-				locale.setlocale(category, (self.gotLanguage, 'UTF-8'))
+				setlocale(category, (self.getLanguage(), 'UTF-8'))
 			except:
 				pass
-
-		# Also write a locale.conf as /home/root/.config/locale.conf to apply language to interactive shells as well:
-		if not path.exists('/home/root/.config'):
-			mkdir('/home/root/.config')
-
-		localeconf = open('/home/root/.config/locale.conf', 'w')
-		for category in ["LC_TIME", "LC_DATE", "LC_MONETARY", "LC_MESSAGES", "LC_NUMERIC", "LC_NAME", "LC_TELEPHONE", "LC_ADDRESS", "LC_PAPER", "LC_IDENTIFICATION", "LC_MEASUREMENT", "LANG"]:
-			if category == "LANG" or (category == "LC_DATE" and path.exists('/usr/lib/locale/' + self.gotLanguage + '/LC_TIME')) or path.exists('/usr/lib/locale/' + self.gotLanguage + '/' + category):
-				localeconf.write('export %s="%s.%s"\n' % (category, self.gotLanguage, "UTF-8"))
-			else:
-				if path.exists('/usr/lib/locale/C.UTF-8/' + category):
-					localeconf.write('export %s="C.UTF-8"\n' % category)
-				else:
-					localeconf.write('export %s="POSIX"\n' % category)
-		localeconf.close()
 		# HACK: sometimes python 2.7 reverts to the LC_TIME environment value, so make sure it has the correct value
-		environ["LC_TIME"] = self.gotLanguage + '.UTF-8'
-		environ["LANGUAGE"] = self.gotLanguage + '.UTF-8'
-		environ["LANGUAGE2"] = self.gotLanguage
+		environ["LC_TIME"] = f"{self.getLanguage()}'.UTF-8'"
+		environ["LANGUAGE"] = f"{self.getLanguage()}'.UTF-8'"
+		environ["LANGUAGE2"] = self.getLanguage()
 		environ["GST_SUBTITLE_ENCODING"] = self.getGStreamerSubtitleEncoding()
 		return True
 
-	def activateLanguage(self, index):
+	def activateLanguage(self, locale):
 		from Screens.MessageBox import MessageBox
 		from Tools import Notifications
-		if not self.activateLanguage_TRY(index):
+		if not self.activateLanguage_TRY(locale):
 			print("[Language] - retry with ", "es_ES")
 			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using Spanish", MessageBox.TYPE_INFO, timeout=3)
 			self.activateLanguage_TRY("es_ES")
 
-	def activateLanguageIndex(self, index):
-		if index < len(self.langlist):
-			self.activateLanguage(self.langlist[index])
+	def activateLanguageIndex(self, locale):
+		if locale < len(self.langlist):
+			self.activateLanguage(self.langlist[locale])
 
 	def getLanguageList(self):
 		return [(x, self.lang[x]) for x in self.langlist]
@@ -168,7 +147,7 @@ class Language:
 		from Components.config import config
 		if delLang:
 			lang = config.osd.language.value
-			print("[Language] DELETE LANG", delLang)
+			print(f"[Language] DELETE LANG, {delLang}")
 			if delLang[:2] == "es":
 				print("[Language] Default Language can not be deleted !!")
 				return
@@ -180,7 +159,7 @@ class Language:
 				system("opkg remove --autoremove --force-depends " + Lpackagename + delLang[:2])
 		else:
 			lang = self.activeLanguage
-			print("[Language] Delete all lang except ", lang)
+			print(f"[Language] Delete all lang except, {lang}")
 			ll = listdir(LPATH)
 			for x in ll:
 				if len(x) > 2:

@@ -35,10 +35,10 @@ class LanguageSelection(Screen):
 
 		language.InitLang()
 		self.oldActiveLanguage = language.getActiveLanguage()
-		self.catalog = language.getActiveCatalog()# This initializes the full translation of this screen in the selected language.
+		self.catalog = language.getActiveCatalog()  # This initializes the full translation of this screen in the selected language.
 
 		self.list = []
-		self["summarylangsel"] = StaticText() # FRONT PANEL DISPLAY
+		self["summarylangsel"] = StaticText()  # FRONT PANEL DISPLAY
 		self["languages"] = List(self.list)
 		self["languages"].onSelectionChanged.append(self.changed)
 
@@ -194,7 +194,7 @@ class LanguageSelection(Screen):
 						config.timezone.val.save()
 			config.ntp.timesync.value = "dvb"
 		self.setTitle(_("Language selection"))
-		self["summarylangsel"].setText(self["languages"].getCurrent()[1]) # FRONT PANEL DISPLAY
+		self["summarylangsel"].setText(self["languages"].getCurrent()[1])  # FRONT PANEL DISPLAY
 		self["key_red"].setText(_("Cancel"))
 		self["key_green"].setText(_("Save"))
 		self["key_yellow"].setText(_("Add Language"))
