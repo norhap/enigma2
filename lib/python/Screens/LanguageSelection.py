@@ -1,5 +1,4 @@
 from enigma import eTimer
-from time import sleep
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.config import config
@@ -8,7 +7,6 @@ from Components.Language import language
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
-from Components.SystemInfo import MODEL
 from Screens.MessageBox import MessageBox
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.Standby import TryQuitMainloop
@@ -88,10 +86,6 @@ class LanguageSelection(Screen):
 					self["languages"].index = pos
 					break
 		except Exception:
-			if MODEL in ("osmio4kplus"):  # Reconfigure the selected language.
-				config.osd.language.setValue(config.osd.language.value)
-				language.activateLanguage(config.osd.language.value)
-				sleep(0.8)
 			self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 
 	def save(self):
@@ -104,10 +98,6 @@ class LanguageSelection(Screen):
 			self.close()
 		else:
 			if self.oldActiveLanguage != config.osd.language.value:
-				if MODEL in ("osmio4kplus"):  # Reconfigure the selected language.
-					config.osd.language.setValue(config.osd.language.value)
-					language.activateLanguage(config.osd.language.value)
-					sleep(0.8)
 				self.session.openWithCallback(self.restartGUI, MessageBox, _("GUI needs a restart to apply a new language\nDo you want to restart the GUI now?"), MessageBox.TYPE_YESNO)
 			else:
 				self.close()
@@ -230,9 +220,6 @@ class LanguageSelection(Screen):
 		self.updateList()
 		self.updateCache()
 		config.pluginbrowser.languages_po.save()
-		if MODEL in ("osmio4kplus"):  # Reconfigure the selected language.
-			config.osd.language.setValue(config.osd.language.value)
-			language.activateLanguage(config.osd.language.value)
 
 	def changed(self):
 		self.run(justlocal=True)

@@ -10,7 +10,7 @@ packageprefix = "enigma2-locale-"
 
 class Language:
 	def __init__(self):
-		gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE, ""))
+		gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE))
 		gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 		gettext.textdomain("enigma2")
 		self.activeLanguage = 0
@@ -22,7 +22,7 @@ class Language:
 	def InitLang(self):
 		self.langlist = []
 		self.langlistselection = []
-		self.directoryLangs = listdir(DATADIR_PO)
+		self.languageDirectory = listdir(DATADIR_PO)
 		# FIXME make list dynamically
 		# name, iso-639 language, iso-3166 country. Please don't mix language&country!
 		self.addLanguage("Arabic", "ar", "AE", "ISO-8859-15")
@@ -72,7 +72,7 @@ class Language:
 
 	def addLanguage(self, name, lang, country, encoding):
 		try:
-			if lang in self.directoryLangs or (lang + "_" + country) in self.directoryLangs:
+			if lang in self.languageDirectory or (lang + "_" + country) in self.languageDirectory:
 				self.lang[str(lang + "_" + country)] = ((name, lang, country, encoding))
 				self.langlist.append(str(lang + "_" + country))
 		except:
@@ -91,22 +91,25 @@ class Language:
 		# LC_ALL use default (C) locale = getlocale() then don't include it in this for.
 		for category in [LC_CTYPE, LC_COLLATE, LC_TIME, LC_MONETARY, LC_MESSAGES, LC_NUMERIC]:
 			try:
-				setlocale(category, (self.getLanguage(), 'UTF-8'))
-			except:
-				pass
-		# HACK: sometimes python 2.7 reverts to the LC_TIME environment value, so make sure it has the correct value
-		environ["LC_TIME"] = f"{self.getLanguage()}'.UTF-8'"
-		environ["LANGUAGE"] = f"{self.getLanguage()}'.UTF-8'"
-		environ["LANGUAGE2"] = self.getLanguage()
+				setlocale(category, locale)
+			except Exception:  # Second resort to unsupported locale setting.
+				try:
+					if category in [LC_TIME, LC_MESSAGES]:
+						setlocale(category, locale)
+				except Exception:  # Last resort to unsupported locale setting.
+					try:
+						setlocale(LC_TIME, locale)
+					except Exception:
+						pass  # TRY to establish it more times.
+		environ["LC_TIME"] = f"{locale}'.UTF-8'"
+		environ["LANGUAGE"] = f"{locale}'.UTF-8'"
+		environ["LANGUAGE2"] = locale
 		environ["GST_SUBTITLE_ENCODING"] = self.getGStreamerSubtitleEncoding()
 		return True
 
 	def activateLanguage(self, locale):
-		from Screens.MessageBox import MessageBox
-		from Tools import Notifications
 		if not self.activateLanguage_TRY(locale):
 			print("[Language] - retry with ", "es_ES")
-			Notifications.AddNotification(MessageBox, "The selected language is unavailable - using Spanish", MessageBox.TYPE_INFO, timeout=3)
 			self.activateLanguage_TRY("es_ES")
 
 	def activateLanguageIndex(self, locale):
@@ -159,7 +162,7 @@ class Language:
 		else:
 			lang = self.activeLanguage
 			print(f"[Language] Delete all lang except, {lang}")
-			for x in self.directoryLangs:
+			for x in self.languageDirectory:
 				if len(x) > 2:
 					if x != lang and x[:2] != "es":
 						x = x.lower()
