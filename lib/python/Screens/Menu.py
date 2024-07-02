@@ -167,7 +167,7 @@ class Menu(Screen, ProtectedScreen):
 		global imageCache
 		image = imageCache.get(key)
 		skinDefaultFolder = resolveFilename(SCOPE_SKINS, "OctEtFHD")
-		imageSearch = glob(f'/usr/share/enigma2/*/mainmenu/{key}.png') if skinDefaultFolder else glob(f'/usr/share/enigma2/*/*/{key}.png')
+		imageSearch = glob(f'{resolveFilename(SCOPE_SKINS)}*/mainmenu/{key}.png') if skinDefaultFolder else glob(f'{resolveFilename(SCOPE_SKINS)}*/*/{key}.png')
 		for picturefile in imageSearch:
 			imageFile = picturefile.replace("['/", "").replace("']", "")
 			if imageFile:
