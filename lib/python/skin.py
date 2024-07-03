@@ -14,7 +14,6 @@ from Tools.Directories import SCOPE_LCDSKIN, SCOPE_GUISKIN, SCOPE_FONTS, SCOPE_S
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 
-joincomma = ', '  # f-strings: support slashes and commas any Python 3
 config.debug = ConfigSubsection()
 
 MODULE_NAME = __name__.split(".")[-1].capitalize()
@@ -288,7 +287,7 @@ def parseOptions(options, attribute, value, default):
 		if value in options.keys():
 			value = options[value]
 		else:
-			skinError(f"The '{attribute}' value '{value}' is invalid, acceptable options are '{joincomma.join(options.keys())}', using '{default}")
+			skinError(f"The '{attribute}' value '{value}' is invalid, acceptable options are '{', '.join(options.keys())}', using '{default}'")
 			value = default
 	else:
 		skinError(f"The '{attribute}' parser is not correctly initialized, using '{default}'")
@@ -945,7 +944,7 @@ class AttributeParser:
 			except KeyError:
 				errors.append(flag)
 		if errors:
-			print(f"[Skin] Error: Attribute 'flags' with value '{value}' has invalid element(s) '{joincomma.join(errors)}'!")
+			print(f"[Skin] Error: Attribute 'flags' with value '{value}' has invalid element(s) '{', '.join(errors)}'!")
 
 	def font(self, value):
 		self.guiObject.setFont(parseFont(value, self.scaleTuple))
@@ -2005,7 +2004,7 @@ def readSkin(screen, skin, names, desktop):
 				myName = name  # Use this name for debug output.
 				break
 			else:
-				print(f"[Skin] Warning: Skin screen '{name}' your skin was rejected as it does not offer all the mandatory widgets '{joincomma.join(screen.mandatoryWidgets)}'!")
+				print(f"[Skin] Warning: Skin screen '{name}' your skin was rejected as it does not offer all the mandatory widgets '{', '.join(screen.mandatoryWidgets)}'!")
 				myScreen = None
 	else:
 		myName = f"<embedded-in-{screen.__class__.__name__}>"
@@ -2287,7 +2286,7 @@ def readSkin(screen, skin, names, desktop):
 		posY = "?" if context.y is None else str(context.y)
 		sizeW = "?" if context.w is None else str(context.w)
 		sizeH = "?" if context.h is None else str(context.h)
-		print(f"[Skin] Processing screen '{myName}', from list '{joincomma.join(names)}'," if len(names) > 1 else "" f"position=({posX},{posY}), size=({sizeW},{sizeH}) for module '{screen.__class__.__name__}'.")
+		print(f"[Skin] Processing screen '{myName}', from list '{', '.join(names)}'," if len(names) > 1 else "" f"position=({posX},{posY}), size=({sizeW},{sizeH}) for module '{screen.__class__.__name__}'.")
 		context.x = 0  # Reset offsets, all components are relative to screen coordinates.
 		context.y = 0
 		processScreen(myScreen, context)
