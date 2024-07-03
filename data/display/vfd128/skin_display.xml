@@ -283,13 +283,9 @@
 		<panel name="SummaryEpgPanel" />
 	</screen>
 
-	<screen name="MessageBox_summary" position="0,0" size="128,32">
+	<screen name="MessageBoxSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,18" font="FdLcD;9" verticalAlignment="top" horizontalAlignment="center" />
 		<widget source="option" render="Label" position="0,16" size="128,16" font="FdLcD;9" verticalAlignment="bottom" horizontalAlignment="center" />
-	</screen>
-	<screen name="MessageBoxSimple_summary" position="0,0" size="128,32">
-		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="128,16" font="FdLcD;16" verticalAlignment="top" horizontalAlignment="center" />
-		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,16" size="128,16" font="FdLcD;14" verticalAlignment="bottom" horizontalAlignment="center" />
 	</screen>
 
 	<screen name="TimerEditListSummary" position="0,0" size="128,32">
@@ -313,13 +309,13 @@
 		</widget>
 	</screen>
 	<screen name="LanguageSelectionSummary" position="0,0" size="128,64">
-		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />	
+		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />
 		<widget source="parent.summarylangsel" render="Label" position="0,13" size="128,40" font="FdLcD;12" horizontalAlignment="center" />
 	</screen>
 	<screen name="LanguageWizardSummary" position="0,0" size="128,64">
-		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />	
+		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />
 		<widget source="parent.summarytext" render="Label" position="0,13" size="128,50" font="FdLcD;12" horizontalAlignment="center" />
-	</screen>	
+	</screen>
 
 <!-- DVD -->
 	<screen name="DVDSummary" position="fill">

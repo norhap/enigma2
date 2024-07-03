@@ -304,17 +304,13 @@
 		<panel name="SummaryEpgPanel" />
 	</screen>
 
-	<!--screen name="ChoiceBox_summary" position="0,0" size="140,32">
+	<!--screen name="ChoiceBoxSummary" position="0,0" size="140,32">
 		<widget source="parent.summary_list" render="Label" position="0,0" size="140,30" font="FdLcD;11" verticalAlignment="top" noWrap="1" />
 	</screen-->
 
-	<screen name="MessageBox_summary" position="0,0" size="140,32">
+	<screen name="MessageBoxSummary" position="0,0" size="140,32">
 		<widget source="text" render="Label" position="0,0" size="140,16" font="FdLcD;16" verticalAlignment="top" horizontalAlignment="center" />
 		<widget source="option" render="Label" position="0,16" size="140,16" font="FdLcD;14" verticalAlignment="bottom" horizontalAlignment="center" />
-	</screen>
-	<screen name="MessageBoxSimple_summary" position="0,0" size="140,32">
-		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="140,16" font="FdLcD;16" verticalAlignment="top" horizontalAlignment="center" />
-		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,16" size="140,16" font="FdLcD;14" verticalAlignment="bottom" horizontalAlignment="center" />
 	</screen>
 
 	<screen name="TimerEditListSummary" position="0,0" size="140,32">

@@ -302,12 +302,9 @@
 	</screen>
 
 <!-- messagebox-->
-	<screen name="MessageBox_summary" position="0,0" size="480,320">
-		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,20" size="480,180" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
-		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,220" size="400,70" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" noWrap="1" />
-	</screen>
-	<screen name="MessageBoxSimple_summary" position="0,0" size="480,320">
-		<panel name="MessageBox_summary" />
+	<screen name="MessageBoxSummary" position="0,0" size="480,320">
+		<widget source="text" conditional="text" render="Label" position="0,20" size="480,180" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
+		<widget source="option" conditional="option" render="Label" position="0,220" size="400,70" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" noWrap="1" />
 	</screen>
 
 <!-- standby -->
@@ -401,7 +398,7 @@
 		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="0,22" size="400,140" font="FdLcD;24" />
 	</screen>
 
-	<!--screen name="ChoiceBox_summary" position="0,0" size="480,320">
+	<!--screen name="ChoiceBoxSummary" position="0,0" size="480,320">
 		<widget source="parent.summary_list" render="Label" position="0,0" size="480,320" font="FdLcD;18" noWrap="1" />
 	</screen-->
 	<screen name="TimerEditListSummary" position="0,0" size="480,320">

@@ -6,7 +6,7 @@ from Components.MenuList import MenuList
 from Components.Pixmap import MultiPixmap
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
-from Screens.Screen import Screen, ScreenSummary
+from Screens.Screen import Screen
 
 
 class MessageBox(Screen, HelpableScreen):
@@ -212,9 +212,9 @@ class MessageBox(Screen, HelpableScreen):
 		return MessageBoxSummary
 
 
-class MessageBoxSummary(ScreenSummary):
+class MessageBoxSummary(Screen):
 	def __init__(self, session, parent):
-		ScreenSummary.__init__(self, session, parent=parent)
+		Screen.__init__(self, session, parent=parent)
 		self["text"] = StaticText(parent.text)
 		self["option"] = StaticText("")
 		if parent.list:

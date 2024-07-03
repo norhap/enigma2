@@ -14,7 +14,7 @@ from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen, ScreenSummary
+from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop, QUIT_RESTART
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN, SCOPE_LCDSKIN, SCOPE_SKINS, fileReadXML
 # from xml.etree.ElementTree import parse
@@ -270,9 +270,9 @@ class LcdSkinSelector(SkinSelector):
 		self.xmlList = ["skin_display.xml", "skin_display_picon.xml", "skin_display_grautec.xml"]
 
 
-class SkinSelectorSummary(ScreenSummary):
+class SkinSelectorSummary(Screen):
 	def __init__(self, session, parent):
-		ScreenSummary.__init__(self, session, parent=parent)
+		Screen.__init__(self, session, parent=parent)
 		self["Name"] = StaticText("")
 		if self.addWatcher not in self.onShow:
 			self.onShow.append(self.addWatcher)

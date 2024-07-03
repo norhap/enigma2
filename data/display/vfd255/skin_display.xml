@@ -278,13 +278,9 @@
 		<widget source="SetupValue" render="Label" position="0,42" size="256,21" font="FdLcD;20" noWrap="1"/>
 	</screen>
 	<!-- LCD screen MessageBox -->
-	<screen name="MessageBox_summary" position="0,0" size="256,64" id="1">
+	<screen name="MessageBoxSummary" position="0,0" size="256,64" id="1">
 		<widget source="text" render="Label" position="0,0" size="256,45" font="FdLcD;14" horizontalAlignment="center" verticalAlignment="center"/>
 		<widget source="option" render="Label" position="6,46" size="244,18" font="FdLcD;16" horizontalAlignment="center" verticalAlignment="center"/>
-	</screen>
-	<screen name="MessageBoxSimple_summary" position="0,0" size="255,64">
-		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="255,64" font="FdLcD;12" horizontalAlignment="center"/>
-		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,50" size="255,14" font="FdLcD;12" horizontalAlignment="center" noWrap="1"/>
 	</screen>
 	<screen name="TimerEditListSummary" position="0,0" size="255,64">
 		<widget source="service" render="Label" position="0,0" size="160,22" font="FdLcD;18" horizontalAlignment="left" noWrap="1"/>
@@ -312,7 +308,7 @@
 		</widget>
 	</screen>
 	<!-- LCD screen ChoiceBox -->
-	<!--screen name="ChoiceBox_summary" position="0,0" size="256,64" id="1">
+	<!--screen name="ChoiceBoxSummary" position="0,0" size="256,64" id="1">
 		<widget source="parent.summary_list" render="Label" position="0,0" size="244,64" font="FdLcD;12"/>
 	</screen-->
 	<!-- JobView Summary -->

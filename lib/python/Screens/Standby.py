@@ -463,7 +463,7 @@ class TryQuitMainloop(MessageBox):
 		global inTryQuitMainloop
 		inTryQuitMainloop = False
 
-	def createSummary(self):  # Suppress the normal MessageBox ScreenSummary screen.
+	def createSummary(self):  # Suppress the normal MessageBox MessageBoxSummary screen.
 		return None
 
 

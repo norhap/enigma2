@@ -5,7 +5,7 @@ from Components.Label import Label
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen, ScreenSummary
+from Screens.Screen import Screen
 
 config.misc.pluginlist = ConfigSubsection()
 config.misc.pluginlist.eventInfoOrder = ConfigText(default="")
@@ -173,9 +173,9 @@ class ChoiceBox(Screen, HelpableScreen):
 		return ChoiceBoxSummary
 
 
-class ChoiceBoxSummary(ScreenSummary):
+class ChoiceBoxSummary(Screen):
 	def __init__(self, session, parent):
-		ScreenSummary.__init__(self, session, parent=parent)
+		Screen.__init__(self, session, parent=parent)
 		self["text"] = StaticText(parent.text)
 		self["option"] = StaticText("")
 		if hasattr(self, "list"):

@@ -188,7 +188,7 @@
 	</screen>
 
 <!-- channelselection -->
-	<screen name="ChannelSelectionSummary" position="0,0" size="400,240">
+	<screen name="ChannelSelection_summary" position="0,0" size="400,240">
 		<widget source="parent.Service" render="LcdPicon" position="125,0" size="150,90" zPosition="2" alphaTest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>
@@ -390,9 +390,10 @@
 	</screen>
 
 <!-- System -->
-	<!--screen name="ChoiceBox_summary" position="fill" >
-		<widget source="parent.summary_list" render="Label" position="fill" font="FdLcD;21" noWrap="1" verticalAlignment="top" />
-	</screen-->
+	<screen name="ChoiceBoxSummary" position="fill">
+		<widget source="text" render="Label" position="fill" font="FdLcD;24" horizontalAlignment="center" />
+		<widget source="option" render="Label" position="0,135" size="400,28" font="FdLcD;26" horizontalAlignment="center" noWrap="1" />
+	</screen>
 	<screen name="MessageBox_summary" position="0,0" size="400,240">
 		<widget source="text" render="Label" position="0,0" size="400,240" font="FdLcD;24" horizontalAlignment="center" />
 		<widget source="option" render="Label" position="0,135" size="400,28" font="FdLcD;26" foregroundColor="#F4FA58" horizontalAlignment="center" noWrap="1" />

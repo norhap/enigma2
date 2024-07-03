@@ -93,15 +93,11 @@ and the display skin will not be displayed
 		<panel name="MyClockPanel" />
 		<panel name="MyRecPanel" />
 	</screen>
-	<screen name="ChoiceBox_summary" position="0,0" size="1,1">
+	<screen name="ChoiceBoxSummary" position="0,0" size="1,1">
 		<panel name="MyClockPanel" />
 		<panel name="MyRecPanel" />
 	</screen>
-	<screen name="MessageBox_summary" position="0,0" size="1,1">
-		<panel name="MyClockPanel" />
-		<panel name="MyRecPanel" />
-	</screen>
-	<screen name="MessageBoxSimple_summary" position="0,0" size="1,1">
+	<screen name="MessageBoxSummary" position="0,0" size="1,1">
 		<panel name="MyClockPanel" />
 		<panel name="MyRecPanel" />
 	</screen>

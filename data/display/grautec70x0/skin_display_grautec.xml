@@ -423,8 +423,8 @@
 	</widget>
 </screen>
 
-<!--ChoiceBox_summary-->
-<screen name="ChoiceBox_summary" position="0,0" size="400,240">
+<!--ChoiceBoxSummary-->
+<screen name="ChoiceBoxSummary" position="0,0" size="400,240">
 	<widget source="parent.summary_list" render="Label" position="2,15" size="396,202" font="LCD1;44" horizontalAlignment="center"/>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
 		<convert type="ConditionalShowHide">Blink</convert>
@@ -439,8 +439,8 @@
 	</widget>
 </screen>
 
-<!--MessageBox_summary-->
-<screen name="MessageBox_summary" position="0,0" size="400,240">
+<!--MessageBoxSummary-->
+<screen name="MessageBoxSummary" position="0,0" size="400,240">
 	<widget source="text" render="Label" position="2,10" size="396,165" font="LCD1;44" horizontalAlignment="center" verticalAlignment="top" backgroundColor="oledbackground2" />
 	<widget source="option" render="Label" position="2,178" size="396,44" font="LCD1;44" horizontalAlignment="center" foregroundColor="#FFFFFF" />
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">

@@ -126,16 +126,13 @@
 	<screen name="SimpleSummary" position="0,0" size="132,64">
 		<widget source="parent.Title" render="Label" position="0,0" size="124,40" font="Regular;16" verticalAlignment="center" />
 	</screen>
-	<screen name="ChoiceBox_summary" position="0,0" size="132,64">
-		<widget source="parent.summary_selection" conditional="parent.summary_selection" render="Label" position="0,0" size="126,64" font="Regular;11" noWrap="1" />
+	<screen name="ChoiceBoxSummary" position="fill">
+		<widget source="text" render="Label" position="fill" font="Regular;11" horizontalAlignment="center" />
+		<widget source="option" render="Label" position="0,0" size="126,64" font="Regular;11" noWrap="1" />
 	</screen>
-	<screen name="MessageBox_summary" position="0,0" size="132,64">
-		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="132,52" font="Regular;11" verticalAlignment="center" />
-		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,50" size="120,14" horizontalAlignment="left" noWrap="1"  />
-	</screen>
-	<screen name="MessageBoxSimple_summary" position="0,0" size="132,64">
-		<widget source="parent.Text" conditional="parent.Text" render="Label" position="0,0" size="132,52" font="Regular;11" verticalAlignment="center" />
-		<widget source="parent.selectedChoice" conditional="parent.selectedChoice" render="Label" position="0,50" size="120,14" horizontalAlignment="left" noWrap="1"  />
+	<screen name="MessageBoxSummary" position="0,0" size="132,64">
+		<widget source="text" conditional="text" render="Label" position="0,0" size="132,52" font="Regular;11" verticalAlignment="center" />
+		<widget source="option" conditional="option" render="Label" position="0,50" size="120,14" horizontalAlignment="left" noWrap="1"  />
 	</screen>
 	<screen name="JobView_summary" position="0,0" size="132,64">
 		<widget source="parent.summary_job_progress" render="Label" position="0,0" size="132,64" font="Regular;12" >

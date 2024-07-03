@@ -9,7 +9,7 @@ from Components.Label import Label
 from Components.SystemInfo import SystemInfo, BRAND, MODEL
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
-from Screens.Screen import Screen, ScreenSummary
+from Screens.Screen import Screen
 from Tools.Directories import SCOPE_GUISKIN, SCOPE_PLUGINS, SCOPE_SKINS, fileReadXML, resolveFilename
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -241,9 +241,9 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 		return SetupSummary
 
 
-class SetupSummary(ScreenSummary):
+class SetupSummary(Screen):
 	def __init__(self, session, parent):
-		ScreenSummary.__init__(self, session, parent=parent)
+		Screen.__init__(self, session, parent=parent)
 		self["entry"] = StaticText("")  # DEBUG: Proposed for new summary screens.
 		self["value"] = StaticText("")  # DEBUG: Proposed for new summary screens.
 		self["SetupTitle"] = StaticText(parent.getTitle())
