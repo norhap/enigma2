@@ -82,7 +82,7 @@
     </screen>
 
 <!-- channelselection-->
-	<screen name="ChannelSelection_summary" position="fill">
+	<screen name="ChannelSelectionSummary" position="fill">
 		<widget source="parent.ServiceEvent" render="Label" position="top" foregroundColor="#FFFF00" size="*,65" font="FdLcD;30" horizontalAlignment="center" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
@@ -330,7 +330,7 @@
 		<widget source="parent.summary_description" render="Label" position="0,82" size="220,80" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="center"  />
 	</screen>
 
-<!-- Quickmenü -->
+<!-- Quickmenu -->
 	<screen name="QuickMenu_summary" position="0,0" size="220,176">
 		<widget source="parent.Title" render="Label" position="0,0" foregroundColor="#FFFF00" size="220,80" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" />
 		<widget source="parent.summary_description" render="Label" position="0,82" size="220,80" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="center"  />

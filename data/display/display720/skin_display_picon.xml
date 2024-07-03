@@ -133,7 +133,7 @@
 	</screen>
 
 <!-- channelselection-->
-	<screen name="ChannelSelection_summary" position="0,0" size="720,576">
+	<screen name="ChannelSelectionSummary" position="0,0" size="720,576">
 		<widget source="parent.ServiceEvent" render="Label" position="15,21" size="675,100" foregroundColor="#e5b243" font="FdLcD;95" horizontalAlignment="center" zPosition="14">
 			<convert type="ServiceName">Name</convert>
 		</widget>

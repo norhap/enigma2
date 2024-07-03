@@ -63,8 +63,8 @@
 	</widget>
 </screen>
 
-<!--ChannelSelection_summary-->
-<screen name="ChannelSelection_summary" position="0,0" size="400,240">
+<!--ChannelSelectionSummary-->
+<screen name="ChannelSelectionSummary" position="0,0" size="400,240">
 	<widget source="parent.ServiceEvent" render="Label" position="0,32" size="400,155" font="LCD1;52" horizontalAlignment="center">
 		<convert type="ServiceName">Name</convert>
 	</widget>
@@ -91,8 +91,8 @@
 	</widget>
 </screen>
 
-<!--AdvancedChannelSelection_summary-->
-<screen name="AdvancedChannelSelection_summary" position="0,0" size="400,240">
+<!--AdvancedChannelSelectionSummary-->
+<screen name="AdvancedChannelSelectionSummary" position="0,0" size="400,240">
 	<widget source="parent.ServiceEvent" render="Label" position="0,32" size="400,155" font="LCD1;52" horizontalAlignment="center">
 		<convert type="ServiceName">Name</convert>
 	</widget>

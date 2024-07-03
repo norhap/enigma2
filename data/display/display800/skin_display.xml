@@ -34,7 +34,7 @@
 	<!-- MAIN -->
 
 	<!-- CHANNEL SELECTION-->
-	<screen name="ChannelSelection_summary" position="0,0" size="800,480">
+	<screen name="ChannelSelectionSummary" position="0,0" size="800,480">
 		<panel name="LCDChannelSelectionChannelName" />
 		<panel name="LCDChannelSelectionProgramName" />
 		<panel name="LCDChannelSelectionProgress" />

@@ -188,7 +188,7 @@
 	</screen>
 
 <!-- channelselection -->
-	<screen name="ChannelSelection_summary" position="0,0" size="390,240">
+	<screen name="ChannelSelectionSummary" position="0,0" size="390,240">
 		<widget source="parent.Service" render="LcdPicon" position="125,0" size="150,90" zPosition="2" alphaTest="on">
 			<convert type="ServiceName">Reference</convert>
 		</widget>

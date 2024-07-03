@@ -124,7 +124,7 @@
 	</screen>
 
 <!-- channelselection-->
-	<screen name="ChannelSelection_summary" position="0,0" size="480,320">
+	<screen name="ChannelSelectionSummary" position="0,0" size="480,320">
 		<widget source="parent.ServiceEvent" render="Label" position="0,5" size="480,70" font="FdLcD;55" horizontalAlignment="center" verticalAlignment="center" foregroundColor="#FFFF00" >
 			<convert type="ServiceName">Name</convert>
 		</widget>

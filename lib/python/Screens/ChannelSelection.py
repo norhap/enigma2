@@ -2637,6 +2637,15 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			self.setCurrentSelection(tmp_ref)
 		self.revertMode = None
 
+	def createSummary(self):
+		return ChannelSelectionSummary
+
+
+class ChannelSelectionSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent)
+		self.skinName = ["ChannelSelectionSummary"]  # Required for InfoBarChannelSelection.
+
 
 class RadioInfoBar(Screen):
 	def __init__(self, session):
