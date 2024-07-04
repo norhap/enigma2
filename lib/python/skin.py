@@ -2032,7 +2032,10 @@ def readSkin(screen, skin, names, desktop):
 		if myScreen is not None:
 			screen.parsedSkin = myScreen
 	if myScreen is None:
-		print("[Skin] No skin to read or screen to display.")
+		if "Summary" not in screen.__class__.__name__:
+			print(f"[Skin] There is no screen '{screen.__class__.__name__}' in your skin.")
+		if "Summary" in screen.__class__.__name__:
+			print(f"[Skin Display Error] No exist screen '{screen.__class__.__name__}' in your skin_display.")
 		myScreen = screen.parsedSkin = fromstring("<screen></screen>")
 	screen.skinAttributes = []
 	skinPath = getattr(screen, "skin_path", path)  # TODO: It may be possible for "path" to be undefined!
