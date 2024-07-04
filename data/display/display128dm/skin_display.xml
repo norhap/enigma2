@@ -167,7 +167,7 @@
 	</screen>
 
 <!-- Numberzap -->
- 	<screen name="NumberZap_summary" position="2,0" size="128,64">
+ 	<screen name="NumberZapSummary" position="2,0" size="128,64">
 		<widget source="parent.number_summary" render="Label" position="top" size="*,25" font="FdLcD;20" horizontalAlignment="center" verticalAlignment="center" />
 		<widget source="parent.service_summary" render="Label" position="top" size="*,16" foregroundColor="#FFFF00" font="FdLcD;16" horizontalAlignment="center" verticalAlignment="top" />
 		<panel name="SummaryClockPanel" />
@@ -181,7 +181,7 @@
 	</screen>
 
 <!-- JobView Summary -->
-	<screen name="JobView_summary" position="2,0" size="128,64">
+	<screen name="JobViewSummary" position="2,0" size="128,64">
 		<widget source="parent.summary_job_name" render="Label" position="6,4" size="120,42" font="FdLcD;16" />
 		<widget source="parent.summary_job_task" render="Label" position="6,22" size="120,26" font="FdLcD;12" />
 		<widget source="parent.summary_job_progress" render="Progress" position="6,50" size="60,12" borderWidth="1" zPosition="1" />
@@ -200,7 +200,7 @@
 	</screen>
 
 <!-- EMC -->
-	<screen name="EMCSelection_summary" position="3,0" size="128,64">
+	<screen name="EMCSelectionSummary" position="3,0" size="128,64">
 		<!-- Channel name -->
 		<widget source="parent.Service" render="Label" position="top" size="*,16" font="FdLcD;16" horizontalAlignment="center" noWrap="1">
 			<convert type="EMCMovieInfo">RecordServiceName</convert>

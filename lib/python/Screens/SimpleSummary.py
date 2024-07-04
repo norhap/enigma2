@@ -15,10 +15,4 @@ class SimpleSummary(Screen):
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
 		self["Title"] = StaticText(parent.getTitle())
-		names = parent.skinName
-		if not isinstance(names, list):
-			names = [names]
-		self.skinName = [f"{x}_summary" for x in names]
-		self.skinName.append("SimpleSummary")
-		# If parent has a "skin_summary" defined, use that as default.
-		self.skin = parent.__dict__.get("skin_summary", self.skin)
+		self.skinName = ["SimpleSummary"]
