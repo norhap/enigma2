@@ -62,9 +62,6 @@ class PowerTimerEditList(Screen):
 		self["key_blue"].setText(text)
 		config.powertimerlog.actived.save()
 
-	def createSummary(self):
-		return PowerTimerEditListSummary
-
 	def up(self):
 		self["timerlist"].instance.moveSelection(self["timerlist"].instance.moveUp)
 		self.updateState()
@@ -297,25 +294,3 @@ class PowerTimerEditList(Screen):
 	def onStateChange(self, entry):
 		self.refill()
 		self.updateState()
-
-
-class PowerTimerEditListSummary(Screen):
-	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent=parent)
-		self["time"] = StaticText("")
-		self["duration"] = StaticText("")
-		self["state"] = StaticText("")
-		self.onShow.append(self.addWatcher)
-		self.onHide.append(self.removeWatcher)
-
-	def addWatcher(self):
-		self.parent.onChangedEntry.append(self.selectionChanged)
-		self.parent.updateState()
-
-	def removeWatcher(self):
-		self.parent.onChangedEntry.remove(self.selectionChanged)
-
-	def selectionChanged(self, time, duration, state):
-		self["time"].text = time
-		self["duration"].text = duration
-		self["state"].text = state
