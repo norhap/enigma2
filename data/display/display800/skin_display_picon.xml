@@ -64,13 +64,13 @@
 		<panel name="LCDPiconEPGSEndTime" />
 	</screen>
 	<screen name="GraphicalEPGSummary" position="0,0" size="800,480">
-		<panel name="GraphicalEPGPIG_summary" />
+		<panel name="GraphicalEPGPIGSummary" />
 	</screen>
-	<screen name="GraphicalInfoBarEPGSummary" position="0,0" size="800,480">
-		<panel name="GraphicalEPGPIG_summary" />
+		<screen name="GraphicalInfoBarEPGSummary" position="0,0" size="800,480">
+		<panel name="GraphicalEPGPIGSummary" />
 	</screen>
 	<screen name="EPGSelectionMultiSummary" position="0,0" size="800,480">
-		<panel name="GraphicalEPGPIG_summary" />
+		<panel name="GraphicalEPGPIGSummary" />
 	</screen>
 
 	<!-- INFOBAR -->
@@ -92,7 +92,7 @@
 		<widget source="global.CurrentTime" render="Label" position="470,24" foregroundColor="white" size="300,50" font="FdLcD;45" horizontalAlignment="right">
 			<convert type="ClockToText">Format:%d.%m.%Y</convert>
 		</widget>
- 		<widget source="global.CurrentTime" render="Label" position="20,370" foregroundColor="white" size="280,80" font="FdLcD;70" horizontalAlignment="left">
+		<widget source="global.CurrentTime" render="Label" position="20,370" foregroundColor="white" size="280,80" font="FdLcD;70" horizontalAlignment="left">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="40,20" zPosition="3" size="70,70" text=" ">
