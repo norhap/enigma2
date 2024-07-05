@@ -15,5 +15,7 @@ class SimpleSummary(Screen):
 		Screen.__init__(self, session, parent=parent)
 		self["Title"] = StaticText(parent.getTitle())
 		className = parent.skinName
-		self.skinName = [f"{className}Summary"]
+		if not isinstance(className, list):
+			className = [className]
+		self.skinName = [f"{x}Summary" for x in className]
 		self.skinName.append("SimpleSummary")

@@ -8,7 +8,6 @@ import skin
 from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
-from Screens.SimpleSummary import SimpleSummary
 from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -132,12 +131,6 @@ class InformationBase(Screen, HelpableScreen):
 	def displayInformation(self):
 		pass
 
-	def getSummaryInformation(self):
-		pass
-
-	def createSummary(self):
-		return InformationSummary
-
 
 class InformationImage(Screen, HelpableScreen):
 	skin = """
@@ -256,18 +249,6 @@ def formatLine(style, left, right=None):
 		colon = "" if styleLen > 0 and style[0] in ("M", "P", "V") else ""
 		return "%s%s%s%s%s" % (leftIndent, leftStartColor, left, colon, leftEndColor)
 	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
-
-
-class InformationSummary(SimpleSummary):
-	def __init__(self, session, parent):
-		SimpleSummary.__init__(self, session, parent=parent)
-		self.parent = parent
-		self["information"] = StaticText()
-		parent.onInformationUpdated.append(self.updateSummary)
-		# self.updateSummary()
-
-	def updateSummary(self):
-		self["information"].setText(self.parent.getSummaryInformation())
 
 
 class About(Screen):
@@ -476,9 +457,6 @@ class BenchmarkInformation(InformationBase):
 		info.append("")
 		info.append(formatLine("P1", _("RAM benchmark"), _("%.2f MB/s copy rate") % self.ramBenchmark if self.ramBenchmark else _("Calculating benchmark...")))
 		self["information"].setText("\n".join(info))
-
-	def getSummaryInformation(self):
-		return "Benchmark Information"
 
 
 class Geolocation(Screen):

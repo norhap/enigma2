@@ -178,7 +178,7 @@ class ChoiceBoxSummary(Screen):
 		Screen.__init__(self, session, parent=parent)
 		self["text"] = StaticText(parent.text)
 		self["option"] = StaticText("")
-		if hasattr(self, "list"):
+		if parent.list:
 			if self.addWatcher not in self.onShow:
 				self.onShow.append(self.addWatcher)
 			if self.removeWatcher not in self.onHide:
@@ -194,7 +194,7 @@ class ChoiceBoxSummary(Screen):
 			self.parent["list"].onSelectionChanged.remove(self.selectionChanged)
 
 	def selectionChanged(self):
-		self["option"].setText(self.parent["list"].l.getCurrentSelection()[0][0])
+		self["option"].setText(self.parent["list"].getCurrent()[0][0])
 
 
 class OrderedChoiceBox(ChoiceBox):

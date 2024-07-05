@@ -29,9 +29,7 @@
 <!-- SimpleSummary -->
 	<screen name="SimpleSummary" position="fill">
 		<widget source="parent.Title" render="Label" position="6,4" size="400,170" font="FdLcD;40" />
-		<widget source="global.CurrentTime" render="Label" position="100,150" size="400,65" font="FdLcD;50">
-			<convert type="ClockToText">WithSeconds</convert>
-		</widget>
+		<panel name="SummaryClockPanel" />
 	</screen>
 
 <!-- main-->
@@ -236,22 +234,13 @@
 		<panel name="SummaryTunerStatusPanel" />
 	</screen>
 	<screen name="ChoiceBoxSummary" position="fill">
-		<widget source="text" render="Label" position="fill" font="FdLcD;24" horizontalAlignment="center" />
-		<widget source="option" render="Label" position="0,135" size="400,28" font="FdLcD;26" horizontalAlignment="center" noWrap="1" />
+		<widget source="text" render="Label" position="fill" font="FdLcD;30" horizontalAlignment="center" />
+		<widget source="option" render="Label" position="0,135" size="400,28" font="FdLcD;28" horizontalAlignment="center" noWrap="1" />
 	</screen>
 	<screen name="MessageBoxSummary" position="0,0" size="400,240">
 		<widget source="text" render="Label" position="0,0" size="400,240" font="FdLcD;24" horizontalAlignment="center" />
 		<widget source="option" render="Label" position="0,135" size="400,28" font="FdLcD;26" horizontalAlignment="center" noWrap="1" />
 	</screen>
-	<screen name="TimerEditListSummary" position="0,0" size="400,240">
-		<widget source="parent.Title" render="Label" position="0,0" size="400,26" font="FdLcD;24" horizontalAlignment="center" noWrap="1" />
-		<widget source="service" render="Label" position="0,40" size="400,30" font="FdLcD;28" horizontalAlignment="center" noWrap="1" />
-		<widget source="name" render="Label" position="0,80" size="400,100" font="FdLcD;28" horizontalAlignment="center" verticalAlignment="center" />
-		<widget source="time" render="Label" position="0,188" size="400,28" font="FdLcD;24" horizontalAlignment="left" transparent="1" />
-		<widget source="duration" render="Label" position="0,214" size="400,28" font="FdLcD;24" horizontalAlignment="left" transparent="1" />
-		<widget source="state" render="Label" position="0,214" size="400,28" font="FdLcD;24" horizontalAlignment="right" transparent="1" />
-	</screen>
-
 	<screen name="AutoTimerOverviewSummary" position="0,0" size="400,240">
 		<widget source="parent.Title" render="Label" position="0,0" size="400,26" font="FdLcD;24" horizontalAlignment="center" noWrap="1" />
 		<widget source="entry" render="Label" position="0,40" size="400,125" font="FdLcD;28" horizontalAlignment="center" verticalAlignment="center" />
@@ -350,6 +339,7 @@
 		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 		<widget source="Name" render="Label" position="10,75" size="375,50" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 	</screen>
+	<!-- LANGUAGE SELECTION -->
 	<screen name="LanguageSelectionSummary" position="0,0" size="400,240">
 		<widget source="parent.Title" render="Label" position="10,0" size="375,50" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 		<widget source="parent.languages" render="Listbox" position="0,55" size="395,183" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" transparent="1">
@@ -363,6 +353,7 @@
 			</convert>
 		</widget>
 	</screen>
+	<!-- LANGUAGE WIZARD -->
 	<screen name="LanguageWizardSummary" position="0,0" size="400,240">
 		<widget source="parent.Title" render="Label" position="10,0" size="375,35" foregroundColor="#87CEFA" font="FdLcD;35" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 		<widget source="parent.summarytext" render="Label" position="10,40" size="375,150" font="FdLcD;25" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />

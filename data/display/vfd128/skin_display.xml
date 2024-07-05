@@ -221,7 +221,7 @@
 
 <!-- misc-->
 	<screen name="SimpleSummary" position="0,0" size="128,32">
-		<widget source="parent.Title" render="Label" position="0,10" size="128,16" font="FdLcD;16" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />
+		<widget source="parent.Title" render="Label" position="0,0" size="128,32" font="FdLcD;15" />
 	</screen>
 
 <!-- standby -->
@@ -282,22 +282,11 @@
 	<screen name="GraphicalEPGPIGSummary" position="0,0" size="128,32">
 		<panel name="SummaryEpgPanel" />
 	</screen>
-
+<!-- WIZARDS AND LANGAGESELECTION -->
 	<screen name="MessageBoxSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,18" font="FdLcD;9" verticalAlignment="top" horizontalAlignment="center" />
 		<widget source="option" render="Label" position="0,16" size="128,16" font="FdLcD;9" verticalAlignment="bottom" horizontalAlignment="center" />
 	</screen>
-
-	<screen name="TimerEditListSummary" position="0,0" size="128,32">
-		<widget source="service" render="Label" position="0,0" size="128,16" font="FdLcD;15" horizontalAlignment="left" verticalAlignment="bottom" transparent="1" />
-		<widget source="name" render="Label" position="0,10" size="128,18" font="FdLcD;12" horizontalAlignment="left" noWrap="1" transparent="1" />
-		<widget source="time" render="Label" position="0,20" size="110,12" font="FdLcD;12" horizontalAlignment="left" transparent="1" />
-	</screen>
-
-	<screen name="PowerTimerEditListSummary" position="0,0" size="128,32">
-		<widget source="time" render="Label" position="0,20" size="110,12" font="FdLcD;12" horizontalAlignment="left" transparent="1" />
-	</screen>
-
 	<screen name="WizardSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,16" font="FdLcD;16" horizontalAlignment="center" />
 		<widget source="parent.list" render="Label" position="0,16" size="128,16" font="FdLcD;12" horizontalAlignment="center" noWrap="1" />
@@ -309,12 +298,17 @@
 		</widget>
 	</screen>
 	<screen name="LanguageSelectionSummary" position="0,0" size="128,64">
-		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />
-		<widget source="parent.summarylangsel" render="Label" position="0,13" size="128,40" font="FdLcD;12" horizontalAlignment="center" />
+		<widget source="parent.Title" render="Label" position="0,0" size="128,15" font="FdLcD;12" horizontalAlignment="center" />
+		<widget source="parent.summarylangsel" render="Label" position="0,16" size="128,16" font="FdLcD;12" horizontalAlignment="center" />
 	</screen>
 	<screen name="LanguageWizardSummary" position="0,0" size="128,64">
-		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />
-		<widget source="parent.summarytext" render="Label" position="0,13" size="128,50" font="FdLcD;12" horizontalAlignment="center" />
+		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" />
+		<widget source="parent.summarylangsel" render="Label" position="0,13" size="128,50" font="FdLcD;12" horizontalAlignment="center" />
+	</screen>
+<!-- CHOICEBOX -->
+	<screen name="ChoiceBoxSummary" position="0,0" size="128,32">
+		<widget source="text" render="Label" position="0,0" size="128,15" font="FdLcD;9" verticalAlignment="top" horizontalAlignment="center" />
+		<widget source="option" render="Label" position="0,16" size="128,16" font="FdLcD;9" horizontalAlignment="center" />
 	</screen>
 
 <!-- DVD -->
