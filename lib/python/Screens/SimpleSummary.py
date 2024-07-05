@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 
@@ -9,10 +8,12 @@ class SimpleSummary(Screen):
 		<widget source="global.CurrentTime" render="Label" position="56,46" size="82,18" font="Regular;16">
 			<convert type="ClockToText">WithSeconds</convert>
 		</widget>
-		<widget source="Title" render="Label" position="6,4" size="120,42" font="Regular;18" />
+		<widget source="parent.Title" render="Label" position="6,4" size="120,42" font="Regular;18" />
 	</screen>"""
 
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
 		self["Title"] = StaticText(parent.getTitle())
-		self.skinName = ["SimpleSummary"]
+		className = parent.skinName
+		self.skinName = [f"{className}Summary"]
+		self.skinName.append("SimpleSummary")
