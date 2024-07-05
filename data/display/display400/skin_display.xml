@@ -372,4 +372,8 @@
 		<widget source="parent.summarytext" render="Label" position="10,40" size="375,150" font="FdLcD;25" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 		<widget source="parent.summarylangsel" render="Label" position="10,195" foregroundColor="#87CEFA" size="375,35" font="FdLcD;30" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 	</screen>
+	<!-- RdsInfoDisplaySummary -->
+	<screen name="RdsInfoDisplaySummary" position="fill">
+		<panel name="SimpleSummary" />
+	</screen>
 </skin>

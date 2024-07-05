@@ -8,6 +8,7 @@ import skin
 from skin import parameters
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
+from Screens.SimpleSummary import SimpleSummary
 from Screens.MessageBox import MessageBox
 from Components.config import config
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -257,16 +258,15 @@ def formatLine(style, left, right=None):
 	return "%s%s%s:%s|%s%s%s%s" % (leftIndent, leftStartColor, left, leftEndColor, rightIndent, rightStartColor, right, rightEndColor)
 
 
-class InformationSummary(Screen):
+class InformationSummary(SimpleSummary):
 	def __init__(self, session, parent):
-		Screen.__init__(self, session, parent=parent)
+		SimpleSummary.__init__(self, session, parent=parent)
 		self.parent = parent
 		self["information"] = StaticText()
 		parent.onInformationUpdated.append(self.updateSummary)
 		# self.updateSummary()
 
 	def updateSummary(self):
-		# print("[Information] DEBUG: Updating summary.")
 		self["information"].setText(self.parent.getSummaryInformation())
 
 
