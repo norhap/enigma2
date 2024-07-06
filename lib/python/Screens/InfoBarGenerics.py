@@ -53,6 +53,7 @@ import pickle
 from sys import maxsize
 from gettext import ngettext
 from process import ProcessList
+from string import ascii_lowercase, ascii_uppercase, digits
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -2473,9 +2474,7 @@ class InfoBarExtensions:
 
 	def updateExtensions(self):
 		self.extensionsList = []
-		self.allExtensionsList = list("1234567890abcdefghijklmnopqrstuvwxyz")
-		self.availableKeys = ["red", "green", "yellow", "blue", "bullet"]
-		self.availableKeys[5:5] = self.allExtensionsList
+		self.availableKeys = ["red", "green", "yellow", "blue"] + list(digits + ascii_lowercase + ascii_uppercase)
 		self.extensionKeys = {}
 		for x in self.list:
 			if x[0] == self.EXTENSION_SINGLE:
@@ -4259,9 +4258,9 @@ class InfoBarHdmi2:
 
 		if BoxInfo.getItem("hashdmiin"):
 			if not self.hdmi_enabled_full:
-				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True), "bullet")
+				self.addExtension((self.getHDMIInFullScreen, self.HDMIInFull, lambda: True))
 			if not self.hdmi_enabled_pip:
-				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True), "bullet")
+				self.addExtension((self.getHDMIInPiPScreen, self.HDMIInPiP, lambda: True))
 		self["HDMIActions"] = HelpableActionMap(self, ["InfobarHDMIActions"], {
 			"HDMIin": (self.HDMIIn, _("Switch to HDMI-IN mode")),
 			"HDMIinLong": (self.HDMIInLong, _("Switch to HDMI-IN mode")),
