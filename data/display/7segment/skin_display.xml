@@ -45,6 +45,12 @@ and the display skin will not be displayed
 		<panel name="MyRecPanel" />
 	</screen>
 
+<!-- MovieSelection-->
+	<screen name="MovieSelectionSummary" position="0,0" size="1,1">
+		<panel name="MyClockPanel" />
+		<panel name="MyRecPanel" />
+	</screen>
+
 <!-- movieplayer-->
 	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="1,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="1,1">
