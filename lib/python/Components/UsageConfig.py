@@ -2,7 +2,7 @@ from enigma import eBackgroundFileEraser, eActionMap, eDVBDB, eEnv, eSubtitleSet
 
 from locale import AM_STR, PM_STR, nl_langinfo
 from os import listdir, makedirs, remove
-from os.path import exists, isdir, isfile, join, normpath
+from os.path import exists, isfile, ismount, join, normpath
 from time import mktime
 from gettext import ngettext
 from skin import parameters
@@ -302,11 +302,11 @@ def InitUsageConfig():
 	timeshiftPath = ""
 	for partition in harddiskmanager.getMountedPartitions():
 		directories = normpath(partition.mountpoint)
-		if directories != "/" and not exists(str(directories + "/movie")):
+		if directories != "/" and ismount(str(directories)) and not exists(str(directories + "/movie")):
 			makedirs(directories + "/movie")
 		if directories != "/" and "movie" in directories:
 			moviesPath = join(directories + "/")
-		for timeshiftpath in ["/media/%s/timeshift" % media for media in listdir("/media/") if isdir(join("/media/", media))]:
+		for timeshiftpath in [f"/media/{media}/timeshift" for media in listdir("/media/") if ismount(join("/media/", media))]:
 			if exists(str(timeshiftpath)):
 				if not exists(str(timeshiftpath + "/recordings")):
 					makedirs(timeshiftpath + "/recordings")
