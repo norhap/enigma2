@@ -218,7 +218,6 @@
 		<widget source="SetupValue" render="Label" position="0,16" size="128,16" font="FdLcD;14" horizontalAlignment="center" verticalAlignment="bottom" zPosition="1" noWrap="1" />
 	</screen>
 
-
 <!-- misc-->
 	<screen name="SimpleSummary" position="0,0" size="128,32">
 		<widget source="parent.Title" render="Label" position="0,0" size="128,32" font="FdLcD;15" />
@@ -242,6 +241,11 @@
 	<screen name="PluginBrowserSummary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,14" font="FdLcD;15" horizontalAlignment="center" verticalAlignment="top" zPosition="1" noWrap="1" />
 		<widget source="entry" render="Label" position="fill" size="*,18" font="FdLcD;10" horizontalAlignment="center" verticalAlignment="top" zPosition="1" />
+	</screen>
+
+<!-- RdsInfoDisplaySummary -->
+	<screen name="RdsInfoDisplaySummary" position="fill">
+		<panel name="SimpleSummary" />
 	</screen>
 
 <!-- JobView Summary -->
