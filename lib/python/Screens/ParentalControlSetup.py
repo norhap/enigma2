@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
 from Components.ConfigList import ConfigListScreen
-from Components.ActionMap import NumberActionMap
-from Components.config import config, getConfigListEntry, ConfigNothing, NoSave, configfile
+from Components.config import config, getConfigListEntry, ConfigNothing, NoSave
 
 from Screens.MessageBox import MessageBox
 from Screens.InputBox import PinInput

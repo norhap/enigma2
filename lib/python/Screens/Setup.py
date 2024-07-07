@@ -2,7 +2,6 @@ from gettext import dgettext
 from os.path import getmtime, join
 from xml.etree.ElementTree import fromstring
 
-from skin import setups
 from Components.config import ConfigBoolean, ConfigNothing, ConfigSelection, config
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
@@ -10,7 +9,7 @@ from Components.SystemInfo import SystemInfo, BRAND, MODEL
 from Components.Sources.StaticText import StaticText
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
-from Tools.Directories import SCOPE_GUISKIN, SCOPE_PLUGINS, SCOPE_SKINS, fileReadXML, resolveFilename
+from Tools.Directories import SCOPE_PLUGINS, SCOPE_SKINS, fileReadXML, resolveFilename
 
 MODULE_NAME = __name__.split(".")[-1]
 

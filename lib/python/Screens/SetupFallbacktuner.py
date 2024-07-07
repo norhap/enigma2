@@ -1,7 +1,7 @@
 from enigma import getPeerStreamingBoxes
 
 from Screens.Setup import Setup
-from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry, ConfigBoolean
+from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry
 from Components.ImportChannels import ImportChannels
 from Tools.Directories import isPluginInstalled
 

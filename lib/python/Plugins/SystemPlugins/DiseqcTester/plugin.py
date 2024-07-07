@@ -4,7 +4,7 @@ from Screens.Screen import Screen
 from Screens.TextBox import TextBox
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import ActionMap, NumberActionMap
+from Components.ActionMap import NumberActionMap
 from Components.NimManager import nimmanager
 from Components.TuneTest import TuneTest
 from Components.Label import Label

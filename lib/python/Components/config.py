@@ -4,7 +4,6 @@ from os.path import realpath
 from time import localtime, strftime, struct_time
 
 from enigma import getPrevAsciiCode
-import unicodedata
 
 from Tools.Directories import SCOPE_CONFIG, fileAccess, resolveFilename
 from Tools.NumericalTextInput import NumericalTextInput
