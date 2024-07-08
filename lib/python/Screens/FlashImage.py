@@ -112,16 +112,17 @@ class SelectImage(Screen):
 
 			self.imagesList = dict(self.jsonlist)
 			for mountdir in ["/media", "/media/net", "/media/autofs"]:
-				if isdir(mountdir):
-					for media in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
+				for media in [f"{mountdir}/{x}" for x in listdir(mountdir)] if isdir(mountdir) else []:
+					if ismount(media):
 						getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and MODEL in x])
 						for folder in ["images", "downloaded_images", "imagebackups"]:
 							if folder in listdir(media):
 								subfolder = join(media, folder)
 								if isdir(subfolder) and not islink(subfolder) and not ismount(subfolder):
 									getImages(subfolder, [join(subfolder, x) for x in listdir(subfolder) if splitext(x)[1] == ".zip" and MODEL in x])
-									for dir in [dir for dir in [join(subfolder, dir) for dir in listdir(subfolder)] if isdir(dir) and splitext(dir)[1] == ".unzipped"]:
-										rmtree(dir)
+									for directory in [directory for directory in [join(subfolder, directory) for directory in listdir(subfolder)] if isdir(directory) and splitext(directory)[1] == ".unzipped"]:
+										rmtree(directory)
+										break
 
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
