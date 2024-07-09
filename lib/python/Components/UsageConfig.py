@@ -14,7 +14,7 @@ from keyids import KEYIDS
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo, SystemInfo, MODEL
-from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, defaultRecordingLocation, fileContains, fileWriteLine, resolveFilename
+from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, SCOPE_CONFIG, defaultRecordingLocation, fileContains, fileWriteLine, resolveFilename
 
 MODULE_NAME = __name__.split(".")[-1]
 originalAudioTracks = "orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth"
@@ -1232,29 +1232,30 @@ def InitUsageConfig():
 			d = normpath(p.mountpoint)
 			if p.mountpoint != "/":
 				hddchoises.append((p.mountpoint, d))
-	config.misc.epgcachepath = ConfigSelection(default="/etc/enigma2/", choices=hddchoises)
+	config.misc.epgcachepath = ConfigSelection(default=resolveFilename(SCOPE_CONFIG), choices=hddchoises)
 	config.misc.epgcachefilename = ConfigText(default="epg", fixed_size=False)
-	config.misc.epgcache_filename = ConfigText(default=join(config.misc.epgcachepath.value, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+	config.misc.epgcache_filename = ConfigText(default=join(config.misc.epgcachepath.value, config.misc.epgcachefilename.value + ".dat"))
 
 	def EpgCacheChanged(configElement):
-		config.misc.epgcache_filename.setValue(join(config.misc.epgcachepath.value, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+		config.misc.epgcache_filename.setValue(join(config.misc.epgcachepath.value, config.misc.epgcachefilename.value + ".dat"))
 		config.misc.epgcache_filename.save()
 		eEPGCache.getInstance().setCacheFile(config.misc.epgcache_filename.value)
 		epgcache = eEPGCache.getInstance()
 		epgcache.save()
 		for partition in harddiskmanager.getMountedPartitions():  # ckeck epg.dat file
 			path = normpath(partition.mountpoint)
+			cacheFileName = config.misc.epgcachefilename.value + ".dat"
 			if not config.misc.firstrun.value:
 				try:
-					if not config.misc.epgcache_filename.value.startswith("/etc/enigma2/"):  # delete internal flash
-						if exists(join("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
-							remove(join("/etc/enigma2/", "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
-						if path not in config.misc.epgcache_filename.value:  # delete on all devices with no value in config
-							if exists(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
-								remove(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+					if resolveFilename(SCOPE_CONFIG) not in config.misc.epgcache_filename.value + ".dat":  # delete internal flash
+						if exists(join(resolveFilename(SCOPE_CONFIG, cacheFileName))):
+							remove(join(resolveFilename(SCOPE_CONFIG, cacheFileName)))
+						if path not in config.misc.epgcache_filename.value + ".dat":  # delete on all devices with no value in config
+							if exists(join(path, cacheFileName)):
+								remove(join(path, cacheFileName))
 					else:  # delete in all devices except internal flash
-						if exists(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", ""))):
-							remove(join(path, "%s.dat" % config.misc.epgcachefilename.value.replace(".dat", "")))
+						if exists(join(path, cacheFileName)):
+							remove(join(path, cacheFileName))
 				except:
 					pass
 
