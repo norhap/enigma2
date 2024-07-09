@@ -1,4 +1,5 @@
-from enigma import checkInternetAccess, eTimer, eConsoleAppContainer
+from enigma import eTimer, eConsoleAppContainer
+
 from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
@@ -11,7 +12,7 @@ from Components.Network import iNetwork
 from Components.SystemInfo import BoxInfo
 # from Components.Language import language
 # from Tools.Geolocation import geolocation
-# from Components.Timezones import languageCode
+from Components.Timezones import internetAccess
 from Tools.Directories import fileContains, resolveFilename, SCOPE_PLUGINS
 
 
@@ -79,10 +80,9 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		self.isWlanPluginInstalled()
 		# geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 		# if geolocationData.get("status", None) == "success":
-		if config.misc.firstrun.value:
-			if checkInternetAccess("google.com") == 0:
-				Time.useGeolocation(self)  # set time zone auto.
-				Time.setNTP(self)  # set NTP in crontab.
+		if internetAccess():
+			Time.useGeolocation(self)  # set time zone auto.
+			Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
 			# if config.misc.firstrun.value and config.osd.language.value != languageCode():
 			# 	from Screens.Standby import TryQuitMainloop  # noqa: E402

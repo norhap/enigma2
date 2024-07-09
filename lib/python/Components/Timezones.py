@@ -1,3 +1,5 @@
+from enigma import checkInternetAccess
+
 from errno import ENOENT
 from os import environ, symlink, unlink, walk
 from os.path import exists, isfile, join, realpath
@@ -41,6 +43,12 @@ DEFAULT_ZONE = "London"
 TIMEZONE_FILE = "/etc/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 LANGUAGE_CODE = "/usr/share/zoneinfo/LanguageCode"
+
+
+def internetAccess():
+	if checkInternetAccess("ip-api.com") == 0:
+		return True
+	return False
 
 
 def InitTimeZones():
@@ -146,8 +154,7 @@ def languageCode():
 			with open(LANGUAGE_CODE, "r") as fr:
 				languagecode = fr.read().split('\n', 1)[0]
 		elif exists(TIMEZONE_FILE):
-			from enigma import checkInternetAccess  # noqa: E402
-			if checkInternetAccess("google.com") == 0:
+			if internetAccess():
 				with open(TIMEZONE_FILE, "r") as fr:
 					for city in fr.readlines():
 						if config.timezone.val.value in city:
