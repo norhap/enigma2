@@ -392,7 +392,7 @@
 
 <!-- RdsInfoDisplaySummary -->
 	<screen name="RdsInfoDisplaySummary" position="fill">
-		<panel name="SimpleSummary" />
+		<widget source="radiotext" render="Label" position="10,0" size="400,240" foregroundColor="#87CEFA" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 	</screen>
 
 <!-- IMDbLCDScreen -->

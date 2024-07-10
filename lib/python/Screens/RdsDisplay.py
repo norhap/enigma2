@@ -10,14 +10,19 @@ from Tools.LoadPixmap import LoadPixmap
 
 
 class RdsInfoDisplaySummary(Screen):
+	skin = """
+	<screen position="fill" flags="wfNoBorder">
+		<widget source="radiotext" render="Label" position="0,0" size="e,e" font="Regular;15" horizontalAlignment="center" verticalAlignment="center" />
+	</screen>"""
+
 	def __init__(self, session, parent):
 		Screen.__init__(self, session, parent=parent)
-		self["message"] = StaticText("")
+		self["radiotext"] = StaticText("")
 		self.parent.onText.append(self.onText)
 
-	def onText(self, message):
-		self["message"].text = message
-		if message and len(message):
+	def onText(self, radiotext):
+		self["radiotext"].text = radiotext
+		if radiotext and len(radiotext):
 			self.show()
 		else:
 			self.hide()

@@ -245,7 +245,7 @@
 
 <!-- RdsInfoDisplaySummary -->
 	<screen name="RdsInfoDisplaySummary" position="fill">
-		<panel name="SimpleSummary" />
+		<widget source="radiotext" render="Label" position="0,0" size="128,32" font="FdLcD;10" />
 	</screen>
 
 <!-- JobView Summary -->
