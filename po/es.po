@@ -1593,9 +1593,6 @@ msgstr "Modo de configuración"
 msgid "Configuration mode: %s"
 msgstr "Modo de configuración: %s"
 
-msgid "Configuration"
-msgstr "Configuración"
-
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
 msgstr "Configure si se debe obviar la comprobación de HDMI EDID, esto podría solucionar problemas con algunos televisores."
 
