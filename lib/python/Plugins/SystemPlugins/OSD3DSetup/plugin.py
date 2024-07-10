@@ -131,7 +131,7 @@ def startSetup(menuid):
 
 
 def autostart(reason, **kwargs):
-	"session" in kwargs and kwargs["session"].open(auto3D)
+	auto3D(kwargs["session"])
 
 
 def Plugins(**kwargs):
