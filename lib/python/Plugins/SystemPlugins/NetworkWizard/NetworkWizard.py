@@ -80,7 +80,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		self.isWlanPluginInstalled()
 		# geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
 		# if geolocationData.get("status", None) == "success":
-		if internetAccess():
+		if internetAccess() and config.misc.firstrun.value:
 			Time.useGeolocation(self)  # set time zone auto.
 			Time.setNTP(self)  # set NTP in crontab.
 			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
