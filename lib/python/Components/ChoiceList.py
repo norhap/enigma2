@@ -26,9 +26,9 @@ def ChoiceEntryComponent(key=None, text=None):
 				png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/expanded.png"))
 			elif key == "verticalline":
 				png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/verticalline.png"))
-			if key in list(digits) + ["red", "green", "yellow", "blue", "menu"]:
+			elif key in list(digits) + ["red", "green", "yellow", "blue", "menu"]:
 				png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, f"buttons/key_{key}.png"))
-			else:
+			if key not in list(digits) + ["red", "green", "yellow", "blue", "menu", "expandable", "expanded", "verticalline"]:
 				png = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "buttons/bullet.png"))
 			if png:
 				x, y, w, h = parameters.get("ChoicelistIcon", (5, 0, 35, 25))
