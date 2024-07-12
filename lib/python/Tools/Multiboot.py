@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from Components.Console import Console
-import os
-import glob
+from os import rename, rmdir, sep, stat
+from os.path import basename, exists, isfile, ismount, join
+from glob import glob
 import tempfile
 from subprocess import check_output
 from Components.SystemInfo import SystemInfo, BoxInfo as BoxInfoRunningInstance, BoxInformation
@@ -17,17 +18,17 @@ def getMultibootStartupDevice():
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 	bootList = ("/dev/mmcblk0p1", "/dev/mmcblk1p1", "/dev/mmcblk0p3", "/dev/mmcblk0p4", "/dev/mtdblock2", "/dev/block/by-name/bootoptions") if not SystemInfo["hasKexec"] else ("/dev/mmcblk0p4", "/dev/mmcblk0p7", "/dev/mmcblk0p9")
 	for device in bootList:
-		if os.path.exists(device):
-			if os.path.exists("/dev/block/by-name/flag"):
+		if exists(device):
+			if exists("/dev/block/by-name/flag"):
 				Console().ePopen('mount --bind %s %s' % (device, tmp.dir))
 			else:
 				Console().ePopen('mount %s %s' % (device, tmp.dir))
-			if os.path.isfile(os.path.join(tmp.dir, "STARTUP")):
+			if isfile(join(tmp.dir, "STARTUP")):
 				print('[Multiboot] Startupdevice found:', device)
 				return device
 			Console().ePopen('umount %s' % tmp.dir)
-	if not os.path.ismount(tmp.dir):
-		os.rmdir(tmp.dir)
+	if not ismount(tmp.dir):
+		rmdir(tmp.dir)
 
 
 def getparam(line, param):
@@ -42,7 +43,7 @@ def getMultibootslots():
 	UUIDnum = 0
 	BoxInfo = BoxInfoRunningInstance
 	if SystemInfo["MultibootStartupDevice"]:
-		for file in glob.glob(os.path.join(tmp.dir, 'STARTUP_*')):
+		for file in glob(join(tmp.dir, 'STARTUP_*')):
 			if 'MODE_' in file:
 				mode12found = True
 				slotnumber = file.rsplit('_', 3)[1]
@@ -67,10 +68,10 @@ def getMultibootslots():
 							if slotx is not None:
 								device = slotx
 							slot['kernel'] = "/linuxrootfs%s/zImage" % slotnumber
-						if os.path.exists(device) or device == 'ubi0:ubifs':
+						if exists(device) or device == 'ubi0:ubifs':
 							slot['device'] = device
 							slot["slotType"] = "eMMC" if "mmc" in slot["device"] else "USB"
-							slot['startupfile'] = os.path.basename(file)
+							slot['startupfile'] = basename(file)
 							SystemInfo["HasMultibootMTD"] = slot.get("mtd")
 							if 'rootsubdir' in line:
 								SystemInfo["HasRootSubdir"] = True
@@ -85,8 +86,8 @@ def getMultibootslots():
 				if slot:
 					bootslots[int(slotnumber)] = slot
 		Console().ePopen('umount %s' % tmp.dir)
-		if not os.path.ismount(tmp.dir):
-			os.rmdir(tmp.dir)
+		if not ismount(tmp.dir):
+			rmdir(tmp.dir)
 		if not mode12found and SystemInfo["canMode12"]:
 			# the boot device has ancient content and does not contain the correct STARTUP files
 			for slot in range(1, 5):
@@ -123,29 +124,29 @@ def getCurrentImageMode():
 def deleteImage(slot):
 	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 	Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
-	enigma2binaryfile = os.path.join(os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
-	if os.path.exists(enigma2binaryfile):
-		os.rename(enigma2binaryfile, '%s.bak' % enigma2binaryfile)
+	enigma2binaryfile = join(sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
+	if exists(enigma2binaryfile):
+		rename(enigma2binaryfile, '%s.bak' % enigma2binaryfile)
 	Console().ePopen('umount %s' % tmp.dir)
-	if not os.path.ismount(tmp.dir):
-		os.rmdir(tmp.dir)
+	if not ismount(tmp.dir):
+		rmdir(tmp.dir)
 
 
 def restoreImages():
 	for slot in SystemInfo["canMultiBoot"]:
 		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
 		Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
-		enigma2binaryfile = os.path.join(os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
-		if os.path.exists('%s.bak' % enigma2binaryfile):
-			os.rename('%s.bak' % enigma2binaryfile, enigma2binaryfile)
+		enigma2binaryfile = join(sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
+		if exists('%s.bak' % enigma2binaryfile):
+			rename('%s.bak' % enigma2binaryfile, enigma2binaryfile)
 		Console().ePopen('umount %s' % tmp.dir)
-		if not os.path.ismount(tmp.dir):
-			os.rmdir(tmp.dir)
+		if not ismount(tmp.dir):
+			rmdir(tmp.dir)
 
 
 def getUUIDtoSD(UUID):  # returns None on failure
 	check = "/sbin/blkid"
-	if os.path.exists(check):
+	if exists(check):
 		lines = check_output([check]).decode(encoding="utf8", errors="ignore").split("\n")
 		for line in lines:
 			if UUID in line.replace('"', ''):
@@ -181,17 +182,17 @@ def getImagelist(Recovery=None):
 					Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 			except:
 				pass
-			imagedir = os.sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')]))
-			if os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2')):
-				if os.path.isfile(os.path.join(imagedir, "usr/lib/enigma.info")):
+			imagedir = sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')]))
+			if isfile(join(imagedir, 'usr/bin/enigma2')):
+				if isfile(join(imagedir, "usr/lib/enigma.info")):
 					print("[MultiBoot] [BoxInfo] using BoxInfo")
 					BuildVersion = createInfo(slot, imagedir=imagedir)
 				else:
 					print("[MultiBoot] [getImagelist] 2 slot = %s imagedir = %s" % (slot, imagedir))
 					Creator = open("%s/etc/issue" % imagedir).readlines()[-2].capitalize().strip()[:-6]
 					print("[MultiBoot] [getImagelist] Creator = %s imagedir = %s" % (Creator, imagedir))
-					if SystemInfo["hasKexec"] and os.path.isfile(os.path.join(imagedir, "etc/vtiversion.info")):
-						Vti = open(os.path.join(imagedir, "etc/vtiversion.info")).read()
+					if SystemInfo["hasKexec"] and isfile(join(imagedir, "etc/vtiversion.info")):
+						Vti = open(join(imagedir, "etc/vtiversion.info")).read()
 						date = VerDate(imagedir)
 						Creator = Vti[0:3]
 						Build = Vti[-8:-1]
@@ -201,15 +202,15 @@ def getImagelist(Recovery=None):
 						Creator = Creator.replace("-release", " ")
 						BuildVersion = "%s (%s)" % (Creator, date)
 				imagelist[slot] = {"imagename": "%s" % BuildVersion}
-			elif os.path.isfile(os.path.join(imagedir, "usr/bin/enigmax")):
+			elif isfile(join(imagedir, "usr/bin/enigmax")):
 				imagelist[slot] = {"imagename": _("Deleted image")}
 			else:
 				imagelist[slot] = {"imagename": _("Empty slot")}
 			Console().ePopen('umount %s' % tmp.dir)
-		if not os.path.exists("/usr/share/enigma2/bootlogo.txt") and getChipSet() not in ("72604",):
+		if not exists("/usr/share/enigma2/bootlogo.txt") and getChipSet() not in ("72604",):
 			bootmviSlot(imagedir=imagedir, text=BuildVersion, slot=slot)
-		if not os.path.ismount(tmp.dir):
-			os.rmdir(tmp.dir)
+		if not ismount(tmp.dir):
+			rmdir(tmp.dir)
 	return imagelist
 
 
@@ -225,9 +226,9 @@ def createInfo(slot, imagedir="/"):
 
 
 def bootmviSlot(imagedir="/", text=" ", slot=" "):
-	inmviPath = os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
-	outmviPath = os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
-	txtPath = os.path.join(imagedir, "/usr/share/enigma2/bootlogo.txt")
+	inmviPath = join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
+	outmviPath = join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
+	txtPath = join(imagedir, "/usr/share/enigma2/bootlogo.txt")
 	slot = getCurrentImage()
 	text = _("Booting in slot %s %s") % (slot, text)
 	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmviPath, "   ", outmviPath)
@@ -237,7 +238,7 @@ def bootmviSlot(imagedir="/", text=" ", slot=" "):
 	print("[MultiBoot][bootmviSlot] Dump iframe to png")
 	Console(binary=True).ePopen("ffmpeg -skip_frame nokey -i /tmp/bootlogo.m1v -vsync 0  -y  /tmp/out1.png 2>/dev/null")
 	Console(binary=True).ePopen("rm -f /tmp/mypicture.m1v")
-	if os.path.exists("/tmp/out1.png"):
+	if exists("/tmp/out1.png"):
 		img = Image.open("/tmp/out1.png")						# Open an Image
 	else:
 		print("[MultiBoot][bootmviSlot] unable to create new bootlogo cannot open out1.png")
@@ -255,13 +256,12 @@ def bootmviSlot(imagedir="/", text=" ", slot=" "):
 
 
 def VerDate(imagedir):
-	date3 = "00000000"
-	date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "/var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
-	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "/usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
-	if os.path.exists(os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")):
-		date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "/usr/share/enigma2/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
-	print("[MultiBoot][VerDate]1 date1, date2, date3", date1, "   ", date2, "   ", date3)
-	date = max(date1, date2, date3)
-	print("[MultiBoot][VerDate]2 date = %s" % date)
+	date1 = date2 = date3 = "00000000"
+	if isfile(join(imagedir, "var/lib/opkg/status")):
+		date1 = datetime.fromtimestamp(stat(join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
+	date2 = datetime.fromtimestamp(stat(join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
+	if isfile(join(imagedir, "usr/share/bootlogo.mvi")):
+		date3 = datetime.fromtimestamp(stat(join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
+	date = max(date1, date2, date3)  # this is comparing strings
 	date = datetime.strptime(date, '%Y-%m-%d').strftime("%d-%m-%Y")
 	return date
