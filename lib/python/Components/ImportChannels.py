@@ -54,7 +54,7 @@ class ImportChannels():
 				sleep(5)
 				return self.getUrl(url, timeout)
 			print("[ImportChannels]", err)
-			raise (err)
+			result = {}
 		return result
 
 	def getFallbackSettings(self):
