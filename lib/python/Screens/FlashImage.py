@@ -24,6 +24,7 @@ from Components.Console import Console
 from Components.Harddisk import Harddisk
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
+from Components.Timezones import internetAccess
 from Components.SystemInfo import SystemInfo, MODEL
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -114,7 +115,10 @@ class SelectImage(Screen):
 			for mountdir in ["/media", "/media/net", "/media/autofs"]:
 				for media in [f"{mountdir}/{x}" for x in listdir(mountdir)] if isdir(mountdir) else []:
 					if ismount(media):
-						getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and MODEL in x])
+						try:
+							getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and MODEL in x])
+						except Exception:
+							break
 						for folder in ["images", "downloaded_images", "imagebackups"]:
 							if folder in listdir(media):
 								subfolder = join(media, folder)
@@ -273,9 +277,9 @@ class FlashImage(Screen):
 
 	def confirmation(self):
 		if self.reasons:
-			self.message = _("%s\nDo you still want to flash image\n%s?") % (self.reasons, self.imagename)
+			self.message = f"{self.reasons}\n" + _("Do you still want to flash image?\n") + f"{self.imagename}"
 		else:
-			self.message = _("Do you want to flash image\n%s") % self.imagename if not SystemInfo["canKexec"] else _("Unable to complete - Kexec Multiboot files missing!")
+			self.message = _("Do you want to flash image\n") + f"{self.imagename}" if not SystemInfo["canKexec"] else _("Unable to complete - Kexec Multiboot files missing!")
 		if SystemInfo["canMultiBoot"] and SystemInfo["HasUsbhdd"]:
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
@@ -283,9 +287,9 @@ class FlashImage(Screen):
 			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')} if not SystemInfo["HasKexecUSB"] else {k: v for k, v in SystemInfo["canMultiBoot"].items()}
 			numberSlots = len(slotdict) + 1 if not SystemInfo["hasKexec"] else len(slotdict)
 			for x in range(1, numberSlots):
-				choices.append(((_("slot%s - %s (current image) with, backup") if x == currentimageslot else _("slot%s - %s, with backup")) % (x, imagesList[x]['imagename']), (x, "with backup")))
+				choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image) with, backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("with backup"), (x, "with backup"))))
 			for x in range(1, numberSlots):
-				choices.append(((_("slot%s - %s (current image), without backup") if x == currentimageslot else _("slot%s - %s, without backup")) % (x, imagesList[x]['imagename']), (x, "without backup")))
+				choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image), without backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("without backup"), (x, "without backup"))))
 			if "://" in self.source:
 				choices.append((_("No, only image download"), (1, "only download")))
 			choices.append((_("No, do not flash image"), False))
@@ -327,23 +331,27 @@ class FlashImage(Screen):
 				mounts = []
 				devices = []
 				for mountdir in ["/media", "/media/net", "/media/autofs"]:
-					if isdir(mountdir):
-						for path in ['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] + (['%s/%s' % (mountdir, x) for x in listdir('%s' % mountdir)] if isdir('%s' % mountdir) else []):
+					for path in [f"{mountdir}/{x}" for x in listdir(mountdir)] if isdir(mountdir) else []:
+						if ismount(path):
 							if checkIfDevice(path, diskstats):
 								devices.append((path, avail(path)))
 							else:
 								mounts.append((path, avail(path)))
+						else:
+							return
 				devices.sort(key=lambda x: x[1], reverse=True)
 				mounts.sort(key=lambda x: x[1], reverse=True)
 				return ((devices[0][1] > 500 and (devices[0][0], True)) if devices else mounts and mounts[0][1] > 500 and (mounts[0][0], False)) or (None, None)
-
-			self.destination, isDevice = findmedia(isfile(self.BACKUP_SCRIPT) and hasattr(config.plugins, "autobackup") and config.plugins.autobackup.where.value or "/media/hdd")
-
+			try:
+				self.destination, isDevice = findmedia(isfile(self.BACKUP_SCRIPT) and hasattr(config.plugins, "autobackup") and config.plugins.autobackup.where.value or "/media/hdd")
+			except:
+				self.session.openWithCallback(self.abort, MessageBox, _("No storage devices found"), type=MessageBox.TYPE_ERROR, simple=True)
+				return
 			if self.destination:
 
 				destination = join(self.destination, 'downloaded_images')
 				self.zippedimage = "://" in self.source and join(destination, self.imagename) or self.source
-				self.unzippedimage = join(destination, '%s.unzipped' % self.imagename[:-4])
+				self.unzippedimage = join(destination, f'{self.imagename[:-4]}'".unzipped")
 
 				try:
 					if isfile(destination):
@@ -358,7 +366,7 @@ class FlashImage(Screen):
 					else:
 						self.startDownload()
 				except:
-					self.session.openWithCallback(self.abort, MessageBox, _("Unable to create the required directories on the media (e.g. USB stick or Harddisk) - Please verify media and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
+					pass
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
 		else:
@@ -383,11 +391,14 @@ class FlashImage(Screen):
 		if retval == 0:
 			self.startDownload()
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n%s") % retval, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Error during backup settings\n") + f"{retval}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def startDownload(self, reply=True):
 		self.show()
 		if reply:
+			if not internetAccess():
+				self.session.openWithCallback(self.abort, MessageBox, _("Your internet connection is not working."), type=MessageBox.TYPE_ERROR, simple=True)
+				return
 			if "://" in self.source:
 				self["header"].setText(_("Downloading Image"))
 				self["info"].setText(self.imagename)
@@ -408,7 +419,7 @@ class FlashImage(Screen):
 
 	def downloadError(self, reason, status):
 		self.downloader.stop()
-		self.session.openWithCallback(self.abort, MessageBox, _("Error during downloading image\n%s\n%s") % (self.imagename, reason), type=MessageBox.TYPE_ERROR, simple=True)
+		self.session.openWithCallback(self.abort, MessageBox, _("Error during downloading image\n") + f"{self.imagename}\n" + f"{reason}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def downloadEnd(self, outputFile):
 		self.downloader.stop()
@@ -417,10 +428,10 @@ class FlashImage(Screen):
 
 	def unzip(self):
 		if self.onlyDownload:
-			self.session.openWithCallback(self.abort, MessageBox, _("Download successfully\n%s") % self.imagename, type=MessageBox.TYPE_INFO, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Download successfully\n") + f"{self.imagename}", type=MessageBox.TYPE_INFO, simple=True)
 		else:
 			self["header"].setText(_("Unzipping Image"))
-			self["info"].setText("%s\n%s" % (self.imagename, _("Please wait")))
+			self["info"].setText(f"{self.imagename}\n" + _("Please wait"))
 			self["progress"].hide()
 			self.callLater(self.doUnzip)
 
@@ -429,7 +440,7 @@ class FlashImage(Screen):
 			ZipFile(self.zippedimage, 'r').extractall(self.unzippedimage)
 			self.flashimage()
 		except:
-			self.session.openWithCallback(self.abort, MessageBox, _("Error during unzipping image\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Error during unzipping image\n") + f"{self.imagename}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def flashimage(self):
 		self["header"].setText(_("Flashing Image"))
@@ -442,23 +453,23 @@ class FlashImage(Screen):
 		mtd = SystemInfo["canMultiBoot"][self.multibootslot]["device"].split("/")[2]  # USB get mtd root fs slot kexec
 		if imagefiles:
 			if SystemInfo["canMultiBoot"] and not SystemInfo["hasKexec"]:
-				command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)
+				command = f"/usr/bin/ofgwrite -k -r -m{self.multibootslot} '{imagefiles}'"
 			elif not SystemInfo["canMultiBoot"]:
-				command = "/usr/bin/ofgwrite -k -r '%s'" % imagefiles
+				command = f"/usr/bin/ofgwrite -k -r '{imagefiles}'"
 			else:  # kexec
 				if self.multibootslot == 0:
 					from boxbranding import getMachineMtdKernel, getMachineMtdRoot
 					kz0 = getMachineMtdKernel()
 					rz0 = getMachineMtdRoot()
-					command = "/usr/bin/ofgwrite -kkz0 -rrz0 '%s'" % imagefiles  # slot0 treat as kernel/root only multiboot receiver
+					command = f"/usr/bin/ofgwrite -kkz0 -rrz0 '{imagefiles}'"  # slot0 treat as kernel/root only multiboot receiver
 				if SystemInfo["HasKexecUSB"] and mtd and "mmcblk" not in mtd:
-					command = "/usr/bin/ofgwrite -r%s -kzImage -s'%s/linuxrootfs' -m%s '%s'" % (mtd, MODEL[2:], self.multibootslot, imagefiles)  # USB flash slot kexec
+					command = f"/usr/bin/ofgwrite -r{mtd} -kzImage -s'{MODEL[2:]}/linuxrootfs' -m{self.multibootslot} '{imagefiles}'"  # USB flash slot kexec
 				else:
-					command = "/usr/bin/ofgwrite -k -r -m%s '%s'" % (self.multibootslot, imagefiles)  # eMMC flash slot kexec
+					command = f"/usr/bin/ofgwrite -k -r -m{self.multibootslot} '{imagefiles}'"  # eMMC flash slot kexec
 			self.containerofgwrite = Console()
 			self.containerofgwrite.ePopen(command, self.FlashimageDone)
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Image to install is invalid\n") + f"{self.imagename}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def FlashimageDone(self, data, retval, extra_args):
 		try:
@@ -469,9 +480,9 @@ class FlashImage(Screen):
 		self.containerofgwrite = None
 		if retval == 0:
 			self["header"].setText(_("Flashing image successful"))
-			self["info"].setText(_("%s\nPress ok for multiboot selection\nPress exit to close") % self.imagename)
+			self["info"].setText(f"{self.imagename}\n" + _("Press ok for multiboot selection\nPress exit to close"))
 		else:
-			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not successful\n%s") % self.imagename, type=MessageBox.TYPE_ERROR, simple=True)
+			self.session.openWithCallback(self.abort, MessageBox, _("Flashing image was not successful\n") + f"{self.imagename}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def abort(self, reply=None):
 		if self.getImageList or self.containerofgwrite:
@@ -530,11 +541,11 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		self.blue = False
 		self.currentimageslot = getCurrentImage()
 		self.tmp_dir = mkdtemp(prefix="MultibootSelection")
-		Console().ePopen('mount %s %s' % (SystemInfo["MultibootStartupDevice"], self.tmp_dir))
+		Console().ePopen(f'mount {SystemInfo["MultibootStartupDevice"]} {self.tmp_dir}')
 		self.getImagesList()
 
 	def cancel(self, value=None):
-		Console().ePopen('umount %s' % self.tmp_dir)
+		Console().ePopen(f'umount {self.tmp_dir}')
 		if not ismount(self.tmp_dir) and exists(self.tmp_dir):
 			rmdir(self.tmp_dir)
 		if value == 2 and not exists(self.tmp_dir):
@@ -551,25 +562,25 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		if imagesList:
 			for index, x in enumerate(imagesList):
 				if SystemInfo["hasKexec"] and x == 1:
-					self["description"] = StaticText(_("Select slot image and press OK or GREEN button to reboot."))
+					self["description"].setText(_("Select slot image and press OK or GREEN button to reboot."))
 					if not self.currentimageslot:  # Slot0
-						list.append(ChoiceEntryComponent('', ((_("slot0 %s - Recovery mode image (current)")) % SystemInfo["canMultiBoot"][x]["slotType"], "Recovery")))
+						list.append(ChoiceEntryComponent('', ((_(f'slot0 {SystemInfo["canMultiBoot"][x]["slotType"]} ' + _("- Recovery mode image (current)"))), "Recovery")))
 					else:
-						list.append(ChoiceEntryComponent('', ((_("slot0 %s - Recovery mode image")) % SystemInfo["canMultiBoot"][x]["slotType"], "Recovery")))
+						list.append(ChoiceEntryComponent('', ((_(f'slot0 {SystemInfo["canMultiBoot"][x]["slotType"]} ' + _("- Recovery mode image"))), "Recovery")))
 				if imagesList[x]["imagename"] == _("Deleted image"):
 					self.deletedImagesExists = True
 				elif imagesList[x]["imagename"] != _("Empty slot"):
 					if SystemInfo["canMode12"]:
-						list.insert(index, ChoiceEntryComponent('', ((_("slot%s %s - %s mode 1 (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s %s - %s mode 1")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))
-						list12.insert(index, ChoiceEntryComponent('', ((_("slot%s %s - %s mode 12 (current image)") if x == self.currentimageslot and mode == 12 else _("slot%s %s - %s mode 12")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 12))))
+						list.insert(index, ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 1 (current image)") if x == self.currentimageslot and mode != 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 1"), (x, 1)))))
+						list12.insert(index, ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 12 (current image)") if x == self.currentimageslot and mode == 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 12"), (x, 12)))))
 					else:
 						if not SystemInfo["hasKexec"]:
-							list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s (current image)") if x == self.currentimageslot and mode != 12 else _("slot%s %s - %s")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))
+							list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("(current image)") if x == self.currentimageslot and mode != 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} {imagesList[x]["imagename"]}', (x, 1)))))
 						else:
 							if x != self.currentimageslot:
-								list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))  # list USB eMMC slots not current
+								list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]}', (x, 1)))))  # list USB eMMC slots not current
 							else:
-								list.append(ChoiceEntryComponent('', ((_("slot%s %s - %s (current image)")) % (x, SystemInfo["canMultiBoot"][x]["slotType"], imagesList[x]['imagename']), (x, 1))))  # Slot current != Slot0
+								list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("(current image)"), (x, 1)))))  # Slot current != Slot0
 		if list12:
 			self.blue = True
 			self["key_blue"].setText(_("Order by modes") if config.usage.multiboot_order.value else _("Order by slots"))
@@ -577,13 +588,13 @@ class MultibootSelection(SelectImage, HelpableScreen):
 			list = sorted(list) if config.usage.multiboot_order.value else list
 		if isfile(join(self.tmp_dir, "STARTUP_RECOVERY")) and not SystemInfo["hasKexec"]:
 			list.append(ChoiceEntryComponent('', ((_("Boot to Recovery menu")), "Recovery")))
-			self["description"] = StaticText(_("Select image or boot to recovery menu and press OK or GREEN button for reboot."))
+			self["description"].setText(_("Select image or boot to recovery menu and press OK or GREEN button for reboot."))
 		if isfile(join(self.tmp_dir, "STARTUP_ANDROID")):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
-			self["description"] = StaticText(_("Select image or boot to Android image and press OK or GREEN button for reboot."))
+			self["description"].setText(_("Select image or boot to Android image and press OK or GREEN button for reboot."))
 		if list12 or list:
 			if not isfile(join(self.tmp_dir, "STARTUP_RECOVERY")) and not isfile(join(self.tmp_dir, "STARTUP_ANDROID")):
-				self["description"] = StaticText(_("Select image and press OK or GREEN button for reboot."))
+				self["description"].setText(_("Select image and press OK or GREEN button for reboot."))
 		if not list:
 			list.append(ChoiceEntryComponent('', ((_("No images found")), "Waiter")))
 		self["list"].setList(list)
@@ -593,7 +604,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		if self["key_yellow"].text == _("Restore deleted images"):
 			self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Want to restore all deleted images?"), simple=True)
 		elif self["key_yellow"].text == _("Delete Image"):
-			self.session.openWithCallback(self.deleteImageCallback, MessageBox, "%s:\n%s" % (_("Are you sure to delete image:"), self.currentSelected[0][0]), simple=True)
+			self.session.openWithCallback(self.deleteImageCallback, MessageBox, _("Are you sure to delete image:\n") + f"{self.currentSelected[0][0]}", simple=True)
 
 	def deleteImageCallback(self, answer):
 		if answer:
@@ -611,7 +622,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 			self.getImagesList()
 
 	def keyOk(self):
-		self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
+		self.session.openWithCallback(self.doReboot, MessageBox, _("Are you sure to reboot to:\n") + f"{self.currentSelected[0][0]}", simple=True)
 
 	def doReboot(self, answer):
 		if answer:
@@ -622,13 +633,13 @@ class MultibootSelection(SelectImage, HelpableScreen):
 				copyfile(join(self.tmp_dir, "STARTUP_ANDROID"), join(self.tmp_dir, "STARTUP"))
 			elif SystemInfo["canMultiBoot"][slot[0]]['startupfile']:
 				if SystemInfo["canMode12"]:
-					startupfile = join(self.tmp_dir, "%s_%s" % (SystemInfo["canMultiBoot"][slot[0]]['startupfile'].rsplit('_', 1)[0], slot[1]))
+					startupfile = join(self.tmp_dir, f"{SystemInfo['canMultiBoot'][slot[0]]['startupfile'].rsplit('_', 1)[0]}_{slot[1]}")
 				else:
-					startupfile = join(self.tmp_dir, "%s" % SystemInfo["canMultiBoot"][slot[0]]['startupfile'])
+					startupfile = join(self.tmp_dir, f"{SystemInfo['canMultiBoot'][slot[0]]['startupfile']}")
 				if SystemInfo["canDualBoot"]:
 					with open('/dev/block/by-name/flag', 'wb') as f:
 						f.write(pack("B", int(slot[0])))
-					startupfile = join("/boot", "%s" % SystemInfo["canMultiBoot"][slot[0]]['startupfile'])
+					startupfile = join(f"/boot, {SystemInfo['canMultiBoot'][slot[0]]['startupfile']}")
 					if isfile(startupfile):
 						copyfile(startupfile, join("/boot", "STARTUP"))
 				else:
@@ -636,9 +647,9 @@ class MultibootSelection(SelectImage, HelpableScreen):
 						copyfile(startupfile, join(self.tmp_dir, "STARTUP"))
 			else:
 				if slot[1] == 1:
-					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot[0], slot[0] * 2 + 1, MODEL)
+					startupFileContents = f"boot emmcflash0.kernel{slot[0]} 'root=/dev/mmcblk0p{slot[0] * 2 + 1} rw rootwait {MODEL}_4.boxmode=1'\n"
 				else:
-					startupFileContents = "boot emmcflash0.kernel%s 'brcm_cma=520M@248M brcm_cma=%s@768M root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=12'\n" % (slot[0], SystemInfo["canMode12"], slot[0] * 2 + 1, MODEL)
+					startupFileContents = f"boot emmcflash0.kernel{slot[0]} 'brcm_cma=520M@248M brcm_cma={SystemInfo['canMode12']}@768M root=/dev/mmcblk0p{slot[0] * 2 + 1} rw rootwait {MODEL}_4.boxmode=12'\n"
 				with open(join(self.tmp_dir, "STARTUP", "w")) as f:
 					f.write(startupFileContents)
 			self.cancel(2)
@@ -679,7 +690,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 				if free < 1024:
 					des = str(round((float(free)), 2)) + _("MB")
 					print("[MultibootSelection][add USB STARTUP slot] limited free space", des)
-					self.session.open(MessageBox, _("FlashImage: Add USB STARTUP slots - USB (%s) only has %s free. At least 1024MB is required.") % (usb, des), MessageBox.TYPE_INFO, timeout=30)
+					self.session.open(MessageBox, _("FlashImage: Add USB STARTUP slots - USB") + f" ({usb}) " + _("only has") + f" {des} " + _("free. At least 1024MB is required."), MessageBox.TYPE_INFO, timeout=30)
 					self.cancel()
 					return
 				Console().ePopen("/sbin/blkid | grep " + "/dev/" + hdd[0], self.KexecMountRet)
@@ -696,14 +707,14 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		else:
 			boxmodel = MODEL[2:]
 			for usbslot in range(hiKey + 1, hiKey + 5):
-				STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, SystemInfo["VuUUIDSlot"][0], boxmodel, usbslot)  # /STARTUP_<n>
+				STARTUP_usbslot = f'kernel={boxmodel}/linuxrootfs{usbslot}/zImage root={SystemInfo["VuUUIDSlot"][0]} rootsubdir={boxmodel}/linuxrootfs{usbslot}'  # /STARTUP_<n>
 				if boxmodel in ("duo4k"):
 					STARTUP_usbslot += " rootwait=40"
 				elif boxmodel in ("duo4kse"):
 					STARTUP_usbslot += " rootwait=35"
-				with open("/%s/STARTUP_%d" % (self.tmp_dir, usbslot), 'w') as f:
+				with open(f"/{self.tmp_dir}/STARTUP_{usbslot}", 'w') as f:
 					f.write(STARTUP_usbslot)
-				print("[MultibootSelection] STARTUP_%d --> %s, self.tmp_dir: %s" % (usbslot, STARTUP_usbslot, self.tmp_dir))
+				print(f"[MultibootSelection] STARTUP_{usbslot} --> {STARTUP_usbslot}, self.tmp_dir: {self.tmp_dir}")
 			self.session.open(TryQuitMainloop, QUIT_RESTART)
 
 	def KexecMountRet(self, result=None, retval=None, extra_args=None):
@@ -711,13 +722,13 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		usb = result.split(":")[0]
 		boxmodel = MODEL[2:]
 		for usbslot in range(4, 8):
-			STARTUP_usbslot = "kernel=%s/linuxrootfs%d/zImage root=%s rootsubdir=%s/linuxrootfs%d" % (boxmodel, usbslot, self.device_uuid, boxmodel, usbslot)  # /STARTUP_<n>
+			STARTUP_usbslot = f"kernel={boxmodel}/linuxrootfs{usbslot}/zImage root={self.device_uuid} rootsubdir={boxmodel}/linuxrootfs{usbslot}"  # /STARTUP_<n>
 			if boxmodel in ("duo4k"):
 				STARTUP_usbslot += " rootwait=40"
 			elif boxmodel in ("duo4kse"):
 				STARTUP_usbslot += " rootwait=35"
-			print("[MultibootSelection] STARTUP_%d --> %s, self.tmp_dir: %s" % (usbslot, STARTUP_usbslot, self.tmp_dir))
-			with open("/%s/STARTUP_%d" % (self.tmp_dir, usbslot), 'w') as f:
+			print(f"[MultibootSelection] STARTUP_{usbslot} --> {STARTUP_usbslot}, self.tmp_dir: {self.tmp_dir}")
+			with open(f"/{self.tmp_dir}/STARTUP_{usbslot}", 'w') as f:
 				f.write(STARTUP_usbslot)
 
 		SystemInfo["HasKexecUSB"] = True

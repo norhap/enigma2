@@ -325,14 +325,8 @@ msgid "%k:%M %e/%m"
 msgstr "%k:%M %e/%m"
 
 #, python-format
-msgid ""
-"%s\n"
-"Press ok for multiboot selection\n"
-"Press exit to close"
-msgstr ""
-"%s\n"
-"Pulsa OK para la selección de arranque múltiple\n"
-"Pulsa exit para cerrar"
+msgid "Press ok for multiboot selection\nPress exit to close"
+msgstr "Pulsa OK para la selección de arranque múltiple\nPulsa exit para cerrar"
 
 #, python-format
 msgid "%s %d.%d"
@@ -2226,10 +2220,8 @@ msgstr "¿Quiere quemar esta colección a un DVD?"
 #, python-format
 msgid ""
 "Do you want to flash image\n"
-"%s"
 msgstr ""
 "¿Quiere flashear la imagen?\n"
-"%s"
 
 msgid "Do you want to install the package:\n"
 msgstr "¿Quiere instalar el paquete?:\n"
@@ -2309,10 +2301,8 @@ msgstr "Descargar plugins"
 
 msgid ""
 "Download successfully\n"
-"%s"
 msgstr ""
 "Descarga con éxito\n"
-"%s"
 
 msgid "Install plugins"
 msgstr "Instalar plugins"
@@ -2610,20 +2600,14 @@ msgstr "Código de error"
 #, python-format
 msgid ""
 "Error during backup settings\n"
-"%s"
 msgstr ""
 "Error mientras se respaldaban sus ajustes\n"
-"%s"
 
 #, python-format
 msgid ""
 "Error during downloading image\n"
-"%s\n"
-"%s"
 msgstr ""
 "Error mientras se descargaba imagen\n"
-"%s\n"
-"%s"
 
 #, python-format
 msgid ""
@@ -3716,13 +3700,8 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr "Ignorar conflicto"
 
-#, python-format
-msgid ""
-"Image to install is invalid\n"
-"%s"
-msgstr ""
-"La imagen a instalar no es válida\n"
-"%s"
+msgid "Image to install is invalid\n"
+msgstr "La imagen a instalar no es válida\n"
 
 msgid "Image: "
 msgstr "Imagen: "
@@ -5767,15 +5746,8 @@ msgstr "Tipo de grabación"
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "La(s) grabación(es) están en progreso o comenzarán en pocos segundos!"
 
-#, python-format
-msgid ""
-"Recording(s) are in progress or coming up in few seconds!\n"
-"Do you still want to flash image\n"
-"%s?"
-msgstr ""
-"La(s) grabación(es) están en progreso o comenzarán en pocos segundos!\n"
-"Aún así quieres flashear la imagen \n"
-"%s?"
+msgid "Do you still want to flash image?\n"
+msgstr "¿Aún así quieres flashear la imagen?\n"
 
 msgid "Recordings"
 msgstr "Grabaciones"
@@ -9061,6 +9033,9 @@ msgstr ""
 msgid "Your internet connection is working (IP address: %s)"
 msgstr "Su conexión a internet está funcionando (Dirección IP: %s)"
 
+msgid "Your internet connection is not working."
+msgstr "Su conexión a internet no funciona."
+
 msgid "Your network configuration has been activated."
 msgstr "Su configuración de red ha sido activada."
 
@@ -9579,6 +9554,9 @@ msgstr "adelantar al siguiente capítulo"
 msgid "free"
 msgstr "libre"
 
+msgid "free. At least 1024MB is required."
+msgstr "libre. Se requieren al menos 1024 MB."
+
 msgid "from"
 msgstr "de"
 
@@ -9807,8 +9785,8 @@ msgstr "Su hardware puede detectar el modo CI por sí mismo o solo funciona en m
 msgid "no resource manager"
 msgstr "sin administrador de recursos"
 
-msgid "no storage devices found"
-msgstr "no se encontraron dispositivos de almacenamiento"
+msgid "No storage devices found"
+msgstr "No se encontraron dispositivos de almacenamiento"
 
 msgid "none"
 msgstr "ninguno"
@@ -10110,51 +10088,47 @@ msgstr "saltar hacia atrás"
 msgid "skip forward"
 msgstr "saltar hacia delante"
 
-#, python-format
-msgid "slot%s %s - %s"
-msgstr "slot%s %s - %s"
+msgid "- Recovery mode image (current)"
+msgstr "- Imagen modo recuperación (actual)"
 
-msgid "slot0 %s - Recovery mode image (current)"
-msgstr "slot0 %s - Imagen modo recuperación (actual)"
-
-msgid "slot0 %s - Recovery mode image"
-msgstr "slot0 %s - Imagen modo recuperación"
+msgid "- Recovery mode image"
+msgstr "- Imagen modo recuperación"
 
 #, python-format
-msgid "slot%s %s - %s (current image)"
-msgstr "slot%s %s - %s (imagen actual)"
+msgid "(current image)"
+msgstr "(imagen actual)"
 
 #, python-format
-msgid "slot%s - %s (current image) with, backup"
-msgstr "slot%s - %s (imagen actual) con previo-backup"
+msgid "(current image) with, backup"
+msgstr "(imagen actual) con previo-backup"
 
 #, python-format
-msgid "slot%s - %s (current image), without backup"
-msgstr "slot%s - %s (imagen actual) sin hacer backup"
+msgid "(current image), without backup"
+msgstr "(imagen actual) sin hacer backup"
 
 #, python-format
-msgid "slot%s %s - %s mode 1"
-msgstr "slot%s %s - %s modo 1"
+msgid "mode 1"
+msgstr "modo 1"
 
 #, python-format
-msgid "slot%s %s - %s mode 1 (current image)"
-msgstr "slot%s %s - %s modo 1 (imagen actual)"
+msgid "mode 1 (current image)"
+msgstr "modo 1 (imagen actual)"
 
 #, python-format
-msgid "slot%s %s - %s mode 12"
-msgstr "slot%s %s - %s modo 12"
+msgid "mode 12"
+msgstr "modo 12"
 
 #, python-format
-msgid "slot%s %s - %s mode 12 (current image)"
-msgstr "slot%s %s - %s modo 12 (imagen actual)"
+msgid "mode 12 (current image)"
+msgstr "modo 12 (imagen actual)"
 
 #, python-format
-msgid "slot%s - %s, with backup"
-msgstr "slot%s - %s, con previo-backup"
+msgid "with backup"
+msgstr "con previo-backup"
 
 #, python-format
-msgid "slot%s - %s, without backup"
-msgstr "slot%s - %s, sin hacer backup"
+msgid "without backup"
+msgstr "sin hacer backup"
 
 msgid "soap/melodram/folkloric"
 msgstr "enredo/melodrama/folclore"
@@ -10408,8 +10382,8 @@ msgstr "Flashear imagen"
 msgid "FlashImage: Add USB STARTUP slots - No EXT4 USB attached."
 msgstr "FlashImage: Añadir slots de INICIO USB - Sin USB EXT4 conectado."
 
-msgid "FlashImage: Add USB STARTUP slots - USB (%s) only has %s free. At least 1024MB is required."
-msgstr "FlashImage: Agregar slots de INICIO USB - USB (%s) solo tiene %s libres. Se requieren al menos 1024 MB."
+msgid "FlashImage: Add USB STARTUP slots - USB"
+msgstr "FlashImage: Agregar slots de INICIO USB"
 
 msgid "GUI Skin"
 msgstr "Cambiar Skin"
@@ -12252,6 +12226,9 @@ msgstr ""
 
 msgid "only automatic boot"
 msgstr "sólo arranque automático"
+
+msgid "only has"
+msgstr "solo tiene"
 
 msgid "only manual boot"
 msgstr "sólo arranque manual"
@@ -16939,8 +16916,8 @@ msgstr "Imágenes copia completa de Vision Core"
 msgid "Restore deleted images"
 msgstr "Restaurar imágenes eliminadas"
 
-msgid "Are you sure to reboot to"
-msgstr "Quieres Reiniciar con imagen"
+msgid "Are you sure to reboot to:\n"
+msgstr "Quieres Reiniciar con imagen:\n"
 
 msgid "Press 'OK' for attach function."
 msgstr "Pulse 'OK' para asignar la función."
@@ -17173,8 +17150,8 @@ msgstr "Configure el puerto de OpenWebif desde su sintonizador de reserva."
 msgid "Requires internet connection."
 msgstr "Requiere conexión a internet."
 
-msgid "Are you sure to delete image:"
-msgstr "Estás seguro de eliminar la imagen:"
+msgid "Are you sure to delete image:\n"
+msgstr "Estás seguro de eliminar la imagen:\n"
 
 msgid "Want to restore all deleted images?"
 msgstr "Quiere restaurar todas las imágenes eliminadas?"

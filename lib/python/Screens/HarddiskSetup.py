@@ -56,7 +56,7 @@ class HarddiskSelection(Screen):
 		self.skinName = "HarddiskSelection"  # For derived classes
 		if harddiskmanager.HDDCount() == 0:
 			tlist = []
-			tlist.append((_("no storage devices found"), 0))
+			tlist.append((_("No storage devices found"), 0))
 			self["hddlist"] = MenuList(tlist)
 		else:
 			self["hddlist"] = MenuList(harddiskmanager.HDDList())
