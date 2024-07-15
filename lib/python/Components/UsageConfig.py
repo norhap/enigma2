@@ -130,8 +130,8 @@ def InitUsageConfig():
 	config.usage.multiepg_ask_bouquet = ConfigYesNo(default=False)
 
 	config.usage.quickzap_bouquet_change = ConfigYesNo(default=False)
-	config.usage.e1like_radio_mode = ConfigYesNo(default=False)
-	config.usage.e1like_radio_mode_last_play = ConfigYesNo(default=True)
+	config.usage.e1like_radio_mode = ConfigYesNo(default=True)
+	config.usage.e1like_radio_mode_last_play = ConfigYesNo(default=False)
 	choicelist = [("0", _("No timeout"))]
 	for i in range(1, 12):
 		choicelist.append((str(i), ngettext("%d second", "%d seconds", i) % i))
