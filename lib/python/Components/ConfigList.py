@@ -9,8 +9,10 @@ from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
-from Screens.Standby import QUIT_DEBUG_RESTART, QUIT_RESTART, TryQuitMainloop
+from Screens.Standby import QUIT_DEBUG_RESTART, QUIT_RESTART, QUIT_REBOOT, TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+
+reboot = False
 
 
 class ConfigList(GUIComponent):
@@ -461,10 +463,13 @@ class ConfigListScreen:
 		self["config"].handleKey(ACTIONKEY_0 + number, self.entryChanged)
 
 	def keySave(self):
+		global reboot
 		for notifier in self.onSave:
 			notifier()
 		if self.saveAll() and hasattr(self, "restartMsg"):
 			self.session.openWithCallback(self.restartConfirm, MessageBox, self.restartMsg, default=True, type=MessageBox.TYPE_YESNO)
+		elif reboot:
+			self.session.openWithCallback(self.rebootConfirm, MessageBox, _("Reboot system now?"), default=True, type=MessageBox.TYPE_YESNO)
 		else:
 			self.close()
 
@@ -473,12 +478,20 @@ class ConfigListScreen:
 			self.session.open(TryQuitMainloop, retvalue=QUIT_DEBUG_RESTART) if config.crash.debugLevel.value != "3" else self.session.open(TryQuitMainloop, retvalue=QUIT_RESTART)
 			self.close()
 
+	def rebootConfirm(self, result):
+		if result:
+			self.session.open(TryQuitMainloop, retvalue=QUIT_REBOOT)
+			self.close()
+
 	def saveAll(self):
 		restart = False
 		for item in set(self["config"].list + self.manipulatedItems):
 			if len(item) > 1:
-				if item[0].endswith("*") and item[1].isChanged():
+				if item[0].endswith("*") and "**" not in item[0] and item[1].isChanged():
 					restart = True
+				elif item[0].endswith("**") and item[1].isChanged():
+					global reboot
+					reboot = True
 				item[1].save()
 		configfile.save()
 		return restart

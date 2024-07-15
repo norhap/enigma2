@@ -2,6 +2,7 @@ from enigma import eBackgroundFileEraser, eActionMap, eDVBDB, eEnv, eSubtitleSet
 
 from locale import AM_STR, PM_STR, nl_langinfo
 from os import listdir, makedirs, remove
+from glob import glob
 from os.path import exists, isfile, ismount, join, normpath
 from time import mktime
 from gettext import ngettext
@@ -1327,7 +1328,12 @@ def InitUsageConfig():
 		if exists(partition.mountpoint):
 			path = normpath(partition.mountpoint)
 			if partition.mountpoint != "/":
-				debugPath.append((join(partition.mountpoint, "logs", ""), path))
+				folderunzipped = path + "/*/*.unzipped"
+				for folders in glob(folderunzipped, recursive=True):
+					if exists(folders):
+						Console().ePopen('rm -rf ' + folders)
+					break
+				debugPath.append((join(partition.mountpoint, "logs", ""), path + "/logs/"))
 	config.crash.debugPath = ConfigSelection(default="/home/root/logs/", choices=debugPath)
 
 	def updateDebugPath(configElement):

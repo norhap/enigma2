@@ -5691,6 +5691,15 @@ msgstr "¿Actualizar su receptor y reiniciar ahora?"
 msgid "Reboot"
 msgstr "Reiniciar"
 
+msgid "Reboot system now?"
+msgstr "¿Reiniciar sistema ahora?"
+
+msgid "* = Restart Required"
+msgstr "* = Reiniciar Requerido"
+
+msgid "** = Reboot System Required"
+msgstr "** = Reiniciar Sistema Requerido"
+
 msgid "Recall to previous service"
 msgstr "Volver al canal anterior"
 
@@ -17126,8 +17135,8 @@ msgstr "Elija la carpeta de localización del log."
 msgid "Debug to file"
 msgstr "Debug a archivo"
 
-msgid "Logs folder location *"
-msgstr "Ubicación de la carpeta de Logs *"
+msgid "Logs folder location **"
+msgstr "Ubicación de la carpeta de Logs **"
 
 msgid "Emergency"
 msgstr "Emergencia"
@@ -18076,9 +18085,6 @@ msgstr "Incluir datos de carga de pantalla"
 
 msgid "Enable this option to add screen names and resolution data to the debug log file."
 msgstr "Habilite esta opción para agregar nombres de pantalla y datos de resolución al archivo de registro de depuración."
-
-msgid "* = Restart Required"
-msgstr "* = Reiniciar Requerido"
 
 msgid "Move to first line / screen"
 msgstr "Mover a la primera línea en pantalla"

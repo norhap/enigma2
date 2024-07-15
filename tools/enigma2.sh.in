@@ -40,8 +40,12 @@ if [ -f /proc/stb/fp/nec_ir ]; then
 	[ -f /sys/class/remote/amremote/protocol ] && echo "2" > /sys/class/remote/amremote/protocol
 fi
 
-# enigma2-core.dump.
-DEBUGDIR=`sed -En 's|^config\.crash\.debugPath=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
+# Create and set log folder
+DEBUGDIR="/home/root/logs/"
+if [ ! -d $DEBUGDIR ] ; then mkdir -p $DEBUGDIR; fi
+if [ "$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')" != "" -a -d "$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')" ]; then
+	DEBUGDIR=$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')
+fi
 
 if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
 	if [ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/" ]; then

@@ -234,6 +234,7 @@ class LogManager(Screen):
 			self["key_red"].setText("")
 			self["key_green"].setText("")
 			self["key_yellow"].setText("")
+			self["key_blue"].setText("")
 
 	def showLog(self):
 		if self.logs:
