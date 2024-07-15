@@ -81,7 +81,8 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 			</convert>
 		</widget>
 		<widget name="quickselect" position="0,0" size="e,450" font="Regular;100" foregroundColor="#00fff000" horizontalAlignment="center" transparent="1" verticalAlignment="center" zPosition="+1" />
-		<widget name="description" position="0,e-75" size="e,25" font="Regular;20" verticalAlignment="center" />
+		<widget name="introduction" position="0,e-90" size="e,25" font="Regular;20" verticalAlignment="center" />
+		<widget name="description" position="0,e-60" size="e,25" font="Regular;20" verticalAlignment="center" />
 		<widget source="key_red" render="Label" position="0,e-40" size="180,40" backgroundColor="key_red" font="Regular;20" foregroundColor="key_text" horizontalAlignment="center" verticalAlignment="center">
 			<convert type="ConditionalShowHide" />
 		</widget>
@@ -120,6 +121,7 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 		self["quickselect"] = Label()
 		self["quickselect"].hide()
 		self["description"] = Label()
+		self["introduction"] = Label()
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "MenuActions"], {
 			"ok": (self.keySelect, _("Start the highlighted plugin")),
 			"cancel": (self.keyCancel, _("Close the Plugin Browser screen")),
@@ -196,6 +198,13 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 			with open("/etc/opkg/all-feed.conf", "r") as fr:
 				url = fr.read().split('//')[1].split('/')[0]
 				self.urlServer = "http://" + url
+				try:
+					request = Request(self.urlServer)
+					self.urlResponse = urlopen(request, timeout=5)
+				except Exception:
+					self["key_green"].setText("")
+					self["introduction"].setText(_("No response in server URL.\nDoes not have access to sources."))
+					self["pluginDownloadActions"].setEnabled(False)
 
 	def isProtected(self):
 		return config.ParentalControl.setuppinactive.value and not config.ParentalControl.config_sections.main_menu.value and config.ParentalControl.config_sections.plugin_browser.value
@@ -235,14 +244,7 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 			self["key_red"].setText(_("Remove plugins"))
 			self["key_blue"].setText(_("Edit Mode On"))
 			self["pluginRemoveActions"].setEnabled(True)
-			try:
-				request = Request(self.urlServer)
-				self.urlResponse = urlopen(request, timeout=5)
-			except Exception:
-				self["key_green"].setText("")
-				self["description"].setText(_("No response in server URL.\nDoes not have access to sources."))
-				self["pluginDownloadActions"].setEnabled(False)
-			if self.urlServer and self.urlResponse:
+			if self.urlResponse:
 				self["key_green"].setText(_("Download plugins"))
 				self["pluginDownloadActions"].setEnabled(True)
 			self["pluginEditActions"].setEnabled(False)
