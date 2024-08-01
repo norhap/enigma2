@@ -32,7 +32,6 @@ class NimSetup(Setup, ServiceStopScreen):
 			yellow_button={'function': self.key_yellow, 'helptext': _("Toggle Configuration Mode or Auto DiSEqC")},
 			blue_button={'function': self.key_blue, 'helptext': _("Set all the settings back as they were")})
 		ServiceStopScreen.__init__(self)
-		self.createSetup()
 		self.setTitle(_("Setup") + " " + self.nim.friendly_full_description)
 
 	def createSimpleSetup(self, list, mode):
