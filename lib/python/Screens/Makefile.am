@@ -48,6 +48,7 @@ install_PYTHON = \
 	PluginBrowser.py \
 	PowerTimerEdit.py \
 	PowerTimerEntry.py \
+	Processing.py \	
 	PVRState.py \
 	QuadPiP.py \
 	RdsDisplay.py \

@@ -213,6 +213,8 @@ RESULT eDVBService::getName(const eServiceReference &ref, std::string &name)
 {
 	if (!ref.name.empty())
 		name = ref.name; // use renamed service name..
+	else if (!m_service_display_name.empty())
+		name = m_service_display_name;
 	else if (!m_service_name.empty())
 		name = m_service_name;
 	else
@@ -712,6 +714,44 @@ void eDVBDB::loadServiceListV5(FILE * f)
 	eDebug("[eDVBDB] loaded %d channels/transponders and %d services", tcount, scount);
 }
 
+void eDVBDB::resetLcnDB()
+{
+	for (auto &kv : m_lcnmap)
+	{
+		kv.second.resetFound();
+	}
+}
+
+void eDVBDB::saveLcnDB()
+{
+	std::string lfname = eEnv::resolve("${sysconfdir}/enigma2/lcndb");
+	CFile lf(lfname, "w");
+	if (lf)
+	{
+		fprintf(lf, "#VERSION 2\n");
+		for (auto &[key, value] : m_lcnmap)
+		{
+			value.write(lf, key);
+		}
+	}
+}
+
+void eDVBDB::addLcnToDB(int ns, int onid, int tsid, int sid, uint16_t lcn, uint32_t signal)
+{
+	eServiceReferenceDVB s = eServiceReferenceDVB(eDVBNamespace(ns), eTransportStreamID(tsid), eOriginalNetworkID(onid), eServiceID(sid), 0);
+	std::map<eServiceReferenceDVB, LCNData>::iterator it = m_lcnmap.find(s);
+	if (it != m_lcnmap.end())
+	{
+		it->second.Update(lcn, signal);
+	}
+	else
+	{
+		LCNData lcndata;
+		lcndata.Update(lcn, signal);
+		m_lcnmap.insert(std::pair<eServiceReferenceDVB, LCNData>(s, lcndata));
+	}
+}
+
 void eDVBDB::loadServicelist(const char *file)
 {
 	eDebug("[eDVBDB] ---- opening lame channel db");
@@ -722,6 +762,40 @@ void eDVBDB::loadServicelist(const char *file)
 	}
 
 	char line[256];
+	m_lcnmap.clear();
+	int lcnversion = 0;
+	std::string lfname = eEnv::resolve("${sysconfdir}/enigma2/lcndb");
+	CFile lf(lfname, "rt");
+	if(lf)
+	{
+		while (!feof(lf))
+		{
+			if (!fgets(line, sizeof(line), lf))
+				break;
+
+			if (lcnversion == 0)
+			{
+				if(!sscanf(line, "#VERSION %d",&lcnversion))
+					lcnversion = 1;
+				else
+					continue;
+			}
+
+			LCNData lcndata;
+			eServiceReferenceDVB s = lcndata.parse(line, lcnversion);
+			if (s)
+				m_lcnmap.insert(std::pair<eServiceReferenceDVB, LCNData>(s, lcndata));
+
+		}
+		eDebug("[eDVBDB] Reading lcn db version %d done. %lu services found.", lcnversion, m_lcnmap.size());
+	}
+
+	if(lcnversion == 1)
+	{
+		eDebug("[eDVBDB] save updated lcn db");
+		saveLcnDB();
+	}
+
 	int version;
 	if ((!fgets(line, sizeof(line), f)) || sscanf(line, "eDVB services /%d/", &version) != 1)
 	{
@@ -796,6 +870,20 @@ void eDVBDB::loadServicelist(const char *file)
 			s->m_provider_name = line;
 		else
 			parseServiceData(s, line);
+
+		if (m_lcnmap.size())
+		{
+			eServiceReferenceDVB channel = eServiceReferenceDVB(ref.toString());
+			channel.setServiceType(0);
+			std::map<eServiceReferenceDVB, LCNData>::iterator it = m_lcnmap.find(channel);
+			if (it != m_lcnmap.end())
+			{
+				if(!it->second.getServiceNameGui().empty())
+					s->m_service_display_name = it->second.getServiceNameGui();
+				if(!it->second.geProviderNameGui().empty())
+					s->m_provider_display_name = it->second.geProviderNameGui();
+			}
+		}
 		addService(ref, s);
 		scount++;
 	}
@@ -1354,6 +1442,23 @@ int eDVBDB::renumberBouquet(eBouquet &bouquet, int startChannelNum)
 						startChannelNum = renumberBouquet(subBouquet, startChannelNum);
 				}
 			}
+		}
+
+		if (!(ref.flags & (eServiceReference::isMarker | eServiceReference::isDirectory)) || (ref.flags & eServiceReference::isNumberedMarker))
+		{
+			if (m_numbering_mode == 2)
+			{
+				if (m_lcnmap.size())
+				{
+					eServiceReferenceDVB channel = eServiceReferenceDVB(ref.toString());
+					channel.setServiceType(0);
+					std::map<eServiceReferenceDVB, LCNData>::iterator it = m_lcnmap.find(channel);
+					if (it != m_lcnmap.end())
+						ref.number = it->second.getLCN();
+				}
+			}
+			else
+				ref.number = startChannelNum++;
 		}
 		if( !(ref.flags & (eServiceReference::isMarker|eServiceReference::isDirectory)) ||
 		   (ref.flags & eServiceReference::isNumberedMarker) )

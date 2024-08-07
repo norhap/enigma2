@@ -77,6 +77,9 @@ msgstr "Restaura la configuración de su receptor."
 msgid "Scan for local extensions and install them."
 msgstr "Busque extensiones locales e instálelas."
 
+msgid "Scan for terrestrial LCNs and create LCN bouquets"
+msgstr "Busque LCNs terrestres y crear bouquets de LCN"
+
 msgid ""
 "Select your backup device.\n"
 "Current device: "
@@ -698,6 +701,12 @@ msgstr "Añadir grabación (para al acabar el evento actual)"
 msgid "Add service"
 msgstr "Añadir servicio"
 
+msgid "Add service names"
+msgstr "Añadir nombres de canales"
+
+msgid "Add service names to each #SERVICE entry."
+msgstr "Añada nombres de canales a cada entrada #SERVICE."
+
 msgid "Add Timer"
 msgstr "Añadir Temporizador"
 
@@ -823,6 +832,9 @@ msgstr "También importar cuando el receptor vuelva de reposo"
 
 msgid "Also on standby"
 msgstr "También en reposo"
+
+msgid "Also use a #DESCRIPTION line after each #SERVICE line to hold the service's name."
+msgstr "Utilice también una línea #DESCRIPTION después de cada línea #SERVICE para guardar el nombre del canal."
 
 msgid "Alternative"
 msgstr "Alternativo"
@@ -2724,6 +2736,9 @@ msgstr "Cambiar la configuración del dispositivo"
 
 msgid "Select 'Yes' to enable editing of this device's settings. Selecting 'No' resets the devices settings to their default values."
 msgstr "Seleccione 'Sí' para habilitar la edición de la configuración de este dispositivo. Seleccionar 'No' restablece la configuración de los dispositivos a sus valores predeterminados."
+
+msgid "Select 'Yes' to show this plugin in the Plugin Browser."
+msgstr "Seleccione \"Sí\" para mostrar este programa en Plugins."
 
 msgid "Device name"
 msgstr "Nombre dispositivo"
@@ -5041,6 +5056,9 @@ msgstr "Configurar contraseña"
 msgid "Please wait while feeds state is being checked."
 msgstr "Espere mientras se verifica el estado de los feeds."
 
+msgid "Please wait while LCN bouquets are created/updated..."
+msgstr "Por favor espere mientras se crean/actualizan los ramos LCN..."
+
 msgid "Pause and start timeshift"
 msgstr "Pausar y comenzar el cambio de tiempo"
 
@@ -6506,6 +6524,9 @@ msgstr "Seleccione el canal Unicable que se asignará a este sintonizador. Este 
 
 msgid "Select the format of your Unicable device. Choices are 'SCR Unicable' (Unicable I format), or 'SCR JESS' (Unicable II format)."
 msgstr "Seleccione el formato de su dispositivo Unicable. Las opciones son ‘SCR Unicable’ (formato Unicable I) o ‘SCR JESS’ (formato Unicable II)."
+
+msgid "Select the list of LCN rules to be applied to the scan."
+msgstr "Seleccione la lista de reglas LCN que se aplicarán a la búsqueda."
 
 msgid "Select the manufacturer of your Unicable device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr "Seleccione el fabricante de su dispositivo Unicable. Si el fabricante no figura en la lista, configure ‘SCR’ como ‘definido por el usuario’ e ingrese los parámetros del dispositivo manualmente de acuerdo con su hoja de especificaciones."
@@ -8441,6 +8462,9 @@ msgstr ""
 
 msgid "Use DHCP"
 msgstr "Usa DHCP"
+
+msgid "Use description lines"
+msgstr "Utilice líneas descriptivas"
 
 msgid "Use HDMI pre-emphasis"
 msgstr "Use HDMI pre-énfasis"
@@ -13256,6 +13280,9 @@ msgstr "Mostrar en el menú del evento"
 msgid "Show in extension menu"
 msgstr "Mostrar en el menú de extensión"
 
+msgid "Show in Plugin Browser"
+msgstr "Mostrar en Plugins"
+
 msgid "Show last SearchLog"
 msgstr "Mostrar la última búsqueda"
 
@@ -14912,8 +14939,23 @@ msgstr "Por favor, establezca su zona horaria"
 msgid "Front Panel Display"
 msgstr "Panel Frontal Display"
 
+msgid "LCN rules"
+msgstr "Reglas LCN"
+
 msgid "LCD Setup"
 msgstr "Ajustes Display"
+
+msgid "LCN Scanner"
+msgstr "Búsqueda LCN"
+
+msgid "LCN Scanner Actions"
+msgstr "Acciones de la búsqueda LCN"
+
+msgid "LCN Scanner plugin for DVB-C/T/T2 services"
+msgstr "Plugin de búsqueda LCN para DVB-C/T/T2"
+
+msgid "LCN Scanner Settings"
+msgstr "Ajustes Búsqueda LCN"
 
 msgid "LED Setup"
 msgstr "Ajustes LED"
@@ -15583,6 +15625,12 @@ msgstr "Configure si y por cuánto tiempo se recordará el último canal en el m
 
 msgid "Use separate picon pack for front panel display"
 msgstr "Use un paquete de picon separado para la pantalla del display"
+
+msgid "Use spacer lines"
+msgstr "Utilice líneas espaciadoras"
+
+msgid "Use spacer lines to pad the bouquet to make the #SERVICE line numbers match the LCN."
+msgstr "Utilice líneas espaciadoras de relleno de bouquet para que los números de línea #SERVICE coincidan con el LCN."
 
 msgid "Use piconlcd directory for picons on color LCD."
 msgstr "Use el directorio piconlcd para picons en color LCD."

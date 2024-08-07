@@ -342,11 +342,14 @@ public:
 	bool cacheAudioEmpty();
 
 	eDVBService();
-		/* m_service_name_sort is uppercase, with special chars removed, to increase sort performance. */
+	/* m_service_name_sort is uppercase, with special chars removed, to increase sort performance. */
 	std::string m_service_name, m_service_name_sort;
 	std::string m_provider_name;
 	std::string m_default_authority;
 	uint32_t m_aus_da_flag;
+
+	std::string m_service_display_name;
+	std::string m_provider_display_name;
 
 	void genSortName();
 

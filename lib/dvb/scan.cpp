@@ -51,13 +51,11 @@ eDVBScan::eDVBScan(iDVBChannel *channel, bool usePAT, bool debug)
 	if (m_channel->getDemux(m_demux))
 		SCAN_eDebug("[eDVBScan] failed to allocate demux!");
 	m_channel->connectStateChange(sigc::mem_fun(*this, &eDVBScan::stateChange), m_stateChanged_connection);
-	m_lcn_file = NULL;
+	m_updateLCN = false;
 }
 
 eDVBScan::~eDVBScan()
 {
-	if (m_lcn_file)
-		fclose(m_lcn_file);
 }
 
 int eDVBScan::isValidONIDTSID(int orbital_position, eOriginalNetworkID onid, eTransportStreamID tsid)
@@ -221,7 +219,7 @@ void eDVBScan::stateChange(iDVBChannel *ch)
 		}
 		nextChannel();
 	}
-			/* unavailable will timeout, anyway. */
+	/* unavailable will timeout, anyway. */
 }
 
 RESULT eDVBScan::nextChannel()
@@ -614,53 +612,6 @@ void eDVBScan::addKnownGoodChannel(const eDVBChannelID &chid, iDVBFrontendParame
 		m_new_channels.insert(std::pair<eDVBChannelID,ePtr<iDVBFrontendParameters> >(chid, feparm));
 }
 
-void eDVBScan::addLcnToDB(eDVBNamespace ns, eOriginalNetworkID onid, eTransportStreamID tsid, eServiceID sid, uint16_t lcn, uint32_t signal)
-{
-	char row[40];
-	sprintf(row, "%08x:%04x:%04x:%04x:%05d:%08d\n", ns.get(), onid.get(), tsid.get(), sid.get(), lcn, signal);
-	if (m_lcn_file)
-	{
-		SCAN_eDebug("[eDVBScan] [LCN] File is present, trying to write...");
-		int size = 0;
-		bool added = false;
-		[[maybe_unused]] size_t ret; /* dummy value to store fread return values */
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wformat-overflow"
-		sprintf(row, "%08x:%04x:%04x:%04x:%05d:%08d\n", ns.get(), onid.get(), tsid.get(), sid.get(), lcn, signal);
-#pragma GCC diagnostic pop
-
-		fseek(m_lcn_file, 0, SEEK_END);
-		size = ftell(m_lcn_file);
-		
-		for (int i = 0; i < size / 39; i++)
-		{
-			char tmp[40];
-			fseek(m_lcn_file, i*39, SEEK_SET);
-			ret = fread (tmp, 1, 39, m_lcn_file);
-			if (memcmp(tmp, row, 23) == 0)
-			{
-				tmp[38] = 0;
-				SCAN_eDebugNoNewLine("[eDVBScan] [LCN] replacing %s with %s", tmp, row);
-				fseek(m_lcn_file, i*39, SEEK_SET);
-				fwrite(row, 1, 39, m_lcn_file);
-				added = true;
-				break;
-			}
-		}
-			
-		if (!added)
-		{
-			SCAN_eDebug("[eDVBScan] [LCN] adding %s", row);
-			fseek(m_lcn_file, 0, SEEK_END);
-			fwrite(row, 1, 39, m_lcn_file);
-		}
-		fflush(m_lcn_file);
-	} else
-	{
-		SCAN_eDebug("[eDVBScan] [LCN] File is not present, will NOT add %s", row);
-	}
-}
 
 void eDVBScan::addChannelToScan(iDVBFrontendParameters *feparm)
 {
@@ -1045,23 +996,21 @@ void eDVBScan::channelDone()
 						case BRASIL_NET_LOGICAL_CHANNEL_DESCRIPTOR:
 						{
 							//SCAN_eDebug("[eDVBScan] [LCN] Test 2");
-							if (system != iDVBFrontend::feTerrestrial)
+							if (system != iDVBFrontend::feTerrestrial && system != iDVBFrontend::feCable)
 							{
 								SCAN_eDebug("[eDVBScan] [LCN] when current locked transponder is no terrestrial transponder ignore this descriptor");
 								break; // when current locked transponder is no terrestrial transponder ignore this descriptor
-							}	
+							}
 							if (ns.get() == 0)
 							{
 								SCAN_eDebug("[eDVBScan] [LCN] invalid namespace");
 								break; // invalid namespace
 							}
-								
 							int signal = 0;
 							ePtr<iDVBFrontend> fe;
 							
 							if (!m_channel->getFrontend(fe))
 								signal = fe->readFrontendData(iFrontendInformation_ENUMS::signalPower);
-							
 							LogicalChannelDescriptor &d = (LogicalChannelDescriptor&)**desc;
 							for (LogicalChannelListConstIterator it = d.getChannelList()->begin(); it != d.getChannelList()->end(); it++)
 							{
@@ -1069,10 +1018,9 @@ void eDVBScan::channelDone()
 								LogicalChannel *ch = *it;
 								if (ch->getVisibleServiceFlag())
 								{
-									addLcnToDB(ns, onid, tsid, eServiceID(ch->getServiceId()), ch->getLogicalChannelNumber(), signal);
-								} else
-								{
-									SCAN_eDebug("[eDVBScan] [LCN] marked as not visible - not adding NAMESPACE: %08x TSID: %04x ONID: %04x SID: %04x LCN: %05d SIGNAL: %08d", ns.get(), onid.get(), tsid.get(), ch->getServiceId(), ch->getLogicalChannelNumber(), signal);
+									eDVBDB::getInstance()->addLcnToDB(ns.get(), onid.get(), tsid.get(), ch->getServiceId(), ch->getLogicalChannelNumber(), signal);
+									m_updateLCN = true;									
+									SCAN_eDebug("NAMESPACE: %08x ONID: %04x TSID: %04x SID: %04x LCN: %05d SIGNAL: %08d", ns.get(), onid.get(), tsid.get(), ch->getServiceId(), ch->getLogicalChannelNumber(), signal);
 								}
 							}
 							break;
@@ -1081,7 +1029,7 @@ void eDVBScan::channelDone()
 						{
 							PrivateDataSpecifierDescriptor &d = (PrivateDataSpecifierDescriptor&)**desc;
 							uint32_t priv = d.getPrivateDataSpecifier();
-							SCAN_eDebug("[eDVBScan]   NIT TS private %08x", priv);
+							SCAN_eDebug("[eDVBScan] NIT TS private %08x", priv);
 							// ZZ if (priv >= 0x3200 && priv <= 0x320f)
 							if (priv)
 							{
@@ -1346,26 +1294,10 @@ void eDVBScan::start(const eSmartPtrList<iDVBFrontendParameters> &known_transpon
 	m_new_services.clear();
 	m_new_servicerefs.clear();
 	m_last_service = m_new_services.end();
-
-	if (m_lcn_file)
-		fclose(m_lcn_file);
 		
 	if (m_flags & scanRemoveServices)
 	{
-		SCAN_eDebug("[eDVBScan] clearing lcndb");
-		m_lcn_file = fopen(eEnv::resolve("${sysconfdir}/enigma2/lcndb").c_str(), "w+");
-		if (!m_lcn_file)
-			eDebug("[eDVBScan] couldn't open file lcndb");
-	}
-	else
-	{
-		m_lcn_file = fopen(eEnv::resolve("${sysconfdir}/enigma2/lcndb").c_str(), "r+");
-		if (!m_lcn_file)
-		{
-			m_lcn_file = fopen(eEnv::resolve("${sysconfdir}/enigma2/lcndb").c_str(), "w+");
-			if (!m_lcn_file)
-				eDebug("[eDVBScan] couldn't open file lcndb");
-		}
+		eDVBDB::getInstance()->resetLcnDB();
 	}
 
 	if (m_flags & scanBlindSearch)
@@ -1660,6 +1592,13 @@ void eDVBScan::insertInto(iDVBChannelList *db, bool backgroundscanresult)
 		{
 			eDebug("[eDVBScan] failed to create 'Last Scanned' bouquet!");
 		}
+
+		if(m_updateLCN)
+		{
+			m_updateLCN = false;
+			eDVBDB::getInstance()->saveLcnDB();
+		}
+
 	}
 }
 
