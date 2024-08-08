@@ -1,5 +1,6 @@
 from os import stat
 from os.path import isfile
+from urllib.request import urlopen, Request
 from sys import maxsize, modules, version_info
 from gettext import ngettext
 import time
@@ -10,6 +11,17 @@ from struct import pack, unpack
 from subprocess import PIPE, Popen
 from Components.SystemInfo import SystemInfo
 from Tools.HardwareInfo import HardwareInfo
+
+
+def getFeeds():
+	if isfile("/etc/opkg/all-feed.conf"):
+		with open("/etc/opkg/all-feed.conf", "r") as fr:
+			feeds = "http://" + fr.read().split('//')[1].split('/')[0]
+			try:
+				urlopen(Request(feeds))
+			except Exception:
+				return False
+		return True
 
 
 def _ifinfo(sock, addr, ifname):
