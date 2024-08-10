@@ -27,7 +27,7 @@ class ServiceScanSummary(Screen):
 	def __init__(self, session, parent, showStepSlider=True):
 		Screen.__init__(self, session, parent)
 
-		self["Title"] = Label(parent.title or _("Service scan"))
+		self["Title"] = Label(parent.title or _("Service Scan"))
 		self["Service"] = Label(_("No service"))
 		self["scan_progress"] = ProgressBar()
 
@@ -39,10 +39,11 @@ class ServiceScanSummary(Screen):
 
 
 class ServiceScan(Screen):
-	def __init__(self, session, scanList):
+	def __init__(self, session, scanList):  # noqa: F811
 		Screen.__init__(self, session)
 		self["Title"] = Label(_("Scanning..."))
 		self.scanList = scanList
+		self.bouquetLastScanned = None
 		if hasattr(session, 'infobar'):
 			self.currentInfobar = Screens.InfoBar.InfoBar.instance
 			if self.currentInfobar:
@@ -66,8 +67,6 @@ class ServiceScan(Screen):
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("OK"))
 		self["actions"] = ActionMap(["SetupActions", "MenuActions"], {
-			"up": self.up,
-			"down": self.down,
 			"ok": self.ok,
 			"save": self.ok,
 			"cancel": self.cancel,
@@ -81,7 +80,7 @@ class ServiceScan(Screen):
 			from Plugins.SystemPlugins.LCNScanner.plugin import LCNScanner
 			self.LCNScanner = LCNScanner()
 		else:
-			LCNScanner = None
+			self.LCNScanner = None
 
 	def ok(self):
 		print("[ServiceScan] ok")
@@ -121,47 +120,7 @@ class ServiceScan(Screen):
 					for line in bouquetread:
 						fw.write(line.replace("Last Scanned", _("Last Scanned")))
 			eDVBDB.getInstance().reloadBouquets()
-
-	def __init__(self, session, scanList):
-		Screen.__init__(self, session)
-
-		self.scanList = scanList
 		self.bouquetLastScanned = "/etc/enigma2/userbouquet.LastScanned.tv"
-
-		if hasattr(session, 'infobar'):
-			self.currentInfobar = Screens.InfoBar.InfoBar.instance
-			self.currentServiceList = self.currentInfobar.servicelist
-			if self.session.pipshown and self.currentServiceList:
-				if self.currentServiceList.dopipzap:
-					self.currentServiceList.togglePipzap()
-				if hasattr(self.session, 'pip'):
-					del self.session.pip
-				self.session.pipshown = False
-		else:
-			self.currentInfobar = None
-
-		self.session.nav.stopService()
-
-		self["scan_progress"] = ProgressBar()
-		self["scan_state"] = Label(_("scan state"))
-		self["network"] = Label()
-		self["transponder"] = Label()
-
-		self["pass"] = Label("")
-		self["servicelist"] = FIFOList()
-		self["FrontendInfo"] = FrontendInfo()
-		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label(_("OK"))
-
-		self["actions"] = ActionMap(["SetupActions", "MenuActions"],
-		{
-			"ok": self.ok,
-			"save": self.ok,
-			"cancel": self.cancel,
-			"menu": self.doCloseRecursive
-		}, -2)
-		self.setTitle(_("Service scan"))
-		self.onFirstExecBegin.append(self.doServiceScan)
 
 	def scanPoll(self):
 		if self["scan"].isDone():

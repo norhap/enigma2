@@ -49,7 +49,7 @@ class DefaultServiceScan(ServiceScan):
 
 class DefaultServicesScannerPlugin(ScanSetup):
 	skin = """
-		<screen position="100,115" size="520,390" title="Service scan">
+		<screen position="100,115" size="520,390" title="Service Scan">
 			<widget name="config" position="10,10" size="500,350" scrollbarMode="showOnDemand" />
 			<widget name="introduction" position="10,365" size="500,25" font="Regular;20" horizontalAlignment="center" />
 		</screen>"""

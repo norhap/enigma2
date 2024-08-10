@@ -6674,8 +6674,8 @@ msgstr ""
 msgid "Service reference"
 msgstr "Referencia de canal"
 
-msgid "Service scan"
-msgstr "Búsqueda de canal"
+msgid "Service Scan"
+msgstr "Búsqueda de Canales"
 
 msgid "Service title mode"
 msgstr "Modo de título de canal"
