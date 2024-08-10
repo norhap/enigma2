@@ -638,6 +638,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 			"red": self.keyCancel,
 			"green": self.keyGo,
 			"menu": self.doCloseRecursive,
+			"left": self.keyLeft,
+			"right": self.keyRight,
 		}, -2)
 
 		self.statusTimer = eTimer()
@@ -876,7 +878,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 	def newConfig(self):
 		cur = self["config"].getCurrent()
-		print("[ScanSetup] cur is", cur)
+		print("[ScanSetup] chosen config is", self["config"].getCurrent()[1].getText())
 		if cur == self.typeOfScanEntry or \
 			cur == self.DVB_TypeEntry or \
 			cur == self.typeOfInputEntry or \

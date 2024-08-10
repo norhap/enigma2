@@ -64,8 +64,8 @@ class BouquetSelector(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions"],
 			{
-				"ok": self.okbuttonClick,
-				"cancel": self.cancelClick
+			"ok": self.okbuttonClick,
+			"cancel": self.cancelClick
 		})
 		entrys = [(x[0], x[1]) for x in bouquets]
 		self["menu"] = MenuList(entrys, enableWrapAround)
@@ -149,17 +149,17 @@ class ChannelContextMenu(Screen):
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "NumberActions", "MenuActions"],
 			{
-				"ok": self.okbuttonClick,
-				"cancel": self.cancelClick,
-				"blue": self.showServiceInPiP,
-				"red": self.playMain,
-				"menu": self.openSetup,
-				"1": self.unhideParentalServices,
-				"2": self.renameEntry,
-				"3": self.findCurrentlyPlayed,
-				"5": self.addServiceToBouquetOrAlternative,
-				"6": self.toggleMoveModeSelect,
-				"8": self.removeEntry
+			"ok": self.okbuttonClick,
+			"cancel": self.cancelClick,
+			"blue": self.showServiceInPiP,
+			"red": self.playMain,
+			"menu": self.openSetup,
+			"1": self.unhideParentalServices,
+			"2": self.renameEntry,
+			"3": self.findCurrentlyPlayed,
+			"5": self.addServiceToBouquetOrAlternative,
+			"6": self.toggleMoveModeSelect,
+			"8": self.removeEntry
 		})
 		menu = []
 		self.configStreamRelay = None
@@ -1048,7 +1048,7 @@ class ChannelSelectionEdit:
 
 		self["ChannelSelectEditActions"] = ChannelSelectionEditActionMap(self, ["ChannelSelectEditActions", "OkCancelActions"],
 			{
-				"contextMenu": self.doContext,
+			"contextMenu": self.doContext,
 		})
 
 	def getMutableList(self, root=eServiceReference()):
@@ -2678,7 +2678,7 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 		self.infobar = infobar  # reference to real infobar (the one and only)
 		self["RdsDecoder"] = self.info["RdsDecoder"]
 		self["RdsActions"] = HelpableActionMap(self, ["InfobarRdsActions"],
-		{
+			{
 			"startRassInteractive": (self.startRassInteractive, _("View Rass interactive..."))
 		}, -1)
 		self["RdsActions"].setEnabled(False)
@@ -2810,10 +2810,10 @@ class SimpleChannelSelection(ChannelSelectionBase, SelectionEventInfo):
 		SelectionEventInfo.__init__(self)
 		self["actions"] = ActionMap(["OkCancelActions", "TvRadioActions"],
 			{
-				"cancel": self.close,
-				"ok": self.channelSelected,
-				"keyRadio": self.setModeRadio,
-				"keyTV": self.setModeTv,
+			"cancel": self.close,
+			"ok": self.channelSelected,
+			"keyRadio": self.setModeRadio,
+			"keyTV": self.setModeTv,
 		})
 		self.bouquet_mark_edit = OFF
 		if isinstance(title, str):
