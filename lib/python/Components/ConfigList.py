@@ -466,7 +466,7 @@ class ConfigListScreen:
 		global reboot
 		for notifier in self.onSave:
 			notifier()
-		if self.saveAll() and hasattr(self, "restartMsg"):
+		if self.saveAll() and hasattr(self, "restartMsg") and not reboot:
 			self.session.openWithCallback(self.restartConfirm, MessageBox, self.restartMsg, default=True, type=MessageBox.TYPE_YESNO)
 		elif reboot:
 			self.session.openWithCallback(self.rebootConfirm, MessageBox, _("Reboot system now?"), default=True, type=MessageBox.TYPE_YESNO)
