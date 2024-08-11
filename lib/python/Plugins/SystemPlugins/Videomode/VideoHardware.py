@@ -212,14 +212,15 @@ class VideoHardware:
 	def readPreferredModes(self):
 		if not config.av.edid_override.value:
 			modes = eAVControl.getInstance().getPreferredModes(1)
-			self.modes_preferred = modes.split(' ')
-			if len(self.modes_preferred) <= 1:
+			if len(modes) <= 1:
+				self.modes_preferred = modes.split()
+				print("[Videomode] reading preferred modes is empty")
+			else:  # ports availables Jack, HDMI, RCA...
 				self.modes_preferred = self.modes_available
-				print("[Videomode] reading preferred modes is empty, using all video modes")
+				print("[Videomode] using all video mode availables")
 		else:
 			self.modes_preferred = self.modes_available
 			print("[Videomode] config.av.edid_override.value, using all video modes")
-
 		self.last_modes_preferred = self.modes_preferred
 
 	# check if a high-level mode with a given rate is available.

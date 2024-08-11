@@ -71,7 +71,6 @@ class VideoWizard(WizardLanguage, ShowRemoteControl):
 				sortKeys["1080p"] = 1
 				sortKeys["720p"] = 3
 		modes.sort(key=sortKey)
-		# print("[WizardVideo] listModes DEBUG: port='%s', modes=%s." % (self.port, modes))
 		return modes
 
 	def listRates(self, mode=None):  # Called by wizardvideo.xml.

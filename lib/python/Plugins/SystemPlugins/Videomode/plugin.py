@@ -34,13 +34,14 @@ class VideoSetup(ConfigListScreen, Screen):
 			{
 			"cancel": self.keyCancel,
 			"save": self.apply,
-			"menu": self.closeRecursive,
+			"menu": self.keyMenu,
+			"ok": self.keyMenu,
 			"left": self.keyLeft,
 			"right": self.keyRight
 		}, -2)
 
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("OK"))
+		self["key_green"] = StaticText(_("Save"))
 		self["description"] = Label("")
 
 		self.createSetup()
@@ -175,6 +176,9 @@ class VideoSetup(ConfigListScreen, Screen):
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
 		self.createSetup()
+
+	def keyMenu(self):
+		ConfigListScreen.keyMenu(self)
 
 	def confirm(self, confirmed):
 		if not confirmed:
