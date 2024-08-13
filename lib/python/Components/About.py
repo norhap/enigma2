@@ -14,13 +14,17 @@ from Tools.HardwareInfo import HardwareInfo
 
 
 def getFeeds():
-	if isfile("/etc/opkg/all-feed.conf"):
-		with open("/etc/opkg/all-feed.conf", "r") as fr:
-			feeds = "http://" + fr.read().split('//')[1].split('/')[0]
-			try:
-				urlopen(Request(feeds))
-			except Exception:
-				return False
+	from Components.Timezones import INTERNET_SUCCESS  # noqa: E402
+	if not INTERNET_SUCCESS:
+		if isfile("/etc/opkg/all-feed.conf"):
+			with open("/etc/opkg/all-feed.conf", "r") as fr:
+				feeds = "http://" + fr.read().split('//')[1].split('/')[0]
+				try:
+					urlopen(Request(feeds))
+				except Exception:
+					return False
+				return True  # ip-api.com is down and feeds URL is OK.
+	else:
 		return True
 
 
