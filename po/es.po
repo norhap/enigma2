@@ -447,7 +447,7 @@ msgid "30"
 msgstr "30"
 
 msgid "3D surround"
-msgstr "envolvente 3D"
+msgstr "Envolvente 3D"
 
 msgid "3D surround softlimiter"
 msgstr "Limitador de sonido envolvente 3D"

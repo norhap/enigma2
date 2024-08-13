@@ -41,7 +41,7 @@ class ServiceScanSummary(Screen):
 class ServiceScan(Screen):
 	def __init__(self, session, scanList):  # noqa: F811
 		Screen.__init__(self, session)
-		self["Title"] = Label(_("Scanning..."))
+		self.setTitle(_("Service Scan"))
 		self.scanList = scanList
 		self.bouquetLastScanned = None
 		if hasattr(session, 'infobar'):
@@ -72,7 +72,6 @@ class ServiceScan(Screen):
 			"cancel": self.cancel,
 			"menu": self.doCloseRecursive
 		}, -2)
-		self.setTitle(_("Service Scan"))
 		self.onFirstExecBegin.append(self.doServiceScan)
 		self.scanTimer = eTimer()
 		self.scanTimer.callback.append(self.scanPoll)
