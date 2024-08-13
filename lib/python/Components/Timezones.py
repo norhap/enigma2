@@ -1,5 +1,3 @@
-from enigma import checkInternetAccess
-
 from errno import ENOENT
 from os import environ, symlink, unlink, walk
 from os.path import exists, isfile, join, realpath
@@ -43,12 +41,8 @@ DEFAULT_ZONE = "London"
 TIMEZONE_FILE = "/etc/timezone.xml"  # This should be SCOPE_TIMEZONES_FILE!  This file moves arond the filesystem!!!  :(
 TIMEZONE_DATA = "/usr/share/zoneinfo/"  # This should be SCOPE_TIMEZONES_DATA!
 LANGUAGE_CODE = "/usr/share/zoneinfo/LanguageCode"
-
-
-def internetAccess():
-	if checkInternetAccess("ip-api.com") == 0:
-		return True
-	return False
+geolocationData = geolocation.getGeolocationData(fields="status")
+INTERNET_SUCCESS = geolocationData.get("status", None)
 
 
 def InitTimeZones():
@@ -94,24 +88,25 @@ def InitTimeZones():
 
 
 def languageCode():
+	global INTERNET_SUCCESS
 	languagecode = ""
 	config.misc.firstrun = ConfigBoolean(default=True)
 	if exists(TIMEZONE_FILE) and config.misc.firstrun.value:
-		geolocationData = geolocation.getGeolocationData(fields="status,message,timezone,proxy")
-		tz = geolocationData.get("timezone", None)
-		if tz:
-			area, zone = tz.split("/", 1)
-			config.timezone.area.value = area
-			config.timezone.val.value = zone
-			with open(TIMEZONE_FILE, "r") as fr:
-				for city in fr.readlines():
-					if config.timezone.val.value in city:
-						languagecode = city.split('localeCode="')[1].split('" />')[0]
-						config.osd.language = ConfigText(default=languagecode)
-						config.osd.language.save()
-						with open(LANGUAGE_CODE, "w") as fw:
-							fw.write(languagecode)
-						break
+		if INTERNET_SUCCESS:
+			tz = geolocation.getGeolocationData(fields="timezone").get("timezone", None)
+			if tz:
+				area, zone = tz.split("/", 1)
+				config.timezone.area.value = area
+				config.timezone.val.value = zone
+				with open(TIMEZONE_FILE, "r") as fr:
+					for city in fr.readlines():
+						if config.timezone.val.value in city:
+							languagecode = city.split('localeCode="')[1].split('" />')[0]
+							config.osd.language = ConfigText(default=languagecode)
+							config.osd.language.save()
+							with open(LANGUAGE_CODE, "w") as fw:
+								fw.write(languagecode)
+							break
 		else:
 			try:
 				header = {"User-Agent": "Enigma2 - TimeZone"}
@@ -126,8 +121,8 @@ def languageCode():
 				iprequest = Request(publicip, headers=header)
 				responseip = urlopen(iprequest)
 				publicip = responseip.read()
-				tz = f"http://worldtimeapi.org/api/ip:{publicip}"
-				timezonerequest = Request(tz, headers=header)
+				INTERNET_SUCCESS = f"http://worldtimeapi.org/api/ip:{publicip}"
+				timezonerequest = Request(INTERNET_SUCCESS, headers=header)
 				responsetz = urlopen(timezonerequest)
 				timezone = responsetz.read()
 				with open(TIMEZONE_DATA + "timezone", "wb") as tzwrite:
@@ -154,7 +149,7 @@ def languageCode():
 			with open(LANGUAGE_CODE, "r") as fr:
 				languagecode = fr.read().split('\n', 1)[0]
 		elif exists(TIMEZONE_FILE):
-			if internetAccess():
+			if INTERNET_SUCCESS:
 				with open(TIMEZONE_FILE, "r") as fr:
 					for city in fr.readlines():
 						if config.timezone.val.value in city:

@@ -24,8 +24,8 @@ from Components.Console import Console
 from Components.Harddisk import Harddisk
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from Components.Timezones import internetAccess
 from Components.SystemInfo import SystemInfo, MODEL
+from Tools.Geolocation import geolocation
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.Downloader import DownloadWithProgress
@@ -396,7 +396,8 @@ class FlashImage(Screen):
 	def startDownload(self, reply=True):
 		self.show()
 		if reply:
-			if not internetAccess():
+			geolocationData = geolocation.getGeolocationData(fields="status")
+			if not geolocationData.get("status", None):
 				self.session.openWithCallback(self.abort, MessageBox, _("Your internet connection is not working."), type=MessageBox.TYPE_ERROR, simple=True)
 				return
 			if "://" in self.source:

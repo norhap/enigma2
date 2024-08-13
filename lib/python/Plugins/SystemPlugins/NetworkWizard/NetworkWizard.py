@@ -3,20 +3,16 @@ from enigma import eTimer, eConsoleAppContainer
 from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
 from Screens.MessageBox import MessageBox
-from Screens.Time import Time
 from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
 from Components.SystemInfo import BoxInfo
-# from Components.Language import language
-# from Tools.Geolocation import geolocation
-from Components.Timezones import internetAccess
 from Tools.Directories import fileContains, resolveFilename, SCOPE_PLUGINS
 
 
-class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
+class NetworkWizard(WizardLanguage, ShowRemoteControl):
 	skin = """
 		<screen position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder" >
 			<widget name="text" position="153,40" size="340,300" font="Regular;22" />
@@ -78,17 +74,6 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		self.rescanTimer.callback.append(self.rescanTimerFired)
 		self.getInstalledInterfaceCount()
 		self.isWlanPluginInstalled()
-		# geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=False)
-		# if geolocationData.get("status", None) == "success":
-		if internetAccess() and config.misc.firstrun.value:
-			Time.useGeolocation(self)  # set time zone auto.
-			Time.setNTP(self)  # set NTP in crontab.
-			#  config.osd.language.value = language.getLanguage()  #  in some boxes it does not start the user language by default
-			# if config.misc.firstrun.value and config.osd.language.value != languageCode():
-			# 	from Screens.Standby import TryQuitMainloop  # noqa: E402
-			# 	config.osd.language.value = languageCode()
-			# 	config.osd.language.save()
-			# 	self.session.open(TryQuitMainloop, 3)
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):

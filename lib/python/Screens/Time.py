@@ -206,6 +206,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self.getTimeList()
 
 	def selectKeys(self):
+		self.geolocationWizard()
 		self.clearSelectedKeys()
 		self.selectKey("UP")
 		self.selectKey("DOWN")
