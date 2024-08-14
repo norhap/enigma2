@@ -711,6 +711,7 @@ class SystemNetworkInfo(Screen):
 		Screen.setTitle(self, title)
 		self.skinName = ["SystemNetworkInfo", "WlanStatus"]
 		self.console = Console()
+		self.AboutText = ""
 		self["LabelBSSID"] = StaticText()
 		self["LabelESSID"] = StaticText()
 		self["LabelQuality"] = StaticText()
@@ -752,7 +753,7 @@ class SystemNetworkInfo(Screen):
 			"upRepeated": self.doNothing
 		})
 		self.iface = None
-		self.createscreen()
+		self.createScreen()
 		self.iStatus = None
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
@@ -765,8 +766,9 @@ class SystemNetworkInfo(Screen):
 			self.onClose.append(self.cleanup)
 		self.onLayoutFinish.append(self.updateStatusbar)
 
-	def createscreen(self):
-		self.AboutText = ""
+	def createScreen(self):
+		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
+		ipv4address = geolocationData.get("query", None)
 		self.iface = "eth0"
 		eth0 = about.getIfConfig('eth0')
 		if 'addr' in eth0:
@@ -868,46 +870,40 @@ class SystemNetworkInfo(Screen):
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n"
 		else:
 			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
-		self.console.ePopen('/sbin/ifconfig %s' % self.iface, self.getIPv6Address)
+		if ipv4address:  # get IPv4
+			self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
+		else:
+			try:
+				ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
+				ipv4address = ip.content.decode()  # get IPv4
+			except Exception:
+				ipv4address = _("None")
+			self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
+			# try:
+			# 	ip = get("https://freeipapi.com/api/json/")  # FREE ALTERNATIVE https://freeipapi.com/api/json/
+			# 	from json import loads
+			# 	dictionary = loads(ip.content)
+			# 	ipv4address = dictionary.get("ipAddress", "")  # get IPv4
+			# 	self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
+			# except Exception:
+			# 	pass
+		self.console.ePopen(f'/sbin/ifconfig {self.iface}') if not fileHas("/etc/inetd.conf", "tcp6") else self.console.ePopen(f'/sbin/ifconfig {self.iface}', self.getIPv6Address)
 		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
 
 	def getIPv6Address(self, result, retval, extra_args):
-		if hasattr(self, "AboutText"):
-			geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
-			ipv4address = geolocationData.get("query", None)
-			if ipv4address:  # get IPv4
-				self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
-			else:
-				ipv4address = ""
-				try:
-					ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
-					ipv4address = ip.content.decode()  # get IPv4
-					self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
-				except Exception:
-					pass
-				# try:
-				# 	ip = get("https://freeipapi.com/api/json/")  # FREE ALTERNATIVE https://freeipapi.com/api/json/
-				# 	from json import loads
-				# 	dictionary = loads(ip.content)
-				# 	ipv4address = dictionary.get("ipAddress", "")  # get IPv4
-				# 	self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
-				# except Exception:
-				# 	pass
-			ipv6address = result.split('\n')
-			for line in ipv6address:  # get IPv6
-				if "inet6 addr:" in line:
-					ipv6address = line.split(': ')[1][:-4].replace(" Scope:", "")
-					self.AboutText += _("IPv6 public address:") + "\t" + ipv6address + "\n"
-			self["AboutScrollLabel"].setText(self.AboutText)
-		else:
-			self.close(True)
+		ipv6address = result.split('\n')
+		for line in ipv6address:  # get IPv6
+			if "inet6 addr:" in line:
+				ipv6address = line.split(': ')[1][:-4].replace(" Scope:", "")
+				self.AboutText += _("IPv6 public address:") + "\t" + ipv6address + "\n"
+		self["AboutScrollLabel"].setText(self.AboutText)
 
 	def SpeedFinished(self, result, retval, extra_args):
 		result_tmp = result.split('\n')
 		for line in result_tmp:
 			if "Speed:" in line:
-				speed = line.split(': ')[1][:-4]
-				self.AboutText += _("Speed:") + "\t" + "\t" + speed + _('Mb/s')
+				speed = line.split(': ')[1][:-4] if "Unknown" not in line else _("Unknown")
+				self.AboutText += _("Speed:") + "\t" + "\t" + speed + _(' Mb/s')
 		hostname = open('/proc/sys/kernel/hostname').read()
 		self.AboutText += "\n" + _("Hostname:") + "\t" + "\t" + hostname + "\n"
 		self["AboutScrollLabel"].setText(self.AboutText)
