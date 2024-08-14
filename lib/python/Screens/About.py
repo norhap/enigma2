@@ -389,8 +389,8 @@ class About(Screen):
 class BenchmarkInformation(InformationBase):
 	def __init__(self, session):
 		InformationBase.__init__(self, session)
-		self.setTitle(_("Benchmark Information"))
 		self.skinName.insert(0, "BenchmarkInformation")
+		self.setTitle(_("Benchmark Information"))
 		self.cpuTypes = []
 		self.cpuBenchmark = None
 		self.cpuRating = None
@@ -462,7 +462,6 @@ class BenchmarkInformation(InformationBase):
 class Geolocation(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self.setTitle(_("Geolocation"))
 		self.setTitle(_("Geolocation Information"))
 		self["lab1"] = StaticText(_("norhap"))
 		self["lab2"] = StaticText(_("Report problems to:"))
@@ -536,8 +535,8 @@ class Geolocation(Screen):
 class TunerInformation(InformationBase):
 	def __init__(self, session):
 		InformationBase.__init__(self, session)
-		self.setTitle(_("Tuner Information"))
 		self.skinName.insert(0, "TunerInformation")
+		self.setTitle(_("Tuner Information"))
 
 	def displayInformation(self):
 		info = []
@@ -611,9 +610,7 @@ class TunerInformation(InformationBase):
 class Devices(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		screentitle = _("Storage Devices")
-		title = screentitle
-		Screen.setTitle(self, title)
+		self.setTitle(_("Storage Devices"))
 		self["HDDHeader"] = StaticText(_("Detected devices:"))
 		self["MountsHeader"] = StaticText(_("Network servers:"))
 		self["nims"] = StaticText()
@@ -706,12 +703,10 @@ class Devices(Screen):
 class SystemNetworkInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		screentitle = _("Network")
-		title = screentitle
-		Screen.setTitle(self, title)
 		self.skinName = ["SystemNetworkInfo", "WlanStatus"]
-		self.console = Console()
+		self.setTitle(_("Network"))
 		self.AboutText = ""
+		self.console = Console()
 		self["LabelBSSID"] = StaticText()
 		self["LabelESSID"] = StaticText()
 		self["LabelQuality"] = StaticText()
@@ -1045,10 +1040,8 @@ class SystemNetworkInfo(Screen):
 class SystemMemoryInfo(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		screentitle = _("Memoria Ram & Flash")
-		title = screentitle
-		Screen.setTitle(self, title)
 		self.skinName = ["SystemMemoryInfo", "About"]
+		self.setTitle(_("Memoria Ram & Flash"))
 		self["lab1"] = StaticText(_("norhap"))
 		self["lab2"] = StaticText(_("Report problems to:"))
 		self["lab3"] = StaticText(_("telegram @norhap"))
@@ -1174,8 +1167,7 @@ class CommitInfoDevelop(Screen):
 		Screen.__init__(self, session)
 		self.session = session
 		self.skinName = "CommitInfoDevelop"
-		self.setup_title = _("Latest Commits")
-		self.setTitle(self.setup_title)
+		self.setTitle(_("Latest Commits"))
 		self["AboutScrollLabel"] = ScrollLabel(_("Please wait"))
 		self["lab1"] = StaticText(_("norhap"))
 		self["lab2"] = StaticText(_("Report problems to:"))
