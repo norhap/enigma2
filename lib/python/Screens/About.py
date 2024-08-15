@@ -706,6 +706,9 @@ class SystemNetworkInfo(Screen):
 		self.skinName = ["SystemNetworkInfo", "WlanStatus"]
 		self.setTitle(_("Network"))
 		self.AboutText = ""
+		self.iface = None
+		self.iStatus = None
+		self.LinkState = False
 		self.console = Console()
 		self["LabelBSSID"] = StaticText()
 		self["LabelESSID"] = StaticText()
@@ -747,13 +750,10 @@ class SystemNetworkInfo(Screen):
 			"downRepeated": self.doNothing,
 			"upRepeated": self.doNothing
 		})
-		self.iface = None
 		self.createScreen()
-		self.iStatus = None
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
-
 				self.iStatus = iStatus
 			except:
 				pass
@@ -762,8 +762,6 @@ class SystemNetworkInfo(Screen):
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createScreen(self):
-		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
-		ipv4address = geolocationData.get("query", None)
 		self.iface = "eth0"
 		eth0 = about.getIfConfig('eth0')
 		if 'addr' in eth0:
@@ -791,7 +789,7 @@ class SystemNetworkInfo(Screen):
 			self.iface = 'ra0'
 		wlan0 = about.getIfConfig('wlan0')
 		if 'addr' in wlan0:
-			self.AboutText += _("IP:") + "\t" + "\t" + wlan0['addr'] + "\n"
+			self.AboutText += _("IP WLAN:") + "\t" + "\t" + wlan0['addr'] + "\n"
 			if 'netmask' in wlan0:
 				self.AboutText += _("Netmask:") + "\t" + wlan0['netmask'] + "\n"
 			if 'hwaddr' in wlan0:
@@ -843,28 +841,14 @@ class SystemNetworkInfo(Screen):
 			if tx_bytes[0:1] > str(0):
 				self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (GB)" + "\n"
 		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
-		isp = geolocationData.get("isp", None)
-		isporg = geolocationData.get("org", None)
-		if isinstance(isp, str):
-			isp = str(isp)
-		if isinstance(isporg, str):
-			isporg = str(isporg)
+		ipv4address = geolocationData.get("query", None)
 		self.AboutText += "\n"
-		if isp:
-			if isporg:
-				self.AboutText += _("ISP: ") + "\t" + "\t" + isp + " " + (isporg) + "\n"
-			else:
-				self.AboutText += "\n" + _("ISP: ") + "\t" + "\t" + isp + "\n"
-		mobile = geolocationData.get("mobile", False)
-		if mobile:
-			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n"
+		if geolocationData.get("isp", None):
+			self.AboutText += _("ISP: ") + "\t" + "\t" + geolocationData.get("isp", None) + " " + geolocationData.get("org", None) + "\n" if geolocationData.get("org", None) else _("ISP: ") + "\t" + "\t" + geolocationData.get("isp", None) + "\n"
 		else:
-			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
-		proxy = geolocationData.get("proxy", False)
-		if proxy:
-			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n"
-		else:
-			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
+			self.AboutText += _("ISP: ") + "\t" + "\t" + _("None") + "\n"
+		self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n" if geolocationData.get("mobile", False) else _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
+		self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n" if geolocationData.get("proxy", False) else _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
 		if ipv4address:  # get IPv4
 			self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
 		else:
@@ -883,7 +867,7 @@ class SystemNetworkInfo(Screen):
 			# except Exception:
 			# 	pass
 		self.console.ePopen(f'/sbin/ifconfig {self.iface}') if not fileHas("/etc/inetd.conf", "tcp6") else self.console.ePopen(f'/sbin/ifconfig {self.iface}', self.getIPv6Address)
-		self.console.ePopen('ethtool %s' % self.iface, self.SpeedFinished)
+		self.console.ePopen(f'ethtool {self.iface}', self.SpeedFinished)
 
 	def getIPv6Address(self, result, retval, extra_args):
 		ipv6address = result.split('\n')
@@ -912,8 +896,7 @@ class SystemNetworkInfo(Screen):
 			self.iStatus.getDataForInterface(self.iface, self.getInfoCB)
 
 	def getInfoCB(self, data, status):
-		self.LinkState = None
-		if data and data:
+		if data:
 			if status:
 				if self.iface == 'wlan0' or self.iface == 'wlan3' or self.iface == 'ra0':
 					if not status[self.iface]["accesspoint"]:
@@ -1003,7 +986,6 @@ class SystemNetworkInfo(Screen):
 		self["devicepic"].show()
 
 	def dataAvail(self, data):
-		self.LinkState = None
 		for line in data.splitlines():
 			line = line.strip()
 			if 'Link detected:' in line:
@@ -1020,7 +1002,7 @@ class SystemNetworkInfo(Screen):
 	def checkNetworkCB(self, data):
 		try:
 			if iNetwork.getAdapterAttribute(self.iface, "up") is True:
-				if self.LinkState is True:
+				if self.LinkState:
 					if data <= 2:
 						self["statuspic"].setPixmapNum(0)
 					else:
