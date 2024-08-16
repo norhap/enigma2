@@ -762,130 +762,138 @@ class SystemNetworkInfo(Screen):
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createScreen(self):
-		self.iface = "eth0"
-		eth0 = about.getIfConfig('eth0')
-		if 'addr' in eth0:
-			self.AboutText += _("IP:") + "\t" + "\t" + eth0['addr'] + "\n"
-			if 'netmask' in eth0:
-				self.AboutText += _("Netmask:") + "\t" + eth0['netmask'] + "\n"
-			if 'hwaddr' in eth0:
-				self.AboutText += _("MAC:") + "\t" + "\t" + eth0['hwaddr'] + "\n"
-			self.iface = 'eth0'
-		eth1 = about.getIfConfig('eth1')
-		if 'addr' in eth1:
-			self.AboutText += _("IP:") + "\t" + "\t" + eth1['addr'] + "\n"
-			if 'netmask' in eth1:
-				self.AboutText += _("Netmask:") + "\t" + eth1['netmask'] + "\n"
-			if 'hwaddr' in eth1:
-				self.AboutText += _("MAC:") + "\t" + "\t" + eth1['hwaddr'] + "\n"
-			self.iface = 'eth1'
-		ra0 = about.getIfConfig('ra0')
-		if 'addr' in ra0:
-			self.AboutText += _("IP:") + "\t" + "\t" + ra0['addr'] + "\n"
-			if 'netmask' in ra0:
-				self.AboutText += _("Netmask:") + "\t" + ra0['netmask'] + "\n"
-			if 'hwaddr' in ra0:
-				self.AboutText += _("MAC:") + "\t" + "\t" + ra0['hwaddr'] + "\n"
-			self.iface = 'ra0'
-		wlan0 = about.getIfConfig('wlan0')
-		if 'addr' in wlan0:
-			self.AboutText += _("IP WLAN:") + "\t" + "\t" + wlan0['addr'] + "\n"
-			if 'netmask' in wlan0:
-				self.AboutText += _("Netmask:") + "\t" + wlan0['netmask'] + "\n"
-			if 'hwaddr' in wlan0:
-				self.AboutText += _("MAC:") + "\t" + "\t" + wlan0['hwaddr'] + "\n"
-			self.iface = 'wlan0'
-		wlan3 = about.getIfConfig('wlan3')
-		if 'addr' in wlan3:
-			self.AboutText += _("IP:") + "\t" + "\t" + wlan3['addr'] + "\n"
-			if 'netmask' in wlan3:
-				self.AboutText += _("Netmask:") + "\t" + wlan3['netmask'] + "\n"
-			if 'hwaddr' in wlan3:
-				self.AboutText += _("MAC:") + "\t" + "\t" + wlan3['hwaddr'] + "\n"
-			self.iface = 'wlan3'
-		rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
-		if rx_bytes[4:5] and not rx_bytes[5:6]:
-			self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (KB)" + "\n"
-		elif rx_bytes[5:6] and not rx_bytes[6:7]:
-			self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (KB)" + "\n"
-		elif rx_bytes[6:7] and not rx_bytes[7:8]:
-			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (MB)" + "\n"
-		elif rx_bytes[7:8] and not rx_bytes[8:9]:
-			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (MB)" + "\n"
-		elif rx_bytes[8:9] and not rx_bytes[9:10]:
-			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (MB)" + "\n"
-		elif rx_bytes[9:10] and not rx_bytes[10:11]:
-			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (GB)" + "\n"
-		elif rx_bytes[10:11] and not rx_bytes[10:12]:
-			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (GB)" + "\n"
-		elif rx_bytes[10:12] and not rx_bytes[10:13]:
-			self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (GB)" + "\n"
-		else:
-			if rx_bytes[0:1] > str(0):
-				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (TB)" + "\n"
-		if tx_bytes[4:5] and not tx_bytes[5:6]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (KB)" + "\n"
-		elif tx_bytes[5:6] and not tx_bytes[6:7]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (KB)" + "\n"
-		elif tx_bytes[6:7] and not tx_bytes[7:8]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (MB)" + "\n"
-		elif tx_bytes[7:8] and not tx_bytes[8:9]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (MB)" + "\n"
-		elif tx_bytes[8:9] and not tx_bytes[9:10]:
-			self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (MB)" + "\n"
-		elif tx_bytes[9:10] and not tx_bytes[10:11]:
-			self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (GB)" + "\n"
-		elif tx_bytes[10:11] and not tx_bytes[10:12]:
-			self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (GB)" + "\n"
-		else:
-			if tx_bytes[0:1] > str(0):
-				self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (GB)" + "\n"
-		geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
-		ipv4address = geolocationData.get("query", None)
-		self.AboutText += "\n"
-		if geolocationData.get("isp", None):
-			self.AboutText += _("ISP: ") + "\t" + "\t" + geolocationData.get("isp", None) + " " + geolocationData.get("org", None) + "\n" if geolocationData.get("org", None) else _("ISP: ") + "\t" + "\t" + geolocationData.get("isp", None) + "\n"
-		else:
-			self.AboutText += _("ISP: ") + "\t" + "\t" + _("None") + "\n"
-		self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n" if geolocationData.get("mobile", False) else _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
-		self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n" if geolocationData.get("proxy", False) else _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
-		if ipv4address:  # get IPv4
-			self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
-		else:
-			try:
-				ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
-				ipv4address = ip.content.decode()  # get IPv4
-			except Exception:
-				ipv4address = _("None")
-			self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
-			# try:
-			# 	ip = get("https://freeipapi.com/api/json/")  # FREE ALTERNATIVE https://freeipapi.com/api/json/
-			# 	from json import loads
-			# 	dictionary = loads(ip.content)
-			# 	ipv4address = dictionary.get("ipAddress", "")  # get IPv4
-			# 	self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
-			# except Exception:
-			# 	pass
-		self.console.ePopen(f'/sbin/ifconfig {self.iface}') if not fileHas("/etc/inetd.conf", "tcp6") else self.console.ePopen(f'/sbin/ifconfig {self.iface}', self.getIPv6Address)
-		self.console.ePopen(f'ethtool {self.iface}', self.SpeedFinished)
+		if hasattr(self, "AboutText"):
+			self.iface = "eth0"
+			eth0 = about.getIfConfig('eth0')
+			if 'addr' in eth0:
+				self.AboutText += _("IP:") + "\t" + "\t" + eth0['addr'] + "\n"
+				if 'netmask' in eth0:
+					self.AboutText += _("Netmask:") + "\t" + eth0['netmask'] + "\n"
+				if 'hwaddr' in eth0:
+					self.AboutText += _("MAC:") + "\t" + "\t" + eth0['hwaddr'] + "\n"
+				self.iface = 'eth0'
+			eth1 = about.getIfConfig('eth1')
+			if 'addr' in eth1:
+				self.AboutText += _("IP:") + "\t" + "\t" + eth1['addr'] + "\n"
+				if 'netmask' in eth1:
+					self.AboutText += _("Netmask:") + "\t" + eth1['netmask'] + "\n"
+				if 'hwaddr' in eth1:
+					self.AboutText += _("MAC:") + "\t" + "\t" + eth1['hwaddr'] + "\n"
+				self.iface = 'eth1'
+			ra0 = about.getIfConfig('ra0')
+			if 'addr' in ra0:
+				self.AboutText += _("IP:") + "\t" + "\t" + ra0['addr'] + "\n"
+				if 'netmask' in ra0:
+					self.AboutText += _("Netmask:") + "\t" + ra0['netmask'] + "\n"
+				if 'hwaddr' in ra0:
+					self.AboutText += _("MAC:") + "\t" + "\t" + ra0['hwaddr'] + "\n"
+				self.iface = 'ra0'
+			wlan0 = about.getIfConfig('wlan0')
+			if 'addr' in wlan0:
+				self.AboutText += _("IP WLAN:") + "\t" + "\t" + wlan0['addr'] + "\n"
+				if 'netmask' in wlan0:
+					self.AboutText += _("Netmask:") + "\t" + wlan0['netmask'] + "\n"
+				if 'hwaddr' in wlan0:
+					self.AboutText += _("MAC:") + "\t" + "\t" + wlan0['hwaddr'] + "\n"
+				self.iface = 'wlan0'
+			wlan3 = about.getIfConfig('wlan3')
+			if 'addr' in wlan3:
+				self.AboutText += _("IP:") + "\t" + "\t" + wlan3['addr'] + "\n"
+				if 'netmask' in wlan3:
+					self.AboutText += _("Netmask:") + "\t" + wlan3['netmask'] + "\n"
+				if 'hwaddr' in wlan3:
+					self.AboutText += _("MAC:") + "\t" + "\t" + wlan3['hwaddr'] + "\n"
+				self.iface = 'wlan3'
+			rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
+			if rx_bytes[4:5] and not rx_bytes[5:6]:
+				self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (KB)" + "\n"
+			elif rx_bytes[5:6] and not rx_bytes[6:7]:
+				self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (KB)" + "\n"
+			elif rx_bytes[6:7] and not rx_bytes[7:8]:
+				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (MB)" + "\n"
+			elif rx_bytes[7:8] and not rx_bytes[8:9]:
+				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (MB)" + "\n"
+			elif rx_bytes[8:9] and not rx_bytes[9:10]:
+				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (MB)" + "\n"
+			elif rx_bytes[9:10] and not rx_bytes[10:11]:
+				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (GB)" + "\n"
+			elif rx_bytes[10:11] and not rx_bytes[10:12]:
+				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (GB)" + "\n"
+			elif rx_bytes[10:12] and not rx_bytes[10:13]:
+				self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (GB)" + "\n"
+			else:
+				if rx_bytes[0:1] > str(0):
+					self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (TB)" + "\n"
+			if tx_bytes[4:5] and not tx_bytes[5:6]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (KB)" + "\n"
+			elif tx_bytes[5:6] and not tx_bytes[6:7]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (KB)" + "\n"
+			elif tx_bytes[6:7] and not tx_bytes[7:8]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (MB)" + "\n"
+			elif tx_bytes[7:8] and not tx_bytes[8:9]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (MB)" + "\n"
+			elif tx_bytes[8:9] and not tx_bytes[9:10]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (MB)" + "\n"
+			elif tx_bytes[9:10] and not tx_bytes[10:11]:
+				self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (GB)" + "\n"
+			elif tx_bytes[10:11] and not tx_bytes[10:12]:
+				self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (GB)" + "\n"
+			else:
+				if tx_bytes[0:1] > str(0):
+					self.AboutText += "\n" + _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (GB)" + "\n"
+			geolocationData = geolocation.getGeolocationData(fields="isp,org,mobile,proxy,query", useCache=True)
+			ipv4address = geolocationData.get("query", None)
+			self.AboutText += "\n"
+			if geolocationData.get("isp", None):
+				self.AboutText += _("ISP: ") + "\t" + "\t" + geolocationData.get("isp", None) + " " + geolocationData.get("org", None) + "\n" if geolocationData.get("org", None) else _("ISP: ") + "\t" + "\t" + geolocationData.get("isp", None) + "\n"
+			else:
+				self.AboutText += _("ISP: ") + "\t" + "\t" + _("None") + "\n"
+			self.AboutText += _("Mobile: ") + "\t" + "\t" + _("Yes") + "\n" if geolocationData.get("mobile", False) else _("Mobile: ") + "\t" + "\t" + _("No") + "\n"
+			self.AboutText += _("Proxy: ") + "\t" + "\t" + _("Yes") + "\n" if geolocationData.get("proxy", False) else _("Proxy: ") + "\t" + "\t" + _("No") + "\n"
+			if ipv4address:  # get IPv4
+				self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
+			else:
+				try:
+					ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
+					ipv4address = ip.content.decode()  # get IPv4
+				except Exception:
+					ipv4address = _("None")
+				self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
+				# try:
+				# 	ip = get("https://freeipapi.com/api/json/")  # FREE ALTERNATIVE https://freeipapi.com/api/json/
+				# 	from json import loads
+				# 	dictionary = loads(ip.content)
+				# 	ipv4address = dictionary.get("ipAddress", "")  # get IPv4
+				# 	self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
+				# except Exception:
+				# 	pass
+			self.console.ePopen(f'/sbin/ifconfig {self.iface}') if not fileHas("/etc/inetd.conf", "tcp6") else self.console.ePopen(f'/sbin/ifconfig {self.iface}', self.getIPv6Address)
+			self.console.ePopen(f'ethtool {self.iface}', self.SpeedFinished)
 
 	def getIPv6Address(self, result, retval, extra_args):
-		ipv6address = result.split('\n')
-		for line in ipv6address:  # get IPv6
-			if "inet6 addr:" in line:
-				ipv6address = line.split(': ')[1][:-4].replace(" Scope:", "")
-				self.AboutText += _("IPv6 public address:") + "\t" + ipv6address + "\n"
+		if hasattr(self, "AboutText"):
+			ipv6address = result.split('\n')
+			# print(ipv6address)
+			for line in ipv6address:  # get IPv6
+				if "inet6 addr:" in line:
+					if "Global" in line:
+						ipv6address = line.split('/')[0].replace("inet6 addr: ", "").replace(" Scope:Global", "").replace(" ", "")
+						self.AboutText += _("IPv6 public address:") + "\t" + ipv6address + "\n"
+					else:
+						ipv6address = line.split('/')[0].replace("inet6 addr: ", "").replace(" ", "")
+						self.AboutText += _("IPv6 address prefix:") + "\t" + ipv6address + "\n"
 		self["AboutScrollLabel"].setText(self.AboutText)
 
 	def SpeedFinished(self, result, retval, extra_args):
-		result_tmp = result.split('\n')
-		for line in result_tmp:
-			if "Speed:" in line:
-				speed = line.split(': ')[1][:-4] if "Unknown" not in line else _("Unknown")
-				self.AboutText += _("Speed:") + "\t" + "\t" + speed + _(' Mb/s')
-		hostname = open('/proc/sys/kernel/hostname').read()
-		self.AboutText += "\n" + _("Hostname:") + "\t" + "\t" + hostname + "\n"
-		self["AboutScrollLabel"].setText(self.AboutText)
+		if hasattr(self, "AboutText"):
+			result_tmp = result.split('\n')
+			for line in result_tmp:
+				if "Speed:" in line:
+					speed = line.split(': ')[1][:-4] if "Unknown" not in line else _("Unknown")
+					self.AboutText += _("Speed:") + "\t" + "\t" + speed + _(' Mb/s')
+			hostname = open('/proc/sys/kernel/hostname').read()
+			self.AboutText += "\n" + _("Hostname:") + "\t" + "\t" + hostname + "\n"
+			self["AboutScrollLabel"].setText(self.AboutText)
 
 	def cleanup(self):
 		if self.iStatus:
