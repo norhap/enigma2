@@ -11,7 +11,7 @@ from time import localtime, mktime, time, strftime
 from datetime import datetime
 
 
-class TimerEntry(Screen, ConfigListScreen):
+class TimerEntry(ConfigListScreen, Screen):
 	def __init__(self, session, timer):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("PowerManager entry"))
