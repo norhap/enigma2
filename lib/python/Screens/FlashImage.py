@@ -98,6 +98,7 @@ class SelectImage(Screen):
 						self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(sep)[-1]}
 				except:
 					pass
+
 		from Components.SystemInfo import MODEL
 		if not self.imagesList:
 			if not self.jsonlist:
@@ -110,7 +111,6 @@ class SelectImage(Screen):
 					self.jsonlist.update(load(urlopen(req, timeout=3)))
 				except:
 					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % url)
-
 			self.imagesList = dict(self.jsonlist)
 			for mountdir in ["/media", "/media/net", "/media/autofs"]:
 				for media in [f"{mountdir}/{x}" for x in listdir(mountdir)] if isdir(mountdir) else []:
@@ -127,7 +127,6 @@ class SelectImage(Screen):
 									for directory in [directory for directory in [join(subfolder, directory) for directory in listdir(subfolder)] if isdir(directory) and splitext(directory)[1] == ".unzipped"]:
 										rmtree(directory)
 										break
-
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
 			if catagorie in self.expanded:
@@ -337,8 +336,6 @@ class FlashImage(Screen):
 								devices.append((path, avail(path)))
 							else:
 								mounts.append((path, avail(path)))
-						else:
-							return
 				devices.sort(key=lambda x: x[1], reverse=True)
 				mounts.sort(key=lambda x: x[1], reverse=True)
 				return ((devices[0][1] > 500 and (devices[0][0], True)) if devices else mounts and mounts[0][1] > 500 and (mounts[0][0], False)) or (None, None)
@@ -348,11 +345,9 @@ class FlashImage(Screen):
 				self.session.openWithCallback(self.abort, MessageBox, _("No storage devices found"), type=MessageBox.TYPE_ERROR, simple=True)
 				return
 			if self.destination:
-
 				destination = join(self.destination, 'downloaded_images')
 				self.zippedimage = "://" in self.source and join(destination, self.imagename) or self.source
 				self.unzippedimage = join(destination, f'{self.imagename[:-4]}'".unzipped")
-
 				try:
 					if isfile(destination):
 						remove(destination)
