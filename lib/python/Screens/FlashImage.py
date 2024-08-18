@@ -99,13 +99,14 @@ class SelectImage(Screen):
 				except:
 					pass
 
-		from Components.SystemInfo import MODEL
 		if not self.imagesList:
 			if not self.jsonlist:
 				if "MODEL" in self.selectedImage:
 					for expression in eval(self.url_feeds.find(self.selectedImage["MODEL"]).text):
-						MODEL = sub(expression[0], expression[1], MODEL)
-				url = "%s%s" % (self.selectedImage["url"], MODEL)
+						model = sub(expression[0], expression[1], MODEL)
+						url = f'{self.selectedImage["url"]}{model}'
+				else:
+					url = f'{self.selectedImage["url"]}{MODEL}'
 				try:
 					req = Request(url, None, {"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"})
 					self.jsonlist.update(load(urlopen(req, timeout=3)))
