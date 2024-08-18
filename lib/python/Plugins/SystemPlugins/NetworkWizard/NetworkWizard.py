@@ -2,7 +2,9 @@ from enigma import eTimer, eConsoleAppContainer
 
 from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
+from Screens.Time import Time
 from Screens.MessageBox import MessageBox
+from Components.Timezones import INTERNET_SUCCESS
 from Components.config import config
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
@@ -12,7 +14,7 @@ from Components.SystemInfo import BoxInfo
 from Tools.Directories import fileContains, resolveFilename, SCOPE_PLUGINS
 
 
-class NetworkWizard(WizardLanguage, ShowRemoteControl):
+class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 	skin = """
 		<screen position="0,0" size="720,576" title="Welcome..." flags="wfNoBorder" >
 			<widget name="text" position="153,40" size="340,300" font="Regular;22" />
@@ -74,6 +76,8 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl):
 		self.rescanTimer.callback.append(self.rescanTimerFired)
 		self.getInstalledInterfaceCount()
 		self.isWlanPluginInstalled()
+		if INTERNET_SUCCESS and config.misc.firstrun.value:
+			Time.useGeolocation(self)  # set time zone auto.
 
 	def exitWizardQuestion(self, ret=False):
 		if (ret):
