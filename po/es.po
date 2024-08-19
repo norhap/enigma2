@@ -9942,7 +9942,7 @@ msgid "remarkable people"
 msgstr "personas notables"
 
 msgid "Remove after this position"
-msgstr "Eliminar después de esta posición"
+msgstr "Eliminar lo de después de esta posición"
 
 msgid "Remove bookmarks in cuts"
 msgstr "Eliminar marcadores en cortes"
@@ -9981,7 +9981,7 @@ msgid "Both"
 msgstr "Ambos"
 
 msgid "Remove before this position"
-msgstr "Eliminar lo de detrás de esta posición"
+msgstr "Eliminar lo de delante de esta posición"
 
 msgid "Remove bouquet from parental protection"
 msgstr "Eliminar bouquet de la protección parental"

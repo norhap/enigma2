@@ -12,8 +12,6 @@ from Screens.MessageBox import MessageBox
 from Screens.Standby import QUIT_DEBUG_RESTART, QUIT_RESTART, QUIT_REBOOT, TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 
-reboot = False
-
 
 class ConfigList(GUIComponent):
 	GUI_WIDGET = eListbox
@@ -271,6 +269,7 @@ class ConfigListScreen:
 		self["config"] = ConfigList(list, session=session)
 		self.setCancelMessage(None)
 		self.setRestartMessage(None)
+		self.reboot = False
 		self.onChangedEntry = []
 		self.onSave = []
 		self.manipulatedItems = []  # keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
@@ -463,12 +462,11 @@ class ConfigListScreen:
 		self["config"].handleKey(ACTIONKEY_0 + number, self.entryChanged)
 
 	def keySave(self):
-		global reboot
 		for notifier in self.onSave:
 			notifier()
-		if self.saveAll() and hasattr(self, "restartMsg") and not reboot:
+		if self.saveAll() and hasattr(self, "restartMsg") and not self.reboot:
 			self.session.openWithCallback(self.restartConfirm, MessageBox, self.restartMsg, default=True, type=MessageBox.TYPE_YESNO)
-		elif reboot:
+		elif self.reboot:
 			self.session.openWithCallback(self.rebootConfirm, MessageBox, _("Reboot system now?"), default=True, type=MessageBox.TYPE_YESNO)
 		else:
 			self.close()
@@ -490,8 +488,7 @@ class ConfigListScreen:
 				if item[0].endswith("*") and "**" not in item[0] and item[1].isChanged():
 					restart = True
 				elif item[0].endswith("**") and item[1].isChanged():
-					global reboot
-					reboot = True
+					self.reboot = True
 				item[1].save()
 		configfile.save()
 		return restart
