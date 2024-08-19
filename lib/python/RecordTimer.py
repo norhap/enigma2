@@ -760,6 +760,7 @@ class RecordTimerEntry(TimerEntry, object):
 	wasInStandby = False
 	wasInDeepStandby = False
 	receiveRecordEvents = False
+	diskWriteError = False
 
 	@staticmethod
 	def keypress(key=None, flag=1):
@@ -1442,10 +1443,11 @@ class RecordTimerEntry(TimerEntry, object):
 		self.log(16, "Record event %d." % event)
 		if event == iRecordableService.evRecordWriteError:
 			print("[RecordTimer] Write error on recording!")
+			RecordTimerEntry.diskWriteError = True
 			# show notification. the "id" will make sure that it will be
 			# displayed only once, even if more timers are failing at the
 			# same time. (which is very likely in case of disk fullness)
-			AddPopup(text=_("Write error while recording.\n"), type=MessageBox.TYPE_ERROR, timeout=0, id="WriteErrorMessage")
+			AddPopup(text=_("Disk writing error during recording."), type=MessageBox.TYPE_ERROR, timeout=0, id="WriteErrorMessage")
 			# ok, the recording has been stopped. we need to properly note
 			# that in our state, with also keeping the possibility to re-try.
 			# TODO: this has to be done.

@@ -10,6 +10,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Tools.TextBoundary import getTextBoundarySize
 from timer import TimerEntry
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
+from RecordTimer import RecordTimerEntry
 
 
 # <Name of the Timer>     <Service>
@@ -72,7 +73,7 @@ class TimerList(GUIComponent):
 					state = _("zapped")
 					icon = self.iconZapped
 				else:
-					state = _("recording...")
+					state = _("recording...") if not RecordTimerEntry.diskWriteError else _("Disk write error!")
 					icon = self.iconRecording
 			elif timer.state == TimerEntry.StateEnded:
 				state = _("done!")

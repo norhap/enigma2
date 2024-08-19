@@ -8868,11 +8868,17 @@ msgstr "Asistente para ajustar el overscan"
 msgid "Would you save the entered PIN %s persistent?"
 msgstr "¿Guardarías el PIN introducido %s persistente?"
 
+msgid "Disk writing error during recording."
+msgstr "Error de escritura en disco durante la grabación."
+
 msgid "Write error while recording. Disk full?\n"
-msgstr "Error al hacer grabación. ¿Disco lleno?\n"
+msgstr "Error de escritura durante la grabación. ¿Disco lleno?\n"
 
 msgid "Write failed!"
 msgstr "Escritura fallida!"
+
+msgid "Disk write error!"
+msgstr "Error de escritura en disco!"
 
 msgid "Write to /tmp/positionersetup.log"
 msgstr "Escribir a /tmp/positionersetup.log"
