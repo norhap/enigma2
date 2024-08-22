@@ -6477,6 +6477,17 @@ msgstr "Seleccionar ficheros/carpetas a copiar"
 msgid "Select function"
 msgstr "Seleccionar función"
 
+msgid ""
+"Channel in IPToSAT:"
+"\n"
+"\n"
+"Select an IPTV channel to record."
+msgstr ""
+"Canal en IPToSAT:"
+"\n"
+"\n"
+"Seleccione un canal IPTV para poder grabar."
+
 msgid "Format Disk Settings"
 msgstr "Ajustes Formatear Disco"
 

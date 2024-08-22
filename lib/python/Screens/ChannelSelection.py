@@ -37,7 +37,7 @@ from ServiceReference import ServiceReference, service_types_tv_ref, service_typ
 from Tools.BoundFunction import boundFunction
 from Tools.Notifications import RemovePopup
 from Tools.Alternatives import GetWithAlternative
-from Tools.Directories import fileContains, isPluginInstalled
+from Tools.Directories import fileContains, isPluginInstalled, resolveFilename, SCOPE_CONFIG
 from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
@@ -180,6 +180,13 @@ class ChannelContextMenu(Screen):
 		self.parentalControlEnabled = config.ParentalControl.servicepin[0].value and config.ParentalControl.servicepinactive.value
 		menu.append(ChoiceEntryComponent("menu", (_("Settings"), self.openSetup)))
 		self["menu"] = ChoiceList(menu)
+		if isPluginInstalled("IPToSAT"):
+			if resolveFilename(SCOPE_CONFIG, "iptosat.json") and config.plugins.IPToSAT.enable.value:
+				with open(resolveFilename(SCOPE_CONFIG, "iptosat.json", "r")) as fr:
+					for refiptosat in fr.readlines():
+						if "sref" in refiptosat and current.toString() in refiptosat:
+							self.refChannelIPToSAT = refiptosat.split(': "')[1].split('"')[0]
+							break
 		if not (current_sel_path or current_sel_flags & (eServiceReference.isDirectory | eServiceReference.isMarker)) or current_sel_flags & eServiceReference.isGroup:
 			append_when_current_valid(current, menu, (_("Show transponder info"), self.showServiceInformations), level=2)
 		if csel.bouquet_mark_edit == OFF and not csel.entry_marked:
@@ -221,15 +228,8 @@ class ChannelContextMenu(Screen):
 								self.configStreamRelay = "/etc/tuxbox/config/oscam-emu/oscam.conf"
 							elif str(ProcessList().named("ncam")).strip("[]"):
 								self.configStreamRelay = "/etc/tuxbox/config/ncam/ncam.conf"
-							if self.configStreamRelay:
-								if isfile("/etc/enigma2/iptosat.json"):
-									with open("/etc/enigma2/iptosat.json", "r") as fr:
-										for refiptosat in fr.readlines():
-											if "sref" in refiptosat and current.toString() in refiptosat:
-												self.refChannelIPToSAT = refiptosat.split(': "')[1].split('"')[0]
-												break
-								if not self.refChannelIPToSAT:
-									append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleWithStreamrelay), level=1)
+							if self.configStreamRelay and not self.refChannelIPToSAT:
+								append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleWithStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							# Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:

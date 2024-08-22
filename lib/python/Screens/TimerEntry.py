@@ -23,6 +23,7 @@ from Screens.Screen import Screen
 from Screens.TagEditor import TagEditor
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.FallbackTimer import FallbackTimerDirs
+from Tools.Directories import isPluginInstalled, resolveFilename, SCOPE_CONFIG
 
 
 class TimerEntry(ConfigListScreen, Screen):
@@ -400,6 +401,13 @@ class TimerEntry(ConfigListScreen, Screen):
 			self.timer.eit = eit
 
 	def keyGo(self, result=None):
+		if isPluginInstalled("IPToSAT"):
+			if resolveFilename(SCOPE_CONFIG, "iptosat.json") and config.plugins.IPToSAT.enable.value:
+				with open(resolveFilename(SCOPE_CONFIG, "iptosat.json", "r")) as fr:
+					for refiptosat in fr.readlines():
+						if "sref" in refiptosat and str(self.timerentry_service_ref) in refiptosat:
+							self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
+							return
 		if not self.timerentry_service_ref.isRecordable():
 			self.session.openWithCallback(self.selectChannelSelector, MessageBox, _("You didn't select a channel to record from."), MessageBox.TYPE_ERROR)
 		else:
