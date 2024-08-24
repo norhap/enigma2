@@ -581,6 +581,10 @@ if test "$MACHINE" == "hd2400" -o "$MACHINE" == "hd11" -o "$MACHINE" == "hd1100"
 	AC_DEFINE(KEY_F3_TO_KEY_LIST, 1,[define when rc sends a KEY_F3 event for its KEY_LIST key])
 fi
 
+if test "$BOXTYPE" == "pulse4k" -o "$BOXTYPE" == "pulse4kmini"; then
+	AC_DEFINE(USE_ALTERNATE_CA_HANDLING, 1,[define it so to use additioanl ca device freeing])
+fi
+
 if test "$MACHINE" == "hd2400" -o "$MACHINE" == "vuultimo"; then
 	AC_DEFINE(HAVE_BWLCD255, 1,[define when using a 255x64 black and white display device])
 fi
