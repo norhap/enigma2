@@ -69,7 +69,13 @@ def parseKeymap(filename, context, actionMapInstance, device, domKeys):
 			print("[ActionMap] Error: Attribute 'flag' in context '%s' id '%s' (%d) in file '%s' must be specified!" % (context, keyName, keyId, filename))
 			error = True
 		else:
-			flagToValue = lambda x: {'m': 1, 'b': 2, 'r': 4, 'l': 8}[x]  # noqa: E731
+			flagToValue = lambda x: {
+				"m": 1,
+				"b": 2,
+				"r": 4,
+				"l": 8,
+				"s": 32
+			}[x]
 			newFlags = sum(map(flagToValue, flags))
 			if not newFlags:
 				print("[ActionMap] Error: Attribute 'flag' value '%s' in context '%s' id '%s' (%d) in file '%s' appears invalid!" % (flags, context, keyName, keyId, filename))
