@@ -8848,6 +8848,15 @@ msgstr "Cuando el contenido tenga una relación de aspecto de 16: 9, elija si de
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr "Cuando el contenido tenga una relación de aspecto de 4: 3, elija si desea escalar / estirar la imagen."
 
+msgid ""
+"When this timer starts:" 
+"\n"
+"If you change channels on this tuner or start this channel from standby, recording will stop."
+msgstr "" 
+"Cuando comience este temporizador:" 
+"\n"
+"Si cambia de canal en este sintonizador o inicia en este canal desde standby, la grabación se detendrá."
+
 msgid "Where to save temporary timeshift recordings?"
 msgstr "¿Dónde guardar las grabaciones timeshift temporales?"
 
