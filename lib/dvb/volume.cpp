@@ -20,17 +20,17 @@
 #endif
 
 #ifdef HAVE_ALSA
-# ifndef ALSA_VOLUME_MIXER
-#  define ALSA_VOLUME_MIXER "Master"
-# endif
-# ifndef ALSA_CARD
-#  define ALSA_CARD "default"
-# endif
+#ifndef ALSA_VOLUME_MIXER
+#define ALSA_VOLUME_MIXER "Master"
+#endif
+#ifndef ALSA_CARD
+#define ALSA_CARD "default"
+#endif
 #endif
 
-eDVBVolumecontrol* eDVBVolumecontrol::instance = NULL;
+eDVBVolumecontrol *eDVBVolumecontrol::instance = NULL;
 
-eDVBVolumecontrol* eDVBVolumecontrol::getInstance()
+eDVBVolumecontrol *eDVBVolumecontrol::getInstance()
 {
 	if (instance == NULL)
 		instance = new eDVBVolumecontrol;
@@ -38,7 +38,7 @@ eDVBVolumecontrol* eDVBVolumecontrol::getInstance()
 }
 
 eDVBVolumecontrol::eDVBVolumecontrol()
-:m_volsteps(5)
+	: m_volsteps(5)
 {
 #ifdef HAVE_ALSA
 	mainVolume = NULL;
@@ -99,7 +99,7 @@ int eDVBVolumecontrol::openMixer()
 	}
 	return mainVolume ? 0 : -1;
 #else
-	return open( AUDIO_DEV, O_RDWR );
+	return open(AUDIO_DEV, O_RDWR);
 #endif
 }
 
@@ -108,13 +108,9 @@ void eDVBVolumecontrol::closeMixer(int fd)
 #ifdef HAVE_ALSA
 	/* we want to keep the alsa mixer */
 #else
-	if (fd >= 0) close(fd);
+	if (fd >= 0)
+		close(fd);
 #endif
-}
-
-void eDVBVolumecontrol::setVolumeSteps(int steps)
-{
-	m_volsteps = steps;
 }
 
 void eDVBVolumecontrol::volumeUp(int left, int right)
@@ -138,7 +134,7 @@ int eDVBVolumecontrol::checkVolume(int vol)
 
 void eDVBVolumecontrol::setVolume(int left, int right)
 {
-		/* left, right is 0..100 */
+	/* left, right is 0..100 */
 	leftVol = checkVolume(left);
 	rightVol = checkVolume(right);
 
@@ -147,10 +143,10 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 	if (mainVolume)
 		snd_mixer_selem_set_playback_volume_all(mainVolume, muted ? 0 : leftVol);
 #else
-		/* convert to -1dB steps */
+	/* convert to -1dB steps */
 	left = 63 - leftVol * 63 / 100;
 	right = 63 - rightVol * 63 / 100;
-		/* now range is 63..0, where 0 is loudest */
+	/* now range is 63..0, where 0 is loudest */
 
 	audio_mixer_t mixer;
 
@@ -163,32 +159,23 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 	if (fd >= 0)
 	{
 #ifdef DVB_API_VERSION
-		if (ioctl(fd, AUDIO_SET_MIXER, &mixer) < 0) {
+		if (ioctl(fd, AUDIO_SET_MIXER, &mixer) < 0)
+		{
 			eDebug("[eDVBVolumecontrol] Setvolume failed: %m");
 		}
 #endif
 		closeMixer(fd);
 		return;
 	}
-	else {
+	else
+	{
 		eDebug("[eDVBVolumecontrol] SetVolume failed to open mixer: %m");
 	}
 
-	//HACK?
+	// HACK?
 	CFile::writeInt("/proc/stb/avs/0/volume", left); /* in -1dB */
 #endif
 }
-
-int eDVBVolumecontrol::getVolume()
-{
-	return leftVol;
-}
-
-bool eDVBVolumecontrol::isMuted()
-{
-	return muted;
-}
-
 
 void eDVBVolumecontrol::volumeMute()
 {
@@ -208,7 +195,7 @@ void eDVBVolumecontrol::volumeMute()
 	}
 	muted = true;
 
-	//HACK?
+	// HACK?
 	CFile::writeInt("/proc/stb/audio/j1_mute", 1);
 #endif
 }
@@ -231,7 +218,7 @@ void eDVBVolumecontrol::volumeUnMute()
 	}
 	muted = false;
 
-	//HACK?
+	// HACK?
 	CFile::writeInt("/proc/stb/audio/j1_mute", 0);
 #endif
 }
