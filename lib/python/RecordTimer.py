@@ -1146,8 +1146,8 @@ class RecordTimerEntry(TimerEntry, object):
 					remove("/tmp/was_rectimer_wakeup")
 			self.autostate = Screens.Standby.inStandby
 			if isPluginInstalled("IPToSAT") and self.autostate:
-				from Plugins.Extensions.IPToSAT.plugin import variousRecordings  # noqa: E402
-				if config.plugins.IPToSAT.enable.value and "%3a//" in self.service_ref.ref.toString() and not variousRecordings():
+				from Plugins.Extensions.IPToSAT.plugin import allowsMultipleRecordings  # noqa: E402
+				if config.plugins.IPToSAT.enable.value and "%3a//" in self.service_ref.ref.toString() and not allowsMultipleRecordings():
 					config.servicelist.startupservice.value = "0:0:0:0:0:0:C00000:0:0:0:"
 					AddPopup(_("If the recording has not finished:\nIf you switch to channels on this tuner, the recording will stop."), type=MessageBox.TYPE_INFO, timeout=0)
 			# If this timer has been cancelled, just go to "end" state.

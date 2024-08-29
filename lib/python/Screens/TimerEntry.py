@@ -264,8 +264,8 @@ class TimerEntry(ConfigListScreen, Screen):
 		self[widget].list = self.list
 		if isPluginInstalled("IPToSAT"):
 			if self.timerentry_justplay.value != "zap" and config.plugins.IPToSAT.enable.value:
-				from Plugins.Extensions.IPToSAT.plugin import variousRecordings  # noqa: E402
-				if not variousRecordings() and "http" in str(self.timerentry_service_ref):
+				from Plugins.Extensions.IPToSAT.plugin import allowsMultipleRecordings  # noqa: E402
+				if not allowsMultipleRecordings() and "http" in str(self.timerentry_service_ref):
 					self["description"].setText(_("When this timer starts:\nIf the receiver is not in standby, when you change channels on this tuner, recording will stop."))
 
 	def newConfig(self):
