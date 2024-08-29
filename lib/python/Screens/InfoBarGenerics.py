@@ -35,7 +35,7 @@ from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
 from Tools.ASCIItranslit import legacyEncode
-from Tools.Directories import fileExists, fileWriteLine, fileReadLines, getRecordingFilename, moveFiles, isPluginInstalled, resolveFilename, SCOPE_CONFIG
+from Tools.Directories import fileExists, fileWriteLine, fileReadLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
@@ -2894,12 +2894,10 @@ class InfoBarInstantRecord:
 		serviceref = info["serviceref"]
 		event = info["event"]
 		if isPluginInstalled("IPToSAT"):
-			if resolveFilename(SCOPE_CONFIG, "iptosat.json") and config.plugins.IPToSAT.enable.value:
-				with open(resolveFilename(SCOPE_CONFIG, "iptosat.json", "r")) as fr:
-					for refiptosat in fr.readlines():
-						if "sref" in refiptosat and self.session.nav.getCurrentlyPlayingServiceReference().toString() in refiptosat:
-							self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
-							return
+			from Plugins.Extensions.IPToSAT.plugin import isRecordable
+			if not isRecordable():
+				self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
+				return
 		if event is not None:
 			end = begin + self.currentEventTime()  # time now + remaining event time: instant record with (stop after current event).
 			if limitEvent:
