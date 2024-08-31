@@ -78,7 +78,9 @@ elif test "$MACHINE" == "pulse4kmini"; then
 elif test "$MACHINE" == "gbue4k"; then
 	AC_DEFINE(HWGBUE4K, 1,[gbue4k])
 elif test "$MACHINE" == "gbtrio4kpro"; then
-	AC_DEFINE(HWGBTRIO4KPRO, 1,[gbtrio4kpro])	
+	AC_DEFINE(HWGBTRIO4KPRO, 1,[gbtrio4kpro])
+elif test "$MACHINE" == "beyonwizt2"; then
+	AC_DEFINE(HWBEYONWIZT2, 1,[beyonwizt2])	
 fi
 
 AC_ARG_WITH(brandname,
