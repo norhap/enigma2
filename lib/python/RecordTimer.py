@@ -1150,7 +1150,7 @@ class RecordTimerEntry(TimerEntry, object):
 				if config.plugins.IPToSAT.enable.value and not allowsMultipleRecordings():
 					if config.plugins.IPToSAT.username.value in self.service_ref.ref.toString() or config.plugins.IPToSAT.domain.value.replace("http://", "").replace("https://", "") in self.service_ref.ref.toString():
 						config.servicelist.startupservice.value = "0:0:0:0:0:0:C00000:0:0:0:"
-						AddPopup(_("If the recording has not finished:\nIf you switch to channels on this tuner, the recording will stop."), type=MessageBox.TYPE_INFO, timeout=0)
+						AddPopup(_("If the recording has not finished:\nIf you switch to another channel in your subscription, the recording will stop."), type=MessageBox.TYPE_INFO, timeout=0)
 			# If this timer has been cancelled, just go to "end" state.
 			if self.cancelled:
 				return True
