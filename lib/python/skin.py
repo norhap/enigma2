@@ -1297,6 +1297,9 @@ class AttributeParser:
 	def transparent(self, value):
 		self.guiObject.setTransparent(1 if parseBoolean("transparent", value) else 0)
 
+	def underline(self, value):
+		self.guiObject.setUnderline(parseBoolean("underline", value))
+
 	def valign(self, value):  # This legacy definition uses an inconsistent name, use 'verticalAlignment' instead!
 		self.verticalAlignment(value)
 		# attribDeprecationWarning("valign", "verticalAlignment")
