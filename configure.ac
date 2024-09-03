@@ -672,6 +672,7 @@ if test "$MACHINE_BRAND" == "Vu+"; then
 	AC_DEFINE(FORCE_NO_FILL_ACCELERATION, 1,[define when the framebuffer acceleration does not have fill support])
 	AC_DEFINE(KEY_INFO_TO_KEY_EPG, 1,[define when rc sends a KEY_INFO event for its KEY_EPG key])
 	AC_DEFINE(KEY_EDIT_TO_KEY_TIME, 1,[define when rc sends a KEY_TIME event for its KEY_EDIT key])
+	AC_DEFINE(VOLUME64DB, 1,[define when volume control should be 64dB instead of 63dB])	
 fi
 
 if test "$MACHINE" == "vuduo2"; then
