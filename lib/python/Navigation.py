@@ -15,7 +15,7 @@ import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
-from os import path
+from os.path import exists
 from Screens.InfoBarGenerics import streamrelay
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
@@ -140,20 +140,9 @@ class Navigation:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
 		print("[Navigation] playing", ref and ref.toString())
-		if path.exists("/proc/stb/lcd/symbol_signal") and config.lcd.mode.value == '1':
-			try:
-				if '0:0:0:0:0:0:0:0:0' not in ref.toString():
-					signal = 1
-				else:
-					signal = 0
-				with open("/proc/stb/lcd/symbol_signal", "w") as f:
-					f.write(str(signal))
-			except:
-				with open("/proc/stb/lcd/symbol_signal", "w") as f:
-					f.write("0")
-		elif path.exists("/proc/stb/lcd/symbol_signal") and config.lcd.mode.value == '0':
+		if exists("/proc/stb/lcd/symbol_signal"):
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
-				f.write("0")
+				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
 		if ref is None:
 			self.stopService()
 			return 0
@@ -327,7 +316,7 @@ class Navigation:
 			self.pnav.stopService()
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
-		if path.exists("/proc/stb/lcd/symbol_signal"):
+		if exists("/proc/stb/lcd/symbol_signal"):
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("0")
 
@@ -347,7 +336,7 @@ class Navigation:
 		return eStreamServer.getInstance() and eStreamServer.getInstance().getConnectedClients()
 
 	# def getChannelIPToSAT(self):
-	# 	if path.exists("/etc/enigma2/iptosat.json"):
+	# 	if exists("/etc/enigma2/iptosat.json"):
 	# 		with open("/etc/enigma2/iptosat.json", "r") as fr:
 	# 			for refiptosat in fr.readlines():
 	# 				if "sref" in refiptosat and str(self.currentlyPlayingServiceReference.toString()) in refiptosat:
