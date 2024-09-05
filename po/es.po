@@ -10090,6 +10090,9 @@ msgstr "ciencia ficción/fantasía/horror"
 msgid "Seconds"
 msgstr "Segundos"
 
+msgid "%2.1f Seconds"
+msgstr "%2.1f Segundos"
+
 msgid "select"
 msgstr "seleccionar"
 
@@ -17274,6 +17277,9 @@ msgstr "Dirección pública IPv4:"
 
 msgid "IPv6 public address:"
 msgstr "Dirección pública IPv6:"
+
+msgid "IPv6 address prefix:"
+msgstr "Prefijo dirección IPv6:"
 
 msgid "Static IP Router"
 msgstr "Router IP Estática"
