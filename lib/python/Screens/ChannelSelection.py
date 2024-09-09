@@ -381,7 +381,10 @@ class ChannelContextMenu(Screen):
 		self.close()
 
 	def toggleWithStreamrelay(self):
-		if fileContains(self.configStreamRelay, "streamrelay"):
+		if config.streaming.authentication.value:
+			self.session.open(MessageBox, _("Http streams authentication is enabled."), MessageBox.TYPE_ERROR, default=False, simple=True, timeout=10)
+			return
+		elif fileContains(self.configStreamRelay, "streamrelay"):
 			Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
 			self.close()
 		else:

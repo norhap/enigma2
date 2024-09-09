@@ -3630,6 +3630,9 @@ msgstr "¿Cuántos minutos quiere agregar a la grabación?"
 msgid "How many minutes do you want to record?"
 msgstr "¿Cuántos minutos quiere grabar?"
 
+msgid "Http streams authentication is enabled."
+msgstr "La autenticación de streams http está habilitada."
+
 msgid "Hue"
 msgstr "Matiz"
 
