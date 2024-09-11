@@ -113,14 +113,16 @@ void eDVBVolumecontrol::closeMixer(int fd)
 #endif
 }
 
-void eDVBVolumecontrol::volumeUp(int left, int right)
+int eDVBVolumecontrol::volumeUp(int left, int right)
 {
 	setVolume(leftVol + (left ? left : m_volsteps), rightVol + (right ? right : m_volsteps));
+	return leftVol;
 }
 
-void eDVBVolumecontrol::volumeDown(int left, int right)
+int eDVBVolumecontrol::volumeDown(int left, int right)
 {
 	setVolume(leftVol - (left ? left : m_volsteps), rightVol - (right ? right : m_volsteps));
+	return leftVol;
 }
 
 int eDVBVolumecontrol::checkVolume(int vol)
@@ -132,7 +134,7 @@ int eDVBVolumecontrol::checkVolume(int vol)
 	return vol;
 }
 
-void eDVBVolumecontrol::setVolume(int left, int right)
+int eDVBVolumecontrol::setVolume(int left, int right)
 {
 	/* left, right is 0..100 */
 	leftVol = checkVolume(left);
@@ -145,11 +147,7 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 #else
 	/* convert to -1dB steps */
 
-#ifdef VOLUME64DB
-	int minVol = 64;
-#else
 	int minVol = 63;
-#endif
 	left = minVol - leftVol * minVol / 100;
 	right = minVol - rightVol * minVol / 100;
 	/* now range is 63..0, where 0 is loudest */
@@ -179,6 +177,7 @@ void eDVBVolumecontrol::setVolume(int left, int right)
 		CFile::writeInt("/proc/stb/avs/0/volume", left); /* in -1dB */
 	}
 #endif
+	return leftVol;
 }
 
 void eDVBVolumecontrol::volumeMute()
