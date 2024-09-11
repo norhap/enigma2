@@ -8214,6 +8214,9 @@ msgstr "Setup MultiTranscodificado: "
 msgid "Translation"
 msgstr "Traducción"
 
+msgid "Translate Subs On This Service"
+msgstr "Traducir subtítulos en este canal"
+
 msgid "Translations"
 msgstr "Traducciones"
 
@@ -9471,6 +9474,9 @@ msgstr "documental"
 
 msgid "Don't descramble, record ecm"
 msgstr "No descifrar, grabar ecm"
+
+msgid "Don't Translate Subs On This Service"
+msgstr "No traducir los subtítulos en este canal"
 
 msgid "done!"
 msgstr "hecho!"
