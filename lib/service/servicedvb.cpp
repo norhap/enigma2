@@ -3661,8 +3661,9 @@ void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 /*		xineLib->getPTS(pts);*/
 		if (m_is_pvr || m_timeshift_enabled)
 		{
-			eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
-			subtitledelay = eSubtitleSettings::subtitle_noPTSrecordingdelay;
+			// This is wrong!
+			// eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
+			// subtitledelay = eSubtitleSettings::subtitle_noPTSrecordingdelay;
 		}
 		else
 		{
