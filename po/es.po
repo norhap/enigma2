@@ -528,6 +528,9 @@ msgstr "Color de traducción impulsado por IA"
 msgid "AI-Powered translation enabled"
 msgstr "Traducción impulsada por IA habilitada"
 
+msgid "AI-Powered Translation optimization"
+msgstr "Traducción optimizada por IA habilitada"
+
 msgid "AI-Powered language translation"
 msgstr "Traducción de idiomas impulsado por IA"
 
@@ -622,6 +625,9 @@ msgstr "Receptor"
 
 msgid "About..."
 msgstr "Acerca de..."
+
+msgid "Above 200 Mbp"
+msgstr "Por encima de 200 Mbps"
 
 msgid "Access point:"
 msgstr "Punto de acceso:"
@@ -7938,6 +7944,9 @@ msgstr "Este plugin está instalado."
 msgid "This plugin is not installed."
 msgstr "Este plugin no está instalado."
 
+msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection speed selected."
+msgstr "El servicio de traducción impulsado por inteligencia artificial se optimizará para proporcionar el mejor rendimiento según la velocidad de conexión a Internet seleccionada."
+
 msgid "The AutoTimer plugin is installed."
 msgstr "El plugin Temporizador Automático está instalado."
 
@@ -8864,11 +8873,11 @@ msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stre
 msgstr "Cuando el contenido tenga una relación de aspecto de 4: 3, elija si desea escalar / estirar la imagen."
 
 msgid ""
-"When this timer starts:" 
+"When this timer starts:"
 "\n"
 "If the receiver is not in standby mode, if you switch to channels from your subscription, the recording will stop."
-msgstr "" 
-"Cuando comience este temporizador:" 
+msgstr ""
+"Cuando comience este temporizador:"
 "\n"
 "Si el receptor no está en standby, si cambia a canales de su suscripción, la grabación se detendrá."
 
@@ -15171,6 +15180,9 @@ msgstr "Mostrar Lectores/Proxies"
 
 msgid "Status"
 msgstr "Estado"
+
+msgid "Up to 50 Mbps"
+msgstr "Hasta 50 Mbps"
 
 msgid "Update interval (in seconds)"
 msgstr "Actualizar intervalo (segundos)"

@@ -1658,8 +1658,21 @@ def InitUsageConfig():
 		config.subtitles.ai_subtitle_colors = ConfigSelection(default=1, choices=[
 			(1, _("White")),
 			(2, _("Yellow"))
+			(3, _("Red")),
+			(4, _("Green")),
+			(5, _("Blue"))
 		])
 		config.subtitles.ai_subtitle_colors.addNotifier(setAiSubtitleColors)
+
+		def setAiConnectionSpeed(configElement):
+			eSubtitleSettings.setAiConnectionSpeed(configElement.value)
+
+		config.subtitles.ai_connection_speed = ConfigSelection(default=1, choices=[
+			(1, _("Up to 50 Mbps")),
+			(2, _("50-200 Mbps")),
+			(3, _("Above 200 Mbps"))
+		])
+		config.subtitles.ai_connection_speed.addNotifier(setAiConnectionSpeed)
 
 		langsAI = ["ar", "bg", "nb", "ca", "cs", "zh", "da", "de", "el", "en", "es", "et", "fa", "fi", "fr", "fy", "he", "hr", "hu", "id", "is", "it", "ku", "lt", "lv", "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sr", "sv", "th", "tr", "uk", "vi"]
 		langsAI = [(x, LANGUAGE_AI[x][1]) for x in langsAI]
@@ -1668,7 +1681,10 @@ def InitUsageConfig():
 		langsAI.append(("haw", _("Hawaiian")))
 		langsAI.append(("iw", _("Hebrew")))
 		langsAI.append(("hmn", _("Hmong")))
-		langsAI.append(("ckb", _("Kurdish (Sorani)")))
+		langsAI.append(("ar_eg", _("Arabic (Egyptian)")))
+		langsAI.append(("ar_ma", _("Arabic (Moroccan)")))
+		langsAI.append(("ar_sy", _("Arabic (Syro-Lebanese)")))
+		langsAI.append(("ar_tn", _("Arabic (Tunisian)")))
 		langsAI.sort(key=lambda x: x[1])
 
 		default = config.osd.language.value
