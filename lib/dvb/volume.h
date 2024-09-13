@@ -22,6 +22,7 @@ private:
 	int openMixer();
 	void closeMixer(int fd);
 
+	bool mute_zero;
 	bool muted;
 	int leftVol, rightVol;
 	int m_volsteps;
@@ -39,7 +40,7 @@ public:
 
 	void volumeMute();
 	void volumeUnMute();
-	void volumeToggleMute();
+	bool volumeToggleMute();
 
 	int getVolume() { return leftVol; }
 	int getVolumeLeft() { return leftVol; }

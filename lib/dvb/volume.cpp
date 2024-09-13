@@ -167,6 +167,18 @@ int eDVBVolumecontrol::setVolume(int left, int right)
 		{
 			eDebug("[eDVBVolumecontrol] Error: Set volume failed!  (%m)");
 		}
+		// Force mute if vol = 0 because some boxes will not be complete silent.
+		if (leftVol == 0)
+		{
+			mute_zero = true;
+			ioctl(fd, AUDIO_SET_MUTE, true);
+		}
+		else if (mute_zero)
+		{
+			mute_zero = false;
+			if(!muted)
+				ioctl(fd, AUDIO_SET_MUTE, false);
+		}
 #endif
 		closeMixer(fd);
 	}
@@ -175,6 +187,19 @@ int eDVBVolumecontrol::setVolume(int left, int right)
 		eTrace("[eDVBVolumecontrol] Error: Unable to open mixer!  (%m)");
 		// Workaround because the mixer is opened exclusive in the driver
 		CFile::writeInt("/proc/stb/avs/0/volume", left); /* in -1dB */
+
+		// Force mute if vol = 0 because some boxes will not be complete silent.
+		if (leftVol == 0)
+		{
+			mute_zero = true;
+			CFile::writeInt("/proc/stb/audio/j1_mute", 1);
+		}
+		else if (mute_zero)
+		{
+			mute_zero = false;
+			if(!muted)
+				CFile::writeInt("/proc/stb/audio/j1_mute", 0);
+		}
 	}
 #endif
 	return leftVol;
@@ -226,10 +251,11 @@ void eDVBVolumecontrol::volumeUnMute()
 #endif
 }
 
-void eDVBVolumecontrol::volumeToggleMute()
+bool eDVBVolumecontrol::volumeToggleMute()
 {
 	if (isMuted())
 		volumeUnMute();
 	else
 		volumeMute();
+	return muted;
 }
