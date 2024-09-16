@@ -44,6 +44,7 @@ eDVBVolumecontrol::eDVBVolumecontrol()
 	mainVolume = NULL;
 	openMixer();
 #endif
+	mute_zero = false;
 	volumeUnMute();
 // dont reset volume on start
 //	setVolume(100, 100);
