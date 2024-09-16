@@ -14431,6 +14431,9 @@ msgstr "nombre evento"
 msgid "event name and description"
 msgstr "nombre de evento y descripción"
 
+msgid "Event number:"
+msgstr "Evento número:"
+
 msgid "next entry"
 msgstr "próxima entrada"
 
