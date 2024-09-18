@@ -216,6 +216,7 @@ public:
 	void reloadBouquets();
 	bool isValidService(int tsid, int onid, int sid);
 	void parseServiceData(ePtr<eDVBService> s, std::string str);
+	PyObject *getAllServicesRaw();
 };
 
 #ifndef SWIG
