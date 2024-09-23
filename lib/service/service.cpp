@@ -170,6 +170,18 @@ std::string eServiceReference::toReferenceString() const
 	return ret;
 }
 
+std::string eServiceReference::toLCNReferenceString(bool trailing) const
+{
+    std::string ret;
+    ret.reserve(24); /* Estimate required space */
+    char buf[24];
+    if(trailing)
+        snprintf(buf, 24, "%X:%X:%X:%X:", data[1], data[2], data[3], data[4]);
+    else
+        snprintf(buf, 24, "%X:%X:%X:%X", data[1], data[2], data[3], data[4]);
+    ret.assign(buf);
+	return ret;
+}
 
 eServiceCenter *eServiceCenter::instance;
 

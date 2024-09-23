@@ -174,6 +174,7 @@ public:
 	std::string toString() const;
 	std::string toCompareString() const;
 	std::string toReferenceString() const;
+	std::string toLCNReferenceString(bool trailing=true) const;
 #ifndef SWIG
 	operator bool() const
 	{
@@ -193,7 +194,7 @@ public:
 	bool operator<(const eServiceReference &c) const
 	{
 		if (!c) return 0;
-		
+
 		if (type < c.type)
 			return 1;
 
