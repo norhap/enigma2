@@ -48,6 +48,7 @@ def InitCiConfig():
 			config.ci[slot].static_pin = ConfigPIN(default=0)
 			config.ci[slot].show_ci_messages = ConfigYesNo(default=True)
 			config.ci[slot].disable_operator_profile = ConfigYesNo(default=False)
+			config.ci[slot].alternative_ca_handling = ConfigSelection(choices=[(0, _("off")), (1, _("Close CA device at programm end")), (2, _("CA device Offset index")), (3, _("Offset and close CA device"))], default=0)
 			if SystemInfo["CI%dSupportsHighBitrates" % slot]:
 				highBitrateChoices = [("normal", _("normal")), ("high", _("high"))]
 				if exists("/proc/stb/tsmux/ci%d_tsclk_choices" % slot):
@@ -482,6 +483,7 @@ class CiSelection(Screen):
 		self.list.append(getConfigListEntry(_("Reset persistent PIN code"), ConfigNothing(), 6, slot))
 		self.list.append(getConfigListEntry(_("Show CI messages"), config.ci[slot].show_ci_messages, 3, slot))
 		self.list.append(getConfigListEntry(_("Disable operator profiles"), config.ci[slot].disable_operator_profile, 3, slot))
+		self.list.append(getConfigListEntry(_("Descrambling options") + " *", config.ci[slot].alternative_ca_handling, 3, slot))
 		self.list.append(getConfigListEntry(_("Multiple service support"), config.ci[slot].canDescrambleMultipleServices, 3, slot))
 		if SystemInfo["CI%dSupportsHighBitrates" % slot]:
 			self.list.append(getConfigListEntry(_("High bitrate support"), config.ci[slot].highBitrate, 3, slot))

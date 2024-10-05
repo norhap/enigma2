@@ -1272,6 +1272,9 @@ msgstr "CH"
 msgid "CH%s"
 msgstr "CH%s"
 
+msgid "CA device Offset index"
+msgstr "Índice de desplazamiento del dispositivo CA"
+
 msgid "CI (Common Interface) Setup"
 msgstr "Configuración de CI (interfaz común)"
 
@@ -1531,6 +1534,9 @@ msgstr "Limpiar lista de reproducción"
 
 msgid "Close"
 msgstr "Cerrar"
+
+msgid "Close CA device at programm end"
+msgstr "Cerrar el dispositivo CA al final del programa"
 
 msgid "Close the Plugin Browser screen"
 msgstr "Cierre la pantalla del navegador de plugins"
@@ -11107,11 +11113,14 @@ msgstr "Número de canales que se muestran en la lista de canales"
 msgid "Number of repeating text on display."
 msgstr "Número de texto repetido en display."
 
-msgid "OSD Setup"
-msgstr "Ajustes OSD"
-
 msgid "Offline decode delay (ms)"
 msgstr "Retraso decodificación sin conexión (milisegundos)"
+
+msgid "Offset and close CA device"
+msgstr "Desplazar y cerrar el dispositivo CA"
+
+msgid "OSD Setup"
+msgstr "Ajustes OSD"
 
 msgid "On valid ONIDs, ignore frequency sub network part"
 msgstr "En ONID válidos, ignore la parte de la frecuencia de subred"

@@ -135,7 +135,7 @@ void eDVBCICcSession::addProgram(uint16_t program_number, std::vector<uint16_t>&
 	eDebugNoNewLine("\n");
 
 	for (std::vector<uint16_t>::iterator it = pids.begin(); it != pids.end(); ++it)
-		descrambler_set_pid(m_descrambler_fd, m_slot->getSlotID(), 1, *it);
+		descrambler_set_pid(m_descrambler_fd, m_slot, 1, *it);
 }
 
 void eDVBCICcSession::removeProgram(uint16_t program_number, std::vector<uint16_t>& pids)
@@ -146,7 +146,10 @@ void eDVBCICcSession::removeProgram(uint16_t program_number, std::vector<uint16_
 	eDebugNoNewLine("\n");
 
 	for (std::vector<uint16_t>::iterator it = pids.begin(); it != pids.end(); ++it)
-		descrambler_set_pid(m_descrambler_fd, m_slot->getSlotID(), 0, *it);
+		descrambler_set_pid(m_descrambler_fd, m_slot, 0, *it);
+
+	if (m_slot->getDescramblingOptions() == 1 || m_slot->getDescramblingOptions() == 3)
+		descrambler_deinit(m_descrambler_fd);
 }
 
 void eDVBCICcSession::cc_open_req()
@@ -793,13 +796,13 @@ void eDVBCICcSession::set_descrambler_key()
 	if (m_descrambler_fd != -1 && m_current_ca_demux_id != m_slot->getCADemuxID())
 	{
 		descrambler_deinit(m_descrambler_fd);
-		m_descrambler_fd = descrambler_init(m_slot->getSlotID(), m_slot->getCADemuxID());
+		m_descrambler_fd = descrambler_init(m_slot, m_slot->getCADemuxID());
 		m_current_ca_demux_id = m_slot->getCADemuxID();
 	}
 
 	if (m_descrambler_fd == -1 && m_slot->getCADemuxID() > -1)
 	{
-		m_descrambler_fd = descrambler_init(m_slot->getSlotID(), m_slot->getCADemuxID());
+		m_descrambler_fd = descrambler_init(m_slot, m_slot->getCADemuxID());
 		m_current_ca_demux_id = m_slot->getCADemuxID();
 	}
 

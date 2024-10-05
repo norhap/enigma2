@@ -1285,21 +1285,18 @@ eDVBCISlot::eDVBCISlot(eMainloop *context, int nr):
 	user_mapped = false;
 	plugged = false;
 	m_ci_version = versionUnknown;
-	char config_key_operator_profile[255];
-	snprintf(config_key_operator_profile, 255, "config.ci.%d.disable_operator_profile", slotid);
-	bool operator_profile_disabled = eConfigManager::getConfigBoolValue(config_key_operator_profile, false);
-	m_operator_profiles_disabled = operator_profile_disabled;
 	snprintf(configStr, 255, "config.ci.%d.enabled", slotid);
 	bool enabled = eSimpleConfig::getBool(configStr, true);
-	if (enabled) {
-		int bootDelay = eSimpleConfig::getInt("config.cimisc.bootDelay", 5);
-		if (bootDelay) {
-			CONNECT(startup_timeout->timeout, eDVBCISlot::openDevice);
-			startup_timeout->start(1000 * bootDelay, true);
-		}
-		else
-			openDevice();
-	}
+	char config_key_operator_profile[255];
+	snprintf(config_key_operator_profile, 255, "config.ci.%d.disable_operator_profile", slotid);
+	bool operator_profile_disabled = eSimpleConfig::getBool(config_key_operator_profile, false);
+	m_operator_profiles_disabled = operator_profile_disabled;
+	char config_key_alt_ca[255];
+	snprintf(config_key_alt_ca, 255, "config.ci.%d.alternative_ca_handling", slotid);
+	int alt_ca = eSimpleConfig::getInt(config_key_alt_ca, 0);
+	m_alt_ca_handling = alt_ca;
+	if (enabled)
+		openDevice();
 	else
 		/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::slotStateChanged, getSlotID(), 3)); // state disabled
 }
