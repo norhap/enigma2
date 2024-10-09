@@ -2150,6 +2150,15 @@ msgstr "Desactivar temporizador"
 msgid "Disabled"
 msgstr "Desactivado"
 
+msgid ""
+"Disabled use of FCC to use fallback tuner.\n"
+"Enigma2 needs to be restarted.\n"
+"Do you want to do it now?"
+msgstr ""
+"Se ha deshabilitado el uso de FCC para usar el tuner reserva.\n"
+"Es necesario reiniciar enigma2.\n"
+"¿Quieres hacerlo ahora?"
+
 msgid "Display 16:9 content as"
 msgstr "Mostrar contenido 16:9 como"
 

@@ -4,6 +4,7 @@ from Screens.Setup import Setup
 from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry
 from Components.ImportChannels import ImportChannels
 from Tools.Directories import isPluginInstalled
+from Screens.MessageBox import MessageBox
 
 
 class SetupFallbacktuner(Setup):
@@ -71,14 +72,6 @@ class SetupFallbacktuner(Setup):
 		self.list.append(getConfigListEntry(_("Import from remote receiver URL"),
 			config.usage.remote_fallback_import,
 			_("Import channels and/or EPG from remote receiver URL or IP.")))
-		if isPluginInstalled("FastChannelChange") and isPluginInstalled("IPToSAT"):
-			if config.usage.remote_fallback_enabled.value and not config.misc.firstrun.value and config.plugins.fccsetup.activate.value:
-				from Screens.Standby import TryQuitMainloop
-				config.plugins.fccsetup.activate.value = False
-				config.plugins.fccsetup.activate.save()
-				config.plugins.IPToSAT.enable.value = False
-				config.plugins.IPToSAT.enable.save()
-				self.session.open(TryQuitMainloop, 3)
 		if config.usage.remote_fallback_enabled.value:
 			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,
@@ -192,6 +185,9 @@ class SetupFallbacktuner(Setup):
 		self["config"].l.setList(self.list)
 
 	def keySave(self):
+		if isPluginInstalled("FastChannelChange"):  # OpenSPA [norhap] sync with FCC.
+			if config.usage.remote_fallback_enabled.value and config.plugins.fccsetup.activate.value:
+				self.session.openWithCallback(self.syncWithFCC, MessageBox, _("Disabled use of FCC to use fallback tuner.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
@@ -248,3 +244,13 @@ class SetupFallbacktuner(Setup):
 		if not self.remote_fallback_prev and config.usage.remote_fallback_import.value:
 			ImportChannels()
 		self.close(False)
+
+	def syncWithFCC(self, answer):  # sync with FCC.
+		from Screens.Standby import TryQuitMainloop  # noqa: E402
+		if answer:
+			config.plugins.fccsetup.activate.value = False
+			config.plugins.fccsetup.activate.save()
+			self.session.open(TryQuitMainloop, 3)
+		else:
+			config.usage.remote_fallback_enabled.value = False
+			config.usage.remote_fallback_enabled.save()

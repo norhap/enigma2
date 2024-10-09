@@ -454,6 +454,11 @@ class FCCSetup(Setup):
 		Setup.changedEntry(self)
 
 	def keySave(self):
+		if config.usage.remote_fallback_enabled.value and config.plugins.fccsetup.activate.value:
+			config.usage.remote_fallback_enabled.value = False
+			config.usage.remote_fallback_enabled.save()
+			from Screens.Standby import TryQuitMainloop  # noqa: E402
+			self.session.open(TryQuitMainloop, 3)
 		Setup.keySave(self)
 		FCCChanged()
 
