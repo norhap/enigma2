@@ -2034,6 +2034,9 @@ msgstr "Eliminar archivo"
 msgid "Delete image"
 msgstr "Eliminar imagen"
 
+msgid "Delete or stop recordings"
+msgstr "Eliminar o detener grabaciones"
+
 msgid "Delete playlist entry"
 msgstr "Eliminar la entrada de la lista de reproducción"
 
@@ -2285,6 +2288,9 @@ msgstr "¿Quieres continuar esta reproducción?"
 
 msgid "Do you want to select a different skin?"
 msgstr "¿Quieres seleccionar un skin diferente?"
+
+msgid "Do you want to stop this recording?"
+msgstr "¿Quieres detener esta grabación?"
 
 #, python-format
 msgid "Do you want to update your %s %s?"
@@ -7362,9 +7368,6 @@ msgstr "Detener modo movimiento"
 msgid "Stop PiP"
 msgstr "Detener PiP"
 
-msgid "Stop all current recordings"
-msgstr "Detener grabaciones actuales"
-
 msgid "Stop all streams"
 msgstr "Detener todos los streams"
 
@@ -7373,12 +7376,6 @@ msgstr "Detener y eliminar todas las grabaciones actuales"
 
 msgid "Stop and delete recording"
 msgstr "Detener y eliminar grabación"
-
-msgid "Stop and delete recording:"
-msgstr "Detener y eliminar grabación:"
-
-msgid "Stop and delete recordings:"
-msgstr "Detener y eliminar grabaciones:"
 
 msgid "Stop current event and disable coming events"
 msgstr "Detener el evento actual y deshabilitar los siguientes eventos"
@@ -7403,12 +7400,6 @@ msgstr "Detener la grabación"
 
 msgid "Stop recording and delete"
 msgstr "Detener grabación y eliminar"
-
-msgid "Stop recording:"
-msgstr "Detener grabación:"
-
-msgid "Stop recordings:"
-msgstr "Detener grabaciones:"
 
 msgid "Stop service on return to movie list"
 msgstr "Detener la reproducción al regresar a la lista de películas"
@@ -19269,6 +19260,12 @@ msgstr "Actualizando caché"
 
 msgid "Updating cache, please wait..."
 msgstr "Actualizando caché, por favor espere..."
+
+msgid "want to stop and delete this recording?"
+msgstr "¿Quieres detener y eliminar esta grabación?"
+
+msgid "want to stop and delete this recordings?"
+msgstr "¿Quieres detener y eliminar estas grabaciones?"
 
 msgid "Add Language"
 msgstr "Añadir Lenguaje"
