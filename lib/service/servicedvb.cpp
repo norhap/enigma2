@@ -112,7 +112,7 @@ int eStaticServiceDVBInformation::isPlayable(const eServiceReference &ref, const
 		int system;
 		((const eServiceReferenceDVB&)ref).getChannelID(chid);
 		((const eServiceReferenceDVB&)ignore).getChannelID(chid_ignore);
-		return res_mgr->canAllocateChannel(chid, chid_ignore, system);
+		return res_mgr->canAllocateChannel(chid, chid_ignore, eDVBChannelID(), system);
 	}
 	return 0;
 }
@@ -257,7 +257,7 @@ int eStaticServiceDVBBouquetInformation::isPlayable(const eServiceReference &ref
 			};
 			int system;
 			((const eServiceReferenceDVB&)*it).getChannelID(chid);
-			int tmp = res->canAllocateChannel(chid, chid_ignore, system, simulate);
+			int tmp = res->canAllocateChannel(chid, chid_ignore, eDVBChannelID(), system, simulate);
 			if (prio_order == 127) // ignore dvb-type priority, try all alternatives one-by-one
 			{
 				if (((tmp > 0) || (!it->path.empty())))
@@ -1568,10 +1568,12 @@ RESULT eDVBServicePlay::connectEvent(const sigc::slot<void(iPlayableService*,int
 
 RESULT eDVBServicePlay::pause(ePtr<iPauseableService> &ptr)
 {
+	eServiceReferenceDVB sRelayOrigSref;
+	bool isSRService = ((const eServiceReferenceDVB&)m_reference).getSROriginal(sRelayOrigSref);
 		/* note: we check for timeshift to be enabled,
-		   not neccessary active. if you pause when timeshift
-		   is not active, you should activate it when unpausing */
-	if ((!m_is_pvr) && (!m_timeshift_enabled))
+			not neccessary active. if you pause when timeshift
+			is not active, you should activate it when unpausing */
+	if ((!m_is_pvr) && (!m_timeshift_enabled) && (m_reference.path.empty() || isSRService))
 	{
 		ptr = nullptr;
 		return -1;
@@ -1676,7 +1678,9 @@ RESULT eDVBServicePlay::setFastForward_internal(int ratio, bool final_seek)
 
 RESULT eDVBServicePlay::seek(ePtr<iSeekableService> &ptr)
 {
-	if (m_is_pvr || m_timeshift_enabled)
+	eServiceReferenceDVB sRelayOrigSref;
+	bool isSRService = ((const eServiceReferenceDVB&)m_reference).getSROriginal(sRelayOrigSref);
+	if (m_is_pvr || m_timeshift_enabled || (!m_reference.path.empty() && !isSRService))
 	{
 		ptr = this;
 		return 0;
@@ -2135,14 +2139,20 @@ std::string eDVBServicePlay::getInfoString(int w)
 	switch (w)
 	{
 	case sProvider:
+	{
 		if (!m_dvb_service) return "";
-		if(m_dvb_service->m_provider_name.empty() && !m_reference.alternativeurl.empty())
-		{
-			ePtr<eDVBService> sRelayServiceOrigSref;
-			eDVBDB::getInstance()->getService(eServiceReferenceDVB(m_reference.alternativeurl), sRelayServiceOrigSref);
-			m_dvb_service->m_provider_name = std::string(sRelayServiceOrigSref->m_provider_name);
+		std::string prov = m_dvb_service->m_provider_name;
+		if (prov.empty()) {
+			eServiceReferenceDVB sRelayOrigSref;
+			bool res = ((const eServiceReferenceDVB&)m_reference).getSROriginal(sRelayOrigSref);
+			if (res) {
+				ePtr<eDVBService> sRelayServiceOrigSref;
+				eDVBDB::getInstance()->getService(sRelayOrigSref, sRelayServiceOrigSref);
+				return sRelayServiceOrigSref->m_provider_name;
+			}
 		}
-		return m_dvb_service->m_provider_name;
+		return prov;
+	}
 	case sServiceref:
 		return m_reference.toString();
 	case sHBBTVUrl:
@@ -2374,10 +2384,10 @@ int eDVBServicePlay::selectAudioStream(int i)
 				a.) we have an entry in the service db for the current service,
 				b.) we are not playing back something,
 				c.) we are not selecting the default entry. (we wouldn't change
-				    anything in the best case, or destroy the default setting in
-				    case the real default is not yet available.)
+					anything in the best case, or destroy the default setting in
+					case the real default is not yet available.)
 				d.) we have only one audiostream (overwrite the cache to make sure
-				    the cache contains the correct audio pid and type)
+					the cache contains the correct audio pid and type)
 			*/
 	if (m_dvb_service && (i != -1 || program.audioStreams.size() == 1
 		|| m_dvb_service->cacheAudioEmpty()))
@@ -2519,7 +2529,7 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 		return false;
 	service.getChannelID(chid); 						// this sets chid
 	eServiceReferenceDVB().getChannelID(chid_ignore);	// this sets chid_ignore
-	if(res_mgr->canAllocateChannel(chid, chid_ignore, system))	// this sets system
+	if(res_mgr->canAllocateChannel(chid, chid_ignore, eDVBChannelID(), system))	// this sets system
 		return false;
 
 	if (eConfigManager::getConfigBoolValue("config.usage.remote_fallback_alternative", false) && !(system == iDVBFrontend::feSatellite))
@@ -2805,13 +2815,13 @@ int eDVBServicePlay::isTimeshiftActive()
 
 int eDVBServicePlay::isTimeshiftEnabled()
 {
-        return m_timeshift_enabled;
+	return m_timeshift_enabled;
 }
 
 RESULT eDVBServicePlay::saveTimeshiftFile()
 {
 	if (!m_timeshift_enabled)
-                return -1;
+		return -1;
 
 	m_save_timeshift = 1;
 

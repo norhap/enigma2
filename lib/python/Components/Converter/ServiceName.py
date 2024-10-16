@@ -133,6 +133,11 @@ class ServiceName(Converter):
 	def dvb_t(self):
 		return "%s %s %s/%s" % (self.system(), self.ch_number(), self.freq(), self.bandwidth())
 
+	def getProvider(self, ref, info, tp_data=None):
+		if ref:
+			return info.getInfoString(ref, iServiceInformation.sProvider)
+		return info.getInfoString(iServiceInformation.sProvider)
+
 	def dvb_c(self):
 		return "%s %s %s %s %s" % (self.system(), self.freq(), self.s_rate(), self.fec(), self.mod())
 
