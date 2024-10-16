@@ -1571,8 +1571,7 @@ RESULT eDVBServicePlay::pause(ePtr<iPauseableService> &ptr)
 		/* note: we check for timeshift to be enabled,
 		   not neccessary active. if you pause when timeshift
 		   is not active, you should activate it when unpausing */
-
-	if (!m_is_pvr && !m_timeshift_enabled && (m_reference.path.empty() || !m_reference.alternativeurl.empty()))
+	if ((!m_is_pvr) && (!m_timeshift_enabled))
 	{
 		ptr = nullptr;
 		return -1;
@@ -1677,8 +1676,7 @@ RESULT eDVBServicePlay::setFastForward_internal(int ratio, bool final_seek)
 
 RESULT eDVBServicePlay::seek(ePtr<iSeekableService> &ptr)
 {
-
-	if (m_is_pvr || m_timeshift_enabled || (!m_reference.path.empty() && m_reference.alternativeurl.empty()))
+	if (m_is_pvr || m_timeshift_enabled)
 	{
 		ptr = this;
 		return 0;
