@@ -2153,15 +2153,6 @@ msgstr "Desactivar temporizador"
 msgid "Disabled"
 msgstr "Desactivado"
 
-msgid ""
-"Disabled use of FCC to use fallback tuner.\n"
-"Enigma2 needs to be restarted.\n"
-"Do you want to do it now?"
-msgstr ""
-"Se ha deshabilitado el uso de FCC para usar el tuner reserva.\n"
-"Es necesario reiniciar enigma2.\n"
-"¿Quieres hacerlo ahora?"
-
 msgid "Display 16:9 content as"
 msgstr "Mostrar contenido 16:9 como"
 
@@ -3064,6 +3055,15 @@ msgstr "Parte temporal rápida"
 
 msgid "FCC enabled"
 msgstr "FCC habilitado"
+
+msgid ""
+"FCC usage will be disabled to use the fallback tuner.\n"
+"Enigma2 needs to be restarted.\n"
+"Do you want to do it now?"
+msgstr ""
+"Se deshabilitará el uso de FCC para utilizar el tuner reserva.\n"
+"Es necesario reiniciar enigma2.\n"
+"¿Quieres hacerlo ahora?"
 
 msgid "FCC was disabled for Quad PiP"
 msgstr "FCC fue deshabilitado para Quad PiP"
@@ -7799,6 +7799,15 @@ msgstr "El estado de la imagen actual no se pudo verificar porque no se puede ll
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
+
+msgid ""
+"The use of the reserve tuner will be disabled to use FCC.\n"
+"Enigma2 needs to be restarted.\n"
+"Do you want to do it now?"
+msgstr ""
+"El uso del tuner reserva se deshabilitará para utilizar FCC.\n"
+"Es necesario reiniciar enigma2.\n"
+"¿Quieres hacerlo ahora?"
 
 msgid "The user interface of the receiver will now restart to select the selected skin"
 msgstr "La interfaz de usuario del receptor ahora se reiniciará para mostrar su skin seleccionado"

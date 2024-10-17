@@ -5,6 +5,7 @@ from Components.config import config, configfile, ConfigSelection, ConfigIP, Con
 from Components.ImportChannels import ImportChannels
 from Tools.Directories import isPluginInstalled
 from Screens.MessageBox import MessageBox
+from Screens.Standby import checkTimeshiftRunning, TryQuitMainloop
 
 
 class SetupFallbacktuner(Setup):
@@ -187,7 +188,8 @@ class SetupFallbacktuner(Setup):
 	def keySave(self):
 		if isPluginInstalled("FastChannelChange"):  # OpenSPA [norhap] sync with FCC.
 			if config.usage.remote_fallback_enabled.value and config.plugins.fccsetup.activate.value:
-				self.session.openWithCallback(self.syncWithFCC, MessageBox, _("Disabled use of FCC to use fallback tuner.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
+				self.syncWithFCC()
+				return
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
@@ -245,12 +247,20 @@ class SetupFallbacktuner(Setup):
 			ImportChannels()
 		self.close(False)
 
-	def syncWithFCC(self, answer):  # sync with FCC.
-		from Screens.Standby import TryQuitMainloop  # noqa: E402
-		if answer:
-			config.plugins.fccsetup.activate.value = False
-			config.plugins.fccsetup.activate.save()
-			self.session.open(TryQuitMainloop, 3)
+	def syncWithFCC(self):  # sync with FCC.
+		def disableFCC(answer=False):
+			if answer:
+				config.plugins.fccsetup.activate.value = False
+				config.plugins.fccsetup.activate.save()
+				config.usage.remote_fallback_enabled.value = True
+				config.usage.remote_fallback_enabled.save()
+				self.session.open(TryQuitMainloop, 3)
+			else:
+				config.usage.remote_fallback_enabled.value = False
+				Setup.keySave(self)
+
+		if not checkTimeshiftRunning() and not self.session.nav.getRecordings():
+			self.session.openWithCallback(disableFCC, MessageBox, _("FCC usage will be disabled to use the fallback tuner.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
 		else:
 			config.usage.remote_fallback_enabled.value = False
-			config.usage.remote_fallback_enabled.save()
+			Setup.keySave(self)

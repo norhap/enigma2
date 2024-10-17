@@ -8,6 +8,8 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 from Screens.Setup import Setup
 from Screens.InfoBarGenerics import streamrelay
+from Screens.MessageBox import MessageBox
+from Screens.Standby import checkTimeshiftRunning, TryQuitMainloop
 
 max_fcc = len(glob('/dev/fcc?'))
 default_fcc = (max_fcc) > 5 and 5 or max_fcc
@@ -455,12 +457,28 @@ class FCCSetup(Setup):
 
 	def keySave(self):
 		if config.usage.remote_fallback_enabled.value and config.plugins.fccsetup.activate.value:
-			config.usage.remote_fallback_enabled.value = False
-			config.usage.remote_fallback_enabled.save()
-			from Screens.Standby import TryQuitMainloop  # noqa: E402
-			self.session.open(TryQuitMainloop, 3)
+			self.syncWithFallbackTuner()
+			return
 		Setup.keySave(self)
 		FCCChanged()
+
+	def syncWithFallbackTuner(self):  # sync with Fallback tuner.
+		def disableFallbackTuner(answer=False):
+			if answer:
+				config.usage.remote_fallback_enabled.value = False
+				config.usage.remote_fallback_enabled.save()
+				config.plugins.fccsetup.activate.value = True
+				config.plugins.fccsetup.activate.save()
+				self.session.open(TryQuitMainloop, 3)
+			else:
+				config.plugins.fccsetup.activate.value = False
+				Setup.keySave(self)
+
+		if not checkTimeshiftRunning() and not self.session.nav.getRecordings():
+			self.session.openWithCallback(disableFallbackTuner, MessageBox, _("The use of the reserve tuner will be disabled to use FCC.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
+		else:
+			config.plugins.fccsetup.activate.value = False
+			Setup.keySave(self)
 
 
 def ToggleUpdate():
