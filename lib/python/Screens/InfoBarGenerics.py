@@ -2928,7 +2928,7 @@ class InfoBarInstantRecord:
 		event = info["event"]
 		if isPluginInstalled("IPToSAT"):
 			from Plugins.Extensions.IPToSAT.plugin import isRecordable
-			if not isRecordable():
+			if isRecordable() is False:
 				self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
 				return
 		if event is not None:
