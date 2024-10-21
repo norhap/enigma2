@@ -71,6 +71,8 @@ elif test "$MACHINE" == "vuultimo4k"; then
 	AC_DEFINE(HWULTIMO4K, 1,[vuultimo4k])
 elif test "$MACHINE" == "h7"; then
 	AC_DEFINE(HWH7, 1,[h7])
+elif test "$MACHINE" == "h17"; then
+	AC_DEFINE(HWH17, 1,[h17])	
 elif test "$MACHINE" == "pulse4k"; then
 	AC_DEFINE(HWPULSE4K, 1,[pulse4k])
 elif test "$MACHINE" == "pulse4kmini"; then
