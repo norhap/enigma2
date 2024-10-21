@@ -17380,6 +17380,9 @@ msgstr "Seleccione cardserver"
 msgid "Select a cardserver from the available list."
 msgstr "Seleccione un cardserver de la lista disponible."
 
+msgid "Space used:"
+msgstr "Espacio usado:"
+
 msgid "Reset the selected devices and save changes of your config when the GREEN button is pressed."
 msgstr "Reiniciará lo seleccionado y guarda su configuración si pulsa botón VERDE."
 
@@ -18154,10 +18157,10 @@ msgid "File can not displayed - File not found"
 msgstr "Archivo no se puede mostrar - Archivo no encontrado"
 
 msgid ""
-"Exist are debug or crash files.\n"
+"Exist are debug files.\n"
 "Space used:"
 msgstr ""
-"Existen archivos debug o crash.\n"
+"Existen archivos debug.\n"
 "Espacio usado:"
 
 msgid "Exist are no debug files or crash."

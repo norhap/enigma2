@@ -2,6 +2,7 @@
 from enigma import eTimer, eBackgroundFileEraser, eLabel, gFont, fontRenderClass
 from os import remove, walk, stat, rmdir, listdir
 from os.path import join, getsize, isdir, exists
+from glob import glob
 from time import time, sleep
 import Components.Task
 from Components.ActionMap import ActionMap
@@ -430,7 +431,10 @@ class LogInfo(VariableText, GUIComponent):
 					total_size = "%d MB" % (total_size >> 20)
 				else:
 					total_size = "%d GB" % (total_size >> 30)
-				self.setText(_("Exist are debug or crash files.\nSpace used:") + " " + total_size) if self.logs and get_size(path) > 0 else self.setText(_("Exist are no debug files or crash."))
+				if self.logs and get_size(path) > 0:
+					self.setText(_("Exist are debug files.\nSpace used:") + " " + total_size) if not glob(config.crash.debugPath.value + '*crash*') else self.setText(_("Space used:") + " " + total_size)
+				else:
+					self.setText(_("Exist are no debug files or crash."))
 			except:
 				# occurs when f_blocks is 0 or a similar error
 				self.setText("-?-")
