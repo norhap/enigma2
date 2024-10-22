@@ -342,7 +342,7 @@ msgstr "%(freespace)s %(percent)s espacio libre en disco"
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
-msgstr "%s no está en uso. Debería borrarlo?"
+msgstr "%s no está en uso. Debería eliminarlo?"
 
 #, python-format
 msgid "%s updated package available"
@@ -2026,7 +2026,7 @@ msgid "Delete entry"
 msgstr "Eliminar entrada"
 
 msgid "Delete failed!"
-msgstr "Borrado falló!"
+msgstr "¡Eliminación fallida!"
 
 msgid "Delete file"
 msgstr "Eliminar archivo"
@@ -2050,7 +2050,7 @@ msgid "Delete timer"
 msgstr "Eliminar temporizador"
 
 msgid "Deleted"
-msgstr "Borrado"
+msgstr "Eliminado"
 
 msgid "Deleted items"
 msgstr "Objetos eliminados"
@@ -2323,8 +2323,8 @@ msgstr "No cambiar canal y eliminar temporizador"
 #, python-format
 msgid "Done - Installed, upgraded or removed %d package (%s)"
 msgid_plural "Done - Installed, upgraded or removed %d packages (%s)"
-msgstr[0] "Hecho - Instalado, actualizado o borrado %d paquete (%s)"
-msgstr[1] "Hecho - Instalados, actualizados o borrados %d paquetes (%s)"
+msgstr[0] "Hecho - Instalado, actualizado o eliminado %d paquete (%s)"
+msgstr[1] "Hecho - Instalados, actualizados o eliminados %d paquetes (%s)"
 
 msgid "Download plugins"
 msgstr "Descargar plugins"
@@ -2949,7 +2949,7 @@ msgid "Select 'Yes' to remove all user customisations of skin data. Selecting th
 msgstr "Seleccione 'Sí' para eliminar todas las personalizaciones de usuario de los datos del skin. Al seleccionar esta opción, se eliminarán todas las personalizaciones de skin basadas en el usuario. Todos los aspectos afectados volverán a su configuración estándar. Esto también eliminará los logotipos y fondos de arranque personalizados."
 
 msgid "Select 'Yes' to remove all timer configuration data. Selecting this option will clear all timers, autotimers and power timers."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del temporizador. Al seleccionar esta opción, se borrarán todos los temporizadores, temporizadores automáticos y temporizadores de alimentación."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del temporizador. Al seleccionar esta opción, se eliminarán todos los temporizadores, temporizadores automáticos y temporizadores de alimentación."
 
 msgid "Select 'Yes' to remove all other files and directories not covered by the options above."
 msgstr "Seleccione 'Sí' para eliminar todos los demás archivos y directorios no cubiertos por las opciones anteriores."
@@ -5912,7 +5912,7 @@ msgid "Delete bookmark"
 msgstr "Eliminar marcador"
 
 msgid "Really delete this entry?"
-msgstr "¿Estas seguro de borrar esta entrada?"
+msgstr "¿Estas seguro de eliminar esta entrada?"
 
 msgid "  Red key : Show/Hide channel name"
 msgstr "  Tecla roja: Mostrar/Ocultar nombre de canal"
@@ -7851,7 +7851,7 @@ msgid "There is no signal to lock on !"
 msgstr "¡No hay señal para bloquear!"
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
-msgstr "Este medio de DVD RW ya está formateado - el formateo borrará todo el contenido del disco."
+msgstr "Este medio de DVD RW ya está formateado - el formateo eliminará todo el contenido del disco."
 
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
@@ -7969,7 +7969,7 @@ msgid "This plugin will be installed."
 msgstr "Este plugin será instalado."
 
 msgid "This plugin will be removed."
-msgstr "Este plugin será borrado."
+msgstr "Este plugin será eliminado."
 
 msgid ""
 "This function recovers your video signal in case of loss. The video has been changed to 720p.\n"
@@ -8985,7 +8985,7 @@ msgid "Yes, always"
 msgstr "Sí, siempre"
 
 msgid "Yes, and delete this movie"
-msgstr "Sí, y borra esta película"
+msgstr "Sí, y elimina esta película"
 
 msgid "Yes, delete this movie and return to movie list"
 msgstr "Sí, eliminar esta película y regresar a la lista de películas"
@@ -12412,7 +12412,7 @@ msgid ""
 "Backup file will be deleted!"
 msgstr ""
 "¡La copia de archivo está corrupto!\n"
-"Se borrará el archivo de respaldo!"
+"Se eliminará el archivo de respaldo!"
 
 msgid "Backup file is not found!"
 msgstr "La copia del archivo no se encuentra!"
@@ -12536,7 +12536,7 @@ msgid "Length of History"
 msgstr "Longitud de la historia de búsqueda"
 
 msgid "List of history is cleared !"
-msgstr "La lista de la historia está borrada!"
+msgstr "La lista de la historia está eliminada!"
 
 msgid "Lookup in TMBD"
 msgstr "Búsqueda en TMBD"
@@ -13788,7 +13788,7 @@ msgid "Run autoinstall"
 msgstr "Ejecutar auto instalación de complementos"
 
 msgid "Remove autoinstall list"
-msgstr "Borrar lista de autoinstalación"
+msgstr "Eliminar lista de autoinstalación"
 
 msgid "Running..."
 msgstr "Ejecutando..."
@@ -14568,16 +14568,16 @@ msgid "History zap: count %d"
 msgstr "Historial zap: %d contados"
 
 msgid "Del entry  Clear history        Preview"
-msgstr "Borrar entrada  Limpiar historia      Vista previa"
+msgstr "Eliminar entrada  Limpiar historia      Vista previa"
 
 msgid "Del entry  Clear history  List  Preview"
-msgstr "Borrar entrada  Limpiar Lista historia   Vista Previa"
+msgstr "Eliminar entrada  Limpiar Lista historia   Vista Previa"
 
 msgid "Delete selected  Clear history                 Preview"
-msgstr "Borrar selección      Limpiar historial         Vista previa"
+msgstr "Eliminar seleccionado      Limpiar historial         Vista previa"
 
 msgid "Delete selected  Clear history  All list       Preview"
-msgstr "Borrar selección   Limpiar historial completo   Vista previa"
+msgstr "Eliminar seleccionado   Limpiar historial completo   Vista previa"
 
 msgid "Main screen"
 msgstr "Pantalla principal"
@@ -15253,7 +15253,7 @@ msgid ""
 "\n"
 "Server must have authentication disabled for streams http in MENU \"customize\". Set password if it is set on server."
 msgstr ""
-"El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor reserva. Se borrarán todos los ajustes del sintonizador.\n"
+"El modo cliente configura este receptor para transmitir desde otro receptor. En este modo, no habrá sintonizadores locales disponibles y las listas de canales, EPG, etc., provendrán del receptor reserva. Se eliminarán todos los ajustes del sintonizador.\n"
 "\n"
 "Rutas para buscar EPG y/o Canales en el servidor:\n"
 "Internal Flash o /media/hdd/.\n"
@@ -16988,7 +16988,7 @@ msgid "Long YELLOW button"
 msgstr "Botón AMARILLO prolongado"
 
 msgid "Yes, show delete time"
-msgstr "Sí, mostrar hora de borrado"
+msgstr "Sí, mostrar hora de eliminación"
 
 msgid "Yes, show record time"
 msgstr "Sí, mostrar hora de grabación"
@@ -17000,10 +17000,10 @@ msgid "alpharev then newest"
 msgstr "alfabético-inverso fecha más reciente"
 
 msgid "delete time - show delete time (Trash ONLY)"
-msgstr "tiempo de borrado - muestra el tiempo de borrado (Solo Papelera)"
+msgstr "eliminar hora - muestra hora de eliminación (Solo Papelera)"
 
 msgid "delete time - show record time (Trash ONLY)"
-msgstr "tiempo de borrado: muestra el tiempo de grabación (Solo Papelera)"
+msgstr "eliminar hora - mostrar hora de grabación (SOLO Papelera)"
 
 msgid "longest"
 msgstr "película más larga"
@@ -19166,7 +19166,7 @@ msgid "Delete the current entry from the log"
 msgstr "Eliminar la entrada actual del registro"
 
 msgid "Clear the contents of the log"
-msgstr "Borrar el contenido del registro"
+msgstr "Eliminar el contenido del registro"
 
 msgid "Log Actions"
 msgstr "Acciones Registros"
