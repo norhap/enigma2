@@ -885,7 +885,7 @@ class SatfinderExtra(Satfinder):
 		default = r"\c00ffffff"  # colour default white
 		dash = "%s%s" % (default, "- ")
 		services = []
-		legend = "%s:  %s%s  %s%s  %s%s  %s%s\n" % (_("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))
+		legend = "%s:                             %s%s  %s%s  %s%s  %s%s\n" % (_("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))
 		for service in self.serviceList:
 			fta = "free_ca" in service and service["free_ca"] == 0
 			if service["service_type"] in radio:
