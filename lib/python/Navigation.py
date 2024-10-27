@@ -1,4 +1,4 @@
-from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, setPreferredTuner, eStreamServer, iRecordableServicePtr, eDVBLocalTimeHandler, eTimer
+from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, iServiceInformation, setPreferredTuner, eStreamServer, iRecordableServicePtr, eDVBLocalTimeHandler, eTimer
 from Components.ImportChannels import ImportChannels
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
@@ -272,6 +272,17 @@ class Navigation:
 
 	def getCurrentlyPlayingServiceOrGroup(self):
 		return self.currentlyPlayingServiceOrGroup
+
+	def getCurrentServiceRef(self):
+		curPlayService = self.getCurrentService()
+		info = curPlayService and curPlayService.info()
+		return info and info.getInfoString(iServiceInformation.sServiceref)
+
+	def isCurrentServiceIPTV(self):
+		ref = self.getCurrentServiceRef()
+		ref = ref and eServiceReference(ref)
+		path = ref and ref.getPath()
+		return path and not path.startswith("/") and ref.type in [0x1, 0x1001, 0x138A, 0x1389]
 
 	def recordService(self, ref, simulate=False, type=pNavigation.isUnknownRecording):
 		service = None
