@@ -4969,10 +4969,13 @@ msgid "Original"
 msgstr "Original"
 
 msgid "Other"
-msgstr "Otros"
+msgstr "Otro"
 
 msgid "Other Images"
 msgstr "Otras Imágenes"
+
+msgid "Others"
+msgstr "Otros"
 
 msgid "Output"
 msgstr "Salida"
@@ -17221,10 +17224,7 @@ msgstr "Receptor DVB-Cable: "
 msgid "Client is streaming from this box!"
 msgstr "Un cliente está en streaming desde este receptor!"
 
-msgid "FTA TV"
-msgstr "FTA"
-
-msgid "Encrypted TV"
+msgid "Encrypted"
 msgstr "Encriptado"
 
 msgid "Play last movie"

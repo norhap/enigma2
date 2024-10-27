@@ -878,25 +878,26 @@ class SatfinderExtra(Satfinder):
 			return
 		tv = [1, 17, 22, 25]
 		radio = [2, 10]
-		green = r"\c0088ff88"  # FTA tv
-		red = r"\c00ff8888"  # encrypted tv
-		yellow = r"\c00ffff00"  # data/interactive/catch-all/etc
-		blue = r"\c007799ff"  # radio
+		red = r"\c00ff8888"  # Encrypted
+		green = r"\c0088ff88"  # FTA
+		yellow = r"\c00ffff00"  # UHD
+		blue = r"\c007799ff"  # Radio
+		mix = r"\c0000fafa"  # Others
 		default = r"\c00ffffff"  # colour default white
-		dash = "%s%s" % (default, "- ")
+		dash = f"{default}- "
 		services = []
-		legend = "%s:                             %s%s  %s%s  %s%s  %s%s\n" % (_("Services"), green, _("FTA TV"), red, _("Encrypted TV"), blue, _("Radio"), yellow, _("Other"))
+		legend = f"{_('Services')}:                             {red}{_('Encrypted')}  {green}{_('FTA')}  {yellow}{_('UHD')}  {blue}{_('Radio')}  {mix}{_('Others')}\n"
 		for service in self.serviceList:
 			fta = "free_ca" in service and service["free_ca"] == 0
 			if service["service_type"] in radio:
 				colour = blue
-			elif service["service_type"] not in tv:  # data/interactive/etc
-				colour = yellow
+			elif service["service_type"] not in tv:
+				colour = yellow if "UHD" in service["service_name"] or "4K" in service["service_name"] else mix
 			elif fta:
 				colour = green
 			else:
 				colour = red
-			services.append("%s%s%s" % (dash, colour, service["service_name"]))  # if version_info.major >= 3 else services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
+			services.append(f"{dash}{colour}{service['service_name']}")  # if version_info.major >= 3 else services.append("%s%s%s" % (dash, colour, service["service_name"].decode("ISO-8859-1").encode("UTF-8")))
 
 		self.session.open(TextBox, "\n".join(services), legend)
 
