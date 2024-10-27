@@ -42,7 +42,7 @@ public:
 	int m_data_ok, m_packet_size, m_scrambled;
 	time_t m_time_create;
 	pts_t m_length;
-	std::string m_name, m_description, m_tags, m_service_data;
+	std::string m_name, m_description, m_tags, m_service_data, m_prov;
 	off_t m_filesize;
 };
 #endif
