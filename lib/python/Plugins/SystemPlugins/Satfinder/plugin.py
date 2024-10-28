@@ -7,6 +7,8 @@ from Components.Sources.FrontendStatus import FrontendStatus
 from Components.ActionMap import ActionMap
 from Components.NimManager import nimmanager, getConfigSatlist
 from Components.config import config, ConfigSelection, getConfigListEntry
+from Components.Sources.StaticText import StaticText
+from Components.Label import Label
 from Components.TuneTest import Tuner
 from Tools.Transponder import getChannelNumber, channel2frequency
 from Tools.BoundFunction import boundFunction
@@ -15,7 +17,6 @@ from Tools.Directories import isPluginInstalled
 if isPluginInstalled("AutoBouquetsMaker"):
 	dvbreader_available = True
 	from Plugins.SystemPlugins.AutoBouquetsMaker.scanner import dvbreader
-	from Components.Sources.StaticText import StaticText
 	import time
 	import datetime
 	import _thread
@@ -54,6 +55,7 @@ class Satfinder(ScanSetup):
 
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
+		self["header"] = Label(_("Manual Scan"))
 		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
 		self["actions"] = ActionMap(["SetupActions"],
@@ -908,6 +910,25 @@ def SatfinderCallback(close, answer):
 
 
 def SatfinderMain(session, close=None, **kwargs):
+	def restartUI(answer=False):
+		if answer:
+			from Screens.Standby import TryQuitMainloop
+			session.open(TryQuitMainloop, 3)
+
+	def InstallAutoBouquetsMaker(answer=False):
+		if answer:
+			from Components.Opkg import OpkgComponent
+			from time import sleep
+			autobouquetsmaker = {"package": "--force-overwrite enigma2-plugin-systemplugins-autobouquetsmaker"}
+			OpkgComponent().startCmd(OpkgComponent.CMD_INSTALL, autobouquetsmaker)
+			sleep(5)
+			if isPluginInstalled("AutoBouquetsMaker"):
+				session.openWithCallback(restartUI, MessageBox, _("AutoBoquetsMaker was installed successfully.\nIt is necessary to restart enigma2 to apply the changes.\nDo you want to do it now?"), MessageBox.TYPE_YESNO, simple=True)
+			else:
+				session.openWithCallback(boundFunction(SatfinderCallback, close), Satfinder)
+		else:
+			session.openWithCallback(boundFunction(SatfinderCallback, close), Satfinder)
+
 	nims = nimmanager.nim_slots
 	nimList = []
 	for n in nims:
@@ -922,15 +943,15 @@ def SatfinderMain(session, close=None, **kwargs):
 	if len(nimList) == 0:
 		session.open(MessageBox, _("No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."), MessageBox.TYPE_ERROR)
 	else:
-		if dvbreader_available:
+		if dvbreader_available or isPluginInstalled("AutoBouquetsMaker"):
 			session.openWithCallback(boundFunction(SatfinderCallback, close), SatfinderExtra)
 		else:
-			session.openWithCallback(boundFunction(SatfinderCallback, close), Satfinder)
+			session.openWithCallback(InstallAutoBouquetsMaker, MessageBox, _("To view and sort channels with YELLOW button:\nYou can install AutoBouquetsMaker.\nDo you want to install it now?"), type=MessageBox.TYPE_YESNO, simple=True)
 
 
 def SatfinderStart(menuid, **kwargs):
 	if menuid == "scan" and nimmanager.somethingConnected():
-		return [(_("Signal finder"), SatfinderMain, "satfinder", 35, True)]
+		return [(_("Signal Finder & Manual Scan"), SatfinderMain, "satfinder", 15)]
 	else:
 		return []
 

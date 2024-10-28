@@ -1073,6 +1073,9 @@ msgstr "Modo de video automático seleccionado"
 msgid "Auto video mode selected for the TV."
 msgstr "Modo de video automático seleccionado para su TV."
 
+msgid "AutoBoquetsMaker was installed successfully.\nIt is necessary to restart enigma2 to apply the changes.\nDo you want to do it now?"
+msgstr "AutoBoquetsMaker se instaló correctamente.\nEs necesario reiniciar enigma2 para aplicar los cambios.\n¿Quiere hacerlo ahora?"
+
 msgid "Automatic"
 msgstr "Automático"
 
@@ -5502,8 +5505,8 @@ msgstr "Pulse OK para editar la configuración."
 msgid "Press OK to get further details for %s"
 msgstr "Pulse OK para obtener más detalles sobre %s"
 
-msgid "Press OK to scan"
-msgstr "Pulse OK para escanear"
+msgid "Press OK to scan."
+msgstr "Pulse OK para escanear."
 
 msgid "Press OK to select a group of satellites to configure in one block."
 msgstr "Pulse OK para seleccionar un grupo de satélites para configurar en bloque."
@@ -7000,6 +7003,9 @@ msgstr "Señal OK, procediendo"
 
 msgid "Signal finder"
 msgstr "Buscador de señal"
+
+msgid "Signal Finder & Manual Scan"
+msgstr "Buscador de señal & Búsqueda Manual"
 
 msgid "Signal quality"
 msgstr "Calidad de señal"
@@ -14134,6 +14140,9 @@ msgstr "Este dispositivo ya está montado como HDD."
 
 msgid "This entry already exists in the fstab!"
 msgstr "Esta entrada ya existe en el fstab!"
+
+msgid "To view and sort channels with YELLOW button:\nYou can install AutoBouquetsMaker.\nDo you want to install it now?"
+msgstr "Para ver y clasificar canales con botón AMARILLO:\nPuedes instalar AutoBouquetsMaker.\n¿Quieres instalarlo ahora?"
 
 msgid "Type: "
 msgstr "Tipo: "

@@ -652,6 +652,9 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		if self.scan_nims.value == "":
 			self["introduction"].text = _("Nothing to scan! Setup your tuner and try again.")
 			return
+		else:
+			self["introduction"].text = _("Press OK to scan.")
+
 		self.createSetup()
 
 	def runAsync(self, finished_cb):
@@ -1798,7 +1801,7 @@ class ScanSimple(ConfigListScreen, Screen, CableTransponderSearchSupport, Terres
 				self.list.append(getConfigListEntry(_("Blindscan terrestrial (if possible)"), self.scan_terrestrial_binary_scan))
 
 		ConfigListScreen.__init__(self, self.list, on_change=self.newConfig, fullUI=True)
-		self["footer"] = Label(_("Press OK to scan"))
+		self["footer"] = Label(_("Press OK to scan."))
 
 	def newConfig(self):
 		self.changedEntry()  # force summary update immediately, not just on select/deselect
