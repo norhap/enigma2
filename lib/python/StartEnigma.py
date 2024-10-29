@@ -6,7 +6,7 @@ enigma.eTimer = eBaseImpl.eTimer
 enigma.eSocketNotifier = eBaseImpl.eSocketNotifier
 enigma.eConsoleAppContainer = eConsoleImpl.eConsoleAppContainer
 from Tools.Directories import InitDefaultPaths, resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN  # noqa: E402
-from Components.config import ConfigSubsection, ConfigInteger, ConfigText, ConfigYesNo, NoSave, config, configfile  # noqa: E402
+from Components.config import ConfigSubsection, ConfigInteger, ConfigSelection, ConfigText, ConfigYesNo, NoSave, config, configfile  # noqa: E402
 from Components.SystemInfo import BoxInfo, ARCHITECTURE, MODEL  # noqa: E402
 from Components.Timezones import InitTimeZones, languageCode  # noqa: E402
 from os.path import isdir, islink, join  # noqa: E402
@@ -41,13 +41,18 @@ def setEPGCachePath(configElement):
 	enigma.eEPGCache.getInstance().setCacheFile(configElement.value)
 
 
-def setLoadUnlinkedUserbouquets(configElement):
-	enigma.eDVBDB.getInstance().setLoadUnlinkedUserbouquets(configElement.value)
-
-
 enigma.eProfileWrite("Bouquets")
-config.misc.load_unlinked_userbouquets = ConfigYesNo(default=True)
+config.misc.load_unlinked_userbouquets = ConfigSelection(default="1", choices=[("0", _("Off")), ("1", _("Top")), ("2", _("Bottom"))])
+if config.misc.load_unlinked_userbouquets.value.lower() in ("true", "false"):
+	config.misc.load_unlinked_userbouquets.value = "1" if config.misc.load_unlinked_userbouquets.value.lower() == "true" else "0"
+
+
+def setLoadUnlinkedUserbouquets(configElement):
+	enigma.eDVBDB.getInstance().setLoadUnlinkedUserbouquets(int(configElement.value))
+
+
 config.misc.load_unlinked_userbouquets.addNotifier(setLoadUnlinkedUserbouquets)
+enigma.eDVBDB.getInstance().reloadBouquets()
 
 enigma.eProfileWrite("ClientMode")
 import Components.ClientMode  # noqa: E402
