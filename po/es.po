@@ -9403,6 +9403,9 @@ msgstr "Arrancando en slot %s %s"
 msgid "bottom"
 msgstr "abajo"
 
+msgid "Bottom"
+msgstr "Abajo"
+
 msgid "broadcasting/press"
 msgstr "difusión/prensa"
 
@@ -10344,6 +10347,9 @@ msgstr "alternar el tiempo, el capítulo, el audio, la información de los subt�
 
 msgid "top"
 msgstr "arriba"
+
+msgid "Top"
+msgstr "Arriba"
 
 msgid "tourism/travel"
 msgstr "turismo/viaje"

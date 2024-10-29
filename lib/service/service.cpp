@@ -70,6 +70,13 @@ eServiceReference::eServiceReference(const std::string &string)
 				path = string;
 				name = string;
 			}
+
+			std::string res_name = "";
+			std::string res_provider = "";
+			eServiceReference::parseNameAndProviderFromName(name, res_name, res_provider);
+			name = res_name;
+			prov = res_provider;
+
 			eDebug("[eServiceReference] URL=%s name=%s", path.c_str(), name.c_str());
 			return;
 		}
