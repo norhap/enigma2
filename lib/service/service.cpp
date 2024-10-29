@@ -155,10 +155,14 @@ std::string eServiceReference::toString() const
 		ret += ':';
 		ret += encode(name);
 	}
-	if (!prov.empty()) {
-		std::string provPart = "•" + prov;
-		if (ret.find(provPart) == std::string::npos)
-			ret += provPart;
+
+	std::string fullName = ret;
+	std::string provPart = "•";
+	if (!prov.empty())
+	{
+		provPart += prov;
+		if (fullName.find(provPart) == std::string::npos)
+			fullName += provPart;
 	}
 	return ret;
 }
