@@ -647,8 +647,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
-		self["introduction"] = Label("")
 		self["description"] = Label("")
+		self["introduction"] = StaticText("")
 		if self.scan_nims.value == "":
 			self["introduction"].text = _("Nothing to scan! Setup your tuner and try again.")
 			return
@@ -916,6 +916,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.scan_sat.t2mi_pid.value = eDVBFrontendParametersSatellite.T2MI_Default_Pid
 			self.createSetup()
 		self.changedEntry()  # force summary update immediately, not just on select/deselect
+		self["introduction"].text = _("Press OK to scan.")
 
 	def createConfig(self, frontendData):
 		defaultSat = {
@@ -1293,10 +1294,12 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		return True
 
 	def keyLeft(self):
+		self["introduction"].text = _("Please wait...")
 		ConfigListScreen.keyLeft(self)
 		self.newConfig()
 
 	def keyRight(self):
+		self["introduction"].text = _("Please wait...")
 		ConfigListScreen.keyRight(self)
 		self.newConfig()
 

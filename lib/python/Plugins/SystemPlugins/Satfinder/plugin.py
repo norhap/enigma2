@@ -713,6 +713,7 @@ class SatfinderExtra(Satfinder):
 								self["onidtext"].setText("ONID:")
 								self["tsid"].setText("%d" % (section["header"]["transport_stream_id"]))
 								self["onid"].setText("%d" % (section["header"]["original_network_id"]))
+								self["introduction"].text = _("Press OK to scan.")
 								print("[Satfinder][getCurrentTsidOnid] tsid %d, onid %d" % (section["header"]["transport_stream_id"], section["header"]["original_network_id"]))
 
 							if len(sdt_current_sections_read) == sdt_current_sections_count:
@@ -859,6 +860,7 @@ class SatfinderExtra(Satfinder):
 						return False
 					if frontendStatus["tuner_state"] != "LOCKED":
 						time.sleep(0.25)
+						self["introduction"].text = _("The data provided will not find services.")
 						continue
 
 			return True
