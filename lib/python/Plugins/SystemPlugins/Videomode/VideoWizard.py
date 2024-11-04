@@ -76,9 +76,9 @@ class VideoWizard(WizardLanguage, ShowRemoteControl):
 	def listRates(self, mode=None):  # Called by wizardvideo.xml.
 		def sortKey(name):
 			return {
-				"multi": 1,
+				"multi": 3,
 				"auto": 2
-			}.get(name[0], 3)
+			}.get(name[0], 1)
 
 		if mode is None:
 			mode = self.mode
