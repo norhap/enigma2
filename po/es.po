@@ -16871,6 +16871,9 @@ msgstr "Mostrar picon"
 msgid "Set a temporary sort method for this directory"
 msgstr "Establecer un método de clasificación temporal para este directorio"
 
+msgid "Set auto DiSEqC search order"
+msgstr "Establecer el orden de búsqueda automática de DiSEqC"
+
 msgid "Set the default sorting method."
 msgstr "Establece el método de clasificación predeterminado."
 
