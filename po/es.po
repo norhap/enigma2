@@ -236,10 +236,22 @@ msgid "%d fps"
 msgstr "%d fps"
 
 #, python-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] "%d día"
+msgstr[1] "%d días"
+
+#, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hora"
 msgstr[1] "%d horas"
+
+#, python-format
+msgid "%d week"
+msgid_plural "%d weeks"
+msgstr[0] "%d semana"
+msgstr[1] "%d semanas"
 
 #, python-format
 msgid "%d job is running in the background!"
@@ -12546,7 +12558,7 @@ msgid "New Search"
 msgstr "Nueva Busqueda"
 
 msgid "No history !"
-msgstr "No historia !"
+msgstr "¡Sin historia!"
 
 msgid "Open selected in IMDb"
 msgstr "Abrir selección en IMDb"
