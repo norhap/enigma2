@@ -667,9 +667,9 @@ class EPGList(GUIComponent):
 					return True
 				else:
 					new_time = self.time_base - self.time_epoch * 60
-					now = time()
+					now = time() - int(config.epg.histminutes.value) * 60
 					if new_time - now + self.time_epoch < 0:
-						new_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
+						new_time = now - now % int(config.misc.graph_mepg.roundTo.value)
 					self.fillMultiEPG(None, stime=new_time)
 					return True
 			elif dir == +2: #next page
@@ -887,7 +887,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.selectBouquet = selectBouquet
 		self.epg_bouquet = epg_bouquet
 		self.serviceref = None
-		now = time() - config.epg.histminutes.getValue() * 60
+		now = time()
 		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
 		self["key_red"] = Button("")
 		self["key_green"] = StaticText("")
@@ -1130,7 +1130,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 	def onDateTimeInputClosed(self, ret):
 		if len(ret) > 1:
 			if ret[0]:
-				now = time() - config.epg.histminutes.getValue() * 60
+				now = time()
 				self.ask_time = ret[1] if ret[1] >= now else now
 				self.ask_time = self.ask_time - self.ask_time % int(config.misc.graph_mepg.roundTo.getValue())
 				l = self["list"]
@@ -1142,7 +1142,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 
 	def setNewTime(self, type=''):
 		if type:
-			date = time() - config.epg.histminutes.getValue() * 60
+			date = time()
 			if type == "now_time":
 				self.time_mode = self.TIME_NOW
 				self["key_blue"].setText(_("Add autotimer\nPrime time (Press long)")) if isPluginInstalled("AutoTimer") else self["key_blue"].setText(_("AutoTimer is not installed\nPrime time (Press long)"))
@@ -1190,7 +1190,7 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		l.setEpoch(config.misc.graph_mepg.prev_time_period.value)
 		l.setOverjump_Empty(config.misc.graph_mepg.overjump.value)
 		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
-		now = time() - config.epg.histminutes.getValue() * 60
+		now = time()
 		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
 		l.fillMultiEPG(None, self.ask_time)
