@@ -665,7 +665,14 @@ class EPGList(GUIComponent):
 					self.offs -= 1
 					self.fillMultiEPG(None)  # refill
 					return True
-			elif dir == +2:  # next page
+				else:
+					new_time = self.time_base - self.time_epoch * 60
+					now = time()
+					if new_time - now + self.time_epoch < 0:
+						new_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
+					self.fillMultiEPG(None, stime=new_time)
+					return True
+			elif dir == +2: #next page
 				self.offs += 1
 				self.fillMultiEPG(None)  # refill
 				return True
