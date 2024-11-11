@@ -667,7 +667,7 @@ class EPGList(GUIComponent):
 					return True
 				else:
 					new_time = self.time_base - self.time_epoch * 60
-					now = time() - int(config.epg.histminutes.value) * 60
+					now = time() - int(config.epg.periodoftime.value) * 60
 					if new_time - now + self.time_epoch < 0:
 						new_time = now - now % int(config.misc.graph_mepg.roundTo.value)
 					self.fillMultiEPG(None, stime=new_time)

@@ -10679,8 +10679,8 @@ msgstr "Configure un retraso adicional para mejorar la sincronización de subtí
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Configure durante cuánto tiempo la barra de información permanecerá visible."
 
-msgid "Configure for how many minutes finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed."
-msgstr "Configure por cuántos minutos los eventos terminados deben permanecer visibles en la EPG. Es útil cuando necesita información sobre un evento que acaba de finalizar o se ha retrasado."
+msgid "Configure for how many time finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed."
+msgstr "Configure por cuánto tiempo los eventos terminados deben permanecer visibles en la EPG. Es útil cuando necesita información sobre un evento que acaba de finalizar o se ha retrasado."
 
 msgid "Configure how many channels are shown in the selection list."
 msgstr "Configure cuántos canales se muestran en la lista de canales."

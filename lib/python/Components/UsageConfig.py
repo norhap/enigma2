@@ -1208,14 +1208,14 @@ def InitUsageConfig():
 					return "%s" % (ngettext("%d day", "%d days", unit) % unit)
 				else:
 					return "%s" % (ngettext("%d week", "%d weeks", unit) % unit)
-		return _("0 minutes")
+		return _("disabled")
 	choices = [(0, _('None'))] + [(i, wdhm(i)) for i in [i * 15 for i in range(1, 4)] + [i * 60 for i in range(1, 9)] + [i * 120 for i in range(5, 12)] + [i * 24 * 60 for i in range(1, 8)]]
-	config.epg.histminutes = ConfigSelection(default=0, choices=choices)
+	config.epg.periodoftime = ConfigSelection(default=0, choices=choices)
 
 	def EpgHistorySecondsChanged(configElement):
 		from enigma import eEPGCache
-		eEPGCache.getInstance().setEpgHistorySeconds(config.epg.histminutes.getValue() * 60)
-	config.epg.histminutes.addNotifier(EpgHistorySecondsChanged)
+		eEPGCache.getInstance().setEpgHistorySeconds(config.epg.periodoftime.getValue() * 60)
+	config.epg.periodoftime.addNotifier(EpgHistorySecondsChanged)
 
 	choicelist = [("newline", _("new line")), ("2newlines", _("2 new lines")), ("space", _("space")), ("dot", " . "), ("dash", " - "), ("asterisk", " * "), ("nothing", _("nothing"))]
 	config.epg.fulldescription_separator = ConfigSelection(default="nothing", choices=choicelist)
