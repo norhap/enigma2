@@ -284,8 +284,8 @@ class FlashImage(Screen):
 			imagesList = getImagelist()
 			currentimageslot = getCurrentImage()
 			choices = []
-			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sda')} if not SystemInfo["HasKexecUSB"] else {k: v for k, v in SystemInfo["canMultiBoot"].items()}
-			numberSlots = len(slotdict) + 1 if not SystemInfo["hasKexec"] else len(slotdict)
+			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sd')} if not SystemInfo["HasKexecUSB"] else {k: v for k, v in SystemInfo["canMultiBoot"].items()}
+			numberSlots = len(slotdict) + 1 if not SystemInfo["hasKexec"] and len(slotdict) < 9 else len(slotdict)
 			for x in range(1, numberSlots):
 				choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image) with, backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("with backup"), (x, "with backup"))))
 			for x in range(1, numberSlots):
