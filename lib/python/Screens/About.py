@@ -1054,13 +1054,13 @@ class SystemMemoryInfo(Screen):
 			tstLine = out_lines[lidx].split()
 			if "MemTotal:" in tstLine:
 				MemTotal = out_lines[lidx].split()
-				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "." + MemTotal[1][3:5] + " GB" + "\n"
+				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "." + MemTotal[1][1:4] + " MB" + "\n"
 			if "MemFree:" in tstLine:
 				MemFree = out_lines[lidx].split()
-				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "." + MemFree[1][2:4] + " GB" + "\n"
+				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "." + MemFree[1][1:4] + " MB" + "\n"
 			if "Buffers:" in tstLine:
 				Buffers = out_lines[lidx].split()
-				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1][0:1] + " MB" + "\n"
+				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1][0:2] + " MB" + "\n" if Buffers[1][4:5] else _("Buffers:") + "\t" + "\t" + Buffers[1][0:1] + " MB" + "\n"
 			if "Cached:" in tstLine:
 				Cached = out_lines[lidx].split()
 				if Cached[1][4:5] and not Cached[1][5:6]:
