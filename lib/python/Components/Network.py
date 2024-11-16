@@ -630,14 +630,17 @@ class Network:
 					pass
 
 	def sysfsPath(self, iface):
-		return '/sys/class/net/' + iface
+		try:
+			return '/sys/class/net/' + iface
+		except:
+			pass
 
 	def isWirelessInterface(self, iface):
 		if iface in self.wlan_interfaces:
 			return True
-
-		if isdir(self.sysfsPath(iface) + '/wireless'):
-			return True
+		if self.sysfsPath(iface):
+			if isdir(self.sysfsPath(iface) + '/wireless'):
+				return True
 
 		# r871x_usb_drv on kernel 2.6.12 is not identifiable over /sys/class/net/'ifacename'/wireless so look also inside /proc/net/wireless
 		device = re.compile('[a-z]{2,}[0-9]*:')

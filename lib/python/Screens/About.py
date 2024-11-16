@@ -750,7 +750,6 @@ class SystemNetworkInfo(Screen):
 			"downRepeated": self.doNothing,
 			"upRepeated": self.doNothing
 		})
-		self.createScreen()
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
@@ -759,6 +758,7 @@ class SystemNetworkInfo(Screen):
 				pass
 			self.resetList()
 			self.onClose.append(self.cleanup)
+		self.createScreen()
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createScreen(self):
@@ -869,6 +869,8 @@ class SystemNetworkInfo(Screen):
 				# 	pass
 			self.console.ePopen(f'/sbin/ifconfig {self.iface}') if not fileHas("/etc/inetd.conf", "tcp6") else self.console.ePopen(f'/sbin/ifconfig {self.iface}', self.getIPv6Address)
 			self.console.ePopen(f'ethtool {self.iface}', self.SpeedFinished)
+		else:
+			self.exit()
 
 	def getIPv6Address(self, result, retval, extra_args):
 		if hasattr(self, "AboutText"):
@@ -989,7 +991,10 @@ class SystemNetworkInfo(Screen):
 				self["IF"].setText(_("LAN connection"))
 			else:
 				self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
-			iNetwork.getLinkState(self.iface, self.dataAvail)
+			try:
+				iNetwork.getLinkState(self.iface, self.dataAvail)
+			except:
+				pass
 			self["devicepic"].setPixmapNum(0)
 		self["devicepic"].show()
 
