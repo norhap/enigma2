@@ -805,7 +805,11 @@ class SystemNetworkInfo(Screen):
 					self.AboutText += _("MAC:") + "\t" + "\t" + wlan3['hwaddr'] + "\n"
 				self.iface = 'wlan3'
 			rx_bytes, tx_bytes = about.getIfTransferredData(self.iface)
-			if rx_bytes[4:5] and not rx_bytes[5:6]:
+			if rx_bytes[2:3] and not rx_bytes[3:4]:
+				self.AboutText += _("Bytes received:") + "\t" + rx_bytes + " Bytes" + "\n"
+			elif rx_bytes[3:4] and not rx_bytes[4:5]:
+				self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (KB)" + "\n"
+			elif rx_bytes[4:5] and not rx_bytes[5:6]:
 				self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:2] + " (KB)" + "\n"
 			elif rx_bytes[5:6] and not rx_bytes[6:7]:
 				self.AboutText += _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:3] + " (KB)" + "\n"
@@ -824,7 +828,11 @@ class SystemNetworkInfo(Screen):
 			else:
 				if rx_bytes[0:1] > str(0):
 					self.AboutText += "\n" + _("Bytes received:") + "\t" + rx_bytes + "\t" + rx_bytes[0:1] + " (TB)" + "\n"
-			if tx_bytes[4:5] and not tx_bytes[5:6]:
+			if tx_bytes[2:3] and not tx_bytes[3:4]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + " Bytes" + "\n"
+			elif tx_bytes[3:4] and not tx_bytes[4:5]:
+				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:1] + " (KB)" + "\n"
+			elif tx_bytes[4:5] and not tx_bytes[5:6]:
 				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:2] + " (KB)" + "\n"
 			elif tx_bytes[5:6] and not tx_bytes[6:7]:
 				self.AboutText += _("Bytes sent:") + "\t" + tx_bytes + "\t" + tx_bytes[0:3] + " (KB)" + "\n"
@@ -1062,15 +1070,17 @@ class SystemMemoryInfo(Screen):
 				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "." + MemTotal[1][1:4] + " MB" + "\n"
 			if "MemFree:" in tstLine:
 				MemFree = out_lines[lidx].split()
-				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "." + MemFree[1][1:4] + " MB" + "\n"
+				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:2] + " MB" + "\n"
 			if "Buffers:" in tstLine:
 				Buffers = out_lines[lidx].split()
 				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1][0:2] + " MB" + "\n" if Buffers[1][4:5] else _("Buffers:") + "\t" + "\t" + Buffers[1][0:1] + " MB" + "\n"
 			if "Cached:" in tstLine:
 				Cached = out_lines[lidx].split()
-				if Cached[1][4:5] and not Cached[1][5:6]:
+				if Cached[1][3:4] and not Cached[1][4:5]:
+					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:1] + " MB" + "\n"
+				elif Cached[1][4:5] and not Cached[1][5:6]:
 					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:2] + " MB" + "\n"
-				elif Cached[1][5:6]:
+				elif Cached[1][5:6] and not Cached[1][6:7]:
 					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:3] + " MB" + "\n"
 				else:
 					self.AboutText += _("Cached:") + "\t" + "\t" + Cached[1][0:1] + " GB" + "\n"
