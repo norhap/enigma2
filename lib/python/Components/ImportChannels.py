@@ -32,7 +32,7 @@ class ImportChannels():
 			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_url.value != "same" and config.usage.remote_fallback_import_url.value:
 				self.url = config.usage.remote_fallback_import_url.value.rsplit(":", 1)[0]
 			else:
-				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
+				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0] if "@" not in config.usage.remote_fallback.value and "root" not in config.usage.remote_fallback.value else config.usage.remote_fallback.value.split("root")[0] + config.usage.remote_fallback.value.split("@")[1].split(":")[0]
 			if config.usage.remote_fallback_openwebif_customize.value:
 				self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
 				if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
