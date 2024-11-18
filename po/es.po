@@ -3256,8 +3256,8 @@ msgstr "Gabón"
 msgid "Gambia"
 msgstr "Gambia"
 
-msgid "Gateway"
-msgstr "Puerta de enlace"
+msgid "Gateway:"
+msgstr "Puerta de enlace:"
 
 msgid "General AC3 delay"
 msgstr "Retardo general AC3"
@@ -3682,8 +3682,8 @@ msgstr "No quiero realizar ningún búsqueda de canal"
 msgid "IDLE"
 msgstr "IDLE"
 
-msgid "IP address"
-msgstr "Dirección IP"
+msgid "IP address:"
+msgstr "Dirección IP:"
 
 msgid ""
 "IP %s is not valid.\n"
@@ -4563,8 +4563,8 @@ msgstr "Nepal"
 msgid "Netherlands"
 msgstr "Holanda"
 
-msgid "Netmask"
-msgstr "Máscara de red"
+msgid "Netmask:"
+msgstr "Máscara de red:"
 
 msgid "Network"
 msgstr "Red"
@@ -5550,8 +5550,8 @@ msgstr "Menú de vista previa"
 msgid "Preview selected channel"
 msgstr "Vista previa del canal seleccionado"
 
-msgid "Primary DNS"
-msgstr "DNS Primario"
+msgid "Primary DNS:"
+msgstr "DNS Primario:"
 
 msgid "Prime time"
 msgstr "Hora máxima audiencia"
@@ -6374,8 +6374,8 @@ msgstr "Buscando oeste..."
 msgid "Second cable of motorized LNB"
 msgstr "Segundo cable de LNB motorizado"
 
-msgid "Secondary DNS"
-msgstr "DNS Secundario"
+msgid "Secondary DNS:"
+msgstr "DNS Secundario:"
 
 msgid "Seek"
 msgstr "Buscar"
@@ -16412,9 +16412,6 @@ msgstr ""
 
 msgid "Removing service"
 msgstr "Eliminando servicio"
-
-msgid "Netmask:"
-msgstr "Máscara de red:"
 
 msgid "Bytes received:"
 msgstr "Bytes recibidos:"

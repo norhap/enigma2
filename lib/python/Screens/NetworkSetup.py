@@ -714,16 +714,16 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 		self.onClose.append(self.cleanup)
 
-		self["DNS1text"] = StaticText(_("Primary DNS"))
-		self["DNS2text"] = StaticText(_("Secondary DNS"))
+		self["DNS1text"] = StaticText(_("Primary DNS:"))
+		self["DNS2text"] = StaticText(_("Secondary DNS:"))
 		self["DNS1"] = StaticText()
 		self["DNS2"] = StaticText()
 		self["introduction"] = StaticText(_("Current settings:"))
 		self["description"] = Label("")
 
-		self["IPtext"] = StaticText(_("IP address"))
-		self["Netmasktext"] = StaticText(_("Netmask"))
-		self["Gatewaytext"] = StaticText(_("Gateway"))
+		self["IPtext"] = StaticText(_("IP address:"))
+		self["Netmasktext"] = StaticText(_("Netmask:"))
+		self["Gatewaytext"] = StaticText(_("Gateway:"))
 
 		self["IP"] = StaticText()
 		self["Mask"] = StaticText()
@@ -759,10 +759,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self["IP"].setText(_("N/A"))
 		if iNetwork.getAdapterAttribute(self.iface, "gateway"):
 			if self.gatewayConfigEntry.getText() == "0.0.0.0":
-				self["Gatewaytext"].setText(_("Gateway"))
+				self["Gatewaytext"].setText(_("Gateway:"))
 				self["Gateway"].setText(_("N/A"))
 			else:
-				self["Gatewaytext"].setText(_("Gateway"))
+				self["Gatewaytext"].setText(_("Gateway:"))
 				self["Gateway"].setText(self.gatewayConfigEntry.getText())
 		else:
 			self["Gateway"].setText("")
@@ -850,7 +850,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				self.gatewayEntry = getConfigListEntry(_('Use a gateway'), self.hasGatewayConfigEntry)
 				self.list.append(self.gatewayEntry)
 				if self.hasGatewayConfigEntry.value:
-					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
+					self.list.append(getConfigListEntry(_('Gateway:'), self.gatewayConfigEntry))
 			havewol = False
 			if BoxInfo.getItem("WakeOnLAN") and MODEL not in ("et10000", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "gbipbox", "gbquad", "gbx1", "gbx2", "gbx3", "gbx3h"):
 				havewol = True
