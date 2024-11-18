@@ -393,7 +393,7 @@ class FlashImage(Screen):
 		self.show()
 		if reply:
 			geolocationData = geolocation.getGeolocationData(fields="status")
-			if not geolocationData.get("status", None):
+			if not geolocationData.get("status", None) and "://" in self.source:
 				self.session.openWithCallback(self.abort, MessageBox, _("Your internet connection is not working."), type=MessageBox.TYPE_ERROR, simple=True)
 				return
 			if "://" in self.source:
