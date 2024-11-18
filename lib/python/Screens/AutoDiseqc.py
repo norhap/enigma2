@@ -23,27 +23,6 @@ class AutoDiseqc(ConfigListScreen, Screen):
 	]
 
 	universal_central_sats_frequencies = [
-		# Hotbird 13.0E Rai 1
-		(
-			10992,
-			27500,
-			eDVBFrontendParametersSatellite.Polarisation_Vertical,
-			eDVBFrontendParametersSatellite.FEC_2_3,
-			eDVBFrontendParametersSatellite.Inversion_Off,
-			130,
-			eDVBFrontendParametersSatellite.System_DVB_S,
-			eDVBFrontendParametersSatellite.Modulation_Auto,
-			eDVBFrontendParametersSatellite.RollOff_auto,
-			eDVBFrontendParametersSatellite.Pilot_Unknown,
-			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
-			eDVBFrontendParametersSatellite.PLS_Gold,
-			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
-			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
-			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			12400,
-			318,
-			"Hotbird 13.0°E"
-		),
 		# Astra 19.2E ZDF
 		(
 			11954,
@@ -64,6 +43,27 @@ class AutoDiseqc(ConfigListScreen, Screen):
 			1079,
 			1,
 			"Astra 1 19.2°E"
+		),
+		# Hotbird 13.0E Rai 1
+		(
+			10992,
+			27500,
+			eDVBFrontendParametersSatellite.Polarisation_Vertical,
+			eDVBFrontendParametersSatellite.FEC_2_3,
+			eDVBFrontendParametersSatellite.Inversion_Off,
+			130,
+			eDVBFrontendParametersSatellite.System_DVB_S,
+			eDVBFrontendParametersSatellite.Modulation_Auto,
+			eDVBFrontendParametersSatellite.RollOff_auto,
+			eDVBFrontendParametersSatellite.Pilot_Unknown,
+			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
+			eDVBFrontendParametersSatellite.PLS_Gold,
+			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
+			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
+			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
+			12400,
+			318,
+			"Hotbird 13.0°E"
 		),
 		# Astra 23.5E Astra SES
 		(
