@@ -624,6 +624,7 @@ def InitUsageConfig():
 				("Channel", _("Channel name"))
 			])
 		else:
+			config.usage.blinking_in_standby_during_recording = ConfigYesNo(default=False)
 			config.usage.blinking_rec_symbol_during_recording = ConfigYesNo(default=True)
 
 	# show/hide time in display in standby
