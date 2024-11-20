@@ -750,6 +750,7 @@ class SystemNetworkInfo(Screen):
 			"downRepeated": self.doNothing,
 			"upRepeated": self.doNothing
 		})
+		self.createScreen()
 		if iNetwork.isWirelessInterface(self.iface):
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
@@ -758,7 +759,6 @@ class SystemNetworkInfo(Screen):
 				pass
 			self.resetList()
 			self.onClose.append(self.cleanup)
-		self.createScreen()
 		self.onLayoutFinish.append(self.updateStatusbar)
 
 	def createScreen(self):
