@@ -18,7 +18,6 @@ from Tools.Directories import fileContains
 class Network:
 	def __init__(self):
 		self.ifaces = {}
-		self.onlyWoWifaces = {}
 		self.configuredNetworkAdapters = []
 		self.NetworkState = 0
 		self.DnsState = 0
@@ -98,10 +97,12 @@ class Network:
 				with open(disable_ipv6, "w") as ipv6:
 					ipv6.write("1")
 			if BoxInfo.getItem("WakeOnLAN"):
-				if config.network.wol.value and not fileContains("/etc/crontab", "ifdown -v -f eth0"):
-					eConsoleAppContainer().execute("sed -i '$a@reboot root ifdown -v -f eth0; ifup -v eth0' /etc/crontab ; /etc/init.d/crond restart")  # up WOL from deep sleep
-				elif not config.network.wol.value and fileContains("/etc/crontab", "ifdown -v -f eth0"):
-					eConsoleAppContainer().execute("sed -i '/@reboot root ifdown -v -f eth0; ifup -v eth0/d' /etc/crontab")
+				if not self.isWirelessInterface(iface):
+					if not fileContains("/etc/crontab", f"ifdown -v -f {iface}"):
+						eConsoleAppContainer().execute(f"sed -i '$a@reboot root ifdown -v -f wlan0;ifdown -v -f {iface}; ifup -v {iface}' /etc/crontab ; /etc/init.d/crond restart")  # up WOL from deep sleep
+				elif self.isWirelessInterface(iface):
+					if fileContains("/etc/crontab", f"ifdown -v -f {iface}"):
+						eConsoleAppContainer().execute(f"sed -i '/@reboot root ifdown -v -f {iface};ifdown -v -f eth0; ifup -v eth0/d' /etc/crontab")
 		except:
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]
@@ -123,13 +124,6 @@ class Network:
 					dns.append((self.convertIP(s)))
 				if dns:
 					self.nameservers = dns
-			WoW = False
-			self.onlyWoWifaces[ifacename] = False
-			if ifacename in self.onlyWoWifaces:
-				WoW = self.onlyWoWifaces[ifacename]
-			if WoW:
-				self.onlyWoWifaces[ifacename] = True
-				fp.write("# Only WakeOnWiFi " + ifacename + "\n")
 			if BoxInfo.getItem("WakeOnLAN"):
 				if not config.network.wol.value or "wlan" in ifacename:
 					fp.write("auto " + ifacename + "\n")
@@ -392,9 +386,6 @@ class Network:
 		print("[Network] setting for adapter", iface, "attribute", attribute, " to value", value)
 		if iface in self.ifaces:
 			self.ifaces[iface][attribute] = value
-		if BoxInfo.getItem("WakeOnLAN") and iface not in self.wlan_interfaces:
-			if config.network.wol.value and self.ifaces[iface][attribute] is False:
-				self.ifaces[iface][attribute] = True  # if down netowork and not attribute then: attribute True for WOL
 
 	def removeAdapterAttribute(self, iface, attribute):
 		if iface in self.ifaces and attribute in self.ifaces[iface]:

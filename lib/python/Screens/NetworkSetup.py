@@ -782,18 +782,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.weplist = None
 		self.wsconfig = None
 		self.default = None
-		self.onlyWakeOnWiFi = False
-		self.WakeOnWiFiEntry = False
-		if iNetwork.canWakeOnWiFi(self.iface):
-			iface_file = "/etc/network/interfaces"
-			default_v = False
-			if exists(iface_file):
-				with open(iface_file) as f:
-					output = f.read()
-				search_str = f"# Only WakeOnWiFi {self.iface}"
-				if output.find(search_str) >= 0:
-					default_v = True
-			self.onlyWakeOnWiFi = NoSave(ConfigYesNo(default=default_v))
 		if iNetwork.isWirelessInterface(self.iface):
 			from Plugins.SystemPlugins.WirelessLan.Wlan import wpaSupplicant
 			self.ws = wpaSupplicant()
@@ -833,15 +821,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 
 	def createSetup(self):
-		if BoxInfo.getItem("WakeOnLAN"):
-			self.wolstartvalue = config.network.wol.value
 		self.list = []
 		self.InterfaceEntry = getConfigListEntry(_("Use interface"), self.activateInterfaceEntry)
 		self.list.append(self.InterfaceEntry)
-		if self.onlyWakeOnWiFi:
-			self.WakeOnWiFiEntry = getConfigListEntry(_("Use only for Wake on WLan (WoW)"), self.onlyWakeOnWiFi)
-			self.list.append(self.WakeOnWiFiEntry)
-		if self.activateInterfaceEntry.value or (self.onlyWakeOnWiFi and self.onlyWakeOnWiFi.value):
+		if self.activateInterfaceEntry.value:
 			self.dhcpEntry = getConfigListEntry(_("Use DHCP"), self.dhcpConfigEntry)
 			self.list.append(self.dhcpEntry)
 			if not self.dhcpConfigEntry.value:
@@ -856,7 +839,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				havewol = True
 			if MODEL in ("et10000", "vuultimo4k", "vuduo4kse") and self.iface == "eth0":
 				havewol = False
-			if havewol and self.onlyWakeOnWiFi is False and "eth" in self.iface:
+			if havewol and "eth" in self.iface:
 				self.list.append(getConfigListEntry(_("Enable Wake On LAN"),
 					config.network.wol, _("Enabled the receiver is able to wakeup on LAN. Command: \"ether-wake MAC\"")))
 			self.extended = None
@@ -891,9 +874,15 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.session.openWithCallback(self.DNSSettingsClosed, DNSSettings)
 
 	def newConfig(self):
-		if self["config"].getCurrent() == self.WakeOnWiFiEntry:
-			iNetwork.onlyWoWifaces[self.iface] = self.onlyWakeOnWiFi.value
-			open(BoxInfo.getItem("WakeOnLAN"), "w").write(BoxInfo.getItem("WakeOnLANType")[self.onlyWakeOnWiFi.value])
+		if self["config"].getCurrent() == self.InterfaceEntry:
+			self.createSetup()
+		if self["config"].getCurrent() == self.dhcpEntry:
+			self.createSetup()
+		if self["config"].getCurrent() == self.gatewayEntry:
+			self.createSetup()
+		if iNetwork.isWirelessInterface(self.iface):
+			if self["config"].getCurrent() == self.encryption:
+				self.createSetup()
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -907,7 +896,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def keySave(self):
 		self.hideInputHelp()
-		if self["config"].isChanged() or (BoxInfo.getItem("WakeOnLAN") and self.wolstartvalue != config.network.wol.value):
+		if self["config"].isChanged():
 			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext))
 		else:
 			if self.finished_cb:
@@ -1004,8 +993,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def keyCancelConfirm(self, result):
 		if not result:
 			return
-		if BoxInfo.getItem("WakeOnLAN"):
-			config.network.wol.setValue(self.wolstartvalue)
 		if not self.oldInterfaceState:
 			iNetwork.deactivateInterface(self.iface, self.keyCancelCB)
 		else:
@@ -1013,7 +1000,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def keyCancel(self):
 		self.hideInputHelp()
-		if self["config"].isChanged() or (BoxInfo.getItem("WakeOnLAN") and self.wolstartvalue != config.network.wol.value):
+		if self["config"].isChanged():
 			self.session.openWithCallback(self.keyCancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
 			self.close('cancel')

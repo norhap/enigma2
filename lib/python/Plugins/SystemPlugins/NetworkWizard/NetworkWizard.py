@@ -10,8 +10,7 @@ from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
 from Components.Network import iNetwork
-from Components.SystemInfo import BoxInfo
-from Tools.Directories import fileContains, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 
 class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
@@ -263,9 +262,6 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 
 	def checkNetworkCB(self, data):
 		if data:
-			if BoxInfo.getItem("WakeOnLAN"):
-				if config.network.wol.value and not fileContains("/etc/crontab", "ifdown -v -f eth0"):
-					eConsoleAppContainer().execute("sed -i '$a@reboot root ifdown -v -f eth0; ifup -v eth0' /etc/crontab")  # up WOL from deep sleep
 			if iNetwork.isWirelessInterface(self.selectedInterface):
 				if self.WlanPluginInstalled:
 					from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
