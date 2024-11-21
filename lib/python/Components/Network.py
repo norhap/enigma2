@@ -97,12 +97,20 @@ class Network:
 				with open(disable_ipv6, "w") as ipv6:
 					ipv6.write("1")
 			if BoxInfo.getItem("WakeOnLAN"):
+				eth = ""
+				wlan = ""
+				for ifacename in self.getInstalledAdapters():
+					if ifacename.startswith("wlan"):
+						wlan = ifacename
+					if ifacename.startswith("eth"):
+						eth = ifacename
 				if not self.isWirelessInterface(iface):
 					if not fileContains("/etc/crontab", f"ifdown -v -f {iface}"):
-						eConsoleAppContainer().execute(f"sed -i '$a@reboot root ifdown -v -f wlan0;ifdown -v -f {iface}; ifup -v {iface}' /etc/crontab ; /etc/init.d/crond restart")  # up WOL from deep sleep
+						eConsoleAppContainer().execute(f"sed -i '$a@reboot root ifdown -v -f {wlan};ifdown -v -f {iface}; ifup -v {iface}' /etc/crontab ; /etc/init.d/crond restart")
 				elif self.isWirelessInterface(iface):
+					config.network.wol.value = True
 					if fileContains("/etc/crontab", f"ifdown -v -f {iface}"):
-						eConsoleAppContainer().execute(f"sed -i '/@reboot root ifdown -v -f {iface};ifdown -v -f eth0; ifup -v eth0/d' /etc/crontab")
+						eConsoleAppContainer().execute(f"sed -i '/@reboot root ifdown -v -f {iface};ifdown -v -f {eth}; ifup -v {eth}/d' /etc/crontab")
 		except:
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]
