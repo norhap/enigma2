@@ -146,6 +146,12 @@
 		</widget>
 	</screen>
 
+<!-- SkinSelectorSummary -->
+	<screen name="SkinSelectorSummary" position="0,0" size="1,1">
+		<widget source="parent.Title" render="Label" position="0,0" size="1,1" />
+		<widget source="Name" render="Label" position="0,0" size="1,1" />
+	</screen>
+
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="132,64">
 		<widget source="global.CurrentTime" render="Label" position="0,0" size="120,64" font="Regular;48" horizontalAlignment="center" verticalAlignment="center">

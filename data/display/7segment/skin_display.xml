@@ -154,6 +154,12 @@ and the display skin will not be displayed
 		</widget>
 	</screen>
 
+<!-- SkinSelectorSummary -->
+	<screen name="SkinSelectorSummary" position="0,0" size="1,1">
+		<widget source="parent.Title" render="Label" position="0,0" size="1,1" />
+		<widget source="Name" render="Label" position="0,0" size="1,1" />
+	</screen>
+
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="1,1">
 		<widget source="session.CurrentService" render="Label" position="0,0" size="1,1">
