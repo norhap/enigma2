@@ -77,8 +77,11 @@ class SetupFallbacktuner(Setup):
 			self.list.append(getConfigListEntry(_("Enable import timer from fallback tuner"),
 				config.usage.remote_fallback_external_timer,
 				_("When enabled the timer from the fallback tuner is imported.")))
+			self.list.append(getConfigListEntry(_("Enable manual URL typing"),
+				config.usage.remote_fallback_write_url_manual,
+				_("Enabled you can manually enter the data for the booking receiver URL.")))
 			self.list.append(getConfigListEntry(_("Fallback remote receiver"),
-				self.avahiselect,
+				self.avahiselect if not config.usage.remote_fallback_write_url_manual.value else config.usage.remote_fallback,
 				_("Destination of fallback remote receiver.")))
 			if self.avahiselect.value == "ip":
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
@@ -91,21 +94,22 @@ class SetupFallbacktuner(Setup):
 				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
 					config.usage.remote_fallback,
 					_("URL of fallback remote receiver.")))
-		if config.usage.remote_fallback_import.value:
-			self.list.append(getConfigListEntry(_("Import remote receiver URL"),
-				self.avahiselect_seperate,
-				_("URL of fallback remote receiver.")))
-			if self.avahiselect_seperate.value == "ip":
-				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
-					self.ip_seperate,
-					_("IP of fallback remote receiver.")))
-				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
-					self.port_seperate,
-					_("Port of fallback remote receiver.")))
-			if self.avahiselect_seperate.value == "url":
-				self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
-					config.usage.remote_fallback_import_url,
+		if not config.usage.remote_fallback_write_url_manual.value:
+			if config.usage.remote_fallback_import.value:
+				self.list.append(getConfigListEntry(_("Import remote receiver URL"),
+					self.avahiselect_seperate,
 					_("URL of fallback remote receiver.")))
+				if self.avahiselect_seperate.value == "ip":
+					self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver IP"),
+						self.ip_seperate,
+						_("IP of fallback remote receiver.")))
+					self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver Port"),
+						self.port_seperate,
+						_("Port of fallback remote receiver.")))
+				if self.avahiselect_seperate.value == "url":
+					self.list.append(getConfigListEntry("  %s" % _("Fallback remote receiver URL"),
+						config.usage.remote_fallback_import_url,
+						_("URL of fallback remote receiver.")))
 		if config.usage.remote_fallback_import.value:
 			self.list.append(getConfigListEntry(_("Also import at reboot/restart enigma2"),
 				config.usage.remote_fallback_import_restart,
@@ -186,13 +190,13 @@ class SetupFallbacktuner(Setup):
 		self["config"].l.setList(self.list)
 
 	def keySave(self):
-		if isPluginInstalled("FastChannelChange"):  # OpenSPA [norhap] sync with FCC.
+		if isPluginInstalled("FastChannelChange"):  # [norhap] sync with FCC.
 			if config.usage.remote_fallback_enabled.value and config.plugins.fccsetup.activate.value:
 				self.syncWithFCC()
 				return
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
-		elif self.avahiselect.value != "url":
+		elif self.avahiselect.value != "url" and not config.usage.remote_fallback_write_url_manual.value:
 			config.usage.remote_fallback.value = self.avahiselect.value
 		if self.avahiselect_seperate.value == "ip":
 			config.usage.remote_fallback_import_url.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip_seperate.value) + (self.port_seperate.value,))
@@ -234,6 +238,7 @@ class SetupFallbacktuner(Setup):
 		config.usage.remote_fallback_nok.save()
 		config.usage.remote_fallback.save()
 		config.usage.remote_fallback_external_timer.save()
+		config.usage.remote_fallback_write_url_manual.save()
 		config.usage.remote_fallback_openwebif_customize.save()
 		config.usage.remote_fallback_openwebif_userid.save()
 		config.usage.remote_fallback_openwebif_password.save()
