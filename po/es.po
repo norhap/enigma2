@@ -404,6 +404,9 @@ msgstr "-ERROR DE SERVICIO:%d\n"
 msgid "/s"
 msgstr "/s"
 
+msgid "1. Tune to an imported channel with at least EPG EIT.\n2. Restart enigma2.\n3. Now try to download EPG cache from the reserve receiver."
+msgstr "1. Sintonice un canal importado con al menos EPG EIT.\n2. Reinicie Enigma2.\n3. Ahora intente descargar la caché EPG del receptor reserva."
+
 msgid "10 MB/s"
 msgstr "10 MB/s"
 
@@ -643,6 +646,12 @@ msgstr "Por encima de 200 Mbps"
 
 msgid "Access point:"
 msgstr "Punto de acceso:"
+
+msgid "Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings.\n"
+msgstr "Acceso no disponible:\nVerifique que la autenticación HTTP no esté activa en OpenWebIF en el receptor reserva o verifique los datos ingresados ​​en la configuración.\n"
+
+msgid "Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings."
+msgstr "Acceso no disponible:\nVerifique que la autenticación HTTP no esté activa en OpenWebIF en el receptor reserva o verifique los datos ingresados ​​en la configuración."
 
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Activar HbbTV (Botón Rojo)"
@@ -1410,6 +1419,9 @@ msgstr "Cambiar grabación (repetición y ajustes de demora)"
 msgid "Change step size"
 msgstr "Cambiar tamaño de los pasos"
 
+msgid "Change the cache directory to Internal Flash in EPG Settings on both receivers."
+msgstr "Cambie el directorio de caché a Internal Flash en Ajustes EPG en ambos receptores."
+
 msgid "Change Timer"
 msgstr "Cambiar Temporizador"
 
@@ -1466,6 +1478,9 @@ msgstr "Lista importada con bouquet vacío <n/a> el archivo %s no existe"
 
 msgid "%s imported from fallback tuner"
 msgstr "%s importado del sintonizador reserva"
+
+msgid "Channels imported successfully from"
+msgstr "Canales importados con éxito desde"
 
 msgid "Channels only"
 msgstr "Solo Canales"
@@ -2397,6 +2412,9 @@ msgstr ""
 " Tecla PVR: Introducir nombre del canal\n"
 " Tecla Salir: Finalizar edición del canal"
 
+msgid "EPG imported successfully from"
+msgstr "EPG importada con éxito desde"
+
 msgid "EPG only"
 msgstr "Solo EPG"
 
@@ -3003,6 +3021,9 @@ msgstr "Confirmación Eliminar"
 msgid "Failed"
 msgstr "Fallido"
 
+msgid "Failed to download"
+msgstr "Error al descargar"
+
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr "Fallo al escribir /tmp/positionersetup.log: "
 
@@ -3196,6 +3217,9 @@ msgstr "Viernes"
 
 msgid "From:"
 msgstr "Desde:"
+
+msgid "From :"
+msgstr "Desde :"
 
 msgid ""
 "From \"Last Scanned\" a new bouquet was created with this name:\n"
@@ -3791,6 +3815,9 @@ msgstr "En progreso"
 
 msgid "Inactivity Sleeptimer"
 msgstr "Temporizador de inactividad"
+
+msgid "Incorrect password: Change the password in the OpenWebIF setting in the reserve tuner settings.\nYou must enter the password of the reserve receiver."
+msgstr "Contraseña incorrecta: Cambie la contraseña en el ajuste OpenWebIF en la configuración del tuner reserva.\nDebe ingresar la contraseña del receptor reserva."
 
 msgid "Incorrect type service for PiP!"
 msgstr "Canal incorrecto para PiP!"
@@ -18466,6 +18493,9 @@ msgstr ""
 "%s\n"
 "Falló al descargar %s/%s desde %s"
 
+msgid "Read failled"
+msgstr "Lectura fallida"
+
 msgid ""
 "%s\n"
 "Read failled %s/%s from %s"
@@ -19388,23 +19418,8 @@ msgstr "Mover el elemento actual una línea hacia abajo"
 msgid "Reset list order to default?"
 msgstr "Restablecer el orden por defecto de la lista?"
 
-msgid "Server not available"
-msgstr "Servidor no disponible"
-
-msgid "EPG and Channels not received receiver %s is turned off"
-msgstr "EPG y Canales no recibidos el receptor %s está apagado"
-
-msgid "Channels imported successfully from %s"
-msgstr "Canales importados con éxito desde %s"
-
-msgid "EPG imported successfully from %s"
-msgstr "EPG importada con éxito desde %s"
-
 msgid "Manually import from fallback tuner"
 msgstr "Importar manual desde el tuner reserva"
-
-msgid "Set new value to \"Fallback remote receiver\" change URL %s"
-msgstr "Establezca nuevo valor en \"Receptor reserva para respaldo\" cambie URL %s"
 
 msgid "FTP connection failure"
 msgstr "Falló la conexión FTP"
