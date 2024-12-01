@@ -2544,17 +2544,11 @@ msgstr "Activa este ajuste si su instalación de antena necesita alimentación e
 msgid "Enable timer conflict detection"
 msgstr "Activa temporizador de detección de conflictos"
 
-msgid "Enable manual URL typing"
-msgstr "Habilitar la escritura manual de la URL"
-
 msgid "Enable wakeup timer"
 msgstr "Activa temporizador despertador"
 
 msgid "Enabled"
 msgstr "Activado"
-
-msgid "Enabled you can manually enter the data for the booking receiver URL."
-msgstr "Habilitado puede ingresar manualmente los datos de la URL del receptor reserva."
 
 msgid "Encrypted: "
 msgstr "Encriptado: "
