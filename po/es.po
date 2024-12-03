@@ -2495,6 +2495,12 @@ msgstr "Slot vacío"
 msgid "Enable"
 msgstr "Activar"
 
+msgid "Enable auto fastscan"
+msgstr "Habilitar escaneo rápido automático"
+
+msgid "Enable auto fastscan for %s"
+msgstr "Habilitar escaneo rápido automático para %s"
+
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para antena activa"
 
@@ -6671,8 +6677,8 @@ msgstr "Seleccione su país. Si no está disponible seleccione \"Todo\"."
 msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
 msgstr "Seleccione su proveedor y región. Si no está presente en esta lista, deberá seleccionar uno de los otros ‘tipos de búsqueda de canal’."
 
-msgid "Select your provider, and press OK to start the scan"
-msgstr "Seleccione su proveedor y pulse OK para comenzar la búsqueda"
+msgid "Select your provider using the LEFT - RIGHT keys and press BLUE to start scanning."
+msgstr "Seleccione su proveedor utilizando las teclas IZQUIERDA - DERECHA y pulse AZUL para comenzar a escanear."
 
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Seleccione su región. Si no está disponible, cambie “País” a “todos” y seleccione una de las alternativas predeterminadas."
@@ -7349,6 +7355,9 @@ msgstr "Comenzar grabación?"
 
 msgid "Restart Sleeptimer"
 msgstr "Reiniciar Temporizador"
+
+msgid "Start scan"
+msgstr "Iniciar escaneo"
 
 msgid "Start Sleeptimer"
 msgstr "Iniciar Temporizador de descanso"
@@ -18214,9 +18223,6 @@ msgstr "Esto establece el número máximo de archivos logs que se conservarán. 
 
 msgid "This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted."
 msgstr "Esto establece el prefijo para cada línea en el log de depuración. El 'Tiempo de arranque' es el número de segundos desde que arrancó su %s %s por última vez."
-
-msgid "Enable auto fastscan"
-msgstr "Habilitar escaneo rápido automático"
 
 msgid "Debug logging *"
 msgstr "Registros de depuración *"
