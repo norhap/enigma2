@@ -842,11 +842,38 @@ msgstr "Asigne un número al LNB físico que está configurando. Podrá volver a
 msgid "Allocate unused memory index"
 msgstr "Asignar índice de memoria no utilizada"
 
+msgid "Allow unsupported modes"
+msgstr "Permitir modos no compatibles"
+
+msgid "Allows the TV remote to be used to control the receiver."
+msgstr "Permite usar el mando a distancia del televisor para controlar el receptor."
+
+msgid "Allows you to assign the selected function to this button."
+msgstr "Le permite asignar la función seleccionada a este botón."
+
+msgid "Allows you to enable/disable displaying icons on the frontpanel."
+msgstr "Le permite habilitar/deshabilitar la visualización de iconos en display."
+
+msgid "Allows you to enable the twisted log. It contains very detailed information of everything the twisted does."
+msgstr "Le permite habilitar log twisted en Carpeta tmp. Contiene información muy detallada de todo lo que hace el sistema."
+
 msgid "Allows you to hide the extensions of known file types."
 msgstr "Le permite ocultar las extensiones de archivos."
 
-msgid "Allow unsupported modes"
-msgstr "Permitir modos no compatibles"
+msgid "Allows you to set a schedule to import the EPG and channels list."
+msgstr "Le permite establecer un horario para importar la EPG y la lista de canales."
+
+msgid "Allows you to show images."
+msgstr "Le permite mostrar imágenes."
+
+msgid "Allows you to show/hide 'Logs Manager' in extensions (blue button)."
+msgstr "Le permite mostrar/ocultar \"Administrador Logs\" en extensiones (botón azul)."
+
+msgid "Allows your %s %s to read the stored EPG data regularly."
+msgstr "Permite a su %s %s leer en el almacenado el EPG periódicamente."
+
+msgid "Allows your %s %s to store the EPG data regularly."
+msgstr "Permite a su %s %s almacenar los datos en el EPG periódicamente."
 
 msgid "Also import at reboot/restart enigma2"
 msgstr "También importar al reboot o reiniciar enigma2"
@@ -1285,6 +1312,54 @@ msgstr "Burundi"
 
 msgid "Bus: "
 msgstr "Bus: "
+
+msgid "By reverse date, then by reverse name"
+msgstr "Por fecha inversa, luego por nombre inverso"
+
+msgid "By date, then by name"
+msgstr "Por fecha, luego por nombre"
+
+msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
+msgstr "Por defecto, SNR se mostrará en dB (cuando el sintonizador lo admita). Esta configuración obliga a que SNR se muestre como un porcentaje."
+
+msgid "By description, then by name"
+msgstr "Por descripción, luego por nombre"
+
+msgid "By duration, then by name"
+msgstr "Por duración, luego por nombre"
+
+msgid "By enabling this events will not be matched if they don't occur on certain dates."
+msgstr "Al habilitar estos eventos, no se combinarán si no ocurren en ciertas fechas."
+
+msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "Al habilitar esto, se le notificará sobre temporizadores similares agregados durante el sondeo automático. No hay inteligencia involucrada, por lo que puede molestarlo sobre el mismo conflicto una y otra vez."
+
+msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
+msgstr "Al habilitar esto, se le notificará acerca de los conflictos de temporizador encontrados durante el sondeo automático. No hay inteligencia involucrada, por lo que puede molestarlo sobre el mismo conflicto una y otra vez."
+
+msgid "By enabling this you will be notified about timer(s) added during automated polling. Just not in standby mode."
+msgstr "Al habilitar esto, se le notificará sobre el temporizador agregado durante el sondeo automático. Simplemente no en modo de espera."
+
+msgid "By file size, then by name"
+msgstr "Por tamaño de archivo, luego por nombre"
+
+msgid "By name, then by date"
+msgstr "Por nombre, luego por fecha"
+
+msgid "By name, then by reverse date"
+msgstr "Por nombre, luego por fecha inversa"
+
+msgid "By reverse duration, then by name"
+msgstr "Por duración inversa, luego por nombre"
+
+msgid "By reverse file size, then by name"
+msgstr "Por tamaño de archivo inverso, luego por nombre"
+
+msgid "By reverse name, then by date"
+msgstr "Por nombre inverso, luego por fecha"
+
+msgid "By reverse name, then by reverse date"
+msgstr "Por nombre inverso, luego por fecha inversa"
 
 msgid "Bypass HDMI EDID checking"
 msgstr "Omitir la verificación HDMI EDID"
@@ -3475,11 +3550,14 @@ msgstr "Ajustes avanzados"
 msgid "Enable the advanced HDMI-CEC setting options."
 msgstr "Habilite las opciones de ajustes avanzados HDMI-CEC."
 
+msgid "Even if TV has another input active"
+msgstr "Incluso si la TV tiene otra entrada activa"
+
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Si se establece en 'Sí', se enviarán los mismos comandos al televisor para los eventos en modo espera profundo y los eventos de modo reposo regulares."
 
-msgid "Even if TV has another input active"
-msgstr "Incluso si la TV tiene otra entrada activa"
+msgid "Input scroll position"
+msgstr "Posición entrada desplazamiento"
 
 msgid "You can skip this function and turn off the TV when you wake the receiver from standby and immediately switch back to standby."
 msgstr "Puede omitir esta función y apagar el televisor cuando active el receptor del modo reposo y vuelva inmediatamente al modo reposo."
@@ -10682,9 +10760,6 @@ msgstr "Comportamiento cuando se inicia una película"
 msgid "Behavior when a movie is stopped"
 msgstr "Comportamiento cuando pulsa STOP en una película"
 
-msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
-msgstr "Por defecto, SNR se mostrará en dB (cuando el sintonizador lo admita). Esta configuración obliga a que SNR se muestre como un porcentaje."
-
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Se puede usar para diferentes fps entre subtítulos externos y video."
 
@@ -12848,18 +12923,6 @@ msgstr "Comienza \"después del evento\" espacio de tiempo"
 
 msgid "Begin of timespan"
 msgstr "Comienza el tiempo"
-
-msgid "By enabling this events will not be matched if they don't occur on certain dates."
-msgstr "Al habilitar estos eventos, no se combinarán si no ocurren en ciertas fechas."
-
-msgid "By enabling this you will be notified about similar timers added during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
-msgstr "Al habilitar esto, se le notificará sobre temporizadores similares agregados durante el sondeo automático. No hay inteligencia involucrada, por lo que puede molestarlo sobre el mismo conflicto una y otra vez."
-
-msgid "By enabling this you will be notified about timer conflicts found during automated polling. There is no intelligence involved, so it might bother you about the same conflict over and over."
-msgstr "Al habilitar esto, se le notificará acerca de los conflictos de temporizador encontrados durante el sondeo automático. No hay inteligencia involucrada, por lo que puede molestarlo sobre el mismo conflicto una y otra vez."
-
-msgid "By enabling this you will be notified about timer(s) added during automated polling. Just not in standby mode."
-msgstr "Al habilitar esto, se le notificará sobre el temporizador agregado durante el sondeo automático. Simplemente no en modo de espera."
 
 msgid "Change default recording offset?"
 msgstr "¿Cambiar la compensación de grabación predeterminada?"
@@ -15284,9 +15347,6 @@ msgstr "No hay subcanales activos disponibles."
 msgid "A background update check is in progress, please wait a few minutes and try again."
 msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos e intente nuevamente."
 
-msgid "Allows you to set a schedule to import the EPG and channels list."
-msgstr "Le permite establecer un horario para importar la EPG y la lista de canales."
-
 msgid ""
 "You want to delete all files?\n"
 "\n"
@@ -15490,9 +15550,6 @@ msgstr "Si el texto es demasiado largo para mostrarse en la pantalla del display
 msgid "Show Display Icons"
 msgstr "Mostrar iconos en Display"
 
-msgid "Allows you to enable/disable displaying icons on the frontpanel."
-msgstr "Le permite habilitar/deshabilitar la visualización de iconos en display."
-
 msgid "Scrolling speed (software renderer)"
 msgstr "Velocidad desplazamiento (software renderer)"
 
@@ -15689,17 +15746,8 @@ msgstr "Modo Android"
 msgid "Really reboot into android mode?"
 msgstr "¿Realmente reiniciar en modo Android?"
 
-msgid "Input scroll position"
-msgstr "Posición entrada desplazamiento"
-
-msgid "When the input cursor reaches this point (percentage of the width, from either side) scroll the text to the cursor."
-msgstr "Cuando el cursor de entrada alcanza este punto (porcentaje del ancho, desde cualquier lado), desplace el texto hacia el cursor."
-
-msgid "Allows you to enable the twisted log. It contains very detailed information of everything the twisted does."
-msgstr "Le permite habilitar log twisted en Carpeta tmp. Contiene información muy detallada de todo lo que hace el sistema."
-
-msgid "Show the Plugin Browser screen"
-msgstr "Mostrar la pantalla del navegador de plugins"
+msgid "Show the Plugin Browser screen ***"
+msgstr "Mostrar la pantalla del navegador de plugins ***"
 
 msgid "Show two lines per entry"
 msgstr "Mostrar dos líneas por entrada"
@@ -16641,12 +16689,6 @@ msgstr "Guardar-Cargar-Eliminar"
 msgid "Delete EPG Cache"
 msgstr "Eliminar EPG"
 
-msgid "Allows your %s %s to read the stored EPG data regularly."
-msgstr "Permite a su %s %s leer en el almacenado el EPG periódicamente."
-
-msgid "Allows your %s %s to store the EPG data regularly."
-msgstr "Permite a su %s %s almacenar los datos en el EPG periódicamente."
-
 msgid "Choose the location where the EPG data will be stored when your %s %s is shut down. The location must be available at boot time."
 msgstr "Elegir la ubicación donde se guardarán los datos EPG en su %s %s cuando se apaga. La ubicación deberá estar disponible durante el reinicio."
 
@@ -16781,9 +16823,6 @@ msgstr "(Actualmente está utilizando un método de clasificación temporal)"
 msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'.  It hides the year for recordings made this year.\t It hides the day of the week for recordings made in previous years."
 msgstr "La visualización adaptable de la fecha permite que las fechas recientes se muestren como 'Hoy' o 'Ayer'. Oculta el año para las grabaciones realizadas este año. Oculta el día de la semana para las grabaciones realizadas en años anteriores."
 
-msgid "Allows you to assign the selected function to this button."
-msgstr "Le permite asignar la función seleccionada a este botón."
-
 msgid "Ask user (with default as 'no')"
 msgstr "Preguntar al usuario (por defecto 'no')"
 
@@ -16816,9 +16855,6 @@ msgstr "Botón F3"
 
 msgid "Show image items"
 msgstr "Mostrar elementos de imagen"
-
-msgid "Allows you to show images."
-msgstr "Le permite mostrar imágenes."
 
 msgid "Cannot delete file"
 msgstr "No se puede eliminar el archivo"
@@ -16982,44 +17018,11 @@ msgstr "Usar papelera en lista de peliculas"
 msgid "Recordings by date, other media by name"
 msgstr "Grabaciones por fecha, otros medios por nombre"
 
-msgid "By reverse date, then by reverse name"
-msgstr "Por fecha inversa, luego por nombre inverso"
-
-msgid "By date, then by name"
-msgstr "Por fecha, luego por nombre"
-
-msgid "By name, then by date"
-msgstr "Por nombre, luego por fecha"
-
 msgid "Flat by name, then by date"
 msgstr "Plano por nombre, luego por fecha"
 
-msgid "By name, then by reverse date"
-msgstr "Por nombre, luego por fecha inversa"
-
-msgid "By reverse name, then by date"
-msgstr "Por nombre inverso, luego por fecha"
-
-msgid "By reverse name, then by reverse date"
-msgstr "Por nombre inverso, luego por fecha inversa"
-
 msgid "Flat by reverse name, then by reverse date"
 msgstr "Plana por nombre inverso, luego por fecha inversa"
-
-msgid "By duration, then by name"
-msgstr "Por duración, luego por nombre"
-
-msgid "By reverse duration, then by name"
-msgstr "Por duración inversa, luego por nombre"
-
-msgid "By file size, then by name"
-msgstr "Por tamaño de archivo, luego por nombre"
-
-msgid "By reverse file size, then by name"
-msgstr "Por tamaño de archivo inverso, luego por nombre"
-
-msgid "By description, then by name"
-msgstr "Por descripción, luego por nombre"
 
 msgid "When enabled, network trash cans are probed for cleaning."
 msgstr "Cuando está habilitado, papelera de la red son sondeados para su limpieza."
@@ -17035,6 +17038,9 @@ msgstr "Cuando se establece, cada directorio mostrará el estado anterior utiliz
 
 msgid "When set, sort changes via the sort key will be permanent. When unset, sort changes will be temporary, just for this view of a directory."
 msgstr "Cuando se establece, los cambios de clasificación a través de la tecla de clasificación serán permanentes. Cuando no se configura, los cambios de clasificación serán temporales, solo para esta vista de un directorio."
+
+msgid "When the input cursor reaches this point (percentage of the width, from either side) scroll the text to the cursor."
+msgstr "Cuando el cursor de entrada alcanza este punto (porcentaje del ancho, desde cualquier lado), desplace el texto hacia el cursor."
 
 msgid "When unset, sort changes will be temporary - just for this view of a directory."
 msgstr "Cuando se cambia la configuración, los cambios de clasificación serán temporales, solo para esta vista de un directorio."
@@ -18053,9 +18059,6 @@ msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor 
 msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
 msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
 
-msgid "Allows the TV remote to be used to control the receiver."
-msgstr "Permite usar el mando a distancia del televisor para controlar el receptor."
-
 msgid "When enabled, receiver will automatically return to the set mode when the TV is turned off or the power button on the receiver's remote is pressed. If the set mode is 'Deep Standby' and the TV is active on another input, if we press the power button on the receiver remote, receiver will remain on standby."
 msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo establecido cuando se apague el televisor o se pulse el botón de encendido en el mando del receptor. Si el modo configurado es \"Reposo Profundo\" y el televisor está activo en otra entrada, si pulsamos el botón de encendido en el mando del receptor, el receptor permanecerá en reposo."
 
@@ -18148,9 +18151,6 @@ msgstr "Cuando se alcance el espacio máximo para todos los logs, se eliminarán
 
 msgid "Show Logs Manager in extensions list"
 msgstr "Mostrar Logs Manager en la lista de extensiones"
-
-msgid "Allows you to show/hide 'Logs Manager' in extensions (blue button)."
-msgstr "Le permite mostrar/ocultar \"Administrador Logs\" en extensiones (botón azul)."
 
 msgid "LogManager"
 msgstr "Administrador de logs"
