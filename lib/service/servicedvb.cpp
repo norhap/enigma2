@@ -2280,6 +2280,7 @@ RESULT eDVBServicePlay::getTrackInfo(struct iAudioTrackInfo &info, unsigned int 
 		{ eDVBServicePMTHandler::audioStream::atAC3,   "AC3",    },
 		{ eDVBServicePMTHandler::audioStream::atDDP,   "AC3+",   },
 		{ eDVBServicePMTHandler::audioStream::atAAC,   "AAC",    },
+		{ eDVBServicePMTHandler::audioStream::atDRA,   "DRA",    },
 		{ eDVBServicePMTHandler::audioStream::atAACHE, "AAC-HE", },
 		{ eDVBServicePMTHandler::audioStream::atDTS,   "DTS",    },
 		{ eDVBServicePMTHandler::audioStream::atDTSHD, "DTS-HD", },

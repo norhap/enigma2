@@ -538,11 +538,11 @@ PyObject *eDVBServicePMTHandler::getHbbTVApplications()
 
 int eDVBServicePMTHandler::getProgramInfo(program &program)
 {
+//	ePtr<eTable<ProgramMapSection> > ptr;
 	struct audioMap {
 		int streamType;
 		eDVBService::cacheID cacheTag;
 	};
-	ePtr<eTable<ProgramMapSection> > ptr;
 	int cached_apid[eDVBService::cacheMax];
 	int cached_vpid = -1;
 	int cached_tpid = -1;
@@ -575,19 +575,20 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 	{
 		unsigned int i;
 		int first_non_mpeg = -1;
-		int first_mpeg = -1;
 		int audio_cached = -1;
 		int autoaudio[eDVBService::cacheMax];
 		int autoaudio_level = 4;
 		const static audioMap audioMapMain[] = {
 			{ audioStream::atMPEG,  eDVBService::cMPEGAPID,  },
 			{ audioStream::atAC3,   eDVBService::cAC3PID,    },
+			{ audioStream::atAC4,    eDVBService::cAC4PID,   },
 			{ audioStream::atDDP,   eDVBService::cDDPPID,    },
 			{ audioStream::atAACHE,	eDVBService::cAACHEAPID, },
-			{ audioStream::atAAC,   eDVBService::cAACAPID,    },
+			{ audioStream::atAAC,   eDVBService::cAACAPID,   },
 			{ audioStream::atDTS,   eDVBService::cDTSPID,    },
 			{ audioStream::atLPCM,  eDVBService::cLPCMPID,   },
 			{ audioStream::atDTSHD, eDVBService::cDTSHDPID,  },
+			{ audioStream::atDRA,    eDVBService::cDRAAPID,  },
 		};
 		static const int nAudioMapMain = sizeof audioMapMain / sizeof audioMapMain[0];
 
@@ -681,10 +682,6 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 					}
 				}
 			}
-			if (autoaudio_languages.empty() && program.audioStreams[i].type == audioStream::atMPEG && first_mpeg == -1)
-			{
-				first_mpeg = i;
-			}
 			if (!as->language_code.empty())
 			{
 				int x = 1;
@@ -692,8 +689,15 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 					it = autoaudio_languages.begin();
 					x <= autoaudio_level && it != autoaudio_languages.end(); x++, it++)
 				{
-					if ((*it).find(as->language_code) != std::string::npos)
+					bool languageFound = false;
+					size_t pos = 0;
+					char delimiter = '/';
+					std::string audioStreamLanguages = program.audioStreams[i].language_code;
+					audioStreamLanguages += delimiter;
+					while ((pos = audioStreamLanguages.find(delimiter)) != std::string::npos)
 					{
+						if ((*it).find(as->language_code) != std::string::npos)
+						{
 						for (int m = 0; m < nAudioMapMain; m++)
 						{
 							eDVBService::cacheID cTag = audioMapMain[m].cacheTag;
@@ -704,8 +708,13 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 							}
 						}
 						autoaudio_level = x;
+						languageFound = true;
 						break;
+						}
+						audioStreamLanguages.erase(0, pos + 1);
 					}
+					if (languageFound)
+						break;
 				}
 			}
 		}
@@ -772,8 +781,6 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 				program.defaultAudioStream = defaultAudio;
 			else if (first_non_mpeg != -1 && (defaultac3 || defaultddp))
 				program.defaultAudioStream = first_non_mpeg;
-			else if (first_non_mpeg != -1 && first_mpeg != -1 && first_non_mpeg < first_mpeg && (!defaultac3 || !defaultddp))
-				program.defaultAudioStream = first_mpeg;
 		}
 
 		bool allow_hearingimpaired = eSubtitleSettings::subtitle_hearingimpaired;
@@ -821,12 +828,14 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 		// Same entries, but different order from audioMapMain
 		const static audioMap audioMapList[] = {
 			{ audioStream::atAC3,   eDVBService::cAC3PID,    },
+			{ audioStream::atAC4,   eDVBService::cAC4PID,    },
 			{ audioStream::atDDP,   eDVBService::cDDPPID,    },
-			{ audioStream::atAAC,   eDVBService::cAACAPID,    },
+			{ audioStream::atAAC,   eDVBService::cAACAPID,   },
 			{ audioStream::atDTS,   eDVBService::cDTSPID,    },
 			{ audioStream::atLPCM,  eDVBService::cLPCMPID,   },
 			{ audioStream::atDTSHD, eDVBService::cDTSHDPID,  },
 			{ audioStream::atAACHE, eDVBService::cAACHEAPID, },
+			{ audioStream::atDRA,   eDVBService::cDRAAPID,   },
 			{ audioStream::atMPEG,  eDVBService::cMPEGAPID,  },
 		};
 		static const int nAudioMapList = sizeof audioMapList / sizeof audioMapList[0];
@@ -922,9 +931,17 @@ int eDVBServicePMTHandler::getProgramInfo(program &program)
 
 int eDVBServicePMTHandler::compareAudioSubtitleCode(const std::string &subtitleTrack, const std::string &audioTrack)
 {
-	for (const auto& _audioTrack : split(audioTrack, "/"))
+	std::size_t pos = audioTrack.find("/");
+	if ( pos != std::string::npos)
 	{
-		if (strcasecmp(subtitleTrack.c_str(), _audioTrack.c_str()) == 0)
+		std::string firstAudio = audioTrack.substr(0, pos);
+		std::string secondAudio = audioTrack.substr(pos + 1);
+		if (strcasecmp(subtitleTrack, firstAudio) == 0 || strcasecmp(subtitleTrack, secondAudio) == 0)
+			return 0;
+	}
+	else
+	{
+		if (strcasecmp(subtitleTrack, audioTrack) == 0)
 			return 0;
 	}
 	return -1;

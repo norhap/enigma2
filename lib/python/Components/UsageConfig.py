@@ -1718,8 +1718,9 @@ def InitUsageConfig():
 		# AI end
 
 	config.autolanguage = ConfigSubsection()
-	audio_language_choices = [
+	languageChoiceList = [
 		("", _("None")),
+		("und", _("Undetermined")),
 		(originalAudioTracks, _("Original")),
 		("ara", _("Arabic")),
 		("eus baq", _("Basque")),
@@ -1729,8 +1730,8 @@ def InitUsageConfig():
 		("twn hkn", _("Chinese - Traditional")),
 		("ces cze", _("Czech")),
 		("dan", _("Danish")),
-		("dut ndl nld", _("Dutch")),
-		("eng", _("English")),
+		("dut ndl nld Dutch", _("Dutch")),
+		("eng Englisch", _("English")),
 		("est", _("Estonian")),
 		("fin", _("Finnish")),
 		("fra fre", _("French")),
@@ -1744,12 +1745,12 @@ def InitUsageConfig():
 		("lit", _("Lithuanian")),
 		("ltz", _("Luxembourgish")),
 		("nor", _("Norwegian")),
-		("fas per fa pes", _("Persian")),
 		("pol", _("Polish")),
 		("por dub Dub DUB ud1 LEG", _("Portuguese")),
+		("fas per fa pes", _("Persian")),
 		("ron rum", _("Romanian")),
 		("rus", _("Russian")),
-		("srp", _("Serbian")),
+		("srp scc", _("Serbian")),
 		("slk slo", _("Slovak")),
 		("slv", _("Slovenian")),
 		("spa", _("Spanish")),
@@ -1760,7 +1761,8 @@ def InitUsageConfig():
 		(visuallyImpairedCommentary, _("Audio description for the visually impaired"))
 	]
 
-	epg_language_choices = audio_language_choices[:1] + audio_language_choices[2:]
+	epgChoiceList = languageChoiceList[:1] + languageChoiceList[2:]
+	subtitleChoiceList = languageChoiceList[:1] + languageChoiceList[2:]
 
 	def setEpgLanguage(configElement):
 		eServiceEvent.setEPGLanguage(configElement.value)
@@ -1769,10 +1771,10 @@ def InitUsageConfig():
 		eServiceEvent.setEPGLanguageAlternative(configElement.value)
 
 	def epglanguage(configElement):
-		config.autolanguage.audio_epglanguage.setChoices([x for x in epg_language_choices if x[0] and x[0] != config.autolanguage.audio_epglanguage_alternative.value or not x[0] and not config.autolanguage.audio_epglanguage_alternative.value])
-		config.autolanguage.audio_epglanguage_alternative.setChoices([x for x in epg_language_choices if x[0] and x[0] != config.autolanguage.audio_epglanguage.value or not x[0]])
-	config.autolanguage.audio_epglanguage = ConfigSelection(default="", choices=epg_language_choices)
-	config.autolanguage.audio_epglanguage_alternative = ConfigSelection(default="", choices=epg_language_choices)
+		config.autolanguage.audio_epglanguage.setChoices([x for x in epgChoiceList if x[0] and x[0] != config.autolanguage.audio_epglanguage_alternative.value or not x[0] and not config.autolanguage.audio_epglanguage_alternative.value])
+		config.autolanguage.audio_epglanguage_alternative.setChoices([x for x in epgChoiceList if x[0] and x[0] != config.autolanguage.audio_epglanguage.value or not x[0]])
+	config.autolanguage.audio_epglanguage = ConfigSelection(default="", choices=epgChoiceList)
+	config.autolanguage.audio_epglanguage_alternative = ConfigSelection(default="", choices=epgChoiceList)
 	config.autolanguage.audio_epglanguage.addNotifier(setEpgLanguage)
 	config.autolanguage.audio_epglanguage.addNotifier(epglanguage, initial_call=False)
 	config.autolanguage.audio_epglanguage_alternative.addNotifier(setEpgLanguageAlternative)
@@ -1782,16 +1784,16 @@ def InitUsageConfig():
 		return [eval("config.autolanguage.audio_autoselect%x.value" % x) for x in range]
 
 	def autolanguage(configElement):
-		config.autolanguage.audio_autoselect1.setChoices([x for x in audio_language_choices if x[0] and x[0] not in getselectedlanguages((2, 3, 4)) or not x[0] and not config.autolanguage.audio_autoselect2.value])
-		config.autolanguage.audio_autoselect2.setChoices([x for x in audio_language_choices if x[0] and x[0] not in getselectedlanguages((1, 3, 4)) or not x[0] and not config.autolanguage.audio_autoselect3.value])
-		config.autolanguage.audio_autoselect3.setChoices([x for x in audio_language_choices if x[0] and x[0] not in getselectedlanguages((1, 2, 4)) or not x[0] and not config.autolanguage.audio_autoselect4.value])
-		config.autolanguage.audio_autoselect4.setChoices([x for x in audio_language_choices if x[0] and x[0] not in getselectedlanguages((1, 2, 3)) or not x[0]])
+		config.autolanguage.audio_autoselect1.setChoices([x for x in languageChoiceList if x[0] and x[0] not in getselectedlanguages((2, 3, 4)) or not x[0] and not config.autolanguage.audio_autoselect2.value])
+		config.autolanguage.audio_autoselect2.setChoices([x for x in languageChoiceList if x[0] and x[0] not in getselectedlanguages((1, 3, 4)) or not x[0] and not config.autolanguage.audio_autoselect3.value])
+		config.autolanguage.audio_autoselect3.setChoices([x for x in languageChoiceList if x[0] and x[0] not in getselectedlanguages((1, 2, 4)) or not x[0] and not config.autolanguage.audio_autoselect4.value])
+		config.autolanguage.audio_autoselect4.setChoices([x for x in languageChoiceList if x[0] and x[0] not in getselectedlanguages((1, 2, 3)) or not x[0]])
 		eSettings.setAudioLanguages(config.autolanguage.audio_autoselect1.value, config.autolanguage.audio_autoselect2.value, config.autolanguage.audio_autoselect3.value, config.autolanguage.audio_autoselect4.value)
 
-	config.autolanguage.audio_autoselect1 = ConfigSelection(default="", choices=audio_language_choices)
-	config.autolanguage.audio_autoselect2 = ConfigSelection(default="", choices=audio_language_choices)
-	config.autolanguage.audio_autoselect3 = ConfigSelection(default="", choices=audio_language_choices)
-	config.autolanguage.audio_autoselect4 = ConfigSelection(default="", choices=audio_language_choices)
+	config.autolanguage.audio_autoselect1 = ConfigSelection(default="", choices=languageChoiceList)
+	config.autolanguage.audio_autoselect2 = ConfigSelection(default="", choices=languageChoiceList)
+	config.autolanguage.audio_autoselect3 = ConfigSelection(default="", choices=languageChoiceList)
+	config.autolanguage.audio_autoselect4 = ConfigSelection(default="", choices=languageChoiceList)
 	config.autolanguage.audio_autoselect1.addNotifier(autolanguage, initial_call=False)
 	config.autolanguage.audio_autoselect2.addNotifier(autolanguage, initial_call=False)
 	config.autolanguage.audio_autoselect3.addNotifier(autolanguage, initial_call=False)
@@ -1815,19 +1817,17 @@ def InitUsageConfig():
 	config.autolanguage.audio_usecache = ConfigYesNo(default=True)
 	config.autolanguage.audio_usecache.addNotifier(setAudioUseCache)
 
-	subtitle_language_choices = audio_language_choices[:1] + audio_language_choices[2:]
-
 	def getselectedsublanguages(range):
 		return [eval("config.autolanguage.subtitle_autoselect%x.value" % x) for x in range]
 
 	def autolanguagesub(configElement):
-		config.autolanguage.subtitle_autoselect1.setChoices([x for x in subtitle_language_choices if x[0] and x[0] not in getselectedsublanguages((2, 3, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect2.value])
-		config.autolanguage.subtitle_autoselect2.setChoices([x for x in subtitle_language_choices if x[0] and x[0] not in getselectedsublanguages((1, 3, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect3.value])
-		config.autolanguage.subtitle_autoselect3.setChoices([x for x in subtitle_language_choices if x[0] and x[0] not in getselectedsublanguages((1, 2, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect4.value])
-		config.autolanguage.subtitle_autoselect4.setChoices([x for x in subtitle_language_choices if x[0] and x[0] not in getselectedsublanguages((1, 2, 3)) or not x[0]])
-		choicelist = [(0, _("None"))]
-		for y in range(1, 15 if config.autolanguage.subtitle_autoselect4.value else (7 if config.autolanguage.subtitle_autoselect3.value else (4 if config.autolanguage.subtitle_autoselect2.value else (2 if config.autolanguage.subtitle_autoselect1.value else 0)))):
-			choicelist.append((y, ", ".join([eval("config.autolanguage.subtitle_autoselect%x.getText()" % x) for x in (y & 1, y & 2, y & 4 and 3, y & 8 and 4) if x])))
+		config.autolanguage.subtitle_autoselect1.setChoices([x for x in subtitleChoiceList if x[0] and x[0] not in getselectedsublanguages((2, 3, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect2.value])
+		config.autolanguage.subtitle_autoselect2.setChoices([x for x in subtitleChoiceList if x[0] and x[0] not in getselectedsublanguages((1, 3, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect3.value])
+		config.autolanguage.subtitle_autoselect3.setChoices([x for x in subtitleChoiceList if x[0] and x[0] not in getselectedsublanguages((1, 2, 4)) or not x[0] and not config.autolanguage.subtitle_autoselect4.value])
+		config.autolanguage.subtitle_autoselect4.setChoices([x for x in subtitleChoiceList if x[0] and x[0] not in getselectedsublanguages((1, 2, 3)) or not x[0]])
+		choiceList = [(0, _("None"))]
+		for y in list(range(1, 15 if config.autolanguage.subtitle_autoselect4.value else (7 if config.autolanguage.subtitle_autoselect3.value else (4 if config.autolanguage.subtitle_autoselect2.value else (2 if config.autolanguage.subtitle_autoselect1.value else 0))))):
+			choiceList.append((y, ", ".join([eval("config.autolanguage.subtitle_autoselect%x.getText()" % x) for x in (y & 1, y & 2, y & 4 and 3, y & 8 and 4) if x])))
 		if config.autolanguage.subtitle_autoselect3.value:
 			choiceList.append((y + 1, _("All")))
 		config.autolanguage.equal_languages.setChoices(default=0, choices=choiceList)
@@ -1838,10 +1838,10 @@ def InitUsageConfig():
 
 	config.autolanguage.equal_languages = ConfigSelection(default=0, choices=[x for x in range(0, 16)])
 	config.autolanguage.equal_languages.addNotifier(setSubtitleEqualLanguages)
-	config.autolanguage.subtitle_autoselect1 = ConfigSelection(default="", choices=subtitle_language_choices)
-	config.autolanguage.subtitle_autoselect2 = ConfigSelection(default="", choices=subtitle_language_choices)
-	config.autolanguage.subtitle_autoselect3 = ConfigSelection(default="", choices=subtitle_language_choices)
-	config.autolanguage.subtitle_autoselect4 = ConfigSelection(default="", choices=subtitle_language_choices)
+	config.autolanguage.subtitle_autoselect1 = ConfigSelection(default="", choices=subtitleChoiceList)
+	config.autolanguage.subtitle_autoselect2 = ConfigSelection(default="", choices=subtitleChoiceList)
+	config.autolanguage.subtitle_autoselect3 = ConfigSelection(default="", choices=subtitleChoiceList)
+	config.autolanguage.subtitle_autoselect4 = ConfigSelection(default="", choices=subtitleChoiceList)
 	config.autolanguage.subtitle_autoselect1.addNotifier(autolanguagesub, initial_call=False)
 	config.autolanguage.subtitle_autoselect2.addNotifier(autolanguagesub, initial_call=False)
 	config.autolanguage.subtitle_autoselect3.addNotifier(autolanguagesub, initial_call=False)
