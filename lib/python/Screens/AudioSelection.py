@@ -35,6 +35,11 @@ def getConfigMenuItem(configElementName):
 	return "", None
 
 
+def isIPTV(service):
+	path = service and service.getPath()
+	return path and not path.startswith("/") and service.type in [0x1, 0x1001, 0x138A, 0x1389]
+
+
 class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
@@ -111,6 +116,9 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		self["config"].instance.setSelectionEnable(False)
 		self.focus = FOCUS_STREAMS
 		self.settings.menupage.addNotifier(self.fillList)
+
+	def saveAVDict(self):
+		eDVBDB.getInstance().saveIptvServicelist()
 
 	def fillList(self, arg=None):
 		from Components.UsageConfig import originalAudioTracks, visuallyImpairedCommentary
@@ -517,6 +525,8 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		if isinstance(track, int):
 			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > track:
 				self.audioTracks.selectTrack(track)
+				if isIPTV(ref):
+					self.saveAVDict()
 
 	def keyLeft(self):
 		if self.focus == FOCUS_CONFIG:
@@ -638,6 +648,8 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 					else:
 						self.enableSubtitle(cur[0][:5])
 						self.__updatedInfo()
+					if isIPTV(ref):
+						self.saveAVDict()
 				self.close(0)
 			elif self.focus == FOCUS_CONFIG:
 				self.keyRight()
