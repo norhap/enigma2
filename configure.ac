@@ -72,17 +72,23 @@ elif test "$MACHINE" == "vuultimo4k"; then
 elif test "$MACHINE" == "h7"; then
 	AC_DEFINE(HWH7, 1,[h7])
 elif test "$MACHINE" == "h17"; then
-	AC_DEFINE(HWH17, 1,[h17])	
+	AC_DEFINE(HWH17, 1,[h17])
 elif test "$MACHINE" == "pulse4k"; then
 	AC_DEFINE(HWPULSE4K, 1,[pulse4k])
 elif test "$MACHINE" == "pulse4kmini"; then
 	AC_DEFINE(HWPULSE4KMINI, 1,[pulse4kmini])
 elif test "$MACHINE" == "gbue4k"; then
 	AC_DEFINE(HWGBUE4K, 1,[gbue4k])
+elif test "$MACHINE" == "gbquad4k"; then
+	AC_DEFINE(HWGBQUAD4K, 1,[gbquad4k])
 elif test "$MACHINE" == "gbtrio4kpro"; then
 	AC_DEFINE(HWGBTRIO4KPRO, 1,[gbtrio4kpro])
+elif test "$MACHINE" == "gbquad4kpro"; then
+	AC_DEFINE(HWGBQUAD4KPRO, 1,[gbquad4kpro])
 elif test "$MACHINE" == "beyonwizt2"; then
-	AC_DEFINE(HWBEYONWIZT2, 1,[beyonwizt2])	
+	AC_DEFINE(HWBEYONWIZT2, 1,[beyonwizt2])
+elif test "$MACHINE" == "u5"; then
+	AC_DEFINE(HWU5, 1,[u5])	
 fi
 
 AC_ARG_WITH(brandname,
@@ -572,7 +578,7 @@ if test "$MACHINE" == "gb800solo" -o "$MACHINE" == "gb800se" -o "$MACHINE" == "g
 	AC_DEFINE(KEY_GUIDE_TO_KEY_EPG, 1,[define when rc sends a KEY_HELP event for its KEY_EPG key])
 	AC_DEFINE(KEY_F2_TO_KEY_F6, 1,[define when rc sends a KEY_F2 event for its KEY_F6 key])
 	AC_DEFINE(KEY_SCREEN_TO_KEY_MODE, 1,[define when rc sends a KEY_MODE event for its KEY_ASPECT key])
-	AC_DEFINE(KEY_HOME_TO_KEY_UNKNOWN, 1,[define when rc sends a KEY_UNKNOWN event for its KEY_HOME key])	
+	AC_DEFINE(KEY_HOME_TO_KEY_UNKNOWN, 1,[define when rc sends a KEY_UNKNOWN event for its KEY_HOME key])
 fi
 
 if test "$MACHINE" == "gbquad4k" -o "$MACHINE" == "gbue4k" -o "$MACHINE" == "gbx34k"; then
@@ -684,7 +690,7 @@ if test "$MACHINE_BRAND" == "Vu+"; then
 	AC_DEFINE(FORCE_NO_BLENDING_ACCELERATION, 1,[define when the framebuffer acceleration does not have alphablending support, though the autodetection might indicate that it does])
 	AC_DEFINE(FORCE_NO_FILL_ACCELERATION, 1,[define when the framebuffer acceleration does not have fill support])
 	AC_DEFINE(KEY_INFO_TO_KEY_EPG, 1,[define when rc sends a KEY_INFO event for its KEY_EPG key])
-	AC_DEFINE(KEY_EDIT_TO_KEY_TIME, 1,[define when rc sends a KEY_TIME event for its KEY_EDIT key])	
+	AC_DEFINE(KEY_EDIT_TO_KEY_TIME, 1,[define when rc sends a KEY_TIME event for its KEY_EDIT key])
 fi
 
 if test "$MACHINE" == "vuduo2"; then
