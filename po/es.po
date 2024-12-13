@@ -13312,6 +13312,9 @@ msgstr "Vista previa para sus Temporizadores Automáticos"
 msgid "Print shell log"
 msgstr "Imprimir registro de shell"
 
+msgid "RAM allocation:\n"
+msgstr "Distribución de RAM:\n"
+
 msgid "Reading file...\n"
 msgstr "Leyendo archivo...\n"
 

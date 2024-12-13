@@ -1120,6 +1120,15 @@ class SystemMemoryInfo(Screen):
 		self.AboutText += "\n\nFLASH" + '\n\n'
 		self.AboutText += _("Total:") + "\t" + "\t" + RamTotal.replace('G', ' G').replace('M', ' M') + "B" + "\n"
 		self.AboutText += _("Free:") + "\t" + "\t" + RamFree.replace('G', ' G').replace('M', ' M') + "B" + "\n\n"
+		if fileHas("/var/log/dmesg", "Memory: "):
+			with open("/var/log/dmesg", "r") as ramsystem:
+				for ram in ramsystem.readlines():
+					if "Memory: " in ram:
+						ram = ram.split("Memory: ")[1]
+						if config.osd.language.value == "es_ES":
+							ram = ram.replace("K", "KB").replace("/", " de ").replace(" (", "\n(").replace("available", "disponibles").replace("cma-reserved", "reservada a memoria contigua").replace("reserved", "reservada").replace("kernel code", "código kernel").replace("highmem", "reservada a memoria alta").replace("bss, ", "bss,\n")
+						self.AboutText += _("RAM allocation:\n") + ram
+						break
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
 
