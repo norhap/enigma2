@@ -304,13 +304,17 @@ def InitUsageConfig():
 	for partition in harddiskmanager.getMountedPartitions():
 		directories = normpath(partition.mountpoint)
 		if directories != "/" and ismount(str(directories)) and not exists(str(directories + "/movie")):
-			makedirs(directories + "/movie")
+			if "net" in str(directories) or "autofs" in str(directories):
+				if ismount(str(directories)) and not exists(str(directories + "/movie")):
+					Console().ePopen("mkdir -p " + directories + "/movie")
+			else:
+				Console().ePopen("mkdir -p " + directories + "/movie")
 		if directories != "/" and "movie" in directories:
 			moviesPath = join(directories + "/")
 		for timeshiftpath in [f"/media/{media}/timeshift" for media in listdir("/media/") if ismount(join("/media/", media))]:
 			if exists(str(timeshiftpath)):
 				if not exists(str(timeshiftpath + "/recordings")):
-					makedirs(timeshiftpath + "/recordings")
+					Console().ePopen("mkdir -p " + timeshiftpath + "/recordings")
 				timeshiftPath = timeshiftpath + "/recordings/"
 				break
 	defaultValue = moviesPath if moviesPath and "/net/movie" not in moviesPath or moviesPath and "/autofs/movie" not in moviesPath else resolveFilename(SCOPE_HDD)
