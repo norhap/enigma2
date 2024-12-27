@@ -534,6 +534,9 @@ msgstr "Un temporizador de grabación completado está a punto de poner su recep
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Un temporizador de grabación completado está a punto de apagar su receptor. ¿Le gustaría continuar?"
 
+msgid "A graphical DVB subtitles will be displayed in the selected color, instead of the original color."
+msgstr "Los subtítulos gráficos DVB se mostrarán en el color seleccionado, en lugar del color original."
+
 msgid "A graphical EPG for all services of a specific bouquet"
 msgstr "Un EPG gráfico para todos los canales de un bouquet específico"
 
@@ -11709,9 +11712,6 @@ msgstr "Cuando está habilitado, los subtítulos DVB gráficos se centrarán hor
 msgid "When enabled, graphical DVB subtitles will be displayed at their original position."
 msgstr "Cuando está habilitado, los subtítulos DVB gráficos se mostrarán en su posición original."
 
-msgid "When enabled, graphical DVB subtitles will be displayed in yellow, instead of the original color."
-msgstr "Cuando está habilitado, los subtítulos DVB gráficos se mostrarán en amarillo, en lugar del color original."
-
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
 msgstr "Cuando está habilitado, los stremas http se descodifican en el lado del servidor. El receptor del cliente (reserva) no tiene que descifrar. Predeterminado activado."
 
@@ -11796,8 +11796,8 @@ msgstr "Cuando no es cero, una grabación comenzará antes de la hora de inicio 
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr "Cuando no es cero, una grabación se detendrá más tarde que la hora de finalización indicada por la EPG."
 
-msgid "Yellow DVB subtitles"
-msgstr "Subtítulos DVB amarillos"
+msgid "DVB subtitles color"
+msgstr "Color Subtítulos DVB"
 
 msgid "Zap focused channel on full screen"
 msgstr "Zapear canal enfocado en pantalla completa"
