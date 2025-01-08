@@ -401,7 +401,7 @@ def InitUsageConfig():
 	])
 
 	config.usage.setupShowDefault = ConfigSelection(default="newline", choices=[
-		("", _("Don't show default")),
+		(None, _("Don't show default")),
 		("spaces", _("Show default after description")),
 		("newline", _("Show default on new line"))
 	])
