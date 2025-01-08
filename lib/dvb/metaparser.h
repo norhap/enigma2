@@ -14,16 +14,16 @@ class iDVBMetaFile
 public:
 	enum
 	{
-		idServiceRef	= 0,
-		idName		= 1,
-		idDescription	= 2,
-		idCreated	= 3,
-		idTags		= 4,
-		idLength	= 5,
-		idFileSize	= 6,
+		idServiceRef  	= 0,
+		idName 			= 1,
+		idDescription 	= 2,
+		idCreated 		= 3,
+		idTags 			= 4,
+		idLength 		= 5,
+		idFileSize 		= 6,
 		idServiceData	= 7,
-		idPacketSize	= 8,
-		idScrambled	= 9,
+		idPacketSize 	= 8,
+		idScrambled 	= 9,
 	};
 };
 SWIG_ALLOW_OUTPUT_SIMPLE(iDVBMetaFile);
@@ -39,11 +39,11 @@ public:
 	int updateMeta(const std::string &basename);
 
 	eServiceReferenceDVB m_ref;
-	int m_data_ok, m_packet_size, m_scrambled;
-	time_t m_time_create;
-	pts_t m_length;
+	int m_data_ok, m_time_create, m_packet_size, m_scrambled;
+	pts_t  m_length;
 	std::string m_name, m_description, m_tags, m_service_data, m_prov;
-	off_t m_filesize;
+	long long m_filesize;
 };
 #endif
+
 #endif

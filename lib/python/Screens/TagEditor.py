@@ -23,15 +23,14 @@ class TagManager():
 
 	def loadTags(self):
 		tags = []
-		filename = isfile(resolveFilename(SCOPE_CONFIG, "movietags"))
-		if filename:
-			tags = fileReadLines(filename, tags, source=MODULE_NAME)
-			tags = [self.formatTag(x) for x in tags]
-			while "" in tags:
-				tags.remove("")
-			tags.sort()
-			print(f"[TagEditor] {len(tags)} tags read from '{filename}'.")
-			return tags
+		filename = resolveFilename(SCOPE_CONFIG, "movietags")
+		tags = fileReadLines(filename, tags, source=MODULE_NAME)
+		tags = [self.formatTag(x) for x in tags]
+		while "" in tags:
+			tags.remove("")
+		tags.sort()
+		print(f"[TagEditor] {len(tags)} tags read from '{filename}'.")
+		return tags
 
 	def saveTags(self):
 		if self.tags != self.fileTags:

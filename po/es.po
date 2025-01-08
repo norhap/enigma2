@@ -7976,6 +7976,9 @@ msgstr "No existe canal con este número"
 msgid "There is no signal to lock on !"
 msgstr "¡No hay señal para bloquear!"
 
+msgid "There is no tag for this selection.\n\nPress Menu and enter \"Edit Tags\""
+msgstr "No existe etiqueta para esta selección.\n\nPulse Menu e ingrese en \"Editar Etiquetas\""
+
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Este medio de DVD RW ya está formateado - el formateo eliminará todo el contenido del disco."
 
@@ -17077,9 +17080,6 @@ msgstr "película más corta"
 
 msgid "Create directory"
 msgstr "Crear directorio"
-
-msgid "No tags are set on these movies."
-msgstr "No se establecen etiquetas en la lista de películas."
 
 msgid "Automatic bookmarks"
 msgstr "Marcadores automáticos"

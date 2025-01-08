@@ -15,25 +15,20 @@ eDVBMetaParser::eDVBMetaParser()
 	m_scrambled = 0;
 }
 
-// For the recording creation time if there is no .ts.meta file
-// or no creation time in the .ts.meta file.
-// It's the time of the last write to the .ts file, but that's
-// as good as it gets.
-
-static time_t getmtime(const std::string &basename)
+static int getctime(const std::string &basename)
 {
 	struct stat s = {};
 	if (::stat(basename.c_str(), &s) == 0)
 	{
-		return s.st_mtime;
+		return s.st_ctime;
 	}
 	return 0;
 }
 
-static off_t fileSize(const std::string &basename)
+static long long fileSize(const std::string &basename)
 {
 	long long filesize = 0;
-	char buf[16] = {};
+	char buf[8] = {};
 	std::string splitname;
 	struct stat64 s = {};
 
@@ -66,7 +61,7 @@ int eDVBMetaParser::parseFile(const std::string &basename)
 	if (!parseRecordings(basename))
 		return 0;
 	m_filesize = fileSize(basename);
-	m_time_create = getmtime(basename);
+	m_time_create = getctime(basename);
 	return -1;
 }
 
@@ -112,10 +107,10 @@ int eDVBMetaParser::parseMeta(const std::string &tsname)
 			m_description = line;
 			break;
 		case iDVBMetaFile::idCreated:
-			m_time_create = atol(line);
+			m_time_create = atoi(line);
 			if (m_time_create == 0)
 			{
-				m_time_create = getmtime(tsname);
+				m_time_create = getctime(tsname);
 			}
 			break;
 		case iDVBMetaFile::idTags:
@@ -126,10 +121,6 @@ int eDVBMetaParser::parseMeta(const std::string &tsname)
 			break;
 		case iDVBMetaFile::idFileSize:
 			m_filesize = atoll(line);
-			if (m_filesize == 0)
-			{
-				m_filesize = fileSize(tsname);
-			}
 			break;
 		case iDVBMetaFile::idServiceData:
 			m_service_data = line;
@@ -200,7 +191,7 @@ int eDVBMetaParser::parseRecordings(const std::string &filename)
 			m_ref = ref;
 			m_name = description;
 			m_description = "";
-			m_time_create = getmtime(filename);
+			m_time_create = getctime(filename);
 			m_length = 0;
 			m_filesize = fileSize(filename);
 			m_data_ok = 1;
@@ -221,10 +212,6 @@ int eDVBMetaParser::updateMeta(const std::string &tsname)
 	eServiceReference ref = m_ref;
 	ref.path = "";
 
-	/* To make sure you only modify the meta file you're looking at, and not one that is hardlinked to this one, remove the file first.
-	 * We don't care about the result - if it doesn't exist that's also just fine. */
-	::unlink(filename.c_str());
-
 	CFile f(filename.c_str(), "w");
 	if (!f) {
 		eDebug("[eDVBMetaParser] error updateMeta, couldn't open '%s' for writing: %m", filename.c_str());
@@ -244,7 +231,6 @@ int eDVBMetaParser::updateMeta(const std::string &tsname)
 			ref.setName(service_name);
 		}
 	}
-
 	fprintf(f, "%s\n%s\n%s\n%d\n%s\n%lld\n%lld\n%s\n%d\n%d\n", ref.toString().c_str(), m_name.c_str(), m_description.c_str(), m_time_create, m_tags.c_str(), m_length, m_filesize, m_service_data.c_str(), m_packet_size, m_scrambled);
 	return 0;
 }
