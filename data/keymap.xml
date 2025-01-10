@@ -1305,6 +1305,8 @@
 		<key id="KEY_FILE" mapto="file" flags="m" />
 		<key id="KEY_FIND" mapto="find" flags="m" />
 		<key id="KEY_SLOW" mapto="slow" flags="m" />
+		<key id="KEY_ARCHIVE" mapto="history" flags="b" />
+		<key id="KEY_ARCHIVE" mapto="history_long" flags="l" />		
 	</map>
 
 	<map context="CCcamInfoActions">
@@ -1332,7 +1334,5 @@
 		<key id="KEY_RIGHT" mapto="right" flags="m" />
 		<key id="KEY_CHANNELUP" mapto="incUphop" flags="m" />
 		<key id="KEY_CHANNELDOWN" mapto="decUphop" flags="m" />
-		<key id="KEY_ARCHIVE" mapto="history" flags="b" />
-		<key id="KEY_ARCHIVE" mapto="history_long" flags="l" />
 	</map>
 </keymap>
