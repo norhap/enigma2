@@ -219,10 +219,8 @@ def createInfo(slot, imagedir="/"):
 	Creator = BoxInfo.getItem("distro", " ").capitalize()
 	BuildImgVersion = BoxInfo.getItem("imageversion")
 	BuildType = BoxInfo.getItem("imagetype")
-	BuildVer = BoxInfo.getItem("imagebuild")
 	BuildDate = VerDate(imagedir)
-	BuildDev = str(BoxInfo.getItem("imagedevbuild")).zfill(3) if BuildType != "rel" else ""
-	return " ".join([x for x in (Creator, BuildImgVersion, BuildType, BuildVer, BuildDev, "(%s)" % BuildDate) if x])
+	return " ".join([x for x in (Creator, BuildImgVersion, BuildType, "(%s)" % BuildDate) if x])
 
 
 def bootmviSlot(imagedir="/", text=" ", slot=" "):
