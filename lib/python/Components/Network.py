@@ -290,15 +290,18 @@ class Network:
 	def getFriendlyAdapterNaming(self, iface):
 		name = None
 		wirelesslan = glob(self.sysfsPath("wlan*"))
-		zerotier = glob("/etc/rc2.d/S*zerotier")
-		openvpn = glob("/etc/rc2.d/S*openvpn")
+		try:
+			from Plugins.Extensions.IPToSAT.plugin import checkZerotierMember  # noqa: E402
+			servicezerotier = glob("/etc/rc2.d/S*zerotier")
+			zerotier = servicezerotier and checkZerotierMember()
+		except Exception:
+			zerotier = False
 		if self.isWirelessInterface(iface):
 			if iface not in self.wlan_interfaces:  # with WLAN first adapter is WLAN
 				name = _("WLAN connection")  # noqa: F405
 				self.wlan_interfaces.append(iface)
 		else:
 			zerotiername = _("VPN connection ZeroTier")  # noqa: F405
-			openvpnname = _("OpenVPN connection")  # noqa: F405
 			lanname = _("LAN connection")  # noqa: F405
 			if iface not in self.lan_interfaces:
 				if iface == "eth1":
@@ -308,12 +311,11 @@ class Network:
 						if getBoxType() not in ("sf8008", "vuuno4kse"):  # STBs with WLAN in first position
 							name = lanname
 							if len(self.lan_interfaces):
-								name = zerotiername if zerotier else openvpnname
+								if zerotier:
+									name = zerotiername
 						else:  # STBs with WLAN in last position
 							if zerotier:
 								name = zerotiername
-							if openvpn:
-								name = openvpnname
 							if len(self.lan_interfaces):
 								name = lanname
 							else:
@@ -321,18 +323,14 @@ class Network:
 									name = lanname
 								else:
 									if BoxInfo.getItem("WakeOnLAN"):
-										if not zerotier and not openvpn:
+										if not zerotier:
 											name = lanname
 										else:
 											if zerotier:
 												name = zerotiername
-											if openvpn:
-												name = openvpnname
 					else:
 						if zerotier:
 							name = zerotiername
-						if openvpn:
-							name = openvpnname
 						if len(self.lan_interfaces):
 							name = lanname
 						if not name:

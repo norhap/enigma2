@@ -5066,9 +5066,6 @@ msgstr "Opciones de temporizador desactivado"
 msgid "OpenVPN"
 msgstr "OpenVPN"
 
-msgid "OpenVPN connection"
-msgstr "Conexión OpenVPN"
-
 msgid "OpenVPN log"
 msgstr "OpenVPN log"
 
