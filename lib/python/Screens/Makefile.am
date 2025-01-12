@@ -37,7 +37,6 @@ install_PYTHON = \
 	MinuteInput.py \
 	MovieSelection.py \
 	Mute.py \
-	NcamInfo.py \
 	NetworkSetup.py \
 	NumericalTextInputHelpDialog.py \
 	Opkg.py \

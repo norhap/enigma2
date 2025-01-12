@@ -1679,7 +1679,7 @@ def InitUsageConfig():
 
 		config.subtitles.ai_subtitle_colors = ConfigSelection(default=1, choices=[
 			(1, _("White")),
-			(2, _("Yellow"))
+			(2, _("Yellow")),
 			(3, _("Red")),
 			(4, _("Green")),
 			(5, _("Blue"))
@@ -1874,30 +1874,25 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_usecache.addNotifier(setSubtitleUseCache)
 
 	config.oscaminfo = ConfigSubsection()
-	if SystemInfo["OSCamIsActive"]:
+	if BoxInfo.getItem("ShowOscamInfo"):
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=True)
 	else:
 		config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
-	config.oscaminfo.userdatafromconf = ConfigYesNo(default=True)
-	config.oscaminfo.autoupdate = ConfigYesNo(default=False)
+	config.oscaminfo.userDataFromConf = ConfigYesNo(default=True)
 	config.oscaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
 	config.oscaminfo.password = ConfigPassword(default="password", fixed_size=False)
-	config.oscaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
-	config.oscaminfo.port = ConfigInteger(default=16002, limits=(0, 65536))
-	config.oscaminfo.intervall = ConfigSelectionNumber(min=1, max=600, stepwidth=1, default=10, wraparound=True)
-
-	config.ncaminfo = ConfigSubsection()
-	if SystemInfo["NCamIsActive"]:
-		config.ncaminfo.showInExtensions = ConfigYesNo(default=True)
-	else:
-		config.ncaminfo.showInExtensions = ConfigYesNo(default=False)
-	config.ncaminfo.userdatafromconf = ConfigYesNo(default=True)
-	config.ncaminfo.autoupdate = ConfigYesNo(default=False)
-	config.ncaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
-	config.ncaminfo.password = ConfigPassword(default="password", fixed_size=False)
-	config.ncaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
-	config.ncaminfo.port = ConfigInteger(default=16002, limits=(0, 65536))
-	config.ncaminfo.intervall = ConfigSelectionNumber(min=1, max=600, stepwidth=1, default=10, wraparound=True)
+	config.oscaminfo.ip = ConfigText(default="127.0.0.1", fixed_size=False)
+	config.oscaminfo.port = ConfigInteger(default=83, limits=(0, 65536))
+	config.oscaminfo.usessl = ConfigYesNo(default=False)
+	config.oscaminfo.verifycert = ConfigYesNo(default=False)
+	choiceList = [
+		(0, _("Disabled"))
+	] + [(x, ngettext("%d second", "%d seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d minute", "%d minutes", x) % x) for x in (1, 2, 3)]
+	config.oscaminfo.autoUpdate = ConfigSelection(default=10, choices=choiceList)
+	choiceList = [
+		(0, _("Disabled"))
+	] + [(x, ngettext("%d second", "%d seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d minute", "%d minutes", x) % x) for x in (1, 2, 3)]
+	config.oscaminfo.autoUpdateLog = ConfigSelection(default=0, choices=choiceList)
 
 	config.cccaminfo = ConfigSubsection()
 	if SystemInfo["CCcamIsActive"]:

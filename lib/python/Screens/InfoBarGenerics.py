@@ -12,7 +12,7 @@ from Components.Sources.ServiceEvent import ServiceEvent
 # from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
 from Components.config import config, ConfigBoolean, ConfigClock, ACTIONKEY_RIGHT
-from Components.SystemInfo import BoxInfo, SystemInfo, BRAND
+from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, getSysSoftcam
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
 from Components.VolumeControl import VolumeControl
 from Components.Sources.StaticText import StaticText
@@ -2407,31 +2407,24 @@ class InfoBarExtensions:
 			"openCurrentEventAutoTimer": (self.importAutoTimerCurrentEvent, _("Import autotimer in current event")),
 		}, prio=1, description=_("Extension Actions"))  # Lower priority.
 		self.addExtension(extension=self.getOSCamInfo, type=InfoBarExtensions.EXTENSION_LIST)
-		self.addExtension(extension=self.getNCamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getCCcamInfo, type=InfoBarExtensions.EXTENSION_LIST)
 		self.addExtension(extension=self.getLogManager, type=InfoBarExtensions.EXTENSION_LIST)
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_EXTENSIONSINGLE):
 			p.__call__(self)
 
-	def getOSCam(self):
-		return _("OSCam Info")
+	def getOSCamNCam(self):
+		return "OSCam Info" if getSysSoftcam() == "OSCam" else "NCam Info"
 
 	def getNCam(self):
-		return _("NCam Info")
+		return "NCam Info"
 
 	def getCCcam(self):
-		return _("CCcam Info")
+		return "CCcam Info"
 
 	def getOSCamInfo(self):
-		if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
-			return [((boundFunction(self.getOSCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
-		else:
-			return []
-
-	def getNCamInfo(self):
-		if str(ProcessList().named("ncam")).strip("[]"):
-			return [((boundFunction(self.getNCam), boundFunction(self.openNCamInfo), lambda: True), None)] or []
+		if BoxInfo.getItem("ShowOscamInfo"):
+			return [((boundFunction(self.getOSCamNCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
 			return []
 
@@ -2509,12 +2502,8 @@ class InfoBarExtensions:
 			answer[1][1]()
 
 	def openOSCamInfo(self):
-		from Screens.OScamInfo import OSCamInfoMenu
-		self.session.open(OSCamInfoMenu)
-
-	def openNCamInfo(self):
-		from Screens.NcamInfo import NCamInfoMenu
-		self.session.open(NCamInfoMenu)
+		from Screens.OScamInfo import OSCamInfo
+		self.session.open(OSCamInfo)
 
 	def openCCcamInfo(self):
 		from Screens.CCcamInfo import CCcamInfoMain

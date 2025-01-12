@@ -83,7 +83,10 @@ class SoftcamSetup(Setup):
 			self["key_yellow"].setText("")
 			self["restartActions"].setEnabled(False)
 		if self["config"].getCurrent()[1] == config.misc.softcams and config.misc.softcams.value and config.misc.softcams.value.lower() != "none" and config.misc.softcams.value.lower() != "wicardd" and not config.misc.softcams.value.startswith("mgcamd"):
-			self["key_blue"].setText(_("Info"))
+			if config.misc.softcams.value.lower() == "cccam":
+				self["key_blue"].setText("CCcam Info")
+			else:
+				self["key_blue"].setText("OSCam Info" if config.misc.softcams.value.lower() == "oscam" else "NCam Info")
 			self["infoActions"].setEnabled(True)
 		else:
 			self["key_blue"].setText("")
@@ -91,12 +94,9 @@ class SoftcamSetup(Setup):
 
 	def softcamInfo(self):
 		ppanelFilename = "/etc/ppanels/%s.xml" % config.misc.softcams.value
-		if "oscam" in config.misc.softcams.value.lower():
-			from Screens.OScamInfo import OSCamInfoMenu
-			self.session.open(OSCamInfoMenu)
-		elif "ncam" in config.misc.softcams.value.lower():
-			from Screens.NcamInfo import NCamInfoMenu
-			self.session.open(NCamInfoMenu)
+		if config.misc.softcams.value.lower() == "oscam" or config.misc.softcams.value.lower() == "ncam":
+			from Screens.OScamInfo import OSCamInfo
+			self.session.open(OSCamInfo)
 		elif "cccam" in config.misc.softcams.value.lower() or isPluginInstalled("CCcamInfo"):
 			from Screens.CCcamInfo import CCcamInfoMain
 			self.session.open(CCcamInfoMain)

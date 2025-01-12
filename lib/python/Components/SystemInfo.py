@@ -162,6 +162,17 @@ def getBootdevice():
 	return dev
 
 
+def getSysSoftcam():
+	cams = "None"
+	if str(ProcessList().named("oscam")).strip("[]") and str(ProcessList().named("ncam")).strip("[]"):
+		cams = "OSCam"
+	elif str(ProcessList().named("oscam")).strip("[]"):
+		cams = "OSCam"
+	elif str(ProcessList().named("ncam")).strip("[]"):
+		cams = "NCam"
+	return cams
+
+
 SystemInfo["ArchIsARM"] = ARCHITECTURE.startswith(("arm", "cortex"))
 SystemInfo["ArchIsARM64"] = "64" in ARCHITECTURE
 
@@ -176,7 +187,9 @@ BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
-BoxInfo.setItem("StreamRelay", False)
+BoxInfo.setItem("ShowOscamInfo", False)
+BoxInfo.setItem("ReadOscamConf", getSysSoftcam() == "OSCam")
+BoxInfo.setItem("ReadNcamConf", getSysSoftcam() == "NCam")
 BoxInfo.setItem("WakeOnLAN", fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol"))
 BoxInfo.setItem("WakeOnLANType", getWakeOnLANType(BoxInfo.getItem("WakeOnLAN")) if BoxInfo.getItem("WakeOnLAN") else None)
 BoxInfo.setItem("AISubs", fileExists("/etc/init.d/aisocket"))
@@ -287,8 +300,6 @@ SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
 SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
-SystemInfo["OSCamIsActive"] = str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]")
-SystemInfo["NCamIsActive"] = str(ProcessList().named("ncam")).strip("[]")
 SystemInfo["CCcamIsActive"] = str(ProcessList().named("CCcam")).strip("[]")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = MODEL in ("ustym4kpro", "beyonwizv2", "viper4k", "gbtrio4k", "gbtrio4kplus", "gbip4k", "qviart5") or getBoxType() in ("sf8008")

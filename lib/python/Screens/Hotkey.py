@@ -269,9 +269,8 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Harddisk Setup"), "Setup/harddisk", "Setup"))
 	hotkey.functions.append((_("Subtitles Settings"), "Setup/subtitlesetup", "Setup"))
 	hotkey.functions.append((_("Language Setup"), "Module/Screens.LanguageSelection/LanguageSelection", "Setup"))
-	hotkey.functions.append((_("OSCam Info"), "Module/Screens.OScamInfo/OSCamInfoMenu", "Setup"))
-	hotkey.functions.append((_("NCam Info"), "Module/Screens.NcamInfo/NCamInfoMenu", "Setup"))
-	hotkey.functions.append((_("CCcam Info"), "Module/Screens.CCcamInfo/CCcamInfoMain", "Setup"))
+	hotkey.functions.append(("OSCam Info", "Module/Screens.OScamInfo/OSCamInfo", "Setup"))
+	hotkey.functions.append(("CCcam Info", "Module/Screens.CCcamInfo/CCcamInfoMain", "Setup"))
 	hotkey.functions.append((_("Memory Info"), "Module/Screens.About/MemoryInfo", "Setup"))
 	if SystemInfo["canMultiBoot"]:
 		hotkey.functions.append((_("Multiboot image selector"), "Module/Screens.FlashImage/MultibootSelection", "Setup"))

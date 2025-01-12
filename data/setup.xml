@@ -341,27 +341,19 @@
 		<item level="2" text="Stream Relay port" description="Server port used to decrypt channels that can only be done using Stream Relay.">config.misc.softcam_streamrelay_port</item>
 		<item level="2" text="Stream Relay switch delay" description="Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
 	</setup>
-	<setup key="OSCamInfo" title="OSCam Info Setup">
-		<item level="0" text="Read userdata from oscam.conf" description="Read userdata from oscam.conf.">config.oscaminfo.userdatafromconf</item>
-		<if conditional="not config.oscaminfo.userdatafromconf.value">
-			<item level="0" text="Username (httpuser)" description="Set username if you have it set in section [webif] httpuser.">config.oscaminfo.username</item>
-			<item level="0" text="Password (httpwd)" description="Set password if you have it set in section [webif] httppwd.">config.oscaminfo.password</item>
-			<item level="0" text="IP address" description="Set receiver IP address.">config.oscaminfo.ip</item>
-			<item level="0" text="Port (httpport)" description="Set in section [webif] port (httpport), enter (0) if you don't have any numeric value assigned in your (httpport).">config.oscaminfo.port</item>
+	<setup key="OSCamInfoSetup" title="Cam Nodule Settings">
+		<item level="0" text="Read userdata from oscam.conf" description="Read userdata from oscam.conf" requires="ReadOscamConf">config.oscaminfo.userDataFromConf</item>
+		<item level="0" text="Read userdata from ncam.conf" description="Read userdata from ncam.conf" requires="ReadNcamConf">config.oscaminfo.userDataFromConf</item>
+		<if conditional="not config.oscaminfo.userDataFromConf.value">
+			<item level="0" text="Username (httpuser)" description="Username (httpuser)">config.oscaminfo.username</item>
+			<item level="0" text="Password (httpwd)" description="Password (httpuser)">config.oscaminfo.password</item>
+			<item level="0" text="Hostname or IP address" description="DNS name or IP address">config.oscaminfo.ip</item>
+			<item level="0" text="Port" description="Port">config.oscaminfo.port</item>
+			<item level="0" text="Use HTTPS protocol" description="Use HTTPS protocol">config.oscaminfo.usessl</item>
 		</if>
-		<item level="0" text="Automatically update Clients/Servers/Log screens" description="Enabled, screens Clients, Servers and Log are updated on time interval.">config.oscaminfo.autoupdate</item>
-		<item level="0" text="Update interval (in seconds)" description="Time interval for screens update Clients/Servers/Log (in seconds)." conditional="config.oscaminfo.autoupdate.value">config.oscaminfo.intervall</item>
-	</setup>
-	<setup key="NCamInfo" title="NCam Info Setup">
-		<item level="0" text="Read userdata from ncam.conf" description="Read userdata from ncam.conf.">config.ncaminfo.userdatafromconf</item>
-		<if conditional="not config.ncaminfo.userdatafromconf.value">
-			<item level="0" text="Username (httpuser)" description="Set username if you have it set in section [webif] httpuser.">config.ncaminfo.username</item>
-			<item level="0" text="Password (httpwd)" description="Set password if you have it set in section [webif] httppwd.">config.ncaminfo.password</item>
-			<item level="0" text="IP address" description="Set receiver IP address.">config.ncaminfo.ip</item>
-			<item level="0" text="Port (httpport)" description="Set in section [webif] port (httpport), enter (0) if you don't have any numeric value assigned in your (httpport).">config.ncaminfo.port</item>
-		</if>
-		<item level="0" text="Automatically update Clients/Servers/Log screens" description="Enabled, screens Clients, Servers and Log are updated on time interval.">config.ncaminfo.autoupdate</item>
-		<item level="0" text="Update interval (in seconds)" description="Time interval for screens update Clients/Servers/Log (in seconds)." conditional="config.ncaminfo.autoupdate.value">config.ncaminfo.intervall</item>
+		<item level="0" text="Verify WebIf SSL certificate" description="Verify WebIf SSL certificate">config.oscaminfo.verifycert</item>
+		<item level="0" text="Automatically update Client/Server View" description="Automatically update Client/Server View">config.oscaminfo.autoUpdate</item>
+		<item level="0" text="Automatically update Log-Fullscreen View" description="Automatically update Log-Fullscreen View">config.oscaminfo.autoUpdateLog</item>
 	</setup>
 	<setup key="Subtitle" title="Subtitle Setup">
 		<if requires="AISubs">
