@@ -4601,6 +4601,12 @@ msgstr "Saltar al final de la lista"
 msgid "Jump to next marked position"
 msgstr "Saltar a la próxima marca"
 
+msgid "Jump to next marker"
+msgstr "Saltar al siguiente marcador"
+
+msgid "Jump to previous marker"
+msgstr "Saltar al marcador previo"
+
 msgid "Jump to previous marked position"
 msgstr "Saltar a la marca previa"
 
