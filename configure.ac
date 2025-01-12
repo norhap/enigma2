@@ -69,6 +69,8 @@ if test "$MACHINE" == "vusolo4k"; then
 	AC_DEFINE(HWVUSOLO4K, 1,[vusolo4k])
 elif test "$MACHINE" == "vuultimo4k"; then
 	AC_DEFINE(HWULTIMO4K, 1,[vuultimo4k])
+elif test "$MACHINE" == "vuuno4kse"; then
+	AC_DEFINE(HWUNO4KSE, 1,[vuuno4kse])
 elif test "$MACHINE" == "h7"; then
 	AC_DEFINE(HWH7, 1,[h7])
 elif test "$MACHINE" == "h17"; then
@@ -88,7 +90,7 @@ elif test "$MACHINE" == "gbquad4kpro"; then
 elif test "$MACHINE" == "beyonwizt2"; then
 	AC_DEFINE(HWBEYONWIZT2, 1,[beyonwizt2])
 elif test "$MACHINE" == "u5"; then
-	AC_DEFINE(HWU5, 1,[u5])	
+	AC_DEFINE(HWU5, 1,[u5])
 fi
 
 AC_ARG_WITH(brandname,
