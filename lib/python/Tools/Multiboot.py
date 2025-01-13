@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from time import localtime, strftime
 from Components.Console import Console
+from Components.About import getBuildDateString
 from os import rename, rmdir, sep, stat
 from os.path import basename, exists, isfile, ismount, join
 from glob import glob
@@ -254,12 +255,10 @@ def bootmviSlot(imagedir="/", text=" ", slot=" "):
 
 
 def VerDate(imagedir):
-	date1 = date2 = date3 = "00000000"
-	if isfile(join(imagedir, "var/lib/opkg/status")):
-		date1 = datetime.fromtimestamp(stat(join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
-	date2 = datetime.fromtimestamp(stat(join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
-	if isfile(join(imagedir, "usr/share/bootlogo.mvi")):
-		date3 = datetime.fromtimestamp(stat(join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
-	date = max(date1, date2, date3)  # this is comparing strings
-	date = datetime.strptime(date, '%Y-%m-%d').strftime("%d-%m-%Y")
-	return date
+	if isfile(join(imagedir, "usr/bin/enigma2")):
+		tmpfile = stat(join(imagedir, "usr/bin/enigma2"))
+		compiledate = localtime(tmpfile.st_mtime)
+		date = strftime("%d-%m-%Y", compiledate)
+		if int(BoxInfoRunningInstance.getItem("compiledate")[0:1]) > int(date[8:9]):  # avoid compilation date 09-03-2018
+			date = getBuildDateString()
+		return date
