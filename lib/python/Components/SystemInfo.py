@@ -3,7 +3,7 @@ from os.path import isfile, join
 from re import findall
 from hashlib import md5
 from boxbranding import getMachineName
-from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD, getBoxType
+from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD, getBoxType, eConsoleAppContainer
 
 from process import ProcessList
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, pathExists, resolveFilename
@@ -12,6 +12,8 @@ from Tools.StbHardware import getWakeOnLANType
 
 class BoxInformation:
 	def __init__(self, root=""):
+		if not isfile(resolveFilename(SCOPE_LIBDIR, ".enigmainfo")):
+			eConsoleAppContainer().execute(f"cp {resolveFilename(SCOPE_LIBDIR, 'enigma.info')} {resolveFilename(SCOPE_LIBDIR, '.enigmainfo')}")  # backup enigma.info file.
 		self.immutableList = []
 		self.boxInfo = {}
 		file = root + join(resolveFilename(SCOPE_LIBDIR), "enigma.info")
@@ -31,6 +33,8 @@ class BoxInformation:
 				print(f"[BoxInfo] Data integrity of {file} could not be verified.")
 		else:
 			print(f"[BoxInfo] ERROR: {file} is not available!  The system is unlikely to boot or operate correctly.")
+			eConsoleAppContainer().execute(f"cp {resolveFilename(SCOPE_LIBDIR, '.enigmainfo')} {resolveFilename(SCOPE_LIBDIR, 'enigma.info')}")  # restore enigma.info file and return.
+			return
 
 	def processValue(self, value):
 		try:
