@@ -194,44 +194,44 @@ class OSCamInfo(Screen, OSCamGlobals):
 			<widget source="extrainfos" render="Label" position="15,102" size="1905,32" font="Regular;26" horizontalAlignment="center" verticalAlignment="center" foregroundColor="#092CBDF" backgroundColor="#10101010"/>
 			<widget source="timerinfos" render="Label" position="15,136" size="1905,34" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#10101010"/>
 			<!-- Server / Reader / Clients -->
-			<eLabel text="#" position="15,172" size="23,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Reader/User" position="40,172" size="173,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="AU" position="215,172" size="88,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Address" position="305,172" size="168,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Port" position="475,172" size="88,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Protocol" position="565,172" size="223,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="srvid:caid@provid" position="790,172" size="268,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Last Channel" position="1060,172" size="233,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="LB Value/Reader" position="1295,172" size="233,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Online\nIdle" position="1530,172" size="163,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Status" position="1695,172" size="210,36" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="#" position="15,172" size="23,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Reader/User" position="40,172" size="173,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="AU" position="215,172" size="88,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Address" position="305,172" size="195,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Port" position="502,172" size="89,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Protocol" position="593,172" size="195,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="srvid:caid@provid" position="790,172" size="268,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Last Channel" position="1060,172" size="233,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="LB Value/Reader" position="1295,172" size="233,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Online\nIdle" position="1530,172" size="163,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Status" position="1695,172" size="210,36" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
 			<widget source="outlist" render="Listbox" position="15,210" size="1890,600" backgroundColor="#10b3b3b3" enableWrapAround="1" scrollbarMode="showOnDemand" >
 				<convert type="TemplatedMultiContent">
 					{"template": [  # index 0 is backgroundcolor
 					MultiContentEntryText(pos=(0,0), size=(23,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=1),  # type
 					MultiContentEntryText(pos=(25,0), size=(173,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=2),  # Reader/User
 					MultiContentEntryText(pos=(200,0), size=(88,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=3),  # AU
-					MultiContentEntryText(pos=(290,0), size=(168,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=4),  # Adress
-					MultiContentEntryText(pos=(460,0), size=(88,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=5),  # Port
-					MultiContentEntryText(pos=(550,0), size=(223,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, color=0x000000, backcolor=MultiContentTemplateColor(0), text=6),  # Protocol
+					MultiContentEntryText(pos=(290,0), size=(195,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=4),  # Adress
+					MultiContentEntryText(pos=(487,0), size=(89,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=5),  # Port
+					MultiContentEntryText(pos=(578,0), size=(195,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, color=0x000000, backcolor=MultiContentTemplateColor(0), text=6),  # Protocol
 					MultiContentEntryText(pos=(775,0), size=(268,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=7),  # srvid:caid@provid
 					MultiContentEntryText(pos=(1045,0), size=(233,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, color=0x000000, backcolor=MultiContentTemplateColor(0), text=8),  # Last Channel
 					MultiContentEntryText(pos=(1280,0), size=(233,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=9),  # LB Value/Reader
 					MultiContentEntryText(pos=(1515,0), size=(163,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER|RT_WRAP, color=0x000000, backcolor=MultiContentTemplateColor(0), text=10),  # Online+Idle
 					MultiContentEntryText(pos=(1680,0), size=(210,75), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=11)  # Status
-					], "fonts": [gFont("Regular",27)], "itemHeight":75
+					], "fonts": [gFont("Regular",25)], "itemHeight":75
 					}
 				</convert>
 			</widget>
 			<widget name="logtext" position="15,812" size="1890,150" font="Regular;24" horizontalAlignment="left" verticalAlignment="top" foregroundColor="black" backgroundColor="#10ECEAF6" noWrap="0" scrollbarMode="showNever" />
-			<eLabel text="System Ram" position="15,964" size="171,42" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="#FFFF30" backgroundColor="#105a5a5a" />
-			<widget source="total" render="Label" position="188,964" size="258,42" font="Regular;27" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="used" render="Label" position="418,964" size="228,42" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="free" render="Label" position="648,964" size="228,42" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="buffer" render="Label" position="878,964" size="228,42" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="camname" render="Label" position="1108,964" size="125,42" font="Regular;27" verticalAlignment="center" horizontalAlignment="center" foregroundColor="#FFFF30" backgroundColor="#105a5a5a" />
-			<widget source="virtuell" render="Label" position="1235,964" size="388,42" font="Regular;27" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="resident" render="Label" position="1575,964" size="330,42" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="System Ram" position="15,964" size="171,42" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="#FFFF30" backgroundColor="#105a5a5a" />
+			<widget source="total" render="Label" position="188,964" size="258,42" font="Regular;23" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="used" render="Label" position="418,964" size="228,42" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="free" render="Label" position="648,964" size="228,42" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="buffer" render="Label" position="878,964" size="228,42" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="camname" render="Label" position="1108,964" size="125,42" font="Regular;23" verticalAlignment="center" horizontalAlignment="center" foregroundColor="#FFFF30" backgroundColor="#105a5a5a" />
+			<widget source="virtuell" render="Label" position="1235,964" size="388,42" font="Regular;23" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="resident" render="Label" position="1575,964" size="330,42" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
 			<eLabel name="red" position="20,1010" size="10,65" backgroundColor="red" zPosition="1" />
 			<eLabel name="green" position="320,1010" size="10,65" backgroundColor="green" zPosition="1" />
 			<eLabel name="blue" position="920,1010" size="10,65" backgroundColor="blue" zPosition="1" />
@@ -465,34 +465,34 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 			<widget source="global.CurrentTime" render="Label" position="1470,51" size="240,40" font="Regular;24" noWrap="1" horizontalAlignment="right" verticalAlignment="bottom" foregroundColor="#00FFFFFF" backgroundColor="#1A0F0F0F" transparent="1">
 				<convert type="ClockToText">Format:%e. %B</convert>
 			</widget>
-			<widget source="dheader0" render="Label" position="15,105" size="88,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Type
-			<widget source="dheader1" render="Label" position="105,105" size="103,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # CAID
-			<widget source="dheader2" render="Label" position="210,105" size="118,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Provid
-			<widget source="dheader3" render="Label" position="330,105" size="268,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # ID
-			<widget source="dheader4" render="Label" position="600,105" size="148,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Class
-			<widget source="dheader5" render="Label" position="750,105" size="163,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Start Date
-			<widget source="dheader6" render="Label" position="915,105" size="163,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Expire Date
-			<widget source="dheader7" render="Label" position="1080,105" size="825,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Name
-			<widget source="cheader0" render="Label" position="15,105" size="88,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # CAID
-			<widget source="cheader1" render="Label" position="105,105" size="208,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # System
+			<widget source="dheader0" render="Label" position="15,105" size="88,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Type
+			<widget source="dheader1" render="Label" position="105,105" size="103,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # CAID
+			<widget source="dheader2" render="Label" position="210,105" size="118,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Provid
+			<widget source="dheader3" render="Label" position="330,105" size="268,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # ID
+			<widget source="dheader4" render="Label" position="600,105" size="148,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Class
+			<widget source="dheader5" render="Label" position="750,105" size="163,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Start Date
+			<widget source="dheader6" render="Label" position="915,105" size="163,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Expire Date
+			<widget source="dheader7" render="Label" position="1080,105" size="825,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Name
+			<widget source="cheader0" render="Label" position="15,105" size="88,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # CAID
+			<widget source="cheader1" render="Label" position="105,105" size="208,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # System
 			<widget source="cheader2" render="Label" />  # Reshare (not used here)
 			<widget source="cheader3" render="Label" />  # Hop (not used here)
 			<widget source="cheader4" render="Label" />  # ShareID (not used here)
 			<widget source="cheader5" render="Label" />  # RemoteID (not used here)
-			<widget source="cheader6" render="Label" position="315,105" size="118,58" font="Regular;27" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # ProvIDs
-			<widget source="cheader7" render="Label" position="435,105" size="313,58" font="Regular;27" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Providers
-			<widget source="cheader8" render="Label" position="750,105" size="268,58" font="Regular;27" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Nodes
-			<widget source="cheader9" render="Label" position="1020,105" size="88,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Locals
-			<widget source="cheader10" render="Label" position="1110,105" size="88,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Count
-			<widget source="cheader11" render="Label" position="1200,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Hop1
-			<widget source="cheader12" render="Label" position="1275,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Hop2
-			<widget source="cheader13" render="Label" position="1350,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Hopx
-			<widget source="cheader14" render="Label" position="1425,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Curr
-			<widget source="cheader15" render="Label" position="1500,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Res0
-			<widget source="cheader16" render="Label" position="1575,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Res1
-			<widget source="cheader17" render="Label" position="1650,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Res2
-			<widget source="cheader18" render="Label" position="1725,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Resx
-			<widget source="cheader19" render="Label" position="1800,105" size="105,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Reshare
+			<widget source="cheader6" render="Label" position="315,105" size="118,58" font="Regular;23" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # ProvIDs
+			<widget source="cheader7" render="Label" position="435,105" size="313,58" font="Regular;23" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Providers
+			<widget source="cheader8" render="Label" position="750,105" size="268,58" font="Regular;23" horizontalAlignment="left" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Nodes
+			<widget source="cheader9" render="Label" position="1020,105" size="88,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Locals
+			<widget source="cheader10" render="Label" position="1110,105" size="88,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Count
+			<widget source="cheader11" render="Label" position="1200,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Hop1
+			<widget source="cheader12" render="Label" position="1255,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Hop2
+			<widget source="cheader13" render="Label" position="1350,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Hopx
+			<widget source="cheader14" render="Label" position="1425,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Curr
+			<widget source="cheader15" render="Label" position="1500,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Res0
+			<widget source="cheader16" render="Label" position="1575,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Res1
+			<widget source="cheader17" render="Label" position="1650,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Res2
+			<widget source="cheader18" render="Label" position="1725,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Resx
+			<widget source="cheader19" render="Label" position="1800,105" size="105,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />  # Reshare
 			<parameters>
 				<parameter name="OSCamInfoBGcolors" value="0x10fef2e6, 0x10f0f4e5" />
 			</parameters>
@@ -528,7 +528,7 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 							MultiContentEntryText(pos=(1785,0), size=(105,36), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=20)  # Reshare
 							])
 	  					},
-						"fonts": [gFont("Regular",27)], "itemHeight":36
+						"fonts": [gFont("Regular",25)], "itemHeight":36
 					}
 				</convert>
 			</widget>
@@ -752,28 +752,28 @@ class OSCamEntitleDetails(Screen, OSCamGlobals):
 		<screen name="OSCamEntitleDetails" position="center,center" size="765,1080" backgroundColor="#10101010" title="OSCam EntitleDetails" flags="wfNoBorder" resolution="1920,1080">
 			<ePixmap pixmap="icons/OscamLogo.png" position="15,15" size="80,80" scale="1" alphaTest="blend" />
 			<widget source="Title" render="Label" position="105,15" size="660,60" font="Regular;40" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#10101010" />
-			<eLabel text="CAID" position="15,105" size="88,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="System" position="105,105" size="178,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Reshare" position="285,105" size="118,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="Hop" position="405,105" size="73,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="ShareID" position="480,105" size="133,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<eLabel text="RemoteID" position="615,105" size="135,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="label0" render="Label" position="15,165" size="88,55" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # CAID
-			<widget source="label1" render="Label" position="105,165" size="178,55" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # System
-			<widget source="label2" render="Label" position="285,165" size="118,55" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # Reshare
-			<widget source="label3" render="Label" position="405,165" size="73,55" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # Hop
-			<widget source="label4" render="Label" position="480,165" size="133,55" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # ShareID
-			<widget source="label5" render="Label" position="615,165" size="135,55" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # RemoteID
-			<eLabel text="ProvIDs" position="15,225" size="735,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="ProvIDlist" render="Listbox" position="15,285" size="735,195" font="Regular;27" itemHeight="40" foregroundColor="black" backgroundColor="#10fef2e6" foregroundColorSelected="black" backgroundColorSelected="#10fef2e6" horizontalAlignment="center" verticalAlignment="center" scrollbarMode="showOnDemand" >
+			<eLabel text="CAID" position="15,105" size="88,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="System" position="105,105" size="178,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Reshare" position="285,105" size="118,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="Hop" position="405,105" size="73,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="ShareID" position="480,105" size="133,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<eLabel text="RemoteID" position="615,105" size="135,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="label0" render="Label" position="15,165" size="88,55" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # CAID
+			<widget source="label1" render="Label" position="105,165" size="178,55" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # System
+			<widget source="label2" render="Label" position="285,165" size="118,55" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # Reshare
+			<widget source="label3" render="Label" position="405,165" size="73,55" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # Hop
+			<widget source="label4" render="Label" position="480,165" size="133,55" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # ShareID
+			<widget source="label5" render="Label" position="615,165" size="135,55" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="#10fef2e6" />  # RemoteID
+			<eLabel text="ProvIDs" position="15,225" size="735,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="ProvIDlist" render="Listbox" position="15,285" size="735,195" font="Regular;23" itemHeight="40" foregroundColor="black" backgroundColor="#10fef2e6" foregroundColorSelected="black" backgroundColorSelected="#10fef2e6" horizontalAlignment="center" verticalAlignment="center" scrollbarMode="showOnDemand" >
 				<convert type="StringList" />
 			</widget>
-			<eLabel text="Providers" position="15,485" size="735,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="Providerlist" render="Listbox" position="15,545" size="735,195" font="Regular;27" itemHeight="40" foregroundColor="black" backgroundColor="#10fef2e6" foregroundColorSelected="black" backgroundColorSelected="#10fef2e6" horizontalAlignment="center" verticalAlignment="center" scrollbarMode="showOnDemand" >
+			<eLabel text="Providers" position="15,485" size="735,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="Providerlist" render="Listbox" position="15,545" size="735,195" font="Regular;23" itemHeight="40" foregroundColor="black" backgroundColor="#10fef2e6" foregroundColorSelected="black" backgroundColorSelected="#10fef2e6" horizontalAlignment="center" verticalAlignment="center" scrollbarMode="showOnDemand" >
 				<convert type="StringList" />
 			</widget>
-			<eLabel text="Nodes" position="15,745" size="735,58" font="Regular;27" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
-			<widget source="Nodelist" render="Listbox" position="15,805" size="735,195" font="Regular;27" itemHeight="40" foregroundColor="black" backgroundColor="#10fef2e6" foregroundColorSelected="black" backgroundColorSelected="#10fef2e6" horizontalAlignment="center" verticalAlignment="center" scrollbarMode="showOnDemand" >
+			<eLabel text="Nodes" position="15,745" size="735,58" font="Regular;23" horizontalAlignment="center" verticalAlignment="center" foregroundColor="white" backgroundColor="#105a5a5a" />
+			<widget source="Nodelist" render="Listbox" position="15,805" size="735,195" font="Regular;23" itemHeight="40" foregroundColor="black" backgroundColor="#10fef2e6" foregroundColorSelected="black" backgroundColorSelected="#10fef2e6" horizontalAlignment="center" verticalAlignment="center" scrollbarMode="showOnDemand" >
 				<convert type="StringList" />
 			</widget>
 			<widget source="key_exit" render="Label" position="570,1020" size="150,42" font="Regular;30" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="grey" />

@@ -7617,10 +7617,10 @@ msgid "Shuffle playlist"
 msgstr "Lista de reproducción aleatoria"
 
 msgid "Shutdown NCam"
-msgstr "Detener NCam"
+msgstr "Parar NCam"
 
 msgid "Shutdown OSCam"
-msgstr "Detener OSCam"
+msgstr "Parar OSCam"
 
 msgid "Shutdown when in Standby"
 msgstr "Apagar cuando está en modo de reposo"
