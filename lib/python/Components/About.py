@@ -9,7 +9,7 @@ from socket import socket, AF_INET, inet_ntoa, SOCK_DGRAM
 from fcntl import ioctl
 from struct import pack, unpack
 from subprocess import PIPE, Popen
-from Components.SystemInfo import SystemInfo
+from Components.SystemInfo import BoxInfo, SystemInfo
 from Tools.HardwareInfo import HardwareInfo
 
 
@@ -89,13 +89,7 @@ def getFlashDateString():
 
 
 def getBuildDateString():
-	try:
-		if isfile('/etc/version'):
-			version = open("/etc/version", "r").read()
-			return "%s-%s-%s" % (version[:4], version[4:6], version[6:8])
-	except:
-		pass
-	return _("unknown")
+	return f'{BoxInfo.getItem("compiledate")[6:8]}' + '-' + f'{BoxInfo.getItem("compiledate")[4:6]}' + '-' + f'{BoxInfo.getItem("compiledate")[0:4]}'
 
 
 def getEnigmaVersionString():
