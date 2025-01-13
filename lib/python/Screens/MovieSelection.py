@@ -552,6 +552,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			buildMovieLocationList(locations)
 			for d, p in locations:
 				if p and p.startswith("/"):
+					if "movie" not in d:
+						d = d.split("/")[0]
 					userDefinedActions[p] = "%s: %s" % (_("Goto"), d)
 			config.movielist.btn_red = ConfigSelection(default="delete", choices=userDefinedActions)
 			config.movielist.btn_green = ConfigSelection(default="move", choices=userDefinedActions)
