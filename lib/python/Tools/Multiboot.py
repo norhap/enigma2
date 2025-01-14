@@ -259,6 +259,6 @@ def VerDate(imagedir):
 		tmpfile = stat(join(imagedir, "usr/bin/enigma2"))
 		compiledate = localtime(tmpfile.st_mtime)
 		date = strftime("%d-%m-%Y", compiledate)
-		if int(BoxInfoRunningInstance.getItem("compiledate")[0:1]) > int(date[8:9]):  # avoid compilation date 09-03-2018
+		if int(BoxInfoRunningInstance.getItem("compiledate")[0:1]) != int(date[8:9]):  # Avoid different date in compilation.
 			date = getBuildDateString()
 		return date
