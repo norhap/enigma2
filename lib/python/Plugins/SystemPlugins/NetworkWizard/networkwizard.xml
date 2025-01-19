@@ -156,7 +156,8 @@ self.selectKey("DOWN")
 				</code>
 		</step>
 		<step id="wlanconfig">
-				<text value="Please configure your internet connection by filling out the required values.\n\nWhen you are ready press OK to continue.\n\nTo show WiFi networks activate Use interface and press OK, then wait until it shows Configure your network again. Configuring your network again will display the list of available networks." />
+				<!-- text value="Please configure your internet connection by filling out the required values.\n\nWhen you are ready press OK to continue.\n\nTo show WiFi networks activate Use interface and press OK, then wait until it shows Configure your network again. Configuring your network again will display the list of available networks." / -->
+				<text value="Please configure your internet connection by filling out the required values.\n\nWhen you are ready press OK to continue." />
 				<displaytext value="Configure interface" />
 				<config screen="AdapterSetup" module="NetworkSetup" args="(self.selectedInterface,self.ap)" type="ConfigList" />
 				<code>
