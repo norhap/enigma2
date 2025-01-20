@@ -39,6 +39,7 @@ config.macaddress.mac = ConfigText(default="", fixed_size=False)
 config.macaddress.change = ConfigText(default="%s" % macaddress)
 configmac = config.macaddress
 disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
+wlandeactive = False
 
 
 # Define a function to determine whether a service is configured to start at boot time.
@@ -185,6 +186,7 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		self.onClose.append(self.cleanup)
 
 	def buildInterfaceList(self, iface, name, default, active):
+		global wlandeactive
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "div-h.png"))
 		defaultpng = None
 		activepng = None
@@ -195,6 +197,8 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 			icon = {True: "icons/network_wired-active.png", False: "icons/network_wired-inactive.png", None: "icons/network_wired.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
 		elif iNetwork.isWirelessInterface(iface):
+			if wlandeactive:
+				active = False
 			icon = {True: "icons/network_wireless-active.png", False: "icons/network_wireless-inactive.png", None: "icons/network_wireless.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
 
@@ -770,6 +774,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["Adapter"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 
 	def createConfig(self):
+		global wlandeactive
 		self.InterfaceEntry = None
 		self.dhcpEntry = None
 		self.gatewayEntry = None
@@ -804,6 +809,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				ethactive = "auto eth"
 				if output.find(ethactive) >= 0:
 					ifaces = True
+					if fileContains(self.interfacesFile, "# 	pre-up"):
+						wlandeactive = True
+						iNetwork.setAdapterAttribute(self.iface, "up", False)
 			self.wsconfig = self.ws.loadConfig(self.iface)
 			if self.essid is None:
 				self.essid = self.wsconfig['ssid']
