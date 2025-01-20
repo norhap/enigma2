@@ -4,6 +4,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigBoolean, getConfigListEntry, ConfigSelection, ConfigNothing
 from Components.Network import iNetwork
 from Components.Opkg import OpkgComponent
+from Components.About import getIfConfig
 
 config.misc.installwizard = ConfigSubsection()
 config.misc.installwizard.hasnetwork = ConfigBoolean(default=False)
@@ -69,6 +70,11 @@ class InstallWizard(ConfigListScreen, Screen):
 			self.checkNetwork()
 
 	def createMenu(self):
+		wlan = ""
+		for ifacename in iNetwork.getInstalledAdapters():
+			if ifacename.startswith("wlan"):
+				wlan = ifacename
+				break
 		try:
 			test = self.index
 		except:
@@ -77,6 +83,11 @@ class InstallWizard(ConfigListScreen, Screen):
 		if self.index == self.STATE_UPDATE:
 			if config.misc.installwizard.hasnetwork.value:
 				ip = ".".join([str(x) for x in iNetwork.getAdapterAttribute(self.adapter, "ip")])
+				if str(ip) == "0.0.0.0":
+					try:
+						ip = getIfConfig(f"{wlan}")["addr"]
+					except Exception:
+						pass
 				self.list.append(getConfigListEntry(_("Your internet connection is working (IP address: %s)") % ip, self.enabled))
 			else:
 				self.doNextStep = True
