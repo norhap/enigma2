@@ -98,19 +98,16 @@ class Network:
 					ipv6.write("1")
 			if BoxInfo.getItem("WakeOnLAN"):
 				eth = ""
-				wlan = ""
 				for ifacename in self.getInstalledAdapters():
-					if ifacename.startswith("wlan"):
-						wlan = ifacename
 					if ifacename.startswith("eth"):
 						eth = ifacename
-				if not self.isWirelessInterface(iface):
-					if not fileContains("/etc/crontab", f"ifdown -v -f {iface}"):
-						eConsoleAppContainer().execute(f"sed -i '$a@reboot root ifdown -v -f {wlan};ifdown -v -f {iface}; ifup -v {iface}' /etc/crontab ; /etc/init.d/crond restart")
-				elif self.isWirelessInterface(iface):
-					config.network.wol.value = True
-					if fileContains("/etc/crontab", f"ifdown -v -f {iface}"):
-						eConsoleAppContainer().execute(f"sed -i '/@reboot root ifdown -v -f {iface};ifdown -v -f {eth}; ifup -v {eth}/d' /etc/crontab")
+						break
+				if config.network.wol.value:
+					if not fileContains("/etc/crontab", f"ifup -v {eth}"):
+						eConsoleAppContainer().execute(f"sed -i '$a@reboot root ifup -v {eth}' /etc/crontab ; /etc/init.d/crond restart")
+				else:
+					if fileContains("/etc/crontab", f"ifup -v {eth}"):
+						eConsoleAppContainer().execute(f"sed -i '/@reboot root ifup -v {eth}/d' /etc/crontab")
 		except:
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]
@@ -132,17 +129,27 @@ class Network:
 						dns.append((self.convertIP(s)))
 					if dns:
 						self.nameservers = dns
-				if BoxInfo.getItem("WakeOnLAN"):
-					if not config.network.wol.value or "wlan" in ifacename:
+				if iface["up"]:
+					if BoxInfo.getItem("WakeOnLAN"):
+						if config.network.wol.value and "eth" in ifacename:
+							fp.write("# auto " + ifacename + "\n")  # deactive auto ethx to activate WOL.
+						else:
+							fp.write("auto " + ifacename + "\n")
+					else:
 						fp.write("auto " + ifacename + "\n")
-						self.configuredInterfaces.append(ifacename)
-				else:
-					if iface["up"]:
-						fp.write("auto " + ifacename + "\n")
-						self.configuredInterfaces.append(ifacename)
 				if iface['dhcp']:
-					fp.write("iface " + ifacename + " inet dhcp\n")
-					fp.write("udhcpc_opts -T1 -t9\n")
+					if BoxInfo.getItem("WakeOnLAN"):
+						if config.network.wol.value:
+							if "eth" in ifacename:
+								fp.write("iface " + ifacename + " inet dhcp\n")
+								fp.write("udhcpc_opts -T1 -t9\n")
+						else:
+							fp.write("iface " + ifacename + " inet dhcp\n")
+							fp.write("udhcpc_opts -T1 -t9\n")
+					else:
+						if iface["up"]:
+							fp.write("iface " + ifacename + " inet dhcp\n")
+							fp.write("udhcpc_opts -T1 -t9\n")
 				if not iface['dhcp']:
 					fp.write("iface " + ifacename + " inet static\n")
 					if 'ip' in iface:
@@ -152,17 +159,23 @@ class Network:
 						if 'gateway' in iface:
 							fp.write("	gateway %d.%d.%d.%d\n" % tuple(iface['gateway']))
 				if "configStrings" in iface:
-					fp.write(iface["configStrings"])
-				if iface["preup"] and "configStrings" not in iface:
-					fp.write(iface["preup"])
-				if iface["predown"] and "configStrings" not in iface:
-					fp.write(iface["predown"])
+					configStrings = iface["configStrings"]
+					if not iface["up"]:
+						configStrings = configStrings.split("\n")
+						configStrings = [f"# {x}" for x in configStrings]
+						configStrings = "\n".join(configStrings)
+					fp.write(configStrings)
+				if iface["up"]:
+					if iface["preup"] and "configStrings" not in iface:
+						fp.write(iface["preup"])
+					if iface["predown"] and "configStrings" not in iface:
+						fp.write(iface["predown"])
 				if "dns-nameservers" in iface and iface["dns-nameservers"]:
 					fp.write("	dns-nameservers")
 					for nameserver in iface["dns-nameservers"]:
 						fp.write(" %d.%d.%d.%d" % tuple(nameserver))
-					fp.write("\n")
 				fp.write("\n")
+				self.configuredInterfaces.append(ifacename)
 		self.configuredNetworkAdapters = self.configuredInterfaces
 
 	def writeNameserverConfig(self):

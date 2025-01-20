@@ -782,6 +782,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.weplist = None
 		self.wsconfig = None
 		self.default = None
+		self.twoIfacesActive = False
+		self.interfacesFile = "/etc/network/interfaces"
+		ifaces = False
 		if iNetwork.isWirelessInterface(self.iface):
 			from Plugins.SystemPlugins.WirelessLan.Wlan import wpaSupplicant
 			self.ws = wpaSupplicant()
@@ -795,7 +798,12 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.weplist = []
 			self.weplist.append("ASCII")
 			self.weplist.append("HEX")
-
+			if exists(self.interfacesFile):
+				with open(self.interfacesFile) as f:
+					output = f.read()
+				ethactive = "auto eth"
+				if output.find(ethactive) >= 0:
+					ifaces = True
 			self.wsconfig = self.ws.loadConfig(self.iface)
 			if self.essid is None:
 				self.essid = self.wsconfig['ssid']
@@ -819,6 +827,22 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		nameserver = (iNetwork.getNameserverList() + [[0, 0, 0, 0]] * 2)[0:2]
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
+		if self.activateInterfaceEntry.value:
+			if exists(self.interfacesFile):
+				with open(self.interfacesFile) as f:
+					output = f.read()
+				wlanactive = "auto wlan"
+				if output.find(wlanactive) >= 0:
+					ifaces = True
+		else:
+			if not iNetwork.isWirelessInterface(self.iface):
+				if exists(self.interfacesFile):
+					with open(self.interfacesFile) as f:
+						output = f.read()
+					wlanactive = "auto wlan"
+					if output.find(wlanactive) >= 0:
+						ifaces = True
+		self.twoIfacesActive = ifaces
 
 	def createSetup(self):
 		self.list = []
@@ -906,13 +930,16 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		config.network.save()
 
 	def keySaveConfirm(self, ret=False):
+		if BoxInfo.getItem("WakeOnLAN") and iNetwork.isWirelessInterface(self.iface):
+			config.network.wol.value = False
+			config.network.wol.save()
 		if ret:
 			num_configured_if = len(iNetwork.getConfiguredAdapters())
 			if num_configured_if >= 1:
-				if self.iface in iNetwork.getConfiguredAdapters():
-					self.applyConfig(True)
+				if self.twoIfacesActive:
+					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), type=MessageBox.TYPE_YESNO, default=True)
 				else:
-					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), default=True)
+					self.applyConfig(True)
 			else:
 				self.applyConfig(True)
 		else:
@@ -1103,7 +1130,6 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		else:
 			from wifi.exceptions import InterfaceError
 			try:
-				self.Console.ePopen("ifconfig %s up" % self.iface)
 				wlanresponse = list(Cell.all(iface))
 			except InterfaceError as err:
 				print("[NetworkSetup] queryWirelessDevice InterfaceError:", err)
