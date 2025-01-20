@@ -5,6 +5,7 @@ dist_install_DATA = \
 	green.png \
 	red.png \
 	vkey_backspace.png \
+	vkey_bg.png \
 	vkey_bg_l.png \
 	vkey_bg_m.png \
 	vkey_bg_r.png \
