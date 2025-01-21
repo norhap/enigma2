@@ -14,7 +14,7 @@ from enigma import eEnv, getDesktop, eGetEnigmaDebugLvl
 DEFAULT_MODULE_NAME = __name__.split(".")[-1]
 
 forceDebug = eGetEnigmaDebugLvl() > 4
-pathExists = exists  # This is needed for old plugins.
+pathExists = exists
 
 SCOPE_HOME = 0  # DEBUG: Not currently used in Enigma2.
 SCOPE_LANGUAGE = 1
@@ -50,7 +50,7 @@ PATH_CREATE = 0
 PATH_DONTCREATE = 1
 
 defaultPaths = {
-	SCOPE_HOME: ("", PATH_DONTCREATE),  # User home directory.
+	SCOPE_HOME: ("", PATH_DONTCREATE),  # User home directory
 	SCOPE_LANGUAGE: (eEnv.resolve("${datadir}/enigma2/po/"), PATH_DONTCREATE),
 	SCOPE_KEYMAPS: (eEnv.resolve("${datadir}/keymaps/"), PATH_CREATE),
 	SCOPE_METADIR: (eEnv.resolve("${datadir}/meta/"), PATH_CREATE),
@@ -82,39 +82,8 @@ def InitDefaultPaths():
 	resolveFilename(SCOPE_CONFIG)
 
 
-skinResolveList = []
-lcdskinResolveList = []
-fontsResolveList = []
-
-
-def clearResolveLists():
-	global skinResolveList, lcdskinResolveList, fontsResolveList
-	skinResolveList = []
-	lcdskinResolveList = []
-	fontsResolveList = []
-
-
 def resolveFilename(scope, base="", path_prefix=None):
-	def addIfExists(paths):
-		return [path for path in paths if isdir(path)]
-
-	def checkPaths(resolveList, base):
-		# Disable png / svg interchange code for now.  SVG files are very CPU intensive.
-		# baseList = [base]
-		# if base.endswith(".png"):
-		# 	baseList.append(f"{base[:-3]}svg")
-		# elif base.endswith(".svg"):
-		# 	baseList.append(f"{base[:-3]}png")
-		path = base
-		for item in resolveList:
-			# for base in baseList:
-			file = join(item, base)
-			if exists(file):
-				path = file
-				break
-		return path
-
-	if str(base).startswith(f"~{sep}"):  # You can only use the ~/ if we have a prefix directory.
+	if str(base).startswith("~%s" % sep):  # You can only use the ~/ if we have a prefix directory.
 		if path_prefix:
 			base = join(path_prefix, base[2:])
 		else:
@@ -137,68 +106,79 @@ def resolveFilename(scope, base="", path_prefix=None):
 		base = data[0]
 		suffix = data[1]
 	path = base
+
+	def itemExists(resolveList, base):
+		# Disable png / svg interchange code for now.  SVG files are very CPU intensive.
+		# baseList = [base]
+		# if base.endswith(".png"):
+		# 	baseList.append("%s%s" % (base[:-3], "svg"))
+		# elif base.endswith(".svg"):
+		# 	baseList.append("%s%s" % (base[:-3], "png"))
+		for item in resolveList:
+			# for base in baseList:
+			file = join(item, base)
+			if exists(file):
+				return file
+		return base
+
 	if base == "":  # If base is "" then set path to the scope.  Otherwise use the scope to resolve the base filename.
 		path, flags = defaultPaths.get(scope)
 		if scope == SCOPE_GUISKIN:  # If the scope is SCOPE_GUISKIN append the current skin to the scope path.
-			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
+			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 			skin = dirname(config.skin.primary_skin.value)
 			path = join(path, skin)
 	elif scope == SCOPE_GUISKIN:
-		global skinResolveList
-		if not skinResolveList:
-			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
-			skin = dirname(config.skin.primary_skin.value)
-			skinResolveList = addIfExists([
-				join(scopeConfig, skin),
-				join(scopeConfig, "skin_common"),
-				join(scopeGUISkin, skin),
-				join(scopeGUISkin, f"skin_fallback_{getDesktop(0).size().height()}"),
-				join(scopeGUISkin, "skin_default"),
-				scopeGUISkin  # Deprecate top level of SCOPE_GUISKIN directory to allow a clean up.
-			])
-		path = checkPaths(skinResolveList, base)
+		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
+		skin = dirname(config.skin.primary_skin.value)
+		resolveList = [
+			join(scopeConfig, skin),
+			# join(scopeConfig, "skin_common"),
+			scopeConfig,  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
+			join(scopeGUISkin, skin),
+			join(scopeGUISkin, "skin_fallback_%d" % getDesktop(0).size().height()),
+			join(scopeGUISkin, "skin_default"),
+			scopeGUISkin  # Can we deprecate top level of SCOPE_GUISKIN directory to allow a clean up?
+		]
+		path = itemExists(resolveList, base)
 	elif scope == SCOPE_LCDSKIN:
-		global lcdskinResolveList
-		if not lcdskinResolveList:
-			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
-			skin = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else ""
-			lcdskinResolveList = addIfExists([
-				join(scopeConfig, "display", skin),
-				join(scopeConfig, "display", "skin_common"),
-				join(scopeLCDSkin, skin),
-				join(scopeLCDSkin, f"skin_fallback_{getDesktop(1).size().height()}"),
-				join(scopeLCDSkin, "skin_default"),
-				scopeLCDSkin  # Deprecate top level of SCOPE_LCDSKIN directory to allow a clean up.
-			])
-		path = checkPaths(lcdskinResolveList, base)
+		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
+		skin = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else ""
+		resolveList = [
+			join(scopeConfig, "display", skin),
+			join(scopeConfig, "display", "skin_common"),
+			scopeConfig,  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
+			join(scopeLCDSkin, skin),
+			join(scopeLCDSkin, "skin_fallback_%s" % getDesktop(1).size().height()),
+			join(scopeLCDSkin, "skin_default"),
+			scopeLCDSkin  # Can we deprecate top level of SCOPE_LCDSKIN directory to allow a clean up?
+		]
+		path = itemExists(resolveList, base)
 	elif scope == SCOPE_FONTS:
-		global fontsResolveList
-		if not fontsResolveList:
-			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
-			skin = dirname(config.skin.primary_skin.value)
-			display = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
-			resolveList = [
-				join(scopeConfig, "fonts"),
-				join(scopeConfig, skin, "fonts"),
-				join(scopeConfig, skin)
-			]
-			if display:
-				resolveList.append(join(scopeConfig, "display", display, "fonts"))
-				resolveList.append(join(scopeConfig, "display", display))
-			resolveList.append(join(scopeConfig, "skin_common", "fonts"))
-			resolveList.append(join(scopeConfig, "skin_common"))
-			resolveList.append(join(scopeGUISkin, skin, "fonts"))
-			resolveList.append(join(scopeGUISkin, skin))
-			resolveList.append(join(scopeGUISkin, "skin_default", "fonts"))
-			resolveList.append(join(scopeGUISkin, "skin_default"))
-			if display:
-				resolveList.append(join(scopeLCDSkin, display, "fonts"))
-				resolveList.append(join(scopeLCDSkin, display))
-			resolveList.append(join(scopeLCDSkin, "skin_default", "fonts"))
-			resolveList.append(join(scopeLCDSkin, "skin_default"))
-			resolveList.append(scopeFonts)
-			fontsResolveList = addIfExists(resolveList)
-		path = checkPaths(fontsResolveList, base)
+		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
+		skin = dirname(config.skin.primary_skin.value)
+		display = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
+		resolveList = [
+			join(scopeConfig, "fonts"),
+			join(scopeConfig, skin, "fonts"),
+			join(scopeConfig, skin)
+		]
+		if display:
+			resolveList.append(join(scopeConfig, "display", display, "fonts"))
+			resolveList.append(join(scopeConfig, "display", display))
+		resolveList.append(join(scopeConfig, "skin_common", "fonts"))
+		resolveList.append(join(scopeConfig, "skin_common"))
+		resolveList.append(scopeConfig)  # Can we deprecate top level of SCOPE_CONFIG directory to allow a clean up?
+		resolveList.append(join(scopeGUISkin, skin, "fonts"))
+		resolveList.append(join(scopeGUISkin, skin))
+		resolveList.append(join(scopeGUISkin, "skin_default", "fonts"))
+		resolveList.append(join(scopeGUISkin, "skin_default"))
+		if display:
+			resolveList.append(join(scopeLCDSkin, display, "fonts"))
+			resolveList.append(join(scopeLCDSkin, display))
+		resolveList.append(join(scopeLCDSkin, "skin_default", "fonts"))
+		resolveList.append(join(scopeLCDSkin, "skin_default"))
+		resolveList.append(scopeFonts)
+		path = itemExists(resolveList, base)
 	elif scope == SCOPE_PLUGIN:
 		file = join(scopePlugins, base)
 		if exists(file):
@@ -304,8 +284,8 @@ def fileReadXML(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False)
 			except Exception as err:
 				print("[%s] Error: Unable to parse data in '%s' - '%s'!" % (source, filename, err))
 	except OSError as err:
-		if err.errno == ENOENT:  # No such file or directory.
-			print(f"[{source}] Warning: File '{filename}' does not exist!")
+		if err.errno == ENOENT:  # ENOENT - No such file or directory.
+			print("[%s] Warning: File '%s' does not exist!" % (source, filename))
 		else:
 			print("[%s] Error %d: Opening file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
 	except Exception as err:
@@ -370,11 +350,11 @@ def getRecordingFilename(basename, dirname=None):
 		if character in nonAllowedCharacters or ord(character) < 32:
 			character = "_"
 		filename += character
-	# Max filename length for ext4 is 255 (minus 12 characters for .stream.meta)
-	# but must not truncate in the middle of a multi-byte UTF8 character!
-	# So convert the truncation to Unicode and back, ignoring errors, the
-	# result will be valid UTF8 and so XML parsing will be OK.
-	filename = filename[:243]
+	# Max filename length for ext4 is 255 (minus 8 characters for .ts.meta)
+	# but must not truncate in the middle of a multi-byte utf8 character!
+	# So convert the truncation to unicode and back, ignoring errors, the
+	# result will be valid utf8 and so xml parsing will be OK.
+	filename = filename[:247]
 	if dirname is None:
 		dirname = defaultRecordingLocation()
 	else:
@@ -467,8 +447,8 @@ def copytree(src, dst, symlinks=False):
 	return copyTree(src, dst, symlinks=symlinks)
 
 
-# Renames files or if source and destination are on different devices moves them in the background.
-# The input is a list of (source, destination).
+# Renames files or if source and destination are on different devices moves them in background
+# input list of (source, destination)
 #
 def moveFiles(fileList):
 	errorFlag = False
@@ -478,7 +458,7 @@ def moveFiles(fileList):
 			rename(item[0], item[1])
 			movedList.append(item)
 	except OSError as err:
-		if err.errno == EXDEV:  # Invalid cross-device link.
+		if err.errno == EXDEV:  # EXDEV - Invalid cross-device link.
 			print("[Directories] Warning: Cannot rename across devices, trying slower move.")
 			from Tools.CopyFiles import moveFiles as extMoveFiles
 			extMoveFiles(fileList, item[0])
@@ -508,7 +488,7 @@ def comparePaths(leftPath, rightPath):
 	return True
 
 
-# Returns a list of tuples containing pathname and filename matching the given pattern.
+# Returns a list of tuples containing pathname and filename matching the given pattern
 # Example-pattern: match all txt-files: ".*\.txt$"
 #
 def crawlDirectory(directory, pattern):
@@ -688,25 +668,25 @@ def sanitizeFilename(filename, maxlen=255):  # 255 is max length in ext4 (and mo
 		"COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5",
 		"LPT6", "LPT7", "LPT8", "LPT9",
 	)  # Reserved words on Windows
-	# Remove any blacklisted chars. Remove all characters below code point 32. Normalize. Strip.
+	# Remove any blacklisted chars. Remove all charcters below code point 32. Normalize. Strip.
 	filename = normalize("NFKD", "".join(c for c in filename if c not in blacklist and ord(c) > 31)).strip()
 	if all([x == "." for x in filename]) or filename in reserved:  # if filename is a string of dots
 		filename = f"__{filename}"
 	# Most Unix file systems typically allow filenames of up to 255 bytes.
 	# However, the actual number of characters allowed can vary due to the
 	# representation of Unicode characters. Therefore length checks must
-	# be done in bytes, not Unicode.
+	# be done in bytes, not unicode.
 	#
 	# Also we cannot leave the byte truncate in the middle of a multi-byte
-	# UTF8 character! So, convert to bytes, truncate then get back to Unicode,
-	# ignoring errors along the way, the result will be valid Unicode.
-	# Prioritize maintaining the complete extension if possible.
+	# utf8 character! So, convert to bytes, truncate then get back to unicode,
+	# ignoring errors along the way, the result will be valid unicode.
+	# Prioritise maintaining the complete extension if possible.
 	# Any truncation of root or ext will be done at the end of the string
-	root, ext = splitext(filename.encode(encoding="UTF-8", errors="ignore"))
+	root, ext = splitext(filename.encode(encoding="utf-8", errors="ignore"))
 	if len(ext) > maxlen - (1 if root else 0):  # leave at least one char for root if root
 		ext = ext[:maxlen - (1 if root else 0)]
-	# convert back to Unicode, ignoring any incomplete UTF8 multi-byte chars
-	filename = root[:maxlen - len(ext)].decode(encoding="UTF-8", errors="ignore") + ext.decode(encoding="UTF-8", errors="ignore")
+	# convert back to unicode, ignoring any incomplete utf8 multibyte chars
+	filename = root[:maxlen - len(ext)].decode(encoding="utf-8", errors="ignore") + ext.decode(encoding="utf-8", errors="ignore")
 	filename = filename.rstrip(". ")  # Windows does not allow these at end
 	if not filename:
 		filename = "__"
