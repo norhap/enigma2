@@ -790,6 +790,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.twoIfacesActive = False
 		self.interfacesFile = "/etc/network/interfaces"
 		ifaces = False
+		self.firstRunSetupWizard = False
 		if iNetwork.isWirelessInterface(self.iface):
 			from Plugins.SystemPlugins.WirelessLan.Wlan import wpaSupplicant
 			self.ws = wpaSupplicant()
@@ -821,7 +822,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			config.plugins.wlan.encryption = NoSave(ConfigSelection(self.encryptionlist, default=self.wsconfig['encryption']))
 			config.plugins.wlan.wepkeytype = NoSave(ConfigSelection(self.weplist, default=self.wsconfig['wepkeytype']))
 			config.plugins.wlan.psk = NoSave(ConfigPassword(default=self.wsconfig['key'], visible_width=50, fixed_size=False))
-
+			if config.misc.firstrun.value and iNetwork.isWirelessInterface(self.iface):
+				config.plugins.wlan.encryption.value = "WPA/WPA2"  # set encryption ..prepare to enter password in wizard.
+				config.plugins.wlan.encryption.save()
 		self.activateInterfaceEntry = NoSave(ConfigYesNo(default=iNetwork.getAdapterAttribute(self.iface, "up") or False))
 		self.dhcpConfigEntry = NoSave(ConfigYesNo(default=iNetwork.getAdapterAttribute(self.iface, "dhcp") or False))
 		self.ipConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "ip")) or [0, 0, 0, 0])
@@ -927,8 +930,11 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.newConfig()
 
 	def keySave(self):
+		if config.misc.firstrun.value and not self.firstRunSetupWizard:  # ConfigPassword WLAN VK or helpwindow or deactivate interface not used in wizard.
+			self.createConfig()
+			self.createSetup()
 		self.hideInputHelp()
-		if self["config"].isChanged():
+		if self["config"].isChanged() or config.misc.firstrun.value:
 			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext))
 		else:
 			if self.finished_cb:
@@ -994,6 +1000,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				else:
 					iNetwork.deactivateInterface(self.iface, self.activateInterfaceCB)
 				iNetwork.writeNetworkConfig()
+				if config.misc.firstrun.value:
+					self.firstRunSetupWizard = True
 				self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network configuration..."), type=MessageBox.TYPE_INFO, enable_input=False)
 		else:
 			self.keyCancel()
@@ -1017,9 +1025,12 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def applyConfigfinishedCB(self, data):
 		if data:
 			if self.finished_cb:
-				self.session.openWithCallback(lambda x: self.finished_cb(), MessageBox, _("Your network configuration has been activated."), type=MessageBox.TYPE_INFO, timeout=10)
+				if config.misc.firstrun.value and iNetwork.isWirelessInterface(self.iface):
+					self.session.openWithCallback(lambda x: self.finished_cb(), MessageBox, _("Your network configuration has been activated.\n\nPress and wait in next screen.\n\nYou will automatically return to the WLAN data screen."), type=MessageBox.TYPE_INFO)
+				else:
+					self.session.openWithCallback(lambda x: self.finished_cb(), MessageBox, _("Your network configuration has been activated."), type=MessageBox.TYPE_INFO, timeout=5)
 			else:
-				self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network configuration has been activated."), type=MessageBox.TYPE_INFO, timeout=10)
+				self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network configuration has been activated."), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def ConfigfinishedCB(self, data):
 		if data is not None and data:

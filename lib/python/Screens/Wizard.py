@@ -635,10 +635,9 @@ class Wizard(Screen):
 				self["VKeyIcon"].boolean = False
 
 	def KeyText(self):
-		if not config.misc.firstrun.value:  # use help window to set WLAN password not VK only in first run.
-			from Screens.VirtualKeyBoard import VirtualKeyBoard
-			self.currentConfigIndex = self["config"].getCurrentIndex()
-			self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
+		from Screens.VirtualKeyBoard import VirtualKeyBoard
+		self.currentConfigIndex = self["config"].getCurrentIndex()
+		self.session.openWithCallback(self.VirtualKeyBoardCallback, VirtualKeyBoard, title=self["config"].getCurrent()[0], text=self["config"].getCurrent()[1].getValue())
 
 	def VirtualKeyBoardCallback(self, callback=None):
 		if callback is not None and len(callback):

@@ -5879,7 +5879,7 @@ msgid "Please note that the previously selected media could not be accessed and 
 msgstr "No se pudo acceder a los medios previamente seleccionados y, por lo tanto, se está utilizando el directorio predeterminado."
 
 msgid "Please press OK to continue."
-msgstr "Pulsar OK para continuar."
+msgstr "Pulse OK para continuar."
 
 msgid "Please re-enter the new PIN code"
 msgstr "Reintroducir el nuevo PIN"
@@ -9785,6 +9785,9 @@ msgstr "Su conexión a internet no funciona."
 
 msgid "Your network configuration has been activated."
 msgstr "Su configuración de red ha sido activada."
+
+msgid "Your network configuration has been activated.\n\nPress and wait in next screen.\n\nYou will automatically return to the WLAN data screen."
+msgstr "Su configuración de red ha sido activada.\n\nPulse y espere en la siguiente pantalla.\n\nRegresará automáticamente a la pantalla de datos WLAN."
 
 msgid "Your receiver can use SCPC optimized search range. Consult your receiver's manual for more information."
 msgstr "Su receptor puede usar el rango de búsqueda optimizado SCPC. Consulte el manual de su receptor para más información."
