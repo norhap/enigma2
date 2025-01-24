@@ -192,6 +192,8 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		description = None
 		interfacepng = None
 
+		if not fileContains(interfacesFile, f"{iface}"):
+			active = False
 		if not iNetwork.isWirelessInterface(iface):
 			icon = {True: "icons/network_wired-active.png", False: "icons/network_wired-inactive.png", None: "icons/network_wired.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
@@ -335,7 +337,7 @@ class DNSSettings(Setup, HelpableScreen):
 		strdns = str(self.backupNameserverList)
 		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
 		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
-			if fileContains("/etc/network/interfaces", "iface eth0 inet static") or fileContains("/etc/network/interfaces", "iface wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
+			if fileContains(interfacesFile, "eth0 inet static") or fileContains(interfacesFile, "wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
 				servername = _("Static IP Router")
@@ -954,7 +956,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			num_configured_if = len(iNetwork.getConfiguredAdapters())
 			if num_configured_if >= 1:
 				if self.twoIfacesActive:
-					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), type=MessageBox.TYPE_YESNO, default=True)
+					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("There is a second interface configured (recommended to disable it).\n\nDo you want to disable the second network interface?"), type=MessageBox.TYPE_YESNO, default=True)
 				else:
 					self.applyConfig(True)
 			else:
@@ -1036,6 +1038,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network configuration has been activated."), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def ConfigfinishedCB(self, data):
+		if not fileContains(interfacesFile, f"{self.iface}") and self.ipConfigEntry.getText() == "0.0.0.0":
+			self.session.open(MessageBox, _("1. Change an adapter parameter and activate this setting.\n\n2. This setting will have no effect.\n\n3. Reconfigure your settings as before the change.\n\n4. This action will provide you with the IP address."), type=MessageBox.TYPE_INFO)
 		if data is not None and data:
 			self.close('ok')
 
