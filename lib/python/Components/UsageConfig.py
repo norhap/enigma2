@@ -1123,6 +1123,9 @@ def InitUsageConfig():
 	config.usage.show_slider_value = ConfigYesNo(default=True)
 	config.usage.cursorscroll = ConfigSelectionNumber(min=0, max=50, stepwidth=5, default=0, wraparound=True)
 
+	config.iface = ConfigSubsection()
+	config.iface.active_entry = ConfigYesNo(default=True)
+
 	config.usage.multiboot_order = ConfigYesNo(default=True)
 
 	config.crash = ConfigSubsection()

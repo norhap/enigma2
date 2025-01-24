@@ -39,7 +39,7 @@ config.macaddress.mac = ConfigText(default="", fixed_size=False)
 config.macaddress.change = ConfigText(default="%s" % macaddress)
 configmac = config.macaddress
 disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
-wlandeactive = False
+interfacesFile = "/etc/network/interfaces"
 
 
 # Define a function to determine whether a service is configured to start at boot time.
@@ -186,7 +186,6 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		self.onClose.append(self.cleanup)
 
 	def buildInterfaceList(self, iface, name, default, active):
-		global wlandeactive
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "div-h.png"))
 		defaultpng = None
 		activepng = None
@@ -197,7 +196,7 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 			icon = {True: "icons/network_wired-active.png", False: "icons/network_wired-inactive.png", None: "icons/network_wired.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
 		elif iNetwork.isWirelessInterface(iface):
-			if wlandeactive:
+			if fileContains(interfacesFile, "# 	pre-up"):
 				active = False
 			icon = {True: "icons/network_wireless-active.png", False: "icons/network_wireless-inactive.png", None: "icons/network_wireless.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
@@ -774,7 +773,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["Adapter"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 
 	def createConfig(self):
-		global wlandeactive
 		self.InterfaceEntry = None
 		self.dhcpEntry = None
 		self.gatewayEntry = None
@@ -788,7 +786,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.wsconfig = None
 		self.default = None
 		self.twoIfacesActive = False
-		self.interfacesFile = "/etc/network/interfaces"
 		ifaces = False
 		self.firstRunSetupWizard = False
 		if iNetwork.isWirelessInterface(self.iface):
@@ -804,14 +801,13 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.weplist = []
 			self.weplist.append("ASCII")
 			self.weplist.append("HEX")
-			if exists(self.interfacesFile):
-				with open(self.interfacesFile) as f:
+			if exists(interfacesFile):
+				with open(interfacesFile) as f:
 					output = f.read()
 				ethactive = "auto eth"
 				if output.find(ethactive) >= 0:
 					ifaces = True
-					if fileContains(self.interfacesFile, "# 	pre-up"):
-						wlandeactive = True
+					if fileContains(interfacesFile, "# 	pre-up"):
 						iNetwork.setAdapterAttribute(self.iface, "up", False)
 			self.wsconfig = self.ws.loadConfig(self.iface)
 			if self.essid is None:
@@ -839,16 +835,16 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 		if self.activateInterfaceEntry.value:
-			if exists(self.interfacesFile):
-				with open(self.interfacesFile) as f:
+			if exists(interfacesFile):
+				with open(interfacesFile) as f:
 					output = f.read()
 				wlanactive = "auto wlan"
 				if output.find(wlanactive) >= 0:
 					ifaces = True
 		else:
 			if not iNetwork.isWirelessInterface(self.iface):
-				if exists(self.interfacesFile):
-					with open(self.interfacesFile) as f:
+				if exists(interfacesFile):
+					with open(interfacesFile) as f:
 						output = f.read()
 					wlanactive = "auto wlan"
 					if output.find(wlanactive) >= 0:
@@ -909,6 +905,12 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.session.openWithCallback(self.DNSSettingsClosed, DNSSettings)
 
 	def newConfig(self):
+		if self.activateInterfaceEntry.value:
+			config.iface.active_entry.value = config.iface.active_entry.default
+			config.iface.active_entry.save()
+		else:
+			config.iface.active_entry.value = False
+			config.iface.active_entry.save()
 		if self["config"].getCurrent() == self.InterfaceEntry:
 			self.createSetup()
 		if self["config"].getCurrent() == self.dhcpEntry:
@@ -944,6 +946,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		config.network.save()
 
 	def keySaveConfirm(self, ret=False):
+		self.activateInterfaceEntry.value = True if config.iface.active_entry.value else False
 		if BoxInfo.getItem("WakeOnLAN") and iNetwork.isWirelessInterface(self.iface):
 			config.network.wol.value = False
 			config.network.wol.save()
