@@ -9786,8 +9786,8 @@ msgstr "Su conexión a internet no funciona."
 msgid "Your network configuration has been activated."
 msgstr "Su configuración de red ha sido activada."
 
-msgid "Your network configuration has been activated.\n\nPress and wait in next screen.\n\nYou will automatically return to the WLAN data screen."
-msgstr "Su configuración de red ha sido activada.\n\nPulse y espere en la siguiente pantalla.\n\nRegresará automáticamente a la pantalla de datos WLAN."
+msgid "Your network configuration has been activated.\n\nPress OK and wait in next screen.\n\nIt will switch to the WLAN data screen automatically."
+msgstr "Su configuración de red ha sido activada.\n\nPulse OK y espere en la siguiente pantalla.\n\nCambiará automáticamente a la pantalla de datos WLAN."
 
 msgid "Your receiver can use SCPC optimized search range. Consult your receiver's manual for more information."
 msgstr "Su receptor puede usar el rango de búsqueda optimizado SCPC. Consulte el manual de su receptor para más información."
