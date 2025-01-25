@@ -407,9 +407,6 @@ msgstr "/s"
 msgid "1. Tune to an imported channel with at least EPG EIT.\n2. Restart enigma2.\n3. Now try to download EPG cache from the reserve receiver."
 msgstr "1. Sintonice un canal importado con al menos EPG EIT.\n2. Reinicie Enigma2.\n3. Ahora intente descargar la caché EPG del receptor reserva."
 
-msgid "1. Change an adapter parameter and activate this setting.\n\n2. This setting will have no effect.\n\n3. Reconfigure your settings as before the change.\n\n4. This action will provide you with the IP address."
-msgstr "1. Cambie un parámetro del adaptador y active esta configuración.\n\n2. Este ajuste no tendrá ningún efecto.\n\n3. Reconfigure sus ajustes como antes del cambio.\n\n4. Esta acción le proporcionará la dirección IP."
-
 msgid "10 MB/s"
 msgstr "10 MB/s"
 

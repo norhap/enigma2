@@ -958,6 +958,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				if self.twoIfacesActive:
 					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("There is a second interface configured (recommended to disable it).\n\nDo you want to disable the second network interface?"), type=MessageBox.TYPE_YESNO, default=True)
 				else:
+					if not self.activateInterfaceEntry.value and self.dhcpConfigEntry.value:  # Always confirm IP without losing it with DHCP enabled and self.iface up False.
+						iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
 					self.applyConfig(True)
 			else:
 				self.applyConfig(True)
@@ -1038,8 +1040,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, _("Your network configuration has been activated."), type=MessageBox.TYPE_INFO, timeout=5)
 
 	def ConfigfinishedCB(self, data):
-		if not fileContains(interfacesFile, f"{self.iface}") and self.ipConfigEntry.getText() == "0.0.0.0":
-			self.session.open(MessageBox, _("1. Change an adapter parameter and activate this setting.\n\n2. This setting will have no effect.\n\n3. Reconfigure your settings as before the change.\n\n4. This action will provide you with the IP address."), type=MessageBox.TYPE_INFO)
 		if data is not None and data:
 			self.close('ok')
 
