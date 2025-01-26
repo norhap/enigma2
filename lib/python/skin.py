@@ -157,8 +157,8 @@ def InitSkins():
 def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), screenID=GUI_SKIN_ID):
 	config.debug.debugScreens = ConfigYesNo(default=False)
 	global windowStyles, resolutions
-	if "skin_user" in filename and isfile(pathjoin(scopeConfig, filename)):  # Check user skin files in /etc/enigma2 first and use it if exists
-		filename = pathjoin(scopeConfig, filename)
+	if "skin_user" in filename and isfile(join(scopeConfig, filename)):  # Check user skin files in /etc/enigma2 first and use it if exists
+		filename = join(scopeConfig, filename)
 	else:
 		filename = resolveFilename(scope, filename)
 	print(f"[Skin] Loading skin file '{filename}'.")
