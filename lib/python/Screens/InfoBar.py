@@ -1,4 +1,5 @@
-from os.path import exists
+from os.path import exists, splitext
+from glob import glob
 from enigma import eServiceReference, eProfileWrite, eServiceCenter, iPlayableService  # noqa: E402
 eProfileWrite("LOAD:enigma")
 from Components.SystemInfo import BRAND, MODEL  # noqa: E402
@@ -241,6 +242,15 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.servicelist = slist
 		self.infobar = infobar
 		self.lastservice = lastservice or session.nav.getCurrentlyPlayingServiceOrGroup()
+		path = splitext(service.getPath())[0]
+		subs = []
+		for sub in ("srt", "ass", "ssa"):
+			subs = glob("%s*.%s" % (path, sub))
+			if subs:
+				break
+		if subs:
+			service.setSubUri(subs[0])  # Support currently only one external sub
+
 		session.nav.playService(service)
 		self.cur_service = service
 		self.returning = False
