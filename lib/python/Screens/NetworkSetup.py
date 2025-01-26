@@ -39,7 +39,7 @@ config.macaddress.mac = ConfigText(default="", fixed_size=False)
 config.macaddress.change = ConfigText(default="%s" % macaddress)
 configmac = config.macaddress
 disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
-interfacesFile = "/etc/network/interfaces"
+interfacesfile = "/etc/network/interfaces"
 
 
 # Define a function to determine whether a service is configured to start at boot time.
@@ -192,13 +192,13 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		description = None
 		interfacepng = None
 
-		if not fileContains(interfacesFile, f"{iface}"):
+		if not fileContains(interfacesfile, f"{iface}"):
 			active = False
 		if not iNetwork.isWirelessInterface(iface):
 			icon = {True: "icons/network_wired-active.png", False: "icons/network_wired-inactive.png", None: "icons/network_wired.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
 		elif iNetwork.isWirelessInterface(iface):
-			if fileContains(interfacesFile, "# 	pre-up"):
+			if fileContains(interfacesfile, "# 	pre-up"):
 				active = False
 			icon = {True: "icons/network_wireless-active.png", False: "icons/network_wireless-inactive.png", None: "icons/network_wireless.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
@@ -337,7 +337,7 @@ class DNSSettings(Setup, HelpableScreen):
 		strdns = str(self.backupNameserverList)
 		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
 		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
-			if fileContains(interfacesFile, "eth0 inet static") or fileContains(interfacesFile, "wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
+			if fileContains(interfacesfile, "eth0 inet static") or fileContains(interfacesfile, "wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
 				servername = _("Static IP Router")
@@ -511,16 +511,16 @@ class MACSettings(Setup):
 				Console().ePopen('rm ' + MAC_WILDCARD_FILE)
 
 	def checkInterfaces(self):
-		with open("/etc/network/interfaces", "r") as interfaces:
+		with open(interfacesfile, "r") as interfaces:
 			interfacesdata = interfaces.read()
 		if "hwaddress ether" in interfacesdata:
 			oldMac = re.findall(r"hwaddress ether (\w{2}:\w{2}:\w{2}:\w{2}:\w{2}:\w{2})", interfacesdata)[0]
 			interfacesdata = interfacesdata.replace(oldMac, configmac.change.value)
-			with open("/etc/network/interfaces", "w") as interfaces:
+			with open(interfacesfile, "w") as interfaces:
 				interfaces.write(interfacesdata)
 		else:
-			interfacesdata = open("/etc/network/interfaces", "r").readlines()
-			interfaceswrite = open("/etc/network/interfaces", "w")
+			interfacesdata = open(interfacesfile, "r").readlines()
+			interfaceswrite = open(interfacesfile, "w")
 			for line in interfacesdata:
 				interfaceswrite.write(line)
 				if "iface eth0 inet dhcp" in line or "iface eth0 inet static" in line:
@@ -803,13 +803,13 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.weplist = []
 			self.weplist.append("ASCII")
 			self.weplist.append("HEX")
-			if exists(interfacesFile):
-				with open(interfacesFile) as f:
+			if exists(interfacesfile):
+				with open(interfacesfile) as f:
 					output = f.read()
 				ethactive = "auto eth"
 				if output.find(ethactive) >= 0:
 					ifaces = True
-					if fileContains(interfacesFile, "# 	pre-up"):
+					if fileContains(interfacesfile, "# 	pre-up"):
 						iNetwork.setAdapterAttribute(self.iface, "up", False)
 			self.wsconfig = self.ws.loadConfig(self.iface)
 			if self.essid is None:
@@ -837,16 +837,16 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
 		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 		if self.activateInterfaceEntry.value:
-			if exists(interfacesFile):
-				with open(interfacesFile) as f:
+			if exists(interfacesfile):
+				with open(interfacesfile) as f:
 					output = f.read()
 				wlanactive = "auto wlan"
 				if output.find(wlanactive) >= 0:
 					ifaces = True
 		else:
 			if not iNetwork.isWirelessInterface(self.iface):
-				if exists(interfacesFile):
-					with open(interfacesFile) as f:
+				if exists(interfacesfile):
+					with open(interfacesfile) as f:
 						output = f.read()
 					wlanactive = "auto wlan"
 					if output.find(wlanactive) >= 0:
