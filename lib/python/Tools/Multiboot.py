@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from time import localtime, strftime
 from Components.Console import Console
-from Components.About import getBuildDateString
-from os import rename, rmdir, sep, stat
+from os import rename, rmdir, sep
 from os.path import basename, exists, isfile, ismount, join
 from glob import glob
-import tempfile
+from tempfile import mkdtemp
 from subprocess import check_output
 from Components.SystemInfo import SystemInfo, BoxInfo as BoxInfoRunningInstance, BoxInformation
 from Components.About import getChipSet
@@ -16,7 +14,7 @@ class tmp:
 
 
 def getMultibootStartupDevice():
-	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
+	tmp.dir = mkdtemp(prefix="Multiboot")
 	bootList = ("/dev/mmcblk0p1", "/dev/mmcblk1p1", "/dev/mmcblk0p3", "/dev/mmcblk0p4", "/dev/mtdblock2", "/dev/block/by-name/bootoptions") if not SystemInfo["hasKexec"] else ("/dev/mmcblk0p4", "/dev/mmcblk0p7", "/dev/mmcblk0p9")
 	for device in bootList:
 		if exists(device):
@@ -123,7 +121,7 @@ def getCurrentImageMode():
 
 
 def deleteImage(slot):
-	tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
+	tmp.dir = mkdtemp(prefix="Multiboot")
 	Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 	enigma2binaryfile = join(sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
 	if exists(enigma2binaryfile):
@@ -135,7 +133,7 @@ def deleteImage(slot):
 
 def restoreImages():
 	for slot in SystemInfo["canMultiBoot"]:
-		tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
+		tmp.dir = mkdtemp(prefix="Multiboot")
 		Console().ePopen('mount %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
 		enigma2binaryfile = join(sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')])), 'usr/bin/enigma2')
 		if exists('%s.bak' % enigma2binaryfile):
@@ -175,7 +173,7 @@ def getImagelist(Recovery=None):
 		imagelist[slot] = {"imagename": _("Empty slot")}
 		imagedir = "/"
 		if SystemInfo["canMultiBoot"]:
-			tmp.dir = tempfile.mkdtemp(prefix="Multiboot")
+			tmp.dir = mkdtemp(prefix="Multiboot")
 			try:  # Avoid problems Dev lost USB Slots Kexec
 				if SystemInfo["canMultiBoot"][slot]['device'] == 'ubi0:ubifs':
 					Console().ePopen('mount -t ubifs %s %s' % (SystemInfo["canMultiBoot"][slot]['device'], tmp.dir))
@@ -255,10 +253,13 @@ def bootmviSlot(imagedir="/", text=" ", slot=" "):
 
 
 def VerDate(imagedir):
-	if isfile(join(imagedir, "usr/bin/enigma2")):
-		tmpfile = stat(join(imagedir, "usr/bin/enigma2"))
-		compiledate = localtime(tmpfile.st_mtime)
-		date = strftime("%d-%m-%Y", compiledate)
-		if int(BoxInfoRunningInstance.getItem("compiledate")[0:1]) != int(date[8:9]):  # Avoid different date in compilation.
-			date = getBuildDateString()
+	if isfile(join(imagedir, "usr/lib/enigma.info")):
+		date = ""
+		enigmainfo = join(imagedir, "usr/lib/enigma.info")
+		with open(enigmainfo, "r") as f:
+			for compiledate in f.readlines():
+				if "compiledate" in compiledate:
+					fulldate = compiledate.split("compiledate='")[1].split("'")[0]
+					date = fulldate[6:8] + '-' + fulldate[4:6] + '-' + fulldate[0:4]
+					break
 		return date
