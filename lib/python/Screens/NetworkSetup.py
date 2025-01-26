@@ -40,6 +40,7 @@ config.macaddress.change = ConfigText(default="%s" % macaddress)
 configmac = config.macaddress
 disable_ipv6 = "/proc/sys/net/ipv6/conf/all/disable_ipv6"
 interfacesfile = "/etc/network/interfaces"
+staticip = False
 
 
 # Define a function to determine whether a service is configured to start at boot time.
@@ -336,8 +337,10 @@ class DNSSettings(Setup, HelpableScreen):
 		self.createSetup()
 		strdns = str(self.backupNameserverList)
 		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
+		servername = ""
 		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
-			if fileContains(interfacesfile, "eth0 inet static") or fileContains(interfacesfile, "wlan0 inet static") and fileContains("/run/ifstate", "wlan0=wlan0"):
+			global staticip
+			if staticip:
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
 				servername = _("Static IP Router")
@@ -854,6 +857,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.twoIfacesActive = ifaces
 
 	def createSetup(self):
+		global staticip
+		staticip = False if self.dhcpConfigEntry.value else True
 		self.list = []
 		self.InterfaceEntry = getConfigListEntry(_("Use interface"), self.activateInterfaceEntry)
 		self.list.append(self.InterfaceEntry)
@@ -982,6 +987,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.applyConfig(True)
 
 	def applyConfig(self, ret=False):
+		global staticip
+		staticip = False if self.dhcpConfigEntry.value else True
 		if ret:
 			self.applyConfigRef = None
 			iNetwork.setAdapterAttribute(self.iface, "up", self.activateInterfaceEntry.value)
