@@ -124,7 +124,7 @@ class OSCamGlobals():
 										ip = "::1" if ipv6compiled else "127.0.0.1"
 									if "::1" not in allowed:
 										ip = "127.0.0.1"
-				else:  #Use custom defined parameters
+				else:  # Use custom defined parameters
 					proto = proto = "https" if config.oscaminfo.usessl.value else "http"
 					ip = str(config.oscaminfo.ip.value)
 					port = str(config.oscaminfo.port.value)
@@ -151,7 +151,7 @@ class OSCamGlobals():
 			authhandler = HTTPDigestAuthHandler(pwman)
 			opener = build_opener(webhandler, authhandler)
 		try:
-			#print("[%s] DEBUG in module 'callApi': API call: %s" % (MODULE_NAME, url))
+			# print("[%s] DEBUG in module 'callApi': API call: %s" % (MODULE_NAME, url))
 			data = opener.open(url, timeout=5).read()
 			return True, url, data
 		except (OSError, UnicodeError) as error:
@@ -281,7 +281,7 @@ class OSCamInfo(Screen, OSCamGlobals):
 			"red": (self.keyShutdown, _("Shutdown OSCam")),
 			"green": (self.keyRestart, _("Restart OSCam")),
 			"blue": (self.keyBlue, _("Open Log"))
-			}, prio=1, description=_("OSCamInfo Actions"))
+		}, prio=1, description=_("OSCamInfo Actions"))
 		self.loop = eTimer()
 		self.loop.callback.append(self.updateOScamData)
 		self.onLayoutFinish.append(self.onLayoutFinished)
@@ -497,9 +497,9 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 				<parameter name="OSCamInfoBGcolors" value="0x10fef2e6, 0x10f0f4e5" />
 			</parameters>
 			<widget source="entitleslist" render="Listbox" position="15,165" size="1890,828" backgroundColor="#10b3b3b3" enableWrapAround="1" scrollbarMode="showOnDemand" >
-	  			<convert type="TemplatedMultiContent">
+				<convert type="TemplatedMultiContent">
 					{"templates":  # index 0 is backgroundcolor
-		  				{	"default": (36, [
+						{	"default": (36, [
 							MultiContentEntryText(pos=(0,0), size=(88,36), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=1),  # Type
 							MultiContentEntryText(pos=(90,0), size=(103,36), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=2),  # CAID
 							MultiContentEntryText(pos=(195,0), size=(118,36), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=3),  # Provid
@@ -527,7 +527,7 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 							MultiContentEntryText(pos=(1710,0), size=(73,36), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=19),  # Resx
 							MultiContentEntryText(pos=(1785,0), size=(105,36), font=0, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, color=0x000000, backcolor=MultiContentTemplateColor(0), text=20)  # Reshare
 							])
-	  					},
+						},
 						"fonts": [gFont("Regular",25)], "itemHeight":36
 					}
 				</convert>
@@ -570,7 +570,7 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 			"ok": (self.keyOk, _("Show all details")),
 			"cancel": (self.exit, _("Close the screen")),
 			"blue": (self.keyBlue, _("Show all"))
-			}, prio=1, description=_("OSCamInfo Actions"))
+		}, prio=1, description=_("OSCamInfo Actions"))
 		self.onLayoutFinish.append(self.onLayoutFinished)
 		self.bgColors = parameters.get("OSCamInfoBGcolors", (0x10fcfce1, 0x10f1f6e6, 0x10e2e0ef))
 		self.loop = eTimer()
@@ -806,7 +806,7 @@ class OSCamEntitleDetails(Screen, OSCamGlobals):
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions"], {
 			"ok": (self.close, _("Close the screen")),
 			"cancel": (self.close, _("Close the screen")),
-			}, prio=1, description=_("OSCamInfo Actions"))
+		}, prio=1, description=_("OSCamInfo Actions"))
 
 
 class OSCamInfoLog(Screen, OSCamGlobals):
@@ -832,7 +832,7 @@ class OSCamInfoLog(Screen, OSCamGlobals):
 			"up": (self.keyPageUp, _("Move up a page")),
 			"down": (self.keyPageDown, _("Move down a page")),
 			"pageDown": (self.keyPageDown, _("Move down a page"))
-			}, prio=1, description=_("OSCamInfo Log Actions"))
+		}, prio=1, description=_("OSCamInfo Log Actions"))
 		self.loop = eTimer()
 		self.loop.callback.append(self.displayLog)
 		self.onLayoutFinish.append(self.onLayoutFinished)
@@ -866,7 +866,7 @@ class OSCamInfoSetup(Setup):
 	def __init__(self, session):
 		self.status = None
 		self.oldIP = config.oscaminfo.ip.value
-		self.hostValidator = compile("(\d*[a-zA-Z]+[\.]*\d*)+$")
+		self.hostValidator = compile(r"(\d*[a-zA-Z]+[\.]*\d*)+$")
 		Setup.__init__(self, session, setup="OSCamInfoSetup")
 
 	def selectionChanged(self):

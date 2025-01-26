@@ -443,7 +443,7 @@ class PowerKey:
 					if x.get("key") == "shutdown":
 						self.session.infobar = self
 						menu_screen = self.session.openWithCallback(self.MenuClosed, MainMenu, x)
-						menu_screen.setTitle(_("Standby / restart"))
+						menu_screen.setTitle(_("Standby / restart"))  # noqa: F405
 						break
 
 	def standby(self):

@@ -672,7 +672,7 @@ class EPGList(GUIComponent):
 						new_time = now - now % int(config.misc.graph_mepg.roundTo.value)
 					self.fillMultiEPG(None, stime=new_time)
 					return True
-			elif dir == +2: #next page
+			elif dir == +2:  # next page
 				self.offs += 1
 				self.fillMultiEPG(None)  # refill
 				return True
