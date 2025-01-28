@@ -235,17 +235,17 @@ class ChannelContextMenu(Screen):
 					if not eDVBDB.getInstance().isCrypted(eServiceReference(current.toString())):
 						append_when_current_valid(current, menu, (_("Add BISS CaID to service"), self.setBISS), level=0)
 
+					if BoxInfo.getItem("AISubs"):
+						if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_NO_AI_TRANSLATION:
+							append_when_current_valid(current, menu, (_("Translate Subs On This Service"), self.removeNoAITranslationFlag))
+						else:
+							append_when_current_valid(current, menu, (_("Don't Translate Subs On This Service"), self.addNoAITranslationFlag))
 					if haveBouquets:
 						bouquets = self.csel.getBouquetList()
 						if bouquets is None:
 							bouquetCnt = 0
 						else:
 							bouquetCnt = len(bouquets)
-					if BoxInfo.getItem("AISubs"):
-						if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_NO_AI_TRANSLATION:
-							append_when_current_valid(current, menu, (_("Translate Subs On This Service"), self.removeNoAITranslationFlag))
-						else:
-							append_when_current_valid(current, menu, (_("Don't Translate Subs On This Service"), self.addNoAITranslationFlag))
 						if not self.inBouquet or bouquetCnt > 1:
 							append_when_current_valid(current, menu, (_("Add service to bouquet"), self.addServiceToBouquetSelected), level=0, key="5")
 							self.addFunction = self.addServiceToBouquetSelected
