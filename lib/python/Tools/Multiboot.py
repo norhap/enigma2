@@ -227,13 +227,10 @@ def bootmviSlot(imagedir="/", text="", slot=""):
 	txtpath = join(imagedir, f"{dirusr}/share/enigma2/.bootlogotxt")
 	text = _("Booting in slot %s %s") % (slot, text)
 	tmp = join(imagedir, "tmp") if isfile(join(imagedir, "usr/share/enigma2/bootlogo.mvi")) else "/tmp"
-	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmvipath, "   ", outmvipath)
+	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmvipath, " ", outmvipath)
 	from PIL import Image, ImageDraw, ImageFont
-	print(f"[MultiBoot][bootmviSlot] Copy usr/share/enigma2/bootlogo.mvi to {tmp}/bootlogo.m1v")
-	Console(binary=True).ePopen(f"cp {inmvipath} {tmp}/bootlogo.m1v")
-	print("[MultiBoot][bootmviSlot] Dump iframe to png")
-	Console(binary=True).ePopen(f"ffmpeg -skip_frame nokey -i {tmp}/bootlogo.m1v -vsync 0  -y  {tmp}/drawbootlogo.png 2>/dev/null")
-	Console(binary=True).ePopen(f"rm -f {tmp}/mypicture.m1v")
+	print(f"[MultiBoot][bootmviSlot] Copy usr/share/enigma2/bootlogo.mvi to {tmp}/bootlogo.m1v and Dump iframe to png")
+	Console(binary=True).ePopen(f"cp {inmvipath} {tmp}/bootlogo.m1v ; ffmpeg -skip_frame nokey -i {tmp}/bootlogo.m1v -vsync 0 -y {tmp}/drawbootlogo.png 2>/dev/null")
 	if exists(f"{tmp}/drawbootlogo.png"):
 		img = Image.open(f"{tmp}/drawbootlogo.png")  # Open an Image
 	else:
@@ -245,8 +242,7 @@ def bootmviSlot(imagedir="/", text="", slot=""):
 	draw.text((50, 25), text, font=myFont, fill=(255, 255, 255))
 	img.save(f"{tmp}/drawbootlogo.png")  # Save the edited image
 	print("[MultiBoot][bootmviSlot] Repack bootlogo")
-	Console(binary=True).ePopen(f"ffmpeg -i {tmp}/drawbootlogo.png -r 25 -b 20000 -y {tmp}/mypicture.m1v  2>/dev/null")
-	Console(binary=True).ePopen(f"cp {tmp}/mypicture.m1v {inmvipath}")
+	Console(binary=True).ePopen(f"ffmpeg -i {tmp}/drawbootlogo.png -r 25 -b 20000 -y {tmp}/mypicture.m1v 2>/dev/null ; mv {tmp}/mypicture.m1v {inmvipath} ; rm -f {tmp}/drawbootlogo.png {tmp}/bootlogo.m1v")
 	with open(txtpath, "w") as f:
 		f.write(text)
 
