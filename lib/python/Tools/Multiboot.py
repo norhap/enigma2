@@ -5,8 +5,8 @@ from os.path import basename, exists, isfile, ismount, join
 from glob import glob
 from tempfile import mkdtemp
 from subprocess import check_output
-from Components.SystemInfo import SystemInfo, BoxInfo as BoxInfoRunningInstance, BoxInformation
-from Components.About import getChipSet
+from Components.SystemInfo import SystemInfo, BoxInfo, BoxInformation, MODEL
+from Components.About import getBuildDateString
 
 
 class tmp:
@@ -40,7 +40,6 @@ def getMultibootslots():
 	SystemInfo["VuUUIDSlot"] = ""
 	UUID = ""
 	UUIDnum = 0
-	BoxInfo = BoxInfoRunningInstance
 	if SystemInfo["MultibootStartupDevice"]:
 		for file in glob(join(tmp.dir, 'STARTUP_*')):
 			if 'MODE_' in file:
@@ -164,14 +163,10 @@ def getImagelist(Recovery=None):
 				imagelist[slot] = {"imagename": _("Recovery Mode")}
 				continue
 		print("[MultiBoot] [getImagelist] slot = ", slot)
-		BuildVersion = "  "
-		Build = " "  # ViX Build No.
-		Dev = " "  # ViX Dev No.
-		Creator = " "  # Openpli Openvix Openatv etc
-		Date = " "
-		BuildType = " "  # release etc
 		imagelist[slot] = {"imagename": _("Empty slot")}
 		imagedir = "/"
+		draw_bootlogo_norhap = f"{BoxInfo.getItem('distro')} {BoxInfo.getItem('imageversion')} {BoxInfo.getItem('imgrevision')} ({getBuildDateString()})"  # try draw all models distro norhap.
+		modelsdraw = MODEL not in ("osmio4kplus", "osmio4k")
 		if SystemInfo["canMultiBoot"]:
 			tmp.dir = mkdtemp(prefix="Multiboot")
 			try:  # Avoid problems Dev lost USB Slots Kexec
@@ -183,76 +178,80 @@ def getImagelist(Recovery=None):
 				pass
 			imagedir = sep.join(filter(None, [tmp.dir, SystemInfo["canMultiBoot"][slot].get('rootsubdir', '')]))
 			if isfile(join(imagedir, 'usr/bin/enigma2')):
-				if isfile(join(imagedir, "usr/lib/enigma.info")):
-					print("[MultiBoot] [BoxInfo] using BoxInfo")
-					BuildVersion = createInfo(slot, imagedir=imagedir)
-				else:
+				imagelist[slot] = {'imagename': getSlotImageInfo(slot, imagedir=imagedir)}
+				if not isfile(join(imagedir, "usr/share/enigma2/.bootlogotxt")) and not isfile("/usr/share/enigma2/.bootlogotxt") and SystemInfo["hasKexec"]:
+					bootmviSlot(imagedir=imagedir, text=getSlotImageInfo(slot, imagedir=imagedir), slot=slot)
+				if not isfile(join(imagedir, "usr/lib/enigma.info")):
 					print("[MultiBoot] [getImagelist] 2 slot = %s imagedir = %s" % (slot, imagedir))
-					Creator = open("%s/etc/issue" % imagedir).readlines()[-2].capitalize().strip()[:-6]
-					print("[MultiBoot] [getImagelist] Creator = %s imagedir = %s" % (Creator, imagedir))
+					creator = open("%s/etc/issue" % imagedir).readlines()[-2].capitalize().strip()[:-6]
+					print("[MultiBoot] [getImagelist] creator = %s imagedir = %s" % (creator, imagedir))
 					if SystemInfo["hasKexec"] and isfile(join(imagedir, "etc/vtiversion.info")):
-						Vti = open(join(imagedir, "etc/vtiversion.info")).read()
-						date = VerDate(imagedir)
-						Creator = Vti[0:3]
-						Build = Vti[-8:-1]
-						BuildVersion = "%s %s (%s) " % (Creator, Build, date)
+						VTI = open(join(imagedir, "etc/vtiversion.info")).read()
+						date = getSlotCompileDate(imagedir)
+						creator = VTI[0:3]
+						build = VTI[-8:-1]
+						imagelist[slot] = f"{creator} {build} ({date})"
 					else:
-						date = VerDate(imagedir)
-						Creator = Creator.replace("-release", " ")
-						BuildVersion = "%s (%s)" % (Creator, date)
-				imagelist[slot] = {"imagename": "%s" % BuildVersion}
-			elif isfile(join(imagedir, "usr/bin/enigmax")):
+						date = getSlotCompileDate(imagedir)
+						creator = creator.replace("-release", " ")
+						imagelist[slot] = f"{creator} ({date})"
+			elif isfile(join(imagedir, "usr/bin/enigma2.bak")):
 				imagelist[slot] = {"imagename": _("Deleted image")}
 			else:
 				imagelist[slot] = {"imagename": _("Empty slot")}
 			Console().ePopen('umount %s' % tmp.dir)
-		if not exists("/usr/share/enigma2/bootlogo.txt") and getChipSet() not in ("72604",):
-			bootmviSlot(imagedir=imagedir, text=BuildVersion, slot=slot)
+			if not isfile("/usr/share/enigma2/.bootlogotxt") and modelsdraw:
+				bootmviSlot(imagedir=imagedir, text=draw_bootlogo_norhap, slot=slot)
 		if not ismount(tmp.dir):
 			rmdir(tmp.dir)
 	return imagelist
 
 
-def createInfo(slot, imagedir="/"):
-	BoxInfo = BoxInformation(root=imagedir) if getCurrentImage() != slot else BoxInfoRunningInstance
-	Creator = BoxInfo.getItem("distro", " ").capitalize()
-	BuildImgVersion = BoxInfo.getItem("imageversion")
-	BuildType = BoxInfo.getItem("imagetype")
-	BuildDate = VerDate(imagedir)
+def getSlotImageInfo(slot, imagedir="/"):
+	BoxInfoInstance = BoxInformation(root=imagedir) if getCurrentImage() != slot else BoxInfo
+	Creator = BoxInfoInstance.getItem("distro", " ").capitalize()
+	BuildImgVersion = BoxInfoInstance.getItem("imageversion")
+	BuildType = BoxInfoInstance.getItem("imagetype")
+	BuildDate = getSlotCompileDate(imagedir)
 	return " ".join([x for x in (Creator, BuildImgVersion, BuildType, "(%s)" % BuildDate) if x])
 
 
-def bootmviSlot(imagedir="/", text=" ", slot=" "):
-	inmviPath = join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
-	outmviPath = join(imagedir, "/usr/share/enigma2/bootlogo.mvi")
-	txtPath = join(imagedir, "/usr/share/enigma2/bootlogo.txt")
-	slot = getCurrentImage()
-	text = _("Booting in slot %s %s") % (slot, text)
-	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmviPath, "   ", outmviPath)
-	from PIL import Image, ImageDraw, ImageFont
-	print("[MultiBoot][bootmviSlot] Copy usr/share/enigma2/bootlogo.mvi to /tmp/bootlogo.m1v")
-	Console(binary=True).ePopen("cp %s /tmp/bootlogo.m1v" % inmviPath)
-	print("[MultiBoot][bootmviSlot] Dump iframe to png")
-	Console(binary=True).ePopen("ffmpeg -skip_frame nokey -i /tmp/bootlogo.m1v -vsync 0  -y  /tmp/out1.png 2>/dev/null")
-	Console(binary=True).ePopen("rm -f /tmp/mypicture.m1v")
-	if exists("/tmp/out1.png"):
-		img = Image.open("/tmp/out1.png")						# Open an Image
+def bootmviSlot(imagedir="/", text="", slot=""):
+	if not isfile(join(imagedir, "usr/share/enigma2/bootlogo.mvi")):
+		slot = getCurrentImage()
+		dirusr = "/usr"
 	else:
-		print("[MultiBoot][bootmviSlot] unable to create new bootlogo cannot open out1.png")
+		dirusr = "usr"
+	inmvipath = join(imagedir, f"{dirusr}/share/enigma2/bootlogo.mvi")
+	outmvipath = join(imagedir, f"{dirusr}/share/enigma2/bootlogo.mvi")
+	txtpath = join(imagedir, f"{dirusr}/share/enigma2/.bootlogotxt")
+	text = _("Booting in slot %s %s") % (slot, text)
+	tmp = join(imagedir, "tmp") if isfile(join(imagedir, "usr/share/enigma2/bootlogo.mvi")) else "/tmp"
+	print("[MultiBoot][bootmviSlot] inPath, outpath ", inmvipath, "   ", outmvipath)
+	from PIL import Image, ImageDraw, ImageFont
+	print(f"[MultiBoot][bootmviSlot] Copy usr/share/enigma2/bootlogo.mvi to {tmp}/bootlogo.m1v")
+	Console(binary=True).ePopen(f"cp {inmvipath} {tmp}/bootlogo.m1v")
+	print("[MultiBoot][bootmviSlot] Dump iframe to png")
+	Console(binary=True).ePopen(f"ffmpeg -skip_frame nokey -i {tmp}/bootlogo.m1v -vsync 0  -y  {tmp}/drawbootlogo.png 2>/dev/null")
+	Console(binary=True).ePopen(f"rm -f {tmp}/mypicture.m1v")
+	if exists(f"{tmp}/drawbootlogo.png"):
+		img = Image.open(f"{tmp}/drawbootlogo.png")  # Open an Image
+	else:
+		print("[MultiBoot][bootmviSlot] unable to create new bootlogo cannot open drawbootlogo.png")
 		return
-	I1 = ImageDraw.Draw(img)									# Call draw Method to add 2D graphics in an image
-	myFont = ImageFont.truetype("/usr/share/fonts/DejaVuSansCondensed-Bold.ttf", 30)		# Custom font style and font size
+	draw = ImageDraw.Draw(img)  # Call draw Method to add 2D graphics in an image
+	myFont = ImageFont.truetype("/usr/share/fonts/DejaVuSansCondensed-Bold.ttf", 30)  # Custom font style and font size
 	print("[MultiBoot][bootmviSlot] Write text to png")
-	I1.text((50, 22), text, font=myFont, fill=(255, 255, 255))
-	img.save("/tmp/out1.png")									# Save the edited image
+	draw.text((50, 25), text, font=myFont, fill=(255, 255, 255))
+	img.save(f"{tmp}/drawbootlogo.png")  # Save the edited image
 	print("[MultiBoot][bootmviSlot] Repack bootlogo")
-	Console(binary=True).ePopen("ffmpeg -i /tmp/out1.png -r 25 -b 20000 -y /tmp/mypicture.m1v  2>/dev/null")
-	Console(binary=True).ePopen("cp /tmp/mypicture.m1v %s" % outmviPath)
-	with open(txtPath, "w") as f:
+	Console(binary=True).ePopen(f"ffmpeg -i {tmp}/drawbootlogo.png -r 25 -b 20000 -y {tmp}/mypicture.m1v  2>/dev/null")
+	Console(binary=True).ePopen(f"cp {tmp}/mypicture.m1v {inmvipath}")
+	with open(txtpath, "w") as f:
 		f.write(text)
 
 
-def VerDate(imagedir):
+def getSlotCompileDate(imagedir):
 	if isfile(join(imagedir, "usr/lib/enigma.info")):
 		date = ""
 		enigmainfo = join(imagedir, "usr/lib/enigma.info")
