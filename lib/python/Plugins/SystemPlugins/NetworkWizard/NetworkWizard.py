@@ -242,16 +242,16 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		if data is not None:
 			if data:
 				if status is not None:
-					text1 = _("Your receiver is now ready to be used.\n\nYour internet connection is working.\n")
-					text2 = str(self.showIP()) + "\n"
+					text1 = _("Your internet connection is working.\n\n")
+					text2 = str(self.showIP()) + "\n\n"
 					text3 = _('Access point:') + " " + str(status[self.selectedInterface]["accesspoint"]) + "\n"
 					text4 = _('SSID:') + " " + str(status[self.selectedInterface]["essid"]) + "\n"
 					text5 = _('Link quality:') + " " + str(status[self.selectedInterface]["quality"]) + "\n"
 					text6 = _('Signal strength:') + " " + str(status[self.selectedInterface]["signal"]) + "\n"
 					text7 = _('Bitrate:') + " " + str(status[self.selectedInterface]["bitrate"]) + "\n"
-					text8 = _('Encryption:') + " " + str(status[self.selectedInterface]["encryption"]) + "\n"
+					text8 = _('Encryption:') + " " + str(status[self.selectedInterface]["encryption"]) + "\n\n"
 					text9 = _("Please press OK to continue.")
-					infotext = text1 + text2 + text3 + text4 + text5 + text7 + text8 + "\n" + text9
+					infotext = text1 + text2 + text3 + text4 + text5 + text7 + text8 + text9
 					self.currStep = self.getStepWithID("checkWlanstatusend")
 					self.Text = infotext
 					if str(status[self.selectedInterface]["accesspoint"]) == "Not-Associated":
@@ -394,7 +394,7 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 			if not iNetwork.isWirelessInterface(self.selectedInterface):
 				ip = getIfConfig(f"{self.selectedInterface}")["addr"]
 				old = self["text"].getText()
-				text = self["text"].setText(_("IP address:") + " " + ip + "\n\n" + old)
+				text = self["text"].setText(_("Your internet connection is working.\n\nIP address:") + " " + ip + "\n\n" + old)
 			else:
 				text = _("IP address:") + " " + getIfConfig(f"{self.selectedInterface}")["addr"]
 			return text
