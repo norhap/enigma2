@@ -6,6 +6,7 @@ from Screens.Time import Time
 from Screens.MessageBox import MessageBox
 from Components.Timezones import INTERNET_SUCCESS
 from Components.config import config
+from Components.About import getIfConfig
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.Sources.StaticText import StaticText
@@ -241,15 +242,16 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 		if data is not None:
 			if data:
 				if status is not None:
-					text1 = _("Your receiver is now ready to be used.\n\nYour internet connection is working.\n\n")
-					text2 = _('Access point:') + "\t" + str(status[self.selectedInterface]["accesspoint"]) + "\n"
-					text3 = _('SSID:') + "\t" + str(status[self.selectedInterface]["essid"]) + "\n"
-					text4 = _('Link quality:') + "\t" + str(status[self.selectedInterface]["quality"]) + "\n"
-					text5 = _('Signal strength:') + "\t" + str(status[self.selectedInterface]["signal"]) + "\n"
-					text6 = _('Bitrate:') + "\t" + str(status[self.selectedInterface]["bitrate"]) + "\n"
-					text7 = _('Encryption:') + " " + str(status[self.selectedInterface]["encryption"]) + "\n"
-					text8 = _("Please press OK to continue.")
-					infotext = text1 + text2 + text3 + text4 + text5 + text7 + "\n" + text8
+					text1 = _("Your receiver is now ready to be used.\n\nYour internet connection is working.\n")
+					text2 = str(self.showIP()) + "\n"
+					text3 = _('Access point:') + " " + str(status[self.selectedInterface]["accesspoint"]) + "\n"
+					text4 = _('SSID:') + " " + str(status[self.selectedInterface]["essid"]) + "\n"
+					text5 = _('Link quality:') + " " + str(status[self.selectedInterface]["quality"]) + "\n"
+					text6 = _('Signal strength:') + " " + str(status[self.selectedInterface]["signal"]) + "\n"
+					text7 = _('Bitrate:') + " " + str(status[self.selectedInterface]["bitrate"]) + "\n"
+					text8 = _('Encryption:') + " " + str(status[self.selectedInterface]["encryption"]) + "\n"
+					text9 = _("Please press OK to continue.")
+					infotext = text1 + text2 + text3 + text4 + text5 + text7 + text8 + "\n" + text9
 					self.currStep = self.getStepWithID("checkWlanstatusend")
 					self.Text = infotext
 					if str(status[self.selectedInterface]["accesspoint"]) == "Not-Associated":
@@ -385,3 +387,16 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 
 	def ChoicesSelectionMoved(self):
 		pass
+
+	def showIP(self):
+		try:
+			text = ""
+			if not iNetwork.isWirelessInterface(self.selectedInterface):
+				ip = getIfConfig(f"{self.selectedInterface}")["addr"]
+				old = self["text"].getText()
+				text = self["text"].setText(_("IP address:") + " " + ip + "\n\n" + old)
+			else:
+				text = _("IP address:") + " " + getIfConfig(f"{self.selectedInterface}")["addr"]
+			return text
+		except Exception:
+			pass

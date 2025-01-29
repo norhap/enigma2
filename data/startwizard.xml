@@ -9,7 +9,7 @@ self.selectKey("OK")
 		<step id="introduction" >
 			<text value="Use the UP and DOWN keys to select the language, then press OK button. By pressing MENU you can install a new language."/>
 			<list>
-				<listentry caption="Use the wizard to set up basic features" step="network"/>
+				<listentry caption="Use the wizard to set up basic features" step="nima"/>
 				<listentry caption="Exit the wizard" step="end"/>
 			</list>
 			<code>
@@ -18,7 +18,7 @@ self.selectKey("UP")
 self.selectKey("DOWN")
 			</code>
 		</step>
-		<step id="network" >
+		<!--step id="network" >
 			<text value="Connecting your [BRANDMODEL] to the internet."/>
 			<list>
 				<listentry caption="Check the internet connection" step="update"/>
@@ -52,7 +52,7 @@ self.clearSelectedKeys()
 self.selectKey("UP")
 self.selectKey("DOWN")
 			</code>
-		</step>
+		</step-->
 		<step id="nima">
 			<condition>
 from Components.NimManager import nimmanager
