@@ -139,7 +139,12 @@ def resolveFilename(scope, base="", path_prefix=None):
 			join(scopeGUISkin, "skin_default"),
 			scopeGUISkin  # Can we deprecate top level of SCOPE_GUISKIN directory to allow a clean up?
 		]
-		path = itemExists(resolveList, base)
+		if base.endswith(".xml"):  # If the base filename ends with ".xml" then add scopeConfig to the resolveList for support of old skins.
+			resolveList = resolveList[:]
+			resolveList.insert(2, scopeConfig)
+			path = itemExists(resolveList, base)
+		else:
+			path = itemExists(resolveList, base)
 	elif scope == SCOPE_LCDSKIN:
 		from Components.config import config  # This import must be here as this module finds the config file as part of the config initialisation.
 		skin = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else ""
