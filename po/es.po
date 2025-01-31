@@ -9786,6 +9786,9 @@ msgstr "Su conexión a internet no funciona."
 msgid "Your network configuration has been activated."
 msgstr "Su configuración de red ha sido activada."
 
+msgid "Your network configuration has been disabled."
+msgstr "Su configuración de red ha sido desactivada."
+
 msgid "Your network configuration has been activated.\n\nPress OK and wait in next screen.\n\nIt will switch to the WLAN data screen automatically."
 msgstr "Su configuración de red ha sido activada.\n\nPulse OK y espere en la siguiente pantalla.\n\nCambiará automáticamente a la pantalla de datos WLAN."
 
