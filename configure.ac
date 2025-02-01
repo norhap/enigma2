@@ -65,33 +65,60 @@ AM_CONDITIONAL(VUDUO4KSE, test "$MACHINE" == vuduo4kse)
 AM_CONDITIONAL(GB7252, test "$MACHINE" == gbue4k)
 AM_CONDITIONAL(GB7252, test "$MACHINE" == gbquad4k)
 
-if test "$MACHINE" == "vusolo4k"; then
-	AC_DEFINE(HWVUSOLO4K, 1,[vusolo4k])
-elif test "$MACHINE" == "vuultimo4k"; then
-	AC_DEFINE(HWULTIMO4K, 1,[vuultimo4k])
-elif test "$MACHINE" == "vuuno4kse"; then
-	AC_DEFINE(HWUNO4KSE, 1,[vuuno4kse])
-elif test "$MACHINE" == "h7"; then
-	AC_DEFINE(HWH7, 1,[h7])
-elif test "$MACHINE" == "h17"; then
-	AC_DEFINE(HWH17, 1,[h17])
-elif test "$MACHINE" == "pulse4k"; then
-	AC_DEFINE(HWPULSE4K, 1,[pulse4k])
-elif test "$MACHINE" == "pulse4kmini"; then
-	AC_DEFINE(HWPULSE4KMINI, 1,[pulse4kmini])
-elif test "$MACHINE" == "gbue4k"; then
-	AC_DEFINE(HWGBUE4K, 1,[gbue4k])
-elif test "$MACHINE" == "gbquad4k"; then
-	AC_DEFINE(HWGBQUAD4K, 1,[gbquad4k])
-elif test "$MACHINE" == "gbtrio4kpro"; then
-	AC_DEFINE(HWGBTRIO4KPRO, 1,[gbtrio4kpro])
-elif test "$MACHINE" == "gbquad4kpro"; then
-	AC_DEFINE(HWGBQUAD4KPRO, 1,[gbquad4kpro])
-elif test "$MACHINE" == "beyonwizt2"; then
-	AC_DEFINE(HWBEYONWIZT2, 1,[beyonwizt2])
-elif test "$MACHINE" == "u5"; then
-	AC_DEFINE(HWU5, 1,[u5])
-fi
+AS_IF([test "$MACHINE" == "beyonwizt2"],[AC_DEFINE(HWBEYONWIZT2, 1,[beyonwizt2])])
+AS_IF([test "$MACHINE" == "dm8000"],[AC_DEFINE(HWDM8000, 1,[dm8000])])
+AS_IF([test "$MACHINE" == "dm7020hd" -o "$BOXTYPE" == "dm7020hdv2"],[AC_DEFINE(HWDM7020HD, 1,[dm7020hd])])
+AS_IF([test "$MACHINE" == "dm7080"],[AC_DEFINE(HWDM7080, 1,[dm7080])])
+AS_IF([test "$MACHINE" == "dm820"],[AC_DEFINE(HWDM820, 1,[dm820])])
+AS_IF([test "$MACHINE" == "dm520" -o "$BOXTYPE" == "dm525"],[AC_DEFINE(HWDM520, 1,[dm520])])
+AS_IF([test "$MACHINE" == "dm900"],[AC_DEFINE(HWDM900, 1,[dm900])])
+AS_IF([test "$MACHINE" == "dm920"],[AC_DEFINE(HWDM920, 1,[dm920])])
+AS_IF([test "$MACHINE" == "dm800se"],[AC_DEFINE(HWDM800SE, 1,[dm800se])])
+AS_IF([test "$MACHINE" == "dm500hd"],[AC_DEFINE(HWDM500HD, 1,[dm500hd])])
+AS_IF([test "$MACHINE" == "dm800sev2"],[AC_DEFINE(HWDM800SEV2, 1,[dm800sev2])])
+AS_IF([test "$MACHINE" == "dm500hdv2"],[AC_DEFINE(HWDM500HDV2, 1,[dm500hdv2])])
+AS_IF([test "$MACHINE" == "dual"],[AC_DEFINE(HWDUAL, 1,[dual4k])])
+AS_IF([test "$MACHINE" == "et7x00"],[AC_DEFINE(HWET7X00, 1,[et7x00])])
+AS_IF([test "$MACHINE" == "gbip4k"],[AC_DEFINE(HWGBIP4K, 1,[gbip4k])])
+AS_IF([test "$MACHINE" == "gbquad4k"],[AC_DEFINE(HWGBQUAD4K, 1,[gbquad4k])])
+AS_IF([test "$MACHINE" == "gbquad4kpro"],[AC_DEFINE(HWGBQUAD4KPRO, 1,[gbquad4kpro])])
+AS_IF([test "$MACHINE" == "gbtrio4k"],[AC_DEFINE(HWGBTRIO4K, 1,[gbtrio4k])])
+AS_IF([test "$MACHINE" == "gbtrio4kpro"],[AC_DEFINE(HWGBTRIO4KPRO, 1,[gbtrio4kpro])])
+AS_IF([test "$MACHINE" == "gbue4k"],[AC_DEFINE(HWGBUE4K, 1,[gbue4k])])
+AS_IF([test "$MACHINE" == "h7"],[AC_DEFINE(HWH7, 1,[h7])])
+AS_IF([test "$MACHINE" == "h9"],[AC_DEFINE(HWH9, 1,[h9])])
+AS_IF([test "$MACHINE" == "h9combo"],[AC_DEFINE(HWH9COMBO, 1,[h9combo])])
+AS_IF([test "$MACHINE" == "h9combose"],[AC_DEFINE(HWH9COMBOSE, 1,[h9combose])])
+AS_IF([test "$MACHINE" == "h9se"],[AC_DEFINE(HWH9SE, 1,[h9se])])
+AS_IF([test "$MACHINE" == "h10"],[AC_DEFINE(HWH10, 1,[h10])])
+AS_IF([test "$MACHINE" == "h11"],[AC_DEFINE(HWH11, 1,[h11])])
+AS_IF([test "$MACHINE" == "h17"],[AC_DEFINE(HWH17, 1,[h17])])
+AS_IF([test "$MACHINE" == "hd51"],[AC_DEFINE(HWHD51, 1,[hd51])])
+AS_IF([test "$MACHINE" == "hd61"],[AC_DEFINE(HWHD61, 1,[hd61])])
+AS_IF([test "$MACHINE" == "multiboxpro"],[AC_DEFINE(HWMULTIBOXPRO, 1,[multiboxpro])])
+AS_IF([test "$MACHINE" == "osnino"],[AC_DEFINE(HWOSNINO, 1,[osnino])])
+AS_IF([test "$MACHINE" == "osmio4kplus"],[AC_DEFINE(HWOSMIO4KPLUS, 1,[osmio4Kplus])])
+AS_IF([test "$MACHINE" == "pulse4k"],[AC_DEFINE(HWPULSE4K, 1,[pulse4k])])
+AS_IF([test "$MACHINE" == "pulse4kmini"],[AC_DEFINE(HWPULSE4KMINI, 1,[pulse4kmini])])
+AS_IF([test "$MACHINE" == "sf8008m"],[AC_DEFINE(HWSF8008M, 1,[sf8008m])])
+AS_IF([test "$MACHINE" == "sf8008"],[AC_DEFINE(HWSF8008, 1,[sf8008])])
+AS_IF([test "$MACHINE" == "sfx6008"],[AC_DEFINE(HWSFX6008, 1,[sfx6008])])
+AS_IF([test "$MACHINE" == "sx988"],[AC_DEFINE(HWSX988, 1,[sx988])])
+AS_IF([test "$MACHINE" == "sx88v2"],[AC_DEFINE(HWSX88V2, 1,[sx88v2])])
+AS_IF([test "$MACHINE" == "u5"],[AC_DEFINE(HWU5, 1,[u5])])
+AS_IF([test "$MACHINE" == "ustym4kpro"],[AC_DEFINE(HWUSTYM4KPRO, 1,[ustym4kpro])])
+AS_IF([test "$MACHINE" == "vuduo2"],[AC_DEFINE(HWVUDUO2, 1,[vuduo2])])
+AS_IF([test "$MACHINE" == "vuduo4k"],[AC_DEFINE(HWVUDUO4K, 1,[vuduo4k])])
+AS_IF([test "$MACHINE" == "vuduo4kse"],[AC_DEFINE(HWVUDUO4KSE, 1,[vuduo4kse])])
+AS_IF([test "$MACHINE" == "vusolo2"],[AC_DEFINE(HWVUSOLO2, 1,[vusolo2])])
+AS_IF([test "$MACHINE" == "vusolo4k"],[AC_DEFINE(HWVUSOLO4K, 1,[vusolo4k])])
+AS_IF([test "$MACHINE" == "vusolose"],[AC_DEFINE(HWVUSOLOSE, 1,[vusolose])])
+AS_IF([test "$MACHINE" == "vuultimo"],[AC_DEFINE(HWVUULTIMO, 1,[vuultimo])])
+AS_IF([test "$MACHINE" == "vuultimo4k"],[AC_DEFINE(HWVUULTIMO4K, 1,[vuultimo4k])])
+AS_IF([test "$MACHINE" == "vuuno4k"],[AC_DEFINE(HWVUUNO4K, 1,[vuuno4k])])
+AS_IF([test "$MACHINE" == "vuuno4kse"],[AC_DEFINE(HWVUUNO4KSE, 1,[vuuno4kse])])
+AS_IF([test "$MACHINE" == "vuzero"],[AC_DEFINE(HWVUZERO, 1,[vuzero])])
+AS_IF([test "$MACHINE" == "vuzero4k"],[AC_DEFINE(HWVUZERO4K, 1,[vuzero4k])])
 
 AC_ARG_WITH(brandname,
 	[  --with-brandname=NAME brand name [[none,dreambox...]]],
