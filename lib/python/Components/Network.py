@@ -157,6 +157,8 @@ class Network:
 			if not iface['dhcp']:
 				lines.append(f"iface {ifacename} inet static")
 				if "ip" in iface:
+					if not iface["up"]:
+						lines.append(f"# static ip not up")  # for script network.sh.
 					dummy = ".".join([str(x) for x in iface["ip"]])
 					lines.append(f"address {dummy}")
 					dummy = ".".join([str(x) for x in iface["netmask"]])

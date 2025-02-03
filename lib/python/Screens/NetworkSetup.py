@@ -963,7 +963,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				if self.iface in iNetwork.getConfiguredAdapters() and not self.twoIfacesActive:
 					self.applyConfig(True)
 				else:
-					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("There is a second interface configured (recommended to disable it).\n\nDo you want to disable the second network interface?"), default=True)
+					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), default=True)
 			else:
 				self.applyConfig(True)
 		else:
