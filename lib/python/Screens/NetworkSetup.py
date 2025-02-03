@@ -951,8 +951,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		config.network.save()
 
 	def keySaveConfirm(self, ret=False):
-		if not self.activateInterfaceEntry.value and self.dhcpConfigEntry.value:  # Always confirm IP without losing it with DHCP enabled and self.iface up False.
-			iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
 		self.activateInterfaceEntry.value = True if config.iface.active_entry.value else False
 		if BoxInfo.getItem("WakeOnLAN") and iNetwork.isWirelessInterface(self.iface):
 			config.network.wol.value = False
@@ -961,6 +959,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			num_configured_if = len(iNetwork.getConfiguredAdapters())
 			if num_configured_if >= 1:
 				if self.iface in iNetwork.getConfiguredAdapters() and not self.twoIfacesActive:
+					if not self.activateInterfaceEntry.value:  # Always confirm IP on current interface without losing if interface is not up.
+						iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
 					self.applyConfig(True)
 				else:
 					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), default=True)
@@ -1031,7 +1031,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			iNetwork.getInterfaces(self.getInterfacesDataAvail)
 
 	def getInterfacesDataAvail(self, data):
-		if data and self.applyConfigRef:
+		if data:
 			self.applyConfigRef.close(True)
 
 	def applyConfigfinishedCB(self, data):
