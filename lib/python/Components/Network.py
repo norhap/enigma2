@@ -158,7 +158,7 @@ class Network:
 				lines.append(f"iface {ifacename} inet static")
 				if "ip" in iface:
 					if not iface["up"]:
-						lines.append(f"# static ip not up")  # for script network.sh.
+						lines.append("# static ip not up")  # for script network.sh.
 					dummy = ".".join([str(x) for x in iface["ip"]])
 					lines.append(f"address {dummy}")
 					dummy = ".".join([str(x) for x in iface["netmask"]])
@@ -179,7 +179,7 @@ class Network:
 				if iface["predown"] and "configStrings" not in iface:
 					lines.append(iface["predown"])
 			if "dns-nameservers" in iface and iface["dns-nameservers"]:
-				lines.append(f"dns-nameservers")
+				lines.append("dns-nameservers")
 				for nameserver in iface["dns-nameservers"]:
 					lines.append(f"{tuple(nameserver)}.{tuple(nameserver)}.{tuple(nameserver)}.{tuple(nameserver)}")
 		lines.append("")
