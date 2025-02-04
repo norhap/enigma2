@@ -683,10 +683,10 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 				hoplist = []
 				for client in self.clients:  # find according CAID in JSONstats-clients
 					if client.get("request", {}).get("caid", "") == caid:
-							for entitle in client.get("connection", {}).get("entitlements", []):
-								for key in ["locals", "cccount", "ccchop1", "ccchop2", "ccchopx", "ccccurr", "cccres0", "cccres1", "cccres2", "cccresx", "cccreshare"]:
-									hoplist.append(entitle.get(key, ""))
-							break
+						for entitle in client.get("connection", {}).get("entitlements", []):
+							for key in ["locals", "cccount", "ccchop1", "ccchop2", "ccchopx", "ccccurr", "cccres0", "cccres1", "cccres2", "cccresx", "cccreshare"]:
+								hoplist.append(entitle.get(key, ""))
+						break
 				if hoplist:
 					entitleslist.append(tuple([bgcolor, caid, system, reshare, hop, shareid, remoteid, provid, ptext, ntext] + hoplist))
 				elif self.showall:
