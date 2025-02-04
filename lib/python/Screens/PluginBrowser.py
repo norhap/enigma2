@@ -1,6 +1,7 @@
 from os import unlink
 from os.path import isfile, normpath
 from enigma import eConsoleAppContainer, eDVBDB, eTimer, gRGB
+from skin import parseColor
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Screens.HelpMenu import HelpableScreen
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText
