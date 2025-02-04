@@ -522,6 +522,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 	def changeAudio(self, audio):
 		track = int(audio)
 		if isinstance(track, int):
+			ref = self.session.nav.getCurrentServiceRef() and eServiceReference(self.session.nav.getCurrentServiceRef())
 			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > track:
 				self.audioTracks.selectTrack(track)
 				if isIPTV(ref):
@@ -635,6 +636,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		try:
 			if self.focus == FOCUS_STREAMS and self["streams"].list:
 				cur = self["streams"].getCurrent()
+				ref = self.session.nav.getCurrentServiceRef() and eServiceReference(self.session.nav.getCurrentServiceRef())
 				if self.settings.menupage.value == PAGE_AUDIO and cur[0] is not None:
 					self.changeAudio(cur[0])
 					self.__updatedInfo()
