@@ -1878,10 +1878,6 @@ def InitUsageConfig():
 	config.autolanguage.subtitle_usecache.addNotifier(setSubtitleUseCache)
 
 	config.oscaminfo = ConfigSubsection()
-	if BoxInfo.getItem("ShowOscamInfo"):
-		config.oscaminfo.showInExtensions = ConfigYesNo(default=True)
-	else:
-		config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.oscaminfo.userDataFromConf = ConfigYesNo(default=True)
 	config.oscaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
 	config.oscaminfo.password = ConfigPassword(default="password", fixed_size=False)
@@ -1899,10 +1895,6 @@ def InitUsageConfig():
 	config.oscaminfo.autoUpdateLog = ConfigSelection(default=0, choices=choiceList)
 
 	config.cccaminfo = ConfigSubsection()
-	if SystemInfo["CCcamIsActive"]:
-		config.cccaminfo.showInExtensions = ConfigYesNo(default=True)
-	else:
-		config.cccaminfo.showInExtensions = ConfigYesNo(default=False)
 	config.cccaminfo.serverNameLength = ConfigSelectionNumber(min=10, max=100, stepwidth=1, default=22, wraparound=True)
 	config.cccaminfo.name = ConfigText(default="Profile", fixed_size=False)
 	config.cccaminfo.ip = ConfigText(default="192.168.2.12", fixed_size=False)

@@ -7,7 +7,6 @@ from Components.GUIComponent import GUIComponent
 from Components.Sources.Source import Source
 from Components.Sources.StaticText import StaticText
 from Tools.CList import CList
-from process import ProcessList
 
 
 # The lines marked DEBUG: are proposals for further fixes or improvements when partner code is updated.
@@ -115,7 +114,6 @@ class Screen(dict):
 			self.session.close(self, *retval)
 
 	def show(self):
-		BoxInfo.setItem("ShowOscamInfo", True if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]") or str(ProcessList().named("ncam")).strip("[]") else False)
 		print(f"[Screen] Showing screen {self.skinName}.")  # To ease identification of screens.
 		# DEBUG: if (self.shown and self.alreadyShown) or not self.instance:
 		if (self.shown and self.already_shown) or not self.instance:

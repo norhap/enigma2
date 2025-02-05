@@ -167,7 +167,7 @@ def getBootdevice():
 
 
 def getSysSoftcam():
-	cams = "None"
+	cams = None
 	if str(ProcessList().named("oscam")).strip("[]") and str(ProcessList().named("ncam")).strip("[]"):
 		cams = "OSCam"
 	elif str(ProcessList().named("oscam")).strip("[]"):
@@ -191,7 +191,7 @@ BoxInfo.setItem("RemoteDelay", 700)
 BoxInfo.setItem("have24hz", eAVControl.getInstance().has24hz())
 BoxInfo.setItem("hashdmiin", BoxInfo.getItem("hdmifhdin") or BoxInfo.getItem("hdmihdin"))
 BoxInfo.setItem("MiniTV", fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable"))
-BoxInfo.setItem("ShowOscamInfo", False)
+BoxInfo.setItem("ShowOscamInfo", True if getSysSoftcam() else False)
 BoxInfo.setItem("ReadOscamConf", getSysSoftcam() == "OSCam")
 BoxInfo.setItem("ReadNcamConf", getSysSoftcam() == "NCam")
 BoxInfo.setItem("WakeOnLAN", fileCheck("/proc/stb/power/wol") or fileCheck("/proc/stb/fp/wol"))
@@ -304,7 +304,6 @@ SystemInfo["BootDevice"] = getBootdevice()
 SystemInfo["HaveCISSL"] = fileCheck("/etc/ssl/certs/customer.pem") and fileCheck("/etc/ssl/certs/device.pem")
 SystemInfo["CanChangeOsdAlpha"] = fileCheck("/proc/stb/video/alpha")
 SystemInfo["ScalerSharpness"] = fileExists("/proc/stb/vmpeg/0/pep_scaler_sharpness")
-SystemInfo["CCcamIsActive"] = str(ProcessList().named("CCcam")).strip("[]")
 SystemInfo["HiSilicon"] = pathExists("/proc/hisi") or fileExists("/usr/bin/hihalt")
 SystemInfo["DefineSat"] = MODEL in ("ustym4kpro", "beyonwizv2", "viper4k", "gbtrio4k", "gbtrio4kplus", "gbip4k", "qviart5") or getBoxType() in ("sf8008")
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and MODEL not in ("hd51", "h7")

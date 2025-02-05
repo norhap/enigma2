@@ -2423,7 +2423,7 @@ class InfoBarExtensions:
 		return "CCcam Info"
 
 	def getOSCamInfo(self):
-		if BoxInfo.getItem("ShowOscamInfo"):
+		if getSysSoftcam():
 			return [((boundFunction(self.getOSCamNCam), boundFunction(self.openOSCamInfo), lambda: True), None)] or []
 		else:
 			return []
