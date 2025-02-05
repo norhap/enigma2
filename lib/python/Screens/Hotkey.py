@@ -229,8 +229,7 @@ def getHotkeyFunctions():
 	if SystemInfo["HDMICEC"]:
 		hotkey.functions.append((_("HDMI-CEC Source Active"), "Infobar/SourceActiveHdmiCec", "InfoBar"))
 		hotkey.functions.append((_("HDMI-CEC Source Inactive"), "Infobar/SourceInactiveHdmiCec", "InfoBar"))
-	if SystemInfo["HasSoftcamInstalled"]:
-		hotkey.functions.append((_("Softcam Setup"), "SoftcamSetup", "Setup"))
+	hotkey.functions.append((_("Softcam Setup"), "SoftcamSetup", "Setup"))
 	hotkey.functions.append((_("HotKey Setup"), "Module/Screens.Hotkey/HotkeySetup", "Setup"))
 	hotkey.functions.append((_("Software update"), "Module/Screens.SoftwareUpdate/UpdatePlugin", "Setup"))
 	hotkey.functions.append((_("Latest Commits"), "Module/Screens.About/CommitInfo", "Setup"))
@@ -718,7 +717,7 @@ class InfoBarHotkey():
 					print("[Hotkey] error during executing module %s, screen %s, %s" % (selected[1], selected[2], e))
 					import traceback
 					traceback.print_exc()
-			elif selected[0] == "SoftcamSetup" and SystemInfo["HasSoftcamInstalled"]:
+			elif selected[0] == "SoftcamSetup":
 				from Screens.SoftcamSetup import SoftcamSetup
 				self.session.open(SoftcamSetup)
 			elif selected[0] == "Setup":

@@ -7764,9 +7764,6 @@ msgstr "Social/Política/Economía"
 msgid "Softcam Setup"
 msgstr "Configuración de Softcam"
 
-msgid "Softcam setup"
-msgstr "Configuración de Softcam"
-
 msgid "Software"
 msgstr "Software"
 
@@ -11529,9 +11526,6 @@ msgstr "Mostrar información de género en evento"
 msgid "Show service type icons"
 msgstr "Mostrar iconos de tipo de canal"
 
-msgid "Show softcam setup in extensions menu"
-msgstr "Mostrar configuración de softcam en menú de extensiones"
-
 msgid "Show status icons in movielist"
 msgstr "Mostrar iconos de status en lista de películas"
 
@@ -11619,9 +11613,6 @@ msgid ""
 msgstr ""
 "No hay respuesta en la URL del servidor.\n"
 "No tiene acceso a las fuentes."
-
-msgid "This option allows you to add the softcam setup in the extensions menu."
-msgstr "Esta opción le permite agregar la configuración de softcam en el menú de extensiones."
 
 msgid "This option allows you to alphabetically sort setup menu entries."
 msgstr "Esta opción le permite ordenar alfabéticamente las entradas del menú de configuración."

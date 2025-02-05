@@ -154,11 +154,6 @@ def countFrontpanelLEDs():
 	return numLeds
 
 
-def hassoftcaminstalled():
-	softcams = fileExists("/etc/init.d/softcam") or fileExists("/etc/init.d/cardserver")
-	return softcams
-
-
 def getBootdevice():
 	dev = ("root" in cmdline and cmdline["root"].startswith("/dev/")) and cmdline["root"][5:]
 	while dev and not fileExists("/sys/block/%s" % dev):
@@ -210,7 +205,6 @@ SystemInfo["NimExceptionDMM8000"] = SystemInfo["HasSVideo"]
 SystemInfo["FbcTunerPowerAlwaysOn"] = MODEL in ("vusolo4k", "vuduo4k", "vuduo4kse", "vuultimo4k", "vuuno4k", "vuuno4kse")
 SystemInfo["HasPhysicalLoopthrough"] = ["Vuplus DVB-S NIM(AVL2108)", "GIGA DVB-S2 NIM (Internal)"]
 SystemInfo["HasFBCtuner"] = ["Vuplus DVB-C NIM(BCM3158)", "Vuplus DVB-C NIM(BCM3148)", "Vuplus DVB-S NIM(7376 FBC)", "Vuplus DVB-S NIM(45308X FBC)", "Vuplus DVB-S NIM(45208 FBC)", "DVB-S2 NIM(45208 FBC)", "DVB-S2X NIM(45308X FBC)", "DVB-S2 NIM(45308 FBC)", "DVB-C NIM(3128 FBC)", "BCM45208", "BCM45308X", "BCM3158"]
-SystemInfo["HasSoftcamInstalled"] = hassoftcaminstalled()
 SystemInfo["NumVideoDecoders"] = getNumVideoDecoders()
 SystemInfo["Udev"] = not fileExists("/dev/.devfsd")
 SystemInfo["PIPAvailable"] = MODEL != "i55plus" and SystemInfo["NumVideoDecoders"] > 1
