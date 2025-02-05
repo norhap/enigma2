@@ -35,7 +35,7 @@ class Screen(dict):
 		self.execing = False
 		self.shown = True
 		# DEBUG: Variable already_shown used in CutListEditor/ui.py and StartKodi/plugin.py.
-		# DEBUG: self.alreadyShown = False  # Already shown is false until the screen is really shown (after creation).
+		# DEBUG: self.already_shown = False  # Already shown is false until the screen is really shown (after creation).
 		self.already_shown = False  # Already shown is false until the screen is really shown (after creation).
 		self.renderer = []
 		self.helpList = []  # In order to support screens *without* a help, we need the list in every screen. how ironic.
@@ -114,30 +114,25 @@ class Screen(dict):
 			self.session.close(self, *retval)
 
 	def show(self):
-		print(f"[Screen] Showing screen {self.skinName}.")  # To ease identification of screens.
-		# DEBUG: if (self.shown and self.alreadyShown) or not self.instance:
-		if (self.shown and self.already_shown) or not self.instance:
-			return
-		self.shown = True
-		# DEBUG: self.alreadyShown = True
-		self.already_shown = True
-		self.instance.show()
-		for callback in self.onShow:
-			callback()
-		for value in list(self.values()) + self.renderer:
-			if isinstance(value, GUIComponent) or isinstance(value, Source):
-				value.onShow()
+		if not (self.shown and self.already_shown) and self.instance:
+			self.shown = True
+			self.already_shown = True
+			self.instance.show()
+			for callback in self.onShow:
+				callback()
+			for value in list(self.values()) + self.renderer:
+				if isinstance(value, GUIComponent) or isinstance(value, Source):
+					value.onShow()
 
 	def hide(self):
-		if not self.shown or not self.instance:
-			return
-		self.shown = False
-		self.instance.hide()
-		for callback in self.onHide:
-			callback()
-		for value in list(self.values()) + self.renderer:
-			if isinstance(value, GUIComponent) or isinstance(value, Source):
-				value.onHide()
+		if self.shown and self.instance:
+			self.shown = False
+			self.instance.hide()
+			for callback in self.onHide:
+				callback()
+			for value in list(self.values()) + self.renderer:
+				if isinstance(value, GUIComponent) or isinstance(value, Source):
+					value.onHide()
 
 	def isAlreadyShown(self):  # Already shown is false until the screen is really shown (after creation).
 		return self.already_shown
