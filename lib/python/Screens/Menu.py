@@ -173,7 +173,7 @@ class Menu(Screen, ProtectedScreen):
 			if imageFile:
 				image = LoadPixmap(imageFile, cached=True)
 				print(f"[Menu] menuimage '{key}.png")
-				break
+				return image
 		return image
 
 	def menuClosedWithConfigFlush(self, *res):
