@@ -166,14 +166,10 @@ class Menu(Screen, ProtectedScreen):
 	def getMenuEntryImage(self, key, lastKey):
 		global imageCache
 		image = imageCache.get(key)
-		skinDefaultFolder = resolveFilename(SCOPE_SKINS, "OctEtFHD")
-		imageSearch = glob(f'{resolveFilename(SCOPE_SKINS)}*/mainmenu/{key}.png') if skinDefaultFolder else glob(f'{resolveFilename(SCOPE_SKINS)}*/*/{key}.png')
-		for picturefile in imageSearch:
-			imageFile = picturefile.replace("['/", "").replace("']", "")
-			if imageFile:
-				image = LoadPixmap(imageFile, cached=True)
-				print(f"[Menu] menuimage '{key}.png")
-				return image
+		picturefile = glob(f'{resolveFilename(SCOPE_SKINS)}'f'{config.skin.primary_skin.value.replace("skin.xml", "")}*/{key}.png')
+		print(f"[Menu] menuimage '{key}.png")
+		for menuimage in picturefile:
+			image = LoadPixmap(menuimage, cached=True)
 		return image
 
 	def menuClosedWithConfigFlush(self, *res):
