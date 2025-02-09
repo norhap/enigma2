@@ -2232,12 +2232,6 @@ msgstr "Configure el tipo de mando a distancia"
 msgid "Configure the aspect ratio of the screen."
 msgstr "Configure la relación de aspecto de la pantalla."
 
-msgid "Configure the AI-Powered translation language."
-msgstr "Configure el idioma de traducción impulsado por IA."
-
-msgid "Configure the color of the AI-Powered translations."
-msgstr "Configure el color de las traducciones impulsadas por IA."
-
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr "Configura la duración en horas en las que el receptor se deba ir a reposo cuando no está controlado."
 
@@ -3106,9 +3100,6 @@ msgstr "Habilitar escaneo rápido automático para %s"
 
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para antena activa"
-
-msgid "Enable AI-Powered translation for all teletext and DVB subtitles."
-msgstr "Habilite la traducción impulsada por IA para todos los subtítulos de teletexto y DVB."
 
 msgid "Enable auto cable scan"
 msgstr "Activar búsqueda automática de cable"
@@ -7196,6 +7187,12 @@ msgstr "Seleccione el método de clasificación:"
 msgid "Select target folder"
 msgstr "Seleccionar carpeta de destino"
 
+msgid "Select the AI-Powered Translation target language."
+msgstr "Seleccione el idioma de destino de traducción impulsada por IA."
+
+msgid "Select the color to be used for the AI-Powered Translation text."
+msgstr "Seleccione el color que se utilizará para el texto de traducción impulsada por IA."
+
 msgid "Select the Unicable channel to be assigned to this tuner. This is a unique value. Be certain that no other device connected to this same Unicable system is allocated to the same Unicable channel."
 msgstr "Seleccione el canal Unicable que se asignará a este sintonizador. Este es un valor único. Asegúrese de que ningún otro dispositivo conectado a este mismo sistema Unicable esté asignado al mismo canal Unicable."
 
@@ -8597,9 +8594,6 @@ msgstr "Este plugin está instalado."
 
 msgid "This plugin is not installed."
 msgstr "Este plugin no está instalado."
-
-msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection speed selected."
-msgstr "El servicio de traducción impulsado por inteligencia artificial se optimizará para proporcionar el mejor rendimiento según la velocidad de conexión a Internet seleccionada."
 
 msgid "The AutoTimer plugin is installed."
 msgstr "El plugin Temporizador Automático está instalado."
@@ -15094,6 +15088,9 @@ msgstr "Seleccione el canal de la banda de usuario que se asignará a este sinto
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Seleccione la banda de usuario que se asignará a este sintonizador. Este es un índice en la tabla de frecuencias que usa el interruptor SCR o SCR LNB para pasar el transpondedor solicitado al sintonizador."
 
+msgid "Select 'Yes' to enable AI-Powered Translation for all teletext and DVB subtitles."
+msgstr "Seleccione 'Sí' para habilitar la traducción impulsada por IA para todos los subtítulos de teletexto y DVB."
+
 msgid "Select 'yes' if this tuner is connected to the SCR device through another tuner, otherwise select 'no'."
 msgstr "Seleccione 'sí' si este sintonizador está conectado al dispositivo SCR a través de otro sintonizador, de lo contrario, seleccione 'no'."
 
@@ -16826,6 +16823,12 @@ msgid ""
 msgstr ""
 "El Plugin TMBD no está Instalado!\n"
 "Quieres instalarlo?"
+
+msgid "The AI mode used for translating languages. You can choose the one that gives the most accurate translation for your target language."
+msgstr "El modo AI que se utiliza para traducir idiomas. Puedes elegir el que ofrezca la traducción más precisa para el idioma de destino."
+
+msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection upload speed selected."
+msgstr "El servicio de traducción impulsado por inteligencia artificial se optimizará para proporcionar el mejor rendimiento según la velocidad de carga de la conexión a Internet seleccionada."
 
 msgid ""
 "The AutoTimer plugin is not installed!\n"
