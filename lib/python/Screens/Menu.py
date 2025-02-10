@@ -163,7 +163,7 @@ class Menu(Screen, ProtectedScreen):
 		# TODO add check if !empty(menu.childNodes)
 		destList.append((MenuTitle, a, key, weight))
 
-	def getMenuEntryImage(self, key, lastKey):
+	def getMenuEntryImage(self, key):
 		global imageCache
 		image = imageCache.get(key)
 		picturefile = glob(f'{resolveFilename(SCOPE_SKINS)}'f'{config.skin.primary_skin.value.replace("skin.xml", "")}*/{key}.png')
@@ -199,7 +199,7 @@ class Menu(Screen, ProtectedScreen):
 			return
 		item_text = menu.get("text", "")
 		key = menu.get("key", "undefined")
-		print(f"[Menu] MenuEntryCompare (Sources) for this menu '{key}")
+		image = self.getMenuEntryImage(key)
 		weight = menu.get("weight", 50)
 		for x in menu:
 			if x.tag == "screen":
@@ -339,7 +339,7 @@ class Menu(Screen, ProtectedScreen):
 			self.onExecBegin.append(self.__onExecBegin)
 
 	def selectionChanged(self):
-		self["menuimage"].instance.setPixmap(self.getMenuEntryImage(self.menuID, lastKey))
+		self["menuimage"].instance.setPixmap(self.getMenuEntryImage(self.menuID))
 
 	def openTestA(self):
 		self.session.open(AnimMain, self.list, self.menu_title)
