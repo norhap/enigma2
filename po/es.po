@@ -2646,6 +2646,9 @@ msgstr "Eliminar la entrada de la lista de reproducción"
 msgid "Delete saved playlist"
 msgstr "Eliminar lista de reproducción guardada"
 
+msgid "Delete services"
+msgstr "Eliminar canales"
+
 msgid "Delete Timer"
 msgstr "Eliminar Temporizador"
 
@@ -2800,6 +2803,9 @@ msgstr "No centrar subtítulos DVB en este canal"
 
 msgid "Do not change"
 msgstr "No cambies"
+
+msgid "Do not delete services"
+msgstr "No eliminar canales"
 
 msgid "Do not record"
 msgstr "No grabes"
@@ -5340,9 +5346,6 @@ msgstr "No se encuentra un sintonizador sat adecuado!"
 
 msgid "No timeout"
 msgstr "Sin tiempo de espera"
-
-msgid "No to all"
-msgstr "No a todo"
 
 msgid "No transparency"
 msgstr "Sin transparencia"
@@ -9608,9 +9611,6 @@ msgstr "Si y guardar en el directorio timeshift"
 
 msgid "Yes and save in movie dir"
 msgstr "Sí y guardar en el directorio de películas"
-
-msgid "Yes to all"
-msgstr "Sí a todo"
 
 msgid "Yes, I do want to install plugins"
 msgstr "Sí, quiero instalar plugins"
