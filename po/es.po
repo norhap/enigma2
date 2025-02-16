@@ -3856,6 +3856,9 @@ msgstr "Gambia"
 msgid "Gateway:"
 msgstr "Puerta de enlace:"
 
+msgid "Gateway"
+msgstr "Puerta de enlace"
+
 msgid "General AC3 delay"
 msgstr "Retardo general AC3"
 
@@ -5177,6 +5180,9 @@ msgstr "Nepal"
 
 msgid "Netherlands"
 msgstr "Holanda"
+
+msgid "Netmask"
+msgstr "Máscara de red"
 
 msgid "Netmask:"
 msgstr "Máscara de red:"
@@ -9165,7 +9171,7 @@ msgid "Use USALS for this sat"
 msgstr "Usar USALS para este satélite"
 
 msgid "Use a gateway"
-msgstr "Usar una puerta de enlace"
+msgstr "Usar puerta de enlace"
 
 msgid "Use as PiP if possible"
 msgstr "Usar como PiP si es posible"
@@ -14512,7 +14518,7 @@ msgstr "Búsqueda Contenido NFS"
 msgid "Scan range"
 msgstr "Búsqueda Rango"
 
-msgid "IP Address"
+msgid "IP address"
 msgstr "Dirección IP"
 
 msgid "Audio Sync Setup"

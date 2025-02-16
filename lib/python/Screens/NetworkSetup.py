@@ -869,7 +869,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				self.gatewayEntry = getConfigListEntry(_('Use a gateway'), self.hasGatewayConfigEntry)
 				self.list.append(self.gatewayEntry)
 				if self.hasGatewayConfigEntry.value:
-					self.list.append(getConfigListEntry(_('Gateway:'), self.gatewayConfigEntry))
+					self.list.append(getConfigListEntry(_('Gateway'), self.gatewayConfigEntry))
 			havewol = False
 			if BoxInfo.getItem("WakeOnLAN") and MODEL not in ("et10000", "gb800seplus", "gb800ueplus", "gbultrase", "gbultraue", "gbultraueh", "gbipbox", "gbquad", "gbx1", "gbx2", "gbx3", "gbx3h"):
 				havewol = True
