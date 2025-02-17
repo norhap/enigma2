@@ -56,13 +56,15 @@ class Satfinder(ScanSetup):
 		ScanSetup.__init__(self, session)
 		self.setTitle(_("Signal finder"))
 		self["header"] = Label(_("Manual Scan"))
+		self["key_blue"] = StaticText(_("Extras") if not isPluginInstalled("AutoBouquetsMaker") else "")
 		self["Frontend"] = FrontendStatus(frontend_source=lambda: self.frontend, update_interval=100)
 
-		self["actions"] = ActionMap(["SetupActions"],
+		self["actions"] = ActionMap(["SetupActions", "ColorActions"],
 		{
 			"save": self.keyGoScan,
 			"ok": self.keyGoScan,
 			"cancel": self.keyCancel,
+			"blue": self.extras,
 			"menu": self.keyMenu
 		}, -3)
 
@@ -80,6 +82,25 @@ class Satfinder(ScanSetup):
 				if self.frontend:
 					return True
 		return False
+
+	def restartUI(self, answer):
+		if answer:
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 3)
+
+	def extras(self):
+		def installAutoBouquetsMaker(answer=False):
+			if answer:
+				from Components.Opkg import OpkgComponent
+				from time import sleep
+				autobouquetsmaker = {"package": "enigma2-plugin-systemplugins-autobouquetsmaker"}
+				OpkgComponent().startCmd(OpkgComponent.CMD_INSTALL, autobouquetsmaker)
+				sleep(2.5)
+			if isPluginInstalled("AutoBouquetsMaker"):
+				self.session.openWithCallback(self.restartUI, MessageBox, _("AutoBoquetsMaker was installed successfully.\nIt is necessary to restart enigma2 to apply the changes.\nDo you want to do it now?"), MessageBox.TYPE_YESNO, simple=True)
+
+		if not isPluginInstalled("AutoBouquetsMaker"):
+			self.session.openWithCallback(installAutoBouquetsMaker, MessageBox, _("To add extras you need to install AutoBouquetsMaker.\nIf you press \"Yes\" please wait.\nDo you want to install it now?"), type=MessageBox.TYPE_YESNO, simple=True)
 
 	def prepareFrontend(self):
 		self.frontend = None
@@ -633,7 +654,10 @@ class SatfinderExtra(Satfinder):
 
 	def dvb_read_stream(self):
 		print("[satfinder][dvb_read_stream] starting")
-		_thread.start_new_thread(self.getCurrentTsidOnid, (True,))
+		try:
+			_thread.start_new_thread(self.getCurrentTsidOnid, (True,))
+		except Exception:
+			pass
 
 	def getCurrentTsidOnid(self, from_retune=False):
 		self.currentProcess = currentProcess = datetime.datetime.now()
@@ -912,25 +936,6 @@ def SatfinderCallback(close, answer):
 
 
 def SatfinderMain(session, close=None, **kwargs):
-	def restartUI(answer=False):
-		if answer:
-			from Screens.Standby import TryQuitMainloop
-			session.open(TryQuitMainloop, 3)
-
-	def InstallAutoBouquetsMaker(answer=False):
-		if answer:
-			from Components.Opkg import OpkgComponent
-			from time import sleep
-			autobouquetsmaker = {"package": "opkg update ; opkg install enigma2-plugin-systemplugins-autobouquetsmaker"}
-			OpkgComponent().startCmd(OpkgComponent.CMD_INSTALL, autobouquetsmaker)
-			sleep(2.5)
-			if isPluginInstalled("AutoBouquetsMaker"):
-				session.openWithCallback(restartUI, MessageBox, _("AutoBoquetsMaker was installed successfully.\nIt is necessary to restart enigma2 to apply the changes.\nDo you want to do it now?"), MessageBox.TYPE_YESNO, simple=True)
-			else:
-				session.openWithCallback(boundFunction(SatfinderCallback, close), Satfinder)
-		else:
-			session.openWithCallback(boundFunction(SatfinderCallback, close), Satfinder)
-
 	nims = nimmanager.nim_slots
 	nimList = []
 	for n in nims:
@@ -938,7 +943,7 @@ def SatfinderMain(session, close=None, **kwargs):
 			continue
 		if n.config_mode in ("loopthrough", "satposdepends", "nothing"):
 			continue
-		if n.isCompatible("DVB-S") and n.config_mode in ("advanced", "simple") and len(nimmanager.getSatListForNim(n.slot)) < 1 and len(n.getTunerTypesEnabled()) < 2:
+		if n.isCompatible("DVB-S") and n.config_mode in ("advanced", "equal", "simple") and len(nimmanager.getSatListForNim(n.slot)) < 1 and len(n.getTunerTypesEnabled()) < 2:
 			continue
 		nimList.append(n)
 
@@ -948,7 +953,7 @@ def SatfinderMain(session, close=None, **kwargs):
 		if dvbreader_available or isPluginInstalled("AutoBouquetsMaker"):
 			session.openWithCallback(boundFunction(SatfinderCallback, close), SatfinderExtra)
 		else:
-			session.openWithCallback(InstallAutoBouquetsMaker, MessageBox, _("To view and sort channels with YELLOW button:\nYou can install AutoBouquetsMaker.\nDo you want to install it now?"), type=MessageBox.TYPE_YESNO, simple=True)
+			session.openWithCallback(boundFunction(SatfinderCallback, close), Satfinder)
 
 
 def SatfinderStart(menuid, **kwargs):

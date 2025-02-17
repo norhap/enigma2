@@ -14300,8 +14300,8 @@ msgstr "Este dispositivo ya está montado como HDD."
 msgid "This entry already exists in the fstab!"
 msgstr "Esta entrada ya existe en el fstab!"
 
-msgid "To view and sort channels with YELLOW button:\nYou can install AutoBouquetsMaker.\nDo you want to install it now?"
-msgstr "Para ver y clasificar canales con botón AMARILLO:\nPuedes instalar AutoBouquetsMaker.\n¿Quieres instalarlo ahora?"
+msgid "To add extras you need to install AutoBouquetsMaker.\nIf you press \"Yes\" please wait.\nDo you want to install it now?"
+msgstr "Para añadir extras necesitas instalar AutoBouquetsMaker.\nSi pulsa \"Sí\" por favor espera.\n¿Quieres instalarlo ahora?"
 
 msgid "Type: "
 msgstr "Tipo: "
