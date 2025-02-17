@@ -192,9 +192,9 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		activepng = None
 		description = None
 		interfacepng = None
-
-		if not fileContains(interfacesfile, f"{iface}"):
-			active = False
+		if iface.startswith("eth") or iface.startswith("wlan"):
+			if not fileContains(interfacesfile, f"{iface}"):
+				active = False
 		if not iNetwork.isWirelessInterface(iface):
 			icon = {True: "icons/network_wired-active.png", False: "icons/network_wired-inactive.png", None: "icons/network_wired.png"}[active]
 			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
@@ -987,6 +987,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def applyConfig(self, ret=False):
 		global staticip
 		staticip = False if self.dhcpConfigEntry.value else True
+		if self.iface.startswith("zt"):
+			if not staticip:  # with VPN ZeroTier do not enable DHCP use VPN with static IP always.
+				self.dhcpConfigEntry.value = False
 		if ret:
 			self.applyConfigRef = None
 			iNetwork.setAdapterAttribute(self.iface, "up", self.activateInterfaceEntry.value)
