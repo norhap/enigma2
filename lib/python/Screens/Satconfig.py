@@ -392,7 +392,7 @@ class NimSetup(Setup, ServiceStopScreen):
 		if Wizard.instance is not None:
 			Wizard.instance.back()
 		else:
-			self.restartPrevService(close=False)
+			self.restoreService()
 			self.createSetup()
 
 	def fillListWithAdvancedSatEntrys(self, Sat):
@@ -611,7 +611,7 @@ class NimSetup(Setup, ServiceStopScreen):
 				self.deleteConfirmed(confirmed)
 			break
 		else:
-			self.restartPrevService()
+			self.restoreService()
 
 	def changedEntry(self):
 		current = self["config"].getCurrent()
@@ -649,7 +649,7 @@ class NimSetup(Setup, ServiceStopScreen):
 		if self.isChanged():
 			self.session.openWithCallback(self.cancelConfirm, MessageBox, _("Really close without saving settings?"))
 		else:
-			self.restartPrevService()
+			self.restoreService()
 
 	def isChanged(self):
 		is_changed = False
@@ -713,7 +713,7 @@ class NimSetup(Setup, ServiceStopScreen):
 			self.nimConfig.cable.scan_provider.save()
 		# we need to call saveAll to reset the connectedTo choices
 		self.saveAll()
-		self.restartPrevService()
+		self.restoreService()
 
 	def key_yellow(self):
 		if self.autodiseqc_enabled and (not self.nim.isCombined() or self.nimConfig.configModeDVBS.value):
