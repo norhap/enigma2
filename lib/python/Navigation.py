@@ -22,6 +22,8 @@ from Screens.InfoBarGenerics import streamrelay
 
 
 class Navigation:
+	playServiceExtensions = []
+
 	def __init__(self, nextRecordTimerAfterEventActionAuto=False, nextPowerManagerAfterEventActionAuto=False):
 		if NavigationInstance.instance is not None:
 			raise NavigationInstance.instance
@@ -38,6 +40,7 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
+		self.originalPlayingServiceReference = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
 		self.RecordTimer = RecordTimer.RecordTimer()
@@ -146,9 +149,11 @@ class Navigation:
 		if ref is None:
 			self.stopService()
 			return 0
+		self.originalPlayingServiceReference = ref
 		from Components.ServiceEventTracker import InfoBarCount
 		InfoBarInstance = InfoBarCount == 1 and InfoBar.instance
 		isStreamRelay = False
+		is_handled = False
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session] or adjust)), session=session):
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
@@ -195,6 +200,10 @@ class Navigation:
 				self.currentlyPlayingServiceReference = playref
 				if not ignoreStreamRelay:
 					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
+				if SystemInfo["FCCactive"] and "%3a//" in ref.toString() and not isStreamRelay:
+					self.pnav.stopService()
+				for f in Navigation.playServiceExtensions:
+					playref, is_handled = f(self, playref, event, InfoBarInstance)
 				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref
 				if startPlayingServiceOrGroup and startPlayingServiceOrGroup.flags & eServiceReference.isGroup and not ref.flags & eServiceReference.isGroup:
@@ -243,6 +252,7 @@ class Navigation:
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
+					self.originalPlayingServiceReference = None
 					if streamrelay.checkService(oldref):
 						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 						self.retryServicePlayTimer = eTimer()
@@ -260,6 +270,8 @@ class Navigation:
 				self.skipServiceReferenceReset = False
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:
 					self.isCurrentServiceStreamRelay = True
+				if InfoBarInstance and "%3a//" in playref.toString() and not is_handled:
+					self.originalPlayingServiceReference = None
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
 				return 0
@@ -283,6 +295,9 @@ class Navigation:
 		ref = ref and eServiceReference(ref)
 		path = ref and ref.getPath()
 		return path and not path.startswith("/") and ref.type in [0x1, 0x1001, 0x138A, 0x1389]
+
+	def getCurrentServiceReferenceOriginal(self):
+		return self.originalPlayingServiceReference or self.currentlyPlayingServiceOrGroup
 
 	def recordService(self, ref, simulate=False, type=pNavigation.isUnknownRecording):
 		service = None
