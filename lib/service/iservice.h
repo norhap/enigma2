@@ -65,12 +65,15 @@ public:
 	int data[8];
 	std::string path;
 	std::string alternativeurl;
-	std::string suburi;	
+	std::string suburi;
+	std::string compareSref;
+	bool isStreamRelay = false;	
 #endif
 	std::string getPath() const { return path; }
 	void setPath( const std::string &n ) { path=n; }
 	void setAlternativeUrl( const std::string &n ) { alternativeurl=n; }
 	void setSubUri( const std::string &n ) { suburi=n; }
+	void setCompareSref( const std::string &n, bool isSR = false) { compareSref=n; isStreamRelay=isSR; }
 
 	unsigned int getUnsignedData(unsigned int num) const
 	{
@@ -193,7 +196,7 @@ public:
 	{
 		if (!c || type != c.type)
 			return 0;
-		return (memcmp(data, c.data, sizeof(int)*8)==0) && (path == c.path);
+		return ((memcmp(data, c.data, sizeof(int)*8)==0) && (path == c.path)) || (!c.compareSref.empty() && toString() == c.compareSref) || (!compareSref.empty() && compareSref == c.toString());
 	}
 	bool operator!=(const eServiceReference &c) const
 	{

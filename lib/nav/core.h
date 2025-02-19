@@ -62,6 +62,7 @@ class eNavigation: public iObject, public sigc::trackable
 	ePtr<iServiceHandler> m_servicehandler;
 
 	ePtr<iPlayableService> m_runningService;
+	eServiceReference m_runningServiceRef;
 	sigc::signal<void(int)> m_event;
 	ePtr<eConnection> m_service_event_conn;
 	void serviceEvent(iPlayableService* service, int event);
@@ -83,6 +84,7 @@ public:
 	RESULT connectRecordEvent(const sigc::slot<void(ePtr<iRecordableService>,int)> &event, ePtr<eConnection> &connection);
 /*	int connectServiceEvent(const sigc::slot<void(iPlayableService*,int> &event, ePtr<eConnection)> &connection); */
 	RESULT getCurrentService(ePtr<iPlayableService> &service);
+	RESULT getCurrentServiceReference(eServiceReference &service);
 	RESULT stopService(void);
 
 	RESULT recordService(const eServiceReference &ref, ePtr<iRecordableService> &service, bool simulate, pNavigation::RecordType type);
