@@ -213,11 +213,6 @@
 	</screen>
 
 <!-- EPG Screens -->
-	<screen name="EPGSelectionSummary" position="0,0" size="400,240">
-		<panel name="SummaryEpgPanel" />
-		<panel name="SummaryIconsPanel" />
-		<panel name="SummaryTunerStatusPanel" />
-	</screen>
 	<screen name="QuickEPGSummary" position="0,0" size="400,240">
 		<panel name="SummaryEpgPanel" />
 		<panel name="SummaryIconsPanel" />
