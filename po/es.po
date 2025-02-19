@@ -3323,8 +3323,8 @@ msgstr "Nombre del evento primero"
 msgid "Event view context menu"
 msgstr "Menú contextual de vista de evento"
 
-msgid "Events info menu"
-msgstr "Menú de información de eventos"
+msgid "Events Info Menu"
+msgstr "Menú Información de Eventos"
 
 msgid "Every known"
 msgstr "Todos los conocidos"
@@ -4224,6 +4224,9 @@ msgstr "Historia atrás"
 
 msgid "History next"
 msgstr "Historia adelante"
+
+msgid "History Prev/Next"
+msgstr "Historia Previo - Siguiente"
 
 msgid "Hold screen"
 msgstr "Pantalla de espera"
@@ -9846,14 +9849,17 @@ msgstr "Zap enfocado a la pantalla principal"
 msgid "Zap to"
 msgstr "Zapea a"
 
-msgid "Zap to channel number"
-msgstr "Zapea al número de canal"
-
 msgid "Zap to selected channel"
 msgstr "Zapear a canal seleccionado"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
 msgstr "Zap canal seleccionado, o muestre información evento"
+
+msgid "Zap to channel number"
+msgstr "Zapea al número de canal"
+
+msgid "Zap to selected service"
+msgstr "Zapear al canal seleccionado"
 
 msgid "Zap up"
 msgstr "Zapea arriba"
@@ -12612,160 +12618,6 @@ msgstr "Guardar EPG"
 msgid "delete"
 msgstr "eliminar"
 
-msgid " (%s%d min)"
-msgstr " (%s%d minutos)"
-
-msgid "Add \"Search event in EPG\" to channel menu"
-msgstr "Agregar 'Evento de búsqueda en EPG'  al menú del canal"
-
-msgid "Add \"Search event in EPG\" to event menu"
-msgstr "Agregar 'Evento de búsqueda en EPG'  al menú de eventos"
-
-msgid "Add \"Search\" Button to EPG"
-msgstr "Agregar 'Buscar' Botón EPG"
-
-msgid "Adds \"Search event in EPG\" item into the channel selection context menu (needs restart GUI)"
-msgstr "Agrega 'Evento de búsqueda en EPG'  en el menú contextual de selección de canal (necesita reiniciar la GUI)"
-
-msgid "Adds \"Search event in EPG\" item into the event menu (needs restart GUI)"
-msgstr "Agrega \"Buscar evento en EPG\" en el menú del evento (necesita reiniciar la GUI)"
-
-msgid "Choice list"
-msgstr "Lista de opciones"
-
-msgid "Choice list EPGSearch"
-msgstr "Lista de opciones Buscar EPG"
-
-msgid "Choice list RED Button"
-msgstr "Lista de opciones Botón ROJO"
-
-msgid "Choosing an encoding. \"UTF-8\" to search for EPG cyrillic."
-msgstr "Elegir una codificación. \"UTF-8\" para buscar EPG cirílico."
-
-msgid "Clear history"
-msgstr "Limpiar Historia de Búsqueda"
-
-#, python-format
-msgid "Could not read AutoTimer timer list: %s"
-msgstr "No se pudo leer la lista desde el Temporizador Automático: %s"
-
-msgid "Custom search"
-msgstr "Búsqueda Personalizada"
-
-msgid "Display name service as in bouquets"
-msgstr "Mostrar el nombre del canal como en bouquets"
-
-msgid "EPG Search"
-msgstr "Buscar EPG"
-
-msgid "EPGSearch"
-msgstr "Buscar EPG"
-
-msgid "EPGSearch Setup"
-msgstr "Configuración Buscar EPG"
-
-msgid "Encoding Search to EPG"
-msgstr "Búsqueda de codificación a EPG"
-
-msgid "Enter text to search for"
-msgstr "Ingrese el texto para buscar"
-
-msgid "Export selected as AutoTimer"
-msgstr "Exportar seleccionado como Temporizador Automático"
-
-msgid "History"
-msgstr "Historia"
-
-msgid "History Prev/Next"
-msgstr "Historia Previo - Siguiente"
-
-msgid "How many entries to keep in the search history at most. 0 disables history entirely!"
-msgstr "Cuántas entradas mantener en el historial de búsqueda como máximo. 0 deshabilita el historial por completo!"
-
-msgid "If 'Search only bouquets' is enabled, show service name as in bouquets for renamed services."
-msgstr "Si 'Buscar solo bouquets' está habilitado, muestre el nombre del canal como en bouquets para los canales renombrados."
-
-msgid "If this setting is enabled, searching EPG in only services in user bouquets."
-msgstr "Si esta configuración está habilitada, busca EPG en solo canales de bouquets de usuario."
-
-msgid "If this setting is enabled, the plugin adds a \"Search\" Button to the regular EPG."
-msgstr "Si esta configuración está habilitada, el plugin agrega un botón \"Buscar\" a la EPG normal."
-
-msgid "If this setting is enabled, the plugin adds picons."
-msgstr "Si esta configuración está habilitada, el plugin agrega picons."
-
-msgid "Import from AutoTimer"
-msgstr "Importar desde Temporizador Automático"
-
-msgid "Import from EPG"
-msgstr "Importar desde EPG"
-
-msgid "Import from Timer"
-msgstr "Importar desde Temporizador"
-
-msgid "Length of History"
-msgstr "Longitud de la historia de búsqueda"
-
-msgid "List of history is cleared !"
-msgstr "La lista de la historia está eliminada!"
-
-msgid "Lookup in TMBD"
-msgstr "Búsqueda en TMBD"
-
-msgid "New Search"
-msgstr "Nueva Busqueda"
-
-msgid "No history !"
-msgstr "¡Sin historia!"
-
-msgid "Open selected in IMDb"
-msgstr "Abrir selección en IMDb"
-
-msgid "Partnerbox Entries"
-msgstr "Entradas Partnerbox"
-
-msgid "Save search as AutoTimer"
-msgstr "Guardar búsqueda como Temporizador Automático"
-
-msgid "Search"
-msgstr "Buscar"
-
-msgid "Search EPG by title event"
-msgstr "Buscar evento EPG por título"
-
-msgid "Search event in EPG"
-msgstr "Búsqueda de evento en EPG"
-
-msgid "Search for TMDb info"
-msgstr "Buscar información TMDb"
-
-msgid "Search in SMS mode"
-msgstr "Búsqueda en modo SMS"
-
-msgid "Search only bouquets"
-msgstr "Buscar solo bouquets"
-
-msgid "Search strictness"
-msgstr "Rigor de búsqueda"
-
-msgid "Search type"
-msgstr "Tipo de búsqueda"
-
-msgid "Search type for filter"
-msgstr "Tipo de búsqueda para filtro"
-
-msgid "Select a timer to search"
-msgstr "Seleccione un temporizador para buscar"
-
-msgid "Select image and reboot"
-msgstr "Seleccionar imagen y reiniciar"
-
-msgid "Select image and delete"
-msgstr "Seleccionar imagen y eliminar"
-
-msgid "Select text to search for"
-msgstr "Seleccione texto para buscar"
-
 msgid ""
 "Select the video mode to be used on the TV.\n"
 "\n"
@@ -12779,56 +12631,11 @@ msgstr ""
 "\n"
 "ADVERTENCIA: Si un modo de video provoca pérdida de señal, mantenga pulsado el botón EXIT para regresar a la lista de modos de video."
 
-msgid "Select type for filter search. Press button P +/- for show/hide filter in description after search."
-msgstr "Seleccione tipo de filtro para la búsqueda. Pulse el botón +/- para mostrar/ocultar el filtro en la descripción después de la búsqueda."
-
 msgid "Select type for search, \"partial match\" for the most extensive search."
 msgstr "Seleccione el tipo de búsqueda,  'coincidencia parcial' para la búsqueda más extensa."
 
-msgid "Select type: 'Search and Select channel' or 'Search'."
-msgstr "Seleccione el tipo: 'Buscar y seleccionar canal' o 'Buscar'."
-
-msgid "Select whether or not you want to enforce case correctness."
-msgstr "Seleccione si desea o no aplicar la corrección."
-
 msgid "Timers list"
 msgstr "Lista Temporizadores"
-
-msgid "Type blue Button"
-msgstr "Tipo Botón azul"
-
-msgid "Use Picons"
-msgstr "Usa Picons"
-
-msgid "Zap to selected service"
-msgstr "Zapear al canal seleccionado"
-
-msgid "case-insensitive search"
-msgstr "búsqueda insensible de mayúsculas y minúsculas"
-
-msgid "case-sensitive search"
-msgstr "búsqueda sensible de mayúsculas y minúsculas"
-
-msgid "choice (Search and standard)"
-msgstr "elección (Búsqueda y estándar)"
-
-msgid "exact match"
-msgstr "coincidencia exacta"
-
-msgid "only Search"
-msgstr "solo buscar"
-
-msgid "partial match"
-msgstr "coincidencia parcial"
-
-msgid "search EPG"
-msgstr "buscar EPG"
-
-msgid "search EPG..."
-msgstr "buscar EPG..."
-
-msgid "title starts with"
-msgstr "el título comienza con"
 
 msgid " (if services are enabled, bouquets are ignored)."
 msgstr " (si los canales están habilitados, los bouquets se ignoran)."
@@ -13420,6 +13227,9 @@ msgstr "Guarde el nombre del temporizador generado por SeriesPlugin en una lista
 msgid "Save/check labeled series in filterlist (SeriesPlugin)"
 msgstr "Guarde/marque series etiquetadas en lista de filtro (SeriesPlugin)"
 
+msgid "Search"
+msgstr "Buscar"
+
 msgid "Search new events matching for your AutoTimers"
 msgstr "Buscar eventos que coincidan con Temporizadores Automáticos"
 
@@ -13440,6 +13250,12 @@ msgstr "Seleccione el bouquet para grabar en"
 
 msgid "Select channel to record on"
 msgstr "Seleccione el canal para grabar en"
+
+msgid "Select image and delete"
+msgstr "Seleccionar imagen y eliminar"
+
+msgid "Select image and reboot"
+msgstr "Seleccionar imagen y reiniciar"
 
 msgid "Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
 msgstr "Seleccione el retraso que se utilizará al cerrar un canal Stream Relay antes de reasignar el sintonizador a otro canal. El uso de '0' sólo se recomienda para cajas con múltiples sintonizadores de satélite."
