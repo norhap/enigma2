@@ -209,6 +209,7 @@ class InfoBarStreamRelay:
 	data = property(__getData, __setData)
 
 	def streamrelayChecker(self, playref):
+		is_stream_relay = False
 		if hasattr(playref, "toCompareString"):
 			playrefstring = playref.toCompareString()
 			if "%3a//" not in playrefstring and playrefstring in self.__services:
@@ -219,9 +220,10 @@ class InfoBarStreamRelay:
 					playrefmod = playrefstring
 				playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
 				print(f"[{self.__class__.__name__}] Play service {playref.toCompareString()} via streamrelay")
+				is_stream_relay = True
 				playref.setAlternativeUrl(playrefstring)
 				return (playref, True)
-		return (playref, False)
+		return (playref, is_stream_relay)
 
 	def checkService(self, service):
 		return service and service.toCompareString() in self.__services

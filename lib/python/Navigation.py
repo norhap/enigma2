@@ -23,6 +23,7 @@ from Screens.InfoBarGenerics import streamrelay
 
 class Navigation:
 	playServiceExtensions = []
+	recordServiceExtensions = []
 
 	def __init__(self, nextRecordTimerAfterEventActionAuto=False, nextPowerManagerAfterEventActionAuto=False):
 		if NavigationInstance.instance is not None:
@@ -129,7 +130,10 @@ class Navigation:
 		for x in self.record_event:
 			x(rec_service, event)
 
-	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False):
+	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None):
+		if ref is None:
+			self.stopService()
+			return 0
 		session = None
 		startPlayingServiceOrGroup = None
 		count = isinstance(adjust, list) and len(adjust) or 0
@@ -143,17 +147,28 @@ class Navigation:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
 		print("[Navigation] playing", ref and ref.toString())
-		if exists("/proc/stb/lcd/symbol_signal"):
-			with open("/proc/stb/lcd/symbol_signal", "w") as f:
-				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
-		if ref is None:
-			self.stopService()
-			return 0
-		self.originalPlayingServiceReference = ref
-		from Components.ServiceEventTracker import InfoBarCount
-		InfoBarInstance = InfoBarCount == 1 and InfoBar.instance
+		InfoBarInstance = InfoBar.instance
 		isStreamRelay = False
 		is_handled = False
+		current_service_source = None
+		if InfoBarInstance:
+			current_service_source = InfoBarInstance.session.screen["CurrentService"]
+		if "%3a//" in ref.toString():
+			self.currentlyPlayingServiceReference = None
+			self.currentlyPlayingService = None
+			if current_service_source:
+				current_service_source.newService(False)
+		if exists("/proc/stb/lcd/symbol_signal") and hasattr(config.lcd, "mode"):
+			with open("/proc/stb/lcd/symbol_signal", "w") as f:
+				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
+		self.currentlyPlayingServiceReference = ref
+		self.currentlyPlayingServiceOrGroup = ref
+		self.originalPlayingServiceReference = ref
+		if InfoBarInstance and current_service_source:
+			current_service_source.newService(ref)
+			InfoBarInstance.session.screen["Event_Now"].updateSource(self.currentlyPlayingServiceReference)
+			InfoBarInstance.session.screen["Event_Next"].updateSource(self.currentlyPlayingServiceReference)
+			InfoBarInstance.serviceStarted()
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session] or adjust)), session=session):
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
@@ -248,7 +263,7 @@ class Navigation:
 					self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 					self.retryServicePlayTimer.start(config.misc.softcam_streamrelay_delay.value, True)
 					return 0
-				elif self.pnav.playService(playref):
+				elif not is_handled and self.pnav.playService(playref):
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
@@ -272,6 +287,7 @@ class Navigation:
 					self.isCurrentServiceStreamRelay = True
 				if InfoBarInstance and "%3a//" in playref.toString() and not is_handled:
 					self.originalPlayingServiceReference = None
+					InfoBarInstance.serviceStarted()
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
 				return 0
@@ -310,6 +326,8 @@ class Navigation:
 				ref = getBestPlayableServiceReference(ref, eServiceReference(), simulate)
 			if type != (pNavigation.isPseudoRecording | pNavigation.isFromEPGrefresh):
 				ref, isStreamRelay = streamrelay.streamrelayChecker(ref)
+			for f in Navigation.recordServiceExtensions:
+				ref = f(self, ref)
 			service = ref and self.pnav and self.pnav.recordService(ref, simulate, type)
 			if service is None:
 				print("[Navigation] record returned non-zero")
