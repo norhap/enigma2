@@ -24,7 +24,7 @@ from Components.Console import Console
 from Components.Harddisk import Harddisk
 from Components.Label import Label
 from Components.ProgressBar import ProgressBar
-from Components.SystemInfo import SystemInfo, MODEL
+from Components.SystemInfo import SystemInfo, MACHINEBUILD, MODEL
 from Tools.Geolocation import geolocation
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -105,8 +105,10 @@ class SelectImage(Screen):
 					for expression in eval(self.url_feeds.find(self.selectedImage["MODEL"]).text):
 						model = sub(expression[0], expression[1], MODEL)
 						url = f'{self.selectedImage["url"]}{model}'
-				else:
+				if "openpli" in self.selectedImage["url"]:
 					url = f'{self.selectedImage["url"]}{MODEL}'
+				else:
+					url = f'{self.selectedImage["url"]}{MACHINEBUILD}'
 				try:
 					req = Request(url, None, {"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"})
 					self.jsonlist.update(load(urlopen(req, timeout=3)))
