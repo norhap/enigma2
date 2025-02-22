@@ -41,7 +41,6 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
-		self.originalPlayingServiceReference = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
 		self.RecordTimer = RecordTimer.RecordTimer()
@@ -163,7 +162,6 @@ class Navigation:
 				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
 		self.currentlyPlayingServiceReference = ref
 		self.currentlyPlayingServiceOrGroup = ref
-		self.originalPlayingServiceReference = ref
 		if InfoBarInstance and current_service_source:
 			current_service_source.newService(ref)
 			InfoBarInstance.session.screen["Event_Now"].updateSource(self.currentlyPlayingServiceReference)
@@ -267,7 +265,6 @@ class Navigation:
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
-					self.originalPlayingServiceReference = None
 					if streamrelay.checkService(oldref):
 						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 						self.retryServicePlayTimer = eTimer()
@@ -286,7 +283,6 @@ class Navigation:
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:
 					self.isCurrentServiceStreamRelay = True
 				if InfoBarInstance and "%3a//" in playref.toString() and not is_handled:
-					self.originalPlayingServiceReference = None
 					InfoBarInstance.serviceStarted()
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
@@ -311,9 +307,6 @@ class Navigation:
 		ref = ref and eServiceReference(ref)
 		path = ref and ref.getPath()
 		return path and not path.startswith("/") and ref.type in [0x1, 0x1001, 0x138A, 0x1389]
-
-	def getCurrentServiceReferenceOriginal(self):
-		return self.originalPlayingServiceReference or self.currentlyPlayingServiceOrGroup
 
 	def recordService(self, ref, simulate=False, type=pNavigation.isUnknownRecording):
 		service = None

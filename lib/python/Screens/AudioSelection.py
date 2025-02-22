@@ -35,11 +35,6 @@ def getConfigMenuItem(configElementName):
 	return "", None
 
 
-def isIPTV(service):
-	path = service and service.getPath()
-	return path and not path.startswith("/") and service.type in [0x1, 0x1001, 0x138A, 0x1389]
-
-
 class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
@@ -522,10 +517,9 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 	def changeAudio(self, audio):
 		track = int(audio)
 		if isinstance(track, int):
-			ref = self.session.nav.getCurrentServiceReferenceOriginal() and eServiceReference(self.session.nav.getCurrentServiceReferenceOriginal())
 			if self.session.nav.getCurrentService().audioTracks().getNumberOfTracks() > track:
 				self.audioTracks.selectTrack(track)
-				if isIPTV(ref):
+				if self.session.nav.isCurrentServiceIPTV():
 					self.saveAVDict()
 
 	def keyLeft(self):
@@ -636,7 +630,6 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		try:
 			if self.focus == FOCUS_STREAMS and self["streams"].list:
 				cur = self["streams"].getCurrent()
-				ref = self.session.nav.getCurrentServiceReferenceOriginal() and eServiceReference(self.session.nav.getCurrentServiceReferenceOriginal())
 				if self.settings.menupage.value == PAGE_AUDIO and cur[0] is not None:
 					self.changeAudio(cur[0])
 					self.__updatedInfo()
@@ -649,7 +642,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 					else:
 						self.enableSubtitle(cur[0][:5])
 						self.__updatedInfo()
-					if isIPTV(ref):
+					if self.session.nav.isCurrentServiceIPTV():
 						self.saveAVDict()
 				self.close(0)
 			elif self.focus == FOCUS_CONFIG:
