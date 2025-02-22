@@ -17,7 +17,7 @@ from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText,
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, fileExists, fileContains
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, fileExists
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer, eConsoleAppContainer
@@ -189,31 +189,28 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 	def buildInterfaceList(self, iface, name, default, active):
 		divpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "div-h.png"))
 		defaultpng = None
-		activepng = None
-		description = None
 		interfacepng = None
-		if iface.startswith("eth") or iface.startswith("wlan"):
-			if not fileContains(interfacesfile, f"{iface}"):
-				active = False
 		if not iNetwork.isWirelessInterface(iface):
-			icon = {True: "icons/network_wired-active.png", False: "icons/network_wired-inactive.png", None: "icons/network_wired.png"}[active]
-			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
-		elif iNetwork.isWirelessInterface(iface):
-			if fileContains(interfacesfile, "# 	pre-up"):
-				active = False
-			icon = {True: "icons/network_wireless-active.png", False: "icons/network_wireless-inactive.png", None: "icons/network_wireless.png"}[active]
-			interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, icon))
-
-		num_configured_if = len(iNetwork.getConfiguredAdapters())
-		if num_configured_if >= 2:
-			icon = "buttons/button_green.png" if active else "buttons/button_green_off.png"
-			defaultpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, icon))
-		icon = "icons/lock_on.png" if active else "icons/lock_error.png"
-		activepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, icon))
-
+			if active:
+				interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/network_wired-active.png"))
+				defaultpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "skin_default/buttons/button_green.png"))
+			elif not active:
+				interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/network_wired-inactive.png"))
+				defaultpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "skin_default/buttons/button_green_off.png"))
+			else:
+				interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/network_wired.png"))
+		if iNetwork.isWirelessInterface(iface):
+			if active:
+				interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/network_wireless-active.png"))
+				defaultpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "skin_default/buttons/button_green.png"))
+			elif not active:
+				interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/network_wireless-inactive.png"))
+				defaultpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "skin_default/buttons/button_green_off.png"))
+			else:
+				interfacepng = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/network_wireless.png"))
+		activepng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_on.png")) if active else LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/lock_error.png"))
 		description = iNetwork.getFriendlyAdapterDescription(iface)
-
-		return ((iface, name, description, interfacepng, defaultpng, activepng, divpng))
+		return iface, name, description, interfacepng, defaultpng, activepng, divpng
 
 	def updateList(self):
 		self.list = []
