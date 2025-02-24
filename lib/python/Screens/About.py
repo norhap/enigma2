@@ -862,7 +862,7 @@ class SystemNetworkInfo(Screen):
 				self.AboutText += _("IPv4 public address:") + "\t" + ipv4address + "\n"
 			else:
 				try:
-					ip = get("http://api.ipify.org?format=json/")  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
+					ip = get("http://api.ipify.org?format=json/", timeout=(3, 2))  # FREE ALTERNATIVE https://reallyfreegeoip.org/json/
 					ipv4address = ip.content.decode()  # get IPv4
 				except Exception:
 					ipv4address = _("None")
