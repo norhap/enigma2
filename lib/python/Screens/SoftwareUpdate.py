@@ -298,6 +298,9 @@ class UpdatePlugin(Screen, ProtectedScreen):
 		else:
 			if not self.updating:
 				self.close()
+			else:
+				if self.packages == 0:
+					self.close()
 
 	def exitAnswer(self, result):
 		if result is not None and result:
