@@ -2025,11 +2025,8 @@ msgstr "Tipo de lista de canales"
 msgid "Channel not in services list"
 msgstr "Canal no en lista de canales"
 
-msgid "Channel in IPToSAT (main list)"
-msgstr "Canal en IPToSAT (lista principal)"
-
-msgid "Channel in IPToSAT (second list)"
-msgstr "Canal en IPToSAT (segunda lista)"
+msgid "Channel in IPToSAT"
+msgstr "Canal en IPToSAT"
 
 msgid "Channel selection"
 msgstr "Selección de canal"
