@@ -249,9 +249,11 @@ class PliExtraInfo(Poll, Converter):
 		try:
 			serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
 			if fileContains("/etc/enigma2/iptosat.json", str(serviceref)):
-				caid_name = _("Channel in IPToSAT")
+				caid_name = _("Channel IPToSAT")
+				return caid_name + "  SID: %04x" % int(info.getInfo(iServiceInformation.sSID))
 			elif "http" in serviceref:
 				caid_name = "Stream IPTV"
+				return caid_name
 			else:
 				caid_name = "FTA"
 			for caid_entry in caid_data:
