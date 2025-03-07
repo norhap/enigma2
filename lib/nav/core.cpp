@@ -54,6 +54,12 @@ RESULT eNavigation::playService(const eServiceReference &service)
 	return res;
 }
 
+RESULT eNavigation::setPiPService(const eServiceReference &service)
+{
+	m_runningPiPServiceRef = service;
+	return 0;
+}
+
 RESULT eNavigation::connectEvent(const sigc::slot<void(int)> &event, ePtr<eConnection> &connection)
 {
 	connection = new eConnection(this, m_event.connect(event));
@@ -78,6 +84,12 @@ RESULT eNavigation::getCurrentServiceReference(eServiceReference &service)
 	return 0;
 }
 
+RESULT eNavigation::getCurrentPiPServiceReference(eServiceReference &service)
+{
+	service = m_runningPiPServiceRef;
+	return 0;
+}
+
 RESULT eNavigation::stopService(void)
 {
 	/* check if there is a running service... */
@@ -98,6 +110,12 @@ RESULT eNavigation::stopService(void)
 #if defined(HAVE_FCC)
 	m_fccmgr && m_fccmgr->cleanupFCCService();
 #endif
+	return 0;
+}
+
+RESULT eNavigation::clearPiPService(void)
+{
+	m_runningPiPServiceRef = eServiceReference();
 	return 0;
 }
 

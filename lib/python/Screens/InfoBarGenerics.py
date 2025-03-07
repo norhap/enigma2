@@ -3241,7 +3241,7 @@ class InfoBarSubserviceSelection:
 					wrappererror = _("Error getting link via %s\n%s") % (p.name, errormsg)
 					break
 				elif newurl:
-					ref.setAlternativeUrl(newurl)
+					ref.setCompareSref(newurl)
 					break
 			if wrappererror:
 				AddPopup(text=wrappererror, type=MessageBox.TYPE_ERROR, timeout=5, id="channelzapwrapper")

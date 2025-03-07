@@ -626,7 +626,7 @@ void eListboxServiceContent::setItemHeight(int height)
 }
 
 inline bool compareServices(const eServiceReference &src, const eServiceReference &trg) {
-	return (src.toString() == trg.alternativeurl);
+	return (src.toString() == trg.compareSref);
 }
 
 bool eListboxServiceContent::checkServiceIsRecorded(eServiceReference ref,pNavigation::RecordType type)

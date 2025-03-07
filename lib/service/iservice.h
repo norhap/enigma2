@@ -64,16 +64,16 @@ public:
 #ifndef SWIG
 	int data[8];
 	std::string path;
-	std::string alternativeurl;
 	std::string suburi;
 	std::string compareSref;
-	bool isStreamRelay = false;	
+	bool isStreamRelay = false;
 #endif
 	std::string getPath() const { return path; }
 	void setPath( const std::string &n ) { path=n; }
-	void setAlternativeUrl( const std::string &n ) { alternativeurl=n; }
 	void setSubUri( const std::string &n ) { suburi=n; }
 	void setCompareSref( const std::string &n, bool isSR = false) { compareSref=n; isStreamRelay=isSR; }
+	bool getStreamRelay() const { return isStreamRelay; }
+	std::string getCompareSref() const { return compareSref; }
 
 	unsigned int getUnsignedData(unsigned int num) const
 	{

@@ -262,6 +262,14 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		sRelayOrigSref = eServiceReferenceDVB(refCur.compareSref);
 	}
 
+	eServiceReference refCurPiP;
+	eNavigation::getInstance()->getCurrentPiPServiceReference(refCurPiP);
+
+	if (refCurPiP && refCurPiP.isStreamRelay)
+	{
+		sRelayOrigSref = eServiceReferenceDVB(refCurPiP.compareSref);
+	}
+
 	ePtr<eDVBResourceManager> res_mgr;
 	bool remote_fallback_enabled = eConfigManager::getConfigBoolValue("config.usage.remote_fallback_enabled", false);
 
@@ -275,7 +283,7 @@ int eDVBService::isPlayable(const eServiceReference &ref, const eServiceReferenc
 		((const eServiceReferenceDVB&)ref).getChannelID(chid);
 		((const eServiceReferenceDVB&)ignore).getChannelID(chid_ignore);
 
-		if (refCur && refCur.isStreamRelay)
+		if ((refCur && refCur.isStreamRelay) || (refCurPiP && refCurPiP.isStreamRelay))
 		{
 			sRelayOrigSref.getChannelID(chid_ignore_sr);
 		}

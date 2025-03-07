@@ -949,7 +949,7 @@ int eDVBServicePMTHandler::compareAudioSubtitleCode(const std::string &subtitleT
 
 int eDVBServicePMTHandler::getChannel(eUsePtr<iDVBChannel> &channel)
 {
-	if (!m_sr_channel && !m_reference.alternativeurl.empty())
+	if (!m_sr_channel && !m_reference.compareSref.empty())
 	{
 
 		ePtr<eDVBResourceManager> res_mgr;
@@ -959,7 +959,7 @@ int eDVBServicePMTHandler::getChannel(eUsePtr<iDVBChannel> &channel)
 			res_mgr->getActiveChannels(list);
 			if(list.size()) {
 
-				eServiceReferenceDVB m_alternative_ref = eServiceReferenceDVB(m_reference.alternativeurl);
+				eServiceReferenceDVB m_alternative_ref = eServiceReferenceDVB(m_reference.compareSref);
 				char buf[30];
 				sprintf(buf, "%x:%x:%x", m_alternative_ref.getTransportStreamID().get(), m_alternative_ref.getOriginalNetworkID().get(), m_alternative_ref.getDVBNamespace().get());
 				std::string alternativeChannelID = std::string(buf);
@@ -1256,6 +1256,7 @@ void eDVBServicePMTHandler::free()
 	m_PAT.stop();
 	m_service = 0;
 	m_channel = 0;
+	m_sr_channel = 0;
 	m_pvr_channel = 0;
 	m_demux = 0;
 }
