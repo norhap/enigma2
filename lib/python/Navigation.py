@@ -130,6 +130,9 @@ class Navigation:
 			x(rec_service, event)
 
 	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None):
+		if exists("/proc/stb/lcd/symbol_signal") and hasattr(config.lcd, "mode"):
+			with open("/proc/stb/lcd/symbol_signal", "w") as f:
+				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
 		if ref is None:
 			self.stopService()
 			return 0
@@ -142,24 +145,21 @@ class Navigation:
 				startPlayingServiceOrGroup = adjust[2]
 			adjust = adjust[0]
 		oldref = self.currentlyPlayingServiceOrGroup
+		current_service_source = None
+		isStreamRelay = False
+		is_handled = False
+		InfoBarInstance = InfoBar.instance
+		if InfoBarInstance:
+			current_service_source = InfoBarInstance.session.screen["CurrentService"]
 		if ref and oldref and ref == oldref and not forceRestart:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
 		print("[Navigation] playing", ref and ref.toString())
-		InfoBarInstance = InfoBar.instance
-		isStreamRelay = False
-		is_handled = False
-		current_service_source = None
-		if InfoBarInstance:
-			current_service_source = InfoBarInstance.session.screen["CurrentService"]
 		if "%3a//" in ref.toString():
 			self.currentlyPlayingServiceReference = None
 			self.currentlyPlayingService = None
 			if current_service_source:
 				current_service_source.newService(False)
-		if exists("/proc/stb/lcd/symbol_signal") and hasattr(config.lcd, "mode"):
-			with open("/proc/stb/lcd/symbol_signal", "w") as f:
-				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
 		self.currentlyPlayingServiceReference = ref
 		self.currentlyPlayingServiceOrGroup = ref
 		if InfoBarInstance and current_service_source:
