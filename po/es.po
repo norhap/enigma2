@@ -2469,9 +2469,6 @@ msgstr "Transpondedor actual"
 msgid "Current value: "
 msgstr "Valor actual: "
 
-msgid "The repository is not public or there is no access."
-msgstr "El repositorio no es público o no hay acceso."
-
 msgid "Cut Menu"
 msgstr "Menú Cortar"
 
@@ -4122,12 +4119,6 @@ msgstr "Repita los comandos de espera y activación enviados"
 
 msgid "Time delay for the repeated transmission"
 msgstr "Retardo de tiempo para la transmisión repetida"
-
-msgid "The services/bouquets list is reloaded!"
-msgstr "La lista de canales ha sido recargada!"
-
-msgid "The time is multiplied by the current repeat counter."
-msgstr "El tiempo se multiplica por el contador de repetición actual."
 
 msgid "Repeat the standby commands"
 msgstr "Repita los comandos de reposo"
@@ -8321,22 +8312,6 @@ msgid "Thailand"
 msgstr "Thailandia"
 
 #, python-format
-msgid "The %d min remaining before the end of the event."
-msgstr "El %d min restante antes del final del evento."
-
-msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
-msgstr "El estándar de DVD no admite transmisiones de video H.264 (HDTV). ¿Desea crear un DVD de datos de formato especial (que no se reproducirá en reproductores de DVD independientes) en su lugar?"
-
-msgid "The PIN code has been changed successfully."
-msgstr "El código PIN ha sido cambiado con éxito."
-
-msgid "The PIN code has been saved successfully."
-msgstr "El código PIN se ha guardado correctamente."
-
-msgid "The PIN codes you entered are different."
-msgstr "Los códigos PIN que ingresó son diferentes."
-
-#, python-format
 msgid ""
 "The current image might not be stable.\n"
 "For more information see %s."
@@ -8411,61 +8386,6 @@ msgstr ""
 
 msgid "Server port used to decrypt channels that can only be done using Stream Relay."
 msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pueden hacer mediante Stream Relay."
-
-msgid "The PIN code you entered is wrong."
-msgstr "El código PIN introducido es incorrecto."
-
-#, python-format
-msgid "The results have been written to %s"
-msgstr "Los resultados han sido escritos en %s"
-
-msgid "The saved PIN was cleared."
-msgstr "Se borró el PIN guardado."
-
-msgid "The sleep timer has been activated."
-msgstr "El temporizador de descanso se ha activado."
-
-msgid "The sleep timer has been disabled."
-msgstr "El temporizador de descanso se ha desactivado."
-
-msgid ""
-"The software management extension is not installed!\n"
-"Please install it."
-msgstr ""
-"¡La extensión de administración de software no está instalada!\n"
-"Por favor instálela."
-
-#, python-format
-msgid "The status of the current image could not be checked because %s can not be reached."
-msgstr "El estado de la imagen actual no se pudo verificar porque no se puede llegar a %s."
-
-msgid "The timer file (timers.xml) is corrupt and could not be loaded."
-msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
-
-msgid ""
-"The use of the reserve tuner will be disabled to use FCC.\n"
-"Enigma2 needs to be restarted.\n"
-"Do you want to do it now?"
-msgstr ""
-"El uso del tuner reserva se deshabilitará para utilizar FCC.\n"
-"Es necesario reiniciar enigma2.\n"
-"¿Quieres hacerlo ahora?"
-
-msgid "The user interface of the receiver will now restart to select the selected skin"
-msgstr "La interfaz de usuario del receptor ahora se reiniciará para mostrar su skin seleccionado"
-
-msgid "The user interface of your %s %s is restarting"
-msgstr "La interfaz de usuario de su %s %s se está reiniciando"
-
-msgid ""
-"The user interface of your %s %s is restarting\n"
-"due to an error in StartEnigma.py"
-msgstr ""
-"La interfaz de usuario de su %s %s se está reiniciando\n"
-"debido a un error en StartEnigma.py"
-
-msgid "The user interface of your %s %s is restarting in debug mode"
-msgstr "La interfaz de usuario de su %s %s está reiniciando en modo debug"
 
 msgid "Please choose what you want to do next."
 msgstr "Elija lo que desea hacer a continuación."
@@ -8603,9 +8523,6 @@ msgstr "Este plugin está instalado."
 
 msgid "This plugin is not installed."
 msgstr "Este plugin no está instalado."
-
-msgid "The AutoTimer plugin is installed."
-msgstr "El plugin Temporizador Automático está instalado."
 
 msgid "This plugin will be installed."
 msgstr "Este plugin será instalado."
@@ -11241,12 +11158,6 @@ msgstr "Incluye siempre ECM en las grabaciones"
 msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your %s %s. Default: off."
 msgstr "Siempre incluya mensajes ECM en grabaciones. Esto anula las configuraciones de temporizador individuales. Permite que las grabaciones siempre se descifren después (a veces llamada decodificación sin conexión), si su %s %s lo soporta. Por Defecto: apagado."
 
-msgid "The speed of the fan when your %s %s is in normal use."
-msgstr "La velocidad del ventilador cuando su %s %s está en uso normal."
-
-msgid "The speed of the fan when your %s %s is in standby mode."
-msgstr "La velocidad del ventilador cuando su %s %s está en standby."
-
 msgid "Keyboard map"
 msgstr "Mapa de teclado"
 
@@ -12261,15 +12172,6 @@ msgstr "No, solo encender el receptor"
 
 msgid "OK, guide me through the upgrade process"
 msgstr "OK, guíame en el proceso de actualización"
-
-msgid "The backup failed. Please choose a different backup location."
-msgstr "La copia de seguridad falló. Escoge un lugar diferente para la copia."
-
-msgid "The wizard can backup your current settings. Do you want to do a backup now?"
-msgstr "El asistente puede guardar tus ajustes actuales. Quieres hacer una copia ahora?"
-
-msgid "The wizard is finished now."
-msgstr "El asistente ha terminado."
 
 msgid "Welcome to the image upgrade wizard. The wizard will assist you in upgrading the firmware of your receiver by providing a backup facility for your current settings and a short explanation of how to upgrade your firmware."
 msgstr "Bienvenido al asistente de actualización de imagen. El asistente le ayudará a actualizar el firmware de su receptor al proporcionar una utilidad de copia de seguridad para su configuración actual y una breve explicación de cómo actualizar su firmware."
@@ -13377,14 +13279,29 @@ msgstr "Soporte 'Búsqueda rápida'?"
 msgid "Tags the Timer/Recording will have."
 msgstr "Etiquetas que tendrá el temporizador/grabación."
 
+msgid "The AutoTimer plugin is installed."
+msgstr "El plugin Temporizador Automático está instalado."
+
 msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt and could not be loaded."
 msgstr "El archivo del Temporizador Automático (/etc/enigma2/autotimer.xml) está corrupto y no se pudo cargar."
+
+msgid "The backup failed. Please choose a different backup location."
+msgstr "La copia de seguridad falló. Escoge un lugar diferente para la copia."
 
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "El contador puede restablecerse automáticamente al límite en ciertos intervalos."
 
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "El editor que se utilizará para los nuevos Temporizador Automático. Este puede ser el asistente o el editor clásico."
+
+msgid "The services/bouquets list is reloaded!"
+msgstr "La lista de canales ha sido recargada!"
+
+msgid "The time is multiplied by the current repeat counter."
+msgstr "El tiempo se multiplica por el contador de repetición actual."
+
+msgid "The repository is not public or there is no access."
+msgstr "El repositorio no es público o no hay acceso."
 
 #, python-format
 msgid ""
@@ -13397,8 +13314,139 @@ msgstr ""
 msgid "The match attribute is mandatory."
 msgstr "El atributo de coincidencia es obligatorio."
 
+msgid "The PIN code you entered is wrong."
+msgstr "El código PIN introducido es incorrecto."
+
+#, python-format
+msgid "The %d min remaining before the end of the event."
+msgstr "El %d min restante antes del final del evento."
+
+msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
+msgstr "El estándar de DVD no admite transmisiones de video H.264 (HDTV). ¿Desea crear un DVD de datos de formato especial (que no se reproducirá en reproductores de DVD independientes) en su lugar?"
+
+msgid "The PIN code has been changed successfully."
+msgstr "El código PIN ha sido cambiado con éxito."
+
+msgid "The PIN code has been saved successfully."
+msgstr "El código PIN se ha guardado correctamente."
+
+msgid "The PIN codes you entered are different."
+msgstr "Los códigos PIN que ingresó son diferentes."
+
+#, python-format
+msgid "The results have been written to %s"
+msgstr "Los resultados han sido escritos en %s"
+
+msgid "The saved PIN was cleared."
+msgstr "Se borró el PIN guardado."
+
+msgid "The sleep timer has been activated."
+msgstr "El temporizador de descanso se ha activado."
+
+msgid "The sleep timer has been disabled."
+msgstr "El temporizador de descanso se ha desactivado."
+
+msgid ""
+"The software management extension is not installed!\n"
+"Please install it."
+msgstr ""
+"¡La extensión de administración de software no está instalada!\n"
+"Por favor instálela."
+
+#, python-format
+msgid "The status of the current image could not be checked because %s can not be reached."
+msgstr "El estado de la imagen actual no se pudo verificar porque no se puede llegar a %s."
+
+msgid "The timer file (timers.xml) is corrupt and could not be loaded."
+msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
+
+msgid ""
+"The use of the reserve tuner will be disabled to use FCC.\n"
+"Enigma2 needs to be restarted.\n"
+"Do you want to do it now?"
+msgstr ""
+"El uso del tuner reserva se deshabilitará para utilizar FCC.\n"
+"Es necesario reiniciar enigma2.\n"
+"¿Quieres hacerlo ahora?"
+
+msgid "The user interface of the receiver will now restart to select the selected skin"
+msgstr "La interfaz de usuario del receptor ahora se reiniciará para mostrar su skin seleccionado"
+
+msgid "The user interface of your %s %s is restarting"
+msgstr "La interfaz de usuario de su %s %s se está reiniciando"
+
+msgid ""
+"The user interface of your %s %s is restarting\n"
+"due to an error in StartEnigma.py"
+msgstr ""
+"La interfaz de usuario de su %s %s se está reiniciando\n"
+"debido a un error en StartEnigma.py"
+
+msgid "The user interface of your %s %s is restarting in debug mode"
+msgstr "La interfaz de usuario de su %s %s está reiniciando en modo debug"
+
+msgid "The speed of the fan when your %s %s is in normal use."
+msgstr "La velocidad del ventilador cuando su %s %s está en uso normal."
+
+msgid "The speed of the fan when your %s %s is in standby mode."
+msgstr "La velocidad del ventilador cuando su %s %s está en standby."
+
 msgid "The title attribute is mandatory."
 msgstr "El atributo de título es obligatorio."
+
+msgid "The wizard can backup your current settings. Do you want to do a backup now?"
+msgstr "El asistente puede guardar tus ajustes actuales. Quieres hacer una copia ahora?"
+
+msgid "The wizard is finished now."
+msgstr "El asistente ha terminado."
+
+msgid "The timer file (pm_timers.xml) is corrupt and could not be loaded."
+msgstr "El archivo del temporizador (pm_timers.xml) está dañado y no se pudo cargar."
+
+msgid "The device is already mounted!"
+msgstr "El dispositivo ya está montado!"
+
+msgid ""
+"The Timer will not be added to the List.\n"
+"Please press OK to close this Wizard."
+msgstr ""
+"El temporizador no se agregará a la lista.\n"
+"Pulse OK para cerrar este asistente."
+
+msgid "The data provided will not find services."
+msgstr "Los datos facilitados no encontrará canales."
+
+msgid "The password can not be blank!"
+msgstr "La contraseña no puede estar en blanco!"
+
+msgid ""
+"The TMBD plugin is not installed!\n"
+"Do you want to install it?"
+msgstr ""
+"El Plugin TMBD no está Instalado!\n"
+"Quieres instalarlo?"
+
+msgid "The AI mode used for translating languages. You can choose the one that gives the most accurate translation for your target language."
+msgstr "El modo AI que se utiliza para traducir idiomas. Puedes elegir el que ofrezca la traducción más precisa para el idioma de destino."
+
+msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection upload speed selected."
+msgstr "El servicio de traducción impulsado por inteligencia artificial se optimizará para proporcionar el mejor rendimiento según la velocidad de carga de la conexión a Internet seleccionada."
+
+msgid ""
+"The AutoTimer plugin is not installed!\n"
+"Do you want to install it?"
+msgstr ""
+"El Plugin Temporizador Automático no está Instalado!\n"
+"Quieres instalarlo?"
+
+msgid "The command to wake from standby will be sent multiple times."
+msgstr "El comando para despertar desde el modo de espera se enviará varias veces."
+
+msgid "The hostname or the IP address of the NTP server to synchronise the time with."
+msgstr "El nombre de host o la dirección IP del servidor NTP con el que sincronizar la hora."
+
+msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
+msgstr "El intervalo de tiempo de un Temporizador Automático es el primer atributo 'avanzado'. Si se especifica un intervalo de tiempo, un evento solo coincidirá con este Temporizador Automático si se encuentra dentro de este intervalo de tiempo."
 
 msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
 msgstr "Este es un nombre que puede darle al Temporizador Automático. Se mostrará en la Descripción y la Vista previa."
@@ -13615,16 +13663,6 @@ msgid ""
 msgstr ""
 "Gracias por usar el asistente. Su nuevo Temporizador Automático ha sido agregado a la lista.\n"
 "Por favor, pulse OK para continuar."
-
-msgid ""
-"The Timer will not be added to the List.\n"
-"Please press OK to close this Wizard."
-msgstr ""
-"El temporizador no se agregará a la lista.\n"
-"Pulse OK para cerrar este asistente."
-
-msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "El intervalo de tiempo de un Temporizador Automático es el primer atributo 'avanzado'. Si se especifica un intervalo de tiempo, un evento solo coincidirá con este Temporizador Automático si se encuentra dentro de este intervalo de tiempo."
 
 msgid ""
 "Welcome.\n"
@@ -14103,9 +14141,6 @@ msgstr "Configuración de Montajes"
 
 msgid "TB"
 msgstr "TB"
-
-msgid "The device is already mounted!"
-msgstr "El dispositivo ya está montado!"
 
 msgid "This Device is already mounted as HDD."
 msgstr "Este dispositivo ya está montado como HDD."
@@ -15789,9 +15824,6 @@ msgstr "Teletexto TTFWidthFactor16 (ancho de letra TrueType)"
 msgid "Teletext UseTTF (0=fixed font, 1=TrueType)"
 msgstr "Teletexto UseTTF (0=fuente fija, 1=TrueType)"
 
-msgid "The data provided will not find services."
-msgstr "Los datos facilitados no encontrará canales."
-
 msgid "Configure whether a bold TrueType font is used for teletext."
 msgstr "Configure si se usa una fuente TrueType en negrita para el teletexto."
 
@@ -16258,9 +16290,6 @@ msgstr "Puerto Telnet"
 msgid "Telnet setup"
 msgstr "Configurar Telnet"
 
-msgid "The password can not be blank!"
-msgstr "La contraseña no puede estar en blanco!"
-
 msgid "TiVo support"
 msgstr "Soporte TiVo"
 
@@ -16479,9 +16508,6 @@ msgstr "Detener el evento actual y deshabilitar futuros eventos"
 msgid "Stop current event but not future events"
 msgstr "Detener evento actual pero no futuros eventos"
 
-msgid "The timer file (pm_timers.xml) is corrupt and could not be loaded."
-msgstr "El archivo del temporizador (pm_timers.xml) está dañado y no se pudo cargar."
-
 msgid ""
 "Timer overlap in pm_timers.xml detected!\n"
 "Please recheck it!"
@@ -16635,26 +16661,6 @@ msgstr "Consultar detalles de la base de datos de películas de Internet"
 
 msgid "TMBD Not Installed"
 msgstr "TMBD No Instalado"
-
-msgid ""
-"The TMBD plugin is not installed!\n"
-"Do you want to install it?"
-msgstr ""
-"El Plugin TMBD no está Instalado!\n"
-"Quieres instalarlo?"
-
-msgid "The AI mode used for translating languages. You can choose the one that gives the most accurate translation for your target language."
-msgstr "El modo AI que se utiliza para traducir idiomas. Puedes elegir el que ofrezca la traducción más precisa para el idioma de destino."
-
-msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection upload speed selected."
-msgstr "El servicio de traducción impulsado por inteligencia artificial se optimizará para proporcionar el mejor rendimiento según la velocidad de carga de la conexión a Internet seleccionada."
-
-msgid ""
-"The AutoTimer plugin is not installed!\n"
-"Do you want to install it?"
-msgstr ""
-"El Plugin Temporizador Automático no está Instalado!\n"
-"Quieres instalarlo?"
 
 msgid "Seems internet connection down, Or TMBD Plugin not on feed."
 msgstr "Parece que la conexión a Internet no funciona, o el complemento TMBD no está en el feed."
@@ -17367,9 +17373,6 @@ msgstr "Escaneo rápido"
 msgid "Recovery Mode"
 msgstr "Modo Recuperación"
 
-msgid "The hostname or the IP address of the NTP server to synchronise the time with."
-msgstr "El nombre de host o la dirección IP del servidor NTP con el que sincronizar la hora."
-
 msgid "Service belongs to a parental protected bouquet"
 msgstr "El canal pertenece a un bouquet protegido por los padres"
 
@@ -17984,9 +17987,6 @@ msgstr "También activa el receptor A/V desde el modo de espera."
 
 msgid "Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms."
 msgstr "Retraso entre comandos CEC al enviar una serie de comandos. Algunos dispositivos requieren este retraso para su correcto funcionamiento, generalmente entre 50-150 ms."
-
-msgid "The command to wake from standby will be sent multiple times."
-msgstr "El comando para despertar desde el modo de espera se enviará varias veces."
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
 msgstr "Ordene al televisor que cambie a la entrada HDMI correcta cuando se activen los temporizadores zap."
