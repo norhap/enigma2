@@ -46,6 +46,8 @@ class SetupFallbacktuner(Setup):
 				self.peerStreamingBoxes = [config.usage.remote_fallback_atsc.value] + self.peerStreamingBoxes
 		self.avahiselect = ConfigSelection(default=peerDefault, choices=self.peerStreamingBoxes)
 		self.avahiselect.addNotifier(set_avahiselect_seperate)
+		if config.misc.firstrun.value:  # write URL from VK.
+			self.avahiselect.value = "url"
 		try:
 			ipDefault = [int(x) for x in config.usage.remote_fallback.value.split(":")[1][2:].split(".")]
 			portDefault = int(config.usage.remote_fallback.value.split(":")[2])

@@ -617,6 +617,8 @@ class Wizard(Screen):
 	def handleInputHelpers(self):
 		if self["config"].getCurrent() is not None:
 			if isinstance(self["config"].getCurrent()[1], ConfigText) or isinstance(self["config"].getCurrent()[1], ConfigPassword):
+				if int(self.currStep) == 15:  # write URL from VK.
+					self["VirtualKB"].setEnabled(True)
 				if "VKeyIcon" in self:
 					self["VirtualKB"].setEnabled(True)
 					self["VKeyIcon"].boolean = True
