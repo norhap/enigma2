@@ -16771,7 +16771,7 @@ msgid "Do you really want to delete %s ?"
 msgstr "¿Quieres eliminar %s?"
 
 msgid "Do you really want to delete ?"
-msgstr "Realmente quieres eliminar ?"
+msgstr "¿Realmente quieres eliminarlo?"
 
 msgid "Do you really want to move to the trash can ?"
 msgstr "Realmente quieres pasar a la papelera?"

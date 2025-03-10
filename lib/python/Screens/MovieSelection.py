@@ -1980,7 +1980,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							(_("Stop recording and delete"), ("sd", timer))]
 						self.session.openWithCallback(self.onTimerChoice, ChoiceBox, title="%s:\n%s" % (_("Recording in progress"), name), list=choices)
 						return
-				if time() - st.st_mtime < 5:
+				if int(time()) >= int(st.st_mtime):
 					if not args:
 						are_you_sure = _("Do you really want to delete ?")
 						mbox = self.session.openWithCallback(self.delete, MessageBox, _("File appears to be busy.\n") + are_you_sure)
