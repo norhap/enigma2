@@ -195,13 +195,13 @@ class MovieList(GUIComponent):
 		self.fontSize = 20
 		self.listHeight = None
 		self.listWidth = None
-		self.pbarShift = 0
+		self.pbarShift = 16
 		self.pbarHeight = 16
 		self.pbarLargeWidth = 48
 		self.pbarColour = 0x206333
 		self.pbarColourSeen = 0xffc71d
 		self.pbarColourRec = 0xff001d
-		self.partIconeShift = 0
+		self.partIconeShift = 16
 		self.spaceRight = 2
 		self.spaceIconeText = 2
 		self.iconsWidth = 22
@@ -516,7 +516,7 @@ class MovieList(GUIComponent):
 			colX = addProgress()
 
 		# Recording name
-		res.append(MultiContentEntryText(pos=(colX, 0), size=(width - iconSize - space - durationWidth - dateWidth - r - colX, ih), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=data.txt))
+		res.append(MultiContentEntryText(pos=(colX + 5, 0), size=(width - iconSize - space - durationWidth - dateWidth - r - colX, ih), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=data.txt))
 		colX = width - iconSize - space - durationWidth - dateWidth - r
 
 		if piconWidth > 0:
@@ -528,7 +528,7 @@ class MovieList(GUIComponent):
 				len = data.len
 				if len > 0:
 					len = ngettext("%d Min", "%d Mins", (len // 60)) % (len // 60)
-					res.append(MultiContentEntryText(pos=(colX + 880, 2), size=(durationWidth, ih), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=len))
+					res.append(MultiContentEntryText(pos=(colX + 830, 2), size=(durationWidth, ih), font=1, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text=len))
 
 		# Date
 		begin_string = ""
