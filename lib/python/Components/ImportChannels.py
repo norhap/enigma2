@@ -207,7 +207,7 @@ class ImportChannels():
 					urlopen(self.url + "/api/saveepg")
 				except Exception as err:
 					print(f"[ImportChannels] {err}")
-					self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings."))
+					self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active on the receiver fallback.\nIf the problem persists try with \"Fallback remote receiver IP\"."))
 					return
 				print("[ImportChannels] Get EPG Location")
 				try:
@@ -252,7 +252,7 @@ class ImportChannels():
 						content = map(lambda x: x.decode('utf-8', 'replace'), content)
 					except Exception as err:
 						print(f"[ImportChannels] Exception: {err}")
-						self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings.\n") + _("Read failled") + f" {channelslistpath}/{file} " + _("From :") + f" {self.url}")
+						self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active on the receiver fallback.\nIf the problem persists try with \"Fallback remote receiver IP\"."))  # + _("Read failled") + f" {channelslistpath}/{file} " + _("From :") + f" {self.url}")
 						return
 				else:
 					with open(f"{channelslistpath}/{file}", "r") as f:
@@ -292,7 +292,7 @@ class ImportChannels():
 					open(join(self.tmp_dir, basename(file)), "wb").write(self.getUrl(f"{self.url}/file?file={channelslistpath}/{quote(file)}").read())
 				except Exception as err:
 					if "epg" not in self.remote_fallback_import:
-						self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings.\n") + _("Failed to download") + f" {channelslistpath}/{file} " + _("From :") + f" {self.url}")
+						self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active on the receiver fallback.\nIf the problem persists try with \"Fallback remote receiver IP\"."))  # + _("Read failled") + f" {channelslistpath}/{file} " + _("From :") + f" {self.url}")
 					return
 			print("[ImportChannels] Enumerate local files")
 			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')

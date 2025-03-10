@@ -644,11 +644,8 @@ msgstr "Por encima de 200 Mbps"
 msgid "Access point:"
 msgstr "Punto de acceso:"
 
-msgid "Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings.\n"
-msgstr "Acceso no disponible:\nVerifique que la autenticación HTTP no esté activa en OpenWebIF en el receptor reserva o verifique los datos ingresados ​​en la configuración.\n"
-
-msgid "Access not available:\nCheck HTTP authentication not is active in OpenWebIF on the receiver fallback or check data entered in settings."
-msgstr "Acceso no disponible:\nVerifique que la autenticación HTTP no esté activa en OpenWebIF en el receptor reserva o verifique los datos ingresados ​​en la configuración."
+msgid "Access not available:\nCheck HTTP authentication not is active on the receiver fallback.\nIf the problem persists try with \"Fallback remote receiver IP\"."
+msgstr "Acceso no disponible:\nVerifique que la autenticación HTTP no esté activa en el receptor reserva.\nSi el problema persiste intente con \"IP receptor reserva\"."
 
 msgid "Activate HbbTV (Redbutton)"
 msgstr "Activar HbbTV (Botón Rojo)"
@@ -3604,7 +3601,7 @@ msgid "Fallback remote receiver"
 msgstr "Receptor reserva para respaldo"
 
 msgid "Fallback remote receiver IP"
-msgstr "IP Receptor reserva"
+msgstr "IP receptor reserva"
 
 msgid "Fallback remote receiver Port"
 msgstr "Puerto del receptor reserva"
@@ -4302,7 +4299,7 @@ msgid "Set receiver IP address."
 msgstr "Establecer la dirección IP del receptor."
 
 msgid "IP of fallback remote receiver."
-msgstr "IP del receptor reserva para respaldo."
+msgstr "IP del receptor reserva."
 
 msgid "ISO file is too large for this filesystem!"
 msgstr "La imagen ISO es demasiado grande para este sistema de archivos!"
