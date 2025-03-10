@@ -212,7 +212,8 @@ self.selectKey("RIGHT")
 		<step id="fallbacktuner">
 			<condition>
 from Components.NimManager import nimmanager
-self.condition = not nimmanager.somethingConnected()
+from Components.Timezones import INTERNET_SUCCESS
+self.condition = not nimmanager.somethingConnected() and INTERNET_SUCCESS
 			</condition>
 			<text value="Please configure the fallback tuner setup."/>
 			<config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList"/>
