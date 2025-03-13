@@ -897,16 +897,16 @@
 		<widget source="key_help" alphaTest="blend" pixmap="OctEtFHD/buttons/key_help.png" position="353,1035" size="64,43" render="Pixmap" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="key_red" alphaTest="blend" pixmap="OctEtFHD/buttons/key_red.png" position="26,155" render="Pixmap" size="40,40" zPosition="1">
+		<widget source="key_red" alphaTest="blend" pixmap="OctEtFHD/buttons/key_red.png" position="26,158" render="Pixmap" size="40,40" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="key_green" alphaTest="blend" pixmap="OctEtFHD/buttons/key_green.png" position="26,205" size="40,40" render="Pixmap" zPosition="1">
+		<widget source="key_green" alphaTest="blend" pixmap="OctEtFHD/buttons/key_green.png" position="26,207" size="40,40" render="Pixmap" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="key_yellow" alphaTest="blend" pixmap="OctEtFHD/buttons/key_yellow.png" position="26,255" size="40,40" render="Pixmap" zPosition="1">
+		<widget source="key_yellow" alphaTest="blend" pixmap="OctEtFHD/buttons/key_yellow.png" position="26,257" size="40,40" render="Pixmap" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="key_blue" alphaTest="blend" pixmap="OctEtFHD/buttons/key_blue.png" position="26,305" size="40,40" render="Pixmap" zPosition="1">
+		<widget source="key_blue" alphaTest="blend" pixmap="OctEtFHD/buttons/key_blue.png" position="26,307" size="40,40" render="Pixmap" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget name="config" itemHeight="50" entryFont="RegularBold;26" valueFont="Regular;23" position="70,155" size="1185,350" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" transparent="1" zPosition="3"/>
@@ -5605,7 +5605,7 @@
 		<widget source="key_blue" render="Pixmap" pixmap="OctEtFHD/buttons/key_blue.png" objectTypes="key_blue,StaticText" backgroundColor="OE_NewBg2" position="2,910" size="40,40" alphaTest="blend" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="key_blue" conditional="key_blue" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="39,895" size="240,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget source="key_blue" conditional="key_blue" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="45,895" size="234,70" verticalAlignment="center" transparent="1" zPosition="1"/>
 	</screen>
 		<!-- MENUS EPG -->
 		<!-- FRAME EPG -->

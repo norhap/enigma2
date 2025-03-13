@@ -59,15 +59,15 @@ class PicCript(Renderer):
 		self.path = "cript"
 		self.nameCache = {}
 		self.pngName = ""
-		self.picon_default = "picon_default.png"
+	#	self.picon_default = "picon_default.png"
 
 	def applySkin(self, desktop, parent):
 		attribs = []
 		for (attrib, value,) in self.skinAttributes:
 			if (attrib == "path"):
 				self.path = value
-			elif (attrib == "picon_default"):
-				self.picon_default = value
+		#	elif (attrib == "picon_default"):
+		#		self.picon_default = value
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
@@ -92,15 +92,15 @@ class PicCript(Renderer):
 					pngName = self.findPicon(sName)
 					if (pngName != ""):
 						self.nameCache[sName] = pngName
-			if (pngName == ""):
-				pngName = self.nameCache.get("default", "")
-				if (pngName == ""):
-					pngName = self.findPicon("picon_default")
-					if (pngName == ""):
-						tmp = resolveFilename(SCOPE_GUISKIN, "picon_default.png")
-						if isfile(tmp):
-							pngName = tmp
-						self.nameCache["default"] = pngName
+		#	if (pngName == ""):
+		#		pngName = self.nameCache.get("default", "")
+		#		if (pngName == ""):
+		#			pngName = self.findPicon("picon_default")
+		#			if (pngName == ""):
+		#				tmp = resolveFilename(SCOPE_GUISKIN, "picon_default.png")
+		#				if isfile(tmp):
+		#					pngName = tmp
+		#				self.nameCache["default"] = pngName
 			if (self.pngName != pngName):
 				self.pngName = pngName
 				self.instance.setPixmapFromFile(self.pngName)
