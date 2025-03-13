@@ -155,11 +155,6 @@ class Navigation:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
 		print("[Navigation] playing", ref and ref.toString())
-		if "%3a//" in ref.toString():
-			self.currentlyPlayingServiceReference = None
-			self.currentlyPlayingService = None
-			if current_service_source:
-				current_service_source.newService(False)
 		self.currentlyPlayingServiceReference = ref
 		self.currentlyPlayingServiceOrGroup = ref
 		if InfoBarInstance and current_service_source:
