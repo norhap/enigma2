@@ -407,12 +407,12 @@
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_leftright.png" position="940,1004" size="64,43"/>
 		<eLabel backgroundColor="OE_NewBg2" position="277,1004" size="903,45" zPosition="-10"/>
 		<eLabel text="Move" position="1010,1010" size="168,30" backgroundColor="OE_NewBg2" zPosition="1" transparent="1" font="RegularBold;24"/>
-		<ePixmap alphaTest="blend" backgroundColor="OE_NewBg2" pixmap="OctEtFHD/buttons/key_red.png" position="2,1005" size="40,40"/>
+		<ePixmap alphaTest="blend" backgroundColor="OE_NewBg2" pixmap="OctEtFHD/buttons/key_red.png" position="4,1005" size="40,40"/>
 		<ePixmap alphaTest="blend" backgroundColor="OE_NewBg2" pixmap="OctEtFHD/buttons/key_green.png" position="235,1005" size="40,40"/>
 		<ePixmap alphaTest="blend" backgroundColor="OE_NewBg2" pixmap="OctEtFHD/buttons/key_yellow.png" position="655,1005" size="40,40"/>
-		<widget source="key_red" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="40,1005" size="202,39" transparent="1" zPosition="1" horizontalAlignment="left" verticalAlignment="center"/>
+		<widget source="key_red" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="48,1005" size="202,39" transparent="1" zPosition="1" horizontalAlignment="left" verticalAlignment="center"/>
 		<widget source="key_green" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="280,1007" size="370,39" transparent="1" zPosition="1" horizontalAlignment="left" verticalAlignment="center"/>
-		<widget source="key_yellow" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="695,1007" size="240,39" transparent="1" zPosition="1" horizontalAlignment="left" verticalAlignment="center"/>
+		<widget source="key_yellow" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="697,1007" size="238,39" transparent="1" zPosition="1" horizontalAlignment="left" verticalAlignment="center"/>
 	</screen>
 	<!-- CHOICEBOX -->
 	<screen name="ChoiceBox" position="fill" flags="wfNoBorder">
@@ -1268,10 +1268,10 @@
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_green.png" position="845,970" size="40,40"/>
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_yellow.png" position="1125,970" size="40,40"/>
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_blue.png" position="1405,970" size="40,40"/>
-		<widget name="key_red" font="RegularBold;26" backgroundColor="OE_Background" position="605,955" size="235,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<widget name="key_green" font="RegularBold;26" backgroundColor="OE_Background" position="885,955" size="235,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<widget name="key_yellow" font="RegularBold;26" backgroundColor="OE_Background" position="1165,955" size="235,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<widget name="key_blue" font="RegularBold;26" backgroundColor="OE_Background" position="1445,955" size="260,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_red" font="RegularBold;26" backgroundColor="OE_Background" position="608,955" size="235,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_green" font="RegularBold;26" backgroundColor="OE_Background" position="888,955" size="235,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_yellow" font="RegularBold;26" backgroundColor="OE_Background" position="1168,955" size="235,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_blue" font="RegularBold;26" backgroundColor="OE_Background" position="1448,955" size="260,70" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
 	</screen>
 	<!-- CHANNELSELECTION MENU -->
 	<screen name="ChannelContextMenu" backgroundColor="transparent" flags="wfNoBorder" position="0,center" size="1920,1080" transparent="0">
@@ -5602,10 +5602,10 @@
 		<!-- MENU SORT -->
 	<screen name="TemplateMenuSort">
 		<ePixmap alphaTest="blend" objectTypes="key_blue,Button,Label" backgroundColor="OE_NewBg2" pixmap="OctEtFHD/buttons/key_blue.png" position="2,910" size="40,40"/>
-		<widget source="key_blue" render="Pixmap" pixmap="OctEtFHD/buttons/key_blue.png" objectTypes="key_blue,StaticText" backgroundColor="OE_NewBg2" position="2,910" size="40,40" alphaTest="blend" zPosition="1">
+		<widget source="key_blue" render="Pixmap" pixmap="OctEtFHD/buttons/key_blue.png" objectTypes="key_blue,StaticText" backgroundColor="OE_NewBg2" position="4,910" size="40,40" alphaTest="blend" zPosition="1">
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="key_blue" conditional="key_blue" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="45,895" size="234,70" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget source="key_blue" conditional="key_blue" render="Label" font="RegularBold;24" backgroundColor="OE_NewBg2" position="50,895" size="229,70" verticalAlignment="center" transparent="1" zPosition="1"/>
 	</screen>
 		<!-- MENUS EPG -->
 		<!-- FRAME EPG -->
