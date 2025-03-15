@@ -788,6 +788,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.wsconfig = None
 		self.default = None
 		self.firstRunSetupWizard = False
+		self.messageSimple = False if not config.misc.firstrun.value else True
 		wlanactive = "auto wlan"
 		lanactive = "auto eth"
 		ifaces = False
@@ -939,7 +940,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			self.createSetup()
 		self.hideInputHelp()
 		if self["config"].isChanged() or config.misc.firstrun.value:
-			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext))
+			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext), simple=self.messageSimple)
 		else:
 			if self.finished_cb:
 				self.finished_cb()
@@ -960,7 +961,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 						iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
 					self.applyConfig(True)
 				else:
-					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), default=True)
+					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), default=True, simple=self.messageSimple)
 			else:
 				self.applyConfig(True)
 		else:
@@ -1005,7 +1006,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			if not self.activateInterfaceEntry.value:
 				iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
 				iNetwork.writeNetworkConfig()
-				self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network configuration..."), type=MessageBox.TYPE_INFO, enable_input=False)
+				self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network configuration..."), type=MessageBox.TYPE_INFO, enable_input=False, simple=self.messageSimple)
 			else:
 				if not self.oldInterfaceState:
 					iNetwork.activateInterface(self.iface, self.deactivateInterfaceCB)
@@ -1014,7 +1015,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				iNetwork.writeNetworkConfig()
 				if config.misc.firstrun.value:
 					self.firstRunSetupWizard = True
-				self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network configuration..."), type=MessageBox.TYPE_INFO, enable_input=False)
+				self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network configuration..."), type=MessageBox.TYPE_INFO, enable_input=False, simple=self.messageSimple)
 		else:
 			self.keyCancel()
 
