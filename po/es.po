@@ -13288,17 +13288,11 @@ msgstr "La copia de seguridad falló. Escoge un lugar diferente para la copia."
 msgid "The counter can automatically be reset to the limit at certain intervals."
 msgstr "El contador puede restablecerse automáticamente al límite en ciertos intervalos."
 
+msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
+msgstr "El estándar de DVD no admite transmisiones de video H.264 (HDTV). ¿Desea crear un DVD de datos de formato especial (que no se reproducirá en reproductores de DVD independientes) en su lugar?"
+
 msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
 msgstr "El editor que se utilizará para los nuevos Temporizador Automático. Este puede ser el asistente o el editor clásico."
-
-msgid "The services/bouquets list is reloaded!"
-msgstr "La lista de canales ha sido recargada!"
-
-msgid "The time is multiplied by the current repeat counter."
-msgstr "El tiempo se multiplica por el contador de repetición actual."
-
-msgid "The repository is not public or there is no access."
-msgstr "El repositorio no es público o no hay acceso."
 
 #, python-format
 msgid ""
@@ -13307,6 +13301,9 @@ msgid ""
 msgstr ""
 "El filtro de Entrada '%s' ya existe!\n"
 "El cambio fue cancelado."
+
+msgid "The bouquet \"Last Scanned\" has not been created.\nYou need to restart enigma2 and rescan it to create it.\nDo you want to restart enigma2 now?"
+msgstr "El bouquet \"Último escaneo\" no se ha creado.\nEs necesario reiniciar enigma2 y volver a escanear para poder crearlo.\n¿Quiere reiniciar enigma2 ahora?"
 
 msgid "The match attribute is mandatory."
 msgstr "El atributo de coincidencia es obligatorio."
@@ -13318,9 +13315,6 @@ msgstr "El código PIN introducido es incorrecto."
 msgid "The %d min remaining before the end of the event."
 msgstr "El %d min restante antes del final del evento."
 
-msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
-msgstr "El estándar de DVD no admite transmisiones de video H.264 (HDTV). ¿Desea crear un DVD de datos de formato especial (que no se reproducirá en reproductores de DVD independientes) en su lugar?"
-
 msgid "The PIN code has been changed successfully."
 msgstr "El código PIN ha sido cambiado con éxito."
 
@@ -13330,6 +13324,9 @@ msgstr "El código PIN se ha guardado correctamente."
 msgid "The PIN codes you entered are different."
 msgstr "Los códigos PIN que ingresó son diferentes."
 
+msgid "The repository is not public or there is no access."
+msgstr "El repositorio no es público o no hay acceso."
+
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Los resultados han sido escritos en %s"
@@ -13337,11 +13334,23 @@ msgstr "Los resultados han sido escritos en %s"
 msgid "The saved PIN was cleared."
 msgstr "Se borró el PIN guardado."
 
+msgid "The services/bouquets list is reloaded!"
+msgstr "La lista de canales ha sido recargada!"
+
+msgid "The time is multiplied by the current repeat counter."
+msgstr "El tiempo se multiplica por el contador de repetición actual."
+
 msgid "The sleep timer has been activated."
 msgstr "El temporizador de descanso se ha activado."
 
 msgid "The sleep timer has been disabled."
 msgstr "El temporizador de descanso se ha desactivado."
+
+msgid "The speed of the fan when your %s %s is in normal use."
+msgstr "La velocidad del ventilador cuando su %s %s está en uso normal."
+
+msgid "The speed of the fan when your %s %s is in standby mode."
+msgstr "La velocidad del ventilador cuando su %s %s está en standby."
 
 msgid ""
 "The software management extension is not installed!\n"
@@ -13353,6 +13362,9 @@ msgstr ""
 #, python-format
 msgid "The status of the current image could not be checked because %s can not be reached."
 msgstr "El estado de la imagen actual no se pudo verificar porque no se puede llegar a %s."
+
+msgid "The title attribute is mandatory."
+msgstr "El atributo de título es obligatorio."
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
@@ -13381,15 +13393,6 @@ msgstr ""
 
 msgid "The user interface of your %s %s is restarting in debug mode"
 msgstr "La interfaz de usuario de su %s %s está reiniciando en modo debug"
-
-msgid "The speed of the fan when your %s %s is in normal use."
-msgstr "La velocidad del ventilador cuando su %s %s está en uso normal."
-
-msgid "The speed of the fan when your %s %s is in standby mode."
-msgstr "La velocidad del ventilador cuando su %s %s está en standby."
-
-msgid "The title attribute is mandatory."
-msgstr "El atributo de título es obligatorio."
 
 msgid "The wizard can backup your current settings. Do you want to do a backup now?"
 msgstr "El asistente puede guardar tus ajustes actuales. Quieres hacer una copia ahora?"

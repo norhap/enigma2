@@ -11,6 +11,8 @@ from Components.Sources.FrontendInfo import FrontendInfo
 from Components.config import config
 from os.path import exists
 from Screens.Processing import Processing
+from Screens.MessageBox import MessageBox
+from Screens.Standby import TryQuitMainloop
 from Tools.Directories import SCOPE_CONFIG, fileReadLines, resolveFilename, isPluginInstalled
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -100,6 +102,11 @@ class ServiceScan(Screen):
 						config.servicelist.lastmode.save()
 						self.currentServiceList.saveChannel(service)
 						self.doCloseRecursive()
+					else:
+						def restartGUI(answer=False):
+							if answer:
+								self.session.open(TryQuitMainloop, 3)
+						self.session.openWithCallback(restartGUI, MessageBox, _("The bouquet \"Last Scanned\" has not been created.\nYou need to restart enigma2 and rescan it to create it.\nDo you want to restart enigma2 now?"), type=MessageBox.TYPE_YESNO, simple=True)
 			self.cancel()
 
 	def cancel(self):
