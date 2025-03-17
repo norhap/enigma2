@@ -415,6 +415,9 @@ class TimerEntry(ConfigListScreen, Screen):
 							if "sref" in refiptosat and str(self.timerentry_service_ref) in refiptosat:
 								self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
 								return
+							elif "https" in str(self.timerentry_service_ref):
+								self.session.open(MessageBox, _("Recording failed: This IPTV channel is not recordable."), MessageBox.TYPE_ERROR)
+								return
 		if not self.timerentry_service_ref.isRecordable():
 			self.session.openWithCallback(self.selectChannelSelector, MessageBox, _("You didn't select a channel to record from."), MessageBox.TYPE_ERROR)
 		else:

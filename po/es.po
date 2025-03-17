@@ -6389,6 +6389,9 @@ msgstr "Acciones de Grabación"
 msgid "Recording failed: Storage device free size %d MB."
 msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d MB."
 
+msgid "Recording failed: This IPTV channel is not recordable."
+msgstr "Error de grabación: este canal IPTV no se puede grabar."
+
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
 
