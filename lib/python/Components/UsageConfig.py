@@ -607,6 +607,10 @@ def InitUsageConfig():
 	config.usage.show_event_progress_in_servicelist.addNotifier(refreshServiceList)
 	config.usage.show_channel_numbers_in_servicelist.addNotifier(refreshServiceList)
 
+	config.usage.servicelist_mode = ConfigSelection(default="standard", choices=[
+		("standard", _("Standard")),
+		("simple", _("Simple"))
+	])
 	if SystemInfo["7segment"]:
 		config.usage.blinking_in_standby_during_recording = ConfigSelection(default="Rec", choices=[
 			("Rec", _("REC")),

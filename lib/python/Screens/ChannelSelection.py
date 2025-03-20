@@ -2155,7 +2155,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		ChannelSelectionEdit.__init__(self)
 		ChannelSelectionEPG.__init__(self)
 		SelectionEventInfo.__init__(self)
-
+		if config.usage.servicelist_mode.value == "simple":
+			self.skinName = "SimpleChannelSelection"
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "TvRadioActions"],
 			{
 			"cancel": (self.cancel, _("Cancel")),

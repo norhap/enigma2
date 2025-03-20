@@ -284,7 +284,7 @@ class ConfigListScreen:
 
 	def setRestartMessage(self, msg):
 		if msg is None:
-			self.restartMsg = _("Restart GUI in debug mode now?") if config.crash.debugLevel.value == "3" else _("Restart GUI now?")
+			self.restartMsg = _("Restart GUI now?")
 		else:
 			msg
 
