@@ -7906,6 +7906,9 @@ msgstr "Sri Lanka"
 msgid "Standard"
 msgstr "Estándar"
 
+msgid "Standard 2"
+msgstr "Estándar 2"
+
 msgid "Standart list"
 msgstr "Lista estándar"
 

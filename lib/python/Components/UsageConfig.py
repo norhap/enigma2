@@ -609,6 +609,7 @@ def InitUsageConfig():
 
 	config.usage.servicelist_mode = ConfigSelection(default="standard", choices=[
 		("standard", _("Standard")),
+		("standard2", _("Standard 2")),
 		("simple", _("Simple"))
 	])
 	if SystemInfo["7segment"]:

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Screens.Screen import Screen
+from skin import findSkinScreen
 from Screens.HelpMenu import HelpableScreen
 from Screens.Setup import Setup
 import Screens.InfoBar
@@ -2157,6 +2158,8 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		SelectionEventInfo.__init__(self)
 		if config.usage.servicelist_mode.value == "simple":
 			self.skinName = "SimpleChannelSelection"
+		elif config.usage.servicelist_mode.value == "standard2" and findSkinScreen("Standar2ChannelSelection"):
+			self.skinName = "Standar2ChannelSelection"
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "TvRadioActions"],
 			{
 			"cancel": (self.cancel, _("Cancel")),
