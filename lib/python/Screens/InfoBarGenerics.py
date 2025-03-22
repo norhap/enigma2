@@ -407,6 +407,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.hideTimer.callback.append(self.doTimerHide)
 		self.hideTimer.start(5000, True)
 
+		self["key_blue"] = Label()  # show extensions.
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
 
@@ -440,6 +441,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.hideVBILineScreen.hide()
 
 	def __onShow(self):
+		self["key_blue"].setText(_("Extensions"))
 		self.__state = self.STATE_SHOWN
 		for x in self.onShowHideNotifiers:
 			x(True)
