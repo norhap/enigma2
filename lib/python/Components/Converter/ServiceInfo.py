@@ -2,6 +2,7 @@ from Components.Converter.Converter import Converter
 from enigma import eAVControl, iServiceInformation, iPlayableService, eServiceReference
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
+from Components.config import config
 from Components.Converter.Poll import Poll
 from Components.Converter.VAudioInfo import StdAudioDesc
 from Tools.Transponder import ConvertToHumanReadable
@@ -215,7 +216,7 @@ class ServiceInfo(Poll, Converter):
 			return video_aspect in WIDESCREEN
 		elif self.type == self.IS_NOT_WIDESCREEN:
 			return video_aspect not in WIDESCREEN
-		elif self.type == self.SUBSERVICES_AVAILABLE:
+		elif self.type == self.SUBSERVICES_AVAILABLE and not config.misc.hotkey.green.value:
 			return hasActiveSubservicesForCurrentChannel(info.getInfoString(iServiceInformation.sServiceref))
 		elif self.type == self.HAS_HBBTV:
 			return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""

@@ -364,15 +364,18 @@ class SecondInfoBar(Screen):
 	def __init__(self, session, skinName):
 		Screen.__init__(self, session)
 		self.skinName = ["SecondInfoBar"]
+		self["key_green"] = Label()
 		self["key_yellow"] = Label()
 		self["key_blue"] = Label()
 		self.onShow.append(self.__Show)
 
 	def __Show(self):
-		if "SoftcamSetup" not in (config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value) and "Void" not in (config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value):
+		if "SoftcamSetup" not in (config.misc.hotkey.green.value or config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value) and "Void" not in (config.misc.hotkey.green.value or config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value):
+			self["key_green"].setText(_("First InfoBar") if not config.misc.hotkey.green.value else config.misc.hotkey.green.value.replace("Module/Screens.", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1])
 			self["key_yellow"].setText(_("AutoTimer") if isPluginInstalled("AutoTimer") and "importAutoTimer" in (config.misc.hotkey.yellow.value) or not config.misc.hotkey.yellow.value else config.misc.hotkey.yellow.value.replace("Module/Screens.", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1])
 			self["key_blue"].setText(_("Extensions") if not config.misc.hotkey.blue.value else config.misc.hotkey.blue.value.replace("Module/Screens.", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1])
 		else:
+			self["key_green"].setText(_("First InfoBar") if not config.misc.hotkey.green.value else config.misc.hotkey.green.value)
 			self["key_yellow"].setText(_("AutoTimer") if isPluginInstalled("AutoTimer") and "importAutoTimer" in (config.misc.hotkey.yellow.value) or not config.misc.hotkey.yellow.value else config.misc.hotkey.yellow.value)
 			self["key_blue"].setText(_("Extensions") if not config.misc.hotkey.blue.value else config.misc.hotkey.blue.value)
 
@@ -409,6 +412,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.hideTimer.callback.append(self.doTimerHide)
 		self.hideTimer.start(5000, True)
 
+		self["key_green"] = Label()
 		self["key_yellow"] = Label()
 		self["key_blue"] = Label()
 		self.onShow.append(self.__onShow)
@@ -444,10 +448,12 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.hideVBILineScreen.hide()
 
 	def __onShow(self):
-		if "SoftcamSetup" not in (config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value) and "Void" not in (config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value):
+		if "SoftcamSetup" not in (config.misc.hotkey.green.value or config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value) and "Void" not in (config.misc.hotkey.green.value or config.misc.hotkey.yellow.value or config.misc.hotkey.blue.value):
+			self["key_green"].setText(_("First InfoBar") if not config.misc.hotkey.green.value else config.misc.hotkey.green.value.replace("Module/Screens.", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1])
 			self["key_yellow"].setText(_("AutoTimer") if isPluginInstalled("AutoTimer") and "importAutoTimer" in (config.misc.hotkey.yellow.value) or not config.misc.hotkey.yellow.value else config.misc.hotkey.yellow.value.replace("Module/Screens.", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1])
 			self["key_blue"].setText(_("Extensions") if not config.misc.hotkey.blue.value else config.misc.hotkey.blue.value.replace("Module/Screens.", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1])
 		else:
+			self["key_green"].setText(_("First InfoBar") if not config.misc.hotkey.green.value else config.misc.hotkey.green.value)
 			self["key_yellow"].setText(_("AutoTimer") if isPluginInstalled("AutoTimer") and "importAutoTimer" in (config.misc.hotkey.yellow.value) or not config.misc.hotkey.yellow.value else config.misc.hotkey.yellow.value)
 			self["key_blue"].setText(_("Extensions") if not config.misc.hotkey.blue.value else config.misc.hotkey.blue.value)
 		self.__state = self.STATE_SHOWN
