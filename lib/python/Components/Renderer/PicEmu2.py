@@ -3,7 +3,8 @@ from os.path import isfile, join
 from enigma import ePixmap, iServiceInformation
 
 from Components.Renderer.Renderer import Renderer
-from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines, fileContains
+import NavigationInstance
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -60,9 +61,10 @@ class PicEmu2(Renderer):
 					if (pngName != ""):
 						self.nameCache[sName] = pngName
 			if (pngName == ""):
+				serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
 				pngName = self.nameCache.get("default", "")
 				if (pngName == ""):
-					pngName = self.findPicon("picon_default")
+					pngName = self.findPicon("picon_default" if not fileContains("/etc/enigma2/iptosat.json", str(serviceref)) else "picon_default_iptosat")
 					if (pngName == ""):
 						tmp = resolveFilename(SCOPE_GUISKIN, "picon_default.png")
 						if isfile(tmp):
