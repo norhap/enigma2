@@ -6,6 +6,7 @@ from Components.SystemInfo import BoxInfo, SystemInfo
 from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo  # noqa: F401
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
+from sys import version_info
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Plugins.Plugin import PluginDescriptor
@@ -760,7 +761,7 @@ class InfoBarHotkey():
 						eConsoleAppContainer().execute("python %s" % command)
 					else:
 						from Screens.Console import Console
-						self.session.open(Console, selected[1] + " pythonscript", "python %s" % command, closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
+						self.session.open(Console, selected[1] + " pythonscript", f"python{str(version_info.major)} {command}", closeOnSuccess=selected[1].startswith('!'), showStartStopText=False)
 			elif selected[0] == "Menu":
 				from Screens.Menu import MainMenu, mdom
 				root = mdom.getroot()
