@@ -2111,7 +2111,7 @@ int eDVBServicePlay::getInfo(int w)
 		// use origiginal namespace
 		if (m_reference.isStreamRelay){
 			eServiceReferenceDVB m_parsed_ref = eServiceReferenceDVB(m_reference.compareSref);
-			if (m_parsed_ref.valid()) 
+			if (m_parsed_ref.valid())
 			{
 				return ((const eServiceReferenceDVB&)m_parsed_ref).getDVBNamespace().get();
 			}
@@ -3665,35 +3665,32 @@ void eDVBServicePlay::newSubtitleStream()
 	m_event((iPlayableService*)this, evUpdatedInfo);
 }
 
+// How many seconds before subtitle pages are considered to have bad timing.
+#define MAX_SUBTITLE_LIFESPAN 90
+
+// Used to sort subtitles in chronological order
+bool compare_pts(const eDVBTeletextSubtitlePage &a, const eDVBTeletextSubtitlePage &b)
+{
+	return a.m_pts < b.m_pts;
+}
+
 void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 {
 	if (m_subtitle_widget)
 	{
-		int subtitledelay = 0;
-		pts_t pts;
-		m_decoder->getPTS(0, pts);
-/*		xineLib->getPTS(pts);*/
-		if (m_is_pvr || m_timeshift_enabled)
-		{
-			// This is wrong!
-			// eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
-			// subtitledelay = eSubtitleSettings::subtitle_noPTSrecordingdelay;
-		}
-		else
-		{
-			/* check the setting for subtitle delay in live playback, either with pts, or without pts */
-			subtitledelay = eSubtitleSettings::subtitle_bad_timing_delay;
-		}
+		pts_t pts = 0;
+		if (m_decoder)
+			m_decoder->getPTS(0, pts);
 
-		// eDebug("[eDVBServicePlay] Subtitle get  TTX have_pts=%d pvr=%d timeshift=%d page.pts=%lld pts=%lld delay=%d", page.m_have_pts, m_is_pvr, m_timeshift_enabled, page.m_pts, pts, subtitledelay);
 		eDVBTeletextSubtitlePage tmppage = page;
-		tmppage.m_have_pts = true;
+		pts_t diff = tmppage.m_pts - pts;
 
-		if (abs(tmppage.m_pts - pts) > SUBT_TXT_ABNORMAL_PTS_DIFFS)
-			tmppage.m_pts = pts; // fix abnormal pts diffs
-
-		tmppage.m_pts += subtitledelay;
-		m_subtitle_pages.push_back(tmppage);
+		if (diff > 0 && diff < (MAX_SUBTITLE_LIFESPAN * 90000))
+		{
+			tmppage.m_pts += (m_is_pvr || m_timeshift_enabled) ? 0 : eSubtitleSettings::subtitle_bad_timing_delay;
+			m_subtitle_pages.push_back(tmppage);
+			m_subtitle_pages.sort(compare_pts);
+		}
 
 		checkSubtitleTiming();
 	}
@@ -3735,12 +3732,11 @@ void eDVBServicePlay::checkSubtitleTiming()
 		else
 			return;
 
-		// If subtitle is overdue or within 20ms the video timing then display it.
-		// If not, pause subtitle processing until the subtitle should be shown
 		int diff = show_time - pos;
-		if (diff < 20*90)
+		// eDebug("[eDVBServicePlay] checkSubtitleTiming show %d page.pts=%lld pts=%lld diff=%d", type, show_time, pos, diff);
+
+		if (diff < 20 * 90 || diff > MAX_SUBTITLE_LIFESPAN * 90000)
 		{
-			//eDebug("[eDVBServicePlay] Showing subtitle with pts:%lld Video pts:%lld diff:%.03fs. Page stack size %d", show_time, pos, diff / 90000.0f, m_dvb_subtitle_pages.size());
 			if (type == TELETEXT)
 			{
 				m_subtitle_widget->setPage(page);
@@ -3754,7 +3750,6 @@ void eDVBServicePlay::checkSubtitleTiming()
 		}
 		else
 		{
-			//eDebug("[eDVBServicePlay] Delay early subtitle by %.03fs. Page stack size %d", diff / 90000.0f, m_dvb_subtitle_pages.size());
 			m_subtitle_sync_timer->start(diff / 90, 1);
 			break;
 		}
