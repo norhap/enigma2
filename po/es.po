@@ -4404,7 +4404,7 @@ msgstr "Temporizador de inactividad"
 msgid "Incorrect password: Change the password in the OpenWebIF setting in the reserve tuner settings.\nYou must enter the password of the reserve receiver."
 msgstr "Contraseña incorrecta: Cambie la contraseña en el ajuste OpenWebIF en la configuración del tuner reserva.\nDebe ingresar la contraseña del receptor reserva."
 
-msgid "Incorrect type service for PiP!"
+msgid "Incorrect service type for PiP!"
 msgstr "Canal incorrecto para PiP!"
 
 msgid "Increased voltage"

@@ -145,14 +145,24 @@ class Navigation:
 				startPlayingServiceOrGroup = adjust[2]
 			adjust = adjust[0]
 		oldref = self.currentlyPlayingServiceOrGroup
+		current_service_source = None
 		isStreamRelay = False
 		is_handled = False
 		InfoBarInstance = InfoBar.instance
+		if InfoBarInstance:
+			current_service_source = InfoBarInstance.session.screen["CurrentService"]
 		if ref and oldref and ref == oldref and not forceRestart:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
 		print("[Navigation] playing", ref and ref.toString())
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session] or adjust)), session=session):
+			self.currentlyPlayingServiceReference = ref
+			self.currentlyPlayingServiceOrGroup = ref
+			if InfoBarInstance and current_service_source:
+				current_service_source.newService(ref)
+				# InfoBarInstance.session.screen["Event_Now"].updateSource(self.currentlyPlayingServiceReference) # respect EIT
+				# InfoBarInstance.session.screen["Event_Next"].updateSource(self.currentlyPlayingServiceReference) # respect EIT
+				InfoBarInstance.serviceStarted()
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
 				playref = getBestPlayableServiceReference(ref, oldref)
