@@ -1,7 +1,6 @@
 from os.path import isdir, join
 from os import listdir
 from re import sub
-import unicodedata
 from Components.Renderer.Renderer import Renderer
 from enigma import ePixmap
 from Tools.Alternatives import GetWithAlternative

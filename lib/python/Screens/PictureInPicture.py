@@ -5,7 +5,7 @@ from Components.SystemInfo import SystemInfo
 from Components.VideoWindow import VideoWindow
 from Components.Sources.StreamService import StreamServiceList
 from Components.config import config, ConfigPosition, ConfigSelection
-from Tools.Notifications import AddPopup, RemovePopup
+from Tools.Notifications import AddPopup
 from Screens.MessageBox import MessageBox
 
 MAX_X = 720
