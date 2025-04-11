@@ -722,6 +722,10 @@ if test "$MACHINE_BRAND" == "Vu+"; then
 	AC_DEFINE(KEY_EDIT_TO_KEY_TIME, 1,[define when rc sends a KEY_TIME event for its KEY_EDIT key])
 fi
 
+if "$MACHINE" == "vuultimo4k" -o "$MACHINE" == "vuduo4kse"; then
+ 	AC_DEFINE(PASSTHROUGH_FIX, 1 ,[define when passthrough is not entirely supported by drivers (usually Vu+)])
+fi
+
 if test "$MACHINE" == "vuduo2"; then
 	AC_DEFINE(HAVE_BWLCD140, 1,[define when using a 140x32 black and white display device])
 	AC_DEFINE(FORCE_AUTO_INV, 1,[force Inversion auto for vuplus mipsel boxes])
