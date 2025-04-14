@@ -50,10 +50,6 @@ using namespace std;
 #include <sstream>
 #include <iomanip>
 
-#ifndef SUBT_TXT_ABNORMAL_PTS_DIFFS
-#define SUBT_TXT_ABNORMAL_PTS_DIFFS 1800000
-#endif
-
 class eStaticServiceDVBInformation: public iStaticServiceInformation
 {
 	DECLARE_REF(eStaticServiceDVBInformation);
@@ -1543,31 +1539,6 @@ RESULT eDVBServicePlay::stop()
 
 RESULT eDVBServicePlay::setTarget(int target, bool noaudio = false)
 {
-	// start/stop audio
-	if (target == 1000)
-	{
-		if (noaudio) // stop audio
-		{
-			if (m_decoder && !m_noaudio)
-			{
-				m_noaudio = true;
-				m_decoder->setSyncPCR(-1);
-				m_decoder->setAudioPID(-1, -1);
-				m_decoder->set();
-				return 0;
-			}
-		}
-		else // start audio
-		{
-			if (m_noaudio)
-			{
-				m_noaudio = false;
-				updateDecoder(m_noaudio);
-				return 0;
-			}
-		}
-		return -1;
-	}
 	m_is_primary = !target;
 	m_decoder_index = target;
 	m_noaudio = noaudio;
@@ -2262,13 +2233,11 @@ int eDVBServicePlay::getCurrentTrack()
 
 RESULT eDVBServicePlay::selectTrack(unsigned int i)
 {
-	if (m_noaudio)
-		return -1;
-
 	int ret = selectAudioStream(i);
 
 	if (m_decoder->set())
 		return -5;
+
 	return ret;
 }
 
@@ -3696,32 +3665,33 @@ void eDVBServicePlay::newSubtitleStream()
 	m_event((iPlayableService*)this, evUpdatedInfo);
 }
 
-// How many seconds before subtitle pages are considered to have bad timing.
-#define MAX_SUBTITLE_LIFESPAN 90
-
-// Used to sort subtitles in chronological order
-bool compare_pts(const eDVBTeletextSubtitlePage &a, const eDVBTeletextSubtitlePage &b)
-{
-	return a.m_pts < b.m_pts;
-}
-
 void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 {
 	if (m_subtitle_widget)
 	{
-		pts_t pts = 0;
-		if (m_decoder)
-			m_decoder->getPTS(0, pts);
-
-		eDVBTeletextSubtitlePage tmppage = page;
-		pts_t diff = tmppage.m_pts - pts;
-
-		if (diff > 0 && diff < (MAX_SUBTITLE_LIFESPAN * 90000))
+		int subtitledelay = 0;
+		pts_t pts;
+		m_decoder->getPTS(0, pts);
+		if (m_is_pvr || m_timeshift_enabled)
 		{
-			tmppage.m_pts += (m_is_pvr || m_timeshift_enabled) ? 0 : eSubtitleSettings::subtitle_bad_timing_delay;
-			m_subtitle_pages.push_back(tmppage);
-			m_subtitle_pages.sort(compare_pts);
+			eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
+			subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
 		}
+		else
+		{
+			/* check the setting for subtitle delay in live playback, either with pts, or without pts */
+			subtitledelay = eSubtitleSettings::subtitle_bad_timing_delay;
+		}
+
+		// eDebug("[eDVBServicePlay] Subtitle get  TTX have_pts=%d pvr=%d timeshift=%d page.pts=%lld pts=%lld delay=%d", page.m_have_pts, m_is_pvr, m_timeshift_enabled, page.m_pts, pts, subtitledelay);
+		eDVBTeletextSubtitlePage tmppage = page;
+		tmppage.m_have_pts = true;
+
+		if (abs(tmppage.m_pts - pts) > 20 * 90000)
+			tmppage.m_pts = pts; // fix abnormal pts diffs
+
+		tmppage.m_pts += subtitledelay;
+		m_subtitle_pages.push_back(tmppage);
 
 		checkSubtitleTiming();
 	}
@@ -3766,7 +3736,7 @@ void eDVBServicePlay::checkSubtitleTiming()
 		int diff = show_time - pos;
 		// eDebug("[eDVBServicePlay] checkSubtitleTiming show %d page.pts=%lld pts=%lld diff=%d", type, show_time, pos, diff);
 
-		if (diff < 20 * 90 || diff > MAX_SUBTITLE_LIFESPAN * 90000)
+		if (diff < 20 * 90)
 		{
 			if (type == TELETEXT)
 			{
@@ -3798,7 +3768,7 @@ void eDVBServicePlay::newDVBSubtitlePage(const eDVBSubtitlePage &p)
 		// Where subtitles are delivered out of sync with video, only treat subtitles in the past as having bad timing.
 		// Those that are delivered too early are cached for displaying at the appropriate later time
 		// Note that this can be due to buggy drivers, as well as problems with the broadcast
-		if (pos-p.m_show_time > SUBT_TXT_ABNORMAL_PTS_DIFFS && (m_is_pvr || m_timeshift_enabled))
+		if (pos-p.m_show_time > 1800000 && (m_is_pvr || m_timeshift_enabled))
 		{
 			// Subtitles delivered over 20 seconds too late
 			eDebug("[eDVBServicePlay] Video pts:%lld, subtitle show_time:%lld, diff:%.02fs BAD TIMING", pos, p.m_show_time, (p.m_show_time - pos) / 90000.0f);
