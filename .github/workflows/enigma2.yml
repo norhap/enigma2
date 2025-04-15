@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         gcc: [13]
-        python: ['3.12']
+        python: ['3.13']
     steps:
     - name: install dev packages
       run: |
