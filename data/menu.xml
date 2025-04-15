@@ -22,7 +22,7 @@
 		<menu key="video_selection" level="0" text="Audio &amp; Video" weight="5">
 			<id val="video" />
 			<item key="av_setup" level="0" text="Audio/Video Setup" weight="5"><setup id="AudioVideo" /></item>
-			<item key="autolanguage_setup" level="0" text="Automatic Language and Subtitles Setup" weight="10"><setup id="AutoLanguage" /></item>
+			<item key="autolanguage_setup" level="0" text="Automatic Language and Subtitle Settings" weight="10"><setup id="AutoLanguage" /></item>
 			<item key="hdmicec" level="0" text="HDMI-CEC Settings" weight="55" requires="HDMICEC"><screen module="HDMICEC" screen="HDMICECSetup" /></item>
 		</menu>
 		<!-- Main Menu > Setup > Tuners and Scanning -->

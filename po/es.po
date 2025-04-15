@@ -10549,6 +10549,9 @@ msgstr "original"
 msgid "original language"
 msgstr "idioma original"
 
+msgid "Original language"
+msgstr "Lenguaje original"
+
 msgid "pass"
 msgstr "pasar"
 
@@ -11539,8 +11542,8 @@ msgstr "Posición de los subtítulos"
 msgid "Subtitles Settings"
 msgstr "Ajustes Subtítulos"
 
-msgid "Automatic Language and Subtitles Setup"
-msgstr "Ajustes Lenguaje Automático & Subtítulos"
+msgid "Automatic Language and Subtitle Settings"
+msgstr "Ajustes Automáticos Lenguaje & Subtítulos"
 
 msgid "Teletext subtitle color"
 msgstr "Color de subtítulos del teletexto"
@@ -16329,6 +16332,9 @@ msgstr "Actualización de tiempo en minutos"
 msgid "Time update in minutes:"
 msgstr "Actualización de tiempo en minutos:"
 
+msgid "Tuner fallback"
+msgstr "Sintonizador reserva"
+
 msgid "Unable to change password!"
 msgstr "No se puede cambiar la contraseña!"
 
@@ -19383,9 +19389,6 @@ msgstr "Incluir datos DVB"
 
 msgid "Enable this option to add extra DVB scan data to the debug log file."
 msgstr "Habilite esta opción para agregar datos de Búsqueda DVB adicionales al archivo de registro de depuración."
-
-msgid "Original language"
-msgstr "Lenguaje original"
 
 msgid "Narration"
 msgstr "Narración"

@@ -6,6 +6,7 @@ from Screens.Setup import Setup, setupDom
 from Screens.HelpMenu import HelpableScreen
 from Screens.InputBox import PinInput
 from Screens.MessageBox import MessageBox
+from Screens.SetupFallbacktuner import getChannelIPToSAT
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.ConfigList import ConfigListScreen
@@ -326,15 +327,28 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						if lang == "":
 							language += _("Not defined")
 						elif lang in originalAudioTracks:
-							language += _("Original language")
+							if not getChannelIPToSAT():
+								language += _("Original language")
+							else:  # IPToSAT
+								if "X" in selected:
+									language += _("Original language")
+									streams.append((x, "", number, description, language, selected, selectionpng))
+									break
 						elif lang in LanguageCodes:
-							language += _(LanguageCodes[lang][0])
+							if not getChannelIPToSAT():
+								language += _(LanguageCodes[lang][0])
+							else:  # IPToSAT
+								if "X" in selected:
+									language += _(LanguageCodes[lang][0])
+									streams.append((x, "", number, description, language, selected, selectionpng))
+									break
 						elif lang in visuallyImpairedCommentary:
 							language += _("Narration")
 						else:
 							language += lang
 						cnt += 1
-					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
+					if not getChannelIPToSAT():
+						streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 			else:
 				conflist.append(("",))
 			if SystemInfo["Canedidchecking"]:

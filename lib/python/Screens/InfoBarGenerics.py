@@ -2928,6 +2928,7 @@ class InfoBarInstantRecord:
 			# info["end"] = curEvent[1]
 
 	def startInstantRecording(self, limitEvent=False):
+		from Screens.SetupFallbacktuner import getChannelIPToSAT  # noqa: E402
 		begin = int(time())
 		end = begin + 3600		# dummy
 		name = _("Instant record")
@@ -2935,11 +2936,9 @@ class InfoBarInstantRecord:
 		self.getProgramInfoAndEvent(info, name)
 		serviceref = info["serviceref"]
 		event = info["event"]
-		if isPluginInstalled("IPToSAT"):
-			from Plugins.Extensions.IPToSAT.plugin import isRecordable
-			if isRecordable() is False:
-				self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
-				return
+		if getChannelIPToSAT():
+			self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
+			return
 		if event is not None:
 			end = begin + self.currentEventTime()  # time now + remaining event time: instant record with (stop after current event).
 			if limitEvent:

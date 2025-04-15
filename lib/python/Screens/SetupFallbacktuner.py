@@ -1,4 +1,4 @@
-from enigma import getPeerStreamingBoxes
+from enigma import getPeerStreamingBoxes, iFrontendInformation
 
 from Screens.Setup import Setup
 from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry
@@ -6,6 +6,42 @@ from Components.ImportChannels import ImportChannels
 from Tools.Directories import isPluginInstalled
 from Screens.MessageBox import MessageBox
 from Screens.Standby import checkTimeshiftRunning, TryQuitMainloop
+
+
+def getChannelOnFallbackTuner():
+	import NavigationInstance  # noqa: E402
+	from Components.NimManager import nimmanager  # noqa: E402
+	channelOnFallbackTuner = False
+	try:
+		for nims in nimmanager.nim_slots:
+			if nims.config_mode == ("nothing"):
+				SNR = 0
+				service = NavigationInstance.instance.getCurrentService()
+				if service:
+					info = service and service.info()
+					if info:
+						FeInfo = service and service.frontendInfo()
+						if FeInfo:
+							SNR = FeInfo.getFrontendInfo(iFrontendInformation.signalQuality) / 655
+							if SNR < 1 and config.usage.remote_fallback_enabled.value:
+								channelOnFallbackTuner = True
+							elif SNR < 1:  # Others fallback tuners or client mode.
+								channelOnFallbackTuner = True
+			else:
+				return channelOnFallbackTuner
+	except Exception:
+		return channelOnFallbackTuner
+	return channelOnFallbackTuner
+
+
+def getChannelIPToSAT():
+	if isPluginInstalled("IPToSAT"):
+		from Plugins.Extensions.IPToSAT.plugin import isRecordable  # noqa: E402
+		if not isRecordable():
+			return True
+		return None
+	else:
+		return None
 
 
 class SetupFallbacktuner(Setup):

@@ -5,10 +5,9 @@ from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
-from Tools.Directories import fileContains
 from Components.Converter.Poll import Poll
 from skin import parameters
-import NavigationInstance
+from Screens.SetupFallbacktuner import getChannelIPToSAT, getChannelOnFallbackTuner
 
 caid_data = (
 	("0x0100", "0x01ff", "Seca", "S", True),
@@ -247,12 +246,14 @@ class PliExtraInfo(Poll, Converter):
 
 	def createCryptoSpecial(self, info):
 		try:
-			serviceref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
-			if fileContains("/etc/enigma2/iptosat.json", str(serviceref)):
+			if getChannelIPToSAT():
 				caid_name = _("Channel IPToSAT")
 				return caid_name + "  SID: %04x" % int(info.getInfo(iServiceInformation.sSID))
-			elif "http" in serviceref:
+			elif self.createStreamURLInfo(info):
 				caid_name = "Stream IPTV"
+				return caid_name
+			elif getChannelOnFallbackTuner():
+				caid_name = _("Tuner fallback")
 				return caid_name
 			else:
 				caid_name = "FTA"
