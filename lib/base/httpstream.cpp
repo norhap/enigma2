@@ -85,7 +85,7 @@ int eHttpStream::openUrl(const std::string &url, std::string &newurl)
 	int authenticationindex = hostname.find("@");
 	if (authenticationindex > 0)
 	{
-		authorizationData =  base64encode(hostname.substr(0, authenticationindex));
+		authorizationData = base64encode(hostname.substr(0, authenticationindex));
 		hostname = hostname.substr(authenticationindex + 1);
 	}
 	int customportindex = hostname.find(":");
@@ -270,7 +270,7 @@ void eHttpStream::thread()
 		newurl = "";
 	}
 	/* too many redirect / playlist levels */
-	eDebug("[eHttpStream] hread end NO connection");
+	eDebug("[eHttpStream] Thread end NO connection");
 	connectionStatus = FAILED;
 	return;
 }
