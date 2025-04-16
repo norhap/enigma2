@@ -1092,6 +1092,7 @@ RESULT eDVBResourceManager::allocateDemux(eDVBRegisteredFrontend *fe, ePtr<eDVBA
 	 * On some hardware, there are less ca devices than demuxes, so try to leave
 	 * the first demuxes for live tv, and start with the last for pvr playback
 	 */
+
 	bool use_decode_demux = (fe || (cap & iDVBChannel::capDecode));
 
 	if (!use_decode_demux)
@@ -2303,15 +2304,13 @@ RESULT eDVBChannel::getDemux(ePtr<iDVBDemux> &demux, int cap)
 	if (!our_demux)
 	{
 		demux = 0;
-
+		// eDebug"[eDVBChannel] DEBUG getDemux call allocateDemuxu");
 		if (m_mgr->allocateDemux(m_frontend ? (eDVBRegisteredFrontend*)*m_frontend : (eDVBRegisteredFrontend*)0, our_demux, cap))
 			return -1;
 
-		demux = *our_demux;
 	}
-	else
-		demux = *our_demux;
-
+	demux = *our_demux;
+		
 	return 0;
 }
 
