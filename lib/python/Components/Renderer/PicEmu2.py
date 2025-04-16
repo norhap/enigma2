@@ -4,7 +4,7 @@ from enigma import ePixmap, iServiceInformation
 
 from Components.Renderer.Renderer import Renderer
 from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines
-from Screens.SetupFallbacktuner import getChannelIPToSAT
+from ServiceReference import serviceRefIPToSAT
 
 MODULE_NAME = __name__.split(".")[-1]
 
@@ -63,7 +63,7 @@ class PicEmu2(Renderer):
 			if (pngName == ""):
 				pngName = self.nameCache.get("default", "")
 				if (pngName == ""):
-					pngName = self.findPicon("picon_default" if not getChannelIPToSAT() else "picon_default_iptosat")
+					pngName = self.findPicon("picon_default" if not serviceRefIPToSAT() else "picon_default_iptosat")
 					if (pngName == ""):
 						tmp = resolveFilename(SCOPE_GUISKIN, "picon_default.png")
 						if isfile(tmp):

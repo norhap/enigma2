@@ -33,7 +33,7 @@ from Screens.SubtitleDisplay import SubtitleDisplay
 from Screens.RdsDisplay import RdsInfoDisplay, RassInteractive
 from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
-from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef
+from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef, serviceRefIPToSAT
 from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileWriteLine, fileReadLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
@@ -2928,7 +2928,6 @@ class InfoBarInstantRecord:
 			# info["end"] = curEvent[1]
 
 	def startInstantRecording(self, limitEvent=False):
-		from Screens.SetupFallbacktuner import getChannelIPToSAT  # noqa: E402
 		begin = int(time())
 		end = begin + 3600		# dummy
 		name = _("Instant record")
@@ -2936,7 +2935,7 @@ class InfoBarInstantRecord:
 		self.getProgramInfoAndEvent(info, name)
 		serviceref = info["serviceref"]
 		event = info["event"]
-		if getChannelIPToSAT():
+		if serviceRefIPToSAT():
 			self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
 			return
 		if event is not None:

@@ -34,16 +34,6 @@ def getChannelOnFallbackTuner():
 	return channelOnFallbackTuner
 
 
-def getChannelIPToSAT():
-	if isPluginInstalled("IPToSAT"):
-		from Plugins.Extensions.IPToSAT.plugin import isRecordable  # noqa: E402
-		if not isRecordable():
-			return True
-		return None
-	else:
-		return None
-
-
 class SetupFallbacktuner(Setup):
 	def __init__(self, session):
 		self.createConfig()

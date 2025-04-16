@@ -7,7 +7,8 @@ from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
 from Components.Converter.Poll import Poll
 from skin import parameters
-from Screens.SetupFallbacktuner import getChannelIPToSAT, getChannelOnFallbackTuner
+from Screens.SetupFallbacktuner import getChannelOnFallbackTuner
+from ServiceReference import serviceRefIPToSAT
 
 caid_data = (
 	("0x0100", "0x01ff", "Seca", "S", True),
@@ -246,7 +247,7 @@ class PliExtraInfo(Poll, Converter):
 
 	def createCryptoSpecial(self, info):
 		try:
-			if getChannelIPToSAT():
+			if serviceRefIPToSAT():
 				caid_name = _("Channel IPToSAT")
 				return caid_name + "  SID: %04x" % int(info.getInfo(iServiceInformation.sSID))
 			elif self.createStreamURLInfo(info):

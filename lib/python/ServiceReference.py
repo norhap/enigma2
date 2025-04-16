@@ -40,6 +40,15 @@ class ServiceReference(eServiceReference):
 		return ref.flags & eServiceReference.isGroup or (ref.type in (eServiceReference.idDVB, eServiceReference.idDVB + eServiceReference.idServiceIsScrambled, eServiceReference.idServiceHDMIIn, eServiceReference.idServiceMP3))
 
 
+def serviceRefIPToSAT():
+	from Tools.Directories import isPluginInstalled  # noqa: E402
+	if isPluginInstalled("IPToSAT"):
+		from Plugins.Extensions.IPToSAT.plugin import isIPToSAT  # noqa: E402
+		return False if not isIPToSAT() else True
+	else:
+		return False
+
+
 def getPlayingref(ref):
 	playingref = None
 	if NavigationInstance.instance:
