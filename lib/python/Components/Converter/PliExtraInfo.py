@@ -250,8 +250,11 @@ class PliExtraInfo(Poll, Converter):
 			if serviceRefIPToSAT():
 				caid_name = _("Channel IPToSAT")
 				return caid_name + "  SID: %04x" % int(info.getInfo(iServiceInformation.sSID))
-			elif self.createStreamURLInfo(info):
+			elif self.createStreamURLInfo(info) and str(config.misc.softcam_streamrelay_port.value) not in self.createStreamURLInfo(info):
 				caid_name = "Stream IPTV"
+				return caid_name
+			elif self.createStreamURLInfo(info) and str(config.misc.softcam_streamrelay_port.value) in self.createStreamURLInfo(info):
+				caid_name = "Stream Relay"
 				return caid_name
 			elif getChannelOnFallbackTuner():
 				caid_name = _("Tuner fallback")
