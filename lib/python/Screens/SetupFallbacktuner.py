@@ -10,27 +10,19 @@ from Screens.Standby import checkTimeshiftRunning, TryQuitMainloop
 
 def getChannelOnFallbackTuner():
 	import NavigationInstance  # noqa: E402
-	from Components.NimManager import nimmanager  # noqa: E402
 	channelOnFallbackTuner = False
 	try:
-		for nims in nimmanager.nim_slots:
-			if nims.config_mode == ("nothing"):
-				SNR = 0
-				service = NavigationInstance.instance.getCurrentService()
-				if service:
-					info = service and service.info()
-					if info:
-						FeInfo = service and service.frontendInfo()
-						if FeInfo:
-							SNR = FeInfo.getFrontendInfo(iFrontendInformation.signalQuality) / 655
-							if SNR < 1 and config.usage.remote_fallback_enabled.value:
-								channelOnFallbackTuner = True
-							elif SNR < 1:  # Others fallback tuners or client mode.
-								channelOnFallbackTuner = True
-			else:
-				return channelOnFallbackTuner
+		service = NavigationInstance.instance.getCurrentService()
+		if service:
+			info = service and service.info()
+			if info:
+				FeInfo = service and service.frontendInfo()
+				if FeInfo:
+					SNR = FeInfo.getFrontendInfo(iFrontendInformation.signalQuality)
+					if not SNR and (config.usage.remote_fallback_enabled.value or config.clientmode.enabled.value):
+						channelOnFallbackTuner = True
 	except Exception:
-		return channelOnFallbackTuner
+		return False
 	return channelOnFallbackTuner
 
 
