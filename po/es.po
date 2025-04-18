@@ -782,6 +782,12 @@ msgstr "Ajuste de mejoras de video avanzado"
 msgid "Advanced video setup"
 msgstr "Ajustes de video avanzado"
 
+msgid "audioSelection"
+msgstr "selección de Audio"
+
+msgid "audioSelectionLong"
+msgstr "cambiar pista AC3"
+
 msgid "Audio language selection 1"
 msgstr "Selección de idioma de audio 1"
 
@@ -1138,6 +1144,12 @@ msgstr "Mostrar mensaje antes de reproducir la próxima película"
 
 msgid "Display Setup"
 msgstr "Ajustes Display"
+
+msgid "EPGRefresh"
+msgstr "Actualizar EPG"
+
+msgid "EPGSearch"
+msgstr "Buscar EPG"
 
 msgid "EPG language selection 1"
 msgstr "Selección del idioma de EPG 1"
@@ -1622,6 +1634,9 @@ msgstr "Automático"
 msgid "Automatic Scan"
 msgstr "Búsqueda Automática"
 
+msgid "av_setup"
+msgstr "ajustes audio & video"
+
 msgid "Available format variables"
 msgstr "Variables de formato disponibles"
 
@@ -1871,6 +1886,9 @@ msgstr "CH%s"
 
 msgid "CA device Offset index"
 msgstr "Índice de desplazamiento del dispositivo CA"
+
+msgid "CiSelection"
+msgstr "Selección CI"
 
 msgid "CI (Common Interface) Setup"
 msgstr "Configuración de CI (interfaz común)"
@@ -3549,39 +3567,6 @@ msgstr "FEC:"
 msgid "FTA"
 msgstr "FTA"
 
-msgid "Select Quad Channels"
-msgstr "Seleccionar canales cuádruples"
-
-msgid "Select 'Yes' to remove all settings, tuning data, timers, resume pointers etc. Selecting this option will restore the configuration to the initial settings before any configuration settings were applied. This is the most reliable form of Factory Reset."
-msgstr "Seleccione 'Sí' para eliminar todos los ajustes, datos de ajuste, temporizadores, punteros de reanudación, etc. Al seleccionar esta opción, se restaurará la configuración a los ajustes iniciales antes de que se aplicaran los ajustes de configuración. Esta es la forma más confiable de restablecimiento de fábrica."
-
-msgid "Select 'Yes' to remove all tuning data. Selecting this option will remove all tuning and bouquet data and will make timers non functional until the receiver is retuned."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de sintonización. Al seleccionar esta opción, se eliminarán todos los datos de sintonización y ramificación y los temporizadores no funcionarán hasta que se vuelva a sintonizar el receptor."
-
-msgid "Select 'Yes' to remove all keymap data. Selecting this option will remove all keymap override data and restore the default keymap definitions."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de teclas. Al seleccionar esta opción, se eliminarán todos los datos de teclas y se restaurarán las definiciones predeterminadas del mapa de teclas."
-
-msgid "Select 'Yes' to remove all network data. Selecting this option will remove all network data including automounts and network connection data including connection accounts and passwords. This could cause some Enigma2 functions to fail if they are configured to use these network resources."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de la red. Al seleccionar esta opción, se eliminarán todos los datos de red, incluidos los montajes automáticos y los datos de conexión de red, incluidas las cuentas de conexión y las contraseñas. Esto podría hacer que algunas funciones de Enigma2 fallen si están configuradas para usar estos recursos de red."
-
-msgid "Select 'Yes' to remove all plugin configuration data. Selecting this option will remove all plugin configuration data that is stored in the Enigma2 configuration folder. This will cause all affected plugins to return to their default settings. This could cause some plugins to not function until configured."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de plugins. Al seleccionar esta opción, se eliminarán todos los datos de configuración de plugins que están almacenados en la carpeta de configuración de Enigma2. Esto hará que todos los plugins afectados vuelvan a su configuración predeterminada. Esto podría hacer que algunos plugins no funcionen hasta que se configuren."
-
-msgid "Select 'Yes' to remove all media player resume data. Selecting this option will remove the data used to allow playback of media files to resume from the position where playback was last stopped. Playback position of recordings is not affected."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de reanudación del reproductor multimedia. Al seleccionar esta opción, se eliminarán los datos utilizados para permitir que la reproducción de archivos multimedia se reanude desde la posición donde se detuvo por última vez. La posición de reproducción de las grabaciones no se ve afectada."
-
-msgid "Select 'Yes' to remove all main settings configuration data. Selecting this option will set all Enigma2 settings back to their default values.  This will also cause Enigma2 to run the Welcome Wizard on restart."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de los ajustes principales. Al seleccionar esta opción, todos los ajustes de Enigma2 volverán a sus valores de fábrica. Esto también hace que Enigma2 ejecute el Asistente wizard al reiniciar."
-
-msgid "Select 'Yes' to remove all user customisations of skin data. Selecting this option will remove all user based skin customisations. All affected skins will return to their standard settings. This will also clear any customied boot logos and backdrops."
-msgstr "Seleccione 'Sí' para eliminar todas las personalizaciones de usuario de los datos del skin. Al seleccionar esta opción, se eliminarán todas las personalizaciones de skin basadas en el usuario. Todos los aspectos afectados volverán a su configuración estándar. Esto también eliminará los logotipos y fondos de arranque personalizados."
-
-msgid "Select 'Yes' to remove all timer configuration data. Selecting this option will clear all timers, autotimers and power timers."
-msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del temporizador. Al seleccionar esta opción, se eliminarán todos los temporizadores, temporizadores automáticos y temporizadores de alimentación."
-
-msgid "Select 'Yes' to remove all other files and directories not covered by the options above."
-msgstr "Seleccione 'Sí' para eliminar todos los demás archivos y directorios no cubiertos por las opciones anteriores."
-
 msgid "Factory Reset"
 msgstr "Restablecimiento de Fábrica"
 
@@ -4018,6 +4003,15 @@ msgstr "Guyana"
 msgid "Hardware Type: "
 msgstr "Hardware Tipo: "
 
+msgid "HDMIIn"
+msgstr "Entrada HDMI"
+
+msgid "HDMIInFull"
+msgstr "HDMI Completo"
+
+msgid "HDMIInPiP"
+msgstr "Entrada HDMI PiP"
+
 msgid "HD list"
 msgstr "Lista HD"
 
@@ -4225,6 +4219,9 @@ msgstr "Historia atrás"
 msgid "History next"
 msgstr "Historia adelante"
 
+msgid "HotkeySetup"
+msgstr "Ajustes teclas"
+
 msgid "History Prev/Next"
 msgstr "Historia Previo - Siguiente"
 
@@ -4287,6 +4284,174 @@ msgstr "Húngaro"
 
 msgid "Hungary"
 msgstr "Hungría"
+
+msgid "Add legacy LEFT/RIGHT actions"
+msgstr "Agregar acciones IZQUIERDA/DERECHA"
+
+msgid "Select 'Yes' to enable use of the LEFT/RIGHT buttons to move PageUp/PageDown when the LEFT/RIGHT buttons are otherwise undefined. This provides legacy navigation for users who prefer it."
+msgstr "Seleccione 'Sí' para habilitar el uso de los botones IZQUIERDO/DERECHO para mover Página Arriba/Página Abajo cuando los botones IZQUIERDO/DERECHO no están definidos. Esto proporciona una navegación heredada para los usuarios que la prefieran."
+
+msgid "Date style"
+msgstr "Estilo de fecha"
+
+msgid "Time style"
+msgstr "Estilo de Tiempo"
+
+msgid "Day D Mon"
+msgstr "Día D Lun"
+
+msgid "Day D-Mon"
+msgstr "Día D-Lun"
+
+msgid "Day D/M"
+msgstr "Día D/M"
+
+msgid "Day D/MM"
+msgstr "Día D/MM"
+
+msgid "Day DD Mon"
+msgstr "Día DD Lun"
+
+msgid "Day DD-Mon"
+msgstr "Día DD-Lun"
+
+msgid "Day DD/M"
+msgstr "Día DD/M"
+
+msgid "Day DD/MM"
+msgstr "Día DD/MM"
+
+msgid "Day M/D"
+msgstr "Día M/D"
+
+msgid "Day M/DD"
+msgstr "Día M/DD"
+
+msgid "Day MM/D"
+msgstr "Día MM/D"
+
+msgid "Day MM/DD"
+msgstr "Día MM/DD"
+
+msgid "Day Mon D"
+msgstr "Día Lun D"
+
+msgid "Day Mon DD"
+msgstr "Dia Lun DD"
+
+msgid "Day Mon-D"
+msgstr "Día Lun-D"
+
+msgid "Day Mon-DD"
+msgstr "Día Lun-DD"
+
+msgid "Day of the month"
+msgstr "Día del mes"
+
+msgid "Dayname D Month Year"
+msgstr "Nombre Día D Mes Año"
+
+msgid "Dayname D-Month-Year"
+msgstr "Nombre Día D-Mes-Año"
+
+msgid "Dayname D. Month Year"
+msgstr "Nombre Día D. Mes Año"
+
+msgid "Dayname D.M.Year"
+msgstr "Nombre Día D.M.Año"
+
+msgid "Dayname D.MM.Year"
+msgstr "Nombre Día D.MM.Año"
+
+msgid "Dayname D/M/Year"
+msgstr "Nombre Día D/M/Año"
+
+msgid "Dayname D/MM/Year"
+msgstr "Nombre Día D/MM/Año"
+
+msgid "Dayname DD Month Year"
+msgstr "Nombre Día DD Mes Año"
+
+msgid "Dayname DD-Month-Year"
+msgstr "Nombre Día DD-Mes-Año"
+
+msgid "Dayname DD. Month Year"
+msgstr "Nombre Día DD. Mes Año"
+
+msgid "Dayname DD.M.Year"
+msgstr "Nombre Día DD.M.Año"
+
+msgid "Dayname DD.MM.Year"
+msgstr "Nombre Día DD.MM.Año"
+
+msgid "Dayname DD/M/Year"
+msgstr "Nombre Día DD/M/Año"
+
+msgid "Dayname DD/MM/Year"
+msgstr "Nombre Día DD/MM/Año"
+
+msgid "Dayname M/D/Year"
+msgstr "Nombre Día M/D/Año"
+
+msgid "Dayname M/DD/Year"
+msgstr "Nombre Día M/DD/Año"
+
+msgid "Dayname MM/D/Year"
+msgstr "Nombre Día MM/D/Año"
+
+msgid "Dayname MM/DD/Year"
+msgstr "Nombre Día MM/DD/Año"
+
+msgid "Dayname Month D Year"
+msgstr "Nombre Día Mes D Año"
+
+msgid "Dayname Month DD Year"
+msgstr "Nombre Día Mes DD Año"
+
+msgid "Dayname Month-D-Year"
+msgstr "Nombre Día Mes-D-Año"
+
+msgid "Dayname Month-DD-Year"
+msgstr "Nombre Día Mes-DD-Año"
+
+msgid "Dayname Year Month D"
+msgstr "Nombre Día Año Mes D"
+
+msgid "Dayname Year Month DD"
+msgstr "Nombre Día Año Mes DD"
+
+msgid "Dayname Year-Month-D"
+msgstr "Nombre Día Año-Mes-D"
+
+msgid "Dayname Year-Month-DD"
+msgstr "Nombre Día Año-Mes-DD"
+
+msgid "Dayname Year/M/D"
+msgstr "Nombre Día Año/M/D"
+
+msgid "Dayname Year/M/DD"
+msgstr "Nombre Día Año/M/DD"
+
+msgid "Dayname Year/MM/D"
+msgstr "Nombre Día Año/MM/D"
+
+msgid "Dayname Year/MM/DD"
+msgstr "Nombre Día Año/MM/DD"
+
+msgid "Hidden / Blank"
+msgstr "Ocultar / En blanco"
+
+msgid "hide"
+msgstr "ocultar"
+
+msgid "historyBack"
+msgstr "historia Atrás"
+
+msgid "historyNext"
+msgstr "historia Siguiente"
+
+msgid "fast"
+msgstr "rápido"
 
 msgid "I do not want to perform any service scans"
 msgstr "No quiero realizar ningún búsqueda de canal"
@@ -4644,6 +4809,9 @@ msgstr "Kuwait"
 msgid "Kyrgyzstan"
 msgstr "Kirguistán"
 
+msgid "LanguageSelection"
+msgstr "Ajustes Idioma"
+
 msgid "LAN adapter"
 msgstr "Adaptador LAN-Cable"
 
@@ -4861,6 +5029,9 @@ msgstr "Macedonia"
 msgid "Madagascar"
 msgstr "Madagascar"
 
+msgid "mainMenu"
+msgstr "menú Principal"
+
 msgid "Main Menu"
 msgstr "Menú Principal"
 
@@ -4959,6 +5130,9 @@ msgstr "El medio no es un DVD grabable!"
 
 msgid "Medium is not empty!"
 msgstr "El medio no está vacío!"
+
+msgid "MemoryInfo"
+msgstr "Info Memoria"
 
 msgid "Memory Ram & Flash"
 msgstr "Memoria Ram & Flash"
@@ -5110,6 +5284,9 @@ msgstr "Moviendo al oeste..."
 
 msgid "Mozambique"
 msgstr "Mozambique"
+
+msgid "MultibootSelection"
+msgstr "Selección Multiboot"
 
 msgid "Multi EPG"
 msgstr "Multi EPG"
@@ -6908,6 +7085,9 @@ msgstr "Modo de escalado"
 msgid "Scan"
 msgstr "Búsqueda"
 
+msgid "scan"
+msgstr "escaneo"
+
 msgid "Scan "
 msgstr "Búsqueda "
 
@@ -7309,6 +7489,9 @@ msgstr "Títulos separados con un menú principal"
 
 msgid "Sequence repeat"
 msgstr "Repetir la secuencia"
+
+msgid "ServiceInfo"
+msgstr "Info Canal"
 
 msgid "Serbia"
 msgstr "Serbia"
@@ -7772,9 +7955,6 @@ msgstr "Suave"
 
 msgid "Social/Political/Economics"
 msgstr "Social/Política/Economía"
-
-msgid "Softcam Setup"
-msgstr "Configuración de Softcam"
 
 msgid "Software"
 msgstr "Software"
@@ -9032,6 +9212,9 @@ msgstr "Desmontar"
 msgid "Unsupported"
 msgstr "No soportado"
 
+msgid "UpdatePlugin"
+msgstr "Actualización Software"
+
 msgid "Update"
 msgstr "Actualizar"
 
@@ -9071,11 +9254,17 @@ msgstr "Actualizando"
 msgid "Uruguay"
 msgstr "Uruguay"
 
+msgid "usage"
+msgstr "configuración de uso"
+
 msgid "Usage Setup"
 msgstr "Configuración de uso"
 
 msgid "Use"
 msgstr "Uso"
+
+msgid "userinterface"
+msgstr "intefaz de usuario"
 
 msgid ""
 "Do you want to use auto mode detection?\n"
@@ -10021,6 +10210,9 @@ msgstr "circular a la derecha"
 msgid "clip overscan / letterbox borders"
 msgstr "bordes de overscan / letterbox del clip"
 
+msgid "CommitInfo"
+msgstr "Últimos Cambios"
+
 msgid "comedy"
 msgstr "comedia"
 
@@ -10540,6 +10732,15 @@ msgstr "Solo desde el modo de reposo profundo"
 msgid "Only from standby"
 msgstr "Solo desde el modo de reposo"
 
+msgid "openFavouritesList"
+msgstr "abrir Favoritos"
+
+msgid "openSatellitesList"
+msgstr "abrir lista Satélites"
+
+msgid "openServiceList"
+msgstr "lista de canales"
+
 msgid "open nameserver configuration"
 msgstr "abrir la configuración del servidor de nombres"
 
@@ -10581,6 +10782,12 @@ msgstr "Canal Quad PiP anterior"
 
 msgid "Purge deleted user bouquets"
 msgstr "Purgar bouquets de usuario eliminados"
+
+msgid "recallPrevService"
+msgstr "recordar canal anterior"
+
+msgid "recording"
+msgstr "ajustes grabaciones"
 
 msgid "receiver software because updates are available."
 msgstr "software del receptor porque hay actualizaciones disponibles."
@@ -10678,6 +10885,9 @@ msgstr "Repetido"
 msgid "reserved for future use"
 msgstr "reservado para uso futuro"
 
+msgid "restartLastMovie"
+msgstr "reiniciar última película"
+
 msgid "Restore deleted user bouquets"
 msgstr "Restaurar bouquets de usuario eliminados"
 
@@ -10738,11 +10948,44 @@ msgstr "música clásica/seria"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "drama/clásico/religioso/histórico/serio"
 
+msgid "servicelist"
+msgstr "canal anterior"
+
 msgid "service is in bouquet parental protection"
 msgstr "el canal está en bouquet con protección parental"
 
 msgid "service off-air"
 msgstr "canal sin emisión"
+
+msgid "showEventInfoPlugins"
+msgstr "menu Info Evento"
+
+msgid "showExtensionSelection"
+msgstr "Extensiones"
+
+msgid "showFirstInfoBar"
+msgstr "mostrar Primera InfoBar"
+
+msgid "showMovies"
+msgstr "mostrar Películas"
+
+msgid "showPiP"
+msgstr "activar PiP"
+
+msgid "showRadio"
+msgstr "moodo Radio"
+
+msgid "showSecondInfoBar"
+msgstr "mostrar Segunda InfoBar"
+
+msgid "showServiceListOrMovies"
+msgstr "lista canales o Películas"
+
+msgid "showTv"
+msgstr "mostrar TV"
+
+msgid "showHelp"
+msgstr "mostrar Ayuda"
 
 msgid "Show"
 msgstr "Mostrar"
@@ -10777,6 +11020,9 @@ msgstr "show/juego (general)"
 msgid "Shuffle"
 msgstr "Aleatorio"
 
+msgid "shutdown"
+msgstr "apagar"
+
 msgid "shut down"
 msgstr "apagar"
 
@@ -10788,6 +11034,9 @@ msgstr "saltar hacia atrás"
 
 msgid "skip forward"
 msgstr "saltar hacia delante"
+
+msgid "swapPiP"
+msgstr "intercambiar PiP"
 
 msgid "- Recovery mode image (current)"
 msgstr "- Imagen modo recuperación (actual)"
@@ -10858,6 +11107,18 @@ msgstr "magacine de deportes"
 msgid "standard"
 msgstr "estándar"
 
+msgid "startInstantRecording"
+msgstr "iniciar Grabación Instantánea"
+
+msgid "startTeletext"
+msgstr "iniciar Teletexto"
+
+msgid "startTimeshift"
+msgstr "iniciar Timeshift"
+
+msgid "stopTimeshift"
+msgstr "detener Timeshift"
+
 msgid "Start Cablescan"
 msgstr "Iniciar Búsqueda cable"
 
@@ -10891,8 +11152,17 @@ msgstr "Estéreo"
 msgid "Stop using as startup service"
 msgstr "Dejar de usar como canal de inicio"
 
+msgid "subtitleSelection"
+msgstr "selección Subtítulos"
+
 msgid "successful"
 msgstr "exitoso"
+
+msgid "switchChannelUp"
+msgstr "canal arriba"
+
+msgid "switchChannelDown"
+msgstr "canal abajo"
 
 msgid "switch to the next angle"
 msgstr "cambia al siguiente ángulo"
@@ -10927,6 +11197,24 @@ msgstr "esta grabación"
 msgid "This service is protected by a parental control PIN"
 msgstr "Este canal está protegido por un PIN de control parental"
 
+msgid "ToggleHideVBI"
+msgstr "Alternar esconder VBI"
+
+msgid "togglePipzap"
+msgstr "alternar zap PiP"
+
+msgid "toggleTvRadio"
+msgstr "alternar TV - Radio"
+
+msgid "toggleShow"
+msgstr "alternar Mostrar"
+
+msgid "toggleSubtitleShown"
+msgstr "alternar Mostrar Subtítulos"
+
+msgid "ToggleVideoMode"
+msgstr "Alternar Modo Video"
+
 msgid "toggle time, chapter, audio, subtitle info"
 msgstr "alternar el tiempo, el capítulo, el audio, la información de los subtítulos"
 
@@ -10938,6 +11226,9 @@ msgstr "Arriba"
 
 msgid "tourism/travel"
 msgstr "turismo/viaje"
+
+msgid "TryQuitMainloop"
+msgstr "Reiniciar - Reposo profundo"
 
 msgid "true"
 msgstr "verdadero"
@@ -11056,6 +11347,12 @@ msgstr "sí (mantiene feeds)"
 msgid "zap"
 msgstr "zap"
 
+msgid "zapDown"
+msgstr "zapea abajo"
+
+msgid "zapUp"
+msgstr "zapea arriba"
+
 msgid "Zap and record"
 msgstr "Zapea y graba"
 
@@ -11094,6 +11391,9 @@ msgstr "Cambiar Skin"
 
 msgid "Harddisk"
 msgstr "Disco Duro"
+
+msgid "harddisk"
+msgstr "disco duro"
 
 msgid "Initialization"
 msgstr "Inicialización"
@@ -11148,6 +11448,12 @@ msgstr "Temporizador de Descanso"
 
 msgid "SoftCam / CI"
 msgstr "SoftCam & CI"
+
+msgid "Softcam Setup"
+msgstr "Configuración de Softcam"
+
+msgid "SoftcamSetup"
+msgstr "Configuración Softcam"
 
 msgid "Standby / restart"
 msgstr "Reposo & Reinicios"
@@ -11217,6 +11523,9 @@ msgstr "Modulador"
 
 msgid "Multi-EPG bouquet selection"
 msgstr "Selección de bouquet MuliEPG"
+
+msgid "NimSelection"
+msgstr "Selección de sintonizador"
 
 msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
 msgstr "Nunca descifre el contenido mientras graba. Esto anula las configuraciones de temporizador individuales a nivel general. Si está habilitado, las grabaciones se almacenan en una presentación encriptada y se deben descifrar posteriormente (a veces llamadas decodificación sin conexión). Predeterminado: apagado."
@@ -11355,6 +11664,12 @@ msgstr "Justificar subtítulos"
 
 msgid "Satellite Dish Setup"
 msgstr "Ajustes Antena Satélite"
+
+msgid "ScanSetup"
+msgstr "Búsqueda Manual"
+
+msgid "ScanSimple"
+msgstr "Búsqueda Automática"
 
 msgid "Scroll delay"
 msgstr "Retardo de repetición"
@@ -11497,6 +11812,12 @@ msgstr "Sonido"
 msgid "Sound carrier"
 msgstr "Portadora de sonido"
 
+msgid "SourceActiveHdmiCec"
+msgstr "Activar HDMI CEC"
+
+msgid "SourceInactiveHdmiCec"
+msgstr "Inactivar HDMI CEC"
+
 msgid "StandbyLED"
 msgstr "StandbyLED"
 
@@ -11505,6 +11826,9 @@ msgstr "Inicie el receptor a reposo desde espera profundo o desde apagado."
 
 msgid "Startup to standby from deepstandby or power off"
 msgstr "Iniciar a reposo desde espera profundo o apagado"
+
+msgid "subtitlesetup"
+msgstr "ajustes subtítulos"
 
 msgid "Subtitle alignment"
 msgstr "Alineamiento de subtítulos"
@@ -11924,6 +12248,9 @@ msgstr "Ahora"
 msgid "Nameserver setup"
 msgstr "Configuración del servidor de nombres"
 
+msgid "NetworkAdapterSelection"
+msgstr "Selección adaptador de red"
+
 msgid "Network configuration..."
 msgstr "Configuración de la red…"
 
@@ -12053,6 +12380,9 @@ msgstr "Conexión de su [BRANDMODEL] a Internet."
 
 msgid "Please set up tuner [TUNER]"
 msgstr "Configure el sintonizador [TUNER]"
+
+msgid "SkinSelector"
+msgstr "Cambiar Skin"
 
 msgid "Skip internet connection check (disables automatic package installation)"
 msgstr "Omitir comprobación de conexión a Internet"
@@ -13517,6 +13847,9 @@ msgstr "Tiempo en minutos para anteponer a la grabación."
 msgid "Timeout (in min)"
 msgstr "Tiempo de espera (en minutos)"
 
+msgid "TimerEditList"
+msgstr "Lista Temporizadores"
+
 msgid "Timer from:\n"
 msgstr "Temporizador de:\n"
 
@@ -13627,6 +13960,9 @@ msgstr "editar filtros"
 
 msgid "favorites description match"
 msgstr "coincidencia de descripción de favoritos"
+
+msgid "instantRecord"
+msgstr "grabacíon Instantánea"
 
 msgid "in Description"
 msgstr "en descripción"
@@ -14287,6 +14623,9 @@ msgstr ""
 msgid "Spin down HDD before shutdown box"
 msgstr "Disminuir velocidad de giro HDD antes de que el receptor sea apagado"
 
+msgid "movePiP"
+msgstr "mover PiP"
+
 msgid "mount"
 msgstr "montar"
 
@@ -14518,6 +14857,15 @@ msgstr "sólo TEXT/HELP"
 
 msgid "only standard PiP"
 msgstr "sólo Pip standard"
+
+msgid "openEventView"
+msgstr "detalle del Evento"
+
+msgid "openMultiServiceEPG"
+msgstr "abrir Multi EPG"
+
+msgid "openSingleServiceEPG"
+msgstr "abrir EPG Simple"
 
 msgid "open Event View"
 msgstr "abrir Vista de Eventos"
@@ -14882,6 +15230,39 @@ msgstr "Otros Subtítulos lenguaje"
 msgid "PGS File"
 msgstr "Archivo PGS"
 
+msgid "Select Quad Channels"
+msgstr "Seleccionar canales cuádruples"
+
+msgid "Select 'Yes' to remove all settings, tuning data, timers, resume pointers etc. Selecting this option will restore the configuration to the initial settings before any configuration settings were applied. This is the most reliable form of Factory Reset."
+msgstr "Seleccione 'Sí' para eliminar todos los ajustes, datos de ajuste, temporizadores, punteros de reanudación, etc. Al seleccionar esta opción, se restaurará la configuración a los ajustes iniciales antes de que se aplicaran los ajustes de configuración. Esta es la forma más confiable de restablecimiento de fábrica."
+
+msgid "Select 'Yes' to remove all tuning data. Selecting this option will remove all tuning and bouquet data and will make timers non functional until the receiver is retuned."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de sintonización. Al seleccionar esta opción, se eliminarán todos los datos de sintonización y ramificación y los temporizadores no funcionarán hasta que se vuelva a sintonizar el receptor."
+
+msgid "Select 'Yes' to remove all keymap data. Selecting this option will remove all keymap override data and restore the default keymap definitions."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de teclas. Al seleccionar esta opción, se eliminarán todos los datos de teclas y se restaurarán las definiciones predeterminadas del mapa de teclas."
+
+msgid "Select 'Yes' to remove all network data. Selecting this option will remove all network data including automounts and network connection data including connection accounts and passwords. This could cause some Enigma2 functions to fail if they are configured to use these network resources."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de la red. Al seleccionar esta opción, se eliminarán todos los datos de red, incluidos los montajes automáticos y los datos de conexión de red, incluidas las cuentas de conexión y las contraseñas. Esto podría hacer que algunas funciones de Enigma2 fallen si están configuradas para usar estos recursos de red."
+
+msgid "Select 'Yes' to remove all plugin configuration data. Selecting this option will remove all plugin configuration data that is stored in the Enigma2 configuration folder. This will cause all affected plugins to return to their default settings. This could cause some plugins to not function until configured."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de plugins. Al seleccionar esta opción, se eliminarán todos los datos de configuración de plugins que están almacenados en la carpeta de configuración de Enigma2. Esto hará que todos los plugins afectados vuelvan a su configuración predeterminada. Esto podría hacer que algunos plugins no funcionen hasta que se configuren."
+
+msgid "Select 'Yes' to remove all media player resume data. Selecting this option will remove the data used to allow playback of media files to resume from the position where playback was last stopped. Playback position of recordings is not affected."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de reanudación del reproductor multimedia. Al seleccionar esta opción, se eliminarán los datos utilizados para permitir que la reproducción de archivos multimedia se reanude desde la posición donde se detuvo por última vez. La posición de reproducción de las grabaciones no se ve afectada."
+
+msgid "Select 'Yes' to remove all main settings configuration data. Selecting this option will set all Enigma2 settings back to their default values.  This will also cause Enigma2 to run the Welcome Wizard on restart."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración de los ajustes principales. Al seleccionar esta opción, todos los ajustes de Enigma2 volverán a sus valores de fábrica. Esto también hace que Enigma2 ejecute el Asistente wizard al reiniciar."
+
+msgid "Select 'Yes' to remove all user customisations of skin data. Selecting this option will remove all user based skin customisations. All affected skins will return to their standard settings. This will also clear any customied boot logos and backdrops."
+msgstr "Seleccione 'Sí' para eliminar todas las personalizaciones de usuario de los datos del skin. Al seleccionar esta opción, se eliminarán todas las personalizaciones de skin basadas en el usuario. Todos los aspectos afectados volverán a su configuración estándar. Esto también eliminará los logotipos y fondos de arranque personalizados."
+
+msgid "Select 'Yes' to remove all timer configuration data. Selecting this option will clear all timers, autotimers and power timers."
+msgstr "Seleccione 'Sí' para eliminar todos los datos de configuración del temporizador. Al seleccionar esta opción, se eliminarán todos los temporizadores, temporizadores automáticos y temporizadores de alimentación."
+
+msgid "Select 'Yes' to remove all other files and directories not covered by the options above."
+msgstr "Seleccione 'Sí' para eliminar todos los demás archivos y directorios no cubiertos por las opciones anteriores."
+
 msgid "SRT File"
 msgstr "Archivo SRT"
 
@@ -15068,6 +15449,9 @@ msgstr "Por favor, establezca su zona horaria"
 msgid "Front Panel Display"
 msgstr "Panel Frontal Display"
 
+msgid "LcdSkinSelector"
+msgstr "Selección Display"
+
 msgid "LCN rules"
 msgstr "Reglas LCN"
 
@@ -15196,6 +15580,9 @@ msgstr "Contraseña (httppwd)"
 
 msgid "Set password if you have it set in section [webif] httppwd."
 msgstr "Establece contraseña si la tiene configurada en la sección [webif] httppwd."
+
+msgid "PluginBrowser"
+msgstr "Plugins"
 
 msgid "Please choose CCcam-Reader"
 msgstr "Elegir CCcam-Lector"
@@ -15989,6 +16376,15 @@ msgstr "Visibilidad de la base de teletexto"
 msgid "Old"
 msgstr "Antiguo"
 
+msgid "activateRedButton"
+msgstr "activa botón Rojo"
+
+msgid "activateTimeshiftEnd"
+msgstr "activa final Timeshift"
+
+msgid "activateTimeshiftEndAndPause"
+msgstr "activa Timeshift final & Pausa"
+
 msgid "active"
 msgstr "activa"
 
@@ -16237,6 +16633,9 @@ msgstr "Memoria libre"
 msgid "Switch config"
 msgstr "Cambio config"
 
+msgid "CCcamInfoMain"
+msgstr "CCcam Info"
+
 msgid "CCcam Config Switcher"
 msgstr "Cambiar config"
 
@@ -16469,6 +16868,9 @@ msgstr "modo reposo profundo automático"
 
 msgid "reboot system"
 msgstr "reiniciar sistema"
+
+msgid "SleepTimerEdit"
+msgstr "Temporizador Descanso"
 
 msgid "Sleep delay"
 msgstr "Retraso para ejecutarse"
@@ -17475,6 +17877,12 @@ msgstr "violeta"
 msgid "Violet"
 msgstr "Violeta"
 
+msgid "volumeUp"
+msgstr "volumen arriba"
+
+msgid "volumeDown"
+msgstr "volumen abajo"
+
 msgid "Operating LED status in deep standby mode"
 msgstr "Estado del LED en reposo profundo"
 
@@ -17576,168 +17984,6 @@ msgstr "Mostrar valor 'Por Defecto' en descripciones"
 
 msgid "This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description."
 msgstr "Esta opción le permite seleccionar si se muestra 'Por Defecto' para un elemento de configuración y, de ser así, dónde se muestra en relación con la descripción."
-
-msgid "Add legacy LEFT/RIGHT actions"
-msgstr "Agregar acciones IZQUIERDA/DERECHA"
-
-msgid "Select 'Yes' to enable use of the LEFT/RIGHT buttons to move PageUp/PageDown when the LEFT/RIGHT buttons are otherwise undefined. This provides legacy navigation for users who prefer it."
-msgstr "Seleccione 'Sí' para habilitar el uso de los botones IZQUIERDO/DERECHO para mover Página Arriba/Página Abajo cuando los botones IZQUIERDO/DERECHO no están definidos. Esto proporciona una navegación heredada para los usuarios que la prefieran."
-
-msgid "Date style"
-msgstr "Estilo de fecha"
-
-msgid "Time style"
-msgstr "Estilo de Tiempo"
-
-msgid "Day D Mon"
-msgstr "Día D Lun"
-
-msgid "Day D-Mon"
-msgstr "Día D-Lun"
-
-msgid "Day D/M"
-msgstr "Día D/M"
-
-msgid "Day D/MM"
-msgstr "Día D/MM"
-
-msgid "Day DD Mon"
-msgstr "Día DD Lun"
-
-msgid "Day DD-Mon"
-msgstr "Día DD-Lun"
-
-msgid "Day DD/M"
-msgstr "Día DD/M"
-
-msgid "Day DD/MM"
-msgstr "Día DD/MM"
-
-msgid "Day M/D"
-msgstr "Día M/D"
-
-msgid "Day M/DD"
-msgstr "Día M/DD"
-
-msgid "Day MM/D"
-msgstr "Día MM/D"
-
-msgid "Day MM/DD"
-msgstr "Día MM/DD"
-
-msgid "Day Mon D"
-msgstr "Día Lun D"
-
-msgid "Day Mon DD"
-msgstr "Dia Lun DD"
-
-msgid "Day Mon-D"
-msgstr "Día Lun-D"
-
-msgid "Day Mon-DD"
-msgstr "Día Lun-DD"
-
-msgid "Day of the month"
-msgstr "Día del mes"
-
-msgid "Dayname D Month Year"
-msgstr "Nombre Día D Mes Año"
-
-msgid "Dayname D-Month-Year"
-msgstr "Nombre Día D-Mes-Año"
-
-msgid "Dayname D. Month Year"
-msgstr "Nombre Día D. Mes Año"
-
-msgid "Dayname D.M.Year"
-msgstr "Nombre Día D.M.Año"
-
-msgid "Dayname D.MM.Year"
-msgstr "Nombre Día D.MM.Año"
-
-msgid "Dayname D/M/Year"
-msgstr "Nombre Día D/M/Año"
-
-msgid "Dayname D/MM/Year"
-msgstr "Nombre Día D/MM/Año"
-
-msgid "Dayname DD Month Year"
-msgstr "Nombre Día DD Mes Año"
-
-msgid "Dayname DD-Month-Year"
-msgstr "Nombre Día DD-Mes-Año"
-
-msgid "Dayname DD. Month Year"
-msgstr "Nombre Día DD. Mes Año"
-
-msgid "Dayname DD.M.Year"
-msgstr "Nombre Día DD.M.Año"
-
-msgid "Dayname DD.MM.Year"
-msgstr "Nombre Día DD.MM.Año"
-
-msgid "Dayname DD/M/Year"
-msgstr "Nombre Día DD/M/Año"
-
-msgid "Dayname DD/MM/Year"
-msgstr "Nombre Día DD/MM/Año"
-
-msgid "Dayname M/D/Year"
-msgstr "Nombre Día M/D/Año"
-
-msgid "Dayname M/DD/Year"
-msgstr "Nombre Día M/DD/Año"
-
-msgid "Dayname MM/D/Year"
-msgstr "Nombre Día MM/D/Año"
-
-msgid "Dayname MM/DD/Year"
-msgstr "Nombre Día MM/DD/Año"
-
-msgid "Dayname Month D Year"
-msgstr "Nombre Día Mes D Año"
-
-msgid "Dayname Month DD Year"
-msgstr "Nombre Día Mes DD Año"
-
-msgid "Dayname Month-D-Year"
-msgstr "Nombre Día Mes-D-Año"
-
-msgid "Dayname Month-DD-Year"
-msgstr "Nombre Día Mes-DD-Año"
-
-msgid "Dayname Year Month D"
-msgstr "Nombre Día Año Mes D"
-
-msgid "Dayname Year Month DD"
-msgstr "Nombre Día Año Mes DD"
-
-msgid "Dayname Year-Month-D"
-msgstr "Nombre Día Año-Mes-D"
-
-msgid "Dayname Year-Month-DD"
-msgstr "Nombre Día Año-Mes-DD"
-
-msgid "Dayname Year/M/D"
-msgstr "Nombre Día Año/M/D"
-
-msgid "Dayname Year/M/DD"
-msgstr "Nombre Día Año/M/DD"
-
-msgid "Dayname Year/MM/D"
-msgstr "Nombre Día Año/MM/D"
-
-msgid "Dayname Year/MM/DD"
-msgstr "Nombre Día Año/MM/DD"
-
-msgid "Hidden / Blank"
-msgstr "Ocultar / En blanco"
-
-msgid "hide"
-msgstr "ocultar"
-
-msgid "fast"
-msgstr "rápido"
 
 msgid "slow"
 msgstr "lento"
