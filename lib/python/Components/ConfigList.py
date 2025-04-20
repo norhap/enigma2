@@ -56,7 +56,7 @@ class ConfigList(GUIComponent):
 	def selectionChanged(self):
 		if isinstance(self.current, tuple) and len(self.current) >= 2:
 			self.current[1].onDeselect(self.session)
-		self.current = self.getCurrent()
+		self.current = self.getCurrent(full=False)
 		if isinstance(self.current, tuple) and len(self.current) >= 2:
 			self.current[1].onSelect(self.session)
 		else:
@@ -64,12 +64,15 @@ class ConfigList(GUIComponent):
 		for callback in self.onSelectionChanged:
 			callback()
 
-	def getCurrent(self):
-		return self.l.getCurrentSelection()
+	def getCurrent(self, full=True):
+		item = self.l.getCurrentSelection()
+		if full and item and len(item) > 1 and isinstance(item[0], tuple):
+			item = (item[0][0],) + item[1:]
+		return item
 
 	def handleKey(self, key, callback=None):
 		for item in range(len(self.list)):
-			selection = self.getCurrent()
+			selection = self.getCurrent(full=False)
 			if selection and selection[1].enabled:
 				changed = selection[1].handleKey(key, callback)
 				self.invalidateCurrent()
@@ -79,7 +82,7 @@ class ConfigList(GUIComponent):
 			return False
 
 	def toggle(self):
-		self.getCurrent()[1].toggle()
+		self.getCurrent(full=False)[1].toggle()
 		self.invalidateCurrent()
 
 	def getCurrentIndex(self):
@@ -290,7 +293,7 @@ class ConfigListScreen:
 
 	def getCurrentItem(self):
 		try:
-			return self["config"].getCurrent() and self["config"].getCurrent()[1] or None
+			return self["config"].getCurrent(full=False) and self["config"].getCurrent()[1] or None
 		except Exception as err:
 			print(err)
 
@@ -298,10 +301,10 @@ class ConfigListScreen:
 		return self["config"].getCurrent() and self["config"].getCurrent()[0] or ""
 
 	def getCurrentValue(self):
-		return self["config"].getCurrent() and str(self["config"].getCurrent()[1].getText()) or ""
+		return self["config"].getCurrent(full=False) and str(self["config"].getCurrent()[1].getText()) or ""
 
 	def getCurrentDescription(self):
-		return self["config"].getCurrent() and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
+		return self["config"].getCurrent(full=False) and len(self["config"].getCurrent()) > 2 and self["config"].getCurrent()[2] or ""
 
 	def changedEntry(self):
 		for callback in self.onChangedEntry:
@@ -322,7 +325,7 @@ class ConfigListScreen:
 				self[actionMap].setEnabled(self.actionMapStates[index])
 
 	def handleInputHelpers(self):
-		currConfig = self["config"].getCurrent()
+		currConfig = self["config"].getCurrent(full=False)
 		if currConfig is not None:
 			if isinstance(currConfig[1], (ConfigInteger, ConfigSequence, ConfigText)):
 				self["charConfigActions"].setEnabled(True)
@@ -365,7 +368,7 @@ class ConfigListScreen:
 
 	def displayHelp(self, state):
 		if "config" in self and "HelpWindow" in self and self["config"].getCurrent() is not None and len(self["config"].getCurrent()) > 1:
-			currConf = self["config"].getCurrent()[1]
+			currConf = self["config"].getCurrent(full=False)[1]
 			if isinstance(currConf, ConfigText) and currConf.help_window is not None and currConf.help_window.instance is not None:
 				if state:
 					currConf.help_window.show()
@@ -397,7 +400,7 @@ class ConfigListScreen:
 				self.entryChanged()
 
 	def keyMenu(self):
-		currConfig = self["config"].getCurrent()
+		currConfig = self["config"].getCurrent(full=False)
 		if currConfig and currConfig[1].enabled and hasattr(currConfig[1], "description"):
 			self.session.openWithCallback(
 				self.keyMenuCallback, ChoiceBox, title=currConfig[0],
