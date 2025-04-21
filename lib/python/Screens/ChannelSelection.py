@@ -1581,10 +1581,11 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		self.recallBouquetMode()
 
 	def _helpPrevNextBouquet(self, prev):
-		if ("reverseB" in config.usage.servicelist_cursor_behavior.value) == prev:
-			return _("Move up in bouquet list")
-		else:
-			return _("Move down in bouquet list")
+		if 'FROM BOUQUET "bouquets.' not in self.getRoot().getPath():
+			if ("reverseB" in config.usage.servicelist_cursor_behavior.value) == prev:
+				return _("Move down in bouquet list") if "reverseB" not in config.usage.servicelist_cursor_behavior.value else _("Move up in bouquet list")
+			else:
+				return _("Move up in bouquet list") if "reverseB" not in config.usage.servicelist_cursor_behavior.value else _("Move down in bouquet list")
 
 	def _helpKeyleftright(self, prev):
 		if config.usage.oldstyle_channel_select_controls.value:
