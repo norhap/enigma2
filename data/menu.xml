@@ -84,9 +84,9 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<!-- Main Menu > Setup > User Interface -->
 		<menu key="osd_setup" level="0" text="User Interface" weight="20">
 			<id val="osd_menu" />
-			<item key="user_interface" level="0" text="User Interface Setup" weight="5"><setup id="UserInterface" /></item>
+			<item key="user_interface" level="0" text="User Interface Setup" weight="5"><setup id="userinterface" /></item>
 			<item key="primary_skin_selector" level="0" text="Skin Setup" weight="10"><screen module="SkinSelector" screen="SkinSelector" /></item>
-			<item key="subtitle_setup" level="2" text="Subtitle Setup" weight="20"><setup id="Subtitle" /></item>
+			<item key="subtitle_setup" level="2" text="Subtitle Setup" weight="20"><setup id="subtitlesetup" /></item>
 			<item key="language_setup" level="0" text="Language Setup" weight="25"><screen module="LanguageSelection" /></item>
 			<item key="parental_setup" level="0" text="Parental Control Setup" weight="30"><screen module="ParentalControlSetup" screen="ParentalControlSetup" /></item>
 		</menu>
@@ -132,7 +132,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<!-- Main Menu > Setup > Storage -->
 		<menu key="hardisk_selection" level="0" text="Storage" requires="Harddisk" weight="40">
 			<id val="harddisk" />
-			<item key="harddisk_setup" level="0" text="Harddisk Setup" weight="5"><setup id="HardDisk" /></item>
+			<item key="harddisk_setup" level="0" text="Harddisk Setup" weight="5"><setup id="harddisk" /></item>
 			<item key="harddisk_init" level="0" text="Format Disk Settings" weight="10"><screen module="HarddiskSetup" screen="HarddiskSelection" /></item>
 			<item key="harddisk_check" level="0" text="Filesystem Check" weight="15"><screen module="HarddiskSetup" screen="HarddiskFsckSelection" /></item>
 		</menu>
@@ -153,7 +153,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<menu key="system_selection" level="0" text="System" weight="55">
 			<id val="system" />
 			<item key="accesslevel_setup" level="0" text="User Mode Setup"><setup id="AccessLevel" /></item>
-			<item key="usage_setup" level="0" text="Customize"><setup id="Usage" /></item>
+			<item key="usage_setup" level="0" text="Customize"><setup id="usage" /></item>
 			<item key="hotkey_setup" level="1" text="Hotkey"><screen module="Hotkey" screen="HotkeySetup" /></item>
 			<item key="log_settings" level="2" text="Logs Setup"><setup id="Logs" /></item>
 			<item key="logs_man" level="2" text="Logs Manager"><screen module="LogManager" screen="LogManager" /></item>

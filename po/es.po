@@ -911,14 +911,14 @@ msgstr "=SIN STREAM\n"
 msgid "??"
 msgstr "??"
 
-msgid "activateRedButton"
-msgstr "activa botón Rojo"
+msgid "ActivateRedButton"
+msgstr "Activa botón Rojo"
 
-msgid "activateTimeshiftEnd"
-msgstr "activa final Timeshift"
+msgid "ActivateTimeshiftEnd"
+msgstr "Activa final Timeshift"
 
-msgid "activateTimeshiftEndAndPause"
-msgstr "activa Timeshift final & Pausa"
+msgid "ActivateTimeshiftEndAndPause"
+msgstr "Activa & Pausa Timeshift"
 
 msgid "active"
 msgstr "activa"
@@ -1266,11 +1266,11 @@ msgstr "Permitir 10bit"
 msgid "Allow 12bit"
 msgstr "Permitir 12bit"
 
-msgid "audioSelection"
-msgstr "selección de Audio"
+msgid "AudioSelection"
+msgstr "Selección de Audio"
 
-msgid "audioSelectionLong"
-msgstr "cambiar pista AC3"
+msgid "AudioSelectionLong"
+msgstr "Cambiar pista AC3"
 
 msgid "Audio language selection 1"
 msgstr "Selección de idioma de audio 1"
@@ -1859,9 +1859,6 @@ msgstr "Ocultar número de marcadores"
 msgid "Hide zap errors"
 msgstr "Ocultar errores de zapeo"
 
-msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
-msgstr "Si está habilitado, el display muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
-
 msgid "blkid"
 msgstr "blkid"
 
@@ -1885,6 +1882,12 @@ msgstr "restaurar fstab!"
 
 msgid "fstab-Editor"
 msgstr "editor-fstab"
+
+msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
+msgstr "Si está habilitado, el display muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
+
+msgid "ImportAutoTimerCurrentEvent"
+msgstr "Temporizador automático"
 
 msgid "install ext2 kernel module"
 msgstr "instalar módulo kernel ext2"
@@ -2267,9 +2270,11 @@ msgstr "Auto"
 msgid "Auto detect"
 msgstr "Detección automática"
 
+msgid "Auto_3d_setup"
+msgstr "Ajustes OSD 3D"
+
 msgid "Auto DiSEqC"
 msgstr "DiSEqC Automático"
-
 
 msgid "Activate network settings"
 msgstr "Activar ajustes de red"
@@ -2343,8 +2348,8 @@ msgstr "Autoinicio"
 msgid "Autostart:"
 msgstr "Autoinicio:"
 
-msgid "av_setup"
-msgstr "ajustes audio & video"
+msgid "Av_setup"
+msgstr "Ajustes audio & video"
 
 msgid "Available format variables"
 msgstr "Variables de formato disponibles"
@@ -4568,9 +4573,6 @@ msgstr "Finés"
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Primer día para unir eventos. Ningún evento que comience antes de esta fecha se igualará."
 
-msgid "First InfoBar"
-msgstr "Primera InfoBar"
-
 msgid "First page"
 msgstr "Primera página"
 
@@ -4910,6 +4912,15 @@ msgstr "Ajustes HDMI-CEC"
 
 msgid "HDMI-CEC Settings"
 msgstr "Ajustes HDMI-CEC"
+
+msgid "HistorialZapSelector"
+msgstr "Ajustes Historial Zap"
+
+msgid "HistoryBack"
+msgstr "Historial Zap Atrás"
+
+msgid "HistoryNext"
+msgstr "Historial Zap Adelante"
 
 msgid "Horizontal menu"
 msgstr "Menú Horizontal"
@@ -5368,8 +5379,8 @@ msgstr "Islandia"
 msgid "Icons"
 msgstr "Iconos"
 
-msgid "instantRecord"
-msgstr "grabacíon Instantánea"
+msgid "InstantRecord"
+msgstr "Grabacíon Instantánea"
 
 msgid "in Description"
 msgstr "en descripción"
@@ -5932,8 +5943,8 @@ msgstr "Macedonia"
 msgid "Madagascar"
 msgstr "Madagascar"
 
-msgid "mainMenu"
-msgstr "menú Principal"
+msgid "MainMenu"
+msgstr "Menú Principal"
 
 msgid "Main Menu"
 msgstr "Menú Principal"
@@ -7509,7 +7520,7 @@ msgid "Record time limited due to conflicting timer %s"
 msgstr "Tiempo de grabación limitado por conflicto de tmporizador %s"
 
 msgid "Recording"
-msgstr "Grabando"
+msgstr "Grabación"
 
 msgid "Recording Actions"
 msgstr "Acciones de Grabación"
@@ -8008,9 +8019,6 @@ msgstr "Modo de escalado"
 
 msgid "Scan"
 msgstr "Búsqueda"
-
-msgid "scan"
-msgstr "escaneo"
 
 msgid "Scan "
 msgstr "Búsqueda "
@@ -9222,6 +9230,9 @@ msgstr "StreamRelay está deshabilitado en la config del módulo cam"
 msgid "Strongest position"
 msgstr "Posición más fuerte"
 
+msgid "SubserviceSelection"
+msgstr "Subcanales"
+
 msgid "Subservice list"
 msgstr "Lista de subcanales"
 
@@ -10178,17 +10189,17 @@ msgstr "Actualizando"
 msgid "Uruguay"
 msgstr "Uruguay"
 
-msgid "usage"
-msgstr "configuración de uso"
+msgid "Usage"
+msgstr "Personalizar"
 
 msgid "Usage Setup"
-msgstr "Configuración de uso"
+msgstr "Personalizar"
 
 msgid "Use"
 msgstr "Uso"
 
-msgid "userinterface"
-msgstr "intefaz de usuario"
+msgid "Userinterface"
+msgstr "Interfaz de usuario"
 
 msgid ""
 "Do you want to use auto mode detection?\n"
@@ -10286,9 +10297,6 @@ msgstr "Transpondedor definido por el usuario"
 
 msgid "User Interface"
 msgstr "Interfaz de Usuario"
-
-msgid "User interface"
-msgstr "Interfaz de usuario"
 
 msgid "User Interface Setup"
 msgstr "Ajustes Interfaz de Usuario"
@@ -10393,6 +10401,9 @@ msgstr "Modo cuadrícula"
 msgid "List mode"
 msgstr "Modo lista"
 
+msgid "Video_finetune"
+msgstr "Brillo-Contraste-Color"
+
 msgid "View Rass interactive..."
 msgstr "Ver Rass interactivo…"
 
@@ -10464,6 +10475,12 @@ msgstr "Volumen abajo"
 
 msgid "Volume up"
 msgstr "Volumen arriba"
+
+msgid "Videoenhancement_setup"
+msgstr "Ajustes mejora de video"
+
+msgid "Virtual keyboard skin"
+msgstr "Teclado virtual en skin"
 
 msgid "W"
 msgstr "W"
@@ -10912,14 +10929,14 @@ msgstr "Solo desde el modo de reposo profundo"
 msgid "Only from standby"
 msgstr "Solo desde el modo de reposo"
 
-msgid "openFavouritesList"
-msgstr "abrir Favoritos"
+msgid "OpenFavouritesList"
+msgstr "Abrir Favoritos"
 
-msgid "openSatellitesList"
-msgstr "abrir lista Satélites"
+msgid "OpenSatellitesList"
+msgstr "Abrir lista Satélites"
 
-msgid "openServiceList"
-msgstr "lista de canales"
+msgid "OpenServiceList"
+msgstr "Lista de canales"
 
 msgid "open nameserver configuration"
 msgstr "abrir la configuración del servidor de nombres"
@@ -10963,11 +10980,8 @@ msgstr "Canal Quad PiP anterior"
 msgid "Purge deleted user bouquets"
 msgstr "Purgar bouquets de usuario eliminados"
 
-msgid "recallPrevService"
-msgstr "recordar canal anterior"
-
-msgid "recording"
-msgstr "ajustes grabaciones"
+msgid "RecallPrevService"
+msgstr "Recordar canal anterior"
 
 msgid "receiver software because updates are available."
 msgstr "software del receptor porque hay actualizaciones disponibles."
@@ -11065,8 +11079,8 @@ msgstr "Repetido"
 msgid "reserved for future use"
 msgstr "reservado para uso futuro"
 
-msgid "restartLastMovie"
-msgstr "reiniciar última película"
+msgid "RestartLastMovie"
+msgstr "Reiniciar última película"
 
 msgid "Restore deleted user bouquets"
 msgstr "Restaurar bouquets de usuario eliminados"
@@ -11128,8 +11142,8 @@ msgstr "música clásica/seria"
 msgid "serious/classical/religious/historical movie/drama"
 msgstr "drama/clásico/religioso/histórico/serio"
 
-msgid "servicelist"
-msgstr "canal anterior"
+msgid "Servicelist"
+msgstr "Canal anterior"
 
 msgid "service is in bouquet parental protection"
 msgstr "el canal está en bouquet con protección parental"
@@ -11137,35 +11151,35 @@ msgstr "el canal está en bouquet con protección parental"
 msgid "service off-air"
 msgstr "canal sin emisión"
 
-msgid "showEventInfoPlugins"
-msgstr "menú Información Evento"
+msgid "ShowEventInfoPlugins"
+msgstr "Menú Información Evento"
 
-msgid "showExtensionSelection"
-msgstr "extensiones"
+msgid "ShowExtensionSelection"
+msgstr "Extensiones"
 
-msgid "showFirstInfoBar"
-msgstr "mostrar Primera InfoBar"
+msgid "ShowFirstInfoBar"
+msgstr "Mostrar Primera InfoBar"
 
-msgid "showMovies"
-msgstr "mostrar Películas"
+msgid "ShowMovies"
+msgstr "Mostrar Películas"
 
-msgid "showPiP"
-msgstr "activar PiP"
+msgid "ShowPiP"
+msgstr "Activar PiP"
 
-msgid "showRadio"
-msgstr "moodo Radio"
+msgid "ShowRadio"
+msgstr "Moodo Radio"
 
-msgid "showSecondInfoBar"
-msgstr "mostrar Segunda InfoBar"
+msgid "ShowSecondInfoBar"
+msgstr "Mostrar Segunda InfoBar"
 
-msgid "showServiceListOrMovies"
-msgstr "lista canales o Películas"
+msgid "ShowServiceListOrMovies"
+msgstr "Lista canales o Películas"
 
-msgid "showTv"
-msgstr "mostrar TV"
+msgid "ShowTv"
+msgstr "Mostrar TV"
 
-msgid "showHelp"
-msgstr "mostrar Ayuda"
+msgid "ShowHelp"
+msgstr "Mostrar Ayuda"
 
 msgid "Show"
 msgstr "Mostrar"
@@ -11200,9 +11214,6 @@ msgstr "show/juego (general)"
 msgid "Shuffle"
 msgstr "Aleatorio"
 
-msgid "shutdown"
-msgstr "apagar"
-
 msgid "shut down"
 msgstr "apagar"
 
@@ -11215,8 +11226,8 @@ msgstr "saltar hacia atrás"
 msgid "skip forward"
 msgstr "saltar hacia delante"
 
-msgid "swapPiP"
-msgstr "intercambiar PiP"
+msgid "SwapPiP"
+msgstr "Intercambiar PiP"
 
 msgid "- Recovery mode image (current)"
 msgstr "- Imagen modo recuperación (actual)"
@@ -11271,17 +11282,17 @@ msgstr "magacine de deportes"
 msgid "standard"
 msgstr "estándar"
 
-msgid "startInstantRecording"
-msgstr "iniciar Grabación Instantánea"
+msgid "StartInstantRecording"
+msgstr "Iniciar Grabación Instantánea"
 
-msgid "startTeletext"
-msgstr "iniciar Teletexto"
+msgid "StartTeletext"
+msgstr "Iniciar Teletexto"
 
-msgid "startTimeshift"
-msgstr "iniciar Timeshift"
+msgid "StartTimeshift"
+msgstr "Iniciar Timeshift"
 
-msgid "stopTimeshift"
-msgstr "detener Timeshift"
+msgid "StopTimeshift"
+msgstr "Detener Timeshift"
 
 msgid "Start Cablescan"
 msgstr "Iniciar Búsqueda cable"
@@ -11316,17 +11327,17 @@ msgstr "Estéreo"
 msgid "Stop using as startup service"
 msgstr "Dejar de usar como canal de inicio"
 
-msgid "subtitleSelection"
-msgstr "selección Subtítulos"
+msgid "SubtitleSelection"
+msgstr "Selección Subtítulos"
 
 msgid "successful"
 msgstr "exitoso"
 
-msgid "switchChannelUp"
-msgstr "lista de canales"
+msgid "SwitchChannelUp"
+msgstr "Cambiar canal arriba"
 
-msgid "switchChannelDown"
-msgstr "lista de canales"
+msgid "SwitchChannelDown"
+msgstr "Cambiar canal abajo"
 
 msgid "switch to the next angle"
 msgstr "cambia al siguiente ángulo"
@@ -11364,17 +11375,17 @@ msgstr "Este canal está protegido por un PIN de control parental"
 msgid "ToggleHideVBI"
 msgstr "Alternar esconder VBI"
 
-msgid "togglePipzap"
-msgstr "alternar zap PiP"
+msgid "TogglePipzap"
+msgstr "Alternar zap PiP"
 
-msgid "toggleTvRadio"
-msgstr "alternar TV - Radio"
+msgid "ToggleTvRadio"
+msgstr "Alternar TV - Radio"
 
-msgid "toggleShow"
-msgstr "alternar Mostrar"
+msgid "ToggleShow"
+msgstr "Alternar Mostrar"
 
-msgid "toggleSubtitleShown"
-msgstr "alternar Mostrar Subtítulos"
+msgid "ToggleSubtitleShown"
+msgstr "Alternar Mostrar Subtítulos"
 
 msgid "ToggleVideoMode"
 msgstr "Alternar Modo Video"
@@ -11435,6 +11446,9 @@ msgstr "show de variedades"
 
 msgid "vertical"
 msgstr "vertical"
+
+msgid "Void"
+msgstr "No hacer nada"
 
 msgid "wait for ci..."
 msgstr "espera por ci…"
@@ -11532,9 +11546,6 @@ msgstr "Cambiar Skin"
 msgid "Harddisk"
 msgstr "Disco Duro"
 
-msgid "harddisk"
-msgstr "disco duro"
-
 msgid "Initialization"
 msgstr "Inicialización"
 
@@ -11597,6 +11608,9 @@ msgstr "Configuración Softcam"
 
 msgid "Standby / restart"
 msgstr "Reposo & Reinicios"
+
+msgid "Standby_restart_list"
+msgstr "Menú reinicios & apagado"
 
 msgid "VCR scart"
 msgstr "SoftCam / CI"
@@ -11922,12 +11936,6 @@ msgstr "Sonido"
 msgid "Sound carrier"
 msgstr "Portadora de sonido"
 
-msgid "SourceActiveHdmiCec"
-msgstr "Activar HDMI CEC"
-
-msgid "SourceInactiveHdmiCec"
-msgstr "Inactivar HDMI CEC"
-
 msgid "StandbyLED"
 msgstr "StandbyLED"
 
@@ -11937,8 +11945,8 @@ msgstr "Inicie el receptor a reposo desde espera profundo o desde apagado."
 msgid "Startup to standby from deepstandby or power off"
 msgstr "Iniciar a reposo desde espera profundo o apagado"
 
-msgid "subtitlesetup"
-msgstr "ajustes subtítulos"
+msgid "Subtitlesetup"
+msgstr "Ajustes subtítulos"
 
 msgid "Subtitle alignment"
 msgstr "Alineamiento de subtítulos"
@@ -12971,7 +12979,7 @@ msgid "Any time"
 msgstr "En cualquier momento"
 
 msgid "AutoTimer"
-msgstr "Temporizador Automático"
+msgstr "Añadir Temporizador"
 
 #, python-format
 msgid ""
@@ -14451,8 +14459,8 @@ msgstr ""
 msgid "Spin down HDD before shutdown box"
 msgstr "Disminuir velocidad de giro HDD antes de que el receptor sea apagado"
 
-msgid "movePiP"
-msgstr "mover PiP"
+msgid "MovePiP"
+msgstr "Mover PiP"
 
 msgid "mount"
 msgstr "montar"
@@ -14662,17 +14670,14 @@ msgstr "sólo TEXT/HELP"
 msgid "only standard PiP"
 msgstr "sólo Pip standard"
 
-msgid "openEventView"
-msgstr "detalle del Evento"
+msgid "OpenEventView"
+msgstr "Detalle del Evento"
 
-msgid "openMultiServiceEPG"
-msgstr "abrir Multi EPG"
+msgid "OpenMultiServiceEPG"
+msgstr "Abrir Multi EPG"
 
-msgid "openSingleServiceEPG"
-msgstr "abrir EPG Simple"
-
-msgid "open Event View"
-msgstr "abrir Vista de Eventos"
+msgid "OpenSingleServiceEPG"
+msgstr "Abrir EPG Simple"
 
 msgid "open list options"
 msgstr "abrir opciones lista"
@@ -17272,9 +17277,6 @@ msgstr "Estás seguro de eliminar la imagen:\n"
 msgid "Want to restore all deleted images?"
 msgstr "Quiere restaurar todas las imágenes eliminadas?"
 
-msgid "Virtual keyboard skin"
-msgstr "Teclado virtual en skin"
-
 msgid "Humidity:"
 msgstr "Humedad:"
 
@@ -17476,11 +17478,11 @@ msgstr "violeta"
 msgid "Violet"
 msgstr "Violeta"
 
-msgid "volumeUp"
-msgstr "volumen arriba"
+msgid "VolumeUp"
+msgstr "Subir Volumen"
 
-msgid "volumeDown"
-msgstr "volumen abajo"
+msgid "VolumeDown"
+msgstr "Bajar Volumen"
 
 msgid "Operating LED status in deep standby mode"
 msgstr "Estado del LED en reposo profundo"
@@ -19380,7 +19382,6 @@ msgstr "¡Solo puedes grabar en DVD grabaciones de receptor!"
 msgid "You can remove this plugin."
 msgstr "Puede eliminar este plugin."
 
-
 msgid "You must set a root password in order to be able to use network services, such as FTP, telnet or ssh."
 msgstr "Debe establecer una contraseña de root para poder utilizar los canales de red, como FTP, telnet o ssh."
 
@@ -19561,11 +19562,11 @@ msgstr "Su %s %s?"
 msgid "zap"
 msgstr "zap"
 
-msgid "zapDown"
-msgstr "zapea abajo"
+msgid "ZapDown"
+msgstr "Zapea abajo"
 
-msgid "zapUp"
-msgstr "zapea arriba"
+msgid "ZapUp"
+msgstr "Zapea arriba"
 
 msgid "Zap and record"
 msgstr "Zapea y graba"

@@ -100,7 +100,7 @@
 		<item level="0" text="Locales to be displayed" description="Display the base locales or all locales for a language.">config.locales.packageLocales</item>
 		<item level="0" text="Locale list sort order" description="Sort order for the language list.">config.locales.localesSortBy</item>
 	</setup>
-	<setup key="HardDisk" title="Hard Disk Setup">
+	<setup key="harddisk" title="Hard Disk Setup">
 		<item level="0" text="Hard disk standby after" description="Configure the hard disk drive to go to standby after the specified idle time.">config.usage.hdd_standby</item>
 	</setup>
 	<setup key="HDMICEC" title="HDMI-CEC Settings">
@@ -289,7 +289,7 @@
 		<item level="2" text="Show source packages" description="If set to 'yes' it will show the 'SRC' packages in browser.">config.pluginbrowser.src</item>
 		<item level="2" text="Show the Plugin Browser screen ***" description="This option allows you to view the Plugin Browser screen as a list or as a grid.">config.usage.pluginListLayout</item>
 	</setup>
-	<setup key="Recording" title="Recording Setup">
+	<setup key="recording" title="Recording Setup">
 		<item level="0" text="Default movie location" description="Set the default location for your recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations.">config.usage.default_path</item>
 		<item level="2" text="Timer recording location" description="Set the default location for your timers. Press OK to add new locations, LEFT/RIGHT to select from any existing locations.">config.usage.timer_path</item>
 		<item level="2" text="Instant recording location" description="Set the default location for your instant recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations.">config.usage.instantrec_path</item>
@@ -355,7 +355,7 @@
 		<item level="0" text="Automatically update Client/Server View" description="Automatically update Client/Server View">config.oscaminfo.autoUpdate</item>
 		<item level="0" text="Automatically update Log-Fullscreen View" description="Automatically update Log-Fullscreen View">config.oscaminfo.autoUpdateLog</item>
 	</setup>
-	<setup key="Subtitle" title="Subtitle Setup">
+	<setup key="subtitlesetup" title="Subtitle Setup">
 		<if requires="AISubs">
 			<item level="2" text="AI Translation enabled" description="Select 'Yes' to enable AI-Powered Translation for all teletext and DVB subtitles.">config.subtitles.ai_enabled</item>
 			<item level="2" text="AI Translation language" description="Select the AI-Powered Translation target language.">config.subtitles.ai_translate_to</item>
@@ -410,7 +410,7 @@
 		<item level="2" text="Use timeshift seekbar while timeshifting?" description="If set to 'yes', allows you to use the seekbar to jump to a point within the event.">config.timeshift.showinfobar</item>
 		-->
 	</setup>
-	<setup key="Usage" title="Customize">
+	<setup key="usage" title="Customize">
 		<item level="0" text="Show Main Menu as" description="Choose style of main menus">config.usage.menutype</item>
 		<item level="1" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus">config.usage.menu_sort_mode</item>
 		<item level="1" text="Sort order for setup entries" description="This option allows you to alphabetically sort setup menu entries.">config.usage.sort_settings</item>
@@ -490,7 +490,7 @@
 		<item level="2" text="Auto play last service in radio mode" conditional="not config.usage.e1like_radio_mode.value" description="When enabled, it will automatically play to the last saved radio service when switching to radio mode.">config.usage.e1like_radio_mode_last_play</item>
 		<item level="0" text="Include CI assignment" description="Set CI assignment for detection of available services.">config.misc.use_ci_assignment</item>
 	</setup>
-	<setup key="UserInterface" title="User Interface Setup">
+	<setup key="userinterface" title="User Interface Setup">
 		<item level="1" text="Show animation while busy" description="Show busy indicator when the system is busy.">config.usage.show_spinner</item>
 		<item level="1" text="Show positioner movement" requires="isRotorTuner" description="Configure whether or not an icon should be shown when your motorized dish is moving.">config.usage.showdish</item>
 		<item level="1" text="Show positioner position" requires="isRotorTuner" description="Configure whether or not a rotor position will be displayed on the infobar">config.misc.showrotorposition</item>

@@ -175,8 +175,9 @@ def getHotkeyFunctions():
 	hotkey.functions.append((_("Zap up"), "Infobar/zapUp", "InfoBar"))
 	hotkey.functions.append((_("Volume up"), "Infobar/volumeUp", "InfoBar"))
 	hotkey.functions.append((_("Volume down"), "Infobar/volumeDown", "InfoBar"))
-	hotkey.functions.append((_("Switch channel up"), "Infobar/switchChannelUp", "InfoBar"))
-	hotkey.functions.append((_("Switch channel down"), "Infobar/switchChannelDown", "InfoBar"))
+	if config.usage.servicelist_cursor_behavior.default != config.usage.servicelist_cursor_behavior.value:
+		hotkey.functions.append((_("Switch channel up"), "Infobar/switchChannelUp", "InfoBar"))
+		hotkey.functions.append((_("Switch channel down"), "Infobar/switchChannelDown", "InfoBar"))
 	hotkey.functions.append((_("Show service list"), "Infobar/openServiceList", "InfoBar"))
 	hotkey.functions.append((_("Show movies"), "Infobar/showMovies", "InfoBar"))
 	hotkey.functions.append((_("Play last movie"), "Infobar/restartLastMovie", "InfoBar"))
@@ -227,9 +228,6 @@ def getHotkeyFunctions():
 		hotkey.functions.append((_("Toggle HDMI-In PiP"), "Infobar/HDMIInPiP", "InfoBar"))
 	hotkey.functions.append((_("Toggle dashed flickering line for this service"), "Infobar/ToggleHideVBI", "InfoBar"))
 	hotkey.functions.append((_("Do nothing"), "Void", "InfoBar"))
-	if SystemInfo["HDMICEC"]:
-		hotkey.functions.append((_("HDMI-CEC Source Active"), "Infobar/SourceActiveHdmiCec", "InfoBar"))
-		hotkey.functions.append((_("HDMI-CEC Source Inactive"), "Infobar/SourceInactiveHdmiCec", "InfoBar"))
 	hotkey.functions.append((_("Softcam Setup"), "SoftcamSetup", "Setup"))
 	hotkey.functions.append((_("HotKey Setup"), "Module/Screens.Hotkey/HotkeySetup", "Setup"))
 	hotkey.functions.append((_("Software update"), "Module/Screens.SoftwareUpdate/UpdatePlugin", "Setup"))
@@ -258,13 +256,13 @@ def getHotkeyFunctions():
 		if plugin[2]:
 			hotkey.functions.append((plugin[0], "MenuPlugin/gui/" + plugin[2], "Setup"))
 	hotkey.functions.append((_("Skin Setup"), "Module/Screens.SkinSelector/SkinSelector", "Setup"))
-	hotkey.functions.append((_("PowerMenu"), "Menu/shutdown", "Power"))
+	hotkey.functions.append((_("PowerMenu"), "Menu/standby_restart_list", "Power"))
 	hotkey.functions.append((_("Standby"), "Module/Screens.Standby/Standby", "Power"))
 	hotkey.functions.append((_("Restart"), "Module/Screens.Standby/TryQuitMainloop/2", "Power"))
 	hotkey.functions.append((_("Restart enigma"), "Module/Screens.Standby/TryQuitMainloop/3", "Power"))
 	hotkey.functions.append((_("Deep standby"), "Module/Screens.Standby/TryQuitMainloop/1", "Power"))
 	hotkey.functions.append((_("Usage Setup"), "Setup/usage", "Setup"))
-	hotkey.functions.append((_("User interface"), "Setup/userinterface", "Setup"))
+	hotkey.functions.append((_("User Interface"), "Setup/userinterface", "Setup"))
 	hotkey.functions.append((_("Recording Setup"), "Setup/recording", "Setup"))
 	hotkey.functions.append((_("Harddisk Setup"), "Setup/harddisk", "Setup"))
 	hotkey.functions.append((_("Subtitles Settings"), "Setup/subtitlesetup", "Setup"))
@@ -775,14 +773,3 @@ class InfoBarHotkey():
 			self.openServiceList()
 		elif hasattr(self, "showMovies"):
 			self.showMovies()
-
-	def SourceActiveHdmiCec(self):
-		self.setHdmiCec("sourceactive")
-
-	def SourceInactiveHdmiCec(self):
-		self.setHdmiCec("sourceinactive")
-
-	def setHdmiCec(self, cmd):
-		if config.hdmicec.enabled.value:
-			import Components.HdmiCec
-			Components.HdmiCec.hdmi_cec.sendMessage(0, cmd)
