@@ -23,13 +23,6 @@ git add *
 git commit -m "PEP8 double aggressive E701, E70 and E502"
 
 echo ""
-echo "PEP8 double aggressive E251 and E252"
-autopep8 . -a -a -j 0 --recursive --select=E251,E252 --in-place
-git add -u
-git add *
-git commit -m "PEP8 double aggressive E251 and E252"
-
-echo ""
 echo "PEP8 double aggressive E20 and E211"
 autopep8 . -a -a -j 0 --recursive --select=E20,E211 --in-place
 git add -u
