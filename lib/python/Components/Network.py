@@ -5,7 +5,6 @@ from os import listdir
 from os.path import basename, exists, isdir, isfile, realpath
 import re
 import netifaces as ni
-from socket import *  # noqa: F403
 from glob import glob
 from Components.Console import Console
 from Components.PluginComponent import plugins
