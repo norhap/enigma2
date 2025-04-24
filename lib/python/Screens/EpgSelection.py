@@ -74,6 +74,7 @@ class EPGSelection(Screen):
 			self.currentService = ServiceReference(service)
 			self.zapFunc = zapFunc
 			self.sort_type = 0
+			self.filtering = 0
 			self.setSortDescription()
 		else:
 			self.setTitle(_("Multi EPG"))
@@ -118,7 +119,8 @@ class EPGSelection(Screen):
 			"prevBouquet": self.prevBouquet,  # just used in multi epg yet
 			"nextService": self.nextService,  # just used in single epg yet
 			"prevService": self.prevService,  # just used in single epg yet
-			"preview": self.eventPreview
+			"preview": self.eventPreview,
+			"filter": self.stopButtonPressed
 		})
 		self.isTMBD = isPluginInstalled("TMBD")
 		if self.isTMBD:
@@ -199,22 +201,30 @@ class EPGSelection(Screen):
 
 	def nextBouquet(self):
 		if self.type == EPG_TYPE_SINGLE:
+			self.resetFiltering()
+			self.resetSortStatus()
 			self.session.openWithCallback(self.channelSelectionCallback, Screens.ChannelSelection.SimpleChannelSelection, _("Select channel"), True, True, self.currentService.ref, self.parent and self.parent.epg_bouquet)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(1, self)
 
 	def prevBouquet(self):
 		if self.type == EPG_TYPE_SINGLE:
+			self.resetFiltering()
+			self.resetSortStatus()
 			self.session.openWithCallback(self.channelSelectionCallback, Screens.ChannelSelection.SimpleChannelSelection, _("Select channel"), True, True, self.currentService.ref, self.parent and self.parent.epg_bouquet)
 		if self.bouquetChangeCB:
 			self.bouquetChangeCB(-1, self)
 
 	def nextService(self):
 		if self.serviceChangeCB:
+			self.resetFiltering()
+			self.resetSortStatus()
 			self.serviceChangeCB(1, self)
 
 	def prevService(self):
 		if self.serviceChangeCB:
+			self.resetFiltering()
+			self.resetSortStatus()
 			self.serviceChangeCB(-1, self)
 
 	def enterDateTime(self):
@@ -294,14 +304,17 @@ class EPGSelection(Screen):
 		elif self.type == EPG_TYPE_SINGLE:
 			service = self.currentService
 			self["Service"].newService(service.ref)
-			if not self.saved_title:
-				self.saved_title = self.instance.getTitle()
-			self.setTitle(self.saved_title + ' - ' + service.getServiceName())
+			self.serviceToTitle(service)
 			li.fillSingleEPG(service)
 		elif self.type == EPG_TYPE_PARTIAL:
 			li.fill_partial_list(self.eventid)
 		else:
 			li.fillSimilarList(self.currentService, self.eventid)
+
+	def serviceToTitle(self, service):
+		if not self.saved_title:
+			self.saved_title = self.instance.getTitle()
+		self.setTitle(self.saved_title + ' - ' + service.getServiceName())
 
 	def eventViewCallback(self, setEvent, setService, val):
 		l = self["list"]
@@ -351,6 +364,25 @@ class EPGSelection(Screen):
 		else:
 			self.infoKeyPressed()
 
+	def stopButtonPressed(self):
+		if config.epg.filter.value:
+			if self.type == EPG_TYPE_SINGLE:
+				if not config.epg.filter_keepsorting.value:
+					self.resetSortStatus()
+				self.serviceToTitle(self.currentService)
+				title = self.instance.getTitle()
+				begin, end = config.epg.filter_start.value, config.epg.filter_end.value
+				if config.epg.filter_reversal.value:
+					self.filtering = self.filtering - 1 if self.filtering else 2
+				else:
+					self.filtering = (self.filtering + 1) % 3
+				title += '' if self.filtering == 0 else ('   (%02d:%02d - %02d:%02d)' % ((*begin, *end) if self.filtering == 1 else (*end, *begin)))
+				self.setTitle(title)
+				self["list"].fillSingleEPG(self.currentService, self.sort_type, self.filtering)
+
+	def resetFiltering(self):
+		self.filtering = 0
+
 	def yellowButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:
 			self["list"].updateMultiEPG(-1)
@@ -375,6 +407,10 @@ class EPGSelection(Screen):
 		else:
 			# TRANSLATORS: This must fit into the header button in the EPG-List
 			self["key_yellow"].setText(_("Sort A-Z"))
+
+	def resetSortStatus(self):
+		self.sort_type = 0
+		self.setSortDescription()
 
 	def blueButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:

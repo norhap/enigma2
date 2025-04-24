@@ -1005,6 +1005,7 @@
 		<key id="KEY_TV2" mapto="preview" flags="m" />
 		<key id="KEY_REWIND" mapto="prevDay" flags="m" />
 		<key id="KEY_FASTFORWARD" mapto="nextDay" flags="m" />
+		<key id="KEY_STOP" mapto="filter" flags="m" />
 	</map>
 
 	<map context="GMEPGSelectActions">
@@ -1306,7 +1307,7 @@
 		<key id="KEY_FIND" mapto="find" flags="m" />
 		<key id="KEY_SLOW" mapto="slow" flags="m" />
 		<key id="KEY_ARCHIVE" mapto="history" flags="b" />
-		<key id="KEY_ARCHIVE" mapto="history_long" flags="l" />		
+		<key id="KEY_ARCHIVE" mapto="history_long" flags="l" />
 	</map>
 
 	<map context="CCcamInfoActions">

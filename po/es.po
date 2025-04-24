@@ -4014,6 +4014,12 @@ msgstr "Habilitar el receptor reserva para respaldo"
 msgid "Enable Fast Channel Change"
 msgstr "Habilitar Cambio Rápido Canal"
 
+msgid "Enable Filtering"
+msgstr "Habilitar filtrado"
+
+msgid "Enable filtering in SingleEPG"
+msgstr "Habilitar filtrado en EPGSimple"
+
 msgid "Enable Quad PiP"
 msgstr "Habilitar Quad PiP"
 
@@ -4031,6 +4037,9 @@ msgstr ""
 "Permita que el receptor servidor intente sintonizar canales que no se pueden sintonizar localmente, ej. el sintonizador está ocupado o el tipo de canal no está disponible en el sintonizador local.\n"
 "\n"
 "Puede usar este receptor solo en modo cliente usando la lista de canales del servidor, temporizadores y EPG."
+
+msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
+msgstr "Habilite un intervalo de tiempo para filtrar eventos en EPGSimple usando el botón 'STOP'."
 
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
@@ -4058,6 +4067,15 @@ msgstr "Tipo de llave de encriptado"
 
 msgid "Encryption:"
 msgstr "Encriptación:"
+
+msgid "End of \"after event\" timespan"
+msgstr "Fin del \"después del evento\" intervalo de tiempo"
+
+msgid "End of timespan"
+msgstr "Final de intervalo de tiempo"
+
+msgid "End of the time interval within which an events must start in order to be displayed."
+msgstr "Fin del intervalo de tiempo dentro del cual un evento debe comenzar para ser mostrado."
 
 msgid "End timeshift"
 msgstr "Final timeshift"
@@ -5700,6 +5718,9 @@ msgstr "Kazakistán"
 
 msgid "Keep service"
 msgstr "Mantener canal"
+
+msgid "Keep sorting"
+msgstr "Sigue ordenando"
 
 msgid "Kenya"
 msgstr "Kenia"
@@ -9095,6 +9116,9 @@ msgstr "Empezar desde el principio"
 msgid "Start instant recording"
 msgstr "Comenzar grabación instantánea"
 
+msgid "Start of the time interval within which an events must start in order to be displayed."
+msgstr "Inicio del intervalo de tiempo dentro del cual un evento debe comenzar para ser mostrado."
+
 msgid "Start offline decode"
 msgstr "Comenzar decodificado offline"
 
@@ -9877,6 +9901,9 @@ msgstr "Hoy"
 msgid "Toggle display of the second InfoBar"
 msgstr "Alternar visualización de la segunda barra de información"
 
+msgid "Toggle Filter Order"
+msgstr "Cambiar orden de filtro"
+
 msgid "Toggle HDMI In"
 msgstr "Alternar entrada HDMI"
 
@@ -10343,6 +10370,9 @@ msgstr "Usando LNB %d"
 msgid "Using fixed address"
 msgstr "Usando una dirección fija"
 
+msgid "Using the 'Stop' button will cyclically switch displaying events starting: 'outside the interval', 'within the interval', and 'without filtering', instead of 'within the interval', 'outside the interval', and 'without filtering'."
+msgstr "Al utilizar el botón 'Detener' se cambiará cíclicamente la visualización de eventos comenzando por: 'fuera del intervalo', 'dentro del intervalo' y 'sin filtrar', en lugar de 'dentro del intervalo', 'fuera del intervalo' y 'sin filtrar'."
+
 #, python-format
 msgid "Using tuner %s"
 msgstr "Usando sintonizador %s"
@@ -10631,6 +10661,9 @@ msgstr "Cuando está habilitado, su receptor detectará actividad en la entrada 
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Cuando se selecciona, esto permite que se seleccionen los modos de video, incluso si no se informaron como compatibles."
+
+msgid "When switching the filter, the selected EPG sorting is preserved."
+msgstr "Al cambiar el filtro, se conserva la clasificación EPG seleccionada."
 
 msgid "When the content has an aspect ratio of 16:9, choose whether to scale/stretch the picture."
 msgstr "Cuando el contenido tenga una relación de aspecto de 16: 9, elija si desea escalar / estirar la imagen."
@@ -13181,9 +13214,6 @@ msgstr "Editar Canales"
 msgid "Editor for new AutoTimers"
 msgstr "Editor para nuevos Temporizadores Automáticos"
 
-msgid "Enable Filtering"
-msgstr "Habilitar filtrado"
-
 msgid "Enable Service Restriction"
 msgstr "Habilitar restricción de canal"
 
@@ -13198,12 +13228,6 @@ msgstr "Habilítelo para poder acceder al agregar al Temporizador Automático de
 
 msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
 msgstr "Codificando los usos del canal para sus datos EPG. Solo necesita cambiar esto si está buscando caracteres especiales como las diéresis alemanas."
-
-msgid "End of \"after event\" timespan"
-msgstr "Fin del \"después del evento\" intervalo de tiempo"
-
-msgid "End of timespan"
-msgstr "Final de intervalo de tiempo"
 
 msgid "Enter or edit description"
 msgstr "Ingrese o edite la descripción"
