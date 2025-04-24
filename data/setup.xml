@@ -188,6 +188,7 @@
 		<item level="2" text="Include DVB scan data" description="Enable this option to add extra DVB scan data to the debug log file.">config.crash.debugDVBScan</item>
 		<item level="2" text="Log python stack trace on spinner" description="Set to yes for debugging the root cause of a spinner.">config.crash.pythonStackOnSpinner</item>
 		<item level="2" text="Logs folder location **" description="Choose the location for crash and debug logs folder.">config.crash.debugPath</item>
+		<item level="2" text="Include timer descramble data in PVR" requires="CanDescrambleInStandby" description="Enabled displays PVR scrambled recording debug data.">config.crash.debugTimers</item>		
 		<item level="2" text="Debug log time format *" description="This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted.">config.crash.debugTimeFormat</item>
 		<item level="2" text="Enable core dumps *" description="Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location.">config.crash.coredump</item>
 		<item level="2" text="Number of debug logs to keep *" description="This sets the maximum number of log files that will be retained. Files in excess of this number will be deleted.">config.crash.debugFileCount</item>
@@ -306,6 +307,14 @@
 		<item level="2" text="Never decrypt while recording" description="Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off.">config.recording.never_decrypt</item>
 		<item level="2" text="Offline decode delay (ms)" requires="HasOfflineDecoding" description="Configure the offline decoding delay in milliseconds. The configured delay is observed at each control word parity change.">config.recording.offline_decode_delay</item>
 		<item level="0" text="Force zap to recording service in standby" description="This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped.">config.recording.zap_record_service_in_standby</item>
+		<if requires="CanDescrambleInStandby">
+			<item level="2" text="Descramble in Standby" description="Set to 'Enabled' to descramble queued scrambled recordings in Standby.">config.recording.standbyDescramble</item>
+			<if conditional="config.recording.standbyDescramble.value" indent="1">
+				<item level="2" text="Descramble recordings before Shutdown" description="Set to 'Enabled' to descramble queued scrambled recordings in Standby mode before shutting down.">config.recording.standbyDescrambleShutdown</item>
+				<item level="2" text="Descramble start time" description="Select a time, when in Standby mode, after which the descramble can proceed.">config.recording.standbyDescrambleStart</item>
+				<item level="2" text="Descramble end time" description="Select a time, when in Standby, before which descramble can proceed.">config.recording.standbyDescrambleEnd</item>
+			</if>
+		</if>
 		<!--
 		<item level="2" text="Preferred tuner for recordings" description="Configure which tuner will be preferred for recordings, when more than one tuner is available. 'Disabled' would select a tuner based on preferred tuner in customise screen. 'Auto' would choose based on E2's default rules, ignoring preferred tuner in customise screen.">config.usage.recording_frontend_priority</item>
 		<item level="0" text="Split event detection (minutes)" description="Detect programs split by news bulletins. Choose the maximum duration in minutes to consider as a bulletin, or 0 to disable.">config.recording.split_programme_minutes</item>

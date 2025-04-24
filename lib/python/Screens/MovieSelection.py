@@ -24,6 +24,7 @@ from Components.UsageConfig import preferredTimerPath
 # from Components.Sources.Boolean import Boolean
 from Components.Sources.ServiceEvent import ServiceEvent
 from Components.Sources.StaticText import StaticText
+from Components.SystemInfo import BoxInfo
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChoiceBox import ChoiceBox
 from Screens.HelpMenu import HelpableScreen
@@ -2293,7 +2294,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				if not (service.flags & eServiceReference.mustDescent):
 					if self.isResetable():
 						append_to_menu(menu, (_("Reset playback position"), csel.do_reset), key="7")
-					if service.getPath().endswith(".ts"):
+					if service.getPath().endswith(".ts") or BoxInfo.getItem("CanOfflineDecode"):
 						append_to_menu(menu, (_("Start offline decode"), csel.do_decode), key="8")
 				elif BlurayPlayer is None and csel.isBlurayFolderAndFile(service):
 					append_to_menu(menu, (_("Auto play blu-ray file"), csel.playBlurayFile))

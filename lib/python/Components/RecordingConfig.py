@@ -1,8 +1,18 @@
 # -*- coding: utf-8 -*-
-from Components.config import ConfigInteger, ConfigNumber, ConfigYesNo, ConfigSubsection, ConfigSelection, config
+from time import localtime, mktime
+from Components.config import ConfigEnableDisable, ConfigClock, ConfigInteger, ConfigNumber, ConfigYesNo, ConfigSubsection, ConfigSelection, config
+from Components.SystemInfo import BoxInfo
+
+
+def calculateTime(hours, minutes, day_offset=0):
+    cur_time = localtime()
+    unix_time = mktime((cur_time.tm_year, cur_time.tm_mon, cur_time.tm_mday, hours, minutes, 0, cur_time.tm_wday, cur_time.tm_yday, cur_time.tm_isdst)) + day_offset
+    return unix_time
 
 
 def InitRecordingConfig():
+	if hasattr(config, "recording"):
+ 		return
 	config.recording = ConfigSubsection()
 	# actually this is "recordings always have priority". "Yes" does mean: don't ask. The RecordTimer will ask when value is 0.
 	config.recording.asktozap = ConfigYesNo(default=True)
@@ -21,3 +31,11 @@ def InitRecordingConfig():
 	config.recording.offline_decode_delay = ConfigInteger(default=1000, limits=(1, 10000))
 	config.recording.timer_default_type = ConfigSelection(choices=[("zap", _("zap")), ("record", _("record")), ("zap+record", _("zap and record"))], default="record")
 	config.recording.show_rec_symbol_for_rec_types = ConfigSelection(choices=[("any", _("any recordings")), ("real", _("real recordings")), ("real_streaming", _("real recordings or streaming")), ("real_pseudo", _("real or pseudo recordings"))], default="real_streaming")
+	if BoxInfo.getItem("CanDescrambleInStandby"):
+		config.recording.standbyDescramble = ConfigEnableDisable(default=True)
+		config.recording.standbyDescrambleShutdown = ConfigEnableDisable(default=True)
+	else:
+		config.recording.standbyDescramble = ConfigEnableDisable(default=False)
+		config.recording.standbyDescrambleShutdown = ConfigEnableDisable(default=False)
+	config.recording.standbyDescrambleStart = ConfigClock(default=calculateTime(0, 1))
+	config.recording.standbyDescrambleEnd = ConfigClock(default=calculateTime(23, 59))

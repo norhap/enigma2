@@ -10,6 +10,7 @@ from Components.AVSwitch import AVSwitch
 from Components.Console import Console
 from Components.ImportChannels import ImportChannels
 from Components.SystemInfo import BoxInfo, SystemInfo, MODEL, BRAND, DISPLAYMODEL
+from Components.ScrambledRecordings import ScrambledRecordings
 from Components.Sources.StreamService import StreamServiceList
 from Components.Task import job_manager
 from Tools.Directories import mediaFilesInUse
@@ -383,6 +384,30 @@ class TryQuitMainloop(MessageBox):
 		self.retval = retvalue
 		self.connected = False
 		reason = check_reasons and getReasons(session, retvalue)
+		jobs = len(job_manager.getPendingJobs())
+		if BoxInfo.getItem("CanDescrambleInStandby"):
+			scrambledRecordings = ScrambledRecordings()
+			scrambledList = scrambledRecordings.readList(returnLength=True)
+		else:
+			scrambledList = []
+		if jobs and retvalue in (QUIT_SHUTDOWN, QUIT_REBOOT):
+			reason = _('%d jobs are running in the background!') % jobs
+			default_yes = False
+			timeout = 30
+		elif len(scrambledList) and retvalue == QUIT_SHUTDOWN and config.recording.standbyDescrambleShutdown.value:
+			duration = 0
+			for scrambledListItem in scrambledList:
+				duration += scrambledListItem[1]
+			count = len(scrambledList)
+			reason = [
+				ngettext("There is %d scrambled recording, which will be unscrambled during Standby.", "There are %d scrambled recordings, which will be unscrambled during Standby.", count) % count,
+				_("The process will take approximately %d minutes to complete.") % min(int(duration // 60), 2),
+				_("Select 'Yes' to shut down immediately instead of starting the descramble.")
+			]
+			reason = f"{reason[0]} {reason[1]}\n\n{reason[2]}"
+			default_yes = False
+			self.descramble = True
+			timeout = 30
 		if reason:
 			text = {
 				QUIT_SHUTDOWN: _("Really shutdown now?"),
@@ -447,6 +472,10 @@ class TryQuitMainloop(MessageBox):
 						oled.write("0")
 			self.quitMainloop()
 		else:
+			if self.descramble:
+				from Components.PvrDescrambleConvert import pvr_descramble_convert
+				if pvr_descramble_convert.scrambledRecordsLeft():
+					self.session.open(Standby)
 			MessageBox.close(self, True)
 
 	def quitMainloop(self):

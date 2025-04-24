@@ -540,6 +540,15 @@ msgstr "Eliminar corte (deshabilitado)"
 msgid "Descramble and record ecm"
 msgstr "Descifrar y grabar ecm"
 
+msgid "Descramble end time"
+msgstr "Hora de finalización de la descodificación"
+
+msgid "Descramble recordings before Shutdown"
+msgstr "Descodificar grabaciones antes de modo profundo"
+
+msgid "Descramble start time"
+msgstr "Hora de inicio descodificación"
+
 msgid "detective/thriller"
 msgstr "detective/intriga"
 
@@ -611,6 +620,9 @@ msgstr "Activar modo movimiento"
 
 msgid "enabled"
 msgstr "activado"
+
+msgid "Enabled displays PVR scrambled recording debug data."
+msgstr "Habilitado muestra datos de depuración de grabación codificados de PVR."
 
 msgid "End alternatives edit"
 msgstr "Fin edición alternativos"
@@ -1930,6 +1942,9 @@ msgstr "Incluir SDT en streams http"
 
 msgid "Info bar timeout"
 msgstr "Duración de la InfoBar"
+
+msgid "Include timer descramble data in PVR"
+msgstr "Incluir datos de descifrado del temporizador en PVR"
 
 msgid "Infobar frontend data source"
 msgstr "Fuente de datos de la Infobar"
@@ -3485,6 +3500,9 @@ msgstr "Eliminar Montaje"
 
 msgid "Deleted items"
 msgstr "Objetos eliminados"
+
+msgid "Descramble in Standby"
+msgstr "Descodificar en modo reposo"
 
 msgid "description match"
 msgstr "descripción del evento"
@@ -8215,6 +8233,12 @@ msgstr "Seleccionar Softcam"
 msgid "Select a network adapter"
 msgstr "Seleccionar adaptador de red"
 
+msgid "Select a time, when in Standby mode, after which the descramble can proceed."
+msgstr "Seleccione un tiempo en modo reposo, después del cual se podrá continuar con la descodificación."
+
+msgid "Select a time, when in Standby, before which descramble can proceed."
+msgstr "Seleccione una hora en modo reposo, antes del cual se pueda realizar la descodificación."
+
 msgid "Select a wireless network"
 msgstr "Seleccionar una red inhalámbrica"
 
@@ -8550,6 +8574,12 @@ msgstr "Establecer la ventana de tiempo en 5 horas"
 
 msgid "Set time window to 6 hours"
 msgstr "Establecer la ventana de tiempo en 6 horas"
+
+msgid "Set to 'Enabled' to descramble queued scrambled recordings in Standby."
+msgstr "Establezca en 'Habilitado' para descodificar grabaciones cifradas en cola en modo reposo."
+
+msgid "Set to 'Enabled' to descramble queued scrambled recordings in Standby mode before shutting down."
+msgstr "Establezca en 'Habilitado' para descodificar grabaciones cifradas en cola antes de modo reposo profundo."
 
 msgid "Set voltage and 22KHz"
 msgstr "Ajuste el voltaje y 22KHz"
@@ -9547,6 +9577,11 @@ msgstr "¡No hay señal para bloquear!"
 
 msgid "There is no tag for this selection.\n\nPress Menu and enter \"Edit Tags\""
 msgstr "No existe etiqueta para esta selección.\n\nPulse Menu e ingrese en \"Editar Etiquetas\""
+
+msgid "There is %d scrambled recording, which will be unscrambled during Standby."
+msgid_plural "There are %d scrambled recordings, which will be unscrambled during Standby."
+msgstr[0] "Hay %d grabaciones codificadas, que se decodificarán durante el modo reposo."
+msgstr[1] "Hay %d grabación codificada, que se decodificará durante el modo reposo."
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Este medio de DVD RW ya está formateado - el formateo eliminará todo el contenido del disco."
@@ -13784,6 +13819,9 @@ msgstr "Los datos facilitados no encontrará canales."
 msgid "The password can not be blank!"
 msgstr "La contraseña no puede estar en blanco!"
 
+msgid "The process will take approximately %d minutes to complete."
+msgstr "El proceso tardará aproximadamente %d minutos en completarse."
+
 msgid ""
 "The TMBD plugin is not installed!\n"
 "Do you want to install it?"
@@ -14709,6 +14747,9 @@ msgstr "minutos restantes"
 
 msgid "Select 'Yes' to remove all languages except Spanish."
 msgstr "Seleccione 'Sí' para eliminar todos los idiomas excepto el Español."
+
+msgid "Select 'Yes' to shut down immediately instead of starting the descramble."
+msgstr "Seleccione 'Sí' para apagar inmediatamente en lugar de iniciar la descodificación."
 
 msgid "show all list"
 msgstr "mostrar toda la lista"

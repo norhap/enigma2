@@ -16,6 +16,7 @@ from Components.SystemInfo import SystemInfo, MODEL
 from Components.TimerSanityCheck import TimerSanityCheck
 import Components.ParentalControl
 from Components.UsageConfig import defaultMoviePath, preferredInstantRecordPath, preferredTimerPath
+from Components.ScrambledRecordings import ScrambledRecordings
 from Screens.MessageBox import MessageBox
 from Screens.PictureInPicture import PictureInPicture
 import Screens.Standby
@@ -814,7 +815,7 @@ class RecordTimerEntry(TimerEntry, object):
 
 	# End of static methods and members that are only in use when the box is in (soft) standby!
 
-	def __init__(self, serviceref, begin, end, name, description, eit, disabled=False, justplay=False, afterEvent=AFTEREVENT.AUTO, checkOldTimers=False, dirname=None, tags=None, descramble=True, record_ecm=False, isAutoTimer=False, always_zap=False, zap_wakeup="always", rename_repeat=True, conflict_detection=True, pipzap=False):
+	def __init__(self, serviceref, begin, end, name, description, eit, disabled=False, justplay=False, afterEvent=AFTEREVENT.AUTO, checkOldTimers=False, dirname=None, tags=None, descramble=True, record_ecm=False, isAutoTimer=False, always_zap=False, zap_wakeup="always", rename_repeat=True, conflict_detection=True, pipzap=False, filename=None):
 		TimerEntry.__init__(self, int(begin), int(end))
 		if checkOldTimers:
 			if self.begin < time() - 1209600:
@@ -891,11 +892,19 @@ class RecordTimerEntry(TimerEntry, object):
 					if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbs.value != "-2":
 						if config.usage.recording_frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_dvbs.value
+		if self.descramble or not self.record_ecm:
+			if cihelper.ServiceIsAssigned(self.service_ref.ref):
+				self.descramble = False
+				self.record_ecm = True
 		self.needChangePriorityFrontend = self.setAdvancedPriorityFrontend is not None or config.usage.recording_frontend_priority.value != "-2" and config.usage.recording_frontend_priority.value != config.usage.frontend_priority.value
 		self.change_frontend = False
 		self.InfoBarInstance = Screens.InfoBar.InfoBar.instance
 		self.ts_dialog = None
 		self.isAutoTimer = isAutoTimer
+		self.PVRFilename = filename
+		self.isPVRDescramble = False
+		self.pvrConvert = False
+		self.scrambledRecordings = ScrambledRecordings()
 		self.log_entries = []
 		self.flags = set()
 		self.resetState()
@@ -908,6 +917,11 @@ class RecordTimerEntry(TimerEntry, object):
 		print("[RecordTimer] Log message: '%s'." % msg)
 
 	def calculateFilename(self, name=None):
+		if self.PVRFilename:
+			self.Filename = self.PVRFilename
+			self.PVRFilename = None
+			self.isPVRDescramble = True
+			return self.Filename
 		serviceName = self.service_ref.getServiceName()
 		beginDate = strftime("%Y%m%d %H%M", localtime(self.begin))
 		name = name or self.name
@@ -1259,6 +1273,9 @@ class RecordTimerEntry(TimerEntry, object):
 			self.log_tuner(12, "Stop")
 			RecordingsState(-1)
 			if not self.justplay:
+				if not self.isPVRDescramble and not self.descramble and self.record_service:
+					print(f"[RecordTimer] Add Recording to pending descramble list: {self.Filename}")
+					self.scrambledRecordings.writeList(append=f"{self.Filename}{self.record_service.getFilenameExtension()}")
 				NavigationInstance.instance.stopRecordService(self.record_service)
 				if self.background_zap is not None and Screens.Standby.inStandby:
 					cur_ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
@@ -1458,6 +1475,8 @@ class RecordTimerEntry(TimerEntry, object):
 			# that in our state, with also keeping the possibility to re-try.
 			# TODO: this has to be done.
 		elif event == iRecordableService.evStart:
+			if self.pvrConvert:
+				return
 			RecordingsState(1)
 			text = _("A recording has started:\n%s") % self.name
 			notify = config.usage.show_message_when_recording_starts.value and not Screens.Standby.inStandby and self.InfoBarInstance and self.InfoBarInstance.execing

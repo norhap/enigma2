@@ -1234,6 +1234,7 @@ def InitUsageConfig():
 	choicelist = [("no", _("no")), ("nothing", _("omit")), ("space", _("space")), ("dot", ". "), ("dash", " - "), ("asterisk", " * "), ("hashtag", " # ")]
 	config.epg.replace_newlines = ConfigSelection(default="space", choices=choicelist)
 	config.crash.debugEPG = ConfigYesNo(default=False)
+	config.crash.debugTimers = ConfigYesNo(default=False)
 	config.epg.cacheloadsched = ConfigYesNo(default=False)
 	config.epg.cachesavesched = ConfigYesNo(default=False)
 

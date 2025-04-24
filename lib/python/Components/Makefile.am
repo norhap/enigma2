@@ -52,11 +52,13 @@ install_PYTHON = \
 	PluginList.py \
 	PowerTimerList.py \
 	ProgressBar.py \
+	PvrDescrambleConvert.py \
 	RcModel.py \
 	RecordingConfig.py \
 	ResourceManager.py \
 	RFmod.py \
 	Scanner.py \
+	ScrambledRecordings.py \
 	ScrollLabel.py \
 	SelectionList.py \
 	Sensors.py \

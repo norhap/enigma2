@@ -500,6 +500,9 @@ from Components.UsageConfig import InitUsageConfig, getFileUsage  # noqa: E402
 InitUsageConfig()
 getFileUsage()
 
+enigma.eProfileWrite("InitPvrDescrambleConvert")
+from Components.PvrDescrambleConvert import pvr_descramble_convert
+
 
 def runScreenTest():
 	config.misc.startCounter.value += 1

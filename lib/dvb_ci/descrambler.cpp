@@ -69,7 +69,7 @@ int descrambler_set_key(int& desc_fd, eDVBCISlot *slot, int parity, unsigned cha
 {
 	bool vuIoctlSuccess = false;
 
-	if (slot->getTunerNum() > 7) // might be VU box with 2 FBC tuners -> try to use VU ioctl
+	if (slot->getTunerNum() > 7 || slot->getTunerNum() == -1) // might be VU box with 2 FBC tuners or VU offline decryption -> try to use VU ioctl
 	{
 		struct vu_ca_descr_data d;
 
@@ -163,7 +163,7 @@ int descrambler_set_pid(int desc_fd, eDVBCISlot *slot, int enable, int pid)
 int descrambler_init(eDVBCISlot *slot, uint8_t ca_demux_id)
 {
 	int desc_fd;
-	
+
 	std::string filename = "/dev/dvb/adapter0/ca" + std::to_string(ca_demux_id);
 
 	if (slot->getDescramblingOptions() > 1)

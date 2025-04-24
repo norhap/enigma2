@@ -499,7 +499,7 @@ int eDVBCICcSession::generate_akh()
 int eDVBCICcSession::compute_dh_key()
 {
 	int len = DH_size(m_dh);
-	eWarning("[dvbci_ccmgr][CI%d RCC][compute_dh_key()] DH_size(m_dh: %x", m_slot->getSlotID(), len);	
+	eWarning("[dvbci_ccmgr][CI%d RCC][compute_dh_key()] DH_size(m_dh: %x", m_slot->getSlotID(), len);
 	if (len > 256)
 	{
 		eWarning("[dvbci_ccmgr][CI%d RCC] too long shared key", m_slot->getSlotID());
@@ -791,8 +791,8 @@ void eDVBCICcSession::check_new_key()
  * Sets new key or old one if /dev/caX device has changed */
 void eDVBCICcSession::set_descrambler_key()
 {
-	eDebug("[dvbci_ccmgr][CI%d RCC] set_descrambler_key", m_slot->getSlotID());
-	bool set_key = (m_current_ca_demux_id != m_slot->getCADemuxID()) || (m_slot->getTunerNum() > 7);
+	eDebug("[CI%d RCC] set_descrambler_key", m_slot->getSlotID());
+	bool set_key = (m_current_ca_demux_id != m_slot->getCADemuxID()) || (m_slot->getTunerNum() > 7) || (m_slot->getTunerNum() == -1);
 
 	if (m_descrambler_fd != -1 && m_current_ca_demux_id != m_slot->getCADemuxID())
 	{
