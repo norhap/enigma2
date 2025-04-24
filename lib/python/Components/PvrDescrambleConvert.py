@@ -336,7 +336,7 @@ class PVRDescrambleConvert():
 					print(f"[PVRDescramble] no more unscrambled recordings / wantShutdown {self.wantShutdown}")
 				if self.wantShutdown:
 					quitMainloop(1)
-				else:
+				elif self.successCount + self.failedCount > 0:  # [norhap] only show notification if currentPvr is not None.
 					message = [
 						_("Descramble in Standby finished"),
 						_("Amount %d / Success %d / Failed %d") % (self.successCount + self.failedCount, self.successCount, self.failedCount),

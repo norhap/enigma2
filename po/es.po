@@ -537,6 +537,9 @@ msgstr "Eliminar corte"
 msgid "Delete cut (disabled)"
 msgstr "Eliminar corte (deshabilitado)"
 
+msgid "Descramble in Standby finished"
+msgstr "Descodificación en modo reposo finalizada"
+
 msgid "Descramble and record ecm"
 msgstr "Descifrar y grabar ecm"
 
@@ -1350,6 +1353,12 @@ msgstr "Agregando horario."
 
 msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled."
 msgstr "Después de una actualización exitosa, el Temporizador Automático buscará nuevas coincidencias si está habilitado."
+
+msgid "Amount of recordings left"
+msgstr "Cantidad de grabaciones restantes"
+
+msgid "Amount %d / Success %d / Failed %d"
+msgstr "Cantidad %d / Convertidos %d / Fallidos %d"
 
 msgid "Are you sure you want to delete the EPG data from:\n"
 msgstr "Seguro que quieres eliminar los datos EPG desde:\n"
@@ -13036,9 +13045,6 @@ msgstr "Todos los temporizadores no repetitivos"
 
 msgid "Always write config"
 msgstr "Siempre escriba configuración"
-
-msgid "Amount of recordings left"
-msgstr "Cantidad de grabaciones restantes"
 
 msgid "Any service/recording"
 msgstr "Cualquier canal/grabación"
