@@ -9855,11 +9855,12 @@ msgstr "Entrada del Temporizador"
 msgid "Timer Log"
 msgstr "Registro del Temporizador"
 
-msgid ""
-"Timer overlap in timers.xml detected!\n"
-"Please recheck it!"
-msgstr ""
-"Superposición de temporizador en timers.xml detectado!\n"
+msgid "Timer overlaps detected in pm_timers.xml!"
+msgstr "Superposición de temporizador en pm_timers.xml!"
+
+msgid "Timer overlaps detected in timers.xml!"
+msgstr "Superposición de temporizador en timers.xml!"
+
 "Por favor, vuelva a verificarlo!"
 
 msgid "Timer overview"
@@ -15390,6 +15391,9 @@ msgstr "Establece contraseña si la tiene configurada en la sección [webif] htt
 
 msgid "PluginBrowser"
 msgstr "Plugins"
+
+msgid "Please check all timers."
+msgstr "Revise todos los temporizadores."
 
 msgid "Please choose CCcam-Reader"
 msgstr "Elegir CCcam-Lector"

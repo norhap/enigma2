@@ -72,7 +72,7 @@ class PowerTimer(Timer):
 				print("[PowerTimer] Error %d: Renaming broken timer file failed!  (%s)" % (err.errno, err.strerror))
 			return
 		check = True
-		overlapText = [_("Timer overlaps detected in pm_timers.xml!"), _("Please check all timers!")]
+		overlapText = [_("Timer overlaps detected in pm_timers.xml!"), _("Please check all timers.")]
 		for timer in timersDom.findall("timer"):
 			newTimer = self.createTimer(timer)
 			if (self.record(newTimer, True, dosave=False) is not None) and check:

@@ -383,6 +383,7 @@ class TryQuitMainloop(MessageBox):
 	def __init__(self, session, retvalue=QUIT_SHUTDOWN, timeout=-1, default_yes=False, check_reasons=True):
 		self.retval = retvalue
 		self.connected = False
+		self.descramble = False
 		reason = check_reasons and getReasons(session, retvalue)
 		jobs = len(job_manager.getPendingJobs())
 		if BoxInfo.getItem("CanDescrambleInStandby"):
