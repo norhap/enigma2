@@ -384,18 +384,12 @@ class TryQuitMainloop(MessageBox):
 		self.retval = retvalue
 		self.connected = False
 		self.descramble = False
-		reason = check_reasons and getReasons(session, retvalue)
-		jobs = len(job_manager.getPendingJobs())
 		if BoxInfo.getItem("CanDescrambleInStandby"):
 			scrambledRecordings = ScrambledRecordings()
 			scrambledList = scrambledRecordings.readList(returnLength=True)
 		else:
 			scrambledList = []
-		if jobs and retvalue in (QUIT_SHUTDOWN, QUIT_REBOOT):
-			reason = _('%d jobs are running in the background!') % jobs
-			default_yes = False
-			timeout = 30
-		elif len(scrambledList) and retvalue == QUIT_SHUTDOWN and config.recording.standbyDescrambleShutdown.value:
+		if len(scrambledList) and retvalue == QUIT_SHUTDOWN and config.recording.standbyDescrambleShutdown.value:
 			duration = 0
 			for scrambledListItem in scrambledList:
 				duration += scrambledListItem[1]
@@ -409,6 +403,8 @@ class TryQuitMainloop(MessageBox):
 			default_yes = False
 			self.descramble = True
 			timeout = 30
+		else:
+			reason = check_reasons and getReasons(session, retvalue)
 		if reason:
 			text = {
 				QUIT_SHUTDOWN: _("Really shutdown now?"),
