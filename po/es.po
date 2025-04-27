@@ -13813,7 +13813,7 @@ msgid "The user interface of the receiver will now restart to select the selecte
 msgstr "La interfaz de usuario del receptor ahora se reiniciará para mostrar su skin seleccionado"
 
 msgid "The user interface of your %s %s is restarting"
-msgstr "La interfaz de usuario de su %s %s se está reiniciando"
+msgstr "La interfaz de su %s %s está reiniciando"
 
 msgid ""
 "The user interface of your %s %s is restarting\n"
@@ -13823,7 +13823,7 @@ msgstr ""
 "debido a un error en StartEnigma.py"
 
 msgid "The user interface of your %s %s is restarting in debug mode"
-msgstr "La interfaz de usuario de su %s %s está reiniciando en modo debug"
+msgstr "La interfaz de su %s %s está reiniciando con debug"
 
 msgid "The wizard can backup your current settings. Do you want to do a backup now?"
 msgstr "El asistente puede guardar tus ajustes actuales. Quieres hacer una copia ahora?"
