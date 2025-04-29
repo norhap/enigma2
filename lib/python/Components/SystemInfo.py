@@ -195,8 +195,8 @@ BoxInfo.setItem("WakeOnLAN", fileCheck("/proc/stb/power/wol") or fileCheck("/pro
 BoxInfo.setItem("WakeOnLANType", getWakeOnLANType(BoxInfo.getItem("WakeOnLAN")) if BoxInfo.getItem("WakeOnLAN") else None)
 BoxInfo.setItem("AISubs", fileExists("/etc/init.d/aisocket"))
 BoxInfo.setItem("VuEAC3Fix", MODEL in ("vuultimo4k", "vuduo4kse"))
-BoxInfo.setItem("CanDescrambleInStandby", "PVR" in fileReadLine("/proc/stb/tsmux/ci0_input_choices", default="", source=MODULE_NAME))
-BoxInfo.setItem("CanOfflineDecode", MODEL in ("hd51", "h7", "et10000", "et8000", "hd2400", "vs1500"))
+BoxInfo.setItem("CanDescrambleInStandby", any(x in fileReadLine("/proc/stb/tsmux/ci0_input_choices", default="", source=MODULE_NAME) for x in ("PVR", "DVR0")))
+BoxInfo.setItem("CanOfflineDecode", MODEL in ("hd51", "h7", "h17", "et10000", "et8000", "hd2400", "vs1500", "8100s"))
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
