@@ -60,6 +60,7 @@ void eFilePushThread::thread()
 	{
 		int eofcount = 0;
 		int buf_end = 0;
+		int poll_timeout_count = 0;
 		size_t bytes_read = 0;
 		off_t current_span_offset = 0;
 		size_t current_span_remaining = 0;
@@ -132,26 +133,30 @@ void eFilePushThread::thread()
 					pfd.events = POLLIN;
 					switch (poll(&pfd, 1, 250)) // wait for 250ms
 					{
-						case 0:
-							eDebug("[eFilePushThread] wait for driver eof timeout");
-							continue;
-						case 1:
-							eDebug("[eFilePushThread] wait for driver eof ok");
+					case 0:
+						if ((++poll_timeout_count % 20) == 0)
+							eDebug("[eFilePushThread] wait for driver eof timeout - %ds", poll_timeout_count / 4);
+						continue;
+					case 1:
+						eDebug("[eFilePushThread] wait for driver eof ok");
+						break;
+					default:
+						eDebug("[eFilePushThread] wait for driver eof aborted by signal");
+						/* Check m_stop after interrupted syscall. */
+						if (m_stop)
 							break;
-						default:
-							eDebug("[eFilePushThread] wait for driver eof aborted by signal");
-							/* Check m_stop after interrupted syscall. */
-							if (m_stop)
-								break;
-							continue;
+						continue;
 					}
 				}
+				else
+					poll_timeout_count = 0;
 
 				if (m_stop)
 					break;
 
 				/* in stream_mode, we are sending EOF events
 				   over and over until somebody responds.
+
 				   in stream_mode, think of evtEOF as "buffer underrun occurred". */
 				if (m_sof == 0)
 					sendEvent(evtEOF);
