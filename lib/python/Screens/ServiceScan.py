@@ -119,6 +119,7 @@ class ServiceScan(Screen):
 		if self.currentInfobar.__class__.__name__ == "InfoBar":
 			self.close(returnValue)
 		self.close()
+		self.bouquetLastScanned = "/etc/enigma2/userbouquet.LastScanned.tv"
 		if exists(str(self.bouquetLastScanned)) and "en" not in config.osd.language.value:
 			with open(self.bouquetLastScanned, "r") as fr:
 				bouquetread = fr.readlines()
@@ -126,7 +127,6 @@ class ServiceScan(Screen):
 					for line in bouquetread:
 						fw.write(line.replace("Last Scanned", _("Last Scanned")))
 			eDVBDB.getInstance().reloadBouquets()
-		self.bouquetLastScanned = "/etc/enigma2/userbouquet.LastScanned.tv"
 
 	def scanPoll(self):
 		if self["scan"].isDone():
