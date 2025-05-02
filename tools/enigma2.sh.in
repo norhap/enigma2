@@ -66,6 +66,13 @@ if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
 	ulimit -c ${COREDUMPSIZE}
 fi
 
+# Show backdrop on enigma2 start.
+if [ -x @bindir@/showiframe ]; then
+	if [ -f @datadir@/enigma2/backdrop.mvi ]; then
+		@bindir@/showiframe @datadir@/enigma2/backdrop.mvi
+	fi
+fi
+
 # Create debug first run
 if [ -n "$DEBUG_LVL" ]; then
 	(LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL ENIGMA_DEBUG_TIME=$ENIGMA_DEBUG_TIME @bindir@/enigma2 &> ${DEBUGDIR}$(date +%Y%m%d-%H%M%S)_enigma2_debug_first_run.log) &
@@ -93,13 +100,6 @@ wait ${enigma2pid}
 
 # Enigma main loop.
 while : ; do
-	# Show backdrop on enigma2 start.
-	if [ -x @bindir@/showiframe ]; then
-		if [ -f @datadir@/enigma2/backdrop.mvi ]; then
-			@bindir@/showiframe @datadir@/enigma2/backdrop.mvi
-		fi
-	fi
-
 	# Hook to execute scripts always before enigma2 start.
 	if [ -x "@bindir@/enigma2_pre_start.sh" ]; then
 		"@bindir@/enigma2_pre_start.sh"
