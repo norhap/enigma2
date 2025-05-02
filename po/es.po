@@ -4027,7 +4027,7 @@ msgid "Enable Filtering"
 msgstr "Habilitar filtrado"
 
 msgid "Enable filtering in SingleEPG"
-msgstr "Habilitar filtrado en EPGSimple"
+msgstr "Habilitar filtrado en EPG Simple"
 
 msgid "Enable Quad PiP"
 msgstr "Habilitar Quad PiP"
@@ -4048,7 +4048,7 @@ msgstr ""
 "Puede usar este receptor solo en modo cliente usando la lista de canales del servidor, temporizadores y EPG."
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
-msgstr "Habilite un intervalo de tiempo para filtrar eventos en EPGSimple usando el botón 'STOP'."
+msgstr "Habilite un intervalo de tiempo para filtrar eventos en EPG Simple usando el botón 'STOP'."
 
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
@@ -11028,6 +11028,9 @@ msgstr "idioma original"
 msgid "Original language"
 msgstr "Lenguaje original"
 
+msgid "Original timespan values"
+msgstr "Valores transcurridos de tiempo originales"
+
 msgid "pass"
 msgstr "pasar"
 
@@ -17927,6 +17930,9 @@ msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo e
 
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
 msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
+
+msgid "While filtering is active, you can temporarily adjust the filter interval using keys 1/4 and 3/6. If you want your changes to overwrite the original values, disable this setting. Otherwise, the original values will be restored when the EPG is closed."
+msgstr "Mientras el filtrado esté activo, puede ajustar temporalmente el intervalo del filtro con las teclas 1/4 y 3/6. Si desea que los cambios sobrescriban los valores originales, desactive esta opción. De lo contrario, los valores originales se restaurarán al cerrar la EPG."
 
 msgid "Wake the receiver from standby when selected wake command is sent from the TV."
 msgstr "Despierta el receptor desde el modo de espera cuando se envía el comando de activación seleccionado desde el televisor."
