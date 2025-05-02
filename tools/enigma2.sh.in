@@ -16,6 +16,12 @@ if [ -d /home/root ]; then
 	cd
 fi
 
+# Create debug first run
+if [ "$(grep -i config.misc.firstrun=False /etc/enigma2/settings)" == "" ]; then
+	DEBUG_LVL=4
+	ENIGMA_DEBUG_TIME=1
+fi
+
 if [ -f "@bindir@/libreader" ]; then
 	COUNT=`ps -ef | grep libreader | grep -v "grep" | wc -l`
 	if [ "${COUNT}" -eq "0" ];then
@@ -40,12 +46,6 @@ if [ -f /proc/stb/fp/nec_ir ]; then
 	[ -f /sys/class/remote/amremote/protocol ] && echo "2" > /sys/class/remote/amremote/protocol
 fi
 
-# Create debug first run
-if [ "$(grep -i config.misc.firstrun=False /etc/enigma2/settings)" == "" ]; then
-	DEBUG_LVL=4
-	ENIGMA_DEBUG_TIME=1
-fi
-
 # Create and set log folder
 DEBUGDIR="/home/root/logs/"
 if [ ! -d $DEBUGDIR ] ; then mkdir -p $DEBUGDIR; fi
@@ -68,7 +68,7 @@ fi
 
 # Create debug first run
 if [ -n "$DEBUG_LVL" ]; then
-	(LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL ENIGMA_DEBUG_TIME=$ENIGMA_DEBUG_TIME @bindir@/enigma2 &> ${DEBUGDIR}$(date +%Y%m%d-%H%M%S)-enigma2-debug-first-run.log) &
+	(LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL ENIGMA_DEBUG_TIME=$ENIGMA_DEBUG_TIME @bindir@/enigma2 &> ${DEBUGDIR}$(date +%Y%m%d-%H%M%S)_enigma2_debug_first_run.log) &
 fi
 
 enigma2pid=$!
