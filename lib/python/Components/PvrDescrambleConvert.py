@@ -374,7 +374,7 @@ class PVRDescrambleConvert():
 
 		begin = int(time())
 		end = begin + 3600  # dummy
-		#end = begin + int(length) + 2
+		# end = begin + int(length) + 2
 		description = ""
 		eventid = None
 
