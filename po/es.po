@@ -4083,8 +4083,8 @@ msgstr "Fin del \"después del evento\" intervalo de tiempo"
 msgid "End of timespan"
 msgstr "Final de intervalo de tiempo"
 
-msgid "End of the time interval within which an events must start in order to be displayed."
-msgstr "Fin del intervalo de tiempo dentro del cual un evento debe comenzar para ser mostrado."
+msgid "End of the time interval during which events must begin to be displayed. If the filter is active, use keys 3 and 6 to adjust the end time, and key 0 to save."
+msgstr "Fin del intervalo de tiempo durante el cual deben empezar a mostrarse los eventos. Si el filtro está activo, utilice las teclas 3 y 6 para ajustar la hora de finalización y la tecla 0 para guardar."
 
 msgid "End timeshift"
 msgstr "Final timeshift"
@@ -4161,6 +4161,9 @@ msgstr "Ingrese la frecuencia de su oscilador local de banda baja. Para obtener 
 
 msgid "Enter your subscription code, the unified code for trial is 15."
 msgstr "Ingrese su código de suscripción, el código unificado para probar es 15."
+
+msgid "EPG filter switching"
+msgstr "Cambio de filtro EPG"
 
 msgid "Equal to"
 msgstr "Igual a"
@@ -9125,8 +9128,8 @@ msgstr "Empezar desde el principio"
 msgid "Start instant recording"
 msgstr "Comenzar grabación instantánea"
 
-msgid "Start of the time interval within which an events must start in order to be displayed."
-msgstr "Inicio del intervalo de tiempo dentro del cual un evento debe comenzar para ser mostrado."
+msgid "Start of the time interval during which events must begin to be displayed. If the filter is active, use keys 1 and 4 to adjust the start time, and key 0 to save."
+msgstr "Inicio del intervalo de tiempo durante el cual deben empezar a mostrarse los eventos. Si el filtro está activo, utilice las teclas 1 y 4 para ajustar la hora de inicio y la tecla 0 para guardar."
 
 msgid "Start offline decode"
 msgstr "Comenzar decodificado offline"
@@ -10312,6 +10315,9 @@ msgstr "Usar como PiP si es posible"
 
 msgid "Use circular LNB"
 msgstr "Usar un LNB circular"
+
+msgid "Use current filter values as default"
+msgstr "Utilice los valores de filtro actuales por defecto"
 
 msgid "Use fastscan channel names"
 msgstr "Utilice los nombres de los canales de búsqueda rápida"
@@ -13601,6 +13607,9 @@ msgstr "Seleccione la ruta donde se guardará autotimer_search.log"
 
 msgid "Select type of Filter"
 msgstr "Seleccionar tipo de filtro"
+
+msgid "Set %s as default?"
+msgstr "¿Establecer %s por defecto?"
 
 msgid "Set End Time"
 msgstr "Establecer hora de finalización"
@@ -17930,9 +17939,6 @@ msgstr "Cuando está habilitado, el receptor volverá automáticamente al modo e
 
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
 msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
-
-msgid "While filtering is active, you can temporarily adjust the filter interval using keys 1/4 and 3/6. If you want your changes to overwrite the original values, disable this setting. Otherwise, the original values will be restored when the EPG is closed."
-msgstr "Mientras el filtrado esté activo, puede ajustar temporalmente el intervalo del filtro con las teclas 1/4 y 3/6. Si desea que los cambios sobrescriban los valores originales, desactive esta opción. De lo contrario, los valores originales se restaurarán al cerrar la EPG."
 
 msgid "Wake the receiver from standby when selected wake command is sent from the TV."
 msgstr "Despierta el receptor desde el modo de espera cuando se envía el comando de activación seleccionado desde el televisor."
