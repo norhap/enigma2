@@ -210,6 +210,7 @@ typedef long time_t;
 %immutable eTuxtxtApp::appClosed;
 %immutable iDVBChannel::receivedTsidOnid;
 %immutable eDVBSatelliteEquipmentControl::slotRotorSatPosChanged;
+%immutable eStreamServer::streamStatusChanged;
 %include <lib/base/message.h>
 %include <lib/base/internetcheck.h>
 %include <lib/driver/rc.h>
@@ -339,6 +340,12 @@ public:
 %template(PSignal2VII) PSignal2<void,int,int>;
 
 %typemap(out) PSignal2VII {
+	$1 = $input->get();
+}
+
+%template(PSignal2VIS) PSignal2<void,int,const char *c>;
+
+%typemap(out) PSignal2VIS {
 	$1 = $input->get();
 }
 
