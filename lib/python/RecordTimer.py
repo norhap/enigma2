@@ -12,7 +12,7 @@ from timer import Timer, TimerEntry
 from ServiceReference import ServiceReference, isPlayableForCur
 from Components.config import config
 from Components.Harddisk import findMountPoint
-from Components.SystemInfo import SystemInfo, MODEL
+from Components.SystemInfo import BoxInfo, SystemInfo, MODEL
 from Components.TimerSanityCheck import TimerSanityCheck
 import Components.ParentalControl
 from Components.UsageConfig import defaultMoviePath, preferredInstantRecordPath, preferredTimerPath
@@ -892,10 +892,9 @@ class RecordTimerEntry(TimerEntry, object):
 					if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.recording_frontend_priority_dvbs.value != "-2":
 						if config.usage.recording_frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 							self.setAdvancedPriorityFrontend = config.usage.recording_frontend_priority_dvbs.value
-		if self.descramble or not self.record_ecm:
-			if cihelper.ServiceIsAssigned(self.service_ref.ref):
-				self.descramble = False
-				self.record_ecm = True
+		if (self.descramble or not self.record_ecm) and BoxInfo.getItem("CanDescrambleInStandby") and config.recording.standbyDescramble.value and cihelper.ServiceIsAssigned(self.service_ref.ref):
+			self.descramble = False
+			self.record_ecm = True
 		self.needChangePriorityFrontend = self.setAdvancedPriorityFrontend is not None or config.usage.recording_frontend_priority.value != "-2" and config.usage.recording_frontend_priority.value != config.usage.frontend_priority.value
 		self.change_frontend = False
 		self.InfoBarInstance = Screens.InfoBar.InfoBar.instance
