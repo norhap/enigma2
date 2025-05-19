@@ -9665,8 +9665,8 @@ msgstr "Esta opción le permite potenciar los tonos verdes en la imagen."
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr "Esta opción te permite cambiar la posición del altavoz."
 
-msgid "This option allows you to choose between the two available channel lists."
-msgstr "Esta opción le permite elegir entre las dos listas de canales disponibles."
+msgid "This option allows you to choose between the three available channel lists."
+msgstr "Esta opción le permite elegir entre las tres listas de canales disponibles."
 
 msgid "This option allows you to configure the Colordepth for UHD"
 msgstr "Esta opción le permite configurar la profundidad de color para UHD"
