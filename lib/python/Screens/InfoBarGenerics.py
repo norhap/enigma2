@@ -2928,7 +2928,7 @@ class InfoBarInstantRecord:
 		if serviceRefIPToSAT():
 			self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
 			return
-		if event is not None:
+		if event is not None and not RecordTimerEntry.StateEnded:
 			end = begin + self.currentEventTime()  # time now + remaining event time: instant record with (stop after current event).
 			if limitEvent:
 				message = _("Recording timer has been set")

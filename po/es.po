@@ -7582,6 +7582,9 @@ msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d M
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
 
+msgid "Recording is not possible"
+msgstr "No es posible grabar"
+
 msgid "Recording set to (24 hours)"
 msgstr "Se ha establecido grabación a (24 horas)"
 
@@ -19237,9 +19240,6 @@ msgstr ""
 
 msgid "Player:"
 msgstr "Reproductor:"
-
-msgid "IPTV - recording with ServiceApp enabled - no possible recording"
-msgstr "IPTV - Grabación con ServiceApp habilitado - no es posible grabar"
 
 msgid "Not installed"
 msgstr "No instalado"

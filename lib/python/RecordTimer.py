@@ -42,6 +42,7 @@ MODULE_NAME = __name__.split(".")[-1]
 #
 writeLock = Lock()
 wasrecLock = Lock()
+player = ("ServiceApp" if isPluginInstalled("ServiceApp") else "ServiceHisilicon" if isPluginInstalled("ServiceHisilicon") else "ServiceMP3")
 
 
 # Parses an event, and gives out a (begin, end, name, duration, eit)-tuple.
@@ -350,10 +351,10 @@ class RecordTimer(Timer):
 			AddPopup(_("Recording failed: Storage device free size %d MB.") % getRecordingStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer for servicetype 4097,
 		# and ServiceApp has player enabled, then skip recording.
-		if w.service_ref.ref.toString().startswith("4097:") and isPluginInstalled("ServiceApp") and config.plugins.serviceapp.servicemp3.replace.value or w.service_ref.ref.toString()[:4] in ("5001", "5002"):
-			print("[RecordTimer][doActivate] ServiceApp enabled - recording disabled")
-			w.state = RecordTimerEntry.StateEnded
-			AddPopup(f"Stream {w.service_ref.ref.toString()[:4]} " + _("IPTV - recording with ServiceApp enabled - no possible recording"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
+		if config.plugins.serviceapp.servicemp3.replace.value or player == "ServiceHisilicon":
+			if w.service_ref.ref.toString().startswith("4097:") or w.service_ref.ref.toString()[:4] in ("5001", "5002"):
+				w.state = RecordTimerEntry.StateEnded
+				AddPopup("Stream IPTV " + w.service_ref.ref.toString()[:4] + ": " + _("Recording is not possible") + " " + player + " " + _("enabled"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer which has already passed,
 		# simply abort the timer. don't run trough all the stages.
 		elif w.shouldSkip():
