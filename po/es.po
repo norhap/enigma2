@@ -5662,6 +5662,9 @@ msgstr "Isla de Man"
 msgid "Israel"
 msgstr "Israel"
 
+msgid "It is not possible to record with"
+msgstr "No es posible grabar con"
+
 msgid ""
 "It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
 "\n"
@@ -7581,9 +7584,6 @@ msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d M
 
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
-
-msgid "Recording is not possible"
-msgstr "No es posible grabar"
 
 msgid "Recording set to (24 hours)"
 msgstr "Se ha establecido grabación a (24 horas)"

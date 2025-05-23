@@ -354,7 +354,7 @@ class RecordTimer(Timer):
 		if config.plugins.serviceapp.servicemp3.replace.value or player == "ServiceHisilicon":
 			if w.service_ref.ref.toString().startswith("4097:") or w.service_ref.ref.toString()[:4] in ("5001", "5002"):
 				w.state = RecordTimerEntry.StateEnded
-				AddPopup("Stream IPTV " + w.service_ref.ref.toString()[:4] + ": " + _("Recording is not possible") + " " + player + " " + _("enabled"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
+				AddPopup("Stream IPTV " + w.service_ref.ref.toString()[:4] + ": " + _("It is not possible to record with") + " " + player + " " + _("enabled"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer which has already passed,
 		# simply abort the timer. don't run trough all the stages.
 		elif w.shouldSkip():
