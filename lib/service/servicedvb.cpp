@@ -2098,7 +2098,7 @@ int eDVBServicePlay::getInfo(int w)
 		return ((const eServiceReferenceDVB&)m_reference).getTransportStreamID().get();
 	case sNamespace:
 		// use origiginal namespace
-		if (m_reference.isStreamRelay){
+		if (!m_reference.compareSref.empty()){
 			eServiceReferenceDVB m_parsed_ref = eServiceReferenceDVB(m_reference.compareSref);
 			if (m_parsed_ref.valid())
 			{
@@ -2179,7 +2179,7 @@ std::string eDVBServicePlay::getInfoString(int w)
 
 ePtr<iDVBTransponderData> eDVBServicePlay::getTransponderData()
 {
-	if(m_reference.isStreamRelay)
+	if(!m_reference.compareSref.empty())
 	{
 		eServiceReferenceDVB srRef = eServiceReferenceDVB(m_reference.compareSref);
 		if (srRef.valid())
