@@ -351,13 +351,18 @@ class RecordTimer(Timer):
 			AddPopup(_("Recording failed: Storage device free size %d MB.") % getRecordingStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer for servicetype 4097,
 		# and ServiceApp has player enabled, then skip recording.
-		if config.plugins.serviceapp.servicemp3.replace.value or player == "ServiceHisilicon":
-			if w.service_ref.ref.toString().startswith("4097:") or w.service_ref.ref.toString()[:4] in ("5001", "5002"):
+		if "%3a/" in w.service_ref.ref.toString():
+			message = "Stream IPTV " + w.service_ref.ref.toString()[:4] + " " + _("It is not possible to record with") + " " + player + " " + _("enabled")
+			if player == "ServiceApp":
+				if config.plugins.serviceapp.servicemp3.replace.value:
+					w.state = RecordTimerEntry.StateEnded
+					AddPopup(message, type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
+			elif player == "ServiceHisilicon":
 				w.state = RecordTimerEntry.StateEnded
-				AddPopup("Stream IPTV " + w.service_ref.ref.toString()[:4] + ": " + _("It is not possible to record with") + " " + player + " " + _("enabled"), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
+				AddPopup(message, type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer which has already passed,
 		# simply abort the timer. don't run trough all the stages.
-		elif w.shouldSkip():
+		if w.shouldSkip():
 			w.state = RecordTimerEntry.StateEnded
 		else:
 			# when active returns true, this means "accepted".
