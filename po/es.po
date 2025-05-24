@@ -6474,11 +6474,11 @@ msgstr "Sin retardo"
 msgid "No description available."
 msgstr "Sin descripción disponible."
 
+msgid "No event info found - record (24 hours)"
+msgstr "No se encontró información del evento - grabar (24 horas)"
+
 msgid "%s connected successfully. No playable files on this medium found!"
 msgstr "%s conectado con éxito. ¡No se encontraron archivos reproducibles en este medio!"
-
-msgid "No event info found, recording set to (24 hours)"
-msgstr "No se encontró información del evento, grabación establecida a (24 horas)"
 
 msgid "No fast winding possible yet... but you can use the number buttons to skip forward/backward!"
 msgstr "No es posible el avance rápido aún… pero puede usar los botones de números para pasar delante/atrás!"

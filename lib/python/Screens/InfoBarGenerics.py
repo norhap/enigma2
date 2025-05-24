@@ -2919,7 +2919,7 @@ class InfoBarInstantRecord:
 
 	def startInstantRecording(self, limitEvent=False):
 		begin = int(time())
-		end = begin + 3600		# dummy
+		end = begin + self.currentEventTime()  # time now + remaining event time: instant record with (stop after current event).
 		name = _("Instant record")
 		info = {}
 		self.getProgramInfoAndEvent(info, name)
@@ -2928,23 +2928,17 @@ class InfoBarInstantRecord:
 		if serviceRefIPToSAT():
 			self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
 			return
-		if event is not None and not RecordTimerEntry.StateEnded:
-			end = begin + self.currentEventTime()  # time now + remaining event time: instant record with (stop after current event).
+		if event and not RecordTimerEntry.StateEnded:
 			if limitEvent:
-				message = _("Recording timer has been set")
-				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
-			else:
-				message = _("Recording set to (24 hours)")
+				message = _("Recording timer has been set") + ":\n\n" + info["name"]
 				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
 		else:
-			service = self.session.nav.getCurrentlyPlayingServiceReference()
-			if service and service.toString().startswith("1:"):
-				if limitEvent:
-					message = _("Recording timer has been set")
-					AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
-				else:
-					message = _("No event info found, recording set to (24 hours)")
-					AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
+			if limitEvent:
+				message = _("Recording timer has been set") + ":\n\n" + info["name"]
+				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
+			else:
+				message = _("Recording set to (24 hours)")
+				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
 
 		if isinstance(serviceref, eServiceReference):
 			serviceref = ServiceReference(serviceref)
@@ -3136,7 +3130,7 @@ class InfoBarInstantRecord:
 			info = {}
 			self.getProgramInfoAndEvent(info, "")
 			event_entry = ((_("Add recording (stop after current event)"), "event"),)
-			common = ((_("Add recording set to (24 hours)"), "indefinitely"),
+			common = ((_("No event info found - record (24 hours)") if not info["name"] else _("Add recording set to (24 hours)"), "indefinitely"),
 					(_("Add recording (enter recording duration)"), "manualduration"),
 					(_("Add recording (enter recording endtime)"), "manualendtime"),)
 			if info["event"]:
