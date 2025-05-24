@@ -37,11 +37,15 @@ class Navigation:
 		self.pnav = pNavigation()
 		self.pnav.m_event.get().append(self.dispatchEvent)
 		self.pnav.m_record_event.get().append(self.dispatchRecordEvent)
+		eStreamServer.getInstance().streamStatusChanged.get().append(self.streamStatusChangedCB)
 		self.event = []
 		self.record_event = []
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
+		self.indicatorRecordingsCount = None
+		self.anyRecordingsCount = None
+		self.realRecordingsCount = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
 		self.RecordTimer = RecordTimer.RecordTimer()
@@ -127,6 +131,9 @@ class Navigation:
 
 	def dispatchRecordEvent(self, rec_service, event):
 		# print "[Navigation] record_event", rec_service, event
+		self.anyRecordingsCount = None
+		self.indicatorRecordingsCount = None
+		self.realRecordingsCount = None
 		for x in self.record_event:
 			x(rec_service, event)
 
@@ -330,6 +337,22 @@ class Navigation:
 		if service and isinstance(service, iRecordableServicePtr):
 			ret = self.pnav and self.pnav.stopRecordService(service)
 		return ret
+
+	def streamStatusChangedCB(self, status, sref, host):
+		if "127.0.0.1" in host:  # Ignore local host.
+			return
+		print(f"[Navigation] Stream status changed: {status}, {sref}, {host}.")
+		if status == 0:
+			self.activeStreamings = [sref]  # TODO: Check if this is correct. Add support for multiple streams.
+		else:
+			self.activeStreamings = []
+
+		self.anyRecordingsCount = None
+		self.indicatorRecordingsCount = None
+		self.realRecordingsCount = None
+
+		for x in self.record_event:
+			x(None, iRecordableService.evStart if status == 0 else iRecordableService.evEnd)
 
 	def getRecordings(self, simulate=False, type=pNavigation.isAnyRecording):
 		recs = self.pnav and self.pnav.getRecordings(simulate)

@@ -2,9 +2,9 @@ name: enigma2
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ scarthgap ]
   pull_request:
-    branches: [ develop ]
+    branches: [ scarthgap ]
 
 jobs:
   build:

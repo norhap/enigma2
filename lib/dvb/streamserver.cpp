@@ -102,7 +102,7 @@ void eStreamClient::notifier(int what)
 					char *buffer = (char*)malloc(4096);
 					if (buffer)
 					{
-						struct passwd pwd;
+						struct passwd pwd = {};
 						struct passwd *pwdresult = NULL;
 						std::string crypt;
 						username = authentication.substr(0, pos);
@@ -110,13 +110,13 @@ void eStreamClient::notifier(int what)
 						getpwnam_r(username.c_str(), &pwd, buffer, 4096, &pwdresult);
 						if (pwdresult)
 						{
-							struct crypt_data cryptdata;
+							struct crypt_data cryptdata = {};
 							char *cryptresult = NULL;
 							cryptdata.initialized = 0;
 							crypt = pwd.pw_passwd;
 							if (crypt == "*" || crypt == "x")
 							{
-								struct spwd spwd;
+								struct spwd spwd = {};
 								struct spwd *spwdresult = NULL;
 								getspnam_r(username.c_str(), &spwd, buffer, 4096, &spwdresult);
 								if (spwdresult)
@@ -162,7 +162,7 @@ void eStreamClient::notifier(int what)
 				set_tcp_option(streamFd, TCP_USER_TIMEOUT, 10 * 1000);
 
 				if (serviceref.substr(0, 10) == "file?file=") /* convert openwebif stream reqeust back to serviceref */
-					serviceref = std::string("1:0:1:0:0:0:0:0:0:0:") + serviceref.substr(10);
+					serviceref = "1:0:1:0:0:0:0:0:0:0:" + serviceref.substr(10);
 				/* Strip session ID from URL if it exists, PLi streaming can not handle it */
 				pos = serviceref.find("&sessionid=");
 				if (pos != std::string::npos) {
@@ -175,7 +175,7 @@ void eStreamClient::notifier(int what)
 				pos = serviceref.find('?');
 				if (pos == std::string::npos)
 				{
-					parent->startStream(serviceref);
+					parent->startStream(serviceref, m_remotehost);
 
 					eDebug("[eDVBServiceStream] stream ref: %s", serviceref.c_str());
 					if (eDVBServiceStream::start(serviceref.c_str(), streamFd) >= 0)
@@ -200,7 +200,7 @@ void eStreamClient::notifier(int what)
 					if (posdur != std::string::npos)
 					{
 
-						parent->startStream(serviceref);
+						parent->startStream(serviceref, m_remotehost);
 
 						if (eDVBServiceStream::start(serviceref.c_str(), streamFd) >= 0)
 						{
@@ -226,7 +226,8 @@ void eStreamClient::notifier(int what)
 						int interlaced = 0;
 						int aspectratio = 0;
 						int buffersize;
-						std::string vcodec, acodec;
+						std::string vcodec = "h264";
+						std::string acodec = "aac";
 
 						sscanf(request.substr(pos).c_str(), "&bitrate=%d", &bitrate);
 						pos = request.find("&width=");
@@ -363,14 +364,14 @@ void eStreamServer::connectionLost(eStreamClient *client)
 			serviceref = it->getDVBService().toString();
         std::string client = it->getRemoteHost();
 		clients.erase(it);
-		streamStatusChanged(2,serviceref.c_str());
+		streamStatusChanged(2,serviceref.c_str(), client.c_str());
 		eNavigation::getInstance()->removeStreamService(serviceref);
 	}
 }
 
-void eStreamServer::startStream(const std::string serviceref)
+void eStreamServer::startStream(const std::string serviceref, const std::string remotehost)
 {
-	streamStatusChanged(0,serviceref.c_str());
+	streamStatusChanged(0,serviceref.c_str(), remotehost.c_str());
 	eNavigation::getInstance()->addStreamService(serviceref);
 }
 
@@ -379,7 +380,7 @@ void eStreamServer::stopStream()
 	eSmartPtrList<eStreamClient>::iterator it = clients.begin();
 	if (it != clients.end())
 	{
-		streamStatusChanged(1,it->getServiceref().c_str());
+		streamStatusChanged(1,it->getServiceref().c_str(), it->getRemoteHost().c_str());
 		eNavigation::getInstance()->removeStreamService(it->getServiceref());
 		it->stopStream();
 	}
@@ -478,8 +479,6 @@ PyObject *eStreamServer::getConnectedClientDetails(int index)
 	return ret;
 
 }
-
-
 
 PyObject *eStreamServer::getConnectedClients()
 {
