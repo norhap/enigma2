@@ -2928,17 +2928,6 @@ class InfoBarInstantRecord:
 		if serviceRefIPToSAT():
 			self.session.open(MessageBox, _("Channel in IPToSAT:\n\nSelect an IPTV channel to record."), MessageBox.TYPE_ERROR)
 			return
-		if event and not RecordTimerEntry.StateEnded:
-			if limitEvent:
-				message = _("Recording timer has been set") + ":\n\n" + info["name"]
-				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
-		else:
-			if limitEvent:
-				message = _("Recording timer has been set") + ":\n\n" + info["name"]
-				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
-			else:
-				message = _("Recording set to (24 hours)")
-				AddNotification(MessageBox, message, type=MessageBox.TYPE_INFO, timeout=10)
 
 		if isinstance(serviceref, eServiceReference):
 			serviceref = ServiceReference(serviceref)
