@@ -10861,7 +10861,7 @@ msgid "menu"
 msgstr "menú"
 
 msgid "mins"
-msgstr "mins"
+msgstr "minutos"
 
 msgid "month"
 msgstr "mes"

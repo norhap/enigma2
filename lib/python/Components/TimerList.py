@@ -56,7 +56,8 @@ class TimerList(GUIComponent):
 				extra_text = _("(ZAP)")
 			text = repeatedtext + ((" %s %s") % (begin[1], extra_text))
 		else:
-			text = repeatedtext + ((" %s ... %s (%d " + _("mins") + ")") % (begin[1], FuzzyTime(timer.end)[1], (timer.end - timer.begin) // 60))
+			coding = " %s...1 " + _("day") + "...%s (%d " + _("mins") + ")" if (timer.end - timer.begin) // 60 == 1440 else " %s ... %s (%d " + _("mins") + ")"
+			text = repeatedtext + coding % (begin[1], FuzzyTime(timer.end)[1], (timer.end - timer.begin) // 60)
 		icon = None
 		if not processed and (not timer.disabled or (timer.repeated and timer.isRunning() and not timer.justplay)):
 			if timer.state == TimerEntry.StateWaiting:
