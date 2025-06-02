@@ -235,19 +235,19 @@ class Session:
 
 	def processDelay(self):
 		callback = self.current_dialog.callback
+		if hasattr(self.current_dialog, "returnValue"):
+			retval = self.current_dialog.returnValue
 
-		retval = self.current_dialog.returnValue
+			if self.current_dialog.isTmp:
+				self.current_dialog.doClose()
+				# dump(self.current_dialog)
+				del self.current_dialog
+			else:
+				del self.current_dialog.callback
 
-		if self.current_dialog.isTmp:
-			self.current_dialog.doClose()
-			# dump(self.current_dialog)
-			del self.current_dialog
-		else:
-			del self.current_dialog.callback
-
-		self.popCurrent()
-		if callback is not None:
-			callback(*retval)
+			self.popCurrent()
+			if callback is not None:
+				callback(*retval)
 
 	def execBegin(self, first=True, do_show=True):
 		try:
