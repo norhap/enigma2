@@ -407,6 +407,12 @@ msgstr "y seleccione el canal anterior"
 msgid "are you sure to cancel all changes"
 msgstr "estás seguro de cancelar todos los cambios"
 
+msgid "Arctic"
+msgstr "Ártico"
+
+msgid "Atlantic"
+msgstr "Atlántico"
+
 msgid "arts/culture (without music, general)"
 msgstr "arte / cultura (sin música, general)"
 
@@ -1841,6 +1847,12 @@ msgstr "Habilite para mostrar todas las opciones de configuración Verdadero/Fal
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr "Habilitar zapping con CH +/-, B +/-, P +/-"
 
+msgid "Enter IP to scan..."
+msgstr "Ingrese la IP a escanear..."
+
+msgid "Enter user and password for host: "
+msgstr "Ingrese usuario y contraseña para el host: "
+
 msgid "External subtitle color"
 msgstr "Color de los subtítulos externos"
 
@@ -3175,11 +3187,14 @@ msgstr "Satélites conectados"
 msgid "Connected to"
 msgstr "Conectado a"
 
+msgid "CPU rating"
+msgstr "Calificación CPU"
+
+msgid "Close the screen"
+msgstr "Cerrar esta pantalla"
+
 msgid "Connected transcoding, limit - no PiP!"
 msgstr "Transcodificado conectado, límite - no PiP!"
-
-msgid "Service type 4097 incorrect for PiP!"
-msgstr "Tipo de canal 4097 incorrecto para PiP!"
 
 msgid "Console"
 msgstr "Consola"
@@ -3725,6 +3740,9 @@ msgid ""
 msgstr ""
 "¿Realmente quiere descargar\n"
 "el plugin “%s”?"
+
+msgid "Do you want to enter a username and password for this host?\n"
+msgstr "Desea ingresar un nombre de usuario y contraseña para este host?\n"
 
 msgid "Do you really want to exit?"
 msgstr "¿Realmente quiere salir?"
@@ -4322,6 +4340,15 @@ msgstr "Seleccione \"Sí\" para mostrar este programa en Plugins."
 
 msgid "Device name"
 msgstr "Nombre dispositivo"
+
+msgid "Delete Language(s)"
+msgstr "Eliminar Lenguaje(s)"
+
+msgid "Delay start http(s) stream"
+msgstr "Retraso en el inicio de stream http(s)"
+
+msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
+msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams http(s), por ejemplo conectar un tuner remoto con sistema complejo tipo DiSEqC."
 
 msgid "Enter a new name for this device."
 msgstr "Introduzca un nuevo nombre para este dispositivo."
@@ -4984,6 +5011,18 @@ msgstr "Incluso si la TV tiene otra entrada activa"
 
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr "Si se establece en 'Sí', se enviarán los mismos comandos al televisor para los eventos en modo espera profundo y los eventos de modo reposo regulares."
+
+msgid "If set to 'yes', it will display 'languages' packs and 'PO' in browser'."
+msgstr "Si se establece en 'sí', mostrará los paquetes de 'idiomas' y 'PO' en el navegador'."
+
+msgid "If set to 'yes' it will show the 'SRC' packages in browser."
+msgstr "Si se establece en 'sí', mostrará los paquetes 'SRC' en el navegador."
+
+msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
+msgstr "Si se establece en 'sí', le permite usar Timeshift con plugins de audio alternativos."
+
+msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
+msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor para los eventos de espera profunda que se envían durante los eventos de espera normales."
 
 msgid "Input scroll position"
 msgstr "Posición entrada desplazamiento"
@@ -10743,14 +10782,8 @@ msgstr "Instalar picons lcd en"
 msgid "Show packages languages"
 msgstr "Mostrar paquetes de idiomas"
 
-msgid "If set to 'yes', it will display 'languages' packs and 'PO' in browser'."
-msgstr "Si se establece en 'sí', mostrará los paquetes de 'idiomas' y 'PO' en el navegador'."
-
 msgid "Show source packages"
 msgstr "Mostrar paquetes fuente"
-
-msgid "If set to 'yes' it will show the 'SRC' packages in browser."
-msgstr "Si se establece en 'sí', mostrará los paquetes 'SRC' en el navegador."
 
 msgid "repeated"
 msgstr "repetido"
@@ -12002,9 +12035,6 @@ msgstr "Mostrar advertencia al detener timeshift"
 msgid "Skip jumping to live TV while timeshifting with plugins"
 msgstr "Salta a la TV en vivo mientras cambias de tiempo con plugins"
 
-msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
-msgstr "Si se establece en 'sí', le permite usar Timeshift con plugins de audio alternativos."
-
 msgid "Slow motion speeds"
 msgstr "Velocidad de cámara lenta"
 
@@ -12669,18 +12699,8 @@ msgstr ""
 "Gracias por usar el asistente.\n"
 "Por favor, pulsa OK para continuar."
 
-msgid ""
-"Welcome.\n"
-"\n"
-"If you want to connect your [BRANDMODEL] to the Internet, this wizard will guide you through the basic network setup.\n"
-"\n"
-"Press OK to start configuring your network."
-msgstr ""
-"Bienvenido.\n"
-"\n"
-"Si quieres conectar su [BRANDMODEL] a Internet, este asistente te guiará por el ajuste básico de red.\n"
-"\n"
-"Pulsa OK para configurar su red."
+msgid "Welcome.\n\nIf you want to connect your [BRANDMODEL] to the Internet, this wizard will guide you through the basic network setup.\n\nPress OK to start configuring your network."
+msgstr "Bienvenido.\n\nSi quieres conectar su [BRANDMODEL] a Internet, este asistente te guiará por el ajuste básico de red.\n\nPulsa OK para configurar su red."
 
 msgid "Wireless network connection setup"
 msgstr "Configure conexión de red inalámbrica"
@@ -13605,6 +13625,9 @@ msgstr "Seleccione la ruta donde se guardará autotimer_search.log"
 msgid "Select type of Filter"
 msgstr "Seleccionar tipo de filtro"
 
+msgid "Service type 4097 incorrect for PiP!"
+msgstr "Tipo de canal 4097 incorrecto para PiP!"
+
 msgid "Set %s as default?"
 msgstr "¿Establecer %s por defecto?"
 
@@ -14255,9 +14278,6 @@ msgstr "Navegador de Red Local"
 msgid "Convert ext3 filesystem to ext4"
 msgstr "Convertir sistema de archivos ext3 a ext4"
 
-msgid "Do you want to enter a username and password for this host?\n"
-msgstr "Desea ingresar un nombre de usuario y contraseña para este host?\n"
-
 msgid "Please wait while removing your network mount..."
 msgstr "Espere mientras se elimina su montaje de red..."
 
@@ -14639,12 +14659,6 @@ msgstr "Administrador de usuarios"
 
 msgid "Press OK to edit selected settings."
 msgstr "Pulse OK para editar las configuración seleccionada."
-
-msgid "Enter user and password for host: "
-msgstr "Ingrese usuario y contraseña para el host: "
-
-msgid "Enter IP to scan..."
-msgstr "Ingrese la IP a escanear..."
 
 msgid "Scan NFS share"
 msgstr "Búsqueda Contenido NFS"
@@ -17925,9 +17939,6 @@ msgstr "Cuando el receptor se despierta del modo de espera o del modo de espera 
 msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
 msgstr "Algunos televisores no se despiertan del modo de espera cuando reciben el comando 'Vista de imagen activada'. Si este es el caso, intente el comando 'Vista de texto activada' en su lugar."
 
-msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
-msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor para los eventos de espera profunda que se envían durante los eventos de espera normales."
-
 msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
 msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
 
@@ -18153,12 +18164,6 @@ msgstr "%d DMIPS con %d cores"
 
 msgid "%d DMIPS per core"
 msgstr "%d DMIPS por cada core"
-
-msgid "CPU rating"
-msgstr "Calificación CPU"
-
-msgid "Close the screen"
-msgstr "Cerrar esta pantalla"
 
 msgid "Refresh the screen"
 msgstr "Actualizar esta pantalla"
@@ -19120,15 +19125,6 @@ msgstr "¿Quieres detener y eliminar estas grabaciones?"
 msgid "Add Language"
 msgstr "Añadir Lenguaje"
 
-msgid "Delete Language(s)"
-msgstr "Eliminar Lenguaje(s)"
-
-msgid "Delay start http(s) stream"
-msgstr "Retraso en el inicio de stream http(s)"
-
-msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
-msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams http(s), por ejemplo conectar un tuner remoto con sistema complejo tipo DiSEqC."
-
 msgid "[ActionMap] Missing actions in keymap, missing context in this list ->'%s' for mapto='%s'."
 msgstr "[ActionMap] Faltan acciones en el mapa de teclas, falta contexto en esta lista ->'%s' para mapto='%s'."
 
@@ -19270,12 +19266,6 @@ msgstr "Pacífico"
 
 msgid "Indian"
 msgstr "India"
-
-msgid "Arctic"
-msgstr "Ártico"
-
-msgid "Atlantic"
-msgstr "Atlántico"
 
 msgid "< PREV NEXT >  Move"
 msgstr "< PREV NEXT >  Mover"
