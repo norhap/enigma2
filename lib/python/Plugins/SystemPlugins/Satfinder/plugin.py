@@ -89,7 +89,10 @@ class Satfinder(ScanSetup):
 			self.session.open(TryQuitMainloop, 3)
 
 	def extras(self):
-		eConsoleAppContainer().execute("opkg update")
+		if not isPluginInstalled("AutoBouquetsMaker"):
+			from time import sleep
+			eConsoleAppContainer().execute("opkg update")
+			sleep(1)
 
 		def installAutoBouquetsMaker(answer=False):
 			if answer:
