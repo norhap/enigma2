@@ -501,7 +501,7 @@ InitUsageConfig()
 getFileUsage()
 
 enigma.eProfileWrite("InitPvrDescrambleConvert")
-from Components.PvrDescrambleConvert import pvr_descramble_convert
+from Components.PvrDescrambleConvert import pvr_descramble_convert  # noqa: E402, F401
 
 
 def runScreenTest():
