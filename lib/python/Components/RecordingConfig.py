@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from time import localtime, mktime
+from enigma import pNavigation
 from Components.config import ConfigEnableDisable, ConfigClock, ConfigInteger, ConfigNumber, ConfigYesNo, ConfigSubsection, ConfigSelection, config
 from Components.SystemInfo import BoxInfo
 
