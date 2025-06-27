@@ -10,7 +10,7 @@ from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config
-from Components.SystemInfo import BoxInfo
+from Components.SystemInfo import SystemInfo, BoxInfo
 from Tools.Directories import fileContains, fileWriteLines
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -349,10 +349,14 @@ class Network:
 											if zerotier:
 												name = zerotiername
 					else:
-						if zerotier:
-							name = zerotiername
-						if len(self.lan_interfaces):
-							name = lanname
+						if SystemInfo["hasKexec"] and not exists("/STARTUP.cpio.gz"):
+							if len(self.lan_interfaces):
+								name = zerotiername if zerotier else lanname
+						else:
+							if zerotier:
+								name = zerotiername
+							if len(self.lan_interfaces):
+								name = lanname
 						if not name:
 							name = lanname
 				self.lan_interfaces.append(iface)
