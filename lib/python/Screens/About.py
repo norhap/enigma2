@@ -323,25 +323,29 @@ class About(Screen):
 			AboutText += _("No Display") + "\n"
 		servicemp3 = "ServiceMP3"
 		servicehisilicon = "ServiceHisilicon"
-		exteplayer3 = "ServiceApp-ExtEplayer3"
-		gstplayer = "ServiceApp-GstPlayer"
+		exteplayer3 = "ServiceExtEplayer3"
+		gstplayer = "ServiceGstPlayer"
 		if isPluginInstalled("ServiceApp"):
-			if isPluginInstalled("ServiceMP3"):
+			if not isPluginInstalled("ServiceHisilicon"):
 				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
 					player = f"{exteplayer3}"
-				else:
+				elif config.plugins.serviceapp.servicemp3.replace.value:
 					player = f"{gstplayer}"
-				if not config.plugins.serviceapp.servicemp3.replace.value:
+				elif isPluginInstalled("ServiceMP3"):
 					player = f"{servicemp3}"
+				else:
+					player = _("ServiceApp (not actived)")
 			elif isPluginInstalled("ServiceHisilicon"):
 				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
 					player = f"{exteplayer3}"
-				else:
+				elif config.plugins.serviceapp.servicemp3.replace.value:
 					player = f"{gstplayer}"
-				if not config.plugins.serviceapp.servicemp3.replace.value:
+				else:
 					player = f"{servicehisilicon}"
+			elif isPluginInstalled("ServiceMP3"):
+				player = f"{servicemp3}"
 			else:
-				player = _("Not installed")
+				player = _("ServiceApp (not actived)")
 		else:
 			if isPluginInstalled("ServiceMP3"):
 				player = f"{servicemp3}"

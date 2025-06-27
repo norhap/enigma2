@@ -2958,8 +2958,10 @@ class InfoBarInstantRecord:
 					AddPopup(_("Could not record due to conflicting timer %s") % name, MessageBox.TYPE_INFO, timeout=5)
 			if serviceref:
 				AddPopup(_("Could not record due to invalid service %s") % serviceref, MessageBox.TYPE_INFO, timeout=5)
-			else:
+			elif isPluginInstalled("ServiceMP3"):
 				AddPopup(_("Could not record due to busy tuner"), MessageBox.TYPE_INFO, timeout=5)
+			else:
+				AddPopup(_("Recording could not be done because the serviceMP3 player is not installed") if not isPluginInstalled("ServiceApp") else _("It could not be recorded with the ServiceApp player"), MessageBox.TYPE_INFO, timeout=5)
 			recording.autoincrease = False
 
 	def isInstantRecordRunning(self):

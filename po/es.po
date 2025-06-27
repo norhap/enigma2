@@ -3265,6 +3265,9 @@ msgstr "No se pudo grabar por canal inválido %s"
 msgid "Could not record due to busy tuner"
 msgstr "No se pudo grabar debido a que el sintonizador está ocupado"
 
+msgid "Recording could not be done because the serviceMP3 player is not installed"
+msgstr "No se pudo grabar debido a que el reproductor serviceMP3 no está instalado"
+
 msgid "Country"
 msgstr "País"
 
@@ -5700,6 +5703,9 @@ msgstr "Isla de Man"
 
 msgid "Israel"
 msgstr "Israel"
+
+msgid "It could not be recorded with the ServiceApp player"
+msgstr "No se pudo grabar con el reproductor ServiceApp"
 
 msgid "It is not possible to record with"
 msgstr "No es posible grabar con"
@@ -8583,6 +8589,9 @@ msgid ""
 msgstr ""
 "Canal no disponible!\n"
 "Revise configuración del sintonizador!"
+
+msgid "ServiceApp (not actived)"
+msgstr "ServiceApp (no activado)"
 
 msgid "Servicename"
 msgstr "Nombre de canal"
