@@ -4666,14 +4666,6 @@ msgstr "Flasheando Imagen"
 msgid "Flashing image succesfull"
 msgstr "Flasheo de imagen con éxito"
 
-#, python-format
-msgid ""
-"Flashing image was not succesfull\n"
-"%s"
-msgstr ""
-"Flasheo de la imagen fallido\n"
-"%s"
-
 msgid "Following tasks will be done after you press OK!"
 msgstr "Las siguientes tareas se realizarán después de presionar OK!"
 
@@ -15816,12 +15808,8 @@ msgstr "Recuperando slots de imagen - Espere por favor..."
 msgid "Flashing image successful"
 msgstr "Flash imagen con éxito"
 
-msgid ""
-"Flashing image was not successful\n"
-"%s"
-msgstr ""
-"Flash imagen no tuvo éxito\n"
-"%s"
+msgid "Flashing image was not successful\n"
+msgstr "Flash imagen no tuvo éxito\n"
 
 msgid "Edit menu"
 msgstr "Editar menú"
