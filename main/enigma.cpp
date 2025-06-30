@@ -464,7 +464,7 @@ const char *getPlatform()
 
 int getE2Flags()
 {
-	return 3; // start/stop Audio = 1 | WebP = 2
+	return 1;
 }
 
 #include <malloc.h>
