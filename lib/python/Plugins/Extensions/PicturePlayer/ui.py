@@ -450,6 +450,12 @@ class Pic_Full_View(Screen):
 			"right": self.nextPic,
 			"showEventInfo": self.StartExif,
 			"contextMenu": self.KeyMenu,
+			"down": self.doNothing,
+			"up": self.doNothing,
+			"downUp": self.doNothing,
+			"upUp": self.doNothing,
+			"leftUp": self.doNothing,
+			"rightUp": self.doNothing,
 		}, -1)
 
 		self["point"] = Pixmap()
@@ -599,3 +605,6 @@ class Pic_Full_View(Screen):
 			self.session.nav.playService(self.oldref)
 
 		self.close(self.lastindex + self.dirlistcount)
+
+	def doNothing(self):
+		pass
