@@ -1084,7 +1084,7 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
-		<widget backgroundColor="blue_light" pixmap="colors/green_light.png" position="50,385" render="Progress" size="500,5" source="ServiceEvent" transparent="0" zPosition="1">
+		<widget backgroundColor="blue_light" pixmap="OctEtFHD/colors/green_light.png" position="50,385" render="Progress" size="500,5" source="ServiceEvent" transparent="0" zPosition="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget backgroundColor="OE_NewBg2" font="RegularBold;26" position="50,390" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="500,330" source="ServiceEvent" transparent="1">
