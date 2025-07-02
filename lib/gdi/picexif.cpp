@@ -121,6 +121,7 @@ bool Cexif::DecodeExifJpeg(const char * filename)
 		return false;
 	}
 	int a = fgetc(hFile);
+	strcpy(m_szLastError, "Cannot get JPEG EXIF data");
 
 	if (a != 0xff || fgetc(hFile) != M_SOI) {
 		strcpy(m_szLastError, "Not a JPEG file");
