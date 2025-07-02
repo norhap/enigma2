@@ -7,6 +7,7 @@ import Screens.InfoBar
 from Screens.ScreenSaver import InfoBarScreenSaver
 import Components.ParentalControl
 from Components.Button import Button
+from Components.Label import Label
 from Components.ServiceList import ServiceList, refreshServiceList
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Components.MenuList import MenuList
@@ -1551,6 +1552,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		self.movemode = False
 		self.showSatDetails = False
 
+		self["letternumber"] = Label("")
 		self["ChannelSelectBaseActions"] = HelpableNumberActionMap(self, ["ChannelSelectBaseActions", "NumberActions", "InputAsciiActions"],
 			{
 			"showFavourites": (self.showFavourites, _("Show Favorites")),
@@ -2029,6 +2031,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 					charstr = self.numericalTextInput.getKey(number)
 					if len(charstr) == 1:
 						self.servicelist.moveToChar(charstr[0])
+						self["letternumber"].setText(charstr[0])
 
 	def numberSelectionActions(self, number):
 		if not (hasattr(self, "movemode") and self.movemode):
@@ -2054,6 +2057,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 			self.servicelist.moveToChar(charstr[0])
 
 	def getRoot(self):
+		self["letternumber"].setText("")
 		return self.servicelist.getRoot()
 
 	def getCurrentSelection(self):
