@@ -314,6 +314,12 @@ msgstr "[edición de favoritos]"
 msgid "[move mode]"
 msgstr "[modo mover]"
 
+msgid "A-Z, New-Old"
+msgstr "A-Z, Nuevo-Viejo"
+
+msgid "A-Z, Old-New"
+msgstr "A-Z, Viejo-Nuevo"
+
 msgid "a gui to assign services/providers to common interface modules"
 msgstr "una gui para asignar canales/proveedores a módulos de interfaz común"
 
@@ -725,6 +731,12 @@ msgstr "bellas artes"
 
 msgid "fitness & health"
 msgstr "ejercicio y salud"
+
+msgid "Flat A-Z, New-Old"
+msgstr "Plano A-Z, Nuevo-Viejo"
+
+msgid "Flat Z-A, Old-New"
+msgstr "Plano A-Z, Viejo-Nuevo"
 
 msgid "flat alphabetic"
 msgstr "alfabético fecha más reciente"
@@ -5828,6 +5840,9 @@ msgstr "Laos"
 msgid "Large"
 msgstr "Largo"
 
+msgid "Large-Small A-Z"
+msgstr "Grande-pequeña A-Z"
+
 msgid "Last config"
 msgstr "Última Configuración"
 
@@ -6721,6 +6736,9 @@ msgstr "Apagado"
 
 msgid "Ok"
 msgstr "Ok"
+
+msgid "Old-New, Z-A"
+msgstr "Viejo-Nuevo, Z-A"
 
 msgid "Oman"
 msgstr "Omán"
@@ -8687,6 +8705,9 @@ msgstr "Shellscript"
 msgid "Short filenames"
 msgstr "Nombres cortos de archivo"
 
+msgid "Short-Long A-Z"
+msgstr "Corto-Largo A-Z"
+
 msgid "Show Audioselection"
 msgstr "Mostrar selección de audio"
 
@@ -8975,6 +8996,9 @@ msgstr "Lento"
 
 msgid "Small"
 msgstr "Pequeño"
+
+msgid "Small-Large A-Z"
+msgstr "Pequeña-grande A-Z"
 
 msgid "Small progress"
 msgstr "Progreso pequeño"
@@ -11685,6 +11709,9 @@ msgstr "Seleccione mando a distancia"
 msgid "Long press emulation with button"
 msgstr "Emulación de pulsación larga con botón"
 
+msgid "Long-Short A-Z"
+msgstr "Largo-Corto A-Z"
+
 msgid "Select the remote control device to be used with the %s %s."
 msgstr "Seleccione el dispositivo del mando a distancia que se utilizará con el %s %s."
 
@@ -12547,6 +12574,9 @@ msgstr "menú de configuración"
 msgid "Rec"
 msgstr "Rec"
 
+msgid "Rec New-Old & A-Z"
+msgstr "Rec Nuevo-Viejo & A-Z"
+
 msgid "[REC]"
 msgstr "[REC]"
 
@@ -13213,6 +13243,9 @@ msgstr "Define dónde buscar duplicados (solo título, descripción breve o incl
 
 msgid "Delay after editing (in sec)"
 msgstr "Retraso después de la edición (en segundos)"
+
+msgid "Descr A-Z"
+msgstr "Descripción A-Z"
 
 msgid "Description - short equal extended for match"
 msgstr "Descripción - corto igual extendido para coincidir"
@@ -14914,6 +14947,9 @@ msgstr "Ejecutar cortes..."
 
 msgid "Replace original:"
 msgstr "Reemplazar original:"
+
+msgid "New-Old, A-Z"
+msgstr "Nuevo-Viejo, A-Z"
 
 msgid "New filename:"
 msgstr "Nuevo nombre de archivo:"
@@ -19626,6 +19662,12 @@ msgstr "Su hardware puede detectar el modo CI por sí mismo o solo funciona en m
 
 msgid "Your %s %s?"
 msgstr "Su %s %s?"
+
+msgid "Z-A, New-Old"
+msgstr "Z-A, Nuevo-Viejo"
+
+msgid "Z-A, Old-New"
+msgstr "Z-A, Viejo-Nuevo"
 
 msgid "zap"
 msgstr "zap"

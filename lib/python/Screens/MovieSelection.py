@@ -52,21 +52,21 @@ else:
 
 
 l_moviesort = [
-	(str(MovieList.SORT_GROUPWISE), _("Recordings by date, other media by name"), 'Rec New-Old & A-Z'),
-	(str(MovieList.SORT_RECORDED), _("By date, then by name"), 'New-Old, A-Z'),
-	(str(MovieList.SORT_RECORDED_REVERSE), _("By reverse date, then by reverse name"), 'Old-New, Z-A'),
-	(str(MovieList.SORT_ALPHANUMERIC), _("By name, then by date"), 'A-Z, New-Old'),
-	(str(MovieList.SORT_ALPHANUMERIC_FLAT), _("Flat by name, then by date"), 'Flat A-Z, New-Old'),
-	(str(MovieList.SORT_ALPHA_DATE_OLDEST_FIRST), _("By name, then by reverse date"), 'A-Z, Old-New'),
-	(str(MovieList.SORT_ALPHAREV_DATE_NEWEST_FIRST), _("By reverse name, then by date"), 'Z-A, New-Old'),
-	(str(MovieList.SORT_ALPHANUMERIC_REVERSE), _("By reverse name, then by reverse date"), 'Z-A, Old-New'),
-	(str(MovieList.SORT_ALPHANUMERIC_FLAT_REVERSE), _("Flat by reverse name, then by reverse date"), 'Flat Z-A, Old-New'),
-	(str(MovieList.SORT_DURATION_ALPHA), _("By duration, then by name"), 'Short-Long A-Z'),
-	(str(MovieList.SORT_DURATIONREV_ALPHA), _("By reverse duration, then by name"), 'Long-Short A-Z'),
-	(str(MovieList.SORT_SIZE_ALPHA), _("By file size, then by name"), 'Small-Large A-Z'),
-	(str(MovieList.SORT_SIZEREV_ALPHA), _("By reverse file size, then by name"), 'Large-Small A-Z'),
-	(str(MovieList.SORT_DESCRIPTION_ALPHA), _("By description, then by name"), 'Descr A-Z'),
-	(str(MovieList.SORT_SHUFFLE), _("Shuffle"), "Shuffle")
+	(str(MovieList.SORT_GROUPWISE), _("Recordings by date, other media by name"), _('Rec New-Old & A-Z')),
+	(str(MovieList.SORT_RECORDED), _("By date, then by name"), _('New-Old, A-Z')),
+	(str(MovieList.SORT_RECORDED_REVERSE), _("By reverse date, then by reverse name"), _('Old-New, Z-A')),
+	(str(MovieList.SORT_ALPHANUMERIC), _("By name, then by date"), _('A-Z, New-Old')),
+	(str(MovieList.SORT_ALPHANUMERIC_FLAT), _("Flat by name, then by date"), _('Flat A-Z, New-Old')),
+	(str(MovieList.SORT_ALPHA_DATE_OLDEST_FIRST), _("By name, then by reverse date"), _('A-Z, Old-New')),
+	(str(MovieList.SORT_ALPHAREV_DATE_NEWEST_FIRST), _("By reverse name, then by date"), _('Z-A, New-Old')),
+	(str(MovieList.SORT_ALPHANUMERIC_REVERSE), _("By reverse name, then by reverse date"), _('Z-A, Old-New')),
+	(str(MovieList.SORT_ALPHANUMERIC_FLAT_REVERSE), _("Flat by reverse name, then by reverse date"), _('Flat Z-A, Old-New')),
+	(str(MovieList.SORT_DURATION_ALPHA), _("By duration, then by name"), _('Short-Long A-Z')),
+	(str(MovieList.SORT_DURATIONREV_ALPHA), _("By reverse duration, then by name"), _('Long-Short A-Z')),
+	(str(MovieList.SORT_SIZE_ALPHA), _("By file size, then by name"), _('Small-Large A-Z')),
+	(str(MovieList.SORT_SIZEREV_ALPHA), _("By reverse file size, then by name"), _('Large-Small A-Z')),
+	(str(MovieList.SORT_DESCRIPTION_ALPHA), _("By description, then by name"), _('Descr A-Z')),
+	(str(MovieList.SORT_SHUFFLE), _("Shuffle"), _("Shuffle"))
 ]
 
 # 4th item is the textual value set in UsageConfig.py
