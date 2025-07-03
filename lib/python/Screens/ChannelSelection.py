@@ -2016,6 +2016,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 					charstr = self.numericalTextInput.getKey(number)
 					if len(charstr) == 1:
 						self.servicelist.moveToChar(charstr[0])
+						self["letternumber"].setText(charstr[0])  # letternumber servicelist
 		else:
 			current_root = self.getRoot()
 			if current_root and 'FROM BOUQUET "bouquets.' in current_root.getPath():
@@ -2031,7 +2032,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 					charstr = self.numericalTextInput.getKey(number)
 					if len(charstr) == 1:
 						self.servicelist.moveToChar(charstr[0])
-						self["letternumber"].setText(charstr[0])
+						self["letternumber"].setText(charstr[0])  # letternumber bouquetList and continue servicelist
 
 	def numberSelectionActions(self, number):
 		if not (hasattr(self, "movemode") and self.movemode):
