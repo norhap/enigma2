@@ -799,6 +799,8 @@ def InitUsageConfig():
 	config.usage.time.wide = NoSave(ConfigBoolean(default=False))
 	config.usage.time.wide_display = NoSave(ConfigBoolean(default=False))
 
+	config.usage.recovery_disguise = ConfigBoolean(default=False)
+
 	# TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See "man strftime"
 	config.usage.date.dayfull = ConfigSelection(default=_("%A %-d %B %Y"), choices=[
 		(_("%A %d %B %Y"), _("Dayname DD Month Year")),
