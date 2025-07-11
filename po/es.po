@@ -3531,14 +3531,17 @@ msgstr "Eliminar temporizador"
 msgid "Deleted"
 msgstr "Eliminado"
 
-msgid "Delete the character under the text buffer cursor"
-msgstr "Eliminar el carácter debajo del cursor del búfer de texto"
+msgid "Deleted image"
+msgstr "Imagen eliminada"
+
+msgid "Deleted items"
+msgstr "Objetos eliminados"
 
 msgid "Delete mount"
 msgstr "Eliminar Montaje"
 
-msgid "Deleted items"
-msgstr "Objetos eliminados"
+msgid "Delete the character under the text buffer cursor"
+msgstr "Eliminar el carácter debajo del cursor del búfer de texto"
 
 msgid "Descramble in Standby"
 msgstr "Descodificar en modo reposo"
