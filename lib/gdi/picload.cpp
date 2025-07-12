@@ -485,15 +485,17 @@ static void png_load(Cfilepara* filepara, int background, bool forceRGB=false)
 
 	filepara->ox = width;
 	filepara->oy = height;
+	bool forceRGBA = false;
 
-	// When we have indexed (8bit) PNG convert it to standard 32bit png so to preserve transparency and to allow proper alphablending
+	// This is a hack to support 8bit pngs with transparency since the detection is not really correct for some reason
 	if (color_type == PNG_COLOR_TYPE_PALETTE && bit_depth == 8) {
+		forceRGBA = true;
 		color_type = PNG_COLOR_TYPE_RGBA;
-		png_set_expand(png_ptr);
-		png_set_palette_to_rgb(png_ptr);
-		png_set_tRNS_to_alpha(png_ptr);
-		bit_depth = 32;
-		eDebug("[ePicLoad] Interlaced PNG 8bit -> 32bit");
+		// png_set_expand(png_ptr);
+		// png_set_palette_to_rgb(png_ptr);
+		// png_set_tRNS_to_alpha(png_ptr);
+		// bit_depth = 32;
+		// eDebug("[ePicLoad] Interlaced PNG 8bit -> 32bit");
 	}
 
 
@@ -511,7 +513,7 @@ static void png_load(Cfilepara* filepara, int background, bool forceRGB=false)
 		filepara->transparent = (trans_alpha != NULL);
 	}
 
-	if ((bit_depth <= 8) && (color_type == PNG_COLOR_TYPE_GRAY || color_type & PNG_COLOR_MASK_PALETTE))
+	if ((bit_depth <= 8) && (color_type == PNG_COLOR_TYPE_GRAY || color_type & PNG_COLOR_MASK_PALETTE) || forceRGBA)
 	{
 		if (bit_depth < 8)
 			png_set_packing(png_ptr);
