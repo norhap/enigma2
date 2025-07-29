@@ -585,7 +585,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 			self["key_blue"].setText(_("Order by modes") if config.usage.multiboot_order.value else _("Order by slots"))
 			list += list12
 			list = sorted(list) if config.usage.multiboot_order.value else list
-		if isfile(join(self.tmp_dir, "STARTUP_RECOVERY")) and not SystemInfo["hasKexec"]:
+		if isfile(join(self.tmp_dir, "STARTUP_RECOVERY")) and not SystemInfo["hasKexec"] and MODEL != "gbquad4kpro":
 			list.append(ChoiceEntryComponent('', ((_("Boot to Recovery menu")), "Recovery")))
 			self["description"].setText(_("Select image or boot to recovery menu and press OK or GREEN button for reboot."))
 		if isfile(join(self.tmp_dir, "STARTUP_ANDROID")):
