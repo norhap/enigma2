@@ -197,6 +197,7 @@ BoxInfo.setItem("AISubs", fileExists("/etc/init.d/aisocket"))
 BoxInfo.setItem("VuEAC3Fix", MODEL in ("vuultimo4k", "vuduo4kse"))
 BoxInfo.setItem("CanDescrambleInStandby", any(x in fileReadLine("/proc/stb/tsmux/ci0_input_choices", default="", source=MODULE_NAME) for x in ("PVR", "DVR0")))
 BoxInfo.setItem("CanOfflineDecode", MODEL in ("hd51", "h7", "h17", "et10000", "et8000", "hd2400", "vs1500", "8100s"))
+BoxInfo.setItem("ForceSet10bitMode2160p", MODEL in ("gbquad4kpro",))
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()

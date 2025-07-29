@@ -276,15 +276,14 @@ class VideoHardware:
 				print("[Videomode] cannot open /proc/stb/video/videomode_24hz")
 
 		if BRAND == "GigaBlue":
-			if MODEL == "gbquad4kpro" and mode.startswith("2160p") and config.av.hdmicolordepth.value != "10bit":
-				config.av.hdmicolordepth.value = "10bit"
-				config.av.hdmicolordepth.save()
 			try:
 				# use 50Hz mode (if available) for booting
 				open("/etc/videomode", "w").write(mode_50)
 			except OSError:
 				print("[Videomode] Write to /etc/videomode failed.")
-
+		if BoxInfo.getItem("ForceSet10bitMode2160p") and mode.startswith("2160p") and config.av.hdmicolordepth.value != "10bit":
+			config.av.hdmicolordepth.value = "10bit"
+			config.av.hdmicolordepth.save()
 		self.updateAspect(None)
 
 	def saveMode(self, port, mode, rate):
