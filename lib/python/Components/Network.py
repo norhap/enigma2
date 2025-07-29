@@ -399,6 +399,10 @@ class Network:
 				name = 'Intel'
 			elif name.startswith('brcm') or name.startswith('bcm'):
 				name = 'Broadcom'
+			elif name == 'usb' and isdir('/sys/module/aic8800_fdrv'):
+				name = 'AIC@8800'
+			elif name == "wlan":
+				name = name.upper()
 		elif isdir('/tmp/bcm/' + iface):
 			name = 'Broadcom'
 		else:
