@@ -610,7 +610,6 @@ static void png_load(Cfilepara* filepara, int background, bool forceRGB=false)
 		png_read_update_info(png_ptr, info_ptr);
 
 		int bpp = png_get_rowbytes(png_ptr, info_ptr) / width;
-		if (bit_depth == 32) bpp = 4;
 		eDebug("[ePicLoad] RGB data from PNG file int bpp %x)", bpp);
 		if ((bpp != 4) && (bpp != 3))
 		{
