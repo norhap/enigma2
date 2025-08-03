@@ -4,6 +4,7 @@ from enigma import eServiceReference, eProfileWrite, eServiceCenter, iPlayableSe
 eProfileWrite("LOAD:enigma")
 from Components.SystemInfo import BRAND, MODEL  # noqa: E402
 from Tools.Directories import fileExists, isPluginInstalled  # noqa: E402
+from Tools.Notifications import AddNotification
 # workaround for required config entry dependencies.
 from Screens.MovieSelection import MovieSelection, moveServiceFiles  # noqa: E402
 from Screens.Hotkey import InfoBarHotkey  # noqa: E402
@@ -317,6 +318,8 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.session.openWithCallback(self.leavePlayerOnExitCallback, MessageBox, _("Exit movie player?"), simple=True)
 		elif config.usage.leave_movieplayer_onExit.value == "without popup":
 			self.leavePlayerOnExitCallback(True)
+		elif config.usage.leave_movieplayer_onExit.value == "no with popup" or "no" in config.usage.leave_movieplayer_onExit.value and self.__class__.__name__ == "MoviePlayer" and self.session.nav.getRecordings():
+			AddNotification(MessageBox, _("Press STOP and then EXIT to exit the movie list."), MessageBox.TYPE_INFO, timeout=8)
 
 	def leavePlayerOnExitCallback(self, answer):
 		if answer:

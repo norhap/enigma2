@@ -2805,6 +2805,7 @@ class InfoBarInstantRecord:
 			"instantRecord": (self.instantRecord, _("Instant recording")),
 		}, prio=0, description=_("Recording Actions"))
 		self.SelectedInstantServiceRef = None
+		self.notificationOnExit = False
 		if isStandardInfoBar(self):
 			self.recording = []
 		else:
@@ -3036,6 +3037,9 @@ class InfoBarInstantRecord:
 					remaining = self.currentEventTime()
 					if remaining > 0:
 						self.setCurrentEventTimer(remaining - 15)
+		if self.notificationOnExit is True and isMoviePlayerInfoBar(self):
+			self.notificationOnExit = False
+			AddNotification(MessageBox, _("Press STOP and then EXIT to exit the movie list."), MessageBox.TYPE_INFO, timeout=8)
 		print("after:\n", self.recording)
 
 	def setEndtime(self, entry):
@@ -3129,6 +3133,7 @@ class InfoBarInstantRecord:
 		else:
 			common = ()
 		if self.isInstantRecordRunning():
+			self.notificationOnExit = True if "no" in config.usage.leave_movieplayer_onExit.value else False
 			text = _("A recording is currently running.\nWhat do you want to do?")
 			list = common + \
 				((_("Change recording (duration)"), "changeduration"),

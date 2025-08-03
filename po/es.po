@@ -6608,6 +6608,9 @@ msgstr "No hay actualizaciones disponibles. Por favor, inténtelo más tarde."
 msgid "No wireless networks found! Searching..."
 msgstr "No se han encontrado redes inalámbricas! Buscando…"
 
+msgid "No (with notification)"
+msgstr "No (con notificación)"
+
 msgid ""
 "No working local network adapter found.\n"
 "Please verify that you have attached a network cable and your network is configured correctly."
@@ -7390,6 +7393,12 @@ msgstr "Pulse OK para alternar la selección."
 
 msgid "Press OK, save and exit..."
 msgstr "Pulse OK, guadar y salir…"
+
+msgid "Press STOP and then EXIT to exit the movie list."
+msgstr "Pulse STOP y luego EXIT para salir de la lista de películas."
+
+msgid "Press this button to emulate a long press on a button pressed afterwards (this also overrides any other actions assigned to emulation button)."
+msgstr "Pulse este botón para emular una pulsación larga en un botón pulsado después (esto también anula cualquier otra acción asignada al botón de emulación)."
 
 msgid "Press yellow to set this interface as default interface."
 msgstr "Pulse amarillo para establecer esta interfaz como predeterminada."
@@ -11717,9 +11726,6 @@ msgstr "Largo-Corto A-Z"
 
 msgid "Select the remote control device to be used with the %s %s."
 msgstr "Seleccione el dispositivo del mando a distancia que se utilizará con el %s %s."
-
-msgid "Press this button to emulate a long press on a button pressed afterwards (this also overrides any other actions assigned to emulation button)."
-msgstr "Pulse este botón para emular una pulsación larga en un botón pulsado después (esto también anula cualquier otra acción asignada al botón de emulación)."
 
 msgid "Manual scan"
 msgstr "Búsqueda manual"
