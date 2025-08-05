@@ -223,13 +223,7 @@ while : ; do
 			/sbin/reboot
 			;;
 		42)
-			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
-			while read LINE; do
-				if [ -f "${LINE}/var/lib/opkg/status" ]; then
-				DESTS="${DESTS}" --add-dest "${LINE}":"${LINE}"
-			fi
-			done < /tmp/upgrade_mountpoints.txt
-			# Bind the console (when available).
+			# bind the console (when available)
 			[ -f /sys/class/vtconsole/vtcon1/bind ] && echo "1" > /sys/class/vtconsole/vtcon1/bind
 			PREVUPD="0"
 			CURRUPD="999"
@@ -238,13 +232,23 @@ while : ; do
 			if [ "$(opkg list-upgradable busybox)" != "" ]; then
 				opkg update busybox 2>&1 | tee -a /home/root/opkgupgrade.log
 			fi
-			# update all other packages
+			# update all other packages installed on the rootfs
 			while [ "${CURRUPD}" -gt "0" ] && [ "${CURRUPD}" -ne "${PREVUPD}" ]; do
-				opkg upgrade "${DESTS}" 2>&1 | tee -a /home/root/opkgupgrade.log
+				opkg upgrade 2>&1 | tee -a /home/root/opkgupgrade.log
 				PREVUPD="${CURRUPD}"
 				CURRUPD=`opkg list-upgradable | wc -l`
 				echo "===> ${CURRUPD} PACKAGE(S) REMAINING" >> /home/root/opkgupgrade.log
 			done
+			# and remaining install destinations
+			df -P | grep -v "tmpfs " | awk '{print $6}' | tail -n +3 > /tmp/upgrade_mountpoints.txt
+			while read LINE; do
+				if [ -f "${LINE}/var/lib/opkg/status" ]; then
+				DESTS="${DESTS}" --add-dest "${LINE}":"${LINE}"
+			fi
+			done < /tmp/upgrade_mountpoints.txt
+			if [ "$DESTS" != "" ]; then
+				opkg upgrade "${DESTS}" 2>&1 | tee -a /home/root/opkgupgrade.log
+			fi
 			/sbin/reboot
 			;;
 		43)
