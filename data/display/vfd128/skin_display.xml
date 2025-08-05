@@ -309,6 +309,10 @@
 		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" />
 		<widget source="parent.summarylangsel" render="Label" position="0,13" size="128,50" font="FdLcD;12" horizontalAlignment="center" />
 	</screen>
+	<screen name="SkinSelectorSummary" position="0,0" size="128,64">
+		<widget source="parent.Title" render="Label" position="0,0" size="128,12" font="FdLcD;12" />
+		<widget source="Name" render="Label" position="0,13" size="128,50" font="FdLcD;12" />
+	</screen>
 <!-- CHOICEBOX -->
 	<screen name="ChoiceBoxSummary" position="0,0" size="128,32">
 		<widget source="text" render="Label" position="0,0" size="128,15" font="FdLcD;9" verticalAlignment="top" horizontalAlignment="center" />
