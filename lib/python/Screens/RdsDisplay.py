@@ -21,11 +21,12 @@ class RdsInfoDisplaySummary(Screen):
 		self.parent.onText.append(self.onText)
 
 	def onText(self, radiotext):
-		self["radiotext"].text = radiotext
-		if radiotext and len(radiotext):
-			self.show()
-		else:
-			self.hide()
+		if hasattr(self, "radiotext"):
+			self["radiotext"].text = radiotext
+			if radiotext and len(radiotext):
+				self.show()
+			else:
+				self.hide()
 
 
 class RdsInfoDisplay(Screen):
