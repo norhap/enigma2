@@ -82,10 +82,10 @@ def InitDefaultPaths():
 	resolveFilename(SCOPE_CONFIG)
 
 
-class ClearResolveLists:
-	skinResolveList = []
-	lcdskinResolveList = []
-	fontsResolveList = []
+class ResolveLists:
+	skins = []
+	lcdSkin = []
+	fonts = []
 
 
 def resolveFilename(scope, base="", path_prefix=None):
@@ -138,10 +138,10 @@ def resolveFilename(scope, base="", path_prefix=None):
 			skin = dirname(config.skin.primary_skin.value)
 			path = join(path, skin)
 	elif scope == SCOPE_GUISKIN:
-		if ClearResolveLists.skinResolveList == []:
+		if not ResolveLists.skins:
 			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
 			skin = dirname(config.skin.primary_skin.value)
-			skinResolveList = addIfExists([
+			skins = addIfExists([
 				join(scopeConfig, skin),
 				join(scopeConfig, "skin_common"),
 				join(scopeGUISkin, skin),
@@ -150,16 +150,16 @@ def resolveFilename(scope, base="", path_prefix=None):
 				scopeGUISkin  # Deprecate top level of SCOPE_GUISKIN directory to allow a clean up.
 			])
 		if base.endswith(".xml"):  # If the base filename ends with ".xml" then add scopeConfig to the resolveList for support of old skins.
-			resolveList = skinResolveList[:]
+			resolveList = skins[:]
 			resolveList.insert(2, scopeConfig)
 			path = checkPaths(resolveList, base)
 		else:
-			path = checkPaths(skinResolveList, base)
+			path = checkPaths(skins, base)
 	elif scope == SCOPE_LCDSKIN:
-		if ClearResolveLists.lcdskinResolveList == []:
+		if not ResolveLists.lcdSkin:
 			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
 			skin = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else ""
-			lcdskinResolveList = addIfExists([
+			lcdSkin = addIfExists([
 				join(scopeConfig, "display", skin),
 				join(scopeConfig, "display", "skin_common"),
 				join(scopeLCDSkin, skin),
@@ -167,9 +167,9 @@ def resolveFilename(scope, base="", path_prefix=None):
 				join(scopeLCDSkin, "skin_default"),
 				scopeLCDSkin  # Deprecate top level of SCOPE_LCDSKIN directory to allow a clean up.
 			])
-		path = checkPaths(lcdskinResolveList, base)
+		path = checkPaths(lcdSkin, base)
 	elif scope == SCOPE_FONTS:
-		if ClearResolveLists.fontsResolveList == []:
+		if not ResolveLists.fonts:
 			from Components.config import config  # This import must be here as this module finds the config file as part of the config initialization.
 			skin = dirname(config.skin.primary_skin.value)
 			display = dirname(config.skin.display_skin.value) if hasattr(config.skin, "display_skin") else None
@@ -193,8 +193,8 @@ def resolveFilename(scope, base="", path_prefix=None):
 			resolveList.append(join(scopeLCDSkin, "skin_default", "fonts"))
 			resolveList.append(join(scopeLCDSkin, "skin_default"))
 			resolveList.append(scopeFonts)
-			fontsResolveList = addIfExists(resolveList)
-		path = checkPaths(fontsResolveList, base)
+			fonts = addIfExists(resolveList)
+		path = checkPaths(fonts, base)
 	elif scope == SCOPE_PLUGIN:
 		file = join(scopePlugins, base)
 		if exists(file):
