@@ -321,7 +321,6 @@ SystemInfo["SecondCheckModel"] = MODEL in ("osninopro", "osnino", "osninoplus", 
 SystemInfo["DifferentLCDSettings"] = MODEL in ("spycat4kmini", "osmega")
 SystemInfo["ArchIsARM64"] = ARCHITECTURE == "aarch64" or "64" in ARCHITECTURE
 SystemInfo["ArchIsARM"] = ARCHITECTURE.startswith(("arm", "cortex"))
-SystemInfo["HasH9SD"] = MODEL in ("h9", "i55plus") and pathExists("/dev/mmcblk0p1")
 SystemInfo["HasSDnomount"] = MODEL in ("h9", "h3", "i55plus") and (False, "none") or MODEL in ("multibox", "h9combo", "h3") and (True, "mmcblk0")
 SystemInfo["canBackupEMMC"] = MODEL in ("hd51", "h7", "h17", "osmio4k", "osmio4kplus", "osmini4k") and ("disk.img", f'{SystemInfo["MultibootStartupDevice"]}') or MODEL in ("xc7439") and ("emmc.img", f'{SystemInfo["MultibootStartupDevice"]}') or SystemInfo["DefineSat"] and ("usb_update.bin", "none") or MODEL in ("cc1", "sx988", "ip8", "ustym4kottpremium", "og2ott4k", "og2s4k", "sx88v2") and ("usb_update.bin", "none")
 SystemInfo["FrontpanelLEDBlinkControl"] = fileExists("/proc/stb/fp/led_blink")
