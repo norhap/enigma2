@@ -280,4 +280,3 @@ class OpkgComponent:
 			# We except unterminated commands
 			what += "\n"
 			self.cmd.write(what, len(what))
-
