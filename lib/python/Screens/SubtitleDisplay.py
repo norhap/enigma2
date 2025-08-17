@@ -1,62 +1,53 @@
-# -*- coding: utf-8 -*-
-from Screens.Screen import Screen
+from enigma import getDesktop, gRGB
+from Components.config import config
 from Components.Label import Label
-from enigma import eTimer, getDesktop, eActionMap, gFont
-from sys import maxsize
+from Screens.Screen import Screen
+from skin import subtitleFonts, parseFont, getSkinFactor
 
 
 class SubtitleDisplay(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		eActionMap.getInstance().bindAction('', -maxsize - 1, self.__keypress)
-
-		self.messageShown = False
-		self['message'] = Label()
-		self['message'].hide()
-
-		self.onClose.append(self.__close)
+		self.subtitlesShown = False
+		self["subtitles"] = Label()
+		self["subtitles"].hide()
 		self.onLayoutFinish.append(self.__layoutFinished)
 
-	def __close(self):
-		eActionMap.getInstance().unbindAction('', self.__keypress)
-
 	def __layoutFinished(self):
-		# Not expecting skins to contain this element
-		label = self['message']
-		label.instance.setFont(gFont("Regular", 50))
-		label.instance.setZPosition(1)
-		label.instance.setNoWrap(1)
-		label.instance.setHAlign(1)
-		label.instance.setVAlign(1)
+		widgetInstance = self["subtitles"].instance
+		fontStyle = subtitleFonts.get("Subtitle_Regular", {})
+		fontSize = int(config.subtitles.subtitle_fontsize.value)
+		fontFace = fontStyle.get("font", "Regular").split(";")[0]
+		font = parseFont(f"{fontFace};{fontSize * getSkinFactor()}")
+		widgetInstance.setZPosition(1)
+		widgetInstance.setWrap(0)
+		widgetInstance.setHAlign(1)
+		widgetInstance.setVAlign(1)
+		widgetInstance.setBackgroundColor(gRGB(0xff000000))
+		foreColor = config.subtitles.pango_subtitle_colors.value
+		if foreColor == 2:  # yellow
+			widgetInstance.setForegroundColor(gRGB(0x00ffff00))
+		borderWidth = fontStyle.get("borderWidth", 0)
+		borderColor = fontStyle.get("borderColor", None)
+		if borderWidth and borderColor:
+			widgetInstance.setBorderWidth(borderWidth)
+			widgetInstance.setBorderColor(borderColor)
 
-	def __keypress(self, key, flag):
-		# Releasing the subtitle button after a long press unintentionally pops up the subtitle dialog,
-		# This blocks it without causing issues for anyone that sets the buttons up the other way round
-		if self.messageShown:
-			# whilst the notification is shown any keydown event dismisses the notification
-			if flag == 0:
-				self.hideMessage()
-			else:  # any key repeat or keyup event is discarded
-				return 1
-
-	def showMessage(self, message, hideScreen):
+	def showSubtitles(self, subtitles):
 		padding = (40, 10)
-		label = self['message']
-		label.setText(message)
-		size = label.getSize()
-		label.resize(size[0] + padding[0] * 2, size[1] + padding[1] * 2)
-		label.move((getDesktop(0).size().width() - size[0] - padding[0]) // 2, getDesktop(0).size().height() - size[1] - padding[1] * 2 - 30)
-		label.show()
-		self.messageShown = True
+		widget = self["subtitles"]
+		widget.setText(subtitles)
+		size = widget.getSize()
+		widget.resize(size[0] + padding[0] * 2, size[1] + padding[1] * 2)
+		widget.move((getDesktop(0).size().width() - size[0] - padding[0]) // 2, getDesktop(0).size().height() - size[1] - padding[1] * 2 - 30)
+		widget.show()
+		self.subtitlesShown = True
 		self.show()
-		self.hideTimer = eTimer()
-		self.hideTimer.callback.append(self.hideScreen if hideScreen else self.hideMessage)
-		self.hideTimer.start(2000, True)
 
-	def hideMessage(self):
-		self.messageShown = False
-		self['message'].hide()
+	def hideSubtitles(self):
+		self.subtitlesShown = False
+		self["subtitles"].hide()
 
 	def hideScreen(self):
-		self.hideMessage()
+		self.hideSubtitles()
 		self.hide()

@@ -37,6 +37,8 @@ def getConfigMenuItem(configElementName):
 
 
 class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
+	fillSubtitleExt = None
+
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
@@ -391,6 +393,11 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 								language = x[4]
 					except Exception:
 						language = ""
+					languagetype = ""
+					if language and len(x) == 6 and x[5] and isinstance(x[5], str):
+						languagetype = x[5].split()
+						if languagetype and len(languagetype) == 2:
+							language = "%s (%s)" % (language, languagetype[1])
 					if x[0] == 0:
 						description = "DVB"
 						number = "%x" % (x[1])
@@ -430,6 +437,8 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		subtitle = service and service.subtitle()
 		subtitlelist = subtitle and subtitle.getSubtitleList()
 		self.selectedSubtitle = None
+		if callable(AudioSelection.fillSubtitleExt):
+			AudioSelection.fillSubtitleExt(subtitlelist)
 		if self.subtitlesEnabled():
 			self.selectedSubtitle = self.infobar.selected_subtitle
 			if self.selectedSubtitle and self.selectedSubtitle[:4] == (0, 0, 0, 0):
@@ -649,12 +658,20 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 					self.__updatedInfo()
 				if self.settings.menupage.value == PAGE_SUBTITLES and cur[0] is not None:
 					if self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
-						self.enableSubtitle(None)
+						if len(cur[0]) > 6 and callable(cur[0][6]):
+							cur[0][6](None)
+						else:
+							self.enableSubtitle(None)
 						selectedidx = self["streams"].getIndex()
 						self.__updatedInfo()
 						self["streams"].setIndex(selectedidx)
 					else:
-						self.enableSubtitle(cur[0][:5])
+						if len(cur[0]) > 6 and callable(cur[0][6]):
+							cur[0][6](cur[0])
+						else:
+							if self.infobar.selected_subtitle and len(self.infobar.selected_subtitle) > 6:
+								self.infobar.selected_subtitle[6](None)
+							self.enableSubtitle(cur[0][:5])
 						self.__updatedInfo()
 					if self.session.nav.isCurrentServiceIPTV():
 						self.saveAVDict()
