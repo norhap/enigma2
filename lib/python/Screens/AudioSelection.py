@@ -37,6 +37,12 @@ def getConfigMenuItem(configElementName):
 
 
 class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
+	TYPE_ALL = 0
+	TYPE_AUDIO = 1
+	TYPE_SUBTITLE = 2
+	hooks = []
+	audioHooks = []
+	subtitleHooks = []
 	fillSubtitleExt = None
 
 	def __init__(self, session, infobar=None, page=PAGE_AUDIO):
@@ -104,6 +110,20 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 		]
 		self.settings.menupage = ConfigSelection(choices=choicelist, default=page)
 		self.onLayoutFinish.append(self.__layoutFinished)
+
+	def runHooks(self, type):
+		if type == self.TYPE_ALL:
+			for hook in AudioSelection.hooks:
+				if callable(hook):
+					hook()
+		elif type == self.TYPE_AUDIO:
+			for hook in AudioSelection.audioHooks:
+				if callable(hook):
+					hook()
+		elif type == self.TYPE_SUBTITLE:
+			for hook in AudioSelection.subtitleHooks:
+				if callable(hook):
+					hook()
 
 	def audioSelectionLong(self):
 		from Screens.InfoBar import InfoBar
@@ -656,6 +676,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 				if self.settings.menupage.value == PAGE_AUDIO and cur[0] is not None:
 					self.changeAudio(cur[0])
 					self.__updatedInfo()
+					self.runHooks(self.TYPE_AUDIO)
 				if self.settings.menupage.value == PAGE_SUBTITLES and cur[0] is not None:
 					if self.infobar.selected_subtitle and self.infobar.selected_subtitle[:4] == cur[0][:4]:
 						if len(cur[0]) > 6 and callable(cur[0][6]):
@@ -665,6 +686,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						selectedidx = self["streams"].getIndex()
 						self.__updatedInfo()
 						self["streams"].setIndex(selectedidx)
+						self.runHooks(self.TYPE_SUBTITLE)
 					else:
 						if len(cur[0]) > 6 and callable(cur[0][6]):
 							cur[0][6](cur[0])
@@ -675,6 +697,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						self.__updatedInfo()
 					if self.session.nav.isCurrentServiceIPTV():
 						self.saveAVDict()
+				self.runHooks(self.TYPE_ALL)
 				self.close(0)
 			elif self.focus == FOCUS_CONFIG:
 				self.keyRight()
