@@ -2208,17 +2208,17 @@
 		<widget name="DescriptionBorder" position="0,0" size="0,0"/>
 		<widget name="waitingtext" position="950,145" size="600,35" font="RegularBold;26" foregroundColor="#0000fafa" backgroundColor="black" zPosition="1"/>
 		<!-- Button -->
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_menu.png" position="465,950" size="64,43"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_info.png" position="525,950" size="64,43"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_help.png" position="585,950" size="64,43"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_red.png" position="690,950" size="40,40"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_green.png" position="970,950" size="40,40"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_yellow.png" position="1260,950" size="40,40"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_blue.png" position="1550,950" size="40,40"/>
-		<widget backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" position="735,937" size="250,70" name="key_red" transparent="1" zPosition="1"/>
-		<widget backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" position="1015,937" size="250,70" name="key_green" transparent="1" zPosition="1"/>
-		<widget backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" position="1305,937" size="250,70" name="key_yellow" transparent="1" zPosition="1"/>
-		<widget backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" position="1595,937" size="310,70" name="key_blue" transparent="1" zPosition="1"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_menu.png" position="465,955" size="64,43"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_info.png" position="525,955" size="64,43"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_help.png" position="585,955" size="64,43"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_red.png" position="690,955" size="40,40"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_green.png" position="970,955" size="40,40"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_yellow.png" position="1260,955" size="40,40"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_blue.png" position="1550,955" size="40,40"/>
+		<widget source="key_red" render="Label" backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" verticalAlignment="center" position="735,935" size="250,85" transparent="1" zPosition="1"/>
+		<widget source="key_green" render="Label" backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" verticalAlignment="center" position="1015,935" size="250,85" transparent="1" zPosition="1"/>
+		<widget source="key_yellow" render="Label" backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" verticalAlignment="center" position="1305,935" size="250,85" transparent="1" zPosition="1"/>
+		<widget source="key_blue" render="Label" backgroundColor="OE_Background" font="RegularBold;22" horizontalAlignment="left" verticalAlignment="center" position="1595,935" size="310,85" transparent="1" zPosition="1"/>
 	</screen>
 	<!-- MOVIESELECTIONSLIM -->
 	<screen name="MovieSelectionSlim" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080" transparent="0">
@@ -3345,7 +3345,7 @@
 	<screen name="TimerSelection" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1920,1080">
 		<panel name="StanDardScreen"/>
 		<panel name="TemplatePip"/>
-		<ePixmap alphaTest="blend" pixmap="buttons/key_exit.png" position="18,1035" size="64,43"/>
+		<ePixmap alphaTest="blend" pixmap="OctEtFHD/buttons/key_exit.png" position="18,1035" size="64,43"/>
 		<widget name="timerlist" itemHeight="95" setEventNameFont="RegularBold;21" setServiceNameFont="RegularBold;22" setFont="RegularBold;23" backgroundColor="OE_Background" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" position="26,140" satPosLeft="400" rowSplit="45" size="1250,809" transparent="1"/>
 	</screen>
 	<!-- TIMEREDIT -->
@@ -5622,8 +5622,8 @@
 		<eLabel backgroundColor="black" position="0,0" size="1920,1080" zPosition="-15"/>
 		<eLabel backgroundColor="blue_light" position="10,72" size="1900,2" zPosition="0"/>
 		<eLabel backgroundColor="blue_light" position="10,72" size="2,938" zPosition="0"/>
-		<eLabel backgroundColor="blue_light" position="10,1008" size="1900,2" zPosition="0"/>
-		<eLabel backgroundColor="blue_light" position="1908,72" size="2,938" zPosition="0"/>
+		<eLabel backgroundColor="blue_light" position="10,1023" size="1900,2" zPosition="0"/>
+		<eLabel backgroundColor="blue_light" position="1908,72" size="2,953" zPosition="0"/>
 	</screen>
 		<!-- EPG SINGLE EPG SEARCH EPG SIMILAR -->
 	<screen name="TemplateEPGSelection">
