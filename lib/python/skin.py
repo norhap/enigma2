@@ -893,6 +893,9 @@ class AttributeParser:
 	def applyVerticalScale(self, value):
 		return int(parseInteger(value) * self.scaleTuple[1][0] / self.scaleTuple[1][1])
 
+	def alphaBlend(self, value):
+		self.guiObject.setWidgetAlphaBlend(parseBoolean("alphablend", value))
+
 	def alphaTest(self, value):
 		# value = "blend" if value == "on" else value  workaround for renderer with transparent borders C++ does not use now BT_ALPHATEST for pixmap
 		self.guiObject.setAlphatest(parseAlphaTest(value))
