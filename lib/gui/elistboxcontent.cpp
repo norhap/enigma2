@@ -1523,8 +1523,6 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 
 					if (size > 9)
 						pborderColorSelected = lookupColor(PyTuple_GET_ITEM(item, 9), data);
-					else
-						pborderColorSelected = pborderColor;
 				}
 
 				if (size > 10)
@@ -1547,8 +1545,6 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 
 				int cornerRadius = pCornerRadius ? PyLong_AsLong(pCornerRadius) : 0;
 				int cornerEdges = pCornerEdges ? PyLong_AsLong(pCornerEdges) : 15;
-				if (cornerRadius || cornerEdges)
-					bwidth = 0; // border not supported for rounded edges
 
 				if (selected && itemZoomContent)
 				{
@@ -1578,6 +1574,13 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 						{
 							painter.setBackgroundColor(defaultBackColor);
 						}
+
+						if(bwidth && pborderColor)
+						{
+							uint32_t color = PyLong_AsUnsignedLongMask((selected && pborderColorSelected) ? pborderColorSelected : pborderColor);
+							painter.setBorder(gRGB(color), bwidth);
+						}
+						bwidth = 0;
 						painter.drawRectangle(rect);
 					}
 					else
@@ -1588,14 +1591,14 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 				}
 				painter.clippop();
 
-				if (bwidth && cornerRadius == 0)
+				if(bwidth && pborderColor)
 				{
 					eRect rect(eRect(x, y, width, height));
 					painter.clip(rect);
 
 					if (pborderColor)
 					{
-						uint32_t color = PyLong_AsUnsignedLongMask(selected ? pborderColorSelected : pborderColor);
+						uint32_t color = PyLong_AsUnsignedLongMask(selected && pborderColorSelected ? pborderColorSelected : pborderColor);
 						painter.setForegroundColor(gRGB(color));
 					}
 
@@ -1705,9 +1708,6 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 					y += zoomoffs.y();
 				}
 
-				if (radius)
-					bwidth = 0; // border is not supported yet
-
 				eRect rect(x + bwidth, y + bwidth, width - bwidth * 2, height - bwidth * 2);
 				painter.clip(rect);
 				{
@@ -1723,6 +1723,13 @@ void eListboxPythonMultiContent::paint(gPainter &painter, eWindowStyle &style, c
 						}
 						else
 							painter.setBackgroundColor(defaultBackColor);
+
+						if(bwidth && pborderColor)
+						{
+							uint32_t color = PyLong_AsUnsignedLongMask(pborderColor);
+							painter.setBorder(gRGB(color), bwidth);
+						}
+						bwidth = 0;
 						painter.drawRectangle(rect);
 
 						if (selected)
