@@ -93,21 +93,23 @@ class MultiContentTemplateParser(TemplateParser):
 							borderWidth = int(item.get("borderWidth", "0"))
 							cornerRadius, cornerEdges = item.get("_radius", (0, 0))
 							flags = item.get("_flags", 0)
-							if item["type"]:
-								if "text":
+							match item["type"]:
+								case "text":
+									textBorderColor = item.get("textBorderColor")
+									textBorderWidth = int(item.get("textBorderWidth", "0"))
 									foregroundColorSelected = item.get("foregroundColorSelected")
 									foregroundColor = item.get("foregroundColor")
 									font = int(item.get("font", 0))
 									if index == -1:
 										index = item.get("text", "")
-									modeData.append((eListboxPythonMultiContent.TYPE_TEXT, pos[0], pos[1], size[0], size[1], font or 0, flags, index, foregroundColor, foregroundColorSelected, backgroundColor, backgroundColorSelected, borderWidth, borderColor, cornerRadius, cornerEdges))
-								elif "pixmap":
+									modeData.append((eListboxPythonMultiContent.TYPE_TEXT, pos[0], pos[1], size[0], size[1], font or 0, flags, index, foregroundColor, foregroundColorSelected, backgroundColor, backgroundColorSelected, borderWidth, borderColor, cornerRadius, cornerEdges, textBorderWidth, textBorderColor))
+								case "pixmap":
 									if index == -1:
 										index = item.get("pixmap", "")
 									pixmapType = item.get("pixmapType", eListboxPythonMultiContent.TYPE_PIXMAP)
 									pixmapFlags = item.get("pixmapFlags", 0)
 									modeData.append((pixmapType, pos[0], pos[1], size[0], size[1], self.resolvePixmap(index), backgroundColor, backgroundColorSelected, pixmapFlags, cornerRadius, cornerEdges))
-								elif "rectangle":
+								case "rectangle":
 									gradientDirection, gradientAlpha, gradientStart, gradientEnd, gradientMid, gradientStartSelected, gradientEndSelected, gradientMidSelected = item.get("_gradient", (0, 0, None, None, None, None, None, None))
 									if gradientDirection:
 										if gradientAlpha:
@@ -116,7 +118,7 @@ class MultiContentTemplateParser(TemplateParser):
 											modeData.append((eListboxPythonMultiContent.TYPE_LINEAR_GRADIENT, pos[0], pos[1], size[0], size[1], gradientDirection, gradientStart, gradientMid, gradientEnd, gradientStartSelected, gradientMidSelected, gradientEndSelected, cornerRadius, cornerEdges))
 									else:
 										modeData.append((eListboxPythonMultiContent.TYPE_RECT, pos[0], pos[1], size[0], size[1], backgroundColor, backgroundColorSelected, borderWidth, borderColor, borderColorSelected, cornerRadius, cornerEdges))
-								elif "progress":
+								case "progress":
 									if index == -1:
 										index = None
 									foregroundColorSelected = item.get("foregroundColorSelected", None)
