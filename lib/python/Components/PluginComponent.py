@@ -32,9 +32,11 @@ class PluginComponent:
 			self.restartRequired = True
 
 	def removePlugin(self, plugin):
-		self.pluginList.remove(plugin)
+		if plugin in self.pluginList:
+			self.pluginList.remove(plugin)
 		for x in plugin.where:
-			self.plugins[x].remove(plugin)
+			if plugin:
+				self.plugins[x].remove(plugin)
 			if x == PluginDescriptor.WHERE_AUTOSTART:
 				plugin(reason=1)
 
