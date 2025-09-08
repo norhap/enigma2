@@ -7692,6 +7692,9 @@ msgstr "Rojo"
 msgid "Red button..."
 msgstr "Botón rojo…"
 
+msgid "Movie Selection"
+msgstr "Selección de Películas"
+
 msgid "Movie Selection Setup"
 msgstr "Ajustes Selección de Películas"
 
