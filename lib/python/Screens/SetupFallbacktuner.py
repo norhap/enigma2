@@ -206,7 +206,11 @@ class SetupFallbacktuner(Setup):
 		self["config"].l.setList(self.list)
 
 	def keySave(self):
-		if isPluginInstalled("FastChannelChange"):  # sync with FCC.
+		if isPluginInstalled("FastChannelChange"):  # sync with FCC and IPToSAT.
+			if isPluginInstalled("IPToSAT"):
+				if config.plugins.IPToSAT.enable.value or config.plugins.fccsetup.activate.value:
+					self.syncWithFCC()
+					return
 			if config.usage.remote_fallback_enabled.value and config.plugins.fccsetup.activate.value:
 				self.syncWithFCC()
 				return
@@ -270,17 +274,26 @@ class SetupFallbacktuner(Setup):
 	def syncWithFCC(self):  # sync with FCC.
 		def disableFCC(answer=False):
 			if answer:
-				config.plugins.fccsetup.activate.value = False
-				config.plugins.fccsetup.activate.save()
-				config.usage.remote_fallback_enabled.value = True
-				config.usage.remote_fallback_enabled.save()
+				if isPluginInstalled("IPToSAT"):
+					config.usage.remote_fallback_enabled.save()
+				if config.plugins.fccsetup.activate.value:
+					config.plugins.fccsetup.activate.value = False
+					config.plugins.fccsetup.activate.save()
+					config.usage.remote_fallback_enabled.value = True
+					config.usage.remote_fallback_enabled.save()
 				self.session.open(TryQuitMainloop, 3)
 			else:
 				config.usage.remote_fallback_enabled.value = False
 				Setup.keySave(self)
 
 		if not checkTimeshiftRunning() and not self.session.nav.getRecordings():
-			self.session.openWithCallback(disableFCC, MessageBox, _("FCC usage will be disabled to use the fallback tuner.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
+			if config.plugins.fccsetup.activate.value:
+				self.session.openWithCallback(disableFCC, MessageBox, _("FCC usage will be disabled to use the fallback tuner.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
+			else:
+				if config.usage.remote_fallback_enabled.value:
+					self.session.openWithCallback(disableFCC, MessageBox, _("The use of IPToSAT will be disabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
+				else:
+					self.session.openWithCallback(disableFCC, MessageBox, _("The use of IPToSAT will be enabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
 		else:
 			config.usage.remote_fallback_enabled.value = False
 			Setup.keySave(self)
