@@ -492,11 +492,11 @@ class ConfigListScreen:
 		restart = False
 		for item in set(self["config"].list + self.manipulatedItems):
 			if len(item) > 1:
-				if item[0].endswith("*") and "**" not in item[0] and "***" not in item[0] and item[1].isChanged():
+				if "*" in item[0] and "**" not in item[0] and "***" not in item[0] and item[1].isChanged():
 					restart = True
-				elif item[0].endswith("**") and not item[0].endswith("***") and item[1].isChanged():
+				elif "**" in item[0] and "***" not in item[0] and item[1].isChanged():
 					self.reboot = True
-				elif item[0].endswith("***") and item[1].isChanged():
+				elif "***" in item[0] and item[1].isChanged():
 					self.pluginGridList = True
 				item[1].save()
 		configfile.save()
