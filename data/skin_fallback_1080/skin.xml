@@ -605,9 +605,9 @@
 		<eLabel backgroundColor="blue_light" position="475,1055" size="1210,1" zPosition="20"/>
 		<eLabel backgroundColor="blue_light" position="8,158" size="2,899" zPosition="-22"/>
 		<eLabel backgroundColor="blue_light" position="1700,158" size="2,899" zPosition="-22"/>
-		<eLabel backgroundColor="OE_NewBg" position="25,center" size="440,1080" transparent="0" zPosition="-20"/>
-		<eLabel backgroundColor="blue_light" foregroundColor="OE_Background" position="55,159" size="380,2" zPosition="-15"/>
-		<eLabel backgroundColor="blue_light" position="55,510" size="380,2" transparent="0" zPosition="-1"/>
+		<eLabel backgroundColor="OE_NewBg" position="25,center" size="445,1080" transparent="0" zPosition="-20"/>
+		<eLabel backgroundColor="blue_light" position="55,159" size="385,2" transparent="0" zPosition="-1"/>
+		<eLabel backgroundColor="blue_light" position="55,510" size="385,2" transparent="0" zPosition="-1"/>
 		<eLabel backgroundColor="blue_light" position="465,955" size="1235,2" zPosition="-22"/>
 		<widget alphaTest="blend" position="135,10" render="Picon" size="220,132" source="session.CurrentService" transparent="1" zPosition="4">
 			<convert type="ServiceName">Reference</convert>
@@ -739,10 +739,10 @@
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<!-- CryptoInfo -->
-		<widget source="session.CurrentService" render="PicCript" path="OctEtFHD/cript" position="470,965" size="98,31" alphaTest="blend" zPosition="3"/>
+		<widget source="session.CurrentService" render="PicCript" path="OctEtFHD/cript" position="475,965" size="98,31" alphaTest="blend" zPosition="3"/>
 		<panel name="Clock"/>
-		<widget source="session.CurrentService" render="PicEmu2" path="OctEtFHD/emu" position="540,965" size="98,31" transparent="1" alphaTest="blend" zPosition="3"/>
-		<widget source="session.CurrentService" render="Label" font="RegularBold;21" position="660,965" size="450,35" zPosition="50" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+		<widget source="session.CurrentService" render="PicEmu2" path="OctEtFHD/emu" position="545,965" size="98,31" transparent="1" alphaTest="blend" zPosition="3"/>
+		<widget source="session.CurrentService" render="Label" font="RegularBold;21" position="665,965" size="450,35" zPosition="50" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
 			<convert type="CaidInfo2"/>
 		</widget>
 		 <!-- MSNWeather -->
@@ -818,16 +818,16 @@
 		<widget source="session.MSNWeather" render="Label" position="245,965" size="108,50" font="RegularBold;17" backgroundColor="OE_NewBg" horizontalAlignment="center" transparent="1" zPosition="8">
 			<convert type="MSNWeather">temperature_text,day4</convert>
 		</widget>
-		<widget source="session.MSNWeather" render="Label" position="362,830" size="110,25" font="RegularBold;21" backgroundColor="OE_NewBg" horizontalAlignment="left" transparent="1" zPosition="8">
+		<widget source="session.MSNWeather" render="Label" position="362,830" size="110,25" font="RegularBold;21" backgroundColor="OE_NewBg" horizontalAlignment="center" transparent="1" zPosition="8">
 			<convert type="MSNWeather">weekday,day5</convert>
 		</widget>
-		<widget source="session.MSNWeather" position="375,865" size="60,60" alphaTest="blend" render="MSNWeatherPixmap" transparent="1" zPosition="8">
+		<widget source="session.MSNWeather" position="385,865" size="60,60" alphaTest="blend" render="MSNWeatherPixmap" transparent="1" zPosition="8">
 			<convert type="MSNWeather">weathericon,day5,/usr/share/enigma2/OctEtFHD/WeatherIcon/,png</convert>
 		</widget>
-		<widget source="session.MSNWeather" render="Label" position="372,930" size="40,25" font="RegularBold;20" backgroundColor="OE_NewBg" transparent="1" zPosition="8">
+		<widget source="session.MSNWeather" render="Label" position="377,930" size="40,25" font="RegularBold;20" backgroundColor="OE_NewBg" transparent="1" zPosition="8">
 			<convert type="MSNWeather">temperature_high,day5</convert>
 		</widget>
-		<widget source="session.MSNWeather" render="Label" position="415,930" size="40,25" font="RegularBold;20" backgroundColor="OE_NewBg" transparent="1" zPosition="8">
+		<widget source="session.MSNWeather" render="Label" position="420,930" size="40,25" font="RegularBold;20" backgroundColor="OE_NewBg" transparent="1" zPosition="8">
 			<convert type="MSNWeather">temperature_low,day5</convert>
 		</widget>
 		<widget source="session.MSNWeather" render="Label" position="357,965" size="108,50" font="RegularBold;17" backgroundColor="OE_NewBg" horizontalAlignment="center" transparent="1" zPosition="8">
@@ -5621,12 +5621,12 @@
 			<convert type="ServiceInfo">SubservicesAvailable</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<ePixmap pixmap="OctEtFHD/buttons/key_green.png" objectTypes="key_green,Button,Label" alphaTest="blend" position="460,1010" size="40,40"/>
-		<widget name="key_green" objectTypes="key_green,Label,Button" font="RegularBold;24" backgroundColor="OE_Background" position="500,1017" size="330,25" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_yellow.png" objectTypes="key_yellow,Button,Label" alphaTest="blend" position="825,1010" size="40,40"/>
-		<widget name="key_yellow" objectTypes="key_yellow,Label,Button" font="RegularBold;24" backgroundColor="OE_Background" position="865,1000" size="400,60" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<ePixmap pixmap="OctEtFHD/buttons/key_blue.png" objectTypes="key_blue,Button,Label" alphaTest="blend" position="1260,1010" size="40,40"/>
-		<widget name="key_blue" objectTypes="key_blue,Label,Button" font="RegularBold;24" backgroundColor="OE_Background" position="1300,1000" size="400,60" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<ePixmap pixmap="OctEtFHD/buttons/key_green.png" objectTypes="key_green,Button,Label" alphaTest="blend" position="465,1010" size="40,40"/>
+		<widget name="key_green" objectTypes="key_green,Label,Button" font="RegularBold;24" backgroundColor="OE_Background" position="505,1017" size="330,25" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<ePixmap pixmap="OctEtFHD/buttons/key_yellow.png" objectTypes="key_yellow,Button,Label" alphaTest="blend" position="830,1010" size="40,40"/>
+		<widget name="key_yellow" objectTypes="key_yellow,Label,Button" font="RegularBold;24" backgroundColor="OE_Background" position="870,1000" size="400,60" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<ePixmap pixmap="OctEtFHD/buttons/key_blue.png" objectTypes="key_blue,Button,Label" alphaTest="blend" position="1265,1010" size="40,40"/>
+		<widget name="key_blue" objectTypes="key_blue,Label,Button" font="RegularBold;24" backgroundColor="OE_Background" position="1305,1000" size="395,60" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
 	</screen>
 		<!--  SOURCES AND NAMES KEYS ALL WITH CONDITION RED GREEN YELLOW BLUE SCREENS INFORMATION-->
 	<screen name="ButtonsInformation">
@@ -6149,8 +6149,8 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget source="session.Event_Now" render="xtraPoster" position="80,490" size="185,278" zPosition="2"/>
 	</screen>
 	<screen name="poster_secondinfobar">
-		<widget source="session.Event_Now" render="xtraPoster" position="470,195" size="185,278" zPosition="2"/>
-		<widget source="session.Event_Next" render="xtraPoster" position="470,645" size="185,278" zPosition="2"/>
+		<widget source="session.Event_Now" render="xtraPoster" position="475,195" size="185,278" zPosition="2"/>
+		<widget source="session.Event_Next" render="xtraPoster" position="475,645" size="185,278" zPosition="2"/>
 	</screen>
 	<screen name="poster_channelselection">
 		<widget source="ServiceEvent" conditional="ServiceEvent" render="xtraPoster" position="210,561" size="175,159" zPosition="2"/>
