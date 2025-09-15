@@ -165,6 +165,12 @@ msgstr[0] "%d fichero"
 msgstr[1] "%d ficheros"
 
 #, python-format
+msgid "%d plugin is not available:"
+msgid_plural "%d plugins are not available:"
+msgstr[0] "%d Plugin no disponible:"
+msgstr[1] "%d Plugins no disponibles:"
+
+#, python-format
 msgid "%d fps"
 msgstr "%d fps"
 
@@ -3011,6 +3017,12 @@ msgstr "Limpiar log"
 msgid "Clear playlist"
 msgstr "Limpiar lista de reproducción"
 
+#, python-format
+msgid "Clear warning"
+msgid_plural "Clear warnings"
+msgstr[0] "Eliminar advertencia"
+msgstr[1] "Eliminar advertencias"
+
 msgid "Close"
 msgstr "Cerrar"
 
@@ -5791,6 +5803,12 @@ msgstr "Mantener canal"
 
 msgid "Keep sorting"
 msgstr "Sigue ordenando"
+
+#, python-format
+msgid "Keep warning"
+msgid_plural "Keep warnings"
+msgstr[0] "Mantener advertencia"
+msgstr[1] "Mantener las advertencias"
 
 msgid "Kenya"
 msgstr "Kenia"
@@ -9056,9 +9074,6 @@ msgstr "Islas Salomón"
 
 msgid "Somalia"
 msgstr "Somalia"
-
-msgid "Some plugins are not available:\n"
-msgstr "Algunos plugins no están disponibles:\n"
 
 #, python-format
 msgid "Sorry, %s has not been installed!"

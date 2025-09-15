@@ -1,3 +1,4 @@
+from gettext import ngettext
 from os import unlink
 from os.path import isfile, normpath
 from enigma import eConsoleAppContainer, eDVBDB, eTimer, gRGB
@@ -11,7 +12,7 @@ from Components.Harddisk import harddiskmanager
 from Components import Opkg
 from Components.Label import Label
 from Components.Language import language
-from Components.PluginComponent import plugins
+from Components.PluginComponent import pluginComponent, plugins
 from Components.PluginList import PluginList, PluginCategoryComponent, PluginDownloadComponent
 from Components.Sources.StaticText import StaticText
 from Components.About import getFeeds
@@ -440,12 +441,21 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 				callback(name, description)
 
 	def checkWarnings(self):
-		if len(plugins.warnings):
-			text = _("Some plugins are not available:\n")
-			for (pluginname, error) in plugins.warnings:
-				text += "%s (%s)\n" % (pluginname, error)
-			plugins.resetWarnings()
-			self.session.open(MessageBox, text=text, type=MessageBox.TYPE_WARNING)
+		def checkWarningsCallback(answer):
+			if answer:
+				pluginComponent.resetWarnings()
+
+		warnings = pluginComponent.getWarnings()
+		if warnings:
+			count = len(warnings)
+			text = [ngettext("%d plugin is not available:", "%d plugins are not available:", count) % count, ""]
+			for pluginName, error in warnings:
+				text.append(f"- {pluginName}\n    {error}")
+			options = [
+				(ngettext("Keep warning", "Keep warnings", count), False),
+				(ngettext("Clear warning", "Clear warnings", count), True)
+			]
+			self.session.openWithCallback(checkWarningsCallback, MessageBox, text="\n".join(text), type=MessageBox.TYPE_YESNO, list=options, default=0, typeIcon=MessageBox.TYPE_WARNING)
 
 	def delete(self):
 		config.misc.pluginbrowser.languages_po.value = False

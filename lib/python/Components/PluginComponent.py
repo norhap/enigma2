@@ -15,8 +15,8 @@ class PluginComponent:
 		self.plugins = {}
 		self.pluginList = []
 		self.installedPluginList = []
+		self.pluginWarnings = []
 		self.setPluginPrefix("Plugins.")
-		self.resetWarnings()
 
 	def setPluginPrefix(self, prefix):
 		self.prefix = prefix
@@ -56,12 +56,14 @@ class PluginComponent:
 					try:
 						plugin = my_import('.'.join(["Plugins", c, pluginname, "plugin"]))
 						plugins = plugin.Plugins(path=path)
-					except Exception as exc:
-						print("[PluginComponent] Plugin ", c + "/" + pluginname, "failed to load:", exc)
+					except Exception as err:
+						print("[PluginComponent] Plugin ", c + "/" + pluginname, "failed to load:", err)
 						# supress errors due to missing plugin.py* files (badly removed plugin)
 						for fn in ('plugin.py', 'plugin.pyc', 'plugin.pyo'):
 							if os.path.exists(os.path.join(path, fn)):
-								self.warnings.append((c + "/" + pluginname, str(exc)))
+								warning = (os.path.join(c, pluginname), str(err))
+								if warning not in self.pluginWarnings:
+									self.pluginWarnings.append(warning)
 								from traceback import print_exc
 								print_exc()
 								break
@@ -86,9 +88,11 @@ class PluginComponent:
 					if fileExists(keymap):
 						try:
 							loadKeymap(keymap)
-						except Exception as exc:
-							print("[PluginComponent] keymap for plugin %s/%s failed to load: " % (c, pluginname), exc)
-							self.warnings.append((c + "/" + pluginname, str(exc)))
+						except Exception as err:
+							print("[PluginComponent] keymap for plugin %s/%s failed to load: " % (c, pluginname), err)
+							warning = (os.path.join(c, pluginname), str(err))
+							if warning not in self.pluginWarnings:
+								self.pluginWarnings.append(warning)
 
 		# build a diff between the old list of plugins and the new one
 		# internally, the "fnc" argument will be compared with __eq__
@@ -150,8 +154,13 @@ class PluginComponent:
 		for p in self.pluginList[:]:
 			self.removePlugin(p)
 
+	def getWarnings(self):
+		return self.pluginWarnings
+
+	warnings = property(getWarnings)
+
 	def resetWarnings(self):
-		self.warnings = []
+		self.pluginWarnings = []
 
 	def getNextWakeupTime(self):
 		wakeup = -1
@@ -162,4 +171,5 @@ class PluginComponent:
 		return int(wakeup)
 
 
-plugins = PluginComponent()
+pluginComponent = PluginComponent()
+plugins = pluginComponent  # Retain the legacy name until all code is updated.
