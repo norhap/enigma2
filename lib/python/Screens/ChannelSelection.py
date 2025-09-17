@@ -8,6 +8,7 @@ from Screens.ScreenSaver import InfoBarScreenSaver
 import Components.ParentalControl
 from Components.Button import Button
 from Components.Label import Label
+from Components.Sources.StaticText import StaticText
 from Components.ServiceList import ServiceList, refreshServiceList
 from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Components.MenuList import MenuList
@@ -841,6 +842,7 @@ class SelectionEventInfo:
 
 class ChannelSelectionEPG(InfoBarHotkey):
 	def __init__(self):
+		self["key_info"] = StaticText(_("INFO"))
 		if not hotkey.functions:
 			getHotkeyFunctions()
 		self.hotkeys = [("Info (EPG)", "info", "Infobar/openEventView"),
@@ -1022,8 +1024,9 @@ class ChannelSelectionEPG(InfoBarHotkey):
 	def showEPGList(self):
 		ref = self.getCurrentSelection()
 		if ref:
-			self.savedService = ref
-			self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB=self.changeServiceCB)
+			if (ref.flags & 7) == 0:
+				self.savedService = ref
+				self.session.openWithCallback(self.SingleServiceEPGClosed, EPGSelection, ref, serviceChangeCB=self.changeServiceCB)
 
 	def SingleServiceEPGClosed(self, ret=False):
 		if ret:
@@ -1528,6 +1531,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		self["key_green"] = Button(_("Satellites"))
 		self["key_yellow"] = Button(_("Provider"))
 		self["key_blue"] = Button(_("Favourites"))
+		self["key_info"] = StaticText(_("INFO"))
 
 		self["list"] = ServiceList(self)
 		self.servicelist = self["list"]
@@ -1789,6 +1793,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		return False
 
 	def showAllServices(self):
+		self["key_info"].setText(_("INFO"))
 		if not self.pathChangeDisabled:
 			ref = serviceRefAppendPath(self.service_types_ref, 'ORDER BY name')
 			if not self.preEnterPath(ref.toString()):
@@ -1803,10 +1808,12 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 	def showSatellites(self, changeMode=False):
 		if not self.pathChangeDisabled:
 			ref = serviceRefAppendPath(self.service_types_ref, 'FROM SATELLITES ORDER BY satellitePosition')
+			self["key_info"].setText(_("INFO"))
 			if not self.preEnterPath(ref.toString()):
 				justSet = False
 				prev = None
 
+				self["key_info"].setText("")
 				if self.isBasePathEqual(ref):
 					if self.isPrevPathEqual(ref):
 						justSet = True
@@ -1822,6 +1829,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 						justSet = True
 						self.clearPath()
 						self.enterPath(ref, True)
+						self["key_green"].setText(_("Satellites") if self.showSatDetails else _("Satellites Extended"))
 				if justSet:
 					addCableAndTerrestrialLater = []
 					serviceHandler = eServiceCenter.getInstance()
@@ -1891,6 +1899,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 								self.setCurrentSelectionAlternative(ref)
 
 	def showProviders(self):
+		self["key_info"].setText("")
 		if not self.pathChangeDisabled:
 			ref = serviceRefAppendPath(self.service_types_ref, ' FROM PROVIDERS ORDER BY name')
 			if not self.preEnterPath(ref.toString()):
@@ -1985,6 +1994,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 	def showFavourites(self):
 		if not self.pathChangeDisabled:
 			if not self.preEnterPath(self.bouquet_root.toString()):
+				self["key_info"].setText("")
 				if self.isBasePathEqual(self.bouquet_root):
 					self.pathUp()
 				else:
@@ -1992,6 +2002,8 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 					if currentRoot is None or currentRoot != self.bouquet_root:
 						self.clearPath()
 						self.enterPath(self.bouquet_root)
+			else:
+				self["key_info"].setText(_("INFO"))
 
 	def keyNumber0(self, number):
 		if len(self.servicePath) > 1 and not self.selectionNumber:
@@ -2163,6 +2175,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		ChannelSelectionEdit.__init__(self)
 		ChannelSelectionEPG.__init__(self)
 		SelectionEventInfo.__init__(self)
+		self["key_info"] = StaticText(_("INFO"))
 		if config.usage.servicelist_mode.value == "simple":
 			self.skinName = "SimpleChannelSelection"
 		elif config.usage.servicelist_mode.value == "standard2" and findSkinScreen("Standar2ChannelSelection"):
@@ -2311,6 +2324,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		if self.movemode and (self.isBasePathEqual(self.bouquet_root) or "userbouquet." in ref.toString()):
 			self.toggleMoveMarked()
 		elif (ref.flags & eServiceReference.flagDirectory) == eServiceReference.flagDirectory:
+			self["key_info"].setText(_("INFO"))
 			if Components.ParentalControl.parentalControl.isServicePlayable(ref, self.bouquetParentalControlCallback, self.session):
 				self.enterPath(ref)
 				self.gotoCurrentServiceOrProvider(ref)
@@ -2615,6 +2629,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.bouquet_mark_edit != OFF and self.endMarkedEdit(True)
 		self.editMode = False
 		self.protectContextMenu = True
+		self["key_info"].setText(_("INFO"))
 		self.close(None)
 
 	def zapBack(self):

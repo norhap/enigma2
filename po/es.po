@@ -5871,7 +5871,7 @@ msgid "Last config"
 msgstr "Última Configuración"
 
 msgid "Last Scanned"
-msgstr "Último Escaneo"
+msgstr "Último Escaneado"
 
 msgid "Last speed"
 msgstr "Última velocidad"
@@ -8095,6 +8095,9 @@ msgstr "Longitud del satélite:"
 
 msgid "Satellites"
 msgstr "Satélites"
+
+msgid "Satellites Extended"
+msgstr "Satélites Extendido"
 
 msgid "Sats"
 msgstr "Sats"
