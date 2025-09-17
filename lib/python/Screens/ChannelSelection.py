@@ -1528,7 +1528,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self["key_red"] = Button(_("All"))
-		self["key_green"] = Button(_("Satellites"))
+		self["key_green"] = StaticText(_("Satellites"))
 		self["key_yellow"] = Button(_("Provider"))
 		self["key_blue"] = Button(_("Favourites"))
 		self["key_info"] = StaticText(_("INFO"))
@@ -1793,6 +1793,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		return False
 
 	def showAllServices(self):
+		self["key_green"].setText(_("Satellites"))
 		self["key_info"].setText(_("INFO"))
 		if not self.pathChangeDisabled:
 			ref = serviceRefAppendPath(self.service_types_ref, 'ORDER BY name')
@@ -1808,6 +1809,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 	def showSatellites(self, changeMode=False):
 		if not self.pathChangeDisabled:
 			ref = serviceRefAppendPath(self.service_types_ref, 'FROM SATELLITES ORDER BY satellitePosition')
+			self["key_green"].setText(_("Simple") if self.showSatDetails else _("Extended"))
 			self["key_info"].setText(_("INFO"))
 			if not self.preEnterPath(ref.toString()):
 				justSet = False
@@ -1829,7 +1831,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 						justSet = True
 						self.clearPath()
 						self.enterPath(ref, True)
-						self["key_green"].setText(_("Satellites") if self.showSatDetails else _("Satellites Extended"))
+						self["key_green"].setText(_("Simple") if self.showSatDetails else _("Extended"))
 				if justSet:
 					addCableAndTerrestrialLater = []
 					serviceHandler = eServiceCenter.getInstance()
@@ -2175,6 +2177,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		ChannelSelectionEdit.__init__(self)
 		ChannelSelectionEPG.__init__(self)
 		SelectionEventInfo.__init__(self)
+		self["key_green"] = StaticText(_("Satellites"))
 		self["key_info"] = StaticText(_("INFO"))
 		if config.usage.servicelist_mode.value == "simple":
 			self.skinName = "SimpleChannelSelection"
@@ -2630,6 +2633,7 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.editMode = False
 		self.protectContextMenu = True
 		self["key_info"].setText(_("INFO"))
+		self["key_green"].setText(_("Satellites"))
 		self.close(None)
 
 	def zapBack(self):
