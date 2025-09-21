@@ -246,8 +246,11 @@ class Session:
 				del self.current_dialog.callback
 
 			self.popCurrent()
-			if callback is not None:
-				callback(*retval)
+			try:
+				if callback is not None:
+					callback(*retval)
+			except AttributeError:
+				print(str(AttributeError))
 
 	def execBegin(self, first=True, do_show=True):
 		try:
