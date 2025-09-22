@@ -1,10 +1,9 @@
 from Components.Converter.Converter import Converter
 from Components.Converter.Poll import Poll
 from Components.Element import cached
-from Tools.Directories import fileReadLines
+from os.path import isfile
 
-
-class CpuUsage(Converter, object):
+class CpuUsage(Converter):
 	CPU_ALL = -2
 	CPU_TOTAL = -1
 
@@ -64,7 +63,7 @@ class CpuUsage(Converter, object):
 	range = 100
 
 
-class CpuUsageMonitor(Poll, object):
+class CpuUsageMonitor(Poll):
 
 	def __init__(self):
 		Poll.__init__(self)
@@ -77,19 +76,19 @@ class CpuUsageMonitor(Poll, object):
 
 	def getCpusInfo(self):
 		results = []
-		lines = fileReadLines("/proc/stat", [])
-		for line in lines:
-			if line.startswith("cpu"):
-				# data = [cpu, usr, nic, sys, idle, iowait, irq, softirq, steal]
-				data = line.split()
-				total = 0
-				for item in range(1, len(data)):
-					data[item] = int(data[item])
-					total += data[item]
-				# busy = total - idle - iowait
-				busy = total - data[4] - data[5]
-				# append [cpu, total, busy]
-				results.append([data[0], total, busy])
+		if isfile("/proc/stat"):
+			with open("/proc/stat", "r") as fd:
+				for line in fd.readlines():
+					if line.find("cpu") == 0:
+						total = busy = 0
+						# data = [cpu, usr, nic, sys, idle, iowait, irq, softirq, steal]
+						data = line.split()
+						for item in range(1, len(data)):
+							total += int(data[item])
+						# busy = total - idle - iowait
+						busy = total - int(data[4]) - int(data[5])
+						# append [cpu, total, busy]
+						results.append([data[0], total, busy])
 		return results
 
 	def poll(self):
