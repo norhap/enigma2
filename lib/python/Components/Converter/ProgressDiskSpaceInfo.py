@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.Converter.Poll import Poll
@@ -81,16 +80,16 @@ class ProgressDiskSpaceInfo(Poll, Converter):
 			else:
 				list = self.getMemInfo(entry[0])
 			if list[0] == 0:
-				text = _("%s: Not Available") % entry[1]
+				text = "%s: " % entry[1] + _("Not Available")
 			elif self.shortFormat:
 				text = _("%s: %s, in use: %s%%") % (entry[1],
 				self.getSizeStr(list[0]), list[3])
 			elif self.fullFormat:
-				text = _("%s: %s Free: %s Used: %s (%s%%)") % (entry[1],
-				self.getSizeStr(list[0]), self.getSizeStr(list[2]), self.getSizeStr(list[1]), list[3])
+				text = "%s: %s %s %s (%s%%)" % (entry[1],
+				self.getSizeStr(list[0]) + " " + _("Free") + ":" + " ", self.getSizeStr(list[2]) + " " + _("Used") + ":" + " ", self.getSizeStr(list[1]), list[3])
 			else:
-				text = _("%s: %s Used: %s Free: %s") % (entry[1],
-				self.getSizeStr(list[0]), self.getSizeStr(list[1]), self.getSizeStr(list[2]))
+				text = "%s: %s %s %s" % (entry[1],
+				self.getSizeStr(list[0]) + "   " + _("Used") + ":" + " ", self.getSizeStr(list[1]) + " " + _("Free") + ":" + " ", self.getSizeStr(list[2]))
 		return text
 
 	@cached

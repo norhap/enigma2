@@ -787,7 +787,7 @@ class CCcamInfoMain(Screen):
 					if x != "":
 						list.append(x)
 
-				self.showInfo("%s\n\n  %s %s\n  %s %s\n  %s %s" % (_("Free memory:"), _("Total:"), list[0], _("Used:"), list[1], _("Free:"), list[2]), _("Free memory"))
+				self.showInfo("%s\n\n  %s %s\n  %s %s\n  %s %s" % (_("Free memory:"), _("Total:"), list[0], _("Used:"), list[1], _("Free") + ":", list[2]), _("Free memory"))
 			else:
 				self.showInfo(result, _("Free memory"))
 		else:

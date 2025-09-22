@@ -32,7 +32,7 @@ class CpuUsage(Converter, object):
 					if pos < len(self.sfmt) - 1 and \
 						self.sfmt[pos + 1].isdigit() and \
 						int(self.sfmt[pos + 1]) > cpus:
-						self.sfmt = self.sfmt.replace("$%s" % self.sfmt[pos + 1], "N/A")
+						self.sfmt = self.sfmt.replace("$%s" % self.sfmt[pos + 1], "")
 					pos += 1
 
 	def doSuspend(self, suspended):

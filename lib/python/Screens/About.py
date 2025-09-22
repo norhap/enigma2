@@ -662,15 +662,15 @@ class Devices(Screen):
 					hddp = hddp.replace('Internal', 'ATA Bus ')
 				free = hdd.Totalfree()
 				if ((float(free) / 1024) / 1024) >= 1:
-					freeline = _("Free: ") + str(round(((float(free) / 1024) / 1024), 2)) + "TB"
+					freeline = _("Free") + ":" + " " + str(round(((float(free) / 1024) / 1024), 2)) + "TB"
 				elif (free / 1024) >= 1:
-					freeline = _("Free: ") + str(round((float(free) / 1024), 2)) + "GB"
+					freeline = _("Free") + ":" + " " + str(round((float(free) / 1024), 2)) + "GB"
 				elif free >= 1:
-					freeline = _("Free: ") + str(free) + "MB"
+					freeline = _("Free") + ":" + " " + str(free) + "MB"
 				elif "Generic(STORAGE" in hddp:
 					continue
 				else:
-					freeline = _("Free: ") + _("full")
+					freeline = _("Free") + ":" + " " + _("full")
 				line = "%s      %s" % (hddp, freeline)
 				self.list.append(line)
 		self.list = '\n'.join(self.list)
@@ -1123,7 +1123,7 @@ class SystemMemoryInfo(Screen):
 		RamFree = flash[3]
 		self.AboutText += "\n\nFLASH" + '\n\n'
 		self.AboutText += _("Total:") + "\t" + "\t" + RamTotal.replace('G', ' G').replace('M', ' M') + "B" + "\n"
-		self.AboutText += _("Free:") + "\t" + "\t" + RamFree.replace('G', ' G').replace('M', ' M') + "B" + "\n\n"
+		self.AboutText += _("Free") + ":" + "\t" + "\t" + RamFree.replace('G', ' G').replace('M', ' M') + "B" + "\n\n"
 		if fileHas("/var/log/dmesg", "Memory: "):
 			with open("/var/log/dmesg", "r") as ramsystem:
 				for ram in ramsystem.readlines():
