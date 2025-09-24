@@ -19186,7 +19186,7 @@ msgid "want to stop and delete this recordings?"
 msgstr "¿Quieres detener y eliminar estas grabaciones?"
 
 msgid "Weather Report"
-msgstr "Informe Metereólogico"
+msgstr "Informe Meteorológico"
 
 msgid "Add Language"
 msgstr "Añadir Lenguaje"
