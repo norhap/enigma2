@@ -7,5 +7,5 @@ install_PYTHON = \
 	MainMenu.py \
 	Pager.py \
 	ScreenButtonsBar.py \
-    ScreenHeader.py \
-    ServiceInfoBar.py
+	ScreenHeader.py \
+	ServiceInfoBar.py
