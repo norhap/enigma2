@@ -1,7 +1,5 @@
 installdir = $(pkglibdir)/python/Components/Addons
 
-installdir = $(pkglibdir)/python/Components/Renderer
-
 install_PYTHON = \
 	ButtonSequence.py \
 	ColorButtonsSequence.py \
