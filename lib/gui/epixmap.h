@@ -18,10 +18,7 @@ public:
 	void setAlphatest(int alphatest); /* 1 for alphatest, 2 for alphablend */
 	void setScale(int scale); // DEPRECATED
 	void setPixmapScale(int flags);
-
-	void setAniPixmapFromFile(const char* filename, bool autostart = false);
-	void startAnimation(bool once = false);
-	void stopAnimation() { m_animTimer->stop(); }
+	void setPixmapScaleFlags(int flags) { setPixmapScale(flags); } // DEPRECATED
 
 	void setAniPixmapFromFile(const char* filename, bool autostart = false);
 	void startAnimation(bool once = false);
