@@ -242,16 +242,27 @@ class Screen(dict):
 		self.createGUIScreen(self.instance, self.desktop)
 
 	def createGUIScreen(self, parent, desktop, updateonly=False):
+		def addToStack(widget):
+			if hasattr(widget, "stackIndex") and widget.stackIndex != -1:
+				stack = self.stacks[widget.stackIndex]
+				stack.instance.addChild(widget.instance)
+
+		for widget in self.stacks:
+			widget.instance = widget.widget(parent, widget.layout)
+			applyAllAttributes(widget.instance, desktop, widget.skinAttributes, self.scale)
+			addToStack(widget)
 		for item in self.renderer:
 			if isinstance(item, GUIComponent):
 				if not updateonly:
 					item.GUIcreate(parent)
+					addToStack(item)
 				if not item.applySkin(desktop, self):
 					print(f"[Screen] Warning: Skin is missing renderer {item} in {str(self)}.")
 		for (name, item) in self.items():
 			if isinstance(item, GUIComponent):
 				if not updateonly:
 					item.GUIcreate(parent)
+					addToStack(item)
 				depr = item.deprecationInfo
 				if item.applySkin(desktop, self):
 					if depr:
@@ -264,10 +275,11 @@ class Screen(dict):
 						print(f"[Screen] Skin Error <embedded-{str(self)}: widget '{name}' is missing in mandatory widgets.!")
 					else:
 						print(f"[Screen] Warning: Skin is missing element {name} in {str(self)}.")
-		for item in self.additionalWidgets:
+		for widget in self.additionalWidgets:
 			if not updateonly:
-				item.instance = item.widget(parent)
-			applyAllAttributes(item.instance, desktop, item.skinAttributes, self.scale)
+				widget.instance = widget.widget(parent)
+			applyAllAttributes(widget.instance, desktop, widget.skinAttributes, self.scale)
+			addToStack(widget)
 		for callback in self.onLayoutFinish:
 			if not isinstance(callback, type(self.close)):
 				# The following command triggers an error in Puthon 3 even if a PY2 test is used!!!
