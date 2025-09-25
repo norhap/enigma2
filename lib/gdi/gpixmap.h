@@ -147,6 +147,7 @@ struct gPalette
 	gRGB *data;
 	unsigned long data_phys;
 	gColor findColor(const gRGB rgb) const;
+	gColor findOrAddColor(const gRGB rgb);
 	gPalette():	start(0), colors(0), data(0), data_phys(0) {}
 };
 

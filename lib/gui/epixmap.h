@@ -23,6 +23,10 @@ public:
 	void startAnimation(bool once = false);
 	void stopAnimation() { m_animTimer->stop(); }
 
+	void setAniPixmapFromFile(const char* filename, bool autostart = false);
+	void startAnimation(bool once = false);
+	void stopAnimation() { m_animTimer->stop(); }
+
 protected:
 	ePtr<gPixmap> m_pixmap;
 	int event(int event, void* data = 0, void* data2 = 0);
