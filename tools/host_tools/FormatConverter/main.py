@@ -3,7 +3,7 @@ from os import system
 from datasource import genericdatasource
 from satxml import satxml
 from lamedb import lamedb
-from input import *  # noqa: F403
+from input import inputChoices
 
 maindata = genericdatasource()
 
