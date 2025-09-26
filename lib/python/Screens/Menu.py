@@ -244,7 +244,6 @@ class Menu(Screen, ProtectedScreen):
 		self.menulength = 0
 		self["key_blue"] = StaticText("")
 		self["menu"] = List([])
-		self["menu"].onSelectionChanged.append(self.selectionChanged)
 		self["menuimage"] = Pixmap()
 		self.showNumericHelp = False
 		self.createMenuList()
@@ -340,9 +339,6 @@ class Menu(Screen, ProtectedScreen):
 			self.onExecBegin.append(self.__onExecBegin)
 		if self.layoutFinished not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.layoutFinished)
-
-	def selectionChanged(self):
-		self["menuimage"].instance.setPixmap(self.getMenuEntryImage(self.menuID))
 
 	def openTestA(self):
 		self.session.open(AnimMain, self.list, self.menu_title)
