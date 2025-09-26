@@ -44,6 +44,7 @@ class Element(object):
 		self.source = None
 		self.__suspended = True
 		self.cache = None
+		self.onChanged = []  # Addons Actions ButtonSequence.
 
 	def connectDownstream(self, downstream):
 		self.downstream_elements.append(downstream)
@@ -93,6 +94,8 @@ class Element(object):
 		self.cache = {}
 		self.downstream_elements.changed(*args, **kwargs)
 		self.cache = None
+		for x in self.onChanged:
+			x()
 
 	def setSuspend(self, suspended):
 		changed = self.__suspended != suspended

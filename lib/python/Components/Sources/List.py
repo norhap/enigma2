@@ -24,7 +24,12 @@ to generate HTML."""
 		self.listStyle = "default"  # Style might be an optional string which can be used to define different visualizations in the skin.
 		self.listIndexNames = indexNames or {}
 		self.onSelectionChanged = []
+		self.onListUpdated = []
 		self.disableCallbacks = False
+		self.connectedGuiElement = None
+		self.__current = None
+		self.__index = None
+		self.connectedGuiElement = None
 
 	def enableAutoNavigation(self, enabled):
 		try:
@@ -39,11 +44,19 @@ to generate HTML."""
 	def setList(self, listData):
 		self.listData = listData
 		self.changed((self.CHANGED_ALL,))
+		self.listUpdated()
 
 	list = property(getList, setList)
 
 	def count(self):
 		return len(self.listData)
+
+	def setConnectedGuiElement(self, guiElement):
+		self.connectedGuiElement = guiElement
+		index = guiElement.instance.getCurrentIndex()
+		self.__current = self.list[index]
+		self.__index = index
+		self.changed((self.CHANGED_ALL,))
 
 	def updateList(self, listData):
 		"""Changes the list without changing the selection or emitting changed Events"""
@@ -79,7 +92,10 @@ to generate HTML."""
 
 	@cached
 	def getCurrent(self):
-		return self.master is not None and self.master.current
+		if self.master:
+			if hasattr(self.master, "current"):
+				return self.master.current
+		return self.__current
 
 	current = property(getCurrent)
 
@@ -139,6 +155,10 @@ to generate HTML."""
 			self.changed((self.CHANGED_SPECIFIC, "style"))
 
 	style = property(getStyle, setStyle)
+
+	def listUpdated(self):
+		for x in self.onListUpdated:
+			x()
 
 	@cached
 	def getIndexNames(self):
@@ -266,10 +286,17 @@ to generate HTML."""
 		return self.getCurrentIndex()
 
 	def getIndex(self):
-		return self.getCurrentIndex()
+		return self.getCurrentIndex() if self.master is not None and hasattr(self.master, "index") else self.__index
 
 	def setIndex(self, index):
-		self.setCurrentIndex(index)
+		if self.master is not None:
+			if hasattr(self.master, "index"):
+				self.master.index = index
+			else:
+				self.__index = index
+			self.selectionChanged(index)
+		if self.connectedGuiElement is not None:
+			self.connectedGuiElement.moveSelection(index)
 
 	def top(self):
 		self.goTop()
