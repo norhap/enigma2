@@ -56,18 +56,18 @@ class MainMenu(GUIAddon):
 
 		if self.iconSize > 0 and menupng:
 			res.append(MultiContentEntryPixmapAlphaBlend(
-						pos=(xPos, yPos),
-						size=(self.iconSize, self.iconSize),
-						png=menupng))
+				pos=(xPos, yPos),
+				size=(self.iconSize, self.iconSize),
+				png=menupng))
 			xPos += self.iconSize + 10
 		textWidth = self.longestMenuTextWidth if self.maxWidth >= (self.longestMenuTextWidth + self.iconSize + 40 + 10) else self.maxWidth - self.iconSize - 40 - 10
 		res.append(MultiContentEntryText(
-				pos=(xPos, 0),
-				size=(textWidth, self.itemHeight),
-				font=0, flags=RT_BLEND | RT_HALIGN_LEFT | RT_VALIGN_CENTER,
-				text=item_text,
-				color=self.foregroundColor, color_sel=self.foregroundColorSelected,
-				backcolor=None, backcolor_sel=None))
+			pos=(xPos, 0),
+			size=(textWidth, self.itemHeight),
+			font=0, flags=RT_BLEND | RT_HALIGN_LEFT | RT_VALIGN_CENTER,
+			text=item_text,
+			color=self.foregroundColor, color_sel=self.foregroundColorSelected,
+			backcolor=None, backcolor_sel=None))
 
 		return res
 
