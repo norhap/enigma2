@@ -1665,9 +1665,9 @@ class PacketManager(Screen, NumericalTextInput):
 					tokens = x.split(' - ')
 					name = tokens[0].strip()
 					if name and not any(name.endswith(x) for x in self.unwanted_extensions):
-						l = len(tokens)
-						version = l > 1 and tokens[1].strip() or ""
-						descr = l > 2 and tokens[2].strip() or ""
+						L = len(tokens)
+						version = L > 1 and tokens[1].strip() or ""
+						descr = L > 2 and tokens[2].strip() or ""
 						if name == last_name:
 							continue
 						last_name = name
@@ -1691,8 +1691,8 @@ class PacketManager(Screen, NumericalTextInput):
 				tokens = x.split(' - ')
 				name = tokens[0].strip()
 				if not any(name.endswith(x) for x in self.unwanted_extensions):
-					l = len(tokens)
-					version = l > 1 and tokens[1].strip() or ""
+					L = len(tokens)
+					version = L > 1 and tokens[1].strip() or ""
 					self.installed_packetlist[name] = version
 		if not self.Console:
 			self.Console = Console()
@@ -1706,8 +1706,8 @@ class PacketManager(Screen, NumericalTextInput):
 				tokens = x.split(' - ')
 				name = tokens[0].strip()
 				if not any(name.endswith(x) for x in self.unwanted_extensions):
-					l = len(tokens)
-					version = l > 2 and tokens[2].strip() or ""
+					L = len(tokens)
+					version = L > 2 and tokens[2].strip() or ""
 					self.upgradeable_packages[name] = version
 		self.buildPacketList()
 

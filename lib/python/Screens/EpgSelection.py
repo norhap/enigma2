@@ -336,13 +336,13 @@ class EPGSelection(Screen, HelpableScreen):
 		self.setTitle(self.saved_title + ' - ' + service.getServiceName())
 
 	def eventViewCallback(self, setEvent, setService, val):
-		l = self["list"]
-		old = l.getCurrent()
+		L = self["list"]
+		old = L.getCurrent()
 		if val == -1:
 			self.moveUp()
 		elif val == +1:
 			self.moveDown()
-		cur = l.getCurrent()
+		cur = L.getCurrent()
 		if self.type == EPG_TYPE_MULTI and cur[0] is None and cur[1].ref != old[1].ref:
 			self.eventViewCallback(setEvent, setService, val)
 		else:

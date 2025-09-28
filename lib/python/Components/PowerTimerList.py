@@ -120,7 +120,7 @@ class PowerTimerList(GUIComponent, object):
 
 	def __init__(self, list):
 		GUIComponent.__init__(self)
-		self.l = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.l.setBuildFunc(self.buildTimerEntry)
 		self.serviceNameFont = gFont("Regular", 20)
 		self.font = gFont("Regular", 18)

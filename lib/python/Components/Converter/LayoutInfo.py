@@ -163,8 +163,8 @@ class LayoutInfo(Poll, Converter):
             try:
                 fd = open('/proc/mounts', 'r')
                 for line in fd:
-                    l = line.split()
-                    if len(l) > 1 and l[1] == path:
+                    L = line.split()
+                    if len(L) > 1 and L[1] == path:
                         return True
 
                 fd.close()

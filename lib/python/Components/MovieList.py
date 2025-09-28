@@ -569,12 +569,12 @@ class MovieList(GUIComponent):
 		return self.instance.getCurrentIndex()
 
 	def getCurrentEvent(self):
-		l = self.l.getCurrentSelection()
-		return l and l[0] and l[1] and l[1].getEvent(l[0])
+		L = self.l.getCurrentSelection()
+		return L and L[0] and L[1] and L[1].getEvent(L[0])
 
 	def getCurrent(self):
-		l = self.l.getCurrentSelection()
-		return l and l[0]
+		L = self.l.getCurrentSelection()
+		return L and L[0]
 
 	def getItem(self, index):
 		if self.list:

@@ -91,7 +91,7 @@ class EPGList(GUIComponent):
 		self.onSelChanged = []
 		if selChangedCB is not None:
 			self.onSelChanged.append(selChangedCB)
-		self.l = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.l.setBuildFunc(self.buildEntry)
 		self.setOverjump_Empty(overjump_empty)
 		self.epg_bouquet = epg_bouquet
@@ -767,7 +767,7 @@ class EPGList(GUIComponent):
 class TimelineText(GUIComponent):
 	def __init__(self):
 		GUIComponent.__init__(self)
-		self.l = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.l.setSelectionClip(eRect(0, 0, 0, 0))
 		self.l.setItemHeight(25)
 		self.foreColor = 0xffc000
@@ -805,7 +805,7 @@ class TimelineText(GUIComponent):
 		elif "picon" in value:
 			self.datefmt = _("%d-%m")
 
-	def setEntries(self, l, timeline_now, time_lines, force):
+	def setEntries(self, l, timeline_now, time_lines, force):  # noqa: E741
 		event_rect = l.getEventRect()
 		time_epoch = l.getTimeEpoch()
 		time_base = l.getTimeBase()
@@ -1135,9 +1135,9 @@ class GraphMultiEPG(Screen, HelpableScreen):
 				now = time()
 				self.ask_time = ret[1] if ret[1] >= now else now
 				self.ask_time = self.ask_time - self.ask_time % int(config.misc.graph_mepg.roundTo.getValue())
-				l = self["list"]
-				l.resetOffset()
-				l.fillMultiEPG(None, self.ask_time)
+				L = self["list"]
+				L.resetOffset()
+				L.fillMultiEPG(None, self.ask_time)
 				self.moveTimeLines(True)
 				self.time_mode = self.TIME_CHANGE
 				self["key_blue"].setText(_("Add autotimer\nNow (Press long)") if isPluginInstalled("AutoTimer") else _("AutoTimer is not installed\nNow (Press long)"))
@@ -1156,19 +1156,19 @@ class GraphMultiEPG(Screen, HelpableScreen):
 					date = date + 60 * 60 * 24
 				self.time_mode = self.TIME_PRIME
 				self["key_blue"].setText(_("Add autotimer\nNow (Press long)") if isPluginInstalled("AutoTimer") else _("AutoTimer is not installed\nNow (Press long)"))
-			l = self["list"]
+			L = self["list"]
 			self.ask_time = date - date % int(config.misc.graph_mepg.roundTo.getValue())
-			l.resetOffset()
-			l.fillMultiEPG(None, self.ask_time)
+			L.resetOffset()
+			L.fillMultiEPG(None, self.ask_time)
 			self.moveTimeLines(True)
 
 	def setEvent(self, serviceref, eventid):
 		self.setService(serviceref.ref)
-		l = self["list"]
-		event = l.getEventFromId(serviceref, eventid)
+		L = self["list"]
+		event = L.getEventFromId(serviceref, eventid)
 		self.ask_time = event.getBeginTime()
-		l.resetOffset()
-		l.fillMultiEPG(None, self.ask_time)
+		L.resetOffset()
+		L.fillMultiEPG(None, self.ask_time)
 		self.moveTimeLines(True)
 
 	def showSetup(self):
@@ -1186,16 +1186,16 @@ class GraphMultiEPG(Screen, HelpableScreen):
 			self.session.openWithCallback(self.close, MessageBox, _("The PIN code you entered is wrong."), MessageBox.TYPE_ERROR)
 
 	def onSetupClose(self, ignore=-1):
-		l = self["list"]
-		l.setItemsPerPage()
-		l.setEventFontsize()
-		l.setEpoch(config.misc.graph_mepg.prev_time_period.value)
-		l.setOverjump_Empty(config.misc.graph_mepg.overjump.value)
-		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
+		L = self["list"]
+		L.setItemsPerPage()
+		L.setEventFontsize()
+		L.setEpoch(config.misc.graph_mepg.prev_time_period.value)
+		L.setOverjump_Empty(config.misc.graph_mepg.overjump.value)
+		L.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
 		now = time()
 		self.ask_time = now - now % int(config.misc.graph_mepg.roundTo.getValue())
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
-		l.fillMultiEPG(None, self.ask_time)
+		L.fillMultiEPG(None, self.ask_time)
 		self.moveTimeLines(True)
 		self.time_mode = self.TIME_NOW
 		self["key_blue"].setText(_("Add autotimer\nPrime time (Press long)") if isPluginInstalled("AutoTimer") else _("AutoTimer is not installed\nPrime time (Press long)"))
@@ -1264,26 +1264,26 @@ class GraphMultiEPG(Screen, HelpableScreen):
 		self.serviceref = service
 
 	def doRefresh(self, answer):
-		l = self["list"]
-		l.moveToService(self.serviceref)
-		l.setCurrentlyPlaying(Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection())
+		L = self["list"]
+		L.moveToService(self.serviceref)
+		L.setCurrentlyPlaying(Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection())
 		self.moveTimeLines()
 
 	def onCreate(self):
 		self.serviceref = self.serviceref or Screens.InfoBar.InfoBar.instance.servicelist.getCurrentSelection()
-		l = self["list"]
-		l.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
+		L = self["list"]
+		L.setShowServiceMode(config.misc.graph_mepg.servicetitle_mode.value)
 		self["timeline_text"].setDateFormat(config.misc.graph_mepg.servicetitle_mode.value)
-		l.fillMultiEPG(self.services, self.ask_time)
-		l.moveToService(self.serviceref)
-		l.setCurrentlyPlaying(self.previousref)
+		L.fillMultiEPG(self.services, self.ask_time)
+		L.moveToService(self.serviceref)
+		L.setCurrentlyPlaying(self.previousref)
 		self.moveTimeLines()
 
 	def eventViewCallback(self, setEvent, setService, val):
-		l = self["list"]
-		old = l.getCurrent()
+		L = self["list"]
+		old = L.getCurrent()
 		self.updEvent(val, False)
-		cur = l.getCurrent()
+		cur = L.getCurrent()
 		if cur[0] is None and cur[1].ref != old[1].ref:
 			self.eventViewCallback(setEvent, setService, val)
 		else:

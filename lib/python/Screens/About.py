@@ -1159,10 +1159,10 @@ class TranslationInfo(Screen):
 		infolines = _("").split("\n")
 		infomap = {}
 		for x in infolines:
-			l = x.split(': ')
-			if len(l) != 2:
+			L = x.split(': ')
+			if len(L) != 2:
 				continue
-			(type, value) = l
+			(type, value) = L
 			infomap[type] = value
 		print(infomap)
 		translator_name = infomap.get("Language-Team", "none")

@@ -152,18 +152,18 @@ class PollReactor(posixbase.PosixReactorBase):
 			timeout = int(timeout * 1000)  # convert seconds to milliseconds
 
 		try:
-			l = poller.poll(timeout)
-			if l is None:
+			L = poller.poll(timeout)
+			if L is None:
 				if self.running:
 					self.stop()
-				l = []
+				L = []
 		except select.error as e:
 			if e[0] == errno.EINTR:
 				return
 			else:
 				raise
 		_drdw = self._doReadOrWrite
-		for fd, event in l:
+		for fd, event in L:
 			try:
 				selectable = selectables[fd]
 			except KeyError:

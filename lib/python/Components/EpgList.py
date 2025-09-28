@@ -48,7 +48,7 @@ class EPGList(GUIComponent):
 			self.onSelChanged.append(selChangedCB)
 		GUIComponent.__init__(self)
 		self.type = type
-		self.l = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.eventItemFont = gFont("Regular", 22)
 		self.eventTimeFont = gFont("Regular", 16)
 		self.iconSize = 21

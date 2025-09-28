@@ -113,7 +113,7 @@ class ImportChannels():
 			print(f"[ImportChannels] saveEPGonRemoteReceiver ERROR: {err}")
 		except URLError as err:
 			print(f"[ImportChannels] saveEPGonRemoteReceiver ERROR: {err}")
-		except Exception:
+		except:
 			print('[ImportChannels] saveEPGonRemoteReceiver undefined error')
 
 	def FTPdownloadFile(self, sourcefolder, sourcefile, destfile):
@@ -224,7 +224,7 @@ class ImportChannels():
 							try:
 								try:
 									mkdir("/tmp/epgdat")
-								except Exception:
+								except:
 									print("[ImportChannels] epgdat folder exists in tmp")
 								epgdattmp = "/tmp/epgdat"
 								epgdatserver = "/tmp/epgdat/epg.dat"
@@ -257,9 +257,9 @@ class ImportChannels():
 				else:
 					with open(f"{channelslistpath}/{file}", "r") as f:
 						content = f.readlines()
-			except Exception as err:
+			except Exception as e:
 				# for the moment just log and ignore
-				print(f"[ImportChannels] {err}")
+				print(f"[ImportChannels] {e}")
 				continue
 
 			# check the contents for more bouquet files
@@ -290,7 +290,7 @@ class ImportChannels():
 					print(f"[ImportChannels] Downloading {file}...")
 				try:
 					open(join(self.tmp_dir, basename(file)), "wb").write(self.getUrl(f"{self.url}/file?file={channelslistpath}/{quote(file)}").read())
-				except Exception:
+				except Exception as err:
 					if "epg" not in self.remote_fallback_import:
 						self.ImportChannelsNotDone(True, _("Access not available:\nCheck HTTP authentication not is active on the receiver fallback.\nIf the problem persists try with \"Fallback remote receiver IP\"."))  # + _("Read failled") + f" {channelslistpath}/{file} " + _("From :") + f" {self.url}")
 					return

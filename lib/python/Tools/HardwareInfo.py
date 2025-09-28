@@ -41,11 +41,11 @@ class HardwareInfo:
 		# Model
 		for line in open((resolveFilename(SCOPE_SKINS, 'hw_info/hw_info.cfg')), 'r'):
 			if not line.startswith('#') and not line.isspace():
-				l = line.strip().replace('\t', ' ')
-				if ' ' in l:
-					infoFname, prefix = l.split()
+				L = line.strip().replace('\t', ' ')
+				if ' ' in L:
+					infoFname, prefix = L.split()
 				else:
-					infoFname = l
+					infoFname = L
 					prefix = ""
 				try:
 					self.device_model = prefix + open("/proc/stb/info/" + infoFname).read().strip()  # this variable starts machine you can also use proc boxtype

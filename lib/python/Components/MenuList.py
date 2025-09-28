@@ -9,7 +9,7 @@ class MenuList(GUIComponent):
 	def __init__(self, list, enableWrapAround=None, content=eListboxPythonStringContent):  # enableWrapAround is deprecated as this is now controllable in the skin and windowstyle.
 		GUIComponent.__init__(self)
 		self.list = list
-		self.l = content()
+		self.l = content()  # noqa: E741
 		self.l.setList(self.list)
 		self.onSelectionChanged = []
 

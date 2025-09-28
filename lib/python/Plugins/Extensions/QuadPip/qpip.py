@@ -789,9 +789,9 @@ class QuadPipScreen(Screen, FocusShowHide, HelpableScreen):
 
 		self.fontSize = {1080: 40, 720: 28, 576: 18}.get(h, 40)
 		ww = int(w / 2 - 10)
-		l = int(w / 2 + 5)
-		self.text1Pos = (l, h - h18 - h18, ww, h18)
-		self.text2Pos = (l, h - h18, ww, h18)
+		L = int(w / 2 + 5)
+		self.text1Pos = (L, h - h18 - h18, ww, h18)
+		self.text2Pos = (L, h - h18, ww, h18)
 
 	def moveFrame(self):
 		self.showFocus()

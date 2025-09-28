@@ -65,8 +65,8 @@ for arg in sys.argv[1:]:
 		print('#: ' + arg)
 		k.replace("\\n", "\"\n\"")
 		if c:
-			for l in c.split('\n'):
-				print("#. ", l)
+			for L in c.split('\n'):
+				print("#. ", L)
 		print('msgid "' + k + '"')
 		print('msgstr ""')
 

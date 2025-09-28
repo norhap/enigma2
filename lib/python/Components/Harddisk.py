@@ -732,8 +732,8 @@ class HarddiskManager:
 			if p.mountpoint:  # Plugins won't expect unmounted devices
 				self.on_partition_list_change("add", p)
 			# see if this is a harddrive
-			l = len(device)
-			if l and (not device[l - 1].isdigit() or device.startswith("mmcblk")):
+			L = len(device)
+			if L and (not device[L - 1].isdigit() or device.startswith("mmcblk")):
 				self.hdd.append(Harddisk(device, removable))
 				self.hdd.sort()
 				SystemInfo["Harddisk"] = True
@@ -767,8 +767,8 @@ class HarddiskManager:
 				self.partitions.remove(x)
 				if x.mountpoint:  # Plugins won't expect unmounted devices
 					self.on_partition_list_change("remove", x)
-		l = len(device)
-		if l and (not device[l - 1].isdigit() or (device.startswith("mmcblk") and not search(r"mmcblk\dp\d+", device))):
+		L = len(device)
+		if L and (not device[L - 1].isdigit() or (device.startswith("mmcblk") and not search(r"mmcblk\dp\d+", device))):
 			for hdd in self.hdd:
 				if hdd.device == device:
 					hdd.stop()

@@ -140,7 +140,7 @@ def translateBlock(block):
 #############################################################
 
 
-def getConfigValue(l):
+def getConfigValue(l):  # noqa: E741
 	list = l.split(":")
 	ret = ""
 
@@ -464,17 +464,17 @@ class CCcamInfoMain(Screen):
 		try:
 			f = open(CFG, 'r')
 
-			for l in f:
-				if l.startswith('WEBINFO LISTEN PORT :'):
-					port = getConfigValue(l)
+			for L in f:
+				if L.startswith('WEBINFO LISTEN PORT :'):
+					port = getConfigValue(L)
 					if port != "":
 						self.url = self.url.replace('16001', port)
 
-				elif l.startswith('WEBINFO USERNAME :'):
-					username = getConfigValue(l)
+				elif L.startswith('WEBINFO USERNAME :'):
+					username = getConfigValue(L)
 
-				elif l.startswith('WEBINFO PASSWORD :'):
-					password = getConfigValue(l)
+				elif L.startswith('WEBINFO PASSWORD :'):
+					password = getConfigValue(L)
 
 			f.close()
 		except:
@@ -642,12 +642,12 @@ class CCcamInfoMain(Screen):
 		infoList = []
 		lines = html.split("\n")
 
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split('|')
+					list = L.split('|')
 					if len(list) > 8:
 						username = list[1].replace(" ", "")
 						if username != "":
@@ -674,12 +674,12 @@ class CCcamInfoMain(Screen):
 		infoList = []
 		lines = html.split("\n")
 
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split('|')
+					list = L.split('|')
 					if len(list) > 7:
 						hostname = list[1].replace(" ", "")
 						if hostname != "":
@@ -705,12 +705,12 @@ class CCcamInfoMain(Screen):
 		infoList = []
 		lines = html.split("\n")
 
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split('|')
+					list = L.split('|')
 					if len(list) > 7:
 						hostname = list[1].replace(" ", "")
 						if hostname != "":
@@ -735,12 +735,12 @@ class CCcamInfoMain(Screen):
 		infoList = []
 		lines = html.split("\n")
 
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split('|')
+					list = L.split('|')
 					if len(list) > 5:
 						caid = list[1].replace(" ", "")
 						if caid != "":
@@ -909,12 +909,12 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 		ulevel = 0
 		lines = html.split("\n")
 
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split("|")
+					list = L.split("|")
 					if len(list) > 7:
 						hostname = list[1].replace(" ", "")
 						if hostname != "":
@@ -1060,12 +1060,12 @@ class CCcamShareViewMenu(Screen, HelpableScreen):
 	def readProvidersCallback(self, html):
 		firstLine = True
 		lines = html.split("\n")
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split('|')
+					list = L.split('|')
 					if len(list) > 5:
 						caid = list[1].replace(" ", "")
 						if caid != "":
@@ -1442,12 +1442,12 @@ class CCcamInfoShareInfo(Screen):
 		count = 0
 		lines = html.split("\n")
 
-		for l in lines:
-			if l.__contains__('|'):
+		for L in lines:
+			if L.__contains__('|'):
 				if firstLine:
 					firstLine = False
 				else:
-					list = l.split("|")
+					list = L.split("|")
 					if len(list) > 7:
 						hostname = list[1].replace(" ", "")
 						if (self.hostname == "None" or self.hostname == hostname) and hostname != "":

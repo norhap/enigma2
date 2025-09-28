@@ -125,9 +125,9 @@ class SoftwareTools(PackageInfoHandler):
 					tokens = x.split(' - ')
 					name = tokens[0].strip()
 					if not any(name.endswith(x) for x in self.unwanted_extensions):
-						l = len(tokens)
-						version = l > 1 and tokens[1].strip() or ""
-						descr = l > 2 and tokens[2].strip() or ""
+						L = len(tokens)
+						version = L > 1 and tokens[1].strip() or ""
+						descr = L > 2 and tokens[2].strip() or ""
 						self.available_packetlist.append([name, version, descr])
 				if callback is None:
 					self.startInstallMetaPackage()
@@ -188,8 +188,8 @@ class SoftwareTools(PackageInfoHandler):
 				tokens = x.split(' - ')
 				name = tokens[0].strip()
 				if not any(name.endswith(x) for x in self.unwanted_extensions):
-					l = len(tokens)
-					version = l > 1 and tokens[1].strip() or ""
+					L = len(tokens)
+					version = L > 1 and tokens[1].strip() or ""
 					self.installed_packetlist[name] = version
 			for package in self.packagesIndexlist[:]:
 				if not self.verifyPrerequisites(package[0]["prerequisites"]):

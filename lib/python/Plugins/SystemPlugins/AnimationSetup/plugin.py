@@ -189,15 +189,15 @@ class AnimationSetupScreen(Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		l = []
+		L = []
 		for x in self.animationSetupItems:
 			key = x.get("idx", 0)
 			name = x.get("name", "??")
 			if key == config.misc.window_animation_default.value:
 				name = "* %s" % (name)
-			l.append((name, key))
+			L.append((name, key))
 
-		self["list"].setList(l)
+		self["list"].setList(L)
 
 	def ok(self):
 		current = self["list"].getCurrent()
