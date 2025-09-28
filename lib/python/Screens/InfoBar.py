@@ -4,7 +4,7 @@ from enigma import eServiceReference, eProfileWrite, eServiceCenter, iPlayableSe
 eProfileWrite("LOAD:enigma")
 from Components.SystemInfo import BRAND, MODEL  # noqa: E402
 from Tools.Directories import fileExists, isPluginInstalled  # noqa: E402
-from Tools.Notifications import AddNotification
+from Tools.Notifications import AddNotification  # noqa: E402
 # workaround for required config entry dependencies.
 from Screens.MovieSelection import MovieSelection, moveServiceFiles  # noqa: E402
 from Screens.Hotkey import InfoBarHotkey  # noqa: E402

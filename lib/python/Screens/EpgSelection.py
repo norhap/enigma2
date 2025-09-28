@@ -27,7 +27,6 @@ from Tools.BoundFunction import boundFunction
 from Tools.FallbackTimer import FallbackTimerList
 from Components.Button import Button
 from Tools.Directories import isPluginInstalled
-from Screens.MessageBox import MessageBox
 from Components.Console import Console
 from gettext import pgettext
 

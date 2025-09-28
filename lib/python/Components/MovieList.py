@@ -210,7 +210,7 @@ class MovieList(GUIComponent):
 		if config.usage.time.wide.value:
 			self.dateWidth = int(self.dateWidth * 1.15)
 		self.reloadDelayTimer = None
-		self.l = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()  # noqa: E741
 		self.tags = set()
 		self.root = None
 		self._playInBackground = None
