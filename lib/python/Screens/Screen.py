@@ -22,7 +22,7 @@ class Screen(dict):
 		self.session = session
 		self.parent = parent
 		self.mandatoryWidgets = mandatoryWidgets
-		self.ignoreWidgets = []
+		self.handledWidgets = []
 		self.onClose = []
 		self.onFirstExecBegin = []
 		self.onExecBegin = []
@@ -231,8 +231,8 @@ class Screen(dict):
 		resolution = bounds
 		zPosition = 0
 		for (key, value) in self.skinAttributes:
-			if key == "ignoreWidgets":
-				self.ignoreWidgets = [x.strip() for x in value.split(",")]
+			if key == "handledWidgets":
+				self.handledWidgets = [x.strip() for x in value.split(",")]
 			elif key == "resolution":
 				resolution = tuple([int(x.strip()) for x in value.split(",")])
 			elif key == "zPosition":
@@ -276,7 +276,7 @@ class Screen(dict):
 					if depr:
 						print(f"[Screen] WARNING: OBSOLETE COMPONENT {name} USED IN SKIN. USE {depr[0]} INSTEAD!")
 						print(f"[Screen] OBSOLETE COMPONENT WILL BE REMOVED {depr[1]}, PLEASE UPDATE!")
-				elif not depr and name not in self.ignoreWidgets:
+				elif not depr and name not in self.handledWidgets:
 					if name in ("config", "footnote", "description", "information",
 						"name", "image", "filetext", "quickselect", "autoresize", "icon",
 						"list", "text", "pluginGrid", "pluginList", "skins") and name not in self.items():  # detect errors in skin embedded.
