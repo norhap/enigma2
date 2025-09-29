@@ -41,6 +41,7 @@ class PowerTimerEditList(Screen):
 		self["key_blue"] = StaticText("")
 		self["key_info"] = StaticText("")
 		self["description"] = Label()
+		self["event_nr"] = Label("")
 		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "ShortcutActions", "TimerEditActions"],
 			{
 			"ok": self.openEdit,
