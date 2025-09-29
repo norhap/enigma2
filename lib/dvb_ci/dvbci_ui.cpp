@@ -27,12 +27,13 @@ eDVBCI_UI *eDVBCI_UI::getInstance()
 	return instance;
 }
 
-void eDVBCI_UI::gotMessage(const eDVBCIInterfaces::Message &message)
-{
-	switch (message.m_type)
-	{
+void eDVBCI_UI::gotMessage(const eDVBCIInterfaces::Message& message) {
+	switch (message.m_type) {
 		case eDVBCIInterfaces::Message::slotStateChanged:
 			setState(message.m_slotid, message.m_state);
+			break;
+		case eDVBCIInterfaces::Message::slotDecodingStateChanged:
+			setDecodingState(message.m_slotid, message.m_state);
 			break;
 		case eDVBCIInterfaces::Message::mmiSessionDestroyed:
 			mmiSessionDestroyed(message.m_slotid);
