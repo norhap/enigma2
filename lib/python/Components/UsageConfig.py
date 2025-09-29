@@ -1978,10 +1978,16 @@ def InitUsageConfig():
 		else:
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 			eEPGCache.getInstance().timeUpdated()
-	config.ntp.timesync = ConfigSelection(default="auto", choices=[
-		("auto", _("Auto")),
+
+	config.misc.useNTPminutes = ConfigSelection(default="30", choices=[
+		("30", "30" + " " + _("mins")),
+		("60", _("Every hour")),
+		("1440", _("Once per day"))
+	])
+	config.misc.useNTPminutes.addNotifier(timesyncChanged)
+	config.ntp.timesync = ConfigSelection(default="ntp", choices=[
 		("dvb", _("Transponder time")),
-		("ntp", _("Internet time (SNTP)"))
+		("ntp", _("NTP"))
 	])
 	config.ntp.timesync.addNotifier(timesyncChanged)
 

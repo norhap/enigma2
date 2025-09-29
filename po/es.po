@@ -6803,6 +6803,9 @@ msgstr "Solo mueva el plato rápidamente antes de esta hora."
 msgid "Only on startup"
 msgstr "Solo en el inicio"
 
+msgid "Once per day"
+msgstr "Una vez al día"
+
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr "Solo seleccione ‘sí’ si está usando un multiswich que requiere una señal de comando DiSEqC Port-A. Para todas las demás configuraciones, seleccione ‘no’."
 
@@ -13972,9 +13975,6 @@ msgstr ""
 msgid "The command to wake from standby will be sent multiple times."
 msgstr "El comando para despertar desde el modo de espera se enviará varias veces."
 
-msgid "The hostname or the IP address of the NTP server to synchronise the time with."
-msgstr "El nombre de host o la dirección IP del servidor NTP con el que sincronizar la hora."
-
 msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
 msgstr "El intervalo de tiempo de un Temporizador Automático es el primer atributo 'avanzado'. Si se especifica un intervalo de tiempo, un evento solo coincidirá con este Temporizador Automático si se encuentra dentro de este intervalo de tiempo."
 
@@ -15970,17 +15970,17 @@ msgstr "Sincronice la hora del sistema utilizando un transpondedor o internet."
 msgid "Sync time using"
 msgstr "Sincronizar hora usando"
 
-msgid "Sync NTP every (minutes)"
-msgstr "Sincronizar NTP cada (minutos)"
-
-msgid "Setup network time synchronization interval."
-msgstr "Configurar el intervalo de sincronización horaria de internet."
+msgid "Configure the Internet Time Sync Interval."
+msgstr "Configurar el intervalo de sincronización horaria de Internet."
 
 msgid "Configure your NTP server."
 msgstr "Configurar el servidor NTP."
 
 msgid "NTP server"
 msgstr "Servidor NTP"
+
+msgid "NTP sync interval"
+msgstr "Intervalo de sincronización NTP"
 
 msgid "Show Time Remaining/Elapsed"
 msgstr "Mostrar tiempo Restante/Transcurrido"
@@ -17556,13 +17556,10 @@ msgid "Time zone"
 msgstr "Tiempo zona"
 
 msgid "Time synchronization method"
-msgstr "Tiempo método sincronizado"
+msgstr "Método de sincronización horaria"
 
-msgid "NTP Hostname"
-msgstr "NTP Hostname"
-
-msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available."
-msgstr "Seleccione cómo desea que su receptor mantenga la hora correcta, ya sea desde el transpondedor DVB o desde Internet usando NTP. O use Auto, que favorecerá el uso de NTP, pero volverá al tiempo del transpondedor cuando no haya conexión a Internet disponible."
+msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP."
+msgstr "Seleccione cómo desea que su receptor mantenga la hora correcta, ya sea desde el transpondedor DVB o desde Internet usando NTP."
 
 msgid "FastScan"
 msgstr "Escaneo Rápido"
@@ -17789,8 +17786,8 @@ msgstr "Muy rápido"
 msgid "Transponder time"
 msgstr "Hora transpondedor"
 
-msgid "Internet time (SNTP)"
-msgstr "Hora internet (SNTP)"
+msgid "Internet time"
+msgstr "Hora internet"
 
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr "Elija el estilo de formato de visualización del display para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por el skin."

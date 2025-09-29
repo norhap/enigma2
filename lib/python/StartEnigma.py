@@ -640,6 +640,10 @@ enigma.eProfileWrite("Init:skin")
 from skin import InitSkins  # noqa: E402
 InitSkins()
 
+enigma.eProfileWrite("NTPSyncPoller")
+from Components.NetworkTime import AutoNTPSync  # noqa: E402
+AutoNTPSync()
+
 enigma.eProfileWrite("InputDevice")
 import Components.InputDevice  # noqa: E402
 Components.InputDevice.InitInputDevices()

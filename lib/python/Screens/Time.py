@@ -1,4 +1,5 @@
 from enigma import eConsoleAppContainer
+from Components.NetworkTime import ntpsyncpoller
 from Components.ActionMap import ActionMap, HelpableActionMap
 from os.path import isfile  # islink
 from Components.config import config, getConfigListEntry, ConfigSelection
@@ -18,6 +19,7 @@ from requests import get
 class Time(Setup):
 	def __init__(self, session):
 		Setup.__init__(self, session=session, setup="Time")
+		self.addSaveNotifier(self.updateNetworkTime)
 		self["key_yellow"] = StaticText("")
 		self["geolocationActions"] = HelpableActionMap(self, ["ColorActions"], {
 			"yellow": (self.useGeolocation, _("Use geolocation to set the current time zone location")),
@@ -27,35 +29,41 @@ class Time(Setup):
 			eConsoleAppContainer().execute("opkg update && opkg install cronie")
 		self.selectionChanged()
 
-	def setNTP(self):
-		# cmdntp = "root /usr/bin/ntpdate-sync silent"
-		# linkup = "ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync"
-		# if config.ntp.timesync.value != "dvb":
-		# if not fileContains("/etc/crontab", "ntpdate"):
-		# eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab;sed -i '$a@reboot %s'" % cmdntp + " " "/etc/crontab;sed -i '$a 30 *   *   *   * %s'" % cmdntp + " " "/etc/crontab")
-		# if not islink("/etc/network/if-up.d/ntpdate-sync"):
-		# eConsoleAppContainer().execute(linkup)
-		# else:
-		# if islink("/etc/network/if-up.d/ntpdate-sync"):
-		# eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab")
-		if config.ntp.timesync.value != "dvb":
-			eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
-		else:
-			eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab")
+	def updateNetworkTime(self):
+		if config.ntp.timesync.isChanged() or config.ntp.server.isChanged() or config.misc.useNTPminutes.isChanged():
+			ntpsyncpoller.ntpConfigUpdated()
 
+	# def setNTP(self):
+	# cmdntp = "root /usr/bin/ntpdate-sync silent"
+	# linkup = "ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync"
+	# if config.ntp.timesync.value != "dvb":
+	# if not fileContains("/etc/crontab", "ntpdate"):
+	# eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab;sed -i '$a@reboot %s'" % cmdntp + " " "/etc/crontab;sed -i '$a 30 *   *   *   * %s'" % cmdntp + " " "/etc/crontab")
+	# if not islink("/etc/network/if-up.d/ntpdate-sync"):
+	# eConsoleAppContainer().execute(linkup)
+	# else:
+	# if islink("/etc/network/if-up.d/ntpdate-sync"):
+	# eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab")
+	# #######LAST USED SNTP######
+	# if config.ntp.timesync.value != "dvb":
+	# eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
+	# else:
+	# eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab")
 	def keySave(self):
-		if isfile("/etc/init.d/crond"):
-			Setup.keySave(self)
-			self.setNTP()
-		else:
-			if config.ntp.timesync.value != "dvb":
-				if isfile("/etc/init.d/crond"):
-					Setup.keySave(self)
-					self.setNTP()
-				else:
-					self.setFootnote(_("Cronie is being installed. Time settings are being established. Save your settings with GREEN button after a few seconds."))
-			else:
-				Setup.keySave(self)
+		# #######LAST USED SNTP######
+		# if isfile("/etc/init.d/crond"):
+		# Setup.keySave(self)
+		# self.setNTP()
+		# else:
+		# if config.ntp.timesync.value != "dvb":
+		# if isfile("/etc/init.d/crond"):
+		# Setup.keySave(self)
+		# self.setNTP()
+		# else:
+		# self.setFootnote(_("Cronie is being installed. Time settings are being established. Save your settings with GREEN button after a few seconds."))
+		# else:
+		# Setup.keySave(self)
+		Setup.keySave(self)
 
 	def selectionChanged(self):
 		if Setup.getCurrentItem(self) in (config.timezone.area, config.timezone.val):
@@ -120,7 +128,8 @@ class Time(Setup):
 			self.setFootnote(_("Geolocation has been used to set the time zone."))
 		except KeyError:
 			pass
-		self.setNTP()
+		# #######LAST USED SNTP######
+		# self.setNTP()
 
 
 class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
@@ -217,9 +226,8 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 
 	def getTimeList(self):
 		config.ntp.timesync = ConfigSelection(default="ntp", choices=[
-			("auto", _("Auto")),
 			("dvb", _("Transponder time")),
-			("ntp", _("Internet time (SNTP)"))
+			("ntp", _("NTP"))
 		])
 		self.list = []
 		self.list.append(getConfigListEntry(_("Time zone area"), config.timezone.area))
@@ -227,7 +235,7 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self.list.append(getConfigListEntry(_("Date style"), config.usage.date.dayfull))
 		self.list.append(getConfigListEntry(_("Time style"), config.usage.time.long))
 		self.list.append(getConfigListEntry(_("Time synchronization method"), config.ntp.timesync))
-		self.list.append(getConfigListEntry(_("NTP Hostname"), config.ntp.server))
+		self.list.append(getConfigListEntry(_("NTP server"), config.ntp.server))
 		self["config"].list = self.list
 		self["config"].setList(self.list)
 
@@ -272,11 +280,13 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 			valItem[1].changed()
 		self["config"].invalidate(valItem)
 		self["text"].setText(_("Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."))
-		Time.setNTP(self)
+		# #######LAST USED SNTP######
+		# Time.setNTP(self)
 
 	def keySave(self):
 		ConfigListScreen.keySave(self)
-		Time.setNTP(self)
+		# #######LAST USED SNTP######
+		# Time.setNTP(self)
 		self.close(True)
 
 	def keyGeolocation(self):

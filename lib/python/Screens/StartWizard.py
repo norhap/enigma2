@@ -2,7 +2,7 @@ from enigma import eConsoleAppContainer, eTimer, eActionMap
 
 from Screens.Wizard import wizardManager
 from Screens.Screen import Screen
-from Screens.Time import Time
+from Screens.Time import TimeWizard
 from Screens.MessageBox import MessageBox
 from Screens.WizardLanguage import WizardLanguage
 from Screens.HelpMenu import ShowRemoteControl
@@ -19,7 +19,6 @@ from Components.SystemInfo import SystemInfo
 from Components.config import config, ConfigBoolean, configfile
 from Components.Timezones import INTERNET_SUCCESS
 from Screens.LanguageSelection import LanguageWizard
-from Screens.Time import TimeWizard
 import os
 
 config.misc.firstrun = ConfigBoolean(default=True)
@@ -165,7 +164,7 @@ class AutoInstallWizard(Screen):
 			self.delay.callback.append(self.abort)
 			eActionMap.getInstance().bindAction('', 0, self.abort)
 			self.delay.startLongTimer(5)
-			Time.setNTP(self)  # set NTP if necessary.
+			# Time.setNTP(self)  # set NTP if necessary.
 
 	def abort(self, key=None, flag=None):
 		if hasattr(self, 'delay'):
