@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
-from enigma import eAVControl, iServiceInformation, iPlayableService
+from enigma import eAVControl, iServiceInformation, iPlayableService, eDVBCI_UI
 from Components.Converter.Converter import Converter
 from Components.Element import cached
 from Components.config import config
 from Tools.Transponder import ConvertToHumanReadable
 from Tools.GetEcmInfo import GetEcmInfo
+from Tools.Directories import pathExists
+from Components.SystemInfo import SystemInfo
 from Components.Converter.Poll import Poll
 from skin import parameters
 from Screens.SetupFallbacktuner import getChannelOnFallbackTuner
 from ServiceReference import serviceRefIPToSAT
+
+dvbCIUI = eDVBCI_UI.getInstance()
 
 caid_data = (
 	("0x0100", "0x01ff", "Seca", "S", True),
@@ -69,7 +73,53 @@ def addspace(text):
 	if text:
 		text += " "
 	return text
+	
+	
+def getCryptoInfo(info):
+	ecmdata = GetEcmInfo()
+	if info and info.getInfo(iServiceInformation.sIsCrypted) == 1:
+		data = ecmdata.getEcmData()
+		current_source = data[0]
+		current_caid = data[1]
+		current_provid = data[2]
+		current_ecmpid = data[3]
+	else:
+		current_source = ""
+		current_caid = "0"
+		current_provid = "0"
+		current_ecmpid = "0"
+	return current_source, current_caid, current_provid, current_ecmpid
 
+
+def createCurrentCaidLabel(info, currentCaid=None):
+	if currentCaid:
+		current_caid = currentCaid
+	else:
+		current_caid = getCryptoInfo(info)[1]
+	res = ""
+	decodingCiSlot = -1
+	NUM_CI = SystemInfo["CommonInterface"]
+	if NUM_CI and NUM_CI > 0:
+		if dvbCIUI:
+			for slot in range(NUM_CI):
+				stateDecoding = dvbCIUI.getDecodingState(slot)
+				stateSlot = dvbCIUI.getState(slot)
+				if stateDecoding == 2 and stateSlot not in (-1, 0, 3):
+					decodingCiSlot = slot
+		
+	if not pathExists("/tmp/ecm.info") and decodingCiSlot == -1:
+		return "FTA"
+		
+	if decodingCiSlot > -1 and not pathExists("/tmp/ecm.info"):
+		return "CI%d" % (decodingCiSlot)
+		
+	for caid_entry in caid_data:
+		if int(caid_entry[0], 16) <= int(current_caid, 16) <= int(caid_entry[1], 16):
+			res = caid_entry[4]
+	if decodingCiSlot > -1:
+		return "CI%d + %s" % (decodingCiSlot, res)
+	return res
+	
 
 class PliExtraInfo(Poll, Converter):
 	def __init__(self, type):
