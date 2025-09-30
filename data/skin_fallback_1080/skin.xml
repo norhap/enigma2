@@ -2290,7 +2290,7 @@
 		<widget name="freeDiskSpace" position="15,1000" size="435,90" font="RegularBold;22" backgroundColor="OE_NewBg2" transparent="0" zPosition="1"/>
 		<widget name="movie_sort" pixmaps="OctEtFHD/icons/az.png,OctEtFHD/icons/newtop.png,OctEtFHD/icons/shuffle.png,OctEtFHD/icons/za.png,OctEtFHD/icons/oldtop.png,OctEtFHD/icons/faz.png,OctEtFHD/icons/fza.png" position="450,952" size="45,25" transparent="1" alphaTest="on"/>
 		<widget name="movie_off" pixmaps="OctEtFHD/icons/ask.png,OctEtFHD/icons/movielist.png,OctEtFHD/icons/quit.png,OctEtFHD/icons/pause.png,OctEtFHD/icons/playlist.png,OctEtFHD/icons/playlistquit.png,OctEtFHD/icons/loop.png,OctEtFHD/icons/rep.png" position="505,952" zPosition="10" size="45,25" transparent="1" alphaTest="on"/>
-		<widget backgroundColor="OE_Background" font="RegularBold;24" position="15,420" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="435,450" source="Service" transparent="1" zPosition="1">
+		<widget backgroundColor="OE_Background" font="RegularBold;24" position="15,465" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="435,410" source="Service" transparent="1" zPosition="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="DescriptionBorder" position="0,0" size="0,0"/>
@@ -2856,7 +2856,7 @@
 		</widget>
 		<widget name="quickselect" position="1400,850" size="410,100" font="Regular;24" foregroundColor="#00fff000" horizontalAlignment="center" transparent="1" verticalAlignment="center" zPosition="+1" />
 		<widget source="description" render="Label" conditional="description" position="1290,520" size="620,635" font="RegularBold;25" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
-		<eLabel text="Plugin Browser Setup" position="1290,835" size="620,35" font="RegularBold;26" backgroundColor="OE_NewBg2" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="3"/>
+		<eLabel text="Plugin Browser Settings" position="1290,835" size="620,35" font="RegularBold;26" backgroundColor="OE_NewBg2" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="3"/>
 	</screen>
 	<!-- PLUGIN BROWSER GRID-->
 	<screen name="PluginBrowserGrid" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080" transparent="0">
@@ -2883,7 +2883,7 @@
 		</widget>
 		<widget name="quickselect" position="1400,850" size="410,100" font="Regular;24" foregroundColor="#00fff000" horizontalAlignment="center" transparent="1" verticalAlignment="center" zPosition="+1" />
 		<widget source="description" render="Label" conditional="description" position="1290,520" size="620,635" font="RegularBold;25" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
-		<eLabel text="Plugin Browser Setup" position="1290,835" size="620,35" font="RegularBold;26" backgroundColor="OE_NewBg2" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="3"/>
+		<eLabel text="Plugin Browser Settings" position="1290,835" size="620,35" font="RegularBold;26" backgroundColor="OE_NewBg2" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="3"/>
 	</screen>
 	<screen name="PluginDownloadBrowser" title="Downloadable plugins" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1920,1080">
 		<panel name="StanDardScreen"/>
@@ -6172,7 +6172,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget source="ServiceEvent" conditional="ServiceEvent" render="xtraPoster" position="210,561" size="175,159" zPosition="2"/>
 	</screen>
 	<screen name="poster_movieselection">
-		<widget source="Service" conditional="Service" render="xtraPoster" position="95,10" size="260,400" zPosition="2"/>
+		<widget source="Service" conditional="Service" render="xtraPoster" position="20,10" size="410,450" zPosition="2"/>
 	</screen>
 	<screen name="TemplateXtraEPGSelection">
 		<widget source="Event" conditional="Event" render="xtraPoster" position="165,285" size="185,278" zPosition="2"/>
