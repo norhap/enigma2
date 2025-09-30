@@ -1,3 +1,7 @@
+# This Renderer is used in E2-DarkOS-skin and it's temporary.
+# The Renderer can changed or removed.
+# We need to find a better solution for the ratings.
+
 from Components.Renderer.Renderer import Renderer
 from enigma import eLabel, gRGB
 from skin import parseColor
