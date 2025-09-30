@@ -290,7 +290,7 @@
 		<item level="2" text="Quit Movie Player with EXIT button" description="When enabled, it is possible to leave the Movie Player with exit.">config.usage.leave_movieplayer_onExit</item>
 		-->
 	</setup>
-	<setup key="PluginBrowser" title="Plugin Browser Setup">
+	<setup key="PluginBrowserSettings" title="Plugin Browser Settings">
 		<item level="2" text="Show packages languages" description="If set to 'yes', it will display 'languages' packs and 'PO' in browser'.">config.pluginbrowser.languages_po</item>
 		<item level="2" text="Show source packages" description="If set to 'yes' it will show the 'SRC' packages in browser.">config.pluginbrowser.src</item>
 		<item level="2" text="Show the Plugin Browser screen ***" description="This option allows you to view the Plugin Browser screen as a list or as a grid.">config.usage.pluginListLayout</item>

@@ -22,6 +22,7 @@ from Screens.Console import Console
 from Screens.MessageBox import MessageBox
 from Screens.ParentalControlSetup import ProtectedScreen
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_GUISKIN, isPluginInstalled
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
@@ -47,6 +48,29 @@ config.misc.pluginbrowser.plugin_order = ConfigText(default="")
 def languageChanged():
 	plugins.clearPluginList()
 	plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+
+
+class PluginBrowserSettings(Setup):
+	def __init__(self, session):
+		Setup.__init__(self, session=session, setup="PluginBrowserSettings")
+		self.addSaveNotifier(self.onUpdateSettings)
+		self.onClose.append(self.clearSaveNotifiers)
+
+	def onUpdateSettings(self):
+		if config.usage.pluginListLayout.isChanged():
+			oldDialogIndex = None
+			oldSummarys = (-1, None)
+			for index, dialog in enumerate(self.session.dialog_stack):
+				if isinstance(dialog[0], PluginBrowser):
+					oldDialogIndex = (index, dialog[1])
+					oldSummarys = dialog[0].summaries[:]
+					break
+			if oldDialogIndex[0] != -1:
+				newDialog = self.session.instantiateDialog(PluginBrowser)
+				newDialog.summaries = oldSummarys
+				newDialog.isTmp = False
+				newDialog.callback = None
+				self.session.dialog_stack[oldDialogIndex[0]] = (newDialog, oldDialogIndex[1])
 
 
 class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen):
@@ -290,8 +314,11 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 				currentPlugin.__call__(session=self.session)
 
 	def keyMenu(self):
-		from Screens.Setup import Setup
-		self.session.open(Setup, "PluginBrowser")
+		def keyMenuCallback():
+			self.checkWarnings()
+			self.updatePluginList()
+
+		self.session.openWithCallback(keyMenuCallback, PluginBrowserSettings)
 
 	def keyRed(self):
 		if self.sortMode:
@@ -413,10 +440,6 @@ class PluginBrowser(Screen, HelpableScreen, NumericalTextInput, ProtectedScreen)
 				if package.name.lower().startswith(pattern):  # Select first file starting with case insensitive QuickSelect text.
 					self.currentList.setCurrentIndex(index)
 					break
-
-	def openSetup(self):
-		from Screens.Setup import Setup
-		self.session.open(Setup, "PluginBrowser")
 
 	def isProtected(self):  # noqa: F811 redefinition of unused
 		return config.ParentalControl.setuppinactive.value and (not config.ParentalControl.config_sections.main_menu.value or hasattr(self.session, 'infobar') and self.session.infobar is None) and config.ParentalControl.config_sections.plugin_browser.value

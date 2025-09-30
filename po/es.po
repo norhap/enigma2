@@ -18059,7 +18059,7 @@ msgstr ""
 msgid "User defined hidden"
 msgstr "Definido por el usuario oculto"
 
-msgid "Plugin Browser Setup"
+msgid "Plugin Browser Settings"
 msgstr "Ajustes Navegador de Plugins"
 
 msgid "OPKG clean mode"
