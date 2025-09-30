@@ -1042,9 +1042,9 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				if config.misc.firstrun.value and iNetwork.isWirelessInterface(self.iface):
 					self.session.openWithCallback(lambda x: self.finished_cb(), MessageBox, _("Your network configuration has been activated.\n\nPress OK and wait for the next screen.\n\nIt will automatically switch to your WLAN data."), type=MessageBox.TYPE_INFO)
 				else:
-					self.session.openWithCallback(lambda x: self.finished_cb(), MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
+					self.session.openWithCallback(lambda x: self.finished_cb(), MessageBox, message, type=MessageBox.TYPE_INFO, simple=self.messageSimple, timeout=5)
 			else:
-				self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, message, type=MessageBox.TYPE_INFO, timeout=5)
+				self.session.openWithCallback(self.ConfigfinishedCB, MessageBox, message, type=MessageBox.TYPE_INFO, simple=self.messageSimple, timeout=5)
 
 	def ConfigfinishedCB(self, data):
 		if data is not None and data:
