@@ -26,10 +26,9 @@ to generate HTML."""
 		self.onSelectionChanged = []
 		self.onListUpdated = []
 		self.disableCallbacks = False
-		self.connectedGuiElement = None
-		self.__current = None
-		self.__index = None
-		self.connectedGuiElement = None
+		self.__current = None  # current element set from connected GUI element
+		self.__index = 0  # current index set from connected GUI element
+		self.connectedGuiElement = None  # manuallyconnected GUI element
 
 	def enableAutoNavigation(self, enabled):
 		try:
