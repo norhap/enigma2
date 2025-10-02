@@ -1160,6 +1160,13 @@
 		<widget backgroundColor="OE_NewBg2" font="RegularBold;24" position="50,390" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="500,170" source="ServiceEvent" transparent="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
+		<widget source="ServiceEvent" render="Pixmap" backgroundColor="OE_NewBg2" position="50,565" size="40,20" alphatest="blend">
+			<convert type="EventName">RatingIcon</convert>
+			<convert type="ValueToPixmap">Path</convert>
+		</widget>
+		<widget source="ServiceEvent" font="RegularBold;25" render="Label" backgroundColor="OE_NewBg2" foregroundColor="#0000fafa" position="50,595" size="320,110" transparent="1">
+			<convert type="EventName">Rating</convert>
+		</widget>
 		<widget backgroundColor="blue_light" foregroundColor="blue_light" position="50,723" render="Progress" size="500,4" source="Event" transparent="0" zPosition="1">
 			<convert type="EventTime">Progress</convert>
 		</widget>
@@ -6169,7 +6176,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget source="session.Event_Next" render="xtraPoster" position="475,645" size="185,278" zPosition="2"/>
 	</screen>
 	<screen name="poster_channelselection">
-		<widget source="ServiceEvent" conditional="ServiceEvent" render="xtraPoster" position="210,561" size="175,159" zPosition="2"/>
+		<widget source="ServiceEvent" conditional="ServiceEvent" render="xtraPoster" position="375,561" size="175,159" zPosition="2"/>
 	</screen>
 	<screen name="poster_movieselection">
 		<widget source="Service" conditional="Service" render="xtraPoster" position="65,10" size="320,450" zPosition="2"/>

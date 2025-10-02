@@ -23,7 +23,7 @@ class ETSIClassifications(dict):
 
 	def longRating(self, age):
 		if age == 0:
-			return _("Rating undefined")
+			return _("All audiences")
 		elif age <= 15:
 			age += 3
 			return _("Minimum age %d years") % age
@@ -141,7 +141,7 @@ class ItaClassifications(dict):
 # If there is no matching country then the default ETSI should be selected.
 
 countries = {
-	"ETSI": (ETSIClassifications(), lambda age: (_("bc%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ETSI-na.png")),
+	"ETSI": (ETSIClassifications(), lambda age: (_("bc%d") % age, _("Rating defined by broadcaster - %d") % (age + 3), "ratings/ETSI-18.png")),
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png")),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png")),
 	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png"))
@@ -303,24 +303,38 @@ class EventName(Converter):
 			return self.trimText(event.getEventName())
 		elif self.type in (self.RATING, self.SRATING, self.RATINGICON):
 			rating = event.getParentalData()
-			if rating:
-				age = rating.getRating()
-				country = rating.getCountryCode().upper()
-				if country in opentv_countries:
-					country = opentv_countries[country]
-				if country in countries:
-					c = countries[country]
-				else:
+			if "+" in event.getExtendedDescription():
+				test = event.getExtendedDescription().split("+")[1]
+				try:
+					age = int(test[:2]) - 3
+				except Exception:
 					c = countries["ETSI"]
-				if config.misc.epgratingcountry.value:
-					c = countries[config.misc.epgratingcountry.value]
-				rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
-				if rating:
-					if self.type == self.RATING:
-						return self.trimText(rating[self.RATLONG])
-					elif self.type == self.SRATING:
-						return self.trimText(rating[self.RATSHORT])
-					return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+					rating = c[self.RATNORMAL].get(0, c[self.RATDEFAULT](0))
+					if self.type != self.RATING:
+						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+					else:
+						if "(+" in event.getExtendedDescription():
+							rating = event.getExtendedDescription().split("(")[1][:3]
+							return self.trimText(rating)
+						else:
+							return self.trimText(_("All audiences"))
+			country = rating.getCountryCode().upper()
+			if country in opentv_countries:
+				country = opentv_countries[country]
+			if country in countries:
+				c = countries[country]
+			else:
+				c = countries["ETSI"]
+			if config.misc.epgratingcountry.value:
+				c = countries[config.misc.epgratingcountry.value]
+			age = rating.getRating()
+			rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+			if rating:
+				if self.type == self.RATING:
+					return self.trimText(rating[self.RATLONG])
+				elif self.type == self.SRATING:
+					return self.trimText(rating[self.RATSHORT])
+				return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
 		elif self.type in (self.GENRE, self.GENRELIST):
 			if not config.usage.show_genre_info.value:
 				return ""
