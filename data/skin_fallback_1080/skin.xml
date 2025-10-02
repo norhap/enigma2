@@ -1160,7 +1160,7 @@
 		<widget backgroundColor="OE_NewBg2" font="RegularBold;24" position="50,390" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="500,170" source="ServiceEvent" transparent="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
-		<widget source="ServiceEvent" render="Pixmap" backgroundColor="OE_NewBg2" position="50,565" size="40,20" alphatest="blend">
+		<widget source="ServiceEvent" render="Pixmap" backgroundColor="OE_NewBg2" position="50,565" size="40,20" alphaTest="blend">
 			<convert type="EventName">RatingIcon</convert>
 			<convert type="ValueToPixmap">Path</convert>
 		</widget>
