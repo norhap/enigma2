@@ -305,14 +305,14 @@ class EventName(Converter):
 			rating = event.getParentalData()
 			if "+" in event.getExtendedDescription() or "(TP)" in event.getExtendedDescription():
 				searchage = event.getExtendedDescription().split("+")[1] if "+" in event.getExtendedDescription() else event.getExtendedDescription().split("(")[1]
+				if "TP" in searchage[:2]:
+					age = 0
+					if self.type == self.RATING:
+						return self.trimText(_("All audiences"))
+					c = countries["ETSI"]
+					rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+					return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
 				try:
-					if "TP" in searchage[:2]:
-						age = 0
-						if self.type == self.RATING:
-							return self.trimText(_("All audiences"))
-						c = countries["ETSI"]
-						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
-						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
 					age = int(searchage[:2].replace(")", "")) - 3
 				except Exception:
 					age = rating.getRating()
