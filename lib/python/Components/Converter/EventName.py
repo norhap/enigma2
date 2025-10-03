@@ -141,7 +141,7 @@ class ItaClassifications(dict):
 # If there is no matching country then the default ETSI should be selected.
 
 countries = {
-	"ETSI": (ETSIClassifications(), lambda age: (_("bc%d") % age, _("Minimum age %d years") % (age + 3), "ratings/ETSI-18.png")),
+	"ETSI": (ETSIClassifications(), lambda age: ((_("bc%d") % age, _("Minimum age %d years") % (age + 3) if age < 16 else _("Rating undefined"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-na.png"))),
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png")),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png")),
 	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png"))
