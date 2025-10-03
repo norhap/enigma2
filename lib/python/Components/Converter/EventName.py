@@ -313,7 +313,7 @@ class EventName(Converter):
 						c = countries["ETSI"]
 						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
-					age = int(searchage[:2]) - 3
+					age = int(searchage[:2].replace(")", "")) - 3
 				except Exception:
 					age = rating.getRating()
 			else:
