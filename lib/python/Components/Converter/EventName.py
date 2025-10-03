@@ -304,7 +304,7 @@ class EventName(Converter):
 		elif self.type in (self.RATING, self.SRATING, self.RATINGICON):
 			rating = event.getParentalData()
 			if "+" in event.getExtendedDescription() or "(TP)" in event.getExtendedDescription():
-				searchage = event.getExtendedDescription().split("+")[1]
+				searchage = event.getExtendedDescription().split("+")[1] if "+" in event.getExtendedDescription() else event.getExtendedDescription().split("(")[1]
 				try:
 					if "TP" in searchage[:2]:
 						age = 0
