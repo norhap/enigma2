@@ -6214,7 +6214,7 @@ msgstr "Micronesia"
 
 #, python-format
 msgid "Minimum age %d years"
-msgstr "Mínima edad %d años"
+msgstr "Edad mínima %d años"
 
 msgid "Minimum send interval"
 msgstr "Intervalo mínimo de envío"

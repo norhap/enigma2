@@ -141,7 +141,7 @@ class ItaClassifications(dict):
 # If there is no matching country then the default ETSI should be selected.
 
 countries = {
-	"ETSI": (ETSIClassifications(), lambda age: (_("bc%d") % age, _("Rating defined by broadcaster - %d") % (age + 3), "ratings/ETSI-18.png")),
+	"ETSI": (ETSIClassifications(), lambda age: (_("bc%d") % age, _("Minimum age %d years") % (age + 3), "ratings/ETSI-18.png")),
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png")),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png")),
 	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png"))
@@ -303,7 +303,7 @@ class EventName(Converter):
 			return self.trimText(event.getEventName())
 		elif self.type in (self.RATING, self.SRATING, self.RATINGICON):
 			rating = event.getParentalData()
-			if "+" in event.getExtendedDescription():
+			if "+" in event.getExtendedDescription() or "(TP)" in event.getExtendedDescription():
 				searchage = event.getExtendedDescription().split("+")[1]
 				try:
 					if "TP" in searchage[:2]:
@@ -318,17 +318,17 @@ class EventName(Converter):
 					age = rating.getRating()
 			else:
 				age = rating.getRating()
-			country = rating.getCountryCode().upper()
-			if country in opentv_countries:
-				country = opentv_countries[country]
-			if country in countries:
-				c = countries[country]
-			else:
-				c = countries["ETSI"]
-			if config.misc.epgratingcountry.value:
-				c = countries[config.misc.epgratingcountry.value]
-			rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 			if rating:
+				country = rating.getCountryCode().upper()
+				if country in opentv_countries:
+					country = opentv_countries[country]
+				if country in countries:
+					c = countries[country]
+				else:
+					c = countries["ETSI"]
+				if config.misc.epgratingcountry.value:
+					c = countries[config.misc.epgratingcountry.value]
+				rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 				if self.type == self.RATING:
 					return self.trimText(rating[self.RATLONG])
 				elif self.type == self.SRATING:
