@@ -304,20 +304,20 @@ class EventName(Converter):
 		elif self.type in (self.RATING, self.SRATING, self.RATINGICON):
 			rating = event.getParentalData()
 			if "+" in event.getExtendedDescription():
-				test = event.getExtendedDescription().split("+")[1]
+				searchage = event.getExtendedDescription().split("+")[1]
 				try:
-					age = int(test[:2]) - 3
-				except Exception:
-					c = countries["ETSI"]
-					rating = c[self.RATNORMAL].get(0, c[self.RATDEFAULT](0))
-					if self.type != self.RATING:
-						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
-					else:
-						if "(+" in event.getExtendedDescription():
-							rating = event.getExtendedDescription().split("(")[1][:3]
-							return self.trimText(rating)
-						else:
+					if "TP" in searchage[:2]:
+						age = 0
+						if self.type == self.RATING:
 							return self.trimText(_("All audiences"))
+						c = countries["ETSI"]
+						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+					age = int(searchage[:2]) - 3
+				except Exception:
+					age = rating.getRating()
+			else:
+				age = rating.getRating()
 			country = rating.getCountryCode().upper()
 			if country in opentv_countries:
 				country = opentv_countries[country]
@@ -327,7 +327,6 @@ class EventName(Converter):
 				c = countries["ETSI"]
 			if config.misc.epgratingcountry.value:
 				c = countries[config.misc.epgratingcountry.value]
-			age = rating.getRating()
 			rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 			if rating:
 				if self.type == self.RATING:
