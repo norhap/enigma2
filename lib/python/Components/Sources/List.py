@@ -50,13 +50,6 @@ to generate HTML."""
 	def count(self):
 		return len(self.listData)
 
-	def setConnectedGuiElement(self, guiElement):
-		self.connectedGuiElement = guiElement
-		index = guiElement.instance.getCurrentIndex()
-		self.__current = self.list[index]
-		self.__index = index
-		self.changed((self.CHANGED_ALL,))
-
 	def updateList(self, listData):
 		"""Changes the list without changing the selection or emitting changed Events"""
 		maxIndex = len(listData) - 1
@@ -77,6 +70,15 @@ to generate HTML."""
 		except AttributeError:
 			pass
 
+	# this is for manually set which is the GUI element connected with the list
+	# For use in case of addons where there is no source so to rely on the master
+	def setConnectedGuiElement(self, guiElement):
+		self.connectedGuiElement = guiElement
+		index = guiElement.instance.getCurrentIndex()
+		self.__current = self.listData[index]
+		self.__index = index
+		self.changed((self.CHANGED_ALL,))
+
 	def selectionChanged(self, index):
 		if not self.disableCallbacks:
 			for element in self.downstream_elements:  # Update all non-master targets.
@@ -91,21 +93,23 @@ to generate HTML."""
 
 	@cached
 	def getCurrent(self):
-		if self.master:
-			if hasattr(self.master, "current"):
-				return self.master.current
-		return self.__current
+		return self.master.current if self.master and hasattr(self.master, "current") else self.__current
 
 	current = property(getCurrent)
 
 	@cached
 	def getCurrentIndex(self):
-		return self.master.index if self.master is not None else 0  # None - The 0 is a hack to avoid badly written code from crashing!
+		return self.master.index if self.master is not None and hasattr(self.master, "index") else self.__index
 
 	def setCurrentIndex(self, index):
 		if self.master is not None:
-			self.master.index = index
+			if hasattr(self.master, "index"):
+				self.master.index = index
+			else:
+				self.__index = index
 			self.selectionChanged(index)
+		if self.connectedGuiElement is not None:
+			self.connectedGuiElement.moveSelection(index)
 
 	index = property(getCurrentIndex, setCurrentIndex)
 
@@ -156,8 +160,8 @@ to generate HTML."""
 	style = property(getStyle, setStyle)
 
 	def listUpdated(self):
-		for x in self.onListUpdated:
-			x()
+		for method in self.onListUpdated:
+			method()
 
 	@cached
 	def getIndexNames(self):
@@ -285,17 +289,10 @@ to generate HTML."""
 		return self.getCurrentIndex()
 
 	def getIndex(self):
-		return self.getCurrentIndex() if self.master is not None and hasattr(self.master, "index") else self.__index
+		return self.getCurrentIndex()
 
 	def setIndex(self, index):
-		if self.master is not None:
-			if hasattr(self.master, "index"):
-				self.master.index = index
-			else:
-				self.__index = index
-			self.selectionChanged(index)
-		if self.connectedGuiElement is not None:
-			self.connectedGuiElement.moveSelection(index)
+		self.setCurrentIndex(index)
 
 	def top(self):
 		self.goTop()
