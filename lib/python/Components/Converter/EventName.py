@@ -23,7 +23,7 @@ class ETSIClassifications(dict):
 
 	def longRating(self, age):
 		if age == 0:
-			return _("All audiences")
+			return _("All ages")
 		elif age <= 15:
 			age += 3
 			return _("Minimum age %d years") % age
@@ -308,7 +308,7 @@ class EventName(Converter):
 				if "TP" in searchage[:2]:
 					age = 0
 					if self.type == self.RATING:
-						return self.trimText(_("All audiences"))
+						return self.trimText(_("All ages"))
 					c = countries["ETSI"]
 					rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 					return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])

@@ -389,9 +389,6 @@ msgstr "después "
 msgid "all"
 msgstr "todo"
 
-msgid "All audiences"
-msgstr "Todas las audiencias"
-
 msgid "alphabetic"
 msgstr "alfabético"
 
