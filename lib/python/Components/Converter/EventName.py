@@ -141,7 +141,7 @@ class ItaClassifications(dict):
 # If there is no matching country then the default ETSI should be selected.
 
 countries = {
-	"ETSI": (ETSIClassifications(), lambda age: ((_("bc%d") % age, _("Minimum age %d years") % (age + 3) if age < 16 else _("Rating undefined"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-na.png"))),
+	"ETSI": (ETSIClassifications(), lambda age: ((_("%d+") % (age + 3) if age < 19 else _("All ages"), _("Minimum age %d years") % (age + 3) if age < 16 else _("All ages"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-ALL.png"))),
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png")),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png")),
 	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png"))
@@ -266,7 +266,7 @@ class EventName(Converter):
 		if self.trim:
 			return str(text).strip()
 		else:
-			return str(text)
+			return str(text.strip())
 
 	def getCrid(self, event, types):
 		print("[EventName] getCrid %s" % types)
@@ -307,13 +307,14 @@ class EventName(Converter):
 				searchage = event.getExtendedDescription().split("+")[1] if "+" in event.getExtendedDescription() else event.getExtendedDescription().split("(")[1]
 				if "TP" in searchage[:2]:
 					age = 0
-					if self.type == self.RATING:
+					if self.type == self.RATING or self.type == self.SRATING:
 						return self.trimText(_("All ages"))
 					c = countries["ETSI"]
 					rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 					return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
 				try:
-					age = int(searchage[:2].replace(")", "")) - 3
+					agecount = int(searchage[:2].replace(")", ""))
+					age = agecount - 3 if agecount >= 7 else 0
 				except Exception:
 					age = rating.getRating()
 			else:
