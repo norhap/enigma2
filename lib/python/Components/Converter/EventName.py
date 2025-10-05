@@ -141,10 +141,10 @@ class ItaClassifications(dict):
 # If there is no matching country then the default ETSI should be selected.
 
 countries = {
-	"ETSI": (ETSIClassifications(), lambda age: ((_("%d+") % (age + 3) if age < 19 else _("All ages"), _("Minimum age %d years") % (age + 3) if age < 16 else _("All ages"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-ALL.png"))),
-	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png")),
-	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png")),
-	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png"))
+	"ETSI": (ETSIClassifications(), lambda age: ((_("%d+") % (age + 3) if age < 19 else _("All ages"), _("Minimum age %d years") % (age + 3) if age < 16 else _("All ages"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-ALL.png", 0x222222))),
+	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png", 0x222222)),
+	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png", 0x222222)),
+	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png", 0x222222))
 }
 
 
@@ -185,6 +185,7 @@ class EventName(Converter):
 	RAWRATING = 31
 	RATINGCOUNTRY = 32
 	RATINGICON = 33
+	FORMAT_STRING = 34
 
 	CRID_SERIES = 41
 	CRID_EPISODE = 42
