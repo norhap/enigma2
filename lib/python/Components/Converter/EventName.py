@@ -329,6 +329,7 @@ class EventName(Converter):
 					c = countries["ETSI"]
 				if config.misc.epgratingcountry.value:
 					c = countries[config.misc.epgratingcountry.value]
+				age = (age if age + 3 >= 7 else age + 8 if age == 1 else age + 4 if age == 0 else age)
 				rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 				if self.type == self.RATING:
 					return self.trimText(rating[self.RATLONG])
