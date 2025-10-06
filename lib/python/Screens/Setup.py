@@ -215,9 +215,9 @@ class Setup(ConfigListScreen, Screen, HelpableScreen):
 	def setFootnote(self, footnote):
 		if footnote is None:
 			if "*" in self.getCurrentEntry():
-				if "**" not in self.getCurrentEntry() and "***" not in self.getCurrentEntry():
+				if "**" not in self.getCurrentEntry():
 					self["footnote"].setText(_("* = Restart Required"))
-				elif "**" in self.getCurrentEntry() and "***" not in self.getCurrentEntry():
+				elif "**" in self.getCurrentEntry():
 					self["footnote"].setText(_("** = Reboot System Required"))
 				self["footnote"].show()
 			else:

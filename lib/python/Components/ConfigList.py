@@ -273,7 +273,6 @@ class ConfigListScreen:
 		self.setCancelMessage(None)
 		self.setRestartMessage(None)
 		self.reboot = False
-		self.pluginGridList = False
 		self.onChangedEntry = []
 		self.onSave = []
 		self.manipulatedItems = []  # keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
@@ -468,13 +467,10 @@ class ConfigListScreen:
 	def keySave(self):
 		for notifier in self.onSave:
 			notifier()
-		if self.saveAll() and hasattr(self, "restartMsg") and not self.reboot and not self.pluginGridList:
+		if self.saveAll() and hasattr(self, "restartMsg") and not self.reboot:
 			self.session.openWithCallback(self.restartConfirm, MessageBox, self.restartMsg, default=True, type=MessageBox.TYPE_YESNO)
 		elif self.reboot:
 			self.session.openWithCallback(self.rebootConfirm, MessageBox, _("Reboot system now?"), default=True, type=MessageBox.TYPE_YESNO)
-		elif self.pluginGridList:
-			from Screens.PluginBrowser import PluginBrowser  # noqa: E402
-			self.session.openWithCallback(self.close, PluginBrowser)
 		else:
 			self.close()
 
@@ -492,12 +488,10 @@ class ConfigListScreen:
 		restart = False
 		for item in set(self["config"].list + self.manipulatedItems):
 			if len(item) > 1:
-				if "*" in item[0] and "**" not in item[0] and "***" not in item[0] and item[1].isChanged():
+				if "*" in item[0] and "**" not in item[0] and item[1].isChanged():
 					restart = True
-				elif "**" in item[0] and "***" not in item[0] and item[1].isChanged():
+				elif "**" in item[0] and item[1].isChanged():
 					self.reboot = True
-				elif "***" in item[0] and item[1].isChanged():
-					self.pluginGridList = True
 				item[1].save()
 		configfile.save()
 		return restart

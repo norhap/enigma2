@@ -15943,8 +15943,8 @@ msgstr "Modo Android"
 msgid "Really reboot into android mode?"
 msgstr "¿Realmente reiniciar en modo Android?"
 
-msgid "Show the Plugin Browser screen ***"
-msgstr "Mostrar la pantalla del navegador de plugins ***"
+msgid "Show the Plugin Browser screen"
+msgstr "Mostrar la pantalla del navegador de plugins"
 
 msgid "Show two lines per entry"
 msgstr "Mostrar dos líneas por entrada"
