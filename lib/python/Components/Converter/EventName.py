@@ -15,21 +15,21 @@ class ETSIClassifications(dict):
 	COLORS = (0x000000, 0x00A822, 0x00A822, 0x00A822, 0x007DCA, 0x007DCA, 0x007DCA, 0xFF7900, 0xFF7900, 0xFF7900, 0xFF5594, 0xFF5594, 0xFF5594, 0xD70723, 0xD70723, 0xD70723)
 
 	def shortRating(self, age):
-		if age == 0:
+		if age < 4:
 			return _("All ages")
 		elif age <= 15:
 			age += 3
 			return " %d+" % age
 
 	def longRating(self, age):
-		if age == 0:
+		if age < 4:
 			return _("All ages")
 		elif age <= 15:
 			age += 3
 			return _("Minimum age %d years") % age
 
 	def imageRating(self, age):
-		if age == 0:
+		if age < 4:
 			return "ratings/ETSI-ALL.png"
 		elif age <= 15:
 			age += 3
@@ -303,20 +303,37 @@ class EventName(Converter):
 		if self.type == self.NAME:
 			return self.trimText(event.getEventName())
 		elif self.type in (self.RATING, self.SRATING, self.RATINGICON):
+			reference = self.source.service
+			info = reference and self.source.info
+			self.list = []
+			self.epgcache = eEPGCache.getInstance()
+			if info:
+				test = ["ITSECX", (reference.toString(), 1, -1, 1)]
+				if self.epgcache:
+					self.list = self.epgcache.lookupEvent(test)
 			rating = event.getParentalData()
-			if "+" in event.getExtendedDescription() or "(TP)" in event.getExtendedDescription():
-				searchage = event.getExtendedDescription().split("+")[1] if "+" in event.getExtendedDescription() else event.getExtendedDescription().split("(")[1]
-				if "TP" in searchage[:2]:
-					age = 0
-					if self.type == self.RATING or self.type == self.SRATING:
-						return self.trimText(_("All ages"))
-					c = countries["ETSI"]
-					rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
-					return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
-				try:
-					agecount = int(searchage[:2].replace(")", ""))
-					age = agecount - 3 if agecount >= 7 else 0
-				except Exception:
+			if "+" in event.getExtendedDescription() or "(TP)" in event.getExtendedDescription() or self.epgcache:
+				searchage = (event.getExtendedDescription().split("+")[1] if "+" in event.getExtendedDescription() else event.getExtendedDescription().split("(")[1] if "(TP)" in event.getExtendedDescription() else self.list[1][3].split("+")[1] if "+" in self.list else self.list[1][3].split("(")[1] if "(TP)" in self.list else None)
+				if searchage is not None:
+					if "TP" in searchage[:2] or "ALL" in searchage[:3]:
+						age = 0
+						if self.type == self.RATING or self.type == self.SRATING:
+							return self.trimText(_("All ages"))
+						c = countries["ETSI"]
+						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+					else:
+						try:
+							c = countries["ETSI"]
+							agecount = int(searchage[:2].replace(")", ""))
+							age = agecount - 3 if agecount >= 7 else 0
+							rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+							if self.type == self.RATING or self.type == self.SRATING:
+								return self.trimText(rating[self.RATLONG])
+							return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+						except Exception:
+							age = rating.getRating()
+				else:
 					age = rating.getRating()
 			else:
 				age = rating.getRating()
@@ -330,7 +347,6 @@ class EventName(Converter):
 					c = countries["ETSI"]
 				if config.misc.epgratingcountry.value:
 					c = countries[config.misc.epgratingcountry.value]
-				age = (age if age + 3 >= 7 else age + 8 if age == 1 else age + 4 if age == 0 else age)
 				rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 				if self.type == self.RATING:
 					return self.trimText(rating[self.RATLONG])
