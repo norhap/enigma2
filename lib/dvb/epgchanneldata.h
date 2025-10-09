@@ -22,7 +22,8 @@ class freesatEITSubtableStatus;
 
 #define FILE_EQUIV "/etc/mhw_Equiv.epg"
 #define FILE_CHANNELS "/etc/mhw_Chann.epg"
-#define FILE_LOG "/tmp/mhw_Log.epg"
+#define FILE_CHANNELS_HD "/etc/mhw_ChannHD.epg"  /* OPENSPA [norhap] Channel HD list */
+#define FILE_LOG "/etc/mhw_Log.epg"  /* OPENSPA [norhap] Path to the title summaries file */
 
 #define EPG_REPLAY_LEN 8
 
@@ -117,6 +118,7 @@ class eEPGChannelData: public sigc::trackable
 #endif
 #ifdef ENABLE_MHW_EPG
 	std::vector<mhw_channel_name_t> m_channels;
+	std::vector<mhw_channel_name_t> m_channels2;  // OPENSPA [morser] Add for HD channels
 	std::vector<mhw_channel_equiv_t> m_equiv;
 	std::map<uint8_t, mhw_theme_name_t> m_themes;
 	std::map<uint32_t, mhw_title_t> m_titles;

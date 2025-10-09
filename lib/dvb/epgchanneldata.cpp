@@ -60,7 +60,7 @@ void eEPGChannelData::startChannel()
  */
 void eEPGChannelData::startEPG()
 {
-	eDebug("[eEPGChannelData] start reading events(%lld)", ::time(0));
+	eDebug("[eEPGChannelData] start reading events(%ld)", ::time(0));
 	state=0;
 	haveData=0;
 	for (unsigned int i=0; i < sizeof(seenSections)/sizeof(tidMap); ++i)
@@ -288,7 +288,7 @@ void eEPGChannelData::finishEPG()
 {
 	if (!isRunning)  // epg ready
 	{
-		eDebug("[eEPGChannelData] stop caching events(%lld)", ::time(0));
+		eDebug("[eEPGChannelData] stop caching events(%ld)", ::time(0));
 		zapTimer->start(UPDATE_INTERVAL, 1);
 		eDebug("[eEPGChannelData] next update in %i min", UPDATE_INTERVAL / 60000);
 		for (unsigned int i=0; i < sizeof(seenSections)/sizeof(tidMap); ++i)
@@ -515,7 +515,7 @@ void eEPGChannelData::readData( const uint8_t *data, int source)
 #endif
 			default: eDebugNoNewLine("unknown");break;
 		}
-		eDebugNoNewLine(" finished(%lld)\n", ::time(0));
+		eDebugNoNewLine(" finished(%ld\n", ::time(0));
 		if ( reader )
 			reader->stop();
 		isRunning &= ~source;
@@ -743,6 +743,7 @@ void eEPGChannelData::cleanupMHW()
 {
 	m_MHWTimeoutTimer->stop();
 	m_channels.clear();
+	m_channels2.clear();  /* OPENSPA [morser] For M+ 7 days epg */
 	m_themes.clear();
 	m_titles.clear();
 	m_titlesID.clear();
@@ -862,7 +863,17 @@ void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator it
 	packet->segment_last_table_id = 0x50;
 
 	uint8_t *title = isMHW2 ? ((uint8_t*)(itTitle->second.title))-4 : (uint8_t*)itTitle->second.title;
-	std::string prog_title = (char *) delimitName( title, name, isMHW2 ? 35 : 23 );
+	/* OPENSPA [morser] For M+ 7 days epg */
+	std::string prog_title;
+	if (isMHW2)
+	{
+		prog_title = (char *) title;
+		prog_title.append((char *) itTitle->second.title2);
+	}
+	else
+		prog_title = (char *) delimitName( title, name, isMHW2 ? 35 : 23 );
+	/* ************************************ */
+
 	int prog_title_length = prog_title.length();
 
 	int packet_length = EIT_SIZE + EIT_LOOP_SIZE + EIT_SHORT_EVENT_DESCRIPTOR_SIZE +
@@ -1048,6 +1059,40 @@ void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator it
 		descriptor[1] = 2;
 		descriptor[2] = content_id;
 		descriptor[3] = 0;
+
+		/* OPENSPA [morser] Add parental descriptor fo M+ */
+		int rating = -1;
+		std::size_t found1 = sumText.find("(TP)");
+		if (found1!=std::string::npos)
+		{
+			rating = 0;
+		} else {
+			found1 = sumText.find("(+");
+			if (found1!=std::string::npos)
+			{
+				std::size_t found2 = sumText.find(")",found1+1);
+				if (found2!=std::string::npos)
+				{
+					std::string newstr = sumText.substr(found1+2,found2-found1+2);
+					int r = std::stoi(newstr);
+					rating = r-3;
+				}
+			}
+		}
+		if (rating > -1)
+		{
+			u_char *descriptor2 = (u_char *) data + packet_length;
+			packet_length += 6;
+			descr_ll += 6;
+
+			descriptor2[0] = 0x55;
+			descriptor2[1] = 4;
+			descriptor2[2] = 'E';
+			descriptor2[3] = 'S';
+			descriptor2[4] = 'P';
+			descriptor2[5] = rating;
+		}
+		/* ********************************************** */
 	}
 
 	event_data->descriptors_loop_length_hi = (descr_ll & 0xf00)>>8;
@@ -1059,6 +1104,26 @@ void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator it
 	// Feed the data to eEPGTransponderDataReader::sectionRead()
 	if (eEPGCache::getInstance())
 		eEPGCache::getInstance()->sectionRead( data, eEPGCache::MHW, this );
+
+	/* OPENSPA [morser] Copy to HD Channel for M+ *** */
+	if (isMHW2)
+	{
+		if (m_channels[ itTitle->second.channel_id - 1 ].channel_id_hi != m_channels2[ itTitle->second.channel_id - 1 ].channel_id_hi ||
+			m_channels[ itTitle->second.channel_id - 1 ].channel_id_lo != m_channels2[ itTitle->second.channel_id - 1 ].channel_id_lo)
+		{
+			packet->service_id_hi = m_channels2[ itTitle->second.channel_id - 1 ].channel_id_hi;
+			packet->transport_stream_id_hi = m_channels2[ itTitle->second.channel_id - 1 ].transport_stream_id_hi;
+			packet->original_network_id_hi = m_channels2[ itTitle->second.channel_id - 1 ].network_id_hi;
+			packet->service_id_lo = m_channels2[ itTitle->second.channel_id - 1 ].channel_id_lo;
+			packet->transport_stream_id_lo = m_channels2[ itTitle->second.channel_id - 1 ].transport_stream_id_lo;
+			packet->original_network_id_lo = m_channels2[ itTitle->second.channel_id - 1 ].network_id_lo;
+			if (eEPGCache::getInstance())
+				eEPGCache::getInstance()->sectionRead( data, eEPGCache::MHW, this );
+		}
+	}
+	/* ********************************************** */
+
+	// Copy to Equivalences
 
 	int i;
 	for (i=0;i<nb_equiv;i++)
@@ -1126,7 +1191,7 @@ void eEPGChannelData::startMHWReader2(uint16_t pid, uint8_t tid, int ext)
 bool eEPGChannelData::log_open ()
 {
 	log_file = fopen (FILE_LOG, "w");
-	 
+
 	return (log_file != NULL);
 }
 
@@ -1141,19 +1206,19 @@ void eEPGChannelData::log_add (const char *message, ...)
 	va_list args;
 	char msg[16*1024];
 	time_t now_time;
-	struct tm loctime;
+	struct tm loctime = {};
 
 	now_time = time (NULL);
 	localtime_r(&now_time, &loctime);
 	strftime (msg, 255, "%d/%m/%Y %H:%M:%S ", &loctime);
-	 
+
 	if (log_file != NULL) fwrite (msg, strlen (msg), 1, log_file);
 
 	va_start (args, message);
 	vsnprintf (msg, 16*1024, message, args);
 	va_end (args);
 	msg[(16*1024)-1] = '\0';
-	 
+
 	if (log_file != NULL)
 	{
 		fwrite (msg, strlen (msg), 1, log_file);
@@ -1166,9 +1231,9 @@ void eEPGChannelData::GetEquiv(void)
 {
 	nb_equiv=0;
 	m_equiv.resize(100);
- 
+
  	FILE *eq=fopen(FILE_EQUIV,"r");
- 	if (eq) 
+ 	if (eq)
 	{
 		char linea[256];
 		while ((fgets(linea,256,eq)!=NULL) && (nb_equiv<100))
@@ -1226,7 +1291,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 
 		char dated[22];
 		time_t now_time;
-		struct tm loctime;
+		struct tm loctime = {};
 		now_time = time (NULL);
 		localtime_r(&now_time, &loctime);
 		strftime (dated, 21, "%d/%m/%Y %H:%M:%S", &loctime);
@@ -1351,6 +1416,8 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 	{
 		mhw_summary_t *summary = (mhw_summary_t*) data;
 
+		int table_len=data[2]|((data[1]&0x0f)<<8);
+		if (table_len < (data[14] + 17)) return;
 		// Create unique key per record
 		uint32_t program_id = ((summary->program_id_hi)<<24)|((summary->program_id_mh)<<16)|
 			((summary->program_id_ml)<<8)|(summary->program_id_lo);
@@ -1389,7 +1456,7 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 				return;	// Continue reading of the current table.
 		}
 	}
-	eDebug("[eEPGChannelData] mhw finished(%lld) %zu summaries not found",
+	eDebug("[eEPGChannelData] mhw finished(%ld) %zu summaries not found",
 		::time(0),
 		m_program_ids.size());
 	log_add("Summaries not found: %zu",m_program_ids.size());
@@ -1450,7 +1517,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 
 		char dated[22];
 		time_t now_time;
-		struct tm loctime;
+		struct tm loctime = {};
 		now_time = time (NULL);
 		localtime_r(&now_time, &loctime);
 		strftime (dated, 21, "%d/%m/%Y %H:%M:%S", &loctime);
@@ -1509,6 +1576,102 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		// Themes table
 		eDebug("[eEPGChannelData] mhw2 themes nyi");
 	}
+	/* OPENSPA [morser] Channel HD list ********* */
+	else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
+	// More channels
+	{
+		int num_channels = data[120];
+		m_channels2.resize(num_channels);
+		if(dataLen > 120)
+		{
+			int ptr = 121 + 8 * num_channels;
+			if( dataLen > ptr )
+			{
+				for( int chid = 0; chid < num_channels; ++chid )
+				{
+					ptr += ( data[ptr] & 0x0f ) + 1;
+					if( dataLen < ptr )
+						goto abort;
+				}
+			}
+			else
+				goto abort;
+		}
+		else
+			goto abort;
+		// data seems consistent...
+		const uint8_t *tmp = data+121;
+		FILE *f=fopen(FILE_CHANNELS_HD,"w");
+
+		char dated[22];
+		time_t now_time;
+		struct tm *loctime;
+		now_time = time (NULL);
+		loctime = localtime (&now_time);
+		strftime (dated, 21, "%d/%m/%Y %H:%M:%S", loctime);
+		if (f)
+		{
+			fprintf(f,"#########################################\n");
+			fprintf(f,"#                                       #\n");
+			fprintf(f,"#     Channels HD list  in mhw EPG      #\n");
+			fprintf(f,"#    Generated at %s   #\n",dated);
+			fprintf(f,"#                                       #\n");
+			fprintf(f,"#    Format: (NAME) TYP:SID:TSID:NID    #\n");
+			fprintf(f,"#                                       #\n");
+			fprintf(f,"#########################################\n");
+			fprintf(f,"#\n");
+		}
+
+		for (int i=0; i < num_channels; ++i)
+		{
+			mhw_channel_name_t channel;
+			channel.network_id_hi = *(tmp++);
+			channel.network_id_lo = *(tmp++);
+			channel.transport_stream_id_hi = *(tmp++);
+			channel.transport_stream_id_lo = *(tmp++);
+			channel.channel_id_hi = *(tmp++);
+			channel.channel_id_lo = *(tmp++);
+			channel.tmp = *(tmp++);
+			channel.data = *(tmp++);
+			m_channels2[i]=channel;
+//			eDebug("[eEPGCache] %d(%02x) %04x: %02x %02x", i, i, (channel.channel_id_hi << 8) | channel.channel_id_lo, *tmp, *(tmp+1));
+//			tmp+=2;
+		}
+		for (int i=0; i < num_channels; ++i)
+		{
+			mhw_channel_name_t &channel = m_channels2[i];
+			int channel_name_len=*(tmp++)&0x0f;
+			int x=0, q=channel.data&0xF;
+			for (; x < channel_name_len; ++x)
+				channel.name[x]=*(tmp++);
+			channel.name[channel_name_len]=0;
+//			eDebug("[eEPGCache] %d(%02x) %s", i, i, channel.name);
+
+			/* data for q
+			   3 = SD Channel = 1 in Enigma
+			   7 = SD Taquilla = 1 in Enigma
+			   11 = HD Channel = 25 in Enigma
+			   15 = HD Taquilla = 25 in Enigma
+			*/
+			if (q == 3) q=1;
+			else if (q == 11) q=25;
+			else if (q == 7) q=1;
+			else if (q == 15) q=25;
+
+			// in 3f4 transponder, Hd channels configured with 1
+			if (channel.getTransportStreamId() == 0x3F4) q=1;
+
+			if (f) fprintf(f,"(%s) %x:%x:%x:%x\n",channel.name, q,
+			channel.getChannelId(), channel.getTransportStreamId(), channel.getNetworkId());
+		}
+
+		fclose(f);
+		log_add("ChannelsHD nbr.: %d",num_channels);
+		log_add("Equivalences Nbr.: %d",nb_equiv);
+		haveData |= eEPGCache::MHW;
+		eDebug("[eEPGChannelData] mhw2 %zu channels2 found", m_channels2.size());
+	}
+	/* ************************************************* */
 	else if (m_MHWFilterMask2.pid == m_mhw2_title_pid)
 	// Titles table
 	{
@@ -1519,8 +1682,8 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			int len=dataLen-1;
 			while( pos < dataLen && !valid)
 			{
-				pos += 18;
-				pos += (data[pos] & 0x3F) + 3;
+				pos += 16;  /* OPENSPA [morser] Fix fo 7 days in M+ */
+				pos += (data[pos] & 0x3F) + 4;  /* OPENSPA [morser] Fix fo 7 days in M+ */
 				if( pos == len )
 					valid = true;
 			}
@@ -1542,33 +1705,40 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			while (pos < dataLen)
 			{
 				title.channel_id = data[7]+1;
-				title.mhw2_mjd_hi = data[pos+11];
-				title.mhw2_mjd_lo = data[pos+12];
-				title.mhw2_hours = data[pos+13];
-				title.mhw2_minutes = data[pos+14];
-				title.mhw2_seconds = data[pos+15];
-				int duration = ((data[pos+16] << 8)|data[pos+17]) >> 4;
+				title.mhw2_mjd_hi = data[pos+9];  /* OPENSPA [morser] Fix fo 7 days in M+ */
+				title.mhw2_mjd_lo = data[pos+10];  /* OPENSPA [morser] Fix fo 7 days in M+ */
+				title.mhw2_hours = data[pos+11];  /* OPENSPA [morser] Fix fo 7 days in M+ */
+				title.mhw2_minutes = data[pos+12];  /* OPENSPA [morser] Fix fo 7 days in M+ */
+				title.mhw2_seconds = data[pos+13];  /* OPENSPA [morser] Fix fo 7 days in M+ */
+				int duration = ((data[pos+14] << 8)|data[pos+15]) >> 4; /* OPENSPA [morser] Fix fo 7 days in M+ */
 				title.mhw2_duration_hi = (duration&0xFF00) >> 8;
 				title.mhw2_duration_lo = duration&0xFF;
 
 				// Create unique key per title
-				uint32_t title_id = (data[pos+7] << 24) | (data[pos+8] << 16) | (data[pos+9] << 8) | data[pos+10];
+				uint32_t title_id = (data[pos+5] << 24) | (data[pos+6] << 16) | (data[pos+7] << 8) | data[pos+8];  /* OPENSPA [morser] Fix fo 7 days in M+ */
 
-				uint32_t summary_id = (data[pos+4] << 16) | (data[pos+5] << 8) | data[pos+6];
-				uint8_t slen = data[pos+18] & 0x3f;
+				/* OPENSPA [morser] Fix fo 7 days in M+ */
+				uint32_t summary_id_o = (data[pos+2] << 16) | (data[pos+3] << 8) | data[pos+4];
+				uint8_t slen = data[pos+16] & 0x3f;
 				uint8_t *dest = ((uint8_t*)title.title)-4;
-				memcpy(dest, &data[pos+19], slen>35 ? 35 : slen);
-				if ( slen < 35 )
-					memset(dest+slen, 0, 35-slen);
+				uint8_t *dest2 = (uint8_t*)title.title2;
+				memset(dest, 0, 35);
+				memset(dest2, 0, 30);
+				memcpy(dest, &data[pos+17], slen>34 ? 34 : slen);
+				if ( slen > 34 )
+					memcpy(dest2, &data[pos+17+34], slen>64 ? 30 : slen-34);
 				//memset(dest+slen, 0, (slen>35 ? 0 : 35-slen));
-				pos += 19 + slen;
+				pos += 17 + slen;
 
 				title.mhw2_theme = 0xFF;
 
-				if (summary_id == 0xFFFFFF)
-					summary_id = (data[pos+1] << 8) | data[pos+2];
+				uint32_t summary_id = (data[pos+2] << 8) | data[pos+3];
 
-				pos += 2;
+				if (summary_id == 0xFFFF)
+					summary_id = summary_id_o;
+
+				pos += 3;
+				/* ************************************* */
 
 				//std::map<uint32_t, mhw_title_t>::iterator it = m_titles.find( title_id );
 				std::map<uint32_t, uint32_t>::iterator it1 = m_titlesID.find( title_id );
@@ -1580,7 +1750,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 					startMHWTimeout(40000);
 					m_titles[ title_id ] = title;
 					m_titlesID[ title_id ] = title_id;
-					if (summary_id != 0xFFFF)
+					if (summary_id != 0xFFFFFF)  /* OPENSPA [morser] Fix fo 7 days in M+ */
 					{
 
 						bool add=true;
@@ -1668,7 +1838,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 						}
 						if (nb>0 && !checkMHWTimeout())
 						{
-							startMHWTimeout(15000);
+							startMHWTimeout(35000);  /* OPENSPA [morser] Fix fo 7 days in M+ */
 						}
 					}
 				}
@@ -1740,7 +1910,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 				}
 				else
 				{
-					startMHWTimeout(17000);
+					startMHWTimeout(30000);  /* OPENSPA [morser] Fix fo 7 days in M+ */
 					std::string the_text = (char *) (data + pos + 2);
 
 					pos=pos+len+12;
@@ -1763,7 +1933,7 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 
 									int chid = it->second.channel_id - 1;
 									time_t ndate, edate;
-									struct tm next_date;
+									struct tm next_date = {};
 									u_char mhw2_mjd_hi = data[pos+10];
 									u_char mhw2_mjd_lo = data[pos+11];
 									u_char mhw2_hours = data[pos+12];
@@ -1807,7 +1977,14 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 		}
 		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
 		{
-			// Themes table has been read, start reading the titles table.
+			// OPENSPA [morser] Themes table has been read, start reading the HD channels table.
+			startMHWReader2(m_mhw2_channel_pid, 0xC8, 2);
+			return;
+		}
+		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
+		{
+			// hd channels has been read, start reading the titles table.
+
 			startMHWReader2(m_mhw2_title_pid, 0xdc);
 			return;
 		}
@@ -1876,7 +2053,7 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 
 		char dated[22];
 		time_t now_time;
-		struct tm loctime;
+		struct tm loctime = {};
 		now_time = time (NULL);
 		localtime_r(&now_time, &loctime);
 		strftime (dated, 21, "%d/%m/%Y %H:%M:%S", &loctime);
@@ -1934,6 +2111,103 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 		// Themes table
 		eDebug("[eEPGChannelData] mhw2 themes nyi");
 	}
+	/* OPENSPA [morser] Read HD Channels */
+	else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
+	// More channels
+	{
+		int num_channels = data[120];
+		m_channels2.resize(num_channels);
+		if(dataLen > 120)
+		{
+			int ptr = 121 + 8 * num_channels;
+			if( dataLen > ptr )
+			{
+				for( int chid = 0; chid < num_channels; ++chid )
+				{
+					ptr += ( data[ptr] & 0x0f ) + 1;
+					if( dataLen < ptr )
+						goto abort;
+				}
+			}
+			else
+				goto abort;
+		}
+		else
+			goto abort;
+		// data seems consistent...
+		const uint8_t *tmp = data+121;
+		FILE *f=fopen(FILE_CHANNELS_HD,"w");
+
+		char dated[22];
+		time_t now_time;
+		struct tm *loctime;
+		now_time = time (NULL);
+		loctime = localtime (&now_time);
+		strftime (dated, 21, "%d/%m/%Y %H:%M:%S", loctime);
+		if (f)
+		{
+			fprintf(f,"#########################################\n");
+			fprintf(f,"#                                       #\n");
+			fprintf(f,"#     Channels HD list  in mhw EPG      #\n");
+			fprintf(f,"#    Generated at %s   #\n",dated);
+			fprintf(f,"#                                       #\n");
+			fprintf(f,"#    Format: (NAME) TYP:SID:TSID:NID    #\n");
+			fprintf(f,"#                                       #\n");
+			fprintf(f,"#########################################\n");
+			fprintf(f,"#\n");
+		}
+
+		for (int i=0; i < num_channels; ++i)
+		{
+			mhw_channel_name_t channel;
+			channel.network_id_hi = *(tmp++);
+			channel.network_id_lo = *(tmp++);
+			channel.transport_stream_id_hi = *(tmp++);
+			channel.transport_stream_id_lo = *(tmp++);
+			channel.channel_id_hi = *(tmp++);
+			channel.channel_id_lo = *(tmp++);
+			channel.tmp = *(tmp++);
+			channel.data = *(tmp++);
+			m_channels2[i]=channel;
+//			eDebug("[EPGCache] %d(%02x) %04x: %02x %02x", i, i, (channel.channel_id_hi << 8) | channel.channel_id_lo, *tmp, *(tmp+1));
+//			tmp+=2;
+		}
+		for (int i=0; i < num_channels; ++i)
+		{
+			mhw_channel_name_t &channel = m_channels2[i];
+			int channel_name_len=*(tmp++)&0x0f;
+			int x=0, q=channel.data&0xF;
+			for (; x < channel_name_len; ++x)
+				channel.name[x]=*(tmp++);
+			channel.name[channel_name_len]=0;
+//			eDebug("[eEPGCache] %d(%02x) %s", i, i, channel.name);
+
+			/* data for q
+			   3 = SD Channel = 1 in Enigma
+			   7 = SD Taquilla = 1 in Enigma
+			   11 = HD Channel = 25 in Enigma
+			   15 = HD Taquilla = 25 in Enigma
+			*/
+
+			// in 3f4 transponder, Hd channels configured with 1
+			if (channel.getTransportStreamId() == 0x3F4) q=1;
+
+			if (q == 3) q=1;
+			else if (q == 11) q=25;
+			else if (q == 7) q=1;
+			else if (q == 15) q=25;
+
+			if (f) fprintf(f,"(%s) %x:%x:%x:%x\n",channel.name, q,
+			channel.getChannelId(), channel.getTransportStreamId(), channel.getNetworkId());
+		}
+
+		fclose(f);
+		log_add("ChannelsHD nbr.: %d",num_channels);
+		log_add("Equivalences Nbr.: %d",nb_equiv);
+		haveData |= eEPGCache::MHW;
+		eDebug("[eEPGChannelData] mhw2 %d channels found", m_channels2.size());
+	}
+	/* ******************************************************************* */
 	else if (m_MHWFilterMask2.pid == m_mhw2_title_pid && m_MHWFilterMask2.data[0] == 0xe6)
 	// Titles table
 	{
@@ -1987,9 +2261,14 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 
 			uint8_t slen = data[pos+18] & 0x3f;
 			uint8_t *dest = ((uint8_t*)title.title)-4;
-			memcpy(dest, &data[pos+19], slen>35 ? 35 : slen);
-			if ( slen < 35 )
-				memset(dest+slen, 0, 35-slen);
+			/* OPENSPA [morser] Fix for 7 days in M+ */
+			uint8_t *dest2 = (uint8_t*)title.title2;
+			memset(dest, 0, 35);
+			memset(dest2, 0, 30);
+			memcpy(dest, &data[pos+19], slen>34 ? 34 : slen);
+			if ( slen > 34 )
+				memcpy(dest2, &data[pos+19+34], slen>64 ? 30 : slen-34);
+			/* *************************************** */
 			pos += 19 + slen;
 //			eDebugNoNewLine("%02x [%02x %02x]: %s\n", data[pos], data[pos+1], data[pos+2], dest);
 
@@ -2164,7 +2443,7 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 								char const *const days[] = {"D", "L", "M", "M", "J", "V", "S", "D"};
 
 								time_t ndate, edate;
-								struct tm next_date;
+								struct tm next_date = {};
 								ndate = replay_time[n];
 								edate = MjdToEpochTime(itTitle->second.mhw2_mjd)
 									+ (((itTitle->second.mhw2_hours&0xf0)>>4)*10+(itTitle->second.mhw2_hours&0x0f)) * 3600
@@ -2202,7 +2481,14 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 		}
 		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
 		{
-			// Themes table has been read, start reading the titles table.
+			// OPENSPA [morser] Themes table has been read, start reading the HD channels table.
+			startMHWReader2(m_mhw2_channel_pid, 0xC8, 2);
+			return;
+		}
+		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
+		{
+			// hd channels has been read, start reading the titles table.
+
 			startMHWReader2(m_mhw2_title_pid, 0xe6);
 			return;
 		}
@@ -2212,7 +2498,7 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 			// Now store titles that do not have summaries.
 			for (std::map<uint32_t, mhw_title_t>::iterator itTitle(m_titles.begin()); itTitle != m_titles.end(); itTitle++)
 				storeMHWTitle( itTitle, "", data );
-			eDebug("[eEPGChannelData] mhw2 finished(%lld) %zu summaries not found",
+			eDebug("[eEPGChannelData] mhw2 finished(%ld) %zu summaries not found",
 				::time(0),
 				m_program_ids.size());
 			log_add("Summaries not found: %zu",m_program_ids.size());
@@ -2455,7 +2741,7 @@ void eEPGChannelData::ATSC_EITsection(const uint8_t *d)
 		uint32_t etm = ((eit.getTableIdExtension() & 0xffff) << 16) | (((*ev)->getEventId() & 0x3fff) << 2) | 0x2;
 		if (m_ATSC_EIT_map.find(etm) == m_ATSC_EIT_map.end())
 		{
-			struct atsc_event event;
+			struct atsc_event event = {};
 			event.title = (*ev)->getTitle("---");
 			event.eventId = (*ev)->getEventId();
 			event.startTime = (*ev)->getStartTime() + (time_t)315964800; /* ATSC GPS system time epoch is 00:00 Jan 6th 1980 */
@@ -2625,7 +2911,7 @@ void eEPGChannelData::OPENTV_ChannelsSection(const uint8_t *d)
 	{
 		if (m_OPENTV_channels_map.find((*channel)->getChannelId()) == m_OPENTV_channels_map.end())
 		{
-			struct opentv_channel otc;
+			struct opentv_channel otc = {};
 			otc.originalNetworkId = (*channel)->getOriginalNetworkId();
 			otc.transportStreamId = (*channel)->getTransportStreamId();
 			otc.serviceId = (*channel)->getServiceId();
@@ -2646,7 +2932,7 @@ void eEPGChannelData::OPENTV_TitlesSection(const uint8_t *d)
 
 		if (m_OPENTV_EIT_map.find(etm) == m_OPENTV_EIT_map.end())
 		{
-			struct opentv_event ote;
+			struct opentv_event ote = {};
 			ote.eventId = (*title)->getEventId();
 			ote.startTime = (*title)->getStartTime();
 			ote.duration = (*title)->getDuration();
