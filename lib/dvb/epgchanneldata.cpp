@@ -1975,13 +1975,13 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			startMHWReader2(m_mhw2_channel_pid, 0xC8, 1);
 			return;
 		}
-		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
+		else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
 		{
 			// OPENSPA [morser] Themes table has been read, start reading the HD channels table.
 			startMHWReader2(m_mhw2_channel_pid, 0xC8, 2);
 			return;
 		}
-		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
+		else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
 		{
 			// hd channels has been read, start reading the titles table.
 
@@ -2479,13 +2479,13 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 			startMHWReader2(m_mhw2_channel_pid, 0xC8, 1);
 			return;
 		}
-		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
+		else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 1)
 		{
 			// OPENSPA [morser] Themes table has been read, start reading the HD channels table.
 			startMHWReader2(m_mhw2_channel_pid, 0xC8, 2);
 			return;
 		}
-		else if ( m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
+		else if (m_MHWFilterMask2.pid == m_mhw2_channel_pid && m_MHWFilterMask2.data[0] == 0xC8 && m_MHWFilterMask2.data[1] == 2)
 		{
 			// hd channels has been read, start reading the titles table.
 
