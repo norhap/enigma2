@@ -44,9 +44,9 @@ class NTPSyncPoller:
 		else:
 			self.update_schedule()
 
-	def update_schedule(self, result=None, retval=None, extra_args=None):
-		if retval and result:
-			print("[NetworkTime] Error %d: Unable to synchronize the time!\n%s" % (retval, result.strip()))
+	def update_schedule(self, result=None, retVal=None, extra_args=None):
+		if retVal and result:
+			print("[NetworkTime] Error %d: Unable to synchronize the time!\n%s" % (retVal, result.strip()))
 		nowTime = time()
 		if nowTime > 10000:
 			print(f"[NetworkTime] Setting time to {ctime(nowTime)} {(str(nowTime))} from {config.ntp.timesync.toDisplayString(config.ntp.timesync.value)}.")
