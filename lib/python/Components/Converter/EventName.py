@@ -10,6 +10,20 @@ from time import localtime, mktime, strftime
 from gettext import pgettext
 
 
+class RatingBroadcaster(dict):
+	#            None
+	COLORS = (0x000000)
+
+	def shortRating(self, age):
+		return _("Defined in broadcaster")
+
+	def longRating(self, age):
+		return _("Rating defined by broadcaster")
+
+	def imageRating(self, age):
+		return "ratings/ETSI-na.png"
+
+
 class ETSIClassifications(dict):
 	#            0         1         2          3        4         5          6         7         8         9        10        11        12        13        14        15
 	COLORS = (0x000000, 0x00A822, 0x00A822, 0x00A822, 0x007DCA, 0x007DCA, 0x007DCA, 0xFF7900, 0xFF7900, 0xFF7900, 0xFF5594, 0xFF5594, 0xFF5594, 0xD70723, 0xD70723, 0xD70723)
@@ -144,7 +158,8 @@ countries = {
 	"ETSI": (ETSIClassifications(), lambda age: ((_("%d+") % (age + 3) if age < 19 else _("All ages"), _("Minimum age %d years") % (age + 3) if age < 16 else _("All ages"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-ALL.png", 0x222222))),
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png", 0x222222)),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png", 0x222222)),
-	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png", 0x222222))
+	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png", 0x222222)),
+	"BC": (RatingBroadcaster(), lambda age: (_("Defined in broadcaster"), _("Rating defined by broadcaster"), "ratings/ETSI-na.png", 0x222222))
 }
 
 
@@ -322,7 +337,7 @@ class EventName(Converter):
 						c = countries["ETSI"]
 						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
-					else:
+					if rating:
 						try:
 							c = countries["ETSI"]
 							agecount = int(searchage[:2].replace(")", ""))
@@ -332,12 +347,9 @@ class EventName(Converter):
 								return self.trimText(rating[self.RATLONG])
 							return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
 						except Exception:
-							age = rating.getRating()
-				else:
-					age = rating.getRating()
-			else:
-				age = rating.getRating()
+							pass
 			if rating:
+				age = rating.getRating()
 				country = rating.getCountryCode().upper()
 				if country in opentv_countries:
 					country = opentv_countries[country]
@@ -347,6 +359,15 @@ class EventName(Converter):
 					c = countries["ETSI"]
 				if config.misc.epgratingcountry.value:
 					c = countries[config.misc.epgratingcountry.value]
+				rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+				if self.type == self.RATING:
+					return self.trimText(rating[self.RATLONG])
+				elif self.type == self.SRATING:
+					return self.trimText(rating[self.RATSHORT])
+				return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+			else:
+				age = None
+				c = countries["BC"]
 				rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 				if self.type == self.RATING:
 					return self.trimText(rating[self.RATLONG])
