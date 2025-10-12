@@ -21,7 +21,7 @@ class RatingBroadcaster(dict):
 		return _("Rating defined by broadcaster")
 
 	def imageRating(self, age):
-		return "ratings/ETSI-na.png"
+		return "ratings/ETSI-BC.png"
 
 
 class ETSIClassifications(dict):
@@ -159,7 +159,7 @@ countries = {
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png", 0x222222)),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png", 0x222222)),
 	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png", 0x222222)),
-	"BC": (RatingBroadcaster(), lambda age: (_("Defined in broadcaster"), _("Rating defined by broadcaster"), "ratings/ETSI-na.png", 0x222222))
+	"BC": (RatingBroadcaster(), lambda age: (_("Defined in broadcaster"), _("Rating defined by broadcaster"), "ratings/ETSI-BC.png", 0x222222))
 }
 
 
