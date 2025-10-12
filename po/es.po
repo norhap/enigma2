@@ -4380,8 +4380,8 @@ msgstr "Retraso en el inicio de stream http(s)"
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr "Defina un retraso adicional en milisegundos antes del inicio de streams http(s), por ejemplo conectar un tuner remoto con sistema complejo tipo DiSEqC."
 
-msgid "Defined in broadcaster"
-msgstr "Definido en emisora"
+msgid "Rated on the station"
+msgstr "Calificado en emisora"
 
 msgid "Enter a new name for this device."
 msgstr "Introduzca un nuevo nombre para este dispositivo."
@@ -7610,13 +7610,13 @@ msgid "Random"
 msgstr "Aleatorio"
 
 msgid "Rating defined by broadcaster"
-msgstr "Clasificación definida por la emisora"
+msgstr "Calificación definida por la emisora"
 
 msgid "Rating defined by broadcaster - %d"
-msgstr "Clasificación definida por la emisora - %d"
+msgstr "Calificación definida por la emisora - %d"
 
 msgid "Rating undefined"
-msgstr "Clasificación indefinida"
+msgstr "Califificación indefinida"
 
 msgid "Really close without saving settings?"
 msgstr "¿Cerrar sin guardar configuración?"
