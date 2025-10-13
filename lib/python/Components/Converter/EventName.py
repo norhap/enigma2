@@ -6,7 +6,7 @@ from Components.Converter.genre import getGenreStringSub, getGenreStringLong
 from Components.config import config
 from Components.UsageConfig import dropEPGNewLines, replaceEPGSeparator
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
-from time import localtime, mktime, strftime
+from time import localtime, mktime, strftime, time
 from gettext import pgettext
 
 
