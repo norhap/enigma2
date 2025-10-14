@@ -2,6 +2,7 @@
 from Components.Console import Console
 from os import rename, rmdir, sep
 from os.path import basename, exists, isfile, ismount, join
+from re import search
 from glob import glob
 from tempfile import mkdtemp
 from subprocess import check_output
@@ -115,8 +116,9 @@ def getCurrentImage():
 
 
 def getCurrentImageMode():
-	print("[Multiboot] Read /sys/firmware/devicetree/base/chosen/bootargs")
-	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
+	if SystemInfo["canMultiBoot"] and SystemInfo["canMode12"]:
+		if (results := search(r"\bboxmode=(\d+)\b", open("/sys/firmware/devicetree/base/chosen/bootargs", "r").read())):
+			return int(results.group(1))
 
 
 def deleteImage(slot):
