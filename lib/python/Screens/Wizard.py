@@ -179,6 +179,7 @@ class Wizard(Screen):
 		if self.showSteps:
 			self["step"] = Label()
 		if self.showStepSlider:
+			self["step"] = Label()
 			self["stepslider"] = Slider(1, self.numSteps)
 		if self.showList:
 			self.list = []
@@ -507,6 +508,8 @@ class Wizard(Screen):
 				self["step"].setText(self.getTranslation("Step ") + str(self.currStep) + "/" + str(self.numSteps))
 			if self.showStepSlider:
 				self["stepslider"].setValue(self.currStep)
+				self.progressCounter = int(100 * self.currStep / self.numSteps)
+				self["step"].setText(str(self.progressCounter) + " %" if self.progressCounter < 96 else str(100) + " %")
 			if self.wizard[self.currStep]["timeout"] is not None:
 				self.resetCounter()
 				self.timeoutTimer.start(1000)
