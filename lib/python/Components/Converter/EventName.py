@@ -141,7 +141,7 @@ class ItaClassifications(dict):
 # If there is no matching country then the default ETSI should be selected.
 #                                                    SHORT RATING                                                                                    LONG RATING                                                                                                             ICONS RATING
 countries = {
-	"ETSI": (ETSIClassifications(), lambda age: ((_("%d+") % (age + 3) if age < 19 else _("All ages") if age < 7 else _("Rated on the station"), _("Minimum age %d years") % (age + 3) if age < 16 else _("All ages") if age < 7 else _("Rating defined by broadcaster"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-ALL.png" if age < 7 else "ratings/ETSI-BC.png", 0x222222))),
+	"ETSI": (ETSIClassifications(), lambda age: ((_("%d+") % (age + 3) if age < 19 else _("All ages") if age < 7 else _("Possible rated in broadcaster"), _("Minimum age %d years") % (age + 3) if age < 16 else _("All ages") if age < 7 else _("Possible rated in broadcaster"), "ratings/ETSI-%d.png" % (age + 3) if age < 16 else "ratings/ETSI-ALL.png" if age < 7 else "ratings/ETSI-BC.png", 0x222222))),
 	"AUS": (AusClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/AUS-na.png", 0x222222)),
 	"GBR": (GBrClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/GBR-na.png", 0x222222)),
 	"ITA": (ItaClassifications(), lambda age: (_("BC%d") % age, _("Rating defined by broadcaster - %d") % age, "ratings/ITA-na.png", 0x222222))
@@ -322,17 +322,16 @@ class EventName(Converter):
 						c = countries["ETSI"]
 						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
 						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
-					if rating:
-						try:
-							c = countries["ETSI"]
-							agecount = int(searchage[:2].replace(")", ""))
-							age = agecount - 3 if agecount >= 7 else 0
-							rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
-							if self.type == self.RATING or self.type == self.SRATING:
-								return self.trimText(rating[self.RATLONG])
-							return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
-						except Exception:
-							pass
+					try:
+						c = countries["ETSI"]
+						agecount = int(searchage[:2].replace(")", ""))
+						age = agecount - 3 if agecount >= 7 else 0
+						rating = c[self.RATNORMAL].get(age, c[self.RATDEFAULT](age))
+						if self.type == self.RATING or self.type == self.SRATING:
+							return self.trimText(rating[self.RATLONG])
+						return resolveFilename(SCOPE_GUISKIN, rating[self.RATICON])
+					except Exception:
+						pass
 			if rating:
 				age = rating.getRating()
 				country = rating.getCountryCode().upper()
