@@ -40,6 +40,7 @@ class NTPSyncPoller:
 			# -n = Run in foreground
 			# -q = Quit after clock is set
 			# -p [keyno:NUM:]PEER... Obtain time from PEER (may be repeated)... Use key NUM for authentication... If -p is not given, 'server HOST' lines from /etc/ntp.conf are used.
+			# self.Console.ePopen(["/usr/sbin/sntp", "/usr/sbin/sntp", "-S", config.ntp.server.value], self.update_schedule)  add wildcard norhap for SNTP.
 			self.Console.ePopen(["/usr/sbin/ntpd", "/usr/sbin/ntpd", "-nq", "-p", config.ntp.server.value], self.update_schedule)
 		else:
 			self.update_schedule()
