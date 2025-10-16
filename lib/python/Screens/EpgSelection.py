@@ -113,7 +113,7 @@ class EPGSelection(Screen, HelpableScreen):
 		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "EPGFilterActions"], {
 			"cancel": self.closeScreen,
 			"ok": self.eventSelected,
-			"red": self.goToTmbd,
+			"red": self.goToIMDb,
 			"timerAdd": self.timerAdd,
 			"yellow": self.yellowButtonPressed,
 			"blue": self.blueButtonPressed,
@@ -138,12 +138,12 @@ class EPGSelection(Screen, HelpableScreen):
 			"endUp": (self.filterEndUp, _("End time") + " +"),
 			"saveTimes": (self.saveFilterValues, _("Use current filter values as default")),
 		})
-		self.isTMBD = isPluginInstalled("TMBD")
+		self.isTMBD = isPluginInstalled("IMDb")
 		if self.isTMBD:
-			self["key_red"] = StaticText(_("Search TMBD"))
+			self["key_red"] = StaticText(_("Search IMDb"))
 			self.select = True
 		else:
-			self["key_red"] = StaticText(_("TMBD Not Installed"))
+			self["key_red"] = StaticText(_("IMDB Not Installed"))
 			self.select = False
 		try:
 			from Plugins.Extensions.YTTrailer.plugin import baseEPGSelection__init__
@@ -165,15 +165,15 @@ class EPGSelection(Screen, HelpableScreen):
 		else:
 			self.fallbackTimer = FallbackTimerList(self, self.onCreate)
 
-	def goToTmbd(self):
-		if isPluginInstalled("TMBD"):
-			self.runTMBD()
+	def goToIMDb(self):
+		if isPluginInstalled("IMDb"):
+			self.runIMDB()
 		else:
-			self.session.openWithCallback(self.doInstall, MessageBox, _('The TMBD plugin is not installed!\nDo you want to install it?'), MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.doInstall, MessageBox, _('The IMDb plugin is not installed!\nDo you want to install it?'), MessageBox.TYPE_YESNO)
 
-	def runTMBD(self):
-		if isPluginInstalled("TMBD"):
-			from Plugins.Extensions.TMBD.plugin import TMBD
+	def runIMDB(self):
+		if isPluginInstalled("IMDb"):
+			from Plugins.Extensions.IMDb.plugin import IMDB
 			description = _("TMBD Details")
 			description = _("TMBD details for event")
 			description = _("Query details from the Internet Movie Database")
@@ -183,33 +183,20 @@ class EPGSelection(Screen, HelpableScreen):
 				name3 = name2.split("(")[0].strip()
 				eventname = name3.replace('"', '').replace('', '').replace('.', '')
 				eventname = eventname.replace('', '')
-				try:
-					tmbdsearch = config.plugins.tmbd.profile.value
-				except:
-					tmbdsearch = None
-				if tmbdsearch is not None:
-					if config.plugins.tmbd.profile.value == "0":
-						self.session.open(TMBD, eventname, False)
-					else:
-						try:
-							from Plugins.Extensions.TMBD.plugin import KinoRu
-							self.session.open(KinoRu, eventname, False)
-						except:
-							pass
-				else:
-					self.session.open(TMBD, eventname, False)
+				from Plugins.Extensions.IMDb.plugin import IMDB
+				self.session.open(IMDB, eventname, False)
 
 	def doInstall(self, val):
 		if val:
 			self.message = self.session.open(MessageBox, _("Please wait..."), MessageBox.TYPE_INFO, enable_input=False)
-			self.message.setTitle(_('Installing TMBD'))
-			self.Console.ePopen('opkg update && opkg install enigma2-plugin-extensions-tmbd', self.installComplete)
+			self.message.setTitle(_('Installing IMDb'))
+			self.Console.ePopen('opkg update && opkg install enigma2-plugin-extensions-imdb', self.installComplete)
 		else:
 			self.close()
 
 	def installComplete(self, str, retval, extra_args):
 		if 'Collected errors' in str:
-			self.session.openWithCallback(self.close, MessageBox, _("Seems internet connection down, Or TMBD Plugin not on feed."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+			self.session.openWithCallback(self.close, MessageBox, _("Seems internet connection down, Or IMDb Plugin not on feed."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 			self.message.close()
 		else:
 			self.message.close()
