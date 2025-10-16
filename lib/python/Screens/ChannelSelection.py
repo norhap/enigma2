@@ -192,7 +192,7 @@ class ChannelContextMenu(Screen):
 				isPlayable = not (current_sel_flags & (eServiceReference.isMarker | eServiceReference.isDirectory))
 				if isPlayable:
 					for p in plugins.getPlugins(PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU):
-						append_when_current_valid(current, menu, (p.name, boundFunction(self.runPlugin, p)), key="bullet")
+						append_when_current_valid(current, menu, (p.name, boundFunction(self.runPlugin if "IMDB" not in p.name and "EPG" not in p.name else self.runPluginSearchEPG if "EPG" in p.name else self.runPluginIMDb, p)), key="bullet")
 					if config.servicelist.startupservice.value == current.toString():
 						append_when_current_valid(current, menu, (_("Stop using as startup service"), self.unsetStartupService), level=0)
 					else:
@@ -792,6 +792,28 @@ class ChannelContextMenu(Screen):
 
 	def runPlugin(self, plugin):
 		plugin(session=self.session, service=self.csel.getCurrentSelection())
+		self.close()
+
+	def runPluginIMDb(self, plugin):
+		from Plugins.Extensions.IMDb.plugin import IMDB
+		serviceHandler = eServiceCenter.getInstance()
+		info = serviceHandler.info(self.csel.getCurrentSelection())
+		event = info.getEvent(self.csel.getCurrentSelection())
+		if event:
+			name = info and event.getEventName()
+			if name:
+				self.session.open(IMDB, name)
+		self.close()
+
+	def runPluginSearchEPG(self, plugin):
+		from Plugins.Extensions.EPGSearch.EPGSearch import EPGSearch
+		serviceHandler = eServiceCenter.getInstance()
+		info = serviceHandler.info(self.csel.getCurrentSelection())
+		event = info.getEvent(self.csel.getCurrentSelection())
+		if event:
+			name = info and event.getEventName()
+			if name:
+				self.session.open(EPGSearch, name)
 		self.close()
 
 
