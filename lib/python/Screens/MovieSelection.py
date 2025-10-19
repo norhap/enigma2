@@ -4,7 +4,7 @@ from os import W_OK, access, listdir, mkdir, rename, rmdir, stat
 from os.path import abspath, basename, exists, isdir, isfile, join, normpath, pardir, realpath, split, splitext
 from time import time
 
-from enigma import eRCInput, eServiceCenter, eServiceReference, eSize, eTimer, iPlayableService, iServiceInformation, getPrevAsciiCode
+from enigma import eRCInput, eServiceCenter, eServiceReference, eSize, eTimer, iPlayableService, iServiceInformation, getPrevAsciiCode, loadJPG
 
 from skin import findSkinScreen
 import NavigationInstance
@@ -393,6 +393,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 		self["movie_sort"] = MultiPixmap()
 		self["movie_sort"].hide()
+		self["poster"] = Pixmap()
 
 		self["freeDiskSpace"] = self.diskinfo = DiskInfo(config.movielist.last_videodir.value, DiskInfo.FREE, update=False)
 		self["TrashcanSize"] = self.trashinfo = TrashInfo(config.movielist.last_videodir.value, TrashInfo.USED, update=False)
@@ -832,6 +833,25 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 				gui.show()
 			else:
 				gui.hide()
+		self.getPoster()
+
+	def getPoster(self):
+		serviceHandler = eServiceCenter.getInstance()
+		info = serviceHandler.info(self.getCurrent())
+		movietitle = info and info.getName(self.getCurrent())
+		pathPoster = config.usage.default_path.value + "IMDB/"
+		posterName = movietitle + ".jpg" if movietitle else None
+		xtraposter = False
+		if posterName:
+			if isPluginInstalled("xtraEvent"):
+				if config.plugins.xtraEvent.loc.value:
+					xtraposter = exists(config.plugins.xtraEvent.loc.value + "xtraEvent/poster/" + posterName)
+			if exists(str(pathPoster + posterName)) and xtraposter is False:
+				self["poster"].instance.setPixmap(loadJPG(pathPoster + posterName))
+				self["poster"].instance.setScale(1)
+				self["poster"].instance.show()
+			else:
+				self["poster"].instance.hide()
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
