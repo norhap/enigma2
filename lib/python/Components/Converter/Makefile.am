@@ -13,4 +13,4 @@ install_PYTHON = \
 	HbbtvApplicationInfo.py BhAnalogic.py BhStreamInfo.py VNetSpeedInfo.py VisionCamInfo.py CaidInfo2.py \
 	RefString.py CpuUsage.py ProgressDiskSpaceInfo.py RouteInfo.py ServiceInfoEX.py Audio.py \
 	TextAddAfter.py TextAddBefore.py Textreplace.py TextToUpper.py MovieBarInfo.py HddState.py \
-	VAudioInfo.py XmlMultiContent.py
+	VAudioInfo.py XmlMultiContent.py ConfigEntryTestVisible.py
