@@ -2275,6 +2275,7 @@
 	<!-- MOVIESELECTION -->
 	<screen name="MovieSelection" position="0,0" size="1920,1080" title="EMCSelection">
 		<panel name="poster_movieselection"/>
+		<widget name="poster" conditional="poster" position="65,10" size="320,450" alphaTest="blend" backgroundColor="OE_NewBg2" zPosition="2"/>
 		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/norhap_logo.png" position="470,15" size="75,75" transparent="1" zPosition="1"/>
 		<eLabel backgroundColor="OE_NewBg2" foregroundColor="OE_Background" position="45,75" size="1875,1080" zPosition="-15"/>
 		<eLabel backgroundColor="#002c445e" foregroundColor="OE_Background" position="0,0" size="1920,1080" zPosition="-16"/>
@@ -2300,7 +2301,7 @@
 		<widget name="freeDiskSpace" position="15,1000" size="435,90" font="RegularBold;22" backgroundColor="OE_NewBg2" transparent="0" zPosition="1"/>
 		<widget name="movie_sort" pixmaps="OctEtFHD/icons/az.png,OctEtFHD/icons/newtop.png,OctEtFHD/icons/shuffle.png,OctEtFHD/icons/za.png,OctEtFHD/icons/oldtop.png,OctEtFHD/icons/faz.png,OctEtFHD/icons/fza.png" position="450,952" size="45,25" transparent="1" alphaTest="on"/>
 		<widget name="movie_off" pixmaps="OctEtFHD/icons/ask.png,OctEtFHD/icons/movielist.png,OctEtFHD/icons/quit.png,OctEtFHD/icons/pause.png,OctEtFHD/icons/playlist.png,OctEtFHD/icons/playlistquit.png,OctEtFHD/icons/loop.png,OctEtFHD/icons/rep.png" position="505,952" zPosition="10" size="45,25" transparent="1" alphaTest="on"/>
-		<widget backgroundColor="OE_Background" font="RegularBold;24" position="15,465" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="435,410" source="Service" transparent="1" zPosition="1">
+		<widget backgroundColor="OE_Background" font="RegularBold;24" position="15,460" size="435,420" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" source="Service" transparent="1" zPosition="1">
 			<convert type="EventName">ExtendedDescription</convert>
 		</widget>
 		<widget name="DescriptionBorder" position="0,0" size="0,0"/>
