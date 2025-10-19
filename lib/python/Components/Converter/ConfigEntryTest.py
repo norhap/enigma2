@@ -8,13 +8,13 @@ class ConfigEntryTest(Converter):
 	def __init__(self, argstr):
 		Converter.__init__(self, argstr)
 		args = argstr.split(',')
-		self.argerror = False
+		self.argError = False
 		self.checkSourceBoolean = False
 		self.invert = False
 		self.configKey = None
 		self.configValue = None
 		if len(args) < 2:
-			self.argerror = True
+			self.argError = True
 		else:
 			if "config." in args[0]:
 				self.configKey = args[0]
