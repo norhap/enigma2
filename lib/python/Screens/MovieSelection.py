@@ -395,6 +395,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["movie_sort"].hide()
 		self["poster"] = Pixmap()
 
+		self["hiddenpig"] = Label()
 		self["freeDiskSpace"] = self.diskinfo = DiskInfo(config.movielist.last_videodir.value, DiskInfo.FREE, update=False)
 		self["TrashcanSize"] = self.trashinfo = TrashInfo(config.movielist.last_videodir.value, TrashInfo.USED, update=False)
 
@@ -841,17 +842,15 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		movietitle = info and info.getName(self.getCurrent())
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = movietitle + ".jpg" if movietitle else None
-		xtraposter = False
 		if posterName:
-			if isPluginInstalled("xtraEvent"):
-				if config.plugins.xtraEvent.loc.value:
-					xtraposter = exists(config.plugins.xtraEvent.loc.value + "xtraEvent/poster/" + posterName)
-			if exists(str(pathPoster + posterName)) and xtraposter is False:
+			if exists(str(pathPoster + posterName)):
+				self["hiddenpig"].show()
 				self["poster"].instance.setPixmap(loadJPG(pathPoster + posterName))
 				self["poster"].instance.setScale(1)
 				self["poster"].instance.show()
 			else:
 				self["poster"].instance.hide()
+				self["hiddenpig"].hide()
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
@@ -1227,6 +1226,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def abort(self):
 		global playlist
+		self["poster"].instance.hide()
 		del playlist[:]
 		if self.list.playInBackground:
 			self.list.playInBackground = None
