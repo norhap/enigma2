@@ -31,7 +31,7 @@ AM_CONDITIONAL(HAVE_FAKE_GIT_DIR, test -f "$srcdir/.git/last_commit_info")
 
 dnl versions of plugins-base
 PKG_CHECK_MODULES(TUXTXT, tuxbox-tuxtxt)
-PKG_CHECK_MODULES(BASE, [freetype2 fribidi glib-2.0 libdvbsi++ libpng libxml-2.0 sigc++-3.0 libssl libcrypto libcurl])
+PKG_CHECK_MODULES(BASE, [freetype2 fribidi glib-2.0 libdvbsi++ libpng libwebp libxml-2.0 sigc++-3.0 libssl libcrypto libcurl])
 PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
 AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
 PKG_CHECK_MODULES(AVAHI, avahi-client)
@@ -43,7 +43,7 @@ AC_CHECK_LIB([jpeg], [jpeg_set_defaults], [LIBJPEG_LIBS="-ljpeg"], [AC_MSG_ERROR
 AC_SUBST(LIBJPEG_LIBS)
 AC_CHECK_LIB([ungif], [DGifOpen], [LIBGIF_LIBS="-lungif"], [AC_CHECK_LIB([gif], [DGifOpen], [LIBGIF_LIBS="-lgif"], [AC_MSG_ERROR([Could not find libgif or libungif])])])
 AC_SUBST(LIBGIF_LIBS)
-AC_CHECK_LIB([webp], [WebPDecodeRGB],[LIBWEBP_LIBS="-lwebp" AC_DEFINE([HAVE_WEBP], [1], [Define if libwebp is available])], [AC_MSG_WARN([Could not find libwebp, WebP support will be disabled.])])
+AC_CHECK_LIB([webp], [WebPDecodeRGB],[LIBWEBP_LIBS="-lwebp"], [AC_MSG_ERROR([Could not find libwebp])])
 AC_SUBST(LIBWEBP_LIBS)
 
 PKG_CHECK_MODULES([SWSCALE], [libswscale], [
