@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-from enigma import getBoxType, eConsoleAppContainer
+from enigma import eConsoleAppContainer
 
 from os import listdir
 from os.path import basename, exists, isdir, isfile, realpath
 import re
 import netifaces as ni
-from glob import glob
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config
-from Components.SystemInfo import SystemInfo, BoxInfo
+from Components.SystemInfo import BoxInfo
 from Tools.Directories import fileContains, fileWriteLines
 
 MODULE_NAME = __name__.split(".")[-1]
@@ -309,56 +308,25 @@ class Network:
 
 	def getFriendlyAdapterNaming(self, iface):
 		name = None
-		wirelesslan = glob(self.sysfsPath("wlan*"))
-		try:
-			from Plugins.Extensions.IPToSAT.plugin import checkZerotierMember  # noqa: E402
-			servicezerotier = glob("/etc/rc2.d/S*zerotier")
-			zerotier = servicezerotier and checkZerotierMember()
-		except Exception:
-			zerotier = False
 		if self.isWirelessInterface(iface):
-			if iface not in self.wlan_interfaces:  # with WLAN first adapter is WLAN
-				name = _("WLAN connection")  # noqa: F405
+			if iface not in self.wlan_interfaces:
+				name = _("WLAN connection")
+				if len(self.wlan_interfaces):
+					name += " " + str(len(self.wlan_interfaces) + 1)
 				self.wlan_interfaces.append(iface)
 		else:
-			zerotiername = _("VPN connection ZeroTier")  # noqa: F405
-			lanname = _("LAN connection")  # noqa: F405
 			if iface not in self.lan_interfaces:
 				if iface == "eth1":
-					name = _("VLAN connection")  # noqa: F405
+					name = _("VLAN connection")
 				else:
-					if wirelesslan:
-						if getBoxType() not in ("sf8008", "vuuno4kse"):  # STBs with WLAN in first position
-							name = lanname
-							if len(self.lan_interfaces):
-								if zerotier:
-									name = zerotiername
-						else:  # STBs with WLAN in last position
-							if zerotier:
-								name = zerotiername
-							if len(self.lan_interfaces):
-								name = lanname
-							else:
-								if config.misc.firstrun.value:
-									name = lanname
-								else:
-									if BoxInfo.getItem("WakeOnLAN"):
-										if not zerotier:
-											name = lanname
-										else:
-											if zerotier:
-												name = zerotiername
-					else:
-						if SystemInfo["hasKexec"] and not exists("/STARTUP.cpio.gz"):
-							if len(self.lan_interfaces):
-								name = zerotiername if zerotier else lanname
-						else:
-							if zerotier:
-								name = zerotiername
-							if len(self.lan_interfaces):
-								name = lanname
-						if not name:
-							name = lanname
+					ifacename = ""
+					if iface.startswith("zt"):
+						ifacename = _("VPN connection") + " " + "ZeroTier"
+					elif iface.startswith("Wg"):
+						ifacename = _("VPN connection") + " " + "WireGuard"
+					name = iface.replace("eth0", _("LAN connection")).replace(iface, ifacename)
+				if len(self.lan_interfaces) and not iface == "eth1":
+					name += " "
 				self.lan_interfaces.append(iface)
 		return name
 

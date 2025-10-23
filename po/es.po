@@ -5843,9 +5843,6 @@ msgstr "Adaptador LAN-Cable"
 msgid "LAN connection"
 msgstr "Conexión LAN-Cable"
 
-msgid "VPN connection ZeroTier"
-msgstr "Conexión VPN ZeroTier"
-
 msgid "VPN connection"
 msgstr "Conexión VPN"
 
