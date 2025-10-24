@@ -183,7 +183,6 @@ class EPGSelection(Screen, HelpableScreen):
 				name3 = name2.split("(")[0].strip()
 				eventname = name3.replace('"', '').replace('', '').replace('.', '')
 				eventname = eventname.replace('', '')
-				from Plugins.Extensions.IMDb.plugin import IMDB
 				self.session.open(IMDB, eventname, False)
 
 	def doInstall(self, val):
