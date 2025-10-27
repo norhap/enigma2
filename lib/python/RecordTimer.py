@@ -351,7 +351,7 @@ class RecordTimer(Timer):
 			AddPopup(_("Recording failed: Storage device free size %d MB.") % getRecordingStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer for servicetype 4097,
 		# and ServiceApp has player enabled, then skip recording.
-		if "%3a/" in w.service_ref.ref.toString():
+		if "%3a//" in w.service_ref.ref.toString():
 			message = "Stream IPTV " + w.service_ref.ref.toString()[:4] + " " + _("It is not possible to record with") + " " + player + " " + _("enabled")
 			if player == "ServiceApp":
 				if config.plugins.serviceapp.servicemp3.replace.value:
