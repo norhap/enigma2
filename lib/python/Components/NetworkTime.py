@@ -52,11 +52,13 @@ class NTPSyncPoller:
 		if nowTime > 10000:
 			print(f"[NetworkTime] Setting time to {ctime(nowTime)} {(str(nowTime))} from {config.ntp.timesync.toDisplayString(config.ntp.timesync.value)}.")
 			setRTCtime(nowTime)
-			eDVBLocalTimeHandler.getInstance().setUseDVBTime(config.ntp.timesync.value == "dvb")
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
 			eEPGCache.getInstance().timeUpdated()
 			self.timer.startLongTimer(int(config.misc.useNTPminutes.value if config.ntp.timesync.value == "ntp" else config.misc.useNTPminutes.default) * 60)
 			if config.ntp.timesync.value == "ntp" and abs(time() - self.previous) > 60:
-				self._timeUpdated("NTP")
+				for f in self.onTimeUpdated:
+					if callable(f):
+						f()
 		else:
 			print('[NetworkTime] NO TIME SET')
 			self.timer.startLongTimer(10)
@@ -65,8 +67,8 @@ class NTPSyncPoller:
 		self.timer.stop()  # stop current timer if this is an update from Time.py
 		self.timer.startLongTimer(0)
 
-	def _timeUpdated(self, using="eDVBLocalTimerHandler"):
-		print("[NetworkTime] system clock was updated by", using)
+	def _timeUpdated(self, dvbtime="DVBLocalTimerHandler"):
+		print("[NetworkTime] system clock was updated using", dvbtime)
 		for f in self.onTimeUpdated:
 			if callable(f):
 				f()
