@@ -6743,6 +6743,12 @@ msgstr "OK"
 msgid "ONID"
 msgstr "ONID"
 
+msgid "OSCamInfo Capability Actions"
+msgstr "OSCamInfo Acciones Capacidades"
+
+msgid "OSCamInfo: Capabilities"
+msgstr "OSCamInfo: Capacidades"
+
 msgid "OSCamInfo Log Actions"
 msgstr "Acciones Log OSCamInfo"
 
@@ -13537,6 +13543,9 @@ msgstr "Solo en Día laborable: %s"
 msgid "Only poll while in standby"
 msgstr "Solo encuesta mientras está en modo de espera"
 
+msgid "Open Capability"
+msgstr "Capacidad abierta"
+
 msgid "Open Context Menu"
 msgstr "Abrir menú contextual"
 
@@ -13750,6 +13759,9 @@ msgstr "Mostrar 'Agregar al Temporizador Automático' en Menú selección de can
 
 msgid "Show AutoTimer FilterTxt"
 msgstr "Mostrar Temporizador Automático FiltroTxt"
+
+msgid "Show Capabilities"
+msgstr "Mostrar capacidades"
 
 msgid "Show Log file"
 msgstr "Mostrar archivo de registro"
@@ -17469,6 +17481,9 @@ msgstr "Prefijo dirección IPv6:"
 
 msgid "Static IP Router"
 msgstr "Router IP Estática"
+
+msgid "<no capabilities found>"
+msgstr "<No se encontraron capacidades>"
 
 msgid "<Press OK to perform action>"
 msgstr "<Pulse OK>"
