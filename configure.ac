@@ -512,6 +512,7 @@ if test "$MACHINE" == "sf8008" -o "$MACHINE" == "sf8008m" -o "$MACHINE" == "usty
 	AC_DEFINE(HAVE_HISILICON, 1,[define it is a HISILICON chip])
 	AC_DEFINE(CONFIG_HISILICON_FB, 1,[define add HISILICON framebuffer blit])
 	AC_DEFINE(FORCE_ALPHABLENDING_ACCELERATION, 1,[define when the framebuffer acceleration has alphablending support, but detection slow down all])
+	AC_DEFINE(FORCE_NO_ACCELERATION_SCALE, 1,[define when the framebuffer acceleration does not have scale support])
 fi
 
 if test "$MACHINE_BRAND" == "dags"; then
