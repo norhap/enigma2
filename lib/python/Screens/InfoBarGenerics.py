@@ -3128,8 +3128,7 @@ class InfoBarInstantRecord:
 			common = ((_("No event info found - record (24 hours)") if not info["name"] else _("Add recording set to (24 hours)"), "indefinitely"),
 					(_("Add recording (enter recording duration)"), "manualduration"),
 					(_("Add recording (enter recording endtime)"), "manualendtime"),)
-			if info["event"]:
-				common = event_entry + common
+			common = event_entry + common if info["event"] and self.currentEventTime() > 0 else common
 		else:
 			common = ()
 		if self.isInstantRecordRunning():
