@@ -1168,12 +1168,11 @@ class RecordTimerEntry(TimerEntry, object):
 					wasRecTimerWakeup = int(open("/tmp/was_rectimer_wakeup", "r").read()) and True or False
 					remove("/tmp/was_rectimer_wakeup")
 			self.autostate = Screens.Standby.inStandby
-			if isPluginInstalled("IPToSAT") and self.autostate:
-				from Plugins.Extensions.IPToSAT.plugin import allowsMultipleRecordings  # noqa: E402
-				if config.plugins.IPToSAT.enable.value and not allowsMultipleRecordings():
-					if config.plugins.IPToSAT.username.value in self.service_ref.ref.toString() or config.plugins.IPToSAT.domain.value.replace("http://", "").replace("https://", "") in self.service_ref.ref.toString():
-						config.servicelist.startupservice.value = "0:0:0:0:0:0:C00000:0:0:0:"
-						AddPopup(_("If the recording has not finished:\nIf you switch to another channel in your subscription, the recording will stop.\nWhen recording is finished, enter IPToSAT enigma2 needs to be restarted."), type=MessageBox.TYPE_INFO, timeout=0)
+			refiptv = str(self.service_ref.ref.toString())
+			message = _("If the recording has not finished:\nIf you switch to another channel in your subscription, the recording will stop.")
+			if self.getStreamIPTVSingleConection(refiptv) and self.autostate:
+				config.servicelist.startupservice.value = "0:0:0:0:0:0:C00000:0:0:0:"
+				AddPopup(message, type=MessageBox.TYPE_INFO, timeout=0)
 			# If this timer has been cancelled, just go to "end" state.
 			if self.cancelled:
 				return True
@@ -1468,6 +1467,13 @@ class RecordTimerEntry(TimerEntry, object):
 		if int(oldPrepare) and int(oldPrepare) != int(self.start_prepare):
 			self.log(15, "Record time changed, start prepare is now %s." % ctime(self.start_prepare))
 
+	def getStreamIPTVSingleConection(self, refiptv):
+		if isPluginInstalled("IPToSAT") and "http" in refiptv:
+			from Plugins.Extensions.IPToSAT.plugin import allowsMultipleRecordings  # noqa: E402
+			if config.plugins.IPToSAT.enable.value and not allowsMultipleRecordings():
+				if config.plugins.IPToSAT.username.value in refiptv or config.plugins.IPToSAT.domain.value.replace("http://", "").replace("https://", "") in refiptv:
+					return refiptv
+
 	def gotRecordEvent(self, record, event):
 		# TODO: this is not working (never true), please fix. (comparing two swig wrapped ePtrs)
 		if self.__record_service.__deref__() != record.__deref__():
@@ -1487,13 +1493,15 @@ class RecordTimerEntry(TimerEntry, object):
 			if self.pvrConvert:
 				return
 			RecordingsState(1)
-			text = _("A recording has started:\n%s") % self.name
+			refiptv = str(self.service_ref.ref.toString())
+			message = _("If you switch to another channel in your subscription, the recording will stop.")
+			text = _("A recording has started:\n%s") % self.name if not self.getStreamIPTVSingleConection(refiptv) else _("A recording has started:\n%s") % self.name + "\n" + message
 			notify = config.usage.show_message_when_recording_starts.value and not Screens.Standby.inStandby and self.InfoBarInstance and self.InfoBarInstance.execing
 			if self.dirnameHadToFallback:
 				text = "\n".join((text, _("Please note that the previously selected media could not be accessed and therefore the default directory is being used instead.")))
 				notify = True
 			if notify:
-				AddPopup(text=text, type=MessageBox.TYPE_INFO, timeout=5)
+				AddPopup(text=text, type=MessageBox.TYPE_INFO, timeout=10)
 		elif event == iRecordableService.evRecordAborted:
 			NavigationInstance.instance.RecordTimer.removeEntry(self)
 		elif event == iRecordableService.evGstRecordEnded:
