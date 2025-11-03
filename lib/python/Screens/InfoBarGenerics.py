@@ -3020,6 +3020,8 @@ class InfoBarInstantRecord:
 		elif answer[1] == "stopdeleteall":
 			self.deleteRecording = True
 			self.stopDeleteAllCurrentRecordings(list)
+		elif answer[1] == ("event") and not config.epg.eit.value and self.currentEventTime() == 0:
+			self.startInstantRecording(limitEvent=self.currentEventTime())
 		elif answer[1] in ("indefinitely", "manualduration", "manualendtime", "event"):
 			self.startInstantRecording(limitEvent=answer[1] in ("event", "manualendtime", "manualduration") or False)
 			if answer[1] == "manualduration":
@@ -3124,11 +3126,13 @@ class InfoBarInstantRecord:
 		if isStandardInfoBar(self):
 			info = {}
 			self.getProgramInfoAndEvent(info, "")
-			event_entry = ((_("Add recording (stop after current event)"), "event"),)
-			common = ((_("No event info found - record (24 hours)") if not info["name"] else _("Add recording set to (24 hours)"), "indefinitely"),
+			timeindefinite = config.usage.indefiniterecordingtime.value // 3600
+			event_entry = ((_("Add recording (stop after current event)") if self.currentEventTime() > 0 else _("Without entry stop current event in") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")"), "event"),
+			common = ((_("No event info found - record") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")" if not info["name"] and not config.epg.eit.value else _("Add recording set to") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")" if not config.epg.eit.value else _("Add recording set to") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")", "indefinitely"),
 					(_("Add recording (enter recording duration)"), "manualduration"),
-					(_("Add recording (enter recording endtime)"), "manualendtime"),)
-			common = event_entry + common if info["event"] and self.currentEventTime() > 0 else common
+					(_("Add recording (enter recording endtime)"), "manualendtime"))
+			if info["event"]:
+				common = event_entry + common
 		else:
 			common = ()
 		if self.isInstantRecordRunning():

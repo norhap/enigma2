@@ -350,6 +350,20 @@ def InitUsageConfig():
 			config.usage.timeshift_path.value = savedValue
 	config.usage.allowed_timeshift_paths = ConfigLocations(default=[resolveFilename(SCOPE_TIMESHIFT)])
 	config.usage.timeshift_skipreturntolive = ConfigYesNo(default=False)
+	choiceList = [
+		(7200, "2 " + _("hours")),
+		(14400, "4 " + _("hours")),
+		(21600, "6 " + _("hours")),
+		(28800, "8 " + _("hours")),
+		(36000, "10 " + _("hours")),
+		(43200, "12 " + _("hours")),
+		(50400, "14 " + _("hours")),
+		(57600, "16 " + _("hours")),
+		(64800, "18 " + _("hours")),
+		(72000, "20 " + _("hours")),
+		(79200, "22 " + _("hours")),
+		(86400, "24 " + _("hours"))]
+	config.usage.indefiniterecordingtime = ConfigSelection(default=7200, choices=choiceList)
 
 	def setTimeshiftPath(configElement):
 		config.usage.timeshift_path.value = configElement.value
@@ -1203,6 +1217,7 @@ def InitUsageConfig():
 		if not config.epg.opentv.value:
 			mask &= ~eEPGCache.OPENTV
 		eEPGCache.getInstance().setEpgSources(mask)
+
 	config.epg.eit.addNotifier(EpgSettingsChanged, initial_call=False)
 	config.epg.mhw.addNotifier(EpgSettingsChanged, initial_call=False)
 	config.epg.freesat.addNotifier(EpgSettingsChanged, initial_call=False)

@@ -1199,8 +1199,8 @@ msgstr "Añadir grabación (introduce duración)"
 msgid "Add recording (enter recording endtime)"
 msgstr "Añadir grabación (introduce final de grabación)"
 
-msgid "Add recording set to (24 hours)"
-msgstr "Añadir grabación establecida a (24 horas)"
+msgid "Add recording set to"
+msgstr "Añadir grabación establecida a"
 
 msgid "Add recording (stop after current event)"
 msgstr "Añadir grabación (para al acabar el evento actual)"
@@ -6542,8 +6542,11 @@ msgstr "Sin retardo"
 msgid "No description available."
 msgstr "Sin descripción disponible."
 
-msgid "No event info found - record (24 hours)"
-msgstr "No se encontró información del evento - grabar (24 horas)"
+msgid "Without entry stop current event in"
+msgstr "Sin entrada detenga el evento actual en"
+
+msgid "No event info found - record"
+msgstr "No se encontró información del evento - grabar"
 
 msgid "%s connected successfully. No playable files on this medium found!"
 msgstr "%s conectado con éxito. ¡No se encontraron archivos reproducibles en este medio!"
@@ -8668,6 +8671,9 @@ msgstr "Establecer tiempo final"
 
 msgid "Set fixed"
 msgstr "Establecer dirección"
+
+msgid "Set indefinite recording time"
+msgstr "Establecer tiempo de grabación indefinido"
 
 msgid "Set interface as default Interface"
 msgstr "Establecer interfaz como predeterminada"
@@ -10875,6 +10881,9 @@ msgstr "Ocultar"
 
 msgid "horizontal"
 msgstr "horizontal"
+
+msgid "hours"
+msgstr "horas"
 
 msgid "information/education/school program"
 msgstr "información/educación/programa escolar"
@@ -15675,6 +15684,9 @@ msgstr "Programar la importación de EPG y lista de canales"
 
 msgid "Repeat how often"
 msgstr "Repita con qué frecuencia"
+
+msgid "Set the recording time indefinited."
+msgstr "Establezca el tiempo de grabación indefinido."
 
 msgid "Set the repeat interval of the schedule."
 msgstr "Establezca el intervalo de repetición del programa."

@@ -1312,6 +1312,7 @@ class RecordTimerEntry(TimerEntry, object):
 		if not self.autoincrease:
 			return False
 		if entry is None:
+			self.autoincreasetime = config.usage.indefiniterecordingtime.value
 			new_end = int(time()) + self.autoincreasetime
 		else:
 			new_end = entry.begin - 30
