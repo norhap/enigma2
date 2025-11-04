@@ -3127,7 +3127,7 @@ class InfoBarInstantRecord:
 			info = {}
 			self.getProgramInfoAndEvent(info, "")
 			timeindefinite = config.usage.indefiniterecordingtime.value // 3600
-			event_entry = ((_("Add recording (stop after current event)") if self.currentEventTime() > 0 else _("Without entry stop current event in") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")"), "event"),
+			event_entry = ((_("Add recording (stop after current event)") if self.currentEventTime() > 0 else _("No timer - stop the current event in") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")"), "event"),
 			common = ((_("No event info found - record") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")" if not info["name"] and not config.epg.eit.value else _("Add recording set to") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")" if not config.epg.eit.value else _("Add recording set to") + " " + f'({str(timeindefinite)}' + " " + _("hours") + ")", "indefinitely"),
 					(_("Add recording (enter recording duration)"), "manualduration"),
 					(_("Add recording (enter recording endtime)"), "manualendtime"))

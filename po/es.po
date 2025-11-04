@@ -6542,8 +6542,8 @@ msgstr "Sin retardo"
 msgid "No description available."
 msgstr "Sin descripción disponible."
 
-msgid "Without entry stop current event in"
-msgstr "Sin entrada detenga el evento actual en"
+msgid "No timer - stop the current event in"
+msgstr "Sin temporizador - detener el evento actual en"
 
 msgid "No event info found - record"
 msgstr "No se encontró información del evento - grabar"
