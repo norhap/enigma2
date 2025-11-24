@@ -964,10 +964,10 @@ class InfoBarChannelSelection:
 		self.switchChannelDown() if config.usage.oldstyle_zap_controls.value else self.zapDown()
 
 	def keyChannelUpCheck(self):
-		self.zapDown() if config.usage.zap_with_ch_buttons.value else self.openServiceList()
+		self.zapUp() if config.usage.zap_with_ch_buttons.value else self.openServiceList()
 
 	def keyChannelDownCheck(self):
-		self.zapUp() if config.usage.zap_with_ch_buttons.value else self.openServiceList()
+		self.zapDown() if config.usage.zap_with_ch_buttons.value else self.openServiceList()
 
 	def getKeyUpHelptext(self):
 		if config.usage.oldstyle_zap_controls.value:
