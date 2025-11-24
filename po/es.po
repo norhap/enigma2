@@ -443,6 +443,9 @@ msgstr "auto"
 msgid "automatic"
 msgstr "automático"
 
+msgid "Available"
+msgstr "Disponible"
+
 msgid "back"
 msgstr "negro"
 
@@ -6119,6 +6122,9 @@ msgstr "Transpondedor manual"
 msgid "Manufacturer"
 msgstr "Fabricante"
 
+msgid "Manufacturer distribution:\n"
+msgstr "Distribución del fabricante:\n"
+
 msgid "Marker Actions"
 msgstr "Acciones de marcador"
 
@@ -6758,6 +6764,9 @@ msgstr "Solicitud de nombre OSD"
 
 msgid "OSD transparency"
 msgstr "Transparencia OSD"
+
+msgid "of"
+msgstr "de"
 
 msgid "Off"
 msgstr "Apagado"
@@ -7867,7 +7876,13 @@ msgid "Rereading partition table"
 msgstr "Releyendo de tabla de particiones"
 
 msgid "Reserved"
-msgstr "Reservado"
+msgstr "Reservada"
+
+msgid "Reserved for high memory"
+msgstr "Reservada para memoria alta"
+
+msgid "Reserved to contiguous memory"
+msgstr "Reservada para memoria contigua"
 
 msgid "Reset"
 msgstr "Restablecer"
@@ -13597,9 +13612,6 @@ msgstr "Vista previa para sus Temporizadores Automáticos"
 
 msgid "Print shell log"
 msgstr "Imprimir registro de shell"
-
-msgid "RAM allocation:\n"
-msgstr "Distribución de RAM:\n"
 
 msgid "Reading file...\n"
 msgstr "Leyendo archivo...\n"
