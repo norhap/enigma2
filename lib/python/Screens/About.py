@@ -1142,8 +1142,8 @@ class SystemMemoryInfo(Screen):
 							reserved = ram.split("K reserved")[0].split("s, ")[1]
 							cmareserved = ram.split("K cma-reserved")[0].split("d, ")[1]
 							highmem = ram.split("K highmem")[0].split("cma-reserved, ")[1]
-							sizeAvailable = (int(available) / 1000000 if int(available) >= 1000000 else int(available) / 1000000 * 1000)
-							sizeTotal = (int(total) / 1000000 if int(total) >= 1000000 else int(total) / 1000000 * 1000)
+							sizeAvailable = (int(available) / 1000000 if int(available) >= 1000000 else int(available) / 1000)
+							sizeTotal = (int(total) / 1000000 if int(total) >= 1000000 else int(total) / 1000)
 							sizeKernel = int(kernel) / 1000
 							sizerwdata = int(rwdata) / 1000
 							sizerodata = int(rodata) / 1000
