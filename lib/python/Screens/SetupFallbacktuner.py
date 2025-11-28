@@ -248,6 +248,9 @@ class SetupFallbacktuner(Setup):
 			config.usage.remote_fallback_alternative.value = False
 		if config.usage.remote_fallback_import_url.value == config.usage.remote_fallback.value:
 			config.usage.remote_fallback_import_url.value = ""
+		self.keySaveAll()
+
+	def keySaveAll(self):
 		config.usage.remote_fallback_enabled.save()
 		config.usage.remote_fallback_import.save()
 		config.usage.remote_fallback_import_url.save()
@@ -284,7 +287,7 @@ class SetupFallbacktuner(Setup):
 				self.session.open(TryQuitMainloop, 3)
 			else:
 				config.usage.remote_fallback_enabled.value = False
-				Setup.keySave(self)
+				self.keySaveAll()
 
 		if not checkTimeshiftRunning() and not self.session.nav.getRecordings():
 			if config.plugins.fccsetup.activate.value:
@@ -296,4 +299,4 @@ class SetupFallbacktuner(Setup):
 					self.session.openWithCallback(disableFCC, MessageBox, _("The use of IPToSAT will be enabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
 		else:
 			config.usage.remote_fallback_enabled.value = False
-			Setup.keySave(self)
+			self.keySaveAll()
