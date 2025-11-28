@@ -1101,7 +1101,7 @@ msgid "AC3 downmix"
 msgstr "Mezcla AC3"
 
 msgid "ACQUIRING TSID/ONID"
-msgstr "ACQUIRING TSID/ONID"
+msgstr "ADQUIRIENDO TSID/ONID"
 
 msgid "AGC:"
 msgstr "AGC:"
@@ -10196,7 +10196,7 @@ msgid "Tuner setting values"
 msgstr "Valores ajustes del sintonizador"
 
 msgid "Tuner status:"
-msgstr "Status del sintonizador:"
+msgstr "Estado del sintonizador:"
 
 msgid "Tuner type"
 msgstr "Tipo de sintonizador"
