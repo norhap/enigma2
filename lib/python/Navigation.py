@@ -15,6 +15,7 @@ import Screens.Standby
 import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
+from Screens.MessageBox import MessageBox
 from Components.Sources.StreamService import StreamServiceList
 from os.path import exists
 from Screens.InfoBarGenerics import streamrelay
@@ -257,6 +258,8 @@ class Navigation:
 					self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 					self.retryServicePlayTimer.start(config.misc.softcam_streamrelay_delay.value, True)
 					return 0
+				elif SystemInfo["FCCactive"] and config.usage.remote_fallback_enabled.value:
+					AddNotification(MessageBox, _("It is not compatible to have fallback tuner and FCC activated simultaneously.\nActivate only the function you wish to use."), type=MessageBox.TYPE_ERROR, timeout=0)
 				elif not is_handled and self.pnav.playService(playref):
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
@@ -266,7 +269,7 @@ class Navigation:
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
 						self.retryServicePlayTimer.start(500, True)
-				elif SystemInfo["FbcTunerPowerAlwaysOn"]:
+				elif SystemInfo["HasFBCtuner"]:
 					if streamrelay.checkService(oldref):
 						print("[Navigation] Zap any service with SR or not SR with FCC active or not active and any config Mode tuner FBC")  # stop and restart service with timer
 						self.currentlyPlayingServiceReference = None

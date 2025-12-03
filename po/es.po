@@ -4621,15 +4621,6 @@ msgstr "coincidencia de descripción de favoritos"
 msgid "FCC enabled"
 msgstr "FCC habilitado"
 
-msgid ""
-"FCC usage will be disabled to use the fallback tuner.\n"
-"Enigma2 needs to be restarted.\n"
-"Do you want to do it now?"
-msgstr ""
-"Se deshabilitará el uso de FCC para utilizar el tuner reserva.\n"
-"Es necesario reiniciar enigma2.\n"
-"¿Quieres hacerlo ahora?"
-
 msgid "FCC was disabled for Quad PiP"
 msgstr "FCC fue deshabilitado para Quad PiP"
 
@@ -5726,6 +5717,9 @@ msgstr "Israel"
 
 msgid "It could not be recorded with the ServiceApp player"
 msgstr "No se pudo grabar con el reproductor ServiceApp"
+
+msgid "It is not compatible to have fallback tuner and FCC activated simultaneously.\nActivate only the function you wish to use."
+msgstr "No es compatible tener el sintonizador de respaldo y FCC activados simultáneamente.\nActive solo la función que desee utilizar."
 
 msgid "It is not possible to record with"
 msgstr "No es posible grabar con"
@@ -13925,9 +13919,6 @@ msgstr "El atributo de título es obligatorio."
 
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
-
-msgid "The use of the reserve tuner will be disabled to use FCC.\nEnigma2 needs to be restarted.\nDo you want to do it now?"
-msgstr "El uso del tuner reserva se deshabilitará para utilizar FCC.\nEs necesario reiniciar enigma2.\n¿Quieres hacerlo ahora?"
 
 msgid "The use of IPToSAT will be disabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"
 msgstr "Se deshabilitará el uso de IPToSAT.\nEs necesario reiniciar Enigma2.\n¿Quieres hacerlo ahora?"
