@@ -5718,9 +5718,6 @@ msgstr "Israel"
 msgid "It could not be recorded with the ServiceApp player"
 msgstr "No se pudo grabar con el reproductor ServiceApp"
 
-msgid "It is not compatible to have fallback tuner and FCC activated simultaneously.\nActivate only the function you wish to use."
-msgstr "No es compatible tener el sintonizador de respaldo y FCC activados simultáneamente.\nActive solo la función que desee utilizar."
-
 msgid "It is not possible to record with"
 msgstr "No es posible grabar con"
 
