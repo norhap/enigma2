@@ -3,9 +3,6 @@ from enigma import getPeerStreamingBoxes, iFrontendInformation
 from Screens.Setup import Setup
 from Components.config import config, configfile, ConfigSelection, ConfigIP, ConfigInteger, getConfigListEntry
 from Components.ImportChannels import ImportChannels
-from Tools.Directories import isPluginInstalled
-from Screens.MessageBox import MessageBox
-from Screens.Standby import checkTimeshiftRunning, TryQuitMainloop
 
 
 def getChannelOnFallbackTuner():
@@ -206,11 +203,6 @@ class SetupFallbacktuner(Setup):
 		self["config"].l.setList(self.list)
 
 	def keySave(self):
-		if isPluginInstalled("FastChannelChange"):  # sync with FCC and IPToSAT.
-			if isPluginInstalled("IPToSAT"):
-				if config.plugins.IPToSAT.enable.value:
-					self.syncWithIPToSAT()
-					return
 		if self.avahiselect.value == "ip":
 			config.usage.remote_fallback.value = "http://%d.%d.%d.%d:%d" % (tuple(self.ip.value) + (self.port.value,))
 		elif self.avahiselect.value != "url":
@@ -270,17 +262,3 @@ class SetupFallbacktuner(Setup):
 		if not self.remote_fallback_prev and config.usage.remote_fallback_import.value:
 			ImportChannels()
 		self.close(False)
-
-	def syncWithIPToSAT(self):  # sync with IPToSAT.
-		def syncIPToSAT(answer=False):
-			if answer:
-				self.keySaveAll()
-				self.session.open(TryQuitMainloop, 3)
-
-		if not checkTimeshiftRunning() and not self.session.nav.getRecordings():
-			if config.usage.remote_fallback_enabled.value:
-				self.session.openWithCallback(syncIPToSAT, MessageBox, _("The use of IPToSAT will be disabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
-			else:
-				self.session.openWithCallback(syncIPToSAT, MessageBox, _("The use of IPToSAT will be enabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"), type=MessageBox.TYPE_YESNO, simple=True)
-		else:
-			self.keySaveAll()

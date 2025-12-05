@@ -13917,12 +13917,6 @@ msgstr "El atributo de título es obligatorio."
 msgid "The timer file (timers.xml) is corrupt and could not be loaded."
 msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
 
-msgid "The use of IPToSAT will be disabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"
-msgstr "Se deshabilitará el uso de IPToSAT.\nEs necesario reiniciar Enigma2.\n¿Quieres hacerlo ahora?"
-
-msgid "The use of IPToSAT will be enabled.\nEnigma2 needs to be restarted.\nDo you want to do it now?"
-msgstr "Se habilitará el uso de IPToSAT.\nEs necesario reiniciar Enigma2.\n¿Quieres hacerlo ahora?"
-
 msgid "The user interface of the receiver will now restart to select the selected skin"
 msgstr "La interfaz de usuario del receptor ahora se reiniciará para mostrar su skin seleccionado"
 
