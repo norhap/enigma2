@@ -1,6 +1,6 @@
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
-from enigma import eEnv, eTimer
+from enigma import eTimer
 
 from Components.ActionMap import NumberActionMap
 from Components.config import config, ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_LEFT, ACTIONKEY_RIGHT, ConfigPassword, ConfigText  # noqa: F401
@@ -13,7 +13,7 @@ from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Tools.Directories import fileWriteLine
+from Tools.Directories import fileWriteLine, SCOPE_SKINS, resolveFilename
 
 
 class WizardSummary(Screen):
@@ -161,10 +161,7 @@ class Wizard(Screen):
 		wizardHandler = self.parseWizard(self.wizard)
 		parser.setContentHandler(wizardHandler)
 		for xmlfile in self.xmlfile:
-			if xmlfile[0] != '/':
-				parser.parse(eEnv.resolve('${datadir}/enigma2/') + xmlfile)
-			else:
-				parser.parse(xmlfile)
+			parser.parse(resolveFilename(SCOPE_SKINS, xmlfile))
 		self.showSteps = showSteps
 		self.showStepSlider = showStepSlider
 		self.showList = showList
