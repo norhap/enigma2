@@ -8735,6 +8735,9 @@ msgstr "Configuración"
 msgid "Format Disk"
 msgstr "Formatear Disco"
 
+msgid "SetupFallbacktuner"
+msgstr "Ajustes tuner reserva"
+
 msgid "Setup menu"
 msgstr "Menú de configuración"
 
