@@ -798,6 +798,9 @@ msgstr "ir a reposo profundo"
 msgid "go to standby"
 msgstr "ir a reposo"
 
+msgid "(Long)"
+msgstr "(Largo)"
+
 msgid "(VU+ type)"
 msgstr "(Tipo de VU+)"
 

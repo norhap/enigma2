@@ -370,9 +370,33 @@ class SecondInfoBar(Screen):
 		self.onShow.append(self.__Show)
 
 	def __Show(self):
-		self["key_green"].setText(_(("ShowFirstInfoBar") if not config.misc.hotkey.green.value else _(config.misc.hotkey.green.value) if "Void" in config.misc.hotkey.green.value or "SoftcamSetup" in config.misc.hotkey.green.value else _(config.misc.hotkey.green.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + config.misc.hotkey.green.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])))
-		self["key_yellow"].setText(_(("AutoTimer") if not config.misc.hotkey.yellow.value else _(config.misc.hotkey.yellow.value) if "Void" in config.misc.hotkey.yellow.value or "SoftcamSetup" in config.misc.hotkey.yellow.value else _(config.misc.hotkey.yellow.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + config.misc.hotkey.yellow.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])))
-		self["key_blue"].setText(_(("Extensions") if not config.misc.hotkey.blue.value else _(config.misc.hotkey.blue.value) if "Void" in config.misc.hotkey.blue.value or "SoftcamSetup" in config.misc.hotkey.blue.value else _(config.misc.hotkey.blue.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + config.misc.hotkey.blue.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])))
+		valuegreen = None
+		valuegreenLong = None
+		valueyellow = None
+		valueyellowLong = None
+		valueblue = None
+		valueblueLong = None
+		if config.misc.hotkey.green.value:
+			green = config.misc.hotkey.green.value
+			valuegreen = _(green) if "Void" in green or "SoftcamSetup" in green else _(green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.green_long.value:
+			green = config.misc.hotkey.green_long.value
+			valuegreenLong = _(green) if "Void" in green or "SoftcamSetup" in green else _(green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.yellow.value:
+			yellow = config.misc.hotkey.yellow.value
+			valueyellow = _(yellow) if "Void" in yellow or "SoftcamSetup" in yellow else _(yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.yellow_long.value:
+			yellow = config.misc.hotkey.yellow_long.value
+			valueyellowLong = _(yellow) if "Void" in yellow or "SoftcamSetup" in yellow else _(yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.blue.value:
+			blue = config.misc.hotkey.blue.value
+			valueblue = _(blue) if "Void" in blue or "SoftcamSetup" in blue else _(blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.blue_long.value:
+			blue = config.misc.hotkey.blue_long.value
+			valueblueLong = _(blue) if "Void" in blue or "SoftcamSetup" in blue else _(blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		self["key_green"].setText(_(("ShowFirstInfoBar") if not valuegreen and not valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)")))
+		self["key_yellow"].setText(_(("AutoTimer") if not valueyellow and not valueyellowLong else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong else valueyellow if valueyellow else _("AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)")))
+		self["key_blue"].setText(_(("Extensions") if not valueblue and not valueblueLong else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblue and valueblueLong else valueblue if valueblue else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)")))
 
 
 class InfoBarShowHide(InfoBarScreenSaver):
@@ -443,9 +467,33 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.hideVBILineScreen.hide()
 
 	def __onShow(self):
-		self["key_green"].setText(_(("Nothing") if not config.misc.hotkey.green.value else _(config.misc.hotkey.green.value) if "Void" in config.misc.hotkey.green.value or "SoftcamSetup" in config.misc.hotkey.green.value else _(config.misc.hotkey.green.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + config.misc.hotkey.green.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])))
-		self["key_yellow"].setText(_(("AutoTimer") if not config.misc.hotkey.yellow.value else _(config.misc.hotkey.yellow.value) if "Void" in config.misc.hotkey.yellow.value or "SoftcamSetup" in config.misc.hotkey.yellow.value else _(config.misc.hotkey.yellow.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + config.misc.hotkey.yellow.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])))
-		self["key_blue"].setText(_(("Extensions") if not config.misc.hotkey.blue.value else _(config.misc.hotkey.blue.value) if "Void" in config.misc.hotkey.blue.value or "SoftcamSetup" in config.misc.hotkey.blue.value else _(config.misc.hotkey.blue.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + config.misc.hotkey.blue.value.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])))
+		valuegreen = None
+		valuegreenLong = None
+		valueyellow = None
+		valueyellowLong = None
+		valueblue = None
+		valueblueLong = None
+		if config.misc.hotkey.green.value:
+			green = config.misc.hotkey.green.value
+			valuegreen = _(green) if "Void" in green or "SoftcamSetup" in green else _(green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.green_long.value:
+			green = config.misc.hotkey.green_long.value
+			valuegreenLong = _(green) if "Void" in green or "SoftcamSetup" in green else _(green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + green.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.yellow.value:
+			yellow = config.misc.hotkey.yellow.value
+			valueyellow = _(yellow) if "Void" in yellow or "SoftcamSetup" in yellow else _(yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.yellow_long.value:
+			yellow = config.misc.hotkey.yellow_long.value
+			valueyellowLong = _(yellow) if "Void" in yellow or "SoftcamSetup" in yellow else _(yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + yellow.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.blue.value:
+			blue = config.misc.hotkey.blue.value
+			valueblue = _(blue) if "Void" in blue or "SoftcamSetup" in blue else _(blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		if config.misc.hotkey.blue_long.value:
+			blue = config.misc.hotkey.blue_long.value
+			valueblueLong = _(blue) if "Void" in blue or "SoftcamSetup" in blue else _(blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + blue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
+		self["key_green"].setText(_(("Nothing") if not valuegreen and not valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)")))
+		self["key_yellow"].setText(_(("AutoTimer") if not valueyellow and not valueyellowLong else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong else valueyellow if valueyellow else _("AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)")))
+		self["key_blue"].setText(_(("Extensions") if not valueblue and not valueblueLong else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblue and valueblueLong else valueblue if valueblue else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)")))
 		self.__state = self.STATE_SHOWN
 		for x in self.onShowHideNotifiers:
 			x(True)
