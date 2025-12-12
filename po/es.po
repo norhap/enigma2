@@ -1932,7 +1932,7 @@ msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit onl
 msgstr "Si está habilitado, el display muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
 
 msgid "ImportAutoTimerCurrentEvent"
-msgstr "Temporizador automático"
+msgstr "Importar Auto Temporizador"
 
 msgid "install ext2 kernel module"
 msgstr "instalar módulo kernel ext2"
@@ -19066,6 +19066,9 @@ msgstr "Su %s %s va a WOL"
 
 msgid "Your %s %s stores the EPG data every (hours)."
 msgstr "Su %s %s almacena los datos guardados en EPG cada (horas)."
+
+msgid "You are ready to add current event to automatic timer.\nIf there are no conflicts, once added you must enter menu:\n\nTimers > AutoTimers and search the event with green button."
+msgstr "Se dispone para añadir el evento actual al temporizador automático.\nSi no hay conflictos, una vez agregado debe ingresar al menú:\n\nTemporizadores > AutoTemporizadores y busque el evento con botón verde."
 
 msgid "You can cancel the removal."
 msgstr "Puede cancelar la eliminación."
