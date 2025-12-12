@@ -350,27 +350,6 @@ msgstr "activar configuración del adaptador de red"
 msgid "actual time only"
 msgstr "solo tiempo actual"
 
-msgid "Add alternatives"
-msgstr "Añadir alternativos"
-
-msgid "Add bouquet"
-msgstr "Añadir bouquet"
-
-msgid "Add bouquet to parental protection"
-msgstr "Añadir bouquet al control parental"
-
-msgid "Add marker"
-msgstr "Añadir marcador"
-
-msgid "Add service to bouquet"
-msgstr "Añadir canal al bouquet"
-
-msgid "Add service to favourites"
-msgstr "Añadir el canal a favoritos"
-
-msgid "Add to parental protection"
-msgstr "Añadir canal a control parental"
-
 msgid "adult movie/drama"
 msgstr "adultos/Drama"
 
@@ -1172,6 +1151,36 @@ msgstr "Añadir una marca"
 msgid "Add a new title"
 msgstr "Añadir un nuevo título"
 
+msgid "Add alternatives"
+msgstr "Añadir alternativos"
+
+msgid "Add autotimer\nPrime time (Press long)"
+msgstr "Añadir autotemporizador\nHora máxima audiencia (Pulse largo)"
+
+msgid "Add autotimer"
+msgstr "Añadir autotemporizador"
+
+msgid "Add autotimer\nNow (Press long)"
+msgstr "Añadir autotemporizador\nAhora (Pulse largo)"
+
+msgid "AutoTimer is not installed\nPrime time (Press long)"
+msgstr "AutoTemporizador no instalado\nHora máxima audiencia (Pulse largo)"
+
+msgid "Add bouquet"
+msgstr "Añadir bouquet"
+
+msgid "Add bouquet to parental protection"
+msgstr "Añadir bouquet al control parental"
+
+msgid "Add marker"
+msgstr "Añadir marcador"
+
+msgid "Add service to bouquet"
+msgstr "Añadir canal al bouquet"
+
+msgid "Add service to favourites"
+msgstr "Añadir el canal a favoritos"
+
 msgid "Add bookmark"
 msgstr "Añadir marcador"
 
@@ -1186,6 +1195,9 @@ msgstr "Añadir DNS"
 
 msgid "Add USB slots"
 msgstr "Añadir slots USB"
+
+msgid "Add USB slots (require receiver Vu+ 4k)"
+msgstr "Agregar slots USB (requiere receptor Vu+ 4k)"
 
 msgid "Add file to playlist"
 msgstr "Agregar fichero a la lista de reproducción"
@@ -1234,6 +1246,9 @@ msgstr "Añadir al bouquet"
 
 msgid "Add to favourites"
 msgstr "Añadir a favoritos"
+
+msgid "Add to parental protection"
+msgstr "Añadir canal a control parental"
 
 msgid "Add/remove change timer for current event"
 msgstr "Añadir/eliminar cambio temporizador para evento actual"
@@ -1932,7 +1947,7 @@ msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit onl
 msgstr "Si está habilitado, el display muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
 
 msgid "ImportAutoTimerCurrentEvent"
-msgstr "Importar Auto Temporizador"
+msgstr "Auto Temporizador"
 
 msgid "install ext2 kernel module"
 msgstr "instalar módulo kernel ext2"
@@ -1951,6 +1966,9 @@ msgstr "instalar las utilidades linux (fdisk)"
 
 msgid "install linux utilities (util-linux-blkid)"
 msgstr "instalar las utilidades linux (util-linux-blkid)"
+
+msgid "Installing AutoTimer"
+msgstr "Instalando AutoTemporizador"
 
 msgid "Ignore DVB-C namespace sub network"
 msgstr "Ignorar DVB-C espacio de nombres subred"
