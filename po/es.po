@@ -1238,17 +1238,8 @@ msgstr "Añadir a favoritos"
 msgid "Add/remove change timer for current event"
 msgstr "Añadir/eliminar cambio temporizador para evento actual"
 
-msgid "add AutoTimer"
-msgstr "agregar Temporizador Automático"
-
-msgid "add AutoTimer..."
-msgstr "agregar Temporizador Automático..."
-
 msgid "add filters"
 msgstr "agregar Filtros"
-
-msgid "add to AutoTimer filterList"
-msgstr "agregar lista de filtros al temporizador automático"
 
 msgid "Add entry"
 msgstr "Añadir entrada"
@@ -1380,9 +1371,6 @@ msgstr "   (AutoZapeo)"
 
 msgid "Adding schedule..."
 msgstr "Agregando horario."
-
-msgid "After a successful refresh the AutoTimer will automatically search for new matches if this is enabled."
-msgstr "Después de una actualización exitosa, el Temporizador Automático buscará nuevas coincidencias si está habilitado."
 
 msgid "Amount of recordings left"
 msgstr "Cantidad de grabaciones restantes"
@@ -2918,12 +2906,6 @@ msgstr "Canales y EPG"
 
 msgid "config changed."
 msgstr "configuración modificada."
-
-msgid "create AutoTimer for current event"
-msgstr "crear Temporizador Automático para el evento actual"
-
-msgid "Import from fallback tuner failed, %s"
-msgstr "Falló la importación desde el sintonizador reserva, %s"
 
 msgid "Imported list with bouquet empty <n/a> %s file does not exist"
 msgstr "Lista importada con bouquet vacío <n/a> el archivo %s no existe"
@@ -5544,6 +5526,12 @@ msgstr "La imagen a instalar no es válida\n"
 msgid "Image: "
 msgstr "Imagen: "
 
+msgid "Import AutoTimer"
+msgstr "Importar Temporizador Automático"
+
+msgid "Import autotimer in current event"
+msgstr "Importar temporizador automático en el evento actual"
+
 msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby."
 msgstr "Importar canales y/o EPG desde la URL del receptor reserva también cuando el receptor salga del modo de reposo."
 
@@ -5555,6 +5543,15 @@ msgstr "Importar canales y/o EPG desde la URL del receptor reserva cuando se rei
 
 msgid "Import channels from fallback tuner"
 msgstr "Importar canales desde el sintonizador de respaldo"
+
+msgid "Import current source"
+msgstr "Importar fuente actual"
+
+msgid "Import existing Timer"
+msgstr "Importar Temporizador Existente"
+
+msgid "Import from fallback tuner failed, %s"
+msgstr "Falló la importación desde el sintonizador reserva, %s"
 
 msgid "Import from remote receiver URL"
 msgstr "Importar desde la URL del receptor reserva"
@@ -7449,61 +7446,6 @@ msgstr "DNS Primario:"
 
 msgid "Prime time"
 msgstr "Hora máxima audiencia"
-
-msgid ""
-"Add autotimer\n"
-"Prime time (Press long)"
-msgstr ""
-"Añadir autotemporizador\n"
-"Hora máxima audiencia (Pulse largo)"
-
-msgid ""
-"Add autotimer\n"
-"Now (Press long)"
-msgstr ""
-"Añadir autotemporizador\n"
-"Ahora (Pulse largo)"
-
-msgid "Add USB slots (require receiver Vu+ 4k)"
-msgstr "Agregar slots USB (requiere receptor Vu+ 4k)"
-
-msgid ""
-"AutoTimer is not installed\n"
-"Prime time (Press long)"
-msgstr ""
-"AutoTemporizador no instalado\n"
-"Hora máxima audiencia (Pulse largo)"
-
-msgid "Add autotimer"
-msgstr "Añadir autotemporizador"
-
-msgid "Installing AutoTimer"
-msgstr "Instalando AutoTemporizador"
-
-msgid ""
-"You are ready to add current event to automatic timer.\n"
-"If there are no conflicts, once added you must enter menu:\n"
-"\n"
-"Timers > AutoTimers and search the event with green button."
-msgstr ""
-"Se dispone para añadir el evento actual al temporizador automático.\n"
-"Si no hay conflictos, una vez agregado debe ingresar al menú:\n"
-"\n"
-"Temporizadores > AutoTemporizadores y busque el evento con botón verde."
-
-msgid ""
-"You are ready to add this event to automatic timer.\n"
-"If there are no conflicts, once added you must enter menu:\n"
-"\n"
-"Timers > AutoTimers and search the event with green button."
-msgstr ""
-"Se dispone para añadir este evento al temporizador automático.\n"
-"Si no hay conflictos, una vez agregado debe ingresar al menú:\n"
-"\n"
-"Temporizadores > AutoTemporizadores y busque el evento con botón verde."
-
-msgid "Feed not available. The AutoTimer plugin was not installed."
-msgstr "Feed no disponible. El plugin Temporizador Automático no se instaló."
 
 msgid "Priority"
 msgstr "Prioridad"
@@ -12946,9 +12888,6 @@ msgstr "Ignorar lista de canales"
 msgid "Ignore services list(press OK to save)"
 msgstr "Ignorar lista de canales (pulse OK para guardar)"
 
-msgid "Import current source"
-msgstr "Importar fuente actual"
-
 #, python-format
 msgid ""
 "Importing: %s\n"
@@ -12992,9 +12931,6 @@ msgstr ""
 
 msgid "Return to deep standby after import"
 msgstr "Volver al modo de espera profundo después de la importación"
-
-msgid "Run AutoTimer after import"
-msgstr "Ejecutar Temporizador Automático después de importar"
 
 msgid "Show \"EPG Importer\" in main menu"
 msgstr "Mostrar 'EPG Importer' en el menú principal"
@@ -13128,18 +13064,6 @@ msgstr "Se creó una configuración nueva y vacía. Se puede encontrar una copia
 msgid "Activate VPS"
 msgstr "Activar VPS"
 
-msgid "Add \"Choice list AutoTimer\" menu button to multi-EPG"
-msgstr "Agregue 'Elección lista Temporizador Automático'  botón  Menú Multi-EPG"
-
-msgid "Add \"Choice list AutoTimer\" menu button to single-EPG"
-msgstr "Agregue  'Elección lista Temporizador Automático' botón Menú EPG simple"
-
-msgid "Add AutoTimer"
-msgstr "Agregar Temporizador Automático"
-
-msgid "Add new AutoTimer"
-msgstr "Agregar Nuevo Temporizador Automático"
-
 msgid "Add services"
 msgstr "Agregar Canales"
 
@@ -13164,61 +13088,6 @@ msgstr "Cualquier canal/grabación"
 msgid "Any time"
 msgstr "En cualquier momento"
 
-msgid "AutoTimer"
-msgstr "Añadir Temporizador"
-
-#, python-format
-msgid ""
-"AutoTimer\n"
-"%d timer(s) were added."
-msgstr ""
-"Temporizador Automático\n"
-"%d temporizador(s) fueron agregados."
-
-msgid "AutoTimer "
-msgstr "Temporizador Automático "
-
-#, python-format
-msgid "AutoTimer %s FilterListEntry"
-msgstr "Temporizador Automático %s Filtro entrada de la Lista"
-
-msgid "AutoTimer Context Menu"
-msgstr "Menú de contexto del temporizador automático"
-
-msgid "AutoTimer Editor"
-msgstr "Editor Temporizador Automático"
-
-msgid "AutoTimer Filters"
-msgstr "Filtros Temporizaodr Automático"
-
-msgid "AutoTimer Services"
-msgstr "Temporizador Automático canales"
-
-msgid "AutoTimer Settings"
-msgstr "Temporizador Automático Configuraciones"
-
-#, python-format
-msgid "AutoTimer failed with error %s"
-msgstr "Temporizador Automático falló con error %s"
-
-msgid "AutoTimer overview"
-msgstr "Descripción Temporizador Automático"
-
-msgid "AutoTimer scan"
-msgstr "Temporizador Automático escanear"
-
-msgid "AutoTimer was added successfully"
-msgstr "Temporizador Automático fue agregado exitosamente"
-
-msgid "AutoTimer was changed successfully"
-msgstr "Temporizador Automático fue cambiado exitosamente"
-
-msgid "AutoTimer was removed"
-msgstr "Temporizador Automático fue eliminado"
-
-msgid "AutoTimers were changed successfully"
-msgstr "Temporizador Automático fueron cambiados exitosamente"
-
 msgid "Begin of \"after event\" timespan"
 msgstr "Comienza \"después del evento\" espacio de tiempo"
 
@@ -13230,12 +13099,6 @@ msgstr "¿Cambiar la compensación de grabación predeterminada?"
 
 msgid "Check for uniqueness in"
 msgstr "Compruebe la exclusividad en"
-
-msgid "Check the event id (eit) and remove the timer if there is no corresponding EPG event. Due to compatibility issues with SerienRecorder and IPRec, only timer created by AutoTimer are affected."
-msgstr "Verifique la identificación del evento (eit) y elimine el temporizador si no hay un evento EPG correspondiente. Debido a problemas de compatibilidad con SerienRecorder e IPRec, solo el temporizador creado por AutoTimer se ve afectado."
-
-msgid "Choice list AutoTimer"
-msgstr "Lista de opciones Temporizador Automático"
 
 msgid "Choose target folder"
 msgstr "Elija la carpeta de destino"
@@ -13258,9 +13121,6 @@ msgstr "Cerrar sin guardar"
 msgid "Close, save changes and search now"
 msgstr "Cerrar, guardar cambios y buscar ahora"
 
-msgid "Configure AutoTimer behavior"
-msgstr "Configurar el comportamiento del temporizador automático"
-
 msgid "Configure the transparency of the black background of subtitles."
 msgstr "Configura la transparencia del fondo negro de los subtítulos."
 
@@ -13269,15 +13129,6 @@ msgstr "Controle la grabación completamente por canal"
 
 msgid "Couldn't load config file!"
 msgstr "No se pudo cargar el archivo de configuración!"
-
-msgid "Create AutoTimer"
-msgstr "Crear Temporizador Automático"
-
-msgid "Create a new timer using the classic editor"
-msgstr "Crear nuevo Temporizador usando el editor clásico"
-
-msgid "Create a new timer using the wizard"
-msgstr "Crear nuevo temporizador usando el asistente"
 
 msgid "Create debug log file"
 msgstr "Crear archivo de registro de depuración"
@@ -13311,41 +13162,11 @@ msgstr "No se salte la coincidencia cuando no se describa"
 msgid "EPG encoding"
 msgstr "Codificación EPG"
 
-msgid "Edit AutoTimer"
-msgstr "Editar Temporizador Automático"
-
-msgid "Edit AutoTimer filters"
-msgstr "Editar filtros del Temporizador Automático"
-
-msgid "Edit AutoTimer services"
-msgstr "Editar Canales del Temporizador Automático"
-
-msgid "Edit Timers and scan for new Events"
-msgstr "Edite temporizadores y busque nuevos eventos"
-
-msgid "Edit new timer defaults"
-msgstr "Editar nuevos valores predeterminados de temporizador"
-
-msgid "Edit selected AutoTimer"
-msgstr "Editar el temporizador automático seleccionado"
-
 msgid "Edit services"
 msgstr "Editar Canales"
 
-msgid "Editor for new AutoTimers"
-msgstr "Editor para nuevos Temporizadores Automáticos"
-
 msgid "Enable Service Restriction"
 msgstr "Habilitar restricción de canal"
-
-msgid "Enable this to add item for create the AutoTimer into event menu (needs restart GUI)."
-msgstr "Habilítelo para agregar un elemento para crear el Temporizador Automático en el menú de eventos (necesita reiniciar la GUI)."
-
-msgid "Enable this to be able to access the AutoTimer Overview from within the extension menu."
-msgstr "Habilítelo para poder acceder a la Descripción general del temporizador automático desde el menú de extensión."
-
-msgid "Enable this to be able to access the add to AutoTimer from the channel selection context menu."
-msgstr "Habilítelo para poder acceder al agregar al Temporizador Automático desde el menú contextual de selección de canal."
 
 msgid "Encoding the channel uses for it's EPG data. You only need to change this if you're searching for special characters like the german umlauts."
 msgstr "Codificando los usos del canal para sus datos EPG. Solo necesita cambiar esto si está buscando caracteres especiales como las diéresis alemanas."
@@ -13418,9 +13239,6 @@ msgstr "Ayuda"
 msgid "If 0, the popup will remain open."
 msgstr "Si es 0, la ventana emergente permanecerá abierta."
 
-msgid "If a timer conflict occurs, AutoTimer will search outside the timespan for a similar event and add it."
-msgstr "Si se produce un conflicto de temporizador, El Temporizador Automático buscará fuera del intervalo de tiempo para un evento similar y lo agregará."
-
 msgid "If enabled, the polling will be skipped if EPGRefresh is currently running."
 msgstr "Si está habilitado, el sondeo se omitirá si el Actualizador EPG se está ejecutando actualmente."
 
@@ -13430,29 +13248,14 @@ msgstr "Si está habilitado, el sondeo se saltará si hay una grabación en prog
 msgid "If the style is advanced, you will see more information about each auto timer."
 msgstr "Si el estilo está avanzado, verá más información sobre cada temporizador automático."
 
-msgid "If this enabled, debug Autotimer write in log file."
-msgstr "Si esto está habilitado, depure el Temporizador Automático escribe un archivo log."
-
 msgid "If this enabled, debug log print in console mode start enigma2."
 msgstr "Si esto está habilitado, imprimir el registro de depuración en el modo de consola, inicie enigma2."
 
 msgid "If this enabled, will check the list of timers, conflicting autotimers are disabled, the duplicate autotimers will be deleted."
 msgstr "Si esto está habilitado, verificará la lista de temporizadores, los temporizadores en conflicto estarán deshabilitados, los temporizadores duplicados serán eliminados."
 
-msgid "Import AutoTimer"
-msgstr "Importar Temporizador Automático"
-
-msgid "Import existing Timer"
-msgstr "Importar Temporizador Existente"
-
 msgid "Include"
 msgstr "Incluir"
-
-msgid "Include \"AutoTimer\" in tags"
-msgstr "Incluir 'Temporizador Automático' en las etiquetas"
-
-msgid "Include AutoTimer name in tags"
-msgstr "Incluir el nombre del Temporizador Automático en las etiquetas"
 
 msgid "Label Timers with season, episode and title, according to the SeriesPlugin settings."
 msgstr "Etiquete los temporizadores con la temporada, el episodio y el título, de acuerdo con la configuración de SeriesPlugin."
@@ -13539,9 +13342,6 @@ msgstr "En cualquier canal"
 msgid "On same service"
 msgstr "En el mismo canal"
 
-msgid "Only AutoTimers created during this session"
-msgstr "Solo Temporizadores Automáticos creados durante esta sesión"
-
 msgid "Only add timer for next x days"
 msgstr "Solo agregue temporizador para los siguientes x días"
 
@@ -13601,12 +13401,6 @@ msgstr "Tiempo de espera emergente en segundos"
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
 msgstr "Estado de energía para cambiar a después de las grabaciones. Seleccione \"estándar\" para no cambiar el comportamiento predeterminado de enigma2 o valores modificados por usted mismo."
 
-msgid "Preview AutoTimer"
-msgstr "Vista previa Temporizador Automático"
-
-msgid "Preview for your AutoTimers"
-msgstr "Vista previa para sus Temporizadores Automáticos"
-
 msgid "Print shell log"
 msgstr "Imprimir registro de shell"
 
@@ -13618,25 +13412,6 @@ msgstr "Grabe un máximo de x veces"
 
 msgid "Record on"
 msgstr "Grabar en"
-
-msgid "Reload timers list after search events"
-msgstr "Cargar temporizadores después de búsqueda de eventos"
-
-#, python-format
-msgid ""
-"Reload timers list.\n"
-"%d autotimer(s) disabled because conflict.\n"
-"%d double autotimer(s) removed.\n"
-msgstr ""
-"Recargar la lista de temporizadores.\n"
-"%d Temporizador Automático(s) deshabilitado porque el conflicto.\n"
-"%d doble Temporizdor Automático(s) reserva.\n"
-
-msgid "Remove not existing events"
-msgstr "Eliminar eventos no existentes"
-
-msgid "Remove selected AutoTimer"
-msgstr "Eliminar el Temporizador Automático seleccionado"
 
 msgid "Require description to be unique"
 msgstr "Requiere descripción para ser único"
@@ -13668,20 +13443,11 @@ msgstr "Guarde/marque series etiquetadas en lista de filtro (SeriesPlugin)"
 msgid "Search"
 msgstr "Buscar"
 
-msgid "Search new events matching for your AutoTimers"
-msgstr "Buscar eventos que coincidan con Temporizadores Automáticos"
-
 msgid "Select \"exact match\" to enforce \"Match title\" to match exactly, \"partial match\" if you only want to search for a part of the event title or \"description match\" if you only want to search for a part of the event description"
 msgstr "Seleccione \"coincidencia exacta\" para imponer \"título de coincidencia\" para que coincida exactamente, \"coincidencia parcial\" si solo desea buscar una parte del título del evento o \"descripción de coincidencia\" si solo desea buscar una parte de la descripción del evento"
 
 msgid "Select a timer to import"
 msgstr "Seleccione un temporizador para importar"
-
-msgid "Select action for AutoTimer or input date/time:"
-msgstr "Seleccione acción para Temporizador automático o ingrese fecha/hora:"
-
-msgid "Select action for AutoTimer:"
-msgstr "Seleccionar acción para el Temporizador Automático:"
 
 msgid "Select bouquet to record on"
 msgstr "Seleccione el bouquet para grabar en"
@@ -13728,9 +13494,6 @@ msgstr "Establezca una hora de finalización para el temporizador. Si lo hace, e
 msgid "Set maximum duration"
 msgstr "Establecer la duración máxima"
 
-msgid "Set this NO to disable this AutoTimer."
-msgstr "Establezca este NO para deshabilitar este Temporizador Automático."
-
 msgid "Set this to 'Yes' to automatically hide the InfoBar when the media starts playing. If set to 'No' the InfoBar will remain on screen."
 msgstr "Establezca esto en 'Sí' para ocultar automáticamente la barra de información cuando los medios comiencen a reproducirse. Si se establece en 'No', la barra de información permanecerá en la pantalla."
 
@@ -13757,21 +13520,6 @@ msgstr "Establecer el tipo de receptor de despertador. Esto funciona solo para t
 
 msgid "Setup for the Audio Sync Plugin"
 msgstr "Configuración para el plugin Sincronización Audio"
-
-msgid "Should this AutoTimer be restricted to a timespan?"
-msgstr "¿Debería este Temporizador Automático restringirse a un intervalo de tiempo?"
-
-msgid "Should this AutoTimer only match up to a certain event duration?"
-msgstr "¿Este Temporizador Automático solo debe coincidir con una determinada duración del evento?"
-
-msgid "Should timers created by this AutoTimer be recorded to a custom location?"
-msgstr "¿Deberían los temporizadores creados por este Temporizador Automático registrarse en una ubicación personalizada?"
-
-msgid "Show \"add to AutoTimer\" in channel selection menu"
-msgstr "Mostrar 'Agregar al Temporizador Automático' en Menú selección de canal"
-
-msgid "Show AutoTimer FilterTxt"
-msgstr "Mostrar Temporizador Automático FiltroTxt"
 
 msgid "Show Capabilities"
 msgstr "Mostrar capacidades"
@@ -13806,9 +13554,6 @@ msgstr "Omitir encuesta durante la actualización de EPG"
 msgid "Skip poll during records"
 msgstr "Omitir encuesta durante los registros"
 
-msgid "Sort AutoTimer"
-msgstr "Ordenar Temporizador Automático"
-
 msgid "Sort Time"
 msgstr "Tiempo de ordenación"
 
@@ -13830,12 +13575,6 @@ msgstr "Soporte 'Búsqueda rápida'?"
 msgid "Tags the Timer/Recording will have."
 msgstr "Etiquetas que tendrá el temporizador/grabación."
 
-msgid "The AutoTimer plugin is installed."
-msgstr "El plugin Temporizador Automático está instalado."
-
-msgid "The autotimer file (/etc/enigma2/autotimer.xml) is corrupt and could not be loaded."
-msgstr "El archivo del Temporizador Automático (/etc/enigma2/autotimer.xml) está corrupto y no se pudo cargar."
-
 msgid "The backup failed. Please choose a different backup location."
 msgstr "La copia de seguridad falló. Escoge un lugar diferente para la copia."
 
@@ -13844,9 +13583,6 @@ msgstr "El contador puede restablecerse automáticamente al límite en ciertos i
 
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
 msgstr "El estándar de DVD no admite transmisiones de video H.264 (HDTV). ¿Desea crear un DVD de datos de formato especial (que no se reproducirá en reproductores de DVD independientes) en su lugar?"
-
-msgid "The editor to be used for new AutoTimers. This can either be the Wizard or the classic editor."
-msgstr "El editor que se utilizará para los nuevos Temporizador Automático. Este puede ser el asistente o el editor clásico."
 
 #, python-format
 msgid ""
@@ -13980,34 +13716,6 @@ msgstr "El modo AI que se utiliza para traducir idiomas. Puedes elegir el que of
 msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection upload speed selected."
 msgstr "El servicio de traducción impulsado por inteligencia artificial se optimizará para proporcionar el mejor rendimiento según la velocidad de carga de la conexión a Internet seleccionada."
 
-msgid ""
-"The AutoTimer plugin is not installed!\n"
-"Do you want to install it?"
-msgstr ""
-"El Plugin Temporizador Automático no está Instalado!\n"
-"Quieres instalarlo?"
-
-msgid "The command to wake from standby will be sent multiple times."
-msgstr "El comando para despertar desde el modo de espera se enviará varias veces."
-
-msgid "The Timespan of an AutoTimer is the first 'advanced' attribute. If a timespan is specified an event will only match this AutoTimer if it lies inside of this timespan."
-msgstr "El intervalo de tiempo de un Temporizador Automático es el primer atributo 'avanzado'. Si se especifica un intervalo de tiempo, un evento solo coincidirá con este Temporizador Automático si se encuentra dentro de este intervalo de tiempo."
-
-msgid "This is a name you can give the AutoTimer. It will be shown in the Overview and the Preview."
-msgstr "Este es un nombre que puede darle al Temporizador Automático. Se mostrará en la Descripción y la Vista previa."
-
-msgid "This is the delay in hours that the AutoTimer will wait after a search to search the EPG again."
-msgstr "Esta es la demora en horas que el temporizador Automático esperará después de una búsqueda para buscar nuevamente la EPG."
-
-msgid "This is the delay in minutes that the AutoTimer will wait on initial launch to not delay enigma2 startup time."
-msgstr "Esta es la demora en minutos que el Temporizador Automático esperará en el inicio inicial para no retrasar el tiempo de inicio de enigma2."
-
-msgid "This is the delay in seconds that the AutoTimer will wait after editing the AutoTimers."
-msgstr "Esta es la demora en segundos que esperará el Temporizador Automático después de editar los Temporizadores Automáticos."
-
-msgid "This is the duration in minutes that the AutoTimer is allowed to run."
-msgstr "Esta es la duración en minutos que se permite ejecutar el Temporizador Automático."
-
 msgid "This is what will be looked for in event titles. Note that looking for e.g. german umlauts can be tricky as you have to know the encoding the channel uses."
 msgstr "Esto es lo que se buscará en los títulos de los eventos. Tenga en cuenta que, por ejemplo, las diéresis alemanas pueden ser complicadas ya que debes conocer la codificación que usa el canal."
 
@@ -14016,9 +13724,6 @@ msgstr "Esta opción le permite desactivar la detección de confictos del tempor
 
 msgid "This setting controls the behavior when a timer matches a found event."
 msgstr "Esta configuración controla el comportamiento cuando un temporizador coincide con un evento encontrado."
-
-msgid "This toggles the behavior on timer conflicts. If an AutoTimer matches an event that conflicts with an existing timer it will not ignore this event but add it disabled."
-msgstr "Esto alterna el comportamiento en conflictos de temporizador. Si un AutoTimer coincide con un evento que entra en conflicto con un temporizador existente, no ignorará este evento sino que lo agregará deshabilitado."
 
 msgid "Thur"
 msgstr "Jueves"
@@ -14047,9 +13752,6 @@ msgstr "Título y todas las descripciones"
 msgid "To cater for spelling mistakes and small deviations in the EPG information, you can make the matching algorithm fuzzy by setting the percentage both programmes must be equal for. Use 100% if you only want a match when both are completely identical. Recommended default ratio 80%."
 msgstr "Para atender errores ortográficos y pequeñas desviaciones en la información EPG, puede difuminar el algoritmo de coincidencia estableciendo el porcentaje para el que ambos programas deben ser iguales. Use 100% si solo quiere una coincidencia cuando ambos son completamente idénticos. Relación predeterminada recomendada 80%."
 
-msgid "Unless this is enabled AutoTimer will NOT automatically look for events matching your AutoTimers but only when you leave the GUI with the green button."
-msgstr "A menos que esto esté habilitado, el Temporizador Automático NO buscará automáticamente eventos que coincidan con sus Temporizadores Automáticos, sino solo cuando salga de la GUI con el botón verde."
-
 msgid "Upper bound of timespan."
 msgstr "Límite superior del período de tiempo."
 
@@ -14077,23 +13779,14 @@ msgstr "Semanalmente (domingo)"
 msgid "When supporting \"Fast Scan\" the service type is ignored. You don't need to enable this unless your Image supports \"Fast Scan\" and you are using it."
 msgstr "Al admitir \"Exploración rápida\", se ignora el tipo de canal. No necesita habilitar esto a menos que su Imagen sea compatible con \"Exploración rápida\" y lo esté usando."
 
-msgid "When this is enabled AutoTimer will ONLY check for new events whilst in stanadby."
-msgstr "Cuando esto está habilitado, el Temporizador Automático SOLAMENTE verificará si hay nuevos eventos mientras está en modo reposo."
-
 msgid "When this option enabled and short description and extended description match is empty and timer title exist in match title, match is not a duplicate. Attention, this may result in double timers."
 msgstr "Cuando esta opción está habilitada y la descripción breve y la coincidencia de la descripción extendida están vacías y el título del temporizador existe en el título del partido, la coincidencia no es un duplicado. Atención, esto puede dar como resultado tiempos dobles."
 
 msgid "When this option enabled, short description to equal extended description if short description is empty."
 msgstr "Cuando esta opción está habilitada, la descripción breve equivale a la descripción extendida si la breve descripción está vacía."
 
-msgid "When this option is enabled the AutoTimer won't match events where another timer with the same description already exists in the timer list."
-msgstr "Cuando esta opción está activada, el AutoTimer no coincidirá con los eventos en los que ya existe otro temporizador con la misma descripción en la lista de temporizadores."
-
 msgid "With this option enabled the channel to record on can be changed to a alternative service it is restricted to."
 msgstr "Con esta opción habilitada, el canal para grabar puede cambiarse a un canal alternativo al que está restringido."
-
-msgid "With this option you can restrict the AutoTimer to a certain amount of scheduled recordings. Set this to 0 to disable this functionality."
-msgstr "Con esta opción, puede restringir el AutoTimer a una cierta cantidad de grabaciones programadas. Establezca esto en 0 para deshabilitar esta funcionalidad."
 
 msgid "Wizard"
 msgstr "Asistente"
@@ -14126,66 +13819,8 @@ msgstr "no se puede encontrar el temporizador con id %i"
 msgid "Abort this Wizard."
 msgstr "Abortar este asistente."
 
-msgid "Create a new AutoTimer."
-msgstr "Crea un nuevo Temporizador Automático."
-
-msgid ""
-"Filters are another powerful tool when matching events. An AutoTimer can be restricted to certain Weekdays or only match an event with a text inside eg it's Description.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"Los filtros son otra herramienta poderosa cuando se combinan eventos. Un Temporizador Automático puede restringirse a ciertos días de la semana o solo coincidir con un evento con un texto dentro, por ejemplo, es Descripción.\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-
-msgid ""
-"It's possible to restrict an AutoTimer to certain Services or Bouquets or to deny specific ones.\n"
-"An Event will only match this AutoTimer if it's on a specific and not denied Service (inside a Bouquet).\n"
-"Press BLUE to add a new restriction and YELLOW to remove the selected one."
-msgstr ""
-"Es posible restringir un Temporizador Automático a ciertos Canales o Bouquets o denegar algunos específicos.\n"
-"Un Evento solo coincidirá con este Temporizador Automático si se trata de un canal específico y no denegado (dentro de un Bouquet).\n"
-"Pulse AZUL para agregar una nueva restricción y AMARILLO para eliminar la seleccionada."
-
 msgid "No, remove them."
 msgstr "No, eliminarlos."
-
-msgid ""
-"Thank you for using the wizard. Your new AutoTimer has been added to the List.\n"
-"Please press OK to continue."
-msgstr ""
-"Gracias por usar el asistente. Su nuevo Temporizador Automático ha sido agregado a la lista.\n"
-"Por favor, pulse OK para continuar."
-
-msgid ""
-"Welcome.\n"
-"\n"
-"This Wizard will help you to create a new AutoTimer by providing descriptions for common settings."
-msgstr ""
-"Bienvenido.\n"
-"\n"
-"Este asistente le ayudará a crear un nuevo temporizador automático al proporcionar descripciones para la configuración común."
-
-msgid ""
-"You can set the basic properties of an AutoTimer here.\n"
-"While 'Name' is just a human-readable name displayed in the Overview, 'Match in title' is what is looked for in the EPG."
-msgstr ""
-"Puede establecer las propiedades básicas de un temporizador automático aquí.\n"
-"Mientras que 'Nombre' es solo un nombre legible por humanos que se muestra en la Descripción general, 'Coincidencia en título' es lo que se busca en la EPG."
-
-msgid ""
-"You did not provide a valid 'Match in title' Attribute for your new AutoTimer.\n"
-"As this is a mandatory Attribute you cannot continue without doing so."
-msgstr ""
-"No proporcionó un atributo válido de \"Coincidir en el título\" para su nuevo Temporizador Automático.\n"
-"Como este es un Atributo obligatorio, no puede continuar sin hacerlo."
-
-msgid ""
-"You successfully configured a new AutoTimer. Do you want to add it to the list?\n"
-"\n"
-"You can go back a step by pressing EXIT on your remote."
-msgstr ""
-"Usted configuró exitosamente un nuevo Temporizador Automático. ¿Quieres agregarlo a la lista??\n"
-"\n"
-"Puede retroceder un paso presionando EXIT en su mando a distancia."
 
 msgid ""
 "Your 'Match in title' Attribute ends with a Whitespace.\n"
@@ -14193,30 +13828,6 @@ msgid ""
 msgstr ""
 "Su atributo 'Coincidir en el título' termina con un espacio en blanco.\n"
 "Por favor, confirme si esto fue intencional, de lo contrario serán eliminados."
-
-msgid "AutoTimer FAQ"
-msgstr "Preguntas frecuentes sobre Temporizador Automático"
-
-msgid "FAQ"
-msgstr "Preguntas más frecuentes"
-
-msgid "Frequently asked questions about the AutoTimer"
-msgstr "Preguntas frecuentes sobre el Temporizador Automático"
-
-msgid ""
-"Question: I found a problem with the AutoTimer, can you fix it? \n"
-"Answer: First try the AutoTimer version in a recent (experimental) Image to see if the problem was fixed. Then read the Help again and the upcoming FAQs to make sure that this is actually a problem and not expected behavior. \n"
-"If you still think there is something wrong with the AutoTimer, please visit http://www.dream-multimedia-tv.de/board and post your problem there.\n"
-"\n"
-"Q: The plugin only adds timers when leaving the configuration, not automatically. What can I do? \n"
-"A: From the Overview press MENU and enter the \"Setup\". In this screen enable \"Poll automatically\" and you should be good to go."
-msgstr ""
-"Pregunta: Encontré un problema con el Temporizador Automático, ¿puedes arreglarlo? \n"
-"Respuesta: Primero pruebe la versión del Temporizador Automático en una imagen reciente (experimental) para ver si el problema fue resuelto. Luego lea de nuevo la Ayuda y las próximas preguntas frecuentes para asegurarse de que esto sea realmente un problema y no un comportamiento esperado. \n"
-"Si todavía crees que hay algún problema con el Temporizador Automático, visita http://www.dream-multimedia-tv.de/board y publica su problema allí.\n"
-"\n"
-"Q: El plugin solo agrega temporizadores al salir de la configuración, no automáticamente. ¿Que puedo hacer?\n"
-"A: Desde la Vista general, pulse MENÚ e ingrese la \"Configuración\". En esta pantalla, habilite \"Encuesta automáticamente\" y debería estar listo para continuar."
 
 msgid "Auto backup"
 msgstr "Copia Automática"
@@ -18362,9 +17973,6 @@ msgstr "Acciones Extensión"
 
 msgid "Show extensions"
 msgstr "Mostrar extensiones"
-
-msgid "Import autotimer in current event"
-msgstr "Importar temporizador automático en el evento actual"
 
 msgid "Subtitle Actions"
 msgstr "Acciones Subtítulos"

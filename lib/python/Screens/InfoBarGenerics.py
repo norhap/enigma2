@@ -396,7 +396,7 @@ class SecondInfoBar(Screen):
 			self.hotkeyValue = config.misc.hotkey.blue_long.value
 			valueblueLong = InfoBarShowHide.functionHotkeyValue(self)
 		self["key_green"].setText(_(("ShowFirstInfoBar") if not valuegreen and not valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)")))
-		self["key_yellow"].setText(_(("AutoTimer") if not valueyellow and not valueyellowLong else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong else valueyellow if valueyellow else _("AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)")))
+		self["key_yellow"].setText(_(("Import AutoTimer") if not valueyellow and not valueyellowLong else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong else valueyellow if valueyellow else _("Import AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)")))
 		self["key_blue"].setText(_(("Extensions") if not valueblue and not valueblueLong else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblue and valueblueLong else valueblue if valueblue else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)")))
 
 
@@ -500,7 +500,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.hotkeyValue = config.misc.hotkey.blue_long.value
 			valueblueLong = self.functionHotkeyValue()
 		self["key_green"].setText(_(("Nothing") if not valuegreen and not valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)")))
-		self["key_yellow"].setText(_(("AutoTimer") if not valueyellow and not valueyellowLong else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong else valueyellow if valueyellow else _("AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)")))
+		self["key_yellow"].setText(_(("Import AutoTimer") if not valueyellow and not valueyellowLong else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong else valueyellow if valueyellow else _("Import AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)")))
 		self["key_blue"].setText(_(("Extensions") if not valueblue and not valueblueLong else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblue and valueblueLong else valueblue if valueblue else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)")))
 		self.__state = self.STATE_SHOWN
 		for x in self.onShowHideNotifiers:
