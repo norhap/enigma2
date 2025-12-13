@@ -1347,6 +1347,9 @@ msgstr "Actualizar automáticamente Cliente - Servidor"
 msgid "Automatically update Log-Fullscreen View"
 msgstr "Actualizar automáticamente el registro"
 
+msgid "Auto Timers"
+msgstr "Temporizadores Automáticos"
+
 msgid "A file from media is in use!"
 msgstr "Un archivo desde los medios está en uso!"
 
