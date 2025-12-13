@@ -1163,9 +1163,6 @@ msgstr "Añadir autotemporizador"
 msgid "Add autotimer\nNow (Press long)"
 msgstr "Añadir autotemporizador\nAhora (Pulse largo)"
 
-msgid "AutoTimer is not installed\nPrime time (Press long)"
-msgstr "AutoTemporizador no instalado\nHora máxima audiencia (Pulse largo)"
-
 msgid "Add bouquet"
 msgstr "Añadir bouquet"
 
@@ -1368,6 +1365,12 @@ msgstr "Autoinstalación completa"
 
 msgid "Autoinstalling please wait for packages being updated"
 msgstr "Instalación automática, espere actualizando los paquetes"
+
+msgid "AutoTimer"
+msgstr "Temporizadores Automáticos"
+
+msgid "AutoTimer is not installed\nPrime time (Press long)"
+msgstr "AutoTemporizador no instalado\nHora máxima audiencia (Pulse largo)"
 
 msgid "autotimers need a match attribute"
 msgstr "los Temporizadores Automáticos necesitan un atributo de coincidencia"
