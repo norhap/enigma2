@@ -1129,29 +1129,28 @@ class SystemMemoryInfo(Screen):
 				for ram in ramsystem.readlines():
 					if "Memory: " in ram:
 						ram = ram.split("Memory: ")[1]
-						if config.osd.language.value == "es_ES":
-							available = ram.split("K/")[0]
-							convertavailable = "GB" if int(available) >= 1000000 else "MB"
-							total = ram.split("/")[1].split("K")[0]
-							converttotal = "GB" if int(total) >= 1000000 else "MB"
-							kernel = ram.split("K kernel code")[0].split("(")[1]
-							rwdata = ram.split("K rwdata")[0].split(", ")[1]
-							rodata = ram.split("K rodata")[0].split("a, ")[1]
-							init = ram.split("K init")[0].split("rodata, ")[1]
-							rambss = ram.split("K bss")[0].split("init, ")[1]
-							reserved = ram.split("K reserved")[0].split("s, ")[1]
-							cmareserved = ram.split("K cma-reserved")[0].split("d, ")[1]
-							highmem = ram.split("K highmem")[0].split("cma-reserved, ")[1]
-							sizeAvailable = (int(available) / 1000000 if int(available) >= 1000000 else int(available) / 1000)
-							sizeTotal = (int(total) / 1000000 if int(total) >= 1000000 else int(total) / 1000)
-							sizeKernel = int(kernel) / 1000
-							sizerwdata = int(rwdata) / 1000
-							sizerodata = int(rodata) / 1000
-							sizeinit = int(init) / 1000
-							sizebss = int(rambss) / 1000
-							sizereserved = int(reserved) / 1000
-							sizecmareserved = int(cmareserved) / 1000
-							sizehighmem = int(highmem) / 1000
+						available = ram.split("K/")[0]
+						convertavailable = "GB" if int(available) >= 1000000 else "MB"
+						total = ram.split("/")[1].split("K")[0]
+						converttotal = "GB" if int(total) >= 1000000 else "MB"
+						kernel = ram.split("K kernel code")[0].split("(")[1]
+						rwdata = ram.split("K rwdata")[0].split(", ")[1]
+						rodata = ram.split("K rodata")[0].split("a, ")[1]
+						init = ram.split("K init")[0].split("rodata, ")[1]
+						rambss = ram.split("K bss")[0].split("init, ")[1]
+						reserved = ram.split("K reserved")[0].split("s, ")[1]
+						cmareserved = ram.split("K cma-reserved")[0].split("d, ")[1]
+						highmem = ram.split("K highmem")[0].split("cma-reserved, ")[1]
+						sizeAvailable = (int(available) / 1000000 if int(available) >= 1000000 else int(available) / 1000)
+						sizeTotal = (int(total) / 1000000 if int(total) >= 1000000 else int(total) / 1000)
+						sizeKernel = int(kernel) / 1000
+						sizerwdata = int(rwdata) / 1000
+						sizerodata = int(rodata) / 1000
+						sizeinit = int(init) / 1000
+						sizebss = int(rambss) / 1000
+						sizereserved = int(reserved) / 1000
+						sizecmareserved = int(cmareserved) / 1000
+						sizehighmem = int(highmem) / 1000
 						self.AboutText += _("Manufacturer distribution:\n") + str(sizeAvailable).replace(".", ",") + " " + f"{convertavailable}" + " " + _("Available") + " " + _("of") + " " + str(sizeTotal).replace(".", ",") + " " + f"{converttotal}" + " " + "Total" + "\n" + _("Reserved") + ":" + " " + str(sizereserved).replace(".", ",") + " " + "MB" + "\n" + _("Reserved to contiguous memory") + ":" + " " + str(sizecmareserved).replace(".", ",") + " " + "MB" + "\n" + _("Reserved for high memory") + ":" + " " + str(sizehighmem).replace(".", ",") + " " + "MB" + "\n" + _("Kernel") + ":" + " " + str(sizeKernel).replace(".", ",") + " " + "MB" + "\n" + _("rwdata") + ":" + " " + str(sizerwdata).replace(".", ",") + " " + "MB" + "\n" + _("rodata") + ":" + " " + str(sizerodata).replace(".", ",") + " " + "MB" + "\n" + _("init") + ":" + " " + str(sizeinit).replace(".", ",") + " " + "MB" + "\n" + _("bss") + ":" + " " + str(sizebss).replace(".", ",") + " " + "MB"
 						break
 		self["AboutScrollLabel"].setText(self.AboutText)
