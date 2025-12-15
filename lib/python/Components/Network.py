@@ -144,14 +144,14 @@ class Network:
 					if config.network.wol.value:
 						if "eth" in ifacename:
 							lines.append(f"iface {ifacename} inet dhcp")
-							lines.append("udhcpc_opts -T1 -t9")
+							lines.append("udhcpc_opts -S -T6 -t10")
 					else:
 						lines.append(f"iface {ifacename} inet dhcp")
-						lines.append("udhcpc_opts -T1 -t9")
+						lines.append("udhcpc_opts -S -T6 -t10")
 				else:
 					if iface["up"]:
 						lines.append(f"iface {ifacename} inet dhcp")
-						lines.append("udhcpc_opts -T1 -t9")
+						lines.append("udhcpc_opts -S -T6 -t10")
 			if not iface['dhcp']:
 				lines.append(f"iface {ifacename} inet static")
 				if "ip" in iface:
