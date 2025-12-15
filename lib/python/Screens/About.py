@@ -408,9 +408,9 @@ class BenchmarkInformation(InformationBase):
 		for line in lines:
 			if line.startswith("model name") or line.startswith("Processor"):  # HiSilicon use the label "Processor"!
 				self.cpuTypes.append([x.strip() for x in line.split(":")][1])
-		self.console.ePopen(("/usr/bin/dhry", "/usr/bin/dhry"), self.cpuBenchmarkFinished)
+		self.console.ePopen(["/usr/bin/dhry", "/usr/bin/dhry"], self.cpuBenchmarkFinished)
 		# Serialise the tests for better accuracy.
-		# self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
+		# self.console.ePopen(["/usr/bin/streambench", "/usr/bin/streambench"], self.ramBenchmarkFinished)
 		for callback in self.onInformationUpdated:
 			callback()
 
@@ -427,7 +427,7 @@ class BenchmarkInformation(InformationBase):
 				else:
 					self.cpuRating = _("Slow")
 		# Serialise the tests for better accuracy.
-		self.console.ePopen(("/usr/bin/streambench", "/usr/bin/streambench"), self.ramBenchmarkFinished)
+		self.console.ePopen(["/usr/bin/streambench", "/usr/bin/streambench"], self.ramBenchmarkFinished)
 		for callback in self.onInformationUpdated:
 			callback()
 
@@ -662,11 +662,11 @@ class Devices(Screen):
 					hddp = hddp.replace('Internal', 'ATA Bus ')
 				free = hdd.Totalfree()
 				if ((float(free) / 1024) / 1024) >= 1:
-					freeline = _("Free") + ":" + " " + str(round(((float(free) / 1024) / 1024), 2)) + "TB"
+					freeline = _("Free") + ":" + " " + str(round(((float(free) / 1024) / 1024), 2)) + " TB"
 				elif (free / 1024) >= 1:
-					freeline = _("Free") + ":" + " " + str(round((float(free) / 1024), 2)) + "GB"
+					freeline = _("Free") + ":" + " " + str(round((float(free) / 1024), 2)) + " GB"
 				elif free >= 1:
-					freeline = _("Free") + ":" + " " + str(free) + "MB"
+					freeline = _("Free") + ":" + " " + str(free) + " MB"
 				elif "Generic(STORAGE" in hddp:
 					continue
 				else:
@@ -675,7 +675,7 @@ class Devices(Screen):
 				self.list.append(line)
 		self.list = '\n'.join(self.list)
 		self["hdd"].setText(self.list)
-		self.Console.ePopen("df -mh | grep -v '^Filesystem'", self.Stage1Complete)
+		self.Console.ePopen(["df -mh | grep -v '^Filesystem'"], self.Stage1Complete)
 
 	def Stage1Complete(self, result, retval, extra_args=None):
 		result = result.replace('\n                        ', ' ').split('\n')
@@ -879,8 +879,8 @@ class SystemNetworkInfo(Screen):
 				# 	self.AboutText += _("IPv4 public address:") + "\t" + str(ipv4address) + "\n"
 				# except Exception:
 				# 	pass
-			self.console.ePopen(f'/sbin/ifconfig {self.iface}') if not fileHas("/etc/inetd.conf", "tcp6") else self.console.ePopen(f'/sbin/ifconfig {self.iface}', self.getIPv6Address)
-			self.console.ePopen(f'ethtool {self.iface}', self.SpeedFinished)
+			self.console.ePopen(['/sbin/ifconfig ' + self.iface] if not fileHas("/etc/inetd.conf", "tcp6") else ['/sbin/ifconfig ' + self.iface], self.getIPv6Address)
+			self.console.ePopen(['ethtool ' + self.iface], self.SpeedFinished)
 		else:
 			self.exit()
 
@@ -1114,7 +1114,7 @@ class SystemMemoryInfo(Screen):
 					self.AboutText += _("Free swap:") + "\t" + "\t" + SwapFree[1][0:1] + " GB" + "\n"
 		self["actions"].setEnabled(False)
 		self.Console = Console()
-		self.Console.ePopen("df -mh / | grep -v '^Filesystem'", self.Stage1Complete2)
+		self.Console.ePopen(["df -mh / | grep -v '^Filesystem'"], self.Stage1Complete2)
 
 	def Stage1Complete2(self, result, retval, extra_args=None):
 		flash = str(result).replace('\n', '')
