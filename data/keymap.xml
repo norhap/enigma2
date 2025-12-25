@@ -846,6 +846,7 @@
 
 	<map context="InfobarTimeshiftActivateActions">
 		<key id="KEY_PREVIOUSSONG" mapto="timeshiftActivateEnd" flags="m" />
+		<key id="KEY_PLAY" mapto="timeshiftActivateEndAndPause" flags="m" />
 		<key id="KEY_PLAYPAUSE" mapto="timeshiftActivateEndAndPause" flags="m" />
 		<key id="KEY_PAUSE" mapto="timeshiftActivateEndAndPause" flags="m" />
 		<key id="KEY_REWIND" mapto="timeshiftActivateEnd" flags="m" />
