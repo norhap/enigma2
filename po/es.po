@@ -12570,8 +12570,8 @@ msgstr "Selecciona sintonizador"
 msgid "Timer edit"
 msgstr "Editar temporizador"
 
-msgid "Timeshift Actived"
-msgstr "Timeshift Activado"
+msgid "Timeshift Active"
+msgstr "Timeshift Activo"
 
 msgid "Translation:"
 msgstr "Traducción:"

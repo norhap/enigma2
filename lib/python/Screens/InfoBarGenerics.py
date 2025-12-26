@@ -2009,7 +2009,7 @@ class InfoBarPVRState:
 			self._mayShow()
 
 
-class TimeshiftLive(Screen):
+class TimeshiftActive(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 
@@ -2017,12 +2017,12 @@ class TimeshiftLive(Screen):
 class InfoBarTimeshiftState(InfoBarPVRState):
 	def __init__(self):
 		InfoBarPVRState.__init__(self, screen=TimeshiftState, force_show=True)
-		self.timeshiftLiveScreen = self.session.instantiateDialog(TimeshiftLive)
-		self.onHide.append(self.timeshiftLiveScreen.hide)
+		self.timeshiftActiveScreen = self.session.instantiateDialog(TimeshiftActive)
+		self.onHide.append(self.timeshiftActiveScreen.hide)
 		if isStandardInfoBar(self):
-			self.secondInfoBarScreen and self.secondInfoBarScreen.onShow.append(self.timeshiftLiveScreen.hide)
-			self.secondInfoBarScreenSimple and self.secondInfoBarScreenSimple.onShow.append(self.timeshiftLiveScreen.hide)
-		self.timeshiftLiveScreen.hide()
+			self.secondInfoBarScreen and self.secondInfoBarScreen.onShow.append(self.timeshiftActiveScreen.hide)
+			self.secondInfoBarScreenSimple and self.secondInfoBarScreenSimple.onShow.append(self.timeshiftActiveScreen.hide)
+		self.timeshiftActiveScreen.hide()
 		self.__hideTimer = eTimer()
 		self.__hideTimer.callback.append(self.__hideTimeshiftState)
 		self.onFirstExecBegin.append(self.pvrStateDialog.show)
@@ -2036,19 +2036,19 @@ class InfoBarTimeshiftState(InfoBarPVRState):
 					self.secondInfoBarScreenSimple.hide()
 			if self.timeshiftActivated():
 				self.pvrStateDialog.show()
-				self.timeshiftLiveScreen.hide()
+				self.timeshiftActiveScreen.hide()
 			elif self.showTimeshiftState:
 				self.pvrStateDialog.hide()
-				self.timeshiftLiveScreen.show()
+				self.timeshiftActiveScreen.show()
 				self.showTimeshiftState = False
-			if self.seekstate == self.SEEK_STATE_PLAY and config.usage.infobar_timeout.index and (self.pvrStateDialog.shown or self.timeshiftLiveScreen.shown):
+			if self.seekstate == self.SEEK_STATE_PLAY and config.usage.infobar_timeout.index and (self.pvrStateDialog.shown or self.timeshiftActiveScreen.shown):
 				self.__hideTimer.startLongTimer(config.usage.infobar_timeout.index)
 		else:
 			self.__hideTimeshiftState()
 
 	def __hideTimeshiftState(self):
 		self.pvrStateDialog.hide()
-		self.timeshiftLiveScreen.hide()
+		self.timeshiftActiveScreen.hide()
 
 
 class InfoBarShowMovies:
