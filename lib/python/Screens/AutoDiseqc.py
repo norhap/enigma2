@@ -23,16 +23,16 @@ class AutoDiseqc(ConfigListScreen, Screen):
 	]
 
 	universal_central_sats_frequencies = [
-		# Astra 19.2E ZDF
+		# Astra 19.2E NTV
 		(
-			11954,
+			12188,
 			27500,
 			eDVBFrontendParametersSatellite.Polarisation_Horizontal,
 			eDVBFrontendParametersSatellite.FEC_3_4,
 			eDVBFrontendParametersSatellite.Inversion_Off,
 			192,
 			eDVBFrontendParametersSatellite.System_DVB_S,
-			eDVBFrontendParametersSatellite.Modulation_Auto,
+			eDVBFrontendParametersSatellite.Modulation_QPSK,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
 			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
@@ -40,7 +40,7 @@ class AutoDiseqc(ConfigListScreen, Screen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			1079,
+			1089,
 			1,
 			"Astra 1 19.2°E"
 		),
@@ -177,9 +177,9 @@ class AutoDiseqc(ConfigListScreen, Screen):
 	]
 
 	universal_west_sats_frequencies = [
-		# Thor 0.8W Sky News
+		# Thor  3592 CT24
 		(
-			12418,
+			12072,
 			28000,
 			eDVBFrontendParametersSatellite.Polarisation_Vertical,
 			eDVBFrontendParametersSatellite.FEC_7_8,
@@ -194,8 +194,8 @@ class AutoDiseqc(ConfigListScreen, Screen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			20,
-			70,
+			706,
+			1536,
 			"Thor 5/6/7 0.8°W"
 		),
 		# Eutelsat 5.0W Fransat
@@ -243,16 +243,16 @@ class AutoDiseqc(ConfigListScreen, Screen):
 	]
 
 	circular_sats_frequencies = [
-		# Express AMU1 36.0E NTV Plus
+		# Express AMU1 360 NHK World Japan
 		(
-			11785,
+			12341,
 			27500,
-			eDVBFrontendParametersSatellite.Polarisation_CircularRight,
+			eDVBFrontendParametersSatellite.Polarisation_CircularLeft,
 			eDVBFrontendParametersSatellite.FEC_3_4,
 			eDVBFrontendParametersSatellite.Inversion_Off,
 			360,
-			eDVBFrontendParametersSatellite.System_DVB_S2,
-			eDVBFrontendParametersSatellite.Modulation_8PSK,
+			eDVBFrontendParametersSatellite.System_DVB_S,
+			eDVBFrontendParametersSatellite.Modulation_Auto,
 			eDVBFrontendParametersSatellite.RollOff_auto,
 			eDVBFrontendParametersSatellite.Pilot_Unknown,
 			eDVBFrontendParametersSatellite.No_Stream_Id_Filter,
@@ -260,7 +260,7 @@ class AutoDiseqc(ConfigListScreen, Screen):
 			eDVBFrontendParametersSatellite.PLS_Default_Gold_Code,
 			eDVBFrontendParametersSatellite.No_T2MI_PLP_Id,
 			eDVBFrontendParametersSatellite.T2MI_Default_Pid,
-			13,
+			11,
 			112,
 			"Express AMU1 36.0°E"
 		),
