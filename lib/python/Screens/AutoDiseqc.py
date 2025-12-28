@@ -173,7 +173,6 @@ class AutoDiseqc(ConfigListScreen, Screen):
 			64,
 			"Eutelsat 16A 16.0°E"
 		),
-
 	]
 
 	universal_west_sats_frequencies = [
