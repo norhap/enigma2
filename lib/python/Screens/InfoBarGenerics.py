@@ -2885,6 +2885,11 @@ class InfoBarInstantRecord:
 			if answer:
 				self.session.nav.RecordTimer.removeEntry(self.recording[entry])
 				remove = self.recording.remove(self.recording[entry])
+			else:
+				if entry is not None and entry != -1:
+					msg = _("Do you want to delete this recording?") + "\n"
+					msg += self.recording[entry].name + "\n"
+					self.session.openWithCallback(confirmDeleteRecording, MessageBox, msg, MessageBox.TYPE_YESNO)
 
 		def confirmDeleteRecording(answer=False):
 			if answer:
@@ -2892,17 +2897,12 @@ class InfoBarInstantRecord:
 				if self.deleteRecording:
 					self.moveToTrash(self.recording[entry])
 				self.recording.remove(self.recording[entry])
-			else:
-				if entry is not None and entry != -1:
-					msg = _("Do you want to stop this recording?") + "\n"
-					msg += self.recording[entry].name + "\n"
-					self.session.openWithCallback(stopRecordingOrCancel, MessageBox, msg, MessageBox.TYPE_YESNO)
 
 		if entry is not None and entry != -1:
 			if self.deleteRecording:
-				msg = _("want to stop and delete this recording?") + "\n"
-			msg += self.recording[entry].name + "\n"
-			self.session.openWithCallback(confirmDeleteRecording, MessageBox, msg, MessageBox.TYPE_YESNO)
+				msg = _("Do you want to stop this recording?") + "\n"
+			msg += self.recording[entry].name + "\n" + _("Choose \"No\" to delete it")
+			self.session.openWithCallback(stopRecordingOrCancel, MessageBox, msg, MessageBox.TYPE_YESNO)
 
 	def stopDeleteSingleEntryRecording(self, entry=-1):
 		def confirmDeleteRecording(answer=False):
@@ -2914,7 +2914,7 @@ class InfoBarInstantRecord:
 
 		if entry is not None and entry != -1:
 			if self.deleteRecording:
-				msg = _("want to stop and delete this recording?") + "\n"
+				msg = _("Do you want to stop and delete this recording?") + "\n"
 			msg += self.recording[entry].name + "\n"
 			self.session.openWithCallback(confirmDeleteRecording, MessageBox, msg, MessageBox.TYPE_YESNO)
 
@@ -2928,7 +2928,7 @@ class InfoBarInstantRecord:
 						self.moveToTrash(entry[0])
 
 		if self.deleteRecording:
-			msg = _("want to stop and delete this recordings?") + "\n"
+			msg = _("Do you want to stop and delete this recording?") + "\n"
 		for entry in list:
 			msg += entry[0].name + "\n"
 		self.session.openWithCallback(confirmDeleteAllRecordings, MessageBox, msg, MessageBox.TYPE_YESNO)
@@ -3198,7 +3198,7 @@ class InfoBarInstantRecord:
 				((_("Change recording (duration)"), "changeduration"),
 				(_("Change recording (add time)"), "addrecordingtime"),
 				(_("Change recording (endtime)"), "changeendtime"),)
-			list += ((_("Stop recording") if len(self.recording) == 1 else _("Delete or stop recordings"), "stop"),)
+			list += ((_("Stop recording") if len(self.recording) == 1 else _("Stop or delete recordings"), "stop"),)
 			if config.usage.movielist_trashcan.value:
 				if len(self.recording) == 1:
 					list += ((_("Stop and delete recording"), "stopdelete"),)

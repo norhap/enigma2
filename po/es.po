@@ -1505,6 +1505,9 @@ msgstr "Cambiar de bouquet en zapeo rápido"
 msgid "Change view mode"
 msgstr "Cambiar el modo de visualización"
 
+msgid "Choose \"No\" to delete it"
+msgstr "Seleccione \"No\" para eliminarla"
+
 msgid "Choose whether AC3 sound tracks should be downmixed to stereo."
 msgstr "Elegir si las pistas de sonido AC3 deben mezclarse a estéreo."
 
@@ -3534,9 +3537,6 @@ msgstr "Eliminar archivo"
 msgid "Delete image"
 msgstr "Eliminar imagen"
 
-msgid "Delete or stop recordings"
-msgstr "Eliminar o detener grabaciones"
-
 msgid "Delete playlist entry"
 msgstr "Eliminar la entrada de la lista de reproducción"
 
@@ -3770,6 +3770,12 @@ msgid ""
 msgstr ""
 "¿Quiere chequear el sistema el sistema de archivos?\n"
 "Esto puede durar mucho tiempo!"
+
+msgid "Do you want to delete this recording?"
+msgstr "¿Quieres eliminar esta grabación?"
+
+msgid "Do you want to stop and delete this recording?"
+msgstr "¿Quieres detener y eliminar esta grabación?"
 
 #, python-format
 msgid "Do you want to delete %s?"
@@ -9275,9 +9281,6 @@ msgstr "Detener"
 msgid "Stop edit mode"
 msgstr "Detener modo movimiento"
 
-msgid "Stop PiP"
-msgstr "Detener PiP"
-
 msgid "Stop all streams"
 msgstr "Detener todos los streams"
 
@@ -9298,6 +9301,12 @@ msgstr "Detener el stream actual"
 
 msgid "Stop entry"
 msgstr "Detener la entrada"
+
+msgid "Stop or delete recordings"
+msgstr "Detener o eliminar grabaciones"
+
+msgid "Stop PiP"
+msgstr "Detener PiP"
 
 msgid "Stop play TV"
 msgstr "Detener reproducción de TV"
@@ -18828,9 +18837,6 @@ msgstr "Actualizando caché"
 
 msgid "Updating cache, please wait..."
 msgstr "Actualizando caché, por favor espere..."
-
-msgid "want to stop and delete this recording?"
-msgstr "¿Quieres detener y eliminar esta grabación?"
 
 msgid "want to stop and delete this recordings?"
 msgstr "¿Quieres detener y eliminar estas grabaciones?"
