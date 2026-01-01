@@ -2928,7 +2928,7 @@ class InfoBarInstantRecord:
 						self.moveToTrash(entry[0])
 
 		if self.deleteRecording:
-			msg = _("Do you want to stop and delete this recording?") + "\n"
+			msg = _("Do you want to stop and delete this recordings?") + "\n"
 		for entry in list:
 			msg += entry[0].name + "\n"
 		self.session.openWithCallback(confirmDeleteAllRecordings, MessageBox, msg, MessageBox.TYPE_YESNO)

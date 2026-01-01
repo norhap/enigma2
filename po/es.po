@@ -3777,6 +3777,12 @@ msgstr "¿Quieres eliminar esta grabación?"
 msgid "Do you want to stop and delete this recording?"
 msgstr "¿Quieres detener y eliminar esta grabación?"
 
+msgid "Do you want to stop and delete this recordings?"
+msgstr "¿Quieres detener y eliminar estas grabaciones?"
+
+msgid "Do you want to stop this recording?"
+msgstr "¿Quieres detener esta grabación?"
+
 #, python-format
 msgid "Do you want to delete %s?"
 msgstr "¿Quiere eliminar %s?"
@@ -3870,9 +3876,6 @@ msgstr ""
 "¿Quieres parar %s?\n"
 "\n"
 "Para reactivar %s, ingrese a Vision Softcam o Configuración de Softcam."
-
-msgid "Do you want to stop this recording?"
-msgstr "¿Quieres detener esta grabación?"
 
 #, python-format
 msgid "Do you want to update your %s %s?"
