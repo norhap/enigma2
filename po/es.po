@@ -7000,12 +7000,6 @@ msgstr "Ajustes Control Parental"
 msgid "Parental Control Setup"
 msgstr "Ajustes Control Parental"
 
-msgid "Partial"
-msgstr "Similar completo"
-
-msgid "Partial EPG"
-msgstr "Similar completo"
-
 msgid "Passthrough audio handling delay AC3"
 msgstr "Retardo manejo de audio Passthrough AC3"
 
@@ -14835,6 +14829,9 @@ msgstr "Embebido"
 
 msgid "Extended PID info"
 msgstr "Extender info PID"
+
+msgid "Extended similar"
+msgstr "Similar extendido"
 
 msgid "Other Subtitles & lang"
 msgstr "Otros Subtítulos lenguaje"

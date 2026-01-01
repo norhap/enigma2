@@ -146,7 +146,7 @@ class EventViewBase:
 		self["datetime"].setText("%s - %s" % (strftime("%s, %s" % (config.usage.date.daylong.value, config.usage.time.short.value), beginTime), strftime(config.usage.time.short.value, endTime)))
 		self["duration"].setText(_("%d min") % (duration // 60))
 		self["key_red"].setText("")
-		self["key_yellow"].setText(_("Single EPG")) if self.singleEPGCB else self["key_yellow"].setText(_("Partial"))
+		self["key_yellow"].setText(_("Single EPG")) if self.singleEPGCB else self["key_yellow"].setText(_("Extended similar"))
 		self["similarActions"].setEnabled(False)
 		if self.similarBroadcastTimer:
 			self.similarBroadcastTimer.start(25, True)
