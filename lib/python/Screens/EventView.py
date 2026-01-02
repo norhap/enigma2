@@ -146,7 +146,6 @@ class EventViewBase:
 		self["datetime"].setText("%s - %s" % (strftime("%s, %s" % (config.usage.date.daylong.value, config.usage.time.short.value), beginTime), strftime(config.usage.time.short.value, endTime)))
 		self["duration"].setText(_("%d min") % (duration // 60))
 		self["key_red"].setText("")
-		self["key_yellow"].setText(_("Single EPG")) if self.singleEPGCB else self["key_yellow"].setText(_("Extended similar"))
 		self["similarActions"].setEnabled(False)
 		if self.similarBroadcastTimer:
 			self.similarBroadcastTimer.start(25, True)
@@ -311,6 +310,8 @@ class EventViewBase:
 			if self.similarEPGCB:
 				self["key_red"].text = _("Similar")
 				self["similarActions"].setEnabled(True)
+		if not self["key_yellow"].text:
+			self["key_yellow"].text = _("Partial EPG")
 
 	def openSimilarList(self):
 		id = self.event and self.event.getEventId()
