@@ -480,6 +480,12 @@ msgstr "centrado"
 msgid "centered, wrapped"
 msgstr "centrado, envuelto"
 
+msgid "Channel down"
+msgstr "Canal abajo"
+
+msgid "Channel up"
+msgstr "Canal arriba"
+
 msgid "chapters"
 msgstr "capítulos"
 
@@ -1129,6 +1135,9 @@ msgstr "Activar configuración actual"
 
 msgid "Activate movement"
 msgstr "Activar movimiento"
+
+msgid "Activate PiP"
+msgstr "Activar PiP"
 
 msgid "Activate timeshift End"
 msgstr "Activar final de Timeshift"
@@ -2453,6 +2462,9 @@ msgstr "BT 709"
 msgid "Back"
 msgstr "Atrás"
 
+msgid "Back/Recall"
+msgstr "Atrás/Recordar"
+
 msgid "Background"
 msgstr "Segundo plano"
 
@@ -3250,6 +3262,9 @@ msgstr "Consulte la hoja de especificaciones de su motor para obtener esta infor
 msgid "Content does not fit on DVD!"
 msgstr "El contenido no cabe en el DVD!"
 
+msgid "Context"
+msgstr "Contexto"
+
 msgid "Continue"
 msgstr "Continuar"
 
@@ -3929,6 +3944,9 @@ msgstr "Instalar plugins"
 msgid "Init Vu+ MultiBoot"
 msgstr "Inicializar Vu+ MultiBoot"
 
+msgid "Down"
+msgstr "Abajo"
+
 msgid "Downloading"
 msgstr "Descargando"
 
@@ -3952,6 +3970,9 @@ msgstr "Corte final"
 
 msgid "EPG"
 msgstr "EPG"
+
+msgid "EPG/Guide"
+msgstr "EPG/Guía"
 
 msgid ""
 "EPG key : Switch to quad PiP entry\n"
@@ -4615,6 +4636,9 @@ msgstr "Islas Feroe"
 msgid "Fast"
 msgstr "Rápido"
 
+msgid "Fastforward"
+msgstr "Avance rápido"
+
 msgid "Fast Channel Change"
 msgstr "Cambio Rápido Canal"
 
@@ -5024,6 +5048,9 @@ msgstr "Ajustes HDMI-CEC"
 
 msgid "HDMI-CEC Settings"
 msgstr "Ajustes HDMI-CEC"
+
+msgid "History"
+msgstr "Historial"
 
 msgid "HistorialZapSelector"
 msgstr "Ajustes Historial Zap"
@@ -5980,6 +6007,9 @@ msgstr "Títulos vinculados con un menú de DVD"
 msgid "List Fav"
 msgstr "Lista Favoritos"
 
+msgid "List/File"
+msgstr "Lista/Archivo"
+
 msgid "Mode PiP"
 msgstr "Modo PiP"
 
@@ -6149,6 +6179,9 @@ msgstr "Fabricante"
 msgid "Manufacturer distribution:\n"
 msgstr "Distribución del fabricante:\n"
 
+msgid "Mark/Portal/Playlist"
+msgstr "Marca/Portal/Lista de reproducción"
+
 msgid "Marker Actions"
 msgstr "Acciones de marcador"
 
@@ -6293,6 +6326,9 @@ msgstr "Tiempo de espera del motor"
 
 msgid "Mount"
 msgstr "Montar"
+
+msgid "Mouse"
+msgstr "Ratón"
 
 msgid "Move"
 msgstr "Mover"
@@ -6517,6 +6553,9 @@ msgstr "Nueva Zelanda"
 
 msgid "News Current Affairs"
 msgstr "Noticias Actualidades"
+
+msgid "Next"
+msgstr "Siguiente"
 
 msgctxt "button label, 'next screen'"
 msgid "Next"
@@ -7079,6 +7118,9 @@ msgstr "Islas Pitcairn"
 msgid "Play"
 msgstr "Play"
 
+msgid "Playpause"
+msgstr "PlayPausa"
+
 msgid "Play DVD"
 msgstr "Play DVD"
 
@@ -7470,6 +7512,9 @@ msgstr "Menú de vista previa"
 
 msgid "Preview selected channel"
 msgstr "Vista previa del canal seleccionado"
+
+msgid "Previous"
+msgstr "Previo"
 
 msgid "Primary DNS:"
 msgstr "DNS Primario:"
@@ -8986,8 +9031,17 @@ msgstr "Skin"
 msgid "Skins"
 msgstr "Skins"
 
+msgid "Skip back"
+msgstr "Saltar hacia atrás"
+
 msgid "Skip empty services"
 msgstr "Omitir eventos vacíos"
+
+msgid "Skip forward"
+msgstr "Saltar hacia adelante"
+
+msgid "Sleep"
+msgstr "Dormir"
 
 msgid "SleepTimer Configuration"
 msgstr "Configuración del temporizador de descanso"
@@ -11180,6 +11234,9 @@ msgstr "Eliminar lo de después de esta posición"
 
 msgid "Remove bookmarks in cuts"
 msgstr "Eliminar marcadores en cortes"
+
+msgid "Rewind"
+msgstr "Rebobinar"
 
 msgid "Preserve bookmarks in cuts"
 msgstr "Conservar marcadores en cortes"
@@ -17298,6 +17355,9 @@ msgstr "Ajuste skin"
 msgid "Configure color of the LED when is operation."
 msgstr "Configure el color del LED frontal cuando está en funcionamiento."
 
+msgid "Video Mode"
+msgstr "Modo de vídeo"
+
 msgid "violet"
 msgstr "violeta"
 
@@ -17985,6 +18045,9 @@ msgstr "Ajustes Timeshift"
 
 msgid "Teletext Actions"
 msgstr "Acciones Teletexto"
+
+msgid "Up"
+msgstr "Arriba"
 
 msgid "Use best / Controlled by HDMI"
 msgstr "Usar mejor controlado por HDMI"
