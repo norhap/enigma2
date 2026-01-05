@@ -149,7 +149,7 @@ class ActionMap:
 			}
 		else:
 			self.legacyActions = {}
-		if undefinedAction:
+		if undefinedAction and 'HotkeyActions' not in self.contexts:
 			print(_("[ActionMap] Missing actions in keymap, missing context in this list ->'%s' for mapto='%s'.") % ("', '".join(sorted(self.contexts)), "', '".join(sorted(list(self.actions.keys())))))
 
 	def setEnabled(self, enabled):
