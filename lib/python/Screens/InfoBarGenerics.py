@@ -3010,11 +3010,11 @@ class InfoBarInstantRecord:
 				if recording.setAutoincreaseEnd():
 					self.session.nav.RecordTimer.record(recording)
 					self.recording.append(recording)
-					AddPopup(_("Record time limited due to conflicting timer %s") % name_date, MessageBox.TYPE_INFO, timeout=5)
+					AddPopup(_("Record time limited due to conflicting timer") + "\n" + f"{name_date}", MessageBox.TYPE_INFO, timeout=5)
 				else:
-					AddPopup(_("Could not record due to conflicting timer %s") % name, MessageBox.TYPE_INFO, timeout=5)
+					AddPopup(_("Could not record due to conflicting timer") + "\n" + f"{name}", MessageBox.TYPE_INFO, timeout=5)
 			if serviceref:
-				AddPopup(_("Could not record due to invalid service %s") % serviceref, MessageBox.TYPE_INFO, timeout=5)
+				AddPopup(_("Could not record due to invalid service") + " " + f"{ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()}", MessageBox.TYPE_INFO, timeout=5)
 			elif isPluginInstalled("ServiceMP3"):
 				AddPopup(_("Could not record due to busy tuner"), MessageBox.TYPE_INFO, timeout=5)
 			else:
