@@ -3310,17 +3310,8 @@ msgstr "No se puso cargar medio! No hay disco insertado?"
 msgid "Could not open Picture in Picture"
 msgstr "No se pudo abrir PiP"
 
-msgid "Could not record due to conflicting timer"
-msgstr "No se pudo grabar por conflicto en temporizador"
-
-msgid "Could not record due to invalid service"
-msgstr "No se pudo grabar por canal inválido"
-
 msgid "Could not record due to busy tuner"
 msgstr "No se pudo grabar debido a que el sintonizador está ocupado"
-
-msgid "Recording could not be done because the serviceMP3 player is not installed"
-msgstr "No se pudo grabar debido a que el reproductor serviceMP3 no está instalado"
 
 msgid "Country"
 msgstr "País"
@@ -7693,8 +7684,14 @@ msgstr "Grabación"
 msgid "Recording Actions"
 msgstr "Acciones de Grabación"
 
+msgid "Recording could not be done because the serviceMP3 player is not installed"
+msgstr "No se pudo grabar debido a que el reproductor serviceMP3 no está instalado"
+
 msgid "Recording failed: Storage device free size %d MB."
 msgstr "Grabación fallida: Tamaño libre del dispositivo de almacenamiento %d MB."
+
+msgid "Recording is not possible in"
+msgstr "La grabación no es posible en"
 
 msgid "Recording in progress"
 msgstr "Grabación en progreso"
@@ -9748,6 +9745,9 @@ msgstr "Actualmente no hay acciones pendientes."
 
 msgid "There are no updates available."
 msgstr "No hay actualizaciones disponibles."
+
+msgid "There is a conflict with this timer"
+msgstr "Hay un conflicto con este temporizador"
 
 msgid "There is no service with this number"
 msgstr "No existe canal con este número"

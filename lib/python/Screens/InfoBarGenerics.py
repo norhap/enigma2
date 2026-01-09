@@ -3011,14 +3011,13 @@ class InfoBarInstantRecord:
 					self.session.nav.RecordTimer.record(recording)
 					self.recording.append(recording)
 					AddPopup(_("Record time limited due to conflicting timer") + "\n" + f"{name_date}", MessageBox.TYPE_INFO, timeout=5)
+				elif serviceref:
+					AddPopup(_("Recording is not possible in") + " " + f"{ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()}\n" + _("There is a conflict with this timer") + ":\n" + f"{name}", MessageBox.TYPE_INFO, timeout=8)
+			if not serviceref:
+				if isPluginInstalled("ServiceMP3"):
+					AddPopup(_("Could not record due to busy tuner"), MessageBox.TYPE_INFO, timeout=5)
 				else:
-					AddPopup(_("Could not record due to conflicting timer") + "\n" + f"{name}", MessageBox.TYPE_INFO, timeout=5)
-			if serviceref:
-				AddPopup(_("Could not record due to invalid service") + " " + f"{ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference()).getServiceName()}", MessageBox.TYPE_INFO, timeout=5)
-			elif isPluginInstalled("ServiceMP3"):
-				AddPopup(_("Could not record due to busy tuner"), MessageBox.TYPE_INFO, timeout=5)
-			else:
-				AddPopup(_("Recording could not be done because the serviceMP3 player is not installed") if not isPluginInstalled("ServiceApp") else _("It could not be recorded with the ServiceApp player"), MessageBox.TYPE_INFO, timeout=5)
+					AddPopup(_("Recording could not be done because the serviceMP3 player is not installed") if not isPluginInstalled("ServiceApp") else _("It could not be recorded with the ServiceApp player"), MessageBox.TYPE_INFO, timeout=5)
 			recording.autoincrease = False
 
 	def isInstantRecordRunning(self):
