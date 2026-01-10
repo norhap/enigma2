@@ -15163,20 +15163,6 @@ msgstr "Último ECM"
 msgid "ECM-Time"
 msgstr "Tiempo-ECM"
 
-msgid ""
-"File oscam.conf not found.\n"
-"Please enter username/password manually."
-msgstr ""
-"Archivo oscam.conf no encontrado.\n"
-"Introducir usuario/contraseña manualmente."
-
-msgid ""
-"File ncam.conf not found.\n"
-"Please enter username/password manually."
-msgstr ""
-"Archivo ncam.conf no encontrado.\n"
-"Introducir usuario/contraseña manualmente."
-
 msgid "Hops"
 msgstr "Saltos"
 
