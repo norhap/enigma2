@@ -162,7 +162,6 @@ class subservice:
 
 
 class InfoBarStreamRelay:
-
 	FILENAME = "/etc/enigma2/whitelist_streamrelay"
 
 	def __init__(self):
@@ -176,7 +175,7 @@ class InfoBarStreamRelay:
 		return list(set([match(r"([0-9A-F]+:){10}", line.strip()).group(0) for line in data if line and match(r"^(?:[0-9A-F]+:){10}", line.strip())]))
 
 	def check(self, nav, service):
-		return nav.getCurrentlyPlayingServiceReference() and service.toCompareString() in self.__services
+		return (service or nav.getCurrentlyPlayingServiceReference()) and service.toCompareString() in self.__services
 
 	def write(self):
 		self.__services.sort(key=lambda ref: (int((x := ref.split(":"))[6], 16), int(x[5], 16), int(x[4], 16), int(x[3], 16)))
@@ -190,14 +189,17 @@ class InfoBarStreamRelay:
 			self.__services = list(set(serviceList + self.__services))
 			self.write()
 		else:
-			servicestring = service.toCompareString()
-			if servicestring in self.__services:
-				self.__services.remove(servicestring)
-			else:
-				self.__services.append(servicestring)
-			if nav.getCurrentlyPlayingServiceReference():
-				nav.restartService()
-			self.write()
+			service = service or nav.getCurrentlyPlayingServiceReference()
+			if service:
+				servicestring = service.toCompareString()
+				currentlyPlaying = nav.getCurrentlyPlayingServiceReference()
+				if servicestring in self.__services:
+					self.__services.remove(servicestring)
+				else:
+					self.__services.append(servicestring)
+				self.write()
+				if currentlyPlaying and currentlyPlaying == service:
+					nav.restartService()
 
 	def __getData(self):
 		return self.__services
@@ -209,20 +211,19 @@ class InfoBarStreamRelay:
 	data = property(__getData, __setData)
 
 	def streamrelayChecker(self, playref):
-		is_stream_relay = False
 		if hasattr(playref, "toCompareString"):
 			playrefstring = playref.toCompareString()
 			if "%3a//" not in playrefstring and playrefstring in self.__services:
 				url = f'http://{".".join("%d" % d for d in config.misc.softcam_streamrelay_url.value)}:{config.misc.softcam_streamrelay_port.value}/'
 				if "127.0.0.1" in url:
-					playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
+					playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(":"))])
 				else:
 					playrefmod = playrefstring
 				playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), ServiceReference(playref).getServiceName()))
 				print(f"[{self.__class__.__name__}] Play service {playref.toCompareString()} via streamrelay")
-				is_stream_relay = True
 				playref.setCompareSref(playrefstring, True)
-		return playref, is_stream_relay
+				return playref, True
+		return playref, False
 
 	def checkService(self, service):
 		return service and service.toCompareString() in self.__services
