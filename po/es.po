@@ -1805,9 +1805,6 @@ msgstr "Retardo en milisegundos entre el desplazamiento del caracteres en displa
 msgid "Descramble receiving http streams"
 msgstr "Descifrar recibiendo streams http"
 
-msgid "Descramble sending http streams"
-msgstr "Descifrar enviando streams http"
-
 msgid "DiSEqC"
 msgstr "DiSEqC"
 
@@ -18886,6 +18883,9 @@ msgstr "Actualizando caché"
 
 msgid "Updating cache, please wait..."
 msgstr "Actualizando caché, por favor espere..."
+
+msgid "Unscramble http streams from the server"
+msgstr "Descifrar streams http desde el servidor"
 
 msgid "want to stop and delete this recordings?"
 msgstr "¿Quieres detener y eliminar estas grabaciones?"
