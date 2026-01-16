@@ -179,7 +179,7 @@ class ChannelContextMenu(Screen):
 		menu.append(ChoiceEntryComponent("menu", (_("Settings"), self.openSetup)))
 		self["menu"] = ChoiceList(menu)
 		if isPluginInstalled("IPToSAT"):
-			if resolveFilename(SCOPE_CONFIG, "iptosat.json") and config.plugins.IPToSAT.enable.value:
+			if exists(resolveFilename(SCOPE_CONFIG, "iptosat.json")) and config.plugins.IPToSAT.enable.value:
 				with open(resolveFilename(SCOPE_CONFIG, "iptosat.json", "r")) as fr:
 					for refiptosat in fr.readlines():
 						if "sref" in refiptosat and current.toString() in refiptosat:
