@@ -6,6 +6,7 @@ from Components.ActionMap import HelpableActionMap
 from Components.config import ConfigNothing, NoSave, ConfigSelection, config
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
+from Components.SystemInfo import BoxInfo, getSysSoftcam
 from Screens.Setup import Setup
 from Screens.InfoBarGenerics import streamrelay
 from Tools.camcontrol import CamControl
@@ -148,6 +149,15 @@ class SoftcamSetup(Setup):
 		(newEcmFound, ecmInfo) = self.ecminfo.getEcm()
 		if newEcmFound:
 			self["info"].setText("".join(ecmInfo))
+		if getSysSoftcam() == "OSCam":
+			BoxInfo.setItem("ReadOscamConf", True)
+			BoxInfo.setItem("ReadNcamConf", False)
+		elif getSysSoftcam() == "NCam":
+			BoxInfo.setItem("ReadNcamConf", True)
+			BoxInfo.setItem("ReadOscamConf", False)
+		else:
+			BoxInfo.setItem("ReadNcamConf", False)
+			BoxInfo.setItem("ReadOscamConf", False)
 
 
 class StreamRelaySetup(Setup):
