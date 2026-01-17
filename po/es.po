@@ -2772,9 +2772,6 @@ msgstr "Camerún"
 msgid "Cam Nodule Settings"
 msgstr "Ajustes Módulo Cam"
 
-msgid "Cam Module Information"
-msgstr "Información Módulo Cam"
-
 msgid "Canada"
 msgstr "Canadá"
 
@@ -5076,6 +5073,9 @@ msgstr "Si se establece en 'sí', le permite usar Timeshift con plugins de audio
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor para los eventos de espera profunda que se envían durante los eventos de espera normales."
 
+msgid "Information Settings"
+msgstr "Configuración de información"
+
 msgid "Input scroll position"
 msgstr "Posición entrada desplazamiento"
 
@@ -6475,6 +6475,9 @@ msgstr "Namibia"
 msgid "Nauru"
 msgstr "Nauru"
 
+msgid "NCam Information"
+msgstr "Información NCam"
+
 msgid "Nepal"
 msgstr "Nepal"
 
@@ -6911,6 +6914,9 @@ msgstr "Ordinario"
 
 msgid "Original"
 msgstr "Original"
+
+msgid "OSCam Information"
+msgstr "Información OSCam"
 
 msgid "Other"
 msgstr "Otro"

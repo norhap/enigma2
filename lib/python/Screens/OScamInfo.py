@@ -995,6 +995,8 @@ class OSCamInfoSetup(Setup):
 		self.oldIP = config.oscaminfo.ip.value
 		self.hostValidator = compile(r"(\d*[a-zA-Z]+[\.]*\d*)+$")
 		Setup.__init__(self, session, setup="OSCamInfoSetup")
+		title = _("Information Settings")
+		self.setTitle(title + " OSCam" if getSysSoftcam() == "OSCam" else title + " NCam")
 
 	def selectionChanged(self):
 		Setup.selectionChanged(self)
