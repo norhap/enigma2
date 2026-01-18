@@ -1972,6 +1972,10 @@ def InitUsageConfig():
 	config.streaming.stream_ait = ConfigYesNo(default=True)
 	config.streaming.stream_sdtbat = ConfigYesNo(default=False)
 	config.streaming.authentication = ConfigYesNo(default=False)
+	config.streaming.localHostAuthentication = ConfigYesNo(default=False)
+	if config.streaming.localHostAuthentication.value and not config.streaming.authentication.value:
+		config.streaming.localHostAuthentication.value = False
+		config.streaming.localHostAuthentication.save()
 
 	config.mediaplayer = ConfigSubsection()
 	config.mediaplayer.useAlternateUserAgent = ConfigYesNo(default=False)

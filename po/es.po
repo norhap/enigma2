@@ -2338,6 +2338,9 @@ msgstr "Australia"
 msgid "Austria"
 msgstr "Austria"
 
+msgid "Authentication on local host of http streams"
+msgstr "Autenticación en host local de streams http"
+
 msgid "Author: "
 msgstr "Autor: "
 
@@ -3709,6 +3712,9 @@ msgstr "Desactivar temporizador"
 
 msgid "Disabled"
 msgstr "Desactivado"
+
+msgid "Disabled, local authentication will not be used for http streams."
+msgstr "Deshabilitado, no se utilizará autenticación local en streams http."
 
 msgid "Display 16:9 content as"
 msgstr "Mostrar contenido 16:9 como"
@@ -5295,8 +5301,8 @@ msgstr "¿Cuántos minutos quiere agregar a la grabación?"
 msgid "How many minutes do you want to record?"
 msgstr "¿Cuántos minutos quiere grabar?"
 
-msgid "Http streams authentication is enabled."
-msgstr "La autenticación de streams http está habilitada."
+msgid "HTTP stream authentication on the local host is enabled. Do you want to disable it to use StreamRelay?"
+msgstr "La autenticación de streams http en local host está habilitada.\n¿Quieres desactivarlo para utilizar StreamRelay?"
 
 msgid "Hue"
 msgstr "Matiz"

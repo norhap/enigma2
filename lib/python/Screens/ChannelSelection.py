@@ -41,11 +41,12 @@ from ServiceReference import ServiceReference, service_types_tv_ref, service_typ
 from Tools.BoundFunction import boundFunction
 from Tools.Notifications import RemovePopup
 from Tools.Alternatives import GetWithAlternative
-from Tools.Directories import fileContains, isPluginInstalled, resolveFilename, SCOPE_CONFIG
+from Tools.Directories import isPluginInstalled, resolveFilename, SCOPE_CONFIG
 from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
+from Screens.Standby import TryQuitMainloop
 from os import listdir, remove, rename
 from os.path import exists, isfile, join
 from shutil import copy2
@@ -384,10 +385,26 @@ class ChannelContextMenu(Screen):
 		self.close()
 
 	def toggleWithStreamrelay(self):
-		if config.streaming.authentication.value:
-			self.session.open(MessageBox, _("Http streams authentication is enabled."), MessageBox.TYPE_ERROR, default=False, simple=True, timeout=10)
-			return
-		elif fileContains(self.configStreamRelay, "streamrelay"):
+		streamrelay_active = False
+		with open(self.configStreamRelay, "r") as fd:
+			for line in fd.readlines():
+				if "stream_relay_enabled" in line and "1" in line:
+					streamrelay_active = True
+
+			def restartGUI(answer):
+				if answer:
+					self.session.open(TryQuitMainloop, 3)
+
+			def disableAuthentication(answer):
+				if answer:
+					config.streaming.localHostAuthentication.value = False
+					config.streaming.localHostAuthentication.save()
+					Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
+					self.session.openWithCallback(restartGUI, MessageBox, _("Restart GUI now?"), MessageBox.TYPE_YESNO, timeout=10)
+
+		if config.streaming.localHostAuthentication.value and config.streaming.authentication.value:
+			self.session.openWithCallback(disableAuthentication, MessageBox, _("HTTP stream authentication on the local host is enabled. Do you want to disable it to use StreamRelay?"), MessageBox.TYPE_YESNO, timeout=10)
+		elif streamrelay_active:
 			Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
 			self.close()
 		else:
