@@ -32,37 +32,41 @@ class Time(Setup):
 	def updateNetworkTime(self):
 		if config.ntp.timesync.isChanged() or config.ntp.server.isChanged() or config.misc.useNTPminutes.isChanged():
 			ntpsyncpoller.ntpConfigUpdated()
-
-	# def setNTP(self):
-	# cmdntp = "root /usr/bin/ntpdate-sync silent"
-	# linkup = "ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync"
-	# if config.ntp.timesync.value != "dvb":
-	# if not fileContains("/etc/crontab", "ntpdate"):
-	# eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab;sed -i '$a@reboot %s'" % cmdntp + " " "/etc/crontab;sed -i '$a 30 *   *   *   * %s'" % cmdntp + " " "/etc/crontab")
-	# if not islink("/etc/network/if-up.d/ntpdate-sync"):
-	# eConsoleAppContainer().execute(linkup)
-	# else:
-	# if islink("/etc/network/if-up.d/ntpdate-sync"):
-	# eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab")
-	# #######LAST USED SNTP######
-	# if config.ntp.timesync.value != "dvb":
-	# eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
-	# else:
-	# eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab")
-	def keySave(self):
+		"""
+	def setNTP(self):
+		cmdntp = "root /usr/bin/ntpdate-sync silent"
+		linkup = "ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync"
+		if config.ntp.timesync.value != "dvb":
+			if not fileContains("/etc/crontab", "ntpdate"):
+				eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab;sed -i '$a@reboot %s'" % cmdntp + " " "/etc/crontab;sed -i '$a 30 *   *   *   * %s'" % cmdntp + " " "/etc/crontab")
+		if not islink("/etc/network/if-up.d/ntpdate-sync"):
+			eConsoleAppContainer().execute(linkup)
+		else:
+			if islink("/etc/network/if-up.d/ntpdate-sync"):
+				eConsoleAppContainer().execute("sed -i '/ntpdate-sync/d' /etc/crontab")
 		# #######LAST USED SNTP######
-		# if isfile("/etc/init.d/crond"):
-		# Setup.keySave(self)
-		# self.setNTP()
-		# else:
-		# if config.ntp.timesync.value != "dvb":
-		# if isfile("/etc/init.d/crond"):
-		# Setup.keySave(self)
-		# self.setNTP()
-		# else:
-		# self.setFootnote(_("Cronie is being installed. Time settings are being established. Save your settings with GREEN button after a few seconds."))
-		# else:
-		# Setup.keySave(self)
+		if config.ntp.timesync.value != "dvb":
+			eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab;sed -i '$a@reboot root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sed -i '$a 30 *   *   *   * root sntp -S %s'" % config.ntp.server.value + " " "/etc/crontab;sntp -S %s" % config.ntp.server.value)
+		else:
+			eConsoleAppContainer().execute("sed -i '/sntp/d' /etc/crontab")
+		"""
+
+	def keySave(self):
+		"""
+		# #######LAST USED SNTP######
+		if isfile("/etc/init.d/crond"):
+			Setup.keySave(self)
+			self.setNTP()
+		else:
+			if config.ntp.timesync.value != "dvb":
+				if isfile("/etc/init.d/crond"):
+					Setup.keySave(self)
+					self.setNTP()
+				else:
+					self.setFootnote(_("Cronie is being installed. Time settings are being established. Save your settings with GREEN button after a few seconds."))
+			else:
+				Setup.keySave(self)
+		"""
 		Setup.keySave(self)
 
 	def selectionChanged(self):
