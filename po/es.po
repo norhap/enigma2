@@ -1350,11 +1350,11 @@ msgstr "Comience automáticamente timeshift después"
 msgid "Automatically turn on external subtitles"
 msgstr "Activar automáticamente los subtítulos externos"
 
-msgid "Automatically update Client/Server View"
-msgstr "Actualizar automáticamente Cliente - Servidor"
+msgid "Automatically refresh the full screen"
+msgstr "Actualizar automáticamente la pantalla completa"
 
-msgid "Automatically update Log-Fullscreen View"
-msgstr "Actualizar automáticamente el registro"
+msgid "Automatically update the Client/Server log"
+msgstr "Actualizar automáticamente el log de cliente/servidor"
 
 msgid "Auto Timers"
 msgstr "Temporizadores Automáticos"

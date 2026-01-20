@@ -367,8 +367,8 @@
 			<item level="0" text="Use HTTPS protocol" description="Use HTTPS protocol">config.oscaminfo.usessl</item>
 		</if>
 		<item level="0" text="Verify WebIf SSL certificate" description="Verify WebIf SSL certificate">config.oscaminfo.verifycert</item>
-		<item level="0" text="Automatically update Client/Server View" description="Automatically update Client/Server View">config.oscaminfo.autoUpdate</item>
-		<item level="0" text="Automatically update Log-Fullscreen View" description="Automatically update Log-Fullscreen View">config.oscaminfo.autoUpdateLog</item>
+		<item level="0" text="Automatically update the Client/Server log" description="Automatically update the Client/Server log">config.oscaminfo.autoUpdate</item>
+		<item level="0" text="Automatically refresh the full screen" description="Automatically refresh the full screen">config.oscaminfo.autoUpdateLog</item>
 	</setup>
 	<setup key="subtitlesetup" title="Subtitle Setup">
 		<if requires="AISubs">
