@@ -3197,13 +3197,13 @@ msgid "Configure which color format should be used on the SCART output."
 msgstr "Configure qué formato de color se debe usar en la salida SCART."
 
 msgid "Configure your internal LAN"
-msgstr "Configura su red LAN por cable"
+msgstr "Configura su red Ethernet LAN"
 
 msgid "Configure your network settings and press BLUE to scan"
 msgstr "Configura tus ajustes de red y pulsa AZUL para escanear"
 
 msgid "Configure your wireless LAN again"
-msgstr "Configura su red inalámbrica WLAN-WiFi"
+msgstr "Configura su red inalámbrica Wireless LAN"
 
 msgid "Configures which video output connector will be used."
 msgstr "Configura qué conector de salida de video se usará."
@@ -5881,10 +5881,10 @@ msgid "LanguageSelection"
 msgstr "Ajustes Idioma"
 
 msgid "LAN adapter"
-msgstr "Adaptador LAN-Cable"
+msgstr "Adaptador Ethernet LAN"
 
 msgid "LAN connection"
-msgstr "Conexión LAN-Cable"
+msgstr "Conexión Ethernet LAN"
 
 msgid "VPN connection"
 msgstr "Conexión VPN"
@@ -8819,7 +8819,7 @@ msgid "Show PIP"
 msgstr "Mostrar PiP"
 
 msgid "Show WLAN status"
-msgstr "Mostrar status de WLAN-WiFi"
+msgstr "Mostrar estado Wireless LAN"
 
 msgid "Show bouquet selection menu"
 msgstr "Mostrar menú de selección de bouquet"
@@ -10720,7 +10720,7 @@ msgid "W"
 msgstr "W"
 
 msgid "WLAN connection"
-msgstr "Conexión WLAN-WiFi"
+msgstr "Conexión Wireless LAN"
 
 msgid "WSS on 4:3"
 msgstr "WSS en 4:3"
