@@ -811,6 +811,9 @@ msgstr "(muestra el menú de audio opcional del DVD)"
 msgid "(unknown)"
 msgstr "(desconocido)"
 
+msgid "(unknown service)"
+msgstr "(canal desconocido)"
+
 msgid "* Only available if more than one interface is active."
 msgstr "* Solo disponible si hay más de un interfaz activo."
 

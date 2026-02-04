@@ -64,7 +64,7 @@ class ClientsStreaming(Converter, Poll):
 
 		for x in self.streamServer.getConnectedClients():
 			refs.append((x[1]))
-			servicename = ServiceReference(x[1]).getServiceName() or "(unknown service)"
+			servicename = ServiceReference(x[1]).getServiceName() or _("(unknown service)")
 			service_name = servicename
 			names.append((service_name))
 			ip = x[0]

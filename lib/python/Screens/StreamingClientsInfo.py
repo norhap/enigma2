@@ -42,7 +42,7 @@ class StreamingClientsInfo(Screen):
 		self.clients = []
 		if self.streamServer:
 			for x in self.streamServer.getConnectedClients():
-				service_name = ServiceReference(x[1]).getServiceName() or "(unknown service)"
+				service_name = ServiceReference(x[1]).getServiceName() or _("(unknown service)")
 				ip = x[0]
 				if int(x[2]) == 0:
 					strtype = "S"
@@ -58,7 +58,7 @@ class StreamingClientsInfo(Screen):
 		if StreamServiceList and streamList:
 			for x in StreamServiceList:
 				ip = "ip n/a"
-				service_name = "(unknown service)"
+				service_name = _("(unknown service)")
 				for stream in streamList:
 					if hasattr(stream, 'getService') and stream.getService() and stream.getService().__deref__() == x:
 						service_name = ServiceReference(stream.ref.toString()).getServiceName()
