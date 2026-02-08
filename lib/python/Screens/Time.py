@@ -21,6 +21,7 @@ class Time(Setup):
 		Setup.__init__(self, session=session, setup="Time")
 		self.addSaveNotifier(self.updateNetworkTime)
 		self["key_yellow"] = StaticText("")
+		self["footnote"] = Label()
 		self["geolocationActions"] = HelpableActionMap(self, ["ColorActions"], {
 			"yellow": (self.useGeolocation, _("Use geolocation to set the current time zone location")),
 			"green": self.keySave
