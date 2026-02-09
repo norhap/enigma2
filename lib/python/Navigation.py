@@ -208,7 +208,12 @@ class Navigation:
 				else:
 					self.skipServiceReferenceReset = True
 					from enigma import eFCCServiceManager  # noqa: E402 Set FCC not enabled if fallback tuner is active.
-					eFCCServiceManager.getInstance().setFCCEnable(False) if config.usage.remote_fallback_enabled.value else eFCCServiceManager.getInstance().setFCCEnable(True)
+					if config.usage.remote_fallback_enabled.value:
+						eFCCServiceManager.getInstance().setFCCEnable(False)
+						self.FCCFallBack()
+						return 1
+					else:
+						eFCCServiceManager.getInstance().setFCCEnable(True)
 				self.currentlyPlayingServiceReference = playref
 				if not ignoreStreamRelay and playref:
 					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
@@ -294,6 +299,12 @@ class Navigation:
 		curPlayService = self.getCurrentService()
 		info = curPlayService and curPlayService.info()
 		return info and info.getInfoString(iServiceInformation.sServiceref)
+
+	def FCCFallBack(self):
+		from Screens.MessageBox import MessageBox  # noqa: E402
+		from Tools.Notifications import AddPopup  # noqa: E402
+		if config.usage.remote_fallback_enabled.value and SystemInfo["FCCactive"]:
+			return AddPopup(_("Fallback tuner and FCC activated. Activate only one function."), type=MessageBox.TYPE_ERROR, timeout=10)
 
 	def isCurrentServiceIPTV(self):
 		ref = self.getCurrentServiceRef()

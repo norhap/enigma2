@@ -4654,6 +4654,9 @@ msgstr "Favoritos"
 msgid "favorites description match"
 msgstr "coincidencia de descripción de favoritos"
 
+msgid "Fallback tuner and FCC activated. Activate only one function."
+msgstr "Tuner reserva y FCC activados. Activar solo una función."
+
 msgid "FCC enabled"
 msgstr "FCC habilitado"
 
