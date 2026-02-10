@@ -390,21 +390,7 @@ class ChannelContextMenu(Screen):
 			for line in fd.readlines():
 				if "stream_relay_enabled" in line and "1" in line:
 					streamrelay_active = True
-
-			def restartGUI(answer):
-				if answer:
-					self.session.open(TryQuitMainloop, 3)
-
-			def disableAuthentication(answer):
-				if answer:
-					config.streaming.localHostAuthentication.value = False
-					config.streaming.localHostAuthentication.save()
-					Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
-					self.session.openWithCallback(restartGUI, MessageBox, _("Restart GUI now?"), MessageBox.TYPE_YESNO, timeout=10)
-
-		if config.streaming.localHostAuthentication.value and config.streaming.authentication.value:
-			self.session.openWithCallback(disableAuthentication, MessageBox, _("HTTP stream authentication on the local host is enabled. Do you want to disable it to use StreamRelay?"), MessageBox.TYPE_YESNO, timeout=10)
-		elif streamrelay_active:
+		if streamrelay_active:
 			Screens.InfoBar.InfoBar.instance.ToggleStreamrelay(self.csel.getCurrentSelection())
 			self.close()
 		else:

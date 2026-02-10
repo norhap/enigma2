@@ -114,7 +114,7 @@ void eStreamClient::notifier(int what)
 			}
 		}
 		/*********/
-		if (!isLocalClient && eSimpleConfig::getBool("config.streaming.authentication", false) || isLocalClient && eSimpleConfig::getBool("config.streaming.authentication", false) && eSimpleConfig::getBool("config.streaming.localHostAuthentication", true))
+		if (!isLocalClient && eSimpleConfig::getBool("config.streaming.authentication", false))
 		{
 			bool authenticated = false;
 			if ((pos = request.find("Authorization: Basic ")) != std::string::npos)
