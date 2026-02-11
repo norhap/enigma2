@@ -51,6 +51,7 @@ class ServiceInfo(Poll, Converter):
 	FREQ_INFO = 38
 	PROGRESSIVE = 39
 	VIDEO_INFO = 40
+	IS_SOFTCSA = 41
 
 	def __init__(self, type):
 		Poll.__init__(self)
@@ -62,6 +63,7 @@ class ServiceInfo(Poll, Converter):
 			"IsMultichannel": (self.IS_MULTICHANNEL, (iPlayableService.evUpdatedInfo,)),
 			"IsStereo": (self.AUDIO_STEREO, (iPlayableService.evUpdatedInfo,)),
 			"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
+			"IsSoftCSA": (self.IS_SOFTCSA, (iPlayableService.evUpdatedInfo,)),
 			"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 			"IsNotWidescreen": (self.IS_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 			"SubservicesAvailable": (self.SUBSERVICES_AVAILABLE, (iPlayableService.evUpdatedEventInfo if not config.misc.hotkey.green.value or not config.misc.hotkey.green_long.value else None,)),
@@ -211,7 +213,9 @@ class ServiceInfo(Poll, Converter):
 					return True
 			return False
 		elif self.type == self.IS_CRYPTED:
-			return info.getInfo(iServiceInformation.sIsCrypted) == 1
+			return info.getInfo(iServiceInformation.sIsCrypted) == 1 and info.getInfo(iServiceInformation.sIsSoftCSA) != 1
+		elif self.type == self.IS_SOFTCSA:
+			return info.getInfo(iServiceInformation.sIsSoftCSA) == 1
 		elif self.type == self.IS_WIDESCREEN:
 			return video_aspect in WIDESCREEN
 		elif self.type == self.IS_NOT_WIDESCREEN:

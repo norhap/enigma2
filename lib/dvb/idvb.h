@@ -372,6 +372,12 @@ public:
 		dxNoAITranslation=8192
 	};
 
+	enum
+	{
+		dxIntNewServiceName=32768,
+		dxIntNewProvider=65536,
+	};
+
 	bool usePMT() const { return !(m_flags & dxNoDVB); }
 	bool isHidden() const { return (m_flags & dxDontshow || m_flags & dxIsParentalProtected); }
 	bool isDedicated3D() const { return m_flags & dxIsDedicated3D; }
@@ -754,7 +760,7 @@ class iDVBDemux: public iObject
 public:
 	virtual RESULT createSectionReader(eMainloop *context, ePtr<iDVBSectionReader> &reader)=0;
 	virtual RESULT createPESReader(eMainloop *context, ePtr<iDVBPESReader> &reader)=0;
-	virtual RESULT createTSRecorder(ePtr<iDVBTSRecorder> &recorder, unsigned int packetsize = 188, bool streaming=false)=0;
+	virtual RESULT createTSRecorder(ePtr<iDVBTSRecorder> &recorder, unsigned int packetsize = 188, bool streaming=false, bool sync_mode=false, bool is_streaming_output=false)=0;
 	virtual RESULT getMPEGDecoder(ePtr<iTSMPEGDecoder> &reader, int index = 0)=0;
 	virtual RESULT getSTC(pts_t &pts, int num=0)=0;
 	virtual RESULT getCADemuxID(uint8_t &id)=0;

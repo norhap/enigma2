@@ -143,6 +143,7 @@ public:
 		eventStopped,
 		eventStartPvrDescramble,   // start PVR Descramble Convert
 		eventChannelAllocated,
+		eventCIConnected,  // a CI slot was assigned to this service after recheckPMTHandlers
 	};
 #ifndef SWIG
 	sigc::signal<void(int)> serviceEvent;
@@ -166,6 +167,7 @@ public:
 	void setCaDisable(bool disable) { m_ca_disabled = disable; }
 	void addCaHandler();
 	void removeCaHandler();
+	void allocatePVRChannel();
 
 	enum serviceType
 	{
@@ -180,7 +182,8 @@ public:
 		scrambled_streamserver = 8,
 		streamclient = 9,
 		offline = 10,
-		pvrDescramble = 11
+		pvrDescramble = 11,
+		scrambled_livetv = 12
 	};
 
 	/* deprecated interface */

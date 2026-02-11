@@ -1948,6 +1948,20 @@ def InitUsageConfig():
 	] + [(x, ngettext("%d second", "%d seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d minute", "%d minutes", x) % x) for x in (1, 2, 3)]
 	config.oscaminfo.autoUpdateLog = ConfigSelection(default=0, choices=choiceList)
 
+	config.softcsa = ConfigSubsection()
+	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
+		(0, _("Quick")),
+		(1, _("Normal"))
+	])
+	config.softcsa.syncMode = ConfigSelection(default=0, choices=[
+		(0, _("Automatic")),
+		(1, _("Synchronous"))
+	])
+	config.softcsa.waitForDataTimeout = ConfigSelection(
+		default=800,
+		choices=[(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+
 	config.cccaminfo = ConfigSubsection()
 	config.cccaminfo.serverNameLength = ConfigSelectionNumber(min=10, max=100, stepwidth=1, default=22, wraparound=True)
 	config.cccaminfo.name = ConfigText(default="Profile", fixed_size=False)

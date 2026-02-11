@@ -184,7 +184,7 @@ int eDVBCIInterfaces::reset(int slotid)
 	eDebug("[dvbci][eDVBCIInterfaces::reset][CI]1 Slot %d: getslot %d", slot, slot->getSlotID());
 	if( (slot = getSlot(slotid)) == 0 )
 	{
-		eDebug("[dvbci][eDVBCIInterfaces::reset][CI]2 Slot %d: slot 0 NO reset", slot->getSlotID());	
+		eDebug("[dvbci][eDVBCIInterfaces::reset][CI]2 Slot %d: slot 0 NO reset", slot->getSlotID());
 		return -1;
 	}
 	return slot->reset();
@@ -1230,7 +1230,7 @@ void eDVBCISlot::data(int what)
 
 	if (state == stateInvalid)
 	{
-		eDebug("[dvbci][data][CI%d] non Dreambox stateInvalid .....reset requested", slotid);	
+		eDebug("[dvbci][data][CI%d] non Dreambox stateInvalid .....reset requested", slotid);
 		reset();
 	}
 
@@ -1238,7 +1238,7 @@ void eDVBCISlot::data(int what)
 	{
 		eDebug("[dvbci][data][CI%d] ci inserted state= %d", slotid, state);
 		state = stateInserted;
-		eDebug("[dvbci][data][CI%d] ci inserted reset stateInserted state= %d", slotid, state);		
+		eDebug("[dvbci][data][CI%d] ci inserted reset stateInserted state= %d", slotid, state);
 		/* emit */ eDVBCI_UI::getInstance()->m_messagepump.send(eDVBCIInterfaces::Message(eDVBCIInterfaces::Message::slotStateChanged, getSlotID(), 1));
 		notifier->setRequested(eSocketNotifier::Read|eSocketNotifier::Priority);
 		/* enable PRI to detect removal or errors */
@@ -1351,7 +1351,7 @@ void eDVBCISlot::closeDevice()
 	notifier->stop();
 	data(eSocketNotifier::Priority);
 	state = stateDisabled;
-	eTrace("[dvbci][closedevice][CI] has state %d", state);	
+	eTrace("[dvbci][closedevice][CI] has state %d", state);
 }
 
 void eDVBCISlot::setAppManager(eDVBCIApplicationManagerSession *session)
@@ -1583,8 +1583,8 @@ int eDVBCISlot::setCaParameter(eDVBServicePMTHandler *pmthandler)
 		m_audio_pids[i] = program.audioStreams[i].pid;
 	}
 
-	m_video_pid = program.videoStreams.empty()? 0 : program.videoStreams[0].pid;
-	m_audio_pid = program.audioStreams.empty()? 0 : program.audioStreams[program.defaultAudioStream].pid;
+	m_video_pid = program.videoStreams.empty() ? 0 : program.videoStreams[0].pid;
+	m_audio_pid = (program.audioStreams.empty() || program.defaultAudioStream < 0 || static_cast<size_t>(program.defaultAudioStream) >= program.audioStreams.size()) ? 0 : program.audioStreams[program.defaultAudioStream].pid;
 
 	m_tunernum = -1;
 	if (!pmthandler->getChannel(channel))

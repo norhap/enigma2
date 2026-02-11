@@ -17,12 +17,14 @@ service_libenigma_service_a_SOURCES = \
 	service/servicehdmi.cpp \
 	service/servicepeer.cpp \
 	service/servicets.cpp \
-	service/servicewebts.cpp
+	service/servicewebts.cpp \
+	service/servicedvbsoftdecoder.cpp
 
 serviceincludedir = $(pkgincludedir)/lib/service
 serviceinclude_HEADERS = \
 	service/event.h \
 	service/iservice.h \
+	service/iservicescrambled.h \
 	service/listboxservice.h \
 	service/elistboxservicecontent.h \
 	service/service.h \
@@ -35,7 +37,8 @@ serviceinclude_HEADERS = \
 	service/servicehdmi.h \
 	service/servicepeer.h \
 	service/servicets.h \
-	service/servicewebts.h
+	service/servicewebts.h \
+	service/servicedvbsoftdecoder.h
 
 if HAVE_LIBXINE
 service_libenigma_service_a_SOURCES += service/servicexine.cpp

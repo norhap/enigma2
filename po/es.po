@@ -5301,6 +5301,12 @@ msgstr "¿Cuántos minutos quiere agregar a la grabación?"
 msgid "How many minutes do you want to record?"
 msgstr "¿Cuántos minutos quiere grabar?"
 
+msgid "How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes)."
+msgstr "Cómo liberar el decodificador de hardware al cambiar a descifrado por software. La opción \"Rápido\" libera inmediatamente (zapping más rápido). La opción \"Normal\" realiza primero un apagado limpio (más estable en algunas máquinas)."
+
+msgid "How would you like to cut \"%s\"?"
+msgstr "¿Cómo te gustaría cortar \"%s\"?"
+
 msgid "Hue"
 msgstr "Matiz"
 
@@ -8458,8 +8464,14 @@ msgstr "Seleccione la resolución horizontal:"
 msgid "Select how quickly the dish should move between satellites."
 msgstr "Seleccione qué tan rápido debe moverse el plato entre los satélites."
 
+msgid "Select how the descrambled data stream is processed. 'Automatic' uses asynchronous writes (lower CPU usage) with automatic fallback to synchronous if kernel AIO is not supported. 'Synchronous' forces blocking writes (stable, most compatible)."
+msgstr "Seleccione cómo se procesa el flujo de datos descifrados. \"Automático\" utiliza escrituras asíncronas (menor consumo de CPU) con retorno automático a escrituras síncronas si no se admite AIO del kernel. \"Sincrónico\" fuerza escrituras bloqueantes (estable, máxima compatibilidad)."
+
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
 msgstr "Seleccione cómo se configura la antena parabólica. es decir, plato fijo, LNB único, interruptor DiSEqC, motor, etc."
+
+msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP."
+msgstr "Seleccione cómo desea que su receptor mantenga la hora correcta, ya sea desde el transpondedor DVB o desde Internet usando NTP."
 
 msgid "Select interface"
 msgstr "Seleccionar interfaz"
@@ -8988,6 +9000,9 @@ msgstr "Singapur"
 
 msgid "Single"
 msgstr "Simple"
+
+msgid "SoftCSA Settings"
+msgstr "Ajustes SoftCSA"
 
 msgid "OTT Model"
 msgstr "Modelo OTT"
@@ -9580,6 +9595,12 @@ msgstr "Symbol rate:"
 
 msgid "Sync failure moving back to origin !"
 msgstr "¡Fallo de sincronización, regresando al origen!"
+
+msgid "Sync mode *"
+msgstr "Modo de sincronización *"
+
+msgid "Synchronous"
+msgstr "Sincrónico"
 
 msgid "Syrian Arab Republic"
 msgstr "Siria"
@@ -12928,6 +12949,12 @@ msgstr "Considerar los \"días seleccionados\""
 msgid "Days Profile"
 msgstr "Importación en ciertos días"
 
+msgid "Decoder release strategy *"
+msgstr "Estrategia de lanzamiento del decodificador *"
+
+msgid "Decoder start timeout *"
+msgstr "Tiempo de espera de inicio del decodificador *"
+
 msgid "Delete all"
 msgstr "Eliminar todos"
 
@@ -13387,6 +13414,9 @@ msgstr "Duración máxima (en minutos)"
 
 msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
 msgstr "Duración máxima del evento para que coincida. Si un evento es más largo que este período de tiempo (sin compensación), no se combinará."
+
+msgid "Maximum time to wait for the incoming data and descrambling keys (CW) before starting decoder. Usually both arrive much faster and this is only for special cases."
+msgstr "Tiempo máximo de espera para los datos entrantes y las claves de descifrado (CW) antes de iniciar el decodificador. Normalmente, ambos llegan mucho más rápido y esto solo se aplica en casos especiales."
 
 #, python-format
 msgid ""
@@ -14678,9 +14708,6 @@ msgstr "Incluir asignación de CI"
 
 msgid "Set CI assignment for detection of available services."
 msgstr "Establecer asignación de CI para la detección de canales disponibles."
-
-msgid "How would you like to cut \"%s\"?"
-msgstr "¿Cómo te gustaría cortar \"%s\"?"
 
 msgid "Don't cut"
 msgstr "No cortar"
@@ -17271,9 +17298,6 @@ msgstr "Tiempo zona"
 
 msgid "Time synchronization method"
 msgstr "Método de sincronización horaria"
-
-msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP."
-msgstr "Seleccione cómo desea que su receptor mantenga la hora correcta, ya sea desde el transpondedor DVB o desde Internet usando NTP."
 
 msgid "FastScan"
 msgstr "Escaneo Rápido"

@@ -3,7 +3,7 @@ from os.path import isfile, join
 from re import findall
 from hashlib import md5
 from boxbranding import getMachineName
-from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD, getBoxType, eConsoleAppContainer
+from enigma import Misc_Options, eAVControl, eDVBCIInterfaces, eDVBResourceManager, eGetEnigmaDebugLvl, getPlatform, eDBoxLCD, getBoxType, eConsoleAppContainer, eDVBCSAEngine
 
 from process import ProcessList
 from Tools.Directories import SCOPE_SKINS, SCOPE_LIBDIR, scopeLCDSkin, fileCheck, fileExists, fileHas, fileReadLines, fileReadLine, pathExists, resolveFilename
@@ -198,6 +198,7 @@ BoxInfo.setItem("VuEAC3Fix", MODEL in ("vuultimo4k", "vuduo4kse"))
 BoxInfo.setItem("CanDescrambleInStandby", any(x in fileReadLine("/proc/stb/tsmux/ci0_input_choices", default="", source=MODULE_NAME) for x in ("PVR", "DVR0")))
 BoxInfo.setItem("CanOfflineDecode", MODEL in ("hd51", "h7", "h17", "et10000", "et8000", "hd2400", "vs1500", "8100s"))
 BoxInfo.setItem("ForceSet10bitMode2160p", MODEL in ("gbquad4kpro",))
+BoxInfo.setItem("HasSoftCSA", eDVBCSAEngine.isAvailable())
 
 SystemInfo["InDebugMode"] = eGetEnigmaDebugLvl() >= 4
 SystemInfo["CommonInterface"] = MODEL in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots()
