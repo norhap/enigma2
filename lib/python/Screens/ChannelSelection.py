@@ -1733,6 +1733,8 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 
 	def getServiceName(self, ref):
 		str = self.removeModeStr(ServiceReference(ref).getServiceName())
+		if "Last Scanned" in str:
+			str = str.replace("Last Scanned", _("Last Scanned"))
 		if 'bouquets' in str.lower():
 			return _("User bouquets")
 		if not str:
