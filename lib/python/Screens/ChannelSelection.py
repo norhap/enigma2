@@ -46,7 +46,6 @@ from Plugins.Plugin import PluginDescriptor
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.EventView import EventViewEPGSelect
-from Screens.Standby import TryQuitMainloop
 from os import listdir, remove, rename
 from os.path import exists, isfile, join
 from shutil import copy2
