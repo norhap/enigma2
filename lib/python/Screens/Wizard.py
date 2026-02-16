@@ -288,18 +288,11 @@ class Wizard(Screen):
 		self.close()
 
 	def getStepWithID(self, id):
-		try:  # test avoid FATAL SIGNAL
-			print("[Wizard] getStepWithID: '%s'." % id)
-			count = 0
-			for x in self.wizard.keys():
-				if self.wizard[x]["id"] == id:
-					print("[Wizard] result=%d." % count)
-					return count
-				count += 1
-			print("[Wizard] Result=Nothing.")
-			return 0
-		except:
-			pass
+		for count, key in enumerate(self.wizard.keys()):
+			if self.wizard[key]["id"] == id:
+				return count
+		print("[Wizard] Step name '%s' not found!" % id)
+		return 0
 
 	def finished(self, gotoStep=None, *args, **kwargs):
 		print("[Wizard] In finished.")
