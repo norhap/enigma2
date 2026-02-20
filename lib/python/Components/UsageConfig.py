@@ -1304,7 +1304,7 @@ def InitUsageConfig():
 					else:  # delete in all devices except internal flash
 						if exists(join(path, cacheFileName)):
 							remove(join(path, cacheFileName))
-				except:
+				except OSError:
 					pass
 
 	config.misc.epgcachepath.addNotifier(EpgCacheChanged, immediate_feedback=False)
