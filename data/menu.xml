@@ -73,7 +73,10 @@ def msgClosed(ret):
 		from enigma import eEPGCache
 		from Components.config import config
 		if exists(config.misc.epgcache_filename.value):
-			remove(config.misc.epgcache_filename.value)
+			try:
+				remove(config.misc.epgcache_filename.value)
+			except OSError:
+				pass
 		epgcache = eEPGCache.getInstance()
 		epgcache.flushEPG()
 self.session.openWithCallback(msgClosed, EpgDeleteMsg)
