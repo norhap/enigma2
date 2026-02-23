@@ -165,7 +165,7 @@ def getBootdevice():
 
 def getSysSoftcam():
 	cams = None
-	if str(ProcessList().named("oscam")).strip("[]"):
+	if str(ProcessList().named("oscam")).strip("[]") or str(ProcessList().named("oscam-emu")).strip("[]"):
 		cams = "OSCam"
 		return cams
 	elif str(ProcessList().named("ncam")).strip("[]"):
