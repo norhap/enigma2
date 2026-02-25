@@ -15,7 +15,7 @@ class iObject
 {
 private:
 		/* we don't allow the default operator here, as it would break the refcount. */
-	void operator=(const iObject &);
+	void operator=(const iObject &) = delete;
 protected:
 #ifndef __EXCEPTIONS
 	void operator delete(void *p) { ::operator delete(p); }

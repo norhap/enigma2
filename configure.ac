@@ -813,10 +813,12 @@ CXXFLAGS="$CXXFLAGS -Wall -Wextra \
 	-Wno-error=packed -Wno-error=vla -Wno-error=clobbered -Wno-error=unused-parameter \
 	$BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $ALSA_CFLAGS"
 
-ARFLAGS="cr"
-AC_SUBST(ARFLAGS)
-AR_FLAGS="cr"
-AC_SUBST(AR_FLAGS)
+CXXFLAGS="$CXXFLAGS -Wall -Wno-psabi \
+ 	-Wformat=2 -Wformat-overflow=2 -Wformat-nonliteral -Wformat-security \
+ 	-Wimplicit-fallthrough=5 -Wdangling-else -Wno-error=stringop-truncation \
+ 	$BASE_CFLAGS $ENIGMA2_CFLAGS $PTHREAD_CFLAGS $OPENMP_CFLAGS $GLES_CFLAGS $ALSA_CFLAGS $FFMPEG_CFLAGS"
+
+AX_SWIG_PYTHON_OPT="$AX_SWIG_PYTHON_OPT -DSWIG_PYTHON_LEGACY_BOOL"
 
 AC_CONFIG_FILES([
 Makefile

@@ -61,7 +61,7 @@ void eEPGChannelData::startChannel()
  */
 void eEPGChannelData::startEPG()
 {
-	eDebug("[eEPGChannelData] start reading events(%ld)", ::time(0));
+	eDebug("[eEPGChannelData] start reading events(%lld)", (long long)::time(0));
 	state=0;
 	haveData=0;
 	for (unsigned int i=0; i < sizeof(seenSections)/sizeof(tidMap); ++i)
@@ -289,7 +289,7 @@ void eEPGChannelData::finishEPG()
 {
 	if (!isRunning)  // epg ready
 	{
-		eDebug("[eEPGChannelData] stop caching events(%ld)", ::time(0));
+		eDebug("[eEPGChannelData] stop caching events(%lld)", (long long)::time(0));
 		zapTimer->start(UPDATE_INTERVAL, 1);
 		eDebug("[eEPGChannelData] next update in %i min", UPDATE_INTERVAL / 60000);
 		for (unsigned int i=0; i < sizeof(seenSections)/sizeof(tidMap); ++i)
@@ -516,7 +516,7 @@ void eEPGChannelData::readData( const uint8_t *data, int source)
 #endif
 			default: eDebugNoNewLine("unknown");break;
 		}
-		eDebugNoNewLine(" finished(%ld\n", ::time(0));
+		eDebugNoNewLine(" finished(%lld\n", (long long)::time(0));
 		if ( reader )
 			reader->stop();
 		isRunning &= ~source;
@@ -1457,8 +1457,8 @@ void eEPGChannelData::readMHWData(const uint8_t *data)
 				return;	// Continue reading of the current table.
 		}
 	}
-	eDebug("[eEPGChannelData] mhw finished(%ld) %zu summaries not found",
-		::time(0),
+	eDebug("[eEPGChannelData] mhw finished(%lld) %zu summaries not found",
+		(long long)::time(0),
 		m_program_ids.size());
 	log_add("Summaries not found: %zu",m_program_ids.size());
 	// Summaries have been read, titles that have summaries have been stored.
@@ -1995,8 +1995,8 @@ void eEPGChannelData::readMHWData2(const uint8_t *data)
 			// Now store titles that do not have summaries.
 			for (std::map<uint32_t, mhw_title_t>::iterator itTitle(m_titles.begin()); itTitle != m_titles.end(); itTitle++)
 				storeMHWTitle( itTitle, "", data );
-			eDebug("[eEPGChannelData] mhw2 finished(%ld) %zu summaries not found",
-				::time(0),
+			eDebug("[eEPGChannelData] mhw2 finished(%lld) %zu summaries not found",
+				(long long)::time(0),
 				m_program_ids.size());
 			log_add("Summaries not found: %zu",m_program_ids.size());
 			log_add("mhw2 EPG download finished");
@@ -2206,7 +2206,7 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 		log_add("ChannelsHD nbr.: %d",num_channels);
 		log_add("Equivalences Nbr.: %d",nb_equiv);
 		haveData |= eEPGCache::MHW;
-		eDebug("[eEPGChannelData] mhw2 %d channels found", m_channels2.size());
+		eDebug("[eEPGChannelData] mhw2 %zu channels found", m_channels2.size());
 	}
 	/* ******************************************************************* */
 	else if (m_MHWFilterMask2.pid == m_mhw2_title_pid && m_MHWFilterMask2.data[0] == 0xe6)
@@ -2499,8 +2499,8 @@ void eEPGChannelData::readMHWData2_old(const uint8_t *data)
 			// Now store titles that do not have summaries.
 			for (std::map<uint32_t, mhw_title_t>::iterator itTitle(m_titles.begin()); itTitle != m_titles.end(); itTitle++)
 				storeMHWTitle( itTitle, "", data );
-			eDebug("[eEPGChannelData] mhw2 finished(%ld) %zu summaries not found",
-				::time(0),
+			eDebug("[eEPGChannelData] mhw2 finished(%lld) %zu summaries not found",
+				(long long)::time(0),
 				m_program_ids.size());
 			log_add("Summaries not found: %zu",m_program_ids.size());
 			log_add("mhw2 EPG download finished");

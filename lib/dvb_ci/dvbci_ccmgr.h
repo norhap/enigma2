@@ -3,11 +3,14 @@
 
 #include <memory>
 #include <openssl/x509.h>
+#include <openssl/evp.h>
+#include <openssl/param_build.h>
+#include <openssl/core_names.h>
 #include <lib/dvb_ci/dvbci_session.h>
 
 class eDVBCICcSessionImpl;
 
-class eDVBCICcSession: public eDVBCISession
+class eDVBCICcSession : public eDVBCISession
 {
 	eDVBCISlot *m_slot;
 	int m_descrambler_fd;
@@ -94,8 +97,7 @@ class eDVBCICcSession: public eDVBCISession
 			0, 0, 0, 0, 32, 256, 256, 0,
 			0, 256, 256, 32, 8, 8, 32, 32,
 			0, 8, 2, 32, 1, 32, 1, 0,
-			32
-		};
+			32};
 		void init()
 		{
 			unsigned int i;
@@ -103,7 +105,7 @@ class eDVBCICcSession: public eDVBCISession
 			for (i = 1; i < MAX_ELEMENTS; i++)
 				m_elements[i].invalidate();
 		};
-		struct ciplus_element* get(unsigned int id)
+		struct ciplus_element *get(unsigned int id)
 		{
 			if ((id < 1) || (id >= MAX_ELEMENTS))
 			{
@@ -112,7 +114,7 @@ class eDVBCICcSession: public eDVBCISession
 			}
 			return &m_elements[id];
 		};
-		uint8_t* get_ptr(unsigned int id)
+		uint8_t *get_ptr(unsigned int id)
 		{
 			struct ciplus_element *e = get(id);
 			if (e == NULL)
@@ -225,10 +227,10 @@ class eDVBCICcSession: public eDVBCISession
 	X509 *m_ci_device_cert;
 
 	/* private key of device-cert */
-	RSA *m_rsa_device_key;
+	EVP_PKEY *m_rsa_device_key;
 
 	/* DH parameters */
-	DH *m_dh;
+	EVP_PKEY *m_dh;
 	uint8_t m_dh_p[256];
 	uint8_t m_dh_g[256];
 	uint8_t m_dh_q[32];
@@ -288,8 +290,8 @@ public:
 	~eDVBCICcSession();
 
 	void send(const unsigned char *tag, const void *data, int len);
-	void addProgram(uint16_t program_number, std::vector<uint16_t>& pids);
-	void removeProgram(uint16_t program_number, std::vector<uint16_t>& pids);
+	void addProgram(uint16_t program_number, std::vector<uint16_t> &pids);
+	void removeProgram(uint16_t program_number, std::vector<uint16_t> &pids);
 };
 
 #endif

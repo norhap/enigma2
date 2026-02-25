@@ -181,7 +181,7 @@ int eDVBCIInterfaces::reset(int slotid)
 	eDVBCISlot *slot;
 
 	singleLock s(m_slot_lock);
-	eDebug("[dvbci][eDVBCIInterfaces::reset][CI]1 Slot %d: getslot %d", slot, slot->getSlotID());
+	eDebug("[dvbci][eDVBCIInterfaces::reset][CI]1 Slot %d: getslot %d", slot->getSlotID(), slot->getSlotID());
 	if( (slot = getSlot(slotid)) == 0 )
 	{
 		eDebug("[dvbci][eDVBCIInterfaces::reset][CI]2 Slot %d: slot 0 NO reset", slot->getSlotID());
