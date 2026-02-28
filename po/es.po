@@ -13415,8 +13415,8 @@ msgstr "Duración máxima (en minutos)"
 msgid "Maximum event duration to match. If an event is longer than this amount of time (without offset) it won't be matched."
 msgstr "Duración máxima del evento para que coincida. Si un evento es más largo que este período de tiempo (sin compensación), no se combinará."
 
-msgid "Maximum time to wait for the incoming data and descrambling keys (CW) before starting decoder. Usually both arrive much faster and this is only for special cases."
-msgstr "Tiempo máximo de espera para los datos entrantes y las claves de descifrado (CW) antes de iniciar el decodificador. Normalmente, ambos llegan mucho más rápido y esto solo se aplica en casos especiales."
+msgid "Maximum time to wait for the first descrambling key (CW) before starting the decoder. 'Disabled' starts the decoder immediately without waiting."
+msgstr "Tiempo máximo de espera para la primera clave de descodificación (CW) antes de iniciar el decodificador. \"Deshabilitado\" inicia el decodificador inmediatamente sin espera."
 
 #, python-format
 msgid ""
