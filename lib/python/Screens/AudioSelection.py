@@ -1,4 +1,4 @@
-from enigma import iPlayableService, eTimer, eSize, eDVBDB, eServiceReference, eServiceCenter, iServiceInformation
+from enigma import iPlayableService, eTimer, eSize, eDVBDB, iServiceInformation
 
 from Tools.ISO639 import LanguageCodes
 from Screens.Screen import Screen
@@ -10,7 +10,7 @@ from ServiceReference import serviceRefIPToSAT
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.ActionMap import NumberActionMap, HelpableActionMap
 from Components.ConfigList import ConfigListScreen
-from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff, ConfigYesNo
+from Components.config import config, ConfigSubsection, getConfigListEntry, ConfigNothing, ConfigSelection, ConfigOnOff
 from Components.Label import Label
 from Components.Sources.List import List
 from Components.Sources.Boolean import Boolean
@@ -737,8 +737,6 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 		<widget name="videofps" position="5,280" size="470,20" backgroundColor="secondBG" transparent="1" zPosition="1" font="Regular;16" verticalAlignment="center" horizontalAlignment="left" foregroundColor="blue"/>
 	</screen>"""
 
-	FLAG_CENTER_DVB_SUBS = 2048
-
 	def __init__(self, session, infobar):
 		Screen.__init__(self, session)
 		self.skin = QuickSubtitlesConfigMenu.skin
@@ -747,15 +745,6 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 		self.wait.timeout.get().append(self.resyncSubtitles)
 		self.resume = eTimer()
 		self.resume.timeout.get().append(self.resyncSubtitlesResume)
-		self.service = self.session.nav.getCurrentlyPlayingServiceReference()
-		servicepath = self.service and self.service.getPath()
-		if servicepath and servicepath.startswith("/") and self.service.toString().startswith("1:"):
-			info = eServiceCenter.getInstance().info(self.service)
-			self.service_string = info and info.getInfoString(self.service, iServiceInformation.sServiceref)
-		else:
-			self.service_string = self.service.toString()
-		self.center_dvb_subs = ConfigYesNo(default=(eDVBDB.getInstance().getFlag(eServiceReference(self.service_string)) & self.FLAG_CENTER_DVB_SUBS) and True)
-		self.center_dvb_subs.addNotifier(self.setCenterDvbSubs)
 		self["videofps"] = Label("")
 		self["key_red"] = Label(_("Exit"))
 		self["save"] = Label(_("Save"))
@@ -773,7 +762,6 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("dvb_subtitles_color"),
 				getConfigMenuItem("dvb_subtitles_backtrans"),
 				getConfigMenuItem("dvb_subtitles_original_position"),
-				(_("Center DVB subtitles"), self.center_dvb_subs),
 				getConfigMenuItem("subtitle_position"),
 				getConfigMenuItem("subtitle_bad_timing_delay"),
 				getConfigMenuItem("subtitle_noPTSrecordingdelay"),
@@ -818,14 +806,6 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 
 		self.onLayoutFinish.append(self.layoutFinished)
 
-	def setCenterDvbSubs(self, configElement):
-		if configElement.value:
-			eDVBDB.getInstance().addFlag(eServiceReference(self.service_string), self.FLAG_CENTER_DVB_SUBS)
-			config.subtitles.dvb_subtitles_centered.value = True
-		else:
-			eDVBDB.getInstance().removeFlag(eServiceReference(self.service_string), self.FLAG_CENTER_DVB_SUBS)
-			config.subtitles.dvb_subtitles_centered.value = False
-
 	def layoutFinished(self):
 		if not self["videofps"].text:
 			self.instance.resize(eSize(self.instance.size().width(), self["config"].l.getItemSize().height() * len(self["config"].getList()) + 10))
@@ -852,7 +832,6 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 		return ""
 
 	def cancel(self):
-		self.center_dvb_subs.removeNotifier(self.setCenterDvbSubs)
 		self.close()
 
 	def keySave(self):
