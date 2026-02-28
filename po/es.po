@@ -2601,6 +2601,9 @@ msgstr "Territorio Británico del Océano Índico"
 msgid "Brunei Darussalam"
 msgstr "Brunéi"
 
+msgid "Buffer descrambled data before starting playback. Reduce audio dropouts with AC3 by ensuring enough data is available when the decoder starts. Higher values are more stable but increase channel switch time."
+msgstr "Almacene en búfer los datos descodificados antes de iniciar la reproducción. Reduzca las pérdidas de audio con AC3 garantizando la disponibilidad de suficientes datos al iniciar el decodificador. Los valores más altos son más estables, pero aumentan el tiempo de cambio de canal"
+
 #, python-format
 msgid "Buffering %d%%"
 msgstr "Llenando buffer %d%%"
@@ -12951,6 +12954,9 @@ msgstr "Importación en ciertos días"
 
 msgid "Decoder release strategy *"
 msgstr "Estrategia de lanzamiento del decodificador *"
+
+msgid "Decoder start delay *"
+msgstr "Retraso de inicio del decodificador *"
 
 msgid "Decoder start timeout *"
 msgstr "Tiempo de espera de inicio del decodificador *"
