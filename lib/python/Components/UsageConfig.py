@@ -1577,7 +1577,7 @@ def InitUsageConfig():
 	def setDVBSubtitleBacktrans(configElement):
 		eSubtitleSettings.setDVBSubtitleBacktrans(configElement.value)
 
-	config.subtitles.dvb_subtitles_backtrans = ConfigSelection(default=-1, choices=choiceList)
+	config.subtitles.dvb_subtitles_backtrans = ConfigSelection(default=255, choices=choiceList)
 	config.subtitles.dvb_subtitles_backtrans.addNotifier(setDVBSubtitleBacktrans)
 
 	choiceList = []
@@ -1614,7 +1614,7 @@ def InitUsageConfig():
 	def setDVBSubtitleOriginalPosition(configElement):
 		eSubtitleSettings.setDVBSubtitleOriginalPosition(configElement.value)
 
-	config.subtitles.dvb_subtitles_original_position = ConfigSelection(default=0, choices=[
+	config.subtitles.dvb_subtitles_original_position = ConfigSelection(default=1, choices=[
 		(0, _("Original")),
 		(1, _("Fixed")),
 		(2, _("Relative"))
