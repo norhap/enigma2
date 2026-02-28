@@ -326,6 +326,12 @@ msgstr "A-Z, Nuevo-Viejo"
 msgid "A-Z, Old-New"
 msgstr "A-Z, Viejo-Nuevo"
 
+msgid "A background update check is in progress, please wait a few minutes and try again."
+msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos e intente nuevamente."
+
+msgid "There is an OpenPLi-based backup.\nYou need to restart Enigma2 if you want to restore it.\nDo you want to do it now?"
+msgstr "Hay una copia de seguridad basada en OpenPLi.\nDebes reiniciar Enigma2 si deseas restaurarla.\n¿Quieres hacerlo ahora?"
+
 msgid "a gui to assign services/providers to common interface modules"
 msgstr "una gui para asignar canales/proveedores a módulos de interfaz común"
 
@@ -3822,8 +3828,8 @@ msgstr ""
 msgid "Do you want this?"
 msgstr "Quiere esto?"
 
-msgid "Do you want to autorestore settings?"
-msgstr "¿Desea restaurar la configuración automáticamente?"
+msgid "Do you want restore the OpenPLi-based backup?"
+msgstr "¿Quieres restaurar la copia de seguridad basada en OpenPLi?"
 
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr "¿Quiere quemar esta colección a un DVD?"
@@ -15294,9 +15300,6 @@ msgstr "Tarjetas Info (Lectores-CCcam)"
 
 msgid "No active subservices available."
 msgstr "No hay subcanales activos disponibles."
-
-msgid "A background update check is in progress, please wait a few minutes and try again."
-msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos e intente nuevamente."
 
 msgid ""
 "You want to delete all files?\n"

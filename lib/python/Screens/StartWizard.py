@@ -66,16 +66,17 @@ def setLanguageFromBackup(backupfile):
 def checkForAvailableAutoBackup():
 	for backupfile in ["/media/%s/backup/PLi-AutoBackup.tar.gz" % media for media in os.listdir("/media/") if os.path.isdir(os.path.join("/media/", media))]:
 		if os.path.isfile(backupfile):
-			setLanguageFromBackup(backupfile)
 			return True
 
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
-		MessageBox.__init__(self, session, _("Do you want to autorestore settings?"), type=MessageBox.TYPE_YESNO, timeout=20, default=True, simple=True)
+		message = _("There is an OpenPLi-based backup.\nYou need to restart Enigma2 if you want to restore it.\nDo you want to do it now?") if not os.path.isfile("/etc/.doRestart") else _("Do you want restore the OpenPLi-based backup?")
+		MessageBox.__init__(self, session, message, type=MessageBox.TYPE_YESNO, timeout=20, default=True, simple=True)
 
 	def close(self, value):
 		if value:
+			open('/etc/.doRestart', 'w')
 			MessageBox.close(self, 43)
 		else:
 			MessageBox.close(self)
@@ -175,18 +176,19 @@ class AutoInstallWizard(Screen):
 		self.container = None
 		self.logfile.close()
 		os.remove("/etc/.doAutoinstall")
+		os.remove("/etc/.doRestart")
 		self.close(3)
 
 
 if not os.path.isfile("/etc/installed"):
 	eConsoleAppContainer().execute("opkg list_installed | cut -d ' ' -f 1 > /etc/installed;chmod 444 /etc/installed")
+wizardManager.registerWizard(AutoRestoreWizard, config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
 wizardManager.registerWizard(AutoInstallWizard, os.path.isfile("/etc/.doAutoinstall"), priority=0)
-wizardManager.registerWizard(AutoRestoreWizard, config.misc.languageselected.value and config.misc.firstrun.value and checkForAvailableAutoBackup(), priority=0)
 if not INTERNET_SUCCESS:
-	wizardManager.registerWizard(LanguageWizard, config.misc.languageselected.value and config.misc.firstrun.value, priority=10)
+	wizardManager.registerWizard(LanguageWizard, config.misc.firstrun.value, priority=10)
 if SystemInfo["canKexec"]:
 	from Screens.VuplusKexec import VuWizard
-	wizardManager.registerWizard(VuWizard, config.misc.firstrun.value, priority=2)
+	wizardManager.registerWizard(VuWizard, config.misc.firstrun.value, priority=15)
 wizardManager.registerWizard(TimeWizard, config.misc.firstrun.value, priority=20)
 # if OverscanWizard:  # No ckeck for StartWizard.
 # wizardManager.registerWizard(OverscanWizard, config.misc.do_overscanwizard.value, priority=30)
