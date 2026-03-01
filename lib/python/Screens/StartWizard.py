@@ -79,6 +79,8 @@ class AutoRestoreWizard(MessageBox):
 			open('/etc/.RestoreOpenPLiBackup', 'w')
 			MessageBox.close(self, 43)
 		else:
+			if os.path.isfile("/etc/.RestoreOpenPLiBackup"):
+				os.remove("/etc/.RestoreOpenPLiBackup")
 			MessageBox.close(self)
 
 
