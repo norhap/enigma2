@@ -1,5 +1,6 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigBoolean
+from os.path import isfile
 
 config.misc.firstrun = ConfigBoolean(default=True)
 
@@ -22,6 +23,6 @@ def NetworkWizard(*args, **kwargs):
 
 def Plugins(**kwargs):
 	list = []
-	if config.misc.firstrun.value:
+	if config.misc.firstrun.value and not isfile("/etc/.RestoreOpenPLiBackup"):
 		list.append(PluginDescriptor(name=_("Network wizard"), where=PluginDescriptor.WHERE_WIZARD, needsRestart=False, fnc=(25, NetworkWizard)))
 	return list
