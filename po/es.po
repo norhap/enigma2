@@ -2601,9 +2601,6 @@ msgstr "Territorio Británico del Océano Índico"
 msgid "Brunei Darussalam"
 msgstr "Brunéi"
 
-msgid "Buffer descrambled data before starting playback. Reduce audio dropouts with AC3 by ensuring enough data is available when the decoder starts. Higher values are more stable but increase channel switch time."
-msgstr "Almacene en búfer los datos descodificados antes de iniciar la reproducción. Reduzca las pérdidas de audio con AC3 garantizando la disponibilidad de suficientes datos al iniciar el decodificador. Los valores más altos son más estables, pero aumentan el tiempo de cambio de canal"
-
 #, python-format
 msgid "Buffering %d%%"
 msgstr "Llenando buffer %d%%"
@@ -4655,7 +4652,7 @@ msgid "favorites description match"
 msgstr "coincidencia de descripción de favoritos"
 
 msgid "Fallback tuner and FCC activated. Activate only one function."
-msgstr "Tuner reserva y FCC activados. Activar solo una función."
+msgstr "Tuner reserva y FCC activados. Active solo una función."
 
 msgid "FCC enabled"
 msgstr "FCC habilitado"
@@ -13422,7 +13419,7 @@ msgid "Maximum event duration to match. If an event is longer than this amount o
 msgstr "Duración máxima del evento para que coincida. Si un evento es más largo que este período de tiempo (sin compensación), no se combinará."
 
 msgid "Maximum time to wait for the first descrambling key (CW) before starting the decoder. 'Disabled' starts the decoder immediately without waiting."
-msgstr "Tiempo máximo de espera para la primera clave de descodificación (CW) antes de iniciar el decodificador. \"Deshabilitado\" inicia el decodificador inmediatamente sin espera."
+msgstr "Tiempo máximo de espera para la primera clave de descodificación (CW) antes de iniciar el decodificador. \"Desactivado\" inicia el decodificador inmediatamente sin espera."
 
 #, python-format
 msgid ""
@@ -13593,8 +13590,11 @@ msgstr "Seleccionar imagen y eliminar"
 msgid "Select image and reboot"
 msgstr "Seleccionar imagen y reiniciar"
 
+msgid "Select the delay to buffer descrambled data before starting playback. This can reduce AC3 audio dropouts by ensuring enough data is available when the decoder starts. Higher values are more stable but increase channel switch time."
+msgstr "Seleccione el retardo para almacenar en búfer los datos descodificados antes de iniciar la reproducción. Esto puede reducir las pérdidas de audio AC3 al garantizar que haya suficientes datos disponibles al iniciar el decodificador. Los valores más altos son más estables, pero aumentan el tiempo de cambio de canal."
+
 msgid "Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
-msgstr "Seleccione el retraso que se utilizará al cerrar un canal Stream Relay antes de reasignar el sintonizador a otro canal. El uso de '0' sólo se recomienda para cajas con múltiples sintonizadores de satélite."
+msgstr "Seleccione el retraso que se utilizará al cerrar un canal Stream Relay antes de reasignar el sintonizador a otro canal. El uso de \"0\" sólo se recomienda para cajas con múltiples sintonizadores de satélite."
 
 msgid "Select the count of the last saved searchlogs (min=5 max=20)"
 msgstr "Seleccione el recuento de los últimos registros de búsqueda guardados (mínimo=5 máximo=20)"
