@@ -1656,7 +1656,7 @@ msgid "Configure the gateway."
 msgstr "Configure la puerta de enlace."
 
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
-msgstr "Configure el disco duro para pasar al modo de reposo tras el tiempo de inactividad especificado."
+msgstr "Configure el disco duro para pasar al modo reposo tras el tiempo de inactividad especificado."
 
 msgid "Configure the horizontal alignment of the subtitles."
 msgstr "Configure la alineación horizontal de los subtítulos."
@@ -3155,7 +3155,7 @@ msgid "Configure the duration in minutes for the sleeptimer. Select the entry an
 msgstr "Configura la duración en minutos para el temporizador de descanso. Selecciona la entrada y pulse AZUL para iniciar el temporizador de descanso."
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
-msgstr "Configure la duración cuando el receptor debe apagarse en caso de que esté en modo de reposo."
+msgstr "Configure la duración cuando el receptor debe apagarse en caso de que esté en modo reposo."
 
 msgid "Configure the general audio delay of Dolby Digital sound tracks."
 msgstr "Configure el retardo del audio de las pistas de sonido Dolby Digital."
@@ -3637,7 +3637,7 @@ msgid "Details for plugin: "
 msgstr "Detalles para el plugin: "
 
 msgid "Detect next boxes before standby"
-msgstr "Detecta los cuadros siguientes antes del modo de reposo"
+msgstr "Detecta los cuadros siguientes antes del modo reposo"
 
 msgid "Detected HDD:"
 msgstr "HDD Detectado:"
@@ -5200,7 +5200,7 @@ msgid "Haiti"
 msgstr "Haití"
 
 msgid "Handle standby from TV"
-msgstr "Manejar el modo de reposo desde la TV"
+msgstr "Manejar el modo reposo desde la TV"
 
 msgid "Handle wakeup from TV"
 msgstr "Manejar el despertar desde la TV"
@@ -5593,7 +5593,7 @@ msgid "Import autotimer in current event"
 msgstr "Importar temporizador automático en el evento actual"
 
 msgid "Import channels and/or EPG from remote receiver URL also when the receiver is getting out of standby."
-msgstr "Importar canales y/o EPG desde la URL del receptor reserva también cuando el receptor salga del modo de reposo."
+msgstr "Importar canales y/o EPG desde la URL del receptor reserva también cuando el receptor salga del modo reposo."
 
 msgid "Import channels and/or EPG from remote receiver URL or IP."
 msgstr "Importe canales y/o EPG desde la URL o IP del receptor servidor."
@@ -7586,7 +7586,7 @@ msgid "Protect software update screen"
 msgstr "Proteger pantalla de actalización de software"
 
 msgid "Protect standby menu"
-msgstr "Proteger menú de reposo"
+msgstr "Proteger menú reposo"
 
 msgid "Protect timer menu"
 msgstr "Proteger menú de temporizadores"
@@ -7791,7 +7791,7 @@ msgid "Refreshing image list - Please wait..."
 msgstr "Actualización de la lista de imágenes: espere …"
 
 msgid "Regard deep standby as standby"
-msgstr "Considerar el modo de reposo profundo como modo de reposo"
+msgstr "Considerar el modo reposo profundo como modo reposo"
 
 msgid "Region"
 msgstr "Región"
@@ -8957,7 +8957,7 @@ msgid "Shutdown OSCam"
 msgstr "Parar OSCam"
 
 msgid "Shutdown when in Standby"
-msgstr "Apagar cuando está en modo de reposo"
+msgstr "Apagar cuando está en modo reposo"
 
 msgid "Side by side"
 msgstr "Lado a lado"
@@ -9220,7 +9220,7 @@ msgid "Specify the directory to use when starting Media Player."
 msgstr "Especifique el directorio que se utilizará al iniciar Media Player."
 
 msgid "Specify the end time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Especifique la hora de finalización para ignorar el temporizador de apagado cuando el receptor está en modo de reposo"
+msgstr "Especifique la hora de finalización para ignorar el temporizador de apagado cuando el receptor está en modo reposo"
 
 msgid "Specify the end time until the inactivity sleeptimer should be ignored"
 msgstr "Especifique el tiempo de finalización hasta que se ignore el temporizador de inactividad"
@@ -9232,7 +9232,7 @@ msgid "Specify the extra start time when the inactivity sleeptimer should be ign
 msgstr "Especifique el tiempo de inicio adicional cuando se debe ignorar el temporizador de inactividad"
 
 msgid "Specify the start time to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Especifique la hora de inicio para ignorar el temporizador de apagado cuando el receptor está en modo de reposo"
+msgstr "Especifique la hora de inicio para ignorar el temporizador de apagado cuando el receptor está en modo reposo"
 
 msgid "Specify the start time when the inactivity sleeptimer should be ignored"
 msgstr "Especifique la hora de inicio cuando se debe ignorar el temporizador de inactividad"
@@ -9241,7 +9241,7 @@ msgid "Specify timeframe to ignore inactivity sleeptimer"
 msgstr "Especifique el marco de tiempo para ignorar inactividad"
 
 msgid "Specify timeframe to ignore the shutdown in standby"
-msgstr "Especifique el marco de tiempo para ignorar el apagado en modo de reposo"
+msgstr "Especifique el marco de tiempo para ignorar el apagado en modo reposo"
 
 msgid "Split preview mode"
 msgstr "Modo de vista previa dividida"
@@ -9327,7 +9327,7 @@ msgid "Start time to ignore inactivity sleeptimer"
 msgstr "Hora de inicio para ignorar inactividad"
 
 msgid "Start time to ignore shutdown in standby"
-msgstr "Hora de inicio para ignorar el apagado en modo de reposo"
+msgstr "Hora de inicio para ignorar el apagado en modo reposo"
 
 msgid "Start timeshift"
 msgstr "Iniciar Timeshift"
@@ -10835,7 +10835,7 @@ msgid "Western Sahara"
 msgstr "Sahara Occidental"
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
-msgstr "Cuando está habilitado, puede especificar un intervalo de tiempo para ignorar el temporizador de apagado cuando el receptor está en modo de reposo"
+msgstr "Cuando está habilitado, puede especificar un intervalo de tiempo para ignorar el temporizador de apagado cuando el receptor está en modo reposo"
 
 msgid "When enabled you can specify a timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr "Cuando está habilitado, puede especificar un marco de tiempo cuando se ignora el temporizador de inactividad. No la detección está deshabilitada durante este período de tiempo, pero el tiempo de inactividad está desactivado"
@@ -11179,10 +11179,10 @@ msgid "Once"
 msgstr "Una vez"
 
 msgid "Only from deep standby"
-msgstr "Solo desde el modo de reposo profundo"
+msgstr "Solo desde el modo reposo profundo"
 
 msgid "Only from standby"
-msgstr "Solo desde el modo de reposo"
+msgstr "Solo desde el modo reposo"
 
 msgid "OpenFavouritesList"
 msgstr "Abrir Favoritos"
