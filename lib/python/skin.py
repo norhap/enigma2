@@ -2070,15 +2070,15 @@ class TemplateParser():
 		itemIndex = ""
 		for attrib, value in node.items():  # Walk all attributes.
 			if attrib not in ignore:
-				if attrib:
-					if "position":
+				match attrib:
+					case "position":
 						pos = value
-					elif "size":
+					case "size":
 						size = value
-					elif "index":
+					case "index":
 						itemIndex = value
 						skinAttributes.append((attrib, value))
-					elif _:
+					case _:
 						skinAttributes.append((attrib, value))
 		if itemIndex and includeItemIndexes and itemIndex not in includeItemIndexes:
 			return []
