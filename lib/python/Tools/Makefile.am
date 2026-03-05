@@ -4,6 +4,7 @@ install_PYTHON = \
 	__init__.py \
 	Alternatives.py \
 	ASCIItranslit.py \
+	BaseSubsParser.py \
 	BoundFunction.py \
 	camcontrol.py \
 	CIHelper.py \
@@ -29,7 +30,9 @@ install_PYTHON = \
 	Profile.py \
 	RedirectOutput.py \
 	StbHardware.py \
+	SubRip.py \
 	TextBoundary.py \
+	TolerantDict.py \
 	Trace.py \
 	Transponder.py \
 	Trashcan.py \
