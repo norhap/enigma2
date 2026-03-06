@@ -11624,6 +11624,9 @@ msgstr "archivo plantilla"
 msgid "tennis/squash"
 msgstr "tenis/squash"
 
+msgid "The AutoTimer plugin is not installed!\nDo you want to install it?"
+msgstr "¡El plugin AutoTimer no está instalado!\n¿Quieres instalarlo?"
+
 msgid "This bouquet is protected by a parental control PIN"
 msgstr "Este bouquet está protegido por un PIN de control parental"
 
@@ -19184,6 +19187,9 @@ msgstr "Su %s %s almacena los datos guardados en EPG cada (horas)."
 
 msgid "You are ready to add current event to automatic timer.\nIf there are no conflicts, once added you must enter menu:\n\nTimers > AutoTimers and search the event with green button."
 msgstr "Se dispone para añadir el evento actual al temporizador automático.\nSi no hay conflictos, una vez agregado debe ingresar al menú:\n\nTemporizadores > AutoTemporizadores y busque el evento con botón verde."
+
+msgid "You are ready to add this event to automatic timer.\nIf there are no conflicts, once added you must enter menu:\n\nTimers > AutoTimers and search the event with green button."
+msgstr "Se dispone para añadir este evento al temporizador automático.\nSi no hay conflictos, una vez agregado debe ingresar al menú:\n\nTemporizadores > AutoTemporizadores y busque el evento con botón verde."
 
 msgid "You can cancel the removal."
 msgstr "Puede cancelar la eliminación."
