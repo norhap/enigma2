@@ -1,17 +1,6 @@
 <wizard>
 	<step id="welcome">
 		<text value="Welcome.\n\nIf you want to connect your [BRANDMODEL] to the Internet, this wizard will guide you through the basic network setup.\n\nPress OK to start configuring your network." />
-		<displaytext value="Network wizard" />
-		<code>
-self.clearSelectedKeys()
-self.selectKey("OK")
-		</code>
-		<code pos="after" async="yes">
-self.selectInterface()
-		</code>
-	</step>
-	<step id="selectinterface">
-		<text value="Please select the network interface that you want to use for your internet connection.\n\nPlease press OK to continue." />
 		<displaytext value="Select interface" />
 		<list type="dynamic" source="listInterfaces" evaluation="InterfaceSelectionMade" onselect="InterfaceSelectionMoved" />
 		<code>
@@ -25,7 +14,7 @@ self.checkInterface(self.selectedInterface)
 		</code>
 	</step>
 	<step id="nwconfig">
-		<text value="Please configure your internet connection by filling out the required values.\n\nWhen you are ready press OK to continue." />
+		<text value="Please select the network interface that you want to use for your internet connection.\n\nPlease press OK to continue." />
 		<displaytext value="Configure interface" />
 		<config screen="AdapterSetup" module="NetworkSetup" args="self.selectedInterface" type="ConfigList" />
 		<code>
@@ -205,7 +194,7 @@ self.selectKey("DOWN")
 		</list>
 	</step>
 	<step id="end">
-		<text value="Thank you for using the wizard.\nPlease press OK to continue." />
+		<text value="Thank you for using the wizard.\n\nPlease press OK to continue." />
 		<code>
 self.clearSelectedKeys()
 self.selectKey("OK")
