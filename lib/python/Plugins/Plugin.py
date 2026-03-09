@@ -72,6 +72,8 @@ class PluginDescriptor(object):
 
 	WHERE_EXTENSIONSINGLE = 19
 
+	WHERE_PLAYSERVICE = 20
+
 	def __init__(self, name="Plugin", where=[], description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0):
 		self.name = name
 		self.internal = internal
@@ -96,8 +98,16 @@ class PluginDescriptor(object):
 
 		self.__call__ = fnc
 
+	"""  # Old method function call
 	def __call__(self, reason=0, session=0, servicelist=0, service=0):
 		return
+	"""
+	def __call__(self, *args, **kwargs):  # Calling the function sync method with ATV.
+		if callable(self.__call__):
+			return self.__call__(*args, **kwargs)
+		else:
+			print("[Plugin] Error: PluginDescriptor called without a function!")
+			return []
 
 	def updateIcon(self, path):
 		self.path = path

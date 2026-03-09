@@ -15,9 +15,13 @@ import Screens.Standby
 import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
+from Screens.MessageBox import MessageBox
 from Components.Sources.StreamService import StreamServiceList
 from os.path import exists
 from Screens.InfoBarGenerics import streamrelay
+from Components.PluginComponent import plugins
+from Plugins.Plugin import PluginDescriptor
+from Tools.Notifications import AddPopup
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 
@@ -149,7 +153,7 @@ class Navigation:
 		oldref = self.currentlyPlayingServiceOrGroup
 		current_service_source = None
 		isStreamRelay = False
-		is_handled = False
+		isHandled = False
 		InfoBarInstance = InfoBar.instance
 		if InfoBarInstance:
 			current_service_source = InfoBarInstance.session.screen["CurrentService"]
@@ -168,13 +172,18 @@ class Navigation:
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
 				playref = getBestPlayableServiceReference(ref, oldref)
-				if playref and config.misc.use_ci_assignment.value and not isPlayableForCur(playref):
-					alternative_ci_ref = ResolveCiAlternative(ref, playref)
-					if alternative_ci_ref:
-						playref = alternative_ci_ref
-				if not ignoreStreamRelay:
-					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
-				print("[Navigation] playref", playref)
+				if playref:
+					if config.misc.use_ci_assignment.value and not isPlayableForCur(playref):
+						alternative_ci_ref = ResolveCiAlternative(ref, playref)
+						if alternative_ci_ref:
+							playref = alternative_ci_ref
+					if not ignoreStreamRelay:
+						playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
+					if not isStreamRelay:
+						playref, wrappererror = self.serviceHook(playref)
+						if wrappererror:
+							return 1
+					print("[Navigation] playref", playref)
 				if playref and oldref and playref == oldref and not forceRestart:
 					print("[Navigation] ignore request to play already running service(2)")
 					return 1
@@ -210,17 +219,21 @@ class Navigation:
 					from enigma import eFCCServiceManager  # noqa: E402 Set FCC not enabled if fallback tuner is active.
 					if config.usage.remote_fallback_enabled.value:
 						eFCCServiceManager.getInstance().setFCCEnable(False)
-						self.FCCFallBack()
+						self.serviceHook(playref)
 						return 1
 					else:
 						eFCCServiceManager.getInstance().setFCCEnable(True)
 				self.currentlyPlayingServiceReference = playref
-				if not ignoreStreamRelay and playref:
+				if not ignoreStreamRelay:
 					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
-				if SystemInfo["FCCactive"] and "%3a//" in ref.toString() and not isStreamRelay:
-					self.pnav.stopService()
+				if not isStreamRelay:
+					playref, wrappererror = self.serviceHook(playref)
+					if wrappererror:
+						return 1
+					if SystemInfo["FCCactive"] and "%3a//" in ref.toString():
+						self.pnav.stopService()
 				for f in Navigation.playServiceExtensions:
-					playref, is_handled = f(self, playref, event, InfoBarInstance)
+					playref, isHandled = f(self, playref, event, InfoBarInstance)
 				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref
 				if startPlayingServiceOrGroup and startPlayingServiceOrGroup.flags & eServiceReference.isGroup and not ref.flags & eServiceReference.isGroup:
@@ -267,7 +280,7 @@ class Navigation:
 					self.firstStart = False
 					self.retryServicePlayTimer.start(delay, True)
 					return 0
-				elif not is_handled and self.pnav.playService(playref):
+				elif not isHandled and self.pnav.playService(playref):
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
@@ -280,7 +293,7 @@ class Navigation:
 				self.skipServiceReferenceReset = False
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:
 					self.isCurrentServiceStreamRelay = True
-				if InfoBarInstance and "%3a//" in playref.toString() and not is_handled:
+				if InfoBarInstance and "%3a//" in playref.toString() and not isHandled:
 					InfoBarInstance.serviceStarted()
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
@@ -288,6 +301,24 @@ class Navigation:
 		elif oldref and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(oldref, adjust):
 			self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
 		return 1
+
+	def serviceHook(self, ref):
+		wrappererror = None
+		nref = ref
+		if config.usage.remote_fallback_enabled.value and SystemInfo["FCCactive"]:
+			return AddPopup(_("Fallback tuner and FCC activated. Activate only one function."), type=MessageBox.TYPE_ERROR, timeout=10)
+		elif hasattr(nref, "getPath"):
+			for p in plugins.getPlugins(PluginDescriptor.WHERE_PLAYSERVICE):
+				(newurl, errormsg) = p(service=nref)
+				if errormsg:
+					wrappererror = _("Error getting link via %s\n%s") % (p.name, errormsg)
+					break
+				elif newurl:
+					nref.setCompareSref(newurl)
+					break
+			if wrappererror:
+				AddPopup(text=wrappererror, type=MessageBox.TYPE_ERROR, timeout=5, id="channelzapwrapper")
+		return nref, wrappererror
 
 	def getCurrentlyPlayingServiceReference(self):
 		return self.currentlyPlayingServiceReference
@@ -299,12 +330,6 @@ class Navigation:
 		curPlayService = self.getCurrentService()
 		info = curPlayService and curPlayService.info()
 		return info and info.getInfoString(iServiceInformation.sServiceref)
-
-	def FCCFallBack(self):
-		from Screens.MessageBox import MessageBox  # noqa: E402
-		from Tools.Notifications import AddPopup  # noqa: E402
-		if config.usage.remote_fallback_enabled.value and SystemInfo["FCCactive"]:
-			return AddPopup(_("Fallback tuner and FCC activated. Activate only one function."), type=MessageBox.TYPE_ERROR, timeout=10)
 
 	def isCurrentServiceIPTV(self):
 		ref = self.getCurrentServiceRef()
