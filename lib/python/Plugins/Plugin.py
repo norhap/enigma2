@@ -96,7 +96,7 @@ class PluginDescriptor(object):
 
 		self.wakeupfnc = wakeupfnc
 
-		self.function = fnc
+		self.__call__ = fnc
 
 	"""  # Old method function call
 	def __call__(self, reason=0, session=0, servicelist=0, service=0):
@@ -104,8 +104,8 @@ class PluginDescriptor(object):
 	"""
 
 	def __call__(self, *args, **kwargs):  # Calling the function sync method with ATV.
-		if callable(self.function):
-			return self.function(*args, **kwargs)
+		if callable(self.__call__):
+			return self.__call__(*args, **kwargs)
 		else:
 			print("[Plugin] Error: PluginDescriptor called without a function!")
 			return []
@@ -125,10 +125,10 @@ class PluginDescriptor(object):
 			return self._icon
 
 	def __eq__(self, other):
-		return self.function == other.function
+		return self.__call__ == other.__call__
 
 	def __ne__(self, other):
-		return self.function != other.function
+		return self.__call__ != other.__call__
 
 	def __lt__(self, other):
 		if self.weight < other.weight:
