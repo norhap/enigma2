@@ -98,11 +98,6 @@ class PluginDescriptor(object):
 
 		self.__call__ = fnc
 
-	"""  # Old method function call
-	def __call__(self, reason=0, session=0, servicelist=0, service=0):
-		return
-	"""
-
 	def __call__(self, *args, **kwargs):  # Calling the function sync method with ATV.
 		if callable(self.__call__):
 			return self.__call__(*args, **kwargs)
