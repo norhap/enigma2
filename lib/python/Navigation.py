@@ -184,10 +184,14 @@ class Navigation:
 						if wrappererror:
 							return 1
 					print("[Navigation] playref", playref)
-				if playref and oldref and playref == oldref and not forceRestart:
-					print("[Navigation] ignore request to play already running service(2)")
-					return 1
-				if not playref:
+					if oldref and playref == oldref and not forceRestart:
+						print("[Navigation] ignore request to play already running service(2)")
+						return 1
+					if checkParentalControl and not parentalControl.isServicePlayable(playref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session, ref] or adjust)), session=session):
+						if self.currentlyPlayingServiceOrGroup and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(self.currentlyPlayingServiceOrGroup, adjust):
+							self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
+						return 1
+				else:
 					alternativeref = getBestPlayableServiceReference(ref, eServiceReference(), True)
 					self.stopService()
 					if alternativeref and self.pnav:
@@ -205,10 +209,6 @@ class Navigation:
 						else:
 							print("[Navigation] alternative ref as simulate: ", alternativeref.toString())
 					return 0
-				elif checkParentalControl and not parentalControl.isServicePlayable(playref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session, ref] or adjust)), session=session):
-					if self.currentlyPlayingServiceOrGroup and InfoBarInstance and InfoBarInstance.servicelist.servicelist.setCurrent(self.currentlyPlayingServiceOrGroup, adjust):
-						self.currentlyPlayingServiceOrGroup = InfoBarInstance.servicelist.servicelist.getCurrent()
-					return 1
 			else:
 				playref = ref
 			if self.pnav:
@@ -232,8 +232,10 @@ class Navigation:
 						return 1
 					if SystemInfo["FCCactive"] and "%3a//" in ref.toString():
 						self.pnav.stopService()
+
 				for f in Navigation.playServiceExtensions:
 					playref, isHandled = f(self, playref, event, InfoBarInstance)
+
 				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref
 				if startPlayingServiceOrGroup and startPlayingServiceOrGroup.flags & eServiceReference.isGroup and not ref.flags & eServiceReference.isGroup:
@@ -245,29 +247,30 @@ class Navigation:
 					str_service = self.currentlyPlayingServiceReference.toString()
 					if '%3a//' not in str_service and not str_service.rsplit(":", 1)[1].startswith("/"):
 						type_service = self.currentlyPlayingServiceReference.getUnsignedData(4) >> 16
-						if type_service == 0xEEEE:
-							if SystemInfo["DVB-T_priority_tuner_available"] and config.usage.frontend_priority_dvbt.value != "-2":
-								if config.usage.frontend_priority_dvbt.value != config.usage.frontend_priority.value:
-									setPreferredTuner(int(config.usage.frontend_priority_dvbt.value))
-									setPriorityFrontend = True
-							if SystemInfo["ATSC_priority_tuner_available"] and config.usage.frontend_priority_atsc.value != "-2":
-								if config.usage.frontend_priority_atsc.value != config.usage.frontend_priority.value:
-									setPreferredTuner(int(config.usage.frontend_priority_atsc.value))
-									setPriorityFrontend = True
-						elif type_service == 0xFFFF:
-							if SystemInfo["DVB-C_priority_tuner_available"] and config.usage.frontend_priority_dvbc.value != "-2":
-								if config.usage.frontend_priority_dvbc.value != config.usage.frontend_priority.value:
-									setPreferredTuner(int(config.usage.frontend_priority_dvbc.value))
-									setPriorityFrontend = True
-							if SystemInfo["ATSC_priority_tuner_available"] and config.usage.frontend_priority_atsc.value != "-2":
-								if config.usage.frontend_priority_atsc.value != config.usage.frontend_priority.value:
-									setPreferredTuner(int(config.usage.frontend_priority_atsc.value))
-									setPriorityFrontend = True
-						else:
-							if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.frontend_priority_dvbs.value != "-2":
-								if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
-									setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
-									setPriorityFrontend = True
+						match type_service:
+							case 0xEEEE:
+								if SystemInfo["DVB-T_priority_tuner_available"] and config.usage.frontend_priority_dvbt.value != "-2":
+									if config.usage.frontend_priority_dvbt.value != config.usage.frontend_priority.value:
+										setPreferredTuner(int(config.usage.frontend_priority_dvbt.value))
+										setPriorityFrontend = True
+								if SystemInfo["ATSC_priority_tuner_available"] and config.usage.frontend_priority_atsc.value != "-2":
+									if config.usage.frontend_priority_atsc.value != config.usage.frontend_priority.value:
+										setPreferredTuner(int(config.usage.frontend_priority_atsc.value))
+										setPriorityFrontend = True
+							case 0xFFFF:
+								if SystemInfo["DVB-C_priority_tuner_available"] and config.usage.frontend_priority_dvbc.value != "-2":
+									if config.usage.frontend_priority_dvbc.value != config.usage.frontend_priority.value:
+										setPreferredTuner(int(config.usage.frontend_priority_dvbc.value))
+										setPriorityFrontend = True
+								if SystemInfo["ATSC_priority_tuner_available"] and config.usage.frontend_priority_atsc.value != "-2":
+									if config.usage.frontend_priority_atsc.value != config.usage.frontend_priority.value:
+										setPreferredTuner(int(config.usage.frontend_priority_atsc.value))
+										setPriorityFrontend = True
+							case _:
+								if SystemInfo["DVB-S_priority_tuner_available"] and config.usage.frontend_priority_dvbs.value != "-2":
+									if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
+										setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
+										setPriorityFrontend = True
 				if (config.misc.softcam_streamrelay_delay.value and self.isCurrentServiceStreamRelay) or (self.firstStart and isStreamRelay):
 					self.skipServiceReferenceReset = False
 					self.isCurrentServiceStreamRelay = False
