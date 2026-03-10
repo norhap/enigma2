@@ -39,7 +39,7 @@ class CurrentService(PerServiceBase, Source):
 	@cached
 	def getCurrentServiceRef(self):
 		if NavigationInstance.instance is not None:
-			return NavigationInstance.instance.getCurrentlyPlayingServiceOrGroup()
+			return NavigationInstance.instance.getCurrentServiceReferenceOriginal()
 		return None
 
 	serviceref = property(getCurrentServiceRef)

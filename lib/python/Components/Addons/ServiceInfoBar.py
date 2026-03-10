@@ -151,7 +151,7 @@ class ServiceInfoBar(GUIAddon):
 	def detectVisible(self, key):
 		if self.nav is not None:
 			service = self.nav.getCurrentService()
-			pending_service_ref = self.nav.getCurrentlyPlayingServiceReference()
+			pending_service_ref = self.nav.getCurrentServiceReferenceOriginal()
 			pending_sref = pending_service_ref and pending_service_ref.toString() or ""
 			info = service and service.info()
 			isRef = isinstance(service, eServiceReference)

@@ -46,6 +46,7 @@ class Navigation:
 		self.currentlyPlayingServiceReference = None
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
+		self.originalPlayingServiceReference = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
 		self.firstStart = True
@@ -161,14 +162,17 @@ class Navigation:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
 		print("[Navigation] playing", ref and ref.toString())
+
+		self.currentlyPlayingServiceReference = ref
+		self.currentlyPlayingServiceOrGroup = ref
+		self.originalPlayingServiceReference = ref
+		if InfoBarInstance and current_service_source:
+			current_service_source.newService(ref)
+			# InfoBarInstance.session.screen["Event_Now"].updateSource(self.currentlyPlayingServiceReference) # respect EIT
+			# InfoBarInstance.session.screen["Event_Next"].updateSource(self.currentlyPlayingServiceReference) # respect EIT
+			InfoBarInstance.serviceStarted()
+
 		if not checkParentalControl or parentalControl.isServicePlayable(ref, boundFunction(self.playService, checkParentalControl=False, forceRestart=forceRestart, adjust=(count > 1 and [0, session] or adjust)), session=session):
-			self.currentlyPlayingServiceReference = ref
-			self.currentlyPlayingServiceOrGroup = ref
-			if InfoBarInstance and current_service_source:
-				current_service_source.newService(ref)
-				# InfoBarInstance.session.screen["Event_Now"].updateSource(self.currentlyPlayingServiceReference) # respect EIT
-				# InfoBarInstance.session.screen["Event_Next"].updateSource(self.currentlyPlayingServiceReference) # respect EIT
-				InfoBarInstance.serviceStarted()
 			if ref.flags & eServiceReference.isGroup:
 				oldref = self.currentlyPlayingServiceReference or eServiceReference()
 				playref = getBestPlayableServiceReference(ref, oldref)
@@ -286,6 +290,7 @@ class Navigation:
 				elif not isHandled and self.pnav.playService(playref):
 					print("[Navigation] Failed to start", playref.toString())
 					self.currentlyPlayingServiceReference = None
+					self.originalPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
 					if oldref and ("://" in oldref.getPath() or streamrelay.checkService(oldref)):
 						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
@@ -297,6 +302,7 @@ class Navigation:
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:
 					self.isCurrentServiceStreamRelay = True
 				if InfoBarInstance and "%3a//" in playref.toString() and not isHandled:
+					self.originalPlayingServiceReference = None
 					InfoBarInstance.serviceStarted()
 				if setPriorityFrontend:
 					setPreferredTuner(int(config.usage.frontend_priority.value))
@@ -328,6 +334,9 @@ class Navigation:
 
 	def getCurrentlyPlayingServiceOrGroup(self):
 		return self.currentlyPlayingServiceOrGroup
+
+	def getCurrentServiceReferenceOriginal(self):
+		return self.originalPlayingServiceReference or self.currentlyPlayingServiceOrGroup
 
 	def getCurrentServiceRef(self):
 		curPlayService = self.getCurrentService()
