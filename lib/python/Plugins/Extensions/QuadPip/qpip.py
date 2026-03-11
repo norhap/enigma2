@@ -665,10 +665,10 @@ class QuadPipScreen(Screen, FocusShowHide, HelpableScreen):
 				"red": (self.KeyRed, _("Show/Hide focus bar")),
 			}, -1)
 
-		self["ch1"] = Label(_(" "))
-		self["ch2"] = Label(_(" "))
-		self["ch3"] = Label(_(" "))
-		self["ch4"] = Label(_(" "))
+		self["ch1"] = Label(" ")
+		self["ch2"] = Label(" ")
+		self["ch3"] = Label(" ")
+		self["ch4"] = Label(" ")
 		self["text1"] = Label(_("  Red key : Show/Hide channel name"))
 		self["text2"] = Label(_("  Menu key : Select quad channel"))
 		self["focus"] = Slider(-1, -1)
