@@ -12,7 +12,6 @@
 class eDVBFrontendParameters: public iDVBFrontendParameters
 {
 	DECLARE_REF(eDVBFrontendParameters);
-#ifndef SWIG
 	union
 	{
 		eDVBFrontendParametersSatellite sat;
@@ -22,7 +21,6 @@ class eDVBFrontendParameters: public iDVBFrontendParameters
 	};
 	int m_type;
 	int m_flags;
-#endif
 public:
 	eDVBFrontendParameters();
 	~eDVBFrontendParameters()
@@ -181,7 +179,7 @@ public:
 	const dvb_frontend_info getFrontendInfo() const { return fe_info; }
 	bool is_simulate() const { return m_simulate; }
 	bool is_FBCTuner() { return m_fbc; }
-	void setFBCTuner(bool enable) { m_fbc = enable; }
+	void setFBCTuner(bool yesno) { m_fbc = yesno; }
 	bool getEnabled() { return m_enabled; }
 	void setEnabled(bool enable) { m_enabled = enable; }
 	void setUSBTuner(bool yesno) { m_is_usbtuner = yesno; }
