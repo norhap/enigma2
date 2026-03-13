@@ -924,9 +924,9 @@ RESULT eDVBResourceManager::allocateFrontend(ePtr<eDVBAllocatedFrontend> &fe, eP
 	eSmartPtrList<eDVBRegisteredFrontend> &frontends = simulate ? m_simulate_frontend : m_frontend;
 	eDVBRegisteredFrontend *best, *fbc_fe, *best_fbc_fe;
 	int bestval, foundone, current_fbc_setid, c;
-	bool check_fbc_leaf_linkable;
-	[[maybe_unused]] bool is_configured_sat;
-	[[maybe_unused]] long link;
+	bool check_fbc_leaf_linkable, is_configured_sat;
+
+	long link;
 
 	fbc_fe  = NULL;
 	best_fbc_fe = NULL;
@@ -1464,9 +1464,9 @@ int eDVBResourceManager::canAllocateChannel(const eDVBChannelID &channelid, cons
 	if (!simulate && m_cached_channel)
 	{
 		eDVBChannel *cache_chan = (eDVBChannel*)&(*m_cached_channel);
-		if(channelid==cache_chan->getChannelID())
+		if(channelid==cache_chan->getChannelID()) {
 			return tuner_type_channel_default(m_list, channelid, system);
-	}
+		}
 
 		/* first, check if a channel is already existing. */
 //	eDebug("[eDVBResourceManager] allocate channel.. %04x:%04x", channelid.transport_stream_id.get(), channelid.original_network_id.get());
@@ -1792,19 +1792,6 @@ void eDVBChannel::pvrEvent(int event)
 	case eFilePushThread::evtEOF:
 		eDebug("[eDVBChannel] End of file!");
 		m_event(this, evtEOF);
-		break;
-	case eFilePushThread::evtReadError:
-		eDebug("[eDVBChannel] Read error!");
-		if (m_source->isStream()) {
-			eDebug("[eDVBChannel] We are in stream mode, trying to reconnect it!");
-			ePtr<iTsSource> source = m_source;
-			stop();
-			source->reconnect();
-			playSource(source, m_streaminfo_file.c_str());
-		}
-		else {
-			stop();
-		}
 		break;
 	case eFilePushThread::evtUser: /* start */
 		eDebug("[eDVBChannel] SOF");
@@ -2304,13 +2291,15 @@ RESULT eDVBChannel::getDemux(ePtr<iDVBDemux> &demux, int cap)
 	if (!our_demux)
 	{
 		demux = 0;
-		// eDebug"[eDVBChannel] DEBUG getDemux call allocateDemuxu");
+
 		if (m_mgr->allocateDemux(m_frontend ? (eDVBRegisteredFrontend*)*m_frontend : (eDVBRegisteredFrontend*)0, our_demux, cap))
 			return -1;
 
+		demux = *our_demux;
 	}
-	demux = *our_demux;
-		
+	else
+		demux = *our_demux;
+
 	return 0;
 }
 
