@@ -99,6 +99,7 @@ private:
 	bool m_blindscan;
 	bool m_multitype;
 	std::map<fe_delivery_system_t, bool> m_delsys, m_delsys_whitelist;
+	std::map<fe_delivery_system_t, dvb_frontend_info> m_fe_info;
 	std::string m_filename;
 	char m_description[128];
 	dvb_frontend_info fe_info;
