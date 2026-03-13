@@ -594,9 +594,6 @@ int eDVBFrontend::openFrontend()
 	m_state=stateIdle;
 	m_tuning=0;
 
-	if(initModeList())
-		eDebug("[eDVBFrontend] Error: initModelist");
-
 	if (!m_simulate)
 	{
 		m_need_delivery_system_workaround = eSimpleConfig::getBool("config.usage.enable_delivery_system_workaround", false);
