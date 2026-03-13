@@ -652,7 +652,6 @@ int eDVBFrontend::openFrontend()
 				{
 					fe_delivery_system_t delsys = (fe_delivery_system_t)p[0].u.buffer.data[p[0].u.buffer.len - 1];
 					m_delsys[delsys] = true;
-					setDeliverySystem(delsys);
 					if (::ioctl(m_fd, FE_GET_INFO, &m_fe_info[delsys]) < 0)
 						eWarning("[eDVBFrontend] ioctl FE_GET_INFO failed: %m");
 				}
