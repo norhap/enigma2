@@ -154,7 +154,7 @@ class Navigation:
 		oldref = self.currentlyPlayingServiceOrGroup
 		current_service_source = None
 		isStreamRelay = False
-		isHandled = False
+		isAsyncPlay = False
 		InfoBarInstance = InfoBar.instance
 		if InfoBarInstance:
 			current_service_source = InfoBarInstance.session.screen["CurrentService"]
@@ -237,8 +237,15 @@ class Navigation:
 					if SystemInfo["FCCactive"] and "%3a//" in ref.toString():
 						self.pnav.stopService()
 
-				for f in Navigation.playServiceExtensions:
-					playref, isHandled = f(self, playref, event, InfoBarInstance)
+				originalPlayref = playref.toString()
+				for extensionFunc in Navigation.playServiceExtensions:
+					ret = extensionFunc(self, playref, event, InfoBarInstance)
+					if isinstance(ret, (ServiceReference, eServiceReference)):
+						playref = ret
+					else:
+						playref, isAsyncPlay = ret
+					if isAsyncPlay or playref.toString() != originalPlayref:
+						break
 
 				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref
@@ -287,8 +294,8 @@ class Navigation:
 					self.firstStart = False
 					self.retryServicePlayTimer.start(delay, True)
 					return 0
-				elif not isHandled and self.pnav.playService(playref):
-					print("[Navigation] Failed to start", playref.toString())
+				elif not isAsyncPlay and self.pnav.playService(playref):
+					print(f"[Navigation] Failed to start '{playref.toString()}'.")
 					self.currentlyPlayingServiceReference = None
 					self.originalPlayingServiceReference = None
 					self.currentlyPlayingServiceOrGroup = None
@@ -301,7 +308,7 @@ class Navigation:
 				self.skipServiceReferenceReset = False
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:
 					self.isCurrentServiceStreamRelay = True
-				if InfoBarInstance and "%3a//" in playref.toString() and not isHandled:
+				if InfoBarInstance and "%3a//" in playref.toString() and not isAsyncPlay:
 					self.originalPlayingServiceReference = None
 					InfoBarInstance.serviceStarted()
 				if setPriorityFrontend:
