@@ -96,6 +96,7 @@ private:
 	int m_dvbversion;
 	bool m_rotor_mode;
 	bool m_need_rotor_workaround;
+	bool m_need_delivery_system_workaround;	
 	bool m_blindscan;
 	bool m_multitype;
 	std::map<fe_delivery_system_t, int> m_modelist;
