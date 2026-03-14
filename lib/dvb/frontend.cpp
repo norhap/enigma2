@@ -3547,27 +3547,36 @@ std::string eDVBFrontend::getCapabilities()
 
 		switch (it->first)
 		{
-		case SYS_ATSC:		ss << " ATSC"; break;
-		case SYS_ATSCMH:	ss << " ATSCMH"; break;
-		case SYS_CMMB:		ss << " CMBB"; break;
-		case SYS_DAB:		ss << " DAB"; break;
-		case SYS_DSS:		ss << " DSS"; break;
-		case SYS_DVBC_ANNEX_B:	ss << " DVBC_ANNEX_B"; break;
-		case SYS_DVBH:		ss << " DVBH"; break;
-		case SYS_DVBS:		ss << " DVBS"; break;
-		case SYS_DVBS2:		ss << " DVBS2"; break;
-		case SYS_DVBT:		ss << " DVBT"; break;
-		case SYS_ISDBC:		ss << " ISDBC"; break;
-		case SYS_ISDBS:		ss << " ISDBS"; break;
-		case SYS_ISDBT:		ss << " ISDBT"; break;
-		case SYS_UNDEFINED:	ss << " UNDEFINED"; break;
-		case SYS_DVBC_ANNEX_A:	ss << " DVBC_ANNEX_A"; break;
-		case SYS_DVBC_ANNEX_C:	ss << " DVBC_ANNEX_C"; break;
-		case SYS_DVBT2:		ss << " DVBT2"; break;
-		case SYS_TURBO:		ss << " TURBO"; break;
-		case SYS_DTMB:		ss << " DTMB"; break;
+			case SYS_ATSC:		ss << "ATSC"; break;
+			case SYS_ATSCMH:	ss << "ATSCMH"; break;
+			case SYS_CMMB:		ss << "CMBB"; break;
+			case SYS_DAB:		ss << "DAB"; break;
+			case SYS_DSS:		ss << "DSS"; break;
+			case SYS_DVBC_ANNEX_B:	ss << "DVBC_ANNEX_B"; break;
+			case SYS_DVBH:		ss << "DVBH"; break;
+			case SYS_DVBS:		ss << "DVBS"; break;
+			case SYS_DVBS2:		ss << "DVBS2"; break;
+			case SYS_DVBT:		ss << "DVBT"; break;
+			case SYS_ISDBC:		ss << "ISDBC"; break;
+			case SYS_ISDBS:		ss << "ISDBS"; break;
+			case SYS_ISDBT:		ss << "ISDBT"; break;
+			case SYS_UNDEFINED:	ss << "UNDEFINED"; break;
+			case SYS_DVBC_ANNEX_A:	ss << "DVBC_ANNEX_A"; break;
+	#if DVB_API_VERSION > 5 || DVB_API_VERSION == 5 && DVB_API_VERSION_MINOR >= 6
+			case SYS_DVBC_ANNEX_C:	ss << "DVBC_ANNEX_C"; break;
+			case SYS_TURBO:		ss << "TURBO"; break;
+			case SYS_DTMB:		ss << "DTMB"; break;
+			case SYS_DVBC2:		ss << "DVBC2"; break;
+	#else
+			case SYS_DMBTH:		ss << "DMBTH"; break;
+	#endif
+			case SYS_DVBT2:		ss << "DVBT2"; break;
+			default: ss << "SYS_" << (int)it->first; break;
 		}
+		ss << ",";
 	}
+
+	ss << std::endl;
 
 	return ss.str();
 }
