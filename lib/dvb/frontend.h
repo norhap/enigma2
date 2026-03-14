@@ -98,6 +98,7 @@ private:
 	bool m_need_rotor_workaround;
 	bool m_blindscan;
 	bool m_multitype;
+	std::map<fe_delivery_system_t, int> m_modelist;
 	std::map<fe_delivery_system_t, bool> m_delsys, m_delsys_whitelist;
 	std::map<fe_delivery_system_t, dvb_frontend_info> m_fe_info;
 	std::string m_filename;
@@ -155,6 +156,7 @@ public:
 	RESULT setSecSequence(eSecCommandList &list);
 	RESULT getData(int num, long &data);
 	RESULT setData(int num, long val);
+	bool changeType(int type);
 
 	int readFrontendData(int type); // iFrontendInformation_ENUMS
 	void getFrontendStatus(ePtr<iDVBFrontendStatus> &dest);
@@ -173,6 +175,7 @@ public:
 	void setDeliverySystemWhitelist(const std::vector<fe_delivery_system_t> &whitelist);
 	bool setDeliverySystem(const char *type);
 
+	int initModeList();
 	void reopenFrontend();
 	int openFrontend();
 	int closeFrontend(bool force=false, bool no_delayed=false);
