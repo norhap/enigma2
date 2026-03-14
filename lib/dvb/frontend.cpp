@@ -1564,11 +1564,6 @@ int eDVBFrontend::readFrontendData(int type)
 								signalquality = prop[0].u.st.stat[i].svalue;
 							}
 						}
-						if ((!strcmp(m_description, "Si2169")) && (signalqualitydb == 0))				// Fix for Si2169 problem on Xtrend models where dB figure is returned in the % slot and the dB slot is empty
-						{
-							signalqualitydb = signalquality / 10;
-							signalquality = 0;
-						}
 						if (signalqualitydb)
 						{
 							if(type == iFrontendInformation_ENUMS::signalQualitydB)
@@ -1599,7 +1594,6 @@ int eDVBFrontend::readFrontendData(int type)
 				}
 			}
 			break;
-
 		case iFrontendInformation_ENUMS::signalPower:
 			if (m_state == stateLock)
 			{
