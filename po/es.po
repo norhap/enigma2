@@ -3188,7 +3188,7 @@ msgstr ""
 "ADVERTENCIA: Si el modo de vídeo elegido provoca la pérdida de señal en el puerto de vídeo, pulse prolongadamente el botón EXIT."
 
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
-msgstr "Configure este sintonizador usando opciones simples o avanzadas, o buclee a través de otro sintonizador, o copie una configuración desde otro sintonizador, o desactívela."
+msgstr "Configure este sintonizador usando opciones simples o avanzadas, o bucle a través de otro sintonizador, o copie una configuración desde otro sintonizador, o desactívela."
 
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Configure si el sonido PCM multicanal debe estar habilitado."
