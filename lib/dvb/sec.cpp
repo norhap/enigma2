@@ -144,7 +144,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 				}
 				else
 				{
-					if ((unsigned)sat.frequency > lnb_param.m_lof_threshold)
+					if (sat.frequency > (const unsigned int)lnb_param.m_lof_threshold)
 						band |= 1;
 					if (!(sat.polarisation & eDVBFrontendParametersSatellite::Polarisation_Vertical))
 						band |= 2;
@@ -204,7 +204,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 					if (((linked_unicable != -1 || is_unicable) && diseqc && !rotor && no_compare_satpos) ||
 						(!is_unicable && ((csw != linked_csw) || (diseqc && (ucsw != linked_ucsw || toneburst != linked_toneburst)) ||
 						(rotor && ((linked_satpos_depends == -1 && rotor_pos != sat.orbital_position) || (!direct_connected && linked_satpos_depends != -1 && no_compare_satpos))))))
-					
+
 					{
 						ret = 0;
 						satcount = old_satcount;
@@ -263,7 +263,7 @@ int eDVBSatelliteEquipmentControl::canTune(const eDVBFrontendParametersSatellite
 
 				if (ret && !is_unicable)
 				{
-					int lof = (unsigned)sat.frequency > lnb_param.m_lof_threshold ?
+					int lof = sat.frequency > (const unsigned int)lnb_param.m_lof_threshold ?
 						lnb_param.m_lof_hi : lnb_param.m_lof_lo;
 					unsigned int tuner_freq = absdiff(sat.frequency, lof);
 					if (tuner_freq < (fe_info.type ? fe_info.frequency_min/1000 : fe_info.frequency_min)
@@ -399,7 +399,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 					diseqc_mode = eDVBSatelliteDiseqcParameters::V1_0;
 				else
 				{
-					if (!((eDVBFrontend*)&frontend)->is_FBCTuner()) 
+					if (!((eDVBFrontend*)&frontend)->is_FBCTuner())
 					{
 						// in eDVBFrontend::tuneLoop we call closeFrontend and ->inc_use() in this this condition (to put the kernel frontend thread into idle state)
 						// so we must resend all diseqc stuff (voltage is disabled when the frontend is closed)
@@ -444,7 +444,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			}
 			else
 			{
-				if ((unsigned)sat.frequency > lnb_param.m_lof_threshold)
+				if (sat.frequency > (const unsigned int)lnb_param.m_lof_threshold)
 					band |= 1;
 				if (!(sat.polarisation & eDVBFrontendParametersSatellite::Polarisation_Vertical))
 					band |= 2;
@@ -893,6 +893,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 					}
 				}
 
+				sec_sequence.push_back( eSecCommand(eSecCommand::IF_TUNER_UNLOCKED_GOTO, +12));	//skip all, if tuner unlocked
 				sec_sequence.push_back( eSecCommand(eSecCommand::SEND_DISEQC, diseqc) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SLEEP, m_params[UNICABLE_DELAY_AFTER_LAST_DISEQC_CMD]) );
 				sec_sequence.push_back( eSecCommand(eSecCommand::SET_VOLTAGE, VOLTAGE(13)) );
