@@ -3384,7 +3384,7 @@ std::string eDVBFrontend::getCapabilities()
 			case SYS_DMBTH:		ss << "DMBTH"; break;
 	#endif
 			case SYS_DVBT2:		ss << "DVBT2"; break;
-			default: ss << "SYS_TOTAL_ANALIZED = " << (int)it->first; break;
+			default: ss << "SYSTEMS ANALYZED;" << (int)it->first; break;
 		}
 		ss << ",";
 	}
