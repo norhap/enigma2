@@ -2051,27 +2051,6 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 				++m_sec_sequence.current();
 				break;
 			}
-			case eSecCommand::IF_TUNER_UNLOCKED_GOTO:
-			{
-				if (!m_simulate)
-				{
-					if (readFrontendData(iFrontendInformation_ENUMS::lockState) && readFrontendData(iFrontendInformation_ENUMS::signalQuality))
-					{
-						eDebugNoSimulate("tuner locked .. wait");
-						if (m_timeoutCount)
-							m_timeoutCount--;
-						++m_sec_sequence.current();
-					}
-					else
-					{
-						eDebugNoSimulate("tuner unlocked .. goto %d", m_sec_sequence.current()->steps);
-						setSecSequencePos(m_sec_sequence.current()->steps);
-					}
-				}
-				else
-					setSecSequencePos(m_sec_sequence.current()->steps);
-				break;
-			}
 			case eSecCommand::IF_LOCK_TIMEOUT_GOTO:
 				if (!m_simulate)
 				{
