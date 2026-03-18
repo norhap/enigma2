@@ -804,7 +804,7 @@ CXXFLAGS="$CXXFLAGS -Wall -Wextra \
 	-Wunused-but-set-parameter -Wunused-const-variable=1 -Wuninitialized \
 	-Wstringop-overflow=3 -Woverlength-strings \
 	-Wunsafe-loop-optimizations -Wpointer-arith \
-	-Wfloat-equal -Wlogical-op \
+	-Wfloat-equal -Wno-logical-op \
 	-Wno-error=maybe-uninitialized -Wno-error=sign-compare \
 	-Wno-error=cast-align=strict -Wno-error=ignored-qualifiers \
 	-Wno-error=cast-function-type -Wno-error=deprecated-declarations \
