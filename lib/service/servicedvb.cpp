@@ -2367,10 +2367,14 @@ int eDVBServicePlay::getCurrentTrack()
 
 RESULT eDVBServicePlay::selectTrack(unsigned int i)
 {
+	if (m_noaudio)
+		return -1;
+
 	// When SoftDecoder is active, delegate audio track selection to it
 	if (m_soft_decoder && m_soft_decoder->isRunning())
 	{
 		eDebug("[eDVBServicePlay] selectTrack(%d): delegating to SoftDecoder", i);
+
 		eDVBServicePMTHandler::program program;
 		eDVBServicePMTHandler &h = m_timeshift_active ? m_service_handler_timeshift : m_service_handler;
 		if (h.getProgramInfo(program))
@@ -2379,13 +2383,31 @@ RESULT eDVBServicePlay::selectTrack(unsigned int i)
 		if (i >= program.audioStreams.size())
 			return -2;
 
-		// Update audio cache in eDVBService
-		updateAudioCache(program.audioStreams[i].pid, program.audioStreams[i].type);
+		int apid = program.audioStreams[i].pid;
+		int apidtype = program.audioStreams[i].type;
+
+		// Update m_current_audio_pid so getCurrentTrack() returns the correct value
+		m_current_audio_pid = apid;
+		eDebug("[eDVBServicePlay] selectTrack: updated m_current_audio_pid to %04x", m_current_audio_pid);
+
+		// Store audio PID in service cache for persistence across channel changes
+		updateAudioCache(apid, apidtype);
+
+		h.resetCachedProgram();
 
 		return m_soft_decoder->selectAudioTrack(i);
 	}
 
 	int ret = selectAudioStream(i);
+	if (ret < 0)
+		return ret;
+
+	// Safety NULL check - m_decoder may be NULL during transitions
+	if (!m_decoder)
+	{
+		eDebug("[eDVBServicePlay] selectTrack: m_decoder is NULL");
+		return -3;
+	}
 
 	if (m_decoder->set())
 		return -5;
@@ -2544,29 +2566,21 @@ int eDVBServicePlay::selectAudioStream(int i)
 	if (m_dvb_service && (i != -1 || program.audioStreams.size() == 1
 		|| m_dvb_service->cacheAudioEmpty()))
 	{
-		const static struct {
-			int streamType;
-			eDVBService::cacheID cacheTag;
-		} audioMap [] = {
-			{ eDVBAudio::aMPEG,  eDVBService::cMPEGAPID,  },
-			{ eDVBAudio::aAC3,   eDVBService::cAC3PID,    },
-			{ eDVBAudio::aDDP,   eDVBService::cDDPPID,    },
-			{ eDVBAudio::aAAC,   eDVBService::cAACAPID,    },
-			{ eDVBAudio::aDTS,   eDVBService::cDTSPID,    },
-			{ eDVBAudio::aLPCM,  eDVBService::cLPCMPID,   },
-			{ eDVBAudio::aDTSHD, eDVBService::cDTSHDPID,  },
-			{ eDVBAudio::aAACHE, eDVBService::cAACHEAPID, },
-		};
-		static const int nAudioMap = sizeof audioMap / sizeof audioMap[0];
-		for(int m = 0; m < nAudioMap; m++)
-		{
-			m_dvb_service->setCacheEntry(audioMap[m].cacheTag, apidtype == audioMap[m].streamType ? apid : -1);
-		}
+		updateAudioCache(apid, apidtype);
 	}
 
 	h.resetCachedProgram();
 
 	return 0;
+}
+
+void eDVBServicePlay::updateAudioCache(int apid, int apidtype)
+{
+	if (!m_dvb_service)
+		return;
+
+	m_dvb_service->updateAudioCache(apid, apidtype);
+	eDebug("[eDVBServicePlay] updateAudioCache: pid=%04x type=%d", apid, apidtype);
 }
 
 int eDVBServicePlay::getCurrentChannel()
@@ -4350,40 +4364,6 @@ void eDVBServicePlay::cleanupSoftwareDescrambling()
 
 	m_csa_activated_conn = nullptr;
 	m_soft_decoder_video_info_valid = false;
-}
-
-void eDVBServicePlay::updateAudioCache(int apid, int apidtype)
-{
-	if (!m_dvb_service)
-		return;
-
-	// Update audio cache based on audio type
-	switch (apidtype)
-	{
-		case eDVBServicePMTHandler::audioStream::atMPEG:
-			m_dvb_service->setCacheEntry(eDVBService::cMPEGAPID, apid);
-			break;
-		case eDVBServicePMTHandler::audioStream::atAC3:
-			m_dvb_service->setCacheEntry(eDVBService::cAC3PID, apid);
-			break;
-		case eDVBServicePMTHandler::audioStream::atAC4:
-			m_dvb_service->setCacheEntry(eDVBService::cAC4PID, apid);
-			break;
-		case eDVBServicePMTHandler::audioStream::atDDP:
-			m_dvb_service->setCacheEntry(eDVBService::cDDPPID, apid);
-			break;
-		case eDVBServicePMTHandler::audioStream::atAAC:
-			m_dvb_service->setCacheEntry(eDVBService::cAACAPID, apid);
-			break;
-		case eDVBServicePMTHandler::audioStream::atAACHE:
-			m_dvb_service->setCacheEntry(eDVBService::cAACHEAPID, apid);
-			break;
-		case eDVBServicePMTHandler::audioStream::atDRA:
-			m_dvb_service->setCacheEntry(eDVBService::cDRAAPID, apid);
-			break;
-		default:
-			break;
-	}
 }
 
 // ==================== End Software Descrambling ====================
