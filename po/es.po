@@ -13721,6 +13721,9 @@ msgstr "El contador puede restablecerse automáticamente al límite en ciertos i
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
 msgstr "El estándar de DVD no admite transmisiones de video H.264 (HDTV). ¿Desea crear un DVD de datos de formato especial (que no se reproducirá en reproductores de DVD independientes) en su lugar?"
 
+msgid "The channels cache is disabled. To use FCC, you must enable it.\nDo you want to restart Enigma2 and apply the necessary changes?"
+msgstr "La caché de canales está desactivada. Para usar FCC, debe activarla.\n¿Desea reiniciar Enigma2 y aplicar los cambios necesarios?"
+
 #, python-format
 msgid ""
 "The filterEntry '%s' already exist!\n"

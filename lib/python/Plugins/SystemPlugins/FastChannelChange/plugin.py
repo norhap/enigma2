@@ -8,6 +8,8 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.InfoBar import InfoBar
 from Screens.Setup import Setup
 from Screens.InfoBarGenerics import streamrelay
+from Screens.MessageBox import MessageBox
+from Screens.Standby import checkTimeshiftRunning, TryQuitMainloop
 
 max_fcc = len(glob('/dev/fcc?'))
 default_fcc = (max_fcc) > 5 and 5 or max_fcc
@@ -454,6 +456,17 @@ class FCCSetup(Setup):
 		Setup.changedEntry(self)
 
 	def keySave(self):
+		def enableChannelCache(answer=False):  # Enable channels caching.
+			if answer:
+				config.usage.cached_channel.value = True
+				config.usage.cached_channel.save()
+				Setup.keySave(self)
+				FCCChanged()
+				self.session.open(TryQuitMainloop, 3)
+
+		if not config.usage.cached_channel.value and config.plugins.fccsetup.activate.value:
+			if not checkTimeshiftRunning() and not self.session.nav.getRecordings():
+				return self.session.openWithCallback(enableChannelCache, MessageBox, _("The channels cache is disabled. To use FCC, you must enable it.\nDo you want to restart Enigma2 and apply the necessary changes?"), type=MessageBox.TYPE_YESNO, simple=True)
 		Setup.keySave(self)
 		FCCChanged()
 
