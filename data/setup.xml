@@ -459,6 +459,9 @@
 		<item level="1" text="12V output" description="12V output" requires="12V_Output.">config.usage.output_12V</item>
 		<item level="1" text="Alternative services tuner priority" description="Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type.">config.usage.alternatives_priority</item>
 		<item level="1" text="Preferred tuner" description="Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites.">config.usage.frontend_priority</item>
+		<if conditional="config.usage.frontend_priority.value != '-1' and not SystemInfo['FCCactive']">
+			<item level="1" text="Use the channel cache on your preferred tuner *" description="With this disabled, changing channels on the same transponder in the channel list will be faster." requires="FBCTuner">config.usage.cached_channel</item>
+		</if>
 		<item level="2" text="Preferred tuner DVB-S" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="DVB-S_priority_tuner_available">config.usage.frontend_priority_dvbs</item>
 		<item level="2" text="Preferred tuner DVB-T" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="DVB-T_priority_tuner_available">config.usage.frontend_priority_dvbt</item>
 		<item level="2" text="Preferred tuner DVB-C" description="When enabled, this setting has more weight than 'Preferred tuner'." requires="DVB-C_priority_tuner_available">config.usage.frontend_priority_dvbc</item>

@@ -2099,6 +2099,7 @@ def preferredTunerChoicesUpdate(update=False):
 			atsc_nims.append((str(slot.slot), slot.getSlotName()))
 		nims.append((str(slot.slot), slot.getSlotName()))
 
+	config.usage.cached_channel = ConfigYesNo(default=True)
 	if not update:
 		config.usage.frontend_priority = ConfigSelection(default="-1", choices=list(nims))
 	else:

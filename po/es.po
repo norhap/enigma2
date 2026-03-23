@@ -3716,6 +3716,9 @@ msgstr "Desactivar temporizador"
 msgid "Disabled"
 msgstr "Desactivado"
 
+msgid "With this disabled, changing channels on the same transponder in the channel list will be faster."
+msgstr "Con esta opción desactivada, cambiar de canal en el mismo transpondedor en la lista de canales será más rápido."
+
 msgid "Display 16:9 content as"
 msgstr "Mostrar contenido 16:9 como"
 
@@ -3766,6 +3769,9 @@ msgstr "No eliminar canales"
 
 msgid "Do not record"
 msgstr "No grabes"
+
+msgid "Use the channel cache on your preferred tuner *"
+msgstr "Utilizar la caché de canales en el sintonizador preferido *"
 
 msgid "Do nothing"
 msgstr "No hagas nada"

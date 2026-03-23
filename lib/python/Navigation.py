@@ -303,7 +303,7 @@ class Navigation:
 						print("[Navigation] Streaming was active -> try again")  # use timer to give the streamserver the time to deallocate the tuner
 						self.retryServicePlayTimer = eTimer()
 						self.retryServicePlayTimer.callback.append(boundFunction(self.playService, ref, checkParentalControl, forceRestart, adjust))
-						delay = 500 if not SystemInfo["HasFBCtuner"] else 1000
+						delay = 500 if not SystemInfo["FBCTuner"] else 1000
 						self.retryServicePlayTimer.start(delay, True)
 				self.skipServiceReferenceReset = False
 				if isStreamRelay and not self.isCurrentServiceStreamRelay:

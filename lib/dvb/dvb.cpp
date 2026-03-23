@@ -6,6 +6,7 @@
 #include <lib/base/cfile.h>
 #include <lib/base/eerror.h>
 #include <lib/base/estring.h>
+#include <lib/base/esimpleconfig.h>
 #include <lib/base/wrappers.h>
 #include <lib/base/httpstream.h>
 #include <lib/dvb/cahandler.h>
@@ -1180,38 +1181,6 @@ RESULT eDVBResourceManager::getActiveChannels(std::list<active_channel> &list)
 			eDebug(x); \
 	} while(0)
 
-bool eDVBResourceManager::frontendPreferenceAllowsChannelUse(const eDVBChannelID &channelid, eUsePtr<iDVBChannel> channel, bool simulate)
-{
-	ePtr<iDVBFrontend> fe;
-	channel->getFrontend(fe);
-	int slotid = fe->readFrontendData(iFrontendInformation_ENUMS::frontendNumber);
-	
-	int preferredFrontend = eDVBFrontend::getPreferredFrontend();
-	if (preferredFrontend < 0)
-	{
-		//eDebug("frontend %d allowed, no frontend preference", slotid);      
-		return true; /* no frontend preference */
-	}
-
-	if (!m_list)
-	{
-		//eDebug("frontend %d allowed, no channel list set", slotid);      
-		return true; /* no channel list set */
-	}
-
-	ePtr<iDVBFrontendParameters> feparm;
-	if (m_list->getChannelFrontendData(channelid, feparm))
-	{
-		//eDebug("frontend %d allowed, channel not found", slotid);      
-		return true; /* channel not found */
-	}
-	else
-	{
-		//eDebug("frontend %d forbidden, a new preferred frontend is available, dont use shared or cached channel", slotid);      
-		return false;
-	}
-}
-
 RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUsePtr<iDVBChannel> &channel, bool simulate)
 {
 		/* first, check if a channel is already existing. */
@@ -1222,18 +1191,15 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 		eDVBChannel *cache_chan = (eDVBChannel*)&(*m_cached_channel);
 		if(channelid==cache_chan->getChannelID())
 		{
-			ePtr<iDVBFrontend> fe;
-			m_cached_channel->getFrontend(fe);
-			int slotid = fe->readFrontendData(iFrontendInformation_ENUMS::frontendNumber);
-			if (frontendPreferenceAllowsChannelUse(channelid,m_cached_channel,simulate))
+			if (eSimpleConfig::getBool("config.usage.cached_channel", true))
 			{
-				eDebug("[eDVBResourceManager] use cached_channel, frontend=%d",slotid);
+				eDebug("[eDVBResourceManager] use cached_channel");
 				channel = m_cached_channel;
 				return 0;
 			}
 			else
 			{
-				eDebug("[eDVBResourceManager] strict frontend preference policy, don't use cached_channel, frontend=%d",slotid);
+				eDebug("[eDVBResourceManager] strict frontend preference user defined, don't use cached_channel");
 			}
 		}
 		m_cached_channel_state_changed_conn.disconnect();
@@ -1247,20 +1213,15 @@ RESULT eDVBResourceManager::allocateChannel(const eDVBChannelID &channelid, eUse
 		eDebugNoSimulate("[eDVBResourceManager] available channel.. %04x:%04x", i->m_channel_id.transport_stream_id.get(), i->m_channel_id.original_network_id.get());
 		if (i->m_channel_id == channelid)
 		{
-			ePtr<iDVBFrontend> fe;
-			if (!i->m_channel->getFrontend(fe))
+			if (eSimpleConfig::getBool("config.usage.cached_channel", true))
 			{
-				int slotid = fe->readFrontendData(iFrontendInformation_ENUMS::frontendNumber);
-				if (frontendPreferenceAllowsChannelUse(channelid,i->m_channel,simulate))
-				{
-					eDebugNoSimulate("[eDVBResourceManager] found shared channel.. i=%d, frontend=%d (preferred=%d)",(int)std::distance(active_channels.begin(), i),slotid,eDVBFrontend::getPreferredFrontend());
-					channel = i->m_channel;
-					return 0;
-				}
-				else
-				{
-					eDebugNoSimulate("[eDVBResourceManager] strict frontend preference policy, don't use shared channel.. i=%d, frontend=%d (preferred=%d)",(int)std::distance(active_channels.begin(), i),slotid,eDVBFrontend::getPreferredFrontend());
-				}
+				eDebugNoSimulate("[eDVBResourceManager] use cached_channel");
+				channel = i->m_channel;
+				return 0;
+			}
+			else
+			{
+				eDebugNoSimulate("[eDVBResourceManager] strict frontend preference user defined, don't use cached_channel");
 			}
 		}
 	}
@@ -2363,7 +2324,7 @@ RESULT eDVBChannel::getDemux(ePtr<iDVBDemux> &demux, int cap)
 
 	}
 	demux = *our_demux;
-		
+
 	return 0;
 }
 

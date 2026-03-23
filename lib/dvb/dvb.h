@@ -221,7 +221,6 @@ public:
 	int canAllocateChannel(const eDVBChannelID &channelid, const eDVBChannelID &ignore, const eDVBChannelID& ignoresr, int &system, bool simulate=false);
 
 		/* allocate channel... */
-	bool frontendPreferenceAllowsChannelUse(const eDVBChannelID &channelid, eUsePtr<iDVBChannel> channel, bool simulate);
 	RESULT allocateChannel(const eDVBChannelID &channelid, eUsePtr<iDVBChannel> &channel, bool simulate=false);
 	RESULT allocatePVRChannel(const eDVBChannelID &channelid, eUsePtr<iDVBPVRChannel> &channel);
 	static RESULT getInstance(ePtr<eDVBResourceManager> &);
