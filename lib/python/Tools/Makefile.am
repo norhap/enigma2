@@ -31,6 +31,7 @@ install_PYTHON = \
 	RedirectOutput.py \
 	StbHardware.py \
 	SubRip.py \
+	SubtitleRenderer.py \
 	TextBoundary.py \
 	TolerantDict.py \
 	Trace.py \
