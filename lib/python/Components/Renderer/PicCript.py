@@ -3,12 +3,13 @@ from os.path import isfile, join
 from enigma import ePixmap, iServiceInformation
 
 from Components.Renderer.Renderer import Renderer
+from Components.Converter.Poll import Poll
 from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines
 
 MODULE_NAME = __name__.split(".")[-1]
 
 
-class PicCript(Renderer):
+class PicCript(Renderer, Poll):
 	__module__ = __name__
 	searchPaths = ("/usr/share/enigma2/", "/media/hdd/", "/media/usb/", "/media/ba/")
 	condAccessIds = {
@@ -56,10 +57,13 @@ class PicCript(Renderer):
 
 	def __init__(self):
 		Renderer.__init__(self)
+		Poll.__init__(self)
 		self.path = "cript"
 		self.nameCache = {}
 		self.pngName = ""
 		self.picon_default = "picon_default.png"
+		self.poll_interval = 1000
+		self.poll_enabled = True
 
 	def applySkin(self, desktop, parent):
 		attribs = []
