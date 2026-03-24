@@ -1746,19 +1746,19 @@ def InitUsageConfig():
 		])
 		config.subtitles.ai_connection_speed.addNotifier(setAiConnectionSpeed)
 
-		langsAI = ["ar", "bg", "nb", "ca", "cs", "zh", "da", "de", "el", "en", "es", "et", "fa", "fi", "fr", "fy", "he", "hr", "hu", "id", "is", "it", "ku", "lt", "lv", "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sr", "sv", "th", "tr", "uk", "vi"]
-		langsAI = [(x, LANGUAGE_AI[x][1]) for x in langsAI]
-		langsAI.append(("zh-CN", _("Chinese (Simplified)")))
-		langsAI.append(("ceb", _("Cebuano")))
-		langsAI.append(("haw", _("Hawaiian")))
-		langsAI.append(("iw", _("Hebrew")))
-		langsAI.append(("hmn", _("Hmong")))
-		langsAI.append(("ar_eg", _("Arabic (Egyptian)")))
-		langsAI.append(("ar_ma", _("Arabic (Moroccan)")))
-		langsAI.append(("ar_sy", _("Arabic (Syro-Lebanese)")))
-		langsAI.append(("ar_iq", _("Arabic (Iraq)")))
-		langsAI.append(("ar_tn", _("Arabic (Tunisian)")))
-		langsAI.sort(key=lambda x: x[1])
+		langs_ai = ["af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg", "ca", "zh", "co", "hr", "cs", "da", "nl", "en", "eo", "fr", "fi", "fy", "gl", "ka", "de", "el", "ht", "ha", "hu", "is", "ig", "ga", "it", "ja", "jv", "kn", "kk", "km", "rw", "ko", "ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "mg", "ms", "mt", "mi", "mr", "mn", "no", "ny", "or", "ps", "fa", "pl", "pt", "ro", "ru", "sm", "gd", "sr", "st", "sn", "sk", "sl", "so", "es", "su", "sw", "sv", "tl", "tg", "te", "th", "tr", "tk", "uk", "ur", "ug", "uz", "cy", "xh", "yi", "yo", "zu", "et"]
+		langs_ai = [(x, LANGUAGE_AI[x][1]) for x in langs_ai]
+		langs_ai.append(("zh-CN", _("Chinese (Simplified)")))
+		langs_ai.append(("ceb", _("Cebuano")))
+		langs_ai.append(("haw", _("Hawaiian")))
+		langs_ai.append(("iw", _("Hebrew")))
+		langs_ai.append(("hmn", _("Hmong")))
+		langs_ai.append(("ar_eg", _("Arabic (Egyptian)")))
+		langs_ai.append(("ar_ma", _("Arabic (Moroccan)")))
+		langs_ai.append(("ar_sy", _("Arabic (Syro-Lebanese)")))
+		langs_ai.append(("ar_iq", _("Arabic (Iraq)")))
+		langs_ai.append(("ar_tn", _("Arabic (Tunisian)")))
+		langs_ai.sort(key=lambda x: x[1])
 
 		default = config.osd.language.value
 		default = default.split("_")[0] if "_" in default else default
@@ -1770,7 +1770,7 @@ def InitUsageConfig():
 		def setAiTranslateTo(configElement):
 			eSubtitleSettings.setAiTranslateTo(configElement.value)
 
-		config.subtitles.ai_translate_to = ConfigSelection(default=default, choices=langsAI)
+		config.subtitles.ai_translate_to = ConfigSelection(default=default, choices=langs_ai)
 		config.subtitles.ai_translate_to.addNotifier(setAiTranslateTo)
 
 		def setAiMode(configElement):
