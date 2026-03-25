@@ -10,7 +10,7 @@ install_PYTHON = \
 	ValueToPixmap.py PliExtraInfo.py genre.py TransponderInfo.py RotorPosition.py VfdDisplay.py \
 	AnalogClock.py ServiceName2.py LayoutInfo.py ConverterRotator.py MovieReference.py YWeather.py \
 	EtAnalogClock.py ExtendedServiceInfo.py ExtremeInfo.py VExtraNumText.py VWeather.py VtiTempFan.py \
-	HbbtvApplicationInfo.py BhAnalogic.py BhStreamInfo.py VNetSpeedInfo.py VisionCamInfo.py CaidInfo2.py \
+	HbbtvApplicationInfo.py BhAnalogic.py BhStreamInfo.py VNetSpeedInfo.py VisionCamInfo.py \
 	RefString.py CpuUsage.py ProgressDiskSpaceInfo.py RouteInfo.py ServiceInfoEX.py Audio.py \
 	TextAddAfter.py TextAddBefore.py Textreplace.py TextToUpper.py MovieBarInfo.py HddState.py \
 	VAudioInfo.py XmlMultiContent.py ConfigEntryTestVisible.py

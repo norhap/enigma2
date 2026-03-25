@@ -1764,7 +1764,7 @@ def InitUsageConfig():
 		default = default.split("_")[0] if "_" in default else default
 		if default == "zh":
 			default = "zh-CN"
-		if default not in [x[0] for x in langsAI]:
+		if default not in [x[0] for x in langs_ai]:
 			default = "es"
 
 		def setAiTranslateTo(configElement):
