@@ -1285,7 +1285,10 @@ void eDVBServicePlay::serviceEvent(int event)
 	case eDVBServicePMTHandler::eventTuneFailed:
 	case eDVBServicePMTHandler::eventMisconfiguration:
 	{
-		eDebug("[eDVBServicePlay] DVB service failed to tune - error %d", event);
+		if (eSimpleConfig::getBool("config.usage.cached_channel", true))
+		{
+			eDebug("[eDVBServicePlay] DVB service failed to tune - error %d", event);
+		}
 		m_event((iPlayableService*)this, evTuneFailed);
 		break;
 	}
