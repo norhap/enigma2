@@ -226,7 +226,7 @@ class ChannelContextMenu(Screen):
 								self.configStreamRelay = "/etc/tuxbox/config/oscam-emu/oscam.conf"
 							elif str(ProcessList().named("ncam")).strip("[]"):
 								self.configStreamRelay = "/etc/tuxbox/config/ncam/ncam.conf"
-							if self.configStreamRelay and not self.refChannelIPToSAT:
+							if self.configStreamRelay and not self.refChannelIPToSAT and config.usage.cached_channel.value:
 								append_when_current_valid(current, menu, (_("Play service with Stream Relay"), self.toggleWithStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							# Only show when a DVB subtitle is cached on this service

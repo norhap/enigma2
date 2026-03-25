@@ -2100,6 +2100,10 @@ def preferredTunerChoicesUpdate(update=False):
 		nims.append((str(slot.slot), slot.getSlotName()))
 
 	config.usage.cached_channel = ConfigYesNo(default=True)
+	if not config.usage.cached_channel.value:
+		if fileContains(resolveFilename(SCOPE_CONFIG) + "whitelist_streamrelay", ":"):
+			with open(resolveFilename(SCOPE_CONFIG) + "whitelist_streamrelay", "w") as fd:
+				fd.write()
 	if not update:
 		config.usage.frontend_priority = ConfigSelection(default="-1", choices=list(nims))
 	else:
