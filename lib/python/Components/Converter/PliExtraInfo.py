@@ -201,39 +201,22 @@ class PliExtraInfo(Poll, Converter):
 	def createCurrentCaidLabel(self, info):
 		return createCurrentCaidLabel(info, self.current_caid)
 
-	def createStreamURLInfo(self, info):
-		refstr = info.getInfoString(iServiceInformation.sServiceref)
-		if "%3a//" in refstr.lower():
-			return refstr.split(":")[10].replace("%3a", ":").replace("%3A", ":")
-		return ""
-
 	def createCryptoSpecial(self, info):
-		try:
-			if serviceRefIPToSAT():
-				caid_name = _("Channel IPToSAT")
-				return caid_name + "  SID: %04x" % int(info.getInfo(iServiceInformation.sSID))
-			elif getChannelOnFallbackTuner():
-				caid_name = _("Tuner fallback")
-				return caid_name
-			elif self.createStreamURLInfo(info):
-				if "192.168." in self.createStreamURLInfo(info):
-					caid_name = _("Tuner fallback")
-					return caid_name
-				elif str(config.misc.softcam_streamrelay_port.value) not in self.createStreamURLInfo(info) or "127.0.0.1" not in self.createStreamURLInfo(info):
-					caid_name = "Stream IPTV"
-					return caid_name
-				else:
-					caid_name = "Stream Relay"
-					return caid_name
-			else:
-				caid_name = "FTA"
-			for caid_entry in caid_data:
-				if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
-					caid_name = caid_entry[2]
-					break
-		except Exception:
-			pass
-		return caid_name + ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16))
+		caid = ""
+		iptosat = ""
+		iptv = ""
+		refstr = info.getInfoString(iServiceInformation.sServiceref)
+		streamrelay = "127.0.0.1" in refstr and str(config.misc.softcam_streamrelay_port.value) in refstr
+		identifiers = ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16))
+		for caid_entry in caid_data:
+			if int(caid_entry[0], 16) <= int(self.current_caid, 16) <= int(caid_entry[1], 16):
+				caid = caid_entry[2] if not streamrelay else "Stream Relay"
+				break
+		if serviceRefIPToSAT():
+			iptosat = _("Channel IPToSAT")
+		elif "%3a//" in refstr.lower() and not streamrelay:
+			iptv = "Stream IPTV"
+		return caid + identifiers if caid and not streamrelay else iptosat + "   SID:%04x" % int(info.getInfo(iServiceInformation.sSID)) if iptosat else iptv if iptv else caid if streamrelay else "FTA" + identifiers if not getChannelOnFallbackTuner() else _("Tuner fallback")
 
 	def createResolution(self, info):
 		xres = info.getInfo(iServiceInformation.sVideoWidth)
