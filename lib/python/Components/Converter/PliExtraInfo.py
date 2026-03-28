@@ -187,7 +187,7 @@ class PliExtraInfo(Poll, Converter):
 					for caid in available_caids:
 						if int(caid_entry[0], 16) <= caid <= int(caid_entry[1], 16):
 							color = r"\c%08x" % colors[1]  # yellow
-				except:
+				except Exception:
 					pass
 
 			if color != r"\c%08x" % colors[2] or caid_entry[5]:
@@ -228,7 +228,7 @@ class PliExtraInfo(Poll, Converter):
 		if not fps or fps == -1:
 			try:
 				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) // 1000
-			except:
+			except Exception:
 				pass
 		return "%sx%s%s%s" % (xres, yres, mode, fps)
 
@@ -361,121 +361,90 @@ class PliExtraInfo(Poll, Converter):
 
 	@cached
 	def getText(self):
-		service = self.source.service
-		if service is None:
-			return ""
-		info = service and service.info()
-
-		if not info:
-			return ""
-
-		try:
-			if self.type == "CryptoInfo":
-				self.getCryptoInfo(info)
-				if config.usage.show_cryptoinfo.value:
-					return addspace(self.createCryptoBar(info)) + self.createCryptoSpecial(info)
-				else:
-					return addspace(self.createCryptoBar(info)) + addspace(self.current_source) + self.createCryptoSpecial(info)
-
-			if self.type == "CurrentCrypto":
-				self.getCryptoInfo(info)
-				return self.createCurrentCaidLabel(info)
-
-			if self.type == "CryptoBar":
-				self.getCryptoInfo(info)
-				return self.createCryptoBar(info)
-
-			if self.type == "CryptoSpecial":
-				self.getCryptoInfo(info)
-				return self.createCryptoSpecial(info)
-
-			if self.type == "Resolution":
-				return self.createResolution(info)
-
-			if self.type == "ResolutionString":
-				return addspace(self.createResolution(info)) + self.createGamma(info)
-
-			if self.type == "VideoCodec":
-				return self.createVideoCodec(info)
-
-			if self.type == "Gamma":
-				return self.createGamma(info)
-
-			if self.updateFEdata:
-				feinfo = service.frontendInfo()
-				if feinfo:
-					self.feraw = feinfo.getAll(config.usage.infobar_frontend_source.value == "settings")
-					if self.feraw:
-						self.fedata = ConvertToHumanReadable(self.feraw)
-
-			feraw = self.feraw
-			if not feraw:
-				feraw = info.getInfoObject(iServiceInformation.sTransponderData)
-				fedata = ConvertToHumanReadable(feraw)
-			else:
-				fedata = self.fedata
-
-			if self.type == "All":
-				self.getCryptoInfo(info)
-				if config.usage.show_cryptoinfo.value:
-					return addspace(self.createProviderName(info)) + self.createTransponderInfo(fedata, feraw, info) + "\n" \
-						+ addspace(self.createCryptoBar(info)) + addspace(self.createCryptoSpecial(info)) + "\n" \
-						+ addspace(self.createPIDInfo(info)) + addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
-				else:
-					return addspace(self.createProviderName(info)) + self.createTransponderInfo(fedata, feraw, info) + "\n" \
-						+ addspace(self.createCryptoBar(info)) + self.current_source + "\n" \
-						+ addspace(self.createCryptoSpecial(info)) + addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
-
-			if self.type == "PIDInfo":
-				return self.createPIDInfo(info)
-
-			if not feraw:
-				return ""
-
-			if self.type == "ServiceInfo":
-				return addspace(self.createProviderName(info)) + addspace(self.createTunerSystem(fedata)) + addspace(self.createFrequency(feraw)) + addspace(self.createPolarization(fedata)) \
-					+ addspace(self.createSymbolRate(fedata, feraw)) + addspace(self.createFEC(fedata, feraw)) + addspace(self.createModulation(fedata)) + addspace(self.createOrbPos(feraw)) \
-					+ addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
-
-			if self.type == "TransponderInfo":
-				return self.createTransponderInfo(fedata, feraw, info)
-
-			if self.type == "TransponderFrequency":
-				return self.createFrequency(feraw)
-
-			if self.type == "TransponderSymbolRate":
-				return self.createSymbolRate(fedata, feraw)
-
-			if self.type == "TransponderPolarization":
-				return self.createPolarization(fedata)
-
-			if self.type == "TransponderFEC":
-				return self.createFEC(fedata, feraw)
-
-			if self.type == "TransponderModulation":
-				return self.createModulation(fedata)
-
-			if self.type == "OrbitalPosition":
-				return self.createOrbPos(feraw)
-
-			if self.type == "TunerType":
-				return self.createTunerType(feraw)
-
-			if self.type == "TunerSystem":
-				return self.createTunerSystem(fedata)
-
-			if self.type == "OrbitalPositionOrTunerSystem":
-				return self.createOrbPosOrTunerSystem(fedata, feraw)
-
-			if self.type == "TerrestrialChannelNumber":
-				return self.createChannelNumber(fedata, feraw)
-
-			if self.type == "TransponderInfoMisPls":
-				return self.createMisPls(fedata)
-
-			return _("invalid type")
-		except:
-			return "FTA"
+		if hasattr(self.source, "service"):
+			info = self.source.service and self.source.service.info()
+			if info:
+				try:
+					if self.type == "CryptoInfo":
+						self.getCryptoInfo(info)
+						if config.usage.show_cryptoinfo.value:
+							return addspace(self.createCryptoBar(info)) + self.createCryptoSpecial(info)
+						else:
+							return addspace(self.createCryptoBar(info)) + addspace(self.current_source) + self.createCryptoSpecial(info)
+					if self.type == "CurrentCrypto":
+						self.getCryptoInfo(info)
+						return self.createCurrentCaidLabel(info)
+					if self.type == "CryptoBar":
+						self.getCryptoInfo(info)
+						return self.createCryptoBar(info)
+					if self.type == "CryptoSpecial":
+						self.getCryptoInfo(info)
+						return self.createCryptoSpecial(info)
+					if self.type == "Resolution":
+						return self.createResolution(info)
+					if self.type == "ResolutionString":
+						return addspace(self.createResolution(info)) + self.createGamma(info)
+					if self.type == "VideoCodec":
+						return self.createVideoCodec(info)
+					if self.type == "Gamma":
+						return self.createGamma(info)
+					if self.updateFEdata:
+						feinfo = service.frontendInfo()
+						if feinfo:
+							self.feraw = feinfo.getAll(config.usage.infobar_frontend_source.value == "settings")
+							if self.feraw:
+								self.fedata = ConvertToHumanReadable(self.feraw)
+					feraw = self.feraw
+					if not feraw:
+						feraw = info.getInfoObject(iServiceInformation.sTransponderData)
+						fedata = ConvertToHumanReadable(feraw)
+					else:
+						fedata = self.fedata
+					if self.type == "All":
+						self.getCryptoInfo(info)
+						if config.usage.show_cryptoinfo.value:
+							return addspace(self.createProviderName(info)) + self.createTransponderInfo(fedata, feraw, info) + "\n" \
+								+ addspace(self.createCryptoBar(info)) + addspace(self.createCryptoSpecial(info)) + "\n" \
+								+ addspace(self.createPIDInfo(info)) + addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
+						else:
+							return addspace(self.createProviderName(info)) + self.createTransponderInfo(fedata, feraw, info) + "\n" \
+								+ addspace(self.createCryptoBar(info)) + self.current_source + "\n" \
+								+ addspace(self.createCryptoSpecial(info)) + addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
+					if self.type == "PIDInfo":
+						return self.createPIDInfo(info)
+					if not feraw:
+						return ""
+					if self.type == "ServiceInfo":
+						return addspace(self.createProviderName(info)) + addspace(self.createTunerSystem(fedata)) + addspace(self.createFrequency(feraw)) + addspace(self.createPolarization(fedata)) \
+							+ addspace(self.createSymbolRate(fedata, feraw)) + addspace(self.createFEC(fedata, feraw)) + addspace(self.createModulation(fedata)) + addspace(self.createOrbPos(feraw)) \
+							+ addspace(self.createVideoCodec(info)) + addspace(self.createResolution(info)) + self.createGamma(info)
+					if self.type == "TransponderInfo":
+						return self.createTransponderInfo(fedata, feraw, info)
+					if self.type == "TransponderFrequency":
+						return self.createFrequency(feraw)
+					if self.type == "TransponderSymbolRate":
+						return self.createSymbolRate(fedata, feraw)
+					if self.type == "TransponderPolarization":
+						return self.createPolarization(fedata)
+					if self.type == "TransponderFEC":
+						return self.createFEC(fedata, feraw)
+					if self.type == "TransponderModulation":
+						return self.createModulation(fedata)
+					if self.type == "OrbitalPosition":
+						return self.createOrbPos(feraw)
+					if self.type == "TunerType":
+						return self.createTunerType(feraw)
+					if self.type == "TunerSystem":
+						return self.createTunerSystem(fedata)
+					if self.type == "OrbitalPositionOrTunerSystem":
+						return self.createOrbPosOrTunerSystem(fedata, feraw)
+					if self.type == "TerrestrialChannelNumber":
+						return self.createChannelNumber(fedata, feraw)
+					if self.type == "TransponderInfoMisPls":
+						return self.createMisPls(fedata)
+					return _("invalid type")
+				except Exception:
+					return "FTA"
 
 	text = property(getText)
 
@@ -519,11 +488,11 @@ class PliExtraInfo(Poll, Converter):
 							for caid in available_caids:
 								if int(caid_entry[0], 16) <= caid <= int(caid_entry[1], 16):
 									return True
-						except:
+						except Exception:
 							pass
 
 			return False
-		except:
+		except Exception:
 			return False
 
 	boolean = property(getBool)
