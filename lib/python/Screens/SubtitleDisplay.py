@@ -9,8 +9,9 @@ class SubtitleDisplay(Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		self.subtitlesShown = False
-		self["subtitles"] = Label()
-		self["subtitles"].hide()
+		self.externalSubtitleStarted = False
+		self['subtitles'] = Label()
+		self['subtitles'].hide()
 		self.onLayoutFinish.append(self.__layoutFinished)
 
 	def __layoutFinished(self):
