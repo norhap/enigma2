@@ -1148,10 +1148,14 @@ class RecordTimerEntry(TimerEntry, object):
 						self.log(8, "Asking user to zap away.")
 						AddNotificationWithCallback(self.failureCB, MessageBox, _("A timer failed to record!\nDisable TV and try again?\n"), timeout=20, default=True)
 					else:  # Zap without asking.
-						self.log(9, "Zap without asking.")
-						AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
-						self.setRecordingPreferredTuner()
-						self.failureCB(answer=True)
+						if config.usage.cached_channel.value:
+							self.log(9, "Zap without asking.")
+							AddNotification(MessageBox, _("In order to record a timer, the TV was switched to the recording service!\n"), type=MessageBox.TYPE_INFO, timeout=20)
+							self.setRecordingPreferredTuner()
+							self.failureCB(answer=True)
+						else:
+							self.log(9, "Standby without asking. FBC Tuner without channel cached.")
+							AddNotification(Screens.Standby.Standby)
 				elif cur_ref:
 					self.log(8, "Currently running service is not a live service so stopping it makes no sense.")
 				else:
