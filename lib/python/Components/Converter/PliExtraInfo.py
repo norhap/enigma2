@@ -389,7 +389,7 @@ class PliExtraInfo(Poll, Converter):
 					if self.type == "Gamma":
 						return self.createGamma(info)
 					if self.updateFEdata:
-						feinfo = service.frontendInfo()
+						feinfo = self.source.service.frontendInfo()
 						if feinfo:
 							self.feraw = feinfo.getAll(config.usage.infobar_frontend_source.value == "settings")
 							if self.feraw:
