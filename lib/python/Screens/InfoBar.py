@@ -751,10 +751,11 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		service = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
 		if not service:
 			return
-		if len(subtitlesList) > 0:
-			i = subtitlesList[-1][1] + 1
-		else:
-			i = 1
+		if subtitlesList:
+			if len(subtitlesList) > 0:
+				i = subtitlesList[-1][1] + 1
+			else:
+				i = 1
 		subtitletracks = self.find_related_srt_files(service.getPath())
 		for stream in subtitletracks:
 			subtitlesList.append((2, i, 4, i, stream["language"], self.runSubtitles, stream["path"]))
