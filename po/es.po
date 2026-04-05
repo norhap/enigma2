@@ -19157,11 +19157,11 @@ msgstr "Sí, quiero instalar plugins"
 msgid "Yes, always"
 msgstr "Sí, siempre"
 
-msgid "Yes, and delete this movie"
-msgstr "Sí, y elimina esta película"
-
 msgid "Yes, delete this movie and return to movie list"
 msgstr "Sí, eliminar esta película y regresar a la lista de películas"
+
+msgid "Yes, delete this movie and return to previous channel"
+msgstr "Sí, eliminar esta película y regresar al canal anterior"
 
 msgid "Yes, only from deep standby"
 msgstr "Sí, solo desde reposo profundo"

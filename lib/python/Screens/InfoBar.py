@@ -314,7 +314,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 				list = (
 					(_("Yes, return to the previous channel"), "quit"),
 					(_("Yes, returning to movie list"), "movielist"),
-					(_("Yes, and delete this movie"), "quitanddelete"),
+					(_("Yes, delete this movie and return to previous channel"), "quitanddelete"),
 					(_("Yes, delete this movie and return to movie list"), "deleteandmovielist"),
 					(_("No"), "continue"),
 					(_("No, but restart from begin"), "restart")
@@ -353,7 +353,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		if answer:
 			setResumePoint(self.session)
 			self.handleLeave("quit")
-			self.session.nav.stopService()
+			self.session.nav.stopService()  # return to previous channel
 			self.session.nav.playService(self.lastservice)
 
 	def hidePipOnExitCallback(self, answer):
@@ -390,6 +390,8 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 						# Moved to trash, okay
 						if answer == "quitanddelete":
 							self.close()
+							self.session.nav.stopService()  # return to previous channel
+							self.session.nav.playService(self.lastservice)
 						else:
 							self.movielistAgain()
 						return
@@ -417,7 +419,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			# make sure that playback is unpaused otherwise the
 			# player driver might stop working
 			self.setSeekState(self.SEEK_STATE_PLAY)
-			self.session.nav.stopService()
+			self.session.nav.stopService()  # return to previous channel
 			self.session.nav.playService(self.lastservice)
 			self.close()
 		elif answer in ("movielist", "deleteandmovielistconfirmed"):
