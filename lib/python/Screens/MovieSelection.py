@@ -8,6 +8,7 @@ from enigma import eRCInput, eServiceCenter, eServiceReference, eSize, eTimer, i
 
 from skin import findSkinScreen
 import NavigationInstance
+from ServiceReference import serviceRefIPToSAT
 from RecordTimer import AFTEREVENT, RecordTimerEntry
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Button import Button
@@ -340,7 +341,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["chosenletter"] = Label("")
 		self["chosenletter"].visible = False
 
-		self["waitingtext"] = Label(_("Please wait... Loading list..."))
+		self["waitingtext"] = Label(_("Please wait... Loading list...") if not serviceRefIPToSAT() else _("The previous channel when entering the movie list cannot be IPToSAT"))
 
 		self.LivePlayTimer = eTimer()
 		self.LivePlayTimer.timeout.get().append(self.LivePlay)
@@ -478,6 +479,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			"seekBack": (sback, tBack),
 			"seekBackManual": (ssback, tBack)
 		}, prio=5)
+		if serviceRefIPToSAT():
+			return
 		self.onShown.append(self.onFirstTimeShown)
 		self.onLayoutFinish.append(self.saveListsize)
 		self.list.connectSelChanged(self.updateButtons)
@@ -1267,6 +1270,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	# NOTE: sort methods may be temporary or permanent!
 	#
 	def selectSortby(self):
+		if serviceRefIPToSAT():
+			return
 		menu = []
 		index = 0
 		used = 0
