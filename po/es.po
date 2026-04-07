@@ -1971,7 +1971,7 @@ msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit onl
 msgstr "Si está habilitado, el display muestra 12 caracteres en lugar de 8, pero solo en latin-1/translit."
 
 msgid "ImportAutoTimerCurrentEvent"
-msgstr "Auto Temporizador"
+msgstr "Importar Autotemporizador"
 
 msgid "install ext2 kernel module"
 msgstr "instalar módulo kernel ext2"

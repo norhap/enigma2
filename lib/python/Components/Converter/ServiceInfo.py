@@ -66,7 +66,7 @@ class ServiceInfo(Poll, Converter):
 			"IsSoftCSA": (self.IS_SOFTCSA, (iPlayableService.evUpdatedInfo,)),
 			"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 			"IsNotWidescreen": (self.IS_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
-			"SubservicesAvailable": (self.SUBSERVICES_AVAILABLE, (iPlayableService.evUpdatedEventInfo if not config.misc.hotkey.green.value or not config.misc.hotkey.green_long.value else None,)),
+			"SubservicesAvailable": (self.SUBSERVICES_AVAILABLE, (iPlayableService.evUpdatedEventInfo,)),
 			"VideoWidth": (self.XRES, (iPlayableService.evVideoSizeChanged,)),
 			"VideoHeight": (self.YRES, (iPlayableService.evVideoSizeChanged,)),
 			"AudioPid": (self.APID, (iPlayableService.evUpdatedInfo,)),
@@ -221,7 +221,7 @@ class ServiceInfo(Poll, Converter):
 		elif self.type == self.IS_NOT_WIDESCREEN:
 			return video_aspect not in WIDESCREEN
 		elif self.type == self.SUBSERVICES_AVAILABLE:
-			return hasActiveSubservicesForCurrentChannel(info.getInfoString(iServiceInformation.sServiceref))
+			return hasActiveSubservicesForCurrentChannel(info.getInfoString(iServiceInformation.sServiceref)) if not config.misc.hotkey.green.value else False
 		elif self.type == self.HAS_HBBTV:
 			return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
 		elif self.type == self.AUDIOTRACKS_AVAILABLE:
