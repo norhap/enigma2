@@ -951,7 +951,7 @@ msgid "??"
 msgstr "??"
 
 msgid "ActivateRedButton"
-msgstr "Activa botón Rojo"
+msgstr "Activa HbbTV"
 
 msgid "ActivateTimeshiftEnd"
 msgstr "Activa final Timeshift"
@@ -4716,6 +4716,9 @@ msgstr "Finés"
 
 msgid "First day to match events. No event that begins before this date will be matched."
 msgstr "Primer día para unir eventos. Ningún evento que comience antes de esta fecha se igualará."
+
+msgid "First InfoBar"
+msgstr "Primera InfoBar"
 
 msgid "First page"
 msgstr "Primera página"
@@ -11423,9 +11426,6 @@ msgstr "Menú Información Evento"
 
 msgid "ShowExtensionSelection"
 msgstr "Extensiones"
-
-msgid "ShowFirstInfoBar"
-msgstr "Mostrar Primera InfoBar"
 
 msgid "ShowMovies"
 msgstr "Mostrar Películas"
