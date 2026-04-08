@@ -220,8 +220,15 @@ def getHotkeyFunctions():
 		hotkey.functions.append((_("Swap PiP"), "Infobar/swapPiP", "InfoBar"))
 		hotkey.functions.append((_("Move PiP"), "Infobar/movePiP", "InfoBar"))
 		hotkey.functions.append((_("Toggle PiPzap"), "Infobar/togglePipzap", "InfoBar"))
-	if isPluginInstalled("WebkitHbbTV"):
+	if os.path.exists("/usr/bin/run-webkit.sh"):
+		if config.misc.hotkey.red_long.value != config.misc.hotkey.red_long.default:
+			config.misc.hotkey.red_long.value = config.misc.hotkey.red_long.default
+			config.misc.hotkey.red_long.save()
 		hotkey.functions.append((_("Activate HbbTV (Redbutton)"), "Infobar/activateRedButton", "InfoBar"))
+	else:
+		if config.misc.hotkey.red_long.value == config.misc.hotkey.red_long.default:
+			config.misc.hotkey.red_long.value = ""
+			config.misc.hotkey.red_long.save()
 	if BoxInfo.getItem("hashdmiin"):
 		hotkey.functions.append((_("Toggle HDMI In"), "Infobar/HDMIIn", "InfoBar"))
 		hotkey.functions.append((_("Toggle HDMI-In full screen"), "Infobar/HDMIInFull", "InfoBar"))
