@@ -21,7 +21,7 @@
 
 <!-- template -->
 	<screen name="SummaryClockPanel">
-		<widget source="global.CurrentTime" render="Label" position="320,260" size="160,60" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="320,254" size="160,60" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" noWrap="1">
 			<convert type="ClockToText"></convert>
 		</widget>
 	</screen>
@@ -46,7 +46,7 @@
 		<widget source="session.CurrentService" render="Label" position="0,5" size="480,70" font="FdLcD;55" foregroundColor="#FFFF00" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="0,70" size="480,90" font="FdLcD;40" >
+		<widget source="session.Event_Now" render="Label" position="2,70" size="478,90" font="FdLcD;40" >
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget source="session.Event_Now" render="Progress" position="20,170" size="440,20" borderWidth="1" >
@@ -64,7 +64,7 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">FOLLOW</convert>
 		</widget>
-		<eLabel text="TUNER:" position="20,260" size="160,60" font="FdLcD;40" />
+		<eLabel text="TUNER:" position="20,260" size="140,60" font="FdLcD;35" />
 		<widget source="session.FrontendInfo" render="FixedLabel" position="180,260" size="60,60" text="A" foregroundColor="#04B404" font="FdLcD;40" >
 			<convert type="FrontendInfo">NUMBER</convert>
 			<convert type="ValueRange">0,0</convert>
