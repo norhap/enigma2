@@ -434,7 +434,8 @@
 		<eLabel backgroundColor="blue_light" position="15,850" size="2,227" zPosition="-11"/>
 		<eLabel backgroundColor="blue_light" position="15,1077" size="1865,2" zPosition="-11"/>
 		<eLabel backgroundColor="blue_light" position="1880,850" size="2,229" zPosition="-11"/>
-		<eLabel backgroundColor="OE_NewBg" position="336,932" size="1510,4" zPosition="20" transparent="0" foregroundColor="OE_ListBackground"/>
+		<eLabel backgroundColor="OE_NewBg" position="336,937" size="1510,4" zPosition="1" transparent="0" foregroundColor="OE_ListBackground"/>
+		<eLabel backgroundColor="OE_NewBg" position="336,1014" size="1510,4" zPosition="1" transparent="0" foregroundColor="OE_ListBackground"/>
 		<eLabel backgroundColor="OE_NewBg" foregroundColor="OE_NewBg" position="30,775" size="285,305" zPosition="-10"/>
 		<eLabel backgroundColor="blue_light" position="28,775" size="2,305" zPosition="-11"/>
 		<eLabel backgroundColor="blue_light" position="28,773" size="289,2" zPosition="-11"/>
@@ -515,7 +516,7 @@
 			<convert type="ValueRange">1921,3841</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<widget source="session.Event_Now" render="DRRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" backgroundColor="OE_Background" font="RegularBold;30" noWrap="1" position="575,938" size="1050,64" transparent="1">
+		<widget source="session.Event_Now" render="DRRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" backgroundColor="OE_Background" font="RegularBold;30" noWrap="1" position="575,940" size="1050,64" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
 		<widget backgroundColor="OE_Background" font="RegularBold;28" position="335,942" render="Label" size="90,40" source="session.Event_Now" transparent="1">
@@ -530,7 +531,7 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" backgroundColor="OE_NewBg" pixmap="OctEtFHD/colors/green_light.png" position="336,975" size="1510,4" transparent="0" zPosition="7">
+		<widget source="session.Event_Now" render="Progress" backgroundColor="#002c445e" pixmap="OctEtFHD/colors/green_light.png" position="336,975" size="1510,4" transparent="0" zPosition="7">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 		<widget backgroundColor="OE_Background" font="RegularBold;28" position="335,980" render="Label" size="90,40" source="session.Event_Next" transparent="1" verticalAlignment="top">
@@ -591,7 +592,7 @@
 		</widget>
 		<!-- buttons -->
 		<ePixmap pixmap="OctEtFHD/buttons/key_red.png" position="320,893" size="40,40" objectTypes="key_red,Button,Label" alphaTest="blend"/>
-		<widget name="key_red" position="360,889" size="700,49" backgroundColor="OE_Background" font="RegularBold;20" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_red" position="360,889" size="700,51" backgroundColor="OE_Background" font="RegularBold;20" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
 		<ePixmap pixmap="OctEtFHD/buttons/key_green.png" position="320,1029" size="40,40" objectTypes="key_green,Button,Label" alphaTest="blend"/>
 		<widget name="key_green" position="360,1018" size="465,51" objectTypes="key_green,Label,Button" font="RegularBold;20" backgroundColor="OE_Background" horizontalAlignment="left" verticalAlignment="top" transparent="1" zPosition="1"/>
 		<ePixmap pixmap="OctEtFHD/buttons/key_yellow.png" position="845,1029" size="40,40" objectTypes="key_yellow,Button,Label" alphaTest="blend"/>
