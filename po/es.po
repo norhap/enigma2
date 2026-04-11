@@ -6708,26 +6708,11 @@ msgstr "No se han encontrado redes inalámbricas! Buscando…"
 msgid "No (with notification)"
 msgstr "No (con notificación)"
 
-msgid ""
-"No working local network adapter found.\n"
-"Please verify that you have attached a network cable and your network is configured correctly."
-msgstr ""
-"No se encontró ningún adaptador de red local en funcionamiento.\n"
-"Verifique que haya conectado un cable de red y que su red esté configurada correctamente."
+msgid "No working local network adapter found.\n1. Verify that your wired device is compatible.\n2. Configure your network correctly."
+msgstr "No se encontró ningún adaptador de red local en funcionamiento.\n1. Verifique que su dispositivo de cable es compatible\n2. Configure su red correctamente."
 
-msgid ""
-"No working wireless network adapter found.\n"
-"Please verify that you have attached a compatible WLAN device and your network is configured correctly."
-msgstr ""
-"No se encontró ningún adaptador de red inalámbrica en funcionamiento.\n"
-"Verifique que haya conectado un dispositivo WLAN y que su red esté configurada correctamente."
-
-msgid ""
-"No working wireless network interface found.\n"
-" Please verify that you have attached a compatible WLAN device or enable your local network interface."
-msgstr ""
-"No se encontró una interfaz de red inalámbrica en funcionamiento.\n"
-" Verifique que haya conectado un dispositivo WLAN o habilite su interfaz de red local."
+msgid "No working wireless network adapter found.\n1. Verify that your WLAN device is compatible.\n2. Configure your network correctly."
+msgstr "No se encontró adaptador de red inalámbrica en funcionamiento.\n1. Verifique que su dispositivo WLAN es compatible.\n2. Configure su red correctamente."
 
 msgid "No, I do not want to install plugins"
 msgstr "No, no quiero instalar plugins"
@@ -8247,7 +8232,7 @@ msgid "Scan state"
 msgstr "Estado de la búsqueda"
 
 msgid "Scan wireless networks"
-msgstr "Buscar redes inhalámbricas"
+msgstr "Buscar redes inalámbricas"
 
 msgid "Scan your network for wireless access points and connect to them using your selected wireless device.\n"
 msgstr "Escanee su red en busca de puntos de acceso inalámbrico y conéctese con su dispositivo inalámbrico seleccionado.\n"
@@ -8414,7 +8399,7 @@ msgid "Select a time, when in Standby, before which descramble can proceed."
 msgstr "Seleccione una hora en modo reposo, antes del cual se pueda realizar la descodificación."
 
 msgid "Select a wireless network"
-msgstr "Seleccionar una red inhalámbrica"
+msgstr "Seleccionar una red inalámbrica"
 
 msgid "Select action for timer '%s'."
 msgstr "Seleccionar acción para el temporizador ‘%s’."
@@ -8954,7 +8939,7 @@ msgid "Show/hide window"
 msgstr "Mostrar/ocultar ventana"
 
 msgid "Shows the state of your wireless LAN connection.\n"
-msgstr "Muestra el estado de su conexión LAN inalámbrica.\n"
+msgstr "Muestra el estado de su conexión Wireless LAN.\n"
 
 msgid "Shuffle playlist"
 msgstr "Lista de reproducción aleatoria"
@@ -9053,7 +9038,7 @@ msgid "Site longitude"
 msgstr "Longitud del sitio"
 
 msgid "Skin Setup"
-msgstr "Cambiar Skin"
+msgstr "Ajustes Skin"
 
 msgid "Skin"
 msgstr "Skin"
@@ -9769,12 +9754,8 @@ msgstr "Puerto del servidor que se utiliza para descifrar canales que solo se pu
 msgid "Please choose what you want to do next."
 msgstr "Elija lo que desea hacer a continuación."
 
-msgid ""
-"The wireless LAN plugin is not installed!\n"
-"Please install it."
-msgstr ""
-"El plugin de LAN inalámbrica no está instalado!\n"
-"Por favor instálalo."
+msgid "The wireless LAN plugin is not installed!\n\nPlease install it."
+msgstr "El plugin de LAN inalámbrica no está instalado!\n\nPor favor instálelo."
 
 msgid "There are at least %d updates available."
 msgstr "Hay al menos %d actualizaciones disponibles."
@@ -11757,7 +11738,7 @@ msgid "winter sport"
 msgstr "deporte de invierno"
 
 msgid "wireless network interface"
-msgstr "interfaz de red inhalámbrica"
+msgstr "interfaz de red inalámbrica"
 
 #, python-format
 msgid "with %d error"
@@ -12865,6 +12846,9 @@ msgstr ""
 "Su conexión a Internet no funciona!\n"
 "\n"
 "Por favor, elige que quieres hacer."
+
+msgid "Your Wireless LAN network adapter is disabled."
+msgstr "Su adaptador de red Wireless LAN está desactivado."
 
 msgid ""
 "Your wireless LAN internet connection could not be started!\n"

@@ -139,8 +139,8 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Select a network adapter"))
-		self.wlan_errortext = _("No working wireless network adapter found.\nPlease verify that you have attached a compatible WLAN device and your network is configured correctly.")
-		self.lan_errortext = _("No working local network adapter found.\nPlease verify that you have attached a network cable and your network is configured correctly.")
+		self.wlan_errortext = _("No working wireless network adapter found.\n1. Verify that your WLAN device is compatible.\n2. Configure your network correctly.")
+		self.lan_errortext = _("No working local network adapter found.\n1. Verify that your wired device is compatible.\n2. Configure your network correctly.")
 		self.oktext = _("Press OK to confirm.")
 		self.edittext = _("Press OK to edit the settings.")
 		self.defaulttext = _("Press yellow to set this interface as default interface.")
@@ -1117,8 +1117,8 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self["devicepic"] = MultiPixmap()
 		self.oktext = _("Press OK to confirm.")
 		self.reboottext = _("Your receiver will restart after pressing OK on your remote control.")
-		self.errortext = _("No working wireless network interface found.\n Please verify that you have attached a compatible WLAN device or enable your local network interface.")
-		self.missingwlanplugintxt = _("The wireless LAN plugin is not installed!\nPlease install it.")
+		self.errortext = (_("No working wireless network adapter found.\n1. Verify that your WLAN device is compatible.\n2. Configure your network correctly.") if iNetwork.getAdapterAttribute(self.iface, "up") else _("Your Wireless LAN network adapter is disabled."))
+		self.missingwlanplugintxt = _("The wireless LAN plugin is not installed!\n\nPlease install it.")
 
 		self["WizardActions"] = HelpableActionMap(self, ["WizardActions"],
 			{
