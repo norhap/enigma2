@@ -19072,9 +19072,6 @@ msgstr "India"
 msgid "< PREV NEXT >  Move"
 msgstr "< PREV NEXT >  Mover"
 
-msgid "WARNING: Previously change the channel to \"No IPToSAT\" to execute cuts."
-msgstr "ADVERTENCIA: Cambie previamente el canal a \"No IPToSAT\" para ejecutar cortes."
-
 msgid "yellow"
 msgstr "amarillo"
 

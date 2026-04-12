@@ -19,7 +19,6 @@ from Components.Sources.List import List
 from Components.config import config, ConfigYesNo
 from Screens.MovieSelection import MovieSelection
 from Plugins.Extensions.MovieCut.ui import MovieCut
-from ServiceReference import serviceRefIPToSAT
 
 apscParser = Struct(">qq")    # big-endian, 64-bit offset and 64-bit PTS/data
 
@@ -172,9 +171,6 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		InfoBarCueSheetSupport.__init__(self)
 		InfoBarBase.__init__(self, steal_current_service=True)
 		HelpableScreen.__init__(self)
-		self.serviceRefIPToSAT = False
-		if serviceRefIPToSAT():
-			self.serviceRefIPToSAT = True
 		self.old_service = session.nav.getCurrentlyPlayingServiceReference()
 		self.service = service
 		session.nav.playService(service)
@@ -195,7 +191,6 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 		self["InLen"] = Label()
 		self["OutLen"] = Label()
-		self["status"] = Label()
 		self["Timeline"] = ServicePositionGauge(self.session.nav)
 		self["cutlist"] = List(self.getCutlist())
 		self["cutlist"].onSelectionChanged.append(self.selectionChanged)
@@ -207,8 +202,6 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		self["key_green"] = Label(_("End cut"))
 		self["key_yellow"] = Label(_("Step back"))
 		self["key_blue"] = Label(_("Step forward"))
-		if self.serviceRefIPToSAT:
-			self["status"] = Label(_("WARNING: Previously change the channel to \"No IPToSAT\" to execute cuts."))
 
 		self["SeekActions"].actions.update({"stepBack": self.stepBack})
 		self.helpList.append((self["SeekActions"], "CutlistSeekActions", [("stepBack", _("Step back"))]))
@@ -456,7 +449,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 	def showMenu(self):
 		curpos = self.cueGetCurrentPosition()
-		if curpos is None or self.serviceRefIPToSAT:
+		if curpos is None:
 			return
 		self.setSeekState(self.SEEK_STATE_PAUSE)
 		self.context_position = curpos
@@ -470,7 +463,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		self.session.openWithCallback(self.menuCallback, CutListContextMenu, self.state, nearmark, self.cut_state)
 
 	def menuCallback(self, *result):
-		if not len(result) or self.serviceRefIPToSAT:
+		if not len(result):
 			return
 		result = result[0]
 
