@@ -341,7 +341,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self["chosenletter"] = Label("")
 		self["chosenletter"].visible = False
 
-		self["waitingtext"] = Label(_("Please wait... Loading list...") if not serviceRefIPToSAT() else _("The previous channel when entering the movie list cannot be IPToSAT"))
+		self["waitingtext"] = Label(_("Please wait... Loading list..."))
 
 		self.LivePlayTimer = eTimer()
 		self.LivePlayTimer.timeout.get().append(self.LivePlay)
@@ -480,7 +480,11 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			"seekBackManual": (ssback, tBack)
 		}, prio=5)
 		if serviceRefIPToSAT():
-			return
+			from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
+			killActivePlayer()
+			if config.usage.on_movie_stop.default:
+				config.usage.on_movie_stop.value = "quit"
+				config.usage.on_movie_stop.save()
 		self.onShown.append(self.onFirstTimeShown)
 		self.onLayoutFinish.append(self.saveListsize)
 		self.list.connectSelChanged(self.updateButtons)
@@ -1270,8 +1274,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	# NOTE: sort methods may be temporary or permanent!
 	#
 	def selectSortby(self):
-		if serviceRefIPToSAT():
-			return
 		menu = []
 		index = 0
 		used = 0

@@ -13824,9 +13824,6 @@ msgstr "Los datos facilitados no encontrará canales."
 msgid "The password can not be blank!"
 msgstr "La contraseña no puede estar en blanco!"
 
-msgid "The previous channel when entering the movie list cannot be IPToSAT"
-msgstr "El canal anterior al ingresar a la lista de películas no puede ser IPToSAT"
-
 msgid "The process will take approximately %d minutes to complete."
 msgstr "El proceso tardará aproximadamente %d minutos en completarse."
 
