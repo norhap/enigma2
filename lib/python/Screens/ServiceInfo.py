@@ -147,10 +147,11 @@ class ServiceInfo(Screen):
 			fps = ""
 			if self.info:
 				from enigma import eAVControl
-				from Components.Converter.PliExtraInfo import codec_data, gamma_data
+				from Components.Converter.PliExtraInfo import codec_data
 				avControl = eAVControl.getInstance()
 				videocodec = codec_data.get(self.info.getInfo(iServiceInformation.sVideoType), "N/A")
-				gamma = gamma_data.get(self.info.getInfo(iServiceInformation.sGamma), "")
+				gamma = ("SDR", "HDR", "HDR10", "HLG", "")[self.info.getInfo(iServiceInformation.sGamma)]
+				resolution += f" - {gamma}" if gamma else ""
 				video_rate = avControl.getFrameRate()
 				fps = str((video_rate + 500) // 1000)
 				video_width = avControl.getResolutionX()
