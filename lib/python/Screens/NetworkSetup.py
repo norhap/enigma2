@@ -1114,6 +1114,10 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self["Statustext"] = StaticText()
 		self["statuspic"] = MultiPixmap()
 		self["statuspic"].hide()
+		self["devicelanpic"] = Pixmap()
+		self["deviceofflanpic"] = Pixmap()
+		self["devicewlanpic"] = Pixmap()
+		self["deviceoffwlanpic"] = Pixmap()
 		self["devicepic"] = MultiPixmap()
 		self.oktext = _("Press OK to confirm.")
 		self.reboottext = _("Your receiver will restart after pressing OK on your remote control.")
@@ -1279,7 +1283,16 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 		self["Statustext"].setText(_("Link:"))
 
 		if iNetwork.isWirelessInterface(self.iface):
-			self["devicepic"].setPixmapNum(1)
+			if iNetwork.getAdapterAttribute(self.iface, "up"):
+				self["devicewlanpic"].show()
+				self["devicelanpic"].hide()
+				self["deviceoffwlanpic"].hide()
+				self["deviceofflanpic"].hide()
+			else:
+				self["deviceoffwlanpic"].show()
+				self["devicelanpic"].hide()
+				self["devicewlanpic"].hide()
+				self["deviceofflanpic"].hide()
 			try:
 				from Plugins.SystemPlugins.WirelessLan.Wlan import iStatus
 			except:
@@ -1289,8 +1302,16 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 				iStatus.getDataForInterface(self.iface, self.getInfoCB)
 		else:
 			iNetwork.getLinkState(self.iface, self.dataAvail)
-			self["devicepic"].setPixmapNum(0)
-		self["devicepic"].show()
+			if iNetwork.getAdapterAttribute(self.iface, "up"):
+				self["devicelanpic"].show()
+				self["deviceofflanpic"].hide()
+				self["devicewlanpic"].hide()
+				self["deviceoffwlanpic"].hide()
+			else:
+				self["deviceofflanpic"].show()
+				self["devicelanpic"].hide()
+				self["devicewlanpic"].hide()
+				self["deviceoffwlanpic"].hide()
 
 	def doNothing(self):
 		pass
