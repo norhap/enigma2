@@ -1143,6 +1143,8 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		config.usage.on_movie_eof.value = self.settings["movieoff"]
 		# save movieeof values for using by hotkeys
 		config.usage.on_movie_eof.save()
+		# save moviesort values using list sort type
+		config.movielist.moviesort.save()
 
 	def loadLocalSettings(self):
 		'Load settings, called when entering a directory'
