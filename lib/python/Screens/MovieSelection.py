@@ -482,9 +482,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		if serviceRefIPToSAT():
 			from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
 			killActivePlayer()
-			if config.usage.on_movie_stop.default:
-				config.usage.on_movie_stop.value = "quit"
-				config.usage.on_movie_stop.save()
 		self.onShown.append(self.onFirstTimeShown)
 		self.onLayoutFinish.append(self.saveListsize)
 		self.list.connectSelChanged(self.updateButtons)

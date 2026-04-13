@@ -4,6 +4,7 @@ from time import sleep
 from struct import unpack, Struct
 from ctypes import CDLL, c_longlong
 from enigma import getDesktop, iPlayableService
+from ServiceReference import serviceRefIPToSAT
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from Screens.ChoiceBox import ChoiceBox
@@ -12,6 +13,7 @@ from Components.ActionMap import HelpableActionMap
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 from Components.VideoWindow import VideoWindow
 from Components.Label import Label
+from Components.Console import Console
 from Screens.InfoBarGenerics import InfoBarSeek, InfoBarCueSheetSupport
 from Screens.FixedMenu import FixedMenu
 from Screens.HelpMenu import HelpableScreen
@@ -171,6 +173,10 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		InfoBarCueSheetSupport.__init__(self)
 		InfoBarBase.__init__(self, steal_current_service=True)
 		HelpableScreen.__init__(self)
+		self.serviceRefIPToSAT = False
+		self.console = Console()
+		if serviceRefIPToSAT():
+			self.serviceRefIPToSAT = True
 		self.old_service = session.nav.getCurrentlyPlayingServiceReference()
 		self.service = service
 		session.nav.playService(service)
@@ -358,7 +364,13 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			self.removeMark(m)
 
 	def exit(self):
+		if self.serviceRefIPToSAT:
+			self.console.ePopen(['sleep 3'], self.killIPToSATPlayer)
 		self.close()
+
+	def killIPToSATPlayer(self, result=None, retVal=None, extra_args=None):
+		from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
+		killActivePlayer()
 
 	def getCutlist(self):
 		length = self.getSeek() and self.getSeek().getLength()
@@ -654,10 +666,8 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 	def grabFrame(self):
 		path = self.service.getPath()
-		from Components.Console import Console
-		grabConsole = Console()
 		cmd = 'grab -vblpr%d "%s"' % (180, path.rsplit('.', 1)[0] + ".png")
-		grabConsole.ePopen(cmd)
+		self.console.ePopen(cmd)
 		self.playpauseService()
 
 	def trunc(self, movie, pts):
