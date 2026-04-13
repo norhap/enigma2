@@ -1312,12 +1312,15 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 
 	def getPixmapSortIndex(self, which):
 		index = int(which)
-		if index == MovieList.SORT_ALPHA_DATE_OLDEST_FIRST:
-			index = MovieList.SORT_ALPHANUMERIC
-		elif index == MovieList.SORT_ALPHAREV_DATE_NEWEST_FIRST:
-			index = MovieList.SORT_ALPHANUMERIC_REVERSE
-		elif (index == MovieList.TRASHSORT_SHOWRECORD) or (index == MovieList.TRASHSORT_SHOWDELETE):
-			index = MovieList.SORT_RECORDED
+		match index:
+			case MovieList.SORT_ALPHA_DATE_OLDEST_FIRST:
+				index = MovieList.SORT_ALPHANUMERIC
+			case MovieList.SORT_ALPHAREV_DATE_NEWEST_FIRST:
+				MovieList.SORT_ALPHANUMERIC_REVERSE
+			case MovieList.TRASHSORT_SHOWRECORD:
+				index = MovieList.SORT_RECORDED
+			case _:
+				index = MovieList.SORT_RECORDED
 		return index - 1
 
 	def sortbyMenuCallback(self, choice):
