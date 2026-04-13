@@ -479,6 +479,8 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			if ref:
 				delResumePoint(ref)
+			if self.serviceRefIPToSAT and config.usage.on_movie_eof.value == "movielist":
+				self.console.ePopen(['sleep 3'], self.killIPToSATPlayer)
 			self.handleLeave(config.usage.on_movie_eof.value)
 
 	def up(self):
