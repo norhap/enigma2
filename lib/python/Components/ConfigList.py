@@ -1,7 +1,7 @@
 from enigma import eListbox, eListboxPythonConfigContent, ePoint, eRCInput, eTimer
 
 from skin import parameters
-from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
 from Components.config import ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_ERASE, ACTIONKEY_FIRST, ACTIONKEY_LAST, ACTIONKEY_LEFT, ACTIONKEY_NUMBERS, ACTIONKEY_RIGHT, ACTIONKEY_SELECT, ACTIONKEY_TIMEOUT, ACTIONKEY_TOGGLE, ConfigBoolean, ConfigElement, ConfigInteger, ConfigMACText, ConfigNumber, ConfigSelection, ConfigSequence, ConfigText, config, configfile
 from Components.GUIComponent import GUIComponent
 from Components.Pixmap import Pixmap
@@ -178,8 +178,14 @@ class ConfigListScreen:
 		if fullUI:
 			if "key_red" not in self:
 				self["key_red"] = StaticText(_("Cancel"))
+				self["actions"] = ActionMap(["ColorActions"], {
+					"red": self.keyCancel
+				}, -2)
 			if "key_green" not in self:
 				self["key_green"] = StaticText(_("Save"))
+				self["actions"] = ActionMap(["ColorActions"], {
+					"green": self.keySave
+				}, -2)
 			if "key_yellow" not in self and yellow_button:
 				self["key_yellow"] = StaticText(yellow_button.get('text', ''))
 				self["key_yellowActions"] = HelpableActionMap(self, ["ColorActions"], {
