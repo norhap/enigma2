@@ -107,8 +107,7 @@ class SleepTimerEdit(Setup):
 		self["config"].l.setList(conflist)
 
 	def keySave(self):
-		if self["config"].isChanged():
-			Setup.keySave(self)
+		Setup.keySave(self) if self["config"].isChanged() else self.close()
 
 	def startSleeptimer(self):
 		if self["key_blue"].text:
