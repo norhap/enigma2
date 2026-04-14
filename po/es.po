@@ -18918,6 +18918,9 @@ msgstr "Descifrar streams http desde el servidor"
 msgid "want to stop and delete this recordings?"
 msgstr "¿Quieres detener y eliminar estas grabaciones?"
 
+msgid "WeatherPlugin"
+msgstr "Informe Meteorológico"
+
 msgid "Weather Report"
 msgstr "Informe Meteorológico"
 

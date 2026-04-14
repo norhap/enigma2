@@ -405,7 +405,7 @@ class SecondInfoBar(Screen):
 		if config.misc.hotkey.blue_long.value:
 			self.hotkeyValue = config.misc.hotkey.blue_long.value
 			valueblueLong = InfoBarShowHide.functionHotkeyValue(self)
-		if serviceRefIPToSAT():
+		if not config.usage.cached_channel.value:
 			if str(config.misc.hotkey.red.value) == str(config.misc.hotkey.yellow.default):
 				valuered = _("First InfoBar")
 			if str(config.misc.hotkey.red_long.value) == str(config.misc.hotkey.yellow.default):
@@ -537,7 +537,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		if config.misc.hotkey.blue_long.value:
 			self.hotkeyValue = config.misc.hotkey.blue_long.value
 			valueblueLong = self.functionHotkeyValue()
-		if serviceRefIPToSAT():
+		if not config.usage.cached_channel.value:
 			if str(config.misc.hotkey.red.value) == str(config.misc.hotkey.yellow.default):
 				valuered = _("Nothing")
 			if str(config.misc.hotkey.red_long.value) == str(config.misc.hotkey.yellow.default):
@@ -558,7 +558,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 				valueblueLong = _("Nothing")
 		self["key_red"].setText(_("Nothing") if not valuered and not valueredLong else valuered if valuered and valueredLong and valuered == _("Nothing") and valueredLong == _("Nothing") else valuered if valuered and not valueredLong else valueredLong + " " + _("(Long)") if not valuered and valueredLong and valueredLong != _("Nothing") else valuered + "\n" + valueredLong + " " + _("(Long)") if valuered and valueredLong else valuered if valuered else valueredLong if valueredLong != _("Nothing") else _("Nothing"))
 		self["key_green"].setText("\n" + _("Resolution") + " " + _("(Long)") if not valuegreen and not valuegreenLong else valuegreen if valuegreen and valuegreenLong and valuegreen == _("Nothing") and valuegreenLong == _("Nothing") else valuegreen if valuegreen and valuegreenLong == _("Resolution") + " " + _("(Long)") else valuegreen + "\n" + _("Resolution") + " " + _("(Long)") if valuegreen and not valuegreenLong else "\n" + valuegreenLong + " " + _("(Long)") if not valuegreen and valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)"))
-		self["key_yellow"].setText(_("Import AutoTimer") if not valueyellow and not valueyellowLong else valueyellow if valueyellow and not valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == _("Nothing") and valueyellowLong == _("Nothing") else valueyellow if valueyellow and valueyellowLong and valueyellowLong == _("Nothing") else valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow == _("Nothing") else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow != valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == valueyellowLong else _("Import AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)") if valueyellowLong else valueyellow)
+		self["key_yellow"].setText(_("Import AutoTimer") if not valueyellow and not valueyellowLong or (config.misc.hotkey.yellow.default and not valueyellowLong and config.usage.cached_channel.value) else valueyellow if valueyellow and not valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == _("Nothing") and valueyellowLong == _("Nothing") else valueyellow if valueyellow and valueyellowLong and valueyellowLong == _("Nothing") else valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow == _("Nothing") else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow != valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == valueyellowLong else _("Import AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)") if valueyellowLong else valueyellow)
 		self["key_blue"].setText(_("Extensions") if not valueblue and not valueblueLong else valueblue if valueblue and not valueblueLong else valueblue if valueblue and valueblueLong and valueblue == _("Nothing") and valueblueLong == _("Nothing") else valueblue if valueblue and valueblueLong and valueblueLong == _("Nothing") else valueblueLong + " " + _("(Long)") if valueblue and valueblueLong and valueblue == _("Nothing") else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblueLong and valueblue and valueblue != valueblueLong else valueblue if valueblueLong and valueblue and valueblue == valueblueLong else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)") if valueblueLong else _("Extensions"))
 		self.__state = self.STATE_SHOWN
 		for x in self.onShowHideNotifiers:
