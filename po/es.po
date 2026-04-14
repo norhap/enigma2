@@ -2642,9 +2642,6 @@ msgstr "Por fecha inversa, luego por nombre inverso"
 msgid "By date, then by name"
 msgstr "Por fecha, luego por nombre"
 
-msgid "By default, SNR will be shown in dB (when supported by the tuner). This setting forces SNR to be shown as a percentage instead."
-msgstr "Por defecto, SNR se mostrará en dB (cuando el sintonizador lo admita). Esta configuración obliga a que SNR se muestre como un porcentaje."
-
 msgid "By description, then by name"
 msgstr "Por descripción, luego por nombre"
 
@@ -9811,6 +9808,9 @@ msgstr "Esta opción permite reducir el ruido (pixelado) en la imagen. Obviament
 msgid "This option allows to set the level of dynamic contrast of the picture."
 msgstr "Esta opción permite establecer el nivel de contraste dinámico de la imagen."
 
+msgid "This option allows you to display the signal-to-noise ratio (SNR) in decibels (not all receivers support it)."
+msgstr "Esta opción permite mostrar la relación señal/ruido (SNR) en decibelios (no todos los receptores la admiten)."
+
 msgid "This option allows you can to set the auto volume level."
 msgstr "Esta opción le permite configurar el nivel de volumen automático."
 
@@ -12076,9 +12076,6 @@ msgstr "Modo de configuración"
 msgid "Show EIT now/next in infobar"
 msgstr "Mostrar EIT ahora / siguiente en las barras de información"
 
-msgid "Show SNR percentage instead of dB value"
-msgstr "Mostrar porcentaje de SNR en lugar de valor de dB"
-
 msgid "Show Boolean values as graphical switch"
 msgstr "Mostrar gráficos para las opciones de configuración"
 
@@ -12162,6 +12159,9 @@ msgstr "Mostrar iconos de tipo de canal"
 
 msgid "Show status icons in movielist"
 msgstr "Mostrar iconos de status en lista de películas"
+
+msgid "Swap SNR in '%' with SNR in 'dB'"
+msgstr "Cambiar SNR en ‘%’ por SNR en ‘dB’"
 
 msgid "Show warning when timeshift is stopped"
 msgstr "Mostrar advertencia al detener timeshift"
