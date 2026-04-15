@@ -19072,6 +19072,9 @@ msgstr "India"
 msgid "< PREV NEXT >  Move"
 msgstr "< PREV NEXT >  Mover"
 
+msgid "WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."
+msgstr "ADVERTENCIA: Esta película es una transmisión IPTV.\nNo se puede cortar con este tipo de stream."
+
 msgid "yellow"
 msgstr "amarillo"
 

@@ -197,6 +197,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 		self["InLen"] = Label()
 		self["OutLen"] = Label()
+		self["status"] = Label()
 		self["Timeline"] = ServicePositionGauge(self.session.nav)
 		self["cutlist"] = List(self.getCutlist())
 		self["cutlist"].onSelectionChanged.append(self.selectionChanged)
@@ -249,6 +250,9 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		# Use onShown to set the initial list index, since apparently that doesn't
 		# work from here.
 		self.onShown.append(self.__onShown)
+		if self.service:
+			if ".stream" in self.service.getPath():
+				self["status"] = Label(_("WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."))
 
 	def __onShown(self, override=False):
 		if self.already_shown and not override:
@@ -460,6 +464,9 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		self.last_cuts = new_list
 
 	def showMenu(self):
+		if self.service:
+			if ".stream" in self.service.getPath():
+				return self.session.open(MessageBox, _("WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."), type=MessageBox.TYPE_ERROR, timeout=10)
 		curpos = self.cueGetCurrentPosition()
 		if curpos is None:
 			return
