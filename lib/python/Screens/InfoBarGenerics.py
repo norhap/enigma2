@@ -405,7 +405,7 @@ class SecondInfoBar(Screen):
 		if config.misc.hotkey.blue_long.value:
 			self.hotkeyValue = config.misc.hotkey.blue_long.value
 			valueblueLong = InfoBarShowHide.functionHotkeyValue(self)
-		if not config.usage.cached_channel.value:
+		if not config.usage.cached_channel.value and serviceRefIPToSAT():
 			if str(config.misc.hotkey.red.value) == str(config.misc.hotkey.yellow.default):
 				valuered = _("First InfoBar")
 			if str(config.misc.hotkey.red_long.value) == str(config.misc.hotkey.yellow.default):
@@ -537,7 +537,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		if config.misc.hotkey.blue_long.value:
 			self.hotkeyValue = config.misc.hotkey.blue_long.value
 			valueblueLong = self.functionHotkeyValue()
-		if not config.usage.cached_channel.value:
+		if not config.usage.cached_channel.value and serviceRefIPToSAT():
 			if str(config.misc.hotkey.red.value) == str(config.misc.hotkey.yellow.default):
 				valuered = _("Nothing")
 			if str(config.misc.hotkey.red_long.value) == str(config.misc.hotkey.yellow.default):
