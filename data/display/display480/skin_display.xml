@@ -318,18 +318,19 @@
 	</screen>
 
 <!-- movieplayer-->
-	<screen name="InfoBarMoviePlayerSummary" position="fill">
-		<widget source="session.CurrentService" render="Label" position="top" size="*,36" font="FdLcD;16" horizontalAlignment="left" verticalAlignment="top" >
+	<screen name="InfoBarMoviePlayerSummary" position="0,0" size="480,320">
+		<widget source="session.CurrentService" render="Label" position="0,10" size="480,148" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" transparent="1" >
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Progress" position="top" size="*,4" borderWidth="1">
+		<widget source="session.CurrentService" render="Progress" position="5,150" size="465,30" zPosition="2" borderWidth="1"  transparent="1" >
 			<convert type="ServicePosition">Position</convert>
 		</widget>
-		<panel position="bottom" size="*,24" name="SummaryClockPanel">
-			<widget source="session.CurrentService" render="Label" position="4,0" size="42,12" font="FdLcD;12" horizontalAlignment="left" noWrap="1">
-				<convert type="ServicePosition">Position</convert>
-			</widget>
-		</panel>
+		<widget source="session.CurrentService" render="Label" position="10,184" size="445,50" font="FdLcD;50" horizontalAlignment="right" transparent="1">
+			<convert type="ServicePosition">Remaining,Plus</convert>
+		</widget>
+		<widget source="global.CurrentTime" render="Label" position="175,235" size="445,80" font="FdLcD;55" transparent="1">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
 	</screen>
 	<screen name="MovieContextMenuSummary" position="fill">
 		<widget source="parent.Title" render="Label" position="top" size="*,14" font="FdLcD;12" horizontalAlignment="left" verticalAlignment="top" noWrap="1" />
