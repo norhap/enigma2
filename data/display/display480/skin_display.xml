@@ -117,7 +117,7 @@
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- <ePixmap pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphaTest="blend" /> -->
-		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphaTest="blend">
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,265" size="30,30" zPosition="3" alphaTest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<widget source="global.CurrentTime" render="Label" position="300,241" size="175,70" font="FdLcD;61" transparent="1">
@@ -201,7 +201,7 @@
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- <ePixmap pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphaTest="blend" /> -->
-		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphaTest="blend">
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,265" size="30,30" zPosition="3" alphaTest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<panel name="SummaryClockPanel" />
@@ -282,7 +282,7 @@
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<!-- <ePixmap pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphaTest="blend" /> -->
-		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="285,270" size="30,30" zPosition="3" alphaTest="blend">
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,265" size="30,30" zPosition="3" alphaTest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
 		<panel name="SummaryClockPanel" />
