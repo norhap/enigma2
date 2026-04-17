@@ -49,20 +49,20 @@
 		<widget source="session.Event_Now" render="Label" position="2,70" size="478,90" font="FdLcD;40" >
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Progress" position="20,170" size="440,20" borderWidth="1" >
+		<widget source="session.Event_Now" render="Progress" position="20,161" size="440,20" borderWidth="1" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="20,200" size="130,40" font="FdLcD;40" >
+		<widget source="session.Event_Now" render="Label" position="20,186" size="120,54" font="FdLcD;45" >
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="150,200" size="130,40" font="FdLcD;40" >
+		<widget source="session.Event_Now" render="Label" position="141,186" size="145,54" font="FdLcD;45" >
 			<convert type="EventTime">EndTime</convert>
-			<convert type="ClockToText">Format:- %H:%M</convert>
+			<convert type="ClockToText">Format:-%H:%M</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="350,195" size="100,45" font="FdLcD;48" >
+		<widget source="session.Event_Now" render="Label" position="287,186" size="192,54" font="FdLcD;57" foregroundColor="#FFFF00" >
 			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">FOLLOW</convert>
+			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
 		<eLabel text="TUNER:" position="20,260" size="140,60" font="FdLcD;35" />
 		<widget source="session.FrontendInfo" render="FixedLabel" position="180,260" size="60,60" text="A" foregroundColor="#04B404" font="FdLcD;40" >
@@ -133,20 +133,20 @@
 		<widget source="parent.ServiceEvent" render="Label" position="0,70" size="480,90" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventName">Name</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Progress" position="20,170" size="440,20" borderWidth="1" >
+		<widget source="parent.ServiceEvent" render="Progress" position="20,161" size="440,20" borderWidth="1" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="20,200" size="130,40" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" >
+		<widget source="parent.ServiceEvent" render="Label" position="20,186" size="120,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="150,200" size="130,40" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" >
+		<widget source="parent.ServiceEvent" render="Label" position="141,186" size="145,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventTime">EndTime</convert>
-			<convert type="ClockToText">Format:- %H:%M</convert>
+			<convert type="ClockToText">Format:-%H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="350,200" size="100,40" font="FdLcD;40" horizontalAlignment="right" verticalAlignment="center" >
+		<widget source="parent.ServiceEvent" render="Label" position="287,186" size="192,54" font="FdLcD;57" foregroundColor="#FFFF00" >
 			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">FOLLOW</convert>
+			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
 		<eLabel text="TUNER:" position="20,260" size="160,60" horizontalAlignment="center" verticalAlignment="center" font="FdLcD;40" />
 		<widget source="session.FrontendInfo" render="FixedLabel" position="180,260" size="60,60" text="A" foregroundColor="#04B404" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" >
@@ -204,7 +204,9 @@
 		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,265" size="30,30" zPosition="3" alphaTest="blend">
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-		<panel name="SummaryClockPanel" />
+		<widget source="global.CurrentTime" render="Label" position="300,241" size="175,70" font="FdLcD;61" transparent="1">
+			<convert type="ClockToText">Format:%H:%M</convert>
+		</widget>
 	</screen>
 
 <!-- EPG Screens -->
