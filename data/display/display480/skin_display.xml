@@ -402,9 +402,11 @@
 		<widget source="parent.summary_description" conditional="parent.summary_description" render="Label" position="0,22" size="400,140" font="FdLcD;24" />
 	</screen>
 
-	<!--screen name="ChoiceBoxSummary" position="0,0" size="480,320">
-		<widget source="parent.summary_list" render="Label" position="0,0" size="480,320" font="FdLcD;18" noWrap="1" />
-	</screen-->
+	<screen name="ChoiceBoxSummary" position="0,0" size="480,320">
+		<widget source="text" conditional="text" render="Label" position="0,0" size="480,180" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
+		<widget source="option" conditional="option" render="Label" position="0,181" size="479,139" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
+	</screen>
+
 	<screen name="TimerEditListSummary" position="0,0" size="480,320">
 		<widget source="parent.Title" render="Label" position="0,0" size="400,26" font="FdLcD;24" horizontalAlignment="center" noWrap="1" />
 		<widget source="service" render="Label" position="0,40" size="400,30" font="FdLcD;28" horizontalAlignment="center" noWrap="1" />
