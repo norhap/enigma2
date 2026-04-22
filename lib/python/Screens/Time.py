@@ -209,8 +209,8 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"], {
 			"yellow": self.keyGeolocation,
 			"ok": self.keySave,
-			"red": self.keySave,
-			"back": self.keySave,
+			"red": self.keyCancel,
+			"back": self.keyCancel,
 			"left": self.keyLeft,
 			"right": self.keyRight,
 			"up": self.moveUp,
@@ -288,11 +288,13 @@ class TimeWizard(ConfigListScreen, Screen, ShowRemoteControl):
 		# #######LAST USED SNTP######
 		# Time.setNTP(self)
 
+	def keyCancel(self):
+		ConfigListScreen.keyCancel(self)
+
 	def keySave(self):
 		ConfigListScreen.keySave(self)
 		# #######LAST USED SNTP######
 		# Time.setNTP(self)
-		self.close(True)
 
 	def keyGeolocation(self):
 		self.geolocationWizard()
