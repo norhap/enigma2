@@ -40,6 +40,7 @@ jobs:
         sudo apt-get install libwebp-dev
         sudo apt-get install mm-common
         sudo apt-get install libcurl4-openssl-dev
+        sudo apt-get install --reinstall docbook-xsl
 
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v5
