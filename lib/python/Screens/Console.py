@@ -1,121 +1,255 @@
-from enigma import eConsoleAppContainer
-from Screens.Screen import Screen
-from Components.ActionMap import ActionMap
+from re import sub
+from os.path import isfile
+from time import sleep, localtime
+
+from enigma import eConsoleAppContainer, eTimer
+
+from skin import parseColor
+from Components.ActionMap import HelpableActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.HelpMenu import HelpableScreen
+from Tools.Directories import fileReadLines, fileWriteLines
+
+MODULE_NAME = __name__.split(".")[-1]
 
 
-class Console(Screen):
-	# TODO move this to skin.xml
-	skin = """
-		<screen position="100,100" size="550,400" title="Command execution..." >
-			<widget name="text" position="0,0" size="550,400" font="Console;14" />
-		</screen>"""
-
-	def __init__(self, session, title="Console", cmdlist=None, finishedCallback=None, closeOnSuccess=False, showStartStopText=True, skin=None):
+# The cmdList must be a mixed list or tuple of strings or lists/tuples.
+# Strings are executed by sh -c string, lists/tuples are executed by execvp(list[0], list).
+#
+class Console(Screen, HelpableScreen):
+	def __init__(self, session, title=_("Console"), cmdlist=None, finishedCallback=None, closeOnSuccess=False, cmdList=None, showScripts=True, windowTitle=None, skin=None):
 		Screen.__init__(self, session)
-
+		HelpableScreen.__init__(self)
+		if windowTitle:
+			title = windowTitle
+		self.setTitle(title)
+		if finishedCallback:
+			print("[Console] Warning: The argument 'finishedCallback' is deprecated! Use 'openWithCallback' rather than 'open'.")
+		if cmdList:
+			cmdlist = cmdList
+		self.cmdList = cmdlist
 		self.finishedCallback = finishedCallback
 		self.closeOnSuccess = closeOnSuccess
-		self.showStartStopText = showStartStopText
-		if skin:
-			self.skinName = [skin, "Console"]
-
-		self.errorOcurred = False
-
-		self["text"] = ScrollLabel("")
+		self.showScripts = showScripts
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Hide"))
-		self["actions"] = ActionMap(["WizardActions", "DirectionActions", "ColorActions"],
-		{
-			"ok": self.closeConsole,
-			"back": self.closeConsole,
-			"up": self["text"].pageUp,
-			"down": self["text"].pageDown,
-			"green": self.toggleHideShow,
-			"red": self.cancel,
-		}, -1)
-
-		self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
-		self.newtitle = title == "Console" and _("Console") or title
-		self.cancel_msg = None
-
-		self.onShown.append(self.updateTitle)
-
-		self.container = eConsoleAppContainer()
-		self.run = 0
-		self.finished = False
-		self.container.appClosed.append(self.runFinished)
+		self["key_yellow"] = StaticText()
+		self["text"] = ConsoleScrollLabel()
+		self["summary_description"] = StaticText()
+		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions", "NavigationActions"], {
+			"ok": (self.keyCancel, _("Close the screen")),
+			"cancel": (self.keyCancel, _("Close the screen")),
+			"close": (self.keyCloseRecursive, _("Close the screen and exit all menus")),
+			"red": (self.keyCancel, _("Close this screen")),
+			"top": (self.keyTop, _("Move to first line / screen")),
+			"pageUp": (self.keyPageUp, _("Move up a screen")),
+			"up": (self.keyLineUp, _("Move up a line")),
+			"down": (self.keyLineDown, _("Move down a line")),
+			"pageDown": (self.keyPageDown, _("Move down a screen")),
+			"bottom": (self.keyBottom, _("Move to last line / screen"))
+		}, prio=0, description=_("Console Actions"))
+		self["hideAction"] = HelpableActionMap(self, ["ColorActions"], {
+			"green": (self.keyToggleHideShow, _("Hide/Show the console screen"), _("NOTE: While the console screen is hidden from view the buttons are still active. Pressing any enabled button will cause the screen to reappear but the button will not be actioned.")),
+		}, prio=0, description=_("Console Actions"))
+		self["saveAction"] = HelpableActionMap(self, ["ColorActions"], {
+			"yellow": (self.keySaveLog, _("Save the log of the console messages to a file")),
+		}, prio=0, description=_("Console Actions"))
+		self["saveAction"].setEnabled(False)
+		self.container = eConsoleAppContainer()  # We use this as the Console component does not produce command output in real time.
 		self.container.dataAvail.append(self.dataAvail)
-		self.onLayoutFinish.append(self.startRun)  # dont start before gui is finished
+		self.container.appClosed.append(self.runFinished)
+		self.timer = eTimer()
+		self.timer.callback.append(self.timeout)
+		self.baseTitle = self.getTitle()
+		self.screenHidden = False
+		self.cancelMessageBox = None
+		self.errorOcurred = False
+		self.run = 0
+		self.onLayoutFinish.append(self.layoutFinished)
 
-	def updateTitle(self):
-		self.setTitle(self.newtitle)
+	def layoutFinished(self):
+		self.commandColorStart, self.commandColorEnd, self.scriptColorStart, self.scriptColorEnd = self["text"].getColors()
+		if self.runCommand(self.cmdList[self.run]):  # Start of container application failed so we must call runFinished manually.
+			self.runFinished(-1)
 
-	def startRun(self):
-		if self.showStartStopText:
-			self["text"].setText(_("Execution progress:") + "\n\n")
-		print("[Console] executing in run", self.run, " the command:", self.cmdlist[self.run])
-		if self.container.execute(self.cmdlist[self.run]):  # start of container application failed...
-			self.runFinished(-1)  # so we must call runFinished manual
+	def keyCancel(self, recursive=False):
+		def cancelCallback(answer):
+			if answer:
+				self.container.kill()
+				processCancel()
 
-	def runFinished(self, retval):
-		if retval:
-			self.errorOcurred = True
-			self.show()
-		self.run += 1
-		if self.run != len(self.cmdlist):
-			if self.container.execute(self.cmdlist[self.run]):  # start of container application failed...
-				self.runFinished(-1)  # so we must call runFinished manual
-		else:
-			self.show()
-			self.finished = True
-			lastpage = self["text"].isAtLastPage()
-			if self.cancel_msg:
-				self.cancel_msg.close()
-			if self.showStartStopText:
-				self["text"].appendText(_("Execution finished!!"))
-			if self.finishedCallback is not None:
-				self.finishedCallback()
-			if not self.errorOcurred and self.closeOnSuccess:
-				self.closeConsole()
+		def processCancel():
+			# self.container.dataAvail.remove(self.dataAvail)  # This doesn't currently work at the C++ layer!
+			# self.container.appClosed.remove(self.runFinished)  # This doesn't currently work at the C++ layer!
+			del self.container.dataAvail[:]
+			del self.container.appClosed[:]
+			del self.container
+			if recursive:
+				self.close(True)
 			else:
-				self["text"].appendText(_("\nPress OK or Exit to abort!"))
-				self["key_red"].setText(_("Exit"))
-				self["key_green"].setText("")
+				self.close()
 
-	def toggleHideShow(self):
-		if self.finished:
-			return
-		if self.shown:
+		self.stopTimer()
+		if self.screenHidden:
+			self.keyToggleHideShow()
+		elif self.run == len(self.cmdList):
+			processCancel()
+		else:
+			self.cancelMessageBox = self.session.openWithCallback(cancelCallback, MessageBox, _("Cancel execution?"), type=MessageBox.TYPE_YESNO, default=False, windowTitle=self.getTitle())
+
+	def keyCloseRecursive(self):
+		self.keyCancel(recursive=True)
+
+	def keyToggleHideShow(self, forceShow=False):
+		if forceShow or self.screenHidden:
+			self.show()
+		else:
 			self.hide()
-		else:
-			self.show()
+		self.screenHidden = not (self.screenHidden or forceShow)
 
-	def cancel(self):
-		if self.finished:
-			self.closeConsole()
-		else:
-			self.cancel_msg = self.session.openWithCallback(self.cancelCallback, MessageBox, _("Cancel execution?"), type=MessageBox.TYPE_YESNO, default=False)
+	def keySaveLog(self):
+		def saveLogCallback(answer=None):
+			if answer:
+				text = sub(r"\\c[0-9A-F]{8}", "", self["text"].getText())
+				if not fileWriteLines(self.outputFile, text, source=MODULE_NAME):
+					self.session.open(MessageBox, _("Error: Unable to write log file %s!") % self.outputFile, type=MessageBox.TYPE_ERROR, windowTitle=self.getTitle())
+				self["key_yellow"].setText("")
 
-	def cancelCallback(self, ret=None):
-		self.cancel_msg = None
-		if ret:
-			self.container.appClosed.remove(self.runFinished)
-			self.container.dataAvail.remove(self.dataAvail)
-			self.container.kill()
-			self.close()
+		self.stopTimer()
+		localTime = localtime()
+		self.outputFile = f"/tmp/{localTime[3]:02d}{localTime[4]:02d}{localTime[5]:02d}_console.txt"
+		self.session.openWithCallback(saveLogCallback, MessageBox, f"{_("Save the commands and output to the log file?")}\n('{self.outputFile}')", type=MessageBox.TYPE_YESNO, default=True, windowTitle=self.getTitle())
 
-	def closeConsole(self):
-		if self.finished:
-			self.container.appClosed.remove(self.runFinished)
-			self.container.dataAvail.remove(self.dataAvail)
-			self.close()
+	def keyTop(self):
+		if self.screenHidden:
+			self.keyToggleHideShow()
 		else:
-			self.show()
+			self.stopTimer()
+			self["text"].goTop()
+
+	def keyPageUp(self):
+		if self.screenHidden:
+			self.keyToggleHideShow()
+		else:
+			self.stopTimer()
+			self["text"].goPageUp()
+
+	def keyLineUp(self):
+		if self.screenHidden:
+			self.keyToggleHideShow()
+		else:
+			self.stopTimer()
+			self["text"].goLineUp()
+
+	def keyLineDown(self):
+		if self.screenHidden:
+			self.keyToggleHideShow()
+		else:
+			self.stopTimer()
+			self["text"].goLineDown()
+
+	def keyPageDown(self):
+		if self.screenHidden:
+			self.keyToggleHideShow()
+		else:
+			self.stopTimer()
+			self["text"].goPageDown()
+
+	def keyBottom(self):
+		if self.screenHidden:
+			self.keyToggleHideShow()
+		else:
+			self.stopTimer()
+			self["text"].goBottom()
+
+	def runCommand(self, cmd):
+		print(f"[Console] Running command {self.run + 1}: '{self.cmdList[self.run]}'.")
+		self["text"].appendText(f"{self.commandColorStart}{_("Running command %d: %s") % (self.run + 1, self.cmdList[self.run])}{self.commandColorEnd}\n")
+		if self.showScripts:
+			cmdLine = cmd[0] if isinstance(cmd, (list, tuple)) else cmd.split()[0]
+			if cmdLine.endswith((".sh", ".py")) and isfile(cmdLine):
+				lines = fileReadLines(cmdLine, default=None, source=MODULE_NAME)
+				if lines:
+					self["text"].appendText(f"{self.scriptColorStart}{_("Command script")} '{cmdLine}' {_("contents:")}\n{"\n".join(lines)}\n{_("End of script.")}{self.scriptColorEnd}\n")
+		self["text"].appendText("\n")
+		return self.container.execute(cmd[0], *cmd) if isinstance(cmd, (list, tuple)) else self.container.execute(cmd)
+
+	def startRun(self, cmd):  # For compatibility with the current FSBLUpdater.  This code needs to be updated anyway as it uses the deprecated callback syntax!
+		return self.runCommand(cmd)
 
 	def dataAvail(self, data):
 		if isinstance(data, bytes):
 			data = data.decode()
-		self["text"].appendText(data)
+		self["text"].appendText(f"{self.commandColorEnd}{data}\n" + f"{self.commandColorEnd}{data}".replace(_("Restoring settings: Enigma2 is about to restart..."), "") + f"\n{self.commandColorEnd}{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"{self.commandColorEnd}{data}\n" + f"{self.commandColorEnd}{data}".replace(_("Finishing restore your receiver go to restart..."), "") + f"\n{self.commandColorEnd}{self.commandColorStart}  {_("Finishing restore your receiver go to restart...")}" if "init 6" in self.cmdList[self.run] else f"{self.commandColorEnd}{data}")
+
+	def runFinished(self, retVal):
+
+		if retVal:
+			print(f"[Console] Running command {self.run + 1} finsihed with '{retVal}'.")
+			self.errorOcurred = True
+			self.keyToggleHideShow(True)
+		self.run += 1
+		if self.run != len(self.cmdList):
+
+			if self.runCommand(self.cmdList[self.run]):  # Start of container application failed so we must call runFinished manually.
+				self.runFinished(-1)
+		else:
+			self["key_red"].setText(_("Close"))
+			self["key_green"].setText("")
+			self["hideAction"].setEnabled(False)
+			self["key_yellow"].setText(_("Save Log"))
+			self["saveAction"].setEnabled(True)
+			self.keyToggleHideShow(True)
+			if self.cancelMessageBox:
+				self.cancelMessageBox.close(None)
+			text = ngettext("Command finished.", "Commands finished.", len(self.cmdList)) + _("\nPress OK EXIT or RED button to abort!")
+			self["text"].appendText(f"\n{self.commandColorStart}{text}{self.commandColorEnd}\n")
+			if not self.errorOcurred and not isinstance(self.closeOnSuccess, bool) and self.closeOnSuccess:
+				self["text"].appendText(f"\n{self.commandColorStart}{_("This window will automatically close in %d seconds.") % self.closeOnSuccess}{self.commandColorEnd}\n")
+			self["summary_description"].setText(text)
+			if self.finishedCallback and callable(self.finishedCallback):
+				self.finishedCallback()
+			if not self.errorOcurred and self.closeOnSuccess:
+				if not isinstance(self.closeOnSuccess, bool):
+					self.setTitle(f"{self.baseTitle} ({self.closeOnSuccess})")
+					self.timer.start(1000)
+				else:
+					self.keyCancel()
+
+	def timeout(self):
+		self.timer.stop()
+		self.closeOnSuccess -= 1
+		if self.closeOnSuccess:
+			self.timer.start(1000)
+			self.setTitle(f"{self.baseTitle} ({self.closeOnSuccess})")
+		else:
+			self.keyCancel()
+
+	def stopTimer(self):
+		if self.closeOnSuccess:
+			self.timer.stop()
+			self.setTitle(self.baseTitle)
+
+
+class ConsoleScrollLabel(ScrollLabel):
+	def applySkin(self, desktop, parent):
+		for attribute, value in self.skinAttributes[:]:
+			match attribute:
+				case "commandColor":
+					self.skinAttributes.remove((attribute, value))
+					self.commandColor = rf"\c{parseColor(value, 0x00FFFF00).argb():08X}"
+				case "scriptColor":
+					self.skinAttributes.remove((attribute, value))
+					self.scriptColor = rf"\c{parseColor(value, 0x0000FFFF).argb():08X}"
+		return ScrollLabel.applySkin(self, desktop, parent)
+
+	def getColors(self):
+		defaultColor = rf"\c{self.getForegroundColor():08X}"
+		commandColorStart = self.commandColor if hasattr(self, "commandColor") else ""
+		commandColorEnd = defaultColor if commandColorStart else ""
+		scriptColorStart = self.scriptColor if hasattr(self, "scriptColor") else ""
+		scriptColorEnd = defaultColor if scriptColorStart else ""
+		return commandColorStart, commandColorEnd, scriptColorStart, scriptColorEnd

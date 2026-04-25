@@ -507,6 +507,11 @@ msgstr "circular a la derecha"
 msgid "clip overscan / letterbox borders"
 msgstr "bordes de overscan / letterbox del clip"
 
+msgid "Command finished."
+msgid_plural "Commands finished."
+msgstr[0] "Comando finalizado."
+msgstr[1] "Comandos finalizados."
+
 msgid "CommitInfo"
 msgstr "Últimos Cambios"
 
@@ -3089,6 +3094,9 @@ msgstr "Combo"
 msgid "Command order"
 msgstr "Orden de comando"
 
+msgid "Command script"
+msgstr "Script de comandos"
+
 msgid "Command to run"
 msgstr "Comando para ejecutar"
 
@@ -3241,11 +3249,17 @@ msgstr "Calificación CPU"
 msgid "Close the screen"
 msgstr "Cerrar esta pantalla"
 
+msgid "Close this screen"
+msgstr "Cierra esta pantalla"
+
 msgid "Connected transcoding, limit - no PiP!"
 msgstr "Transcodificado conectado, límite - no PiP!"
 
 msgid "Console"
 msgstr "Consola"
+
+msgid "Console Actions"
+msgstr "Acciones Consola"
 
 msgid "Constellation & FFT mode"
 msgstr "Constelación y modo FFT"
@@ -3258,6 +3272,9 @@ msgstr "Consulte la hoja de especificaciones de su motor para obtener esta infor
 
 msgid "Content does not fit on DVD!"
 msgstr "El contenido no cabe en el DVD!"
+
+msgid "contents:"
+msgstr "contenido:"
 
 msgid "Context"
 msgstr "Contexto"
@@ -4164,6 +4181,9 @@ msgstr "Encriptación:"
 msgid "End of \"after event\" timespan"
 msgstr "Fin del \"después del evento\" intervalo de tiempo"
 
+msgid "End of script."
+msgstr "Fin del script."
+
 msgid "End of timespan"
 msgstr "Final de intervalo de tiempo"
 
@@ -4289,6 +4309,9 @@ msgid ""
 msgstr ""
 "Error al obtener el enlace a través de %s\n"
 "%s"
+
+msgid "Error: Unable to write log file %s!"
+msgstr "Error: ¡No se pudo crear el archivo log %s!"
 
 msgid "Server Error: %s %s is included in bouquets.tv and does not exist in channel list"
 msgstr "Error en Servidor: %s el archivo %s está incluido en bouquets.tv y no existe en la lista de canales"
@@ -4705,6 +4728,9 @@ msgstr "Terminó de configurar su red"
 msgid "Finished restarting your network"
 msgstr "Terminó de reiniciar su red"
 
+msgid "Finishing restore your receiver go to restart..."
+msgstr "Finalizando restauración su receptor va a reiniciar..."
+
 msgid "Finland"
 msgstr "Finlandia"
 
@@ -5048,6 +5074,9 @@ msgstr "Ajustes HDMI-CEC"
 
 msgid "HDMI-CEC Settings"
 msgstr "Ajustes HDMI-CEC"
+
+msgid "Hide/Show the console screen"
+msgstr "Ocultar/Mostrar la pantalla de la consola"
 
 msgid "History"
 msgstr "Historial"
@@ -6775,6 +6804,9 @@ msgstr "No probado:"
 msgid "Not yet implemented!"
 msgstr "Aún no implementado!"
 
+msgid "NOTE: While the console screen is hidden from view the buttons are still active. Pressing any enabled button will cause the screen to reappear but the button will not be actioned."
+msgstr "NOTA: Mientras la pantalla de la consola está oculta, los botones siguen activos. Al pulsar cualquier botón activado, la pantalla volverá a aparecer, pero el botón no se activará."
+
 msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
 msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o apagado\" en \"No, excepto con el temporizador despertador\"."
 
@@ -8037,6 +8069,9 @@ msgstr "Rotor: "
 
 msgid "Round start time on"
 msgstr "Hora de inicio en"
+
+msgid "Running command %d: %s"
+msgstr "Ejecutando comando %d: %s"
 
 msgid "Russian"
 msgstr "Ruso"
@@ -12031,6 +12066,9 @@ msgstr "Reemplazar `-` en cuadros de diálogo con texto en color por altavoz (co
 msgid "Require authentication for http streams"
 msgstr "Requiere autenticación para streams http"
 
+msgid "Restoring settings: Enigma2 is about to restart..."
+msgstr "Restaurando la configuración: Enigma2 va a reiniciar..."
+
 msgid "Rewind speeds"
 msgstr "Velocidades de rebobinado"
 
@@ -12039,6 +12077,15 @@ msgstr "Justificar subtítulos"
 
 msgid "Satellite Dish Setup"
 msgstr "Ajustes Antena Satélite"
+
+msgid "Save Log"
+msgstr "Guardar log"
+
+msgid "Save the commands and output to the log file?"
+msgstr "¿Guardar los comandos y la salida en un archivo?"
+
+msgid "Save the log of the console messages to a file"
+msgstr "Guardar los mensajes log de la consola a un archivo"
 
 msgid "ScanSetup"
 msgstr "Búsqueda Manual"
@@ -12262,6 +12309,9 @@ msgstr "Esta opción te permite apagar el display."
 
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr "Esta opción le permite mostrar la ruta de pantalla completa que conduce a la pantalla actual."
+
+msgid "This window will automatically close in %d seconds."
+msgstr "Esta ventana se cerrará automáticamente en %d segundos."
 
 msgid "Timezone"
 msgstr "Zona horaria"
@@ -15089,12 +15139,8 @@ msgstr "Por favor, configure las siguientes configuraciones básicas."
 msgid "Enter"
 msgstr "Introducir cambios"
 
-msgid ""
-"\n"
-"Press OK or Exit to abort!"
-msgstr ""
-"\n"
-"Pulse OK o Salir para abortar!"
+msgid "\nPress OK EXIT or RED button to abort!"
+msgstr "\nPulse OK EXIT o botón ROJO para abortar!"
 
 msgid "update bookmarks"
 msgstr "actualizar marcadores"
