@@ -1152,7 +1152,7 @@ class SystemMemoryInfo(Screen):
 						sizereserved = format_string("%.1f", int(reserved) / 1000)
 						sizecmareserved = format_string("%.1f", int(cmareserved) / 1000)
 						sizehighmem = format_string("%.1f", int(highmem) / 1000)
-						self.AboutText += _("Manufacturer distribution:\n") + sizeAvailable + " " + f"{convertavailable}" + " " + _("Available") + " " + _("of") + " " + sizeTotal + " " + f"{converttotal}" + " " + "Total" + "\n" + _("Reserved") + ":" + " " + sizereserved + " " + "MB" + "\n" + _("Reserved to contiguous memory") + ":" + " " + sizecmareserved + " " + "MB" + "\n" + _("Reserved for high memory") + ":" + " " + sizehighmem + " " + "MB" + "\n" + _("Kernel") + ":" + " " + sizeKernel + " " + "MB" + "\n" + _("rwdata") + ":" + " " +sizerwdata + " " + "MB" + "\n" + _("rodata") + ":" + " " + sizerodata + " " + "MB" + "\n" + _("init") + ":" + " " + sizeinit + " " + "MB" + "\n" + _("bss") + ":" + " " + sizebss + " " + "MB"
+						self.AboutText += _("Manufacturer distribution:\n") + sizeAvailable + " " + f"{convertavailable}" + " " + _("Available") + " " + _("of") + " " + sizeTotal + " " + f"{converttotal}" + " " + "Total" + "\n" + _("Reserved") + ":" + " " + sizereserved + " " + "MB" + "\n" + _("Reserved to contiguous memory") + ":" + " " + sizecmareserved + " " + "MB" + "\n" + _("Reserved for high memory") + ":" + " " + sizehighmem + " " + "MB" + "\n" + _("Kernel") + ":" + " " + sizeKernel + " " + "MB" + "\n" + _("rwdata") + ":" + " " + sizerwdata + " " + "MB" + "\n" + _("rodata") + ":" + " " + sizerodata + " " + "MB" + "\n" + _("init") + ":" + " " + sizeinit + " " + "MB" + "\n" + _("bss") + ":" + " " + sizebss + " " + "MB"
 						break
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
