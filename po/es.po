@@ -6694,8 +6694,8 @@ msgstr "Sin prioridad"
 msgid "No satellite frontend found!"
 msgstr "No se encontró frontend de satélite!"
 
-msgid "No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."
-msgstr "No hay sintonizador de satélite, terrestre o de cable configurado. Por favor revise la configuración de su sintonizador."
+msgid "No satellite, terrestrial or cable tuner is configured.\n\nPlease check your tuner setup."
+msgstr "No hay sintonizador de satélite, terrestre o de cable configurado.\n\nPor favor revise la configuración de su sintonizador."
 
 msgid "No service"
 msgstr "Sin canal"

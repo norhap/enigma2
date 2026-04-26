@@ -953,7 +953,7 @@ def SatfinderMain(session, close=None, **kwargs):
 		nimList.append(n)
 
 	if len(nimList) == 0:
-		session.open(MessageBox, _("No satellite, terrestrial or cable tuner is configured. Please check your tuner setup."), MessageBox.TYPE_ERROR)
+		session.open(MessageBox, _("No satellite, terrestrial or cable tuner is configured.\n\nPlease check your tuner setup."), MessageBox.TYPE_ERROR)
 	else:
 		if dvbreader_available or isPluginInstalled("AutoBouquetsMaker"):
 			session.openWithCallback(boundFunction(SatfinderCallback, close), SatfinderExtra)
