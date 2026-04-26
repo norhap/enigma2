@@ -1,4 +1,4 @@
-from boxbranding import getBoxType, getMachineMtdKernel, getMachineMtdRoot, getImageFolder
+from boxbranding import getMachineMtdKernel, getMachineMtdRoot, getImageFolder
 from os.path import exists, join
 from Components.Harddisk import harddiskmanager
 from Components.ActionMap import ActionMap

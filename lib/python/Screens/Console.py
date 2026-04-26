@@ -1,6 +1,6 @@
 from re import sub
 from os.path import isfile
-from time import sleep, localtime
+from time import localtime
 
 from enigma import eConsoleAppContainer, eTimer
 
