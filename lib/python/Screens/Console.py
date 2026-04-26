@@ -183,7 +183,7 @@ class Console(Screen, HelpableScreen):
 	def dataAvail(self, data):
 		if isinstance(data, bytes):
 			data = data.decode()
-		self["text"].appendText(f"{self.commandColorEnd}{data}\n" + f"{self.commandColorEnd}{data}".replace(_("Restoring settings: Enigma2 is about to restart..."), "") + f"\n{self.commandColorEnd}{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"{self.commandColorEnd}{data}\n" + f"{self.commandColorEnd}{data}".replace(_("Finishing restore your receiver go to restart..."), "") + f"\n{self.commandColorEnd}{self.commandColorStart}  {_("Finishing restore your receiver go to restart...")}" if "init 6" in self.cmdList[self.run] else f"{self.commandColorEnd}{data}".replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")))
+		self["text"].appendText(f"{self.commandColorEnd}{data}\n" + f"{self.commandColorEnd}{data}".replace(_("Restoring settings: Enigma2 is about to restart..."), "") + f"\n{self.commandColorEnd}{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"{self.commandColorEnd}{data}\n" + f"{self.commandColorEnd}{data}".replace(_("Finishing restore your receiver go to restart..."), "") + f"\n{self.commandColorEnd}{self.commandColorStart}  {_("Finishing restore your receiver go to restart...")}" if "init 6" in self.cmdList[self.run] else f"{self.commandColorEnd}{data}".replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")))
 
 	def runFinished(self, retVal):
 
