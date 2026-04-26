@@ -4391,6 +4391,9 @@ msgstr "Progreso de la ejecución:"
 msgid "Exif"
 msgstr "Exif"
 
+msgid "Existing"
+msgstr "Existente"
+
 msgid "Exit"
 msgstr "Salir"
 
@@ -5122,6 +5125,9 @@ msgstr "Configuración de información"
 
 msgid "Input scroll position"
 msgstr "Posición entrada desplazamiento"
+
+msgid "is different from the conffile in the new package"
+msgstr "es diferente del archivo de configuración en el nuevo paquete"
 
 msgid "When the receiver wakes from standby or deep standby it will send a command to the TV to bring it out of standby."
 msgstr "Cuando el receptor sale del modo reposo o del modo de espera profundo, enviará un comando al televisor para que salga del modo reposo."
@@ -6790,6 +6796,9 @@ msgstr "No Definido"
 
 msgid "Not defined"
 msgstr "No definido"
+
+msgid "Not deleting modified"
+msgstr "No se eliminan los modificados"
 
 msgid "Not associated"
 msgstr "No asociado"
@@ -9739,6 +9748,9 @@ msgid ""
 msgstr ""
 "¡La extensión del asistente de red no está instalada!\n"
 "Por favor instálela."
+
+msgid "The new conffile will be placed at"
+msgstr "El nuevo config ile se colocará en"
 
 msgid ""
 "The overscan wizard has been completed.\n"

@@ -183,8 +183,8 @@ class Console(Screen, HelpableScreen):
 	def dataAvail(self, data):
 		if isinstance(data, bytes):
 			data = data.decode()
-		screendata = data.replace(_("Restoring settings: Enigma2 is about to restart..."), "").replace(_("Finishing restore your receiver go to restart..."), "").replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing"))
-		self["text"].appendText(f"{self.commandColorEnd}{screendata}\n{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"{self.commandColorEnd}{screendata}\n{self.commandColorStart}  {_("Finishing restore your receiver go to restart...")}" if "init 6" in self.cmdList[self.run] else f"{self.commandColorEnd}{screendata}")
+		screendata = data.replace(_("Restoring settings: Enigma2 is about to restart..."), "").replace(_("Finishing restore your receiver go to restart..."), "").replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")).replace("Not deleting modified", _("Not deleting modified")).replace("Existing", _("Existing")).replace("The new conffile will be placed at", _("The new conffile will be placed at")).replace("is different from the conffile in the new package", _("is different from the conffile in the new package"))
+		self["text"].appendText(f"{self.commandColorEnd}{screendata}\n" + f"{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"{self.commandColorEnd}{screendata}\n" + f"{self.commandColorStart}  {_("Finishing restore your receiver go to restart...")}" if "init 6" in self.cmdList[self.run] else f"{self.commandColorEnd}{screendata}")
 
 	def runFinished(self, retVal):
 
