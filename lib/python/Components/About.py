@@ -1,5 +1,6 @@
 from os import stat
 from os.path import isfile
+from locale import format_string
 from urllib.request import urlopen, Request
 from sys import maxsize, modules, version_info
 from gettext import ngettext
@@ -194,12 +195,13 @@ def getCPUInfoString():
 				temperature = search(r'temperature = (\d+) degree', open("/proc/hisi/msp/pm_cpu").read()).group(1)
 			except:
 				pass
+		cpuSpeedStr = _("%s GHz") % format_string("%.1f", cpu_speed / 1000) if cpu_speed and cpu_speed >= 1000 else _("%d MHz") % int(cpu_speed)
 		if temperature:
 			degree = "\u00B0"
 			if not isinstance(degree, str):
 				degree = degree.encode("UTF-8", errors="ignore")
-			return "%s %s MHz (%s) %s%sC" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature, degree)
-		return "%s %s MHz (%s)" % (processor, cpu_speed, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
+			return "%s %s (%s) %s%sC" % (processor, cpuSpeedStr, ngettext("%d core", "%d cores", cpu_count) % cpu_count, temperature, degree)
+		return "%s %s (%s)" % (processor, cpuSpeedStr, ngettext("%d core", "%d cores", cpu_count) % cpu_count)
 	except:
 		return _("undefined")
 

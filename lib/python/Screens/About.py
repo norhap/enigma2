@@ -2,6 +2,7 @@ from enigma import eConsoleAppContainer, eDVBResourceManager, eGetEnigmaDebugLvl
 from os import listdir, remove
 from os.path import getmtime, isfile, join
 from glob import glob
+from locale import format_string
 from requests import get
 from PIL import Image
 import skin
@@ -1141,17 +1142,17 @@ class SystemMemoryInfo(Screen):
 						reserved = ram.split("K reserved")[0].split("s, ")[1]
 						cmareserved = ram.split("K cma-reserved")[0].split("d, ")[1]
 						highmem = ram.split("K highmem")[0].split("cma-reserved, ")[1]
-						sizeAvailable = (int(available) / 1000000 if int(available) >= 1000000 else int(available) / 1000)
-						sizeTotal = (int(total) / 1000000 if int(total) >= 1000000 else int(total) / 1000)
-						sizeKernel = int(kernel) / 1000
-						sizerwdata = int(rwdata) / 1000
-						sizerodata = int(rodata) / 1000
-						sizeinit = int(init) / 1000
-						sizebss = int(rambss) / 1000
-						sizereserved = int(reserved) / 1000
-						sizecmareserved = int(cmareserved) / 1000
-						sizehighmem = int(highmem) / 1000
-						self.AboutText += _("Manufacturer distribution:\n") + str(sizeAvailable).replace(".", ",") + " " + f"{convertavailable}" + " " + _("Available") + " " + _("of") + " " + str(sizeTotal).replace(".", ",") + " " + f"{converttotal}" + " " + "Total" + "\n" + _("Reserved") + ":" + " " + str(sizereserved).replace(".", ",") + " " + "MB" + "\n" + _("Reserved to contiguous memory") + ":" + " " + str(sizecmareserved).replace(".", ",") + " " + "MB" + "\n" + _("Reserved for high memory") + ":" + " " + str(sizehighmem).replace(".", ",") + " " + "MB" + "\n" + _("Kernel") + ":" + " " + str(sizeKernel).replace(".", ",") + " " + "MB" + "\n" + _("rwdata") + ":" + " " + str(sizerwdata).replace(".", ",") + " " + "MB" + "\n" + _("rodata") + ":" + " " + str(sizerodata).replace(".", ",") + " " + "MB" + "\n" + _("init") + ":" + " " + str(sizeinit).replace(".", ",") + " " + "MB" + "\n" + _("bss") + ":" + " " + str(sizebss).replace(".", ",") + " " + "MB"
+						sizeAvailable = (format_string("%.1f", int(available) / 1000000) if int(available) >= 1000000 else format_string("%.1f", int(available) / 1000))
+						sizeTotal = (format_string("%.1f", int(total) / 1000000) if int(total) >= 1000000 else format_string("%.1f", int(total) / 1000))
+						sizeKernel = format_string("%.1f", int(kernel) / 1000)
+						sizerwdata = format_string("%.1f", int(rwdata) / 1000)
+						sizerodata = format_string("%.1f", int(rodata) / 1000)
+						sizeinit = format_string("%.1f", int(init) / 1000)
+						sizebss = format_string("%.1f", int(rambss) / 1000)
+						sizereserved = format_string("%.1f", int(reserved) / 1000)
+						sizecmareserved = format_string("%.1f", int(cmareserved) / 1000)
+						sizehighmem = format_string("%.1f", int(highmem) / 1000)
+						self.AboutText += _("Manufacturer distribution:\n") + sizeAvailable + " " + f"{convertavailable}" + " " + _("Available") + " " + _("of") + " " + sizeTotal + " " + f"{converttotal}" + " " + "Total" + "\n" + _("Reserved") + ":" + " " + sizereserved + " " + "MB" + "\n" + _("Reserved to contiguous memory") + ":" + " " + sizecmareserved + " " + "MB" + "\n" + _("Reserved for high memory") + ":" + " " + sizehighmem + " " + "MB" + "\n" + _("Kernel") + ":" + " " + sizeKernel + " " + "MB" + "\n" + _("rwdata") + ":" + " " +sizerwdata + " " + "MB" + "\n" + _("rodata") + ":" + " " + sizerodata + " " + "MB" + "\n" + _("init") + ":" + " " + sizeinit + " " + "MB" + "\n" + _("bss") + ":" + " " + sizebss + " " + "MB"
 						break
 		self["AboutScrollLabel"].setText(self.AboutText)
 		self["actions"].setEnabled(True)
