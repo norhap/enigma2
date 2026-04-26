@@ -79,7 +79,7 @@ class VuplusKexec(Screen):
 			self.close()
 
 	def RootInitKexec(self, *args, **kwargs):
-		if not exists("/STARTUP.cpio.gz") and exists("/usr/bin/STARTUP.cpio.gz"):
+		if not exists("/STARTUP.cpio.gz") and exists("/usr/bin/STARTUP.cpio.gz") and exists("/STARTUP"):
 			move("/usr/bin/STARTUP.cpio.gz", "/STARTUP.cpio.gz")
 			sleep(0.5)
 		if exists("/STARTUP.cpio.gz"):
