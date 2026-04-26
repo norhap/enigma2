@@ -1,5 +1,7 @@
 from boxbranding import getMachineMtdKernel, getMachineMtdRoot, getImageFolder
 from os.path import exists, join
+from time import sleep
+from shutil import move
 from Components.Harddisk import harddiskmanager
 from Components.ActionMap import ActionMap
 from Components.Console import Console
@@ -32,6 +34,7 @@ class VuplusKexec(Screen):
 	def __init__(self, session, *args, **kwargs):
 		Screen.__init__(self, session)
 		self.title = _("Vu+ MultiBoot Manager")
+		self.Console = Console(binary=True)
 		self["description"] = StaticText(_("Press GREEN button to enable MultiBoot.\n\nYour receiver will reboot and create the eMMC partitions."))
 		# self["key_red"] = StaticText(_("Cancel"))
 		self["footnote"] = StaticText()
@@ -49,7 +52,6 @@ class VuplusKexec(Screen):
 		for partition in partitions:
 			fileForceUpdate = join(partition.mountpoint, "%s/force.update") % getImageFolder()
 			if exists(fileForceUpdate) and "noforce.update" not in fileForceUpdate:
-				from shutil import move
 				move(fileForceUpdate, fileForceUpdate.replace("force.update", "noforce.update"))
 		if not config.misc.firstrun.value:
 			self["actions"].setEnabled(False)  # This function takes time so disable the ActionMap to avoid responding to multiple button presses
@@ -71,13 +73,17 @@ class VuplusKexec(Screen):
 			cmdlist.append("dd if=/dev/%s of=/zImage" % getMachineMtdKernel())  # backup old kernel
 			cmdlist.append("dd if=/usr/bin/kernel_auto.bin of=/dev/%s" % getMachineMtdKernel())  # create new kernel
 			cmdlist.append("mv /usr/bin/STARTUP.cpio.gz /STARTUP.cpio.gz")  # copy userroot routine
-			Console().eBatch(cmdlist, self.RootInitKexec, debug=True) if not config.misc.firstrun.value else Console().eBatch(cmdlist, self.reBoot, debug=True)
+			self.Console.eBatch(cmdlist, self.RootInitKexec, debug=True) if not config.misc.firstrun.value else self.Console.eBatch(cmdlist, self.reBoot, debug=True)
 		else:
 			self.session.open(MessageBox, _("VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."), MessageBox.TYPE_INFO, timeout=30)
 			self.close()
 
 	def RootInitKexec(self, *args, **kwargs):
-		self.session.open(TryQuitMainloop, QUIT_REBOOT)
+		if not exists("/STARTUP.cpio.gz") and exists("/usr/bin/STARTUP.cpio.gz"):
+			move("/usr/bin/STARTUP.cpio.gz", "/STARTUP.cpio.gz")
+			sleep(0.5)
+		if exists("/STARTUP.cpio.gz"):
+			self.session.open(TryQuitMainloop, QUIT_REBOOT)
 
 
 class VuWizard(Screen):
