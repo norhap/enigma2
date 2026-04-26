@@ -71,16 +71,12 @@ class VuplusKexec(Screen):
 			cmdlist.append("dd if=/dev/%s of=/zImage" % getMachineMtdKernel())  # backup old kernel
 			cmdlist.append("dd if=/usr/bin/kernel_auto.bin of=/dev/%s" % getMachineMtdKernel())  # create new kernel
 			cmdlist.append("mv /usr/bin/STARTUP.cpio.gz /STARTUP.cpio.gz")  # copy userroot routine
-			Console().eBatch(cmdlist, self.RootInitEnd, debug=True) if not config.misc.firstrun.value else Console().eBatch(cmdlist, self.reBoot, debug=True)
+			Console().eBatch(cmdlist, self.RootInitKexec, debug=True) if not config.misc.firstrun.value else Console().eBatch(cmdlist, self.reBoot, debug=True)
 		else:
 			self.session.open(MessageBox, _("VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."), MessageBox.TYPE_INFO, timeout=30)
 			self.close()
 
-	def RootInitEnd(self, *args, **kwargs):
-		print("[VuplusKexec][RootInitEnd] rebooting")
-		for usbslot in range(1, 4):
-			if exists("/media/hdd/%s/linuxrootfs%s" % (getBoxType(), usbslot)):
-				Console().ePopen("cp -R /media/hdd/%s/linuxrootfs%s . /" % (getBoxType(), usbslot))
+	def RootInitKexec(self, *args, **kwargs):
 		self.session.open(TryQuitMainloop, QUIT_REBOOT)
 
 
