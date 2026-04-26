@@ -75,15 +75,18 @@ class VuplusKexec(Screen):
 			cmdlist.append("mv /usr/bin/STARTUP.cpio.gz /STARTUP.cpio.gz")  # copy userroot routine
 			self.Console.eBatch(cmdlist, self.RootInitKexec, debug=True) if not config.misc.firstrun.value else self.Console.eBatch(cmdlist, self.reBoot, debug=True)
 		else:
-			self.session.open(MessageBox, _("VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."), MessageBox.TYPE_INFO, timeout=30)
+			self.session.open(MessageBox, _("VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."), MessageBox.TYPE_ERROR, timeout=15, simple=True)
 			self.close()
 
 	def RootInitKexec(self, *args, **kwargs):
 		if not exists("/STARTUP.cpio.gz") and exists("/usr/bin/STARTUP.cpio.gz") and exists("/STARTUP"):
 			move("/usr/bin/STARTUP.cpio.gz", "/STARTUP.cpio.gz")
 			sleep(0.5)
-		if exists("/STARTUP.cpio.gz"):
+		if exists("/STARTUP.cpio.gz") and exists("/STARTUP"):
 			self.session.open(TryQuitMainloop, QUIT_REBOOT)
+		else:
+			self.session.open(MessageBox, _("VuplusKexec: Create Vu+ Multiboot environment - Unable to complete, Vu+ Multiboot files missing."), MessageBox.TYPE_ERROR, timeout=15, simple=True)
+			self.close()
 
 
 class VuWizard(Screen):
