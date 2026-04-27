@@ -8,6 +8,7 @@ from skin import parseColor
 from Components.ActionMap import HelpableActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
+from Components.config import config, configfile
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -183,11 +184,21 @@ class Console(Screen, HelpableScreen):
 	def dataAvail(self, data):
 		if isinstance(data, bytes):
 			data = data.decode()
-		screendata = data.replace(_("Restoring settings: Enigma2 is about to restart..."), "").replace(_("Finishing restore your receiver go to restart..."), "").replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")).replace("Not deleting modified", _("Not deleting modified")).replace("Existing", _("Existing")).replace("The new conffile will be placed at", _("The new conffile will be placed at")).replace("is different from the conffile in the new package", _("is different from the conffile in the new package"))
-		self["text"].appendText(f"{self.commandColorEnd}{screendata}\n" + f"{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"{self.commandColorEnd}{screendata}\n" + f"{self.commandColorStart}  {_("Finishing restore your receiver go to restart...")}" if "init 6" in self.cmdList[self.run] else f"{self.commandColorEnd}{screendata}")
+		screendata = data.replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")).replace("Not deleting modified", _("Not deleting modified")).replace("Existing", _("Existing")).replace("The new conffile will be placed at", _("The new conffile will be placed at")).replace("is different from the conffile in the new package", _("is different from the conffile in the new package")).replace("No packages installed or removed", _("No packages installed or removed"))
+		self["text"].appendText(f"{self.commandColorEnd}{screendata}")
+		if "killall -9 enigma2" in self.cmdList[self.run] and "init " in self.cmdList[self.run]:
+			config.misc.RestartUI.value = True
+			config.misc.RestartUI.save()
+			configfile.save()
+			self.ReBootRestartTimer = eTimer()
+			self.ReBootRestartTimer.callback.append(self.dataReBootRestart)
+			self.ReBootRestartTimer.start(4000, True)
+
+	def dataReBootRestart(self):
+		self.ReBootRestartTimer.stop()
+		self["text"].appendText(f"\n{self.commandColorStart}  {_("Restoring settings: Enigma2 is about to restart...")}" if "init 3" in self.cmdList[self.run] else f"\n{self.commandColorStart}  {_("Finishing restore: Your receiver go to reboot...")}")
 
 	def runFinished(self, retVal):
-
 		if retVal:
 			print(f"[Console] Running command {self.run + 1} finsihed with '{retVal}'.")
 			self.errorOcurred = True

@@ -70,11 +70,7 @@ class Navigation:
 		if self.__wasTimerWakeup:
 			if wakeup_time_type == 3 and not config.misc.isNextRecordTimerAfterEventActionAuto.value:  # "inStandby". Do not execute setWasInDeepStandby static method if recording exists.
 				RecordTimer.RecordTimerEntry.setWasInDeepStandby()
-		if config.misc.RestartUI.value:
-			config.misc.RestartUI.value = False
-			config.misc.RestartUI.save()
-			configfile.save()
-		else:
+		if not config.misc.RestartUI.value:
 			if config.usage.remote_fallback_import.value and not config.usage.remote_fallback_import_restart.value:
 				ImportChannels()
 			if startup_to_standby == "yes" or self.__wasTimerWakeup and config.misc.prev_wakeup_time.value and (wakeup_time_type == 0 or wakeup_time_type == 1 or (wakeup_time_type == 3 and startup_to_standby == "except")):
@@ -82,6 +78,10 @@ class Navigation:
 					self.standbytimer = eTimer()
 					self.standbytimer.callback.append(self.gotostandby)
 					self.standbytimer.start(15000, True)  # Time increse 15 second for standby.
+		else:
+			config.misc.RestartUI.value = False
+			config.misc.RestartUI.save()
+			configfile.save()
 
 	def _processTimerWakeup(self):
 		now = time()

@@ -4731,8 +4731,8 @@ msgstr "Terminó de configurar su red"
 msgid "Finished restarting your network"
 msgstr "Terminó de reiniciar su red"
 
-msgid "Finishing restore your receiver go to restart..."
-msgstr "Finalizando restauración su receptor va a reiniciar..."
+msgid "Finishing restore: Your receiver go to reboot..."
+msgstr "Finalizando restauración: Su receptor va a reiniciarse..."
 
 msgid "Finland"
 msgstr "Finlandia"
@@ -6684,6 +6684,9 @@ msgstr "No se encontraron plugins, revise el servidor."
 
 msgid "List of available plugins."
 msgstr "Lista de plugins disponibles."
+
+msgid "No packages installed or removed"
+msgstr "No hay paquetes instalados o eliminados"
 
 msgid "No positioner capable frontend found."
 msgstr "No se encontró ningún frontend capaz de posicionar."
