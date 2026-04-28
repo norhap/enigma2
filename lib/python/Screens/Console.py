@@ -192,7 +192,7 @@ class Console(Screen, HelpableScreen):
 			configfile.save()
 			self.ReBootRestartTimer = eTimer()
 			self.ReBootRestartTimer.callback.append(self.dataReBootRestart)
-			self.ReBootRestartTimer.start(4000, True)
+			self.ReBootRestartTimer.start(5000, True)
 
 	def dataReBootRestart(self):
 		self.ReBootRestartTimer.stop()
