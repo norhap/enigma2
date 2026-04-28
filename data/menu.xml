@@ -88,7 +88,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<menu key="osd_setup" level="0" text="User Interface" weight="20">
 			<id val="osd_menu" />
 			<item key="user_interface" level="0" text="User Interface Setup" weight="5"><setup id="userinterface" /></item>
-			<item key="primary_skin_selector" level="0" text="Skin Setup" weight="10"><screen module="SkinSelector" screen="SkinSelector" /></item>
+			<item key="primary_skin_selector" level="0" text="Skin Selection" weight="10"><screen module="SkinSelector" screen="SkinSelector" /></item>
 			<item key="subtitle_setup" level="2" text="Subtitle Setup" weight="20"><setup id="subtitlesetup" /></item>
 			<item key="language_setup" level="0" text="Language Setup" weight="25"><screen module="LanguageSelection" /></item>
 			<item key="parental_setup" level="0" text="Parental Control Setup" weight="30"><screen module="ParentalControlSetup" screen="ParentalControlSetup" /></item>
@@ -96,8 +96,8 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<!-- Main Menu > Setup > Panel Frontal Display and LED Display -->
 		<menu key="display_selection" level="0" text="Front Panel Display" weight="15" requires="FrontpanelDisplay">
 			<id val="lcd" />
-			<item key="display_skin_selector" level="0" text="Skin Setup" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
-			<item key="lcd_setup" level="1" text="LCD Setup" weight="10"><setup id="FrontDisplay" /></item>
+			<item key="display_skin_selector" level="0" text="Display Selection" weight="5"><screen module="SkinSelector" screen="LcdSkinSelector" /></item>
+			<item key="lcd_setup" level="1" text="Display Settings" weight="10"><setup id="FrontDisplay" /></item>
 			<menu key="leddisplay_selection" level="0" text="LED Setup" weight="15" requires="DisplayLED">
 				<id val="led" />
 				<item key="led_setup" level="1" text="LED Setup" weight="15"><setup id="LEDDisplay" /></item>

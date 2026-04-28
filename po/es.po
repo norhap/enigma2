@@ -3681,6 +3681,12 @@ msgstr "Puerto DiSEqC %s: %s"
 msgid "DiSEqC-tester settings"
 msgstr "Ajustes del DiSEqC-tester"
 
+msgid "Display Selection"
+msgstr "Selección de Display"
+
+msgid "Display Settings"
+msgstr "Ajustes Display"
+
 msgid "Did you see all eight arrow heads?"
 msgstr "Viste las 8 puntas de las flechas?"
 
@@ -9081,8 +9087,8 @@ msgstr "Latitud del sitio"
 msgid "Site longitude"
 msgstr "Longitud del sitio"
 
-msgid "Skin Setup"
-msgstr "Ajustes Skin"
+msgid "Skin Selection"
+msgstr "Selección de Skin"
 
 msgid "Skin"
 msgstr "Skin"
@@ -11841,9 +11847,6 @@ msgstr "FlashImage: Añadir slots de INICIO USB - Sin USB EXT4 conectado."
 msgid "FlashImage: Add USB STARTUP slots - USB"
 msgstr "FlashImage: Agregar slots de INICIO USB"
 
-msgid "GUI Skin"
-msgstr "Cambiar Skin"
-
 msgid "Harddisk"
 msgstr "Disco Duro"
 
@@ -12805,9 +12808,6 @@ msgstr "Conexión de su [BRANDMODEL] a Internet."
 
 msgid "Please set up tuner [TUNER]"
 msgstr "Configure el sintonizador [TUNER]"
-
-msgid "SkinSelector"
-msgstr "Cambiar Skin"
 
 msgid "Skip internet connection check (disables automatic package installation)"
 msgstr "Omitir comprobación de conexión a Internet"
@@ -15218,9 +15218,6 @@ msgstr "Selección Display"
 
 msgid "LCN rules"
 msgstr "Reglas LCN"
-
-msgid "LCD Setup"
-msgstr "Ajustes Display"
 
 msgid "LCN Scanner"
 msgstr "Búsqueda LCN"

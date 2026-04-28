@@ -51,7 +51,7 @@ class SkinSelector(Screen, HelpableScreen):
 		10, 50, 140, 40, 20,
 		160, 50, 140, 40, 20]
 
-	def __init__(self, session, screenTitle=_("GUI Skin")):
+	def __init__(self, session, screenTitle=_("Skin Selection")):
 		Screen.__init__(self, session, mandatoryWidgets=["description", "skins"])
 		HelpableScreen.__init__(self)
 
@@ -261,7 +261,7 @@ class SkinSelector(Screen, HelpableScreen):
 
 
 class LcdSkinSelector(SkinSelector):
-	def __init__(self, session, screenTitle=_("Display Skin")):
+	def __init__(self, session, screenTitle=_("Display Selection")):
 		SkinSelector.__init__(self, session, screenTitle=screenTitle)
 		self.skinName = ["LcdSkinSelector", "SkinSelector"]
 		self.dataDirRoot = resolveFilename(SCOPE_LCDSKIN)
