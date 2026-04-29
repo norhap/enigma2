@@ -559,7 +559,7 @@ class TunerInformation(InformationBase):
 			except:
 				pass
 		for count in range(len(nims)):
-			data = nims[count].split(":")
+			data = nims[count].split(": ")
 			idx = data[0].strip("Tuner").strip()
 			desc = data[1].strip()
 			if descList and descList[curIndex]["desc"] == desc:
