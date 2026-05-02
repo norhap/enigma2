@@ -88,29 +88,23 @@
 
 	<!-- STANDBY -->
 	<screen name="StandbySummary" position="0,0" size="800,480">
-		<panel name="AnalogueClock" />
-		<widget source="global.CurrentTime" render="Label" position="470,24" foregroundColor="white" size="300,50" font="FdLcD;45" horizontalAlignment="right">
-			<convert type="ClockToText">Format:%d.%m.%Y</convert>
+		<widget source="global.CurrentTime" render="Label" position="40,50" size="720,200" font="FdLcD;150" foregroundColor="#FFFF00" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
+			<convert type="ClockToText"></convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="20,370" foregroundColor="white" size="280,80" font="FdLcD;70" horizontalAlignment="left">
-			<convert type="ClockToText">Format:%H:%M</convert>
+		<widget source="global.CurrentTime" render="Label" position="1,250" size="798,90" font="FdLcD;78" horizontalAlignment="center" zPosition="10">
+			<convert type="ClockToText">LongDate</convert>
 		</widget>
-		<widget source="session.RecordState" render="FixedLabel" position="40,20" zPosition="3" size="70,70" text=" ">
+		<widget source="session.RecordState" render="FixedLabel" position="375,360" zPosition="3" size="70,70" text=" ">
 			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="40,20"  size="70,70" >
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="375,360"  size="70,70" >
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<!--
-		<widget source="global.CurrentTime" render="Label" position="40,70" size="720,180" foregroundColor="white" font="FdLcD;100" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
-			<convert type="ClockToText">Mixed</convert>
-		</widget>
-		<widget source="global.CurrentTime" render="Label" position="40,270" size="720,75" font="FdLcD;70" foregroundColor="white" horizontalAlignment="center" zPosition="10">
-			<convert type="ClockToText">ShortFullDate</convert>
-		</widget>
-		-->
 	</screen>
-
+	<screen name="SkinSelectorSummary" position="0,0" size="800,480">
+		<widget source="parent.Title" render="Label" position="0,5" size="795,95" font="FdLcD;75" horizontalAlignment="center" verticalAlignment="center" foregroundColor="#FFFF00" />
+		<widget source="Name" render="Label" position="0,101" size="795,90" font="FdLcD;80" horizontalAlignment="center" verticalAlignment="center" />
+	</screen>
 	<include filename="skin_display_templates.xml"/>
 </skin>
