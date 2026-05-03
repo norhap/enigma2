@@ -841,6 +841,9 @@ msgstr "/s"
 msgid "1. Tune to an imported channel with at least EPG EIT.\n2. Restart enigma2.\n3. Now try to download EPG cache from the reserve receiver."
 msgstr "1. Sintonice un canal importado con al menos EPG EIT.\n2. Reinicie Enigma2.\n3. Ahora intente descargar la caché EPG del receptor reserva."
 
+msgid "1. Turn off the receiver and reconnect it to the power supply.\n2. Press MENU repeatedly during startup.\n3. Start a new image in a different slot and flash the updated image to slots 2, 3, and 4."
+msgstr "1. Apague el receptor y vuelva a conectarlo a corriente.\n2. Pulse MENU repetidamente durante el arranque.\n3. Inicie una nueva imagen en un slot diferente y realice flash de la imagen actualizada en los slots 2, 3 y 4."
+
 msgid "10 MB/s"
 msgstr "10 MB/s"
 
@@ -6767,6 +6770,9 @@ msgstr "No, pero reiniciar desde el principio"
 msgid "No, do not flash image"
 msgstr "No, no flashear imagen"
 
+msgid "No, do not flash. The missing slots have images that are not compatible with the current image."
+msgstr "No, no Flashear. Los slots faltantes tienen imágenes no compatibles con la actual imagen."
+
 msgid "No, only image download"
 msgstr "No, solo descargar imagen"
 
@@ -9324,6 +9330,9 @@ msgstr "Ventilador en reposo %d tensión"
 
 msgid "Standby in "
 msgstr "Reposo en "
+
+msgid "Start a new image in a different slot than the current one using the 'Recovery Mode' and perform an online flash with the updated image in the remaining slots."
+msgstr "Inicie una nueva imagen en un slot diferente a la actual usando \"Modo Recuperación\" y realice un flasheo en línea con la imagen actualizada en los slots restantes."
 
 msgid "Start edit mode"
 msgstr "Iniciar modo editar"
@@ -19279,6 +19288,9 @@ msgstr "Has elegido hacer una copia de seguridad de su configuración. Pulse OK 
 
 msgid "You have chosen to restore your settings. Enigma2 will restart after restore. Please press OK to start the restore now."
 msgstr "Haa elegido restaurar su configuración. Enigma2 se reiniciará después de la restauración. Pulse OK para comenzar la restauración ahora."
+
+msgid "The slots are not accessible.\nYou may need to restore the partitions via USB flash and restart MultiBoot."
+msgstr "Los slots no son accesibles.\nEs posible que deba reiniciar las particiones a través de flash USB y reiniciar MultiBoot."
 
 msgid ""
 "You need a PC connected to your receiver. If you need further instructions, please visit the website https://openpli.org\n"

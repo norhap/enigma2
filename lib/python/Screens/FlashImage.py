@@ -288,14 +288,20 @@ class FlashImage(Screen):
 			choices = []
 			slotdict = {k: v for k, v in SystemInfo["canMultiBoot"].items() if not v['device'].startswith('/dev/sd')} if not SystemInfo["HasKexecUSB"] else {k: v for k, v in SystemInfo["canMultiBoot"].items()}
 			numberSlots = len(slotdict) + 1 if not SystemInfo["hasKexec"] and len(slotdict) < 9 else len(slotdict)
-			for x in range(1, numberSlots):
-				choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image) with, backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("with backup"), (x, "with backup"))))
-			for x in range(1, numberSlots):
-				choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image), without backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("without backup"), (x, "without backup"))))
-			if "://" in self.source:
-				choices.append((_("No, only image download"), (1, "only download")))
-			choices.append((_("No, do not flash image"), False))
-			self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
+			try:
+				for x in range(1, numberSlots):
+					choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image) with, backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("with backup"), (x, "with backup"))))
+			except Exception as err:
+				if "string indices must be integers" in str(err):
+					choices.append((_("No, do not flash. The missing slots have images that are not compatible with the current image."), False))
+					self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
+			else:
+				for x in range(1, numberSlots):
+					choices.append(((f"slot{x} - {imagesList[x]['imagename']} " + _("(current image), without backup") if x == currentimageslot else f"slot{x} - {imagesList[x]['imagename']} " + _("without backup"), (x, "without backup"))))
+				if "://" in self.source:
+					choices.append((_("No, only image download"), (1, "only download")))
+				choices.append((_("No, do not flash image"), False))
+				self.session.openWithCallback(self.checkMedia, MessageBox, self.message, list=choices, default=currentimageslot, simple=True)
 		else:
 			choices = [(_("Yes, with backup"), "with backup"), (_("Yes, without backup"), "without backup")] if not SystemInfo["canKexec"] else []
 			if "://" in self.source:
@@ -560,26 +566,33 @@ class MultibootSelection(SelectImage, HelpableScreen):
 		self.deletedImagesExists = False
 		if imagesList:
 			for index, x in enumerate(imagesList):
-				if SystemInfo["hasKexec"] and x == 1:
-					self["description"].setText(_("Select slot image and press OK or GREEN button to reboot."))
-					if not self.currentimageslot:  # Slot0
-						list.append(ChoiceEntryComponent('', ((_(f'slot0 {SystemInfo["canMultiBoot"][x]["slotType"]} ' + _("- Recovery mode image (current)"))), "Recovery")))
-					else:
-						list.append(ChoiceEntryComponent('', ((_(f'slot0 {SystemInfo["canMultiBoot"][x]["slotType"]} ' + _("- Recovery mode image"))), "Recovery")))
-				if imagesList[x]["imagename"] == _("Deleted image"):
-					self.deletedImagesExists = True
-				elif imagesList[x]["imagename"] != _("Empty slot"):
-					if SystemInfo["canMode12"]:
-						list.insert(index, ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 1 (current image)") if x == self.currentimageslot and mode != 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 1"), (x, 1)))))
-						list12.insert(index, ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 12 (current image)") if x == self.currentimageslot and mode == 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 12"), (x, 12)))))
-					else:
-						if not SystemInfo["hasKexec"]:
-							list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("(current image)") if x == self.currentimageslot and mode != 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} {imagesList[x]["imagename"]}', (x, 1)))))
+				try:
+					if SystemInfo["hasKexec"] and x == 1:
+						self["description"].setText(_("Select slot image and press OK or GREEN button to reboot."))
+						if not self.currentimageslot:  # Slot0
+							list.append(ChoiceEntryComponent('', ((_(f'slot0 {SystemInfo["canMultiBoot"][x]["slotType"]} ' + _("- Recovery mode image (current)"))), "Recovery")))
 						else:
-							if x != self.currentimageslot:
-								list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]}', (x, 1)))))  # list USB eMMC slots not current
+							list.append(ChoiceEntryComponent('', ((_(f'slot0 {SystemInfo["canMultiBoot"][x]["slotType"]} ' + _("- Recovery mode image"))), "Recovery")))
+					if imagesList[x]["imagename"] == _("Deleted image"):
+						self.deletedImagesExists = True
+					elif imagesList[x]["imagename"] != _("Empty slot"):
+						if SystemInfo["canMode12"]:
+							list.insert(index, ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 1 (current image)") if x == self.currentimageslot and mode != 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 1"), (x, 1)))))
+							list12.insert(index, ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 12 (current image)") if x == self.currentimageslot and mode == 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("mode 12"), (x, 12)))))
+						else:
+							if not SystemInfo["hasKexec"]:
+								list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("(current image)") if x == self.currentimageslot and mode != 12 else f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} {imagesList[x]["imagename"]}', (x, 1)))))
 							else:
-								list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("(current image)"), (x, 1)))))  # Slot current != Slot0
+								if x != self.currentimageslot:
+									list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]}', (x, 1)))))  # list USB eMMC slots not current
+								else:
+									list.append(ChoiceEntryComponent('', ((f'slot{x} {SystemInfo["canMultiBoot"][x]["slotType"]} - {imagesList[x]["imagename"]} ' + _("(current image)"), (x, 1)))))  # Slot current != Slot0
+				except Exception as err:
+					from Tools.Notifications import AddPopup  # noqa: E402
+					if "string indices must be integers" in str(err):
+						self.close(True)
+						message = _("Start a new image in a different slot than the current one using the 'Recovery Mode' and perform an online flash with the updated image in the remaining slots.") if SystemInfo["RecoveryMode"] else _("1. Turn off the receiver and reconnect it to the power supply.\n2. Press MENU repeatedly during startup.\n3. Start a new image in a different slot and flash the updated image to slots 2, 3, and 4.") if MODEL.startswith("osmio4k") else _("The slots are not accessible.\nYou may need to restore the partitions via USB flash and restart MultiBoot.")
+						AddPopup(message, MessageBox.TYPE_ERROR, timeout=0)
 		if list12:
 			self.blue = True
 			self["key_blue"].setText(_("Order by modes") if config.usage.multiboot_order.value else _("Order by slots"))
