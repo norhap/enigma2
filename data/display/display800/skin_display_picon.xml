@@ -106,5 +106,11 @@
 		<widget source="parent.Title" render="Label" position="0,5" size="795,95" font="FdLcD;75" horizontalAlignment="center" verticalAlignment="center" foregroundColor="#FFFF00" />
 		<widget source="Name" render="Label" position="0,101" size="795,90" font="FdLcD;80" horizontalAlignment="center" verticalAlignment="center" />
 	</screen>
+	<screen name="WizardSummary" position="0,0" size="800,480">
+		<widget source="text" render="Label" position="5,5" size="790,194" font="FdLcD;65" horizontalAlignment="center" />
+		<widget source="parent.list" render="Label" position="40,200" size="720,279" font="FdLcD;65" horizontalAlignment="center" >
+			<convert type="StringListSelection" />
+		</widget>
+	</screen>
 	<include filename="skin_display_templates.xml"/>
 </skin>
