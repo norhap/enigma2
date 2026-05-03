@@ -16,13 +16,13 @@
 
 	<!-- ## DEFAULT ## -->
 	<screen name="LCDTitle">
-		<widget source="parent.title" render="Label" position="40,50" size="720,110" foregroundColor="white" font="FdLcD;85" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
+		<widget source="parent.title" render="Label" position="40,40" size="720,144" foregroundColor="white" font="FdLcD;65" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
 	</screen>
 	<screen name="LCDTitle2">
-		<widget source="parent.Title" render="Label" position="40,50" size="720,110" foregroundColor="white" font="FdLcD;85" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
+		<widget source="parent.Title" render="Label" position="40,40" size="720,144" foregroundColor="white" font="FdLcD;65" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
 	</screen>
 	<screen name="LCDInfoBarChannelName">
-		<widget source="session.CurrentService" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=80,repeat=3,always=0,oneshot=1,startdelay=6000,wrap" position="40,40" size="720,90" font="FdLcD;75" foregroundColor="white" horizontalAlignment="center" verticalAlignment="center" zPosition="2">
+		<widget source="session.CurrentService" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=80,repeat=3,always=0,oneshot=1,startdelay=6000,wrap" position="40,40" size="720,90" font="FdLcD;75" foregroundColor="white" zPosition="2">
 			<convert type="ServiceName">Name</convert>
 		</widget>
 	</screen>
@@ -358,8 +358,8 @@
 
 	<!-- CHOICEBOX -->
 	<screen name="ChoiceBoxSummary" position="fill">
-		<widget source="text" render="Label" position="fill" font="FdLcD;24" horizontalAlignment="center" />
-		<widget source="option" render="Label" position="40,200" size="720,160" font="FdLcD;26" horizontalAlignment="center" noWrap="1" />
+		<widget source="text" render="Label" position="5,5" size="790,194" font="FdLcD;65" horizontalAlignment="center" />
+		<widget source="option" render="Label" position="40,200" size="720,160" font="FdLcD;65" horizontalAlignment="center" />
 	</screen>
 
 	<!-- IMDB -->
@@ -469,9 +469,9 @@
 
 	<!-- SETUP -->
 	<screen name="SetupSummary" position="0,0" size="800,480">
-		<widget source="SetupTitle" render="Label" position="40,50" size="720,110" foregroundColor="white" font="FdLcD;85" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
-		<widget source="SetupEntry" render="Label" position="40,200" size="720,160" foregroundColor="white" font="FdLcDLight;65" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
-		<widget source="SetupValue" render="Label" position="40,380" size="720,70" foregroundColor="white" font="FdLcDLight;60" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="SetupTitle" render="Label" position="5,50" size="790,149" foregroundColor="white" font="FdLcD;65" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
+		<widget source="SetupEntry" render="Label" position="5,200" size="790,160" foregroundColor="white" font="FdLcDLight;65" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
+		<widget source="SetupValue" render="Label" position="5,380" size="790,70" foregroundColor="white" font="FdLcDLight;60" horizontalAlignment="center" verticalAlignment="top" zPosition="2" />
 	</screen>
 
 	<!-- ET PORTAL -->

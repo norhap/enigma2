@@ -77,7 +77,7 @@
 		<panel name="LCDInfoBarProgramName" />
 		<panel name="LCDInfoBarProgress" />
 		<panel name="LCDInfoBarRemainingTime" />
-		<panel name="LCDInfoBarStartTime" />
+		<!-- panel name="LCDInfoBarStartTime" / -->
 		<!-- eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" / -->
 		<panel name="LCDInfoBarEndTime" />
 		<panel name="LCDRecordIcon" />
