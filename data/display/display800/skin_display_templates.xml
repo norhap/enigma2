@@ -27,19 +27,19 @@
 		</widget>
 	</screen>
 	<screen name="LCDInfoBarProgramName">
-		<widget source="session.Event_Now" render="Label" position="40,150" size="720,150" font="FdLcDLight;60" foregroundColor="white" horizontalAlignment="center" verticalAlignment="top" zPosition="2">
+		<widget source="session.Event_Now" render="Label" position="40,130" size="720,150" font="FdLcDLight;60" foregroundColor="white" horizontalAlignment="center" verticalAlignment="top" zPosition="2">
 			<convert type="EventName">Name</convert>
 		</widget>
 	</screen>
 	<screen name="LCDInfoBarProgress">
-		<widget source="session.Event_Now" render="Progress" position="40,340" size="720,30" foregroundColor="white" borderWidth="2" zPosition="2">
+		<widget source="session.Event_Now" render="Progress" position="40,285" size="720,30" foregroundColor="white" borderWidth="2" zPosition="2">
 			<convert type="EventTime">Progress</convert>
 		</widget>
 	</screen>
 	<screen name="LCDInfoBarRemainingTime">
-		<widget source="session.Event_Now" render="Label" position="40,390" size="320,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="left" verticalAlignment="center">
+		<widget source="session.Event_Now" render="Label" position="40,345" size="320,120" font="FdLcD;98" foregroundColor="white" horizontalAlignment="left" verticalAlignment="center">
 			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">InMinutes</convert>
+			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
 	</screen>
 	<!--
@@ -50,16 +50,17 @@
 		</widget>
 	</screen>
 	-->
+	<!--
 	<screen name="LCDInfoBarStartTime">
 		<widget source="session.Event_Now" render="Label" position="360,390" size="160,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="right" verticalAlignment="center">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
 	</screen>
+	-->
 	<screen name="LCDInfoBarEndTime">
-		<widget source="session.Event_Now" render="Label" position="590,390" size="160,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="right" verticalAlignment="center">
-			<convert type="EventTime">EndTime</convert>
-			<convert type="ClockToText">Default</convert>
+		<widget source="global.CurrentTime" render="Label" position="520,345" size="280,120" font="FdLcD;98" foregroundColor="white" horizontalAlignment="left" verticalAlignment="center">
+			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 	</screen>
 	<!--
