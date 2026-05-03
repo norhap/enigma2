@@ -841,8 +841,8 @@ msgstr "/s"
 msgid "1. Tune to an imported channel with at least EPG EIT.\n2. Restart enigma2.\n3. Now try to download EPG cache from the reserve receiver."
 msgstr "1. Sintonice un canal importado con al menos EPG EIT.\n2. Reinicie Enigma2.\n3. Ahora intente descargar la caché EPG del receptor reserva."
 
-msgid "1. Turn off the receiver and reconnect it to the power supply.\n2. Press MENU repeatedly during startup.\n3. Start a new image in a different slot and flash the updated image to slots 2, 3, and 4."
-msgstr "1. Apague el receptor y vuelva a conectarlo a corriente.\n2. Pulse MENU repetidamente durante el arranque.\n3. Inicie una nueva imagen en un slot diferente y realice flash de la imagen actualizada en los slots 2, 3 y 4."
+msgid "1. Turn off the receiver and reconnect it to the power supply.\n2. Press MENU repeatedly during startup.\n3. Start a new image in a different slot and perform an online flash into the remaining slots."
+msgstr "1. Apague el receptor y vuelva a conectarlo a corriente.\n2. Pulse MENU repetidamente durante el arranque.\n3. Inicie una nueva imagen en un slot diferente y realice flash online de la imagen actualizada en los slots restantes."
 
 msgid "10 MB/s"
 msgstr "10 MB/s"
