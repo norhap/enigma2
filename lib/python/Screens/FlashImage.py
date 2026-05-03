@@ -591,7 +591,7 @@ class MultibootSelection(SelectImage, HelpableScreen):
 					from Tools.Notifications import AddPopup  # noqa: E402
 					if "string indices must be integers" in str(err):
 						self.close(True)
-						message = _("Start a new image in a different slot than the current one using the 'Recovery Mode' and perform an online flash with the updated image in the remaining slots.") if SystemInfo["RecoveryMode"] else _("1. Turn off the receiver and reconnect it to the power supply.\n2. Press MENU repeatedly during startup.\n3. Start a new image in a different slot and flash the updated image to slots 2, 3, and 4.") if MODEL.startswith("osmio4k") else _("The slots are not accessible.\nYou may need to restore the partitions via USB flash and restart MultiBoot.")
+						message = _("Start a new image in a different slot than the current one using the 'Recovery Mode' and perform an online flash with the updated image in the remaining slots.") if SystemInfo["RecoveryMode"] else _("1. Turn off the receiver and reconnect it to the power supply.\n2. Press MENU repeatedly during startup.\n3. Start a new image in a different slot and flash the updated image to slots 2, 3, and 4.") if MODEL in ("hd51", "h7", "h17", "osmio4k", "osmio4kplus", "osmini4k") else _("The slots are not accessible.\nYou may need to restore the partitions via USB flash and restart MultiBoot.")
 						AddPopup(message, MessageBox.TYPE_ERROR, timeout=0)
 		if list12:
 			self.blue = True
