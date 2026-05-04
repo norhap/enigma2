@@ -40,7 +40,7 @@
 		<panel name="LCDChannelSelectionProgress" />
 		<panel name="LCDChannelSelectionRemainingTime" />
 		<panel name="LCDChannelSelectionStartTime" />
-		<eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" horizontalAlignment="center" verticalAlignment="center" />
+		<!-- eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" horizontalAlignment="center" verticalAlignment="center" / -->
 		<panel name="LCDChannelSelectionEndTime" />
 		<panel name="LCDRecordIcon" />
 	</screen>

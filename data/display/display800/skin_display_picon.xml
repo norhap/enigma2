@@ -42,7 +42,7 @@
 		<panel name="LCDPiconStatusIcons" />
 		<panel name="LCDRecordIcon" />
 		<panel name="LCDPiconChannelSelectionStartTime" />
-		<eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" horizontalAlignment="center" verticalAlignment="center" />
+		<!-- eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" horizontalAlignment="center" verticalAlignment="center" / -->
 		<panel name="LCDPiconChannelSelectionEndTime" />
 	</screen>
 	<screen name="ChannelSelectionRadioSummary" position="0,0" size="800,480">

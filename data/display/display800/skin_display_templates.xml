@@ -22,7 +22,7 @@
 		<widget source="parent.Title" render="Label" position="40,40" size="720,144" foregroundColor="white" font="FdLcD;65" horizontalAlignment="center" verticalAlignment="center" zPosition="2" />
 	</screen>
 	<screen name="LCDInfoBarChannelName">
-		<widget source="session.CurrentService" render="RunningText" options="movetype=running,startpoint=0,direction=left,steptime=80,repeat=3,always=0,oneshot=1,startdelay=6000,wrap" position="40,40" size="720,90" font="FdLcD;75" foregroundColor="white" zPosition="2">
+		<widget source="session.CurrentService" render="DRRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" position="20,40" size="778,90" font="FdLcD;70" zPosition="2">
 			<convert type="ServiceName">Name</convert>
 		</widget>
 	</screen>
