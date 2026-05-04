@@ -85,10 +85,10 @@
 
 	<!-- STANDBY -->
 	<screen name="StandbySummary" position="0,0" size="800,480">
-		<widget source="global.CurrentTime" render="Label" position="40,50" size="720,160" font="FdLcD;150" foregroundColor="#FFFF00" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="40,50" size="720,160" font="FdLcD;150" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
 			<convert type="ClockToText"></convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="170,250" size="500,90" font="FdLcD;80" horizontalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="155,250" size="550,90" font="FdLcD;90" horizontalAlignment="center" zPosition="10">
 			<convert type="ClockToText">LongDate</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="375,360" zPosition="3" size="70,70" text=" ">
