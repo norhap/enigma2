@@ -140,11 +140,7 @@ def getHardwareTypeString():
 
 
 def getImageTypeString():
-	try:
-		image_type = open("/etc/issue").readlines()[-2].strip()[:-6]
-		return image_type.capitalize()
-	except:
-		return _("unknown")
+	return BoxInfo.getItem("imageversion")
 
 
 def getCPUInfoString():
