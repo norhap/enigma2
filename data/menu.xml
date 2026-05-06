@@ -189,7 +189,7 @@ self.session.openWithCallback(msgClosed, EpgDeleteMsg)
 		<item key="network_screen" level="0" text="Network" weight="25"><screen module="About" screen="SystemNetworkInfo" /></item>
 		<item key="service_info_screen" level="1" text="Service" weight="30"><screen module="ServiceInfo" screen="ServiceInfo" /></item>
 		<!--item key="geolocation_screen" level="0" text="Geolocation" weight="40"><screen module="About" screen="Geolocation" /></item-->
-		<item key="BenchmarkInformation_screen" level="0" text="Benchmark Information" weight="40"><screen module="About" screen="BenchmarkInformation" /></item>
+		<item key="BenchmarkInformation_screen" level="0" text="Benchmark Information" weight="40" requires="Benchmark"><screen module="About" screen="BenchmarkInformation" /></item>
 		<item key="streaming_clients_info_screen" level="2" text="Streaming Clients" weight="50"><screen module="StreamingClientsInfo" /></item>
 	</menu>
 	<!-- Main Menu > Plugins -->
