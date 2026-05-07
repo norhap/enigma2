@@ -122,7 +122,7 @@ def getFFmpegVersionString():
 		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
 		return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
 	except:
-		return _("Not installed")
+		return _("Not installed") if not isfile("/usr/lib/exteplayer3_deps/librtmp.so.0") else "6.1.1"
 
 
 def getKernelVersionString():
