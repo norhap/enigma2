@@ -8,7 +8,6 @@ from skin import parseColor
 from Components.ActionMap import HelpableActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
-from Components.config import config, configfile
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
@@ -187,9 +186,8 @@ class Console(Screen, HelpableScreen):
 		screendata = data.replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")).replace("Not deleting modified", _("Not deleting modified")).replace("Existing", _("Existing")).replace("The new conffile will be placed at", _("The new conffile will be placed at")).replace("is different from the conffile in the new package", _("is different from the conffile in the new package")).replace("No packages installed or removed", _("No packages installed or removed"))
 		self["text"].appendText(f"{self.commandColorEnd}{screendata}")
 		if "killall -9 enigma2" in self.cmdList[self.run] and "init " in self.cmdList[self.run]:
-			config.misc.RestartUI.value = True
-			config.misc.RestartUI.save()
-			configfile.save()
+			with open("/home/root/.backuprestore", "w") as fd:  # The timer displays a message in YELLOW at 5 seconds in the backup restore wizard.
+				fd.write("")
 			self.ReBootRestartTimer = eTimer()
 			self.ReBootRestartTimer.callback.append(self.dataReBootRestart)
 			self.ReBootRestartTimer.start(5000, True)
