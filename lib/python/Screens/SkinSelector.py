@@ -102,7 +102,7 @@ class SkinSelector(Screen, HelpableScreen):
 	def refreshList(self):
 		emergency = _("Emergency")
 		default = _("Default")
-		defaultPicon = _("Default+Picon")
+		defaultPicon = _("Picon")
 		current = _("Current")
 		displayPicon = join(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_picon.xml")
 		displayGrautec = join(dirname(DEFAULT_DISPLAY_SKIN), "skin_display_grautec.xml")
@@ -152,7 +152,7 @@ class SkinSelector(Screen, HelpableScreen):
 					elif path == DEFAULT_DISPLAY_SKIN:
 						list = [DEFAULT_DISPLAY_SKIN.split(".")[0].split("/")[1], default, directory, path, DEFAULT_DISPLAY_SKIN.split("/skin_")[1], preview]
 					elif path == displayPicon:
-						list = [displayPicon.split(".")[0].split("/")[1], default, directory, path, displayPicon.split("/skin_")[1], preview]
+						list = [displayPicon.split(".")[0].split("/")[1], defaultPicon, directory, path, displayPicon.split("/skin_")[1], preview]
 					elif path == displayGrautec:
 						list = [displayGrautec.split(".")[0].split("/")[1], default, directory, path, displayGrautec.split("/skin_")[1], preview]
 					else:
