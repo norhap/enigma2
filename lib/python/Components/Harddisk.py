@@ -319,15 +319,15 @@ class Harddisk:
 		size = self.diskSize()
 		print("[Harddisk] Disk size: %s MB." % size)
 		task = UnmountTask(job, self)
-		task = Task.PythonTask(job, _("Removing partition table."))
+		task = Task.PythonTask(job, _("Removing partition table"))
 		task.work = self.killPartitionTable
 		task.weighting = 1
-		task = Task.LoggingTask(job, _("Rereading partition table."))
+		task = Task.LoggingTask(job, _("Rereading partition table"))
 		task.weighting = 1
 		task.setTool("hdparm")
 		task.args.append("-z")
 		task.args.append(self.disk_path)
-		task = Task.ConditionTask(job, _("Waiting for partition."), timeoutCount=20)
+		task = Task.ConditionTask(job, _("Waiting for partition"), timeoutCount=20)
 		task.check = lambda: not exists(self.partitionPath("1"))
 		task.weighting = 1
 		if exists("/usr/sbin/parted"):
@@ -339,7 +339,7 @@ class Harddisk:
 			else:
 				use_parted = False
 		print("[Harddisk] Creating partition.")
-		task = Task.LoggingTask(job, _("Creating partition."))
+		task = Task.LoggingTask(job, _("Creating partition"))
 		task.weighting = 5
 		if use_parted:
 			task.setTool("parted")
@@ -896,7 +896,7 @@ class UnmountTask(Task.LoggingTask):
 
 class MountTask(Task.LoggingTask):
 	def __init__(self, job, hdd):
-		Task.LoggingTask.__init__(self, job, _("Mount."))
+		Task.LoggingTask.__init__(self, job, _("Mount"))
 		self.hdd = hdd
 
 	def prepare(self):
