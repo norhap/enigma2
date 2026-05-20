@@ -118,7 +118,7 @@ self.checkWlanSelection()
 self.condition = (self.isInterfaceUp == None and self.WlanPluginInstalled == True)
 		</condition>
 		<text value="Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next." />
-		<displaytext value="Please follow the instructions on the TV." />
+		<displaytext value="Please follow the instructions on the TV" />
 		<list type="dynamic" source="listChoices" evaluation="ChoicesSelectionMade" onselect="ChoicesSelectionMoved" />
 		<code>
 self.clearSelectedKeys()

@@ -490,7 +490,7 @@ class Wizard(Screen):
 				displaytext = self.wizard[self.currStep]["displaytext"]
 				print("[Wizard] Set LCD text.")
 				for x in self.lcdCallbacks:
-					x(displaytext)
+					x(_(displaytext))
 			if len(self.stepHistory) == 0 or self.stepHistory[-1] != self.currStep:
 				self.stepHistory.append(self.currStep)
 			print("[Wizard] Wizard step: '%s'." % self.wizard[self.currStep])
@@ -509,7 +509,7 @@ class Wizard(Screen):
 				displaytext = self.wizard[self.currStep]["displaytext"]
 				print("[Wizard] Set LCD text.")
 				for x in self.lcdCallbacks:
-					x(displaytext)
+					x(_(displaytext))
 			self.codeafter = False
 			self.runCode(self.wizard[self.currStep]["code"])
 			if self.runCode(self.wizard[self.currStep]["code_async"]):
