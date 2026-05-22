@@ -16,7 +16,8 @@ def getChannelOnFallbackTuner():
 				FeInfo = service and service.frontendInfo()
 				if FeInfo:
 					SNR = FeInfo.getFrontendInfo(iFrontendInformation.signalQuality)
-					if not SNR and (config.usage.remote_fallback_enabled.value or config.clientmode.enabled.value):
+					AGC = FeInfo.getFrontendInfo(iFrontendInformation.signalPower)
+					if not SNR and not AGC and (config.usage.remote_fallback_enabled.value or config.clientmode.enabled.value):
 						channelOnFallbackTuner = True
 	except Exception:
 		return False
