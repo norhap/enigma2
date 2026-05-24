@@ -412,7 +412,7 @@
 
 	<screen name="WizardSummary" position="0,0" size="480,320">
 		<widget source="text" render="Label" position="0,10" size="480,259" font="FdLcD;45" horizontalAlignment="center" />
-		<widget source="parent.list" render="Label" position="0,270" size="0,0" font="FdLcD;40" horizontalAlignment="center" >
+		<widget source="parent.list" render="Label" position="0,270" size="480,49" font="FdLcD;40" horizontalAlignment="center" >
 			<convert type="StringListSelection" />
 		</widget>
 	</screen>
