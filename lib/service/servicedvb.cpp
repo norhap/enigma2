@@ -4166,6 +4166,9 @@ void eDVBServicePlay::setQpipMode(bool value, bool audio)
 
 		m_decoder->set();
 	}
+
+	if (m_soft_decoder)
+		m_soft_decoder->setNoAudio(m_noaudio, m_current_audio_pid);
 }
 
 // ==================== Software Descrambling ====================
