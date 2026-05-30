@@ -309,15 +309,15 @@
 
 <!-- standby -->
 	<screen name="StandbySummary" position="5,0" size="471,320">
-		<widget source="global.CurrentTime" render="Label" position="center,67" size="265,133" font="FdLcD;85" horizontalAlignment="center" transparent="1" noWrap="1" >
-			<convert type="ClockToText">Format:%H:%M</convert>
+		<widget source="global.CurrentTime" render="Label" position="80,50" size="300,130" font="FdLcD;110" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
+			<convert type="ClockToText"></convert>
 		</widget>
-		<eLabel position="118,200" size="236,1" backgroundColor="white" />
-		<widget source="global.CurrentTime" render="Label" position="0,220" size="471,45" font="FdLcD;34" horizontalAlignment="center" transparent="1" noWrap="1">
-			<convert type="ClockToText">Format:%d.%m.%Y</convert>
+		<widget source="global.CurrentTime" render="Label" position="0,190" size="479,80" font="FdLcD;75" horizontalAlignment="center" zPosition="10">
+			<convert type="ClockToText">LongDate</convert>
 		</widget>
-		<panel name="MeinRecordingPanel" />
-		<panel name="MeinTunerInfoPanel" />
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,275" size="30,30" zPosition="3" alphaTest="blend">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
 	</screen>
 
 <!-- Plugin browser -->
