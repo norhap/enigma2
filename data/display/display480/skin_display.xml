@@ -316,7 +316,7 @@
 		<widget source="global.CurrentTime" render="Label" position="80,50" size="300,130" font="FdLcD;110" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
 			<convert type="ClockToText"></convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,190" size="479,80" font="FdLcD;75" horizontalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="0,190" size="479,85" font="FdLcD;75" horizontalAlignment="center" zPosition="10">
 			<convert type="ClockToText">LongDate</convert>
 		</widget>
 		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,275" size="30,30" zPosition="3" alphaTest="blend">
