@@ -82,7 +82,7 @@
 		<panel name="LCDPiconStatusIcons" />
 		<panel name="LCDRecordIcon" />
 		<!-- panel name="LCDInfoBarStartTime" / -->
-		<eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" />
+		<!-- eLabel text="-" position="520,390" size="70,70" foregroundColor="white" font="FdLcD;60" /-->
 		<panel name="LCDPiconInfoBarEndTime" />
 	</screen>
 
@@ -91,14 +91,14 @@
 		<widget source="global.CurrentTime" render="Label" position="150,50" size="500,160" font="FdLcD;150" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
 			<convert type="ClockToText"></convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,250" size="779,115" font="FdLcD;123" font="FdLcD;90" horizontalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="0,250" size="779,115" font="FdLcD;123" horizontalAlignment="center" zPosition="10">
 			<convert type="ClockToText">LongDate</convert>
 		</widget>
 		<widget source="session.RecordState" render="FixedLabel" position="375,370" zPosition="3" size="70,70" text=" ">
 			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
 			<convert type="ConditionalShowHide">Blink</convert>
 		</widget>
-		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="375,360"  size="70,70" >
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="375,370"  size="70,70" >
 			<convert type="ConditionalShowHide" />
 		</widget>
 	</screen>

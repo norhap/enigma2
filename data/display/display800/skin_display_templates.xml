@@ -41,6 +41,13 @@
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
+		<widget source="session.RecordState" render="FixedLabel" position="375,385" zPosition="3" size="70,70" text=" ">
+			<convert type="ConfigEntryTest">config.usage.blinking_rec_symbol_during_recording,True,CheckSourceBoolean</convert>
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>
+		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="375,385"  size="70,70" >
+			<convert type="ConditionalShowHide" />
+		</widget>
 	</screen>
 	<!--
 	<screen name="LCDInfoBarStartEndTime">
