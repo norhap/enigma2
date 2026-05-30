@@ -1532,6 +1532,9 @@ msgstr "Comportamiento cuando pulsa STOP en una película"
 msgid "Can be used for different fps between external subtitles and video."
 msgstr "Se puede usar para diferentes fps entre subtítulos externos y video."
 
+msgid "Can't write to"
+msgstr "No se puede escribir en"
+
 msgid "Change bouquets in quickzap"
 msgstr "Cambiar de bouquet en zapeo rápido"
 

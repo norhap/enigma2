@@ -25,7 +25,7 @@ import Screens.InfoBar
 from Tools import ASCIItranslit, Trashcan
 from Tools.Alternatives import ResolveCiAlternative
 from Tools.CIHelper import cihelper
-from Tools.Directories import SCOPE_CONFIG, fileReadXML, getRecordingFilename, resolveFilename, isPluginInstalled
+from Tools.Directories import SCOPE_CONFIG, fileReadXML, fileAccess, getRecordingFilename, resolveFilename, isPluginInstalled
 from Tools.Notifications import AddNotification, AddNotificationWithCallback, AddPopup
 from Tools.XMLTools import stringToXML
 
@@ -346,7 +346,12 @@ class RecordTimer(Timer):
 		return entry
 
 	def doActivate(self, w):
-		if getRecordingStorageSize() < 100:  # Storage < 100 MB not recording.
+		path = config.usage.default_path.value
+		if not fileAccess(path, "w"):  # Storage not writeable.
+			w.state = RecordTimerEntry.StateEnded
+			message = _("Can't write to") + " " + path
+			AddPopup(message, type=MessageBox.TYPE_ERROR, timeout=10)
+		elif getRecordingStorageSize() < 100:  # Storage < 100 MB not recording.
 			w.state = RecordTimerEntry.StateEnded
 			AddPopup(_("Recording failed: Storage device free size %d MB.") % getRecordingStorageSize(), type=MessageBox.TYPE_ERROR, timeout=0, id="TimerRecordingFailed")
 		# when activating a timer for servicetype 4097,
