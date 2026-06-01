@@ -183,6 +183,7 @@ class Network:
 		lines.append("")
 		fileWriteLines(self.networkConfigFile, lines, source=MODULE_NAME)
 		self.configuredNetworkAdapters = self.configuredInterfaces
+		self.writeNameserverConfig()
 
 	def writeNameserverConfig(self):
 		try:
@@ -245,7 +246,6 @@ class Network:
 			self.configuredNetworkAdapters = self.configuredInterfaces
 			# load ns only once
 			self.loadNameserverConfig()
-			self.writeNameserverConfig()
 			print("[Network] read configured interface:", ifaces)
 			# remove any password before info is printed to the debug log
 			safe_ifaces = self.ifaces.copy()
