@@ -186,18 +186,10 @@ class Network:
 
 	def writeNameserverConfig(self):
 		try:
-			if config.usage.dns.value.lower() in ("dhcp-router", "staticip"):
-				fp = open('/etc/resolv.conf', 'w')
+			with open('/etc/nameservers.conf', 'w') as fd:
 				for nameserver in self.nameservers:
-					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-				fp.close()
-				if (isfile("/etc/enigma2/nameservers")):
-					Console().ePopen('rm /etc/enigma2/nameservers')
-			else:
-				fp = open('/etc/enigma2/nameservers', 'w')
-				for nameserver in self.nameservers:
-					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-				fp.close()
+					fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+			# eConsoleAppContainer().execute("sed -i '/@reboot root cp -af \/etc\/nameservers.conf \/run\/resolv.conf/d' /etc/crontab ; sed -i '$a@reboot root cp -af /etc/nameservers.conf /run/resolv.conf' /etc/crontab")
 		except Exception as err:
 			print("[Network] DNS %s" % err)
 
@@ -273,12 +265,8 @@ class Network:
 
 		resolv = []
 		try:
-			if config.usage.dns.value.lower() in ("dhcp-router", "staticip"):
-				fp = open('/etc/resolv.conf', 'r')
-			else:
-				fp = open('/etc/enigma2/nameservers', 'r')
-			resolv = fp.readlines()
-			fp.close()
+			with open('/etc/resolv.conf', 'r') as fd:
+				resolv = fd.readlines()
 			self.nameservers = []
 		except Exception as err:
 			print("[Network] DNS %s" % err)
@@ -457,6 +445,7 @@ class Network:
 			self.commands.append(self.ifconfig_bin + " eth0 down")
 			self.commands.append(self.ifconfig_bin + " ath0 down")
 			self.commands.append(self.ifconfig_bin + " wlan0 up")
+			self.commands.append(self.ifconfig_bin + " wlan3 up")
 		if mode == 'wlan-mpci':
 			self.commands.append(self.ifconfig_bin + " eth0 down")
 			self.commands.append(self.ifconfig_bin + " wlan0 down")
@@ -464,6 +453,7 @@ class Network:
 		if mode == 'lan':
 			self.commands.append(self.ifconfig_bin + " eth0 up")
 			self.commands.append(self.ifconfig_bin + " wlan0 down")
+			self.commands.append(self.ifconfig_bin + " wlan3 down")
 			self.commands.append(self.ifconfig_bin + " ath0 down")
 		self.commands.append(self.avahi_daemon + " start")
 		self.resetNetworkConsole.eBatch(self.commands, self.resetNetworkFinished, [mode, callback], debug=True)
