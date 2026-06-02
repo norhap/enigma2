@@ -5,11 +5,13 @@ exec_prefix="@exec_prefix@"
 datarootdir="@datarootdir@"
 
 export PATH="${PATH}:/usr/script"
-
-# IP static require nameservers not lost in /var/run
-if [ "$(grep -i static /etc/network/interfaces)" != "" ]; then
-	cp -af /etc/nameservers.conf /var/run/resolv.conf
-fi
+# patch in wrynose not lost DNS with IP static
+# Fix require in volatiles initscripts -> l root root 0755 /var/run /run
+# if [ -e "@localstatedir@/run/resolv.conf" ]; then
+# 	if [ "$(grep -i static /etc/network/interfaces)" != "" ]; then
+# 		cp -af @sysconfdir@/nameservers.conf @localstatedir@/run/resolv.conf
+# 	fi
+# fi
 
 # LC_ALL available?
 if [ -z $LC_ALL ]; then

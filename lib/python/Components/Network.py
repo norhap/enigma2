@@ -187,7 +187,8 @@ class Network:
 
 	def writeNameserverConfig(self):
 		try:
-			with open('/etc/nameservers.conf', 'w') as fd:
+			# with open('/etc/nameservers.conf', 'w') as fd:  # patch in wrynose not lost DNS with IP static
+			with open('/etc/resolv.conf', 'w') as fd:
 				for nameserver in self.nameservers:
 					fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 			# eConsoleAppContainer().execute("sed -i '/@reboot root cp -af \/etc\/nameservers.conf \/run\/resolv.conf/d' /etc/crontab ; sed -i '$a@reboot root cp -af /etc/nameservers.conf /run/resolv.conf' /etc/crontab")
