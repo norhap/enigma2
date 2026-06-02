@@ -1191,9 +1191,8 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 				else:
 					if self.queryWirelessDevice(self.iface):
 						self.session.openWithCallback(self.AdapterSetupClosed, AdapterSetup, self.iface)
-					else:
-						eConsoleAppContainer().execute(f"ifconfig {self.iface} up")
-						self.session.openWithCallback(self.WlanScanClosed, WlanScan, self.iface)
+					else:  # Adapter settings WLAN -> OK
+						self.showErrorMessage() if iNetwork.getAdapterAttribute(self.iface, "up") else self.session.openWithCallback(self.AdapterSetupClosed, AdapterSetup, self.iface)  # Display error message only if the interface is active; otherwise, there is an opportunity to activate and configure the WLAN interface.
 			else:
 				self.session.openWithCallback(self.AdapterSetupClosed, AdapterSetup, self.iface)
 		if self["menulist"].getCurrent()[1] == 'test':
@@ -1212,7 +1211,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 			else:
 				if self.queryWirelessDevice(self.iface):
 					self.session.openWithCallback(self.WlanScanClosed, WlanScan, self.iface)
-				else:
+				else:  # Scan wireless networks -> OK
 					eConsoleAppContainer().execute(f"ifconfig {self.iface} up")
 					self.session.openWithCallback(self.WlanScanClosed, WlanScan, self.iface)
 		if self["menulist"].getCurrent()[1] == 'wlanstatus':
