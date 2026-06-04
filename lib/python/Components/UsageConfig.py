@@ -33,7 +33,10 @@ def InitUsageConfig():
 		("cloudflare", "Cloudflare"),
 		("nordvpn", "NordVPN"),
 		("opendns", "OpenDNS"),
-		("opendns-2", "OpenDNS-2")
+		("opendns-2", "OpenDNS-2"),
+		("adguard", "AdGuard DNS"),
+		("shurfshark", "Surfshark VPN"),
+		("comodo", "Comodo Secure DNS")
 	])
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)

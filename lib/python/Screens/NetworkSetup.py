@@ -361,6 +361,12 @@ class DNSSettings(Setup, HelpableScreen):
 				servername = "NordVPN"
 			elif "1.1." in dns:
 				servername = "Cloudflare"
+			elif "94.140." in dns:
+				servername = "AdGuard DNS"
+			elif "162.252." in dns:
+				servername = "Surfshark VPN"
+			elif "8.26." in dns:
+				servername = "Comodo Secure DNS"
 			else:
 				servernameisp = "DHCP Router" if not staticip else ""
 		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns) if not servernameisp else _("WARNING: '%s' is not configured with your used ISP DNS.\n\nActive server: %s\nDNS: %s\n\nPress LEFT RIGHT OK or MENU and choose \"DHCP Router\".") % (config.usage.dns.value, servernameisp, dns)
@@ -401,6 +407,12 @@ class DNSSettings(Setup, HelpableScreen):
 			self.nameserverEntries = [NoSave(ConfigIP(default=[1, 1, 1, 1])), NoSave(ConfigIP(default=[1, 0, 0, 1]))]
 		elif config.usage.dns.value == 'nordvpn':
 			self.nameserverEntries = [NoSave(ConfigIP(default=[103, 86, 96, 100])), NoSave(ConfigIP(default=[103, 86, 99, 100]))]
+		elif config.usage.dns.value == 'adguard':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[94, 140, 14, 15])), NoSave(ConfigIP(default=[94, 140, 15, 16]))]
+		elif config.usage.dns.value == 'shurfshark':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[162, 252, 172, 57])), NoSave(ConfigIP(default=[149, 154, 159, 92]))]
+		elif config.usage.dns.value == 'comodo':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[8, 26, 56, 26])), NoSave(ConfigIP(default=[8, 20, 247, 20]))]
 		else:
 			self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
 		self.list = []
