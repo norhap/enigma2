@@ -19165,6 +19165,9 @@ msgstr "India"
 msgid "< PREV NEXT >  Move"
 msgstr "< PREV NEXT >  Mover"
 
+msgid "WARNING: '%s' is not configured with your used ISP DNS.\n\nActive server: %s\nDNS: %s\n\nPress LEFT RIGHT OK or MENU and choose \"DHCP Router\"."
+msgstr "ADVERTENCIA: '%s' no está configurado con el DNS de su ISP utilizado.\n\nServidor activo: %s\nDNS: %s\n\nPulse IZQUIERDA DERECHA OK o MENÚ y elija \"DHCP Router\"."
+
 msgid "WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."
 msgstr "ADVERTENCIA: Esta película es una transmisión IPTV.\nNo se puede cortar con este tipo de stream."
 

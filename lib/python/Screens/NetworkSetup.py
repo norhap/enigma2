@@ -333,10 +333,11 @@ class DNSSettings(Setup, HelpableScreen):
 		self.list = []
 		self.createSetup()
 		strdns = str(self.backupNameserverList)
-		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
+		dns = strdns.replace("[[", "").replace("]]", "").replace(",", ".").replace("].", "]").replace(". ", ".")
 		servername = ""
-		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
-			global staticip
+		servernameisp = ""
+		global staticip
+		if config.usage.dns.value in ("dhcp-router", "staticip"):
 			if staticip:
 				config.usage.dns.default = "staticip"
 				config.usage.dns.value = config.usage.dns.default
@@ -346,22 +347,24 @@ class DNSSettings(Setup, HelpableScreen):
 				config.usage.dns.value = config.usage.dns.default
 				servername = "DHCP Router"
 		else:
-			if "8. 8." in dns:
+			if "8.8." in dns:
 				servername = "Google DNS"
-			elif "9. 9. 9. 9" in dns:
+			elif "9.9.9.9" in dns:
 				servername = "Quad9 Security"
-			elif "9. 9. 9. 10" in dns:
+			elif "9.9.9.10" in dns:
 				servername = "Quad9 No Security"
-			elif "222. 222" in dns:
+			elif "222.222" in dns:
 				servername = "OpenDNS"
-			elif "220. 222" in dns:
+			elif "220.222" in dns:
 				servername = "OpenDNS-2"
-			elif "103. 86" in dns:
+			elif "103.86" in dns:
 				servername = "NordVPN"
-			else:
+			elif "1.1." in dns:
 				servername = "Cloudflare"
-		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns)
-		if "0. 0. 0. 0" in dns:
+			else:
+				servernameisp = "DHCP Router" if not staticip else ""
+		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns) if not servernameisp else _("WARNING: '%s' is not configured with your used ISP DNS.\n\nActive server: %s\nDNS: %s\n\nPress LEFT RIGHT OK or MENU and choose \"DHCP Router\".") % (config.usage.dns.value, servernameisp, dns)
+		if "0.0.0.0" in dns:
 			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
 			self["introduction"] = StaticText(introduction)
 		elif config.usage.dns.value == "staticip":
@@ -369,7 +372,15 @@ class DNSSettings(Setup, HelpableScreen):
 			self["key_blue"].setText(_("Remove DNS"))
 			self["introduction"] = StaticText(_("%s\n\nYou can use the DNS provided by other servers in Static IP Router.\n\nIf you add or remove DNS, start editing the DNS 1 first") % introduction)
 		elif config.usage.dns.value == "dhcp-router":
-			self["introduction"] = StaticText(_("%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver.") % introduction)
+			try:
+				with open('/etc/resolv.conf', 'r') as fd:
+					for dnsisp in fd.readlines():
+						if dnsisp and "nameserver" in dnsisp:
+							dnsisp = dnsisp.split("nameserver ")[1]
+							self["introduction"] = StaticText(_("%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver.") % introduction if dns not in str(dnsisp) else introduction)
+							break
+			except Exception:
+				self["introduction"] = StaticText(introduction)
 		else:
 			self["introduction"] = StaticText(introduction)
 
