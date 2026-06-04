@@ -361,9 +361,8 @@
     </screen>
 
 <!-- misc-->
-	<screen name="SimpleSummary" position="fill">
-		<widget source="parent.Title" render="Label" position="top" size="*,100" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
-		<panel position="bottom" size="*,24" name="SummaryClockPanel" />
+	<screen name="SimpleSummary" position="0,0" size="480,320">
+		<widget source="parent.Title" render="Label" position="5,5" size="474,314" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
 	</screen>
 
 <!-- Plugin browser -->

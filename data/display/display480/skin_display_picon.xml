@@ -287,9 +287,8 @@
 	</screen>
 
 <!-- misc-->
-	<screen name="SimpleSummary" position="5,0" size="471,320">
-		<widget source="parent.Title" render="Label" position="0,0" size="471,237" font="FdLcD;38" foregroundColor="#87CEFA" horizontalAlignment="center" verticalAlignment="center" />
-		<panel name="SummaryClockPanel" />
+	<screen name="SimpleSummary" position="0,0" size="480,320">
+		<widget source="parent.Title" render="Label" position="5,5" size="474,314" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
 	</screen>
 	<screen name="WizardSummary" position="0,0" size="480,320">
 		<widget source="text" render="Label" position="0,10" size="480,219" font="FdLcD;40" horizontalAlignment="center" />
