@@ -333,9 +333,10 @@ class DNSSettings(Setup, HelpableScreen):
 		self.list = []
 		self.createSetup()
 		strdns = str(self.backupNameserverList)
-		dns = strdns.replace("[[", "").replace("]]", "").replace(",", ".").replace("].", "]").replace(". ", ".")
+		dns = strdns.replace("]]", "").replace("[", "").replace("].", " ").replace(",", ".").replace("].", "").replace(". ", ".")
 		servername = ""
 		servernameisp = ""
+		dnsisp = ""
 		global staticip
 		if config.usage.dns.value in ("dhcp-router", "staticip"):
 			if staticip:
@@ -369,7 +370,15 @@ class DNSSettings(Setup, HelpableScreen):
 				servername = "Comodo Secure DNS"
 			else:
 				servernameisp = "DHCP Router" if not staticip else ""
-		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS: %s") % (servername, dns) if not servernameisp else _("WARNING: '%s' is not configured with your used ISP DNS.\n\nActive server: %s\nDNS: %s\n\nPress LEFT RIGHT OK or MENU and choose \"DHCP Router\".") % (config.usage.dns.value, servernameisp, dns)
+		try:
+			with open('/etc/resolv.conf', 'r') as fd:
+				for dnsisp in fd.readlines():
+					if dnsisp and "nameserver" in dnsisp:
+						dnsisp = dnsisp.split("nameserver ")[1]
+						break
+		except Exception:
+			pass
+		introduction = _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS 1: %s\nDNS 2: %s") % (servername, dns.split(" ")[0], dns.split(" ")[1]) if str(dnsisp) and dns not in str(dnsisp) and not servernameisp else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nActive server: %s\nDNS 1: %s") % (servername, dns) if str(dnsisp) and dns in str(dnsisp) and not servernameisp else _("WARNING: '%s' is not configured with your used ISP DNS.\n\nActive server: %s\nDNS: %s\n\nPress LEFT RIGHT OK or MENU and choose \"DHCP Router\".") % (config.usage.dns.value, servernameisp, dns)
 		if "0.0.0.0" in dns:
 			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
 			self["introduction"] = StaticText(introduction)
@@ -378,15 +387,7 @@ class DNSSettings(Setup, HelpableScreen):
 			self["key_blue"].setText(_("Remove DNS"))
 			self["introduction"] = StaticText(_("%s\n\nYou can use the DNS provided by other servers in Static IP Router.\n\nIf you add or remove DNS, start editing the DNS 1 first") % introduction)
 		elif config.usage.dns.value == "dhcp-router":
-			try:
-				with open('/etc/resolv.conf', 'r') as fd:
-					for dnsisp in fd.readlines():
-						if dnsisp and "nameserver" in dnsisp:
-							dnsisp = dnsisp.split("nameserver ")[1]
-							self["introduction"] = StaticText(_("%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver.") % introduction if dns not in str(dnsisp) else introduction)
-							break
-			except Exception:
-				self["introduction"] = StaticText(introduction)
+			self["introduction"] = StaticText(_("%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver.") % introduction if dns not in str(dnsisp) else introduction)
 		else:
 			self["introduction"] = StaticText(introduction)
 
