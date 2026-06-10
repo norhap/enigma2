@@ -269,7 +269,7 @@ class Network:
 		for ifacename, iface in ifaces.items():
 			if ifacename in self.ifaces:
 				self.ifaces[ifacename]["dhcp"] = iface["dhcp"]
-				if iface["dhcp"] and self.ifaces[ifacename]["up"]:
+				if iface["dhcp"] and self.ifaces[ifacename]["up"] and islink(self.resolvFile):
 					DHCP = True
 		if not self.console.appContainers:
 			# save configured interfacelist
