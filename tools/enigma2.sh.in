@@ -7,7 +7,7 @@ datarootdir="@datarootdir@"
 export PATH="${PATH}:/usr/script"
 # patch in wrynose not lost DNS with IP static
 # Fix require in volatiles initscripts -> l root root 0755 /var/run /run
-# if [ -e "@localstatedir@/run/resolv.conf" ]; then
+# if [ -e @localstatedir@/run/resolv.conf ]; then
 # 	if [ "$(grep -i static /etc/network/interfaces)" != "" ]; then
 # 		cp -af @sysconfdir@/nameservers.conf @localstatedir@/run/resolv.conf
 # 	fi
@@ -27,6 +27,9 @@ fi
 if [ "$(grep -i config.misc.firstrun=False /etc/enigma2/settings)" == "" ]; then
 	DEBUG_LVL=4
 	ENIGMA_DEBUG_TIME=1
+	if [ ! -e @sysconfdir@/resolv.conf ]; then
+		ln -sf @localstatedir@/run/resolv.conf @sysconfdir@/resolv.conf
+	fi
 fi
 
 if [ -f "@bindir@/libreader" ]; then
@@ -195,8 +198,8 @@ while : ; do
 			/sbin/reboot
 			;;
 		5)
-			if ! grep -q config.misc.RestartUI /etc/enigma2/settings; then
-				echo "config.misc.RestartUI=true" >>/etc/enigma2/settings
+			if [ "$(grep -i config.misc.RestartUI /etc/enigma2/settings)" == "" ]; then
+				echo "config.misc.RestartUI=true" > /etc/enigma2/settings
 			fi
 			;;
 		6)

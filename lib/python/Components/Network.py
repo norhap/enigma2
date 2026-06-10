@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from enigma import eConsoleAppContainer
 
-from os import listdir
-from os.path import basename, exists, isdir, isfile, realpath
+from os import listdir, unlink, symlink, remove
+from os.path import basename, exists, isdir, isfile, realpath, getsize, islink
 import re
 import netifaces as ni
 from Components.Console import Console
@@ -25,6 +25,8 @@ class Network:
 		self.nameservers = []
 		self.ethtool_bin = "/usr/sbin/ethtool"
 		self.ip_bin = "/sbin/ip"
+		self.resolvFile = "/etc/resolv.conf"
+		self.varResolvFile = "/var/run/resolv.conf"
 		self.ifconfig_bin = "/sbin/ifconfig"
 		self.ifdown_bin = "/sbin/ifdown"
 		self.ifup_bin = "/sbin/ifup"
@@ -186,14 +188,39 @@ class Network:
 		self.writeNameserverConfig()
 
 	def writeNameserverConfig(self):
-		try:
-			# with open('/etc/nameservers.conf', 'w') as fd:  # patch in wrynose not lost DNS with IP static
-			with open('/etc/resolv.conf', 'w') as fd:
-				for nameserver in self.nameservers:
-					fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-			# eConsoleAppContainer().execute("sed -i '/@reboot root cp -af \/etc\/nameservers.conf \/run\/resolv.conf/d' /etc/crontab ; sed -i '$a@reboot root cp -af /etc/nameservers.conf /run/resolv.conf' /etc/crontab")
-		except Exception as err:
-			print("[Network] DNS %s" % err)
+		useDHCPforDNS = False
+		for iface in sorted(self.ifaces.keys()):
+			if self.ifaces[iface]["up"] and self.ifaces[iface]["dhcp"]:
+				useDHCPforDNS = True
+		if useDHCPforDNS and config.usage.dns.value == "ispdns":
+			try:
+				if not islink(self.resolvFile) and exists(self.varResolvFile):
+					if exists(self.resolvFile):
+						remove(self.resolvFile)
+					symlink(self.varResolvFile, self.resolvFile)
+			except Exception:
+				pass
+		else:
+			try:
+				if islink(self.resolvFile):
+					unlink(self.resolvFile)
+			except Exception:
+				pass
+			dns_counter_number = 0
+			try:
+				with open(self.resolvFile, 'w') as fd:
+					for nameserver in self.nameservers:
+						fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+				with open(self.resolvFile, "r") as fr:
+					dns_counter_number = fr.read().split().count("nameserver")
+				if getsize(self.resolvFile) == 0 or fileContains(self.resolvFile, "0.0.0.0") and dns_counter_number == 1:
+					for iface in sorted(self.ifaces.keys()):
+						if self.getAdapterAttribute(iface, "up"):
+							for nameserver in [self.getAdapterAttribute(iface, "gateway")]:
+								with open(self.resolvFile, 'w') as fd:
+									fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+			except Exception as err:
+				print("[Network] DNS %s" % err)
 
 	def loadNetworkConfig(self, iface, callback=None):
 		interfaces = []
@@ -238,15 +265,19 @@ class Network:
 				if split[0] in ("pre-down", "post-down"):
 					if "predown" in self.ifaces[currif]:
 						self.ifaces[currif]["predown"] = i
-
+		DHCP = False
 		for ifacename, iface in ifaces.items():
 			if ifacename in self.ifaces:
 				self.ifaces[ifacename]["dhcp"] = iface["dhcp"]
+				if iface["dhcp"] and self.ifaces[ifacename]["up"]:
+					DHCP = True
 		if not self.console.appContainers:
 			# save configured interfacelist
 			self.configuredNetworkAdapters = self.configuredInterfaces
 			# load ns only once
 			self.loadNameserverConfig()
+			if not DHCP:
+				self.writeNameserverConfig()
 			print("[Network] read configured interface:", ifaces)
 			# remove any password before info is printed to the debug log
 			safe_ifaces = self.ifaces.copy()
@@ -266,7 +297,7 @@ class Network:
 
 		resolv = []
 		try:
-			with open('/etc/resolv.conf', 'r') as fd:
+			with open(self.resolvFile, 'r') as fd:
 				resolv = fd.readlines()
 			self.nameservers = []
 		except Exception as err:
