@@ -88,7 +88,7 @@
 
 	<!-- STANDBY -->
 	<screen name="StandbySummary" position="0,0" size="800,480">
-		<widget source="global.CurrentTime" render="Label" position="150,50" size="500,160" font="FdLcD;150" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="0,50" size="779,160" font="FdLcD;150" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
 			<convert type="ClockToText"></convert>
 		</widget>
 		<widget source="global.CurrentTime" render="Label" position="0,250" size="779,134" font="FdLcD;123" horizontalAlignment="center" zPosition="10">

@@ -313,7 +313,7 @@
 
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="480,320">
-		<widget source="global.CurrentTime" render="Label" position="80,50" size="300,130" font="FdLcD;110" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="0,50" size="479,130" font="FdLcD;110" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
 			<convert type="ClockToText"></convert>
 		</widget>
 		<widget source="global.CurrentTime" render="Label" position="0,190" size="479,85" font="FdLcD;75" horizontalAlignment="center" zPosition="10">
