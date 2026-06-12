@@ -96,7 +96,7 @@ class SelectImage(Screen):
 						if imagetyp not in self.imagesList:
 							self.imagesList[imagetyp] = {}
 						self.imagesList[imagetyp][file] = {'link': file, 'name': file.split(sep)[-1]}
-				except:
+				except Exception:
 					pass
 
 		if not self.imagesList:
@@ -112,7 +112,7 @@ class SelectImage(Screen):
 				try:
 					req = Request(url, None, {"User-agent": "Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5"})
 					self.jsonlist.update(load(urlopen(req, timeout=3)))
-				except:
+				except Exception:
 					print("[FlashImage] getImagesList Error: Unable to load json data from URL '%s'!" % url)
 			self.imagesList = dict(self.jsonlist)
 			for mountdir in ["/media", "/media/net", "/media/autofs"]:
@@ -182,8 +182,8 @@ class SelectImage(Screen):
 				self.setIndex = self["list"].getSelectedIndex()
 				self.imagesList = []
 				self.getImagesList()
-			except:
-				self.session.open(MessageBox, _("Cannot delete downloaded image"), MessageBox.TYPE_ERROR, timeout=3)
+			except Exception as err:
+				self.session.open(MessageBox, _("Cannot delete downloaded image.\nERROR:") + " " + str(err), MessageBox.TYPE_ERROR, timeout=3)
 
 	def otherImages(self):
 		self.session.openWithCallback(self.otherImagesCallback, ChoiceBox, list=sorted([(feedinfo.attrib["name"], feedinfo.attrib) for feedinfo in self.url_feeds if feedinfo.tag == "ImageFeed" and "OpenPLi" not in feedinfo.attrib["name"]]), windowTitle=_("Select Image"))
@@ -325,7 +325,7 @@ class FlashImage(Screen):
 						try:
 							statvfspath = statvfs(path)
 							return (statvfspath.f_bavail * statvfspath.f_frsize) / (1 << 20)
-						except:
+						except Exception:
 							pass
 
 				def checkIfDevice(path, diskstats):
@@ -350,7 +350,7 @@ class FlashImage(Screen):
 				return ((devices[0][1] > 500 and (devices[0][0], True)) if devices else mounts and mounts[0][1] > 500 and (mounts[0][0], False)) or (None, None)
 			try:
 				self.destination, isDevice = findmedia(isfile(self.BACKUP_SCRIPT) and hasattr(config.plugins, "autobackup") and config.plugins.autobackup.where.value or "/media/hdd")
-			except:
+			except Exception:
 				self.session.openWithCallback(self.abort, MessageBox, _("No storage devices found"), type=MessageBox.TYPE_ERROR, simple=True)
 				return
 			if self.destination:
@@ -369,7 +369,7 @@ class FlashImage(Screen):
 							self.session.openWithCallback(self.startBackupsettings, MessageBox, _("Can only find a network drive to store the backup this means after the flash the autorestore will not work. Alternativaly you can mount the network drive after the flash and perform a manufacurer reset to autorestore"), simple=True)
 					else:
 						self.startDownload()
-				except:
+				except Exception:
 					pass
 			else:
 				self.session.openWithCallback(self.abort, MessageBox, _("Could not find suitable media - Please remove some downloaded images or insert a media (e.g. USB stick) with sufficiant free space and try again!"), type=MessageBox.TYPE_ERROR, simple=True)
@@ -444,7 +444,7 @@ class FlashImage(Screen):
 		try:
 			ZipFile(self.zippedimage, 'r').extractall(self.unzippedimage)
 			self.flashimage()
-		except:
+		except Exception:
 			self.session.openWithCallback(self.abort, MessageBox, _("Error during unzipping image\n") + f"{self.imagename}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def flashimage(self):

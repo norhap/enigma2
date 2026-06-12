@@ -16745,6 +16745,9 @@ msgstr "Botón F3"
 msgid "Show image items"
 msgstr "Mostrar elementos de imagen"
 
+msgid "Cannot delete downloaded image.\nERROR:"
+msgstr "No se puede eliminar la imagen descargada.\nERROR:"
+
 msgid "Cannot delete file"
 msgstr "No se puede eliminar el archivo"
 
