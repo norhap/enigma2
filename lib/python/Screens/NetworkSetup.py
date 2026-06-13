@@ -946,12 +946,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.session.openWithCallback(self.DNSSettingsClosed, DNSSettings)
 
 	def newConfig(self):
-		if self.activateInterfaceEntry.value:
-			config.iface.active_entry.value = config.iface.active_entry.default
-			config.iface.active_entry.save()
-		else:
-			config.iface.active_entry.value = False
-			config.iface.active_entry.save()
 		if self["config"].getCurrent() == self.InterfaceEntry:
 			self.createSetup()
 		if self["config"].getCurrent() == self.dhcpEntry:
@@ -987,7 +981,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		config.network.save()
 
 	def keySaveConfirm(self, ret=False):
-		self.activateInterfaceEntry.value = True if config.iface.active_entry.value else False
 		if BoxInfo.getItem("WakeOnLAN") and iNetwork.isWirelessInterface(self.iface):
 			config.network.wol.value = False
 			config.network.wol.save()
