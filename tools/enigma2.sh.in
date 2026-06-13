@@ -23,12 +23,16 @@ if [ -d /home/root ]; then
 	cd
 fi
 
-# Create debug first run
+# Create debug first run - link resolv.conf to /var/run for check Internet via timezone - Up in Iface WLAN for view Available Wireless Networks in Wizard.
 if [ "$(grep -i config.misc.firstrun=False /etc/enigma2/settings)" == "" ]; then
 	DEBUG_LVL=4
 	ENIGMA_DEBUG_TIME=1
 	if [ ! -e @sysconfdir@/resolv.conf ]; then
 		ln -sf @localstatedir@/run/resolv.conf @sysconfdir@/resolv.conf
+	fi
+	WLAN=`find /sys/class/net/ -name "*wlan*" | sed 's/\/sys\/class\/net\///g'`
+	if [ -e /sys/class/net/"${WLAN}" ]; then
+		ifconfig "${WLAN}" up
 	fi
 fi
 
