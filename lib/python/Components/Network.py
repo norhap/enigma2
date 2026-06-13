@@ -155,17 +155,17 @@ class Network:
 						lines.append(f"iface {ifacename} inet dhcp")
 						lines.append("udhcpc_opts -S -T6 -t10")
 			if not iface['dhcp']:
-				lines.append(f"iface {ifacename} inet static")
+				enabled = iface["up"] is True
+				enabledComment = "" if enabled else "# "
+				lines.append(f"{enabledComment}iface {ifacename} inet static")
 				if "ip" in iface:
-					if not iface["up"]:
-						lines.append("# static ip not up")  # for script network.sh.
 					dummy = ".".join([str(x) for x in iface["ip"]])
-					lines.append(f"address {dummy}")
+					lines.append(f"{enabledComment}	address {dummy}")
 					dummy = ".".join([str(x) for x in iface["netmask"]])
-					lines.append(f"netmask {dummy}")
+					lines.append(f"{enabledComment}	netmask {dummy}")
 					if "gateway" in iface:
 						dummy = ".".join([str(x) for x in iface["gateway"]])
-						lines.append(f"gateway {dummy}")
+						lines.append(f"{enabledComment}	gateway {dummy}")
 			if "configStrings" in iface:
 				configStrings = iface["configStrings"]
 				if not iface["up"]:
@@ -190,7 +190,7 @@ class Network:
 	def writeNameserverConfig(self):
 		useDHCPforDNS = False
 		for iface in sorted(self.ifaces.keys()):
-			if self.ifaces[iface]["up"] and self.ifaces[iface]["dhcp"]:
+			if self.ifaces[iface]["up"] and self.ifaces[iface]["dhcp"] and fileContains(self.varResolvFile, "nameserver"):
 				useDHCPforDNS = True
 		if useDHCPforDNS and config.usage.dns.value == "ispdns":
 			try:
@@ -269,7 +269,7 @@ class Network:
 		for ifacename, iface in ifaces.items():
 			if ifacename in self.ifaces:
 				self.ifaces[ifacename]["dhcp"] = iface["dhcp"]
-				if iface["dhcp"] and self.ifaces[ifacename]["up"] and islink(self.resolvFile):
+				if iface["dhcp"] and self.ifaces[ifacename]["up"] and (islink(self.resolvFile) and fileContains(self.varResolvFile, "nameserver")):
 					DHCP = True
 		if not self.console.appContainers:
 			# save configured interfacelist
