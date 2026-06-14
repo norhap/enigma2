@@ -427,6 +427,7 @@ class FlashImage(Screen):
 		self.session.openWithCallback(self.abort, MessageBox, _("Error during downloading image\n") + f"{self.imagename}\n" + f"{reason}", type=MessageBox.TYPE_ERROR, simple=True)
 
 	def downloadEnd(self, outputFile):
+		self.zippedimage = outputFile
 		self.downloader.stop()
 		self["progress_counter"].hide()
 		self.unzip()
