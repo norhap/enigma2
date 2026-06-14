@@ -274,7 +274,7 @@ class Network:
 						resolvconf = False
 						break
 				elif exists(self.resolvFile):
-				# dns_counter_number = 0
+					# dns_counter_number = 0
 					with open(self.resolvFile, "r") as fr:
 						# dns_counter_number = fr.read().split().count("nameserver")
 						if not re.search(r'[1-9]', fr.read()):

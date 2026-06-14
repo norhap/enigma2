@@ -311,21 +311,17 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 
 class DNSSettings(Setup, HelpableScreen):
 	def __init__(self, session):
-		Setup.__init__(self, session=session, setup="")
+		Setup.__init__(self, session, None,
+			yellow_button={'function': self.addDNServer, 'helptext': _("Add DNS")},
+			blue_button={'function': self.removeDNServer, 'helptext': _("Remove DNS")})
 		HelpableScreen.__init__(self)
 		self.setTitle(_("Settings DNS Server"))
-		self["key_yellow"] = StaticText("")
-		self["key_blue"] = StaticText("")
-		self["addAction"] = HelpableActionMap(self, ["ColorActions"], {
-			"red": (self.keyCancel, _("Exit nameserver configuration")),
-			"green": (self.keySave, _("Activate current configuration")),
-			"yellow": (self.addDNServer, _("Add DNS")),
-			"blue": (self.removeDNServer, _("Remove DNS"))
-		})
 		self["actions"] = HelpableActionMap(self, ["OkCancelActions", "ColorActions", "ConfigListActions"], {
 			"red": (self.keyCancel, _("Exit nameserver configuration")),
 			"cancel": (self.keyCancel, _("Exit nameserver configuration")),
 			"green": (self.keySave, _("Activate current configuration")),
+			"yellow": self.addDNServer,
+			"blue": self.removeDNServer,
 			"menu": (self.keyMenu, _("Display selection list as a selection menu")),
 		})
 		self.list = []
@@ -339,7 +335,7 @@ class DNSSettings(Setup, HelpableScreen):
 			else:
 				config.usage.dns.value = "dhcp-router"
 				config.usage.dns.save()
-		self["introduction"] = StaticText(_("Press LEFT RIGHT OK or MENU to choose another server."))
+		self["description"].setText(_("Press LEFT RIGHT OK or MENU to choose another server.") if config.usage.dns.value != 'custom' else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."))
 
 	def dnsISP(self):
 		iNetwork.clearNameservers()
@@ -354,7 +350,7 @@ class DNSSettings(Setup, HelpableScreen):
 		self.nameservers = iNetwork.getNameserverList()
 		if config.usage.dns.value not in ("ispdns"):
 			gateway = False
-			self["introduction"].setText(_("Press LEFT RIGHT OK or MENU to choose another server.") if config.usage.dns.value != 'custom' else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."))
+			self["description"].setText(_("Press LEFT RIGHT OK or MENU to choose another server.") if config.usage.dns.value != 'custom' else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."))
 			if config.usage.dns.value == 'google':
 				self.nameserverEntries = [NoSave(ConfigIP(default=[8, 8, 8, 8])), NoSave(ConfigIP(default=[8, 8, 4, 4]))]
 			elif config.usage.dns.value == 'quad9security':
@@ -409,7 +405,7 @@ class DNSSettings(Setup, HelpableScreen):
 		if config.usage.dns.value not in ("ispdns", "custom"):
 			self["key_yellow"].setText("")
 			self["key_blue"].setText("")
-			self["introduction"].setText("")
+			self["description"].setText("")
 		else:
 			if config.usage.dns.value == 'custom':
 				self["key_yellow"].setText(_("Add DNS"))
