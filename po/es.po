@@ -5820,9 +5820,6 @@ msgstr "¿Está bien este modo de video?"
 msgid "Isle of Man"
 msgstr "Isla de Man"
 
-msgid "ISP DNS"
-msgstr "DNS ISP"
-
 msgid "Israel"
 msgstr "Israel"
 

@@ -24,10 +24,8 @@ visuallyImpairedCommentary = "NAR qad"
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
-	config.usage.dns = ConfigSelection(default="ispdns", choices=[
-		("staticip", _("Static IP Router")),
+	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
 		("google", "Google DNS"),
-		("custom", _("Custom")),
 		("quad9security", "Quad9 Security"),
 		("quad9nosecurity", "Quad9 No Security"),
 		("cloudflare", "Cloudflare"),
@@ -36,8 +34,9 @@ def InitUsageConfig():
 		("opendns-2", "OpenDNS-2"),
 		("adguard", "AdGuard DNS"),
 		("shurfshark", "Surfshark VPN"),
+		("custom", _("Custom")),
 		("comodo", "Comodo Secure DNS"),
-		("ispdns", _("ISP DNS")),
+		("staticip", _("Static IP Router")),
 		("dhcp-router", "DHCP Router"),
 	])
 	config.usage.subnetwork = ConfigYesNo(default=True)

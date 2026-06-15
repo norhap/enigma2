@@ -192,7 +192,7 @@ class Network:
 		for iface in sorted(self.ifaces.keys()):
 			if self.ifaces[iface]["up"] and self.ifaces[iface]["dhcp"]:
 				useDHCPforDNS = True
-		if useDHCPforDNS and config.usage.dns.value == "ispdns" and fileContains(self.varResolvFile, "nameserver"):
+		if useDHCPforDNS and config.usage.dns.value == "dhcp-router" and fileContains(self.varResolvFile, "nameserver"):
 			try:
 				if not islink(self.resolvFile):
 					if exists(self.resolvFile):

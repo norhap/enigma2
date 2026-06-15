@@ -325,7 +325,6 @@ class DNSSettings(Setup, HelpableScreen):
 			"menu": (self.keyMenu, _("Display selection list as a selection menu")),
 		})
 		self.list = []
-		self.createSetup()
 		self.addDNS = False
 		global staticip
 		if config.usage.dns.value in ("dhcp-router", "staticip"):
@@ -337,50 +336,32 @@ class DNSSettings(Setup, HelpableScreen):
 				config.usage.dns.save()
 		self["description"].setText(_("Press LEFT RIGHT OK or MENU to choose another server.") if config.usage.dns.value != 'custom' else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."))
 
-	def dnsISP(self):
-		iNetwork.clearNameservers()
-		ifaces = sorted(iNetwork.ifaces.keys())
-		for iface in ifaces:
-			if iNetwork.getAdapterAttribute(iface, "up"):
-				return iNetwork.getAdapterAttribute(iface, "gateway")
-		return [0, 0, 0, 0]
-
 	def createSetup(self):  # Updatable list of servers to write IP DNS.
 		self.updateStatus()
 		self.nameservers = iNetwork.getNameserverList()
-		if config.usage.dns.value not in ("ispdns"):
-			gateway = False
-			self["description"].setText(_("Press LEFT RIGHT OK or MENU to choose another server.") if config.usage.dns.value != 'custom' else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."))
-			if config.usage.dns.value == 'google':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[8, 8, 8, 8])), NoSave(ConfigIP(default=[8, 8, 4, 4]))]
-			elif config.usage.dns.value == 'quad9security':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[9, 9, 9, 9])), NoSave(ConfigIP(default=[149, 112, 112, 112]))]
-			elif config.usage.dns.value == 'quad9nosecurity':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[9, 9, 9, 10])), NoSave(ConfigIP(default=[149, 112, 112, 10]))]
-			elif config.usage.dns.value == 'opendns':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 222, 222])), NoSave(ConfigIP(default=[208, 67, 220, 220]))]
-			elif config.usage.dns.value == 'opendns-2':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 220, 222])), NoSave(ConfigIP(default=[208, 67, 222, 220]))]
-			elif config.usage.dns.value == 'cloudflare':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[1, 1, 1, 1])), NoSave(ConfigIP(default=[1, 0, 0, 1]))]
-			elif config.usage.dns.value == 'nordvpn':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[103, 86, 96, 100])), NoSave(ConfigIP(default=[103, 86, 99, 100]))]
-			elif config.usage.dns.value == 'adguard':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[94, 140, 14, 15])), NoSave(ConfigIP(default=[94, 140, 15, 16]))]
-			elif config.usage.dns.value == 'shurfshark':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[162, 252, 172, 57])), NoSave(ConfigIP(default=[149, 154, 159, 92]))]
-			elif config.usage.dns.value == 'comodo':
-				self.nameserverEntries = [NoSave(ConfigIP(default=[8, 26, 56, 26])), NoSave(ConfigIP(default=[8, 20, 247, 20]))]
-			elif config.usage.dns.value == 'custom':
-				self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
-			else:
-				self.dnsips = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
-				for x in self.dnsips:
-					if "0.0.0.0" in str(x):
-						self.nameserverEntries = [NoSave(ConfigIP(default=self.dnsISP()))]
+		self["description"].setText(_("Press LEFT RIGHT OK or MENU to choose another server.") if config.usage.dns.value != 'custom' else _("Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."))
+		if config.usage.dns.value == 'google':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[8, 8, 8, 8])), NoSave(ConfigIP(default=[8, 8, 4, 4]))]
+		elif config.usage.dns.value == 'quad9security':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[9, 9, 9, 9])), NoSave(ConfigIP(default=[149, 112, 112, 112]))]
+		elif config.usage.dns.value == 'quad9nosecurity':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[9, 9, 9, 10])), NoSave(ConfigIP(default=[149, 112, 112, 10]))]
+		elif config.usage.dns.value == 'opendns':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 222, 222])), NoSave(ConfigIP(default=[208, 67, 220, 220]))]
+		elif config.usage.dns.value == 'opendns-2':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 220, 222])), NoSave(ConfigIP(default=[208, 67, 222, 220]))]
+		elif config.usage.dns.value == 'cloudflare':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[1, 1, 1, 1])), NoSave(ConfigIP(default=[1, 0, 0, 1]))]
+		elif config.usage.dns.value == 'nordvpn':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[103, 86, 96, 100])), NoSave(ConfigIP(default=[103, 86, 99, 100]))]
+		elif config.usage.dns.value == 'adguard':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[94, 140, 14, 15])), NoSave(ConfigIP(default=[94, 140, 15, 16]))]
+		elif config.usage.dns.value == 'shurfshark':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[162, 252, 172, 57])), NoSave(ConfigIP(default=[149, 154, 159, 92]))]
+		elif config.usage.dns.value == 'comodo':
+			self.nameserverEntries = [NoSave(ConfigIP(default=[8, 26, 56, 26])), NoSave(ConfigIP(default=[8, 20, 247, 20]))]
 		else:
-			gateway = True
-			self.nameserverEntries = [NoSave(ConfigIP(default=self.dnsISP()))]
+			self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
 		self.list = []
 		self["config"].list = self.list
 		self.ListDNServers = getConfigListEntry(_("DNS server name"), config.usage.dns)
@@ -388,12 +369,7 @@ class DNSSettings(Setup, HelpableScreen):
 		i = 1
 		if hasattr(self, "nameserverEntries"):
 			for x in self.nameserverEntries:
-				self.list.append(getConfigListEntry(_("DNS %d") % (i) if not gateway else _("Gateway"), x))
-				i += 1
-		else:
-			self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
-			for x in self.nameserverEntries:
-				self.list.append(getConfigListEntry(_("DNS %d") % (i) if not gateway else _("Gateway"), x))
+				self.list.append(getConfigListEntry(_("DNS %d") % (i), x))
 				i += 1
 		self.dnsLength = ""
 		dnsNameList = self["config"].getList()
@@ -402,7 +378,7 @@ class DNSSettings(Setup, HelpableScreen):
 			self.dnsLength = item
 
 	def updateStatus(self):
-		if config.usage.dns.value not in ("ispdns", "custom"):
+		if config.usage.dns.value not in ("dhcp-router", "custom"):
 			self["key_yellow"].setText("")
 			self["key_blue"].setText("")
 			self["description"].setText("")
@@ -682,7 +658,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		else:
 			self.iface = networkinfo
 			self.essid = essid
-		self.resolvFile = "/etc/resolv.conf"
 		self.extended = None
 		self.applyConfigRef = None
 		self.finished_cb = None
@@ -828,42 +803,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=self.dhcpdefault or False))
 		self.gatewayConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "gateway") or [0, 0, 0, 0]))
 		nameserver = (iNetwork.getNameserverList() + [[0, 0, 0, 0]] * 2)[0:2]
-		if exists(self.resolvFile):
-			try:
-				with open(self.resolvFile, "r") as fr:
-					dns_counter_number = fr.read().split().count("nameserver")
-					if dns_counter_number == 1:
-						with open(self.resolvFile, "r") as fd:
-							for line in fd.readlines():
-								if "nameserver" in line:
-									dnsprimary = line.replace("nameserver ", "")
-									dnssecondary = "0.0.0.0"
-									self.primaryDNS = NoSave(ConfigText(default=dnsprimary))
-									self.secondaryDNS = NoSave(ConfigText(default=dnssecondary))
-									break
-					elif dns_counter_number == 2:
-						dnsprimary = ""
-						with open(self.resolvFile, "r") as fr:
-							for line in fr.read().split('\n', 1):
-								if "nameserver" in line:
-									dnsprimary = line.replace("nameserver ", "")
-									self.primaryDNS = NoSave(ConfigText(default=dnsprimary))
-									break
-						with open(self.resolvFile, "r") as fd:
-							for line in fd.read().split('\n', 1):
-								if "nameserver" in line and dnsprimary not in line:
-									dnssecondary = line.replace("nameserver ", "")
-									self.secondaryDNS = NoSave(ConfigText(default=dnssecondary))
-									break
-					else:
-						self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
-						self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
-			except Exception:
-				self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
-				self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
-		else:
-			self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
-			self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
+		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
+		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
 		if self.activateInterfaceEntry.value:
 			if exists(interfacesfile):
 				with open(interfacesfile) as f:
@@ -1015,6 +956,12 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		if self.iface.startswith("zt"):
 			if not staticip:  # with VPN ZeroTier do not enable DHCP use VPN with static IP always.
 				self.dhcpConfigEntry.value = False
+		if not staticip and config.usage.dns.value == "staticip":
+			config.usage.dns.value = "dhcp-router"
+			config.usage.dns.save()
+		elif staticip and config.usage.dns.value == "dhcp-router":
+			config.usage.dns.value = "staticip"
+			config.usage.dns.save()
 		if ret:
 			self.applyConfigRef = None
 			iNetwork.setAdapterAttribute(self.iface, "up", self.activateInterfaceEntry.value)
