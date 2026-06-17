@@ -206,21 +206,9 @@ class Network:
 					unlink(self.resolvFile)
 			except Exception:
 				pass
-			# dns_counter_number = 0
-			try:
-				with open(self.resolvFile, 'w') as fd:
-					for nameserver in self.nameservers:
-						fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-				with open(self.resolvFile, "r") as fr:
-					# dns_counter_number = fr.read().split().count("nameserver")
-					if not re.search(r'[1-9]', fr.read()):
-						for iface in sorted(self.ifaces.keys()):
-							if self.getAdapterAttribute(iface, "up"):
-								for nameserver in [self.getAdapterAttribute(iface, "gateway")]:
-									with open(self.resolvFile, 'w') as fd:
-										fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
-			except Exception as err:
-				print("[Network] DNS %s" % err)
+			with open(self.resolvFile, 'w') as fd:
+				for nameserver in self.nameservers:
+					fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
 
 	def loadNetworkConfig(self, iface, callback=None):
 		interfaces = []
