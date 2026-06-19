@@ -108,6 +108,7 @@ service_types_tv_ref.setPath(makeServiceQueryStr((
 	eServiceReferenceDVB.avcSdTv,
 	eServiceReferenceDVB.avcHdTv,
 	eServiceReferenceDVB.nvecTv,
+	eServiceReferenceDVB.nvecTv20,
 	eServiceReferenceDVB.user134,
 	eServiceReferenceDVB.user195,
 )))
