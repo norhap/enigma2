@@ -1,4 +1,4 @@
-from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, iServiceInformation, setPreferredTuner, eStreamServer, iRecordableServicePtr, eDVBLocalTimeHandler, eTimer
+from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, iServiceInformation, setPreferredTuner, eStreamServer, iRecordableService, iRecordableServicePtr, eDVBLocalTimeHandler, eTimer
 from Components.ImportChannels import ImportChannels
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
@@ -16,7 +16,6 @@ import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
 from Screens.MessageBox import MessageBox
-from Components.Sources.StreamService import StreamServiceList
 from os.path import exists
 from Screens.InfoBarGenerics import streamrelay
 from Components.PluginComponent import plugins
@@ -41,6 +40,9 @@ class Navigation:
 		self.pnav = pNavigation()
 		self.pnav.m_event.get().append(self.dispatchEvent)
 		self.pnav.m_record_event.get().append(self.dispatchRecordEvent)
+		self.activeStreamings = []
+		self.activeStreamingsByClient = {}
+		eStreamServer.getInstance().streamStatusChanged.get().append(self.streamStatusChangedCB)
 		self.event = []
 		self.record_event = []
 		self.currentlyPlayingServiceReference = None
@@ -383,13 +385,32 @@ class Navigation:
 			ret = self.pnav and self.pnav.stopRecordService(service)
 		return ret
 
+	def streamStatusChangedCB(self, status, sref, host):
+		if "127.0.0.1" in host:  # Ignore local host.
+			return
+		print(f"[Navigation] Stream status changed: {status}, {sref}, {host}.")
+		wasStreaming = bool(self.activeStreamings)
+		key = (host or "", sref or "")
+		if status == 0:
+			ref, count = self.activeStreamingsByClient.get(key, (sref, 0))
+			self.activeStreamingsByClient[key] = (ref, count + 1)
+		else:
+			ref, count = self.activeStreamingsByClient.get(key, (sref, 0))
+			if count > 1:
+				self.activeStreamingsByClient[key] = (ref, count - 1)
+			else:
+				self.activeStreamingsByClient.pop(key, None)
+		self.activeStreamings = list(dict.fromkeys(ref for ref, count in self.activeStreamingsByClient.values() if ref))
+
+		if wasStreaming != bool(self.activeStreamings):
+			for x in self.record_event:
+				x(None, iRecordableService.evStart if self.activeStreamings else iRecordableService.evEnd)
+
 	def getRecordings(self, simulate=False, type=pNavigation.isAnyRecording):
-		recs = self.pnav and self.pnav.getRecordings(simulate)
-		if not simulate and StreamServiceList:
-			for rec in recs[:]:
-				if rec.__deref__() in StreamServiceList:
-					recs.remove(rec)
-		return recs
+		if ((type == pNavigation.isAnyRecording) or (type & pNavigation.isStreaming == pNavigation.isStreaming)) and self.activeStreamings:
+			return self.pnav and self.pnav.getRecordings(simulate, type) + self.activeStreamings
+		else:
+			return self.pnav and self.pnav.getRecordings(simulate, type)
 
 	def getCurrentService(self):
 		if not self.currentlyPlayingService:

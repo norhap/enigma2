@@ -1,10 +1,18 @@
 #include <sys/select.h>
 #include <unistd.h>
+#include <errno.h>
 #include <string.h>
+#include <stdint.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <sys/poll.h>
+#include <signal.h>
+#include <sys/time.h>
+#include <sstream>
 
 #include <lib/base/eerror.h>
 #include <lib/base/init.h>
@@ -16,6 +24,10 @@
 #include <lib/dvb/encoder.h>
 #include <lib/dvb/pmt.h>
 #include <lib/service/service.h>
+
+#ifndef O_CLOEXEC
+#define O_CLOEXEC 0
+#endif
 
 DEFINE_REF(eEncoder);
 
@@ -34,6 +46,7 @@ eEncoder::eEncoder()
 
 	instance = this;
 	eServiceCenter::getInstance(service_center);
+	bcm_encoder = false;
 
 	if(service_center)
 	{
@@ -65,7 +78,20 @@ eEncoder::eEncoder()
 			snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/decoder", index);
 
 			if (CFile::parseInt(&decoder_index, filename) < 0)
+			{
+				// VU+
+				snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/demux", index);
+				if (CFile::parseInt(&decoder_index, filename) < 0)
+					break;
+			}
+
+			snprintf(filename, sizeof(filename), "/dev/%s%d", bcm_encoder ? "bcm_enc" : "encoder", index);
+			if (access(filename, bcm_encoder ? (R_OK | W_OK) : R_OK) < 0)
+			{
+				eDebug("[eEncoder] stopping encoder scan at %d: %s is not usable: errno=%d (%s)",
+						index, filename, errno, strerror(errno));
 				break;
+			}
 
 			/* the connected video decoder for "Xtrend" transcoding / encoding or for Broadcom HDMI recording */
 			if((navigation_instance_normal = new eNavigation(service_center, decoder_index)) == nullptr)
@@ -81,7 +107,9 @@ eEncoder::eEncoder()
 				navigation_instance_alternative = nullptr;
 
 			encoder.push_back(EncoderContext(navigation_instance_normal, navigation_instance_alternative));
+			encoder.back().backend = bcm_encoder ? EncoderContext::backend_bcm : EncoderContext::backend_proc;
 		}
+
 	}
 }
 
@@ -130,20 +158,29 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 		return(-1);
 	}
 
+	auto cleanup_proc_encoder = [&]() {
+		if(encoder[encoder_index].encoder_fd >= 0)
+		{
+			close(encoder[encoder_index].encoder_fd);
+			encoder[encoder_index].encoder_fd = -1;
+		}
+		if(encoder[encoder_index].file_fd >= 0)
+		{
+			close(encoder[encoder_index].file_fd);
+			encoder[encoder_index].file_fd = -1;
+		}
+		encoder[encoder_index].navigation_instance = nullptr;
+		encoder[encoder_index].state = EncoderContext::state_idle;
+	};
 	// Set encoder parameters - unified for both BCM and HiSilicon encoders
 	// BCM parameters now enabled for URL parameter support via Port 8001
 	// This makes transtreamproxy obsolete and enables SoftCSA for transcoding
+
 	if(bcm_encoder)
 	{
 		vcodec_node = "video_codec";
 		acodec_node = "audio_codec";
 		encoder[encoder_index].navigation_instance = encoder[encoder_index].navigation_instance_alternative;
-	}
-	else
-	{
-		vcodec_node = "vcodec";
-		acodec_node = "acodec";
-		encoder[encoder_index].navigation_instance = encoder[encoder_index].navigation_instance_normal;
 
 		// Write transcoding parameters to /proc/stb/encoder for BCM
 		eDebug("[eEncoder] BCM encoder %d: setting bitrate=%d framerate=%d", encoder_index, bitrate, framerate);
@@ -176,15 +213,31 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 		CFile::writeInt(filename, aspectratio);
 		*/
 	}
+	else
+	{
+		vcodec_node = "vcodec";
+		acodec_node = "acodec";
+		encoder[encoder_index].navigation_instance = encoder[encoder_index].navigation_instance_normal;
 
-	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/framerate", encoder_index);
-	CFile::writeInt(filename, framerate);
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/bitrate", encoder_index);
+		CFile::writeInt(filename, bitrate);
 
-	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/interlaced", encoder_index);
-	CFile::writeInt(filename, interlaced);
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/width", encoder_index);
+		CFile::writeInt(filename, width);
 
-	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/aspectratio", encoder_index);
-	CFile::writeInt(filename, aspectratio);
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/height", encoder_index);
+		CFile::writeInt(filename, height);
+
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/framerate", encoder_index);
+		CFile::writeInt(filename, framerate);
+
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/interlaced", encoder_index);
+		CFile::writeInt(filename, interlaced);
+
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/aspectratio", encoder_index);
+		CFile::writeInt(filename, aspectratio);
+
+	}
 
 	if(!vcodec.empty())
 	{
@@ -206,8 +259,12 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 		}
 	}
 
-	snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/apply", encoder_index);
-	CFile::writeInt(filename, 1);
+	if(!bcm_encoder) {
+
+		snprintf(filename, sizeof(filename), "/proc/stb/encoder/%d/apply", encoder_index);
+		CFile::writeInt(filename, 1);
+
+	}
 
 	if(source_file.empty())
 		encoder[encoder_index].file_fd = -1;
@@ -215,7 +272,8 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	{
 		if((encoder[encoder_index].file_fd = open(source_file.c_str(), O_RDONLY, 0)) < 0)
 		{
-			eWarning("[eEncoder] open source file failed");
+			eWarning("[eEncoder] open source file '%s' failed: errno=%d (%s)", source_file.c_str(), errno, strerror(errno));
+			cleanup_proc_encoder();
 			return(-1);
 		}
 	}
@@ -224,7 +282,8 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 
 	if((encoder[encoder_index].encoder_fd = open(filename, bcm_encoder ? O_RDWR : O_RDONLY)) < 0)
 	{
-		eWarning("[eEncoder] open encoder failed");
+		eWarning("[eEncoder] open encoder '%s' failed: errno=%d (%s)", filename, errno, strerror(errno));
+		cleanup_proc_encoder();
 		return(-1);
 	}
 
@@ -250,8 +309,7 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 			default:
 			{
 				eWarning("[eEncoder] only encoder 0 and encoder 1 implemented");
-				close(encoder[encoder_index].encoder_fd);
-				encoder[encoder_index].encoder_fd = -1;
+				cleanup_proc_encoder();
 				return(-1);
 			}
 		}
@@ -265,37 +323,29 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	if(encoder[encoder_index].navigation_instance->playService(serviceref) < 0)
 	{
 		eWarning("[eEncoder] navigation->playservice failed");
+		if(encoder[encoder_index].navigation_instance)
+			encoder[encoder_index].navigation_instance->stopService();
+		cleanup_proc_encoder();
 		return(-1);
 	}
 
 	return(encoder[encoder_index].encoder_fd);
 }
 
-int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize)
+int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize,
+		int bitrate, int width, int height, int framerate, int interlaced, int aspectratio,
+		const std::string &vcodec, const std::string &acodec)
 {
-	/* these are hardcoded because they're ignored anyway */
-
-/*
-	static const int hdmi_encoding_bitrate = 100000;
-	static const int hdmi_encoding_width = 1280;
-	static const int hdmi_encoding_height = 720;
-	static const int hdmi_encoding_framerate = 25000;
-	static const int hdmi_encoding_interlaced = 0;
-	static const int hdmi_encoding_aspect_ratio = 0;
-	static const char *hdmi_encoding_vcodec = "h264";
-	static const char *hdmi_encoding_acodec = "aac";
-*/
-
-	int hdmi_encoding_bitrate = eConfigManager::getConfigIntValue("config.hdmirecord.bitrate", 8 * 1024 * 1024);
-	int hdmi_encoding_width = eConfigManager::getConfigIntValue("config.hdmirecord.width", 1280);
-	int hdmi_encoding_height = eConfigManager::getConfigIntValue("config.hdmirecord.height", 720);
-	int hdmi_encoding_framerate = eConfigManager::getConfigIntValue("config.hdmirecord.framerate", 50000);
-	int hdmi_encoding_interlaced = eConfigManager::getConfigIntValue("config.hdmirecord.interlaced", 0);
-	int hdmi_encoding_aspect_ratio = eConfigManager::getConfigIntValue("config.hdmirecord.aspectratio", 0);
-	std::string hdmi_encoding_vcodec = eConfigManager::getConfigValue("config.hdmirecord.vcodec");
+	int hdmi_encoding_bitrate = bitrate > 0 ? bitrate : eConfigManager::getConfigIntValue("config.hdmirecord.bitrate", 8 * 1024 * 1024);
+	int hdmi_encoding_width = width > 0 ? width : eConfigManager::getConfigIntValue("config.hdmirecord.width", 1280);
+	int hdmi_encoding_height = height > 0 ? height : eConfigManager::getConfigIntValue("config.hdmirecord.height", 720);
+	int hdmi_encoding_framerate = framerate > 0 ? framerate : eConfigManager::getConfigIntValue("config.hdmirecord.framerate", 50000);
+	int hdmi_encoding_interlaced = interlaced >= 0 ? interlaced : eConfigManager::getConfigIntValue("config.hdmirecord.interlaced", 0);
+	int hdmi_encoding_aspect_ratio = aspectratio >= 0 ? aspectratio : eConfigManager::getConfigIntValue("config.hdmirecord.aspectratio", 0);
+	std::string hdmi_encoding_vcodec = vcodec.empty() ? eConfigManager::getConfigValue("config.hdmirecord.vcodec") : vcodec;
 	if(hdmi_encoding_vcodec.empty())
 		hdmi_encoding_vcodec = "h264";
-	std::string hdmi_encoding_acodec = eConfigManager::getConfigValue("config.hdmirecord.acodec");
+	std::string hdmi_encoding_acodec = acodec.empty() ? eConfigManager::getConfigValue("config.hdmirecord.acodec") : acodec;
 	if(hdmi_encoding_acodec.empty())
 		hdmi_encoding_acodec = "aac";
 
@@ -326,6 +376,23 @@ int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize
 
 	encoder[0].navigation_instance = encoder[0].navigation_instance_normal;
 
+	auto cleanup_hdmi_encoder = [&]() {
+		if(encoder[0].encoder_fd >= 0)
+		{
+			close(encoder[0].encoder_fd);
+			encoder[0].encoder_fd = -1;
+		}
+		if(encoder[0].file_fd >= 0)
+		{
+			close(encoder[0].file_fd);
+			encoder[0].file_fd = -1;
+		}
+		if(encoder[0].navigation_instance)
+			encoder[0].navigation_instance->stopService();
+		encoder[0].navigation_instance = nullptr;
+		encoder[0].state = EncoderContext::state_idle;
+	};
+
 	CFile::writeInt("/proc/stb/encoder/0/bitrate", hdmi_encoding_bitrate);
 	CFile::writeInt("/proc/stb/encoder/0/width", hdmi_encoding_width);
 	CFile::writeInt("/proc/stb/encoder/0/height", hdmi_encoding_height);
@@ -349,6 +416,7 @@ int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize
 	if(encoder[0].navigation_instance->playService(serviceref) < 0)
 	{
 		eWarning("[eEncoder] navigation->playservice failed");
+		cleanup_hdmi_encoder();
 		return(-1);
 	}
 
@@ -356,7 +424,8 @@ int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize
 
 	if((encoder[0].encoder_fd = open(filename, O_RDONLY)) < 0)
 	{
-		eWarning("[eEncoder] open encoder failed");
+		eWarning("[eEncoder] open encoder '%s' failed: errno=%d (%s)", filename, errno, strerror(errno));
+		cleanup_hdmi_encoder();
 		return(-1);
 	}
 
@@ -554,6 +623,7 @@ void eEncoder::navigation_event_1(int event)
 
 void eEncoder::EncoderContext::thread(void)
 {
+
 	hasStarted();
 
 	eDebug("[EncoderContext %x] start ioctl transcoding", (int)pthread_self());

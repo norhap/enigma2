@@ -2,6 +2,7 @@
 #define __DVB_ENCODER_H_
 
 #include <vector>
+#include <string>
 
 #include <lib/nav/core.h>
 #include <lib/dvb/streamserver.h>
@@ -28,20 +29,44 @@ class eEncoder
 		{
 			public:
 
+				enum Backend
+				{
+					backend_proc,
+					backend_bcm,
+				};
+
 				EncoderContext(eNavigation *navigation_instance_normal_in, eNavigation *navigation_instance_alternative_in)
 				{
 					file_fd = -1;
 					encoder_fd = -1;
+					output_fd = -1;
+					backend = backend_proc;
 					state = state_idle;
 					navigation_instance = nullptr;
 					navigation_instance_normal = navigation_instance_normal_in;
 					navigation_instance_alternative = navigation_instance_alternative_in;
 					stream_thread = nullptr;
+					bitrate = 0;
+					width = 0;
+					height = 0;
+					framerate = 0;
+					interlaced = 0;
+					aspectratio = 0;
 				}
 
+				Backend backend;
 				int encoder_fd;
 				int file_fd;
+				int output_fd;
 				eDVBRecordStreamThread *stream_thread;
+				int bitrate;
+				int width;
+				int height;
+				int framerate;
+				int interlaced;
+				int aspectratio;
+				std::string vcodec;
+				std::string acodec;
 
 				enum
 				{
@@ -61,6 +86,7 @@ class eEncoder
 
 		std::vector<EncoderContext> encoder;
 		bool bcm_encoder;
+
 		ePtr<eConnection> m_nav_event_connection_0;
 		ePtr<eConnection> m_nav_event_connection_1;
 
@@ -85,7 +111,9 @@ class eEncoder
 
 		int allocateEncoder(const std::string &serviceref, int &buffersize, int bitrate, int width, int height, int framerate, int interlaced, int aspectratio,
 				const std::string &vcodec = "", const std::string &acodec = "");
-		int allocateHDMIEncoder(const std::string &serviceref, int &buffersize);
+		int allocateHDMIEncoder(const std::string &serviceref, int &buffersize,
+				int bitrate = 0, int width = 0, int height = 0, int framerate = 0, int interlaced = -1, int aspectratio = -1,
+				const std::string &vcodec = "", const std::string &acodec = "");
 		void freeEncoder(int encoderfd);
 		int getUsedEncoderCount();
 

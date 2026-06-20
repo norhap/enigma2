@@ -209,6 +209,16 @@ typedef long time_t;
 %immutable eHdmiCEC::messageReceived;
 %immutable eHdmiCEC::addressChanged;
 %immutable ePythonMessagePump::recv_msg;
+%immutable eStreamServer::availabilityChanged;
+%immutable eStreamServer::sourceStateChanged;
+%immutable eStreamServer::upstreamStateChanged;
+%immutable eStreamServer::upstreamBitrateChanged;
+%immutable eStreamServer::rtspClientCountChanged;
+%immutable eStreamServer::rtspStateChanged;
+%immutable eStreamServer::hlsStateChanged;
+%immutable eStreamServer::uriParametersChanged;
+%immutable eStreamServer::dbusError;
+%immutable eStreamServer::ping;
 %immutable eDVBLocalTimeHandler::m_timeUpdated;
 %immutable eFCCServiceManager::m_fcc_event;
 %immutable eTuxtxtApp::appClosed;
@@ -352,6 +362,18 @@ public:
 %template(PSignal2VIS) PSignal2<void,int,const char *c>;
 
 %typemap(out) PSignal2VIS {
+	$1 = $input->get();
+}
+
+template<class R, class P0, class P1, class P2> class PSignal3
+{
+public:
+	PyObject *get();
+};
+
+%template(PSignal3VISS) PSignal3<void,int,const char *,const char *>;
+
+%typemap(out) PSignal3VISS {
 	$1 = $input->get();
 }
 
