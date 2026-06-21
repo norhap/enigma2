@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # shamelessly copied from pliExpertInfo (Vali, Mirakels, Littlesat)
 from os.path import exists
-from enigma import iServiceInformation, iPlayableService, eDVBCI_UI
+from enigma import iServiceInformation, iPlayableService, eDVBCI_UI, eAVControl
 
 from Components.Converter.Converter import Converter
 from Components.Element import cached
@@ -219,18 +219,13 @@ class PliExtraInfo(Poll, Converter):
 		return caid + identifiers if caid and not streamrelay else iptosat + "   SID:%04x" % int(info.getInfo(iServiceInformation.sSID)) if iptosat else iptv if iptv else caid if streamrelay else "FTA" + identifiers if not getChannelOnFallbackTuner() else _("Tuner fallback")
 
 	def createResolution(self, info):
-		xres = info.getInfo(iServiceInformation.sVideoWidth)
-		if xres == -1:
-			return ""
-		yres = info.getInfo(iServiceInformation.sVideoHeight)
-		mode = ("i", "p", " ")[info.getInfo(iServiceInformation.sProgressive)]
-		fps = (info.getInfo(iServiceInformation.sFrameRate) + 500) // 1000
-		if not fps or fps == -1:
-			try:
-				fps = (int(open("/proc/stb/vmpeg/0/framerate", "r").read()) + 500) // 1000
-			except Exception:
-				pass
-		return "%sx%s%s%s" % (xres, yres, mode, fps)
+		avControl = eAVControl.getInstance()
+		video_rate = avControl.getFrameRate(0)
+		video_pol = "p" if avControl.getProgressive() else "i"
+		video_width = avControl.getResolutionX(0)
+		video_height = avControl.getResolutionY(0)
+		fps = str((video_rate + 500) // 1000)
+		return f"{video_width}x{video_height} {fps}{video_pol}"
 
 	def createGamma(self, info):
 		return ("SDR", "HDR", "HDR10", "HLG", "")[info.getInfo(iServiceInformation.sGamma)]
@@ -383,7 +378,7 @@ class PliExtraInfo(Poll, Converter):
 					if self.type == "Resolution":
 						return self.createResolution(info)
 					if self.type == "ResolutionString":
-						return addspace(self.createResolution(info)) + self.createGamma(info)
+						return addspace(self.createResolution(info)) + self.createGamma(info) if self.createGamma(info) else addspace(self.createResolution(info))
 					if self.type == "VideoCodec":
 						return self.createVideoCodec(info)
 					if self.type == "Gamma":
