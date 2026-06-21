@@ -30,6 +30,8 @@ class eConsoleAppContainer: public sigc::trackable, public iObject
 	std::queue<struct queue_data> outbuf;
 	ePtr<eSocketNotifier> in, out, err;
 	std::vector<char> buffer;
+	bool m_line_mode = false;
+	int startProcess(const char *cmdline, const char * const argv[]);
 	void readyRead(int what);
 	void readyErrRead(int what);
 	void readyWrite(int what);
@@ -39,6 +41,7 @@ public:
 	~eConsoleAppContainer();
 	int setCWD( const char *path );
 	void setBufferSize(int size);
+	void setLineMode(bool enable) { m_line_mode = enable; }
 	int execute( const char *str );
 	int execute( const char *cmdline, const char *const argv[] );
 	int getPID() { return pid; }

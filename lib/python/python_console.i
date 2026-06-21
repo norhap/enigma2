@@ -183,6 +183,16 @@ eConsolePy_execute(eConsolePy* self, PyObject *argt)
 	return NULL;
 }
 
+	static PyObject *
+	eConsolePy_setLineMode(eConsolePy* self, PyObject *args)
+	{
+		int enable = 0;
+		if (!PyArg_ParseTuple(args, "i", &enable))
+			return NULL;
+		self->cont->setLineMode(enable != 0);
+		Py_RETURN_NONE;
+	}
+
 static PyObject *
 eConsolePy_write(eConsolePy* self, PyObject *args)
 {
@@ -301,6 +311,9 @@ eConsolePy_readFromFile(eConsolePy* self, PyObject *args)
 static PyMethodDef eConsolePy_methods[] = {
 	{(char*)"setCWD", (PyCFunction)eConsolePy_setCWD, METH_VARARGS,
 	 (char*)"set working dir"
+	},
+	{(char*)"setLineMode", (PyCFunction)eConsolePy_setLineMode, METH_VARARGS,
+	(char*)"enable line-buffered stdout/stderr via /usr/bin/stdbuf"
 	},
 	{(char*)"setBufferSize", (PyCFunction)eConsolePy_setBufferSize, METH_VARARGS,
 	 (char*)"set transfer buffer size"
