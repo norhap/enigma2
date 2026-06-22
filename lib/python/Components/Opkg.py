@@ -137,7 +137,9 @@ class OpkgComponent:
 		self.callbackList = []
 		self.setCurrentCommand()
 
-	def setCurrentCommand(self, command=None):
+	def setCurrentCommand(self, command=None, args=None):
+		if args is None:
+			args = {}
 		self.currentCommand = command
 
 	def runCmdEx(self, cmd, addDests=False):
@@ -155,6 +157,7 @@ class OpkgComponent:
 		print("[Opkg] executing", self.opkg, cmd)
 		self.cmd.appClosed.append(self.cmdFinished)
 		self.cmd.dataAvail.append(self.cmdData)
+		self.cmd.setLineMode("lineMode" in args and args["lineMode"])
 		if self.cmd.execute("%s %s" % (self.opkg, cmd)):
 			self.cmdFinished(-1)
 
@@ -194,6 +197,7 @@ class OpkgComponent:
 		elif cmd == self.CMD_UPGRADE_LIST:
 			self.fetchedList = []
 			self.runCmdEx("list-upgradable", True)
+		self.cmd.setLineMode(bool(args and "lineMode" in args and args["lineMode"]))
 		self.setCurrentCommand(cmd)
 
 	def cmdFinished(self, retval):
