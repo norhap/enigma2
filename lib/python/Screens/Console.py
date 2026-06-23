@@ -45,10 +45,11 @@ class Console(Screen, HelpableScreen):
 			"close": (self.keyCloseRecursive, _("Close the screen and exit all menus")),
 			"red": (self.keyCancel, _("Close this screen")),
 			"top": (self.keyTop, _("Move to first line / screen")),
-			"pageUp": (self.keyPageUp, _("Move up a screen")),
+			"left": (self.keyPageUp, _("Move up a screen")),
 			"up": (self.keyLineUp, _("Move up a line")),
 			"down": (self.keyLineDown, _("Move down a line")),
-			"pageDown": (self.keyPageDown, _("Move down a screen")),
+			"right": (self.keyPageDown, _("Move down a screen")),
+			"yellow": (self.keySaveLog, _("Save the log of the console messages to a file")),
 			"bottom": (self.keyBottom, _("Move to last line / screen"))
 		}, prio=0, description=_("Console Actions"))
 		self["hideAction"] = HelpableActionMap(self, ["ColorActions"], {
