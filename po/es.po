@@ -17492,6 +17492,9 @@ msgstr "Abrir la lista de Satélites"
 msgid "Show all"
 msgstr "Mostrar todo"
 
+msgid "Showing all"
+msgstr "Mostrando todo"
+
 msgid "Show All Services"
 msgstr "Mostrar Todos los Canales"
 

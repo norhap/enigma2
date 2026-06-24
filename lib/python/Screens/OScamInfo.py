@@ -608,7 +608,7 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 			<widget source="key_detailed" render="Label" position="1470,1020" size="250,42" font="Regular;30" horizontalAlignment="left" verticalAlignment="center" foregroundColor="grey">
 				<convert type="ConditionalShowHide" />
 			</widget>
-			<widget source="key_exit" render="Label" position="1730,1020" size="150,42" font="Regular;30" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="grey" />
+			<widget source="key_exit" render="Label" position="1730,1020" size="150,42" font="Regular;22" horizontalAlignment="center" verticalAlignment="center" foregroundColor="black" backgroundColor="grey" />
 		</screen>"""
 
 	def __init__(self, session, readeruser):
@@ -801,7 +801,7 @@ class OSCamEntitlements(Screen, OSCamGlobals):
 		if self.showall:
 			self["key_exit"].setText(_("Active only"))
 		else:
-			self["key_exit"].setText(_("Show all"))
+			self["key_exit"].setText(_("Showing all"))
 		self.showall = not self.showall
 		self._triggerEntitlementsUpdate()
 
