@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from Components.GUIComponent import GUIComponent
 
-from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from re import search
+from datetime import timedelta
+from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, eServiceReference
 
 from Tools.Alternatives import CompareWithAlternatives
 from Tools.LoadPixmap import LoadPixmap
@@ -66,6 +68,7 @@ class EPGList(GUIComponent):
 			assert type in (EPG_TYPE_SIMILAR, EPG_TYPE_PARTIAL)
 			self.l.setBuildFunc(self.buildSimilarEntry)
 		self.epgcache = eEPGCache.getInstance()
+		self.catchUpIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/catchup.png"))
 		main_icons = (
 			"epgclock",
 			"zapclock",
@@ -200,17 +203,20 @@ class EPGList(GUIComponent):
 	def gap(self, width):
 		return width - self.colGap
 
-	def getClockTypesForEntry(self, service, eventId, beginTime, duration):
+	def getClockTypesForEntry(self, service, eventId, beginTime, duration, catchUpIcon=None):
 		if not beginTime:
 			return None
+		type = []
 		rec = self.timer.isInTimer(eventId, beginTime, duration, service)
+		if catchUpIcon and self.detectCatchupAvailable(beginTime, service):
+			type = [65]
 		if rec is not None:
-			return rec[1]
+			return (type + rec[1])
 		else:
-			return None
+			return type
 
 	def buildSingleEntry(self, service, eventId, beginTime, duration, EventName):
-		clock_types = self.getClockTypesForEntry(service, eventId, beginTime, duration)
+		clock_types = self.getClockTypesForEntry(service, eventId, beginTime, duration, self.catchUpIcon)
 		r1 = self.weekday_rect
 		r2 = self.datetime_rect
 		r3 = self.descr_rect
@@ -225,7 +231,8 @@ class EPGList(GUIComponent):
 		]
 		if clock_types:
 			for i in range(len(clock_types)):
-				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + i * self.space, r3.y + self.dy, self.iconSize, self.iconSize, self.clocks[clock_types[i]]))
+				clockIcon = (clock_types[i] == 65 and self.catchUpIcon) or self.clocks[clock_types[i]]
+				res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHABLEND, r3.x + i * self.space, r3.y + self.dy, self.iconSize, self.iconSize, clockIcon))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x + (i + 1) * self.space, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName))
 		else:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r3.x, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName))
@@ -287,6 +294,16 @@ class EPGList(GUIComponent):
 					(eListboxPythonMultiContent.TYPE_TEXT, r3.x + self.tw, r3.y, r3.w, r3.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, EventName)
 				))
 		return res
+
+	def detectCatchupAvailable(self, stime, service):
+		sref = service.toString() if isinstance(service, eServiceReference) else service
+		now = time()
+		if stime and "catchupdays=" in sref and stime < now:
+			match = search(r"catchupdays=(\d*)", sref)
+			catchup_days = int(match.groups(1)[0])
+			if now - stime <= timedelta(days=catchup_days).total_seconds():
+				return True
+		return False
 
 	def queryEPG(self, list, buildFunc=None):
 		if self.epgcache is not None:

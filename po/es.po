@@ -7169,6 +7169,9 @@ msgstr "Islas Pitcairn"
 msgid "Play"
 msgstr "Play"
 
+msgid "Play archive"
+msgstr "Reproducir archivo"
+
 msgid "Playpause"
 msgstr "PlayPausa"
 
