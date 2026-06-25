@@ -137,9 +137,7 @@ class OpkgComponent:
 		self.callbackList = []
 		self.setCurrentCommand()
 
-	def setCurrentCommand(self, command=None, args=None):
-		if args is None:
-			args = {}
+	def setCurrentCommand(self, command=None):
 		self.currentCommand = command
 
 	def runCmdEx(self, cmd, addDests=False):
@@ -153,7 +151,9 @@ class OpkgComponent:
 		else:
 			self.runCmd(cmd)
 
-	def runCmd(self, cmd):
+	def runCmd(self, cmd, args=None):
+		if args is None:
+			args = {}
 		print("[Opkg] executing", self.opkg, cmd)
 		self.cmd.appClosed.append(self.cmdFinished)
 		self.cmd.dataAvail.append(self.cmdData)
