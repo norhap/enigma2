@@ -152,8 +152,7 @@ class OpkgComponent:
 			self.runCmd(cmd)
 
 	def runCmd(self, cmd, args=None):
-		if args is None:
-			args = {}
+		args = {}
 		print("[Opkg] executing", self.opkg, cmd)
 		self.cmd.appClosed.append(self.cmdFinished)
 		self.cmd.dataAvail.append(self.cmdData)
