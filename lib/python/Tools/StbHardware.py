@@ -3,9 +3,11 @@ from os import remove
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, timezone
-from Tools.Directories import fileExists, fileReadLine
+from Tools.Directories import fileExists, fileReadLine, fileWriteLine
 from boxbranding import getMachineBuild
 
+MODULE_NAME = __name__.split(".")[-1]
+wasTimerWakeup = False
 INFO_TYPE = "/proc/stb/info/type"
 INFO_SUBTYPE = "/proc/stb/info/subtype"
 
@@ -104,35 +106,29 @@ def getFPWakeuptime():
 	return ret
 
 
-wasTimerWakeup = None
-
-
 def getFPWasTimerWakeup(check=False):
 	global wasTimerWakeup
-	isError = False
-	if wasTimerWakeup is not None:
-		if check:
-			return wasTimerWakeup, isError
-		return wasTimerWakeup
-	elif fileExists("/home/root/.backuprestore"):  # Stop the timer YELLOW show message from the restore console in the wizard.
+	if fileExists("/home/root/.backuprestore"):  # Stop the timer YELLOW show message from the restore console in the wizard.
 		remove("/home/root/.backuprestore")
 		wasTimerWakeup = False
 		return wasTimerWakeup
-	wasTimerWakeup = False
-	try:
-		wasTimerWakeup = int(open("/proc/stb/fp/was_timer_wakeup", "r").read()) and True or False
-		open("/tmp/was_timer_wakeup.txt", "w").write(str(wasTimerWakeup))
-	except:
-		try:
-			fp = open("/dev/dbox/fp0")
-			wasTimerWakeup = unpack('B', ioctl(fp.fileno(), 9, ' '))[0] and True or False
-			fp.close()
-		except OSError:
-			print("[StbHardware] wasTimerWakeup failed!")
-			isError = True
+	isError = False
 	if wasTimerWakeup:
-		# clear hardware status
-		clearFPWasTimerWakeup()
+		if check:
+			return wasTimerWakeup, isError
+		return wasTimerWakeup
+	wasTimerWakeup = fileReadLine("/proc/stb/fp/was_timer_wakeup", source=MODULE_NAME)
+	if wasTimerWakeup:
+		wasTimerWakeup = int(wasTimerWakeup) and True or False
+		if not fileWriteLine("/tmp/was_timer_wakeup.txt", str(wasTimerWakeup), source=MODULE_NAME):
+			try:
+				with open("/dev/dbox/fp0") as fd:
+					wasTimerWakeup = unpack('B', ioctl(fd.fileno(), 9, ' '))[0] and True or False
+			except Exception as err:
+				isError = True
+				print(f"[StbHardware] Unable to read '/dev/dbox/fp0', getFPWasTimerWakeup failed  Error: {err}")
+	if wasTimerWakeup:
+		clearFPWasTimerWakeup()  # Clear hardware status.
 	if check:
 		return wasTimerWakeup, isError
 	return wasTimerWakeup
