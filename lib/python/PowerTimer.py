@@ -307,7 +307,7 @@ class PowerTimer(Timer):
 	def getWakeupEPGImport(self):
 		now = localtime(time())
 		begin = int(mktime(localtime(time())))
-		if isPluginInstalled("EPGImport") and config.misc.prev_wakeup_time_type.value == 2:
+		if isPluginInstalled("EPGImport") and config.plugins.epgimport.deepstandby.value and config.plugins.epgimport.enabled.value:
 			importwakeup = config.plugins.epgimport.wakeup.value
 			importtime = int(mktime((now.tm_year, now.tm_mon, now.tm_mday, importwakeup[0], importwakeup[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 			if not config.misc.RestartUI.value and \
