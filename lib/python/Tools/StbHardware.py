@@ -1,5 +1,4 @@
 from os.path import isfile
-from os import remove
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, timezone
@@ -108,10 +107,6 @@ def getFPWakeuptime():
 
 def getFPWasTimerWakeup(check=False):
 	global wasTimerWakeup
-	if fileExists("/home/root/.backuprestore"):  # Stop the timer YELLOW show message from the restore console in the wizard.
-		remove("/home/root/.backuprestore")
-		wasTimerWakeup = False
-		return wasTimerWakeup
 	isError = False
 	if wasTimerWakeup:
 		if check:
