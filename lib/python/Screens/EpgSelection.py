@@ -140,10 +140,9 @@ class EPGSelection(Screen, HelpableScreen):
 			"endUp": (self.filterEndUp, _("End time") + " +"),
 			"saveTimes": (self.saveFilterValues, _("Use current filter values as default")),
 		})
-		self["CatchUpActions"] = HelpableActionMap(self, "EPGCatchUpActions",
-			{
+		self["CatchUpActions"] = HelpableActionMap(self, "EPGCatchUpActions", {
 			"play": (self.playCatchup, _("Play archive")),
-			}, prio=-2)
+		}, prio=-2)
 		self.isTMBD = isPluginInstalled("IMDb")
 		if self.isTMBD:
 			self["key_red"] = StaticText(_("Search IMDb"))
