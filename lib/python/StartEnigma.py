@@ -587,7 +587,7 @@ def runScreenTest():
 		if (startSleepTime[0] - nowTime) < 270:  # no time to switch box back on
 			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			if MODEL.startswith == "gb":
+			if MODEL.startswith("gb"):
 				wakeupTime = startSleepTime[0] - 120  # GigaBlue already starts 2 min. before wakeup time
 			else:
 				wakeupTime = startSleepTime[0] - 240
@@ -603,10 +603,11 @@ def runScreenTest():
 
 	if powerTimerList and powerTimerList[0][1] == 3:
 		startTimePowerList = powerTimerList[0]
+		advancetime = 0 if not MODEL.startswith("vu") else 60
 		if (startTimePowerList[0] - nowTime) < 60:  # no time to switch box back on
 			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			wakeupTime = startTimePowerList[0]
+			wakeupTime = startTimePowerList[0] - advancetime
 		if not config.ntp.timesync.value == "dvb":
 			setRTCtime(nowTime)
 		setFPWakeuptime(wakeupTime)
@@ -614,11 +615,12 @@ def runScreenTest():
 	config.misc.isNextPowerTimerAfterEventActionAuto.value = powerTimerWakeupAuto
 	config.misc.isNextPowerTimerAfterEventActionAuto.save()
 	if powerTimerList and powerTimerList[0][1] != 3:
+		advancetime = 240 if not MODEL.startswith("vu") else 300
 		startTimePowerList = powerTimerList[0]
 		if (startTimePowerList[0] - nowTime) < 270:  # no time to switch box back on
 			wakeupTime = nowTime + 30  # so switch back on in 30 seconds
 		else:
-			wakeupTime = startTimePowerList[0] - 240
+			wakeupTime = startTimePowerList[0] - advancetime
 		if not config.ntp.timesync.value == "dvb":
 			setRTCtime(nowTime)
 		setFPWakeuptime(wakeupTime)
