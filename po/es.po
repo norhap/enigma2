@@ -1311,6 +1311,9 @@ msgstr "Ajustes 3D"
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
 msgstr "Ajuste la configuración de color para que todas las sombras de color se distingan, pero aparezcan lo más saturadas posibles. Si está satisfecho con el resultado, pulse OK para cerrar el ajuste de video o use las teclas numéricas para seleccionar otras pantallas de prueba."
 
+msgid "Adult Audience, Strong Violence 15+"
+msgstr "Violencia explícita (mayores de 15 años)"
+
 msgid "Advanced"
 msgstr "Avanzado"
 
@@ -1540,6 +1543,9 @@ msgstr "Cambiar de bouquet en zapeo rápido"
 
 msgid "Change view mode"
 msgstr "Cambiar el modo de visualización"
+
+msgid "Children"
+msgstr "Niños"
 
 msgid "Choose \"No\" to delete it"
 msgstr "Seleccione \"No\" para eliminarla"
@@ -6242,6 +6248,12 @@ msgstr "Islas Marshall"
 msgid "Martinique"
 msgstr "Martinica"
 
+msgid "Mature Audience 15+"
+msgstr "Público adudiencia 15+"
+
+msgid "Mature Adult Audience 15+"
+msgstr "Público adulto mayor de 15 años"
+
 msgid "Mauritania"
 msgstr "Mauritania"
 
@@ -6816,6 +6828,9 @@ msgstr "No se eliminan los modificados"
 msgid "Not associated"
 msgstr "No asociado"
 
+msgid "Not Classified"
+msgstr "No clasificado"
+
 #, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%d MB required, %d MB available)"
 msgstr "No hay suficiente espacio en el disco. Libere espacio en disco e intente de nuevo. (Se requiere %d MB, %d MB disponible)"
@@ -7089,6 +7104,9 @@ msgstr "Ajustes Control Parental"
 
 msgid "Parental Control Setup"
 msgstr "Ajustes Control Parental"
+
+msgid "Parental Guidance Recommended"
+msgstr "Supervisión de los padres"
 
 msgid "Partial EPG"
 msgstr "EPG Parcial"
@@ -7442,6 +7460,9 @@ msgstr "Transpondedor predefinido"
 
 msgid "Preparing... Please wait"
 msgstr "Preparando… Espere"
+
+msgid "Preschool"
+msgstr "Preescolar"
 
 msgid "Press '0' to toggle PiP mode"
 msgstr "Pulse ‘0’ para alternar el modo PiP"
@@ -9541,6 +9562,15 @@ msgstr "Domingo"
 
 msgid "Suriname"
 msgstr "Surinam"
+
+msgid "Suitable for ages 12+"
+msgstr "Apta mayores de 12 años"
+
+msgid "Suitable for ages 15+"
+msgstr "Apta mayores de 15 años"
+
+msgid "Suitable only for Adults"
+msgstr "Apta solo para adultos"
 
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard y Jan Mayen"
@@ -11975,6 +12005,9 @@ msgstr "Ajustes OSD"
 msgid "On valid ONIDs, ignore frequency sub network part"
 msgstr "En ONID válidos, ignore la parte de la frecuencia de subred"
 
+msgid "PG - Parental Guidance"
+msgstr "Supervisión de los padres"
+
 msgid "Position of completed timers in timerlist"
 msgstr "Posición de temporizadores completados en lista de temporizadores"
 
@@ -12082,6 +12115,9 @@ msgstr "Requiere autenticación para streams http"
 
 msgid "Restoring settings: Enigma2 is about to restart..."
 msgstr "Restaurando la configuración: Enigma2 va a reiniciar..."
+
+msgid "Restricted 18+"
+msgstr "Restringido a mayores de 18 años"
 
 msgid "Rewind speeds"
 msgstr "Velocidades de rebobinado"
@@ -12347,6 +12383,9 @@ msgstr "Activar HDMI-IN modo pantalla completa"
 
 msgid "Turn on the power LED during standby."
 msgstr "Encienda el LED de encendido durante standby o reposo profundo."
+
+msgid "U - Suitable for all"
+msgstr "Apta para todos"
 
 msgid "Unexpected error accessing WebIF: %s"
 msgstr "Error inesperado al acceder a WebIF: %s"

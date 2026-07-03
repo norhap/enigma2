@@ -183,7 +183,7 @@ class Console(Screen, HelpableScreen):
 
 	def dataAvail(self, data):
 		if isinstance(data, bytes):
-			data = data.decode()
+			data = data.decode("utf-8", errors="replace")
 		screendata = data.replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")).replace("Not deleting modified", _("Not deleting modified")).replace("Existing", _("Existing")).replace("The new conffile will be placed at", _("The new conffile will be placed at")).replace("is different from the conffile in the new package", _("is different from the conffile in the new package")).replace("No packages installed or removed", _("No packages installed or removed"))
 		self["text"].appendText(f"{self.commandColorEnd}{screendata}")
 		if "killall -9 enigma2" in self.cmdList[self.run] and "init " in self.cmdList[self.run]:
