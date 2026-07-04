@@ -42,6 +42,13 @@
 		<widget source="SetupValue" render="Label" position="0,200" size="480,70" font="FdLcD;40" horizontalAlignment="center" verticalAlignment="center" />
 	</screen>
 
+<!-- Servicescan -->
+	<screen name="ServiceScanSummary" position="5,0" size="471,320">
+		<widget name="Title" position="0,0" size="471,113" font="FdLcD;38" foregroundColor="#87CEFA" horizontalAlignment="center" verticalAlignment="center" />
+		<widget name="scan_progress" position="0,133" size="471,47"  borderWidth="2" />
+		<widget name="Service" position="0,200" size="471,113" font="FdLcD;38" horizontalAlignment="center" verticalAlignment="center" />
+	</screen>
+
 	<screen name="InfoBarSummary" position="0,0" size="480,320">
 		<widget source="session.CurrentService" render="Label" position="0,5" size="480,70" font="FdLcD;55" foregroundColor="#FFFF00" >
 			<convert type="ServiceName">Name</convert>
