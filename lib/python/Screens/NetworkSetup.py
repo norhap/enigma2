@@ -555,7 +555,6 @@ class IPv6Setup(ConfigListScreen, Screen, HelpableScreen):
 			self.ipv6 = True
 			print("[NetworkSetup] IPv6 is actived")
 		self.IPv6ConfigEntry = NoSave(ConfigYesNo(default=self.ipv6 or False))
-		self.createConfig()
 
 	def createConfig(self):
 		self.commands = []
@@ -640,11 +639,11 @@ class IPv6Setup(ConfigListScreen, Screen, HelpableScreen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createConfig()
+		self.newConfig()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createConfig()
+		self.newConfig()
 
 
 class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
@@ -663,7 +662,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.finished_cb = None
 		self.oktext = _("Press OK to confirm.")
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
-
 		self.createConfig()
 
 		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
@@ -762,7 +760,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.weplist = None
 		self.wsconfig = None
 		self.default = None
-		self.firstRunSetupWizard = False
 		self.messageSimple = False if not config.misc.firstrun.value else True
 		wlanactive = "auto wlan"
 		lanactive = "auto eth"
@@ -895,18 +892,13 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.createSetup()
 		self.newConfig()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.createSetup()
 		self.newConfig()
 
 	def keySave(self):
-		if config.misc.firstrun.value and not self.firstRunSetupWizard:  # ConfigPassword WLAN VK or helpwindow or deactivate interface not used in wizard.
-			self.createConfig()
-			self.createSetup()
 		self.hideInputHelp()
 		if self["config"].isChanged() or config.misc.firstrun.value:
 			self.session.openWithCallback(self.keySaveConfirm, MessageBox, (_("Are you sure you want to activate this network configuration?\n\n") + self.oktext), simple=self.messageSimple)
@@ -987,8 +979,6 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				else:
 					iNetwork.deactivateInterface(self.iface, self.activateInterfaceCB)
 				iNetwork.writeNetworkConfig()
-				if config.misc.firstrun.value:
-					self.firstRunSetupWizard = True
 				self.applyConfigRef = self.session.openWithCallback(self.applyConfigfinishedCB, MessageBox, _("Please wait for activation of your network configuration..."), type=MessageBox.TYPE_INFO, enable_input=False, simple=self.messageSimple)
 		else:
 			self.keyCancel()
