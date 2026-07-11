@@ -342,9 +342,8 @@ class NetworkWizard(WizardLanguage, ShowRemoteControl, Time):
 								complist.remove(compentry)
 				for entry in complist:
 					self.APList.append((entry[1], entry[1]))
-			if not len(aps):
-				self.APList.append((_("No networks found"), None))
-
+			# Wait to timer if not list networks then, List Wireless networks.
+			self["text"].setText(_("Searching for Wireless networks...") if not len(aps) else _("Press \"OK\" on your Wireless network."))
 		self.rescanTimer.start(4000)
 		return self.APList
 

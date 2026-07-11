@@ -6756,9 +6756,6 @@ msgstr "No hay actualizaciones disponibles"
 msgid "No updates available. Please try again later."
 msgstr "No hay actualizaciones disponibles. Por favor, inténtelo más tarde."
 
-msgid "No wireless networks found! Searching..."
-msgstr "No se han encontrado redes inalámbricas! Buscando…"
-
 msgid "No (with notification)"
 msgstr "No (con notificación)"
 
@@ -7510,6 +7507,9 @@ msgid ""
 msgstr ""
 "Para guardar y aplicar el skin '%s' seleccionado, la GUI debe reiniciarse.\n"
 "¿Desea guardar la selección y reiniciar la GUI ahora?"
+
+msgid "Press \"OK\" on your Wireless network."
+msgstr "Pulse \"OK\" sobre su red Inalámbrica."
 
 msgid "Press OK to activate the settings."
 msgstr "Pulse OK para activar la configuración."
@@ -8340,6 +8340,9 @@ msgstr "Buscando las actualizaciones disponibles. Por favor espere…"
 
 msgid "Searching for new installed or removed packages. Please wait..."
 msgstr "Buscando nuevos paquetes instalados o eliminados. Por favor espere…"
+
+msgid "Searching for Wireless networks..."
+msgstr "Buscando redes Inalámbricas..."
 
 msgid "Searching west..."
 msgstr "Buscando oeste..."

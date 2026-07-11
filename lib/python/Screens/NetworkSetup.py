@@ -1186,7 +1186,8 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 				if self.queryWirelessDevice(self.iface):
 					self.session.openWithCallback(self.WlanScanClosed, WlanScan, self.iface)
 				else:  # Scan wireless networks -> OK
-					eConsoleAppContainer().execute(f"ifconfig {self.iface} up")
+					if not config.misc.firstrun.value:
+						eConsoleAppContainer().execute(f"ifconfig {self.iface} up")
 					self.session.openWithCallback(self.WlanScanClosed, WlanScan, self.iface)
 		if self["menulist"].getCurrent()[1] == 'wlanstatus':
 			try:

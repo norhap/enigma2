@@ -82,6 +82,8 @@ class Wlan:
 				Console().ePopen("ifconfig " + self.iface + " up")
 				if existBcmWifi(self.iface):
 					eConsoleAppContainer().execute("wl up")
+		elif existBcmWifi(self.iface):  # Wizard config.misc.firstrun.value is active from enigma2.sh and driver BcmWifi "wlan3".
+			eConsoleAppContainer().execute("wl up")
 		aps = {}
 		try:
 			scanresults = list(Cell.all(self.iface, 5))
