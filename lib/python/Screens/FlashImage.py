@@ -121,15 +121,16 @@ class SelectImage(Screen):
 						try:
 							getImages(media, [join(media, x) for x in listdir(media) if splitext(x)[1] == ".zip" and MODEL in x])
 						except Exception:
-							break
-						for folder in ["images", "downloaded_images", "imagebackups"]:
-							if folder in listdir(media):
-								subfolder = join(media, folder)
-								if isdir(subfolder) and not islink(subfolder) and not ismount(subfolder):
-									getImages(subfolder, [join(subfolder, x) for x in listdir(subfolder) if splitext(x)[1] == ".zip" and MODEL in x])
-									for directory in [directory for directory in [join(subfolder, directory) for directory in listdir(subfolder)] if isdir(directory) and splitext(directory)[1] == ".unzipped"]:
-										rmtree(directory)
-										break
+							pass
+					# proceed with the local mount.
+					for folder in ["images", "downloaded_images", "imagebackups"]:
+						if folder in listdir(media):
+							subfolder = join(media, folder)
+							if isdir(subfolder) and not islink(subfolder) and not ismount(subfolder):
+								getImages(subfolder, [join(subfolder, x) for x in listdir(subfolder) if splitext(x)[1] == ".zip" and MODEL in x])
+								for directory in [directory for directory in [join(subfolder, directory) for directory in listdir(subfolder)] if isdir(directory) and splitext(directory)[1] == ".unzipped"]:
+									rmtree(directory)
+									break
 		list = []
 		for catagorie in reversed(sorted(self.imagesList.keys())):
 			if catagorie in self.expanded:
