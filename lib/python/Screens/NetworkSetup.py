@@ -817,10 +817,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				with open(interfacesfile) as f:
 					output = f.read()
 				if not iNetwork.isWirelessInterface(self.iface):
-					if output.find(wlanactive) >= 0:
+					if output.find(wlanactive) > 0:
 						ifaces = True
 				else:
-					if output.find(lanactive) >= 0:
+					if output.find(lanactive) > 0:
 						ifaces = True
 		self.twoIfacesActive = ifaces
 
@@ -880,11 +880,7 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.session.openWithCallback(self.DNSSettingsClosed, DNSSettings)
 
 	def newConfig(self):
-		if self["config"].getCurrent() == self.InterfaceEntry:
-			self.createSetup()
-		if self["config"].getCurrent() == self.dhcpEntry:
-			self.createSetup()
-		if self["config"].getCurrent() == self.gatewayEntry:
+		if self["config"].getCurrent() in (self.InterfaceEntry, self.dhcpEntry, self.gatewayEntry):
 			self.createSetup()
 		if iNetwork.isWirelessInterface(self.iface):
 			if self["config"].getCurrent() == self.encryption:

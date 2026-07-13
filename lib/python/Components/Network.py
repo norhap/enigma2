@@ -188,24 +188,24 @@ class Network:
 		self.writeNameserverConfig()
 
 	def writeNameserverConfig(self):
-		useDHCPforDNS = False
+		var_run_resolvconf = False
+		use_dhcp_for_dns = False
+		if exists(self.varResolvFile):
+			with open(self.varResolvFile) as f:
+				if f.read().find("nameserver") > 0:
+					var_run_resolvconf = True
 		for iface in sorted(self.ifaces.keys()):
 			if self.ifaces[iface]["up"] and self.ifaces[iface]["dhcp"]:
-				useDHCPforDNS = True
-		if useDHCPforDNS and config.usage.dns.value == "dhcp-router" and fileContains(self.varResolvFile, "nameserver"):
-			try:
-				if not islink(self.resolvFile):
-					if exists(self.resolvFile):
-						remove(self.resolvFile)
-					symlink(self.varResolvFile, self.resolvFile)
-			except Exception:
-				pass
+				use_dhcp_for_dns = True
+				break
+		if use_dhcp_for_dns and var_run_resolvconf and config.usage.dns.value == "dhcp-router":
+			if not islink(self.resolvFile):
+				if exists(self.resolvFile):
+					remove(self.resolvFile)
+				symlink(self.varResolvFile, self.resolvFile)
 		else:
-			try:
-				if islink(self.resolvFile):
-					unlink(self.resolvFile)
-			except Exception:
-				pass
+			if islink(self.resolvFile):
+				unlink(self.resolvFile)
 			with open(self.resolvFile, 'w') as fd:
 				for nameserver in self.nameservers:
 					fd.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
