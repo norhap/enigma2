@@ -224,6 +224,8 @@ class Session:
 		self.in_exec = False
 
 		self.screen = SessionGlobals(self)
+		from Tools.Notifications import notificationCenter
+		notificationCenter.setup(self)
 
 		for p in plugins.getPlugins(PluginDescriptor.WHERE_SESSIONSTART):
 			try:
