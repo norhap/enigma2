@@ -5823,6 +5823,9 @@ msgstr "Irlanda"
 msgid "Is this video mode ok?"
 msgstr "¿Está bien este modo de video?"
 
+msgid "it will be deactivated. You will see it after reboot the system."
+msgstr "se desactivará. Lo verá después de reiniciar el sistema."
+
 msgid "Isle of Man"
 msgstr "Isla de Man"
 

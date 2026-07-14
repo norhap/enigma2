@@ -807,10 +807,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				with open(interfacesfile) as f:
 					output = f.read()
 				if not iNetwork.isWirelessInterface(self.iface):
-					if output.find(wlanactive) >= 0:
+					if output.find(wlanactive) > 0:
 						ifaces = True
 				else:
-					if output.find(lanactive) >= 0:
+					if output.find(lanactive) > 0:
 						ifaces = True
 		else:
 			if exists(interfacesfile):
@@ -917,7 +917,14 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 						iNetwork.deactivateInterface(self.iface, self.deactivateInterfaceCB)
 					self.applyConfig(True)
 				else:
-					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, _("A second configured interface has been found.\n\nDo you want to disable the second network interface?"), default=True, simple=self.messageSimple)
+					message = _("A second configured interface has been found.\n\nDo you want to disable the second network interface?")
+					if MODEL.startswith("osmio4k") and exists("/etc/resolvconf.conf"):  # Add more receivers by disabling the second interface with openresolv.
+						for interface in iNetwork.getConfiguredAdapters():
+							if interface and interface != self.iface and self.dhcpConfigEntry.value and not config.misc.firstrun.value and (interface.startswith("eth") or interface.startswith("wlan")):
+								iface = "Ethernet LAN" if interface.startswith("eth") else "Wireless LAN"
+								message += "\n\n" + iface + " " + _("it will be deactivated. You will see it after reboot the system.")
+								break
+					self.session.openWithCallback(self.secondIfaceFoundCB, MessageBox, message, default=True, simple=self.messageSimple)
 			else:
 				self.applyConfig(True)
 		else:
