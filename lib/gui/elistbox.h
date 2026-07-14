@@ -89,6 +89,7 @@ struct eListboxStyleSetted
 	bool separator_color : 1;
 	bool header_color : 1;
 	bool wrap : 1;
+	bool shrink : 1;
 };
 
 struct eListboxStyle
@@ -133,11 +134,11 @@ struct eListboxStyle
 
 	int m_itemCornerRadius[4];
 	uint8_t m_itemCornerRadiusEdges[4];
-	int cornerRadius(uint8_t mode)
+	int cornerRadius(uint8_t mode) const
 	{
 		return m_itemCornerRadius[mode];
 	}
-	int cornerRadiusEdges(uint8_t mode)
+	int cornerRadiusEdges(uint8_t mode) const
 	{
 		return m_itemCornerRadiusEdges[mode];
 	}
@@ -168,7 +169,8 @@ public:
 		showLeftOnDemand,
 		showLeftAlways,
 		showTopOnDemand,
-		showTopAlways
+		showTopAlways,
+		showOnDemandShrink,
 	};
 
 	enum
@@ -236,18 +238,23 @@ public:
 	void setScrollbarMode(uint8_t mode);
 	void setWrapAround(bool state) { m_enabled_wrap_around = state; }
 
+	/* Pins entry 0 to a fixed on-screen slot (vertical orientation only);
+	   it stays visible while the remaining entries scroll below it. */
+	void setLockFirstRow(bool lock);
+	bool getLockFirstRow() const { return m_lock_first_row; }
+
 	void setOrientation(uint8_t orientation);
 	void setContent(iListboxContent *content);
 
 	void allowNativeKeys(bool allow);
 	void enableAutoNavigation(bool allow) { allowNativeKeys(allow); }
 
-	int getCurrentIndex();
+	int getCurrentIndex() const;
 	void moveSelection(int how);
 	void moveSelectionTo(int index);
 	void moveToEnd(); // Deprecated
-	bool atBegin();
-	bool atEnd();
+	bool atBegin() const;
+	bool atEnd() const;
 
 	void goTop() { moveSelection(moveTop); }
 	void goBottom() { moveSelection(moveBottom); }
@@ -296,12 +303,12 @@ public:
 	void setBackgroundColorRows(const gRGB &col);
 
 	void setSpacingColor(const gRGB &col);
-	void clearSpacingColor() { m_style.is_set.spacing_color = 0; }
+	void clearSpacingColor() { m_style.is_set.spacing_color = false; }
 
-	void clearBackgroundColor() override { m_style.is_set.background_color = 0; }
-	void clearBackgroundColorSelected() { m_style.is_set.background_color_selected = 0; }
-	void clearForegroundColor() { m_style.is_set.foreground_color = 0; }
-	void clearForegroundColorSelected() { m_style.is_set.foreground_color_selected = 0; }
+	void clearBackgroundColor() override { m_style.is_set.background_color = false; }
+	void clearBackgroundColorSelected() { m_style.is_set.background_color_selected = false; }
+	void clearForegroundColor() { m_style.is_set.foreground_color = false; }
+	void clearForegroundColorSelected() { m_style.is_set.foreground_color_selected = false; }
 
 	void setBorderColor(const gRGB &col) override { m_style.m_border_color = col; }
 	void setBorderWidth(int width) override;
@@ -311,7 +318,7 @@ public:
 
 	void setBackgroundPixmap(ePtr<gPixmap> &pm) { m_style.m_background = pm; }
 	void setSelectionPixmap(ePtr<gPixmap> &pm) { m_style.m_selection = pm; }
-	void setSelectionBorderHidden() { m_style.is_set.border = 1; }
+	void setSelectionBorderHidden() { m_style.is_set.border = true; }
 
 	void setScrollbarForegroundPixmap(ePtr<gPixmap> &pm);
 	void setScrollbarBackgroundPixmap(ePtr<gPixmap> &pm);
@@ -346,12 +353,12 @@ public:
 	void setMaxRows(int rows)
 	{
 		m_style.m_max_rows = rows;
-		m_style.is_set.max_rows = 1;
+		m_style.is_set.max_rows = true;
 	};
 	void setMaxColumns(int columns)
 	{
 		m_style.m_max_columns = columns;
-		m_style.is_set.max_columns = 1;
+		m_style.is_set.max_columns = true;
 	};
 	void setItemSpacing(const ePoint &spacing, bool innerOnly = false);
 
@@ -370,7 +377,7 @@ public:
 
 	void setSeparatorColor(const gRGB &col) { 
 		m_style.m_separator_color = col;
-		m_style.is_set.separator_color = 1;
+		m_style.is_set.separator_color = true;
 	}
 
 	void setSeparatorSize(const eRect &size) { 
@@ -379,13 +386,13 @@ public:
 
 	void setHeaderColor(const gRGB &col) { 
 		m_style.m_header_color = col;
-		m_style.is_set.header_color = 1;
+		m_style.is_set.header_color = true;
 	}
 
 	void setOverlay(ePtr<gPixmap> &pm)
 	{
 		m_style.m_overlay = pm;
-		m_style.is_set.overlay = 1;
+		m_style.is_set.overlay = true;
 	}
 
 	void setPageSize(int size) { m_page_size = size; }
@@ -441,7 +448,7 @@ public:
 
 	void setTopIndex(int idx);
 	void setStartIndex(int index);
-	int getStartIndex() { return (m_orientation == orHorizontal) ? m_left : m_top; }
+	int getStartIndex() const { return (m_orientation == orHorizontal) ? m_left : m_top; }
 
 	bool getWrapAround() { return m_enabled_wrap_around; }
 	uint8_t getScrollbarScroll() { return m_scrollbar_scroll; }
@@ -461,16 +468,16 @@ public:
 	gFont *getEntryFont() { return m_style.m_font; }
 	gFont *getValueFont() { return m_style.m_valuefont; }
 	gFont *getHeaderFont() { return m_style.m_headerfont; }
-	int getItemsPerPage() {
+	int getItemsPerPage() const {
 		if (m_orientation == orHorizontal)
 			return m_max_columns;
 		else if (m_orientation == orGrid)
 			return m_max_columns * m_max_rows;
 		else
-			return m_max_rows;
+			return effectiveMaxRows();
 		}
 
-	int getCurrentPage()
+	int getCurrentPage() const
 	{
 		if (m_content)
 		{
@@ -478,7 +485,7 @@ public:
 			if (m_orientation == orGrid)
 				max = m_max_columns * m_max_rows;
 			else
-				max = (m_orientation == orHorizontal) ? m_max_columns : m_max_rows;
+				max = (m_orientation == orHorizontal) ? m_max_columns : effectiveMaxRows();
 			if (max > 0)
 			{
 				return (m_content->cursorGet() / max) + 1;
@@ -487,15 +494,15 @@ public:
 		return 0;
 	}
 
-	int getPageCount()
-	{ 
+	int getPageCount() const
+	{
 		if (m_content)
 		{
 			int max = 0;
 			if (m_orientation == orGrid)
 				max = m_max_columns * m_max_rows;
 			else
-				max = (m_orientation == orHorizontal) ? m_max_columns : m_max_rows;
+				max = (m_orientation == orHorizontal) ? m_max_columns : effectiveMaxRows();
 			if (max > 0)
 			{
 				return (int)std::ceil((float)m_content->size() / (float)max);
@@ -503,10 +510,10 @@ public:
 		}
 		return 0;
 	}
-	int getMaxItemTextWidth() { return m_content->getMaxItemTextWidth(); }
+	int getMaxItemTextWidth() const { return m_content->getMaxItemTextWidth(); }
 	void redrawItemByIndex(int index) { entryChanged(index); }
 
-	int getScrollbarListOffset();
+	int getScrollbarListOffset() const;
 
 	void setScrollText(int direction, long delay, long startDelay, long endDelay, int repeat, int stepSize, int mode);
 
@@ -523,7 +530,7 @@ public:
 	/* the complete list changed. you should not attemp to keep the current index. */
 	void entryReset(bool cursorHome = true);
 
-	int getEntryTop();
+	int getEntryTop() const;
 	void invalidate(const gRegion &region = gRegion::invalidRegion()) override;
 
 	// scroll
@@ -540,6 +547,8 @@ private:
 	ePoint getItemPostion(int index);
 	int moveSelectionLineMode(bool doUp, bool doDown, int dir, int oldSel, int oldTopLeft, int oldRow, int maxItems, bool indexChanged, int pageOffset, int topLeft);
 	void recalcSizeAlignment(bool scrollbarVisible);
+	/* row count available for scrolling; one less than m_max_rows when the first row is locked */
+	int effectiveMaxRows() const { return (m_lock_first_row && m_orientation == orVertical && m_max_rows > 1) ? m_max_rows - 1 : m_max_rows; }
 	int setScrollbarPosition();
 	void setItemCornerRadiusInternal(uint8_t index, int radius, uint8_t edges);
 	void setItemGradientInternal(uint8_t index, const gRGB &startcolor, const gRGB &midcolor, const gRGB &endcolor, uint8_t direction, bool alphablend);
@@ -558,43 +567,44 @@ private:
 	static int defaultHorizontalAlignment;
 	static int defaultVerticalAlignment;
 
-	int m_prev_scrollbar_page;
-	uint8_t m_scrollbar_mode;
-	uint8_t m_scrollbar_scroll;
-	bool m_content_changed;
-	bool m_enabled_wrap_around;
-	bool m_itemwidth_set;
-	bool m_itemheight_set;
+	int m_prev_scrollbar_page = -1;
+	uint8_t m_scrollbar_mode = showNever;
+	uint8_t m_scrollbar_scroll = byPage;
+	bool m_content_changed = false;
+	bool m_enabled_wrap_around = false;
+	bool m_itemwidth_set = false;
+	bool m_itemheight_set = false;
 
-	int m_scrollbar_width;
-	int m_scrollbar_height;
-	int m_scrollbar_length;
+	int m_scrollbar_width = 10;
+	int m_scrollbar_height = 10;
+	int m_scrollbar_length = 0;
 	int m_scrollbar_offset;
 	int m_scrollbar_border_width;
-	int m_top, m_left, m_selected;
-	int m_itemheight;
-	int m_itemwidth;
-	uint8_t m_orientation;
-	int m_max_columns;
-	int m_max_rows;
-	int m_selection_enabled;
-	int m_page_size;
-	int m_item_alignment;
-	int xOffset;
-	int yOffset;
+	int m_top = 0, m_left = 0, m_selected = 0;
+	int m_itemheight = 25;
+	int m_itemwidth = 25;
+	uint8_t m_orientation = orVertical;
+	int m_max_columns = 0;
+	int m_max_rows = 0;
+	int m_selection_enabled = 1;
+	int m_page_size = 0;
+	int m_item_alignment = 0;
+	int xOffset = 0;
+	int yOffset = 0;
 	int m_x_itemSpace;
 	int m_y_itemSpace;
 
-	bool m_native_keys_bound;
-	int m_first_selectable_item;
-	int m_last_selectable_item;
+	bool m_native_keys_bound = false;
+	int m_first_selectable_item = -1;
+	int m_last_selectable_item = -1;
 	int m_scrollbar_calcsize;
+	bool m_lock_first_row = false;
 
 	ePoint m_spacing;
 	ePoint m_defined_spacing;
 	bool m_spacing_innerOnly;
 	ePtr<iListboxContent> m_content;
-	eSlider *m_scrollbar;
+	eSlider *m_scrollbar = nullptr;
 	eListboxStyle m_style;
 	ePtr<gPixmap> m_scrollbarpixmap, m_scrollbarbackgroundpixmap;
 #ifdef USE_LIBVUGLES2

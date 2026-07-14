@@ -24,6 +24,7 @@ to generate HTML."""
 		self.listStyle = "default"  # Style might be an optional string which can be used to define different visualizations in the skin.
 		self.listIndexNames = indexNames or {}
 		self.additionalTemplateAttributes = {}
+		self.templateDataFormats = {}
 		self.onSelectionChanged = []
 		self.onListUpdated = []
 		self.disableCallbacks = False
@@ -160,10 +161,6 @@ to generate HTML."""
 
 	style = property(getStyle, setStyle)
 
-	def listUpdated(self):
-		for method in self.onListUpdated:
-			method()
-
 	@cached
 	def getIndexNames(self):
 		return self.listIndexNames
@@ -267,6 +264,17 @@ to generate HTML."""
 		try:
 			instance = self.master.master.instance
 			instance.goBottom()
+		except AttributeError:
+			pass
+
+	def listUpdated(self):
+		for method in self.onListUpdated:
+			method()
+
+	def setLockFirstRow(self, enabled):
+		try:
+			instance = self.master.master.instance
+			instance.setLockFirstRow(enabled)
 		except AttributeError:
 			pass
 
