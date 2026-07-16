@@ -325,14 +325,17 @@ void eDVBPESReader::data(int)
 		r = ::read(m_fd, buffer, 16384);
 		if (!r)
 			return;
+		// norhap
+		/*
 		if(r < 0)
 		{
-			if (errno == EAGAIN || errno == EINTR) /* ok */
+			if (errno == EAGAIN || errno == EINTR)
 				return;
 			eWarning("[eDVBPESReader] ERROR reading PES (fd=%d): %m", m_fd);
 			return;
-		}
-
+		}// */
+		if(r < 0)
+			break;
 		if (m_active)
 			m_read(buffer, r);
 		else
