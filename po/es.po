@@ -4184,6 +4184,9 @@ msgstr ""
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
 msgstr "Habilite un intervalo de tiempo para filtrar eventos en EPG Simple usando el botón 'STOP'."
 
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
+msgstr "Habilite la opción de ordenar por calificación haciendo clic en el botón AMARILLO EPG Simple."
+
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
 
@@ -7692,6 +7695,9 @@ msgstr "Posible clasificación en la emisora"
 
 msgid "Rating defined by broadcaster - %d"
 msgstr "Calificación definida por la emisora - %d"
+
+msgid "Rating sort in SingleEPG"
+msgstr "Clasificación por calificación en EPG Simple"
 
 msgid "Rating undefined"
 msgstr "Califificación indefinida"
