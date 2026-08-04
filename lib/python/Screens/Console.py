@@ -187,6 +187,9 @@ class Console(Screen, HelpableScreen):
 		screendata = data.replace("Downloading", _("Downloading")).replace("Removing", _("Removing")).replace("Configuring", _("Configuring")).replace("Installing", _("Installing")).replace("Not deleting modified", _("Not deleting modified")).replace("Existing", _("Existing")).replace("The new conffile will be placed at", _("The new conffile will be placed at")).replace("is different from the conffile in the new package", _("is different from the conffile in the new package")).replace("No packages installed or removed", _("No packages installed or removed"))
 		self["text"].appendText(f"{self.commandColorEnd}{screendata}")
 		if "killall -9 enigma2" in self.cmdList[self.run] and "init " in self.cmdList[self.run]:
+			if "init 6" in self.cmdList[self.run]:
+				with open("/home/root/.notwasTimerWakeup", "w") as fd:  # wasTimerWakeup to False in BackupRestore.
+					fd.write("")
 			self.ReBootRestartTimer = eTimer()
 			self.ReBootRestartTimer.callback.append(self.dataReBootRestart)
 			self.ReBootRestartTimer.start(5000, True)

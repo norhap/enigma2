@@ -1,4 +1,5 @@
 from os.path import isfile
+from os import remove
 from fcntl import ioctl
 from struct import pack, unpack
 from time import time, localtime, timezone
@@ -107,6 +108,10 @@ def getFPWakeuptime():
 
 def getFPWasTimerWakeup(check=False):
 	global wasTimerWakeup
+	if fileExists("/home/root/.notwasTimerWakeup"):  # wasTimerWakeup to False in BackupRestore.
+		remove("/home/root/.notwasTimerWakeup")
+		wasTimerWakeup = False
+		return wasTimerWakeup
 	isError = False
 	if wasTimerWakeup:
 		if check:
