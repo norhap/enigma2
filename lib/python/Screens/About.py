@@ -1075,7 +1075,7 @@ class SystemMemoryInfo(Screen):
 				self.AboutText += _("Total memory:") + "\t" + "\t" + MemTotal[1][0:3] + " MB" + "\n" if MemTotal[1][5:6] and not MemTotal[1][6:7] else _("Total memory:") + "\t" + "\t" + MemTotal[1][0:1] + "." + MemTotal[1][1:4] + " MB" + "\n"
 			if "MemFree:" in tstLine:
 				MemFree = out_lines[lidx].split()
-				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:2] + " MB" + "\n"
+				self.AboutText += _("Free memory:") + "\t" + "\t" + MemFree[1][0:3] + " MB" + "\n" if MemFree[1][5:6] and not MemFree[1][6:7] else _("Free memory:") + "\t" + "\t" + MemFree[1][0:1] + "." + MemFree[1][1:4] + " MB" + "\n"
 			if "Buffers:" in tstLine:
 				Buffers = out_lines[lidx].split()
 				self.AboutText += _("Buffers:") + "\t" + "\t" + Buffers[1][0:2] + " MB" + "\n" if Buffers[1][4:5] else _("Buffers:") + "\t" + "\t" + Buffers[1][0:1] + " MB" + "\n"
