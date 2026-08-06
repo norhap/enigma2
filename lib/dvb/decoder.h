@@ -5,6 +5,7 @@
 #include <lib/dvb/demux.h>
 
 class eSocketNotifier;
+class eHEVCHDRDetector;
 
 class eDVBAudio: public iObject
 {
@@ -40,6 +41,14 @@ private:
 	sigc::signal<void(struct iTSMPEGDecoder::videoEvent)> m_event;
 	int m_width, m_height, m_framerate, m_aspect, m_progressive, m_gamma;
 	static int readApiSize(int fd, int &xres, int &yres, int &aspect);
+
+	// HEVC HDR fallback for drivers which do not expose a usable sGamma.
+	eHEVCHDRDetector *m_hdr_detector;
+	int m_hdr_gamma, m_driver_gamma;
+	bool m_hdr_gamma_authoritative, m_gamma_from_driver_event;
+	void hdr_gamma_detected(int gamma);
+	void publish_gamma(int gamma);
+	int read_driver_gamma();
 public:
 	enum { UNKNOWN = -1, MPEG2, MPEG4_H264, VC1 = 3, MPEG4_Part2, VC1_SM, MPEG1, H265_HEVC, AVS = 16, AVS2 = 17 };
 	eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable=false);

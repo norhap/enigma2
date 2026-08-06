@@ -3,6 +3,7 @@
 #include <lib/base/eerror.h>
 #include <lib/base/wrappers.h>
 #include <lib/dvb/decoder.h>
+#include <lib/dvb/hevc_hdr_detector.h>
 #include <lib/components/tuxtxtapp.h>
 #include <linux/dvb/audio.h>
 #include <linux/dvb/video.h>
@@ -261,7 +262,8 @@ int eDVBVideo::m_close_invalidates_attributes = -1;
 
 eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable)
 	: m_demux(demux), m_dev(dev), m_fcc_enable(fcc_enable),
-	m_width(-1), m_height(-1), m_framerate(-1), m_aspect(-1), m_progressive(-1), m_gamma(-1)
+	m_width(-1), m_height(-1), m_framerate(-1), m_aspect(-1), m_progressive(-1), m_gamma(-1),
+	m_hdr_detector(0), m_hdr_gamma(-1), m_driver_gamma(-1), m_hdr_gamma_authoritative(false), m_gamma_from_driver_event(false)
 {
 	char filename[128] = {};
 	sprintf(filename, "/dev/dvb/adapter%d/video%d", demux ? demux->adapter : 0, dev);
@@ -288,6 +290,11 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable)
 		m_fd_demux = -1;
 	}
 
+	if (demux && m_dev == 0)
+	{
+		m_hdr_detector = new eHEVCHDRDetector(demux, sigc::mem_fun(*this, &eDVBVideo::hdr_gamma_detected));
+		eDebug("[eHEVCHDRDetector] attached to video decoder %d (FCC=%d)", m_dev, m_fcc_enable);
+	}
 #ifndef DREAMBOX
 	if (m_fd >= 0)
 	{
@@ -332,8 +339,24 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable)
 
 int eDVBVideo::startPid(int pid, int type)
 {
+	if (m_hdr_detector)
+		m_hdr_detector->stop();
+	m_gamma = -1;
+	m_hdr_gamma = -1;
+	m_driver_gamma = -1;
+	m_hdr_gamma_authoritative = false;
+	m_gamma_from_driver_event = false;
+
+	if (type == H265_HEVC)
+		eDebug("[eHEVCHDRDetector] HEVC start request decoder=%d PID=%04x FCC=%d detector=%s",
+			m_dev, pid, m_fcc_enable, m_hdr_detector ? "yes" : "no");
+
 	if (m_fcc_enable)
+	{
+		if (type == H265_HEVC && m_hdr_detector)
+			m_hdr_detector->start(pid);
 		return 0;
+	}
 
 	if (m_fd >= 0)
 	{
@@ -426,11 +449,16 @@ int eDVBVideo::startPid(int pid, int type)
 		else
 			eDebugNoNewLine("ok\n");
 	}
+	if (type == H265_HEVC && m_hdr_detector)
+		m_hdr_detector->start(pid);
 	return 0;
 }
 
 void eDVBVideo::stop()
 {
+	if (m_hdr_detector)
+		m_hdr_detector->stop();
+
 	if (m_fcc_enable)
 		return;
 
@@ -533,11 +561,63 @@ int eDVBVideo::getPTS(pts_t &now)
 
 eDVBVideo::~eDVBVideo()
 {
+	delete m_hdr_detector;
+	m_hdr_detector = 0;
 	if (m_fd >= 0)
 		::close(m_fd);
 	if (m_fd_demux >= 0)
 		::close(m_fd_demux);
 	eDebug("[eDVBVideo%d] destroy", m_dev);
+}
+
+void eDVBVideo::publish_gamma(int gamma)
+{
+	if (gamma < 0 || gamma > 3 || gamma == m_gamma)
+		return;
+
+	struct iTSMPEGDecoder::videoEvent event = {};
+	event.type = iTSMPEGDecoder::videoEvent::eventGammaChanged;
+	m_gamma = event.gamma = gamma;
+	/* emit */ m_event(event);
+}
+
+int eDVBVideo::read_driver_gamma()
+{
+	char tmp[64] = {};
+	sprintf(tmp, "/proc/stb/vmpeg/%d/gamma", m_dev);
+	int driver_gamma = -1;
+	CFile::parseIntHex(&driver_gamma, tmp);
+	if (driver_gamma >= 0 && driver_gamma <= 3)
+		m_driver_gamma = driver_gamma;
+	return m_driver_gamma;
+}
+
+void eDVBVideo::hdr_gamma_detected(int gamma)
+{
+	if (gamma != 0 && gamma != 2 && gamma != 3)
+		return;
+
+	if (!m_gamma_from_driver_event && m_driver_gamma < 0)
+		read_driver_gamma();
+
+	m_hdr_gamma = gamma;
+	m_hdr_gamma_authoritative = gamma == 2 || gamma == 3;
+
+	/* A valid native HDR/HLG value remains the highest-confidence source. */
+	if (m_driver_gamma >= 2)
+		return;
+
+	if (m_hdr_gamma_authoritative)
+	{
+		eDebug("[eDVBVideo%d] HEVC bitstream gamma %d", m_dev, gamma);
+		publish_gamma(gamma);
+	}
+	else if (!m_gamma_from_driver_event && m_driver_gamma < 1)
+	{
+		/* Do not replace the native 'traditional HDR' value, which the parser cannot infer. */
+		eDebug("[eDVBVideo%d] HEVC bitstream gamma 0 (SDR fallback)", m_dev);
+		publish_gamma(0);
+	}
 }
 
 void eDVBVideo::video_event(int)
@@ -588,8 +668,6 @@ void eDVBVideo::video_event(int)
 			}
 			else if (evt.type == 17 /*VIDEO_EVENT_GAMMA_CHANGED*/)
 			{
-				struct iTSMPEGDecoder::videoEvent event = {};
-				event.type = iTSMPEGDecoder::videoEvent::eventGammaChanged;
 				/*
 				 * Possible gamma values
 				 * 0: Traditional gamma - SDR luminance range
@@ -597,9 +675,20 @@ void eDVBVideo::video_event(int)
 				 * 2: SMPTE ST2084 (aka HDR10)
 				 * 3: Hybrid Log-gamma
 				 */
-				m_gamma = event.gamma = evt.u.frame_rate;
-				eDebugNoNewLine("GAMMA_CHANGED %d\n", m_gamma);
-				/* emit */ m_event(event);
+				const int driver_gamma = evt.u.frame_rate;
+				if (driver_gamma >= 0 && driver_gamma <= 3)
+				{
+					m_driver_gamma = driver_gamma;
+					m_gamma_from_driver_event = true;
+					int gamma = driver_gamma;
+					if (m_hdr_gamma_authoritative && m_hdr_gamma >= 2 && gamma < 2)
+						gamma = m_hdr_gamma;
+						eDebugNoNewLine("GAMMA_CHANGED %d\n", gamma);
+					publish_gamma(gamma);
+					if (m_hdr_detector && driver_gamma >= 2)
+						m_hdr_detector->stop();
+				}
+				eDebugNoNewLine("invalid GAMMA_CHANGED %d\n", driver_gamma);
 			}
 			else
 				eDebugNoNewLine("unhandled DVBAPI Video Event %d\n", evt.type);
@@ -714,9 +803,13 @@ int eDVBVideo::getGamma()
 	{
 		if (m_gamma == -1)
 		{
-			char tmp[64] = {};
-			sprintf(tmp, "/proc/stb/vmpeg/%d/gamma", m_dev);
-			CFile::parseIntHex(&m_gamma, tmp);
+			const int driver_gamma = read_driver_gamma();
+			if (driver_gamma >= 0)
+			{
+				m_gamma = driver_gamma;
+				if (m_hdr_detector && driver_gamma >= 2)
+					m_hdr_detector->stop();
+			}
 		}
 	}
 	return m_gamma;
