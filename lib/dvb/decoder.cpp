@@ -290,17 +290,23 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable)
 		m_fd_demux = -1;
 	}
 
+#if defined(HAVE_FCC) // [norhap] fixme, This needs to be checked for issues stemming from UHD video with HAVE_FCC
+	eDebug("[eDVBVideo] FCC=%d", m_fcc_enable);
+#else
 	if (demux && m_dev == 0)
 	{
 		m_hdr_detector = new eHEVCHDRDetector(demux, sigc::mem_fun(*this, &eDVBVideo::hdr_gamma_detected));
-		eDebug("[eHEVCHDRDetector] attached to video decoder %d (FCC=%d)", m_dev, m_fcc_enable);
+		eDebug("[eHEVCHDRDetector] attached to video decoder %d", m_dev);
 	}
+#endif
+
 #ifndef DREAMBOX
 	if (m_fd >= 0)
 	{
 		::ioctl(m_fd, VIDEO_SELECT_SOURCE, demux ? VIDEO_SOURCE_DEMUX : VIDEO_SOURCE_HDMI);
 	}
 #endif
+
 	if (m_close_invalidates_attributes < 0)
 	{
 		/*
