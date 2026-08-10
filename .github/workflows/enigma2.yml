@@ -17,9 +17,9 @@ jobs:
       CC: "gcc-${{ matrix.gcc }}"
       CXX: "g++-${{ matrix.gcc }}"
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: Setup Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python }}
     - name: install python packages and flake8
@@ -28,7 +28,7 @@ jobs:
     - name: install dev packages
       run: |
         sudo apt-get -q update
-        sudo apt install docbook-xsl gettext automake build-essential libcrypt-dev libunwind-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libfribidi-dev libtool libavahi-client-dev libgif-dev mm-common libfreetype6-dev libjpeg-turbo8-dev libcurl4-openssl-dev python3-dev zlib1g-dev swig libssl-dev linux-libc-dev libwebp-dev --reinstall docbook-xsl
+        sudo apt install docbook-xsl gettext automake build-essential libcrypt-dev libunwind-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libfribidi-dev libtool libavahi-client-dev libgif-dev mm-common libfreetype6-dev libjpeg-turbo8-dev libcurl4-openssl-dev python3-dev zlib1g-dev swig libssl-dev linux-libc-dev libwebp-dev --reinstall docbook-xsl yarnpkg 
     - name: Check format PEP8
       run: |
         echo "checking locale format..."
