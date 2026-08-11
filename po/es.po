@@ -2390,6 +2390,12 @@ msgstr "Ajustes OSD 3D"
 msgid "Auto DiSEqC"
 msgstr "DiSEqC Automático"
 
+msgid "Auto-reset after boot"
+msgstr "Reinicio automático después del arranque"
+
+msgid "Auto-reset action"
+msgstr "Acción de reinicio automático"
+
 msgid "Activate network settings"
 msgstr "Activar ajustes de red"
 
@@ -2714,9 +2720,6 @@ msgstr "CH"
 #, python-format
 msgid "CH%s"
 msgstr "CH%s"
-
-msgid "CA device Offset index"
-msgstr "Índice de desplazamiento del dispositivo CA"
 
 msgid "CiSelection"
 msgstr "Selección CI"
@@ -4575,14 +4578,17 @@ msgstr "PiP Externo"
 msgid "External Storage %s"
 msgstr "Almacenamiento externo %s"
 
-msgid "extra high"
-msgstr "extra alto"
+msgid "Extra High"
+msgstr "Extra Alto"
 
 msgid "Extra end time to ignore inactivity sleeptimer"
 msgstr "Hora de final adicional para ignorar inactividad"
 
 msgid "Extra motor options"
 msgstr "Opciones extra del motor"
+
+msgid "Extra settle delay before re-zap"
+msgstr "Retraso antes de volver a zapear"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
 msgstr "Hora de inicio adicional para ignorar el temporizador de inactividad"
@@ -5295,8 +5301,8 @@ msgstr "Ocultar listas"
 msgid "Hierarchy info"
 msgstr "Info Jerarquía"
 
-msgid "high"
-msgstr "alto"
+msgid "High"
+msgstr "Alto"
 
 msgid "High bitrate support"
 msgstr "Soporte de alta tasa de bits"
@@ -12008,9 +12014,6 @@ msgstr "Número de texto repetido en display."
 msgid "Offline decode delay (ms)"
 msgstr "Retraso decodificación sin conexión (milisegundos)"
 
-msgid "Offset and close CA device"
-msgstr "Desplazar y cerrar el dispositivo CA"
-
 msgid "OSD Setup"
 msgstr "Ajustes OSD"
 
@@ -12668,6 +12671,30 @@ msgstr "8"
 
 msgid "9"
 msgstr "9"
+
+msgid "5 seconds"
+msgstr "5 segundos"
+
+msgid "10 seconds"
+msgstr "10 segundos"
+
+msgid "15 seconds"
+msgstr "15 segundos"
+
+msgid "20 seconds"
+msgstr "20 segundos"
+
+msgid "25 seconds"
+msgstr "25 segundos"
+
+msgid "30 seconds"
+msgstr "30 segundos"
+
+msgid "45 seconds"
+msgstr "45 segundos"
+
+msgid "60 seconds"
+msgstr "60 segundos"
 
 msgid "Channellist menu"
 msgstr "Menú de lista de canales"
@@ -13563,8 +13590,14 @@ msgstr "Cantidad de grabaciones programadas dejadas."
 msgid "Offset after recording (in m)"
 msgstr "Desplazamiento después de la grabación (en minutos)"
 
+msgid "Offset and close CA device"
+msgstr "Desplazar y cerrar el dispositivo CA"
+
 msgid "Offset before recording (in m)"
 msgstr "Desplazamiento antes de grabar (en minutos)"
+
+msgid "Offset CA device index"
+msgstr "Índice de dispositivos CA de desplazamiento"
 
 msgid "On any service"
 msgstr "En cualquier canal"
@@ -17344,6 +17377,9 @@ msgstr "Reiniciar ambos"
 
 msgid "None"
 msgstr "Ninguno"
+
+msgid "Immediate"
+msgstr "Inmediato"
 
 msgid "Immediately restart selected devices."
 msgstr "Reinicie inmediatamente los seleccionados."
