@@ -234,3 +234,57 @@ class MessageBoxSummary(Screen):
 
 	def selectionChanged(self):
 		self["option"].setText(self.parent["list"].getCurrent()[0])
+
+
+class ModalMessageBox:
+	instance = None
+
+	def __init__(self, session):
+		if ModalMessageBox.instance:
+			print("[ModalMessageBox] Error: Only one ModalMessageBox instance is allowed!")
+		else:
+			ModalMessageBox.instance = self
+			self.dialog = session.instantiateDialog(MessageBox, "", enableInput=False, skinName="MessageBoxModal")
+			self.dialog.setAnimationMode(0)
+
+	def showMessageBox(self, text=None, timeout=-1, list=None, default=True, closeOnAnyKey=False, timeoutDefault=None, windowTitle=None, msgBoxID=None, typeIcon=MessageBox.TYPE_YESNO, enableInput=True, callback=None):
+		self.dialog.text = text
+		self.dialog["text"].setText(text)
+		self.dialog.typeIcon = typeIcon
+		self.dialog.type = typeIcon
+		self.dialog.picon = (typeIcon != MessageBox.TYPE_NOICON)  # Legacy picon argument to support old skins.
+		if typeIcon == MessageBox.TYPE_YESNO:
+			self.dialog.list = [(_("Yes"), True), (_("No"), False)] if list is None else list
+			self.dialog["list"].setList(self.dialog.list)
+			if isinstance(default, bool):
+				self.dialog.startIndex = 0 if default else 1
+			elif isinstance(default, int):
+				self.dialog.startIndex = default
+			else:
+				print(f"[MessageBox] Error: The context of the default ({default}) can't be determined!")
+			self.dialog["list"].show()
+		else:
+			self.dialog["list"].hide()
+			self.dialog.list = None
+		self.callback = callback
+		self.dialog.timeout = timeout
+		self.dialog.msgBoxID = msgBoxID
+		self.dialog.enableInput = enableInput
+		if enableInput:
+			self.dialog.createActionMap(-20)
+			self.dialog["actions"].execBegin()
+		self.dialog.closeOnAnyKey = closeOnAnyKey
+		self.dialog.timeoutDefault = timeoutDefault
+		self.dialog.windowTitle = windowTitle or self.dialog.TYPE_PREFIX.get(type, _("Message"))
+		self.dialog.baseTitle = self.dialog.windowTitle
+		self.dialog.activeTitle = self.dialog.windowTitle
+		self.dialog.reloadLayout()
+		self.dialog.close = self.close
+		self.dialog.show()
+
+	def close(self, *retVal):
+		if self.callback and callable(self.callback):
+			self.callback(*retVal)
+		if self.dialog.enableInput:
+			self.dialog["actions"].execEnd()
+		self.dialog.hide()

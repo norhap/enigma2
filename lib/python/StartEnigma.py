@@ -220,6 +220,7 @@ class Session:
 		self.dialog_stack = []
 		self.summary_stack = []
 		self.summary = None
+		self.onShutdown = []
 
 		self.in_exec = False
 
@@ -396,6 +397,20 @@ class Session:
 		if self.summary is not None:
 			self.summary.show()
 
+	def doShutdown(self):
+		for callback in self.onShutdown:
+			if callable(callback):
+				callback()
+		Toast.instance.doShutdown()
+
+	def showInfo(self, text, timeout=4):
+		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_INFO, timeout=timeout)
+
+	def showWarning(self, text, timeout=4):
+		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_WARNING, timeout=timeout)
+
+	def showError(self, text, timeout=4):
+		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_ERROR, timeout=timeout)
 
 enigma.eProfileWrite("Standby,PowerKey")
 import Screens.Standby  # noqa: E402
@@ -548,6 +563,9 @@ def runScreenTest():
 	vol = VolumeControl(session)
 	enigma.eProfileWrite("Init:PowerKey")
 	power = PowerKey(session)
+	enigma.eProfileWrite("Global MessageBox Screen")
+	modalMessagebox = ModalMessageBox(session)  # noqa F841
+	toast = Toast(session)  # noqa F841
 
 	if BoxInfo.getItem("vfdsymbol"):
 		enigma.eProfileWrite("VFDSYMBOLS")
@@ -632,6 +650,7 @@ def runScreenTest():
 
 	session.nav.stopService()
 	session.nav.shutdown()
+	session.doShutdown()
 
 	configfile.save()
 	from Screens import InfoBarGenerics
@@ -702,6 +721,10 @@ enigma.eProfileWrite("EpgCacheSched")
 import Components.EpgLoadSave  # noqa: E402
 Components.EpgLoadSave.EpgCacheSaveCheck()
 Components.EpgLoadSave.EpgCacheLoadCheck()
+
+enigma.eProfileWrite("ModalMessageBox")
+from Screens.MessageBox import ModalMessageBox
+from Screens.Toast import Toast
 
 # if config.clientmode.enabled.value:  # add to navigation instance for the user to decide if channels are imported or not after restarting enigma2.
 # import Components.ChannelsImporter

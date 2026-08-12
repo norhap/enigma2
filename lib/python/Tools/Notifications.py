@@ -1,11 +1,10 @@
-import threading
-lock = threading.Lock()
 from enigma import eTimer
 from Screens.MessageBox import MessageBox
+import threading
 
 notifications = []
 notificationAdded = []
-
+lock = threading.Lock()
 # notifications which are currently on screen (and might be closed by similiar notifications)
 current_notifications = []
 
@@ -71,9 +70,6 @@ def RemovePopup(id):
 		if x[0] == id:
 			print("[Notifications] found in current notifications")
 			x[1].close()
-
-
-from Screens.MessageBox import MessageBox  # noqa: E402 module level import not at top of file
 
 
 def AddPopup(text, type, timeout, id=None):

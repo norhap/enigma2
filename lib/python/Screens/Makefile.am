@@ -82,6 +82,7 @@ install_PYTHON = \
 	TimerEntry.py \
 	TimerSelection.py \
 	Timeshift.py \
+	Toast.py \
 	UnhandledKey.py \
 	VirtualKeyBoard.py \
 	Volume.py \
