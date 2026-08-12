@@ -109,7 +109,6 @@ eEncoder::eEncoder()
 			encoder.push_back(EncoderContext(navigation_instance_normal, navigation_instance_alternative));
 			encoder.back().backend = bcm_encoder ? EncoderContext::backend_bcm : EncoderContext::backend_proc;
 		}
-
 	}
 }
 
@@ -623,7 +622,6 @@ void eEncoder::navigation_event_1(int event)
 
 void eEncoder::EncoderContext::thread(void)
 {
-
 	hasStarted();
 
 	eDebug("[EncoderContext %x] start ioctl transcoding", (int)pthread_self());

@@ -86,7 +86,6 @@ class eEncoder
 
 		std::vector<EncoderContext> encoder;
 		bool bcm_encoder;
-
 		ePtr<eConnection> m_nav_event_connection_0;
 		ePtr<eConnection> m_nav_event_connection_1;
 
