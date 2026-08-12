@@ -412,6 +412,7 @@ class Session:
 	def showError(self, text, timeout=4):
 		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_ERROR, timeout=timeout)
 
+
 enigma.eProfileWrite("Standby,PowerKey")
 import Screens.Standby  # noqa: E402
 from Screens.Menu import MainMenu, mdom  # noqa: E402
