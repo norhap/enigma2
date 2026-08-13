@@ -3637,6 +3637,9 @@ msgstr "Dinamarca"
 msgid "Depth"
 msgstr "Profundidad"
 
+msgid "Descrambling options"
+msgstr "Opciones de descifrado"
+
 msgid "Description"
 msgstr "Descripción"
 
@@ -4588,7 +4591,7 @@ msgid "Extra motor options"
 msgstr "Opciones extra del motor"
 
 msgid "Extra settle delay before re-zap"
-msgstr "Retraso antes de volver a zapear"
+msgstr "Retraso antes de volver a iniciar"
 
 msgid "Extra start time to ignore inactivity sleeptimer"
 msgstr "Hora de inicio adicional para ignorar el temporizador de inactividad"
