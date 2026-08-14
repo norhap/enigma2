@@ -101,7 +101,7 @@ runCallbacks = False
 # E.g. "MySkin/skin_display.xml"
 #
 def InitSkins():
-	global currentPrimarySkin, currentDisplaySkin, resolutions
+	global currentPrimarySkin, currentDisplaySkin
 	# #################################################################################################
 	if isfile("/etc/.restore_skins"):
 		unlink("/etc/.restore_skins")
@@ -220,27 +220,35 @@ def loadSkin(filename, scope=SCOPE_SKINS, desktop=getDesktop(GUI_SKIN_ID), scree
 
 
 def reloadSkins():
-	global colors, domScreens, fonts, menus, parameters, setups, switchPixmap
+	for styleID in windowStyles:  # Reset window styles so a new skin without its own <windowstyle> doesn't inherit the previous skin's fonts/colors.
+		eWindowStyleManager.getInstance().setStyle(styleID, eWindowStyleSkinned())
 	domScreens.clear()
 	colors.clear()
-	colors = {
+	colors.update({
 		"key_back": gRGB(0x00313131),
 		"key_blue": gRGB(0x0018188B),
 		"key_green": gRGB(0x001F771F),
 		"key_red": gRGB(0x009F1313),
 		"key_text": gRGB(0x00FFFFFF),
 		"key_yellow": gRGB(0x00A08500)
-	}
+	})
 	gradients.clear()
 	fonts.clear()
-	fonts = {
+	fonts.update({
 		"Body": ("Regular", 18, 22, 16),
 		"ChoiceList": ("Regular", 20, 24, 18)
-	}
+	})
 	menus.clear()
+	screens.clear()
 	parameters.clear()
 	setups.clear()
 	switchPixmap.clear()
+	windowStyles.clear()
+	scrollLabelStyle.clear()
+	subtitleFonts.clear()
+	constantWidgets.clear()
+	layouts.clear()
+	variables.clear()
 	InitSkins()
 
 
@@ -376,25 +384,26 @@ def parseColor(value, default=0x00FFFFFF):
 
 # Convert a coordinate string into a number.  Used to convert object position and
 # size attributes into a number.
-#    s is the input string.
-#    e is the the parent object size to do relative calculations on parent
-#    size is the size of the object size (e.g. width or height)
-#    font is a font object to calculate relative to font sizes
+# 	s is the input string.
+# 	e is the parent object size to do relative calculations on parent
+# 	size is the size of the object size (e.g. width or height)
+# 	font is a font object to calculate relative to font sizes
 # Note some constructs for speeding up simple cases that are very common.
 #
 # Can do things like:  10+center-10w+4%
 # To center the widget on the parent widget,
-#    but move forward 10 pixels and 4% of parent width
-#    and 10 character widths backward
+# 	but move forward 10 pixels and 4% of parent width
+# 	and 10 character widths backward
 # Multiplication, division and subexpressions are also allowed: 3*(e-c/2)
 #
-# Usage:  center : Center the object on parent based on parent size and object size.
-#         e      : Take the parent size/width.
-#         c      : Take the center point of parent size/width.
-#         %      : Take given percentage of parent size/width.
-#         w      : Multiply by current font width. (Only to be used in elements where the font attribute is available, i.e. not "None")
-#         h      : Multiply by current font height. (Only to be used in elements where the font attribute is available, i.e. not "None")
-#         f      : Replace with getSkinFactor().
+# Usage:
+# 	center	Center the object on parent based on parent size and object size.
+# 	e	Take the parent size/width.
+# 	c	Take the center point of parent size/width.
+# 	%	Take given percentage of parent size/width.
+# 	w	Multiply by current font width. (Only to be used in elements where the font attribute is available, i.e. not "None")
+# 	h	Multiply by current font height. (Only to be used in elements where the font attribute is available, i.e. not "None")
+# 	f	Replace with getSkinFactor().
 #
 def parseCoordinate(value, parent, size=0, font=None, scale=(1, 1)):
 	def scaleNumbers(coordinate, scale):
@@ -534,10 +543,10 @@ def parseGradient(value):
 
 def parseHorizontalAlignment(value):
 	options = {
-		"left": 0,  # RT_HALIGN_LEFT,
-		"center": 1,  # RT_HALIGN_CENTER,
-		"right": 2,  # RT_HALIGN_RIGHT,
-		"block": 3  # RT_HALIGN_BLOCK
+		"left": 0,  # RT_HALIGN_LEFT.
+		"center": 1,  # RT_HALIGN_CENTER.
+		"right": 2,  # RT_HALIGN_RIGHT.
+		"block": 3  # RT_HALIGN_BLOCK.
 	}
 	return parseOptions(options, "horizontalAlignment", value, 0)
 
@@ -599,19 +608,20 @@ def parseOrientation(value):
 		"orBottomToTop": 0x11
 	}
 	value = parseOptions(options, "orientation", value, 0x00)
-	return (value & 0x10, value & 0x01)  # (orHorizontal / orVertical, not swapped / swapped)
+	return (value & 0x10, value & 0x01)  # (orHorizontal / orVertical, not swapped / swapped).
 
 
 # Convert a parameter string into a value based on string triggers.  The type
 # and value returned is based on the trigger.
 #
-# Usage:  *string   : The paramater is a string with the "*" is removed (Type: String).
-#         #aarrggbb : The parameter is a HEX colour string (Type: Integer).
-#         0xABCD    : The parameter is a HEX integer (Type: Integer).
-#         5.3       : The parameter is a floating point number (Type: Float).
-#         red       : The parameter is a named color (Type: Integer).
-#         font;zize : The parameter is a font name with a font size (Type: List[Font, Size]).
-#         123       : The parameter is an integer (Type: Integer).
+# Usage:
+# 	*string		The paramater is a string with the "*" is removed (Type: String).
+# 	#aarrggbb	The parameter is a HEX color string (Type: Integer).
+# 	0xABCD		The parameter is a HEX integer (Type: Integer).
+# 	5.3		The parameter is a floating point number (Type: Float).
+# 	red		The parameter is a named color (Type: Integer).
+# 	font;zize	The parameter is a font name with a font size (Type: List[Font, Size]).
+# 	123		The parameter is an integer (Type: Integer).
 #
 def parseParameter(value):
 	"""This function is responsible for parsing parameters in the skin, it can parse integers, floats, hex colors, hex integers, named colors, fonts and strings."""
@@ -875,10 +885,10 @@ def parsePadding(attribute, value):
 
 def parseVerticalAlignment(value):
 	options = {
-		"top": 0,  # RT_VALIGN_TOP,
-		"center": 1,  # RT_VALIGN_CENTER,
-		"middle": 1,  # RT_VALIGN_CENTER,
-		"bottom": 2  # RT_VALIGN_BOTTOM
+		"top": 0,  # RT_VALIGN_TOP.
+		"center": 1,  # RT_VALIGN_CENTER.
+		"middle": 1,  # RT_VALIGN_CENTER.
+		"bottom": 2  # RT_VALIGN_BOTTOM.
 	}
 	return parseOptions(options, "verticalAlignment", value, 1)
 
@@ -1427,7 +1437,6 @@ def applyAllAttributes(guiObject, desktop, attributes, scale=((1, 1), (1, 1))):
 def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN):
 	"""Loads skin data like colors, windowstyle etc."""
 	assert domSkin.tag == "skin", "root element in skin must be 'skin'!"
-	global colors, fonts, menus, parameters, setups, switchPixmap, resolutions, scrollLabelStyle, subtitleFonts
 	for tag in domSkin.findall("output"):
 		scrnID = parseInteger(tag.attrib.get("id", GUI_SKIN_ID), GUI_SKIN_ID)
 		if scrnID == GUI_SKIN_ID:
