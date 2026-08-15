@@ -843,18 +843,20 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def getPoster(self):
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.getCurrent())
-		movietitle = info and info.getName(self.getCurrent())
+		movietitle = info and info.getName(self.getCurrent())[0:10]
 		pathPoster = config.usage.default_path.value + "IMDB/"
-		posterName = movietitle + ".jpg" if movietitle else None
+		posterName = ""
+		if exists(str(pathPoster)):
+			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if str(movietitle) in x]:
+				posterName = poster
 		if posterName:
-			if exists(str(pathPoster + posterName)):
-				self["hiddenpig"].show()
-				self["poster"].instance.setPixmap(loadJPG(pathPoster + posterName))
-				self["poster"].instance.setScale(1)
-				self["poster"].instance.show()
-			else:
-				self["poster"].instance.hide()
-				self["hiddenpig"].hide()
+			self["hiddenpig"].show()
+			self["poster"].instance.setPixmap(loadJPG(pathPoster + posterName))
+			self["poster"].instance.setScale(1)
+			self["poster"].instance.show()
+		else:
+			self["poster"].instance.hide()
+			self["hiddenpig"].hide()
 
 	def showEventInformation(self):
 		from Screens.EventView import EventViewSimple
