@@ -1623,10 +1623,7 @@ void eDVBDB::setNumberingMode(bool numberingMode)
 
 int eDVBDB::renumberBouquet(eBouquet &bouquet, int startChannelNum)
 {
-	eDebug("[eDVBDB] Renumber %s, starting at %d", bouquet.m_bouquet_name.c_str(), startChannelNum);
 	std::list<eServiceReference> &list = bouquet.m_services;
-	bool addBQFlag = (bouquet.m_bouquet_name != "Last Scanned");
-
 	for (std::list<eServiceReference>::iterator it = list.begin(); it != list.end(); ++it)
 	{
 		eServiceReference &ref = *it;
@@ -1650,35 +1647,9 @@ int eDVBDB::renumberBouquet(eBouquet &bouquet, int startChannelNum)
 				}
 			}
 		}
-
-		if (!(ref.flags & (eServiceReference::isMarker | eServiceReference::isDirectory)) || (ref.flags & eServiceReference::isNumberedMarker))
-		{
-			if (m_numbering_mode == 2)
-			{
-				if (m_lcnmap.size())
-				{
-					eServiceReferenceDVB channel = eServiceReferenceDVB(ref.toString());
-					channel.setServiceType(0);
-					std::map<eServiceReferenceDVB, LCNData>::iterator it = m_lcnmap.find(channel);
-					if (it != m_lcnmap.end())
-						ref.number = it->second.getLCN();
-				}
-			}
-			else
-				ref.number = startChannelNum++;
-		}
 		if( !(ref.flags & (eServiceReference::isMarker|eServiceReference::isDirectory)) ||
 		   (ref.flags & eServiceReference::isNumberedMarker) )
 			ref.number = startChannelNum++;
-
-		// add is in bouquet flag to m_services
-		if(addBQFlag && ref.flags == 0)
-		{
-			eServiceReferenceDVB &service = (eServiceReferenceDVB&)ref;
-			std::map<eServiceReferenceDVB, ePtr<eDVBService> >::iterator it(m_services.find(service));
-			if (it != m_services.end())
-				it->second->m_flags |= 8192;
-		}
 
 	}
 	return startChannelNum;
@@ -3115,7 +3086,7 @@ PyObject *eDVBDB::getAllServicesRaw(int type)
 				PyTuple_SET_ITEM(tuple, 2, PyUnicode_FromString(service->m_provider_display_name.c_str()));
 				PyTuple_SET_ITEM(tuple, 3, PyUnicode_FromString(service->m_service_name.c_str()));
 				PyTuple_SET_ITEM(tuple, 4, PyUnicode_FromString(!service->m_service_display_name.empty() ? service->m_service_display_name.c_str() : service->m_service_name.c_str()));
-				int flags = (service->m_flags & (eDVBService::dxIntNewServiceName | eDVBService::dxIntNewProvider)) >> 14;				
+				int flags = (service->m_flags & (eDVBService::dxIntNewServiceName | eDVBService::dxIntNewProvider)) >> 14;
 				PyTuple_SET_ITEM(tuple, 5, PyLong_FromLongLong(service->m_flags));
 				PyDict_SetItemString(serviceList, sit->first.toLCNReferenceString(false).c_str(), tuple);
 				Py_DECREF(tuple);
