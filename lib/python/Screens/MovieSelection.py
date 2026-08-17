@@ -843,11 +843,11 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def getPoster(self):
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.getCurrent())
-		movietitle = info and info.getName(self.getCurrent())[0:10]
+		movietitle = info and info.getName(self.getCurrent())[0:16]
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = ""
 		if exists(str(pathPoster)):
-			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if str(movietitle) in x]:
+			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if str(movietitle) in x and ".jpg" in x]:
 				posterName = poster
 		if posterName:
 			self["hiddenpig"].show()
