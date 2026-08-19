@@ -1003,10 +1003,12 @@ class SystemNetworkInfo(Screen):
 			if glob("/etc/rc2.d/S*zerotier") or glob("/etc/rc2.d/S*openvpn"):
 				self["IF"].setText(_("LAN connection"))
 			else:
-				self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
+				if self.iface:
+					self["IF"].setText(iNetwork.getFriendlyAdapterName(self.iface))
 			try:
-				iNetwork.getLinkState(self.iface, self.dataAvail)
-			except:
+				if self.iface:
+					iNetwork.getLinkState(self.iface, self.dataAvail)
+			except Exception:
 				pass
 			self["devicepic"].setPixmapNum(0)
 		self["devicepic"].show()
