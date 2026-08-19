@@ -7,7 +7,7 @@ from Components.Converter.Poll import Poll
 
 sucess_internet = False
 INTERNET_TIMEOUT = 2
-FEED_SERVER = "ip-api.com"
+FEED_SERVER = "google.com"
 
 
 class RouteInfo(Poll, Converter):
