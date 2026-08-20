@@ -844,11 +844,17 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.getCurrent())
 		movietitle = info and info.getName(self.getCurrent())[0:16]
+		movietitletwo = info and info.getName(self.getCurrent())[0:10]
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = ""
 		if exists(str(pathPoster)):
-			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if str(movietitle) in x and ".jpg" in x]:
-				posterName = poster
+			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if str(movietitle) in x and ".jpg" in x or str(movietitletwo) in x and ".jpg" in x]:
+				if poster.replace(".jpg", "") == str(movietitle):
+					posterName = poster
+				elif str(movietitle) in poster and not posterName:
+					posterName = poster
+				elif str(movietitletwo) in poster and not posterName:
+					posterName = poster
 		if posterName:
 			self["hiddenpig"].show()
 			self["poster"].instance.setPixmap(loadJPG(pathPoster + posterName))
