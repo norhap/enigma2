@@ -843,9 +843,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	def getPoster(self):
 		serviceHandler = eServiceCenter.getInstance()
 		info = serviceHandler.info(self.getCurrent())
-		movietitle = info and info.getName(self.getCurrent())[0:16]
-		movietitletwo = info and info.getName(self.getCurrent())[0:10]
-		movietitlethre = info and info.getName(self.getCurrent())[0:8]
+		event_title = info and info.getName(self.getCurrent())
+		movietitle = event_title[0:16]
+		movietitletwo = event_title[0:10]
+		movietitlethre = event_title[0:8]
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = ""
 		if exists(str(pathPoster)):
