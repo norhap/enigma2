@@ -15839,7 +15839,7 @@ msgid "Select the time delay between each repeat of the button."
 msgstr "Seleccione el tiempo de retraso entre cada repetición del botón."
 
 msgid "Synchronize system time using transponder or internet."
-msgstr "Sincronice la hora del sistema utilizando un transpondedor o internet."
+msgstr "Sincronice la hora del sistema utilizando un transpondedor o Internet."
 
 msgid "Sync time using"
 msgstr "Sincronizar hora usando"
@@ -17310,7 +17310,7 @@ msgid "Set the port of the OpenWebif from your fallback tuner."
 msgstr "Configure el puerto de OpenWebif desde su sintonizador de reserva."
 
 msgid "Requires internet connection."
-msgstr "Requiere conexión a internet."
+msgstr "Requiere conexión a Internet."
 
 msgid "Are you sure to delete image:\n"
 msgstr "Estás seguro de eliminar la imagen:\n"
@@ -17673,7 +17673,7 @@ msgid "Transponder time"
 msgstr "Hora transpondedor"
 
 msgid "Internet time"
-msgstr "Hora internet"
+msgstr "Hora Internet"
 
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr "Elija el estilo de formato de visualización del display para las fechas. 'D' / 'DD' es la fecha y 'M' / 'MM' es el mes en dígitos. ('DD' y 'MM' tienen ceros a la izquierda para valores de un solo dígito). La visualización de la pantalla se basará en su elección, pero puede verse influenciada por el skin."
@@ -19495,10 +19495,10 @@ msgstr ""
 
 #, python-format
 msgid "Your internet connection is working (IP address: %s)"
-msgstr "Su conexión a internet está funcionando (Dirección IP: %s)"
+msgstr "Su conexión a Internet está funcionando (Dirección IP: %s)"
 
 msgid "Your internet connection is not working."
-msgstr "Su conexión a internet no funciona."
+msgstr "Su conexión a Internet no funciona."
 
 msgid "Your network configuration has been activated."
 msgstr "Su configuración de red ha sido activada."
@@ -19516,13 +19516,13 @@ msgid "Your receiver can use tone amplitude. Consult your receiver's manual for 
 msgstr "Su receptor puede usar amplitud de tono. Consulte el manual de su receptor para más información."
 
 msgid "Your [BRANDMODEL] does not have an internet connection."
-msgstr "Su [BRANDMODEL] no tiene conexión a internet."
+msgstr "Su [BRANDMODEL] no tiene conexión a Internet."
 
 msgid "Your internet connection is working.\n\n"
-msgstr "Su conexión a internet está funcionando.\n\n"
+msgstr "Su conexión a Internet está funcionando.\n\n"
 
 msgid "Your internet connection is working.\n\nIP address:"
-msgstr "Su conexión a internet está funcionando.\n\nDirección IP:"
+msgstr "Su conexión a Internet está funcionando.\n\nDirección IP:"
 
 msgid "Your network mount has been updated."
 msgstr "Su montaje de red ha sido actualizado."
