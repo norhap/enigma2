@@ -848,7 +848,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = ""
 		if exists(str(pathPoster)):
-			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if str(movietitle) in x and ".jpg" in x or str(movietitletwo) in x and ".jpg" in x]:
+			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if ".jpg" in x and (str(movietitle) in x or str(movietitletwo) in x)]:
 				if poster.replace(".jpg", "") == str(movietitle):
 					posterName = poster
 				elif str(movietitle) in poster and not posterName:
