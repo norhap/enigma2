@@ -845,15 +845,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		info = serviceHandler.info(self.getCurrent())
 		movietitle = info and info.getName(self.getCurrent())[0:16]
 		movietitletwo = info and info.getName(self.getCurrent())[0:10]
+		movietitlethre = info and info.getName(self.getCurrent())[0:8]
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = ""
 		if exists(str(pathPoster)):
-			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if ".jpg" in x and (str(movietitle) in x or str(movietitletwo) in x)]:
+			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if ".jpg" in x and (str(movietitle) in x or str(movietitletwo) in x or str(movietitlethre) in x)]:
 				if poster.replace(".jpg", "") == str(movietitle):
 					posterName = poster
 				elif str(movietitle) in poster and not posterName:
 					posterName = poster
 				elif str(movietitletwo) in poster and not posterName:
+					posterName = poster
+				elif str(movietitlethre) in poster and not posterName:
 					posterName = poster
 		if posterName:
 			self["hiddenpig"].show()
