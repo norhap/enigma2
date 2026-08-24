@@ -681,6 +681,9 @@ msgstr "ecuestre"
 msgid "error starting scan"
 msgstr "error al iniciar el escaneo"
 
+msgid "Error to read data from"
+msgstr "Error al leer datos de"
+
 msgid "error while scanning"
 msgstr "error mientras se escanea"
 
@@ -3933,14 +3936,8 @@ msgstr ""
 "\n"
 "Tardará unos 5 segundos!"
 
-msgid ""
-"Do you want to shut down %s?\n"
-"\n"
-"To reactivate %s, enter to Vision Softcam or Softcam Setup."
-msgstr ""
-"¿Quieres parar %s?\n"
-"\n"
-"Para reactivar %s, ingrese a Vision Softcam o Configuración de Softcam."
+msgid "Do you want to shut down %s?\n\nTo reactivate %s press GREEN button."
+msgstr "¿Quieres parar %s?\n\nPara reactivar %s pulse botón VERDE."
 
 #, python-format
 msgid "Do you want to update your %s %s?"
@@ -7491,6 +7488,9 @@ msgstr ""
 msgid "Press INFO for additional information."
 msgstr "Pulse INFO para obtener información adicional."
 
+msgid "Press MENU and configue."
+msgstr "Pulse MENÚ y configure."
+
 msgid "Press MENU for additional options."
 msgstr "Pulse MENÚ para opciones adicionales."
 
@@ -9024,12 +9024,6 @@ msgstr "Muestra el estado de su conexión Wireless LAN.\n"
 
 msgid "Shuffle playlist"
 msgstr "Lista de reproducción aleatoria"
-
-msgid "Shutdown NCam"
-msgstr "Parar NCam"
-
-msgid "Shutdown OSCam"
-msgstr "Parar OSCam"
 
 msgid "Shutdown when in Standby"
 msgstr "Apagar cuando está en modo reposo"

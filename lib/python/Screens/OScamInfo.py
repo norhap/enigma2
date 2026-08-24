@@ -12,6 +12,7 @@ from pathlib import Path
 from xml.etree.ElementTree import XML, ParseError
 from ipaddress import ip_address
 from socket import getaddrinfo, gaierror
+from process import ProcessList
 
 # ENIGMA IMPORTS
 from enigma import eTimer, ePicLoad
@@ -29,6 +30,7 @@ from Tools.BoundFunction import boundFunction
 from Components.Pixmap import Pixmap
 
 # GLOBALS
+inactive_softcam = None
 MODULE_NAME = __name__.split(".")[-1]
 
 
@@ -280,6 +282,8 @@ class OSCamInfo(Screen, OSCamGlobals):
 		"""
 
 	def __init__(self, session):
+		global inactive_softcam
+		inactive_softcam = getSysSoftcam()
 		Screen.__init__(self, session)
 		self.skinName = "OSCamInfo"
 		self.setTitle("OSCam Info: " + _("Information") if getSysSoftcam() == "OSCam" else "NCam Info: " + _("Information"))
@@ -297,8 +301,8 @@ class OSCamInfo(Screen, OSCamGlobals):
 		self["camname"] = StaticText()
 		self["virtuell"] = StaticText()
 		self["resident"] = StaticText()
-		self["key_red"] = StaticText(_("Shutdown OSCam") if getSysSoftcam() == "OSCam" else _("Shutdown NCam"))
-		self["key_green"] = StaticText(_("Restart OSCam") if getSysSoftcam() == "OSCam" else _("Restart NCam"))
+		self["key_red"] = StaticText(_("Stop") + " " + getSysSoftcam())
+		self["key_green"] = StaticText(_("Restart") + " " + getSysSoftcam())
 		self["key_yellow"] = StaticText(_("Show Capabilities"))
 		self["key_blue"] = StaticText(_("Show Log"))
 		self["key_OK"] = StaticText()
@@ -318,6 +322,10 @@ class OSCamInfo(Screen, OSCamGlobals):
 		self.loop.callback.append(self._triggerDataUpdate)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 		self.bgColors = parameters.get("OSCamInfoBGcolors", (0x10fcfce1, 0x10f1f6e6, 0x10e2e0ef))
+
+	def _getSoftcam(self):
+		cam = str(ProcessList().named(getSysSoftcam().lower())).strip("[]")
+		return cam if cam else None
 
 	def onLayoutFinished(self):
 		self.showHideKeyOk()
@@ -369,8 +377,10 @@ class OSCamInfo(Screen, OSCamGlobals):
 		"""Update main UI"""
 		ctime = datetime.fromisoformat(datetime.now(timezone.utc).astimezone().isoformat())
 		currtime = "Protocol Time: %s - %s" % (ctime.strftime("%x"), ctime.strftime("%X"))
+		if currtime and self._getSoftcam() and not url:
+			self["extrainfos"].setText(f"{_("Error to read data from")} {getSysSoftcam().casefold()}.conf. {_("Press MENU and configue.")}")
 		na = _("n/a")
-		tag, camname = {"oscamapi": ("oscam", "OSCam"), "ncamapi": ("ncam", "NCam"), None: (na, na)}.get(api)
+		tag, camname = {"oscamapi": ("oscam", "OSCam"), "ncamapi": ("ncam", "NCam"), "": (na, na)}.get(api)
 		if webifok and result:
 			jsonData = loads(result).get(tag, {})
 			sysinfo = jsonData.get("sysinfo", {})
@@ -444,7 +454,7 @@ class OSCamInfo(Screen, OSCamGlobals):
 		else:
 			self.loop.stop()
 			self["buildinfos"].setText(url)
-			self["extrainfos"].setText(_("Unexpected error accessing WebIF: %s") % result.decode(encoding="latin-1", errors="ignore"))
+			self["extrainfos"].setText(f"{_("Error to read data from")} {getSysSoftcam().casefold()}.conf. {_("Press MENU and configue.")}" if not webifok and result and self._getSoftcam() else _("Unexpected error accessing WebIF: %s") % result.decode(encoding="latin-1", errors="ignore"))
 			self["timerinfos"].setText(currtime)  # set at least one element just for having the attribute 'activeComponents'
 
 	def strf_delta(self, td):  # converts deltatime-format in hours (e.g. '2 days, 01:00' in '49:00:00')
@@ -494,10 +504,14 @@ class OSCamInfo(Screen, OSCamGlobals):
 		self.session.openWithCallback(self.menuCallback, OSCamInfoSetup)
 
 	def keyShutdown(self):
-		self.session.openWithCallback(boundFunction(self.msgboxCB, "shutdown"), MessageBox, _("Do you want to shut down %s?\n\nTo reactivate %s, enter to Vision Softcam or Softcam Setup.") % (getSysSoftcam(), getSysSoftcam()), MessageBox.TYPE_YESNO, timeout=10, default=False)
+		self["key_red"].setText("")
+		self["key_green"].setText(_("Start") + " " + getSysSoftcam())
+		self.session.openWithCallback(boundFunction(self.msgboxCB, "shutdown"), MessageBox, _("Do you want to shut down %s?\n\nTo reactivate %s press GREEN button.") % (getSysSoftcam(), getSysSoftcam()), MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 	def keyRestart(self):
-		self.session.openWithCallback(boundFunction(self.msgboxCB, "restart"), MessageBox, _("Do you want to restart %s?\n\nThis will take about 5 seconds!") % getSysSoftcam(), MessageBox.TYPE_YESNO, timeout=10, default=False)
+		global inactive_softcam
+		softcam = inactive_softcam if not getSysSoftcam() else getSysSoftcam()
+		self.session.openWithCallback(boundFunction(self.msgboxCB, "restart"), MessageBox, _("Do you want to restart %s?\n\nThis will take about 5 seconds!") % softcam, MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 	def keyInfo(self):
 		self.loop.stop()
@@ -508,14 +522,20 @@ class OSCamInfo(Screen, OSCamGlobals):
 		self.session.openWithCallback(self.keyCallback, OSCamInfoLog)
 
 	def msgboxCB(self, action, answer):
+		global inactive_softcam
 		if answer:
 			self.loop.stop()
 			# Execute shutdown/restart in background to avoid blocking
 
 			def doAction():
+				from Components.Console import Console  # noqa: E402
 				webifok, api, url, signstatus, result = self.openWebIF(part=action)
 				if not webifok:
-					self._showActionError(result)
+					if inactive_softcam and not getSysSoftcam():
+						self["key_red"].setText(_("Shutdown" + " " + str(inactive_softcam)))
+						Console().ePopen("/etc/init.d/softcam." + str(inactive_softcam).casefold() + " start")
+					else:
+						self._showActionError(result)
 			callInThread(doAction)
 
 	def _showActionError(self, result):
