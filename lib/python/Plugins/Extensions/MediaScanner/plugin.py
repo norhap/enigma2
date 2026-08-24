@@ -4,6 +4,8 @@ from Screens.InfoBar import InfoBar
 from Components.Harddisk import harddiskmanager
 import os
 
+scanning_device = False
+
 
 def execute(option):
 	print("[MediaScanner] execute", option)
@@ -39,6 +41,8 @@ def mountpoint_choosen(option):
 
 
 def scan(session):
+	global scanning_device  # norhap report if the receiver is scanning the device.
+	scanning_device = True
 	from Screens.ChoiceBox import ChoiceBox
 	parts = [(r.tabbedDescription(), r.mountpoint, session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) if os.access(r.mountpoint, os.F_OK | os.R_OK)]
 	parts.append((_("Memory") + "\t/tmp", "/tmp", session))
