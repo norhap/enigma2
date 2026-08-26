@@ -1,10 +1,9 @@
+from Tools.StbHardware import getFPWasTimerWakeup
 from Plugins.Plugin import PluginDescriptor
 from Components.Scanner import scanDevice
 from Screens.InfoBar import InfoBar
 from Components.Harddisk import harddiskmanager
 import os
-
-scanning_device = False
 
 
 def execute(option):
@@ -41,8 +40,9 @@ def mountpoint_choosen(option):
 
 
 def scan(session):
-	global scanning_device  # norhap report if the receiver is scanning the device.
-	scanning_device = True
+	if getFPWasTimerWakeup():  # norhap Avoid being unable to go into standby mode due to having an open instance of ChoiceBox.
+		with open("/tmp/.listtoscanchoicebox", "w") as f:
+			f.write("")
 	from Screens.ChoiceBox import ChoiceBox
 	parts = [(r.tabbedDescription(), r.mountpoint, session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) if os.access(r.mountpoint, os.F_OK | os.R_OK)]
 	parts.append((_("Memory") + "\t/tmp", "/tmp", session))
@@ -90,6 +90,8 @@ def sessionstart(reason, session):
 def autostart(reason, **kwargs):
 	global global_session
 	if reason == 0:
+		if os.path.exists("/tmp/.listtoscanchoicebox"):
+			os.remove("/tmp/.listtoscanchoicebox")
 		harddiskmanager.on_partition_list_change.append(partitionListChanged)
 	elif reason == 1:
 		harddiskmanager.on_partition_list_change.remove(partitionListChanged)
