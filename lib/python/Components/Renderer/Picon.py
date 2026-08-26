@@ -2,7 +2,8 @@ from os.path import isdir, join
 from os import listdir
 from re import sub
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap
+from enigma import ePixmap, eServiceReference, iServiceInformation
+import NavigationInstance
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename, sanitizeFilename
 from Components.Harddisk import harddiskmanager
@@ -111,6 +112,19 @@ def getPiconName(serviceName):
 	return piconLocator.getPiconName(serviceName)
 
 
+def getDABImage(serviceName):
+	ref = eServiceReference(serviceName or "")
+	if ref.type != eServiceReference.idServiceDAB or NavigationInstance.instance is None:
+		return ""
+	playingRef = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+	if not playingRef or playingRef.toString().split(":", 10)[:10] != ref.toString().split(":", 10)[:10]:
+		return ""
+	service = NavigationInstance.instance.getCurrentService()
+	info = service and service.info()
+	image = info and info.getInfoString(iServiceInformation.sTagImage) or ""
+	return image if image and pathExists(image) else ""
+
+
 class Picon(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
@@ -133,7 +147,7 @@ class Picon(Renderer):
 	def changed(self, what):
 		if self.instance:
 			if what[0] in (self.CHANGED_DEFAULT, self.CHANGED_ALL, self.CHANGED_SPECIFIC):
-				pngname = piconLocator.getPiconName(self.source.text)
+				pngname = piconLocator.getPiconName(self.source.text) or getDABImage(self.source.text)
 				if not pathExists(pngname):  # no picon for service found
 					pngname = self.defaultpngname
 				if self.pngname != pngname:

@@ -37,7 +37,7 @@ from Screens.ServiceInfo import ServiceInfo
 from Screens.Hotkey import InfoBarHotkey, helpableHotkeyActionMap, hotkey, getHotkeyFunctions
 from Screens.PictureInPicture import PictureInPicture
 from Screens.RdsDisplay import RassInteractive
-from ServiceReference import ServiceReference, service_types_tv_ref, service_types_radio_ref, serviceRefAppendPath
+from ServiceReference import ServiceReference, service_types_tv_ref, service_types_radio_ref, serviceRefAppendPath, isRadioServiceReference
 from Tools.BoundFunction import boundFunction
 from Tools.Notifications import RemovePopup
 from Tools.Alternatives import GetWithAlternative
@@ -2870,7 +2870,13 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 	def onCreate(self):
 		self.setRadioMode()
 		self.restoreRoot()
-		lastservice = eServiceReference(config.radio.lastservice.value)
+		currentservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
+		if isRadioServiceReference(currentservice):
+			lastservice = currentservice
+			config.radio.lastservice.value = lastservice.toString()
+			config.radio.lastservice.save()
+		else:
+			lastservice = eServiceReference(config.radio.lastservice.value)
 		if lastservice.valid():
 			self.servicelist.setCurrent(lastservice)
 			if config.usage.e1like_radio_mode_last_play.value:

@@ -1550,6 +1550,13 @@ self.instance.move(ePoint(orgpos.x() + (orgwidth - newwidth) // 2, orgpos.y() + 
 	</screen>
 	<!-- Radio infobar -->
 	<screen name="RadioInfoBar" position="center,408" size="560,120" zPosition="-1" title="Radio">
+		<widget position="5,5" render="Picon" size="45,45" source="session.CurrentService" transparent="1" zPosition="3">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
+		<widget alphaTest="on" pixmap="icons/ico_dab-plus.png" position="15,62" render="Pixmap" size="25,25" source="session.CurrentService" zPosition="3">
+			<convert type="ServiceInfo">IsDAB</convert>
+			<convert type="ConditionalShowHide" />
+		</widget>
 		<widget source="session.CurrentService" render="Label" position="5,1" size="325,26" font="Regular;20" noWrap="1" transparent="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

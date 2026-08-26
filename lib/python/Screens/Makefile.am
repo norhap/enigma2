@@ -12,6 +12,7 @@ install_PYTHON = \
 	ClientMode.py \
 	Console.py \
 	CronTimer.py \
+	DABScan.py \
 	Dish.py \
 	DVD.py \
 	EpgSelection.py \

@@ -1016,6 +1016,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							const char *filename = ref.path.c_str();
 							ePtr<gPixmap> &pixmap =
 								(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
+								(m_cursor->type == eServiceReference::idServiceDAB) ? m_pixmaps[picDAB] :
 								(strstr(filename, "://")) ? m_pixmaps[picStream] :
 								(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
 								(orbpos == 0xEEEE) ? m_pixmaps[picDVB_T] : m_pixmaps[picDVB_S];

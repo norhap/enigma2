@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect
+from ServiceReference import isRadioServiceReference
 from Components.config import config
 from Components.GUIComponent import GUIComponent
 from Components.Renderer.Picon import getPiconName
@@ -45,6 +46,8 @@ class ServiceList(GUIComponent):
 		pic and self.l.setPixmap(self.l.picCrypto, pic)
 		pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/record.png"))
 		pic and self.l.setPixmap(self.l.picRecord, pic)
+		pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/ico_dab-plus.png"))
+		pic and self.l.setPixmap(self.l.picDAB, pic)
 
 		self.root = None
 		self.mode = self.MODE_NORMAL
@@ -197,7 +200,7 @@ class ServiceList(GUIComponent):
 		from Components.ServiceEventTracker import InfoBarCount
 		if adjust and config.usage.multibouquet.value and InfoBarCount == 1 and ref and ref.type != 8192:
 			print("[servicelist] search for service in userbouquets")
-			isRadio = ref.toString().startswith("1:0:2:") or ref.toString().startswith("1:0:A:")
+			isRadio = isRadioServiceReference(ref)
 			if self.serviceList:
 				revert_mode = config.servicelist.lastmode.value
 				revert_root = self.getRoot()

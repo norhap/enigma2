@@ -230,6 +230,9 @@ msgid_plural "%d pixels wide"
 msgstr[0] "%d píxel de ancho"
 msgstr[1] "%d píxeles de ancho"
 
+msgid "%d radio bouquets created"
+msgstr "%d bouquets de radio creados"
+
 #, python-format
 msgid "%d sec"
 msgstr "%d seg"
@@ -290,6 +293,12 @@ msgstr "%s %d.%d"
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr "%(freespace)s %(percent)s espacio libre en disco"
 
+msgid "%s - PID 0x%04X - %s"
+msgstr "%s - PID 0x%04X - %s"
+
+msgid "%s: bouquet could not be written"
+msgstr "%s: no se pudo escribir el bouquet"
+
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
 msgid "%s is no longer used. Should it be deleted?"
@@ -332,6 +341,9 @@ msgstr "Se está realizando una verificación de actualización en segundo plano
 # restorewizard vision core LCD
 msgid "A backup has been detected."
 msgstr "Se ha detectado una copia de seguridad."
+
+msgid "A DAB+ scan cannot run while a recording is in progress."
+msgstr "No se puede realizar una búsqueda DAB+ mientras hay una grabación en curso."
 
 msgid "There is an OpenPLi-based backup.\nYou need to restart Enigma2 if you want to restore it.\nDo you want to do it now?"
 msgstr "Hay una copia de seguridad basada en OpenPLi.\nDebes reiniciar Enigma2 si deseas restaurarla.\n¿Quieres hacerlo ahora?"
@@ -536,6 +548,12 @@ msgstr "Copiar a bouquets"
 
 msgid "create directory"
 msgstr "crar directorio"
+
+msgid "DAB+ Scan"
+msgstr "Búsqueda DAB+"
+
+msgid "DAB+ scan failed; existing bouquets were kept."
+msgstr "Error en la búsqueda DAB+; Se mantuvieron los bouquets existentes."
 
 msgid "daily"
 msgstr "diariamente"
@@ -6746,6 +6764,9 @@ msgstr "No hay clientes en streaming"
 msgid "No suitable sat tuner found!"
 msgstr "No se encuentra un sintonizador sat adecuado!"
 
+msgid "No supported DAB+ feeds are available for the satellite positions configured on this box."
+msgstr "No hay feeds DAB+ compatibles disponibles para las posiciones de los satélites configuradas en este receptor."
+
 msgid "No timeout"
 msgstr "Sin tiempo de espera"
 
@@ -6767,6 +6788,9 @@ msgstr "No hay actualizaciones disponibles"
 
 msgid "No updates available. Please try again later."
 msgstr "No hay actualizaciones disponibles. Por favor, inténtelo más tarde."
+
+msgid "No valid DAB+ feeds configured. Check /etc/enigma2/dab.xml."
+msgstr "No hay canales DAB+ válidos configurados. Consulte /etc/enigma2/dab.xml."
 
 msgid "No (with notification)"
 msgstr "No (con notificación)"
@@ -7119,6 +7143,9 @@ msgstr "Supervisión de los padres"
 
 msgid "Partial EPG"
 msgstr "EPG Parcial"
+
+msgid "Pass %d/%d"
+msgstr "Paso %d/%d"
 
 msgid "Passthrough audio handling delay AC3"
 msgstr "Retardo manejo de audio Passthrough AC3"
@@ -8338,6 +8365,18 @@ msgstr "¡Escaneado fallido!"
 msgid "Scanning..."
 msgstr "Escaneando…"
 
+msgid "Scanning DAB+ feed; waiting for live FIC data..."
+msgstr "Búsqueda de feed DAB+; esperando datos FIC en vivo..."
+
+msgid "Scanning can't be performed while recordings are in progress."
+msgstr "No se puede realizar la búsqueda mientras las grabaciones están en curso."
+
+msgid "Scanning completed, %d DAB+ services found."
+msgstr "Escaneo completado, %d canales DAB+ encontrados."
+
+msgid "Scanning: %d services found; validating live result (%d/%d)..."
+msgstr "Búscando: %d canales encontrados; validando resultado en vivo (%d/%d)..."
+
 msgid "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr "Escanea lamedbs por defecto ordenados por satélite con un motor de plato conectado"
 
@@ -9374,6 +9413,9 @@ msgstr "Comenzar grabación?"
 msgid "Restart Sleeptimer"
 msgstr "Reiniciar Temporizador"
 
+msgid "Starting DAB+ scan..."
+msgstr "Iniciando búsqueda DAB+ ..."
+
 msgid "Start scan"
 msgstr "Iniciar escaneo"
 
@@ -10107,6 +10149,9 @@ msgstr "Ajustes Horario"
 msgid "Time scale"
 msgstr "Escala de tiempo"
 
+msgid "Timeout waiting for FIC service data"
+msgstr "Tiempo de espera de espera de datos del servicio FIC"
+
 msgid "Timer"
 msgstr "Temporizadores Grabaciones"
 
@@ -10428,6 +10473,9 @@ msgid ""
 msgstr ""
 "Reset de fábrica en progreso\n"
 "Espere hasta que su %s %s se reinicie"
+
+msgid "Unable to start the DAB+ feed"
+msgstr "No se puede iniciar el feed DAB+"
 
 msgid "Uncover dashed flickering line for this service"
 msgstr "Descubrir línea parpadeante discontinua para este canal"

@@ -29,9 +29,14 @@ TUXBOX_APPS_DVB
 AM_CONDITIONAL(HAVE_GIT_DIR, test -d "$srcdir/.git")
 AM_CONDITIONAL(HAVE_FAKE_GIT_DIR, test -f "$srcdir/.git/last_commit_info")
 
-dnl versions of plugins-base
+dnl versions of gstreamer and plugins-base
+AC_ARG_WITH(gstversion,
+	AS_HELP_STRING([--with-gstversion],[use gstreamer version (version)]),
+	[GSTVERSION=$withval],[GSTVERSION=1.0])
+
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GSTVERSION gstreamer-pbutils-$GSTVERSION)
 PKG_CHECK_MODULES(TUXTXT, tuxbox-tuxtxt)
-PKG_CHECK_MODULES(BASE, [freetype2 fribidi glib-2.0 gio-2.0 libdvbsi++ libpng libwebp libxml-2.0 sigc++-3.0 libssl libcrypto libcurl])
+PKG_CHECK_MODULES(BASE, [gstreamer-$GSTVERSION gstreamer-pbutils-$GSTVERSION freetype2 fribidi glib-2.0 gio-2.0 libdvbsi++ libpng libwebp libxml-2.0 sigc++-3.0 libssl libcrypto libcurl])
 PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
 AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
 PKG_CHECK_MODULES(AVAHI, avahi-client)

@@ -11,6 +11,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.ServiceEvent import ServiceEvent
 # from Components.ServiceList import refreshServiceList
 from Components.Sources.Boolean import Boolean
+from Components.Sources.RdsDecoder import RdsDecoder
 from Components.config import config, ConfigBoolean, ConfigClock, ACTIONKEY_RIGHT
 from Components.SystemInfo import BoxInfo, SystemInfo, BRAND, getSysSoftcam
 from Components.UsageConfig import preferredInstantRecordPath, defaultMoviePath
@@ -368,6 +369,7 @@ class SecondInfoBar(Screen):
 	def __init__(self, session, skinName):
 		Screen.__init__(self, session)
 		self.skinName = ["SecondInfoBar"]
+		self["RdsDecoder"] = RdsDecoder(self.session.nav)
 		self["key_red"] = Label()
 		self["key_green"] = Label()
 		self["key_yellow"] = Label()
@@ -1581,6 +1583,7 @@ class InfoBarRdsDecoder:
 	"""provides RDS and Rass support/display"""
 
 	def __init__(self):
+		self["RdsDecoder"] = RdsDecoder(self.session.nav)
 		self.rds_display = self.session.instantiateDialog(RdsInfoDisplay)
 		self.session.instantiateSummaryDialog(self.rds_display)
 		self.rds_display.setAnimationMode(0)

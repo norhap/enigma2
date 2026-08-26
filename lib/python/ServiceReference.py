@@ -37,7 +37,10 @@ class ServiceReference(eServiceReference):
 
 	def isRecordable(self):
 		ref = self.ref
-		return ref.flags & eServiceReference.isGroup or (ref.type in (eServiceReference.idDVB, eServiceReference.idDVB + eServiceReference.idServiceIsScrambled, eServiceReference.idServiceHDMIIn, eServiceReference.idServiceMP3))
+		return ref.flags & eServiceReference.isGroup or (ref.type in (eServiceReference.idDVB, eServiceReference.idDVB + eServiceReference.idServiceIsScrambled, eServiceReference.idServiceHDMIIn, eServiceReference.idServiceMP3, eServiceReference.idServiceDAB))
+
+	def toString(self):
+		return self.ref.toString()
 
 
 def serviceRefIPToSAT():
@@ -74,6 +77,17 @@ def resolveAlternate(ref):
 		if not nref:
 			nref = getBestPlayableServiceReference(ref, eServiceReference(), True)
 	return nref
+
+
+def isRadioServiceReference(ref):
+	"""Return whether *ref* belongs in Enigma2's existing radio mode."""
+	if not isinstance(ref, eServiceReference):
+		ref = eServiceReference(ref or "")
+	return bool(ref.valid() and (ref.type == eServiceReference.idServiceDAB or ref.getUnsignedData(0) in (
+		eServiceReferenceDVB.dRadio,
+		eServiceReferenceDVB.dRadioAvc,
+	)))
+
 
 # type 1 = digital television service
 # type 4 = nvod reference service (NYI)

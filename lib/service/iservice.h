@@ -28,6 +28,7 @@ public:
 		idServiceMP3          = 0x1001,				// 4097
 		idServiceAirPlay      = 0x1009,				// 4105
 		idServiceXINE         = 0x1010,				// 4112
+		idServiceDAB          = 0x1013,				// 4115, DAB ensemble carried over DVB
 		idServiceDVD          = 0x1111,				// 4369
 		idServiceHDMIIn       = 0x2000,				// 8192
 	};
@@ -424,7 +425,8 @@ public:
 		sVideoInfo,
 		sIsSoftCSA,			/* 1 if current service uses software descrambling */
 
-		sUser = 0x100
+		sUser = 0x100,
+		sDABServiceList = sUser + 1 /* tab-separated SID, bitrate, DAB+ flag and label */
 	};
 	enum {
 		resNA = -1,
