@@ -72,6 +72,7 @@ public:
 		picDVB_C,
 		picStream,
 		picDAB,
+		picCatchup,
 		picServiceGroup,
 		picFolder,
 		picMarker,

@@ -48,6 +48,8 @@ class ServiceList(GUIComponent):
 		pic and self.l.setPixmap(self.l.picRecord, pic)
 		pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/ico_dab-plus.png"))
 		pic and self.l.setPixmap(self.l.picDAB, pic)
+		pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, "icons/ico_catchup.png"))
+		pic and self.l.setPixmap(self.l.picCatchup, pic)
 
 		self.root = None
 		self.mode = self.MODE_NORMAL

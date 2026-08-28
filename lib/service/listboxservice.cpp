@@ -648,7 +648,7 @@ bool eListboxServiceContent::checkServiceIsRecorded(eServiceReference ref,pNavig
 				for (std::list<eServiceReference>::iterator i(bouquet->m_services.begin()); i != bouquet->m_services.end(); ++i){
 					if (*i == it->second)
 						return true;
-				}					
+				}
 			}
 		}
 		else {
@@ -761,6 +761,13 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 		bool serviceFallback = false;
 		int isplayable_value;
 		gRGB EventProgressbarColor = 0xe7b53f;
+
+		bool isCatchUpAvailable = false;
+		std::string orig_ref_str = ref.toString();
+
+		if (orig_ref_str.find("catchupdays=") != std::string::npos) {
+			isCatchUpAvailable = true;
+		}
 
 		if (!marked && isPlayable && service_info && m_is_playable_ignore.valid())
 		{
@@ -1016,6 +1023,7 @@ void eListboxServiceContent::paint(gPainter &painter, eWindowStyle &style, const
 							const char *filename = ref.path.c_str();
 							ePtr<gPixmap> &pixmap =
 								(m_cursor->flags & eServiceReference::isGroup) ? m_pixmaps[picServiceGroup] :
+								(isCatchUpAvailable) ? m_pixmaps[picCatchup] :
 								(m_cursor->type == eServiceReference::idServiceDAB) ? m_pixmaps[picDAB] :
 								(strstr(filename, "://")) ? m_pixmaps[picStream] :
 								(orbpos == 0xFFFF) ? m_pixmaps[picDVB_C] :
