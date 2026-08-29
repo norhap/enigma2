@@ -41,7 +41,7 @@ class DABScan(ServiceScan):
 		self.scanFinished = False
 		ServiceScan.__init__(self, session, [])
 		self.skinName = ["ServiceScan"]
-		self.setImage("ServiceScan")
+		# self.setImage("ServiceScan") ATV.
 		self.setTitle(_("DAB+ Scan"))
 		self.pollTimer = eTimer()
 		self.pollTimer.callback.append(self.pollScan)
@@ -108,7 +108,9 @@ class DABScan(ServiceScan):
 		return default
 
 	def parseFeed(self, node, transponder=None, satellite=None):
-		attribute = lambda name, default=None: self.feedAttribute(node, transponder, satellite, name, default)
+		# attribute = lambda name, default=None: self.feedAttribute(node, transponder, satellite, name, default)
+		def attribute(name, default=None):
+			return self.feedAttribute(node, transponder, satellite, name, default)
 		feedId = attribute("id", "feed")
 		orbitalPosition = int(attribute("orbitalPosition", "-1"), 10)
 		if orbitalPosition < 0 or orbitalPosition > 3599:

@@ -153,6 +153,26 @@ msgstr[0] "%d canal encontrado"
 msgstr[1] "%d canales encontrados"
 
 #, python-format
+msgid "Scanning: %d%% complete"
+msgid_plural "Scanning: %d%% complete"
+msgstr[0] "Búsqueda: %d%% completo"
+msgstr[1] "Búsqueda: %d%% completo"
+
+#, python-format
+msgid "%d service found."
+msgid_plural "%d services found."
+msgstr[0] "%d canal encontrado."
+msgstr[1] "%d canales encontrados."
+
+msgid "Scanning completed, %d service found."
+msgid_plural "Scanning completed, %d services found."
+msgstr[0] "Búsqueda completado: %d canal encontrado."
+msgstr[1] "Búsqueda completada: %d canales encontrados."
+
+msgid "Scanning failed!"
+msgstr "¡La búsqueda ha fallado!"
+
+#, python-format
 msgid "%d core"
 msgid_plural "%d cores"
 msgstr[0] "%d núcleo"
@@ -553,7 +573,7 @@ msgid "DAB+ Scan"
 msgstr "Búsqueda DAB+"
 
 msgid "DAB+ scan failed; existing bouquets were kept."
-msgstr "Error en la búsqueda DAB+; Se mantuvieron los bouquets existentes."
+msgstr "Error en la búsqueda DAB+: Se mantuvieron los bouquets existentes."
 
 msgid "daily"
 msgstr "diariamente"
@@ -697,13 +717,13 @@ msgid "equestrian"
 msgstr "ecuestre"
 
 msgid "error starting scan"
-msgstr "error al iniciar el escaneo"
+msgstr "error al iniciar la búsqueda"
 
 msgid "Error to read data from"
 msgstr "Error al leer datos de"
 
 msgid "error while scanning"
-msgstr "error mientras se escanea"
+msgstr "error durante la búsqueda"
 
 msgid "et4000"
 msgstr "et4000"
@@ -4068,10 +4088,6 @@ msgid "EPG only"
 msgstr "Solo EPG"
 
 #, python-format
-msgid "ERROR - failed to scan (%s)!"
-msgstr "ERROR - falló el búsqueda (%s)!"
-
-#, python-format
 msgid "ERROR downloading file %s/%s"
 msgstr "ERROR descargando archivo %s/%s"
 
@@ -4151,10 +4167,10 @@ msgid "Enabled, screens Clients, Servers and Log are updated on time interval."
 msgstr "Habilitado, las pantallas Clientes, Servidores y Log se actualizan en intervalos de tiempo."
 
 msgid "Enable auto fastscan"
-msgstr "Habilitar escaneo rápido automático"
+msgstr "Habilitar búsqueda rápido automático"
 
 msgid "Enable auto fastscan for %s"
-msgstr "Habilitar escaneo rápido automático para %s"
+msgstr "Habilitar búsqueda rápido automático para %s"
 
 msgid "Enable 5V for active antenna"
 msgstr "Activar 5V para antena activa"
@@ -4341,6 +4357,9 @@ msgstr "Error"
 msgid "Error code"
 msgstr "Código de error"
 
+msgid "error starting scanning"
+msgstr "error iniciando la búsqueda"
+
 #, python-format
 msgid "Error during backup settings\n"
 msgstr "Error mientras se respaldaban sus ajustes\n"
@@ -4378,6 +4397,9 @@ msgstr "Error al detener el stream!"
 
 msgid "Enter directory"
 msgstr "Ingrese el directorio"
+
+msgid "ERROR - failed to scan (%s)!"
+msgstr "ERROR - ¡Ha fallado la búsqueda (%s)!"
 
 msgid "Error in ioctl '%s'!"
 msgstr "Error en ioctl ‘%s’!"
@@ -6743,6 +6765,9 @@ msgstr "No se encontró ningún frontend capaz de posicionar."
 msgid "No priority"
 msgstr "Sin prioridad"
 
+msgid "no resource manager"
+msgstr "sin administrador de recursos"
+
 msgid "No satellite frontend found!"
 msgstr "No se encontró frontend de satélite!"
 
@@ -7381,7 +7406,7 @@ msgid "Please wait for activation of your network configuration..."
 msgstr "Espere la activación de la configuración de red…"
 
 msgid "Please wait while scanning..."
-msgstr "Espere mientras escanea..."
+msgstr "Espere mientras busca..."
 
 msgid "Please wait while we prepare your network interfaces..."
 msgstr "Espere mientras prepabouquets los interfaces de su red…"
@@ -8321,8 +8346,8 @@ msgstr "Búsqueda SR adicional"
 #, python-format
 msgid "Scan completed, %d channel found."
 msgid_plural "Scan completed, %d channels found."
-msgstr[0] "Búsqueda completa, %d canal encontrado."
-msgstr[1] "Búsqueda completa, %d canales encontrados."
+msgstr[0] "Búsqueda completa: %d canal encontrado."
+msgstr[1] "Búsqueda completa: %d canales encontrados."
 
 msgid "Scan failed!"
 msgstr "Busqueda fallida!"
@@ -8331,7 +8356,7 @@ msgid "Scan files..."
 msgstr "Búsqueda ficheros…"
 
 msgid "Scan options"
-msgstr "Opciones de Escaneo"
+msgstr "Opciones de Búsqueda"
 
 msgid "Scan state"
 msgstr "Estado de la búsqueda"
@@ -8350,29 +8375,26 @@ msgstr "Buscando %s…"
 #, python-format
 msgid "Scanning - %d%% completed"
 msgid_plural "Scanning - %d%% completed"
-msgstr[0] "Escaneando - %d%% completado"
-msgstr[1] "Escaneando - %d%% completados"
+msgstr[0] "Búsqueda - %d%% completado"
+msgstr[1] "Búsqueda - %d%% completados"
 
 #, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
-msgstr[0] "Búsqueda completa, %d canal encontrado"
-msgstr[1] "Búsqueda completa, %d canales encontrados"
-
-msgid "Scanning failed!"
-msgstr "¡Escaneado fallido!"
+msgstr[0] "Búsqueda completa: %d canal encontrado"
+msgstr[1] "Búsqueda completa: %d canales encontrados"
 
 msgid "Scanning..."
-msgstr "Escaneando…"
+msgstr "Búscando…"
 
 msgid "Scanning DAB+ feed; waiting for live FIC data..."
-msgstr "Búsqueda de feed DAB+; esperando datos FIC en vivo..."
+msgstr "Búsqueda de feed DAB+: esperando datos FIC en vivo..."
 
 msgid "Scanning can't be performed while recordings are in progress."
 msgstr "No se puede realizar la búsqueda mientras las grabaciones están en curso."
 
 msgid "Scanning completed, %d DAB+ services found."
-msgstr "Escaneo completado, %d canales DAB+ encontrados."
+msgstr "Búsqueda completado: %d canales DAB+ encontrados."
 
 msgid "Scanning: %d services found; validating live result (%d/%d)..."
 msgstr "Búscando: %d canales encontrados; validando resultado en vivo (%d/%d)..."
@@ -9417,7 +9439,7 @@ msgid "Starting DAB+ scan..."
 msgstr "Iniciando búsqueda DAB+ ..."
 
 msgid "Start scan"
-msgstr "Iniciar escaneo"
+msgstr "Iniciar búsqueda"
 
 msgid "Start Sleeptimer"
 msgstr "Iniciar Temporizador de descanso"
@@ -11236,7 +11258,7 @@ msgid "no CI slots found"
 msgstr "no slots CI encontrados"
 
 msgid "no channel list"
-msgstr "sin lista de canales"
+msgstr "no hay lista de canales"
 
 msgid "no module found"
 msgstr "módulo no encontrado"
@@ -11255,9 +11277,6 @@ msgstr "Filtrado PID"
 
 msgid "Choose the CI protocol operation mode for standard CI or CI Plus."
 msgstr "Elija el modo de funcionamiento del protocolo CI para CI estándar o CI Plus."
-
-msgid "no resource manager"
-msgstr "sin administrador de recursos"
 
 msgid "No storage devices found"
 msgstr "No se encontraron dispositivos de almacenamiento"
@@ -11344,7 +11363,7 @@ msgid "Original timespan values"
 msgstr "Valores transcurridos de tiempo originales"
 
 msgid "pass"
-msgstr "pasar"
+msgstr "paso"
 
 msgid "pausing"
 msgstr "pausando"
@@ -14498,7 +14517,7 @@ msgid "USB: "
 msgstr "USB: "
 
 msgid "Wait please while scanning your box devices..."
-msgstr "Espere mientras escanea en su receptor dispositivos..."
+msgstr "Espere mientras busca en su receptor dispositivos..."
 
 msgid "Warning, this device is used for more than one mount point!\n"
 msgstr "Advertencia, este dispositivo se usa para más de un punto de montaje!\n"
@@ -16817,6 +16836,9 @@ msgstr "Mostrar información EPG para canal actual"
 msgid "%d of %d Bytes"
 msgstr "%d de %d Bytes"
 
+msgid "%d of %d feeds completed; failed feed bouquets were kept"
+msgstr "%d de %d feeds completados: Se mantuvieron los bouquets de feed fallido"
+
 msgid "%d of %d KB"
 msgstr "%d de %d KB"
 
@@ -17484,10 +17506,10 @@ msgid "Time synchronization method"
 msgstr "Método de sincronización horaria"
 
 msgid "FastScan"
-msgstr "Escaneo Rápido"
+msgstr "Búsqueda Rápida"
 
 msgid "Fastscan"
-msgstr "Escaneo rápido"
+msgstr "Búsqueda rápida"
 
 msgid "Recovery Mode"
 msgstr "Modo Recuperación"
@@ -19129,7 +19151,7 @@ msgid "Scan and search files and extensions in subdirs"
 msgstr "Escanea y busca archivos y extensiones en subdirectorios"
 
 msgid "For Media Scanner, enabled will take search more time, but will do a full scan of all subdirs where your media files or extensions are located."
-msgstr "Para Media Scanner, habilitado llevará más tiempo la búsqueda, pero realizará un escaneo completo de todos los subdirectorios donde se encuentran sus archivos multimedia o extensiones."
+msgstr "Para Media Scanner, habilitado llevará más tiempo la búsqueda, pero realizará la búsqueda completo de todos los subdirectorios donde se encuentran sus archivos multimedia o extensiones."
 
 msgid "SkinSelector: Restart GUI"
 msgstr "Skin Seleccionado: Reiniciar GUI"
