@@ -332,7 +332,7 @@ class DABScan(ServiceScan):
 			self["servicelist"].setCurrentIndex(0)
 			self["servicelist"].selectionEnabled(True)
 			self["key_green"].setText(_("Select"))
-			self["doneActions"].setEnabled(True)
+			# self["doneActions"].setEnabled(True) ATV
 		else:
 			self.state = self.ERROR
 			self.setScanState(_("DAB+ scan failed; existing bouquets were kept."))
