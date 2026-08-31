@@ -13,7 +13,7 @@ from Components.Converter.Poll import Poll
 
 from skin import parameters
 from Screens.SetupFallbacktuner import getChannelOnFallbackTuner
-from ServiceReference import serviceRefIPToSAT
+from ServiceReference import serviceRefIPToSAT, isRadioServiceReference
 
 dvbCIUI = eDVBCI_UI.getInstance()
 
@@ -205,7 +205,9 @@ class PliExtraInfo(Poll, Converter):
 		caid = ""
 		iptosat = ""
 		iptv = ""
+		radiodab = ""
 		refstr = info.getInfoString(iServiceInformation.sServiceref)
+		refstrdab = info.getInfoString(iServiceInformation.sDABServiceList)
 		streamrelay = "127.0.0.1" in refstr and str(config.misc.softcam_streamrelay_port.value) in refstr
 		identifiers = ":%04x:%04x:%04x:%04x" % (int(self.current_caid, 16), int(self.current_provid, 16), info.getInfo(iServiceInformation.sSID), int(self.current_ecmpid, 16))
 		for caid_entry in caid_data:
@@ -214,9 +216,11 @@ class PliExtraInfo(Poll, Converter):
 				break
 		if serviceRefIPToSAT():
 			iptosat = _("Channel IPToSAT")
+		elif isRadioServiceReference(refstr) and refstrdab:
+			radiodab = "Radio DAB+"
 		elif "%3a//" in refstr.lower() and not streamrelay:
 			iptv = "Stream IPTV"
-		return caid + identifiers if caid and not streamrelay else iptosat + "   SID:%04x" % int(info.getInfo(iServiceInformation.sSID)) if iptosat else iptv if iptv else caid if streamrelay else "FTA" + identifiers if not getChannelOnFallbackTuner() else _("Tuner fallback")
+		return caid + identifiers if caid and not streamrelay else iptosat + "   SID:%04x" % int(info.getInfo(iServiceInformation.sSID)) if iptosat else iptv if iptv else radiodab if radiodab else caid if streamrelay else "FTA" + identifiers if not getChannelOnFallbackTuner() else _("Tuner fallback")
 
 	def createResolution(self, info):
 		avControl = eAVControl.getInstance()
