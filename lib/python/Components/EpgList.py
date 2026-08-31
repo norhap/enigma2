@@ -69,7 +69,7 @@ class EPGList(GUIComponent):
 			assert type in (EPG_TYPE_SIMILAR, EPG_TYPE_PARTIAL)
 			self.l.setBuildFunc(self.buildSimilarEntry)
 		self.epgcache = eEPGCache.getInstance()
-		self.catchUpIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/catchup.png"))
+		self.catchUpIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/ico_catchup.png"))
 		main_icons = (
 			"epgclock",
 			"zapclock",
