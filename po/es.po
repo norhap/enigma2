@@ -3966,11 +3966,11 @@ msgid "Do you want to select a different skin?"
 msgstr "¿Quieres seleccionar un skin diferente?"
 
 msgid ""
-"Do you want to restart %s?\n"
+"Do you want to %s?\n"
 "\n"
 "This will take about 5 seconds!"
 msgstr ""
-"¿Quieres reiniciar %s?\n"
+"¿Quieres %s?\n"
 "\n"
 "Tardará unos 5 segundos!"
 
@@ -8060,6 +8060,9 @@ msgstr "Resolución"
 
 msgid "Restart"
 msgstr "Reiniciar"
+
+msgid "restart"
+msgstr "reiniciar"
 
 msgid "Restart GUI now?"
 msgstr "¿Reiniciar Enigma2 ahora?"
@@ -14459,12 +14462,6 @@ msgstr "Restablecer con éxito ‘%s’!"
 msgid "Restart Box..."
 msgstr "Reiniciar Receptor..."
 
-msgid "Restart OSCam"
-msgstr "Reiniciar OSCam"
-
-msgid "Restart NCam"
-msgstr "Reiniciar NCam"
-
 msgid "Restore backup fstab"
 msgstr "Restaurar copia del fstab"
 
@@ -15649,6 +15646,9 @@ msgstr "Ingrese el puerto de streaming del receptor servidor (normalmente '8001'
 
 msgid "Start"
 msgstr "Iniciar"
+
+msgid "start"
+msgstr "iniciar"
 
 msgid "Timers"
 msgstr "Temporizadores"

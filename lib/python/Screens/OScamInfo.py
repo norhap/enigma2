@@ -301,8 +301,8 @@ class OSCamInfo(Screen, OSCamGlobals):
 		self["camname"] = StaticText()
 		self["virtuell"] = StaticText()
 		self["resident"] = StaticText()
-		self["key_red"] = StaticText(_("Stop") + " " + getSysSoftcam())
-		self["key_green"] = StaticText(_("Restart") + " " + getSysSoftcam())
+		self["key_red"] = StaticText(f"{_("Stop")} {getSysSoftcam()}")
+		self["key_green"] = StaticText(f"{_("Restart")} {getSysSoftcam()}")
 		self["key_yellow"] = StaticText(_("Show Capabilities"))
 		self["key_blue"] = StaticText(_("Show Log"))
 		self["key_OK"] = StaticText()
@@ -313,8 +313,8 @@ class OSCamInfo(Screen, OSCamGlobals):
 			"ok": (self.keyOk, _("Show details")),
 			"cancel": (self.exit, _("Close the screen")),
 			"menu": (self.keyMenu, _("Open Settings")),
-			"red": (self.keyShutdown, _("Shutdown OSCam")),
-			"green": (self.keyRestart, _("Restart OSCam")),
+			"red": (self.keyShutdown, f"{_("Stop")} {getSysSoftcam()}"),
+			"green": (self.keyRestart, f"{_("Restart")} {getSysSoftcam()}"),
 			"yellow": (self.keyInfo, _("Open Capability")),
 			"blue": (self.keyBlue, _("Open Log"))
 		}, prio=1, description=_("OSCamInfo Actions"))
@@ -505,13 +505,13 @@ class OSCamInfo(Screen, OSCamGlobals):
 
 	def keyShutdown(self):
 		self["key_red"].setText("")
-		self["key_green"].setText(_("Start") + " " + getSysSoftcam())
+		self["key_green"].setText(f"{_("Start")} {getSysSoftcam()}")
 		self.session.openWithCallback(boundFunction(self.msgboxCB, "shutdown"), MessageBox, _("Do you want to shut down %s?\n\nTo reactivate %s press GREEN button.") % (getSysSoftcam(), getSysSoftcam()), MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 	def keyRestart(self):
 		global inactive_softcam
-		softcam = inactive_softcam if not getSysSoftcam() else getSysSoftcam()
-		self.session.openWithCallback(boundFunction(self.msgboxCB, "restart"), MessageBox, _("Do you want to restart %s?\n\nThis will take about 5 seconds!") % softcam, MessageBox.TYPE_YESNO, timeout=10, default=False)
+		softcam = f"{_("start")} {inactive_softcam}" if not getSysSoftcam() else f"{_("restart")} {getSysSoftcam()}"
+		self.session.openWithCallback(boundFunction(self.msgboxCB, "restart"), MessageBox, _("Do you want to %s?\n\nThis will take about 5 seconds!") % softcam, MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 	def keyInfo(self):
 		self.loop.stop()
@@ -532,11 +532,16 @@ class OSCamInfo(Screen, OSCamGlobals):
 				webifok, api, url, signstatus, result = self.openWebIF(part=action)
 				if not webifok:
 					if inactive_softcam and not getSysSoftcam():
-						self["key_red"].setText(_("Shutdown" + " " + str(inactive_softcam)))
+						self["key_red"].setText(f"{_("Stop")} {str(inactive_softcam)}")
 						Console().ePopen("/etc/init.d/softcam." + str(inactive_softcam).casefold() + " start")
 					else:
 						self._showActionError(result)
 			callInThread(doAction)
+		elif getSysSoftcam():
+			self["key_red"].setText("")
+			self["key_green"].setText("")
+			self["key_red"].setText(f"{_("Stop")} {getSysSoftcam()}")
+			self["key_green"].setText(f"{_("Restart")} {getSysSoftcam()}")
 
 	def _showActionError(self, result):
 		"""Show action error"""
