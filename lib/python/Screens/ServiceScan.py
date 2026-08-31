@@ -367,9 +367,10 @@ class ServiceScan(Screen):
 		# 	pass
 		if self.currentInfobar.__class__.__name__ == "InfoBar":
 			self.close(returnValue)
-		self.close(returnValue)
+		if config.misc.firstrun.value:
+			self.close()
 		self.bouquetLastScanned = "/etc/enigma2/userbouquet.LastScanned.tv"
-		if exists(str(self.bouquetLastScanned)) and "en" not in config.osd.language.value:  # [norhap][OpenSPA]
+		if exists(str(self.bouquetLastScanned)):
 			with open(self.bouquetLastScanned, "r") as fr:
 				bouquetread = fr.readlines()
 				with open(self.bouquetLastScanned, "w") as fw:
@@ -383,28 +384,29 @@ class ServiceScan(Screen):
 		# except Exception:
 		# 	pass
 		# self.close(True)
-		if self.currentInfobar.__class__.__name__ == "InfoBar":
-			selectedService = self["servicelist"].getCurrent()
-			if selectedService and self.currentServiceList is not None:
-				self.currentServiceList.setTvMode()
-				bouquets = self.currentServiceList.getBouquetList()
-				lastScannedBouquet = bouquets and next((x[1] for x in bouquets if x[0] == "Last Scanned"), None)
-				if lastScannedBouquet:
-					self.currentServiceList.enterUserbouquet(lastScannedBouquet)
-					self.currentServiceList.setCurrentSelection(eServiceReference(selectedService[1]))
-					service = self.currentServiceList.getCurrentSelection()
-					if not self.session.postScanService or service != self.session.postScanService:
-						self.session.postScanService = service
-						self.currentServiceList.addToHistory(service)
-					config.servicelist.lastmode.save()
-					self.currentServiceList.saveChannel(service)
-					self.keyCloseRecursive()
-				else:
-					def restartGUI(answer=False):
-						if answer:
-							self.session.open(TryQuitMainloop, 3)
-					self.session.openWithCallback(restartGUI, MessageBox, _("The bouquet \"Last Scanned\" has not been created.\nYou need to restart enigma2 and rescan it to create it.\nDo you want to restart enigma2 now?"), type=MessageBox.TYPE_YESNO, simple=True)
-		self.keyCancel()
+		if self.scan.isDone():
+			if self.currentInfobar.__class__.__name__ == "InfoBar":
+				selectedService = self["servicelist"].getCurrent()
+				if selectedService and self.currentServiceList is not None:
+					self.currentServiceList.setTvMode()
+					bouquets = self.currentServiceList.getBouquetList()
+					lastScannedBouquet = bouquets and next((x[1] for x in bouquets if x[0] == "Last Scanned"), None)
+					if lastScannedBouquet:
+						self.currentServiceList.enterUserbouquet(lastScannedBouquet)
+						self.currentServiceList.setCurrentSelection(eServiceReference(selectedService[1]))
+						service = self.currentServiceList.getCurrentSelection()
+						if not self.session.postScanService or service != self.session.postScanService:
+							self.session.postScanService = service
+							self.currentServiceList.addToHistory(service)
+						config.servicelist.lastmode.save()
+						self.currentServiceList.saveChannel(service)
+						self.keyCloseRecursive()
+					else:
+						def restartGUI(answer=False):
+							if answer:
+								self.session.open(TryQuitMainloop, 3)
+						self.session.openWithCallback(restartGUI, MessageBox, _("The bouquet \"Last Scanned\" has not been created.\nYou need to restart enigma2 and rescan it to create it.\nDo you want to restart enigma2 now?"), type=MessageBox.TYPE_YESNO, simple=True)
+			self.keyCancel()
 
 	def createSummary(self):
 		return ServiceScanSummary
