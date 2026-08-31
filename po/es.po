@@ -8385,7 +8385,7 @@ msgstr[0] "Búsqueda completa: %d canal encontrado"
 msgstr[1] "Búsqueda completa: %d canales encontrados"
 
 msgid "Scanning..."
-msgstr "Búscando…"
+msgstr "Buscando…"
 
 msgid "Scanning DAB+ feed; waiting for live FIC data..."
 msgstr "Búsqueda de feed DAB+: esperando datos FIC en vivo..."
@@ -8397,7 +8397,7 @@ msgid "Scanning completed, %d DAB+ services found."
 msgstr "Búsqueda completado: %d canales DAB+ encontrados."
 
 msgid "Scanning: %d services found; validating live result (%d/%d)..."
-msgstr "Búscando: %d canales encontrados; validando resultado en vivo (%d/%d)..."
+msgstr "Buscando: %d canales encontrados; validando resultado en vivo (%d/%d)..."
 
 msgid "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr "Escanea lamedbs por defecto ordenados por satélite con un motor de plato conectado"
