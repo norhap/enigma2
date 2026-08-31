@@ -112,7 +112,7 @@ class EPGSelection(Screen, HelpableScreen):
 		self.key_green_choice = self.ADD_TIMER
 		self.key_red_choice = self.EMPTY
 		self["list"] = EPGList(type=self.type, selChangedCB=self.onSelectionChanged, timer=session.nav.RecordTimer)
-		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions", "EPGFilterActions"], {
+		self["actions"] = ActionMap(["EPGSelectActions", "OkCancelActions"], {
 			"cancel": self.closeScreen,
 			"ok": self.eventSelected,
 			"red": self.goToIMDb,
@@ -131,7 +131,7 @@ class EPGSelection(Screen, HelpableScreen):
 			"startUp": self.filterStartUp,
 			"endDown": self.filterEndDown,
 			"endUp": self.filterEndUp
-		})
+		}, -1)
 		self["EPGFilterActions"] = HelpableActionMap(self, ["EPGFilterActions"], {
 			"filter": (self.stopButtonPressed, _("EPG filter switching")),
 			"startDown": (self.filterStartDown, _("Start time") + " -"),
@@ -139,7 +139,7 @@ class EPGSelection(Screen, HelpableScreen):
 			"endDown": (self.filterEndDown, _("End time") + " -"),
 			"endUp": (self.filterEndUp, _("End time") + " +"),
 			"saveTimes": (self.saveFilterValues, _("Use current filter values as default")),
-		})
+		}, -1)
 		self["CatchUpActions"] = HelpableActionMap(self, "EPGCatchUpActions", {
 			"play": (self.playCatchup, _("Play archive")),
 		}, prio=-2)

@@ -12061,7 +12061,7 @@ msgid "Modulator"
 msgstr "Modulador"
 
 msgid "Multi-EPG bouquet selection"
-msgstr "Selección de bouquet MuliEPG"
+msgstr "Selección de bouquet MultiEPG"
 
 msgid "NimSelection"
 msgstr "Selección de sintonizador"
