@@ -96,6 +96,18 @@ class PiconLocator:
 				pngname = resolveFilename(SCOPE_GUISKIN, 'picon_default.png')
 		return pngname
 
+	def getDABImage(self, serviceName):
+		ref = eServiceReference(serviceName or "")
+		if ref.type != eServiceReference.idServiceDAB or NavigationInstance.instance is None:
+			return ""
+		playingRef = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
+		if not playingRef or playingRef.toString().split(":", 10)[:10] != ref.toString().split(":", 10)[:10]:
+			return ""
+		service = NavigationInstance.instance.getCurrentService()
+		info = service and service.info()
+		image = info and info.getInfoString(iServiceInformation.sTagImage) or ""
+		return image if image and pathExists(image) else ""
+
 
 piconLocator = None
 
@@ -113,16 +125,7 @@ def getPiconName(serviceName):
 
 
 def getDABImage(serviceName):
-	ref = eServiceReference(serviceName or "")
-	if ref.type != eServiceReference.idServiceDAB or NavigationInstance.instance is None:
-		return ""
-	playingRef = NavigationInstance.instance.getCurrentlyPlayingServiceReference()
-	if not playingRef or playingRef.toString().split(":", 10)[:10] != ref.toString().split(":", 10)[:10]:
-		return ""
-	service = NavigationInstance.instance.getCurrentService()
-	info = service and service.info()
-	image = info and info.getInfoString(iServiceInformation.sTagImage) or ""
-	return image if image and pathExists(image) else ""
+	return piconLocator.getDABImage(serviceName)
 
 
 class Picon(Renderer):
@@ -147,7 +150,7 @@ class Picon(Renderer):
 	def changed(self, what):
 		if self.instance:
 			if what[0] in (self.CHANGED_DEFAULT, self.CHANGED_ALL, self.CHANGED_SPECIFIC):
-				pngname = piconLocator.getPiconName(self.source.text) or getDABImage(self.source.text)
+				pngname = piconLocator.getPiconName(self.source.text) or piconLocator.getDABImage(self.source.text)
 				if not pathExists(pngname):  # no picon for service found
 					pngname = self.defaultpngname
 				if self.pngname != pngname:
