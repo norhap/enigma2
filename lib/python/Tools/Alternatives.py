@@ -50,12 +50,11 @@ def CompareWithAlternatives(serviceA, serviceB):
 
 
 def GetWithAlternative(service):
-	service = getServiceRef(service)
-	if service.type == 0 and service.flags == 134:
+	if service.startswith('1:134:'):
 		channels = getAlternativeChannels(service)
 		if channels:
 			return channels[0]
-	return service.toString()
+	return service
 
 
 def ResolveCiAlternative(ref, ignore_ref=None, record_mode=False):
