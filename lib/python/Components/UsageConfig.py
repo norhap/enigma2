@@ -1364,6 +1364,7 @@ def InitUsageConfig():
 	config.misc.actionLeftRightToPageUpPageDown = ConfigYesNo(default=True)
 
 	config.crash.debugDVBScan = ConfigYesNo(default=False)
+	config.crash.debugDAB = ConfigYesNo(default=False)
 	config.crash.coredump = ConfigYesNo(default=False)
 
 	def updateStackTracePrinter(configElement):

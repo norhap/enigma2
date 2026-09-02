@@ -947,37 +947,41 @@ class ConfigSatlist(ConfigSelection):
 # wraparound: Pressing RIGHT key at max value brings you to min value and vice
 # versa if set to True.
 #
-class ConfigSelectionNumber(ConfigSelection):
-	def __init__(self, min, max, stepwidth, default=None, wraparound=False):
-		choices = []
-		step = min
-		while step <= max:
-			choices.append(str(step))
-			step += stepwidth
+class ConfigSelectionInteger(ConfigSelection):
+	def __init__(self, default=None, first=0, last=100, step=1, wrap=False, units=None):
 		if default is None:
-			default = min
-		self.wrap = wraparound
-		ConfigSelection.__init__(self, choices, str(default))
-		self.default = default
-		self.lastValue = default
-		self.value = default
+			default = first
+		self.first = first
+		self.last = last
+		self.step = step
+		self.wrap = wrap
+		self.units = units
+		ConfigSelection.__init__(self, choices=[(x, (ngettext(units[0], units[1], x) % x if units and isinstance(units, (list, tuple)) else str(x))) for x in range(first, last + 1, step)], default=default)
 
 	def handleKey(self, key, callback=None):
 		if not self.wrap:
-			value = str(self.value)
-			if key == ACTIONKEY_RIGHT and self.choices.index(value) == len(self.choices) - 1:
+			if key == ACTIONKEY_RIGHT and self.choices.index(self.value) == len(self.choices) - 1:
 				return
-			if key == ACTIONKEY_LEFT and self.choices.index(value) == 0:
+			if key == ACTIONKEY_LEFT and self.choices.index(self.value) == 0:
 				return
 		ConfigSelection.handleKey(self, key, callback)
 
-	def getValue(self):
-		return int(ConfigSelection.getValue(self))
+	def setChoices(self, default=None, first=None, last=None, step=None, wrap=None, units=None):
+		self.first = self.first if first is None else first
+		self.last = self.last if last is None else last
+		self.step = self.step if step is None else step
+		self.wrap = self.wrap if wrap is None else wrap
+		self.units = self.units if units is None else units
+		if default is None:
+			default = self.default if first < self.default <= last else first
+		if self.value < self.first or self.value > self.last:
+			self.value = default
+		return self.setSelectionList([(x, (ngettext(self.units[0], self.units[1], x) % x if self.units and isinstance(self.units, (list, tuple)) else str(x))) for x in range(self.first, self.last + 1, self.step)], default=default)
 
-	def setValue(self, value):
-		ConfigSelection.setValue(self, str(value))
 
-	value = property(getValue, setValue)
+class ConfigSelectionNumber(ConfigSelectionInteger):
+	def __init__(self, min, max, stepwidth, default=None, wraparound=False, units=None):
+		ConfigSelectionInteger.__init__(self, default, min, max, stepwidth, wraparound, units)
 
 
 # This is the control, and base class, for formatted sequence settings.

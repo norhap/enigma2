@@ -58,6 +58,7 @@ install_PYTHON = \
 	RecordingConfig.py \
 	ResourceManager.py \
 	RFmod.py \
+	RTLSDR.py \
 	Scanner.py \
 	ScrambledRecordings.py \
 	ScrollLabel.py \

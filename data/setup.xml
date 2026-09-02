@@ -56,7 +56,7 @@
  		<item level="1" text="End time" indents="4" conditional="config.epg.filter.value" description="End of the time interval during which events must begin to be displayed. If the filter is active, use keys 3 and 6 to adjust the end time, and key 0 to save.">config.epg.filter_end</item>
 		<item level="1" text="Toggle Filter Order" indents="4" conditional="config.epg.filter.value" description="Using the 'Stop' button will cyclically switch displaying events starting: 'outside the interval', 'within the interval', and 'without filtering', instead of 'within the interval', 'outside the interval', and 'without filtering'.">config.epg.filter_reversal</item>
 		<item level="1" text="Keep sorting" indents="4" conditional="config.epg.filter.value" description="When switching the filter, the selected EPG sorting is preserved.">config.epg.filter_keepsorting</item>
-		<item level="1" text="Rating sort in SingleEPG" description="Enable sorting by rating under the yellow button in SingleEPG.">config.epg.ratingsort</item>		
+		<item level="1" text="Rating sort in SingleEPG" description="Enable sorting by rating under the yellow button in SingleEPG.">config.epg.ratingsort</item>
 	</setup>
 	<setup key="FactoryReset" title="Factory Reset Setup">
 		<!-- This is just a placeholder, the FactoryReset module implements this menu. -->
@@ -192,6 +192,7 @@
 		<item level="2" text="Include screen load data" description="Enable this option to add screen names and resolution data to the debug log file.">config.debug.debugScreens</item>
 		<item level="2" text="Include EPG data" description="Enable this option to add extra EPG data to the debug log file.">config.crash.debugEPG</item>
 		<item level="2" text="Include DVB scan data" description="Enable this option to add extra DVB scan data to the debug log file.">config.crash.debugDVBScan</item>
+		<item level="2" text="Include DAB+ data *" description="Enable this option to add detailed DAB+ receiver, packet, MOT and SPI information to the debug log file.">config.crash.debugDAB</item>
 		<item level="2" text="Log python stack trace on spinner" description="Set to yes for debugging the root cause of a spinner.">config.crash.pythonStackOnSpinner</item>
 		<item level="2" text="Logs folder location **" description="Choose the location for crash and debug logs folder.">config.crash.debugPath</item>
 		<item level="2" text="Include timer descramble data in PVR" requires="CanDescrambleInStandby" description="Enabled displays PVR scrambled recording debug data.">config.crash.debugTimers</item>

@@ -1394,6 +1394,11 @@ RESULT eTSMPEGDecoder::setRadioPic(const std::string &filename)
 
 RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 {
+	return showSinglePic(filename, false);
+}
+
+RESULT eTSMPEGDecoder::showSinglePic(const char *filename, bool keepVisible)
+{
 	if (m_decoder == 0)
 	{
 		eDebug("[eTSMPEGDecoder] showSinglePic %s", filename);
@@ -1455,7 +1460,8 @@ RESULT eTSMPEGDecoder::showSinglePic(const char *filename)
 #if HAVE_HISILICON
 				;
 #else
-				m_showSinglePicTimer->start(150, true);
+				if (!keepVisible)
+					m_showSinglePicTimer->start(150, true);
 #endif
 			}
 			close(f);

@@ -53,6 +53,7 @@ install_PYTHON = \
 	QuadPiP.py \
 	RdsDisplay.py \
 	Recording.py \
+	RTLSDRSetup.py \
 	Satconfig.py \
 	ScanSetup.py \
 	Scart.py \
