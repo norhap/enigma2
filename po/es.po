@@ -334,6 +334,9 @@ msgstr[1] "%s paquetes de actualización disponibles"
 msgid "%s:%s"
 msgstr "%s:%s"
 
+msgid "%s (cached)"
+msgstr "%s (en caché)"
+
 msgid "[a]"
 msgstr "[a]"
 
@@ -409,6 +412,9 @@ msgstr "después "
 
 msgid "all"
 msgstr "todo"
+
+msgid "All regions"
+msgstr "Todas las regiones"
 
 msgid "alphabetic"
 msgstr "alfabético"
@@ -575,6 +581,12 @@ msgstr "Búsqueda DAB+"
 msgid "DAB+ scan failed; existing bouquets were kept."
 msgstr "Error en la búsqueda DAB+: Se mantuvieron los bouquets existentes."
 
+msgid "DAB+ USB support could not be installed from the feed."
+msgstr "No se pudo instalar la compatibilidad con USB DAB+ desde el feed."
+
+msgid "DAB+ USB support was installed. You can now enable the receiver in Reception settings."
+msgstr "Se ha instalado la compatibilidad con DAB+ USB. Puede activar el receptor en los ajustes de recepción."
+
 msgid "daily"
 msgstr "diariamente"
 
@@ -703,6 +715,9 @@ msgstr "Fin edición de favoritos"
 
 msgid "Enable favourites edit"
 msgstr "Habilitar edición de favoritos"
+
+msgid "Enable DAB+ USB receiver"
+msgstr "Habilitar receptor USB DAB+"
 
 msgid "entertainment (10-16 year old)"
 msgstr "entretenimiento (10-16 años)"
@@ -1091,6 +1106,9 @@ msgstr "Código de suscripción de traducción impulsada por IA"
 msgid "Auto save history before stopping E2"
 msgstr "Historial de guardado automático antes de detener E2"
 
+msgid "Automatic gain"
+msgstr "Ganancia automática"
+
 #, python-format
 msgid ""
 "A recording has started:\n"
@@ -1322,7 +1340,7 @@ msgid "Add/remove change timer for current event"
 msgstr "Añadir/eliminar cambio temporizador para evento actual"
 
 msgid "add filters"
-msgstr "agregar Filtros"
+msgstr "añadir Filtros"
 
 msgid "Add entry"
 msgstr "Añadir entrada"
@@ -2235,6 +2253,9 @@ msgstr "Ocurrió un error. Inténtalo más tarde"
 
 msgid "An error occurred while downloading the packetlist. Please try again."
 msgstr "Ocurrió un error al descargar lista de paquetes. Por favor, reintenta."
+
+msgid "An RTL-SDR receiver was detected. The optional DAB+ USB runtime is being installed from the feed."
+msgstr "Detectado receptor RTL-SDR. Instalando entorno de ejecución USB DAB+ opcional desde la señal."
 
 msgid "An unknown error occurred!"
 msgstr "Ocurrió un error desconocido!"
@@ -3375,6 +3396,9 @@ msgstr "Costa Rica"
 msgid "Cote d'Ivoire"
 msgstr "Costa de Marfil"
 
+msgid "Correct the tuner oscillator in parts per million."
+msgstr "Corrija el oscilador del sintonizador en partes por millón."
+
 msgid "Could not find installed channel list."
 msgstr "No se encontró lista de canales instalada."
 
@@ -3689,6 +3713,9 @@ msgstr "Deseleccionar"
 
 msgid "Destination of fallback remote receiver."
 msgstr "Destino del receptor reserva."
+
+msgid "Detected hardware"
+msgstr "Hardware detectado"
 
 msgid ""
 "Device changes need a system restart to take effects.\n"
@@ -4224,6 +4251,12 @@ msgstr "Habilite un intervalo de tiempo para filtrar eventos en EPG Simple usand
 msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr "Habilite la opción de ordenar por calificación haciendo clic en el botón AMARILLO EPG Simple."
 
+msgid "Enable this option to add extra DVB scan data to the debug log file."
+msgstr "Habilite esta opción para añadir datos de Búsqueda DVB adicionales al archivo de registro de depuración."
+
+msgid "Enable this option to add detailed DAB+ receiver, packet, MOT and SPI information to the debug log file."
+msgstr "Active esta opción para añadir información detallada sobre el receptor DAB+, los paquetes, el MOT y el SPI al archivo de registro de depuración."
+
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
 
@@ -4676,6 +4709,9 @@ msgstr "FEC"
 msgid "FEC:"
 msgstr "FEC:"
 
+msgid "Frequency correction"
+msgstr "Corrección de frecuencia"
+
 msgid "FTA"
 msgstr "FTA"
 
@@ -4943,6 +4979,9 @@ msgstr "Opciones Adicionales"
 msgid "Further options"
 msgstr "Opciones adicionales"
 
+msgid "Gain steps"
+msgstr "Gana pasos"
+
 msgid "GStreamer version: "
 msgstr "Versión de GStreamer: "
 
@@ -5197,6 +5236,9 @@ msgstr "Si se establece en 'sí', le permite usar Timeshift con plugins de audio
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr "Si se establece en 'sí', se enviarán los mismos comandos al televisor para los eventos de espera profunda que se envían durante los eventos de espera normales."
 
+msgid "Include DAB+ data *"
+msgstr "Incluir datos DAB+ *"
+
 msgid "Information Settings"
 msgstr "Configuración de información"
 
@@ -5402,7 +5444,7 @@ msgid "Hotkey zap"
 msgstr "Tecla para zapeo"
 
 msgid "How many minutes do you want add to the recording?"
-msgstr "¿Cuántos minutos quiere agregar a la grabación?"
+msgstr "¿Cuántos minutos quiere añadir a la grabación?"
 
 msgid "How many minutes do you want to record?"
 msgstr "¿Cuántos minutos quiere grabar?"
@@ -5598,6 +5640,9 @@ msgstr "No quiero realizar ningún búsqueda de canal"
 
 msgid "IDLE"
 msgstr "IDLE"
+
+msgid "In use by DAB+"
+msgstr "En uso por DAB+"
 
 msgid "IP address:"
 msgstr "Dirección IP:"
@@ -6064,6 +6109,9 @@ msgstr "A la izquierda del nombre del canal"
 msgid "Leisure hobbies"
 msgstr "Pasatiempos de ocio"
 
+msgid "Let the tuner select its RF gain automatically."
+msgstr "Deje que el sintonizador seleccione automáticamente su ganancia de RF."
+
 msgid "Lesotho"
 msgstr "Lesotho"
 
@@ -6082,6 +6130,9 @@ msgstr "Libia"
 
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
+
+msgid "Limit a DAB+ USB scan to the frequency blocks defined for this region in dab.xml."
+msgstr "Limite la búsqueda USB DAB+ a los bloques de frecuencia definidos para esta región en dab.xml."
 
 msgid "Limit east"
 msgstr "Límite este"
@@ -7561,6 +7612,9 @@ msgstr "No está disponible la función Quad PiP."
 msgid "Press OK to activate current MAC address."
 msgstr "Pulse OK para activar la actual dirección MAC."
 
+msgid "Product"
+msgstr "Producto"
+
 msgid ""
 "To apply the selected '%s' skin the GUI needs to restart.\n"
 "Would you like to restart the GUI now?"
@@ -7766,6 +7820,9 @@ msgstr "Califificación indefinida"
 msgid "Really close without saving settings?"
 msgstr "¿Cerrar sin guardar configuración?"
 
+msgid "Receiver"
+msgstr "Receptor"
+
 msgid "Delete finished timers?"
 msgstr "¿Eliminar temporizadores finalizados?"
 
@@ -7892,6 +7949,9 @@ msgstr "Función del botón AZUL"
 
 msgid "Receiver does not support Quad PiP."
 msgstr "El receptor no soporta Quad PiP."
+
+msgid "Reception sources to scan"
+msgstr "Fuentes de recepción para buscar"
 
 msgid "Red colored"
 msgstr "Coloreado en rojo"
@@ -8264,6 +8324,9 @@ msgstr "Configuración del equipo de satélite"
 msgid "Satellite longitude:"
 msgstr "Longitud del satélite:"
 
+msgid "Satellite only"
+msgstr "Satélite únicamente"
+
 msgid "Satellites"
 msgstr "Satélites"
 
@@ -8386,6 +8449,9 @@ msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
 msgstr[0] "Búsqueda completa: %d canal encontrado"
 msgstr[1] "Búsqueda completa: %d canales encontrados"
+
+msgid "Scan region"
+msgstr "Búsqueda de región"
 
 msgid "Scanning..."
 msgstr "Buscando…"
@@ -8672,6 +8738,9 @@ msgstr "Seleccione el número de modelo de su dispositivo Unicable. Si el númer
 msgid "Select the movie path"
 msgstr "Seleccione la ruta de las películas"
 
+msgid "Select the RTL-SDR device. Generic devices are identified by their physical USB port."
+msgstr "Seleccione el dispositivo RTL-SDR. Los dispositivos genéricos se identifican por su puerto USB físico."
+
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Seleccione el satélite que está conectado al puerto A de su interruptor. Si no está seguro, seleccione ‘automático’ y el receptor intentará determinarlo por usted. Si no hay nada conectado a este puerto, seleccione ‘nada conectado’."
 
@@ -8764,6 +8833,9 @@ msgstr "Serbia"
 
 msgid "Serbian"
 msgstr "Serbio"
+
+msgid "Serial number"
+msgstr "Número de serie"
 
 msgid "Service & PIDs"
 msgstr "Canal & PIDs"
@@ -10671,6 +10743,9 @@ msgstr "Usar interfaz"
 msgid "Use official channel numbering"
 msgstr "Usar el orden de numeración oficial"
 
+msgid "Use the RTL-SDR device exclusively for DAB+ reception."
+msgstr "Utilice el dispositivo RTL-SDR exclusivamente para la recepción de DAB+."
+
 msgid "Use only for Wake on WLan (WoW)"
 msgstr "Usar solo para Wake on WLan (WoW)"
 
@@ -11431,6 +11506,9 @@ msgstr "Conservar marcadores en cortes"
 msgid "Enable cuts (preview)"
 msgstr "Habilitar cortes (vista previa)"
 
+msgid "DAB+ decoder backend is not installed"
+msgstr "El decodificador DAB+ no está instalado"
+
 msgid "Disable cuts (edit)"
 msgstr "Deshabilitar cortes (editar)"
 
@@ -11442,6 +11520,9 @@ msgstr "Ejecución rápida"
 
 msgid "Insert mark after each in"
 msgstr "Insertar marca después de cada IN"
+
+msgid "Ready"
+msgstr "Listo"
 
 msgid "Remove all alternatives"
 msgstr "Eliminar todos los alternativos"
@@ -13358,7 +13439,7 @@ msgid ""
 "%d conflict(s) encountered when trying to add new timers:\n"
 "%s"
 msgstr ""
-"%d conflicto(s) encontrados al intentar agregar nuevos temporizadores:\n"
+"%d conflicto(s) encontrados al intentar añadir nuevos temporizadores:\n"
 "%s"
 
 #, python-format
@@ -13529,7 +13610,7 @@ msgid ""
 " %s event(s) added \n"
 " %s event(s) skipped"
 msgstr ""
-"Finalizado agregar a filterList con %s evento(s):\n"
+"Finalizado añadir a filterList con %s evento(s):\n"
 "\n"
 " %s evento(s) agregados \n"
 " %s evento(s) saltados"
@@ -13648,6 +13729,9 @@ msgstr "No después"
 msgid "Not before"
 msgstr "No antes"
 
+msgid "No compatible RTL-SDR device detected"
+msgstr "No se ha detectado ningún dispositivo RTL-SDR compatible"
+
 msgid "Not found xml config file!"
 msgstr "No se encontró el archivo de configuración xml!"
 
@@ -13728,6 +13812,9 @@ msgstr "Encuesta automáticamente"
 msgid "Popup timeout in seconds"
 msgstr "Tiempo de espera emergente en segundos"
 
+msgid "Position in the tuner's supported gain range. The backend selects the closest gain step."
+msgstr "Posición en el rango de ganancia compatible con el afinador. El sistema selecciona el paso de ganancia más cercano."
+
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
 msgstr "Estado de energía para cambiar a después de las grabaciones. Seleccione \"estándar\" para no cambiar el comportamiento predeterminado de enigma2 o valores modificados por usted mismo."
 
@@ -13742,6 +13829,9 @@ msgstr "Grabe un máximo de x veces"
 
 msgid "Record on"
 msgstr "Grabar en"
+
+msgid "RF gain"
+msgstr "Ganancia de RF"
 
 msgid "Require description to be unique"
 msgstr "Requiere descripción para ser único"
@@ -14065,7 +14155,7 @@ msgid "Thur"
 msgstr "Jueves"
 
 msgid "Time in minutes to append to recording."
-msgstr "Tiempo en minutos para agregar a la grabación."
+msgstr "Tiempo en minutos para añadir a la grabación."
 
 msgid "Time in minutes to prepend to recording."
 msgstr "Tiempo en minutos para anteponer a la grabación."
@@ -14226,6 +14316,15 @@ msgstr ""
 msgid "USB"
 msgstr "USB"
 
+msgid "USB ID"
+msgstr "ID de USB"
+
+msgid "USB port"
+msgstr "Puerto USB"
+
+msgid "USB speed"
+msgstr "Velocidad USB"
+
 msgid "EPG cache backup"
 msgstr "Copia la cache EPG"
 
@@ -14243,6 +14342,9 @@ msgstr "Eliminar lista de autoinstalación"
 
 msgid "Running..."
 msgstr "Ejecutando..."
+
+msgid "Replace the static radio background with pictures transmitted by the current DAB+ station."
+msgstr "Sustituya el fondo estático de la radio por imágenes transmitidas por la emisora DAB+ actual."
 
 msgid "Mounts management"
 msgstr "Administrar Montajes"
@@ -14295,8 +14397,14 @@ msgstr "Pulse OK para expandir este hostname"
 msgid "Press OK to collapse this host"
 msgstr "Pulse OK para contraer este hostname"
 
+msgid "Scan the USB receiver, available DAB+ satellite feeds, or both."
+msgstr "Busque el receptor USB, las señales satelitales DAB+ disponibles o ambas."
+
 msgid "Search for network shares..."
 msgstr "Buscar recursos compartidos en red ..."
+
+msgid "Show DAB slideshow"
+msgstr "Mostrar presentación de diapositivas DAB"
 
 msgid "Browse network neighbourhood"
 msgstr "Navegador de Red Local"
@@ -17853,6 +17961,12 @@ msgstr "Moverse a la página anterior"
 msgid "Move to the previous skin"
 msgstr "Moverse al skin anterior"
 
+msgid "Not Available"
+msgstr "No Disponible"
+
+msgid "Not available"
+msgstr "No disponible"
+
 msgid "Save and activate the currently selected skin"
 msgstr "Guardar y activar el actual skin seleccionado"
 
@@ -18122,25 +18236,25 @@ msgid "Include keyboard data"
 msgstr "Incluir datos del teclado"
 
 msgid "Enable this option to add keyboard keymap data to the debug log file."
-msgstr "Habilite esta opción para agregar datos del keymap del teclado al archivo de registro de depuración."
+msgstr "Habilite esta opción para añadir datos del keymap del teclado al archivo de registro de depuración."
 
 msgid "Include remote control data"
 msgstr "Incluir datos del mando a distancia"
 
 msgid "Enable this option to add remote control data to the debug log file."
-msgstr "Habilite esta opción para agregar datos del mando a distancia al archivo de registro de depuración."
+msgstr "Habilite esta opción para añadir datos del mando a distancia al archivo de registro de depuración."
 
 msgid "Include action map data"
 msgstr "Incluir datos de mapas de acción en keymap"
 
 msgid "Enable this option to add action map / remote control mapping data to the debug log file."
-msgstr "Habilite esta opción para agregar datos de mapas de acción/mando a distancia al archivo de registro de depuración."
+msgstr "Habilite esta opción para añadir datos de mapas de acción/mando a distancia al archivo de registro de depuración."
 
 msgid "Include screen load data"
 msgstr "Incluir datos de carga de pantalla"
 
 msgid "Enable this option to add screen names and resolution data to the debug log file."
-msgstr "Habilite esta opción para agregar nombres de pantalla y datos de resolución al archivo de registro de depuración."
+msgstr "Habilite esta opción para añadir nombres de pantalla y datos de resolución al archivo de registro de depuración."
 
 msgid "Move to first line / screen"
 msgstr "Mover a la primera línea en pantalla"
@@ -18305,16 +18419,16 @@ msgid "HDMI-IN Actions"
 msgstr "Acciones HDMI-IN"
 
 msgid "Set the default location for your recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
-msgstr "Establezca la ubicación por defecto para sus grabaciones. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
+msgstr "Establezca la ubicación por defecto para sus grabaciones. Pulse OK para añadir nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
 
 msgid "Set the default location for your timers. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
-msgstr "Establezca la ubicación por defecto para sus temporizadores. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
+msgstr "Establezca la ubicación por defecto para sus temporizadores. Pulse OK para añadir nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
 
 msgid "Set the default location for your instant recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
-msgstr "Establezca la ubicación por defecto para sus grabaciones instantáneas. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
+msgstr "Establezca la ubicación por defecto para sus grabaciones instantáneas. Pulse OK para añadir nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar entre las ubicaciones existentes."
 
 msgid "Set the default location for your timeshift files. Press OK to add new locations, LEFT/RIGHT to select any existing locations."
-msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pulse OK para agregar nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar cualquier ubicación existente."
+msgstr "Establezca la ubicación por defecto para sus archivos de Timeshift. Pulse OK para añadir nuevas ubicaciones, IZQUIERDA/DERECHA para seleccionar cualquier ubicación existente."
 
 msgid "Directory not accepted, change path."
 msgstr "Directorio no aceptado, cambie de ruta."
@@ -18573,9 +18687,6 @@ msgstr "Habilite el valor actual del control deslizante al final de la barra des
 
 msgid "Free: "
 msgstr "Libre: "
-
-msgid "Not Available"
-msgstr "No Disponible"
 
 msgid "%s: %s, in use: %s%%"
 msgstr "%s: %s, en uso: %s%%"
@@ -18923,7 +19034,7 @@ msgid "Scan using transponders on NIT table? 'No' will use transponders in xml f
 msgstr "Buscar usando transpondedores en la tabla NIT? 'No' usará transpondedores en el archivo xml."
 
 msgid "Remove the services on scanned transponders before re-adding services?"
-msgstr "Eliminar los canales que ya existen de los transpondedores buscados antes de volver a agregar estos canales?"
+msgstr "Eliminar los canales que ya existen de los transpondedores buscados antes de volver a añadir estos canales?"
 
 msgid "Choose whether to scan for free services only or whether to include paid/encrypted services too."
 msgstr "Elija si desea buscar solo canales gratuitos o si desea incluir también canales de pago."
@@ -19120,6 +19231,9 @@ msgstr ""
 "\n"
 "\"Añadir Lenguaje\" o \"MENÚ\" agrega idioma(s) adicional(es)."
 
+msgid "Unable to open receiver (%d)"
+msgstr "No se pudo abrir el receptor (%d)"
+
 msgid "Updating cache"
 msgstr "Actualizando caché"
 
@@ -19128,6 +19242,12 @@ msgstr "Actualizando caché, por favor espere..."
 
 msgid "Unscramble http streams from the server"
 msgstr "Descifrar streams http desde el servidor"
+
+msgid "USB and satellite"
+msgstr "Satélite y USB"
+
+msgid "USB receiver only"
+msgstr "Receptor USB únicamente"
 
 msgid "want to stop and delete this recordings?"
 msgstr "¿Quieres detener y eliminar estas grabaciones?"
@@ -19260,13 +19380,10 @@ msgid "Include EPG data"
 msgstr "Incluir datos EPG"
 
 msgid "Enable this option to add extra EPG data to the debug log file."
-msgstr "Habilite esta opción para agregar datos EPG adicionales al archivo de registro de depuración."
+msgstr "Habilite esta opción para añadir datos EPG adicionales al archivo de registro de depuración."
 
 msgid "Include DVB scan data"
 msgstr "Incluir datos DVB"
-
-msgid "Enable this option to add extra DVB scan data to the debug log file."
-msgstr "Habilite esta opción para agregar datos de Búsqueda DVB adicionales al archivo de registro de depuración."
 
 msgid "Narration"
 msgstr "Narración"
