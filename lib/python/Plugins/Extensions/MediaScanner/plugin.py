@@ -92,9 +92,6 @@ def mountpoint_choosen(option):
 
 
 def scan(session):
-	if getFPWasTimerWakeup():  # norhap Avoid being unable to go into standby mode due to having an open instance of ChoiceBox.
-		with open("/tmp/.listtoscanchoicebox", "w") as f:
-			f.write("")
 	from Screens.ChoiceBox import ChoiceBox
 	parts = [(r.tabbedDescription(), r.mountpoint, session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) if access(r.mountpoint, F_OK | R_OK)]
 	parts.append((_("Memory") + "\t/tmp", "/tmp", session))
@@ -123,6 +120,9 @@ def partitionListChanged(action, device):
 	if InfoBar.instance:
 		if InfoBar.instance.execing:
 			if action == 'add' and device.is_hotplug:
+				if getFPWasTimerWakeup():  # norhap Avoid being unable to go into standby mode due to having an open instance of ChoiceBox.
+					with open("/tmp/.listtoscanchoicebox", "w") as f:
+						f.write("")
 				print("[MediaScanner] mountpoint", device.mountpoint)
 				print("[MediaScanner] description", device.description)
 				print("[MediaScanner] force_mounted", device.force_mounted)
