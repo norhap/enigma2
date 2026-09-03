@@ -73,7 +73,7 @@ def processHotplugData(self, v):
 				callback(dev, action or media_state)
 			except AttributeError:
 				hotplugNotifier.remove(callback)
-	elif mode == 1 and action == "dab-sdr-add":
+	elif mode == 1:  # DAB+ USB
 		device = v.get("DEVPATH", "").split("/")[-1]
 		for callback in hotplugNotifier[:]:
 			try:
@@ -96,17 +96,18 @@ class Hotplug(Protocol):
 	def connectionLost(self, reason):
 		print("[Hotplug] connection lost!")
 		v = {}
-		if v.get("ACTION") != "dab-sdr-add":
-			data = self.received.split('\0')[:-1]
-			v["mode"] = 0
+		if "\n" in self.received:
+			data = self.received.rstrip("\0\n").split("\n")
 		else:
-			if "\n" in self.received:
-				data = self.received.rstrip("\0\n").split("\n")
-				v["mode"] = 1
+			data = self.received.split('\0')[:-1]
 		for x in data:
 			i = x.find('=')
 			var, val = x[:i], x[i + 1:]
 			v[var] = val
+			if v.get("ACTION") != "dab-sdr-add":
+				v["mode"] = 0
+			else:
+				v["mode"] = 1  # DAB+ USB
 		processHotplugData(self, v)
 
 
