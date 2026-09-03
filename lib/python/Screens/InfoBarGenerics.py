@@ -370,9 +370,6 @@ class SecondInfoBar(Screen):
 		Screen.__init__(self, session)
 		self.skinName = ["SecondInfoBar"]
 		self["RdsDecoder"] = RdsDecoder(self.session.nav)
-		self.dab_slide_display = self.session.instantiateDialog(DABSlideDisplay)
-		self.dab_slide_display.setAnimationMode(0)
-		self.dab_slide_display.reserveRadioTextArea(self.rds_display)
 		self["key_red"] = Label()
 		self["key_green"] = Label()
 		self["key_yellow"] = Label()
@@ -1587,9 +1584,12 @@ class InfoBarRdsDecoder:
 
 	def __init__(self):
 		self["RdsDecoder"] = RdsDecoder(self.session.nav)
+		self.dab_slide_display = self.session.instantiateDialog(DABSlideDisplay)
+		self.dab_slide_display.setAnimationMode(0)
 		self.rds_display = self.session.instantiateDialog(RdsInfoDisplay)
 		self.session.instantiateSummaryDialog(self.rds_display)
 		self.rds_display.setAnimationMode(0)
+		self.dab_slide_display.reserveRadioTextArea(self.rds_display)
 		self.rass_interactive = None
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={

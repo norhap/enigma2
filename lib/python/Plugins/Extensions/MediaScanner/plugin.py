@@ -32,7 +32,7 @@ class DABUSBInstaller:
 			Toast.instance.showToast(
 				_("An RTL-SDR receiver was detected. The optional DAB+ USB runtime is being installed from the feed."),
 				Toast.TYPE_INFO, timeout=6)
-		self.opkg.startCmd(self.opkg.CMD_UPDATE, {"arguments": [DAB_USB_PACKAGE], "lineMode": True})
+		self.opkg.startCmd(self.opkg.CMD_INSTALL, {"package": [DAB_USB_PACKAGE], "lineMode": True})
 
 	def opkgCallback(self, event, parameter):
 		if event == self.opkg.EVENT_ERROR:
