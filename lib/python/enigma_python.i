@@ -46,6 +46,8 @@ is usually caused by not marking PSignals as immutable.
 #include <lib/base/profile.h>
 #include <lib/driver/rc.h>
 #include <lib/driver/rcinput_swig.h>
+#include <lib/driver/ehotplug_socket.h>
+#include <lib/driver/inputhotplug.h>
 #include <lib/service/event.h>
 #include <lib/service/iservice.h>
 #include <lib/service/service.h>
@@ -282,6 +284,8 @@ typedef long time_t;
 %include <lib/components/scan.h>
 %include <lib/components/file_eraser.h>
 %include <lib/components/tuxtxtapp.h>
+%include <lib/driver/ehotplug_socket.h>
+%include <lib/driver/inputhotplug.h>
 %include <lib/driver/avswitch.h>
 %include <lib/driver/avcontrol.h>
 %include <lib/driver/hdmi_cec.h>
