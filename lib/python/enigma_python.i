@@ -179,6 +179,7 @@ typedef long time_t;
 %include <lib/python/python_pcore.i>
 
 %immutable eSocketNotifier::activated;
+%immutable eHotplugSocket::dataReceived;
 %include <lib/base/ebase.h>
 %include <lib/base/smartptr.h>
 %include <lib/service/event.h>
