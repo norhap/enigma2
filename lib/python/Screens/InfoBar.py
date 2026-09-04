@@ -56,6 +56,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self["actions"] = HelpableActionMap(self, ["InfobarActions"], {
 			"showMovies": (self.showMovies, _("Play recorded movies")),
 			"showRadio": (self.showRadio, _("Show the radio player")),
+			"openBouquetList": (self.openBouquetList, _("Open Bouquet selection")),  # Keys TV / RADIO switch open Bouquets.
 			"showTv": (self.showTv, _("Show the TV player")),
 			"toggleTvRadio": (self.toggleTvRadio, _("Toggle the TV and the radio player")),
 			"ZoomInOut": (self.ZoomInOut, _("Zoom In/Out TV")),
@@ -148,6 +149,10 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		else:
 			self.radioTV = 1
 			self.showRadio()
+
+	def openBouquetList(self):
+		self.servicelist.showFavourites()
+		self.openServiceList()
 
 	def ChannelSelectionRadioClosed(self, *arg):
 		self.rds_display.show()  # in InfoBarRdsDecoder
