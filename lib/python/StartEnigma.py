@@ -538,6 +538,8 @@ def runScreenTest():
 	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value)  # wake up to standby for RecordTimer and PowerTimer.
 	session = Session(desktop=enigma.getDesktop(0), summary_desktop=enigma.getDesktop(1), navigation=nav)
 	CiHandler.setSession(session)
+	from Components.RTLSDR import initRTLSDR
+	initRTLSDR(session)
 	screensToRun = [p.__call__ for p in plugins.getPlugins(PluginDescriptor.WHERE_WIZARD)]
 	enigma.eProfileWrite("wizards")
 	screensToRun += wizardManager.getWizards()

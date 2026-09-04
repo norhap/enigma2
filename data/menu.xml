@@ -33,8 +33,8 @@
 			<item key="auto_scan" level="0" text="Automatic Scan" weight="15" conditional="nimmanager.somethingConnected()" requires="ClientModeDisabled"><screen module="ScanSetup" screen="ScanSimple" /></item>
 			<item key="manual_scan" level="0" text="Manual Scan" weight="20" conditional="nimmanager.somethingConnected()" requires="ClientModeDisabled"><screen module="ScanSetup" /></item>
 			<item key="fallbacktuner_settings" level="0" text="Fallback remote receiver setup" weight="25" requires="ClientModeDisabled"><screen module="SetupFallbacktuner" /></item>
-			<item key="dab_scan" level="0" text="DAB+ Scan" weight="27" conditional="nimmanager.getEnabledNimListOfType('DVB-S') or canScanRTLSDR()"><screen module="DABScan" screen="DABScan" /></item>
-			<item key="dab_usb_setup" level="0" text="DAB+ USB receiver" weight="28" conditional="hasRTLSDRDevice()"><screen module="RTLSDRSetup" screen="RTLSDRSetup" /></item>
+			<item key="dab_scan" level="0" text="DAB+ Scan" weight="27" requires="CanScanDAB"><screen module="DABScan" screen="DABScan" /></item>
+			<item key="dab_usb_setup" level="0" text="DAB+ USB Tuner Settings" weight="28" requires="HasRTLSDR"><screen module="RTLSDRSetup" screen="RTLSDRSetup" /></item>
 		</menu>
 		<!-- Main Menu > Setup > EPG -->
 		<menu key="epg_menu" level="0" text="EPG" weight="15">

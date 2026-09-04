@@ -11,7 +11,6 @@ from Components.NimManager import nimmanager  # This import, although not define
 from Components.Pixmap import Pixmap
 from Components.PluginComponent import plugins
 from Components.SystemInfo import SystemInfo
-from Components.RTLSDR import canScanRTLSDR, hasRTLSDRDevice  # noqa F401 needed in menu.xml
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor

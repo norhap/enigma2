@@ -1,5 +1,6 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.Harddisk import harddiskmanager
+from Components.RTLSDR import dabHotplugNotifier
 from Screens.Screen import Screen
 from Screens.Opkg import Opkg
 from Components.Opkg import OpkgComponent
@@ -75,11 +76,11 @@ def processHotplugData(self, v):
 				hotplugNotifier.remove(callback)
 	elif mode == 1:  # DAB+ USB
 		device = v.get("DEVPATH", "").split("/")[-1]
-		for callback in hotplugNotifier[:]:
+		for callback in dabHotplugNotifier[:]:
 			try:
 				callback(device, action)
 			except AttributeError:
-				hotplugNotifier.remove(callback)
+				dabHotplugNotifier.remove(callback)
 
 
 class Hotplug(Protocol):
@@ -104,7 +105,7 @@ class Hotplug(Protocol):
 			i = x.find('=')
 			var, val = x[:i], x[i + 1:]
 			v[var] = val
-			if v.get("ACTION") != "dab-sdr-add":
+			if v.get("ACTION") in ("dab-sdr-add", "dab-sdr-remove"):
 				v["mode"] = 0
 			else:
 				v["mode"] = 1  # DAB+ USB
