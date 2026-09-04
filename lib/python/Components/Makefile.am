@@ -70,6 +70,7 @@ install_PYTHON = \
 	ServiceScan.py \
 	Slider.py \
 	StackTrace.py \
+	Storage.py \
 	SystemInfo.py \
 	Task.py \
 	TimerList.py \
