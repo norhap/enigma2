@@ -673,7 +673,6 @@ AutoNTPSync()
 enigma.eProfileWrite("InputDevice")
 import Components.InputDevice  # noqa: E402
 Components.InputDevice.InitInputDevices()
-import Components.InputHotplug  # noqa: E402
 
 enigma.eProfileWrite("AVSwitch")
 import Components.AVSwitch  # noqa: E402

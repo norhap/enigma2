@@ -62,7 +62,7 @@ def getFolderSize(path):
 
 
 class Harddisk:
-	def __init__(self, device, removable=False):
+	def __init__(self, device, removable=False, model=None):
 		self.device = device
 		self.card = False
 		self.max_idle_time = 0
@@ -75,6 +75,7 @@ class Harddisk:
 		self.disk_path = ""
 		self.mount_path = None
 		self.mount_device = None
+		self.modelName = model
 		self.phys_path = realpath(self.sysfsPath("device"))
 		self.removable = removable
 		self.internal = "ide" in self.phys_path or "pci" in self.phys_path or "ahci" in self.phys_path or "sata" in self.phys_path
@@ -170,6 +171,8 @@ class Harddisk:
 		return _("%.2f GB") % (cap // 1000.0)
 
 	def model(self):
+		if self.modelName:
+			return self.modelName		
 		if self.device[:2] == "hd":
 			return fileReadLine(join("/proc/ide", self.device, "model"), _("Unknown"))
 		elif self.device[:2] == "sd":
@@ -714,7 +717,7 @@ class HarddiskManager:
 				return join(item[1], "")
 		return None
 
-	def addHotplugPartition(self, device, physdev=None):
+	def addHotplugPartition(self, device, physdev=None, model=None):
 		# device is the device name, without /dev
 		# physdev is the physical device path, which we (might) use to determine the userfriendly name
 		if not physdev:
@@ -734,7 +737,7 @@ class HarddiskManager:
 			# see if this is a harddrive
 			L = len(device)
 			if L and (not device[L - 1].isdigit() or device.startswith("mmcblk")):
-				self.hdd.append(Harddisk(device, removable))
+				self.hdd.append(Harddisk(device, removable, model))
 				self.hdd.sort()
 				SystemInfo["Harddisk"] = True
 			if len(partitions) != 0:
