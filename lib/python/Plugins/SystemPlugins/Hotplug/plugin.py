@@ -55,7 +55,7 @@ class HotPlugManager:
 			if "=" in values:
 				variable, value = values.split("=", 1)
 				eventData[variable] = value
-				eventData["mode"] = 0 if eventData.get("ACTION") not in ("dab-sdr-add", "dab-sdr-remove") else 1  # DAB+ USB
+		eventData["mode"] = 0 if eventData.get("ACTION") not in ("dab-sdr-add", "dab-sdr-remove") else 1  # DAB+ USB
 		if data and eventData:
 			self.processHotplugData(eventData)
 
