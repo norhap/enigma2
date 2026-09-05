@@ -1,7 +1,7 @@
 from enigma import eBackgroundFileEraser, eActionMap, eDVBDB, eEnv, eSubtitleSettings, eSettings, setEnableTtCachingOnOff, setPreferredTuner, setSpinnerOnOff, setTunerTypePriorityOrder, Misc_Options, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
 
 from locale import AM_STR, PM_STR, nl_langinfo
-from os import listdir, makedirs, remove
+from os import listdir, makedirs, remove, unlink
 from glob import glob
 from os.path import exists, isfile, ismount, join, normpath
 from time import mktime
@@ -1413,6 +1413,18 @@ def InitUsageConfig():
 	def updateDebugPath(configElement):
 		if not exists(config.crash.debugPath.value):
 			makedirs(config.crash.debugPath.value, 0o755)
+
+	config.crash.debugStorage = ConfigYesNo(default=False)
+
+	def debugStorageChanged(configElement):
+		udevDebugFile = "/etc/udev/udev.debug"
+		if configElement.value:
+			fileWriteLine(udevDebugFile, "", source=MODULE_NAME)
+		elif exists(udevDebugFile):
+			unlink(udevDebugFile)
+		harddiskmanager.debug = configElement.value
+
+	config.crash.debugStorage.addNotifier(debugStorageChanged)
 
 	config.crash.debugPath.addNotifier(updateDebugPath, immediate_feedback=False)
 	config.crash.debugFileCount = ConfigSelectionNumber(min=2, max=5, stepwidth=1, default=2, wraparound=True)

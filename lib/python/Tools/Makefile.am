@@ -10,6 +10,7 @@ install_PYTHON = \
 	CIHelper.py \
 	CList.py \
 	CopyFiles.py \
+	Conversions.py \
 	CountryCodes.py \
 	Directories.py \
 	Downloader.py \

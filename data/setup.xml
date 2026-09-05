@@ -195,6 +195,7 @@
 		<item level="2" text="Include DAB+ data *" description="Enable this option to add detailed DAB+ receiver, packet, MOT and SPI information to the debug log file.">config.crash.debugDAB</item>
 		<item level="2" text="Log python stack trace on spinner" description="Set to yes for debugging the root cause of a spinner.">config.crash.pythonStackOnSpinner</item>
 		<item level="2" text="Logs folder location **" description="Choose the location for crash and debug logs folder.">config.crash.debugPath</item>
+		<item level="2" text="Include storage device data" description="Enable this option to add storage device information detected during system boot and hot plug events to the debug log file." indent="1">config.crash.debugStorage</item>		
 		<item level="2" text="Include timer descramble data in PVR" requires="CanDescrambleInStandby" description="Enabled displays PVR scrambled recording debug data.">config.crash.debugTimers</item>
 		<item level="2" text="Debug log time format *" description="This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted.">config.crash.debugTimeFormat</item>
 		<item level="2" text="Enable core dumps *" description="Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location.">config.crash.coredump</item>
@@ -341,7 +342,6 @@
 		<item level="1" text="Finetune">config.rfmod.finetune</item>
 	</setup>
 	<setup key="RTLSDRSetup" title="DAB+ USB Tuner Settings">
-		<item level="0" text="Common Settings" />
 		<item level="0" text="Enable DAB+ mode" description="Use a selected RTL-SDR USB tuner device exclusively for DAB+ reception. This tuner will not be available for TV service reception." indent="1">config.dab.rtlsdr.enabled</item>
 		<if requires="config.dab.rtlsdr.enabled">
 			<item level="0" text="Select tuner" description="Select the RTL-SDR USB tuner to be used for DAB+ reception." indent="1">config.dab.rtlsdr.device</item>

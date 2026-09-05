@@ -31,7 +31,6 @@ install_PYTHON = \
 	ImportChannels.py \
 	Input.py \
 	InputDevice.py \
-	InputHotplug.py \
 	Label.py \
 	Language.py \
 	Lcd.py \
@@ -39,7 +38,6 @@ install_PYTHON = \
 	MenuList.py \
 	MovieList.py \
 	MultiContent.py \
-	Netlink.py \
 	Network.py \
 	NetworkTime.py \
 	NimManager.py \
@@ -70,6 +68,7 @@ install_PYTHON = \
 	ServiceScan.py \
 	Slider.py \
 	StackTrace.py \
+	Storage.py \
 	SystemInfo.py \
 	Task.py \
 	TimerList.py \
