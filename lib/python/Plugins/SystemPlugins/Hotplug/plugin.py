@@ -55,7 +55,7 @@ class HotPlugManager:
 			if "=" in values:
 				variable, value = values.split("=", 1)
 				eventData[variable] = value
-		eventData["mode"] = 0 if eventData.get("ACTION") not in ("dab-sdr-add", "dab-sdr-remove") else 1  # DAB+ USB
+		eventData["mode"] = 0 if eventData.get("ACTION") not in ("dab-sdr-add", "dab-sdr-remove") else 1  # [norhap] DAB+ USB
 		if data and eventData:
 			self.processHotplugData(eventData)
 
@@ -121,8 +121,8 @@ class HotPlugManager:
 				newFstab = [x for x in fstab if f"UUID={ID_FS_UUID}" not in x]
 				newFstab.append(f"UUID={ID_FS_UUID} {mountPointHdd} {ID_FS_TYPE} defaults 0 0")
 				fileWriteLines("/etc/fstab", newFstab)
-				if not exists(mountPointHdd):
-					mkdir(mountPointHdd, 0o755)
+				if not exists(mountPointHdd) and not exists(mountPoint):  # [norhap] Check that mountPoint does not exist.
+					mkdir(mountPoint, 0o755)
 				self.callMount = True
 				notFound = False
 

@@ -6743,6 +6743,9 @@ msgctxt "now/next: 'next' event label"
 msgid "Next"
 msgstr "Siguiente"
 
+msgid "New Storage Device"
+msgstr "Nuevo dispositivo de almacenamiento"
+
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
@@ -7276,6 +7279,12 @@ msgstr "Porcentaje a la derecha"
 
 msgid "Permanently delete all recordings in the trash can?"
 msgstr "¿Eliminar permanentemente todas las grabaciones en la papelera?"
+
+msgid "Permanently ignore this device"
+msgstr "Ignorar este dispositivo de forma permanente"
+
+msgid "Permanently mount as %s"
+msgstr "Montar permanentemente como %s"
 
 msgid "Permanently remove all deleted items"
 msgstr "Eliminar permanentemente todos los elementos eliminados"
@@ -9223,6 +9232,9 @@ msgstr "Ajustes SoftCSA"
 
 msgid "OTT Model"
 msgstr "Modelo OTT"
+
+msgid "Temporarily mount as %s"
+msgstr "Montar temporalmente como %s"
 
 msgid "Twin Hybrid"
 msgstr "Twin Híbrido"
@@ -13474,6 +13486,9 @@ msgstr "/tmp"
 
 msgid "A new and empty config was created. A backup of the config can be found here (/etc/enigma2/autotimer.xml_old)."
 msgstr "Se creó una configuración nueva y vacía. Se puede encontrar una copia de la configuración aquí (/etc/enigma2/autotimer.xml_old)."
+
+msgid "A new storage device has been connected:"
+msgstr "Se ha conectado un nuevo dispositivo de almacenamiento:"
 
 msgid "Activate VPS"
 msgstr "Activar VPS"
