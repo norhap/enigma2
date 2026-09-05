@@ -172,7 +172,7 @@ class Harddisk:
 
 	def model(self):
 		if self.modelName:
-			return self.modelName		
+			return self.modelName
 		if self.device[:2] == "hd":
 			return fileReadLine(join("/proc/ide", self.device, "model"), _("Unknown"))
 		elif self.device[:2] == "sd":

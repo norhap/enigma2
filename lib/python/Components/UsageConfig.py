@@ -1413,9 +1413,9 @@ def InitUsageConfig():
 	def updateDebugPath(configElement):
 		if not exists(config.crash.debugPath.value):
 			makedirs(config.crash.debugPath.value, 0o755)
-			
-	config.crash.debugStorage = ConfigYesNo(default=False)		
-			
+
+	config.crash.debugStorage = ConfigYesNo(default=False)
+
 	def debugStorageChanged(configElement):
 		udevDebugFile = "/etc/udev/udev.debug"
 		if configElement.value:
@@ -1424,7 +1424,7 @@ def InitUsageConfig():
 			unlink(udevDebugFile)
 		harddiskmanager.debug = configElement.value
 
-	config.crash.debugStorage.addNotifier(debugStorageChanged)			
+	config.crash.debugStorage.addNotifier(debugStorageChanged)
 
 	config.crash.debugPath.addNotifier(updateDebugPath, immediate_feedback=False)
 	config.crash.debugFileCount = ConfigSelectionNumber(min=2, max=5, stepwidth=1, default=2, wraparound=True)
