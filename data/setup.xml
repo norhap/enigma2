@@ -342,7 +342,6 @@
 		<item level="1" text="Finetune">config.rfmod.finetune</item>
 	</setup>
 	<setup key="RTLSDRSetup" title="DAB+ USB Tuner Settings">
-		<item level="0" text="Common Settings" />
 		<item level="0" text="Enable DAB+ mode" description="Use a selected RTL-SDR USB tuner device exclusively for DAB+ reception. This tuner will not be available for TV service reception." indent="1">config.dab.rtlsdr.enabled</item>
 		<if requires="config.dab.rtlsdr.enabled">
 			<item level="0" text="Select tuner" description="Select the RTL-SDR USB tuner to be used for DAB+ reception." indent="1">config.dab.rtlsdr.device</item>

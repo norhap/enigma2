@@ -585,7 +585,13 @@ msgid "DAB+ USB support could not be installed from the feed."
 msgstr "No se pudo instalar la compatibilidad con USB DAB+ desde el feed."
 
 msgid "DAB+ USB support was installed. You can now enable the receiver in Reception settings."
-msgstr "Se ha instalado la compatibilidad con DAB+ USB. Puede activar el receptor en los ajustes de recepción."
+msgstr "Se ha instalado la compatibilidad con USB DAB+. Puede activar el receptor en los ajustes de recepción."
+
+msgid "DAB+ USB Tuner Settings"
+msgstr "Ajustes del sintonizador USB DAB+"
+
+msgid "DAB+ USB Tuner Settings Actions"
+msgstr "Acciones de Ajustes del sintonizador USB DAB+"
 
 msgid "daily"
 msgstr "diariamente"
@@ -716,8 +722,8 @@ msgstr "Fin edición de favoritos"
 msgid "Enable favourites edit"
 msgstr "Habilitar edición de favoritos"
 
-msgid "Enable DAB+ USB receiver"
-msgstr "Habilitar receptor USB DAB+"
+msgid "Enable DAB+ mode"
+msgstr "Habilitar modo DAB+"
 
 msgid "entertainment (10-16 year old)"
 msgstr "entretenimiento (10-16 años)"
@@ -1369,6 +1375,9 @@ msgstr "Ajustes 3D"
 
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
 msgstr "Ajuste la configuración de color para que todas las sombras de color se distingan, pero aparezcan lo más saturadas posibles. Si está satisfecho con el resultado, pulse OK para cerrar el ajuste de video o use las teclas numéricas para seleccionar otras pantallas de prueba."
+
+msgid "Adjust the tuner oscillator offset to refine the DAB+ signal reception."
+msgstr "Ajuste el desplazamiento del oscilador del sintonizador para optimizar la recepción de la señal DAB+."
 
 msgid "Adult Audience, Strong Violence 15+"
 msgstr "Violencia explícita (mayores de 15 años)"
@@ -2097,6 +2106,9 @@ msgstr "Incluir EIT en streams http"
 
 msgid "Include SDT, BAT in http streams"
 msgstr "Incluir SDT en streams http"
+
+msgid "Include storage device data"
+msgstr "Incluir datos del dispositivo de almacenamiento"
 
 msgid "Info bar timeout"
 msgstr "Duración de la InfoBar"
@@ -3396,9 +3408,6 @@ msgstr "Costa Rica"
 msgid "Cote d'Ivoire"
 msgstr "Costa de Marfil"
 
-msgid "Correct the tuner oscillator in parts per million."
-msgstr "Corrija el oscilador del sintonizador en partes por millón."
-
 msgid "Could not find installed channel list."
 msgstr "No se encontró lista de canales instalada."
 
@@ -4257,6 +4266,9 @@ msgstr "Habilite esta opción para añadir datos de Búsqueda DVB adicionales al
 msgid "Enable this option to add detailed DAB+ receiver, packet, MOT and SPI information to the debug log file."
 msgstr "Active esta opción para añadir información detallada sobre el receptor DAB+, los paquetes, el MOT y el SPI al archivo de registro de depuración."
 
+msgid "Enable this option to add storage device information detected during system boot and hot plug events to the debug log file."
+msgstr "Habilite esta opción para añadir información del dispositivo de almacenamiento detectada durante el arranque del sistema y los eventos de conexión en caliente."
+
 msgid "Enable this setting if your aerial system needs power"
 msgstr "Activa este ajuste si su instalación de antena necesita alimentación eléctrica"
 
@@ -4709,9 +4721,6 @@ msgstr "FEC"
 msgid "FEC:"
 msgstr "FEC:"
 
-msgid "Frequency correction"
-msgstr "Corrección de frecuencia"
-
 msgid "FTA"
 msgstr "FTA"
 
@@ -4921,6 +4930,9 @@ msgstr "Frecuencia y Polarización"
 
 msgid "Frequency bands"
 msgstr "Bandas de frecuencia"
+
+msgid "Frequency correction offset"
+msgstr "Desplazamiento de corrección de frecuencia"
 
 msgid "Frequency scan step size(khz)"
 msgstr "Tamaño de los pasos de frecuencia (khz)"
@@ -6131,8 +6143,8 @@ msgstr "Libia"
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-msgid "Limit a DAB+ USB scan to the frequency blocks defined for this region in dab.xml."
-msgstr "Limite la búsqueda USB DAB+ a los bloques de frecuencia definidos para esta región en dab.xml."
+msgid "Limit a DAB+ USB scan to the frequency blocks defined for this region in the 'dab.xml' file."
+msgstr "Limite la búsqueda USB DAB+ a los bloques de frecuencia definidos para esta región en el archivo 'dab.xml'."
 
 msgid "Limit east"
 msgstr "Límite este"
@@ -8738,9 +8750,6 @@ msgstr "Seleccione el número de modelo de su dispositivo Unicable. Si el númer
 msgid "Select the movie path"
 msgstr "Seleccione la ruta de las películas"
 
-msgid "Select the RTL-SDR device. Generic devices are identified by their physical USB port."
-msgstr "Seleccione el dispositivo RTL-SDR. Los dispositivos genéricos se identifican por su puerto USB físico."
-
 msgid "Select the satellite which is connected to Port-A of your switch. If you are unsure select 'automatic' and the receiver will attempt to determine this for you. If nothing is connected to this port, select 'nothing connected'."
 msgstr "Seleccione el satélite que está conectado al puerto A de su interruptor. Si no está seguro, seleccione ‘automático’ y el receptor intentará determinarlo por usted. Si no hay nada conectado a este puerto, seleccione ‘nada conectado’."
 
@@ -10743,8 +10752,11 @@ msgstr "Usar interfaz"
 msgid "Use official channel numbering"
 msgstr "Usar el orden de numeración oficial"
 
-msgid "Use the RTL-SDR device exclusively for DAB+ reception."
-msgstr "Utilice el dispositivo RTL-SDR exclusivamente para la recepción de DAB+."
+msgid "Select the RTL-SDR USB tuner to be used for DAB+ reception."
+msgstr "Seleccione el sintonizador USB RTL-SDR que se utilizará para la recepción de DAB+."
+
+msgid "Use a selected RTL-SDR USB tuner device exclusively for DAB+ reception. This tuner will not be available for TV service reception."
+msgstr "Utilice un sintonizador USB RTL-SDR seleccionado exclusivamente para la recepción de DAB+. Este sintonizador no estará disponible para la recepción de servicios TV."
 
 msgid "Use only for Wake on WLan (WoW)"
 msgstr "Usar solo para Wake on WLan (WoW)"
@@ -11506,8 +11518,8 @@ msgstr "Conservar marcadores en cortes"
 msgid "Enable cuts (preview)"
 msgstr "Habilitar cortes (vista previa)"
 
-msgid "DAB+ decoder backend is not installed"
-msgstr "El decodificador DAB+ no está instalado"
+msgid "DAB+ decoder back end not installed"
+msgstr "El sistema decodificador DAB+ no está instalado"
 
 msgid "Disable cuts (edit)"
 msgstr "Deshabilitar cortes (editar)"
@@ -13729,8 +13741,8 @@ msgstr "No después"
 msgid "Not before"
 msgstr "No antes"
 
-msgid "No compatible RTL-SDR device detected"
-msgstr "No se ha detectado ningún dispositivo RTL-SDR compatible"
+msgid "No compatible RTL-SDR USB tuner detected"
+msgstr "No se ha detectado ningún sintonizador USB RTL-SDR compatible"
 
 msgid "Not found xml config file!"
 msgstr "No se encontró el archivo de configuración xml!"
@@ -13812,7 +13824,7 @@ msgstr "Encuesta automáticamente"
 msgid "Popup timeout in seconds"
 msgstr "Tiempo de espera emergente en segundos"
 
-msgid "Position in the tuner's supported gain range. The backend selects the closest gain step."
+msgid "Position in the tuner's supported gain range. The back end selects the closest gain step."
 msgstr "Posición en el rango de ganancia compatible con el afinador. El sistema selecciona el paso de ganancia más cercano."
 
 msgid "Power state to change to after recordings. Select \"standard\" to not change the default behavior of enigma2 or values changed by yourself."
@@ -13898,6 +13910,9 @@ msgstr "Seleccione la ruta de autotimer_search.log"
 
 msgid "Select the path where the autotimer_search.log should be saved"
 msgstr "Seleccione la ruta donde se guardará autotimer_search.log"
+
+msgid "Select tuner"
+msgstr "Seleccionar sintonizador"
 
 msgid "Select type of Filter"
 msgstr "Seleccionar tipo de filtro"
@@ -14397,14 +14412,14 @@ msgstr "Pulse OK para expandir este hostname"
 msgid "Press OK to collapse this host"
 msgstr "Pulse OK para contraer este hostname"
 
-msgid "Scan the USB receiver, available DAB+ satellite feeds, or both."
-msgstr "Busque el receptor USB, las señales satelitales DAB+ disponibles o ambas."
+msgid "Scan the USB tuner, available DAB+ satellite feeds, or both."
+msgstr "Busque el sintonizador USB, las señales satelitales DAB+ disponibles o ambas."
 
 msgid "Search for network shares..."
 msgstr "Buscar recursos compartidos en red ..."
 
-msgid "Show DAB slideshow"
-msgstr "Mostrar presentación de diapositivas DAB"
+msgid "Show DAB+ slideshow"
+msgstr "Mostrar presentación de diapositivas DAB+"
 
 msgid "Browse network neighbourhood"
 msgstr "Navegador de Red Local"
@@ -16498,8 +16513,17 @@ msgstr "Extender Compartidos"
 msgid "Local box"
 msgstr "CCcam.cfg receptor"
 
+msgid "Refresh list of RTL-SDR USB tuners"
+msgstr "Actualizar la lista de sintonizadores USB RTL-SDR"
+
 msgid "Remote box"
 msgstr "CCcam.cfg Remoto"
+
+msgid "RTL-SDR tuner"
+msgstr "Sintonizador RTL-SDR"
+
+msgid "RTL-SDR USB tuner"
+msgstr "Sintonizador USB RTL-SDR"
 
 msgid "Using old profile: "
 msgstr "Usando perfil antiguo: "
@@ -19231,8 +19255,8 @@ msgstr ""
 "\n"
 "\"Añadir Lenguaje\" o \"MENÚ\" agrega idioma(s) adicional(es)."
 
-msgid "Unable to open receiver (%d)"
-msgstr "No se pudo abrir el receptor (%d)"
+msgid "Unable to open tuner (%d)"
+msgstr "No se pudo abrir el sintonizador (%d)"
 
 msgid "Updating cache"
 msgstr "Actualizando caché"
