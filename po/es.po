@@ -587,8 +587,8 @@ msgstr "No se pudo instalar la compatibilidad con USB DAB+ desde el feed."
 msgid "DAB+ USB support was installed. You can now enable the receiver in Reception settings."
 msgstr "Se ha instalado la compatibilidad con USB DAB+. Puede activar el receptor en los ajustes de recepción."
 
-msgid "DAB+ USB Tuner Settings"
-msgstr "Ajustes del sintonizador USB DAB+"
+msgid "DAB+ Settings"
+msgstr "Ajustes DAB+"
 
 msgid "DAB+ USB Tuner Settings Actions"
 msgstr "Acciones de Ajustes del sintonizador USB DAB+"
@@ -2660,6 +2660,9 @@ msgstr "Pantalla negra hasta bloqueada"
 msgid "Block noise reduction"
 msgstr "Bloquear la reducción de ruido"
 
+msgid "Block RTL2832 DVB kernel driver"
+msgstr "Bloquear el driver del kernel DVB RTL2832"
+
 msgid "Blue"
 msgstr "Azúl"
 
@@ -3232,6 +3235,9 @@ msgstr "Modo de configuración: %s"
 
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
 msgstr "Configure si se debe obviar la comprobación de HDMI EDID, esto podría solucionar problemas con algunos televisores."
+
+msgid "Create or remove the RTL2832 DVB module blacklist. A full receiver reboot is required; while enabled, this USB tuner is available for DAB+ but not for DVB-T/T2."
+msgstr "Cree o elimine la lista negra del módulo DVB RTL2832. Es necesario reiniciar completamente el receptor; mientras esté habilitado, este sintonizador USB estará disponible para DAB+ pero no para DVB-T/T2."
 
 msgid "Settings DNS Server"
 msgstr "Configuración Servidor DNS"
@@ -4198,6 +4204,9 @@ msgstr "Slot vacío"
 
 msgid "Enable"
 msgstr "Activar"
+
+msgid "Enable a selected RTL-SDR USB receiver for DAB+ reception. DVB-T and DAB+ cannot use the same receiver at the same time."
+msgstr "Habilite un receptor USB RTL-SDR seleccionado para la recepción de DAB+. DVB-T y DAB+ no pueden usar el mismo receptor simultáneamente."
 
 msgid "Enabled, screens Clients, Servers and Log are updated on time interval."
 msgstr "Habilitado, las pantallas Clientes, Servidores y Log se actualizan en intervalos de tiempo."
@@ -7069,6 +7078,9 @@ msgstr "Una vez al día"
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
 msgstr "Solo seleccione ‘sí’ si está usando un multiswich que requiere una señal de comando DiSEqC Port-A. Para todas las demás configuraciones, seleccione ‘no’."
 
+msgid "Open Bouquet selection"
+msgstr "Abrir selección de Bouquet"
+
 msgid "Open select location"
 msgstr "Abrir seleccionar ubicación"
 
@@ -7970,9 +7982,6 @@ msgstr "Función del botón AZUL"
 
 msgid "Receiver does not support Quad PiP."
 msgstr "El receptor no soporta Quad PiP."
-
-msgid "Reception sources to scan"
-msgstr "Fuentes de recepción para buscar"
 
 msgid "Red colored"
 msgstr "Coloreado en rojo"
@@ -10558,6 +10567,9 @@ msgstr "USALS mueve automáticamente un plato motorizado al satélite correcto e
 msgid "USALS calibration"
 msgstr "Calibrado de USALS"
 
+msgid "USB receiver settings"
+msgstr "Ajustes del receptor USB"
+
 msgid "USB stick"
 msgstr "Pendrive USB"
 
@@ -10766,9 +10778,6 @@ msgstr "Usar el orden de numeración oficial"
 
 msgid "Select the RTL-SDR USB tuner to be used for DAB+ reception."
 msgstr "Seleccione el sintonizador USB RTL-SDR que se utilizará para la recepción de DAB+."
-
-msgid "Use a selected RTL-SDR USB tuner device exclusively for DAB+ reception. This tuner will not be available for TV service reception."
-msgstr "Utilice un sintonizador USB RTL-SDR seleccionado exclusivamente para la recepción de DAB+. Este sintonizador no estará disponible para la recepción de servicios TV."
 
 msgid "Use only for Wake on WLan (WoW)"
 msgstr "Usar solo para Wake on WLan (WoW)"
@@ -14373,9 +14382,6 @@ msgstr "Eliminar lista de autoinstalación"
 msgid "Running..."
 msgstr "Ejecutando..."
 
-msgid "Replace the static radio background with pictures transmitted by the current DAB+ station."
-msgstr "Sustituya el fondo estático de la radio por imágenes transmitidas por la emisora DAB+ actual."
-
 msgid "Mounts management"
 msgstr "Administrar Montajes"
 
@@ -14427,14 +14433,8 @@ msgstr "Pulse OK para expandir este hostname"
 msgid "Press OK to collapse this host"
 msgstr "Pulse OK para contraer este hostname"
 
-msgid "Scan the USB tuner, available DAB+ satellite feeds, or both."
-msgstr "Busque el sintonizador USB, las señales satelitales DAB+ disponibles o ambas."
-
 msgid "Search for network shares..."
 msgstr "Buscar recursos compartidos en red ..."
-
-msgid "Show DAB+ slideshow"
-msgstr "Mostrar presentación de diapositivas DAB+"
 
 msgid "Browse network neighbourhood"
 msgstr "Navegador de Red Local"
