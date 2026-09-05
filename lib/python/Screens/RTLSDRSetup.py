@@ -57,7 +57,7 @@ class RTLSDRSetup(Setup):
 
 	def buildCommonItems(self):
 		items = [
-			(_("Common settings"),),
+			# (_("Common settings"),),
 			((_("Show DAB+ slideshow"), 1), config.dab.slideshow,
 				_("Replace the static radio background with pictures transmitted by the current DAB+ station."))
 		]

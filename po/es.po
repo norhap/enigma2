@@ -581,6 +581,9 @@ msgstr "Búsqueda DAB+"
 msgid "DAB+ scan failed; existing bouquets were kept."
 msgstr "Error en la búsqueda DAB+: Se mantuvieron los bouquets existentes."
 
+msgid "DAB+ USB: bouquet could not be written"
+msgstr "DAB+ USB: no se pudo escribir el paquete"
+
 msgid "DAB+ USB support could not be installed from the feed."
 msgstr "No se pudo instalar la compatibilidad con USB DAB+ desde el feed."
 
@@ -7983,6 +7986,9 @@ msgstr "Función del botón AZUL"
 msgid "Receiver does not support Quad PiP."
 msgstr "El receptor no soporta Quad PiP."
 
+msgid "Reception sources to scan"
+msgstr "Fuentes de recepción para buscar"
+
 msgid "Red colored"
 msgstr "Coloreado en rojo"
 
@@ -8493,7 +8499,7 @@ msgid "Scanning can't be performed while recordings are in progress."
 msgstr "No se puede realizar la búsqueda mientras las grabaciones están en curso."
 
 msgid "Scanning completed, %d DAB+ services found."
-msgstr "Búsqueda completado: %d canales DAB+ encontrados."
+msgstr "Búsqueda completa: %d canales DAB+ encontrados."
 
 msgid "Scanning: %d services found; validating live result (%d/%d)..."
 msgstr "Buscando: %d canales encontrados; validando resultado en vivo (%d/%d)..."
@@ -11331,6 +11337,9 @@ msgstr "pasar a la entrada anterior"
 
 msgid "movie/drama (general)"
 msgstr "película/drama (general)"
+
+msgid "Moving rotor and tuning DAB+ satellite feed..."
+msgstr "Rotación del rotor y sintonización de la señal satelital DAB+..."
 
 msgid "multi"
 msgstr "multi"
@@ -14382,6 +14391,9 @@ msgstr "Eliminar lista de autoinstalación"
 msgid "Running..."
 msgstr "Ejecutando..."
 
+msgid "Replace the static radio background with pictures transmitted by the current DAB+ station."
+msgstr "Sustituya el fondo estático de la radio por imágenes transmitidas por la emisora DAB+ actual."
+
 msgid "Mounts management"
 msgstr "Administrar Montajes"
 
@@ -14433,8 +14445,14 @@ msgstr "Pulse OK para expandir este hostname"
 msgid "Press OK to collapse this host"
 msgstr "Pulse OK para contraer este hostname"
 
+msgid "Scan the USB tuner, available DAB+ satellite feeds, or both."
+msgstr "Busque el sintonizador USB, las señales satelitales DAB+ disponibles o ambas."
+
 msgid "Search for network shares..."
 msgstr "Buscar recursos compartidos en red ..."
+
+msgid "Show DAB+ slideshow"
+msgstr "Mostrar presentación de diapositivas DAB+"
 
 msgid "Browse network neighbourhood"
 msgstr "Navegador de Red Local"
@@ -14805,6 +14823,12 @@ msgid ""
 msgstr ""
 "Ya existe una entrada de montaje con este nombre!\n"
 "Actualizar la entrada existente y continuar?\n"
+
+msgid "Unable to register the DAB+ transponder"
+msgstr "No se pudo registrar el transpondedor DAB+"
+
+msgid "Unable to tune the DAB+ satellite feed"
+msgstr "No se puede sintonizar la señal satelital DAB+"
 
 msgid "User management"
 msgstr "Administrador de usuarios"
@@ -15799,6 +15823,9 @@ msgstr "H: = horario / D: = diario / W: = semanal / M: = mensual"
 
 msgid "Tuners & scanning"
 msgstr "Sintonizadores & Búsqueda"
+
+msgid "Tuning DAB+ satellite feed..."
+msgstr "Sintonizando la señal satelital DAB+..."
 
 msgid "Really reboot into Recovery Mode?"
 msgstr "Reiniciar en Modo Recuperación?"
@@ -16988,6 +17015,9 @@ msgstr "%d de %d feeds completados: Se mantuvieron los bouquets de feed fallido"
 
 msgid "%d of %d KB"
 msgstr "%d de %d KB"
+
+msgid "%d of %d channels contained a DAB+ ensemble"
+msgstr "%d de %d canales contenían un conjunto DAB+"
 
 msgid "%s"
 msgstr "%s"
