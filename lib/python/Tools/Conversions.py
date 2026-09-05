@@ -40,7 +40,7 @@ def scaleNumber(number, style="Si", suffix="B", format="%.3f"):
 	# if style == "Auto":
 	# 	style = config.usage.scaleUnits.value
 	if style not in ("Si", "Iec", "Jedec"):
-		print("[Conversions] Error: Invalid number unit style '%s' specified so 'Si' is assumed!" % style)
+		print(f"[Conversions] Error: Invalid number unit style '{style}' specified so 'Si' is assumed!")
 	if style == "Si":
 		units[1] = units[1].lower()
 	negative = number < 0
@@ -147,7 +147,7 @@ class NumberScaler:
 			style = "Si"  # config.usage.scaleUnits.value
 		style = style.capitalize()
 		if style not in ("Si", "Sifull", "Iec", "Jedec"):
-			print("[Conversions] Error: Invalid number unit style '%s' specified so '%s' is assumed!" % (style, config.usage.scaleUnits.value))
+			print(f"[Conversions] Error: Invalid number unit style '{style}' is assumed!")
 		scaleTable = self.styles.get(style, UnitMultipliers.Default)
 		firstScaleIndex = min(firstScaleIndex, len(scaleTable) - 1)
 		maxNumLen = max(maxNumLen, 3)

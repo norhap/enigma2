@@ -7,11 +7,19 @@ from Components.config import config
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager
 from Components.RTLSDR import dabHotplugNotifier
-from Components.Storage import EXPANDER_MOUNT, cleanMediaDirs
+from Components.Storage import cleanMediaDirs
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import ModalMessageBox
 from Tools.Directories import fileReadLines, fileWriteLines
 from Tools.Conversions import scaleNumber
+
+# OpkgInstaller
+from Components.ActionMap import ActionMap
+from Components.SelectionList import SelectionList
+from Components.Sources.StaticText import StaticText
+from Components.Opkg import OpkgComponent
+from Screens.Opkg import Opkg
+from Screens.Screen import Screen
 
 # globals
 hotplugNotifier = []
@@ -107,7 +115,7 @@ class HotPlugManager:
 						break
 
 			if notFound and ID_FS_UUID:
-				fstabDevice = [x[1] for x in fstabEntries if x[0] == f"UUID={ID_FS_UUID}" and EXPANDER_MOUNT not in x[1]]
+				fstabDevice = [x[1] for x in fstabEntries if x[0] == f"UUID={ID_FS_UUID}"]
 				if fstabDevice and fstabDevice[0] not in mountPoints:  # Check if device is already in fstab and if the mountpoint not used
 					if not exists(fstabDevice[0]):
 						mkdir(fstabDevice[0], 0o755)
@@ -291,8 +299,81 @@ class HotPlugManager:
 					hotplugNotifier.remove(callback)
 
 
+class OpkgInstaller(Screen):
+	skin = """
+		<screen name="OpkgInstaller" position="center,center" size="550,450" title="Install extensions" >
+			<ePixmap pixmap="buttons/red.png" position="0,0" size="140,40" alphaTest="on" />
+			<ePixmap pixmap="buttons/green.png" position="140,0" size="140,40" alphaTest="on" />
+			<ePixmap pixmap="buttons/yellow.png" position="280,0" size="140,40" alphaTest="on" />
+			<ePixmap pixmap="buttons/blue.png" position="420,0" size="140,40" alphaTest="on" />
+			<widget source="key_red" render="Label" position="0,0" zPosition="1" size="140,40" font="Regular;20" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#9f1313" transparent="1" />
+			<widget source="key_green" render="Label" position="140,0" zPosition="1" size="140,40" font="Regular;20" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#1f771f" transparent="1" />
+			<widget source="key_yellow" render="Label" position="280,0" zPosition="1" size="140,40" font="Regular;20" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#a08500" transparent="1" />
+			<widget source="key_blue" render="Label" position="420,0" zPosition="1" size="140,40" font="Regular;20" horizontalAlignment="center" verticalAlignment="center" backgroundColor="#18188b" transparent="1" />
+			<widget name="list" position="5,50" size="540,360" />
+			<ePixmap pixmap="div-h.png" position="0,410" zPosition="10" size="560,2" transparent="1" alphaTest="on" />
+			<widget source="introduction" render="Label" position="5,420" zPosition="10" size="550,30" horizontalAlignment="center" verticalAlignment="center" font="Regular;22" transparent="1" shadowColor="black" shadowOffset="-1,-1" />
+		</screen>"""
+
+	def __init__(self, session, list):
+		Screen.__init__(self, session)
+
+		self.list = SelectionList()
+		self["list"] = self.list
+
+		p = 0
+		if len(list):
+			p = list[0].rfind("/")
+			title = list[0][:p]
+			self.title = ("%s %s %s") % (_("Install extensions"), _("from"), title)
+
+		for listindex in range(len(list)):
+			self.list.addSelection(list[listindex][p + 1:], list[listindex], listindex, False)
+		self.list.sort()
+
+		self["key_red"] = StaticText(_("Close"))
+		self["key_green"] = StaticText(_("Install"))
+		self["key_yellow"] = StaticText()
+		self["key_blue"] = StaticText(_("Invert"))
+		self["introduction"] = StaticText(_("Press OK to toggle the selection."))
+
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.list.toggleSelection,
+			"cancel": self.close,
+			"red": self.close,
+			"green": self.install,
+			"blue": self.list.toggleAllSelection
+		}, -1)
+
+	def install(self):
+		list = self.list.getSelectionsList()
+		cmdList = []
+		for item in list:
+			cmdList.append((OpkgComponent.CMD_INSTALL, {"package": item[1]}))
+		self.session.open(Opkg, cmdList=cmdList)
+
+
+def filescan_open(list, session, **kwargs):
+	filelist = [x.path for x in list]
+	session.open(OpkgInstaller, filelist)  # list
+
+
+def filescan(**kwargs):
+	from Components.Scanner import Scanner, ScanPath
+	return \
+		Scanner(mimetypes=["application/x-debian-package"],
+			paths_to_scan=[
+				ScanPath(path="ipk", with_subdirs=True),
+				ScanPath(path="", with_subdirs=False),],
+			name="Opkg",
+			description=_("Install extensions"),
+			openfnc=filescan_open,)
+
+
 hotPlugManager = HotPlugManager()
 
 
 def Plugins(**kwargs):
-	return PluginDescriptor(name="Hotplug", description="Hotplug handler.", where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart)
+	return [PluginDescriptor(name="Hotplug", description="Hotplug handler.", where=PluginDescriptor.WHERE_AUTOSTART, needsRestart=True, fnc=autostart),
+		PluginDescriptor(name=_("Opkg"), where=PluginDescriptor.WHERE_FILESCAN, needsRestart=False, fnc=filescan)]
