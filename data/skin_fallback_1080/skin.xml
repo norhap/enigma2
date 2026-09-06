@@ -1453,7 +1453,7 @@
 			<convert type="RdsInfo">RadioText</convert>
 		</widget>
 		<widget source="RdsDecoder" render="Label" position="1395,710" size="515,140" font="RegularBold;27" horizontalAlignment="center" verticalAlignment="center" backgroundColor="OE_NewBg2" transparent="1" zPosition="2">
-			<convert type="RdsInfo">RtpText</convert>
+			<convert type="RdsInfo">RtpTextIfNoEvent</convert>
 		</widget>
 	</screen>
 	<screen name="ChapterZap" title="ChapterZap" backgroundColor="transparent" flags="wfNoBorder" position="50,50" size="284,96" zPosition="8">
@@ -3090,7 +3090,7 @@
 	<screen name="RdsInfoDisplay" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080" zPosition="-2">
 		<widget name="RassLogo" pixmap="OctEtFHD/icons/rass_logo.png" position="150,50" size="50,21"/>
 		<widget name="RadioText" backgroundColor="#54111112" font="RegularBold;28" noWrap="1" position="20,100" shadowColor="transpBlack" shadowOffset="-2,-2" size="1000,45"/>
-		<widget name="RtpText" backgroundColor="#54111112" font="RegularBold;28" horizontalAlignment="left" noWrap="1" position="20,145" shadowColor="transpBlack" shadowOffset="-2,-2" size="1000,45"/>
+		<widget name="RtpTextIfNoEvent" backgroundColor="#54111112" font="RegularBold;28" horizontalAlignment="left" noWrap="1" position="20,145" shadowColor="transpBlack" shadowOffset="-2,-2" size="1000,45"/>
 	</screen>
 	<!-- RESTORE PLUGINS -->
 	<screen name="RestorePlugins" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1920,1080">
