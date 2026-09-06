@@ -6,4 +6,5 @@ dist_install_DATA = \
 	input_info.png \
 	input_message.png \
 	input_question.png \
-	input_warning.png
+	input_warning.png \
+	selectioncross.png
