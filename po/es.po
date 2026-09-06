@@ -166,8 +166,8 @@ msgstr[1] "%d canales encontrados."
 
 msgid "Scanning completed, %d service found."
 msgid_plural "Scanning completed, %d services found."
-msgstr[0] "Búsqueda completado: %d canal encontrado."
-msgstr[1] "Búsqueda completada: %d canales encontrados."
+msgstr[0] "Búsqueda completa: %d canal encontrado."
+msgstr[1] "Búsqueda completa: %d canales encontrados."
 
 msgid "Scanning failed!"
 msgstr "¡La búsqueda ha fallado!"
@@ -239,6 +239,9 @@ msgstr[1] "%d minutos"
 #, python-format
 msgid "%d minutes"
 msgstr "%d minutos"
+
+msgid "%s (motor)"
+msgstr "%s (motor)"
 
 #, python-format
 msgid "%d ms"
@@ -592,6 +595,9 @@ msgstr "Se ha instalado la compatibilidad con USB DAB+. Puede activar el recepto
 
 msgid "DAB+ Settings"
 msgstr "Ajustes DAB+"
+
+msgid "DAB+ Settings Actions"
+msgstr "Acciones Ajustes DAB+"
 
 msgid "DAB+ USB Tuner Settings Actions"
 msgstr "Acciones de Ajustes del sintonizador USB DAB+"
@@ -2112,6 +2118,9 @@ msgstr "Incluir SDT en streams http"
 
 msgid "Include storage device data"
 msgstr "Incluir datos del dispositivo de almacenamiento"
+
+msgid "Include this configured satellite position in the DAB+ scan. Disable it to skip the position."
+msgstr "Incluya esta posición de satélite configurada en la búsqueda DAB+. Desactívela para omitir dicha posición."
 
 msgid "Info bar timeout"
 msgstr "Duración de la InfoBar"
@@ -3734,6 +3743,9 @@ msgstr "Destino del receptor reserva."
 
 msgid "Detected hardware"
 msgstr "Hardware detectado"
+
+msgid "Detected USB hardware"
+msgstr "Hardware USB detectado"
 
 msgid ""
 "Device changes need a system restart to take effects.\n"
@@ -8357,6 +8369,9 @@ msgstr "Equipo de satélite"
 msgid "Satellite equipment setup"
 msgstr "Configuración del equipo de satélite"
 
+msgid "Satellite feeds to scan"
+msgstr "Feeds satélite a buscar"
+
 msgid "Satellite longitude:"
 msgstr "Longitud del satélite:"
 
@@ -8477,8 +8492,8 @@ msgstr "Buscando %s…"
 #, python-format
 msgid "Scanning - %d%% completed"
 msgid_plural "Scanning - %d%% completed"
-msgstr[0] "Búsqueda - %d%% completado"
-msgstr[1] "Búsqueda - %d%% completados"
+msgstr[0] "Búsqueda - %d%% completa"
+msgstr[1] "Búsqueda - %d%% completas"
 
 #, python-format
 msgid "Scanning completed, %d channel found"
@@ -14094,6 +14109,9 @@ msgstr "El repositorio no es público o no hay acceso."
 #, python-format
 msgid "The results have been written to %s"
 msgstr "Los resultados han sido escritos en %s"
+
+msgid "The RTL2832 kernel driver blacklist could not be updated:\n%s"
+msgstr "No se pudo actualizar la lista negra del driver del kernel RTL2832:\n%s"
 
 msgid "The saved PIN was cleared."
 msgstr "Se borró el PIN guardado."
