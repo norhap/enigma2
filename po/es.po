@@ -11354,7 +11354,7 @@ msgid "movie/drama (general)"
 msgstr "película/drama (general)"
 
 msgid "Moving rotor and tuning DAB+ satellite feed..."
-msgstr "Rotación del rotor y sintonización de la señal satelital DAB+..."
+msgstr "Movimiento del motor y sintonización de la señal satelital DAB+..."
 
 msgid "multi"
 msgstr "multi"
