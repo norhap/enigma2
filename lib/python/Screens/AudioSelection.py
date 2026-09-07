@@ -24,6 +24,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
+SUBTITLE_PGS = 3  # iSubtitleOutput track type: 0 DVB, 1 teletext, 2 text, 3 PGS
 
 selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/selectioncross.png"))
 
@@ -430,6 +431,8 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 							description = types[x[2]]
 						except Exception:
 							description = _("unknown") + ": %s" % x[2]
+					elif x[0] == SUBTITLE_PGS:
+						description = "PGS"							
 					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 					idx += 1
 			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
@@ -757,8 +760,13 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("ai_translate_to"),
 				getConfigMenuItem("ai_subtitle_colors")
 			])
-		if sub[0] == 0:  # dvb
-			menu = [
+		if sub[0] == SUBTITLE_PGS:  # bitmap, only the position settings reach it
+			menu.extend([
+				getConfigMenuItem("dvb_subtitles_original_position"),
+				getConfigMenuItem("subtitle_position")
+			])
+		elif sub[0] == 0:  # dvb
+			menu.extend([
 				getConfigMenuItem("dvb_subtitles_color"),
 				getConfigMenuItem("dvb_subtitles_backtrans"),
 				getConfigMenuItem("dvb_subtitles_original_position"),
