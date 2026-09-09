@@ -858,7 +858,8 @@ data/keymaps/Makefile
 data/hw_info/Makefile
 data/rc_models/Makefile
 data/skin_default/Makefile
-data/skin_default/menu/Makefile
+data/skin_default/ratings/Makefile
+data/skin_default/window/Makefile
 data/skin_default/icons/Makefile
 data/skin_default/buttons/Makefile
 data/skin_default/epg/Makefile
