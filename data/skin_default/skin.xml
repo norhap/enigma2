@@ -3359,10 +3359,10 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget backgroundColor="OE_NewBg3" font="RegularBold;20" horizontalAlignment="left" position="1170,660" render="Label" size="60,26" source="session.CurrentService" transparent="1" verticalAlignment="center">
 			<convert type="ServiceInfo">VideoHeight</convert>
 		</widget>
-		<widget name="key_red" position="240,592" size="0,0" backgroundColor="OE_Background" font="RegularBold;13" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<widget name="key_green" position="240,678" size="0,0" objectTypes="key_green,Label,Button" font="RegularBold;13" backgroundColor="OE_Background" horizontalAlignment="left" verticalAlignment="top" transparent="1" zPosition="1"/>
-		<widget name="key_yellow" position="590,683" size="0,0" backgroundColor="OE_Background" font="RegularBold;13" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
-		<widget name="key_blue" position="930,683" size="0,0" backgroundColor="OE_Background" font="RegularBold;13" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_red" conditional="key_red" position="240,592" size="0,0" backgroundColor="OE_Background" font="RegularBold;13" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_green" conditional="key_green" position="240,678" size="0,0" objectTypes="key_green,Label,Button" font="RegularBold;13" backgroundColor="OE_Background" horizontalAlignment="left" verticalAlignment="top" transparent="1" zPosition="1"/>
+		<widget name="key_yellow" conditional="key_yellow" position="590,683" size="0,0" backgroundColor="OE_Background" font="RegularBold;13" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
+		<widget name="key_blue" conditional="key_blue" position="930,683" size="0,0" backgroundColor="OE_Background" font="RegularBold;13" horizontalAlignment="left" verticalAlignment="center" transparent="1" zPosition="1"/>
 		<!-- Clock -->
 		<panel name="Clock"/>
 	</screen>
