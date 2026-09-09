@@ -977,7 +977,7 @@ class VirtualKeyBoard(Screen, HelpableScreen):
 
 	def virtualKeyBoardEntryComponent(self, keys):
 		if self.nativeKeys:
-			return self.nativeKeyboardEntryComponent(keys)		
+			return self.nativeKeyboardEntryComponent(keys)
 		res = [keys]
 		text = []
 		offset = 14 - self.keyboardWidth  # 14 represents the maximum buttons per row as defined here and in the skin (14 x self.width).
