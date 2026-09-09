@@ -3294,7 +3294,6 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<!-- MOVIEPLAYER -->
 	<screen name="MoviePlayer" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1280,720" title="InfoBar">
 		<panel name="PVRState"/>
-		<panel name="poster_firstinfobar"/>
 		<eLabel backgroundColor="OE_Background" name="InfoBar" position="13,606" size="1253,83" zPosition="-11"/>
 		<eLabel backgroundColor="OE_NewBg" foregroundColor="OE_NewBg" position="1076,573" size="166,140" zPosition="-10"/>
 		<eLabel backgroundColor="green_light" position="1086,654" size="146,1" zPosition="-9"/>
