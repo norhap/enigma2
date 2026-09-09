@@ -29,5 +29,5 @@ dist_install_DATA = \
 	ETSI-17.png \
 	ETSI-18.png \
 	ETSI-ALL.png \
-	ETSI-BC.png \	
+	ETSI-BC.png \
 	ETSI-na.png

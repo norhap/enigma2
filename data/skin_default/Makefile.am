@@ -7,4 +7,5 @@ dist_install_DATA = \
 	pointer.png \
 	prev.png \
 	rcold.png \
-	rc_circle.png
+	rc_circle.png \
+	skin.xml
