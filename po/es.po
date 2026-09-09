@@ -11500,6 +11500,9 @@ msgstr "Valores transcurridos de tiempo originales"
 msgid "pass"
 msgstr "paso"
 
+msgid "Pass"
+msgstr "Paso"
+
 msgid "pausing"
 msgstr "pausando"
 
