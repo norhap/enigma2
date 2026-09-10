@@ -3169,7 +3169,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget name="year" position="233,644" size="250,24" backgroundColor="#002c445e" transparent="1" font="Regular;20"/>
 		<widget name="genretext" position="550,644" size="100,24" font="Regular;20" backgroundColor="#002c445e" transparent="1" foregroundColor="darkgrey"/>
 		<widget name="genre" position="650,644" size="344,24" font="Regular;20" backgroundColor="#002c445e" transparent="1" foregroundColor="darkgrey"/>
-		<widget name="PositionGauge" position="251,418" size="0,0" pointer="OctEtFHD/skin_default/position_pointer.png:8,2" seekPointer="OctEtFHD/skin_default/position_pointer.png:8,2" zPosition="3" transparent="1"/>
+		<widget name="PositionGauge" position="251,418" size="0,0" pointer="position_pointer.png:8,2" seekPointer="position_pointer.png:8,2" zPosition="3" transparent="1"/>
 		<widget source="session.CurrentService" render="Label" position="6,690" size="100,23" backgroundColor="#002c445e" transparent="1" zPosition="2" font="Regular;20" verticalAlignment="center" horizontalAlignment="right">
 			<convert type="ServicePosition">Position</convert>
 		</widget>
