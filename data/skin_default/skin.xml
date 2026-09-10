@@ -1041,7 +1041,7 @@
 		<!-- MESSAGEBOX TEMPLATE-->
 	<screen name="MessageBoxTemplate">
 		<ePixmap alphaTest="blend" pixmap="buttons/key_help.png" position="13,61" size="42,28"/>
-		<widget name="icon" pixmaps="OctEtFHD/icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="6,2" size="53,53" alphaTest="blend"/>
+		<widget name="icon" pixmaps="icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="6,2" size="53,53" alphaTest="blend"/>
 		<applet type="onLayoutFinish">
 def getScreenObjectSize(data, screenObject, maxWidth, maxHeight):
 	from enigma import eLabel, eSize
@@ -3245,7 +3245,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<ePixmap alphaTest="blend" pixmap="buttons/key_help.png" position="12,690" size="42,28"/>
 		<eLabel backgroundColor="OE_Background" position="17,643" size="833,1" zPosition="-8"/>
 		<widget name="list" conditional="list" itemHeight="33" font="RegularBold;18" backgroundColor="OE_Background" foregroundColor="OE_Foreground" position="17,93" size="833,66" transparent="1"/>
-		<widget name="icon" pixmaps="OctEtFHD/icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="406,164" size="53,53" alphaTest="blend"/>
+		<widget name="icon" pixmaps="icons/input_question.png,icons/input_info.png,icons/input_warning.png,icons/input_error.png,icons/input_message.png" position="406,164" size="53,53" alphaTest="blend"/>
 		<widget name="text" font="RegularBold;18" backgroundColor="OE_Background" position="53,220" size="783,456" verticalAlignment="top" horizontalAlignment="center"/>
 	</screen>
 	<!-- MESSAGEBOX SIMPLE-->
