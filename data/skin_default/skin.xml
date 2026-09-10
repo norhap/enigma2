@@ -1637,7 +1637,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget source="session.FrontendStatus" text="SNR" render="FixedLabel" position="23,520" zPosition="2" size="26,16" font="Regular;14" horizontalAlignment="center" backgroundColor="OE_NewBg" transparent="1" verticalAlignment="center">
 			<convert type="FrontendInfo">SNR</convert>
 		</widget>
-		<widget render="Progress" source="session.FrontendStatus" pixmap="OctEtFHD/my_icons/barra-snr-agc.png" position="53,524" size="96,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
+		<widget render="Progress" source="session.FrontendStatus" pixmap="icons/barra-snr-agc.png" position="53,524" size="100,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
 			<convert type="FrontendInfo">SNR</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -1649,7 +1649,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget source="session.FrontendStatus" render="FixedLabel" text="AGC" position="23,547" zPosition="2" size="30,16" font="Regular;14" horizontalAlignment="center" backgroundColor="OE_NewBg" transparent="1" verticalAlignment="center">
 			<convert type="FrontendInfo">AGC</convert>
 		</widget>
-		<widget render="Progress" source="session.FrontendStatus" pixmap="OctEtFHD/my_icons/barra-snr-agc.png" position="53,550" size="96,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
+		<widget render="Progress" source="session.FrontendStatus" pixmap="icons/barra-snr-agc.png" position="53,550" size="100,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
 			<convert type="FrontendInfo">AGC</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
@@ -2820,13 +2820,13 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<eLabel backgroundColor="OE_Accent1" foregroundColor="OE_Accent1" position="106,243" size="1153,1"/>
 		<widget backgroundColor="blue" name="timeline_text" position="106,253" selection="0" size="1153,33" transparent="1" itemHeight="36" font="RegularBold;17"/>
 		<widget name="list" position="106,286" size="1153,333" scrollbarMode="showNever" ServiceFont="Regular;18" ServiceBackgroundColor="OE_Background" EntryBackgroundColor="dark" EntryBackgroundColorNow="#37732F" EntryBackgroundColorSelected="OE_Selection" EntryBorderColor="darkgrey" EntryFont="RegularBold;16" EntryForegroundColor="#ffffff" EntryForegroundColorNow="#ffffff" EntryForegroundColorSelected="#ffffff" EventBorderWidth="0" ServiceBackgroundColorSelected="dark" ServiceBorderColor="darkgrey" ServiceBorderWidth="0" ServiceForegroundColorSelected="yellow" transparent="1"/>
-		<widget alphaTest="blend" name="timeline_now" pixmap="OctEtFHD/extensions/timeline-now.png" position="0,286" size="11,333" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline0" pixmap="OctEtFHD/extensions/timeline.png" position="0,286" size="1,333" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline1" pixmap="OctEtFHD/extensions/timeline.png" position="0,286" size="1,333" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline2" pixmap="OctEtFHD/extensions/timeline.png" position="0,286" size="1,333" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline3" pixmap="OctEtFHD/extensions/timeline.png" position="0,286" size="1,333" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline4" pixmap="OctEtFHD/extensions/timeline.png" position="0,286" size="1,333" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline5" pixmap="OctEtFHD/extensions/timeline.png" position="0,286" size="1,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline_now" pixmap="icons/timeline-now.png" position="0,286" size="11,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline0" pixmap="icons/timeline.png" position="0,286" size="1,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline1" pixmap="icons/timeline.png" position="0,286" size="1,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline2" pixmap="icons/timeline.png" position="0,286" size="1,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline3" pixmap="icons/timeline.png" position="0,286" size="1,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline4" pixmap="icons/timeline.png" position="0,286" size="1,333" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline5" pixmap="icons/timeline.png" position="0,286" size="1,333" zPosition="2"/>
 		<widget backgroundColor="OE_Background" font="RegularBold;17" position="106,120" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" size="643,120" source="Event" transparent="1">
 			<convert type="EventName">FullDescription</convert>
 		</widget>
@@ -2836,13 +2836,13 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<panel name="TemplateGraphicalEPG"/>
 		<widget backgroundColor="blue" name="timeline_text" position="106,113" selection="0" size="1153,33" transparent="1" itemHeight="36" font="RegularBold;17"/>
 		<widget name="list" position="106,153" size="1153,460" scrollbarMode="showNever" ServiceFont="Regular;18" ServiceBackgroundColor="OE_Background" EntryBackgroundColor="dark" EntryBackgroundColorNow="#37732F" EntryBackgroundColorSelected="OE_Selection" EntryBorderColor="darkgrey" EntryFont="RegularBold;16" EntryForegroundColor="#ffffff" EntryForegroundColorNow="#ffffff" EntryForegroundColorSelected="#ffffff" EventBorderWidth="0" ServiceBackgroundColorSelected="dark" ServiceBorderColor="darkgrey" ServiceBorderWidth="0" ServiceForegroundColorSelected="yellow" transparent="1"/>
-		<widget alphaTest="blend" name="timeline_now" pixmap="OctEtFHD/extensions/timeline-now.png" position="0,153" size="11,460" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline0" pixmap="OctEtFHD/extensions/timeline.png" position="0,150" size="1,460" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline1" pixmap="OctEtFHD/extensions/timeline.png" position="0,153" size="1,460" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline2" pixmap="OctEtFHD/extensions/timeline.png" position="0,153" size="1,460" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline3" pixmap="OctEtFHD/extensions/timeline.png" position="0,153" size="1,460" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline4" pixmap="OctEtFHD/extensions/timeline.png" position="0,153" size="1,460" zPosition="2"/>
-		<widget alphaTest="blend" name="timeline5" pixmap="OctEtFHD/extensions/timeline.png" position="0,153" size="1,460" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline_now" pixmap="icons/timeline-now.png" position="0,153" size="11,666" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline0" pixmap="icons/timeline.png" position="0,150" size="1,800" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline1" pixmap="icons/timeline.png" position="0,153" size="1,800" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline2" pixmap="icons/timeline.png" position="0,153" size="1,800" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline3" pixmap="icons/timeline.png" position="0,153" size="1,800" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline4" pixmap="icons/timeline.png" position="0,153" size="1,800" zPosition="2"/>
+		<widget alphaTest="blend" name="timeline5" pixmap="icons/timeline.png" position="0,153" size="1,800" zPosition="2"/>
 	</screen>
 	<screen name="GraphMultiEpgSetup" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1280,720">
 		<panel name="StanDardScreen"/>

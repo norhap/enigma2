@@ -132,6 +132,8 @@ dist_install_DATA = \
 	scan-t.png \
 	selectioncross.png \
 	shuffle.png \
+	timeline.png \
+	timeline-now.png \
 	timer_done.png  timer_failed.png  timer_prep.png  timer_rep.png   timer_zap.png \
 	timer_off.png   timer_rec.png   timer_wait.png   timer_autotimer.png \
 	trashcan.png \
