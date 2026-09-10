@@ -71,6 +71,8 @@ dist_install_DATA = \
 	movielist.png \
 	NCamLogo.png \
 	newtop.png \
+	norhap_logo.png \
+	norhap_logo100x60.png \
 	oldtop.png \
 	OscamLogo.png \
 	part_0_4.png \
@@ -133,6 +135,7 @@ dist_install_DATA = \
 	timer_done.png  timer_failed.png  timer_prep.png  timer_rep.png   timer_zap.png \
 	timer_off.png   timer_rec.png   timer_wait.png   timer_autotimer.png \
 	trashcan.png \
+	unhandled_key.png \
 	unlock.png \
 	unlockBouquet.png \
 	verticalline.png \

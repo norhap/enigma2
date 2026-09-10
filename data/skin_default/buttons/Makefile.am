@@ -4,6 +4,7 @@ dist_install_DATA = \
 	blank.png \
 	blue.png \
 	blue_pressed.png \
+	bullet.png \
 	button_blue.png \
 	button_blue_off.png \
 	button_green.png \
@@ -29,11 +30,14 @@ dist_install_DATA = \
 	key_audio.png \
 	key_blue.png \
 	key_channel.png \
+	key_downup.png \
+	key_epg.png \
 	key_exit.png \
 	key_green.png \
 	key_help.png \
 	key_info.png \
 	key_left.png \
+	key_leftright.png
 	key_menu.png \
 	key_next.png \
 	key_ok.png \
@@ -41,8 +45,10 @@ dist_install_DATA = \
 	key_prevnext.png \
 	key_red.png \
 	key_right.png \
+	key_stop.png \
 	key_text.png \
 	key_tv.png \
+	key_video.png \
 	key_yellow.png \
 	left.png \
 	play.png \
@@ -56,6 +62,7 @@ dist_install_DATA = \
 	sel2.png \
 	text.png \
 	vkey_backspace.png \
+	vkey_bg.png \
 	vkey_bg_l.png \
 	vkey_bg_m.png \
 	vkey_bg_r.png \
