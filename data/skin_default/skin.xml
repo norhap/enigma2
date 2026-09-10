@@ -277,7 +277,7 @@
 					[
 					MultiContentEntryText(pos = (2, 0), size = (594, 45), color_sel = 0x00a2f0f7, text = 0)
 					],
-				  "fonts": [gFont("RegularBold", 28)],
+				  "fonts": [gFont("RegularBold", 25)],
 				  "itemHeight": 38
 				}
 			</convert>
@@ -1070,8 +1070,8 @@ if self.list:
 	textAdjust = max(0, newListSize[0] - listSize[0])
 else:
 	textAdjust = 0
-textPos = (95, 15)
-textSize = (1370, 65)
+textPos = (70, 15)
+textSize = (715, 65)
 maxWidth = textSize[0] + textAdjust + (0 if self.typeIcon else textPos[0] - iconPos[0])
 newTextWidth, newTextHeight = getScreenObjectSize(self.text, self["text"], maxWidth, screenSize[1])
 if newTextHeight > screenSize[1] - 100:
@@ -1447,7 +1447,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 	</switchpixmap>
 	<!-- RESTART GUI -->
 	<screen name="QuitMainloopScreen" position="fill" backgroundColor="#002c445e" flags="wfNoBorder">
-		<ePixmap pixmap="OctEtFHD/icons/input_info.png" position="606,210" size="53,53" alphaTest="blend"/>
+		<ePixmap pixmap="icons/input_info.png" position="606,210" size="53,53" alphaTest="blend"/>
 		<ePixmap alphaTest="blend" pixmap="icons/norhap_logo100x60.png" position="580,100" size="100,60" transparent="1" zPosition="10"/>
 		<widget name="text" position="333,280" size="613,166" zPosition="2" transparent="1" font="RegularBold;16" backgroundColor="#002c445e" horizontalAlignment="center" verticalAlignment="top"/>
 	</screen>
@@ -1543,64 +1543,10 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 			<convert type="PliExtraInfo">TransponderInfo</convert>
 		</widget -->
 		<!-- Icons -->
-		<widget source="session.CurrentService" render="Pixmap" pixmap="OctEtFHD/my_icons/ip_tv.png" position="864,592" size="42,21" zPosition="2" alphaTest="blend">
-			<convert type="ClientsStreaming"/>
+		<ePixmap alphaTest="blend" pixmap="icons/icon_rec_off.png" position="913,592" size="42,21" zPosition="1"/>
+		<widget alphaTest="blend" pixmap="icons/icon_rec.png" position="913,592" render="Pixmap" size="42,21" source="session.RecordState" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="OctEtFHD/my_icons/ip_tv.png" position="864,592" size="42,21" zPosition="2" alphaTest="blend">
-			<convert type="ServiceInfo">IsStream</convert>
-			<convert type="ConditionalShowHide">
-			</convert>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/rec_off.png" position="913,592" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/rec_on.png" position="913,592" render="Pixmap" size="42,21" source="session.RecordState" zPosition="2">
-			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/crypt_off.png" position="962,592" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/crypt_on.png" position="962,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">IsCrypted</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/txt_off.png" position="1010,592" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/txt_on.png" position="1010,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">HasTelext</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/hbbtv_off.png" position="1059,592" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/hbbtv_on.png" position="1059,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="10">
-			<convert type="ServiceInfo">HasHBBTV</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/dolby_off.png" position="1108,592" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/dolby_on.png" position="1108,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">IsMultichannel</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/format_off.png" position="1156,592" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/format_on.png" position="1156,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">IsWidescreen</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/sd_on.png" position="1205,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="1">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">0,720</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/hd_on.png" position="1205,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">721,1280</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/fhd_on.png" position="1205,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="3">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">1281,1920</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/uhd_on.png" position="1205,592" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="4">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">1921,3841</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
+		</widget>		
 		<widget source="session.Event_Now" render="DRRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" backgroundColor="OE_Background" font="RegularBold;20" noWrap="1" position="383,626" size="700,42" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
@@ -1634,27 +1580,27 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 			<convert type="EventTime">Duration</convert>
 			<convert type="ClockToText">AsLengthHours</convert>
 		</widget>
-		<widget source="session.FrontendStatus" text="SNR" render="FixedLabel" position="23,520" zPosition="2" size="26,16" font="Regular;14" horizontalAlignment="center" backgroundColor="OE_NewBg" transparent="1" verticalAlignment="center">
+		<widget source="session.FrontendStatus" text="SNR" render="FixedLabel" position="23,520" zPosition="2" size="26,16" font="Regular;13" horizontalAlignment="center" backgroundColor="OE_NewBg" transparent="1" verticalAlignment="center">
 			<convert type="FrontendInfo">SNR</convert>
 		</widget>
-		<widget render="Progress" source="session.FrontendStatus" pixmap="icons/barra-snr-agc.png" position="53,524" size="100,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
+		<widget render="Progress" source="session.FrontendStatus" pixmap="icons/barra-snr-agc.png" position="53,524" size="95,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
 			<convert type="FrontendInfo">SNR</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<eLabel backgroundColor="blue_light" position="53,523" size="96,10" zPosition="0"/>
-		<eLabel backgroundColor="red" position="54,524" size="94,7" zPosition="1"/>
+		<eLabel backgroundColor="red" position="54,525" size="93,6" zPosition="1"/>
 		<widget source="session.FrontendStatus" render="Label" position="143,514" size="76,26" backgroundColor="OE_NewBg" transparent="1" horizontalAlignment="center" font="RegularBold;15" verticalAlignment="center" zPosition="3" foregroundColor="un56c856">
 			<convert type="FrontendInfo">SNR</convert>
 		</widget>
-		<widget source="session.FrontendStatus" render="FixedLabel" text="AGC" position="23,547" zPosition="2" size="30,16" font="Regular;14" horizontalAlignment="center" backgroundColor="OE_NewBg" transparent="1" verticalAlignment="center">
+		<widget source="session.FrontendStatus" render="FixedLabel" text="AGC" position="23,548" zPosition="2" size="30,16" font="Regular;13" horizontalAlignment="center" backgroundColor="OE_NewBg" transparent="1" verticalAlignment="center">
 			<convert type="FrontendInfo">AGC</convert>
 		</widget>
-		<widget render="Progress" source="session.FrontendStatus" pixmap="icons/barra-snr-agc.png" position="53,550" size="100,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
+		<widget render="Progress" source="session.FrontendStatus" pixmap="icons/barra-snr-agc.png" position="53,553" size="95,9" zPosition="7" transparent="1" backgroundColor="OE_NewBg" scrollbarBorderWidth="2" borderColor="blue_light">
 			<convert type="FrontendInfo">AGC</convert>
 			<convert type="ConditionalShowHide"/>
 		</widget>
-		<eLabel backgroundColor="blue_light" position="53,550" size="96,10" zPosition="0"/>
-		<eLabel backgroundColor="red" position="54,551" size="94,7" zPosition="1"/>
+		<eLabel backgroundColor="blue_light" position="53,552" size="96,10" zPosition="0"/>
+		<eLabel backgroundColor="red" position="54,554" size="93,6" zPosition="1"/>
 		<widget source="session.FrontendStatus" render="Label" position="143,541" size="76,26" backgroundColor="OE_NewBg" transparent="1" horizontalAlignment="center" font="RegularBold;15" verticalAlignment="center" zPosition="3" foregroundColor="blue_light">
 			<convert type="FrontendInfo">AGC</convert>
 		</widget>
@@ -1725,6 +1671,10 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 			<convert type="ConditionalShowHide">
 			</convert>
 		</widget -->
+		<ePixmap alphaTest="blend" pixmap="icons/icon_rec_off.png" position="838,644" size="42,21" zPosition="1"/>
+		<widget alphaTest="blend" pixmap="icons/icon_rec.png" position="838,644" render="Pixmap" size="42,21" source="session.RecordState" zPosition="2">
+			<convert type="ConditionalShowHide">Blink</convert>
+		</widget>			
 		<widget backgroundColor="OE_ListBackground" foregroundColor="green_light" font="RegularBold;18" position="442,125" render="Label" size="60,23" source="session.Event_Now" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText"/>
@@ -1760,69 +1710,6 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		</widget>
 		<widget source="session.Event_Next" backgroundColor="OE_Accent1" pixmap="OctEtFHD/colors/green_light.png" position="443,448" size="786,1" render="Progress" transparent="0" zPosition="1">
 			<convert type="EventTime">Progress</convert>
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="OctEtFHD/my_icons/ip_tv.png" position="838,644" size="42,21" zPosition="2" alphaTest="blend">
-			<convert type="ClientsStreaming"/>
-			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
-		<widget source="session.CurrentService" render="Pixmap" pixmap="OctEtFHD/my_icons/ip_tv.png" alphaTest="blend" position="838,644" zPosition="2" size="42,21" transparent="1">
-			<convert type="ServiceInfo">IsStream</convert>
-			<convert type="ConditionalShowHide">
-			</convert>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/rec_off.png" position="887,644" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/rec_on.png" position="887,644" render="Pixmap" size="42,21" source="session.RecordState" zPosition="2">
-			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/crypt_off.png" position="936,644" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/crypt_on.png" position="936,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfoEX">IsCrypted</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/txt_off.png" position="984,644" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/txt_on.png" position="984,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfoEX">HasTelext</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/sub_on.png" position="1033,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">SubservicesAvailable</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/sub_off.png" position="1033,644" size="42,21" zPosition="1"/>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/hbbtv_off.png" position="1082,644" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/hbbtv_on.png" position="1082,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="10">
-			<convert type="ServiceInfoEX">HasHBBTV</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/dolby_off.png" position="1130,644" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/dolby_on.png" position="1130,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfoEX">IsMultichannel</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<ePixmap alphaTest="blend" pixmap="OctEtFHD/my_icons/format_off.png" position="1179,644" size="42,21" zPosition="1"/>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/format_on.png" position="1179,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfoEX">IsWidescreen</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/sd_on.png" position="1228,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="1">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">0,720</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/hd_on.png" position="1228,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="2">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">721,1280</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/fhd_on.png" position="1228,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="3">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">1281,1920</convert>
-			<convert type="ConditionalShowHide"/>
-		</widget>
-		<widget alphaTest="blend" pixmap="OctEtFHD/my_icons/uhd_on.png" position="1228,644" render="Pixmap" size="42,21" source="session.CurrentService" zPosition="4">
-			<convert type="ServiceInfo">VideoWidth</convert>
-			<convert type="ValueRange">1921,3841</convert>
-			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget source="session.Event_Now" options="movetype=running,startpoint=0,direction=top,steptime=100,startdelay=4000,wrap,always=0" render="DRRunningText" position="443,156" size="786,253" font="RegularBold;16" zPosition="1" backgroundColor="OE_ListBackground" transparent="1">
 			<convert type="EventName">ExtendedDescription</convert>
