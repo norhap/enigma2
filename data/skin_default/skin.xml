@@ -2066,7 +2066,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<panel name="TemplatePip"/>
 		<eLabel backgroundColor="blue_light" position="17,343" size="833,3"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_menu.png" position="12,690" size="42,28"/>
-		<ePixmap alphaTest="blend" pixmap="buttons/key_menu.png" position="56,690" size="42,28"/>
+		<ePixmap alphaTest="blend" pixmap="buttons/key_ok.png" position="56,690" size="42,28"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_exit.png" position="101,690" size="42,28"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_leftright.png" position="146,690" size="42,28"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_downup.png" position="190,690" size="42,28"/>
@@ -3797,7 +3797,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		</widget>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_red.png" position="113,640" size="26,26"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_exit.png" position="489,640" size="42,28"/>
-		<ePixmap alphaTest="blend" pixmap="buttons/key_menu.png" position="300,640" size="42,28"/>
+		<ePixmap alphaTest="blend" pixmap="buttons/key_ok.png" position="300,640" size="42,28"/>
 		<eLabel text="Cancel" backgroundColor="OE_Background" font="Regular;18" horizontalAlignment="left" verticalAlignment="center" position="146,640" size="146,26" transparent="1" zPosition="1"/>
 		<eLabel text="Install" backgroundColor="OE_Background" font="Regular;18" horizontalAlignment="left" verticalAlignment="center" position="349,640" size="133,26" transparent="1" zPosition="1"/>
 		<eLabel text="Back" backgroundColor="OE_Background" font="Regular;18" horizontalAlignment="left" verticalAlignment="center" position="538,640" size="133,26" transparent="1" zPosition="1"/>
@@ -4115,7 +4115,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<eLabel backgroundColor="OE_NewBg2" position="6,6" size="163,300" zPosition="-5"/>
 		<widget name="config" position="174,6" size="613,300" itemHeight="26" entryFont="RegularBold;26" valueFont="Regular;23" scrollbarMode="showOnDemand" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" enableWrapAround="1" backgroundColor="OE_Background" transparent="1"/>
 		<ePixmap position="56,30" size="52,31" alphaTest="blend" pixmap="icons/norhap_logo.png" zPosition="1"/>
-		<ePixmap position="10,100" size="42,28" alphaTest="blend" pixmap="buttons/key_menu.png" zPosition="1"/>
+		<ePixmap position="10,100" size="42,28" alphaTest="blend" pixmap="buttons/key_ok.png" zPosition="1"/>
 		<widget name="save" position="15,96" size="140,36" backgroundColor="OE_NewBg2" transparent="1" zPosition="1" font="Regular;16" verticalAlignment="center" horizontalAlignment="center"/>
 		<ePixmap position="20,140" size="26,26" objectTypes="key_red,Button,Label" alphaTest="blend" pixmap="buttons/key_red.png"/>
 		<widget name="key_red" position="56,146" size="100,23" backgroundColor="OE_NewBg2" transparent="1" zPosition="1" font="Regular;16"/>
@@ -4209,7 +4209,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<eLabel text="Reception Settings" font="RegularBold;22" backgroundColor="OE_Background" position="113,48" size="833,33" transparent="1"/>
 		<widget name="nimlist" itemHeight="33" font="RegularBold;17" scrollbarMode="showOnDemand" backgroundColor="OE_Background" position="113,110" size="833,533" transparent="1"/>
 		<!-- Button -->
-		<ePixmap alphaTest="blend" pixmap="buttons/key_menu.png" position="52,604" size="42,28"/>
+		<ePixmap alphaTest="blend" pixmap="buttons/key_ok.png" position="52,604" size="42,28"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_exit.png" position="52,640" size="42,28"/>
 		<!-- Clock -->
 		<panel name="Clock"/>
@@ -4402,7 +4402,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget name="scan_state" position="17,193" size="833,32" font="RegularBold;21" backgroundColor="OE_Background" transparent="1"/>
 		<widget name="scan_progress" scrollbarBorderColor="blue_light" scrollbarBorderWidth="2" backgroundColor="OE_Background" foregroundColor="green_light" position="17,230" size="833,16" transparent="1"/>
 		<widget name="frontend" pixmap="OctEtFHD/icons/scan-s.png" alphaTest="blend" position="1046,120" size="73,73" zPosition="1"/>
-		<ePixmap alphaTest="blend" pixmap="buttons/key_menu.png" position="12,690" size="42,28"/>
+		<ePixmap alphaTest="blend" pixmap="buttons/key_ok.png" position="12,690" size="42,28"/>
 	</screen>
 	<!-- CABLE SCANING -->
 	<screen name="CableScanScreen" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1280,720">
@@ -4878,7 +4878,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 				}
 			</convert>
 		</widget>
-		<ePixmap name="new ePixmap" pixmap="buttons/key_menu.png" position="113,638" size="42,28" alphaTest="blend"/>
+		<ePixmap name="new ePixmap" pixmap="buttons/key_ok.png" position="113,638" size="42,28" alphaTest="blend"/>
 		<ePixmap name="new ePixmap" pixmap="buttons/key_exit.png" position="168,638" size="42,28" alphaTest="blend"/>
 	</screen>
 	<!-- MENU HORIZONTAL -->
@@ -5189,7 +5189,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget name="addentry" position="240,656" size="166,23" zPosition="1" transparent="1" font="RegularBold;17" horizontalAlignment="left"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_yellow.png" position="450,653" size="26,26"/>
 		<widget name="restore" position="486,653" size="136,23" font="RegularBold;17" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="2"/>
-		<ePixmap alphaTest="blend" pixmap="buttons/key_menu.png" position="1050,613" size="42,28"/>
+		<ePixmap alphaTest="blend" pixmap="buttons/key_ok.png" position="1050,613" size="42,28"/>
 		<widget name="run" position="1006,646" size="136,23" font="RegularBold;17" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="2"/>
 		<ePixmap alphaTest="blend" pixmap="buttons/key_blue.png" position="690,653" size="26,26"/>
 		<widget name="edit" position="666,656" size="166,23" font="RegularBold;17" horizontalAlignment="center" verticalAlignment="center" transparent="1" zPosition="2"/>
@@ -5206,7 +5206,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<ePixmap alphaTest="on" pixmap="/usr/lib/enigma2/python/Plugins/SystemPlugins/MountManager/icons/fstabEditor.png" position="446,690" size="66,26"/>
 		<widget name="ButtonBlue" position="550,653" zPosition="1" alphaTest="blend" size="26,26" pixmap="buttons/key_blue.png"/>
 		<widget name="ButtonBlueText" position="593,656" size="180,46" zPosition="1" transparent="1" font="RegularBold;17"/>
-		<widget name="ButtonOK" pixmap="buttons/key_menu.png" position="746,370" size="26,14" transparent="1" alphaTest="on"/>
+		<widget name="ButtonOK" pixmap="buttons/key_ok.png" position="746,370" size="26,14" transparent="1" alphaTest="on"/>
 	</screen>
 	<!--	DEVICEMANAGER DIMA73 -->
 	<screen name="HddSetup" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1280,720" transparent="0">
