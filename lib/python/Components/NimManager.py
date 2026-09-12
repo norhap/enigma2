@@ -271,9 +271,9 @@ class SecConfigure:
 		for x in range(3601, 3605):
 			lnb = int(config.Nims[slotid].advanced.sat[x].lnb.value)
 			if lnb != 0:
-				for x in self.NimManager.satList:
+				for sat in self.NimManager.satList:
 					print("[NimManager] SecConfigure: Add '%s' to '%s'." % (x[0], lnb))
-					lnbSat[lnb].append(x[0])
+					lnbSat[lnb].append(sat[0])
 		# Wildcard for user satellites (for rotor).
 		for x in range(3605, 3607):
 			lnb = int(config.Nims[slotid].advanced.sat[x].lnb.value)
