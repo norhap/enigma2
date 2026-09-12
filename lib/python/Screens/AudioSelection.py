@@ -773,7 +773,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("subtitle_position"),
 				getConfigMenuItem("subtitle_bad_timing_delay"),
 				getConfigMenuItem("subtitle_noPTSrecordingdelay"),
-			]
+			])
 		elif sub[0] == 1:  # teletext
 			menu = [
 				getConfigMenuItem("ttx_subtitle_colors"),
