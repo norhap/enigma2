@@ -598,6 +598,9 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		filename_str = m_ref.path;
 		filename = m_ref.path.c_str();
 	}
+	
+	if (!m_ref.compareSref.empty())
+		filename = m_ref.compareSref.c_str();	
 
 	std::string realFilename_str;
 	const char *realFilename;
@@ -2489,9 +2492,8 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 					m_event(this, evGstreamerStart);
 					if (m_send_ev_start)
 						m_event(this, evStart);
-					if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin))
+					if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
 						break;
-					subsink = gst_bin_get_by_name(GST_BIN(m_gst_playbin), "subtitle_sink");
 					GValue result = { 0, };
 					GstIterator *children;
 					subsink = gst_bin_get_by_name(GST_BIN(m_gst_playbin), "subtitle_sink");
