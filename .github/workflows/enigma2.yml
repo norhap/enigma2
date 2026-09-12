@@ -2,9 +2,9 @@ name: enigma2
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ servicemp3vix ]
   pull_request:
-    branches: [ develop ]
+    branches: [ servicemp3vix ]
 
 jobs:
   build:
