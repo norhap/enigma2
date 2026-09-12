@@ -151,8 +151,8 @@ int eServiceMP3Record::doPrepare()
 			stream_uri = m_ref.path;
 		}
 
-		if(!m_ref.alternativeurl.empty())
-			stream_uri = m_ref.alternativeurl;
+		if(!m_ref.compareSref.empty())
+			stream_uri = m_ref.compareSref;
 
 		eDebug("[eMP3ServiceRecord] doPrepare uri=%s", stream_uri.c_str());
 		uri = g_strdup_printf ("%s", stream_uri.c_str());
