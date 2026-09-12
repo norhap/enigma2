@@ -31,12 +31,12 @@ AM_CONDITIONAL(HAVE_FAKE_GIT_DIR, test -f "$srcdir/.git/last_commit_info")
 
 dnl versions of gstreamer and plugins-base
 AC_ARG_WITH(gstversion,
-	AS_HELP_STRING([--with-gstversion],[use gstreamer version (version)]),
-	[GSTVERSION=$withval],[GSTVERSION=1.0])
+	AS_HELP_STRING([--with-gstversion],[use gstreamer version (major.minor)]),
+	[GST_MAJORMINOR=$withval],[GST_MAJORMINOR=0.10])
 
-PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GSTVERSION gstreamer-pbutils-$GSTVERSION)
 PKG_CHECK_MODULES(TUXTXT, tuxbox-tuxtxt)
-PKG_CHECK_MODULES(BASE, [gstreamer-$GSTVERSION gstreamer-pbutils-$GSTVERSION freetype2 fribidi glib-2.0 gio-2.0 libdvbsi++ libpng libwebp libxml-2.0 sigc++-3.0 libssl libcrypto libcurl])
+PKG_CHECK_MODULES(GSTREAMER, gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR)
+PKG_CHECK_MODULES(BASE, [freetype2 fribidi gstreamer-$GST_MAJORMINOR gstreamer-pbutils-$GST_MAJORMINOR glib-2.0 gio-2.0 libdvbsi++ libpng libwebp libxml-2.0 sigc++-3.0 libssl libcrypto libcurl])
 PKG_CHECK_MODULES(LIBDDVD, libdreamdvd, HAVE_LIBDDVD="yes", HAVE_LIBDDVD="no")
 AM_CONDITIONAL(HAVE_LIBDDVD, test "$HAVE_LIBDDVD" = "yes")
 PKG_CHECK_MODULES(AVAHI, avahi-client)
@@ -387,7 +387,7 @@ AM_CONDITIONAL(DREAMNEXTGEN, test "$MACHINE" == dreamone -o "$MACHINE" == dreamt
 if test "$MACHINE" == "dreamone" -o "$MACHINE" == "dreamtwo"; then
 	ALSA_CFLAGS="-lasound"
 	FFMPEG_CFLAGS=" -lavdevice -lavformat -lavcodec -lswresample -lswscale -lavutil -lm "
-	#AC_DEFINE(DREAMNEXTGEN, 1, [Dreambox NexT Generation Hardware])
+	AC_DEFINE(DREAMNEXTGEN, 1, [Dreambox NexT Generation Hardware])
 fi
 
 AC_ARG_WITH(fcc,

@@ -424,6 +424,8 @@ public:
 		sGamma,
 		sVideoInfo,
 		sIsSoftCSA,			/* 1 if current service uses software descrambling */
+		
+		sHDRType,			/* 0=SDR 1=HDR10 2=HLG 3=HDR */		
 
 		sUser = 0x100,
 		sDABServiceList = sUser + 1, /* tab-separated SID, bitrate, DAB+ flag and label */
@@ -995,6 +997,10 @@ public:
 		evVideoGammaChanged,
 
 		evFccFailed,
+		
+		evUpdateTags,
+		evUpdateIDv3Cover,
+		evGstreamerStart,
 
 		evUser = 0x100
 	};
