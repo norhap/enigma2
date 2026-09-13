@@ -533,6 +533,7 @@ def runScreenTest():
 	enigma.pauseInit()
 	plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
 	enigma.resumeInit()
+	toast = Toast()  # noqa F841
 
 	enigma.eProfileWrite("Init:Session")
 	nav = Navigation(config.misc.isNextRecordTimerAfterEventActionAuto.value, config.misc.isNextPowerTimerAfterEventActionAuto.value)  # wake up to standby for RecordTimer and PowerTimer.
@@ -568,7 +569,6 @@ def runScreenTest():
 	power = PowerKey(session)
 	enigma.eProfileWrite("Global MessageBox Screen")
 	modalMessagebox = ModalMessageBox(session)  # noqa F841
-	toast = Toast(session)  # noqa F841
 
 	if BoxInfo.getItem("vfdsymbol"):
 		enigma.eProfileWrite("VFDSYMBOLS")
@@ -734,11 +734,9 @@ from Screens.Toast import Toast  # noqa: E402
 
 try:
 	runScreenTest()
-
 	plugins.shutdown()
-
 	Components.ParentalControl.parentalControl.save()
-except:
+except Exception:
 	print('EXCEPTION IN PYTHON STARTUP CODE:')
 	print('-' * 60)
 	print_exc(file=stdout)

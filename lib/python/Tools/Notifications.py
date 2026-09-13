@@ -1,6 +1,8 @@
 from enigma import eTimer
 from Screens.MessageBox import MessageBox
 import threading
+from Screens.Toast import Toast
+from Screens.Toast import Toast
 
 notifications = []
 notificationAdded = []
@@ -97,15 +99,15 @@ def removeCIdialog():
 
 
 def showError(text, timeout=5):
-	notificationCenter.session.showError(text, timeout)
+	notificationCenter.showError(text, timeout)
 
 
 def showInfo(text, timeout=5):
-	notificationCenter.session.showInfo(text, timeout)
+	notificationCenter.showInfo(text, timeout)
 
 
 def showWarning(text, timeout=5):
-	notificationCenter.session.showWarning(text, timeout)
+	notificationCenter.showWarning(text, timeout)
 
 
 def AddModalNotification(text, timeout=-1, list=None, default=True, typeIcon=None, windowTitle=None, callback=None):
@@ -115,6 +117,7 @@ def AddModalNotification(text, timeout=-1, list=None, default=True, typeIcon=Non
 class NotificationCenter:
 
 	def __init__(self):
+		self.session = None
 		self.modalDialog = None
 		self.modalQueue = []
 		self.modalCallback = None
@@ -127,6 +130,7 @@ class NotificationCenter:
 		self.modalDialog.hide()
 		self.nextModalTimer = eTimer()
 		self.nextModalTimer.callback.append(self.showNextModal)
+		Toast.instance.setup(session)
 
 	def addModalNotification(self, text, timeout=-1, list=None, default=True, typeIcon=None, windowTitle=None, callback=None):
 		if not self.modalDialog:
@@ -182,6 +186,15 @@ class NotificationCenter:
 			callback(*retval)
 		if self.modalQueue:
 			self.nextModalTimer.start(500, True)
+
+	def showInfo(self, text, timeout=4):
+		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_INFO, timeout=timeout)
+
+	def showWarning(self, text, timeout=4):
+		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_WARNING, timeout=timeout)
+
+	def showError(self, text, timeout=4):
+		Toast.instance.showToast(text=text, toasttype=Toast.TYPE_ERROR, timeout=timeout)
 
 
 notificationCenter = NotificationCenter()
