@@ -584,8 +584,17 @@ msgstr "Búsqueda DAB+"
 msgid "DAB+ scan failed; existing bouquets were kept."
 msgstr "Error en la búsqueda DAB+: Se mantuvieron los bouquets existentes."
 
+msgid "DAB+ service information for '%s'"
+msgstr "Información del servicio DAB+ para '%s'"
+
 msgid "DAB+ USB: bouquet could not be written"
 msgstr "DAB+ USB: no se pudo escribir el paquete"
+
+msgid "DAB+ channel"
+msgstr "Canal DAB+"
+
+msgid "DAB+ channel %s"
+msgstr "Canal DAB+ %s"
 
 msgid "DAB+ USB support could not be installed from the feed."
 msgstr "No se pudo instalar la compatibilidad con USB DAB+ desde el feed."
@@ -6940,6 +6949,9 @@ msgstr "No, excepto con el temporizador despertador"
 msgid "No, never"
 msgstr "No, nunca"
 
+msgid "No usable RTL-SDR DAB+ receiver was found."
+msgstr "No se encontró ningún receptor RTL-SDR DAB+ utilizable."
+
 msgid "Nonlinear"
 msgstr "No linear"
 
@@ -7660,9 +7672,6 @@ msgstr "No está disponible la función Quad PiP."
 msgid "Press OK to activate current MAC address."
 msgstr "Pulse OK para activar la actual dirección MAC."
 
-msgid "Product"
-msgstr "Producto"
-
 msgid ""
 "To apply the selected '%s' skin the GUI needs to restart.\n"
 "Would you like to restart the GUI now?"
@@ -7753,6 +7762,9 @@ msgstr "Prioridad"
 
 msgid "Process"
 msgstr "Proceso"
+
+msgid "Product"
+msgstr "Producto"
 
 msgid "Progress"
 msgstr "Progreso"
@@ -10587,9 +10599,6 @@ msgstr "USALS mueve automáticamente un plato motorizado al satélite correcto e
 
 msgid "USALS calibration"
 msgstr "Calibrado de USALS"
-
-msgid "USB receiver settings"
-msgstr "Ajustes del receptor USB"
 
 msgid "USB stick"
 msgstr "Pendrive USB"
@@ -14394,6 +14403,15 @@ msgstr "Puerto USB"
 msgid "USB speed"
 msgstr "Velocidad USB"
 
+msgid "USB reader %d"
+msgstr "Lector USB %d"
+
+msgid "USB receiver only"
+msgstr "Solo receptor USB"
+
+msgid "USB receiver settings"
+msgstr "Configuración del receptor USB"
+
 msgid "EPG cache backup"
 msgstr "Copia la cache EPG"
 
@@ -15092,6 +15110,9 @@ msgstr "Zapear-PiP"
 
 msgid "Include CI assignment"
 msgstr "Incluir asignación de CI"
+
+msgid "Include DAB+ data"
+msgstr "Incluir datos DAB+"
 
 msgid "Set CI assignment for detection of available services."
 msgstr "Establecer asignación de CI para la detección de canales disponibles."
@@ -19335,9 +19356,6 @@ msgstr "Descifrar streams http desde el servidor"
 
 msgid "USB and satellite"
 msgstr "Satélite y USB"
-
-msgid "USB receiver only"
-msgstr "Receptor USB únicamente"
 
 msgid "want to stop and delete this recordings?"
 msgstr "¿Quieres detener y eliminar estas grabaciones?"
