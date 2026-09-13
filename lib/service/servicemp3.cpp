@@ -1890,7 +1890,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	if (suburi != NULL)
 		eDebug("[eServiceMP3] playbin suburi=%s", suburi);
 
-	if (!gst_is_initialized())  // INITIALIZE PLAY STREAM [norhap]
+	if (!gst_is_initialized())  // INIT PLAYBACK [norhap]
 		gst_init(NULL, NULL);
 
 	m_gst_playbin = gst_element_factory_make("playbin", "playbin");

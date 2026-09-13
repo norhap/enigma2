@@ -191,16 +191,24 @@ void eNavigation::getRecordings(std::vector<ePtr<iRecordableService>> &recording
 
 void eNavigation::getRecordingsServicesOnly(std::vector<eServiceReference> &services, pNavigation::RecordType type)
 {
+	if (m_recordings_types.empty())
+		return;
+
 	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
 		if (!it->first)
 			continue;
 		if (it->second & type)
 		{
-			auto svc_it = m_recordings_services.find(it->first);
-			if (svc_it != m_recordings_services.end())
+			for (auto svc_it = m_recordings_services.begin(); svc_it != m_recordings_services.end(); ++svc_it)
 			{
-				services.push_back(svc_it->second);
+				if (!svc_it->first)
+					continue;
+				if (svc_it->first.get() == it->first.get())
+				{
+					services.push_back(svc_it->second);
+					break;
+				}
 			}
 		}
 	}
@@ -239,24 +247,29 @@ void eNavigation::getRecordingsSlotIDsOnly(std::vector<int> &slotids, pNavigatio
 
 std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> eNavigation::getRecordingsServices(pNavigation::RecordType type)
 {
-	eDebug("[eNavigation] getRecordingsServices: m_recordings_types.size()=%zu, m_recordings_services.size()=%zu",
-		m_recordings_types.size(), m_recordings_services.size());
-
 	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> result;
+
+	if (m_recordings_types.empty())
+		return result;
 
 	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
 		if (!it->first)
-		{
-			eDebug("[eNavigation] SKIPPING null entry in m_recordings_types");
 			continue;
-		}
 		if (it->second & type)
 		{
-			auto svc_it = m_recordings_services.find(it->first);
-			if (svc_it != m_recordings_services.end())
+			// NO usar find() — el comparator dereferencea keys y puede crashar
+			// si m_recordings_services tiene una key dangling.
+			// Comparar raw pointers manualmente.
+			for (auto svc_it = m_recordings_services.begin(); svc_it != m_recordings_services.end(); ++svc_it)
 			{
-				result[it->first] = svc_it->second;
+				if (!svc_it->first)
+					continue;
+				if (svc_it->first.get() == it->first.get())
+				{
+					result[it->first] = svc_it->second;
+					break;
+				}
 			}
 		}
 	}
