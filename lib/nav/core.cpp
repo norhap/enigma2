@@ -189,9 +189,11 @@ void eNavigation::getRecordings(std::vector<ePtr<iRecordableService>> &recording
 		for (std::set<ePtr<iRecordableService>>::iterator it(m_simulate_recordings.begin()); it != m_simulate_recordings.end(); ++it)
 			recordings.push_back(*it);
 	else
-		for (std::map<ePtr<iRecordableService>, ePtr<eConnection>>::iterator it(m_recordings.begin()); it != m_recordings.end(); ++it)
+		for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 		{
-			if (m_recordings_types[it->first] & type)
+			if (!it->first)
+				continue;
+			if (it->second & type)
 			{
 				recordings.push_back(it->first);
 			}
@@ -200,20 +202,28 @@ void eNavigation::getRecordings(std::vector<ePtr<iRecordableService>> &recording
 
 void eNavigation::getRecordingsServicesOnly(std::vector<eServiceReference> &services, pNavigation::RecordType type)
 {
-	for (std::map<ePtr<iRecordableService>, eServiceReference>::iterator it(m_recordings_services.begin()); it != m_recordings_services.end(); ++it)
+	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
-		if (m_recordings_types[it->first] & type)
+		if (!it->first)
+			continue;
+		if (it->second & type)
 		{
-			services.push_back(it->second);
+			auto svc_it = m_recordings_services.find(it->first);
+			if (svc_it != m_recordings_services.end())
+			{
+				services.push_back(svc_it->second);
+			}
 		}
 	}
 }
 
 void eNavigation::getRecordingsTypesOnly(std::vector<pNavigation::RecordType> &returnedTypes, pNavigation::RecordType type)
 {
-	for (std::map<ePtr<iRecordableService>, pNavigation::RecordType>::iterator it(m_recordings_types.begin()); it != m_recordings_types.end(); ++it)
+	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
-		if (m_recordings_types[it->first] & type)
+		if (!it->first)
+			continue;
+		if (it->second & type)
 		{
 			returnedTypes.push_back(it->second);
 		}
@@ -222,9 +232,11 @@ void eNavigation::getRecordingsTypesOnly(std::vector<pNavigation::RecordType> &r
 
 void eNavigation::getRecordingsSlotIDsOnly(std::vector<int> &slotids, pNavigation::RecordType type)
 {
-	for (std::map<ePtr<iRecordableService>, eServiceReference>::iterator it(m_recordings_services.begin()); it != m_recordings_services.end(); ++it)
+	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
-		if (m_recordings_types[it->first] & type)
+		if (!it->first)
+			continue;
+		if (it->second & type)
 		{
 			ePtr<iFrontendInformation> fe_info;
 			it->first->frontendInfo(fe_info);
@@ -238,16 +250,22 @@ void eNavigation::getRecordingsSlotIDsOnly(std::vector<int> &slotids, pNavigatio
 
 std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> eNavigation::getRecordingsServices(pNavigation::RecordType type)
 {
-	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> m_recordings_services_filtered;
+	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> result;
 
-	for (std::map<ePtr<iRecordableService>, eServiceReference>::iterator it(m_recordings_services.begin()); it != m_recordings_services.end(); ++it)
+	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
-		if (m_recordings_types[it->first] & type)
+		if (!it->first)
+			continue;
+		if (it->second & type)
 		{
-			m_recordings_services_filtered[it->first] = m_recordings_services[it->first];
+			auto svc_it = m_recordings_services.find(it->first);
+			if (svc_it != m_recordings_services.end())
+			{
+				result[it->first] = svc_it->second;
+			}
 		}
 	}
-	return m_recordings_services_filtered;
+	return result;
 }
 
 RESULT eNavigation::pause(int dop)
