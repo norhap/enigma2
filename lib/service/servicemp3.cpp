@@ -717,17 +717,20 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	gchar *suburi = NULL;
 
 	pos = m_ref.path.find("&suburi=");
+	// 1. Parsear suburi path original [norhap]
 	if (pos != std::string::npos)
 	{
 		filename_str = filename;
-
 		std::string suburi_str = filename_str.substr(pos + 8);
 		filename = suburi_str.c_str();
-		suburi = g_strdup_printf ("%s", filename);
-
+		suburi = g_strdup_printf("%s", filename);
 		filename_str = filename_str.substr(0, pos);
 		filename = filename_str.c_str();
 	}
+
+	// 2. Override with compareSref (if applicable) [norhap]
+	if (!m_ref.compareSref.empty())
+		filename = m_ref.compareSref.c_str();
 
 	if ( m_sourceinfo.is_streaming )
 	{
