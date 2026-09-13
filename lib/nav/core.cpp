@@ -204,7 +204,7 @@ void eNavigation::getRecordingsServicesOnly(std::vector<eServiceReference> &serv
 			{
 				if (!svc_it->first)
 					continue;
-				if (svc_it->first.get() == it->first.get())
+				if ((iRecordableService*)svc_it->first == (iRecordableService*)it->first)
 				{
 					services.push_back(svc_it->second);
 					break;
@@ -265,7 +265,7 @@ std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableServi
 			{
 				if (!svc_it->first)
 					continue;
-				if (svc_it->first.get() == it->first.get())
+				if ((iRecordableService*)svc_it->first == (iRecordableService*)it->first)
 				{
 					result[it->first] = svc_it->second;
 					break;
