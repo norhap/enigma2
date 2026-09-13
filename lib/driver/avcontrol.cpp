@@ -165,6 +165,7 @@ void eAVControl::fp_event(int what)
 eAVControl::~eAVControl()
 {
 	m_instance = nullptr;
+	m_video_resolution_observer = nullptr;
 	if (m_fp_fd >= 0)
 		close(m_fp_fd);
 }
@@ -242,6 +243,11 @@ int eAVControl::getResolutionY(int defaultVal, int flags) const
 	else if (flags & FLAGS_DEBUG)
 		eDebug("[%s] %s: %d", __MODULE__, "getResolutionY", value);
 	return value;
+}
+
+void eAVSwitch::setVideoResolutionObserver(void (*observer)(int, int))
+{
+	m_video_resolution_observer = observer;
 }
 
 /// @brief Get FrameRate

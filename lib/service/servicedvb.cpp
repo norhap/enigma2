@@ -9,7 +9,7 @@
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/db.h>
 #include <lib/dvb/decoder.h>
-#include <lib/driver/avcontrol.h>
+#include <lib/driver/avswitch.h>
 
 #include <lib/base/cfile.h>
 #include <lib/dvb/pmtparse.h>
@@ -1440,7 +1440,7 @@ void eDVBServicePlay::serviceEvent(int event)
 			const bool eligible_incoming_ddp = selected_ddp && have_program &&
 				encrypted_ddp_source && !m_encrypted_ddp_audio_reset_done &&
 				!m_noaudio && !m_service_handler.isCiConnected() &&
-				eConfigManager::getConfigBoolValue("config.av.passthrough_fix", false);
+				eSimpleConfig::getBool("config.av.passthrough_fix", false);
 
 			if (eligible_incoming_ddp)
 				s_encrypted_ddp_late_reset_armed.insert(this);
@@ -1542,7 +1542,7 @@ void eDVBServicePlay::goToNextPlaybackFile()
 {
 	if (m_timeshift_file_next.empty())
 	{
-		if (!eConfigManager::getConfigBoolValue("config.usage.timeshift_skipreturntolive", false))
+		if (!eSimpleConfig::getBool("config.usage.timeshift_skipreturntolive", false))
 		{
 			eDebug("[eDVBServicePlay] timeshift EOF, so let's go live");
 			switchToLive();
@@ -1571,9 +1571,9 @@ void eDVBServicePlay::goToNextPlaybackFile()
 RESULT eDVBServicePlay::start()
 {
 #ifdef PASSTHROUGH_FIX
-	if (eAVControl::getInstance())
-		eAVControl::getInstance()->setVideoResolutionObserver(eDVBServicePlayReportVideoResolution);
-	if (eConfigManager::getConfigBoolValue("config.av.passthrough_fix", false))
+	if (eAVSwitch::getInstance())
+		eAVSwitch::getInstance()->setVideoResolutionObserver(eDVBServicePlayReportVideoResolution);
+	if (eSimpleConfig::getBool("config.av.passthrough_fix", false))
 	{
 		int pending = eServiceMP3PendingStopWorkers();
 		if (pending > 0)
@@ -2831,7 +2831,7 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 	if(res_mgr->canAllocateChannel(chid, chid_ignore, eDVBChannelID(), system))	// this sets system
 		return false;
 
-	if (eConfigManager::getConfigBoolValue("config.usage.remote_fallback_alternative", false) && !(system == iDVBFrontend::feSatellite))
+	if (eSimpleConfig::getBool("config.usage.remote_fallback_alternative", false) && !(system == iDVBFrontend::feSatellite))
 	{
 		switch (system)
 		{
@@ -3687,7 +3687,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 #ifdef PASSTHROUGH_FIX
 void eDVBServicePlay::forceAudioReset()
 {
-	if (!eConfigManager::getConfigBoolValue("config.av.passthrough_fix", false))
+	if (!eSimpleConfig::getBool("config.av.passthrough_fix", false))
 		return;
 	// Toggle Bluetooth audio off->on->off to force audio driver reinitialization
 	std::string btaudio = CFile::read("/proc/stb/audio/btaudio");
@@ -4263,7 +4263,7 @@ void eDVBServicePlay::observeVideoResolutionState(int xres, int yres)
 	if (s_primary_live_codec_owner != this ||
 		!m_is_primary || m_is_pvr || (m_is_stream && !streamrelay_ddp_candidate) ||
 		m_timeshift_active || m_noaudio || m_service_handler.isCiConnected() ||
-		!eConfigManager::getConfigBoolValue("config.av.passthrough_fix", false))
+		!eSimpleConfig::getBool("config.av.passthrough_fix", false))
 		return;
 
 	/* The retained old resolution can be identical to the new service. Require
@@ -4312,7 +4312,7 @@ void eDVBServicePlay::video_event(struct iTSMPEGDecoder::videoEvent event)
 			 * reset encrypted live DD+ exactly once when dimensions are valid. */
 			if (!m_encrypted_ddp_audio_reset_done && m_is_primary && !m_is_pvr && !m_is_stream &&
 				!m_timeshift_active && !m_noaudio && !m_service_handler.isCiConnected() &&
-				eConfigManager::getConfigBoolValue("config.av.passthrough_fix", false))
+				eSimpleConfig::getBool("config.av.passthrough_fix", false))
 			{
 				int video_width = getInfo(sVideoWidth);
 				int video_height = getInfo(sVideoHeight);
