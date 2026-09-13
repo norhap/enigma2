@@ -66,6 +66,16 @@ class AVSwitch:
 def InitAVSwitch():
 	config.av = ConfigSubsection()
 
+	config.av.truehd_playback = ConfigSelection(choices=[
+		("off", _("Off")),
+		("ac3", _("Dolby Digital"))
+	], default="off")
+	config.av.dts_playback = ConfigSelection(choices=[
+		("off", _("Off")),
+		("ac3", _("Dolby Digital"))
+	], default="off")
+	if SystemInfo["VuEAC3Fix"]:
+		config.av.passthrough_fix = ConfigYesNo(default=True)
 	delayChoices = [(i, _("%d ms") % i) for i in list(range(0, 3000, 100))]  # noqa: F821
 	config.av.passthrough_fix_long = ConfigSelection(choices=delayChoices, default=1200)
 	config.av.passthrough_fix_short = ConfigSelection(choices=delayChoices, default=100)
