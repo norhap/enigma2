@@ -147,39 +147,28 @@ RESULT eNavigation::recordService(const eServiceReference &ref, ePtr<iRecordable
 RESULT eNavigation::stopRecordService(ePtr<iRecordableService> &service)
 {
 	service->stop();
-	std::set<ePtr<iRecordableService>>::iterator it =
-		m_simulate_recordings.find(service);
-	if (it != m_simulate_recordings.end())
+	auto it_sim = m_simulate_recordings.find(service);
+	if (it_sim != m_simulate_recordings.end())
 	{
-		m_simulate_recordings.erase(it);
+		m_simulate_recordings.erase(it_sim);
 		return 0;
 	}
-	else
+	auto it = m_recordings.find(service);
+	if (it != m_recordings.end())
 	{
-		std::map<ePtr<iRecordableService>, ePtr<eConnection>>::iterator it =
-			m_recordings.find(service);
-		if (it != m_recordings.end())
-		{
-			m_recordings.erase(it);
-			/* send stop event */
-			m_record_event(service, iRecordableService::evEnd);
-			std::map<ePtr<iRecordableService>, eServiceReference>::iterator it_services =
-				m_recordings_services.find(service);
-			if (it_services != m_recordings_services.end())
-			{
-				m_recordings_services.erase(it_services);
-			}
-			std::map<ePtr<iRecordableService>, pNavigation::RecordType>::iterator it_types =
-				m_recordings_types.find(service);
-			if (it_types != m_recordings_types.end())
-			{
-				m_recordings_types.erase(it_types);
-			}
-			return 0;
-		}
-	}
+		/* 1. Eliminar de TODOS los maps primero */
+		m_recordings.erase(it);
+		auto it_services = m_recordings_services.find(service);
+		if (it_services != m_recordings_services.end())
+			m_recordings_services.erase(it_services);
+		auto it_types = m_recordings_types.find(service);
+		if (it_types != m_recordings_types.end())
+			m_recordings_types.erase(it_types);
 
-	eDebug("[eNavigation] try to stop non running recording!!"); // this should not happen
+		/* 2. Emitir evento DESPUÉS (los maps ya están limpios) */
+		m_record_event(service, iRecordableService::evEnd);
+		return 0;
+	}
 	return -1;
 }
 
@@ -250,12 +239,18 @@ void eNavigation::getRecordingsSlotIDsOnly(std::vector<int> &slotids, pNavigatio
 
 std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> eNavigation::getRecordingsServices(pNavigation::RecordType type)
 {
+	eDebug("[eNavigation] getRecordingsServices: m_recordings_types.size()=%zu, m_recordings_services.size()=%zu",
+		m_recordings_types.size(), m_recordings_services.size());
+
 	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService *>> result;
 
 	for (auto it = m_recordings_types.begin(); it != m_recordings_types.end(); ++it)
 	{
 		if (!it->first)
+		{
+			eDebug("[eNavigation] SKIPPING null entry in m_recordings_types");
 			continue;
+		}
 		if (it->second & type)
 		{
 			auto svc_it = m_recordings_services.find(it->first);
