@@ -1890,7 +1890,8 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	if (suburi != NULL)
 		eDebug("[eServiceMP3] playbin suburi=%s", suburi);
 
-	gst_init(NULL, NULL);  // INITIALIZE [norhap]
+	if (!gst_is_initialized())  // INITIALIZE PLAY STREAM [norhap]
+		gst_init(NULL, NULL);
 
 	m_gst_playbin = gst_element_factory_make("playbin", "playbin");
 	if ( m_gst_playbin )
@@ -3963,7 +3964,7 @@ subtype_t getSubtitleType(GstPad* pad, gchar *g_codec=NULL)
 void eServiceMP3::gstBusCall(GstMessage *msg)
 {
     if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
-        return;	
+        return;
 	if (!msg)
 		return;
 	gchar *sourceName;
@@ -4011,7 +4012,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 					if (m_send_ev_start)
 						m_event(this, evStart);
 					if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
-						break;					
+						break;
 					GValue result = { 0, };
 					GstIterator *children;
 					subsink = gst_bin_get_by_name(GST_BIN(m_gst_playbin), "subtitle_sink");
