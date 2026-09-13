@@ -1131,7 +1131,7 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
 	m_subtitle_sync_timer(eTimer::create(eApp)),
-	m_soft_decoder_video_info_valid(false)
+	m_soft_decoder_video_info_valid(false),
 #ifdef PASSTHROUGH_FIX
 	m_encrypted_ddp_audio_reset_done(false),
 #endif
