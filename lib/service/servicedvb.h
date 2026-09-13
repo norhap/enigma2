@@ -336,7 +336,7 @@ protected:
 #ifdef PASSTHROUGH_FIX
 	ePtr<eTimer> m_passthrough_fix_timer;
 	bool m_encrypted_ddp_audio_reset_done;
-	void forcePassthrough()
+	void forcePassthrough();
 #endif
 	ePtr<eTimer> m_nownext_timer;
 	void updateEpgCacheNowNext();
