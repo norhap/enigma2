@@ -104,6 +104,7 @@ private:
 	static int m_ac3_delay;
 	static int m_audio_channel;
 	std::string m_radio_pic;
+	bool m_radio_pic_shown;	
 	ePtr<eDVBDemux> m_demux;
 	ePtr<eDVBAudio> m_audio;
 	ePtr<eDVBVideo> m_video;
