@@ -290,8 +290,8 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable)
 		m_fd_demux = -1;
 	}
 
-#if defined(HAVE_FCC) // [norhap] fixme, This needs to be checked for issues stemming from UHD video with HAVE_FCC
-	eDebug("[eDVBVideo] FCC=%d", m_fcc_enable);
+#if defined(HAVE_FCC) // [norhap] The bitstream detector does not work on FBC (it kills the video) and the driver does not expose HDR via procfs.
+	eDebug("[eHEVCHDRDetector] FBC does not expose HDR via procfs FCC=%d", m_fcc_enable);
 #else
 	if (demux && m_dev == 0)
 	{

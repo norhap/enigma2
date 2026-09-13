@@ -599,7 +599,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		filename = m_ref.path.c_str();
 	}
 	
-	if (!m_ref.compareSref.empty())
+	if (!m_ref.compareSref.empty()) // [norhap]
 		filename = m_ref.compareSref.c_str();	
 
 	std::string realFilename_str;
