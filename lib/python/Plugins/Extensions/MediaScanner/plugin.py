@@ -49,6 +49,7 @@ def mountpoint_choosen(option):
 	else:
 		Toast.instance.showToast(text=text_list, toasttype=toast_type, timeout=10, customIcon=icon)
 
+
 def scan(session):
 	from Screens.ChoiceBox import ChoiceBox
 	parts = [(r.tabbedDescription(), r.mountpoint, session) for r in harddiskmanager.getMountedPartitions(onlyhotplug=False) if access(r.mountpoint, F_OK | R_OK)]
