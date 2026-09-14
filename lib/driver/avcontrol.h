@@ -82,6 +82,7 @@ private:
 	void (*m_video_resolution_observer)(int, int);
 	static eAVControl *m_instance;
 #endif
+	std::string m_video_mode; 
 	std::string m_video_mode_50;
 	std::string m_video_mode_60;
 	std::string m_videomode_choices;
