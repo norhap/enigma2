@@ -43,6 +43,7 @@ public:
 	std::string getPreferredModes(int flags = 0) const;
 	std::string getAvailableModes() const;
 	bool isEncoderActive() const;
+	void startStopHDMIIn(bool on, bool audio, int flags = 0);	
 
 private:
 	// ... miembros existentes ...
@@ -57,7 +58,7 @@ private:
 
 	void setVideoMode(const std::string &newMode, int flags = 0) const;
 	void setInput(const std::string &newMode, int flags = 0);
-	void startStopHDMIIn(bool on, bool audio, int flags = 0);
+
 	void disableHDMIIn(int flags = 0) const;
 	void setOSDAlpha(int alpha, int flags = 0) const;
 
