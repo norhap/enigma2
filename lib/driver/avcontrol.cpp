@@ -6,6 +6,7 @@ Licensed under GPLv2.
 */
 
 
+#include "avcontrol.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -19,7 +20,16 @@ Licensed under GPLv2.
 #include <lib/base/eerror.h>
 #include <lib/base/ebase.h>
 #include <lib/base/modelinformation.h>
-#include <lib/driver/avcontrol.h>
+
+const char *__MODULE__ = "eAVControl";
+
+eAVControl::eAVControl()
+    : m_video_resolution_observer(nullptr)
+{
+    if (!m_instance)
+        m_instance = this;
+    // ...
+}   
 
 const char *__MODULE__ = "eAVControl"; // NOSONAR
 
