@@ -23,16 +23,6 @@ Licensed under GPLv2.
 
 const char *__MODULE__ = "eAVControl";
 
-eAVControl::eAVControl()
-    : m_video_resolution_observer(nullptr)
-{
-    if (!m_instance)
-        m_instance = this;
-    // ...
-}   
-
-const char *__MODULE__ = "eAVControl"; // NOSONAR
-
 const char *proc_hdmi_rx_monitor = "/proc/stb/hdmi-rx/0/hdmi_rx_monitor";	// NOSONAR
 const char *proc_hdmi_rx_monitor_audio = "/proc/stb/audio/hdmi_rx_monitor"; // NOSONAR
 #ifdef DREAMNEXTGEN
@@ -59,7 +49,10 @@ const char *proc_wss = "/proc/stb/denc/0/wss"; // NOSONAR
 eAVControl *eAVControl::m_instance = nullptr;
 
 eAVControl::eAVControl()
+    : m_video_resolution_observer(nullptr)
 {
+    if (!m_instance)
+        m_instance = this;
 	struct stat buffer;
 
 #ifdef HAVE_HDMIIN_DM
@@ -669,10 +662,10 @@ void eAVControl::setPolicy169(const std::string &newPolicy, int flags) const
 }
 
 /// @brief setVideoSize
-/// @param top 
-/// @param left 
-/// @param width 
-/// @param height 
+/// @param top
+/// @param left
+/// @param width
+/// @param height
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
 void eAVControl::setVideoSize(int top, int left, int width, int height, int flags) const
 {
@@ -697,7 +690,7 @@ void eAVControl::setOSDAlpha(int alpha, int flags) const
 }
 
 /// @brief getEDIDPath
-/// @return 
+/// @return
 std::string eAVControl::getEDIDPath() const
 {
 	struct stat buffer = {};
