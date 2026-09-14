@@ -4095,6 +4095,9 @@ msgstr "Instalar plugins"
 msgid "Init Vu+ MultiBoot"
 msgstr "Inicializar Vu+ MultiBoot"
 
+msgid "Dolby TrueHD Transcoding"
+msgstr "Transcodificación Dolby TrueHD"
+
 msgid "Down"
 msgstr "Abajo"
 
@@ -4103,6 +4106,9 @@ msgstr "Descargando"
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Descargando información. Espera por favor..."
+
+msgid "DTS / DTS-HD Transcoding"
+msgstr "Transcodificación DTS - DTS-HD"
 
 msgid "Dutch"
 msgstr "Holandés"
@@ -9128,6 +9134,9 @@ msgstr "Mostrar selección de extensión"
 msgid "Show extensions..."
 msgstr "Mostrar extensiones…"
 
+msgid "Show faded message without list"
+msgstr "Mostrar mensaje desvanecido sin lista"
+
 msgid "Show favourites list"
 msgstr "Mostrar lista de favoritos"
 
@@ -12750,6 +12759,9 @@ msgstr "Cuando está habilitado, los stremas http se descodifican en el lado del
 
 msgid "When enabled, it is possible to leave the movie player with exit."
 msgstr "Cuando está habilitado, es posible abandonar el reproductor de películas con exit."
+
+msgid "When enabled, it will only display a message that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
+msgstr "Cuando está habilitado, solo mostrará un mensaje que se desvanece tras un breve periodo, sin mostrar una lista (por ejemplo, al conectar un dispositivo de almacenamiento)."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Cuando esté habilitado, mida el consumo de energía para detectar cuándo el motor deja de girar (cuando es compatible con el sintonizador)."
