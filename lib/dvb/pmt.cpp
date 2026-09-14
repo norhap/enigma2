@@ -255,8 +255,7 @@ void eDVBServicePMTHandler::PATready(int)
 		}
 		if (pmtpid == -1) {
 			eDebug("[eDVBServicePMTHandler] no PAT entry found.. start delay");
-			if (m_service_type != streamclient)
-				m_no_pat_entry_delay->start(1000, true);  // [norhap] PAT timeout to one second if no streamclient.
+			m_no_pat_entry_delay->start(1000, true);
 		}
 		else {
 			eDebug("[eDVBServicePMTHandler] use pmtpid %04x for service_id %04x", pmtpid, m_reference.getServiceID().get());
