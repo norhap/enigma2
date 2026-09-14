@@ -1131,20 +1131,20 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cuesheet_changed(0),
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
-	m_subtitle_sync_timer(eTimer::create(eApp)),
-	m_soft_decoder_video_info_valid(false),
-{	
+    m_subtitle_sync_timer(eTimer::create(eApp)),
+    m_soft_decoder_video_info_valid(false)
 #ifdef PASSTHROUGH_FIX
-	m_passthrough_fix_timer = eTimer::create(eApp);
-	m_encrypted_ddp_audio_reset_done(false),
+    , m_passthrough_fix_timer(eTimer::create(eApp))
+    , m_encrypted_ddp_audio_reset_done(false)
 #endif
-	m_nownext_timer(eTimer::create(eApp))
-	if (connect_event)
-		CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
-	CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
-	CONNECT(m_event_handler.m_eit_changed, eDVBServicePlay::gotNewEvent);
-	CONNECT(m_subtitle_sync_timer->timeout, eDVBServicePlay::checkSubtitleTiming);
-	CONNECT(m_nownext_timer->timeout, eDVBServicePlay::updateEpgCacheNowNext);
+    , m_nownext_timer(eTimer::create(eApp))
+{
+    if (connect_event)
+        CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
+    CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
+    CONNECT(m_event_handler.m_eit_changed, eDVBServicePlay::gotNewEvent);
+    CONNECT(m_subtitle_sync_timer->timeout, eDVBServicePlay::checkSubtitleTiming);
+    CONNECT(m_nownext_timer->timeout, eDVBServicePlay::updateEpgCacheNowNext);
 #ifdef PASSTHROUGH_FIX
 	CONNECT(m_passthrough_fix_timer->timeout, eDVBServicePlay::forcePassthrough);
 #endif
