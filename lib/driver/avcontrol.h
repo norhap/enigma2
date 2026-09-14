@@ -44,6 +44,13 @@ public:
 	std::string getAvailableModes() const;
 	bool isEncoderActive() const;
 
+private:
+	// ... miembros existentes ...
+#ifndef SWIG
+	void (*m_video_resolution_observer)(int, int);
+	static eAVControl *m_instance;
+#endif
+
 	void setAspectRatio(int ratio, int flags = 0) const;
 	void setAspect(const std::string &newFormat, int flags = 0) const;
 	void setColorFormat(const std::string &newFormat, int flags = 0) const;

@@ -245,10 +245,10 @@ int eAVControl::getResolutionY(int defaultVal, int flags) const
 	return value;
 }
 
-void eAVSwitch::setVideoResolutionObserver(void (*observer)(int, int))
-{
+	void eAVControl::setVideoResolutionObserver(void (*observer)(int, int))
+	{
 	m_video_resolution_observer = observer;
-}
+	}
 
 /// @brief Get FrameRate
 /// @param defaultVal
