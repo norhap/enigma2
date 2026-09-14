@@ -6,7 +6,6 @@ Licensed under GPLv2.
 */
 
 
-#include "avcontrol.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -20,8 +19,9 @@ Licensed under GPLv2.
 #include <lib/base/eerror.h>
 #include <lib/base/ebase.h>
 #include <lib/base/modelinformation.h>
+#include <lib/driver/avcontrol.h>
 
-const char *__MODULE__ = "eAVControl";
+const char *__MODULE__ = "eAVControl"; // NOSONAR
 
 const char *proc_hdmi_rx_monitor = "/proc/stb/hdmi-rx/0/hdmi_rx_monitor";	// NOSONAR
 const char *proc_hdmi_rx_monitor_audio = "/proc/stb/audio/hdmi_rx_monitor"; // NOSONAR
@@ -49,10 +49,8 @@ const char *proc_wss = "/proc/stb/denc/0/wss"; // NOSONAR
 eAVControl *eAVControl::m_instance = nullptr;
 
 eAVControl::eAVControl()
-    : m_video_resolution_observer(nullptr) // [norhap]
 {
-    if (!m_instance)
-        m_instance = this;
+	m_video_resolution_observer = nullptr;   
 	struct stat buffer;
 
 #ifdef HAVE_HDMIIN_DM
@@ -74,6 +72,7 @@ eAVControl::eAVControl()
 
 	m_videomode_choices = readAvailableModes();
 	m_encoder_active = false;
+	m_video_resolution_observer = nullptr;
 
 	eModelInformation &modelinformation = eModelInformation::getInstance();
 	m_b_has_scartswitch = modelinformation.getValue("scart") == "True";
@@ -168,7 +167,6 @@ void eAVControl::fp_event(int what)
 eAVControl::~eAVControl()
 {
 	m_instance = nullptr;
-	m_video_resolution_observer = nullptr; // [norhap]
 	if (m_fp_fd >= 0)
 		close(m_fp_fd);
 }
@@ -248,11 +246,6 @@ int eAVControl::getResolutionY(int defaultVal, int flags) const
 	return value;
 }
 
-	void eAVControl::setVideoResolutionObserver(void (*observer)(int, int))
-	{
-	m_video_resolution_observer = observer;
-	}
-
 /// @brief Get FrameRate
 /// @param defaultVal
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
@@ -304,10 +297,15 @@ std::string eAVControl::getVideoMode(const std::string &defaultVal, int flags) c
 /// @brief Set VideoMode
 /// @param newMode
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
+
+void eAVControl::setVideoResolutionObserver(void (*observer)(int, int))
+{
+	m_video_resolution_observer = observer;
+}
+
 void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 {
 #ifdef VIDEO_MODE_50
-	// gigablue driver bug
 	CFile::writeStr(proc_videomode_50, newMode, __MODULE__, flags);
 	CFile::writeStr(proc_videomode_60, newMode, __MODULE__, flags);
 #else
@@ -316,7 +314,10 @@ void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 
 	if (flags & FLAGS_DEBUG)
 		eDebug("[%s] %s: %s", __MODULE__, "setVideoMode", newMode.c_str());
-}
+
+	if (m_video_resolution_observer)
+		m_video_resolution_observer(getResolutionX(), getResolutionY());
+}   
 
 /// @brief startStopHDMIIn
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
@@ -662,10 +663,10 @@ void eAVControl::setPolicy169(const std::string &newPolicy, int flags) const
 }
 
 /// @brief setVideoSize
-/// @param top
-/// @param left
-/// @param width
-/// @param height
+/// @param top 
+/// @param left 
+/// @param width 
+/// @param height 
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
 void eAVControl::setVideoSize(int top, int left, int width, int height, int flags) const
 {
@@ -690,7 +691,7 @@ void eAVControl::setOSDAlpha(int alpha, int flags) const
 }
 
 /// @brief getEDIDPath
-/// @return
+/// @return 
 std::string eAVControl::getEDIDPath() const
 {
 	struct stat buffer = {};

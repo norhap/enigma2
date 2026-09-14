@@ -27,9 +27,7 @@ public:
 	eAVControl();
 	~eAVControl();
 #endif
-#ifndef SWIG
-	void setVideoResolutionObserver(void (*observer)(int, int));
-#endif
+
 	static eAVControl *getInstance()
 	{
 		return m_instance;
@@ -43,14 +41,6 @@ public:
 	std::string getPreferredModes(int flags = 0) const;
 	std::string getAvailableModes() const;
 	bool isEncoderActive() const;
-	void startStopHDMIIn(bool on, bool audio, int flags = 0);	
-
-private:
-	// ... miembros existentes ...
-#ifndef SWIG
-	void (*m_video_resolution_observer)(int, int);
-	static eAVControl *m_instance;
-#endif
 
 	void setAspectRatio(int ratio, int flags = 0) const;
 	void setAspect(const std::string &newFormat, int flags = 0) const;
@@ -58,7 +48,7 @@ private:
 
 	void setVideoMode(const std::string &newMode, int flags = 0) const;
 	void setInput(const std::string &newMode, int flags = 0);
-
+	void startStopHDMIIn(bool on, bool audio, int flags = 0);
 	void disableHDMIIn(int flags = 0) const;
 	void setOSDAlpha(int alpha, int flags = 0) const;
 
@@ -76,6 +66,7 @@ private:
 	void setVideoSize(int top, int left, int width, int height, int flags = 0) const;
 
 	std::string getEDIDPath() const;
+	void setVideoResolutionObserver(void (*observer)(int, int));
 
 	enum
 	{
@@ -87,7 +78,10 @@ private:
 	int getVCRSlowBlanking();
 
 private:
-	std::string m_video_mode;
+#ifndef SWIG
+	void (*m_video_resolution_observer)(int, int);
+	static eAVControl *m_instance;
+#endif
 	std::string m_video_mode_50;
 	std::string m_video_mode_60;
 	std::string m_videomode_choices;
