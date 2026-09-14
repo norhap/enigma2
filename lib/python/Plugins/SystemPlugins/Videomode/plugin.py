@@ -123,9 +123,12 @@ class VideoSetup(ConfigListScreen, Screen):
 			self.list.append(getConfigListEntry(_("Audio volume step size"), config.av.volume_stepsize, _("Configure the general audio volume step size (limit 1-10).")))
 			if SystemInfo["CanDownmixAC3"]:
 				self.list.append(getConfigListEntry(_("AC3 downmix"), config.av.downmix_ac3, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
-				if BoxInfo.getItem("VuEAC3Fix") and not config.av.downmix_ac3.value:
-					self.list.append(getConfigListEntry(_("Passthrough audio handling delay AC3"), config.av.passthrough_fix_short, _("Used to specify delay when switching between services and AC3 passthrough is enabled.")))
-					self.list.append(getConfigListEntry(_("Passthrough audio handling delay AC3+"), config.av.passthrough_fix_long, _("Used to specify delay when switching between services and AC3+/Atmos passthrough is enabled.")))
+				if BoxInfo.getItem("VuEAC3Fix"):
+					if not config.av.downmix_ac3.value:
+						self.list.append(getConfigListEntry(_("Passthrough audio handling delay AC3"), config.av.passthrough_fix_short, _("Used to specify delay when switching between services and AC3 passthrough is enabled.")))
+						self.list.append(getConfigListEntry(_("Passthrough audio handling delay AC3+"), config.av.passthrough_fix_long, _("Used to specify delay when switching between services and AC3+/Atmos passthrough is enabled.")))
+					elif config.av.downmix_ac3.value == "passthrough":
+						self.list.append(getConfigListEntry(_("AC3+ Passthrough audio fix"), config.av.passthrough_fix, _("Enabled/Disable audio passthrough fix.")))
 			if SystemInfo["CanDownmixDTS"]:
 				self.list.append(getConfigListEntry(_("DTS downmix"), config.av.downmix_dts, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDTSHD"]:
@@ -162,7 +165,8 @@ class VideoSetup(ConfigListScreen, Screen):
 				self.list.append(getConfigListEntry(_("Enable bluetooth audio"), config.av.btaudio, _("This option allows you to switch audio to bluetooth speakers.")))
 				if SystemInfo["CanBTAudioDelay"] and config.av.btaudio.value != "off":
 					self.list.append(getConfigListEntry(_("General bluetooth audio delay"), config.av.btaudiodelay, _("This option configures the general audio delay for bluetooth speakers.")))
-
+			self.list.append(getConfigListEntry(_("DTS / DTS-HD Transcoding"), config.av.dts_playback, _("Choose whether DTS / DTS-HD sound tracks should be transcoded to Dolby Digital.")))
+			self.list.append(getConfigListEntry(_("Dolby TrueHD Transcoding"), config.av.truehd_playback, _("Choose whether Dolby TrueHD sound tracks should be transcoded to Dolby Digital.")))
 		if SystemInfo["CanChangeOsdAlpha"]:
 			self.list.append(getConfigListEntry(_("OSD transparency"), config.av.osd_alpha, _("Configure the transparency of the OSD.")))
 

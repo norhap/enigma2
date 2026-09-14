@@ -50,6 +50,7 @@ eAVControl *eAVControl::m_instance = nullptr;
 
 eAVControl::eAVControl()
 {
+	m_video_resolution_observer = nullptr; // [norhap] servicedvb PASSTHROUGH_FIX   
 	struct stat buffer;
 
 #ifdef HAVE_HDMIIN_DM
@@ -71,6 +72,7 @@ eAVControl::eAVControl()
 
 	m_videomode_choices = readAvailableModes();
 	m_encoder_active = false;
+	m_video_resolution_observer = nullptr; // [norhap] servicedvb PASSTHROUGH_FIX
 
 	eModelInformation &modelinformation = eModelInformation::getInstance();
 	m_b_has_scartswitch = modelinformation.getValue("scart") == "True";
@@ -295,6 +297,11 @@ std::string eAVControl::getVideoMode(const std::string &defaultVal, int flags) c
 /// @brief Set VideoMode
 /// @param newMode
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
+void eAVControl::setVideoResolutionObserver(void (*observer)(int, int)) // [norhap] servicedvb PASSTHROUGH_FIX
+{
+	m_video_resolution_observer = observer;
+}
+
 void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 {
 #ifdef VIDEO_MODE_50
@@ -307,7 +314,10 @@ void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 
 	if (flags & FLAGS_DEBUG)
 		eDebug("[%s] %s: %s", __MODULE__, "setVideoMode", newMode.c_str());
-}
+
+	if (m_video_resolution_observer) // [norhap] servicedvb PASSTHROUGH_FIX
+		m_video_resolution_observer(getResolutionX(), getResolutionY());
+}   
 
 /// @brief startStopHDMIIn
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)

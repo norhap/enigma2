@@ -9,6 +9,7 @@
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/db.h>
 #include <lib/dvb/decoder.h>
+#include <lib/driver/avcontrol.h>
 
 #include <lib/base/cfile.h>
 #include <lib/dvb/pmtparse.h>
@@ -19,7 +20,6 @@
 #include <lib/dvb/metaparser.h>
 #include <lib/dvb/tstools.h>
 #include <lib/python/python.h>
-#include <lib/base/nconfig.h> // access to python config
 #include <lib/base/esimpleconfig.h>
 #include <lib/base/httpsstream.h>
 #include <lib/base/httpstream.h>
@@ -62,6 +62,23 @@ using namespace std;
 #include <ios>
 #include <sstream>
 #include <iomanip>
+
+#ifdef PASSTHROUGH_FIX
+extern int eServiceMP3PendingStopWorkers();
+static std::set<eDVBServicePlay*> s_deferred_dvb_starts;
+/* A real valid evVideoSizeChanged remains the preferred late-reset trigger.
+ * When the driver does not emit one, reuse PliExtraInfo's existing resolution
+ * observation as a fallback without adding another timer or demux consumer. */
+static eDVBServicePlay *s_primary_live_codec_owner = nullptr;
+static std::set<eDVBServicePlay*> s_encrypted_ddp_late_reset_armed;
+static std::set<eDVBServicePlay*> s_encrypted_ddp_resolution_zero_seen;
+
+static void eDVBServicePlayReportVideoResolution(int xres, int yres)
+{
+	if (s_primary_live_codec_owner)
+		s_primary_live_codec_owner->observeVideoResolutionState(xres, yres);
+}
+#endif
 
 class eStaticServiceDVBInformation: public iStaticServiceInformation
 {
@@ -1113,19 +1130,20 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cuesheet_changed(0),
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
-	m_subtitle_sync_timer(eTimer::create(eApp)),
-	m_nownext_timer(eTimer::create(eApp)),
-	m_soft_decoder_video_info_valid(false)
-{
+    m_subtitle_sync_timer(eTimer::create(eApp)),
+    m_soft_decoder_video_info_valid(false)
 #ifdef PASSTHROUGH_FIX
-	m_passthrough_fix_timer = eTimer::create(eApp);
+    , m_passthrough_fix_timer(eTimer::create(eApp))
+    , m_encrypted_ddp_audio_reset_done(false)
 #endif
-	if (connect_event)
-		CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
-	CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
-	CONNECT(m_event_handler.m_eit_changed, eDVBServicePlay::gotNewEvent);
-	CONNECT(m_subtitle_sync_timer->timeout, eDVBServicePlay::checkSubtitleTiming);
-	CONNECT(m_nownext_timer->timeout, eDVBServicePlay::updateEpgCacheNowNext);
+    , m_nownext_timer(eTimer::create(eApp))
+{
+    if (connect_event)
+        CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
+    CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
+    CONNECT(m_event_handler.m_eit_changed, eDVBServicePlay::gotNewEvent);
+    CONNECT(m_subtitle_sync_timer->timeout, eDVBServicePlay::checkSubtitleTiming);
+    CONNECT(m_nownext_timer->timeout, eDVBServicePlay::updateEpgCacheNowNext);
 #ifdef PASSTHROUGH_FIX
 	CONNECT(m_passthrough_fix_timer->timeout, eDVBServicePlay::forcePassthrough);
 #endif
@@ -1133,6 +1151,13 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 
 eDVBServicePlay::~eDVBServicePlay()
 {
+#ifdef PASSTHROUGH_FIX
+	s_deferred_dvb_starts.erase(this);
+	s_encrypted_ddp_late_reset_armed.erase(this);
+	s_encrypted_ddp_resolution_zero_seen.erase(this);
+	if (s_primary_live_codec_owner == this)
+		s_primary_live_codec_owner = nullptr;
+#endif
 	if (m_is_pvr)
 	{
 		eDVBMetaParser meta;
@@ -1161,7 +1186,6 @@ eDVBServicePlay::~eDVBServicePlay()
 
 	if (m_subtitle_widget) m_subtitle_widget->destroy();
 }
-
 
 #ifdef PASSTHROUGH_FIX
 void eDVBServicePlay::forcePassthrough()
@@ -1225,6 +1249,22 @@ void eDVBServicePlay::gotNewEvent(int error)
 
 void eDVBServicePlay::updateEpgCacheNowNext()
 {
+#ifdef PASSTHROUGH_FIX
+	if (s_deferred_dvb_starts.find(this) != s_deferred_dvb_starts.end())
+	{
+		int pending = eServiceMP3PendingStopWorkers();
+		if (pending > 0)
+		{
+			m_nownext_timer->start(10, true);
+			return;
+		}
+		s_deferred_dvb_starts.erase(this);
+		eDebug("[eDVBServicePlay] previous GStreamer teardown complete; starting deferred DVB playback");
+		start();
+		return;
+	}
+#endif
+
 	bool update = false;
 	ePtr<eServiceEvent> next = 0;
 	ePtr<eServiceEvent> ptr = nullptr;
@@ -1365,6 +1405,48 @@ void eDVBServicePlay::serviceEvent(int event)
 			m_first_program_info &= ~1;
 			seekTo(0);
 		}
+#ifdef PASSTHROUGH_FIX
+		/* Resolve the selected codec at the same point immediately preceding
+		 * evUpdatedInfo. This is the native atDDP equivalent of ServiceInfo's
+		 * IS_AUDIO_CODEC re-query on evUpdatedInfo. */
+		const bool streamrelay_ddp_candidate = m_reference.isStreamRelay;
+		if (!m_timeshift_active && !m_is_pvr && (!m_is_stream || streamrelay_ddp_candidate) && m_is_primary)
+		{
+			eDVBServicePMTHandler::program program;
+			bool have_program = !m_service_handler.getProgramInfo(program);
+			bool selected_ddp = false;
+			if (have_program)
+			{
+				for (const auto &audio : program.audioStreams)
+				{
+					if (audio.pid == m_current_audio_pid &&
+						audio.type == eDVBServicePMTHandler::audioStream::atDDP)
+					{
+						selected_ddp = true;
+						break;
+					}
+				}
+			}
+
+			/* The late readiness problem is an incoming encrypted-DD+ property, not
+			 * a same-codec-only transition. AAC-LC and MPEG-1 Layer II -> encrypted
+			 * DD+ are runtime-proven to need the same late fallback. */
+			/* StreamRelay's local HTTP leg is already descrambled, so its PMT no
+			 * longer proves the original DVB service was encrypted. Keep explicit
+			 * StreamRelay references eligible while leaving arbitrary IPTV streams
+			 * excluded from this encrypted-DD+ hardware workaround. */
+			const bool encrypted_ddp_source = program.isCrypted() || streamrelay_ddp_candidate;
+			const bool eligible_incoming_ddp = selected_ddp && have_program &&
+				encrypted_ddp_source && !m_encrypted_ddp_audio_reset_done &&
+				!m_noaudio && !m_service_handler.isCiConnected() &&
+				eSimpleConfig::getBool("config.av.passthrough_fix", false);
+
+			if (eligible_incoming_ddp)
+				s_encrypted_ddp_late_reset_armed.insert(this);
+			else
+				s_encrypted_ddp_late_reset_armed.erase(this);
+		}
+#endif
 		if (!m_timeshift_active)
 			m_event((iPlayableService*)this, evUpdatedInfo);
 
@@ -1459,7 +1541,7 @@ void eDVBServicePlay::goToNextPlaybackFile()
 {
 	if (m_timeshift_file_next.empty())
 	{
-		if (!eConfigManager::getConfigBoolValue("config.usage.timeshift_skipreturntolive", false))
+		if (!eSimpleConfig::getBool("config.usage.timeshift_skipreturntolive", false))
 		{
 			eDebug("[eDVBServicePlay] timeshift EOF, so let's go live");
 			switchToLive();
@@ -1487,6 +1569,23 @@ void eDVBServicePlay::goToNextPlaybackFile()
 
 RESULT eDVBServicePlay::start()
 {
+#ifdef PASSTHROUGH_FIX
+	if (eAVControl::getInstance())
+		eAVControl::getInstance()->setVideoResolutionObserver(eDVBServicePlayReportVideoResolution);
+	if (eSimpleConfig::getBool("config.av.passthrough_fix", false))
+	{
+		int pending = eServiceMP3PendingStopWorkers();
+		if (pending > 0)
+		{
+			if (s_deferred_dvb_starts.insert(this).second)
+				eDebug("[eDVBServicePlay] deferring DVB startup while %d previous GStreamer teardown(s) release hardware", pending);
+			m_nownext_timer->start(10, true);
+			return 0;
+		}
+		s_deferred_dvb_starts.erase(this);
+	}
+#endif
+
 	eServiceReferenceDVB service = (eServiceReferenceDVB&)m_reference;
 	bool scrambled = true;
 	int packetsize = 188;
@@ -1518,6 +1617,15 @@ RESULT eDVBServicePlay::start()
 		type = eDVBServicePMTHandler::playback;
 	}
 	else
+#ifdef PASSTHROUGH_FIX
+		if (m_is_primary)
+		{
+			s_encrypted_ddp_late_reset_armed.erase(this);
+			s_encrypted_ddp_resolution_zero_seen.erase(this);
+			m_encrypted_ddp_audio_reset_done = false;
+			s_primary_live_codec_owner = this;
+		}
+#endif
 		m_event(this, evStart);
 
 	if (m_is_stream)
@@ -1565,6 +1673,14 @@ RESULT eDVBServicePlay::start()
 
 RESULT eDVBServicePlay::stop()
 {
+#ifdef PASSTHROUGH_FIX
+	if (s_deferred_dvb_starts.erase(this))
+		m_nownext_timer->stop();
+	s_encrypted_ddp_late_reset_armed.erase(this);
+	s_encrypted_ddp_resolution_zero_seen.erase(this);
+	if (s_primary_live_codec_owner == this)
+		s_primary_live_codec_owner = nullptr;
+#endif
 		/* add bookmark for last play position */
 		/* m_cutlist_enabled bit 2 is the "don't remember bit" */
 	if (m_is_pvr && ((m_cutlist_enabled & 2) == 0))
@@ -2714,29 +2830,29 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 	if(res_mgr->canAllocateChannel(chid, chid_ignore, eDVBChannelID(), system))	// this sets system
 		return false;
 
-	if (eConfigManager::getConfigBoolValue("config.usage.remote_fallback_alternative", false) && !(system == iDVBFrontend::feSatellite))
+	if (eSimpleConfig::getBool("config.usage.remote_fallback_alternative", false) && !(system == iDVBFrontend::feSatellite))
 	{
 		switch (system)
 		{
 			case iDVBFrontend::feTerrestrial:
 			{
-				remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback_dvb_t");
+				remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback_dvb_t");
 				break;
 			}
 			case iDVBFrontend::feCable:
 			{
-				remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback_dvb_c");
+				remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback_dvb_c");
 				break;
 			}
 			case iDVBFrontend::feATSC:
 			{
-				remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback_atsc");
+				remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback_atsc");
 				break;
 			}
 		}
 	}
 	else
-		remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback");
+		remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback");
 
 	if (remote_fallback_url.empty() && !getAnyPeerStreamingBox(remote_fallback_url))
 		return false;
@@ -3510,7 +3626,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		{
 			std::string value;
 			bool showRadioBackground = eSimpleConfig::getBool("config.misc.showradiopic", true);
-			std::string radio_pic = eConfigManager::getConfigValue( showRadioBackground ? "config.misc.radiopic" : "config.misc.blackradiopic" );
+			std::string radio_pic = eSimpleConfig::getString( showRadioBackground ? "config.misc.radiopic" : "config.misc.blackradiopic" );
 			m_decoder->setRadioPic(radio_pic);
 		}
 
@@ -3559,9 +3675,34 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 			sendSeekableStateChanged = true;
 	}
 
+#ifdef PASSTHROUGH_FIX
+	if (!m_noaudio)
+		forceAudioReset();
+#endif
 	if (sendSeekableStateChanged)
 		m_event((iPlayableService*)this, evSeekableStatusChanged);
 }
+
+#ifdef PASSTHROUGH_FIX
+void eDVBServicePlay::forceAudioReset()
+{
+	if (!eSimpleConfig::getBool("config.av.passthrough_fix", false))
+		return;
+	// Toggle Bluetooth audio off->on->off to force audio driver reinitialization
+	std::string btaudio = CFile::read("/proc/stb/audio/btaudio");
+	if (!btaudio.empty() && btaudio.find("off") != std::string::npos)
+	{
+		eDebug("[eDVBSoftDecoder] Force audio reset: toggling btaudio on and back off");
+		CFile::writeStr("/proc/stb/audio/btaudio", "on");
+		CFile::writeStr("/proc/stb/audio/btaudio", "off");
+	}
+	if (btaudio.empty())
+	{
+		int currAudioIndex = getCurrentTrack();
+		selectTrack(currAudioIndex);
+	}
+}
+#endif
 
 void eDVBServicePlay::loadCuesheet()
 {
@@ -3931,7 +4072,7 @@ void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 		if (m_is_pvr || m_timeshift_enabled)
 		{
 			eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
-			subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
+			subtitledelay = eSimpleConfig::getInt("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
 		}
 		else
 		{
@@ -4076,7 +4217,7 @@ int eDVBServicePlay::getPCMDelay()
 
 void eDVBServicePlay::setAC3Delay(int delay)
 {
-	int generalAC3delay = eConfigManager::getConfigIntValue("config.av.generalAC3delay");
+	int generalAC3delay = eSimpleConfig::getInt("config.av.generalAC3delay");
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cAC3DELAY, delay ? delay : -1);
 	if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
@@ -4094,7 +4235,7 @@ void eDVBServicePlay::setAC3Delay(int delay)
 
 void eDVBServicePlay::setPCMDelay(int delay)
 {
-	int generalPCMdelay = eConfigManager::getConfigIntValue("config.av.generalPCMdelay");
+	int generalPCMdelay = eSimpleConfig::getInt("config.av.generalPCMdelay");
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cPCMDELAY, delay ? delay : -1);
 	if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
@@ -4110,10 +4251,93 @@ void eDVBServicePlay::setPCMDelay(int delay)
 	}
 }
 
+#ifdef PASSTHROUGH_FIX
+void eDVBServicePlay::observeVideoResolutionState(int xres, int yres)
+{
+	/* PliExtraInfo already samples /proc/stb/vmpeg/0/{xres,yres} once per
+	 * second. Reuse that existing observation for the current primary live
+	 * transition; only a subsequently armed encrypted-DD+ target may consume
+	 * the observed 0x0 -> valid sequence. Do not add another timer or reader. */
+	const bool streamrelay_ddp_candidate = m_reference.isStreamRelay;
+	if (s_primary_live_codec_owner != this ||
+		!m_is_primary || m_is_pvr || (m_is_stream && !streamrelay_ddp_candidate) ||
+		m_timeshift_active || m_noaudio || m_service_handler.isCiConnected() ||
+		!eSimpleConfig::getBool("config.av.passthrough_fix", false))
+		return;
+
+	/* The retained old resolution can be identical to the new service. Require
+	 * an observed invalid decoder state first, so a stale 3840x2160 can never
+	 * satisfy the fallback. */
+	if (xres == 0 && yres == 0)
+	{
+		s_encrypted_ddp_resolution_zero_seen.insert(this);
+		return;
+	}
+
+	if (xres <= 0 || yres <= 0 || m_encrypted_ddp_audio_reset_done ||
+		!s_encrypted_ddp_late_reset_armed.count(this) ||
+		!s_encrypted_ddp_resolution_zero_seen.count(this))
+		return;
+
+	eDVBServicePMTHandler::program program;
+	if (m_service_handler.getProgramInfo(program) ||
+		(!program.isCrypted() && !streamrelay_ddp_candidate))
+		return;
+
+	for (const auto &audio : program.audioStreams)
+	{
+		if (audio.pid == m_current_audio_pid &&
+			audio.type == eDVBServicePMTHandler::audioStream::atDDP)
+		{
+			m_encrypted_ddp_audio_reset_done = true;
+			s_encrypted_ddp_late_reset_armed.erase(this);
+			s_encrypted_ddp_resolution_zero_seen.erase(this);
+			eDebug("[eDVBServicePlay] encrypted DD+%s transition: existing PliExtraInfo poll observed decoder resolution 0x0 -> %dx%d; forcing late passthrough audio reset",
+				streamrelay_ddp_candidate ? " StreamRelay" : "", xres, yres);
+			forceAudioReset();
+			break;
+		}
+	}
+}
+#endif
+
 void eDVBServicePlay::video_event(struct iTSMPEGDecoder::videoEvent event)
 {
 	switch(event.type) {
 		case iTSMPEGDecoder::videoEvent::eventSizeChanged:
+#ifdef PASSTHROUGH_FIX
+			/* A real video-size event is the same readiness point used by the
+			 * resolution UI. Ignore the driver's transitional 0x0 event and
+			 * reset encrypted live DD+ exactly once when dimensions are valid. */
+			if (!m_encrypted_ddp_audio_reset_done && m_is_primary && !m_is_pvr && !m_is_stream &&
+				!m_timeshift_active && !m_noaudio && !m_service_handler.isCiConnected() &&
+				eSimpleConfig::getBool("config.av.passthrough_fix", false))
+			{
+				int video_width = getInfo(sVideoWidth);
+				int video_height = getInfo(sVideoHeight);
+				if (video_width > 0 && video_height > 0)
+				{
+					eDVBServicePMTHandler::program program;
+					if (!m_service_handler.getProgramInfo(program) && program.isCrypted())
+					{
+						for (const auto &audio : program.audioStreams)
+						{
+							if (audio.pid == m_current_audio_pid &&
+								audio.type == eDVBServicePMTHandler::audioStream::atDDP)
+							{
+								m_encrypted_ddp_audio_reset_done = true;
+								s_encrypted_ddp_resolution_zero_seen.erase(this);
+								s_encrypted_ddp_late_reset_armed.erase(this);
+								eDebug("[eDVBServicePlay] encrypted DD+ valid evVideoSizeChanged %dx%d: forcing late passthrough audio reset",
+									video_width, video_height);
+								forceAudioReset();
+								break;
+							}
+						}
+					}
+				}
+			}
+#endif
 			// For SoftCSA: Send evUpdatedInfo on first video size event
 			// This is needed because some skins query video resolution only on evUpdatedInfo
 			if (m_csa_session && m_csa_session->isActive() && !m_soft_decoder_video_info_valid)
@@ -4376,6 +4600,9 @@ void eDVBServicePlay::cleanupSoftwareDescrambling()
 
 	m_csa_activated_conn = nullptr;
 	m_soft_decoder_video_info_valid = false;
+#ifdef PASSTHROUGH_FIX
+	m_encrypted_ddp_audio_reset_done = false;
+#endif
 }
 
 void eDVBServicePlay::resetHwDescramblerSlot()
