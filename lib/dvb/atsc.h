@@ -18,10 +18,10 @@ public:
 	StringSegment(const uint8_t *const buffer);
 	~StringSegment(void);
 
-	const uint8_t getMode(void) const;
-	const uint8_t getCompression(void) const;
+	uint8_t getMode(void) const;
+	uint8_t getCompression(void) const;
 	const std::vector<uint8_t> &getData(void) const;
-	const std::string getValue(void) const;
+	std::string getValue(void) const;
 };
 
 class StringValue

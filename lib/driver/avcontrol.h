@@ -86,7 +86,6 @@ private:
 	int getVCRSlowBlanking();
 
 private:
-	static eAVControl *m_instance;
 	std::string m_video_mode;
 	std::string m_video_mode_50;
 	std::string m_video_mode_60;

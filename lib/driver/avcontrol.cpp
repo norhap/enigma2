@@ -49,7 +49,7 @@ const char *proc_wss = "/proc/stb/denc/0/wss"; // NOSONAR
 eAVControl *eAVControl::m_instance = nullptr;
 
 eAVControl::eAVControl()
-    : m_video_resolution_observer(nullptr)
+    : m_video_resolution_observer(nullptr) // [norhap]
 {
     if (!m_instance)
         m_instance = this;
@@ -168,7 +168,7 @@ void eAVControl::fp_event(int what)
 eAVControl::~eAVControl()
 {
 	m_instance = nullptr;
-	m_video_resolution_observer = nullptr;
+	m_video_resolution_observer = nullptr; // [norhap]
 	if (m_fp_fd >= 0)
 		close(m_fp_fd);
 }
