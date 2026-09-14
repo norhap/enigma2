@@ -335,7 +335,7 @@ class About(Screen):
 				elif isPluginInstalled("ServiceMP3"):
 					player = f"{servicemp3}"
 				else:
-					player = _("ServiceApp (not actived)")
+					player = f"{servicemp3}"
 			elif isPluginInstalled("ServiceHisilicon"):
 				if config.plugins.serviceapp.servicemp3.replace.value and config.plugins.serviceapp.servicemp3.player.value == "exteplayer3":
 					player = f"{exteplayer3}"
@@ -346,14 +346,15 @@ class About(Screen):
 			elif isPluginInstalled("ServiceMP3"):
 				player = f"{servicemp3}"
 			else:
-				player = _("ServiceApp (not actived)")
+				player = f"{servicemp3}"
 		else:
 			if isPluginInstalled("ServiceMP3"):
 				player = f"{servicemp3}"
 			elif isPluginInstalled("ServiceHisilicon"):
 				player = f"{servicehisilicon}"
 			else:
-				player = _("Not installed")
+				# player = _("Not installed")  old plugin used servicemp3.
+				player = f"{servicemp3}"
 		AboutText += _("Player:") + f" {player}"
 		AboutText += "\n"
 		AboutText += _("Uptime: ") + about.getBoxUptime()

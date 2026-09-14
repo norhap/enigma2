@@ -8963,9 +8963,6 @@ msgstr ""
 "Canal no disponible!\n"
 "Revise configuración del sintonizador!"
 
-msgid "ServiceApp (not actived)"
-msgstr "ServiceApp (no activado)"
-
 msgid "Servicename"
 msgstr "Nombre de canal"
 
