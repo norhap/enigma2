@@ -50,7 +50,7 @@ eAVControl *eAVControl::m_instance = nullptr;
 
 eAVControl::eAVControl()
 {
-	m_video_resolution_observer = nullptr;   
+	m_video_resolution_observer = nullptr; // [norhap] servicedvb PASSTHROUGH_FIX   
 	struct stat buffer;
 
 #ifdef HAVE_HDMIIN_DM
@@ -72,7 +72,7 @@ eAVControl::eAVControl()
 
 	m_videomode_choices = readAvailableModes();
 	m_encoder_active = false;
-	m_video_resolution_observer = nullptr;
+	m_video_resolution_observer = nullptr; // [norhap] servicedvb PASSTHROUGH_FIX
 
 	eModelInformation &modelinformation = eModelInformation::getInstance();
 	m_b_has_scartswitch = modelinformation.getValue("scart") == "True";
@@ -297,8 +297,7 @@ std::string eAVControl::getVideoMode(const std::string &defaultVal, int flags) c
 /// @brief Set VideoMode
 /// @param newMode
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
-
-void eAVControl::setVideoResolutionObserver(void (*observer)(int, int))
+void eAVControl::setVideoResolutionObserver(void (*observer)(int, int)) // [norhap] servicedvb PASSTHROUGH_FIX
 {
 	m_video_resolution_observer = observer;
 }
@@ -306,6 +305,7 @@ void eAVControl::setVideoResolutionObserver(void (*observer)(int, int))
 void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 {
 #ifdef VIDEO_MODE_50
+	// gigablue driver bug
 	CFile::writeStr(proc_videomode_50, newMode, __MODULE__, flags);
 	CFile::writeStr(proc_videomode_60, newMode, __MODULE__, flags);
 #else
@@ -315,7 +315,7 @@ void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 	if (flags & FLAGS_DEBUG)
 		eDebug("[%s] %s: %s", __MODULE__, "setVideoMode", newMode.c_str());
 
-	if (m_video_resolution_observer)
+	if (m_video_resolution_observer) // [norhap] servicedvb PASSTHROUGH_FIX
 		m_video_resolution_observer(getResolutionX(), getResolutionY());
 }   
 

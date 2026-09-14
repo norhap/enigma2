@@ -20,7 +20,6 @@
 #include <lib/dvb/metaparser.h>
 #include <lib/dvb/tstools.h>
 #include <lib/python/python.h>
-#include <lib/base/nconfig.h> // access to python config
 #include <lib/base/esimpleconfig.h>
 #include <lib/base/httpsstream.h>
 #include <lib/base/httpstream.h>
@@ -2837,23 +2836,23 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 		{
 			case iDVBFrontend::feTerrestrial:
 			{
-				remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback_dvb_t");
+				remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback_dvb_t");
 				break;
 			}
 			case iDVBFrontend::feCable:
 			{
-				remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback_dvb_c");
+				remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback_dvb_c");
 				break;
 			}
 			case iDVBFrontend::feATSC:
 			{
-				remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback_atsc");
+				remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback_atsc");
 				break;
 			}
 		}
 	}
 	else
-		remote_fallback_url = eConfigManager::getConfigValue("config.usage.remote_fallback");
+		remote_fallback_url = eSimpleConfig::getString("config.usage.remote_fallback");
 
 	if (remote_fallback_url.empty() && !getAnyPeerStreamingBox(remote_fallback_url))
 		return false;
@@ -3627,7 +3626,7 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 		{
 			std::string value;
 			bool showRadioBackground = eSimpleConfig::getBool("config.misc.showradiopic", true);
-			std::string radio_pic = eConfigManager::getConfigValue( showRadioBackground ? "config.misc.radiopic" : "config.misc.blackradiopic" );
+			std::string radio_pic = eSimpleConfig::getString( showRadioBackground ? "config.misc.radiopic" : "config.misc.blackradiopic" );
 			m_decoder->setRadioPic(radio_pic);
 		}
 
@@ -4073,7 +4072,7 @@ void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 		if (m_is_pvr || m_timeshift_enabled)
 		{
 			eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
-			subtitledelay = eConfigManager::getConfigIntValue("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
+			subtitledelay = eSimpleConfig::getInt("config.subtitles.subtitle_noPTSrecordingdelay", 315000);
 		}
 		else
 		{
@@ -4218,7 +4217,7 @@ int eDVBServicePlay::getPCMDelay()
 
 void eDVBServicePlay::setAC3Delay(int delay)
 {
-	int generalAC3delay = eConfigManager::getConfigIntValue("config.av.generalAC3delay");
+	int generalAC3delay = eSimpleConfig::getInt("config.av.generalAC3delay");
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cAC3DELAY, delay ? delay : -1);
 	if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
@@ -4236,7 +4235,7 @@ void eDVBServicePlay::setAC3Delay(int delay)
 
 void eDVBServicePlay::setPCMDelay(int delay)
 {
-	int generalPCMdelay = eConfigManager::getConfigIntValue("config.av.generalPCMdelay");
+	int generalPCMdelay = eSimpleConfig::getInt("config.av.generalPCMdelay");
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cPCMDELAY, delay ? delay : -1);
 	if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
