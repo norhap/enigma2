@@ -27,7 +27,9 @@ public:
 	eAVControl();
 	~eAVControl();
 #endif
-
+#ifndef SWIG
+	void setVideoResolutionObserver(void (*observer)(int, int));
+#endif
 	static eAVControl *getInstance()
 	{
 		return m_instance;

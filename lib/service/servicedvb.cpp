@@ -9,7 +9,7 @@
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/db.h>
 #include <lib/dvb/decoder.h>
-#include <lib/driver/avswitch.h>
+#include <lib/driver/avcontrol.h>
 
 #include <lib/base/cfile.h>
 #include <lib/dvb/pmtparse.h>
@@ -1571,8 +1571,8 @@ void eDVBServicePlay::goToNextPlaybackFile()
 RESULT eDVBServicePlay::start()
 {
 #ifdef PASSTHROUGH_FIX
-	if (eAVSwitch::getInstance())
-		eAVSwitch::getInstance()->setVideoResolutionObserver(eDVBServicePlayReportVideoResolution);
+	if (eAVControl::getInstance())
+		eAVControl::getInstance()->setVideoResolutionObserver(eDVBServicePlayReportVideoResolution);
 	if (eSimpleConfig::getBool("config.av.passthrough_fix", false))
 	{
 		int pending = eServiceMP3PendingStopWorkers();

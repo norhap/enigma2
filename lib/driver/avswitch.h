@@ -19,10 +19,6 @@ public:
 	eAVSwitch();
 	~eAVSwitch();
 #endif
-#ifndef SWIG
-	void setVideoResolutionObserver(void (*observer)(int, int));
-#endif
-
 	static eAVSwitch *getInstance();
 	bool haveScartSwitch();
 	void setColorFormat(int format);
