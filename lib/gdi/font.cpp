@@ -842,7 +842,7 @@ int eTextPara::renderString(const char *string, int rflags, int border, int mark
 							goto nprint;
 						case 'c':
 						{
-							char color[8];
+							color[8] = '\0'; // [norhap]
 							int codeidx;
 							for (codeidx = 0; codeidx < 8; codeidx++)
 							{

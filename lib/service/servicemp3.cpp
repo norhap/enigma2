@@ -35,6 +35,8 @@
 #include <gst/gst.h>
 #include <gst/pbutils/missing-plugins.h>
 #include <sys/stat.h>
+#include <cmath>       // for std::abs [norhap]
+#include <inttypes.h>  // for PRId64 [norhap]
 
 #define HTTP_TIMEOUT 60
 
@@ -796,6 +798,7 @@ void setHDAudioAuxRetryBlocked(GstElement *playbin, bool blocked)
 		g_object_set_qdata(G_OBJECT(playbin), hdAudioAuxRetryBlockQuark(), GINT_TO_POINTER(blocked ? 1 : 0));
 }
 
+[[maybe_unused]]
 bool hdAudioNativeEac3ResetPending(GstElement *playbin)
 {
 	return playbin && GPOINTER_TO_INT(g_object_get_qdata(G_OBJECT(playbin), hdAudioNativeEac3ResetPendingQuark()));
@@ -2475,7 +2478,7 @@ RESULT eServiceMP3::unpause()
 		return -1;
 
 	/* no need to unpase if we are not paused already */
-	if (m_currentTrickRatio == 1.0 && !m_paused)
+	if (std::abs(m_currentTrickRatio - 1.0) < 1e-9 && !m_paused) // [norhap]
 	{
 		eDebug("[eServiceMP3] trickSeek no need to unpause!");
 		return 0;
@@ -2572,7 +2575,7 @@ RESULT eServiceMP3::trickSeek(gdouble ratio)
 		return 0;
 	}
 
-	bool unpause = (m_currentTrickRatio == 1.0 && ratio == 1.0);
+	bool unpause = (m_currentTrickRatio == 1.0 && ratio == 1.0); // [norhap]
 	if (unpause)
 	{
 		GstElement *source = NULL;
@@ -2657,7 +2660,7 @@ seek_unpause:
 		}
 	}
 
-	setHDAudioAuxState(m_gst_playbin, ratio == 1.0 ? GST_STATE_PLAYING : GST_STATE_PAUSED);
+	setHDAudioAuxState(m_gst_playbin, ratio == 1.0 ? GST_STATE_PLAYING : GST_STATE_PAUSED); // [norhap]
 	m_prev_decoder_time = -1;
 	m_decoder_time_valid_state = 0;
 	return 0;
@@ -3395,7 +3398,7 @@ std::string eServiceMP3::getInfoString(int w)
 		GstDateTime *date_time;
 		if (gst_tag_list_get_date(m_stream_tags, GST_TAG_DATE, &date))
 		{
-			gchar res[5];
+			gchar res[8]; // [norhap]
 			snprintf(res, sizeof(res), "%06d", g_date_get_year(date));
 			g_date_free(date);
 			return (std::string)res;
@@ -3404,7 +3407,7 @@ std::string eServiceMP3::getInfoString(int w)
 		{
 			if (gst_date_time_has_year(date_time))
 			{
-				gchar res[5];
+				gchar res[8]; // [norhap]
 				snprintf(res, sizeof(res), "%06d", gst_date_time_get_year(date_time));
 				gst_date_time_unref(date_time);
 				return (std::string)res;
@@ -3664,11 +3667,11 @@ int eServiceMP3::selectAudioStream(int i, bool skipAudioFix)
 	const HDAudioAuxMode aux_mode = !m_sourceinfo.is_streaming ?
 		hdAudioAuxModeForCodec(m_audioStreams[i].codec) : hdAuxNone;
 	HDAudioAuxState *active_aux = getHDAudioAuxState(m_gst_playbin);
-	const HDAudioAuxMode previous_aux_mode = active_aux ? active_aux->mode : hdAuxNone;
-	const bool native_eac3_to_aux = !active_aux && aux_mode == hdAuxAC3 &&
+	[[maybe_unused]] const HDAudioAuxMode previous_aux_mode = active_aux ? active_aux->mode : hdAuxNone; // [norhap]
+	[[maybe_unused]] const bool native_eac3_to_aux = !active_aux && aux_mode == hdAuxAC3 && // [norhap]
 		m_currentAudioStream >= 0 && m_currentAudioStream < (int)m_audioStreams.size() &&
 		m_audioStreams[m_currentAudioStream].type == atEAC3;
-	bool native_handoff_reset = false;
+	[[maybe_unused]] bool native_handoff_reset = false; // [norhap]
 
 	if (aux_mode != hdAuxNone || active_aux)
 	{
@@ -3963,8 +3966,8 @@ subtype_t getSubtitleType(GstPad* pad, gchar *g_codec=NULL)
 
 void eServiceMP3::gstBusCall(GstMessage *msg)
 {
-    if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
-        return;
+	if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
+		return;
 	if (!msg)
 		return;
 	gchar *sourceName;
@@ -5219,7 +5222,7 @@ void eServiceMP3::pullSubtitle(GstBuffer *buffer)
 				if (!line.empty() && line[line.length()-1] == '\n')
 					line.erase(line.length()-1);
 
-				eTrace("[eServiceMP3] got new text subtitle @ buf_pos = %lld ns (in pts=%lld), dur=%lld: '%s' ", buf_pos, buf_pos/11111, duration_ns, line.c_str());
+				eTrace("[eServiceMP3] got new text subtitle @ buf_pos = %" PRId64 " ns (in pts=%" PRId64 "), dur=%" PRId64 ": '%s' ", (int64_t)buf_pos, (int64_t)(buf_pos/11111), (int64_t)duration_ns, line.c_str()); // [norhap]
 
 				uint32_t start_ms = ((buf_pos / 1000000ULL) * convert_fps) + (delay / 90);
 				uint32_t end_ms = start_ms + (duration_ns / 1000000ULL);
@@ -5274,7 +5277,7 @@ void eServiceMP3::pushDVBSubtitles()
 		}
 		else
 		{
-			eDebug("[eServiceMP3] Delay early subtitle by %.03fs. Page stack size %d", diff / 1000.0f, m_dvb_subtitle_pages.size());
+			eDebug("[eServiceMP3] Delay early subtitle by %.03fs. Page stack size %zu", diff / 1000.0f, m_dvb_subtitle_pages.size());
 			m_dvb_subtitle_sync_timer->start(diff, 1);
 			break;
 		}
