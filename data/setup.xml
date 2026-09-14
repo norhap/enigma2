@@ -195,7 +195,7 @@
 		<item level="2" text="Include DAB+ data *" description="Enable this option to add detailed DAB+ receiver, packet, MOT and SPI information to the debug log file.">config.crash.debugDAB</item>
 		<item level="2" text="Log python stack trace on spinner" description="Set to yes for debugging the root cause of a spinner.">config.crash.pythonStackOnSpinner</item>
 		<item level="2" text="Logs folder location **" description="Choose the location for crash and debug logs folder.">config.crash.debugPath</item>
-		<item level="2" text="Include storage device data" description="Enable this option to add storage device information detected during system boot and hot plug events to the debug log file." indent="1">config.crash.debugStorage</item>		
+		<item level="2" text="Include storage device data" description="Enable this option to add storage device information detected during system boot and hot plug events to the debug log file." indent="1">config.crash.debugStorage</item>
 		<item level="2" text="Include timer descramble data in PVR" requires="CanDescrambleInStandby" description="Enabled displays PVR scrambled recording debug data.">config.crash.debugTimers</item>
 		<item level="2" text="Debug log time format *" description="This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted.">config.crash.debugTimeFormat</item>
 		<item level="2" text="Enable core dumps *" description="Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location.">config.crash.coredump</item>
@@ -540,6 +540,7 @@
 		<if conditional="config.usage.show_infobar_do_dimming.value">
 			<item level="0" text="Infobar fade-out speed" description="Configure the infobar fading speed">config.usage.show_infobar_dimming_speed</item>
 		</if>
+		<item level="0" text="Show faded message without list" description="When enabled, it will only display a message that fades away after a short period, without showing a list (e.g. when connecting a storage device).">config.usage.show_fading_message</item>
 		<item level="2" text="Show infobar on channel change" description="When enabled, the infobar will be displayed when changing channels.">config.usage.show_infobar_on_zap</item>
 		<item level="2" text="Show infobar on skip forward/backward" description="When enabled, the infobar will be displayed when skipping forwards/backwards during media playback.">config.usage.show_infobar_on_skip</item>
 		<item level="2" text="Show infobar on event change" description="When enabled, the infobar will be displayed when a new event starts.">config.usage.show_infobar_on_event_change</item>

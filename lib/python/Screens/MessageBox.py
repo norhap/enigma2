@@ -53,31 +53,7 @@ class MessageBox(Screen, HelpableScreen):
 		if enable_input is False:  # Process legacy enable_input argument.
 			enableInput = False
 		if enableInput:
-			if self.list:
-				self["actions"] = HelpableActionMap(self, ["MsgBoxActions", "NavigationActions", "DirectionActions"], {
-					"cancel": (self.cancel, _("Select the No / False response")),
-					"select": (self.select, _("Return the current selection response")),
-					"selectOk": (self.selectOk, _("Select the Yes / True response")),
-					"top": (self.top, _("Move to first line")),
-					"pageUp": (self.pageUp, _("Move up a page")),
-					"up": (self.up, _("Move up a line")),
-					"upUp": self.doNothing,
-					"left": (self.pageUp, _("Move up a page")),
-					"right": (self.pageDown, _("Move down a page")),
-					# "first": (self.top, _("Move to first line")),
-					# "last": (self.bottom, _("Move to last line")),
-					"down": (self.down, _("Move down a line")),
-					"downUp": self.doNothing,
-					"leftUp": self.pageUp,
-					"rightUp": self.pageDown,
-					"pageDown": (self.pageDown, _("Move down a page")),
-					"bottom": (self.bottom, _("Move to last line"))
-				}, prio=0, description=_("Message Box Actions"))
-			else:
-				self["actions"] = HelpableActionMap(self, ["OkCancelActions"], {
-					"cancel": (self.cancel, _("Close the window")),
-					"ok": (self.select, _("Close the window"))
-				}, prio=0, description=_("Message Box Actions"))
+			self.createActionMap(0)
 		self.msgBoxID = msgBoxID
 		if picon:  # Process legacy picon argument.
 			typeIcon = picon
@@ -109,6 +85,33 @@ class MessageBox(Screen, HelpableScreen):
 		self.timer = eTimer()
 		self.timer.callback.append(self.processTimer)
 		self.onLayoutFinish.append(self.layoutFinished)
+
+	def createActionMap(self, prio):
+		if self.list:
+			self["actions"] = HelpableActionMap(self, ["MsgBoxActions", "NavigationActions", "DirectionActions"], {
+				"cancel": (self.cancel, _("Select the No / False response")),
+				"select": (self.select, _("Return the current selection response")),
+				"selectOk": (self.selectOk, _("Select the Yes / True response")),
+				"top": (self.top, _("Move to first line")),
+				"pageUp": (self.pageUp, _("Move up a page")),
+				"up": (self.up, _("Move up a line")),
+				"upUp": self.doNothing,
+				"left": (self.pageUp, _("Move up a page")),
+				"right": (self.pageDown, _("Move down a page")),
+				# "first": (self.top, _("Move to first line")),
+				# "last": (self.bottom, _("Move to last line")),
+				"down": (self.down, _("Move down a line")),
+				"downUp": self.doNothing,
+				"leftUp": self.pageUp,
+				"rightUp": self.pageDown,
+				"pageDown": (self.pageDown, _("Move down a page")),
+				"bottom": (self.bottom, _("Move to last line"))
+			}, prio=0, description=_("Message Box Actions"))
+		else:
+			self["actions"] = HelpableActionMap(self, ["OkCancelActions"], {
+				"cancel": (self.cancel, _("Close the window")),
+				"ok": (self.select, _("Close the window"))
+			}, prio=0, description=_("Message Box Actions"))
 
 	def __repr__(self):
 		return f"{str(type(self))}({self.text})"
@@ -210,6 +213,14 @@ class MessageBox(Screen, HelpableScreen):
 
 	def createSummary(self):
 		return MessageBoxSummary
+
+	def reloadLayout(self):
+		for method in self.onLayoutFinish:
+			if not isinstance(method, type(self.close)):
+				exec(method, globals(), locals())
+			else:
+				method()
+		self.layoutFinished()
 
 
 class MessageBoxSummary(Screen):

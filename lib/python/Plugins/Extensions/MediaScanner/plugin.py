@@ -3,9 +3,11 @@ from os.path import exists, split
 from Tools.StbHardware import getFPWasTimerWakeup
 from Plugins.Plugin import PluginDescriptor
 from Components.Scanner import scanDevice
+from Components.config import config
 from Screens.InfoBar import InfoBar
 from Components.Harddisk import harddiskmanager
 from Screens.MessageBox import MessageBox
+from Screens.Toast import Toast
 
 global_session = None
 
@@ -29,18 +31,23 @@ def mountpoint_choosen(option):
 	res = scanDevice(mountpoint)
 
 	list = [(r.description, r, res[r], session) for r in res]
-
+	text = _("%s connected successfully.\nPlayable files found.") % description if access(mountpoint, F_OK | R_OK) else _("Storage device not available or not initialized.")
+	icon = "\uF003"
+	toast_type = Toast.TYPE_INFO if access(mountpoint, F_OK | R_OK) else Toast.TYPE_ERROR
+	text_list = _("%s connected successfully.\nPlayable files found.") % description
+	type_messagebox = MessageBox.TYPE_ERROR if access(mountpoint, F_OK | R_OK) else MessageBox.TYPE_INFO
 	if not list:
-		if access(mountpoint, F_OK | R_OK):
-			session.open(MessageBox, _("%s connected successfully. No playable files on this medium found!") % description, MessageBox.TYPE_INFO, simple=True, timeout=5)
+		if not config.usage.show_fading_message.value:
+			session.open(MessageBox, text % description, type_messagebox, simple=True, timeout=10)
 		else:
-			session.open(MessageBox, _("Storage device not available or not initialized."), MessageBox.TYPE_ERROR, simple=True, timeout=10)
+			Toast.instance.showToast(text=text, toasttype=toast_type, timeout=10, customIcon=icon)
 		return
-
-	session.openWithCallback(execute, ChoiceBox,
-		title=_("%s connected successfully.\nPlayable files found.") % description,
-		list=list)
-
+	if not config.usage.show_fading_message.value:
+		session.openWithCallback(execute, ChoiceBox,
+			title=text_list % description,
+			list=list)
+	else:
+		Toast.instance.showToast(text=text_list, toasttype=toast_type, timeout=10, customIcon=icon)
 
 def scan(session):
 	from Screens.ChoiceBox import ChoiceBox

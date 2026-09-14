@@ -158,6 +158,7 @@ def InitUsageConfig():
 	config.usage.ok_is_channelselection = ConfigYesNo(default=False)
 	config.usage.channelselection_preview = ConfigYesNo(default=False)
 	config.usage.show_spinner = ConfigYesNo(default=True)
+	config.usage.show_fading_message = ConfigYesNo(default=False)
 	config.usage.plugin_sort_weight = ConfigDictionarySet()
 	config.usage.menu_sort_weight = ConfigDictionarySet(default={"mainmenu": {"submenu": {}}})
 	config.usage.menu_sort_mode = ConfigSelection(default="user", choices=[
