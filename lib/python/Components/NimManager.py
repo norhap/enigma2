@@ -1094,6 +1094,9 @@ class NimManager:
 			if any([self.nim_slots[slotid].isCompatible(x) for x in ("DVB-S", "DVB-T", "DVB-C", "ATSC")]):
 				return not (configMode == "nothing")
 
+	def hardwareDABSDR(self, slotid=-1):  # norhap detect HW SDR for scan menu.
+		return False if not exists("/home/root/.dab-sdr") else True
+
 	def getSatListForNim(self, slotid):
 		list = []
 		if self.nim_slots[slotid].isCompatible("DVB-S"):

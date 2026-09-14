@@ -64,6 +64,11 @@ class HotPlugManager:
 				variable, value = values.split("=", 1)
 				eventData[variable] = value
 		eventData["mode"] = 0 if eventData.get("ACTION") not in ("dab-sdr-add", "dab-sdr-remove") else 1  # [norhap] DAB+ USB
+		if eventData["mode"] == 1:  # norhap detect HW SDR for scan menu.
+			with open("/home/root/.dab-sdr") as f:
+				f.write("true")
+		elif exists("/home/root/.dab-sdr"):
+			remove("/home/root/.dab-sdr")
 		if data and eventData:
 			self.processHotplugData(eventData)
 
