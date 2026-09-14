@@ -424,6 +424,8 @@ public:
 		sGamma,
 		sVideoInfo,
 		sIsSoftCSA,			/* 1 if current service uses software descrambling */
+		
+		sHDRType,			/* 0=SDR 1=HDR10 2=HLG 3=HDR */		
 
 		sUser = 0x100,
 		sDABServiceList = sUser + 1, /* tab-separated SID, bitrate, DAB+ flag and label */
@@ -469,7 +471,7 @@ public:
 	virtual std::string getInfoString(int w);
 	virtual ePtr<iServiceInfoContainer> getInfoObject(int w);
 	virtual ePtr<iDVBTransponderData> getTransponderData();
-	virtual void getAITApplications(std::map<int, std::string> &aitlist) {};
+	virtual void getAITApplications(std::map<int, std::string> &aitlist) { (void)aitlist; }
 	virtual PyObject *getHbbTVApplications() { return 0; };
 	virtual void getCaIds(std::vector<int> &caids, std::vector<int> &ecmpids, std::vector<std::string> &ecmdatabytes);
 	virtual long long getFileSize();
@@ -576,10 +578,12 @@ struct iAudioTrackInfo
 	std::string m_description;
 	std::string m_language; /* iso639 */
 	int m_pid; /* for association with the stream. */
+	int m_channels = 0; /* decoded/source channel count when available. */                                                                       
 #endif
 	std::string getDescription() { return m_description; }
 	std::string getLanguage() { return m_language; }
 	int getPID() { return m_pid; }
+	int getChannels() { return m_channels; }                                         
 };
 SWIG_ALLOW_OUTPUT_SIMPLE(iAudioTrackInfo);
 
@@ -995,6 +999,10 @@ public:
 		evVideoGammaChanged,
 
 		evFccFailed,
+		
+		evUpdateTags,
+		evUpdateIDv3Cover,
+		evGstreamerStart,
 
 		evUser = 0x100
 	};
