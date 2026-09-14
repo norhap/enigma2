@@ -20,12 +20,12 @@ StringSegment::~StringSegment()
 {
 }
 
-const uint8_t StringSegment::getMode(void) const
+uint8_t StringSegment::getMode(void) const
 {
 	return mode;
 }
 
-const uint8_t StringSegment::getCompression(void) const
+uint8_t StringSegment::getCompression(void) const
 {
 	return compression;
 }
@@ -35,7 +35,7 @@ const std::vector<uint8_t> &StringSegment::getData(void) const
 	return dataBytes;
 }
 
-const std::string StringSegment::getValue(void) const
+std::string StringSegment::getValue(void) const
 {
 	std::string value;
 	iconv_t cd = (iconv_t)-1;
@@ -175,7 +175,7 @@ const std::string StringValue::getValue(void) const
 	return value;
 }
 
-const uint32_t StringValue::getSize(void) const
+uint32_t StringValue::getSize(void) const
 {
 	return size;
 }
@@ -206,6 +206,7 @@ const StringValueList *MultipleStringStructure::getStrings(void) const
 
 VirtualChannel::VirtualChannel(const uint8_t * const buffer, bool terrestrial)
 {
+    (void)terrestrial;
 	int i;
 	iconv_t cd = iconv_open("UTF-8", "UCS-2BE");
 	if (cd != (iconv_t)-1)

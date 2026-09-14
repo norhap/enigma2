@@ -471,7 +471,7 @@ public:
 	virtual std::string getInfoString(int w);
 	virtual ePtr<iServiceInfoContainer> getInfoObject(int w);
 	virtual ePtr<iDVBTransponderData> getTransponderData();
-	virtual void getAITApplications(std::map<int, std::string> &aitlist) {};
+	virtual void getAITApplications(std::map<int, std::string> &aitlist) { (void)aitlist; }
 	virtual PyObject *getHbbTVApplications() { return 0; };
 	virtual void getCaIds(std::vector<int> &caids, std::vector<int> &ecmpids, std::vector<std::string> &ecmdatabytes);
 	virtual long long getFileSize();

@@ -35,7 +35,7 @@ public:
 	StringValue(const uint8_t *const buffer);
 	~StringValue(void);
 
-	const uint32_t getSize(void) const;
+	uint32_t getSize(void) const;
 	const std::string &getIso639LanguageCode(void) const;
 	const std::vector<StringSegment *> &getSegments(void) const;
 	const std::string getValue(void) const;
