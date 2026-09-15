@@ -122,13 +122,10 @@ class VideoSetup(ConfigListScreen, Screen):
 		if level >= 1:
 			self.list.append(getConfigListEntry(_("Audio volume step size"), config.av.volume_stepsize, _("Configure the general audio volume step size (limit 1-10).")))
 			if SystemInfo["CanDownmixAC3"]:
-				self.list.append(getConfigListEntry(_("AC3 downmix"), config.av.downmix_ac3, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
-				if BoxInfo.getItem("VuEAC3Fix"):
-					if not config.av.downmix_ac3.value:
-						self.list.append(getConfigListEntry(_("Passthrough audio handling delay AC3"), config.av.passthrough_fix_short, _("Used to specify delay when switching between services and AC3 passthrough is enabled.")))
-						self.list.append(getConfigListEntry(_("Passthrough audio handling delay AC3+"), config.av.passthrough_fix_long, _("Used to specify delay when switching between services and AC3+/Atmos passthrough is enabled.")))
-					elif config.av.downmix_ac3.value == "passthrough":
-						self.list.append(getConfigListEntry(_("AC3+ Passthrough audio fix"), config.av.passthrough_fix, _("Enabled/Disable audio passthrough fix.")))
+				if SystemInfo["VuEAC3Fix"]:
+					self.list.append(getConfigListEntry(_("AC3 / AC3+ Downmix"), config.av.downmix_ac3, _("Choose whether multi channel AC3 / AC3+ sound tracks should be downmixed to stereo.")))
+				else:
+					self.list.append(getConfigListEntry(_("AC3 Downmix"), config.av.downmix_ac3, _("Choose whether multi channel AC3 sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDownmixDTS"]:
 				self.list.append(getConfigListEntry(_("DTS downmix"), config.av.downmix_dts, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDTSHD"]:
@@ -136,7 +133,10 @@ class VideoSetup(ConfigListScreen, Screen):
 			if SystemInfo["CanWMAPRO"]:
 				self.list.append(getConfigListEntry(_("WMA Pro downmix"), config.av.wmapro, _("Choose whether WMA Pro channel sound tracks should be downmixed or transcoded.")))
 			if SystemInfo["CanDownmixAAC"]:
-				self.list.append(getConfigListEntry(_("AAC downmix"), config.av.downmix_aac, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
+				if SystemInfo["VuEAC3Fix"]:
+					self.list.append(getConfigListEntry(_("AAC / AAC+ Downmix"), config.av.downmix_aac, _("Choose whether multi channel AAC / AAC+ sound tracks should be downmixed to stereo.")))
+				else:
+					self.list.append(getConfigListEntry(_("AAC Downmix"), config.av.downmix_aac, _("Choose whether multi channel AAC sound tracks should be downmixed to stereo.")))
 			if SystemInfo["CanDownmixAACPlus"]:
 				self.list.append(getConfigListEntry(_("AAC+ downmix"), config.av.downmix_aacplus, _("Configure whether multi channel sound tracks should be downmixed to stereo.")))
 			if SystemInfo["HDMIAudioSource"]:

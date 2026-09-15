@@ -1131,22 +1131,19 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
     m_subtitle_sync_timer(eTimer::create(eApp)),
-    m_soft_decoder_video_info_valid(false)
+    m_soft_decoder_video_info_valid(false),
 #ifdef PASSTHROUGH_FIX
-    , m_passthrough_fix_timer(eTimer::create(eApp))
-    , m_encrypted_ddp_audio_reset_done(false)
+	m_encrypted_ddp_audio_reset_done(false),
 #endif
-    , m_nownext_timer(eTimer::create(eApp))
+	m_nownext_timer(eTimer::create(eApp))
 {
-    if (connect_event)
-        CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
-    CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
-    CONNECT(m_event_handler.m_eit_changed, eDVBServicePlay::gotNewEvent);
-    CONNECT(m_subtitle_sync_timer->timeout, eDVBServicePlay::checkSubtitleTiming);
-    CONNECT(m_nownext_timer->timeout, eDVBServicePlay::updateEpgCacheNowNext);
-#ifdef PASSTHROUGH_FIX
-	CONNECT(m_passthrough_fix_timer->timeout, eDVBServicePlay::forcePassthrough);
-#endif
+	eDebug("[servicedvb][eDVBServicePlay] now running: m_is_pvr set to; %d", m_is_pvr);
+	if (connect_event)
+		CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
+	CONNECT(m_service_handler_timeshift.serviceEvent, eDVBServicePlay::serviceEventTimeshift);
+	CONNECT(m_event_handler.m_eit_changed, eDVBServicePlay::gotNewEvent);
+	CONNECT(m_subtitle_sync_timer->timeout, eDVBServicePlay::checkSubtitleTiming);
+	CONNECT(m_nownext_timer->timeout, eDVBServicePlay::updateEpgCacheNowNext);
 }
 
 eDVBServicePlay::~eDVBServicePlay()
@@ -1186,14 +1183,6 @@ eDVBServicePlay::~eDVBServicePlay()
 
 	if (m_subtitle_widget) m_subtitle_widget->destroy();
 }
-
-#ifdef PASSTHROUGH_FIX
-void eDVBServicePlay::forcePassthrough()
-{
-	eTrace("[eDVBServicePlay] Setting 'passthrough' to force correct operation");
-	CFile::writeStr("/proc/stb/audio/ac3", "passthrough");
-}
-#endif
 
 void eDVBServicePlay::gotNewEvent(int error)
 {
@@ -2638,21 +2627,6 @@ int eDVBServicePlay::selectAudioStream(int i)
 		eDebug("[eDVBServicePlay] set audio pid %04x failed", apid);
 		return -4;
 	}
-
-#ifdef PASSTHROUGH_FIX
-	if (apidtype == eDVBPMTParser::audioStream::atAC3 || apidtype == eDVBPMTParser::audioStream::atAAC || apidtype == eDVBPMTParser::audioStream::atDDP) {
-		// Check if the audio type is AC3, AAC, or DDP and ensure passthrough mode is set correctly.
-		std::string pass = CFile::read("/proc/stb/audio/ac3");
-		if(pass.find("passthrough") != std::string::npos)
-		{
-			int audioDelay = apidtype == eDVBPMTParser::audioStream::atDDP
-				? eSimpleConfig::getInt("config.av.passthrough_fix_long", 1200)
-				: eSimpleConfig::getInt("config.av.passthrough_fix_short", 100);
-			m_passthrough_fix_timer->stop();
-			m_passthrough_fix_timer->start(audioDelay, true);
-		}
-	}
-#endif
 
 	if (position != -1)
 	{

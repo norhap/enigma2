@@ -1186,11 +1186,17 @@ msgstr ""
 msgid "A/V Setup"
 msgstr "Ajustes A/V"
 
-msgid "AAC downmix"
+msgid "AAC Downmix"
 msgstr "Mezla AAC"
 
-msgid "AC3 downmix"
+msgid "AAC / AAC+ Downmix"
+msgstr "Mezla AAC-AAC+"
+
+msgid "AC3 Downmix"
 msgstr "Mezcla AC3"
+
+msgid "AC3 / AC3+ Downmix"
+msgstr "Mezcla AC3-AC3+"
 
 msgid "ACQUIRING TSID/ONID"
 msgstr "ADQUIRIENDO TSID/ONID"
@@ -1636,8 +1642,17 @@ msgstr "Niños"
 msgid "Choose \"No\" to delete it"
 msgstr "Seleccione \"No\" para eliminarla"
 
-msgid "Choose whether AC3 sound tracks should be downmixed to stereo."
-msgstr "Elegir si las pistas de sonido AC3 deben mezclarse a estéreo."
+msgid "Choose whether multi channel AAC sound tracks should be downmixed to stereo."
+msgstr "Elija si las pistas de audio AAC multicanal deben mezclarse en estéreo."
+
+msgid "Choose whether multi channel AAC / AAC+ sound tracks should be downmixed to stereo."
+msgstr "Elija si las pistas de audio AAC / AAC+ multicanal deben mezclarse a estéreo."
+
+msgid "Choose whether multi channel AC3 / AC3+ sound tracks should be downmixed to stereo."
+msgstr "Elija si las pistas de sonido multicanal AC3 / AC3+ deben mezclarse a estéreo."
+
+msgid "Choose whether multi channel AC3 sound tracks should be downmixed to stereo."
+msgstr "Elija si las pistas de audio AC3 multicanal deben mezclarse a estéreo."
 
 msgid "Choose which tuner to configure."
 msgstr "Elegir el sintonizador a configurar."
@@ -3320,9 +3335,6 @@ msgstr "Configure este sintonizador usando opciones simples o avanzadas, o bucle
 
 msgid "Configure whether multi channel PCM sound should be enabled."
 msgstr "Configure si el sonido PCM multicanal debe estar habilitado."
-
-msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
-msgstr "Configure si las pistas de sonido multicanal se deben mezclar a estéreo."
 
 msgid "Configure which color format should be used on the SCART output."
 msgstr "Configure qué formato de color se debe usar en la salida SCART."
@@ -7283,12 +7295,6 @@ msgstr "EPG Parcial"
 msgid "Pass %d/%d"
 msgstr "Paso %d/%d"
 
-msgid "Passthrough audio handling delay AC3"
-msgstr "Retardo manejo de audio Passthrough AC3"
-
-msgid "Passthrough audio handling delay AC3+"
-msgstr "Retardo manejo de audio Passthrough AC3+"
-
 msgid "Password changed."
 msgstr "Contraseña Cambiada."
 
@@ -10835,12 +10841,6 @@ msgstr "¿Usar esta configuración de mejora de video??"
 
 msgid "Used service scan type"
 msgstr "Tipo de exploración de canal usado"
-
-msgid "Used to specify delay when switching between services and AC3 passthrough is enabled."
-msgstr "Retraso cuando se cambia canales y está habilitado el paso passthrough AC3."
-
-msgid "Used to specify delay when switching between services and AC3+/Atmos passthrough is enabled."
-msgstr "Retraso cuando se cambia canales y está habilitado el paso passthrough AC3+/Atmos."
 
 msgid "User bouquets"
 msgstr "Bouquets Usuario"
