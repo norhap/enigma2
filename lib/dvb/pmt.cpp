@@ -80,7 +80,7 @@ void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
 		{
 			eDebug("[eDVBServicePMTHandler] ok ... now we start!!");
 			m_have_cached_program = false;
-			m_pat_retry = 0;  // [norhap]   
+			m_pat_retry = 0;  // [norhap]
 
 			if (m_service && !m_service->cacheEmpty())
 			{
@@ -167,7 +167,7 @@ void eDVBServicePMTHandler::PMTready(int error)
 	else
 	{
 		m_pmt_ready = true;
-		m_pat_retry = 0;  // [norhap]   
+		m_pat_retry = 0;  // [norhap]
 		m_have_cached_program = false;
 		serviceEvent(eventNewProgramInfo);
 		switch (m_service_type)
@@ -257,10 +257,10 @@ void eDVBServicePMTHandler::PATready(int)
 		}
 		if (pmtpid == -1) {
 			eDebug("[eDVBServicePMTHandler] no PAT entry found.. start delay");
-			if (m_service_type == streamclient && m_pat_retry < 2)
+			if (m_pat_retry < 2)
 			{
 				m_pat_retry++;
-				eDebug("[eDVBServicePMTHandler] streamclient PAT retry %d/2, waiting 2500ms", m_pat_retry);
+				eDebug("[eDVBServicePMTHandler] PAT retry %d/2, waiting 2500ms", m_pat_retry);
 				m_no_pat_entry_delay->start(2500, true);
 			}
 			else
