@@ -108,6 +108,7 @@ class eDVBServicePMTHandler: public eDVBPMTParser
 	int m_use_decode_demux;
 	uint8_t m_decode_demux_num;
 	ePtr<eTimer> m_no_pat_entry_delay;
+	int m_pat_retry;  // [norhap]
 
 	bool m_pmt_ready;
 	bool m_ca_disabled;
