@@ -2871,13 +2871,13 @@ bool eDVBServiceBase::tryFallbackTuner(eServiceReferenceDVB &service, bool &is_s
 
 	service = eServiceReferenceDVB(remote_service_ref.str());
 
-	// [norhap] If IPToSAT is active, the previous service was likely a
-	// streamclient (exteplayer3/gstplayer). Give the previous HTTP thread
-	// time to fully release the demux before we assign it to the fallback.
+	/* [norhap] If IPToSAT is active, the previous service was likely a
+	   streamclient (exteplayer3/gstplayer). Give the previous HTTP thread
+	   time to fully release the demux before we assign it to the fallback. */
 	if (eSimpleConfig::getBool("config.plugins.IPToSAT.enable", true))
 	{
 		eDebug("[eDVBServiceBase] Fallback: IPToSAT active, waiting for previous streamclient to release demux");
-		struct timeval tv = {0, 200000};  // 200ms
+		struct timeval tv = {0, 1000000};
 		select(0, NULL, NULL, NULL, &tv);   
 	}
 
