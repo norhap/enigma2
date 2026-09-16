@@ -2,7 +2,6 @@ from enigma import eTimer
 from Screens.MessageBox import MessageBox
 import threading
 from Screens.Toast import Toast
-from Screens.Toast import Toast
 
 notifications = []
 notificationAdded = []
