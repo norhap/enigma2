@@ -270,6 +270,7 @@ void eDVBServicePMTHandler::PATready(int)
 			}
 		}
 		else {
+			m_pat_retry = 0;  // [norhap]
 			eDebug("[eDVBServicePMTHandler] use pmtpid %04x for service_id %04x", pmtpid, m_reference.getServiceID().get());
 			m_no_pat_entry_delay->stop();
 			m_PMT.begin(eApp, eDVBPMTSpec(pmtpid, m_reference.getServiceID().get()), m_demux);
