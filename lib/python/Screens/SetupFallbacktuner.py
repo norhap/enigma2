@@ -10,6 +10,7 @@ def getChannelOnFallbackTuner():
 	channelOnFallbackTuner = False
 	try:
 		service = NavigationInstance.instance.getCurrentService()
+		ref = NavigationInstance.instance.getCurrentlyPlayingServiceReference().toString()
 		if service:
 			info = service and service.info()
 			if info:
@@ -17,7 +18,7 @@ def getChannelOnFallbackTuner():
 				if FeInfo:
 					SNR = FeInfo.getFrontendInfo(iFrontendInformation.signalQuality)
 					AGC = FeInfo.getFrontendInfo(iFrontendInformation.signalPower)
-					if not SNR and not AGC and (config.usage.remote_fallback_enabled.value or config.clientmode.enabled.value):
+					if not SNR and not AGC and "http" not in ref and (config.usage.remote_fallback_enabled.value or config.clientmode.enabled.value):
 						channelOnFallbackTuner = True
 	except Exception:
 		return False
