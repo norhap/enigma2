@@ -1382,6 +1382,9 @@ class AttributeParser:
 	def shadowColor(self, value):
 		self.guiObject.setShadowColor(parseColor(value, 0x00000000))
 
+	def hidePointerOnZeroLength(self, value):
+		self.guiObject.setHidePointerOnZeroLength(int(parseBoolean("hidePointerOnZeroLength", value)))
+
 	def shadowOffset(self, value):
 		self.guiObject.setShadowOffset(parsePosition(value, self.scaleTuple))
 
