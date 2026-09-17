@@ -444,6 +444,8 @@ class PliExtraInfo(Poll, Converter):
 					return _("invalid type")
 				except Exception:
 					return "FTA"
+			else:
+				return ""
 
 	text = property(getText)
 
