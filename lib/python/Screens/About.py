@@ -280,15 +280,10 @@ class About(Screen):
 		AboutText += _("Image: ") + about.getImageTypeString()
 		# [WanWizard] Removed until we find a reliable way to determine the installation date
 		# AboutText += _("Installed: ") + about.getFlashDateString() + "\n"
-		EnigmaVersion = about.getEnigmaVersionString()
-		EnigmaVersion = EnigmaVersion.rsplit("-", EnigmaVersion.count("-") - 2)
-		if len(EnigmaVersion) == 3:
-			EnigmaVersion = EnigmaVersion[0] + " (" + EnigmaVersion[2] + "-" + EnigmaVersion[1] + ")"
-		else:
-			EnigmaVersion = EnigmaVersion[1]
-		EnigmaVersion = _("Branch Enigma2: ") + EnigmaVersion
-		self["EnigmaVersion"] = StaticText(EnigmaVersion)
-		AboutText += "\n" + EnigmaVersion + "\n"
+		enigmabranch = about.getEnigmaVersionString()
+		enigmaversion = _("Branch Enigma2: ") + enigmabranch
+		self["EnigmaVersion"] = StaticText(enigmaversion)
+		AboutText += "\n" + enigmaversion + "\n"
 		if "+" in getE2Rev():
 			AboutText += _("Enigma2 revision: ") + getE2Rev().split("+")[1] + "\n"
 		AboutText += _("Build date: ") + about.getBuildDateString() + "\n"

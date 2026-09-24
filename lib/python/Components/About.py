@@ -94,11 +94,7 @@ def getBuildDateString():
 
 
 def getEnigmaVersionString():
-	import enigma
-	enigma_version = enigma.getEnigmaVersionString()
-	if '-(no branch)' in enigma_version:
-		enigma_version = enigma_version[:-12]
-	return enigma_version
+	return BoxInfo.getItem("imagetype")
 
 
 def getGStreamerVersionString():
