@@ -66,7 +66,6 @@ public:
 	void setVideoSize(int top, int left, int width, int height, int flags = 0) const;
 
 	std::string getEDIDPath() const;
-	void setVideoResolutionObserver(void (*observer)(int, int)); // [norhap] servicedvb PASSTHROUGH_FIX
 
 	enum
 	{
@@ -77,12 +76,8 @@ public:
 	PSignal1<void, int> vcr_sb_notifier;
 	int getVCRSlowBlanking();
 
-private:
-#ifndef SWIG
-	void (*m_video_resolution_observer)(int, int); // [norhap] servicedvb PASSTHROUGH_FIX
 	static eAVControl *m_instance;
-#endif
-	std::string m_video_mode;  // [norhap] servicedvb PASSTHROUGH_FIX
+	std::string m_video_mode;
 	std::string m_video_mode_50;
 	std::string m_video_mode_60;
 	std::string m_videomode_choices;

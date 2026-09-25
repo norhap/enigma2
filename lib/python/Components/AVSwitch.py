@@ -74,9 +74,6 @@ def InitAVSwitch():
 		("off", _("Off")),
 		("ac3", _("Dolby Digital"))
 	], default="off")
-	if SystemInfo["VuEAC3Fix"]:
-		config.av.passthrough_fix = ConfigYesNo(default=True)
-
 	if MODEL == "vuduo" or BRAND == "Medi@link":
 		config.av.yuvenabled = ConfigBoolean(default=False)
 	else:

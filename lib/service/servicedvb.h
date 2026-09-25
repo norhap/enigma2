@@ -206,9 +206,6 @@ public:
 	RESULT stream(ePtr<iStreamableService> &ptr);
 	ePtr<iStreamData> getStreamingData();
 	void setQpipMode(bool value, bool audio);
-#ifdef PASSTHROUGH_FIX
-	void observeVideoResolutionState(int xres, int yres);
-#endif
 
 protected:
 	friend class eServiceFactoryDVB;
@@ -275,9 +272,6 @@ protected:
 	void switchToTimeshift();
 
 	void updateDecoder(bool sendSeekableStateChanged=false);
-#ifdef PASSTHROUGH_FIX
-	void forceAudioReset();
-#endif
 
 	int m_skipmode;
 	int m_fastforward;
@@ -333,9 +327,6 @@ protected:
 	ePtr<eTimer> m_subtitle_sync_timer;
 	void checkSubtitleTiming();
 
-#ifdef PASSTHROUGH_FIX
-	bool m_encrypted_ddp_audio_reset_done;
-#endif
 	ePtr<eTimer> m_nownext_timer;
 	void updateEpgCacheNowNext();
 
