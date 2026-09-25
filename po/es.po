@@ -4946,6 +4946,9 @@ msgstr "Flasheo de imagen con éxito"
 msgid "Following tasks will be done after you press OK!"
 msgstr "Las siguientes tareas se realizarán después de presionar OK!"
 
+msgid "For universal LNBs, leave set to 'yes'. Select 'no' only for special setups requiring a fixed 14V supply without the 22kHz tone."
+msgstr "Para LNB universales, mantenga la opción establecida en 'Sí'. Seleccione 'No' únicamente para configuraciones especiales que requieran una alimentación fija de 14 V sin el tono de 22 kHz."
+
 msgid "Force LNB Power"
 msgstr "Forzar alimentación LNB"
 
@@ -6165,9 +6168,6 @@ msgstr "Letón"
 
 msgid "Leave DVD player?"
 msgstr "¿Salir del reproductor de DVD?"
-
-msgid "Leave this set to 'yes' unless you fully understand why you are adjusting it."
-msgstr "Deje este ajuste en ‘sí’ a menos que comprenda completamente por qué lo está cambiando."
 
 msgid "Lebanon"
 msgstr "Líbano"
