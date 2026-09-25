@@ -555,6 +555,7 @@ class IPv6Setup(ConfigListScreen, Screen, HelpableScreen):
 			self.ipv6 = True
 			print("[NetworkSetup] IPv6 is actived")
 		self.IPv6ConfigEntry = NoSave(ConfigYesNo(default=self.ipv6 or False))
+		self.createConfig()
 
 	def createConfig(self):
 		self.commands = []
@@ -639,11 +640,9 @@ class IPv6Setup(ConfigListScreen, Screen, HelpableScreen):
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
-		self.newConfig()
 
 	def keyRight(self):
 		ConfigListScreen.keyRight(self)
-		self.newConfig()
 
 
 class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
