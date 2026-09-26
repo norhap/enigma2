@@ -76,6 +76,7 @@ public:
 	PSignal1<void, int> vcr_sb_notifier;
 	int getVCRSlowBlanking();
 
+private:
 	static eAVControl *m_instance;
 	std::string m_video_mode;
 	std::string m_video_mode_50;

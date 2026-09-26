@@ -295,7 +295,6 @@ std::string eAVControl::getVideoMode(const std::string &defaultVal, int flags) c
 /// @brief Set VideoMode
 /// @param newMode
 /// @param flags bit ( 1 = DEBUG , 2 = SUPPRESS_NOT_EXISTS , 4 = SUPPRESS_READWRITE_ERROR)
-
 void eAVControl::setVideoMode(const std::string &newMode, int flags) const
 {
 #ifdef VIDEO_MODE_50
