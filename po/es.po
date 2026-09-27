@@ -319,6 +319,9 @@ msgstr "%(freespace)s %(percent)s espacio libre en disco"
 msgid "%s - PID 0x%04X - %s"
 msgstr "%s - PID 0x%04X - %s"
 
+msgid "%s: bouquet could not be cleared"
+msgstr "%s: no se pudo eliminar el bouquet"
+
 msgid "%s: bouquet could not be written"
 msgstr "%s: no se pudo escribir el bouquet"
 
@@ -586,6 +589,9 @@ msgstr "Error en la búsqueda DAB+: Se mantuvieron los bouquets existentes."
 
 msgid "DAB+ service information for '%s'"
 msgstr "Información del servicio DAB+ para '%s'"
+
+msgid "DAB+ signal detected; waiting for FIC service data..."
+msgstr "Señal DAB+ detectada; esperando datos de servicio FIC..."
 
 msgid "DAB+ USB: bouquet could not be written"
 msgstr "DAB+ USB: no se pudo escribir el paquete"
@@ -8114,6 +8120,9 @@ msgstr "Eliminar plugins"
 
 msgid "Remove Quad Channel Entry"
 msgstr "Eliminar la entrada del canal quad"
+
+msgid "Remove previously stored services from scanned DAB+ multiplexes. Disable this option to retain services when a multiplex is temporarily unavailable."
+msgstr "Elimina los canales almacenados previamente de los multiplexores DAB+ escaneados. Desactiva esta opción para conservar los canales cuando un multiplexor no esté disponible temporalmente."
 
 msgid "Remove this logfile"
 msgstr "Eliminar este registro"
