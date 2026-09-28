@@ -7,6 +7,8 @@
 #include <sys/types.h>
 #endif
 
+void clearPixmapCache();
+
 #ifndef SWIG
 
 class PixmapCache
