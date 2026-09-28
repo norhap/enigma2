@@ -114,11 +114,23 @@ def getGStreamerVersionString():
 
 def getFFmpegVersionString():
 	try:
-		from glob import glob
-		ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
-		return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
-	except:
-		return _("Not installed") if not isfile("/usr/lib/exteplayer3_deps/librtmp.so.0") else "6.1.1"
+		if isfile("/var/lib/opkg/info/exteplayer3skyjet18.control"):
+			ffmpeg_version = ""
+			exteplayer3_version = ""
+			with open("/var/lib/opkg/info/exteplayer3skyjet18.control", "r") as exteplayer3:
+				for version in exteplayer3.readlines():
+					if "Description" in version and "FFmpeg" in version:
+						ffmpeg_version = version.split("FFmpeg ")[1]
+					if "Version: " in version and "-" in version:
+						exteplayer3_version = version.split("Version: ")[1].split("-")[0]
+			if ffmpeg_version and exteplayer3_version:
+				return _("FFmpeg version: ") + ffmpeg_version + _("ExtEplayer3 Version: ") + exteplayer3_version
+		else:
+			from glob import glob
+			ffmpeg = [x.split("Version: ") for x in open(glob("/var/lib/opkg/info/ffmpeg.control")[0], "r") if x.startswith("Version:")][0]
+			return "%s" % ffmpeg[1].split("-")[0].replace("\n", "")
+	except Exception:
+		return _("Not installed")
 
 
 def getKernelVersionString():

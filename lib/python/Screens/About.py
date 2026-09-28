@@ -292,9 +292,12 @@ class About(Screen):
 		GStreamerVersion = _("GStreamer version: ") + about.getGStreamerVersionString().replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
 		AboutText += GStreamerVersion + "\n"
-		FFmpegVersion = _("FFmpeg version: ") + about.getFFmpegVersionString()
+		FFmpegVersion = about.getFFmpegVersionString()
 		self["FFmpegVersion"] = StaticText(FFmpegVersion)
-		AboutText += FFmpegVersion + "\n"
+		try:
+			AboutText += FFmpegVersion + "\n"
+		except Exception:
+			pass
 		AboutText += _("Python version: ") + about.getPythonVersionString() + "\n"
 		AboutText += _("GCC version: ") + about.getGccVersion() + "\n"
 		AboutText += _("Enigma (re)starts: %d\n") % config.misc.startCounter.value

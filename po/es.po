@@ -2044,6 +2044,9 @@ msgstr "Ingrese la IP a escanear..."
 msgid "Enter user and password for host: "
 msgstr "Ingrese usuario y contraseña para el host: "
 
+msgid "ExtEplayer3 Version: "
+msgstr "Versión ExtEplayer3: "
+
 msgid "External subtitle color"
 msgstr "Color de los subtítulos externos"
 
