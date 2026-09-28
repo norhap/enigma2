@@ -1135,11 +1135,11 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 			<convert type="ConditionalShowHide"/>
 		</widget>
 		<widget name="footnote" conditional="footnote" position="860,633" size="413,86" font="RegularBold;16" foregroundColor="#00e5e619" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1"/>
-		<widget name="introduction" conditional="introduction" position="860,433" size="413,373" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
+		<widget name="introduction" conditional="introduction" position="860,520" size="413,373" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
 		<widget source="description" render="Label" conditional="description" position="860,346" size="413,423" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
 		<widget name="description" conditional="description" position="860,346" size="413,423" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
-		<widget source="introduction" render="Label" conditional="introduction" position="860,433" size="413,373" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
-		<widget source="introduction2" render="Label" conditional="introduction2" position="860,483" size="413,153" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
+		<widget source="introduction" render="Label" conditional="introduction" position="860,520" size="413,373" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
+		<widget source="introduction2" render="Label" conditional="introduction2" position="860,520" size="413,153" font="RegularBold;16" horizontalAlignment="left" backgroundColor="OE_NewBg2" transparent="1" zPosition="2"/>
 	</screen>
 		<!-- TEMPLATE NOT PIP -->
 	<screen name="TemplateNoPip">
