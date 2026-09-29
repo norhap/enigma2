@@ -35,10 +35,10 @@ def mountpoint_choosen(option):
 	icon = "\uF003"
 	toast_type = Toast.TYPE_INFO if access(mountpoint, F_OK | R_OK) else Toast.TYPE_ERROR
 	text_list = _("%s connected successfully.\nPlayable files found.") % description
-	type_messagebox = MessageBox.TYPE_ERROR if access(mountpoint, F_OK | R_OK) else MessageBox.TYPE_INFO
+	type_messagebox = MessageBox.TYPE_INFO if access(mountpoint, F_OK | R_OK) else MessageBox.TYPE_ERROR
 	if not list:
 		if not config.usage.show_fading_message.value:
-			session.open(MessageBox, text % description, type_messagebox, simple=True, timeout=10)
+			session.open(MessageBox, text, type_messagebox, simple=True, timeout=10)
 		else:
 			Toast.instance.showToast(text=text, toasttype=toast_type, timeout=10, customIcon=icon)
 		return
