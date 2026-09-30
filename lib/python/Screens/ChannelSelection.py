@@ -2239,8 +2239,9 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				config.tv.lastservice.value = config.servicelist.startupservice.value
 				config.tv.lastroot.value = config.servicelist.startuproot.value
 			elif config.servicelist.lastmode.value == "radio":
-				config.radio.lastservice.value = config.servicelist.startupservice.value
-				config.radio.lastroot.value = config.servicelist.startuproot.value
+				if self.session.nav.getCurrentlyPlayingServiceOrGroup():  # The radio service is "lastservice" if it has a reference and is not empty.
+					config.radio.lastservice.value = config.servicelist.startupservice.value
+					config.radio.lastroot.value = config.servicelist.startuproot.value
 
 		self.lastservice = config.tv.lastservice
 		self.lastroot = config.tv.lastroot
