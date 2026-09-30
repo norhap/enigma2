@@ -59,15 +59,15 @@
 		<widget source="session.Event_Now" render="Progress" position="20,161" size="440,20" borderWidth="1" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="20,186" size="120,54" font="FdLcD;45" >
+		<widget source="session.Event_Now" render="Label" position="20,186" size="145,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="141,186" size="145,54" font="FdLcD;45" >
+		<widget source="session.Event_Now" render="Label" position="166,186" size="145,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:-%H:%M</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="287,186" size="192,54" font="FdLcD;57" foregroundColor="#FFFF00" >
+		<widget source="session.Event_Now" render="Label" position="320,186" size="192,54" font="FdLcD;47" foregroundColor="#FFFF00" >
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
@@ -143,15 +143,15 @@
 		<widget source="parent.ServiceEvent" render="Progress" position="20,161" size="440,20" borderWidth="1" >
 			<convert type="EventTime">Progress</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="20,186" size="120,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
+		<widget source="parent.ServiceEvent" render="Label" position="20,186" size="145,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="141,186" size="145,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
+		<widget source="parent.ServiceEvent" render="Label" position="166,186" size="145,54" font="FdLcD;45" horizontalAlignment="center" verticalAlignment="center" >
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Format:-%H:%M</convert>
 		</widget>
-		<widget source="parent.ServiceEvent" render="Label" position="287,186" size="192,54" font="FdLcD;57" foregroundColor="#FFFF00" >
+		<widget source="parent.ServiceEvent" render="Label" position="320,186" size="192,54" font="FdLcD;47" foregroundColor="#FFFF00" >
 			<convert type="EventTime">Remaining</convert>
 			<convert type="RemainingToText">NoSeconds</convert>
 		</widget>
@@ -323,7 +323,7 @@
 		<widget source="global.CurrentTime" render="Label" position="0,50" size="479,130" font="FdLcD;110" horizontalAlignment="center" verticalAlignment="center" zPosition="10">
 			<convert type="ClockToText"></convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,190" size="479,85" font="FdLcD;75" horizontalAlignment="center" zPosition="10">
+		<widget source="global.CurrentTime" render="Label" position="0,190" size="479,85" font="FdLcD;65" horizontalAlignment="center" zPosition="10">
 			<convert type="ClockToText">LongDate</convert>
 		</widget>
 		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/record.png" position="245,275" size="30,30" zPosition="3" alphaTest="blend">
