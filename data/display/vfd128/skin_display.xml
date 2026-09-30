@@ -225,10 +225,10 @@
 
 <!-- standby -->
 	<screen name="StandbySummary" position="0,0" size="128,32">
-		<widget source="global.CurrentTime" render="Label" position="0,0" size="128,15" font="FdLcD;15" horizontalAlignment="center" noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="0,0" size="128,15" font="FdLcD;12" horizontalAlignment="center" noWrap="1">
 			<convert type="ClockToText">ShortDate</convert>
 		</widget>
-		<widget source="global.CurrentTime" render="Label" position="0,12" size="120,25" font="FdLcD;25" horizontalAlignment="center" noWrap="1">
+		<widget source="global.CurrentTime" render="Label" position="0,12" size="120,25" font="FdLcD;21" horizontalAlignment="center" noWrap="1">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
 		<widget source="session.RecordState" render="Pixmap" pixmap="/usr/share/enigma2/display/skin_default/rec.png" position="105,22" size="19,10">
