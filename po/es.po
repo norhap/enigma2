@@ -12145,7 +12145,7 @@ msgid "Fallback remote receiver setup"
 msgstr "Configuración del receptor reserva"
 
 msgid "FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'."
-msgstr "FastScan puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de FastScan seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción «Borrar antes del análisis» establecida en 'Sí'."
+msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de FastScan seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción «Borrar antes del análisis» establecida en 'Sí'."
 
 msgid "Filesystem Check"
 msgstr "Chequear sistema de archivos"
