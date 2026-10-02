@@ -79,13 +79,13 @@
 	</screen>
 	-->
 	<screen name="LCDChannelSelectionStartTime">
-		<widget source="parent.ServiceEvent" render="Label" position="340,390" size="175,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="right" verticalAlignment="center">
+		<widget source="parent.ServiceEvent" render="Label" position="360,390" size="160,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="right" verticalAlignment="center">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
 	</screen>
 	<screen name="LCDChannelSelectionEndTime">
-		<widget source="parent.ServiceEvent" render="Label" position="520,390" size="254,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="right" verticalAlignment="center">
+		<widget source="parent.ServiceEvent" render="Label" position="590,390" size="160,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="right" verticalAlignment="center">
 			<convert type="EventTime">EndTime</convert>
 			<convert type="ClockToText">Default</convert>
 		</widget>
@@ -134,9 +134,9 @@
 		</widget>
 	</screen>
 	<screen name="LCDChannelSelectionRemainingTime">
-		<widget source="parent.ServiceEvent" render="Label" position="40,385" size="320,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="left" verticalAlignment="center">
+		<widget source="parent.ServiceEvent" render="Label" position="40,390" size="320,70" font="FdLcD;60" foregroundColor="white" horizontalAlignment="left" verticalAlignment="center">
 			<convert type="EventTime">Remaining</convert>
-			<convert type="RemainingToText">NoSeconds</convert>
+			<convert type="RemainingToText">InMinutes</convert>
 		</widget>
 	</screen>
 	<screen name="LCDChannelSelectionStartEndTime">
