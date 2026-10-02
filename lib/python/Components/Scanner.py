@@ -1,4 +1,3 @@
-from functools import total_ordering
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config
 from Components.PluginComponent import plugins
@@ -108,7 +107,6 @@ class Scanner:
 			self.openfnc(list, *args, **kwargs)
 
 
-@total_ordering
 class ScanPath:
 	def __init__(self, path, with_subdirs=False):
 		self.path = path
