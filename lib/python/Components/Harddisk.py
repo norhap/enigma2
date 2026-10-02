@@ -1,3 +1,4 @@
+from functools import total_ordering
 from fcntl import ioctl
 from os import listdir, major, minor, mkdir, popen, rmdir, sep, stat, statvfs, system, unlink, lstat, walk
 from os.path import abspath, dirname, exists, ismount, join, normpath, realpath, islink, isfile
@@ -61,6 +62,7 @@ def getFolderSize(path):
 		return total_bytes
 
 
+@total_ordering
 class Harddisk:
 	def __init__(self, device, removable=False, model=None):
 		self.device = device

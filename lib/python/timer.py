@@ -1,9 +1,12 @@
 from bisect import insort
 from time import time, localtime, mktime
-from enigma import eTimer, eActionMap
 import datetime
+from functools import total_ordering
+
+from enigma import eTimer, eActionMap
 
 
+@total_ordering
 class TimerEntry:
 	StateWaiting = 0
 	StatePrepared = 1
