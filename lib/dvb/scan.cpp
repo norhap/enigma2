@@ -1792,13 +1792,14 @@ void eDVBScan::insertInto(iDVBChannelList *db, bool backgroundscanresult)
 
 			bouquet->m_bouquet_name = "Last Scanned";
 			bouquet->m_services.clear();
-			for (std::map<eServiceReferenceDVB, ePtr<eDVBService> >::const_iterator
-				service(m_new_services.begin()); service != m_new_services.end(); ++service)
+			/* [norhap] Iterate over m_new_servicerefs (vector, scanner order) first services with Name then services with SID. */
+			for (std::vector<eServiceReferenceDVB>::const_iterator
+				service(m_new_servicerefs.begin()); service != m_new_servicerefs.end(); ++service)
 			{
-				int serviceType = service->first.getServiceType();
+				int serviceType = service->getServiceType();
 				bool radioService = serviceType == eServiceReferenceDVB::dRadio || serviceType == eServiceReferenceDVB::dRadioAvc;
 				if (radioService == radio)
-					bouquet->m_services.push_back(service->first);
+					bouquet->m_services.push_back(*service);
 			}
 			bouquet->flushChanges();
 		}
