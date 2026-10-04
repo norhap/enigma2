@@ -11623,6 +11623,9 @@ msgstr "Conservar marcadores en cortes"
 msgid "Enable cuts (preview)"
 msgstr "Habilitar cortes (vista previa)"
 
+msgid "DAB+ audio decoding"
+msgstr "Decodificación de audio DAB+"
+
 msgid "DAB+ decoder back end not installed"
 msgstr "El sistema decodificador DAB+ no está instalado"
 
@@ -15000,6 +15003,9 @@ msgstr "Mostrar mensaje de advertencia antes de la acción"
 
 msgid "Style services list"
 msgstr "Estilo de la lista canales"
+
+msgid "Use automatic hardware detection, request hardware AAC decoding, or force the software PCM compatibility path."
+msgstr "Utilice la detección automática de hardware, solicite la decodificación AAC por hardware o fuerce la ruta de compatibilidad PCM por software."
 
 msgid "Use automatic mode detection"
 msgstr "Usar detección de modo automático"
