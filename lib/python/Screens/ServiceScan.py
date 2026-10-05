@@ -368,9 +368,7 @@ class ServiceScan(Screen):
 		# 	pass
 		if self.currentInfobar.__class__.__name__ == "InfoBar":
 			self.close(returnValue)
-		if config.misc.firstrun.value:
-			self.close()
-		if exists(str(self.bouquetLastScanned)):
+		if exists(str(self.bouquetLastScanned)) or config.misc.firstrun.value:
 			for ext in ("tv", "radio"):
 				path = f"/etc/enigma2/userbouquet.LastScanned.{ext}"
 				path_favourites = f"/etc/enigma2/userbouquet.favourites.{ext}"
@@ -386,6 +384,8 @@ class ServiceScan(Screen):
 						with open(path_favourites, "w") as fw:
 							fw.write(favourites_content.replace("Favourites", _("Favourites")))
 			eDVBDB.getInstance().reloadBouquets()
+		if config.misc.firstrun.value:
+			self.close()
 
 	def keySave(self):
 		if self.scan.isDone():
