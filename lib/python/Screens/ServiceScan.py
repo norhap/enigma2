@@ -370,13 +370,14 @@ class ServiceScan(Screen):
 			self.close(returnValue)
 		if config.misc.firstrun.value:
 			self.close()
-		self.bouquetLastScanned = "/etc/enigma2/userbouquet.LastScanned.tv"
 		if exists(str(self.bouquetLastScanned)):
-			with open(self.bouquetLastScanned, "r") as fr:
-				bouquetread = fr.readlines()
-				with open(self.bouquetLastScanned, "w") as fw:
-					for line in bouquetread:
-						fw.write(line.replace("Last Scanned", _("Last Scanned")))
+			for ext in ("tv", "radio"):
+				path = f"/etc/enigma2/userbouquet.LastScanned.{ext}"
+				if exists(path):
+					with open(path, "r") as fr:
+						bouquetread = fr.readlines()
+					with open(path, "w") as fw:
+						fw.writelines(line.replace("Last Scanned", _("Last Scanned")) for line in bouquetread)
 			eDVBDB.getInstance().reloadBouquets()
 
 	def keySave(self):
@@ -389,6 +390,7 @@ class ServiceScan(Screen):
 					types = service_types_radio_ref if radio else service_types_tv_ref
 					extension = "radio" if radio else "tv"
 					lastScannedBouquet = serviceRefAppendPath(types, f' FROM BOUQUET "userbouquet.LastScanned.{extension}" ORDER BY bouquet')
+					self.bouquetLastScanned = f"/etc/enigma2/userbouquet.LastScanned.{extension}"
 					if lastScannedBouquet:
 						if radio and not config.usage.e1like_radio_mode.value:
 							# The separate radio screen owns its history; do not overwrite TV state.
