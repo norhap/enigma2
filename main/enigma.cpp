@@ -42,6 +42,8 @@
 #include "bsod.h"
 #include "version_info.h"
 
+#include <gst/gst.h>
+
 #include <Python.h>
 
 #ifdef OBJECT_DEBUG
@@ -272,6 +274,9 @@ int main(int argc, char **argv)
 
 	// Clear LD_PRELOAD so that shells and processes launched by Enigma2 can pass on file handles and pipes
 	unsetenv("LD_PRELOAD");
+
+	// INIT Gstreamer [norhap]
+	gst_init(&argc, &argv);
 
 	// set pythonpath if unset
 	setenv("PYTHONPATH", eEnv::resolve("${libdir}/enigma2/python").c_str(), 0);

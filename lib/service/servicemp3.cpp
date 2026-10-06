@@ -2076,9 +2076,6 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	if (suburi != NULL)
 		eDebug("[eServiceMP3] playbin suburi=%s", suburi);
 
-	if (!gst_is_initialized())  // INIT PLAYBACK [norhap]
-		gst_init(NULL, NULL);
-
 	m_gst_playbin = gst_element_factory_make("playbin", "playbin");
 	if ( m_gst_playbin )
 	{
@@ -2162,7 +2159,6 @@ eServiceMP3::~eServiceMP3()
 		GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(m_gst_playbin));
 		gst_bus_set_sync_handler(bus, NULL, NULL, NULL);
 		gst_object_unref(bus);
-		m_gst_playbin = nullptr;  // ← norhap el hilo pump verá NULL y no tocará el bin
 	}
 	// ...
 	stop();  // stop() norhap hace el unref real
@@ -2185,12 +2181,11 @@ eServiceMP3::~eServiceMP3()
 		gst_object_unref(GST_OBJECT(videoSink));
 		videoSink = NULL;
 	}
-	// [norhap]
 	if (m_gst_playbin)
 	{
-		gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
+		gst_element_set_state(m_gst_playbin, GST_STATE_NULL);  // [norhap]
 		gst_object_unref(GST_OBJECT(m_gst_playbin));
-		m_gst_playbin = nullptr;
+		m_gst_playbin = nullptr;  // [norhap]
 		eDebug("[eServiceMP3] destruct!");
 	}
 	m_new_dvb_subtitle_page_connection = 0;
