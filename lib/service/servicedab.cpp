@@ -2725,6 +2725,8 @@ bool eServiceDAB::startAudioPipeline(bool loasInput, bool pcmInput)
 #ifdef DREAMNEXTGEN
 			sinkSync = true;
 #endif
+			/* [norhap] for affected hardware where the sink does not support clock-based sync in scan/playback mode. */
+			sinkSync = false;
 			g_object_set(audioSink, "e2-sync", sinkSync, nullptr);
 		}
 		if (g_object_class_find_property(G_OBJECT_GET_CLASS(audioSink), "e2-async"))

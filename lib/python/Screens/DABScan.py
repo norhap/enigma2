@@ -576,6 +576,19 @@ class DABScan(ServiceScan):
 		return reference
 
 	def writeBouquet(self, feed, services):
+		# [norhap] FIX: crear el archivo si no existe para que loadBouquet lo abra y cambiar favourites a translate.
+		bouquetPath = resolveFilename(SCOPE_CONFIG, feed["bouquetFile"])
+		if not exists(bouquetPath):
+			with open(bouquetPath, "w") as f:
+				f.write("#NAME %s\n" % feed["bouquetName"])
+		path_favourites = "/etc/enigma2/userbouquet.favourites.radio"
+		if exists(path_favourites):
+			with open(path_favourites, "r") as fr:
+				favourites_content = fr.read()
+			if "Favourites" in favourites_content:
+				with open(path_favourites, "w") as fw:
+					fw.write(favourites_content.replace("Favourites", _("Favourites")))
+		# END [norhap]
 		entries = []
 		for service in services:
 			reference = self.buildReference(feed, service["sid"], service["label"])
@@ -654,8 +667,10 @@ class DABScan(ServiceScan):
 		self.scanFinished = True
 		if self.usbScanChannels and (self.usbServices or self.clearBeforeScan) and not self.writeUSBBouquet():
 			self.failures.append(_("DAB+ USB: bouquet could not be written"))
+		""" [norhap] Empty bouquets are stepped on
 		if self.saveRegisteredParents:
 			eDVBDB.getInstance().saveServicelist()
+		END Empty bouquets are stepped on """
 		eDVBDB.getInstance().reloadBouquets()
 		refreshServiceList()
 		self.restoreService()
