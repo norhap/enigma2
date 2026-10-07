@@ -6934,7 +6934,7 @@ msgid "No suitable sat tuner found!"
 msgstr "No se encuentra un sintonizador sat adecuado!"
 
 msgid "No supported DAB+ feeds are available for the satellite positions configured on this box."
-msgstr "No hay feeds DAB+ compatibles disponibles para las posiciones de los satélites configuradas en este receptor."
+msgstr "No hay feeds DAB+ disponibles para las posiciones de los satélites."
 
 msgid "No timeout"
 msgstr "Sin tiempo de espera"

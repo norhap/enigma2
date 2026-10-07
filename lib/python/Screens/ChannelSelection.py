@@ -1677,6 +1677,15 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 				self.bouquet_root = eServiceReference(singlebouquet_radio_ref)
 		self.service_types = self.service_types_ref.toString()
 		self.bouquet_rootstr = self.bouquet_root.toString()
+		for ext in ("tv", "radio"):
+			path_favourites = f"/etc/enigma2/userbouquet.favourites.{ext}"
+			if exists(path_favourites):
+				with open(path_favourites, "r") as fr:
+					favourites_content = fr.read()
+				if "Favourites" in favourites_content:
+					with open(path_favourites, "w") as fw:
+						fw.write(favourites_content.replace("Favourites", _("Favourites")))
+					eDVBDB.getInstance().reloadBouquets()
 
 	def setTvMode(self):
 		self.mode = MODE_TV
@@ -1735,6 +1744,8 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 		str = self.removeModeStr(ServiceReference(ref).getServiceName())
 		if "Last Scanned" in str:
 			str = str.replace("Last Scanned", _("Last Scanned"))
+		if "Favourites" in str:
+			str = str.replace("Favourites", _("Favourites"))
 		if 'bouquets' in str.lower():
 			return _("User bouquets")
 		if not str:
