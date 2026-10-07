@@ -348,8 +348,13 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.session.nav.playService(self.lastservice)
 
 	def killIPToSATPlayer(self, result=None, retVal=None, extra_args=None):
-		from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
-		killActivePlayer()
+		from process import ProcessList  # noqa: E402
+		exteplayer3 = str(ProcessList().named("exteplayer3")).strip("[]")
+		gstplayer = str(ProcessList().named("gstplayer")).strip("[]")
+		if exteplayer3:
+			Console().ePopen(f'kill -9 {exteplayer3}')
+		elif gstplayer:
+			Console().ePopen(f'kill -9 {gstplayer}')
 
 	def leavePlayerOnExit(self):
 		if self.shown:
