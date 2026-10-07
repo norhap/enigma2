@@ -8,12 +8,10 @@ from enigma import eRCInput, eServiceCenter, eServiceReference, eSize, eTimer, i
 
 from skin import findSkinScreen
 import NavigationInstance
-from ServiceReference import serviceRefIPToSAT
 from RecordTimer import AFTEREVENT, RecordTimerEntry
 from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Button import Button
 from Components.ChoiceList import ChoiceEntryComponent, ChoiceList
-from Components.Console import Console
 from Components.config import ConfigLocations, ConfigSelection, ConfigInteger, ConfigSelectionNumber, ConfigSet, ConfigSubsection, ConfigText, ConfigYesNo, config
 from Components.DiskInfo import DiskInfo
 from Components.Harddisk import harddiskmanager
@@ -306,6 +304,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 	# SUSPEND_PAUSES actually means "please call my pauseService()"
 	ALLOW_SUSPEND = Screen.SUSPEND_PAUSES
 	if exists(config.movielist.last_videodir.value) and not listdir(config.movielist.last_videodir.value):
+		from Components.Console import Console
 		Console().ePopen("mount -a")
 
 	def __init__(self, session, selectedmovie=None, timeshiftEnabled=False):
@@ -479,14 +478,6 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			"seekBack": (sback, tBack),
 			"seekBackManual": (ssback, tBack)
 		}, prio=5)
-		if serviceRefIPToSAT():
-			from process import ProcessList  # noqa: E402
-			exteplayer3 = str(ProcessList().named("exteplayer3")).strip("[]")
-			gstplayer = str(ProcessList().named("gstplayer")).strip("[]")
-			if exteplayer3:
-				Console().ePopen(f'kill -9 {exteplayer3}')
-			elif gstplayer:
-				Console().ePopen(f'kill -9 {gstplayer}')
 		self.onShown.append(self.onFirstTimeShown)
 		self.onLayoutFinish.append(self.saveListsize)
 		self.list.connectSelChanged(self.updateButtons)

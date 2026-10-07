@@ -7,7 +7,6 @@ from pathlib import Path
 from enigma import eServiceReference, eProfileWrite, eServiceCenter, iPlayableService  # noqa: E402
 eProfileWrite("LOAD:enigma")
 import NavigationInstance  # noqa: E402
-from ServiceReference import serviceRefIPToSAT  # noqa: E402
 from Tools.Directories import fileExists, isPluginInstalled  # noqa: E402
 from Tools.Notifications import AddNotification  # noqa: E402
 from Tools.SubtitleRenderer import SubtitleRenderer  # noqa: E402
@@ -34,7 +33,6 @@ eProfileWrite("LOAD:InitBar_Components")
 from Components.ActionMap import HelpableActionMap  # noqa: E402
 from Components.config import config  # noqa: E402
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase  # noqa: E402
-from Components.Console import Console  # noqa: E402
 eProfileWrite("LOAD:HelpableScreen")
 from Screens.HelpMenu import HelpableScreen  # noqa: E402
 
@@ -259,11 +257,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		self.onChangedEntry = []
 		self.servicelist = slist
 		self.infobar = infobar
-		self.console = Console()
 		self.lastservice = lastservice or session.nav.getCurrentlyPlayingServiceOrGroup()
-		self.serviceRefIPToSAT = False
-		if serviceRefIPToSAT():
-			self.serviceRefIPToSAT = True
 		if hasattr(service, "getPath"):
 			path = splitext(service.getPath())[0]
 			subs = []
@@ -337,8 +331,6 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			self.leavePlayerConfirmed([True, how])
 
 	def leavePlayer(self):
-		if config.usage.on_movie_stop.default and self.serviceRefIPToSAT:
-			self.console.ePopen(['sleep 3'], self.killIPToSATPlayer)
 		setResumePoint(self.session)
 		self.selected_subtitle = (0, 0, 0, 0, "")
 		self.subtitle_renderer.stopSubtitles()
@@ -346,15 +338,6 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 		if config.usage.on_movie_stop.value == "quit":
 			self.session.nav.stopService()
 			self.session.nav.playService(self.lastservice)
-
-	def killIPToSATPlayer(self, result=None, retVal=None, extra_args=None):
-		from process import ProcessList  # noqa: E402
-		exteplayer3 = str(ProcessList().named("exteplayer3")).strip("[]")
-		gstplayer = str(ProcessList().named("gstplayer")).strip("[]")
-		if exteplayer3:
-			Console().ePopen(f'kill -9 {exteplayer3}')
-		elif gstplayer:
-			Console().ePopen(f'kill -9 {gstplayer}')
 
 	def leavePlayerOnExit(self):
 		if self.shown:
@@ -489,8 +472,6 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			ref = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			if ref:
 				delResumePoint(ref)
-			if self.serviceRefIPToSAT and config.usage.on_movie_eof.value == "movielist":
-				self.console.ePopen(['sleep 3'], self.killIPToSATPlayer)
 			self.handleLeave(config.usage.on_movie_eof.value)
 
 	def up(self):
