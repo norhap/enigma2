@@ -575,12 +575,8 @@ class DABScan(ServiceScan):
 				reference.setName(name.encode("ascii", errors="replace").decode("ascii") or "DAB service")
 		return reference
 
+	# [norhap] Write full entry - userbouquet Bouquet Name + Service Reference + translate favourites.
 	def writeBouquet(self, feed, services):
-		# [norhap] FIX: crear el archivo si no existe para que loadBouquet lo abra y cambiar favourites a translate.
-		bouquetPath = resolveFilename(SCOPE_CONFIG, feed["bouquetFile"])
-		if not exists(bouquetPath):
-			with open(bouquetPath, "w") as f:
-				f.write("#NAME %s\n" % feed["bouquetName"])
 		path_favourites = "/etc/enigma2/userbouquet.favourites.radio"
 		if exists(path_favourites):
 			with open(path_favourites, "r") as fr:
@@ -588,7 +584,6 @@ class DABScan(ServiceScan):
 			if "Favourites" in favourites_content:
 				with open(path_favourites, "w") as fw:
 					fw.write(favourites_content.replace("Favourites", _("Favourites")))
-		# END [norhap]
 		entries = []
 		for service in services:
 			reference = self.buildReference(feed, service["sid"], service["label"])
@@ -600,7 +595,16 @@ class DABScan(ServiceScan):
 					entries.append((identity, label, referenceText))
 					known.add(identity)
 		references = [referenceText for identity, label, referenceText in entries]
+
+		# Write
+		bouquetPath = resolveFilename(SCOPE_CONFIG, feed["bouquetFile"])
+		with open(bouquetPath, "w") as f:
+			f.write("#NAME %s\n" % feed["bouquetName"])
+			for ref in references:
+				f.write("#SERVICE %s\n" % ref)
+
 		return eDVBDB.getInstance().addOrUpdateBouquet(feed["bouquetName"], feed["bouquetFile"], references, False) == 0
+		# [norhap] THE END Write full entry - userbouquet Bouquet Name + Service Reference + translate favourites.
 
 	def serviceIdentity(self, reference):
 		return tuple(reference.getUnsignedData(index) for index in range(1, 8)) + (reference.getPath(),)
