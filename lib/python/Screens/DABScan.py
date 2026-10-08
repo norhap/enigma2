@@ -596,12 +596,12 @@ class DABScan(ServiceScan):
 					known.add(identity)
 		references = [referenceText for identity, label, referenceText in entries]
 
-		# Write
 		bouquetPath = resolveFilename(SCOPE_CONFIG, feed["bouquetFile"])
-		with open(bouquetPath, "w") as f:
-			f.write("#NAME %s\n" % feed["bouquetName"])
-			for ref in references:
-				f.write("#SERVICE %s\n" % ref)
+		if self.clearBeforeScan or not exists(bouquetPath):  # Always write service and bouquet references if they do not exist.
+			with open(bouquetPath, "w") as f:
+				f.write("#NAME %s\n" % feed["bouquetName"])
+				for ref in references:
+					f.write("#SERVICE %s\n" % ref)
 
 		return eDVBDB.getInstance().addOrUpdateBouquet(feed["bouquetName"], feed["bouquetFile"], references, False) == 0
 		# [norhap] THE END Write full entry - userbouquet Bouquet Name + Service Reference + translate favourites.
