@@ -2463,6 +2463,9 @@ msgstr "Audio PID"
 msgid "Audio auto volume level"
 msgstr "Nivel de volumen de audio automático"
 
+msgid "Audio decoding"
+msgstr "Decodificación de audio"
+
 msgid "PCM multichannel"
 msgstr "Multicanal PCM"
 
@@ -11622,9 +11625,6 @@ msgstr "Conservar marcadores en cortes"
 
 msgid "Enable cuts (preview)"
 msgstr "Habilitar cortes (vista previa)"
-
-msgid "DAB+ audio decoding"
-msgstr "Decodificación de audio DAB+"
 
 msgid "DAB+ decoder back end not installed"
 msgstr "El sistema decodificador DAB+ no está instalado"
