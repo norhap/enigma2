@@ -49,9 +49,13 @@ class Navigation:
 		self.currentlyPlayingServiceOrGroup = None
 		self.currentlyPlayingService = None
 		self.originalPlayingServiceReference = None
+		self.hybridPlaybackService = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
 		self.firstStart = True
+		self.streamRetryTimer = None
+		self.streamRetryService = None
+		self.streamRetryCount = 0		
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.PowerTimer = PowerTimer.PowerTimer()
 		self.__wasTimerWakeup = False
@@ -125,9 +129,14 @@ class Navigation:
 		return self.__isRestartUI
 
 	def dispatchEvent(self, i):
+		if i == iPlayableService.evStreamError:
+			self.scheduleStreamRetry()
+		elif i == iPlayableService.evEOF and self.streamRetryService is not None:
+			return  # Do not let the failed stream's EOF pause the pending retry.		
 		for x in self.event:
 			x(i)
 		if i == iPlayableService.evEnd:
+			self.hybridPlaybackService = None
 			if not self.skipServiceReferenceReset:
 				self.currentlyPlayingServiceReference = None
 				self.currentlyPlayingServiceOrGroup = None
@@ -137,6 +146,62 @@ class Navigation:
 		# print "[Navigation] record_event", rec_service, event
 		for x in self.record_event:
 			x(rec_service, event)
+			
+	def cancelStreamRetry(self, reset=True):
+		if self.streamRetryTimer:
+			self.streamRetryTimer.stop()
+		self.streamRetryService = None
+		if reset:
+			self.streamRetryCount = 0
+			
+	def getStreamRetryService(self):
+		bar = InfoBar.instance
+		ref = self.currentlyPlayingServiceOrGroup
+		streamRef = self.hybridPlaybackService or ref
+		if (not bar or ServiceEventTracker.getActiveInfoBar() is not bar or Screens.Standby.inStandby
+				or self.isCurrentServiceDVBI or self.isCurrentServiceStreamRelay
+				or not ref or ref.flags & eServiceReference.isGroup or streamRef.type != 4097
+				or not streamRef.getPath().lower().startswith(("http://", "https://"))
+				or bar.seekstate != bar.SEEK_STATE_PLAY):
+			return None
+		service = self.getCurrentService()
+		seek = service and service.seek()
+		if not seek:
+			return None
+		length = seek.getLength()
+		if not length[0] and length[1] > 0:
+			return None  # A finite HTTP movie must not restart from the beginning.
+		timeshift = service.timeshift()
+		if timeshift and timeshift.isTimeshiftEnabled():
+			return None
+		return service, self.currentlyPlayingServiceReference, ref			
+			
+	def scheduleStreamRetry(self):
+		if self.streamRetryService is not None:
+			return
+		pending = self.getStreamRetryService()
+		if pending is None:
+			return
+		if self.streamRetryCount >= 3:
+			if self.streamRetryCount == 3:
+				InfoBar.instance.session.showError(_("Unable to reconnect to the stream. Please try the channel again later."))
+				self.streamRetryCount += 1
+			return
+		self.streamRetryService = pending
+		if self.streamRetryTimer is None:
+			self.streamRetryTimer = eTimer()
+			self.streamRetryTimer.callback.append(self.retryStream)
+		# Recreate the service outside its native event callback, as on a zap.
+		self.streamRetryTimer.start(2000 << self.streamRetryCount, True)
+		
+	def retryStream(self):
+		pending = self.streamRetryService
+		self.cancelStreamRetry(reset=False)
+		if pending is None or pending != self.getStreamRetryService():
+			return  # Stopped, zapped, paused, in standby or another player took over.
+		self.streamRetryCount += 1
+		print(f"[Navigation] Reconnecting HTTP stream (attempt {self.streamRetryCount}/3).")
+		self.playService(pending[2], forceRestart=True, streamRetry=True)
 
 	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None):
 		if exists("/proc/stb/lcd/symbol_signal") and hasattr(config.lcd, "mode"):

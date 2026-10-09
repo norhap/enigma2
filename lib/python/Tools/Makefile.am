@@ -20,6 +20,7 @@ install_PYTHON = \
 	Geolocation.py \
 	GetEcmInfo.py \
 	HardwareInfo.py \
+	HybridService.py
 	Import.py \
 	ISO639.py \
 	LoadPixmap.py \

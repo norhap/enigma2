@@ -1,4 +1,5 @@
 from skin import parameters
+from urllib.parse import urlsplit
 
 from Components.config import config
 from Components.Element import cached
@@ -18,6 +19,7 @@ class FrontendInfo(Converter):
 	STRING = 7
 	USE_TUNERS_STRING = 8
 	REC_TUNER = 9
+	SNR_STREAM = 10
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -27,6 +29,8 @@ class FrontendInfo(Converter):
 			self.type = self.SNR
 		elif type == "SNRdB":
 			self.type = self.SNRdB
+		elif type == "SNRStream":
+			self.type = self.SNR_STREAM			
 		elif type == "AGC":
 			self.type = self.AGC
 		elif type == "NUMBER":
@@ -50,6 +54,24 @@ class FrontendInfo(Converter):
 	@cached
 	def getText(self):
 		assert self.type not in (self.LOCK, self.SLOT_NUMBER), "the text output of FrontendInfo cannot be used for lock info"
+		# Opt-in InfoBar display; ordinary SNR widgets (e.g. Satfinder) stay unchanged.
+		prefix = "SNR: " if self.type == self.SNR_STREAM else ""
+		if self.type == self.SNR_STREAM:
+			nav = NavigationInstance.instance
+			ref = nav.getCurrentlyPlayingServiceReference() if nav else None
+			if ref:
+				# DVB-I supplies verified format hints. Other IPTV services can only
+				# be labelled by their URL; never probe a stream from the UI.
+				if getattr(nav, "isCurrentServiceDVBI", False):
+					streamType = {0x100: "DASH", 0x200: "HLS"}.get(ref.getUnsignedData(7) & 0x300, "DVB-I")
+					return f"IP: {streamType}"
+				try:
+					address = urlsplit(ref.getPath())
+				except ValueError:
+					address = None
+				if address and address.scheme.lower() in ("http", "https", "rtsp", "rtsps", "rtmp", "rtmps", "rtp", "udp", "srt", "mms", "mmsh", "mmst"):
+					streamType = "DASH" if address.path.lower().endswith(".mpd") else "HLS" if address.path.lower().endswith(".m3u8") else "Stream"
+					return f"IP: {streamType}"
 		percent = None
 		swapsnr = config.usage.swap_snr_on_osd.value
 		colors = parameters.get("FrontendInfoColors", (0x0000FF00, 0x00FFFF00, 0x007F7F7F))  # tuner active, busy, available colors
@@ -61,9 +83,9 @@ class FrontendInfo(Converter):
 				return _("N/A")
 		elif self.type == self.AGC:
 			percent = self.source.agc
-		elif (self.type == self.SNR and not swapsnr) or (self.type == self.SNRdB and swapsnr):
+		elif (self.type == self.SNR or self.SNR_STREAM and not swapsnr) or (self.type == self.SNRdB and swapsnr):
 			percent = self.source.snr
-		elif self.type == self.SNR or self.type == self.SNRdB:
+		elif self.type == self.SNR or self.type == self.SNRdB or self.type == self.SNR_STREAM:
 			if self.source.snr_db is not None:
 				return _("%3.01f dB") % (self.source.snr_db / 100.0)
 			elif self.source.snr is not None:  # fallback to normal SNR...
