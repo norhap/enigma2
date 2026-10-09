@@ -1017,6 +1017,7 @@ public:
 		 * constructor) has actually been applied and playback is running
 		 * from it, not merely requested. */
 		evResumed,
+		evStreamError, /* recoverable failure of the primary HTTP source, not normal EOF */
 
 		/* eServiceMP3 only: fired once, the first time this playback
 		 * session actually has a frame decoded and ready to be shown/heard

@@ -38,6 +38,7 @@ from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRe
 from Tools.ASCIItranslit import legacyEncode
 from Tools.Directories import fileExists, fileWriteLine, fileReadLines, getRecordingFilename, moveFiles, isPluginInstalled
 from Tools.Notifications import AddNotificationWithCallback, AddPopup, current_notifications, lock, notificationAdded, notifications, RemovePopup, AddNotification
+from Tools.HybridService import HybridService
 from keyids import KEYFLAGS, KEYIDS, KEYIDNAMES
 from enigma import eAVControl, eTimer, eServiceCenter, eDVBServicePMTHandler, iServiceInformation, iPlayableService, eServiceReference, eEPGCache, eActionMap, getDesktop, eDVBDB, eDBoxLCD
 from time import time, localtime, strftime
@@ -3466,6 +3467,7 @@ class InfoBarRedButton:
 		self.onHBBTVActivation = []
 		self.onRedButtonActivation = []
 		self.onReadyForAIT = []
+		self.hybridService = HybridService(self) if isStandardInfoBar(self) else None
 		self.__et = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evHBBTVInfo: self.detectedHbbtvApplication,
 			iPlayableService.evUpdatedInfo: self.updateInfomation

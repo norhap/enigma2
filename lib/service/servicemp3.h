@@ -20,7 +20,10 @@ class eServiceFactoryMP3: public iServiceHandler
 public:
 	eServiceFactoryMP3();
 	virtual ~eServiceFactoryMP3();
-	enum { id = 0x1001 };
+	/* [norhap] */
+	enum { id = eServiceReference::idServiceMP3 };
+	static eServiceFactoryMP3 *getDVBIFactory(const eServiceReference &ref);
+	/* [norhap] */
 
 		// iServiceHandler
 	RESULT play(const eServiceReference &, ePtr<iPlayableService> &ptr);
@@ -29,6 +32,9 @@ public:
 	RESULT info(const eServiceReference &, ePtr<iStaticServiceInformation> &ptr);
 	RESULT offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr);
 private:
+	/* [norhap] */
+	static eServiceFactoryMP3 *instance;
+	/* [norhap] */
 	ePtr<eStaticServiceMP3Info> m_service_info;
 };
 
@@ -336,6 +342,9 @@ private:
 	bool m_clear_buffers;
 	bool m_initial_start;
 	bool m_send_ev_start;
+	/* [norhap] */
+	bool m_is_adaptive_stream;
+	/* [norhap] */
 	/* True once evFirstFrame has been fired for this playback session -
 	 * see its firing sites in gstBusCall() for why this needs its own
 	 * one-shot flag rather than reusing m_initial_start. */

@@ -56,6 +56,9 @@ typedef enum
 	PROGRESSIVE_DOWNLOAD	= 0x00000002
 } eServiceMP3Flags;
 
+// [norhap] Worker-verified DVB-I media hints in data[7]; low buffering bits stay unchanged.
+enum { DVB_I_DASH = 0x100, DVB_I_HLS = 0x200, DVB_I_MEDIA_MASK = 0x300 };
+
 /*
  * GstPlayFlags flags from playbin2. It is the policy of GStreamer to
  * not publicly expose element-specific enums. That's why this
@@ -1305,9 +1308,23 @@ bool seekHDAudioAuxPersistent(GstElement *playbin, gint64 position_ns)
 #undef GSTREAMER_SUBTITLE_SYNC_MODE_BUG
 /**/
 
+/* [norhap] */
+eServiceFactoryMP3 *eServiceFactoryMP3::instance = nullptr;
+
+eServiceFactoryMP3 *eServiceFactoryMP3::getDVBIFactory(const eServiceReference &ref) {
+	const int hint = ref.getData(7) & DVB_I_MEDIA_MASK;
+	const std::string &url = ref.compareSref.empty() ? ref.path : ref.compareSref;
+	// Only worker-marked DVB-I adaptive HTTP streams bypass a third-party 4097 factory.
+	// eAutoInitPtr keeps the native factory alive even after its public registration is replaced.
+	return ref.type == id && (hint == DVB_I_DASH || hint == DVB_I_HLS)
+		&& (url.compare(0, 7, "http://") == 0 || url.compare(0, 8, "https://") == 0) ? instance : nullptr;
+}
+
 eServiceFactoryMP3::eServiceFactoryMP3()
 {
+	instance = this;
 	ePtr<eServiceCenter> sc;
+/* [norhap] */
 
 	eServiceCenter::getPrivInstance(sc);
 	if (sc)
@@ -1369,6 +1386,8 @@ eServiceFactoryMP3::eServiceFactoryMP3()
 
 eServiceFactoryMP3::~eServiceFactoryMP3()
 {
+	if (instance == this)
+		instance = nullptr;
 	ePtr<eServiceCenter> sc;
 
 	eServiceCenter::getPrivInstance(sc);
@@ -1740,6 +1759,9 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_buffer_size = 5 * 1024 * 1024;
 	m_ignore_buffering_messages = 0;
 	m_is_live = false;
+	/* [norhap] */
+	m_is_adaptive_stream = false;
+	/* [norhap] */
 	m_use_prefillbuffer = false;
 	m_paused = false;
 	m_clear_buffers = true;
@@ -1954,9 +1976,18 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		m_sourceinfo.containertype = ctVCD;
 		m_sourceinfo.is_video = TRUE;
 	}
+	/* [norhap] */
 	if (strstr(filename, "://"))
 		m_sourceinfo.is_streaming = TRUE;
-
+	const int mediaHint = m_ref.getData(7) & DVB_I_MEDIA_MASK;
+	const bool isHttp = !strncmp(filename, "http://", 7) || !strncmp(filename, "https://", 8);
+	m_is_adaptive_stream = isHttp && (mediaHint == DVB_I_DASH || mediaHint == DVB_I_HLS);
+	if (m_is_adaptive_stream) {
+		m_sourceinfo.is_hls = mediaHint == DVB_I_HLS;
+		m_sourceinfo.is_audio = m_ref.getData(0) == 2;
+		m_sourceinfo.is_video = !m_sourceinfo.is_audio;
+	}
+	/* [norhap] */
 	/* Optional "&e2startoffset=<pts>", "&e2audiotrack=<index>" and
 	 * "&e2subtitletrack=<index>" parameters, in the same ad-hoc
 	 * "&key=value" style as "&suburi=" below - lets a caller (e.g. a
@@ -5046,6 +5077,30 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 			gst_message_parse_error (msg, &err, &debug);
 			g_free (debug);
 			eWarning("[eServiceMP3] Gstreamer error: %s (%i) from %s", err->message, err->code, sourceName );
+			/* [norhap] */
+			if (m_sourceinfo.is_streaming && !m_is_adaptive_stream
+				&& m_state != stStopped && err->domain == GST_RESOURCE_ERROR
+				&& (err->code == GST_RESOURCE_ERROR_READ || err->code == GST_RESOURCE_ERROR_OPEN_READ
+					|| err->code == GST_RESOURCE_ERROR_SEEK)) {
+				// Notify Navigation before the existing stop/EOF handling. It may
+				// retry live TV, but must leave movie players and normal EOF alone.
+				GstElement* input = NULL;
+				g_object_get(m_gst_playbin, "source", &input, NULL);
+				GstElementFactory* factory = input ? gst_element_get_factory(input) : NULL;
+				const GstStructure* details = NULL;
+				guint status = 0;
+				gst_message_parse_error_details(msg, &details);
+				if (details)
+					gst_structure_get_uint(details, "http-status-code", &status);
+				bool retry = input && source == GST_OBJECT(input) && factory
+					&& !strcmp(gst_plugin_feature_get_name(GST_PLUGIN_FEATURE(factory)), "souphttpsrc")
+					&& (status < 400 || status == 500 || status == 502 || status == 503 || status == 504);
+				if (input)
+					gst_object_unref(input);
+				if (retry)
+					m_event((iPlayableService*)this, evStreamError);
+			}
+			/* [norhap] */
 			if ( err->domain == GST_STREAM_ERROR )
 			{
 				if ( err->code == GST_STREAM_ERROR_CODEC_NOT_FOUND )

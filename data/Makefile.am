@@ -2,6 +2,7 @@ SUBDIRS = countries display fonts extensions keymaps skin_default skin_fallback_
 
 dist_pkgdata_DATA = \
 	dab.xml \
+	hybridservices.xml \
 	black.mvi \
 	encoding.conf \
 	freesat.t1 \
