@@ -50,6 +50,12 @@
  *
  * Progressive download requires buffering enabled, so it's mandatory to use flag 3 not 2
  */
+ 
+typedef enum { BUFFERING_ENABLED = 0x00000001, PROGRESSIVE_DOWNLOAD = 0x00000002 } eServiceMP3Flags;
+
+// Worker-verified DVB-I media hints in data[7]; low buffering bits stay unchanged.
+enum { DVB_I_DASH = 0x100, DVB_I_HLS = 0x200, DVB_I_MEDIA_MASK = 0x300 };
+ 
 typedef enum
 {
 	BUFFERING_ENABLED	= 0x00000001,
@@ -1305,6 +1311,17 @@ bool seekHDAudioAuxPersistent(GstElement *playbin, gint64 position_ns)
 #undef GSTREAMER_SUBTITLE_SYNC_MODE_BUG
 /**/
 
+eServiceFactoryMP3 *eServiceFactoryMP3::instance = nullptr;
+
+eServiceFactoryMP3 *eServiceFactoryMP3::getDVBIFactory(const eServiceReference &ref) {
+	const int hint = ref.getData(7) & DVB_I_MEDIA_MASK;
+	const std::string &url = ref.compareSref.empty() ? ref.path : ref.compareSref;
+	// Only worker-marked DVB-I adaptive HTTP streams bypass a third-party 4097 factory.
+	// eAutoInitPtr keeps the native factory alive even after its public registration is replaced.
+	return ref.type == id && (hint == DVB_I_DASH || hint == DVB_I_HLS)
+		&& (url.compare(0, 7, "http://") == 0 || url.compare(0, 8, "https://") == 0) ? instance : nullptr;
+}
+
 eServiceFactoryMP3::eServiceFactoryMP3()
 {
 	ePtr<eServiceCenter> sc;
@@ -1740,6 +1757,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	m_buffer_size = 5 * 1024 * 1024;
 	m_ignore_buffering_messages = 0;
 	m_is_live = false;
+	m_is_adaptive_stream = false;
 	m_use_prefillbuffer = false;
 	m_paused = false;
 	m_clear_buffers = true;
@@ -1956,11 +1974,11 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	}
 	if (strstr(filename, "://"))
 		m_sourceinfo.is_streaming = TRUE;
-	const int mediaHint = m_ref.getData(7) & 0x300;
-	const bool isHttp = !strncmp(filename, "http://", 7) || !strncmp(filename, "https://", 8);
-	m_is_adaptive_stream = isHttp && (mediaHint == 0x100 || mediaHint ==  0x200);
+	const int mediaHint = m_ref.getData(7) & DVB_I_MEDIA_MASK;
+	m_is_adaptive_stream = (!strncmp(filename, "http://", 7) || !strncmp(filename, "https://", 8))
+		&& (mediaHint == DVB_I_DASH || mediaHint == DVB_I_HLS);
 	if (m_is_adaptive_stream) {
-		m_sourceinfo.is_hls = mediaHint ==  0x200;
+		m_sourceinfo.is_hls = mediaHint == DVB_I_HLS;
 		m_sourceinfo.is_audio = m_ref.getData(0) == 2;
 		m_sourceinfo.is_video = !m_sourceinfo.is_audio;
 	}
