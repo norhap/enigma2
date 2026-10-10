@@ -50,17 +50,15 @@
  *
  * Progressive download requires buffering enabled, so it's mandatory to use flag 3 not 2
  */
- 
-typedef enum { BUFFERING_ENABLED = 0x00000001, PROGRESSIVE_DOWNLOAD = 0x00000002 } eServiceMP3Flags;
 
-// Worker-verified DVB-I media hints in data[7]; low buffering bits stay unchanged.
-enum { DVB_I_DASH = 0x100, DVB_I_HLS = 0x200, DVB_I_MEDIA_MASK = 0x300 };
- 
 typedef enum
 {
 	BUFFERING_ENABLED	= 0x00000001,
 	PROGRESSIVE_DOWNLOAD	= 0x00000002
 } eServiceMP3Flags;
+
+// Worker-verified DVB-I media hints in data[7]; low buffering bits stay unchanged.
+enum { DVB_I_DASH = 0x100, DVB_I_HLS = 0x200, DVB_I_MEDIA_MASK = 0x300 };
 
 /*
  * GstPlayFlags flags from playbin2. It is the policy of GStreamer to
