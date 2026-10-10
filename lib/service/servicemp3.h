@@ -336,6 +336,7 @@ private:
 	bool m_clear_buffers;
 	bool m_initial_start;
 	bool m_send_ev_start;
+	bool m_is_adaptive_stream;
 	/* True once evFirstFrame has been fired for this playback session -
 	 * see its firing sites in gstBusCall() for why this needs its own
 	 * one-shot flag rather than reusing m_initial_start. */
