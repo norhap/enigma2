@@ -1956,11 +1956,11 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 	}
 	if (strstr(filename, "://"))
 		m_sourceinfo.is_streaming = TRUE;
-	const int mediaHint = m_ref.getData(7) & DVB_I_MEDIA_MASK;
+	const int mediaHint = m_ref.getData(7) & 0x300;
 	const bool isHttp = !strncmp(filename, "http://", 7) || !strncmp(filename, "https://", 8);
-	m_is_adaptive_stream = isHttp && (mediaHint == DVB_I_DASH || mediaHint == DVB_I_HLS);
+	m_is_adaptive_stream = isHttp && (mediaHint == 0x100 || mediaHint ==  0x200);
 	if (m_is_adaptive_stream) {
-		m_sourceinfo.is_hls = mediaHint == DVB_I_HLS;
+		m_sourceinfo.is_hls = mediaHint ==  0x200;
 		m_sourceinfo.is_audio = m_ref.getData(0) == 2;
 		m_sourceinfo.is_video = !m_sourceinfo.is_audio;
 	}
