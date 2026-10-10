@@ -690,10 +690,8 @@ class DABScan(ServiceScan):
 		self.scanFinished = True
 		if self.usbScanChannels and (self.usbServices or self.clearBeforeScan) and not self.writeUSBBouquet():
 			self.failures.append(_("DAB+ USB: bouquet could not be written"))
-		""" [norhap] Empty bouquets are stepped on
 		if self.saveRegisteredParents:
 			eDVBDB.getInstance().saveServicelist()
-		END Empty bouquets are stepped on """
 		eDVBDB.getInstance().reloadBouquets()
 		refreshServiceList()
 		self.restoreService()
