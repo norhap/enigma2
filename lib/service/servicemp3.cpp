@@ -1389,6 +1389,7 @@ eServiceFactoryMP3::~eServiceFactoryMP3()
 {
 	if (instance == this)
 		instance = nullptr;
+	ePtr<eServiceCenter> sc;
 
 	eServiceCenter::getPrivInstance(sc);
 	if (sc)
