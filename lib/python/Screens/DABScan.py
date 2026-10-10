@@ -576,7 +576,7 @@ class DABScan(ServiceScan):
 		return reference
 
 	# [norhap] Write full entry - userbouquet Bouquet Name + Service Reference + translate favourites.
-	def writeBouquet(self, feed, services):
+	def writeBouquetNORHAP(self, feed, services):
 		path_favourites = "/etc/enigma2/userbouquet.favourites.radio"
 		if exists(path_favourites):
 			with open(path_favourites, "r") as fr:
@@ -606,10 +606,29 @@ class DABScan(ServiceScan):
 		return eDVBDB.getInstance().addOrUpdateBouquet(feed["bouquetName"], feed["bouquetFile"], references, False) == 0
 		# [norhap] THE END Write full entry - userbouquet Bouquet Name + Service Reference + translate favourites.
 
+	def writeBouquet(self, feed, services):
+		entries = []
+		for service in services:
+			reference = self.buildReference(feed, service["sid"], service["label"])
+			entries.append((self.serviceIdentity(reference), service["label"], reference.toString()))
+		if not self.clearBeforeScan:
+			known = {entry[0] for entry in entries}
+			for identity, label, referenceText in self.readBouquetEntries(feed["bouquetFile"]):
+				if identity not in known:
+					entries.append((identity, label, referenceText))
+					known.add(identity)
+		references = [referenceText for identity, label, referenceText in entries]
+		return eDVBDB.getInstance().addOrUpdateBouquet(feed["bouquetName"], feed["bouquetFile"], references, False) == 0
+
 	def serviceIdentity(self, reference):
 		return tuple(reference.getUnsignedData(index) for index in range(1, 8)) + (reference.getPath(),)
 
 	def readBouquetEntries(self, bouquetFile):
+		# Match eDVBDB::loadBouquet's search paths. Listing a missing bouquet
+		# creates an uninitialised DB entry, preventing addOrUpdateBouquet from
+		# creating its file and adding the link to bouquets.radio.
+		if not any(exists(resolveFilename(SCOPE_CONFIG, prefix + bouquetFile)) for prefix in ("alternatives/", "bouquets/", "")):
+			return []
 		reference = eServiceReference(f'1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "{bouquetFile}" ORDER BY bouquet')
 		serviceList = eServiceCenter.getInstance().list(reference)
 		entries = []
