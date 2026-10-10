@@ -4,6 +4,7 @@ from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
 from Components.config import config, configfile
 from Components.RecordingConfig import recType
+from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.BoundFunction import boundFunction
 from Tools.StbHardware import getFPWasTimerWakeup
 from Tools.Alternatives import ResolveCiAlternative
