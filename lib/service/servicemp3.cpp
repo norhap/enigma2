@@ -1387,7 +1387,8 @@ eServiceFactoryMP3::eServiceFactoryMP3()
 
 eServiceFactoryMP3::~eServiceFactoryMP3()
 {
-	ePtr<eServiceCenter> sc;
+	if (instance == this)
+		instance = nullptr;
 
 	eServiceCenter::getPrivInstance(sc);
 	if (sc)
