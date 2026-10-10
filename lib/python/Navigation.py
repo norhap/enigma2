@@ -55,7 +55,7 @@ class Navigation:
 		self.firstStart = True
 		self.streamRetryTimer = None
 		self.streamRetryService = None
-		self.streamRetryCount = 0		
+		self.streamRetryCount = 0
 		self.RecordTimer = RecordTimer.RecordTimer()
 		self.PowerTimer = PowerTimer.PowerTimer()
 		self.__wasTimerWakeup = False
@@ -132,7 +132,7 @@ class Navigation:
 		if i == iPlayableService.evStreamError:
 			self.scheduleStreamRetry()
 		elif i == iPlayableService.evEOF and self.streamRetryService is not None:
-			return  # Do not let the failed stream's EOF pause the pending retry.		
+			return  # Do not let the failed stream's EOF pause the pending retry.
 		for x in self.event:
 			x(i)
 		if i == iPlayableService.evEnd:
@@ -146,14 +146,14 @@ class Navigation:
 		# print "[Navigation] record_event", rec_service, event
 		for x in self.record_event:
 			x(rec_service, event)
-			
+
 	def cancelStreamRetry(self, reset=True):
 		if self.streamRetryTimer:
 			self.streamRetryTimer.stop()
 		self.streamRetryService = None
 		if reset:
 			self.streamRetryCount = 0
-			
+
 	def getStreamRetryService(self):
 		bar = InfoBar.instance
 		ref = self.currentlyPlayingServiceOrGroup
@@ -174,8 +174,8 @@ class Navigation:
 		timeshift = service.timeshift()
 		if timeshift and timeshift.isTimeshiftEnabled():
 			return None
-		return service, self.currentlyPlayingServiceReference, ref			
-			
+		return service, self.currentlyPlayingServiceReference, ref
+
 	def scheduleStreamRetry(self):
 		if self.streamRetryService is not None:
 			return
@@ -193,7 +193,7 @@ class Navigation:
 			self.streamRetryTimer.callback.append(self.retryStream)
 		# Recreate the service outside its native event callback, as on a zap.
 		self.streamRetryTimer.start(2000 << self.streamRetryCount, True)
-		
+
 	def retryStream(self):
 		pending = self.streamRetryService
 		self.cancelStreamRetry(reset=False)

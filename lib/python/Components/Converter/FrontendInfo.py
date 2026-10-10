@@ -30,7 +30,7 @@ class FrontendInfo(Converter):
 		elif type == "SNRdB":
 			self.type = self.SNRdB
 		elif type == "SNRStream":
-			self.type = self.SNR_STREAM			
+			self.type = self.SNR_STREAM
 		elif type == "AGC":
 			self.type = self.AGC
 		elif type == "NUMBER":
