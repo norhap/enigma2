@@ -1324,6 +1324,7 @@ eServiceFactoryMP3 *eServiceFactoryMP3::getDVBIFactory(const eServiceReference &
 
 eServiceFactoryMP3::eServiceFactoryMP3()
 {
+	instance = this;
 	ePtr<eServiceCenter> sc;
 
 	eServiceCenter::getPrivInstance(sc);
