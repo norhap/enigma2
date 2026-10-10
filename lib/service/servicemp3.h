@@ -30,6 +30,7 @@ public:
 	RESULT info(const eServiceReference &, ePtr<iStaticServiceInformation> &ptr);
 	RESULT offlineOperations(const eServiceReference &, ePtr<iServiceOfflineOperations> &ptr);
 private:
+	static eServiceFactoryMP3 *instance;
 	ePtr<eStaticServiceMP3Info> m_service_info;
 };
 
