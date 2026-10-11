@@ -18808,6 +18808,9 @@ msgstr "Forzar zap al canal de grabación en espera"
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Esto puede resultar útil cuando se utiliza el módulo CI(+). Una vez finalizada la grabación, el canal se detendrá automáticamente."
 
+msgid "This channel requires an HbbTV plugin. Please install a compatible HbbTV plugin."
+msgstr "Este canal requiere un complemento HbbTV. Por favor, instale un complemento HbbTV compatible."
+
 msgid "Common Information Actions"
 msgstr "Acciones Comunes Información"
 
@@ -19404,6 +19407,9 @@ msgstr ""
 
 msgid "Unable to open tuner (%d)"
 msgstr "No se pudo abrir el sintonizador (%d)"
+
+msgid "Unable to start the HbbTV application."
+msgstr "No se puede iniciar la aplicación HbbTV."
 
 msgid "Updating cache"
 msgstr "Actualizando caché"
