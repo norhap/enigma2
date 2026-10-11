@@ -304,9 +304,17 @@ void eFilePushThread::stop()
 		return;
 	m_stop = 1;
 	eDebug("[eFilePushThread] stopping thread");
-	m_run_cond.signal(); /* Break out of pause if needed */
-	sendSignal(SIGUSR1);
-	kill(); /* Kill means join actually */
+	/* A signal arriving between the m_stop check and a blocking
+	 * syscall is lost, so repeat it until the thread has exited. */
+	for (int attempt = 0;; ++attempt)
+	{
+		m_run_cond.signal(); /* Break out of pause if needed */
+		sendSignal(SIGUSR1);
+		if (join(100))
+			break;
+		if (attempt % 50 == 0)
+			eDebug("[eFilePushThread] thread still running, resending signal");
+	}
 }
 
 void eFilePushThread::pause()
@@ -748,13 +756,21 @@ void eFilePushThreadRecorder::start(int fd)
 
 void eFilePushThreadRecorder::stop()
 {
-	/* if we aren't running, don't bother stopping. */
-	if (m_stop == 1)
-		return;
-	m_stop = 1;
-	eDebug("[eFilePushThreadRecorder] stopping thread."); /* just do it ONCE. it won't help to do this more than once. */
-	sendSignal(SIGUSR1);
-	kill();
+    /* if we aren't running, don't bother stopping. */
+    if (m_stop == 1)
+        return;
+    m_stop = 1;
+    eDebug("[eFilePushThreadRecorder] stopping thread.");
+    /* A signal arriving between the m_stop check and a blocking
+     * read() is lost, so repeat it until the thread has exited. */
+    for (int attempt = 0;; ++attempt)
+    {
+        sendSignal(SIGUSR1);
+        if (join(100))
+            break;
+        if (attempt % 50 == 0)
+            eDebug("[eFilePushThreadRecorder] thread still running, resending signal");
+    }
 }
 
 void eFilePushThreadRecorder::sendEvent(int evt)
