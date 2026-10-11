@@ -35,8 +35,10 @@
 #include <gst/gst.h>
 #include <gst/pbutils/missing-plugins.h>
 #include <sys/stat.h>
-#include <cmath>       // for std::abs [norhap]
-#include <inttypes.h>  // for PRId64 [norhap]
+/* [norhap] for std::abs */
+#include <cmath>
+/* [norhap] for PRId64 */
+#include <inttypes.h>
 
 #define HTTP_TIMEOUT 60
 
@@ -58,6 +60,7 @@ typedef enum
 
 // [norhap] Worker-verified DVB-I media hints in data[7]; low buffering bits stay unchanged.
 enum { DVB_I_DASH = 0x100, DVB_I_HLS = 0x200, DVB_I_MEDIA_MASK = 0x300 };
+/* [norhap] */
 
 /*
  * GstPlayFlags flags from playbin2. It is the policy of GStreamer to
@@ -1386,8 +1389,10 @@ eServiceFactoryMP3::eServiceFactoryMP3()
 
 eServiceFactoryMP3::~eServiceFactoryMP3()
 {
+	/* [norhap] */
 	if (instance == this)
 		instance = nullptr;
+	/* [norhap] */
 	ePtr<eServiceCenter> sc;
 
 	eServiceCenter::getPrivInstance(sc);
@@ -1854,9 +1859,11 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		filename_str = m_ref.path;
 		filename = m_ref.path.c_str();
 	}
-
-	if (!m_ref.compareSref.empty()) // [norhap]
+	
+	/* [norhap] */
+	if (!m_ref.compareSref.empty())
 		filename = m_ref.compareSref.c_str();
+	/* [norhap] */	
 
 	std::string realFilename_str;
 	const char *realFilename;
@@ -2192,7 +2199,7 @@ eServiceMP3::~eServiceMP3()
 		gst_object_unref(bus);
 	}
 	// ...
-	stop();  // stop() norhap hace el unref real
+	stop(); 
 
 	if (m_decoder)
 	{
@@ -2214,9 +2221,13 @@ eServiceMP3::~eServiceMP3()
 	}
 	if (m_gst_playbin)
 	{
-		gst_element_set_state(m_gst_playbin, GST_STATE_NULL);  // [norhap]
+		/* [norhap] */
+		gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
+		/* [norhap] */
 		gst_object_unref(GST_OBJECT(m_gst_playbin));
-		m_gst_playbin = nullptr;  // [norhap]
+		/* [norhap] */		
+		m_gst_playbin = nullptr;
+		/* [norhap] */		
 		eDebug("[eServiceMP3] destruct!");
 	}
 	m_new_dvb_subtitle_page_connection = 0;
@@ -2803,8 +2814,9 @@ RESULT eServiceMP3::unpause()
 	if (!m_gst_playbin || m_state != stRunning)
 		return -1;
 
-	/* no need to unpase if we are not paused already */
-	if (std::abs(m_currentTrickRatio - 1.0) < 1e-9 && !m_paused) // [norhap]
+	/* no need to unpase if we are not paused already [norhap] */
+	if (std::abs(m_currentTrickRatio - 1.0) < 1e-9 && !m_paused)
+	/* [norhap] */		
 	{
 		eDebug("[eServiceMP3] trickSeek no need to unpause!");
 		return 0;
@@ -2927,8 +2939,9 @@ RESULT eServiceMP3::trickSeek(gdouble ratio)
 		}
 		return 0;
 	}
-
-	bool unpause = (m_currentTrickRatio == 1.0 && ratio == 1.0); // [norhap]
+	/* [norhap] */
+	bool unpause = (m_currentTrickRatio == 1.0 && ratio == 1.0);
+	/* [norhap] */	
 	if (unpause)
 	{
 		GstElement *source = NULL;
@@ -3012,8 +3025,9 @@ seek_unpause:
 			gst_element_seek(m_gst_playbin, ratio, GST_FORMAT_TIME, (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_SKIP), GST_SEEK_TYPE_SET, 0, GST_SEEK_TYPE_SET, pos);
 		}
 	}
-
-	setHDAudioAuxState(m_gst_playbin, ratio == 1.0 ? GST_STATE_PLAYING : GST_STATE_PAUSED); // [norhap]
+	/* [norhap] */
+	setHDAudioAuxState(m_gst_playbin, ratio == 1.0 ? GST_STATE_PLAYING : GST_STATE_PAUSED);
+	/* [norhap] */	
 	m_prev_decoder_time = -1;
 	m_decoder_time_valid_state = 0;
 	return 0;
@@ -3920,7 +3934,9 @@ std::string eServiceMP3::getInfoString(int w)
 		GstDateTime *date_time;
 		if (gst_tag_list_get_date(m_stream_tags, GST_TAG_DATE, &date))
 		{
-			gchar res[8]; // [norhap]
+			/* [norhap] */			
+			gchar res[8];
+			/* [norhap] */			
 			snprintf(res, sizeof(res), "%06d", g_date_get_year(date));
 			g_date_free(date);
 			return (std::string)res;
@@ -3929,7 +3945,9 @@ std::string eServiceMP3::getInfoString(int w)
 		{
 			if (gst_date_time_has_year(date_time))
 			{
-				gchar res[8]; // [norhap]
+				/* [norhap] */					
+				gchar res[8];
+				/* [norhap] */								
 				snprintf(res, sizeof(res), "%06d", gst_date_time_get_year(date_time));
 				gst_date_time_unref(date_time);
 				return (std::string)res;
@@ -4770,7 +4788,9 @@ subtype_t getSubtitleType(GstPad* pad, gchar *g_codec=NULL)
 
 void eServiceMP3::gstBusCall(GstMessage *msg)
 {
-	if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
+	/* [norhap] */
+	if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin))
+	/* [norhap] */
 		return;
 	if (!msg)
 		return;
@@ -4815,8 +4835,10 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				case GST_STATE_CHANGE_READY_TO_PAUSED:
 				{
 					m_state = stRunning;
-					if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin)) // [norhap]
+					/* [norhap] */
+					if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin))
 						break;
+					/* [norhap] */	
 					if (m_start_events_deferred)
 						eDebug("[eServiceMP3] deferring evGstreamerStart/evStart until pending start offset is applied");
 					else
@@ -6195,9 +6217,9 @@ void eServiceMP3::pullSubtitle(GstBuffer *buffer)
 				// some media muxers do add an extra new line at the end off a muxed/reencoded srt to ssa codec
 				if (!line.empty() && line[line.length()-1] == '\n')
 					line.erase(line.length()-1);
-
-				eTrace("[eServiceMP3] got new text subtitle @ buf_pos = %" PRId64 " ns (in pts=%" PRId64 "), dur=%" PRId64 ": '%s' ", (int64_t)buf_pos, (int64_t)(buf_pos/11111), (int64_t)duration_ns, line.c_str()); // [norhap]
-
+				/* [norhap] */
+				eTrace("[eServiceMP3] got new text subtitle @ buf_pos = %" PRId64 " ns (in pts=%" PRId64 "), dur=%" PRId64 ": '%s' ", (int64_t)buf_pos, (int64_t)(buf_pos/11111), (int64_t)duration_ns, line.c_str());
+				/* [norhap] */
 				uint32_t start_ms = ((buf_pos / 1000000ULL) * convert_fps) + (delay / 90);
 				uint32_t end_ms = start_ms + (duration_ns / 1000000ULL);
 				m_subtitle_pages.insert(subtitle_pages_map_pair_t(end_ms, subtitle_page_t(start_ms, end_ms, line)));
