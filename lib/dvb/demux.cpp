@@ -495,6 +495,13 @@ int eDVBRecordFileThread::getFirstPTS(pts_t &pts)
 }
 
 int eDVBRecordFileThread::AsyncIO::wait(const volatile int* stop_flag, int* short_write_count)
+// Transient resource shortage: drop the chunk instead of aborting the thread.
+static bool isTransientAioError(int err)
+{
+	return err == ENOMEM || err == EAGAIN;
+}
+
+int eDVBRecordFileThread::AsyncIO::wait(int* short_write_count, bool allowCancelled)
 {
 	if (aio.aio_buf == nullptr) // No request outstanding
 		return 0;
@@ -609,6 +616,11 @@ int eDVBRecordFileThread::AsyncIO::poll(int* short_write_count)
 
 	if (r >= 0 && (size_t)r != aio.aio_nbytes)
 	{ // short write
+		if (isTransientAioError(err))
+		{
+			eWarning("[eDVBRecordFileThread] aio failed (error=%d): %s - dropping %zu bytes", err, strerror(err), aio.aio_nbytes);
+			return 0;
+		}
 		if (short_write_count)
 			++(*short_write_count);
 		eDebug("[eDVBRecordFileThread] short write: %d of bytes %zu written -> retry", r, aio.aio_nbytes);
@@ -676,7 +688,11 @@ int eDVBRecordFileThread::asyncWrite(int len)
 	int r = m_current_buffer->start(m_fd_dest, m_current_offset, len, m_buffer);
 	if (r < 0)
 	{
-		eWarning("[eDVBRecordFileThread] aio_write failed: %m");
+		if (isTransientAioError(errno))
+		{
+			eWarning("[eDVBRecordFileThread] aio_write failed: %m - dropping %d bytes", len);
+			return len;
+		}
 		return r;
 	}
 	m_current_offset += len;
