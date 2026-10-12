@@ -2818,6 +2818,7 @@ bool eServiceDAB::startAudioPipeline(bool loasInput, bool pcmInput, bool mp2Inpu
 #endif
 			/* [norhap] for affected hardware where the sink does not support clock-based sync in scan/playback mode. */
 			sinkSync = false;
+			/* [norhap]*/
 			g_object_set(audioSink, "e2-sync", sinkSync, nullptr);
 		}
 		if (g_object_class_find_property(G_OBJECT_GET_CLASS(audioSink), "e2-async"))
