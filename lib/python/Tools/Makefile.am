@@ -12,6 +12,7 @@ install_PYTHON = \
 	CopyFiles.py \
 	Conversions.py \
 	CountryCodes.py \
+	DAB.py \
 	Directories.py \
 	Downloader.py \
 	Event.py \

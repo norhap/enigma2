@@ -1,11 +1,12 @@
-from Components.Converter.Converter import Converter
 from enigma import eAVControl, iServiceInformation, iPlayableService, eServiceReference
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
+from Components.Converter.Converter import Converter
 from Components.config import config
 from Components.Converter.Poll import Poll
 from Components.Converter.VAudioInfo import StdAudioDesc
 from Tools.Transponder import ConvertToHumanReadable
+from Tools.DAB import dabMetadata
 
 WIDESCREEN = [1, 3, 4, 7, 8, 0xB, 0xC, 0xF, 0x10]
 
@@ -52,7 +53,10 @@ class ServiceInfo(Poll, Converter):
 	PROGRESSIVE = 39
 	VIDEO_INFO = 40
 	IS_SOFTCSA = 41
-	IS_DAB = 48
+	IS_DAB = 42
+	IS_DVBI = 43
+	DAB_LANGUAGE = 44
+	DAB_PROTECTION = 45
 
 	def __init__(self, type):
 		Poll.__init__(self)
@@ -65,6 +69,7 @@ class ServiceInfo(Poll, Converter):
 			"IsStereo": (self.AUDIO_STEREO, (iPlayableService.evUpdatedInfo,)),
 			"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
 			"IsDAB": (self.IS_DAB, (iPlayableService.evStart, iPlayableService.evUpdatedInfo)),
+			"IsDVBI": (self.IS_DVBI, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"IsSoftCSA": (self.IS_SOFTCSA, (iPlayableService.evUpdatedInfo,)),
 			"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
 			"IsNotWidescreen": (self.IS_NOT_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
@@ -85,6 +90,8 @@ class ServiceInfo(Poll, Converter):
 			"TransferBPS": (self.TRANSFERBPS, (iPlayableService.evUpdatedInfo,)),
 			"HasHBBTV": (self.HAS_HBBTV, (iPlayableService.evUpdatedInfo, iPlayableService.evHBBTVInfo,)),
 			"AudioTracksAvailable": (self.AUDIOTRACKS_AVAILABLE, (iPlayableService.evUpdatedInfo,)),
+			"DABLanguage": (self.DAB_LANGUAGE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABProtection": (self.DAB_PROTECTION, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"SubtitlesAvailable": (self.SUBTITLES_AVAILABLE, (iPlayableService.evUpdatedInfo,)),
 			"Freq_Info": (self.FREQ_INFO, (iPlayableService.evUpdatedInfo,)),
 			"Editmode": (self.EDITMODE, (iPlayableService.evUpdatedInfo,)),
@@ -178,7 +185,8 @@ class ServiceInfo(Poll, Converter):
 		info = service and service.info()
 		if not info:
 			return False
-
+		if self.type == self.IS_DVBI:
+			result = bool(service and getattr(self.source, "isDVBI", False))
 		video_height = None
 		video_width = None
 		video_aspect = None
@@ -286,7 +294,15 @@ class ServiceInfo(Poll, Converter):
 		info = service and service.info()
 		if not info:
 			return ""
-
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION):
+			if info:
+				serviceRef = info.getInfoString(iServiceInformation.sServiceref)
+				if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
+					if self.type == self.DAB_LANGUAGE:
+						result = dabMetadata.languageName(info.getInfoString(iServiceInformation.sTagLanguageCode))
+					else:
+						result = info.getInfoString(iServiceInformation.sDABProtection)
+			return result
 		if self.type == self.XRES:
 			return self._getVideoWidthStr(info)
 		elif self.type == self.YRES:
