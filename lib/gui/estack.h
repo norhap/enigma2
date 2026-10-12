@@ -51,6 +51,7 @@ private:
 	std::vector<eWidget*> m_stackchilds;
 	int m_spacing;
 	bool m_inLayout = false;
+	ePoint m_lastpos;
 };
 
 #endif
