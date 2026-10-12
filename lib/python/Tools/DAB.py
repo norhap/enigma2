@@ -47,6 +47,7 @@ LANGUAGE_DATA = {
 	"ga": ("Irish", _("Irish"), "Gaeilge", "", "", ("IE",)),
 	"gd": ("Scottish Gaelic", _("Scottish Gaelic"), "Gàidhlig", "", "", ("GB",)),
 	"gl": ("Galician", _("Galician"), "Galego", "ISO-8859-15", "", ("ES",)),
+	"gn": ("Guarani", _("Guarani"), "Avañe'ẽ", "", "", ("PY", "BR", "BO")),
 	"gu": ("Gujarati", _("Gujarati"), "ગુજરાતી", "", "", ("IN",)),
 	"ha": ("Hausa", _("Hausa"), "Hausa", "", "", ("NG", "NE", "SD")),
 	"he": ("Hebrew", _("Hebrew"), "עברית", "ISO-8859-8", "", ("IL",)),
