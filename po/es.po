@@ -485,6 +485,9 @@ msgstr "negro"
 msgid "background image"
 msgstr "imagen de fondo"
 
+msgid "Background sound/clean feed"
+msgstr "Sonido de fondo / señal limpia"
+
 msgid "ballet"
 msgstr "ballet"
 
