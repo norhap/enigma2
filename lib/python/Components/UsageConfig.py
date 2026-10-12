@@ -16,6 +16,7 @@ from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo, SystemInfo, MODEL
 from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, SCOPE_CONFIG, defaultRecordingLocation, fileContains, fileWriteLine, resolveFilename
+from Tools.DAB import LANGUAGE_DATA
 
 MODULE_NAME = __name__.split(".")[-1]
 originalAudioTracks = "orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth"
@@ -1685,117 +1686,82 @@ def InitUsageConfig():
 	config.subtitles.pango_autoturnon.addNotifier(setPangoSubtitleAutoRun)
 
 	# AI start
-	if BoxInfo.getItem("AISubs"):
-		LANGUAGE_AI = {
-			"ar": ("Arabic", _("Arabic")),
-			"bg": ("Български", _("Български")),
-			"nb": ("Norsk Bokmål", _("Norsk Bokmål")),
-			"ca": ("Català", _("Català")),
-			"cs": ("Česky", _("Česky")),
-			"zh": ("Chinese", _("Chinese")),
-			"da": ("Dansk", _("Dansk")),
-			"de": ("Deutsch", _("Deutsch")),
-			"el": ("Ελληνικά", _("Ελληνικά")),
-			"en": ("English", _("English")),
-			"es": ("Español", _("Español")),
-			"et": ("Eesti", _("Eesti")),
-			"fa": ("Persian", _("Persian")),
-			"fi": ("Suomi", _("Suomi")),
-			"fr": ("Français", _("Français")),
-			"fy": ("Frysk", _("Frysk")),
-			"he": ("Hebrew", _("Hebrew")),
-			"hr": ("Hrvatski", _("Hrvatski")),
-			"hu": ("Magyar", _("Magyar")),
-			"id": ("Indonesian", _("Indonesian")),
-			"is": ("Íslenska", _("Íslenska")),
-			"it": ("Italiano", _("Italiano")),
-			"ku": ("Kurdish", _("Kurdish")),
-			"lt": ("Lietuvių", _("Lietuvių")),
-			"lv": ("Latviešu", _("Latviešu")),
-			"nl": ("Nederlands", _("Nederlands")),
-			"no": ("Norsk", _("Norsk")),
-			"pl": ("Polski", _("Polski")),
-			"pt": ("Portuguese", _("Portuguese")),
-			"ro": ("Romanian", _("Romanian")),
-			"ru": ("Русский", _("Русский")),
-			"sk": ("Slovensky", _("Slovensky")),
-			"sl": ("Slovenščina", _("Slovenščina")),
-			"sr": ("Srpski", _("Srpski")),
-			"sv": ("Svenska", _("Svenska")),
-			"th": ("ภาษาไทย", _("ภาษาไทย")),
-			"tr": ("Türkçe", _("Türkçe")),
-			"uk": ("Українська", _("Українська")),
-			"vi": ("Tiếng Việt", _("Tiếng Việt"))
-		}
+	def setAiEnabled(configElement):
+		eSubtitleSettings.setAiEnabled(configElement.value)
 
-		def setAiEnabled(configElement):
-			eSubtitleSettings.setAiEnabled(configElement.value)
+	config.subtitles.ai_enabled = ConfigYesNo(default=False)
+	config.subtitles.ai_enabled.addNotifier(setAiEnabled)
 
-		config.subtitles.ai_enabled = ConfigYesNo(default=False)
-		config.subtitles.ai_enabled.addNotifier(setAiEnabled)
+	def setAiSubscriptionCode(configElement):
+		eSubtitleSettings.setAiSubscriptionCode(str(configElement.value))
 
-		def setAiSubscriptionCode(configElement):
-			eSubtitleSettings.setAiSubscriptionCode(str(configElement.value))
+	config.subtitles.ai_subscription_code = ConfigNumber(default=15)
+	config.subtitles.ai_subscription_code.addNotifier(setAiSubscriptionCode)
 
-		config.subtitles.ai_subscription_code = ConfigNumber(default=15)
-		config.subtitles.ai_subscription_code.addNotifier(setAiSubscriptionCode)
+	def setAiSubtitleColors(configElement):
+		eSubtitleSettings.setAiSubtitleColors(configElement.value)
 
-		def setAiSubtitleColors(configElement):
-			eSubtitleSettings.setAiSubtitleColors(configElement.value)
+	config.subtitles.ai_subtitle_colors = ConfigSelection(default=1, choices=[
+		(1, _("White")),
+		(2, _("Yellow")),
+		(3, _("Red")),
+		(4, _("Green")),
+		(5, _("Blue"))
+	])
+	config.subtitles.ai_subtitle_colors.addNotifier(setAiSubtitleColors)
 
-		config.subtitles.ai_subtitle_colors = ConfigSelection(default=1, choices=[
-			(1, _("White")),
-			(2, _("Yellow")),
-			(3, _("Red")),
-			(4, _("Green")),
-			(5, _("Blue"))
-		])
-		config.subtitles.ai_subtitle_colors.addNotifier(setAiSubtitleColors)
+	def setAiConnectionSpeed(configElement):
+		eSubtitleSettings.setAiConnectionSpeed(configElement.value)
 
-		def setAiConnectionSpeed(configElement):
-			eSubtitleSettings.setAiConnectionSpeed(configElement.value)
+	config.subtitles.ai_connection_speed = ConfigSelection(default=1, choices=[
+		(1, _("Up to 50 Mbps")),
+		(2, _("50-200 Mbps")),
+		(3, _("Above 200 Mbps"))
+	])
+	config.subtitles.ai_connection_speed.addNotifier(setAiConnectionSpeed)
 
-		config.subtitles.ai_connection_speed = ConfigSelection(default=1, choices=[
-			(1, _("Up to 50 Mbps")),
-			(2, _("50-200 Mbps")),
-			(3, _("Above 200 Mbps"))
-		])
-		config.subtitles.ai_connection_speed.addNotifier(setAiConnectionSpeed)
+	langs_ai = ["af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg",
+		"ca", "zh", "co", "hr", "cs", "da", "nl", "en", "eo", "fr", "fi",
+		"fy", "gl", "ka", "de", "el", "ht", "ha", "hu", "is", "ig", "ga",
+		"it", "ja", "jv", "kn", "kk", "km", "rw", "ko", "ku", "ky", "lo",
+		"la", "lv", "lt", "lb", "mk", "mg", "ms", "mt", "mi", "mr", "mn",
+		"no", "ny", "or", "ps", "fa", "pl", "pt", "ro", "ru", "sm", "gd",
+		"sr", "st", "sn", "sk", "sl", "so", "es", "su", "sw", "sv", "tl",
+		"tg", "te", "th", "tr", "tk", "uk", "ur", "ug", "uz", "cy", "xh",
+		"yi", "yo", "zu", "et"
+	]
+	langs_ai = [(x, LANGUAGE_DATA[x][1]) for x in langs_ai]
+	langs_ai.append(("zh-CN", _("Chinese (Simplified)")))
+	langs_ai.append(("ceb", _("Cebuano")))
+	langs_ai.append(("haw", _("Hawaiian")))
+	langs_ai.append(("iw", _("Hebrew")))
+	langs_ai.append(("hmn", _("Hmong")))
+	langs_ai.append(("ar_eg", _("Arabic (Egyptian)")))
+	langs_ai.append(("ar_ma", _("Arabic (Moroccan)")))
+	langs_ai.append(("ar_sy", _("Arabic (Syro-Lebanese)")))
+	langs_ai.append(("ar_iq", _("Arabic (Iraq)")))
+	langs_ai.append(("ar_tn", _("Arabic (Tunisian)")))
+	langs_ai.sort(key=lambda x: x[1])
 
-		langs_ai = ["af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg", "ca", "zh", "co", "hr", "cs", "da", "nl", "en", "eo", "fr", "fi", "fy", "gl", "ka", "de", "el", "ht", "ha", "hu", "is", "ig", "ga", "it", "ja", "jv", "kn", "kk", "km", "rw", "ko", "ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "mg", "ms", "mt", "mi", "mr", "mn", "no", "ny", "or", "ps", "fa", "pl", "pt", "ro", "ru", "sm", "gd", "sr", "st", "sn", "sk", "sl", "so", "es", "su", "sw", "sv", "tl", "tg", "te", "th", "tr", "tk", "uk", "ur", "ug", "uz", "cy", "xh", "yi", "yo", "zu", "et"]
-		langs_ai = [(x, LANGUAGE_AI[x][1]) for x in langs_ai]
-		langs_ai.append(("zh-CN", _("Chinese (Simplified)")))
-		langs_ai.append(("ceb", _("Cebuano")))
-		langs_ai.append(("haw", _("Hawaiian")))
-		langs_ai.append(("iw", _("Hebrew")))
-		langs_ai.append(("hmn", _("Hmong")))
-		langs_ai.append(("ar_eg", _("Arabic (Egyptian)")))
-		langs_ai.append(("ar_ma", _("Arabic (Moroccan)")))
-		langs_ai.append(("ar_sy", _("Arabic (Syro-Lebanese)")))
-		langs_ai.append(("ar_iq", _("Arabic (Iraq)")))
-		langs_ai.append(("ar_tn", _("Arabic (Tunisian)")))
-		langs_ai.sort(key=lambda x: x[1])
+	default = config.osd.language.value
+	default = default.split("_")[0] if "_" in default else default
+	if default == "zh":
+		default = "zh-CN"
+	if default not in [x[0] for x in langs_ai]:
+		default = "es"
 
-		default = config.osd.language.value
-		default = default.split("_")[0] if "_" in default else default
-		if default == "zh":
-			default = "zh-CN"
-		if default not in [x[0] for x in langs_ai]:
-			default = "es"
+	def setAiTranslateTo(configElement):
+		eSubtitleSettings.setAiTranslateTo(configElement.value)
 
-		def setAiTranslateTo(configElement):
-			eSubtitleSettings.setAiTranslateTo(configElement.value)
+	config.subtitles.ai_translate_to = ConfigSelection(default=default, choices=langs_ai)
+	config.subtitles.ai_translate_to.addNotifier(setAiTranslateTo)
 
-		config.subtitles.ai_translate_to = ConfigSelection(default=default, choices=langs_ai)
-		config.subtitles.ai_translate_to.addNotifier(setAiTranslateTo)
+	def setAiMode(configElement):
+		eSubtitleSettings.setAiMode(configElement.value)
 
-		def setAiMode(configElement):
-			eSubtitleSettings.setAiMode(configElement.value)
-
-		config.subtitles.ai_mode = ConfigSelection(default=1, choices=[(x, f"{_("Mode")} {x}") for x in range(1, 4)])
-		config.subtitles.ai_mode.addNotifier(setAiMode)
-
-		# AI end
+	config.subtitles.ai_mode = ConfigSelection(default=1, choices=[(x, f"{_("Mode")} {x}") for x in range(1, 4)])
+	config.subtitles.ai_mode.addNotifier(setAiMode)
+	# AI end
 
 	config.autolanguage = ConfigSubsection()
 	languageChoiceList = [

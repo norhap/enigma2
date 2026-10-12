@@ -296,7 +296,7 @@ class Screen(dict):
 			applyAllAttributes(widget.instance, desktop, widget.skinAttributes, self.scale)
 			addToStack(widget)
 		for widget in sorted(stacked, key=lambda x: getattr(x, "stackOrder", 0)):  # Add in skin order, the stack layout depends on it.
-			self.stacks[widget.stackIndex].instance.addChild(widget.instance)			
+			self.stacks[widget.stackIndex].instance.addChild(widget.instance)
 		for callback in self.onLayoutFinish:
 			if not isinstance(callback, type(self.close)):
 				# The following command triggers an error in Puthon 3 even if a PY2 test is used!!!
