@@ -1682,7 +1682,7 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 			if exists(path_favourites):
 				with open(path_favourites, "r") as fr:
 					favourites_content = fr.read()
-				if "Favourites" in favourites_content:
+				if _("Favourites") not in favourites_content:
 					with open(path_favourites, "w") as fw:
 						fw.write(favourites_content.replace("Favourites", _("Favourites")))
 					eDVBDB.getInstance().reloadBouquets()
@@ -1742,9 +1742,9 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 
 	def getServiceName(self, ref):
 		str = self.removeModeStr(ServiceReference(ref).getServiceName())
-		if "Last Scanned" in str:
+		if _("Last Scanned") not in str:
 			str = str.replace("Last Scanned", _("Last Scanned"))
-		if "Favourites" in str:
+		if _("Favourites") not in str:
 			str = str.replace("Favourites", _("Favourites"))
 		if 'bouquets' in str.lower():
 			return _("User bouquets")
