@@ -14,6 +14,13 @@ except ImportError:
 	no_comments = True
 
 
+def escape_po(s):
+	s = s.replace('\\', '\\\\')
+	s = s.replace('"', '\\"')
+	s = s.replace('\n', '\\n')
+	return s
+
+
 class parseXML(ContentHandler, LexicalHandler):
 	def __init__(self, attrlist):
 		self.isPointsElement, self.isReboundsElement = 0, 0
@@ -28,10 +35,18 @@ class parseXML(ContentHandler, LexicalHandler):
 	def startElement(self, name, attrs):
 		for x in ["text", "title", "value", "caption", "description"]:
 			try:
-				k = str(attrs[x].encode('utf-8'))
-				if k.strip() != "" and not self.ishex.match(k):
-					attrlist.add((k, self.last_comment))
-					self.last_comment = None
+				k = attrs[x]
+				if k.strip() == "" or self.ishex.match(k):
+					continue
+				limpio = k.strip().replace(',', '').replace(' ', '')
+				if limpio.isdigit():
+					continue
+				if re.match(r'^[\d,.\s]+$', k.strip()):
+					continue
+				if k.strip() in ('e', 'w', 'c', 'center', 'left', 'right', 'top', 'bottom', '0', '1'):
+					continue
+				self.attrlist.add((k, self.last_comment))
+				self.last_comment = None
 			except KeyError:
 				pass
 
@@ -49,17 +64,23 @@ for arg in sys.argv[1:]:
 	if isdir(arg):
 		for file in listdir(arg):
 			if file.endswith(".xml"):
-				parser.parse(join(arg, file))
+				try:
+					parser.parse(join(arg, file))
+				except Exception:
+					pass
 	else:
-		parser.parse(arg)
-	attributes = list(attributes)  # noqa: F821
-	attributes.sort(key=lambda x: x[0])
-	for (key, value) in attributes:
-		print(f"\n#: {arg}")
-		key.replace("\\n", "\"\n\"")
-		if value:
-			for line in value.split("\n"):
-				print(f"#. {line}")
-		print(f"msgid \"{key}\"")
-		print("msgstr \"\"")
-	attributes = set()
+		try:
+			parser.parse(arg)
+		except Exception:
+			pass
+
+attrlist = list(attrlist)
+attrlist.sort(key=lambda x: x[0])
+for (key, value) in attrlist:
+	key_esc = escape_po(key)
+	if value:
+		for line in value.split("\n"):
+			print(f"#. {line.strip()}")
+	print(f'msgid "{key_esc}"')
+	print('msgstr ""')
+	print()
