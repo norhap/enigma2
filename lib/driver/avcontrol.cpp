@@ -671,13 +671,9 @@ void eAVControl::setVideoSize(int top, int left, int width, int height, int flag
 		eDebug("[%s] %s: T:%d L:%d W:%d H:%d", __MODULE__, "setVideoSize", top, left, width, height);
 }
 
-void eAVControl::setOSDAlpha(int alpha, int flags) const
+int eAVControl::setOSDAlpha(int alpha, int flags) const
 {
-#ifdef DREAMNEXTGEN
-	CFile::writeIntHex(proc_osd_alpha, alpha, __MODULE__, flags);
-#else
-	CFile::writeInt(proc_osd_alpha, alpha, __MODULE__, flags);
-#endif
+	return CFile::writeInt(proc_osd_alpha, alpha, __MODULE__, flags);
 }
 
 /// @brief getEDIDPath

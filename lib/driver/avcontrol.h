@@ -37,6 +37,7 @@ public:
 	bool getProgressive(int flags = 0) const;
 	int getResolutionX(int defaultVal = 0, int flags = 0) const;
 	int getResolutionY(int defaultVal = 0, int flags = 0) const;
+	int setOSDAlpha(int alpha, int flags = 0) const;
 	std::string getVideoMode(const std::string &defaultVal = "", int flags = 0) const;
 	std::string getPreferredModes(int flags = 0) const;
 	std::string getAvailableModes() const;
@@ -50,7 +51,6 @@ public:
 	void setInput(const std::string &newMode, int flags = 0);
 	void startStopHDMIIn(bool on, bool audio, int flags = 0);
 	void disableHDMIIn(int flags = 0) const;
-	void setOSDAlpha(int alpha, int flags = 0) const;
 
 	bool hasProcHDMIRXMonitor() const { return m_b_has_proc_hdmi_rx_monitor; }
 	bool hasProcVideoMode50() const { return m_b_has_proc_videomode_50; }
