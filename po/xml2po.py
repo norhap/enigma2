@@ -64,10 +64,7 @@ for arg in sys.argv[1:]:
 	if isdir(arg):
 		for file in listdir(arg):
 			if file.endswith(".xml"):
-				try:
-					parser.parse(join(arg, file))
-				except Exception:
-					pass
+				parser.parse(join(arg, file))
 	else:
 		try:
 			parser.parse(arg)
