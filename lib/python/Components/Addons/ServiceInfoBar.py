@@ -60,6 +60,7 @@ class ServiceInfoBar(GUIAddon):
 		self.frontendInfoSource = None
 		self.isCryptedDetected = False
 		self.tunerColors = parameters.get("FrontendInfoColors", (0x0000FF00, 0x00FFFF00, 0x007F7F7F))  # tuner active, busy, available colors
+		self.serviceEnded = False
 
 	def onContainerShown(self):
 		self.textRenderer.GUIcreate(self.relatedScreen.instance)
@@ -70,13 +71,14 @@ class ServiceInfoBar(GUIAddon):
 			self.__event_tracker = ServiceEventTracker(screen=self.relatedScreen,
 				eventmap={
 					iPlayableService.evStart: self.scheduleAddonUpdate,
-					iPlayableService.evEnd: self.scheduleAddonUpdate,
+					iPlayableService.evEnd: self.onServiceEnd,
 					iPlayableService.evUpdatedInfo: self.scheduleAddonUpdate,
 					iPlayableService.evVideoSizeChanged: self.updateAddon,
 					iPlayableService.evHBBTVInfo: self.scheduleAddonUpdate,
 					iPlayableService.evNewProgramInfo: self.scheduleAddonUpdate,
 					iPlayableService.evCuesheetChanged: self.scheduleAddonUpdate,
 					iPlayableService.evTunedIn: self.scheduleAddonUpdate,
+					iPlayableService.evVideoGammaChanged: self.onGammaChanged,
 				}
 			)
 		self.currentServiceSource = self.source.screen["CurrentService"]
@@ -108,6 +110,14 @@ class ServiceInfoBar(GUIAddon):
 			self.records_running = len(recs)
 			if self.records_running != prevRecords:
 				self.updateAddon()
+
+	def onGammaChanged(self):
+		self.serviceEnded = False  # the new service has reported its own gamma
+		self.scheduleAddonUpdate()
+
+	def onServiceEnd(self):
+		self.serviceEnded = True  # keep gamma hidden until the new service reports its own
+		self.updateAddon()
 
 	def scheduleAddonUpdate(self):
 		if hasattr(self, "refreshAddon"):
@@ -235,7 +245,7 @@ class ServiceInfoBar(GUIAddon):
 				self.gotRecordEvent(None, None)
 				if self.records_running > 0:
 					return key
-			elif key == "gamma" and not isRef:
+			elif key == "gamma" and not isRef and not self.serviceEnded:
 				if info.getInfo(iServiceInformation.sGamma) == 1:
 					return "IS_HDR"
 				if info.getInfo(iServiceInformation.sGamma) == 2:
