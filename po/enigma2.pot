@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-14 23:35+0200\n"
+"POT-Creation-Date: 2026-10-15 19:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3962,6 +3962,13 @@ msgctxt "Text list separator"
 msgid ", "
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/ImportChannels.py:102
+msgid ""
+"1. Tune to an imported channel with at least EPG EIT.\n"
+"2. Restart enigma2.\n"
+"3. Now try to download EPG cache from the reserve receiver."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/NimManager.py:1392
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/NimManager.py:1397
 msgid "1.0"
@@ -4020,6 +4027,15 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/International.py:67
 msgid "Abkhazian"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/ImportChannels.py:218
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/ImportChannels.py:263
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/ImportChannels.py:303
+msgid ""
+"Access not available:\n"
+"Check HTTP authentication not is active on the receiver fallback.\n"
+"If the problem persists try with \"Fallback remote receiver IP\"."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/EpgLoadSave.py:51
@@ -4986,6 +5002,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/HdmiCec-pli.py:73
 msgid "Image View On"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/ImportChannels.py:139
+msgid ""
+"Incorrect password: Change the password in the OpenWebIF setting in the reserve tuner settings.\n"
+"You must enter the password of the reserve receiver."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/International.py:371
@@ -8709,6 +8731,20 @@ msgstr ""
 msgid "Error code"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Navigation.py:398
+#, python-format
+msgid ""
+"Error getting link via %s\n"
+"%s"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/Task.py:386
+#, python-format
+msgid ""
+"Error: %s\n"
+"Retry?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/UsageConfig.py:1492
 msgid "Everywhere"
 msgstr ""
@@ -8864,6 +8900,12 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/UsageConfig.py:711
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/UsageConfig.py:719
 msgid "Hours Mins Secs"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/CutListEditor/ui.py:575
+msgid ""
+"How would you like to modify the movie?\n"
+"Warning: This operation cannot be undone!"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/DVDBurn/Process.py:327
@@ -9512,8 +9554,24 @@ msgstr ""
 msgid "Very slow"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/CutListEditor/ui.py:255
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/CutListEditor/ui.py:469
+msgid ""
+"WARNING: This movie is an IPTV stream.\n"
+"It cannot be cut with this type of stream."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/Task.py:43
 msgid "Waiting"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/CutListEditor/ui.py:291
+msgid ""
+"Welcome to the cutlist editor.\n"
+"\n"
+"Seek to the start of the stuff you want to cut away, press RED.\n"
+"\n"
+"Then seek to the end, press GREEN. That's it."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Components/UsageConfig.py:297
@@ -9804,6 +9862,14 @@ msgstr ""
 msgid "%d-%m"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/MediaScanner/plugin.py:34
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/MediaScanner/plugin.py:37
+#, python-format
+msgid ""
+"%s connected successfully.\n"
+"Playable files found."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/AnimationSetup/plugin.py:172
 msgid "* current animation"
 msgstr ""
@@ -9847,6 +9913,23 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:938
 msgid "Add autotimer"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1053
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1143
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1158
+msgid ""
+"Add autotimer\n"
+"Now (Press long)"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:901
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1056
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1150
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1201
+msgid ""
+"Add autotimer\n"
+"Prime time (Press long)"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/CommonInterfaceAssignment/plugin.py:608
@@ -9934,8 +10017,31 @@ msgstr ""
 msgid "Attention, this is repeated timer!\n"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1344
+msgid ""
+"Attention, this is repeated timer!\n"
+"What do you want to do?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/PicturePlayer/ui.py:186
 msgid "Auto EXIF Orientation rotation/flipping"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1053
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1143
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1158
+msgid ""
+"AutoTimer is not installed\n"
+"Now (Press long)"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:901
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1056
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1150
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1201
+msgid ""
+"AutoTimer is not installed\n"
+"Prime time (Press long)"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/HdmiCEC/plugin.py:46
@@ -10046,6 +10152,12 @@ msgstr ""
 msgid "Current CEC address"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/FSBLUpdater/plugin.py:27
+msgid ""
+"DO NOT POWER OFF YOUR DEVICE WHILE UPDATING!\n"
+"Update now?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/HdmiCEC/plugin.py:64
 msgid "Debug to file"
 msgstr ""
@@ -10149,8 +10261,30 @@ msgstr ""
 msgid "Don't stop current event but disable coming events"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/FSBLUpdater/FSBLUpdater.py:77
+msgid ""
+"Don't worry your device is still ok! There are several safety mechanisms in place!\n"
+"Your device is still as fine as it was before this procedure!"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/FastScan/plugin.py:206
 msgid "Drop unconfigured satellites"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/QuadPip/qpip.py:287
+msgid ""
+"EPG key : Switch to channel list\n"
+"Ok key : Remove selected channel\n"
+"PVR key : Input channel name\n"
+"Exit key : Finish channel edit"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/QuadPip/qpip.py:285
+msgid ""
+"EPG key : Switch to quad PiP entry\n"
+"Ok key : Add to new entry\n"
+"PVR key : Input channel name\n"
+"Exit key : Finish channel edit"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/QuadPip/qpip.py:457
@@ -10553,6 +10687,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/DiseqcTester/plugin.py:170
 msgid "Not tested:"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/DefaultServicesScanner/plugin.py:85
+msgid ""
+"Nothing to scan!\n"
+"Please setup your tuner settings before you start a service scan."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSD3DSetup/plugin.py:21
@@ -11182,6 +11322,19 @@ msgstr ""
 msgid "The AutoTimer plugin is installed."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1122
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1124
+msgid ""
+"The AutoTimer plugin is not installed!\n"
+"Do you want to install it?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/FastChannelChange/plugin.py:469
+msgid ""
+"The channels cache is disabled. To use FCC, you must enable it.\n"
+"Do you want to restart Enigma2 and apply the necessary changes?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/HdmiCEC/plugin.py:61
 msgid "The command to wake from standby will be sent multiple times."
 msgstr ""
@@ -11216,6 +11369,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/FSBLUpdater/FSBLUpdater.py:80
 msgid "Update finished!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/FSBLUpdater/FSBLUpdater.py:81
+msgid ""
+"Update succeeded!\n"
+"Your Bootloader is now up-to-date!"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/MediaPlayer/settings.py:29
@@ -11314,8 +11473,29 @@ msgstr ""
 msgid "With errors:"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:980
+msgid ""
+"You are ready to add this event to automatic timer.\n"
+"If there are no conflicts, once added you must enter menu:\n"
+"\n"
+"Timers > AutoTimers and search the event with green button."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/MediaPlayer/plugin.py:829
 msgid "You cannot delete this!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/NetworkWizard/NetworkWizard.py:245
+msgid ""
+"Your internet connection is working.\n"
+"\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/NetworkWizard/NetworkWizard.py:396
+msgid ""
+"Your internet connection is working.\n"
+"\n"
+"IP address:"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/Extensions/GraphMultiEPG/GraphMultiEpg.py:1541
@@ -11551,6 +11731,39 @@ msgstr ""
 msgid "yellow"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:696
+#, python-format
+msgid ""
+"\n"
+" %s "
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:553
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:1156
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:1510
+msgid ""
+"\n"
+"After pressing OK, please wait!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Console.py:220
+msgid ""
+"\n"
+"Press OK EXIT or RED button to abort!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:116
+msgid ""
+"\n"
+"Press OK to continue."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Satfinder/plugin.py:156
+msgid ""
+"\n"
+"Recording in progress."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ChannelSelection.py:2433
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ChannelSelection.py:2749
 msgid " (PiP)"
@@ -11732,12 +11945,61 @@ msgstr ""
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:502
+#, python-format
+msgid ""
+"A finished powertimer wants to reboot your %s %s.\n"
+"Do that now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:512
+msgid ""
+"A finished powertimer wants to restart the user interface.\n"
+"Do that now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:519
+#, python-format
+msgid ""
+"A finished powertimer wants to set your %s %s to standby.\n"
+"Do that now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:427
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:434
+msgid ""
+"A finished powertimer wants to set your receiver to standby.\n"
+"Do that now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:474
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:492
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/PowerTimer.py:528
+#, python-format
+msgid ""
+"A finished powertimer wants to shutdown your %s %s.\n"
+"Do that now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:1508
+#, python-format
+msgid ""
+"A recording has started:\n"
+"%s"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:225
 msgid "A search for available updates is currently in progress."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:1063
 msgid "A small overview of the available icon states and actions."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:1154
+msgid ""
+"A timer failed to record!\n"
+"Disable TV and try again?\n"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Videomode/plugin.py:137
@@ -11968,6 +12230,27 @@ msgstr ""
 msgid "Are you sure to remove this entry?"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py:259
+msgid ""
+"Are you sure you want to delete\n"
+"the following backup:\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py:244
+#, python-format
+msgid ""
+"Are you sure you want to restore\n"
+"the following backup:\n"
+"%s\n"
+"Your receiver will restart after the backup has been restored!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:258
+msgid ""
+"Are you sure you want to restore the backup?\n"
+"Your receiver will restart after the backup has been restored!"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Videomode/plugin.py:21
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Videomode/plugin.py:286
 msgid "Audio & Video Settings"
@@ -12021,6 +12304,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Ci.py:665
 msgid "Auto-reset after boot"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Satfinder/plugin.py:105
+msgid ""
+"AutoBoquetsMaker was installed successfully.\n"
+"It is necessary to restart enigma2 to apply the changes.\n"
+"Do you want to do it now?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/AudioSelection.py:104
@@ -12176,6 +12466,15 @@ msgstr ""
 msgid "CCcam Info"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:553
+#, python-format
+msgid ""
+"CCcam Info %s\n"
+"by AliAbdul %s\n"
+"\n"
+"This screen shows you the status of CCcam."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:1656
 msgid "CCcam Info Config"
 msgstr ""
@@ -12298,6 +12597,25 @@ msgstr ""
 msgid "Calibrate"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/VideoTune/VideoFinetune.py:468
+msgid ""
+"Can be used to test defect pixels on TV screen.\n"
+"\n"
+"Available color test screens:\n"
+"\n"
+"red\n"
+"green\n"
+"blue\n"
+"white\n"
+"black\n"
+"cyan\n"
+"magenta\n"
+"yellow\n"
+"\n"
+"Screens change with left/right buttons or use red, green, blue to toggle.\n"
+"Yellow for returning back to this intro"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:352
 msgid "Can't write to"
 msgstr ""
@@ -12351,6 +12669,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/PositionerSetup/ui.py:838
 msgid "Checking ONID/TSID"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/AutoDiseqc.py:464
+#, python-format
+msgid ""
+"Checking tuner %s\n"
+"DiSEqC port %s for %s"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:276
@@ -12429,6 +12754,16 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ClientMode.py:20
 msgid "Client Mode Tuner Settings"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ClientMode.py:49
+msgid ""
+"Client mode sets up this receiver to stream from another receiver. In this mode no local tuners will be available and channel lists, EPG, etc, will come from the remote receiver. All tuner settings will be cleared.\n"
+"\n"
+"Paths to search EPG and/or Channels on server:\n"
+"Internal Flash or /media/hdd/.\n"
+"\n"
+"Server must have authentication disabled for streams http in MENU \"customize\". Set password if it is set on server."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:180
@@ -12586,6 +12921,12 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:698
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:1199
 msgid "Connected: "
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ClientMode.py:152
+msgid ""
+"Connection using supplied FTP parameters failed.\n"
+"Check parameters of server."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Console.py:23
@@ -12967,6 +13308,12 @@ msgstr ""
 msgid "Do you want to remove the package:\n"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CronTimer.py:234
+msgid ""
+"Do you want to remove this command or script?\n"
+"\n"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSDPositionSetup/overscanwizard.py:120
 msgid "Do you want to select a different skin?"
 msgstr ""
@@ -13288,6 +13635,15 @@ msgstr ""
 msgid "Friday"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ChannelSelection.py:1141
+msgid ""
+"From \"Last Scanned\" a new bouquet was created with this name:\n"
+"\n"
+"\"Bouquet created to rename\"\n"
+"\n"
+"Change the name again with your chosen one."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Dish.py:43
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Dish.py:276
 msgid "From:"
@@ -13308,6 +13664,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:292
 msgid "GStreamer version: "
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ClientMode.py:80
+msgid ""
+"GUI needs a restart to switch modes\n"
+"Do you want to restart the GUI now?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Videomode/plugin.py:149
@@ -13495,6 +13857,13 @@ msgstr ""
 msgid "INFO"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ClientMode.py:135
+#, python-format
+msgid ""
+"IP %s is not valid.\n"
+"Disable client mode if you are going to use this address."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:797
 msgid "IP WLAN:"
 msgstr ""
@@ -13529,8 +13898,22 @@ msgstr ""
 msgid "Idle Time: "
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:1181
+msgid ""
+"If the recording has not finished:\n"
+"If you switch to another channel in your subscription, the recording will stop."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:1507
 msgid "If you switch to another channel in your subscription, the recording will stop."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/VideoTune/VideoFinetune.py:218
+msgid ""
+"If your TV has a brightness or contrast enhancement, disable it. If there is something called \"dynamic\", set it to standard. Adjust the backlight level to a value suiting your taste. Turn down contrast on your TV as much as possible.\n"
+"Then turn the brightness setting as low as possible, but make sure that the two lowermost shades of gray stay distinguishable.\n"
+"Do not care about the bright shades now. They will be set up in the next step.\n"
+"If you are happy with the result, press OK."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:280
@@ -13619,6 +14002,14 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:360
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/RecordTimer.py:366
 msgid "It is not possible to record with"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSDPositionSetup/overscanwizard.py:88
+msgid ""
+"It seems you did not see all the eight arrow heads. This means your TV has overscan enabled, and is not configured properly.\n"
+"\n"
+"Please refer to your TV's manual to find how you can disable overscan on your TV. Look for terms like 'Just fit', 'Full width', etc. If you can't find it, ask other users at telegram @norhap\n"
+"\n"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ChannelSelection.py:1592
@@ -14054,6 +14445,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Console.py:187
 msgid "No packages installed or removed"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Satfinder/plugin.py:956
+msgid ""
+"No satellite, terrestrial or cable tuner is configured.\n"
+"\n"
+"Please check your tuner setup."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/DABScan.py:85
@@ -14885,6 +15283,12 @@ msgstr ""
 msgid "Select update source to edit"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:145
+msgid ""
+"Select your backup device.\n"
+"Current device: "
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:182
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:512
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CCcamInfo.py:1145
@@ -14934,6 +15338,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ClientMode.py:68
 msgid "Set the time of day to perform the import."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Videomode/plugin.py:66
+msgid ""
+"Set the video output mode (or resolution).\n"
+"\n"
+"WARNING: If the chosen video mode causes a loss of signal on your video port, long press EXIT button."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/PositionerSetup/plugin.py:33
@@ -15107,6 +15518,14 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/PositionerSetup/ui.py:315
 msgid "Sorry, this tuner is in use."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py:76
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/BackupRestore.py:78
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/SoftwareManager/plugin.py:316
+msgid ""
+"Sorry, your backup destination is not writeable.\n"
+"Please select a different one."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ChannelSelection.py:319
@@ -15331,6 +15750,31 @@ msgstr ""
 msgid "The new conffile will be placed at"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSDPositionSetup/overscanwizard.py:124
+msgid ""
+"The overscan wizard has been completed.\n"
+"\n"
+"Note: you can always start the Overscan wizard later, via\n"
+"\n"
+"Menu->Installation->System->Audio/Video->Overscan wizard"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSDPositionSetup/overscanwizard.py:73
+msgid ""
+"The overscan wizard helps you to setup your TV in the correct way.\n"
+"\n"
+"For the majority of TV's, the factory default is to have overscan enabled. This means you are always watching a \"zoomed in\" picture instead of real HD, and parts of the user inferface (skin) may be invisible.\n"
+"\n"
+"The yellow area means a 5% border area of a full HD picture will be invisible.\n"
+"The green area means a 10% border area of a full HD picture will be invisible.\n"
+"\n"
+"In other words, if the yellow box touches all four sides of your screen, you have at least 5% overscan on all sides.\n"
+"\n"
+"If you see the tips of all eight arrowheads, then your TV has overscan disabled.\n"
+"\n"
+"Test Pattern by TigerDave - www.tigerdave.com/ht_menu.htm"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:1278
 msgid "The repository is not public or there is no access."
 msgstr ""
@@ -15374,6 +15818,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/PositionerSetup/ui.py:1227
 msgid "There is no signal to lock on !"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:1327
+msgid ""
+"This info is for developers only.\n"
+"For normal users it is not relevant.\n"
+"Please don't panic if you see values displayed looking suspicious!"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/PositionerSetup/ui.py:871
@@ -15532,6 +15983,12 @@ msgstr ""
 msgid "This valid ONID/TSID"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/PositionerSetup/ui.py:757
+msgid ""
+"This will (re-)calculate all positions of your rotor and may remove previously memorised positions and fine-tuning!\n"
+"Are you sure?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CronTimer.py:269
 msgid "Thursday"
 msgstr ""
@@ -15575,6 +16032,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/About.py:505
 msgid "Timezone: "
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/Satfinder/plugin.py:108
+msgid ""
+"To add extras you need to install AutoBouquetsMaker.\n"
+"If you press \"Yes\" please wait.\n"
+"Do you want to install it now?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/AudioSelection.py:438
@@ -16098,6 +16562,29 @@ msgstr ""
 msgid "You can remove this plugin."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSDPositionSetup/overscanwizard.py:112
+msgid ""
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition this you may also miss parts of the user interface, for example volume bars and more.\n"
+"\n"
+"Unfortunately, your model of receiver is not capable to adjust the dimensions of the user interface. If not everything is visible, you should change the installed skin to one that supports the overscan area of your TV.\n"
+"\n"
+"When you select a different skin, the user interface of your receiver will restart.\n"
+"\n"
+"Note: you can always start the Overscan wizard later, via\n"
+"\n"
+"menu->installation->system->Overscan wizard"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Plugins/SystemPlugins/OSDPositionSetup/overscanwizard.py:97
+msgid ""
+"You did not see all eight arrow heads. This means your TV has overscan enabled and presents you with a zoomed-in picture, causing you to loose part of a full HD screen. In addition to this you may also miss parts of the user interface, for example volume bars and more.\n"
+"\n"
+"You can now try to resize and change the position of the user interface until you see the eight arrow heads.\n"
+"\n"
+"When done press OK.\n"
+"\n"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/CronTimer.py:343
 msgid "You must set at least one command"
 msgstr ""
@@ -16486,10 +16973,55 @@ msgstr ""
 msgid "%s is no longer used. Should it be deleted?"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Recording.py:123
+#, python-format
+msgid ""
+"'%s' Storage free size %d MB.\n"
+"%s"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:1964
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:1994
 #, python-format
 msgid "'%s' contains %d file(s) and %d sub-directories.\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Recording.py:104
+#, python-format
+msgid ""
+"'%s' does not exist.\n"
+"%s"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Recording.py:108
+#, python-format
+msgid ""
+"'%s' is Internal Flash. It is not a storage device.\n"
+"%s"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Recording.py:112
+#, python-format
+msgid ""
+"'%s' not writeable.\n"
+"%s"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:196
+msgid ""
+"'Save' or 'OK' changes active language.\n"
+"\n"
+"'Add Language' or MENU adds additional language(s)."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:193
+msgid ""
+"'Save' or 'OK' changes active language.\n"
+"\n"
+"'Add Language' or MENU adds additional language(s).\n"
+"\n"
+"'Delete Language' allows either deletion of all but Spanish and selected language.\n"
+"You also have the option to remove only the selected language."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:433
@@ -16541,6 +17073,13 @@ msgctxt "Hotkey help separator"
 msgid "/"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:597
+msgid ""
+"1. Turn off the receiver and reconnect it to the power supply.\n"
+"2. Press MENU repeatedly during startup.\n"
+"3. Start a new image in a different slot and perform an online flash into the remaining slots."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3561
 msgid "16:9 Always"
 msgstr ""
@@ -16583,6 +17122,19 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/HelpMenu.py:226
 msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list lists the active buttons and whether the function requires a long press or SHIFT of the button(s)."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3266
+msgid ""
+"A recording is currently running.\n"
+"What do you want to do?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:919
+msgid ""
+"A second configured interface has been found.\n"
+"\n"
+"Do you want to disable the second network interface?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:58
@@ -16772,6 +17324,18 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:640
 msgid "Are you sure to reboot to:\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:899
+msgid ""
+"Are you sure you want to activate this network configuration?\n"
+"\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1195
+msgid ""
+"Are you sure you want to restart your network interfaces?\n"
+"\n"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3523
@@ -16974,6 +17538,12 @@ msgstr ""
 msgid "Cancel the location selection"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:187
+msgid ""
+"Cannot delete downloaded image.\n"
+"ERROR:"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:1981
 msgid "Cannot delete file"
 msgstr ""
@@ -17049,6 +17619,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Hotkey.py:38
 msgid "Channel down"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3057
+msgid ""
+"Channel in IPToSAT:\n"
+"\n"
+"Select an IPTV channel to record."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Hotkey.py:37
@@ -17264,6 +17841,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:225
 msgid "Crash Logs"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:2501
+msgid ""
+"Current event is over.\n"
+"Select an option to save the timeshift file."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PiPSetup.py:43
@@ -17524,6 +18107,12 @@ msgstr ""
 msgid "Do not record"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/HarddiskSetup.py:95
+msgid ""
+"Do you really want to check the filesystem?\n"
+"This could take lots of time!"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBar.py:408
 #, python-format
 msgid "Do you really want to delete %s?"
@@ -17532,6 +18121,12 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:1971
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:2023
 msgid "Do you really want to delete ?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:148
+msgid ""
+"Do you really want to delete selected language?\n"
+"\n"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LocationBox.py:319
@@ -17575,6 +18170,21 @@ msgstr ""
 msgid "Do you want this?"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/OScamInfo.py:514
+#, python-format
+msgid ""
+"Do you want to %s?\n"
+"\n"
+"This will take about 5 seconds!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:259
+msgid ""
+"Do you want to delete all the selected files?\n"
+"\n"
+"choose \"No\" to only delete the currently selected file."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:2961
 msgid "Do you want to delete this recording?"
 msgstr ""
@@ -17605,6 +18215,14 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3869
 msgid "Do you want to resume this playback?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/OScamInfo.py:509
+#, python-format
+msgid ""
+"Do you want to shut down %s?\n"
+"\n"
+"To reactivate %s press GREEN button."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:2988
@@ -17745,6 +18363,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1244
 msgid "Enable or disable IPv6 support of your receiver.\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:528
+msgid ""
+"Enable or disable IPv6.\n"
+"Button BLUE set file inetd.conf default (mode IPv4)."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ParentalControlSetup.py:79
@@ -17918,6 +18542,12 @@ msgstr ""
 msgid "Events Info Menu"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:435
+msgid ""
+"Exist are debug files.\n"
+"Space used:"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:437
 msgid "Exist are no debug files or crash."
 msgstr ""
@@ -18004,6 +18634,25 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:89
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:535
 msgid "Extra motor options"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:838
+msgid ""
+"FBC automatic\n"
+"connected to"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:851
+#, python-format
+msgid ""
+"FBC automatic\n"
+"connected to %s"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:848
+msgid ""
+"FBC automatic\n"
+"inactive"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:2031
@@ -18156,6 +18805,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:95
 msgid "Fullbackup Images"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:89
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:101
+msgid ""
+"GUI needs a restart to apply a new language\n"
+"Do you want to restart the GUI now?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/RTLSDRSetup.py:127
@@ -18355,6 +19011,13 @@ msgstr ""
 msgid "If you are using a DiSEqC uncommitted switch enter the port number required to access the LNB used for this satellite."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Scart.py:31
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Scart.py:33
+msgid ""
+"If you see this, something is wrong with\n"
+"your scart connection. Press OK to return."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:482
 msgid "Image to install is invalid\n"
 msgstr ""
@@ -18389,6 +19052,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/RTLSDRSetup.py:88
 msgid "Include this configured satellite position in the DAB+ scan. Disable it to skip the position."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MinuteInput.py:69
+#, python-format
+msgid ""
+"Incorrect format for skip value: '%s'\n"
+"Skip cancelled."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PictureInPicture.py:236
@@ -18712,6 +19382,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1321
 msgid "MAC Address Setup"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:477
+msgid ""
+"MAC address successfully changed.\n"
+"New MAC address: "
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Hotkey.py:170
@@ -19044,6 +19720,12 @@ msgstr ""
 msgid "No config to start, please check /etc/openvpn/ and try again."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:4236
+msgid ""
+"No data on transponder!\n"
+"(Timeout reading PAT)"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:813
 msgid "No data received yet"
 msgstr ""
@@ -19075,6 +19757,13 @@ msgstr ""
 msgid "No resource manager"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:96
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PluginBrowser.py:262
+msgid ""
+"No response in server URL.\n"
+"Does not have access to sources."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceScan.py:441
 msgid "No service"
 msgstr ""
@@ -19090,6 +19779,27 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3256
 msgid "No timer - stop the current event in"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ScanSetup.py:1378
+msgid ""
+"No tuner is enabled!\n"
+"Please setup your tuner settings before you start a service scan."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:143
+msgid ""
+"No working local network adapter found.\n"
+"1. Verify that your wired device is compatible.\n"
+"2. Configure your network correctly."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:142
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1090
+msgid ""
+"No working wireless network adapter found.\n"
+"1. Verify that your WLAN device is compatible.\n"
+"2. Configure your network correctly."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InstallWizard.py:96
@@ -19507,6 +20217,13 @@ msgstr ""
 msgid "Please select the tag to filter..."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PiPSetup.py:40
+msgid ""
+"Please use direction keys to move the PiP window.\n"
+"Press Bouquet +/- to resize the window.\n"
+"Press OK to go back to the TV mode or EXIT to cancel the moving."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InstallWizard.py:124
 msgid "Please wait (updating packages)"
 msgstr ""
@@ -19638,6 +20355,14 @@ msgstr ""
 msgid "Press LEFT RIGHT OK or MENU to choose another server."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:337
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:342
+msgid ""
+"Press LEFT RIGHT OK or MENU to choose another server.\n"
+"\n"
+"You can use custom DNS by adding or deleting DNS."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:711
 msgid "Press OK to activate the settings."
 msgstr ""
@@ -19694,6 +20419,12 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBar.py:355
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3170
 msgid "Press STOP and then EXIT to exit the movie list."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:493
+msgid ""
+"Press ok for multiboot selection\n"
+"Press exit to close"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Hotkey.py:372
@@ -20404,6 +21135,14 @@ msgstr ""
 msgid "Select 'Yes' to remove all keymap data. Selecting this option will remove all keymap override data and restore the default keymap definitions."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:128
+msgid ""
+"Select 'Yes' to remove all languages except Spanish and the selected language.\n"
+"\n"
+"Select 'No' to delete only the chosen language:\n"
+"\n"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LanguageSelection.py:130
 msgid "Select 'Yes' to remove all languages except Spanish."
 msgstr ""
@@ -20767,6 +21506,13 @@ msgstr ""
 msgid "Select/Zap to selected service"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FactoryReset.py:101
+msgid ""
+"Selecting 'Yes' will delete the currently selected user data. This action can't be undone. You may want to create a backup before continuing.\n"
+"\n"
+"Are you sure you want to continue with the factory reset?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:200
 msgid "Selecting this option allows you to configure a group of satellites in one block."
 msgstr ""
@@ -20857,10 +21603,22 @@ msgstr ""
 msgid "Service info - tuner setting values"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:4238
+msgid ""
+"Service invalid!\n"
+"(Timeout reading PMT)"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceInfo.py:166
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceInfo.py:174
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceInfo.py:180
 msgid "Service name"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:4237
+msgid ""
+"Service not found!\n"
+"(SID not found in PAT)"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceInfo.py:168
@@ -20868,6 +21626,12 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceInfo.py:185
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceInfo.py:189
 msgid "Service reference"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:4243
+msgid ""
+"Service unavailable!\n"
+"Check tuner configuration!"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/EpgSelection.py:403
@@ -21413,6 +22177,26 @@ msgstr ""
 msgid "Subtitles enabled"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:614
+msgid ""
+"Successfully restored /etc/inetd.conf\n"
+"\n"
+"IPv6 is disabled"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:612
+msgid ""
+"Successfully restored /etc/inetd.conf\n"
+"\n"
+"IPv6 is enabled"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ScanSetup.py:446
+msgid ""
+"Sundtek - hardware blind scan in progress.\n"
+"Please wait(3-20 min) for the scan to finish."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Hotkey.py:220
 msgid "Swap PiP"
 msgstr ""
@@ -21557,8 +22341,41 @@ msgstr ""
 msgid "The %d min remaining before the end of the event."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/EpgSelection.py:177
+msgid ""
+"The IMDb plugin is not installed!\n"
+"Do you want to install it?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ParentalControlSetup.py:135
 msgid "The PIN code has been changed successfully."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/RTLSDRSetup.py:138
+#, python-format
+msgid ""
+"The RTL2832 kernel driver blacklist could not be updated:\n"
+"%s"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/ServiceScan.py:422
+msgid ""
+"The bouquet \"Last Scanned\" has not been created.\n"
+"You need to restart enigma2 and rescan it to create it.\n"
+"Do you want to restart enigma2 now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/RecordPaths.py:50
+#, python-format
+msgid ""
+"The directory %s is not writable.\n"
+"Make sure you select a writable directory instead."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:305
+msgid ""
+"The network wizard extension is not installed!\n"
+"Please install it."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:3723
@@ -21584,6 +22401,25 @@ msgstr ""
 msgid "The sleep timer has been disabled."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:597
+msgid ""
+"The slots are not accessible.\n"
+"You may need to restore the partitions via USB flash and restart MultiBoot."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PluginBrowser.py:501
+msgid ""
+"The software management extension is not installed!\n"
+"Please install it."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1091
+msgid ""
+"The wireless LAN plugin is not installed!\n"
+"\n"
+"Please install it."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3086
 msgid "There is a conflict with this timer"
 msgstr ""
@@ -21593,10 +22429,34 @@ msgstr ""
 msgid "There is no service with this number"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/MovieSelection.py:1522
+msgid ""
+"There is no tag for this selection.\n"
+"\n"
+"Press Menu and enter \"Edit Tags\""
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LocationBox.py:409
+msgid ""
+"There may not be enough space on the selected location.\n"
+"\n"
+"Do you really want to continue?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:287
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:288
 #, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:3592
+msgid ""
+"This function recovers your video signal in case of loss. The video has been changed to 720p.\n"
+"If this is your case, please keep the video at 720P and do the following:\n"
+"Go to Menu > Setup > Audio & Video > Audio & Video Settings\n"
+"Now set a correct resolution.\n"
+"\n"
+"Do you want to keep the video at 720p?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:132
@@ -21634,6 +22494,40 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Satconfig.py:412
 msgid "This setting is for special setups only. It gives this LNB higher priority over other LNBs with lower values. The free LNB with the highest priority will be the first LNB selected for tuning services."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1686
+msgid ""
+"This test checks for configured nameservers.\n"
+"If you get a \"unconfirmed\" message:\n"
+"- please check your DHCP, cabling and adapter setup\n"
+"- if you configured your nameservers manually please verify your entries in the \"Nameserver\" configuration"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1671
+msgid ""
+"This test checks whether a network cable is connected to your LAN adapter.\n"
+"If you get a \"disconnected\" message:\n"
+"- verify that a network cable is attached\n"
+"- verify that the cable is not broken"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1681
+msgid ""
+"This test checks whether a valid IP address is found for your LAN adapter.\n"
+"If you get a \"unconfirmed\" message:\n"
+"- no valid IP address was found\n"
+"- please check your DHCP, cabling and adapter setup"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1676
+msgid ""
+"This test checks whether your LAN adapter is set up for automatic IP address configuration with DHCP.\n"
+"If you get a \"disabled\" message:\n"
+"- then your LAN adapter is configured for manual IP setup\n"
+"- verify thay you have entered the correct IP information in the adapter setup dialog.\n"
+"If you get an \"enabeld\" message:\n"
+"- verify that you have a configured and working DHCP server in your network."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1666
@@ -22060,6 +22954,12 @@ msgstr ""
 msgid "Volume up"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/HarddiskSetup.py:80
+msgid ""
+"Want to format the device to Linux file system?\n"
+"All data on the device will be lost!"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/FlashImage.py:620
 msgid "Want to restore all deleted images?"
 msgstr ""
@@ -22147,6 +23047,30 @@ msgstr ""
 msgid "Yes, without backup"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PluginBrowser.py:850
+#, python-format
+msgid ""
+"You already have a bootlogo installed,\n"
+"would you like to remove\n"
+"\"%s\"?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PluginBrowser.py:844
+#, python-format
+msgid ""
+"You already have a channel list installed,\n"
+"would you like to remove\n"
+"\"%s\"?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:2655
+msgid ""
+"You are ready to add current event to automatic timer.\n"
+"If there are no conflicts, once added you must enter menu:\n"
+"\n"
+"Timers > AutoTimers and search the event with green button."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/HarddiskSetup.py:32
 msgid "You can continue watching TV etc. while this is running."
 msgstr ""
@@ -22170,6 +23094,25 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:461
 msgid "You want to change current MAC address: "
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:272
+msgid ""
+"You want to delete all files?\n"
+"\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:292
+msgid ""
+"You want to delete all the selected logs?\n"
+"\n"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:263
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/LogManager.py:296
+msgid ""
+"You want to delete this log?\n"
+"\n"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/PluginBrowser.py:655
@@ -22199,6 +23142,15 @@ msgstr ""
 msgid "Your network configuration has been activated."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1009
+msgid ""
+"Your network configuration has been activated.\n"
+"\n"
+"Press OK and wait for the next screen.\n"
+"\n"
+"It will automatically switch to your WLAN data."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:1005
 msgid "Your network configuration has been disabled."
 msgstr ""
@@ -22213,6 +23165,19 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InstallWizard.py:94
 msgid "Your receiver does not have an internet connection"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:99
+#, python-format
+msgid ""
+"Your receiver will be restarted after the installation of the service\n"
+"Do you want to install \"%s\"?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/NetworkSetup.py:110
+msgid ""
+"Your receiver will be restarted after the removal of the service\n"
+"Do you want to remove the service now?"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/InfoBarGenerics.py:4306
@@ -22592,6 +23557,27 @@ msgstr ""
 msgid "without backup"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:518
+msgid ""
+"\n"
+" Do you want to switch to Android ?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEdit.py:184
+msgid ""
+"\n"
+"Conflict detection disabled!"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEdit.py:473
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEdit.py:510
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEdit.py:523
+#, python-format
+msgid ""
+"\n"
+"Timer '%s' disabled!"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:372
 #, python-format
 msgid "%d job is running in the background!"
@@ -22815,6 +23801,12 @@ msgstr ""
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SleepTimerEdit.py:26
+msgid ""
+"Configure the duration in minutes for the sleeptimer.\n"
+"Select the entry and press BLUE to restart the sleeptimer or press YELLOW for stop the sleeptimer current."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SleepTimerEdit.py:32
 msgid "Configure the duration in minutes for the sleeptimer. Select the entry and press BLUE to start the sleeptimer."
 msgstr ""
@@ -22948,6 +23940,19 @@ msgstr ""
 msgid "Display the tags context menu"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TagEditor.py:233
+#, python-format
+msgid ""
+"Do you really want to delete all '%s' tags?\n"
+"(NOTE: 'Cancel' cannot undo this!)"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TagEditor.py:255
+msgid ""
+"Do you really want to delete all tags?\n"
+"(Note that 'Cancel' will not undo this!)"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/StartWizard.py:74
 msgid "Do you want restore the OpenPLi-based backup?"
 msgstr ""
@@ -23003,6 +24008,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SetupFallbacktuner.py:96
 msgid "Enable import timer from fallback tuner"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SetupFallbacktuner.py:91
+msgid ""
+"Enable remote enigma2 receiver to be tried to tune into services that cannot be tuned into locally, e.g. tuner is occupied or service type is unavailable on local tuner.\n"
+"\n"
+"You can use this receiver only in client mode using server channel list, timers and EPG."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEntry.py:256
@@ -23120,6 +24132,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Tools/DAB.py:46
 msgid "Frisian"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:349
+#, python-format
+msgid ""
+"Front panel your %s %s will be updated\n"
+"This may take a few minutes"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Tools/DAB.py:40
@@ -23258,6 +24277,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SetupFallbacktuner.py:137
 msgid "Make it possible to manually initiate the channels import and/or EPG via the extension menu."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:348
+#, python-format
+msgid ""
+"Manufacturer reset in progress\n"
+"Please wait until your %s %s restarts"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Tools/CountryCodes.py:146
@@ -23421,6 +24447,20 @@ msgstr ""
 msgid "Port of fallback remote receiver."
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/VuplusKexec.py:101
+msgid ""
+"Press \"Yes\" for Enable Vu+ MultiBoot.\n"
+"\n"
+"Press \"No\" to continue wizard."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/VuplusKexec.py:38
+msgid ""
+"Press GREEN button to enable MultiBoot.\n"
+"\n"
+"Your receiver will reboot and create the eMMC partitions."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SkinSelector.py:194
 #, python-format
 msgid "Press OK to activate the selected skin %s."
@@ -23513,6 +24553,13 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEntry.py:145
 msgid "Repeated"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TagEditor.py:217
+#, python-format
+msgid ""
+"Replace all '%s' tags with:\n"
+"(NOTE: 'Cancel' cannot undo this!)"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SleepTimerEdit.py:22
@@ -23840,6 +24887,12 @@ msgstr ""
 msgid "Tag Editor Actions"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SoftwareUpdate.py:123
+msgid ""
+"The current image might not be stable.\n"
+"For more information see telegram @norhap."
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:399
 #, python-format
 msgid "The process will take approximately %d minutes to complete."
@@ -23865,6 +24918,13 @@ msgid "There is %d scrambled recording, which will be unscrambled during Standby
 msgid_plural "There are %d scrambled recordings, which will be unscrambled during Standby."
 msgstr[0] ""
 msgstr[1] ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/StartWizard.py:74
+msgid ""
+"There is an OpenPLi-based backup.\n"
+"You need to restart Enigma2 if you want to restore it.\n"
+"Do you want to do it now?"
+msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Time.py:28
 msgid "Time Setup Actions"
@@ -23910,6 +24970,20 @@ msgstr ""
 msgid "Timor-Leste"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SkinSelector.py:210
+#, python-format
+msgid ""
+"To apply the selected '%s' skin the GUI needs to restart.\n"
+"Would you like to restart the GUI now?"
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SkinSelector.py:219
+#, python-format
+msgid ""
+"To save and apply the selected '%s' skin the GUI needs to restart.\n"
+"Would you like to save the selection and restart the GUI now?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TagEditor.py:135
 msgid "Toggle selection of the current tag"
 msgstr ""
@@ -23925,6 +24999,14 @@ msgstr ""
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SetupFallbacktuner.py:189
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SetupFallbacktuner.py:203
 msgid "URL of fallback remote receiver."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:347
+#, python-format
+msgid ""
+"Unattended update in progress\n"
+"Please wait until your %s %s reboots\n"
+"This may take a few minutes"
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/VirtualKeyBoard.py:503
@@ -24029,6 +25111,13 @@ msgstr ""
 msgid "Wakeup type"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEdit.py:485
+msgid ""
+"Warning!\n"
+"This is an option for advanced users.\n"
+"Really disable timer conflict detection?"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SetupFallbacktuner.py:98
 msgid "When enabled the timer from the fallback tuner is imported."
 msgstr ""
@@ -24052,6 +25141,12 @@ msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SleepTimerEdit.py:98
 msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEntry.py:269
+msgid ""
+"When this timer starts:\n"
+"If the receiver is not in standby mode, if you switch to channels from your subscription, the recording will stop."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Tools/Conversions.py:23
@@ -24096,9 +25191,24 @@ msgstr ""
 msgid "Your %s %s?"
 msgstr ""
 
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Standby.py:343
+#, python-format
+msgid ""
+"Your frontprocessor will be updated\n"
+"Please wait until your %s %s reboots\n"
+"This may take a few minutes"
+msgstr ""
+
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/SoftwareUpdate.py:249
 #, python-format
 msgid "Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your %s %s."
+msgstr ""
+
+#: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/Time.py:287
+msgid ""
+"Your zone and local time has been set successfully.\n"
+"\n"
+"Press \"OK\" to continue wizard."
 msgstr ""
 
 #: /c/Users/Portátil/Desktop/MI-GITHUB/enigma2/lib/python/Screens/TimerEntry.py:115
@@ -25420,9 +26530,6 @@ msgid "How to release the hardware decoder when switching to software descrambli
 msgstr ""
 
 msgid "I"
-msgstr ""
-
-msgid "IGNORE"
 msgstr ""
 
 msgid "IMDB"
@@ -27579,13 +28686,7 @@ msgstr ""
 msgid "easyCIconfigMenu"
 msgstr ""
 
-msgid "false"
-msgstr ""
-
 msgid "mhwEPG"
-msgstr ""
-
-msgid "true"
 msgstr ""
 
 msgid "uShare"
