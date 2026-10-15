@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: enigma2\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-14 23:35+0200\nPO-Revision-Date: 2024-10-30 17:31+0100\nLast-Translator: Kuatto\nLanguage-Team: Álvaro <mi casa>\nLanguage: es_ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Poedit 3.5\n"
+msgstr "Project-Id-Version: enigma2\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-15 02:36+0200\nPO-Revision-Date: 2024-10-30 17:31+0100\nLast-Translator: Kuatto\nLanguage-Team: Álvaro <mi casa>\nLanguage: es_ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Poedit 3.5\n"
 
 #~ msgid ""
 #~ "\n"
@@ -23305,7 +23305,7 @@ msgid "WSS on 4:3"
 msgstr "WSS en 4:3"
 
 msgid "x"
-msgstr "incógnita"
+msgstr "x"
 
 msgid "XBox support"
 msgstr "Soporte XBox"
