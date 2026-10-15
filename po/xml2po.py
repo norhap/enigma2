@@ -15,9 +15,10 @@ except ImportError:
 
 
 def escape_po(s):
+	s = s.replace('\\n', '\x00')
 	s = s.replace('\\', '\\\\')
 	s = s.replace('"', '\\"')
-	s = s.replace('\n', '\\n')
+	s = s.replace('\x00', '\\n')
 	return s
 
 
