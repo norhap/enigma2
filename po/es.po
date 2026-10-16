@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: enigma2\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-15 22:26+0200\nPO-Revision-Date: 2024-10-30 17:31+0100\nLast-Translator: Kuatto\nLanguage-Team: Álvaro <mi casa>\nLanguage: es_ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Poedit 3.5\n"
+msgstr "Project-Id-Version: enigma2\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-16 19:42+0200\nPO-Revision-Date: 2024-10-30 17:31+0100\nLast-Translator: Kuatto\nLanguage-Team: Álvaro <mi casa>\nLanguage: es_ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Poedit 3.5\n"
 
 # restorewizard vision core LCD
 # restorewizard vision core LCD
@@ -854,6 +854,12 @@ msgid "%d seconds"
 msgstr "%d segundos"
 
 #, python-format
+msgid "%d service found."
+msgid_plural "%d services found."
+msgstr[0] "%d canal encontrado."
+msgstr[1] "%d canales encontrados."
+
+#, python-format
 msgid "%d times"
 msgstr "%d veces"
 
@@ -1573,6 +1579,9 @@ msgstr "una gui para asignar canales/proveedores/caids a módulos de interfaz co
 msgid "A highlight on the remote control image shows which button the help refers to. If more than one button performs the indicated function, more than one highlight will be shown. Text below the list lists the active buttons and whether the function requires a long press or SHIFT of the button(s)."
 msgstr "Un resaltado en la imagen del mando a distancia muestra a que botón se refiere la ayuda. Si más de un botón realiza la función indicada, se mostrará más de un resaltado. El texto debajo de la lista enumera los botones activos y si la función requiere una pulsación larga o MAYÚS de los botones(s)."
 
+msgid "A new storage device has been connected:"
+msgstr "Se ha conectado un nuevo dispositivo de almacenamiento:"
+
 #, python-format
 msgid "A recording has started:\n%s"
 msgstr "Ha comenzado una grabación:\n%s"
@@ -1916,7 +1925,7 @@ msgid "address:"
 msgstr "dirección IP:"
 
 msgid "Adel"
-msgstr "Adel"
+msgstr "Nobleza"
 
 msgid "Adjust 3D settings"
 msgstr "Ajustes 3D"
@@ -2193,7 +2202,7 @@ msgid "Alternative URLs for DVB-T/C or ATSC"
 msgstr "URLs Alternativas para DVB-T/C o ATSC"
 
 msgid "Altri"
-msgstr "Más"
+msgstr "Otros"
 
 msgid "Altri Programmi"
 msgstr "Guía Electrónica de Programación"
@@ -2406,7 +2415,7 @@ msgid "Are you sure you want to reload the EPG data from:\n"
 msgstr "Seguro que quieres volver a cargar los datos EPG desde\":\n"
 
 msgid "Are you sure you want to restart your network interfaces?\n\n"
-msgstr "Seguro que quieres guardar el Caché EPG:\n"
+msgstr "¿Quieres reiniciar tus interfaces de red?\n\n"
 
 #, python-format
 msgid "Are you sure you want to restore\nthe following backup:\n%s\nYour receiver will restart after the backup has been restored!"
@@ -2467,7 +2476,7 @@ msgid "Aruba"
 msgstr "Aruba"
 
 msgid "Arzt"
-msgstr "Arzt"
+msgstr "Medicina"
 
 msgid "As defined by the skin"
 msgstr "Definido por skin"
@@ -2805,7 +2814,7 @@ msgid "Azione"
 msgstr "Azione"
 
 msgid "Azure"
-msgstr "Azur"
+msgstr "Azure"
 
 msgid "B"
 msgstr "B"
@@ -3672,7 +3681,7 @@ msgid "Channel down"
 msgstr "Canal abajo"
 
 msgid "Channel in IPToSAT:\n\nSelect an IPTV channel to record."
-msgstr "No seleccionó un canal a grabar."
+msgstr "Canal en IPToSAT:\n\nSelecciona un canal IPTV para grabar."
 
 msgid "Channel Info"
 msgstr "Info de canal"
@@ -4143,6 +4152,9 @@ msgstr[1] "Comandos finalizados."
 
 msgid "Command order"
 msgstr "Orden de comando"
+
+msgid "Command script"
+msgstr "Script de comandos"
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
 msgstr "Ordene al televisor que cambie a la entrada HDMI correcta cuando se activen los temporizadores zap."
@@ -4675,19 +4687,22 @@ msgid "Consult your SCR device spec sheet for this information."
 msgstr "Consulte la hoja de especificaciones de su dispositivo SCR para obtener esta información."
 
 msgid "Content"
-msgstr "Contexto"
+msgstr "Contenido"
 
 msgid "Content does not fit on DVD!"
 msgstr "El contenido no cabe en el DVD!"
+
+msgid "contents:"
+msgstr "contenido:"
 
 msgid "Context"
 msgstr "Contexto"
 
 msgid "Context / Favourites"
-msgstr "Favoritos"
+msgstr "Contexto - Favoritos"
 
 msgid "Context / Plugins"
-msgstr "Cerrar plugin"
+msgstr "Contexto - Plugins"
 
 msgid "Continent: "
 msgstr "Continente: "
@@ -5777,7 +5792,7 @@ msgid "Divehi / Dhivehi / Maldivian"
 msgstr "Divehi / Dhivehi / Maldivo"
 
 msgid "DIY"
-msgstr "DIY"
+msgstr "Bricolaje"
 
 msgid "Djibouti"
 msgstr "Djibouti"
@@ -5960,7 +5975,7 @@ msgid "Do you want to remove the package:\n"
 msgstr "¿Quieres desinstalar el paquete?:\n"
 
 msgid "Do you want to remove this command or script?\n\n"
-msgstr "¿Quieres desinstalar el paquete?:\n"
+msgstr "¿Quieres eliminar este comando o script?\n\n"
 
 msgid "Do you want to restore your settings?"
 msgstr "¿Quieres restaurar tus ajustes?"
@@ -6667,6 +6682,9 @@ msgstr "Habilitado, el receptor puede reactivarse en LAN. Comando: \"ether-wake 
 msgid "Enabled will perform a channels and EPG import on every enigma2 restart."
 msgstr "Habilitado realizará una importación de canales y EPG en cada reinicio de enigma2."
 
+msgid "Encrypted"
+msgstr "Encriptado"
+
 msgid "Encrypted: "
 msgstr "Encriptado: "
 
@@ -6706,6 +6724,9 @@ msgstr "Finalizar corte aquí (restablecer)"
 msgid "End favourites edit"
 msgstr "Fin edición de favoritos"
 
+msgid "End of script."
+msgstr "Fin del script."
+
 msgid "End of the time interval during which events must begin to be displayed. If the filter is active, use keys 3 and 6 to adjust the end time, and key 0 to save."
 msgstr "Fin del intervalo de tiempo durante el cual deben empezar a mostrarse los eventos. Si el filtro está activo, utilice las teclas 3 y 6 para ajustar la hora de finalización y la tecla 0 para guardar."
 
@@ -6722,7 +6743,7 @@ msgid "End timeshift"
 msgstr "Final timeshift"
 
 msgid "ene"
-msgstr "uso"
+msgstr "ene"
 
 msgid "Energie"
 msgstr "Energia"
@@ -6921,7 +6942,7 @@ msgid "EPGSearch - History"
 msgstr "Limpiar Historial"
 
 msgid "Epos"
-msgstr "Epopeya"
+msgstr "Épica"
 
 msgid "Equal to"
 msgstr "Igual a"
@@ -6978,6 +6999,9 @@ msgstr "error al iniciar la búsqueda"
 
 msgid "Error stop stream!"
 msgstr "Error al detener el stream!"
+
+msgid "Error to read data from"
+msgstr "Error al leer datos de"
 
 #, python-format
 msgid "Error while retreiving fallback timer information\n%s"
@@ -7042,7 +7066,7 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 msgid "Essen"
-msgstr "Essen"
+msgstr "Cocina"
 
 msgid "Estonia"
 msgstr "Estonia"
@@ -7662,6 +7686,9 @@ msgstr "Terminó de configurar su red"
 msgid "Finished restarting your network"
 msgstr "Terminó de reiniciar su red"
 
+msgid "Finishing restore: Your receiver go to reboot..."
+msgstr "Finalizando la restauración: el receptor se va a reiniciar..."
+
 msgid "Finland"
 msgstr "Finlandia"
 
@@ -7935,10 +7962,10 @@ msgid "Fula"
 msgstr "Fula"
 
 msgid "Fulah"
-msgstr "Fulá"
+msgstr "Fula"
 
 msgid "full"
-msgstr "lleno"
+msgstr "completo"
 
 msgid "Full description separator"
 msgstr "Separador de descripción completa"
@@ -7975,7 +8002,7 @@ msgid "Further options"
 msgstr "Opciones adicionales"
 
 msgid "Fußball"
-msgstr "Fußball"
+msgstr "Fútbol"
 
 msgid "Für Kinder"
 msgstr "Para niños"
@@ -8137,7 +8164,7 @@ msgid "GIGA"
 msgstr "Giga"
 
 msgid "Gioco"
-msgstr "Juego"
+msgstr "Juegos"
 
 msgid "Go down the list"
 msgstr "Ve abajo de la lista"
@@ -8762,7 +8789,7 @@ msgid "https://github.com/norhap"
 msgstr "https://github.com/norhap"
 
 msgid "Hue"
-msgstr "Matiz"
+msgstr "Hue"
 
 msgid "Hungarian"
 msgstr "Húngaro"
@@ -8798,7 +8825,7 @@ msgid "Idle Time: "
 msgstr "Tiempo de inactividad: "
 
 msgid "Ido"
-msgstr "Sí"
+msgstr "Ido"
 
 msgid "If an action is user-configurable, its help entry will be flagged with a '(C)' suffix."
 msgstr "Si una acción es configurable por el usuario, su entrada de ayuda se marcará con un sufijo '(C)'."
@@ -9645,7 +9672,7 @@ msgid "Komi"
 msgstr "Komi"
 
 msgid "Komödie"
-msgstr "Komödie"
+msgstr "Comedia"
 
 msgid "Kongo"
 msgstr "Congo"
@@ -9669,13 +9696,13 @@ msgid "Kraftsport"
 msgstr "Deportes de fuerza"
 
 msgid "Krieg"
-msgstr "Krieg"
+msgstr "Guerra"
 
 msgid "Krimi"
-msgstr "Crimi"
+msgstr "Crimen"
 
 msgid "Kriminalität"
-msgstr "Criminalidad"
+msgstr "Crimen"
 
 msgid "Kuanyama / Kwanyama"
 msgstr "Kuanyama/Kwanyama"
@@ -9690,13 +9717,13 @@ msgid "Kurdish"
 msgstr "Kurdo"
 
 msgid "Kurzfilm"
-msgstr "Kurzfilm"
+msgstr "Cortometraje"
 
 msgid "Kuwait"
 msgstr "Kuwait"
 
 msgid "Kyrgyz"
-msgstr "Kirguistán"
+msgstr "Kirguís"
 
 msgid "Kyrgyzstan"
 msgstr "Kirguistán"
@@ -9742,7 +9769,7 @@ msgid "languages"
 msgstr "idiomas"
 
 msgid "Lao"
-msgstr "Líbano"
+msgstr "Lao"
 
 msgid "Lao People's Democratic Republic"
 msgstr "Laos"
@@ -10371,7 +10398,7 @@ msgid "Manufacturer reset in progress\nPlease wait until your %s %s restarts"
 msgstr "Restablecimiento del fabricante en curso\nEspere hasta que su %s %s se reinicie"
 
 msgid "Manx"
-msgstr "Manx"
+msgstr "Manés"
 
 msgid "Maori"
 msgstr "Maorí"
@@ -11105,7 +11132,7 @@ msgid "Mystery"
 msgstr "Ayer"
 
 msgid "Märchen"
-msgstr "Marzo"
+msgstr "Cuentos de hadas"
 
 msgid "N"
 msgstr "NO"
@@ -11380,7 +11407,7 @@ msgid "Niue"
 msgstr "Niue"
 
 msgid "nne"
-msgstr "ninguno"
+msgstr "noreste"
 
 msgid "nnw"
 msgstr "noroeste"
@@ -11797,7 +11824,7 @@ msgid "Number or SMS style data entry"
 msgstr "Entrada de datos de estilo de número o SMS"
 
 msgid "Nuoto"
-msgstr "Nuoto"
+msgstr "Natación"
 
 msgid "nw"
 msgstr "noroeste"
@@ -12128,6 +12155,9 @@ msgstr "Otras Imágenes"
 msgid "Other Subtitles & lang"
 msgstr "Otros Subtítulos lenguaje"
 
+msgid "Others"
+msgstr "Otros"
+
 msgid "OTT Model"
 msgstr "Modelo OTT"
 
@@ -12260,6 +12290,9 @@ msgstr "EPG Parcial"
 
 msgid "Pashto"
 msgstr "Pastún"
+
+msgid "Pass"
+msgstr "Contraseña"
 
 #, python-format
 msgid "Pass %d/%d"
@@ -12634,7 +12667,7 @@ msgid "Please select the movie path..."
 msgstr "Seleccionar ruta para películas…"
 
 msgid "Please select the network interface that you want to use for your internet connection.\n\nPlease press OK to continue."
-msgstr "Seleccione la interfaz de red que desea utilizar para su conexión a Internet. Pulse \"OK\" para continuar."
+msgstr "Seleccione la interfaz de red que desea utilizar para su conexión a Internet.\n\nPulse \"OK\" para continuar."
 
 msgid "Please select the tag to filter..."
 msgstr "Seleccione la etiqueta para filtrar..."
@@ -12810,7 +12843,7 @@ msgid "Portal / Option"
 msgstr "Posición orbital"
 
 msgid "Porträt"
-msgstr "Puerto"
+msgstr "Documental"
 
 msgid "Portugal"
 msgstr "Portugal"
@@ -13000,6 +13033,9 @@ msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para elegir otro servidor."
 
 msgid "Press LEFT RIGHT OK or MENU to choose another server.\n\nYou can use custom DNS by adding or deleting DNS."
 msgstr "Pulse IZQUIERDA DERECHA OK o MENÚ para elegir otro servidor.\n\nPuede utilizar DNS personalizado añadiendo o eliminando DNS."
+
+msgid "Press MENU and configue."
+msgstr "Pulse MENU y configure."
 
 msgid "Press MENU for additional options."
 msgstr "Pulse MENÚ para opciones adicionales."
@@ -14039,6 +14075,9 @@ msgstr "Resolución"
 msgid "Restart"
 msgstr "Reiniciar"
 
+msgid "restart"
+msgstr "reiniciar"
+
 msgid "Restart both"
 msgstr "Reiniciar ambos"
 
@@ -14116,6 +14155,9 @@ msgstr "Restaura sus copias de seguridad por fecha."
 
 msgid "Restore your receiver settings."
 msgstr "Restaura la configuración de su receptor."
+
+msgid "Restoring settings: Enigma2 is about to restart..."
+msgstr "Restaurando la configuración: Enigma2 está a punto de reiniciarse..."
 
 msgid "Restoring..."
 msgstr "Restaurando…"
@@ -14323,6 +14365,10 @@ msgstr "Burundi"
 msgid "Running"
 msgstr "Ejecutando"
 
+#, python-format
+msgid "Running command %d: %s"
+msgstr "Ejecutando el comando %d: %s"
+
 msgid "running..."
 msgstr "ejecutando..."
 
@@ -14524,6 +14570,9 @@ msgstr "Guardar lista de reproducción al salir"
 msgid "Save settings and EPG data"
 msgstr "Guarde la configuración y los datos EPG"
 
+msgid "Save the commands and output to the log file?"
+msgstr "¿Guardar los comandos y la salida en el archivo de log?"
+
 msgid "Save the current contents of the log and close the screen"
 msgstr "Guarde el contenido del registro y cierre la pantalla"
 
@@ -14669,6 +14718,13 @@ msgstr "Buscando…"
 #, python-format
 msgid "Scanning: %d services found; validating live result (%d/%d)..."
 msgstr "Buscando: %d canales encontrados; validando resultado en vivo (%d/%d)..."
+
+#. TRANSLATORS: The receiver is performing a service scan, progress percentage is printed in '%d' (and '%%' will show a single '%' symbol).
+#, python-format
+msgid "Scanning: %d%% complete"
+msgid_plural "Scanning: %d%% complete"
+msgstr[0] "Búsqueda: %d%% completa"
+msgstr[1] "Búsqueda: %d%% completas"
 
 msgid "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr "Escanea lamedbs por defecto ordenados por satélite con un motor de plato conectado"
@@ -16469,9 +16525,6 @@ msgstr "Ranura %s / FBC en %s"
 msgid "Slot %s / FBC virtual %s"
 msgstr "Ranura %s / FBC virtual %s"
 
-msgid "slot0 {SystemInfo[\"canMultiBoot\"][x][\"slotType\"]} "
-msgstr "slot0 {SystemInfo[\"canMultiBoot\"][x][\"slotType\"]} "
-
 msgid "Slovak"
 msgstr "Eslovaco"
 
@@ -16843,7 +16896,7 @@ msgid "SSA file"
 msgstr "Archivo SSA"
 
 msgid "sse"
-msgstr "Essen"
+msgstr "sureste"
 
 msgid "SSID:"
 msgstr "SSID:"
@@ -16898,6 +16951,9 @@ msgstr "Velocidad del ventilador"
 
 msgid "Start"
 msgstr "Iniciar"
+
+msgid "start"
+msgstr "iniciar"
 
 msgid "Start a new image in a different slot than the current one using the 'Recovery Mode' and perform an online flash with the updated image in the remaining slots."
 msgstr "Inicie una nueva imagen en un slot diferente a la actual usando \"Modo Recuperación\" y realice un flasheo en línea con la imagen actualizada en los slots restantes."
@@ -17509,7 +17565,7 @@ msgid "Taiwan"
 msgstr "Taiwán"
 
 msgid "Tajik"
-msgstr "Tajikistan"
+msgstr "Tayiko"
 
 msgid "Tajikistan"
 msgstr "Tajikistan"
@@ -18155,6 +18211,10 @@ msgstr "Es un ONID/TSID válido"
 msgid "This will (re-)calculate all positions of your rotor and may remove previously memorised positions and fine-tuning!\nAre you sure?"
 msgstr "¡Esto (re)calculará todas las posiciones de su rotor y puede eliminar posiciones y ajustes previamente memorizados!\n¿Está seguro?"
 
+#, python-format
+msgid "This window will automatically close in %d seconds."
+msgstr "Esta ventana se cerrará automáticamente en %d segundos."
+
 msgid "Three"
 msgstr "Tres"
 
@@ -18177,7 +18237,7 @@ msgid "Tibetan"
 msgstr "Tibetano"
 
 msgid "Tiere"
-msgstr "Tiere"
+msgstr "Animales"
 
 msgid "Tigrinya"
 msgstr "Tigrinya"
@@ -18469,7 +18529,7 @@ msgid "Toneburst A/B"
 msgstr "MiniDiseqC"
 
 msgid "Tonga"
-msgstr "Tonga"
+msgstr "Tongano"
 
 msgid "Top"
 msgstr "Arriba"
@@ -18517,7 +18577,7 @@ msgid "Traditional Music"
 msgstr "Música Tradicional"
 
 msgid "Tragödie"
-msgstr "Tragodia"
+msgstr "Tragedia"
 
 msgid "Transcoding"
 msgstr "Transcodificación AAC"
@@ -20277,10 +20337,10 @@ msgid "WMA Pro downmix"
 msgstr "Mezcla WMA Pro"
 
 msgid "wnw"
-msgstr "ww"
+msgstr "oeste-oroeste"
 
 msgid "Wolof"
-msgstr "Wólof"
+msgstr "Wolof"
 
 msgid "World Affairs"
 msgstr "Asuntos Mundiales"
@@ -20543,7 +20603,7 @@ msgid "Your hardware can detect CI mode itself or works only in legacy mode."
 msgstr "Su hardware puede detectar el modo CI por sí mismo o solo funciona en modo heredado."
 
 msgid "Your internet connection is not working!\n\nPlease choose what you want to do next."
-msgstr "Su conexión a Internet no funciona."
+msgstr "¡Su conexión a internet no funciona!\n\nPor favor, elige qué quieres hacer a continuación."
 
 msgid "Your internet connection is not working."
 msgstr "Su conexión a Internet no funciona."
@@ -20606,7 +20666,7 @@ msgid "Your Wireless LAN network adapter is disabled."
 msgstr "Su adaptador de red Wireless LAN está desactivado."
 
 msgid "Your zone and local time has been set successfully.\n\nPress \"OK\" to continue wizard."
-msgstr "Pulse el botón AMARILLO si su zona horaria no está configurada o pulse \"OK\" para continuar con el asistente."
+msgstr "Pulse el botón AMARILLO si su zona horaria no está configurada\n\nPulse \"OK\" para continuar con el asistente."
 
 msgid "Youth"
 msgstr "Sur"
