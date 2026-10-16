@@ -119,15 +119,18 @@ protected:
 	{
 		struct aiocb aio;
 		unsigned char* buffer;
+		bool short_written;
 		AsyncIO()
 		{
 			memset(&aio, 0, sizeof(aiocb));
 			buffer = NULL;
+			short_written = false;
 		}
 		int wait(const volatile int* stop_flag = nullptr, int* short_write_count = nullptr);
 		int start(int fd, off_t offset, size_t nbytes, void* buffer);
 		int poll(int* short_write_count = nullptr); // returns 1 if busy, 0 if ready, <0 on error return
 		int cancel(int fd); // returns <0 on error, 0 cancelled, >0 bytes written?
+		void countShortWrite(int* short_write_count);
 	};
 	eMPEGStreamParserTS m_ts_parser;
 	off_t m_current_offset;

@@ -36,6 +36,12 @@ enum dmx_source {
 #define DMX_SET_SOURCE _IOW('o', 49, enum dmx_source)
 #endif
 
+// dvb/demux.cpp — tras los #include, antes de las definiciones de la clase
+static bool isTransientAioError(int err)
+{
+    return err == ENOMEM || err == EAGAIN;
+}
+
 //#define SHOW_WRITE_TIME
 static int determineBufferCount()
 {
@@ -494,103 +500,104 @@ int eDVBRecordFileThread::getFirstPTS(pts_t &pts)
 	return m_ts_parser.getFirstPTS(pts);
 }
 
-int eDVBRecordFileThread::AsyncIO::wait(const volatile int* stop_flag, int* short_write_count)
-// Transient resource shortage: drop the chunk instead of aborting the thread.
-static bool isTransientAioError(int err)
+void eDVBRecordFileThread::AsyncIO::countShortWrite(int* short_write_count)
 {
-	return err == ENOMEM || err == EAGAIN;
+    if (short_write_count && !short_written)
+        ++(*short_write_count);
+    short_written = true;
 }
 
-int eDVBRecordFileThread::AsyncIO::wait(int* short_write_count, bool allowCancelled)
+int eDVBRecordFileThread::AsyncIO::wait(const volatile int* stop_flag, int* short_write_count)
 {
-	if (aio.aio_buf == nullptr) // No request outstanding
-		return 0;
+    if (aio.aio_buf == nullptr)
+        return 0;
 
-	// Limit consecutive timeouts to prevent infinite blocking
-	const int MAX_TIMEOUTS = 5;
-	int timeout_count = 0;
+    const int MAX_TIMEOUTS = 5;
+    int timeout_count = 0;
 
-	while (true)
-	{
-		// Wait for current operation to complete with timeout
-		while (aio_error(&aio) == EINPROGRESS)
-		{
-			eDebug("[eDVBRecordFileThread] Waiting for I/O to complete");
-			struct aiocb* paio = &aio;
-			struct timespec timeout = {1, 0}; // 1 second timeout
-			int r = aio_suspend(&paio, 1, &timeout);
-			if (r < 0)
-			{
-				if (errno == EAGAIN) // Timeout
-				{
-					timeout_count++;
-					eDebug("[eDVBRecordFileThread] aio_suspend timeout (%d/%d)",
-						timeout_count, MAX_TIMEOUTS);
+    while (true)
+    {
+        while (aio_error(&aio) == EINPROGRESS)
+        {
+            struct aiocb* paio = &aio;
+            struct timespec timeout = {1, 0};
+            int r = aio_suspend(&paio, 1, &timeout);
+            if (r < 0)
+            {
+                if (errno == EAGAIN)
+                {
+                    timeout_count++;
+                    eDebug("[eDVBRecordFileThread] aio_suspend timeout (%d/%d)",
+                           timeout_count, MAX_TIMEOUTS);
 
-					// Check if we should stop
-					if (stop_flag && *stop_flag)
-					{
-						eDebug("[eDVBRecordFileThread] stop requested, cancelling AIO");
-						aio_cancel(aio.aio_fildes, &aio);
-						aio.aio_buf = NULL;
-						return -1;
-					}
+                    if (stop_flag && *stop_flag)
+                    {
+                        eDebug("[eDVBRecordFileThread] stop requested, cancelling AIO");
+                        aio_cancel(aio.aio_fildes, &aio);
+                        aio.aio_buf = nullptr;
+                        return -1;
+                    }
 
-					// After MAX_TIMEOUTS, cancel AIO and continue (don't block forever)
-					if (timeout_count >= MAX_TIMEOUTS)
-					{
-						eWarning("[eDVBRecordFileThread] AIO timeout limit reached, cancelling and continuing");
-						aio_cancel(aio.aio_fildes, &aio);
-						aio.aio_buf = NULL;
-						return 0; // Return 0 so thread continues!
-					}
-					continue;
-				}
-				if (errno == EINTR)
-				{
-					// Check if we should stop after signal
-					if (stop_flag && *stop_flag)
-					{
-						eDebug("[eDVBRecordFileThread] stop requested after EINTR");
-						aio_cancel(aio.aio_fildes, &aio);
-						aio.aio_buf = NULL;
-						return -1;
-					}
-					continue;
-				}
-				eDebug("[eDVBRecordFileThread] aio_suspend failed: %m");
-				return -1;
-			}
-		}
+                    if (timeout_count >= MAX_TIMEOUTS)
+                    {
+                        eWarning("[eDVBRecordFileThread] AIO timeout limit reached, dropping chunk");
+                        aio_cancel(aio.aio_fildes, &aio);
+                        aio.aio_buf = nullptr;
+                        return 0;
+                    }
+                    continue;
+                }
 
-		int r = aio_return(&aio);
-		if (r < 0)
-		{
-			eDebug("[eDVBRecordFileThread] wait: aio_return failed: %m");
-			return -1;
-		}
+                if (errno == EINTR)
+                {
+                    if (stop_flag && *stop_flag)
+                    {
+                        eDebug("[eDVBRecordFileThread] stop requested after EINTR");
+                        aio_cancel(aio.aio_fildes, &aio);
+                        aio.aio_buf = nullptr;
+                        return -1;
+                    }
+                    continue;
+                }
 
-		// Handle short write - retry remaining bytes
-		if ((size_t)r != aio.aio_nbytes)
-		{
-			if (short_write_count)
-				++(*short_write_count);
-			eDebug("[eDVBRecordFileThread] wait: short write %d of %zu bytes -> retry", r, aio.aio_nbytes);
-			aio.aio_nbytes -= r;
-			aio.aio_offset += r;
-			aio.aio_buf = (volatile void*)((const char*)aio.aio_buf + r);
-			if (aio_write(&aio) < 0)
-			{
-				eDebug("[eDVBRecordFileThread] wait: aio_write retry failed: %m");
-				aio.aio_buf = NULL;
-				return -1;
-			}
-			continue; // Wait for retry to complete
-		}
+                eDebug("[eDVBRecordFileThread] aio_suspend failed: %m");
+                return -1;
+            }
+        }
 
-		aio.aio_buf = NULL;
-		return 0;
-	}
+        int r = aio_return(&aio);
+        if (r < 0)
+        {
+            if (isTransientAioError(-r))
+            {
+                eWarning("[eDVBRecordFileThread] transient AIO error %d, dropping chunk", -r);
+                aio.aio_buf = nullptr;
+                return 0;
+            }
+            eDebug("[eDVBRecordFileThread] aio_return failed: %s", strerror(-r));
+            return -1;
+        }
+
+        if ((size_t)r != aio.aio_nbytes)
+        {
+            countShortWrite(short_write_count);
+            eDebug("[eDVBRecordFileThread] short write %d of %zu -> retry", r, aio.aio_nbytes);
+            aio.aio_nbytes -= r;
+            aio.aio_offset  += r;
+            aio.aio_buf = (volatile void*)((const char*)aio.aio_buf + r);
+            timeout_count = 0;
+            if (aio_write(&aio) < 0)
+            {
+                eDebug("[eDVBRecordFileThread] aio_write retry failed: %m");
+                aio.aio_buf = nullptr;
+                return -1;
+            }
+            continue;
+        }
+
+        aio.aio_buf = nullptr;
+        return 0;
+    }
 }
 
 int eDVBRecordFileThread::AsyncIO::cancel(int fd)
@@ -604,48 +611,46 @@ int eDVBRecordFileThread::AsyncIO::cancel(int fd)
 
 int eDVBRecordFileThread::AsyncIO::poll(int* short_write_count)
 {
-	if (aio.aio_buf == NULL)
-		return 0;
-	int err = aio_error(&aio);
-	if (err == EINPROGRESS)
-	{
-		return 1;
-	}
+    if (aio.aio_buf == nullptr)
+        return 0;
 
-	int r = aio_return(&aio);
+    int err = aio_error(&aio);
+    if (err == EINPROGRESS)
+        return 1;
 
-	if (r >= 0 && (size_t)r != aio.aio_nbytes)
-	{ // short write
-		if (isTransientAioError(err))
-		{
-			eWarning("[eDVBRecordFileThread] aio failed (error=%d): %s - dropping %zu bytes", err, strerror(err), aio.aio_nbytes);
-			return 0;
-		}
-		if (short_write_count)
-			++(*short_write_count);
-		eDebug("[eDVBRecordFileThread] short write: %d of bytes %zu written -> retry", r, aio.aio_nbytes);
-		aio.aio_nbytes -= r;
-		aio.aio_offset += r;
-		aio.aio_buf = (volatile void*)((const char*)aio.aio_buf + r);
-		if (aio_write(&aio) < 0)
-			return -1;
-		return 1;
-	}
+    int r = aio_return(&aio);
 
-	aio.aio_buf = NULL;
-	if (r < 0)
-	{
-		if (err == 0 || err == ECANCELED)
-		{
-			/* aio_error() reported success/cancel but aio_return() failed.
-			 * This happens on DVR/socket devices with incomplete POSIX AIO.
-			 * The operation itself completed - treat as done. */
-			return 0;
-		}
-		eDebug("[eDVBRecordFileThread] poll: aio failed (error=%d): %s", err, strerror(err));
-		return -1;
-	}
-	return 0;
+    if (r >= 0 && (size_t)r != aio.aio_nbytes)
+    { // short write
+        countShortWrite(short_write_count);
+        eDebug("[eDVBRecordFileThread] short write: %d of %zu -> retry", r, aio.aio_nbytes);
+        aio.aio_nbytes -= r;
+        aio.aio_offset += r;
+        aio.aio_buf = (volatile void*)((const char*)aio.aio_buf + r);
+        if (aio_write(&aio) < 0)
+        {
+            aio.aio_buf = nullptr;
+            return -1;
+        }
+        return 1;
+    }
+
+    aio.aio_buf = nullptr;
+
+    if (r < 0)
+    {
+        if (err == 0 || err == ECANCELED)
+            return 0;
+        if (isTransientAioError(err))
+        {
+            eWarning("[eDVBRecordFileThread] transient AIO error %d, dropping chunk", err);
+            return 0;
+        }
+        eDebug("[eDVBRecordFileThread] poll: aio failed (error=%d): %s", err, strerror(err));
+        return -1;
+    }
+
+    return 0;
 }
 
 int eDVBRecordFileThread::AsyncIO::start(int fd, off_t offset, size_t nbytes, void* buffer)
