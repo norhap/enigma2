@@ -424,8 +424,10 @@ public:
 		sGamma,
 		sVideoInfo,
 		sIsSoftCSA,			/* 1 if current service uses software descrambling */
-		
-		sHDRType,			/* 0=SDR 1=HDR10 2=HLG 3=HDR */		
+
+		sHDRType,			/* 0=SDR 1=HDR10 2=HLG 3=HDR */
+		sVideoBitrate,		/* measured live bitrate of the video stream in kbit/s (servicemp3; -1 = not available) */
+		sAudioBitrate,		/* same for the currently selected audio stream */
 
 		sUser = 0x100,
 		sDABServiceList = sUser + 1, /* tab-separated SID, bitrate, DAB+ flag and label */
@@ -578,12 +580,12 @@ struct iAudioTrackInfo
 	std::string m_description;
 	std::string m_language; /* iso639 */
 	int m_pid; /* for association with the stream. */
-	int m_channels = 0; /* decoded/source channel count when available. */                                                                       
+	int m_channels = 0; /* decoded/source channel count when available. */
 #endif
 	std::string getDescription() { return m_description; }
 	std::string getLanguage() { return m_language; }
 	int getPID() { return m_pid; }
-	int getChannels() { return m_channels; }                                         
+	int getChannels() { return m_channels; }
 };
 SWIG_ALLOW_OUTPUT_SIMPLE(iAudioTrackInfo);
 
@@ -1007,7 +1009,7 @@ public:
 		evVideoGammaChanged,
 
 		evFccFailed,
-		
+
 		evUpdateTags,
 		evUpdateIDv3Cover,
 		evGstreamerStart,
