@@ -7,6 +7,8 @@ dist_install_DATA = \
 	bullet.png \
 	clock.png \
 	cutting.png \
+	dab_radio.png \
+	default_dab.png \
 	default.png \
 	dish.png \
 	dish_scan.png \
