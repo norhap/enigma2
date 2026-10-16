@@ -256,6 +256,7 @@ SystemInfo["Power4x7Standby"] = fileCheck("/proc/stb/fp/power4x7standby")
 SystemInfo["Power4x7Suspend"] = fileCheck("/proc/stb/fp/power4x7suspend")
 SystemInfo["MaxPIPSize"] = MODEL in ("hd51", "h7", "vs1500", "e4hdultra") and (360, 288) or (540, 432)
 SystemInfo["HasExternalPIP"] = PLATFORM != "1genxt" and fileCheck("/proc/stb/vmpeg/1/external")
+SystemInfo["PiPLimited720x576"] = MODEL in ("gbquad4kpro", "vuduo4klite")  # hardware limits PiP to 720x576, no Big PiP / Splitscreen
 SystemInfo["VideoDestinationConfigurable"] = fileExists("/proc/stb/vmpeg/0/dst_left")
 SystemInfo["hasPIPVisibleProc"] = fileCheck("/proc/stb/vmpeg/1/visible")
 SystemInfo["3DMode"] = fileCheck("/proc/stb/fb/3dmode") or fileCheck("/proc/stb/fb/primary/3d")
