@@ -7,7 +7,7 @@ self.selectKey("OK")
 		</code>
 	</step>
 	<step id="introduction" >
-		<text value="Use the UP and DOWN keys to select the language, then press OK button. By pressing MENU you can install a new language."/>
+		<text value="Welcome to your assistant [BRANDMODEL].\nThis start wizard will guide you through the basic setup.\nPress the OK button on your remote control to move to the next step."/>
 		<list>
 			<listentry caption="Use the wizard to set up basic features" step="nima"/>
 			<listentry caption="Exit the wizard" step="end"/>

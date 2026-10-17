@@ -2400,7 +2400,7 @@ msgid "Are you sure to remove this entry?"
 msgstr "Eliminar esta entrada?"
 
 msgid "Are you sure you want to activate this network configuration?\n\n"
-msgstr "¿Salir del asistente?\n\n"
+msgstr "¿Quieres activar esta configuración de red?\n\n"
 
 msgid "Are you sure you want to delete\nthe following backup:\n"
 msgstr "Seguro que quieres eliminar los datos EPG desde:\n"
@@ -12295,7 +12295,7 @@ msgid "Pashto"
 msgstr "Pastún"
 
 msgid "Pass"
-msgstr "Contraseña"
+msgstr "Paso"
 
 #, python-format
 msgid "Pass %d/%d"
