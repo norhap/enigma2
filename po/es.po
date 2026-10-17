@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
-msgstr "Project-Id-Version: enigma2\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-16 19:42+0200\nPO-Revision-Date: 2024-10-30 17:31+0100\nLast-Translator: Kuatto\nLanguage-Team: Álvaro <mi casa>\nLanguage: es_ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Poedit 3.5\n"
+msgstr "Project-Id-Version: enigma2\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2026-10-16 22:07+0200\nPO-Revision-Date: 2024-10-30 17:31+0100\nLast-Translator: Kuatto\nLanguage-Team: Álvaro <mi casa>\nLanguage: es_ES\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=2; plural=(n != 1);\nX-Generator: Poedit 3.5\n"
 
 # restorewizard vision core LCD
 # restorewizard vision core LCD
@@ -5013,6 +5013,9 @@ msgstr "Canal DAB+ %s"
 
 msgid "DAB+ decoder back end not installed"
 msgstr "El sistema decodificador DAB+ no está instalado"
+
+msgid "DAB+ front display"
+msgstr "Panel Frontal DAB+"
 
 msgid "DAB+ Scan"
 msgstr "Búsqueda DAB+"
@@ -13417,6 +13420,9 @@ msgstr "Botón RADIO"
 msgid "Radio mode"
 msgstr "Modo radio"
 
+msgid "Radio text"
+msgstr "Texto de radio"
+
 msgid "Radsport"
 msgstr "Ciclismo"
 
@@ -15840,6 +15846,9 @@ msgstr "Mostrar animación cuando esté ocupado"
 msgid "Show Audioselection"
 msgstr "Mostrar selección de audio"
 
+msgid "Show available DAB+ reception and decoding information above the radio text. This option applies to both USB and DVB reception."
+msgstr "Muestra información sobre la recepción y decodificación DAB+ disponible, por encima del texto de radio. Esta opción se aplica tanto a la recepción por USB como a la recepción DVB."
+
 msgid "Show background in radio mode"
 msgstr "Mostrar fondo en modo radio"
 
@@ -16143,6 +16152,9 @@ msgstr "Mostrar la página anterior de descripción"
 msgid "Show Providers"
 msgstr "Mostrar Proveedores"
 
+msgid "Show radio text, slideshow pictures or only the station logo on the receiver's color display. Slideshow mode falls back to the station logo; logo-only mode never shows slides. If no station logo is available, the DAB+ logo is shown. This setting is independent of the TV slideshow."
+msgstr "Muestra texto de radio, imágenes en presentación o solo el logotipo de la emisora ​​en display LCD color. En el modo de presentación, si no hay imágenes disponibles, se muestra el logotipo de la emisora; en el modo de solo logotipo, nunca se muestran imágenes. Si no la emisora no dispone de logotipo, muestra el logotipo de DAB+. Esta configuración es independiente de la presentación de imágenes en modo TV."
+
 msgid "Show receiver image(s)"
 msgstr "Mostrar imagen previa"
 
@@ -16214,6 +16226,9 @@ msgstr "Mostrar selección de subcanales"
 
 msgid "Show subtitle selection"
 msgstr "Mostrar selección de subtítulos"
+
+msgid "Show technical status line"
+msgstr "Mostrar línea de estado técnico"
 
 msgid "Show the Plugin Browser screen"
 msgstr "Mostrar la pantalla del navegador de plugins"
@@ -16512,6 +16527,9 @@ msgstr "Intervalo de muestra (seg.)"
 
 msgid "Slide top to bottom"
 msgstr "Deslizar de izquierda a derecha"
+
+msgid "Slideshow / station logo"
+msgstr "Presentación de diapositivas - logotipo de la emisora"
 
 #, python-format
 msgid "Slot %d"
@@ -17050,6 +17068,9 @@ msgstr "Región: "
 
 msgid "Static IP Router"
 msgstr "Router IP Estática"
+
+msgid "Station logo only"
+msgstr "Solo el logotipo de la emisora"
 
 msgid "Status"
 msgstr "Estado"
