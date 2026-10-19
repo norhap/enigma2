@@ -1,5 +1,4 @@
 from enigma import eAVControl, iServiceInformation, iPlayableService, eServiceReference
-from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
 from Components.Converter.Converter import Converter
 from Components.config import config
@@ -56,18 +55,39 @@ class ServiceInfo(Poll, Converter):
 	IS_DVBI = 42
 	DAB_LANGUAGE = 43
 	DAB_PROTECTION = 44
+	DAB_METADATA = 45
+	DAB_QUALITY = 46
+	DAB_ENSEMBLE_ID = 47
+	DAB_TECHNICAL = 48
+	DAB_TEXT_FIELDS = {
+		"DABArtist": iServiceInformation.sTagArtist,
+		"DABBitrate": iServiceInformation.sTagBitrate,
+		"DABChannel": iServiceInformation.sDABChannel,
+		"DABCodec": iServiceInformation.sTagCodec,
+		"DABDynamicLabel": iServiceInformation.sDABDynamicLabel,
+		"DABEnsemble": iServiceInformation.sDABEnsembleLabel,
+		"DABGenre": iServiceInformation.sTagGenre,
+		"DABReceiver": iServiceInformation.sDABReceiverName,
+		"DABTitle": iServiceInformation.sTagTitle
+	}
+	DAB_QUALITY_FIELDS = {
+		"DABFICQuality": iServiceInformation.sDABFICQuality,
+		"DABMSCQuality": iServiceInformation.sDABMSCQuality
+	}
 
 	def __init__(self, type):
 		Poll.__init__(self)
 		Converter.__init__(self, type)
-		self.poll_interval = 10000
-		self.poll_enabled = True
-		self.type, self.interesting_events = {
+		tokens = {
 			"HasTelext": (self.HAS_TELETEXT, (iPlayableService.evUpdatedInfo,)),
 			"IsMultichannel": (self.IS_MULTICHANNEL, (iPlayableService.evUpdatedInfo,)),
 			"IsStereo": (self.AUDIO_STEREO, (iPlayableService.evUpdatedInfo,)),
 			"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
 			"IsDAB": (self.IS_DAB, (iPlayableService.evStart, iPlayableService.evUpdatedInfo)),
+			"DABEnsembleId": (self.DAB_ENSEMBLE_ID, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABLanguage": (self.DAB_LANGUAGE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABProtection": (self.DAB_PROTECTION, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABTechnical": (self.DAB_TECHNICAL, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"IsDVBI": (self.IS_DVBI, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"IsSoftCSA": (self.IS_SOFTCSA, (iPlayableService.evUpdatedInfo,)),
 			"IsWidescreen": (self.IS_WIDESCREEN, (iPlayableService.evVideoSizeChanged,)),
@@ -89,8 +109,6 @@ class ServiceInfo(Poll, Converter):
 			"TransferBPS": (self.TRANSFERBPS, (iPlayableService.evUpdatedInfo,)),
 			"HasHBBTV": (self.HAS_HBBTV, (iPlayableService.evUpdatedInfo, iPlayableService.evHBBTVInfo,)),
 			"AudioTracksAvailable": (self.AUDIOTRACKS_AVAILABLE, (iPlayableService.evUpdatedInfo,)),
-			"DABLanguage": (self.DAB_LANGUAGE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
-			"DABProtection": (self.DAB_PROTECTION, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"SubtitlesAvailable": (self.SUBTITLES_AVAILABLE, (iPlayableService.evUpdatedInfo,)),
 			"Freq_Info": (self.FREQ_INFO, (iPlayableService.evUpdatedInfo,)),
 			"Editmode": (self.EDITMODE, (iPlayableService.evUpdatedInfo,)),
@@ -107,7 +125,13 @@ class ServiceInfo(Poll, Converter):
 			"IsHDR10": (self.IS_HDR10, (iPlayableService.evVideoSizeChanged, iPlayableService.evVideoGammaChanged,)),
 			"IsHLG": (self.IS_HLG, (iPlayableService.evVideoSizeChanged, iPlayableService.evVideoGammaChanged,)),
 			"IsHDHDR": (self.IS_HDHDR, (iPlayableService.evVideoSizeChanged, iPlayableService.evVideoGammaChanged,)),
-		}[type]
+		}
+		# DAB
+		tokens.update(dict.fromkeys(self.DAB_TEXT_FIELDS, (self.DAB_METADATA, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo))))
+		tokens.update(dict.fromkeys(self.DAB_QUALITY_FIELDS, (self.DAB_QUALITY, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo))))
+		# -----------------------------------
+		self.type, self.interesting_events = tokens.get(type)
+		self._token = type
 		self.interesting_events += (iPlayableService.evStart,)
 
 	def _isHDMIIn(self, info):
@@ -181,6 +205,10 @@ class ServiceInfo(Poll, Converter):
 	def getBoolean(self):
 		service = self.source.service
 		info = service and service.info()
+		if self.type == self.DAB_QUALITY:
+			return self.value >= 0  # Availability, including a measured zero.
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL):
+			return bool(self.text)
 		if not info:
 			return False
 		if self.type == self.IS_DVBI:
@@ -226,6 +254,7 @@ class ServiceInfo(Poll, Converter):
 		elif self.type == self.IS_NOT_WIDESCREEN:
 			return video_aspect not in WIDESCREEN
 		elif self.type == self.SUBSERVICES_AVAILABLE:
+			from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel  # noqa: E402
 			return hasActiveSubservicesForCurrentChannel(info.getInfoString(iServiceInformation.sServiceref)) if not config.misc.hotkey.green.value else False
 		elif self.type == self.HAS_HBBTV:
 			return info.getInfoString(iServiceInformation.sHBBTVUrl) != ""
@@ -272,18 +301,40 @@ class ServiceInfo(Poll, Converter):
 
 	@cached
 	def getText(self):
+		result = ""
 		service = self.source.service
 		info = service and service.info()
 		if not info:
-			return ""
-		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION):
-			result = ""
-			serviceRef = info.getInfoString(iServiceInformation.sServiceref)
-			if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
-				if self.type == self.DAB_LANGUAGE:
-					result = dabMetadata.languageName(info.getInfoString(iServiceInformation.sTagLanguageCode))
-				else:
-					result = info.getInfoString(iServiceInformation.sDABProtection)
+			return result
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_QUALITY, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL):
+			if info:
+				serviceRef = info.getInfoString(iServiceInformation.sServiceref)
+				if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
+					if self.type == self.DAB_LANGUAGE:
+						result = dabMetadata.languageName(info.getInfoString(iServiceInformation.sTagLanguageCode))
+					elif self.type == self.DAB_PROTECTION:
+						result = info.getInfoString(iServiceInformation.sDABProtection)
+					elif self.type == self.DAB_QUALITY:
+						quality = self.value
+						result = f"{quality}%" if quality >= 0 else ""
+					elif self.type == self.DAB_ENSEMBLE_ID:
+						ensembleId = info.getInfo(iServiceInformation.sDABEnsembleId)
+						result = f"{ensembleId:04X}" if ensembleId > 0 else ""
+					elif self.type == self.DAB_TECHNICAL:
+						channel = info.getInfoString(iServiceInformation.sDABChannel)
+						parts = [f"SDR {channel}" if channel else "DVB"]
+						values = [info.getInfoString(self.DAB_TEXT_FIELDS[x]) for x in ("DABCodec", "DABBitrate")]
+						parts.extend(x for x in values if x)
+						protection = info.getInfoString(iServiceInformation.sDABProtection)
+						if protection:
+							parts.append(protection)
+						for name, field in (("FIC", iServiceInformation.sDABFICQuality), ("MSC", iServiceInformation.sDABMSCQuality)):
+							quality = info.getInfo(field)
+							if 0 <= quality <= 100:
+								parts.append(f"{name} {quality}%")
+						result = " | ".join(parts)
+					else:
+						result = info.getInfoString(self.DAB_TEXT_FIELDS[self.argument])
 			return result
 		elif self.type == self.XRES:
 			return self._getVideoWidthStr(info)
@@ -360,8 +411,17 @@ class ServiceInfo(Poll, Converter):
 
 	@cached
 	def getValue(self):
+		result = -1
 		service = self.source.service
 		info = service and service.info()
+		if self.type == self.DAB_QUALITY:
+			if info:
+				serviceRef = info.getInfoString(iServiceInformation.sServiceref)
+				if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
+					quality = info.getInfo(self.DAB_QUALITY_FIELDS[self.argument])
+					if 0 <= quality <= 100:
+						result = quality
+			return result
 		if not info:
 			return -1
 		if self.type == self.XRES:
@@ -382,6 +442,7 @@ class ServiceInfo(Poll, Converter):
 		return -1
 
 	value = property(getValue)
+	range = property(lambda self: 100 if self.token == self.DAB_QUALITY else None)
 
 	def changed(self, what):
 		if what[0] != self.CHANGED_SPECIFIC or what[1] in self.interesting_events:

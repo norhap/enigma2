@@ -3510,11 +3510,11 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 			m_decoder->setTextPID(tpid);
 		}
 
-		if (vpid > 0 && vpid < 0x2000)
-			;
-		else
+		// Radio backgrounds are GUI pictures; keep MPEG still pictures for
+		// non-radio audio playback. Broadcast RASS images retain their decoder.
+		const unsigned int serviceType = m_reference.getUnsignedData(0);
+		if ((vpid <= 0 || vpid >= 0x2000) && serviceType != eServiceReferenceDVB::dRadio && serviceType != eServiceReferenceDVB::dRadioAvc)
 		{
-			std::string value;
 			bool showRadioBackground = eSimpleConfig::getBool("config.misc.showradiopic", true);
 			std::string radio_pic = eSimpleConfig::getString( showRadioBackground ? "config.misc.radiopic" : "config.misc.blackradiopic" );
 			m_decoder->setRadioPic(radio_pic);

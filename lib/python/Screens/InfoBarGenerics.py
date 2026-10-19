@@ -31,7 +31,7 @@ from Screens.MinuteInput import MinuteInput
 from Screens.TimerSelection import TimerSelection
 from Screens.PictureInPicture import PictureInPicture
 from Screens.SubtitleDisplay import SubtitleDisplay
-from Screens.RdsDisplay import DABSlideDisplay, RassInteractive, RdsInfoDisplay
+from Screens.RdsDisplay import DABSlideDisplay, RassInteractive, RdsInfoDisplay, RdsInfoDisplaySummary
 from Screens.TimeDateInput import TimeDateInput
 from Screens.UnhandledKey import UnhandledKey
 from ServiceReference import ServiceReference, isPlayableForCur, hdmiInServiceRef, serviceRefIPToSAT
@@ -1588,9 +1588,9 @@ class InfoBarRdsDecoder:
 		self.dab_slide_display = self.session.instantiateDialog(DABSlideDisplay)
 		self.dab_slide_display.setAnimationMode(0)
 		self.rds_display = self.session.instantiateDialog(RdsInfoDisplay)
-		self.session.instantiateSummaryDialog(self.rds_display)
 		self.rds_display.setAnimationMode(0)
 		self.dab_slide_display.reserveRadioTextArea(self.rds_display)
+		self.rds_display.onLayoutFinish.append(self.dab_slide_display.reserveRadioTextArea)
 		self.rass_interactive = None
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
@@ -1604,7 +1604,7 @@ class InfoBarRdsDecoder:
 
 		self["RdsActions"].setEnabled(False)
 
-		self.onLayoutFinish.append(self.rds_display.show)
+		self.onLayoutFinish.append(self.rds_display.updateVisibility)
 		self.rds_display.onRassInteractivePossibilityChanged.append(self.RassInteractivePossibilityChanged)
 
 	def RassInteractivePossibilityChanged(self, state):
@@ -1624,6 +1624,7 @@ class InfoBarRdsDecoder:
 			rass_interactive.close()
 
 	def startRassInteractive(self):
+		self.dab_slide_display.rassPictureAvailable()
 		self.rds_display.hide()
 		self.rass_interactive = self.session.openWithCallback(self.RassInteractiveClosed, RassInteractive)
 
@@ -1631,7 +1632,7 @@ class InfoBarRdsDecoder:
 		if self.rass_interactive is not None:
 			self.rass_interactive = None
 			self.RassSlidePicChanged()
-		self.rds_display.show()
+		self.rds_display.updateVisibility()
 
 
 class InfoBarSeek:
@@ -4029,7 +4030,22 @@ class InfoBarCueSheetSupport:
 
 
 class InfoBarSummary(Screen):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent=parent)
+		self.radioSummary = None
+		if session.summary_desktop is not None and BoxInfo.getItem("FrontpanelDisplay") and BoxInfo.getItem("displaytype") != "7segment":
+			self.radioSummary = session.doInstantiateDialog(RdsInfoDisplaySummary, (self,), {}, session.summary_desktop)
+			# Follow the normal summary lifecycle, not the TV infobar's hide timer.
+			# RDS updates must never show over menus, movie playback or standby.
+			self.onShow.append(self.radioSummary.updateDisplay)
+			self.onHide.append(self.radioSummary.hide)
+			self.onClose.append(self.closeRadioSummary)
+
+	def closeRadioSummary(self):
+		self.session.deleteDialog(self.radioSummary)
+		self.radioSummary = None
 	skin = """
+
 	<screen position="0,0" size="132,64">
 		<widget source="global.CurrentTime" render="Label" position="62,46" size="82,18" font="Regular;16" >
 			<convert type="ClockToText">WithSeconds</convert>

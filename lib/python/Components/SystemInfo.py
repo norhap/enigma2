@@ -315,6 +315,13 @@ SystemInfo["DefineSat"] = MODEL in ("ustym4kpro", "beyonwizv2", "viper4k", "gbtr
 SystemInfo["RecoveryMode"] = fileCheck("/proc/stb/fp/boot_mode") and MODEL not in ("hd51", "h7")
 SystemInfo["AndroidMode"] = SystemInfo["RecoveryMode"] and MODEL == "multibox" or BRAND in ("wetek", "dreambox")
 SystemInfo["grautec"] = fileExists("/tmp/usbtft")
+try:
+	# The driver reports hexadecimal bpp. Legacy colorlcd128 branding also
+	# includes monochrome OLEDs, so the build flag alone is not sufficient.
+	if isfile("/proc/stb/lcd/bpp"):
+		colorFrontpanel = int(fileReadLine("/proc/stb/lcd/bpp", default="0"), 16) > 8
+except ValueError:
+	colorFrontpanel = False
 SystemInfo["GraphicLCD"] = MODEL in ("vuultimo", "xpeedlx3", "et10000", "hd2400", "sezammarvel", "atemionemesis", "mbultra", "beyonwizt4", "osmio4kplus")
 SystemInfo["LcdLiveTV"] = fileCheck("/proc/stb/fb/sd_detach") or fileCheck("/proc/stb/lcd/live_enable")
 SystemInfo["LCDMiniTV"] = fileExists("/proc/stb/lcd/mode")
