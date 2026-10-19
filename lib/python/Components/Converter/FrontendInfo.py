@@ -83,11 +83,11 @@ class FrontendInfo(Converter):
 				return _("N/A")
 		elif self.type == self.AGC:
 			percent = self.source.agc
-		elif (self.type == self.SNR or self.SNR_STREAM and not swapsnr) or (self.type == self.SNRdB and swapsnr):
+		elif (self.type == self.SNR or self.type == self.SNR_STREAM and not swapsnr) or (self.type == self.SNRdB and swapsnr):
 			percent = self.source.snr
 		elif self.type == self.SNR or self.type == self.SNRdB or self.type == self.SNR_STREAM:
 			if self.source.snr_db is not None:
-				return _("%3.01f dB") % (self.source.snr_db / 100.0)
+				return prefix + _("%3.01f dB") % (self.source.snr_db / 100.0)
 			elif self.source.snr is not None:  # fallback to normal SNR...
 				percent = self.source.snr
 		elif self.type == self.TUNER_TYPE:
@@ -124,7 +124,7 @@ class FrontendInfo(Converter):
 			return string
 		if percent is None:
 			return _("N/A")
-		return "%d %%" % (percent * 100 / 65535)
+		return prefix + "%d %%" % (percent * 100 / 65535)
 
 	@cached
 	def getBool(self):
