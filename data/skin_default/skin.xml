@@ -5608,7 +5608,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<eLabel position="0,0" size="1,26" backgroundColor="blue_light" zPosition="1"/>
 		<eLabel position="0,25" size="120,1" backgroundColor="blue_light" zPosition="1"/>
 		<eLabel position="119,0" size="1,26" backgroundColor="blue_light" zPosition="1"/>
-		<eLabel text="Zapear-PiP" position="20,5" size="166,26" backgroundColor="OE_NewBg2" transparent="1" font="RegularBold;14"/>
+		<eLabel text="PiPZap" position="20,5" size="166,26" backgroundColor="OE_NewBg2" transparent="1" font="RegularBold;14"/>
 	</screen>
 	<!-- ******************** MOVE	PIP ******************** -->
 	<screen name="PiPSetup" position="240,333" size="373,133" backgroundColor="OE_NewBg2" zPosition="1" flags="wfNoBorder">

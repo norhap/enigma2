@@ -12476,7 +12476,7 @@ msgid "PiP with OSD"
 msgstr "PiP con OSD"
 
 msgid "PiPZap"
-msgstr "PiPZap"
+msgstr "Zapear-PiP"
 
 msgid "Pitcairn"
 msgstr "Islas Pitcairn"
