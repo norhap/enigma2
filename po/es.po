@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-17 23:53+0200\n"
+"POT-Creation-Date: 2026-10-19 05:08+0200\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -20775,9 +20775,6 @@ msgstr "Zapea arriba"
 
 msgid "Zap Up/Down"
 msgstr "Zapea arriba - abajo"
-
-msgid "Zapear-PiP"
-msgstr "Zapear-pip"
 
 #, python-format
 msgid "Zapped to timer service %s as Picture in Picture!"

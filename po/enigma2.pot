@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-17 23:53+0200\n"
+"POT-Creation-Date: 2026-10-19 05:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,8 +126,8 @@ msgstr ""
 msgid " (+5 volt terrestrial)"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2053
-#: lib/python/Components/UsageConfig.py:2056
+#: lib/python/Components/UsageConfig.py:2054
+#: lib/python/Components/UsageConfig.py:2057
 msgid " (auto detection)"
 msgstr ""
 
@@ -1306,8 +1306,8 @@ msgstr ""
 #: lib/python/Components/UsageConfig.py:142
 #: lib/python/Components/UsageConfig.py:275
 #: lib/python/Components/UsageConfig.py:537
-#: lib/python/Components/UsageConfig.py:1926
-#: lib/python/Components/UsageConfig.py:1930
+#: lib/python/Components/UsageConfig.py:1927
+#: lib/python/Components/UsageConfig.py:1931
 #, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1995,7 +1995,7 @@ msgstr ""
 msgid "16:9 always"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3561
+#: lib/python/Screens/InfoBarGenerics.py:3562
 msgid "16:9 Always"
 msgstr ""
 
@@ -2374,7 +2374,7 @@ msgstr ""
 msgid "A recording is currently running on the selected tuner. Please select a different tuner or stop the recording and try again."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3266
+#: lib/python/Screens/InfoBarGenerics.py:3267
 msgid ""
 "A recording is currently running.\n"
 "What do you want to do?"
@@ -2578,7 +2578,7 @@ msgstr ""
 msgid "Activate Picture in Picture"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2782
+#: lib/python/Screens/InfoBarGenerics.py:2783
 msgid "Activate Picture in Picture - Enable in LCD MiniTV"
 msgstr ""
 
@@ -2751,19 +2751,19 @@ msgstr ""
 msgid "Add provider"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3258
+#: lib/python/Screens/InfoBarGenerics.py:3259
 msgid "Add recording (enter recording duration)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3259
+#: lib/python/Screens/InfoBarGenerics.py:3260
 msgid "Add recording (enter recording endtime)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3256
+#: lib/python/Screens/InfoBarGenerics.py:3257
 msgid "Add recording (stop after current event)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3257
+#: lib/python/Screens/InfoBarGenerics.py:3258
 msgid "Add recording set to"
 msgstr ""
 
@@ -2808,11 +2808,11 @@ msgstr ""
 msgid "Add title"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3403
+#: lib/python/Screens/InfoBarGenerics.py:3404
 msgid "Add to bouquet"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3401
+#: lib/python/Screens/InfoBarGenerics.py:3402
 msgid "Add to favourites"
 msgstr ""
 
@@ -2989,7 +2989,7 @@ msgstr ""
 msgid "Agenten"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1937
+#: lib/python/Components/UsageConfig.py:1938
 msgid "Aggressive"
 msgstr ""
 
@@ -3100,7 +3100,7 @@ msgstr ""
 msgid "All slots"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2056
+#: lib/python/Components/UsageConfig.py:2057
 msgid "all tuners"
 msgstr ""
 
@@ -3307,7 +3307,7 @@ msgstr ""
 msgid "and select previous channel"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4325
+#: lib/python/Screens/InfoBarGenerics.py:4341
 msgid "And will put your receiver in standby over in "
 msgstr ""
 
@@ -3418,23 +3418,23 @@ msgstr ""
 msgid "Arabic"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1739
+#: lib/python/Components/UsageConfig.py:1740
 msgid "Arabic (Egyptian)"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1742
+#: lib/python/Components/UsageConfig.py:1743
 msgid "Arabic (Iraq)"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1740
+#: lib/python/Components/UsageConfig.py:1741
 msgid "Arabic (Moroccan)"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1741
+#: lib/python/Components/UsageConfig.py:1742
 msgid "Arabic (Syro-Lebanese)"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1743
+#: lib/python/Components/UsageConfig.py:1744
 msgid "Arabic (Tunisian)"
 msgstr ""
 
@@ -3624,11 +3624,11 @@ msgstr ""
 msgid "Aspect ratio"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3523
+#: lib/python/Screens/InfoBarGenerics.py:3524
 msgid "Aspect Ratio Actions"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3521
+#: lib/python/Screens/InfoBarGenerics.py:3522
 msgid "Aspect ratio list"
 msgstr ""
 
@@ -3732,7 +3732,7 @@ msgstr ""
 msgid "Audio decoding"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1807
+#: lib/python/Components/UsageConfig.py:1808
 msgid "Audio description for the visually impaired"
 msgstr ""
 
@@ -3748,7 +3748,7 @@ msgstr ""
 msgid "Audio language selection 4"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3302
+#: lib/python/Screens/InfoBarGenerics.py:3303
 msgid "Audio options"
 msgstr ""
 
@@ -3779,7 +3779,7 @@ msgstr ""
 msgid "Audio track (%s) language"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3304
+#: lib/python/Screens/InfoBarGenerics.py:3305
 msgid "Audio track selection, downmix and other audio options"
 msgstr ""
 
@@ -3822,15 +3822,15 @@ msgstr ""
 msgid "Auto"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2071
-#: lib/python/Components/UsageConfig.py:2103
-#: lib/python/Components/UsageConfig.py:2112
-#: lib/python/Components/UsageConfig.py:2121
-#: lib/python/Components/UsageConfig.py:2130
+#: lib/python/Components/UsageConfig.py:2072
+#: lib/python/Components/UsageConfig.py:2104
+#: lib/python/Components/UsageConfig.py:2113
+#: lib/python/Components/UsageConfig.py:2122
+#: lib/python/Components/UsageConfig.py:2131
 msgid "auto"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3621
+#: lib/python/Screens/InfoBarGenerics.py:3622
 msgid "Auto (not available)"
 msgstr ""
 
@@ -4311,7 +4311,7 @@ msgstr ""
 msgid "Bhutan"
 msgstr ""
 
-#: lib/python/Screens/PictureInPicture.py:79
+#: lib/python/Screens/PictureInPicture.py:85
 msgid "Big PiP"
 msgstr ""
 
@@ -5050,7 +5050,7 @@ msgstr ""
 msgid "Cartoons"
 msgstr ""
 
-#: lib/python/Screens/PictureInPicture.py:74
+#: lib/python/Screens/PictureInPicture.py:80
 msgid "Cascade PiP"
 msgstr ""
 
@@ -5123,7 +5123,7 @@ msgstr ""
 msgid "CCcam Shares Info"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1735
+#: lib/python/Components/UsageConfig.py:1736
 msgid "Cebuano"
 msgstr ""
 
@@ -5205,15 +5205,15 @@ msgstr ""
 msgid "Change PIN Pressing [OK]"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3269
+#: lib/python/Screens/InfoBarGenerics.py:3270
 msgid "Change recording (add time)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3268
+#: lib/python/Screens/InfoBarGenerics.py:3269
 msgid "Change recording (duration)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3270
+#: lib/python/Screens/InfoBarGenerics.py:3271
 msgid "Change recording (endtime)"
 msgstr ""
 
@@ -5259,7 +5259,7 @@ msgstr ""
 msgid "Channel down"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3057
+#: lib/python/Screens/InfoBarGenerics.py:3058
 msgid ""
 "Channel in IPToSAT:\n"
 "\n"
@@ -5443,15 +5443,15 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1734
+#: lib/python/Components/UsageConfig.py:1735
 msgid "Chinese (Simplified)"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1775
+#: lib/python/Components/UsageConfig.py:1776
 msgid "Chinese - Simplified"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1776
+#: lib/python/Components/UsageConfig.py:1777
 msgid "Chinese - Traditional"
 msgstr ""
 
@@ -5472,7 +5472,7 @@ msgstr ""
 msgid "Choice where to put \"%s\""
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2975
+#: lib/python/Screens/InfoBarGenerics.py:2976
 msgid "Choose \"No\" to delete it"
 msgstr ""
 
@@ -5794,7 +5794,7 @@ msgstr ""
 msgid "Close the screen and exit all menus"
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:112 lib/python/Screens/MessageBox.py:113
+#: lib/python/Screens/MessageBox.py:113 lib/python/Screens/MessageBox.py:114
 msgid "Close the window"
 msgstr ""
 
@@ -6486,7 +6486,7 @@ msgstr ""
 msgid "Connected to"
 msgstr ""
 
-#: lib/python/Screens/PictureInPicture.py:208
+#: lib/python/Screens/PictureInPicture.py:215
 msgid "Connected transcoding, limit - no PiP!"
 msgstr ""
 
@@ -6560,8 +6560,8 @@ msgstr ""
 msgid "Continue in background"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1677
 #: lib/python/Screens/InfoBarGenerics.py:1678
+#: lib/python/Screens/InfoBarGenerics.py:1679
 msgid "Continue playback"
 msgstr ""
 
@@ -6701,7 +6701,7 @@ msgstr ""
 msgid "Could not open the file %s!"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3089
+#: lib/python/Screens/InfoBarGenerics.py:3090
 msgid "Could not record due to busy tuner"
 msgstr ""
 
@@ -6856,7 +6856,7 @@ msgstr ""
 msgid "Current event EPG"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2501
+#: lib/python/Screens/InfoBarGenerics.py:2502
 msgid ""
 "Current event is over.\n"
 "Select an option to save the timeshift file."
@@ -7849,7 +7849,7 @@ msgstr ""
 msgid "Disable Picture in Picture"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2772
+#: lib/python/Screens/InfoBarGenerics.py:2773
 msgid "Disable Picture in Picture - Disable in LCD MiniTV"
 msgstr ""
 
@@ -8093,7 +8093,7 @@ msgid ""
 "Update now?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3286
+#: lib/python/Screens/InfoBarGenerics.py:3287
 msgid "Do not record"
 msgstr ""
 
@@ -8190,8 +8190,8 @@ msgstr ""
 msgid "Do you want restore the OpenPLi-based backup?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4306
-#: lib/python/Screens/InfoBarGenerics.py:4337
+#: lib/python/Screens/InfoBarGenerics.py:4322
+#: lib/python/Screens/InfoBarGenerics.py:4353
 msgid "Do you want this?"
 msgstr ""
 
@@ -8220,7 +8220,7 @@ msgid ""
 "choose \"No\" to only delete the currently selected file."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2961
+#: lib/python/Screens/InfoBarGenerics.py:2962
 msgid "Do you want to delete this recording?"
 msgstr ""
 
@@ -8300,7 +8300,7 @@ msgstr ""
 msgid "Do you want to restore your settings?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3869
+#: lib/python/Screens/InfoBarGenerics.py:3870
 msgid "Do you want to resume this playback?"
 msgstr ""
 
@@ -8321,16 +8321,16 @@ msgstr ""
 msgid "Do you want to stop %s and delete timer?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2988
+#: lib/python/Screens/InfoBarGenerics.py:2989
 msgid "Do you want to stop and delete this recording?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3002
+#: lib/python/Screens/InfoBarGenerics.py:3003
 msgid "Do you want to stop and delete this recordings?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2974
-#: lib/python/Screens/InfoBarGenerics.py:3014
+#: lib/python/Screens/InfoBarGenerics.py:2975
+#: lib/python/Screens/InfoBarGenerics.py:3015
 msgid "Do you want to stop this recording?"
 msgstr ""
 
@@ -8389,7 +8389,7 @@ msgstr ""
 msgid "Dolby Digital"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3317
+#: lib/python/Screens/InfoBarGenerics.py:3318
 #, python-format
 msgid "Dolby Digital downmix is now %s"
 msgstr ""
@@ -8423,7 +8423,7 @@ msgstr ""
 msgid "Don't restart"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2502
+#: lib/python/Screens/InfoBarGenerics.py:2503
 msgid "Don't save and stop timeshift"
 msgstr ""
 
@@ -8584,7 +8584,7 @@ msgstr ""
 msgid "Dual Mode"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1779
+#: lib/python/Components/UsageConfig.py:1780
 msgid "Dutch"
 msgstr ""
 
@@ -9312,7 +9312,7 @@ msgstr ""
 msgid "End time to ignore shutdown in standby"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2178
+#: lib/python/Screens/InfoBarGenerics.py:2179
 msgid "End timeshift"
 msgstr ""
 
@@ -10003,7 +10003,7 @@ msgstr ""
 msgid "Ext. NumberZap"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4335
+#: lib/python/Screens/InfoBarGenerics.py:4351
 msgid "Extend sleeptimer 15 minutes"
 msgstr ""
 
@@ -10038,7 +10038,7 @@ msgstr ""
 msgid "Extended Software Plugin"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2542
+#: lib/python/Screens/InfoBarGenerics.py:2543
 msgid "Extension Actions"
 msgstr ""
 
@@ -10051,7 +10051,7 @@ msgstr ""
 msgid "Extensions management"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2632
+#: lib/python/Screens/InfoBarGenerics.py:2633
 msgid "Extensions Menu"
 msgstr ""
 
@@ -10064,7 +10064,7 @@ msgstr ""
 msgid "External"
 msgstr ""
 
-#: lib/python/Screens/PictureInPicture.py:81
+#: lib/python/Screens/PictureInPicture.py:87
 msgid "External PiP"
 msgstr ""
 
@@ -11660,7 +11660,7 @@ msgstr ""
 msgid "Hausa"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1736
+#: lib/python/Components/UsageConfig.py:1737
 msgid "Hawaiian"
 msgstr ""
 
@@ -11720,7 +11720,7 @@ msgstr ""
 msgid "HDMI-CEC Setup Actions"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4430
+#: lib/python/Screens/InfoBarGenerics.py:4446
 msgid "HDMI-IN Actions"
 msgstr ""
 
@@ -11935,7 +11935,7 @@ msgstr ""
 msgid "HLG support"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1738
+#: lib/python/Components/UsageConfig.py:1739
 msgid "Hmong"
 msgstr ""
 
@@ -12136,11 +12136,11 @@ msgstr ""
 msgid "Hours Mins Secs"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3204
+#: lib/python/Screens/InfoBarGenerics.py:3205
 msgid "How many minutes do you want add to the recording?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3199
+#: lib/python/Screens/InfoBarGenerics.py:3200
 msgid "How many minutes do you want to record?"
 msgstr ""
 
@@ -12358,7 +12358,7 @@ msgstr ""
 msgid "Import AutoTimer"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2541
+#: lib/python/Screens/InfoBarGenerics.py:2542
 msgid "Import autotimer in current event"
 msgstr ""
 
@@ -12489,7 +12489,7 @@ msgid ""
 "You must enter the password of the reserve receiver."
 msgstr ""
 
-#: lib/python/Screens/PictureInPicture.py:250
+#: lib/python/Screens/PictureInPicture.py:257
 msgid "Incorrect service type for PiP!"
 msgstr ""
 
@@ -12779,11 +12779,11 @@ msgstr ""
 msgid "Installing Software..."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3051
+#: lib/python/Screens/InfoBarGenerics.py:3052
 msgid "Instant record"
 msgstr ""
 
-#: lib/python/Screens/Hotkey.py:198 lib/python/Screens/InfoBarGenerics.py:2932
+#: lib/python/Screens/Hotkey.py:198 lib/python/Screens/InfoBarGenerics.py:2933
 msgid "Instant recording"
 msgstr ""
 
@@ -13064,7 +13064,7 @@ msgstr ""
 msgid "Israel"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3091
+#: lib/python/Screens/InfoBarGenerics.py:3092
 msgid "It could not be recorded with the ServiceApp player"
 msgstr ""
 
@@ -13177,7 +13177,7 @@ msgstr ""
 msgid "Jump to last item in list or the end of text"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3825
+#: lib/python/Screens/InfoBarGenerics.py:3826
 msgid "Jump to next marked position"
 msgstr ""
 
@@ -13185,7 +13185,7 @@ msgstr ""
 msgid "Jump to next marker"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3824
+#: lib/python/Screens/InfoBarGenerics.py:3825
 msgid "Jump to previous marked position"
 msgstr ""
 
@@ -13653,7 +13653,7 @@ msgstr ""
 msgid "Letterbox"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3695
+#: lib/python/Screens/InfoBarGenerics.py:3696
 msgid "Letterbox zoom"
 msgstr ""
 
@@ -13985,7 +13985,7 @@ msgstr ""
 msgid "Logs folder location **"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2576
+#: lib/python/Screens/InfoBarGenerics.py:2577
 msgid "Logs Manager"
 msgstr ""
 
@@ -14065,7 +14065,7 @@ msgstr ""
 msgid "Luxembourg"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1792
+#: lib/python/Components/UsageConfig.py:1793
 msgid "Luxembourgish"
 msgstr ""
 
@@ -14245,7 +14245,7 @@ msgstr ""
 msgid "Manage Locale/Language Selection settings"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3666
+#: lib/python/Screens/InfoBarGenerics.py:3667
 msgid "Manage sleep timer"
 msgstr ""
 
@@ -14274,7 +14274,7 @@ msgstr ""
 msgid "Manual transponder"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2538
+#: lib/python/Screens/InfoBarGenerics.py:2539
 msgid "Manually import from fallback tuner"
 msgstr ""
 
@@ -14319,7 +14319,7 @@ msgstr ""
 msgid "Mark/Portal/Playlist"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3827
+#: lib/python/Screens/InfoBarGenerics.py:3828
 msgid "Marker Actions"
 msgstr ""
 
@@ -14520,7 +14520,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:109 lib/python/Screens/MessageBox.py:114
+#: lib/python/Screens/MessageBox.py:110 lib/python/Screens/MessageBox.py:115
 msgid "Message Box Actions"
 msgstr ""
 
@@ -15129,7 +15129,7 @@ msgstr ""
 msgid "Movie Information TMDb"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2132
+#: lib/python/Screens/InfoBarGenerics.py:2133
 msgid "Movie List Actions"
 msgstr ""
 
@@ -15702,7 +15702,7 @@ msgid "No"
 msgstr ""
 
 #: lib/python/Components/UsageConfig.py:1255
-#: lib/python/Components/UsageConfig.py:2049
+#: lib/python/Components/UsageConfig.py:2050
 msgid "no"
 msgstr ""
 
@@ -15714,7 +15714,7 @@ msgstr ""
 msgid "No (with notification)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3413
+#: lib/python/Screens/InfoBarGenerics.py:3414
 msgid "No active subservices available."
 msgstr ""
 
@@ -15772,7 +15772,7 @@ msgstr ""
 msgid "No connection"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4236
+#: lib/python/Screens/InfoBarGenerics.py:4252
 msgid ""
 "No data on transponder!\n"
 "(Timeout reading PAT)"
@@ -15802,12 +15802,12 @@ msgstr ""
 msgid "No ECMPids available (FTA Service)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3257
+#: lib/python/Screens/InfoBarGenerics.py:3258
 msgid "No event info found - record"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1890
-#: lib/python/Screens/InfoBarGenerics.py:1926
+#: lib/python/Screens/InfoBarGenerics.py:1891
+#: lib/python/Screens/InfoBarGenerics.py:1927
 msgid "No fast winding possible yet... but you can use the number buttons to skip forward/backward!"
 msgstr ""
 
@@ -15819,9 +15819,9 @@ msgstr ""
 msgid "No free index available"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4234
-#: lib/python/Screens/InfoBarGenerics.py:4248
-#: lib/python/Screens/PictureInPicture.py:232
+#: lib/python/Screens/InfoBarGenerics.py:4250
+#: lib/python/Screens/InfoBarGenerics.py:4264
+#: lib/python/Screens/PictureInPicture.py:239
 msgid "No free tuner!"
 msgstr ""
 
@@ -15933,7 +15933,7 @@ msgstr ""
 msgid "No timeout"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3256
+#: lib/python/Screens/InfoBarGenerics.py:3257
 msgid "No timer - stop the current event in"
 msgstr ""
 
@@ -16230,7 +16230,7 @@ msgstr ""
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2006
+#: lib/python/Components/UsageConfig.py:2007
 msgid "NTP"
 msgstr ""
 
@@ -16418,7 +16418,7 @@ msgstr ""
 msgid "Once"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2001
+#: lib/python/Components/UsageConfig.py:2002
 msgid "Once per day"
 msgstr ""
 
@@ -16538,9 +16538,9 @@ msgstr ""
 msgid "Open Simple EPG"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2129
 #: lib/python/Screens/InfoBarGenerics.py:2130
 #: lib/python/Screens/InfoBarGenerics.py:2131
+#: lib/python/Screens/InfoBarGenerics.py:2132
 msgid "Open the movie list"
 msgstr ""
 
@@ -16625,7 +16625,7 @@ msgstr ""
 #: lib/python/Components/UsageConfig.py:1628
 #: lib/python/Components/UsageConfig.py:1635
 #: lib/python/Components/UsageConfig.py:1667
-#: lib/python/Components/UsageConfig.py:1770
+#: lib/python/Components/UsageConfig.py:1771
 msgid "Original"
 msgstr ""
 
@@ -16965,7 +16965,7 @@ msgstr ""
 msgid "Pause"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2179
+#: lib/python/Screens/InfoBarGenerics.py:2180
 msgid "Pause and start timeshift"
 msgstr ""
 
@@ -16973,11 +16973,11 @@ msgstr ""
 msgid "Pause movie at end"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1676
+#: lib/python/Screens/InfoBarGenerics.py:1677
 msgid "Pause playback"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1675
+#: lib/python/Screens/InfoBarGenerics.py:1676
 msgid "Pause/Continue playback"
 msgstr ""
 
@@ -17053,7 +17053,7 @@ msgstr ""
 msgid "Permanently remove all deleted items"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1796
+#: lib/python/Components/UsageConfig.py:1797
 msgid "Persian"
 msgstr ""
 
@@ -17131,7 +17131,7 @@ msgstr ""
 msgid "PiP"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2749
+#: lib/python/Screens/InfoBarGenerics.py:2750
 msgid "PiP Actions"
 msgstr ""
 
@@ -17253,7 +17253,7 @@ msgstr ""
 msgid "Playback Setup"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1681
+#: lib/python/Screens/InfoBarGenerics.py:1682
 msgid "Playback/Seek Actions"
 msgstr ""
 
@@ -17277,7 +17277,7 @@ msgstr ""
 msgid "Please add titles to the compilation."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3178
+#: lib/python/Screens/InfoBarGenerics.py:3179
 msgid "Please change recording endtime"
 msgstr ""
 
@@ -17380,11 +17380,11 @@ msgstr ""
 msgid "Please select a playlist..."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3643
+#: lib/python/Screens/InfoBarGenerics.py:3644
 msgid "Please select a resolution..."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3411
+#: lib/python/Screens/InfoBarGenerics.py:3412
 msgid "Please select a sub service..."
 msgstr ""
 
@@ -17400,7 +17400,7 @@ msgstr ""
 msgid "Please select an acceptable directory."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3575
+#: lib/python/Screens/InfoBarGenerics.py:3576
 msgid "Please select an aspect ratio..."
 msgstr ""
 
@@ -18034,7 +18034,7 @@ msgstr ""
 msgid "Press or select button and then press 'OK' for attach next function or edit attached."
 msgstr ""
 
-#: lib/python/Screens/InfoBar.py:355 lib/python/Screens/InfoBarGenerics.py:3170
+#: lib/python/Screens/InfoBar.py:355 lib/python/Screens/InfoBarGenerics.py:3171
 msgid "Press STOP and then EXIT to exit the movie list."
 msgstr ""
 
@@ -18091,7 +18091,7 @@ msgstr ""
 msgid "Previous / Arrow Left"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2252
+#: lib/python/Screens/InfoBarGenerics.py:2253
 msgid "Previous saved timeshift has editing properties with plugin CutListEditor."
 msgstr ""
 
@@ -18358,11 +18358,11 @@ msgstr ""
 msgid "Query details from the Internet Movie Database"
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:72
+#: lib/python/Screens/MessageBox.py:73
 msgid "Question"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1935
+#: lib/python/Components/UsageConfig.py:1936
 msgid "Quick"
 msgstr ""
 
@@ -18382,8 +18382,8 @@ msgstr ""
 msgid "Quick Select Actions"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3404
-#: lib/python/Screens/InfoBarGenerics.py:3407
+#: lib/python/Screens/InfoBarGenerics.py:3405
+#: lib/python/Screens/InfoBarGenerics.py:3408
 msgid "Quick zap"
 msgstr ""
 
@@ -18644,7 +18644,7 @@ msgstr ""
 msgid "Record"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3084
+#: lib/python/Screens/InfoBarGenerics.py:3085
 msgid "Record time limited due to conflicting timer"
 msgstr ""
 
@@ -18652,11 +18652,11 @@ msgstr ""
 msgid "Recording"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2933
+#: lib/python/Screens/InfoBarGenerics.py:2934
 msgid "Recording Actions"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3091
+#: lib/python/Screens/InfoBarGenerics.py:3092
 msgid "Recording could not be done because the serviceMP3 player is not installed"
 msgstr ""
 
@@ -18670,11 +18670,11 @@ msgstr ""
 msgid "Recording in progress"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3086
+#: lib/python/Screens/InfoBarGenerics.py:3087
 msgid "Recording is not possible in"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3249
+#: lib/python/Screens/InfoBarGenerics.py:3250
 #, python-format
 msgid "Recording path is \"%s\""
 msgstr ""
@@ -18690,8 +18690,8 @@ msgstr ""
 msgid "Recording Setup"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3192
-#: lib/python/Screens/InfoBarGenerics.py:3228
+#: lib/python/Screens/InfoBarGenerics.py:3193
+#: lib/python/Screens/InfoBarGenerics.py:3229
 msgid "Recording timer was canceled"
 msgstr ""
 
@@ -18736,7 +18736,7 @@ msgstr ""
 msgid "RED button"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3464
+#: lib/python/Screens/InfoBarGenerics.py:3465
 msgid "Red button..."
 msgstr ""
 
@@ -18744,7 +18744,7 @@ msgstr ""
 msgid "Red colored"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3465
+#: lib/python/Screens/InfoBarGenerics.py:3466
 msgid "Red/HbbTV Button Actions"
 msgstr ""
 
@@ -19440,7 +19440,7 @@ msgstr ""
 msgid "Resume from last position"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3869
+#: lib/python/Screens/InfoBarGenerics.py:3870
 #, python-format
 msgid "Resume position at %s"
 msgstr ""
@@ -19452,7 +19452,7 @@ msgstr ""
 #. TRANSLATORS: in the middle somewhere and not from the beginning.
 #. TRANSLATORS: (Some translators seem to have interpreted it as a
 #. TRANSLATORS: question or a choice, but it is a statement.)
-#: lib/python/Screens/InfoBarGenerics.py:3878
+#: lib/python/Screens/InfoBarGenerics.py:3879
 msgid "Resuming playback"
 msgstr ""
 
@@ -19460,7 +19460,7 @@ msgstr ""
 msgid "Retrieving image list - Please wait..."
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:93
+#: lib/python/Screens/MessageBox.py:94 lib/python/Screens/MessageBox.py:95
 msgid "Return the current selection response"
 msgstr ""
 
@@ -19940,11 +19940,11 @@ msgstr ""
 msgid "Save and activate the currently selected skin"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2502
+#: lib/python/Screens/InfoBarGenerics.py:2503
 msgid "Save and restart timeshift"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2502
+#: lib/python/Screens/InfoBarGenerics.py:2503
 msgid "Save and stop timeshift"
 msgstr ""
 
@@ -20001,15 +20001,15 @@ msgstr ""
 msgid "Save timeshift and zap"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3288
+#: lib/python/Screens/InfoBarGenerics.py:3289
 msgid "Save timeshift file"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3289
+#: lib/python/Screens/InfoBarGenerics.py:3290
 msgid "Save timeshift file in movie directory"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3291
+#: lib/python/Screens/InfoBarGenerics.py:3292
 msgid "Save timeshift only for current event"
 msgstr ""
 
@@ -20355,43 +20355,43 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2174
+#: lib/python/Screens/InfoBarGenerics.py:2175
 msgid "Seek back long"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2172
+#: lib/python/Screens/InfoBarGenerics.py:2173
 msgid "Seek back medium"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2170
+#: lib/python/Screens/InfoBarGenerics.py:2171
 msgid "Seek back short"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1680
+#: lib/python/Screens/InfoBarGenerics.py:1681
 msgid "Seek backward"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2169
+#: lib/python/Screens/InfoBarGenerics.py:2170
 msgid "Seek backward (enter time)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:1679
+#: lib/python/Screens/InfoBarGenerics.py:1680
 msgid "Seek forward"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2168
+#: lib/python/Screens/InfoBarGenerics.py:2169
 msgid "Seek forward (enter time)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2175
+#: lib/python/Screens/InfoBarGenerics.py:2176
 msgid "Seek forward long"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2173
+#: lib/python/Screens/InfoBarGenerics.py:2174
 msgid "Seek forward medium"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2171
+#: lib/python/Screens/InfoBarGenerics.py:2172
 msgid "Seek forward short"
 msgstr ""
 
@@ -20860,7 +20860,7 @@ msgstr ""
 msgid "Select the next item in list or move cursor right"
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:92
+#: lib/python/Screens/MessageBox.py:93
 msgid "Select the No / False response"
 msgstr ""
 
@@ -20963,7 +20963,7 @@ msgstr ""
 msgid "Select the video mode to be used on the TV.\n\nThe following video modes will automatically change in 20 seconds.\n\nWARNING: If a video mode causes signal loss, hold the EXIT button to return to the mode video list."
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:94
+#: lib/python/Screens/MessageBox.py:95
 msgid "Select the Yes / True response"
 msgstr ""
 
@@ -21165,11 +21165,11 @@ msgstr ""
 msgid "Service belongs to a parental protected bouquet"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3443
+#: lib/python/Screens/InfoBarGenerics.py:3444
 msgid "Service has been added to the favourites."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3448
+#: lib/python/Screens/InfoBarGenerics.py:3449
 msgid "Service has been added to the selected bouquet."
 msgstr ""
 
@@ -21205,7 +21205,7 @@ msgstr ""
 msgid "Service info - tuner setting values"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4238
+#: lib/python/Screens/InfoBarGenerics.py:4254
 msgid ""
 "Service invalid!\n"
 "(Timeout reading PMT)"
@@ -21220,7 +21220,7 @@ msgstr ""
 msgid "Service name"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4237
+#: lib/python/Screens/InfoBarGenerics.py:4253
 msgid ""
 "Service not found!\n"
 "(SID not found in PAT)"
@@ -21253,7 +21253,7 @@ msgstr ""
 msgid "Service title mode"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4243
+#: lib/python/Screens/InfoBarGenerics.py:4259
 msgid ""
 "Service unavailable!\n"
 "Check tuner configuration!"
@@ -21819,7 +21819,7 @@ msgstr ""
 msgid "Show extension selection"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2540
+#: lib/python/Screens/InfoBarGenerics.py:2541
 msgid "Show extensions"
 msgstr ""
 
@@ -22699,7 +22699,7 @@ msgstr ""
 msgid "Softcam Actions"
 msgstr ""
 
-#: lib/python/Screens/Hotkey.py:238 lib/python/Screens/InfoBarGenerics.py:2537
+#: lib/python/Screens/Hotkey.py:238 lib/python/Screens/InfoBarGenerics.py:2538
 msgid "Softcam Setup"
 msgstr ""
 
@@ -22899,7 +22899,7 @@ msgstr ""
 msgid "Spain"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1802
+#: lib/python/Components/UsageConfig.py:1803
 msgid "Spanish"
 msgstr ""
 
@@ -23009,7 +23009,7 @@ msgstr ""
 msgid "Split preview mode"
 msgstr ""
 
-#: lib/python/Screens/PictureInPicture.py:76
+#: lib/python/Screens/PictureInPicture.py:82
 msgid "Splitscreen"
 msgstr ""
 
@@ -23211,7 +23211,7 @@ msgstr ""
 msgid "Start RDS interactive"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3281
+#: lib/python/Screens/InfoBarGenerics.py:3282
 msgid "Start recording?"
 msgstr ""
 
@@ -23249,7 +23249,7 @@ msgstr ""
 msgid "Start time to ignore shutdown in standby"
 msgstr ""
 
-#: lib/python/Screens/Hotkey.py:202 lib/python/Screens/InfoBarGenerics.py:2166
+#: lib/python/Screens/Hotkey.py:202 lib/python/Screens/InfoBarGenerics.py:2167
 msgid "Start timeshift"
 msgstr ""
 
@@ -23346,11 +23346,11 @@ msgstr ""
 msgid "Stop all streams"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3276
+#: lib/python/Screens/InfoBarGenerics.py:3277
 msgid "Stop and delete all current recordings"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3274
+#: lib/python/Screens/InfoBarGenerics.py:3275
 msgid "Stop and delete recording"
 msgstr ""
 
@@ -23387,7 +23387,7 @@ msgstr ""
 msgid "Stop live TV service"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3271
+#: lib/python/Screens/InfoBarGenerics.py:3272
 msgid "Stop or delete recordings"
 msgstr ""
 
@@ -23406,7 +23406,7 @@ msgstr ""
 msgid "Stop previous broadcasted service on return to movie list."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3271
+#: lib/python/Screens/InfoBarGenerics.py:3272
 #: lib/python/Screens/MovieSelection.py:2017
 msgid "Stop recording"
 msgstr ""
@@ -23436,16 +23436,16 @@ msgstr ""
 msgid "Stop testing plane after  # successful transponders"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3278
-#: lib/python/Screens/InfoBarGenerics.py:3284
+#: lib/python/Screens/InfoBarGenerics.py:3279
+#: lib/python/Screens/InfoBarGenerics.py:3285
 msgid "Stop timer recording"
 msgstr ""
 
-#: lib/python/Screens/Hotkey.py:203 lib/python/Screens/InfoBarGenerics.py:2167
+#: lib/python/Screens/Hotkey.py:203 lib/python/Screens/InfoBarGenerics.py:2168
 msgid "Stop timeshift"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2417
+#: lib/python/Screens/InfoBarGenerics.py:2418
 msgid "Stop timeshift?"
 msgstr ""
 
@@ -23559,12 +23559,12 @@ msgstr ""
 msgid "Stumm"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3326
-#: lib/python/Screens/InfoBarGenerics.py:3331
+#: lib/python/Screens/InfoBarGenerics.py:3327
+#: lib/python/Screens/InfoBarGenerics.py:3332
 msgid "Sub Service Actions"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3325
+#: lib/python/Screens/InfoBarGenerics.py:3326
 msgid "Subservice list"
 msgstr ""
 
@@ -23577,7 +23577,7 @@ msgstr ""
 msgid "Subtitle"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4114
+#: lib/python/Screens/InfoBarGenerics.py:4130
 msgid "Subtitle Actions"
 msgstr ""
 
@@ -23628,7 +23628,7 @@ msgstr ""
 msgid "Subtitle Setup"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4113
+#: lib/python/Screens/InfoBarGenerics.py:4129
 msgid "Subtitle show/hide"
 msgstr ""
 
@@ -23636,11 +23636,11 @@ msgstr ""
 msgid "Subtitles"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4193
+#: lib/python/Screens/InfoBarGenerics.py:4209
 msgid "Subtitles disabled"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4193
+#: lib/python/Screens/InfoBarGenerics.py:4209
 msgid "Subtitles enabled"
 msgstr ""
 
@@ -23736,7 +23736,7 @@ msgstr ""
 msgid "Swap PiP and main picture"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2787
+#: lib/python/Screens/InfoBarGenerics.py:2788
 msgid "Swap services"
 msgstr ""
 
@@ -23804,7 +23804,7 @@ msgstr ""
 msgid "Switch on the display during Suspend Mode"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3522
+#: lib/python/Screens/InfoBarGenerics.py:3523
 msgid "Switch to 720p video?"
 msgstr ""
 
@@ -23825,8 +23825,8 @@ msgstr ""
 msgid "Switch to filelist"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4428
-#: lib/python/Screens/InfoBarGenerics.py:4429
+#: lib/python/Screens/InfoBarGenerics.py:4444
+#: lib/python/Screens/InfoBarGenerics.py:4445
 msgid "Switch to HDMI-IN mode"
 msgstr ""
 
@@ -23844,7 +23844,7 @@ msgstr ""
 msgid "Switch to next channel in history"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3329
+#: lib/python/Screens/InfoBarGenerics.py:3330
 msgid "Switch to next sub service"
 msgstr ""
 
@@ -23866,7 +23866,7 @@ msgstr ""
 msgid "Switch to previous channel in history"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3330
+#: lib/python/Screens/InfoBarGenerics.py:3331
 msgid "Switch to previous sub service"
 msgstr ""
 
@@ -23924,7 +23924,7 @@ msgstr ""
 msgid "Sync mode *"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1941
+#: lib/python/Components/UsageConfig.py:1942
 msgid "Synchronous"
 msgstr ""
 
@@ -24084,7 +24084,7 @@ msgstr ""
 msgid "Teletext"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4100
+#: lib/python/Screens/InfoBarGenerics.py:4116
 msgid "Teletext Actions"
 msgstr ""
 
@@ -24255,7 +24255,7 @@ msgstr ""
 msgid "Thank you for using the wizard. Your [BRANDMODEL] is now ready for use.\n\nPress OK to start."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2440
+#: lib/python/Screens/InfoBarGenerics.py:2441
 #, python-format
 msgid "The %d min remaining before the end of the event."
 msgstr ""
@@ -24432,11 +24432,11 @@ msgstr ""
 msgid "The services/bouquets list is reloaded!"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4325
+#: lib/python/Screens/InfoBarGenerics.py:4341
 msgid "The sleep timer has been activated."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4329
+#: lib/python/Screens/InfoBarGenerics.py:4345
 msgid "The sleep timer has been disabled."
 msgstr ""
 
@@ -24525,7 +24525,7 @@ msgid_plural "There are %d scrambled recordings, which will be unscrambled durin
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3086
+#: lib/python/Screens/InfoBarGenerics.py:3087
 msgid "There is a conflict with this timer"
 msgstr ""
 
@@ -24582,7 +24582,7 @@ msgstr ""
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3592
+#: lib/python/Screens/InfoBarGenerics.py:3593
 msgid ""
 "This function recovers your video signal in case of loss. The video has been changed to 720p.\n"
 "If this is your case, please keep the video at 720P and do the following:\n"
@@ -25052,7 +25052,7 @@ msgstr ""
 msgid "Timer '%s' disabled!"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3668
+#: lib/python/Screens/InfoBarGenerics.py:3669
 msgid "Timer Actions"
 msgstr ""
 
@@ -25090,7 +25090,7 @@ msgstr ""
 msgid "Timer sanity error"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3667
+#: lib/python/Screens/InfoBarGenerics.py:3668
 msgid "Timer selection"
 msgstr ""
 
@@ -25118,15 +25118,15 @@ msgstr ""
 msgid "Timeshift"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2176
-#: lib/python/Screens/InfoBarGenerics.py:2180
+#: lib/python/Screens/InfoBarGenerics.py:2177
+#: lib/python/Screens/InfoBarGenerics.py:2181
 msgid "Timeshift Actions"
 msgstr ""
 
 msgid "Timeshift Active"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2274
+#: lib/python/Screens/InfoBarGenerics.py:2275
 #, python-format
 msgid "Timeshift failed: Storage device free size %d MB."
 msgstr ""
@@ -25139,11 +25139,11 @@ msgstr ""
 msgid "Timeshift location"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2265
+#: lib/python/Screens/InfoBarGenerics.py:2266
 msgid "Timeshift not enough diskspace. Is device mounted?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2262
+#: lib/python/Screens/InfoBarGenerics.py:2263
 msgid "Timeshift not possible!"
 msgstr ""
 
@@ -25231,7 +25231,7 @@ msgstr ""
 msgid "Today"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3826
+#: lib/python/Screens/InfoBarGenerics.py:3827
 msgid "Toggle a cut mark at the current position"
 msgstr ""
 
@@ -25457,7 +25457,7 @@ msgstr ""
 msgid "Transponder"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2005
+#: lib/python/Components/UsageConfig.py:2006
 msgid "Transponder time"
 msgstr ""
 
@@ -25558,7 +25558,7 @@ msgstr ""
 msgid "Tune and focus"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4235
+#: lib/python/Screens/InfoBarGenerics.py:4251
 msgid "Tune failed!"
 msgstr ""
 
@@ -25645,19 +25645,19 @@ msgstr ""
 msgid "Turks and Caicos Islands"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4462
+#: lib/python/Screens/InfoBarGenerics.py:4478
 msgid "Turn off HDMI-IN Full screen mode"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4468
+#: lib/python/Screens/InfoBarGenerics.py:4484
 msgid "Turn off HDMI-IN PiP mode"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4460
+#: lib/python/Screens/InfoBarGenerics.py:4476
 msgid "Turn on HDMI-IN Full screen mode"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4466
+#: lib/python/Screens/InfoBarGenerics.py:4482
 msgid "Turn on HDMI-IN PiP mode"
 msgstr ""
 
@@ -25887,7 +25887,7 @@ msgstr ""
 msgid "Under 5"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:1769
+#: lib/python/Components/UsageConfig.py:1770
 msgid "Undetermined"
 msgstr ""
 
@@ -26730,7 +26730,7 @@ msgstr ""
 msgid "Video wizard"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3622
+#: lib/python/Screens/InfoBarGenerics.py:3623
 #, python-format
 msgid "Video: %dx%d@%gHz"
 msgstr ""
@@ -26833,7 +26833,7 @@ msgstr ""
 msgid "View Rass interactive..."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4099
+#: lib/python/Screens/InfoBarGenerics.py:4115
 msgid "View teletext"
 msgstr ""
 
@@ -27087,7 +27087,7 @@ msgstr ""
 msgid "War"
 msgstr ""
 
-#: lib/python/Screens/MessageBox.py:72
+#: lib/python/Screens/MessageBox.py:73
 msgid "Warning"
 msgstr ""
 
@@ -27648,7 +27648,7 @@ msgstr ""
 msgid "With T2MI RAW mode disabled (default) we can use single T2MI PLP de-encapsulation. With T2MI RAW mode enabled we can use astra-sm to analyze T2MI"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2049
+#: lib/python/Components/UsageConfig.py:2050
 msgid "with text"
 msgstr ""
 
@@ -27667,8 +27667,8 @@ msgstr ""
 msgid "With this setting, you can probably improve the signal quality or eliminate problems that can occur with longer HDMI cables."
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2049
-#: lib/python/Components/UsageConfig.py:2057
+#: lib/python/Components/UsageConfig.py:2050
+#: lib/python/Components/UsageConfig.py:2058
 msgid "with tuner name"
 msgstr ""
 
@@ -27800,7 +27800,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: lib/python/Components/UsageConfig.py:2049
+#: lib/python/Components/UsageConfig.py:2050
 msgid "yes"
 msgstr ""
 
@@ -27808,12 +27808,12 @@ msgstr ""
 msgid "Yes (save index in setup tuner)"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2425
+#: lib/python/Screens/InfoBarGenerics.py:2426
 msgid "Yes and save in movie dir"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2424
-#: lib/python/Screens/InfoBarGenerics.py:2430
+#: lib/python/Screens/InfoBarGenerics.py:2425
+#: lib/python/Screens/InfoBarGenerics.py:2431
 msgid "Yes and save in timeshift dir"
 msgstr ""
 
@@ -27893,7 +27893,7 @@ msgid ""
 "\"%s\"?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:2655
+#: lib/python/Screens/InfoBarGenerics.py:2656
 msgid ""
 "You are ready to add current event to automatic timer.\n"
 "If there are no conflicts, once added you must enter menu:\n"
@@ -28169,11 +28169,11 @@ msgid ""
 "Do you want to remove the service now?"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4306
+#: lib/python/Screens/InfoBarGenerics.py:4322
 msgid "Your receiver will got to standby due to inactivity."
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4336
+#: lib/python/Screens/InfoBarGenerics.py:4352
 msgid "Your receiver will got to standby due to the sleeptimer."
 msgstr ""
 
@@ -28293,9 +28293,6 @@ msgstr ""
 msgid "Zap Up/Down"
 msgstr ""
 
-msgid "Zapear-PiP"
-msgstr ""
-
 #: lib/python/RecordTimer.py:1218
 #, python-format
 msgid "Zapped to timer service %s as Picture in Picture!"
@@ -28337,8 +28334,8 @@ msgstr ""
 msgid "Zirkus"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:3696
-#: lib/python/Screens/InfoBarGenerics.py:4364
+#: lib/python/Screens/InfoBarGenerics.py:3697
+#: lib/python/Screens/InfoBarGenerics.py:4380
 msgid "Zoom Actions"
 msgstr ""
 
@@ -28354,7 +28351,7 @@ msgstr ""
 msgid "Zoom In/Out TV"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4362
+#: lib/python/Screens/InfoBarGenerics.py:4378
 msgid "Zoom In/Out TV..."
 msgstr ""
 
@@ -28362,7 +28359,7 @@ msgstr ""
 msgid "Zoom Off"
 msgstr ""
 
-#: lib/python/Screens/InfoBarGenerics.py:4363
+#: lib/python/Screens/InfoBarGenerics.py:4379
 msgid "Zoom Off..."
 msgstr ""
 
