@@ -184,7 +184,7 @@
 <!--Jukebox_Summary-->
 <screen name="Jukebox_Summary" position="0,0" size="400,240">
 	<ePixmap pixmap="/usr/share/enigma2/display/icon_jukebox.png" zPosition="1" position="0,25" size="400,100" />
-	<widget source="parent.NameStr" render="Running_Text" position="0,125" size="400,52" zPosition="2" font="LCD1;55" horizontalAlignment="center" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap"/>
+	<widget source="parent.NameStr" render="Running_Text" position="0,125" size="400,52" zPosition="2" font="LCD1;55" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap"/>
 	<widget source="parent.Progress" render="Progress" pixmap="/usr/share/enigma2/display/progress-lcd1.png" position="0,177" size="400,14" borderWidth="1" zPosition="2" backgroundColor="oledbackground1" />
 	<widget source="global.CurrentTime" render="Label" position="0,188" size="200,50" font="LCD1;52" horizontalAlignment="left" verticalAlignment="top" foregroundColor="oled1" backgroundColor="#000000">
 		<convert type="ClockToText">Format:%H:%M:%S</convert>
@@ -205,7 +205,7 @@
 	<!--	<widget source="parent.menu" render="Label" position="0,25" size="400,100" font="LCD1;50" horizontalAlignment="center" zPosition="2" foregroundColor="oled1" backgroundColor="#000000" transparent="1">
 			<convert type="StringListSelection"/>
  	</widget> -->
-	<widget source="parent.lcdinfo" render="RunningText" position="0,125" size="400,52" zPosition="2" font="LCD1;55" horizontalAlignment="center" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap"/>
+	<widget source="parent.lcdinfo" render="RunningText" position="0,125" size="400,52" zPosition="2" font="LCD1;55" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap"/>
 	<ePixmap pixmap="/usr/share/enigma2/display/progress-lcd1.png" zPosition="1" position="0,177" size="400,14" />
 	<widget source="global.CurrentTime" render="Label" position="0,188" size="200,50" font="LCD1;52" horizontalAlignment="left" verticalAlignment="top" foregroundColor="oled1" backgroundColor="#000000">
 		<convert type="ClockToText">Format:%H:%M:%S</convert>
@@ -274,7 +274,7 @@
 <!--MovieSelectionSummary-->
 <screen name="MovieSelectionSummary" position="0,0" size="400,240">
 	<ePixmap pixmap="/usr/share/enigma2/display/icon_movieplayer.png" zPosition="1" position="0,25" size="400,100" />
-	<widget source="parent.Service" render="RunningText" position="0,125" size="400,52" font="LCD1;55" horizontalAlignment="center" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap">
+	<widget source="parent.Service" render="RunningText" position="0,125" size="400,52" font="LCD1;55" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap">
 		<convert type="ServiceName">Name</convert>
 	</widget>
 	<ePixmap pixmap="/usr/share/enigma2/display/progress-lcd1.png" zPosition="1" position="0,177" size="400,14" />
@@ -296,7 +296,7 @@
 <!--AdvancedMovieSelectionSummary-->
 <screen name="AdvancedMovieSelectionSummary" position="0,0" size="400,240">
 	<ePixmap pixmap="/usr/share/enigma2/display/icon_movieplayer.png" zPosition="1" position="0,25" size="400,100" />
-	<widget source="parent.Movietitle" render="RunningText" position="0,125" size="400,52" font="LCD1;55" horizontalAlignment="center" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap"/>
+	<widget source="parent.Movietitle" render="RunningText" position="0,125" size="400,52" font="LCD1;55" options="movetype=running,direction=left,startpoint=150,steptime=40,startdelay=2000,noWrap"/>
 	<ePixmap pixmap="/usr/share/enigma2/display/progress-lcd1.png" zPosition="1" position="0,177" size="400,14" />
 	<widget source="parent.MovieSize" render="Label" position="0,188" size="180,50" font="LCD1;52" horizontalAlignment="left" verticalAlignment="top" foregroundColor="oled1" backgroundColor="#000000">
 		<convert type="ServiceTime">Duration</convert>
@@ -675,7 +675,7 @@
 <!--webradio FSdisplay-->
 <screen name="webradioFSdisplay12" position="0,0" size="400,240" >
 	<ePixmap pixmap="/usr/share/enigma2/display/icon_dreamnetcast.png" zPosition="1" position="0,25" size="400,100" />
-	<widget source="Zeile2" render="RunningText" position="0,125" size="400,52" zPosition="2" font="LCD1;55" foregroundColor="oled2" backgroundColor="#00000000" horizontalAlignment="center" options="movetype=running,direction=left,startpoint=150,steptime=30,startdelay=500,noWrap" />
+	<widget source="Zeile2" render="RunningText" position="0,125" size="400,52" zPosition="2" font="LCD1;55" foregroundColor="oled2" backgroundColor="#00000000" options="movetype=running,direction=left,startpoint=150,steptime=30,startdelay=500,noWrap" />
 	<ePixmap pixmap="/usr/share/enigma2/display/progress-lcd1.png" zPosition="1" position="2,180" size="396,3" />
 	<widget source="Zeile1" render="Label" position="0,190" size="400,50" zPosition="2" transparent="1" horizontalAlignment="center" font="LCD1;45" foregroundColor="oled1" backgroundColor="#00000000" />
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
@@ -1346,6 +1346,18 @@
 	</widget>
 	<widget source="session.RecordState" render="FixedLabel" text=" " position="399,239" zPosition="2" size="1,1" font="LCD1;1" horizontalAlignment="left" verticalAlignment="top" foregroundColor="white" backgroundColor="#FF0000">
 		<convert type="ConditionalShowHide">Blink</convert>
+	</widget>
+</screen>
+<!-- Radio text / optional color-display DAB slideshow -->
+<screen name="RdsInfoDisplaySummary" position="0,0" size="400,240" zPosition="1" backgroundColor="#000000" flags="wfNoBorder">
+	<widget source="station" render="RunningText" position="0,0" size="400,38" font="Regular;34" options="movetype=running,direction=left,wrap=0,always=0,startdelay=3000,steptime=80" />
+	<widget source="message" render="RunningText" position="0,40" size="400,174" font="Regular;30" options="movetype=running,direction=top,wrap=1,always=0,startdelay=2000,steptime=80" />
+	<widget name="picture" position="0,40" size="400,174" zPosition="1" alphaTest="blend" scaleFlags="centerScaled" />
+	<widget source="global.CurrentTime" render="Label" position="200,214" size="200,26" font="Regular;24" halign="right" noWrap="1">
+		<convert type="ClockToText">Format:%H:%M</convert>
+	</widget>
+	<widget source="session.RecordState" render="FixedLabel" text="REC" position="0,214" size="200,26" font="Regular;24" noWrap="1">
+		<convert type="ConditionalShowHide" />
 	</widget>
 </screen>
 </skin>
