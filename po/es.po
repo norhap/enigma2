@@ -5930,7 +5930,7 @@ msgstr "Realmente quieres eliminar el directorio desde la papelera?"
 
 #, python-format
 msgid "Do you really want to remove your bookmark of %s?"
-msgstr "Quieres eliminar tu marcador de %s?"
+msgstr "Quieres eliminar su marcador de %s?"
 
 msgid "Do you still want to flash image?\n"
 msgstr "¿Aún así quieres flashear la imagen?\n"
@@ -7077,7 +7077,7 @@ msgid "Error: Unable to delete directory '%s'! (Diretory may not be empty.)"
 msgstr "Error: no se puede eliminar el directorio '%s'! (Es posible que el directorio no esté vacío)"
 
 msgid "Error: Unable to process the command!  Please try again later."
-msgstr "No se puede volver a conectar a la transmisión. Por favor, intenta acceder al canal nuevamente más tarde."
+msgstr "Error: ¡No es posible procesar el comando! Por favor, inténtalo de nuevo más tarde."
 
 #, python-format
 msgid "Error: Unable to rename directory '%s' to '%s'!"
@@ -8919,7 +8919,7 @@ msgid "If you see this, something is wrong with\nyour scart connection. Press OK
 msgstr "Si ves esto, algo anda mal\nsu conexión euroconector. pulse OK para regresar."
 
 msgid "If you switch to another channel in your subscription, the recording will stop."
-msgstr "Si cambias a otro canal de tu suscripción, la grabación se detendrá."
+msgstr "Si cambias a otro canal de su suscripción, la grabación se detendrá."
 
 msgid "If your TV has a brightness or contrast enhancement, disable it. If there is something called \"dynamic\", set it to standard. Adjust the backlight level to a value suiting your taste. Turn down contrast on your TV as much as possible.\nThen turn the brightness setting as low as possible, but make sure that the two lowermost shades of gray stay distinguishable.\nDo not care about the bright shades now. They will be set up in the next step.\nIf you are happy with the result, press OK."
 msgstr "Si su televisor tiene una mejora de brillo o contraste, desactívela. Si hay algo llamado \"dinámico\", configúrelo como estándar. Ajuste el nivel de luz de fondo a un valor que se adapte a sus gustos. Baje el contraste de su televisor tanto como sea posible.\nLuego, baje la configuración de brillo lo más posible, pero asegúrese de que los dos tonos de gris más bajos permanezcan distinguibles.\nNo te preocupes por los tonos brillantes ahora. Se configurarán en el siguiente paso.\nSi está satisfecho con el resultado, pulse OK."
@@ -17226,7 +17226,7 @@ msgid "Storia"
 msgstr "Almacenamiento"
 
 msgid "Stream"
-msgstr "Transmisión"
+msgstr "Stream"
 
 msgid "Stream Relay port"
 msgstr "Puerto Stream Relay"
@@ -17247,10 +17247,10 @@ msgid "Stream request"
 msgstr "Solicitud de stream"
 
 msgid "Stream-tv"
-msgstr "Transmisión"
+msgstr "Stream-tv"
 
 msgid "Streaming"
-msgstr "Transmisión"
+msgstr "Streaming"
 
 msgid "Streaming Clients"
 msgstr "Clientes en Streaming"
@@ -18923,7 +18923,7 @@ msgid "Unable to open tuner (%d)"
 msgstr "No se pudo abrir el sintonizador (%d)"
 
 msgid "Unable to reconnect to the stream. Please try the channel again later."
-msgstr "No se puede volver a conectar a la transmisión. Por favor, intenta acceder al canal nuevamente más tarde."
+msgstr "No se puede volver a conectar al stream. Por favor, intenta acceder al canal nuevamente más tarde."
 
 msgid "Unable to register the DAB+ transponder"
 msgstr "No se pudo registrar el transpondedor DAB+"
@@ -19884,7 +19884,7 @@ msgid "Warning: the second input of this dual tuner may not support SCR LNBs. "
 msgstr "Advertencia: es posible que la segunda entrada de este sintonizador dual no admita LNB SCR. "
 
 msgid "WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."
-msgstr "ADVERTENCIA: Esta película es una transmisión de IPTV.\nNo se puede cortar con este tipo de arroyo."
+msgstr "ADVERTENCIA: Esta película es un stream de IPTV.\nNo se puede cortar con este tipo de stream."
 
 msgid "Wassersport"
 msgstr "Deporte acuático"
