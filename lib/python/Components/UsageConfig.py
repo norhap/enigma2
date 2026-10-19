@@ -1720,7 +1720,8 @@ def InitUsageConfig():
 	])
 	config.subtitles.ai_connection_speed.addNotifier(setAiConnectionSpeed)
 
-	langs_ai = ["af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg",
+	langs_ai = [
+		"af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg",
 		"ca", "zh", "co", "hr", "cs", "da", "nl", "en", "eo", "fr", "fi",
 		"fy", "gl", "ka", "de", "el", "ht", "ha", "hu", "is", "ig", "ga",
 		"it", "ja", "jv", "kn", "kk", "km", "rw", "ko", "ku", "ky", "lo",
