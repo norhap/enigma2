@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 05:08+0200\n"
+"POT-Creation-Date: 2026-10-19 20:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,9 +44,24 @@ msgctxt "Abbreviation of \"Configurable\""
 msgid "C"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/plugin.py:66
+msgctxt "Video output mode"
+msgid "Mode"
+msgstr ""
+
 #: lib/python/Screens/Hotkey.py:632
 msgctxt "Hotkey help separator"
 msgid "/"
+msgstr ""
+
+#: lib/python/Screens/Satconfig.py:151
+msgctxt "Satellite configuration mode"
+msgid "Mode"
+msgstr ""
+
+#: lib/python/Screens/EpgSelection.py:91 lib/python/Screens/EpgSelection.py:94
+msgctxt "button label, 'next screen'"
+msgid "Next"
 msgstr ""
 
 #: lib/python/Screens/EpgSelection.py:90 lib/python/Screens/EpgSelection.py:93
@@ -4761,6 +4776,9 @@ msgstr ""
 #: lib/python/Screens/About.py:848 lib/python/Screens/About.py:850
 #: lib/python/Screens/About.py:852 lib/python/Screens/About.py:855
 msgid "Bytes sent:"
+msgstr ""
+
+msgid "C"
 msgstr ""
 
 #: lib/python/Components/NimManager.py:1304
@@ -15641,6 +15659,10 @@ msgstr ""
 
 #: lib/python/Components/ServiceList.py:431
 msgid "NEXT"
+msgstr ""
+
+#: lib/python/Screens/Hotkey.py:76
+msgid "Next"
 msgstr ""
 
 msgid "Next / Arrow Right"

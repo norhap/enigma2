@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 05:08+0200\n"
+"POT-Creation-Date: 2026-10-19 20:29+0200\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -33,6 +33,18 @@ msgstr "C"
 msgctxt "third event: 'third' event label"
 msgid "Later"
 msgstr "Más tarde"
+
+msgctxt "Satellite configuration mode"
+msgid "Mode"
+msgstr "Modo"
+
+msgctxt "Video output mode"
+msgid "Mode"
+msgstr "Modo"
+
+msgctxt "button label, 'next screen'"
+msgid "Next"
+msgstr "Siguiente"
 
 msgctxt "now/next: 'next' event label"
 msgid "Next"
@@ -3359,6 +3371,9 @@ msgstr "Bytes recibidos:"
 
 msgid "Bytes sent:"
 msgstr "Bytes enviados:"
+
+msgid "C"
+msgstr "C"
 
 msgid "C-Band"
 msgstr "Band-C"
@@ -11394,6 +11409,9 @@ msgid "news/weather report"
 msgstr "noticias/pronóstico del tiempo"
 
 msgid "NEXT"
+msgstr "Siguiente"
+
+msgid "Next"
 msgstr "Siguiente"
 
 msgid "Next / Arrow Right"
