@@ -58,11 +58,6 @@ msgctxt "button label, 'previous screen'"
 msgid "Prev"
 msgstr "Anterior"
 
-# restorewizard vision core LCD
-# restorewizard vision core LCD
-# restorewizard vision core LCD
-# restorewizard vision core LCD
-# restorewizard vision core LCD
 #, python-format
 msgid "\n %s "
 msgstr "\n %s "
@@ -2066,7 +2061,7 @@ msgid "AGC:"
 msgstr "AGC:"
 
 msgid "Agenten"
-msgstr "Argentina"
+msgstr "Agente"
 
 msgid "Aggressive"
 msgstr "Agresivo"
@@ -2078,10 +2073,10 @@ msgid "AI Translation enabled"
 msgstr "Traducción impulsada por IA habilitada"
 
 msgid "AI Translation language"
-msgstr "Traducción"
+msgstr "Traducción de lenguaje IA"
 
 msgid "AI Translation mode"
-msgstr "Traducción"
+msgstr "Modo de traducción por IA"
 
 msgid "AI Translation optimization"
 msgstr "Traducción optimizada por IA habilitada"
@@ -2337,28 +2332,28 @@ msgid "Animals"
 msgstr "Animales"
 
 msgid "Animated Movie"
-msgstr "Modo activado"
+msgstr "Película de animado"
 
 msgid "Animation"
 msgstr "Animación"
 
 msgid "Animation Setup"
-msgstr "Animación"
+msgstr "Ajustes Animación"
 
 msgid "Animation Speed"
-msgstr "Animación"
+msgstr "Velocidad de animación"
 
 msgid "Animation speed of help indicators"
-msgstr "Velocidad de animación de los indicadores de ayuda"
+msgstr "Ayuda de indicadores de velocidad de animación"
 
 msgid "Animations"
-msgstr "Animación"
+msgstr "Animaciones"
 
 msgid "Animazione"
 msgstr "Animación"
 
 msgid "Anime"
-msgstr "Animado"
+msgstr "Animación"
 
 msgid "ANNEX-A"
 msgstr "ANEXO-A"
@@ -2406,7 +2401,7 @@ msgid "Arabic (Moroccan)"
 msgstr "Árabe (marroquí)"
 
 msgid "Arabic (Syro-Lebanese)"
-msgstr "Árabe (sirio-libanés)"
+msgstr "Árabe (Sirio-Libanés)"
 
 msgid "Arabic (Tunisian)"
 msgstr "Árabe (tunecino)"
@@ -2424,7 +2419,7 @@ msgid "Are you sure to delete image:\n"
 msgstr "Estás seguro de eliminar la imagen:\n"
 
 msgid "Are you sure to purge all deleted user bouquets?"
-msgstr "Purgar todos los bouquets de usuario eliminados?"
+msgstr "Eliminar todos los bouquets de usuario eliminados?"
 
 msgid "Are you sure to reboot to:\n"
 msgstr "Quieres Reiniciar con imagen:\n"
@@ -2496,16 +2491,16 @@ msgid "Artist"
 msgstr "Artista"
 
 msgid "Arts"
-msgstr "Letras"
+msgstr "Arte"
 
 msgid "Arts & Culture"
-msgstr "Artes/Cultura"
+msgstr "Arte & Cultura"
 
 msgid "Arts/Culture"
-msgstr "Artes/Cultura"
+msgstr "Arte/Cultura"
 
 msgid "arts/culture (general)"
-msgstr "arte / cultura (sin música, general)"
+msgstr "arte / cultura (general)"
 
 msgid "Arts/Culture (without music)"
 msgstr "Arte / Cultura (sin música)"
@@ -2514,7 +2509,7 @@ msgid "arts/culture (without music, general)"
 msgstr "arte / cultura (sin música, general)"
 
 msgid "arts/culture magazine"
-msgstr "arte/revista de cultura"
+msgstr "programa de arte/cultura"
 
 msgid "Aruba"
 msgstr "Aruba"
@@ -3031,13 +3026,13 @@ msgid "BER:"
 msgstr "BER:"
 
 msgid "Bericht"
-msgstr "Bericht"
+msgstr "Mensaje"
 
 msgid "Bermuda"
 msgstr "Bermuda"
 
 msgid "Berufe"
-msgstr "Berufe"
+msgstr "Profesiones"
 
 msgid "better"
 msgstr "mejor"
@@ -3554,10 +3549,10 @@ msgid "Cardserial"
 msgstr "Serial tarjeta"
 
 msgid "cardserver"
-msgstr "Seleccione cardserver"
+msgstr "servidor tarjeta"
 
 msgid "Cartoni Animati"
-msgstr "Cartoni Animati"
+msgstr "Dibujos animados"
 
 msgid "Cartoon"
 msgstr "Dibujos animados"
@@ -5100,10 +5095,10 @@ msgid "Daily"
 msgstr "Diario"
 
 msgid "daily"
-msgstr "diariamente"
+msgstr "diario"
 
 msgid "Dance"
-msgstr "Cancelar"
+msgstr "Bailar"
 
 msgid "Danish"
 msgstr "Danés"
@@ -6374,7 +6369,7 @@ msgid "Economics"
 msgstr "Ciencias económicas"
 
 msgid "economics/social advisory"
-msgstr "economía/asesoría social"
+msgstr "asesoramiento económico/social"
 
 msgid "Ecuador"
 msgstr "Ecuador"
@@ -6434,22 +6429,22 @@ msgid "Edit update source url"
 msgstr "Editar url para código actualización"
 
 msgid "Education"
-msgstr "Modulación"
+msgstr "Educación"
 
 msgid "Education/Information"
-msgstr "Información Geolocalización"
+msgstr "Educación/Información"
 
 msgid "education/information (general)"
-msgstr "educación/ciencia/temas de actualidad (general)"
+msgstr "educación/información (general)"
 
 msgid "Education/Science/Factual"
-msgstr "Educación/Ciencia/Datos reales"
+msgstr "Educación/Ciencia/Factual"
 
 msgid "education/science/factual topics (general)"
-msgstr "educación/ciencia/temas de actualidad (general)"
+msgstr "educación/ciencia/temas fácticos (general)"
 
 msgid "Educational"
-msgstr "Modulación"
+msgstr "Educativo"
 
 msgid "educational/science/factual topics (general)"
 msgstr "educación/ciencia/temas de actualidad (general)"
@@ -7163,7 +7158,7 @@ msgid "Eventi Speciali"
 msgstr "Eventos especiales"
 
 msgid "Events"
-msgstr "Eventos clave"
+msgstr "Eventos"
 
 msgid "Events Info Menu"
 msgstr "Menú Información de Eventos"
@@ -7374,10 +7369,10 @@ msgid "Extra wide"
 msgstr "Extra amplio"
 
 msgid "ExtraMessageBox"
-msgstr "Mensaje"
+msgstr "Mensaje Extra"
 
 msgid "Extras"
-msgstr "Extra Alto"
+msgstr "Extras"
 
 msgid "Extreme"
 msgstr "Extremo"
@@ -7895,7 +7890,7 @@ msgid "France"
 msgstr "Francia"
 
 msgid "Frauen"
-msgstr "Señora"
+msgstr "Mujeres"
 
 msgid "Free"
 msgstr "Libre"
@@ -8120,7 +8115,7 @@ msgid "General AC3 delay"
 msgstr "Retardo general AC3"
 
 msgid "General Arts"
-msgstr "Espectáculo General"
+msgstr "Artes Generales"
 
 msgid "General bluetooth audio delay"
 msgstr "Retardo General audio bluetooth"
@@ -8715,7 +8710,7 @@ msgid "Home"
 msgstr "Hogar"
 
 msgid "Home and Garden"
-msgstr "Orden de comando"
+msgstr "Hogar y Jardín"
 
 msgid "Homepage"
 msgstr "Hogar"
@@ -10304,34 +10299,34 @@ msgid "Magazin"
 msgstr "Ragazzi"
 
 msgid "Magazine"
-msgstr "Revista Cine"
+msgstr "Programa Cine"
 
 msgid "Magazine Caccia e Pesca"
-msgstr "Revista Caccia e Pesca"
+msgstr "Programa Caccia e Pesca"
 
 msgid "Magazine Cinema"
-msgstr "Revista Cine"
+msgstr "Programa Cine"
 
 msgid "Magazine Cultura"
-msgstr "Revista Cultura"
+msgstr "Programa Cultura"
 
 msgid "Magazine Musica"
-msgstr "Revista Música"
+msgstr "Programa Música"
 
 msgid "Magazine Natura"
-msgstr "Revista Natura"
+msgstr "Programa Natura"
 
 msgid "Magazine Scienza"
-msgstr "Revista Ciencia"
+msgstr "Programa Ciencia"
 
 msgid "Magazine Sport"
-msgstr "Revista Natura"
+msgstr "Programa Natura"
 
 msgid "Magazine Viaggi"
-msgstr "Revista Viaggi"
+msgstr "Programa Viajes"
 
 msgid "magazines/reports/documentary"
-msgstr "revista/informe/documental"
+msgstr "programas/deportes/documental"
 
 msgid "Magenta"
 msgstr "Argentina"
@@ -10745,10 +10740,10 @@ msgid "module disabled"
 msgstr "módulo deshabilitado"
 
 msgid "Moldova (Republic of)"
-msgstr "Moldovia (República de)"
+msgstr "República de (Moldovia)"
 
 msgid "Moldova, Republic of"
-msgstr "Moldovia (República de)"
+msgstr "República de (Moldovia)"
 
 msgid "Mon"
 msgstr "Lun"
@@ -11388,10 +11383,10 @@ msgid "News and Weather"
 msgstr "Noticias y clima"
 
 msgid "News Magazine"
-msgstr "Revista de noticias"
+msgstr "Programa de noticias"
 
 msgid "news magazine"
-msgstr "revista de noticias"
+msgstr "programa de noticias"
 
 msgid "News/Current Affairs"
 msgstr "Noticias Actualidades"
@@ -12509,7 +12504,7 @@ msgid "Play"
 msgstr "Play"
 
 msgid "Play / Pause"
-msgstr "PlayPausa"
+msgstr "Play - Pausa"
 
 msgid "Play archive"
 msgstr "Reproducir archivo"
@@ -13343,7 +13338,7 @@ msgid "Punjabi"
 msgstr "Punjabi"
 
 msgid "Puppentrick"
-msgstr "Truco de marioneta"
+msgstr "Animación con marionetas"
 
 msgid "Puppets"
 msgstr "Marionetas"
@@ -16312,13 +16307,13 @@ msgid "Show WLAN status"
 msgstr "Mostrar estado Wireless LAN"
 
 msgid "show/game show (general)"
-msgstr "show/juego (general)"
+msgstr "programa/concurso (general)"
 
 msgid "Show/Game Show/Leisure hobbies"
-msgstr "Pasatiempos de ocio"
+msgstr "Programa de concursos/Pasatiempos y ocio"
 
 msgid "Show/Games show"
-msgstr "Mostrar Games show"
+msgstr "Espectáculo/Programa de juegos"
 
 msgid "Show/Hide focus bar"
 msgstr "Mostrar/Ocultar barra de enfoque"
@@ -16327,7 +16322,7 @@ msgid "Show/hide window"
 msgstr "Mostrar/ocultar ventana"
 
 msgid "Showbiz"
-msgstr "Mostrar"
+msgstr "El mundo del espectáculo"
 
 msgid "Showing all"
 msgstr "Mostrando todo"
@@ -16538,13 +16533,13 @@ msgid "Sleeptimer edit"
 msgstr "Editar temporizador de descanso"
 
 msgid "Slide drop"
-msgstr "Caída de diapositivas"
+msgstr "Caída deslizando"
 
 msgid "Slide from left"
-msgstr "Deslizar desde la izquierda"
+msgstr "Desliza desde la izquierda"
 
 msgid "Slide left to right"
-msgstr "Deslizar de izquierda a derecha"
+msgstr "Desliza de izquierda a derecha"
 
 msgid "Slide picture in loop"
 msgstr "Mostrar la imagen en bucle"
@@ -16592,10 +16587,10 @@ msgid "slow"
 msgstr "lento"
 
 msgid "Slow motion"
-msgstr "Velocidad de cámara lenta"
+msgstr "Cámara lenta"
 
 msgid "Slow motion speeds"
-msgstr "Velocidad de cámara lenta"
+msgstr "Velocidades de cámara lenta"
 
 msgid "Small"
 msgstr "Pequeño"
@@ -16785,7 +16780,7 @@ msgid "Sorting of playlists"
 msgstr "Orden de listas de reproducción"
 
 msgid "Sotho, Southern"
-msgstr "Sudán del Sur"
+msgstr "Sotho meridional"
 
 msgid "Soul/Rhythm Blues"
 msgstr "Soul/Blues rítmico"
@@ -16842,10 +16837,10 @@ msgid "special (general)"
 msgstr "deportes (general)"
 
 msgid "Special 1"
-msgstr "Especial"
+msgstr "Especial 1"
 
 msgid "Special 2"
-msgstr "Especial"
+msgstr "Especial 2"
 
 msgid "special events"
 msgstr "eventos especiales"
@@ -16893,10 +16888,10 @@ msgid "Spettacolo"
 msgstr "Color del texto"
 
 msgid "Spiele"
-msgstr "Juego"
+msgstr "Juegos"
 
 msgid "Spielfilm"
-msgstr "Película de juego"
+msgstr "Largometraje"
 
 msgid "Split preview mode"
 msgstr "Modo de vista previa dividida"
@@ -16917,10 +16912,10 @@ msgid "sports (general)"
 msgstr "deportes (general)"
 
 msgid "sports magazine"
-msgstr "magacine de deportes"
+msgstr "programa de deportes"
 
 msgid "Sports Magazines"
-msgstr "Magacine de deportes"
+msgstr "Programas de deportes"
 
 msgid "Sprache"
 msgstr "Sprache"
@@ -17637,7 +17632,7 @@ msgid "Tanz"
 msgstr "Tanz"
 
 msgid "Tanzania, United Republic of"
-msgstr "Tanzania"
+msgstr "República Unida de Tanzania"
 
 msgid "Tatar"
 msgstr "Qatar"
@@ -17664,7 +17659,7 @@ msgid "Telefilm"
 msgstr "Telefilm"
 
 msgid "telegram @norhap"
-msgstr "telegrama @norhap"
+msgstr "telegram @norhap"
 
 msgid "Telenovela"
 msgstr "Telenovela"
@@ -19523,13 +19518,13 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 msgid "Varieta"
-msgstr "Varietal"
+msgstr "Variedad"
 
 msgid "Variety"
-msgstr "Varietal"
+msgstr "Variedad"
 
 msgid "variety show"
-msgstr "show de variedades"
+msgstr "programa de variedades"
 
 msgid "Various"
 msgstr "Varios"
