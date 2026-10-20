@@ -3314,7 +3314,7 @@ msgid "Bus: "
 msgstr "Bus: "
 
 msgid "Business"
-msgstr "Brillo"
+msgstr "Negocio"
 
 msgid "Business & Finance"
 msgstr "Negocios y Finanzas"
@@ -3393,7 +3393,7 @@ msgid "Caccia"
 msgstr "Caccia"
 
 msgid "Cache thumbnails"
-msgstr "Crear caché de miniaturas"
+msgstr "Caché de miniaturas"
 
 msgid "Cached:"
 msgstr "En Caché:"
@@ -3534,7 +3534,7 @@ msgid "Card"
 msgstr "Tarjeta"
 
 msgid "card"
-msgstr "MMC card"
+msgstr "card"
 
 msgid "card reader"
 msgstr "lector de tarjetas"
@@ -3567,7 +3567,7 @@ msgid "Cascade PiP"
 msgstr "PiP en cascada"
 
 msgid "Casting"
-msgstr "Esperando"
+msgstr "Casting"
 
 msgid "Catalan"
 msgstr "Catalán"
@@ -3634,7 +3634,7 @@ msgid "centered, wrapped"
 msgstr "centrado, envuelto"
 
 msgid "Central African Republic"
-msgstr "República Centroafricana"
+msgstr "República CentroAfricana"
 
 msgid "Central Khmer"
 msgstr "Centro"
@@ -3740,7 +3740,7 @@ msgid "Channel not in services list"
 msgstr "Canal no en lista de canales"
 
 msgid "Channel Selection"
-msgstr "Selección de canal"
+msgstr "Selección de Canal"
 
 msgid "Channel selection"
 msgstr "Selección de canal"
@@ -3771,10 +3771,10 @@ msgid "Channels imported successfully from %s"
 msgstr "Canales importados con éxito desde %s"
 
 msgid "Channels only"
-msgstr "Solo Canales"
+msgstr "Solo canales"
 
 msgid "ChannelSelectionRadio"
-msgstr "Selección de canal"
+msgstr "Selección canal Radio"
 
 msgid "Chap."
 msgstr "Cap."
@@ -4059,7 +4059,7 @@ msgid "Clear"
 msgstr "Limpiar"
 
 msgid "Clear before scan"
-msgstr "Limpiar antes de escanear"
+msgstr "Limpiar antes de buscar"
 
 msgid "Clear fixed"
 msgstr "Limpiar dirección"
@@ -4195,7 +4195,7 @@ msgid "Command script"
 msgstr "Script de comandos"
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
-msgstr "Ordene al televisor que cambie a la entrada HDMI correcta cuando se activen los temporizadores zap."
+msgstr "Haz que el televisor cambie a la entrada HDMI correcta cuando se activen los temporizadores de cambio de canal."
 
 msgid "Command to run"
 msgstr "Comando para ejecutar"
@@ -4213,7 +4213,7 @@ msgid "Common Interface"
 msgstr "Interfaz común"
 
 msgid "Common Interface assignment"
-msgstr "Asignación de interfaz común"
+msgstr "Asignación de Interfaz Común"
 
 msgid "Common Setup Actions"
 msgstr "Acciones Ajustes Comunes"
@@ -4225,7 +4225,7 @@ msgid "Comoros"
 msgstr "Comoros"
 
 msgid "Compact flash"
-msgstr "Compact flash"
+msgstr "Flash compacto"
 
 msgid "Complete"
 msgstr "Completo"
@@ -4243,7 +4243,7 @@ msgid "Computer"
 msgstr "Completo"
 
 msgid "Config"
-msgstr "Configurando"
+msgstr "Configuración"
 
 msgid "Config EPG: New | OpenSPA"
 msgstr "Configurar EPG: Nuevo | OpenSPA"
@@ -4671,7 +4671,7 @@ msgid "confirmed"
 msgstr "confirmado"
 
 msgid "Conflict not resolved!"
-msgstr "Conflicto no resuelto!"
+msgstr "¡Conflicto no resuelto!"
 
 msgid "Congo"
 msgstr "Congo"
@@ -4728,7 +4728,7 @@ msgid "Content"
 msgstr "Contenido"
 
 msgid "Content does not fit on DVD!"
-msgstr "El contenido no cabe en el DVD!"
+msgstr "¡El contenido no cabe en el DVD!"
 
 msgid "contents:"
 msgstr "contenido:"
@@ -5083,13 +5083,13 @@ msgid "DAC"
 msgstr "DAC"
 
 msgid "Dai 12 anni in su"
-msgstr "Hace 12 años en su"
+msgstr "A partir de 12 años"
 
 msgid "Dai 14 anni in su"
-msgstr "Hace 14 años en su"
+msgstr "A partir de 14 años"
 
 msgid "Dai 18 anni in su"
-msgstr "Hace 18 años en su"
+msgstr "A partir de 18 años"
 
 msgid "Daily"
 msgstr "Diario"
@@ -7582,7 +7582,7 @@ msgid "FastScan"
 msgstr "Búsqueda Rápida"
 
 msgid "FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'."
-msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de Búsqueda Rápida seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción 'Limpiar antes de escanear' establecida en 'Sí'."
+msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de Búsqueda Rápida seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción 'Limpiar antes de buscar' establecida en 'Sí'."
 
 msgid "Favorites"
 msgstr "Favoritos"
