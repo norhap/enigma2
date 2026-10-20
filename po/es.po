@@ -7582,7 +7582,7 @@ msgid "FastScan"
 msgstr "Búsqueda Rápida"
 
 msgid "FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'."
-msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de Búsqueda Rápida seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción «Borrar antes del análisis» establecida en 'Sí'."
+msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de Búsqueda Rápida seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción 'Limpiar antes de escanear' establecida en 'Sí'."
 
 msgid "Favorites"
 msgstr "Favoritos"
@@ -10564,7 +10564,7 @@ msgid "Memoria Ram & Flash"
 msgstr "Memoria Ram & Flash"
 
 msgid "Memory"
-msgstr "Info Memoria"
+msgstr "Memoria"
 
 msgid "Memory index"
 msgstr "Índice de memoria"
@@ -10613,7 +10613,7 @@ msgid "mhwEPG"
 msgstr "mhwEPG"
 
 msgid "MHz"
-msgstr "%s MHz"
+msgstr "MHz"
 
 msgid "Micronesia (Federated States of)"
 msgstr "Micronesia"
@@ -10625,7 +10625,7 @@ msgid "Miinute"
 msgstr "Minuto"
 
 msgid "Mini Series"
-msgstr "Miniserie"
+msgstr "Mini Series"
 
 msgid "MiniDiSEqC A/B"
 msgstr "MiniDiSEqC A/B"
@@ -10659,7 +10659,7 @@ msgid "MiniTV with OSD"
 msgstr "MiniTV con OSD"
 
 msgid "Minority Sports"
-msgstr "Deportes minoritarios"
+msgstr "Deportes Minoritarios"
 
 msgid "Mins"
 msgstr "Minutos"
@@ -10683,7 +10683,7 @@ msgid "Miscellaneous"
 msgstr "Misceláneas"
 
 msgid "MMA"
-msgstr "Artes marciales mixtas"
+msgstr "MMA"
 
 msgid "MMC card"
 msgstr "MMC card"
@@ -10710,10 +10710,10 @@ msgid "mode 12 (current image)"
 msgstr "modo 12 (imagen actual)"
 
 msgid "Mode down a line"
-msgstr "Modo en una línea"
+msgstr "Modo bajar una línea"
 
 msgid "Mode down a screen"
-msgstr "Modo abajo de una pantalla"
+msgstr "Desplazarse hacia abajo por una pantalla"
 
 msgid "Mode PiP"
 msgstr "Modo PiP"
@@ -10725,7 +10725,7 @@ msgid "Model: "
 msgstr "Modelo: "
 
 msgid "Modern Dance"
-msgstr "Modo en una línea"
+msgstr "Danza moderna"
 
 msgid "Modes"
 msgstr "Modos"
@@ -10758,7 +10758,7 @@ msgid "Monday"
 msgstr "Lunes"
 
 msgid "Mondo e Tendenze"
-msgstr "Mundo y Tendenze"
+msgstr "Mundo y tendencias"
 
 msgid "Mongolia"
 msgstr "Mongolia"
@@ -10779,13 +10779,13 @@ msgid "Montserrat"
 msgstr "Montserrat"
 
 msgid "MORE"
-msgstr "Más"
+msgstr "MÁS"
 
 msgid "Morocco"
 msgstr "Marruecos"
 
 msgid "Mosquito noise reduction"
-msgstr "Reducción del sonido de mosquito"
+msgstr "Reducción del ruido tipo 'mosquito'"
 
 msgid "Motor command retries"
 msgstr "Reintentos de comandos de motor"
@@ -11178,7 +11178,7 @@ msgid "N/A"
 msgstr "N/A"
 
 msgid "n/a"
-msgstr "n / A"
+msgstr "n/a"
 
 msgid "Nachrichten"
 msgstr "Nachrichten"
@@ -11410,10 +11410,10 @@ msgid "Next"
 msgstr "Siguiente"
 
 msgid "Next / Arrow Right"
-msgstr "Izquierda / Derecha"
+msgstr "Siguiente / Flecha derecha"
 
 msgid "Next / ArrowRight"
-msgstr "Izquierda / Derecha"
+msgstr "Siguiente / Flecha derecha"
 
 msgid "Next Image"
 msgstr "Próxima Imagen"
@@ -11702,13 +11702,13 @@ msgid "Normal mode"
 msgstr "Modo normal"
 
 msgid "Normal speed"
-msgstr "Modo normal"
+msgstr "Velocidad normal"
 
 msgid "North"
 msgstr "Norte"
 
 msgid "North Macedonia, Republic of"
-msgstr "Corea del Sur"
+msgstr "República de Corea del Sur"
 
 msgid "North Ndebele"
 msgstr "Ndebele del norte"
@@ -11898,7 +11898,7 @@ msgid "Offset CA device index"
 msgstr "Índice de dispositivos CA de desplazamiento"
 
 msgid "offset is"
-msgstr "offset es"
+msgstr "el desplazamiento es"
 
 msgid "Ojibwa"
 msgstr "Ojibwa"
@@ -20754,19 +20754,19 @@ msgid "Zap down"
 msgstr "Zapeo abajo"
 
 msgid "Zap focus to main screen"
-msgstr "Zap enfocado a la pantalla principal"
+msgstr "Zapear en la pantalla principal"
 
 msgid "Zap focus to Picture in Picture"
-msgstr "Zap enfocado a PiP"
+msgstr "Zapear en PiP"
 
 msgid "Zap focused channel on full screen"
-msgstr "Zapear canal enfocado en pantalla completa"
+msgstr "Zapear canal seleccionado en pantalla completa"
 
 msgid "Zap key delay for channel number input"
 msgstr "Retardo de tecla Zap para entrada de número de canal"
 
 msgid "Zap mode"
-msgstr "Modo Zap"
+msgstr "Modo Zapeo"
 
 msgid "Zap to"
 msgstr "Zapea a"
@@ -20781,7 +20781,7 @@ msgid "Zap to selected channel and exit GMEPG"
 msgstr "Zapear al canal seleccionado y salir de GMEPG"
 
 msgid "Zap to selected channel, or show detailed event info (depends on configuration)"
-msgstr "Zap canal seleccionado, o muestre información evento"
+msgstr "Zapea al canal seleccionado, o muestre información evento"
 
 msgid "Zap up"
 msgstr "Zapea arriba"
@@ -20795,7 +20795,7 @@ msgstr "Zapeo al canal de temporizador %s como PiP!"
 
 #, python-format
 msgid "Zapped to timer service %s!"
-msgstr "Zapeo al canal de temporizador %s!"
+msgstr "Zapeado al canal de temporizador %s!"
 
 msgid "Zeichentrick"
 msgstr "Zeichentrick"
