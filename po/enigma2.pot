@@ -130,6 +130,7 @@ msgstr ""
 msgid "  Menu key : Select quad channel"
 msgstr ""
 
+#: data/display/displaytext/skin_display_alternate.xml
 msgid "  REC  "
 msgstr ""
 
@@ -175,7 +176,7 @@ msgstr ""
 msgid " (Lower than any auto)"
 msgstr ""
 
-#: lib/python/Components/Harddisk.py:839
+#: lib/python/Components/Harddisk.py:845
 #, python-format
 msgid " (Partition %d)"
 msgstr ""
@@ -224,6 +225,7 @@ msgstr ""
 msgid " and"
 msgstr ""
 
+#: data/display/7segment/skin_display.xml
 msgid " HI "
 msgstr ""
 
@@ -1712,6 +1714,7 @@ msgid ""
 "%s"
 msgstr ""
 
+#: data/setup.xml
 msgid "'Handle standby from TV' has a higher priority than 'Handle input from TV'."
 msgstr ""
 
@@ -1821,9 +1824,11 @@ msgstr ""
 msgid "** = Reboot System Required"
 msgstr ""
 
+#: data/display/display800/skin_display_picon.xml
 msgid "-"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "- 22:00"
 msgstr ""
 
@@ -1902,9 +1907,11 @@ msgstr ""
 msgid "0"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "0 ( _-)"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "02:59:00"
 msgstr ""
 
@@ -1915,6 +1922,7 @@ msgstr ""
 msgid "1"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "1 (.,?!@)"
 msgstr ""
 
@@ -1979,6 +1987,7 @@ msgstr ""
 msgid "12bit"
 msgstr ""
 
+#: data/setup.xml
 msgid "12V output"
 msgstr ""
 
@@ -2043,6 +2052,7 @@ msgstr ""
 msgid "2"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "2 (ABC)"
 msgstr ""
 
@@ -2058,6 +2068,7 @@ msgstr ""
 msgid "20 seconds"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "22:00"
 msgstr ""
 
@@ -2074,9 +2085,11 @@ msgstr ""
 msgid "3"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "3 (DEF)"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "30 min +-"
 msgstr ""
 
@@ -2116,6 +2129,7 @@ msgstr ""
 msgid "4"
 msgstr ""
 
+#: data/rc_models/vu2.xml
 msgid "4 (GHI)"
 msgstr ""
 
@@ -2160,6 +2174,7 @@ msgstr ""
 msgid "5"
 msgstr ""
 
+#: data/rc_models/vu2.xml
 msgid "5 (JKL)"
 msgstr ""
 
@@ -2180,6 +2195,7 @@ msgstr ""
 msgid "6"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "6 (MNO)"
 msgstr ""
 
@@ -2192,6 +2208,7 @@ msgstr ""
 msgid "7"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "7 (PQRS)"
 msgstr ""
 
@@ -2208,6 +2225,7 @@ msgstr ""
 msgid "8"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "8 (TUV)"
 msgstr ""
 
@@ -2228,6 +2246,7 @@ msgstr ""
 msgid "9"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "9 (WXYZ)"
 msgstr ""
 
@@ -2297,6 +2316,7 @@ msgstr ""
 msgid "[move mode]"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "[OK]  ="
 msgstr ""
 
@@ -2355,6 +2375,7 @@ msgid ""
 "Do that now?"
 msgstr ""
 
+#: data/setup.xml
 msgid "A graphical DVB subtitles will be displayed in the selected color, instead of the original color."
 msgstr ""
 
@@ -2449,6 +2470,7 @@ msgstr ""
 msgid "A-Z, Old-New"
 msgstr ""
 
+#: data/rc_models/vu.xml
 msgid "A/V"
 msgstr ""
 
@@ -2564,6 +2586,7 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
+#: data/setup.xml
 msgid "Activate a way to send individual or specific internal HDMI-CEC commands from the command line."
 msgstr ""
 
@@ -2585,6 +2608,7 @@ msgstr ""
 msgid "activate network adapter configuration"
 msgstr ""
 
+#: data/setup.xml
 msgid "Activate network settings"
 msgstr ""
 
@@ -2601,6 +2625,7 @@ msgstr ""
 msgid "Activate PiP"
 msgstr ""
 
+#: data/setup.xml
 msgid "Activate the configured network settings."
 msgstr ""
 
@@ -2641,6 +2666,7 @@ msgstr ""
 msgid "Adapter settings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Adaptive date display allows recent dates to be displayed as 'Today' or 'Yesterday'. It hides the year for recordings made this year. It hides the day of the week for recordings made in previous years."
 msgstr ""
 
@@ -2747,6 +2773,7 @@ msgstr ""
 msgid "Add Language"
 msgstr ""
 
+#: data/setup.xml
 msgid "Add legacy LEFT/RIGHT actions"
 msgstr ""
 
@@ -2786,9 +2813,11 @@ msgstr ""
 msgid "Add service"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Add service names"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Add service names to each #SERVICE entry."
 msgstr ""
 
@@ -2884,12 +2913,15 @@ msgstr ""
 msgid "Adjust the color settings so that all the color shades are distinguishable, but appear as saturated as possible. If you are happy with the result, press OK to close the video fine-tuning, or use the number keys to select other test screens."
 msgstr ""
 
+#: data/setup.xml
 msgid "Adjust the horizontal position of the letters used for teletext."
 msgstr ""
 
+#: data/setup.xml
 msgid "Adjust the tuner oscillator offset to refine the DAB+ signal reception."
 msgstr ""
 
+#: data/setup.xml
 msgid "Adjust the vertical position of the letters used for teletext."
 msgstr ""
 
@@ -2930,6 +2962,7 @@ msgstr ""
 msgid "Advanced restore"
 msgstr ""
 
+#: data/setup.xml
 msgid "Advanced Settings"
 msgstr ""
 
@@ -2993,6 +3026,7 @@ msgstr ""
 msgid "After event"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "AGC"
 msgstr ""
 
@@ -3008,21 +3042,27 @@ msgstr ""
 msgid "Aggressive"
 msgstr ""
 
+#: data/setup.xml
 msgid "AI Translation color"
 msgstr ""
 
+#: data/setup.xml
 msgid "AI Translation enabled"
 msgstr ""
 
+#: data/setup.xml
 msgid "AI Translation language"
 msgstr ""
 
+#: data/setup.xml
 msgid "AI Translation mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "AI Translation optimization"
 msgstr ""
 
+#: data/setup.xml
 msgid "AI Translation subscription code"
 msgstr ""
 
@@ -3056,9 +3096,11 @@ msgstr ""
 msgid "Alias"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Alignment of events"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Alignment of service names"
 msgstr ""
 
@@ -3139,12 +3181,15 @@ msgstr ""
 msgid "Allow 12bit"
 msgstr ""
 
+#: data/setup.xml
 msgid "Allow quitting movie player with exit"
 msgstr ""
 
+#: data/setup.xml
 msgid "Allow subtitle language to equal audio language"
 msgstr ""
 
+#: data/setup.xml
 msgid "Allow subtitles for hearing impaired"
 msgstr ""
 
@@ -3156,12 +3201,15 @@ msgstr ""
 msgid "Allows the TV remote to be used to control the receiver."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows you to assign the selected function to this button."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows you to enable/disable displaying icons on the frontpanel."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows you to hide the extensions of known file types."
 msgstr ""
 
@@ -3169,18 +3217,23 @@ msgstr ""
 msgid "Allows you to set a schedule to import the EPG and channels list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows you to show images."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows you to show/hide 'Logs Manager' in extensions (blue button)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows your %s %s to read the stored EPG data regularly."
 msgstr ""
 
+#: data/setup.xml
 msgid "Allows your %s %s to store the EPG data regularly."
 msgstr ""
 
+#: data/setup.xml
 msgid "Alpha"
 msgstr ""
 
@@ -3208,6 +3261,7 @@ msgstr ""
 msgid "Also on standby"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Also use a #DESCRIPTION line after each #SERVICE line to hold the service's name."
 msgstr ""
 
@@ -3215,9 +3269,11 @@ msgstr ""
 msgid "Alternative"
 msgstr ""
 
+#: data/setup.xml
 msgid "Alternative numbering mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Alternative services tuner priority"
 msgstr ""
 
@@ -3242,12 +3298,15 @@ msgstr ""
 msgid "Always ask"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Always hide infobar"
 msgstr ""
 
+#: data/setup.xml
 msgid "Always include ECM in recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Always include ECM messages in recordings. This overrides the individual timer settings globally. It allows recordings to be always decrypted afterwards (sometimes called offline decoding), if supported by your %s %s. Default: off."
 msgstr ""
 
@@ -3273,6 +3332,7 @@ msgstr ""
 msgid "Amount %d / Success %d / Failed %d"
 msgstr ""
 
+#: data/setup.xml
 msgid "An attempt is made to capture the current TV status. If this is not possible due to incorrect or missing status messages it may cause the receiver to respond unexpectedly. On the other hand, tries to respond better to different operating conditions."
 msgstr ""
 
@@ -3330,6 +3390,7 @@ msgstr ""
 msgid "Andorra"
 msgstr ""
 
+#: data/menu.xml
 msgid "Android Mode"
 msgstr ""
 
@@ -3368,6 +3429,7 @@ msgstr ""
 msgid "Animation Speed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Animation speed of help indicators"
 msgstr ""
 
@@ -3632,6 +3694,7 @@ msgstr ""
 msgid "Ask user (with default as 'Yes')"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "Aspect"
 msgstr ""
 
@@ -3722,6 +3785,7 @@ msgstr ""
 msgid "Audio"
 msgstr ""
 
+#: data/menu.xml
 msgid "Audio & Video"
 msgstr ""
 
@@ -3751,15 +3815,19 @@ msgstr ""
 msgid "Audio description for the visually impaired"
 msgstr ""
 
+#: data/setup.xml
 msgid "Audio language selection 1"
 msgstr ""
 
+#: data/setup.xml
 msgid "Audio language selection 2"
 msgstr ""
 
+#: data/setup.xml
 msgid "Audio language selection 3"
 msgstr ""
 
+#: data/setup.xml
 msgid "Audio language selection 4"
 msgstr ""
 
@@ -3806,6 +3874,7 @@ msgstr ""
 msgid "Audio volume step size"
 msgstr ""
 
+#: data/setup.xml
 msgid "Audio/Video Setup"
 msgstr ""
 
@@ -3895,6 +3964,7 @@ msgstr ""
 msgid "Auto play blu-ray file"
 msgstr ""
 
+#: data/setup.xml
 msgid "Auto play last service in radio mode"
 msgstr ""
 
@@ -3910,9 +3980,11 @@ msgstr ""
 msgid "auto standby"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Auto video mode selected"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Auto video mode selected for the TV."
 msgstr ""
 
@@ -3948,12 +4020,15 @@ msgstr ""
 msgid "Automatic"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatic bookmarks"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatic gain"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatic Language and Subtitle Settings"
 msgstr ""
 
@@ -3961,9 +4036,11 @@ msgstr ""
 msgid "Automatic Language and Subtitles Setup"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatic refresh"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatic save"
 msgstr ""
 
@@ -3975,6 +4052,7 @@ msgstr ""
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatically refresh the full screen"
 msgstr ""
 
@@ -3982,12 +4060,15 @@ msgstr ""
 msgid "Automatically run FastScan 90 seconds after each entry into standby and every 24 hours while remaining in standby. If a recording is in progress, retry after one hour. Select 'multi' to scan multiple providers."
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatically start timeshift after"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatically turn on external subtitles"
 msgstr ""
 
+#: data/setup.xml
 msgid "Automatically update the Client/Server log"
 msgstr ""
 
@@ -4024,6 +4105,7 @@ msgid ""
 "Prime time (Press long)"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "AUX"
 msgstr ""
 
@@ -4100,9 +4182,11 @@ msgstr ""
 msgid "Background color"
 msgstr ""
 
+#: data/setup.xml
 msgid "Background delete option"
 msgstr ""
 
+#: data/setup.xml
 msgid "Background delete speed"
 msgstr ""
 
@@ -4131,6 +4215,7 @@ msgstr ""
 msgid "Backup failed."
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Backup is running"
 msgstr ""
 
@@ -4247,18 +4332,23 @@ msgstr ""
 msgid "Begin time"
 msgstr ""
 
+#: data/setup.xml
 msgid "Behavior of '0' button in PiP mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Behavior of PAUSE and OK when paused"
 msgstr ""
 
+#: data/setup.xml
 msgid "Behavior when a movie is started"
 msgstr ""
 
+#: data/setup.xml
 msgid "Behavior when a movie is stopped"
 msgstr ""
 
+#: data/setup.xml
 msgid "Behavior when a movie reaches the end"
 msgstr ""
 
@@ -4351,6 +4441,7 @@ msgstr ""
 msgid "Bislama"
 msgstr ""
 
+#: data/setup.xml
 msgid "Bitrate"
 msgstr ""
 
@@ -4417,6 +4508,7 @@ msgstr ""
 msgid "Block noise reduction"
 msgstr ""
 
+#: data/setup.xml
 msgid "Block RTL2832 DVB kernel driver"
 msgstr ""
 
@@ -4430,6 +4522,7 @@ msgstr ""
 msgid "blue"
 msgstr ""
 
+#: data/setup.xml
 msgid "BLUE button"
 msgstr ""
 
@@ -4580,6 +4673,7 @@ msgstr ""
 msgid "Brightness"
 msgstr ""
 
+#: data/setup.xml
 msgid "Brightness (Dimmed)"
 msgstr ""
 
@@ -4722,6 +4816,7 @@ msgstr ""
 msgid "By file size, then by name"
 msgstr ""
 
+#: data/display/vfd255/skin_display_picon.xml
 msgid "by hmmmdada"
 msgstr ""
 
@@ -4778,6 +4873,7 @@ msgstr ""
 msgid "Bytes sent:"
 msgstr ""
 
+#: data/display/display220/skin_display.xml
 msgid "C"
 msgstr ""
 
@@ -4789,6 +4885,7 @@ msgstr ""
 msgid "Cable"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Cable Scan"
 msgstr ""
 
@@ -4864,6 +4961,7 @@ msgstr ""
 msgid "Call-in"
 msgstr ""
 
+#: data/setup.xml
 msgid "Cam Nodule Settings"
 msgstr ""
 
@@ -4875,6 +4973,7 @@ msgstr ""
 msgid "Cameroon"
 msgstr ""
 
+#: data/setup.xml
 msgid "Can be used for different fps between external subtitles and video."
 msgstr ""
 
@@ -5153,6 +5252,7 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Center time-labels and remove date"
 msgstr ""
 
@@ -5197,6 +5297,7 @@ msgstr ""
 msgid "Change AC3 audio track"
 msgstr ""
 
+#: data/setup.xml
 msgid "Change bouquets in quickzap"
 msgstr ""
 
@@ -5216,6 +5317,7 @@ msgstr ""
 msgid "Change Language"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Change pin code"
 msgstr ""
 
@@ -5263,9 +5365,11 @@ msgstr ""
 msgid "Channel"
 msgstr ""
 
+#: data/rc_models/vu.xml
 msgid "Channel +"
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "Channel -"
 msgstr ""
 
@@ -5292,9 +5396,11 @@ msgstr ""
 msgid "Channel IPToSAT"
 msgstr ""
 
+#: data/setup.xml
 msgid "Channel list mode*"
 msgstr ""
 
+#: data/setup.xml
 msgid "Channel List Settings"
 msgstr ""
 
@@ -5310,6 +5416,7 @@ msgstr ""
 msgid "Channel selection"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Channel Selection"
 msgstr ""
 
@@ -5352,6 +5459,7 @@ msgstr ""
 msgid "Channels only"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "ChannelSelectionRadio"
 msgstr ""
 
@@ -5372,6 +5480,7 @@ msgstr ""
 msgid "chapters"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "ChapterZap"
 msgstr ""
 
@@ -5387,6 +5496,7 @@ msgstr ""
 msgid "Check"
 msgstr ""
 
+#: data/setup.xml
 msgid "Check power and input state from TV"
 msgstr ""
 
@@ -5494,9 +5604,11 @@ msgstr ""
 msgid "Choose \"No\" to delete it"
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose a country scheme for decoding genre information in EPG events."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose a country scheme for decoding rating information in EPG events."
 msgstr ""
 
@@ -5504,6 +5616,7 @@ msgstr ""
 msgid "Choose bouquet"
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose style of main menus"
 msgstr ""
 
@@ -5511,30 +5624,39 @@ msgstr ""
 msgid "Choose the CI protocol operation mode for standard CI or CI Plus."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes and 'ss' is the seconds. ('HH' and 'hh' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the front panel display formatting style for dates. 'D' / 'DD' is the date and 'M' / 'MM' is the month in digits. ('DD' and 'MM' have leading zeros for single digit values.) The screen display will be based on your choice but can be influenced by the skin."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes. ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the location for crash and debug logs folder."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the location where the EPG data will be stored when your %s %s is shut down. The location must be available at boot time."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the name of the file that holds the EPG data when your %s %s is shut down. This can be handy to differentiate between several boxes."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the option to correct invalid EPG data."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose the order in which items are displayed in Help windows"
 msgstr ""
 
@@ -5594,6 +5716,7 @@ msgstr ""
 msgid "Choose whether WMA Pro channel sound tracks should be downmixed or transcoded."
 msgstr ""
 
+#: data/setup.xml
 msgid "Choose which tuner to configure."
 msgstr ""
 
@@ -5627,6 +5750,7 @@ msgstr ""
 msgid "CI assignment"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "CI Assignment"
 msgstr ""
 
@@ -5659,12 +5783,15 @@ msgstr ""
 msgid "Ciclismo"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "CIconfigMenu"
 msgstr ""
 
+#: data/menu.xml
 msgid "CIFS/Samba"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "CIHelper Setup"
 msgstr ""
 
@@ -5693,6 +5820,7 @@ msgstr ""
 msgid "circular right"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "CIselectMainMenu"
 msgstr ""
 
@@ -5708,6 +5836,7 @@ msgstr ""
 msgid "Classical Music"
 msgstr ""
 
+#: data/setup.xml
 msgid "Clean network trash cans"
 msgstr ""
 
@@ -5790,6 +5919,7 @@ msgstr ""
 msgid "Close Event View screen"
 msgstr ""
 
+#: data/setup.xml
 msgid "Close PiP with 'exit' button"
 msgstr ""
 
@@ -5982,6 +6112,7 @@ msgstr ""
 msgid "Complex (allows mixing audio tracks and aspects)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Composition of the recording filenames"
 msgstr ""
 
@@ -5997,9 +6128,11 @@ msgstr ""
 msgid "Config"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Config EPG: New | OpenSPA"
 msgstr ""
 
+#: data/setup.xml
 msgid "Config resolution of pictures"
 msgstr ""
 
@@ -6028,9 +6161,11 @@ msgstr ""
 msgid "Configuration options for the HELP screen can be found in 'MENU > Setup > User Interface > User Interface Setup'."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure an additional delay to improve external subtitle synchronisation."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure an additional delay to improve subtitle synchronisation."
 msgstr ""
 
@@ -6038,12 +6173,15 @@ msgstr ""
 msgid "Configure ATSC"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure color front LED during deep standby mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure color of the LED when is operation."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure default type for new timers."
 msgstr ""
 
@@ -6059,57 +6197,75 @@ msgstr ""
 msgid "Configure DVB-T"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure for how long the infobar will remain visible after activation."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure for how many time finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure front LED color during recording in standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure front LED color during recording."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure front LED color during standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure how many channels are shown in the selection list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure how recording filenames are constructed."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure how the fan should operate"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure how to show REC symbol in standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure how to show REC symbol in use."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if and how crypto icons will be shown in the channel selection list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if and how long the latest service in Picture in Picture mode will be remembered."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if and how service type icons will be shown in the channel selection list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if and how the record indicator will be shown in the channel selection list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if and how wide columns will be shown in the channel selection list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if epg.dat should be saved at all."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if service picons will be shown in display (when supported by the skin)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if service picons will be shown in the channel selection list."
 msgstr ""
 
@@ -6117,15 +6273,19 @@ msgstr ""
 msgid "Configure if the HDMI EDID checking should be bypassed as this might solve issue with some TVs."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure if the subtitle should switch between normal, italic, bold and bolditalic"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Configure interface"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure on which devices the background delete option should be used."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure separator type used in full description for separate short and extended descriptions."
 msgstr ""
 
@@ -6133,45 +6293,59 @@ msgstr ""
 msgid "Configure the aspect ratio of the screen."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the behavior of the 'pause and ok' key when movie playback is already paused."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the behavior when movie playback is manually stopped."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the behavior when movie playback is started."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the behavior when reaching the end of a movie, during movie playback."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the border width of the subtitles. The dark border makes the subtitles easier to read on a light background."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the brightness level of the front panel display during standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the brightness level of the front panel display for dimmed operation."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the brightness level of the front panel display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the color of the external subtitles, alternative (normal in white, italic in yellow, bold in cyan, underscore in green), white or yellow."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the color of the teletext subtitles."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the contrast level of the front panel display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the cursor behaviour in the channel selection list. When opening the channel selection list you can keep on the current service or already select up/down and you are able to revert the B+/B- buttons."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the DiSEqC mode for this LNB."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the display resolution and the font used for teletext."
 msgstr ""
 
@@ -6179,6 +6353,7 @@ msgstr ""
 msgid "Configure the duration in hours the receiver should go to standby when the receiver is not controlled."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the duration in minutes for the screensaver."
 msgstr ""
 
@@ -6196,30 +6371,39 @@ msgstr ""
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the end coordinate in x of the teletext display area."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the end coordinate in y of the teletext display area."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the first audio language (highest priority)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the first subtitle language (highest priority)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the font size of the subtitles."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the fourth audio language."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the fourth subtitle language."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the function of the '0' button when Picture in Picture is active."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the gateway."
 msgstr ""
 
@@ -6235,63 +6419,83 @@ msgstr ""
 msgid "Configure the general audio volume step size (limit 1-10)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the hard disk drive to go to standby after the specified idle time."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the height of the TrueType font letters used for teletext."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the horizontal alignment of the subtitles."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the infobar fading speed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the initial fast forward speed. When you press the fast forward button, winding will start at this speed."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the initial rewind speed. When you press the rewind button, winding will start at this speed."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the Internet Time Sync Interval."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the IP address."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the latitude of your location."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the longitude of your location."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the minimum amount of disk space to be available for recordings. When the amount of space drops below this value, deleted items will be removed from the trash can."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the nameserver (DNS)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the netmask."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the number of days after which items are automatically removed from the trash can. A setting of 0 disables this."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the number of days after which items are automaticaly removed from the trash can."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the number of days old timers are kept before they are automatically removed from the timer list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the offline decoding delay in milliseconds. The configured delay is observed at each control word parity change."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the possible fast forward speeds."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the possible rewind speeds."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the primary EPG language."
 msgstr ""
 
@@ -6299,6 +6503,7 @@ msgstr ""
 msgid "Configure the refresh rate of the screen."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the screen resolution for teletext (Not all skins support full-HD teletext)."
 msgstr ""
 
@@ -6306,12 +6511,15 @@ msgstr ""
 msgid "Configure the screen resolution in PC output mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the second audio language."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the second subtitle language."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the secondary EPG language."
 msgstr ""
 
@@ -6319,45 +6527,59 @@ msgstr ""
 msgid "Configure the sharpness of the video scaling."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the skip time interval for the '1'/'3' buttons."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the skip time interval for the '4'/'6' buttons."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the skip time interval for the '7'/'9' buttons."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the slow motion speeds."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the source of the frontend data as shown on the infobars. 'Settings' is as stored on the settings. 'Tuner' is as reported by the tuner."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the speed of the background deletion process. Lower speed will consume less hard disk drive performance."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the speed of the fan"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the start coordinate in x of the teletext display area."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the start coordinate in y of the teletext display area."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the subtitle delay when timing information is not available."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the third audio language."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the third subtitle language."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the transparency of the black background of graphical DVB subtitles."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the transparency of the black background of subtitles."
 msgstr ""
 
@@ -6365,15 +6587,19 @@ msgstr ""
 msgid "Configure the transparency of the OSD."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the tuner mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the type of status indication icons shown in the movielist."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the way in which your %s %s changes channels."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure the width of the TrueType font letters used for teletext."
 msgstr ""
 
@@ -6381,15 +6607,19 @@ msgstr ""
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure where completed timers show up in the timer list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether a bold TrueType font is used for teletext."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether a fixed font or a scalable TrueType font is used for teletext."
 msgstr ""
 
@@ -6402,18 +6632,23 @@ msgstr ""
 msgid "Configure whether multi channel sound tracks should be downmixed to stereo."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether or not a rotor position will be displayed on the infobar"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether or not an icon should be shown when your motorized dish is moving."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether service picons will be shown in number zap."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure whether the 'recording' symbol (in the display skin and LCD skin) is visible for real recordings only or also for streaming and pseuso recordings (e.g. EPGrefresh)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure which access level to use for the configuration menu. Expert level gives access to all items."
 msgstr ""
 
@@ -6421,12 +6656,15 @@ msgstr ""
 msgid "Configure which color format should be used on the SCART output."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure which tuner for recordings will be preferred, when more than one tuner is available."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure which tuner type will be preferred when the same service is available on different types of tuners. Choose 'no priority' to try each alternative one by one regardless of the tuner type."
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure which tuner will be preferred, when more than one tuner is available. If set to 'auto' the system will give priority to the tuner having the lowest number of channels/satellites."
 msgstr ""
 
@@ -6434,6 +6672,7 @@ msgstr ""
 msgid "Configure your internal LAN"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Configure your network again"
 msgstr ""
 
@@ -6441,6 +6680,7 @@ msgstr ""
 msgid "Configure your network settings and press BLUE to scan"
 msgstr ""
 
+#: data/setup.xml
 msgid "Configure your NTP server."
 msgstr ""
 
@@ -6560,9 +6800,11 @@ msgstr ""
 msgid "Context"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "Context / Favourites"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "Context / Plugins"
 msgstr ""
 
@@ -6600,9 +6842,11 @@ msgstr ""
 msgid "Contrast"
 msgstr ""
 
+#: data/setup.xml
 msgid "Control LED can be turned on or off here."
 msgstr ""
 
+#: data/setup.xml
 msgid "Control the animation speed of the button indicators in the Help screen. 'Disabled' turns off animation so that indicators jump between buttons."
 msgstr ""
 
@@ -6660,6 +6904,7 @@ msgstr ""
 msgid "Copying files"
 msgstr ""
 
+#: data/setup.xml
 msgid "Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location."
 msgstr ""
 
@@ -6667,6 +6912,7 @@ msgstr ""
 msgid "Cornish"
 msgstr ""
 
+#: data/setup.xml
 msgid "Correct invalid EPG data"
 msgstr ""
 
@@ -6732,9 +6978,11 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+#: data/setup.xml
 msgid "Country for EPG event genre information"
 msgstr ""
 
+#: data/setup.xml
 msgid "Country for EPG event rating information"
 msgstr ""
 
@@ -6785,6 +7033,7 @@ msgstr ""
 msgid "Create DVD-ISO"
 msgstr ""
 
+#: data/setup.xml
 msgid "Create or remove the RTL2832 DVB module blacklist. A full receiver reboot is required; while enabled, this USB tuner is available for DAB+ but not for DVB-T/T2."
 msgstr ""
 
@@ -6829,6 +7078,7 @@ msgstr ""
 msgid "Cron Manager"
 msgstr ""
 
+#: data/menu.xml
 msgid "Cron Timers"
 msgstr ""
 
@@ -6914,18 +7164,23 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
+#: data/setup.xml
 msgid "Custom skip time for '1'/'3' buttons"
 msgstr ""
 
+#: data/setup.xml
 msgid "Custom skip time for '4'/'6' buttons"
 msgstr ""
 
+#: data/setup.xml
 msgid "Custom skip time for '7'/'9' buttons"
 msgstr ""
 
+#: data/menu.xml
 msgid "Customize"
 msgstr ""
 
+#: data/setup.xml
 msgid "Customize channel list cursor behavior"
 msgstr ""
 
@@ -6946,6 +7201,7 @@ msgstr ""
 msgid "Cutlist editor..."
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "CutListEditor"
 msgstr ""
 
@@ -6974,6 +7230,7 @@ msgstr ""
 msgid "Czechia"
 msgstr ""
 
+#: data/display/display400/skin_display_picon.xml
 msgid "D"
 msgstr ""
 
@@ -6999,6 +7256,7 @@ msgstr ""
 msgid "DAB+ scan failed; existing bouquets were kept."
 msgstr ""
 
+#: data/setup.xml
 msgid "DAB+ Settings"
 msgstr ""
 
@@ -7287,9 +7545,11 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
+#: data/setup.xml
 msgid "Debug log time format *"
 msgstr ""
 
+#: data/setup.xml
 msgid "Debug logging *"
 msgstr ""
 
@@ -7301,12 +7561,15 @@ msgstr ""
 msgid "Debug to file"
 msgstr ""
 
+#: data/setup.xml
 msgid "Decoder release strategy *"
 msgstr ""
 
+#: data/setup.xml
 msgid "Decoder start delay *"
 msgstr ""
 
+#: data/setup.xml
 msgid "Decoder start timeout *"
 msgstr ""
 
@@ -7323,6 +7586,7 @@ msgstr ""
 msgid "Deep standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "Deep Standby LED"
 msgstr ""
 
@@ -7342,12 +7606,15 @@ msgstr ""
 msgid "Default settings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Default timer type"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Default video mode selected"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Default video mode selected for the TV."
 msgstr ""
 
@@ -7356,6 +7623,7 @@ msgstr ""
 msgid "Default: '%s'."
 msgstr ""
 
+#: data/setup.xml
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr ""
 
@@ -7431,18 +7699,23 @@ msgstr ""
 msgid "Delay between switch and motor command"
 msgstr ""
 
+#: data/setup.xml
 msgid "Delay for external subtitles"
 msgstr ""
 
+#: data/setup.xml
 msgid "Delay in miliseconds after finish scrolling text on display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Delay in miliseconds before start of scrolling text on display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Delay in miliseconds between scrolling characters on display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Delay start http(s) stream"
 msgstr ""
 
@@ -7508,6 +7781,7 @@ msgstr ""
 msgid "Delete entry"
 msgstr ""
 
+#: data/menu.xml
 msgid "Delete EPG Cache"
 msgstr ""
 
@@ -7647,9 +7921,11 @@ msgstr ""
 msgid "Descramble and record ecm"
 msgstr ""
 
+#: data/setup.xml
 msgid "Descramble end time"
 msgstr ""
 
+#: data/setup.xml
 msgid "Descramble in Standby"
 msgstr ""
 
@@ -7657,12 +7933,15 @@ msgstr ""
 msgid "Descramble in Standby finished"
 msgstr ""
 
+#: data/setup.xml
 msgid "Descramble receiving http streams"
 msgstr ""
 
+#: data/setup.xml
 msgid "Descramble recordings before Shutdown"
 msgstr ""
 
+#: data/setup.xml
 msgid "Descramble start time"
 msgstr ""
 
@@ -7742,6 +8021,7 @@ msgstr ""
 msgid "Device name"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Devices"
 msgstr ""
 
@@ -7781,9 +8061,11 @@ msgstr ""
 msgid "Digital contour removal"
 msgstr ""
 
+#: data/setup.xml
 msgid "Dim delay"
 msgstr ""
 
+#: data/setup.xml
 msgid "Dim the LCD after specified time."
 msgstr ""
 
@@ -7816,6 +8098,7 @@ msgstr ""
 msgid "Directory not accepted, change path."
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Directorybrowser"
 msgstr ""
 
@@ -7828,6 +8111,7 @@ msgstr ""
 msgid "Disable Animations"
 msgstr ""
 
+#: data/setup.xml
 msgid "Disable background scanning"
 msgstr ""
 
@@ -7843,6 +8127,7 @@ msgstr ""
 msgid "Disable Fast Channel Change"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/FastChannelChange/setup.xml
 msgid "Disable FCC during recordings"
 msgstr ""
 
@@ -7871,6 +8156,7 @@ msgstr ""
 msgid "Disable Picture in Picture - Disable in LCD MiniTV"
 msgstr ""
 
+#: data/setup.xml
 msgid "Disable the HDD Process on VFD."
 msgstr ""
 
@@ -7912,6 +8198,7 @@ msgstr ""
 msgid "discussion/interview/debate"
 msgstr ""
 
+#: data/setup.xml
 msgid "DiSEqC"
 msgstr ""
 
@@ -7953,9 +8240,11 @@ msgstr ""
 msgid "DiSEqC-tester settings"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Dish"
 msgstr ""
 
+#: data/setup.xml
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr ""
 
@@ -8003,6 +8292,7 @@ msgstr ""
 msgid "Display EPG list for current channel"
 msgstr ""
 
+#: data/setup.xml
 msgid "Display message before playing next movie"
 msgstr ""
 
@@ -8018,9 +8308,11 @@ msgstr ""
 msgid "Display selection list as a selection menu"
 msgstr ""
 
+#: data/menu.xml
 msgid "Display Settings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Display Setup"
 msgstr ""
 
@@ -8028,6 +8320,7 @@ msgstr ""
 msgid "Display skin"
 msgstr ""
 
+#: data/setup.xml
 msgid "Display the base locales or all locales for a language."
 msgstr ""
 
@@ -8065,6 +8358,7 @@ msgstr ""
 msgid "DNS %d"
 msgstr ""
 
+#: data/setup.xml
 msgid "DNS name or IP address"
 msgstr ""
 
@@ -8256,6 +8550,7 @@ msgstr ""
 msgid "Do you want to install \"%s\"?"
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Do you want to install Plugins?"
 msgstr ""
 
@@ -8367,6 +8662,7 @@ msgstr ""
 msgid "Do you want to update your %s %s?"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Do you want to use auto mode detection?\n\nThis option reads all supported modes and automatically sets the highest resolution supported by your TV. Choose 'No' if you want to customize your settings.\n\nWARNING: If on the next screen you lose signal on your video mode, long press EXIT button to return to the list of video modes."
 msgstr ""
 
@@ -8512,6 +8808,7 @@ msgstr ""
 msgid "Download successfully\n"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Downloadable plugins"
 msgstr ""
 
@@ -8599,6 +8896,7 @@ msgstr ""
 msgid "DUAL LAYER DVD"
 msgstr ""
 
+#: data/menu.xml
 msgid "Dual Mode"
 msgstr ""
 
@@ -8610,6 +8908,7 @@ msgstr ""
 msgid "Dutch / Flemish"
 msgstr ""
 
+#: data/setup.xml
 msgid "DVB and Pango subtitle position"
 msgstr ""
 
@@ -8633,9 +8932,11 @@ msgstr ""
 msgid "DVB frontend"
 msgstr ""
 
+#: data/setup.xml
 msgid "DVB subtitle black transparency"
 msgstr ""
 
+#: data/setup.xml
 msgid "DVB subtitles color"
 msgstr ""
 
@@ -8699,6 +9000,7 @@ msgstr ""
 msgid "DVB-T/-S/-C"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "DVD"
 msgstr ""
 
@@ -8715,6 +9017,7 @@ msgstr ""
 msgid "DVD file browser"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "DVD File Browser"
 msgstr ""
 
@@ -8752,6 +9055,7 @@ msgstr ""
 msgid "E"
 msgstr ""
 
+#: data/display/display480/skin_display.xml
 msgid "E "
 msgstr ""
 
@@ -8776,9 +9080,11 @@ msgstr ""
 msgid "Easy Listening"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "easyCIconfigMenu"
 msgstr ""
 
+#: data/display/grautec70x0/skin_display_grautec.xml
 msgid "EasyMedia"
 msgstr ""
 
@@ -8794,6 +9100,7 @@ msgstr ""
 msgid "ecm.info"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "ECMInfo"
 msgstr ""
 
@@ -8928,6 +9235,7 @@ msgstr ""
 msgid "Einzelsportart"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "Eject USB"
 msgstr ""
 
@@ -8957,24 +9265,31 @@ msgstr ""
 msgid "Embedded"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EMC Cover search"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EMC Cover search setup"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EMC Cover Selecter"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EMC Filebrowser"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EMC Playlist"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EMC Playlist Setup"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "EMCSelection"
 msgstr ""
 
@@ -8998,9 +9313,11 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable 'neutrino' style channel select controlling"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable 'neutrino' style zap controlling"
 msgstr ""
 
@@ -9008,9 +9325,11 @@ msgstr ""
 msgid "Enable 5V for active antenna"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable a selected RTL-SDR USB receiver for DAB+ reception. DVB-T and DAB+ cannot use the same receiver at the same time."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/CableScan/setup.xml
 msgid "Enable auto cable scan"
 msgstr ""
 
@@ -9036,6 +9355,7 @@ msgstr ""
 msgid "Enable bouquet edit"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable bouquet selection in multi-EPG"
 msgstr ""
 
@@ -9043,9 +9363,11 @@ msgstr ""
 msgid "Enable client mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable command line function"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable core dumps *"
 msgstr ""
 
@@ -9053,12 +9375,15 @@ msgstr ""
 msgid "Enable cuts (preview)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable DAB+ mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable debug log"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable EIT EPG"
 msgstr ""
 
@@ -9074,6 +9399,7 @@ msgstr ""
 msgid "Enable favourites edit"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable filtering in SingleEPG"
 msgstr ""
 
@@ -9081,9 +9407,11 @@ msgstr ""
 msgid "Enable Focus Animation"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable FreeSat EPG"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable HDMI-CEC"
 msgstr ""
 
@@ -9091,6 +9419,7 @@ msgstr ""
 msgid "Enable import timer from fallback tuner"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable infobar fade-out"
 msgstr ""
 
@@ -9099,6 +9428,7 @@ msgstr ""
 msgid "Enable log"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable MHW EPG"
 msgstr ""
 
@@ -9110,18 +9440,23 @@ msgstr ""
 msgid "Enable move mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable multiple bouquets"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable Netmed EPG"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable OK as preview in channel selection"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable OK for channel selection"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable OpenTV EPG"
 msgstr ""
 
@@ -9159,42 +9494,55 @@ msgid ""
 "You can use this receiver only in client mode using server channel list, timers and EPG."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable teletext caching"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable the advanced HDMI-CEC setting options."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable the current value of the slider at end of the slider bar."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add action map / remote control mapping data to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add detailed DAB+ receiver, packet, MOT and SPI information to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add extra DVB scan data to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add extra EPG data to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add keyboard keymap data to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add remote control data to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add screen names and resolution data to the debug log file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable this option to add storage device information detected during system boot and hot plug events to the debug log file."
 msgstr ""
 
@@ -9206,12 +9554,15 @@ msgstr ""
 msgid "Enable timer conflict detection"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable to display all True/False, Yes/No, On/Off and Enable/Disable set up options as a graphical switch."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable ViaSat EPG"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable Virgin EPG"
 msgstr ""
 
@@ -9227,6 +9578,7 @@ msgstr ""
 msgid "Enable wakeup timer"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr ""
 
@@ -9240,6 +9592,7 @@ msgstr ""
 msgid "enabled"
 msgstr ""
 
+#: data/setup.xml
 msgid "Enabled displays PVR scrambled recording debug data."
 msgstr ""
 
@@ -9311,6 +9664,7 @@ msgstr ""
 msgid "End of script."
 msgstr ""
 
+#: data/setup.xml
 msgid "End of the time interval during which events must begin to be displayed. If the filter is active, use keys 3 and 6 to adjust the end time, and key 0 to save."
 msgstr ""
 
@@ -9354,9 +9708,11 @@ msgstr ""
 msgid "English name (Descending)"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Enhanced Movie Center"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EnhancedMovieCenterMenu"
 msgstr ""
 
@@ -9374,6 +9730,7 @@ msgstr ""
 msgid "Enigma2 revision: "
 msgstr ""
 
+#: data/display/display720/skin_display_picon.xml
 msgid "Enigmalight"
 msgstr ""
 
@@ -9385,6 +9742,7 @@ msgstr ""
 msgid "Enter a new name for this device."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enter date and time"
 msgstr ""
 
@@ -9485,6 +9843,7 @@ msgstr ""
 msgid "Enter your low band local oscillator frequency. For more information consult the spec sheet of your LNB."
 msgstr ""
 
+#: data/setup.xml
 msgid "Enter your subscription code, the unified code for trial is 15."
 msgstr ""
 
@@ -9532,9 +9891,11 @@ msgstr ""
 msgid "EPG Cache Check"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "EPG download MediaHighway"
 msgstr ""
 
+#: data/setup.xml
 msgid "EPG filename"
 msgstr ""
 
@@ -9568,12 +9929,15 @@ msgid ""
 "Exit key : Finish channel edit"
 msgstr ""
 
+#: data/setup.xml
 msgid "EPG language selection 1"
 msgstr ""
 
+#: data/setup.xml
 msgid "EPG language selection 2"
 msgstr ""
 
+#: data/setup.xml
 msgid "EPG location"
 msgstr ""
 
@@ -9581,12 +9945,15 @@ msgstr ""
 msgid "EPG only"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "EPG Search"
 msgstr ""
 
+#: data/display/display240/skin_display.xml
 msgid "EPG Selection"
 msgstr ""
 
+#: data/setup.xml
 msgid "EPG Setup"
 msgstr ""
 
@@ -9598,6 +9965,7 @@ msgstr ""
 msgid "EPG:"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "EPGSearch - History"
 msgstr ""
 
@@ -9791,18 +10159,23 @@ msgstr ""
 msgid "Ethiopia"
 msgstr ""
 
+#: data/display/display800/skin_display_templates.xml
 msgid "EtPortal"
 msgstr ""
 
+#: data/setup.xml
 msgid "Even if a 'Wakeup' PowerTimer starting?"
 msgstr ""
 
+#: data/setup.xml
 msgid "Even if a 'Zap and Record' recording timer starting?"
 msgstr ""
 
+#: data/setup.xml
 msgid "Even if a 'Zap' recording timer starting?"
 msgstr ""
 
+#: data/setup.xml
 msgid "Even if TV has another input active"
 msgstr ""
 
@@ -9810,6 +10183,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Event font size (relative to skin size)"
 msgstr ""
 
@@ -9843,6 +10217,7 @@ msgstr ""
 msgid "Events Info Menu"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Eventview"
 msgstr ""
 
@@ -9999,6 +10374,7 @@ msgstr ""
 msgid "Exit quad PiP"
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Exit the wizard"
 msgstr ""
 
@@ -10018,6 +10394,7 @@ msgstr ""
 msgid "Expert mode"
 msgstr ""
 
+#: data/display/grautec70x0/skin_display_grautec.xml
 msgid "Ext. NumberZap"
 msgstr ""
 
@@ -10086,17 +10463,20 @@ msgstr ""
 msgid "External PiP"
 msgstr ""
 
-#: lib/python/Components/Harddisk.py:830
+#: lib/python/Components/Harddisk.py:836
 #, python-format
 msgid "External Storage %s"
 msgstr ""
 
+#: data/setup.xml
 msgid "External subtitle color"
 msgstr ""
 
+#: data/setup.xml
 msgid "External subtitle dialog colorisation"
 msgstr ""
 
+#: data/setup.xml
 msgid "External subtitle switch fonts"
 msgstr ""
 
@@ -10131,6 +10511,7 @@ msgstr ""
 msgid "Extra wide"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "ExtraMessageBox"
 msgstr ""
 
@@ -10151,33 +10532,43 @@ msgstr ""
 msgid "Extrude from left"
 msgstr ""
 
+#: data/display/display480/skin_display.xml
 msgid "F"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "F i l e l i s t"
 msgstr ""
 
+#: data/rc_models/sf8008.xml
 msgid "F1"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "F1 / Help"
 msgstr ""
 
+#: data/setup.xml
 msgid "F1 button"
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "F2"
 msgstr ""
 
+#: data/setup.xml
 msgid "F2 button"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "F3"
 msgstr ""
 
+#: data/setup.xml
 msgid "F3 button"
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "F4"
 msgstr ""
 
@@ -10185,6 +10576,7 @@ msgstr ""
 msgid "Factory Reset"
 msgstr ""
 
+#: data/setup.xml
 msgid "Factory Reset Setup"
 msgstr ""
 
@@ -10198,6 +10590,7 @@ msgstr ""
 msgid "Factual Topics"
 msgstr ""
 
+#: data/setup.xml
 msgid "Fade the infobar when hiding"
 msgstr ""
 
@@ -10327,12 +10720,15 @@ msgstr ""
 msgid "Fan %d voltage"
 msgstr ""
 
+#: data/setup.xml
 msgid "Fan operation"
 msgstr ""
 
+#: data/setup.xml
 msgid "Fan speed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Fan Speed Setup"
 msgstr ""
 
@@ -10395,12 +10791,15 @@ msgstr ""
 msgid "Fast epoch"
 msgstr ""
 
+#: data/rc_models/vu2.xml
 msgid "Fast Forward"
 msgstr ""
 
+#: data/setup.xml
 msgid "Fast forward speeds"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Fast Scan"
 msgstr ""
 
@@ -10458,6 +10857,7 @@ msgstr ""
 msgid "FCC 1953"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/FastChannelChange/setup.xml
 msgid "FCC enabled"
 msgstr ""
 
@@ -10521,6 +10921,7 @@ msgstr ""
 msgid "File can not displayed - File not found"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "File Commander - File/Directory Information"
 msgstr ""
 
@@ -10541,6 +10942,7 @@ msgstr ""
 msgid "Filename"
 msgstr ""
 
+#: data/menu.xml
 msgid "Filesystem Check"
 msgstr ""
 
@@ -10575,6 +10977,7 @@ msgstr ""
 msgid "Final position at index"
 msgstr ""
 
+#: data/setup.xml
 msgid "Final scroll delay"
 msgstr ""
 
@@ -10598,6 +11001,7 @@ msgstr ""
 msgid "Fine movement"
 msgstr ""
 
+#: data/setup.xml
 msgid "Finetune"
 msgstr ""
 
@@ -10750,6 +11154,7 @@ msgstr ""
 msgid "Following tasks will be done after you press OK!"
 msgstr ""
 
+#: data/setup.xml
 msgid "Font size"
 msgstr ""
 
@@ -10802,6 +11207,7 @@ msgstr ""
 msgid "Force legacy signal stats"
 msgstr ""
 
+#: data/setup.xml
 msgid "Force zap to recording service in standby"
 msgstr ""
 
@@ -10834,6 +11240,7 @@ msgstr ""
 msgid "Forward volume keys"
 msgstr ""
 
+#: data/setup.xml
 msgid "Frame rate"
 msgstr ""
 
@@ -10918,6 +11325,7 @@ msgstr ""
 msgid "Frequency bands"
 msgstr ""
 
+#: data/setup.xml
 msgid "Frequency correction offset"
 msgstr ""
 
@@ -10969,6 +11377,7 @@ msgstr ""
 msgid "Front"
 msgstr ""
 
+#: data/menu.xml
 msgid "Front Panel Display"
 msgstr ""
 
@@ -10992,6 +11401,7 @@ msgstr ""
 msgid "FTA"
 msgstr ""
 
+#: data/menu.xml
 msgid "FTP"
 msgstr ""
 
@@ -11020,6 +11430,7 @@ msgstr ""
 msgid "full"
 msgstr ""
 
+#: data/setup.xml
 msgid "Full description separator"
 msgstr ""
 
@@ -11048,6 +11459,7 @@ msgstr ""
 msgid "Fullbackup Images"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Function of OK button"
 msgstr ""
 
@@ -11072,6 +11484,7 @@ msgstr ""
 msgid "Für Kinder"
 msgstr ""
 
+#: data/display/display480/skin_display.xml
 msgid "G"
 msgstr ""
 
@@ -11306,6 +11719,7 @@ msgstr ""
 msgid "Gibraltar"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "GIGA"
 msgstr ""
 
@@ -11442,6 +11856,7 @@ msgstr ""
 msgid "Grab this frame as bitmap"
 msgstr ""
 
+#: data/display/display720/skin_display.xml
 msgid "Graphical EPG"
 msgstr ""
 
@@ -11449,6 +11864,7 @@ msgstr ""
 msgid "Graphical Multi EPG"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "GraphMultiEpg Settings"
 msgstr ""
 
@@ -11473,6 +11889,7 @@ msgstr ""
 msgid "green"
 msgstr ""
 
+#: data/setup.xml
 msgid "GREEN button"
 msgstr ""
 
@@ -11543,6 +11960,7 @@ msgid ""
 "Do you want to restart the GUI now?"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "Guide / EPG"
 msgstr ""
 
@@ -11566,6 +11984,7 @@ msgstr ""
 msgid "Gymnastics"
 msgstr ""
 
+#: data/display/display480/skin_display.xml
 msgid "H"
 msgstr ""
 
@@ -11630,6 +12049,7 @@ msgstr ""
 msgid "handicraft"
 msgstr ""
 
+#: data/setup.xml
 msgid "Handle input from TV"
 msgstr ""
 
@@ -11649,12 +12069,15 @@ msgstr ""
 msgid "Hard disk"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hard Disk Setup"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hard disk standby after"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Harddisk"
 msgstr ""
 
@@ -11694,6 +12117,7 @@ msgstr ""
 msgid "HDMI"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "HDMI CEC setup"
 msgstr ""
 
@@ -11713,6 +12137,7 @@ msgstr ""
 msgid "HDMI HDR Type"
 msgstr ""
 
+#: data/setup.xml
 msgid "HDMI Recording Setup"
 msgstr ""
 
@@ -11766,6 +12191,7 @@ msgstr ""
 msgid "height"
 msgstr ""
 
+#: data/setup.xml
 msgid "Height"
 msgstr ""
 
@@ -11840,6 +12266,7 @@ msgstr ""
 msgid "hh:mmam/pm"
 msgstr ""
 
+#: data/setup.xml
 msgid "HI-cleanup for external subtitles"
 msgstr ""
 
@@ -11857,9 +12284,11 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hide channel list in radio mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hide known extensions"
 msgstr ""
 
@@ -11867,6 +12296,7 @@ msgstr ""
 msgid "Hide lists"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hide number markers"
 msgstr ""
 
@@ -11886,6 +12316,7 @@ msgstr ""
 msgid "Hide the second InfoBar"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hide zap errors"
 msgstr ""
 
@@ -11921,6 +12352,7 @@ msgstr ""
 msgid "HiSilicon"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "HiSilicon Setup"
 msgstr ""
 
@@ -12090,6 +12522,7 @@ msgstr ""
 msgid "Hostname cannot be resolved to IP address!"
 msgstr ""
 
+#: data/setup.xml
 msgid "Hostname or IP address"
 msgstr ""
 
@@ -12162,6 +12595,7 @@ msgstr ""
 msgid "How many minutes do you want to record?"
 msgstr ""
 
+#: data/setup.xml
 msgid "How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes). 'Aggressive' performs a full descrambler reset between encrypted channels."
 msgstr ""
 
@@ -12187,6 +12621,7 @@ msgstr ""
 msgid "Hungary"
 msgstr ""
 
+#: data/display/display480/skin_display.xml
 msgid "I"
 msgstr ""
 
@@ -12231,6 +12666,7 @@ msgstr ""
 msgid "If an action is user-configurable, its help entry will be flagged with a '(C)' suffix."
 msgstr ""
 
+#: data/setup.xml
 msgid "If disabled, underline characters in file and directory names are not shown and are replaced with spaces."
 msgstr ""
 
@@ -12238,15 +12674,19 @@ msgstr ""
 msgid "If enabled, a log will be kept of CEC protocol traffic ('hdmicec.log')"
 msgstr ""
 
+#: data/setup.xml
 msgid "If enabled, a log will be kept of CEC protocol traffic. The log files are located with the other log files but named 'Enigma2-hdmicec-[date].log'."
 msgstr ""
 
+#: data/setup.xml
 msgid "If enabled, bookmarks will be updated with the new location when you move or copy a recording."
 msgstr ""
 
+#: data/setup.xml
 msgid "If enabled, display shows 12 chars instead 8, but in latin-1/translit only."
 msgstr ""
 
+#: data/setup.xml
 msgid "If set to 'yes' it will show the 'SRC' packages in browser."
 msgstr ""
 
@@ -12254,6 +12694,7 @@ msgstr ""
 msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. This is an old API version that has now been superseded."
 msgstr ""
 
+#: data/setup.xml
 msgid "If set to 'Yes' the same commands will be sent to the TV for deep standby events as are sent during regular standby events."
 msgstr ""
 
@@ -12261,9 +12702,11 @@ msgstr ""
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
 msgstr ""
 
+#: data/setup.xml
 msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
 msgstr ""
 
+#: data/setup.xml
 msgid "If set to 'yes', it will display 'languages' packs and 'PO' in browser'."
 msgstr ""
 
@@ -12273,6 +12716,7 @@ msgid ""
 "If you switch to another channel in your subscription, the recording will stop."
 msgstr ""
 
+#: data/setup.xml
 msgid "If the text is too long to be displayed on the front panel display, it will be repeated (number of times):"
 msgstr ""
 
@@ -12322,12 +12766,15 @@ msgstr ""
 msgid "Ignore conflict"
 msgstr ""
 
+#: data/setup.xml
 msgid "Ignore DVB-C namespace sub network"
 msgstr ""
 
+#: data/setup.xml
 msgid "Ignore DVB-S namespace sub network"
 msgstr ""
 
+#: data/setup.xml
 msgid "Ignore DVB-T namespace sub network"
 msgstr ""
 
@@ -12335,6 +12782,7 @@ msgstr ""
 msgid "Ignore services on satellites that are not configured in the tuner settings."
 msgstr ""
 
+#: data/setup.xml
 msgid "Ignore unexpectedly wakeup and stay in standby"
 msgstr ""
 
@@ -12350,9 +12798,11 @@ msgstr ""
 msgid "Image: "
 msgstr ""
 
+#: data/menu.xml
 msgid "Images"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "IMDB"
 msgstr ""
 
@@ -12360,6 +12810,7 @@ msgstr ""
 msgid "IMDB Not Installed"
 msgstr ""
 
+#: data/display/display240/skin_display.xml
 msgid "IMDB Search"
 msgstr ""
 
@@ -12405,12 +12856,15 @@ msgstr ""
 msgid "Imported list with bouquet empty <n/a> %s file does not exist"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "IN"
 msgstr ""
 
+#: data/setup.xml
 msgid "In live view wait this many seconds after a numeric key press before assuming the required channel number has been entered. Default: 5 seconds. Setting zero will require confirmation with 'OK'. "
 msgstr ""
 
+#: data/setup.xml
 msgid "In most cases this should be set to No. Only enable if you have a very specific need."
 msgstr ""
 
@@ -12431,6 +12885,7 @@ msgstr ""
 msgid "Inactivity Sleeptimer"
 msgstr ""
 
+#: data/menu.xml
 msgid "Inadyn"
 msgstr ""
 
@@ -12448,42 +12903,55 @@ msgstr ""
 msgid "Inadyn setup"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include action map data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include AIT in http streams"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include CI assignment"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include DAB+ data *"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include DVB scan data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include ECM in http streams"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include EIT in http streams"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include EPG data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include keyboard data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include remote control data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include screen load data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include SDT, BAT in http streams"
 msgstr ""
 
+#: data/setup.xml
 msgid "Include storage device data"
 msgstr ""
 
@@ -12491,6 +12959,7 @@ msgstr ""
 msgid "Include this configured satellite position in the DAB+ scan. Disable it to skip the position."
 msgstr ""
 
+#: data/setup.xml
 msgid "Include timer descramble data in PVR"
 msgstr ""
 
@@ -12563,12 +13032,15 @@ msgstr ""
 msgid "info"
 msgstr ""
 
+#: data/rc_models/vu.xml
 msgid "Info / EPG"
 msgstr ""
 
+#: data/setup.xml
 msgid "Info bar timeout"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "InfoBar"
 msgstr ""
 
@@ -12580,9 +13052,11 @@ msgstr ""
 msgid "InfoBar Event View Actions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Infobar fade-out speed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Infobar frontend data source"
 msgstr ""
 
@@ -12644,6 +13118,7 @@ msgstr ""
 msgid "Init Vu+ MultiBoot"
 msgstr ""
 
+#: data/setup.xml
 msgid "Initial fast forward speed"
 msgstr ""
 
@@ -12656,9 +13131,11 @@ msgstr ""
 msgid "Initial lock ratio"
 msgstr ""
 
+#: data/setup.xml
 msgid "Initial rewind speed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Initial scroll delay"
 msgstr ""
 
@@ -12703,9 +13180,11 @@ msgstr ""
 msgid "Input Device Driver Setup"
 msgstr ""
 
+#: data/menu.xml
 msgid "Input Devices"
 msgstr ""
 
+#: data/setup.xml
 msgid "Input scroll position"
 msgstr ""
 
@@ -12794,6 +13273,7 @@ msgstr ""
 msgid "Installing service"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Installing Software..."
 msgstr ""
 
@@ -12816,6 +13296,7 @@ msgstr ""
 msgid "Interface"
 msgstr ""
 
+#: data/setup.xml
 msgid "Interface to change MAC"
 msgstr ""
 
@@ -12823,6 +13304,7 @@ msgstr ""
 msgid "Interface: "
 msgstr ""
 
+#: data/setup.xml
 msgid "Interlaced"
 msgstr ""
 
@@ -13007,6 +13489,7 @@ msgstr ""
 msgid "IP:"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "IPTV"
 msgstr ""
 
@@ -13110,12 +13593,15 @@ msgstr ""
 msgid "Italy"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Items per page"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Items per page for list screen"
 msgstr ""
 
+#: data/display/display480/skin_display.xml
 msgid "J"
 msgstr ""
 
@@ -13156,6 +13642,7 @@ msgstr ""
 msgid "Job overview"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "JobView"
 msgstr ""
 
@@ -13270,6 +13757,7 @@ msgstr ""
 msgid "Keep service"
 msgstr ""
 
+#: data/setup.xml
 msgid "Keep sorting"
 msgstr ""
 
@@ -13279,6 +13767,7 @@ msgid_plural "Keep warnings"
 msgstr[0] ""
 msgstr[1] ""
 
+#: data/setup.xml
 msgid "Keeps the movie list open whilst playing audio files."
 msgstr ""
 
@@ -13306,6 +13795,7 @@ msgstr ""
 msgid "Key Events"
 msgstr ""
 
+#: data/setup.xml
 msgid "Keyboard / Remote Control Setup"
 msgstr ""
 
@@ -13313,9 +13803,11 @@ msgstr ""
 msgid "Keyboard data entry"
 msgstr ""
 
+#: data/setup.xml
 msgid "Keyboard map"
 msgstr ""
 
+#: data/setup.xml
 msgid "Keyboard mapping file to be used for keyboard input."
 msgstr ""
 
@@ -13475,6 +13967,7 @@ msgstr ""
 msgid "Language Setup"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Language Wizard"
 msgstr ""
 
@@ -13555,9 +14048,11 @@ msgstr ""
 msgid "Latvian"
 msgstr ""
 
+#: data/setup.xml
 msgid "LCD scroll speed"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "LCN rules"
 msgstr ""
 
@@ -13574,6 +14069,7 @@ msgstr ""
 msgid "LCN Scanner plugin for DVB-C/T/T2 services"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "LCN Scanner Settings"
 msgstr ""
 
@@ -13589,33 +14085,43 @@ msgstr ""
 msgid "Lebanon"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED brightness during deep standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "LED brightness during normal operations."
 msgstr ""
 
+#: data/setup.xml
 msgid "LED brightness during standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "LED color during recording"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED color during recording in standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED color during standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED Deep Standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED Normal"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED Setup"
 msgstr ""
 
+#: data/setup.xml
 msgid "LED Standby"
 msgstr ""
 
@@ -13663,6 +14169,7 @@ msgstr ""
 msgid "Lesotho"
 msgstr ""
 
+#: data/setup.xml
 msgid "Let the tuner select its RF gain automatically."
 msgstr ""
 
@@ -13675,6 +14182,7 @@ msgstr ""
 msgid "Letterbox zoom"
 msgstr ""
 
+#: data/setup.xml
 msgid "Level Setup"
 msgstr ""
 
@@ -13713,9 +14221,11 @@ msgstr ""
 msgid "limit ..., aborting !"
 msgstr ""
 
+#: data/setup.xml
 msgid "Limit a DAB+ USB scan to the frequency blocks defined for this region in the 'dab.xml' file."
 msgstr ""
 
+#: data/setup.xml
 msgid "Limit character set for recording filenames"
 msgstr ""
 
@@ -13724,6 +14234,7 @@ msgstr ""
 msgid "Limit east"
 msgstr ""
 
+#: data/setup.xml
 msgid "Limit the characters that can be used in recording filenames to (7 bit) ascii. This ensures compatibility with operating systems or file systems with limited character sets."
 msgstr ""
 
@@ -13767,6 +14278,7 @@ msgstr ""
 msgid "Linked titles with a DVD menu"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "List available networks"
 msgstr ""
 
@@ -13850,9 +14362,11 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
+#: data/menu.xml
 msgid "Load EPG Cache"
 msgstr ""
 
+#: data/setup.xml
 msgid "Load only specific days in EPG"
 msgstr ""
 
@@ -13864,6 +14378,7 @@ msgstr ""
 msgid "Load tags from the timer and recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Load unlinked user bouquets"
 msgstr ""
 
@@ -13920,9 +14435,11 @@ msgstr ""
 msgid "Locale already selected."
 msgstr ""
 
+#: data/setup.xml
 msgid "Locale list sort order"
 msgstr ""
 
+#: data/setup.xml
 msgid "Locale Selection Setup"
 msgstr ""
 
@@ -13937,9 +14454,11 @@ msgstr ""
 msgid "Locale/Language Selection Actions"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Locale/Language Wizard"
 msgstr ""
 
+#: data/setup.xml
 msgid "Locales to be displayed"
 msgstr ""
 
@@ -13947,6 +14466,7 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Location Box"
 msgstr ""
 
@@ -13958,6 +14478,7 @@ msgstr ""
 msgid "Location for instant recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Location of recordings in Timeshift"
 msgstr ""
 
@@ -13965,6 +14486,7 @@ msgstr ""
 msgid "LocationBox Actions"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "LOCK"
 msgstr ""
 
@@ -13985,6 +14507,7 @@ msgstr ""
 msgid "Log Actions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Log python stack trace on spinner"
 msgstr ""
 
@@ -14000,6 +14523,7 @@ msgstr ""
 msgid "LogManager"
 msgstr ""
 
+#: data/setup.xml
 msgid "Logs folder location **"
 msgstr ""
 
@@ -14007,9 +14531,11 @@ msgstr ""
 msgid "Logs Manager"
 msgstr ""
 
+#: data/setup.xml
 msgid "Logs older than the specified number of days will be deleted."
 msgstr ""
 
+#: data/setup.xml
 msgid "Logs Setup"
 msgstr ""
 
@@ -14018,6 +14544,7 @@ msgstr ""
 msgid "long"
 msgstr ""
 
+#: data/setup.xml
 msgid "Long BLUE button"
 msgstr ""
 
@@ -14025,9 +14552,11 @@ msgstr ""
 msgid "Long filenames"
 msgstr ""
 
+#: data/setup.xml
 msgid "Long GREEN button"
 msgstr ""
 
+#: data/setup.xml
 msgid "Long press emulation with button"
 msgstr ""
 
@@ -14036,9 +14565,11 @@ msgstr ""
 msgid "Long press: %s"
 msgstr ""
 
+#: data/setup.xml
 msgid "Long RED button"
 msgstr ""
 
+#: data/setup.xml
 msgid "Long YELLOW button"
 msgstr ""
 
@@ -14175,6 +14706,7 @@ msgstr ""
 msgid "Magenta"
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "Magic"
 msgstr ""
 
@@ -14182,12 +14714,15 @@ msgstr ""
 msgid "Main menu"
 msgstr ""
 
+#: data/menu.xml
 msgid "Main Menu"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Mainmenu"
 msgstr ""
 
+#: data/setup.xml
 msgid "Maintain old EPG data for"
 msgstr ""
 
@@ -14281,6 +14816,7 @@ msgstr ""
 msgid "Manual"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Manual configuration"
 msgstr ""
 
@@ -14323,9 +14859,11 @@ msgstr ""
 msgid "Marathi"
 msgstr ""
 
+#: data/setup.xml
 msgid "Margin after recording (minutes)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Margin before recording (minutes)"
 msgstr ""
 
@@ -14377,6 +14915,7 @@ msgstr ""
 msgid "Mauritius"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/FastChannelChange/setup.xml
 msgid "Max channels"
 msgstr ""
 
@@ -14402,15 +14941,19 @@ msgstr ""
 msgid "Maxdown: "
 msgstr ""
 
+#: data/setup.xml
 msgid "Maximum number of days"
 msgstr ""
 
+#: data/setup.xml
 msgid "Maximum number of EPG days"
 msgstr ""
 
+#: data/setup.xml
 msgid "Maximum time to wait for the first descrambling key (CW) before starting the decoder. 'Disabled' starts the decoder immediately without waiting."
 msgstr ""
 
+#: data/setup.xml
 msgid "Maximum total space used (MB)"
 msgstr ""
 
@@ -14427,9 +14970,11 @@ msgstr ""
 msgid "MB"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "Media"
 msgstr ""
 
+#: data/setup.xml
 msgid "Media playback Remaining/Elapsed as"
 msgstr ""
 
@@ -14442,6 +14987,7 @@ msgstr ""
 msgid "Media player"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Media Player Settings"
 msgstr ""
 
@@ -14449,6 +14995,7 @@ msgstr ""
 msgid "Media scanner"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "MediaPlayer"
 msgstr ""
 
@@ -14496,9 +15043,11 @@ msgstr ""
 msgid "Memory Info"
 msgstr ""
 
+#: data/menu.xml
 msgid "Memory Ram & Flash"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "MemoryInfo"
 msgstr ""
 
@@ -14550,6 +15099,7 @@ msgstr ""
 msgid "Mexico"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "mhwEPG"
 msgstr ""
 
@@ -14577,6 +15127,7 @@ msgstr ""
 msgid "MiniDiSEqC A/B"
 msgstr ""
 
+#: data/menu.xml
 msgid "MiniDLNA"
 msgstr ""
 
@@ -14732,6 +15283,7 @@ msgstr ""
 msgid "Modulation"
 msgstr ""
 
+#: data/setup.xml
 msgid "Modulator"
 msgstr ""
 
@@ -14795,6 +15347,7 @@ msgstr ""
 msgid "Montserrat"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "MORE"
 msgstr ""
 
@@ -14848,10 +15401,11 @@ msgstr ""
 msgid "Motorsport"
 msgstr ""
 
-#: lib/python/Components/Harddisk.py:902
+#: lib/python/Components/Harddisk.py:908
 msgid "Mount"
 msgstr ""
 
+#: data/menu.xml
 msgid "Mounts"
 msgstr ""
 
@@ -15132,18 +15686,23 @@ msgstr ""
 msgid "movie (general)"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Movie Browser Configuration"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Movie Information Download (TMDb)"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Movie Information Download Setup"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Movie Information Preview"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Movie Information TMDb"
 msgstr ""
 
@@ -15167,9 +15726,11 @@ msgstr ""
 msgid "Movie selection"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Movie Selection"
 msgstr ""
 
+#: data/setup.xml
 msgid "Movie Selection Setup"
 msgstr ""
 
@@ -15178,9 +15739,11 @@ msgstr ""
 msgid "Movie/Drama"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Movielist menu"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "MovieMenu"
 msgstr ""
 
@@ -15218,6 +15781,7 @@ msgstr ""
 msgid "Mozambique"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "MPHelp"
 msgstr ""
 
@@ -15229,6 +15793,7 @@ msgstr ""
 msgid "Multi EPG"
 msgstr ""
 
+#: data/setup.xml
 msgid "Multi-EPG bouquet selection"
 msgstr ""
 
@@ -15237,6 +15802,7 @@ msgstr ""
 msgid "Multiboot image selector"
 msgstr ""
 
+#: data/menu.xml
 msgid "Multiboot Image Selector"
 msgstr ""
 
@@ -15320,6 +15886,7 @@ msgstr ""
 msgid "Musik"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Mute"
 msgstr ""
 
@@ -15372,6 +15939,7 @@ msgstr ""
 msgid "Nameserver"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "NameserverSetup"
 msgstr ""
 
@@ -15438,6 +16006,7 @@ msgstr ""
 msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. OK to perform the action described in the currently highlighted help."
 msgstr ""
 
+#: data/menu.xml
 msgid "NCam Information"
 msgstr ""
 
@@ -15492,9 +16061,11 @@ msgstr ""
 msgid "Network ID"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/CableScan/setup.xml
 msgid "Network ID (0 - all networks)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Network interface for change MAC address."
 msgstr ""
 
@@ -15524,6 +16095,7 @@ msgstr ""
 msgid "Network servers:"
 msgstr ""
 
+#: data/menu.xml
 msgid "Network Services"
 msgstr ""
 
@@ -15535,6 +16107,7 @@ msgstr ""
 msgid "Network test"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Network test..."
 msgstr ""
 
@@ -15547,6 +16120,7 @@ msgstr ""
 msgid "Network wizard"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Network Wizard"
 msgstr ""
 
@@ -15555,6 +16129,7 @@ msgstr ""
 msgid "Network:"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "NetworkAdapterSelection"
 msgstr ""
 
@@ -15570,9 +16145,11 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
+#: data/setup.xml
 msgid "Never decrypt the content while recording. This overrides the individual timer settings globally. If enabled, recordings are stored in crypted presentation and must be decrypted afterwards (sometimes called offline decoding). Default: off."
 msgstr ""
 
+#: data/setup.xml
 msgid "Never decrypt while recording"
 msgstr ""
 
@@ -15665,9 +16242,11 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "Next / Arrow Right"
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "Next / ArrowRight"
 msgstr ""
 
@@ -15679,6 +16258,7 @@ msgstr ""
 msgid "Next quad PiP channel"
 msgstr ""
 
+#: data/menu.xml
 msgid "NFS"
 msgstr ""
 
@@ -16083,6 +16663,7 @@ msgstr ""
 msgid "Normal mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Normal speed"
 msgstr ""
 
@@ -16245,6 +16826,7 @@ msgstr ""
 msgid "Notiziario"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "NOW"
 msgstr ""
 
@@ -16260,6 +16842,7 @@ msgstr ""
 msgid "NTP server"
 msgstr ""
 
+#: data/setup.xml
 msgid "NTP sync interval"
 msgstr ""
 
@@ -16267,18 +16850,23 @@ msgstr ""
 msgid "NTSC"
 msgstr ""
 
+#: data/setup.xml
 msgid "Number of channels shown in channel selection list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Number of debug logs to keep *"
 msgstr ""
 
+#: data/setup.xml
 msgid "Number of repeating text on display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Number of rows"
 msgstr ""
 
+#: data/setup.xml
 msgid "Number of rows to display"
 msgstr ""
 
@@ -16307,6 +16895,7 @@ msgstr ""
 msgid "Occitan"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "OE_Background, OE_Foreground, OE_Blue, OE_Blue, OE_Orange"
 msgstr ""
 
@@ -16338,6 +16927,7 @@ msgstr ""
 msgid "off or wpa2 on"
 msgstr ""
 
+#: data/setup.xml
 msgid "Offline decode delay (ms)"
 msgstr ""
 
@@ -16392,12 +16982,15 @@ msgstr ""
 msgid "Oman"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "OMB Manager About"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "OMB Manager Install"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "OMB Manager List"
 msgstr ""
 
@@ -16428,6 +17021,7 @@ msgstr ""
 msgid "on READ ONLY medium."
 msgstr ""
 
+#: data/setup.xml
 msgid "On valid ONIDs, ignore frequency sub network part"
 msgstr ""
 
@@ -16570,9 +17164,11 @@ msgstr ""
 msgid "Open the Plugin Browser settings screen"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Open Vision Commit Info Setup"
 msgstr ""
 
+#: data/menu.xml
 msgid "OpenVPN"
 msgstr ""
 
@@ -16585,6 +17181,7 @@ msgstr ""
 msgid "OpenVPN setup"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "OpenWebif Configuration"
 msgstr ""
 
@@ -16594,9 +17191,11 @@ msgstr ""
 msgid "Opera"
 msgstr ""
 
+#: data/setup.xml
 msgid "Operating LED status in deep standby mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Operating LED status while running"
 msgstr ""
 
@@ -16668,6 +17267,7 @@ msgstr ""
 msgid "Oromo"
 msgstr ""
 
+#: data/menu.xml
 msgid "OSCam Information"
 msgstr ""
 
@@ -16721,6 +17321,7 @@ msgstr ""
 msgid "OSD name request"
 msgstr ""
 
+#: data/setup.xml
 msgid "OSD Setup"
 msgstr ""
 
@@ -16760,6 +17361,7 @@ msgstr ""
 msgid "OTT Model"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "OUT"
 msgstr ""
 
@@ -16797,6 +17399,7 @@ msgstr ""
 msgid "OVR"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "P l a y l i s t"
 msgstr ""
 
@@ -16908,6 +17511,7 @@ msgstr ""
 msgid "Parental control"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Parental control services Editor"
 msgstr ""
 
@@ -16915,6 +17519,7 @@ msgstr ""
 msgid "Parental control setup"
 msgstr ""
 
+#: data/menu.xml
 msgid "Parental Control Setup"
 msgstr ""
 
@@ -16960,9 +17565,11 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: data/setup.xml
 msgid "Password (httpuser)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Password (httpwd)"
 msgstr ""
 
@@ -17023,6 +17630,7 @@ msgstr ""
 msgid "PDC"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "PE Speed Up"
 msgstr ""
 
@@ -17053,6 +17661,7 @@ msgstr ""
 msgid "performing arts"
 msgstr ""
 
+#: data/setup.xml
 msgid "Permanent sort key changes"
 msgstr ""
 
@@ -17111,9 +17720,11 @@ msgstr ""
 msgid "Picon and servicename"
 msgstr ""
 
+#: data/setup.xml
 msgid "Picon Size"
 msgstr ""
 
+#: data/setup.xml
 msgid "Picon Width"
 msgstr ""
 
@@ -17165,6 +17776,7 @@ msgstr ""
 msgid "PiP with OSD"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "PiPZap"
 msgstr ""
 
@@ -17184,6 +17796,7 @@ msgstr ""
 msgid "PLAY"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "Play / Pause"
 msgstr ""
 
@@ -17191,6 +17804,7 @@ msgstr ""
 msgid "Play archive"
 msgstr ""
 
+#: data/setup.xml
 msgid "Play audio in background"
 msgstr ""
 
@@ -17237,6 +17851,7 @@ msgstr ""
 msgid "Play last movie"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "Play List"
 msgstr ""
 
@@ -17272,6 +17887,7 @@ msgstr ""
 msgid "Play service without Stream Relay"
 msgstr ""
 
+#: data/menu.xml
 msgid "Playback Setup"
 msgstr ""
 
@@ -17311,15 +17927,19 @@ msgstr ""
 msgid "Please choose an extension..."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Please choose what you want to do next."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Please configure or verify your DNS server by filling out the required values.\nWhen you are ready press OK to continue."
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Please configure the fallback tuner setup."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Please configure your internet connection by filling out the required values.\n\nWhen you are ready press OK to continue."
 msgstr ""
 
@@ -17375,6 +17995,7 @@ msgstr ""
 msgid "Please enter the old PIN code"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Please follow the instructions on the TV"
 msgstr ""
 
@@ -17439,6 +18060,7 @@ msgstr ""
 msgid "Please select the movie path..."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Please select the network interface that you want to use for your internet connection.\n\nPlease press OK to continue."
 msgstr ""
 
@@ -17446,12 +18068,15 @@ msgstr ""
 msgid "Please select the tag to filter..."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Please select the wireless network that you want to connect to.\n\nPlease press OK to continue."
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Please set up tuner [TUNER]"
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Please setup the following basic configs."
 msgstr ""
 
@@ -17562,6 +18187,7 @@ msgstr ""
 msgid "Plugin Browser Select Actions"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Plugin Browser Settings"
 msgstr ""
 
@@ -17578,6 +18204,7 @@ msgstr ""
 msgid "Plugin manager help"
 msgstr ""
 
+#: data/menu.xml
 msgid "Plugins"
 msgstr ""
 
@@ -17679,6 +18306,7 @@ msgstr ""
 msgid "Port:"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "Portal / Option"
 msgstr ""
 
@@ -17698,9 +18326,11 @@ msgstr ""
 msgid "Position"
 msgstr ""
 
+#: data/setup.xml
 msgid "Position in the tuner's supported gain range. The back end selects the closest gain step."
 msgstr ""
 
+#: data/setup.xml
 msgid "Position of completed timers in timerlist"
 msgstr ""
 
@@ -17738,15 +18368,19 @@ msgstr ""
 msgid "Power"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "POWER"
 msgstr ""
 
+#: data/setup.xml
 msgid "Power LED can be turned on or off here."
 msgstr ""
 
+#: data/setup.xml
 msgid "Power LED state during deep-standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Power LED state in Deep-Standby"
 msgstr ""
 
@@ -17754,6 +18388,7 @@ msgstr ""
 msgid "Power management. Consult your receiver's manual for more information."
 msgstr ""
 
+#: data/setup.xml
 msgid "Power On Display"
 msgstr ""
 
@@ -17765,6 +18400,7 @@ msgstr ""
 msgid "Power threshold. Consult your receiver's manual for more information."
 msgstr ""
 
+#: data/menu.xml
 msgid "Power Timers"
 msgstr ""
 
@@ -17801,54 +18437,71 @@ msgstr ""
 msgid "Predefined transponder"
 msgstr ""
 
+#: data/setup.xml
 msgid "Prefer AC3 track"
 msgstr ""
 
+#: data/setup.xml
 msgid "Prefer AC3+ track"
 msgstr ""
 
+#: data/setup.xml
 msgid "Prefer audio track stored by service"
 msgstr ""
 
+#: data/setup.xml
 msgid "Prefer graphical DVB subtitles"
 msgstr ""
 
+#: data/setup.xml
 msgid "Prefer subtitles for hearing impaired"
 msgstr ""
 
+#: data/setup.xml
 msgid "Prefer subtitles stored by service"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Preferences"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner ATSC"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner ATSC for recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner DVB-C"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner DVB-C for recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner DVB-S"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner DVB-S for recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner DVB-T"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner DVB-T for recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Preferred tuner for recordings"
 msgstr ""
 
@@ -17942,6 +18595,7 @@ msgid ""
 "Press exit to close"
 msgstr ""
 
+#: data/setup.xml
 msgid "Press OK to activate current MAC address."
 msgstr ""
 
@@ -18060,6 +18714,7 @@ msgstr ""
 msgid "Press STOP and then EXIT to exit the movie list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Press this button to emulate a long press on a button pressed afterwards (this also overrides any other actions assigned to emulation button)."
 msgstr ""
 
@@ -18083,6 +18738,7 @@ msgstr ""
 msgid "Pressing this button multiple times will increase the rate of forward scan."
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "Prev / ArrowLeft"
 msgstr ""
 
@@ -18110,6 +18766,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: data/rc_models/vu.xml
 msgid "Previous / Arrow Left"
 msgstr ""
 
@@ -18121,6 +18778,7 @@ msgstr ""
 msgid "Primary DNS:"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Prime time"
 msgstr ""
 
@@ -18338,9 +18996,11 @@ msgstr ""
 msgid "Put TV in standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "Put your AV Receiver in standby"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "PVR"
 msgstr ""
 
@@ -18388,6 +19048,7 @@ msgstr ""
 msgid "Quick"
 msgstr ""
 
+#: data/display/display220/skin_display.xml
 msgid "Quick EPG"
 msgstr ""
 
@@ -18409,6 +19070,7 @@ msgstr ""
 msgid "Quick zap"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "QuickMenu - Open Vision Panel"
 msgstr ""
 
@@ -18426,6 +19088,7 @@ msgstr ""
 msgid "Radio"
 msgstr ""
 
+#: data/setup.xml
 msgid "RADIO button"
 msgstr ""
 
@@ -18477,12 +19140,15 @@ msgstr ""
 msgid "Rating defined by broadcaster - %d"
 msgstr ""
 
+#: data/setup.xml
 msgid "Rating sort in SingleEPG"
 msgstr ""
 
+#: data/setup.xml
 msgid "Read userdata from ncam.conf"
 msgstr ""
 
+#: data/setup.xml
 msgid "Read userdata from oscam.conf"
 msgstr ""
 
@@ -18606,6 +19272,7 @@ msgstr ""
 msgid "Rec"
 msgstr ""
 
+#: data/display/7segment/skin_display.xml
 msgid "REC "
 msgstr ""
 
@@ -18617,12 +19284,15 @@ msgstr ""
 msgid "REC symbol"
 msgstr ""
 
+#: data/setup.xml
 msgid "REC symbol in Standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "REC symbol in use"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "Recall"
 msgstr ""
 
@@ -18651,6 +19321,7 @@ msgstr ""
 msgid "Receiver with IP %s is turned off."
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Reception Settings"
 msgstr ""
 
@@ -18705,6 +19376,7 @@ msgstr ""
 msgid "Recording paths"
 msgstr ""
 
+#: data/menu.xml
 msgid "Recording Paths"
 msgstr ""
 
@@ -18734,6 +19406,7 @@ msgstr ""
 msgid "Recordings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Recordings always have priority"
 msgstr ""
 
@@ -18755,6 +19428,7 @@ msgstr ""
 msgid "red"
 msgstr ""
 
+#: data/setup.xml
 msgid "RED button"
 msgstr ""
 
@@ -18783,6 +19457,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
+#: data/setup.xml
 msgid "Refresh every (in hours)"
 msgstr ""
 
@@ -18823,6 +19498,7 @@ msgstr ""
 msgid "Regionale"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Regular; 28"
 msgstr ""
 
@@ -18895,6 +19571,7 @@ msgstr ""
 msgid "remarkable people"
 msgstr ""
 
+#: data/setup.xml
 msgid "Remember last service in PiP"
 msgstr ""
 
@@ -19006,6 +19683,7 @@ msgstr ""
 msgid "Remove channel"
 msgstr ""
 
+#: data/setup.xml
 msgid "Remove completed timers after (days)"
 msgstr ""
 
@@ -19038,6 +19716,7 @@ msgstr ""
 msgid "Remove from parental protection"
 msgstr ""
 
+#: data/setup.xml
 msgid "Remove items from trash can after (days)"
 msgstr ""
 
@@ -19084,6 +19763,7 @@ msgstr ""
 msgid "Remove terrestrial services"
 msgstr ""
 
+#: data/setup.xml
 msgid "Remove texts for the hearing impaired from external subtitles (instrumental music or environmental sounds, e.g., when a doorbell rings or a gun shot is heard)."
 msgstr ""
 
@@ -19173,12 +19853,15 @@ msgstr ""
 msgid "Repeat leave standby messages"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Repeat playlist"
 msgstr ""
 
+#: data/setup.xml
 msgid "Repeat the sent standby and wakeup commands"
 msgstr ""
 
+#: data/setup.xml
 msgid "Repeat the standby commands"
 msgstr ""
 
@@ -19206,6 +19889,7 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
+#: data/setup.xml
 msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
 msgstr ""
 
@@ -19216,6 +19900,7 @@ msgid ""
 "(NOTE: 'Cancel' cannot undo this!)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Replace newlines in EPG"
 msgstr ""
 
@@ -19240,6 +19925,7 @@ msgstr ""
 msgid "Request for vendor report"
 msgstr ""
 
+#: data/setup.xml
 msgid "Require authentication for http streams"
 msgstr ""
 
@@ -19312,6 +19998,7 @@ msgstr ""
 msgid "Reset sort order"
 msgstr ""
 
+#: data/setup.xml
 msgid "Reset the selected devices and save changes of your config when the GREEN button is pressed."
 msgstr ""
 
@@ -19360,6 +20047,7 @@ msgstr ""
 msgid "restart GUI"
 msgstr ""
 
+#: data/menu.xml
 msgid "Restart GUI in debug mode"
 msgstr ""
 
@@ -19388,6 +20076,7 @@ msgstr ""
 msgid "Restart your network connection and interfaces.\n"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "RestartNetwork"
 msgstr ""
 
@@ -19416,6 +20105,7 @@ msgstr ""
 msgid "Restore deleted user bouquets"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Restore is running"
 msgstr ""
 
@@ -19521,6 +20211,7 @@ msgstr ""
 msgid "Rewind"
 msgstr ""
 
+#: data/setup.xml
 msgid "Rewind speeds"
 msgstr ""
 
@@ -19528,12 +20219,15 @@ msgstr ""
 msgid "rewind to the previous chapter"
 msgstr ""
 
+#: data/setup.xml
 msgid "Rewrap subtitles"
 msgstr ""
 
+#: data/setup.xml
 msgid "RF gain"
 msgstr ""
 
+#: data/setup.xml
 msgid "RF Modulator Output Setup"
 msgstr ""
 
@@ -19615,9 +20309,11 @@ msgstr ""
 msgid "Root"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Root Change Password"
 msgstr ""
 
+#: data/setup.xml
 msgid "Root directory"
 msgstr ""
 
@@ -19645,6 +20341,7 @@ msgstr ""
 msgid "Rotor: "
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Round start time on"
 msgstr ""
 
@@ -19768,6 +20465,7 @@ msgstr ""
 msgid "S"
 msgstr ""
 
+#: data/menu.xml
 msgid "SABnzbd"
 msgstr ""
 
@@ -19880,6 +20578,7 @@ msgstr ""
 msgid "Satellite DAB+ feeds cannot be scanned while a recording is in progress, and no USB receiver is available."
 msgstr ""
 
+#: data/setup.xml
 msgid "Satellite Dish Setup"
 msgstr ""
 
@@ -19914,6 +20613,7 @@ msgstr ""
 msgid "Satire"
 msgstr ""
 
+#: data/menu.xml
 msgid "SATPI"
 msgstr ""
 
@@ -19974,12 +20674,15 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
+#: data/menu.xml
 msgid "Save EPG Cache"
 msgstr ""
 
+#: data/setup.xml
 msgid "Save EPG data"
 msgstr ""
 
+#: data/setup.xml
 msgid "Save every (in hours)"
 msgstr ""
 
@@ -19988,6 +20691,7 @@ msgstr ""
 msgid "Save IPv6 settings"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Save last directory on exit"
 msgstr ""
 
@@ -20000,6 +20704,7 @@ msgstr ""
 msgid "Save playlist"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Save playlist on exit"
 msgstr ""
 
@@ -20035,6 +20740,7 @@ msgstr ""
 msgid "Save timeshift only for current event"
 msgstr ""
 
+#: data/menu.xml
 msgid "Save-Load-Delete"
 msgstr ""
 
@@ -20124,6 +20830,7 @@ msgstr ""
 msgid "Scan forwards"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Scan IP"
 msgstr ""
 
@@ -20131,6 +20838,7 @@ msgstr ""
 msgid "Scan options"
 msgstr ""
 
+#: data/setup.xml
 msgid "Scan region"
 msgstr ""
 
@@ -20282,15 +20990,19 @@ msgstr ""
 msgid "SCR Unicable"
 msgstr ""
 
+#: data/setup.xml
 msgid "Scroll delay"
 msgstr ""
 
+#: data/setup.xml
 msgid "Scroll repeats"
 msgstr ""
 
+#: data/setup.xml
 msgid "Scrolling delay (software renderer)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Scrolling speed (software renderer)"
 msgstr ""
 
@@ -20310,6 +21022,7 @@ msgstr ""
 msgid "Search east"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Search for details from the Internet Movie Database"
 msgstr ""
 
@@ -20470,6 +21183,7 @@ msgstr ""
 msgid "Select 'yes' to choose what bands or step sizes will be scanned."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select 'Yes' to enable AI-Powered Translation for all teletext and DVB subtitles."
 msgstr ""
 
@@ -20477,6 +21191,7 @@ msgstr ""
 msgid "Select 'Yes' to enable editing of this device's settings. Selecting 'No' resets the devices settings to their default values."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select 'Yes' to enable use of the LEFT/RIGHT buttons to move PageUp/PageDown when the LEFT/RIGHT buttons are otherwise undefined. This provides legacy navigation for users who prefer it."
 msgstr ""
 
@@ -20558,6 +21273,7 @@ msgstr ""
 msgid "Select 'Yes' to remove all user customizations of skin data. Selecting this option will remove all user based skin customizations. All affected skins will return to their standard settings. This will also clear any customized boot logos and backdrops."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Select 'Yes' to show this plugin in the Plugin Browser."
 msgstr ""
 
@@ -20581,6 +21297,7 @@ msgstr ""
 msgid "Select 'Yes' when you want to configure this tuner for DVB-T"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select a cardserver from the available list."
 msgstr ""
 
@@ -20588,12 +21305,15 @@ msgstr ""
 msgid "Select a network adapter"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select a softcam from the available list."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select a time, when in Standby mode, after which the descramble can proceed."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select a time, when in Standby, before which descramble can proceed."
 msgstr ""
 
@@ -20643,6 +21363,7 @@ msgstr ""
 msgid "select CAId's"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select cardserver"
 msgstr ""
 
@@ -20661,6 +21382,7 @@ msgstr ""
 msgid "Select channel to record from"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select char for replacing newlines in EPG."
 msgstr ""
 
@@ -20697,6 +21419,7 @@ msgstr ""
 msgid "Select function"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Select HDD"
 msgstr ""
 
@@ -20704,6 +21427,7 @@ msgstr ""
 msgid "Select how quickly the dish should move between satellites."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select how the descrambled data stream is processed. 'Automatic' uses asynchronous writes (lower CPU usage) with automatic fallback to synchronous if kernel AIO is not supported. 'Synchronous' forces blocking writes (stable, most compatible)."
 msgstr ""
 
@@ -20711,6 +21435,7 @@ msgstr ""
 msgid "Select how the satellite dish is set up. i.e. fixed dish, single LNB, DiSEqC switch, positioner, etc."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP."
 msgstr ""
 
@@ -20738,6 +21463,7 @@ msgstr ""
 msgid "Select image or boot to recovery menu and press OK or GREEN button for reboot."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select in which resolution pictures are displayed with picture viewer or movie player."
 msgstr ""
 
@@ -20787,9 +21513,11 @@ msgstr ""
 msgid "Select Quad Channels"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Select refresh rate"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select remote control"
 msgstr ""
 
@@ -20797,6 +21525,7 @@ msgstr ""
 msgid "Select satellites"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Select Sats Entry"
 msgstr ""
 
@@ -20817,6 +21546,7 @@ msgstr ""
 msgid "Select slot image and press OK or GREEN button to reboot."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select softcam"
 msgstr ""
 
@@ -20828,6 +21558,7 @@ msgstr ""
 msgid "Select target folder"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the AI-Powered Translation target language."
 msgstr ""
 
@@ -20835,6 +21566,7 @@ msgstr ""
 msgid "Select the character or action under the keyboard cursor"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the color to be used for the AI-Powered Translation text."
 msgstr ""
 
@@ -20846,9 +21578,11 @@ msgstr ""
 msgid "Select the currently highlighted location and exit"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the delay to buffer descrambled data before starting playback. This can reduce AC3 audio dropouts by ensuring enough data is available when the decoder starts. Higher values are more stable but increase channel switch time."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
 msgstr ""
 
@@ -20856,6 +21590,7 @@ msgstr ""
 msgid "Select the FastScan provider."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Select the list of LCN rules to be applied to the scan."
 msgstr ""
 
@@ -20867,6 +21602,7 @@ msgstr ""
 msgid "Select the manufacturer of your SCR device. If the manufacturer is not listed, set 'SCR' to 'user defined' and enter the device parameters manually according to its spec sheet."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the method of restoring screen resolution and framebuffer when leaving teletext."
 msgstr ""
 
@@ -20894,12 +21630,15 @@ msgstr ""
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Select the refresh rate to be used on the TV."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the remote control device to be used with the %s %s."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the RTL-SDR USB tuner to be used for DAB+ reception."
 msgstr ""
 
@@ -20943,6 +21682,7 @@ msgstr ""
 msgid "Select the time delay between each repeat of the button."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select the time zone within the area or region."
 msgstr ""
 
@@ -20982,6 +21722,7 @@ msgstr ""
 msgid "Select the User Band to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Select the video mode to be used on the TV.\n\nThe following video modes will automatically change in 20 seconds.\n\nWARNING: If a video mode causes signal loss, hold the EXIT button to return to the mode video list."
 msgstr ""
 
@@ -20993,6 +21734,7 @@ msgstr ""
 msgid "Select Timeshift Location"
 msgstr ""
 
+#: data/setup.xml
 msgid "Select tuner"
 msgstr ""
 
@@ -21004,9 +21746,11 @@ msgstr ""
 msgid "Select update source to edit"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Select video mode"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Select video output port with UP/DOWN buttons"
 msgstr ""
 
@@ -21028,6 +21772,7 @@ msgstr ""
 msgid "Select which tuner to use for the scan."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Select wireless network"
 msgstr ""
 
@@ -21057,6 +21802,7 @@ msgstr ""
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
 
+#: data/setup.xml
 msgid "Select your time zone area or region."
 msgstr ""
 
@@ -21069,6 +21815,7 @@ msgstr ""
 msgid "Select/Zap to selected service"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "SelectBouquet"
 msgstr ""
 
@@ -21140,6 +21887,7 @@ msgstr ""
 msgid "Serie"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "Series"
 msgstr ""
 
@@ -21160,9 +21908,11 @@ msgstr ""
 msgid "Server Error: %s %s is included in bouquets.tv and does not exist in channel list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Server IP address used to decrypt channels that can only be done via Stream Relay."
 msgstr ""
 
+#: data/setup.xml
 msgid "Server port used to decrypt channels that can only be done using Stream Relay."
 msgstr ""
 
@@ -21175,6 +21925,7 @@ msgstr ""
 msgid "Servers:"
 msgstr ""
 
+#: data/menu.xml
 msgid "Service"
 msgstr ""
 
@@ -21269,9 +22020,11 @@ msgstr ""
 msgid "Service Selection/Zap Actions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Service Title mode"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Service title mode"
 msgstr ""
 
@@ -21336,6 +22089,7 @@ msgstr ""
 msgid "Set blocktimes by weekday"
 msgstr ""
 
+#: data/setup.xml
 msgid "Set CI assignment for detection of available services."
 msgstr ""
 
@@ -21356,9 +22110,11 @@ msgstr ""
 msgid "Set fixed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Set fps for external subtitles"
 msgstr ""
 
+#: data/setup.xml
 msgid "Set framerate for MiniTV"
 msgstr ""
 
@@ -21366,6 +22122,7 @@ msgstr ""
 msgid "Set FTP connection to the remote receiver be established in passive mode (normally 'no')."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set indefinite recording time"
 msgstr ""
 
@@ -21381,6 +22138,7 @@ msgstr ""
 msgid "Set local time"
 msgstr ""
 
+#: data/setup.xml
 msgid "Set new MAC address"
 msgstr ""
 
@@ -21404,24 +22162,31 @@ msgstr ""
 msgid "Set system"
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the date."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the default location for your instant recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the default location for your recordings. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the default location for your timers. Press OK to add new locations, LEFT/RIGHT to select from any existing locations."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the default location for your timeshift files. Press OK to add new locations, LEFT/RIGHT to select any existing locations."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the default sorting method."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the delay time between repeated loops, this is used by software renderer in some skins."
 msgstr ""
 
@@ -21441,6 +22206,7 @@ msgstr ""
 msgid "Set the port of the OpenWebif from your fallback tuner."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the recording time indefinited."
 msgstr ""
 
@@ -21448,9 +22214,11 @@ msgstr ""
 msgid "Set the repeat interval of the schedule."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the scrolling speed of text on the front panel display, this is used by software renderer in some skins."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the scrolling speed of text on the front panel display."
 msgstr ""
 
@@ -21462,9 +22230,11 @@ msgstr ""
 msgid "Set the time of day to perform the import."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the time."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the type of the progress indication in the channel selection screen."
 msgstr ""
 
@@ -21472,6 +22242,7 @@ msgstr ""
 msgid "Set the User ID of the OpenWebif from your fallback tuner."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set the vertical position of subtitles, measured from the bottom of the screen."
 msgstr ""
 
@@ -21482,21 +22253,27 @@ msgid ""
 "WARNING: If the chosen video mode causes a loss of signal on your video port, long press EXIT button."
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Set this to 'Yes' to automatically hide the InfoBar when the media starts playing. If set to 'No' the InfoBar will remain on screen."
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Set this to 'Yes' to display the Media Player menu item in the Main Menu. If set to 'No' Media Player can still be started from the Plugins list."
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Set this to 'Yes' to keep playing this play list in a continuously repeating loop. If set to 'No' the play list will only be played once."
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Set this to 'Yes' to save the current directory when exiting the Media Player."
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Set this to 'Yes' to save the current play list when exiting the Media Player."
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Set this to 'Yes' to sort the playlists alphabetically."
 msgstr ""
 
@@ -21524,12 +22301,15 @@ msgstr ""
 msgid "Set time window to 6 hours"
 msgstr ""
 
+#: data/setup.xml
 msgid "Set to 'Enabled' to descramble queued scrambled recordings in Standby mode before shutting down."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set to 'Enabled' to descramble queued scrambled recordings in Standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Set to yes for debugging the root cause of a spinner."
 msgstr ""
 
@@ -21537,6 +22317,7 @@ msgstr ""
 msgid "Set voltage and 22KHz"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sets the root directory of movie list, to remove the '..' from being shown in that folder."
 msgstr ""
 
@@ -21559,6 +22340,7 @@ msgstr ""
 msgid "Setup menu"
 msgstr ""
 
+#: data/setup.xml
 msgid "Setup mode"
 msgstr ""
 
@@ -21655,6 +22437,7 @@ msgstr ""
 msgid "Show - Toggle PiP (Enable in LCD MiniTV)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show additional slider value"
 msgstr ""
 
@@ -21682,9 +22465,11 @@ msgstr ""
 msgid "Show alternatives"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show and prioritize the event now and next with EIT in the information bars."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show animation while busy"
 msgstr ""
 
@@ -21696,9 +22481,11 @@ msgstr ""
 msgid "Show available DAB+ reception and decoding information above the radio text. This option applies to both USB and DVB reception."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show background in radio mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Boolean values as graphical switch"
 msgstr ""
 
@@ -21707,6 +22494,7 @@ msgstr ""
 msgid "Show bouquet selection menu"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show busy indicator when the system is busy."
 msgstr ""
 
@@ -21754,6 +22542,7 @@ msgstr ""
 msgid "show cards with uphop 9"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show channel numbers in channel selection"
 msgstr ""
 
@@ -21767,12 +22556,15 @@ msgstr ""
 msgid "Show CI messages"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show columns"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show crypto icons"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show crypto info in infobar"
 msgstr ""
 
@@ -21797,9 +22589,11 @@ msgstr ""
 msgid "Show details"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Show disabled timers"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Display Icons"
 msgstr ""
 
@@ -21807,6 +22601,7 @@ msgstr ""
 msgid "show DVD main menu"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show EIT now/next in infobar"
 msgstr ""
 
@@ -21824,9 +22619,11 @@ msgstr ""
 msgid "Show event details"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show event genre information"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show event-progress in channel selection"
 msgstr ""
 
@@ -21834,6 +22631,7 @@ msgstr ""
 msgid "Show eventinfo plugins"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show extended description"
 msgstr ""
 
@@ -21845,6 +22643,7 @@ msgstr ""
 msgid "Show extensions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show faded message without list"
 msgstr ""
 
@@ -21856,15 +22655,19 @@ msgstr ""
 msgid "Show favourites list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show framerate MiniTV in the front panel display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show HDD progress"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show HDMI Output Resulution."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show HDMI-Output Res"
 msgstr ""
 
@@ -21872,9 +22675,11 @@ msgstr ""
 msgid "Show help"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show icon for new/unseen items"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show image items"
 msgstr ""
 
@@ -21882,12 +22687,15 @@ msgstr ""
 msgid "Show import notification for channels and EPG"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Show in extensions menu"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Show in Plugin Browser"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show in Standby"
 msgstr ""
 
@@ -21907,12 +22715,15 @@ msgstr ""
 msgid "Show InfoBar"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show infobar on channel change"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show infobar on event change"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show infobar on skip forward/backward"
 msgstr ""
 
@@ -21924,6 +22735,7 @@ msgstr ""
 msgid "Show latest update log"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Show list with PiP"
 msgstr ""
 
@@ -21931,6 +22743,7 @@ msgstr ""
 msgid "Show Live in MiniTV"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show live tv when movie stopped"
 msgstr ""
 
@@ -21947,33 +22760,43 @@ msgstr ""
 msgid "Show log"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Logs Manager in extensions list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Main Menu as"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Media playback Remaining/Elapsed as"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Show media player on main menu"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Show menu numbers"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show message when recording starts"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show MiniTV in the front panel display"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show MiniTV in the front panel display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show movie lengths in movie list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show movie lengths in movielist"
 msgstr ""
 
@@ -22013,9 +22836,11 @@ msgstr ""
 msgid "Show notification when import channels was successful"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show or hide the extended description, (skin dependant)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show packages languages"
 msgstr ""
 
@@ -22023,15 +22848,19 @@ msgstr ""
 msgid "Show packages to be updated"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show picons during channel number input"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show picons in channel selection list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show picons in display"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show picons in the movie list."
 msgstr ""
 
@@ -22039,15 +22868,19 @@ msgstr ""
 msgid "Show PiP in MiniTV"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show PIP in the front panel display"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show PIP in the front panel display."
 msgstr ""
 
+#: data/setup.xml
 msgid "Show positioner movement"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show positioner position"
 msgstr ""
 
@@ -22075,12 +22908,15 @@ msgstr ""
 msgid "Show receiver image(s)"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Show record clock icons"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show record indicator"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show recording symbol"
 msgstr ""
 
@@ -22092,9 +22928,11 @@ msgstr ""
 msgid "Show satellites list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show screen path"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show screensaver"
 msgstr ""
 
@@ -22102,6 +22940,7 @@ msgstr ""
 msgid "Show second InfoBar"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show second infobar"
 msgstr ""
 
@@ -22113,6 +22952,7 @@ msgstr ""
 msgid "Show service list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show service type icons"
 msgstr ""
 
@@ -22120,6 +22960,7 @@ msgstr ""
 msgid "Show servicelist or movies"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show setup default value"
 msgstr ""
 
@@ -22135,12 +22976,15 @@ msgstr ""
 msgid "show softwaremanager on blue button"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show source packages"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show status icons in movie list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show status icons in movielist"
 msgstr ""
 
@@ -22160,6 +23004,7 @@ msgstr ""
 msgid "Show technical status line"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show the Plugin Browser screen"
 msgstr ""
 
@@ -22167,6 +23012,7 @@ msgstr ""
 msgid "Show the radio player"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show the service information on two lines in the channel selection screen. You can choose between the current event description below the channel name, or the current event description next to the channel name, and the next event description on the second line."
 msgstr ""
 
@@ -22174,12 +23020,15 @@ msgstr ""
 msgid "Show the TV player"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show time elapsed as positive"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Time Remaining/Elapsed"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show time remaining/elapsed"
 msgstr ""
 
@@ -22187,21 +23036,27 @@ msgstr ""
 msgid "Show transponder info"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show Transponder Remaining/Elapsed as"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show transponder remaining/elapsed as"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show two lines per entry"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show underline characters in filenames"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show VCR scart on main menu"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Show vertical timelines"
 msgstr ""
 
@@ -22209,6 +23064,7 @@ msgstr ""
 msgid "Show warning before set 'Ignore conflict'"
 msgstr ""
 
+#: data/setup.xml
 msgid "Show warning when timeshift is stopped"
 msgstr ""
 
@@ -22249,6 +23105,7 @@ msgstr ""
 msgid "Shows a notification when the channel and EPG import from server is completed successfully."
 msgstr ""
 
+#: data/setup.xml
 msgid "Shows the icons when new/unseen, otherwise it will not show an icon."
 msgstr ""
 
@@ -22256,6 +23113,7 @@ msgstr ""
 msgid "Shows the state of your wireless LAN connection.\n"
 msgstr ""
 
+#: data/setup.xml
 msgid "Shows the watched status of the movie."
 msgstr ""
 
@@ -22276,6 +23134,7 @@ msgstr ""
 msgid "Shut down"
 msgstr ""
 
+#: data/menu.xml
 msgid "Shutdown"
 msgstr ""
 
@@ -22483,6 +23342,7 @@ msgstr ""
 msgid "skip backward"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Skip empty services"
 msgstr ""
 
@@ -22494,6 +23354,7 @@ msgstr ""
 msgid "skip forward"
 msgstr ""
 
+#: data/setup.xml
 msgid "Skip jumping to live TV while timeshifting with plugins"
 msgstr ""
 
@@ -22509,6 +23370,7 @@ msgstr ""
 msgid "Sleep delay"
 msgstr ""
 
+#: data/menu.xml
 msgid "Sleep Timer"
 msgstr ""
 
@@ -22607,6 +23469,7 @@ msgstr ""
 msgid "Slow motion"
 msgstr ""
 
+#: data/setup.xml
 msgid "Slow motion speeds"
 msgstr ""
 
@@ -22654,6 +23517,7 @@ msgstr ""
 msgid "Snooker/Pool"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "SNR"
 msgstr ""
 
@@ -22714,6 +23578,7 @@ msgstr ""
 msgid "softcam"
 msgstr ""
 
+#: data/menu.xml
 msgid "SoftCam / CI"
 msgstr ""
 
@@ -22725,6 +23590,7 @@ msgstr ""
 msgid "Softcam Setup"
 msgstr ""
 
+#: data/setup.xml
 msgid "SoftCSA Settings"
 msgstr ""
 
@@ -22752,6 +23618,7 @@ msgstr ""
 msgid "Software update"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Software Update"
 msgstr ""
 
@@ -22759,6 +23626,7 @@ msgstr ""
 msgid "Softwaremanager information"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "SoftwareManager information"
 msgstr ""
 
@@ -22774,6 +23642,7 @@ msgstr ""
 msgid "Somalia"
 msgstr ""
 
+#: data/setup.xml
 msgid "Some TVs can't switch to the correct input if another HDMI port is active. This setting sets the TV to standby before the switch. (If the TV does not turn back on it may require a slower transmission interval or the repetition of the wake-up command.)"
 msgstr ""
 
@@ -22839,15 +23708,19 @@ msgstr ""
 msgid "Sort list:"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sort order for help screen"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sort order for menu entries"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sort order for setup entries"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sort order for the language list."
 msgstr ""
 
@@ -22860,9 +23733,11 @@ msgstr ""
 msgid "Sort time"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sort Trash by deletion time"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Sorting of playlists"
 msgstr ""
 
@@ -22874,9 +23749,11 @@ msgstr ""
 msgid "Soul/Rhythm Blues"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sound"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sound carrier"
 msgstr ""
 
@@ -22972,6 +23849,7 @@ msgstr ""
 msgid "Specify if you want to set the blocktimes separately by weekday"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Specify the directory to use when starting Media Player."
 msgstr ""
 
@@ -23165,9 +24043,11 @@ msgstr ""
 msgid "Standby in %s"
 msgstr ""
 
+#: data/setup.xml
 msgid "Standby LED"
 msgstr ""
 
+#: data/setup.xml
 msgid "Standby speed"
 msgstr ""
 
@@ -23199,6 +24079,7 @@ msgstr ""
 msgid "Start cut here (reset)"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/MediaPlayer/setup.xml
 msgid "Start directory"
 msgstr ""
 
@@ -23222,6 +24103,7 @@ msgstr ""
 msgid "Start instant recording"
 msgstr ""
 
+#: data/setup.xml
 msgid "Start of the time interval during which events must begin to be displayed. If the filter is active, use keys 1 and 4 to adjust the start time, and key 0 to save."
 msgstr ""
 
@@ -23275,6 +24157,7 @@ msgstr ""
 msgid "Start timeshift"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Start Wizard"
 msgstr ""
 
@@ -23425,6 +24308,7 @@ msgstr ""
 msgid "Stop playing this movie?"
 msgstr ""
 
+#: data/setup.xml
 msgid "Stop previous broadcasted service on return to movie list."
 msgstr ""
 
@@ -23437,6 +24321,7 @@ msgstr ""
 msgid "Stop recording and delete"
 msgstr ""
 
+#: data/setup.xml
 msgid "Stop service on return to movie list"
 msgstr ""
 
@@ -23485,6 +24370,7 @@ msgstr ""
 msgid "Stop|Disable Autostart"
 msgstr ""
 
+#: data/menu.xml
 msgid "Storage"
 msgstr ""
 
@@ -23517,9 +24403,11 @@ msgstr ""
 msgid "Stream"
 msgstr ""
 
+#: data/setup.xml
 msgid "Stream Relay port"
 msgstr ""
 
+#: data/menu.xml
 msgid "Stream Relay Settings"
 msgstr ""
 
@@ -23528,9 +24416,11 @@ msgstr ""
 msgid "Stream Relay Setup Actions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Stream Relay switch delay"
 msgstr ""
 
+#: data/setup.xml
 msgid "Stream Relay URL"
 msgstr ""
 
@@ -23547,6 +24437,7 @@ msgstr ""
 msgid "Streaming"
 msgstr ""
 
+#: data/menu.xml
 msgid "Streaming Clients"
 msgstr ""
 
@@ -23603,36 +24494,47 @@ msgstr ""
 msgid "Subtitle Actions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle alignment"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle black transparency"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle border width"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle delay when timing is bad"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle delay when timing lacks"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle font size"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle language selection 1"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle language selection 2"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle language selection 3"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle language selection 4"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle position"
 msgstr ""
 
@@ -23644,9 +24546,11 @@ msgstr ""
 msgid "Subtitle selection"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Subtitle settings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Subtitle Setup"
 msgstr ""
 
@@ -23762,6 +24666,7 @@ msgstr ""
 msgid "Swap services"
 msgstr ""
 
+#: data/setup.xml
 msgid "Swap SNR in '%' with SNR in 'dB'"
 msgstr ""
 
@@ -23814,15 +24719,19 @@ msgstr ""
 msgid "Switch config"
 msgstr ""
 
+#: data/setup.xml
 msgid "Switch off the TV to correct input"
 msgstr ""
 
+#: data/setup.xml
 msgid "Switch on the display during operation"
 msgstr ""
 
+#: data/setup.xml
 msgid "Switch on the display during Standby Mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Switch on the display during Suspend Mode"
 msgstr ""
 
@@ -23830,6 +24739,7 @@ msgstr ""
 msgid "Switch to 720p video?"
 msgstr ""
 
+#: data/menu.xml
 msgid "Switch to Android"
 msgstr ""
 
@@ -23943,6 +24853,7 @@ msgstr ""
 msgid "Sync failure moving back to origin !"
 msgstr ""
 
+#: data/setup.xml
 msgid "Sync mode *"
 msgstr ""
 
@@ -24110,48 +25021,63 @@ msgstr ""
 msgid "Teletext Actions"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext alpha"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext CleanAlgo (resolution reset algorithm)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext EndX (right border)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext EndY (upper border)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext font and resolution"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext StartX (left border)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext StartY (lower border)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext subtitle color"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext TTFBold (0=normal, 1=bold)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext TTFHeightFactor16 (TrueType letter height)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext TTFScreenResX (screen X resolution)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext TTFShiftX (horizontal letter position)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext TTFShiftY (vertical letter position)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext TTFWidthFactor16 (TrueType letter width)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Teletext UseTTF (0=fixed font, 1=TrueType)"
 msgstr ""
 
@@ -24159,6 +25085,7 @@ msgstr ""
 msgid "Televendita"
 msgstr ""
 
+#: data/menu.xml
 msgid "Telnet"
 msgstr ""
 
@@ -24214,6 +25141,7 @@ msgstr ""
 msgid "Test DiSEqC settings"
 msgstr ""
 
+#: data/setup.xml
 msgid "Test mode"
 msgstr ""
 
@@ -24245,6 +25173,7 @@ msgstr ""
 msgid "TEXT"
 msgstr ""
 
+#: data/rc_models/vu2.xml
 msgid "Text"
 msgstr ""
 
@@ -24252,6 +25181,7 @@ msgstr ""
 msgid "TEXT   Reset"
 msgstr ""
 
+#: data/setup.xml
 msgid "TEXT button"
 msgstr ""
 
@@ -24271,9 +25201,11 @@ msgstr ""
 msgid "Thailand"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Thank you for using the wizard.\n\nPlease press OK to continue."
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Thank you for using the wizard. Your [BRANDMODEL] is now ready for use.\n\nPress OK to start."
 msgstr ""
 
@@ -24282,12 +25214,15 @@ msgstr ""
 msgid "The %d min remaining before the end of the event."
 msgstr ""
 
+#: data/setup.xml
 msgid "The AI mode used for translating languages. You can choose the one that gives the most accurate translation for your target language."
 msgstr ""
 
+#: data/setup.xml
 msgid "The AI-Powered Translation service will be optimized to provide the best performance based on the the Internet connection upload speed selected."
 msgstr ""
 
+#: data/setup.xml
 msgid "The aspect ratio of the recording."
 msgstr ""
 
@@ -24302,6 +25237,7 @@ msgid ""
 "Do you want to install it?"
 msgstr ""
 
+#: data/setup.xml
 msgid "The bitrate of the video encoder. Larger value improves quality and increases file size."
 msgstr ""
 
@@ -24343,9 +25279,11 @@ msgstr ""
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
 msgstr ""
 
+#: data/setup.xml
 msgid "The frame rate of the recording. Ideally, this will match the frame rate of the source or be an integer multiple. If in doubt, set to 60, which should work with most sources."
 msgstr ""
 
+#: data/setup.xml
 msgid "The height of the picture. The input will be scaled to match this value."
 msgstr ""
 
@@ -24474,12 +25412,15 @@ msgid ""
 "Please install it."
 msgstr ""
 
+#: data/setup.xml
 msgid "The speed of the fan when your %s %s is in normal use."
 msgstr ""
 
+#: data/setup.xml
 msgid "The speed of the fan when your %s %s is in standby mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "The time is multiplied by the current repeat counter."
 msgstr ""
 
@@ -24505,6 +25446,7 @@ msgstr ""
 msgid "The user interface of your %s %s is restarting in debug mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "The width of the picture. The input will be scaled to match this value."
 msgstr ""
 
@@ -24581,6 +25523,7 @@ msgid ""
 "Do you really want to continue?"
 msgstr ""
 
+#: data/setup.xml
 msgid "This allows you change the font size relative to skin size, so 1 increases by 1 point size, and -1 decreases by 1 point size"
 msgstr ""
 
@@ -24588,6 +25531,7 @@ msgstr ""
 msgid "This bouquet is protected by a parental control PIN"
 msgstr ""
 
+#: data/setup.xml
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr ""
 
@@ -24625,6 +25569,7 @@ msgstr ""
 msgid "This is a multitype tuner. Available options depend on the hardware."
 msgstr ""
 
+#: data/setup.xml
 msgid "This is a workaround for some devices that wakeup again after switching to standby. The wake up command's from other devices will be ignored for few seconds."
 msgstr ""
 
@@ -24660,15 +25605,19 @@ msgstr ""
 msgid "This option allows you can to set the auto volume level."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you choose how to display elapsed time as + or -"
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you choose how to display remaining time, or elapsed time, or both."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you choose how to display the remaining/elapsed time for live TV."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you choose how to display the time or nothing in Standby."
 msgstr ""
 
@@ -24680,6 +25629,7 @@ msgstr ""
 msgid "This option allows you enable the vertical scaler dejagging."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to alphabetically sort setup menu entries."
 msgstr ""
 
@@ -24695,21 +25645,27 @@ msgstr ""
 msgid "This option allows you to change the virtuell loadspeaker position."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to choose between the three available channel lists."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to choose how to display elapsed time. As + or -"
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to choose how to display the remaining/elapsed time for live TV."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to choose how to display the remaining/elapsed time for Media playback."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to choose how to display the remaining/elapsed time for media playback."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to choose whether or not to display genre information for the event."
 msgstr ""
 
@@ -24733,9 +25689,11 @@ msgstr ""
 msgid "This option allows you to disable or change the virtuell loadspeaker position."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to display numbers that will directly access the menu."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to display the signal-to-noise ratio (SNR) in decibels (not all receivers support it)."
 msgstr ""
 
@@ -24763,15 +25721,19 @@ msgstr ""
 msgid "This option allows you to force the HLG modes for UHD"
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus"
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to Power Off the display."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to select if the default value for a setup item is shown and, if so, where it is displayed in relation to the description."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to show the full screen path leading to the current screen."
 msgstr ""
 
@@ -24787,6 +25749,7 @@ msgstr ""
 msgid "This option allows you to view the old and new settings side by side."
 msgstr ""
 
+#: data/setup.xml
 msgid "This option allows you to view the Plugin Browser screen as a list or as a grid."
 msgstr ""
 
@@ -24871,9 +25834,11 @@ msgstr ""
 msgid "This service is protected by a parental control PIN"
 msgstr ""
 
+#: data/setup.xml
 msgid "This sets the maximum number of log files that will be retained. Files in excess of this number will be deleted."
 msgstr ""
 
+#: data/setup.xml
 msgid "This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted."
 msgstr ""
 
@@ -24990,12 +25955,15 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
+#: data/setup.xml
 msgid "Time delay for the repeated transmission"
 msgstr ""
 
+#: data/setup.xml
 msgid "Time delay until standby or deep standby"
 msgstr ""
 
+#: data/setup.xml
 msgid "Time for next LCD scrolling"
 msgstr ""
 
@@ -25003,9 +25971,11 @@ msgstr ""
 msgid "Time import should start"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Time scale"
 msgstr ""
 
+#: data/setup.xml
 msgid "Time Setup"
 msgstr ""
 
@@ -25045,6 +26015,7 @@ msgstr ""
 msgid "Time zone area"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Time/Date Input"
 msgstr ""
 
@@ -25120,6 +26091,7 @@ msgstr ""
 msgid "Timer type"
 msgstr ""
 
+#: data/display/grautec70x0/skin_display_grautec.xml
 msgid "Timer+"
 msgstr ""
 
@@ -25127,12 +26099,15 @@ msgstr ""
 msgid "Timer:"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "TimerEdit"
 msgstr ""
 
+#: data/display/grautec70x0/skin_display_grautec.xml
 msgid "Timerlist"
 msgstr ""
 
+#: data/menu.xml
 msgid "Timers"
 msgstr ""
 
@@ -25145,6 +26120,7 @@ msgstr ""
 msgid "Timeshift Actions"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Timeshift Active"
 msgstr ""
 
@@ -25169,9 +26145,11 @@ msgstr ""
 msgid "Timeshift not possible!"
 msgstr ""
 
+#: data/setup.xml
 msgid "Timeshift Setup"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "TimeshiftState"
 msgstr ""
 
@@ -25217,6 +26195,7 @@ msgstr ""
 msgid "TMBD details for event"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "TMBD Details Plugin"
 msgstr ""
 
@@ -25277,6 +26256,7 @@ msgstr ""
 msgid "Toggle display of the second InfoBar"
 msgstr ""
 
+#: data/setup.xml
 msgid "Toggle Filter Order"
 msgstr ""
 
@@ -25536,6 +26516,7 @@ msgstr ""
 msgid "TrueType font (SD)"
 msgstr ""
 
+#: data/setup.xml
 msgid "Try to send repeated commands if not all commands are executed. (e.g. TV wakeup, but not switched to correct input.)"
 msgstr ""
 
@@ -25618,6 +26599,7 @@ msgstr ""
 msgid "Tuner setting values"
 msgstr ""
 
+#: data/setup.xml
 msgid "Tuner slot"
 msgstr ""
 
@@ -25629,9 +26611,11 @@ msgstr ""
 msgid "Tuner type"
 msgstr ""
 
+#: data/display/display390/skin_display.xml
 msgid "TUNER:"
 msgstr ""
 
+#: data/menu.xml
 msgid "Tuners & scanning"
 msgstr ""
 
@@ -25683,15 +26667,19 @@ msgstr ""
 msgid "Turn on HDMI-IN PiP mode"
 msgstr ""
 
+#: data/setup.xml
 msgid "Turn on the control LED"
 msgstr ""
 
+#: data/setup.xml
 msgid "Turn on the power LED"
 msgstr ""
 
+#: data/setup.xml
 msgid "Turn on the power LED during deep standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "Turn on the power LED during standby."
 msgstr ""
 
@@ -25703,18 +26691,23 @@ msgstr ""
 msgid "Tuvalu"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "TV"
 msgstr ""
 
+#: data/rc_models/gb4.xml
 msgid "TV / Radio"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "TV A/V"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "TV Back"
 msgstr ""
 
+#: data/setup.xml
 msgid "TV button"
 msgstr ""
 
@@ -25726,21 +26719,27 @@ msgstr ""
 msgid "TV physical address report"
 msgstr ""
 
+#: data/rc_models/octagon1.xml
 msgid "TV Power"
 msgstr ""
 
+#: data/rc_models/edision3.xml
 msgid "TV Ratio"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "TV Set / IR Learning"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "TV Volume +"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "TV Volume -"
 msgstr ""
 
+#: data/rc_models/sf8008.xml
 msgid "TV/Radio"
 msgstr ""
 
@@ -26007,7 +27006,7 @@ msgstr ""
 msgid "Unmark service as dedicated 3D service"
 msgstr ""
 
-#: lib/python/Components/Harddisk.py:871
+#: lib/python/Components/Harddisk.py:877
 msgid "Unmount"
 msgstr ""
 
@@ -26015,6 +27014,7 @@ msgstr ""
 msgid "unpublished"
 msgstr ""
 
+#: data/setup.xml
 msgid "Unscramble http streams from the server"
 msgstr ""
 
@@ -26256,6 +27256,7 @@ msgstr ""
 msgid "USB receiver only"
 msgstr ""
 
+#: data/setup.xml
 msgid "USB receiver settings"
 msgstr ""
 
@@ -26271,6 +27272,7 @@ msgstr ""
 msgid "Use"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use 12 characters display mode"
 msgstr ""
 
@@ -26278,6 +27280,7 @@ msgstr ""
 msgid "Use a gateway"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use adaptive date display"
 msgstr ""
 
@@ -26289,6 +27292,7 @@ msgstr ""
 msgid "Use automatic hardware detection, request hardware AAC decoding, or force the software PCM compatibility path."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Use automatic mode detection"
 msgstr ""
 
@@ -26309,6 +27313,7 @@ msgstr ""
 msgid "Use defaults"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Use description lines"
 msgstr ""
 
@@ -26316,6 +27321,7 @@ msgstr ""
 msgid "Use DHCP"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use EIT EPG information when it is available."
 msgstr ""
 
@@ -26327,6 +27333,7 @@ msgstr ""
 msgid "Use fastscan channel numbering"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use FreeSat EPG information when it is available."
 msgstr ""
 
@@ -26346,12 +27353,15 @@ msgstr ""
 msgid "Use HDMI pre-emphasis"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use HDMI-preemphasis"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use HTTPS protocol"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use individual settings for each directory"
 msgstr ""
 
@@ -26359,24 +27369,31 @@ msgstr ""
 msgid "Use interface"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use MHW EPG information when it is available."
 msgstr ""
 
+#: data/setup.xml
 msgid "Use Netmed EPG information when it is available."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/CableScan/setup.xml
 msgid "Use official channel numbering"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use OpenTV EPG information when it is available. For reading OpenTV EPG data tuning to a dedicated transponder is required"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use original DVB subtitle position"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use original teletext position"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use piconlcd directory for picons on color LCD."
 msgstr ""
 
@@ -26384,21 +27401,27 @@ msgstr ""
 msgid "Use power measurement"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use separate picon pack for front panel display"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use slim screen"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Use spacer lines"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/LCNScanner/setup.xml
 msgid "Use spacer lines to pad the bouquet to make the #SERVICE line numbers match the LCN."
 msgstr ""
 
+#: data/setup.xml
 msgid "Use the alternative screen"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use the channel cache on your preferred tuner *"
 msgstr ""
 
@@ -26406,6 +27429,7 @@ msgstr ""
 msgid "Use the channel numbering provided by FastScan, including gaps. When disabled, channels are numbered consecutively without gaps."
 msgstr ""
 
+#: data/setup.xml
 msgid "Use the deletion time to sort Trash directories. Most recently deleted at the top."
 msgstr ""
 
@@ -26430,6 +27454,7 @@ msgstr ""
 msgid "Use the UP and DOWN keys to select the language, then press OK button. By pressing MENU you can install a new language."
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Use the wizard to set up basic features"
 msgstr ""
 
@@ -26442,6 +27467,7 @@ msgstr ""
 msgid "Use these settings?"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged. These logs can be helpful for developers in finding and fixing problems."
 msgstr ""
 
@@ -26449,9 +27475,11 @@ msgstr ""
 msgid "Use this video enhancement settings?"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use trash can in movie list"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use trash can in movielist"
 msgstr ""
 
@@ -26463,9 +27491,11 @@ msgstr ""
 msgid "Use USALS for this sat"
 msgstr ""
 
+#: data/setup.xml
 msgid "Use ViaSat EPG information when it is available."
 msgstr ""
 
+#: data/setup.xml
 msgid "Use Virgin EPG information when it is available."
 msgstr ""
 
@@ -26530,9 +27560,11 @@ msgstr ""
 msgid "User Interface"
 msgstr ""
 
+#: data/setup.xml
 msgid "User Interface Setup"
 msgstr ""
 
+#: data/menu.xml
 msgid "User Mode Setup"
 msgstr ""
 
@@ -26542,6 +27574,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+#: data/setup.xml
 msgid "Username (httpuser)"
 msgstr ""
 
@@ -26549,6 +27582,7 @@ msgstr ""
 msgid "Username:"
 msgstr ""
 
+#: data/menu.xml
 msgid "uShare"
 msgstr ""
 
@@ -26590,6 +27624,7 @@ msgstr ""
 msgid "Using old profile: "
 msgstr ""
 
+#: data/setup.xml
 msgid "Using the 'Stop' button will cyclically switch displaying events starting: 'outside the interval', 'within the interval', and 'without filtering', instead of 'within the interval', 'outside the interval', and 'without filtering'."
 msgstr ""
 
@@ -26602,6 +27637,7 @@ msgstr ""
 msgid "using:"
 msgstr ""
 
+#: data/setup.xml
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
 msgstr ""
 
@@ -26641,6 +27677,7 @@ msgstr ""
 msgid "Various"
 msgstr ""
 
+#: data/menu.xml
 msgid "VCR Scart"
 msgstr ""
 
@@ -26656,6 +27693,7 @@ msgstr ""
 msgid "Venezuela, Bolivarian Republic of"
 msgstr ""
 
+#: data/setup.xml
 msgid "Verify WebIf SSL certificate"
 msgstr ""
 
@@ -26692,6 +27730,7 @@ msgstr ""
 msgid "Very slow"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "VFormat"
 msgstr ""
 
@@ -26699,6 +27738,7 @@ msgstr ""
 msgid "Viaggi"
 msgstr ""
 
+#: data/rc_models/vu2.xml
 msgid "Video"
 msgstr ""
 
@@ -26729,6 +27769,7 @@ msgstr ""
 msgid "Video output"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/Videomode/videowizard.xml
 msgid "Video output port selection.\n\nPress OK to select the video port.\n\nThe next output port will be automatically tried in 20 seconds."
 msgstr ""
 
@@ -26771,6 +27812,7 @@ msgstr ""
 msgid "Videocodec, size & format"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "VideoMode"
 msgstr ""
 
@@ -26896,6 +27938,7 @@ msgstr ""
 msgid "Virtual Keyboard"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Virtual KeyBoard"
 msgstr ""
 
@@ -26911,6 +27954,7 @@ msgstr ""
 msgid "VLAN connection"
 msgstr ""
 
+#: data/display/vfd255/skin_display_picon.xml
 msgid "VMC"
 msgstr ""
 
@@ -26926,6 +27970,7 @@ msgstr ""
 msgid "VOB File"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "VOD"
 msgstr ""
 
@@ -26946,12 +27991,15 @@ msgstr ""
 msgid "Voltage mode"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Volume"
 msgstr ""
 
+#: data/rc_models/sf3038.xml
 msgid "Volume +"
 msgstr ""
 
+#: data/rc_models/vu4.xml
 msgid "Volume -"
 msgstr ""
 
@@ -26963,6 +28011,7 @@ msgstr ""
 msgid "Volume keys on the receiver remote will control the TV volume."
 msgstr ""
 
+#: data/setup.xml
 msgid "Volume keys on the receiver remote will control the TV volume. If this feature is not supported the volume keys have no function!"
 msgstr ""
 
@@ -27082,6 +28131,7 @@ msgstr ""
 msgid "Wakeup type"
 msgstr ""
 
+#: data/setup.xml
 msgid "Wakeup your AV Receiver from standby"
 msgstr ""
 
@@ -27167,6 +28217,7 @@ msgstr ""
 msgid "Weather"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "Weather Plugin"
 msgstr ""
 
@@ -27175,6 +28226,7 @@ msgstr ""
 msgid "Web interface"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "WebTV"
 msgstr ""
 
@@ -27223,12 +28275,15 @@ msgid ""
 "Then seek to the end, press GREEN. That's it."
 msgstr ""
 
+#: data/startwizard.xml
 msgid "Welcome to your assistant [BRANDMODEL].\nThis start wizard will guide you through the basic setup.\nPress the OK button on your remote control to move to the next step."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Welcome.\n\nIf you want to connect your [BRANDMODEL] to the Internet, this wizard will guide you through the basic network setup.\n\nPress OK to start configuring your network."
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Welcome..."
 msgstr ""
 
@@ -27276,24 +28331,31 @@ msgstr ""
 msgid "Wetter"
 msgstr ""
 
+#: data/startwizard.xml
 msgid "What type of service scan do you want?"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled enigma2 will load unlinked user bouquets. This means that user bouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled the receiver will automatically be switched off."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled the receiver will automatically be switched on."
 msgstr ""
 
@@ -27309,6 +28371,7 @@ msgstr ""
 msgid "When enabled the timer from the fallback tuner is imported."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode"
 msgstr ""
 
@@ -27329,36 +28392,47 @@ msgstr ""
 msgid "When enabled you can specify an extra timeframe when the inactivity sleeptimer is ignored. Not the detection is disabled during this timeframe but the inactivity timeout is disabled"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled you can zap channels with the CH+/-, B+/-, P+/- buttons instead of opening the channel selection list."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled you get the channel selection list via the OK button, the infobar toggle is then transfered to exit button"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, a popup message will be shown when a recording starts."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, a radio background image will be visible while listening to a radio channel."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, a recording is allowed to interrupt live tv, when there are no free tuners."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, AIT data will be included in http streams. This allows a client receiver to use HbbTV."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, authentication is required to watch http streams."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, channel numbering will start at '1' for each bouquet."
 msgstr ""
 
@@ -27366,129 +28440,171 @@ msgstr ""
 msgid "When enabled, content with an aspect ratio of 4:3 will be stretched to fit the screen."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, continue to the next bouquet when the last channel of the current bouquet is reached while changing channels."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, deleted recordings are moved to the trash can, instead of being deleted immediately."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, ECM data will be included in http streams. This allows a client receiver to do the descrambling."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, encryption info will be shown in the infobar (when supported by the skin)."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, error messages related to zapping will not be shown."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, external subtitles will be always turned on for playback movie."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, graphical DVB subtitles are preferred over teletext subtitles, when both types are available."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, graphical DVB subtitles will be displayed at their original position."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, HDMI-CEC is enabled with standard configuration"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, it is possible to leave the movie player with exit."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, it will only display a message that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, network trash cans are probed for cleaning."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, number markers will be hidden."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, receiver will automatically return to the set mode when the TV is turned off or the power button on the receiver's remote is pressed. If the set mode is 'Deep Standby' and the TV is active on another input, if we press the power button on the receiver remote, receiver will remain on standby."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, reformat subtitles to match the width of the screen."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, SDT, BAT data will be included in http streams."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, services may be grouped in multiple bouquets."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, show channel numbers in the channel selection screen."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, subtitles for the hearing impaired can be used."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, subtitles for the hearing impaired will be preferred over normal subtitles, when both types are available."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, teletext pages will be cached, allowing faster access."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, teletext subtitles will be displayed at their original position."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the channel selection list will be hidden while listening to a radio channel"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the infobar will be displayed when a new event starts."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the infobar will be displayed when changing channels."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the infobar will be displayed when skipping forwards/backwards during media playback."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the length of each recording will be shown in the movielist (this might cause some additional loading time)."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, the VCR scart option will be shown on the main menu"
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, this setting has more weight than 'Preferred tuner'."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, timeshift starts automatically in background after the specified time. Timeshift recording will start for each started service, the previous one is deleted. This background recording is not saved unless you press the PLAY-PAUSE, if zap to another service then you will have options to save the previous service recording."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, use DHCP for the IP configuration."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, your %s %s will automatically use the audio track which you selected before."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, your %s %s will automatically use the subtitles which you selected before."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, your %s %s will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, your %s %s will select an AC3 track (when available)."
 msgstr ""
 
+#: data/setup.xml
 msgid "When enabled, your %s %s will select an AC3+ track (when available)."
 msgstr ""
 
@@ -27500,12 +28616,15 @@ msgstr ""
 msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
 msgstr ""
 
+#: data/setup.xml
 msgid "When maximum space for all logs is reached, the oldest logs will be deleted."
 msgstr ""
 
+#: data/setup.xml
 msgid "When nonzero, a recording will start earlier than the starting time indicated by the EPG."
 msgstr ""
 
+#: data/setup.xml
 msgid "When nonzero, a recording will stop later than the ending time indicated by the EPG."
 msgstr ""
 
@@ -27525,6 +28644,7 @@ msgstr ""
 msgid "when PiPzap enabled zap channel up..."
 msgstr ""
 
+#: data/setup.xml
 msgid "When receiver wakes from standby it will command the TV to switch to the HDMI input to which the receiver is connected."
 msgstr ""
 
@@ -27536,15 +28656,19 @@ msgstr ""
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr ""
 
+#: data/setup.xml
 msgid "When set the PIG will return to live after a movie has stopped playing."
 msgstr ""
 
+#: data/setup.xml
 msgid "When set, each directory will show the previous state used. When off, the default values will be shown."
 msgstr ""
 
+#: data/setup.xml
 msgid "When set, sort changes via the sort key will be permanent. When unset, sort changes will be temporary, just for this view of a directory."
 msgstr ""
 
+#: data/setup.xml
 msgid "When switching the filter, the selected EPG sorting is preserved."
 msgstr ""
 
@@ -27557,9 +28681,11 @@ msgstr ""
 msgid "When the content has an aspect ratio of 4:3, choose whether to scale/stretch the picture."
 msgstr ""
 
+#: data/setup.xml
 msgid "When the input cursor reaches this point (percentage of the width, from either side) scroll the text to the cursor."
 msgstr ""
 
+#: data/setup.xml
 msgid "When the receiver wakes from standby or deep standby it will send a command to the TV to bring it out of standby."
 msgstr ""
 
@@ -27581,6 +28707,7 @@ msgstr ""
 msgid "White"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "white, white, cyan, magenta"
 msgstr ""
 
@@ -27593,6 +28720,7 @@ msgstr ""
 msgid "width"
 msgstr ""
 
+#: data/setup.xml
 msgid "Width"
 msgstr ""
 
@@ -27617,9 +28745,11 @@ msgstr ""
 msgid "Wireless network configuration..."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Wireless network connection setup"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Wireless network connection setup."
 msgstr ""
 
@@ -27631,6 +28761,7 @@ msgstr ""
 msgid "Wireless network state"
 msgstr ""
 
+#: data/skin_fallback_1080/skin.xml
 msgid "Wireless Network State"
 msgstr ""
 
@@ -27674,18 +28805,23 @@ msgstr ""
 msgid "with text"
 msgstr ""
 
+#: data/setup.xml
 msgid "With this disabled, changing channels on the same transponder in the channel list will be faster."
 msgstr ""
 
+#: data/setup.xml
 msgid "With this option you can switch on the display during operation."
 msgstr ""
 
+#: data/setup.xml
 msgid "With this option you can switch on the display in Deep Standby Mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "With this option you can switch on the display in Standby Mode."
 msgstr ""
 
+#: data/setup.xml
 msgid "With this setting, you can probably improve the signal quality or eliminate problems that can occur with longer HDMI cables."
 msgstr ""
 
@@ -27766,6 +28902,7 @@ msgstr ""
 msgid "WSS on 4:3"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "x"
 msgstr ""
 
@@ -27803,6 +28940,7 @@ msgstr ""
 msgid "yellow"
 msgstr ""
 
+#: data/setup.xml
 msgid "YELLOW button"
 msgstr ""
 
@@ -27955,6 +29093,7 @@ msgstr ""
 msgid "You can remove this plugin."
 msgstr ""
 
+#: data/setup.xml
 msgid "You can skip this function and turn off the TV when you wake the receiver from standby and immediately switch back to standby."
 msgstr ""
 
@@ -28076,9 +29215,11 @@ msgstr ""
 msgid "Your %s %s is shutting down"
 msgstr ""
 
+#: data/setup.xml
 msgid "Your %s %s reads the stored EPG data every (hours)."
 msgstr ""
 
+#: data/setup.xml
 msgid "Your %s %s stores the EPG data every (hours)."
 msgstr ""
 
@@ -28087,9 +29228,11 @@ msgstr ""
 msgid "Your %s %s?"
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Your [BRANDMODEL] is now ready to use.\n\nPlease press OK to continue."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Your [BRANDMODEL] is now ready to use.\n\nYour internet connection is working now.\n\nPlease press OK to continue."
 msgstr ""
 
@@ -28114,6 +29257,7 @@ msgstr ""
 msgid "Your hardware can detect CI mode itself or works only in legacy mode."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Your internet connection is not working!\n\nPlease choose what you want to do next."
 msgstr ""
 
@@ -28203,6 +29347,7 @@ msgstr ""
 msgid "Your receiver will restart after pressing OK on your remote control."
 msgstr ""
 
+#: lib/python/Plugins/SystemPlugins/NetworkWizard/networkwizard.xml
 msgid "Your wireless LAN internet connection could not be started!\nHave you attached your USB WLAN Stick?\n\nPlease choose what you want to do next."
 msgstr ""
 
@@ -28221,9 +29366,11 @@ msgstr ""
 msgid "Youth"
 msgstr ""
 
+#: data/rc_models/octagon3.xml
 msgid "YouTube"
 msgstr ""
 
+#: data/skin_default/skin.xml
 msgid "YT Trailer-List"
 msgstr ""
 
@@ -28259,6 +29406,7 @@ msgstr ""
 msgid "Zap back to service before positioner setup?"
 msgstr ""
 
+#: lib/python/Plugins/Extensions/GraphMultiEPG/setup.xml
 msgid "Zap bouquets blindly on zap buttons"
 msgstr ""
 
@@ -28278,9 +29426,11 @@ msgstr ""
 msgid "Zap focused channel on full screen"
 msgstr ""
 
+#: data/setup.xml
 msgid "Zap key delay for channel number input"
 msgstr ""
 
+#: data/setup.xml
 msgid "Zap mode"
 msgstr ""
 
@@ -28341,6 +29491,7 @@ msgstr ""
 msgid "ZeroTier setup"
 msgstr ""
 
+#: data/menu.xml
 msgid "ZeroTierVPN"
 msgstr ""
 
@@ -28389,5 +29540,6 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
+#: data/display/display720/skin_display_picon.xml
 msgid "�"
 msgstr ""

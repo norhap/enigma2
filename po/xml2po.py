@@ -27,6 +27,7 @@ class parseXML(ContentHandler, LexicalHandler):
 		self.isPointsElement, self.isReboundsElement = 0, 0
 		self.attrlist = attrlist
 		self.last_comment = None
+		self.current_file = None
 		self.ishex = re.compile(r'#[0-9a-fA-F]+\Z')
 
 	def comment(self, comment):
@@ -46,7 +47,7 @@ class parseXML(ContentHandler, LexicalHandler):
 					continue
 				if k.strip() in ('e', 'w', 'c', 'center', 'left', 'right', 'top', 'bottom', '0', '1'):
 					continue
-				self.attrlist.add((k, self.last_comment))
+				self.attrlist.add((k, self.last_comment, self.current_file))
 				self.last_comment = None
 			except KeyError:
 				pass
@@ -65,17 +66,21 @@ for arg in sys.argv[1:]:
 	if isdir(arg):
 		for file in listdir(arg):
 			if file.endswith(".xml"):
+				contentHandler.current_file = join(arg, file)
 				parser.parse(join(arg, file))
 	else:
 		try:
+			contentHandler.current_file = arg
 			parser.parse(arg)
 		except Exception:
 			pass
 
 attrlist = list(attrlist)
 attrlist.sort(key=lambda x: x[0])
-for (key, value) in attrlist:
+for (key, value, filepath) in attrlist:
 	key_esc = escape_po(key)
+	if filepath:
+		print(f"#: {filepath[2:] if filepath.startswith('./') else filepath}")
 	if value:
 		for line in value.split("\n"):
 			print(f"#. {line.strip()}")
