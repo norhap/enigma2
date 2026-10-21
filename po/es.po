@@ -288,7 +288,7 @@ msgstr "%-m/%d/%Y"
 
 #, python-format
 msgid "%.1f?? E"
-msgstr "%.1f?? mi"
+msgstr "%.1f?? E"
 
 #, python-format
 msgid "%.1f?? W"
@@ -296,15 +296,15 @@ msgstr "%.1f?? W"
 
 #, python-format
 msgid "%.1f° E"
-msgstr "%.1f°E"
+msgstr "%.1f° E"
 
 #, python-format
 msgid "%.1f° W"
-msgstr "%.1f° O"
+msgstr "%.1f° W"
 
 #, python-format
 msgid "%.2f GB"
-msgstr "%.2fGB"
+msgstr "%.2f GB"
 
 #, python-format
 msgid "%.2f MB/s copy rate"
@@ -336,54 +336,54 @@ msgstr "%a %e %b"
 
 #. TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See "man strftime"
 msgid "%A %-d %B %Y"
-msgstr "%A %e %B %Y"
+msgstr "%A %-d %B %Y"
 
 #. TRANSLATORS: long date representation short dayname daynum monthname year in strftime() format! See "man strftime"
 msgid "%a %-d %B %Y"
-msgstr "%a %e %B %Y"
+msgstr "%a %-d %B %Y"
 
 #. TRANSLATORS: long date representation short dayname daynum short monthname year in strftime() format! See "man strftime"
 msgid "%a %-d %b %Y"
-msgstr "%-d %b %Y"
+msgstr "%a %-d %b %Y"
 
 msgid "%a %-d+%b_"
-msgstr "%-d+%b_"
+msgstr "%a %-d+%b_"
 
 msgid "%A %-d-%B"
 msgstr "%A %-d-%B"
 
 msgid "%a %-d-%b"
-msgstr "%-d-%b"
+msgstr "%a %-d-%b"
 
 msgid "%A %-d-%B-%Y"
-msgstr "%-d-%B-%Y"
+msgstr "%A %-d-%B-%Y"
 
 msgid "%a %-d-%B-%Y"
-msgstr "%-d-%B-%Y"
+msgstr "%a %-d-%B-%Y"
 
 msgid "%a %-d-%b-%Y"
-msgstr "%-d-%b-%Y"
+msgstr "%a %-d-%b-%Y"
 
 msgid "%A %-d. %B"
-msgstr "%A %d %B"
+msgstr "%A %-d. %B"
 
 msgid "%a %-d. %b"
-msgstr "%-d. %b"
+msgstr "%a %-d. %b"
 
 msgid "%A %-d. %B %Y"
-msgstr "%A %e %B %Y"
+msgstr "%A %-d. %B %Y"
 
 msgid "%a %-d. %B %Y"
-msgstr "%a %e %B %Y"
+msgstr "%a %-d. %B %Y"
 
 msgid "%a %-d. %b %Y"
-msgstr "%-d. %por"
+msgstr "%a %-d. %b %Y"
 
 msgid "%A %-d.%-m"
-msgstr "%A %-d.%-m.%Y"
+msgstr "%A %-d.%-m"
 
 msgid "%a %-d.%-m"
-msgstr "%a %-d.%-m.%Y"
+msgstr "%a %-d.%-m"
 
 msgid "%A %-d.%-m.%Y"
 msgstr "%A %-d.%-m.%Y"
@@ -392,46 +392,46 @@ msgid "%a %-d.%-m.%Y"
 msgstr "%a %-d.%-m.%Y"
 
 msgid "%A %-d.%m"
-msgstr "%A %-d.%-m.%Y"
+msgstr "%A %-d.%m"
 
 msgid "%a %-d.%m"
-msgstr "%a %-d.%-m.%Y"
+msgstr "%a %-d.%m"
 
 msgid "%A %-d.%m.%Y"
-msgstr "%A %-d.%-m.%Y"
+msgstr "%A %-d.%m.%Y"
 
 msgid "%a %-d.%m.%Y"
-msgstr "%a %-d.%-m.%Y"
+msgstr "%a %-d.%m.%Y"
 
 msgid "%A %-d/%-m"
-msgstr "%A %-d/%-m/%Y"
+msgstr "%A %-d/%-m"
 
 msgid "%a %-d/%-m"
-msgstr "%-d/%-m"
+msgstr "%a %-d/%-m"
 
 msgid "%A %-d/%-m/%Y"
 msgstr "%A %-d/%-m/%Y"
 
 msgid "%a %-d/%-m/%Y"
-msgstr "%A %-d/%-m/%Y"
+msgstr "%a %-d/%-m/%Y"
 
 msgid "%A %-d/%m"
-msgstr "%A %-d/%-m/%Y"
+msgstr "%A %-d/%m"
 
 msgid "%a %-d/%m"
-msgstr "%a %e/%m"
+msgstr "%a %-d/%m"
 
 msgid "%A %-d/%m/%Y"
-msgstr "%A %-d/%-m/%Y"
+msgstr "%A %-d/%m/%Y"
 
 msgid "%a %-d/%m/%Y"
-msgstr "%A %-d/%-m/%Y"
+msgstr "%a %-d/%m/%Y"
 
 msgid "%A %-m/%-d"
 msgstr "%A %-m/%-d"
 
 msgid "%a %-m/%-d"
-msgstr "%A %-m/%-d"
+msgstr "%a %-m/%-d"
 
 msgid "%A %-m/%-d/%Y"
 msgstr "%A %-m/%-d/%Y"
@@ -443,7 +443,7 @@ msgid "%A %-m/%d"
 msgstr "%A %-m/%d"
 
 msgid "%a %-m/%d"
-msgstr "%A %-m/%d"
+msgstr "%a %-m/%d"
 
 msgid "%A %-m/%d/%Y"
 msgstr "%A %-m/%d/%Y"
@@ -503,7 +503,7 @@ msgid "%a %b-%d"
 msgstr "%a %b-%d"
 
 msgid "%A %B-%d-%Y"
-msgstr "%B-%-d-%Y"
+msgstr "%A %B-%d-%Y"
 
 msgid "%a %B-%d-%Y"
 msgstr "%a %B-%d-%Y"
@@ -740,13 +740,13 @@ msgid "%b=%d "
 msgstr "%b=%d "
 
 msgid "%d %b"
-msgstr "%-d %b"
+msgstr "%d %b"
 
 msgid "%d %B %Y"
-msgstr "%d.%B %Y"
+msgstr "%d %B %Y"
 
 msgid "%d %b %Y"
-msgstr "%-d %b %Y"
+msgstr "%d %b %Y"
 
 #. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
 #, python-format
@@ -948,7 +948,7 @@ msgid "%d. %B %Y"
 msgstr "%d.%B %Y"
 
 msgid "%d. %b %Y"
-msgstr "%d. %por"
+msgstr "%d. %b %Y"
 
 msgid "%d.%-m"
 msgstr "%d.%-m"
@@ -987,7 +987,7 @@ msgid "%H:%M"
 msgstr "%H:%M"
 
 msgid "%I:%M"
-msgstr "%SOY"
+msgstr "%I:%M"
 
 msgid "%I:%M%^p"
 msgstr "%I:%M%^p"
@@ -1048,7 +1048,7 @@ msgstr "%s conectado con éxito.\n¡Se encontraron archivos reproducibles."
 
 #, python-format
 msgid "%s GHz"
-msgstr "%sGHz"
+msgstr "%s GHz"
 
 #. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
 #, python-format
@@ -1240,31 +1240,31 @@ msgid "- Recovery mode image (current)"
 msgstr "- Imagen modo recuperación (actual)"
 
 msgid "-1"
-msgstr "1"
+msgstr "-1"
 
 msgid "-2"
-msgstr "2"
+msgstr "-2"
 
 msgid "-3"
-msgstr "3"
+msgstr "-3"
 
 msgid "-4"
-msgstr "4"
+msgstr "-4"
 
 msgid "-5"
-msgstr "5"
+msgstr "-5"
 
 msgid "-6"
-msgstr "6"
+msgstr "-6"
 
 msgid "-7"
-msgstr "7"
+msgstr "-7"
 
 msgid "-8"
-msgstr "8"
+msgstr "-8"
 
 msgid "-9"
-msgstr "9"
+msgstr "-9"
 
 msgid "-NO SERVICE\n"
 msgstr "-SIN SERVICIO\n"
@@ -1427,7 +1427,7 @@ msgid "3D surround speaker position on or off"
 msgstr "Posición del altavoz de sonido envolvente 3D o desactivar"
 
 msgid "3X"
-msgstr "3"
+msgstr "3X"
 
 msgid "4"
 msgstr "4"
@@ -1457,10 +1457,10 @@ msgid "4:3 PanScan"
 msgstr "4:3 PanScan"
 
 msgid "4K"
-msgstr "4"
+msgstr "4K"
 
 msgid "4X"
-msgstr "4"
+msgstr "4X"
 
 msgid "5"
 msgstr "5"
@@ -1475,7 +1475,7 @@ msgid "50 MB/s"
 msgstr "50 MB/s"
 
 msgid "50-200 Mbps"
-msgstr "50-200Mbps"
+msgstr "50-200 Mbps"
 
 msgid "6"
 msgstr "6"
@@ -1511,7 +1511,7 @@ msgid "8bit"
 msgstr "8bit"
 
 msgid "8K"
-msgstr "8"
+msgstr "8K"
 
 msgid "9"
 msgstr "9"
@@ -1573,7 +1573,7 @@ msgid "A"
 msgstr "A"
 
 msgid "A completed recording timer is about to put your receiver in standby mode. Would you like to proceed?"
-msgstr "Un temporizador de grabación completado está a punto de poner su receptor en modo de espera. ¿Le gustaría continuar?"
+msgstr "Un temporizador de grabación completado está a punto de poner su receptor en reposo. ¿Le gustaría continuar?"
 
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Un temporizador de grabación completado está a punto de apagar su receptor. ¿Le gustaría continuar?"
@@ -1594,10 +1594,10 @@ msgstr "Un temporizador terminado quiere reiniciar la interfaz de usuario.\n¿Ha
 
 #, python-format
 msgid "A finished powertimer wants to set your %s %s to standby.\nDo that now?"
-msgstr "Un temporizador terminado quiere poner su %s %s en modo de espera.\n¿Hacer eso ahora?"
+msgstr "Un temporizador terminado quiere poner su %s %s en reposo.\n¿Hacer eso ahora?"
 
 msgid "A finished powertimer wants to set your receiver to standby.\nDo that now?"
-msgstr "Un temporizador está a punto de poner su receptor en modo de espera. ¿Le gustaría continuar?"
+msgstr "Un temporizador está a punto de poner su receptor en reposo. ¿Le gustaría continuar?"
 
 #, python-format
 msgid "A finished powertimer wants to shutdown your %s %s.\nDo that now?"
@@ -1651,7 +1651,7 @@ msgid "A second configured interface has been found.\n\nDo you want to disable t
 msgstr "Se ha encontrado una segunda interfaz configurada.\n\n¿Quieres desactivar la segunda interfaz de red?"
 
 msgid "A sleep timer is about to put your receiver in standby mode. Would you like to proceed?"
-msgstr "Un temporizador está a punto de poner su receptor en modo de espera. ¿Le gustaría continuar?"
+msgstr "Un temporizador está a punto de poner su receptor en reposo. ¿Le gustaría continuar?"
 
 msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Un temporizador de apagado está a punto de apagar su receptor. ¿Le gustaría continuar?"
@@ -2042,7 +2042,7 @@ msgid "Afghanistan"
 msgstr "Afganistán"
 
 msgid "AFL"
-msgstr "AFP"
+msgstr "AFL"
 
 msgid "Afrikaans"
 msgstr "Afrikaans"
@@ -2262,7 +2262,7 @@ msgid "Always include ECM messages in recordings. This overrides the individual 
 msgstr "Siempre incluya mensajes ECM en grabaciones. Esto anula las configuraciones de temporizador individuales. Permite que las grabaciones siempre se descifren después (a veces llamada decodificación sin conexión), si su %s %s lo soporta. Por Defecto: apagado."
 
 msgid "American Football"
-msgstr "Fútbol gaélico"
+msgstr "Fútbol Américano"
 
 msgid "American Samoa"
 msgstr "Samoa Americana"
@@ -2275,7 +2275,7 @@ msgstr "Amárico"
 
 #, python-format
 msgid "Amount %d / Success %d / Failed %d"
-msgstr "Cantidad %d / Convertidos %d / Fallidos %d"
+msgstr "Cantidad %d / Exitosamente %d / Fallidos %d"
 
 msgid "An attempt is made to capture the current TV status. If this is not possible due to incorrect or missing status messages it may cause the receiver to respond unexpectedly. On the other hand, tries to respond better to different operating conditions."
 msgstr "Se intenta capturar el estado actual del televisor. Si esto no es posible debido a mensajes de estado incorrectos o faltantes, es posible que el receptor responda de forma inesperada. Por otro lado, trata de responder mejor a las diferentes condiciones de funcionamiento."
@@ -2536,7 +2536,7 @@ msgid "Aspect ratio"
 msgstr "Relación de aspecto"
 
 msgid "Aspect Ratio Actions"
-msgstr "Acciones Aspecto Ratio"
+msgstr "Acciones Relación de Aspecto"
 
 msgid "Aspect ratio list"
 msgstr "Lista de relación de Aspecto"
@@ -2781,13 +2781,13 @@ msgid "Automatic Scan"
 msgstr "Búsqueda Automática"
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
-msgstr "Ponga automáticamente el televisor en modo de espera siempre que el receptor entre en modo de espera o en modo de espera total."
+msgstr "Ponga automáticamente el televisor en reposo siempre que el receptor entre en reposo o en reposo profundo."
 
 msgid "Automatically refresh the full screen"
 msgstr "Actualizar automáticamente la pantalla completa"
 
 msgid "Automatically run FastScan 90 seconds after each entry into standby and every 24 hours while remaining in standby. If a recording is in progress, retry after one hour. Select 'multi' to scan multiple providers."
-msgstr "Ejecuta Búsqueda Rápida automáticamente 90 segundos después de entrar en modo de espera y cada 24 horas mientras permanezca en dicho modo. Si hay una grabación en curso, se reintentará la operación al cabo de una hora. Selecciona 'multi' para escanear varios proveedores."
+msgstr "Ejecuta Búsqueda Rápida automáticamente 90 segundos después de entrar en reposo y cada 24 horas mientras permanezca en dicho modo. Si hay una grabación en curso, se reintentará la operación al cabo de una hora. Selecciona 'multi' para escanear varios proveedores."
 
 msgid "Automatically start timeshift after"
 msgstr "Comience automáticamente timeshift después"
@@ -2975,7 +2975,7 @@ msgid "BC%d"
 msgstr "antes de Cristo%d"
 
 msgid "Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command."
-msgstr "Antes de enviar el comando para poner el televisor en modo de espera, el receptor prueba si todos los demás dispositivos conectados al televisor están en modo de espera. Si no es así, el comando 'códigoactivo' se enviará al televisor en lugar del comando 'standby'."
+msgstr "Antes de enviar el comando para poner el televisor en reposo, el receptor prueba si todos los demás dispositivos conectados al televisor están en reposo. Si no es así, el comando 'códigoactivo' se enviará al televisor en lugar del comando 'standby'."
 
 msgid "Begin time"
 msgstr "Hora de comienzo"
@@ -3274,7 +3274,7 @@ msgstr "BT709 XvYCC"
 
 #, python-format
 msgid "Buffering %d%%"
-msgstr "Llenando buffer %d%%"
+msgstr "Almacenando búfer %d%%"
 
 msgid "Buffers:"
 msgstr "Tampones:"
@@ -3314,7 +3314,7 @@ msgid "Bus: "
 msgstr "Bus: "
 
 msgid "Business"
-msgstr "Brillo"
+msgstr "Negocio"
 
 msgid "Business & Finance"
 msgstr "Negocios y Finanzas"
@@ -3356,10 +3356,10 @@ msgid "By reverse name, then by reverse date"
 msgstr "Por nombre inverso, luego por fecha inversa"
 
 msgid "Bypass HDMI EDID Check"
-msgstr "Omitir comprobación de HDMI EDID"
+msgstr "Omitir comprobación de EDID HDMI"
 
 msgid "Bypass HDMI EDID checking"
-msgstr "Omitir la verificación HDMI EDID"
+msgstr "Omitir la comprobación de EDID HDMI"
 
 msgid "Bytes received:"
 msgstr "Bytes recibidos:"
@@ -3393,7 +3393,7 @@ msgid "Caccia"
 msgstr "Caccia"
 
 msgid "Cache thumbnails"
-msgstr "Crear caché de miniaturas"
+msgstr "Caché de miniaturas"
 
 msgid "Cached:"
 msgstr "En Caché:"
@@ -3534,7 +3534,7 @@ msgid "Card"
 msgstr "Tarjeta"
 
 msgid "card"
-msgstr "MMC card"
+msgstr "card"
 
 msgid "card reader"
 msgstr "lector de tarjetas"
@@ -3567,7 +3567,7 @@ msgid "Cascade PiP"
 msgstr "PiP en cascada"
 
 msgid "Casting"
-msgstr "Esperando"
+msgstr "Casting"
 
 msgid "Catalan"
 msgstr "Catalán"
@@ -3634,7 +3634,7 @@ msgid "centered, wrapped"
 msgstr "centrado, envuelto"
 
 msgid "Central African Republic"
-msgstr "República Centroafricana"
+msgstr "República CentroAfricana"
 
 msgid "Central Khmer"
 msgstr "Centro"
@@ -3740,7 +3740,7 @@ msgid "Channel not in services list"
 msgstr "Canal no en lista de canales"
 
 msgid "Channel Selection"
-msgstr "Selección de canal"
+msgstr "Selección de Canal"
 
 msgid "Channel selection"
 msgstr "Selección de canal"
@@ -3771,10 +3771,10 @@ msgid "Channels imported successfully from %s"
 msgstr "Canales importados con éxito desde %s"
 
 msgid "Channels only"
-msgstr "Solo Canales"
+msgstr "Solo canales"
 
 msgid "ChannelSelectionRadio"
-msgstr "Selección de canal"
+msgstr "Selección canal Radio"
 
 msgid "Chap."
 msgstr "Cap."
@@ -3929,13 +3929,13 @@ msgid "Choose whether AC3 Plus sound tracks should be transcoded to AC3."
 msgstr "Elija si las pistas de sonido AC3 Plus deben transcodificarse a AC3."
 
 msgid "Choose whether Dolby TrueHD sound tracks should be transcoded to Dolby Digital."
-msgstr "Elija si las pistas de sonido AC3 Plus deben transcodificarse a AC3."
+msgstr "Elige si las pistas de audio Dolby TrueHD deben transcodificarse a Dolby Digital."
 
 msgid "Choose whether DTS / DTS-HD sound tracks should be transcoded to Dolby Digital."
-msgstr "Elija si las pistas de sonido AC3 Plus deben transcodificarse a AC3."
+msgstr "Elige si las pistas de audio DTS / DTS-HD deben transcodificarse a Dolby Digital."
 
 msgid "Choose whether DTS channel sound tracks should be downmixed or transcoded."
-msgstr "Elija si las pistas de audio AAC multicanal deben mezclarse en estéreo."
+msgstr "Elige si las pistas de audio con canales DTS deben someterse a una mezcla reducida (downmix) o a una transcodificación."
 
 msgid "Choose whether multi channel AAC / AAC+ sound tracks should be downmixed to stereo."
 msgstr "Elija si las pistas de audio AAC / AAC+ multicanal deben mezclarse a estéreo."
@@ -3950,7 +3950,7 @@ msgid "Choose whether multi channel AC3 sound tracks should be downmixed to ster
 msgstr "Elija si las pistas de audio AC3 multicanal deben mezclarse a estéreo."
 
 msgid "Choose whether multi channel sound tracks should be convert to PCM or SPDIF."
-msgstr "Elija si las pistas de audio AAC multicanal deben mezclarse en estéreo."
+msgstr "Elige si las pistas de sonido multicanal deben convertirse a PCM o a SPDIF."
 
 msgid "Choose whether to scan a single transponder, one satellite or multiple satellites."
 msgstr "Elija si desea buscar un solo transpondedor, un satélite o varios satélites."
@@ -3959,7 +3959,7 @@ msgid "Choose whether to scan for free services only or whether to include paid/
 msgstr "Elija si desea buscar solo canales gratuitos o si desea incluir también canales de pago."
 
 msgid "Choose whether WMA Pro channel sound tracks should be downmixed or transcoded."
-msgstr "Elija si las pistas de audio AAC multicanal deben mezclarse en estéreo."
+msgstr "Elija si las pistas de audio WMA Pro multicanal deben mezclarse en estéreo."
 
 msgid "Choose which tuner to configure."
 msgstr "Elegir el sintonizador a configurar."
@@ -3993,7 +3993,7 @@ msgid "CI Boot Delay"
 msgstr "Retraso inicio CI"
 
 msgid "CI Legacy"
-msgstr "Legado de CI"
+msgstr "Legacy CI"
 
 msgid "CI Operation Mode"
 msgstr "CI Modo Operación"
@@ -4059,7 +4059,7 @@ msgid "Clear"
 msgstr "Limpiar"
 
 msgid "Clear before scan"
-msgstr "Limpiar antes de escanear"
+msgstr "Limpiar antes de buscar"
 
 msgid "Clear fixed"
 msgstr "Limpiar dirección"
@@ -4195,7 +4195,7 @@ msgid "Command script"
 msgstr "Script de comandos"
 
 msgid "Command the TV to switch to the correct HDMI input when zap timers activate."
-msgstr "Ordene al televisor que cambie a la entrada HDMI correcta cuando se activen los temporizadores zap."
+msgstr "Haz que el televisor cambie a la entrada HDMI correcta cuando se activen los temporizadores de Zapeo."
 
 msgid "Command to run"
 msgstr "Comando para ejecutar"
@@ -4213,7 +4213,7 @@ msgid "Common Interface"
 msgstr "Interfaz común"
 
 msgid "Common Interface assignment"
-msgstr "Asignación de interfaz común"
+msgstr "Asignación de Interfaz Común"
 
 msgid "Common Setup Actions"
 msgstr "Acciones Ajustes Comunes"
@@ -4225,7 +4225,7 @@ msgid "Comoros"
 msgstr "Comoros"
 
 msgid "Compact flash"
-msgstr "Compact flash"
+msgstr "Flash compacto"
 
 msgid "Complete"
 msgstr "Completo"
@@ -4243,7 +4243,7 @@ msgid "Computer"
 msgstr "Completo"
 
 msgid "Config"
-msgstr "Configurando"
+msgstr "Configuración"
 
 msgid "Config EPG: New | OpenSPA"
 msgstr "Configurar EPG: Nuevo | OpenSPA"
@@ -4278,7 +4278,7 @@ msgid "Configure ATSC"
 msgstr "Configurando"
 
 msgid "Configure color front LED during deep standby mode."
-msgstr "Configure el color del LED frontal durante el modo de espera profundo."
+msgstr "Configure el color del LED frontal durante el reposo profundo."
 
 msgid "Configure color of the LED when is operation."
 msgstr "Configure el color del LED frontal cuando está en funcionamiento."
@@ -4383,7 +4383,7 @@ msgid "Configure the border width of the subtitles. The dark border makes the su
 msgstr "Configure el ancho del borde de los subtítulos. El borde oscuro hace que los subtítulos sean más fáciles de leer en un fondo claro."
 
 msgid "Configure the brightness level of the front panel display during standby."
-msgstr "Configure el nivel de brillo de la pantalla del display durante el modo de espera."
+msgstr "Configure el nivel de brillo de la pantalla del display durante el reposo."
 
 msgid "Configure the brightness level of the front panel display for dimmed operation."
 msgstr "Configure el nivel de brillo de la pantalla del display para una operación atenuada."
@@ -4671,7 +4671,7 @@ msgid "confirmed"
 msgstr "confirmado"
 
 msgid "Conflict not resolved!"
-msgstr "Conflicto no resuelto!"
+msgstr "¡Conflicto no resuelto!"
 
 msgid "Congo"
 msgstr "Congo"
@@ -4728,7 +4728,7 @@ msgid "Content"
 msgstr "Contenido"
 
 msgid "Content does not fit on DVD!"
-msgstr "El contenido no cabe en el DVD!"
+msgstr "¡El contenido no cabe en el DVD!"
 
 msgid "contents:"
 msgstr "contenido:"
@@ -5083,13 +5083,13 @@ msgid "DAC"
 msgstr "DAC"
 
 msgid "Dai 12 anni in su"
-msgstr "Hace 12 años en su"
+msgstr "A partir de 12 años"
 
 msgid "Dai 14 anni in su"
-msgstr "Hace 14 años en su"
+msgstr "A partir de 14 años"
 
 msgid "Dai 18 anni in su"
-msgstr "Hace 18 años en su"
+msgstr "A partir de 18 años"
 
 msgid "Daily"
 msgstr "Diario"
@@ -5761,7 +5761,7 @@ msgid "DiSEqC-tester settings"
 msgstr "Ajustes del DiSEqC-tester"
 
 msgid "Dish"
-msgstr "Plato"
+msgstr "Antena"
 
 msgid "Disk space to reserve for recordings (in GB)"
 msgstr "Espacio en disco a reservar para grabaciones (en GB)"
@@ -5833,7 +5833,7 @@ msgid "Divehi / Dhivehi / Maldivian"
 msgstr "Divehi / Dhivehi / Maldivo"
 
 msgid "DIY"
-msgstr "Bricolaje"
+msgstr "DIY"
 
 msgid "Djibouti"
 msgstr "Djibouti"
@@ -6087,7 +6087,7 @@ msgid "Dolby Digital downmix is now %s"
 msgstr "Mezcla AC3 Dolby Digital es ahora %s"
 
 msgid "Dolby TrueHD Transcoding"
-msgstr "Transcodificación Dolby TrueHD"
+msgstr "Transcodificación Dolby True HD"
 
 msgid "Domain"
 msgstr "Dominio"
@@ -7065,7 +7065,7 @@ msgstr "Error: El Directorio '%s' ya existe!"
 
 #, python-format
 msgid "Error: Failed to run service scan!  (%s)"
-msgstr "Error: ¡No se pudo ejecutar el análisis del servicio!  (%s)"
+msgstr "Error: ¡No se pudo ejecutar la búsqueda del canal!  (%s)"
 
 #, python-format
 msgid "Error: File or directory '%s' already exists!"
@@ -7582,7 +7582,7 @@ msgid "FastScan"
 msgstr "Búsqueda Rápida"
 
 msgid "FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'."
-msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante un análisis normal. Las actualizaciones de Búsqueda Rápida seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones del análisis normal. Para restaurarlos, vuelva a analizar los canales con la opción 'Limpiar antes de escanear' establecida en 'Sí'."
+msgstr "Búsqueda Rápida puede renombrar canales existentes e impedir que se actualicen mediante búsqueda normal. Las actualizaciones de Búsqueda Rápida seguirán funcionando. Desactivar esta opción no restaurará los nombres originales ni las actualizaciones de la búsqueda normal. Para restaurarlos, vuelva a analizar los canales con la opción 'Limpiar antes de buscar' establecida en 'Sí'."
 
 msgid "Favorites"
 msgstr "Favoritos"
@@ -8340,7 +8340,7 @@ msgid "Grow drop"
 msgstr "Crecer caer"
 
 msgid "Grow from left"
-msgstr "Extruir desde la izquierda"
+msgstr "Crece desde la izquierda"
 
 msgid "GStreamer version: "
 msgstr "Versión de GStreamer: "
@@ -8373,7 +8373,7 @@ msgid "GUI needs a restart to switch modes\nDo you want to restart the GUI now?"
 msgstr "La GUI necesita reiniciarse para cambiar de modo\n¿Quieres reiniciar la GUI ahora?"
 
 msgid "Guide / EPG"
-msgstr "Multi EPG"
+msgstr "Guía - EPG"
 
 msgid "Guinea"
 msgstr "Guinea"
@@ -8953,7 +8953,7 @@ msgid "Ignore services on satellites that are not configured in the tuner settin
 msgstr "Ignore los canales de los satélites que no estén configurados en los ajustes del sintonizador."
 
 msgid "Ignore unexpectedly wakeup and stay in standby"
-msgstr "Ignorar la activación inesperada y permanecer en modo de espera"
+msgstr "Ignorar la activación inesperada y permanecer en reposo"
 
 msgid "Image to install is invalid\n"
 msgstr "La imagen a instalar no es válida\n"
@@ -8974,7 +8974,7 @@ msgid "IMDB Not Installed"
 msgstr "IMDB No Instalado"
 
 msgid "IMDB Search"
-msgstr "Buscar"
+msgstr "Buscar IMDB"
 
 msgid "Immediate"
 msgstr "Inmediato"
@@ -9659,7 +9659,7 @@ msgid "Kenya"
 msgstr "Kenia"
 
 msgid "Kernel"
-msgstr "Núcleo"
+msgstr "Kernel"
 
 msgid "Kernel driver"
 msgstr "Driver del Kernel"
@@ -9804,7 +9804,7 @@ msgid "Language Setup"
 msgstr "Ajustes Idioma"
 
 msgid "Language Wizard"
-msgstr "Idioma"
+msgstr "Asistente de Idioma"
 
 msgid "languages"
 msgstr "idiomas"
@@ -10395,7 +10395,7 @@ msgid "Manage extensions"
 msgstr "Manejar extensiones"
 
 msgid "Manage extensions or plugins for your receiver."
-msgstr "Administre extensiones o complementos para su receptor."
+msgstr "Administre extensiones o plugins para su receptor."
 
 msgid "Manage Locale/Language Selection settings"
 msgstr "Administrar Selección Región/Lenguaje"
@@ -10779,7 +10779,7 @@ msgid "Montserrat"
 msgstr "Montserrat"
 
 msgid "MORE"
-msgstr "MÁS"
+msgstr "Más"
 
 msgid "Morocco"
 msgstr "Marruecos"
@@ -11404,7 +11404,7 @@ msgid "news/weather report"
 msgstr "noticias/pronóstico del tiempo"
 
 msgid "NEXT"
-msgstr "Siguiente"
+msgstr "SIGUIENTE"
 
 msgid "Next"
 msgstr "Siguiente"
@@ -11497,7 +11497,7 @@ msgid "No config to start, please check /etc/openvpn/ and try again."
 msgstr "No hay configuración para comenzar, verifique en /etc/openvpn/ e intente nuevamente."
 
 msgid "No Connection"
-msgstr "Sin conexión"
+msgstr "Sin Conexión"
 
 msgid "No connection"
 msgstr "Sin conexión"
@@ -11518,7 +11518,7 @@ msgid "No description available."
 msgstr "Sin descripción disponible."
 
 msgid "No Display"
-msgstr "Encender display"
+msgstr "No Display"
 
 msgid "No ECMPids available (FTA Service)"
 msgstr "No ECMPids disponibles (Canal FTA)"
@@ -11542,7 +11542,7 @@ msgid "No images found"
 msgstr "No se encontraron imágenes"
 
 msgid "No log: please try later again"
-msgstr "Sin registro: inténtelo más tarde de nuevo"
+msgstr "Sin log: inténtelo más tarde de nuevo"
 
 msgid "No matching place names found"
 msgstr "No se encontraron imágenes"
@@ -11563,7 +11563,7 @@ msgid "No packages installed or removed"
 msgstr "No hay paquetes instalados o eliminados"
 
 msgid "No parse cannot emu"
-msgstr "No hay análisis no puede emular"
+msgstr "Ningún análisis no puede emular"
 
 msgid "No plugins found, check server."
 msgstr "No se encontraron plugins, revise el servidor."
@@ -11593,7 +11593,7 @@ msgid "No services/providers selected"
 msgstr "No se seleccionaron canales / proveedores"
 
 msgid "No standby"
-msgstr "Sin espera"
+msgstr "No reposo"
 
 msgid "No storage devices found"
 msgstr "No se encontraron dispositivos de almacenamiento"
@@ -11665,13 +11665,13 @@ msgid "No, only image download"
 msgstr "No, solo descargar imagen"
 
 msgid "NodeID"
-msgstr "ID de nodo"
+msgstr "Nodo ID"
 
 msgid "NodeID: "
-msgstr "ID de Nodo: "
+msgstr "Nodo ID: "
 
 msgid "Non Classificato"
-msgstr "No clasificado"
+msgstr "No Clasificado"
 
 msgid "Non Definito"
 msgstr "No Definido"
@@ -11684,7 +11684,7 @@ msgstr "ninguno"
 
 #. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
-msgstr "No linear"
+msgstr "No lineal"
 
 msgid "Norfolk Island"
 msgstr "Isla Norfolk"
@@ -11787,7 +11787,7 @@ msgid "Not valide MAC address"
 msgstr "Dirección MAC no válida"
 
 msgid "Not-Associated"
-msgstr "No asociado"
+msgstr "No Asociado"
 
 msgid "not_tested"
 msgstr "no_testeado"
@@ -11820,7 +11820,7 @@ msgid "Notiziario"
 msgstr "Noticiario"
 
 msgid "NOW"
-msgstr "Ahora"
+msgstr "AHORA"
 
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr "Ahora, use la configuración de contraste para aumentar el brillo del fondo tanto como sea posible, pero asegúrese de que aún pueda ver la diferencia entre los dos niveles más brillantes de tonos. Si lo ha hecho, pulse OK."
@@ -11952,7 +11952,7 @@ msgid "on READ ONLY medium."
 msgstr "en medio de SOLO LECTURA."
 
 msgid "On valid ONIDs, ignore frequency sub network part"
-msgstr "En ONID válidos, ignore la parte de la frecuencia de subred"
+msgstr "En ONIDs válidos, ignore la parte de la frecuencia de subred"
 
 msgid "Once"
 msgstr "Una vez"
@@ -12114,7 +12114,7 @@ msgid "Original"
 msgstr "Original"
 
 msgid "Original language"
-msgstr "Lenguaje original"
+msgstr "Idioma original"
 
 msgid "original language"
 msgstr "idioma original"
@@ -12194,7 +12194,7 @@ msgid "OTT Model"
 msgstr "Modelo OTT"
 
 msgid "OUT"
-msgstr "AFUERA"
+msgstr "OUT"
 
 msgid "Outdoor"
 msgstr "Exterior"
@@ -12474,10 +12474,10 @@ msgid "Pink"
 msgstr "Rosa"
 
 msgid "PIP"
-msgstr "PEPITA"
+msgstr "PiP"
 
 msgid "PiP"
-msgstr "PEPITA"
+msgstr "PiP"
 
 msgid "PiP Actions"
 msgstr "Acciones Audio"
@@ -12914,10 +12914,10 @@ msgid "Possible rated in broadcaster"
 msgstr "Posible clasificación en la emisora"
 
 msgid "POWER"
-msgstr "FUERZA"
+msgstr "ENCENDER"
 
 msgid "Power"
-msgstr "Menú de apagado"
+msgstr "Encender"
 
 msgid "Power LED can be turned on or off here."
 msgstr "El LED de encendido se puede encender o apagar aquí."
@@ -13377,7 +13377,7 @@ msgid "Put your AV Receiver in standby"
 msgstr "Ponga su receptor AV en modo reposo"
 
 msgid "PVR"
-msgstr "OVR"
+msgstr "PVR"
 
 msgid "Python frontend for /tmp/mmi.socket"
 msgstr "Interfaz de Python para /tmp/mmi.socket"
@@ -13974,7 +13974,7 @@ msgid "Renamed %s!"
 msgstr "Renombrado %s!"
 
 msgid "Renovation"
-msgstr "Resolución"
+msgstr "Renovación"
 
 msgid "Repeat"
 msgstr "Repetir"
@@ -14007,7 +14007,7 @@ msgid "Repeating the event currently recording... What do you want to do?"
 msgstr "Repetir el evento que está grabando actualmente...Qué quieres hacer?"
 
 msgid "Repeats"
-msgstr "Repetición"
+msgstr "Repeticiones"
 
 msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
 msgstr "Reemplazar `-` en cuadros de diálogo con texto en color por altavoz (como subtítulos de teletexto para sordos)"
@@ -14203,13 +14203,6 @@ msgstr "Continuar desde la última posición"
 msgid "Resume position at %s"
 msgstr "Continuar posición en %s"
 
-#. TRANSLATORS: The string "Resuming playback" flashes for a moment
-#. TRANSLATORS: at the start of a movie, when the user has selected
-#. TRANSLATORS: "Resume from last position" as start behavior.
-#. TRANSLATORS: The purpose is to notify the user that the movie starts
-#. TRANSLATORS: in the middle somewhere and not from the beginning.
-#. TRANSLATORS: (Some translators seem to have interpreted it as a
-#. TRANSLATORS: question or a choice, but it is a statement.)
 msgid "Resuming playback"
 msgstr "Continuar reproducción"
 
@@ -14259,7 +14252,7 @@ msgid "RF Modulator Output Setup"
 msgstr "Ajustes de Salida Modulador RF"
 
 msgid "RGB"
-msgstr "GB"
+msgstr "RGB"
 
 msgid "Right"
 msgstr "Derecha"
@@ -15416,10 +15409,10 @@ msgid "Send 'sourceactive' before zap timers"
 msgstr "Enviar ‘códigoactivo’ antes de zapear temporizadores"
 
 msgid "Send DiSEqC"
-msgstr "Mandar Diseqc"
+msgstr "Enviar Diseqc"
 
 msgid "Send DiSEqC only on satellite change"
-msgstr "Mandar Diseqc solo en cambio de satélite"
+msgstr "Enviar Diseqc solo en cambio de satélite"
 
 msgid "Senegal"
 msgstr "Senegal"
@@ -15715,7 +15708,7 @@ msgid "Set this to 'Yes' to automatically hide the InfoBar when the media starts
 msgstr "Establezca esto en 'Sí' para ocultar automáticamente la barra de información cuando los medios comiencen a reproducirse. Si se establece en 'No', la barra de información permanecerá en la pantalla."
 
 msgid "Set this to 'Yes' to display the Media Player menu item in the Main Menu. If set to 'No' Media Player can still be started from the Plugins list."
-msgstr "Establezca esto en 'Sí' para mostrar el elemento de menú del Reproductor multimedia en el menú principal. Si está configurado en 'No', el Reproductor multimedia aún se puede iniciar desde la lista de complementos."
+msgstr "Establezca esto en 'Sí' para mostrar el elemento de menú del Reproductor multimedia en el menú principal. Si está configurado en 'No', el Reproductor multimedia aún se puede iniciar desde la lista de plugins."
 
 msgid "Set this to 'Yes' to keep playing this play list in a continuously repeating loop. If set to 'No' the play list will only be played once."
 msgstr "Configúrelo en 'Sí' para seguir reproduciendo esta lista de reproducción en un bucle que se repite continuamente. Si se establece en 'No', la lista de reproducción sólo se reproducirá una vez."
@@ -15995,7 +15988,7 @@ msgid "Show faded message without list"
 msgstr "Mostrar mensaje desvanecido sin lista"
 
 msgid "Show Favorites"
-msgstr "Mostrar favoritos"
+msgstr "Mostrar Favoritos"
 
 msgid "Show favourites list"
 msgstr "Mostrar lista de favoritos"
@@ -16031,7 +16024,7 @@ msgid "Show in Plugin Browser"
 msgstr "Mostrar en Plugins"
 
 msgid "Show in Standby"
-msgstr "Mostrar en standby"
+msgstr "Mostrar en Reposo"
 
 msgid "Show info"
 msgstr "Mostrar info"
@@ -16076,7 +16069,7 @@ msgid "Show Logs Manager in extensions list"
 msgstr "Mostrar Logs Manager en la lista de extensiones"
 
 msgid "Show Main Menu as"
-msgstr "Mostrar menú principal como"
+msgstr "Mostrar Menú Principal como"
 
 msgid "Show Media playback Remaining/Elapsed as"
 msgstr "Reproducción de medios restante/transcurrido como"
@@ -16623,7 +16616,7 @@ msgid "Snooker"
 msgstr "Snooker"
 
 msgid "Snooker/Pool"
-msgstr "Billar/billar"
+msgstr "Snooker/Billar"
 
 msgid "SNR"
 msgstr "SNR"
@@ -16713,10 +16706,10 @@ msgid "Somalia"
 msgstr "Somalia"
 
 msgid "Some TVs can't switch to the correct input if another HDMI port is active. This setting sets the TV to standby before the switch. (If the TV does not turn back on it may require a slower transmission interval or the repetition of the wake-up command.)"
-msgstr "Algunos televisores no pueden cambiar a la entrada correcta si otro puerto HDMI está activo. Esta configuración pone el televisor en modo de espera antes del cambio. (Si el televisor no se vuelve a encender, es posible que requiera un intervalo de transmisión más lento o la repetición del comando de activación)."
+msgstr "Algunos televisores no pueden cambiar a la entrada correcta si otro puerto HDMI está activo. Esta configuración pone el televisor en reposo antes del cambio. (Si el televisor no se vuelve a encender, es posible que requiera un intervalo de transmisión más lento o la repetición del comando de activación)."
 
 msgid "Some TVs do not wake from standby when they receive the 'Image View On' command. If this is the case try the 'Text View On' command instead."
-msgstr "Algunos televisores no se despiertan del modo de espera cuando reciben el comando 'Vista de imagen activada'. Si este es el caso, intente el comando 'Vista de texto activada' en su lugar."
+msgstr "Algunos televisores no se despiertan del reposo cuando reciben el comando 'Vista de imagen activada'. Si este es el caso, intente el comando 'Vista de texto activada' en su lugar."
 
 msgid "Sorbian"
 msgstr "Serbio"
@@ -17832,7 +17825,7 @@ msgid "The channels cache is disabled. To use FCC, you must enable it.\nDo you w
 msgstr "La caché de canales está deshabilitada. Para utilizar FCC, debe habilitarlo.\n¿Quieres reiniciar Enigma2 y aplicar los cambios necesarios?"
 
 msgid "The command to wake from standby will be sent multiple times."
-msgstr "El comando para salir del modo de espera se enviará varias veces."
+msgstr "El comando para salir de reposo se enviará varias veces."
 
 msgid "The current image might not be stable.\nFor more information see telegram @norhap."
 msgstr "Es posible que la imagen actual no sea estable.\nPara obtener más información, consulte Telegram @norhap."
@@ -19822,7 +19815,7 @@ msgid "Waiting for partition"
 msgstr "Esperando para partición"
 
 msgid "Wake the receiver from standby when selected wake command is sent from the TV."
-msgstr "Despierta el receptor desde el modo de espera cuando se envía el comando de activación seleccionado desde el televisor."
+msgstr "Despierta el receptor desde reposo cuando se envía el comando de activación seleccionado desde el televisor."
 
 msgid "Wake up"
 msgstr "Despertar"
@@ -19837,7 +19830,7 @@ msgid "wakeup"
 msgstr "despertar"
 
 msgid "Wakeup A/V receiver from standby too."
-msgstr "También activa el receptor A/V desde el modo de espera."
+msgstr "También activa el receptor A/V desde reposo."
 
 msgid "Wakeup command for TV"
 msgstr "Comando de activación para TV"
@@ -19864,7 +19857,7 @@ msgid "Wakeup type"
 msgstr "Tipo de despertar"
 
 msgid "Wakeup your AV Receiver from standby"
-msgstr "Active su receptor AV desde el modo de espera"
+msgstr "Active su receptor AV desde reposo"
 
 msgid "Wallis and Futuna"
 msgstr "Wallis y Futuna"
@@ -20017,10 +20010,10 @@ msgid "When enabled the receiver will automatically be switched on."
 msgstr "Cuando está habilitado, el receptor se encenderá automáticamente."
 
 msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
-msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
+msgstr "Cuando está habilitado, el receptor se activará automáticamente desde reposo cuando se encienda el televisor."
 
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
-msgstr "Cuando está habilitado, el receptor se activará automáticamente desde el modo de espera cuando se encienda el televisor."
+msgstr "Cuando está habilitado, el receptor se activará automáticamente desde reposo cuando se encienda el televisor."
 
 msgid "When enabled the timer from the fallback tuner is imported."
 msgstr "Cuando está habilitado se importa el temporizador desde el sintonizador de reserva."
@@ -20233,7 +20226,7 @@ msgid "When receiver wakes from standby it will command the TV to switch to the 
 msgstr "Cuando el receptor sale del modo reposo, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
 
 msgid "When receiver wakes from standby, it will command the TV to switch to the HDMI input the receiver is connected to."
-msgstr "Cuando el receptor se despierta desde el modo de espera, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
+msgstr "Cuando el receptor se despierta desde reposo, ordenará al televisor que cambie a la entrada HDMI a la que está conectado el receptor."
 
 msgid "When selected this allows video modes to be selected even if they are not reported as supported."
 msgstr "Cuando se selecciona, esto permite que se seleccionen los modos de video, incluso si no se informaron como compatibles."
@@ -20260,13 +20253,13 @@ msgid "When the input cursor reaches this point (percentage of the width, from e
 msgstr "Cuando el cursor de entrada alcanza este punto (porcentaje del ancho, desde cualquier lado), desplace el texto hacia el cursor."
 
 msgid "When the receiver wakes from standby or deep standby it will send a command to the TV to bring it out of standby."
-msgstr "Cuando el receptor sale del modo reposo o del modo de espera profundo, enviará un comando al televisor para que salga del modo reposo."
+msgstr "Cuando el receptor sale del modo reposo o reposo profundo, enviará un comando al televisor para que salga del modo reposo."
 
 msgid "When the receiver wakes from standby or deep standby, it will send a command to the TV to bring it out of standby too."
-msgstr "Cuando el receptor se despierta del modo de espera o del modo de espera profundo, enviará un comando al televisor para que también salga del modo de espera."
+msgstr "Cuando el receptor se despierta desde reposo o reposo profundo, enviará un comando al televisor para que también salga del reposo."
 
 msgid "When this timer starts:\nIf the receiver is not in standby mode, if you switch to channels from your subscription, the recording will stop."
-msgstr "Cuando comienza este cronómetro:\nSi el receptor no está en modo de espera, si cambia a canales de su suscripción, la grabación se detendrá."
+msgstr "Cuando comienza este cronómetro:\nSi el receptor no está en reposo, si cambia a canales de su suscripción, la grabación se detendrá."
 
 msgid "Where to save temporary timeshift recordings?"
 msgstr "¿Dónde guardar las grabaciones timeshift temporales?"
