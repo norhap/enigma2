@@ -10779,7 +10779,7 @@ msgid "Montserrat"
 msgstr "Montserrat"
 
 msgid "MORE"
-msgstr "Más"
+msgstr "MÁS"
 
 msgid "Morocco"
 msgstr "Marruecos"
