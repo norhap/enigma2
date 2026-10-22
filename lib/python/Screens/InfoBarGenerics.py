@@ -20,6 +20,7 @@ from Components.Sources.StaticText import StaticText
 from Screens.EpgSelection import EPGSelection
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
+from Screens import Hotkey
 from Screens.ScreenSaver import InfoBarScreenSaver
 from Screens.Standby import Standby, inStandby
 from Screens.ChoiceBox import ChoiceBox, OrderedChoiceBox
@@ -505,10 +506,18 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self.hideVBILineScreen.hide()
 
 	def functionHotkeyValue(self):
-		hotkeyvalue = None
-		if self.hotkeyValue is not None:
-			hotkeyvalue = _(self.hotkeyValue) if "Void" in self.hotkeyValue or "SoftcamSetup" in self.hotkeyValue else _(self.hotkeyValue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1].upper()[0:1] + self.hotkeyValue.replace("Module/Screens.", "").replace("MenuPlugin/video", "").replace("MenuPlugin/system", "").replace("Plugins/Extensions", "").replace("Plugins/SystemPlugins", "").split("/")[1][1:30])
-		return hotkeyvalue if "," not in hotkeyvalue else hotkeyvalue.split(",")[0]
+		if self.hotkeyValue is None:
+			return None
+		if not Hotkey.hotkey.functions:
+			Hotkey.getHotkeyFunctions()
+		# print(f"[InfoBarGenerics] hotkeyValue={self.hotkeyValue!r}, functions len={len(Hotkey.hotkey.functions) if Hotkey.hotkey.functions else 0}")
+		if Hotkey.hotkey.functions:
+			for name, action, category in Hotkey.hotkey.functions:
+				if action == self.hotkeyValue:
+					# print(f"[InfoBarGenerics] FOUND: {name!r}")
+					return name
+		# print(f"[InfoBarGenerics] NOT FOUND, returning raw")
+		return self.hotkeyValue
 
 	def __onShow(self):
 		valuered = None
