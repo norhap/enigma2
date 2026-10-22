@@ -53,6 +53,7 @@ class Navigation:
 		self.hybridPlaybackService = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
+		self.streamRetryOverride = False
 		self.firstStart = True
 		self.streamRetryTimer = None
 		self.streamRetryService = None
@@ -159,10 +160,13 @@ class Navigation:
 		bar = InfoBar.instance
 		ref = self.currentlyPlayingServiceOrGroup
 		streamRef = self.hybridPlaybackService or ref
+		isOverride = self.streamRetryOverride
 		if (not bar or ServiceEventTracker.getActiveInfoBar() is not bar or Screens.Standby.inStandby
-				or self.isCurrentServiceDVBI or self.isCurrentServiceStreamRelay
-				or not ref or ref.flags & eServiceReference.isGroup or streamRef.type != 4097
-				or not streamRef.getPath().lower().startswith(("http://", "https://"))
+				or (self.isCurrentServiceDVBI and not isOverride)
+				or self.isCurrentServiceStreamRelay
+				or not ref or ref.flags & eServiceReference.isGroup
+				or (not isOverride and streamRef.type != 4097)
+				or (not isOverride and not streamRef.getPath().lower().startswith(("http://", "https://")))
 				or bar.seekstate != bar.SEEK_STATE_PLAY):
 			return None
 		service = self.getCurrentService()
