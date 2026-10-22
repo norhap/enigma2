@@ -1862,6 +1862,8 @@ RESULT eDVBServicePlay::start()
 	 * silently never showing a picture. Cheap/instant no-op when nothing is
 	 * outstanding, which is the common case. */
 
+	/* an event handler may stop and release this service while it starts */
+	ePtr<eDVBServicePlay> self = this;
 	eServiceReferenceDVB service = (eServiceReferenceDVB&)m_reference;
 	bool scrambled = true;
 	int packetsize = 188;

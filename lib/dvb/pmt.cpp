@@ -37,7 +37,7 @@
 
 eDVBServicePMTHandler::eDVBServicePMTHandler()
 	:m_last_channel_state(-1), m_ca_servicePtr(0), m_dvb_scan(0), m_decode_demux_num(0xFF),
-	m_no_pat_entry_delay(eTimer::create()), m_have_cached_program(false)
+	m_no_pat_entry_delay(eTimer::create()), m_destroyed(nullptr), m_free_count(0), m_have_cached_program(false)
 {
 	m_use_decode_demux = 0;
 	m_pmt_pid = -1;
@@ -54,7 +54,27 @@ eDVBServicePMTHandler::eDVBServicePMTHandler()
 
 eDVBServicePMTHandler::~eDVBServicePMTHandler()
 {
+	if (m_destroyed)
+		*m_destroyed = true;
 	free();
+}
+
+/* returns false when an event handler freed or destroyed this handler */
+bool eDVBServicePMTHandler::sendServiceEvent(int event)
+{
+	bool destroyed = false;
+	bool *outerDestroyed = m_destroyed;
+	unsigned int freeCount = m_free_count;
+	m_destroyed = &destroyed;
+	serviceEvent(event);
+	if (destroyed)
+	{
+		if (outerDestroyed)
+			*outerDestroyed = true;
+		return false;
+	}
+	m_destroyed = outerDestroyed;
+	return m_free_count == freeCount;
 }
 
 void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
@@ -83,7 +103,8 @@ void eDVBServicePMTHandler::channelStateChanged(iDVBChannel *channel)
 
 			if (m_service && !m_service->cacheEmpty())
 			{
-				serviceEvent(eventNewProgramInfo);
+				if (!sendServiceEvent(eventNewProgramInfo))
+					return;
 				if (m_use_decode_demux)
 				{
 					if (!m_ca_servicePtr)
@@ -167,7 +188,8 @@ void eDVBServicePMTHandler::PMTready(int error)
 	{
 		m_pmt_ready = true;
 		m_have_cached_program = false;
-		serviceEvent(eventNewProgramInfo);
+		if (!sendServiceEvent(eventNewProgramInfo))
+			return;
 		switch (m_service_type)
 		{
 		case livetv:
@@ -213,7 +235,15 @@ void eDVBServicePMTHandler::PMTready(int error)
 
 void eDVBServicePMTHandler::sendEventNoPatEntry()
 {
-	serviceEvent(eventNoPATEntry);
+	if (!sendServiceEvent(eventNoPATEntry))
+		return;
+
+	ePtr<iDVBFrontend> fe;
+	if (!m_channel->getFrontend(fe))
+	{
+		eDVBFrontend *frontend = (eDVBFrontend*)&(*fe);
+		frontend->checkRetune();
+	}
 }
 
 bool eDVBServicePMTHandler::hasSharedPmtPid(int pmtPid)
@@ -493,7 +523,8 @@ void eDVBServicePMTHandler::AITready(int error)
 			for(HbbTVApplicationInfoListConstIterator infoiter = m_HbbTVApplications.begin() ; infoiter != m_HbbTVApplications.end() ; ++infoiter)
 				eDebug("[eDVBServicePMTHandler] Found : control[%d], name[%s], url[%s]",
 					(*infoiter)->m_ControlCode, (*infoiter)->m_ApplicationName.c_str(), (*infoiter)->m_HbbTVUrl.c_str());
-			serviceEvent(eventHBBTVInfo);
+			if (!sendServiceEvent(eventHBBTVInfo))
+				return;
 		}
 		else eDebug("[eDVBServicePMTHandler] No found anything.");
 	}
@@ -1140,8 +1171,8 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, ePtr<iTsSource> &s
 		if (!simulate)
 			eDebug("[eDVBServicePMTHandler] allocate Channel: res %d", res);
 
-		if (!res)
-			serviceEvent(eventChannelAllocated);
+		if (!res && !sendServiceEvent(eventChannelAllocated))
+			return res;
 
 		ePtr<iDVBChannelList> db;
 		if (!m_resourceManager->getChannelList(db))
@@ -1215,7 +1246,10 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, ePtr<iTsSource> &s
 				sigc::mem_fun(*this, &eDVBServicePMTHandler::channelStateChanged),
 				m_channelStateChanged_connection);
 			m_last_channel_state = -1;
+			unsigned int freeCount = m_free_count;
 			channelStateChanged(m_channel);
+			if (m_free_count != freeCount)
+				return res;
 
 			m_channel->connectEvent(
 				sigc::mem_fun(*this, &eDVBServicePMTHandler::channelEvent),
@@ -1267,6 +1301,10 @@ int eDVBServicePMTHandler::tuneExt(eServiceReferenceDVB &ref, ePtr<iTsSource> &s
 
 void eDVBServicePMTHandler::free()
 {
+	++m_free_count;
+	// Disconnect before releasing the scan: a pending SDT timeout can otherwise
+	// call SDTScanEvent after the service has already released m_dvb_scan.
+	m_scan_event_connection = 0;
 	m_dvb_scan = 0;
 
 	if (m_ca_servicePtr)
