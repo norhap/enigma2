@@ -1567,7 +1567,7 @@ msgid "[move mode]"
 msgstr "[modo mover]"
 
 msgid "[OK]  ="
-msgstr "[Aceptar] ="
+msgstr "[OK] ="
 
 msgid "A"
 msgstr "A"
@@ -3592,7 +3592,7 @@ msgstr "CCcam Info"
 
 #, python-format
 msgid "CCcam Info %s\nby AliAbdul %s\n\nThis screen shows you the status of CCcam."
-msgstr "Información de cámara CC %s\npor AliAbdul %s\n\nEsta pantalla le muestra el estado de CCcam."
+msgstr "Información CCcam %s\npor AliAbdul %s\n\nEsta pantalla le muestra el estado de CCcam."
 
 msgid "CCcam Info Config"
 msgstr "CCcam Info"
@@ -4368,7 +4368,7 @@ msgid "Configure the aspect ratio of the screen."
 msgstr "Configure la relación de aspecto de la pantalla."
 
 msgid "Configure the behavior of the 'pause and ok' key when movie playback is already paused."
-msgstr "Configure el comportamiento de la tecla ‘pausa y aceptar’ cuando la reproducción de la película ya está en pausa."
+msgstr "Configure el comportamiento de la tecla ‘PAUSA y OK’ cuando la reproducción de la película ya está en pausa."
 
 msgid "Configure the behavior when movie playback is manually stopped."
 msgstr "Configure el comportamiento cuando la reproducción de la película se detiene manualmente."
@@ -7296,7 +7296,7 @@ msgid "Extended"
 msgstr "Extendido"
 
 msgid "Extended network setup plugin..."
-msgstr "Complemento de configuración de red extendida…"
+msgstr "Ajustes del plugin de Red Extendida"
 
 msgid "Extended PID info"
 msgstr "Extender info PID"
@@ -11238,7 +11238,7 @@ msgid "Navajo / Navaho"
 msgstr "Navajo / Navajo"
 
 msgid "Navigate up/down with UP/DOWN buttons and page up/down with LEFT/RIGHT. OK to perform the action described in the currently highlighted help."
-msgstr "Navegue hacia arriba/abajo con los botones ARRIBA/ABAJO y página arriba/abajo con IZQUIERDA/DERECHA. Aceptar para realizar la acción descrita en la ayuda resaltada actualmente."
+msgstr "Navegue hacia arriba/abajo con los botones ARRIBA/ABAJO y página arriba/abajo con IZQUIERDA/DERECHA. \"OK\" para realizar la acción descrita en la ayuda resaltada actualmente."
 
 msgid "NCam Information"
 msgstr "Información NCam"
@@ -13043,10 +13043,10 @@ msgid "Press 'OK' for attach next function or 'CH+/-' for edit attached."
 msgstr "Pulse 'OK' para asignar la siguiente función o 'CH +/-' para editar lo asignado."
 
 msgid "Press 'OK' for remove item or 'CH+/-' for toggle to list of features."
-msgstr "Pulse 'Aceptar' para eliminar el elemento o 'CH +/-' para alternar a la lista de características."
+msgstr "Pulse 'OK' para eliminar el elemento o 'CH +/-' para alternar a la lista de características."
 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
-msgstr "Pulse 'Aceptar' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
+msgstr "Pulse 'OK' para eliminar el elemento o <> para cambiar el orden o 'CH +/-' para alternar a la lista de características."
 
 msgid "Press EXIT to return to the help screen."
 msgstr "Pulse EXIT para regresar a la pantalla de ayuda."
@@ -14908,7 +14908,7 @@ msgid "Seems a background update check is in progress, please wait a few minutes
 msgstr "Se está realizando una verificación de actualización en segundo plano, espere unos minutos y vuelva a intentarlo."
 
 msgid "Seems internet connection down, Or IMDb Plugin not on feed."
-msgstr "Parece que la conexión a Internet no funciona, o el complemento IMDB no está en el feed."
+msgstr "Parece que la conexión a Internet no funciona, o el plugin IMDB no está en el feed."
 
 msgid "Select"
 msgstr "Seleccionar"
@@ -15227,7 +15227,7 @@ msgid "Select the delay to buffer descrambled data before starting playback. Thi
 msgstr "Seleccione el retardo para almacenar en búfer los datos descodificados antes de iniciar la reproducción. Esto puede reducir las pérdidas de audio AC3 al garantizar que haya suficientes datos disponibles al iniciar el decodificador. Los valores más altos son más estables, pero aumentan el tiempo de cambio de canal."
 
 msgid "Select the delay to use when closing a Stream Relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners."
-msgstr "Seleccione el retraso que se utilizará al cerrar un canal Stream Relay antes de reasignar el sintonizador a otro canal. El uso de \"0\" sólo se recomienda para cajas con múltiples sintonizadores de satélite."
+msgstr "Seleccione el retraso que se utilizará al cerrar un canal Stream Relay antes de reasignar el sintonizador a otro canal. El uso de \"0\" sólo se recomienda para receptores con múltiples sintonizadores de satélite."
 
 msgid "Select the FastScan provider."
 msgstr "Seleccione el proveedor para Búsqueda Rápida."
@@ -18008,7 +18008,7 @@ msgid "This can be useful when using the CI(+) module. After the end of the reco
 msgstr "Esto puede resultar útil cuando se utiliza el módulo CI(+). Una vez finalizada la grabación, el canal se detendrá automáticamente."
 
 msgid "This channel requires an HbbTV plugin. Please install a compatible HbbTV plugin."
-msgstr "Este canal requiere un complemento HbbTV. Por favor, instale un complemento HbbTV compatible."
+msgstr "Este canal requiere un plugin HbbTV. Por favor, instale un plugin HbbTV compatible."
 
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr "Este medio de DVD RW ya está formateado - el formateo eliminará todo el contenido del disco."
