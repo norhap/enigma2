@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-19 20:29+0200\n"
+"POT-Creation-Date: 2026-10-22 01:57+0200\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -10551,6 +10551,9 @@ msgstr "medicina/fisología/psicología"
 msgid "Medien"
 msgstr "Medio"
 
+msgid "Medium"
+msgstr "Medio"
+
 msgid "Medium is not a writeable DVD!"
 msgstr "El medio no es un DVD grabable!"
 
@@ -15295,6 +15298,9 @@ msgstr "Seleccione el juego de caracteres desplazado del teclado virtual"
 msgid "Select the shifted character set for the next character only"
 msgstr "Eliminar el carácter debajo del cursor del búfer de texto"
 
+msgid "Select the speed of the fade-in and fade-out of toast messages."
+msgstr "Seleccione la velocidad de desvanecimiento de entrada y salida de los mensajes de notificación."
+
 msgid "Select the time delay before the button starts repeating."
 msgstr "Seleccione el tiempo de retraso antes de que el botón comience a repetirse."
 
@@ -18483,6 +18489,9 @@ msgstr "Para guardar y aplicar el aspecto '%s' seleccionado, la GUI debe reinici
 
 msgid "To subtitle selection"
 msgstr "Ir a Selección de Subtítulos"
+
+msgid "Toast fade"
+msgstr "Desvanecimiento de notificaciones"
 
 msgid "Today"
 msgstr "Hoy"
