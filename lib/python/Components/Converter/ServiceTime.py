@@ -37,14 +37,14 @@ class ServiceTime(Converter):
 			return time
 		elif self.type == self.ENDTIME:
 			begin = info.getInfo(service, iServiceInformation.sTimeCreate)
-			len = info.getLength(service)
-			return begin + len
+			duration = info.getLength(service)
+			return begin + duration
 		elif self.type == self.DURATION:
-			len = info.getLength(service)
-			if len == -1:  # try to get duration from event
+			duration = info.getLength(service)
+			if duration == -1:  # try to get duration from event
 				ev = info.getEvent(service)
 				if ev:
-					len = ev.getDuration()
-			return len + 10  # added 10 seconds to fix round to minutes
+					duration = ev.getDuration()
+			return duration + 10 if duration >= 0 else None  # added 10 seconds to fix round to minutes
 
 	time = property(getTime)
