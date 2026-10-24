@@ -59,6 +59,7 @@ class ServiceInfo(Poll, Converter):
 	DAB_QUALITY = 46
 	DAB_ENSEMBLE_ID = 47
 	DAB_TECHNICAL = 48
+	DAB_PTY = 49
 	DAB_TEXT_FIELDS = {
 		"DABArtist": iServiceInformation.sTagArtist,
 		"DABBitrate": iServiceInformation.sTagBitrate,
@@ -86,6 +87,7 @@ class ServiceInfo(Poll, Converter):
 			"IsDAB": (self.IS_DAB, (iPlayableService.evStart, iPlayableService.evUpdatedInfo)),
 			"DABEnsembleId": (self.DAB_ENSEMBLE_ID, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABLanguage": (self.DAB_LANGUAGE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABPTY": (self.DAB_PTY, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABProtection": (self.DAB_PROTECTION, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABTechnical": (self.DAB_TECHNICAL, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"IsDVBI": (self.IS_DVBI, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
@@ -207,7 +209,7 @@ class ServiceInfo(Poll, Converter):
 		info = service and service.info()
 		if self.type == self.DAB_QUALITY:
 			return self.value >= 0  # Availability, including a measured zero.
-		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL):
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL, self.DAB_PTY):
 			return bool(self.text)
 		if not info:
 			return False
@@ -306,12 +308,14 @@ class ServiceInfo(Poll, Converter):
 		info = service and service.info()
 		if not info:
 			return result
-		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_QUALITY, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL):
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_QUALITY, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL, self.DAB_PTY):
 			if info:
 				serviceRef = info.getInfoString(iServiceInformation.sServiceref)
 				if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
 					if self.type == self.DAB_LANGUAGE:
 						result = dabMetadata.languageName(info.getInfoString(iServiceInformation.sTagLanguageCode))
+					elif self.type == self.DAB_PTY:
+						result = dabMetadata.programmeTypeName(info.getInfo(iServiceInformation.sDABPTY), info.getInfo(iServiceInformation.sDABPTYTable))
 					elif self.type == self.DAB_PROTECTION:
 						result = info.getInfoString(iServiceInformation.sDABProtection)
 					elif self.type == self.DAB_QUALITY:
