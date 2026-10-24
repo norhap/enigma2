@@ -40,14 +40,14 @@ def mountpoint_choosen(option):
 		if not config.usage.show_fading_message.value:
 			session.open(MessageBox, text, type_messagebox, simple=True, timeout=10)
 		else:
-			Toast.instance.showToast(text=text, toasttype=toast_type, timeout=10, customIcon=icon)
+			Toast.instance.showToast(text=text, toastType=toast_type, timeout=10, customIcon=icon)
 		return
 	if not config.usage.show_fading_message.value:
 		session.openWithCallback(execute, ChoiceBox,
 			title=text_list,
 			list=list)
 	else:
-		Toast.instance.showToast(text=text_list, toasttype=toast_type, timeout=10, customIcon=icon)
+		Toast.instance.showToast(text=text_list, toastType=toast_type, timeout=10, customIcon=icon)
 
 
 def scan(session):
