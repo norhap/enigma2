@@ -24,12 +24,6 @@ visuallyImpairedCommentary = "NAR qad"
 
 
 def InitUsageConfig():
-	config.misc.toastFade = ConfigSelection(default=10, choices=[
-		(0, _("Disabled")),
-		(5, _("Slow")),
-		(10, _("Medium")),
-		(20, _("Fast"))
-	])
 	config.usage = ConfigSubsection()
 	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
 		("google", "Google DNS"),
@@ -166,6 +160,12 @@ def InitUsageConfig():
 	config.usage.channelselection_preview = ConfigYesNo(default=False)
 	config.usage.show_spinner = ConfigYesNo(default=True)
 	config.usage.show_fading_message = ConfigYesNo(default=False)
+	config.misc.toastFade = ConfigSelection(default=10, choices=[
+		(0, _("Disabled")),
+		(5, _("Slow")),
+		(10, _("Medium")),
+		(20, _("Fast"))
+	])
 	config.usage.plugin_sort_weight = ConfigDictionarySet()
 	config.usage.menu_sort_weight = ConfigDictionarySet(default={"mainmenu": {"submenu": {}}})
 	config.usage.menu_sort_mode = ConfigSelection(default="user", choices=[
