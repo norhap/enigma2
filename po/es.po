@@ -16178,7 +16178,7 @@ msgid "Show Providers"
 msgstr "Mostrar Proveedores"
 
 msgid "Show radio text, slideshow pictures or only the station logo on the receiver's color display. Slideshow mode falls back to the station logo; logo-only mode never shows slides. If no station logo is available, the DAB+ logo is shown. This setting is independent of the TV slideshow."
-msgstr "Muestra texto de radio, imágenes en presentación o solo el logotipo de la emisora ​​en display LCD color. En el modo de presentación, si no hay imágenes disponibles, se muestra el logotipo de la emisora; en el modo de solo logotipo, nunca se muestran imágenes. Si no la emisora no dispone de logotipo, muestra el logotipo de DAB+. Esta configuración es independiente de la presentación de imágenes en modo TV."
+msgstr "Muestra texto de radio, imágenes en presentación o solo el logotipo de la emisora en display LCD color. En el modo de presentación, si no hay imágenes disponibles, se muestra el logotipo de la emisora; en el modo de solo logotipo, nunca se muestran imágenes. Si no la emisora no dispone de logotipo, muestra el logotipo de DAB+. Esta configuración es independiente de la presentación de imágenes en modo TV."
 
 msgid "Show receiver image(s)"
 msgstr "Mostrar imagen previa"
