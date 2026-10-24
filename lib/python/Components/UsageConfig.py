@@ -24,6 +24,12 @@ visuallyImpairedCommentary = "NAR qad"
 
 
 def InitUsageConfig():
+	config.misc.toastFade = ConfigSelection(default=10, choices=[
+		(0, _("Disabled")),
+		(5, _("Slow")),
+		(10, _("Medium")),
+		(20, _("Fast"))
+	])
 	config.usage = ConfigSubsection()
 	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
 		("google", "Google DNS"),
