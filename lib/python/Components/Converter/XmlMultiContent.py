@@ -112,16 +112,17 @@ class MultiContentTemplateParser(TemplateParser):
 		def buildModeData(items):
 			modeData = []
 			for item in items:
-				index = item.get("index", "-1")
-				if index.isdigit() or index == "-1":
+				index = item.get("index")
+				if index.isdigit() or index.startswith(("-", "+")) and index[1:].isdigit():
 					index = int(index)
 				elif self.indexNames:
-					index = self.indexNames.get(index, -1)
-					if index < 0 or index >= len(self.indexNames):
-						print(f"[XmlMultiContent] Error: Index name must resolve to a number between 0 and {len(self.indexNames) - 1} inclusive!")
+					index = self.indexNames.get(index)
+					if index is None:
+						index = -1
+						print(f"[XmlMultiContent] Error: Index name must resolve to a valid list item number!")
 				else:
 					index = -1
-					print("[XmlMultiContent] Error: Index must be a list item number!")
+					print("[XmlMultiContent] Error: Index must be a list item number or valid index name!")
 				pos = item.get("position")
 				size = item.get("size")
 				backgroundColor = parseIndexColor(item.get("backgroundColor"))
@@ -188,9 +189,81 @@ class MultiContentTemplateParser(TemplateParser):
 					modeData[maxIndexX] = tuple(modeItem)
 			return modeData
 
-		self.template = {}
-		self.template["modes"] = {}
-		self.template["fonts"] = []
+		def parseIndexColor(color):
+			if self.indexNames and isinstance(color, str) and color[0] == "+":
+				index = self.indexNames.get(color[1:])
+				if index is None:
+					print(f"[XmlMultiContent] Error: Error: Index name must resolve to a valid color list item number!")
+					color = None
+				else:
+					color = 0xFF000000 | index
+			return color
+
+		def parseRowTemplates(template):
+			# Rows select their 'rowtemplate' by data[0] instead of the widget 'style'.
+			# Unlike 'mode', there is no itemWidth/itemHeight override per entry.
+			rowTemplatesItems = []
+			for rowtemplate in template.findall("rowtemplate"):
+				items = []
+				context = SkinContextStack()
+				context.x = 0
+				context.y = 0
+				context.w = self.itemWidth
+				context.h = self.itemHeight
+				context.scale = self.scale
+				context = SkinContext(context, "0,0", f"{self.itemWidth},{self.itemHeight}")
+				for element in rowtemplate:
+					processor = self.processors.get(element.tag, self.processNone)
+					newItems = processor(element, context)
+					if newItems:
+						items += newItems
+				newItems = [{name: int(value) if name == "font" else value for name, value in x.items()} for x in items]
+				rowTemplatesItems.append(newItems)
+			return rowTemplatesItems
+
+		def parseTemplateModes(template):
+			modes = {}
+			modesItems = {}
+			modeElements = template.findall("mode")
+			implicitDefault = not modeElements  # No <mode> children, the template's own children are the "default" mode.
+			if implicitDefault:
+				modeElements = [template]
+			for mode in modeElements:
+				items = []
+				modeName = "default" if implicitDefault else mode.get("name")
+				itemWidth = int(mode.get("itemWidth", self.itemWidth))  # Override from mode.
+				itemHeight = int(mode.get("itemHeight", self.itemHeight))  # Override from mode.
+				attributes = {
+					"itemWidth": itemWidth,
+					"itemHeight": itemHeight
+				}
+				for name, value in mode.items():
+					if name not in ("itemWidth", "itemHeight"):
+						attributes[name] = value
+				context = SkinContextStack()
+				context.x = 0
+				context.y = 0
+				context.w = itemWidth
+				context.h = itemHeight
+				context.scale = self.scale  # Set scale from the widget.
+				context = SkinContext(context, "0,0", f"{itemWidth},{itemHeight}")
+				for element in mode:
+					processor = self.processors.get(element.tag, self.processNone)
+					newItems = processor(element, context)
+					if newItems:
+						items += newItems
+				newItems = [{name: int(value) if name == "font" else value for name, value in x.items()} for x in items]
+				modesItems[modeName] = newItems
+				modes[modeName] = attributes
+				if self.debug:
+					print(f"[MultiContentTemplateParser] DEBUG ITEMS {modeName}")
+					print(modesItems[modeName])
+			return modes, modesItems
+
+		self.template = {
+			"fonts": [],
+			"modes": {}
+		}
 		try:
 			for template in self.dom.findall("template"):
 				templateStyleName = template.get("name", "Default")
