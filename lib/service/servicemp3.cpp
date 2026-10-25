@@ -1144,7 +1144,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref)
 		std::vector<eIPTVDBItem> &iptv_services = eDVBDB::getInstance()->iptv_services;  // [norhap]
 		for(std::vector<eIPTVDBItem>::iterator it = iptv_services.begin(); it != iptv_services.end(); ++it)
 		{
-			if (sref.find(it->s_ref) != std::string::npos)
+			if (!it->s_ref.empty() && sref.find(it->s_ref) != std::string::npos)
 			{
 				m_currentAudioStream = it->ampeg_pid;
 				m_currentSubtitleStream = it->subtitle_pid;
@@ -1699,9 +1699,14 @@ void eServiceMP3::setCacheEntry(bool isAudio, int pid)  // [norhap]
 {
 	bool hasFoundItem = false;
 	/* [norhap] IPTVDBItem */
+
+	/* the first audio track is the default, store it as "auto" (-1) */
+	if (isAudio && pid == 0)
+		pid = -1;
+
 	std::vector<eIPTVDBItem> &iptv_services = eDVBDB::getInstance()->iptv_services;
 	for(std::vector<eIPTVDBItem>::iterator it = iptv_services.begin(); it != iptv_services.end(); ++it) {
-		if (m_ref.toString().find(it->s_ref) != std::string::npos) {
+		if (!it->s_ref.empty() && m_ref.toString().find(it->s_ref) != std::string::npos) {
 			hasFoundItem = true;
 			if (isAudio) {
 				it->ampeg_pid = pid;
@@ -1713,7 +1718,9 @@ void eServiceMP3::setCacheEntry(bool isAudio, int pid)  // [norhap]
 			break;
 		}
 	}
-	if (!hasFoundItem) {
+	/* nothing to remember for "auto"/off when there is no entry yet; entries that
+	 * went back to all-default are pruned by eDVBDB::saveIptvServicelist() */
+	if (!hasFoundItem && pid >= 0) {
 		eIPTVDBItem item(m_sourceinfo.is_streaming ? m_ref.toReferenceString() : m_ref.toString(), isAudio ? pid : -1, -1, -1, -1, -1, -1, -1, isAudio ? -1 : pid, -1);
 		iptv_services.push_back(item);
 	}
