@@ -2473,7 +2473,7 @@ msgid "Argentina"
 msgstr "Argentina"
 
 msgid "ARM"
-msgstr "BRAZO"
+msgstr "ARM"
 
 msgid "ARM64"
 msgstr "ARM64"
@@ -2690,7 +2690,7 @@ msgid "auto"
 msgstr "auto"
 
 msgid "Auto (not available)"
-msgstr "Sintonizador no disponible."
+msgstr "Sintonizador no disponible"
 
 msgid "Auto chapter split every ? minutes (0=never)"
 msgstr "Auto separación de capítulos cada ? Minutos (0=nunca)"
@@ -2754,7 +2754,7 @@ msgid "Autoinstalling %s"
 msgstr "Autoinstalación %s"
 
 msgid "Autoinstalling Completed"
-msgstr "Autoinstalación completa"
+msgstr "Autoinstalación Completa"
 
 msgid "Autoinstalling please wait for packages being updated"
 msgstr "Instalación automática, espere actualizando los paquetes"
@@ -2820,7 +2820,7 @@ msgid "AutoTimer is not installed\nPrime time (Press long)"
 msgstr "El temporizador automático no está instalado\nHora de máxima audiencia (pulse prolongado)"
 
 msgid "AUX"
-msgstr "Auxiliar"
+msgstr "AUX"
 
 msgid "Available"
 msgstr "Disponible"
@@ -3280,7 +3280,7 @@ msgid "Buffering %d%%"
 msgstr "Almacenando búfer %d%%"
 
 msgid "Buffers:"
-msgstr "Tampones:"
+msgstr "Búferes:"
 
 msgid "Build date: "
 msgstr "Fecha de compilación: "
@@ -3380,14 +3380,14 @@ msgid "Cable"
 msgstr "Cable"
 
 msgid "Cable Scan"
-msgstr "Búsqueda de cable"
+msgstr "Búsqueda de Cable"
 
 #, python-format
 msgid "Cable scan executable utility not found '%s'!"
 msgstr "Utilidad ejecutable búsqueda de cable no encontrada '%s'!"
 
 msgid "Cable Scan Settings"
-msgstr "Ajustes Búsqueda de cable"
+msgstr "Ajustes Búsqueda de Cable"
 
 msgid "Cabo Verde"
 msgstr "Cabo Verde"
@@ -3598,13 +3598,13 @@ msgid "CCcam Info %s\nby AliAbdul %s\n\nThis screen shows you the status of CCca
 msgstr "Información CCcam %s\npor AliAbdul %s\n\nEsta pantalla le muestra el estado de CCcam."
 
 msgid "CCcam Info Config"
-msgstr "CCcam Info"
+msgstr "Config CCcam Info"
 
 msgid "CCcam Info Setup"
-msgstr "Ajustes Información NCam"
+msgstr "Ajustes CCcam Info"
 
 msgid "CCcam Provider Info"
-msgstr "Servidor CCcam Info"
+msgstr "Proveedor CCcam Info"
 
 msgid "CCcam Remote Info"
 msgstr "Remoto CCcam Info"
@@ -3613,10 +3613,10 @@ msgid "CCcam Server Info"
 msgstr "Servidor CCcam Info"
 
 msgid "CCcam Share Info"
-msgstr "Servidor CCcam Info"
+msgstr "Compartir CCcam Info"
 
 msgid "CCcam Shares Info"
-msgstr "Servidor CCcam Info"
+msgstr "Compartidos CCcam Info"
 
 msgid "Cebuano"
 msgstr "Cebuano"
@@ -3674,7 +3674,7 @@ msgid "Change directory / Select bookmark"
 msgstr "Cambiar directorio / Seleccionar marcador"
 
 msgid "Change Language"
-msgstr "Cambiar idioma"
+msgstr "Cambiar Idioma"
 
 msgid "Change pin code"
 msgstr "Cambiar el modo de visualización"
@@ -3795,10 +3795,10 @@ msgid "ChapterZap"
 msgstr "Capítulo"
 
 msgid "Chat Show"
-msgstr "Reality show"
+msgstr "Programa de Entrevistas"
 
 msgid "Chechen"
-msgstr "Comprobar"
+msgstr "Chechen"
 
 msgid "Check"
 msgstr "Comprobar"
@@ -5354,13 +5354,13 @@ msgid "Delay after change voltage before switch command"
 msgstr "Retardo después de cambiar la tensión antes del comando del interruptor"
 
 msgid "Delay after continuous tone disable before diseqc"
-msgstr "Retardo después de desactivación de tono continuo antes de diseqc"
+msgstr "Retardo después de desactivación de tono continuo antes de DiSEqC"
 
 msgid "Delay after diseqc peripherial poweron command"
-msgstr "Retardo después del comando de encendido del diseqc"
+msgstr "Retardo después del comando de encendido del DiSEqC"
 
 msgid "Delay after diseqc reset command"
-msgstr "Retardo después del comando de respeto del diseqc"
+msgstr "Retardo después del comando de respeto del DiSEqC"
 
 msgid "Delay after enable voltage before motor command"
 msgstr "Retraso después de habilitar la tensión antes del comando del motor"
@@ -5372,7 +5372,7 @@ msgid "Delay after final continuous tone change"
 msgstr "Retraso después del cambio de tono continuo final"
 
 msgid "Delay after last diseqc command"
-msgstr "Retardo después del último comando diseqc"
+msgstr "Retardo después del último comando DiSEqC"
 
 msgid "Delay after last voltage change"
 msgstr "Retardo después del último cambio de voltaje"
@@ -5384,7 +5384,7 @@ msgid "Delay after set voltage before measure motor power"
 msgstr "Retardo después de configurar el voltaje antes de medir la potencia del motor"
 
 msgid "Delay after toneburst"
-msgstr "Retardo después de MiniDiseqC"
+msgstr "Retardo después de MiniDiSEqC"
 
 msgid "Delay after voltage change before motor command"
 msgstr "Retardo después del cambio de voltaje tras el comando de motor"
@@ -5399,7 +5399,7 @@ msgid "Delay between CEC commands when sending a series of commands. Some device
 msgstr "Retraso entre comandos CEC al enviar una serie de comandos. Algunos dispositivos requieren este retraso para su correcto funcionamiento, generalmente entre 50-150 ms."
 
 msgid "Delay between diseqc commands"
-msgstr "Retardo entre comando diseqc"
+msgstr "Retardo entre comando DiSEqC"
 
 msgid "Delay between switch and motor command"
 msgstr "Retardo entre el interruptor y el comando del motor"
@@ -15494,10 +15494,10 @@ msgid "Send 'sourceactive' before zap timers"
 msgstr "Enviar ‘códigoactivo’ antes de zapear temporizadores"
 
 msgid "Send DiSEqC"
-msgstr "Enviar Diseqc"
+msgstr "Enviar DiSEqC"
 
 msgid "Send DiSEqC only on satellite change"
-msgstr "Enviar Diseqc solo en cambio de satélite"
+msgstr "Enviar DiSEqC solo en cambio de satélite"
 
 msgid "Senegal"
 msgstr "Senegal"
@@ -16072,8 +16072,8 @@ msgstr "Mostrar selección de extensión"
 msgid "Show extensions"
 msgstr "Mostrar extensiones"
 
-msgid "Show faded message without list"
-msgstr "Mostrar mensaje desvanecido sin lista"
+msgid "Show faded notification without list"
+msgstr "Mostrar notificación desvanecido sin lista"
 
 msgid "Show Favorites"
 msgstr "Mostrar Favoritos"
@@ -17846,7 +17846,7 @@ msgid "Terrestrial"
 msgstr "Terrestre"
 
 msgid "Test DiSEqC settings"
-msgstr "Test de los ajustes Diseqc"
+msgstr "Test de los ajustes DiSEqC"
 
 msgid "Test mode"
 msgstr "Modo test"
@@ -18665,10 +18665,10 @@ msgid "Tone mode"
 msgstr "Modo de tono"
 
 msgid "Toneburst"
-msgstr "MiniDiseqC"
+msgstr "MiniDiSEqC"
 
 msgid "Toneburst A/B"
-msgstr "MiniDiseqC"
+msgstr "MiniDiSEqC"
 
 msgid "Tonga"
 msgstr "Tongano"
@@ -19100,7 +19100,7 @@ msgid "Unicable delay after enable voltage before switch command"
 msgstr "Retraso unicable después de habilitar voltaje antes de conmutar comando"
 
 msgid "Unicable delay after last diseqc command"
-msgstr "Retraso unicable después del último comando diseqc"
+msgstr "Retraso unicable después del último comando DiSEqC"
 
 msgid "Uninstall"
 msgstr "Desinstalar"
@@ -20220,8 +20220,8 @@ msgstr "Cuando está habilitado, es posible abandonar el reproductor de películ
 msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
 msgstr "Cuando está habilitado, se reproducirá automáticamente el último canal de radio guardado al cambiar al modo de radio."
 
-msgid "When enabled, it will only display a message that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
-msgstr "Cuando está habilitado, solo mostrará un mensaje que se desvanece tras un breve periodo, sin mostrar una lista (por ejemplo, al conectar un dispositivo de almacenamiento)."
+msgid "When enabled, it will only display a notification that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
+msgstr "Cuando está habilitado, solo mostrará una notification que se desvanece tras un breve periodo, sin mostrar una lista (por ejemplo, al conectar un dispositivo de almacenamiento)."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Cuando esté habilitado, mida el consumo de energía para detectar cuándo el motor deja de girar (cuando es compatible con el sintonizador)."

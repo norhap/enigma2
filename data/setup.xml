@@ -540,7 +540,7 @@
 		<if conditional="config.usage.show_infobar_do_dimming.value">
 			<item level="0" text="Infobar fade-out speed" description="Configure the infobar fading speed">config.usage.show_infobar_dimming_speed</item>
 		</if>
-		<item level="0" text="Show faded message without list" description="When enabled, it will only display a message that fades away after a short period, without showing a list (e.g. when connecting a storage device).">config.usage.show_fading_message</item>
+		<item level="0" text="Show faded notification without list" description="When enabled, it will only display a notification that fades away after a short period, without showing a list (e.g. when connecting a storage device).">config.usage.show_fading_message</item>
 		<if conditional="config.usage.show_fading_message.value">
 			<item level="0" text="Toast fade" description="Select the speed of the fade-in and fade-out of toast messages.">config.misc.toastFade</item>
 		</if>
