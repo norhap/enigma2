@@ -4338,6 +4338,9 @@ msgstr ""
 msgid "Commedia"
 msgstr ""
 
+msgid "Commit Info Setup"
+msgstr ""
+
 msgid "Common Information Actions"
 msgstr ""
 
@@ -12332,9 +12335,6 @@ msgstr ""
 msgid "Open the Plugin Browser settings screen"
 msgstr ""
 
-msgid "Open Vision Commit Info Setup"
-msgstr ""
-
 msgid "OpenVPN"
 msgstr ""
 
@@ -13732,7 +13732,7 @@ msgstr ""
 msgid "Quick zap"
 msgstr ""
 
-msgid "QuickMenu - Open Vision Panel"
+msgid "QuickMenu - Norap Panel"
 msgstr ""
 
 msgid "Quiz"
@@ -16334,7 +16334,7 @@ msgstr ""
 msgid "Show extensions"
 msgstr ""
 
-msgid "Show faded message without list"
+msgid "Show faded notification without list"
 msgstr ""
 
 msgid "Show Favorites"
@@ -20595,7 +20595,7 @@ msgstr ""
 msgid "When enabled, it will automatically play to the last saved radio service when switching to radio mode."
 msgstr ""
 
-msgid "When enabled, it will only display a message that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
+msgid "When enabled, it will only display a notification that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
 msgstr ""
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."

@@ -4218,6 +4218,9 @@ msgstr "Tipo Comando"
 msgid "Commedia"
 msgstr "Inmediato"
 
+msgid "Commit Info Setup"
+msgstr "Ajustes de información de commit"
+
 msgid "Common Information Actions"
 msgstr "Acciones Comunes Información"
 
@@ -12104,9 +12107,6 @@ msgstr "Abrir lista de películas"
 msgid "Open the Plugin Browser settings screen"
 msgstr "Abra la pantalla de configuración del Navegador de Plugins"
 
-msgid "Commit Info Setup"
-msgstr "Ajustes de información de commit"
-
 msgid "OpenVPN"
 msgstr "OpenVPN"
 
@@ -14496,8 +14496,8 @@ msgstr "datosrw"
 msgid "Réunion"
 msgstr "Reunión"
 
-msgid "SD"
-msgstr "SD"
+msgid "S"
+msgstr "S"
 
 msgid "SABnzbd"
 msgstr "SABnzbd"
@@ -20221,7 +20221,7 @@ msgid "When enabled, it will automatically play to the last saved radio service 
 msgstr "Cuando está habilitado, se reproducirá automáticamente el último canal de radio guardado al cambiar al modo de radio."
 
 msgid "When enabled, it will only display a notification that fades away after a short period, without showing a list (e.g. when connecting a storage device)."
-msgstr "Cuando está habilitado, solo mostrará una notification que se desvanece tras un breve periodo, sin mostrar una lista (por ejemplo, al conectar un dispositivo de almacenamiento)."
+msgstr "Cuando está habilitado, solo mostrará una notificación que se desvanece tras un breve periodo, sin mostrar una lista (por ejemplo, al conectar un dispositivo de almacenamiento)."
 
 msgid "When enabled, measure power consumption to detect when the rotor stops turning (when supported by the tuner)."
 msgstr "Cuando esté habilitado, mida el consumo de energía para detectar cuándo el motor deja de girar (cuando es compatible con el sintonizador)."
@@ -20681,7 +20681,7 @@ msgstr "Debe establecer al menos un comando"
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr "Debe cambiar al canal %s (%s - ‘%s')!\n"
 
-msgid "¡You seem to be in timeshift!"
+msgid "You seem to be in timeshift!"
 msgstr "¡Parece que estás en Timeshift!"
 
 msgid "You want to change current MAC address: "
