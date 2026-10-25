@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <array>
 #include <errno.h>
 #include <unistd.h>
@@ -497,7 +498,7 @@ void eDVBService::setCacheEntry(cacheID id, int pid)
 		bool hasFoundItem = false;
 		std::vector<eIPTVDBItem> &iptv_services = eDVBDB::getInstance()->iptv_services;
 		for(std::vector<eIPTVDBItem>::iterator it = iptv_services.begin(); it != iptv_services.end(); ++it) {
-			if (m_reference_str.find(it->s_ref) != std::string::npos) {
+			if (!it->s_ref.empty() && m_reference_str.find(it->s_ref) != std::string::npos) {
 				hasFoundItem = true;
 				int pid_val = pid > 0 ? pid : -1;
 				switch (id)
@@ -535,15 +536,18 @@ void eDVBService::setCacheEntry(cacheID id, int pid)
 				break;
 			}
 		}
-		if (!hasFoundItem) {
-			std::vector<std::string> ref_split = split(m_reference_str, ":");
-			std::vector<std::string> ref_split_r(ref_split.begin(), ref_split.begin() + 10);
-			std::string ref_s;
-			join_str(ref_split_r, ':', ref_s);
+		/* never create an entry just to record the default; defaults are pruned on save */
+		if (!hasFoundItem && pid > 0) {
+			eServiceReference ref = eServiceReference(m_reference_str);
+			std::string ref_s = ref.toReferenceString();
 			int pid_val = pid > 0 ? pid : -1;
-			eIPTVDBItem item(ref_s, id == cacheID::cMPEGAPID ? pid_val : -1, id == cacheID::cAC3PID ? pid_val : -1, id == cacheID::cAC4PID ? pid_val : -1,
-							id == cacheID::cDDPPID ? pid_val : -1, id == cacheID::cAACHEAPID ? pid_val : -1, id == cacheID::cAACAPID ? pid_val : -1,
-							id == cacheID::cDRAAPID ? pid_val : -1, id == cacheID::cSUBTITLE ? pid_val : -1, id == cacheID::cVPID ? pid_val : -1);
+			if (endsWith(ref_s, ":"))
+			{
+				ref_s = ref_s.substr(0, ref_s.size()-1);
+			}
+			eIPTVDBItem item(ref_s, id == cacheID::cMPEGAPID ? pid_val : -1, id == cacheID::cAC3PID ? pid_val : -1, id == cacheID::cDDPPID ? pid_val : -1,
+							id == cacheID::cAACHEAPID ? pid_val : -1, id == cacheID::cAACAPID ? pid_val : -1, id == cacheID::cDRAAPID ? pid_val : -1,
+							id == cacheID::cAC4PID ? pid_val : -1, id == cacheID::cSUBTITLE ? pid_val : -1, id == cacheID::cVPID ? pid_val : -1);
 			iptv_services.push_back(item);
 		}
 	}
@@ -609,7 +613,7 @@ void eDVBDB::parseServiceData(ePtr<eDVBService> s, std::string str)
 	std::string sref = s->m_reference_str;
 	if (!sref.empty()) {
 		for(std::vector<eIPTVDBItem>::iterator it = iptv_services.begin(); it != iptv_services.end(); ++it) {
-			if (sref.find(it->s_ref) != std::string::npos) {
+			if (!it->s_ref.empty() && sref.find(it->s_ref) != std::string::npos) {
 				if (it->v_pid != -1) {
 					s->setCacheEntry(eDVBService::cacheID::cVPID, it->v_pid);
 				}
@@ -1342,16 +1346,28 @@ void eDVBDB::deleteBouquet(const std::string filename)
 
 void eDVBDB::saveIptvServicelist()
 {
-	std::ofstream outputFile("/etc/enigma2/config_av");
-	for(std::vector<eIPTVDBItem>::iterator it = iptv_services.begin(); it != iptv_services.end(); ++it) {
-		char buffer[256];
-		sprintf(buffer, "%s|%d|%d|%d|%d|%d|%d|%d|%d|%d", it->s_ref.c_str(), it->v_pid, it->ampeg_pid, it->aac3_pid, it->aac4_pid, it->addp_pid,
-					it->aaach_pid, it->aaac_pid, it->adra_pid, it->subtitle_pid);
-		std::string line = buffer;
-		outputFile << line << '\n';
-	}
-	outputFile.close();
+	/* drop entries that went back to all-default so they vanish from memory and from the file */
+	iptv_services.erase(std::remove_if(iptv_services.begin(), iptv_services.end(),
+		[](const eIPTVDBItem &i) { return i.s_ref.empty() || i.isDefault(); }), iptv_services.end());
 
+	/* line format: <service ref>|v|ampeg|ac3|ddp|aache|aac|dra|ac4|sub
+	 * the ref is stored verbatim (it may itself contain '|') so the reader only has
+	 * to split the 9 numeric columns off the end of the line */
+	const char *filename = "/etc/enigma2/config_av";
+	std::string tmpname = std::string(filename) + ".writing";
+	FILE *f = fopen(tmpname.c_str(), "w");
+	if (!f)
+	{
+		eDebug("[eDVBDB] couldn't write %s: %m", tmpname.c_str());
+		return;
+	}
+	for(std::vector<eIPTVDBItem>::const_iterator it = iptv_services.begin(); it != iptv_services.end(); ++it)
+		fprintf(f, "%s|%d|%d|%d|%d|%d|%d|%d|%d|%d\n", it->s_ref.c_str(), it->v_pid, it->ampeg_pid, it->aac3_pid, it->addp_pid,
+					it->aaach_pid, it->aaac_pid, it->adra_pid, it->aac4_pid, it->subtitle_pid);
+	fflush(f);
+	fsync(fileno(f));
+	fclose(f);
+	rename(tmpname.c_str(), filename);
 }
 
 void eDVBDB::loadBouquet(const char *path)
@@ -1665,28 +1681,33 @@ eDVBDB::eDVBDB()
 	iptv_services.clear();
 	std::ifstream iptv_services_store_file;
 	iptv_services_store_file.open("/etc/enigma2/config_av");
-	std::string line = "";
+	std::string line;
 	while(getline(iptv_services_store_file, line))
 	{
-		line = replace_all(line, "\n", "");
-		std::vector<std::string> ref_split = split(line, "|");
-		std::vector<std::string> ref_split_r(ref_split.begin() + 1, ref_split.end());
-		std::string ref_s;
-		join_str(ref_split_r, '|', ref_s);
-		std::string s_ref = ref_split[0];
-		int ampeg_pid = -1;
-		int aac3_pid = -1;
-		int aac4_pid = -1;
-		int addp_pid = -1;
-		int aaach_pid = -1;
-		int aaac_pid = -1;
-		int adra_pid = -1;
-		int subtitle_pid = -1;
-		int video_pid = -1;
-		sscanf(ref_s.c_str(), "%d|%d|%d|%d|%d|%d|%d|%d|%d", &video_pid, &ampeg_pid, &aac3_pid, &aac4_pid, &addp_pid, &aaach_pid, &aaac_pid, &adra_pid, &subtitle_pid);
-		eIPTVDBItem iptvDBItem(s_ref, ampeg_pid, aac3_pid, aac4_pid, addp_pid, aaach_pid, aaac_pid, adra_pid, subtitle_pid, video_pid);
-		iptv_services.push_back(iptvDBItem);
-		line = "";
+		/* see saveIptvServicelist() for the format: split the 9 pid columns off the end */
+		if (!line.empty() && line[line.size() - 1] == '\r')
+			line.erase(line.size() - 1);
+		int pids[9];
+		size_t end = line.size();
+		bool ok = true;
+		for (int i = 8; i >= 0 && ok; --i)
+		{
+			size_t p = end ? line.rfind('|', end - 1) : std::string::npos;
+			if (p == std::string::npos)
+				ok = false;
+			else
+			{
+				pids[i] = atoi(line.c_str() + p + 1);
+				end = p;
+			}
+		}
+		if (!ok || !end)
+			continue;
+
+		/* pids[] is in column order: v, ampeg, ac3, ddp, aache, aac, dra, ac4, sub */
+		eIPTVDBItem item(line.substr(0, end), pids[1], pids[2], pids[3], pids[4], pids[5], pids[6], pids[7], pids[8], pids[0]);
+		if (!item.isDefault())
+			iptv_services.push_back(item);
 	}
 	iptv_services_store_file.close();
 	reloadServicelist();
