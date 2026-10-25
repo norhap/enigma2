@@ -6,7 +6,6 @@ from Components.config import config, configfile
 from Components.RecordingConfig import recType
 from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.BoundFunction import boundFunction
-from Tools.StbHardware import getFPWasTimerWakeup
 from Tools.Alternatives import ResolveCiAlternative
 from Tools.Notifications import AddNotification
 from time import time
@@ -22,6 +21,7 @@ from Screens.InfoBarGenerics import streamrelay
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
 from Tools.Notifications import AddPopup
+from Tools.StbHardware import getFPWasTimerWakeup
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 
@@ -288,7 +288,13 @@ class Navigation:
 			else:
 				playref = ref
 			if self.pnav:
-				if not SystemInfo["FCCactive"]:
+				# Let native navigation hand over a live SDR session before stopping
+				# the old service. Hooks and extensions resolve the final target first;
+				# native navigation checks whether the receiver can actually be reused.
+				keepSDRReceiver = (not forceRestart
+					and oldref and oldref.type == 4115 and playref.type == 4115
+					and oldref.getPath().startswith("dab://rtlsdr/") and oldref.getPath() == playref.getPath())
+				if (not SystemInfo["FCCactive"] and not keepSDRReceiver) or (forceRestart and oldref and oldref.type == 4115):
 					self.pnav.stopService()
 				else:
 					self.skipServiceReferenceReset = True
@@ -305,6 +311,9 @@ class Navigation:
 				if not isStreamRelay:
 					playref, wrappererror = self.serviceHook(playref)
 					if wrappererror:
+						if keepSDRReceiver:
+							self.pnav.stopService()
+							self.skipServiceReferenceReset = False
 						return 1
 					if SystemInfo["FCCactive"] and "%3a//" in ref.toString():
 						self.pnav.stopService()
@@ -318,6 +327,9 @@ class Navigation:
 						playref, isAsyncPlay = ret
 					if isAsyncPlay or playref.toString() != originalPlayref:
 						break
+				if keepSDRReceiver and isAsyncPlay:
+					self.pnav.stopService()
+					self.skipServiceReferenceReset = False
 
 				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref

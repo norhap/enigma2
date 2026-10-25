@@ -53,6 +53,7 @@ serviceinclude_HEADERS = \
 	service/servicedvbsoftdecoder.h \
 	service/dabdebug.h \
 	service/dabaudioframe.h \
+	service/dabsdrcontrol.h \
 	service/dabtsadapter.h \
 	service/dabdecoder.h \
 	service/dabpacketdecoder.h \
