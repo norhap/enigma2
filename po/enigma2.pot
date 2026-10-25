@@ -2054,6 +2054,9 @@ msgstr ""
 msgid "Adult Audience, Strong Violence 15+"
 msgstr ""
 
+msgid "Adult Hits"
+msgstr ""
+
 msgid "Adult Movie"
 msgstr ""
 
@@ -3942,6 +3945,9 @@ msgstr ""
 msgid "Children"
 msgstr ""
 
+msgid "Children's programmes"
+msgstr ""
+
 msgid "Children/Youth"
 msgstr ""
 
@@ -4157,6 +4163,9 @@ msgstr ""
 msgid "City: "
 msgstr ""
 
+msgid "Classic Rock"
+msgstr ""
+
 msgid "Classical"
 msgstr ""
 
@@ -4268,6 +4277,9 @@ msgid "Collection name"
 msgstr ""
 
 msgid "Collection settings"
+msgstr ""
+
+msgid "College"
 msgstr ""
 
 msgid "Colombia"
@@ -4989,6 +5001,9 @@ msgid "Country for EPG event genre information"
 msgstr ""
 
 msgid "Country for EPG event rating information"
+msgstr ""
+
+msgid "Country Music"
 msgstr ""
 
 msgid "Country: "
@@ -6493,6 +6508,9 @@ msgstr ""
 msgid "Easy Listening"
 msgstr ""
 
+msgid "Easy Listening Music"
+msgstr ""
+
 msgid "easyCIconfigMenu"
 msgstr ""
 
@@ -7876,6 +7894,9 @@ msgstr ""
 msgid "Finance"
 msgstr ""
 
+msgid "Finance/Business"
+msgstr ""
+
 msgid "Find currently playing service"
 msgstr ""
 
@@ -7984,6 +8005,9 @@ msgstr ""
 msgid "Folk and Country"
 msgstr ""
 
+msgid "Folk Music"
+msgstr ""
+
 msgid "folk/traditional music"
 msgstr ""
 
@@ -8036,6 +8060,9 @@ msgid "Force zap to recording service in standby"
 msgstr ""
 
 msgid "foreign countries/expeditions"
+msgstr ""
+
+msgid "Foreign Language"
 msgstr ""
 
 msgid "Format"
@@ -9757,6 +9784,9 @@ msgstr ""
 msgid "jazz"
 msgstr ""
 
+msgid "Jazz Music"
+msgstr ""
+
 msgid "Jersey"
 msgstr ""
 
@@ -10142,6 +10172,9 @@ msgstr ""
 msgid "Leichtathletik"
 msgstr ""
 
+msgid "Leisure"
+msgstr ""
+
 msgid "Leisure hobbies"
 msgstr ""
 
@@ -10177,6 +10210,9 @@ msgid "Liechtenstein"
 msgstr ""
 
 msgid "Lifestyle"
+msgstr ""
+
+msgid "Light Classical"
 msgstr ""
 
 msgid "Limburgan / Limburger / Limburgish"
@@ -11960,6 +11996,9 @@ msgstr ""
 msgid "Norwegian Nynorsk"
 msgstr ""
 
+msgid "Nostalgia"
+msgstr ""
+
 msgid "Not associated"
 msgstr ""
 
@@ -12141,6 +12180,12 @@ msgid "Old"
 msgstr ""
 
 msgid "Old-New, Z-A"
+msgstr ""
+
+msgid "Oldies"
+msgstr ""
+
+msgid "Oldies Music"
 msgstr ""
 
 msgid "Olympia"
@@ -12415,6 +12460,9 @@ msgstr ""
 msgid "Other Images"
 msgstr ""
 
+msgid "Other Music"
+msgstr ""
+
 msgid "Other Subtitles & lang"
 msgstr ""
 
@@ -12655,6 +12703,9 @@ msgstr ""
 msgid "Persian"
 msgstr ""
 
+msgid "Personality"
+msgstr ""
+
 msgid "Peru"
 msgstr ""
 
@@ -12671,6 +12722,9 @@ msgid "PGS File"
 msgstr ""
 
 msgid "Philippines"
+msgstr ""
+
+msgid "Phone In"
 msgstr ""
 
 msgid "Picon"
@@ -13070,6 +13124,9 @@ msgid "Poliziesco"
 msgstr ""
 
 msgid "Pop"
+msgstr ""
+
+msgid "Pop Music"
 msgstr ""
 
 msgid "Popoli"
@@ -13573,6 +13630,9 @@ msgstr ""
 msgid "Psychologie"
 msgstr ""
 
+msgid "Public"
+msgstr ""
+
 msgid "Puerto Rico"
 msgstr ""
 
@@ -14005,6 +14065,12 @@ msgid "Religione"
 msgstr ""
 
 msgid "Religious"
+msgstr ""
+
+msgid "Religious Music"
+msgstr ""
+
+msgid "Religious Talk"
 msgstr ""
 
 msgid "Reload"
@@ -14508,6 +14574,9 @@ msgstr ""
 msgid "RGB"
 msgstr ""
 
+msgid "Rhythm and Blues"
+msgstr ""
+
 msgid "Right"
 msgstr ""
 
@@ -14521,6 +14590,9 @@ msgid "right, wrapped"
 msgstr ""
 
 msgid "Rock"
+msgstr ""
+
+msgid "Rock Music"
 msgstr ""
 
 msgid "Rock/Pop"
@@ -15708,6 +15780,9 @@ msgid "Serie"
 msgstr ""
 
 msgid "Series"
+msgstr ""
+
+msgid "Serious Classical"
 msgstr ""
 
 msgid "Serious Music"
@@ -16911,6 +16986,9 @@ msgstr ""
 msgid "Soccer"
 msgstr ""
 
+msgid "Social Affairs"
+msgstr ""
+
 msgid "social/political issues/economics (general)"
 msgstr ""
 
@@ -16930,6 +17008,15 @@ msgid "Society & Culture"
 msgstr ""
 
 msgid "SocketMMI"
+msgstr ""
+
+msgid "Soft"
+msgstr ""
+
+msgid "Soft Rhythm and Blues"
+msgstr ""
+
+msgid "Soft Rock"
 msgstr ""
 
 msgid "softcam"
@@ -18950,6 +19037,9 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
+msgid "Top 40"
+msgstr ""
+
 msgid "Top and bottom"
 msgstr ""
 
@@ -19889,6 +19979,9 @@ msgstr ""
 msgid "Vanuatu"
 msgstr ""
 
+msgid "Varied"
+msgstr ""
+
 msgid "Varieta"
 msgstr ""
 
@@ -20300,6 +20393,9 @@ msgid "Weather"
 msgstr ""
 
 msgid "Weather Plugin"
+msgstr ""
+
+msgid "Weather/meteorology"
 msgstr ""
 
 msgid "Web interface"

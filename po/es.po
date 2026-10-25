@@ -1987,6 +1987,9 @@ msgstr "Adulto"
 msgid "Adult Audience, Strong Violence 15+"
 msgstr "Violencia explícita (mayores de 15 años)"
 
+msgid "Adult Hits"
+msgstr "Éxitos para Adultos"
+
 msgid "Adult Movie"
 msgstr "Película Adultos"
 
@@ -3828,6 +3831,9 @@ msgstr "Chichewa / Chewa / Nyanja"
 msgid "Children"
 msgstr "Niños"
 
+msgid "Children's programmes"
+msgstr "Programas para niños"
+
 msgid "Children/Youth"
 msgstr "Niños/Jóvenes"
 
@@ -4043,6 +4049,9 @@ msgstr "Menú Principal"
 msgid "City: "
 msgstr "Ciudad: "
 
+msgid "Classic Rock"
+msgstr "Rock Clásico"
+
 msgid "Classical"
 msgstr "Clásico"
 
@@ -4149,6 +4158,9 @@ msgstr "Nombre de la colección"
 
 msgid "Collection settings"
 msgstr "Ajustes de la colección"
+
+msgid "College"
+msgstr "Universitario"
 
 msgid "Colombia"
 msgstr "Colombia"
@@ -4866,6 +4878,9 @@ msgstr "País para la información de género en evento EPG"
 
 msgid "Country for EPG event rating information"
 msgstr "País para la información de clasificación de eventos EPG"
+
+msgid "Country Music"
+msgstr "Música Country"
 
 msgid "Country: "
 msgstr "País: "
@@ -6344,6 +6359,9 @@ msgstr "Este"
 msgid "Easy Listening"
 msgstr "Escucha fácil"
 
+msgid "Easy Listening Music"
+msgstr "Música Ligera"
+
 msgid "easyCIconfigMenu"
 msgstr "menú de configuración"
 
@@ -7296,7 +7314,7 @@ msgid "Extended"
 msgstr "Extendido"
 
 msgid "Extended network setup plugin..."
-msgstr "Ajustes del plugin de Red Extendida"
+msgstr "Ajustes del plugin de Red Extendida..."
 
 msgid "Extended PID info"
 msgstr "Extender info PID"
@@ -7700,6 +7718,9 @@ msgstr "Retardo repetición de texto final"
 msgid "Finance"
 msgstr "Francia"
 
+msgid "Finance/Business"
+msgstr "Finanzas/Negocios"
+
 msgid "Find currently playing service"
 msgstr "Encuentra el canal que se está reproduciendo actualmente"
 
@@ -7808,6 +7829,9 @@ msgstr "Gente"
 msgid "Folk and Country"
 msgstr "País"
 
+msgid "Folk Music"
+msgstr "Música Folklórica"
+
 msgid "folk/traditional music"
 msgstr "música folk/tradicional"
 
@@ -7861,6 +7885,9 @@ msgstr "Forzar zap al canal de grabación en espera"
 
 msgid "foreign countries/expeditions"
 msgstr "países extranjeros/expediciones"
+
+msgid "Foreign Language"
+msgstr "Lengua Extranjera"
 
 msgid "Format"
 msgstr "Formatear"
@@ -9550,6 +9577,9 @@ msgstr "Jazz"
 msgid "jazz"
 msgstr "jazz"
 
+msgid "Jazz Music"
+msgstr "Música Jazz"
+
 msgid "Jersey"
 msgstr "Jersey"
 
@@ -9935,6 +9965,9 @@ msgstr "izquierdo, empaquetado"
 msgid "Leichtathletik"
 msgstr "Zeichentrick"
 
+msgid "Leisure"
+msgstr "Ocio"
+
 msgid "Leisure hobbies"
 msgstr "Pasatiempos de ocio"
 
@@ -9971,6 +10004,9 @@ msgstr "Liechtenstein"
 
 msgid "Lifestyle"
 msgstr "Estilo de Tiempo"
+
+msgid "Light Classical"
+msgstr "Clásica Ligera"
 
 msgid "Limburgan / Limburger / Limburgish"
 msgstr "Limburgués / Limburgés / Limburgués"
@@ -11734,6 +11770,9 @@ msgstr "Noruego"
 msgid "Norwegian Nynorsk"
 msgstr "Noruego"
 
+msgid "Nostalgia"
+msgstr "Nostalgia"
+
 msgid "Not associated"
 msgstr "No asociado"
 
@@ -11914,6 +11953,12 @@ msgstr "Antiguo"
 
 msgid "Old-New, Z-A"
 msgstr "Viejo-Nuevo, Z-A"
+
+msgid "Oldies"
+msgstr "Éxitos Clásicos"
+
+msgid "Oldies Music"
+msgstr "Música Antigua"
 
 msgid "Olympia"
 msgstr "Olimpia"
@@ -12187,6 +12232,9 @@ msgstr "Otras funciones"
 msgid "Other Images"
 msgstr "Otras Imágenes"
 
+msgid "Other Music"
+msgstr "Otra Música"
+
 msgid "Other Subtitles & lang"
 msgstr "Otros Subtítulos lenguaje"
 
@@ -12427,6 +12475,9 @@ msgstr "Eliminar permanentemente todos los elementos eliminados"
 msgid "Persian"
 msgstr "Persa"
 
+msgid "Personality"
+msgstr "Personalidad"
+
 msgid "Peru"
 msgstr "Perú"
 
@@ -12444,6 +12495,9 @@ msgstr "Archivo PGS"
 
 msgid "Philippines"
 msgstr "Filipinas"
+
+msgid "Phone In"
+msgstr "Llamadas Telefónicas"
 
 msgid "Picon"
 msgstr "Picon"
@@ -12840,6 +12894,9 @@ msgstr "Politica"
 
 msgid "Pop"
 msgstr "Ventana emergente"
+
+msgid "Pop Music"
+msgstr "Música Pop"
 
 msgid "Popoli"
 msgstr "Popoli"
@@ -13331,6 +13388,9 @@ msgstr "Proxy: "
 msgid "Psychologie"
 msgstr "Psicología"
 
+msgid "Public"
+msgstr "Público"
+
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -13764,6 +13824,12 @@ msgstr "Religión"
 
 msgid "Religious"
 msgstr "Religioso"
+
+msgid "Religious Music"
+msgstr "Música Religiosa"
+
+msgid "Religious Talk"
+msgstr "Charla Religiosa"
 
 msgid "Reload"
 msgstr "Recargar"
@@ -14264,6 +14330,9 @@ msgstr "Ajustes de Salida Modulador RF"
 msgid "RGB"
 msgstr "RGB"
 
+msgid "Rhythm and Blues"
+msgstr "Ritmo y Blues"
+
 msgid "Right"
 msgstr "Derecha"
 
@@ -14278,6 +14347,9 @@ msgstr "derecha, empaquetado"
 
 msgid "Rock"
 msgstr "Roca"
+
+msgid "Rock Music"
+msgstr "Música Rock"
 
 msgid "Rock/Pop"
 msgstr "Rock/Pop"
@@ -15456,6 +15528,9 @@ msgstr "Serial"
 
 msgid "Series"
 msgstr "Miniserie"
+
+msgid "Serious Classical"
+msgstr "Clásico Serio"
 
 msgid "Serious Music"
 msgstr "Musica seria"
@@ -16649,6 +16724,9 @@ msgstr "enredo/melodrama/folclore"
 msgid "Soccer"
 msgstr "Fútbol"
 
+msgid "Social Affairs"
+msgstr "Asuntos Sociales"
+
 msgid "social/political issues/economics (general)"
 msgstr "social/política/economía (general)"
 
@@ -16669,6 +16747,15 @@ msgstr "Sociedad y Cultura"
 
 msgid "SocketMMI"
 msgstr "ZócaloMMI"
+
+msgid "Soft"
+msgstr "Suave"
+
+msgid "Soft Rhythm and Blues"
+msgstr "Ritmo Suave y Blues"
+
+msgid "Soft Rock"
+msgstr "Rock Suave"
 
 msgid "softcam"
 msgstr "Seleccione softcam"
@@ -18592,6 +18679,9 @@ msgstr "Arriba"
 msgid "top"
 msgstr "arriba"
 
+msgid "Top 40"
+msgstr "40 Mejores"
+
 msgid "Top and bottom"
 msgstr "Arriba y abajo"
 
@@ -19526,6 +19616,9 @@ msgstr "Consulta un ONID/TSID válido en www.lyngsat.com..."
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
+msgid "Varied"
+msgstr "Variado"
+
 msgid "Varieta"
 msgstr "Variedad"
 
@@ -19931,6 +20024,9 @@ msgstr "Informe Meteorológico"
 
 msgid "Weather Plugin"
 msgstr "Informe Meteorológico"
+
+msgid "Weather/meteorology"
+msgstr "Tiempo/meteorología"
 
 msgid "Web interface"
 msgstr "Interfaz Web"
