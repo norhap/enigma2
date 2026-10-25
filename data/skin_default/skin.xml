@@ -1546,7 +1546,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<ePixmap alphaTest="blend" pixmap="icons/icon_rec_off.png" position="913,592" size="42,21" zPosition="1"/>
 		<widget alphaTest="blend" pixmap="icons/icon_rec.png" position="913,592" render="Pixmap" size="42,21" source="session.RecordState" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>		
+		</widget>
 		<widget source="session.Event_Now" render="DRRunningText" options="movetype=running,startpoint=0,direction=left,steptime=40,repeat=5,startdelay=2000,always=0" backgroundColor="OE_Background" font="RegularBold;20" noWrap="1" position="383,626" size="700,42" transparent="1">
 			<convert type="EventName">Name</convert>
 		</widget>
@@ -1674,7 +1674,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<ePixmap alphaTest="blend" pixmap="icons/icon_rec_off.png" position="838,644" size="42,21" zPosition="1"/>
 		<widget alphaTest="blend" pixmap="icons/icon_rec.png" position="838,644" render="Pixmap" size="42,21" source="session.RecordState" zPosition="2">
 			<convert type="ConditionalShowHide">Blink</convert>
-		</widget>			
+		</widget>
 		<widget backgroundColor="OE_ListBackground" foregroundColor="green_light" font="RegularBold;18" position="442,125" render="Label" size="60,23" source="session.Event_Now" transparent="1">
 			<convert type="EventTime">StartTime</convert>
 			<convert type="ClockToText"/>
@@ -2609,7 +2609,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<panel name="TemplatePip"/>
 		<widget name="text" font="Console;18" commandColor="#e5e619" backgroundColor="OE_Background" scrollbarForegroundColor="blue_light" scrollbarBorderColor="blue_light" position="17,100" size="833,533" transparent="1"/>
 	</screen>
-	<screen name="CommitInfoSetup" title="Open Vision Commit Info Setup" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1280,720">
+	<screen name="CommitInfoSetup" title="Commit Info Setup" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1280,720">
 		<panel name="StanDardScreen"/>
 		<widget name="config" itemHeight="33" entryFont="RegularBold;26" valueFont="Regular;23" scrollbarMode="showOnDemand" enableWrapAround="1" backgroundColor="OE_Background" position="17,93" size="833,500" transparent="1"/>
 	</screen>
@@ -4733,7 +4733,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<eLabel backgroundColor="OE_NewBg2" position="46,center" size="53,720" zPosition="-11" verticalAlignment="center"/>
 		<eLabel backgroundColor="blue_light" position="113,86" size="833,1" zPosition="-9"/>
 		<!-- Widget -->
-		<eLabel text="QuickMenu - Open Vision Panel" font="RegularBold;22" backgroundColor="OE_Background" position="113,48" size="833,33" transparent="1"/>
+		<eLabel text="QuickMenu - Norap Panel" font="RegularBold;22" backgroundColor="OE_Background" position="113,48" size="833,33" transparent="1"/>
 		<widget name="list" itemHeight="50" font="RegularBold;17" backgroundColor="OE_Background" position="113,103" size="420,450" transparent="1"/>
 		<widget name="sublist" itemHeight="50" font="RegularBold;17" backgroundColor="OE_Background" position="556,103" size="420,450" transparent="1"/>
 		<eLabel backgroundColor="white" position="544,103" size="1,450" zPosition="-9"/>
