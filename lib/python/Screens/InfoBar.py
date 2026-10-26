@@ -252,6 +252,9 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 			InfoBarPlugins, InfoBarPiP, InfoBarZoom, InfoBarHotkey:
 			x.__init__(self)
 
+		if isPluginInstalled("IPToSAT"):
+			from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
+			killActivePlayer()
 		self.subtitle_renderer = SubtitleRenderer(self)
 		self.curSubsIndex = -1
 		self.onChangedEntry = []

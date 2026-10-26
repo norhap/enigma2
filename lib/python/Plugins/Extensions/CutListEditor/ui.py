@@ -173,10 +173,10 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		InfoBarCueSheetSupport.__init__(self)
 		InfoBarBase.__init__(self, steal_current_service=True)
 		HelpableScreen.__init__(self)
-		self.serviceRefIPToSAT = False
 		self.console = Console()
 		if serviceRefIPToSAT():
-			self.serviceRefIPToSAT = True
+			from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
+			killActivePlayer()
 		self.old_service = session.nav.getCurrentlyPlayingServiceReference()
 		self.service = service
 		session.nav.playService(service)
@@ -368,13 +368,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			self.removeMark(m)
 
 	def exit(self):
-		if self.serviceRefIPToSAT:
-			self.console.ePopen(['sleep 3'], self.killIPToSATPlayer)
 		self.close()
-
-	def killIPToSATPlayer(self, result=None, retVal=None, extra_args=None):
-		from Plugins.Extensions.IPToSAT.plugin import killActivePlayer  # noqa: E402
-		killActivePlayer()
 
 	def getCutlist(self):
 		length = self.getSeek() and self.getSeek().getLength()
