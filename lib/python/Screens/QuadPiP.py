@@ -5,6 +5,11 @@ from Screens.InfoBarGenerics import streamrelay
 
 
 class QuadPiP(Screen):
+	skin = """
+	<screen name="QuadPiP" flags="wfNoBorder" position="0,28" size="360,288" title="QuadPiP" zPosition="-2">
+		<widget name="video" position="0,0" size="180,135" />
+	</screen>"""
+
 	def __init__(self, session, decoderIdx=1, pos=None):
 		Screen.__init__(self, session)
 		self["video"] = VideoWindow(decoderIdx, 720, 576)
