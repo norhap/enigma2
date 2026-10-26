@@ -58,7 +58,6 @@ msgctxt "button label, 'previous screen'"
 msgid "Prev"
 msgstr ""
 
-#, python-format
 msgid ""
 "\n"
 " %s "
@@ -66,7 +65,7 @@ msgstr ""
 
 msgid ""
 "\n"
-" Do you want to switch to Android ?"
+" Do you want to switch to Android?"
 msgstr ""
 
 msgid ""
@@ -94,7 +93,6 @@ msgid ""
 "Recording in progress."
 msgstr ""
 
-#, python-format
 msgid ""
 "\n"
 "Timer '%s' disabled!"
@@ -118,7 +116,6 @@ msgstr ""
 msgid " (auto detection)"
 msgstr ""
 
-#, python-format
 msgid " (Channel %s)"
 msgstr ""
 
@@ -140,7 +137,6 @@ msgstr ""
 msgid " (Lower than any auto)"
 msgstr ""
 
-#, python-format
 msgid " (Partition %d)"
 msgstr ""
 
@@ -189,20 +185,15 @@ msgstr ""
 msgid "!! Bootloader Upgrade !!"
 msgstr ""
 
-#, python-format
 msgid "%(freespace)s %(percent)s free disk space"
 msgstr ""
 
-#. TRANSLATORS: small date representation daynum short monthname in strftime() format! See "man strftime"
-#. TRANSLATORS: compact date representation (for VFD) daynum short monthname in strftime() format! See "man strftime"
 msgid "%-d %b"
 msgstr ""
 
-#. TRANSLATORS: full date representation daynum monthname year in strftime() format! See "man strftime"
 msgid "%-d %B %Y"
 msgstr ""
 
-#. TRANSLATORS: long date representation daynum short monthname year in strftime() format! See "man strftime"
 msgid "%-d %b %Y"
 msgstr ""
 
@@ -302,63 +293,48 @@ msgstr ""
 msgid "%-m/%d/%Y"
 msgstr ""
 
-#, python-format
 msgid "%.1f?? E"
 msgstr ""
 
-#, python-format
 msgid "%.1f?? W"
 msgstr ""
 
-#, python-format
 msgid "%.1f° E"
 msgstr ""
 
-#, python-format
 msgid "%.1f° W"
 msgstr ""
 
-#, python-format
 msgid "%.2f GB"
 msgstr ""
 
-#, python-format
 msgid "%.2f MB/s copy rate"
 msgstr ""
 
-#, python-format
 msgid "%.3f MHz"
 msgstr ""
 
-#, python-format
 msgid "%2.1f Seconds"
 msgstr ""
 
-#, python-format
 msgid "%3.01f dB"
 msgstr ""
 
-#. TRANSLATORS: small date representation short dayname daynum in strftime() format! See "man strftime"
 msgid "%a %-d"
 msgstr ""
 
-#. TRANSLATORS: short date representation dayname daynum short monthname in strftime() format! See "man strftime"
 msgid "%A %-d %B"
 msgstr ""
 
-#. TRANSLATORS: short date representation short dayname daynum short monthname in strftime() format! See "man strftime"
 msgid "%a %-d %b"
 msgstr ""
 
-#. TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See "man strftime"
 msgid "%A %-d %B %Y"
 msgstr ""
 
-#. TRANSLATORS: long date representation short dayname daynum monthname year in strftime() format! See "man strftime"
 msgid "%a %-d %B %Y"
 msgstr ""
 
-#. TRANSLATORS: long date representation short dayname daynum short monthname year in strftime() format! See "man strftime"
 msgid "%a %-d %b %Y"
 msgstr ""
 
@@ -764,181 +740,130 @@ msgstr ""
 msgid "%d %b %Y"
 msgstr ""
 
-#. TRANSLATORS: Intermediate scanning result, '%d' channel(s) have been found so far
-#, python-format
 msgid "%d channel found"
 msgid_plural "%d channels found"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d core"
 msgid_plural "%d cores"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d DMIPS per core"
 msgstr ""
 
-#, python-format
 msgid "%d DMIPS with %d cores"
 msgstr ""
 
-#, python-format
 msgid "%d GB"
 msgstr ""
 
-#, python-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d job is running in the background!"
 msgid_plural "%d jobs are running in the background!"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d KB"
 msgstr ""
 
-#, python-format
 msgid "%d MB"
 msgstr ""
 
-#, python-format
 msgid "%d MHz"
 msgstr ""
 
-#. TRANSLATORS: full date representation dayname daynum monthname year in strftime() format! See 'man strftime'
-#. _("%A %e %B %Y")
-#. TRANSLATORS: short time representation hour:minute in strftime() format! See 'man strftime'
-#. _("%R")
-#. TRANSLATORS: short time representation hour:minute in strftime() format! See 'man strftime'
-#. _("%R")
-#. TRANSLATORS: short date representation daynum short monthname in strftime() format! See 'man strftime'
-#. _("%e %b")
-#. TRANSLATORS: short date representation daynum short monthname in strftime() format! See 'man strftime'
-#. _("%a %e %b")
-#. TRANSLATORS: short time representation hour:minute in strftime() format! See 'man strftime'
-#. _("%R")
-#. TRANSLATORS: long date representation short dayname daynum short monthname hour:minute in strftime() format! See 'man strftime'
-#. _("%a %e %b %R")
-#. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
-#. _("%a %e %B %Y")
-#.
-#, python-format
 msgid "%d Min"
 msgid_plural "%d Mins"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d min"
 msgstr ""
 
-#, python-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d minutes"
 msgstr ""
 
-#, python-format
 msgid "%d ms"
 msgstr ""
 
-#, python-format
 msgid "%d of %d Bytes"
 msgstr ""
 
-#, python-format
 msgid "%d of %d channels contained a DAB+ ensemble"
 msgstr ""
 
-#, python-format
 msgid "%d of %d feeds completed"
 msgstr ""
 
-#, python-format
 msgid "%d of %d KB"
 msgstr ""
 
-#, python-format
 msgid "%d package selected."
 msgid_plural "%d packages selected."
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d pixel wide"
 msgid_plural "%d pixels wide"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d Pixels"
 msgstr ""
 
-#, python-format
 msgid "%d plugin is not available:"
 msgid_plural "%d plugins are not available:"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d radio bouquets created"
 msgstr ""
 
-#, python-format
 msgid "%d sec"
 msgstr ""
 
-#, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d seconds"
 msgstr ""
 
-#, python-format
 msgid "%d service found."
 msgid_plural "%d services found."
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d times"
 msgstr ""
 
-#, python-format
 msgid "%d week"
 msgid_plural "%d weeks"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d wireless network found!"
 msgid_plural "%d wireless networks found!"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%d+"
 msgstr ""
 
@@ -1038,84 +963,64 @@ msgstr ""
 msgid "%m/%d/%Y"
 msgstr ""
 
-#. TRANSLATORS: short time representation hour:minute (Same as "Default")
 msgid "%R"
 msgstr ""
 
-#, python-format
 msgid "%s"
 msgstr ""
 
-#, python-format
 msgid "%s (%s)"
 msgstr ""
 
-#, python-format
 msgid "%s (cached)"
 msgstr ""
 
-#, python-format
 msgid "%s (motor)"
 msgstr ""
 
-#, python-format
 msgid ""
 "%s connected successfully.\n"
 "Playable files found."
 msgstr ""
 
-#, python-format
 msgid "%s GHz"
 msgstr ""
 
-#. TRANSLATORS: The satellite with name '%s' is no longer used after a configuration change. The user is asked whether or not the satellite should be deleted.
-#, python-format
 msgid "%s is no longer used. Should it be deleted?"
 msgstr ""
 
-#, python-format
 msgid "%s KSymb/s"
 msgstr ""
 
-#, python-format
 msgid "%s MHz"
 msgstr ""
 
-#, python-format
 msgid "%s of %s GB"
 msgstr ""
 
-#, python-format
 msgid "%s of %s MB"
 msgstr ""
 
-#, python-format
 msgid "%s updated package available"
 msgid_plural "%s updated packages available"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "%s%s(Default: %s)"
 msgstr ""
 
-#, python-format
 msgid "%s: %s, in use: %s%%"
 msgstr ""
 
-#, python-format
 msgid "%s: bouquet could not be cleared"
 msgstr ""
 
-#, python-format
 msgid "%s: bouquet could not be written"
 msgstr ""
 
-#, python-format
 msgid "%s?"
 msgstr ""
 
-#. TRANSLATORS: time representation hour:minute:seconds for 24 hour clock or 12 hour clock without AM/PM and hour:minute for 12 hour clocks with AM/PM
 msgid "%T"
 msgstr ""
 
@@ -1155,29 +1060,24 @@ msgstr ""
 msgid "%Y/%m/%d"
 msgstr ""
 
-#, python-format
 msgid "'%s' contains %d file(s) and %d sub-directories.\n"
 msgstr ""
 
-#, python-format
 msgid ""
 "'%s' does not exist.\n"
 "%s"
 msgstr ""
 
-#, python-format
 msgid ""
 "'%s' is Internal Flash. It is not a storage device.\n"
 "%s"
 msgstr ""
 
-#, python-format
 msgid ""
 "'%s' not writeable.\n"
 "%s"
 msgstr ""
 
-#, python-format
 msgid ""
 "'%s' Storage free size %d MB.\n"
 "%s"
@@ -1201,7 +1101,6 @@ msgid ""
 "You also have the option to remove only the selected language."
 msgstr ""
 
-#, python-format
 msgid "(activated +%d min)"
 msgstr ""
 
@@ -1304,7 +1203,6 @@ msgstr ""
 msgid "-NO SERVICE\n"
 msgstr ""
 
-#, python-format
 msgid "-SERVICE ERROR:%d\n"
 msgstr ""
 
@@ -1587,11 +1485,9 @@ msgstr ""
 msgid "??"
 msgstr ""
 
-#, python-format
 msgid "[ActionMap] in this context list -> '%s' -> mapto='%s' it is not defined in this code 'missing'."
 msgstr ""
 
-#, python-format
 msgid "[ActionMap] Missing actions in keymap, missing context in this list ->'%s' for mapto='%s'."
 msgstr ""
 
@@ -1619,14 +1515,12 @@ msgstr ""
 msgid "A completed recording timer is about to shut down your receiver. Would you like to proceed?"
 msgstr ""
 
-#, python-format
 msgid "A configuration file (%s) has been modified since it was installed. Would you like to keep the modified version?"
 msgstr ""
 
 msgid "A file from media is in use!"
 msgstr ""
 
-#, python-format
 msgid ""
 "A finished powertimer wants to reboot your %s %s.\n"
 "Do that now?"
@@ -1637,7 +1531,6 @@ msgid ""
 "Do that now?"
 msgstr ""
 
-#, python-format
 msgid ""
 "A finished powertimer wants to set your %s %s to standby.\n"
 "Do that now?"
@@ -1648,7 +1541,6 @@ msgid ""
 "Do that now?"
 msgstr ""
 
-#, python-format
 msgid ""
 "A finished powertimer wants to shutdown your %s %s.\n"
 "Do that now?"
@@ -1672,7 +1564,6 @@ msgstr ""
 msgid "A new storage device has been connected:"
 msgstr ""
 
-#, python-format
 msgid ""
 "A recording has started:\n"
 "%s"
@@ -1695,7 +1586,6 @@ msgstr ""
 msgid "A repeating event is currently recording. What would you like to do?"
 msgstr ""
 
-#, python-format
 msgid "A required tool (%s) was not found."
 msgstr ""
 
@@ -1875,8 +1765,7 @@ msgstr ""
 msgid "Add / Delete bookmark"
 msgstr ""
 
-#, python-format
-msgid "Add 4 more Vu+ Multiboot USB slots after slot %s ?"
+msgid "Add 4 more Vu+ Multiboot USB slots after slot %s?"
 msgstr ""
 
 msgid "Add a mark"
@@ -2117,7 +2006,6 @@ msgstr ""
 msgid "Afrikaans"
 msgstr ""
 
-#, python-format
 msgid "After %s"
 msgstr ""
 
@@ -2343,7 +2231,6 @@ msgstr ""
 msgid "Amharic"
 msgstr ""
 
-#, python-format
 msgid "Amount %d / Success %d / Failed %d"
 msgstr ""
 
@@ -2494,8 +2381,6 @@ msgstr ""
 msgid "Are you sure to reboot to:\n"
 msgstr ""
 
-#. TRANSLATORS: The user is asked to delete all satellite services from a specific orbital position after a configuration change
-#, python-format
 msgid "Are you sure to remove all %s services?"
 msgstr ""
 
@@ -2532,7 +2417,6 @@ msgid ""
 "\n"
 msgstr ""
 
-#, python-format
 msgid ""
 "Are you sure you want to restore\n"
 "the following backup:\n"
@@ -2718,7 +2602,6 @@ msgstr ""
 msgid "Audio PID"
 msgstr ""
 
-#, python-format
 msgid "Audio PID%s, codec & lang"
 msgstr ""
 
@@ -2728,11 +2611,9 @@ msgstr ""
 msgid "Audio Source"
 msgstr ""
 
-#, python-format
 msgid "Audio track (%s) format"
 msgstr ""
 
-#, python-format
 msgid "Audio track (%s) language"
 msgstr ""
 
@@ -2763,7 +2644,6 @@ msgstr ""
 msgid "Authoring mode"
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
 msgid "Auto"
 msgstr ""
 
@@ -2773,7 +2653,7 @@ msgstr ""
 msgid "Auto (not available)"
 msgstr ""
 
-msgid "Auto chapter split every ? minutes (0=never)"
+msgid "Auto chapter split every? minutes (0=never)"
 msgstr ""
 
 msgid "Auto deep standby"
@@ -2833,7 +2713,6 @@ msgid ""
 "Do you want to do it now?"
 msgstr ""
 
-#, python-format
 msgid "Autoinstalling %s"
 msgstr ""
 
@@ -2976,7 +2855,6 @@ msgstr ""
 msgid "Background sound/clean feed"
 msgstr ""
 
-#, python-format
 msgid "Backing up to: %s"
 msgstr ""
 
@@ -3061,7 +2939,6 @@ msgstr ""
 msgid "Basque"
 msgstr ""
 
-#, python-format
 msgid "BC%d"
 msgstr ""
 
@@ -3254,7 +3131,6 @@ msgstr ""
 msgid "Boot to Recovery menu"
 msgstr ""
 
-#, python-format
 msgid "Booting in slot %s %s"
 msgstr ""
 
@@ -3363,7 +3239,6 @@ msgstr ""
 msgid "BT709 XvYCC"
 msgstr ""
 
-#, python-format
 msgid "Buffering %d%%"
 msgstr ""
 
@@ -3385,7 +3260,6 @@ msgstr ""
 msgid "Burmese"
 msgstr ""
 
-#, python-format
 msgid "Burn audio track (%s)"
 msgstr ""
 
@@ -3470,7 +3344,6 @@ msgstr ""
 msgid "Cable Scan"
 msgstr ""
 
-#, python-format
 msgid "Cable scan executable utility not found '%s'!"
 msgstr ""
 
@@ -3698,7 +3571,6 @@ msgstr ""
 msgid "CCcam Info"
 msgstr ""
 
-#, python-format
 msgid ""
 "CCcam Info %s\n"
 "by AliAbdul %s\n"
@@ -3754,7 +3626,6 @@ msgstr ""
 msgid "CH"
 msgstr ""
 
-#, python-format
 msgid "CH%s"
 msgstr ""
 
@@ -3881,7 +3752,6 @@ msgstr ""
 msgid "Channels imported successfully from"
 msgstr ""
 
-#, python-format
 msgid "Channels imported successfully from %s"
 msgstr ""
 
@@ -3930,7 +3800,6 @@ msgstr ""
 msgid "Checking ONID/TSID"
 msgstr ""
 
-#, python-format
 msgid ""
 "Checking tuner %s\n"
 "DiSEqC port %s for %s"
@@ -3990,7 +3859,6 @@ msgstr ""
 msgid "Choice Box Order Actions"
 msgstr ""
 
-#, python-format
 msgid "Choice where to put \"%s\""
 msgstr ""
 
@@ -4096,7 +3964,6 @@ msgstr ""
 msgid "Chuvash"
 msgstr ""
 
-#, python-format
 msgid "CI %s %s"
 msgstr ""
 
@@ -4389,14 +4256,12 @@ msgstr ""
 msgid "Config Scan Details"
 msgstr ""
 
-#, python-format
 msgid "Configfile %s saved."
 msgstr ""
 
 msgid "Configuration mode"
 msgstr ""
 
-#, python-format
 msgid "Configuration mode: %s"
 msgstr ""
 
@@ -4986,14 +4851,12 @@ msgstr ""
 msgid "Could not open Picture in Picture"
 msgstr ""
 
-#, python-format
 msgid "Could not open the file %s!"
 msgstr ""
 
 msgid "Could not record due to busy tuner"
 msgstr ""
 
-#, python-format
 msgid "Could not save configfile %s!"
 msgstr ""
 
@@ -5113,7 +4976,6 @@ msgid ""
 "Select an option to save the timeshift file."
 msgstr ""
 
-#, python-format
 msgid "Current mode: %s \n"
 msgstr ""
 
@@ -5189,7 +5051,6 @@ msgstr ""
 msgid "D"
 msgstr ""
 
-#, python-format
 msgid "DAB+ channel %s"
 msgstr ""
 
@@ -5472,7 +5333,6 @@ msgstr ""
 msgid "Default video mode selected for the TV."
 msgstr ""
 
-#, python-format
 msgid "Default: '%s'."
 msgstr ""
 
@@ -5554,7 +5414,6 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#, python-format
 msgid "Delete %s?"
 msgstr ""
 
@@ -5663,7 +5522,6 @@ msgstr ""
 msgid "Deleted"
 msgstr ""
 
-#, python-format
 msgid "Deleted %s!"
 msgstr ""
 
@@ -5673,7 +5531,6 @@ msgstr ""
 msgid "Deleted items"
 msgstr ""
 
-#, python-format
 msgid "Deleting %s (%s)..."
 msgstr ""
 
@@ -5797,7 +5654,6 @@ msgstr ""
 msgid "Directory"
 msgstr ""
 
-#, python-format
 msgid "Directory %s does not exist."
 msgstr ""
 
@@ -5894,7 +5750,6 @@ msgstr ""
 msgid "DiSEqC mode"
 msgstr ""
 
-#, python-format
 msgid "DiSEqC port %s: %s"
 msgstr ""
 
@@ -5988,7 +5843,6 @@ msgstr ""
 msgid "Dmesg Info"
 msgstr ""
 
-#, python-format
 msgid "DNS %d"
 msgstr ""
 
@@ -6041,18 +5895,9 @@ msgid ""
 "This could take lots of time!"
 msgstr ""
 
-#, python-format
-msgid "Do you really want to delete %s ?"
-msgstr ""
-
-#, python-format
 msgid "Do you really want to delete %s?"
 msgstr ""
 
-msgid "Do you really want to delete ?"
-msgstr ""
-
-#, python-format
 msgid ""
 "Do you really want to delete all '%s' tags?\n"
 "(NOTE: 'Cancel' cannot undo this!)"
@@ -6068,31 +5913,30 @@ msgid ""
 "\n"
 msgstr ""
 
-#, python-format
 msgid "Do you really want to delete the '%s' bookmark?"
 msgstr ""
 
-#, python-format
 msgid "Do you really want to delete the '%s' directory?"
 msgstr ""
 
 msgid "Do you really want to delete this timer?"
 msgstr ""
 
+msgid "Do you really want to delete?"
+msgstr ""
+
 msgid "Do you really want to exit?"
 msgstr ""
 
-msgid "Do you really want to move to the trash can ?"
+msgid "Do you really want to move to the trash can?"
 msgstr ""
 
-#, python-format
-msgid "Do you really want to permamently remove '%s' from the trash can ?"
+msgid "Do you really want to permamently remove '%s' from the trash can?"
 msgstr ""
 
-msgid "Do you really want to permanently remove from the trash can ?"
+msgid "Do you really want to permanently remove from the trash can?"
 msgstr ""
 
-#, python-format
 msgid "Do you really want to remove your bookmark of %s?"
 msgstr ""
 
@@ -6105,7 +5949,6 @@ msgstr ""
 msgid "Do you want this?"
 msgstr ""
 
-#, python-format
 msgid ""
 "Do you want to %s?\n"
 "\n"
@@ -6115,7 +5958,6 @@ msgstr ""
 msgid "Do you want to burn this collection to DVD medium?"
 msgstr ""
 
-#, python-format
 msgid "Do you want to delete %s?"
 msgstr ""
 
@@ -6131,11 +5973,6 @@ msgstr ""
 msgid "Do you want to flash image\n"
 msgstr ""
 
-#, python-format
-msgid "Do you want to install \"%s\" ?"
-msgstr ""
-
-#, python-format
 msgid "Do you want to install \"%s\"?"
 msgstr ""
 
@@ -6151,7 +5988,6 @@ msgstr ""
 msgid "Do you want to preview this DVD before burning?"
 msgstr ""
 
-#, python-format
 msgid "Do you want to purge all locales/languages except %s?"
 msgstr ""
 
@@ -6161,11 +5997,6 @@ msgstr ""
 msgid "Do you want to reboot your receiver?"
 msgstr ""
 
-#, python-format
-msgid "Do you want to remove \"%s\" ?"
-msgstr ""
-
-#, python-format
 msgid "Do you want to remove \"%s\"?"
 msgstr ""
 
@@ -6189,14 +6020,12 @@ msgstr ""
 msgid "Do you want to select a different skin?"
 msgstr ""
 
-#, python-format
 msgid ""
 "Do you want to shut down %s?\n"
 "\n"
 "To reactivate %s press GREEN button."
 msgstr ""
 
-#, python-format
 msgid "Do you want to stop %s and delete timer?"
 msgstr ""
 
@@ -6212,11 +6041,9 @@ msgstr ""
 msgid "Do you want to update the package:\n"
 msgstr ""
 
-#, python-format
 msgid "Do you want to update to %s"
 msgstr ""
 
-#, python-format
 msgid "Do you want to update your %s %s?"
 msgstr ""
 
@@ -6247,7 +6074,6 @@ msgstr ""
 msgid "Dolby Digital"
 msgstr ""
 
-#, python-format
 msgid "Dolby Digital downmix is now %s"
 msgstr ""
 
@@ -6304,7 +6130,6 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-#, python-format
 msgid "Done - Installed, updated or removed %d package (%s)"
 msgid_plural "Done - Installed, updated or removed %d packages (%s)"
 msgstr[0] ""
@@ -6700,7 +6525,6 @@ msgstr ""
 msgid "Enable auto fastscan"
 msgstr ""
 
-#, python-format
 msgid "Enable auto fastscan for %s"
 msgstr ""
 
@@ -6979,11 +6803,9 @@ msgstr ""
 msgid "EnhancedMovieCenterMenu"
 msgstr ""
 
-#, python-format
 msgid "Enigma (re)starts: %d\n"
 msgstr ""
 
-#, python-format
 msgid "Enigma2 debug level: %d\n"
 msgstr ""
 
@@ -7092,7 +6914,6 @@ msgstr ""
 msgid "Entitlements"
 msgstr ""
 
-#, python-format
 msgid "Entitlements for 'CAID %s'"
 msgstr ""
 
@@ -7117,7 +6938,6 @@ msgstr ""
 msgid "EPG imported successfully from"
 msgstr ""
 
-#, python-format
 msgid "EPG imported successfully from %s"
 msgstr ""
 
@@ -7195,7 +7015,6 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#, python-format
 msgid "ERROR - failed to scan (%s)!"
 msgstr ""
 
@@ -7211,7 +7030,6 @@ msgstr ""
 msgid "Error during unzipping image\n"
 msgstr ""
 
-#, python-format
 msgid ""
 "Error getting link via %s\n"
 "%s"
@@ -7229,7 +7047,6 @@ msgstr ""
 msgid "Error to read data from"
 msgstr ""
 
-#, python-format
 msgid ""
 "Error while retreiving fallback timer information\n"
 "%s"
@@ -7238,51 +7055,41 @@ msgstr ""
 msgid "error while scanning"
 msgstr ""
 
-#, python-format
 msgid ""
 "Error: %s\n"
 "Retry?"
 msgstr ""
 
-#, python-format
 msgid "Error: %s %s not %s!  Please try again later."
 msgstr ""
 
-#, python-format
 msgid "Error: Directory '%s' already exists!"
 msgstr ""
 
-#, python-format
 msgid "Error: Failed to run service scan!  (%s)"
 msgstr ""
 
-#, python-format
 msgid "Error: File or directory '%s' already exists!"
 msgstr ""
 
-#, python-format
 msgid "Error: Invalid directory '%s' selected!"
 msgstr ""
 
 msgid "Error: The filename may not be blank!"
 msgstr ""
 
-#, python-format
 msgid "Error: Unable to create directory '%s'!"
 msgstr ""
 
-#, python-format
 msgid "Error: Unable to delete directory '%s'! (Diretory may not be empty.)"
 msgstr ""
 
 msgid "Error: Unable to process the command!  Please try again later."
 msgstr ""
 
-#, python-format
 msgid "Error: Unable to rename directory '%s' to '%s'!"
 msgstr ""
 
-#, python-format
 msgid "Error: Unable to write log file %s!"
 msgstr ""
 
@@ -7525,7 +7332,6 @@ msgstr ""
 msgid "External PiP"
 msgstr ""
 
-#, python-format
 msgid "External Storage %s"
 msgstr ""
 
@@ -7694,15 +7500,12 @@ msgstr ""
 msgid "Family"
 msgstr ""
 
-#, python-format
 msgid "Fan %d"
 msgstr ""
 
-#, python-format
 msgid "Fan %d PWM"
 msgstr ""
 
-#, python-format
 msgid "Fan %d voltage"
 msgstr ""
 
@@ -7789,7 +7592,6 @@ msgid ""
 "connected to"
 msgstr ""
 
-#, python-format
 msgid ""
 "FBC automatic\n"
 "connected to %s"
@@ -7854,7 +7656,6 @@ msgstr ""
 msgid "File Commander - File/Directory Information"
 msgstr ""
 
-#, python-format
 msgid "File error %s"
 msgstr ""
 
@@ -8184,13 +7985,11 @@ msgstr ""
 msgid "Front Panel Display"
 msgstr ""
 
-#, python-format
 msgid ""
 "Front panel your %s %s will be updated\n"
 "This may take a few minutes"
 msgstr ""
 
-#, python-format
 msgid "Frontprocessor version: %s"
 msgstr ""
 
@@ -8230,7 +8029,6 @@ msgstr ""
 msgid "Full Range RGB"
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
 msgid "Full screen"
 msgstr ""
 
@@ -8721,7 +8519,6 @@ msgstr ""
 msgid "HDMI Recording Setup"
 msgstr ""
 
-#, python-format
 msgid "HDMI-CEC %s"
 msgstr ""
 
@@ -9230,7 +9027,6 @@ msgstr ""
 msgid "Import remote receiver URL"
 msgstr ""
 
-#, python-format
 msgid "Imported list with bouquet empty <n/a> %s file does not exist"
 msgstr ""
 
@@ -9312,7 +9108,6 @@ msgstr ""
 msgid "Include timer descramble data in PVR"
 msgstr ""
 
-#, python-format
 msgid ""
 "Incorrect format for skip value: '%s'\n"
 "Skip cancelled."
@@ -9521,7 +9316,6 @@ msgstr ""
 msgid "Installing"
 msgstr ""
 
-#, python-format
 msgid "Installing %s (%s)..."
 msgstr ""
 
@@ -9657,7 +9451,6 @@ msgstr ""
 msgid "IP"
 msgstr ""
 
-#, python-format
 msgid ""
 "IP %s is not valid.\n"
 "Disable client mode if you are going to use this address."
@@ -9844,7 +9637,6 @@ msgstr ""
 msgid "Jump to the currently active locale/language"
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
 msgid "Just scale"
 msgstr ""
 
@@ -10026,11 +9818,9 @@ msgid_plural "Languages"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "Language %s (%s) installed and selected."
 msgstr ""
 
-#, python-format
 msgid "Language %s (%s) selected."
 msgstr ""
 
@@ -10193,7 +9983,6 @@ msgstr ""
 msgid "Let the tuner select its RF gain automatically."
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
 msgid "Letterbox"
 msgstr ""
 
@@ -10284,7 +10073,6 @@ msgstr ""
 msgid "List type"
 msgstr ""
 
-#, python-format
 msgid "List version %(ver)d, found %(num)d channel"
 msgid_plural "List version %(ver)d, found %(num)d channels"
 msgstr[0] ""
@@ -10367,11 +10155,9 @@ msgid_plural "Locales"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "Locale %s (%s) installed and selected."
 msgstr ""
 
-#, python-format
 msgid "Locale %s (%s) selected."
 msgstr ""
 
@@ -10474,7 +10260,6 @@ msgstr ""
 msgid "Long press emulation with button"
 msgstr ""
 
-#, python-format
 msgid "Long press: %s"
 msgstr ""
 
@@ -10678,7 +10463,6 @@ msgstr ""
 msgid "Manufacturer distribution:\n"
 msgstr ""
 
-#, python-format
 msgid ""
 "Manufacturer reset in progress\n"
 "Please wait until your %s %s restarts"
@@ -10846,7 +10630,6 @@ msgstr ""
 msgid "Menu config"
 msgstr ""
 
-#, python-format
 msgid "Menusort (%s)"
 msgstr ""
 
@@ -10895,7 +10678,6 @@ msgstr ""
 msgid "MiniDLNA setup"
 msgstr ""
 
-#, python-format
 msgid "Minimum age %d years"
 msgstr ""
 
@@ -11541,7 +11323,6 @@ msgstr ""
 msgid "Network mount"
 msgstr ""
 
-#, python-format
 msgid "Network mount %s"
 msgstr ""
 
@@ -11573,9 +11354,6 @@ msgid "Network test: "
 msgstr ""
 
 msgid "Network wizard"
-msgstr ""
-
-msgid "Network Wizard"
 msgstr ""
 
 msgid "Network:"
@@ -11950,7 +11728,6 @@ msgstr ""
 msgid "none"
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
 msgid "Nonlinear"
 msgstr ""
 
@@ -12029,7 +11806,6 @@ msgstr ""
 msgid "Not deleting modified"
 msgstr ""
 
-#, python-format
 msgid "Not enough disk space. Please free up some disk space and try again. (%(req)d MB required, %(avail)d MB available)"
 msgstr ""
 
@@ -12416,14 +12192,12 @@ msgstr ""
 msgid "OSCamInfo Log Actions"
 msgstr ""
 
-#, python-format
 msgid "OSCamInfo: %s Entitlements for '%s'"
 msgstr ""
 
 msgid "OSCamInfo: Capabilities"
 msgstr ""
 
-#, python-format
 msgid "OSCamInfo: Entitlements for '%s'"
 msgstr ""
 
@@ -12544,7 +12318,6 @@ msgstr ""
 msgid "Pali"
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
 msgid "Pan&scan"
 msgstr ""
 
@@ -12605,7 +12378,6 @@ msgstr ""
 msgid "Pass"
 msgstr ""
 
-#, python-format
 msgid "Pass %d/%d"
 msgstr ""
 
@@ -12693,7 +12465,6 @@ msgstr ""
 msgid "Permanently ignore this device"
 msgstr ""
 
-#, python-format
 msgid "Permanently mount as %s"
 msgstr ""
 
@@ -12748,7 +12519,6 @@ msgstr ""
 msgid "pid:"
 msgstr ""
 
-#. TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
 msgid "Pillarbox"
 msgstr ""
 
@@ -13040,7 +12810,6 @@ msgstr ""
 msgid "please wait, loading picture..."
 msgstr ""
 
-#, python-format
 msgid "Please wait, restarting %s."
 msgstr ""
 
@@ -13077,7 +12846,6 @@ msgstr ""
 msgid "Plugin Browser Settings"
 msgstr ""
 
-#, python-format
 msgid "Plugin EPGImport actived EPG import and woke up your %s %s"
 msgstr ""
 
@@ -13380,7 +13148,6 @@ msgstr ""
 msgid "Press OK to activate current MAC address."
 msgstr ""
 
-#, python-format
 msgid "Press OK to activate the selected skin %s."
 msgstr ""
 
@@ -13399,19 +13166,15 @@ msgstr ""
 msgid "Press OK to edit the settings."
 msgstr ""
 
-#, python-format
 msgid "Press OK to get further details for %s"
 msgstr ""
 
-#, python-format
 msgid "Press OK to install and use this language.  [%s]"
 msgstr ""
 
-#, python-format
 msgid "Press OK to install and use this locale.  [%s]"
 msgstr ""
 
-#, python-format
 msgid "Press OK to keep the currently selected skin %s."
 msgstr ""
 
@@ -13445,11 +13208,9 @@ msgstr ""
 msgid "Press OK to toggle the selection."
 msgstr ""
 
-#, python-format
 msgid "Press OK to use this language.  [%s]"
 msgstr ""
 
-#, python-format
 msgid "Press OK to use this locale.  [%s]"
 msgstr ""
 
@@ -13777,7 +13538,6 @@ msgstr ""
 msgid "Random password"
 msgstr ""
 
-#, python-format
 msgid "Rating defined by broadcaster - %d"
 msgstr ""
 
@@ -13844,7 +13604,6 @@ msgstr ""
 msgid "Really shutdown now?"
 msgstr ""
 
-#, python-format
 msgid "Really store at index %2d for current position?"
 msgstr ""
 
@@ -13911,7 +13670,6 @@ msgstr ""
 msgid "receiver software because updates are available."
 msgstr ""
 
-#, python-format
 msgid "Receiver with IP %s is turned off."
 msgstr ""
 
@@ -13939,7 +13697,6 @@ msgstr ""
 msgid "Recording could not be done because the serviceMP3 player is not installed"
 msgstr ""
 
-#, python-format
 msgid "Recording failed: Storage device free size %d MB."
 msgstr ""
 
@@ -13949,7 +13706,6 @@ msgstr ""
 msgid "Recording is not possible in"
 msgstr ""
 
-#, python-format
 msgid "Recording path is \"%s\""
 msgstr ""
 
@@ -14280,7 +14036,6 @@ msgstr ""
 msgid "Rename to:"
 msgstr ""
 
-#, python-format
 msgid "Renamed %s!"
 msgstr ""
 
@@ -14323,7 +14078,6 @@ msgstr ""
 msgid "Replace `- ` in dialogs with colored text per speaker (like teletext subtitles for the hearing impaired)"
 msgstr ""
 
-#, python-format
 msgid ""
 "Replace all '%s' tags with:\n"
 "(NOTE: 'Cancel' cannot undo this!)"
@@ -14512,17 +14266,9 @@ msgstr ""
 msgid "Resume from last position"
 msgstr ""
 
-#, python-format
 msgid "Resume position at %s"
 msgstr ""
 
-#. TRANSLATORS: The string "Resuming playback" flashes for a moment
-#. TRANSLATORS: at the start of a movie, when the user has selected
-#. TRANSLATORS: "Resume from last position" as start behavior.
-#. TRANSLATORS: The purpose is to notify the user that the movie starts
-#. TRANSLATORS: in the middle somewhere and not from the beginning.
-#. TRANSLATORS: (Some translators seem to have interpreted it as a
-#. TRANSLATORS: question or a choice, but it is a statement.)
 msgid "Resuming playback"
 msgstr ""
 
@@ -14715,7 +14461,6 @@ msgstr ""
 msgid "Running"
 msgstr ""
 
-#, python-format
 msgid "Running command %d: %s"
 msgstr ""
 
@@ -14962,13 +14707,9 @@ msgstr ""
 msgid "Scan "
 msgstr ""
 
-#. TRANSLATORS: option name, indicating which type of (DVB-C) modulation should be scanned. The modulation type is printed in '%s'. E.g.: 'Scan QAM16'
-#, python-format
 msgid "Scan %s"
 msgstr ""
 
-#. TRANSLATORS: option name, indicating which type of (DVB-C) band should be scanned. The name of the band is printed in '%s'. E.g.: 'Scan EU MID band'
-#, python-format
 msgid "Scan %s band"
 msgstr ""
 
@@ -14981,7 +14722,6 @@ msgstr ""
 msgid "Scan backwards"
 msgstr ""
 
-#, python-format
 msgid "Scan completed, %d channel found."
 msgid_plural "Scan completed, %d channels found."
 msgstr[0] ""
@@ -15029,12 +14769,9 @@ msgstr ""
 msgid "Scan your network for wireless access points and connect to them using your selected wireless device.\n"
 msgstr ""
 
-#, python-format
 msgid "Scanning %s..."
 msgstr ""
 
-#. TRANSLATORS: The stb is performing a channel scan, progress percentage is printed in '%d' (and '%%' will show a single '%' symbol)
-#, python-format
 msgid "Scanning - %d%% completed"
 msgid_plural "Scanning - %d%% completed"
 msgstr[0] ""
@@ -15043,17 +14780,14 @@ msgstr[1] ""
 msgid "Scanning can't be performed while recordings are in progress."
 msgstr ""
 
-#, python-format
 msgid "Scanning completed, %d channel found"
 msgid_plural "Scanning completed, %d channels found"
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "Scanning completed, %d DAB+ services found."
 msgstr ""
 
-#, python-format
 msgid "Scanning completed, %d service found."
 msgid_plural "Scanning completed, %d services found."
 msgstr[0] ""
@@ -15065,12 +14799,9 @@ msgstr ""
 msgid "Scanning..."
 msgstr ""
 
-#, python-format
 msgid "Scanning: %d services found; validating live result (%d/%d)..."
 msgstr ""
 
-#. TRANSLATORS: The receiver is performing a service scan, progress percentage is printed in '%d' (and '%%' will show a single '%' symbol).
-#, python-format
 msgid "Scanning: %d%% complete"
 msgid_plural "Scanning: %d%% complete"
 msgstr[0] ""
@@ -15268,15 +14999,12 @@ msgstr ""
 msgid "Select 'Yes' to enable use of the LEFT/RIGHT buttons to move PageUp/PageDown when the LEFT/RIGHT buttons are otherwise undefined. This provides legacy navigation for users who prefer it."
 msgstr ""
 
-#, python-format
 msgid "Select 'yes' to include %s multiplexes in your search."
 msgstr ""
 
-#, python-format
 msgid "Select 'yes' to include symbol rate %s in your search."
 msgstr ""
 
-#, python-format
 msgid "Select 'yes' to include the %s band in your search."
 msgstr ""
 
@@ -15362,7 +15090,6 @@ msgstr ""
 msgid "Select action"
 msgstr ""
 
-#, python-format
 msgid "Select action for timer '%s'."
 msgstr ""
 
@@ -15794,7 +15521,6 @@ msgstr ""
 msgid "serious/classical/religious/historical drama"
 msgstr ""
 
-#, python-format
 msgid "Server Error: %s %s is included in bouquets.tv and does not exist in channel list"
 msgstr ""
 
@@ -15906,7 +15632,6 @@ msgstr ""
 msgid "Sesotho"
 msgstr ""
 
-#, python-format
 msgid "Set %s as default?"
 msgstr ""
 
@@ -16156,7 +15881,6 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-#, python-format
 msgid "Shift: %s"
 msgstr ""
 
@@ -16814,7 +16538,6 @@ msgstr ""
 msgid "Skin"
 msgstr ""
 
-#, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr ""
 
@@ -16899,15 +16622,12 @@ msgstr ""
 msgid "Slideshow / station logo"
 msgstr ""
 
-#, python-format
 msgid "Slot %d"
 msgstr ""
 
-#, python-format
 msgid "Slot %s / FBC in %s"
 msgstr ""
 
-#, python-format
 msgid "Slot %s / FBC virtual %s"
 msgstr ""
 
@@ -17076,7 +16796,6 @@ msgstr ""
 msgid "Sorbian"
 msgstr ""
 
-#, python-format
 msgid "Sorry, %s has not been installed!"
 msgstr ""
 
@@ -17331,15 +17050,12 @@ msgstr ""
 msgid "Standby after current event"
 msgstr ""
 
-#, python-format
 msgid "Standby fan %d PWM"
 msgstr ""
 
-#, python-format
 msgid "Standby fan %d voltage"
 msgstr ""
 
-#, python-format
 msgid "Standby in %s"
 msgstr ""
 
@@ -18104,7 +17820,6 @@ msgstr ""
 msgid "template file"
 msgstr ""
 
-#, python-format
 msgid "Temporarily mount as %s"
 msgstr ""
 
@@ -18168,7 +17883,6 @@ msgstr ""
 msgid "Thank you for using the wizard. Your [BRANDMODEL] is now ready for use.\n\nPress OK to start."
 msgstr ""
 
-#, python-format
 msgid "The %d min remaining before the end of the event."
 msgstr ""
 
@@ -18214,7 +17928,6 @@ msgstr ""
 msgid "The data provided will not find services."
 msgstr ""
 
-#, python-format
 msgid ""
 "The directory %s is not writable.\n"
 "Make sure you select a writable directory instead."
@@ -18271,7 +17984,6 @@ msgstr ""
 msgid "The password can not be blank!"
 msgstr ""
 
-#, python-format
 msgid "The path %s already exists."
 msgstr ""
 
@@ -18290,18 +18002,15 @@ msgstr ""
 msgid "The PIN codes you entered are different."
 msgstr ""
 
-#, python-format
 msgid "The process will take approximately %d minutes to complete."
 msgstr ""
 
 msgid "The repository is not public or there is no access."
 msgstr ""
 
-#, python-format
 msgid "The results have been written to %s"
 msgstr ""
 
-#, python-format
 msgid ""
 "The RTL2832 kernel driver blacklist could not be updated:\n"
 "%s"
@@ -18347,11 +18056,9 @@ msgstr ""
 msgid "The user interface of the receiver will now restart to select the selected skin"
 msgstr ""
 
-#, python-format
 msgid "The user interface of your %s %s is restarting"
 msgstr ""
 
-#, python-format
 msgid "The user interface of your %s %s is restarting in debug mode"
 msgstr ""
 
@@ -18367,7 +18074,6 @@ msgstr ""
 msgid "Theater"
 msgstr ""
 
-#, python-format
 msgid "There are at least %d updates available."
 msgstr ""
 
@@ -18380,7 +18086,6 @@ msgstr ""
 msgid "There are no updates available."
 msgstr ""
 
-#, python-format
 msgid "There is %d scrambled recording, which will be unscrambled during Standby."
 msgid_plural "There are %d scrambled recordings, which will be unscrambled during Standby."
 msgstr[0] ""
@@ -18428,7 +18133,6 @@ msgstr ""
 msgid "This DVD RW medium is already formatted - reformatting will erase all content on the disc."
 msgstr ""
 
-#, python-format
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr ""
 
@@ -18453,11 +18157,9 @@ msgstr ""
 msgid "This is a workaround for some devices that wakeup again after switching to standby. The wake up command's from other devices will be ignored for few seconds."
 msgstr ""
 
-#, python-format
 msgid "This is the currently selected language.  [%s]"
 msgstr ""
 
-#, python-format
 msgid "This is the currently selected locale.  [%s]"
 msgstr ""
 
@@ -18632,7 +18334,6 @@ msgstr ""
 msgid "This plugin will be removed."
 msgstr ""
 
-#, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr ""
 
@@ -18701,7 +18402,6 @@ msgid ""
 "Are you sure?"
 msgstr ""
 
-#, python-format
 msgid "This window will automatically close in %d seconds."
 msgstr ""
 
@@ -18798,7 +18498,6 @@ msgstr ""
 msgid "Timer"
 msgstr ""
 
-#, python-format
 msgid "Timer '%s' disabled!"
 msgstr ""
 
@@ -18859,7 +18558,6 @@ msgstr ""
 msgid "Timeshift Active"
 msgstr ""
 
-#, python-format
 msgid "Timeshift failed: Storage device free size %d MB."
 msgstr ""
 
@@ -18917,7 +18615,6 @@ msgid ""
 "Do you want to install it now?"
 msgstr ""
 
-#, python-format
 msgid ""
 "To apply the selected '%s' skin the GUI needs to restart.\n"
 "Would you like to restart the GUI now?"
@@ -18926,7 +18623,6 @@ msgstr ""
 msgid "To audio selection"
 msgstr ""
 
-#, python-format
 msgid ""
 "To save and apply the selected '%s' skin the GUI needs to restart.\n"
 "Would you like to save the selection and restart the GUI now?"
@@ -19388,7 +19084,6 @@ msgstr ""
 msgid "Unable to complete - Kexec Multiboot files missing!"
 msgstr ""
 
-#, python-format
 msgid "Unable to open tuner (%d)"
 msgstr ""
 
@@ -19407,7 +19102,6 @@ msgstr ""
 msgid "Unable to tune the DAB+ satellite feed"
 msgstr ""
 
-#, python-format
 msgid ""
 "Unattended update in progress\n"
 "Please wait until your %s %s reboots\n"
@@ -19447,7 +19141,6 @@ msgstr ""
 msgid "Unencrypted"
 msgstr ""
 
-#, python-format
 msgid "Unexpected error accessing WebIF: %s"
 msgstr ""
 
@@ -19586,13 +19279,11 @@ msgstr ""
 msgid "Update channel list only"
 msgstr ""
 
-#, python-format
 msgid "Update completed, %d package was installed."
 msgid_plural "Update completed, %d packages were installed."
 msgstr[0] ""
 msgstr[1] ""
 
-#, python-format
 msgid "Update completed. Do you want to reboot your %s %s?"
 msgstr ""
 
@@ -19835,7 +19526,6 @@ msgstr ""
 msgid "Use the wizard to set up basic features"
 msgstr ""
 
-#, python-format
 msgid "Use these input device settings for '%s' (%s)?"
 msgstr ""
 
@@ -19875,11 +19565,9 @@ msgstr ""
 msgid "Used:"
 msgstr ""
 
-#, python-format
 msgid "User Band %d"
 msgstr ""
 
-#, python-format
 msgid "User Band %d (%s)"
 msgstr ""
 
@@ -19892,7 +19580,6 @@ msgstr ""
 msgid "user defined"
 msgstr ""
 
-#, python-format
 msgid "User defined 0x%02x"
 msgstr ""
 
@@ -19944,7 +19631,6 @@ msgstr ""
 msgid "Using fixed address"
 msgstr ""
 
-#, python-format
 msgid "Using LNB %d"
 msgstr ""
 
@@ -19954,7 +19640,6 @@ msgstr ""
 msgid "Using the 'Stop' button will cyclically switch displaying events starting: 'outside the interval', 'within the interval', and 'without filtering', instead of 'within the interval', 'outside the interval', and 'without filtering'."
 msgstr ""
 
-#, python-format
 msgid "Using tuner %s"
 msgstr ""
 
@@ -20078,11 +19763,9 @@ msgstr ""
 msgid "Video wizard"
 msgstr ""
 
-#, python-format
 msgid "Video: %dx%d@%gHz"
 msgstr ""
 
-#, python-format
 msgid "Video: %s fps"
 msgstr ""
 
@@ -20107,7 +19790,6 @@ msgstr ""
 msgid "View details"
 msgstr ""
 
-#, python-format
 msgid "View list of available %s extensions."
 msgstr ""
 
@@ -20213,7 +19895,6 @@ msgstr ""
 msgid "VOD"
 msgstr ""
 
-#, python-format
 msgid "Vol: %s"
 msgstr ""
 
@@ -20804,7 +20485,6 @@ msgstr ""
 msgid "Wissenschaft"
 msgstr ""
 
-#, python-format
 msgid "with %d error"
 msgid_plural "with %d errors"
 msgstr[0] ""
@@ -20876,7 +20556,6 @@ msgstr ""
 msgid "World Cultures"
 msgstr ""
 
-#, python-format
 msgid "Would you save the entered PIN %s persistent?"
 msgstr ""
 
@@ -20991,14 +20670,12 @@ msgstr ""
 msgid "Yoruba"
 msgstr ""
 
-#, python-format
 msgid ""
 "You already have a bootlogo installed,\n"
 "would you like to remove\n"
 "\"%s\"?"
 msgstr ""
 
-#, python-format
 msgid ""
 "You already have a channel list installed,\n"
 "would you like to remove\n"
@@ -21073,7 +20750,6 @@ msgstr ""
 msgid "You have not selected any logs to view."
 msgstr ""
 
-#, python-format
 msgid "You have to wait %(min)d minutes, %(sec)d seconds!"
 msgstr ""
 
@@ -21083,7 +20759,6 @@ msgstr ""
 msgid "You must set at least one command"
 msgstr ""
 
-#, python-format
 msgid "You must switch to the service %s (%s - '%s')!\n"
 msgstr ""
 
@@ -21108,31 +20783,24 @@ msgid ""
 "\n"
 msgstr ""
 
-#, python-format
 msgid "You want to install the plugin \"%s\"?"
 msgstr ""
 
-#, python-format
 msgid "You want to remove the plugin \"%s\"?"
 msgstr ""
 
-#, python-format
 msgid "Your %s %s goes to WOL"
 msgstr ""
 
-#, python-format
 msgid "Your %s %s is rebooting"
 msgstr ""
 
-#, python-format
 msgid "Your %s %s is rebooting into android mode"
 msgstr ""
 
-#, python-format
 msgid "Your %s %s is rebooting into recovery mode"
 msgstr ""
 
-#, python-format
 msgid "Your %s %s is shutting down"
 msgstr ""
 
@@ -21142,7 +20810,6 @@ msgstr ""
 msgid "Your %s %s stores the EPG data every (hours)."
 msgstr ""
 
-#, python-format
 msgid "Your %s %s?"
 msgstr ""
 
@@ -21158,7 +20825,6 @@ msgstr ""
 msgid "Your current collection will get lost!"
 msgstr ""
 
-#, python-format
 msgid ""
 "Your frontprocessor will be updated\n"
 "Please wait until your %s %s reboots\n"
@@ -21174,7 +20840,6 @@ msgstr ""
 msgid "Your internet connection is not working."
 msgstr ""
 
-#, python-format
 msgid "Your internet connection is working (IP address: %s)"
 msgstr ""
 
@@ -21215,11 +20880,9 @@ msgstr ""
 msgid "Your receiver does not have an internet connection"
 msgstr ""
 
-#, python-format
 msgid "Your receiver might be unusable now. Please consult the manual for further assistance before rebooting your %s %s."
 msgstr ""
 
-#, python-format
 msgid ""
 "Your receiver will be restarted after the installation of the service\n"
 "Do you want to install \"%s\"?"
@@ -21326,11 +20989,9 @@ msgstr ""
 msgid "Zap Up/Down"
 msgstr ""
 
-#, python-format
 msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr ""
 
-#, python-format
 msgid "Zapped to timer service %s!"
 msgstr ""
 

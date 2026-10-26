@@ -515,4 +515,4 @@ class SwitchToAndroid(Screen):
 
 	def switchAndroid(self):
 		self.onShown.remove(self.switchAndroid)
-		self.session.openWithCallback(self.goAndroid, MessageBox, _("\n Do you want to switch to Android ?"))
+		self.session.openWithCallback(self.goAndroid, MessageBox, _("\n Do you want to switch to Android?"))

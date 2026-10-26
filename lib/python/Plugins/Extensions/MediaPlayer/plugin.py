@@ -769,7 +769,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 	def DeletePlaylistSelected(self, path):
 		if path is not None:
 			self.delname = path[1]
-			self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s ?") % (path[1]))
+			self.session.openWithCallback(self.deleteConfirmed, MessageBox, _("Do you really want to delete %s?") % (path[1]))
 
 	def deleteConfirmed(self, confirmed):
 		if confirmed:
@@ -824,7 +824,7 @@ class MediaPlayer(Screen, InfoBarBase, InfoBarScreenSaver, InfoBarSeek, InfoBarA
 			if not offline.deleteFromDisk(1):
 				result = True
 		if result:
-			self.session.openWithCallback(self.deleteConfirmed_offline, MessageBox, _("Do you really want to delete %s ?") % (name))
+			self.session.openWithCallback(self.deleteConfirmed_offline, MessageBox, _("Do you really want to delete %s?") % (name))
 		else:
 			self.session.openWithCallback(self.close, MessageBox, _("You cannot delete this!"), MessageBox.TYPE_ERROR)
 

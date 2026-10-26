@@ -83,7 +83,7 @@ class TitleProperties(ConfigListScreen, Screen):
 				else:
 					self.list.append(getConfigListEntry("DVD " + "widescreen", self.properties.crop))
 			if len(title.chaptermarks) == 0:
-				self.list.append(getConfigListEntry(_("Auto chapter split every ? minutes (0=never)"), self.properties.autochapter))
+				self.list.append(getConfigListEntry(_("Auto chapter split every? minutes (0=never)"), self.properties.autochapter))
 			infotext = "DVB " + _("Title") + ': ' + title.DVBname + "\n" + _("Description") + ': ' + title.DVBdescr + "\n" + _("Channel") + ': ' + title.DVBchannel + '\n' + _("Start time") + title.formatDVDmenuText(": $D.$M.$Y, $T\n", self.title_idx + 1)
 			chaptermarks = title.getChapterMarks(template="$h:$m:$s")
 			chapters_count = len(chaptermarks)

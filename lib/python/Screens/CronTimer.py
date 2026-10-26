@@ -66,7 +66,7 @@ class CronTimers(Screen):
 		if "Collected errors" in str:
 			self.session.openWithCallback(self.close, MessageBox, _("Seems a background update check is in progress, please try again later."), type=MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 		elif not str:
-			self.session.openWithCallback(self.InstallPackage, MessageBox, _("Do you want to install \"%s\" ?") % self.service_name, MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.InstallPackage, MessageBox, _("Do you want to install \"%s\"?") % self.service_name, MessageBox.TYPE_YESNO)
 		else:
 			self.updateList()
 
@@ -96,7 +96,7 @@ class CronTimers(Screen):
 
 	def RemovedataAvail(self, str, retval, extra_args):
 		if str and config.ntp.timesync.value == "dvb":
-			self.session.openWithCallback(self.RemovePackage, MessageBox, _("Do you want to remove \"%s\" ?") % self.service_name)
+			self.session.openWithCallback(self.RemovePackage, MessageBox, _("Do you want to remove \"%s\"?") % self.service_name)
 		else:
 			self.close()
 

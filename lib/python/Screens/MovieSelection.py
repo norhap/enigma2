@@ -1932,7 +1932,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			subdirs = 0
 			if ".Trash" not in cur_path and config.usage.movielist_trashcan.value:
 				if isFolder(item):
-					are_you_sure = _("Do you really want to move to the trash can ?")
+					are_you_sure = _("Do you really want to move to the trash can?")
 					subdirs += 1
 				else:
 					args = True
@@ -1946,10 +1946,10 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 							return
 						except:
 							msg = "%s\n" % _("Cannot move to the trash can")
-							are_you_sure = _("Do you really want to delete %s ?") % name
+							are_you_sure = _("Do you really want to delete %s?") % name
 					else:
 						msg = "%s\n" % _("Cannot move to the trash can")
-						are_you_sure = _("Do you really want to delete %s ?") % name
+						are_you_sure = _("Do you really want to delete %s?") % name
 				for fn in listdir(cur_path):
 					if (fn != ".") and (fn != ".."):
 						ffn = join(cur_path, fn)
@@ -1966,9 +1966,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					return
 			else:
 				if ".Trash" in cur_path:
-					are_you_sure = _("Do you really want to permanently remove from the trash can ?")
+					are_you_sure = _("Do you really want to permanently remove from the trash can?")
 				else:
-					are_you_sure = _("Do you really want to delete ?")
+					are_you_sure = _("Do you really want to delete?")
 				if args:
 					try:
 						msg = ""
@@ -2020,7 +2020,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						return
 				if int(time()) == int(st.st_mtime):
 					if not args:
-						are_you_sure = _("Do you really want to delete ?")
+						are_you_sure = _("Do you really want to delete?")
 						mbox = self.session.openWithCallback(self.delete, MessageBox, _("File appears to be busy.\n") + are_you_sure)
 						mbox.setTitle(self.getTitle())
 						return
@@ -2037,15 +2037,15 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 						return
 					except:
 						msg = "%s\n" % _("Cannot move to the trash can")
-						are_you_sure = _("Do you really want to delete %s ?") % name
+						are_you_sure = _("Do you really want to delete %s?") % name
 				else:
 					msg = "%s\n" % _("Cannot move to the trash can")
-					are_you_sure = _("Do you really want to delete %s ?") % name
+					are_you_sure = _("Do you really want to delete %s?") % name
 			else:
 				if ".Trash" in cur_path:
-					are_you_sure = _("Do you really want to permamently remove '%s' from the trash can ?") % name
+					are_you_sure = _("Do you really want to permamently remove '%s' from the trash can?") % name
 				else:
-					are_you_sure = _("Do you really want to delete %s ?") % name
+					are_you_sure = _("Do you really want to delete %s?") % name
 				msg = ""
 			mbox = self.session.openWithCallback(self.deleteConfirmed, MessageBox, msg + are_you_sure)
 			mbox.setTitle(self.getTitle())
