@@ -71,6 +71,7 @@ AC_ARG_WITH(boxtype,
 AC_SUBST(MACHINE)
 AC_DEFINE_UNQUOTED(MACHINE,"$MACHINE",[box type])
 
+AM_CONDITIONAL(DREAMBOX, test `echo "$MACHINE" | cut -b 1-2` == "dm" -o `echo "$MACHINE" | cut -b 1-5` == "dream")
 AM_CONDITIONAL(VUSOLO4K, test "$MACHINE" == vusolo4k)
 AM_CONDITIONAL(VUUNO4K, test "$MACHINE" == vuuno4k)
 AM_CONDITIONAL(VUUNO4KSE, test "$MACHINE" == vuuno4kse)
