@@ -62,7 +62,7 @@ msgid "\n %s "
 msgstr "\n %s "
 
 msgid "\n Do you want to switch to Android?"
-msgstr "\n¿Quieres cambiar a Android?"
+msgstr "\n ¿Quieres cambiar a Android?"
 
 msgid "\nAfter pressing OK, please wait!"
 msgstr "\nTras pulsar OK, ¡por favor, espere!"
@@ -969,7 +969,7 @@ msgid "%s GHz"
 msgstr "%s GHz"
 
 msgid "%s is no longer used. Should it be deleted?"
-msgstr "%s no está en uso. Debería eliminarlo?"
+msgstr "%s no está en uso. ¿Debería eliminarlo?"
 
 msgid "%s KSymb/s"
 msgstr "%s KSymb/s"
@@ -1520,7 +1520,7 @@ msgid "A recording is currently running on the selected tuner. Please select a d
 msgstr "El sintonizador está ocupado con una grabación. Por favor, selecciona un sintonizador diferente o para la grabación y reintenta."
 
 msgid "A recording is currently running.\nWhat do you want to do?"
-msgstr "Repetir el evento que está grabando actualmente...Qué quieres hacer?"
+msgstr "Repetir el evento que está grabando actualmente.\n¿Qué quieres hacer?"
 
 msgid "A recording is currently running. Please stop the recording before starting a DiSEqC test."
 msgstr "Actualmente se está ejecutando una grabación. Detenga la grabación antes de iniciar una prueba DiSEqC."
@@ -1529,7 +1529,7 @@ msgid "A recording is currently running. Please stop the recording before starti
 msgstr "Actualmente se está ejecutando una grabación. Detenga la grabación antes de iniciar una búsqueda de canal."
 
 msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Actualmente se está grabando un evento repetido. Que te gustaría hacer?"
+msgstr "Actualmente se está grabando un evento repetido. ¿Que le gustaría hacer?"
 
 msgid "A required tool (%s) was not found."
 msgstr "Una herramienta (%s) no fue encontrada."
@@ -1805,7 +1805,7 @@ msgid "Add service to favourites"
 msgstr "Añadir el canal a favoritos"
 
 msgid "Add services to this bouquet?"
-msgstr "¿Añadir canal al bouquet?"
+msgstr "¿Añadir canales a este bouquet?"
 
 msgid "Add Timer"
 msgstr "Añadir Temporizador"
@@ -2309,7 +2309,7 @@ msgid "Are you sure to delete image:\n"
 msgstr "Estás seguro de eliminar la imagen:\n"
 
 msgid "Are you sure to purge all deleted user bouquets?"
-msgstr "Eliminar todos los bouquets de usuario eliminados?"
+msgstr "¿Eliminar los bouquets de usuario eliminados?"
 
 msgid "Are you sure to reboot to:\n"
 msgstr "Quieres Reiniciar con imagen:\n"
@@ -2318,13 +2318,13 @@ msgid "Are you sure to remove all %s services?"
 msgstr "¿Estás seguro que quieres eliminar todos los canales %s?"
 
 msgid "Are you sure to remove all cable services?"
-msgstr "Eliminar todos los canales de cable?"
+msgstr "¿Eliminar todos los canales de cable?"
 
 msgid "Are you sure to remove all terrestrial services?"
-msgstr "Eliminar todos los canales terrestres?"
+msgstr "¿Eliminar todos los canales terrestres?"
 
 msgid "Are you sure to remove this entry?"
-msgstr "Eliminar esta entrada?"
+msgstr "¿Eliminar esta entrada?"
 
 msgid "Are you sure you want to activate this network configuration?\n\n"
 msgstr "¿Quieres activar esta configuración de Red?\n\n"
@@ -2336,7 +2336,7 @@ msgid "Are you sure you want to delete the EPG data from:\n"
 msgstr "Seguro que quieres eliminar los datos EPG desde:\n"
 
 msgid "Are you sure you want to exit this wizard?"
-msgstr "Salir del asistente?"
+msgstr "¿Salir del asistente?"
 
 msgid "Are you sure you want to reload the EPG data from:\n"
 msgstr "Seguro que quieres volver a cargar los datos EPG desde\":\n"
@@ -4722,7 +4722,7 @@ msgid "Could not find suitable media - Please remove some downloaded images or i
 msgstr "No se pudieron encontrar los medios adecuados. Elimine algunas imágenes descargadas o inserte un medio (por ejemplo, un dispositivo USB) con suficiente espacio libre y vuelva a intentarlo!"
 
 msgid "Could not load medium! No disc inserted?"
-msgstr "No se puso cargar medio! No hay disco insertado?"
+msgstr "No se puso cargar medio! ¿No hay disco insertado?"
 
 msgid "Could not open Picture in Picture"
 msgstr "No se pudo abrir PiP"
@@ -5289,7 +5289,7 @@ msgid "Delete"
 msgstr "Eliminar"
 
 msgid "Delete %s?"
-msgstr "Eliminar %s?"
+msgstr "¿Eliminar %s?"
 
 msgid "Delete all"
 msgstr "Eliminar todos"
@@ -5769,7 +5769,7 @@ msgid "Do you really want to delete %s?"
 msgstr "¿Quieres eliminar %s?"
 
 msgid "Do you really want to delete all '%s' tags?\n(NOTE: 'Cancel' cannot undo this!)"
-msgstr "Desea eliminar el '%s' directorio?"
+msgstr "¿Desea eliminar el '%s' directorio?"
 
 msgid "Do you really want to delete all tags?\n(Note that 'Cancel' will not undo this!)"
 msgstr "¿Deseas eliminar todas las etiquetas?\n(¡Tenga en cuenta que 'Cancelar' no deshará esto!)"
@@ -5778,7 +5778,7 @@ msgid "Do you really want to delete selected language?\n\n"
 msgstr "¿Quieres eliminar el idioma seleccionado?\n\n"
 
 msgid "Do you really want to delete the '%s' bookmark?"
-msgstr "Desea eliminar el '%s' marcador?"
+msgstr "¿Desea eliminar el '%s' marcador?"
 
 msgid "Do you really want to delete the '%s' directory?"
 msgstr "¿Desea eliminar el '%s' directorio?"
@@ -5847,7 +5847,7 @@ msgid "Do you want to preview this DVD before burning?"
 msgstr "¿Quieres previsualizar el DVD antes de quemarlo?"
 
 msgid "Do you want to purge all locales/languages except %s?"
-msgstr "Quiere limpiar todas las configuraciones regionales/idiomas excepto %s?"
+msgstr "¿Quiere limpiar todas las configuraciones regionales/idiomas excepto %s?"
 
 msgid "Do you want to quit the overscan wizard?"
 msgstr "¿Quieres salir del asistente de overscan?"
@@ -6953,7 +6953,7 @@ msgid "EtPortal"
 msgstr "EtPortal"
 
 msgid "Even if a 'Wakeup' PowerTimer starting?"
-msgstr "Incluso si se inicia un temporizador 'Despertar'?"
+msgstr "¿Incluso si se inicia un temporizador 'Despertar'?"
 
 msgid "Even if a 'Zap and Record' recording timer starting?"
 msgstr "¿Incluso si se activa un temporizador de grabación de tipo 'Zap y Record'?"
@@ -9308,7 +9308,7 @@ msgid "is different from the conffile in the new package"
 msgstr "es diferente del archivo de configuración en el nuevo paquete"
 
 msgid "Is the remote control working okay?"
-msgstr "Funciona bien el mando a distancia?"
+msgstr "¿Funciona bien el mando a distancia?"
 
 msgid "Is this video mode ok?"
 msgstr "¿Está bien este modo de video?"
@@ -13333,7 +13333,7 @@ msgid "Really close without saving settings?"
 msgstr "¿Cerrar sin guardar configuración?"
 
 msgid "Really delete completed timers?"
-msgstr "Eliminar los temporizadores completados?"
+msgstr "¿Eliminar los temporizadores completados?"
 
 msgid "Really delete this entry?"
 msgstr "¿Estas seguro de eliminar esta entrada?"
@@ -13750,7 +13750,7 @@ msgid "Remove texts for the hearing impaired from external subtitles (instrument
 msgstr "Elimine los textos para personas con discapacidad auditiva de subtítulos externos (música instrumental o sonidos ambientales, por ejemplo, cuando suena un timbre o se escucha un disparo)."
 
 msgid "Remove the services on scanned transponders before re-adding services?"
-msgstr "Eliminar los canales que ya existen de los transpondedores buscados antes de volver a añadir estos canales?"
+msgstr "¿Eliminar los canales que ya existen de los transpondedores buscados antes de volver a añadir estos canales?"
 
 msgid "Remove this logfile"
 msgstr "Eliminar este registro"
@@ -13894,7 +13894,7 @@ msgid "Reset list order to default"
 msgstr "Restablecer el orden de lista por defecto"
 
 msgid "Reset list order to default?"
-msgstr "Restablecer el orden por defecto de la lista?"
+msgstr "¿Restablecer el orden por defecto de la lista?"
 
 msgid "Reset Order"
 msgstr "Restablecer orden"
@@ -14517,7 +14517,7 @@ msgid "Scan the USB tuner, available DAB+ satellite feeds, or both."
 msgstr "Busque el sintonizador USB, las señales satelitales DAB+ disponibles o ambas."
 
 msgid "Scan using transponders on NIT table? 'No' will use transponders in xml file."
-msgstr "Buscar usando transpondedores en la tabla NIT? 'No' usará transpondedores en el archivo xml."
+msgstr "¿Buscar usando transpondedores en la tabla NIT? 'No' usará transpondedores en el archivo xml."
 
 msgid "Scan wireless networks"
 msgstr "Buscar redes inalámbricas"
@@ -16850,7 +16850,7 @@ msgid "Start RDS interactive"
 msgstr "Ver Rass (RDS) interactivo"
 
 msgid "Start recording?"
-msgstr "Comenzar grabación?"
+msgstr "¿Comenzar grabación?"
 
 msgid "Start scan"
 msgstr "Iniciar búsqueda"
@@ -19164,7 +19164,7 @@ msgid "Use the wizard to set up basic features"
 msgstr "Usar el asistente para funciones básicas"
 
 msgid "Use these input device settings for '%s' (%s)?"
-msgstr "Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"
+msgstr "¿Usar estos ajustes de entrada de dispositivo para '%s' (%s)?"
 
 msgid "Use these settings?"
 msgstr "¿Usar esos ajustes?"
@@ -19173,7 +19173,7 @@ msgid "Use this option to select if debug logs of internal enigma2 activities ar
 msgstr "Utilice esta opción para seleccionar si se crean logs de depuración de las actividades internas de enigma2 y, de ser así, cuántos detalles se registrarán. Estos logs pueden ser útiles para que los desarrolladores encuentren y solucionen problemas. Desactívelo cuando encuentre lo que busca!!."
 
 msgid "Use this video enhancement settings?"
-msgstr "¿Usar esta configuración de mejora de video??"
+msgstr "¿Usar esta configuración de mejora de video?"
 
 msgid "Use trash can in movie list"
 msgstr "Usar papelera en lista de peliculas"
@@ -19659,7 +19659,7 @@ msgid "Want to format the device to Linux file system?\nAll data on the device w
 msgstr "¿Quiere formatear el dispositivo en el sistema de archivos Linux?\n¡Se perderán todos los datos del dispositivo!"
 
 msgid "Want to restore all deleted images?"
-msgstr "Quiere restaurar todas las imágenes eliminadas?"
+msgstr "¿Quiere restaurar todas las imágenes eliminadas?"
 
 msgid "War"
 msgstr "Asistente"
@@ -20399,7 +20399,7 @@ msgid "Your %s %s stores the EPG data every (hours)."
 msgstr "Su %s %s almacena los datos guardados en EPG cada (horas)."
 
 msgid "Your %s %s?"
-msgstr "Su %s %s?"
+msgstr "¿Su %s %s?"
 
 msgid "Your [BRANDMODEL] is now ready to use.\n\nPlease press OK to continue."
 msgstr "Su [BRANDMODEL] ya está listo para usar.\n\nPor favor pulse OK para continuar."
@@ -20459,7 +20459,7 @@ msgid "Your receiver might be unusable now. Please consult the manual for furthe
 msgstr "Su receptor podría estar inutilizable ahora. Consulte el manual para obtener más ayuda antes de reiniciar su %s %s."
 
 msgid "Your receiver will be restarted after the installation of the service\nDo you want to install \"%s\"?"
-msgstr "Su receptor se reiniciará tras la instalación del canal\nQuiere instalar \"%s\"?"
+msgstr "Su receptor se reiniciará tras la instalación del canal\n¿Quiere instalar \"%s\"?"
 
 msgid "Your receiver will be restarted after the removal of the service\nDo you want to remove the service now?"
 msgstr "Su receptor se reiniciará tras la eliminación del servicio.\n¿Desea eliminar el servicio ahora?"
@@ -20510,10 +20510,10 @@ msgid "Zap and record"
 msgstr "Zapea y graba"
 
 msgid "Zap back to previously tuned service?"
-msgstr "Volver al canal previamente sintonizado?"
+msgstr "¿Volver al canal previamente sintonizado?"
 
 msgid "Zap back to service before positioner setup?"
-msgstr "Volver al canal antes de la configuración del motor?"
+msgstr "¿Volver al canal antes de la configuración del motor?"
 
 msgid "Zap bouquets blindly on zap buttons"
 msgstr "Zapear bouquets a ciegas en botones de zapeo"
