@@ -60,6 +60,9 @@ class ServiceInfo(Poll, Converter):
 	DAB_ENSEMBLE_ID = 47
 	DAB_TECHNICAL = 48
 	DAB_PTY = 49
+	DAB_SAMPLE_RATE = 50
+	DAB_CHANNEL_MODE = 51
+	DAB_STEREO = 52
 	DAB_TEXT_FIELDS = {
 		"DABArtist": iServiceInformation.sTagArtist,
 		"DABBitrate": iServiceInformation.sTagBitrate,
@@ -85,10 +88,13 @@ class ServiceInfo(Poll, Converter):
 			"IsStereo": (self.AUDIO_STEREO, (iPlayableService.evUpdatedInfo,)),
 			"IsCrypted": (self.IS_CRYPTED, (iPlayableService.evUpdatedInfo,)),
 			"IsDAB": (self.IS_DAB, (iPlayableService.evStart, iPlayableService.evUpdatedInfo)),
+			"DABChannelMode": (self.DAB_CHANNEL_MODE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABEnsembleId": (self.DAB_ENSEMBLE_ID, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABLanguage": (self.DAB_LANGUAGE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABPTY": (self.DAB_PTY, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABProtection": (self.DAB_PROTECTION, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABSampleRate": (self.DAB_SAMPLE_RATE, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
+			"DABStereo": (self.DAB_STEREO, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"DABTechnical": (self.DAB_TECHNICAL, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"IsDVBI": (self.IS_DVBI, (iPlayableService.evStart, iPlayableService.evEnd, iPlayableService.evUpdatedInfo)),
 			"IsSoftCSA": (self.IS_SOFTCSA, (iPlayableService.evUpdatedInfo,)),
@@ -207,12 +213,15 @@ class ServiceInfo(Poll, Converter):
 	def getBoolean(self):
 		service = self.source.service
 		info = service and service.info()
-		if self.type == self.DAB_QUALITY:
-			return self.value >= 0  # Availability, including a measured zero.
-		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL, self.DAB_PTY):
-			return bool(self.text)
 		if not info:
 			return False
+		if self.type == self.DAB_QUALITY:
+			return self.value >= 0  # Availability, including a measured zero.
+		if self.type == self.DAB_STEREO:
+			serviceRef = info.getInfoString(iServiceInformation.sServiceref) if info else ""
+			return bool(serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB and info.getInfoString(iServiceInformation.sTagChannelMode) in ("stereo", "joint-stereo"))
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL, self.DAB_PTY, self.DAB_SAMPLE_RATE, self.DAB_CHANNEL_MODE):
+			return bool(self.text)
 		if self.type == self.IS_DVBI:
 			return bool(service and getattr(self.source, "isDVBI", False))
 		video_height = self._getVideoHeight(info)
@@ -308,7 +317,7 @@ class ServiceInfo(Poll, Converter):
 		info = service and service.info()
 		if not info:
 			return result
-		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_QUALITY, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL, self.DAB_PTY):
+		if self.type in (self.DAB_LANGUAGE, self.DAB_PROTECTION, self.DAB_METADATA, self.DAB_QUALITY, self.DAB_ENSEMBLE_ID, self.DAB_TECHNICAL, self.DAB_PTY, self.DAB_SAMPLE_RATE, self.DAB_CHANNEL_MODE, self.DAB_STEREO):
 			if info:
 				serviceRef = info.getInfoString(iServiceInformation.sServiceref)
 				if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
@@ -318,6 +327,12 @@ class ServiceInfo(Poll, Converter):
 						result = dabMetadata.programmeTypeName(info.getInfo(iServiceInformation.sDABPTY), info.getInfo(iServiceInformation.sDABPTYTable))
 					elif self.type == self.DAB_PROTECTION:
 						result = info.getInfoString(iServiceInformation.sDABProtection)
+					elif self.type == self.DAB_SAMPLE_RATE:
+						sampleRate = self.value
+						result = f"{sampleRate / 1000:g} kHz" if sampleRate > 0 else ""
+					elif self.type in (self.DAB_CHANNEL_MODE, self.DAB_STEREO):
+						channelModes = {"mono": _("Mono"), "stereo": _("Stereo"), "joint-stereo": _("Joint stereo"), "dual-channel": _("Dual channel"), "surround-5.1": _("Surround 5.1"), "surround-7.1": _("Surround 7.1"), "surround": _("Surround")}
+						result = channelModes.get(info.getInfoString(iServiceInformation.sTagChannelMode), "")
 					elif self.type == self.DAB_QUALITY:
 						quality = self.value
 						result = f"{quality}%" if quality >= 0 else ""
@@ -418,6 +433,13 @@ class ServiceInfo(Poll, Converter):
 		result = -1
 		service = self.source.service
 		info = service and service.info()
+		if self.type == self.DAB_SAMPLE_RATE:
+			serviceRef = info.getInfoString(iServiceInformation.sServiceref) if info else ""
+			if serviceRef and eServiceReference(serviceRef).type == eServiceReference.idServiceDAB:
+				sampleRate = info.getInfo(iServiceInformation.sDABSampleRate)
+				if sampleRate > 0:
+					result = sampleRate
+			return result
 		if self.type == self.DAB_QUALITY:
 			if info:
 				serviceRef = info.getInfoString(iServiceInformation.sServiceref)
