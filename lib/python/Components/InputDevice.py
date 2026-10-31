@@ -2,7 +2,7 @@ from enigma import eRCInput
 
 from fcntl import ioctl
 from os import O_NONBLOCK, O_RDWR, close, listdir, open, write
-from os.path import isdir, isfile
+from os.path import isdir, isfile, join
 from platform import machine
 from keyids import KEYIDS, KEYIDNAMES
 from struct import pack
@@ -29,9 +29,9 @@ class InputDevices:
 		self.devices = {}
 		self.currentDevice = None
 		for device in sorted(listdir("/dev/input/")):
-			if isdir("/dev/input/%s" % device):
+			if isdir(join("/dev/input", device)):
 				continue
-			if device not in ("mouse0", "mice"):
+			if not device.startswith("event") or not device[5:].isdigit() or isdir(join("/dev/input/%s" % device)):
 				try:
 					buffer = b"\0" * 512
 					self.fd = open("/dev/input/%s" % device, O_RDWR | O_NONBLOCK)
@@ -39,7 +39,8 @@ class InputDevices:
 					self.name = self.name[:self.name.find("\0")]
 					close(self.fd)
 				except OSError as err:
-					print("[InputDevice] Error: device='%s' getInputDevices <ERROR: ioctl(EVIOCGNAME): '%s'>" % (device, str(err)))
+					if device not in ("mouse0", "mice"):
+						print("[InputDevice] Error: device='%s' getInputDevices <ERROR: ioctl(EVIOCGNAME): '%s'>" % (device, str(err)))
 					self.name = None
 				if self.name:
 					devType = self.getInputDeviceType(self.name.lower())

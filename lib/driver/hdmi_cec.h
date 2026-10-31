@@ -1,6 +1,14 @@
 #ifndef _hdmi_cec_h
 #define _hdmi_cec_h
 
+#ifndef SWIG
+#include <condition_variable>
+#include <deque>
+#include <mutex>
+#include <thread>
+#include <utility>
+#endif
+
 #include <lib/driver/rc.h>
 #include <lib/python/connections.h>
 
@@ -17,6 +25,8 @@ public:
 	virtual int getAddress() = 0;
 	virtual int getCommand() = 0;
 	virtual int getData(char *data, int length) = 0;
+	virtual int getDataLength() = 0;
+	virtual int getDataByte(int index) = 0;
 	virtual int getControl0() = 0;
 	virtual int getControl1() = 0;
 	virtual int getControl2() = 0;
@@ -95,6 +105,8 @@ public:
 		int getAddress();
 		int getCommand();
 		int getData(char *data, int length);
+		int getDataLength() { return dataLength; }
+		int getDataByte(int index) { return index >= 0 && index < dataLength ? messageData[index] : 0; }
 		int getControl0() { return control0; }
 		int getControl1() { return control1; }
 		int getControl2() { return control2; }
@@ -103,13 +115,31 @@ public:
 	void sendMessage(struct cec_message &message);
 #endif
 protected:
+#ifndef SWIG
+	/* drivers whose transmit blocks until the follower answers send from a thread */
+	std::jthread sendThread;
+	std::mutex sendMutex;
+	std::condition_variable sendCondition;
+	/* with the logical address it was sent from */
+	std::deque<std::pair<struct cec_message, unsigned char>> sendQueue;
+	bool sendStop;
+	void startSendThread();
+	void stopSendThread();
+	void sendThreadLoop();
+	void transmitMessage(const struct cec_message &message, unsigned char source) const;
+#endif
 	static eHdmiCEC *instance;
 	bool linuxCEC;
+	bool amlogicCEC;
+	bool eventsSuspended;
 	unsigned char physicalAddress[2];
 	bool fixedAddress;
+	bool cecEnabled;
+	bool reportActiveMenu;
 	unsigned char deviceType, logicalAddress;
 	int hdmiFd;
 	ePtr<eSocketNotifier> messageNotifier;
+	void initializeCEC();
 	void addressPoll();
 	void reportPhysicalAddress();
 	void getAddressInfo();
@@ -129,10 +159,16 @@ public:
 	PSignal1<void, ePtr<iCECMessage> &> messageReceived;
 	PSignal1<void, int> addressChanged;
 	void sendMessage(unsigned char address, unsigned char cmd, char *data, int length);
+	void sendMessageBytes(unsigned char address, unsigned char cmd, char *hexdata);
 	int getLogicalAddress();
 	int getPhysicalAddress();
 	void setFixedPhysicalAddress(int address);
 	int getDeviceType();
+	bool suspendEvents();
+	bool resumeEvents();
+	bool areEventsSuspended() const { return eventsSuspended; }
+	void setEnabled(bool enabled);
+	void setReportActiveMenu(bool enabled);
 };
 
 #ifndef SWIG
@@ -144,5 +180,4 @@ public:
 	const char *getDescription() const;
 };
 #endif
-
 #endif
