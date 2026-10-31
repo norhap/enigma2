@@ -1325,7 +1325,7 @@ class HdmiCec:
 
 			# handle wakeup requests from the tv
 			wakeup = False
-			eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] Edision 4k double key 0x44 0x45 Pressed and Released in C++ -> Open Main Menu automatic!
+			# eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] cmd 0x44 inject 0x8b (changed to -1 in C) default possible open Main Menu.
 			if address == 0 and cmd == 0x44 and ctrl0 in (64, 109):  # handle wakeup from tv hdmi-cec menu (e.g. panasonic tv apps, viera link)
 				wakeup = True
 			elif not checkstate and config.hdmicec.handle_tv_wakeup.value != "disabled":
@@ -1826,7 +1826,8 @@ class HdmiCec:
 				sleep(max(config.hdmicec.minimum_send_interval.value, 250) / 1000.0)
 
 	def configEnabled(self, configElement):
-		eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] Edision 4k double key 0x44 0x45 Pressed and Released in C++ -> Open Main Menu automatic!
+		# eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] cmd 0x44 inject 0x8b (changed to -1 in C) default possible open Main Menu.
+		eHdmiCEC.getInstance().setReportActiveMenu(config.hdmicec.report_active_menu.value)
 		eHdmiCEC.getInstance().setEnabled(config.hdmicec.enabled.value)
 		if config.hdmicec.enabled.value:
 			self.setFixedPhysicalAddress(config.hdmicec.fixed_physical_address.value)

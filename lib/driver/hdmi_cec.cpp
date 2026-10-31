@@ -399,7 +399,7 @@ void eHdmiCEC::getAddressInfo()
 	{
 		bool hasdata = false;
 		struct addressinfo addressinfo = {};
-		
+
 		if (linuxCEC)
 		{
 			__u16 phys_addr;
@@ -701,6 +701,8 @@ void eHdmiCEC::hdmiEvent(int what)
 						case 0x45: /* key released */
 						{
 							long code = translateKey(pressedkey);
+							if (code < 0)
+								break;
 							if (keypressed) code |= 0x80000000;
 							for (std::list<eRCDevice*>::iterator i(listeners.begin()); i != listeners.end() && !eventsSuspended; ++i)
 							{
@@ -728,6 +730,9 @@ long eHdmiCEC::translateKey(unsigned char code)
 	long key = 0;
 	switch (code)
 	{
+		case 0x40:
+			key = 0x74;  /* KEY_POWER */
+			break;
 		case 0x32:
 			key = 0x8b;
 			break;
@@ -834,8 +839,8 @@ long eHdmiCEC::translateKey(unsigned char code)
 			key = 0x190;
 			break;
 		default:
-			key = 0x8b;
 			eDebug("eHdmiCEC: unknown code 0x%02X", (unsigned int)(code & 0xFF));
+			key = -1;
 			break;
 	}
 	return key;
