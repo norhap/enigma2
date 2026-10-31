@@ -15,8 +15,8 @@ from keyids import KEYIDS
 from Components.NimManager import nimmanager
 from Components.ServiceList import refreshServiceList
 from Components.SystemInfo import BoxInfo, SystemInfo, MODEL
+from Components.Language import language
 from Tools.Directories import SCOPE_HDD, SCOPE_TIMESHIFT, SCOPE_CONFIG, defaultRecordingLocation, fileContains, fileWriteLine, resolveFilename
-from Tools.DAB import LANGUAGE_DATA
 
 MODULE_NAME = __name__.split(".")[-1]
 originalAudioTracks = "orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth"
@@ -1737,7 +1737,7 @@ def InitUsageConfig():
 		"tg", "te", "th", "tr", "tk", "uk", "ur", "ug", "uz", "cy", "xh",
 		"yi", "yo", "zu", "et"
 	]
-	langs_ai = [(x, LANGUAGE_DATA[x][1]) for x in langs_ai]
+	langs_ai = [(x, language.LANGUAGE_DATA[x][1]) for x in langs_ai]
 	langs_ai.append(("zh-CN", _("Chinese (Simplified)")))
 	langs_ai.append(("ceb", _("Cebuano")))
 	langs_ai.append(("haw", _("Hawaiian")))

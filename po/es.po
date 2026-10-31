@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 19:15+0100\n"
+"POT-Creation-Date: 2026-10-30 20:23+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -3703,8 +3703,8 @@ msgstr "Chichewa / Chewa / Nyanja"
 msgid "Children"
 msgstr "Niños"
 
-msgid "Children's programmes"
-msgstr "Programas para niños"
+msgid "Children's"
+msgstr "Para niños"
 
 msgid "Children/Youth"
 msgstr "Niños/Jóvenes"
@@ -3716,7 +3716,7 @@ msgid "Childrens"
 msgstr "Niños"
 
 msgid "childrens (general)"
-msgstr "niños/adolescentes (general)"
+msgstr "niños/(general)"
 
 msgid "childrens's youth program (general)"
 msgstr "niños/adolescentes (general)"
@@ -6191,10 +6191,7 @@ msgid "Eastern"
 msgstr "Este"
 
 msgid "Easy Listening"
-msgstr "Escucha fácil"
-
-msgid "Easy Listening Music"
-msgstr "Música Ligera"
+msgstr "Música ligera"
 
 msgid "easyCIconfigMenu"
 msgstr "menú de ajustes CI sencillo"
@@ -7943,7 +7940,7 @@ msgid "GCC version: "
 msgstr "Versión GCC: "
 
 msgid "General"
-msgstr "Espectáculo General"
+msgstr "General"
 
 msgid "General AC3 delay"
 msgstr "Retardo general AC3"
@@ -7955,7 +7952,7 @@ msgid "General bluetooth audio delay"
 msgstr "Retardo General audio bluetooth"
 
 msgid "General Children's"
-msgstr "Retardo general AC3"
+msgstr "Infantil general"
 
 msgid "General Education"
 msgstr "Educación General"
@@ -7964,7 +7961,7 @@ msgid "General Movie"
 msgstr "Película General"
 
 msgid "General Music"
-msgstr "Genérico"
+msgstr "Música general"
 
 msgid "General News"
 msgstr "Espectáculo General"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-27 19:15+0100\n"
+"POT-Creation-Date: 2026-10-30 20:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3817,7 +3817,7 @@ msgstr ""
 msgid "Children"
 msgstr ""
 
-msgid "Children's programmes"
+msgid "Children's"
 msgstr ""
 
 msgid "Children/Youth"
@@ -6340,9 +6340,6 @@ msgid "Eastern"
 msgstr ""
 
 msgid "Easy Listening"
-msgstr ""
-
-msgid "Easy Listening Music"
 msgstr ""
 
 msgid "easyCIconfigMenu"
