@@ -146,6 +146,7 @@ eHdmiCEC::eHdmiCEC()
 	fixedAddress = false;
 	cecEnabled = false;
 	reportActiveMenu = false;
+	keyInjectionEnabled = false;
 	physicalAddress[0] = 0x10;
 	physicalAddress[1] = 0x00;
 	logicalAddress = CEC_LOG_ADDR_TUNER_1;
@@ -548,6 +549,11 @@ void eHdmiCEC::setReportActiveMenu(bool enabled)
 	reportActiveMenu = enabled;
 }
 
+void eHdmiCEC::setKeyInjectionEnabled(bool enabled)
+{
+	keyInjectionEnabled = enabled;
+}
+
 bool eHdmiCEC::getActiveStatus()
 {
 	bool active = true;
@@ -688,7 +694,7 @@ void eHdmiCEC::hdmiEvent(int what)
 					eDebugNoNewLine(" %02X", rxmessage.data[i]);
 				}
 				eDebugNoNewLine("\n");
-				if (reportActiveMenu)
+				if (reportActiveMenu && keyInjectionEnabled)
 				{
 					switch (rxmessage.data[0])
 					{

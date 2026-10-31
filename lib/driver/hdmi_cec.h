@@ -136,6 +136,7 @@ protected:
 	bool fixedAddress;
 	bool cecEnabled;
 	bool reportActiveMenu;
+	bool keyInjectionEnabled;
 	unsigned char deviceType, logicalAddress;
 	int hdmiFd;
 	ePtr<eSocketNotifier> messageNotifier;
@@ -169,6 +170,7 @@ public:
 	bool areEventsSuspended() const { return eventsSuspended; }
 	void setEnabled(bool enabled);
 	void setReportActiveMenu(bool enabled);
+	void setKeyInjectionEnabled(bool enabled);
 };
 
 #ifndef SWIG

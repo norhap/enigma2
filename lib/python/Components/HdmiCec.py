@@ -680,6 +680,10 @@ class HdmiCec:
 		self.sendMessage(5, "givesystemaudiostatus")
 		self.scheduleSystemAudioModeRequest(reset=True)
 
+		self.keyInjectionTimer = eTimer()
+		self.keyInjectionTimer.callback.append(self._enableKeyInjection)
+		self.keyInjectionTimer.start(2000, True)
+
 	def _saveVolumeForwardingState(self):
 		saved = False
 		for path in VOLUME_FORWARDING_STATE_FILES:
@@ -947,6 +951,9 @@ class HdmiCec:
 			self.systemAudioModeMessages = []
 		if self.shouldRequestSystemAudioMode() and not self.systemAudioModeTimer.isActive():
 			self.systemAudioModeTimer.start(delay, True)
+
+	def _enableKeyInjection(self):
+		eHdmiCEC.getInstance().setKeyInjectionEnabled(True)
 
 	def requestSystemAudioMode(self):
 		if not self.shouldRequestSystemAudioMode():
@@ -1325,7 +1332,7 @@ class HdmiCec:
 
 			# handle wakeup requests from the tv
 			wakeup = False
-			eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] Edision 4k double key 0x44 0x45 Pressed and Released in C++ -> Open Main Menu automatic!
+			# eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] Edision 4k double key 0x44 0x45 Pressed and Released in C++ -> Open Main Menu automatic!
 			if address == 0 and cmd == 0x44 and ctrl0 in (64, 109):  # handle wakeup from tv hdmi-cec menu (e.g. panasonic tv apps, viera link)
 				wakeup = True
 			elif not checkstate and config.hdmicec.handle_tv_wakeup.value != "disabled":
@@ -1826,7 +1833,9 @@ class HdmiCec:
 				sleep(max(config.hdmicec.minimum_send_interval.value, 250) / 1000.0)
 
 	def configEnabled(self, configElement):
-		eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] Edision 4k double key 0x44 0x45 Pressed and Released in C++ -> Open Main Menu automatic!
+		# eHdmiCEC.getInstance().setReportActiveMenu(False)  # [norhap] Edision 4k double key 0x44 0x45 Pressed and Released in C++ -> Open Main Menu automatic!
+		eHdmiCEC.getInstance().setReportActiveMenu(config.hdmicec.report_active_menu.value)
+		eHdmiCEC.getInstance().setEnabled(config.hdmicec.enabled.value)
 		if config.hdmicec.enabled.value:
 			self.setFixedPhysicalAddress(config.hdmicec.fixed_physical_address.value)
 		else:
