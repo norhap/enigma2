@@ -22,7 +22,7 @@ from gettext import ngettext
 
 inStandby = None
 infoBarInstance = None
-# TVinStandby = None
+TVinStandby = None
 
 QUIT_SHUTDOWN = 1
 QUIT_REBOOT = 2
@@ -41,16 +41,19 @@ QUIT_WOL = 45
 
 class TVstate:  # load in Navigation
 	def __init__(self):
-		# global TVinStandby
-		# if TVinStandby is not None:
-		# 	print("[Standby] only one TVstate instance is allowed!")
-		# TVinStandby = self
+		global TVinStandby
+		if TVinStandby is not None:
+			print("[Standby] only one TVstate instance is allowed!")
+		TVinStandby = self
+		self.hdmicec_instance = None
 		try:
 			import Components.HdmiCec
 			self.hdmicec_instance = Components.HdmiCec.hdmi_cec.instance
 			self.hdmicec_ok = self.hdmicec_instance and config.hdmicec.enabled.value
+			self.hdmicec_pending = self.hdmicec_ok and getattr(self.hdmicec_instance, "tv_state_pending", True)
 		except:
 			self.hdmicec_ok = False
+			self.hdmicec_pending = False
 
 		if not self.hdmicec_ok:
 			print('[Standby] HDMI-CEC is not enabled or unavailable !!!')
@@ -74,10 +77,12 @@ class TVstate:  # load in Navigation
 				return config.hdmicec.control_tv_wakeup.value and not config.hdmicec.tv_wakeup_zapandrecordtimer.value
 			elif 'wakeuppowertimer' in value:
 				return config.hdmicec.control_tv_wakeup.value and not config.hdmicec.tv_wakeup_wakeuppowertimer.value
+			elif 'waitfortimesync' in value:
+				return config.hdmicec.control_tv_wakeup.value and not (config.hdmicec.deepstandby_waitfortimesync.value and config.workaround.deeprecord.value)
 		return False
 
 	def getTVstate(self, value):
-		if self.hdmicec_ok:
+		if self.hdmicec_ok and not self.hdmicec_pending:
 			if not config.hdmicec.check_tv_state.value or self.hdmicec_instance.sendMessagesIsActive():
 				return False
 			elif value == 'on':
@@ -91,11 +96,15 @@ class TVstate:  # load in Navigation
 		return False
 
 	def setTVstate(self, value):
+		if self.hdmicec_instance and value in ('on', 'power'):
+			self.hdmicec_instance.startupPending = False
 		if self.hdmicec_ok:
 			if value == 'on' or (value == 'power' and config.hdmicec.handle_deepstandby_events.value and not self.hdmicec_instance.handleTimer.isActive()):
 				self.hdmicec_instance.wakeupMessages()
 			elif value == 'standby':
 				self.hdmicec_instance.standbyMessages()
+			elif value == 'power' and not config.hdmicec.handle_deepstandby_events.value:
+				self.hdmicec_instance.scheduleSystemAudioModeRequest()
 
 
 tvState = TVstate()
@@ -204,6 +213,18 @@ class StandbyScreen(Screen):
 		self.onFirstExecBegin.append(self.__onFirstExecBegin)
 		self.onClose.append(self.__onClose)
 
+	def Power(self):
+		if os.path.exists("/usr/script/StandbyLeave.sh"):
+			Console().ePopen("/usr/script/StandbyLeave.sh")
+		if BRAND in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
+			output = "/proc/stb/hdmi/output"
+			if os.path.isfile(output):
+				with open(output, "w") as hdmi:
+					hdmi.write("on")
+		print("[Standby] leave standby")
+		SystemInfo["StandbyState"] = False
+		self.close(True)
+
 	def __onClose(self):
 		global inStandby
 		inStandby = None
@@ -237,19 +258,6 @@ class StandbyScreen(Screen):
 		self.session.screen["Standby"].boolean = True
 		if self.StandbyCounterIncrease:
 			config.misc.standbyCounter.value += 1
-
-	def Power(self):
-		print("[Standby] leave standby")
-		SystemInfo["StandbyState"] = False
-		self.close(True)
-
-		if os.path.exists("/usr/script/StandbyLeave.sh"):
-			Console().ePopen("/usr/script/StandbyLeave.sh")
-		if BRAND in ("dinobot",) or SystemInfo["HiSilicon"] or MODEL in ("sfx6008", "sfx6018"):
-			output = "/proc/stb/hdmi/output"
-			if os.path.isfile(output):
-				with open(output, "w") as hdmi:
-					hdmi.write("on")
 
 	def setMute(self):
 		self.wasMuted = eDVBVolumecontrol.getInstance().isMuted()
