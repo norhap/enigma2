@@ -24,6 +24,7 @@ from Tools.LoadPixmap import LoadPixmap
 
 FOCUS_CONFIG, FOCUS_STREAMS = range(2)
 [PAGE_AUDIO, PAGE_SUBTITLES] = ["audio", "subtitles"]
+SUBTITLE_PGS = 3  # iSubtitleOutput track type: 0 DVB, 1 teletext, 2 text, 3 PGS
 
 selectionpng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_GUISKIN, "icons/selectioncross.png"))
 
@@ -421,18 +422,25 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						languagetype = x[5].split()
 						if languagetype and len(languagetype) == 2:
 							language = "%s (%s)" % (language, languagetype[1])
+						elif x[5] != language:
+							language = "%s (%s)" % (language, x[5])
 					if x[0] == 0:
 						description = "DVB"
 						number = "%x" % (x[1])
+					elif x[0] == SUBTITLE_PGS:
+						description = "PGS"
+						number = str(int(number) + 1)
 					elif x[0] == 1:
 						description = "teletext"
 						number = "%x%02x" % (x[3] and x[3] or 8, x[2])
 					elif x[0] == 2:
-						types = (_("unknown"), _("embedded"), _("SSA file"), _("ASS file"), _("SRT file"), _("VOB file"), _("PGS file"))
+						types = ("unknown", "embedded", "SSA file", "ASS file",
+							"SRT file", "VOB file", "PGS file", "WebVTT")
 						try:
 							description = types[x[2]]
 						except Exception:
 							description = _("unknown") + ": %s" % x[2]
+						number = str(int(number) + 1)
 					streams.append((x, "", number, description, language, selected, selectionpng if selected == "X" else None))
 					idx += 1
 			conflist.append(getConfigListEntry(_("To audio selection"), self.settings.menupage))
@@ -759,6 +767,11 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("ai_enabled"),
 				getConfigMenuItem("ai_translate_to"),
 				getConfigMenuItem("ai_subtitle_colors")
+			])
+		if sub[0] == SUBTITLE_PGS:  # bitmap, only the position settings reach it
+			menu.extend([
+				getConfigMenuItem("dvb_subtitles_original_position"),
+				getConfigMenuItem("subtitle_position")
 			])
 		if sub[0] == 0:  # dvb
 			menu = [

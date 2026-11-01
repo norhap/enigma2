@@ -244,6 +244,9 @@ public:
 		GstPad* pad;
 		audiotype_t type;
 		std::string language_code; /* iso-639, if available. */
+		/* [norhap] track title*/
+		std::string title;
+		/* [norhap] track title*/
 		std::string codec; /* clear text codec description */
 		int channels; /* selected-track channels; normally caps, refined from DTS-HD XLL when available. */
 		audioStream()
@@ -260,6 +263,9 @@ public:
 		GstPad* pad;
 		subtype_t type;
 		std::string language_code; /* iso-639, if available. */
+		/* [norhap] track title*/
+		std::string title;
+		/* [norhap] track title*/
 		subtitleStream()
 			:pad(0) { }
 		bool operator==(const subtitleStream& rhs) const { return type == rhs.type && language_code == rhs.language_code; }

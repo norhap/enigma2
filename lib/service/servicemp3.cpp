@@ -1899,11 +1899,11 @@ eServiceMP3::eServiceMP3(eServiceReference ref):
 		filename_str = m_ref.path;
 		filename = m_ref.path.c_str();
 	}
-	
+
 	/* [norhap] */
 	if (!m_ref.compareSref.empty())
 		filename = m_ref.compareSref.c_str();
-	/* [norhap] */	
+	/* [norhap] */
 
 	std::string realFilename_str;
 	const char *realFilename;
@@ -2241,7 +2241,7 @@ eServiceMP3::~eServiceMP3()
 		gst_object_unref(bus);
 	}
 	// ...
-	stop(); 
+	stop();
 
 	if (m_decoder)
 	{
@@ -2267,9 +2267,9 @@ eServiceMP3::~eServiceMP3()
 		gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
 		/* [norhap] */
 		gst_object_unref(GST_OBJECT(m_gst_playbin));
-		/* [norhap] */		
+		/* [norhap] */
 		m_gst_playbin = nullptr;
-		/* [norhap] */		
+		/* [norhap] */
 		eDebug("[eServiceMP3] destruct!");
 	}
 	m_new_dvb_subtitle_page_connection = 0;
@@ -2924,7 +2924,7 @@ RESULT eServiceMP3::unpause()
 
 	/* no need to unpase if we are not paused already [norhap] */
 	if (std::abs(m_currentTrickRatio - 1.0) < 1e-9 && !m_paused)
-	/* [norhap] */		
+	/* [norhap] */
 	{
 		eDebug("[eServiceMP3] trickSeek no need to unpause!");
 		return 0;
@@ -3049,7 +3049,7 @@ RESULT eServiceMP3::trickSeek(gdouble ratio)
 	}
 	/* [norhap] */
 	bool unpause = (m_currentTrickRatio == 1.0 && ratio == 1.0);
-	/* [norhap] */	
+	/* [norhap] */
 	if (unpause)
 	{
 		GstElement *source = NULL;
@@ -3135,7 +3135,7 @@ seek_unpause:
 	}
 	/* [norhap] */
 	setHDAudioAuxState(m_gst_playbin, ratio == 1.0 ? GST_STATE_PLAYING : GST_STATE_PAUSED);
-	/* [norhap] */	
+	/* [norhap] */
 	m_prev_decoder_time = -1;
 	m_decoder_time_valid_state = 0;
 	return 0;
@@ -4129,9 +4129,9 @@ std::string eServiceMP3::getInfoString(int w)
 		GstDateTime *date_time;
 		if (gst_tag_list_get_date(m_stream_tags, GST_TAG_DATE, &date))
 		{
-			/* [norhap] */			
+			/* [norhap] */
 			gchar res[8];
-			/* [norhap] */			
+			/* [norhap] */
 			snprintf(res, sizeof(res), "%06d", g_date_get_year(date));
 			g_date_free(date);
 			return (std::string)res;
@@ -4140,9 +4140,9 @@ std::string eServiceMP3::getInfoString(int w)
 		{
 			if (gst_date_time_has_year(date_time))
 			{
-				/* [norhap] */					
+				/* [norhap] */
 				gchar res[8];
-				/* [norhap] */								
+				/* [norhap] */
 				snprintf(res, sizeof(res), "%06d", gst_date_time_get_year(date_time));
 				gst_date_time_unref(date_time);
 				return (std::string)res;
@@ -5040,7 +5040,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 					/* [norhap] */
 					if (!m_gst_playbin || !GST_IS_BIN(m_gst_playbin))
 						break;
-					/* [norhap] */	
+					/* [norhap] */
 					if (m_start_events_deferred)
 						eDebug("[eServiceMP3] deferring evGstreamerStart/evStart until pending start offset is applied");
 					else
@@ -5490,7 +5490,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 				for (i = 0; i < n_audio; i++)
 				{
 					audioStream audio = {};
-					gchar *g_codec, *g_lang;
+					gchar *g_codec, *g_lang, *g_title; // [norhap] g_title track title
 					GstTagList *tags = NULL;
 					GstPad* pad = 0;
 					g_signal_emit_by_name (m_gst_playbin, "get-audio-pad", i, &pad);
@@ -5530,6 +5530,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 					audio.codec = g_type;
 					g_codec = NULL;
 					g_lang = NULL;
+					g_title = NULL; /* [norhap] track title*/
 					g_signal_emit_by_name (m_gst_playbin, "get-audio-tags", i, &tags);
 					if (tags && GST_IS_TAG_LIST(tags))
 					{
@@ -5543,6 +5544,16 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 							audio.language_code = std::string(g_lang);
 							g_free(g_lang);
 						}
+						/* [norhap] track title*/
+						if (gst_tag_list_get_string(tags, GST_TAG_TITLE, &g_title)) {
+							audio.title = std::string(g_title);
+							g_free(g_title);
+						}
+						if (audio.title.empty() && (m_ref.data[7] & DVB_I_MEDIA_MASK) && gst_tag_list_get_string(tags, GST_TAG_DESCRIPTION, &g_title)) {
+							audio.title = std::string(g_title);
+							g_free(g_title);
+						}
+						/* [norhap] track title*/
 					}
 
 					/* Refine only the human-readable codec description. Playback
@@ -5735,7 +5746,7 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 
 				for (i = 0; i < n_text; i++)
 				{
-					gchar *g_codec = NULL, *g_lang = NULL;
+					gchar *g_codec = NULL, *g_lang = NULL, *g_title = NULL;
 					GstTagList *tags = NULL;
 					g_signal_emit_by_name (m_gst_playbin, "get-text-tags", i, &tags);
 					subtitleStream subs;
@@ -5747,6 +5758,13 @@ void eServiceMP3::gstBusCall(GstMessage *msg)
 							subs.language_code = g_lang;
 							g_free(g_lang);
 						}
+						/* [norhap] track title*/
+						if (gst_tag_list_get_string(tags, GST_TAG_TITLE, &g_title))
+						{
+							subs.title = g_title;
+							g_free(g_title);
+						}
+						/* [norhap] track title*/
 						gst_tag_list_get_string(tags, GST_TAG_SUBTITLE_CODEC, &g_codec);
 						gst_tag_list_free(tags);
 					}
@@ -6699,6 +6717,28 @@ RESULT eServiceMP3::disableSubtitles()
 	return 0;
 }
 
+/* iSubtitleOutput track types: 0 DVB, 1 teletext, 2 text/pango, 3 PGS.
+   PGS needs its own value - it renders through the eDVBSubtitlePage widget like
+   DVB, but page_number then carries a composition page id for DVB and a
+   subtype_t for us, so the two are not distinguishable from python. */
+static int subtitleTrackType(subtype_t type) {
+	if (type == stDVB)
+		return 0;
+	if (type == stPGS)
+		return 3;
+	return 2;
+}
+
+/**
+ * @brief Retrieves the cached subtitle stream for the current service.
+ *
+ * This function checks if there is a cached subtitle stream available and
+ * returns the corresponding SubtitleTrack structure. If no suitable subtitle
+ * stream is found, it returns -1.
+ *
+ * @param[out] track The SubtitleTrack structure to fill with subtitle information.
+ * @return RESULT indicating success or failure.
+ */
 RESULT eServiceMP3::getCachedSubtitle(struct SubtitleTrack &track)
 {
 	int m_subtitleStreams_size = (int)m_subtitleStreams.size();
@@ -6745,11 +6785,14 @@ RESULT eServiceMP3::getCachedSubtitle(struct SubtitleTrack &track)
 	{
 		eDebug("[eServiceMP3][getCachedSubtitle] (m_cachedSubtitleStream >= 0 && m_cachedSubtitleStream < m_subtitleStreams_size)");
 		subtype_t type = m_subtitleStreams[m_cachedSubtitleStream].type;
-		track.type = type == stDVB ? 0 : 2;
+		/* [norhap] track title*/
+		track.type = subtitleTrackType(type);
+		/* [norhap] track title*/
 		track.pid = m_cachedSubtitleStream + 1;
 		track.page_number = int(type);
 		track.magazine_number = 0;
 		track.language_code = m_subtitleStreams[m_cachedSubtitleStream].language_code;
+		track.title = m_subtitleStreams[m_cachedSubtitleStream].title;
 		return 0;
 	}
 	return -1;
@@ -6757,7 +6800,6 @@ RESULT eServiceMP3::getCachedSubtitle(struct SubtitleTrack &track)
 
 RESULT eServiceMP3::getSubtitleList(std::vector<struct SubtitleTrack> &subtitlelist)
 {
-// 	eDebug("[eServiceMP3] getSubtitleList");
 	int stream_idx = 1;
 
 	for (std::vector<subtitleStream>::iterator IterSubtitleStream(m_subtitleStreams.begin()); IterSubtitleStream != m_subtitleStreams.end(); ++IterSubtitleStream)
@@ -6767,7 +6809,6 @@ RESULT eServiceMP3::getSubtitleList(std::vector<struct SubtitleTrack> &subtitlel
 		{
 		case stUnknown:
 		case stVOB:
-		case stPGS:
 			break;
 		case stDVB:
 		{
@@ -6777,6 +6818,21 @@ RESULT eServiceMP3::getSubtitleList(std::vector<struct SubtitleTrack> &subtitlel
 			track.page_number = int(type);
 			track.magazine_number = 0;
 			track.language_code = IterSubtitleStream->language_code;
+			/* [norhap] track title*/
+			track.title = IterSubtitleStream->title;
+			subtitlelist.push_back(track);
+			break;
+		}
+		case stPGS:
+		{
+			struct SubtitleTrack track = {};
+			track.type = 3;
+			track.pid = stream_idx;
+			track.page_number = int(type);
+			track.magazine_number = 0;
+			track.language_code = IterSubtitleStream->language_code;
+			track.title = IterSubtitleStream->title;
+			/* [norhap] track title*/
 			subtitlelist.push_back(track);
 			break;
 		}
@@ -6788,6 +6844,9 @@ RESULT eServiceMP3::getSubtitleList(std::vector<struct SubtitleTrack> &subtitlel
 			track.page_number = int(type);
 			track.magazine_number = 0;
 			track.language_code = IterSubtitleStream->language_code;
+			/* [norhap] track title*/
+			track.title = IterSubtitleStream->title;
+			/* [norhap] track title*/
 			subtitlelist.push_back(track);
 		}
 		}
