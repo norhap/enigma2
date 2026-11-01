@@ -2507,9 +2507,6 @@ msgstr ""
 msgid "Aspect ratio list"
 msgstr ""
 
-msgid "ASS file"
-msgstr ""
-
 msgid "ASS File"
 msgstr ""
 
@@ -6466,9 +6463,6 @@ msgid "Elapsed & Remaining"
 msgstr ""
 
 msgid "Electronic Program Guide"
-msgstr ""
-
-msgid "embedded"
 msgstr ""
 
 msgid "Embedded"
@@ -12501,9 +12495,6 @@ msgstr ""
 msgid "PG - Parental Guidance"
 msgstr ""
 
-msgid "PGS file"
-msgstr ""
-
 msgid "PGS File"
 msgstr ""
 
@@ -17041,13 +17032,7 @@ msgstr ""
 msgid "Sri Lanka"
 msgstr ""
 
-msgid "SRT file"
-msgstr ""
-
 msgid "SRT File"
-msgstr ""
-
-msgid "SSA file"
 msgstr ""
 
 msgid "SSA File"
@@ -19938,9 +19923,6 @@ msgid "VMC"
 msgstr ""
 
 msgid "VMGM (intro trailer)"
-msgstr ""
-
-msgid "VOB file"
 msgstr ""
 
 msgid "VOB File"

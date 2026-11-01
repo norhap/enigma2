@@ -2431,9 +2431,6 @@ msgstr "Lista de relación de Aspecto"
 msgid "ASS File"
 msgstr "ASS archivo"
 
-msgid "ASS file"
-msgstr "ASS Archivo"
-
 msgid "Assamese"
 msgstr "Assamese"
 
@@ -6321,9 +6318,6 @@ msgstr "Guía Electrónica de Programación"
 
 msgid "Embedded"
 msgstr "Embebido"
-
-msgid "embedded"
-msgstr "embebido"
 
 msgid "EMC Cover search"
 msgstr "Búsqueda de cobertura EMC"
@@ -12276,9 +12270,6 @@ msgstr "Supervisión de los padres"
 msgid "PGS File"
 msgstr "Archivo PGS"
 
-msgid "PGS file"
-msgstr "Archivo PGS"
-
 msgid "Philippines"
 msgstr "Filipinas"
 
@@ -16780,13 +16771,7 @@ msgstr "Sri Lanka"
 msgid "SRT File"
 msgstr "Archivo SRT"
 
-msgid "SRT file"
-msgstr "Archivo STR"
-
 msgid "SSA File"
-msgstr "Archivo SSA"
-
-msgid "SSA file"
 msgstr "Archivo SSA"
 
 msgid "sse"
@@ -19578,9 +19563,6 @@ msgid "VMGM (intro trailer)"
 msgstr "VMGM (intro trailer)"
 
 msgid "VOB File"
-msgstr "Archivo VOB"
-
-msgid "VOB file"
 msgstr "Archivo VOB"
 
 msgid "VOD"
