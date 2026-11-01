@@ -193,9 +193,9 @@ class MultiContentTemplateParser(TemplateParser):
 
 	def scalePadding(self, padding):
 		return (int(padding[0] * self.scale[0][0] / self.scale[0][1]),
-				int(padding[1] * self.scale[1][0] / self.scale[1][1]),
-				int(padding[2] * self.scale[0][0] / self.scale[0][1]),
-				int(padding[3] * self.scale[1][0] / self.scale[1][1]))
+			int(padding[1] * self.scale[1][0] / self.scale[1][1]),
+			int(padding[2] * self.scale[0][0] / self.scale[0][1]),
+			int(padding[3] * self.scale[1][0] / self.scale[1][1]))
 
 	def scaleWithHeight(self, itemWidth, itemHeight):
 		scaleFactorVertical = self.scale[1][0] / self.scale[1][1]
