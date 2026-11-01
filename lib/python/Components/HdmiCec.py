@@ -1332,6 +1332,7 @@ class HdmiCec:
 				if address == 0:
 					activity_ignore_commands = (0x00, 0x83, 0x87, 0x8c, 0x8f, 0x90)
 					if ((cmd == 0x04 and config.hdmicec.handle_tv_wakeup.value == "wakeup") or
+						(cmd in (0x8f, 0x9f, 0xA0) and config.hdmicec.handle_tv_wakeup.value not in ("osdnamerequest", "activity")) or
 						(cmd == 0x85 and config.hdmicec.handle_tv_wakeup.value == "sourcerequest") or
 						(cmd == 0x46 and config.hdmicec.handle_tv_wakeup.value == "osdnamerequest") or
 						(cmd not in activity_ignore_commands and cmd != 0x36 and config.hdmicec.handle_tv_wakeup.value == "activity")):
