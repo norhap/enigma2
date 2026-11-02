@@ -13,7 +13,7 @@ import Screens.Standby
 from Tools.Directories import fileExists, fileReadLine, pathExists
 
 config.hdmicec = ConfigSubsection()
-config.hdmicec.enabled = ConfigYesNo(default=True)  # Pushed to eHdmiCEC in hdmi_cec.cpp
+config.hdmicec.enabled = ConfigYesNo(default=False)  # Pushed to eHdmiCEC in hdmi_cec.cpp
 config.hdmicec.control_tv_standby = ConfigYesNo(default=True)
 config.hdmicec.control_tv_wakeup = ConfigYesNo(default=True)
 config.hdmicec.report_active_source = ConfigYesNo(default=True)
@@ -26,7 +26,7 @@ choicelist = [
 ]
 config.hdmicec.handle_tv_standby = ConfigSelection(default="standby", choices=choicelist)
 config.hdmicec.handle_tv_input = ConfigSelection(default="disabled", choices=choicelist)
-config.hdmicec.handle_tv_wakeup = ConfigSelection(default="streamrequest", choices={
+config.hdmicec.handle_tv_wakeup = ConfigSelection(default="disabled", choices={
 	"disabled": _("Disabled"),
 	"wakeup": _("Wake up"),
 	"tvreportphysicaladdress": _("TV physical address report"),
