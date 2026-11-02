@@ -2045,7 +2045,7 @@ class HdmiCec:
 		if debugprint and not config.hdmicec.debug.value:
 			print(debugtext)
 			return
-		log_path = config.crash.debug_path.value
+		log_path = config.crash.debugPath.value
 		if pathExists(log_path):
 			stat = statvfs(log_path)
 			disk_free = stat.f_bavail * stat.f_bsize / 1024
