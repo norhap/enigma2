@@ -4869,9 +4869,6 @@ msgstr ""
 msgid "Country for EPG event rating information"
 msgstr ""
 
-msgid "Country Music"
-msgstr ""
-
 msgid "Country: "
 msgstr ""
 
@@ -9580,9 +9577,6 @@ msgstr ""
 msgid "jazz"
 msgstr ""
 
-msgid "Jazz Music"
-msgstr ""
-
 msgid "Jersey"
 msgstr ""
 
@@ -11970,9 +11964,6 @@ msgstr ""
 msgid "Oldies"
 msgstr ""
 
-msgid "Oldies Music"
-msgstr ""
-
 msgid "Olympia"
 msgstr ""
 
@@ -14351,9 +14342,6 @@ msgid "right, wrapped"
 msgstr ""
 
 msgid "Rock"
-msgstr ""
-
-msgid "Rock Music"
 msgstr ""
 
 msgid "Rock/Pop"
