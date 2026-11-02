@@ -10,6 +10,11 @@
 #include <atomic>
 #include <lib/dvb/servicetsfilter.h>
 
+// Data written to the DVR is split into parts of at most this size: the
+// DVR driver copies each write into one contiguous kernel buffer, which
+// fails with ENOMEM for large blocks on fragmented memory.
+static const size_t MAX_DVR_WRITE = 32768;
+
 class iFilePushScatterGather
 {
 public:
@@ -71,6 +76,7 @@ class eFilePushThreadRecorder: public eThread, public sigc::trackable
 {
 public:
 	eFilePushThreadRecorder(unsigned char* buffer, size_t buffersize=188*1024, int packetSize=188);
+	int getWriteError() const { return _writeError; }
 	void thread();
 	void stop();
 	void start(int sourcefd);
@@ -98,6 +104,7 @@ protected:
 	// Called when terminating the recording thread. Allows to clean up memory and
 	// flush buffers, terminate outstanding IO requests.
 	virtual void flush() = 0;
+	void _setWriteError(int error);
 
 	int m_fd_source;
 	size_t m_buffersize;
@@ -106,6 +113,7 @@ protected:
 	size_t m_buffer_fill;
 	size_t m_buffer_min_write = minWriteDefault;
 	int m_stop;
+	int _writeError = 0;
 private:
 	int writeBuffer();
 	int m_packetSize;

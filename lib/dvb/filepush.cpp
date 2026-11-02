@@ -1,10 +1,12 @@
 #include "filepush.h"
 #include <lib/base/eerror.h>
 #include <lib/base/esimpleconfig.h>
+#include <algorithm>
 #include <errno.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <poll.h>
+#include <time.h>
 
 //#define SHOW_WRITE_TIME
 
@@ -62,6 +64,9 @@ void eFilePushThread::thread()
 	setIoPrio(prio_class, prio);
 	eDebug("[eFilePushThread] START thread");
 	bool sourceReady = !m_source->isStream();
+	/* Whole blocks from the start of the buffer, which holds whole blocks
+	 * of the source, so no TS packet is split between two writes. */
+	const int write_chunk = std::max<int>(1, MAX_DVR_WRITE / m_blocksize) * m_blocksize;
 
 	do
 	{
@@ -226,10 +231,11 @@ void eFilePushThread::thread()
 			{
 				/* Write data to mux */
 				int buf_start = 0;
+				int nomem_count = 0;
 				filterRecordData(m_buffer, buf_end);
 				while ((buf_start != buf_end) && !m_stop)
 				{
-					int w = write(m_fd_dest, m_buffer + buf_start, buf_end - buf_start);
+					int w = write(m_fd_dest, m_buffer + buf_start, std::min(buf_end - buf_start, write_chunk));
 
 					if (w <= 0)
 					{
@@ -254,11 +260,20 @@ void eFilePushThread::thread()
 #endif
 							continue;
 						}
+						/* Wait for the kernel to free memory, give up after 1 s. */
+						if (w < 0 && errno == ENOMEM && nomem_count < 100)
+						{
+							nomem_count++;
+							const timespec delay = {0, 10000000};
+							nanosleep(&delay, nullptr);
+							continue;
+						}
 						eDebug("[eFilePushThread] write: %m");
 						sendEvent(evtWriteError);
 						break;
 					}
 					buf_start += w;
+					nomem_count = 0;
 				}
 
 				eofcount = 0;
@@ -423,13 +438,19 @@ int eFilePushThreadRecorder::writeBuffer()
 	size_t length = m_buffer_fill;
 	unsigned char tail[192];
 	size_t remainder = 0;
-	if (m_serviceFilter.active())
+	// Retain an incomplete TS packet across reads, including buffer rotation
+	// by asynchronous writes. A packet split over two writes reaches the
+	// recording, the stream and the descrambler as a sync loss, so pass on
+	// whole packets only and prepend the stub to the next buffer.
+	if (m_packetSize > 0 && static_cast<size_t>(m_packetSize) <= sizeof(tail))
 	{
-		// Retain an incomplete TS packet across reads, including buffer rotation
-		// by asynchronous writes. Never feed the same bytes to the filter twice.
 		remainder = length % m_packetSize;
 		length -= remainder;
 		memcpy(tail, m_buffer + length, remainder);
+	}
+	if (m_serviceFilter.active())
+	{
+		// Never feed the same bytes to the filter twice.
 		m_serviceFilter.process(m_buffer + m_filteredBytes, length - m_filteredBytes, m_packetSize);
 		m_filteredBytes = length;
 	}
@@ -735,10 +756,13 @@ void eFilePushThreadRecorder::thread()
 		}
 	}
 
-	/* Flush remaining data */
-	if (m_buffer_fill > 0)
+	/* Flush remaining data. */
+	if (m_buffer_fill > 0 && !_writeError)
 	{
-		writeBuffer();
+		// A write of 0 is only an error while a whole packet is still waiting:
+		// the stub left over from packet alignment cannot be written at all.
+		if (int result = writeBuffer(); result < 0 || (result == 0 && m_buffer_fill >= static_cast<size_t>(m_packetSize)))
+			_setWriteError(result < 0 ? errno : EIO);
 		m_buffer_fill = 0;
 	}
 
@@ -751,6 +775,7 @@ void eFilePushThreadRecorder::start(int fd)
 {
 	m_fd_source = fd;
 	m_stop = 0;
+	_writeError = 0;
 	run();
 }
 
@@ -776,6 +801,15 @@ void eFilePushThreadRecorder::stop()
 void eFilePushThreadRecorder::sendEvent(int evt)
 {
 	m_messagepump.send(evt);
+}
+
+void eFilePushThreadRecorder::_setWriteError(int error)
+{
+	if (!_writeError)
+	{
+		_writeError = error ? error : EIO;
+		sendEvent(evtWriteError);
+	}
 }
 
 void eFilePushThreadRecorder::recvEvent(const int &evt)
