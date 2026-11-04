@@ -24,9 +24,9 @@ choicelist = [
 	("standby", _("Standby")),
 	("deepstandby", _("Deep Standby"))
 ]
-config.hdmicec.handle_tv_standby = ConfigSelection(default="standby", choices=choicelist)
-config.hdmicec.handle_tv_input = ConfigSelection(default="disabled", choices=choicelist)
-config.hdmicec.handle_tv_wakeup = ConfigSelection(default="disabled", choices={
+config.hdmicec.handle_tv_standby = ConfigSelection(default="disabled", choices=choicelist)
+config.hdmicec.handle_tv_input = ConfigSelection(default="standby", choices=choicelist)
+config.hdmicec.handle_tv_wakeup = ConfigSelection(default="streamrequest", choices={
 	"disabled": _("Disabled"),
 	"wakeup": _("Wake up"),
 	"tvreportphysicaladdress": _("TV physical address report"),
