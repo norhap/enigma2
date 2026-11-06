@@ -207,8 +207,6 @@ void eFilePushThread::thread()
 				if (m_stream_mode) {
 					eDebug("[eFilePushThread] reached EOF, but we are in stream mode. reconnecting...");
 					sleep(1);
-					/* reconnect [norhap] */
-					m_source->reconnect();
 					continue;
 				}
 				else if (m_flags == 1) { // timeshift
