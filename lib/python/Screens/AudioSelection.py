@@ -421,7 +421,7 @@ class AudioSelection(ConfigListScreen, Screen, HelpableScreen):
 						number = "%x%02x" % (x[3] and x[3] or 8, x[2])
 					elif x[0] == 2:
 						types = ("unknown", "embedded", "SSA file", "ASS file",
-							"SRT file", "VOB file", "PGS file", "WebVTT")
+							"SRT file", "VOB file", "PGS file", "WebVTT", "DVB", "CC")
 						try:
 							description = types[x[2]]
 						except Exception:
@@ -759,7 +759,7 @@ class QuickSubtitlesConfigMenu(ConfigListScreen, Screen):
 				getConfigMenuItem("dvb_subtitles_original_position"),
 				getConfigMenuItem("subtitle_position")
 			])
-		if sub[0] == 0:  # dvb
+		elif sub[0] == 0:  # dvb
 			menu = [
 				getConfigMenuItem("dvb_subtitles_color"),
 				getConfigMenuItem("dvb_subtitles_backtrans"),

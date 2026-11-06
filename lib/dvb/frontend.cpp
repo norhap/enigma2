@@ -12,6 +12,8 @@
 #include <sys/ioctl.h>
 
 #include <sstream>
+#include <thread>
+#include <chrono>
 
 #include "absdiff.h"
 
@@ -594,7 +596,9 @@ void eDVBFrontend::reopenFrontend()
 {
 	sleep(1);
 	m_delsys.clear();
-	openFrontend();
+	// driver may still be re-registering the device after a mode change
+	for (int retry = 0; openFrontend() && m_state == stateClosed && retry < 20; ++retry)
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
 }
 
 int eDVBFrontend::openFrontend()
@@ -613,7 +617,8 @@ int eDVBFrontend::openFrontend()
 			m_fd = ::open(m_filename.c_str(), O_RDWR | O_NONBLOCK | O_CLOEXEC);
 			if (m_fd < 0)
 			{
-				eWarning("[eDVBFrontend] opening %s failed: %m", m_filename.c_str());
+				eWarning("[eDVBFrontend] failed! (%s) %m", m_filename.c_str());
+				m_state = stateClosed;
 				return -1;
 			}
 		}
@@ -643,6 +648,7 @@ int eDVBFrontend::openFrontend()
 				eWarning("[eDVBFrontend] ioctl FE_GET_INFO failed");
 				::close(m_fd);
 				m_fd = -1;
+				m_state = stateClosed;
 				return -1;
 			}
 			strncpy(m_description, fe_info.name, sizeof(m_description) - 1);
@@ -772,6 +778,24 @@ int eDVBFrontend::closeFrontend(bool force, bool no_delayed)
 			}
 			linked_fe->m_frontend->getData(LINKED_NEXT_PTR, tmp);
 		}
+	}
+	else
+		m_data[ROTOR_CMD] = -1;
+
+	long tmp = m_data[LINKED_NEXT_PTR];
+	while (tmp != -1)
+	{
+		eDVBRegisteredFrontend *linked_fe = (eDVBRegisteredFrontend*)tmp;
+		if (linked_fe->m_inuse)
+		{
+			eDebugNoSimulate("[eDVBFrontend] dont close frontend %d until the linked frontend %d in slot %d is still in use",
+				m_dvbid, linked_fe->m_frontend->getDVBID(), linked_fe->m_frontend->getSlotID());
+			if (!m_simulate && m_sn)
+				m_sn->stop();
+			m_state = stateIdle;
+			return -1;
+		}
+		linked_fe->m_frontend->getData(LINKED_NEXT_PTR, tmp);
 	}
 
 	if (m_fd >= 0)
@@ -908,6 +932,32 @@ void eDVBFrontend::timeout()
 		m_data[CSW] = m_data[UCSW] = m_data[TONEBURST] = -1; // reset diseqc
 		m_stateChanged(this);
 	}
+}
+
+void eDVBFrontend::setConfigRetuneNoPatEntry(int value)
+{
+	eDebug("[eDVBFrontend::setConfigRetuneNoPatEntry] %d",value);
+	m_configRetuneNoPatEntry = value;
+}
+
+void eDVBFrontend::checkRetune()
+{
+	if (m_configRetuneNoPatEntry)
+	{
+		eDebug("[eDVBFrontend] start retune after tune error 3 (noPatEntry)");
+		retune();
+	}
+	else
+		eDebug("[eDVBFrontend] not retuning after tune error 3 (noPatEntry) - disabled");
+}
+
+void eDVBFrontend::retune()
+{
+	m_timeout->stop();
+	m_state = stateFailed;
+	if (m_type == feSatellite)
+		m_data[CSW] = m_data[UCSW] = m_data[TONEBURST] = -1;
+	m_stateChanged(this);
 }
 
 #define INRANGE(X,Y,Z) (((X<=Y) && (Y<=Z))||((Z<=Y) && (Y<=X)) ? 1 : 0)
@@ -1862,8 +1912,9 @@ int eDVBFrontend::tuneLoopInt()  // called by m_tuneTimer
 			// workaround to put the kernel frontend thread into idle state!
 			if (!m_fbc && state != eDVBFrontend::stateIdle && state != stateClosed)
 			{
-				sec_fe->closeFrontend(true);
-				state = sec_fe->m_state;
+				if (sec_fe->m_sn)
+					sec_fe->m_sn->stop();
+				state = sec_fe->m_state = stateIdle;
 			}
 			// sec_fe is closed... we must reopen it here..
 			if (state == stateClosed)
@@ -2263,7 +2314,13 @@ void eDVBFrontend::setFrontend(bool recvEvents)
 	{
 		int type = -1;
 		oparm.getSystem(type);
-		eDebug("[eDVBFrontend%d] setting frontend", m_dvbid);
+		eDebug("setting frontend %d events: %s", m_dvbid, recvEvents?"on":"off");
+		if (!m_sn)
+		{
+			eWarning("[eDVBFrontend] frontend %d not opened, tune failed", m_dvbid);
+			retune();
+			return;
+		}
 		if (recvEvents)
 			m_sn->start();
 		feEvent(-1); // flush events

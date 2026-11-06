@@ -1,4 +1,4 @@
-from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, iServiceInformation, setPreferredTuner, eStreamServer, iRecordableService, iRecordableServicePtr, eDVBLocalTimeHandler, eTimer
+from enigma import eServiceCenter, eServiceReference, pNavigation, getBestPlayableServiceReference, iPlayableService, iServiceInformation, setPreferredTuner, eStreamServer, iRecordableService, iRecordableServicePtr, eDVBLocalTimeHandler, eTimer, getDVBIFallbackService, getDVBIPlaybackService, getDVBIServiceAvailability
 from Components.ImportChannels import ImportChannels
 from Components.ParentalControl import parentalControl
 from Components.SystemInfo import SystemInfo
@@ -51,6 +51,9 @@ class Navigation:
 		self.currentlyPlayingService = None
 		self.originalPlayingServiceReference = None
 		self.hybridPlaybackService = None
+		self.dvbiFailureTimer = None
+		self.dvbiFailureService = None
+		self.dvbiPlaybackService = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
 		self.streamRetryOverride = False
@@ -199,6 +202,56 @@ class Navigation:
 		# Recreate the service outside its native event callback, as on a zap.
 		self.streamRetryTimer.start(2000 << self.streamRetryCount, True)
 
+	def cancelDVBIFailure(self):
+		if self.dvbiFailureTimer:
+			self.dvbiFailureTimer.stop()
+		self.dvbiFailureService = None
+
+	def scheduleDVBIFailure(self):
+		live = self.currentlyPlayingServiceReference
+		logical = self.currentlyPlayingServiceOrGroup
+		ipFailure = self.isCurrentServiceDVBI and self.dvbiPlaybackService and getDVBIServiceAvailability(self.dvbiPlaybackService)
+		if not live or not logical or logical.flags & eServiceReference.isGroup or not (ipFailure or getDVBIFallbackService(live, True)):
+			return False
+		service = self.getCurrentService()
+		timeshift = service and service.timeshift()
+		if not service or (timeshift and timeshift.isTimeshiftEnabled()):
+			return False
+		if self.dvbiFailureService is None:
+			self.dvbiFailureService = (service, live, logical, self.dvbiPlaybackService if ipFailure else None)
+			if self.dvbiFailureTimer is None:
+				self.dvbiFailureTimer = eTimer()
+				self.dvbiFailureTimer.callback.append(self.retryDVBIFailure)
+			# Never destroy the native service inside its own signal callback.
+			self.dvbiFailureTimer.start(0, True)
+		return True
+
+	def retryDVBIFailure(self):
+		pending = self.dvbiFailureService
+		self.cancelDVBIFailure()
+		if pending is None:
+			return
+		service, live, logical, failedIp = pending
+		if service is not self.getCurrentService() or live != self.currentlyPlayingServiceReference or logical != self.currentlyPlayingServiceOrGroup:
+			return  # A zap/stop or another player superseded this failure.
+		timeshift = service.timeshift()
+		if failedIp and not (timeshift and timeshift.isTimeshiftEnabled()):
+			unavailable = getDVBIServiceAvailability(failedIp) < 0
+			nextService = getDVBIPlaybackService(logical, eServiceReference() if unavailable else failedIp)
+			if nextService is not None:
+				self.playService(logical, forceRestart=True, dvbiTarget=nextService)
+			else:
+				self.stopService()
+				if InfoBar.instance:
+					InfoBar.instance.session.showInfo(_("This channel is currently off air.") if unavailable else _("No further DVB-I alternative is available."), timeout=8)
+			return
+		if (timeshift and timeshift.isTimeshiftEnabled()) or not getDVBIFallbackService(live, True):
+			for callback in self.event:
+				callback(iPlayableService.evTuneFailed)
+			return
+		print("[Navigation] DVB-I: reception failed, switching live service to its registered IP alternative.")
+		self.playService(logical, forceRestart=True, dvbiFallback=True)
+
 	def retryStream(self):
 		pending = self.streamRetryService
 		self.cancelStreamRetry(reset=False)
@@ -208,7 +261,7 @@ class Navigation:
 		print(f"[Navigation] Reconnecting HTTP stream (attempt {self.streamRetryCount}/3).")
 		self.playService(pending[2], forceRestart=True, streamRetry=True)
 
-	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None):
+	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None, dvbiTarget=None, dvbiFallback=True):
 		if exists("/proc/stb/lcd/symbol_signal") and hasattr(config.lcd, "mode"):
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
@@ -297,7 +350,6 @@ class Navigation:
 				if (not SystemInfo["FCCactive"] and not keepSDRReceiver) or (forceRestart and oldref and oldref.type == 4115):
 					self.pnav.stopService()
 				else:
-					self.skipServiceReferenceReset = True
 					from enigma import eFCCServiceManager  # noqa: E402 Set FCC not enabled if fallback tuner is active.
 					if config.usage.remote_fallback_enabled.value:
 						eFCCServiceManager.getInstance().setFCCEnable(False)
@@ -305,6 +357,17 @@ class Navigation:
 						return 1
 					else:
 						eFCCServiceManager.getInstance().setFCCEnable(True)
+				# The addon registers only verified equivalents. The native resolver
+				# has an empty map by default and performs no I/O on the zap path.
+				dvbiRef = dvbiTarget or getDVBIFallbackService(playref, dvbiFallback)
+				if playref.getPath().startswith("dvbi://") and dvbiRef is None:
+					dvbiRef = getDVBIPlaybackService(playref, eServiceReference())
+					if dvbiRef is None and getDVBIServiceAvailability(playref) < 0:
+						if InfoBarInstance:
+							InfoBarInstance.session.showInfo(_("This channel is currently off air."), timeout=8)
+						return 1
+				isDVBI = dvbiRef is not None or playref.getPath().startswith("dvbi://")
+				playref = dvbiRef or playref
 				self.currentlyPlayingServiceReference = playref
 				if not ignoreStreamRelay:
 					playref, isStreamRelay = streamrelay.streamrelayChecker(playref)
@@ -330,7 +393,10 @@ class Navigation:
 				if keepSDRReceiver and isAsyncPlay:
 					self.pnav.stopService()
 					self.skipServiceReferenceReset = False
-
+				print(f"[Navigation] Playref is '{playref.toString()}'.")
+				# Keep the delivery route separate from the logical channel used for EPG.
+				self.isCurrentServiceDVBI = isDVBI and "://" in playref.getPath()
+				self.dvbiPlaybackService = playref if isDVBI else None
 				print("[Navigation] playref", playref.toString())
 				self.currentlyPlayingServiceOrGroup = ref
 				if startPlayingServiceOrGroup and startPlayingServiceOrGroup.flags & eServiceReference.isGroup and not ref.flags & eServiceReference.isGroup:
@@ -366,6 +432,7 @@ class Navigation:
 									if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 										setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 										setPriorityFrontend = True
+				# self.skipServiceReferenceReset = True
 				if (config.misc.softcam_streamrelay_delay.value and self.isCurrentServiceStreamRelay) or (self.firstStart and isStreamRelay):
 					self.skipServiceReferenceReset = False
 					self.isCurrentServiceStreamRelay = False
@@ -379,6 +446,11 @@ class Navigation:
 					self.retryServicePlayTimer.start(delay, True)
 					return 0
 				elif not isAsyncPlay and self.pnav.playService(playref):
+					if self.dvbiFailureService is not None:
+						# A synchronous native tune failure already queued recovery.
+						# Keep its references alive for the deferred identity check.
+						self.skipServiceReferenceReset = False
+						return 0
 					print(f"[Navigation] Failed to start '{playref.toString()}'.")
 					self.currentlyPlayingServiceReference = None
 					self.originalPlayingServiceReference = None

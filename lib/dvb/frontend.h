@@ -123,6 +123,7 @@ private:
 
 	int m_timeoutCount; // needed for timeout
 	int m_retryCount; // diseqc retry for rotor
+	int m_configRetuneNoPatEntry;
 
 	void feEvent(int);
 	void timeout();
@@ -156,6 +157,9 @@ public:
 	RESULT setSecSequence(eSecCommandList &list);
 	RESULT getData(int num, long &data);
 	RESULT setData(int num, long val);
+	void checkRetune();
+	void retune();
+	void setConfigRetuneNoPatEntry(int value);
 
 	int readFrontendData(int type); // iFrontendInformation_ENUMS
 	void getFrontendStatus(ePtr<iDVBFrontendStatus> &dest);
