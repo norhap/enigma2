@@ -350,6 +350,7 @@ class Navigation:
 				if (not SystemInfo["FCCactive"] and not keepSDRReceiver) or (forceRestart and oldref and oldref.type == 4115):
 					self.pnav.stopService()
 				else:
+					self.skipServiceReferenceReset = True
 					from enigma import eFCCServiceManager  # noqa: E402 Set FCC not enabled if fallback tuner is active.
 					if config.usage.remote_fallback_enabled.value:
 						eFCCServiceManager.getInstance().setFCCEnable(False)
@@ -432,7 +433,6 @@ class Navigation:
 									if config.usage.frontend_priority_dvbs.value != config.usage.frontend_priority.value:
 										setPreferredTuner(int(config.usage.frontend_priority_dvbs.value))
 										setPriorityFrontend = True
-				# self.skipServiceReferenceReset = True
 				if (config.misc.softcam_streamrelay_delay.value and self.isCurrentServiceStreamRelay) or (self.firstStart and isStreamRelay):
 					self.skipServiceReferenceReset = False
 					self.isCurrentServiceStreamRelay = False

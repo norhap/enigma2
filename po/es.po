@@ -14537,7 +14537,7 @@ msgstr "Buscando %s…"
 msgid "Scanning - %d%% completed"
 msgid_plural "Scanning - %d%% completed"
 msgstr[0] "Búsqueda - %d%% completa"
-msgstr[1] "Búsqueda - %d%% completas"
+msgstr[1] "Búsqueda - %d%% completa"
 
 msgid "Scanning can't be performed while recordings are in progress."
 msgstr "No se puede realizar la búsqueda mientras las grabaciones están en curso."
@@ -14567,7 +14567,7 @@ msgstr "Buscando: %d canales encontrados; validando resultado en vivo (%d/%d)...
 msgid "Scanning: %d%% complete"
 msgid_plural "Scanning: %d%% complete"
 msgstr[0] "Búsqueda: %d%% completa"
-msgstr[1] "Búsqueda: %d%% completas"
+msgstr[1] "Búsqueda: %d%% completa"
 
 msgid "Scans default lamedbs sorted by satellite with a connected dish positioner"
 msgstr "Escanea lamedbs por defecto ordenados por satélite con un motor de plato conectado"
