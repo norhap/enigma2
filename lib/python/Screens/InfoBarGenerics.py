@@ -4139,20 +4139,29 @@ class InfoBarSubtitleSupport(object):
 		}, prio=0, description=_("Subtitle Actions"))
 
 		self.selected_subtitle = None
-
-		if isStandardInfoBar(self):
-			self.subtitle_window = self.session.instantiateDialog(SubtitleDisplay)
-			self.subtitle_window.setAnimationMode(0)
-		else:
-			from Screens.InfoBar import InfoBar
-			self.subtitle_window = InfoBar.instance.subtitle_window
-
-		self.subtitle_window.hide()
+		self.subtitle_window = self.getSharedSubtitleWindow()
+		if self.subtitle_window is not None:
+			self.subtitle_window.hide()
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evStart: self.__serviceChanged,
 			iPlayableService.evEnd: self.__serviceChanged,
 			iPlayableService.evUpdatedInfo: self.__updatedInfo
 		})
+
+	def getSharedSubtitleWindow(self):
+		if isStandardInfoBar(self):
+			owner = self
+		else:
+			from Screens.InfoBar import InfoBar  # InfoBar imports this mixin.
+			owner = InfoBar.instance
+		if getattr(owner, "session", None) is not self.session:
+			return None
+		window = getattr(owner, "subtitle_window", None)
+		if getattr(window, "instance", None) is None:
+			window = self.session.instantiateDialog(SubtitleDisplay)
+			window.setAnimationMode(0)
+			owner.subtitle_window = window
+		return window
 
 	def getCurrentServiceSubtitle(self):
 		service = self.session.nav.getCurrentService()
@@ -4186,7 +4195,8 @@ class InfoBarSubtitleSupport(object):
 	def __serviceChanged(self):
 		if self.selected_subtitle:
 			self.selected_subtitle = None
-			self.subtitle_window.hide()
+			if getattr(self.subtitle_window, "instance", None) is not None:
+				self.subtitle_window.hide()
 
 	def __updatedInfo(self):
 		if not self.selected_subtitle:
@@ -4194,20 +4204,24 @@ class InfoBarSubtitleSupport(object):
 			cachedsubtitle = subtitle and subtitle.getCachedSubtitle()
 			if cachedsubtitle:
 				self.enableSubtitle(cachedsubtitle)
-				self.doCenterDVBSubs()
 
-	def enableSubtitle(self, newSubtitle):
-		if self.selected_subtitle != newSubtitle:
-			subtitle = self.getCurrentServiceSubtitle()
-			self.selected_subtitle = newSubtitle
-			if subtitle and newSubtitle:
-				subtitle.enableSubtitles(self.subtitle_window.instance, newSubtitle)
-				self.showSubtitles()
-				self.doCenterDVBSubs()
-			else:
-				if subtitle:
-					subtitle.disableSubtitles(self.subtitle_window.instance)
-				self.subtitle_window.hide()
+	def enableSubtitle(self, selectedSubtitle):
+		subtitle = self.getCurrentServiceSubtitle()
+		if subtitle and selectedSubtitle and getattr(self.subtitle_window, "instance", None) is None:
+			self.subtitle_window = self.getSharedSubtitleWindow()
+		windowInstance = getattr(self.subtitle_window, "instance", None)
+		if windowInstance is None:
+			self.selected_subtitle = None
+			return
+		self.selected_subtitle = selectedSubtitle
+		if subtitle and self.selected_subtitle:
+			subtitle.enableSubtitles(windowInstance, self.selected_subtitle)
+			self.subtitle_window.show()
+			self.doCenterDVBSubs()
+		else:
+			if subtitle:
+				subtitle.disableSubtitles(windowInstance)
+			self.subtitle_window.hide()
 
 	def restartSubtitle(self):
 		if self.selected_subtitle:
