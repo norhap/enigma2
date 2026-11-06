@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-30 20:23+0100\n"
+"POT-Creation-Date: 2026-11-03 11:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11571,6 +11571,9 @@ msgstr ""
 msgid "No free tuner!"
 msgstr ""
 
+msgid "No further DVB-I alternative is available."
+msgstr ""
+
 msgid "No images found"
 msgstr ""
 
@@ -18149,6 +18152,9 @@ msgid "This bouquet is protected by a parental control PIN"
 msgstr ""
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
+msgstr ""
+
+msgid "This channel is currently off air."
 msgstr ""
 
 msgid "This channel requires an HbbTV plugin. Please install a compatible HbbTV plugin."

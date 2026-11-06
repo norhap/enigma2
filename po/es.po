@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-30 20:23+0100\n"
+"POT-Creation-Date: 2026-11-03 11:07+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -5898,7 +5898,7 @@ msgid "Do you want to update your %s %s?"
 msgstr "¿Quieres actualizar su %s %s?"
 
 msgid "Do you want to use auto mode detection?\n\nThis option reads all supported modes and automatically sets the highest resolution supported by your TV. Choose 'No' if you want to customize your settings.\n\nWARNING: If on the next screen you lose signal on your video mode, long press EXIT button to return to the list of video modes."
-msgstr "¿Quieres utilizar la detección del modo automático?\n\nEsta opción lee todos los modos admitidos y establece automáticamente la resolución más alta admitida por su televisor. Elija 'No' si desea personalizar su configuración.\n\nADVERTENCIA: Si en la siguiente pantalla pierde la señal en su modo de VIDEO, mantenga presionado el botón SALIR para regresar a la lista de modos de VIDEO."
+msgstr "¿Quieres utilizar la detección del modo automático?\n\nEsta opción lee todos los modos admitidos y establece automáticamente la resolución más alta admitida por su televisor. Elija 'No' si desea personalizar su configuración.\n\nADVERTENCIA: Si en la siguiente pantalla pierde la señal en su modo de VIDEO, mantenga presionado el botón EXIT para regresar a la lista de modos de VIDEO."
 
 msgid "Docudrama"
 msgstr "Docudrama"
@@ -11358,6 +11358,9 @@ msgstr "No hay índice libre disponible"
 msgid "No free tuner!"
 msgstr "No hay sintonizador libre!"
 
+msgid "No further DVB-I alternative is available."
+msgstr "No existe ninguna otra alternativa DVB-I."
+
 msgid "No images found"
 msgstr "No se encontraron imágenes"
 
@@ -12538,7 +12541,7 @@ msgid "Please setup the following basic configs."
 msgstr "Por favor, configure las siguientes configuraciones básicas."
 
 msgid "Please use direction keys to move the PiP window.\nPress Bouquet +/- to resize the window.\nPress OK to go back to the TV mode or EXIT to cancel the moving."
-msgstr "Utilice las teclas de dirección para mover la ventana PiP.\nPulse Bouquet +/- para cambiar el tamaño de la ventana.\nPulse OK para volver al modo TV o SALIR para cancelar el movimiento."
+msgstr "Utilice las teclas de dirección para mover la ventana PiP.\nPulse Bouquet +/- para cambiar el tamaño de la ventana.\nPulse OK para volver al modo TV o EXIT para cancelar el movimiento."
 
 msgid "Please wait"
 msgstr "Espere por favor"
@@ -15152,7 +15155,7 @@ msgid "Select the User Band to be assigned to this tuner. This is an index into 
 msgstr "Seleccione la banda de usuario que se asignará a este sintonizador. Este es un índice en la tabla de frecuencias que usa el interruptor SCR o SCR LNB para pasar el transpondedor solicitado al sintonizador."
 
 msgid "Select the video mode to be used on the TV.\n\nThe following video modes will automatically change in 20 seconds.\n\nWARNING: If a video mode causes signal loss, hold the EXIT button to return to the mode video list."
-msgstr "Seleccione el modo de vídeo que se utilizará en el televisor.\n\nLos siguientes modos de VIDEO cambiarán automáticamente en 20 segundos.\n\nADVERTENCIA: Si un modo de VIDEO causa pérdida de señal, mantenga presionado el botón SALIR para regresar a la lista de modos de VIDEO."
+msgstr "Seleccione el modo de vídeo que se utilizará en el televisor.\n\nLos siguientes modos de VIDEO cambiarán automáticamente en 20 segundos.\n\nADVERTENCIA: Si un modo de VIDEO causa pérdida de señal, mantenga presionado el botón EXIT para regresar a la lista de modos de VIDEO."
 
 msgid "Select the Yes / True response"
 msgstr "Seleccione la respuesta Sí/Verdadero"
@@ -15530,7 +15533,7 @@ msgid "Set the vertical position of subtitles, measured from the bottom of the s
 msgstr "Establezca la posición vertical de los subtítulos, medida desde la parte inferior de la pantalla."
 
 msgid "Set the video output mode (or resolution).\n\nWARNING: If the chosen video mode causes a loss of signal on your video port, long press EXIT button."
-msgstr "Configure el modo de salida de VIDEO (o resolución).\n\nADVERTENCIA: Si el modo de VIDEO elegido causa una pérdida de señal en su puerto de VIDEO, pulse prolongadamente el botón SALIR."
+msgstr "Configure el modo de salida de VIDEO (o resolución).\n\nADVERTENCIA: Si el modo de VIDEO elegido causa una pérdida de señal en su puerto de VIDEO, pulse prolongadamente el botón EXIT."
 
 msgid "Set this to 'Yes' to automatically hide the InfoBar when the media starts playing. If set to 'No' the InfoBar will remain on screen."
 msgstr "Establezca esto en 'Sí' para ocultar automáticamente la barra de información cuando los medios comiencen a reproducirse. Si se establece en 'No', la barra de información permanecerá en la pantalla."
@@ -17828,6 +17831,9 @@ msgstr "Este bouquet está protegido por un PIN de control parental"
 
 msgid "This can be useful when using the CI(+) module. After the end of the recording, the service will be automatically stopped."
 msgstr "Esto puede resultar útil cuando se utiliza el módulo CI(+). Una vez finalizada la grabación, el canal se detendrá automáticamente."
+
+msgid "This channel is currently off air."
+msgstr "Este canal se encuentra actualmente fuera del aire."
 
 msgid "This channel requires an HbbTV plugin. Please install a compatible HbbTV plugin."
 msgstr "Este canal requiere un plugin HbbTV. Por favor, instale un plugin HbbTV compatible."
