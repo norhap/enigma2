@@ -10150,10 +10150,10 @@ msgid "magazines/reports/documentary"
 msgstr "programas/deportes/documental"
 
 msgid "Magenta"
-msgstr "Argentina"
+msgstr "Magenta"
 
 msgid "Magic"
-msgstr "Magia"
+msgstr "Mágico"
 
 msgid "Main Menu"
 msgstr "Menú Principal"
