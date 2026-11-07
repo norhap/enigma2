@@ -603,6 +603,13 @@ class HarddiskManager:
 
 	def getBlockDevInfo(self, blockdev):
 		devpath = "/sys/block/" + blockdev
+		physdev = exists(devpath)
+		if physdev:
+			dev = blockdev
+			part = None
+		else:
+			dev, part = self.splitDeviceName(blockdev)
+			devpath = "/sys/block/" + dev
 		error = False
 		removable = False
 		BLACKLIST = []
@@ -644,7 +651,7 @@ class HarddiskManager:
 				except OSError:
 					error = True
 			# check for partitions
-			if not is_cdrom and not is_mmc and exists(devpath):
+			if not part and not is_cdrom and not is_mmc and exists(devpath):
 				for partition in listdir(devpath):
 					if partition[0:len(blockdev)] != blockdev:
 						continue
