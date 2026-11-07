@@ -3550,9 +3550,6 @@ msgstr ""
 msgid "Casting"
 msgstr ""
 
-msgid "Catalan"
-msgstr ""
-
 msgid "Catalan / Valencian"
 msgstr ""
 
@@ -3803,9 +3800,6 @@ msgstr ""
 msgid ""
 "Checking tuner %s\n"
 "DiSEqC port %s for %s"
-msgstr ""
-
-msgid "Chichewa"
 msgstr ""
 
 msgid "Chichewa / Chewa / Nyanja"
@@ -7105,6 +7099,9 @@ msgstr ""
 msgid "Estonian"
 msgstr ""
 
+msgid "Eswatini"
+msgstr ""
+
 msgid "Ethernet network interface"
 msgstr ""
 
@@ -7956,9 +7953,6 @@ msgstr ""
 msgid "Friday"
 msgstr ""
 
-msgid "Frisian"
-msgstr ""
-
 msgid "from"
 msgstr ""
 
@@ -8003,9 +7997,6 @@ msgid "FTP passive mode"
 msgstr ""
 
 msgid "FTP setup"
-msgstr ""
-
-msgid "Fula"
 msgstr ""
 
 msgid "Fulah"
@@ -8430,9 +8421,6 @@ msgid "h:mmam/pm"
 msgstr ""
 
 msgid "Haiti"
-msgstr ""
-
-msgid "Haitian"
 msgstr ""
 
 msgid "Haitian / Haitian Creole"
@@ -9714,9 +9702,6 @@ msgstr ""
 msgid "Keyboard mapping file to be used for keyboard input."
 msgstr ""
 
-msgid "Khmer"
-msgstr ""
-
 msgid "Kikuyu / Gikuyu"
 msgstr ""
 
@@ -9762,6 +9747,9 @@ msgstr ""
 msgid "Korean"
 msgstr ""
 
+msgid "Kosovo"
+msgstr ""
+
 msgid "Kraftsport"
 msgstr ""
 
@@ -9790,9 +9778,6 @@ msgid "Kurzfilm"
 msgstr ""
 
 msgid "Kuwait"
-msgstr ""
-
-msgid "Kyrgyz"
 msgstr ""
 
 msgid "Kyrgyzstan"
@@ -10314,9 +10299,6 @@ msgid "MAC:"
 msgstr ""
 
 msgid "Macao"
-msgstr ""
-
-msgid "Macedonia (the former Yugoslav Republic of)"
 msgstr ""
 
 msgid "Macedonian"
@@ -11755,6 +11737,9 @@ msgstr ""
 msgid "North"
 msgstr ""
 
+msgid "North Macedonia"
+msgstr ""
+
 msgid "North Macedonia, Republic of"
 msgstr ""
 
@@ -11774,6 +11759,9 @@ msgid "Norwegian"
 msgstr ""
 
 msgid "Norwegian Bokml"
+msgstr ""
+
+msgid "Norwegian Bokmål"
 msgstr ""
 
 msgid "Norwegian Nynorsk"
@@ -12336,9 +12324,6 @@ msgstr ""
 msgid "Panjabi / Punjabi"
 msgstr ""
 
-msgid "Papiamento"
-msgstr ""
-
 msgid "Papua New Guinea"
 msgstr ""
 
@@ -12373,9 +12358,6 @@ msgid "Parodie"
 msgstr ""
 
 msgid "Partial EPG"
-msgstr ""
-
-msgid "Pashto"
 msgstr ""
 
 msgid "Pass"
@@ -13401,9 +13383,6 @@ msgid "Puerto Rico"
 msgstr ""
 
 msgid "Punch cuts"
-msgstr ""
-
-msgid "Punjabi"
 msgstr ""
 
 msgid "Puppentrick"
@@ -14542,9 +14521,6 @@ msgstr ""
 msgid "Same resolution as skin"
 msgstr ""
 
-msgid "Sami"
-msgstr ""
-
 msgid "Samoa"
 msgstr ""
 
@@ -14844,9 +14820,6 @@ msgid "Science-Fiction"
 msgstr ""
 
 msgid "Scienza"
-msgstr ""
-
-msgid "Scottish Gaelic"
 msgstr ""
 
 msgid "SCPC optimized search range"
@@ -15645,9 +15618,6 @@ msgid "Services"
 msgstr ""
 
 msgid "Services Stream Relay:"
-msgstr ""
-
-msgid "Sesotho"
 msgstr ""
 
 msgid "Set %s as default?"
@@ -16524,9 +16494,6 @@ msgid "Single satellite"
 msgstr ""
 
 msgid "Single step (GOP)"
-msgstr ""
-
-msgid "Sinhala"
 msgstr ""
 
 msgid "Sinhala / Sinhalese"
@@ -17532,9 +17499,6 @@ msgstr ""
 msgid "Swati"
 msgstr ""
 
-msgid "Swaziland"
-msgstr ""
-
 msgid "Swaziland / Eswatini"
 msgstr ""
 
@@ -17925,6 +17889,9 @@ msgstr ""
 msgid ""
 "The AutoTimer plugin is not installed!\n"
 "Do you want to install it?"
+msgstr ""
+
+msgid "The Bahamas"
 msgstr ""
 
 msgid "The bitrate of the video encoder. Larger value improves quality and increases file size."
@@ -19084,6 +19051,9 @@ msgstr ""
 msgid "Type: "
 msgstr ""
 
+msgid "Türkiye"
+msgstr ""
+
 msgid "U - Suitable for all"
 msgstr ""
 
@@ -19682,9 +19652,6 @@ msgstr ""
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
 msgstr ""
 
-msgid "Uyghur"
-msgstr ""
-
 msgid "Uzbek"
 msgstr ""
 
@@ -19812,6 +19779,9 @@ msgid "VideoMode"
 msgstr ""
 
 msgid "Viet Nam"
+msgstr ""
+
+msgid "Vietnam"
 msgstr ""
 
 msgid "Vietnamese"

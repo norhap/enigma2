@@ -3445,9 +3445,6 @@ msgstr "PiP en cascada"
 msgid "Casting"
 msgstr "Casting"
 
-msgid "Catalan"
-msgstr "Catalán"
-
 msgid "Catalan / Valencian"
 msgstr "Catalán / valenciano"
 
@@ -3690,9 +3687,6 @@ msgstr "Comprobación ONID/TSID"
 
 msgid "Checking tuner %s\nDiSEqC port %s for %s"
 msgstr "Comprobando el sintonizador %s\nPuerto DiSEqC %s para %s"
-
-msgid "Chichewa"
-msgstr "Chichewa"
 
 msgid "Chichewa / Chewa / Nyanja"
 msgstr "Chichewa / Chewa / Nyanja"
@@ -6937,6 +6931,9 @@ msgstr "Estonia"
 msgid "Estonian"
 msgstr "Estonio"
 
+msgid "Eswatini"
+msgstr "Esuatini"
+
 msgid "Ethernet network interface"
 msgstr "Interfaz de Red Ethernet"
 
@@ -7780,9 +7777,6 @@ msgstr "Vie"
 msgid "Friday"
 msgstr "Viernes"
 
-msgid "Frisian"
-msgstr "Persa"
-
 msgid "from"
 msgstr "de"
 
@@ -7821,9 +7815,6 @@ msgstr "FTP modo pasivo"
 
 msgid "FTP setup"
 msgstr "Configurar FTP"
-
-msgid "Fula"
-msgstr "Fula"
 
 msgid "Fulah"
 msgstr "Fula"
@@ -8243,9 +8234,6 @@ msgid "h:mmam/pm"
 msgstr "h:mmam/pm"
 
 msgid "Haiti"
-msgstr "Haití"
-
-msgid "Haitian"
 msgstr "Haití"
 
 msgid "Haitian / Haitian Creole"
@@ -9507,9 +9495,6 @@ msgstr "Mapa de teclado"
 msgid "Keyboard mapping file to be used for keyboard input."
 msgstr "Archivo de asignación de teclado que se utilizará para la entrada de teclado."
 
-msgid "Khmer"
-msgstr "Khmer"
-
 msgid "Kikuyu / Gikuyu"
 msgstr "Kikuyu / Gikuyu"
 
@@ -9555,6 +9540,9 @@ msgstr "Corea del Sur"
 msgid "Korean"
 msgstr "Coreano"
 
+msgid "Kosovo"
+msgstr "Kosovo"
+
 msgid "Kraftsport"
 msgstr "Deportes de fuerza"
 
@@ -9584,9 +9572,6 @@ msgstr "Cortometraje"
 
 msgid "Kuwait"
 msgstr "Kuwait"
-
-msgid "Kyrgyz"
-msgstr "Kirguís"
 
 msgid "Kyrgyzstan"
 msgstr "Kirguistán"
@@ -10106,9 +10091,6 @@ msgstr "MAC:"
 
 msgid "Macao"
 msgstr "Macao"
-
-msgid "Macedonia (the former Yugoslav Republic of)"
-msgstr "Macedonia"
 
 msgid "Macedonian"
 msgstr "Nueva Caledonia"
@@ -11529,6 +11511,9 @@ msgstr "Velocidad normal"
 msgid "North"
 msgstr "Norte"
 
+msgid "North Macedonia"
+msgstr "Macedonia del Norte"
+
 msgid "North Macedonia, Republic of"
 msgstr "República de Macedonia del Norte"
 
@@ -11549,6 +11534,9 @@ msgstr "Noruego"
 
 msgid "Norwegian Bokml"
 msgstr "Bokml Noruego"
+
+msgid "Norwegian Bokmål"
+msgstr "Bokmål noruego"
 
 msgid "Norwegian Nynorsk"
 msgstr "Nynorsk Noruego"
@@ -12108,9 +12096,6 @@ msgstr "Pánico a"
 msgid "Panjabi / Punjabi"
 msgstr "Panjabí / Punjabí"
 
-msgid "Papiamento"
-msgstr "Papiamento"
-
 msgid "Papua New Guinea"
 msgstr "Papúa Nueva Guinea"
 
@@ -12146,9 +12131,6 @@ msgstr "Parodia"
 
 msgid "Partial EPG"
 msgstr "EPG Parcial"
-
-msgid "Pashto"
-msgstr "Pastún"
 
 msgid "Pass"
 msgstr "Paso"
@@ -13160,9 +13142,6 @@ msgstr "Puerto Rico"
 
 msgid "Punch cuts"
 msgstr "Cortes por punzonado"
-
-msgid "Punjabi"
-msgstr "Punjabi"
 
 msgid "Puppentrick"
 msgstr "Animación con marionetas"
@@ -14298,9 +14277,6 @@ msgstr "Mismo comportamiento que la animación actual"
 msgid "Same resolution as skin"
 msgstr "Misma resolución que el skin"
 
-msgid "Sami"
-msgstr "Sami"
-
 msgid "Samoa"
 msgstr "Samoa"
 
@@ -14601,9 +14577,6 @@ msgstr "Ciencia"
 
 msgid "Scienza"
 msgstr "Ciencia"
-
-msgid "Scottish Gaelic"
-msgstr "Gaélico escocés"
 
 msgid "SCPC optimized search range"
 msgstr "Rango de búsqueda optimizada SCPC"
@@ -15387,9 +15360,6 @@ msgstr "Canales"
 
 msgid "Services Stream Relay:"
 msgstr "Canales Stream Relay:"
-
-msgid "Sesotho"
-msgstr "Lesotho"
 
 msgid "Set %s as default?"
 msgstr "¿Establecer %s por defecto?"
@@ -16263,9 +16233,6 @@ msgstr "Satélite único"
 
 msgid "Single step (GOP)"
 msgstr "Único paso (GOP)"
-
-msgid "Sinhala"
-msgstr "Cingalés"
 
 msgid "Sinhala / Sinhalese"
 msgstr "Cingalés / Cingalés"
@@ -17260,9 +17227,6 @@ msgstr "Cambiar SNR en ‘%' por SNR en 'dB'"
 msgid "Swati"
 msgstr "Swati"
 
-msgid "Swaziland"
-msgstr "Swazilandia"
-
 msgid "Swaziland / Eswatini"
 msgstr "Swazilandia"
 
@@ -17652,6 +17616,9 @@ msgstr "Este plugin está instalado."
 
 msgid "The AutoTimer plugin is not installed!\nDo you want to install it?"
 msgstr "¡El plugin AutoTimer no está instalado!\n¿Quieres instalarlo?"
+
+msgid "The Bahamas"
+msgstr "Las Bahamas"
 
 msgid "The bitrate of the video encoder. Larger value improves quality and increases file size."
 msgstr "La tasa de bits del codificador de vídeo. Un valor mayor mejora la calidad y aumenta el tamaño del archivo."
@@ -18726,6 +18693,9 @@ msgstr "Tuner Tipo"
 msgid "Type: "
 msgstr "Tipo: "
 
+msgid "Türkiye"
+msgstr "Turquía"
+
 msgid "U - Suitable for all"
 msgstr "Apta para todos"
 
@@ -19319,9 +19289,6 @@ msgstr "usando:"
 msgid "Usually when the subtitle language is the same as the audio language, the subtitles will not be used. Enable this option to allow these subtitles to be used."
 msgstr "Por lo general, cuando el idioma de los subtítulos es el mismo que el del audio, los subtítulos no se usarán. Habilite esta opción para permitir el uso de estos subtítulos."
 
-msgid "Uyghur"
-msgstr "Uigur"
-
 msgid "Uzbek"
 msgstr "Uzbekistan"
 
@@ -19449,6 +19416,9 @@ msgid "VideoMode"
 msgstr "Modo de video"
 
 msgid "Viet Nam"
+msgstr "Vietnam"
+
+msgid "Vietnam"
 msgstr "Vietnam"
 
 msgid "Vietnamese"
