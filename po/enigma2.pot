@@ -1,45 +1,53 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the Norhap Enigma2 package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translations template for Norhap Enigma2.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the Norhap Enigma2 project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 11:07+0100\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-08 18:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.18.0\n"
 
-msgctxt "third event: 'third' event label"
-msgid "Later"
-msgstr ""
-
-msgctxt "now/next: 'next' event label"
-msgid "Next"
-msgstr ""
-
-msgctxt "now/next: 'now' event label"
-msgid "Now"
+msgctxt "Abbreviation of \"Configurable\""
+msgid "C"
 msgstr ""
 
 msgctxt "Text list separator"
 msgid ", "
 msgstr ""
 
-msgctxt "Abbreviation of \"Configurable\""
-msgid "C"
+msgctxt "now/next: 'now' event label"
+msgid "Now"
+msgstr ""
+
+msgctxt "now/next: 'next' event label"
+msgid "Next"
+msgstr ""
+
+msgctxt "third event: 'third' event label"
+msgid "Later"
 msgstr ""
 
 msgctxt "Video output mode"
 msgid "Mode"
+msgstr ""
+
+msgctxt "button label, 'previous screen'"
+msgid "Prev"
+msgstr ""
+
+msgctxt "button label, 'next screen'"
+msgid "Next"
 msgstr ""
 
 msgctxt "Hotkey help separator"
@@ -48,14 +56,6 @@ msgstr ""
 
 msgctxt "Satellite configuration mode"
 msgid "Mode"
-msgstr ""
-
-msgctxt "button label, 'next screen'"
-msgid "Next"
-msgstr ""
-
-msgctxt "button label, 'previous screen'"
-msgid "Prev"
 msgstr ""
 
 msgid ""
@@ -783,13 +783,13 @@ msgstr ""
 msgid "%d MHz"
 msgstr ""
 
+msgid "%d min"
+msgstr ""
+
 msgid "%d Min"
 msgid_plural "%d Mins"
 msgstr[0] ""
 msgstr[1] ""
-
-msgid "%d min"
-msgstr ""
 
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1168,9 +1168,6 @@ msgid "- 22:00"
 msgstr ""
 
 msgid "- Recovery mode image"
-msgstr ""
-
-msgid "- Recovery mode image (current)"
 msgstr ""
 
 msgid "-1"
@@ -1946,10 +1943,10 @@ msgstr ""
 msgid "Adult Hits"
 msgstr ""
 
-msgid "Adult Movie"
+msgid "adult movie"
 msgstr ""
 
-msgid "adult movie"
+msgid "Adult Movie"
 msgstr ""
 
 msgid "Advanced"
@@ -2528,10 +2525,10 @@ msgstr ""
 msgid "At End:"
 msgstr ""
 
-msgid "Athletics"
+msgid "athletics"
 msgstr ""
 
-msgid "athletics"
+msgid "Athletics"
 msgstr ""
 
 msgid "Atletica"
@@ -2891,10 +2888,10 @@ msgstr ""
 msgid "Bahrain"
 msgstr ""
 
-msgid "Ballet"
+msgid "ballet"
 msgstr ""
 
-msgid "ballet"
+msgid "Ballet"
 msgstr ""
 
 msgid "Bambara"
@@ -3152,10 +3149,10 @@ msgstr ""
 msgid "Botswana"
 msgstr ""
 
-msgid "bottom"
+msgid "Bottom"
 msgstr ""
 
-msgid "Bottom"
+msgid "bottom"
 msgstr ""
 
 msgid "Boulevard"
@@ -4161,10 +4158,10 @@ msgstr ""
 msgid "Combo"
 msgstr ""
 
-msgid "Comedy"
+msgid "comedy"
 msgstr ""
 
-msgid "comedy"
+msgid "Comedy"
 msgstr ""
 
 msgid "comedy (general)"
@@ -4785,10 +4782,10 @@ msgstr ""
 msgid "Cook Islands"
 msgstr ""
 
-msgid "Cooking"
+msgid "cooking"
 msgstr ""
 
-msgid "cooking"
+msgid "Cooking"
 msgstr ""
 
 msgid "Copy"
@@ -5456,10 +5453,10 @@ msgstr ""
 msgid "Delete finished timers?"
 msgstr ""
 
-msgid "Delete Image"
+msgid "Delete image"
 msgstr ""
 
-msgid "Delete image"
+msgid "Delete Image"
 msgstr ""
 
 msgid "Delete Lang"
@@ -5565,6 +5562,9 @@ msgid "Descrambling options"
 msgstr ""
 
 msgid "Description"
+msgstr ""
+
+msgid "description"
 msgstr ""
 
 msgid "Deselect"
@@ -6047,10 +6047,10 @@ msgstr ""
 msgid "Documentario"
 msgstr ""
 
-msgid "Documentary"
+msgid "documentary"
 msgstr ""
 
-msgid "documentary"
+msgid "Documentary"
 msgstr ""
 
 msgid "documentary (general)"
@@ -6695,10 +6695,10 @@ msgstr ""
 msgid "Enable zapping with CH+/-, B+/-, P+/-"
 msgstr ""
 
-msgid "Enabled"
+msgid "enabled"
 msgstr ""
 
-msgid "enabled"
+msgid "Enabled"
 msgstr ""
 
 msgid "Enabled displays PVR scrambled recording debug data."
@@ -6985,10 +6985,10 @@ msgstr ""
 msgid "Equestri"
 msgstr ""
 
-msgid "Equestrian"
+msgid "equestrian"
 msgstr ""
 
-msgid "equestrian"
+msgid "Equestrian"
 msgstr ""
 
 msgid "Eritrea"
@@ -7248,10 +7248,10 @@ msgstr ""
 msgid "Exit network wizard"
 msgstr ""
 
-msgid "Exit networkadapter setup menu"
+msgid "exit networkadapter setup menu"
 msgstr ""
 
-msgid "exit networkadapter setup menu"
+msgid "Exit networkadapter setup menu"
 msgstr ""
 
 msgid "Exit Quad Channel Selection"
@@ -7527,16 +7527,16 @@ msgstr ""
 msgid "Farsi / Persian"
 msgstr ""
 
-msgid "Fashion"
-msgstr ""
-
 msgid "fashion"
 msgstr ""
 
-msgid "Fast"
+msgid "Fashion"
 msgstr ""
 
 msgid "fast"
+msgstr ""
+
+msgid "Fast"
 msgstr ""
 
 msgid "Fast Channel Change"
@@ -7737,10 +7737,10 @@ msgstr ""
 msgid "Fishing"
 msgstr ""
 
-msgid "Fitness & Health"
+msgid "fitness & health"
 msgstr ""
 
-msgid "fitness & health"
+msgid "Fitness & Health"
 msgstr ""
 
 msgid "fitness and health"
@@ -8083,10 +8083,10 @@ msgstr ""
 msgid "Gangster"
 msgstr ""
 
-msgid "Gardening"
+msgid "gardening"
 msgstr ""
 
-msgid "gardening"
+msgid "Gardening"
 msgstr ""
 
 msgid "Garten"
@@ -8720,10 +8720,10 @@ msgstr ""
 msgid "Hong Kong"
 msgstr ""
 
-msgid "Hops:"
+msgid "hops:"
 msgstr ""
 
-msgid "hops:"
+msgid "Hops:"
 msgstr ""
 
 msgid "Horizontal"
@@ -9187,10 +9187,10 @@ msgstr ""
 msgid "infotainment (general)"
 msgstr ""
 
-msgid "Init"
+msgid "init"
 msgstr ""
 
-msgid "init"
+msgid "Init"
 msgstr ""
 
 msgid "init module"
@@ -9559,10 +9559,10 @@ msgstr ""
 msgid "Javanese"
 msgstr ""
 
-msgid "Jazz"
+msgid "jazz"
 msgstr ""
 
-msgid "jazz"
+msgid "Jazz"
 msgstr ""
 
 msgid "Jersey"
@@ -10477,10 +10477,10 @@ msgstr ""
 msgid "Marshallese"
 msgstr ""
 
-msgid "Martial Sports"
+msgid "martial sports"
 msgstr ""
 
-msgid "martial sports"
+msgid "Martial Sports"
 msgstr ""
 
 msgid "Martinique"
@@ -10609,6 +10609,9 @@ msgstr ""
 msgid "Menu config"
 msgstr ""
 
+msgid "menulist"
+msgstr ""
+
 msgid "Menusort (%s)"
 msgstr ""
 
@@ -10675,10 +10678,10 @@ msgstr ""
 msgid "Minority Sports"
 msgstr ""
 
-msgid "Mins"
+msgid "mins"
 msgstr ""
 
-msgid "mins"
+msgid "Mins"
 msgstr ""
 
 msgid "Mins Secs"
@@ -10810,10 +10813,10 @@ msgstr ""
 msgid "Motor running timeout"
 msgstr ""
 
-msgid "Motor Sport"
+msgid "motor sport"
 msgstr ""
 
-msgid "motor sport"
+msgid "Motor Sport"
 msgstr ""
 
 msgid "Motorcycling"
@@ -10822,10 +10825,10 @@ msgstr ""
 msgid "Motori"
 msgstr ""
 
-msgid "Motoring"
+msgid "motoring"
 msgstr ""
 
-msgid "motoring"
+msgid "Motoring"
 msgstr ""
 
 msgid "Motors"
@@ -10873,19 +10876,19 @@ msgstr ""
 msgid "Move down one screen. Move to the last line of the screen if this is the last screen."
 msgstr ""
 
-msgid "Move down to last entry"
+msgid "move down to last entry"
 msgstr ""
 
-msgid "move down to last entry"
+msgid "Move down to last entry"
 msgstr ""
 
 msgid "Move down to last line"
 msgstr ""
 
-msgid "Move down to next entry"
+msgid "move down to next entry"
 msgstr ""
 
-msgid "move down to next entry"
+msgid "Move down to next entry"
 msgstr ""
 
 msgid "Move down to the last line in the list."
@@ -11002,19 +11005,19 @@ msgstr ""
 msgid "Move up one screen. Move to the first line of the screen if this is the first screen."
 msgstr ""
 
-msgid "Move up to first entry"
+msgid "move up to first entry"
 msgstr ""
 
-msgid "move up to first entry"
+msgid "Move up to first entry"
 msgstr ""
 
 msgid "Move up to first line"
 msgstr ""
 
-msgid "Move up to previous entry"
+msgid "move up to previous entry"
 msgstr ""
 
-msgid "move up to previous entry"
+msgid "Move up to previous entry"
 msgstr ""
 
 msgid "Move up to the first line in the list."
@@ -11395,10 +11398,10 @@ msgstr ""
 msgid "News and Weather"
 msgstr ""
 
-msgid "News Magazine"
+msgid "news magazine"
 msgstr ""
 
-msgid "news magazine"
+msgid "News Magazine"
 msgstr ""
 
 msgid "News/Current Affairs"
@@ -11461,13 +11464,13 @@ msgstr ""
 msgid "nnw"
 msgstr ""
 
-msgid "NO"
-msgstr ""
-
 msgid "No"
 msgstr ""
 
 msgid "no"
+msgstr ""
+
+msgid "NO"
 msgstr ""
 
 msgid "No (supported) DVDROM found!"
@@ -11722,10 +11725,10 @@ msgstr ""
 msgid "norhap"
 msgstr ""
 
-msgid "Normal"
+msgid "normal"
 msgstr ""
 
-msgid "normal"
+msgid "Normal"
 msgstr ""
 
 msgid "Normal mode"
@@ -11842,10 +11845,10 @@ msgstr ""
 msgid "nothing"
 msgstr ""
 
-msgid "Nothing connected"
+msgid "nothing connected"
 msgstr ""
 
-msgid "nothing connected"
+msgid "Nothing connected"
 msgstr ""
 
 msgid ""
@@ -12360,6 +12363,9 @@ msgstr ""
 msgid "Partial EPG"
 msgstr ""
 
+msgid "pass"
+msgstr ""
+
 msgid "Pass"
 msgstr ""
 
@@ -12549,10 +12555,10 @@ msgstr ""
 msgid "Play audio in background"
 msgstr ""
 
-msgid "Play Audio-CD..."
+msgid "Play audio-CD..."
 msgstr ""
 
-msgid "Play audio-CD..."
+msgid "Play Audio-CD..."
 msgstr ""
 
 msgid "Play back media files"
@@ -12582,10 +12588,10 @@ msgstr ""
 msgid "Play List"
 msgstr ""
 
-msgid "Play Music..."
+msgid "Play music..."
 msgstr ""
 
-msgid "Play music..."
+msgid "Play Music..."
 msgstr ""
 
 msgid "Play next"
@@ -13799,10 +13805,10 @@ msgstr ""
 msgid "Relative"
 msgstr ""
 
-msgid "Religion"
+msgid "religion"
 msgstr ""
 
-msgid "religion"
+msgid "Religion"
 msgstr ""
 
 msgid "Religione"
@@ -14326,10 +14332,10 @@ msgstr ""
 msgid "Rock"
 msgstr ""
 
-msgid "Rock/Pop"
+msgid "rock/pop"
 msgstr ""
 
-msgid "rock/pop"
+msgid "Rock/Pop"
 msgstr ""
 
 msgid "rodata"
@@ -14338,10 +14344,10 @@ msgstr ""
 msgid "Roll-off"
 msgstr ""
 
-msgid "Romance"
+msgid "romance"
 msgstr ""
 
-msgid "romance"
+msgid "Romance"
 msgstr ""
 
 msgid "Romania"
@@ -14798,10 +14804,10 @@ msgstr ""
 msgid "Sci"
 msgstr ""
 
-msgid "Sci-FI"
+msgid "Sci-Fi"
 msgstr ""
 
-msgid "Sci-Fi"
+msgid "Sci-FI"
 msgstr ""
 
 msgid "Science"
@@ -15192,10 +15198,10 @@ msgstr ""
 msgid "Select Location"
 msgstr ""
 
-msgid "Select menu entry"
+msgid "select menu entry"
 msgstr ""
 
-msgid "select menu entry"
+msgid "Select menu entry"
 msgstr ""
 
 msgid "Select movie"
@@ -15235,6 +15241,8 @@ msgid "Select slot"
 msgstr ""
 
 msgid "Select slot image and press OK or GREEN button to reboot."
+msgstr ""
+msgid "- Recovery mode image (current)"
 msgstr ""
 
 msgid "Select softcam"
@@ -16124,10 +16132,10 @@ msgstr ""
 msgid "Show live tv when movie stopped"
 msgstr ""
 
-msgid "Show Log"
+msgid "Show log"
 msgstr ""
 
-msgid "Show log"
+msgid "Show Log"
 msgstr ""
 
 msgid "Show Logs Manager in extensions list"
@@ -16631,10 +16639,10 @@ msgstr ""
 msgid "Slovenian"
 msgstr ""
 
-msgid "Slow"
+msgid "slow"
 msgstr ""
 
-msgid "slow"
+msgid "Slow"
 msgstr ""
 
 msgid "Slow motion"
@@ -17688,10 +17696,10 @@ msgstr ""
 msgid "Talk"
 msgstr ""
 
-msgid "Talk Show"
+msgid "talk show"
 msgstr ""
 
-msgid "talk show"
+msgid "Talk Show"
 msgstr ""
 
 msgid "Tamil"
@@ -17842,6 +17850,9 @@ msgid "Testscreens that are helpfull to fine-tune your display"
 msgstr ""
 
 msgid "TEXT"
+msgstr ""
+
+msgid "text"
 msgstr ""
 
 msgid "Text"
@@ -18727,10 +18738,10 @@ msgstr ""
 msgid "Tonga"
 msgstr ""
 
-msgid "top"
+msgid "Top"
 msgstr ""
 
-msgid "Top"
+msgid "top"
 msgstr ""
 
 msgid "Top 40"
@@ -19030,10 +19041,10 @@ msgstr ""
 msgid "TXT Subtitles page & lang"
 msgstr ""
 
-msgid "Type"
+msgid "type"
 msgstr ""
 
-msgid "type"
+msgid "Type"
 msgstr ""
 
 msgid "Type Display: "
@@ -19120,10 +19131,10 @@ msgstr ""
 msgid "Uncover dashed flickering line for this service"
 msgstr ""
 
-msgid "Undefined"
+msgid "undefined"
 msgstr ""
 
-msgid "undefined"
+msgid "Undefined"
 msgstr ""
 
 msgid "Under 5"
@@ -19180,10 +19191,10 @@ msgstr ""
 msgid "Universal LNB"
 msgstr ""
 
-msgid "Unknown"
+msgid "unknown"
 msgstr ""
 
-msgid "unknown"
+msgid "Unknown"
 msgstr ""
 
 msgid "UNKNOWN"
@@ -19844,10 +19855,10 @@ msgstr ""
 msgid "View teletext"
 msgstr ""
 
-msgid "View Video CD..."
+msgid "View video CD..."
 msgstr ""
 
-msgid "View video CD..."
+msgid "View Video CD..."
 msgstr ""
 
 msgid "View, install and remove available or installed packages."
@@ -20067,10 +20078,10 @@ msgstr ""
 msgid "Watch recordings"
 msgstr ""
 
-msgid "Water Sport"
+msgid "water sport"
 msgstr ""
 
-msgid "water sport"
+msgid "Water Sport"
 msgstr ""
 
 msgid "Watersports"
@@ -20458,6 +20469,9 @@ msgstr ""
 msgid "Width"
 msgstr ""
 
+msgid "winter sport"
+msgstr ""
+
 msgid "Winter Sports"
 msgstr ""
 
@@ -20577,6 +20591,9 @@ msgstr ""
 msgid "WSS on 4:3"
 msgstr ""
 
+msgid "wsw"
+msgstr ""
+
 msgid "x"
 msgstr ""
 
@@ -20613,13 +20630,16 @@ msgstr ""
 msgid "Yemen"
 msgstr ""
 
-msgid "YES"
-msgstr ""
-
 msgid "Yes"
 msgstr ""
 
 msgid "yes"
+msgstr ""
+
+msgid "YES"
+msgstr ""
+
+msgid "yes (keep feeds)"
 msgstr ""
 
 msgid "Yes (save index in setup tuner)"
@@ -20944,6 +20964,9 @@ msgstr ""
 msgid "Zap"
 msgstr ""
 
+msgid "zap and record"
+msgstr ""
+
 msgid "Zap and record"
 msgstr ""
 
@@ -20993,6 +21016,9 @@ msgid "Zap up"
 msgstr ""
 
 msgid "Zap Up/Down"
+msgstr ""
+
+msgid "zapped"
 msgstr ""
 
 msgid "Zapped to timer service %s as Picture in Picture!"

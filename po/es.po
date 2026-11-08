@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-03 11:07+0100\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-08 18:44+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -5441,6 +5441,9 @@ msgstr "Opciones de descifrado"
 msgid "Description"
 msgstr "Descripción"
 
+msgid "description"
+msgstr "descripción"
+
 msgid "Deselect"
 msgstr "Deseleccionar"
 
@@ -10398,6 +10401,9 @@ msgstr "Acciones Menú"
 msgid "Menu config"
 msgstr "Acciones Menú"
 
+msgid "menulist"
+msgstr "lista de menú"
+
 msgid "Menusort (%s)"
 msgstr "Clasificación de menú (%s)"
 
@@ -12134,6 +12140,9 @@ msgstr "EPG Parcial"
 
 msgid "Pass"
 msgstr "Paso"
+
+msgid "pass"
+msgstr "paso"
 
 msgid "Pass %d/%d"
 msgstr "Paso %d/%d"
@@ -17575,6 +17584,9 @@ msgstr "TEXTO"
 msgid "Text"
 msgstr "Texto"
 
+msgid "text"
+msgstr "texto"
+
 msgid "TEXT   Reset"
 msgstr "TEXT   Restablecer"
 
@@ -20081,6 +20093,9 @@ msgstr "Ancho"
 msgid "width"
 msgstr "ancho"
 
+msgid "winter sport"
+msgstr "deporte de invierno"
+
 msgid "Winter Sports"
 msgstr "Deporte de invierno"
 
@@ -20200,6 +20215,9 @@ msgstr "Escribir a /tmp/positionersetup.log"
 msgid "WSS on 4:3"
 msgstr "WSS en 4:3"
 
+msgid "wsw"
+msgstr "wsw"
+
 msgid "x"
 msgstr "x"
 
@@ -20244,6 +20262,9 @@ msgstr "Sí"
 
 msgid "yes"
 msgstr "sí"
+
+msgid "yes (keep feeds)"
+msgstr "sí (mantener los feeds)"
 
 msgid "Yes (save index in setup tuner)"
 msgstr "Sí (guardar el índice en la configuración del sintonizador)"
@@ -20515,6 +20536,9 @@ msgstr "zap"
 msgid "Zap and record"
 msgstr "Zapea y graba"
 
+msgid "zap and record"
+msgstr "zapear y grabar"
+
 msgid "Zap back to previously tuned service?"
 msgstr "¿Volver al canal previamente sintonizado?"
 
@@ -20562,6 +20586,9 @@ msgstr "Zapea arriba"
 
 msgid "Zap Up/Down"
 msgstr "Zapea arriba - abajo"
+
+msgid "zapped"
+msgstr "zapeado"
 
 msgid "Zapped to timer service %s as Picture in Picture!"
 msgstr "Zapeo al canal de temporizador %s como PiP!"
