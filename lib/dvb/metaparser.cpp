@@ -1,7 +1,10 @@
-#include <lib/dvb/metaparser.h>
+#include <fstream>
+#include <sstream>
+#include <cctype>
 #include <lib/base/cfile.h>
 #include <lib/base/eerror.h>
 #include <lib/service/iservice.h>
+#include <lib/dvb/metaparser.h>
 #include <errno.h>
 #include <sys/stat.h>
 
@@ -233,4 +236,29 @@ int eDVBMetaParser::updateMeta(const std::string &tsname)
 	}
 	fprintf(f, "%s\n%s\n%s\n%d\n%s\n%lld\n%lld\n%s\n%d\n%d\n", ref.toString().c_str(), m_name.c_str(), m_description.c_str(), m_time_create, m_tags.c_str(), m_length, m_filesize, m_service_data.c_str(), m_packet_size, m_scrambled);
 	return 0;
+}
+static bool isStartOfMetadata(const std::string& line) {
+	return line.size() > 2 && isupper(line[0]) && line[1] == ' ' && isdigit(line[2]);
+}
+
+std::string eDVBMetaParser::parseTxtFile(const std::string& basename) {
+	if (basename.length() < 2)
+		return "";
+	std::string filename = basename;
+	filename.erase(filename.length() - 2, 2);
+	filename += "txt";
+	std::ifstream file(filename);
+	std::string result = "";
+	if (file.is_open()) {
+		std::string line;
+		std::ostringstream content;
+
+		while (getline(file, line)) {
+			if (isStartOfMetadata(line))
+				break;
+			content << line << '\n';
+		}
+		result = content.str();
+	}
+	return result;
 }
