@@ -590,7 +590,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		}
 
 	def getinitUserDefinedActionsDescription(self, key):
-		return _(userDefinedActions.get(eval("config.movielist.%s.value" % key), _("Not Defined")))
+		return userDefinedActions.get(eval("config.movielist.%s.value" % key), _("Not Defined"))
 
 	def _callButton(self, name):
 		if name.startswith("@"):
