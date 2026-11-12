@@ -1,4 +1,5 @@
 from os.path import isfile, join
+from time import monotonic
 
 from enigma import ePixmap, iServiceInformation
 
@@ -32,6 +33,8 @@ class PicEmu2(Renderer, Poll):
 		self.picon_default = "picon_default.png"
 		self.poll_interval = 1000
 		self.poll_enabled = True
+		self._process_cache_time = 0
+		self._process_cache = None
 
 	def applySkin(self, desktop, parent):
 		attribs = []
@@ -78,23 +81,31 @@ class PicEmu2(Renderer, Poll):
 				self.instance.setPixmapFromFile(self.pngName)
 
 	def matchCAId(self, caids):
-		from process import ProcessList
-		ncam = str(ProcessList().named("ncam")).strip("[]")
+		now = monotonic()
+		if self._process_cache is None or now - self._process_cache_time >= 5:
+			from process import ProcessList
+			self._process_cache = str(ProcessList().named("ncam")).strip("[]")
+			self._process_cache_time = now
+		ncam = self._process_cache
 		lines = []
+		sName = None
 		try:
 			for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
 				if not ncam:
 					for caid in caids:
 						sName = self.camds.get(line[0:4])
 						if sName:
-							return sName
+							break
 				else:
 					for caid in caids:
 						sName = self.ncam.get(line[0:4])
 						if sName:
-							return sName
+							break
+				if sName:
+					break
 		except OSError as err:
 			print("[PicEmu2] %s" % err)
+		return sName
 
 	def findPicon(self, serviceName):
 		for path in self.searchPaths:
