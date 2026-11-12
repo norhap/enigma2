@@ -690,6 +690,14 @@ class DABScan(ServiceScan):
 		self.scanFinished = True
 		if self.usbScanChannels and (self.usbServices or self.clearBeforeScan) and not self.writeUSBBouquet():
 			self.failures.append(_("DAB+ USB: bouquet could not be written"))
+		# [norhap] check translate Last Scanned.
+		path = "/etc/enigma2/userbouquet.LastScanned.radio"
+		if exists(path):
+			with open(path, "r") as fr:
+				lastscanned_content = fr.read()
+			if _("Last Scanned") not in lastscanned_content:
+				with open(path, "w") as fw:
+					fw.write(lastscanned_content.replace("Last Scanned", _("Last Scanned")))
 		if self.saveRegisteredParents:
 			eDVBDB.getInstance().saveServicelist()
 		eDVBDB.getInstance().reloadBouquets()
