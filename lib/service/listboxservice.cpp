@@ -632,8 +632,16 @@ inline bool compareServices(const eServiceReference &src, const eServiceReferenc
 
 bool eListboxServiceContent::checkServiceIsRecorded(eServiceReference ref,pNavigation::RecordType type)
 {
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
+	eNavigation *navigation = eNavigation::getInstance();
+	if (!navigation)
+		return false;
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
+
 	std::map<ePtr<iRecordableService>, eServiceReference, std::less<iRecordableService*> > recordedServices;
-	recordedServices = eNavigation::getInstance()->getRecordingsServices(type);
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
+	recordedServices = navigation->getRecordingsServices(type);
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
 	for (std::map<ePtr<iRecordableService>, eServiceReference >::iterator it = recordedServices.begin(); it != recordedServices.end(); ++it)
 	{
 		if (ref.flags & eServiceReference::isGroup)

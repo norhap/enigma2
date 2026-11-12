@@ -558,6 +558,11 @@ inline bool compareServices(const eServiceReference &src, const eServiceReferenc
 
 bool eListboxPythonServiceContent::checkServiceIsRecorded(eServiceReference ref, pNavigation::RecordType type)
 {
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
+	eNavigation *navigation = eNavigation::getInstance();
+	if (!navigation)
+		return false;
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
 
 	const bool isGroup = ref.flags & eServiceReference::isGroup;
 
@@ -579,7 +584,9 @@ bool eListboxPythonServiceContent::checkServiceIsRecorded(eServiceReference ref,
 	}
 
 	std::vector<eServiceReference> recordedServices;
-	eNavigation::getInstance()->getRecordingsServicesOnly(recordedServices, type);
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
+	navigation->getRecordingsServicesOnly(recordedServices, type);
+	/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
 
 	if (!recordedServices.empty())
 	{
@@ -606,7 +613,9 @@ bool eListboxPythonServiceContent::checkServiceIsRecorded(eServiceReference ref,
 
 	if (type & pNavigation::isStreaming)
 	{
-		const auto &streamServices = eNavigation::getInstance()->getStreamServiceList();
+		/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
+		const auto &streamServices = navigation->getStreamServiceList();
+		/* [norhap] guard avoid crash during the closing Ctrl + C terminal of the channel list */
 		if (!streamServices.empty())
 		{
 			const std::string refString = ref.toString();
