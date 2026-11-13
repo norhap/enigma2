@@ -26,6 +26,9 @@
 #include <lib/base/init.h>
 #include <lib/base/init_num.h>
 
+#include <lib/gdi/font_arabic.h>
+#include <hb-ft.h>
+#include <hb-ot.h>
 #include <fribidi/fribidi.h>
 
 #include <map>
@@ -188,8 +191,29 @@ std::string fontRenderClass::AddFont(const std::string &filename, const std::str
 	return n->face;
 }
 
+void fontRenderClass::ClearFonts()
+{
+	singleLock s(ftlock);
+	while (font)
+	{
+		fontListEntry *entry = font;
+		font = font->next;
+		FTC_Manager_RemoveFaceID(cacheManager, (FTC_FaceID)entry);
+		delete entry;
+	}
+	eTextPara::setReplacementFont("");
+	eTextPara::setFallbackFont("");
+}
+
+void clearFonts()
+{
+	fontRenderClass::getInstance()->ClearFonts();
+}
+
 fontRenderClass::fontListEntry::~fontListEntry()
 {
+	if (shapingFont)
+		hb_font_destroy(shapingFont);
 }
 
 fontRenderClass::fontRenderClass(): fb(fbClass::getInstance())
@@ -229,6 +253,10 @@ fontRenderClass::fontRenderClass(): fb(fbClass::getInstance())
 		if (FTC_Image_Cache_New(cacheManager, &imageCache))
 		{
 			eDebug("[Font] Initializing font cache imagecache failed!");
+		}
+		if (FTC_CMapCache_New(cacheManager, &cmapCache))
+		{
+			eDebug("[Font] Initializing font cache cmap failed!");
 		}
 		if (FT_Stroker_New(library, &stroker))
 		{
@@ -303,6 +331,18 @@ std::vector<std::string> fontRenderClass::getFontFaces()
 	return v;
 }
 
+FT_UInt Font::getCharIndex(unsigned int codepoint)
+{
+	return renderer->getCharIndex(this, codepoint, 0);
+}
+
+inline FT_UInt fontRenderClass::getCharIndex(Font *fnt, unsigned long chr, int rflags)
+{
+	if (rflags & RS_DIRECT)
+		return (FT_UInt)chr;
+	return FTC_CMapCache_Lookup(cmapCache, fnt->scaler.face_id, -1, (FT_UInt32)chr);
+}
+
 void addFont(const char *filename, const char *alias, int scale_factor, int is_replacement, int renderflags)
 {
 	fontRenderClass::getInstance()->AddFont(filename, alias, scale_factor, renderflags);
@@ -314,6 +354,28 @@ void addFont(const char *filename, const char *alias, int scale_factor, int is_r
 }
 
 DEFINE_REF(Font);
+
+// renderString holds ftlock while shaping. Keep one font per registered face,
+// sharing its OpenType tables across labels without retaining rendered text.
+hb_font_t *Font::getShapingFont(FT_Face face)
+{
+	auto *entry = static_cast<fontRenderClass::fontListEntry *>(scaler.face_id);
+	if (!entry->shapingFont)
+	{
+		hb_face_t *hbFace = hb_ft_face_create_referenced(face);
+		entry->shapingFont = hb_font_create(hbFace);
+		hb_face_destroy(hbFace);
+		hb_ot_font_set_funcs(entry->shapingFont);
+	}
+	unsigned int width, height;
+	hb_font_get_ppem(entry->shapingFont, &width, &height);
+	if (width != scaler.width || height != scaler.height)
+	{
+		hb_font_set_scale(entry->shapingFont, scaler.width * 64, scaler.height * 64);
+		hb_font_set_ppem(entry->shapingFont, scaler.width, scaler.height);
+	}
+	return entry->shapingFont;
+}
 
 Font::Font(fontRenderClass *render, FTC_FaceID faceid, int isize, int tw, int renderflags): tabwidth(tw)
 {
@@ -341,6 +403,16 @@ inline FT_Error Font::getGlyphBitmap(FT_ULong glyph_index, FTC_SBit *sbit)
 	return renderer->getGlyphBitmap(&font, glyph_index, sbit);
 }
 
+int Font::getGlyphAdvance(FT_Face face, FT_UInt glyphIndex)
+{
+	FTC_SBit bitmap;
+	if (!getGlyphBitmap(glyphIndex, &bitmap) && bitmap->buffer)
+		return bitmap->xadvance;
+	if (FT_Load_Glyph(face, glyphIndex, FT_LOAD_DEFAULT))
+		return 0;
+	return face->glyph->advance.x >> 6;
+}
+
 #ifdef HAVE_FREETYPE2
 inline FT_Error Font::getGlyphImage(FT_UInt glyph_index, FT_Glyph *glyph, FT_Glyph *borderglyph, int bordersize)
 #else
@@ -356,11 +428,11 @@ Font::~Font()
 
 DEFINE_REF(eTextPara);
 int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt glyphIndex, int flags, int rflags, int border, bool last,
-		bool activate_newcolor, unsigned long newcolor)
+		bool activate_newcolor, unsigned long newcolor, const PositionedGlyph *position)
 {
 	int xadvance, top, left, height;
 	pGlyph ng;
-	int xborder = 0;
+	int xborder = 0, endBorder = 0;
 
 	if (border)
 	{
@@ -401,7 +473,9 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 			 */
 			if (last)
 			{
-				xadvance += (((FT_BitmapGlyph)ng.borderimage)->bitmap.width - ((FT_BitmapGlyph)ng.image)->bitmap.width) << 15;
+				int extraWidth = int(((FT_BitmapGlyph)ng.borderimage)->bitmap.width) - int(((FT_BitmapGlyph)ng.image)->bitmap.width);
+				xadvance += extraWidth * 32768;
+				endBorder = extraWidth / 2;
 			}
 			if (!previous)
 			{
@@ -437,11 +511,18 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 		height = glyph->height;
 	}
 
-	int nx=cursor.x();
-
-	nx+=xadvance;
-
-	if ((rflags & RS_WRAP) && (nx > area.right()))
+	if (position)
+	{
+		xadvance = position->advance + endBorder;
+		if (position->xOffset || position->yOffset)
+		{
+			left += position->xOffset;
+			top -= position->yOffset;
+			flags |= GS_POSITIONED;
+		}
+	}
+	int wrapWidth = position ? position->clusterWidth : xadvance;
+	if (int nx = cursor.x() + wrapWidth; wrapWidth >= 0 && (rflags & RS_WRAP) && !(flags & GS_ISFIRST) && (nx > area.right()))
 	{
 		int cnt = 0, maycnt = -1;
 		glyphString::reverse_iterator i(glyphs.rbegin()), mayi(glyphs.rend());
@@ -489,8 +570,6 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 				i->x-=offset.x();
 				i->y-=offset.y();
 				i->bbox.moveBy(-offset.x(), -offset.y());
-				--lineChars.back();
-				++charCount;
 			} while (i-- != glyphs.rbegin()); // rearrange them into the next line
 			cursor+=ePoint(linelength, 0);  // put the cursor after that line
 		} else
@@ -504,7 +583,7 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 	}
 
 	int kern=0;
-	if (previous && use_kerning)
+	if (!position && previous && use_kerning && !glyphs.empty() && glyphs.back().font == current_font)
 	{
 		FT_Vector delta;
 		FT_Get_Kerning(current_face, previous, glyphIndex, ft_kerning_default, &delta);
@@ -516,6 +595,7 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 	ng.bbox.setHeight( height );
 
 	xadvance += kern + xborder;
+	// Public glyph bounds use the layout advance, including for zero-advance marks.
 	ng.bbox.setWidth(xadvance);
 
 	ng.x = cursor.x() + kern + xborder;
@@ -533,7 +613,6 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 	}
 
 	glyphs.push_back(ng);
-	++charCount;
 
 		/* when we have a SHY, don't xadvance. It will either be the last in the line (when used for breaking), or not displayed. */
 	if (!(flags & GS_SOFTHYPHEN))
@@ -555,15 +634,15 @@ void eTextPara::calc_bbox()
 
 	glyphString::iterator i(glyphs.begin());
 
-	boundBox.setLeft(i->x);
+	boundBox.setLeft(std::min(i->x, i->bbox.left()));
 	boundBox.setRight(i->bbox.right());
 
 	while (++i != glyphs.end())
 	{
 		if (i->flags & (GS_ISSPACE|GS_SOFTHYPHEN))
 			continue;
-		if ( i->x < boundBox.left() )
-			boundBox.setLeft( i->x );
+		if (std::min(i->x, i->bbox.left()) < boundBox.left())
+			boundBox.setLeft(std::min(i->x, i->bbox.left()));
 		if ( i->bbox.right() > boundBox.right() )
 			boundBox.setRight( i->bbox.right() );
 	}
@@ -577,20 +656,16 @@ void eTextPara::newLine(int flags)
 	if (maximum.width()<cursor.x())
 		maximum.setWidth(cursor.x());
 	cursor.setX(left);
-	int height = current_face->size->metrics.height;
+	int height = cachedLineHeight;
 	if (!height)
 	{
-		/* some fonts don't have height filled in. Estimate it based on the bbox dimensions. */
-		/* Usually, 'height' is less than the complete boundingbox height, so we use only yMax, to avoid getting a much too large line spacing */
-		height = FT_MulFix(current_face->bbox.yMax, current_face->size->metrics.y_scale);
+		height = current_face->size->metrics.height;
+		if (!height)
+			height = FT_MulFix(current_face->bbox.yMax, current_face->size->metrics.y_scale);
+		height >>= 6;
 	}
-	height >>= 6;
 
-	lineOffsets.push_back(cursor.y());
-	lineChars.push_back(charCount);
-	charCount=0;
-
-	cursor+=ePoint(0, height);
+	cursor += ePoint(0, height);
 	if (maximum.height()<cursor.y())
 		maximum.setHeight(cursor.y());
 	previous=0;
@@ -617,6 +692,15 @@ void eTextPara::setFont(const gFont *font, int tabwidth)
 	fontRenderClass::getInstance()->getFont(replacement, replacement_facename.c_str(), font->pointSize, tabwidth);
 	fontRenderClass::getInstance()->getFont(fallback, fallback_facename.c_str(), font->pointSize, tabwidth);
 	setFont(fnt, replacement, fallback);
+
+	cachedLineHeight = 0;
+	if (current_face && current_face->size)
+	{
+		int height = current_face->size->metrics.height;
+		if (!height)
+			height = FT_MulFix(current_face->bbox.yMax, current_face->size->metrics.y_scale);
+		cachedLineHeight = height >> 6;
+	}
 }
 
 std::string eTextPara::replacement_facename;
@@ -675,9 +759,6 @@ void eTextPara::setFont(Font *fnt, Font *replacement, Font *fallback)
 	previous=0;
 	use_kerning=FT_HAS_KERNING(current_face);
 }
-
-void
-shape (std::vector<unsigned long> &string, const std::vector<unsigned long> &text);
 
 int eTextPara::renderString(const char *string, int rflags, int border, int markedpos)
 {
@@ -740,6 +821,13 @@ int eTextPara::renderString(const char *string, int rflags, int border, int mark
 
 	const char *p = string ? string : "";
 
+	// With only ASCII, Latin-1 letters or strong LTR characters, visual order is logical order.
+	bool simpleLtr = true;
+	bool styled = false;
+	constexpr int64_t inheritColor = -2, defaultColor = -1;
+	int64_t color = inheritColor;
+	std::vector<int64_t> logicalColors, visualColors;
+
 	while (*p)
 	{
 		unsigned int unicode=(unsigned char)*p++;
@@ -774,39 +862,103 @@ int eTextPara::renderString(const char *string, int rflags, int border, int mark
 				if (*p)
 					unicode|=(*p++)&0x3F;
 			}
+			if (simpleLtr && (unicode < 0xC0 || unicode > 0xFF))
+			{
+				auto type = fribidi_get_bidi_type(unicode);
+				simpleLtr = type == FRIBIDI_TYPE_LTR || type == FRIBIDI_TYPE_ON ||
+					type == FRIBIDI_TYPE_ET || type == FRIBIDI_TYPE_CS || type == FRIBIDI_TYPE_ES;
+			}
+		}
+		else if (unicode < 0x20 && unicode != '\n' && unicode != '\r' && unicode != '\t')
+			simpleLtr = false;
+		if (!(rflags & RS_DIRECT))
+		{
+			if (unicode == '\\')
+			{
+				if (*p == 'C' || (*p == 'c' && strspn(p + 1, "0123456789abcdefABCDEF:;<=>?") >= 8))
+				{
+					if (!styled)
+						logicalColors.resize(uc_string.size(), inheritColor);
+					styled = true;
+					color = *p == 'C' ? defaultColor : int64_t(gRGB(p + 1).argb());
+					p += *p == 'C' ? 1 : 9;
+					continue;
+				}
+				if (*p == 't' || *p == 'r' || *p == 'n')
+				{
+					unicode = *p == 't' ? '\t' : (*p == 'r' ? '\r' : '\n');
+					++p;
+				}
+			}
+			if (unicode == '\r')
+				continue;
+			if (unicode == 0x85 || unicode == 0x2029 || unicode == 0x8A || unicode == 0xE08A)
+				unicode = '\n';
 		}
 		uc_string.push_back(unicode);
+		if (styled)
+			logicalColors.push_back(color);
 	}
 
-	std::vector<unsigned long> uc_shape;
-
-		// character -> glyph conversion
-	shape(uc_shape, uc_string);
-
-		// now do the usual logical->visual reordering
-	int size=uc_shape.size();
-	FriBidiCharType dir=FRIBIDI_TYPE_ON;
-	uc_visual.resize(size);
-		// gaaanz lahm, aber anders geht das leider nicht, sorry.
-	FriBidiChar *array = new FriBidiChar[size];
-	FriBidiChar *target = new FriBidiChar[size];
-	std::copy(uc_shape.begin(), uc_shape.end(), array);
-	if(!fribidi_log2vis(array, size, &dir, target, 0, 0, 0))
+	std::vector<bool> paragraphRtl;
+	std::vector<PositionedGlyph> positioned;
+	std::vector<TextCluster> visualClusters;
+	const int characterOffset = characterCount;
+	characterCount += uc_string.size();
+	std::array<LayoutFont, 3> fonts = {{{current_font, current_face},
+		{replacement_font, replacement_face}, {fallback_font, fallback_face}}};
+	if (simpleLtr || (rflags & RS_DIRECT))
 	{
-		delete [] target;
-		delete [] array;
-		return -1;
+		uc_visual.swap(uc_string);
+		visualColors.swap(logicalColors);
 	}
-	uc_visual.assign(target, target+size);
+	else
+	{
+		for (auto &entry : fonts)
+		{
+			if (!entry.font)
+				continue;
+			FT_Size size;
+			if (FTC_Manager_LookupSize(fontRenderClass::instance->cacheManager, &entry.font->scaler, &size))
+				return -1;
+			entry.face = size->face;
+		}
+		if (!layoutParagraphs(uc_string, fonts, forced_replaces, uc_visual, paragraphRtl, positioned, logicalColors, visualColors,
+				&visualClusters, (rflags & RS_WRAP) ? std::max(1, area.right() - left - 2 * border) : 0,
+				std::max(1, area.right() - cursor.x() - 2 * border)))
+			return -1;
+		hasRtlParagraph |= std::find(paragraphRtl.begin(), paragraphRtl.end(), true) != paragraphRtl.end();
+		if (glyphClusters.empty())
+			for (size_t i = 0; i < glyphs.size(); ++i)
+				glyphClusters.push_back({int(i), int(i + 1), false});
+	}
+	auto nextPosition = positioned.begin();
 
-	glyphs.reserve(size);
+	glyphs.reserve(glyphs.size() + uc_visual.size());
+	size_t paragraph = 0;
+	bool trackClusters = !visualClusters.empty() || !glyphClusters.empty();
+	if (trackClusters)
+		glyphClusters.reserve(glyphs.size() + uc_visual.size());
 
-	unsigned long newcolor = 0;
-	bool activate_newcolor = false;
-	bool activate_colorreset = false;
+	// Multiple renderString calls can append to one paragraph. Leading text
+	// inherits its preceding style; an explicit reset uses the blit foreground.
+	int64_t inherited = defaultColor;
+	if (styled)
+	{
+		for (auto g = glyphs.rbegin(); g != glyphs.rend(); ++g)
+		{
+			if (g->flags & GS_COLORRESET)
+				break;
+			if (g->flags & GS_COLORCHANGE)
+			{
+				inherited = g->newcolor;
+				break;
+			}
+		}
+	}
+	int64_t previousColor = inherited;
 	int nextflags = 0;
-	int pos = 0;
-	int markedlen = 0;
+	int markedlen = 1;
 	if (markedpos > 0xFFFF)
 	{
             markedlen = markedpos >> 16;
@@ -818,71 +970,23 @@ int eTextPara::renderString(const char *string, int rflags, int border, int mark
 	{
 		int isprintable=1;
 		int flags = nextflags;
+		int visualIndex = i - uc_visual.begin();
+		TextCluster cluster = visualClusters.empty() ? TextCluster{visualIndex, visualIndex + 1, false} : visualClusters[visualIndex];
+		if (cluster.start >= 0)
+		{
+			cluster.start += characterOffset;
+			cluster.end += characterOffset;
+		}
+		if (!paragraphRtl.empty() && paragraphRtl[paragraph])
+			flags |= GS_RTL;
 		unsigned long chr = *i;
 
 		if (!(rflags&RS_DIRECT))
 		{
 			switch (chr)
 			{
-			case '\\':
-			{
-				if ((i + 1) != uc_visual.end())
-				{
-					unsigned long c = *(i+1);
-					switch (c)
-					{
-						case 'n':
-							++i;
-							goto newline;
-						case 't':
-							++i;
-							goto tab;
-						case 'r':
-							++i;
-							goto nprint;
-						case 'c':
-						{
-							char color[9];  // [norhap]
-							color[8] = '\0';
-							int codeidx;
-							for (codeidx = 0; codeidx < 8; codeidx++)
-							{
-								if ((i + 2 + codeidx) == uc_visual.end()) break;
-								color[codeidx] = (char)((*(i + 2 + codeidx)) & 0xff);
-								// Hex digits + legacy color notation (: ; < = > ?)
-								unsigned char c = (unsigned char)color[codeidx];
-								if (!(isxdigit(c) || (c >= ':' && c <= '?')))
-									break;
-							}
-							if (codeidx == 8)
-							{
-								color[8] = '\0';
-								newcolor = gRGB(color).argb();
-								activate_newcolor = true;
-								activate_colorreset = false;
-								isprintable = 0;
-								i += 1 + codeidx;
-							}
-							else
-							{
-								isprintable = 1;
-							}
-							break;
-						}
-						case 'C':
-							isprintable = 0;
-							activate_colorreset = true;
-							activate_newcolor = false;
-							i++;
-							break;
-						default:
-						;
-					}
-				}
-				break;
-			}
 			case '\t':
-tab:				isprintable=0;
+				isprintable=0;
 				cursor+=ePoint(current_font->tabwidth, 0);
 				cursor-=ePoint(cursor.x()%current_font->tabwidth, 0);
 				if (!(nextflags&GS_ISFIRST))
@@ -891,15 +995,16 @@ tab:				isprintable=0;
 			case 0x8A:
 			case 0xE08A:
 			case '\n':
-newline:			isprintable=0;
+				isprintable=0;
 				newLine(rflags);
+				++paragraph;
 				nextflags|=GS_ISFIRST;
 				nextflags&=~GS_FIXED;
 				break;
 			case '\r':
 			case 0x86: case 0xE086:
 			case 0x87: case 0xE087:
-nprint:				isprintable=0;
+				isprintable=0;
 				break;
 			case 0xAD: // soft-hyphen
 				flags |= GS_SOFTHYPHEN;
@@ -920,20 +1025,14 @@ nprint:				isprintable=0;
 		}
 		if (isprintable)
 		{
-			nextflags = 0;
-
-			if (activate_colorreset)
+			const int64_t style = styled ? visualColors[i - uc_visual.begin()] : inheritColor;
+			const int64_t desiredColor = style == inheritColor ? inherited : style;
+			const bool colorChanged = desiredColor != previousColor;
+			if (colorChanged && desiredColor == -1)
 				flags |= GS_COLORRESET;
 
-			if (markedpos == -2 || markedpos == pos++)
-			{
+			if (markedpos == -2 || (markedpos >= 0 && cluster.start < markedpos + markedlen && cluster.end > markedpos))
 				flags |= GS_INVERT;
-				if (markedlen)
-				{
-					--markedlen;
-					++markedpos;
-				}
-			}
 
 			FT_UInt index = 0;
 
@@ -941,35 +1040,58 @@ nprint:				isprintable=0;
 			if (chr == 0x2010)
 				chr = '-';
 
-			if (forced_replaces.find(chr) == forced_replaces.end())
-				index=(rflags&RS_DIRECT)? chr : FT_Get_Char_Index(current_face, chr);
-
-			if (!index)
+			const PositionedGlyph *position = nullptr;
+			LayoutFont source{};
+			if (nextPosition != positioned.end() && nextPosition->visualIndex == size_t(i - uc_visual.begin()))
 			{
-				if (replacement_face)
-					index=(rflags&RS_DIRECT)? chr : FT_Get_Char_Index(replacement_face, chr);
-
-				if (!index)
+				position = &*nextPosition++;
+				source = fonts[position->fontIndex];
+				index = position->glyph;
+			}
+			else
+			{
+				for (auto &candidate : fonts)
 				{
-					if (fallback_face)
-						index=(rflags&RS_DIRECT)? chr : FT_Get_Char_Index(fallback_face, chr);
-					if (!index)
-						eDebug("[eTextPara] Unicode U+%4lx not present", chr);
-					else
-						appendGlyph(fallback_font, fallback_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+					if (!candidate.font || (&candidate == &fonts[0] && forced_replaces.count(chr)))
+						continue;
+					index = fontRenderClass::instance->getCharIndex(candidate.font, chr, rflags);
+					if (index)
+					{
+						source = candidate;
+						break;
+					}
 				}
-				else
-					appendGlyph(replacement_font, replacement_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
-			} else
-				appendGlyph(current_font, current_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+			}
+			if (index || position)
+			{
+				// Complex text was broken in logical order before per-line bidi layout.
+				int result = appendGlyph(source.font, source.face, index, flags, paragraphRtl.empty() ? rflags : rflags & ~RS_WRAP,
+					border, i == uc_visual.end() - 1, colorChanged && desiredColor >= 0, static_cast<unsigned long>(desiredColor), position);
+				if (!result)
+				{
+					const size_t glyphIndex = glyphs.size() - 1;
+					if (!trackClusters && cluster.start != int(glyphIndex))
+					{
+						// Tabs, newlines and missing glyphs can also break the LTR
+						// identity mapping. Earlier glyphs still map one-to-one.
+						glyphClusters.reserve(glyphs.size() + uc_visual.size() - visualIndex - 1);
+						for (size_t j = 0; j < glyphIndex; ++j)
+							glyphClusters.push_back({int(j), int(j + 1), false});
+						trackClusters = true;
+					}
+					if (trackClusters)
+						glyphClusters.push_back(cluster);
+				}
+			}
+			else
+				eDebug("[eTextPara] Unicode U+%4lx not present", chr);
 
-			if (index)
+			if (index || position)
 			{
 				nextflags = 0;
-				activate_newcolor = false;
-				activate_colorreset = false;
+				previousColor = desiredColor;
 			}
-		} else if (nextflags&GS_ISFIRST && !glyphs.empty())
+		} else if (nextflags&GS_ISFIRST && !glyphs.empty() && cluster.start >= 0)
 		{
 			// Newline found, mark the last glyph with the newline flag
 			glyphs.back().flags |= GS_LF;
@@ -977,18 +1099,6 @@ nprint:				isprintable=0;
 	}
 	bboxValid=false;
 	calc_bbox();
-	if (dir & FRIBIDI_MASK_RTL)
-	{
-		doTopBottomReordering=true;
-	}
-	if (charCount)
-	{
-		lineOffsets.push_back(cursor.y());
-		lineChars.push_back(charCount);
-		charCount=0;
-	}
-	delete [] target;
-	delete [] array;
 	return 0;
 }
 
@@ -1039,17 +1149,8 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 	int buffer_stride=surface->stride;
 
 	bool setcolor = true;
-	std::list<int>::reverse_iterator line_offs_it(lineOffsets.rbegin());
-	std::list<int>::iterator line_chars_it(lineChars.begin());
-	int line_offs=0;
-	int line_chars=0;
-	for (glyphString::iterator i(glyphs.begin()); i != glyphs.end(); ++i, --line_chars)
+	for (glyphString::iterator i(glyphs.begin()); i != glyphs.end(); ++i)
 	{
-		while(!line_chars)
-		{
-			line_offs = *(line_offs_it++);
-			line_chars = *(line_chars_it++);
-		}
 		/* don't do colorchanges in borders */
 		if (!border)
 		{
@@ -1164,7 +1265,6 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 			if (!glyph->bitmap.buffer) continue;
 			rxbase = i->x + glyph->left + offset.x();
 			rybase = i->y - glyph->top + offset.y();
-			rybase=(doTopBottomReordering ? line_offs : i->y) - glyph->top + offset.y();
 			sbase = glyph->bitmap.buffer;
 			sxbase = glyph->bitmap.width;
 			sybase = glyph->bitmap.rows;
@@ -1176,11 +1276,25 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 			if (fontRenderClass::instance->getGlyphBitmap(&i->font->font, i->glyph_index, &glyph_bitmap))
 				continue;
 			rxbase=i->x+glyph_bitmap->left + offset.x();
-			rybase=(doTopBottomReordering ? line_offs : i->y) - glyph_bitmap->top + offset.y();
+			rybase=i->y - glyph_bitmap->top + offset.y();
 			sbase=glyph_bitmap->buffer;
 			sxbase=glyph_bitmap->width;
 			sybase=glyph_bitmap->height;
 			pitch = glyph_bitmap->pitch;
+		}
+		if (i->flags & GS_POSITIONED)
+		{
+			// The bounding box already tracks the positioned bitmap origin,
+			// including moves made while wrapping and aligning the line.
+			rxbase = i->bbox.left() + offset.x();
+			rybase = i->bbox.top() + offset.y();
+			if (!border && i->borderimage)
+			{
+				auto outline = reinterpret_cast<FT_BitmapGlyph>(i->borderimage);
+				auto fill = reinterpret_cast<FT_BitmapGlyph>(i->image);
+				rxbase += fill->left - outline->left;
+				rybase += outline->top - fill->top;
+			}
 		}
 		dbase = (__u8*)(surface->data)+buffer_stride*rybase+rxbase*surface->bypp;
 		for (unsigned int c = 0; c < clip.rects.size(); ++c)
@@ -1335,8 +1449,10 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 
 void eTextPara::realign(int dir, int markedpos, int scrollpos)	// der code hier ist ein wenig merkwuerdig.
 {
+	if (markedpos > 0xFFFF)
+		markedpos &= 0xFFFF;
 	glyphString::iterator begin(glyphs.begin()), c(glyphs.begin()), end(glyphs.begin()), last;
-	if ((dir==dirLeft || (dir==dirBidi && !doTopBottomReordering)) && markedpos < 0)
+	if ((dir == dirLeft || (dir == dirBidi && !hasRtlParagraph)) && markedpos < 0)
 		return;
 	while (c != glyphs.end())
 	{
@@ -1374,6 +1490,8 @@ void eTextPara::realign(int dir, int markedpos, int scrollpos)	// der code hier 
 			num++;
 		}
 		c = end;
+		if (dir == dirBidi && !(last->flags & GS_RTL) && markedpos < 0)
+			continue;
 
 		// Ensure the marked position is visible.
 		bool offset_set = false;
@@ -1381,9 +1499,9 @@ void eTextPara::realign(int dir, int markedpos, int scrollpos)	// der code hier 
 		{
 			if (linelength > area.width())
 			{
-				if (markedpos >= (int)glyphs.size())
-					markedpos = glyphs.size() - 1;
-				eRect bbox = glyphs[markedpos].bbox;
+				eRect bbox;
+				if (!getCharacterBBox(markedpos, bbox) && !getCaretBBox(markedpos, bbox))
+					continue;
 				if (scrollpos == 50)
 				{
 					int mark_center = bbox.left() + bbox.width() / 2 - area.left();
@@ -1427,8 +1545,8 @@ void eTextPara::realign(int dir, int markedpos, int scrollpos)	// der code hier 
 					// else mark is visible, keep current offset
 				}
 			}
-			else if (dir == dirLeft || (dir == dirBidi && !doTopBottomReordering))
-				return;
+			else if (dir == dirLeft || (dir == dirBidi && !(last->flags & GS_RTL)))
+				continue;
 		}
 
 		switch (dir)
@@ -1506,6 +1624,92 @@ void eTextPara::realign(int dir, int markedpos, int scrollpos)	// der code hier 
 	calc_bbox();
 }
 
+bool eTextPara::getCharacterBBox(int position, eRect &box) const
+{
+	if (position < 0)
+		return false;
+	if (glyphClusters.empty())
+	{
+		if (position >= int(glyphs.size()))
+			return false;
+		box = glyphs[position].bbox;
+		return true;
+	}
+	bool found = false;
+	for (size_t i = 0; i < glyphs.size(); ++i)
+	{
+		const auto &cluster = glyphClusters[i];
+		if (position >= cluster.start && position < cluster.end)
+		{
+			box = found ? box | glyphs[i].bbox : glyphs[i].bbox;
+			found = true;
+		}
+	}
+	return found;
+}
+
+bool eTextPara::getCaretBBox(int position, eRect &box) const
+{
+	if (position < 0 || position > characterCount)
+		return false;
+	if (glyphs.empty())
+	{
+		box = eRect(area.left(), area.top(), 2, cachedLineHeight);
+		return position == 0;
+	}
+	int character = position == characterCount ? position - 1 : position;
+	if (!getCharacterBBox(character, box))
+		return false;
+	TextCluster cluster{character, character + 1, false};
+	for (const auto &entry : glyphClusters)
+		if (character >= entry.start && character < entry.end)
+		{
+			cluster = entry;
+			break;
+		}
+	int offset = box.width() * (position - cluster.start) / (cluster.end - cluster.start);
+	int x = cluster.rtl ? box.right() - offset : box.left() + offset;
+	box = eRect(x - 1, box.top(), 2, box.height());
+	return true;
+}
+
+std::vector<eRect> eTextPara::getSelectionBoxes(int position, int length) const
+{
+	std::vector<eRect> boxes;
+	if (position < 0 || length <= 0)
+		return boxes;
+	size_t first = glyphClusters.empty() ? std::min(size_t(position), glyphs.size()) : 0;
+	size_t end = glyphClusters.empty() ? std::min(size_t(position + length), glyphs.size()) : glyphs.size();
+	bool adjacent = false;
+	int baseline = 0;
+	for (size_t i = first; i < end; ++i)
+	{
+		const auto cluster = glyphClusters.empty() ? TextCluster{int(i), int(i + 1), false} : glyphClusters[i];
+		if (cluster.start < position + length && cluster.end > position)
+		{
+			if (adjacent && baseline == glyphs[i].y)
+				boxes.back() |= glyphs[i].bbox;
+			else
+				boxes.push_back(glyphs[i].bbox);
+			baseline = glyphs[i].y;
+			adjacent = true;
+		}
+		else
+			adjacent = false;
+	}
+	return boxes;
+}
+
+void eTextPara::setCharacterFlag(int position, int flag)
+{
+	for (size_t i = 0; i < glyphs.size(); ++i)
+	{
+		const auto cluster = glyphClusters.empty() ? TextCluster{int(i), int(i + 1), false} : glyphClusters[i];
+		if (position >= cluster.start && position < cluster.end)
+			glyphs[i].flags |= flag;
+	}
+}
+
 void eTextPara::clear()
 {
 	singleLock s(ftlock);
@@ -1519,6 +1723,9 @@ void eTextPara::clear()
 		if (glyphs[i].borderimage) FT_Done_Glyph(glyphs[i].borderimage);
 	}
 	glyphs.clear();
+	glyphClusters.clear();
+	characterCount = 0;
+	hasRtlParagraph = false;
 	totalheight = 0;
 	lineCount = 0;
 }

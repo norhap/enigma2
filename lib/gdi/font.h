@@ -3,6 +3,7 @@
 
 #ifndef SWIG
 
+#include <cstdint>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_CACHE_H
@@ -29,6 +30,7 @@ class Font;
 class gDC;
 class gFont;
 struct gRGB;
+struct hb_font_t;
 
 #endif
 class fontRenderClass
@@ -43,6 +45,7 @@ class fontRenderClass
 		int scale; // 100 is 1:1
 		int renderflags;
 		fontListEntry *next;
+		hb_font_t *shapingFont = nullptr;
 		~fontListEntry();
 	} *font;
 
@@ -54,6 +57,8 @@ class fontRenderClass
 	int strokerRadius;
 
 	int getFaceProperties(const std::string &face, FTC_FaceID &id, int &renderflags);
+	FTC_CMapCache cmapCache;
+	inline FT_UInt getCharIndex(Font *font, unsigned long chr, int rflags);
 #ifdef HAVE_FREETYPE2
 	FT_Error getGlyphBitmap(FTC_Image_Desc *font, FT_UInt glyph_index, FTC_SBit *sbit);
 	FT_Error getGlyphImage(FTC_Image_Desc *font, FT_UInt glyph_index, FT_Glyph *glyph, FT_Glyph *borderglyph, int bordersize);
@@ -71,6 +76,7 @@ public:
 	static fontRenderClass *getInstance();
 #ifndef SWIG
 	std::string AddFont(const std::string &filename, const std::string &name, int scale, int renderflags = 0);
+	void ClearFonts();
 	FT_Error FTC_Face_Requester(FTC_FaceID face_id, FT_Face *aface);
 	int getFont(ePtr<Font> &font, const std::string &face, int size, int tabwidth = -1);
 	std::vector<std::string> getFontFaces();
@@ -97,7 +103,17 @@ public:
 #define GS_FIXED 256
 #define GS_MAYBREAK 512
 #define GS_COLORRESET 1024
+#define GS_RTL 2048
+#define GS_POSITIONED 4096
 #define GS_CANBREAK (GS_ISSPACE | GS_SOFTHYPHEN | GS_HYPHEN)
+
+struct PositionedGlyph;
+
+struct TextCluster
+{
+	int start, end;
+	bool rtl;
+};
 
 struct pGlyph
 {
@@ -140,19 +156,20 @@ class eTextPara : public iObject
 	eSize maximum;
 	int left;
 	glyphString glyphs;
-	std::list<int> lineOffsets;
-	std::list<int> lineChars;
-	int charCount;
-	int lineCount;
-	int totalheight;
-	int bboxValid;
+	// Allocated for shaping/bidi or when character and glyph indices diverge.
+	std::vector<TextCluster> glyphClusters;
+	int characterCount = 0;
+	int lineCount             = 0;
+	int totalheight           = 0;
+	bool hasRtlParagraph = false;
+	int bboxValid             = 0;
 	eRect boundBox;
-	bool doTopBottomReordering;
-	int m_offset;
-	bool m_blend;
+	int m_offset              = 0;
+	bool m_blend              = false;
+	int cachedLineHeight      = 0;
 
 	int appendGlyph(Font *current_font, FT_Face current_face, FT_UInt glyphIndex, int flags, int rflags, int border, bool last,
-					bool activate_newcolor, unsigned long newcolor);
+					bool activate_newcolor, unsigned long newcolor, const PositionedGlyph *position = nullptr);
 	void newLine(int flags);
 	void setFont(Font *font, Font *replacement_font, Font *fallback_font);
 	void calc_bbox();
@@ -161,8 +178,7 @@ public:
 	eTextPara(eRect area, ePoint start = ePoint(-1, -1))
 		: current_font(0), replacement_font(0), fallback_font(0),
 		  current_face(0), replacement_face(0), fallback_face(0),
-		  area(area), cursor(start), maximum(0, 0), left(start.x()), charCount(0), totalheight(0),
-		  bboxValid(0), doTopBottomReordering(false), m_offset(0), m_blend(false)
+		  area(area), cursor(start), maximum(0, 0), left(start.x())
 	{
 	}
 	virtual ~eTextPara();
@@ -222,6 +238,11 @@ public:
 		return glyphs[num].bbox;
 	}
 
+	bool getCharacterBBox(int position, eRect &box) const;
+	bool getCaretBBox(int position, eRect &box) const;
+	std::vector<eRect> getSelectionBoxes(int position, int length) const;
+	void setCharacterFlag(int position, int flag);
+
 	void setGlyphFlag(int g, int f)
 	{
 		ASSERT(g >= 0);
@@ -245,6 +266,9 @@ public:
 	FTC_ScalerRec scaler;
 	FTC_Image_Desc font;
 	fontRenderClass *renderer;
+	hb_font_t *getShapingFont(FT_Face face);
+	FT_UInt getCharIndex(unsigned int codepoint);
+	int getGlyphAdvance(FT_Face face, FT_UInt glyphIndex);
 #ifdef HAVE_FREETYPE2
 	FT_Error getGlyphBitmap(FT_UInt glyph_index, FTC_SBit *sbit);
 	FT_Error getGlyphImage(FT_UInt glyph_index, FT_Glyph *glyph, FT_Glyph *borderglyph, int bordersize);
