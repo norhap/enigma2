@@ -2,7 +2,7 @@ from types import CodeType
 
 from enigma import eRCInput, eTimer, eWindow, getDesktop, eStack
 
-from skin import GUI_SKIN_ID, applyAllAttributes, readSkin
+from skin import GUI_SKIN_ID, applyAllAttributes, readSkin, variables
 from Components.config import config
 from Components.GUIComponent import GUIComponent
 from Components.Sources.Source import Source
@@ -247,6 +247,8 @@ class Screen(dict):
 				zPosition = int(value)
 		if not self.instance:
 			self.instance = eWindow(self.desktop, zPosition)
+		elif "wfNoBorder" not in [x.strip() for (key, value) in self.skinAttributes if key == "flags" for x in variables.get(value, value).split(",")]:
+			self.instance.clearFlag(eWindow.wfNoBorder)  # Reload: the new skin does not set wfNoBorder.
 		if "title" not in self.skinAttributes and self.screenTitle:
 			self.skinAttributes.append(("title", self.screenTitle))
 		else:
