@@ -23,6 +23,15 @@ slide is available or the slideshow is disabled (if radio backgrounds are
 enabled). A skin may provide icons/default_dab.png to replace that logo.
 Without DabImage, the existing default radio/slideshow layout is retained.
 
+ChannelSelectionRadioDABList (normal channel list) and
+ChannelSelectionRadioDABWithEPG (separate radio player) can also provide a
+DabImage widget. It displays the received DAB slide while the standalone
+radio overlays are hidden; without a slide the widget remains hidden.
+The layouts may use the RdsDecoder source for RadioText and RtpText.
+Custom DAB channel-list layouts take priority over the default layouts.
+The bundled 1080p and 720p skins provide these lists and an InfoBarDAB.
+Custom skins may also define InfoBarDAB; skins without it keep their own InfoBar.
+
 Keep RadioText, RtpText and RassLogo in the screen. Image coordinates are
 relative to the screen; the complete image must fit inside its bounds.
 The resolution attribute lets the skin engine scale this HD example to

@@ -1,6 +1,8 @@
+from types import CodeType
+
 from enigma import eRCInput, eTimer, eWindow, getDesktop, eStack
 
-from skin import GUI_SKIN_ID, applyAllAttributes
+from skin import GUI_SKIN_ID, applyAllAttributes, readSkin
 from Components.config import config
 from Components.GUIComponent import GUIComponent
 from Components.Sources.Source import Source
@@ -308,6 +310,38 @@ class Screen(dict):
 		for (name, item) in self.items():
 			if isinstance(item, GUIComponent):
 				item.GUIdelete()
+
+	def reloadSkin(self):
+		oldRenderers = self.renderer[:]
+		if self.execing:
+			for renderer in oldRenderers:
+				if renderer in self.activeComponents:
+					renderer.execEnd()
+					self.activeComponents.remove(renderer)
+		self.deleteGUIScreen()
+		for widget in self.additionalWidgets:
+			if widget.instance:
+				widget.instance.hide()
+		for widget in self.stacks:
+			if widget.instance:
+				widget.instance.hide()
+		for renderer in oldRenderers:
+			if isinstance(renderer, GUIComponent) and renderer.instance:
+				renderer.GUIdelete()
+			renderer.disconnectAll()
+		for component in self.values():
+			if isinstance(component, GUIComponent):
+				component.skinAttributes = []
+		self.onLayoutFinish = [x for x in self.onLayoutFinish if not isinstance(x, CodeType)]
+		self.onContentChanged = [x for x in self.onContentChanged if not isinstance(x, CodeType)]
+		readSkin(self, None, self.skinName, self.desktop)
+		self.applySkin()
+		for renderer in self.renderer:
+			if self.execing:
+				renderer.execBegin()
+				self.activeComponents.append(renderer)
+			if isinstance(renderer, GUIComponent) and renderer.instance:
+				renderer.changed((renderer.CHANGED_DEFAULT,))
 
 	def createSummary(self):
 		return None

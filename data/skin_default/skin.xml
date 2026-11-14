@@ -1633,6 +1633,28 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<!-- Clock -->
 		<panel name="Clock"/>
 	</screen>
+	<screen name="InfoBarDAB" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="InfoBar">
+		<eLabel backgroundColor="OE_ListBackground" position="10,566" size="1243,153" zPosition="-11"/>
+		<eLabel backgroundColor="blue_light" position="10,566" size="1243,2" zPosition="-10"/>
+		<widget source="session.CurrentService" render="Label" position="26,576" size="800,30" font="RegularBold;21" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+			<convert type="ServiceName">Name</convert>
+		</widget>
+		<widget source="session.CurrentService" render="Label" position="26,613" size="1000,27" font="RegularBold;17" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+			<convert type="ServiceInfo">DABTechnical</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="26,646" size="1000,27" font="RegularBold;17" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+			<convert type="EventName">Name</convert>
+		</widget>
+		<ePixmap pixmap="buttons/key_red.png" position="26,683" size="26,26" objectTypes="key_red,Button,Label" alphaTest="blend"/>
+		<ePixmap pixmap="buttons/key_green.png" position="326,683" size="26,26" objectTypes="key_green,Button,Label" alphaTest="blend"/>
+		<ePixmap pixmap="buttons/key_yellow.png" position="626,683" size="26,26" objectTypes="key_yellow,Button,Label" alphaTest="blend"/>
+		<ePixmap pixmap="buttons/key_blue.png" position="926,683" size="26,26" objectTypes="key_blue,Button,Label" alphaTest="blend"/>
+		<widget name="key_red" position="56,683" size="263,37" font="RegularBold;14" backgroundColor="OE_ListBackground" transparent="1"/>
+		<widget name="key_green" position="356,683" size="263,37" font="RegularBold;14" backgroundColor="OE_ListBackground" transparent="1"/>
+		<widget name="key_yellow" position="656,683" size="263,37" font="RegularBold;14" backgroundColor="OE_ListBackground" transparent="1"/>
+		<widget name="key_blue" position="956,683" size="263,37" font="RegularBold;14" backgroundColor="OE_ListBackground" transparent="1"/>
+		<panel name="Clock"/>
+	</screen>
 	<!-- SECOND INFOBAR -->
 	<screen name="SecondInfoBar" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1280,720" title="InfoBar">
 		<panel name="poster_secondinfobar"/>
@@ -2417,6 +2439,24 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		</widget>
 	</screen>
 	<!-- CHANNELSELECTION RADIO -->
+	<screen name="DABRadioList">
+		<panel name="StanDardScreen"/>
+		<eLabel backgroundColor="OE_NewBg2" position="846,0" size="434,720" zPosition="-16"/>
+		<widget name="list" position="17,center" size="833,533" scrollbarMode="showNever" backgroundColor="OE_Background" colorEventProgressbarBorder="OE_Selection" colorEventProgressbarBorderSelected="OE_Foreground" colorServiceDescription="#a4c400" colorServiceDescriptionSelected="OE_Foreground" foregroundColorServiceNotAvail="OE_Accent2" itemHeight="33" serviceItemHeight="33" serviceNumberFont="RegularBold;21" serviceNameFont="RegularBold;21" serviceInfoFont="RegularBold;18" transparent="1" fieldMargins="10" nonplayableMargins="10" itemsDistances="5" progressBarWidth="46" progressPercentWidth="80" progressbarHeight="8"/>
+		<widget name="DabImage" position="880,103" size="372,279" alphaTest="blend" scaleFlags="centerScaled"/>
+		<widget source="RdsDecoder" render="Label" position="880,400" size="373,90" font="RegularBold;16" horizontalAlignment="center" verticalAlignment="center" backgroundColor="OE_NewBg2" transparent="1">
+			<convert type="RdsInfo">RadioText</convert>
+		</widget>
+		<widget source="RdsDecoder" render="Label" position="880,500" size="373,90" font="RegularBold;18" horizontalAlignment="center" verticalAlignment="center" backgroundColor="OE_NewBg2" transparent="1">
+			<convert type="RdsInfo">RtpText</convert>
+		</widget>
+	</screen>
+	<screen name="ChannelSelectionRadioDABList" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder">
+		<panel name="DABRadioList"/>
+	</screen>
+	<screen name="ChannelSelectionRadioDABWithEPG" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder">
+		<panel name="DABRadioList"/>
+	</screen>
 	<screen name="ChannelSelectionRadio" title="ChannelSelectionRadio" backgroundColor="transparent" flags="wfNoBorder" position="center,center" size="1280,720">
 		<panel name="StanDardScreen"/>
 		<panel name="TemplatePip"/>

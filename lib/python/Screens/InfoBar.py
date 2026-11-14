@@ -29,6 +29,7 @@ from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, \
 	InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarZoom, InfoBarOpenOnTopHelper, InfoBarPowersaver, \
 	InfoBarHDMI, InfoBarHdmi2, setResumePoint, delResumePoint  # noqa: E402
+from Screens.ChannelSelection import hasRadioLayout  # noqa: E402
 eProfileWrite("LOAD:InitBar_Components")
 from Components.ActionMap import HelpableActionMap  # noqa: E402
 from Components.config import config  # noqa: E402
@@ -79,8 +80,10 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.helpList.append((self["actions"], "InfobarActions", [("showRadio", _("Listen to the radio"))]))
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
+			iPlayableService.evStart: self.updateInfoBarSkin,
 			iPlayableService.evUpdatedEventInfo: self.__eventInfoChanged
 		})
+		self.onExecBegin.append(self.updateInfoBarSkin)
 
 		self.current_begin_time = 0
 		if InfoBar.instance is not None:
@@ -88,6 +91,14 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		InfoBar.instance = self
 		self.zoomrate = 0
 		self.zoomin = 1
+
+	def updateInfoBarSkin(self):
+		reference = self.session.nav.getCurrentlyPlayingServiceReference()
+		skinName = "InfoBarDAB" if reference and reference.type == eServiceReference.idServiceDAB and hasRadioLayout("InfoBarDAB") else "InfoBar"
+		if self.skinName != skinName:
+			self.skinName = skinName
+			if self.instance is not None:
+				self.reloadSkin()
 
 	def __onClose(self):
 		InfoBar.instance = None
@@ -136,8 +147,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		if config.usage.e1like_radio_mode.value:
 			self.showRadioChannelList(True)
 		else:
-			self.rds_display.hide()  # in InfoBarRdsDecoder
-			from Screens.ChannelSelection import ChannelSelectionRadio
+			from Screens.ChannelSelection import ChannelSelectionRadio  # Avoid a circular import during InfoBar initialization.
 			self.session.openWithCallback(self.ChannelSelectionRadioClosed, ChannelSelectionRadio, self)
 
 	def toggleTvRadio(self):
@@ -153,7 +163,6 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 		self.openServiceList()
 
 	def ChannelSelectionRadioClosed(self, *arg):
-		self.rds_display.show()  # in InfoBarRdsDecoder
 		self.servicelist.correctChannelNumber()
 
 	def restartLastMovie(self):
