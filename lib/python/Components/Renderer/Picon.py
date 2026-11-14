@@ -2,10 +2,11 @@ from os.path import isdir, join
 from os import listdir
 from re import sub
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap, eServiceReference, iServiceInformation
+from enigma import ePixmap, eServiceReference, getDesktop, iServiceInformation
 import NavigationInstance
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename, sanitizeFilename
+from Tools.LoadPixmap import LoadPixmap
 from Components.Harddisk import harddiskmanager
 from ServiceReference import ServiceReference
 
@@ -132,6 +133,7 @@ class Picon(Renderer):
 	def __init__(self):
 		Renderer.__init__(self)
 		self.pngname = None
+		self.dabLogoFirst = False
 		self.defaultpngname = resolveFilename(SCOPE_GUISKIN, "picon_default.png")
 
 	def applySkin(self, desktop, parent):
@@ -139,6 +141,9 @@ class Picon(Renderer):
 		for (attrib, value) in self.skinAttributes:
 			if attrib == "path":
 				piconLocator.addSearchPath(value)
+				attribs.remove((attrib, value))
+			elif attrib == "dabLogoFirst":
+				self.dabLogoFirst = value == "1"
 				attribs.remove((attrib, value))
 		self.skinAttributes = attribs
 		rc = Renderer.applySkin(self, desktop, parent)
@@ -150,13 +155,23 @@ class Picon(Renderer):
 	def changed(self, what):
 		if self.instance:
 			if what[0] in (self.CHANGED_DEFAULT, self.CHANGED_ALL, self.CHANGED_SPECIFIC):
-				pngname = piconLocator.getPiconName(self.source.text) or piconLocator.getDABImage(self.source.text)
+				dabImage = piconLocator.getDABImage(self.source.text) if self.dabLogoFirst else ""
+				pngname = dabImage or piconLocator.getPiconName(self.source.text) or piconLocator.getDABImage(self.source.text)
 				if not pathExists(pngname):  # no picon for service found
 					pngname = self.defaultpngname
-				if self.pngname != pngname:
+				if self.pngname != pngname or dabImage and pngname == dabImage:
 					if pngname:
 						self.instance.setScale(1)
-						self.instance.setPixmapFromFile(pngname)
+						if dabImage and pngname == dabImage:
+							pixmap = LoadPixmap(pngname, desktop=getDesktop(0), cached=False, autoDetect=True)
+							if pixmap is None:
+								print(f"[Picon] Unable to decode DAB logo '{pngname}'.")
+								self.pngname = None
+								self.instance.hide()
+								return
+							self.instance.setPixmap(pixmap)
+						else:
+							self.instance.setPixmapFromFile(pngname)
 						self.instance.show()
 					else:
 						self.instance.hide()

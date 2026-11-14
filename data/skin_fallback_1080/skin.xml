@@ -605,7 +605,9 @@
 	<screen name="InfoBarDAB" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" title="InfoBar">
 		<eLabel backgroundColor="OE_ListBackground" position="15,850" size="1865,229" zPosition="-11"/>
 		<eLabel backgroundColor="blue_light" position="15,850" size="1865,3" zPosition="-10"/>
-		<widget source="session.CurrentService" render="DABSlide" position="40,860" size="200,150" alphaTest="blend" scaleFlags="centerScaled"/>
+		<widget source="session.CurrentService" render="Picon" dabLogoFirst="1" position="40,860" size="200,150" alphaTest="blend">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
 		<widget source="session.CurrentService" render="Label" position="270,860" size="1000,40" font="RegularBold;32" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

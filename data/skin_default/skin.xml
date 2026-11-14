@@ -1636,7 +1636,9 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 	<screen name="InfoBarDAB" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="InfoBar">
 		<eLabel backgroundColor="OE_ListBackground" position="10,566" size="1243,153" zPosition="-11"/>
 		<eLabel backgroundColor="blue_light" position="10,566" size="1243,2" zPosition="-10"/>
-		<widget source="session.CurrentService" render="DABSlide" position="26,573" size="133,100" alphaTest="blend" scaleFlags="centerScaled"/>
+		<widget source="session.CurrentService" render="Picon" dabLogoFirst="1" position="26,573" size="133,100" alphaTest="blend">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
 		<widget source="session.CurrentService" render="Label" position="180,573" size="667,27" font="RegularBold;21" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>

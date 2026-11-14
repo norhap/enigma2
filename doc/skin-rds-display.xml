@@ -30,10 +30,13 @@ radio overlays are hidden; without a slide the widget remains hidden.
 The layouts may use the RdsDecoder source for RadioText and RtpText.
 Custom DAB channel-list layouts take priority over the default layouts.
 The bundled 1080p and 720p skins provide these lists and an InfoBarDAB.
-Custom skins may also define InfoBarDAB; skins without it keep their own InfoBar.
-For an independent InfoBar image, use source="session.CurrentService" and
-render="DABSlide". It updates on DAB service events, showing the slide or
-station logo when available. Disabling the slideshow selects the logo.
+Their InfoBar displays the DAB station logo, falling back to the normal
+picon; slideshow settings only affect the radio display and channel list.
+Custom skins may also define InfoBarDAB; skins without it keep their own
+InfoBar. To prefer the station logo in a Picon widget, use
+dabLogoFirst="1" with session.CurrentService and ServiceName/Reference.
+For an independent slideshow image, a skin may instead use
+source="session.CurrentService" and render="DABSlide".
 
 Keep RadioText, RtpText and RassLogo in the screen. Image coordinates are
 relative to the screen; the complete image must fit inside its bounds.
