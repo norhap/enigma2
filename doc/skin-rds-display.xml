@@ -31,6 +31,9 @@ The layouts may use the RdsDecoder source for RadioText and RtpText.
 Custom DAB channel-list layouts take priority over the default layouts.
 The bundled 1080p and 720p skins provide these lists and an InfoBarDAB.
 Custom skins may also define InfoBarDAB; skins without it keep their own InfoBar.
+For an independent InfoBar image, use source="session.CurrentService" and
+render="DABSlide". It updates on DAB service events, showing the slide or
+station logo when available. Disabling the slideshow selects the logo.
 
 Keep RadioText, RtpText and RassLogo in the screen. Image coordinates are
 relative to the screen; the complete image must fit inside its bounds.

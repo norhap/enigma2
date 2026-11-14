@@ -9,6 +9,7 @@ install_PYTHON = \
 	ChannelNumber.py \
 	CiModuleControl.py \
 	Cover.py \
+	DABSlide.py \
 	DRRunningText.py \
 	EtAnalogClockLCD.py \
 	FixedLabel.py \

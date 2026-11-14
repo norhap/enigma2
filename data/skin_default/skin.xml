@@ -1636,14 +1636,18 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 	<screen name="InfoBarDAB" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder" title="InfoBar">
 		<eLabel backgroundColor="OE_ListBackground" position="10,566" size="1243,153" zPosition="-11"/>
 		<eLabel backgroundColor="blue_light" position="10,566" size="1243,2" zPosition="-10"/>
-		<widget source="session.CurrentService" render="Label" position="26,576" size="800,30" font="RegularBold;21" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+		<widget source="session.CurrentService" render="DABSlide" position="26,573" size="133,100" alphaTest="blend" scaleFlags="centerScaled"/>
+		<widget source="session.CurrentService" render="Label" position="180,573" size="667,27" font="RegularBold;21" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
 			<convert type="ServiceName">Name</convert>
 		</widget>
-		<widget source="session.CurrentService" render="Label" position="26,613" size="1000,27" font="RegularBold;17" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+		<widget source="session.CurrentService" render="Label" position="180,600" size="1000,23" font="RegularBold;17" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
 			<convert type="ServiceInfo">DABTechnical</convert>
 		</widget>
-		<widget source="session.Event_Now" render="Label" position="26,646" size="1000,27" font="RegularBold;17" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+		<widget source="session.Event_Now" render="Label" position="180,623" size="1000,23" font="RegularBold;17" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
 			<convert type="EventName">Name</convert>
+		</widget>
+		<widget source="session.Event_Now" render="Label" position="180,646" size="1000,23" font="RegularBold;15" backgroundColor="OE_ListBackground" transparent="1" noWrap="1">
+			<convert type="EventName">Description</convert>
 		</widget>
 		<ePixmap pixmap="buttons/key_red.png" position="26,683" size="26,26" objectTypes="key_red,Button,Label" alphaTest="blend"/>
 		<ePixmap pixmap="buttons/key_green.png" position="326,683" size="26,26" objectTypes="key_green,Button,Label" alphaTest="blend"/>
