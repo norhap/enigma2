@@ -1,0 +1,1 @@
+# EnigmaWeather plugin package

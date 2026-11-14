@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-08 18:44+0100\n"
+"POT-Creation-Date: 2026-11-14 19:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,11 @@ msgstr ""
 msgid ""
 "\n"
 "Conflict detection disabled!"
+msgstr ""
+
+msgid ""
+"\n"
+"Press BLUE and enter number to select."
 msgstr ""
 
 msgid ""
@@ -1426,6 +1431,9 @@ msgid "7"
 msgstr ""
 
 msgid "7 (PQRS)"
+msgstr ""
+
+msgid "7-day forecast"
 msgstr ""
 
 msgid "720"
@@ -3077,6 +3085,9 @@ msgstr ""
 msgid "Blue"
 msgstr ""
 
+msgid "BLUE"
+msgstr ""
+
 msgid "blue"
 msgstr ""
 
@@ -4049,6 +4060,9 @@ msgid "Clear log"
 msgstr ""
 
 msgid "Clear playlist"
+msgstr ""
+
+msgid "Clear sky"
 msgstr ""
 
 msgid "Clear the contents of the log"
@@ -5090,6 +5104,9 @@ msgstr ""
 msgid "daily"
 msgstr ""
 
+msgid "Daily forecast"
+msgstr ""
+
 msgid "Dance"
 msgstr ""
 
@@ -5529,6 +5546,15 @@ msgid "Democratic Republic of the Congo"
 msgstr ""
 
 msgid "Denmark"
+msgstr ""
+
+msgid "Dense drizzle"
+msgstr ""
+
+msgid "Dense freezing drizzle"
+msgstr ""
+
+msgid "Depositing rime fog"
 msgstr ""
 
 msgid "Depth"
@@ -6803,10 +6829,19 @@ msgstr ""
 msgid "Enigmalight"
 msgstr ""
 
+msgid "EnigmaWeather"
+msgstr ""
+
+msgid "EnigmaWeather v2.0.0 started"
+msgstr ""
+
 msgid "Enter"
 msgstr ""
 
 msgid "Enter a new name for this device."
+msgstr ""
+
+msgid "Enter city name:"
 msgstr ""
 
 msgid "Enter date and time"
@@ -6819,6 +6854,9 @@ msgid "Enter if you are north or south of the equator."
 msgstr ""
 
 msgid "Enter IP address"
+msgstr ""
+
+msgid "Enter location number (1-%d):"
 msgstr ""
 
 msgid "Enter name of new directory:"
@@ -7021,6 +7059,21 @@ msgstr ""
 msgid ""
 "Error getting link via %s\n"
 "%s"
+msgstr ""
+
+msgid "Error loading weather for: %s"
+msgstr ""
+
+msgid ""
+"Error loading weather for: %s\n"
+"\n"
+"Press BLUE to try again."
+msgstr ""
+
+msgid ""
+"Error loading weather for: %s\n"
+"\n"
+"Press OK to try again."
 msgstr ""
 
 msgid "Error reading webpage!"
@@ -7431,6 +7484,9 @@ msgstr ""
 msgid "failed to execute command!"
 msgstr ""
 
+msgid "Failed to fetch weather for %s"
+msgstr ""
+
 msgid "Failed to write /tmp/positionersetup.log: "
 msgstr ""
 
@@ -7623,6 +7679,9 @@ msgstr ""
 msgid "Festival"
 msgstr ""
 
+msgid "Fetched weather for %s"
+msgstr ""
+
 msgid "FFmpeg version: "
 msgstr ""
 
@@ -7794,6 +7853,9 @@ msgstr ""
 msgid "Flat Z-A, Old-New"
 msgstr ""
 
+msgid "Foggy"
+msgstr ""
+
 msgid "Folk"
 msgstr ""
 
@@ -7852,6 +7914,12 @@ msgid "Force legacy signal stats"
 msgstr ""
 
 msgid "Force zap to recording service in standby"
+msgstr ""
+
+msgid "Forecast days"
+msgstr ""
+
+msgid "Forecast hours"
 msgstr ""
 
 msgid "foreign countries/expeditions"
@@ -8317,6 +8385,9 @@ msgstr ""
 msgid "Green"
 msgstr ""
 
+msgid "GREEN"
+msgstr ""
+
 msgid "green"
 msgstr ""
 
@@ -8532,6 +8603,18 @@ msgid "Health & Fitness"
 msgstr ""
 
 msgid "Heard Island and McDonald Islands"
+msgstr ""
+
+msgid "Heavy freezing rain"
+msgstr ""
+
+msgid "Heavy rain"
+msgstr ""
+
+msgid "Heavy snow"
+msgstr ""
+
+msgid "Heavy snow showers"
 msgstr ""
 
 msgid "Hebrew"
@@ -8804,6 +8887,12 @@ msgstr ""
 msgid "Hourly"
 msgstr ""
 
+msgid "Hourly forecast"
+msgstr ""
+
+msgid "Hourly forecast unavailable."
+msgstr ""
+
 msgid "hours"
 msgstr ""
 
@@ -8831,6 +8920,9 @@ msgid "https://github.com/norhap"
 msgstr ""
 
 msgid "Hue"
+msgstr ""
+
+msgid "Humidity"
 msgstr ""
 
 msgid "Hungarian"
@@ -9415,6 +9507,20 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
+msgid ""
+"Invalid input.\n"
+"\n"
+"Please enter a number.\n"
+"\n"
+msgstr ""
+
+msgid ""
+"Invalid selection.\n"
+"\n"
+"Number must be between 1 and %d\n"
+"\n"
+msgstr ""
+
 msgid "Invalid transponder data"
 msgstr ""
 
@@ -9989,6 +10095,15 @@ msgstr ""
 msgid "Light Classical"
 msgstr ""
 
+msgid "Light drizzle"
+msgstr ""
+
+msgid "Light freezing drizzle"
+msgstr ""
+
+msgid "Light freezing rain"
+msgstr ""
+
 msgid "Limburgan / Limburger / Limburgish"
 msgstr ""
 
@@ -10117,6 +10232,18 @@ msgstr ""
 msgid "Loading information, please wait..."
 msgstr ""
 
+msgid "Loading satellite images..."
+msgstr ""
+
+msgid "Loading satellite images: %d"
+msgstr ""
+
+msgid ""
+"Loading weather for: %s...\n"
+"\n"
+"Please wait..."
+msgstr ""
+
 msgid "Local box"
 msgstr ""
 
@@ -10183,6 +10310,9 @@ msgid "Location for instant recordings"
 msgstr ""
 
 msgid "Location of recordings in Timeshift"
+msgstr ""
+
+msgid "Location search error: %s"
 msgstr ""
 
 msgid "LocationBox Actions"
@@ -10352,6 +10482,9 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
+msgid "Mainly clear"
+msgstr ""
+
 msgid "Mainmenu"
 msgstr ""
 
@@ -10516,6 +10649,9 @@ msgstr ""
 msgid "Maxdown: "
 msgstr ""
 
+msgid "Maximum"
+msgstr ""
+
 msgid "Maximum number of days"
 msgstr ""
 
@@ -10660,6 +10796,9 @@ msgstr ""
 msgid "MiniDLNA setup"
 msgstr ""
 
+msgid "Minimum"
+msgstr ""
+
 msgid "Minimum age %d years"
 msgstr ""
 
@@ -10741,7 +10880,22 @@ msgstr ""
 msgid "Model: "
 msgstr ""
 
+msgid "Moderate drizzle"
+msgstr ""
+
+msgid "Moderate rain"
+msgstr ""
+
+msgid "Moderate rain showers"
+msgstr ""
+
+msgid "Moderate snow"
+msgstr ""
+
 msgid "Modern Dance"
+msgstr ""
+
+msgid "Modern weather plugin using Open-Meteo API"
 msgstr ""
 
 msgid "Modes"
@@ -11562,6 +11716,17 @@ msgstr ""
 msgid "No images found"
 msgstr ""
 
+msgid ""
+"No locations found for: %s\n"
+"\n"
+msgstr ""
+
+msgid ""
+"No locations loaded.\n"
+"\n"
+"Press YELLOW to search first."
+msgstr ""
+
 msgid "No log: please try later again"
 msgstr ""
 
@@ -11604,6 +11769,9 @@ msgid ""
 msgstr ""
 
 msgid "No satellite frontend found!"
+msgstr ""
+
+msgid "No satellite images could be loaded."
 msgstr ""
 
 msgid ""
@@ -11663,6 +11831,9 @@ msgid "No usable RTL-SDR DAB+ receiver was found."
 msgstr ""
 
 msgid "No valid DAB+ feeds configured. Check /etc/enigma2/dab.xml."
+msgstr ""
+
+msgid "No weather data available."
 msgstr ""
 
 msgid ""
@@ -11949,6 +12120,9 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+msgid "OK: Play/Pause    LEFT/RIGHT: Image    EXIT: Back"
+msgstr ""
+
 msgid "Old"
 msgstr ""
 
@@ -12046,6 +12220,9 @@ msgid "Only move the dish quickly before this hour."
 msgstr ""
 
 msgid "Only on startup"
+msgstr ""
+
+msgid "Only one satellite image is available."
 msgstr ""
 
 msgid "Only select 'yes' if you are using a multiswich that requires a DiSEqC Port-A command signal. For all other setups select 'no'."
@@ -12252,6 +12429,9 @@ msgstr ""
 msgid "Overall progress:"
 msgstr ""
 
+msgid "Overcast"
+msgstr ""
+
 msgid "Overscan wizard"
 msgstr ""
 
@@ -12361,6 +12541,9 @@ msgid "Parodie"
 msgstr ""
 
 msgid "Partial EPG"
+msgstr ""
+
+msgid "Partly cloudy"
 msgstr ""
 
 msgid "pass"
@@ -12837,6 +13020,9 @@ msgstr ""
 msgid "Plugin EPGImport actived EPG import and woke up your %s %s"
 msgstr ""
 
+msgid "Plugin is not running when trying to load weather"
+msgstr ""
+
 msgid "Plugin manager activity information"
 msgstr ""
 
@@ -13008,6 +13194,9 @@ msgstr ""
 msgid "pre-school children's program"
 msgstr ""
 
+msgid "Precipitation"
+msgstr ""
+
 msgid "Predefined"
 msgstr ""
 
@@ -13096,6 +13285,9 @@ msgid "Press 'OK' for remove item or 'CH+/-' for toggle to list of features."
 msgstr ""
 
 msgid "Press 'OK' for remove item or < > for change order or 'CH+/-' for toggle to list of features."
+msgstr ""
+
+msgid "Press BLUE to try again."
 msgstr ""
 
 msgid "Press EXIT to return to the help screen."
@@ -13223,6 +13415,12 @@ msgstr ""
 msgid "Press yellow button to set CEC address again"
 msgstr ""
 
+msgid "Press YELLOW to search again."
+msgstr ""
+
+msgid "Press YELLOW to search for a city."
+msgstr ""
+
 msgid "Press yellow to set this interface as default interface."
 msgstr ""
 
@@ -13230,6 +13428,9 @@ msgid "Pressing this button multiple times will increase the rate of backward sc
 msgstr ""
 
 msgid "Pressing this button multiple times will increase the rate of forward scan."
+msgstr ""
+
+msgid "Pressure"
 msgstr ""
 
 msgid "Prev / ArrowLeft"
@@ -13514,6 +13715,9 @@ msgstr ""
 msgid "Ragazzi e Musica"
 msgstr ""
 
+msgid "Rain chance"
+msgstr ""
+
 msgid "Rallying"
 msgstr ""
 
@@ -13734,6 +13938,9 @@ msgid "Recovery Mode"
 msgstr ""
 
 msgid "Red"
+msgstr ""
+
+msgid "RED"
 msgstr ""
 
 msgid "red"
@@ -14554,6 +14761,9 @@ msgstr ""
 msgid "Satellite"
 msgstr ""
 
+msgid "Satellite clouds: Western Europe"
+msgstr ""
+
 msgid "Satellite DAB+ feeds cannot be scanned while a recording is in progress, and no USB receiver is available."
 msgstr ""
 
@@ -14567,6 +14777,9 @@ msgid "Satellite equipment setup"
 msgstr ""
 
 msgid "Satellite feeds to scan"
+msgstr ""
+
+msgid "Satellite image unavailable: %s"
 msgstr ""
 
 msgid "Satellite longitude:"
@@ -14675,6 +14888,9 @@ msgid "Save timeshift only for current event"
 msgstr ""
 
 msgid "Save-Load-Delete"
+msgstr ""
+
+msgid "Saved location is invalid. Press YELLOW to search again."
 msgstr ""
 
 msgid "Saving EPG Cache..."
@@ -15196,6 +15412,9 @@ msgid "Select interface"
 msgstr ""
 
 msgid "Select Location"
+msgstr ""
+
+msgid "SELECT LOCATION (Press BLUE to choose):"
 msgstr ""
 
 msgid "select menu entry"
@@ -16618,6 +16837,18 @@ msgstr ""
 msgid "Slideshow / station logo"
 msgstr ""
 
+msgid "Slight rain"
+msgstr ""
+
+msgid "Slight rain showers"
+msgstr ""
+
+msgid "Slight snow"
+msgstr ""
+
+msgid "Slight snow showers"
+msgstr ""
+
 msgid "Slot %d"
 msgstr ""
 
@@ -16682,6 +16913,9 @@ msgid "Snooker"
 msgstr ""
 
 msgid "Snooker/Pool"
+msgstr ""
+
+msgid "Snow grains"
 msgstr ""
 
 msgid "SNR"
@@ -16781,6 +17015,9 @@ msgid "Somali"
 msgstr ""
 
 msgid "Somalia"
+msgstr ""
+
+msgid "Some satellite images could not be loaded (%d)."
 msgstr ""
 
 msgid "Some TVs can't switch to the correct input if another HDMI port is active. This setting puts the TV into Standby before switching. If the TV does not turn back on, a slower transmission interval or repeating the wake-up command may be required."
@@ -17810,6 +18047,9 @@ msgstr ""
 msgid "Telugu"
 msgstr ""
 
+msgid "Temperature"
+msgstr ""
+
 msgid "Temperature and fan control"
 msgstr ""
 
@@ -18429,6 +18669,15 @@ msgid "Thu"
 msgstr ""
 
 msgid "Thumbnails"
+msgstr ""
+
+msgid "Thunderstorm"
+msgstr ""
+
+msgid "Thunderstorm with heavy hail"
+msgstr ""
+
+msgid "Thunderstorm with slight hail"
 msgstr ""
 
 msgid "Thursday"
@@ -19281,6 +19530,12 @@ msgstr ""
 msgid "Up to 50 Mbps"
 msgstr ""
 
+msgid "UP/DOWN: Hour    LEFT/RIGHT: Page    GREEN/EXIT: Back"
+msgstr ""
+
+msgid "UP/DOWN: More days    RED/EXIT: Back"
+msgstr ""
+
 msgid "Update"
 msgstr ""
 
@@ -19319,6 +19574,9 @@ msgstr ""
 msgid ""
 "Update succeeded!\n"
 "Your Bootloader is now up-to-date!"
+msgstr ""
+
+msgid "Updated"
 msgstr ""
 
 msgid "Updating"
@@ -19867,6 +20125,9 @@ msgstr ""
 msgid "Violence"
 msgstr ""
 
+msgid "Violent rain showers"
+msgstr ""
+
 msgid "Violet"
 msgstr ""
 
@@ -20088,6 +20349,15 @@ msgid "Watersports"
 msgstr ""
 
 msgid "Weather"
+msgstr ""
+
+msgid "Weather code %d"
+msgstr ""
+
+msgid "Weather fetch error: %s"
+msgstr ""
+
+msgid "Weather loaded successfully for %s"
 msgstr ""
 
 msgid "Weather Plugin"
@@ -20469,6 +20739,9 @@ msgstr ""
 msgid "Width"
 msgstr ""
 
+msgid "Wind"
+msgstr ""
+
 msgid "winter sport"
 msgstr ""
 
@@ -20616,6 +20889,9 @@ msgid "Year"
 msgstr ""
 
 msgid "Yellow"
+msgstr ""
+
+msgid "YELLOW"
 msgstr ""
 
 msgid "yellow"

@@ -1,0 +1,15 @@
+<default>
+	<prerequisites>
+		<tag type="Weather" />
+	</prerequisites>
+	<info>
+		<author>EnigmaWeather Team</author>
+		<name>EnigmaWeather</name>
+		<packagename>enigma2-plugin-extensions-enigmaweather</packagename>
+		<shortdescription>Modern weather plugin with Open-Meteo API</shortdescription>
+		<description>EnigmaWeather is a modern weather plugin for Enigma2 featuring:\n- Real-time weather conditions\n- Daily and hourly forecasts\n- Open-Meteo API (free, no API key required)\n- Satellite image animation\n- Location search\n- WMO weather codes with day/night icons\n- Thread-safe caching (1 hour TTL)\n- No additional Python packages required</description>
+	</info>
+	<files type="package">
+		<file type="package" name="enigma2-plugin-extensions-enigmaweather" />
+	</files>
+</default>
