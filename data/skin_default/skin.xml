@@ -5388,6 +5388,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		</widget>
 		<eLabel backgroundColor="blue_light" position="273,553" size="993,1" zPosition="2"/>
 		<widget name="lab6" conditional="lab6" font="RegularBold;17" foregroundColor="blue_light" backgroundColor="OE_Background" position="273,565" size="993,46" transparent="1" horizontalAlignment="center" verticalAlignment="center" zPosition="3"/>
+		<widget name="HelpWindow" conditional="HelpWindow" pixmap="skin_default/vkey_icon.png" position="410,635" size="0,0" transparent="1" zPosition="10" alphaTest="on"/>
 	</screen>
 	<screen name="DeviceMountSetup" backgroundColor="transparent" flags="wfNoBorder" position="0,0" size="1280,720">
 		<panel name="TemplateInformation"/>
