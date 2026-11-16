@@ -829,7 +829,8 @@ def parseScrollbarMode(value):
 def parseScrollbarScroll(value):
 	options = {
 		"byPage": 0,
-		"byLine": 1
+		"byLine": 1,
+		"byCenter": 2
 	}
 	return parseOptions(options, "scrollbarScroll", value, 0)
 
@@ -1706,7 +1707,8 @@ def loadSingleSkinData(desktop, screenID, domSkin, pathSkin, scope=SCOPE_GUISKIN
 	}
 	scrollbarScrolls = {
 		0: "byPage",
-		1: "byLine"
+		1: "byLine",
+		2: "byCenter"
 	}
 	for tag in domSkin.findall("windowstyle"):
 		style = eWindowStyleSkinned()
