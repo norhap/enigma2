@@ -35,6 +35,8 @@ picon; slideshow settings only affect the radio display and channel list.
 Received logos and slides are cached under /media/hdd/dab-cache when
 available, otherwise on a mounted /media/usb/dab-cache, or in /tmp.
 The /tmp cache does not survive a reboot.
+Channel lists use cached station logos for each DAB service, falling back
+to installed picons. Logos not yet received cannot appear until cached.
 Custom skins may also define InfoBarDAB; skins without it keep their own
 InfoBar. To prefer the station logo in a Picon widget, use
 dabLogoFirst="1" with session.CurrentService and ServiceName/Reference.

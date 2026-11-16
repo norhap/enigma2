@@ -2,7 +2,7 @@ from os.path import isdir, join
 from os import listdir
 from re import sub
 from Components.Renderer.Renderer import Renderer
-from enigma import ePixmap, eServiceReference, getDesktop, iServiceInformation
+from enigma import ePixmap, eServiceCenter, eServiceReference, getDesktop, iServiceInformation
 import NavigationInstance
 from Tools.Alternatives import GetWithAlternative
 from Tools.Directories import pathExists, SCOPE_GUISKIN, resolveFilename, sanitizeFilename
@@ -123,6 +123,16 @@ initPiconPaths()
 
 def getPiconName(serviceName):
 	return piconLocator.getPiconName(serviceName)
+
+
+def getChannelSelectionPiconName(serviceName):
+	ref = eServiceReference(serviceName or "")
+	if ref.type == eServiceReference.idServiceDAB:
+		info = eServiceCenter.getInstance().info(ref)
+		image = info and info.getInfoString(ref, iServiceInformation.sTagImage) or ""
+		if image and pathExists(image):
+			return image
+	return getPiconName(serviceName)
 
 
 def getDABImage(serviceName):

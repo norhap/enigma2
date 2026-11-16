@@ -1569,6 +1569,13 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 
 		self["list"] = ServiceList(self)
 		self.servicelist = self["list"]
+		self.dabPiconRefreshTimer = eTimer()
+		self.dabPiconRefreshTimer.callback.append(self.refreshDabPicons)
+		self.onHide.append(self.dabPiconRefreshTimer.stop)
+		self.onClose.append(self.dabPiconRefreshTimer.stop)
+		self.__dabPiconTracker = ServiceEventTracker(screen=self, eventmap={
+			iPlayableService.evUpdatedInfo: self.scheduleDabPiconRefresh
+		})
 
 		self.numericalTextInput = NumericalTextInput(handleTimeout=False)
 		self.numericalTextInput.setUseableChars(u'1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ')
@@ -1623,6 +1630,15 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 
 	def applyListNavigation(self):
 		self.servicelist.instance.enableAutoNavigation(config.misc.actionLeftRightToPageUpPageDown.value and "keymap.ntr" not in config.usage.keymap.value)
+
+	def scheduleDabPiconRefresh(self):
+		ref = self.session.nav.getCurrentlyPlayingServiceReference()
+		if self.execing and self.shown and ref and ref.type == eServiceReference.idServiceDAB and not self.dabPiconRefreshTimer.isActive():
+			self.dabPiconRefreshTimer.start(1000, True)
+
+	def refreshDabPicons(self):
+		if self.execing and self.shown and self.servicelist.instance:
+			self.servicelist.instance.invalidate()
 
 	def reloadChannelListSkin(self, skinName, borderless):
 		selection = self.getCurrentSelection()

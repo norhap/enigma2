@@ -3,7 +3,7 @@ from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceRef
 from ServiceReference import isRadioServiceReference
 from Components.config import config
 from Components.GUIComponent import GUIComponent
-from Components.Renderer.Picon import getPiconName
+from Components.Renderer.Picon import getChannelSelectionPiconName
 from skin import parseColor, parseFont
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -394,7 +394,7 @@ class ServiceList(GUIComponent):
 		self.l.setVisualMode(eListboxServiceContent.visModeComplex)
 
 		if config.usage.service_icon_enable.value:
-			self.l.setGetPiconNameFunc(getPiconName)
+			self.l.setGetPiconNameFunc(getChannelSelectionPiconName)
 		else:
 			self.l.setGetPiconNameFunc(None)
 
