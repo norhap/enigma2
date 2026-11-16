@@ -55,6 +55,10 @@ RadioText/RtpText support explicit fontScale or scrollText attributes.
 The optional technical status line and front-panel display mode remain
 controlled by DAB settings. Disable the automatic technical line if your
 skin provides its own ServiceInfo/DABTechnical widget.
+The bundled 800x480 display layout shows the station logo or slideshow
+beside the radio text when the corresponding DAB front-display mode is set.
+Its messageWithPicture source is empty in text-only mode; the existing
+message source remains empty while an image is shown.
 
 Additional ServiceInfo converters for session.CurrentService:
   DABCodec       - transmitted AAC-LC, HE-AAC, HE-AAC v2 or MPEG Layer II
