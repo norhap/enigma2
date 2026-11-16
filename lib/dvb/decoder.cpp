@@ -31,32 +31,7 @@
 #define VIDEO_GET_FRAME_RATE _IOR('o', 56, unsigned int)
 #endif
 
-/* A decoder device (video/audio) node can still be held by a just-stopped
- * hardware sink for a while after that sink's owner believes it has released
- * it - e.g. eServiceMP3::stop() hands the actual GStreamer teardown that
- * releases these same nodes off to a detached worker thread instead of
- * blocking on it (see its comment), and that teardown's duration is
- * inherently unbounded: gst_element_set_state(..., GST_STATE_NULL) is exactly
- * the call stopWorker() moved off the main thread because some vendor
- * hardware sinks on this class of box block synchronously inside it for
- * seconds (see stopWorker()'s comment). eServiceMP3::waitForHardwareRelease()
- * (called from eDVBServicePlay::start() before tuning even begins) only
- * covers the fast/common case without reintroducing that multi-second UI
- * stall - it is capped short deliberately, and has already been observed on
- * device to time out while a teardown was still genuinely in flight (not
- * wedged), so this retry loop - the layer that actually witnesses ENOSYS at
- * the point of failure - is the real backstop for a slow-but-progressing
- * teardown, not just a residual-race safety net. If the device is still busy
- * by the time we get here, the vendor driver on this class of box has been
- * observed to reject the open with ENOSYS (rather than EBUSY) instead of
- * queueing it, and nothing else retries afterwards - so without this retry,
- * losing that race leaves this decoder instance permanently unable to open
- * video/audio for the lifetime of the service. The total budget here
- * (~4s) is sized well above the ~0.85s worst-case teardown time observed on
- * device, while staying short of looking like a hang to the user - a
- * genuinely wedged teardown (stopWatchdog() already logs past
- * STOP_WATCHDOG_TIMEOUT_SECONDS=10s) is a separate, much rarer problem this
- * isn't trying to paper over. */
+/* Some drivers return ENOSYS while an audio decoder is still being released. */
 static int openDecoderDeviceWithRetry(const char *filename)
 {
 	const int maxAttempts = 200;
@@ -308,7 +283,9 @@ eDVBVideo::eDVBVideo(eDVBDemux *demux, int dev, bool fcc_enable)
 {
 	char filename[128] = {};
 	sprintf(filename, "/dev/dvb/adapter%d/video%d", demux ? demux->adapter : 0, dev);
-	m_fd = openDecoderDeviceWithRetry(filename);
+	/* norhap Open video once */
+	m_fd = ::open(filename, O_RDWR | O_CLOEXEC);
+	/* norhap Open video once */
 	if (m_fd < 0)
 		eWarning("[eDVBVideo] %s: %m", filename);
 	else
@@ -1077,8 +1054,16 @@ int eTSMPEGDecoder::setState()
 		{
 			m_video = new eDVBVideo(m_demux, m_decoder, m_fcc_enable);
 			m_video->connectEvent(sigc::mem_fun(*this, &eTSMPEGDecoder::video_event), m_video_event_conn);
-			if (m_video->startPid(m_vpid, m_vtype))
+			/* norhap guard Failed to start video type ExTEplayer3 GstPlayer HTTP */
+			int error = m_video->startPid(m_vpid, m_vtype);
+			if (error)
+			{
+				eWarning("[eTSMPEGDecoder] Failed to start video PID %04x (%d), releasing decoder", m_vpid, error);
+				m_video_event_conn = nullptr;
+				m_video = nullptr;
 				res = -1;
+			}
+			/* norhap guard Failed to start video type ExTEplayer3 GstPlayer HTTP */
 		}
 		m_changed &= ~changeVideo;
 	}
@@ -1136,7 +1121,8 @@ int eTSMPEGDecoder::setState()
 		m_changed &= ~changeState;
 	}
 
-	if (changed && !m_video && m_audio && m_radio_pic.length())
+	/* norhap guard Failed to start video type ExTEplayer3 GstPlayer HTTP */
+	if (changed && !m_video && (m_vpid < 0 || m_vpid >= 0x1FFF) && m_audio && m_radio_pic.length())
 		showSinglePic(m_radio_pic.c_str());
 
 	return res;
