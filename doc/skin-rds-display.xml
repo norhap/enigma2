@@ -32,6 +32,9 @@ Custom DAB channel-list layouts take priority over the default layouts.
 The bundled 1080p and 720p skins provide these lists and an InfoBarDAB.
 Their InfoBar displays the DAB station logo, falling back to the normal
 picon; slideshow settings only affect the radio display and channel list.
+Received logos and slides are cached under /media/hdd/dab-cache when
+available, otherwise on a mounted /media/usb/dab-cache, or in /tmp.
+The /tmp cache does not survive a reboot.
 Custom skins may also define InfoBarDAB; skins without it keep their own
 InfoBar. To prefer the station logo in a Picon widget, use
 dabLogoFirst="1" with session.CurrentService and ServiceName/Reference.

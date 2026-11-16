@@ -19,6 +19,8 @@
 
 #include <arpa/inet.h>
 #include <fcntl.h>
+#include <limits.h>
+#include <mntent.h>
 #include <poll.h>
 #include <signal.h>
 #include <sys/socket.h>
@@ -115,14 +117,41 @@ std::string dabName(const eServiceReference &ref)
 
 std::string dabCacheDirectory()
 {
-	/* /media/hdd is backed by the configured disk or network mount. Images
-	 * therefore survive a reboot when storage is available; on diskless boxes
-	 * OpenATV provides the same path in volatile storage. */
 	const char *directory = "/media/hdd/dab-cache";
 	if ((mkdir(directory, 0755) == 0 || errno == EEXIST) && access(directory, W_OK | X_OK) == 0)
 		return directory;
-	directory = "/tmp";
-	return directory;
+
+	/* norhap Do not write to the root filesystem when the USB mount is absent. */
+	char usbPath[PATH_MAX];
+	FILE *mounts = setmntent("/proc/mounts", "r");
+	bool usbMounted = false;
+	if (mounts)
+	{
+		if (realpath("/media/usb", usbPath))
+		{
+			while (const struct mntent *mount = getmntent(mounts))
+			{
+				char mountPath[PATH_MAX];
+				if (realpath(mount->mnt_dir, mountPath) && !strcmp(usbPath, mountPath))
+				{
+					usbMounted = true;
+					break;
+				}
+			}
+		}
+		endmntent(mounts);
+	}
+	else
+		eWarning("[eServiceDAB] unable to inspect mounts for USB cache: %m");
+	if (usbMounted)
+	{
+		directory = "/media/usb/dab-cache";
+		if ((mkdir(directory, 0755) == 0 || errno == EEXIST) && access(directory, W_OK | X_OK) == 0)
+			return directory;
+		eWarning("[eServiceDAB] unable to use USB cache '%s': %m", directory);
+	}
+	return "/tmp";
+	/* norhap Do not write to the root filesystem when the USB mount is absent. */
 }
 
 bool parseSPIImageName(const std::string &name, uint32_t &serviceId, unsigned int &width, unsigned int &height)
