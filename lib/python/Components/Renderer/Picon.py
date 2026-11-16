@@ -12,9 +12,9 @@ from ServiceReference import ServiceReference
 
 
 class PiconLocator:
-	def __init__(self):
+	def __init__(self, piconDirectories=None):
 		harddiskmanager.on_partition_list_change.append(self.__onPartitionChange)
-		self.piconDirectories = "picon"
+		self.piconDirectories = piconDirectories or ("picon",)
 		self.activePiconPath = None
 		self.searchPaths = []
 		for mp in ('/usr/share/enigma2/', '/'):
@@ -24,23 +24,25 @@ class PiconLocator:
 
 	def __onMountpointAdded(self, mountpoint):
 		try:
-			path = join(mountpoint, self.piconDirectories) + '/'
-			if isdir(path) and path not in self.searchPaths:
-				for fn in listdir(path):
-					if fn.endswith('.png') or fn.endswith('.svg'):
-						print("[Picon] adding path:", path)
-						self.searchPaths.append(path)
-						break
+			for directory in self.piconDirectories:
+				path = join(mountpoint, directory) + '/'
+				if isdir(path) and path not in self.searchPaths:
+					for fn in listdir(path):
+						if fn.endswith('.png') or fn.endswith('.svg'):
+							print("[Picon] adding path:", path)
+							self.searchPaths.append(path)
+							break
 		except:
 			pass
 
 	def __onMountpointRemoved(self, mountpoint):
-		path = join(mountpoint, self.piconDirectories) + '/'
-		try:
-			self.searchPaths.remove(path)
-			print("[Picon] removed path:", path)
-		except:
-			pass
+		for directory in self.piconDirectories:
+			path = join(mountpoint, directory) + '/'
+			try:
+				self.searchPaths.remove(path)
+				print("[Picon] removed path:", path)
+			except:
+				pass
 
 	def __onPartitionChange(self, why, part):
 		if why == 'add':
@@ -125,13 +127,20 @@ def getPiconName(serviceName):
 	return piconLocator.getPiconName(serviceName)
 
 
-def getChannelSelectionPiconName(serviceName):
+def getDABCachedImage(serviceName):
 	ref = eServiceReference(serviceName or "")
 	if ref.type == eServiceReference.idServiceDAB:
 		info = eServiceCenter.getInstance().info(ref)
 		image = info and info.getInfoString(ref, iServiceInformation.sTagImage) or ""
 		if image and pathExists(image):
 			return image
+	return ""
+
+
+def getChannelSelectionPiconName(serviceName):
+	image = getDABCachedImage(serviceName)
+	if image:
+		return image
 	return getPiconName(serviceName)
 
 

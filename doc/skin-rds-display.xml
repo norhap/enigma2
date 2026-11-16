@@ -37,6 +37,9 @@ available, otherwise on a mounted /media/usb/dab-cache, or in /tmp.
 The /tmp cache does not survive a reboot.
 Channel lists use cached station logos for each DAB service, falling back
 to installed picons. Logos not yet received cannot appear until cached.
+LcdPicon also uses the cached logo for a DAB reference. In channel-list
+summaries this follows the highlighted service, not necessarily the playing
+one, and falls back to the configured LCD picon when no logo is available.
 Custom skins may also define InfoBarDAB; skins without it keep their own
 InfoBar. To prefer the station logo in a Picon widget, use
 dabLogoFirst="1" with session.CurrentService and ServiceName/Reference.

@@ -1639,6 +1639,10 @@ class ChannelSelectionBase(Screen, HelpableScreen):
 	def refreshDabPicons(self):
 		if self.execing and self.shown and self.servicelist.instance:
 			self.servicelist.instance.invalidate()
+			ref = self.getCurrentSelection()
+			service = self.get("Service")
+			if service and ref and ref.type == eServiceReference.idServiceDAB:
+				service.newService(ref)
 
 	def reloadChannelListSkin(self, skinName, borderless):
 		selection = self.getCurrentSelection()
