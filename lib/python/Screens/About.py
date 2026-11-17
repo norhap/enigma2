@@ -1445,7 +1445,8 @@ class Troubleshoot(Screen):
 	def green(self):
 		if self.commandIndex >= self.numberOfCommands:
 			try:
-				remove(self.commands[self.commandIndex].rsplit(" ", 1)[1])
+				command = self.commands[self.commandIndex]
+				remove(command[4:] if command.startswith("cat ") else command.rsplit(" ", 1)[1])
 			except:
 				pass
 			self.updateOptions()
@@ -1495,10 +1496,10 @@ class Troubleshoot(Screen):
 		return [x for x in sorted(glob.glob("/home/root/logs/enigma2_debug_*.log"), key=lambda x: isfile(x) and getmtime(x))]
 
 	def getLogFilesList(self):
-		import glob
-		home_root = "/home/root/logs/enigma2_crash.log"
-		tmp = "/tmp/enigma2_crash.log"
-		return [x for x in sorted(glob.glob("/mnt/hdd/*.log"), key=lambda x: isfile(x) and getmtime(x))] + (isfile(home_root) and [home_root] or []) + (isfile(tmp) and [tmp] or [])
+		paths = set(glob("/mnt/hdd/*.log"))
+		for folder in (config.crash.debugPath.value, "/home/root/logs", "/tmp"):
+			paths.update(glob(join(folder, "enigma2_crash*.log")))
+		return sorted((path for path in paths if isfile(path)), key=getmtime)
 
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages"]

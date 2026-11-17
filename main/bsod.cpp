@@ -51,15 +51,15 @@ static void getKlog(FILE* f)
 
 	std::vector<char> buf(len, 0);
 
-	len = klogctl(4, &buf[0], len); /* read and clear ring buffer */
+	len = klogctl(3, &buf[0], len); /* read ring buffer without clearing it */
 	if (len == -1)
 	{
 		fprintf(f, "Error reading klog %d - %m\n", errno);
 		return;
 	}
 
-	buf.resize(len);
-	fprintf(f, "%s\n", &buf[0]);
+	fwrite(&buf[0], 1, len, f);
+	fprintf(f, "\n");
 }
 
 static void stringFromFile(FILE* f, const char* context, const char* filename)
@@ -93,6 +93,7 @@ static bool bsodhandled = false;
 
 void bsodFatal(const char *component)
 {
+	const bool fatalNative = component != NULL;
 	/* show no more than one bsod while shutting down/crashing */
 	if (bsodhandled) {
 		if (component) {
@@ -121,9 +122,13 @@ void bsodFatal(const char *component)
 	char tm_str[32];
 	localtime_r(&t, &tm);
 	strftime(tm_str, sizeof(tm_str), "%Y-%m-%d_%H-%M-%S", &tm);
-	os << getConfigString("config.crash.debugPath", "/home/root/logs/");
+	std::string debugPath = getConfigString("config.crash.debugPath", "/home/root/logs/");
+	os << debugPath;
+	if (!debugPath.empty() && debugPath[debugPath.size() - 1] != '/')
+		os << "/";
 	os << "enigma2_crash_";
 	os << tm_str;
+	os << "_" << getpid();
 	os << ".log";
 	crashlog_name = os.str();
 	f = fopen(crashlog_name.c_str(), "wb");
@@ -199,9 +204,13 @@ void bsodFatal(const char *component)
 
 		/* dump the kernel log */
 		getKlog(f);
-		fsync(fileno(f));
-		fclose(f);
+		if (fflush(f) != 0 || fsync(fileno(f)) != 0)
+			perror("Failed to write Enigma2 crash log");
+		if (fclose(f) != 0)
+			perror("Failed to close Enigma2 crash log");
 	}
+	else
+		perror("Failed to open Enigma2 crash log");
 
 	ePtr<gMainDC> my_dc;
 	gMainDC::getInstance(my_dc);
@@ -292,7 +301,7 @@ void bsodFatal(const char *component)
 	 * We'd risk destroying things with every additional instruction we're
 	 * executing here.
 	 */
-	if (component) {
+	if (fatalNative) {
 		/*
 		 *  We need to use a signal that generate core dump.
 		 */
@@ -369,4 +378,5 @@ void bsodCatchSignals()
 	sigaction(SIGILL, &act, 0);
 	sigaction(SIGBUS, &act, 0);
 	sigaction(SIGABRT, &act, 0);
+	sigaction(SIGFPE, &act, 0);
 }

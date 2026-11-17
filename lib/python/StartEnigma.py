@@ -12,7 +12,7 @@ from Components.Timezones import InitTimeZones, languageCode  # noqa: E402
 from os.path import isdir, islink, join  # noqa: E402
 from traceback import print_exc  # noqa: E402
 from time import time  # noqa: E402
-from sys import stdout  # noqa: E402
+from sys import stderr, stdout  # noqa: E402
 enigma.eProfileWrite("Imports")
 
 if ARCHITECTURE == "aarch64":
@@ -737,8 +737,8 @@ try:
 	plugins.shutdown()
 	Components.ParentalControl.parentalControl.save()
 except Exception:
-	print('EXCEPTION IN PYTHON STARTUP CODE:')
-	print('-' * 60)
-	print_exc(file=stdout)
+	print('EXCEPTION IN PYTHON STARTUP CODE:', file=stderr)
+	print('-' * 60, file=stderr)
+	print_exc(file=stderr)
 	enigma.quitMainloop(5)
-	print('-' * 60)
+	print('-' * 60, file=stderr)

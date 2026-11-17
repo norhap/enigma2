@@ -382,7 +382,7 @@ def getReasons(session, retvalue=QUIT_SHUTDOWN):
 		reasons.append(_("You seem to be in timeshift!"))
 	if [stream for stream in eStreamServer.getInstance().getConnectedClients() if stream[0] != '127.0.0.1'] or StreamServiceList:
 		reasons.append(_("Client is streaming from this box!"))
-	if not reasons and mediaFilesInUse(session) and retvalue in (QUIT_SHUTDOWN, QUIT_REBOOT, QUIT_RESTART, QUIT_UPGRADE_FP, QUIT_UPGRADE_PROGRAM, QUIT_UPGRADE_FPANEL):
+	if not reasons and retvalue in (QUIT_SHUTDOWN, QUIT_REBOOT, QUIT_RESTART, QUIT_DEBUG_RESTART, QUIT_REBOOT_ANDROID, QUIT_REBOOT_RECOVERY, QUIT_UPGRADE_FP, QUIT_UPGRADE_PROGRAM, QUIT_UPGRADE_FPANEL) and mediaFilesInUse(session):
 		reasons.append(_("A file from media is in use!"))
 	return "\n".join(reasons)
 
@@ -443,14 +443,16 @@ class TryQuitMainloop(MessageBox):
 		if event == iRecordableService.evEnd:
 			recordings = self.session.nav.getRecordings()
 			if not recordings:  # no more recordings exist
+				if self.descramble:
+					return
 				rec_time = self.session.nav.RecordTimer.getNextRecordingTime()
 				if rec_time > 0 and (rec_time - time()) < 360:
-					self.initTimeout(360)  # wait for next starting timer
-					self.startTimer()
-				else:
+					self.timeout = 360
+					self.timer.start(1000)
+				elif not getReasons(self.session, self.retval):
 					self.close(True)  # immediate shutdown
 		elif event == iRecordableService.evStart:
-			self.stopTimer()
+			self.stopTimer("Recording started")
 
 	def close(self, value):
 		if self.connected:
@@ -481,7 +483,7 @@ class TryQuitMainloop(MessageBox):
 				from Components.PvrDescrambleConvert import pvr_descramble_convert
 				if pvr_descramble_convert.scrambledRecordsLeft():
 					self.session.open(Standby)
-			MessageBox.close(self, True)
+			MessageBox.close(self, False)
 
 	def quitMainloop(self):
 		self.session.nav.stopService()

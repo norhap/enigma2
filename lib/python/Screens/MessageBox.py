@@ -37,12 +37,13 @@ class MessageBox(Screen, HelpableScreen):
 		if type == self.TYPE_YESNO:
 			self.list = [(_("Yes"), True), (_("No"), False)] if list is None else list
 			self["list"] = MenuList(self.list)
-			if isinstance(default, int):
-				self["list"].moveToIndex(default)
-			elif default in (True, False):
-				self["list"].moveToIndex(0 if default else 1)
+			if isinstance(default, bool):
+				self.startIndex = 0 if default else 1
+			elif isinstance(default, int):
+				self.startIndex = default
 			else:
 				print(f"[MessageBox] Error: The context of the default ({default}) can't be determined!")
+				self.startIndex = 0
 		else:
 			self.list = []
 			self["list"] = MenuList([])
@@ -64,7 +65,7 @@ class MessageBox(Screen, HelpableScreen):
 		self.picon = (typeIcon != self.TYPE_NOICON)  # Legacy picon argument to support old skins.
 		if typeIcon:
 			self["icon"] = MultiPixmap()  # These line can go with new skins that only use self["icon"]...
-		if timeout_default:  # Process legacy timeout_default argument.
+		if timeout_default is not None:  # Process legacy timeout_default argument.
 			timeoutDefault = timeout_default
 		self.timeoutDefault = timeoutDefault
 		if title:  # Process legacy title argument.
@@ -120,7 +121,7 @@ class MessageBox(Screen, HelpableScreen):
 	def layoutFinished(self):
 		if self.list:
 			self["list"].enableAutoNavigation(False)  # Override listbox navigation.
-			# self["list"].moveToIndex(self.startIndex)
+			self["list"].moveToIndex(self.startIndex)
 		if self.typeIcon:
 			self["icon"].setPixmapNum(self.typeIcon - 1)
 		prefix = self.windowTitle
@@ -151,7 +152,7 @@ class MessageBox(Screen, HelpableScreen):
 			self.timeout -= 1
 		else:
 			self.stopTimer("Timeout!")
-			if self.timeoutDefault:
+			if self.timeoutDefault is not None:
 				self.close(self.timeoutDefault)
 			else:
 				self.select()

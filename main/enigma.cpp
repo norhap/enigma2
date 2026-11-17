@@ -406,7 +406,11 @@ int main(int argc, char **argv)
 	/* start at full size */
 	eVideoWidget::setFullsize(true);
 
-	python.execFile(eEnv::resolve("${libdir}/enigma2/python/StartEnigma.py").c_str());
+	if (python.execFile(eEnv::resolve("${libdir}/enigma2/python/StartEnigma.py").c_str()) != 0 && exit_code != 5)
+	{
+		eLog(lvlFatal, "[Enigma] Failed to execute StartEnigma.py.");
+		exit_code = 5;
+	}
 
 	/* restore both decoders to full size */
 	eVideoWidget::setFullsize(true);

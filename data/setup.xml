@@ -201,8 +201,8 @@
 		<item level="2" text="Debug log time format *" description="This sets the prefix for each line in the debug log. The 'Boot time' is the number of seconds since your %s %s was last booted.">config.crash.debugTimeFormat</item>
 		<item level="2" text="Enable core dumps *" description="Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location.">config.crash.coredump</item>
 		<item level="2" text="Number of debug logs to keep *" description="This sets the maximum number of log files that will be retained. Files in excess of this number will be deleted.">config.crash.debugFileCount</item>
-		<item level="2" text="Maximum number of days" description="Logs older than the specified number of days will be deleted.">config.crash.daysloglimit</item>
-		<item level="2" text="Maximum total space used (MB)" description="When maximum space for all logs is reached, the oldest logs will be deleted.">config.crash.sizeloglimit</item>
+		<item level="2" text="Maximum number of days" description="Logs older than the specified number of days will be deleted, except the five most recent crash logs.">config.crash.daysloglimit</item>
+		<item level="2" text="Maximum total space used (MB)" description="When maximum space for all logs is reached, the oldest logs will be deleted. The five most recent crash logs are kept even if they exceed this limit.">config.crash.sizeloglimit</item>
 		<item level="2" text="Show Logs Manager in extensions list" description="Allows you to show/hide 'Logs Manager' in extensions (blue button).">config.logmanager.showinextensions</item>
 	</setup>
 	<setup key="MACAddress" title="MAC Address Setup">

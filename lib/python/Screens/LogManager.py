@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from enigma import eTimer, eBackgroundFileEraser, eLabel, gFont, fontRenderClass
-from os import remove, walk, stat, rmdir, listdir
-from os.path import join, getsize, isdir, exists
+from os import remove, walk, stat, fstat, rmdir, listdir
+from os.path import join, getsize, isdir, exists, realpath
 from glob import glob
 from time import time, sleep
 import Components.Task
@@ -73,56 +73,64 @@ class LogManagerPoller:
 		ctimeLimit = time() - (config.crash.daysloglimit.value * 3600 * 24)
 		allowedBytes = 1024 * 1024 * int(config.crash.sizeloglimit.value)
 
-		mounts = []
-		matches = []
+		matches = set()
 		print("[LogManager] probing folders")
 		with open("/proc/mounts", "r") as f:
-			for line in f.readlines():
+			for line in f:
 				parts = line.strip().split()
-				mounts.append(parts[1])
-
-		for mount in mounts:
-			if isdir(join(mount, "logs")):
-				matches.append(join(mount, "logs"))
-		matches.append("/home/root/logs")
+				if len(parts) > 1 and isdir(join(parts[1], "logs")):
+					matches.add(realpath(join(parts[1], "logs")))
+		matches.add(realpath("/home/root/logs"))
+		matches.add(realpath(config.crash.debugPath.value))
 
 		print("[LogManager] found following log(s):", matches)
-		if len(matches):
-			for logsfolder in matches:
-				print("[LogManager] looking in:", logsfolder)
-				logssize = get_size(logsfolder)
-				bytesToRemove = logssize - allowedBytes
-				candidates = []
-				size = 0
-				for root, dirs, files in walk(logsfolder, topdown=False):
-					for name in files:
-						try:
-							fn = join(root, name)
-							st = stat(fn)
-							if st.st_ctime < ctimeLimit:
-								print("[LogManager] " + str(fn) + ": Too old:", name, st.st_ctime)
-								eBackgroundFileEraser.getInstance().erase(fn)
-								bytesToRemove -= st.st_size
-							else:
-								candidates.append((st.st_ctime, fn, st.st_size))
-								size += st.st_size
-						except Exception as e:
-							print("[LogManager] Failed to stat %s:" % name, e)
-					# Remove empty directories if possible
-					for name in dirs:
-						try:
-							rmdir(join(root, name))
-						except:
-							pass
-					candidates.sort()
-					# Now we have a list of ctime, candidates, size. Sorted by ctime (=deletion time)
-					for st_ctime, fn, st_size in candidates:
-						print("[LogManager] " + str(logsfolder) + ": bytesToRemove", bytesToRemove)
-						if bytesToRemove < 0:
-							break
-						eBackgroundFileEraser.getInstance().erase(fn)
-						bytesToRemove -= st_size
-						size -= st_size
+		active = set()
+		for fd in (1, 2):
+			try:
+				st = fstat(fd)
+				active.add((st.st_dev, st.st_ino))
+			except OSError as e:
+				print("[LogManager] Failed to inspect output descriptor %d:" % fd, e)
+
+		folders = {}
+		seen = set()
+		crashes = []
+		for logsfolder in sorted(matches, key=len):
+			print("[LogManager] looking in:", logsfolder)
+			entries = []
+			folders[logsfolder] = entries
+			for root, dirs, files in walk(logsfolder, topdown=False):
+				for name in files:
+					fn = join(root, name)
+					path = realpath(fn)
+					if path in seen:
+						continue
+					seen.add(path)
+					try:
+						st = stat(fn)
+					except OSError as e:
+						print("[LogManager] Failed to stat %s:" % fn, e)
+						continue
+					entry = (st.st_ctime, fn, st.st_size, (st.st_dev, st.st_ino))
+					entries.append(entry)
+					if name.startswith("enigma2_crash") and name.endswith(".log"):
+						crashes.append((st.st_mtime, fn))
+				for name in dirs:
+					try:
+						rmdir(join(root, name))
+					except OSError:
+						pass
+
+		protected = {fn for _, fn in sorted(crashes, reverse=True)[:5]}
+		for logsfolder, entries in folders.items():
+			bytesToRemove = sum(entry[2] for entry in entries) - allowedBytes
+			for ctime, fn, size, identity in sorted(entries):
+				if fn in protected or identity in active:
+					continue
+				if ctime < ctimeLimit or bytesToRemove > 0:
+					print("[LogManager] Removing %s (bytes over limit: %d)" % (fn, bytesToRemove))
+					eBackgroundFileEraser.getInstance().erase(fn)
+					bytesToRemove -= size
 		self.TrashTimer.startLongTimer(43200)  # twice a day
 
 

@@ -228,10 +228,8 @@ void eDebugImpl(int flags, const char* fmt, ...)
 
 void ePythonOutput(const char *string, int lvl)
 {
-#ifdef DEBUG
-	if (debugLvl >= lvl)
+	if (lvl <= lvlError || (MAX_DEBUG_LEVEL >= lvl && debugLvl >= lvl))
 		eDebugImpl(_DBGFLG_NONEWLINE, "%s", string);
-#endif
 }
 
 int eGetEnigmaDebugLvl()

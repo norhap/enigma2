@@ -14,7 +14,7 @@ export PATH="${PATH}:/usr/script"
 # fi
 
 # LC_ALL available?
-if [ -z $LC_ALL ]; then
+if [ -z "$LC_ALL" ]; then
 	export LC_ALL=en_GB.utf8
 fi
 
@@ -24,9 +24,9 @@ if [ -d /home/root ]; then
 fi
 
 # Create debug first run - link resolv.conf to /var/run for check Internet via timezone - Up in Iface WLAN for view Available Wireless Networks in Wizard.
-if [ "$(grep -i config.misc.firstrun=False /etc/enigma2/settings)" == "" ]; then
-	DEBUG_LVL=4
-	ENIGMA_DEBUG_TIME=1
+FIRST_RUN=0
+if [ "$(grep -i config.misc.firstrun=False /etc/enigma2/settings)" = "" ]; then
+	FIRST_RUN=1
 	if [ ! -e @sysconfdir@/resolv.conf ]; then
 		ln -sf @localstatedir@/run/resolv.conf @sysconfdir@/resolv.conf
 	fi
@@ -66,12 +66,14 @@ if [ ! -d $DEBUGDIR ] ; then mkdir -p $DEBUGDIR; fi
 if [ "$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')" != "" -a -d "$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')" ]; then
 	DEBUGDIR=$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')
 fi
+DEBUGDIR="${DEBUGDIR%/}/"
 
+COREDUMP_ENABLED=0
 if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
-	if [ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/" ]; then
-		COREDUMPSIZE=$((10 * 512 * 4 - 1 * 512 * 4)) # size is in blocks (512 byte) so this sets 10 MB - 1 MB for log files
-		COREDUMPFILE=${DEBUGDIR}%t-enigma2-core.dump
-	fi
+	COREDUMP_ENABLED=1
+	[ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/"
+	COREDUMPSIZE=$((10 * 512 * 4 - 1 * 512 * 4)) # size is in blocks (512 byte) so this sets 10 MB - 1 MB for log files
+	COREDUMPFILE=${DEBUGDIR}%t-enigma2-core.dump
 	if [ "$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')" != "" ]; then
 		COREDUMPSIZE=$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')
 		COREDUMPSIZE=$((${COREDUMPSIZE} * 512 * 4 - 1 * 512 * 4))
@@ -87,25 +89,6 @@ if [ -x @bindir@/showiframe ]; then
 	fi
 fi
 
-# Create debug first run
-if [ -n "$DEBUG_LVL" ]; then
-	(LD_PRELOAD=$LIBS ENIGMA_DEBUG_LVL=$DEBUG_LVL ENIGMA_DEBUG_TIME=$ENIGMA_DEBUG_TIME @bindir@/enigma2 &> ${DEBUGDIR}$(date +%Y%m%d-%H%M%S)_enigma2_debug_first_run.log) &
-fi
-
-enigma2pid=$!
-
-# Enable generation of core dumps with ELF header included.
-# This seem to be required by gdb.
-# Would be default if kernel is configured with CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS.
-# Default coredump filter can only be set via kernel command line.
-# In all other cases this is only available per process.
-if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
-	COREDUMPFILTER=0x33
-	echo ${COREDUMPFILTER} > /proc/${enigma2pid}/coredump_filter
-fi
-
-wait ${enigma2pid}
-
 # This should not be done as it will suppress the appropriate diagnostic message from within Enigma2.
 #
 # if [ ! -e /etc/enigma2/settings ]; then
@@ -113,6 +96,13 @@ wait ${enigma2pid}
 # fi
 
 # Enigma main loop.
+run_enigma() {
+	if [ "${COREDUMP_ENABLED}" = "1" ]; then
+		echo 0x33 > /proc/self/coredump_filter
+	fi
+	LD_PRELOAD="${LIBS}" ENIGMA_DEBUG_LVL="${DEBUG_LVL}" ENIGMA_DEBUG_TIME="${DEBUG_TIME}" exec "@bindir@/enigma2"
+}
+
 while : ; do
 	# Hook to execute scripts always before enigma2 start.
 	if [ -x "@bindir@/enigma2_pre_start.sh" ]; then
@@ -144,24 +134,80 @@ while : ; do
 	[ -n "${DEBUGTIME}" ] || DEBUGTIME="2"
 	DEBUG_TIME="${DEBUGTIME}"
 
-	if [ "${DEBUG_LVL}" -lt "4" ]; then
-		LD_PRELOAD="${LIBS}" ENIGMA_DEBUG_LVL="${DEBUG_LVL}" ENIGMA_DEBUG_TIME="${DEBUG_TIME}" "@bindir@/enigma2"
-	else
+	FILE=""
+	if [ "${FIRST_RUN}" = "1" ]; then
+		DEBUG_LVL=4
+		DEBUG_TIME=1
+		FILE="${DEBUGDIR}$(date +%Y%m%d-%H%M%S)_enigma2_debug_first_run.log"
+		FIRST_RUN=0
+	elif [ "${DEBUG_LVL}" -ge "4" ]; then
 		[ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/"
 		# Remove old logfiles.
 		KEEP=`sed -En 's|^config\.crash\.debugFileCount=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
 		[ -n "${KEEP}" ] || KEEP="5"
-		for FILE in `ls -t "${DEBUGDIR}"enigma2_debug_*.log`; do
-			let "KEEP--"
+		for FILE in `cd "${DEBUGDIR}" && ls -t enigma2_debug_*.log 2>/dev/null`; do
+			KEEP=$((KEEP - 1))
 			if [ "${KEEP}" -lt "1" ]; then
-				rm "${FILE}"
+				rm "${DEBUGDIR}${FILE}"
 			fi
 		done
-		# Today's log file.
 		FILE="${DEBUGDIR}enigma2_debug_$(date +%Y-%m-%d_%H-%M-%S).log"
-		LD_PRELOAD="${LIBS}" ENIGMA_DEBUG_LVL="${DEBUG_LVL}" ENIGMA_DEBUG_TIME="${DEBUG_TIME}" "@bindir@/enigma2" >> "${FILE}" 2>&1
 	fi
 
+	if [ -n "${FILE}" ] && ! ( : >> "${FILE}" ) 2>/dev/null; then
+		echo "[enigma2.sh] Cannot write debug log ${FILE}; starting without file logging" >&2
+		FILE=""
+	fi
+	if [ -n "${FILE}" ]; then
+		run_enigma >> "${FILE}" 2>&1 &
+	else
+		run_enigma &
+	fi
+	enigma2pid=$!
+	wait "${enigma2pid}"
+	RET=$?
+
+	# Save a minimal diagnostic if Enigma exited unexpectedly before writing its own crash log.
+	case ${RET} in
+		0|1|2|3|4|6|7|12|16|42|43|44|45|143) ;;
+		*)
+			CRASH_FOUND=0
+			for CRASH in "${DEBUGDIR}"enigma2_crash_*_"${enigma2pid}".log; do
+				[ -f "${CRASH}" ] && CRASH_FOUND=1
+			done
+			if [ "${CRASH_FOUND}" = "0" ]; then
+				CRASH="${DEBUGDIR}enigma2_crash_$(date +%Y-%m-%d_%H-%M-%S)_launcher_${enigma2pid}.log"
+				CRASH_FINAL=""
+				if ! (umask 077; : > "${CRASH}") 2>/dev/null; then
+					CRASH_FINAL="/tmp/enigma2_crash_launcher.log"
+					CRASH=$(mktemp "/tmp/enigma2_crash_launcher.XXXXXX") || CRASH=""
+				fi
+				if [ -n "${CRASH}" ]; then
+					if {
+						echo "Enigma2 unexpected exit"
+						echo "date=$(date)"
+						echo "pid=${enigma2pid}"
+						echo "exitcode=${RET}"
+						if [ -n "${FILE}" ] && [ -f "${FILE}" ]; then
+							echo "debuglog=${FILE}"
+							echo "Last debug output:"
+							tail -n 250 "${FILE}"
+						else
+							echo "No debug file was enabled for this run."
+						fi
+					} > "${CRASH}"; then
+						if [ -n "${CRASH_FINAL}" ]; then
+							mv -f "${CRASH}" "${CRASH_FINAL}" || echo "[enigma2.sh] Failed to move crash diagnostic ${CRASH}" >&2
+						fi
+					else
+						echo "[enigma2.sh] Failed to write crash diagnostic ${CRASH}" >&2
+					fi
+				else
+					echo "[enigma2.sh] Failed to create crash diagnostic in ${DEBUGDIR} and /tmp" >&2
+				fi
+			fi
+			;;
+	esac
 
 	# Enigma2 exit codes:
 	#
@@ -181,7 +227,6 @@ while : ; do
 	#
 	# >128 signal
 
-	RET=$?
 	case ${RET} in
 		1)
 			/sbin/halt
@@ -191,7 +236,7 @@ while : ; do
 			/sbin/reboot
 			;;
 		3)
-			ENIGMA_DEBUG_LVL="3"
+			ENIGMA_DEBUG_LVL=""
 			;;
 		4)
 			/sbin/rmmod lcd
@@ -202,12 +247,13 @@ while : ; do
 			/sbin/reboot
 			;;
 		5)
-			if [ "$(grep -i config.misc.RestartUI /etc/enigma2/settings)" == "" ]; then
-				echo "config.misc.RestartUI=true" > /etc/enigma2/settings
+			if [ "$(grep -i config.misc.RestartUI /etc/enigma2/settings)" = "" ]; then
+				echo "config.misc.RestartUI=true" >> /etc/enigma2/settings
 			fi
 			;;
 		6)
-			ENIGMA_DEBUG_LVL="4"
+			ENIGMA_DEBUG_LVL=`sed -En 's|^config\.crash\.debugLevel=(.+)$|\1|p' "@sysconfdir@/enigma2/settings"`
+			[ "${ENIGMA_DEBUG_LVL}" = "5" ] || ENIGMA_DEBUG_LVL="4"
 			;;
 		7)
 			rm -R /etc/enigma2
