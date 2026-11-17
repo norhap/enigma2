@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
-from enigma import eTimer, eBackgroundFileEraser, eLabel, gFont, fontRenderClass
+from enigma import eTimer, eBackgroundFileEraser, eLabel, eEnv, gFont, fontRenderClass
 from os import remove, walk, stat, fstat, rmdir, listdir
-from os.path import join, getsize, isdir, exists, realpath
+from os.path import join, getsize, isdir, isfile, exists, realpath
 from glob import glob
-from time import time, sleep
+import re
+from shutil import which
+from time import time
 import Components.Task
 from Components.ActionMap import ActionMap
 from Components.Sources.StaticText import StaticText
@@ -14,9 +16,12 @@ from Components.MenuList import MenuList
 from Components.VariableText import VariableText
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.Console import Console
 from Tools.TextBoundary import getTextBoundarySize
 
 _session = None
+CORE_DUMP_PATTERN = r"\d+-enigma2-core\.dump(?:\.\d+)?"
+CRASH_LIST_PATTERN = r"enigma2_crash_|(?:^|/)" + CORE_DUMP_PATTERN + r"$"
 
 
 def get_size(start_path=None):
@@ -95,6 +100,7 @@ class LogManagerPoller:
 		folders = {}
 		seen = set()
 		crashes = []
+		core_dumps = set()
 		for logsfolder in sorted(matches, key=len):
 			print("[LogManager] looking in:", logsfolder)
 			entries = []
@@ -115,15 +121,17 @@ class LogManagerPoller:
 					entries.append(entry)
 					if name.startswith("enigma2_crash") and name.endswith(".log"):
 						crashes.append((st.st_mtime, fn))
+					elif re.fullmatch(CORE_DUMP_PATTERN, name):
+						core_dumps.add(fn)
 				for name in dirs:
 					try:
 						rmdir(join(root, name))
 					except OSError:
 						pass
 
-		protected = {fn for _, fn in sorted(crashes, reverse=True)[:5]}
+		protected = {fn for _, fn in sorted(crashes, reverse=True)[:5]} | core_dumps
 		for logsfolder, entries in folders.items():
-			bytesToRemove = sum(entry[2] for entry in entries) - allowedBytes
+			bytesToRemove = sum(entry[2] for entry in entries if entry[1] not in core_dumps) - allowedBytes
 			for ctime, fn, size, identity in sorted(entries):
 				if fn in protected or identity in active:
 					continue
@@ -165,7 +173,7 @@ class LogManager(Screen):
 		self.sentsingle = ""
 		self.selectedFiles = config.logmanager.sentfiles.value
 		self.defaultDir = config.crash.debugPath.value
-		self.matchingPattern = "enigma2_crash_"
+		self.matchingPattern = CRASH_LIST_PATTERN
 		self.filelist = MultiFileSelectList(self.selectedFiles, self.defaultDir, showDirectories=False, matchingPattern=self.matchingPattern)
 		self["list"] = self.filelist
 		self["LogsSize"] = self.logsinfo = LogInfo(config.crash.debugPath.value, LogInfo.USED, update=False)
@@ -228,7 +236,6 @@ class LogManager(Screen):
 
 	def changelogtype(self):
 		self["LogsSize"].update(config.crash.debugPath.value)
-		import re
 		if self.logtype == "crashlogs":
 			self["key_red"].setText(_("Crash Logs"))
 			self.logtype = "debuglogs"
@@ -236,7 +243,7 @@ class LogManager(Screen):
 		else:
 			self["key_red"].setText(_("Debug Logs"))
 			self.logtype = "crashlogs"
-			self.matchingPattern = "enigma2_crash_"
+			self.matchingPattern = CRASH_LIST_PATTERN
 		self["list"].matchingPattern = re.compile(self.matchingPattern)
 		self["list"].changeDir(self.defaultDir)
 		if not listdir(config.crash.debugPath.value):
@@ -252,9 +259,34 @@ class LogManager(Screen):
 			except:
 				self.sel = None
 			if self.sel:
-				self.session.open(LogManagerViewLog, self.sel[0])
+				if re.fullmatch(CORE_DUMP_PATTERN, self.sel[0]):
+					self.analyzeCoreDump(self.sel[0])
+				else:
+					self.session.open(LogManagerViewLog, self.sel[0])
 			else:
 				self.session.open(MessageBox, _("You have not selected any logs to view."), MessageBox.TYPE_INFO, timeout=10)
+
+	def analyzeCoreDump(self, name):
+		path = join(self.defaultDir, name)
+		try:
+			with open(path, "rb") as dump:
+				header = dump.read(18)
+		except OSError as e:
+			self.session.open(MessageBox, _("Cannot read core dump: %s") % str(e), MessageBox.TYPE_ERROR)
+			return
+		if len(header) < 18 or header[:4] != b"\x7fELF" or header[4] not in (1, 2) or header[5] not in (1, 2) or int.from_bytes(header[16:18], "little" if header[5] == 1 else "big") != 4:
+			self.session.open(MessageBox, _("This file is not a valid ELF core dump."), MessageBox.TYPE_ERROR)
+			return
+		gdb = which("gdb")
+		if not gdb:
+			self.session.open(MessageBox, _("GDB is not installed. Install a compatible GDB on the receiver to analyze core dumps."), MessageBox.TYPE_ERROR)
+			return
+		executable = eEnv.resolve("${bindir}/enigma2")
+		if not isfile(executable):
+			self.session.open(MessageBox, _("Enigma2 executable not found: %s") % executable, MessageBox.TYPE_ERROR)
+			return
+		command = (gdb, "--batch", "--nx", "--quiet", "-iex", "set auto-load off", "-ex", "set pagination off", "-ex", "thread apply all bt 30", "--exec", executable, "--core", path)
+		self.session.open(CoreDumpConsole, title=_("Core dump analysis"), cmdlist=[command], showScripts=False)
 
 	def deletelog(self):
 		if self.logs:
@@ -275,22 +307,31 @@ class LogManager(Screen):
 				self.session.open(MessageBox, _("You have not selected any logs to delete."), MessageBox.TYPE_INFO, timeout=10)
 
 	def deleteAllLogs(self):
+		self.logs = [name for name in listdir(self.defaultDir) if not name.startswith(".")]
 		if self.logs:
-			allfiles = ",".join(self.logs).replace(",", "\n")
-			message = _("You want to delete all files?\n\n") + str(allfiles)
+			allfiles = "\n".join(self.logs)
+			message = _("You want to delete all files, including core dumps?\n\n") + allfiles
 			self.session.openWithCallback(self.doDeleteAllLogs, MessageBox, message, MessageBox.TYPE_YESNO)
 
 	def doDeleteAllLogs(self, answer):
 		if answer:
-			from enigma import eConsoleAppContainer
-			eConsoleAppContainer().execute("rm -f " + config.crash.debugPath.value + "*")
-			sleep(0.3)
+			failed = []
+			for name in self.logs:
+				try:
+					remove(join(self.defaultDir, name))
+				except OSError as e:
+					print("[LogManager] Failed to remove %s: %s" % (name, e))
+					failed.append("%s: %s" % (name, e))
+			self.logs = listdir(self.defaultDir)
 			self["list"].changeDir(self.defaultDir)
 			self["LogsSize"].update(config.crash.debugPath.value)
-			self["key_red"].setText("")
-			self["key_green"].setText("")
-			self["key_yellow"].setText("")
-			self["key_blue"].setText("")
+			if not self.logs:
+				self["key_red"].setText("")
+				self["key_green"].setText("")
+				self["key_yellow"].setText("")
+				self["key_blue"].setText("")
+			if failed:
+				self.session.open(MessageBox, _("Could not delete the following files:\n\n") + "\n".join(failed), MessageBox.TYPE_ERROR)
 
 	def doDelete1(self, answer):
 		self.selectedFiles = self["list"].getSelectedList()
@@ -327,6 +368,15 @@ class LogManager(Screen):
 				self.changelogtype()
 			self["list"].changeDir(self.defaultDir)
 			self["LogsSize"].update(config.crash.debugPath.value)
+
+
+class CoreDumpConsole(Console):
+	def runFinished(self, retVal):
+		if retVal:
+			self["text"].appendText("\n" + _("GDB analysis failed (exit code %d). Check the output above.") % retVal + "\n")
+		else:
+			self["text"].appendText("\n" + _("Debug symbols matching the crashed Enigma2 version are needed for a detailed backtrace.") + "\n")
+		Console.runFinished(self, retVal)
 
 
 class LogManagerViewLog(Screen):

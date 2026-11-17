@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-16 20:13+0100\n"
+"POT-Creation-Date: 2026-11-17 19:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3510,6 +3510,9 @@ msgstr ""
 msgid "Cannot move to trash can"
 msgstr ""
 
+msgid "Cannot read core dump: %s"
+msgstr ""
+
 msgid "Capabilities: "
 msgstr ""
 
@@ -3894,7 +3897,7 @@ msgstr ""
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes. ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr ""
 
-msgid "Choose the location for crash and debug logs folder."
+msgid "Choose the location for crash logs, debug logs and core dumps. Restart Enigma2 to apply the new location to all files."
 msgstr ""
 
 msgid "Choose the location where the EPG data will be stored when your %s %s is shut down. The location must be available at boot time."
@@ -4814,7 +4817,10 @@ msgstr ""
 msgid "Copying files"
 msgstr ""
 
-msgid "Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location."
+msgid "Core dump analysis"
+msgstr ""
+
+msgid "Core dumps help developers diagnose fatal C++ crashes. They are not deleted automatically and may fill the storage device; remove them in Logs Manager when no longer needed. Viewing them requires compatible GDB and matching debug symbols. Adjust maximum space used to allow a useful dump."
 msgstr ""
 
 msgid "Cornish"
@@ -4842,6 +4848,11 @@ msgid "Cote d'Ivoire / Ivory Coast"
 msgstr ""
 
 msgid "Could not connect to server"
+msgstr ""
+
+msgid ""
+"Could not delete the following files:\n"
+"\n"
 msgstr ""
 
 msgid "Could not find installed channel list."
@@ -5291,6 +5302,9 @@ msgid "Debug logging *"
 msgstr ""
 
 msgid "Debug Logs"
+msgstr ""
+
+msgid "Debug symbols matching the crashed Enigma2 version are needed for a detailed backtrace."
 msgstr ""
 
 msgid "Debug to file"
@@ -6823,6 +6837,9 @@ msgstr ""
 msgid "Enigma2 debug level: %d\n"
 msgstr ""
 
+msgid "Enigma2 executable not found: %s"
+msgstr ""
+
 msgid "Enigma2 revision: "
 msgstr ""
 
@@ -8170,6 +8187,12 @@ msgid "GB"
 msgstr ""
 
 msgid "GCC version: "
+msgstr ""
+
+msgid "GDB analysis failed (exit code %d). Check the output above."
+msgstr ""
+
+msgid "GDB is not installed. Install a compatible GDB on the receiver to analyze core dumps."
 msgstr ""
 
 msgid "General"
@@ -10345,13 +10368,13 @@ msgstr ""
 msgid "LogManager"
 msgstr ""
 
-msgid "Logs folder location **"
+msgid "Logs folder location *"
 msgstr ""
 
 msgid "Logs Manager"
 msgstr ""
 
-msgid "Logs older than the specified number of days will be deleted."
+msgid "Logs older than the specified number of days will be deleted, except the five most recent crash logs and core dumps."
 msgstr ""
 
 msgid "Logs Setup"
@@ -18203,6 +18226,9 @@ msgstr ""
 msgid "The new conffile will be placed at"
 msgstr ""
 
+msgid "The oldest logs are deleted when this limit is reached, except the five most recent crash logs. Core dumps do not count towards this limit and must be removed manually. This setting also limits the size of each core dump."
+msgstr ""
+
 msgid ""
 "The overscan wizard has been completed.\n"
 "\n"
@@ -18382,6 +18408,9 @@ msgid "This DVD RW medium is already formatted - reformatting will erase all con
 msgstr ""
 
 msgid "This field allows you to search an additional symbol rate up to %s."
+msgstr ""
+
+msgid "This file is not a valid ELF core dump."
 msgstr ""
 
 msgid ""
@@ -20659,9 +20688,6 @@ msgstr ""
 msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
 msgstr ""
 
-msgid "When maximum space for all logs is reached, the oldest logs will be deleted."
-msgstr ""
-
 msgid "When nonzero, a recording will start earlier than the starting time indicated by the EPG."
 msgstr ""
 
@@ -21071,7 +21097,7 @@ msgid "You want to change current MAC address: "
 msgstr ""
 
 msgid ""
-"You want to delete all files?\n"
+"You want to delete all files, including core dumps?\n"
 "\n"
 msgstr ""
 

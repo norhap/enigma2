@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-16 20:13+0100\n"
+"POT-Creation-Date: 2026-11-17 19:07+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -3406,6 +3406,9 @@ msgstr "No se puede mover a la papelera"
 msgid "Cannot move to trash can"
 msgstr "No se puede mover a la papelera"
 
+msgid "Cannot read core dump: %s"
+msgstr "No se puede leer el core dump: %s"
+
 msgid "Capabilities: "
 msgstr "Capacidades: "
 
@@ -3781,8 +3784,8 @@ msgstr "Elija el estilo de formato de visualización del display para las fechas
 msgid "Choose the front panel display formatting style for times. 'H' / 'HH' is the hour for a 24 hour clock, 'h' / 'hh' is the hour for a 12 hour clock, 'mm' is the minutes. ('HH' and 'hh' have leading zeros for single digit values.) The front panel display will be based on your choice but can be influenced any applicable skin."
 msgstr "Elija el estilo de formato de la pantalla del panel frontal para las horas. 'H' / 'HH' es la hora para un reloj de 24 horas, 'h' / 'hh' es la hora para un reloj de 12 horas, 'mm' son los minutos. ('HH' y 'hh' tienen ceros a la izquierda para valores de un solo dígito). El display se basará en su elección, pero se puede influir en cualquier aspecto aplicable."
 
-msgid "Choose the location for crash and debug logs folder."
-msgstr "Elija la carpeta de localización del log."
+msgid "Choose the location for crash logs, debug logs and core dumps. Restart Enigma2 to apply the new location to all files."
+msgstr "Elige la ubicación para los registros de fallo, registros de depuración y core dumps. Reinicia Enigma2 para aplicar la nueva ubicación a todos los archivos."
 
 msgid "Choose the location where the EPG data will be stored when your %s %s is shut down. The location must be available at boot time."
 msgstr "Elegir la ubicación donde se guardarán los datos EPG en su %s %s cuando se apaga. La ubicación deberá estar disponible durante el reinicio."
@@ -4691,8 +4694,11 @@ msgstr "Copiar a lista Stream Relay"
 msgid "Copying files"
 msgstr "Copiando archivos"
 
-msgid "Core dumps are helpful for developers in case of a FATAL SIGNAL crash in the C++ code. Typical core dump size is 110 MB so adjust maximum space used and choose proper location."
-msgstr "Los volcados del núcleo son útiles para los desarrolladores en caso de un bloqueo FATAL SIGNAL en el código C++. El tamaño típico de volcado del núcleo es de 110 MB, por lo tanto, ajuste el espacio máximo utilizado y elija la ubicación adecuada."
+msgid "Core dump analysis"
+msgstr "Análisis de core dump"
+
+msgid "Core dumps help developers diagnose fatal C++ crashes. They are not deleted automatically and may fill the storage device; remove them in Logs Manager when no longer needed. Viewing them requires compatible GDB and matching debug symbols. Adjust maximum space used to allow a useful dump."
+msgstr "Los core dumps ayudan a los desarrolladores a diagnosticar fallos fatales en C++. No se eliminan automáticamente y pueden llenar el dispositivo de almacenamiento; elimínalos en el Gestor de registros cuando ya no sean necesarios. Para verlos se requiere un GDB compatible y símbolos de depuración coincidentes. Ajusta el espacio máximo utilizado para permitir un volcado útil."
 
 msgid "Cornish"
 msgstr "Danés"
@@ -4720,6 +4726,9 @@ msgstr "Costa de Marfil"
 
 msgid "Could not connect to server"
 msgstr "No se pudo grabar debido a que el sintonizador está ocupado"
+
+msgid "Could not delete the following files:\n\n"
+msgstr "No se pudieron eliminar los siguientes archivos:\n\n"
 
 msgid "Could not find installed channel list."
 msgstr "No se encontró lista de canales instalada."
@@ -5167,6 +5176,9 @@ msgstr "Registro Debug *"
 
 msgid "Debug Logs"
 msgstr "Debug Logs"
+
+msgid "Debug symbols matching the crashed Enigma2 version are needed for a detailed backtrace."
+msgstr "Se necesitan símbolos de depuración que coincidan con la versión de Enigma2 que se ha bloqueado para obtener un backtrace detallado."
 
 msgid "Debug to file"
 msgstr "Debug a archivo"
@@ -6670,6 +6682,9 @@ msgstr "Reinicios E2 & Completos: %d\n"
 msgid "Enigma2 debug level: %d\n"
 msgstr "Nivel de depuración de Enigma2: %d\n"
 
+msgid "Enigma2 executable not found: %s"
+msgstr "No se ha encontrado el ejecutable de Enigma2: %s"
+
 msgid "Enigma2 revision: "
 msgstr "Enigma2 revisión: "
 
@@ -7983,6 +7998,12 @@ msgstr "GB"
 
 msgid "GCC version: "
 msgstr "Versión GCC: "
+
+msgid "GDB analysis failed (exit code %d). Check the output above."
+msgstr "El análisis con GDB ha fallado (código de salida %d). Revisa la salida anterior."
+
+msgid "GDB is not installed. Install a compatible GDB on the receiver to analyze core dumps."
+msgstr "GDB no está instalado. Instala un GDB compatible en el receptor para analizar core dumps."
 
 msgid "General"
 msgstr "General"
@@ -10122,14 +10143,14 @@ msgstr "El fichero de registro ya no existe"
 msgid "LogManager"
 msgstr "Administrador de logs"
 
-msgid "Logs folder location **"
-msgstr "Ubicación de la carpeta de Logs **"
+msgid "Logs folder location *"
+msgstr "Ubicación de la carpeta de registros *"
 
 msgid "Logs Manager"
 msgstr "Administrador Logs"
 
-msgid "Logs older than the specified number of days will be deleted."
-msgstr "Se eliminarán los logs anteriores al número de días especificados."
+msgid "Logs older than the specified number of days will be deleted, except the five most recent crash logs and core dumps."
+msgstr "Se eliminarán los registros más antiguos que el número de días especificado, excepto los cinco registros de fallo y core dumps más recientes."
 
 msgid "Logs Setup"
 msgstr "Ajustes Logs"
@@ -17893,6 +17914,9 @@ msgstr "¡La extensión del asistente de Red no está instalada!\nPor favor inst
 msgid "The new conffile will be placed at"
 msgstr "El nuevo config ile se colocará en"
 
+msgid "The oldest logs are deleted when this limit is reached, except the five most recent crash logs. Core dumps do not count towards this limit and must be removed manually. This setting also limits the size of each core dump."
+msgstr "Los registros más antiguos se eliminan al alcanzar este límite, excepto los cinco registros de fallo más recientes. Los core dumps no cuentan para este límite y deben eliminarse manualmente. Este ajuste también limita el tamaño de cada core dump."
+
 msgid "The overscan wizard has been completed.\n\nNote: you can always start the Overscan wizard later, via\n\nMenu->Installation->System->Audio/Video->Overscan wizard"
 msgstr "Se ha completado el asistente de Overscan.\n\nNota: siempre puedes iniciar el asistente de Overscan más tarde, a través de\n\nMenú->Instalación->Sistema->Audio/Video->Asistente de Overscan"
 
@@ -18038,6 +18062,9 @@ msgstr "Este medio de DVD RW ya está formateado - el formateo eliminará todo e
 
 msgid "This field allows you to search an additional symbol rate up to %s."
 msgstr "Este campo le permite buscar un symbol rate adicional hasta %s."
+
+msgid "This file is not a valid ELF core dump."
+msgstr "Este archivo no es un core dump ELF válido."
 
 msgid "This function recovers your video signal in case of loss. The video has been changed to 720p.\nIf this is your case, please keep the video at 720P and do the following:\nGo to Menu > Setup > Audio & Video > Audio & Video Settings\nNow set a correct resolution.\n\nDo you want to keep the video at 720p?"
 msgstr "Esta función recupera su señal de VIDEO en caso de pérdida. El VIDEO ha sido cambiado a 720p.\nSi este es su caso, mantén el VIDEO en 720P y haz lo siguiente:\nVaya a Menú > Configuración > Audio & Video > Ajustes Audio & Video\nAhora establezca una resolución correcta.\n\n¿Quieres mantener el vídeo a 720p?"
@@ -20261,9 +20288,6 @@ msgstr "Cuando está habilitado, su receptor detectará actividad en la entrada 
 msgid "When it is enabled and you want to go to standby only from wake up timer, set \"Startup to standby from deepstandby or power off\" to \"No, except with wake up timer\"."
 msgstr "Cuando está habilitado y desea pasar al modo de espera solo desde el temporizador despertador, configure \"Iniciar a reposo desde espera profundo o apagado\" en \"No, excepto con el temporizador despertador\"."
 
-msgid "When maximum space for all logs is reached, the oldest logs will be deleted."
-msgstr "Cuando se alcance el espacio máximo para todos los logs, se eliminarán los más antiguos."
-
 msgid "When nonzero, a recording will start earlier than the starting time indicated by the EPG."
 msgstr "Cuando no es cero, una grabación comenzará antes de la hora de inicio indicada por la EPG."
 
@@ -20641,8 +20665,8 @@ msgstr "¡Parece que estás en Timeshift!"
 msgid "You want to change current MAC address: "
 msgstr "Quiere cambiar la dirección MAC actual: "
 
-msgid "You want to delete all files?\n\n"
-msgstr "¿Quieres eliminar todos los archivos?\n\n"
+msgid "You want to delete all files, including core dumps?\n\n"
+msgstr "¿Deseas eliminar todos los archivos, incluidos los core dumps?\n\n"
 
 msgid "You want to delete all the selected logs?\n\n"
 msgstr "¿Quieres eliminar todos los logs seleccionados?\n\n"

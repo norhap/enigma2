@@ -60,28 +60,6 @@ if [ -f /proc/stb/fp/nec_ir ]; then
 	[ -f /sys/class/remote/amremote/protocol ] && echo "2" > /sys/class/remote/amremote/protocol
 fi
 
-# Create and set log folder
-DEBUGDIR="/home/root/logs/"
-if [ ! -d $DEBUGDIR ] ; then mkdir -p $DEBUGDIR; fi
-if [ "$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')" != "" -a -d "$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')" ]; then
-	DEBUGDIR=$(grep config.crash.debugPath= /etc/enigma2/settings | sed 's/config.crash.debugPath=//g')
-fi
-DEBUGDIR="${DEBUGDIR%/}/"
-
-COREDUMP_ENABLED=0
-if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
-	COREDUMP_ENABLED=1
-	[ -n "${DEBUGDIR}" ] && [ -d "${DEBUGDIR}" ] || DEBUGDIR="/home/root/logs/"
-	COREDUMPSIZE=$((10 * 512 * 4 - 1 * 512 * 4)) # size is in blocks (512 byte) so this sets 10 MB - 1 MB for log files
-	COREDUMPFILE=${DEBUGDIR}%t-enigma2-core.dump
-	if [ "$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')" != "" ]; then
-		COREDUMPSIZE=$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')
-		COREDUMPSIZE=$((${COREDUMPSIZE} * 512 * 4 - 1 * 512 * 4))
-	fi
-	echo ${COREDUMPFILE} > /proc/sys/kernel/core_pattern
-	ulimit -c ${COREDUMPSIZE}
-fi
-
 # Show backdrop on enigma2 start.
 if [ -x @bindir@/showiframe ]; then
 	if [ -f @datadir@/enigma2/backdrop.mvi ]; then
@@ -98,7 +76,10 @@ fi
 # Enigma main loop.
 run_enigma() {
 	if [ "${COREDUMP_ENABLED}" = "1" ]; then
+		ulimit -c "${COREDUMPSIZE}" || echo "[enigma2.sh] Cannot set core dump size limit" >&2
 		echo 0x33 > /proc/self/coredump_filter
+	else
+		ulimit -c 0 || echo "[enigma2.sh] Cannot disable core dumps" >&2
 	fi
 	LD_PRELOAD="${LIBS}" ENIGMA_DEBUG_LVL="${DEBUG_LVL}" ENIGMA_DEBUG_TIME="${DEBUG_TIME}" exec "@bindir@/enigma2"
 }
@@ -112,6 +93,33 @@ while : ; do
 	# Dreamci.
 	if [ -x "@bindir@/enigma2_pre_start_ciplus.sh" ]; then
 		"@bindir@/enigma2_pre_start_ciplus.sh"
+	fi
+
+	# Reload log and core dump settings for each Enigma2 restart.
+	DEBUGDIR="/home/root/logs/"
+	[ -d "${DEBUGDIR}" ] || mkdir -p "${DEBUGDIR}"
+	CONFIG_DEBUGDIR=$(sed -n 's/^config\.crash\.debugPath=//p' /etc/enigma2/settings)
+	if [ -n "${CONFIG_DEBUGDIR}" ]; then
+		if [ -d "${CONFIG_DEBUGDIR}" ]; then
+			DEBUGDIR="${CONFIG_DEBUGDIR}"
+		else
+			echo "[enigma2.sh] Log directory ${CONFIG_DEBUGDIR} does not exist; using ${DEBUGDIR}" >&2
+		fi
+	fi
+	DEBUGDIR="${DEBUGDIR%/}/"
+
+	COREDUMP_ENABLED=0
+	if [ "$(grep -i config.crash.coredump=true /etc/enigma2/settings)" != "" ]; then
+		COREDUMP_ENABLED=1
+		COREDUMPSIZE=$((10 * 512 * 4 - 1 * 512 * 4))
+		COREDUMPFILE="${DEBUGDIR}%t-enigma2-core.dump"
+		if [ "$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')" != "" ]; then
+			COREDUMPSIZE=$(grep -i config.crash.sizeloglimit= /etc/enigma2/settings | sed 's/config.crash.sizeloglimit=//g')
+			COREDUMPSIZE=$((${COREDUMPSIZE} * 512 * 4 - 1 * 512 * 4))
+		fi
+		if ! echo "${COREDUMPFILE}" > /proc/sys/kernel/core_pattern; then
+			echo "[enigma2.sh] Cannot set core dump path ${COREDUMPFILE}" >&2
+		fi
 	fi
 
 	# Start enigma.
