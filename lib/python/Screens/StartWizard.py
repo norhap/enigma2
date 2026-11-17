@@ -71,7 +71,7 @@ def checkForAvailableAutoBackup():
 
 class AutoRestoreWizard(MessageBox):
 	def __init__(self, session):
-		message = _("There is an OpenPLi-based backup.\nYou need to restart Enigma2 if you want to restore it.\nDo you want to do it now?") if not os.path.isfile("/etc/.RestoreOpenPLiBackup") else _("Do you want restore the OpenPLi-based backup?")
+		message = _("Do you want restore the OpenPLi-based backup?")
 		MessageBox.__init__(self, session, message, type=MessageBox.TYPE_YESNO, timeout=20, default=True, simple=True)
 
 	def close(self, value):

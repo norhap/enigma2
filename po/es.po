@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-17 19:07+0100\n"
+"POT-Creation-Date: 2026-11-17 19:30+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -18026,9 +18026,6 @@ msgstr[1] "Hay %d grabación codificada, que se decodificará durante el modo re
 
 msgid "There is a conflict with this timer"
 msgstr "Hay un conflicto con este temporizador"
-
-msgid "There is an OpenPLi-based backup.\nYou need to restart Enigma2 if you want to restore it.\nDo you want to do it now?"
-msgstr "Hay una copia de seguridad basada en OpenPLi.\nDebe reiniciar Enigma2 si desea restaurarlo.\n¿Quieres hacerlo ahora?"
 
 msgid "There is no service with this number"
 msgstr "No existe canal con este número"
