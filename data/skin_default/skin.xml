@@ -2456,6 +2456,9 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 		<widget source="RdsDecoder" render="Label" position="880,500" size="373,90" font="RegularBold;18" horizontalAlignment="center" verticalAlignment="center" backgroundColor="OE_NewBg2" transparent="1">
 			<convert type="RdsInfo">RtpText</convert>
 		</widget>
+		<widget alphaTest="blend" position="1000,600" render="Picon" size="146,86" source="Service" transparent="1" zPosition="5">
+			<convert type="ServiceName">Reference</convert>
+		</widget>
 	</screen>
 	<screen name="ChannelSelectionRadioDABList" position="0,0" size="1280,720" backgroundColor="transparent" flags="wfNoBorder">
 		<panel name="DABRadioList"/>
