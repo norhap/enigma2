@@ -1825,6 +1825,7 @@ RESULT eServiceMP3::stop() {
 		return -1;
 
 	eDebug("[eServiceMP3] stop %s", m_ref.path.c_str());
+	bool streamStarting = m_sourceinfo.is_streaming && m_state == stIdle;
 	m_state = stStopped;
 #ifdef DREAMNEXTGEN
 	windStop();
@@ -1832,8 +1833,8 @@ RESULT eServiceMP3::stop() {
 
 	GstStateChangeReturn ret;
 	GstState state, pending;
-	/* make sure that last state change was successfull */
-	ret = gst_element_get_state(m_gst_playbin, &state, &pending, 5 * GST_SECOND);
+	/* Don't wait for a network source to preroll before cancelling startup. */
+	ret = gst_element_get_state(m_gst_playbin, &state, &pending, streamStarting ? 0 : 5 * GST_SECOND);
 	eDebug("[eServiceMP3] stop state:%s pending:%s ret:%s", gst_element_state_get_name(state),
 		   gst_element_state_get_name(pending), gst_element_state_change_return_get_name(ret));
 	ret = gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
@@ -3600,8 +3601,10 @@ void eServiceMP3::gstBusCall(GstMessage* msg) {
 						m_event(this, evHBBTVInfo);
 					if (!m_is_live)
 						gst_element_set_state(m_gst_playbin, GST_STATE_PAUSED);
-					ret = gst_element_get_state(m_gst_playbin, &state, &pending, 5LL * GST_SECOND);
-					eDebug("[eServiceMP3] PLAYBIN WITH BLOCK READY TO PAUSED state:%s pending:%s ret:%s",
+					/* Network preroll can take indefinitely; process its bus messages instead of blocking the UI. */
+					ret = gst_element_get_state(m_gst_playbin, &state, &pending,
+						m_sourceinfo.is_streaming ? 0 : 5LL * GST_SECOND);
+					eDebug("[eServiceMP3] PLAYBIN READY TO PAUSED state:%s pending:%s ret:%s",
 						   gst_element_state_get_name(state), gst_element_state_get_name(pending),
 						   gst_element_state_change_return_get_name(ret));
 					if (ret == GST_STATE_CHANGE_NO_PREROLL) {
