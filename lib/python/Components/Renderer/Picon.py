@@ -174,8 +174,11 @@ class Picon(Renderer):
 	def changed(self, what):
 		if self.instance:
 			if what[0] in (self.CHANGED_DEFAULT, self.CHANGED_ALL, self.CHANGED_SPECIFIC):
-				dabImage = piconLocator.getDABImage(self.source.text) if self.dabLogoFirst else ""
-				pngname = dabImage or piconLocator.getPiconName(self.source.text) or piconLocator.getDABImage(self.source.text)
+				dabImage = (piconLocator.getDABImage(self.source.text) or getDABCachedImage(self.source.text)) if self.dabLogoFirst else ""
+				pngname = dabImage or piconLocator.getPiconName(self.source.text)
+				if not dabImage and (not pngname or pngname == self.defaultpngname):
+					dabImage = piconLocator.getDABImage(self.source.text) or getDABCachedImage(self.source.text)
+					pngname = dabImage or pngname
 				if not pathExists(pngname):  # no picon for service found
 					pngname = self.defaultpngname
 				if self.pngname != pngname or dabImage and pngname == dabImage:

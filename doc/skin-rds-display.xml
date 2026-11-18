@@ -42,7 +42,10 @@ summaries this follows the highlighted service, not necessarily the playing
 one, and falls back to the configured LCD picon when no logo is available.
 Custom skins may also define InfoBarDAB; skins without it keep their own
 InfoBar. To prefer the station logo in a Picon widget, use
-dabLogoFirst="1" with session.CurrentService and ServiceName/Reference.
+dabLogoFirst="1" with a service source and ServiceName/Reference. This can
+also follow the highlighted service in a channel list. Without this option,
+an installed picon takes priority; a cached DAB logo replaces the default
+picon when no station-specific picon exists.
 For an independent slideshow image, a skin may instead use
 source="session.CurrentService" and render="DABSlide".
 
