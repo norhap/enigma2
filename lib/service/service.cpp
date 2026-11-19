@@ -4,6 +4,7 @@
 #include <lib/base/init_num.h>
 #include <lib/base/init.h>
 #include <lib/dvb/idvb.h>
+#include <lib/service/servicemp3.h>
 
 static std::string encode(const std::string s)
 {
@@ -244,6 +245,12 @@ DEFINE_REF(eServiceCenter);
 
 RESULT eServiceCenter::play(const eServiceReference &ref, ePtr<iPlayableService> &ptr)
 {
+	if (eServiceMP3::hasPendingTeardown())
+	{
+		eWarning("[eServiceCenter] playback denied while a GStreamer pipeline is closing");
+		ptr = nullptr;
+		return -1;
+	}
 	std::map<int,ePtr<iServiceHandler> >::iterator i = handler.find(ref.type);
 	if (i == handler.end())
 	{

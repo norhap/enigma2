@@ -45,6 +45,7 @@ Licensed under GPLv2.
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -97,6 +98,91 @@ typedef enum {
 static bool first_play_eServicemp3 = false;
 static GstElement *dvb_audiosink, *dvb_videosink, *dvb_subsink;
 static bool dvb_audiosink_ok, dvb_videosink_ok, dvb_subsink_ok;
+
+namespace {
+
+struct PendingMP3Teardown {
+	// GStreamer callbacks can still refer to the service until NULL completes.
+	ePtr<eServiceMP3> service;
+	GstElement* pipeline;
+	std::atomic<bool> done{false};
+	bool succeeded = false;
+	bool reported = false;
+	unsigned int polls = 0;
+};
+
+class MP3TeardownManager : public sigc::trackable {
+	ePtr<eTimer> m_timer;
+	std::vector<std::unique_ptr<PendingMP3Teardown>> m_pending;
+
+	static gpointer stopWorker(gpointer data) {
+		PendingMP3Teardown* pending = static_cast<PendingMP3Teardown*>(data);
+		GstStateChangeReturn result = gst_element_set_state(pending->pipeline, GST_STATE_NULL);
+		pending->succeeded = result == GST_STATE_CHANGE_SUCCESS;
+		eDebug("[eServiceMP3] async stop: set pipeline to NULL returned %s",
+			gst_element_state_change_return_get_name(result));
+		gst_object_unref(pending->pipeline);
+		pending->done.store(true, std::memory_order_release);
+		return nullptr;
+	}
+
+	void check() {
+		for (auto it = m_pending.begin(); it != m_pending.end();) {
+			PendingMP3Teardown& pending = **it;
+			if (pending.done.load(std::memory_order_acquire)) {
+				if (pending.succeeded) {
+					eDebug("[eServiceMP3] async stop complete");
+					it = m_pending.erase(it);
+					continue;
+				}
+				if (!pending.reported) {
+					eWarning("[eServiceMP3] async stop failed; playback remains deferred");
+					pending.reported = true;
+				}
+			} else if (++pending.polls == 100) {
+				eWarning("[eServiceMP3] async stop still pending after 10 seconds");
+			}
+			++it;
+		}
+		if (!m_pending.empty())
+			m_timer->start(100, true);
+	}
+
+public:
+	MP3TeardownManager() : m_timer(eTimer::create(eApp)) {
+		CONNECT(m_timer->timeout, MP3TeardownManager::check);
+	}
+
+	bool pending() const { return !m_pending.empty(); }
+
+	bool start(eServiceMP3* service, GstElement* pipeline) {
+		std::unique_ptr<PendingMP3Teardown> pending(new PendingMP3Teardown);
+		pending->service = service;
+		pending->pipeline = GST_ELEMENT(gst_object_ref(pipeline));
+		m_pending.push_back(std::move(pending));
+		GError* error = nullptr;
+		GThread* worker = g_thread_try_new("mp3-stop", stopWorker, m_pending.back().get(), &error);
+		if (!worker) {
+			eWarning("[eServiceMP3] unable to start async stop: %s", error ? error->message : "unknown error");
+			if (error)
+				g_error_free(error);
+			gst_object_unref(m_pending.back()->pipeline);
+			m_pending.pop_back();
+			return false;
+		}
+		g_thread_unref(worker);
+		m_timer->start(100, true);
+		return true;
+	}
+};
+
+MP3TeardownManager* mp3TeardownManager = nullptr;
+
+}
+
+bool eServiceMP3::hasPendingTeardown() {
+	return mp3TeardownManager && mp3TeardownManager->pending();
+}
 
 static std::string gstLaunchQuote(const std::string& value)
 {
@@ -1569,6 +1655,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref)
  * are stopped to prevent memory leaks or dangling pointers.
  */
 eServiceMP3::~eServiceMP3() {
+	m_destructing = true;
 	invalidateCCProbe();
 	if (m_cc_notify)
 		m_cc_notify->stop();
@@ -1837,6 +1924,21 @@ RESULT eServiceMP3::stop() {
 	ret = gst_element_get_state(m_gst_playbin, &state, &pending, streamStarting ? 0 : 5 * GST_SECOND);
 	eDebug("[eServiceMP3] stop state:%s pending:%s ret:%s", gst_element_state_get_name(state),
 		   gst_element_state_get_name(pending), gst_element_state_change_return_get_name(ret));
+	if (!m_destructing && streamStarting && !m_is_dash_pipeline && ret == GST_STATE_CHANGE_ASYNC
+		&& state == GST_STATE_READY && pending == GST_STATE_PAUSED) {
+		m_nownext_timer->stop();
+		m_play_position_timer->stop();
+		m_audio_switch_timer->stop();
+		m_subtitle_sync_timer->stop();
+		m_dvb_subtitle_sync_timer->stop();
+		removeCCProbe();
+		if (!mp3TeardownManager)
+			mp3TeardownManager = new MP3TeardownManager;
+		if (mp3TeardownManager->start(this, m_gst_playbin)) {
+			eDebug("[eServiceMP3] async stop started; playback will wait for teardown");
+			return 0;
+		}
+	}
 	ret = gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
 	if (ret != GST_STATE_CHANGE_SUCCESS)
 		eDebug("[eServiceMP3] stop GST_STATE_NULL failure");
@@ -4444,6 +4546,8 @@ audiotype_t eServiceMP3::gstCheckAudioPad(GstStructure* structure) {
  * @param[in] msg The GStreamer message to process.
  */
 void eServiceMP3::gstPoll(ePtr<GstMessageContainer> const& msg) {
+	if (m_state == stStopped)
+		return;
 	switch (msg->getType()) {
 		case 1: {
 			GstMessage* gstmessage = *((GstMessageContainer*)msg);

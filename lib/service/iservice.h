@@ -1038,6 +1038,9 @@ public:
 		 * once the pipeline first reaches PLAYING instead. */
 		evFirstFrame,
 
+		evGstreamerTeardownWait,
+		evGstreamerTeardownWaitEnd,
+
 		evUser = 0x100
 	};
 };

@@ -138,6 +138,15 @@ class Navigation:
 			self.scheduleStreamRetry()
 		elif i == iPlayableService.evEOF and self.streamRetryService is not None:
 			return  # Do not let the failed stream's EOF pause the pending retry.
+		elif i in (iPlayableService.evGstreamerTeardownWait, iPlayableService.evGstreamerTeardownWaitEnd):
+			from Screens.Toast import Toast
+			if Toast.instance:
+				if i == iPlayableService.evGstreamerTeardownWait:
+					Toast.instance.showToast(_("The previous stream is closing. Please..."), Toast.TYPE_INFO, 5, replaceId="GstreamerTeardown")
+				else:
+					Toast.instance.removeToast("GstreamerTeardown")
+			else:
+				print("[Navigation] Toast unavailable for GStreamer teardown notification")
 		for x in self.event:
 			x(i)
 		if i == iPlayableService.evEnd:

@@ -6,6 +6,7 @@
 #include <lib/dvb/fcc.h>
 #include <lib/service/servicedvb.h>
 #include <lib/service/servicedab.h>
+#include <lib/service/servicemp3.h>
 
 eNavigation *eNavigation::instance;
 
@@ -31,6 +32,9 @@ void eNavigation::recordEvent(iRecordableService *service, int event)
 
 RESULT eNavigation::playService(const eServiceReference &service)
 {
+	clearPendingService();
+	if (eServiceMP3::hasPendingTeardown())
+		return deferService(service);
 	RESULT res = -1;
 	ePtr<iPlayableService> nextDAB;
 	if (eServiceDAB::prepareRTLSDRZap(m_runningService, service, nextDAB))
@@ -47,11 +51,15 @@ RESULT eNavigation::playService(const eServiceReference &service)
 		if (!m_fccmgr || m_fccmgr->tryFCCService(service, m_runningService) == -1)
 		{
 			stopService();
+			if (eServiceMP3::hasPendingTeardown())
+				return deferService(service);
 			ASSERT(m_servicehandler);
 			res = m_servicehandler->play(service, m_runningService);
 		}
 #else
 		stopService();
+		if (eServiceMP3::hasPendingTeardown())
+			return deferService(service);
 		ASSERT(m_servicehandler);
 		res = m_servicehandler->play(service, m_runningService);
 #endif
@@ -65,6 +73,50 @@ RESULT eNavigation::playService(const eServiceReference &service)
 	}
 	m_runningServiceRef = service;
 	return res;
+}
+
+RESULT eNavigation::deferService(const eServiceReference &service)
+{
+	m_pendingServiceRef = service;
+	m_runningServiceRef = service;
+	m_pendingServiceTimer->start(100, true);
+	eDebug("[eNavigation] playback deferred until GStreamer teardown completes");
+	return 0;
+}
+
+void eNavigation::clearPendingService()
+{
+	m_pendingServiceTimer->stop();
+	m_pendingServiceRef = eServiceReference();
+	m_pendingTeardownPolls = 0;
+	if (m_pendingTeardownNotified)
+	{
+		m_pendingTeardownNotified = false;
+		m_event(iPlayableService::evGstreamerTeardownWaitEnd);
+	}
+}
+
+void eNavigation::retryPendingService()
+{
+	if (!m_pendingServiceRef.valid())
+		return;
+	if (eServiceMP3::hasPendingTeardown())
+	{
+		m_pendingServiceTimer->start(100, true);
+		if (!m_pendingTeardownNotified && ++m_pendingTeardownPolls == 10)
+		{
+			m_pendingTeardownNotified = true;
+			m_event(iPlayableService::evGstreamerTeardownWait);
+		}
+		return;
+	}
+	eServiceReference service = m_pendingServiceRef;
+	clearPendingService();
+	if (playService(service))
+	{
+		eWarning("[eNavigation] deferred playback failed");
+		m_event(iPlayableService::evTuneFailed);
+	}
 }
 
 RESULT eNavigation::setPiPService(const eServiceReference &service)
@@ -105,9 +157,15 @@ RESULT eNavigation::getCurrentPiPServiceReference(eServiceReference &service)
 
 RESULT eNavigation::stopService(void)
 {
+	bool hadPendingService = m_pendingServiceRef.valid();
+	clearPendingService();
 	/* check if there is a running service... */
 	if (!m_runningService)
+	{
+		if (hadPendingService)
+			m_runningServiceRef = eServiceReference();
 		return 1;
+	}
 
 	ePtr<iPlayableService> tmp = m_runningService;
 	m_runningService=0;
@@ -302,6 +360,8 @@ std::vector<std::string> eNavigation::getStreamServiceList()
 eNavigation::eNavigation(iServiceHandler *serviceHandler, int decoder)
 {
 	ASSERT(serviceHandler);
+	m_pendingServiceTimer = eTimer::create(eApp);
+	CONNECT(m_pendingServiceTimer->timeout, eNavigation::retryPendingService);
 	m_servicehandler = serviceHandler;
 	m_decoder = decoder;
 #if defined(HAVE_FCC)

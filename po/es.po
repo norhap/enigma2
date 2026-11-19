@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-17 19:30+0100\n"
+"POT-Creation-Date: 2026-11-19 01:46+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -5745,7 +5745,7 @@ msgid "DLNA support"
 msgstr "Soporte DLna"
 
 msgid "Dmesg Info"
-msgstr "Información de mensaje"
+msgstr "Información Dmesg"
 
 msgid "DNS %d"
 msgstr "DNS %d"
@@ -17943,6 +17943,9 @@ msgstr "El código PIN introducido es incorrecto."
 
 msgid "The PIN codes you entered are different."
 msgstr "Los códigos PIN que ingresó son diferentes."
+
+msgid "The previous stream is closing. Please..."
+msgstr "El stream anterior se está cerrando. Espere..."
 
 msgid "The process will take approximately %d minutes to complete."
 msgstr "El proceso tardará aproximadamente %d minutos en completarse."

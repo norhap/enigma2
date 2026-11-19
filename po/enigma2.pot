@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-17 19:30+0100\n"
+"POT-Creation-Date: 2026-11-19 01:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18271,6 +18271,9 @@ msgid "The pin code you entered is wrong."
 msgstr ""
 
 msgid "The PIN codes you entered are different."
+msgstr ""
+
+msgid "The previous stream is closing. Please..."
 msgstr ""
 
 msgid "The process will take approximately %d minutes to complete."
