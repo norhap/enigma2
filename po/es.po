@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-19 01:46+0100\n"
+"POT-Creation-Date: 2026-11-19 23:11+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -17,46 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
-
-msgctxt "Text list separator"
-msgid ", "
-msgstr ", "
-
-msgctxt "Hotkey help separator"
-msgid "/"
-msgstr "/s"
-
-msgctxt "Abbreviation of \"Configurable\""
-msgid "C"
-msgstr "C"
-
-msgctxt "third event: 'third' event label"
-msgid "Later"
-msgstr "Más tarde"
-
-msgctxt "Satellite configuration mode"
-msgid "Mode"
-msgstr "Modo"
-
-msgctxt "Video output mode"
-msgid "Mode"
-msgstr "Modo"
-
-msgctxt "button label, 'next screen'"
-msgid "Next"
-msgstr "Siguiente"
-
-msgctxt "now/next: 'next' event label"
-msgid "Next"
-msgstr "Siguiente"
-
-msgctxt "now/next: 'now' event label"
-msgid "Now"
-msgstr "Ahora"
-
-msgctxt "button label, 'previous screen'"
-msgid "Prev"
-msgstr "Anterior"
 
 msgid "\n %s "
 msgstr "\n %s "
@@ -1129,6 +1089,10 @@ msgstr "* Solo disponible si hay más de un interfaz activo."
 msgid "** = Reboot System Required"
 msgstr "** = Reiniciar Sistema Requerido"
 
+msgctxt "Text list separator"
+msgid ", "
+msgstr ", "
+
 msgid "-"
 msgstr "-"
 
@@ -1173,6 +1137,10 @@ msgstr "-SIN SERVICIO\n"
 
 msgid "-SERVICE ERROR:%d\n"
 msgstr "-ERROR DE SERVICIO:%d\n"
+
+msgctxt "Hotkey help separator"
+msgid "/"
+msgstr "/"
 
 msgid "/s"
 msgstr "/s"
@@ -3253,6 +3221,10 @@ msgstr "Bytes recibidos:"
 msgid "Bytes sent:"
 msgstr "Bytes enviados:"
 
+msgid "C"
+msgstr "C"
+
+msgctxt "Abbreviation of \"Configurable\""
 msgid "C"
 msgstr "C"
 
@@ -9758,6 +9730,10 @@ msgstr "Último recurso compartido usado: "
 msgid "Late Night"
 msgstr "Altas horas de la noche"
 
+msgctxt "third event: 'third' event label"
+msgid "Later"
+msgstr "Más tarde"
+
 msgid "Latest Commits"
 msgstr "Últimos Cambios"
 
@@ -10647,6 +10623,14 @@ msgstr "Moda"
 msgid "Mode"
 msgstr "Modo"
 
+msgctxt "Satellite configuration mode"
+msgid "Mode"
+msgstr "Modo"
+
+msgctxt "Video output mode"
+msgid "Mode"
+msgstr "Modo"
+
 msgid "mode 1"
 msgstr "modo 1"
 
@@ -11373,6 +11357,14 @@ msgstr "SIGUIENTE"
 msgid "Next"
 msgstr "Siguiente"
 
+msgctxt "button label, 'next screen'"
+msgid "Next"
+msgstr "Siguiente"
+
+msgctxt "now/next: 'next' event label"
+msgid "Next"
+msgstr "Siguiente"
+
 msgid "Next / Arrow Right"
 msgstr "Siguiente / Flecha derecha"
 
@@ -11807,6 +11799,10 @@ msgstr "Noticiario"
 
 msgid "NOW"
 msgstr "AHORA"
+
+msgctxt "now/next: 'now' event label"
+msgid "Now"
+msgstr "Ahora"
 
 msgid "Now, use the contrast setting to turn up the brightness of the background as much as possible, but make sure that you can still see the difference between the two brightest levels of shades.If you have done that, press OK."
 msgstr "Ahora, use la configuración de contraste para aumentar el brillo del fondo tanto como sea posible, pero asegúrese de que aún pueda ver la diferencia entre los dos niveles más brillantes de tonos. Si lo ha hecho, pulse OK."
@@ -13190,6 +13186,10 @@ msgstr "Si pulsa este botón varias veces, aumentará la velocidad de exploraci�
 
 msgid "Pressure"
 msgstr "Presión"
+
+msgctxt "button label, 'previous screen'"
+msgid "Prev"
+msgstr "Anterior"
 
 msgid "Prev / ArrowLeft"
 msgstr "Anterior / FlechaIzquierda"
@@ -20920,5 +20920,5 @@ msgstr "Zoom Apagado..."
 msgid "Zulu"
 msgstr "Zulú"
 
-msgid "�"
-msgstr "�"
+msgid "®"
+msgstr "®"
