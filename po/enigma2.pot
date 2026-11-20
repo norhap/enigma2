@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-19 23:11+0100\n"
+"POT-Creation-Date: 2026-11-21 00:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1761,6 +1761,9 @@ msgid "Add recording (stop after current event)"
 msgstr ""
 
 msgid "Add recording set to"
+msgstr ""
+
+msgid "Add selected GStreamer diagnostics to the Enigma2 debug log. Enable debug logging and restart Enigma2 to apply. Logs may contain stream addresses and credentials."
 msgstr ""
 
 msgid "Add service"
@@ -8212,6 +8215,9 @@ msgid "Grow drop"
 msgstr ""
 
 msgid "Grow from left"
+msgstr ""
+
+msgid "GStreamer diagnostics *"
 msgstr ""
 
 msgid "GStreamer version: "

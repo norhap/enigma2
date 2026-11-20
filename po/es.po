@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-19 23:11+0100\n"
+"POT-Creation-Date: 2026-11-21 00:56+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -1762,6 +1762,9 @@ msgstr "Añadir grabación (para al acabar el evento actual)"
 
 msgid "Add recording set to"
 msgstr "Añadir grabación establecida a"
+
+msgid "Add selected GStreamer diagnostics to the Enigma2 debug log. Enable debug logging and restart Enigma2 to apply. Logs may contain stream addresses and credentials."
+msgstr "Añade información seleccionada de GStreamer al registro de depuración de Enigma2. Activa el registro y reinicia Enigma2 para aplicar el cambio. Los registros pueden contener direcciones y credenciales de los streams."
 
 msgid "Add service"
 msgstr "Añadir servicio"
@@ -8213,6 +8216,9 @@ msgstr "Crecer caer"
 
 msgid "Grow from left"
 msgstr "Crece desde la izquierda"
+
+msgid "GStreamer diagnostics *"
+msgstr "Diagnóstico de GStreamer *"
 
 msgid "GStreamer version: "
 msgstr "Versión de GStreamer: "

@@ -1373,6 +1373,7 @@ def InitUsageConfig():
 
 	config.crash.debugDVBScan = ConfigYesNo(default=False)
 	config.crash.debugDAB = ConfigYesNo(default=False)
+	config.crash.gstDiagnostics = ConfigYesNo(default=False)
 	config.crash.coredump = ConfigYesNo(default=False)
 
 	def updateStackTracePrinter(configElement):

@@ -81,6 +81,12 @@ run_enigma() {
 	else
 		ulimit -c 0 || echo "[enigma2.sh] Cannot disable core dumps" >&2
 	fi
+	if [ "${GST_DIAGNOSTICS}" = "1" ] && [ -n "${FILE}" ]; then
+		export GST_DEBUG="*:2,souphttpsrc:4,basesrc:3,uridecodebin:3,decodebin:3"
+		export GST_DEBUG_NO_COLOR=1
+		unset GST_DEBUG_FILE
+		echo "[enigma2.sh] Selected GStreamer diagnostics enabled" >&2
+	fi
 	LD_PRELOAD="${LIBS}" ENIGMA_DEBUG_LVL="${DEBUG_LVL}" ENIGMA_DEBUG_TIME="${DEBUG_TIME}" exec "@bindir@/enigma2"
 }
 
@@ -165,6 +171,13 @@ while : ; do
 	if [ -n "${FILE}" ] && ! ( : >> "${FILE}" ) 2>/dev/null; then
 		echo "[enigma2.sh] Cannot write debug log ${FILE}; starting without file logging" >&2
 		FILE=""
+	fi
+	GST_DIAGNOSTICS=0
+	if grep -q '^config\.crash\.gstDiagnostics=True$' "@sysconfdir@/enigma2/settings"; then
+		GST_DIAGNOSTICS=1
+		if [ -z "${FILE}" ]; then
+			echo "[enigma2.sh] GStreamer diagnostics require an Enigma2 debug log file" >&2
+		fi
 	fi
 	if [ -n "${FILE}" ]; then
 		run_enigma >> "${FILE}" 2>&1 &

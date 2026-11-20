@@ -187,6 +187,7 @@
 	</setup>
 	<setup key="Logs" title="Logs Setup">
 		<item level="2" text="Debug logging *" description="Use this option to select if debug logs of internal enigma2 activities are created and, if so, how much detail will be logged. These logs can be helpful for developers in finding and fixing problems.">config.crash.debugLevel</item>
+		<item level="2" text="GStreamer diagnostics *" description="Add selected GStreamer diagnostics to the Enigma2 debug log. Enable debug logging and restart Enigma2 to apply. Logs may contain stream addresses and credentials.">config.crash.gstDiagnostics</item>
 		<item level="2" text="Include keyboard data" description="Enable this option to add keyboard keymap data to the debug log file.">config.debug.debugKeyboards</item>
 		<item level="2" text="Include remote control data" description="Enable this option to add remote control data to the debug log file.">config.debug.debugRemoteControls</item>
 		<item level="2" text="Include action map data" description="Enable this option to add action map / remote control mapping data to the debug log file.">config.debug.debugActionMaps</item>
