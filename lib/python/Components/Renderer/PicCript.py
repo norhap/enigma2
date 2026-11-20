@@ -1,13 +1,10 @@
 from os.path import isfile, join
-from time import monotonic
-
 from enigma import ePixmap, iServiceInformation
 
 from Components.Renderer.Renderer import Renderer
+from Components.Renderer.EcmSnapshot import ecmSnapshot
 from Components.Converter.Poll import Poll
-from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines
-
-MODULE_NAME = __name__.split(".")[-1]
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename
 
 
 class PicCript(Renderer, Poll):
@@ -65,8 +62,6 @@ class PicCript(Renderer, Poll):
 		self.picon_default = "picon_default.png"
 		self.poll_interval = 1000
 		self.poll_enabled = True
-		self._process_cache_time = 0
-		self._process_cache = None
 
 	def applySkin(self, desktop, parent):
 		attribs = []
@@ -113,40 +108,31 @@ class PicCript(Renderer, Poll):
 				self.instance.setPixmapFromFile(self.pngName)
 
 	def matchCAId(self, caids):
-		now = monotonic()
-		if self._process_cache is None or now - self._process_cache_time >= 5:
-			from process import ProcessList
-			processes = ProcessList()
-			self._process_cache = (
-				str(processes.named("mgcamd_1.38")).strip("[]"),
-				str(processes.named("CCcam")).strip("[]"))
-			self._process_cache_time = now
-		mgcamd, cccam = self._process_cache
-		lines = []
+		snapshot = ecmSnapshot.get(self)
+		if snapshot is None:
+			return None
+		(mgcamd, cccam, _), lines = snapshot
 		sName = None
-		try:
-			for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-				if not mgcamd and not cccam:
-					for caid in caids:
-						sName = self.condAccessIds.get(line[8:10])
-						if sName:
-							break
+		for line in lines:
+			if not mgcamd and not cccam:
+				for caid in caids:
+					sName = self.condAccessIds.get(line[8:10])
 					if sName:
 						break
-				if cccam:
-					for caid in caids:
-						sName = self.condAccessIds.get(line[14:16])
-						if sName:
-							break
-				else:
-					for caid in caids:
-						sName = self.condAccessIdsMgcamd.get(line[26:28])
-						if sName:
-							break
 				if sName:
 					break
-		except OSError as err:
-			print("[PicCript] %s" % err)
+			if cccam:
+				for caid in caids:
+					sName = self.condAccessIds.get(line[14:16])
+					if sName:
+						break
+			else:
+				for caid in caids:
+					sName = self.condAccessIdsMgcamd.get(line[26:28])
+					if sName:
+						break
+			if sName:
+				break
 		return sName
 
 	def findPicon(self, serviceName):

@@ -11,6 +11,7 @@ install_PYTHON = \
 	Cover.py \
 	DABSlide.py \
 	DRRunningText.py \
+	EcmSnapshot.py \
 	EtAnalogClockLCD.py \
 	FixedLabel.py \
 	FrontpanelLed.py \

@@ -1,14 +1,11 @@
 from os.path import isfile, join
-from time import monotonic
-
 from enigma import ePixmap, iServiceInformation
 
 from Components.Renderer.Renderer import Renderer
+from Components.Renderer.EcmSnapshot import ecmSnapshot
 from Components.Converter.Poll import Poll
-from Tools.Directories import SCOPE_GUISKIN, resolveFilename, fileReadLines
+from Tools.Directories import SCOPE_GUISKIN, resolveFilename
 from ServiceReference import serviceRefIPToSAT
-
-MODULE_NAME = __name__.split(".")[-1]
 
 
 class PicEmu2(Renderer, Poll):
@@ -33,8 +30,6 @@ class PicEmu2(Renderer, Poll):
 		self.picon_default = "picon_default.png"
 		self.poll_interval = 1000
 		self.poll_enabled = True
-		self._process_cache_time = 0
-		self._process_cache = None
 
 	def applySkin(self, desktop, parent):
 		attribs = []
@@ -81,30 +76,24 @@ class PicEmu2(Renderer, Poll):
 				self.instance.setPixmapFromFile(self.pngName)
 
 	def matchCAId(self, caids):
-		now = monotonic()
-		if self._process_cache is None or now - self._process_cache_time >= 5:
-			from process import ProcessList
-			self._process_cache = str(ProcessList().named("ncam")).strip("[]")
-			self._process_cache_time = now
-		ncam = self._process_cache
-		lines = []
+		snapshot = ecmSnapshot.get(self)
+		if snapshot is None:
+			return None
+		(_, _, ncam), lines = snapshot
 		sName = None
-		try:
-			for line in fileReadLines("/tmp/ecm.info", lines, source=MODULE_NAME):
-				if not ncam:
-					for caid in caids:
-						sName = self.camds.get(line[0:4])
-						if sName:
-							break
-				else:
-					for caid in caids:
-						sName = self.ncam.get(line[0:4])
-						if sName:
-							break
-				if sName:
-					break
-		except OSError as err:
-			print("[PicEmu2] %s" % err)
+		for line in lines:
+			if not ncam:
+				for caid in caids:
+					sName = self.camds.get(line[0:4])
+					if sName:
+						break
+			else:
+				for caid in caids:
+					sName = self.ncam.get(line[0:4])
+					if sName:
+						break
+			if sName:
+				break
 		return sName
 
 	def findPicon(self, serviceName):
