@@ -101,6 +101,7 @@ static bool dvb_audiosink_ok, dvb_videosink_ok, dvb_subsink_ok;
 
 namespace {
 
+/* [norhap] TeardownManager */
 struct PendingMP3Teardown {
 	// GStreamer callbacks can still refer to the service until NULL completes.
 	ePtr<eServiceMP3> service;
@@ -192,6 +193,7 @@ MP3TeardownManager* mp3TeardownManager = nullptr;
 bool eServiceMP3::hasPendingTeardown() {
 	return mp3TeardownManager && mp3TeardownManager->pending();
 }
+/* [norhap] TeardownManager */
 
 static std::string gstLaunchQuote(const std::string& value)
 {
@@ -1664,7 +1666,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref)
  * are stopped to prevent memory leaks or dangling pointers.
  */
 eServiceMP3::~eServiceMP3() {
-	m_destructing = true;
+	m_destructing = true; // [norhap] TeardownManager
 	invalidateCCProbe();
 	if (m_cc_notify)
 		m_cc_notify->stop();
@@ -1933,6 +1935,7 @@ RESULT eServiceMP3::stop() {
 	ret = gst_element_get_state(m_gst_playbin, &state, &pending, streamStarting ? 0 : 5 * GST_SECOND);
 	eDebug("[eServiceMP3] stop state:%s pending:%s ret:%s", gst_element_state_get_name(state),
 		   gst_element_state_get_name(pending), gst_element_state_change_return_get_name(ret));
+	/* [norhap] TeardownManager */
 	if (!m_destructing && streamStarting && !m_is_dash_pipeline && ret == GST_STATE_CHANGE_ASYNC
 		&& state == GST_STATE_READY && pending == GST_STATE_PAUSED) {
 		m_nownext_timer->stop();
@@ -1958,6 +1961,7 @@ RESULT eServiceMP3::stop() {
 			return 0;
 		}
 	}
+	/* [norhap] TeardownManager */
 	ret = gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
 	if (ret != GST_STATE_CHANGE_SUCCESS)
 		eDebug("[eServiceMP3] stop GST_STATE_NULL failure");
@@ -4565,7 +4569,7 @@ audiotype_t eServiceMP3::gstCheckAudioPad(GstStructure* structure) {
  * @param[in] msg The GStreamer message to process.
  */
 void eServiceMP3::gstPoll(ePtr<GstMessageContainer> const& msg) {
-	if (m_state == stStopped)
+	if (m_state == stStopped) // [norhap] TeardownManager
 		return;
 	switch (msg->getType()) {
 		case 1: {
