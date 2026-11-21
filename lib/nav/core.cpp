@@ -32,9 +32,11 @@ void eNavigation::recordEvent(iRecordableService *service, int event)
 
 RESULT eNavigation::playService(const eServiceReference &service)
 {
+	/* [norhap] TeardownManager */
 	clearPendingService();
-	if (eServiceMP3::hasPendingTeardown())
+	if (eServiceMP3::hasPendingTeardown(service))
 		return deferService(service);
+	/* [norhap] TeardownManager */
 	RESULT res = -1;
 	ePtr<iPlayableService> nextDAB;
 	if (eServiceDAB::prepareRTLSDRZap(m_runningService, service, nextDAB))
@@ -51,14 +53,14 @@ RESULT eNavigation::playService(const eServiceReference &service)
 		if (!m_fccmgr || m_fccmgr->tryFCCService(service, m_runningService) == -1)
 		{
 			stopService();
-			if (eServiceMP3::hasPendingTeardown())
+			if (eServiceMP3::hasPendingTeardown(service)) // [norhap] TeardownManager
 				return deferService(service);
 			ASSERT(m_servicehandler);
 			res = m_servicehandler->play(service, m_runningService);
 		}
 #else
 		stopService();
-		if (eServiceMP3::hasPendingTeardown())
+		if (eServiceMP3::hasPendingTeardown(service)) // [norhap] TeardownManager
 			return deferService(service);
 		ASSERT(m_servicehandler);
 		res = m_servicehandler->play(service, m_runningService);
@@ -100,7 +102,7 @@ void eNavigation::retryPendingService()
 {
 	if (!m_pendingServiceRef.valid())
 		return;
-	if (eServiceMP3::hasPendingTeardown())
+	if (eServiceMP3::hasPendingTeardown(m_pendingServiceRef))
 	{
 		m_pendingServiceTimer->start(100, true);
 		if (!m_pendingTeardownNotified && ++m_pendingTeardownPolls == 10)

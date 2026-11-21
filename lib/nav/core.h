@@ -67,6 +67,7 @@ class eNavigation: public iObject, public sigc::trackable
 	ePtr<iPlayableService> m_runningService;
 	eServiceReference m_runningServiceRef;
 	eServiceReference m_runningPiPServiceRef;
+	/* [norhap] TeardownManager */
 	eServiceReference m_pendingServiceRef;
 	ePtr<eTimer> m_pendingServiceTimer;
 	unsigned int m_pendingTeardownPolls = 0;
@@ -74,6 +75,7 @@ class eNavigation: public iObject, public sigc::trackable
 	void clearPendingService();
 	void retryPendingService();
 	RESULT deferService(const eServiceReference &service);
+	/* [norhap] TeardownManager */
 	sigc::signal<void(int)> m_event;
 	ePtr<eConnection> m_service_event_conn;
 	void serviceEvent(iPlayableService* service, int event);

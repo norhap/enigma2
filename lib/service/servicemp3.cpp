@@ -10,6 +10,7 @@ Licensed under GPLv2.
 /* it's currently hardcoded to use a big-endian alsasink as sink. */
 #include <inttypes.h>
 #include <fcntl.h>
+#include <cerrno>
 #include <unistd.h>
 #include <lib/base/ebase.h>
 #include <lib/base/eerror.h>
@@ -57,7 +58,7 @@ Licensed under GPLv2.
 
 #include <sys/time.h>
 
-#define HTTP_TIMEOUT 60
+#define HTTP_TIMEOUT 15 // [norhap] was 60: a dead IPTV source blocked the pipeline teardown for 40+ s
 
 /*
  * UNUSED variable from service reference is now used as buffer flag for gstreamer
@@ -101,6 +102,7 @@ static bool dvb_audiosink_ok, dvb_videosink_ok, dvb_subsink_ok;
 
 namespace {
 
+/* [norhap] TeardownManager */
 struct PendingMP3Teardown {
 	// GStreamer callbacks can still refer to the service until NULL completes.
 	ePtr<eServiceMP3> service;
@@ -180,9 +182,29 @@ MP3TeardownManager* mp3TeardownManager = nullptr;
 
 }
 
-bool eServiceMP3::hasPendingTeardown() {
-	return mp3TeardownManager && mp3TeardownManager->pending();
+/* [norhap] A pipeline still closing may keep /dev/dvb/adapter0/{audio,video}0 open through the
+ * global dvb sinks. Some drivers (seen on a Vu+ FBC) refuse a second open with ENOSYS, others
+ * (seen on a non-FBC receiver) allow it. Probe the devices instead of assuming, so only
+ * receivers that really need it wait. A following eServiceMP3 reuses the same sinks and
+ * never waits. */
+static bool dvbDecoderBusy()
+{
+	static const char* const devices[] = {"/dev/dvb/adapter0/audio0", "/dev/dvb/adapter0/video0"};
+	for (const char* device : devices) {
+		int fd = ::open(device, O_RDWR | O_CLOEXEC);
+		if (fd >= 0)
+			::close(fd);
+		else if (errno == ENOSYS || errno == EBUSY)
+			return true;
+	}
+	return false;
 }
+
+bool eServiceMP3::hasPendingTeardown(const eServiceReference& next) {
+	return mp3TeardownManager && mp3TeardownManager->pending() && next.type != eServiceFactoryMP3::id
+		&& dvbDecoderBusy();
+}
+/* [norhap] TeardownManager */
 
 static std::string gstLaunchQuote(const std::string& value)
 {
@@ -1655,7 +1677,7 @@ eServiceMP3::eServiceMP3(eServiceReference ref)
  * are stopped to prevent memory leaks or dangling pointers.
  */
 eServiceMP3::~eServiceMP3() {
-	m_destructing = true;
+	m_destructing = true; // [norhap] TeardownManager
 	invalidateCCProbe();
 	if (m_cc_notify)
 		m_cc_notify->stop();
@@ -1924,6 +1946,7 @@ RESULT eServiceMP3::stop() {
 	ret = gst_element_get_state(m_gst_playbin, &state, &pending, streamStarting ? 0 : 5 * GST_SECOND);
 	eDebug("[eServiceMP3] stop state:%s pending:%s ret:%s", gst_element_state_get_name(state),
 		   gst_element_state_get_name(pending), gst_element_state_change_return_get_name(ret));
+	/* [norhap] TeardownManager */
 	if (!m_destructing && streamStarting && !m_is_dash_pipeline && ret == GST_STATE_CHANGE_ASYNC
 		&& state == GST_STATE_READY && pending == GST_STATE_PAUSED) {
 		m_nownext_timer->stop();
@@ -1935,10 +1958,11 @@ RESULT eServiceMP3::stop() {
 		if (!mp3TeardownManager)
 			mp3TeardownManager = new MP3TeardownManager;
 		if (mp3TeardownManager->start(this, m_gst_playbin)) {
-			eDebug("[eServiceMP3] async stop started; playback will wait for teardown");
+			eDebug("[eServiceMP3] async stop started; non-MP3 playback will wait for teardown");
 			return 0;
 		}
 	}
+	/* [norhap] TeardownManager */
 	ret = gst_element_set_state(m_gst_playbin, GST_STATE_NULL);
 	if (ret != GST_STATE_CHANGE_SUCCESS)
 		eDebug("[eServiceMP3] stop GST_STATE_NULL failure");
@@ -4546,7 +4570,7 @@ audiotype_t eServiceMP3::gstCheckAudioPad(GstStructure* structure) {
  * @param[in] msg The GStreamer message to process.
  */
 void eServiceMP3::gstPoll(ePtr<GstMessageContainer> const& msg) {
-	if (m_state == stStopped)
+	if (m_state == stStopped) // [norhap] TeardownManager
 		return;
 	switch (msg->getType()) {
 		case 1: {

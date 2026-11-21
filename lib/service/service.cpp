@@ -245,12 +245,14 @@ DEFINE_REF(eServiceCenter);
 
 RESULT eServiceCenter::play(const eServiceReference &ref, ePtr<iPlayableService> &ptr)
 {
-	if (eServiceMP3::hasPendingTeardown())
+	/* [norhap] TeardownManager */
+	if (eServiceMP3::hasPendingTeardown(ref))
 	{
 		eWarning("[eServiceCenter] playback denied while a GStreamer pipeline is closing");
 		ptr = nullptr;
 		return -1;
 	}
+	/* [norhap] TeardownManager */
 	std::map<int,ePtr<iServiceHandler> >::iterator i = handler.find(ref.type);
 	if (i == handler.end())
 	{

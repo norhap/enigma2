@@ -789,7 +789,7 @@ public:
 		int page_number;
 		int magazine_number;
 		std::string language_code;
-		std::string title;		
+		std::string title;
 	};
 
 	virtual RESULT enableSubtitles(iSubtitleUser *user, SubtitleTrack &track) = 0;
@@ -1038,8 +1038,10 @@ public:
 		 * once the pipeline first reaches PLAYING instead. */
 		evFirstFrame,
 
+		/* [norhap] TeardownManager */
 		evGstreamerTeardownWait,
 		evGstreamerTeardownWaitEnd,
+		/* [norhap] TeardownManager */
 
 		evUser = 0x100
 	};

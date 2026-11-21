@@ -166,7 +166,7 @@ class eServiceMP3 : public iPlayableService,
 
 public:
 	virtual ~eServiceMP3();
-	static bool hasPendingTeardown();
+	static bool hasPendingTeardown(const eServiceReference& next); // [norhap] TeardownManager
 
 	void setCacheEntry(bool isAudio, int pid);
 	// iPlayableService
@@ -438,7 +438,7 @@ private:
 		stStopped,
 	};
 	int m_state;
-	bool m_destructing = false;
+	bool m_destructing = false; // [norhap] TeardownManager
 	bool m_gstdot;
 	GstElement* m_gst_playbin;
 	GstTagList* m_stream_tags;
