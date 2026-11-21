@@ -108,6 +108,8 @@ struct PendingMP3Teardown {
 	std::atomic<bool> done{false};
 	bool succeeded = false;
 	bool reported = false;
+	// [norhap] Only a teardown that still owns the shared dvb sinks can block a new pipeline.
+	bool holdsSinks = true;
 	unsigned int polls = 0;
 };
 
@@ -153,11 +155,18 @@ public:
 		CONNECT(m_timer->timeout, MP3TeardownManager::check);
 	}
 
-	bool pending() const { return !m_pending.empty(); }
+    // [norhap] use holdsSinks
+	bool pending() const {
+		for (const auto& pending : m_pending)
+			if (pending->holdsSinks)
+				return true;
+		return false;
+	}
 
-	bool start(eServiceMP3* service, GstElement* pipeline) {
+	bool start(eServiceMP3* service, GstElement* pipeline, bool holdsSinks) {
 		std::unique_ptr<PendingMP3Teardown> pending(new PendingMP3Teardown);
 		pending->service = service;
+		pending->holdsSinks = holdsSinks;
 		pending->pipeline = GST_ELEMENT(gst_object_ref(pipeline));
 		m_pending.push_back(std::move(pending));
 		GError* error = nullptr;
@@ -1934,8 +1943,18 @@ RESULT eServiceMP3::stop() {
 		removeCCProbe();
 		if (!mp3TeardownManager)
 			mp3TeardownManager = new MP3TeardownManager;
-		if (mp3TeardownManager->start(this, m_gst_playbin)) {
-			eDebug("[eServiceMP3] async stop started; playback will wait for teardown");
+		/* [norhap] A source still connecting (e.g. dead IPTV URL) has not plugged the global
+		 * dvb sinks yet, so its slow NULL transition must not delay the next service. */
+		bool holdsSinks = false;
+		for (GstElement* sink : { dvb_audiosink, dvb_videosink, dvb_subsink }) {
+			GstObject* parent = sink ? gst_object_get_parent(GST_OBJECT(sink)) : NULL;
+			if (parent) {
+				holdsSinks = true;
+				gst_object_unref(parent);
+			}
+		}
+		if (mp3TeardownManager->start(this, m_gst_playbin, holdsSinks)) {
+			eDebug("[eServiceMP3] async stop started; %s", holdsSinks ? "playback will wait for teardown" : "sinks not in use, playback continues");
 			return 0;
 		}
 	}
