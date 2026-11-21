@@ -176,6 +176,8 @@ int eListboxServiceContent::getNextBeginningWithChar(char c)
 	int index=0;
 	for (list::iterator i(m_list.begin()); i != m_list.end(); ++i, ++index)
 	{
+		if ((m_hide_number_marker && (i->flags & eServiceReference::isNumberedMarker)) || (i->flags & eServiceReference::isInvisible))
+			continue;
 		std::string text;
 		ePtr<iStaticServiceInformation> service_info;
 		if (m_service_center->info(*i, service_info))
@@ -189,15 +191,15 @@ int eListboxServiceContent::getNextBeginningWithChar(char c)
 		while ( idx <= len )
 		{
 			char cc = text[idx++];
-			if (isprint(cc))
+			if (isprint(static_cast<unsigned char>(cc)))
 			{
 				if (cc == c)
-					return index;
+					return cursorResolve(index);
 				break;
 			}
 		}
 	}
-	return 0;
+	return -1;
 }
 
 int eListboxServiceContent::getPrevMarkerPos()
@@ -256,14 +258,22 @@ void eListboxServiceContent::addMarked(const eServiceReference &ref)
 {
 	m_marked.insert(ref);
 	if (m_listbox)
-		m_listbox->entryChanged(cursorResolve(lookupService(ref)));
+	{
+		int index = lookupService(ref);
+		if (index >= 0)
+			m_listbox->entryChanged(cursorResolve(index));
+	}
 }
 
 void eListboxServiceContent::removeMarked(const eServiceReference &ref)
 {
 	m_marked.erase(ref);
 	if (m_listbox)
-		m_listbox->entryChanged(cursorResolve(lookupService(ref)));
+	{
+		int index = lookupService(ref);
+		if (index >= 0)
+			m_listbox->entryChanged(cursorResolve(index));
+	}
 }
 
 int eListboxServiceContent::isMarked(const eServiceReference &ref)
@@ -287,14 +297,15 @@ int eListboxServiceContent::markedQueryNext(eServiceReference &ref)
 int eListboxServiceContent::lookupService(const eServiceReference &ref)
 {
 		/* shortcut for cursor */
-	if (ref == *m_cursor)
+	if (cursorValid() && ref == *m_cursor)
 		return m_cursor_number;
 		/* otherwise, search in the list.. */
 	int index = 0;
-	for (list::const_iterator i(m_list.begin()); i != m_list.end(); ++i, ++index);
+	for (list::const_iterator i(m_list.begin()); i != m_list.end(); ++i, ++index)
+		if (ref == *i)
+			return index;
 
-		/* this is ok even when the index was not found. */
-	return index;
+	return -1;
 }
 
 void eListboxServiceContent::setVisualMode(int mode)

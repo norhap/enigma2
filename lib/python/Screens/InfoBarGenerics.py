@@ -1151,48 +1151,55 @@ class InfoBarChannelSelection:
 		self.session.execDialog(self.servicelist)
 
 	def zapUp(self):
-		if self.servicelist.inBouquet():
-			prev = self.servicelist.getCurrentSelection()
-			if prev:
-				prev = prev.toString()
-				while True:
-					if config.usage.quickzap_bouquet_change.value:
-						if self.servicelist.atBegin():
-							self.servicelist.prevBouquet()
-					self.servicelist.moveUp()
-					cur = self.servicelist.getCurrentSelection()
-					if cur:
-						if self.servicelist.dopipzap:
-							isPlayable = self.session.pip.isPlayableForPipService(cur)
-						else:
-							isPlayable = isPlayableForCur(cur)
-					if cur and (cur.toString() == prev or isPlayable):
-						break
-		else:
-			self.servicelist.moveUp()
-		self.servicelist.zap(enable_pipzap=True)
+		self._zapAdjacent(-1)
 
 	def zapDown(self):
-		if self.servicelist.inBouquet():
-			prev = self.servicelist.getCurrentSelection()
-			if prev:
-				prev = prev.toString()
-				while True:
-					if config.usage.quickzap_bouquet_change.value and self.servicelist.atEnd():
-						self.servicelist.nextBouquet()
-					else:
-						self.servicelist.moveDown()
-					cur = self.servicelist.getCurrentSelection()
-					if cur:
-						if self.servicelist.dopipzap:
-							isPlayable = self.session.pip.isPlayableForPipService(cur)
-						else:
-							isPlayable = isPlayableForCur(cur)
-					if cur and (cur.toString() == prev or isPlayable):
-						break
-		else:
-			self.servicelist.moveDown()
-		self.servicelist.zap(enable_pipzap=True)
+		self._zapAdjacent(1)
+
+	def _zapAdjacent(self, direction):
+		servicelist = self.servicelist
+		if not servicelist.inBouquet():
+			servicelist.moveUp() if direction < 0 else servicelist.moveDown()
+			servicelist.zap(enable_pipzap=True)
+			return
+		previous = servicelist.getCurrentSelection()
+		if not previous or not previous.valid():
+			return
+		previousPath = servicelist.servicePath[:]
+		visited = set()
+		while True:
+			root = servicelist.getRoot()
+			current = servicelist.getCurrentSelection()
+			state = (root.toString() if root else None, current.toString() if current and current.valid() else None)
+			if state in visited:
+				print("[InfoBarChannelSelection] No reachable playable service during quick zap")
+				if servicelist.servicePath != previousPath:
+					servicelist.clearPath()
+					for ref in previousPath:
+						servicelist.enterPath(ref)
+				servicelist.setCurrentSelection(previous)
+				return
+			visited.add(state)
+			changeBouquet = config.usage.quickzap_bouquet_change.value and (
+				not current or not current.valid() or (servicelist.atBegin() if direction < 0 else servicelist.atEnd()))
+			if changeBouquet:
+				servicelist.prevBouquet() if direction < 0 else servicelist.nextBouquet()
+				if root != servicelist.bouquet_root and servicelist.getRoot() == servicelist.bouquet_root:
+					return
+				if direction < 0:
+					widget = servicelist.servicelist.instance
+					widget.moveSelection(widget.moveEnd)
+			else:
+				servicelist.moveUp() if direction < 0 else servicelist.moveDown()
+			current = servicelist.getCurrentSelection()
+			if current and current.valid():
+				if servicelist.dopipzap:
+					isPlayable = self.session.pip.isPlayableForPipService(current)
+				else:
+					isPlayable = isPlayableForCur(current)
+				if current.toString() == previous.toString() or isPlayable:
+					servicelist.zap(enable_pipzap=True)
+					return
 
 	def openFavouritesList(self):
 		self.servicelist.showFavourites()

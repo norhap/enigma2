@@ -267,16 +267,11 @@ class ServiceList(GUIComponent):
 		self.instance.moveSelection(self.instance.moveDown)
 
 	def moveToChar(self, char):
-		# TODO fill with life
-		print("[ServiceList] Next char: ")
 		index = self.l.getNextBeginningWithChar(char)
 		indexup = self.l.getNextBeginningWithChar(char.upper())
-		if indexup != 0:
-			if index > indexup or index == 0:
-				index = indexup
-
-		self.instance.moveSelectionTo(index)
-		print("Moving to character %s" % str(char))
+		if indexup >= 0 and (index < 0 or indexup < index):
+			index = indexup
+		self.instance.moveSelectionTo(index if index >= 0 else 0)
 
 	def moveToNextMarker(self):
 		idx = self.l.getNextMarkerPos()
