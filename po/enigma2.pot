@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-21 00:56+0100\n"
+"POT-Creation-Date: 2026-11-22 18:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -743,6 +743,11 @@ msgid_plural "%d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "%d Minute"
+msgid_plural "%d Minutes"
+msgstr[0] ""
+msgstr[1] ""
+
 msgid "%d minutes"
 msgstr ""
 
@@ -784,6 +789,11 @@ msgstr ""
 
 msgid "%d sec"
 msgstr ""
+
+msgid "%d Second"
+msgid_plural "%d Seconds"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -8608,9 +8618,6 @@ msgid "Honduras"
 msgstr ""
 
 msgid "Hong Kong"
-msgstr ""
-
-msgid "hops:"
 msgstr ""
 
 msgid "Hops:"

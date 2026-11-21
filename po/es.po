@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-21 00:56+0100\n"
+"POT-Creation-Date: 2026-11-22 18:17+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -738,6 +738,11 @@ msgstr[1] "%d Min"
 msgid "%d min"
 msgstr "%d min"
 
+msgid "%d Minute"
+msgid_plural "%d Minutes"
+msgstr[0] "%d Minuto"
+msgstr[1] "%d Minutos"
+
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
@@ -784,6 +789,11 @@ msgstr "%d bouquets de radio creados"
 
 msgid "%d sec"
 msgstr "%d seg"
+
+msgid "%d Second"
+msgid_plural "%d Seconds"
+msgstr[0] "%d Segundo"
+msgstr[1] "%d Segundos"
 
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -8612,9 +8622,6 @@ msgstr "Hong Kong"
 
 msgid "Hops:"
 msgstr "Saltos:"
-
-msgid "hops:"
-msgstr "saltos:"
 
 msgid "Horizontal"
 msgstr "Horizontal"
