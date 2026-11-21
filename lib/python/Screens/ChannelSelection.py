@@ -11,7 +11,7 @@ from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.Sources.StaticText import StaticText
 from Components.ServiceList import ServiceList, refreshServiceList
-from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap
+from Components.ActionMap import ActionMap, HelpableActionMap, HelpableNumberActionMap, queryKeyBinding
 from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase
 # eProfileWrite("ChannelSelection.py 1")
@@ -2280,6 +2280,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 			"keyRadio": (self.doRadioButton, _("Radio mode")),
 			"keyTV": (self.doTVButton, _("TV mode")),
 		})
+		combinedActions = {action: self.tvRadioKeyLong for action in ("tvKeyLong", "tv2KeyLong")
+			if queryKeyBinding("RadioTvCombinedActions", action)}
+		if combinedActions:
+			self["RadioTvCombinedActions"] = ActionMap(["RadioTvCombinedActions"], combinedActions)
 
 		self["ChannelSelectEPGActions"] = ActionMap(["ChannelSelectEPGActions"],
 			{
@@ -2377,6 +2381,15 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 				skinNames = ["ChannelSelectionRadioList"] + skinNames
 		if self.skinName != skinNames and (not isinstance(self.skinName, str) or [self.skinName] != skinNames):
 			self.reloadChannelListSkin(skinNames, borderless=skinNames != self.channelListSkinNames)
+
+	def tvRadioKeyLong(self):
+		if BoxInfo.getItem("model") not in ("osmio4k", "osmio4kplus") or self.callback is not None or self.movemode or self.bouquet_mark_edit != OFF:
+			return 0
+		self.callback = self.switchTvRadioAfterClose
+		self.cancel()
+
+	def switchTvRadioAfterClose(self, result):
+		Screens.InfoBar.InfoBar.instance.tvKeyLong()
 
 	def doTVButton(self):
 		if self.mode == MODE_TV:
@@ -2857,6 +2870,15 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 			"ok": (self.channelSelected, _("Select service")),
 			"audio": (self.audioSelection, _("Select Audio")),
 		})
+		combinedActions = {
+			"tvKeyLong": self.tvKeyLong,
+			"tv2KeyLong": self.tvKeyLong,
+		}
+		for action in tuple(combinedActions):
+			if not queryKeyBinding("RadioTvCombinedActions", action):
+				del combinedActions[action]
+		if combinedActions:
+			self["RadioTvCombinedActions"] = ActionMap(["RadioTvCombinedActions"], combinedActions)
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evStart: self.__evServiceStart,
@@ -2934,6 +2956,12 @@ class ChannelSelectionRadio(ChannelSelectionBase, ChannelSelectionEdit, ChannelS
 
 	def cancel(self):
 		self.close(None)
+
+	def tvKeyLong(self):
+		if BoxInfo.getItem("model") in ("osmio4k", "osmio4kplus"):
+			self.cancel()
+		else:
+			return 0
 
 	def __evServiceStart(self):
 		service = self.session.nav.getCurrentService()

@@ -662,13 +662,16 @@
 	<map context="InfobarActions">
 		<key id="KEY_VIDEO" mapto="showMovies" flags="b" />
 		<key id="KEY_FIND" mapto="showMovies" flags="b" />
-		<key id="KEY_RADIO" mapto="showRadio" flags="m" />
-		<key id="KEY_RADIO" mapto="openBouquetList" flags="b" />
-		<key id="KEY_TV" mapto="showTv" flags="m" />
-		<key id="KEY_TV" mapto="openBouquetList" flags="b" />
+		<key id="KEY_RADIO" mapto="radioKeyPressed" flags="m" />
+		<key id="KEY_RADIO" mapto="radioKeyReleased" flags="b" />
+		<key id="KEY_RADIO" mapto="tvKeyLong" flags="l" />
+		<key id="KEY_TV" mapto="tvKeyPressed" flags="m" />
+		<key id="KEY_TV" mapto="tvKeyReleased" flags="b" />
+		<key id="KEY_TV" mapto="tvKeyLong" flags="l" />
 		<key id="KEY_FAVORITES" mapto="openBouquetList" flags="b" />
 		<key id="KEY_AB" mapto="openBouquetList" flags="b" />
-		<key id="KEY_TV2" mapto="toggleTvRadio" flags="b" />
+		<key id="KEY_TV2" mapto="tv2KeyReleased" flags="b" />
+		<key id="KEY_TV2" mapto="tvKeyLong" flags="l" />
 		<key id="KEY_FILE" mapto="showMovies" flags="m" />
 		<key id="KEY_TEXT" mapto="showText" flags="m" />
 		<key id="KEY_MEDIA" mapto="showMovies" flags="b" />
@@ -983,6 +986,12 @@
 		<key id="KEY_TV2" mapto="keyTV" flags="b" />
 		<key id="KEY_RADIO" mapto="keyRadio" flags="b" />
 		<key id="KEY_AUDIO" mapto="audio" flags="b" />
+	</map>
+
+	<map context="RadioTvCombinedActions">
+		<key id="KEY_TV" mapto="tvKeyLong" flags="l" />
+		<key id="KEY_RADIO" mapto="tvKeyLong" flags="l" />
+		<key id="KEY_TV2" mapto="tv2KeyLong" flags="l" />
 	</map>
 
 	<map context="TimerEditActions">

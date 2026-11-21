@@ -29,9 +29,9 @@ from Screens.InfoBarGenerics import InfoBarShowHide, \
 	InfoBarSummarySupport, InfoBarMoviePlayerSummarySupport, InfoBarTimeshiftState, InfoBarTeletextPlugin, InfoBarExtensions, \
 	InfoBarSubtitleSupport, InfoBarPiP, InfoBarPlugins, InfoBarServiceErrorPopupSupport, InfoBarJobman, InfoBarZoom, InfoBarOpenOnTopHelper, InfoBarPowersaver, \
 	InfoBarHDMI, InfoBarHdmi2, setResumePoint, delResumePoint  # noqa: E402
-from Screens.ChannelSelection import hasRadioLayout  # noqa: E402
+from Screens.ChannelSelection import hasRadioLayout, MODE_RADIO  # noqa: E402
 eProfileWrite("LOAD:InitBar_Components")
-from Components.ActionMap import HelpableActionMap  # noqa: E402
+from Components.ActionMap import HelpableActionMap, queryKeyBinding  # noqa: E402
 from Components.config import config  # noqa: E402
 from Components.ServiceEventTracker import ServiceEventTracker, InfoBarBase  # noqa: E402
 eProfileWrite("LOAD:HelpableScreen")
@@ -52,15 +52,25 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
-		self["actions"] = HelpableActionMap(self, ["InfobarActions"], {
+		actions = {
 			"showMovies": (self.showMovies, _("Play recorded movies")),
 			"showRadio": (self.showRadio, _("Show the radio player")),
+			"radioKeyPressed": (self.radioKeyPressed, _("Show the radio player")),
+			"radioKeyReleased": (self.radioKeyReleased, _("Open Bouquet selection")),
 			"openBouquetList": (self.openBouquetList, _("Open Bouquet selection")),  # Keys TV / RADIO switch open Bouquets.
 			"showTv": (self.showTv, _("Show the TV player")),
+			"tvKeyPressed": (self.tvKeyPressed, _("Show the TV player")),
+			"tvKeyReleased": (self.tvKeyReleased, _("Open Bouquet selection")),
+			"tvKeyLong": (self.tvKeyLong, _("Toggle the TV and the radio player")),
+			"tv2KeyReleased": (self.tv2KeyReleased, _("Toggle the TV and the radio player")),
 			"toggleTvRadio": (self.toggleTvRadio, _("Toggle the TV and the radio player")),
 			"ZoomInOut": (self.ZoomInOut, _("Zoom In/Out TV")),
 			"ZoomOff": (self.ZoomOff, _("Zoom Off"))
-		}, prio=2, description=_("Live TV Actions"))
+		}
+		for action in ("showTv", "showRadio", "radioKeyPressed", "tvKeyPressed", "tvKeyLong", "tv2KeyReleased", "toggleTvRadio"):
+			if not queryKeyBinding("InfobarActions", action):
+				del actions[action]
+		self["actions"] = HelpableActionMap(self, ["InfobarActions"], actions, prio=2, description=_("Live TV Actions"))
 		if isPluginInstalled("AutoTimer"):
 			self["key_yellow"] = Label()
 			self["key_yellow"].setText(_("AutoTimer"))
@@ -77,7 +87,9 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			x.__init__(self)
 
 		self.helpList.append((self["actions"], "InfobarActions", [("showMovies", _("Watch recordings"))]))
-		self.helpList.append((self["actions"], "InfobarActions", [("showRadio", _("Listen to the radio"))]))
+		radioAction = "showRadio" if "showRadio" in actions else "radioKeyPressed"
+		if radioAction in actions:
+			self.helpList.append((self["actions"], "InfobarActions", [(radioAction, _("Listen to the radio"))]))
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 			iPlayableService.evStart: self.updateInfoBarSkin,
@@ -137,6 +149,59 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 	def showTv(self):
 		self.showTvChannelList(True)
 
+	def tvKeyPressed(self):
+		if MODEL not in ("osmio4k", "osmio4kplus"):
+			self.showTv()
+
+	def tvKeyReleased(self):
+		if MODEL in ("osmio4k", "osmio4kplus") and config.usage.e1like_radio_mode.value:
+			self.servicelist.setModeTv()
+		self.openBouquetList()
+
+	def tvKeyLong(self):
+		if MODEL in ("osmio4k", "osmio4kplus"):
+			if config.usage.e1like_radio_mode.value:
+				servicelist = self.servicelist
+				if servicelist.mode == MODE_RADIO:
+					servicelist.setModeTv()
+				else:
+					servicelist.setModeRadio()
+				ref = servicelist.getCurrentSelection()
+				if not ref or not ref.valid() or ref.flags & (eServiceReference.flagDirectory | eServiceReference.isMarker):
+					lastservice = eServiceReference(servicelist.lastservice.value)
+					if lastservice.valid() and not lastservice.flags & (eServiceReference.flagDirectory | eServiceReference.isMarker):
+						for _name, bouquet in servicelist.getBouquetList() or []:
+							services = eServiceCenter.getInstance().list(bouquet)
+							if services and lastservice in services.getContent("R", True):
+								servicelist.enterUserbouquet(bouquet, save_root=False)
+								servicelist.setCurrentSelection(lastservice)
+								ref = lastservice
+								break
+				if ref and ref.valid() and not ref.flags & (eServiceReference.flagDirectory | eServiceReference.isMarker):
+					servicelist.zap(ref=ref)
+				else:
+					print("[InfoBar] No playable last TV/radio service; opening bouquets")
+					self.openBouquetList()
+			else:
+				self.toggleTvRadio()
+		else:
+			return 0
+
+	def radioKeyPressed(self):
+		if MODEL not in ("osmio4k", "osmio4kplus"):
+			self.showRadio()
+
+	def radioKeyReleased(self):
+		if MODEL in ("osmio4k", "osmio4kplus") and config.usage.e1like_radio_mode.value:
+			self.servicelist.setModeRadio()
+		self.openBouquetList()
+
+	def tv2KeyReleased(self):
+		if MODEL in ("osmio4k", "osmio4kplus"):
+			self.openBouquetList()
+		else:
+			self.toggleTvRadio()
+
 	def showRadioButton(self):
 		if BRAND in ("GigaBlue",) or MODEL in ("sezam5000hd", "mbtwin", "beyonwizt3", "ini-3000", "ini-5000", "ini-7000", "ini-7012"):
 			self.toggleTvRadio()
@@ -151,7 +216,7 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			self.session.openWithCallback(self.ChannelSelectionRadioClosed, ChannelSelectionRadio, self)
 
 	def toggleTvRadio(self):
-		if self.radioTV == 1:
+		if (self.servicelist.mode == MODE_RADIO if MODEL in ("osmio4k", "osmio4kplus") else self.radioTV == 1):
 			self.radioTV = 0
 			self.showTv()
 		else:
