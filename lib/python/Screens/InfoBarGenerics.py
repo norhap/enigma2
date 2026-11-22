@@ -367,6 +367,88 @@ class HideVBILine(Screen):
 		Screen.__init__(self, session)
 
 
+# block, display actions in colored buttons for information bars.
+def _hotkeyLabel(action):
+	if not action:
+		return None
+	if not Hotkey.hotkey.functions:
+		Hotkey.getHotkeyFunctions()
+	for name, keyAction, category in Hotkey.hotkey.functions or ():
+		if keyAction == action:
+			return name
+	return action
+
+
+def _formatInfoBarHotkeyLabel(color, short, long, second):
+	first = _("First InfoBar")
+	nothing = _("Nothing")
+	longSuffix = " " + _("(Long)")
+	resolution = _("Resolution") + longSuffix
+
+	if second:
+		if color in ("red", "green"):
+			if short == first and (long == first or (color == "red" and not long)):
+				return first
+			if color == "red" and not short and not long:
+				return first
+			if not long:
+				long = first if color == "red" else _("Resolution")
+			return (short or first) + "\n" + long + longSuffix
+		default = _("Import AutoTimer") if color == "yellow" else _("Extensions")
+		if short and long:
+			return short if short == long else short + "\n" + long + longSuffix
+		if short:
+			return short
+		if long:
+			return default + "\n" + long + longSuffix
+		return default if color == "yellow" else default + "\n" + first + longSuffix
+
+	if color == "red":
+		if not short:
+			return long + longSuffix if long and long != nothing else nothing
+		if not long or (short == nothing and long == nothing):
+			return short
+		return short + "\n" + long + longSuffix
+	if color == "green":
+		if not short and not long:
+			return "\n" + resolution
+		if short and ((short == nothing and long == nothing) or long == resolution):
+			return short
+		return (short or "") + "\n" + (long + longSuffix if long else resolution)
+
+	default = _("Import AutoTimer") if color == "yellow" else _("Extensions")
+	if color == "yellow" and config.misc.hotkey.yellow.default and not long and config.usage.cached_channel.value:
+		return default
+	if short and long:
+		if long == nothing or short == long:
+			return short
+		if short == nothing:
+			return long + longSuffix
+		return short + "\n" + long + longSuffix
+	if short:
+		return short
+	if long and (color == "yellow" or long != nothing):
+		return default + "\n" + long + longSuffix
+	return default
+
+
+def _setInfoBarHotkeyLabels(screen, second=False):
+	colors = ("red", "green", "yellow", "blue")
+	actions = {key: getattr(config.misc.hotkey, key).value for color in colors for key in (color, color + "_long")}
+	labels = {key: _hotkeyLabel(action) for key, action in actions.items()}
+	if not config.usage.cached_channel.value and serviceRefIPToSAT():
+		replacement = _("First InfoBar") if second else _("Nothing")
+		yellowDefault = str(config.misc.hotkey.yellow.default)
+		for key, action in actions.items():
+			if str(action) == yellowDefault:
+				labels[key] = replacement
+		if not str(actions["yellow"]):
+			labels["yellow"] = replacement
+	for color in colors:
+		screen["key_" + color].setText(_formatInfoBarHotkeyLabel(color, labels[color], labels[color + "_long"], second))
+# END block, display actions in colored buttons for information bars.
+
+
 class SecondInfoBar(Screen):
 	def __init__(self, session, skinName):
 		Screen.__init__(self, session)
@@ -376,65 +458,10 @@ class SecondInfoBar(Screen):
 		self["key_green"] = Label()
 		self["key_yellow"] = Label()
 		self["key_blue"] = Label()
-		self.hotkeyValue = None
 		self.onShow.append(self.__Show)
 
 	def __Show(self):
-		valuered = None
-		valueredLong = None
-		valuegreen = None
-		valuegreenLong = None
-		valueyellow = None
-		valueyellowLong = None
-		valueblue = None
-		valueblueLong = None
-		if config.misc.hotkey.red.value:
-			self.hotkeyValue = config.misc.hotkey.red.value
-			valuered = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.red_long.value:
-			self.hotkeyValue = config.misc.hotkey.red_long.value
-			valueredLong = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.green.value:
-			self.hotkeyValue = config.misc.hotkey.green.value
-			valuegreen = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.green_long.value:
-			self.hotkeyValue = config.misc.hotkey.green_long.value
-			valuegreenLong = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.yellow.value:
-			self.hotkeyValue = config.misc.hotkey.yellow.value
-			valueyellow = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.yellow_long.value:
-			self.hotkeyValue = config.misc.hotkey.yellow_long.value
-			valueyellowLong = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.blue.value:
-			self.hotkeyValue = config.misc.hotkey.blue.value
-			valueblue = InfoBarShowHide.functionHotkeyValue(self)
-		if config.misc.hotkey.blue_long.value:
-			self.hotkeyValue = config.misc.hotkey.blue_long.value
-			valueblueLong = InfoBarShowHide.functionHotkeyValue(self)
-		if not config.usage.cached_channel.value and serviceRefIPToSAT():
-			if str(config.misc.hotkey.red.value) == str(config.misc.hotkey.yellow.default):
-				valuered = _("First InfoBar")
-			if str(config.misc.hotkey.red_long.value) == str(config.misc.hotkey.yellow.default):
-				valueredLong = _("First InfoBar")
-			if str(config.misc.hotkey.green.value) == str(config.misc.hotkey.yellow.default):
-				valuegreen = _("First InfoBar")
-			if str(config.misc.hotkey.green_long.value) == str(config.misc.hotkey.yellow.default):
-				valuegreenLong = _("First InfoBar")
-			if str(config.misc.hotkey.yellow.value) == str(config.misc.hotkey.yellow.default):
-				valueyellow = _("First InfoBar")
-			if str(config.misc.hotkey.yellow_long.value) == str(config.misc.hotkey.yellow.default):
-				valueyellowLong = _("First InfoBar")
-			if not str(config.misc.hotkey.yellow.value):
-				valueyellow = _("First InfoBar")
-			if str(config.misc.hotkey.blue.value) == str(config.misc.hotkey.yellow.default):
-				valueblue = _("First InfoBar")
-			if str(config.misc.hotkey.blue_long.value) == str(config.misc.hotkey.yellow.default):
-				valueblueLong = _("First InfoBar")
-		self["key_red"].setText(_("First InfoBar") if not valuered and not valueredLong or valuered == _("First InfoBar") and not valueredLong else valuered if valuered and valueredLong and valuered == _("First InfoBar") and valueredLong == _("First InfoBar") else _("First InfoBar") + "\n" + valueredLong + " " + _("(Long)") if not valuered and valueredLong else valuered + "\n" + _("First InfoBar") + " " + _("(Long)") if valuered and not valueredLong else valuered + "\n" + valueredLong + " " + _("(Long)") if valuered and valueredLong else valuered if valuered else "\n" + _("First InfoBar"))
-		self["key_green"].setText(_("First InfoBar") + "\n" + _("Resolution") + " " + _("(Long)") if not valuegreen and not valuegreenLong else valuegreen if valuegreen and valuegreenLong and valuegreen == _("First InfoBar") and valuegreenLong == _("First InfoBar") else _("First InfoBar") + "\n" + valuegreenLong + " " + _("(Long)") if not valuegreen and valuegreenLong else valuegreen + "\n" + _("Resolution") + " " + _("(Long)") if valuegreen and not valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)"))
-		self["key_yellow"].setText(_("Import AutoTimer") if not valueyellow and not valueyellowLong else valueyellow if valueyellow and not valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == _("First InfoBar") and valueyellowLong == _("First InfoBar") else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow != valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == valueyellowLong else _("Import AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)") if valueyellowLong else valueyellow)
-		self["key_blue"].setText(_("Extensions") + "\n" + _("First InfoBar") + " " + _("(Long)") if not valueblue and not valueblueLong else valueblue if valueblue and not valueblueLong else valueblue if valueblue and valueblueLong and valueblue == _("First InfoBar") and valueblueLong == _("First InfoBar") else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblueLong and valueblue and valueblue != valueblueLong else valueblue if valueblueLong and valueblue and valueblue == valueblueLong else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)") if valueblueLong else _("Extensions"))
+		_setInfoBarHotkeyLabels(self, second=True)
 
 
 class InfoBarShowHide(InfoBarScreenSaver):
@@ -472,7 +499,6 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self["key_green"] = Label()
 		self["key_yellow"] = Label()
 		self["key_blue"] = Label()
-		self.hotkeyValue = None
 		self.onShow.append(self.__onShow)
 		self.onHide.append(self.__onHide)
 
@@ -505,76 +531,8 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.secondInfoBarScreenSimple.hide()
 		self.hideVBILineScreen.hide()
 
-	def functionHotkeyValue(self):
-		if self.hotkeyValue is None:
-			return None
-		if not Hotkey.hotkey.functions:
-			Hotkey.getHotkeyFunctions()
-		# print(f"[InfoBarGenerics] hotkeyValue={self.hotkeyValue!r}, functions len={len(Hotkey.hotkey.functions) if Hotkey.hotkey.functions else 0}")
-		if Hotkey.hotkey.functions:
-			for name, action, category in Hotkey.hotkey.functions:
-				if action == self.hotkeyValue:
-					# print(f"[InfoBarGenerics] FOUND: {name!r}")
-					return name
-		# print(f"[InfoBarGenerics] NOT FOUND, returning raw")
-		return self.hotkeyValue
-
 	def __onShow(self):
-		valuered = None
-		valueredLong = None
-		valuegreen = None
-		valuegreenLong = None
-		valueyellow = None
-		valueyellowLong = None
-		valueblue = None
-		valueblueLong = None
-		if config.misc.hotkey.red.value:
-			self.hotkeyValue = config.misc.hotkey.red.value
-			valuered = self.functionHotkeyValue()
-		if config.misc.hotkey.red_long.value:
-			self.hotkeyValue = config.misc.hotkey.red_long.value
-			valueredLong = self.functionHotkeyValue()
-		if config.misc.hotkey.green.value:
-			self.hotkeyValue = config.misc.hotkey.green.value
-			valuegreen = self.functionHotkeyValue()
-		if config.misc.hotkey.green_long.value:
-			self.hotkeyValue = config.misc.hotkey.green_long.value
-			valuegreenLong = self.functionHotkeyValue()
-		if config.misc.hotkey.yellow.value:
-			self.hotkeyValue = config.misc.hotkey.yellow.value
-			valueyellow = self.functionHotkeyValue()
-		if config.misc.hotkey.yellow_long.value:
-			self.hotkeyValue = config.misc.hotkey.yellow_long.value
-			valueyellowLong = self.functionHotkeyValue()
-		if config.misc.hotkey.blue.value:
-			self.hotkeyValue = config.misc.hotkey.blue.value
-			valueblue = self.functionHotkeyValue()
-		if config.misc.hotkey.blue_long.value:
-			self.hotkeyValue = config.misc.hotkey.blue_long.value
-			valueblueLong = self.functionHotkeyValue()
-		if not config.usage.cached_channel.value and serviceRefIPToSAT():
-			if str(config.misc.hotkey.red.value) == str(config.misc.hotkey.yellow.default):
-				valuered = _("Nothing")
-			if str(config.misc.hotkey.red_long.value) == str(config.misc.hotkey.yellow.default):
-				valueredLong = _("Nothing")
-			if str(config.misc.hotkey.green.value) == str(config.misc.hotkey.yellow.default):
-				valuegreen = _("Nothing")
-			if str(config.misc.hotkey.green_long.value) == str(config.misc.hotkey.yellow.default):
-				valuegreenLong = _("Nothing")
-			if str(config.misc.hotkey.yellow.value) == str(config.misc.hotkey.yellow.default):
-				valueyellow = _("Nothing")
-			if str(config.misc.hotkey.yellow_long.value) == str(config.misc.hotkey.yellow.default):
-				valueyellowLong = _("Nothing")
-			if not str(config.misc.hotkey.yellow.value):
-				valueyellow = _("Nothing")
-			if str(config.misc.hotkey.blue.value) == str(config.misc.hotkey.yellow.default):
-				valueblue = _("Nothing")
-			if str(config.misc.hotkey.blue_long.value) == str(config.misc.hotkey.yellow.default):
-				valueblueLong = _("Nothing")
-		self["key_red"].setText(_("Nothing") if not valuered and not valueredLong else valuered if valuered and valueredLong and valuered == _("Nothing") and valueredLong == _("Nothing") else valuered if valuered and not valueredLong else valueredLong + " " + _("(Long)") if not valuered and valueredLong and valueredLong != _("Nothing") else valuered + "\n" + valueredLong + " " + _("(Long)") if valuered and valueredLong else valuered if valuered else valueredLong if valueredLong != _("Nothing") else _("Nothing"))
-		self["key_green"].setText("\n" + _("Resolution") + " " + _("(Long)") if not valuegreen and not valuegreenLong else valuegreen if valuegreen and valuegreenLong and valuegreen == _("Nothing") and valuegreenLong == _("Nothing") else valuegreen if valuegreen and valuegreenLong == _("Resolution") + " " + _("(Long)") else valuegreen + "\n" + _("Resolution") + " " + _("(Long)") if valuegreen and not valuegreenLong else "\n" + valuegreenLong + " " + _("(Long)") if not valuegreen and valuegreenLong else valuegreen + "\n" + valuegreenLong + " " + _("(Long)") if valuegreen and valuegreenLong else valuegreen if valuegreen else valuegreenLong + " " + _("(Long)"))
-		self["key_yellow"].setText(_("Import AutoTimer") if not valueyellow and not valueyellowLong or (config.misc.hotkey.yellow.default and not valueyellowLong and config.usage.cached_channel.value) else valueyellow if valueyellow and not valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == _("Nothing") and valueyellowLong == _("Nothing") else valueyellow if valueyellow and valueyellowLong and valueyellowLong == _("Nothing") else valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow == _("Nothing") else valueyellow + "\n" + valueyellowLong + " " + _("(Long)") if valueyellow and valueyellowLong and valueyellow != valueyellowLong else valueyellow if valueyellow and valueyellowLong and valueyellow == valueyellowLong else _("Import AutoTimer") + "\n" + valueyellowLong + " " + _("(Long)") if valueyellowLong else valueyellow)
-		self["key_blue"].setText(_("Extensions") if not valueblue and not valueblueLong else valueblue if valueblue and not valueblueLong else valueblue if valueblue and valueblueLong and valueblue == _("Nothing") and valueblueLong == _("Nothing") else valueblue if valueblue and valueblueLong and valueblueLong == _("Nothing") else valueblueLong + " " + _("(Long)") if valueblue and valueblueLong and valueblue == _("Nothing") else valueblue + "\n" + valueblueLong + " " + _("(Long)") if valueblueLong and valueblue and valueblue != valueblueLong else valueblue if valueblueLong and valueblue and valueblue == valueblueLong else _("Extensions") + "\n" + valueblueLong + " " + _("(Long)") if valueblueLong and valueblueLong != _("Nothing") else _("Extensions"))
+		_setInfoBarHotkeyLabels(self)
 		self.__state = self.STATE_SHOWN
 		for x in self.onShowHideNotifiers:
 			x(True)
