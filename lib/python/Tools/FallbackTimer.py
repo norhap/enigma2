@@ -3,9 +3,11 @@ from Components.config import config
 from Screens.MessageBox import MessageBox
 from timer import TimerEntry as TimerObject
 from Tools.Directories import isPluginInstalled
-from urllib.parse import quote
-from xml.etree.ElementTree import fromstring
-from base64 import encodebytes
+from urllib.parse import quote, unquote, urlsplit
+from urllib.request import Request, urlopen
+from xml.etree.ElementTree import ParseError, fromstring
+from base64 import b64encode
+from twisted.internet.threads import deferToThread
 
 
 class FallbackTimerList():
@@ -15,26 +17,38 @@ class FallbackTimerList():
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		self.parent = parent
 		self.headers = {}
+		self.url = None
+		self.list = []
+		ipboxclient = False
 		if isPluginInstalled("Vision"):
 			from Plugins.SystemPlugins.Vision import ClientModeBox  # noqa: F401
-			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value or config.ipboxclient.remotetimers.value:
-				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
+			ipboxclient = config.ipboxclient.remotetimers.value
+		if (config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value) or ipboxclient:
+			try:
+				address = config.usage.remote_fallback.value.strip()
+				parsed = urlsplit(address if "://" in address else "http://%s" % address)
+				if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.port == 0:
+					raise ValueError("Invalid fallback tuner URL")
+				host = "[%s]" % parsed.hostname if ":" in parsed.hostname else parsed.hostname
+				self.url = "%s://%s" % (parsed.scheme, host)
+				userid = unquote(parsed.username or "")
+				password = unquote(parsed.password or "")
 				if config.usage.remote_fallback_openwebif_customize.value:
-					self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
-					if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-						self.headers = {"Authorization": "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
+					port = config.usage.remote_fallback_openwebif_port.value
+					if not 0 < port < 65536:
+						raise ValueError("Invalid OpenWebif port")
+					self.url = "%s:%s" % (self.url, port)
+					userid = config.usage.remote_fallback_openwebif_userid.value
+					password = config.usage.remote_fallback_openwebif_password.value
+				if userid:
+					credentials = b64encode(("%s:%s" % (userid, password)).encode("UTF-8")).decode("ASCII")
+					self.headers = {"Authorization": "Basic %s" % credentials}
+			except ValueError as error:
+				self.url = None
+				parent.onLayoutFinish.append(lambda message=str(error): self.fallback(message))
+			else:
 				self.getFallbackTimerList()
 		else:
-			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_external_timer.value and config.usage.remote_fallback.value:
-				self.url = config.usage.remote_fallback.value.rsplit(":", 1)[0]
-				if config.usage.remote_fallback_openwebif_customize.value:
-					self.url = "%s:%s" % (self.url, config.usage.remote_fallback_openwebif_port.value)
-					if config.usage.remote_fallback_openwebif_userid.value and config.usage.remote_fallback_openwebif_password.value:
-						self.headers = {"Authorization": "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip()}
-				self.getFallbackTimerList()
-		if not hasattr(self, "url"):
-			self.url = None
-			self.list = []
 			parent.onLayoutFinish.append(self.fallbackFunction)
 
 	# remove any trailing channel name from the service reference
@@ -45,42 +59,50 @@ class FallbackTimerList():
 		return service_ref
 
 	def getUrl(self, url):
-		print("[FallbackTimer] getURL", url)
-		from twisted.web.client import getPage
-		return getPage(str.encode("%s/%s" % (self.url, url)), headers=self.headers)
+		address = "%s/%s" % (self.url, url)
+		print("[FallbackTimer] getURL", address.split("?", 1)[0])
+
+		def readUrl():
+			request = Request(address, headers=self.headers)
+			with urlopen(request, timeout=5) as response:
+				return response.read()
+
+		# Resolve hostnames through the system resolver without blocking the GUI.
+		return deferToThread(readUrl)
 
 	def getFallbackTimerList(self):
 		self.list = []
 		if self.url:
-			try:
-				self.getUrl("web/timerlist").addCallback(self.gotFallbackTimerList).addErrback(self.fallback)
-			except:
-				self.fallback(_("Unable to access server timer"))
+			self.getUrl("web/timerlist").addCallback(self.gotFallbackTimerList).addErrback(self.fallback)
 		else:
 			self.fallback()
 
 	def gotFallbackTimerList(self, data):
 		try:
 			root = fromstring(data)
-		except Exception as e:
+			if root.tag != "e2timerlist":
+				raise ValueError("Invalid timer list response")
+			timers = [
+				FallbackTimerClass(
+					service_ref=str(timer.findtext("e2servicereference", '')),
+					name=str(timer.findtext("e2name", '')),
+					disabled=int(timer.findtext("e2disabled", 0)),
+					timebegin=int(timer.findtext("e2timebegin", 0)),
+					timeend=int(timer.findtext("e2timeend", 0)),
+					duration=int(timer.findtext("e2duration", 0)),
+					startprepare=int(timer.findtext("e2startprepare", 0)),
+					state=int(timer.findtext("e2state", 0)),
+					repeated=int(timer.findtext("e2repeated", 0)),
+					justplay=int(timer.findtext("e2justplay", 0)),
+					eit=int(timer.findtext("e2eit", -1)),
+					afterevent=int(timer.findtext("e2afterevent", 0)),
+					dirname=str(timer.findtext("e2location", '')),
+					description=str(timer.findtext("e2description", '')))
+				for timer in root.findall("e2timer")]
+		except (ParseError, TypeError, ValueError) as e:
 			self.fallback(e)
-		self.list = [
-			FallbackTimerClass(
-				service_ref=str(timer.findtext("e2servicereference", '')),
-				name=str(timer.findtext("e2name", '')),
-				disabled=int(timer.findtext("e2disabled", 0)),
-				timebegin=int(timer.findtext("e2timebegin", 0)),
-				timeend=int(timer.findtext("e2timeend", 0)),
-				duration=int(timer.findtext("e2duration", 0)),
-				startprepare=int(timer.findtext("e2startprepare", 0)),
-				state=int(timer.findtext("e2state", 0)),
-				repeated=int(timer.findtext("e2repeated", 0)),
-				justplay=int(timer.findtext("e2justplay", 0)),
-				eit=int(timer.findtext("e2eit", -1)),
-				afterevent=int(timer.findtext("e2afterevent", 0)),
-				dirname=str(timer.findtext("e2location", '')),
-				description=str(timer.findtext("e2description", '')))
-			for timer in root.findall("e2timer")]
+			return
+		self.list = timers
 		print("[FallbackTimer] read %s timers from fallback tuner" % len(self.list))
 		self.parent.session.nav.RecordTimer.setFallbackTimerList(self.list)
 		self.fallback()
@@ -88,12 +110,12 @@ class FallbackTimerList():
 	def removeTimer(self, timer, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
-		self.getUrl("web/timerdelete?sRef=%s&begin=%s&end=%s" % (self.cleanServiceRef(timer.service_ref), timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
+		self.getUrl("web/timerdelete?sRef=%s&begin=%s&end=%s" % (quote(self.cleanServiceRef(timer.service_ref), safe=""), timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
 
 	def toggleTimer(self, timer, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
-		self.getUrl("web/timertogglestatus?sRef=%s&begin=%s&end=%s" % (self.cleanServiceRef(timer.service_ref), timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
+		self.getUrl("web/timertogglestatus?sRef=%s&begin=%s&end=%s" % (quote(self.cleanServiceRef(timer.service_ref), safe=""), timer.begin, timer.end)).addCallback(self.getUrlFallback).addErrback(self.fallback)
 
 	def cleanupTimers(self, fallbackFunction, fallbackFunctionNOK=None):
 		self.fallbackFunction = fallbackFunction
@@ -107,7 +129,7 @@ class FallbackTimerList():
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		url = "web/timeradd?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&dirname=%s&eit=%s" % (
-			self.cleanServiceRef(timer.service_ref),
+			quote(self.cleanServiceRef(timer.service_ref), safe=""),
 			timer.begin,
 			timer.end,
 			quote(timer.name),
@@ -116,7 +138,7 @@ class FallbackTimerList():
 			timer.justplay,
 			timer.afterEvent,
 			timer.repeated,
-			timer.dirname,
+			quote(timer.dirname or "", safe=""),
 			timer.eit or 0,
 		)
 		self.getUrl(url).addCallback(self.getUrlFallback).addErrback(self.fallback)
@@ -125,7 +147,7 @@ class FallbackTimerList():
 		self.fallbackFunction = fallbackFunction
 		self.fallbackFunctionNOK = fallbackFunctionNOK or fallbackFunction
 		url = "web/timerchange?sRef=%s&begin=%s&end=%s&name=%s&description=%s&disabled=%s&justplay=%s&afterevent=%s&repeated=%s&channelOld=%s&beginOld=%s&endOld=%s&dirname=%s&eit=%s" % (
-			self.cleanServiceRef(timer.service_ref),
+			quote(self.cleanServiceRef(timer.service_ref), safe=""),
 			timer.begin,
 			timer.end,
 			quote(timer.name),
@@ -134,10 +156,10 @@ class FallbackTimerList():
 			timer.justplay,
 			timer.afterEvent,
 			timer.repeated,
-			timer.service_ref_prev,
+			quote(str(timer.service_ref_prev), safe=""),
 			timer.begin_prev,
 			timer.end_prev,
-			timer.dirname,
+			quote(timer.dirname or "", safe=""),
 			timer.eit or 0,
 		)
 		self.getUrl(url).addCallback(self.getUrlFallback).addErrback(self.fallback)
@@ -145,17 +167,24 @@ class FallbackTimerList():
 	def getUrlFallback(self, data):
 		try:
 			root = fromstring(data)
-			if root[0].text == 'True':
-				self.getFallbackTimerList()
-			else:
-				self.fallback(root[1].text)
-		except:
-			self.fallback("Unexpected Error")
+			state = root.findtext("e2state", "").lower()
+			if state not in ("true", "false"):
+				raise ValueError("Invalid timer command response")
+		except (ParseError, TypeError, ValueError) as error:
+			self.fallback(error)
+			return
+		if state == "true":
+			self.getFallbackTimerList()
+		else:
+			self.fallback(root.findtext("e2statetext") or "Unexpected Error")
 
 	def fallback(self, message=None):
-		from Tools.Notifications import AddNotificationWithID
-		if message:
-			AddNotificationWithID("fallbackFunctionNOK", MessageBox, _("Error while retreiving fallback timer information\n%s") % message, MessageBox.TYPE_ERROR, timeout=10)
+		if message is not None:
+			from Tools.Notifications import AddNotificationWithIDCallback
+			if hasattr(message, "getErrorMessage"):
+				message = message.getErrorMessage()
+			print("[FallbackTimer] Error:", message)
+			AddNotificationWithIDCallback(self.fallbackNOK, "fallbackFunctionNOK", MessageBox, _("Error while retreiving fallback timer information\n%s") % message, MessageBox.TYPE_ERROR, timeout=10)
 		else:
 			self.fallbackFunction()
 
@@ -167,19 +196,13 @@ class FallbackTimerDirs(FallbackTimerList):
 
 	def getFallbackTimerList(self):
 		if self.url:
-			try:
-				self.getUrl("web/getlocations").addCallback(self.getlocations).addErrback(self.fallbackFunction)
-			except:
-				self.fallbackFunction()
+			self.getUrl("web/getlocations").addCallback(self.getlocations).addErrback(self.fallback)
 		else:
 			self.fallbackFunction()
 
 	def getlocations(self, data):
 		self.locations = [c.text for c in fromstring(data)]
-		try:
-			self.getUrl("web/getcurrlocation").addCallback(self.getcurrlocation).addErrback(self.fallbackFunction)
-		except:
-			self.fallbackFunction()
+		self.getUrl("web/getcurrlocation").addCallback(self.getcurrlocation).addErrback(self.fallback)
 
 	def getcurrlocation(self, data):
 		currlocation = [c.text for c in fromstring(data)]
