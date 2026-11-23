@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-22 18:17+0100\n"
+"POT-Creation-Date: 2026-11-23 14:46+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -3385,6 +3385,9 @@ msgstr "No se encuentra señal …, abortando !"
 msgid "Cannot find images - please try later or select an alternate image"
 msgstr "No se encuentran imágenes - prueba más tarde o seleccione una imagen alternativa"
 
+msgid "Cannot index the copied recording."
+msgstr "No se puede indexar la copia de la grabación."
+
 msgid "Cannot move to the trash can"
 msgstr "No se puede mover a la papelera"
 
@@ -4771,6 +4774,9 @@ msgstr "Logs de fallos"
 
 msgid "Create a separate bouquet for radio services. When disabled, radio services are included in the TV bouquet."
 msgstr "Cree un grupo independiente para los canales de radio. Si esta opción está desactivada, los canales de radio se incluyen en el grupo de televisión."
+
+msgid "Create an editable copy of this recording? Only MPEG transport streams are supported. The original will not be changed. The copy requires disk space and new cut marks."
+msgstr "¿Crear una copia editable de esta grabación? Solo se admiten streams de transporte MPEG. El original no se modificará. La copia necesita espacio en disco y nuevas marcas de corte."
 
 msgid "Create directory"
 msgstr "Crear directorio"
@@ -9146,7 +9152,7 @@ msgid "Input scroll position"
 msgstr "Posición entrada desplazamiento"
 
 msgid "Input Stream ID"
-msgstr "ID del flujo de entrada"
+msgstr "ID del Stream de entrada"
 
 msgid "INS"
 msgstr "NFS"
@@ -13031,6 +13037,12 @@ msgstr "Sintonizador preferido DVB-T para grabaciones"
 
 msgid "Preferred tuner for recordings"
 msgstr "Sintonizador preferido para grabaciones"
+
+msgid "Preparation was cancelled."
+msgstr "Se ha cancelado la preparación."
+
+msgid "Preparing the recording for cutting"
+msgstr "Preparando la grabación para cortar"
 
 msgid "Preparing... Please wait"
 msgstr "Preparando… Espere"
@@ -17897,6 +17909,9 @@ msgstr "El comando para salir del Reposo se enviará varias veces."
 msgid "The command to wake from standby will be sent multiple times."
 msgstr "El comando para salir de reposo se enviará varias veces."
 
+msgid "The copy is ready for cutting:\n%s\n\nOpen this recording in the cutlist editor and create new cut marks. The original was not changed."
+msgstr "La copia está lista para cortar:\n%s\n\nAbra esta grabación en el editor de cortes y cree nuevas marcas. El original no se ha modificado."
+
 msgid "The current image might not be stable.\nFor more information see telegram @norhap."
 msgstr "Es posible que la imagen actual no sea estable.\nPara obtener más información, consulte Telegram @norhap."
 
@@ -17963,6 +17978,15 @@ msgstr "El stream anterior se está cerrando. Espere..."
 msgid "The process will take approximately %d minutes to complete."
 msgstr "El proceso tardará aproximadamente %d minutos en completarse."
 
+msgid "The recording does not have enough access points for MovieCut."
+msgstr "La grabación no tiene suficientes puntos de acceso para MovieCut."
+
+msgid "The recording has an invalid access-point index."
+msgstr "La grabación tiene un índice de puntos de acceso inválido."
+
+msgid "The recording is being copied and indexed in the background. This requires free disk space and may take some time."
+msgstr "La grabación se está copiando e indexando en segundo plano. Esto necesita espacio libre y puede tardar un tiempo."
+
 msgid "The repository is not public or there is no access."
 msgstr "El repositorio no es público o no hay acceso."
 
@@ -17990,6 +18014,9 @@ msgstr "Las máquinas tragamonedas no son accesibles.\nEs posible que deba resta
 msgid "The software management extension is not installed!\nPlease install it."
 msgstr "¡La extensión de administración de software no está instalada!\nPor favor instálelo."
 
+msgid "The source recording changed during copying. Stop the recording and try again."
+msgstr "La grabación original cambió durante la copia. Detenga la grabación y vuelva a intentarlo."
+
 msgid "The speed of the fan when your %s %s is in normal use."
 msgstr "La velocidad del ventilador cuando su %s %s está en uso normal."
 
@@ -18004,6 +18031,9 @@ msgstr "El archivo del temporizador (pm_timers.xml) está dañado y no se pudo c
 
 msgid "The timer file 'timers.xml' is corrupt and could not be loaded."
 msgstr "El archivo de temporizador (timers.xml) está dañado y no se pudo cargar."
+
+msgid "The transport stream could not be indexed."
+msgstr "No se pudo indexar el stream de transporte."
 
 msgid "The user interface of the receiver will now restart to select the selected skin"
 msgstr "La interfaz de usuario del receptor ahora se reiniciará para mostrar su skin seleccionado"
@@ -18273,6 +18303,9 @@ msgstr "¡Este receptor no puede decodificar %s streams!"
 
 msgid "this recording"
 msgstr "esta grabación"
+
+msgid "This recording is not a supported MPEG transport stream."
+msgstr "Esta grabación no es un stream de transporte MPEG compatible."
 
 msgid "This selection is an invalid location"
 msgstr "Esta selección es una ubicación inválida"
@@ -18993,9 +19026,6 @@ msgstr "Ukraniano"
 
 msgid "Umweltbewusstsein"
 msgstr "Ambiente de vida"
-
-msgid "Unable to access server timer"
-msgstr "No se pudo acceder al temporizador del servidor"
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
 msgstr "No se puede realizar una copia de seguridad de la configuración porque falta el plugin AutoBackup, ¿desea continuar?"

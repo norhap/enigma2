@@ -251,7 +251,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		# work from here.
 		self.onShown.append(self.__onShown)
 		if self.service:
-			if ".stream" in self.service.getPath():
+			if self.service.getPath().lower().endswith(".stream"):
 				self["status"] = Label(_("WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."))
 
 	def __onShown(self, override=False):
@@ -459,7 +459,7 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 
 	def showMenu(self):
 		if self.service:
-			if ".stream" in self.service.getPath():
+			if self.service.getPath().lower().endswith(".stream"):
 				return self.session.open(MessageBox, _("WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."), type=MessageBox.TYPE_ERROR, timeout=10)
 		curpos = self.cueGetCurrentPosition()
 		if curpos is None:
@@ -479,6 +479,10 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		if not len(result):
 			return
 		result = result[0]
+
+		if result in (CutListContextMenu.RET_EXECUTECUTS, CutListContextMenu.RET_QUICKEXECUTE) and self.service and self.service.getPath().lower().endswith(".stream"):
+			self.session.open(MessageBox, _("WARNING: This movie is an IPTV stream.\nIt cannot be cut with this type of stream."), type=MessageBox.TYPE_ERROR, timeout=10)
+			return
 
 		if result in (CutListContextMenu.RET_STARTCUT, CutListContextMenu.RET_ENDCUT):
 			if result == CutListContextMenu.RET_STARTCUT:

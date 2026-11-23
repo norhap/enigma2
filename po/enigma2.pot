@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-22 18:17+0100\n"
+"POT-Creation-Date: 2026-11-23 14:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3385,6 +3385,9 @@ msgstr ""
 msgid "Cannot find images - please try later or select an alternate image"
 msgstr ""
 
+msgid "Cannot index the copied recording."
+msgstr ""
+
 msgid "Cannot move to the trash can"
 msgstr ""
 
@@ -4770,6 +4773,9 @@ msgid "Crash Logs"
 msgstr ""
 
 msgid "Create a separate bouquet for radio services. When disabled, radio services are included in the TV bouquet."
+msgstr ""
+
+msgid "Create an editable copy of this recording? Only MPEG transport streams are supported. The original will not be changed. The copy requires disk space and new cut marks."
 msgstr ""
 
 msgid "Create directory"
@@ -13032,6 +13038,12 @@ msgstr ""
 msgid "Preferred tuner for recordings"
 msgstr ""
 
+msgid "Preparation was cancelled."
+msgstr ""
+
+msgid "Preparing the recording for cutting"
+msgstr ""
+
 msgid "Preparing... Please wait"
 msgstr ""
 
@@ -17897,6 +17909,9 @@ msgstr ""
 msgid "The command to wake from Standby will be sent multiple times."
 msgstr ""
 
+msgid "The copy is ready for cutting:\n%s\n\nOpen this recording in the cutlist editor and create new cut marks. The original was not changed."
+msgstr ""
+
 msgid "The current image might not be stable.\nFor more information see telegram @norhap."
 msgstr ""
 
@@ -17963,6 +17978,15 @@ msgstr ""
 msgid "The process will take approximately %d minutes to complete."
 msgstr ""
 
+msgid "The recording does not have enough access points for MovieCut."
+msgstr ""
+
+msgid "The recording has an invalid access-point index."
+msgstr ""
+
+msgid "The recording is being copied and indexed in the background. This requires free disk space and may take some time."
+msgstr ""
+
 msgid "The repository is not public or there is no access."
 msgstr ""
 
@@ -17990,6 +18014,9 @@ msgstr ""
 msgid "The software management extension is not installed!\nPlease install it."
 msgstr ""
 
+msgid "The source recording changed during copying. Stop the recording and try again."
+msgstr ""
+
 msgid "The speed of the fan when your %s %s is in normal use."
 msgstr ""
 
@@ -18003,6 +18030,9 @@ msgid "The timer file 'pm_timers.xml' is corrupt and could not be loaded."
 msgstr ""
 
 msgid "The timer file 'timers.xml' is corrupt and could not be loaded."
+msgstr ""
+
+msgid "The transport stream could not be indexed."
 msgstr ""
 
 msgid "The user interface of the receiver will now restart to select the selected skin"
@@ -18272,6 +18302,9 @@ msgid "This receiver cannot decode %s streams!"
 msgstr ""
 
 msgid "this recording"
+msgstr ""
+
+msgid "This recording is not a supported MPEG transport stream."
 msgstr ""
 
 msgid "This selection is an invalid location"
@@ -18992,9 +19025,6 @@ msgid "Ukrainian"
 msgstr ""
 
 msgid "Umweltbewusstsein"
-msgstr ""
-
-msgid "Unable to access server timer"
 msgstr ""
 
 msgid "Unable to backup settings as the AutoBackup plugin is missing, do you want to continue?"
