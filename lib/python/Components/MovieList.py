@@ -87,20 +87,22 @@ def moviePlayState(cutsFileName, ref, length):
 		# read the cuts file first
 		with open(cutsFileName, 'rb') as f:
 			lastPosition = None
-		while True:
-			data = f.read(cutsParser.size)
-			if len(data) < cutsParser.size:
-				break
-			cut, cutType = cutsParser.unpack(data)
-			if cutType == 3:  # undocumented, but 3 appears to be the stop
-				lastPosition = cut
+			while True:
+				data = f.read(cutsParser.size)
+				if len(data) < cutsParser.size:
+					break
+				cut, cutType = cutsParser.unpack(data)
+				if cutType == 3:  # undocumented, but 3 appears to be the stop
+					lastPosition = cut
 		# See what we have in RAM (it might help)
 		last = lastPlayPosFromCache(ref)
 		if last:
 			# Get the cut point from the cache if not in the file
 			lastPosition = last[1]
 			# Get the length from the cache
-			length = last[2]
+			length = last[2] if last[2] and last[2] > 0 else length * 90000 if length and length > 0 else 0
+			if not length:
+				return 50 if lastPosition else None
 		else:
 			if length and (length > 0):
 				length = length * 90000
@@ -117,8 +119,7 @@ def moviePlayState(cutsFileName, ref, length):
 		last = lastPlayPosFromCache(ref)
 		if last:
 			lastPosition = last[1]
-			if not length or (length < 0):
-				length = last[2]
+			length = last[2] if last[2] and last[2] > 0 else length * 90000 if length and length > 0 else 0
 			if length:
 				if lastPosition >= length:
 					return 100
@@ -641,6 +642,7 @@ class MovieList(GUIComponent):
 		autotags = {}
 		rootPath = os.path.normpath(root.getPath())
 		parent = None
+		parentEntry = None
 		# Don't navigate above the "root"
 		if len(rootPath) > 1 and (os.path.realpath(rootPath) != os.path.realpath(config.movielist.root.value)):
 			parent = os.path.split(os.path.normpath(rootPath))[0]
@@ -650,7 +652,8 @@ class MovieList(GUIComponent):
 					parent += '/'
 				ref = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + parent.replace(':', '%3a'))
 				ref.flags = eServiceReference.flagDirectory
-				self.list.append((ref, None, 0, -1))
+				parentEntry = (ref, None, 0, -1)
+				self.list.append(parentEntry)
 				numberOfDirs += 1
 
 		if config.usage.movielist_trashcan.value:
@@ -775,17 +778,16 @@ class MovieList(GUIComponent):
 		elif self.current_sort == MovieList.SORT_ALPHAREV_DATE_NEWEST_FIRST:
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey, reverse=True) + sorted(self.list[numberOfDirs:], key=self.buildAlphaDateSortKey, reverse=True)
 
-		elif self.sort_type == MovieList.SORT_DURATION_ALPHA:
+		elif self.current_sort == MovieList.SORT_DURATION_ALPHA:
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildLengthAlphaSortKey)
-		elif self.sort_type == MovieList.SORT_DURATIONREV_ALPHA:
+		elif self.current_sort == MovieList.SORT_DURATIONREV_ALPHA:
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildLengthRevAlphaSortKey)
-		elif self.sort_type == MovieList.SORT_SIZE_ALPHA:
+		elif self.current_sort == MovieList.SORT_SIZE_ALPHA:
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildSizeAlphaSortKey)
-		elif self.sort_type == MovieList.SORT_SIZEREV_ALPHA:
+		elif self.current_sort == MovieList.SORT_SIZEREV_ALPHA:
 			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildSizeRevAlphaSortKey)
-		elif not defaultInhibitDirs:
-			if self.sort_type == MovieList.SORT_DESCRIPTION_ALPHA:
-				self.list = sorted(self.list[:numberOfDirs], key=self.buildDescrAlphaSortKey) + sorted(self.list[numberOfDirs:], key=self.buildDescrAlphaSortKey)
+		elif self.current_sort == MovieList.SORT_DESCRIPTION_ALPHA:
+			self.list = sorted(self.list[:numberOfDirs], key=self.buildAlphaDateSortKey) + sorted(self.list[numberOfDirs:], key=self.buildDescrAlphaSortKey)
 		else:
 			self.list.sort(key=self.buildGroupwiseSortkey)
 
@@ -795,6 +797,10 @@ class MovieList(GUIComponent):
 				if tmppath.endswith('.Trash'):
 					self.list.insert(0, self.list.pop(self.list.index(x)))
 					break
+
+		if parentEntry is not None:
+			self.list.remove(parentEntry)
+			self.list.insert(0, parentEntry)
 
 		if self.root and numberOfDirs > 0:
 			rootPath = os.path.normpath(self.root.getPath())
@@ -863,9 +869,12 @@ class MovieList(GUIComponent):
 		# sort recordings that have been split.
 		name = info and info.getName(ref)
 		if name:
-			path = ref.getPath()
-			if path.endswith(".ts") and path[-7] == "_":
-				name += path[-6:-3]
+			if ref.flags & eServiceReference.mustDescent:
+				name = os.path.basename(os.path.normpath(name))
+			else:
+				path = ref.getPath()
+				if path.endswith(".ts") and path[-7:-6] == "_":
+					name += path[-6:-3]
 		return name and name.lower() or ""
 
 	def buildAlphaDateSortKey(self, x):
@@ -880,12 +889,6 @@ class MovieList(GUIComponent):
 		# x = ref,info,begin,...
 		ref = x[0]
 		name = self.getNameKey(ref, x[1]) or ".."
-		if ref.flags & eServiceReference.mustDescent:
-			# Only use directory basename for sorting.
-			try:
-				name = os.path.basename(os.path.normpath(name))
-			except OSError:
-				pass
 		# print("[MovieList] Sorting for -%s-" % name)
 		return (1, name, -x[2])
 
