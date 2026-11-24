@@ -661,6 +661,7 @@
 
 	<map context="InfobarActions">
 		<key id="KEY_VIDEO" mapto="showMovies" flags="b" />
+		<key id="KEY_MP3" mapto="showMovies" flags="b" />
 		<key id="KEY_FIND" mapto="showMovies" flags="b" />
 		<key id="KEY_RADIO" mapto="radioKeyPressed" flags="m" />
 		<key id="KEY_RADIO" mapto="radioKeyReleased" flags="b" />
