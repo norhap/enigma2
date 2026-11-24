@@ -15,12 +15,11 @@ import Screens.Standby
 import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
-from Screens.MessageBox import MessageBox
+from Screens.Toast import Toast
 from os.path import exists
 from Screens.InfoBarGenerics import streamrelay
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
-from Tools.Notifications import AddPopup
 from Tools.StbHardware import getFPWasTimerWakeup
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
@@ -139,7 +138,6 @@ class Navigation:
 		elif i == iPlayableService.evEOF and self.streamRetryService is not None:
 			return  # Do not let the failed stream's EOF pause the pending retry.
 		elif i in (iPlayableService.evGstreamerTeardownWait, iPlayableService.evGstreamerTeardownWaitEnd):
-			from Screens.Toast import Toast
 			if Toast.instance:
 				if i == iPlayableService.evGstreamerTeardownWait:
 					Toast.instance.showToast(_("The previous stream is closing. Please..."), Toast.TYPE_INFO, 5, replaceId="GstreamerTeardown")
@@ -487,7 +485,8 @@ class Navigation:
 		wrappererror = None
 		nref = ref
 		if config.usage.remote_fallback_enabled.value and SystemInfo["FCCactive"]:
-			return AddPopup(_("Fallback tuner and FCC activated. Activate only one function."), type=MessageBox.TYPE_ERROR, timeout=10)
+			wrappererror = _("Fallback tuner and FCC activated. Activate only one function.")
+			Toast.instance.showToast(text=wrappererror, toastType=Toast.TYPE_ERROR, timeout=10, replaceId="fallbackFCC")
 		elif hasattr(nref, "getPath"):
 			for p in plugins.getPlugins(PluginDescriptor.WHERE_PLAYSERVICE):
 				(newurl, errormsg) = p(service=nref)
@@ -498,7 +497,7 @@ class Navigation:
 					nref.setCompareSref(newurl)
 					break
 			if wrappererror:
-				AddPopup(text=wrappererror, type=MessageBox.TYPE_ERROR, timeout=5, id="channelzapwrapper")
+				Toast.instance.showToast(text=wrappererror, toastType=Toast.TYPE_ERROR, timeout=5, replaceId="channelzapwrapper")
 		return nref, wrappererror
 
 	def getCurrentlyPlayingServiceReference(self):
