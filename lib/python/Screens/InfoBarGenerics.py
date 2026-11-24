@@ -3696,7 +3696,7 @@ class InfoBarVmodeButton:
 	def ToggleVideoMode(self):
 		policy = config.av.policy_169 if self.isWideScreen() else config.av.policy_43
 		policy.value = policy.choices[(policy.choices.index(policy.value) + 1) % len(policy.choices)]
-		self.VideoMode_window.setText(policy.value)
+		self.VideoMode_window.setText(policy.getText())
 		config.av.policy_169.save()
 		config.av.policy_43.save()
 

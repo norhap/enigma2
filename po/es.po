@@ -14537,7 +14537,7 @@ msgid "Sardinian"
 msgstr "Ukraniano"
 
 msgid "Sat"
-msgstr "Sáb"
+msgstr "Sat"
 
 msgid "Satellite"
 msgstr "Satélite"
