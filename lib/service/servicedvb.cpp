@@ -1857,8 +1857,13 @@ RESULT eDVBServicePlay::start()
 	RESULT ret = 0;
 	eDVBServicePMTHandler::serviceType type = eDVBServicePMTHandler::livetv;
 
-	if(tryFallbackTuner(/*REF*/service, /*REF*/m_is_stream, m_is_pvr, /*simulate*/false))
+	if (tryFallbackTuner(/*REF*/service, /*REF*/m_is_stream, m_is_pvr, /*simulate*/false))
+	{
 		eDebug("[eDVBServicePlay] ServicePlay: fallback tuner selected");
+		/* [norhap] loop protection on the fallback tuner */
+		if (!onFallbackTunerSelected())
+			return -1;
+	}
 
 		/* in pvr mode, we only want to use one demux. in tv mode, we're using
 		   two (one for decoding, one for data source), as we must be prepared
