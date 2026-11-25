@@ -59,15 +59,16 @@ class PictureInPictureZapping(Screen):
 
 class PictureInPicture(Screen):
 	skin = """
-	<screen name="PictureInPicture" flags="wfNoBorder" position="510,28" size="180,135" title="PiP" zPosition="-2">
-		<widget name="video" position="0,0" size="180,135" />
+	<screen name="PictureInPicture" flags="wfNoBorder" backgroundColor="transparent" position="510,28" size="180,135" title="PiP" zPosition="-2">
+		<widget name="video" backgroundColor="transparent" position="0,0" size="180,135" />
 	</screen>"""
 	playServiceExtensions = []
 
 	def __init__(self, session):
 		global pip_config_initialized
 		Screen.__init__(self, session)
-		self["video"] = VideoWindow()
+		desktopSize = session.desktop.size()
+		self["video"] = VideoWindow(fb_width=desktopSize.width(), fb_height=desktopSize.height())
 		self.pipActive = session.instantiateDialog(PictureInPictureZapping)
 		self.dishpipActive = session.instantiateDialog(Dishpip)
 		self.currentService = None
@@ -114,6 +115,10 @@ class PictureInPicture(Screen):
 		self.relocate()
 		self.setExternalPiP(config.av.pip_mode.value == "external")
 
+	def toDesktopSize(self, x, y):
+		return ((x * self["video"].fb_width + MAX_X - 1) // MAX_X,
+			(y * self["video"].fb_height + MAX_Y - 1) // MAX_Y)
+
 	def move(self, x, y, doSave=True):
 		if doSave:
 			config.av.pip.value[0] = x
@@ -133,7 +138,7 @@ class PictureInPicture(Screen):
 		elif config.av.pip_mode.value in "bigpig external":
 			x = 0
 			y = 0
-		self.instance.move(ePoint(x, y))
+		self.instance.move(ePoint(*self.toDesktopSize(x, y)))
 
 	def resize(self, w, h, doSave=True):
 		if doSave:
@@ -141,24 +146,24 @@ class PictureInPicture(Screen):
 			config.av.pip.value[3] = h
 			config.av.pip.save()
 		if config.av.pip_mode.value == "standard":
-			self.instance.resize(eSize(*(w, h)))
-			self["video"].instance.resize(eSize(*(w, h)))
+			self.instance.resize(eSize(*self.toDesktopSize(w, h)))
+			self["video"].instance.resize(eSize(*self.toDesktopSize(w, h)))
 			self.setSizePosMainWindow()
 		elif config.av.pip_mode.value == "cascade":
-			self.instance.resize(eSize(*(w, h)))
-			self["video"].instance.resize(eSize(*(w, h)))
+			self.instance.resize(eSize(*self.toDesktopSize(w, h)))
+			self["video"].instance.resize(eSize(*self.toDesktopSize(w, h)))
 			self.setSizePosMainWindow(0, h, MAX_X - w, MAX_Y - h)
 		elif config.av.pip_mode.value == "split":
-			self.instance.resize(eSize(*(MAX_X // 2, MAX_Y)))
-			self["video"].instance.resize(eSize(*(MAX_X // 2, MAX_Y)))
+			self.instance.resize(eSize(*self.toDesktopSize(MAX_X // 2, MAX_Y)))
+			self["video"].instance.resize(eSize(*self.toDesktopSize(MAX_X // 2, MAX_Y)))
 			self.setSizePosMainWindow(0, 0, MAX_X // 2, MAX_Y)
 		elif config.av.pip_mode.value == "byside":
-			self.instance.resize(eSize(*(MAX_X // 2, MAX_Y // 2)))
-			self["video"].instance.resize(eSize(*(MAX_X // 2, MAX_Y // 2)))
+			self.instance.resize(eSize(*self.toDesktopSize(MAX_X // 2, MAX_Y // 2)))
+			self["video"].instance.resize(eSize(*self.toDesktopSize(MAX_X // 2, MAX_Y // 2)))
 			self.setSizePosMainWindow(0, MAX_Y // 4, MAX_X // 2, MAX_Y // 2)
 		elif config.av.pip_mode.value in "bigpig external":
-			self.instance.resize(eSize(*(MAX_X, MAX_Y)))
-			self["video"].instance.resize(eSize(*(MAX_X, MAX_Y)))
+			self.instance.resize(eSize(*self.toDesktopSize(MAX_X, MAX_Y)))
+			self["video"].instance.resize(eSize(*self.toDesktopSize(MAX_X, MAX_Y)))
 			self.setSizePosMainWindow()
 
 	def setSizePosMainWindow(self, x=0, y=0, w=0, h=0):
@@ -176,10 +181,14 @@ class PictureInPicture(Screen):
 		self.pipActive.hide()
 
 	def getPosition(self):
-		return self.instance.position().x(), self.instance.position().y()
+		position = self.instance.position()
+		return (position.x() * MAX_X // self["video"].fb_width,
+			position.y() * MAX_Y // self["video"].fb_height)
 
 	def getSize(self):
-		return self.instance.size().width(), self.instance.size().height()
+		size = self.instance.size()
+		return (size.width() * MAX_X // self["video"].fb_width,
+			size.height() * MAX_Y // self["video"].fb_height)
 
 	def togglePiPMode(self):
 		self.setMode(config.av.pip_mode.choices[(config.av.pip_mode.index + 1) % len(config.av.pip_mode.choices)])
