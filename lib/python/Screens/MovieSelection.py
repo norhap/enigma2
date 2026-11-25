@@ -837,24 +837,23 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		self.getPoster()
 
 	def getPoster(self):
-		serviceHandler = eServiceCenter.getInstance()
-		info = serviceHandler.info(self.getCurrent())
-		event_title = info and info.getName(self.getCurrent())
-		movietitle = event_title[0:16]
-		movietitletwo = event_title[0:10]
-		movietitlethre = event_title[0:8]
+		current = self.getCurrent()
+		info = eServiceCenter.getInstance().info(current) if current else None
+		event_title = info and info.getName(current)
+		if not event_title:
+			self["poster"].instance.hide()
+			self["hiddenpig"].hide()
+			return
 		pathPoster = config.usage.default_path.value + "IMDB/"
 		posterName = ""
 		if exists(str(pathPoster)):
-			for poster in [x for x in listdir(config.usage.default_path.value + "IMDB") if ".jpg" in x and (str(movietitle) in x or str(movietitletwo) in x or str(movietitlethre) in x)]:
-				if poster.replace(".jpg", "") == str(movietitle):
-					posterName = poster
-				elif str(movietitle) in poster and not posterName:
-					posterName = poster
-				elif str(movietitletwo) in poster and not posterName:
-					posterName = poster
-				elif str(movietitlethre) in poster and not posterName:
-					posterName = poster
+			try:
+				posters = listdir(pathPoster)
+			except OSError as error:
+				print("[MovieSelection] Cannot list poster directory:", error)
+				posters = []
+			if event_title + ".jpg" in posters:
+				posterName = event_title + ".jpg"
 		if posterName:
 			self["hiddenpig"].show()
 			self["poster"].instance.setPixmap(loadJPG(pathPoster + posterName))
