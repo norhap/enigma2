@@ -55,7 +55,6 @@ class Navigation:
 		self.dvbiPlaybackService = None
 		self.skipServiceReferenceReset = False
 		self.isCurrentServiceStreamRelay = False
-		self.streamRetryOverride = False
 		self.firstStart = True
 		self.streamRetryTimer = None
 		self.streamRetryService = None
@@ -170,14 +169,11 @@ class Navigation:
 		bar = InfoBar.instance
 		ref = self.currentlyPlayingServiceOrGroup
 		streamRef = self.hybridPlaybackService or ref
-		isOverride = self.streamRetryOverride
 		if (not bar or ServiceEventTracker.getActiveInfoBar() is not bar or Screens.Standby.inStandby
-				or (self.isCurrentServiceDVBI and not isOverride)
-				or self.isCurrentServiceStreamRelay
-				or not ref or ref.flags & eServiceReference.isGroup
-				or (not isOverride and streamRef.type != 4097)
-				or (not isOverride and not streamRef.getPath().lower().startswith(("http://", "https://")))
-				or bar.seekstate != bar.SEEK_STATE_PLAY):
+			or self.isCurrentServiceDVBI or self.isCurrentServiceStreamRelay
+			or not ref or ref.flags & eServiceReference.isGroup or streamRef.type != 4097
+			or not streamRef.getPath().lower().startswith(("http://", "https://"))
+			or bar.seekstate != bar.SEEK_STATE_PLAY):
 			return None
 		service = self.getCurrentService()
 		seek = service and service.seek()
@@ -268,7 +264,7 @@ class Navigation:
 		print(f"[Navigation] Reconnecting HTTP stream (attempt {self.streamRetryCount}/3).")
 		self.playService(pending[2], forceRestart=True, streamRetry=True)
 
-	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None, dvbiTarget=None, dvbiFallback=True):
+	def playService(self, ref, checkParentalControl=True, forceRestart=False, adjust=True, ignoreStreamRelay=False, event=None, dvbiTarget=None, dvbiFallback=True, streamRetry=False):
 		if exists("/proc/stb/lcd/symbol_signal") and hasattr(config.lcd, "mode"):
 			with open("/proc/stb/lcd/symbol_signal", "w") as f:
 				f.write("1" if ref and "0:0:0:0:0:0:0:0:0" not in ref.toString() and config.lcd.mode.value else "0")
@@ -293,6 +289,8 @@ class Navigation:
 		if ref and oldref and ref == oldref and not forceRestart:
 			print("[Navigation] ignore request to play already running service(1)")
 			return 1
+		if not streamRetry:
+			self.cancelStreamRetry()
 		print("[Navigation] playing", ref and ref.toString())
 
 		self.currentlyPlayingServiceReference = ref
@@ -579,6 +577,7 @@ class Navigation:
 		return len(self.getRecordings(False, pNavigation.isRealRecording))
 
 	def stopService(self):
+		self.cancelStreamRetry()
 		if self.pnav:
 			self.pnav.stopService()
 		self.currentlyPlayingServiceReference = None
