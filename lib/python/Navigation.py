@@ -139,7 +139,7 @@ class Navigation:
 		elif i in (iPlayableService.evGstreamerTeardownWait, iPlayableService.evGstreamerTeardownWaitEnd):
 			if Toast.instance:
 				if i == iPlayableService.evGstreamerTeardownWait:
-					Toast.instance.showToast(_("The previous stream is closing. Please..."), Toast.TYPE_INFO, 5, replaceId="GstreamerTeardown")
+					Toast.instance.showToast(_("The previous stream is closing. Please..."), Toast.TYPE_INFO, 10, replaceId="GstreamerTeardown")
 				else:
 					Toast.instance.removeToast("GstreamerTeardown")
 			else:
