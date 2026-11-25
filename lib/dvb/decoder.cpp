@@ -1632,7 +1632,6 @@ RESULT eTSMPEGDecoder::prepareFCC(int fe_id, int vpid, int vtype, int pcrpid)
 		return -1;
 	}
 	/* [norhap] loop protection on the fallback tuner */
-
 	if ((fccGetFD() == -1) || (fccSetPids(fe_id, vpid, vtype, pcrpid) < 0) || (fccStart() < 0))
 	{
 		fccFreeFD();

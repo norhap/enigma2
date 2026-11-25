@@ -573,7 +573,6 @@ void eDVBServiceFCCPlay::switchToLive()
 		return;
 	}
 	/* [norhap] loop protection on the fallback tuner */
-
 	if (!m_timeshift_active)
 		return;
 
