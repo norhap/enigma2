@@ -6288,7 +6288,7 @@ self.instance.move(ePoint((screenSize[0] - width) // 2, (screenSize[1] - height)
 	</screen>
 		<!-- XTRAEVENT POSTER -->
 	<screen name="poster_firstinfobar">
-		<widget source="session.Event_Now" render="xtraPoster" position="80,490" size="185,278" zPosition="2"/>
+		<widget source="session.Event_Now" render="xtraPoster" position="15,300" size="300,400" zPosition="2"/>
 	</screen>
 	<screen name="poster_secondinfobar">
 		<widget source="session.Event_Now" render="xtraPoster" position="475,195" size="185,278" zPosition="2"/>
