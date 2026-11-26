@@ -198,6 +198,14 @@ canCopy = canMove
 canRename = canMove
 
 
+def movieListReference(service):
+	if service and service.type == 4097:
+		path = service.getPath()
+		if path.startswith("/") and splitext(path)[1].lower() in (".m2ts", ".mts"):
+			return eServiceReference(3, 0, path)
+	return service
+
+
 def createMoveList(serviceref, dest):
 	# normpath is to remove the trailing "/" from directories
 	ext_ts = "%s.ts" % serviceref
@@ -1055,7 +1063,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			self.list.playInBackground = None
 			self.session.nav.stopService()
 
-	def itemSelected(self, answer=True):
+	def itemSelected(self, answer=True, useAlternativePlayer=False):
 		current = self.getCurrent()
 		if current is not None:
 			path = current.getPath()
@@ -1078,7 +1086,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					# Stop preview, come back later
 					self.session.nav.stopService()
 					self.list.playInBackground = None
-					self.callLater(self.itemSelected)
+					self.callLater(boundFunction(self.itemSelected, answer, useAlternativePlayer))
 					return
 				if ext in IMAGE_EXTENSIONS:
 					try:
@@ -1096,9 +1104,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 					except Exception as ex:
 						print("[MovieSelection] Cannot display", str(ex))
 					return
-				Screens.InfoBar.InfoBar.instance.checkTimeshiftRunning(boundFunction(self.itemSelectedCheckTimeshiftCallback, ext, path))
+				Screens.InfoBar.InfoBar.instance.checkTimeshiftRunning(boundFunction(self.itemSelectedCheckTimeshiftCallback, ext, path, useAlternativePlayer=useAlternativePlayer))
 
-	def itemSelectedCheckTimeshiftCallback(self, ext, path, answer):
+	def itemSelectedCheckTimeshiftCallback(self, ext, path, answer, useAlternativePlayer=False):
 		if answer:
 			if ext in (".iso", ".img", ".nrg") and BlurayPlayer is not None:
 				try:
@@ -1116,7 +1124,18 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			elif "_suburi." in path:
 				if self.playSuburi(path):
 					return
+			if useAlternativePlayer:
+				current = self.getCurrent()
+				if current is None or current.getPath() != path:
+					print("[MovieSelection] Cannot use alternative player: selection changed")
+					return
+				self.saveconfig()
+				self.close(eServiceReference(4097, 0, path))
+				return
 			self.movieSelected()
+
+	def playWithAlternativePlayer(self):
+		self.itemSelected(useAlternativePlayer=True)
 
 	# Note: DVDBurn overrides this method, hence the itemSelected indirection.
 	def movieSelected(self):
@@ -1391,7 +1410,7 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 			title += " - %s" % ",".join(self.selected_tags)
 		self.displayMovieOffStatus()
 		self.displaySortStatus()
-		if not (self.reload_sel and self["list"].moveTo(self.reload_sel)):
+		if not (self.reload_sel and (self["list"].moveTo(self.reload_sel) or self["list"].moveTo(movieListReference(self.reload_sel)))):
 			if self.reload_home:
 				self["list"].moveToFirstMovie()
 		self["freeDiskSpace"].update()
@@ -1791,6 +1810,9 @@ class MovieSelection(Screen, HelpableScreen, SelectionEventInfo, InfoBarBase, Pr
 		current = self.getCurrent()
 		if current:
 			resetMoviePlayState("%s.cuts" % current.getPath(), current)
+			if current.type == 3 and splitext(current.getPath())[1].lower() in (".m2ts", ".mts"):
+				from Screens.InfoBarGenerics import delResumePoint
+				delResumePoint(eServiceReference(4097, 0, current.getPath()))
 			self["list"].invalidateCurrentItem()  # trigger repaint
 
 	def do_move(self):
@@ -2328,6 +2350,8 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				append_to_menu(menu, (_("Copy"), csel.do_copy), key="5")
 				append_to_menu(menu, (_("Rename"), csel.do_rename), key="6")
 				if not (service.flags & eServiceReference.mustDescent):
+					if splitext(service.getPath())[1].lower() in (".m2ts", ".mts"):
+						append_to_menu(menu, (_("Play with alternative player (4097)"), csel.playWithAlternativePlayer))
 					if self.isResetable():
 						append_to_menu(menu, (_("Reset playback position"), csel.do_reset), key="7")
 					if service.getPath().endswith(".ts") or BoxInfo.getItem("CanOfflineDecode"):
@@ -2351,7 +2375,16 @@ class MovieContextMenu(Screen, ProtectedScreen):
 
 	def isResetable(self):
 		item = self.csel.getCurrentSelection()
-		return not (item[1] and moviePlayState("%s.cuts" % item[0].getPath(), item[0], item[1].getLength(item[0])) is None)
+		if not item[1]:
+			return True
+		service = item[0]
+		path = service.getPath()
+		length = item[1].getLength(service)
+		if moviePlayState("%s.cuts" % path, service, length) is not None:
+			return True
+		if service.type == 3 and splitext(path)[1].lower() in (".m2ts", ".mts"):
+			return moviePlayState("%s.cuts" % path, eServiceReference(4097, 0, path), length) is not None
+		return False
 
 	def pinEntered(self, answer):
 		if answer:

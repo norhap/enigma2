@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-23 14:46+0100\n"
+"POT-Creation-Date: 2026-11-26 08:48+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -7363,9 +7363,6 @@ msgstr "URL del receptor reserva."
 msgid "Fallback Timer"
 msgstr "Configuración del sintonizador de respaldo"
 
-msgid "Fallback tuner and FCC activated. Activate only one function."
-msgstr "Tuner reserva y FCC activados. Active solo una función."
-
 msgid "Fallback tuner setup"
 msgstr "Configuración del sintonizador de respaldo"
 
@@ -12581,6 +12578,9 @@ msgstr "Canal con reproducción Stream Relay"
 
 msgid "Play service without Stream Relay"
 msgstr "Canal sin reproducción Stream Relay"
+
+msgid "Play with alternative player (4097)"
+msgstr "Reproducir con reproductor alternativo (4097)"
 
 msgid "Playback Setup"
 msgstr "Ajustes Grabación & Multimedia"

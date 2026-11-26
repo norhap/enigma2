@@ -14,7 +14,7 @@ from Components.SystemInfo import BRAND, MODEL  # noqa: E402
 from Components.Label import Label  # noqa: E402
 from Components.Pixmap import MultiPixmap  # noqa: E402
 # workaround for required config entry dependencies.
-from Screens.MovieSelection import MovieSelection, moveServiceFiles  # noqa: E402
+from Screens.MovieSelection import MovieSelection, movieListReference, moveServiceFiles  # noqa: E402
 from Screens.AudioSelection import AudioSelection  # noqa: E402
 from Screens.Hotkey import InfoBarHotkey  # noqa: E402
 from Screens.Screen import Screen  # noqa: E402
@@ -250,7 +250,13 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 				self.session.nav.playService(ref)
 		else:
 			from Components.ParentalControl import parentalControl
-			if parentalControl.isServicePlayable(service, self.openMoviePlayer):
+			protectionRef = movieListReference(service)
+			if protectionRef != service and not parentalControl.isProtected(service):
+				callback = lambda ref: self.openMoviePlayer(service)
+			else:
+				protectionRef = service
+				callback = self.openMoviePlayer
+			if parentalControl.isServicePlayable(protectionRef, callback):
 				self.openMoviePlayer(service)
 
 	def openMoviePlayer(self, ref):
@@ -726,7 +732,7 @@ class MoviePlayer(InfoBarBase, InfoBarShowHide, InfoBarMenu, InfoBarSeek, InfoBa
 	def getPlaylistServiceInfo(self, service):
 		from Screens.MovieSelection import playlist
 		for i, item in enumerate(playlist):
-			if item == service:
+			if item == service or item == movieListReference(service):
 				if config.usage.on_movie_eof.value == "repeatcurrent":
 					return service, i + 1, len(playlist)
 				i += 1
