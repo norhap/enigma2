@@ -252,7 +252,8 @@ class InfoBar(InfoBarBase, InfoBarShowHide,
 			from Components.ParentalControl import parentalControl
 			protectionRef = movieListReference(service)
 			if protectionRef != service and not parentalControl.isProtected(service):
-				callback = lambda ref: self.openMoviePlayer(service)
+				def callback(ref):
+					self.openMoviePlayer(service)
 			else:
 				protectionRef = service
 				callback = self.openMoviePlayer
