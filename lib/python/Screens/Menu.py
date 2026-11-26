@@ -284,7 +284,14 @@ class Menu(MenuFade, Screen, ProtectedScreen):
 		selection = self["menu"].getCurrent()
 		if selection and selection[1]:
 			lastKey = selection[2]
-			self.fadeMenuAction(selection[1])
+			if self.menuID == "shutdown" and selection[2] in ("restart_enigma", "restart_enigma_debug", "restart", "deep_standby"):
+				if self.menuFadeDirection == -1:
+					return
+				# Avoid revealing the old framebuffer while the quit screen is being painted.
+				self.cancelMenuFade()
+				selection[1]()
+			else:
+				self.fadeMenuAction(selection[1])
 
 	def execText(self, text):
 		exec(text)
