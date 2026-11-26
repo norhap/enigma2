@@ -108,7 +108,172 @@ class MenuSummary(Screen):
 		self["Title"] = StaticText(parent.getTitle())
 
 
-class Menu(Screen, ProtectedScreen):
+class MenuFade:
+	def initMenuFade(self):
+		self.menuFadeTimer = eTimer()
+		self.menuFadeTimer.callback.append(self.menuFadeStep)
+		self.menuFadeHandoffTimer = eTimer()
+		self.menuFadeHandoffTimer.callback.append(self.finishMenuFadeHandoff)
+		self.menuFadeLevel = 10
+		self.menuFadeDirection = 0
+		self.menuFadeAction = None
+		self.menuFadeOwned = False
+		self.menuFadeFailed = False
+		self.menuFadeRunningAction = False
+		self.menuFadeMaps = []
+		self.menuFadeInfoBars = []
+		self.onHide.append(self.hideMenuFade)
+		self.onClose.append(self.cancelMenuFade)
+
+	def menuFadeEnabled(self):
+		return bool(SystemInfo.get("CanChangeOsdAlpha") and config.usage.menu_fade.value and not self.menuFadeFailed)
+
+	def pauseInfoBarDimming(self):
+		self.menuFadeInfoBars = []
+		for screen, _ in self.session.dialog_stack:
+			if all(hasattr(screen, name) for name in ("DimmingTimer", "unDimmingTimer", "hideTimer", "lastResetAlpha")):
+				screen.DimmingTimer.stop()
+				screen.unDimmingTimer.stop()
+				screen.hideTimer.stop()
+				self.menuFadeInfoBars.append(screen)
+
+	def writeMenuAlpha(self, value):
+		try:
+			with open(SystemInfo["CanChangeOsdAlpha"], "w") as alpha:
+				alpha.write(str(value))
+			return True
+		except OSError as error:
+			print(f"[Menu] Unable to set OSD alpha: {error}")
+			self.menuFadeFailed = True
+			return False
+
+	def cancelMenuFade(self):
+		self.menuFadeTimer.stop()
+		self.menuFadeHandoffTimer.stop()
+		self.menuFadeDirection = 0
+		self.menuFadeAction = None
+		for action in self.menuFadeMaps:
+			action.setEnabled(True)
+		self.menuFadeMaps = []
+		if self.menuFadeOwned:
+			if self.writeMenuAlpha(config.av.osd_alpha.value):
+				for screen in self.menuFadeInfoBars:
+					if hasattr(screen, "lastResetAlpha"):
+						screen.lastResetAlpha = True
+			else:
+				print("[Menu] Unable to restore OSD alpha; check the receiver's OSD transparency control.")
+			self.menuFadeOwned = False
+		self.menuFadeInfoBars = []
+		self.menuFadeLevel = 10
+
+	def hideMenuFade(self):
+		if not self.menuFadeRunningAction:
+			self.cancelMenuFade()
+
+	def finishMenuFadeHandoff(self):
+		current = self.session.current_dialog
+		if current is not self and isinstance(current, MenuFade) and current.menuFadeOwned and current.shown:
+			self.menuFadeOwned = False
+		self.cancelMenuFade()
+
+	def runMenuFadeAction(self, action):
+		self.menuFadeRunningAction = True
+		completed = False
+		try:
+			action()
+			completed = True
+		finally:
+			self.menuFadeRunningAction = False
+			current = self.session.current_dialog
+			if current is not self and isinstance(current, MenuFade) and current.menuFadeOwned and current.shown:
+				# The new menu owns the global alpha until its fade completes.
+				self.menuFadeOwned = False
+			elif completed and self.menuFadeOwned and current is self and not self.session.in_exec and self.session.dialog_stack:
+				parent, was_shown = self.session.dialog_stack[-1]
+				if was_shown and isinstance(parent, MenuFade) and not parent.shown and not parent.menuFadeOwned and parent.instance and parent.menuFadeEnabled():
+					# Session restores the parent asynchronously; keep a fallback timer for interruptions.
+					parent.menuFadeOwned = True
+					parent.menuFadeInfoBars = self.menuFadeInfoBars
+					parent.menuFadeHandoffTimer.start(1, True)
+					self.menuFadeOwned = False
+			self.cancelMenuFade()
+
+	def show(self):
+		handoff = self.menuFadeHandoffTimer.isActive()
+		self.menuFadeHandoffTimer.stop()
+		if not self.menuFadeEnabled() or (self.shown and self.already_shown) or not self.instance:
+			if handoff:
+				self.cancelMenuFade()
+			return Screen.show(self)
+		self.pauseInfoBarDimming()
+		self.menuFadeOwned = True
+		if not self.writeMenuAlpha(0):
+			self.cancelMenuFade()
+			return Screen.show(self)
+		self.menuFadeLevel = 0
+		self.menuFadeDirection = 1
+		try:
+			Screen.show(self)
+		except Exception:
+			self.cancelMenuFade()
+			raise
+		if self.menuFadeDirection and self.shown:
+			self.menuFadeTimer.start(20, True)
+
+	def fadeMenuAction(self, action):
+		if self.menuFadeRunningAction:
+			action()
+			return
+		if self.menuFadeDirection == -1:
+			return
+		if not self.menuFadeEnabled() or not self.execing or not self.shown or self.session.current_dialog is not self:
+			action()
+			return
+		if self.menuFadeOwned and self.menuFadeLevel == 0:
+			self.runMenuFadeAction(action)
+			return
+		self.menuFadeTimer.stop()
+		if not self.menuFadeOwned:
+			self.pauseInfoBarDimming()
+			self.menuFadeOwned = True
+			self.menuFadeLevel = 10
+		self.menuFadeAction = action
+		self.menuFadeDirection = -1
+		self.menuFadeMaps = [item for item in self.values() if isinstance(item, ActionMap) and item.enabled]
+		for item in self.menuFadeMaps:
+			item.setEnabled(False)
+		self.menuFadeTimer.start(20, True)
+
+	def menuFadeStep(self):
+		if not self.menuFadeEnabled():
+			action = self.menuFadeAction
+			self.cancelMenuFade()
+			if action:
+				action()
+			return
+		self.menuFadeLevel = max(0, min(10, self.menuFadeLevel + self.menuFadeDirection))
+		value = config.av.osd_alpha.value * self.menuFadeLevel // 10
+		if not self.writeMenuAlpha(value):
+			action = self.menuFadeAction
+			self.cancelMenuFade()
+			if action:
+				action()
+			return
+		if self.menuFadeDirection == 1 and self.menuFadeLevel == 10:
+			self.cancelMenuFade()
+		elif self.menuFadeDirection == -1 and self.menuFadeLevel == 0:
+			action = self.menuFadeAction
+			self.menuFadeAction = None
+			self.menuFadeDirection = 0
+			self.runMenuFadeAction(action)
+		else:
+			self.menuFadeTimer.start(20, True)
+
+	def close(self, *retval):
+		self.fadeMenuAction(lambda: Screen.close(self, *retval))
+
+
+class Menu(MenuFade, Screen, ProtectedScreen):
 	ALLOW_SUSPEND = True
 
 	def okbuttonClick(self):
@@ -119,7 +284,7 @@ class Menu(Screen, ProtectedScreen):
 		selection = self["menu"].getCurrent()
 		if selection and selection[1]:
 			lastKey = selection[2]
-			selection[1]()
+			self.fadeMenuAction(selection[1])
 
 	def execText(self, text):
 		exec(text)
@@ -241,6 +406,7 @@ class Menu(Screen, ProtectedScreen):
 	def __init__(self, session, parent):
 		self.parentmenu = parent
 		Screen.__init__(self, session)
+		self.initMenuFade()
 		self.menulength = 0
 		self["key_blue"] = StaticText("")
 		self["menu"] = List([])
@@ -590,9 +756,10 @@ class MenuSort(Menu):
 			self["menu"].up()
 
 
-class AnimMain(Screen):
+class AnimMain(MenuFade, Screen):
 	def __init__(self, session, tlist, menuTitle):
 		Screen.__init__(self, session)
+		self.initMenuFade()
 		self.skinName = "Animmain"
 		self.tlist = tlist
 		ipage = 1
@@ -723,12 +890,13 @@ class AnimMain(Screen):
 		idx = self.index - 1
 		selection = self.tlist[idx]
 		if selection is not None:
-			selection[1]()
+			self.fadeMenuAction(selection[1])
 
 
-class IconMain(Screen):
+class IconMain(MenuFade, Screen):
 	def __init__(self, session, tlist, menuTitle):
 		Screen.__init__(self, session)
+		self.initMenuFade()
 		self.skinName = "Iconmain"
 		self.tlist = tlist
 		ipage = 1
@@ -961,7 +1129,7 @@ class IconMain(Screen):
 			return
 		selection = self.tlist[idx]
 		if selection is not None:
-			selection[1]()
+			self.fadeMenuAction(selection[1])
 
 
 class MainMenu(Menu):

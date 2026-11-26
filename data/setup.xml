@@ -539,6 +539,7 @@
 		<item level="0" text="Info bar timeout" description="Configure for how long the infobar will remain visible after activation.">config.usage.infobar_timeout</item>
 		<item level="0" text="Show second infobar" description="Configure whether (and for how long) a second infobar will be shown when OK is pressed twice. The second infobar contains additional information about the current channel.">config.usage.show_second_infobar</item>
 		<item level="0" text="Enable infobar fade-out" description="Fade the infobar when hiding">config.usage.show_infobar_do_dimming</item>
+		<item level="0" text="Fade menus" requires="CanChangeOsdAlpha" description="Fade menus in and out using the global OSD transparency. Other visible OSD elements will fade too.">config.usage.menu_fade</item>
 		<if conditional="config.usage.show_infobar_do_dimming.value">
 			<item level="0" text="Infobar fade-out speed" description="Configure the infobar fading speed">config.usage.show_infobar_dimming_speed</item>
 		</if>

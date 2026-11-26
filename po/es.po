@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-26 08:48+0100\n"
+"POT-Creation-Date: 2026-11-26 08:54+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -7296,6 +7296,12 @@ msgstr "Factual"
 
 msgid "Factual Topics"
 msgstr "Temas Fácticos"
+
+msgid "Fade menus"
+msgstr "Desvanecer los menús"
+
+msgid "Fade menus in and out using the global OSD transparency. Other visible OSD elements will fade too."
+msgstr "Muestra y oculta los menús gradualmente usando la transparencia global del OSD. Los demás elementos visibles del OSD también se desvanecerán."
 
 msgid "Fade the infobar when hiding"
 msgstr "Desvanece la InfoBar al esconderse"

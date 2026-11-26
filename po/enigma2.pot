@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Norhap Enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-26 08:48+0100\n"
+"POT-Creation-Date: 2026-11-26 08:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7295,6 +7295,12 @@ msgid "Factual"
 msgstr ""
 
 msgid "Factual Topics"
+msgstr ""
+
+msgid "Fade menus"
+msgstr ""
+
+msgid "Fade menus in and out using the global OSD transparency. Other visible OSD elements will fade too."
 msgstr ""
 
 msgid "Fade the infobar when hiding"
