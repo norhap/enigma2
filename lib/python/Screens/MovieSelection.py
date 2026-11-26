@@ -2351,7 +2351,7 @@ class MovieContextMenu(Screen, ProtectedScreen):
 				append_to_menu(menu, (_("Rename"), csel.do_rename), key="6")
 				if not (service.flags & eServiceReference.mustDescent):
 					if splitext(service.getPath())[1].lower() in (".m2ts", ".mts"):
-						append_to_menu(menu, (_("Play with alternative player (4097)"), csel.playWithAlternativePlayer))
+						append_to_menu(menu, (_("Play with alternative player (4097)"), csel.playWithAlternativePlayer), key="bullet")
 					if self.isResetable():
 						append_to_menu(menu, (_("Reset playback position"), csel.do_reset), key="7")
 					if service.getPath().endswith(".ts") or BoxInfo.getItem("CanOfflineDecode"):
