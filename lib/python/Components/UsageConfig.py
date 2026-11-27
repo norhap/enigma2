@@ -8,7 +8,7 @@ from time import mktime
 from gettext import ngettext
 from skin import parameters
 from Components.About import GetIPsFromNetworkInterfaces
-from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config, ConfigOnOff
+from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config, ConfigOnOff, ConfigEnableDisable
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager
 from keyids import KEYIDS
@@ -1940,6 +1940,7 @@ def InitUsageConfig():
 	config.oscaminfo.autoUpdateLog = ConfigSelection(default=0, choices=choiceList)
 
 	config.softcsa = ConfigSubsection()
+	config.softcsa.enabled = ConfigEnableDisable(default=True)
 	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
 		(0, _("Quick")),
 		(1, _("Normal")),

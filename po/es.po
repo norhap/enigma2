@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-26 08:54+0100\n"
+"POT-Creation-Date: 2026-11-28 00:39+0100\n"
 "PO-Revision-Date: 2024-10-30 17:31+0100\n"
 "Last-Translator: Kuatto\n"
 "Language-Team: Álvaro <mi casa>\n"
@@ -16748,6 +16748,9 @@ msgstr "Acciones Softcam"
 msgid "Softcam Setup"
 msgstr "Configuración de Softcam"
 
+msgid "SoftCSA"
+msgstr "SoftCSA"
+
 msgid "SoftCSA Settings"
 msgstr "Ajustes SoftCSA"
 
@@ -18918,6 +18921,9 @@ msgstr "Encienda el LED de encendido durante standby o reposo profundo."
 
 msgid "Turn on the power LED during standby."
 msgstr "Encienda el LED de encendido durante standby o reposo profundo."
+
+msgid "Turn the software descrambling of CSA-ALT services on or off."
+msgstr "Activa o desactiva la descodificación por software de los canales CSA-ALT."
 
 msgid "Turning step size"
 msgstr "Tamaño de paso de giro"
