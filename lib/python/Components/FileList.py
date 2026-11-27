@@ -137,9 +137,12 @@ class FileList(MenuList):
 			mp = self.getMountpoint(file)
 			last = file
 			file = dirname(file)
-			while last != "/" and mp == self.getMountpoint(file):
+			while last not in ("", "/") and mp == self.getMountpoint(file):
 				last = file
 				file = dirname(file)
+			if not last:
+				print("[FileList] Invalid relative directory passed to getMountpointLink.")
+				return False
 			return join(last, "")
 
 	def getSelection(self):

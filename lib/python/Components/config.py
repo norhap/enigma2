@@ -1838,6 +1838,12 @@ class ConfigDirectory(ConfigText):
 	def __init__(self, default="", visible_width=60):
 		ConfigText.__init__(self, default, fixed_size=True, visible_width=visible_width)
 
+	def fromString(self, value):
+		return "" if value == "None" else value
+
+	def toString(self, value):
+		return "" if value is None else str(value)
+
 	def handleKey(self, key, callback=None):
 		# pass
 		if callable(callback):
