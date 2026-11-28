@@ -7,7 +7,6 @@ from Components.config import config
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager
 from Components.RTLSDR import dabHotplugNotifier
-from Components.Storage import cleanMediaDirs
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import ModalMessageBox
 from Tools.Directories import fileReadLines, fileWriteLines
@@ -34,7 +33,6 @@ def AudiocdAdded():
 def autostart(reason, **kwargs):
 	if reason == 0:
 		print("[Hotplug] Starting hotplug handler.")
-		cleanMediaDirs()  # Initial cleanup
 		eHotplugSocket.getInstance().dataReceived.get().append(hotPlugManager.processRawData)
 
 
@@ -42,8 +40,6 @@ class HotPlugManager:
 	def __init__(self):
 		self.addTimer = eTimer()
 		self.addTimer.callback.append(self.processAddDevice)
-		self.removeTimer = eTimer()
-		self.removeTimer.callback.append(self.processRemoveDevice)
 		self.deviceData = []
 		self.addedDevice = []
 		self.callMount = False
@@ -57,18 +53,14 @@ class HotPlugManager:
 		eventData = {}
 		if "\n" in raw:
 			data = raw.rstrip("\0\n").split("\n")
+			eventData["mode"] = 1
 		else:
 			data = raw.split("\0")[:-1]
+			eventData["mode"] = 0
 		for values in data:
 			if "=" in values:
 				variable, value = values.split("=", 1)
 				eventData[variable] = value
-		eventData["mode"] = 0 if eventData.get("ACTION") not in ("dab-sdr-add", "dab-sdr-remove") else 1  # [norhap] DAB+ USB
-		if eventData["mode"] == 1:  # norhap detect HW SDR for scan menu.
-			with open("/home/root/.dab-sdr") as f:
-				f.write("true")
-		elif exists("/home/root/.dab-sdr"):
-			remove("/home/root/.dab-sdr")
 		if data and eventData:
 			self.processHotplugData(eventData)
 
@@ -217,48 +209,19 @@ class HotPlugManager:
 			for device, physicalDevicePath, model in addedDevice:
 				harddiskmanager.addHotplugPartition(device, physicalDevicePath, model=model)
 
-	def processRemoveDevice(self):
-		self.removeTimer.stop()
-		cleanMediaDirs()
-
 	def processHotplugData(self, eventData):
-		mode = eventData.get("mode")
 		if self.debug:
 			print("[Hotplug] DEBUG: ", eventData)
 		action = eventData.get("ACTION")
-		if mode == 1 and eventData.get("MODE", "") != "CD":
-			if action in ("dab-sdr-add", "dab-sdr-remove"):
-				device = eventData.get("DEVPATH", "").split("/")[-1]
-				for callback in dabHotplugNotifier[:]:
-					try:
-						callback(device, action)
-					except AttributeError:
-						dabHotplugNotifier.remove(callback)
-			elif action == "add":
-				self.addTimer.stop()
-				ID_TYPE = eventData.get("ID_TYPE")
-				DEVTYPE = eventData.get("DEVTYPE")
-				if ID_TYPE == "disk" and DEVTYPE in ("partition", "disk"):
-					self.deviceData.append(eventData)
-					self.addTimer.start(1000)
-
-			elif action == "remove":
-				ID_TYPE = eventData.get("ID_TYPE")
-				DEVTYPE = eventData.get("DEVTYPE")
-				# ID_FS_UUID = eventData.get("ID_FS_UUID")
-				if ID_TYPE == "disk" and DEVTYPE in ("partition", "disk"):
-					device = eventData.get("DEVNAME")
-					harddiskmanager.removeHotplugPartition(device)
-					self.removeTimer.stop()
-					self.removeTimer.start(2000)
-			elif action == "ifup":
-				interface = eventData.get("INTERFACE")  # noqa F841
-			elif action == "ifdown":
-				interface = eventData.get("INTERFACE")  # noqa F841
-			elif action == "online":
-				state = eventData.get("STATE")  # noqa F841
-
+		if action in ("dab-sdr-add", "dab-sdr-remove"):
+			device = eventData.get("DEVPATH", "").split("/")[-1]
+			for callback in dabHotplugNotifier[:]:
+				try:
+					callback(device, action)
+				except AttributeError:
+					dabHotplugNotifier.remove(callback)
 		else:
+			# Preserve this image's Harddisk and MediaScanner notification path.
 			device = eventData.get("DEVPATH", "").split("/")[-1]
 			physicalDevicePath = eventData.get("PHYSDEVPATH")
 			mediaState = eventData.get("X_E2_MEDIA_STATUS")

@@ -157,11 +157,11 @@ int main(int argc, char* argv[]) {
 					int len = snprintf(data, datalen, "ACTION=%s\nDEVPATH=%s\nID_TYPE=dab-sdr\nDEVTYPE=usb_device\nID_BUS=usb\nID_MODEL=%s", action,
 						devpath, env_model ? env_model : (env_name ? env_name : "RTL2832U"));
 					send_to_socket(sd, mode, debug, data, len, datalen);
-				} else if (strcmp(action, "add") == 0 && env_devname && env_uuid) {
+				} else if (strcmp(action, "add") == 0 && env_devname) {
 					char devsize[50];
 					get_device_size(devpath, devsize);
 					int len = snprintf(data, datalen, "ACTION=%s\nDEVPATH=%s\nID_TYPE=%s\nDEVTYPE=%s\nDEVNAME=%s\nID_FS_TYPE=%s\nID_BUS=%s\nID_FS_UUID=%s\nID_MODEL=%s\nID_PART_ENTRY_SIZE=%s", action,
-									   devpath, env_id_type ? env_id_type : "disk", env_devtype ? env_devtype : "", env_devname, env_fs_type ? env_fs_type : "", env_bus ? env_bus : "", env_uuid,
+									   devpath, env_id_type ? env_id_type : "disk", env_devtype ? env_devtype : "", env_devname, env_fs_type ? env_fs_type : "", env_bus ? env_bus : "", env_uuid ? env_uuid : "",
 									   env_model ? env_model : (env_name ? env_name : ""), devsize);
 
 					if (mode == 1) {
@@ -170,9 +170,9 @@ int main(int argc, char* argv[]) {
 						write_data_to_file(env_devname, data, debug);
 					}
 				} else if (strcmp(action, "remove") == 0) {
-					if (env_devname && env_uuid) {
+					if (env_devname) {
 						int len = snprintf(data, datalen, "ACTION=%s\nDEVPATH=%s\nID_TYPE=%s\nDEVTYPE=%s\nDEVNAME=%s\nID_FS_UUID=%s", action, devpath, env_id_type ? env_id_type : "disk",
-										   env_devtype ? env_devtype : "", env_devname, env_uuid);
+										   env_devtype ? env_devtype : "", env_devname, env_uuid ? env_uuid : "");
 						send_to_socket(sd, mode, debug, data, len, datalen);
 					}
 				} else if (strcmp(action, "ifup") == 0) {
