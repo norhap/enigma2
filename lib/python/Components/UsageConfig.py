@@ -8,7 +8,7 @@ from time import mktime
 from gettext import ngettext
 from skin import parameters
 from Components.About import GetIPsFromNetworkInterfaces
-from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config, ConfigOnOff, ConfigEnableDisable
+from Components.config import ConfigBoolean, ConfigClock, ConfigDictionarySet, ConfigEnableDisable, ConfigInteger, ConfigIP, ConfigLocations, ConfigNumber, ConfigPassword, ConfigSelection, ConfigSelectionNumber, ConfigSet, ConfigSlider, ConfigSubDict, ConfigSubsection, ConfigText, ConfigYesNo, NoSave, config, ConfigOnOff
 from Components.Console import Console
 from Components.Harddisk import harddiskmanager
 from keyids import KEYIDS
